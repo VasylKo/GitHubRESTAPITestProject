@@ -42,12 +42,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     private func presentRootController() {
-
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        
-        let centerController = UINavigationController(rootViewController: Storyboards.Main.instantiateMapStoryboardId())
-        let sidebarController = Storyboards.Main.instantiateMainMenuStoryboardId()
+        let centerController = UINavigationController(rootViewController: Storyboards.Main.instantiateMapViewController())
+        let sidebarController = Storyboards.Main.instantiateMainMenuViewController()
         window?.rootViewController = SidebarViewController(centerViewController:
             centerController, andSidebarViewController: sidebarController)
         window?.makeKeyAndVisible()
