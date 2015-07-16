@@ -97,7 +97,7 @@
                     <navigationItem key="navigationItem" id="TN7-xA-vpM">
                         <barButtonItem key="leftBarButtonItem" title="Menu" id="G8T-bM-wrE">
                             <connections>
-                                <action selector="showMenu:" destination="nw9-Ck-dbi" id="Bvx-jJ-LD0"/>
+                                <action selector="showMenu:" destination="nw9-Ck-dbi" id="G2b-A5-6fA"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

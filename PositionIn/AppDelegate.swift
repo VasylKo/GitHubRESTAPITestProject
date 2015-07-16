@@ -45,8 +45,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let centerController = UINavigationController(rootViewController: storyboard.instantiateViewControllerWithIdentifier("MapStoryboardId") as! UIViewController)
-        let sidebarController = storyboard.instantiateViewControllerWithIdentifier("MainMenuStoryboardId") as! UIViewController
+        
+        let centerController = UINavigationController(rootViewController: Storyboards.Main.instantiateMapStoryboardId())
+        let sidebarController = Storyboards.Main.instantiateMainMenuStoryboardId()
         window?.rootViewController = SidebarViewController(centerViewController:
             centerController, andSidebarViewController: sidebarController)
         window?.makeKeyAndVisible()
