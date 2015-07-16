@@ -34,6 +34,20 @@
                ReferencedContainer = "container:PositionIn.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "E6325F811B57E4B000996480"
+               BuildableName = "PosInCoreTests.xctest"
+               BlueprintName = "PosInCoreTests"
+               ReferencedContainer = "container:PositionIn.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
@@ -49,6 +63,16 @@
                BlueprintIdentifier = "E64DC35E1B4E53CA0011D37C"
                BuildableName = "PositionInTests.xctest"
                BlueprintName = "PositionInTests"
+               ReferencedContainer = "container:PositionIn.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "E6325F811B57E4B000996480"
+               BuildableName = "PosInCoreTests.xctest"
+               BlueprintName = "PosInCoreTests"
                ReferencedContainer = "container:PositionIn.xcodeproj">
             </BuildableReference>
          </TestableReference>

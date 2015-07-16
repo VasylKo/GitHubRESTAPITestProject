@@ -1,10 +1,13 @@
 PODS:
+  - Alamofire (1.2.3)
   - UISidebarViewController (1.0.0)
 
 DEPENDENCIES:
+  - Alamofire
   - UISidebarViewController
 
 SPEC CHECKSUMS:
+  Alamofire: 5550bf0b575ed1a4bf9be572f9463e1015cc169e
   UISidebarViewController: afa8867a2201b95d49ffbb12652bb1d7a30d9683
 
 COCOAPODS: 0.37.2
