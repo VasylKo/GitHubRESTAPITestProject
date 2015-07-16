@@ -1,1 +1,10 @@
+PODS:
+  - UISidebarViewController (1.0.0)
+
+DEPENDENCIES:
+  - UISidebarViewController
+
+SPEC CHECKSUMS:
+  UISidebarViewController: afa8867a2201b95d49ffbb12652bb1d7a30d9683
+
 COCOAPODS: 0.37.2
