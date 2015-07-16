@@ -7,6 +7,17 @@
 	objects = {
 
 /* Begin PBXAggregateTarget section */
+		E6325F681B57E0E100996480 /* Natalie */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = E6325F691B57E0E100996480 /* Build configuration list for PBXAggregateTarget "Natalie" */;
+			buildPhases = (
+				E6325F6C1B57E0E600996480 /* ShellScript */,
+			);
+			dependencies = (
+			);
+			name = Natalie;
+			productName = Natalie;
+		};
 		E6736ACF1B4E562C0003580D /* CheckTODO */ = {
 			isa = PBXAggregateTarget;
 			buildConfigurationList = E6736AD21B4E562D0003580D /* Build configuration list for PBXAggregateTarget "CheckTODO" */;
@@ -45,6 +56,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		E6325F6D1B57E17800996480 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E64DC3421B4E53C90011D37C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E6325F681B57E0E100996480;
+			remoteInfo = Natalie;
+		};
 		E64DC3601B4E53CA0011D37C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = E64DC3421B4E53C90011D37C /* Project object */;
@@ -132,9 +150,9 @@
 		E6325F5F1B57D89A00996480 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				E6325F621B57D89A00996480 /* SidebarViewController.swift */,
 				E6325F601B57D89A00996480 /* MainMenuViewController.swift */,
 				E6325F611B57D89A00996480 /* MapViewController.swift */,
-				E6325F621B57D89A00996480 /* SidebarViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -227,6 +245,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				E6325F6E1B57E17800996480 /* PBXTargetDependency */,
 				E6736ADA1B4E567A0003580D /* PBXTargetDependency */,
 			);
 			name = PositionIn;
@@ -262,6 +281,9 @@
 				LastUpgradeCheck = 0640;
 				ORGANIZATIONNAME = "Soluna Labs";
 				TargetAttributes = {
+					E6325F681B57E0E100996480 = {
+						CreatedOnToolsVersion = 6.4;
+					};
 					E64DC3491B4E53C90011D37C = {
 						CreatedOnToolsVersion = 6.4;
 					};
@@ -294,6 +316,7 @@
 				E64DC35E1B4E53CA0011D37C /* PositionInTests */,
 				E6736ACF1B4E562C0003580D /* CheckTODO */,
 				E6736AD41B4E56570003580D /* UpdateVersion */,
+				E6325F681B57E0E100996480 /* Natalie */,
 			);
 		};
 /* End PBXProject section */
@@ -364,6 +387,19 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PositionIn/Pods-PositionIn-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		E6325F6C1B57E0E600996480 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "echo \"Running Natalie generator\"\n\n${PROJECT_DIR}/Scripts/natalie.swift \"$PROJECT_DIR/$PROJECT_NAME\" > \"$PROJECT_DIR/$PROJECT_NAME/Storyboards.swift\"";
+		};
 		E6736AD31B4E56360003580D /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -415,6 +451,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		E6325F6E1B57E17800996480 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E6325F681B57E0E100996480 /* Natalie */;
+			targetProxy = E6325F6D1B57E17800996480 /* PBXContainerItemProxy */;
+		};
 		E64DC3611B4E53CA0011D37C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = E64DC3491B4E53C90011D37C /* PositionIn */;
@@ -447,6 +488,20 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		E6325F6A1B57E0E100996480 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		E6325F6B1B57E0E100996480 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		E64DC3671B4E53CA0011D37C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -626,6 +681,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		E6325F691B57E0E100996480 /* Build configuration list for PBXAggregateTarget "Natalie" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E6325F6A1B57E0E100996480 /* Debug */,
+				E6325F6B1B57E0E100996480 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		E64DC3451B4E53C90011D37C /* Build configuration list for PBXProject "PositionIn" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
