@@ -57,6 +57,8 @@
 		E6325FBD1B57F36E00996480 /* PosInCore.framework in Embed Core Framework */ = {isa = PBXBuildFile; fileRef = E6325FA51B57F36E00996480 /* PosInCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E6325FC61B57F3A300996480 /* CommonTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6325FC41B57F3A300996480 /* CommonTypes.swift */; };
 		E6325FC71B57F3A300996480 /* FoundationWrappers.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6325FC51B57F3A300996480 /* FoundationWrappers.swift */; };
+		E6325FC91B57FBE100996480 /* NetworkDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6325FC81B57FBE100996480 /* NetworkDataProvider.swift */; };
+		E6325FD81B57FEAF00996480 /* NetworkActivityIndicatorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6325FD71B57FEAF00996480 /* NetworkActivityIndicatorManager.swift */; };
 		E64DC3501B4E53C90011D37C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64DC34F1B4E53C90011D37C /* AppDelegate.swift */; };
 		E64DC3551B4E53C90011D37C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E64DC3531B4E53C90011D37C /* Main.storyboard */; };
 		E64DC3571B4E53C90011D37C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E64DC3561B4E53C90011D37C /* Images.xcassets */; };
@@ -144,6 +146,8 @@
 		E6325FB81B57F36E00996480 /* PosInCoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PosInCoreTests.swift; sourceTree = "<group>"; };
 		E6325FC41B57F3A300996480 /* CommonTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonTypes.swift; sourceTree = "<group>"; };
 		E6325FC51B57F3A300996480 /* FoundationWrappers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoundationWrappers.swift; sourceTree = "<group>"; };
+		E6325FC81B57FBE100996480 /* NetworkDataProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkDataProvider.swift; sourceTree = "<group>"; };
+		E6325FD71B57FEAF00996480 /* NetworkActivityIndicatorManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkActivityIndicatorManager.swift; sourceTree = "<group>"; };
 		E64DC34A1B4E53C90011D37C /* PositionIn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PositionIn.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E64DC34E1B4E53C90011D37C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E64DC34F1B4E53C90011D37C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -240,6 +244,8 @@
 			children = (
 				E6325FC41B57F3A300996480 /* CommonTypes.swift */,
 				E6325FC51B57F3A300996480 /* FoundationWrappers.swift */,
+				E6325FC81B57FBE100996480 /* NetworkDataProvider.swift */,
+				E6325FD71B57FEAF00996480 /* NetworkActivityIndicatorManager.swift */,
 				E6325FA91B57F36E00996480 /* PosInCore.h */,
 				E6325FA71B57F36E00996480 /* Supporting Files */,
 			);
@@ -658,7 +664,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				E6325FC71B57F3A300996480 /* FoundationWrappers.swift in Sources */,
+				E6325FC91B57FBE100996480 /* NetworkDataProvider.swift in Sources */,
 				E6325FC61B57F3A300996480 /* CommonTypes.swift in Sources */,
+				E6325FD81B57FEAF00996480 /* NetworkActivityIndicatorManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -763,6 +771,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7686EF47042960E2D0116E90 /* Pods-PosInCore.debug.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -778,6 +787,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -788,6 +799,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 734ACD1B18B4CAB22C231390 /* Pods-PosInCore.release.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -799,6 +811,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
