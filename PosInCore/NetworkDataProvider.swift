@@ -8,6 +8,7 @@
 
 import Foundation
 import Alamofire
+import ObjectMapper
 
 public class NetworkDataProvider: NSObject {
     /**
@@ -39,6 +40,43 @@ public class NetworkDataProvider: NSObject {
             
             return r
     }
+    
+    /**
+    Execute request and parse single object
+    
+    :param: URLRequest The URL request
+    :param: completion Completion block
+    
+    :returns: The created request
+    */
+    public func objectRequest<T: Mappable>(
+        URLRequest: Alamofire.URLRequestConvertible,
+        completion: (OperationResult<T>)->Void
+        ) -> Alamofire.Request {
+            let mapping: AnyObject? -> T? = { json in
+                return Mapper<T>().map(json)
+            }
+            return jsonRequest(URLRequest, map: mapping, completion: completion)
+    }
+    
+    /**
+    Execute request and parse multiple objects
+    
+    :param: URLRequest The URL request
+    :param: completion Completion block
+    
+    :returns: The created request
+    */
+    public func arrayRequest<T: Mappable>(
+        URLRequest: Alamofire.URLRequestConvertible,
+        completion: (OperationResult<[T]>)->Void
+        ) -> Alamofire.Request {
+            let mapping: AnyObject? -> [T]? = { json in
+                return Mapper<T>().mapArray((json))
+            }
+            return jsonRequest(URLRequest, map: mapping, completion: completion)
+    }
+
     
     /// Used API
     public let apiService: APIService
