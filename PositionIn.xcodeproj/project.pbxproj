@@ -67,13 +67,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		E6325F6D1B57E17800996480 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = E64DC3421B4E53C90011D37C /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = E6325F681B57E0E100996480;
-			remoteInfo = Natalie;
-		};
 		E6325FB11B57F36E00996480 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = E64DC3421B4E53C90011D37C /* Project object */;
@@ -421,7 +414,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				E6325F6E1B57E17800996480 /* PBXTargetDependency */,
 				E6736ADA1B4E567A0003580D /* PBXTargetDependency */,
 				E6325FBB1B57F36E00996480 /* PBXTargetDependency */,
 			);
@@ -701,11 +693,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		E6325F6E1B57E17800996480 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = E6325F681B57E0E100996480 /* Natalie */;
-			targetProxy = E6325F6D1B57E17800996480 /* PBXContainerItemProxy */;
-		};
 		E6325FB21B57F36E00996480 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = E6325FA41B57F36E00996480 /* PosInCore */;
