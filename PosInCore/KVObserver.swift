@@ -9,7 +9,7 @@
 import Foundation
 
 @objc
-public class KVObserver<T>: NSObject {
+public final class KVObserver<T>: NSObject {
     
     typealias ObserverBlock = (KVObserver, T?, T?) -> Void
     

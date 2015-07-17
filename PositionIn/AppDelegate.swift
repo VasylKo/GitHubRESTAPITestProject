@@ -8,14 +8,13 @@
 
 import UIKit
 import PosInCore
-import Alamofire
 
 struct TestAPI: APIService {
     func http(endpoint: String) -> String {
-        return ""
+        return "http://google.com"
     }
     func https(endpoint: String) -> String {
-        return "https://api-qa.gwynniebee.com:4443/v1/closets/users/74e17682-e13c-3fb1-b439-98105d69eb79/active/count.json?store_id=1&list_state_ids=2"
+        return "https://api.github.com/users/0111b"
     }
     
     var description: String {
@@ -25,7 +24,7 @@ struct TestAPI: APIService {
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
+    
     var window: UIWindow?
     
     let dataProvider = NetworkDataProvider(api: TestAPI())
@@ -33,7 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         let mapping: AnyObject? -> Int? = { json in
             let dict = json as? NSDictionary
-            let number = dict?["count_active_closet"] as? NSNumber
+            let number = dict?["id"] as? NSNumber
             return number?.integerValue
         }
 
