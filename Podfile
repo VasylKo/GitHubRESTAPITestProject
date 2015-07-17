@@ -7,6 +7,7 @@ target 'PositionIn' do
     pod 'Alamofire'
     pod 'ObjectMapper'
     
+    pod 'HanekeSwift'
     pod 'UISidebarViewController'
 end
 

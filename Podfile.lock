@@ -1,15 +1,18 @@
 PODS:
   - Alamofire (1.2.3)
+  - HanekeSwift (0.9.1)
   - ObjectMapper (0.12)
   - UISidebarViewController (1.0.0)
 
 DEPENDENCIES:
   - Alamofire
+  - HanekeSwift
   - ObjectMapper
   - UISidebarViewController
 
 SPEC CHECKSUMS:
   Alamofire: 5550bf0b575ed1a4bf9be572f9463e1015cc169e
+  HanekeSwift: 50d37bfbc4432edc649167e538c259feccb4a2bb
   ObjectMapper: ef4a369cbab75546029ceb7e8155772b5f8e8841
   UISidebarViewController: afa8867a2201b95d49ffbb12652bb1d7a30d9683
 
