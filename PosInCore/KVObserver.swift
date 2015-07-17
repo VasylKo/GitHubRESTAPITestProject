@@ -11,16 +11,17 @@ import Foundation
 @objc
 public final class KVObserver<T>: NSObject {
     
-    typealias ObserverBlock = (KVObserver, T?, T?) -> Void
+    /// Observe closure - observer, old value, new value
+    typealias ObserverClosure = (KVObserver, T?, T?) -> Void
     
     private(set) public var subject: AnyObject?
     private(set) public var keyPath: String
-    private(set) public var block: ObserverBlock
+    private(set) public var block: ObserverClosure
     
-    public init(subject: AnyObject, keyPath: String, block: ObserverBlock) {
+    public init(subject: AnyObject, keyPath: String, closure: ObserverClosure) {
         self.subject = subject
         self.keyPath = keyPath
-        self.block = block
+        block = closure
         super.init()
         subject.addObserver(self, forKeyPath: keyPath, options: .New | .Old, context: &KVObserverContext)
     }
