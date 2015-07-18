@@ -64,6 +64,8 @@
 		E64DC3571B4E53C90011D37C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E64DC3561B4E53C90011D37C /* Images.xcassets */; };
 		E64DC35A1B4E53C90011D37C /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = E64DC3581B4E53C90011D37C /* LaunchScreen.xib */; };
 		E64DC3661B4E53CA0011D37C /* PositionInTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64DC3651B4E53CA0011D37C /* PositionInTests.swift */; };
+		E660E5271B5AB86B00F52050 /* PositionIn.MainMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E660E5261B5AB86B00F52050 /* PositionIn.MainMenuViewController.xib */; };
+		E660E5291B5AB9CA00F52050 /* PositionIn.MapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E660E5281B5AB9C900F52050 /* PositionIn.MapViewController.xib */; };
 		E6FC63D11B5901060062F5C9 /* KVObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6FC63D01B5901060062F5C9 /* KVObserver.swift */; };
 /* End PBXBuildFile section */
 
@@ -152,6 +154,8 @@
 		E64DC3641B4E53CA0011D37C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E64DC3651B4E53CA0011D37C /* PositionInTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PositionInTests.swift; sourceTree = "<group>"; };
 		E64DC36F1B4E54330011D37C /* PositionIn-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PositionIn-Bridging-Header.h"; sourceTree = "<group>"; };
+		E660E5261B5AB86B00F52050 /* PositionIn.MainMenuViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.MainMenuViewController.xib; sourceTree = "<group>"; };
+		E660E5281B5AB9C900F52050 /* PositionIn.MapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.MapViewController.xib; sourceTree = "<group>"; };
 		E6736ADB1B4E56DD0003580D /* Version.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Version.h; sourceTree = "<group>"; };
 		E6736ADD1B4E56EB0003580D /* TODOwarn.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = TODOwarn.sh; sourceTree = "<group>"; };
 		E6736ADE1B4E56EB0003580D /* Version.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = Version.sh; sourceTree = "<group>"; };
@@ -229,7 +233,9 @@
 			children = (
 				E6325F621B57D89A00996480 /* SidebarViewController.swift */,
 				E6325F601B57D89A00996480 /* MainMenuViewController.swift */,
+				E660E5261B5AB86B00F52050 /* PositionIn.MainMenuViewController.xib */,
 				E6325F611B57D89A00996480 /* MapViewController.swift */,
+				E660E5281B5AB9C900F52050 /* PositionIn.MapViewController.xib */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -301,6 +307,7 @@
 		E64DC34C1B4E53C90011D37C /* PositionIn */ = {
 			isa = PBXGroup;
 			children = (
+				E660E5251B5AB82000F52050 /* Models */,
 				E6325F5F1B57D89A00996480 /* ViewControllers */,
 				E6325F581B57D46C00996480 /* Views */,
 				E64DC34F1B4E53C90011D37C /* AppDelegate.swift */,
@@ -338,6 +345,13 @@
 				E64DC3641B4E53CA0011D37C /* Info.plist */,
 			);
 			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		E660E5251B5AB82000F52050 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		E6736ADC1B4E56EB0003580D /* Scripts */ = {
@@ -522,6 +536,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				E64DC3551B4E53C90011D37C /* Main.storyboard in Resources */,
+				E660E5271B5AB86B00F52050 /* PositionIn.MainMenuViewController.xib in Resources */,
+				E660E5291B5AB9CA00F52050 /* PositionIn.MapViewController.xib in Resources */,
 				E64DC35A1B4E53C90011D37C /* LaunchScreen.xib in Resources */,
 				E64DC3571B4E53C90011D37C /* Images.xcassets in Resources */,
 			);
