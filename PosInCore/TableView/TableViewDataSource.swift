@@ -112,5 +112,19 @@ extension TableViewDataSource {
 
 //MARK: UIScrollViewDelegate
 extension TableViewDataSource {
+    public func scrollViewDidScroll(scrollView: UIScrollView) {
+        if let tableView = scrollView as? TableView {
+            tableView.refreshHeaderView?.containingScrollViewDidScroll(tableView)
+        } else {
+            fatalError("his can only be the delegate of a TableView")
+        }
+    }
     
+    public func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        if let tableView = scrollView as? TableView {
+            tableView.refreshHeaderView?.containingScrollViewDidEndDragging(tableView)
+        } else {
+            fatalError("his can only be the delegate of a TableView")
+        }
+    }    
 }

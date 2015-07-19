@@ -22,7 +22,35 @@ public class TableView: UITableView {
         configure()
     }
     
-    public var state: State
+    public var refreshHeaderView: TableRefreshHeaderView? {
+        set {
+            if let oldRefreshHeaderView = refreshHeader {
+                oldRefreshHeaderView.removeFromSuperview()
+            }
+            if let newRefreshHeaderView = newValue {
+                addSubview(newRefreshHeaderView)
+                sendSubviewToBack(newRefreshHeaderView)
+                showsVerticalScrollIndicator = true
+                newRefreshHeaderView.scrollView = self
+            }
+            refreshHeader = newValue
+        }
+        get {
+            return refreshHeader
+        }
+    }
+    
+    public var state: State {
+        willSet {
+            var refreshState: TableRefreshHeaderView.State = .Normal
+            if state == .Refreshing {
+                refreshState = .Refreshing
+            } else if let refreshHeader = refreshHeaderView where refreshHeader.refreshState == .Refreshing {
+                refreshState = .Closing
+            }
+            refreshHeader?.refreshState = refreshState
+        }
+    }
     
     public enum State {
         case Loading // Initial loading state. Pull to refresh header will not show.
@@ -36,40 +64,15 @@ public class TableView: UITableView {
         estimatedRowHeight = 44.0
     }
     
+    private var refreshHeader: TableRefreshHeaderView?
+    
     //MARK: RefreshHeaderView
     public override func layoutSubviews() {
         super.layoutSubviews()
     
     // Put self.refreshHeaderView above the origin of self.frame. We set self.refreshHeaderView.frame.size to be equal to self.frame.size to gurantee that you won't be able to see beyond the top of the header view.
     // self.refreshHeaderView should draw it's content at the bottom of its frame.
-//    self.refreshHeaderView.frame = CGRectMake(0, -self.frame.size.height, self.frame.size.width, self.frame.size.height);
+        refreshHeader?.frame = CGRect(x: 0, y: -bounds.height, width: bounds.size.width, height: bounds.size.height)
     }
-/*
-    - (void)setRefreshHeaderView:(YLRefreshHeaderView *)refreshHeaderView {
-    if (refreshHeaderView) {
-    [self addSubview:refreshHeaderView];
-    [self sendSubviewToBack:refreshHeaderView];
-    self.showsVerticalScrollIndicator = YES;
-    refreshHeaderView.scrollView = self;
-    } else {
-    [self.refreshHeaderView removeFromSuperview];
-    }
-    _refreshHeaderView = refreshHeaderView;
-    }
-    
-    #pragma mark State
-
-    - (void)setState:(YLTableViewState)state {
-    YLRefreshHeaderViewState newState = YLRefreshHeaderViewStateNormal;
-    if (state == YLTableViewStateRefreshing) {
-    newState = YLRefreshHeaderViewStateRefreshing;
-    } else if (self.refreshHeaderView.refreshState == YLRefreshHeaderViewStateRefreshing) {
-    newState = YLRefreshHeaderViewStateClosing;
-    }
-    self.refreshHeaderView.refreshState = newState;
-    
-    _state = state;
-    }
-*/
   
 }
