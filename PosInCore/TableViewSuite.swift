@@ -78,6 +78,10 @@ public class TableViewCell: UITableViewCell {
         fatalError("\(self.dynamicType): You must override \(__FUNCTION__)")
     }
     
+    public class func reuseId() -> String {
+        return NSStringFromClass(self)
+    }
+    
 }
 
 public class TableViewDataSource: NSObject {
@@ -94,7 +98,7 @@ public class TableViewDataSource: NSObject {
     
     //MARK: Reuse Identifiers
     
-    public func tableView(tableView: UITableView, reuseIdentifierForIndexPath indexPath: NSIndexPath) -> String {
+    @objc public func tableView(tableView: UITableView, reuseIdentifierForIndexPath indexPath: NSIndexPath) -> String {
         fatalError("\(self.dynamicType): You must override \(__FUNCTION__)")
     }
     

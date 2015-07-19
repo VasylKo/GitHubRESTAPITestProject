@@ -16,6 +16,7 @@ class MainMenuViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         dataSource.items = defaultMainMenuItems()
+        tableView.registerNib(UINib(nibName: MainMenuCell.reuseId(), bundle: nil), forCellReuseIdentifier: MainMenuCell.reuseId())
         tableView.delegate = dataSource
         tableView.dataSource = dataSource
         tableView.reloadData()
@@ -59,7 +60,7 @@ class MainMenuViewController: UIViewController {
     }
     
     
-    private class MainMenuItemsDatasource: TableViewDataSource {
+    private class MainMenuItemsDatasource: TableViewDataSource  {
 
         var items: [MainMenuItem] = []
         
@@ -67,20 +68,17 @@ class MainMenuViewController: UIViewController {
             return items.count
         }
         
-        override func tableView(tableView: UITableView, reuseIdentifierForIndexPath indexPath: NSIndexPath) -> String {
-            return NSStringFromClass(MainMenuCell)
+        @objc override func tableView(tableView: UITableView, reuseIdentifierForIndexPath indexPath: NSIndexPath) -> String {
+            return MainMenuCell.reuseId()
         }
-        
-        override func tableView(tableView: UITableView, modelForIndexPath indexPath: NSIndexPath) -> TableViewCellModel {
-            return "Hello"
-//            let model = TableViewCellTextModel(title: "Hello")
-//            return model
+
+         override func tableView(tableView: UITableView, modelForIndexPath indexPath: NSIndexPath) -> TableViewCellModel {            
+            let item = items[indexPath.row]
+            let model = TableViewCellTextModel(title: item.title)
+            return model
         }
         
     }
 }
 
 
-extension String: TableViewCellModel {
-    
-}
