@@ -45,7 +45,6 @@
 /* Begin PBXBuildFile section */
 		451B04D684C5CB71F3D6581C /* Pods_PositionIn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7CE5A186774ECEB07E96F58 /* Pods_PositionIn.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		73062B70D53770174B21763D /* Pods_PosInCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46EE2AF3395401D4D26EB34F /* Pods_PosInCore.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		E6325F631B57D89A00996480 /* MainMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6325F601B57D89A00996480 /* MainMenuViewController.swift */; };
 		E6325F641B57D89A00996480 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6325F611B57D89A00996480 /* MapViewController.swift */; };
 		E6325F651B57D89A00996480 /* SidebarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6325F621B57D89A00996480 /* SidebarViewController.swift */; };
 		E6325F671B57DA4600996480 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6325F661B57DA4600996480 /* MapKit.framework */; };
@@ -64,6 +63,12 @@
 		E64DC3571B4E53C90011D37C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E64DC3561B4E53C90011D37C /* Images.xcassets */; };
 		E64DC35A1B4E53C90011D37C /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = E64DC3581B4E53C90011D37C /* LaunchScreen.xib */; };
 		E64DC3661B4E53CA0011D37C /* PositionInTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64DC3651B4E53CA0011D37C /* PositionInTests.swift */; };
+		E660E5291B5AB9CA00F52050 /* PositionIn.MapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E660E5281B5AB9C900F52050 /* PositionIn.MapViewController.xib */; };
+		E660E52D1B5AC23B00F52050 /* MainMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E660E52B1B5AC23B00F52050 /* MainMenuViewController.swift */; };
+		E660E52E1B5AC23B00F52050 /* PositionIn.MainMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E660E52C1B5AC23B00F52050 /* PositionIn.MainMenuViewController.xib */; };
+		E660E5301B5AC28600F52050 /* MainMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E660E52F1B5AC28600F52050 /* MainMenuCell.swift */; };
+		E660E5321B5AC2A200F52050 /* PositionIn.MainMenuCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E660E5311B5AC2A200F52050 /* PositionIn.MainMenuCell.xib */; };
+		E660E5341B5AC46C00F52050 /* TableViewSuite.swift in Sources */ = {isa = PBXBuildFile; fileRef = E660E5331B5AC46C00F52050 /* TableViewSuite.swift */; };
 		E6FC63D11B5901060062F5C9 /* KVObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6FC63D01B5901060062F5C9 /* KVObserver.swift */; };
 /* End PBXBuildFile section */
 
@@ -127,7 +132,6 @@
 		8723017B34FF5C9F33CC0218 /* Pods-PositionIn.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PositionIn.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PositionIn/Pods-PositionIn.debug.xcconfig"; sourceTree = "<group>"; };
 		A7CE5A186774ECEB07E96F58 /* Pods_PositionIn.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PositionIn.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB73828B80F64D347BB9F14D /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		E6325F601B57D89A00996480 /* MainMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuViewController.swift; sourceTree = "<group>"; };
 		E6325F611B57D89A00996480 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		E6325F621B57D89A00996480 /* SidebarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SidebarViewController.swift; sourceTree = "<group>"; };
 		E6325F661B57DA4600996480 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
@@ -152,6 +156,13 @@
 		E64DC3641B4E53CA0011D37C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E64DC3651B4E53CA0011D37C /* PositionInTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PositionInTests.swift; sourceTree = "<group>"; };
 		E64DC36F1B4E54330011D37C /* PositionIn-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PositionIn-Bridging-Header.h"; sourceTree = "<group>"; };
+		E660E5281B5AB9C900F52050 /* PositionIn.MapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.MapViewController.xib; sourceTree = "<group>"; };
+		E660E52B1B5AC23B00F52050 /* MainMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuViewController.swift; sourceTree = "<group>"; };
+		E660E52C1B5AC23B00F52050 /* PositionIn.MainMenuViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.MainMenuViewController.xib; sourceTree = "<group>"; };
+		E660E52F1B5AC28600F52050 /* MainMenuCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuCell.swift; sourceTree = "<group>"; };
+		E660E5311B5AC2A200F52050 /* PositionIn.MainMenuCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.MainMenuCell.xib; sourceTree = "<group>"; };
+		E660E5331B5AC46C00F52050 /* TableViewSuite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewSuite.swift; sourceTree = "<group>"; };
+		E660E5351B5B192100F52050 /* PositionIn.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = PositionIn.playground; sourceTree = "<group>"; };
 		E6736ADB1B4E56DD0003580D /* Version.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Version.h; sourceTree = "<group>"; };
 		E6736ADD1B4E56EB0003580D /* TODOwarn.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = TODOwarn.sh; sourceTree = "<group>"; };
 		E6736ADE1B4E56EB0003580D /* Version.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = Version.sh; sourceTree = "<group>"; };
@@ -228,8 +239,8 @@
 			isa = PBXGroup;
 			children = (
 				E6325F621B57D89A00996480 /* SidebarViewController.swift */,
-				E6325F601B57D89A00996480 /* MainMenuViewController.swift */,
 				E6325F611B57D89A00996480 /* MapViewController.swift */,
+				E660E5281B5AB9C900F52050 /* PositionIn.MapViewController.xib */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -238,6 +249,7 @@
 			isa = PBXGroup;
 			children = (
 				E6FC63D01B5901060062F5C9 /* KVObserver.swift */,
+				E660E5331B5AC46C00F52050 /* TableViewSuite.swift */,
 				E6325FC41B57F3A300996480 /* CommonTypes.swift */,
 				E6325FC51B57F3A300996480 /* FoundationWrappers.swift */,
 				E6325FC81B57FBE100996480 /* NetworkDataProvider.swift */,
@@ -276,6 +288,7 @@
 		E64DC3411B4E53C90011D37C = {
 			isa = PBXGroup;
 			children = (
+				E660E5351B5B192100F52050 /* PositionIn.playground */,
 				E6736ADC1B4E56EB0003580D /* Scripts */,
 				E64DC34C1B4E53C90011D37C /* PositionIn */,
 				E64DC3621B4E53CA0011D37C /* PositionInTests */,
@@ -301,6 +314,8 @@
 		E64DC34C1B4E53C90011D37C /* PositionIn */ = {
 			isa = PBXGroup;
 			children = (
+				E660E52A1B5AC23B00F52050 /* MainMenu */,
+				E660E5251B5AB82000F52050 /* Models */,
 				E6325F5F1B57D89A00996480 /* ViewControllers */,
 				E6325F581B57D46C00996480 /* Views */,
 				E64DC34F1B4E53C90011D37C /* AppDelegate.swift */,
@@ -338,6 +353,24 @@
 				E64DC3641B4E53CA0011D37C /* Info.plist */,
 			);
 			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		E660E5251B5AB82000F52050 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		E660E52A1B5AC23B00F52050 /* MainMenu */ = {
+			isa = PBXGroup;
+			children = (
+				E660E52B1B5AC23B00F52050 /* MainMenuViewController.swift */,
+				E660E52C1B5AC23B00F52050 /* PositionIn.MainMenuViewController.xib */,
+				E660E52F1B5AC28600F52050 /* MainMenuCell.swift */,
+				E660E5311B5AC2A200F52050 /* PositionIn.MainMenuCell.xib */,
+			);
+			path = MainMenu;
 			sourceTree = "<group>";
 		};
 		E6736ADC1B4E56EB0003580D /* Scripts */ = {
@@ -521,9 +554,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E660E52E1B5AC23B00F52050 /* PositionIn.MainMenuViewController.xib in Resources */,
 				E64DC3551B4E53C90011D37C /* Main.storyboard in Resources */,
+				E660E5291B5AB9CA00F52050 /* PositionIn.MapViewController.xib in Resources */,
 				E64DC35A1B4E53C90011D37C /* LaunchScreen.xib in Resources */,
 				E64DC3571B4E53C90011D37C /* Images.xcassets in Resources */,
+				E660E5321B5AC2A200F52050 /* PositionIn.MainMenuCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -660,6 +696,7 @@
 			files = (
 				E6FC63D11B5901060062F5C9 /* KVObserver.swift in Sources */,
 				E6325FC71B57F3A300996480 /* FoundationWrappers.swift in Sources */,
+				E660E5341B5AC46C00F52050 /* TableViewSuite.swift in Sources */,
 				E6325FC91B57FBE100996480 /* NetworkDataProvider.swift in Sources */,
 				E6325FC61B57F3A300996480 /* CommonTypes.swift in Sources */,
 				E6325FD81B57FEAF00996480 /* NetworkActivityIndicatorManager.swift in Sources */,
@@ -678,11 +715,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E6325F631B57D89A00996480 /* MainMenuViewController.swift in Sources */,
 				E6325F721B57E1DA00996480 /* Storyboards.swift in Sources */,
+				E660E52D1B5AC23B00F52050 /* MainMenuViewController.swift in Sources */,
 				E6325F641B57D89A00996480 /* MapViewController.swift in Sources */,
 				E64DC3501B4E53C90011D37C /* AppDelegate.swift in Sources */,
 				E6325F651B57D89A00996480 /* SidebarViewController.swift in Sources */,
+				E660E5301B5AC28600F52050 /* MainMenuCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
