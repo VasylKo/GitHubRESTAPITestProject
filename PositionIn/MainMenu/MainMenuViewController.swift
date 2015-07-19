@@ -38,7 +38,15 @@ class MainMenuViewController: UIViewController {
     private func defaultMainMenuItems() -> [MainMenuItem] {
         return [
             MainMenuItem(title: "Username", iconName: nil),
-            MainMenuItem(title: NSLocalizedString("For You", comment: "Main Menu: For You"), iconName: nil),
+            MainMenuItem(title: NSLocalizedString("For You", comment: "Main Menu: For You"), iconName: "MainMenuForYou"),
+            MainMenuItem(title: NSLocalizedString("New", comment: "Main Menu: new"), iconName: "MainMenuNew"),
+            MainMenuItem(title: NSLocalizedString("Messages", comment: "Main Menu: Messages"), iconName: "MainMenuMessages"),
+            MainMenuItem(title: NSLocalizedString("Filters", comment: "Main Menu: Filters"), iconName: "MainMenuFilters"),
+            MainMenuItem(title: NSLocalizedString("Categories", comment: "Main Menu: Categories"), iconName: "MainMenuCategories"),
+            MainMenuItem(title: NSLocalizedString("Community", comment: "Main Menu: Community"), iconName: "MainMenuCommunity"),
+            MainMenuItem(title: NSLocalizedString("Wallet", comment: "Main Menu: Wallet"), iconName: "MainMenuWallet"),
+            MainMenuItem(title: NSLocalizedString("User Profile", comment: "Main Menu: User Profile"), iconName: "MainMenuUserProfile"),
+            MainMenuItem(title: NSLocalizedString("Settings", comment: "Main Menu: Settings"), iconName: "MainMenuSettings"),
         ]
     }
     
