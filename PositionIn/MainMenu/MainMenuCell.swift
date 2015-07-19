@@ -21,4 +21,9 @@ class MainMenuCell: TableViewCell {
         titleLabel?.text = m!.title
         iconImageView.image = UIImage(named: m!.image)
     }
+    
+    override func setSelected(selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+        selectionIndicatorView.alpha = selected ? 1.0 : 0.0
+    }
 }
