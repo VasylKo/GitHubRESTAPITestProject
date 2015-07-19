@@ -16,11 +16,7 @@ class MainMenuViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         dataSource.items = defaultMainMenuItems()
-        tableView.registerNib(UINib(nibName: MainMenuCell.reuseId(), bundle: nil), forCellReuseIdentifier: MainMenuCell.reuseId())
-        tableView.delegate = dataSource
-        tableView.dataSource = dataSource
-        tableView.reloadData()
-
+        dataSource.configureTable(tableView)
     }
 
     override func didReceiveMemoryWarning() {
@@ -42,7 +38,15 @@ class MainMenuViewController: UIViewController {
     private func defaultMainMenuItems() -> [MainMenuItem] {
         return [
             MainMenuItem(title: "Username", iconName: nil),
-            MainMenuItem(title: NSLocalizedString("For You", comment: "Main Menu: For You"), iconName: nil),
+            MainMenuItem(title: NSLocalizedString("For You", comment: "Main Menu: For You"), iconName: "MainMenuForYou"),
+            MainMenuItem(title: NSLocalizedString("New", comment: "Main Menu: new"), iconName: "MainMenuNew"),
+            MainMenuItem(title: NSLocalizedString("Messages", comment: "Main Menu: Messages"), iconName: "MainMenuMessages"),
+            MainMenuItem(title: NSLocalizedString("Filters", comment: "Main Menu: Filters"), iconName: "MainMenuFilters"),
+            MainMenuItem(title: NSLocalizedString("Categories", comment: "Main Menu: Categories"), iconName: "MainMenuCategories"),
+            MainMenuItem(title: NSLocalizedString("Community", comment: "Main Menu: Community"), iconName: "MainMenuCommunity"),
+            MainMenuItem(title: NSLocalizedString("Wallet", comment: "Main Menu: Wallet"), iconName: "MainMenuWallet"),
+            MainMenuItem(title: NSLocalizedString("User Profile", comment: "Main Menu: User Profile"), iconName: "MainMenuUserProfile"),
+            MainMenuItem(title: NSLocalizedString("Settings", comment: "Main Menu: Settings"), iconName: "MainMenuSettings"),
         ]
     }
     
@@ -60,7 +64,7 @@ class MainMenuViewController: UIViewController {
     }
     
     
-    private class MainMenuItemsDatasource: TableViewDataSource  {
+    internal class MainMenuItemsDatasource: TableViewDataSource  {
 
         var items: [MainMenuItem] = []
         
@@ -72,10 +76,19 @@ class MainMenuViewController: UIViewController {
             return MainMenuCell.reuseId()
         }
 
-         override func tableView(tableView: UITableView, modelForIndexPath indexPath: NSIndexPath) -> TableViewCellModel {            
+         override func tableView(tableView: UITableView, modelForIndexPath indexPath: NSIndexPath) -> TableViewCellModel {
             let item = items[indexPath.row]
-            let model = TableViewCellTextModel(title: item.title)
+            let model = TableViewCellImageTextModel(title: item.title, imageName: item.iconName ?? "")
             return model
+        }
+     
+        override func nibCellsId() -> [String] {
+            return [MainMenuCell.reuseId()]
+        }
+        
+        func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+            let item = items[indexPath.row]
+            println("Item: \(item.title)")
         }
         
     }
