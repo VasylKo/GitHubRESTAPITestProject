@@ -11,17 +11,24 @@ import UISidebarViewController
 
 class SidebarViewController: UISidebarViewController {
 
+    override init!(centerViewController center: UIViewController!, andSidebarViewController sidebar: UIViewController!) {
+        super.init(centerViewController: center, andSidebarViewController: sidebar)
+        sidebar.view.bounds = CGRect(origin: CGPointZero, size: CGSize(width: sidebarWidth, height: sidebar.view.bounds.height))
+    }
+    
+    required init(coder aDecoder: NSCoder) {
+        fatalError("\(__FUNCTION__) does not implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor.blueColor()
-        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+        
 }
 
 extension UIViewController {
