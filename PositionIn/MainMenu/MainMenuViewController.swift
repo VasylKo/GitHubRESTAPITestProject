@@ -16,11 +16,7 @@ class MainMenuViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         dataSource.items = defaultMainMenuItems()
-        tableView.registerNib(UINib(nibName: MainMenuCell.reuseId(), bundle: nil), forCellReuseIdentifier: MainMenuCell.reuseId())
-        tableView.delegate = dataSource
-        tableView.dataSource = dataSource
-        tableView.reloadData()
-
+        dataSource.configureTable(tableView)
     }
 
     override func didReceiveMemoryWarning() {
@@ -60,7 +56,7 @@ class MainMenuViewController: UIViewController {
     }
     
     
-    private class MainMenuItemsDatasource: TableViewDataSource  {
+    internal class MainMenuItemsDatasource: TableViewDataSource  {
 
         var items: [MainMenuItem] = []
         
@@ -72,10 +68,19 @@ class MainMenuViewController: UIViewController {
             return MainMenuCell.reuseId()
         }
 
-         override func tableView(tableView: UITableView, modelForIndexPath indexPath: NSIndexPath) -> TableViewCellModel {            
+         override func tableView(tableView: UITableView, modelForIndexPath indexPath: NSIndexPath) -> TableViewCellModel {
             let item = items[indexPath.row]
-            let model = TableViewCellTextModel(title: item.title)
+            let model = TableViewCellImageTextModel(title: item.title, imageName: item.iconName ?? "")
             return model
+        }
+     
+        override func nibCellsId() -> [String] {
+            return [MainMenuCell.reuseId()]
+        }
+        
+        func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+            let item = items[indexPath.row]
+            println("Item: \(item.title)")
         }
         
     }

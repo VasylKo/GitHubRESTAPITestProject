@@ -34,7 +34,7 @@ public class TableViewCell: UITableViewCell {
         fatalError("\(self.dynamicType): You must override \(__FUNCTION__)")
     }
     
-    public class func reuseId() -> String {
+    public dynamic class func reuseId() -> String {
         return NSStringFromClass(self)
     }
     

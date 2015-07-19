@@ -16,8 +16,9 @@ class MainMenuCell: TableViewCell {
     @IBOutlet weak var iconImageView: UIImageView!
     
     override func setModel(model: TableViewCellModel) {
-        let m = model as? TableViewCellTextModel
+        let m = model as? TableViewCellImageTextModel
         assert(m != nil, "Invalid model passed")
         titleLabel?.text = m!.title
+        iconImageView.image = UIImage(named: m!.image)
     }
 }

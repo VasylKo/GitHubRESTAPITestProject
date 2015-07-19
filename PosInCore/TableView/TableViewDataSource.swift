@@ -49,6 +49,21 @@ public class TableViewDataSource: NSObject {
         fatalError("\(self.dynamicType): You must override \(__FUNCTION__)")
     }
     
+    //MARK: register views
+    
+    @objc public func configureTable(tableView: UITableView) {
+        for reuseId in nibCellsId() {
+            tableView.registerNib(UINib(nibName: reuseId, bundle: nil), forCellReuseIdentifier: reuseId)
+        }
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.reloadData()
+    }
+    
+    public func nibCellsId() -> [String] {
+        return []
+    }
+    
     
 }
 
