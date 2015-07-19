@@ -6,7 +6,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MainMenuViewController" customModule="PositionIn" customModuleProvider="target">
             <connections>
-                <outlet property="tableView" destination="9te-5M-xLn" id="BGQ-7T-9Tg"/>
+                <outlet property="tableView" destination="9te-5M-xLn" id="x6I-px-gil"/>
                 <outlet property="view" destination="sXl-IH-QGY" id="lNF-VN-TOi"/>
             </connections>
         </placeholder>
@@ -22,7 +22,7 @@
                         <constraint firstAttribute="height" constant="120" id="CYI-T1-tSm"/>
                     </constraints>
                 </imageView>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="9te-5M-xLn">
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="9te-5M-xLn" customClass="TableView" customModule="PosInCore">
                     <rect key="frame" x="0.0" y="120" width="600" height="480"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </tableView>

@@ -11,12 +11,14 @@ import PosInCore
 
 class MainMenuViewController: UIViewController {
 
+    @IBOutlet weak var tableView: TableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         dataSource.items = defaultMainMenuItems()
-        dataSource.tableView = tableView
-//        let t = TableViewDataSource()
-//        t.tableView(tableView, numberOfRowsInSection: 0)
+        tableView.delegate = dataSource
+        tableView.dataSource = dataSource
+        tableView.reloadData()
 
     }
 
@@ -44,51 +46,41 @@ class MainMenuViewController: UIViewController {
     }
     
     private lazy var dataSource: MainMenuItemsDatasource = {
-        return MainMenuItemsDatasource(viewController: self, table: self.tableView)
+        let dataSource = MainMenuItemsDatasource()
+        dataSource.parentViewController = self
+        return dataSource
     }()
     
     
-    private struct MainMenuItem {
+    internal struct MainMenuItem {
         let title: String
         let iconName: String?
+        
     }
     
     
-    private class MainMenuItemsDatasource: NSObject, UITableViewDataSource {
-        init(viewController: UIViewController, table: UITableView) {
-            parentViewController = viewController
-            tableView = table
-        }
+    private class MainMenuItemsDatasource: TableViewDataSource {
+
+        var items: [MainMenuItem] = []
         
-        unowned let parentViewController: UIViewController
-        weak var tableView: UITableView? {
-            didSet {
-                tableView?.dataSource = self
-                reloadData()
-            }
-        }
-        var items: [MainMenuItem] = [] {
-            didSet {
-                reloadData()
-            }
-        }
-        
-        func reloadData() {
-            tableView?.reloadData()
-        }
-        
-        @objc func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        @objc override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
             return items.count
         }
         
-        @objc func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-            //TODO: refactor
-            let cell = UITableViewCell(style: .Default, reuseIdentifier: "MainMenu cell")
-            let item = items[indexPath.row]
-            cell.textLabel?.text = item.title
-            return cell
+        override func tableView(tableView: UITableView, reuseIdentifierForIndexPath indexPath: NSIndexPath) -> String {
+            return NSStringFromClass(MainMenuCell)
         }
+        
+        override func tableView(tableView: UITableView, modelForIndexPath indexPath: NSIndexPath) -> TableViewCellModel {
+            return "Hello"
+//            let model = TableViewCellTextModel(title: "Hello")
+//            return model
+        }
+        
     }
+}
 
-    @IBOutlet weak var tableView: UITableView!
+
+extension String: TableViewCellModel {
+    
 }

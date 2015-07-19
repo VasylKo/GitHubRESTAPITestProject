@@ -14,4 +14,9 @@ class MainMenuCell: TableViewCell {
     @IBOutlet weak var selectionIndicatorView: UIView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var iconImageView: UIImageView!
+    
+    override func setModel(model: TableViewCellModel) {
+        let m = model as! TableViewCellTextModel
+        titleLabel?.text = m.title
+    }
 }
