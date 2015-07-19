@@ -107,8 +107,35 @@ extension TableViewDataSource: UITableViewDelegate {
 
 //MARK: ChildViewController support
 extension TableViewDataSource {
+    @objc public func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        if cell.conformsToProtocol(TableViewChildViewControllerCell) {
+            if let parentController = parentViewController {
+                let viewControllerCell = cell as! TableViewChildViewControllerCell
+                let childController = viewControllerCell.childViewController
+                childController.willMoveToParentViewController(parentController)
+                parentController.addChildViewController(childController)
+                childController.didMoveToParentViewController(parentController)
+            } else {
+                fatalError("Must have a parent view controller to support cell \(cell)")
+            }
+        }
+    }
+    
+    @objc public func tableView(tableView: UITableView, didEndDisplayingCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        if cell.conformsToProtocol(TableViewChildViewControllerCell) {
+            if let parentController = parentViewController {
+                let viewControllerCell = cell as! TableViewChildViewControllerCell
+                let childController = viewControllerCell.childViewController
+                childController.willMoveToParentViewController(nil)
+                childController.removeFromParentViewController()
+            } else {
+                fatalError("Must have a parent view controller to support cell \(cell)")
+            }
+        }
+    }
     
 }
+
 
 //MARK: UIScrollViewDelegate
 extension TableViewDataSource {
@@ -126,5 +153,5 @@ extension TableViewDataSource {
         } else {
             fatalError("his can only be the delegate of a TableView")
         }
-    }    
+    }
 }

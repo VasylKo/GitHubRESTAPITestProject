@@ -8,7 +8,7 @@
 
 import UIKit
 
-public protocol TableViewChildViewControllerCell {
+@objc public protocol TableViewChildViewControllerCell {
     var childViewController: UIViewController { get }
 }
 
