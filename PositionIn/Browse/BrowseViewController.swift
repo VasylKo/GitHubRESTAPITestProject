@@ -12,7 +12,7 @@ class BrowseViewController: BesideMenuViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        applyMode(mode)
+        applyDisplayMode(mode)
         self.navigationItem.titleView = searchbar
     }
 
@@ -39,7 +39,7 @@ class BrowseViewController: BesideMenuViewController {
     var mode: DisplayMode = .Map {
         didSet {
             if isViewLoaded() {
-                applyMode(mode)
+                applyDisplayMode(mode)
             }
         }
     }
@@ -63,7 +63,7 @@ class BrowseViewController: BesideMenuViewController {
     private weak var currentModeViewController: UIViewController?
     
     @IBOutlet weak var displayModeSegmentedControl: UISegmentedControl!
-    private func applyMode(mode: DisplayMode) {
+    private func applyDisplayMode(mode: DisplayMode) {
         println("\(self.dynamicType) Apply: \(mode)")        
         parentViewController?.view.endEditing(true)
         if let currentController = currentModeViewController {
