@@ -57,7 +57,6 @@
 		E62B170A1B5CE46500D446BC /* PositionIn.BrowseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E62B17091B5CE46500D446BC /* PositionIn.BrowseViewController.xib */; };
 		E62B170C1B5CFE7C00D446BC /* BrowseListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E62B170B1B5CFE7C00D446BC /* BrowseListViewController.swift */; };
 		E62B170E1B5CFEBE00D446BC /* PositionIn.BrowseListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E62B170D1B5CFEBE00D446BC /* PositionIn.BrowseListViewController.xib */; };
-		E62B17101B5D0C7A00D446BC /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E62B170F1B5D0C7A00D446BC /* SearchBar.swift */; };
 		E6325F651B57D89A00996480 /* SidebarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6325F621B57D89A00996480 /* SidebarViewController.swift */; };
 		E6325F671B57DA4600996480 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6325F661B57DA4600996480 /* MapKit.framework */; };
 		E6325F721B57E1DA00996480 /* Storyboards.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6325F711B57E1DA00996480 /* Storyboards.swift */; };
@@ -86,6 +85,9 @@
 		E660E5401B5BCF1A00F52050 /* TableRefreshHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E660E53F1B5BCF1A00F52050 /* TableRefreshHeaderView.swift */; };
 		E660E5421B5BCF3800F52050 /* TableViewSectionHeaderFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E660E5411B5BCF3800F52050 /* TableViewSectionHeaderFooterView.swift */; };
 		E660E5441B5BE43900F52050 /* TableViewSectionHeaderFooterLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E660E5431B5BE43900F52050 /* TableViewSectionHeaderFooterLabelView.swift */; };
+		E6D7C2921B5D546C004F3AA9 /* NibView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D7C2911B5D546C004F3AA9 /* NibView.swift */; };
+		E6D7C2971B5D5B3B004F3AA9 /* PositionIn.SearchBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6D7C2951B5D5B3B004F3AA9 /* PositionIn.SearchBar.xib */; };
+		E6D7C2981B5D5B3B004F3AA9 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D7C2961B5D5B3B004F3AA9 /* SearchBar.swift */; };
 		E6FC63D11B5901060062F5C9 /* KVObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6FC63D01B5901060062F5C9 /* KVObserver.swift */; };
 /* End PBXBuildFile section */
 
@@ -161,7 +163,6 @@
 		E62B17091B5CE46500D446BC /* PositionIn.BrowseViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.BrowseViewController.xib; sourceTree = "<group>"; };
 		E62B170B1B5CFE7C00D446BC /* BrowseListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowseListViewController.swift; sourceTree = "<group>"; };
 		E62B170D1B5CFEBE00D446BC /* PositionIn.BrowseListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.BrowseListViewController.xib; sourceTree = "<group>"; };
-		E62B170F1B5D0C7A00D446BC /* SearchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		E6325F621B57D89A00996480 /* SidebarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SidebarViewController.swift; sourceTree = "<group>"; };
 		E6325F661B57DA4600996480 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		E6325F711B57E1DA00996480 /* Storyboards.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storyboards.swift; sourceTree = "<group>"; };
@@ -200,6 +201,9 @@
 		E6736ADB1B4E56DD0003580D /* Version.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Version.h; sourceTree = "<group>"; };
 		E6736ADD1B4E56EB0003580D /* TODOwarn.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = TODOwarn.sh; sourceTree = "<group>"; };
 		E6736ADE1B4E56EB0003580D /* Version.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = Version.sh; sourceTree = "<group>"; };
+		E6D7C2911B5D546C004F3AA9 /* NibView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NibView.swift; sourceTree = "<group>"; };
+		E6D7C2951B5D5B3B004F3AA9 /* PositionIn.SearchBar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.SearchBar.xib; sourceTree = "<group>"; };
+		E6D7C2961B5D5B3B004F3AA9 /* SearchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		E6FC63D01B5901060062F5C9 /* KVObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KVObserver.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -280,6 +284,8 @@
 				E62B17031B5CE3BC00D446BC /* PositionIn.BrowseMapViewController.xib */,
 				E62B170B1B5CFE7C00D446BC /* BrowseListViewController.swift */,
 				E62B170D1B5CFEBE00D446BC /* PositionIn.BrowseListViewController.xib */,
+				E6D7C2961B5D5B3B004F3AA9 /* SearchBar.swift */,
+				E6D7C2951B5D5B3B004F3AA9 /* PositionIn.SearchBar.xib */,
 			);
 			path = Browse;
 			sourceTree = "<group>";
@@ -288,7 +294,6 @@
 			isa = PBXGroup;
 			children = (
 				E62B16F71B5C6BBF00D446BC /* AvatarView.swift */,
-				E62B170F1B5D0C7A00D446BC /* SearchBar.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -311,6 +316,7 @@
 				E6325FC51B57F3A300996480 /* FoundationWrappers.swift */,
 				E6325FC81B57FBE100996480 /* NetworkDataProvider.swift */,
 				E6325FD71B57FEAF00996480 /* NetworkActivityIndicatorManager.swift */,
+				E6D7C2911B5D546C004F3AA9 /* NibView.swift */,
 				E6325FA91B57F36E00996480 /* PosInCore.h */,
 				E6325FA71B57F36E00996480 /* Supporting Files */,
 			);
@@ -631,6 +637,7 @@
 			files = (
 				E62B170E1B5CFEBE00D446BC /* PositionIn.BrowseListViewController.xib in Resources */,
 				E62B170A1B5CE46500D446BC /* PositionIn.BrowseViewController.xib in Resources */,
+				E6D7C2971B5D5B3B004F3AA9 /* PositionIn.SearchBar.xib in Resources */,
 				E62B17041B5CE3BC00D446BC /* PositionIn.BrowseMapViewController.xib in Resources */,
 				E660E52E1B5AC23B00F52050 /* PositionIn.MainMenuViewController.xib in Resources */,
 				E62B16F51B5C1AA700D446BC /* PositionIn.MainMenuUserCell.xib in Resources */,
@@ -783,6 +790,7 @@
 				E6325FC91B57FBE100996480 /* NetworkDataProvider.swift in Sources */,
 				E660E53E1B5BCDF900F52050 /* TableViewDataSource.swift in Sources */,
 				E6325FC61B57F3A300996480 /* CommonTypes.swift in Sources */,
+				E6D7C2921B5D546C004F3AA9 /* NibView.swift in Sources */,
 				E660E5381B5BCCD700F52050 /* TableViewCellModel.swift in Sources */,
 				E6325FD81B57FEAF00996480 /* NetworkActivityIndicatorManager.swift in Sources */,
 			);
@@ -800,7 +808,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E62B17101B5D0C7A00D446BC /* SearchBar.swift in Sources */,
+				E6D7C2981B5D5B3B004F3AA9 /* SearchBar.swift in Sources */,
 				E6325F721B57E1DA00996480 /* Storyboards.swift in Sources */,
 				E62B16FF1B5CE0F800D446BC /* BesideMenuViewController.swift in Sources */,
 				E62B170C1B5CFE7C00D446BC /* BrowseListViewController.swift in Sources */,

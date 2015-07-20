@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SearchBar" customModule="PositionIn" customModuleProvider="target">
+            <connections>
+                <outlet property="contentView" destination="er1-9R-1QN" id="hvt-q3-V9X"/>
+                <outlet property="textField" destination="ddf-Jc-LjD" id="gxY-Sw-WGc"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="er1-9R-1QN" userLabel="ContentView">
+            <rect key="frame" x="0.0" y="0.0" width="300" height="50"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Search" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ddf-Jc-LjD">
+                    <rect key="frame" x="5" y="0.0" width="290" height="50"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="ddf-Jc-LjD" secondAttribute="trailing" constant="5" id="8oq-Pa-3Sp"/>
+                <constraint firstAttribute="bottom" secondItem="ddf-Jc-LjD" secondAttribute="bottom" id="AHg-jG-X4V"/>
+                <constraint firstItem="ddf-Jc-LjD" firstAttribute="leading" secondItem="er1-9R-1QN" secondAttribute="leading" constant="5" id="F5H-NH-OXQ"/>
+                <constraint firstItem="ddf-Jc-LjD" firstAttribute="top" secondItem="er1-9R-1QN" secondAttribute="top" id="Mt9-oU-X4l"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="466" y="225"/>
+        </view>
+    </objects>
+</document>

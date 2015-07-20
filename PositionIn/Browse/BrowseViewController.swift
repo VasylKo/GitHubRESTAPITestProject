@@ -101,7 +101,6 @@ class BrowseViewController: BesideMenuViewController {
             height: self.navigationController!.navigationBar.bounds.height - 2 * vPadding
         )
         let searchBar = SearchBar(frame: frame)
-        searchBar.backgroundColor = UIColor.redColor()
         return searchBar
     }()
 
