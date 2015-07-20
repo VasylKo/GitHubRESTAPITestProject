@@ -88,7 +88,7 @@ class MainMenuViewController: UIViewController {
         
         func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
             let item = items[indexPath.row]
-            println("Item: \(item.title)")
+            println("\(self.dynamicType) Select item: \(item.title)")
             parentViewController?.sideBarController?.executeAction(item.action)
         }
         

@@ -64,7 +64,7 @@ class BrowseViewController: BesideMenuViewController {
     
     @IBOutlet weak var displayModeSegmentedControl: UISegmentedControl!
     private func applyDisplayMode(mode: DisplayMode) {
-        println("\(self.dynamicType) Apply: \(mode)")        
+        println("\(self.dynamicType) Apply display mode: \(mode)")        
         parentViewController?.view.endEditing(true)
         if let currentController = currentModeViewController {
             currentController.willMoveToParentViewController(nil)

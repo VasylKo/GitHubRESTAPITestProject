@@ -26,6 +26,10 @@ class SidebarViewController: KYDrawerController {
     }
 
     func executeAction(action: Action) {
+        if !isViewLoaded() {
+            dispatch_delay(0){ self.executeAction(action) }
+            return
+        }
         let (segue: SidebarViewController.Segue?, sender: AnyObject?) = {
             switch action {
             case .Messages:

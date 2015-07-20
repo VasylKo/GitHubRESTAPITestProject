@@ -30,6 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let dataProvider = NetworkDataProvider(api: TestAPI())
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        
         let mapping: AnyObject? -> Int? = { json in
             let dict = json as? NSDictionary
             let number = dict?["id"] as? NSNumber
@@ -50,6 +51,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         dataProvider.jsonRequest(request, map: mapping, completion: completion)
+        
+        
+        if let sidebarViewController = window?.rootViewController as? SidebarViewController {
+            let defaultAction: SidebarViewController.Action = .ForYou
+            sidebarViewController.executeAction(defaultAction)
+        }
+        
         return true
     }
 

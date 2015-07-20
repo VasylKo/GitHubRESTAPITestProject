@@ -30,7 +30,6 @@
                             <real key="value" value="270"/>
                         </userDefinedRuntimeAttribute>
                         <userDefinedRuntimeAttribute type="string" keyPath="drawerSegueIdentifier" value="DrawerSegue"/>
-                        <userDefinedRuntimeAttribute type="string" keyPath="mainSegueIdentifier" value="ShowBrowse"/>
                     </userDefinedRuntimeAttributes>
                     <connections>
                         <segue destination="BFL-Ne-hYV" kind="custom" identifier="DrawerSegue" customClass="KYEmbedDrawerControllerSegue" customModule="KYDrawerController" id="57u-Oa-0ja"/>
