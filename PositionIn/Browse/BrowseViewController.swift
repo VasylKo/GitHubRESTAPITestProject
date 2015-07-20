@@ -9,8 +9,6 @@
 import UIKit
 
 class BrowseViewController: BesideMenuViewController {
-
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,10 +36,6 @@ class BrowseViewController: BesideMenuViewController {
     }
     
     
-    private func applyMode(mode: DisplayMode) {
-        println("\(self) Apply: \(mode)")
-    }
-    
     enum DisplayMode: Printable {
         case Map
         case List
@@ -56,6 +50,33 @@ class BrowseViewController: BesideMenuViewController {
         }
     }
     
-    
     @IBOutlet weak var contentView: UIView!
+    private weak var currentModeViewController: UIViewController?
+    
+    private func applyMode(mode: DisplayMode) {
+        println("\(self.dynamicType) Apply: \(mode)")
+        if let currentController = currentModeViewController {
+            currentController.willMoveToParentViewController(nil)
+            currentController.removeFromParentViewController()
+        }
+        
+        let childController: UIViewController = {
+            switch self.mode {
+            case .Map:
+                return Storyboards.Main.instantiateBrowseMapViewController()
+            case .List:
+                return Storyboards.Main.instantiateBrowseListViewController()
+            }
+        }()
+        childController.willMoveToParentViewController(self)
+        self.addChildViewController(childController)
+        self.contentView.addSubview(childController.view)
+        childController.view.setTranslatesAutoresizingMaskIntoConstraints(false)
+        let views: [NSObject : AnyObject] = [ "childView": childController.view ]
+        self.contentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[childView]|", options: NSLayoutFormatOptions(0), metrics: nil, views: views))
+        self.contentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[childView]|", options: NSLayoutFormatOptions(0), metrics: nil, views: views))        
+        childController.didMoveToParentViewController(self)
+        currentModeViewController = childController
+    }
+
 }

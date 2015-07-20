@@ -28,6 +28,14 @@ struct Storyboards {
             return self.storyboard.instantiateViewControllerWithIdentifier("MainMenuViewController") as! MainMenuViewController
         }
 
+        static func instantiateBrowseMapViewController() -> BrowseMapViewController! {
+            return self.storyboard.instantiateViewControllerWithIdentifier("BrowseMapViewController") as! BrowseMapViewController
+        }
+
+        static func instantiateBrowseListViewController() -> BrowseListViewController! {
+            return self.storyboard.instantiateViewControllerWithIdentifier("BrowseListViewController") as! BrowseListViewController
+        }
+
         static func instantiateMapViewController() -> BrowseViewController! {
             return self.storyboard.instantiateViewControllerWithIdentifier("MapViewController") as! BrowseViewController
         }
@@ -223,5 +231,9 @@ extension SidebarViewController {
 }
 
 //MARK: - MessagesListViewController
+
+//MARK: - BrowseMapViewController
+
+//MARK: - BrowseListViewController
 
 //MARK: - BrowseViewController

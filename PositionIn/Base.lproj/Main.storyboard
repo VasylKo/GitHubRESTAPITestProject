@@ -107,6 +107,22 @@
             </objects>
             <point key="canvasLocation" x="914" y="564"/>
         </scene>
+        <!--Browse Map View Controller-->
+        <scene sceneID="Ixb-6t-x5h">
+            <objects>
+                <viewController storyboardIdentifier="BrowseMapViewController" id="2Jc-cE-Yoh" customClass="BrowseMapViewController" customModule="PositionIn" customModuleProvider="target" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xoO-d8-dqA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1026" y="-738"/>
+        </scene>
+        <!--Browse List View Controller-->
+        <scene sceneID="Jyj-3J-o7D">
+            <objects>
+                <viewController storyboardIdentifier="BrowseListViewController" id="SVe-Oe-PAe" customClass="BrowseListViewController" customModule="PositionIn" customModuleProvider="target" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mXf-hm-3pP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1765" y="-738"/>
+        </scene>
         <!--Browse View Controller-->
         <scene sceneID="wfN-Bx-Jle">
             <objects>
