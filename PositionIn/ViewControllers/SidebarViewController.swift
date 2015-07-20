@@ -33,20 +33,19 @@ class SidebarViewController: KYDrawerController {
 
 extension UIViewController {
     var sideBarController: SidebarViewController? {
-        return nil
-//        return searchSideBarController(self)
+        return searchSideBarController(self.navigationController)
     }
-/*
-    private func searchSideBarController(controller: UIViewController?) -> UISidebarViewController? {
+    
+    private func searchSideBarController(controller: UIViewController?) -> SidebarViewController? {
         switch controller {
         case .None:
             return nil
         default:
-            if let c = controller as? UISidebarViewController {
+            if let c = controller as? SidebarViewController {
                 return c
             }
         }
         return searchSideBarController(controller?.parentViewController)
     }
-*/
+
 }
