@@ -30,11 +30,11 @@
                             <real key="value" value="270"/>
                         </userDefinedRuntimeAttribute>
                         <userDefinedRuntimeAttribute type="string" keyPath="drawerSegueIdentifier" value="DrawerSegue"/>
-                        <userDefinedRuntimeAttribute type="string" keyPath="mainSegueIdentifier" value="ShowForYou"/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="mainSegueIdentifier" value="ShowBrowse"/>
                     </userDefinedRuntimeAttributes>
                     <connections>
                         <segue destination="BFL-Ne-hYV" kind="custom" identifier="DrawerSegue" customClass="KYEmbedDrawerControllerSegue" customModule="KYDrawerController" id="57u-Oa-0ja"/>
-                        <segue destination="hew-RE-2CB" kind="custom" identifier="ShowForYou" customClass="KYEmbedMainControllerSegue" customModule="KYDrawerController" id="h47-6p-FJa"/>
+                        <segue destination="hew-RE-2CB" kind="custom" identifier="ShowBrowse" customClass="KYEmbedMainControllerSegue" customModule="KYDrawerController" id="h47-6p-FJa"/>
                         <segue destination="Eth-nv-VYE" kind="custom" identifier="ShowMessagesList" customClass="KYEmbedMainControllerSegue" customModule="KYDrawerController" id="dj9-Kt-1RB"/>
                     </connections>
                 </viewController>
@@ -99,7 +99,9 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Messages" id="45E-vw-XYB"/>
+                    <navigationItem key="navigationItem" title="Messages" id="45E-vw-XYB">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="tdQ-rK-BMU"/>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4CW-wc-yjP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

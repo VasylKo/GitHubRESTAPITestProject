@@ -29,8 +29,8 @@ class MainMenuViewController: UIViewController {
         //TODO: refactor
         return [
             MainMenuItem(title: "Username", imageName: "https://pbs.twimg.com/profile_images/3255786215/509fd5bc902d71141990920bf207edea.jpeg"),
-            MainMenuItem(title: NSLocalizedString("For You", comment: "Main Menu: For You"), imageName: "MainMenuForYou"),
-            MainMenuItem(title: NSLocalizedString("New", comment: "Main Menu: new"), imageName: "MainMenuNew"),
+            MainMenuItem(title: NSLocalizedString("For You", comment: "Main Menu: For You"), imageName: "MainMenuForYou", action: .ForYou),
+            MainMenuItem(title: NSLocalizedString("New", comment: "Main Menu: new"), imageName: "MainMenuNew", action: .New),
             MainMenuItem(title: NSLocalizedString("Messages", comment: "Main Menu: Messages"), imageName: "MainMenuMessages", action: .Messages),
             MainMenuItem(title: NSLocalizedString("Filters", comment: "Main Menu: Filters"), imageName: "MainMenuFilters"),
             MainMenuItem(title: NSLocalizedString("Categories", comment: "Main Menu: Categories"), imageName: "MainMenuCategories"),

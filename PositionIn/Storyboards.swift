@@ -189,14 +189,14 @@ extension SidebarViewController {
 
     enum Segue: String, Printable, SegueProtocol {
         case DrawerSegue = "DrawerSegue"
-        case ShowForYou = "ShowForYou"
+        case ShowBrowse = "ShowBrowse"
         case ShowMessagesList = "ShowMessagesList"
 
         var kind: SegueKind? {
             switch (self) {
             case DrawerSegue:
                 return SegueKind(rawValue: "custom")
-            case ShowForYou:
+            case ShowBrowse:
                 return SegueKind(rawValue: "custom")
             case ShowMessagesList:
                 return SegueKind(rawValue: "custom")

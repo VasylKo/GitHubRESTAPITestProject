@@ -25,17 +25,19 @@ class SidebarViewController: KYDrawerController {
     }
 
     func executeAction(action: Action) {
-        let segue: SidebarViewController.Segue? = {
+        let (segue: SidebarViewController.Segue?, sender: AnyObject?) = {
             switch action {
             case .Messages:
-                return SidebarViewController.Segue.ShowMessagesList
+                return (SidebarViewController.Segue.ShowMessagesList, nil)
+            case .ForYou, .New:
+                return (SidebarViewController.Segue.ShowBrowse, nil)
             default:
-                return nil
+                return (nil, nil)
             }
             }()
         if let segue = segue {
             setDrawerState(.Closed, animated: true)
-            performSegue(segue)
+            performSegue(segue, sender: sender)
         }
     }
 
