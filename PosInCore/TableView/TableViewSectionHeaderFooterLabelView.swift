@@ -22,10 +22,7 @@ public class TableViewSectionHeaderFooterLabelView : TableViewSectionHeaderFoote
     private func installLabel() {
         label = UILabel()
         label.numberOfLines = 0
-        label.setTranslatesAutoresizingMaskIntoConstraints(false)
-        contentLayoutGuideView.addSubview(label)
-        contentLayoutGuideView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[label]|", options: NSLayoutFormatOptions(0), metrics: nil, views: ["label" : label]))
-        contentLayoutGuideView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[label]|", options: NSLayoutFormatOptions(0), metrics: nil, views: ["label" : label]))
+        contentLayoutGuideView.addSubViewOnEntireSize(label)
     }
 
     private(set) public var label: UILabel!

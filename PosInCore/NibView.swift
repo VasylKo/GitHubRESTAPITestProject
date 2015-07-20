@@ -34,11 +34,7 @@ public class NibView: UIView {
         let bundle = NSBundle(forClass: self.dynamicType)
         bundle.loadNibNamed(nibName, owner: self, options: nil)
         if let contentView = contentView {
-            addSubview(contentView)
-            contentView.setTranslatesAutoresizingMaskIntoConstraints(false)
-            let views: [NSObject : AnyObject] = [ "contentView": contentView ]
-            self.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[contentView]|", options: NSLayoutFormatOptions(0), metrics: nil, views: views))
-            self.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[contentView]|", options: NSLayoutFormatOptions(0), metrics: nil, views: views))
+            addSubViewOnEntireSize(contentView)
         }
     }
     

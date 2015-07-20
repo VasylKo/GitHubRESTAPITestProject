@@ -14,27 +14,33 @@ class BrowseViewController: BesideMenuViewController {
         super.viewDidLoad()
         applyDisplayMode(mode)
         self.navigationItem.titleView = searchbar
+        blurDisplayed = true
     }
 
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
     
-    @IBAction func displayModeSegmentChanged(sender: UISegmentedControl) {
-        if let displayMode = DisplayMode(rawValue: sender.selectedSegmentIndex) {
-            mode = displayMode
-        } else {
-         fatalError("Unknown display mode in segment control")
+    @IBOutlet private weak var contentView: UIView!
+
+
+//MARK: Blur
+    
+    var blurDisplayed: Bool = false {
+        didSet {
+            blurView.hidden = !blurDisplayed
+            if blurDisplayed {
+                contentView.bringSubviewToFront(blurView)
+            }
         }
     }
-
+    
+    private lazy var blurView: UIView = {
+        let blur = UIBlurEffect(style: .Light)
+        let blurView = UIVisualEffectView(effect: blur)
+        self.contentView.addSubViewOnEntireSize(blurView)
+        blurView.hidden = true
+        return blurView
+    }()
+    
+//MARK: Display mode
     
     var mode: DisplayMode = .Map {
         didSet {
@@ -43,7 +49,6 @@ class BrowseViewController: BesideMenuViewController {
             }
         }
     }
-    
     
     enum DisplayMode: Int, Printable {
         case Map = 0
@@ -59,12 +64,20 @@ class BrowseViewController: BesideMenuViewController {
         }
     }
     
-    @IBOutlet weak var contentView: UIView!
+    @IBOutlet private weak var displayModeSegmentedControl: UISegmentedControl!
+    
+    @IBAction private func displayModeSegmentChanged(sender: UISegmentedControl) {
+        if let displayMode = DisplayMode(rawValue: sender.selectedSegmentIndex) {
+            mode = displayMode
+        } else {
+            fatalError("Unknown display mode in segment control")
+        }
+    }
+
     private weak var currentModeViewController: UIViewController?
     
-    @IBOutlet weak var displayModeSegmentedControl: UISegmentedControl!
     private func applyDisplayMode(mode: DisplayMode) {
-        println("\(self.dynamicType) Apply display mode: \(mode)")        
+        println("\(self.dynamicType) Apply display mode: \(mode)")
         parentViewController?.view.endEditing(true)
         if let currentController = currentModeViewController {
             currentController.willMoveToParentViewController(nil)
@@ -79,20 +92,18 @@ class BrowseViewController: BesideMenuViewController {
             case .List:
                 return Storyboards.Main.instantiateBrowseListViewController()
             }
-        }()
+            }()
         childController.willMoveToParentViewController(self)
         self.addChildViewController(childController)
-        self.contentView.addSubview(childController.view)
-        childController.view.setTranslatesAutoresizingMaskIntoConstraints(false)
-        let views: [NSObject : AnyObject] = [ "childView": childController.view ]
-        self.contentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[childView]|", options: NSLayoutFormatOptions(0), metrics: nil, views: views))
-        self.contentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[childView]|", options: NSLayoutFormatOptions(0), metrics: nil, views: views))        
+        self.contentView.addSubViewOnEntireSize(childController.view)
         childController.didMoveToParentViewController(self)
         currentModeViewController = childController
         displayModeSegmentedControl.selectedSegmentIndex = mode.rawValue
+        blurDisplayed = false
     }
-    
-    lazy var searchbar: SearchBar = {
+
+
+    private lazy var searchbar: SearchBar = {
         let vPadding: CGFloat = 5
         let frame = CGRect(
             x: 0,
@@ -102,6 +113,6 @@ class BrowseViewController: BesideMenuViewController {
         )
         let searchBar = SearchBar(frame: frame)
         return searchBar
-    }()
+        }()
 
 }

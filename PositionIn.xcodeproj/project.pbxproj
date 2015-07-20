@@ -286,6 +286,7 @@
 				E62B170D1B5CFEBE00D446BC /* PositionIn.BrowseListViewController.xib */,
 				E6D7C2961B5D5B3B004F3AA9 /* SearchBar.swift */,
 				E6D7C2951B5D5B3B004F3AA9 /* PositionIn.SearchBar.xib */,
+				E6D7C2991B5D5EB3004F3AA9 /* AddMenu */,
 			);
 			path = Browse;
 			sourceTree = "<group>";
@@ -461,6 +462,13 @@
 				E6736ADE1B4E56EB0003580D /* Version.sh */,
 			);
 			path = Scripts;
+			sourceTree = "<group>";
+		};
+		E6D7C2991B5D5EB3004F3AA9 /* AddMenu */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = AddMenu;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
