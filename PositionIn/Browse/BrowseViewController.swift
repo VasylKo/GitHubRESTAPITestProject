@@ -10,19 +10,14 @@ import UIKit
 
 class BrowseViewController: BesideMenuViewController {
 
-    @IBOutlet weak var contentView: UIView!
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        applyMode(mode)
 
-        // Do any additional setup after loading the view.
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
 
     /*
     // MARK: - Navigation
@@ -33,5 +28,34 @@ class BrowseViewController: BesideMenuViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
+    
+    var mode: DisplayMode = .Map {
+        didSet {
+            if isViewLoaded() {
+                applyMode(mode)
+            }
+        }
+    }
+    
+    
+    private func applyMode(mode: DisplayMode) {
+        println("\(self) Apply: \(mode)")
+    }
+    
+    enum DisplayMode: Printable {
+        case Map
+        case List
+        
+        var description: String {
+            switch self {
+            case .Map:
+                return "Map browse mode"
+            case .List:
+                return "List browse mode"
+            }
+        }
+    }
+    
+    
+    @IBOutlet weak var contentView: UIView!
 }

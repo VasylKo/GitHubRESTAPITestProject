@@ -8,6 +8,7 @@
 
 import UIKit
 import KYDrawerController
+import PosInCore
 
 class SidebarViewController: KYDrawerController {
     enum Action  {
@@ -29,8 +30,10 @@ class SidebarViewController: KYDrawerController {
             switch action {
             case .Messages:
                 return (SidebarViewController.Segue.ShowMessagesList, nil)
-            case .ForYou, .New:
-                return (SidebarViewController.Segue.ShowBrowse, nil)
+            case .ForYou:
+                return (SidebarViewController.Segue.ShowBrowse, Box(BrowseViewController.DisplayMode.Map))
+            case .New:
+                return (SidebarViewController.Segue.ShowBrowse, Box(BrowseViewController.DisplayMode.List))
             default:
                 return (nil, nil)
             }
@@ -38,6 +41,21 @@ class SidebarViewController: KYDrawerController {
         if let segue = segue {
             setDrawerState(.Closed, animated: true)
             performSegue(segue, sender: sender)
+        }
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let segueId = segue.identifier {
+            switch segueId {
+            case SidebarViewController.Segue.ShowBrowse.identifier!:
+                if let navigationController = segue.destinationViewController as? UINavigationController,
+                   let browseController = navigationController.topViewController as? BrowseViewController,
+                   let mode = sender as? Box<BrowseViewController.DisplayMode> {
+                        browseController.mode = mode.unbox
+                }
+            default:
+                return
+            }
         }
     }
 

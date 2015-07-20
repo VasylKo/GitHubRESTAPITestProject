@@ -39,7 +39,7 @@ public func <*><A, B>(f: (A -> B)?, a: A?) -> B? {
 *  Generic wrapper, used in OperationResult because of the enum limitations
 */
 public final class Box<A> {
-    let unbox: A
+    public let unbox: A
     public init(_ value: A) { self.unbox = value }
 }
 
