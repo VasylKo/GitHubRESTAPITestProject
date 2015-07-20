@@ -56,6 +56,11 @@ class SidebarViewController: KYDrawerController {
             }
         }
     }
+    
+    override func setDrawerState(state: KYDrawerController.DrawerState, animated: Bool) {
+        super.setDrawerState(state, animated: animated)
+        mainViewController?.view.endEditing(true)        
+    }
 
 }
 
