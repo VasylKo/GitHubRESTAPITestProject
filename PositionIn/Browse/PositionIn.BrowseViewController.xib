@@ -30,13 +30,23 @@
                     <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
                     <color key="backgroundColor" red="0.97254901959999995" green="0.83921568629999999" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
+                <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Oh4-XU-mlM" customClass="AddMenuButton" customModule="PositionIn" customModuleProvider="target">
+                    <rect key="frame" x="150" y="150" width="50" height="50"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="50" id="QUo-SP-wgs"/>
+                        <constraint firstAttribute="height" constant="50" id="abW-xh-S2h"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstItem="uBe-OX-fNL" firstAttribute="top" secondItem="Oh4-XU-mlM" secondAttribute="bottom" id="7TA-bs-WY3"/>
                 <constraint firstAttribute="trailing" secondItem="f02-Vb-KtN" secondAttribute="trailing" id="8ED-wu-Dzg"/>
                 <constraint firstItem="f02-Vb-KtN" firstAttribute="leading" secondItem="apz-CI-lnL" secondAttribute="leading" id="JF8-gw-v6q"/>
                 <constraint firstItem="uBe-OX-fNL" firstAttribute="leading" secondItem="apz-CI-lnL" secondAttribute="leading" id="V52-o8-Kn8"/>
                 <constraint firstAttribute="trailing" secondItem="uBe-OX-fNL" secondAttribute="trailing" id="WvR-bP-r6A"/>
+                <constraint firstAttribute="centerX" secondItem="Oh4-XU-mlM" secondAttribute="centerX" id="bkT-7S-0xB"/>
                 <constraint firstAttribute="bottom" secondItem="uBe-OX-fNL" secondAttribute="bottom" id="dN9-JI-XPZ"/>
                 <constraint firstItem="f02-Vb-KtN" firstAttribute="top" secondItem="apz-CI-lnL" secondAttribute="top" id="tpz-PS-1rP"/>
                 <constraint firstItem="uBe-OX-fNL" firstAttribute="top" secondItem="f02-Vb-KtN" secondAttribute="bottom" id="wEZ-J5-qwJ"/>
