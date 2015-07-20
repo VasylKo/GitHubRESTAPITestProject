@@ -8,7 +8,7 @@ target 'PositionIn' do
     pod 'ObjectMapper'
     
     pod 'HanekeSwift'
-    pod 'UISidebarViewController'
+    pod 'KYDrawerController'
 end
 
 target 'PositionInTests' do

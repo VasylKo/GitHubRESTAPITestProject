@@ -24,7 +24,7 @@ class MapViewController: UIViewController {
 
     @IBAction func showMenu(sender: AnyObject) {
         let sidebar = sideBarController
-        sidebar?.toggleSidebar(sender)
+//        sidebar?.toggleSidebar(sender)
     }
     
     /*

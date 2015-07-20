@@ -7,10 +7,10 @@
 //
 
 import UIKit
-import UISidebarViewController
+import KYDrawerController
 
-class SidebarViewController: UISidebarViewController {
-
+class SidebarViewController: KYDrawerController {
+/*
     override init!(centerViewController center: UIViewController!, andSidebarViewController sidebar: UIViewController!) {
         super.init(centerViewController: center, andSidebarViewController: sidebar)
         sidebar.view.bounds = CGRect(origin: CGPointZero, size: CGSize(width: sidebarWidth, height: sidebar.view.bounds.height))
@@ -28,14 +28,15 @@ class SidebarViewController: UISidebarViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-        
+ */
 }
 
 extension UIViewController {
-    var sideBarController: UISidebarViewController? {
-        return searchSideBarController(self)
+    var sideBarController: SidebarViewController? {
+        return nil
+//        return searchSideBarController(self)
     }
-    
+/*
     private func searchSideBarController(controller: UIViewController?) -> UISidebarViewController? {
         switch controller {
         case .None:
@@ -47,4 +48,5 @@ extension UIViewController {
         }
         return searchSideBarController(controller?.parentViewController)
     }
+*/
 }

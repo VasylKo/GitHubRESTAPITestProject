@@ -52,7 +52,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         dataProvider.jsonRequest(request, map: mapping, completion: completion)
 
 
-        presentRootController()
+//        presentRootController()
         return true
     }
 
@@ -80,10 +80,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     private func presentRootController() {
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
-        let centerController = Storyboards.Main.instantiateViewControllerWithIdentifier("MapNavigationController")
-        let sidebarController = Storyboards.Main.instantiateMainMenuViewController()
-        window?.rootViewController = SidebarViewController(centerViewController:
-            centerController, andSidebarViewController: sidebarController)
+//        let centerController = Storyboards.Main.instantiateViewControllerWithIdentifier("MapNavigationController")
+//        let sidebarController = Storyboards.Main.instantiateMainMenuViewController()
+//        window?.rootViewController = SidebarViewController(centerViewController:
+//            centerController, andSidebarViewController: sidebarController)
         window?.makeKeyAndVisible()
     }
 
