@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="j5Z-eJ-Y0Z">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
@@ -10,18 +10,51 @@
                 <viewController storyboardIdentifier="MainMenuViewController" id="BFL-Ne-hYV" customClass="MainMenuViewController" customModule="PositionIn" customModuleProvider="target" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kbb-so-kE4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-391" y="-95"/>
+            <point key="canvasLocation" x="241" y="-767"/>
         </scene>
-        <!--Navigation Controller Scene-->
+        <!--Sidebar View Controller-->
+        <scene sceneID="Mz5-9O-204">
+            <objects>
+                <viewController id="j5Z-eJ-Y0Z" customClass="SidebarViewController" customModule="PositionIn" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="lqE-I7-JQd"/>
+                        <viewControllerLayoutGuide type="bottom" id="Jt1-NC-C2e"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="DhI-qB-07N">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="drawerWidth">
+                            <real key="value" value="270"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="string" keyPath="drawerSegueIdentifier" value="DrawerSegue"/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="mainSegueIdentifier" value="ShowBrowse"/>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <segue destination="BFL-Ne-hYV" kind="custom" identifier="DrawerSegue" customClass="KYEmbedDrawerControllerSegue" customModule="KYDrawerController" id="57u-Oa-0ja"/>
+                        <segue destination="hew-RE-2CB" kind="custom" identifier="ShowBrowse" customClass="KYEmbedMainControllerSegue" customModule="KYDrawerController" id="h47-6p-FJa"/>
+                        <segue destination="Eth-nv-VYE" kind="custom" identifier="ShowMessagesList" customClass="KYEmbedMainControllerSegue" customModule="KYDrawerController" id="dj9-Kt-1RB"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LQ4-lF-MRq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-587" y="-430"/>
+        </scene>
+        <!--Browse Navigation Controller Scene-->
         <scene sceneID="Ffe-yH-6Ub">
             <objects>
-                <navigationController storyboardIdentifier="MapNavigationController" id="hew-RE-2CB" userLabel="Navigation Controller Scene" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="MapNavigationController" id="hew-RE-2CB" userLabel="Browse Navigation Controller Scene" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="ba7-E9-Omt">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.13725490200000001" green="0.4431372549" blue="0.83529411760000005" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="barTintColor" red="0.13725490200000001" green="0.4431372549" blue="0.83529411760000005" alpha="1" colorSpace="calibratedRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </textAttributes>
                     </navigationBar>
                     <connections>
                         <segue destination="nw9-Ck-dbi" kind="relationship" relationship="rootViewController" id="UuW-O4-vdY"/>
@@ -31,24 +64,58 @@
             </objects>
             <point key="canvasLocation" x="241" y="-95"/>
         </scene>
-        <!--Map View Controller-->
+        <!--Messaging Navigation Controller Scene-->
+        <scene sceneID="KYr-N5-trl">
+            <objects>
+                <navigationController storyboardIdentifier="MessagingNavigationController" id="Eth-nv-VYE" userLabel="Messaging Navigation Controller Scene" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="Ws9-ZM-SkB">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" red="0.13725490200000001" green="0.4431372549" blue="0.83529411760000005" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="barTintColor" red="0.13725490200000001" green="0.4431372549" blue="0.83529411760000005" alpha="1" colorSpace="calibratedRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="WCn-eT-80Y" kind="relationship" relationship="rootViewController" id="Pg7-Aa-5bg"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5WX-A3-iZV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="241" y="564"/>
+        </scene>
+        <!--Messages-->
+        <scene sceneID="HVo-4m-TZx">
+            <objects>
+                <viewController id="WCn-eT-80Y" customClass="MessagesListViewController" customModule="PositionIn" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="pzK-5d-Ppn"/>
+                        <viewControllerLayoutGuide type="bottom" id="yXG-27-Llc"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="rHC-dc-lgR">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Messages" id="45E-vw-XYB">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="tdQ-rK-BMU"/>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4CW-wc-yjP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="914" y="564"/>
+        </scene>
+        <!--Browse View Controller-->
         <scene sceneID="wfN-Bx-Jle">
             <objects>
-                <viewController storyboardIdentifier="MapViewController" id="nw9-Ck-dbi" customClass="MapViewController" customModule="PositionIn" customModuleProvider="target" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="TN7-xA-vpM">
-                        <barButtonItem key="leftBarButtonItem" image="MainMenuIcon" id="G8T-bM-wrE">
-                            <connections>
-                                <action selector="showMenu:" destination="nw9-Ck-dbi" id="G2b-A5-6fA"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                <viewController storyboardIdentifier="MapViewController" id="nw9-Ck-dbi" customClass="BrowseViewController" customModule="PositionIn" customModuleProvider="target" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="TN7-xA-vpM"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="spd-ov-gak" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="950" y="-95"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="MainMenuIcon" width="22" height="22"/>
-    </resources>
 </document>

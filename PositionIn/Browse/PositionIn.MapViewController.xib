@@ -15,25 +15,14 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Ciz-mK-IHm">
-                    <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                 </mapView>
-                <tabBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uBe-OX-fNL">
-                    <rect key="frame" x="0.0" y="551" width="600" height="49"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <items>
-                        <tabBarItem systemItem="favorites" id="wfg-9f-l2Z"/>
-                        <tabBarItem systemItem="more" id="oDl-kc-XRJ"/>
-                    </items>
-                </tabBar>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="Ciz-mK-IHm" secondAttribute="trailing" id="IwO-ko-cvZ"/>
-                <constraint firstItem="uBe-OX-fNL" firstAttribute="top" secondItem="Ciz-mK-IHm" secondAttribute="bottom" id="T5Q-Xb-VDv"/>
-                <constraint firstItem="uBe-OX-fNL" firstAttribute="leading" secondItem="apz-CI-lnL" secondAttribute="leading" id="V52-o8-Kn8"/>
-                <constraint firstAttribute="trailing" secondItem="uBe-OX-fNL" secondAttribute="trailing" id="WvR-bP-r6A"/>
+                <constraint firstAttribute="bottom" secondItem="Ciz-mK-IHm" secondAttribute="bottom" id="Z1o-eZ-dRK"/>
                 <constraint firstItem="Ciz-mK-IHm" firstAttribute="top" secondItem="apz-CI-lnL" secondAttribute="top" id="dH6-qI-SYG"/>
-                <constraint firstAttribute="bottom" secondItem="uBe-OX-fNL" secondAttribute="bottom" id="dN9-JI-XPZ"/>
                 <constraint firstItem="Ciz-mK-IHm" firstAttribute="leading" secondItem="apz-CI-lnL" secondAttribute="leading" id="qFN-NF-U6F"/>
             </constraints>
         </view>
