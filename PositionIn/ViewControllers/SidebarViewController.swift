@@ -30,10 +30,8 @@ class SidebarViewController: KYDrawerController {
             switch action {
             case .Messages:
                 return (SidebarViewController.Segue.ShowMessagesList, nil)
-            case .ForYou:
+            case .ForYou, .New:
                 return (SidebarViewController.Segue.ShowBrowse, Box(BrowseViewController.DisplayMode.Map))
-            case .New:
-                return (SidebarViewController.Segue.ShowBrowse, Box(BrowseViewController.DisplayMode.List))
             default:
                 return (nil, nil)
             }

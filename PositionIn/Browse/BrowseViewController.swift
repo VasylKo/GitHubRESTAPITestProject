@@ -27,6 +27,15 @@ class BrowseViewController: BesideMenuViewController {
     }
     */
     
+    @IBAction func displayModeSegmentChanged(sender: UISegmentedControl) {
+        if let displayMode = DisplayMode(rawValue: sender.selectedSegmentIndex) {
+            mode = displayMode
+        } else {
+         fatalError("Unknown display mode in segment control")
+        }
+    }
+
+    
     var mode: DisplayMode = .Map {
         didSet {
             if isViewLoaded() {
@@ -36,9 +45,9 @@ class BrowseViewController: BesideMenuViewController {
     }
     
     
-    enum DisplayMode: Printable {
-        case Map
-        case List
+    enum DisplayMode: Int, Printable {
+        case Map = 0
+        case List = 1
         
         var description: String {
             switch self {
@@ -53,10 +62,12 @@ class BrowseViewController: BesideMenuViewController {
     @IBOutlet weak var contentView: UIView!
     private weak var currentModeViewController: UIViewController?
     
+    @IBOutlet weak var displayModeSegmentedControl: UISegmentedControl!
     private func applyMode(mode: DisplayMode) {
         println("\(self.dynamicType) Apply: \(mode)")
         if let currentController = currentModeViewController {
             currentController.willMoveToParentViewController(nil)
+            currentController.view.removeFromSuperview()
             currentController.removeFromParentViewController()
         }
         
@@ -77,6 +88,7 @@ class BrowseViewController: BesideMenuViewController {
         self.contentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[childView]|", options: NSLayoutFormatOptions(0), metrics: nil, views: views))        
         childController.didMoveToParentViewController(self)
         currentModeViewController = childController
+        displayModeSegmentedControl.selectedSegmentIndex = mode.rawValue
     }
 
 }

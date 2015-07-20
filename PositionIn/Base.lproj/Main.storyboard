@@ -127,11 +127,33 @@
         <scene sceneID="wfN-Bx-Jle">
             <objects>
                 <viewController storyboardIdentifier="MapViewController" id="nw9-Ck-dbi" customClass="BrowseViewController" customModule="PositionIn" customModuleProvider="target" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="TN7-xA-vpM"/>
+                    <navigationItem key="navigationItem" id="TN7-xA-vpM">
+                        <nil key="title"/>
+                        <barButtonItem key="rightBarButtonItem" id="YWJ-ev-aNl">
+                            <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="Hzh-Pp-w0S">
+                                <rect key="frame" x="-61" y="-14" width="133" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <segments>
+                                    <segment title="" image="BrowseModeMap"/>
+                                    <segment title="" image="BrowseModeList"/>
+                                </segments>
+                                <connections>
+                                    <action selector="displayModeSegmentChanged:" destination="nw9-Ck-dbi" eventType="valueChanged" id="ZQH-TG-ZTN"/>
+                                </connections>
+                            </segmentedControl>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="displayModeSegmentedControl" destination="Hzh-Pp-w0S" id="T0S-bj-Beg"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="spd-ov-gak" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="950" y="-95"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="BrowseModeList" width="22" height="22"/>
+        <image name="BrowseModeMap" width="22" height="22"/>
+    </resources>
 </document>
