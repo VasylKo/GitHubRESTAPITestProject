@@ -10,10 +10,20 @@ import UIKit
 
 class AddMenuButton: UIControl {
 
+    convenience init(
+        image: UIImage,
+        fillColor: UIColor = UIColor.whiteColor(),
+        shadowColor: UIColor = UIColor.lightGrayColor()
+        ) {
+            let frame = CGRect(origin: CGPointZero, size: image.size)
+            self.init(frame: frame)
+            self.fillColor = fillColor
+            self.shadowColor = shadowColor
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()
-        setDefaults()
     }
     
     required init(coder aDecoder: NSCoder) {
@@ -21,36 +31,63 @@ class AddMenuButton: UIControl {
         configure()
     }
     
-    @IBInspectable var shadowSize: CGFloat = 1 {
+    @IBInspectable var fillColor: UIColor? {
+        set {
+            if let color = newValue {
+                bubbleLayer.fillColor = color.CGColor
+            }
+        }
+        get {
+            if let color = bubbleLayer.fillColor {
+                return UIColor(CGColor: color)
+            }
+            return nil
+        }
+    }
+    
+    
+    @IBInspectable var shadowColor: UIColor? {
+        set {
+            if let color = newValue {
+                bubbleLayer.shadowColor = color.CGColor
+            }
+        }
+        get {
+            if let color = bubbleLayer.shadowColor {
+                return UIColor(CGColor: color)
+            }
+            return nil
+        }
+    }
+    
+    
+    @IBInspectable var image: UIImage? {
         didSet {
-            bubbleLayer.shadowRadius = shadowSize
+            iconLayer.contents = image?.CGImage
+            setNeedsDisplay()
         }
     }
 
     private func configure() {
+        clipsToBounds = false
+        backgroundColor = UIColor.clearColor()
         layer.addSublayer(bubbleLayer)
         layer.addSublayer(iconLayer)
         bubbleLayer.masksToBounds = false
         bubbleLayer.shadowOpacity = 1.0
         bubbleLayer.shadowOffset = CGSize(width: 0, height: 2)
-
-        iconLayer.contents = UIImage(named: "MenuLogo")?.CGImage
-        bubbleLayer.shadowColor = UIColor.blueColor().CGColor
-        bubbleLayer.fillColor = UIColor.redColor().CGColor
+        iconLayer.contentsGravity = kCAGravityCenter
+        iconLayer.masksToBounds = true
+        bubbleLayer.shadowRadius = 1
     }
-    
-    private func setDefaults() {
-        shadowSize = 5
-    }
-    
     
     
     override func layoutSublayersOfLayer(layer: CALayer!) {
-        let insetsSize: CGFloat = shadowSize * 2
-        let rectInsets = CGRectInset(bounds, insetsSize, insetsSize)
-        bubbleLayer.path = UIBezierPath(ovalInRect: rectInsets).CGPath
+        bubbleLayer.path = UIBezierPath(ovalInRect: bounds).CGPath
         bubbleLayer.frame = bounds
-        iconLayer.frame = CGRect(origin: CGPoint(x: shadowSize, y: shadowSize), size: rectInsets.size)
+        let imageInsetsSize: CGFloat = bounds.width / 5.0
+        let imageRect = CGRectInset(bounds, imageInsetsSize, imageInsetsSize)
+        iconLayer.frame = imageRect
     }
     
     private let bubbleLayer = CAShapeLayer()
