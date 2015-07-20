@@ -24,29 +24,20 @@ class MainMenuViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
     
     private func defaultMainMenuItems() -> [MainMenuItem] {
+        //TODO: refactor
         return [
-            MainMenuItem(title: "Username", iconName: "https://pbs.twimg.com/profile_images/3255786215/509fd5bc902d71141990920bf207edea.jpeg"),
-            MainMenuItem(title: NSLocalizedString("For You", comment: "Main Menu: For You"), iconName: "MainMenuForYou"),
-            MainMenuItem(title: NSLocalizedString("New", comment: "Main Menu: new"), iconName: "MainMenuNew"),
-            MainMenuItem(title: NSLocalizedString("Messages", comment: "Main Menu: Messages"), iconName: "MainMenuMessages"),
-            MainMenuItem(title: NSLocalizedString("Filters", comment: "Main Menu: Filters"), iconName: "MainMenuFilters"),
-            MainMenuItem(title: NSLocalizedString("Categories", comment: "Main Menu: Categories"), iconName: "MainMenuCategories"),
-            MainMenuItem(title: NSLocalizedString("Community", comment: "Main Menu: Community"), iconName: "MainMenuCommunity"),
-            MainMenuItem(title: NSLocalizedString("Wallet", comment: "Main Menu: Wallet"), iconName: "MainMenuWallet"),
-            MainMenuItem(title: NSLocalizedString("User Profile", comment: "Main Menu: User Profile"), iconName: "MainMenuUserProfile"),
-            MainMenuItem(title: NSLocalizedString("Settings", comment: "Main Menu: Settings"), iconName: "MainMenuSettings"),
+            MainMenuItem(title: "Username", imageName: "https://pbs.twimg.com/profile_images/3255786215/509fd5bc902d71141990920bf207edea.jpeg"),
+            MainMenuItem(title: NSLocalizedString("For You", comment: "Main Menu: For You"), imageName: "MainMenuForYou"),
+            MainMenuItem(title: NSLocalizedString("New", comment: "Main Menu: new"), imageName: "MainMenuNew"),
+            MainMenuItem(title: NSLocalizedString("Messages", comment: "Main Menu: Messages"), imageName: "MainMenuMessages", action: .Messages),
+            MainMenuItem(title: NSLocalizedString("Filters", comment: "Main Menu: Filters"), imageName: "MainMenuFilters"),
+            MainMenuItem(title: NSLocalizedString("Categories", comment: "Main Menu: Categories"), imageName: "MainMenuCategories"),
+            MainMenuItem(title: NSLocalizedString("Community", comment: "Main Menu: Community"), imageName: "MainMenuCommunity"),
+            MainMenuItem(title: NSLocalizedString("Wallet", comment: "Main Menu: Wallet"), imageName: "MainMenuWallet"),
+            MainMenuItem(title: NSLocalizedString("User Profile", comment: "Main Menu: User Profile"), imageName: "MainMenuUserProfile"),
+            MainMenuItem(title: NSLocalizedString("Settings", comment: "Main Menu: Settings"), imageName: "MainMenuSettings"),
         ]
     }
     
@@ -57,10 +48,16 @@ class MainMenuViewController: UIViewController {
     }()
     
     
+    
     internal struct MainMenuItem {
         let title: String
-        let iconName: String?
-        
+        let image: String
+        let action: SidebarViewController.Action
+        init(title: String, imageName: String, action: SidebarViewController.Action = .None){
+            self.title = title
+            image = imageName
+            self.action = action
+        }
     }
     
     
@@ -81,7 +78,7 @@ class MainMenuViewController: UIViewController {
 
          override func tableView(tableView: UITableView, modelForIndexPath indexPath: NSIndexPath) -> TableViewCellModel {
             let item = items[indexPath.row]
-            let model = TableViewCellImageTextModel(title: item.title, imageName: item.iconName ?? "")
+            let model = TableViewCellImageTextModel(title: item.title, imageName: item.image)
             return model
         }
      
@@ -92,6 +89,7 @@ class MainMenuViewController: UIViewController {
         func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
             let item = items[indexPath.row]
             println("Item: \(item.title)")
+            parentViewController?.sideBarController?.executeAction(item.action)
         }
         
     }

@@ -10,30 +10,43 @@ import UIKit
 import KYDrawerController
 
 class SidebarViewController: KYDrawerController {
-/*
-    override init!(centerViewController center: UIViewController!, andSidebarViewController sidebar: UIViewController!) {
-        super.init(centerViewController: center, andSidebarViewController: sidebar)
-        sidebar.view.bounds = CGRect(origin: CGPointZero, size: CGSize(width: sidebarWidth, height: sidebar.view.bounds.height))
-    }
-    
-    required init(coder aDecoder: NSCoder) {
-        fatalError("\(__FUNCTION__) does not implemented")
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    enum Action  {
+        case None
+        
+        case ForYou
+        case New
+        case Messages
+        case Filters
+        case Categories
+        case Community
+        case Wallet
+        case UserProfile
+        case Settings
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    func executeAction(action: Action) {
+        let segue: SidebarViewController.Segue? = {
+            switch action {
+            case .Messages:
+                return SidebarViewController.Segue.ShowMessagesList
+            default:
+                return nil
+            }
+            }()
+        if let segue = segue {
+            setDrawerState(.Closed, animated: true)
+            performSegue(segue)
+        }
     }
- */
+
 }
 
 extension UIViewController {
     var sideBarController: SidebarViewController? {
-        return searchSideBarController(self.navigationController)
+        if let sideBar = searchSideBarController(self.navigationController) {
+            return sideBar
+        }
+        return searchSideBarController(self)
     }
     
     private func searchSideBarController(controller: UIViewController?) -> SidebarViewController? {

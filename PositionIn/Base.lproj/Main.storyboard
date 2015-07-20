@@ -30,11 +30,11 @@
                             <real key="value" value="270"/>
                         </userDefinedRuntimeAttribute>
                         <userDefinedRuntimeAttribute type="string" keyPath="drawerSegueIdentifier" value="DrawerSegue"/>
-                        <userDefinedRuntimeAttribute type="string" keyPath="mainSegueIdentifier" value="DrawerMainSegue"/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="mainSegueIdentifier" value="ShowForYou"/>
                     </userDefinedRuntimeAttributes>
                     <connections>
                         <segue destination="BFL-Ne-hYV" kind="custom" identifier="DrawerSegue" customClass="KYEmbedDrawerControllerSegue" customModule="KYDrawerController" id="57u-Oa-0ja"/>
-                        <segue destination="hew-RE-2CB" kind="custom" identifier="DrawerMainSegue" customClass="KYEmbedMainControllerSegue" customModule="KYDrawerController" id="h47-6p-FJa"/>
+                        <segue destination="hew-RE-2CB" kind="custom" identifier="ShowForYou" customClass="KYEmbedMainControllerSegue" customModule="KYDrawerController" id="h47-6p-FJa"/>
                         <segue destination="Eth-nv-VYE" kind="custom" identifier="ShowMessagesList" customClass="KYEmbedMainControllerSegue" customModule="KYDrawerController" id="dj9-Kt-1RB"/>
                     </connections>
                 </viewController>
