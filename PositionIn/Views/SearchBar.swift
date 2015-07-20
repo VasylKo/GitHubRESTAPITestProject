@@ -17,5 +17,5 @@ class SearchBar: UITextField {
         // Drawing code
     }
     */
-
+    
 }

@@ -13,7 +13,7 @@ class BrowseViewController: BesideMenuViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         applyMode(mode)
-
+        self.navigationItem.titleView = searchbar
     }
 
 
@@ -90,5 +90,18 @@ class BrowseViewController: BesideMenuViewController {
         currentModeViewController = childController
         displayModeSegmentedControl.selectedSegmentIndex = mode.rawValue
     }
+    
+    lazy var searchbar: SearchBar = {
+        let vPadding: CGFloat = 5
+        let frame = CGRect(
+            x: 0,
+            y: vPadding,
+            width: self.view.bounds.width,
+            height: self.navigationController!.navigationBar.bounds.height - 2 * vPadding
+        )
+        let searchBar = SearchBar(frame: frame)
+        searchBar.backgroundColor = UIColor.redColor()
+        return searchBar
+    }()
 
 }
