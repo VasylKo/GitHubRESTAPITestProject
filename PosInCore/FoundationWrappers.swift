@@ -77,3 +77,18 @@ public  extension NSDictionary {
         return ""
     }
 }
+
+public extension UIView {
+    /**
+    Add subview to the reciever and install constraints to fill parent size
+    
+    :param: contentView subview
+    */
+    public func addSubViewOnEntireSize(contentView: UIView) {
+        addSubview(contentView)
+        contentView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        let views: [NSObject : AnyObject] = [ "contentView": contentView ]
+        self.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[contentView]|", options: NSLayoutFormatOptions(0), metrics: nil, views: views))
+        self.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[contentView]|", options: NSLayoutFormatOptions(0), metrics: nil, views: views))
+    }
+}
