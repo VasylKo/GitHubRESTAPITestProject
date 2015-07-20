@@ -37,7 +37,7 @@ class MainMenuViewController: UIViewController {
     
     private func defaultMainMenuItems() -> [MainMenuItem] {
         return [
-            MainMenuItem(title: "Username", iconName: nil),
+            MainMenuItem(title: "Username", iconName: "https://pbs.twimg.com/profile_images/3255786215/509fd5bc902d71141990920bf207edea.jpeg"),
             MainMenuItem(title: NSLocalizedString("For You", comment: "Main Menu: For You"), iconName: "MainMenuForYou"),
             MainMenuItem(title: NSLocalizedString("New", comment: "Main Menu: new"), iconName: "MainMenuNew"),
             MainMenuItem(title: NSLocalizedString("Messages", comment: "Main Menu: Messages"), iconName: "MainMenuMessages"),
@@ -73,6 +73,9 @@ class MainMenuViewController: UIViewController {
         }
         
         @objc override func tableView(tableView: UITableView, reuseIdentifierForIndexPath indexPath: NSIndexPath) -> String {
+            if indexPath.row == 0 {
+                return  MainMenuUserCell.reuseId()
+            }
             return MainMenuCell.reuseId()
         }
 
@@ -83,7 +86,7 @@ class MainMenuViewController: UIViewController {
         }
      
         override func nibCellsId() -> [String] {
-            return [MainMenuCell.reuseId()]
+            return [MainMenuCell.reuseId(), MainMenuUserCell.reuseId()]
         }
         
         func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {

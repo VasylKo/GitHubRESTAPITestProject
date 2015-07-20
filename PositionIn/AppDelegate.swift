@@ -80,7 +80,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     private func presentRootController() {
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
-        let centerController = UINavigationController(rootViewController: Storyboards.Main.instantiateMapViewController())
+        let centerController = Storyboards.Main.instantiateViewControllerWithIdentifier("MapNavigationController")
         let sidebarController = Storyboards.Main.instantiateMainMenuViewController()
         window?.rootViewController = SidebarViewController(centerViewController:
             centerController, andSidebarViewController: sidebarController)

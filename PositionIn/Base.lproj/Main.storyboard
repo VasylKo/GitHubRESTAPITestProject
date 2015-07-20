@@ -15,16 +15,19 @@
         <!--Navigation Controller Scene-->
         <scene sceneID="Ffe-yH-6Ub">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="c2n-hZ-cGe" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <navigationController storyboardIdentifier="DummyMapNavigationController" id="hew-RE-2CB" userLabel="Navigation Controller Scene" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ba7-E9-Omt">
+                <navigationController storyboardIdentifier="MapNavigationController" id="hew-RE-2CB" userLabel="Navigation Controller Scene" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="ba7-E9-Omt">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" red="0.13725490200000001" green="0.4431372549" blue="0.83529411760000005" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="barTintColor" red="0.13725490200000001" green="0.4431372549" blue="0.83529411760000005" alpha="1" colorSpace="calibratedRGB"/>
                     </navigationBar>
                     <connections>
                         <segue destination="nw9-Ck-dbi" kind="relationship" relationship="rootViewController" id="UuW-O4-vdY"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="c2n-hZ-cGe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="241" y="-95"/>
         </scene>
@@ -33,7 +36,7 @@
             <objects>
                 <viewController storyboardIdentifier="MapViewController" id="nw9-Ck-dbi" customClass="MapViewController" customModule="PositionIn" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="TN7-xA-vpM">
-                        <barButtonItem key="leftBarButtonItem" title="Menu" id="G8T-bM-wrE">
+                        <barButtonItem key="leftBarButtonItem" image="MainMenuIcon" id="G8T-bM-wrE">
                             <connections>
                                 <action selector="showMenu:" destination="nw9-Ck-dbi" id="G2b-A5-6fA"/>
                             </connections>
@@ -45,4 +48,7 @@
             <point key="canvasLocation" x="950" y="-95"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="MainMenuIcon" width="22" height="22"/>
+    </resources>
 </document>

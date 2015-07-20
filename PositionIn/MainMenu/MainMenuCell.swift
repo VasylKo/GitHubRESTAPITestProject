@@ -28,5 +28,7 @@ class MainMenuCell: TableViewCell {
         super.setSelected(selected, animated: animated)
         selectionIndicatorView.alpha = selected ? 1.0 : 0.0
         iconImageView.highlighted = selected
+        let textStyle = selected ? UIFontTextStyleHeadline : UIFontTextStyleSubheadline
+        titleLabel.font = UIFont.preferredFontForTextStyle(textStyle)
     }
 }

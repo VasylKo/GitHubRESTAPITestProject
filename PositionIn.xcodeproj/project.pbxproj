@@ -45,6 +45,9 @@
 /* Begin PBXBuildFile section */
 		451B04D684C5CB71F3D6581C /* Pods_PositionIn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7CE5A186774ECEB07E96F58 /* Pods_PositionIn.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		73062B70D53770174B21763D /* Pods_PosInCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46EE2AF3395401D4D26EB34F /* Pods_PosInCore.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		E62B16F51B5C1AA700D446BC /* PositionIn.MainMenuUserCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E62B16F31B5C1AA700D446BC /* PositionIn.MainMenuUserCell.xib */; };
+		E62B16F61B5C1AA700D446BC /* MainMenuUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E62B16F41B5C1AA700D446BC /* MainMenuUserCell.swift */; };
+		E62B16F81B5C6BBF00D446BC /* AvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E62B16F71B5C6BBF00D446BC /* AvatarView.swift */; };
 		E6325F641B57D89A00996480 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6325F611B57D89A00996480 /* MapViewController.swift */; };
 		E6325F651B57D89A00996480 /* SidebarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6325F621B57D89A00996480 /* SidebarViewController.swift */; };
 		E6325F671B57DA4600996480 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6325F661B57DA4600996480 /* MapKit.framework */; };
@@ -138,6 +141,9 @@
 		8723017B34FF5C9F33CC0218 /* Pods-PositionIn.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PositionIn.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PositionIn/Pods-PositionIn.debug.xcconfig"; sourceTree = "<group>"; };
 		A7CE5A186774ECEB07E96F58 /* Pods_PositionIn.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PositionIn.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB73828B80F64D347BB9F14D /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E62B16F31B5C1AA700D446BC /* PositionIn.MainMenuUserCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.MainMenuUserCell.xib; sourceTree = "<group>"; };
+		E62B16F41B5C1AA700D446BC /* MainMenuUserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuUserCell.swift; sourceTree = "<group>"; };
+		E62B16F71B5C6BBF00D446BC /* AvatarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarView.swift; sourceTree = "<group>"; };
 		E6325F611B57D89A00996480 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		E6325F621B57D89A00996480 /* SidebarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SidebarViewController.swift; sourceTree = "<group>"; };
 		E6325F661B57DA4600996480 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
@@ -243,6 +249,7 @@
 		E6325F581B57D46C00996480 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				E62B16F71B5C6BBF00D446BC /* AvatarView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -381,6 +388,8 @@
 				E660E52C1B5AC23B00F52050 /* PositionIn.MainMenuViewController.xib */,
 				E660E52F1B5AC28600F52050 /* MainMenuCell.swift */,
 				E660E5311B5AC2A200F52050 /* PositionIn.MainMenuCell.xib */,
+				E62B16F41B5C1AA700D446BC /* MainMenuUserCell.swift */,
+				E62B16F31B5C1AA700D446BC /* PositionIn.MainMenuUserCell.xib */,
 			);
 			path = MainMenu;
 			sourceTree = "<group>";
@@ -581,6 +590,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E660E52E1B5AC23B00F52050 /* PositionIn.MainMenuViewController.xib in Resources */,
+				E62B16F51B5C1AA700D446BC /* PositionIn.MainMenuUserCell.xib in Resources */,
 				E64DC3551B4E53C90011D37C /* Main.storyboard in Resources */,
 				E660E5291B5AB9CA00F52050 /* PositionIn.MapViewController.xib in Resources */,
 				E64DC35A1B4E53C90011D37C /* LaunchScreen.xib in Resources */,
@@ -749,8 +759,10 @@
 			files = (
 				E6325F721B57E1DA00996480 /* Storyboards.swift in Sources */,
 				E660E52D1B5AC23B00F52050 /* MainMenuViewController.swift in Sources */,
+				E62B16F61B5C1AA700D446BC /* MainMenuUserCell.swift in Sources */,
 				E6325F641B57D89A00996480 /* MapViewController.swift in Sources */,
 				E64DC3501B4E53C90011D37C /* AppDelegate.swift in Sources */,
+				E62B16F81B5C6BBF00D446BC /* AvatarView.swift in Sources */,
 				E6325F651B57D89A00996480 /* SidebarViewController.swift in Sources */,
 				E660E5301B5AC28600F52050 /* MainMenuCell.swift in Sources */,
 			);
