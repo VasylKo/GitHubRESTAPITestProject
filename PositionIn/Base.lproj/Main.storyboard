@@ -90,15 +90,6 @@
         <scene sceneID="HVo-4m-TZx">
             <objects>
                 <viewController id="WCn-eT-80Y" customClass="MessagesListViewController" customModule="PositionIn" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="pzK-5d-Ppn"/>
-                        <viewControllerLayoutGuide type="bottom" id="yXG-27-Llc"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="rHC-dc-lgR">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
                     <navigationItem key="navigationItem" title="Messages" id="45E-vw-XYB">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="tdQ-rK-BMU"/>
                     </navigationItem>
