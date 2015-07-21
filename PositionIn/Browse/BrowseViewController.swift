@@ -13,16 +13,9 @@ class BrowseViewController: BesideMenuViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        applyDisplayMode(mode)
         self.navigationItem.titleView = searchbar
-
-        addMenu.setItems([
-            AddMenuView.MenuItem(title: NSLocalizedString("INVITE",comment: "Add menu: INVITE"), icon: UIImage(named: "AddFriend")!, color: UIColor.redColor()),
-            AddMenuView.MenuItem(title: NSLocalizedString("PROMOTION",comment: "Add menu: PROMOTION"), icon: UIImage(named: "AddPromotion")!, color: UIColor.greenColor()),
-            AddMenuView.MenuItem(title: NSLocalizedString("EVENT",comment: "Add menu: EVENT"), icon: UIImage(named: "AddEvent")!, color: UIColor.blueColor()),
-            AddMenuView.MenuItem(title: NSLocalizedString("PRODUCT",comment: "Add menu: PRODUCT"), icon: UIImage(named: "AddProduct")!, color: UIColor.yellowColor()),
-            ])
-        addMenu.delegate = self
+        setupAddMenu()
+        applyDisplayMode(mode)
     }
 
     
@@ -107,7 +100,7 @@ class BrowseViewController: BesideMenuViewController {
         childController.didMoveToParentViewController(self)
         currentModeViewController = childController
         displayModeSegmentedControl.selectedSegmentIndex = mode.rawValue
-        blurDisplayed = false
+        addMenu.setExpanded(false, animated: false)
     }
 
 
@@ -125,9 +118,46 @@ class BrowseViewController: BesideMenuViewController {
 
 }
 
+//MARK: configuration
+extension BrowseViewController {
+    private func setupAddMenu() {
+        addMenu.setItems([
+            AddMenuView.MenuItem(
+                title: NSLocalizedString("PRODUCT",comment: "Add menu: PRODUCT"),
+                icon: UIImage(named: "AddProduct")!,
+                color: UIScheme.productAddMenuColor
+            ),
+            AddMenuView.MenuItem(
+                title: NSLocalizedString("EVENT",comment: "Add menu: EVENT"),
+                icon: UIImage(named: "AddEvent")!,
+                color: UIScheme.eventAddMenuColor
+            ),
+            AddMenuView.MenuItem(
+                title: NSLocalizedString("PROMOTION",comment: "Add menu: PROMOTION"),
+                icon: UIImage(named: "AddPromotion")!,
+                color: UIScheme.promotionAddMenuColor
+            ),
+            AddMenuView.MenuItem(
+                title: NSLocalizedString("INVITE",comment: "Add menu: INVITE"),
+                icon: UIImage(named: "AddFriend")!,
+                color: UIScheme.inviteAddMenuColor
+            ),
+        ])
+        addMenu.delegate = self
+    }
+}
+
 //MARK: AddMenuViewDelegate
 extension BrowseViewController: AddMenuViewDelegate {
     func addMenuView(addMenuView: AddMenuView, willExpand expanded:Bool) {
-        blurDisplayed = expanded
+        if expanded {
+            blurDisplayed = expanded
+        }
+    }
+    
+    func addMenuView(addMenuView: AddMenuView, didExpand expanded: Bool) {
+        if !expanded {
+            blurDisplayed = expanded
+        }
     }
 }

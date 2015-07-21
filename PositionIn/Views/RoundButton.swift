@@ -85,7 +85,7 @@ class RoundButton: UIControl {
         bubbleLayer.shadowOpacity = 1.0
         bubbleLayer.shadowOffset = CGSize(width: 1, height: 1)
         bubbleLayer.shadowRadius = 2
-        iconLayer.contentsGravity = kCAGravityCenter
+        iconLayer.contentsGravity = kCAGravityResize
         iconLayer.masksToBounds = true
         setTranslatesAutoresizingMaskIntoConstraints(false)
 
@@ -95,7 +95,7 @@ class RoundButton: UIControl {
     override func layoutSublayersOfLayer(layer: CALayer!) {
         bubbleLayer.path = UIBezierPath(ovalInRect: bounds).CGPath
         bubbleLayer.frame = bounds
-            let imageInsetsSize: CGFloat = bounds.width / 4.0
+            let imageInsetsSize: CGFloat = bounds.width / 5.0
             let imageRect = CGRectInset(bounds, imageInsetsSize, imageInsetsSize)
             iconLayer.frame = imageRect
     }

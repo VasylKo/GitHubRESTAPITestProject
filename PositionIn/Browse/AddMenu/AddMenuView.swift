@@ -30,7 +30,6 @@ class AddMenuView: UIView {
             return mExpanded
         }
         set {
-            delegate?.addMenuView?(self, willExpand: newValue)
             setExpanded(newValue)
         }
     }
@@ -39,12 +38,21 @@ class AddMenuView: UIView {
         expanded = !expanded
     }
     
+    func setExpanded(expanded: Bool, animated:Bool = true) {
+        delegate?.addMenuView?(self, willExpand: expanded)
+        let duration: NSTimeInterval = animated ? self.animationDuration : 0.0
+        if expanded {
+            applyExpandAnimation(duration)
+        } else {
+            applyCollapseAnimation(duration)
+        }
+    }
+
+    
     weak var delegate: AddMenuViewDelegate?
     var direction: AnimationDirection = .TopRight
     
     func setItems(items: [MenuItem]) {
-        let menuItem = MenuItem(title: NSLocalizedString("PRODUCT",comment: "Add menu: PRODUCT"), icon: UIImage(named: "AddProduct")!, color: UIColor.yellowColor())
-        
         for itemView in menuItemViews {
             itemView.removeFromSuperview()
         }
@@ -102,15 +110,6 @@ extension AddMenuView {
         addSubview(startButton)
         startButton.addTarget(self, action: "toogleMenuTapped:", forControlEvents: UIControlEvents.ValueChanged)
         setTranslatesAutoresizingMaskIntoConstraints(false)
-    }
-
-    private func setExpanded(expanded: Bool, animated:Bool = true) {
-        let duration: NSTimeInterval = animated ? self.animationDuration : 0.0
-        if expanded {
-            applyExpandAnimation(duration)
-        } else {
-            applyCollapseAnimation(duration)
-        }
     }
     
     private func applyExpandAnimation(duration: NSTimeInterval) {
@@ -182,7 +181,7 @@ extension AddMenuView {
                 layoutDirection = .LeftToRight
             }
             
-            button = RoundButton(image: icon, fillColor: color)
+            button = RoundButton(image: icon, fillColor: color,shadowColor: UIColor.darkGrayColor())
             button.bounds = CGRect(origin: CGPointZero, size: button.intrinsicContentSize())
             
             label = UILabel()
