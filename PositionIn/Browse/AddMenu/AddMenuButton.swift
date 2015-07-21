@@ -13,6 +13,7 @@ class AddMenuButton: UIControl {
     convenience init() {
         self.init(image: UIImage())
     }
+    
     convenience init(
         image: UIImage,
         fillColor: UIColor = UIColor.whiteColor(),
@@ -23,6 +24,7 @@ class AddMenuButton: UIControl {
             self.fillColor = fillColor
             self.shadowColor = shadowColor
             self.image = image
+            self.iconLayer.contents = image.CGImage
     }
     
     override init(frame: CGRect) {
@@ -89,7 +91,7 @@ class AddMenuButton: UIControl {
     override func layoutSublayersOfLayer(layer: CALayer!) {
         bubbleLayer.path = UIBezierPath(ovalInRect: bounds).CGPath
         bubbleLayer.frame = bounds
-            let imageInsetsSize: CGFloat = bounds.width / 5.0
+            let imageInsetsSize: CGFloat = bounds.width / 4.0
             let imageRect = CGRectInset(bounds, imageInsetsSize, imageInsetsSize)
             iconLayer.frame = imageRect
     }
