@@ -14,7 +14,7 @@ class BrowseViewController: BesideMenuViewController {
         super.viewDidLoad()
         applyDisplayMode(mode)
         self.navigationItem.titleView = searchbar
-        blurDisplayed = true
+
 
         addMenu.setItems([
             AddMenuView.MenuItem(title: NSLocalizedString("INVITE",comment: "Add menu: INVITE"), icon: UIImage(named: "AddFriend")!, color: UIColor.redColor()),

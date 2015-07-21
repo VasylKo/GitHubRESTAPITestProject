@@ -87,6 +87,7 @@ class RoundButton: UIControl {
         bubbleLayer.shadowRadius = 2
         iconLayer.contentsGravity = kCAGravityCenter
         iconLayer.masksToBounds = true
+        setTranslatesAutoresizingMaskIntoConstraints(false)
 
     }
     
@@ -111,7 +112,7 @@ class RoundButton: UIControl {
     private let bubbleLayer = CAShapeLayer()
     private let iconLayer = CAShapeLayer()
     private static let animationScale: CGFloat = 0.85
-    private static let animationDuration: NSTimeInterval = 0.1
+    static let animationDuration: NSTimeInterval = 0.1
 }
 
 //MARK: touches
@@ -123,6 +124,7 @@ extension RoundButton {
     
     override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
         super.touchesEnded(touches, withEvent: event)
+        println("touchesEnded")
         animatedToDeselectedState()
         sendActionsForControlEvents(UIControlEvents.TouchUpInside)
     }

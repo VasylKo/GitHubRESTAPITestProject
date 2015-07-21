@@ -20,16 +20,21 @@ class AddMenuView: UIView {
         configure()
     }
     
-    
-    var expanded: Bool = false {
-        didSet {
-            if expanded {
-                applyExpandAnimation()
-            } else {
-                applyCollapseAnimation()
-            }
+    var expanded: Bool {
+        get {
+            return mExpanded
+        }
+        set {
+            setExpanded(newValue)
         }
     }
+    
+    @IBAction func toogleMenuTapped(sender: AnyObject) {
+        println("toogleMenuTapped")
+        expanded = !expanded
+    }
+
+    
     var direction: AnimationDirection = .TopRight
     
     func setItems(items: [MenuItem]) {
@@ -48,17 +53,20 @@ class AddMenuView: UIView {
             self.addSubview(menuItemView)
             return menuItemView
         }
-        
+        bringSubviewToFront(startButton)
+        setExpanded(false, animated: false)
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
         startButton.frame = bounds
+        menuItemViews.map() { $0.frame = self.bounds }
     }
 
     
     private var menuItemViews: [AddMenuItemView] = []
     private let startButton = RoundButton(image: UIImage(named: "AddIcon")!)
+    private var mExpanded: Bool  = true
 }
 
 //MARK: Types
@@ -74,10 +82,6 @@ extension AddMenuView {
         let color: UIColor
     }
  
-    @IBAction func toogleMenuTapped(sender: AnyObject) {
-        println("toogleMenuTapped")
-    }
-
 }
 
 
@@ -90,14 +94,63 @@ extension AddMenuView {
         backgroundColor = UIColor.clearColor()
         addSubview(startButton)
         startButton.addTarget(self, action: "toogleMenuTapped:", forControlEvents: UIControlEvents.TouchUpInside)
+        setTranslatesAutoresizingMaskIntoConstraints(false)
     }
 
-    private func applyExpandAnimation() {
-        
+    private func setExpanded(expanded: Bool, animated:Bool = true) {
+        let duration: NSTimeInterval = animated ? 2.0/*RoundButton.animationDuration*/ : 0.0
+        if expanded {
+            applyExpandAnimation(duration)
+        } else {
+            applyCollapseAnimation(duration)
+        }
+    }
+    
+    private func applyExpandAnimation(duration: NSTimeInterval) {
+        let expandAnimation: () -> Void = {
+            self.startButton.transform = CGAffineTransformMakeRotation(CGFloat(M_PI_4))
+            for (idx, itemView) in enumerate(self.menuItemViews) {
+                itemView.hidden = false
+                let translation = -itemView.bounds.height * CGFloat(idx + 1)
+                let transform: CGAffineTransform =  CGAffineTransformMakeTranslation(0, translation)
+                itemView.transform = transform
+            }
+        }
+        let expandCompletion: (Bool) -> Void = { _ in
+            for (_, itemView) in enumerate(self.menuItemViews) {
+                itemView.label.alpha = 1.0
+            }
+            self.mExpanded = true
+        }
+        if duration > 0 {
+            UIView.animateWithDuration(duration, animations: expandAnimation, completion: expandCompletion)
+        } else {
+            expandAnimation()
+            expandCompletion(true)
+        }
     }
 
-    private func applyCollapseAnimation() {
-        
+    private func applyCollapseAnimation(duration: NSTimeInterval) {
+        let transform = CGAffineTransformIdentity
+        let collapseAnimation: () -> Void = {
+            self.startButton.transform = CGAffineTransformIdentity
+            for (_, itemView) in enumerate(self.menuItemViews) {
+                itemView.transform = transform
+                itemView.label.alpha = 0.0
+            }
+        }
+        let collapseCompletion: (Bool) -> Void = { _ in
+            for (_, itemView) in enumerate(self.menuItemViews) {
+                itemView.hidden = true
+            }
+            self.mExpanded = false
+        }
+        if duration > 0 {
+            UIView.animateWithDuration(duration, animations: collapseAnimation, completion: collapseCompletion)
+        } else {
+            collapseAnimation()
+            collapseCompletion(true)
+        }
     }
 
     
@@ -126,7 +179,7 @@ extension AddMenuView {
             label.sizeToFit()
             
             super.init(frame: CGRectZero)
-            
+            setTranslatesAutoresizingMaskIntoConstraints(false)
             bounds = CGRect(origin: CGPointZero, size: contentSize())
             backgroundColor = UIColor.clearColor()
             userInteractionEnabled = true
