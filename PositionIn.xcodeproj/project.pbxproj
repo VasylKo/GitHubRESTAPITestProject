@@ -89,6 +89,7 @@
 		E6D7C2971B5D5B3B004F3AA9 /* PositionIn.SearchBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6D7C2951B5D5B3B004F3AA9 /* PositionIn.SearchBar.xib */; };
 		E6D7C2981B5D5B3B004F3AA9 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D7C2961B5D5B3B004F3AA9 /* SearchBar.swift */; };
 		E6D7C29B1B5D6A51004F3AA9 /* AddMenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D7C29A1B5D6A51004F3AA9 /* AddMenuButton.swift */; };
+		E6D7C29D1B5D7A5B004F3AA9 /* AddMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D7C29C1B5D7A5B004F3AA9 /* AddMenuView.swift */; };
 		E6FC63D11B5901060062F5C9 /* KVObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6FC63D01B5901060062F5C9 /* KVObserver.swift */; };
 /* End PBXBuildFile section */
 
@@ -206,6 +207,7 @@
 		E6D7C2951B5D5B3B004F3AA9 /* PositionIn.SearchBar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.SearchBar.xib; sourceTree = "<group>"; };
 		E6D7C2961B5D5B3B004F3AA9 /* SearchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		E6D7C29A1B5D6A51004F3AA9 /* AddMenuButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddMenuButton.swift; sourceTree = "<group>"; };
+		E6D7C29C1B5D7A5B004F3AA9 /* AddMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddMenuView.swift; sourceTree = "<group>"; };
 		E6FC63D01B5901060062F5C9 /* KVObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KVObserver.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -469,6 +471,7 @@
 		E6D7C2991B5D5EB3004F3AA9 /* AddMenu */ = {
 			isa = PBXGroup;
 			children = (
+				E6D7C29C1B5D7A5B004F3AA9 /* AddMenuView.swift */,
 				E6D7C29A1B5D6A51004F3AA9 /* AddMenuButton.swift */,
 			);
 			path = AddMenu;
@@ -829,6 +832,7 @@
 				E62B17021B5CE39400D446BC /* BrowseMapViewController.swift in Sources */,
 				E62B16F61B5C1AA700D446BC /* MainMenuUserCell.swift in Sources */,
 				E64DC3501B4E53C90011D37C /* AppDelegate.swift in Sources */,
+				E6D7C29D1B5D7A5B004F3AA9 /* AddMenuView.swift in Sources */,
 				E62B16FB1B5CDF0100D446BC /* MessagesListViewController.swift in Sources */,
 				E62B16F81B5C6BBF00D446BC /* AvatarView.swift in Sources */,
 				E6325F651B57D89A00996480 /* SidebarViewController.swift in Sources */,

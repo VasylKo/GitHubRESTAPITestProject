@@ -10,6 +10,9 @@ import UIKit
 
 class AddMenuButton: UIControl {
 
+    convenience init() {
+        self.init(image: UIImage())
+    }
     convenience init(
         image: UIImage,
         fillColor: UIColor = UIColor.whiteColor(),
@@ -19,6 +22,7 @@ class AddMenuButton: UIControl {
             self.init(frame: frame)
             self.fillColor = fillColor
             self.shadowColor = shadowColor
+            self.image = image
     }
     
     override init(frame: CGRect) {
@@ -85,12 +89,51 @@ class AddMenuButton: UIControl {
     override func layoutSublayersOfLayer(layer: CALayer!) {
         bubbleLayer.path = UIBezierPath(ovalInRect: bounds).CGPath
         bubbleLayer.frame = bounds
-        let imageInsetsSize: CGFloat = bounds.width / 5.0
-        let imageRect = CGRectInset(bounds, imageInsetsSize, imageInsetsSize)
-        iconLayer.frame = imageRect
+            let imageInsetsSize: CGFloat = bounds.width / 5.0
+            let imageRect = CGRectInset(bounds, imageInsetsSize, imageInsetsSize)
+            iconLayer.frame = imageRect
     }
     
     private let bubbleLayer = CAShapeLayer()
     private let iconLayer = CAShapeLayer()
-    
+    private let animationDuration: NSTimeInterval = 0.1
+    private let animationScale: CGFloat = 0.85
 }
+
+//MARK: touches
+extension AddMenuButton {
+    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+        super.touchesBegan(touches, withEvent: event)
+        animatedToSelectedState()
+    }
+    
+    override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
+        super.touchesEnded(touches, withEvent: event)
+        animatedToDeselectedState()
+        sendActionsForControlEvents(UIControlEvents.TouchUpInside)
+    }
+    
+    override func touchesCancelled(touches: Set<NSObject>!, withEvent event: UIEvent!) {
+        super.touchesCancelled(touches, withEvent: event)
+        animatedToDeselectedState()
+        sendActionsForControlEvents(UIControlEvents.TouchCancel)
+    }
+    
+    
+    private func animatedToSelectedState() {
+        UIView.animateWithDuration(animationDuration) {
+                let transform = CATransform3DMakeScale(self.animationScale, self.animationScale, 0)
+                self.bubbleLayer.transform = transform
+                self.iconLayer.transform = transform
+        }
+    }
+    
+    private func animatedToDeselectedState() {
+        UIView.animateWithDuration(animationDuration) {
+                let transform = CATransform3DMakeScale(1.0, 1.0, 0)
+                self.bubbleLayer.transform = transform
+                self.iconLayer.transform = transform
+        }
+    }
+}
+
