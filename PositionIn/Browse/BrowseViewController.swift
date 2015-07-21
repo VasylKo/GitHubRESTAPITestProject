@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import PosInCore
 
 class BrowseViewController: BesideMenuViewController {
     
@@ -14,7 +15,6 @@ class BrowseViewController: BesideMenuViewController {
         super.viewDidLoad()
         applyDisplayMode(mode)
         self.navigationItem.titleView = searchbar
-        blurDisplayed = true
 
         addMenu.setItems([
             AddMenuView.MenuItem(title: NSLocalizedString("INVITE",comment: "Add menu: INVITE"), icon: UIImage(named: "AddFriend")!, color: UIColor.redColor()),
@@ -22,12 +22,12 @@ class BrowseViewController: BesideMenuViewController {
             AddMenuView.MenuItem(title: NSLocalizedString("EVENT",comment: "Add menu: EVENT"), icon: UIImage(named: "AddEvent")!, color: UIColor.blueColor()),
             AddMenuView.MenuItem(title: NSLocalizedString("PRODUCT",comment: "Add menu: PRODUCT"), icon: UIImage(named: "AddProduct")!, color: UIColor.yellowColor()),
             ])
+        addMenu.delegate = self
     }
 
     
     @IBOutlet private weak var contentView: UIView!
     @IBOutlet private weak var addMenu: AddMenuView!
-
 
 //MARK: Blur
     
@@ -123,4 +123,11 @@ class BrowseViewController: BesideMenuViewController {
         return searchBar
         }()
 
+}
+
+//MARK: AddMenuViewDelegate
+extension BrowseViewController: AddMenuViewDelegate {
+    func addMenuView(addMenuView: AddMenuView, willExpand expanded:Bool) {
+        blurDisplayed = expanded
+    }
 }

@@ -8,6 +8,11 @@
 
 import UIKit
 
+@objc protocol AddMenuViewDelegate {
+    optional func addMenuView(addMenuView: AddMenuView, willExpand expanded:Bool)
+    optional func addMenuView(addMenuView: AddMenuView, didExpand expanded:Bool)
+}
+
 class AddMenuView: UIView {
 
     override init(frame: CGRect) {
@@ -20,11 +25,12 @@ class AddMenuView: UIView {
         configure()
     }
     
-    var expanded: Bool {
+    dynamic var expanded: Bool {
         get {
             return mExpanded
         }
         set {
+            delegate?.addMenuView?(self, willExpand: newValue)
             setExpanded(newValue)
         }
     }
@@ -32,8 +38,8 @@ class AddMenuView: UIView {
     @IBAction func toogleMenuTapped(sender: AnyObject) {
         expanded = !expanded
     }
-
     
+    weak var delegate: AddMenuViewDelegate?
     var direction: AnimationDirection = .TopRight
     
     func setItems(items: [MenuItem]) {
@@ -115,7 +121,6 @@ extension AddMenuView {
                 let translation = -(itemView.bounds.height + self.itemsPadding) * CGFloat(idx + 1)
                 let transform: CGAffineTransform =  CGAffineTransformMakeTranslation(0, translation)
                 itemView.transform = transform
-
             }
         }
         let expandCompletion: (Bool) -> Void = { _ in
@@ -125,8 +130,8 @@ extension AddMenuView {
                 }
                 }) { _ in
                     self.mExpanded = true
+                    self.delegate?.addMenuView?(self, didExpand: self.expanded)
             }
-            
         }
         if duration > 0 {
             UIView.animateWithDuration(duration, animations: expandAnimation, completion: expandCompletion)
@@ -150,6 +155,7 @@ extension AddMenuView {
                 itemView.hidden = true
             }
             self.mExpanded = false
+            self.delegate?.addMenuView?(self, didExpand: self.expanded)
         }
         if duration > 0 {
             UIView.animateWithDuration(duration, animations: collapseAnimation, completion: collapseCompletion)
@@ -246,4 +252,3 @@ extension AddMenuView {
 
     }
 }
-
