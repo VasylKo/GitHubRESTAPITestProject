@@ -15,10 +15,18 @@ class BrowseViewController: BesideMenuViewController {
         applyDisplayMode(mode)
         self.navigationItem.titleView = searchbar
         blurDisplayed = true
+
+        addMenu.setItems([
+            AddMenuView.MenuItem(title: NSLocalizedString("INVITE",comment: "Add menu: INVITE"), icon: UIImage(named: "AddFriend")!, color: UIColor.redColor()),
+            AddMenuView.MenuItem(title: NSLocalizedString("PROMOTION",comment: "Add menu: PROMOTION"), icon: UIImage(named: "AddPromotion")!, color: UIColor.greenColor()),
+            AddMenuView.MenuItem(title: NSLocalizedString("EVENT",comment: "Add menu: EVENT"), icon: UIImage(named: "AddEvent")!, color: UIColor.blueColor()),
+            AddMenuView.MenuItem(title: NSLocalizedString("PRODUCT",comment: "Add menu: PRODUCT"), icon: UIImage(named: "AddProduct")!, color: UIColor.yellowColor()),
+            ])
     }
 
     
     @IBOutlet private weak var contentView: UIView!
+    @IBOutlet private weak var addMenu: AddMenuView!
 
 
 //MARK: Blur

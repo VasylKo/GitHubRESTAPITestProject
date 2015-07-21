@@ -6,6 +6,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BrowseViewController" customModule="PositionIn" customModuleProvider="target">
             <connections>
+                <outlet property="addMenu" destination="Oh4-XU-mlM" id="mSF-6s-0uT"/>
                 <outlet property="contentView" destination="f02-Vb-KtN" id="rlr-To-ZCC"/>
                 <outlet property="view" destination="apz-CI-lnL" id="Ctj-nF-5fk"/>
             </connections>

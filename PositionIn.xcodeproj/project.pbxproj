@@ -85,11 +85,10 @@
 		E660E5401B5BCF1A00F52050 /* TableRefreshHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E660E53F1B5BCF1A00F52050 /* TableRefreshHeaderView.swift */; };
 		E660E5421B5BCF3800F52050 /* TableViewSectionHeaderFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E660E5411B5BCF3800F52050 /* TableViewSectionHeaderFooterView.swift */; };
 		E660E5441B5BE43900F52050 /* TableViewSectionHeaderFooterLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E660E5431B5BE43900F52050 /* TableViewSectionHeaderFooterLabelView.swift */; };
-		E67210EA1B5E2E900002C323 /* PositionIn.AddMenuItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E67210E91B5E2E900002C323 /* PositionIn.AddMenuItemCell.xib */; };
+		E6829B041B5E6CF800FB1E1D /* RoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6829B031B5E6CF800FB1E1D /* RoundButton.swift */; };
 		E6D7C2921B5D546C004F3AA9 /* NibView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D7C2911B5D546C004F3AA9 /* NibView.swift */; };
 		E6D7C2971B5D5B3B004F3AA9 /* PositionIn.SearchBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6D7C2951B5D5B3B004F3AA9 /* PositionIn.SearchBar.xib */; };
 		E6D7C2981B5D5B3B004F3AA9 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D7C2961B5D5B3B004F3AA9 /* SearchBar.swift */; };
-		E6D7C29B1B5D6A51004F3AA9 /* AddMenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D7C29A1B5D6A51004F3AA9 /* AddMenuButton.swift */; };
 		E6D7C29D1B5D7A5B004F3AA9 /* AddMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D7C29C1B5D7A5B004F3AA9 /* AddMenuView.swift */; };
 		E6FC63D11B5901060062F5C9 /* KVObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6FC63D01B5901060062F5C9 /* KVObserver.swift */; };
 /* End PBXBuildFile section */
@@ -201,14 +200,13 @@
 		E660E53F1B5BCF1A00F52050 /* TableRefreshHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableRefreshHeaderView.swift; sourceTree = "<group>"; };
 		E660E5411B5BCF3800F52050 /* TableViewSectionHeaderFooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewSectionHeaderFooterView.swift; sourceTree = "<group>"; };
 		E660E5431B5BE43900F52050 /* TableViewSectionHeaderFooterLabelView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewSectionHeaderFooterLabelView.swift; sourceTree = "<group>"; };
-		E67210E91B5E2E900002C323 /* PositionIn.AddMenuItemCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.AddMenuItemCell.xib; sourceTree = "<group>"; };
 		E6736ADB1B4E56DD0003580D /* Version.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Version.h; sourceTree = "<group>"; };
 		E6736ADD1B4E56EB0003580D /* TODOwarn.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = TODOwarn.sh; sourceTree = "<group>"; };
 		E6736ADE1B4E56EB0003580D /* Version.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = Version.sh; sourceTree = "<group>"; };
+		E6829B031B5E6CF800FB1E1D /* RoundButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundButton.swift; sourceTree = "<group>"; };
 		E6D7C2911B5D546C004F3AA9 /* NibView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NibView.swift; sourceTree = "<group>"; };
 		E6D7C2951B5D5B3B004F3AA9 /* PositionIn.SearchBar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.SearchBar.xib; sourceTree = "<group>"; };
 		E6D7C2961B5D5B3B004F3AA9 /* SearchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
-		E6D7C29A1B5D6A51004F3AA9 /* AddMenuButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddMenuButton.swift; sourceTree = "<group>"; };
 		E6D7C29C1B5D7A5B004F3AA9 /* AddMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddMenuView.swift; sourceTree = "<group>"; };
 		E6FC63D01B5901060062F5C9 /* KVObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KVObserver.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -300,6 +298,7 @@
 		E6325F581B57D46C00996480 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				E6829B031B5E6CF800FB1E1D /* RoundButton.swift */,
 				E62B16F71B5C6BBF00D446BC /* AvatarView.swift */,
 			);
 			path = Views;
@@ -474,8 +473,6 @@
 			isa = PBXGroup;
 			children = (
 				E6D7C29C1B5D7A5B004F3AA9 /* AddMenuView.swift */,
-				E6D7C29A1B5D6A51004F3AA9 /* AddMenuButton.swift */,
-				E67210E91B5E2E900002C323 /* PositionIn.AddMenuItemCell.xib */,
 			);
 			path = AddMenu;
 			sourceTree = "<group>";
@@ -657,7 +654,6 @@
 				E6D7C2971B5D5B3B004F3AA9 /* PositionIn.SearchBar.xib in Resources */,
 				E62B17041B5CE3BC00D446BC /* PositionIn.BrowseMapViewController.xib in Resources */,
 				E660E52E1B5AC23B00F52050 /* PositionIn.MainMenuViewController.xib in Resources */,
-				E67210EA1B5E2E900002C323 /* PositionIn.AddMenuItemCell.xib in Resources */,
 				E62B16F51B5C1AA700D446BC /* PositionIn.MainMenuUserCell.xib in Resources */,
 				E62B16FD1B5CDF2400D446BC /* PositionIn.MessagesListViewController.xib in Resources */,
 				E64DC3551B4E53C90011D37C /* Main.storyboard in Resources */,
@@ -832,7 +828,7 @@
 				E62B170C1B5CFE7C00D446BC /* BrowseListViewController.swift in Sources */,
 				E660E52D1B5AC23B00F52050 /* MainMenuViewController.swift in Sources */,
 				E62B17061B5CE3EB00D446BC /* BrowseViewController.swift in Sources */,
-				E6D7C29B1B5D6A51004F3AA9 /* AddMenuButton.swift in Sources */,
+				E6829B041B5E6CF800FB1E1D /* RoundButton.swift in Sources */,
 				E62B17021B5CE39400D446BC /* BrowseMapViewController.swift in Sources */,
 				E62B16F61B5C1AA700D446BC /* MainMenuUserCell.swift in Sources */,
 				E64DC3501B4E53C90011D37C /* AppDelegate.swift in Sources */,

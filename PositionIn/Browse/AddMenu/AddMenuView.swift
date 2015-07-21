@@ -21,99 +21,170 @@ class AddMenuView: UIView {
     }
     
     
-    var menuWidth: CGFloat = 150 {
+    var expanded: Bool = false {
         didSet {
-            setNeedsLayout()
+            if expanded {
+                applyExpandAnimation()
+            } else {
+                applyCollapseAnimation()
+            }
         }
     }
-    
     var direction: AnimationDirection = .TopRight
-    var items: [MenuItem] = []
+    
+    func setItems(items: [MenuItem]) {
+        let menuItem = MenuItem(title: NSLocalizedString("PRODUCT",comment: "Add menu: PRODUCT"), icon: UIImage(named: "AddProduct")!, color: UIColor.yellowColor())
+        
+        for itemView in menuItemViews {
+            itemView.removeFromSuperview()
+        }
+        
+        menuItemViews = items.map() { menuItem in
+            let menuItemView = AddMenuItemView(direction: self.direction, menuItem: menuItem)
+            menuItemView.sizeToFit()
+            menuItemView.setNeedsLayout()
+            
+            menuItemView.frame = CGRect(origin: CGPointZero, size: menuItemView.bounds.size)
+            self.addSubview(menuItemView)
+            return menuItemView
+        }
+        
+    }
     
     override func layoutSubviews() {
         super.layoutSubviews()
         startButton.frame = bounds
-        tableView.frame = menuRect(direction)
     }
 
     
-    private let startButton = AddMenuButton(image: UIImage(named: "AddIcon")!)
-    private let tableView = UITableView()
-    private let cellReuseId: String = NSStringFromClass(AddMenuItemCell.self)!
+    private var menuItemViews: [AddMenuItemView] = []
+    private let startButton = RoundButton(image: UIImage(named: "AddIcon")!)
 }
 
 //MARK: Types
 extension AddMenuView {
+    
     enum AnimationDirection {
         case TopRight
     }
     
     struct MenuItem {
-        let title: String?
-        let icon: UIImage?
+        let title: String
+        let icon: UIImage
         let color: UIColor
     }
-    
+ 
+    @IBAction func toogleMenuTapped(sender: AnyObject) {
+        println("toogleMenuTapped")
+    }
+
 }
 
 
 //MARK: Private
 extension AddMenuView {
+    
     private func configure() {
+        userInteractionEnabled = true
         clipsToBounds = false
         backgroundColor = UIColor.clearColor()
         addSubview(startButton)
-        tableView.backgroundColor = UIColor.clearColor()
-        tableView.separatorStyle = .None
-        addSubview(tableView)
-        tableView.registerNib(UINib(nibName: cellReuseId, bundle: nil), forCellReuseIdentifier: cellReuseId)
-        tableView.estimatedRowHeight = 60.0
-        tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.dataSource = self
+        startButton.addTarget(self, action: "toogleMenuTapped:", forControlEvents: UIControlEvents.TouchUpInside)
+    }
+
+    private func applyExpandAnimation() {
         
-        items = [
-            AddMenuView.MenuItem(title: "invite", icon: UIImage(named: "AddFriend"), color: UIColor.redColor()),
-            AddMenuView.MenuItem(title: "Promotion", icon: UIImage(named: "AddPromotion"), color: UIColor.greenColor()),
-            AddMenuView.MenuItem(title: "Event", icon: UIImage(named: "AddEvent"), color: UIColor.blueColor()),
-            AddMenuView.MenuItem(title: "Product", icon: UIImage(named: "AddProduct"), color: UIColor.yellowColor()),
-        ]
+    }
+
+    private func applyCollapseAnimation() {
         
-        tableView.reloadData()
     }
-    private func menuRect(direction: AnimationDirection) -> CGRect {
-        let height: CGFloat = tableView.estimatedRowHeight * CGFloat(tableView(tableView, numberOfRowsInSection: 0))
-        switch direction {
-        case .TopRight:
-            return CGRect(x: 0, y: -height, width: menuWidth, height: height)
-        default:
-            return CGRectZero
+
+    
+}
+
+
+extension AddMenuView {
+    private class AddMenuItemView: UIView {
+        
+        convenience init(direction: AnimationDirection, menuItem: MenuItem) {
+            self.init(direction: direction, icon: menuItem.icon, color: menuItem.color, title: menuItem.title)
         }
-    }
-}
+        
+        init(direction: AnimationDirection, icon: UIImage, color: UIColor, title: String) {
+            switch direction {
+            case .TopRight:
+                layoutDirection = .LeftToRight
+            }
+            
+            button = RoundButton(image: icon, fillColor: color)
+            button.bounds = CGRect(origin: CGPointZero, size: button.intrinsicContentSize())
+            
+            label = UILabel()
+            label.text = title
+            label.numberOfLines = 1
+            label.sizeToFit()
+            
+            super.init(frame: CGRectZero)
+            
+            bounds = CGRect(origin: CGPointZero, size: contentSize())
+            backgroundColor = UIColor.clearColor()
+            userInteractionEnabled = true
+            let actionSelector: Selector = "itemlTapped:"
 
-//MARK: Table
-extension AddMenuView: UITableViewDataSource {
-    
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return items.count
-    }
-    
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let item = items[indexPath.row]
-        if let cell = tableView.dequeueReusableCellWithIdentifier(cellReuseId) as? AddMenuItemCell {
-            cell.titleLabel?.text = item.title
-            cell.button?.image = item.icon
-            cell.button?.fillColor = item.color
-            return cell
+            button.addTarget(self, action: actionSelector, forControlEvents: UIControlEvents.TouchUpInside)
+            addSubview(button)
+            
+            label.backgroundColor = UIColor.clearColor()
+            label.textColor = UIColor.whiteColor()
+            label.addGestureRecognizer(UITapGestureRecognizer(target: self, action: actionSelector))
+            addSubview(label)
+            
+            switch layoutDirection {
+            case .LeftToRight:
+                label.textAlignment = .Left
+            }
         }
-        fatalError("Could not deque \(cellReuseId)")
+        
+        required init(coder aDecoder: NSCoder) {
+            fatalError(" \(__FUNCTION__) does not implemented")
+        }
+        
+        override func intrinsicContentSize() -> CGSize {
+            return contentSize()
+        }
+        
+        let  button: RoundButton
+        let  label: UILabel
+        let layoutDirection: LayoutDirection
+        let labelPadding: CGFloat = 10.0
+        
+        enum LayoutDirection {
+            case LeftToRight
+        }
+        
+        override func layoutSubviews() {
+            super.layoutSubviews()
+            switch layoutDirection {
+            case .LeftToRight:
+                button.frame = CGRect(origin: CGPointZero, size: button.bounds.size)
+                label.frame = CGRect(origin: CGPoint(
+                    x: button.frame.maxX + labelPadding,
+                    y: (bounds.height - label.bounds.height) / 2.0
+                    ), size: label.bounds.size)
+            }
+        }
+        
+        @IBAction private func itemlTapped(sender: AnyObject) {
+            println("Tap")
+        }
+        
+        private func contentSize() -> CGSize {
+            let height = max(label.bounds.height, button.bounds.height + labelPadding)
+            let width = label.bounds.width + button.bounds.width + labelPadding
+            return CGSize(width: width, height: height)
+        }
+
     }
 }
 
-
-class AddMenuItemCell: UITableViewCell {
-    
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var button: AddMenuButton!
-    
-}

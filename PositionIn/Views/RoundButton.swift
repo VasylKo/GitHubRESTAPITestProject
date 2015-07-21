@@ -1,5 +1,5 @@
 //
-//  AddMenuButton.swift
+//  RoundButton.swift
 //  PositionIn
 //
 //  Created by Alexandr Goncharov on 20/07/15.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AddMenuButton: UIControl {
+class RoundButton: UIControl {
 
     convenience init() {
         self.init(image: UIImage())
@@ -75,16 +75,19 @@ class AddMenuButton: UIControl {
     }
 
     private func configure() {
+        userInteractionEnabled = true
         clipsToBounds = false
         backgroundColor = UIColor.clearColor()
         layer.addSublayer(bubbleLayer)
         layer.addSublayer(iconLayer)
+        bubbleLayer.shouldRasterize = true
         bubbleLayer.masksToBounds = false
         bubbleLayer.shadowOpacity = 1.0
-        bubbleLayer.shadowOffset = CGSize(width: 0, height: 2)
+        bubbleLayer.shadowOffset = CGSize(width: 1, height: 1)
+        bubbleLayer.shadowRadius = 2
         iconLayer.contentsGravity = kCAGravityCenter
         iconLayer.masksToBounds = true
-        bubbleLayer.shadowRadius = 1
+
     }
     
     
@@ -96,14 +99,23 @@ class AddMenuButton: UIControl {
             iconLayer.frame = imageRect
     }
     
+    override func intrinsicContentSize() -> CGSize {
+        return CGSize(width: 50.0, height: 50.0)
+    }
+    
+    override func sizeThatFits(size: CGSize) -> CGSize {
+        let dimension = min(size.width, size.height)
+        return CGSize(width: dimension, height: dimension)
+    }
+    
     private let bubbleLayer = CAShapeLayer()
     private let iconLayer = CAShapeLayer()
-    private let animationDuration: NSTimeInterval = 0.1
-    private let animationScale: CGFloat = 0.85
+    private static let animationScale: CGFloat = 0.85
+    private static let animationDuration: NSTimeInterval = 0.1
 }
 
 //MARK: touches
-extension AddMenuButton {
+extension RoundButton {
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
         super.touchesBegan(touches, withEvent: event)
         animatedToSelectedState()
@@ -123,18 +135,17 @@ extension AddMenuButton {
     
     
     private func animatedToSelectedState() {
-        UIView.animateWithDuration(animationDuration) {
-                let transform = CATransform3DMakeScale(self.animationScale, self.animationScale, 0)
-                self.bubbleLayer.transform = transform
-                self.iconLayer.transform = transform
-        }
+        applyTransform(CATransform3DMakeScale(RoundButton.animationScale, RoundButton.animationScale, 0))
     }
     
     private func animatedToDeselectedState() {
-        UIView.animateWithDuration(animationDuration) {
-                let transform = CATransform3DMakeScale(1.0, 1.0, 0)
-                self.bubbleLayer.transform = transform
-                self.iconLayer.transform = transform
+        applyTransform(CATransform3DMakeScale(1.0, 1.0, 0))
+    }
+    
+    private func applyTransform(transform: CATransform3D, duration: NSTimeInterval = RoundButton.animationDuration) {
+        UIView.animateWithDuration(duration) {
+            self.bubbleLayer.transform = transform
+            self.iconLayer.transform = transform
         }
     }
 }
