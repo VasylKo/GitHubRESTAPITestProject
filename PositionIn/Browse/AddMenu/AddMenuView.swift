@@ -30,7 +30,6 @@ class AddMenuView: UIView {
     }
     
     @IBAction func toogleMenuTapped(sender: AnyObject) {
-        println("toogleMenuTapped")
         expanded = !expanded
     }
 
@@ -67,6 +66,8 @@ class AddMenuView: UIView {
     private var menuItemViews: [AddMenuItemView] = []
     private let startButton = RoundButton(image: UIImage(named: "AddIcon")!)
     private var mExpanded: Bool  = true
+    private let itemsPadding: CGFloat = 10
+    private let animationDuration: NSTimeInterval = 0.4
 }
 
 //MARK: Types
@@ -93,12 +94,12 @@ extension AddMenuView {
         clipsToBounds = false
         backgroundColor = UIColor.clearColor()
         addSubview(startButton)
-        startButton.addTarget(self, action: "toogleMenuTapped:", forControlEvents: UIControlEvents.TouchUpInside)
+        startButton.addTarget(self, action: "toogleMenuTapped:", forControlEvents: UIControlEvents.ValueChanged)
         setTranslatesAutoresizingMaskIntoConstraints(false)
     }
 
     private func setExpanded(expanded: Bool, animated:Bool = true) {
-        let duration: NSTimeInterval = animated ? 2.0/*RoundButton.animationDuration*/ : 0.0
+        let duration: NSTimeInterval = animated ? self.animationDuration : 0.0
         if expanded {
             applyExpandAnimation(duration)
         } else {
@@ -111,16 +112,21 @@ extension AddMenuView {
             self.startButton.transform = CGAffineTransformMakeRotation(CGFloat(M_PI_4))
             for (idx, itemView) in enumerate(self.menuItemViews) {
                 itemView.hidden = false
-                let translation = -itemView.bounds.height * CGFloat(idx + 1)
+                let translation = -(itemView.bounds.height + self.itemsPadding) * CGFloat(idx + 1)
                 let transform: CGAffineTransform =  CGAffineTransformMakeTranslation(0, translation)
                 itemView.transform = transform
+
             }
         }
         let expandCompletion: (Bool) -> Void = { _ in
+            UIView.animateWithDuration(0.2, animations: {
             for (_, itemView) in enumerate(self.menuItemViews) {
-                itemView.label.alpha = 1.0
+                    itemView.label.alpha = 1.0
+                }
+                }) { _ in
+                    self.mExpanded = true
             }
-            self.mExpanded = true
+            
         }
         if duration > 0 {
             UIView.animateWithDuration(duration, animations: expandAnimation, completion: expandCompletion)
@@ -185,7 +191,7 @@ extension AddMenuView {
             userInteractionEnabled = true
             let actionSelector: Selector = "itemlTapped:"
 
-            button.addTarget(self, action: actionSelector, forControlEvents: UIControlEvents.TouchUpInside)
+            button.addTarget(self, action: actionSelector, forControlEvents: UIControlEvents.ValueChanged)
             addSubview(button)
             
             label.backgroundColor = UIColor.clearColor()

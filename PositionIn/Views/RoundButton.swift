@@ -124,9 +124,8 @@ extension RoundButton {
     
     override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
         super.touchesEnded(touches, withEvent: event)
-        println("touchesEnded")
         animatedToDeselectedState()
-        sendActionsForControlEvents(UIControlEvents.TouchUpInside)
+        sendActionsForControlEvents(UIControlEvents.ValueChanged)
     }
     
     override func touchesCancelled(touches: Set<NSObject>!, withEvent event: UIEvent!) {
