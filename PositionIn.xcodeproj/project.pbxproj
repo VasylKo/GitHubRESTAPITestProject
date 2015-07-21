@@ -87,10 +87,10 @@
 		E660E5441B5BE43900F52050 /* TableViewSectionHeaderFooterLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E660E5431B5BE43900F52050 /* TableViewSectionHeaderFooterLabelView.swift */; };
 		E6829B041B5E6CF800FB1E1D /* RoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6829B031B5E6CF800FB1E1D /* RoundButton.swift */; };
 		E6AC64541B5EBC29007D7952 /* UIScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6AC64531B5EBC29007D7952 /* UIScheme.swift */; };
+		E6AC64561B5EC5B1007D7952 /* AddMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6AC64551B5EC5B1007D7952 /* AddMenuView.swift */; };
 		E6D7C2921B5D546C004F3AA9 /* NibView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D7C2911B5D546C004F3AA9 /* NibView.swift */; };
 		E6D7C2971B5D5B3B004F3AA9 /* PositionIn.SearchBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6D7C2951B5D5B3B004F3AA9 /* PositionIn.SearchBar.xib */; };
 		E6D7C2981B5D5B3B004F3AA9 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D7C2961B5D5B3B004F3AA9 /* SearchBar.swift */; };
-		E6D7C29D1B5D7A5B004F3AA9 /* AddMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D7C29C1B5D7A5B004F3AA9 /* AddMenuView.swift */; };
 		E6FC63D11B5901060062F5C9 /* KVObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6FC63D01B5901060062F5C9 /* KVObserver.swift */; };
 /* End PBXBuildFile section */
 
@@ -206,10 +206,10 @@
 		E6736ADE1B4E56EB0003580D /* Version.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = Version.sh; sourceTree = "<group>"; };
 		E6829B031B5E6CF800FB1E1D /* RoundButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundButton.swift; sourceTree = "<group>"; };
 		E6AC64531B5EBC29007D7952 /* UIScheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIScheme.swift; sourceTree = "<group>"; };
+		E6AC64551B5EC5B1007D7952 /* AddMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddMenuView.swift; sourceTree = "<group>"; };
 		E6D7C2911B5D546C004F3AA9 /* NibView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NibView.swift; sourceTree = "<group>"; };
 		E6D7C2951B5D5B3B004F3AA9 /* PositionIn.SearchBar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.SearchBar.xib; sourceTree = "<group>"; };
 		E6D7C2961B5D5B3B004F3AA9 /* SearchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
-		E6D7C29C1B5D7A5B004F3AA9 /* AddMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddMenuView.swift; sourceTree = "<group>"; };
 		E6FC63D01B5901060062F5C9 /* KVObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KVObserver.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -292,7 +292,7 @@
 				E62B170D1B5CFEBE00D446BC /* PositionIn.BrowseListViewController.xib */,
 				E6D7C2961B5D5B3B004F3AA9 /* SearchBar.swift */,
 				E6D7C2951B5D5B3B004F3AA9 /* PositionIn.SearchBar.xib */,
-				E6D7C2991B5D5EB3004F3AA9 /* AddMenu */,
+				E6AC64551B5EC5B1007D7952 /* AddMenuView.swift */,
 			);
 			path = Browse;
 			sourceTree = "<group>";
@@ -470,14 +470,6 @@
 				E6736ADE1B4E56EB0003580D /* Version.sh */,
 			);
 			path = Scripts;
-			sourceTree = "<group>";
-		};
-		E6D7C2991B5D5EB3004F3AA9 /* AddMenu */ = {
-			isa = PBXGroup;
-			children = (
-				E6D7C29C1B5D7A5B004F3AA9 /* AddMenuView.swift */,
-			);
-			path = AddMenu;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -830,12 +822,12 @@
 				E62B16FF1B5CE0F800D446BC /* BesideMenuViewController.swift in Sources */,
 				E62B170C1B5CFE7C00D446BC /* BrowseListViewController.swift in Sources */,
 				E660E52D1B5AC23B00F52050 /* MainMenuViewController.swift in Sources */,
+				E6AC64561B5EC5B1007D7952 /* AddMenuView.swift in Sources */,
 				E62B17061B5CE3EB00D446BC /* BrowseViewController.swift in Sources */,
 				E6829B041B5E6CF800FB1E1D /* RoundButton.swift in Sources */,
 				E62B17021B5CE39400D446BC /* BrowseMapViewController.swift in Sources */,
 				E62B16F61B5C1AA700D446BC /* MainMenuUserCell.swift in Sources */,
 				E64DC3501B4E53C90011D37C /* AppDelegate.swift in Sources */,
-				E6D7C29D1B5D7A5B004F3AA9 /* AddMenuView.swift in Sources */,
 				E62B16FB1B5CDF0100D446BC /* MessagesListViewController.swift in Sources */,
 				E6AC64541B5EBC29007D7952 /* UIScheme.swift in Sources */,
 				E62B16F81B5C6BBF00D446BC /* AvatarView.swift in Sources */,

@@ -18,6 +18,15 @@ class BrowseViewController: BesideMenuViewController {
         applyDisplayMode(mode)
     }
 
+    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
+        coordinator.animateAlongsideTransition({ context in
+            self.addMenu.update(context)
+        }, completion: { context in
+                
+        })
+    }
+    
     
     @IBOutlet private weak var contentView: UIView!
     @IBOutlet private weak var addMenu: AddMenuView!

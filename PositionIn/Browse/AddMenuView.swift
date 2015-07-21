@@ -46,8 +46,13 @@ class AddMenuView: UIView {
         } else {
             applyCollapseAnimation(duration)
         }
+        bringSubviewToFront(startButton)
     }
 
+    func update(transitionContext: UIViewControllerTransitionCoordinatorContext!) {
+        setNeedsLayout()
+        setExpanded(false, animated: false)
+    }
     
     weak var delegate: AddMenuViewDelegate?
     var direction: AnimationDirection = .TopRight
@@ -65,8 +70,7 @@ class AddMenuView: UIView {
             menuItemView.frame = CGRect(origin: CGPointZero, size: menuItemView.bounds.size)
             self.addSubview(menuItemView)
             return menuItemView
-        }
-        bringSubviewToFront(startButton)
+        }        
         setExpanded(false, animated: false)
     }
     
