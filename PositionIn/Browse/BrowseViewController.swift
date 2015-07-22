@@ -125,9 +125,16 @@ class BrowseViewController: BesideMenuViewController {
         }
     }
     
+    static let BrowseModeDidchangeNotification = "BrowseModeDidchangeNotification"
+    
     private func applyBrowseMode(mode: BrowseMode) {
         println("\(self.dynamicType) Apply browse mode: \(mode)")
         tabbar.selectedMode = mode
+        NSNotificationCenter.defaultCenter().postNotificationName(
+            BrowseViewController.BrowseModeDidchangeNotification,
+            object: self,
+            userInfo: nil
+        )
     }
     
     

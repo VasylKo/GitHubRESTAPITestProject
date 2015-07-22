@@ -17,6 +17,7 @@ class MainMenuViewController: UIViewController {
         super.viewDidLoad()
         dataSource.items = defaultMainMenuItems()
         dataSource.configureTable(tableView)
+        subscribeToNotifications()
     }
 
     override func didReceiveMemoryWarning() {
@@ -40,6 +41,45 @@ class MainMenuViewController: UIViewController {
             MainMenuItem(title: NSLocalizedString("Settings", comment: "Main Menu: Settings"), imageName: "MainMenuSettings"),
         ]
     }
+    
+    private func actionForMode(browseMode: BrowseViewController.BrowseMode) -> SidebarViewController.Action? {
+        switch browseMode {
+        case .ForYou:
+            return .ForYou
+        case .New:
+            return .New
+        }
+    }
+    
+    private func subscribeToNotifications(){
+        let block: NSNotification! -> Void = { [weak self] notification in
+            if  let menuController = self,
+                let browseController = notification.object as? BrowseViewController,
+                let action = menuController.actionForMode(browseController.browseMode) {
+                    for (idx, item) in enumerate(menuController.dataSource.items) {
+                        if item.action == action {
+                            let indexPath = NSIndexPath(forRow: idx, inSection: 0)
+                            menuController.tableView.selectRowAtIndexPath(indexPath, animated: true, scrollPosition: .Top)
+                            break
+                        }
+                    }
+            } // if
+        }
+
+        browseModeUpdateObserver = NSNotificationCenter.defaultCenter().addObserverForName(
+            BrowseViewController.BrowseModeDidchangeNotification,
+            object: nil,
+            queue: nil,
+            usingBlock: block
+        )
+    }
+    
+    private var browseModeUpdateObserver: NSObjectProtocol!
+    
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(browseModeUpdateObserver)
+    }
+    
     
     private lazy var dataSource: MainMenuItemsDatasource = {
         let dataSource = MainMenuItemsDatasource()
