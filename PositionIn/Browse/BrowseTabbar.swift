@@ -41,7 +41,7 @@ class BrowseTabbar: UITabBar {
         
         items = [
             UITabBarItem(title: NSLocalizedString("For You", comment: "Tabbar: For You"), image: UIImage(named: "TabbarForYou"), selectedImage: UIImage(named: "TabbarForYouSelected")),
-            UITabBarItem(title: NSLocalizedString("Near", comment: "Tabbar: Near"), image: UIImage(named: "TabbarNear"), selectedImage: UIImage(named: "TabbarNearSelected")),
+            UITabBarItem(title: NSLocalizedString("New", comment: "Tabbar: New"), image: UIImage(named: "TabbarNear"), selectedImage: UIImage(named: "TabbarNearSelected")),
         ]
         delegate = self
     }

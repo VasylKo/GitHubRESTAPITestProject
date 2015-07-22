@@ -34,8 +34,10 @@ class SidebarViewController: KYDrawerController {
             switch action {
             case .Messages:
                 return (SidebarViewController.Segue.ShowMessagesList, nil)
-            case .ForYou, .New:
-                return (SidebarViewController.Segue.ShowBrowse, Box(BrowseViewController.DisplayMode.Map))
+            case .ForYou:
+                return (SidebarViewController.Segue.ShowBrowse, Box(BrowseViewController.DisplayMode.Map, BrowseViewController.BrowseMode.ForYou))
+            case .New:
+                return (SidebarViewController.Segue.ShowBrowse, Box(BrowseViewController.DisplayMode.Map, BrowseViewController.BrowseMode.New))
             default:
                 return (nil, nil)
             }
@@ -52,8 +54,10 @@ class SidebarViewController: KYDrawerController {
             case SidebarViewController.Segue.ShowBrowse.identifier!:
                 if let navigationController = segue.destinationViewController as? UINavigationController,
                    let browseController = navigationController.topViewController as? BrowseViewController,
-                   let mode = sender as? Box<BrowseViewController.DisplayMode> {
-                        browseController.displayMode = mode.unbox
+                   let mode = sender as? Box<(BrowseViewController.DisplayMode, BrowseViewController.BrowseMode)> {
+                    let (displayMode, browseMode) = mode.unbox
+                        browseController.displayMode = displayMode
+                        browseController.browseMode = browseMode
                 }
             default:
                 return

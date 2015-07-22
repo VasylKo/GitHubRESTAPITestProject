@@ -133,14 +133,14 @@ class BrowseViewController: BesideMenuViewController {
     
     enum BrowseMode: Int, Printable {
         case ForYou
-        case Near
+        case New
         
         var description: String {
             switch self {
             case .ForYou:
                 return "For you"
-            case .Near:
-                return "Near"
+            case .New:
+                return "New"
             }
         }
     }
