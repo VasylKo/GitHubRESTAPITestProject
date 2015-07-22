@@ -48,6 +48,7 @@ class AddMenuView: UIView {
             applyCollapseAnimation(duration)
         }
         bringSubviewToFront(startButton)
+        decorationLayer.zPosition = startButton.layer.zPosition - 1
     }
 
     func update(transitionContext: UIViewControllerTransitionCoordinatorContext!) {
@@ -81,6 +82,11 @@ class AddMenuView: UIView {
         menuItemViews.map() { $0.frame = self.bounds }
     }
 
+    override func layoutSublayersOfLayer(layer: CALayer!) {
+        super.layoutSublayersOfLayer(layer)
+        decorationLayer.frame = bounds
+    }
+    
     
     override func pointInside(point: CGPoint, withEvent event: UIEvent?) -> Bool {
         if (mExpanded) {
@@ -95,7 +101,9 @@ class AddMenuView: UIView {
     private let startButton = RoundButton(image: UIImage(named: "AddIcon")!)
     private var mExpanded: Bool  = true
     private let itemsPadding: CGFloat = 10
+    private let decorationInset: CGFloat = 10.0
     private let animationDuration: NSTimeInterval = 0.4
+    private let decorationLayer = CAShapeLayer()
 }
 
 //MARK: Types
@@ -124,7 +132,22 @@ extension AddMenuView {
         backgroundColor = UIColor.clearColor()
         addSubview(startButton)
         startButton.addTarget(self, action: "toogleMenuTapped:", forControlEvents: UIControlEvents.ValueChanged)
+        startButton.layer.zPosition = CGFloat(FLT_MAX)
         setTranslatesAutoresizingMaskIntoConstraints(false)
+
+        let decorationRect = bounds.rectByInsetting(dx: -decorationInset, dy: -decorationInset)
+        decorationLayer.frame = bounds
+        decorationLayer.path = UIBezierPath(ovalInRect: decorationRect).CGPath
+        decorationLayer.fillColor = UIScheme.tabbarBackgroundColor.CGColor
+        layer.addSublayer(decorationLayer)
+        /*
+        let decorationAmount: CGFloat = 20 //decorationRect.height / 3.0
+        let decorationMask = CALayer()
+        decorationMask.bounds = decorationLayer.bounds
+        decorationMask.backgroundColor = UIColor.blackColor().CGColor
+        decorationMask.frame = decorationRect.rectsByDividing(decorationAmount, fromEdge: .MinYEdge).slice
+        decorationLayer.mask = decorationMask
+        */
     }
     
     private func applyExpandAnimation(duration: NSTimeInterval) {
@@ -132,7 +155,7 @@ extension AddMenuView {
             self.startButton.transform = CGAffineTransformMakeRotation(CGFloat(M_PI_4))
             for (idx, itemView) in enumerate(self.menuItemViews) {
                 itemView.hidden = false
-                let translation = -(itemView.bounds.height + self.itemsPadding) * CGFloat(idx + 1)
+                let translation = -(itemView.bounds.height + self.itemsPadding) * CGFloat(idx + 1) - self.decorationInset
                 let transform: CGAffineTransform =  CGAffineTransformMakeTranslation(0, translation)
                 itemView.transform = transform
             }
