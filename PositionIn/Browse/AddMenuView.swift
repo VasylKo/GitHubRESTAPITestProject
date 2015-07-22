@@ -101,7 +101,7 @@ class AddMenuView: UIView {
     private let startButton = RoundButton(image: UIImage(named: "AddIcon")!)
     private var mExpanded: Bool  = true
     private let itemsPadding: CGFloat = 10
-    private let decorationInset: CGFloat = 10.0
+    private let decorationInset: CGFloat = 5.0
     private let animationDuration: NSTimeInterval = 0.4
     private let decorationLayer = CAShapeLayer()
 }

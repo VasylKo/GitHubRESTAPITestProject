@@ -1084,6 +1084,7 @@
 			baseConfigurationReference = 8723017B34FF5C9F33CC0218 /* Pods-PositionIn.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = "PositionIn/Supporting Files/Info.plist";
 				INFOPLIST_PREFIX_HEADER = "PositionIn/Supporting Files/Version.h";
@@ -1102,6 +1103,7 @@
 			baseConfigurationReference = 040F01865A9A2BB68F3FDBFF /* Pods-PositionIn.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = "PositionIn/Supporting Files/Info.plist";
 				INFOPLIST_PREFIX_HEADER = "PositionIn/Supporting Files/Version.h";
