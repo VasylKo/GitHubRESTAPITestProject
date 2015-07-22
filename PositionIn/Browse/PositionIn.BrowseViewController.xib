@@ -23,8 +23,8 @@
                         <constraint firstAttribute="height" constant="49" id="hJS-Ew-nJV"/>
                     </constraints>
                     <items>
-                        <tabBarItem title="For You" id="wfg-9f-l2Z"/>
-                        <tabBarItem title="Near" id="oDl-kc-XRJ"/>
+                        <tabBarItem title="For You" image="TabbarForYou" selectedImage="TabbarForYouSelected" id="wfg-9f-l2Z"/>
+                        <tabBarItem title="Near" image="TabbarNear" selectedImage="TabbarNearSelected" id="oDl-kc-XRJ"/>
                     </items>
                     <color key="tintColor" red="0.13725490200000001" green="0.4431372549" blue="0.83529411760000005" alpha="1" colorSpace="calibratedRGB"/>
                     <color key="barTintColor" red="0.94117647058823528" green="0.94117647058823528" blue="0.94117647058823528" alpha="1" colorSpace="calibratedRGB"/>
@@ -62,4 +62,10 @@
             </variation>
         </view>
     </objects>
+    <resources>
+        <image name="TabbarForYou" width="32" height="32"/>
+        <image name="TabbarForYouSelected" width="32" height="32"/>
+        <image name="TabbarNear" width="32" height="32"/>
+        <image name="TabbarNearSelected" width="32" height="32"/>
+    </resources>
 </document>
