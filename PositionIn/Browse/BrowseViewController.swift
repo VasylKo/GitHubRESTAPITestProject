@@ -134,22 +134,26 @@ extension BrowseViewController {
             AddMenuView.MenuItem(
                 title: NSLocalizedString("PRODUCT",comment: "Add menu: PRODUCT"),
                 icon: UIImage(named: "AddProduct")!,
-                color: UIScheme.productAddMenuColor
+                color: UIScheme.productAddMenuColor,
+                action: {println("Product")}
             ),
             AddMenuView.MenuItem(
                 title: NSLocalizedString("EVENT",comment: "Add menu: EVENT"),
                 icon: UIImage(named: "AddEvent")!,
-                color: UIScheme.eventAddMenuColor
+                color: UIScheme.eventAddMenuColor,
+                action: {println("Event")}
             ),
             AddMenuView.MenuItem(
                 title: NSLocalizedString("PROMOTION",comment: "Add menu: PROMOTION"),
                 icon: UIImage(named: "AddPromotion")!,
-                color: UIScheme.promotionAddMenuColor
+                color: UIScheme.promotionAddMenuColor,
+                action: {println("Promotion")}
             ),
             AddMenuView.MenuItem(
                 title: NSLocalizedString("INVITE",comment: "Add menu: INVITE"),
                 icon: UIImage(named: "AddFriend")!,
-                color: UIScheme.inviteAddMenuColor
+                color: UIScheme.inviteAddMenuColor,
+                action: {println("invite")}
             ),
         ])
         addMenu.delegate = self

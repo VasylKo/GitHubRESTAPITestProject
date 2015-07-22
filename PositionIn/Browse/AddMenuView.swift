@@ -14,6 +14,7 @@ import UIKit
 }
 
 class AddMenuView: UIView {
+    typealias ItemAction = () -> Void
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -108,6 +109,7 @@ extension AddMenuView {
         let title: String
         let icon: UIImage
         let color: UIColor
+        let action: ItemAction?
     }
  
 }
@@ -185,10 +187,10 @@ extension AddMenuView {
     private class AddMenuItemView: UIView {
         
         convenience init(direction: AnimationDirection, menuItem: MenuItem) {
-            self.init(direction: direction, icon: menuItem.icon, color: menuItem.color, title: menuItem.title)
+            self.init(direction: direction, icon: menuItem.icon, color: menuItem.color, title: menuItem.title, action: menuItem.action)
         }
         
-        init(direction: AnimationDirection, icon: UIImage, color: UIColor, title: String) {
+        init(direction: AnimationDirection, icon: UIImage, color: UIColor, title: String, action: ItemAction?) {
             switch direction {
             case .TopRight:
                 layoutDirection = .LeftToRight
@@ -201,6 +203,8 @@ extension AddMenuView {
             label.text = title
             label.numberOfLines = 1
             label.sizeToFit()
+            
+            self.action = action
             
             super.init(frame: CGRectZero)
             setTranslatesAutoresizingMaskIntoConstraints(false)
@@ -253,7 +257,12 @@ extension AddMenuView {
         }
         
         @IBAction private func itemlTapped(sender: AnyObject) {
-            println("Tap")
+            if let menuView = superview as? AddMenuView {
+                menuView.setExpanded(false, animated: true)
+            }
+            if let action = action {
+                action()
+            }
         }
         
         private func contentSize() -> CGSize {
@@ -262,5 +271,6 @@ extension AddMenuView {
             return CGSize(width: width, height: height)
         }
 
+        private let action: ItemAction?
     }
 }
