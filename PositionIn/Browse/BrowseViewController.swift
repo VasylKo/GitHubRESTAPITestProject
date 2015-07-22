@@ -18,6 +18,7 @@ class BrowseViewController: BesideMenuViewController {
         setupAddMenu()
         applyDisplayMode(displayMode)
         applyBrowseMode(browseMode)
+        blurView.addGestureRecognizer(UITapGestureRecognizer(target: addMenu, action: "toogleMenuTapped:"))
     }
 
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
