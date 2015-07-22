@@ -53,7 +53,7 @@ class SidebarViewController: KYDrawerController {
                 if let navigationController = segue.destinationViewController as? UINavigationController,
                    let browseController = navigationController.topViewController as? BrowseViewController,
                    let mode = sender as? Box<BrowseViewController.DisplayMode> {
-                        browseController.mode = mode.unbox
+                        browseController.displayMode = mode.unbox
                 }
             default:
                 return

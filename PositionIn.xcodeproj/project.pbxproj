@@ -86,6 +86,7 @@
 		E660E5421B5BCF3800F52050 /* TableViewSectionHeaderFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E660E5411B5BCF3800F52050 /* TableViewSectionHeaderFooterView.swift */; };
 		E660E5441B5BE43900F52050 /* TableViewSectionHeaderFooterLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E660E5431B5BE43900F52050 /* TableViewSectionHeaderFooterLabelView.swift */; };
 		E6829B041B5E6CF800FB1E1D /* RoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6829B031B5E6CF800FB1E1D /* RoundButton.swift */; };
+		E6A869DB1B5FD1E100797D16 /* BrowseTabbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A869DA1B5FD1E100797D16 /* BrowseTabbar.swift */; };
 		E6AC64541B5EBC29007D7952 /* UIScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6AC64531B5EBC29007D7952 /* UIScheme.swift */; };
 		E6AC64561B5EC5B1007D7952 /* AddMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6AC64551B5EC5B1007D7952 /* AddMenuView.swift */; };
 		E6D7C2921B5D546C004F3AA9 /* NibView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D7C2911B5D546C004F3AA9 /* NibView.swift */; };
@@ -205,6 +206,7 @@
 		E6736ADD1B4E56EB0003580D /* TODOwarn.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = TODOwarn.sh; sourceTree = "<group>"; };
 		E6736ADE1B4E56EB0003580D /* Version.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = Version.sh; sourceTree = "<group>"; };
 		E6829B031B5E6CF800FB1E1D /* RoundButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundButton.swift; sourceTree = "<group>"; };
+		E6A869DA1B5FD1E100797D16 /* BrowseTabbar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowseTabbar.swift; sourceTree = "<group>"; };
 		E6AC64531B5EBC29007D7952 /* UIScheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIScheme.swift; sourceTree = "<group>"; };
 		E6AC64551B5EC5B1007D7952 /* AddMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddMenuView.swift; sourceTree = "<group>"; };
 		E6D7C2911B5D546C004F3AA9 /* NibView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NibView.swift; sourceTree = "<group>"; };
@@ -293,6 +295,7 @@
 				E6D7C2961B5D5B3B004F3AA9 /* SearchBar.swift */,
 				E6D7C2951B5D5B3B004F3AA9 /* PositionIn.SearchBar.xib */,
 				E6AC64551B5EC5B1007D7952 /* AddMenuView.swift */,
+				E6A869DA1B5FD1E100797D16 /* BrowseTabbar.swift */,
 			);
 			path = Browse;
 			sourceTree = "<group>";
@@ -830,6 +833,7 @@
 				E64DC3501B4E53C90011D37C /* AppDelegate.swift in Sources */,
 				E62B16FB1B5CDF0100D446BC /* MessagesListViewController.swift in Sources */,
 				E6AC64541B5EBC29007D7952 /* UIScheme.swift in Sources */,
+				E6A869DB1B5FD1E100797D16 /* BrowseTabbar.swift in Sources */,
 				E62B16F81B5C6BBF00D446BC /* AvatarView.swift in Sources */,
 				E6325F651B57D89A00996480 /* SidebarViewController.swift in Sources */,
 				E660E5301B5AC28600F52050 /* MainMenuCell.swift in Sources */,

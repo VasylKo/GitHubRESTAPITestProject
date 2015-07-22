@@ -14,8 +14,10 @@ class BrowseViewController: BesideMenuViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.titleView = searchbar
+        tabbar.browseDelegate = self
         setupAddMenu()
-        applyDisplayMode(mode)
+        applyDisplayMode(displayMode)
+        applyBrowseMode(browseMode)
     }
 
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
@@ -30,7 +32,8 @@ class BrowseViewController: BesideMenuViewController {
     
     @IBOutlet private weak var contentView: UIView!
     @IBOutlet private weak var addMenu: AddMenuView!
-
+    @IBOutlet weak var tabbar: BrowseTabbar!
+    
 //MARK: Blur
     
     var blurDisplayed: Bool = false {
@@ -52,10 +55,10 @@ class BrowseViewController: BesideMenuViewController {
     
 //MARK: Display mode
     
-    var mode: DisplayMode = .Map {
+    var displayMode: DisplayMode = .Map {
         didSet {
             if isViewLoaded() {
-                applyDisplayMode(mode)
+                applyDisplayMode(displayMode)
             }
         }
     }
@@ -78,7 +81,7 @@ class BrowseViewController: BesideMenuViewController {
     
     @IBAction private func displayModeSegmentChanged(sender: UISegmentedControl) {
         if let displayMode = DisplayMode(rawValue: sender.selectedSegmentIndex) {
-            mode = displayMode
+            self.displayMode = displayMode
         } else {
             fatalError("Unknown display mode in segment control")
         }
@@ -96,7 +99,7 @@ class BrowseViewController: BesideMenuViewController {
         }
         
         let childController: UIViewController = {
-            switch self.mode {
+            switch self.displayMode {
             case .Map:
                 return Storyboards.Main.instantiateBrowseMapViewController()
             case .List:
@@ -112,6 +115,37 @@ class BrowseViewController: BesideMenuViewController {
         addMenu.setExpanded(false, animated: false)
     }
 
+//MARK: Browse mode
+    
+    var browseMode: BrowseMode = .ForYou {
+        didSet {
+            if isViewLoaded() {
+                applyBrowseMode(browseMode)
+            }
+        }
+    }
+    
+    private func applyBrowseMode(mode: BrowseMode) {
+        println("\(self.dynamicType) Apply browse mode: \(mode)")
+        tabbar.selectedMode = mode
+    }
+    
+    
+    enum BrowseMode: Int, Printable {
+        case ForYou
+        case Near
+        
+        var description: String {
+            switch self {
+            case .ForYou:
+                return "For you"
+            case .Near:
+                return "Near"
+            }
+        }
+    }
+    
+//MARK: Search
 
     private lazy var searchbar: SearchBar = {
         let vPadding: CGFloat = 5
@@ -172,5 +206,12 @@ extension BrowseViewController: AddMenuViewDelegate {
         if !expanded {
             blurDisplayed = expanded
         }
+    }
+}
+
+//MARK:
+extension BrowseViewController: BrowseTabbarDelegate {
+    func tabbarDidChangeMode(tabbar: BrowseTabbar) {
+        browseMode = tabbar.selectedMode
     }
 }
