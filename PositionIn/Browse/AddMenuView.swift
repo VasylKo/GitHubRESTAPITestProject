@@ -81,6 +81,15 @@ class AddMenuView: UIView {
     }
 
     
+    override func pointInside(point: CGPoint, withEvent event: UIEvent?) -> Bool {
+        if (mExpanded) {
+            let rect = menuItemViews.reduce(bounds) { return CGRectUnion($0, $1.frame) }
+            return rect.contains(point)
+        }
+        return super.pointInside(point, withEvent: event)
+    }
+
+    
     private var menuItemViews: [AddMenuItemView] = []
     private let startButton = RoundButton(image: UIImage(named: "AddIcon")!)
     private var mExpanded: Bool  = true
