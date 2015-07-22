@@ -51,12 +51,8 @@
 		E62B16FB1B5CDF0100D446BC /* MessagesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E62B16FA1B5CDF0100D446BC /* MessagesListViewController.swift */; };
 		E62B16FD1B5CDF2400D446BC /* PositionIn.MessagesListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E62B16FC1B5CDF2400D446BC /* PositionIn.MessagesListViewController.xib */; };
 		E62B16FF1B5CE0F800D446BC /* BesideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E62B16FE1B5CE0F800D446BC /* BesideMenuViewController.swift */; };
-		E62B17021B5CE39400D446BC /* BrowseMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E62B17011B5CE39400D446BC /* BrowseMapViewController.swift */; };
-		E62B17041B5CE3BC00D446BC /* PositionIn.BrowseMapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E62B17031B5CE3BC00D446BC /* PositionIn.BrowseMapViewController.xib */; };
 		E62B17061B5CE3EB00D446BC /* BrowseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E62B17051B5CE3EB00D446BC /* BrowseViewController.swift */; };
 		E62B170A1B5CE46500D446BC /* PositionIn.BrowseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E62B17091B5CE46500D446BC /* PositionIn.BrowseViewController.xib */; };
-		E62B170C1B5CFE7C00D446BC /* BrowseListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E62B170B1B5CFE7C00D446BC /* BrowseListViewController.swift */; };
-		E62B170E1B5CFEBE00D446BC /* PositionIn.BrowseListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E62B170D1B5CFEBE00D446BC /* PositionIn.BrowseListViewController.xib */; };
 		E6325F651B57D89A00996480 /* SidebarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6325F621B57D89A00996480 /* SidebarViewController.swift */; };
 		E6325F671B57DA4600996480 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6325F661B57DA4600996480 /* MapKit.framework */; };
 		E6325F721B57E1DA00996480 /* Storyboards.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6325F711B57E1DA00996480 /* Storyboards.swift */; };
@@ -87,6 +83,12 @@
 		E660E5441B5BE43900F52050 /* TableViewSectionHeaderFooterLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E660E5431B5BE43900F52050 /* TableViewSectionHeaderFooterLabelView.swift */; };
 		E6829B041B5E6CF800FB1E1D /* RoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6829B031B5E6CF800FB1E1D /* RoundButton.swift */; };
 		E6A869DB1B5FD1E100797D16 /* BrowseTabbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A869DA1B5FD1E100797D16 /* BrowseTabbar.swift */; };
+		E6A869E21B6000C800797D16 /* BrowseListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A869DD1B6000C800797D16 /* BrowseListViewController.swift */; };
+		E6A869E31B6000C800797D16 /* PositionIn.BrowseListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6A869DE1B6000C800797D16 /* PositionIn.BrowseListViewController.xib */; };
+		E6A869E41B6000C800797D16 /* BrowseMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A869E01B6000C800797D16 /* BrowseMapViewController.swift */; };
+		E6A869E51B6000C800797D16 /* PositionIn.BrowseMapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6A869E11B6000C800797D16 /* PositionIn.BrowseMapViewController.xib */; };
+		E6A869E71B60012500797D16 /* ListProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A869E61B60012500797D16 /* ListProductCell.swift */; };
+		E6A869E91B60013A00797D16 /* PositionIn.ListProductCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6A869E81B60013A00797D16 /* PositionIn.ListProductCell.xib */; };
 		E6AC64541B5EBC29007D7952 /* UIScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6AC64531B5EBC29007D7952 /* UIScheme.swift */; };
 		E6AC64561B5EC5B1007D7952 /* AddMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6AC64551B5EC5B1007D7952 /* AddMenuView.swift */; };
 		E6D7C2921B5D546C004F3AA9 /* NibView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D7C2911B5D546C004F3AA9 /* NibView.swift */; };
@@ -161,12 +163,8 @@
 		E62B16FA1B5CDF0100D446BC /* MessagesListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesListViewController.swift; sourceTree = "<group>"; };
 		E62B16FC1B5CDF2400D446BC /* PositionIn.MessagesListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.MessagesListViewController.xib; sourceTree = "<group>"; };
 		E62B16FE1B5CE0F800D446BC /* BesideMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BesideMenuViewController.swift; sourceTree = "<group>"; };
-		E62B17011B5CE39400D446BC /* BrowseMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowseMapViewController.swift; sourceTree = "<group>"; };
-		E62B17031B5CE3BC00D446BC /* PositionIn.BrowseMapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.BrowseMapViewController.xib; sourceTree = "<group>"; };
 		E62B17051B5CE3EB00D446BC /* BrowseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowseViewController.swift; sourceTree = "<group>"; };
 		E62B17091B5CE46500D446BC /* PositionIn.BrowseViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.BrowseViewController.xib; sourceTree = "<group>"; };
-		E62B170B1B5CFE7C00D446BC /* BrowseListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowseListViewController.swift; sourceTree = "<group>"; };
-		E62B170D1B5CFEBE00D446BC /* PositionIn.BrowseListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.BrowseListViewController.xib; sourceTree = "<group>"; };
 		E6325F621B57D89A00996480 /* SidebarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SidebarViewController.swift; sourceTree = "<group>"; };
 		E6325F661B57DA4600996480 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		E6325F711B57E1DA00996480 /* Storyboards.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storyboards.swift; sourceTree = "<group>"; };
@@ -207,6 +205,12 @@
 		E6736ADE1B4E56EB0003580D /* Version.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = Version.sh; sourceTree = "<group>"; };
 		E6829B031B5E6CF800FB1E1D /* RoundButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundButton.swift; sourceTree = "<group>"; };
 		E6A869DA1B5FD1E100797D16 /* BrowseTabbar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowseTabbar.swift; sourceTree = "<group>"; };
+		E6A869DD1B6000C800797D16 /* BrowseListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowseListViewController.swift; sourceTree = "<group>"; };
+		E6A869DE1B6000C800797D16 /* PositionIn.BrowseListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.BrowseListViewController.xib; sourceTree = "<group>"; };
+		E6A869E01B6000C800797D16 /* BrowseMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowseMapViewController.swift; sourceTree = "<group>"; };
+		E6A869E11B6000C800797D16 /* PositionIn.BrowseMapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.BrowseMapViewController.xib; sourceTree = "<group>"; };
+		E6A869E61B60012500797D16 /* ListProductCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListProductCell.swift; sourceTree = "<group>"; };
+		E6A869E81B60013A00797D16 /* PositionIn.ListProductCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.ListProductCell.xib; sourceTree = "<group>"; };
 		E6AC64531B5EBC29007D7952 /* UIScheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIScheme.swift; sourceTree = "<group>"; };
 		E6AC64551B5EC5B1007D7952 /* AddMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddMenuView.swift; sourceTree = "<group>"; };
 		E6D7C2911B5D546C004F3AA9 /* NibView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NibView.swift; sourceTree = "<group>"; };
@@ -288,10 +292,6 @@
 			children = (
 				E62B17051B5CE3EB00D446BC /* BrowseViewController.swift */,
 				E62B17091B5CE46500D446BC /* PositionIn.BrowseViewController.xib */,
-				E62B17011B5CE39400D446BC /* BrowseMapViewController.swift */,
-				E62B17031B5CE3BC00D446BC /* PositionIn.BrowseMapViewController.xib */,
-				E62B170B1B5CFE7C00D446BC /* BrowseListViewController.swift */,
-				E62B170D1B5CFEBE00D446BC /* PositionIn.BrowseListViewController.xib */,
 				E6D7C2961B5D5B3B004F3AA9 /* SearchBar.swift */,
 				E6D7C2951B5D5B3B004F3AA9 /* PositionIn.SearchBar.xib */,
 				E6AC64551B5EC5B1007D7952 /* AddMenuView.swift */,
@@ -390,6 +390,8 @@
 			children = (
 				E660E52A1B5AC23B00F52050 /* MainMenu */,
 				E62B17001B5CE39400D446BC /* Browse */,
+				E6A869DC1B6000C800797D16 /* BrowseList */,
+				E6A869DF1B6000C800797D16 /* BrowseMap */,
 				E62B16F91B5CDED600D446BC /* Messaging */,
 				E660E5251B5AB82000F52050 /* Models */,
 				E6325F5F1B57D89A00996480 /* ViewControllers */,
@@ -473,6 +475,26 @@
 				E6736ADE1B4E56EB0003580D /* Version.sh */,
 			);
 			path = Scripts;
+			sourceTree = "<group>";
+		};
+		E6A869DC1B6000C800797D16 /* BrowseList */ = {
+			isa = PBXGroup;
+			children = (
+				E6A869DD1B6000C800797D16 /* BrowseListViewController.swift */,
+				E6A869DE1B6000C800797D16 /* PositionIn.BrowseListViewController.xib */,
+				E6A869E61B60012500797D16 /* ListProductCell.swift */,
+				E6A869E81B60013A00797D16 /* PositionIn.ListProductCell.xib */,
+			);
+			path = BrowseList;
+			sourceTree = "<group>";
+		};
+		E6A869DF1B6000C800797D16 /* BrowseMap */ = {
+			isa = PBXGroup;
+			children = (
+				E6A869E01B6000C800797D16 /* BrowseMapViewController.swift */,
+				E6A869E11B6000C800797D16 /* PositionIn.BrowseMapViewController.xib */,
+			);
+			path = BrowseMap;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -647,13 +669,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E62B170E1B5CFEBE00D446BC /* PositionIn.BrowseListViewController.xib in Resources */,
 				E62B170A1B5CE46500D446BC /* PositionIn.BrowseViewController.xib in Resources */,
+				E6A869E91B60013A00797D16 /* PositionIn.ListProductCell.xib in Resources */,
 				E6D7C2971B5D5B3B004F3AA9 /* PositionIn.SearchBar.xib in Resources */,
-				E62B17041B5CE3BC00D446BC /* PositionIn.BrowseMapViewController.xib in Resources */,
+				E6A869E51B6000C800797D16 /* PositionIn.BrowseMapViewController.xib in Resources */,
 				E660E52E1B5AC23B00F52050 /* PositionIn.MainMenuViewController.xib in Resources */,
 				E62B16F51B5C1AA700D446BC /* PositionIn.MainMenuUserCell.xib in Resources */,
 				E62B16FD1B5CDF2400D446BC /* PositionIn.MessagesListViewController.xib in Resources */,
+				E6A869E31B6000C800797D16 /* PositionIn.BrowseListViewController.xib in Resources */,
 				E64DC3551B4E53C90011D37C /* Main.storyboard in Resources */,
 				E64DC35A1B4E53C90011D37C /* LaunchScreen.xib in Resources */,
 				E64DC3571B4E53C90011D37C /* Images.xcassets in Resources */,
@@ -823,19 +846,20 @@
 				E6D7C2981B5D5B3B004F3AA9 /* SearchBar.swift in Sources */,
 				E6325F721B57E1DA00996480 /* Storyboards.swift in Sources */,
 				E62B16FF1B5CE0F800D446BC /* BesideMenuViewController.swift in Sources */,
-				E62B170C1B5CFE7C00D446BC /* BrowseListViewController.swift in Sources */,
 				E660E52D1B5AC23B00F52050 /* MainMenuViewController.swift in Sources */,
 				E6AC64561B5EC5B1007D7952 /* AddMenuView.swift in Sources */,
 				E62B17061B5CE3EB00D446BC /* BrowseViewController.swift in Sources */,
+				E6A869E21B6000C800797D16 /* BrowseListViewController.swift in Sources */,
 				E6829B041B5E6CF800FB1E1D /* RoundButton.swift in Sources */,
-				E62B17021B5CE39400D446BC /* BrowseMapViewController.swift in Sources */,
 				E62B16F61B5C1AA700D446BC /* MainMenuUserCell.swift in Sources */,
 				E64DC3501B4E53C90011D37C /* AppDelegate.swift in Sources */,
 				E62B16FB1B5CDF0100D446BC /* MessagesListViewController.swift in Sources */,
+				E6A869E71B60012500797D16 /* ListProductCell.swift in Sources */,
 				E6AC64541B5EBC29007D7952 /* UIScheme.swift in Sources */,
 				E6A869DB1B5FD1E100797D16 /* BrowseTabbar.swift in Sources */,
 				E62B16F81B5C6BBF00D446BC /* AvatarView.swift in Sources */,
 				E6325F651B57D89A00996480 /* SidebarViewController.swift in Sources */,
+				E6A869E41B6000C800797D16 /* BrowseMapViewController.swift in Sources */,
 				E660E5301B5AC28600F52050 /* MainMenuCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

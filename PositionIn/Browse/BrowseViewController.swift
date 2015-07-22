@@ -47,7 +47,7 @@ class BrowseViewController: BesideMenuViewController {
     }
     
     private lazy var blurView: UIView = {
-        let blur = UIBlurEffect(style: .Light)
+        let blur = UIBlurEffect(style: .Dark)
         let blurView = UIVisualEffectView(effect: blur)
         self.contentView.addSubViewOnEntireSize(blurView)
         blurView.hidden = true

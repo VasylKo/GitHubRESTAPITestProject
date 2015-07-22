@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="PositionIn.ListProductCell" id="z2W-Ud-uUE" customClass="ListProductCell" customModule="PositionIn" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="74"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="z2W-Ud-uUE" id="ade-Nw-2uh">
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="200" verticalHuggingPriority="200" translatesAutoresizingMaskIntoConstraints="NO" id="RJf-1C-axm">
+                        <rect key="frame" x="2" y="2" width="70" height="69.5"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="RJf-1C-axm" secondAttribute="height" multiplier="1:1" id="RNt-rX-LAH"/>
+                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="80" id="eac-DM-wdp"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Wizard of the Coast" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tLP-DN-pMX">
+                        <rect key="frame" x="77" y="7" width="197" height="21"/>
+                        <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="270" text="0.09 miles" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oe9-gN-uiv">
+                        <rect key="frame" x="77" y="54" width="197" height="17"/>
+                        <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                        <color key="textColor" red="0.63529411764705879" green="0.72549019607843135" blue="0.15686274509803921" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="260" verticalHuggingPriority="260" text="Edward Ryan" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Hb-XH-FwV">
+                        <rect key="frame" x="77" y="32.5" width="197" height="17"/>
+                        <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                        <color key="textColor" red="0.61176470589999998" green="0.61176470589999998" blue="0.61176470589999998" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="tLP-DN-pMX" firstAttribute="leading" secondItem="5Hb-XH-FwV" secondAttribute="leading" id="C9h-Bn-32h"/>
+                    <constraint firstAttribute="bottom" secondItem="RJf-1C-axm" secondAttribute="bottom" constant="2" id="JSy-kX-XSU"/>
+                    <constraint firstItem="Oe9-gN-uiv" firstAttribute="trailing" secondItem="5Hb-XH-FwV" secondAttribute="trailing" id="Nrq-Eb-G5r"/>
+                    <constraint firstItem="Oe9-gN-uiv" firstAttribute="top" secondItem="5Hb-XH-FwV" secondAttribute="bottom" constant="5" id="QuB-t3-3Zy"/>
+                    <constraint firstItem="5Hb-XH-FwV" firstAttribute="top" secondItem="tLP-DN-pMX" secondAttribute="bottom" constant="5" id="Rym-9n-h3L"/>
+                    <constraint firstItem="RJf-1C-axm" firstAttribute="top" secondItem="tLP-DN-pMX" secondAttribute="top" constant="-5" id="S9t-MQ-Gyu"/>
+                    <constraint firstItem="RJf-1C-axm" firstAttribute="bottom" secondItem="Oe9-gN-uiv" secondAttribute="bottom" id="X85-65-K87"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="tLP-DN-pMX" secondAttribute="trailing" constant="5" id="iEN-Ey-ZwU"/>
+                    <constraint firstItem="tLP-DN-pMX" firstAttribute="leading" secondItem="RJf-1C-axm" secondAttribute="trailing" constant="5" id="qds-Jr-OZ9"/>
+                    <constraint firstItem="Oe9-gN-uiv" firstAttribute="leading" secondItem="5Hb-XH-FwV" secondAttribute="leading" id="tJF-ZO-pa7"/>
+                    <constraint firstItem="RJf-1C-axm" firstAttribute="leading" secondItem="ade-Nw-2uh" secondAttribute="leading" constant="2" id="x2B-I8-4Or"/>
+                    <constraint firstItem="RJf-1C-axm" firstAttribute="top" secondItem="ade-Nw-2uh" secondAttribute="top" constant="2" id="yBA-ac-YlX"/>
+                    <constraint firstItem="tLP-DN-pMX" firstAttribute="trailing" secondItem="5Hb-XH-FwV" secondAttribute="trailing" id="zJW-0x-isk"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="detailsLabel" destination="5Hb-XH-FwV" id="oyR-7d-6Vv"/>
+                <outlet property="headerLabel" destination="tLP-DN-pMX" id="UWY-FI-IXt"/>
+                <outlet property="infoLabel" destination="Oe9-gN-uiv" id="k9v-pY-da7"/>
+                <outlet property="productImage" destination="RJf-1C-axm" id="Ro9-E1-lSC"/>
+            </connections>
+            <point key="canvasLocation" x="214" y="196"/>
+        </tableViewCell>
+    </objects>
+</document>
