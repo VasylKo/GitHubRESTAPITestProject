@@ -104,23 +104,3 @@ struct APIService {
     private let baseURL: NSURL
     let dataProvider: NetworkDataProvider
 }
-
-struct CollectionResponse<C: CRUDObject>: Mappable {
-    private(set) var items: [C]?
-    
-    init?(_ map: Map) {
-        mapping(map)
-        switch (items) {
-        case (.Some):
-            break
-        default:
-            println("Error while parsing object \(self)")
-            return nil
-        }
-    }
-    
-    mutating func mapping(map: Map) {
-        items <- map["data"]
-    }
-
-}

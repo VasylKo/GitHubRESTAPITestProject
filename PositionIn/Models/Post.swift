@@ -11,6 +11,12 @@ import ObjectMapper
 
 struct Post: CRUDObject {
     private(set) var objectId: CRUDObjectId
+    var name: String?
+    var text: String?
+    
+    init(objectId: CRUDObjectId) {
+        self.objectId = objectId
+    }
     
     init?(_ map: Map) {
         mapping(map)
@@ -25,10 +31,16 @@ struct Post: CRUDObject {
 
     mutating func mapping(map: Map) {
         objectId <- map["id"]
+        name <- map["name"]
+        text <- map["text"]
     }
     
     static func endpoint() -> String {
         return "/v1.0/post"
+    }
+    
+    static func allEndpoint(userId: CRUDObjectId) -> String {
+        return UserProfile.endpoint().stringByAppendingPathComponent(userId).stringByAppendingPathComponent("posts")
     }
     
     var description: String {

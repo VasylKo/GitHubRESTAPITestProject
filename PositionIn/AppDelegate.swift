@@ -51,11 +51,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 println(error)
             case .Success(_):
                 println("Get posts Success")
-                println(result.value.items)
+                println(result.value)
+                self?.createPost()
             }
         }
         
-        api.getAll(token!, endpoint: "/v1.0/user/[user_profile_id]/posts", completion: completion)
+        api.getAll(token!, endpoint: Post.allEndpoint(user.objectId), completion: completion)
+    }
+    
+    func createPost() {
+        var post = Post(objectId: "234")
+        post.name = "Post Name"
+        post.text = "Post text"
+        
+        let completion: (OperationResult<Void>)->Void = { [weak self] result in
+            switch result {
+            case .Failure(let error):
+                println(error)
+            case .Success(_):
+                println("Create post Success: got \(result.value)")
+            }
+        }
+        api.post(token!, object: post, completion: completion)
     }
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
