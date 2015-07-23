@@ -18,28 +18,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
 
-    let dataProvider: NetworkDataProvider
+    let api: APIService
+    var token: String?
     
     override init() {
         let baseURL = NSURL(string: "http://45.63.7.39:8080")!
-        dataProvider = NetworkDataProvider(api: API(url: baseURL))
+        api = APIService(url: baseURL)
         super.init()
     }
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
-        let username = "ios@bekitzur.com"
+        let username = "ios-777@bekitzur.com"
         let password = "pwd"
         
-        
-        let completion: (OperationResult<NetworkDataProvider.AuthResponse>)->Void = { result in
-            switch result {
-            case .Failure(let error):
-                println(error)
-            case .Success(_):
-                println("Auth Success: got \(result.value)")
-            }
-        }
         
         let createCompletion: (OperationResult<Bool>)->Void = { result in
             switch result {
@@ -47,14 +39,45 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 println(error)
             case .Success(_):
                 println("Register Success: got \(result.value)")
-                self.dataProvider.auth(username: username, password: password, completion: completion)
+            }
+        }
+        
+        let getSpecProfileCompletion: (OperationResult<UserProfile>)->Void = { result in
+            switch result {
+            case .Failure(let error):
+                println(error)
+            case .Success(_):
+                println("Get profile Success: got \(result.value)")
+            }
+        }
+
+        let getProfileCompletion: (OperationResult<UserProfile>)->Void = { result in
+            switch result {
+            case .Failure(let error):
+                println(error)
+            case .Success(_):
+                println("Get profile Success: got \(result.value)")
+                self.api.get(self.token!, objectID: result.value.objectId, completion: getSpecProfileCompletion)
             }
         }
         
         
-        
-        dataProvider.createProfile(username: username, password: password, completion: createCompletion)
-        
+        let authCompletion: (OperationResult<APIService.AuthResponse>)->Void = { result in
+            switch result {
+            case .Failure(let error):
+                println(error)
+            case .Success(_):
+                let auth = result.value
+                println("Auth Success: got \(auth)")
+                self.token = auth.accessToken
+
+                self.api.get(self.token!, objectID: nil, completion: getProfileCompletion)
+            }
+        }
+
+
+        //api.createProfile(username: username, password: password, completion: createCompletion)
+        api.auth(username: username, password: password, completion: authCompletion)
         
         
         if let sidebarViewController = window?.rootViewController as? SidebarViewController {
