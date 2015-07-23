@@ -9,7 +9,7 @@
 import UIKit
 import PosInCore
 import Alamofire
-
+import BrightFutures
 
 
 @UIApplicationMain
@@ -19,14 +19,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     let api: APIService
-    var token: String?
     
     override init() {
         let baseURL = NSURL(string: "http://45.63.7.39:8080")!
         api = APIService(url: baseURL)
         super.init()
     }
-
+/*
     func updateUserProfile(profile: UserProfile) {
         var newProfile = profile
         newProfile.firstName = "Alex"
@@ -74,13 +73,42 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         api.post(token!, object: post, completion: completion)
     }
+    */
+    
+    func runAPI(token: String) {
+        api.get(token, objectID: nil).onSuccess { (profile: UserProfile) -> Void in
+            println(profile)
+        }
+
+        api.get(token, objectID: nil).flatMap { (profile: UserProfile) -> Future<Void,NSError> in
+            var newProfile = profile
+            newProfile.firstName = "Alex"
+            newProfile.middleName = "The"
+            newProfile.lastName = "Great"
+            return self.api.update(token, object: newProfile)
+        }.flatMap { ( _: Void ) -> Future<UserProfile,NSError> in
+                return self.api.get(token, objectID: nil)
+        }.onSuccess { profile in
+                println(profile)
+        }.onFailure { error in
+            println(error)
+        }        
+    }
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
+        
         let username = "ios-777@bekitzur.com"
         let password = "pwd"
+
         
-        
+        api.auth(username: username, password: password).onSuccess { response in
+            println("Auth success")
+            self.runAPI(response.accessToken)
+        }.onFailure { error in
+            println(error)
+        }
+        /*
         let createCompletion: (OperationResult<Bool>)->Void = { result in
             switch result {
             case .Failure(let error):
@@ -101,24 +129,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
         
-        
-        let authCompletion: (OperationResult<APIService.AuthResponse>)->Void = { result in
-            switch result {
-            case .Failure(let error):
-                println(error)
-            case .Success(_):
-                let auth = result.value
-                println("Auth Success: got \(auth)")
-                self.token = auth.accessToken
 
-                self.api.get(self.token!, objectID: nil, completion: getProfileCompletion)
-            }
-        }
 
 
         //api.createProfile(username: username, password: password, completion: createCompletion)
         api.auth(username: username, password: password, completion: authCompletion)
-        
+        */
         
         if let sidebarViewController = window?.rootViewController as? SidebarViewController {
             let defaultAction: SidebarViewController.Action = .ForYou

@@ -12,6 +12,9 @@ import ObjectMapper
 struct UserProfile: CRUDObject {
     private(set) var objectId: CRUDObjectId
     var firstName: NSString?
+    var middleName: NSString?
+    var lastName: NSString?
+    var location: Location?
     
     init?(_ map: Map) {
         mapping(map)
@@ -27,6 +30,9 @@ struct UserProfile: CRUDObject {
     mutating func mapping(map: Map) {
         objectId <- map["id"]
         firstName <- map["firstName"]
+        middleName <- map["middleName"]
+        lastName <- map["lastName"]
+        location <- map["location"]
     }
     
     static func endpoint() -> String {
