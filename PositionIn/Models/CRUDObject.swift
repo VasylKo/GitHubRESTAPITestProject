@@ -17,5 +17,5 @@ protocol CRUDObject: Mappable {
 
     var objectId: CRUDObjectId { get }
     
-    static func endpoint() -> String
+    static func endpoint() -> String    
 }

@@ -91,7 +91,6 @@
 		E6A869E91B60013A00797D16 /* PositionIn.ListProductCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6A869E81B60013A00797D16 /* PositionIn.ListProductCell.xib */; };
 		E6A869EC1B60D3E300797D16 /* APIService+Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A869EB1B60D3E300797D16 /* APIService+Auth.swift */; };
 		E6A869EE1B60D42C00797D16 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A869ED1B60D42C00797D16 /* APIService.swift */; };
-		E6A869F01B60FA2700797D16 /* APIService+Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A869EF1B60FA2700797D16 /* APIService+Profile.swift */; };
 		E6A869F21B60FF0500797D16 /* CRUDObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A869F11B60FF0500797D16 /* CRUDObject.swift */; };
 		E6A869F41B60FF2100797D16 /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A869F31B60FF2100797D16 /* UserProfile.swift */; };
 		E6AC64541B5EBC29007D7952 /* UIScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6AC64531B5EBC29007D7952 /* UIScheme.swift */; };
@@ -218,7 +217,6 @@
 		E6A869E81B60013A00797D16 /* PositionIn.ListProductCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.ListProductCell.xib; sourceTree = "<group>"; };
 		E6A869EB1B60D3E300797D16 /* APIService+Auth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "APIService+Auth.swift"; sourceTree = "<group>"; };
 		E6A869ED1B60D42C00797D16 /* APIService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
-		E6A869EF1B60FA2700797D16 /* APIService+Profile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "APIService+Profile.swift"; sourceTree = "<group>"; };
 		E6A869F11B60FF0500797D16 /* CRUDObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CRUDObject.swift; sourceTree = "<group>"; };
 		E6A869F31B60FF2100797D16 /* UserProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
 		E6AC64531B5EBC29007D7952 /* UIScheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIScheme.swift; sourceTree = "<group>"; };
@@ -515,7 +513,6 @@
 			children = (
 				E6A869ED1B60D42C00797D16 /* APIService.swift */,
 				E6A869EB1B60D3E300797D16 /* APIService+Auth.swift */,
-				E6A869EF1B60FA2700797D16 /* APIService+Profile.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -871,7 +868,6 @@
 				E62B16FF1B5CE0F800D446BC /* BesideMenuViewController.swift in Sources */,
 				E660E52D1B5AC23B00F52050 /* MainMenuViewController.swift in Sources */,
 				E6AC64561B5EC5B1007D7952 /* AddMenuView.swift in Sources */,
-				E6A869F01B60FA2700797D16 /* APIService+Profile.swift in Sources */,
 				E6A869F41B60FF2100797D16 /* UserProfile.swift in Sources */,
 				E62B17061B5CE3EB00D446BC /* BrowseViewController.swift in Sources */,
 				E6A869EE1B60D42C00797D16 /* APIService.swift in Sources */,

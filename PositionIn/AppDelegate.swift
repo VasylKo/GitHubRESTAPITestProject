@@ -56,15 +56,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
         
-        let getSpecProfileCompletion: (OperationResult<UserProfile>)->Void = { result in
-            switch result {
-            case .Failure(let error):
-                println(error)
-            case .Success(_):
-                println("Get profile Success: got \(result.value)")
-                self.updateUserProfile(result.value)
-            }
-        }
 
         let getProfileCompletion: (OperationResult<UserProfile>)->Void = { result in
             switch result {
@@ -72,7 +63,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 println(error)
             case .Success(_):
                 println("Get profile Success: got \(result.value)")
-                self.api.get(self.token!, objectID: result.value.objectId, completion: getSpecProfileCompletion)
+                self.updateUserProfile(result.value)
             }
         }
         

@@ -14,6 +14,11 @@ import ObjectMapper
 
 struct APIService {
     
+    func getAll<C: CRUDObject>(token: String, endpoint: String, completion: (OperationResult<[C]>)->Void) {
+        let request = crudRequest(token, endpoint: endpoint, method: .GET, params: nil)
+        dataProvider.arrayRequest(request, completion: completion)
+    }
+    
     func get<C: CRUDObject>(token: String, objectID: CRUDObjectId?, completion: (OperationResult<C>)->Void) {
         let request = crudRequest(token, endpoint: C.endpoint().stringByAppendingPathComponent(objectID ?? ""), method: .GET, params: nil)
         dataProvider.objectRequest(request, completion: completion)
@@ -23,6 +28,12 @@ struct APIService {
         let request = crudRequest(token, endpoint: C.endpoint().stringByAppendingPathComponent(object.objectId), method: .PUT, params: Mapper().toJSON(object))
         dataProvider.jsonRequest(request, map: emptyResponseMapping(), completion: completion).validate(statusCode: [204])
     }
+    
+    func update(token: String, object: UserProfile,  completion: (OperationResult<Void>)->Void) {
+        let request = crudRequest(token, endpoint: UserProfile.endpoint(), method: .PUT, params: Mapper().toJSON(object))
+        dataProvider.jsonRequest(request, map: emptyResponseMapping(), completion: completion).validate(statusCode: [204])
+    }
+
     
     func post<C: CRUDObject>(token: String, object: C,  completion: (OperationResult<Void>)->Void) {
         let request = crudRequest(token, endpoint: C.endpoint(), method: .POST, params: Mapper().toJSON(object))
@@ -65,7 +76,7 @@ struct APIService {
         return  { response in
             if let json = response as? NSDictionary {
                 if let errorMessage = json["message"] as? String {
-                    println("Error: \(errorMessage)")
+                    println("Server Error: \(errorMessage)")
                 } else {
                     println("Got unexpected answer: \(json)")
                 }
