@@ -10,16 +10,20 @@ import Foundation
 import PosInCore
 import Alamofire
 import ObjectMapper
+import BrightFutures
 
 extension APIService {
         
     
-    func auth(#username: String, password: String, completion: (OperationResult<AuthResponse>)->Void) {
-        dataProvider.objectRequest(AuthRouter.Auth(api: self, username: username, password: password), completion: completion)
+    func auth(#username: String, password: String) -> Future<AuthResponse, NSError> {
+        let (_, future): (Alamofire.Request, Future<AuthResponse, NSError>) = dataProvider.objectRequest(AuthRouter.Auth(api: self, username: username, password: password))
+        return future
     }
     
-    func createProfile(#username: String, password: String, completion: (OperationResult<Bool>)->Void) {
-        dataProvider.jsonRequest(AuthRouter.Register(api: self, username: username, password: password), map: emptyResponseMapping(), completion: completion).validate(statusCode: [201])
+    func createProfile(#username: String, password: String) -> Future<Void, NSError> {
+        let (request, future): (Alamofire.Request, Future<Void, NSError>) = dataProvider.jsonRequest(AuthRouter.Register(api: self, username: username, password: password), map: emptyResponseMapping())
+        request.validate(statusCode: [201])
+        return future    
     }
     
     

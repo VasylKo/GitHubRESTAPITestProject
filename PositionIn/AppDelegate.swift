@@ -9,7 +9,7 @@
 import UIKit
 import PosInCore
 import Alamofire
-
+import BrightFutures
 
 
 @UIApplicationMain
@@ -19,7 +19,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     let api: APIService
-    var token: String?
     
     override init() {
         let baseURL = NSURL(string: "http://45.63.7.39:8080")!
@@ -27,98 +26,55 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         super.init()
     }
 
-    func updateUserProfile(profile: UserProfile) {
-        var newProfile = profile
-        newProfile.firstName = "Alex"
-
+    
+    func runProfileAPI(token: String) {
         
-        let updateCompletion: (OperationResult<Void>)->Void = { result in
-            switch result {
-            case .Failure(let error):
-                println(error)
-            case .Success(_):
-                println("Update Success")
-                self.getUserPosts(newProfile)
-            }
+        api.get(token, objectID: nil).flatMap { (profile: UserProfile) -> Future<Void,NSError> in
+            var newProfile = profile
+            newProfile.firstName = "Alex"
+            newProfile.middleName = "The"
+            newProfile.lastName = "Great"
+            return self.api.update(token, object: newProfile)
+        }.flatMap { ( _: Void ) -> Future<UserProfile,NSError> in
+                return self.api.get(token, objectID: nil)
+        }.onSuccess { profile in
+                println(profile)
+            self.runPostsAPI(token, user: profile)
+        }.onFailure { error in
+            println(error)
         }
-        api.update(token!, object: newProfile, completion: updateCompletion)
     }
     
-    func getUserPosts(user: UserProfile) {
-        let completion: (OperationResult<CollectionResponse<Post>>)->Void = { [weak self] result in
-            switch result {
-            case .Failure(let error):
-                println(error)
-            case .Success(_):
-                println("Get posts Success")
-                println(result.value)
-                self?.createPost()
-            }
-        }
-        
-        api.getAll(token!, endpoint: Post.allEndpoint(user.objectId), completion: completion)
-    }
-    
-    func createPost() {
+    func runPostsAPI(token: String, user: UserProfile) {
         var post = Post(objectId: "234")
-        post.name = "Post Name"
-        post.text = "Post text"
+        post.name = "Cool post"
+        post.text = "Big Post text"
         
-        let completion: (OperationResult<Void>)->Void = { [weak self] result in
-            switch result {
-            case .Failure(let error):
+        
+        api.post(token, object: post).flatMap { ( _: Void ) -> Future<CollectionResponse<Post>, NSError> in
+            return self.api.getAll(token, endpoint: Post.allEndpoint(user.objectId))
+        }.onSuccess { response in
+            println(response.items)
+        }.onFailure { error in
                 println(error)
-            case .Success(_):
-                println("Create post Success: got \(result.value)")
-            }
         }
-        api.post(token!, object: post, completion: completion)
     }
+    
+    
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
+        
         let username = "ios-777@bekitzur.com"
         let password = "pwd"
+
         
-        
-        let createCompletion: (OperationResult<Bool>)->Void = { result in
-            switch result {
-            case .Failure(let error):
-                println(error)
-            case .Success(_):
-                println("Register Success: got \(result.value)")
-            }
+        api.auth(username: username, password: password).onSuccess { response in
+            println("Auth success")
+            self.runProfileAPI(response.accessToken)
+        }.onFailure { error in
+            println(error)
         }
-        
-
-        let getProfileCompletion: (OperationResult<UserProfile>)->Void = { result in
-            switch result {
-            case .Failure(let error):
-                println(error)
-            case .Success(_):
-                println("Get profile Success: got \(result.value)")
-                self.updateUserProfile(result.value)
-            }
-        }
-        
-        
-        let authCompletion: (OperationResult<APIService.AuthResponse>)->Void = { result in
-            switch result {
-            case .Failure(let error):
-                println(error)
-            case .Success(_):
-                let auth = result.value
-                println("Auth Success: got \(auth)")
-                self.token = auth.accessToken
-
-                self.api.get(self.token!, objectID: nil, completion: getProfileCompletion)
-            }
-        }
-
-
-        //api.createProfile(username: username, password: password, completion: createCompletion)
-        api.auth(username: username, password: password, completion: authCompletion)
-        
         
         if let sidebarViewController = window?.rootViewController as? SidebarViewController {
             let defaultAction: SidebarViewController.Action = .ForYou

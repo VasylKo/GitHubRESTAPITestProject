@@ -6,6 +6,7 @@ use_frameworks!
 target 'PositionIn' do
     pod 'Alamofire'
     pod 'ObjectMapper'
+    pod 'BrightFutures', '~> 2.0.1'
     
     pod 'HanekeSwift'
     pod 'KYDrawerController'
@@ -18,5 +19,6 @@ end
 target 'PosInCore' do
     pod 'Alamofire'
     pod 'ObjectMapper'
+    pod 'BrightFutures', '~> 2.0.1'
 end
 

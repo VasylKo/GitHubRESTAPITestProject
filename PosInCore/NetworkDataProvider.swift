@@ -9,61 +9,57 @@
 import Foundation
 import Alamofire
 import ObjectMapper
+import BrightFutures
+import Box
 
 public class NetworkDataProvider: NSObject {
     
     /**
-    Execute request and parse single object
+    Create request for mappable object
     
     :param: URLRequest The URL request
-    :param: completion Completion block
     
-    :returns: The created request
+    :returns: Tuple with request and future
     */
     public func objectRequest<T: Mappable>(
-        URLRequest: Alamofire.URLRequestConvertible,
-        completion: (OperationResult<T>)->Void
-        ) -> Alamofire.Request {
+        URLRequest: Alamofire.URLRequestConvertible
+        ) -> (Alamofire.Request, Future<T, NSError>) {
             let mapping: AnyObject? -> T? = { json in
                 return Mapper<T>().map(json)
             }
-            return jsonRequest(URLRequest, map: mapping, completion: completion)
+            return jsonRequest(URLRequest, map: mapping)
     }
     
     /**
-    Execute request and parse multiple objects
+    Create request for multiple mappable objects
     
     :param: URLRequest The URL request
-    :param: completion Completion block
     
-    :returns: The created request
+    :returns: Tuple with request and future
     */
     public func arrayRequest<T: Mappable>(
-        URLRequest: Alamofire.URLRequestConvertible,
-        completion: (OperationResult<[T]>)->Void
-        ) -> Alamofire.Request {
+        URLRequest: Alamofire.URLRequestConvertible
+        ) -> (Alamofire.Request, Future<T, NSError>) {
             let mapping: AnyObject? -> [T]? = { json in
                 return Mapper<T>().mapArray((json))
             }
-            return jsonRequest(URLRequest, map: mapping, completion: completion)
+            return jsonRequest(URLRequest, map: mapping)
     }
     
     /**
-    Execute request and parse response
+    Create request with JSON mapping
     
     :param: URLRequest The URL request
     :param: map        Response mapping function
-    :param: completion Completion block
     
-    :returns: The created request
+    :returns: Tuple with request and future
     */
     public  func jsonRequest<U,V>(
         URLRequest: Alamofire.URLRequestConvertible,
-        map: AnyObject?->U?,
-        completion: (OperationResult<V>)->Void
-        ) -> Alamofire.Request {
+        map: AnyObject?->U?
+        ) -> (Alamofire.Request, Future<V, NSError>) {
             let serializer = Alamofire.Request.CustomResponseSerializer(map)
-            return request(URLRequest, serializer: serializer, completion: completion)
+            return request(URLRequest, serializer: serializer)
     }
     
     /**
@@ -96,31 +92,31 @@ public class NetworkDataProvider: NSObject {
     private let activityIndicator = NetworkActivityIndicatorManager()
     
     /**
-    Execute request and parse response
+    Create request with serializer
     
     :param: URLRequest The URL request
     :param: serializer Response serializer
-    :param: completion Completion block
     
-    :returns: The created request
+    :returns: Tuple with request and future
     */
     private func request<V>(
         URLRequest: Alamofire.URLRequestConvertible,
-        serializer: Alamofire.Request.Serializer,
-        completion: (OperationResult<V>)->Void
-        ) -> Alamofire.Request {
+        serializer: Alamofire.Request.Serializer
+        ) -> (Alamofire.Request, Future<V, NSError>) {
+            let p = Promise<V, NSError>()
+        
             activityIndicator.increment()
-            return request(URLRequest).response(serializer: serializer) {
+            let request = self.request(URLRequest).response(queue: Queue.global.underlyingQueue, serializer: serializer) {
                 [unowned self] (request, response, object, error) in
                 self.activityIndicator.decrement()
                 if let object = object as? Box<V> {
-                    completion(.Success(object))
+                    p.success(object.value)
                 } else {
-                    completion(failure(error ?? ErrorCodes.InvalidResponseError.error()))
+                    p.failure(error ?? ErrorCodes.InvalidResponseError.error())
                 }
             }
+        return (request, p.future)
     }
-    
     
     private func request(URLRequest: Alamofire.URLRequestConvertible) -> Alamofire.Request {
         let request = manager.request(URLRequest).validate()
