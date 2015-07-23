@@ -8,49 +8,53 @@
 
 import UIKit
 import PosInCore
+import Alamofire
 
-struct TestAPI: APIService {
-    func http(endpoint: String) -> String {
-        return "http://google.com"
-    }
-    func https(endpoint: String) -> String {
-        return "https://api.github.com/users/0111b"
-    }
-    
-    var description: String {
-        return "TestAPI"
-    }
-}
+
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
+
+
+    let dataProvider: NetworkDataProvider
     
-    let dataProvider = NetworkDataProvider(api: TestAPI())
+    override init() {
+        let baseURL = NSURL(string: "http://45.63.7.39:8080")!
+        dataProvider = NetworkDataProvider(api: API(url: baseURL))
+        super.init()
+    }
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
-        let mapping: AnyObject? -> Int? = { json in
-            let dict = json as? NSDictionary
-            let number = dict?["id"] as? NSNumber
-            return number?.integerValue
-        }
-
-        let url = NSURL(string: dataProvider.apiService.https(""))
-        let request = NSURLRequest(URL: url!)
-
+        let username = "ios@bekitzur.com"
+        let password = "pwd"
         
-        let completion: (OperationResult<Int>)->Void = { result in
+        
+        let completion: (OperationResult<NetworkDataProvider.AuthResponse>)->Void = { result in
             switch result {
             case .Failure(let error):
                 println(error)
             case .Success(_):
-                println("Success: got \(result.value)")
+                println("Auth Success: got \(result.value)")
             }
         }
         
-        dataProvider.jsonRequest(request, map: mapping, completion: completion)
+        let createCompletion: (OperationResult<Bool>)->Void = { result in
+            switch result {
+            case .Failure(let error):
+                println(error)
+            case .Success(_):
+                println("Register Success: got \(result.value)")
+                self.dataProvider.auth(username: username, password: password, completion: completion)
+            }
+        }
+        
+        
+        
+        dataProvider.createProfile(username: username, password: password, completion: createCompletion)
+        
         
         
         if let sidebarViewController = window?.rootViewController as? SidebarViewController {

@@ -51,7 +51,7 @@ extension BrowseListViewController {
         }
         
         override func tableView(tableView: UITableView, modelForIndexPath indexPath: NSIndexPath) -> TableViewCellModel {
-            return TableViewCellTextModel(title: "Sample text")
+            return TableViewCellTextModel(title: "\(Float(indexPath.row) / 100.0) miles")
         }
         
         override func nibCellsId() -> [String] {

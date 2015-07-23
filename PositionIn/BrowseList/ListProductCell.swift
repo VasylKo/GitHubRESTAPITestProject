@@ -15,8 +15,8 @@ class ListProductCell: TableViewCell {
 
     @IBOutlet private weak var productImage: UIImageView!
     @IBOutlet private weak var headerLabel: UILabel!
-    @IBOutlet private weak var infoLabel: UILabel!
     @IBOutlet private weak var detailsLabel: UILabel!
+    @IBOutlet private weak var infoLabel: UILabel!
     
     override func setModel(model: TableViewCellModel) {
         let m = model as? TableViewCellTextModel
@@ -26,6 +26,7 @@ class ListProductCell: TableViewCell {
             productImage.hnk_setImageFromURL(url, placeholder: UIImage(named: "MainMenuForYou"))
         }
         
+        infoLabel.text = m!.title
     }
     
     override func prepareForReuse() {

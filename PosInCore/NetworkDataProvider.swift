@@ -129,21 +129,21 @@ public class NetworkDataProvider: NSObject {
 */
 public protocol APIService: Printable {
     /**
-    Returns http request string
+    Returns http request url
     
     :param: endpoint       endpoint
     
-    :returns: url string
+    :returns: url
     */
-    func http(endpoint: String) -> String
+    func http(endpoint: String) -> NSURL
     /**
-    Returns http request string
+    Returns http request url
     
     :param: endpoint       endpoint
     
-    :returns: url string
+    :returns: url
     */
-    func https(endpoint: String) -> String
+    func https(endpoint: String) -> NSURL
 }
 
 
