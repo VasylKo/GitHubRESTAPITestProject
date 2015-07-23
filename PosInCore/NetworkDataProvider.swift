@@ -109,7 +109,7 @@ public class NetworkDataProvider: NSObject {
             let p = Promise<V, NSError>()
         
             activityIndicator.increment()
-            let request = self.request(URLRequest).response(serializer: serializer) {
+            let request = self.request(URLRequest).response(queue: Queue.global.underlyingQueue, serializer: serializer) {
                 [unowned self] (request, response, object, error) in
                 self.activityIndicator.decrement()
                 if let object = object as? Box<V> {
