@@ -11,9 +11,8 @@ import ObjectMapper
 
 typealias CRUDObjectId = String!
 
-protocol CRUDObject: Mappable {
-    
-    
+protocol CRUDObject: Mappable, Printable {
+        
 
     var objectId: CRUDObjectId { get }
     

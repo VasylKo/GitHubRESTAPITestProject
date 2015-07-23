@@ -1,5 +1,5 @@
 //
-//  UserProfile.swift
+//  Post.swift
 //  PositionIn
 //
 //  Created by Alexandr Goncharov on 23/07/15.
@@ -9,9 +9,8 @@
 import Foundation
 import ObjectMapper
 
-struct UserProfile: CRUDObject {
+struct Post: CRUDObject {
     private(set) var objectId: CRUDObjectId
-    var firstName: NSString?
     
     init?(_ map: Map) {
         mapping(map)
@@ -23,18 +22,16 @@ struct UserProfile: CRUDObject {
             return nil
         }
     }
-    
+
     mutating func mapping(map: Map) {
         objectId <- map["id"]
-        firstName <- map["firstName"]
     }
     
     static func endpoint() -> String {
-        return "/v1.0/user"
+        return "/v1.0/post"
     }
     
     var description: String {
         return "<\(self.dynamicType):\(objectId)>"
     }
-    
 }

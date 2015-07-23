@@ -14,9 +14,9 @@ import ObjectMapper
 
 struct APIService {
     
-    func getAll<C: CRUDObject>(token: String, endpoint: String, completion: (OperationResult<[C]>)->Void) {
+    func getAll<C: CRUDObject>(token: String, endpoint: String, completion: (OperationResult<CollectionResponse<C>>)->Void) {
         let request = crudRequest(token, endpoint: endpoint, method: .GET, params: nil)
-        dataProvider.arrayRequest(request, completion: completion)
+        dataProvider.objectRequest(request, completion: completion)
     }
     
     func get<C: CRUDObject>(token: String, objectID: CRUDObjectId?, completion: (OperationResult<C>)->Void) {
@@ -103,4 +103,24 @@ struct APIService {
     
     private let baseURL: NSURL
     let dataProvider: NetworkDataProvider
+}
+
+struct CollectionResponse<C: CRUDObject>: Mappable {
+    private(set) var items: [C]?
+    
+    init?(_ map: Map) {
+        mapping(map)
+        switch (items) {
+        case (.Some):
+            break
+        default:
+            println("Error while parsing object \(self)")
+            return nil
+        }
+    }
+    
+    mutating func mapping(map: Map) {
+        items <- map["data"]
+    }
+
 }

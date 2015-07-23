@@ -28,17 +28,34 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func updateUserProfile(profile: UserProfile) {
+        var newProfile = profile
+        newProfile.firstName = "Alex"
+
+        
         let updateCompletion: (OperationResult<Void>)->Void = { result in
             switch result {
             case .Failure(let error):
                 println(error)
             case .Success(_):
                 println("Update Success")
+                self.getUserPosts(newProfile)
             }
         }
-        var newProfile = profile
-        newProfile.firstName = "Alex"
         api.update(token!, object: newProfile, completion: updateCompletion)
+    }
+    
+    func getUserPosts(user: UserProfile) {
+        let completion: (OperationResult<CollectionResponse<Post>>)->Void = { [weak self] result in
+            switch result {
+            case .Failure(let error):
+                println(error)
+            case .Success(_):
+                println("Get posts Success")
+                println(result.value.items)
+            }
+        }
+        
+        api.getAll(token!, endpoint: "/v1.0/user/[user_profile_id]/posts", completion: completion)
     }
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
