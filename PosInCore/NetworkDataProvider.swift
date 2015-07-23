@@ -11,35 +11,6 @@ import Alamofire
 import ObjectMapper
 
 public class NetworkDataProvider: NSObject {
-    /**
-    Execute request and parse response
-    
-    :param: URLRequest The URL request
-    :param: map        Response mapping function
-    :param: completion Completion block
-    
-    :returns: The created request
-    */
-    public  func jsonRequest<U,V>(
-        URLRequest: Alamofire.URLRequestConvertible,
-        map: AnyObject?->U?,
-        completion: (OperationResult<V>)->Void
-        ) -> Alamofire.Request {
-            
-            let serializer = Alamofire.Request.CustomResponseSerializer(map)
-            activityIndicator.increment()
-            let r = request(URLRequest).response(serializer: serializer, completionHandler: {
-                [unowned self] (request, response, object, error) in
-                self.activityIndicator.decrement()
-                if let object = object as? Box<V> {
-                    completion(.Success(object))
-                } else {
-                    completion(failure(error ?? ErrorCodes.InvalidResponseError.error()))
-                }
-                })
-            
-            return r
-    }
     
     /**
     Execute request and parse single object
@@ -76,11 +47,24 @@ public class NetworkDataProvider: NSObject {
             }
             return jsonRequest(URLRequest, map: mapping, completion: completion)
     }
-
     
-    /// Used API
-    public let apiService: APIService
+    /**
+    Execute request and parse response
     
+    :param: URLRequest The URL request
+    :param: map        Response mapping function
+    :param: completion Completion block
+    
+    :returns: The created request
+    */
+    public  func jsonRequest<U,V>(
+        URLRequest: Alamofire.URLRequestConvertible,
+        map: AnyObject?->U?,
+        completion: (OperationResult<V>)->Void
+        ) -> Alamofire.Request {
+            let serializer = Alamofire.Request.CustomResponseSerializer(map)
+            return request(URLRequest, serializer: serializer, completion: completion)
+    }
     
     /**
     Designated initializer
@@ -91,29 +75,54 @@ public class NetworkDataProvider: NSObject {
     :returns: new instance
     */
     public init(
-        api: APIService,
         configuration: NSURLSessionConfiguration = NSURLSessionConfiguration.defaultSessionConfiguration()
         ) {
-            apiService = api
             manager = Alamofire.Manager(configuration: configuration)
     }
     
     /// Singleton instance
-//    public class var sharedInstance: NetworkDataProvider {
-//        struct Static {
-//            static var onceToken: dispatch_once_t = 0
-//            static var instance: NetworkDataProvider? = nil
-//        }
-//        dispatch_once(&Static.onceToken) {
-//            Static.instance = NetworkDataProvider(api: .Dev)
-//        }
-//        return Static.instance!
-//    }
+    public class var sharedInstance: NetworkDataProvider {
+        struct Static {
+            static var onceToken: dispatch_once_t = 0
+            static var instance: NetworkDataProvider? = nil
+        }
+        dispatch_once(&Static.onceToken) {
+            Static.instance = NetworkDataProvider()
+        }
+        return Static.instance!
+    }
 
     private let manager: Alamofire.Manager
     private let activityIndicator = NetworkActivityIndicatorManager()
     
-    internal func request(URLRequest: Alamofire.URLRequestConvertible) -> Alamofire.Request {
+    /**
+    Execute request and parse response
+    
+    :param: URLRequest The URL request
+    :param: serializer Response serializer
+    :param: completion Completion block
+    
+    :returns: The created request
+    */
+    private func request<V>(
+        URLRequest: Alamofire.URLRequestConvertible,
+        serializer: Alamofire.Request.Serializer,
+        completion: (OperationResult<V>)->Void
+        ) -> Alamofire.Request {
+            activityIndicator.increment()
+            return request(URLRequest).response(serializer: serializer) {
+                [unowned self] (request, response, object, error) in
+                self.activityIndicator.decrement()
+                if let object = object as? Box<V> {
+                    completion(.Success(object))
+                } else {
+                    completion(failure(error ?? ErrorCodes.InvalidResponseError.error()))
+                }
+            }
+    }
+    
+    
+    private func request(URLRequest: Alamofire.URLRequestConvertible) -> Alamofire.Request {
         let request = manager.request(URLRequest).validate()
         
         #if DEBUG
@@ -122,28 +131,6 @@ public class NetworkDataProvider: NSObject {
         
         return request
     }
-}
-
-/**
- Protocol that wrap url generation
-*/
-public protocol APIService: Printable {
-    /**
-    Returns http request url
-    
-    :param: endpoint       endpoint
-    
-    :returns: url
-    */
-    func http(endpoint: String) -> NSURL
-    /**
-    Returns http request url
-    
-    :param: endpoint       endpoint
-    
-    :returns: url
-    */
-    func https(endpoint: String) -> NSURL
 }
 
 

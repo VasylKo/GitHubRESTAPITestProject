@@ -70,6 +70,8 @@
 		E64DC3571B4E53C90011D37C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E64DC3561B4E53C90011D37C /* Images.xcassets */; };
 		E64DC35A1B4E53C90011D37C /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = E64DC3581B4E53C90011D37C /* LaunchScreen.xib */; };
 		E64DC3661B4E53CA0011D37C /* PositionInTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64DC3651B4E53CA0011D37C /* PositionInTests.swift */; };
+		E65E872C1B611BA200AE444D /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = E65E872B1B611BA200AE444D /* Post.swift */; };
+		E65E87301B611FE700AE444D /* CollectionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = E65E872F1B611FE700AE444D /* CollectionResponse.swift */; };
 		E660E52D1B5AC23B00F52050 /* MainMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E660E52B1B5AC23B00F52050 /* MainMenuViewController.swift */; };
 		E660E52E1B5AC23B00F52050 /* PositionIn.MainMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E660E52C1B5AC23B00F52050 /* PositionIn.MainMenuViewController.xib */; };
 		E660E5301B5AC28600F52050 /* MainMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E660E52F1B5AC28600F52050 /* MainMenuCell.swift */; };
@@ -89,8 +91,10 @@
 		E6A869E51B6000C800797D16 /* PositionIn.BrowseMapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6A869E11B6000C800797D16 /* PositionIn.BrowseMapViewController.xib */; };
 		E6A869E71B60012500797D16 /* ListProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A869E61B60012500797D16 /* ListProductCell.swift */; };
 		E6A869E91B60013A00797D16 /* PositionIn.ListProductCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6A869E81B60013A00797D16 /* PositionIn.ListProductCell.xib */; };
-		E6A869EC1B60D3E300797D16 /* NetworkDataProvider+Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A869EB1B60D3E300797D16 /* NetworkDataProvider+Auth.swift */; };
+		E6A869EC1B60D3E300797D16 /* APIService+Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A869EB1B60D3E300797D16 /* APIService+Auth.swift */; };
 		E6A869EE1B60D42C00797D16 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A869ED1B60D42C00797D16 /* APIService.swift */; };
+		E6A869F21B60FF0500797D16 /* CRUDObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A869F11B60FF0500797D16 /* CRUDObject.swift */; };
+		E6A869F41B60FF2100797D16 /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A869F31B60FF2100797D16 /* UserProfile.swift */; };
 		E6AC64541B5EBC29007D7952 /* UIScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6AC64531B5EBC29007D7952 /* UIScheme.swift */; };
 		E6AC64561B5EC5B1007D7952 /* AddMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6AC64551B5EC5B1007D7952 /* AddMenuView.swift */; };
 		E6D7C2921B5D546C004F3AA9 /* NibView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D7C2911B5D546C004F3AA9 /* NibView.swift */; };
@@ -190,6 +194,8 @@
 		E64DC3641B4E53CA0011D37C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E64DC3651B4E53CA0011D37C /* PositionInTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PositionInTests.swift; sourceTree = "<group>"; };
 		E64DC36F1B4E54330011D37C /* PositionIn-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PositionIn-Bridging-Header.h"; sourceTree = "<group>"; };
+		E65E872B1B611BA200AE444D /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		E65E872F1B611FE700AE444D /* CollectionResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionResponse.swift; sourceTree = "<group>"; };
 		E660E52B1B5AC23B00F52050 /* MainMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuViewController.swift; sourceTree = "<group>"; };
 		E660E52C1B5AC23B00F52050 /* PositionIn.MainMenuViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.MainMenuViewController.xib; sourceTree = "<group>"; };
 		E660E52F1B5AC28600F52050 /* MainMenuCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuCell.swift; sourceTree = "<group>"; };
@@ -213,8 +219,10 @@
 		E6A869E11B6000C800797D16 /* PositionIn.BrowseMapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.BrowseMapViewController.xib; sourceTree = "<group>"; };
 		E6A869E61B60012500797D16 /* ListProductCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListProductCell.swift; sourceTree = "<group>"; };
 		E6A869E81B60013A00797D16 /* PositionIn.ListProductCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.ListProductCell.xib; sourceTree = "<group>"; };
-		E6A869EB1B60D3E300797D16 /* NetworkDataProvider+Auth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NetworkDataProvider+Auth.swift"; sourceTree = "<group>"; };
+		E6A869EB1B60D3E300797D16 /* APIService+Auth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "APIService+Auth.swift"; sourceTree = "<group>"; };
 		E6A869ED1B60D42C00797D16 /* APIService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
+		E6A869F11B60FF0500797D16 /* CRUDObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CRUDObject.swift; sourceTree = "<group>"; };
+		E6A869F31B60FF2100797D16 /* UserProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
 		E6AC64531B5EBC29007D7952 /* UIScheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIScheme.swift; sourceTree = "<group>"; };
 		E6AC64551B5EC5B1007D7952 /* AddMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddMenuView.swift; sourceTree = "<group>"; };
 		E6D7C2911B5D546C004F3AA9 /* NibView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NibView.swift; sourceTree = "<group>"; };
@@ -442,6 +450,9 @@
 		E660E5251B5AB82000F52050 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				E6A869F11B60FF0500797D16 /* CRUDObject.swift */,
+				E6A869F31B60FF2100797D16 /* UserProfile.swift */,
+				E65E872B1B611BA200AE444D /* Post.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -506,7 +517,8 @@
 			isa = PBXGroup;
 			children = (
 				E6A869ED1B60D42C00797D16 /* APIService.swift */,
-				E6A869EB1B60D3E300797D16 /* NetworkDataProvider+Auth.swift */,
+				E6A869EB1B60D3E300797D16 /* APIService+Auth.swift */,
+				E65E872F1B611FE700AE444D /* CollectionResponse.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -862,19 +874,23 @@
 				E62B16FF1B5CE0F800D446BC /* BesideMenuViewController.swift in Sources */,
 				E660E52D1B5AC23B00F52050 /* MainMenuViewController.swift in Sources */,
 				E6AC64561B5EC5B1007D7952 /* AddMenuView.swift in Sources */,
+				E6A869F41B60FF2100797D16 /* UserProfile.swift in Sources */,
+				E65E87301B611FE700AE444D /* CollectionResponse.swift in Sources */,
 				E62B17061B5CE3EB00D446BC /* BrowseViewController.swift in Sources */,
 				E6A869EE1B60D42C00797D16 /* APIService.swift in Sources */,
 				E6A869E21B6000C800797D16 /* BrowseListViewController.swift in Sources */,
 				E6829B041B5E6CF800FB1E1D /* RoundButton.swift in Sources */,
 				E62B16F61B5C1AA700D446BC /* MainMenuUserCell.swift in Sources */,
 				E64DC3501B4E53C90011D37C /* AppDelegate.swift in Sources */,
+				E65E872C1B611BA200AE444D /* Post.swift in Sources */,
 				E62B16FB1B5CDF0100D446BC /* MessagesListViewController.swift in Sources */,
 				E6A869E71B60012500797D16 /* ListProductCell.swift in Sources */,
 				E6AC64541B5EBC29007D7952 /* UIScheme.swift in Sources */,
 				E6A869DB1B5FD1E100797D16 /* BrowseTabbar.swift in Sources */,
 				E62B16F81B5C6BBF00D446BC /* AvatarView.swift in Sources */,
 				E6325F651B57D89A00996480 /* SidebarViewController.swift in Sources */,
-				E6A869EC1B60D3E300797D16 /* NetworkDataProvider+Auth.swift in Sources */,
+				E6A869F21B60FF0500797D16 /* CRUDObject.swift in Sources */,
+				E6A869EC1B60D3E300797D16 /* APIService+Auth.swift in Sources */,
 				E6A869E41B6000C800797D16 /* BrowseMapViewController.swift in Sources */,
 				E660E5301B5AC28600F52050 /* MainMenuCell.swift in Sources */,
 			);

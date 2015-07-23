@@ -18,28 +18,68 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
 
-    let dataProvider: NetworkDataProvider
+    let api: APIService
+    var token: String?
     
     override init() {
         let baseURL = NSURL(string: "http://45.63.7.39:8080")!
-        dataProvider = NetworkDataProvider(api: API(url: baseURL))
+        api = APIService(url: baseURL)
         super.init()
     }
 
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+    func updateUserProfile(profile: UserProfile) {
+        var newProfile = profile
+        newProfile.firstName = "Alex"
+
         
-        let username = "ios@bekitzur.com"
-        let password = "pwd"
-        
-        
-        let completion: (OperationResult<NetworkDataProvider.AuthResponse>)->Void = { result in
+        let updateCompletion: (OperationResult<Void>)->Void = { result in
             switch result {
             case .Failure(let error):
                 println(error)
             case .Success(_):
-                println("Auth Success: got \(result.value)")
+                println("Update Success")
+                self.getUserPosts(newProfile)
             }
         }
+        api.update(token!, object: newProfile, completion: updateCompletion)
+    }
+    
+    func getUserPosts(user: UserProfile) {
+        let completion: (OperationResult<CollectionResponse<Post>>)->Void = { [weak self] result in
+            switch result {
+            case .Failure(let error):
+                println(error)
+            case .Success(_):
+                println("Get posts Success")
+                println(result.value)
+                self?.createPost()
+            }
+        }
+        
+        api.getAll(token!, endpoint: Post.allEndpoint(user.objectId), completion: completion)
+    }
+    
+    func createPost() {
+        var post = Post(objectId: "234")
+        post.name = "Post Name"
+        post.text = "Post text"
+        
+        let completion: (OperationResult<Void>)->Void = { [weak self] result in
+            switch result {
+            case .Failure(let error):
+                println(error)
+            case .Success(_):
+                println("Create post Success: got \(result.value)")
+            }
+        }
+        api.post(token!, object: post, completion: completion)
+    }
+    
+    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        
+        let username = "ios-777@bekitzur.com"
+        let password = "pwd"
+        
         
         let createCompletion: (OperationResult<Bool>)->Void = { result in
             switch result {
@@ -47,14 +87,37 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 println(error)
             case .Success(_):
                 println("Register Success: got \(result.value)")
-                self.dataProvider.auth(username: username, password: password, completion: completion)
+            }
+        }
+        
+
+        let getProfileCompletion: (OperationResult<UserProfile>)->Void = { result in
+            switch result {
+            case .Failure(let error):
+                println(error)
+            case .Success(_):
+                println("Get profile Success: got \(result.value)")
+                self.updateUserProfile(result.value)
             }
         }
         
         
-        
-        dataProvider.createProfile(username: username, password: password, completion: createCompletion)
-        
+        let authCompletion: (OperationResult<APIService.AuthResponse>)->Void = { result in
+            switch result {
+            case .Failure(let error):
+                println(error)
+            case .Success(_):
+                let auth = result.value
+                println("Auth Success: got \(auth)")
+                self.token = auth.accessToken
+
+                self.api.get(self.token!, objectID: nil, completion: getProfileCompletion)
+            }
+        }
+
+
+        //api.createProfile(username: username, password: password, completion: createCompletion)
+        api.auth(username: username, password: password, completion: authCompletion)
         
         
         if let sidebarViewController = window?.rootViewController as? SidebarViewController {

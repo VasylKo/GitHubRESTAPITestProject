@@ -11,31 +11,23 @@ import PosInCore
 import Alamofire
 import ObjectMapper
 
-extension NetworkDataProvider {
+extension APIService {
         
     
     func auth(#username: String, password: String, completion: (OperationResult<AuthResponse>)->Void) {
-        objectRequest(AuthRouter.Auth(api: apiService, username: username, password: password), completion: completion)
+        dataProvider.objectRequest(AuthRouter.Auth(api: self, username: username, password: password), completion: completion)
     }
     
     func createProfile(#username: String, password: String, completion: (OperationResult<Bool>)->Void) {
-        let mapping: AnyObject? -> Bool? = { response in
-            if let json = response as? NSDictionary {
-                println(json)
-                return true
-            }
-            return false
-        }
-        jsonRequest(AuthRouter.Create(api: apiService, username: username, password: password), map: mapping, completion: completion).validate(statusCode: [201])
+        dataProvider.jsonRequest(AuthRouter.Register(api: self, username: username, password: password), map: emptyResponseMapping(), completion: completion).validate(statusCode: [201])
     }
     
     
     private enum AuthRouter: URLRequestConvertible {
         case Auth(api: APIService, username: String, password: String)
-        case Create(api: APIService, username: String, password: String)
+        case Register(api: APIService, username: String, password: String)
 
-    // MARK: URLRequestConvertible
-        
+        // MARK: URLRequestConvertible
         var URLRequest: NSURLRequest {
             let encoding: Alamofire.ParameterEncoding
             let url:  NSURL
@@ -46,22 +38,24 @@ extension NetworkDataProvider {
             switch self {
             case .Auth(let api, let username, let password):
                 encoding = .URL
-                url = api.https("/oauth/token")
+                url = api.http("/oauth/token")
                 params = [
                     "scope" : "read write",
                     "grant_type" : "password",
                     "username" : username,
                     "password" : password,
                 ]
-                let credentialData = "\(username):\(password)".dataUsingEncoding(NSUTF8StringEncoding)!
+                let clientId = "11111111111111111111111111111111"
+                let clientSecret = "22222222222222222222222222222222"
+                let credentialData = "\(clientId):\(clientSecret)".dataUsingEncoding(NSUTF8StringEncoding)!
                 let base64Credentials = credentialData.base64EncodedStringWithOptions(nil)
                 headers = [
                     "Authorization": "Basic \(base64Credentials)",
                     "Accept" : "application/json",
                 ]
-            case .Create(let api, let username, let password):
+            case .Register(let api, let username, let password):
                 encoding = .JSON
-                url = api.https("/v1.0/user")
+                url = api.http("/v1.0/user")
                 headers = [:]
                 params = [
                     "email" : username,
@@ -77,9 +71,9 @@ extension NetworkDataProvider {
     }
     
     struct AuthResponse: Mappable {
-        private(set) var accessToken: String?
-        private(set) var refreshToken: String?
-        private(set) var expires: Int?
+        private(set) var accessToken: String!
+        private(set) var refreshToken: String!
+        private(set) var expires: Int!
         
         init?(_ map: Map) {
             mapping(map)
