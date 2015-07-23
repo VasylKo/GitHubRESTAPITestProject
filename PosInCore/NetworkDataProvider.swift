@@ -15,12 +15,11 @@ import Box
 public class NetworkDataProvider: NSObject {
     
     /**
-    Execute request and parse single object
+    Create request for mappable object
     
     :param: URLRequest The URL request
-    :param: completion Completion block
     
-    :returns: The created request
+    :returns: Tuple with request and future
     */
     public func objectRequest<T: Mappable>(
         URLRequest: Alamofire.URLRequestConvertible
@@ -32,12 +31,11 @@ public class NetworkDataProvider: NSObject {
     }
     
     /**
-    Execute request and parse multiple objects
+    Create request for multiple mappable objects
     
     :param: URLRequest The URL request
-    :param: completion Completion block
     
-    :returns: The created request
+    :returns: Tuple with request and future
     */
     public func arrayRequest<T: Mappable>(
         URLRequest: Alamofire.URLRequestConvertible
@@ -49,13 +47,12 @@ public class NetworkDataProvider: NSObject {
     }
     
     /**
-    Execute request and parse response
+    Create request with JSON mapping
     
     :param: URLRequest The URL request
     :param: map        Response mapping function
-    :param: completion Completion block
     
-    :returns: The created request
+    :returns: Tuple with request and future
     */
     public  func jsonRequest<U,V>(
         URLRequest: Alamofire.URLRequestConvertible,
@@ -100,7 +97,7 @@ public class NetworkDataProvider: NSObject {
     :param: URLRequest The URL request
     :param: serializer Response serializer
     
-    :returns: TUple with request and future
+    :returns: Tuple with request and future
     */
     private func request<V>(
         URLRequest: Alamofire.URLRequestConvertible,
