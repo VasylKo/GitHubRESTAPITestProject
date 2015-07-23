@@ -10,6 +10,7 @@ import Foundation
 import Alamofire
 import ObjectMapper
 import BrightFutures
+import Box
 
 public class NetworkDataProvider: NSObject {
     
@@ -22,13 +23,12 @@ public class NetworkDataProvider: NSObject {
     :returns: The created request
     */
     public func objectRequest<T: Mappable>(
-        URLRequest: Alamofire.URLRequestConvertible,
-        completion: (OperationResult<T>)->Void
-        ) -> Alamofire.Request {
+        URLRequest: Alamofire.URLRequestConvertible
+        ) -> (Alamofire.Request, Future<T, NSError>) {
             let mapping: AnyObject? -> T? = { json in
                 return Mapper<T>().map(json)
             }
-            return jsonRequest(URLRequest, map: mapping, completion: completion)
+            return jsonRequest(URLRequest, map: mapping)
     }
     
     /**
@@ -40,13 +40,12 @@ public class NetworkDataProvider: NSObject {
     :returns: The created request
     */
     public func arrayRequest<T: Mappable>(
-        URLRequest: Alamofire.URLRequestConvertible,
-        completion: (OperationResult<[T]>)->Void
-        ) -> Alamofire.Request {
+        URLRequest: Alamofire.URLRequestConvertible
+        ) -> (Alamofire.Request, Future<T, NSError>) {
             let mapping: AnyObject? -> [T]? = { json in
                 return Mapper<T>().mapArray((json))
             }
-            return jsonRequest(URLRequest, map: mapping, completion: completion)
+            return jsonRequest(URLRequest, map: mapping)
     }
     
     /**
@@ -60,11 +59,10 @@ public class NetworkDataProvider: NSObject {
     */
     public  func jsonRequest<U,V>(
         URLRequest: Alamofire.URLRequestConvertible,
-        map: AnyObject?->U?,
-        completion: (OperationResult<V>)->Void
-        ) -> Alamofire.Request {
+        map: AnyObject?->U?
+        ) -> (Alamofire.Request, Future<V, NSError>) {
             let serializer = Alamofire.Request.CustomResponseSerializer(map)
-            return request(URLRequest, serializer: serializer, completion: completion)
+            return request(URLRequest, serializer: serializer)
     }
     
     /**
@@ -97,28 +95,13 @@ public class NetworkDataProvider: NSObject {
     private let activityIndicator = NetworkActivityIndicatorManager()
     
     /**
-    Execute request and parse response
+    Create request with serializer
     
     :param: URLRequest The URL request
     :param: serializer Response serializer
-    :param: completion Completion block
     
-    :returns: The created request
+    :returns: TUple with request and future
     */
-    private func request<V>(
-        URLRequest: Alamofire.URLRequestConvertible,
-        serializer: Alamofire.Request.Serializer,
-        completion: (OperationResult<V>)->Void
-        ) -> Alamofire.Request {
-            let (request, future):(Alamofire.Request, Future<V, NSError>)  = self.request(URLRequest, serializer: serializer)
-            future.onSuccess(callback: { v in
-                completion(success(v))
-            }).onFailure(callback: { error in
-                completion(failure(error))
-            })
-            return request
-    }
-    
     private func request<V>(
         URLRequest: Alamofire.URLRequestConvertible,
         serializer: Alamofire.Request.Serializer
@@ -130,7 +113,7 @@ public class NetworkDataProvider: NSObject {
                 [unowned self] (request, response, object, error) in
                 self.activityIndicator.decrement()
                 if let object = object as? Box<V> {
-                    p.success(object.unbox)
+                    p.success(object.value)
                 } else {
                     p.failure(error ?? ErrorCodes.InvalidResponseError.error())
                 }

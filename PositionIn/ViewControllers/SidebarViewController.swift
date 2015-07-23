@@ -9,6 +9,7 @@
 import UIKit
 import KYDrawerController
 import PosInCore
+import Box
 
 class SidebarViewController: KYDrawerController {
     enum Action  {
@@ -55,7 +56,7 @@ class SidebarViewController: KYDrawerController {
                 if let navigationController = segue.destinationViewController as? UINavigationController,
                    let browseController = navigationController.topViewController as? BrowseViewController,
                    let mode = sender as? Box<(BrowseViewController.DisplayMode, BrowseViewController.BrowseMode)> {
-                    let (displayMode, browseMode) = mode.unbox
+                    let (displayMode, browseMode) = mode.value
                         browseController.displayMode = displayMode
                         browseController.browseMode = browseMode
                 }
