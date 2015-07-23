@@ -9,6 +9,7 @@
 import Foundation
 import Alamofire
 import ObjectMapper
+import BrightFutures
 
 public class NetworkDataProvider: NSObject {
     
@@ -109,18 +110,33 @@ public class NetworkDataProvider: NSObject {
         serializer: Alamofire.Request.Serializer,
         completion: (OperationResult<V>)->Void
         ) -> Alamofire.Request {
+            let (request, future):(Alamofire.Request, Future<V, NSError>)  = self.request(URLRequest, serializer: serializer)
+            future.onSuccess(callback: { v in
+                completion(success(v))
+            }).onFailure(callback: { error in
+                completion(failure(error))
+            })
+            return request
+    }
+    
+    private func request<V>(
+        URLRequest: Alamofire.URLRequestConvertible,
+        serializer: Alamofire.Request.Serializer
+        ) -> (Alamofire.Request, Future<V, NSError>) {
+            let p = Promise<V, NSError>()
+        
             activityIndicator.increment()
-            return request(URLRequest).response(serializer: serializer) {
+            let request = self.request(URLRequest).response(serializer: serializer) {
                 [unowned self] (request, response, object, error) in
                 self.activityIndicator.decrement()
                 if let object = object as? Box<V> {
-                    completion(.Success(object))
+                    p.success(object.unbox)
                 } else {
-                    completion(failure(error ?? ErrorCodes.InvalidResponseError.error()))
+                    p.failure(error ?? ErrorCodes.InvalidResponseError.error())
                 }
             }
+        return (request, p.future)
     }
-    
     
     private func request(URLRequest: Alamofire.URLRequestConvertible) -> Alamofire.Request {
         let request = manager.request(URLRequest).validate()
