@@ -27,6 +27,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         super.init()
     }
 
+    func updateUserProfile(profile: UserProfile) {
+        let updateCompletion: (OperationResult<Void>)->Void = { result in
+            switch result {
+            case .Failure(let error):
+                println(error)
+            case .Success(_):
+                println("Update Success")
+            }
+        }
+        var newProfile = profile
+        newProfile.firstName = "Alex"
+        api.update(token!, object: newProfile, completion: updateCompletion)
+    }
+    
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
         let username = "ios-777@bekitzur.com"
@@ -48,6 +62,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 println(error)
             case .Success(_):
                 println("Get profile Success: got \(result.value)")
+                self.updateUserProfile(result.value)
             }
         }
 

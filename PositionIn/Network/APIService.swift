@@ -15,54 +15,31 @@ import ObjectMapper
 struct APIService {
     
     func get<C: CRUDObject>(token: String, objectID: CRUDObjectId?, completion: (OperationResult<C>)->Void) {
-        let endpoint = C.endpoint().stringByAppendingPathComponent(objectID ?? "")
+        let request = crudRequest(token, endpoint: C.endpoint().stringByAppendingPathComponent(objectID ?? ""), method: .GET, params: nil)
+        dataProvider.objectRequest(request, completion: completion)
+    }
+    
+    func update<C: CRUDObject>(token: String, object: C,  completion: (OperationResult<Void>)->Void) {
+        let request = crudRequest(token, endpoint: C.endpoint().stringByAppendingPathComponent(object.objectId), method: .PUT, params: Mapper().toJSON(object))
+        dataProvider.jsonRequest(request, map: emptyResponseMapping(), completion: completion).validate(statusCode: [204])
+    }
+    
+    func post<C: CRUDObject>(token: String, object: C,  completion: (OperationResult<Void>)->Void) {
+        let request = crudRequest(token, endpoint: C.endpoint(), method: .POST, params: Mapper().toJSON(object))
+        dataProvider.jsonRequest(request, map: emptyResponseMapping(), completion: completion).validate(statusCode: [201])
+    }
+    
+    private func crudRequest(token: String, endpoint: String, method: Alamofire.Method, params: [String : AnyObject]?) -> NSURLRequest {
         let url = self.http(endpoint)
         let headers: [String : AnyObject] = [
             "Authorization": "Bearer \(token)",
             "Accept" : "application/json",
         ]
-        let method: Alamofire.Method = .GET
-        let request = NSMutableURLRequest(URL: url)
-        request.HTTPMethod = method.rawValue
-        request.allHTTPHeaderFields = headers
-        
-        dataProvider.objectRequest(request, completion: completion)
-    }
-    
-    func update<C: CRUDObject>(token: String, object: C,  completion: (OperationResult<Void>)->Void) {
-        let url = self.http(C.endpoint().stringByAppendingPathComponent(object.objectId))
-        let headers: [String : AnyObject] = [
-            "Authorization": "Bearer \(token)",
-            "Accept" : "application/json",
-        ]
-        let params = Mapper().toJSON(object)
-        let method: Alamofire.Method = .PUT
-        let request: NSURLRequest = {
-           let r = NSMutableURLRequest(URL: url)
-            r.HTTPMethod = method.rawValue
-            r.allHTTPHeaderFields = headers
-            let encoding = Alamofire.ParameterEncoding.JSON
-            return encoding.encode(r, parameters: params).0
-        }()
-        dataProvider.jsonRequest(request, map: emptyResponseMapping(), completion: completion).validate(statusCode: [204])
-    }
-    
-    func post<C: CRUDObject>(token: String, object: C,  completion: (OperationResult<Void>)->Void) {
-        let url = self.http(C.endpoint())
-        let headers: [String : AnyObject] = [
-            "Authorization": "Bearer \(token)",
-            "Accept" : "application/json",
-        ]
-        let params = Mapper().toJSON(object)
-        let method: Alamofire.Method = .POST
-        let request: NSURLRequest = {
-            let r = NSMutableURLRequest(URL: url)
-            r.HTTPMethod = method.rawValue
-            r.allHTTPHeaderFields = headers
-            let encoding = Alamofire.ParameterEncoding.JSON
-            return encoding.encode(r, parameters: params).0
-            }()
-        dataProvider.jsonRequest(request, map: emptyResponseMapping(), completion: completion).validate(statusCode: [201])
+        let r = NSMutableURLRequest(URL: url)
+        r.HTTPMethod = method.rawValue
+        r.allHTTPHeaderFields = headers
+        let encoding = Alamofire.ParameterEncoding.JSON
+        return encoding.encode(r, parameters: params).0
     }
     
     
