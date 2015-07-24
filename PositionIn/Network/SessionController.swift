@@ -11,6 +11,7 @@ import PosInCore
 import KeychainAccess
 import BrightFutures
 import Result
+import CleanroomLogger
 
 struct SessionController {
     
@@ -21,9 +22,20 @@ struct SessionController {
                 where expirationDate.compare(NSDate()) == NSComparisonResult.OrderedDescending {
                     return Result(value: token)
             }
-            let errorCode = NetworkDataProvider.ErrorCodes.InvalidRequestError
+            Log.warning?.trace()
+            let errorCode = NetworkDataProvider.ErrorCodes.InvalidSessionError
             return Result(error: errorCode.error())
         }
+    }
+    
+    func setAuth(authResponse: APIService.AuthResponse) {
+        Log.info?.message("Auth changed")
+        Log.debug?.value(authResponse)
+        let keychain = self.keychain
+        keychain[KeychainKeys.accessTokenKey] = authResponse.accessToken
+        keychain[KeychainKeys.refreshTokenKey] = authResponse.refreshToken
+        let expiresIn = NSDate(timeIntervalSinceNow: NSTimeInterval(authResponse.expires!))
+        keychain.set(NSKeyedArchiver.archivedDataWithRootObject(expiresIn), key: KeychainKeys.ExpireDateKey)
     }
     
     private var accessToken: String? {
@@ -41,22 +53,11 @@ struct SessionController {
         return nil
     }
     
-
-    func setAuth(authResponse: APIService.AuthResponse) {
-        let keychain = self.keychain
-        keychain[KeychainKeys.accessTokenKey] = authResponse.accessToken
-        keychain[KeychainKeys.refreshTokenKey] = authResponse.refreshToken
-        let expiresIn = NSDate(timeIntervalSinceNow: NSTimeInterval(authResponse.expires!))
-        keychain.set(NSKeyedArchiver.archivedDataWithRootObject(expiresIn), key: KeychainKeys.ExpireDateKey)
-    }
-    
-
     private var keychain: Keychain {
-        return Keychain(service: KeychainKeys.serviceName)
+        return Keychain()
     }
 
     private struct KeychainKeys {
-        static let serviceName =  NSBundle.mainBundle().bundleIdentifier!
         static let accessTokenKey = "at"
         static let refreshTokenKey = "rt"
         static let ExpireDateKey = "ed"

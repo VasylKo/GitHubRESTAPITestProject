@@ -15,6 +15,11 @@ import CleanroomLogger
 
 extension APIService {
         
+    func logout() -> Future<Void, NoError> {
+        return future {
+            self.sessionController.setAuth(AuthResponse.invalidAuth())
+        }
+    }
     
     func auth(#username: String, password: String) -> Future<AuthResponse, NSError> {
         let (_, future): (Alamofire.Request, Future<AuthResponse, NSError>) = dataProvider.objectRequest(AuthRouter.Auth(api: self, username: username, password: password))
@@ -80,7 +85,7 @@ extension APIService {
         }
     }
     
-    struct AuthResponse: Mappable {
+    struct AuthResponse: Mappable, DebugPrintable {
         typealias Token = String!
         private(set) var accessToken: Token
         private(set) var refreshToken: Token
@@ -109,6 +114,10 @@ extension APIService {
             accessToken <- map["access_token"]
             refreshToken <- map["refresh_token"]
             expires <- map["expires_in"]
+        }
+        
+        var debugDescription: String {
+            return "Access:\(accessToken), Refresh: \(refreshToken), Expires: \(expires)"
         }
         
         static func invalidAuth() -> AuthResponse {
