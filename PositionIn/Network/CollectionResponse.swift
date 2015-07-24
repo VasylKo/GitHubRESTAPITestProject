@@ -6,8 +6,8 @@
 //  Copyright (c) 2015 Soluna Labs. All rights reserved.
 //
 
-import Foundation
 import ObjectMapper
+import CleanroomLogger
 
 struct CollectionResponse<C: CRUDObject>: Mappable {
     private(set) var items: [C]!
@@ -18,7 +18,9 @@ struct CollectionResponse<C: CRUDObject>: Mappable {
         case (.Some):
             break
         default:
-            println("Error while parsing object \(self)")
+            Log.error?.message("Error while parsing object")
+            Log.debug?.trace()
+            Log.verbose?.value(self)
             return nil
         }
     }

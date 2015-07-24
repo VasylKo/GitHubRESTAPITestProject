@@ -8,6 +8,7 @@
 
 import UIKit
 import PosInCore
+import CleanroomLogger
 
 class BrowseViewController: BesideMenuViewController {
     
@@ -91,7 +92,7 @@ class BrowseViewController: BesideMenuViewController {
     private weak var currentModeViewController: UIViewController?
     
     private func applyDisplayMode(mode: DisplayMode) {
-        println("\(self.dynamicType) Apply display mode: \(mode)")
+        Log.verbose?.message("\(self.dynamicType) Apply display mode: \(mode)")
         parentViewController?.view.endEditing(true)
         if let currentController = currentModeViewController {
             currentController.willMoveToParentViewController(nil)
@@ -129,7 +130,7 @@ class BrowseViewController: BesideMenuViewController {
     static let BrowseModeDidchangeNotification = "BrowseModeDidchangeNotification"
     
     private func applyBrowseMode(mode: BrowseMode) {
-        println("\(self.dynamicType) Apply browse mode: \(mode)")
+        Log.verbose?.message("\(self.dynamicType) Apply browse mode: \(mode)")
         tabbar.selectedMode = mode
         NSNotificationCenter.defaultCenter().postNotificationName(
             BrowseViewController.BrowseModeDidchangeNotification,
@@ -177,25 +178,25 @@ extension BrowseViewController {
                 title: NSLocalizedString("PRODUCT",comment: "Add menu: PRODUCT"),
                 icon: UIImage(named: "AddProduct")!,
                 color: UIScheme.productAddMenuColor,
-                action: {println("Product")}
+                action: {Log.debug?.message("Product")}
             ),
             AddMenuView.MenuItem(
                 title: NSLocalizedString("EVENT",comment: "Add menu: EVENT"),
                 icon: UIImage(named: "AddEvent")!,
                 color: UIScheme.eventAddMenuColor,
-                action: {println("Event")}
+                action: {Log.debug?.message("Event")}
             ),
             AddMenuView.MenuItem(
                 title: NSLocalizedString("PROMOTION",comment: "Add menu: PROMOTION"),
                 icon: UIImage(named: "AddPromotion")!,
                 color: UIScheme.promotionAddMenuColor,
-                action: {println("Promotion")}
+                action: {Log.debug?.message("Promotion")}
             ),
             AddMenuView.MenuItem(
                 title: NSLocalizedString("INVITE",comment: "Add menu: INVITE"),
                 icon: UIImage(named: "AddFriend")!,
                 color: UIScheme.inviteAddMenuColor,
-                action: {println("invite")}
+                action: {Log.debug?.message("invite")}
             ),
         ])
         addMenu.delegate = self

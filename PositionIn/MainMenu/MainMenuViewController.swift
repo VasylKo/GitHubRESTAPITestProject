@@ -8,6 +8,7 @@
 
 import UIKit
 import PosInCore
+import CleanroomLogger
 
 class MainMenuViewController: UIViewController {
 
@@ -128,7 +129,7 @@ class MainMenuViewController: UIViewController {
         
         func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
             let item = items[indexPath.row]
-            println("\(self.dynamicType) Select item: \(item.title)")
+            Log.debug?.message("\(self.dynamicType) Select item: \(item.title)")
             parentViewController?.sideBarController?.executeAction(item.action)
         }
         

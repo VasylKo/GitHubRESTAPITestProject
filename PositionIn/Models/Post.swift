@@ -6,8 +6,8 @@
 //  Copyright (c) 2015 Soluna Labs. All rights reserved.
 //
 
-import Foundation
 import ObjectMapper
+import CleanroomLogger
 
 struct Post: CRUDObject {
     private(set) var objectId: CRUDObjectId
@@ -25,7 +25,9 @@ struct Post: CRUDObject {
         case (.Some):
             break
         default:
-            println("Error while parsing object \(self)")
+            Log.error?.message("Error while parsing object")
+            Log.debug?.trace()
+            Log.verbose?.value(self)
             return nil
         }
     }

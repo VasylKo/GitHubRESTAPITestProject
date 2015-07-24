@@ -11,6 +11,7 @@ import PosInCore
 import Alamofire
 import ObjectMapper
 import BrightFutures
+import CleanroomLogger
 
 extension APIService {
         
@@ -91,7 +92,9 @@ extension APIService {
             case (.Some, .Some, .Some):
                 break
             default:
-                println("Error while parsing object \(self)")
+                Log.error?.message("Error while parsing object")
+                Log.debug?.trace()
+                Log.verbose?.value(self)
                 return nil
             }
         }
