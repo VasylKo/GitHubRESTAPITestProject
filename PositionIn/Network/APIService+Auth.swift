@@ -96,12 +96,21 @@ extension APIService {
             }
         }
         
+        private init(accessToken: Token, refreshToken: Token, expires: Int) {
+            self.accessToken = accessToken
+            self.refreshToken = refreshToken
+            self.expires = expires
+        }
+        
         mutating func mapping(map: Map) {
             accessToken <- map["access_token"]
             refreshToken <- map["refresh_token"]
             expires <- map["expires_in"]
         }
         
+        static func invalidAuth() -> AuthResponse {
+            return  AuthResponse(accessToken: "",refreshToken: "",expires: -1)
+        }
     }
 }
 
