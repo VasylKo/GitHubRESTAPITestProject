@@ -103,6 +103,8 @@
 		E6B3C3301B62581200EA613A /* CleanroomASL.framework in Embed Core Framework */ = {isa = PBXBuildFile; fileRef = E6B3C32D1B62581200EA613A /* CleanroomASL.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E6B3C3311B62581200EA613A /* CleanroomLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6B3C32E1B62581200EA613A /* CleanroomLogger.framework */; };
 		E6B3C3321B62581200EA613A /* CleanroomLogger.framework in Embed Core Framework */ = {isa = PBXBuildFile; fileRef = E6B3C32E1B62581200EA613A /* CleanroomLogger.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E6B3C3341B625F0D00EA613A /* CleanroomASL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6B3C32D1B62581200EA613A /* CleanroomASL.framework */; };
+		E6B3C3351B625F0D00EA613A /* CleanroomLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6B3C32E1B62581200EA613A /* CleanroomLogger.framework */; };
 		E6D7C2921B5D546C004F3AA9 /* NibView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D7C2911B5D546C004F3AA9 /* NibView.swift */; };
 		E6D7C2971B5D5B3B004F3AA9 /* PositionIn.SearchBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6D7C2951B5D5B3B004F3AA9 /* PositionIn.SearchBar.xib */; };
 		E6D7C2981B5D5B3B004F3AA9 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D7C2961B5D5B3B004F3AA9 /* SearchBar.swift */; };
@@ -249,6 +251,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				73062B70D53770174B21763D /* Pods_PosInCore.framework in Frameworks */,
+				E6B3C3341B625F0D00EA613A /* CleanroomASL.framework in Frameworks */,
+				E6B3C3351B625F0D00EA613A /* CleanroomLogger.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -565,6 +569,7 @@
 				E6325FA21B57F36E00996480 /* Headers */,
 				E6325FA31B57F36E00996480 /* Resources */,
 				12C1C59754A0BBDAC6250E1C /* Copy Pods Resources */,
+				E6B3C3361B625F1D00EA613A /* Strip Cleanroom framework */,
 			);
 			buildRules = (
 			);
@@ -867,6 +872,20 @@
 			shellPath = /bin/sh;
 			shellScript = $PROJECT_DIR/Carthage/Checkouts/CleanroomLogger/BuildControl/bin/stripCarthageFrameworks.sh;
 		};
+		E6B3C3361B625F1D00EA613A /* Strip Cleanroom framework */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Strip Cleanroom framework";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = $PROJECT_DIR/Carthage/Checkouts/CleanroomLogger/BuildControl/bin/stripCarthageFrameworks.sh;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -1013,6 +1032,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -1042,6 +1065,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = PosInCore/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
