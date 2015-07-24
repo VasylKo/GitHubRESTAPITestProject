@@ -7,17 +7,38 @@
 //
 
 import Foundation
+import PosInCore
 import KeychainAccess
+import BrightFutures
+import Result
 
 struct SessionController {
     
+    func session() -> Future<APIService.AuthResponse.Token ,NSError> {
+        return future { () -> Result<APIService.AuthResponse.Token ,NSError> in
+            if  let token = self.accessToken,
+                let expirationDate = self.expiresIn
+                where expirationDate.compare(NSDate()) == NSComparisonResult.OrderedDescending {
+                    return Result(value: token)
+            }
+            let errorCode = NetworkDataProvider.ErrorCodes.InvalidRequestError
+            return Result(error: errorCode.error())
+        }
+    }
     
-    var accessToken: String? {
+    private var accessToken: String? {
         return keychain[KeychainKeys.accessTokenKey]
     }
     
-    var refreshToken: String? {
+    private var refreshToken: String? {
         return keychain[KeychainKeys.refreshTokenKey]
+    }
+    
+    private var expiresIn: NSDate? {
+        if let data = keychain.getData(KeychainKeys.ExpireDateKey) {
+            return NSKeyedUnarchiver.unarchiveObjectWithData(data) as? NSDate
+        }
+        return nil
     }
     
 

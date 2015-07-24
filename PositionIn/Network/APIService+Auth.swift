@@ -78,8 +78,9 @@ extension APIService {
     }
     
     struct AuthResponse: Mappable {
-        private(set) var accessToken: String!
-        private(set) var refreshToken: String!
+        typealias Token = String!
+        private(set) var accessToken: Token
+        private(set) var refreshToken: Token
         private(set) var expires: Int!
         
         init?(_ map: Map) {

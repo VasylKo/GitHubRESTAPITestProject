@@ -167,10 +167,10 @@ extension NetworkDataProvider {
     - InvalidResponseError: Invalid response error
     - ParsingError:    Response Parsing error
     */
-    enum ErrorCodes: Int {
+    public enum ErrorCodes: Int {
         static let errorDomain = "com.bekitzur.Network"
         
-        case UnknownError, InvalidRequestError, TransferError, InvalidResponseError, ParsingError
+        case UnknownError, InvalidRequestError, TransferError, InvalidResponseError, ParsingError, InvalidSessionError
         
         /**
         Converting Error code to the NSError
@@ -179,7 +179,7 @@ extension NetworkDataProvider {
         
         :returns: NSError instance
         */
-        func error(underlyingError: NSError? = nil) -> NSError {
+        public func error(underlyingError: NSError? = nil) -> NSError {
             let description = NSString(format: NSLocalizedString("Network error: %@", comment: "Localized network error description"),
                 self.reason)
             var userInfo: [NSObject : AnyObject] = [
@@ -204,6 +204,8 @@ extension NetworkDataProvider {
                 return NSLocalizedString("ParsingError", comment: "Parsing error")
             case .TransferError:
                 return NSLocalizedString("TransferError", comment: "Data transfer error")
+            case .InvalidSessionError:
+                return NSLocalizedString("InvalidSessionError", comment: "Session error")
             case .UnknownError:
                 fallthrough
             default:

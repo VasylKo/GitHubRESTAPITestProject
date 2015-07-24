@@ -110,6 +110,7 @@ struct APIService {
     }
     
     private let baseURL: NSURL
+//TODO: make private
     internal let dataProvider: NetworkDataProvider
     internal let sessionController: SessionController
     
