@@ -92,7 +92,7 @@ class BrowseViewController: BesideMenuViewController {
     private weak var currentModeViewController: UIViewController?
     
     private func applyDisplayMode(mode: DisplayMode) {
-        Log.verbose?.message("\(self.dynamicType) Apply display mode: \(mode)")
+        Log.verbose?.message("Apply display mode: \(mode)")
         parentViewController?.view.endEditing(true)
         if let currentController = currentModeViewController {
             currentController.willMoveToParentViewController(nil)
@@ -130,7 +130,7 @@ class BrowseViewController: BesideMenuViewController {
     static let BrowseModeDidchangeNotification = "BrowseModeDidchangeNotification"
     
     private func applyBrowseMode(mode: BrowseMode) {
-        Log.verbose?.message("\(self.dynamicType) Apply browse mode: \(mode)")
+        Log.verbose?.message("Apply browse mode: \(mode)")
         tabbar.selectedMode = mode
         NSNotificationCenter.defaultCenter().postNotificationName(
             BrowseViewController.BrowseModeDidchangeNotification,

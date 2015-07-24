@@ -129,7 +129,7 @@ class MainMenuViewController: UIViewController {
         
         func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
             let item = items[indexPath.row]
-            Log.debug?.message("\(self.dynamicType) Select item: \(item.title)")
+            Log.debug?.message("Select menu item: \(item.title)")
             parentViewController?.sideBarController?.executeAction(item.action)
         }
         
