@@ -21,6 +21,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let api: APIService
     
     override init() {
+        #if DEBUG
+        Log.enable(minimumSeverity: .Verbose, synchronousMode: true)
+        #else
+        Log.enable(minimumSeverity: .Info, synchronousMode: false)
+        #endif
         let baseURL = NSURL(string: "http://45.63.7.39:8080")!
         api = APIService(url: baseURL)
         super.init()
@@ -38,10 +43,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }.flatMap { ( _: Void ) -> Future<UserProfile,NSError> in
                 return self.api.get(nil)
         }.onSuccess { profile in
-                println(profile)
+            Log.info?.value(profile)
             self.runPostsAPI(profile)
         }.onFailure { error in
-            println(error)
+            Log.error?.value(error)
         }
     }
     
@@ -53,16 +58,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         api.post(post).flatMap { ( _: Void ) -> Future<CollectionResponse<Post>, NSError> in
             return self.api.getAll(Post.allEndpoint(user.objectId))
         }.onSuccess { response in
-            println(response.items)
+            Log.info?.value(response.items)
         }.onFailure { error in
-                println(error)
+            Log.error?.value(error)
         }
     }
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
 
         api.sessionController.session().recoverWith { (error: NSError) -> Future<APIService.AuthResponse.Token ,NSError>  in
-            println(error)
+            Log.error?.value(error)
             let username = "ios-777@bekitzur.com"
             let password = "pwd"
             return self.api.auth(username: username, password: password).map { response in
@@ -71,7 +76,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }.onSuccess { _ in
             self.runProfileAPI()
         }.onFailure { error in
-            println(error)
+            Log.error?.value(error)
         }
         
         if let sidebarViewController = window?.rootViewController as? SidebarViewController {

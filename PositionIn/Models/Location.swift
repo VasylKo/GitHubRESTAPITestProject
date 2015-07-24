@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Soluna Labs. All rights reserved.
 //
 
-import Foundation
+import CleanroomLogger
 import ObjectMapper
 
 struct Location: Mappable, Printable {
@@ -26,7 +26,9 @@ struct Location: Mappable, Printable {
         case (.Some, .Some):
             break
         default:
-            println("Error while parsing object \(self)")
+            Log.error?.message("Error while parsing object")
+            Log.debug?.trace()
+            Log.verbose?.value(self)
             return nil
         }
     }

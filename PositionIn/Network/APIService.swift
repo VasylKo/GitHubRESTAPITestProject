@@ -11,7 +11,7 @@ import PosInCore
 import Alamofire
 import ObjectMapper
 import BrightFutures
-
+import CleanroomLogger
 
 struct APIService {
     
@@ -99,9 +99,10 @@ struct APIService {
         return  { response in
             if let json = response as? NSDictionary {
                 if let errorMessage = json["message"] as? String {
-                    println("Server Error: \(errorMessage)")
+                    Log.error?.message("Server Error: \(errorMessage)")
                 } else {
-                    println("Got unexpected answer: \(json)")
+                    Log.error?.message("Got unexpected answer")
+                    Log.debug?.value(json)
                 }
                 return nil
             }
