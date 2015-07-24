@@ -46,7 +46,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func runPostsAPI(token: String, user: UserProfile) {
-        var post = Post(objectId: "234")
+        var post = Post(objectId: CRUDObjectInvalidId)
         post.name = "Cool post"
         post.text = "Big Post text"
         
@@ -71,7 +71,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         api.auth(username: username, password: password).onSuccess { response in
             println("Auth success")
-            self.runProfileAPI(response.accessToken)
+//            self.runProfileAPI(response.accessToken)
         }.onFailure { error in
             println(error)
         }

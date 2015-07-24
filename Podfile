@@ -8,6 +8,7 @@ target 'PositionIn' do
     pod 'ObjectMapper'
     pod 'BrightFutures', '~> 2.0.1'
     
+    pod 'KeychainAccess'
     pod 'HanekeSwift'
     pod 'KYDrawerController'
 end

@@ -10,6 +10,7 @@ import Foundation
 import ObjectMapper
 
 typealias CRUDObjectId = String!
+let CRUDObjectInvalidId: CRUDObjectId = ""
 
 protocol CRUDObject: Mappable, Printable {
         

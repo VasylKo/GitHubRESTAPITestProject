@@ -13,6 +13,7 @@ struct Post: CRUDObject {
     private(set) var objectId: CRUDObjectId
     var name: String?
     var text: String?
+    var location: Location?
     
     init(objectId: CRUDObjectId) {
         self.objectId = objectId
@@ -33,6 +34,7 @@ struct Post: CRUDObject {
         objectId <- map["id"]
         name <- map["name"]
         text <- map["text"]
+        location <- map["location"]
     }
     
     static func endpoint() -> String {

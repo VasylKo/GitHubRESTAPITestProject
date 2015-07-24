@@ -17,6 +17,9 @@ extension APIService {
     
     func auth(#username: String, password: String) -> Future<AuthResponse, NSError> {
         let (_, future): (Alamofire.Request, Future<AuthResponse, NSError>) = dataProvider.objectRequest(AuthRouter.Auth(api: self, username: username, password: password))
+        future.onSuccess { response in
+            self.sessionController.setAuth(response)
+        }
         return future
     }
     

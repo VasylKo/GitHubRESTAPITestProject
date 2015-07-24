@@ -62,13 +62,11 @@ struct APIService {
         return encoding.encode(r, parameters: params).0
     }
     
-    
-    //TODO: make private
-    func http(endpoint: String) -> NSURL {
+    internal func http(endpoint: String) -> NSURL {
         return url(endpoint, scheme: "http")
     }
     
-    func https(endpoint: String) -> NSURL {
+    internal func https(endpoint: String) -> NSURL {
         return url(endpoint, scheme: "https")
     }
     
@@ -79,6 +77,7 @@ struct APIService {
     init (url: NSURL) {
         baseURL = url
         dataProvider = NetworkDataProvider()
+        sessionController = SessionController()
     }
     
     func emptyResponseMapping() -> (AnyObject? -> Void?) {
@@ -111,5 +110,7 @@ struct APIService {
     }
     
     private let baseURL: NSURL
-    let dataProvider: NetworkDataProvider
+    internal let dataProvider: NetworkDataProvider
+    internal let sessionController: SessionController
+    
 }

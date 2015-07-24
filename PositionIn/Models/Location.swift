@@ -9,7 +9,7 @@
 import Foundation
 import ObjectMapper
 
-struct Location: Mappable {
+struct Location: Mappable, Printable {
     private(set) var x: Double!
     private(set) var y: Double!
     private(set) var street1: String?
@@ -41,4 +41,9 @@ struct Location: Mappable {
         city <- map["city"]
         zip <- map["zip"]
     }
+    
+    var description: String {
+        return "<\(self.dynamicType):\(x),\(y)>"
+    }
+
 }
