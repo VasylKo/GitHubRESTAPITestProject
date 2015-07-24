@@ -10,7 +10,7 @@ import UIKit
 import PosInCore
 import Alamofire
 import BrightFutures
-
+import CleanroomLogger
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
