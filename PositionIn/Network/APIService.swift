@@ -15,38 +15,53 @@ import BrightFutures
 
 struct APIService {
     
-    func getAll<C: CRUDObject>(token: String, endpoint: String) -> Future<CollectionResponse<C>,NSError> {
-        let request = crudRequest(token, endpoint: endpoint, method: .GET, params: nil)
-        let (_ , future): (Alamofire.Request, Future<CollectionResponse<C>,NSError>) = dataProvider.objectRequest(request)
-        return future
+    func getAll<C: CRUDObject>(endpoint: String) -> Future<CollectionResponse<C>,NSError> {
+        return sessionController.session().flatMap {
+            (token: AuthResponse.Token) -> Future<CollectionResponse<C>,NSError> in
+            let request = self.crudRequest(token, endpoint: endpoint, method: .GET, params: nil)
+            let (_ , future): (Alamofire.Request, Future<CollectionResponse<C>,NSError>) = self.dataProvider.objectRequest(request)
+            return future
+        }
     }
     
-    func get<C: CRUDObject>(token: String, objectID: CRUDObjectId?) -> Future<C, NSError> {
-        let request = crudRequest(token, endpoint: C.endpoint().stringByAppendingPathComponent(objectID ?? ""), method: .GET, params: nil)
-        let (_ , future): (Alamofire.Request, Future<C, NSError>) = dataProvider.objectRequest(request)
-        return future
+    func get<C: CRUDObject>(objectID: CRUDObjectId?) -> Future<C, NSError> {
+        return sessionController.session().flatMap {
+            (token: AuthResponse.Token) -> Future<C, NSError> in
+            let request = self.crudRequest(token, endpoint: C.endpoint().stringByAppendingPathComponent(objectID ?? ""), method: .GET, params: nil)
+            let (_ , future): (Alamofire.Request, Future<C, NSError>) = self.dataProvider.objectRequest(request)
+            return future
+        }
     }
     
-    func update<C: CRUDObject>(token: String, object: C) -> Future<Void,NSError> {
-        let urlRequest = crudRequest(token, endpoint: C.endpoint().stringByAppendingPathComponent(object.objectId), method: .PUT, params: Mapper().toJSON(object))
-        let (request, future): (Alamofire.Request, Future<Void, NSError>) = dataProvider.jsonRequest(urlRequest, map: emptyResponseMapping())
-        request.validate(statusCode: [204])
-        return future
+    func update<C: CRUDObject>(object: C) -> Future<Void,NSError> {
+        return sessionController.session().flatMap {
+            (token: AuthResponse.Token) -> Future<Void,NSError> in
+            let urlRequest = self.crudRequest(token, endpoint: C.endpoint().stringByAppendingPathComponent(object.objectId), method: .PUT, params: Mapper().toJSON(object))
+            let (request, future): (Alamofire.Request, Future<Void, NSError>) = self.dataProvider.jsonRequest(urlRequest, map: self.emptyResponseMapping())
+            request.validate(statusCode: [204])
+            return future
+        }
     }
     
-    func update(token: String, object: UserProfile) -> Future<Void,NSError> {
-        let urlRequest = crudRequest(token, endpoint: UserProfile.endpoint(), method: .PUT, params: Mapper().toJSON(object))
-        let (request, future): (Alamofire.Request, Future<Void, NSError>) = dataProvider.jsonRequest(urlRequest, map: emptyResponseMapping())
-        request.validate(statusCode: [204])
-        return future
+    func update(object: UserProfile) -> Future<Void,NSError> {
+        return sessionController.session().flatMap {
+            (token: AuthResponse.Token) -> Future<Void,NSError> in
+            let urlRequest = self.crudRequest(token, endpoint: UserProfile.endpoint(), method: .PUT, params: Mapper().toJSON(object))
+            let (request, future): (Alamofire.Request, Future<Void, NSError>) = self.dataProvider.jsonRequest(urlRequest, map: self.emptyResponseMapping())
+            request.validate(statusCode: [204])
+            return future
+        }
     }
 
     
-    func post<C: CRUDObject>(token: String, object: C) -> Future<Void,NSError> {
-        let urlRequest = crudRequest(token, endpoint: C.endpoint(), method: .POST, params: Mapper().toJSON(object))
-        let (request, future): (Alamofire.Request, Future<Void, NSError>) = dataProvider.jsonRequest(urlRequest, map: emptyResponseMapping())
-        request.validate(statusCode: [201])
-        return future
+    func post<C: CRUDObject>(object: C) -> Future<Void,NSError> {
+        return sessionController.session().flatMap {
+            (token: AuthResponse.Token) -> Future<Void,NSError> in
+            let urlRequest = self.crudRequest(token, endpoint: C.endpoint(), method: .POST, params: Mapper().toJSON(object))
+            let (request, future): (Alamofire.Request, Future<Void, NSError>) = self.dataProvider.jsonRequest(urlRequest, map: self.emptyResponseMapping())
+            request.validate(statusCode: [201])
+            return future
+        }
     }
     
     private func crudRequest(token: String, endpoint: String, method: Alamofire.Method, params: [String : AnyObject]?) -> NSURLRequest {

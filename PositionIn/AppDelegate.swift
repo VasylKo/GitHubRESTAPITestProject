@@ -27,32 +27,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     
-    func runProfileAPI(token: String) {
+    func runProfileAPI() {
         
-        api.get(token, objectID: nil).flatMap { (profile: UserProfile) -> Future<Void,NSError> in
+        api.get(nil).flatMap { (profile: UserProfile) -> Future<Void,NSError> in
             var newProfile = profile
             newProfile.firstName = "Alex"
             newProfile.middleName = "The"
             newProfile.lastName = "Great"
-            return self.api.update(token, object: newProfile)
+            return self.api.update(newProfile)
         }.flatMap { ( _: Void ) -> Future<UserProfile,NSError> in
-                return self.api.get(token, objectID: nil)
+                return self.api.get(nil)
         }.onSuccess { profile in
                 println(profile)
-            self.runPostsAPI(token, user: profile)
+            self.runPostsAPI(profile)
         }.onFailure { error in
             println(error)
         }
     }
     
-    func runPostsAPI(token: String, user: UserProfile) {
+    func runPostsAPI(user: UserProfile) {
         var post = Post(objectId: CRUDObjectInvalidId)
         post.name = "Cool post"
         post.text = "Big Post text"
         
-        
-        api.post(token, object: post).flatMap { ( _: Void ) -> Future<CollectionResponse<Post>, NSError> in
-            return self.api.getAll(token, endpoint: Post.allEndpoint(user.objectId))
+        api.post(post).flatMap { ( _: Void ) -> Future<CollectionResponse<Post>, NSError> in
+            return self.api.getAll(Post.allEndpoint(user.objectId))
         }.onSuccess { response in
             println(response.items)
         }.onFailure { error in
@@ -60,18 +59,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
-    
-    
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        
-        
-        let username = "ios-777@bekitzur.com"
-        let password = "pwd"
 
-        
-        api.auth(username: username, password: password).onSuccess { response in
-            println("Auth success")
-//            self.runProfileAPI(response.accessToken)
+        api.sessionController.session().recoverWith { (error: NSError) -> Future<APIService.AuthResponse.Token ,NSError>  in
+            println(error)
+            let username = "ios-777@bekitzur.com"
+            let password = "pwd"
+            return self.api.auth(username: username, password: password).map { response in
+                return response.accessToken
+            }
+        }.onSuccess { _ in
+            self.runProfileAPI()
         }.onFailure { error in
             println(error)
         }
