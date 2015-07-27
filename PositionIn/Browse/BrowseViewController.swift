@@ -10,6 +10,14 @@ import UIKit
 import PosInCore
 import CleanroomLogger
 
+protocol BrowseActionProducer {
+    var actionConsumer: BrowseActionConsumer? { get set }
+}
+
+protocol BrowseActionConsumer: class {
+    func browseController(controller: BrowseActionProducer, didSelectPost post: Post)
+}
+
 class BrowseViewController: BesideMenuViewController {
     
     override func viewDidLoad() {
@@ -113,6 +121,11 @@ class BrowseViewController: BesideMenuViewController {
         self.contentView.addSubViewOnEntireSize(childController.view)
         childController.didMoveToParentViewController(self)
         currentModeViewController = childController
+        
+        if var actionProducer = childController as? BrowseActionProducer {
+            actionProducer.actionConsumer = self
+        }
+        
         displayModeSegmentedControl.selectedSegmentIndex = mode.rawValue
         addMenu.setExpanded(false, animated: false)
     }
@@ -218,9 +231,16 @@ extension BrowseViewController: AddMenuViewDelegate {
     }
 }
 
-//MARK:
+//MARK: Tabbar
 extension BrowseViewController: BrowseTabbarDelegate {
     func tabbarDidChangeMode(tabbar: BrowseTabbar) {
         browseMode = tabbar.selectedMode
+    }
+}
+
+//MARK: Browse actions
+extension BrowseViewController: BrowseActionConsumer {
+    func browseController(controller: BrowseActionProducer, didSelectPost post: Post) {
+        performSegue(BrowseViewController.Segue.ShowProductDetails)
     }
 }

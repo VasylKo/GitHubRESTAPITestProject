@@ -9,12 +9,11 @@
 import UIKit
 import PosInCore
 
-class BrowseListViewController: UIViewController {
+class BrowseListViewController: UIViewController, BrowseActionProducer {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         dataSource.configureTable(tableView)
-        
     }
 
     
@@ -27,6 +26,7 @@ class BrowseListViewController: UIViewController {
         return dataSource
         }()
 
+    weak var actionConsumer: BrowseActionConsumer?
     
     @IBOutlet private weak var tableView: UITableView!
     @IBOutlet private weak var displayModeSegmentedControl: UISegmentedControl!
@@ -36,7 +36,7 @@ class BrowseListViewController: UIViewController {
 
 extension BrowseListViewController {
     internal class ProductListDataSource: TableViewDataSource {
-        
+                
         override func configureTable(tableView: UITableView) {
             tableView.estimatedRowHeight = 80.0
             super.configureTable(tableView)
@@ -56,6 +56,14 @@ extension BrowseListViewController {
         
         override func nibCellsId() -> [String] {
             return [ListProductCell.reuseId()]
+        }
+        
+        func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+            tableView.deselectRowAtIndexPath(indexPath, animated: true)
+            if let browseController = parentViewController as? BrowseActionProducer,
+               let actionConsumer = browseController.actionConsumer {
+                actionConsumer.browseController(browseController, didSelectPost: Post(objectId: CRUDObjectInvalidId))
+            }
         }
     }
 }
