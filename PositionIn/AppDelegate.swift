@@ -16,8 +16,6 @@ import CleanroomLogger
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
-
-
     let api: APIService
     
     override init() {
@@ -66,7 +64,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
 
-        api.sessionController.session().recoverWith { (error: NSError) -> Future<APIService.AuthResponse.Token ,NSError>  in
+        api.sessionController.session().recoverWith { [unowned self]
+            (error: NSError) -> Future<APIService.AuthResponse.Token ,NSError>  in
             Log.error?.value(error)
             let username = "ios-777@bekitzur.com"
             let password = "pwd"
@@ -108,5 +107,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
+}
+
+func api() -> APIService {
+    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+    return appDelegate.api
 }
 

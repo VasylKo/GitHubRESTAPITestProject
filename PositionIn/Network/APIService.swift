@@ -89,9 +89,9 @@ struct APIService {
         return "API: \(baseURL.absoluteString)"
     }
     
-    init (url: NSURL) {
+    init (url: NSURL, dataProvider: NetworkDataProvider = NetworkDataProvider()) {
         baseURL = url
-        dataProvider = NetworkDataProvider()
+        self.dataProvider = dataProvider
         sessionController = SessionController()
     }
     
