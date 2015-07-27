@@ -7,97 +7,103 @@
 //
 
 import UIKit
-import CleanroomLogger
+import PosInCore
 
-class ProductDetailsViewController: UICollectionViewController {
+class ProductDetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        updateItemsWidth(view.bounds.width)
+        dataSource.items = productAcionItems()
+        dataSource.configureTable(actionTableView)
     }
     
     
-    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
-        updateItemsWidth(size.width)
-
+    private lazy var dataSource: ProductDetailsDataSource = {
+        let dataSource = ProductDetailsDataSource()
+        dataSource.parentViewController = self
+        return dataSource
+    }()
+    
+    
+    private func productAcionItems() -> [[ProductActionItem]] {
+        return [
+            [ // 0 section
+                ProductActionItem(title: NSLocalizedString("Buy Product", comment: "Product action: Buy Product"), image: "MainMenuMessages", action: .Buy),
+                ],
+            [ // 1 section
+                ProductActionItem(title: NSLocalizedString("Send Message", comment: "Product action: Send Message"), image: "MainMenuMessages", action: .SendMessage),
+                ProductActionItem(title: NSLocalizedString("Product Inventory", comment: "Product action: Product Inventory"), image: "MainMenuMessages", action: .ProductInventory),
+                ProductActionItem(title: NSLocalizedString("Seller Profile", comment: "Product action: Seller Profile"), image: "MainMenuMessages", action: .SellerProfile),
+                ],
+        ]
+        
     }
     
-    private func updateItemsWidth(width: CGFloat) {
-        if let layout = collectionViewLayout as? UICollectionViewFlowLayout {
-            layout.itemSize = CGSize(width: width, height: layout.itemSize.height)
-            layout.invalidateLayout()
-        }
-    }
     
-    override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-        return 3
-    }
-    
-    override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        switch section {
-        case 0,1:
-            return 1
-        case 2:
-            return 30
-        default:
-            fatalError("Unknown section")
-        }
-    }
-    
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        switch section {
-        case 0:
-            return CGSize(width: 0, height: 100.0)
-        case 2:
-            return CGSize(width: 0, height: 50.0)
-        default:
-            return CGSizeZero
-        }
-    }
-    
-    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        switch indexPath.section {
-        case 0:
-            if let cell = collectionView.dequeueReusableCell(ProductDetailsViewController.Reusable.ProductInfo, forIndexPath: indexPath) {
-                return cell
-            }
-        case 1,2:
-            if let cell = collectionView.dequeueReusableCell(ProductDetailsViewController.Reusable.ProductAction, forIndexPath: indexPath) {
-                return cell
-            }
-        default:
-            break
-        }
-        fatalError("Unknown indexPath")
-    }
-    
-
-    override func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
-        if kind == UICollectionElementKindSectionHeader && indexPath.row == 0 {
-            let reusable = ProductDetailsViewController.Reusable.ProductDetailsHeader
-            if let header = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReusable: reusable, forIndexPath: indexPath)  {
-//                header.backImage =
-                return header
-            }
-        }
-        return UICollectionReusableView()
-    }
-
-
+    @IBOutlet private weak var actionTableView: UITableView!
+    @IBOutlet private weak var productImageView: UIImageView!
+    @IBOutlet private weak var headerLabel: UILabel!
+    @IBOutlet private weak var infoLabel: UILabel!
+    @IBOutlet private weak var detailsLabel: UILabel!
 }
 
-class ProductDetailsHeaderView: UICollectionReusableView {
+extension ProductDetailsViewController {
+    enum ProductDetailsAction {
+        case Buy, ProductInventory, SellerProfile, SendMessage
+    }
     
-    @IBOutlet weak var backImage: UIImageView!
+    struct ProductActionItem {
+        let title: String
+        let image: String
+        let action: ProductDetailsAction
+    }
 }
 
-class ProductActionCell: UICollectionViewCell {
-    
-}
+extension ProductDetailsViewController {
+    internal class ProductDetailsDataSource: TableViewDataSource {        
+        
+        var items: [[ProductActionItem]] = []
+        
+        override func configureTable(tableView: UITableView) {
+            tableView.tableFooterView = UIView(frame: CGRectZero)
+            super.configureTable(tableView)
+        }
 
-class ProductInfoCell: UICollectionViewCell {
-    
+        func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+            return items.count
+        }
+        
+        @objc override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+            return items[section].count
+        }
+        
+        @objc override func tableView(tableView: UITableView, reuseIdentifierForIndexPath indexPath: NSIndexPath) -> String {
+            return ProductActionCell.reuseId()
+        }
+        
+        override func tableView(tableView: UITableView, modelForIndexPath indexPath: NSIndexPath) -> TableViewCellModel {
+            let item = items[indexPath.section][indexPath.row]
+            let model = TableViewCellImageTextModel(title: item.title, imageName: item.image)
+            return model
+        }
+        
+        @objc override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+            if section == 1 {
+                return 50
+            }
+            return super.tableView(tableView, heightForHeaderInSection: section)
+        }
+        
+        override func nibCellsId() -> [String] {
+            return [ProductActionCell.reuseId()]
+        }
+        
+        func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+            tableView.deselectRowAtIndexPath(indexPath, animated: true)
+            let item = items[indexPath.section][indexPath.row]
+        }
+
+    }
 }
 
 

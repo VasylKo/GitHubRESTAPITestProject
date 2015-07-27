@@ -237,46 +237,6 @@ extension SidebarViewController {
 //MARK: - BrowseListViewController
 
 //MARK: - ProductDetailsViewController
-extension ProductDetailsViewController { 
-
-    enum Reusable: String, Printable, ReusableViewProtocol {
-        case ProductAction = "ProductAction"
-        case ProductInfo = "ProductInfo"
-        case ProductDetailsHeader = "ProductDetailsHeader"
-
-        var kind: ReusableKind? {
-            switch (self) {
-            case ProductAction:
-                return ReusableKind(rawValue: "collectionViewCell")
-            case ProductInfo:
-                return ReusableKind(rawValue: "collectionViewCell")
-            case ProductDetailsHeader:
-                return ReusableKind(rawValue: "collectionReusableView")
-            default:
-                preconditionFailure("Invalid value")
-                break
-            }
-        }
-
-        var viewType: UIView.Type? {
-            switch (self) {
-            case ProductAction:
-                return ProductActionCell.self
-            case ProductInfo:
-                return ProductInfoCell.self
-            case ProductDetailsHeader:
-                return ProductDetailsHeaderView.self
-            default:
-                return nil
-            }
-        }
-
-        var identifier: String? { return self.description } 
-        var description: String { return self.rawValue }
-    }
-
-}
-
 
 //MARK: - BrowseViewController
 extension UIStoryboardSegue {
