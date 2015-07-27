@@ -4,23 +4,24 @@ use_frameworks!
 
 
 target 'PositionIn' do
-    pod 'Alamofire'
-    pod 'ObjectMapper'
-    pod 'BrightFutures', '~> 2.0.1'
-    
-    
     pod 'KeychainAccess'
     pod 'HanekeSwift'
     pod 'KYDrawerController'
+    
+    target 'PosInCore', :exclusive => true do
+        pod 'Alamofire'
+        pod 'ObjectMapper'
+        pod 'BrightFutures', '~> 2.0.1'
+    end
+    
+    target 'Messaging',  :exclusive => true do
+        pod 'Magnet-XMPPFramework', '~> 3.6.9'
+    end
+
 end
 
 target 'PositionInTests' do
 
 end
 
-target 'PosInCore' do
-    pod 'Alamofire'
-    pod 'ObjectMapper'
-    pod 'BrightFutures', '~> 2.0.1'
-end
 

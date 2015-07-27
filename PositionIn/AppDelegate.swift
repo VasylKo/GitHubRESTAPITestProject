@@ -11,12 +11,14 @@ import PosInCore
 import Alamofire
 import BrightFutures
 import CleanroomLogger
+import Messaging
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
     let api: APIService
+    let chatClient: XMPPClient
     
     override init() {
         #if DEBUG
@@ -26,6 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         #endif
         let baseURL = NSURL(string: "http://45.63.7.39:8080")!
         api = APIService(url: baseURL)
+        chatClient = XMPPClient()
         super.init()
     }
 
