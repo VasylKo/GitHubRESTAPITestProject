@@ -86,9 +86,9 @@
 		E660E5441B5BE43900F52050 /* TableViewSectionHeaderFooterLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E660E5431B5BE43900F52050 /* TableViewSectionHeaderFooterLabelView.swift */; };
 		E6829B041B5E6CF800FB1E1D /* RoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6829B031B5E6CF800FB1E1D /* RoundButton.swift */; };
 		E69420F91B66358000F34F06 /* ProductDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E69420F81B66358000F34F06 /* ProductDetailsViewController.swift */; };
-		E69420FB1B66585F00F34F06 /* ProductActionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E69420FA1B66585F00F34F06 /* ProductActionCell.swift */; };
-		E69420FD1B6658E900F34F06 /* PositionIn.ProductActionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E69420FC1B6658E900F34F06 /* PositionIn.ProductActionCell.xib */; };
 		E69420FF1B665F5100F34F06 /* PositionIn.ProductDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E69420FE1B665F5100F34F06 /* PositionIn.ProductDetailsViewController.xib */; };
+		E69421021B666A1600F34F06 /* PositionIn.ActionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E69421001B666A1600F34F06 /* PositionIn.ActionCell.xib */; };
+		E69421031B666A1600F34F06 /* ActionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E69421011B666A1600F34F06 /* ActionCell.swift */; };
 		E6A869DB1B5FD1E100797D16 /* BrowseTabbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A869DA1B5FD1E100797D16 /* BrowseTabbar.swift */; };
 		E6A869E21B6000C800797D16 /* BrowseListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A869DD1B6000C800797D16 /* BrowseListViewController.swift */; };
 		E6A869E31B6000C800797D16 /* PositionIn.BrowseListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6A869DE1B6000C800797D16 /* PositionIn.BrowseListViewController.xib */; };
@@ -228,9 +228,9 @@
 		E6736ADE1B4E56EB0003580D /* Version.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = Version.sh; sourceTree = "<group>"; };
 		E6829B031B5E6CF800FB1E1D /* RoundButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundButton.swift; sourceTree = "<group>"; };
 		E69420F81B66358000F34F06 /* ProductDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductDetailsViewController.swift; sourceTree = "<group>"; };
-		E69420FA1B66585F00F34F06 /* ProductActionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductActionCell.swift; sourceTree = "<group>"; };
-		E69420FC1B6658E900F34F06 /* PositionIn.ProductActionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.ProductActionCell.xib; sourceTree = "<group>"; };
 		E69420FE1B665F5100F34F06 /* PositionIn.ProductDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.ProductDetailsViewController.xib; sourceTree = "<group>"; };
+		E69421001B666A1600F34F06 /* PositionIn.ActionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.ActionCell.xib; sourceTree = "<group>"; };
+		E69421011B666A1600F34F06 /* ActionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionCell.swift; sourceTree = "<group>"; };
 		E6A869DA1B5FD1E100797D16 /* BrowseTabbar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowseTabbar.swift; sourceTree = "<group>"; };
 		E6A869DD1B6000C800797D16 /* BrowseListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowseListViewController.swift; sourceTree = "<group>"; };
 		E6A869DE1B6000C800797D16 /* PositionIn.BrowseListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.BrowseListViewController.xib; sourceTree = "<group>"; };
@@ -343,6 +343,8 @@
 		E6325F581B57D46C00996480 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				E69421001B666A1600F34F06 /* PositionIn.ActionCell.xib */,
+				E69421011B666A1600F34F06 /* ActionCell.swift */,
 				E6829B031B5E6CF800FB1E1D /* RoundButton.swift */,
 				E62B16F71B5C6BBF00D446BC /* AvatarView.swift */,
 			);
@@ -528,8 +530,6 @@
 			children = (
 				E69420F81B66358000F34F06 /* ProductDetailsViewController.swift */,
 				E69420FE1B665F5100F34F06 /* PositionIn.ProductDetailsViewController.xib */,
-				E69420FA1B66585F00F34F06 /* ProductActionCell.swift */,
-				E69420FC1B6658E900F34F06 /* PositionIn.ProductActionCell.xib */,
 			);
 			name = ProductDetails;
 			path = PositionIn/ProductDetails;
@@ -748,12 +748,12 @@
 				E660E52E1B5AC23B00F52050 /* PositionIn.MainMenuViewController.xib in Resources */,
 				E62B16F51B5C1AA700D446BC /* PositionIn.MainMenuUserCell.xib in Resources */,
 				E62B16FD1B5CDF2400D446BC /* PositionIn.MessagesListViewController.xib in Resources */,
+				E69421021B666A1600F34F06 /* PositionIn.ActionCell.xib in Resources */,
 				E6A869E31B6000C800797D16 /* PositionIn.BrowseListViewController.xib in Resources */,
 				E64DC3551B4E53C90011D37C /* Main.storyboard in Resources */,
 				E64DC35A1B4E53C90011D37C /* LaunchScreen.xib in Resources */,
 				E64DC3571B4E53C90011D37C /* Images.xcassets in Resources */,
 				E660E5321B5AC2A200F52050 /* PositionIn.MainMenuCell.xib in Resources */,
-				E69420FD1B6658E900F34F06 /* PositionIn.ProductActionCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -961,7 +961,7 @@
 				E62B16F61B5C1AA700D446BC /* MainMenuUserCell.swift in Sources */,
 				E64DC3501B4E53C90011D37C /* AppDelegate.swift in Sources */,
 				E65E872C1B611BA200AE444D /* Post.swift in Sources */,
-				E69420FB1B66585F00F34F06 /* ProductActionCell.swift in Sources */,
+				E69421031B666A1600F34F06 /* ActionCell.swift in Sources */,
 				E62B16FB1B5CDF0100D446BC /* MessagesListViewController.swift in Sources */,
 				E6A869E71B60012500797D16 /* ListProductCell.swift in Sources */,
 				E6AC64541B5EBC29007D7952 /* UIScheme.swift in Sources */,

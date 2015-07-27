@@ -8,7 +8,7 @@
 
 import PosInCore
 
-class ProductActionCell: TableViewCell {
+class ActionCell: TableViewCell {
     override func setModel(model: TableViewCellModel) {
         let m = model as? TableViewCellImageTextModel
         assert(m != nil, "Invalid model passed")

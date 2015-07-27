@@ -114,7 +114,7 @@ extension ProductDetailsViewController {
         }
         
         @objc override func tableView(tableView: UITableView, reuseIdentifierForIndexPath indexPath: NSIndexPath) -> String {
-            return ProductActionCell.reuseId()
+            return ActionCell.reuseId()
         }
         
         override func tableView(tableView: UITableView, modelForIndexPath indexPath: NSIndexPath) -> TableViewCellModel {
@@ -131,7 +131,7 @@ extension ProductDetailsViewController {
         }
         
         override func nibCellsId() -> [String] {
-            return [ProductActionCell.reuseId()]
+            return [ActionCell.reuseId()]
         }
         
         func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
