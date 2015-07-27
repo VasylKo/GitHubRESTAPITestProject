@@ -8,6 +8,11 @@
 
 import UIKit
 import PosInCore
+import CleanroomLogger
+
+protocol ProductDetailsActionConsumer {
+    func executeAction(action: ProductDetailsViewController.ProductDetailsAction)
+}
 
 class ProductDetailsViewController: UIViewController {
     
@@ -48,8 +53,21 @@ class ProductDetailsViewController: UIViewController {
 }
 
 extension ProductDetailsViewController {
-    enum ProductDetailsAction {
+    enum ProductDetailsAction: Printable {
         case Buy, ProductInventory, SellerProfile, SendMessage
+        
+        var description: String {
+            switch self {
+            case .Buy:
+                return "Buy"
+            case .ProductInventory:
+                return "Product Inventory"
+            case .SellerProfile:
+                return "Seller profile"
+            case .SendMessage:
+                return "Send message"
+            }
+        }
     }
     
     struct ProductActionItem {
@@ -59,8 +77,26 @@ extension ProductDetailsViewController {
     }
 }
 
+extension ProductDetailsViewController: ProductDetailsActionConsumer {
+    func executeAction(action: ProductDetailsAction) {
+        let segue: ProductDetailsViewController.Segue
+        switch action {
+        case .Buy:
+            segue = .ShowBuyScreen
+        case .ProductInventory:
+            segue = .ShowProductInventory
+        case .SellerProfile:
+            segue = .ShowSellerProfile
+        default:
+            Log.warning?.message("Unhandled action: \(action)")
+            return
+        }
+        performSegue(segue)
+    }
+}
+
 extension ProductDetailsViewController {
-    internal class ProductDetailsDataSource: TableViewDataSource {        
+    internal class ProductDetailsDataSource: TableViewDataSource {
         
         var items: [[ProductActionItem]] = []
         
@@ -101,6 +137,9 @@ extension ProductDetailsViewController {
         func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
             tableView.deselectRowAtIndexPath(indexPath, animated: true)
             let item = items[indexPath.section][indexPath.row]
+            if let actionConsumer = parentViewController as? ProductDetailsActionConsumer {
+                actionConsumer.executeAction(item.action)
+            }
         }
 
     }

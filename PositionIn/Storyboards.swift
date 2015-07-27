@@ -237,6 +237,49 @@ extension SidebarViewController {
 //MARK: - BrowseListViewController
 
 //MARK: - ProductDetailsViewController
+extension UIStoryboardSegue {
+    func selection() -> ProductDetailsViewController.Segue? {
+        if let identifier = self.identifier {
+            return ProductDetailsViewController.Segue(rawValue: identifier)
+        }
+        return nil
+    }
+}
+
+extension ProductDetailsViewController { 
+
+    enum Segue: String, Printable, SegueProtocol {
+        case ShowBuyScreen = "ShowBuyScreen"
+        case ShowProductInventory = "ShowProductInventory"
+        case ShowSellerProfile = "ShowSellerProfile"
+
+        var kind: SegueKind? {
+            switch (self) {
+            case ShowBuyScreen:
+                return SegueKind(rawValue: "show")
+            case ShowProductInventory:
+                return SegueKind(rawValue: "show")
+            case ShowSellerProfile:
+                return SegueKind(rawValue: "show")
+            default:
+                preconditionFailure("Invalid value")
+                break
+            }
+        }
+
+        var destination: UIViewController.Type? {
+            switch (self) {
+            default:
+                assertionFailure("Unknown destination")
+                return nil
+            }
+        }
+
+        var identifier: String? { return self.description } 
+        var description: String { return self.rawValue }
+    }
+
+}
 
 //MARK: - BrowseViewController
 extension UIStoryboardSegue {
