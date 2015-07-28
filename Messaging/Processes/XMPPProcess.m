@@ -11,6 +11,12 @@
 
 static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
 
+@interface XMPPProcess ()
+@property (nonatomic, strong, readwrite, nonnull) XMPPStream *xmppStream;
+@property (nonatomic, copy, readwrite, nullable) XMPPProcesseCompletionBlock completionBlock;
+@property (nonatomic, strong, readwrite, nullable) dispatch_queue_t completionQueue;
+@property (nonatomic, strong, readwrite, nonnull) dispatch_semaphore_t semaphore;
+@end
 
 @implementation XMPPProcess
 
@@ -21,21 +27,25 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
 - (instancetype)initWithStream:(XMPPStream *)stream queue:(dispatch_queue_t)completionQueue {
     self = [super init];
     if (self) {
+        self.semaphore = dispatch_semaphore_create(0);
         self.xmppStream = stream;
+        [self.xmppStream addDelegate:self delegateQueue:[[self class] defaultProcessingQueue]];
         self.completionQueue = completionQueue;
     }
     return  self;
 }
 
 - (void)dealloc {
-    XMPPLogWarn(@"dealloc: %@", [self description]);
+    [self.xmppStream removeDelegate:self];
+    XMPPLogVerbose(@"Dealloc process: %@", [self description]);
 }
 
 - (void)executeWithCompletion:(XMPPProcesseCompletionBlock)completionBlock {
     self.completionBlock = completionBlock;
     dispatch_async([[self class] defaultProcessingQueue], ^{
-        XMPPLogInfo(@"Start process:  %@", [self description]);
+        XMPPLogInfo(@"Starting process:  %@", [self description]);
         [self run];
+        dispatch_semaphore_wait(self.semaphore, DISPATCH_TIME_FOREVER);
     });
     
 }
@@ -46,18 +56,21 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
 }
 
 - (void)complete:(id)result error:(NSError *)error {
+    XMPPLogInfo(@"Finishing process:  %@ (%@, %@)", [self description], result, error);
+    dispatch_semaphore_signal(self.semaphore);
     XMPPProcesseCompletionBlock completionBlock = self.completionBlock ?: ^(id r, NSError *e) {};
     dispatch_queue_t completionQueue = self.completionQueue ?: dispatch_get_main_queue();
-    XMPPLogInfo(@"Finish process:  %@", [self description]);
+    
     dispatch_async(completionQueue, ^{
         completionBlock(result, error);
     });
 }
 
 
+
 + (void)initialize {
     if (self == [XMPPProcess class]) {
-        [self setDefaultProcessingQueue:dispatch_get_main_queue()];
+        [self setDefaultProcessingQueue:dispatch_queue_create("com.bekitzur.xmpp.process", DISPATCH_QUEUE_CONCURRENT)];
     }
 }
 

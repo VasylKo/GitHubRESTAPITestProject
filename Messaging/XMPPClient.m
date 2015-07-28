@@ -114,7 +114,7 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
         //        If you do enableBackgroundingOnSocket on the simulator,
         //        you will simply see an error message from the xmpp stack when it fails to set the property.
         
-        xmppStream.enableBackgroundingOnSocket = YES;
+        self.xmppStream.enableBackgroundingOnSocket = YES;
     }
 #endif
     [self.xmppStream addDelegate:self delegateQueue:dispatch_get_main_queue()];
@@ -382,7 +382,7 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
  **/
 - (void)xmppStreamDidAuthenticate:(XMPPStream *)sender {
     XMPPLogTrace();
-    [self didAuth];
+//    [self didAuth];
 }
 
 /**
@@ -391,7 +391,7 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
 - (void)xmppStream:(XMPPStream *)sender didNotAuthenticate:(NSXMLElement *)error {
     XMPPLogTrace();
     XMPPLogError(@"Error while authenticating: %@", error);
-    [self registerJiD:sender.myJID];
+//    [self registerJiD:sender.myJID];
 }
 
 /**

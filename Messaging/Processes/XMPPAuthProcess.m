@@ -24,6 +24,20 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
     if(![self.xmppStream authenticateWithPassword:self.password error:&error]) {
         XMPPLogError(@"Error while authenticating: %@", error);
     }
+}
+
+#pragma mark - stream delegate -
+
+- (void)xmppStreamDidAuthenticate:(XMPPStream *)sender {
+    XMPPLogTrace();
+    [self complete:nil error:nil];
+}
+
+/**
+ * This method is called if authentication fails.
+ **/
+- (void)xmppStream:(XMPPStream *)sender didNotAuthenticate:(NSXMLElement *)error {
+    XMPPLogTrace();
     [self complete:nil error:error];
 }
 

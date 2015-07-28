@@ -10,15 +10,34 @@
 #import "XMPP.h"
 #import "XMPPLogging.h"
 
-@interface XMPPProcess ()
+@interface XMPPProcess (Private)
 
-- (instancetype)initWithStream:(XMPPStream *)stream queue:(dispatch_queue_t)completionQueue;
+/**
+ *  Designated initializer
+ *
+ *  @param stream          xmpp stream
+ *  @param completionQueue completion queue
+ *
+ *  @return new instance of the process
+ */
+- (nonnull instancetype)initWithStream:(nonnull XMPPStream *)stream queue:(nullable dispatch_queue_t)completionQueue;
 
+/**
+ *  Abstract method. Do actual work
+ */
 - (void)run;
-- (void)complete:(id)result error:(NSError *)error;
 
-@property (nonatomic, strong) XMPPStream *xmppStream;
-@property (nonatomic, strong) dispatch_queue_t completionQueue;
-@property (nonatomic, copy) XMPPProcesseCompletionBlock completionBlock;
+/**
+ *  Finishes process and call completion block. Subclasses MUST call this method
+ *
+ *  @param result process result
+ *  @param error  process error
+ */
+- (void)complete:(nullable id)result error:(nullable  NSError *)error;
+
+/**
+ *  Processes XMPP stream
+ */
+@property (nonatomic, strong, readonly, nonnull) XMPPStream *xmppStream;
 
 @end
