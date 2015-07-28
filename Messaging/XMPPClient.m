@@ -10,63 +10,10 @@
 #import "XMPP.h"
 #import "XMPPLogging.h"
 #import "DDTTYLogger.h"
+#import "XMPPLogFormatter.h"
 
 static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
 
-@interface OOTTYLogFormatter : NSObject <DDLogFormatter>
-{
-    NSDateFormatter *dateFormatter;
-}
-@end
-
-@implementation OOTTYLogFormatter
-
-
-- (id)init {
-    if((self = [super init]))
-    {
-        dateFormatter = [[NSDateFormatter alloc] init];
-        [dateFormatter setFormatterBehavior:NSDateFormatterBehavior10_4];
-        [dateFormatter setDateFormat:@"HH:mm:ss:SSS"];
-    }
-    return self;
-}
-
-- (NSString *)formatLogMessage:(DDLogMessage *)logMessage {
-    NSString *logContext = @"XMPP";
-//    switch (logMessage->logContext) {
-//        case API_LOG_CONTEXT:
-//            logContext = @"API";
-//            break;
-//        case CACHE_LOG_CONTEXT:
-//            logContext = @"CACHE";
-//            break;
-//        case UI_LOG_CONTEXT:
-//            logContext = @"UI";
-//            break;
-//        default:
-//            logContext = @"oOps";
-//            break;
-//    }
-    
-    NSString *logLevel;
-    switch (logMessage->logFlag)
-    {
-        case LOG_FLAG_ERROR : logLevel = @"E"; break;
-        case LOG_FLAG_WARN  : logLevel = @"W"; break;
-        case LOG_FLAG_INFO  : logLevel = @"I"; break;
-        case LOG_FLAG_DEBUG : logLevel = @"D"; break;
-        default             : logLevel = @"V"; break;
-    }
-    
-    NSString *dateAndTime = [dateFormatter stringFromDate:(logMessage->timestamp)];
-    NSString *logMsg = logMessage->logMsg;
-    
-    
-    return [NSString stringWithFormat:@"%@ [ %@:%@ ] %s:%d> %@", dateAndTime,logContext,logLevel,  logMessage->function,logMessage->lineNumber,logMsg];
-}
-
-@end
 
 
 #pragma mark - Configuration
@@ -104,6 +51,12 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
 
 @implementation XMPPClient
 
++ (void)initialize {
+    if(self == [XMPPClient class]) {
+        [XMPPClient setupLog];
+    }
+}
+
 - (instancetype)init {
     return [self initWithConfiguration:[XMPPClientConfiguration defaultConfiguration]];
 }
@@ -112,21 +65,6 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
     self = [super init];
     if (self) {
         self.config = configuration;
-        DDTTYLogger *ttyLogger = [DDTTYLogger sharedInstance];
-        [ttyLogger setColorsEnabled:YES];
-        [ttyLogger setLogFormatter:[OOTTYLogFormatter new]];
-        UIColor *errorColor = [UIColor colorWithRed:(214/255.0f) green:(57/255.0f) blue:(30/255.0f) alpha:1.0f];
-        UIColor *warningColor= [UIColor yellowColor];
-        UIColor *infoColor = [UIColor colorWithRed:0.819 green:0.931 blue:0.976 alpha:1.000];
-        UIColor *verboseColor = [UIColor lightGrayColor];
-        [ttyLogger setForegroundColor:errorColor backgroundColor:nil forFlag:LOG_FLAG_ERROR];
-        [ttyLogger setForegroundColor:warningColor backgroundColor:nil forFlag:LOG_FLAG_WARN];
-        [ttyLogger setForegroundColor:infoColor backgroundColor:nil forFlag:LOG_FLAG_INFO];
-        [ttyLogger setForegroundColor:verboseColor backgroundColor:nil forFlag:LOG_FLAG_VERBOSE];
-        [ttyLogger setForegroundColor:[UIColor purpleColor] backgroundColor:nil forFlag:LOG_FLAG_DEBUG];
-
-        [DDLog addLogger:ttyLogger withLogLevel:XMPP_LOG_FLAG_SEND_RECV];
-//        [DDLog addLogger:[DDASLLogger sharedInstance]];
         [self setupStreamWithConfig:configuration];
     }
     return self;
@@ -134,6 +72,28 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
 
 - (void)dealloc {
     [self teardownStream];
+}
+
++ (void)setupLog {
+    DDTTYLogger *ttyLogger = [DDTTYLogger sharedInstance];
+    [ttyLogger setColorsEnabled:YES];
+    [ttyLogger setLogFormatter:[XMPPLogFormatter new]];
+    UIColor *errorColor = [UIColor colorWithRed:(214/255.0f) green:(57/255.0f) blue:(30/255.0f) alpha:1.0f];
+    UIColor *warningColor= [UIColor yellowColor];
+    UIColor *infoColor = [UIColor colorWithRed:0.819 green:0.931 blue:0.976 alpha:1.000];
+    UIColor *verboseColor = [UIColor lightGrayColor];
+    UIColor *xmlColor = [UIColor colorWithRed: 0.3619 green: 0.3619 blue: 0.3619 alpha: 1.0];
+    [ttyLogger setForegroundColor:errorColor backgroundColor:nil forFlag:XMPP_LOG_FLAG_ERROR context:XMPP_LOG_CONTEXT];
+    [ttyLogger setForegroundColor:warningColor backgroundColor:nil forFlag:XMPP_LOG_FLAG_WARN context:XMPP_LOG_CONTEXT];
+    [ttyLogger setForegroundColor:infoColor backgroundColor:nil forFlag:XMPP_LOG_FLAG_INFO context:XMPP_LOG_CONTEXT];
+    [ttyLogger setForegroundColor:verboseColor backgroundColor:nil forFlag:XMPP_LOG_FLAG_VERBOSE context:XMPP_LOG_CONTEXT];
+    [ttyLogger setForegroundColor:verboseColor backgroundColor:nil forFlag:XMPP_LOG_FLAG_TRACE context:XMPP_LOG_CONTEXT];
+    [ttyLogger setForegroundColor:xmlColor backgroundColor:nil forFlag:XMPP_LOG_FLAG_SEND context:XMPP_LOG_CONTEXT];
+    [ttyLogger setForegroundColor:xmlColor backgroundColor:nil forFlag:XMPP_LOG_FLAG_RECV_POST context:XMPP_LOG_CONTEXT];
+    
+    [DDLog addLogger:ttyLogger withLogLevel:XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_SEND_RECV | XMPP_LOG_FLAG_TRACE];
+    //        [DDLog addLogger:[DDASLLogger sharedInstance]];
+
 }
 
 #pragma mark - Strem LifeCycle -
@@ -182,37 +142,35 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
 
 
 - (void)connect {
-    XMPPLogTrace();
-    XMPPLogError(@"Connecting");
-    NSLog(@"Connecting");
+    XMPPLogInfo(@"Connecting");
     NSError *error = nil;
     
     if (![self.xmppStream connectWithTimeout:XMPPStreamTimeoutNone error:&error]) {
-        NSLog(@"Error while connecting: %@", error);
+        XMPPLogError(@"Error while connecting: %@", error);
     }
 }
 
 - (void)auth {
-    NSLog(@"supportsInBandRegistration %d, isSecure %d"
+    XMPPLogVerbose(@"supportsInBandRegistration %d, isSecure %d"
           ,[self.xmppStream supportsInBandRegistration]
           ,[self.xmppStream isSecure]
           );
     
     
-    NSLog(@"Start auth");
+    XMPPLogInfo(@"Start auth");
     NSString *passowrd = self.config.userpwd;
     NSError *error = nil;
     if(![self.xmppStream authenticateWithPassword:passowrd error:&error]) {
-        NSLog(@"Error while authenticating: %@", error);
+        XMPPLogError(@"Error while authenticating: %@", error);
     }
 }
 
 - (void)registerJiD:(XMPPJID *)jid {
-    NSLog(@"Registering JID: %@", jid.user);
+    XMPPLogInfo(@"Registering JID: %@", jid.user);
     NSError *error = nil;
     NSString *passowrd = self.config.userpwd;
     if(![self.xmppStream registerWithPassword:passowrd error:&error]) {
-        NSLog(@"Error while registering: %@", error);
+        XMPPLogError(@"Error while registering: %@", error);
     }
 }
 
@@ -228,7 +186,7 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
     
     XMPPMessage *msg = [XMPPMessage messageWithType:@"chat" to:[XMPPJID jidWithString:@"adan@beewellapp.com"]];
     [msg addBody:@"Test message"];
-    NSLog(@"Sending message %@", [msg XMLString]);
+    XMPPLogInfo(@"Sending message %@", [msg XMLString]);
     [self.xmppStream sendElement:msg];
 }
 
@@ -236,13 +194,13 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
 #pragma mark - Logs -
 
 - (void)logPresense:(XMPPPresence *)presence {
-    NSLog(@"Presense %@ %@ %@",[presence type], [presence status], [presence show]);
-    NSLog(@"%@",[presence XMLString]);
+    XMPPLogVerbose(@"Presense %@ %@ %@",[presence type], [presence status], [presence show]);
+    XMPPLogVerbose(@"%@",[presence XMLString]);
 }
 
 - (void)logMessage:(XMPPMessage *)msg {
-    NSLog(@"Message %@ %@ %@ %@",[msg type], [msg subject], [msg body], [msg thread]);
-    NSLog(@"%@",[msg XMLString]);
+    XMPPLogVerbose(@"Message %@ %@ %@ %@",[msg type], [msg subject], [msg body], [msg thread]);
+    XMPPLogVerbose(@"%@",[msg XMLString]);
 }
 
 @end
@@ -262,7 +220,7 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
  * that this is a task that needs to continue running in the background.
  **/
 - (void)xmppStreamWillConnect:(XMPPStream *)sender {
-    NSLog(@"%@>%@",[[NSString stringWithCString:__FILE__ encoding:NSUTF8StringEncoding] lastPathComponent],NSStringFromSelector(_cmd));
+    XMPPLogTrace();
 }
 
 /**
@@ -273,7 +231,7 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
  * please use XMPPStream's enableBackgroundingOnSocket property as opposed to doing it directly on the socket here.
  **/
 - (void)xmppStream:(XMPPStream *)sender socketDidConnect:(GCDAsyncSocket *)socket {
-    NSLog(@"%@>%@",[[NSString stringWithCString:__FILE__ encoding:NSUTF8StringEncoding] lastPathComponent],NSStringFromSelector(_cmd));
+    XMPPLogTrace();
 }
 
 /**
@@ -281,7 +239,7 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
  * and the opening XML stream negotiation has started.
  **/
 - (void)xmppStreamDidStartNegotiation:(XMPPStream *)sender {
-    NSLog(@"%@>%@",[[NSString stringWithCString:__FILE__ encoding:NSUTF8StringEncoding] lastPathComponent],NSStringFromSelector(_cmd));
+    XMPPLogTrace();
 }
 
 /**
@@ -314,8 +272,8 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
  * Then implement the xmppStream:didReceiveTrust:completionHandler: delegate method to perform custom validation.
  **/
 - (void)xmppStream:(XMPPStream *)sender willSecureWithSettings:(NSMutableDictionary *)settings {
-    NSLog(@"%@>%@",[[NSString stringWithCString:__FILE__ encoding:NSUTF8StringEncoding] lastPathComponent],NSStringFromSelector(_cmd));
-    NSLog(@"Settings: %@", settings);
+    XMPPLogTrace();
+    XMPPLogInfo(@"Settings: %@", settings);
 }
 
 /**
@@ -356,7 +314,7 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
  **/
 - (void)xmppStream:(XMPPStream *)sender didReceiveTrust:(SecTrustRef)trust
  completionHandler:(void (^)(BOOL shouldTrustPeer))completionHandler {
-    NSLog(@"%@>%@",[[NSString stringWithCString:__FILE__ encoding:NSUTF8StringEncoding] lastPathComponent],NSStringFromSelector(_cmd));
+    XMPPLogTrace();
 #warning validation needed
     /* Custom validation for your certificate on server should be performed */
     
@@ -369,7 +327,7 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
  * or if the secureConnection: method was manually invoked.
  **/
 - (void)xmppStreamDidSecure:(XMPPStream *)sender {
-    NSLog(@"%@>%@",[[NSString stringWithCString:__FILE__ encoding:NSUTF8StringEncoding] lastPathComponent],NSStringFromSelector(_cmd));
+    XMPPLogTrace();
 }
 
 /**
@@ -379,7 +337,7 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
  * At this point it's safe to begin communication with the server.
  **/
 - (void)xmppStreamDidConnect:(XMPPStream *)sender {
-    NSLog(@"%@>%@",[[NSString stringWithCString:__FILE__ encoding:NSUTF8StringEncoding] lastPathComponent],NSStringFromSelector(_cmd));
+    XMPPLogTrace();
     [self auth];
 }
 
@@ -388,7 +346,7 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
  * If registration fails for some reason, the xmppStream:didNotRegister: method will be called instead.
  **/
 - (void)xmppStreamDidRegister:(XMPPStream *)sender {
-    NSLog(@"%@>%@",[[NSString stringWithCString:__FILE__ encoding:NSUTF8StringEncoding] lastPathComponent],NSStringFromSelector(_cmd));
+    XMPPLogTrace();
     [self auth];
 }
 
@@ -396,8 +354,8 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
  * This method is called if registration fails.
  **/
 - (void)xmppStream:(XMPPStream *)sender didNotRegister:(NSXMLElement *)error {
-    NSLog(@"%@>%@",[[NSString stringWithCString:__FILE__ encoding:NSUTF8StringEncoding] lastPathComponent],NSStringFromSelector(_cmd));
-    NSLog(@"Error while registering: %@", error);
+    XMPPLogTrace();
+    XMPPLogError(@"Error while registering: %@", error);
 }
 
 /**
@@ -405,7 +363,7 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
  * If authentication fails for some reason, the xmppStream:didNotAuthenticate: method will be called instead.
  **/
 - (void)xmppStreamDidAuthenticate:(XMPPStream *)sender {
-    NSLog(@"%@>%@",[[NSString stringWithCString:__FILE__ encoding:NSUTF8StringEncoding] lastPathComponent],NSStringFromSelector(_cmd));
+    XMPPLogTrace();
     [self didAuth];
 }
 
@@ -413,8 +371,8 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
  * This method is called if authentication fails.
  **/
 - (void)xmppStream:(XMPPStream *)sender didNotAuthenticate:(NSXMLElement *)error {
-    NSLog(@"%@>%@",[[NSString stringWithCString:__FILE__ encoding:NSUTF8StringEncoding] lastPathComponent],NSStringFromSelector(_cmd));
-    NSLog(@"Error while authenticating: %@", error);
+    XMPPLogTrace();
+    XMPPLogError(@"Error while authenticating: %@", error);
     [self registerJiD:sender.myJID];
 }
 
@@ -430,7 +388,7 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
  * Return nil (or don't implement this method) if you wish to use the standard binding procedure.
  **/
 - (id <XMPPCustomBinding>)xmppStreamWillBind:(XMPPStream *)sender {
-    NSLog(@"%@>%@",[[NSString stringWithCString:__FILE__ encoding:NSUTF8StringEncoding] lastPathComponent],NSStringFromSelector(_cmd));
+    XMPPLogTrace();
     return nil;
 }
 
@@ -441,7 +399,7 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
  * Return an alternative resource or return nil to let the server automatically pick a resource for us.
  **/
 - (NSString *)xmppStream:(XMPPStream *)sender alternativeResourceForConflictingResource:(NSString *)conflictingResource {
-    NSLog(@"%@>%@",[[NSString stringWithCString:__FILE__ encoding:NSUTF8StringEncoding] lastPathComponent],NSStringFromSelector(_cmd));
+    XMPPLogTrace();
     return nil;
 }
 
@@ -467,16 +425,16 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
  * @see xmppStream:didReceivePresence:
  **/
 - (XMPPIQ *)xmppStream:(XMPPStream *)sender willReceiveIQ:(XMPPIQ *)iq {
-    NSLog(@"%@>%@",[[NSString stringWithCString:__FILE__ encoding:NSUTF8StringEncoding] lastPathComponent],NSStringFromSelector(_cmd));
+    XMPPLogTrace();
     return iq;
 }
 - (XMPPMessage *)xmppStream:(XMPPStream *)sender willReceiveMessage:(XMPPMessage *)message {
-    NSLog(@"%@>%@",[[NSString stringWithCString:__FILE__ encoding:NSUTF8StringEncoding] lastPathComponent],NSStringFromSelector(_cmd));
+    XMPPLogTrace();
     [self logMessage:message];
     return message;
 }
 - (XMPPPresence *)xmppStream:(XMPPStream *)sender willReceivePresence:(XMPPPresence *)presence {
-    NSLog(@"%@>%@",[[NSString stringWithCString:__FILE__ encoding:NSUTF8StringEncoding] lastPathComponent],NSStringFromSelector(_cmd));
+    XMPPLogTrace();
     [self logPresense:presence];
     return presence;
 }
@@ -488,7 +446,7 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
  * even if it was filtered for some reason.
  **/
 - (void)xmppStreamDidFilterStanza:(XMPPStream *)sender {
-    NSLog(@"%@>%@",[[NSString stringWithCString:__FILE__ encoding:NSUTF8StringEncoding] lastPathComponent],NSStringFromSelector(_cmd));
+    XMPPLogTrace();
 }
 
 /**
@@ -504,15 +462,15 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
  * you should copy the element first, and then modify and use the copy.
  **/
 - (BOOL)xmppStream:(XMPPStream *)sender didReceiveIQ:(XMPPIQ *)iq {
-    NSLog(@"%@>%@",[[NSString stringWithCString:__FILE__ encoding:NSUTF8StringEncoding] lastPathComponent],NSStringFromSelector(_cmd));
+    XMPPLogTrace();
     return YES;
 }
 - (void)xmppStream:(XMPPStream *)sender didReceiveMessage:(XMPPMessage *)message {
-    NSLog(@"%@>%@",[[NSString stringWithCString:__FILE__ encoding:NSUTF8StringEncoding] lastPathComponent],NSStringFromSelector(_cmd));
+    XMPPLogTrace();
     [self logMessage:message];
 }
 - (void)xmppStream:(XMPPStream *)sender didReceivePresence:(XMPPPresence *)presence {
-    NSLog(@"%@>%@",[[NSString stringWithCString:__FILE__ encoding:NSUTF8StringEncoding] lastPathComponent],NSStringFromSelector(_cmd));
+    XMPPLogTrace();
     [self logPresense:presence];
     [self sendTestMessage];
 }
@@ -527,7 +485,7 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
  * via the other didReceive...: methods.
  **/
 - (void)xmppStream:(XMPPStream *)sender didReceiveError:(NSXMLElement *)error {
-    NSLog(@"%@>%@",[[NSString stringWithCString:__FILE__ encoding:NSUTF8StringEncoding] lastPathComponent],NSStringFromSelector(_cmd));
+    XMPPLogTrace();
 }
 
 /**
@@ -552,15 +510,15 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
  * @see xmppStream:didSendPresence:
  **/
 - (XMPPIQ *)xmppStream:(XMPPStream *)sender willSendIQ:(XMPPIQ *)iq {
-    NSLog(@"%@>%@",[[NSString stringWithCString:__FILE__ encoding:NSUTF8StringEncoding] lastPathComponent],NSStringFromSelector(_cmd));
+    XMPPLogTrace();
     return iq;
 }
 - (XMPPMessage *)xmppStream:(XMPPStream *)sender willSendMessage:(XMPPMessage *)message {
-    NSLog(@"%@>%@",[[NSString stringWithCString:__FILE__ encoding:NSUTF8StringEncoding] lastPathComponent],NSStringFromSelector(_cmd));
+    XMPPLogTrace();
     return message;
 }
 - (XMPPPresence *)xmppStream:(XMPPStream *)sender willSendPresence:(XMPPPresence *)presence {
-    NSLog(@"%@>%@",[[NSString stringWithCString:__FILE__ encoding:NSUTF8StringEncoding] lastPathComponent],NSStringFromSelector(_cmd));
+    XMPPLogTrace();
     [self logPresense:presence];
     return presence;
 }
@@ -571,10 +529,10 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
  * or for general logging purposes. (E.g. a central history logging mechanism).
  **/
 - (void)xmppStream:(XMPPStream *)sender didSendIQ:(XMPPIQ *)iq {
-    NSLog(@"%@>%@",[[NSString stringWithCString:__FILE__ encoding:NSUTF8StringEncoding] lastPathComponent],NSStringFromSelector(_cmd));
+    XMPPLogTrace();
 }
 - (void)xmppStream:(XMPPStream *)sender didSendMessage:(XMPPMessage *)message {
-    NSLog(@"%@>%@",[[NSString stringWithCString:__FILE__ encoding:NSUTF8StringEncoding] lastPathComponent],NSStringFromSelector(_cmd));
+    XMPPLogTrace();
 }
 - (void)xmppStream:(XMPPStream *)sender didSendPresence:(XMPPPresence *)presence {
     NSLog(@"%@>%@",[[NSString stringWithCString:__FILE__ encoding:NSUTF8StringEncoding] lastPathComponent],NSStringFromSelector(_cmd));
@@ -586,21 +544,21 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
  * This occurs when the stream gets disconnected before the element can get sent out.
  **/
 - (void)xmppStream:(XMPPStream *)sender didFailToSendIQ:(XMPPIQ *)iq error:(NSError *)error {
-    NSLog(@"%@>%@",[[NSString stringWithCString:__FILE__ encoding:NSUTF8StringEncoding] lastPathComponent],NSStringFromSelector(_cmd));
+    XMPPLogTrace();
 }
 - (void)xmppStream:(XMPPStream *)sender didFailToSendMessage:(XMPPMessage *)message error:(NSError *)error {
-    NSLog(@"%@>%@",[[NSString stringWithCString:__FILE__ encoding:NSUTF8StringEncoding] lastPathComponent],NSStringFromSelector(_cmd));
+    XMPPLogTrace();
 }
 - (void)xmppStream:(XMPPStream *)sender didFailToSendPresence:(XMPPPresence *)presence error:(NSError *)error {
-    NSLog(@"%@>%@",[[NSString stringWithCString:__FILE__ encoding:NSUTF8StringEncoding] lastPathComponent],NSStringFromSelector(_cmd));
+    XMPPLogTrace();
     [self logPresense:presence];
 }
 /**
  * This method is called if the XMPP Stream's jid changes.
  **/
 - (void)xmppStreamDidChangeMyJID:(XMPPStream *)xmppStream {
-    NSLog(@"%@>%@",[[NSString stringWithCString:__FILE__ encoding:NSUTF8StringEncoding] lastPathComponent],NSStringFromSelector(_cmd));
-    NSLog(@"JID(user:%@ domain:%@ resource:%@)",xmppStream.myJID.user,xmppStream.myJID.domain,xmppStream.myJID.resource);
+    XMPPLogTrace();
+    XMPPLogInfo(@"JID(user:%@ domain:%@ resource:%@)",xmppStream.myJID.user,xmppStream.myJID.domain,xmppStream.myJID.resource);
 }
 
 /**
@@ -616,7 +574,7 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
  * @see xmppStreamDidSendClosingStreamStanza
  **/
 - (void)xmppStreamWasToldToDisconnect:(XMPPStream *)sender {
-    NSLog(@"%@>%@",[[NSString stringWithCString:__FILE__ encoding:NSUTF8StringEncoding] lastPathComponent],NSStringFromSelector(_cmd));
+    XMPPLogTrace();
 }
 
 /**
@@ -630,14 +588,14 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
  * but there are a few contexts in which the difference has various protocol implications.
  **/
 - (void)xmppStreamDidSendClosingStreamStanza:(XMPPStream *)sender {
-    NSLog(@"%@>%@",[[NSString stringWithCString:__FILE__ encoding:NSUTF8StringEncoding] lastPathComponent],NSStringFromSelector(_cmd));
+    XMPPLogTrace();
 }
 
 /**
  * This methods is called if the XMPP stream's connect times out.
  **/
 - (void)xmppStreamConnectDidTimeout:(XMPPStream *)sender {
-    NSLog(@"%@>%@",[[NSString stringWithCString:__FILE__ encoding:NSUTF8StringEncoding] lastPathComponent],NSStringFromSelector(_cmd));
+    XMPPLogTrace();
 }
 
 /**
@@ -652,9 +610,9 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
  * @see xmppStreamConnectDidTimeout:
  **/
 - (void)xmppStreamDidDisconnect:(XMPPStream *)sender withError:(NSError *)error {
-    NSLog(@"%@>%@",[[NSString stringWithCString:__FILE__ encoding:NSUTF8StringEncoding] lastPathComponent],NSStringFromSelector(_cmd));
+    XMPPLogTrace();
     //ENOTCONN	57		/* Socket is not connected */
-    NSLog(@"Disconnected: %@", error);
+    XMPPLogInfo(@"Disconnected: %@", error);
 }
 
 /**
@@ -664,7 +622,7 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
  * Recall that the XEP specifies that <stream:features/> SHOULD be sent.
  **/
 - (void)xmppStream:(XMPPStream *)sender didReceiveP2PFeatures:(NSXMLElement *)streamFeatures {
-    NSLog(@"%@>%@",[[NSString stringWithCString:__FILE__ encoding:NSUTF8StringEncoding] lastPathComponent],NSStringFromSelector(_cmd));
+    XMPPLogTrace();
 }
 
 /**
@@ -674,7 +632,7 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
  * adding any specific featues the delegate might support.
  **/
 - (void)xmppStream:(XMPPStream *)sender willSendP2PFeatures:(NSXMLElement *)streamFeatures {
-    NSLog(@"%@>%@",[[NSString stringWithCString:__FILE__ encoding:NSUTF8StringEncoding] lastPathComponent],NSStringFromSelector(_cmd));
+    XMPPLogTrace();
 }
 
 /**
@@ -685,10 +643,10 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
  * than what is available with the autoAddDelegate:toModulesOfClass: method.
  **/
 - (void)xmppStream:(XMPPStream *)sender didRegisterModule:(id)module {
-    NSLog(@"%@>%@",[[NSString stringWithCString:__FILE__ encoding:NSUTF8StringEncoding] lastPathComponent],NSStringFromSelector(_cmd));
+    XMPPLogTrace();
 }
 - (void)xmppStream:(XMPPStream *)sender willUnregisterModule:(id)module {
-    NSLog(@"%@>%@",[[NSString stringWithCString:__FILE__ encoding:NSUTF8StringEncoding] lastPathComponent],NSStringFromSelector(_cmd));
+    XMPPLogTrace();
 }
 
 /**
@@ -705,10 +663,10 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
  * @see registerCustomElementNames (in XMPPInternal.h)
  **/
 - (void)xmppStream:(XMPPStream *)sender didSendCustomElement:(NSXMLElement *)element {
-    NSLog(@"%@>%@",[[NSString stringWithCString:__FILE__ encoding:NSUTF8StringEncoding] lastPathComponent],NSStringFromSelector(_cmd));
+    XMPPLogTrace();
 }
 - (void)xmppStream:(XMPPStream *)sender didReceiveCustomElement:(NSXMLElement *)element {
-    NSLog(@"%@>%@",[[NSString stringWithCString:__FILE__ encoding:NSUTF8StringEncoding] lastPathComponent],NSStringFromSelector(_cmd));
+    XMPPLogTrace();
 }
 
 

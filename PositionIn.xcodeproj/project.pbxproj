@@ -85,6 +85,8 @@
 		E660E5401B5BCF1A00F52050 /* TableRefreshHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E660E53F1B5BCF1A00F52050 /* TableRefreshHeaderView.swift */; };
 		E660E5421B5BCF3800F52050 /* TableViewSectionHeaderFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E660E5411B5BCF3800F52050 /* TableViewSectionHeaderFooterView.swift */; };
 		E660E5441B5BE43900F52050 /* TableViewSectionHeaderFooterLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E660E5431B5BE43900F52050 /* TableViewSectionHeaderFooterLabelView.swift */; };
+		E6681A241B676345003096D6 /* XMPPLogFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = E6681A221B676345003096D6 /* XMPPLogFormatter.h */; };
+		E6681A251B676345003096D6 /* XMPPLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = E6681A231B676345003096D6 /* XMPPLogFormatter.m */; };
 		E6829B041B5E6CF800FB1E1D /* RoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6829B031B5E6CF800FB1E1D /* RoundButton.swift */; };
 		E69420F91B66358000F34F06 /* ProductDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E69420F81B66358000F34F06 /* ProductDetailsViewController.swift */; };
 		E69420FF1B665F5100F34F06 /* PositionIn.ProductDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E69420FE1B665F5100F34F06 /* PositionIn.ProductDetailsViewController.xib */; };
@@ -256,6 +258,8 @@
 		E660E53F1B5BCF1A00F52050 /* TableRefreshHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableRefreshHeaderView.swift; sourceTree = "<group>"; };
 		E660E5411B5BCF3800F52050 /* TableViewSectionHeaderFooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewSectionHeaderFooterView.swift; sourceTree = "<group>"; };
 		E660E5431B5BE43900F52050 /* TableViewSectionHeaderFooterLabelView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewSectionHeaderFooterLabelView.swift; sourceTree = "<group>"; };
+		E6681A221B676345003096D6 /* XMPPLogFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPLogFormatter.h; sourceTree = "<group>"; };
+		E6681A231B676345003096D6 /* XMPPLogFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPLogFormatter.m; sourceTree = "<group>"; };
 		E6736ADB1B4E56DD0003580D /* Version.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Version.h; sourceTree = "<group>"; };
 		E6736ADD1B4E56EB0003580D /* TODOwarn.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = TODOwarn.sh; sourceTree = "<group>"; };
 		E6736ADE1B4E56EB0003580D /* Version.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = Version.sh; sourceTree = "<group>"; };
@@ -640,6 +644,8 @@
 			children = (
 				E6E2FE8C1B66F61300880F3C /* Messaging.h */,
 				E6E2FE8A1B66F61300880F3C /* Supporting Files */,
+				E6681A221B676345003096D6 /* XMPPLogFormatter.h */,
+				E6681A231B676345003096D6 /* XMPPLogFormatter.m */,
 				E6E2FEAB1B66F72100880F3C /* XMPPClient.h */,
 				E6E2FEAC1B66F72100880F3C /* XMPPClient.m */,
 			);
@@ -687,6 +693,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E6E2FEAD1B66F72100880F3C /* XMPPClient.h in Headers */,
+				E6681A241B676345003096D6 /* XMPPLogFormatter.h in Headers */,
 				E6E2FE8D1B66F61300880F3C /* Messaging.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1194,6 +1201,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E6681A251B676345003096D6 /* XMPPLogFormatter.m in Sources */,
 				E6E2FEAE1B66F72100880F3C /* XMPPClient.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
