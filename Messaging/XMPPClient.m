@@ -13,6 +13,62 @@
 
 static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
 
+@interface OOTTYLogFormatter : NSObject <DDLogFormatter>
+{
+    NSDateFormatter *dateFormatter;
+}
+@end
+
+@implementation OOTTYLogFormatter
+
+
+- (id)init {
+    if((self = [super init]))
+    {
+        dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setFormatterBehavior:NSDateFormatterBehavior10_4];
+        [dateFormatter setDateFormat:@"HH:mm:ss:SSS"];
+    }
+    return self;
+}
+
+- (NSString *)formatLogMessage:(DDLogMessage *)logMessage {
+    NSString *logContext = @"XMPP";
+//    switch (logMessage->logContext) {
+//        case API_LOG_CONTEXT:
+//            logContext = @"API";
+//            break;
+//        case CACHE_LOG_CONTEXT:
+//            logContext = @"CACHE";
+//            break;
+//        case UI_LOG_CONTEXT:
+//            logContext = @"UI";
+//            break;
+//        default:
+//            logContext = @"oOps";
+//            break;
+//    }
+    
+    NSString *logLevel;
+    switch (logMessage->logFlag)
+    {
+        case LOG_FLAG_ERROR : logLevel = @"E"; break;
+        case LOG_FLAG_WARN  : logLevel = @"W"; break;
+        case LOG_FLAG_INFO  : logLevel = @"I"; break;
+        case LOG_FLAG_DEBUG : logLevel = @"D"; break;
+        default             : logLevel = @"V"; break;
+    }
+    
+    NSString *dateAndTime = [dateFormatter stringFromDate:(logMessage->timestamp)];
+    NSString *logMsg = logMessage->logMsg;
+    
+    
+    return [NSString stringWithFormat:@"%@ [ %@:%@ ] %s:%d> %@", dateAndTime,logContext,logLevel,  logMessage->function,logMessage->lineNumber,logMsg];
+}
+
+@end
+
+
 #pragma mark - Configuration
 
 @interface XMPPClientConfiguration ()
@@ -56,7 +112,21 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
     self = [super init];
     if (self) {
         self.config = configuration;
-        [DDLog addLogger:[DDTTYLogger sharedInstance] withLogLevel:XMPP_LOG_FLAG_SEND_RECV];
+        DDTTYLogger *ttyLogger = [DDTTYLogger sharedInstance];
+        [ttyLogger setColorsEnabled:YES];
+        [ttyLogger setLogFormatter:[OOTTYLogFormatter new]];
+        UIColor *errorColor = [UIColor colorWithRed:(214/255.0f) green:(57/255.0f) blue:(30/255.0f) alpha:1.0f];
+        UIColor *warningColor= [UIColor yellowColor];
+        UIColor *infoColor = [UIColor colorWithRed:0.819 green:0.931 blue:0.976 alpha:1.000];
+        UIColor *verboseColor = [UIColor lightGrayColor];
+        [ttyLogger setForegroundColor:errorColor backgroundColor:nil forFlag:LOG_FLAG_ERROR];
+        [ttyLogger setForegroundColor:warningColor backgroundColor:nil forFlag:LOG_FLAG_WARN];
+        [ttyLogger setForegroundColor:infoColor backgroundColor:nil forFlag:LOG_FLAG_INFO];
+        [ttyLogger setForegroundColor:verboseColor backgroundColor:nil forFlag:LOG_FLAG_VERBOSE];
+        [ttyLogger setForegroundColor:[UIColor purpleColor] backgroundColor:nil forFlag:LOG_FLAG_DEBUG];
+
+        [DDLog addLogger:ttyLogger withLogLevel:XMPP_LOG_FLAG_SEND_RECV];
+//        [DDLog addLogger:[DDASLLogger sharedInstance]];
         [self setupStreamWithConfig:configuration];
     }
     return self;
