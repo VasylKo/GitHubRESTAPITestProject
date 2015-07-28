@@ -28,7 +28,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         #endif
         let baseURL = NSURL(string: "http://45.63.7.39:8080")!
         api = APIService(url: baseURL)
-        chatClient = XMPPClient()
+        let chatConfig = XMPPClientConfiguration.defaultConfiguration()
+        chatClient = XMPPClient(configuration: chatConfig)
         super.init()
     }
 
@@ -76,10 +77,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 return response.accessToken
             }
         }.onSuccess { _ in
-            self.runProfileAPI()
+//            self.runProfileAPI()
         }.onFailure { error in
             Log.error?.value(error)
         }
+        
+        chatClient.connect()
         
         if let sidebarViewController = window?.rootViewController as? SidebarViewController {
             let defaultAction: SidebarViewController.Action = .ForYou

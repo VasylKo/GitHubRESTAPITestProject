@@ -118,8 +118,6 @@
 		E6E2FE9C1B66F61400880F3C /* MessagingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E6E2FE9B1B66F61400880F3C /* MessagingTests.m */; };
 		E6E2FE9F1B66F61400880F3C /* Messaging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6E2FE881B66F61300880F3C /* Messaging.framework */; };
 		E6E2FEA01B66F61400880F3C /* Messaging.framework in Embed Core Framework */ = {isa = PBXBuildFile; fileRef = E6E2FE881B66F61300880F3C /* Messaging.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		E6E2FEA91B66F6BA00880F3C /* CocoaAsyncSocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6E2FEA71B66F6BA00880F3C /* CocoaAsyncSocket.framework */; };
-		E6E2FEAA1B66F6BA00880F3C /* CocoaLumberjack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6E2FEA81B66F6BA00880F3C /* CocoaLumberjack.framework */; };
 		E6E2FEAD1B66F72100880F3C /* XMPPClient.h in Headers */ = {isa = PBXBuildFile; fileRef = E6E2FEAB1B66F72100880F3C /* XMPPClient.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E6E2FEAE1B66F72100880F3C /* XMPPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = E6E2FEAC1B66F72100880F3C /* XMPPClient.m */; };
 		E6FC63D11B5901060062F5C9 /* KVObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6FC63D01B5901060062F5C9 /* KVObserver.swift */; };
@@ -341,8 +339,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E6E2FEA91B66F6BA00880F3C /* CocoaAsyncSocket.framework in Frameworks */,
-				E6E2FEAA1B66F6BA00880F3C /* CocoaLumberjack.framework in Frameworks */,
 				2D794D5CB67C8C6DE03B1631 /* Pods_Messaging.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1574,6 +1570,10 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 614C244FF1EB4D43BD933A42 /* Pods-Messaging.debug.xcconfig */;
 			buildSettings = {
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_OBJC_EXPLICIT_OWNERSHIP_TYPE = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_REPEATED_USE_OF_WEAK = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -1587,6 +1587,7 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
+				GCC_WARN_SHADOW = YES;
 				INFOPLIST_FILE = Messaging/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -1603,6 +1604,10 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6A655C5763898604673BF546 /* Pods-Messaging.release.xcconfig */;
 			buildSettings = {
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_OBJC_EXPLICIT_OWNERSHIP_TYPE = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_REPEATED_USE_OF_WEAK = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -1612,6 +1617,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
+				GCC_WARN_SHADOW = YES;
 				INFOPLIST_FILE = Messaging/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
