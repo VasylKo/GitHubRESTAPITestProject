@@ -6,21 +6,22 @@
 //  Copyright (c) 2015 Soluna Labs. All rights reserved.
 //
 
-#import "XMPPProcess.h"
-#import "XMPPLogging.h"
+
+#import "XMPPProcess+Private.h"
 
 static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
 
 
-@interface XMPPProcess ()
-@end
-
 @implementation XMPPProcess
+
+- (instancetype)init {
+    return  nil;
+}
 
 - (instancetype)initWithStream:(XMPPStream *)stream queue:(dispatch_queue_t)completionQueue {
     self = [super init];
     if (self) {
-        self.xmppStream =stream;
+        self.xmppStream = stream;
         self.completionQueue = completionQueue;
     }
     return  self;
@@ -40,6 +41,7 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
 }
 
 - (void)run {
+    //Default implementation call success with no result
     [self complete:nil error:nil];
 }
 

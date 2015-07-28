@@ -6,8 +6,8 @@
 //  Copyright (c) 2015 Soluna Labs. All rights reserved.
 //
 
-#import "XMPPProcess.h"
-#import "XMPP.h"
+#import "XMPPProcess+Private.h"
+
 
 @interface XMPPAuthProcess : XMPPProcess
 
