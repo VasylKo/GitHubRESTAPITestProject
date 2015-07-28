@@ -8,7 +8,10 @@
 
 #import "XMPPClient.h"
 #import "XMPP.h"
-#import <CleanroomLogger/CleanroomLogger-Swift.h>
+#import "XMPPLogging.h"
+#import "DDTTYLogger.h"
+
+static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
 
 #pragma mark - Configuration
 
@@ -53,6 +56,7 @@
     self = [super init];
     if (self) {
         self.config = configuration;
+        [DDLog addLogger:[DDTTYLogger sharedInstance] withLogLevel:XMPP_LOG_FLAG_SEND_RECV];
         [self setupStreamWithConfig:configuration];
     }
     return self;
@@ -108,6 +112,8 @@
 
 
 - (void)connect {
+    XMPPLogTrace();
+    XMPPLogError(@"Connecting");
     NSLog(@"Connecting");
     NSError *error = nil;
     
