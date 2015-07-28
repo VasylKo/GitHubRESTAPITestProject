@@ -12,6 +12,8 @@
 #import "DDTTYLogger.h"
 #import "XMPPLogFormatter.h"
 
+#import "XMPPAuthProcess.h"
+
 static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
 
 
@@ -150,7 +152,23 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
     }
 }
 
+- (XMPPProcess *)auth:(XMPPJID *)jid password:(NSString *)password {
+    XMPPAuthProcess *process = [[XMPPAuthProcess alloc] initWithStream:self.xmppStream queue:nil];
+    process.password = password;
+    process.jid = jid;
+    return process;
+}
+
 - (void)auth {
+    [[self auth:[XMPPJID jidWithString:self.config.userJid] password:self.config.userpwd] executeWithCompletion:^(id result, NSError *error) {
+        if (error != nil) {
+            XMPPLogError(@"Auth %@", error);
+        } else {
+            XMPPLogWarn(@"Auth done");
+        }
+        
+    }];
+    return;
     XMPPLogVerbose(@"supportsInBandRegistration %d, isSecure %d"
           ,[self.xmppStream supportsInBandRegistration]
           ,[self.xmppStream isSecure]

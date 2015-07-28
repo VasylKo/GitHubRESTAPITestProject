@@ -87,6 +87,10 @@
 		E660E5441B5BE43900F52050 /* TableViewSectionHeaderFooterLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E660E5431B5BE43900F52050 /* TableViewSectionHeaderFooterLabelView.swift */; };
 		E6681A241B676345003096D6 /* XMPPLogFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = E6681A221B676345003096D6 /* XMPPLogFormatter.h */; };
 		E6681A251B676345003096D6 /* XMPPLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = E6681A231B676345003096D6 /* XMPPLogFormatter.m */; };
+		E6681A2A1B679C87003096D6 /* XMPPProcess.h in Headers */ = {isa = PBXBuildFile; fileRef = E6681A281B679C87003096D6 /* XMPPProcess.h */; };
+		E6681A2B1B679C87003096D6 /* XMPPProcess.m in Sources */ = {isa = PBXBuildFile; fileRef = E6681A291B679C87003096D6 /* XMPPProcess.m */; };
+		E6681A2E1B67A2DB003096D6 /* XMPPAuthProcess.h in Headers */ = {isa = PBXBuildFile; fileRef = E6681A2C1B67A2DB003096D6 /* XMPPAuthProcess.h */; };
+		E6681A2F1B67A2DB003096D6 /* XMPPAuthProcess.m in Sources */ = {isa = PBXBuildFile; fileRef = E6681A2D1B67A2DB003096D6 /* XMPPAuthProcess.m */; };
 		E6829B041B5E6CF800FB1E1D /* RoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6829B031B5E6CF800FB1E1D /* RoundButton.swift */; };
 		E69420F91B66358000F34F06 /* ProductDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E69420F81B66358000F34F06 /* ProductDetailsViewController.swift */; };
 		E69420FF1B665F5100F34F06 /* PositionIn.ProductDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E69420FE1B665F5100F34F06 /* PositionIn.ProductDetailsViewController.xib */; };
@@ -260,6 +264,10 @@
 		E660E5431B5BE43900F52050 /* TableViewSectionHeaderFooterLabelView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewSectionHeaderFooterLabelView.swift; sourceTree = "<group>"; };
 		E6681A221B676345003096D6 /* XMPPLogFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPLogFormatter.h; sourceTree = "<group>"; };
 		E6681A231B676345003096D6 /* XMPPLogFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPLogFormatter.m; sourceTree = "<group>"; };
+		E6681A281B679C87003096D6 /* XMPPProcess.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPProcess.h; sourceTree = "<group>"; };
+		E6681A291B679C87003096D6 /* XMPPProcess.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPProcess.m; sourceTree = "<group>"; };
+		E6681A2C1B67A2DB003096D6 /* XMPPAuthProcess.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPAuthProcess.h; sourceTree = "<group>"; };
+		E6681A2D1B67A2DB003096D6 /* XMPPAuthProcess.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPAuthProcess.m; sourceTree = "<group>"; };
 		E6736ADB1B4E56DD0003580D /* Version.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Version.h; sourceTree = "<group>"; };
 		E6736ADD1B4E56EB0003580D /* TODOwarn.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = TODOwarn.sh; sourceTree = "<group>"; };
 		E6736ADE1B4E56EB0003580D /* Version.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = Version.sh; sourceTree = "<group>"; };
@@ -589,6 +597,24 @@
 			path = TableView;
 			sourceTree = "<group>";
 		};
+		E6681A261B679C6B003096D6 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		E6681A271B679C72003096D6 /* Processes */ = {
+			isa = PBXGroup;
+			children = (
+				E6681A281B679C87003096D6 /* XMPPProcess.h */,
+				E6681A291B679C87003096D6 /* XMPPProcess.m */,
+				E6681A2C1B67A2DB003096D6 /* XMPPAuthProcess.h */,
+				E6681A2D1B67A2DB003096D6 /* XMPPAuthProcess.m */,
+			);
+			path = Processes;
+			sourceTree = "<group>";
+		};
 		E6736ADC1B4E56EB0003580D /* Scripts */ = {
 			isa = PBXGroup;
 			children = (
@@ -648,6 +674,8 @@
 				E6681A231B676345003096D6 /* XMPPLogFormatter.m */,
 				E6E2FEAB1B66F72100880F3C /* XMPPClient.h */,
 				E6E2FEAC1B66F72100880F3C /* XMPPClient.m */,
+				E6681A271B679C72003096D6 /* Processes */,
+				E6681A261B679C6B003096D6 /* Extensions */,
 			);
 			path = Messaging;
 			sourceTree = "<group>";
@@ -694,7 +722,9 @@
 			files = (
 				E6E2FEAD1B66F72100880F3C /* XMPPClient.h in Headers */,
 				E6681A241B676345003096D6 /* XMPPLogFormatter.h in Headers */,
+				E6681A2E1B67A2DB003096D6 /* XMPPAuthProcess.h in Headers */,
 				E6E2FE8D1B66F61300880F3C /* Messaging.h in Headers */,
+				E6681A2A1B679C87003096D6 /* XMPPProcess.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1201,7 +1231,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E6681A2B1B679C87003096D6 /* XMPPProcess.m in Sources */,
 				E6681A251B676345003096D6 /* XMPPLogFormatter.m in Sources */,
+				E6681A2F1B67A2DB003096D6 /* XMPPAuthProcess.m in Sources */,
 				E6E2FEAE1B66F72100880F3C /* XMPPClient.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
