@@ -83,6 +83,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         chatClient.connect()
+
+        dispatch_delay(3) {
+            self.chatClient.auth("ixmpp@beewellapp.com", password: "1HateD0m2").future().onSuccess {
+                Log.info?.message("XMPP Conntected")
+                }.onFailure { error in
+                    Log.error?.value(error)
+            }
+            
+        }
+        
         
         if let sidebarViewController = window?.rootViewController as? SidebarViewController {
             let defaultAction: SidebarViewController.Action = .ForYou

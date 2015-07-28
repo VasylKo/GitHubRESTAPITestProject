@@ -54,4 +54,10 @@
  */
 @property (nonatomic, strong, readonly, nonnull) XMPPStream *xmppStream;
 
+/**
+ *  Default process processing queue
+ *
+ *  @return dispatch queue
+ */
++ (nonnull dispatch_queue_t)defaultProcessingQueue;
 @end

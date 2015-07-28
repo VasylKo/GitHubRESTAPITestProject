@@ -11,6 +11,7 @@
 #import "XMPPLogging.h"
 #import "DDTTYLogger.h"
 #import "XMPPLogFormatter.h"
+#import "XMPPProcess+Private.h"
 
 #import "XMPPAuthProcess.h"
 
@@ -76,29 +77,7 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
     [self teardownStream];
 }
 
-+ (void)setupLog {
-    DDTTYLogger *ttyLogger = [DDTTYLogger sharedInstance];
-    [ttyLogger setColorsEnabled:YES];
-    [ttyLogger setLogFormatter:[XMPPLogFormatter new]];
-    UIColor *errorColor = [UIColor colorWithRed:(214/255.0f) green:(57/255.0f) blue:(30/255.0f) alpha:1.0f];
-    UIColor *warningColor= [UIColor yellowColor];
-    UIColor *infoColor = [UIColor colorWithRed:0.819 green:0.931 blue:0.976 alpha:1.000];
-    UIColor *verboseColor = [UIColor lightGrayColor];
-    UIColor *xmlColor = [UIColor colorWithRed: 0.3619 green: 0.3619 blue: 0.3619 alpha: 1.0];
-    [ttyLogger setForegroundColor:errorColor backgroundColor:nil forFlag:XMPP_LOG_FLAG_ERROR context:XMPP_LOG_CONTEXT];
-    [ttyLogger setForegroundColor:warningColor backgroundColor:nil forFlag:XMPP_LOG_FLAG_WARN context:XMPP_LOG_CONTEXT];
-    [ttyLogger setForegroundColor:infoColor backgroundColor:nil forFlag:XMPP_LOG_FLAG_INFO context:XMPP_LOG_CONTEXT];
-    [ttyLogger setForegroundColor:verboseColor backgroundColor:nil forFlag:XMPP_LOG_FLAG_VERBOSE context:XMPP_LOG_CONTEXT];
-    [ttyLogger setForegroundColor:verboseColor backgroundColor:nil forFlag:XMPP_LOG_FLAG_TRACE context:XMPP_LOG_CONTEXT];
-    [ttyLogger setForegroundColor:xmlColor backgroundColor:nil forFlag:XMPP_LOG_FLAG_SEND context:XMPP_LOG_CONTEXT];
-    [ttyLogger setForegroundColor:xmlColor backgroundColor:nil forFlag:XMPP_LOG_FLAG_RECV_POST context:XMPP_LOG_CONTEXT];
-    
-    [DDLog addLogger:ttyLogger withLogLevel:XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_SEND_RECV | XMPP_LOG_FLAG_TRACE];
-    //        [DDLog addLogger:[DDASLLogger sharedInstance]];
-
-}
-
-#pragma mark - Strem LifeCycle -
+#pragma mark - Stream LifeCycle -
 
 - (void)setupStreamWithConfig:(XMPPClientConfiguration *)configuration {
     self.xmppStream = [XMPPStream new];
@@ -121,27 +100,53 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
     self.xmppStream.myJID = [XMPPJID jidWithString:configuration.userJid];
     self.xmppStream.hostName = configuration.hostName;
     self.xmppStream.hostPort = configuration.port;
-/*
- self.xmppReconect = [XMPPReconnect new];
- [self.xmppReconect activate:self.xmppStream];
- [self.xmppReconect addDelegate:self delegateQueue:dispatch_get_main_queue()];
-*/
-
+    /*
+     self.xmppReconect = [XMPPReconnect new];
+     [self.xmppReconect activate:self.xmppStream];
+     [self.xmppReconect addDelegate:self delegateQueue:dispatch_get_main_queue()];
+     */
+    
 }
 
 
 - (void)teardownStream {
-//    [self.xmppReconect removeDelegate:self];
+    //    [self.xmppReconect removeDelegate:self];
     [self.xmppStream removeDelegate:self];
     
-//    [self.xmppReconect deactivate];
+    //    [self.xmppReconect deactivate];
     
     [self.xmppStream disconnect];
     
-//    self.xmppReconect = nil;
+    //    self.xmppReconect = nil;
     self.xmppStream = nil;
 }
 
+#pragma mark - Log -
+
++ (void)setupLog {
+    DDTTYLogger *ttyLogger = [DDTTYLogger sharedInstance];
+    [ttyLogger setColorsEnabled:YES];
+    [ttyLogger setLogFormatter:[XMPPLogFormatter new]];
+    UIColor *errorColor = [UIColor colorWithRed:(214/255.0f) green:(57/255.0f) blue:(30/255.0f) alpha:1.0f];
+    UIColor *warningColor= [UIColor yellowColor];
+    UIColor *infoColor = [UIColor colorWithRed:0.819 green:0.931 blue:0.976 alpha:1.000];
+    UIColor *verboseColor = [UIColor lightGrayColor];
+    UIColor *xmlColor = [UIColor colorWithRed: 0.3619 green: 0.3619 blue: 0.3619 alpha: 1.0];
+    [ttyLogger setForegroundColor:errorColor backgroundColor:nil forFlag:XMPP_LOG_FLAG_ERROR context:XMPP_LOG_CONTEXT];
+    [ttyLogger setForegroundColor:warningColor backgroundColor:nil forFlag:XMPP_LOG_FLAG_WARN context:XMPP_LOG_CONTEXT];
+    [ttyLogger setForegroundColor:infoColor backgroundColor:nil forFlag:XMPP_LOG_FLAG_INFO context:XMPP_LOG_CONTEXT];
+    [ttyLogger setForegroundColor:verboseColor backgroundColor:nil forFlag:XMPP_LOG_FLAG_VERBOSE context:XMPP_LOG_CONTEXT];
+    [ttyLogger setForegroundColor:verboseColor backgroundColor:nil forFlag:XMPP_LOG_FLAG_TRACE context:XMPP_LOG_CONTEXT];
+    [ttyLogger setForegroundColor:xmlColor backgroundColor:nil forFlag:XMPP_LOG_FLAG_SEND context:XMPP_LOG_CONTEXT];
+    [ttyLogger setForegroundColor:xmlColor backgroundColor:nil forFlag:XMPP_LOG_FLAG_RECV_POST context:XMPP_LOG_CONTEXT];
+    
+    [DDLog addLogger:ttyLogger withLogLevel:XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_SEND_RECV | XMPP_LOG_FLAG_TRACE];
+    //        [DDLog addLogger:[DDASLLogger sharedInstance]];
+
+}
+
+
+#pragma mark - Processes -
 
 - (void)connect {
     XMPPLogInfo(@"Connecting");
@@ -152,35 +157,13 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
     }
 }
 
-- (XMPPProcess *)auth:(XMPPJID *)jid password:(NSString *)password {
-    XMPPAuthProcess *process = [[XMPPAuthProcess alloc] initWithStream:self.xmppStream queue:nil];
+- (nonnull XMPPProcess *)auth:(nonnull NSString *)jidString password:(nonnull  NSString *)password {
+    XMPPJID *jid = [XMPPJID jidWithString:jidString];
+    XMPPAuthProcess *process = [[XMPPAuthProcess alloc] initWithStream:self.xmppStream queue:[XMPPProcess defaultProcessingQueue]];
     process.password = password;
     process.jid = jid;
     return process;
-}
-
-- (void)auth {
-    [[self auth:[XMPPJID jidWithString:self.config.userJid] password:self.config.userpwd] executeWithCompletion:^(id result, NSError *error) {
-        if (error != nil) {
-            XMPPLogError(@"Auth %@", error);
-        } else {
-            XMPPLogWarn(@"Auth done");
-        }
-        
-    }];
-    return;
-    XMPPLogVerbose(@"supportsInBandRegistration %d, isSecure %d"
-          ,[self.xmppStream supportsInBandRegistration]
-          ,[self.xmppStream isSecure]
-          );
     
-    
-    XMPPLogInfo(@"Start auth");
-    NSString *passowrd = self.config.userpwd;
-    NSError *error = nil;
-    if(![self.xmppStream authenticateWithPassword:passowrd error:&error]) {
-        XMPPLogError(@"Error while authenticating: %@", error);
-    }
 }
 
 - (void)registerJiD:(XMPPJID *)jid {
@@ -356,7 +339,6 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
  **/
 - (void)xmppStreamDidConnect:(XMPPStream *)sender {
     XMPPLogTrace();
-    [self auth];
 }
 
 /**
@@ -365,7 +347,6 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
  **/
 - (void)xmppStreamDidRegister:(XMPPStream *)sender {
     XMPPLogTrace();
-    [self auth];
 }
 
 /**
@@ -382,7 +363,6 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
  **/
 - (void)xmppStreamDidAuthenticate:(XMPPStream *)sender {
     XMPPLogTrace();
-//    [self didAuth];
 }
 
 /**
@@ -447,12 +427,10 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
 }
 - (XMPPMessage *)xmppStream:(XMPPStream *)sender willReceiveMessage:(XMPPMessage *)message {
     XMPPLogTrace();
-    [self logMessage:message];
     return message;
 }
 - (XMPPPresence *)xmppStream:(XMPPStream *)sender willReceivePresence:(XMPPPresence *)presence {
     XMPPLogTrace();
-    [self logPresense:presence];
     return presence;
 }
 
@@ -484,11 +462,9 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
 }
 - (void)xmppStream:(XMPPStream *)sender didReceiveMessage:(XMPPMessage *)message {
     XMPPLogTrace();
-    [self logMessage:message];
 }
 - (void)xmppStream:(XMPPStream *)sender didReceivePresence:(XMPPPresence *)presence {
     XMPPLogTrace();
-    [self logPresense:presence];
     [self sendTestMessage];
 }
 
@@ -536,7 +512,6 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
 }
 - (XMPPPresence *)xmppStream:(XMPPStream *)sender willSendPresence:(XMPPPresence *)presence {
     XMPPLogTrace();
-    [self logPresense:presence];
     return presence;
 }
 
@@ -552,8 +527,7 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
     XMPPLogTrace();
 }
 - (void)xmppStream:(XMPPStream *)sender didSendPresence:(XMPPPresence *)presence {
-    NSLog(@"%@>%@",[[NSString stringWithCString:__FILE__ encoding:NSUTF8StringEncoding] lastPathComponent],NSStringFromSelector(_cmd));
-    [self logPresense:presence];
+    XMPPLogTrace();
 }
 
 /**
@@ -629,7 +603,7 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
 - (void)xmppStreamDidDisconnect:(XMPPStream *)sender withError:(NSError *)error {
     XMPPLogTrace();
     //ENOTCONN	57		/* Socket is not connected */
-    XMPPLogInfo(@"Disconnected: %@", error);
+    XMPPLogWarn(@"Disconnected: %@", error);
 }
 
 /**
@@ -703,11 +677,11 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
 
 
 - (void)xmppReconnect:(XMPPReconnect *)sender didDetectAccidentalDisconnect:(SCNetworkConnectionFlags)connectionFlags {
-    NSLog(@"%@>%@",[[NSString stringWithCString:__FILE__ encoding:NSUTF8StringEncoding] lastPathComponent],NSStringFromSelector(_cmd));
+    XMPPLogTrace();
 }
 
 - (BOOL)xmppReconnect:(XMPPReconnect *)sender shouldAttemptAutoReconnect:(SCNetworkConnectionFlags)connectionFlags {
-    NSLog(@"%@>%@",[[NSString stringWithCString:__FILE__ encoding:NSUTF8StringEncoding] lastPathComponent],NSStringFromSelector(_cmd));
+    XMPPLogTrace();
     return YES;
 }
 
