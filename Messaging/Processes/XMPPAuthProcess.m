@@ -19,7 +19,6 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
                    ,[self.xmppStream isSecure]
                    );
 
-    XMPPLogInfo(@"Start auth");
     NSError *error = nil;
     if(![self.xmppStream authenticateWithPassword:self.password error:&error]) {
         XMPPLogError(@"Error while authenticating: %@", error);
@@ -38,7 +37,7 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
  **/
 - (void)xmppStream:(XMPPStream *)sender didNotAuthenticate:(NSXMLElement *)error {
     XMPPLogTrace();
-    [self complete:nil error:error];
+    [self complete:nil error:[self errorFromElement:error]];
 }
 
 @end

@@ -10,7 +10,8 @@
 #import "XMPP.h"
 #import "XMPPLogging.h"
 
-@interface XMPPProcess (Private)
+
+@interface XMPPProcess ()
 
 /**
  *  Designated initializer
@@ -20,7 +21,7 @@
  *
  *  @return new instance of the process
  */
-- (nonnull instancetype)initWithStream:(nonnull XMPPStream *)stream queue:(nullable dispatch_queue_t)completionQueue;
+- (nonnull instancetype)initWithStream:(nonnull XMPPStream *)stream queue:(nullable dispatch_queue_t)completionQueue NS_DESIGNATED_INITIALIZER;
 
 /**
  *  Abstract method. Do actual work
@@ -34,6 +35,19 @@
  *  @param error  process error
  */
 - (void)complete:(nullable id)result error:(nullable  NSError *)error;
+
+/**
+ *  Generates error from xml element
+ *
+ *  @param element xml element
+ *
+ *  @return error instance
+ */
+- (NSError * __nonnull )errorFromElement:(nonnull NSXMLElement *)element;
+
+@end
+
+@interface XMPPProcess (Private)
 
 /**
  *  Processes XMPP stream

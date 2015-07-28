@@ -21,7 +21,12 @@
 }
 
 - (NSString *)formatLogMessage:(DDLogMessage *)logMessage {
-
+    
+    NSString *logMsg = logMessage->logMsg;
+    
+    if (logMessage->logFlag == XMPP_LOG_FLAG_TRACE) {
+        return [NSString stringWithFormat:@"   XMPP | TRC %@",logMsg];
+    }
     
     NSString *logFlag;
     switch (logMessage->logFlag)
@@ -30,15 +35,11 @@
         case XMPP_LOG_FLAG_WARN  : logFlag = @"WRN"; break;
         case XMPP_LOG_FLAG_INFO  : logFlag = @"INF"; break;
         case XMPP_LOG_FLAG_VERBOSE : logFlag = @"VBS"; break;
-        case XMPP_LOG_FLAG_TRACE : logFlag = @"TRC"; break;
         case XMPP_LOG_FLAG_SEND: logFlag = @"-->"; break;
         case XMPP_LOG_FLAG_RECV_POST: logFlag = @"<--"; break;
         case XMPP_LOG_FLAG_RECV_PRE: logFlag = @"<-<"; break;
         default             : logFlag = @"  "; break;
     }
-    
-    NSString *logMsg = logMessage->logMsg;
-    
     
     return [NSString stringWithFormat:@"   XMPP | %@  %s:%d> %@",logFlag,  logMessage->function,logMessage->lineNumber,logMsg];
 }

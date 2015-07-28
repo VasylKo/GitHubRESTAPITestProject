@@ -11,14 +11,21 @@
 
 static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
 
+NSString *const kXMPPErrorDomain = @"com.bekitzur.xmpp.errorDomain";
+
+
 @interface XMPPProcess ()
+
 @property (nonatomic, strong, readwrite, nonnull) XMPPStream *xmppStream;
 @property (nonatomic, copy, readwrite, nullable) XMPPProcesseCompletionBlock completionBlock;
 @property (nonatomic, strong, readwrite, nullable) dispatch_queue_t completionQueue;
 @property (nonatomic, strong, readwrite, nonnull) dispatch_semaphore_t semaphore;
+
 @end
 
 @implementation XMPPProcess
+
+#pragma mark - LifeCycle -
 
 - (instancetype)init {
     return  nil;
@@ -66,7 +73,7 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
     });
 }
 
-
+#pragma mark - Processing queue -
 
 + (void)initialize {
     if (self == [XMPPProcess class]) {
@@ -84,6 +91,14 @@ static dispatch_queue_t __ooXMPPDefaultProcessingQueue =  NULL;
 
 + (dispatch_queue_t)defaultProcessingQueue {
     return __ooXMPPDefaultProcessingQueue;
+}
+
+#pragma mark - Helpers -
+
+- (NSError * __nonnull )errorFromElement:(nonnull NSXMLElement *)element {
+    NSString *errorReason = [element XMLString];
+    XMPPLogError(@"Error: %@", errorReason);
+    return [NSError errorWithDomain:kXMPPErrorDomain code:-1 userInfo:@{NSLocalizedFailureReasonErrorKey: errorReason}];
 }
 
 

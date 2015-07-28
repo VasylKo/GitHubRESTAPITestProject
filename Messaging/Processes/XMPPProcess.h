@@ -32,4 +32,8 @@ typedef void(^XMPPProcesseCompletionBlock)(id __nullable result, NSError * __nul
 
 
 -(nullable instancetype) init __attribute__((unavailable("init not available")));
+
 @end
+
+
+FOUNDATION_EXPORT NSString * __nonnull const kXMPPErrorDomain;
