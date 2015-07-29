@@ -9,8 +9,8 @@ target 'PositionIn' do
     pod 'KYDrawerController'
     
     target 'PosInCore', :exclusive => true do
-        pod 'Alamofire'
-        pod 'ObjectMapper'
+        pod 'Alamofire', '~> 1.2.3'
+        pod 'ObjectMapper', '0.12'
         pod 'BrightFutures', '~> 2.0.1'
     end
     
