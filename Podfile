@@ -7,12 +7,7 @@ target 'PositionIn' do
     pod 'KeychainAccess'
     pod 'HanekeSwift'
     pod 'KYDrawerController'
-    pod 'PosInCore', :path => 'PosInCore'
-    
-    target 'Messaging',  :exclusive => true do
-        pod 'Magnet-XMPPFramework', '~> 3.6.9'
-    end
-
+    pod 'PosInCore', :path => 'PosInCore'    
 end
 
 target 'PositionInTests' do
