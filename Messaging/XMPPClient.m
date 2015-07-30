@@ -7,7 +7,7 @@
 //
 
 #import "XMPPClient.h"
-#import "XMPP.h"
+#import "XMPPFramework.h"
 #import "XMPPLogging.h"
 #import "DDTTYLogger.h"
 #import "XMPPLogFormatter.h"
