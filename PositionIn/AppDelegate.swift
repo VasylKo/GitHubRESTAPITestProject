@@ -84,9 +84,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         chatClient.connect()
 
-        dispatch_delay(3) {
+        dispatch_delay(5) {
             self.chatClient.auth("ixmpp@beewellapp.com", password: "1HateD0m2").future().onSuccess {
-                Log.info?.message("XMPP Conntected")
+                Log.info?.message("XMPP authorized")
                 }.onFailure { error in
                     Log.error?.value(error)
             }

@@ -31,10 +31,10 @@
 // 
 //#import "XMPPCoreDataStorage.h"
 //
-//#import "XMPPReconnect.h"
+#import "XMPPReconnect.h"
 //
-//#import "XMPPRoster.h"
-//#import "XMPPRosterMemoryStorage.h"
+#import "XMPPRoster.h"
+#import "XMPPRosterMemoryStorage.h"
 //#import "XMPPRosterCoreDataStorage.h"
 //
 //#import "XMPPJabberRPCModule.h"
@@ -77,3 +77,5 @@
 //#import "XMPPAutoTime.h"
 //
 //#import "XMPPElement+Delay.h"
+
+#import "XMPPLogging.h"

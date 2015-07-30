@@ -7,8 +7,7 @@
 //
 
 #import "XMPPProcess.h"
-#import "XMPP.h"
-#import "XMPPLogging.h"
+#import "XMPPFramework.h"
 
 
 @interface XMPPProcess ()
