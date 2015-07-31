@@ -637,6 +637,7 @@
 		E689F0601B6A8CF900597587 /* XMPPFramework.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPFramework.h; sourceTree = "<group>"; };
 		E689F0701B6A909200597587 /* XMPPDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPDelegate.h; sourceTree = "<group>"; };
 		E689F0711B6A909200597587 /* XMPPDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPDelegate.m; sourceTree = "<group>"; };
+		E689F0741B6B8E5400597587 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		E69420F81B66358000F34F06 /* ProductDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductDetailsViewController.swift; sourceTree = "<group>"; };
 		E69420FE1B665F5100F34F06 /* PositionIn.ProductDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.ProductDetailsViewController.xib; sourceTree = "<group>"; };
 		E69421001B666A1600F34F06 /* PositionIn.ActionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.ActionCell.xib; sourceTree = "<group>"; };
@@ -816,6 +817,7 @@
 		E64DC3411B4E53C90011D37C = {
 			isa = PBXGroup;
 			children = (
+				E689F0741B6B8E5400597587 /* README.md */,
 				E689EE861B6A86A700597587 /* Cartfile */,
 				E660E5351B5B192100F52050 /* PositionIn.playground */,
 				E6736ADC1B4E56EB0003580D /* Scripts */,
