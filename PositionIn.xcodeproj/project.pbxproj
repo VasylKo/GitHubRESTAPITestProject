@@ -187,6 +187,12 @@
 		E689F06F1B6A8FE800597587 /* XMPPUserMemoryStorageObject.m in Sources */ = {isa = PBXBuildFile; fileRef = E689EF811B6A8A1000597587 /* XMPPUserMemoryStorageObject.m */; settings = {COMPILER_FLAGS = "-w"; }; };
 		E689F0721B6A909200597587 /* XMPPDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = E689F0701B6A909200597587 /* XMPPDelegate.h */; };
 		E689F0731B6A909200597587 /* XMPPDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E689F0711B6A909200597587 /* XMPPDelegate.m */; };
+		E689F0771B6B90F400597587 /* ProductInventoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E689F0761B6B90F400597587 /* ProductInventoryViewController.swift */; };
+		E689F0791B6B911F00597587 /* PositionIn.ProductInventoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E689F0781B6B911F00597587 /* PositionIn.ProductInventoryViewController.xib */; };
+		E689F07B1B6B972F00597587 /* ProductInventoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E689F07A1B6B972F00597587 /* ProductInventoryCell.swift */; };
+		E689F07D1B6B976100597587 /* PositionIn.ProductInventoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E689F07C1B6B976100597587 /* PositionIn.ProductInventoryCell.xib */; };
+		E689F0801B6B9A1200597587 /* PositionIn.SellerProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E689F07F1B6B9A1200597587 /* PositionIn.SellerProfileViewController.xib */; };
+		E689F0821B6B9A2200597587 /* SellerProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E689F0811B6B9A2200597587 /* SellerProfileViewController.swift */; };
 		E69420F91B66358000F34F06 /* ProductDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E69420F81B66358000F34F06 /* ProductDetailsViewController.swift */; };
 		E69420FF1B665F5100F34F06 /* PositionIn.ProductDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E69420FE1B665F5100F34F06 /* PositionIn.ProductDetailsViewController.xib */; };
 		E69421021B666A1600F34F06 /* PositionIn.ActionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E69421001B666A1600F34F06 /* PositionIn.ActionCell.xib */; };
@@ -638,6 +644,12 @@
 		E689F0701B6A909200597587 /* XMPPDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPDelegate.h; sourceTree = "<group>"; };
 		E689F0711B6A909200597587 /* XMPPDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPDelegate.m; sourceTree = "<group>"; };
 		E689F0741B6B8E5400597587 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		E689F0761B6B90F400597587 /* ProductInventoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductInventoryViewController.swift; sourceTree = "<group>"; };
+		E689F0781B6B911F00597587 /* PositionIn.ProductInventoryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.ProductInventoryViewController.xib; sourceTree = "<group>"; };
+		E689F07A1B6B972F00597587 /* ProductInventoryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductInventoryCell.swift; sourceTree = "<group>"; };
+		E689F07C1B6B976100597587 /* PositionIn.ProductInventoryCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.ProductInventoryCell.xib; sourceTree = "<group>"; };
+		E689F07F1B6B9A1200597587 /* PositionIn.SellerProfileViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.SellerProfileViewController.xib; sourceTree = "<group>"; };
+		E689F0811B6B9A2200597587 /* SellerProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SellerProfileViewController.swift; sourceTree = "<group>"; };
 		E69420F81B66358000F34F06 /* ProductDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductDetailsViewController.swift; sourceTree = "<group>"; };
 		E69420FE1B665F5100F34F06 /* PositionIn.ProductDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.ProductDetailsViewController.xib; sourceTree = "<group>"; };
 		E69421001B666A1600F34F06 /* PositionIn.ActionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.ActionCell.xib; sourceTree = "<group>"; };
@@ -852,6 +864,8 @@
 				E6A869DC1B6000C800797D16 /* BrowseList */,
 				E6A869DF1B6000C800797D16 /* BrowseMap */,
 				E69420F71B66354E00F34F06 /* ProductDetails */,
+				E689F0751B6B90CA00597587 /* ProductInventory */,
+				E689F07E1B6B99FA00597587 /* SellerProfile */,
 				E62B16F91B5CDED600D446BC /* Messaging */,
 				E660E5251B5AB82000F52050 /* Models */,
 				E6325F5F1B57D89A00996480 /* ViewControllers */,
@@ -1833,6 +1847,26 @@
 			path = "XEP-0335";
 			sourceTree = "<group>";
 		};
+		E689F0751B6B90CA00597587 /* ProductInventory */ = {
+			isa = PBXGroup;
+			children = (
+				E689F0761B6B90F400597587 /* ProductInventoryViewController.swift */,
+				E689F0781B6B911F00597587 /* PositionIn.ProductInventoryViewController.xib */,
+				E689F07A1B6B972F00597587 /* ProductInventoryCell.swift */,
+				E689F07C1B6B976100597587 /* PositionIn.ProductInventoryCell.xib */,
+			);
+			path = ProductInventory;
+			sourceTree = "<group>";
+		};
+		E689F07E1B6B99FA00597587 /* SellerProfile */ = {
+			isa = PBXGroup;
+			children = (
+				E689F07F1B6B9A1200597587 /* PositionIn.SellerProfileViewController.xib */,
+				E689F0811B6B9A2200597587 /* SellerProfileViewController.swift */,
+			);
+			path = SellerProfile;
+			sourceTree = "<group>";
+		};
 		E69420F71B66354E00F34F06 /* ProductDetails */ = {
 			isa = PBXGroup;
 			children = (
@@ -2140,12 +2174,15 @@
 			files = (
 				E69420FF1B665F5100F34F06 /* PositionIn.ProductDetailsViewController.xib in Resources */,
 				E62B170A1B5CE46500D446BC /* PositionIn.BrowseViewController.xib in Resources */,
+				E689F0791B6B911F00597587 /* PositionIn.ProductInventoryViewController.xib in Resources */,
 				E6A869E91B60013A00797D16 /* PositionIn.ListProductCell.xib in Resources */,
 				E6D7C2971B5D5B3B004F3AA9 /* PositionIn.SearchBar.xib in Resources */,
 				E6A869E51B6000C800797D16 /* PositionIn.BrowseMapViewController.xib in Resources */,
 				E660E52E1B5AC23B00F52050 /* PositionIn.MainMenuViewController.xib in Resources */,
 				E62B16F51B5C1AA700D446BC /* PositionIn.MainMenuUserCell.xib in Resources */,
+				E689F07D1B6B976100597587 /* PositionIn.ProductInventoryCell.xib in Resources */,
 				E62B16FD1B5CDF2400D446BC /* PositionIn.MessagesListViewController.xib in Resources */,
+				E689F0801B6B9A1200597587 /* PositionIn.SellerProfileViewController.xib in Resources */,
 				E69421021B666A1600F34F06 /* PositionIn.ActionCell.xib in Resources */,
 				E6A869E31B6000C800797D16 /* PositionIn.BrowseListViewController.xib in Resources */,
 				E64DC3551B4E53C90011D37C /* Main.storyboard in Resources */,
@@ -2291,6 +2328,8 @@
 				E6AC64561B5EC5B1007D7952 /* AddMenuView.swift in Sources */,
 				E6A869F41B60FF2100797D16 /* UserProfile.swift in Sources */,
 				E69420F91B66358000F34F06 /* ProductDetailsViewController.swift in Sources */,
+				E689F0771B6B90F400597587 /* ProductInventoryViewController.swift in Sources */,
+				E689F07B1B6B972F00597587 /* ProductInventoryCell.swift in Sources */,
 				E65E87301B611FE700AE444D /* CollectionResponse.swift in Sources */,
 				E65E87321B614A9900AE444D /* Location.swift in Sources */,
 				E62B17061B5CE3EB00D446BC /* BrowseViewController.swift in Sources */,
@@ -2307,6 +2346,7 @@
 				E6AC64541B5EBC29007D7952 /* UIScheme.swift in Sources */,
 				E6A869DB1B5FD1E100797D16 /* BrowseTabbar.swift in Sources */,
 				E62B16F81B5C6BBF00D446BC /* AvatarView.swift in Sources */,
+				E689F0821B6B9A2200597587 /* SellerProfileViewController.swift in Sources */,
 				E6325F651B57D89A00996480 /* SidebarViewController.swift in Sources */,
 				E6681A321B67C6F0003096D6 /* XMPPProcess+Future.swift in Sources */,
 				E6A869F21B60FF0500797D16 /* CRUDObject.swift in Sources */,

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PositionIn.ProductInventoryCell" id="ZdQ-ZX-p4z" customClass="ProductInventoryCell" customModule="PositionIn" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="239" height="114"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="239" height="114"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="200" verticalHuggingPriority="200" image="MenuLogo" translatesAutoresizingMaskIntoConstraints="NO" id="dj9-z0-Yo4">
+                        <rect key="frame" x="0.0" y="0.0" width="239" height="67"/>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$99" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bAH-rQ-NuM">
+                        <rect key="frame" x="8" y="86" width="223" height="19.5"/>
+                        <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The forest" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bc9-Wr-Efd">
+                        <rect key="frame" x="8" y="67" width="223" height="19.5"/>
+                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                        <color key="textColor" red="0.61176470589999998" green="0.61176470589999998" blue="0.61176470589999998" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            </view>
+            <constraints>
+                <constraint firstItem="bAH-rQ-NuM" firstAttribute="leading" secondItem="ZdQ-ZX-p4z" secondAttribute="leading" constant="8" id="5rq-ya-KQC"/>
+                <constraint firstAttribute="trailing" secondItem="bAH-rQ-NuM" secondAttribute="trailing" constant="8" id="7tQ-OV-qSr"/>
+                <constraint firstAttribute="trailing" secondItem="dj9-z0-Yo4" secondAttribute="trailing" id="MVA-zU-I5V"/>
+                <constraint firstItem="bAH-rQ-NuM" firstAttribute="top" secondItem="Bc9-Wr-Efd" secondAttribute="bottom" id="Mjj-RK-VMh"/>
+                <constraint firstItem="bAH-rQ-NuM" firstAttribute="leading" secondItem="Bc9-Wr-Efd" secondAttribute="leading" id="Wky-E1-Izc"/>
+                <constraint firstItem="Bc9-Wr-Efd" firstAttribute="top" secondItem="dj9-z0-Yo4" secondAttribute="bottom" id="YeA-jf-u7c"/>
+                <constraint firstAttribute="bottom" secondItem="bAH-rQ-NuM" secondAttribute="bottom" constant="8" id="dbQ-C3-QTj"/>
+                <constraint firstItem="dj9-z0-Yo4" firstAttribute="top" secondItem="ZdQ-ZX-p4z" secondAttribute="top" id="ojp-q7-hMJ"/>
+                <constraint firstItem="dj9-z0-Yo4" firstAttribute="leading" secondItem="ZdQ-ZX-p4z" secondAttribute="leading" id="qKm-rn-oca"/>
+                <constraint firstItem="bAH-rQ-NuM" firstAttribute="trailing" secondItem="Bc9-Wr-Efd" secondAttribute="trailing" id="uZH-db-6Hw"/>
+            </constraints>
+            <size key="customSize" width="239" height="114"/>
+            <point key="canvasLocation" x="486.5" y="232"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="MenuLogo" width="173" height="38"/>
+    </resources>
+</document>

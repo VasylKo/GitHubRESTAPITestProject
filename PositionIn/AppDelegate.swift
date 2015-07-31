@@ -81,8 +81,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }.onFailure { error in
             Log.error?.value(error)
         }
-        
-        chatClient.connect()
+                
 
         dispatch_delay(5) {
             self.chatClient.auth("ixmpp@beewellapp.com", password: "1HateD0m2").future().onSuccess {

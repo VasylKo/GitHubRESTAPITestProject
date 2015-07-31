@@ -249,17 +249,17 @@ extension UIStoryboardSegue {
 extension ProductDetailsViewController { 
 
     enum Segue: String, Printable, SegueProtocol {
-        case ShowBuyScreen = "ShowBuyScreen"
         case ShowProductInventory = "ShowProductInventory"
         case ShowSellerProfile = "ShowSellerProfile"
+        case ShowBuyScreen = "ShowBuyScreen"
 
         var kind: SegueKind? {
             switch (self) {
-            case ShowBuyScreen:
-                return SegueKind(rawValue: "show")
             case ShowProductInventory:
                 return SegueKind(rawValue: "show")
             case ShowSellerProfile:
+                return SegueKind(rawValue: "show")
+            case ShowBuyScreen:
                 return SegueKind(rawValue: "show")
             default:
                 preconditionFailure("Invalid value")
@@ -269,6 +269,10 @@ extension ProductDetailsViewController {
 
         var destination: UIViewController.Type? {
             switch (self) {
+            case ShowProductInventory:
+                return ProductInventoryViewController.self
+            case ShowSellerProfile:
+                return SellerProfileViewController.self
             default:
                 assertionFailure("Unknown destination")
                 return nil
@@ -280,6 +284,49 @@ extension ProductDetailsViewController {
     }
 
 }
+
+//MARK: - ProductInventoryViewController
+extension UIStoryboardSegue {
+    func selection() -> ProductInventoryViewController.Segue? {
+        if let identifier = self.identifier {
+            return ProductInventoryViewController.Segue(rawValue: identifier)
+        }
+        return nil
+    }
+}
+
+extension ProductInventoryViewController { 
+
+    enum Segue: String, Printable, SegueProtocol {
+        case ShowProductDetails = "ShowProductDetails"
+
+        var kind: SegueKind? {
+            switch (self) {
+            case ShowProductDetails:
+                return SegueKind(rawValue: "show")
+            default:
+                preconditionFailure("Invalid value")
+                break
+            }
+        }
+
+        var destination: UIViewController.Type? {
+            switch (self) {
+            case ShowProductDetails:
+                return ProductDetailsViewController.self
+            default:
+                assertionFailure("Unknown destination")
+                return nil
+            }
+        }
+
+        var identifier: String? { return self.description } 
+        var description: String { return self.rawValue }
+    }
+
+}
+
+//MARK: - SellerProfileViewController
 
 //MARK: - BrowseViewController
 extension UIStoryboardSegue {
