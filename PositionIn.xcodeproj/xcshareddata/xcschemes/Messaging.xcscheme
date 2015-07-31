@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "E6325FA41B57F36E00996480"
-               BuildableName = "PosInCore.framework"
-               BlueprintName = "PosInCore"
+               BlueprintIdentifier = "E6E2FE871B66F61300880F3C"
+               BuildableName = "Messaging.framework"
+               BlueprintName = "Messaging"
                ReferencedContainer = "container:PositionIn.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -42,12 +42,19 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "E6325FA41B57F36E00996480"
-            BuildableName = "PosInCore.framework"
-            BlueprintName = "PosInCore"
+            BlueprintIdentifier = "E6E2FE871B66F61300880F3C"
+            BuildableName = "Messaging.framework"
+            BlueprintName = "Messaging"
             ReferencedContainer = "container:PositionIn.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
+      <EnvironmentVariables>
+         <EnvironmentVariable
+            key = "XcodeColors"
+            value = "YES"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+      </EnvironmentVariables>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -60,9 +67,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "E6325FA41B57F36E00996480"
-            BuildableName = "PosInCore.framework"
-            BlueprintName = "PosInCore"
+            BlueprintIdentifier = "E6E2FE871B66F61300880F3C"
+            BuildableName = "Messaging.framework"
+            BlueprintName = "Messaging"
             ReferencedContainer = "container:PositionIn.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

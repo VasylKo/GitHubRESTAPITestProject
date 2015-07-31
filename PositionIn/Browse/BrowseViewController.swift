@@ -122,6 +122,7 @@ class BrowseViewController: BesideMenuViewController {
         childController.didMoveToParentViewController(self)
         currentModeViewController = childController
         
+        //workaround compiler: var because BrowseActionProducer could be a struct
         if var actionProducer = childController as? BrowseActionProducer {
             actionProducer.actionConsumer = self
         }

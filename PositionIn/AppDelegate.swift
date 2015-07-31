@@ -11,12 +11,14 @@ import PosInCore
 import Alamofire
 import BrightFutures
 import CleanroomLogger
+import Messaging
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
     let api: APIService
+    let chatClient: XMPPClient
     
     override init() {
         #if DEBUG
@@ -26,6 +28,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         #endif
         let baseURL = NSURL(string: "http://45.63.7.39:8080")!
         api = APIService(url: baseURL)
+        let chatConfig = XMPPClientConfiguration.defaultConfiguration()
+        chatClient = XMPPClient(configuration: chatConfig)
         super.init()
     }
 
@@ -73,10 +77,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 return response.accessToken
             }
         }.onSuccess { _ in
-            self.runProfileAPI()
+//            self.runProfileAPI()
         }.onFailure { error in
             Log.error?.value(error)
         }
+                
+
+        dispatch_delay(5) {
+            self.chatClient.auth("ixmpp@beewellapp.com", password: "1HateD0m2").future().onSuccess {
+                Log.info?.message("XMPP authorized")
+                }.onFailure { error in
+                    Log.error?.value(error)
+            }
+            
+        }
+        
         
         if let sidebarViewController = window?.rootViewController as? SidebarViewController {
             let defaultAction: SidebarViewController.Action = .ForYou

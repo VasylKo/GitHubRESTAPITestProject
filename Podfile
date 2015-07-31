@@ -4,23 +4,14 @@ use_frameworks!
 
 
 target 'PositionIn' do
-    pod 'Alamofire'
-    pod 'ObjectMapper'
-    pod 'BrightFutures', '~> 2.0.1'
-    
-    
     pod 'KeychainAccess'
     pod 'HanekeSwift'
     pod 'KYDrawerController'
+    pod 'PosInCore', :path => 'PosInCore'    
 end
 
 target 'PositionInTests' do
 
 end
 
-target 'PosInCore' do
-    pod 'Alamofire'
-    pod 'ObjectMapper'
-    pod 'BrightFutures', '~> 2.0.1'
-end
 

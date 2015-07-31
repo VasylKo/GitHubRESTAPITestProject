@@ -11,7 +11,6 @@ import Alamofire
 import ObjectMapper
 import BrightFutures
 import Box
-import CleanroomLogger
 
 public class NetworkDataProvider: NSObject {
     
@@ -121,7 +120,7 @@ public class NetworkDataProvider: NSObject {
     
     private func request(URLRequest: Alamofire.URLRequestConvertible) -> Alamofire.Request {
         let request = manager.request(URLRequest).validate()
-        Log.verbose?.message("Request:\n\(request.debugDescription)")
+        println("Request:\n\(request.debugDescription)")
         return request
     }
 }
