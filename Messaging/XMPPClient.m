@@ -35,8 +35,6 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
     XMPPClientConfiguration *config = [XMPPClientConfiguration new];
     config.hostName = hostName;
     config.port = port;
-    config.userJid = @"ixmpp@beewellapp.com";
-    config.userpwd = @"1HateD0m2";
     return config;
 }
 @end
@@ -103,7 +101,6 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
 
     [self.xmppStream addDelegate:self.xmppDelegate delegateQueue:delegateQueue];
 
-    self.xmppStream.myJID = [XMPPJID jidWithString:configuration.userJid];
     self.xmppStream.hostName = configuration.hostName;
     self.xmppStream.hostPort = configuration.port;
     
@@ -114,9 +111,6 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
     self.xmppRoster = [[XMPPRoster alloc] initWithRosterStorage:[XMPPRosterMemoryStorage new]];
     [self.xmppRoster activate:self.xmppStream];
     [self.xmppRoster addDelegate:self.xmppDelegate delegateQueue:delegateQueue];
-
-    
-    [self.xmppReconect manualStart];
 }
 
 

@@ -120,7 +120,9 @@ public class NetworkDataProvider: NSObject {
     
     private func request(URLRequest: Alamofire.URLRequestConvertible) -> Alamofire.Request {
         let request = manager.request(URLRequest).validate()
+        #if DEBUG
         println("Request:\n\(request.debugDescription)")
+        #endif
         return request
     }
 }

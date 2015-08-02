@@ -14,11 +14,24 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
 
 - (void)run {
     self.xmppStream.myJID = self.jid;
+    if ([self.xmppStream isDisconnected] && ![self.xmppStream isConnecting]) {
+        NSError *error = nil;
+        if (![self.xmppStream connectWithTimeout:XMPPStreamTimeoutNone error:&error]) {
+            XMPPLogError(@"Error while connecting: %@", error);
+            [self complete:nil error:error];
+        }
+
+    } else {
+        [self auth];
+    }
+}
+
+- (void)auth {
     XMPPLogVerbose(@"supportsInBandRegistration %d, isSecure %d"
                    ,[self.xmppStream supportsInBandRegistration]
                    ,[self.xmppStream isSecure]
                    );
-
+    
     NSError *error = nil;
     if(![self.xmppStream authenticateWithPassword:self.password error:&error]) {
         XMPPLogError(@"Error while authenticating: %@", error);
@@ -28,8 +41,17 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
 
 #pragma mark - stream delegate -
 
+- (void)xmppStreamDidConnect:(XMPPStream *)sender {
+    XMPPLogTrace();
+    [self auth];
+}
+
 - (void)xmppStreamDidAuthenticate:(XMPPStream *)sender {
     XMPPLogTrace();
+    XMPPPresence *presence = [XMPPPresence presence];
+    NSXMLElement *priority = [NSXMLElement elementWithName:@"priority" stringValue:@"24"];
+    [presence addChild:priority];
+    [self.xmppStream sendElement:presence];
     [self complete:nil error:nil];
 }
 

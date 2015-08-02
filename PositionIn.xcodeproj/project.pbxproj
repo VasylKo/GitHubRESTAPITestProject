@@ -75,6 +75,18 @@
 		E6681A2F1B67A2DB003096D6 /* XMPPAuthProcess.m in Sources */ = {isa = PBXBuildFile; fileRef = E6681A2D1B67A2DB003096D6 /* XMPPAuthProcess.m */; };
 		E6681A321B67C6F0003096D6 /* XMPPProcess+Future.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6681A311B67C6F0003096D6 /* XMPPProcess+Future.swift */; };
 		E6829B041B5E6CF800FB1E1D /* RoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6829B031B5E6CF800FB1E1D /* RoundButton.swift */; };
+		E6846DB81B6D9B1400009411 /* XMPPIQ+XEP_0060.h in Headers */ = {isa = PBXBuildFile; fileRef = E689EFDF1B6A8A1000597587 /* XMPPIQ+XEP_0060.h */; };
+		E6846DB91B6D9B1400009411 /* XMPPIQ+XEP_0060.m in Sources */ = {isa = PBXBuildFile; fileRef = E689EFE01B6A8A1000597587 /* XMPPIQ+XEP_0060.m */; settings = {COMPILER_FLAGS = "-w"; }; };
+		E6846DBA1B6D9B1400009411 /* XMPPPubSub.h in Headers */ = {isa = PBXBuildFile; fileRef = E689EFE11B6A8A1000597587 /* XMPPPubSub.h */; };
+		E6846DBB1B6D9B1400009411 /* XMPPPubSub.m in Sources */ = {isa = PBXBuildFile; fileRef = E689EFE21B6A8A1000597587 /* XMPPPubSub.m */; settings = {COMPILER_FLAGS = "-w"; }; };
+		E6846DBC1B6D9B4700009411 /* NSDate+XMPPDateTimeProfiles.h in Headers */ = {isa = PBXBuildFile; fileRef = E689EFEF1B6A8A1000597587 /* NSDate+XMPPDateTimeProfiles.h */; };
+		E6846DBD1B6D9B4700009411 /* NSDate+XMPPDateTimeProfiles.m in Sources */ = {isa = PBXBuildFile; fileRef = E689EFF01B6A8A1000597587 /* NSDate+XMPPDateTimeProfiles.m */; settings = {COMPILER_FLAGS = "-w"; }; };
+		E6846DBE1B6D9B4700009411 /* XMPPDateTimeProfiles.h in Headers */ = {isa = PBXBuildFile; fileRef = E689EFF11B6A8A1000597587 /* XMPPDateTimeProfiles.h */; };
+		E6846DBF1B6D9B4700009411 /* XMPPDateTimeProfiles.m in Sources */ = {isa = PBXBuildFile; fileRef = E689EFF21B6A8A1000597587 /* XMPPDateTimeProfiles.m */; settings = {COMPILER_FLAGS = "-w"; }; };
+		E6846DC01B6D9B6500009411 /* NSString+XEP_0106.h in Headers */ = {isa = PBXBuildFile; fileRef = E689EFFD1B6A8A1000597587 /* NSString+XEP_0106.h */; };
+		E6846DC11B6D9B6500009411 /* NSString+XEP_0106.m in Sources */ = {isa = PBXBuildFile; fileRef = E689EFFE1B6A8A1000597587 /* NSString+XEP_0106.m */; settings = {COMPILER_FLAGS = "-w"; }; };
+		E6846DC21B6D9B9600009411 /* NSXMLElement+XEP_0203.h in Headers */ = {isa = PBXBuildFile; fileRef = E689F03D1B6A8A1000597587 /* NSXMLElement+XEP_0203.h */; };
+		E6846DC31B6D9B9600009411 /* NSXMLElement+XEP_0203.m in Sources */ = {isa = PBXBuildFile; fileRef = E689F03E1B6A8A1000597587 /* NSXMLElement+XEP_0203.m */; settings = {COMPILER_FLAGS = "-w"; }; };
 		E689EEF81B6A89D000597587 /* XMPPAnonymousAuthentication.h in Headers */ = {isa = PBXBuildFile; fileRef = E689EE8A1B6A89D000597587 /* XMPPAnonymousAuthentication.h */; };
 		E689EEF91B6A89D000597587 /* XMPPAnonymousAuthentication.m in Sources */ = {isa = PBXBuildFile; fileRef = E689EE8B1B6A89D000597587 /* XMPPAnonymousAuthentication.m */; settings = {COMPILER_FLAGS = "-w"; }; };
 		E689EEFA1B6A89D000597587 /* XMPPDeprecatedDigestAuthentication.h in Headers */ = {isa = PBXBuildFile; fileRef = E689EE8D1B6A89D000597587 /* XMPPDeprecatedDigestAuthentication.h */; };
@@ -1962,9 +1974,11 @@
 				E689EF3C1B6A89D000597587 /* DDLog.h in Headers */,
 				E689EF471B6A89D000597587 /* NSString+DDXML.h in Headers */,
 				E689EF091B6A89D000597587 /* XMPPSASLAuthentication.h in Headers */,
+				E6846DC21B6D9B9600009411 /* NSXMLElement+XEP_0203.h in Headers */,
 				E689EF251B6A89D000597587 /* DDList.h in Headers */,
 				E689F06D1B6A8FE800597587 /* XMPPRosterMemoryStoragePrivate.h in Headers */,
 				E689EEFA1B6A89D000597587 /* XMPPDeprecatedDigestAuthentication.h in Headers */,
+				E6846DBA1B6D9B1400009411 /* XMPPPubSub.h in Headers */,
 				E689F06B1B6A8FE800597587 /* XMPPRosterMemoryStorage.h in Headers */,
 				E689EF501B6A89D000597587 /* DDXMLPrivate.h in Headers */,
 				E6E2FEAD1B66F72100880F3C /* XMPPClient.h in Headers */,
@@ -1974,8 +1988,10 @@
 				E689EF041B6A89D000597587 /* XMPPXFacebookPlatformAuthentication.h in Headers */,
 				E689EF061B6A89D000597587 /* XMPPXOAuth2Google.h in Headers */,
 				E689EF311B6A89D000597587 /* XMPPTimer.h in Headers */,
+				E6846DBE1B6D9B4700009411 /* XMPPDateTimeProfiles.h in Headers */,
 				E689F0621B6A8EDA00597587 /* XMPPReconnect.h in Headers */,
 				E689F0671B6A8F2E00597587 /* XMPPRosterPrivate.h in Headers */,
+				E6846DB81B6D9B1400009411 /* XMPPIQ+XEP_0060.h in Headers */,
 				E689F0641B6A8F2200597587 /* XMPPResource.h in Headers */,
 				E689EF351B6A89D000597587 /* DDAbstractDatabaseLogger.h in Headers */,
 				E689EEF81B6A89D000597587 /* XMPPAnonymousAuthentication.h in Headers */,
@@ -2001,6 +2017,7 @@
 				E689EF1B1B6A89D000597587 /* XMPPMessage.h in Headers */,
 				E689EF491B6A89D000597587 /* DDXML.h in Headers */,
 				E689EF081B6A89D000597587 /* XMPPCustomBinding.h in Headers */,
+				E6846DBC1B6D9B4700009411 /* NSDate+XMPPDateTimeProfiles.h in Headers */,
 				E689EF331B6A89D000597587 /* GCDAsyncSocket.h in Headers */,
 				E689EF1D1B6A89D000597587 /* XMPPModule.h in Headers */,
 				E689EF541B6A89D000597587 /* stringprep.h in Headers */,
@@ -2017,6 +2034,7 @@
 				E689EF001B6A89D000597587 /* XMPPPlainAuthentication.h in Headers */,
 				E689EF0A1B6A89D000597587 /* NSData+XMPP.h in Headers */,
 				E6681A2A1B679C87003096D6 /* XMPPProcess.h in Headers */,
+				E6846DC01B6D9B6500009411 /* NSString+XEP_0106.h in Headers */,
 				E689F0721B6A909200597587 /* XMPPDelegate.h in Headers */,
 				E689EF2F1B6A89D000597587 /* XMPPStringPrep.h in Headers */,
 				E689EF1A1B6A89D000597587 /* XMPPLogging.h in Headers */,
@@ -2368,6 +2386,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E6846DC11B6D9B6500009411 /* NSString+XEP_0106.m in Sources */,
 				E689EF341B6A89D000597587 /* GCDAsyncSocket.m in Sources */,
 				E689EF171B6A89D000597587 /* XMPPIQ.m in Sources */,
 				E689EF0B1B6A89D000597587 /* NSData+XMPP.m in Sources */,
@@ -2385,6 +2404,8 @@
 				E689EF4F1B6A89D000597587 /* DDXMLNode.m in Sources */,
 				E689EF4D1B6A89D000597587 /* DDXMLElement.m in Sources */,
 				E689EF261B6A89D000597587 /* DDList.m in Sources */,
+				E6846DBF1B6D9B4700009411 /* XMPPDateTimeProfiles.m in Sources */,
+				E6846DB91B6D9B1400009411 /* XMPPIQ+XEP_0060.m in Sources */,
 				E689EF011B6A89D000597587 /* XMPPPlainAuthentication.m in Sources */,
 				E689EF431B6A89D000597587 /* DDDispatchQueueLogFormatter.m in Sources */,
 				E689EF361B6A89D000597587 /* DDAbstractDatabaseLogger.m in Sources */,
@@ -2404,15 +2425,18 @@
 				E689EF3D1B6A89D000597587 /* DDLog.m in Sources */,
 				E689EF3A1B6A89D000597587 /* DDFileLogger.m in Sources */,
 				E689EF121B6A89D000597587 /* XMPPConstants.m in Sources */,
+				E6846DBD1B6D9B4700009411 /* NSDate+XMPPDateTimeProfiles.m in Sources */,
 				E689EF411B6A89D000597587 /* DDContextFilterLogFormatter.m in Sources */,
 				E689EF0D1B6A89D000597587 /* NSNumber+XMPP.m in Sources */,
 				E689EF3F1B6A89D000597587 /* DDTTYLogger.m in Sources */,
 				E689EF0F1B6A89D000597587 /* NSXMLElement+XMPP.m in Sources */,
+				E6846DBB1B6D9B1400009411 /* XMPPPubSub.m in Sources */,
 				E689EF321B6A89D000597587 /* XMPPTimer.m in Sources */,
 				E689EF381B6A89D000597587 /* DDASLLogger.m in Sources */,
 				E689F0631B6A8EDE00597587 /* XMPPReconnect.m in Sources */,
 				E689F06A1B6A8FE800597587 /* XMPPResourceMemoryStorageObject.m in Sources */,
 				E689EF221B6A89D000597587 /* XMPPPresence.m in Sources */,
+				E6846DC31B6D9B9600009411 /* NSXMLElement+XEP_0203.m in Sources */,
 				E689EEFB1B6A89D000597587 /* XMPPDeprecatedDigestAuthentication.m in Sources */,
 				E689EF481B6A89D000597587 /* NSString+DDXML.m in Sources */,
 				E689EF1C1B6A89D000597587 /* XMPPMessage.m in Sources */,

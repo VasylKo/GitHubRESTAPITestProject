@@ -7,7 +7,9 @@ target 'PositionIn' do
     pod 'KeychainAccess'
     pod 'HanekeSwift'
     pod 'KYDrawerController'
-    pod 'PosInCore', :path => 'PosInCore'    
+    
+    pod 'ResponseDetective'
+    pod 'PosInCore', :path => 'PosInCore', :configurations => ['Debug']   
 end
 
 target 'PositionInTests' do
