@@ -11,6 +11,7 @@ import PosInCore
 import Alamofire
 import BrightFutures
 import CleanroomLogger
+import ResponseDetective
 import Messaging
 
 @UIApplicationMain
@@ -26,8 +27,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         #else
         Log.enable(minimumSeverity: .Info, synchronousMode: false)
         #endif
+        let urlSessionConfig = NSURLSessionConfiguration.defaultSessionConfiguration()
+        #if DEBUG
+        InterceptingProtocol.registerRequestInterceptor(HeadersInterceptor(outputStream: CleanroomOutputStream(logChannel: Log.debug)))
+        InterceptingProtocol.registerRequestInterceptor(JSONInterceptor(outputStream: CleanroomOutputStream(logChannel: Log.debug)))
+        InterceptingProtocol.registerErrorInterceptor(HeadersInterceptor(outputStream: CleanroomOutputStream(logChannel: Log.error)))
+        urlSessionConfig.protocolClasses = [InterceptingProtocol.self]
+        #endif
         let baseURL = NSURL(string: "http://45.63.7.39:8080")!
-        api = APIService(url: baseURL)
+        
+        let dataProvider = PosInCore.NetworkDataProvider(configuration: urlSessionConfig)
+        api = APIService(url: baseURL, dataProvider: dataProvider)
         let chatConfig = XMPPClientConfiguration.defaultConfiguration()
         chatClient = XMPPClient(configuration: chatConfig)
         super.init()
@@ -84,12 +94,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 
 
 
-        self.chatClient.auth("ixmpp@beewellapp.com", password: "1HateD0m2").future().onSuccess {
-            Log.info?.message("XMPP authorized")
-            }.onFailure { error in
-                Log.error?.value(error)
-        }
-            
+//        self.chatClient.auth("ixmpp@beewellapp.com", password: "1HateD0m2").future().onSuccess {
+//            Log.info?.message("XMPP authorized")
+//            }.onFailure { error in
+//                Log.error?.value(error)
+//        }
+        
 
         
         
@@ -129,3 +139,10 @@ func api() -> APIService {
     return appDelegate.api
 }
 
+
+struct CleanroomOutputStream: OutputStreamType {
+    let logChannel: LogChannel?
+    func write(string: String) {
+        logChannel?.message(string)
+    }
+}
