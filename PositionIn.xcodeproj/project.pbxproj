@@ -74,6 +74,8 @@
 		E6681A2E1B67A2DB003096D6 /* XMPPAuthProcess.h in Headers */ = {isa = PBXBuildFile; fileRef = E6681A2C1B67A2DB003096D6 /* XMPPAuthProcess.h */; };
 		E6681A2F1B67A2DB003096D6 /* XMPPAuthProcess.m in Sources */ = {isa = PBXBuildFile; fileRef = E6681A2D1B67A2DB003096D6 /* XMPPAuthProcess.m */; };
 		E6681A321B67C6F0003096D6 /* XMPPProcess+Future.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6681A311B67C6F0003096D6 /* XMPPProcess+Future.swift */; };
+		E66945821B6E279E00332134 /* XMPPRegisterProcess.h in Headers */ = {isa = PBXBuildFile; fileRef = E66945801B6E279E00332134 /* XMPPRegisterProcess.h */; };
+		E66945831B6E279E00332134 /* XMPPRegisterProcess.m in Sources */ = {isa = PBXBuildFile; fileRef = E66945811B6E279E00332134 /* XMPPRegisterProcess.m */; };
 		E6829B041B5E6CF800FB1E1D /* RoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6829B031B5E6CF800FB1E1D /* RoundButton.swift */; };
 		E6846DB81B6D9B1400009411 /* XMPPIQ+XEP_0060.h in Headers */ = {isa = PBXBuildFile; fileRef = E689EFDF1B6A8A1000597587 /* XMPPIQ+XEP_0060.h */; };
 		E6846DB91B6D9B1400009411 /* XMPPIQ+XEP_0060.m in Sources */ = {isa = PBXBuildFile; fileRef = E689EFE01B6A8A1000597587 /* XMPPIQ+XEP_0060.m */; settings = {COMPILER_FLAGS = "-w"; }; };
@@ -348,6 +350,8 @@
 		E6681A2D1B67A2DB003096D6 /* XMPPAuthProcess.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPAuthProcess.m; sourceTree = "<group>"; };
 		E6681A301B67A66B003096D6 /* XMPPProcess+Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "XMPPProcess+Private.h"; sourceTree = "<group>"; };
 		E6681A311B67C6F0003096D6 /* XMPPProcess+Future.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "XMPPProcess+Future.swift"; sourceTree = "<group>"; };
+		E66945801B6E279E00332134 /* XMPPRegisterProcess.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPRegisterProcess.h; sourceTree = "<group>"; };
+		E66945811B6E279E00332134 /* XMPPRegisterProcess.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPRegisterProcess.m; sourceTree = "<group>"; };
 		E6736ADB1B4E56DD0003580D /* Version.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Version.h; sourceTree = "<group>"; };
 		E6736ADD1B4E56EB0003580D /* TODOwarn.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = TODOwarn.sh; sourceTree = "<group>"; };
 		E6736ADE1B4E56EB0003580D /* Version.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = Version.sh; sourceTree = "<group>"; };
@@ -966,6 +970,8 @@
 				E6681A291B679C87003096D6 /* XMPPProcess.m */,
 				E6681A2C1B67A2DB003096D6 /* XMPPAuthProcess.h */,
 				E6681A2D1B67A2DB003096D6 /* XMPPAuthProcess.m */,
+				E66945801B6E279E00332134 /* XMPPRegisterProcess.h */,
+				E66945811B6E279E00332134 /* XMPPRegisterProcess.m */,
 			);
 			path = Processes;
 			sourceTree = "<group>";
@@ -2010,6 +2016,7 @@
 				E689EF421B6A89D000597587 /* DDDispatchQueueLogFormatter.h in Headers */,
 				E689EF441B6A89D000597587 /* DDMultiFormatter.h in Headers */,
 				E689EF151B6A89D000597587 /* XMPPInternal.h in Headers */,
+				E66945821B6E279E00332134 /* XMPPRegisterProcess.h in Headers */,
 				E689EF111B6A89D000597587 /* XMPPConstants.h in Headers */,
 				E6681A2E1B67A2DB003096D6 /* XMPPAuthProcess.h in Headers */,
 				E689EF1B1B6A89D000597587 /* XMPPMessage.h in Headers */,
@@ -2387,6 +2394,7 @@
 				E6846DC11B6D9B6500009411 /* NSString+XEP_0106.m in Sources */,
 				E689EF341B6A89D000597587 /* GCDAsyncSocket.m in Sources */,
 				E689EF171B6A89D000597587 /* XMPPIQ.m in Sources */,
+				E66945831B6E279E00332134 /* XMPPRegisterProcess.m in Sources */,
 				E689EF0B1B6A89D000597587 /* NSData+XMPP.m in Sources */,
 				E6681A2B1B679C87003096D6 /* XMPPProcess.m in Sources */,
 				E689F06F1B6A8FE800597587 /* XMPPUserMemoryStorageObject.m in Sources */,

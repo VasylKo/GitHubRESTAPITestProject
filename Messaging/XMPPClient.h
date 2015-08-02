@@ -22,9 +22,9 @@
 
 - (nonnull instancetype)initWithConfiguration:(nonnull XMPPClientConfiguration  * )configuration;
 
-@property (nonatomic, readonly, assign) BOOL isConnected;
-- (void)connect;
-
 - (nonnull XMPPProcess *)auth:(nonnull NSString *)jidString password:(nonnull  NSString *)password;
+- (nonnull XMPPProcess *)registerJid:(nonnull NSString *)jidString password:(nonnull  NSString *)password;
 
+- (void)sendTestMessage;
+@property (nonatomic, readonly, assign) BOOL isConnected;
 @end
