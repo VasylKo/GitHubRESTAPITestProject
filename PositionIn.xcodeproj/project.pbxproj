@@ -311,7 +311,6 @@
 		E6325F661B57DA4600996480 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		E6325F711B57E1DA00996480 /* Storyboards.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storyboards.swift; sourceTree = "<group>"; };
 		E6325FA81B57F36E00996480 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E6325FA91B57F36E00996480 /* PosInCore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PosInCore.h; sourceTree = "<group>"; };
 		E6325FC41B57F3A300996480 /* CommonTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonTypes.swift; sourceTree = "<group>"; };
 		E6325FC51B57F3A300996480 /* FoundationWrappers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoundationWrappers.swift; sourceTree = "<group>"; };
 		E6325FC81B57FBE100996480 /* NetworkDataProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkDataProvider.swift; sourceTree = "<group>"; };
@@ -824,7 +823,6 @@
 				E6325FC81B57FBE100996480 /* NetworkDataProvider.swift */,
 				E6325FD71B57FEAF00996480 /* NetworkActivityIndicatorManager.swift */,
 				E6D7C2911B5D546C004F3AA9 /* NibView.swift */,
-				E6325FA91B57F36E00996480 /* PosInCore.h */,
 				E6325FA71B57F36E00996480 /* Supporting Files */,
 			);
 			path = PosInCore;

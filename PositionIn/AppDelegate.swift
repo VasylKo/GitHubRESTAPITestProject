@@ -87,7 +87,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 return response.accessToken
             }
         }.onSuccess { _ in
-//            self.runProfileAPI()
+            self.runProfileAPI()
         }.onFailure { error in
             Log.error?.value(error)
         }

@@ -7,7 +7,7 @@ Pod::Spec.new do |s|
   s.platform = :ios
   s.ios.deployment_target = '8.0'
   s.source_files =  '*.swift' , 'TableView/*.swift'
-  s.dependency 'Alamofire', '~> 1.2.3'
+  s.dependency 'Alamofire', '~> 1.3.0'
   s.dependency 'ObjectMapper', '0.12'
   s.dependency 'BrightFutures', '~> 2.0.1'
   s.requires_arc = true

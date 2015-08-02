@@ -9,7 +9,7 @@ target 'PositionIn' do
     pod 'KYDrawerController'
     
     pod 'ResponseDetective'
-    pod 'PosInCore', :path => 'PosInCore', :configurations => ['Debug']   
+    pod 'PosInCore', :path => 'PosInCore'
 end
 
 target 'PositionInTests' do
