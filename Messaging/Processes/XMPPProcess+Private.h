@@ -44,6 +44,14 @@
  */
 - (NSError * __nonnull )errorFromElement:(nonnull NSXMLElement *)element;
 
+/**
+ *  Generates an error with given reason
+ *
+ *  @param message reason
+ *
+ *  @return error instance
+ */
+- (NSError * __nonnull )errorWithReason:(nonnull NSString *)message;
 @end
 
 @interface XMPPProcess (Private)

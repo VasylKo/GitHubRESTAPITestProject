@@ -311,7 +311,7 @@
 		E6325F661B57DA4600996480 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		E6325F711B57E1DA00996480 /* Storyboards.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storyboards.swift; sourceTree = "<group>"; };
 		E6325FA81B57F36E00996480 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E6325FC41B57F3A300996480 /* CommonTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonTypes.swift; sourceTree = "<group>"; };
+		E6325FC41B57F3A300996480 /* CommonOperators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonOperators.swift; sourceTree = "<group>"; };
 		E6325FC51B57F3A300996480 /* FoundationWrappers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoundationWrappers.swift; sourceTree = "<group>"; };
 		E6325FC81B57FBE100996480 /* NetworkDataProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkDataProvider.swift; sourceTree = "<group>"; };
 		E6325FD71B57FEAF00996480 /* NetworkActivityIndicatorManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkActivityIndicatorManager.swift; sourceTree = "<group>"; };
@@ -818,7 +818,7 @@
 				E6E4816C1B6A846900500259 /* PosInCore.podspec */,
 				E6FC63D01B5901060062F5C9 /* KVObserver.swift */,
 				E660E5361B5BCCC800F52050 /* TableView */,
-				E6325FC41B57F3A300996480 /* CommonTypes.swift */,
+				E6325FC41B57F3A300996480 /* CommonOperators.swift */,
 				E6325FC51B57F3A300996480 /* FoundationWrappers.swift */,
 				E6325FC81B57FBE100996480 /* NetworkDataProvider.swift */,
 				E6325FD71B57FEAF00996480 /* NetworkActivityIndicatorManager.swift */,
