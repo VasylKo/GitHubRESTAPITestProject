@@ -51,7 +51,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     
     func runProfileAPI() {
-        
         api.get(nil).flatMap { (profile: UserProfile) -> Future<Void,NSError> in
             var newProfile = profile
             newProfile.firstName = "Alex"
@@ -73,7 +72,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         post.name = "Cool post"
         post.text = "Big Post text"
         
-        api.post(post).flatMap { ( _: Void ) -> Future<CollectionResponse<Post>, NSError> in
+        api.post(post).flatMap { (post: Post) -> Future<Void, NSError> in
+            var updatedPost = post
+            updatedPost.name = "Updated post"
+            return self.api.update(post)
+        }.flatMap { ( _: Void ) -> Future<CollectionResponse<Post>, NSError> in
             return self.api.getAll(Post.allEndpoint(user.objectId))
         }.onSuccess { response in
             Log.info?.value(response.items)

@@ -54,11 +54,11 @@ struct APIService {
     }
 
     
-    func post<C: CRUDObject>(object: C) -> Future<Void,NSError> {
+    func post<C: CRUDObject>(object: C) -> Future<C,NSError> {
         return sessionController.session().flatMap {
-            (token: AuthResponse.Token) -> Future<Void,NSError> in
+            (token: AuthResponse.Token) -> Future<C,NSError> in
             let urlRequest = self.crudRequest(token, endpoint: C.endpoint(), method: .POST, params: Mapper().toJSON(object))
-            let (request, future): (Alamofire.Request, Future<Void, NSError>) = self.dataProvider.jsonRequest(urlRequest, map: self.emptyResponseMapping())
+            let (request, future): (Alamofire.Request, Future<C, NSError>) = self.dataProvider.objectRequest(urlRequest)
             request.validate(statusCode: [201])
             return future
         }
