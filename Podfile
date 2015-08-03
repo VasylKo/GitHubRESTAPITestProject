@@ -7,6 +7,7 @@ target 'PositionIn' do
     pod 'KeychainAccess'
     pod 'HanekeSwift'
     pod 'KYDrawerController'
+    pod 'UIImageEffects', :inhibit_warnings => true
     
     pod 'ResponseDetective'
     pod 'PosInCore', :path => 'PosInCore'

@@ -229,8 +229,10 @@
 		E6B3C3301B62581200EA613A /* CleanroomASL.framework in Embed Core Framework */ = {isa = PBXBuildFile; fileRef = E6B3C32D1B62581200EA613A /* CleanroomASL.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E6B3C3311B62581200EA613A /* CleanroomLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6B3C32E1B62581200EA613A /* CleanroomLogger.framework */; };
 		E6B3C3321B62581200EA613A /* CleanroomLogger.framework in Embed Core Framework */ = {isa = PBXBuildFile; fileRef = E6B3C32E1B62581200EA613A /* CleanroomLogger.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		E6D7C2971B5D5B3B004F3AA9 /* PositionIn.SearchBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6D7C2951B5D5B3B004F3AA9 /* PositionIn.SearchBar.xib */; };
-		E6D7C2981B5D5B3B004F3AA9 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D7C2961B5D5B3B004F3AA9 /* SearchBar.swift */; };
+		E6D4D5B21B6F81A7003134CB /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D4D5B11B6F81A7003134CB /* SearchViewController.swift */; };
+		E6D4D5B51B6F8B9F003134CB /* PositionIn.SearchBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6D4D5B31B6F8B9F003134CB /* PositionIn.SearchBar.xib */; };
+		E6D4D5B61B6F8B9F003134CB /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D4D5B41B6F8B9F003134CB /* SearchBar.swift */; };
+		E6D4D5B81B6FA7A7003134CB /* SearchTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D4D5B71B6FA7A7003134CB /* SearchTransition.swift */; };
 		E6E2FE8D1B66F61300880F3C /* Messaging.h in Headers */ = {isa = PBXBuildFile; fileRef = E6E2FE8C1B66F61300880F3C /* Messaging.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E6E2FE931B66F61400880F3C /* Messaging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6E2FE881B66F61300880F3C /* Messaging.framework */; };
 		E6E2FE9C1B66F61400880F3C /* MessagingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E6E2FE9B1B66F61400880F3C /* MessagingTests.m */; };
@@ -685,9 +687,11 @@
 		E6B3C32B1B621E6400EA613A /* SessionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionController.swift; sourceTree = "<group>"; };
 		E6B3C32D1B62581200EA613A /* CleanroomASL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CleanroomASL.framework; path = Carthage/Build/iOS/CleanroomASL.framework; sourceTree = "<group>"; };
 		E6B3C32E1B62581200EA613A /* CleanroomLogger.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CleanroomLogger.framework; path = Carthage/Build/iOS/CleanroomLogger.framework; sourceTree = "<group>"; };
+		E6D4D5B11B6F81A7003134CB /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		E6D4D5B31B6F8B9F003134CB /* PositionIn.SearchBar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.SearchBar.xib; sourceTree = "<group>"; };
+		E6D4D5B41B6F8B9F003134CB /* SearchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
+		E6D4D5B71B6FA7A7003134CB /* SearchTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTransition.swift; sourceTree = "<group>"; };
 		E6D7C2911B5D546C004F3AA9 /* NibView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NibView.swift; sourceTree = "<group>"; };
-		E6D7C2951B5D5B3B004F3AA9 /* PositionIn.SearchBar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.SearchBar.xib; sourceTree = "<group>"; };
-		E6D7C2961B5D5B3B004F3AA9 /* SearchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		E6E2FE881B66F61300880F3C /* Messaging.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Messaging.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6E2FE8B1B66F61300880F3C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E6E2FE8C1B66F61300880F3C /* Messaging.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Messaging.h; sourceTree = "<group>"; };
@@ -788,8 +792,6 @@
 			children = (
 				E62B17051B5CE3EB00D446BC /* BrowseViewController.swift */,
 				E62B17091B5CE46500D446BC /* PositionIn.BrowseViewController.xib */,
-				E6D7C2961B5D5B3B004F3AA9 /* SearchBar.swift */,
-				E6D7C2951B5D5B3B004F3AA9 /* PositionIn.SearchBar.xib */,
 				E6AC64551B5EC5B1007D7952 /* AddMenuView.swift */,
 				E6A869DA1B5FD1E100797D16 /* BrowseTabbar.swift */,
 			);
@@ -877,6 +879,7 @@
 				E62B17001B5CE39400D446BC /* Browse */,
 				E6A869DC1B6000C800797D16 /* BrowseList */,
 				E6A869DF1B6000C800797D16 /* BrowseMap */,
+				E6D4D5B01B6F8186003134CB /* Search */,
 				E69420F71B66354E00F34F06 /* ProductDetails */,
 				E689F0751B6B90CA00597587 /* ProductInventory */,
 				E689F07E1B6B99FA00597587 /* SellerProfile */,
@@ -1924,6 +1927,17 @@
 			path = Network;
 			sourceTree = "<group>";
 		};
+		E6D4D5B01B6F8186003134CB /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				E6D4D5B11B6F81A7003134CB /* SearchViewController.swift */,
+				E6D4D5B71B6FA7A7003134CB /* SearchTransition.swift */,
+				E6D4D5B31B6F8B9F003134CB /* PositionIn.SearchBar.xib */,
+				E6D4D5B41B6F8B9F003134CB /* SearchBar.swift */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
 		E6E2FE891B66F61300880F3C /* Messaging */ = {
 			isa = PBXGroup;
 			children = (
@@ -2199,7 +2213,7 @@
 				E62B170A1B5CE46500D446BC /* PositionIn.BrowseViewController.xib in Resources */,
 				E689F0791B6B911F00597587 /* PositionIn.ProductInventoryViewController.xib in Resources */,
 				E6A869E91B60013A00797D16 /* PositionIn.ListProductCell.xib in Resources */,
-				E6D7C2971B5D5B3B004F3AA9 /* PositionIn.SearchBar.xib in Resources */,
+				E6D4D5B51B6F8B9F003134CB /* PositionIn.SearchBar.xib in Resources */,
 				E6A869E51B6000C800797D16 /* PositionIn.BrowseMapViewController.xib in Resources */,
 				E660E52E1B5AC23B00F52050 /* PositionIn.MainMenuViewController.xib in Resources */,
 				E62B16F51B5C1AA700D446BC /* PositionIn.MainMenuUserCell.xib in Resources */,
@@ -2344,7 +2358,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E6D7C2981B5D5B3B004F3AA9 /* SearchBar.swift in Sources */,
 				E6325F721B57E1DA00996480 /* Storyboards.swift in Sources */,
 				E62B16FF1B5CE0F800D446BC /* BesideMenuViewController.swift in Sources */,
 				E660E52D1B5AC23B00F52050 /* MainMenuViewController.swift in Sources */,
@@ -2356,6 +2369,7 @@
 				E65E87301B611FE700AE444D /* CollectionResponse.swift in Sources */,
 				E65E87321B614A9900AE444D /* Location.swift in Sources */,
 				E62B17061B5CE3EB00D446BC /* BrowseViewController.swift in Sources */,
+				E6D4D5B21B6F81A7003134CB /* SearchViewController.swift in Sources */,
 				E6A869EE1B60D42C00797D16 /* APIService.swift in Sources */,
 				E6B3C32C1B621E6400EA613A /* SessionController.swift in Sources */,
 				E6A869E21B6000C800797D16 /* BrowseListViewController.swift in Sources */,
@@ -2364,6 +2378,7 @@
 				E64DC3501B4E53C90011D37C /* AppDelegate.swift in Sources */,
 				E65E872C1B611BA200AE444D /* Post.swift in Sources */,
 				E69421031B666A1600F34F06 /* ActionCell.swift in Sources */,
+				E6D4D5B61B6F8B9F003134CB /* SearchBar.swift in Sources */,
 				E62B16FB1B5CDF0100D446BC /* MessagesListViewController.swift in Sources */,
 				E6A869E71B60012500797D16 /* ListProductCell.swift in Sources */,
 				E6AC64541B5EBC29007D7952 /* UIScheme.swift in Sources */,
@@ -2375,6 +2390,7 @@
 				E6A869F21B60FF0500797D16 /* CRUDObject.swift in Sources */,
 				E6A869EC1B60D3E300797D16 /* APIService+Auth.swift in Sources */,
 				E6A869E41B6000C800797D16 /* BrowseMapViewController.swift in Sources */,
+				E6D4D5B81B6FA7A7003134CB /* SearchTransition.swift in Sources */,
 				E660E5301B5AC28600F52050 /* MainMenuCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

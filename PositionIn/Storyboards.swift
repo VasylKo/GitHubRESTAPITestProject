@@ -28,6 +28,10 @@ struct Storyboards {
             return self.storyboard.instantiateViewControllerWithIdentifier("MainMenuViewController") as! MainMenuViewController
         }
 
+        static func instantiateSearchViewController() -> SearchViewController! {
+            return self.storyboard.instantiateViewControllerWithIdentifier("SearchViewController") as! SearchViewController
+        }
+
         static func instantiateBrowseMapViewController() -> BrowseMapViewController! {
             return self.storyboard.instantiateViewControllerWithIdentifier("BrowseMapViewController") as! BrowseMapViewController
         }
@@ -232,6 +236,8 @@ extension SidebarViewController {
 
 //MARK: - MessagesListViewController
 
+//MARK: - SearchViewController
+
 //MARK: - BrowseMapViewController
 
 //MARK: - BrowseListViewController
@@ -342,10 +348,13 @@ extension BrowseViewController {
 
     enum Segue: String, Printable, SegueProtocol {
         case ShowProductDetails = "ShowProductDetails"
+        case ShowSearch = "ShowSearch"
 
         var kind: SegueKind? {
             switch (self) {
             case ShowProductDetails:
+                return SegueKind(rawValue: "show")
+            case ShowSearch:
                 return SegueKind(rawValue: "show")
             default:
                 preconditionFailure("Invalid value")
@@ -357,6 +366,8 @@ extension BrowseViewController {
             switch (self) {
             case ShowProductDetails:
                 return ProductDetailsViewController.self
+            case ShowSearch:
+                return SearchViewController.self
             default:
                 assertionFailure("Unknown destination")
                 return nil

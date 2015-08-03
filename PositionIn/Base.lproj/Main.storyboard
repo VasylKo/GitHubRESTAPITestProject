@@ -97,13 +97,102 @@
             </objects>
             <point key="canvasLocation" x="914" y="564"/>
         </scene>
+        <!--Search View Controller-->
+        <scene sceneID="em1-oT-Uzw">
+            <objects>
+                <viewController storyboardIdentifier="SearchViewController" id="kST-So-Shi" customClass="SearchViewController" customModule="PositionIn" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="9UO-pg-gYJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="03r-xU-W5j"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="F0m-Tp-43U">
+                        <rect key="frame" x="0.0" y="64" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="AMn-w6-2mc" userLabel="Back Image View">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fUl-gm-R24">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="113"/>
+                                <subviews>
+                                    <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="gPq-Sv-Swk" userLabel="Categories Search Bar">
+                                        <rect key="frame" x="0.0" y="20" width="600" height="44"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="tintColor" red="0.13725490200000001" green="0.4431372549" blue="0.83529411760000005" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="barTintColor" red="0.13725490200000001" green="0.4431372549" blue="0.83529411760000005" alpha="1" colorSpace="calibratedRGB"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </searchBar>
+                                    <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="fQn-tl-tB5" userLabel="Location Search Bar">
+                                        <rect key="frame" x="0.0" y="64" width="600" height="44"/>
+                                        <color key="barTintColor" red="0.13725490200000001" green="0.4431372549" blue="0.83529411760000005" alpha="1" colorSpace="calibratedRGB"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </searchBar>
+                                </subviews>
+                                <color key="backgroundColor" red="0.13725490200000001" green="0.4431372549" blue="0.83529411760000005" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="fQn-tl-tB5" secondAttribute="trailing" id="H2b-QF-OaN"/>
+                                    <constraint firstItem="gPq-Sv-Swk" firstAttribute="leading" secondItem="fUl-gm-R24" secondAttribute="leading" id="HlT-JQ-etL"/>
+                                    <constraint firstItem="fQn-tl-tB5" firstAttribute="top" secondItem="gPq-Sv-Swk" secondAttribute="bottom" id="Lbh-J3-fG2"/>
+                                    <constraint firstItem="fQn-tl-tB5" firstAttribute="leading" secondItem="fUl-gm-R24" secondAttribute="leading" id="erJ-7t-2bP"/>
+                                    <constraint firstAttribute="trailing" secondItem="gPq-Sv-Swk" secondAttribute="trailing" id="vKw-AO-cgC"/>
+                                    <constraint firstAttribute="bottom" secondItem="fQn-tl-tB5" secondAttribute="bottom" constant="5" id="yFi-w3-oBU"/>
+                                </constraints>
+                            </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="V9L-hl-OWs" customClass="TableView" customModule="PosInCore">
+                                <rect key="frame" x="0.0" y="113" width="600" height="487"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
+                        <constraints>
+                            <constraint firstItem="gPq-Sv-Swk" firstAttribute="top" secondItem="9UO-pg-gYJ" secondAttribute="bottom" id="2us-b8-5l3"/>
+                            <constraint firstAttribute="trailing" secondItem="V9L-hl-OWs" secondAttribute="trailing" id="6y6-xf-vuc"/>
+                            <constraint firstItem="fUl-gm-R24" firstAttribute="top" secondItem="9UO-pg-gYJ" secondAttribute="bottom" id="A9T-vq-BEO"/>
+                            <constraint firstAttribute="trailing" secondItem="AMn-w6-2mc" secondAttribute="trailing" id="FW2-3s-Etk"/>
+                            <constraint firstAttribute="trailing" secondItem="fUl-gm-R24" secondAttribute="trailing" id="IwM-qr-qh2"/>
+                            <constraint firstItem="AMn-w6-2mc" firstAttribute="top" secondItem="9UO-pg-gYJ" secondAttribute="bottom" id="NoZ-yF-YZa"/>
+                            <constraint firstItem="fUl-gm-R24" firstAttribute="top" secondItem="F0m-Tp-43U" secondAttribute="top" id="O5H-TG-X6p"/>
+                            <constraint firstItem="AMn-w6-2mc" firstAttribute="top" secondItem="fUl-gm-R24" secondAttribute="top" id="Rn1-NQ-xSI"/>
+                            <constraint firstItem="V9L-hl-OWs" firstAttribute="leading" secondItem="F0m-Tp-43U" secondAttribute="leading" id="SEA-nU-NLp"/>
+                            <constraint firstAttribute="trailing" secondItem="fUl-gm-R24" secondAttribute="trailing" id="TsF-tf-wHE"/>
+                            <constraint firstItem="fUl-gm-R24" firstAttribute="leading" secondItem="F0m-Tp-43U" secondAttribute="leading" id="Wek-JC-T7I"/>
+                            <constraint firstItem="AMn-w6-2mc" firstAttribute="top" secondItem="fUl-gm-R24" secondAttribute="bottom" id="hSP-aO-Klc"/>
+                            <constraint firstItem="fUl-gm-R24" firstAttribute="leading" secondItem="F0m-Tp-43U" secondAttribute="leading" id="lC9-0d-6tF"/>
+                            <constraint firstItem="03r-xU-W5j" firstAttribute="top" secondItem="AMn-w6-2mc" secondAttribute="bottom" id="nSE-7O-4Lh"/>
+                            <constraint firstItem="AMn-w6-2mc" firstAttribute="leading" secondItem="F0m-Tp-43U" secondAttribute="leading" id="r06-Wg-sic"/>
+                            <constraint firstItem="V9L-hl-OWs" firstAttribute="top" secondItem="fUl-gm-R24" secondAttribute="bottom" id="vbO-lQ-LV4"/>
+                            <constraint firstItem="03r-xU-W5j" firstAttribute="top" secondItem="V9L-hl-OWs" secondAttribute="bottom" id="vt6-V1-wnE"/>
+                            <constraint firstItem="AMn-w6-2mc" firstAttribute="top" secondItem="9UO-pg-gYJ" secondAttribute="bottom" id="xd1-cy-gvB"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="NoZ-yF-YZa"/>
+                                <exclude reference="hSP-aO-Klc"/>
+                                <exclude reference="xd1-cy-gvB"/>
+                                <exclude reference="A9T-vq-BEO"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <connections>
+                        <outlet property="backImageView" destination="AMn-w6-2mc" id="PIL-n4-rPq"/>
+                        <outlet property="categoriesSearchBar" destination="gPq-Sv-Swk" id="REd-Cg-hRD"/>
+                        <outlet property="locationSearchBar" destination="fQn-tl-tB5" id="PgO-VL-lJi"/>
+                        <outlet property="tableView" destination="V9L-hl-OWs" id="rFx-eU-6Vc"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EjS-ZQ-fwB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="932" y="-888"/>
+        </scene>
         <!--Browse Map View Controller-->
         <scene sceneID="Ixb-6t-x5h">
             <objects>
                 <viewController storyboardIdentifier="BrowseMapViewController" id="2Jc-cE-Yoh" customClass="BrowseMapViewController" customModule="PositionIn" customModuleProvider="target" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xoO-d8-dqA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1026" y="-738"/>
+            <point key="canvasLocation" x="1590" y="-882"/>
         </scene>
         <!--Browse List View Controller-->
         <scene sceneID="Jyj-3J-o7D">
@@ -111,7 +200,7 @@
                 <viewController storyboardIdentifier="BrowseListViewController" id="SVe-Oe-PAe" customClass="BrowseListViewController" customModule="PositionIn" customModuleProvider="target" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mXf-hm-3pP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1765" y="-738"/>
+            <point key="canvasLocation" x="2291" y="-904"/>
         </scene>
         <!--Order-->
         <scene sceneID="JzA-qa-Ju1">
@@ -400,7 +489,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SjP-7l-6Pr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2555" y="-509"/>
+            <point key="canvasLocation" x="3059" y="-897"/>
         </scene>
         <!--Product Details View Controller-->
         <scene sceneID="Ofi-KM-od4">
@@ -427,7 +516,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Se8-GM-xNb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2511" y="285"/>
+            <point key="canvasLocation" x="3003" y="-90"/>
         </scene>
         <!--Seller Profile-->
         <scene sceneID="Clr-D8-66g">
@@ -437,7 +526,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="feL-Ea-Em3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1787" y="795"/>
+            <point key="canvasLocation" x="2975" y="699"/>
         </scene>
         <!--Browse View Controller-->
         <scene sceneID="wfN-Bx-Jle">
@@ -476,6 +565,6 @@
         <image name="MainMenuFilters" width="22" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="WXU-OU-n2l"/>
+        <segue reference="UGm-BP-OPQ"/>
     </inferredMetricsTieBreakers>
 </document>
