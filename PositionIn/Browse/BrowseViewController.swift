@@ -171,8 +171,8 @@ class BrowseViewController: BesideMenuViewController {
 //MARK: Search
     
     
-    private lazy var searchbar: UIView = { [unowned self] in
-        let searchBar = UISearchBar()
+    private lazy var searchbar: SearchBar = { [unowned self] in
+        let searchBar = SearchBar()
         searchBar.delegate = self
         return searchBar
 //        let vPadding: CGFloat = 5
@@ -190,7 +190,8 @@ class BrowseViewController: BesideMenuViewController {
 
 extension BrowseViewController: UISearchBarDelegate {
     func searchBarShouldBeginEditing(searchBar: UISearchBar) -> Bool {
-        self.performSegue(BrowseViewController.Segue.ShowSearch)
+        SearchViewController.present(searchbar, presenter: self)
+//        self.performSegue(BrowseViewController.Segue.ShowSearch)
         return false
     }
 }

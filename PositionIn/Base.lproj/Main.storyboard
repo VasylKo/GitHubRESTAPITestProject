@@ -109,14 +109,17 @@
                         <rect key="frame" x="0.0" y="64" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="AMn-w6-2mc" userLabel="Back Image View">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                            </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fUl-gm-R24">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="113"/>
                                 <subviews>
-                                    <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="gPq-Sv-Swk">
+                                    <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="gPq-Sv-Swk" userLabel="Categories Search Bar">
                                         <rect key="frame" x="0.0" y="20" width="600" height="44"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </searchBar>
-                                    <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="fQn-tl-tB5">
+                                    <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="fQn-tl-tB5" userLabel="Location Search Bar">
                                         <rect key="frame" x="0.0" y="64" width="600" height="44"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </searchBar>
@@ -141,23 +144,34 @@
                             <constraint firstItem="gPq-Sv-Swk" firstAttribute="top" secondItem="9UO-pg-gYJ" secondAttribute="bottom" id="2us-b8-5l3"/>
                             <constraint firstAttribute="trailing" secondItem="V9L-hl-OWs" secondAttribute="trailing" id="6y6-xf-vuc"/>
                             <constraint firstItem="fUl-gm-R24" firstAttribute="top" secondItem="9UO-pg-gYJ" secondAttribute="bottom" id="A9T-vq-BEO"/>
+                            <constraint firstAttribute="trailing" secondItem="AMn-w6-2mc" secondAttribute="trailing" id="FW2-3s-Etk"/>
                             <constraint firstAttribute="trailing" secondItem="fUl-gm-R24" secondAttribute="trailing" id="IwM-qr-qh2"/>
+                            <constraint firstItem="AMn-w6-2mc" firstAttribute="top" secondItem="9UO-pg-gYJ" secondAttribute="bottom" id="NoZ-yF-YZa"/>
                             <constraint firstItem="fUl-gm-R24" firstAttribute="top" secondItem="F0m-Tp-43U" secondAttribute="top" id="O5H-TG-X6p"/>
+                            <constraint firstItem="AMn-w6-2mc" firstAttribute="top" secondItem="fUl-gm-R24" secondAttribute="top" id="Rn1-NQ-xSI"/>
                             <constraint firstItem="V9L-hl-OWs" firstAttribute="leading" secondItem="F0m-Tp-43U" secondAttribute="leading" id="SEA-nU-NLp"/>
                             <constraint firstAttribute="trailing" secondItem="fUl-gm-R24" secondAttribute="trailing" id="TsF-tf-wHE"/>
                             <constraint firstItem="fUl-gm-R24" firstAttribute="leading" secondItem="F0m-Tp-43U" secondAttribute="leading" id="Wek-JC-T7I"/>
+                            <constraint firstItem="AMn-w6-2mc" firstAttribute="top" secondItem="fUl-gm-R24" secondAttribute="bottom" id="hSP-aO-Klc"/>
                             <constraint firstItem="fUl-gm-R24" firstAttribute="leading" secondItem="F0m-Tp-43U" secondAttribute="leading" id="lC9-0d-6tF"/>
+                            <constraint firstItem="03r-xU-W5j" firstAttribute="top" secondItem="AMn-w6-2mc" secondAttribute="bottom" id="nSE-7O-4Lh"/>
+                            <constraint firstItem="AMn-w6-2mc" firstAttribute="leading" secondItem="F0m-Tp-43U" secondAttribute="leading" id="r06-Wg-sic"/>
                             <constraint firstItem="V9L-hl-OWs" firstAttribute="top" secondItem="fUl-gm-R24" secondAttribute="bottom" id="vbO-lQ-LV4"/>
                             <constraint firstItem="03r-xU-W5j" firstAttribute="top" secondItem="V9L-hl-OWs" secondAttribute="bottom" id="vt6-V1-wnE"/>
+                            <constraint firstItem="AMn-w6-2mc" firstAttribute="top" secondItem="9UO-pg-gYJ" secondAttribute="bottom" id="xd1-cy-gvB"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
                                 <exclude reference="A9T-vq-BEO"/>
+                                <exclude reference="NoZ-yF-YZa"/>
+                                <exclude reference="hSP-aO-Klc"/>
+                                <exclude reference="xd1-cy-gvB"/>
                             </mask>
                         </variation>
                     </view>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
+                        <outlet property="backImageView" destination="AMn-w6-2mc" id="PIL-n4-rPq"/>
                         <outlet property="categoriesSearchBar" destination="gPq-Sv-Swk" id="REd-Cg-hRD"/>
                         <outlet property="locationSearchBar" destination="fQn-tl-tB5" id="PgO-VL-lJi"/>
                         <outlet property="tableView" destination="V9L-hl-OWs" id="rFx-eU-6Vc"/>
@@ -532,7 +546,6 @@
                     <connections>
                         <outlet property="displayModeSegmentedControl" destination="Hzh-Pp-w0S" id="T0S-bj-Beg"/>
                         <segue destination="S6u-6D-z8V" kind="show" identifier="ShowProductDetails" id="UGm-BP-OPQ"/>
-                        <segue destination="kST-So-Shi" kind="show" identifier="ShowSearch" id="uxR-aK-Dct"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="spd-ov-gak" userLabel="First Responder" sceneMemberID="firstResponder"/>
