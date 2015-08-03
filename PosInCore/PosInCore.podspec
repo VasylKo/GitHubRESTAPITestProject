@@ -11,5 +11,4 @@ Pod::Spec.new do |s|
   s.dependency 'ObjectMapper', '0.12'
   s.dependency 'BrightFutures', '~> 2.0.1'
   s.requires_arc = true
-  s.ios.deployment_target = "8.0"
 end
