@@ -169,19 +169,30 @@ class BrowseViewController: BesideMenuViewController {
     }
     
 //MARK: Search
-
-    private lazy var searchbar: SearchBar = {
-        let vPadding: CGFloat = 5
-        let frame = CGRect(
-            x: 0,
-            y: vPadding,
-            width: self.view.bounds.width,
-            height: self.navigationController!.navigationBar.bounds.height - 2 * vPadding
-        )
-        let searchBar = SearchBar(frame: frame)
+    
+    
+    private lazy var searchbar: UIView = { [unowned self] in
+        let searchBar = UISearchBar()
+        searchBar.delegate = self
         return searchBar
+//        let vPadding: CGFloat = 5
+//        let frame = CGRect(
+//            x: 0,
+//            y: vPadding,
+//            width: self.view.bounds.width,
+//            height: self.navigationController!.navigationBar.bounds.height - 2 * vPadding
+//        )
+//        let searchBar = SearchBar(frame: frame)
+//        return searchBar
         }()
 
+}
+
+extension BrowseViewController: UISearchBarDelegate {
+    func searchBarShouldBeginEditing(searchBar: UISearchBar) -> Bool {
+        self.performSegue(BrowseViewController.Segue.ShowSearch)
+        return false
+    }
 }
 
 //MARK: configuration

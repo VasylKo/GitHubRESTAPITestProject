@@ -229,6 +229,7 @@
 		E6B3C3301B62581200EA613A /* CleanroomASL.framework in Embed Core Framework */ = {isa = PBXBuildFile; fileRef = E6B3C32D1B62581200EA613A /* CleanroomASL.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E6B3C3311B62581200EA613A /* CleanroomLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6B3C32E1B62581200EA613A /* CleanroomLogger.framework */; };
 		E6B3C3321B62581200EA613A /* CleanroomLogger.framework in Embed Core Framework */ = {isa = PBXBuildFile; fileRef = E6B3C32E1B62581200EA613A /* CleanroomLogger.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E6D4D5B21B6F81A7003134CB /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D4D5B11B6F81A7003134CB /* SearchViewController.swift */; };
 		E6D7C2971B5D5B3B004F3AA9 /* PositionIn.SearchBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6D7C2951B5D5B3B004F3AA9 /* PositionIn.SearchBar.xib */; };
 		E6D7C2981B5D5B3B004F3AA9 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D7C2961B5D5B3B004F3AA9 /* SearchBar.swift */; };
 		E6E2FE8D1B66F61300880F3C /* Messaging.h in Headers */ = {isa = PBXBuildFile; fileRef = E6E2FE8C1B66F61300880F3C /* Messaging.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -685,6 +686,7 @@
 		E6B3C32B1B621E6400EA613A /* SessionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionController.swift; sourceTree = "<group>"; };
 		E6B3C32D1B62581200EA613A /* CleanroomASL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CleanroomASL.framework; path = Carthage/Build/iOS/CleanroomASL.framework; sourceTree = "<group>"; };
 		E6B3C32E1B62581200EA613A /* CleanroomLogger.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CleanroomLogger.framework; path = Carthage/Build/iOS/CleanroomLogger.framework; sourceTree = "<group>"; };
+		E6D4D5B11B6F81A7003134CB /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		E6D7C2911B5D546C004F3AA9 /* NibView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NibView.swift; sourceTree = "<group>"; };
 		E6D7C2951B5D5B3B004F3AA9 /* PositionIn.SearchBar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.SearchBar.xib; sourceTree = "<group>"; };
 		E6D7C2961B5D5B3B004F3AA9 /* SearchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
@@ -877,6 +879,7 @@
 				E62B17001B5CE39400D446BC /* Browse */,
 				E6A869DC1B6000C800797D16 /* BrowseList */,
 				E6A869DF1B6000C800797D16 /* BrowseMap */,
+				E6D4D5B01B6F8186003134CB /* Search */,
 				E69420F71B66354E00F34F06 /* ProductDetails */,
 				E689F0751B6B90CA00597587 /* ProductInventory */,
 				E689F07E1B6B99FA00597587 /* SellerProfile */,
@@ -1924,6 +1927,14 @@
 			path = Network;
 			sourceTree = "<group>";
 		};
+		E6D4D5B01B6F8186003134CB /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				E6D4D5B11B6F81A7003134CB /* SearchViewController.swift */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
 		E6E2FE891B66F61300880F3C /* Messaging */ = {
 			isa = PBXGroup;
 			children = (
@@ -2356,6 +2367,7 @@
 				E65E87301B611FE700AE444D /* CollectionResponse.swift in Sources */,
 				E65E87321B614A9900AE444D /* Location.swift in Sources */,
 				E62B17061B5CE3EB00D446BC /* BrowseViewController.swift in Sources */,
+				E6D4D5B21B6F81A7003134CB /* SearchViewController.swift in Sources */,
 				E6A869EE1B60D42C00797D16 /* APIService.swift in Sources */,
 				E6B3C32C1B621E6400EA613A /* SessionController.swift in Sources */,
 				E6A869E21B6000C800797D16 /* BrowseListViewController.swift in Sources */,
