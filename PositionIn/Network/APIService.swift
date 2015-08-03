@@ -65,7 +65,7 @@ struct APIService {
     }
     
     private func crudRequest(token: String, endpoint: String, method: Alamofire.Method, params: [String : AnyObject]?) -> NSURLRequest {
-        let url = self.http(endpoint)
+        let url = self.https(endpoint)
         let headers: [String : AnyObject] = [
             "Authorization": "Bearer \(token)",
             "Accept" : "application/json",

@@ -53,7 +53,7 @@ extension APIService {
             switch self {
             case .Auth(let api, let username, let password):
                 encoding = .URL
-                url = api.http("/oauth/token")
+                url = api.https("/v1.0/oauth/token")
                 params = [
                     "scope" : "read write",
                     "grant_type" : "password",
@@ -70,7 +70,7 @@ extension APIService {
                 ]
             case .Register(let api, let username, let password):
                 encoding = .JSON
-                url = api.http("/v1.0/user")
+                url = api.https("/v1.0/user")
                 headers = [:]
                 params = [
                     "email" : username,

@@ -34,7 +34,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         InterceptingProtocol.registerErrorInterceptor(HeadersInterceptor(outputStream: CleanroomOutputStream(logChannel: Log.error)))
         urlSessionConfig.protocolClasses = [InterceptingProtocol.self]
         #endif
-        let baseURL = NSURL(string: "http://45.63.7.39:8080")!
+        let baseURL = NSURL(string: "https://app-dev.positionin.com/api/")!
         
         let dataProvider = PosInCore.NetworkDataProvider(configuration: urlSessionConfig)
         api = APIService(url: baseURL, dataProvider: dataProvider)
@@ -78,6 +78,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
 
+//        let username = "ios-777@bekitzur.com"
+//        let password = "pwd"
+//        api.createProfile(username: username, password: password);
+//        return true
+        
         api.sessionController.session().recoverWith { [unowned self]
             (error: NSError) -> Future<APIService.AuthResponse.Token ,NSError>  in
             Log.error?.value(error)
@@ -91,22 +96,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }.onFailure { error in
             Log.error?.value(error)
         }
-                
-
-
-        self.chatClient.auth("ixmpp@beewellapp.com", password: "1HateD0m2").future().onSuccess { [unowned self] in
-                Log.info?.message("XMPP authorized")
-                self.chatClient.sendTestMessage()
-            }.onFailure { error in
-                Log.error?.value(error)
-        }
-        
-
         
         
         if let sidebarViewController = window?.rootViewController as? SidebarViewController {
             let defaultAction: SidebarViewController.Action = .ForYou
             sidebarViewController.executeAction(defaultAction)
+        }
+        
+        return true
+        
+        self.chatClient.auth("ixmpp@beewellapp.com", password: "1HateD0m2").future().onSuccess { [unowned self] in
+            Log.info?.message("XMPP authorized")
+            self.chatClient.sendTestMessage()
+            }.onFailure { error in
+                Log.error?.value(error)
         }
         
         return true
