@@ -39,7 +39,7 @@ public class NetworkDataProvider: NSObject {
     */
     public func arrayRequest<T: Mappable>(
         URLRequest: Alamofire.URLRequestConvertible
-        ) -> (Alamofire.Request, Future<T, NSError>) {
+        ) -> (Alamofire.Request, Future<[T], NSError>) {
             let mapping: AnyObject? -> [T]? = { json in
                 return Mapper<T>().mapArray((json))
             }
@@ -54,9 +54,9 @@ public class NetworkDataProvider: NSObject {
     
     :returns: Tuple with request and future
     */
-    public  func jsonRequest<U,V>(
+    public  func jsonRequest<V>(
         URLRequest: Alamofire.URLRequestConvertible,
-        map: AnyObject?->U?
+        map: AnyObject?->V?
         ) -> (Alamofire.Request, Future<V, NSError>) {
             let serializer = Alamofire.Request.CustomResponseSerializer(map)
             return request(URLRequest, serializer: serializer)
@@ -71,9 +71,11 @@ public class NetworkDataProvider: NSObject {
     :returns: new instance
     */
     public init(
-        configuration: NSURLSessionConfiguration = NSURLSessionConfiguration.defaultSessionConfiguration()
+        configuration: NSURLSessionConfiguration = NSURLSessionConfiguration.defaultSessionConfiguration(),
+        trustPolicies: [String: ServerTrustPolicy]? = nil
         ) {
-            manager = Alamofire.Manager(configuration: configuration)
+            let serverTrustPolicyManager = trustPolicies.map { ServerTrustPolicyManager(policies: $0) }
+            manager = Alamofire.Manager(configuration: configuration, serverTrustPolicyManager: serverTrustPolicyManager)
     }
     
     /// Singleton instance
@@ -99,17 +101,17 @@ public class NetworkDataProvider: NSObject {
     
     :returns: Tuple with request and future
     */
-    private func request<V>(
+    private func request<V,Serializer: Alamofire.ResponseSerializer where Serializer.SerializedObject == Box<V>>(
         URLRequest: Alamofire.URLRequestConvertible,
-        serializer: Alamofire.Request.Serializer
+        serializer: Serializer
         ) -> (Alamofire.Request, Future<V, NSError>) {
             let p = Promise<V, NSError>()
         
             activityIndicator.increment()
-            let request = self.request(URLRequest).response(queue: Queue.global.underlyingQueue, serializer: serializer) {
+            let request = self.request(URLRequest).response(queue: Queue.global.underlyingQueue, responseSerializer: serializer) {
                 [unowned self] (request, response, object, error) in
                 self.activityIndicator.decrement()
-                if let object = object as? Box<V> {
+                if let object = object  {
                     p.success(object.value)
                 } else {
                     p.failure(error ?? ErrorCodes.InvalidResponseError.error())
@@ -120,9 +122,9 @@ public class NetworkDataProvider: NSObject {
     
     private func request(URLRequest: Alamofire.URLRequestConvertible) -> Alamofire.Request {
         let request = manager.request(URLRequest).validate()
-        #if DEBUG
+//        #if DEBUG
         println("Request:\n\(request.debugDescription)")
-        #endif
+//        #endif
         return request
     }
 }
@@ -131,11 +133,10 @@ public class NetworkDataProvider: NSObject {
 private extension Alamofire.Request {
     
     //MARK: - Custom serializer -
-    class func CustomResponseSerializer<T>(mapping:AnyObject? -> T?) -> Serializer {
-        
-        return { (request, response, data) in
+    class func CustomResponseSerializer<T>(mapping:AnyObject? -> T?) -> GenericResponseSerializer<Box<T>> {
+        return GenericResponseSerializer { request, response, data in
             let JSONSerializer = Request.JSONResponseSerializer(options: .AllowFragments)
-            let (json: AnyObject?, serializationError) = JSONSerializer(request, response, data)
+            let (json: AnyObject?, serializationError) = JSONSerializer.serializeResponse(request, response, data)
             switch (response, json, serializationError) {
             case (.None, _, _):
                 return (nil, NetworkDataProvider.ErrorCodes.TransferError.error())

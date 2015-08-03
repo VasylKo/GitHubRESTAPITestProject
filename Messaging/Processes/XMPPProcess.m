@@ -11,6 +11,8 @@
 
 static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
 
+static const int64_t XMPPProcessTimeout = 60;
+
 NSString *const kXMPPErrorDomain = @"com.bekitzur.xmpp.errorDomain";
 
 
@@ -52,7 +54,14 @@ NSString *const kXMPPErrorDomain = @"com.bekitzur.xmpp.errorDomain";
     dispatch_async([[self class] defaultProcessingQueue], ^{
         XMPPLogInfo(@"Starting process:  %@", [self description]);
         [self run];
-        dispatch_semaphore_wait(self.semaphore, DISPATCH_TIME_FOREVER);
+        dispatch_time_t timeout = dispatch_time(
+                      DISPATCH_TIME_NOW,
+                      (int64_t)(XMPPProcessTimeout * NSEC_PER_SEC)
+                                                );
+        if (0 != dispatch_semaphore_wait(self.semaphore, timeout) ) {
+            NSError *error = [self errorWithReason:NSLocalizedString(@"XMPP Process timeout", "XMPP Process timeout")];
+            [self complete:nil error:error];
+        }
     });
     
 }
@@ -98,8 +107,11 @@ static dispatch_queue_t __ooXMPPDefaultProcessingQueue =  NULL;
 - (NSError * __nonnull )errorFromElement:(nonnull NSXMLElement *)element {
     NSString *errorReason = [element XMLString];
     XMPPLogError(@"Error: %@", errorReason);
-    return [NSError errorWithDomain:kXMPPErrorDomain code:-1 userInfo:@{NSLocalizedFailureReasonErrorKey: errorReason}];
+    return [NSError errorWithDomain:kXMPPErrorDomain code:2 userInfo:@{NSLocalizedFailureReasonErrorKey: errorReason}];
 }
 
-
+- (NSError * __nonnull )errorWithReason:(nonnull NSString *)message {
+    XMPPLogError(@"Error: %@", message);
+    return [NSError errorWithDomain:kXMPPErrorDomain code:1 userInfo:@{NSLocalizedFailureReasonErrorKey: message}];
+}
 @end

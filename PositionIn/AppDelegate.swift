@@ -32,11 +32,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         InterceptingProtocol.registerRequestInterceptor(HeadersInterceptor(outputStream: CleanroomOutputStream(logChannel: Log.debug)))
         InterceptingProtocol.registerRequestInterceptor(JSONInterceptor(outputStream: CleanroomOutputStream(logChannel: Log.debug)))
         InterceptingProtocol.registerErrorInterceptor(HeadersInterceptor(outputStream: CleanroomOutputStream(logChannel: Log.error)))
-        urlSessionConfig.protocolClasses = [InterceptingProtocol.self]
+//        urlSessionConfig.protocolClasses = [InterceptingProtocol.self]
         #endif
-        let baseURL = NSURL(string: "http://45.63.7.39:8080")!
-        
-        let dataProvider = PosInCore.NetworkDataProvider(configuration: urlSessionConfig)
+        let baseURL = NSURL(string: "https://app-dev.positionin.com/api/")!
+        #if DEBUG
+        let trustPolicies: [String: ServerTrustPolicy] = [
+            baseURL.host! : .DisableEvaluation
+            ]
+        #else
+        let trustPolicies: [String: ServerTrustPolicy] = nil
+        #endif
+        let dataProvider = PosInCore.NetworkDataProvider(configuration: urlSessionConfig, trustPolicies: trustPolicies)
         api = APIService(url: baseURL, dataProvider: dataProvider)
         let chatConfig = XMPPClientConfiguration.defaultConfiguration()
         chatClient = XMPPClient(configuration: chatConfig)
@@ -45,7 +51,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     
     func runProfileAPI() {
-        
         api.get(nil).flatMap { (profile: UserProfile) -> Future<Void,NSError> in
             var newProfile = profile
             newProfile.firstName = "Alex"
@@ -67,7 +72,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         post.name = "Cool post"
         post.text = "Big Post text"
         
-        api.post(post).flatMap { ( _: Void ) -> Future<CollectionResponse<Post>, NSError> in
+        api.post(post).flatMap { (post: Post) -> Future<Void, NSError> in
+            var updatedPost = post
+            updatedPost.name = "Updated post"
+            return self.api.update(post)
+        }.flatMap { ( _: Void ) -> Future<CollectionResponse<Post>, NSError> in
             return self.api.getAll(Post.allEndpoint(user.objectId))
         }.onSuccess { response in
             Log.info?.value(response.items)
@@ -78,6 +87,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
 
+//        let username = "ios-777@bekitzur.com"
+//        let password = "pwd"
+//        api.createProfile(username: username, password: password);
+//        return true
+        
         api.sessionController.session().recoverWith { [unowned self]
             (error: NSError) -> Future<APIService.AuthResponse.Token ,NSError>  in
             Log.error?.value(error)
@@ -87,25 +101,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 return response.accessToken
             }
         }.onSuccess { _ in
-//            self.runProfileAPI()
+            self.runProfileAPI()
         }.onFailure { error in
             Log.error?.value(error)
         }
-                
-
-
-//        self.chatClient.auth("ixmpp@beewellapp.com", password: "1HateD0m2").future().onSuccess {
-//            Log.info?.message("XMPP authorized")
-//            }.onFailure { error in
-//                Log.error?.value(error)
-//        }
-        
-
         
         
         if let sidebarViewController = window?.rootViewController as? SidebarViewController {
             let defaultAction: SidebarViewController.Action = .ForYou
             sidebarViewController.executeAction(defaultAction)
+        }
+        
+        return true
+        
+        self.chatClient.auth("ixmpp@beewellapp.com", password: "1HateD0m2").future().onSuccess { [unowned self] in
+            Log.info?.message("XMPP authorized")
+            self.chatClient.sendTestMessage()
+            }.onFailure { error in
+                Log.error?.value(error)
         }
         
         return true
