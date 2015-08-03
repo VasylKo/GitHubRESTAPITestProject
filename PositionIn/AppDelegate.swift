@@ -32,11 +32,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         InterceptingProtocol.registerRequestInterceptor(HeadersInterceptor(outputStream: CleanroomOutputStream(logChannel: Log.debug)))
         InterceptingProtocol.registerRequestInterceptor(JSONInterceptor(outputStream: CleanroomOutputStream(logChannel: Log.debug)))
         InterceptingProtocol.registerErrorInterceptor(HeadersInterceptor(outputStream: CleanroomOutputStream(logChannel: Log.error)))
-        urlSessionConfig.protocolClasses = [InterceptingProtocol.self]
+//        urlSessionConfig.protocolClasses = [InterceptingProtocol.self]
         #endif
         let baseURL = NSURL(string: "https://app-dev.positionin.com/api/")!
-        
-        let dataProvider = PosInCore.NetworkDataProvider(configuration: urlSessionConfig)
+        #if DEBUG
+        let trustPolicies: [String: ServerTrustPolicy] = [
+            baseURL.host! : .DisableEvaluation
+            ]
+        #else
+        let trustPolicies: [String: ServerTrustPolicy] = nil
+        #endif
+        let dataProvider = PosInCore.NetworkDataProvider(configuration: urlSessionConfig, trustPolicies: trustPolicies)
         api = APIService(url: baseURL, dataProvider: dataProvider)
         let chatConfig = XMPPClientConfiguration.defaultConfiguration()
         chatClient = XMPPClient(configuration: chatConfig)

@@ -95,6 +95,7 @@ struct APIService {
         sessionController = SessionController()
     }
     
+//    @availability(*, unavailable)
     func emptyResponseMapping() -> (AnyObject? -> Void?) {
         return  { response in
             if let json = response as? NSDictionary {

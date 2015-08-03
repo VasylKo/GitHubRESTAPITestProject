@@ -71,9 +71,11 @@ public class NetworkDataProvider: NSObject {
     :returns: new instance
     */
     public init(
-        configuration: NSURLSessionConfiguration = NSURLSessionConfiguration.defaultSessionConfiguration()
+        configuration: NSURLSessionConfiguration = NSURLSessionConfiguration.defaultSessionConfiguration(),
+        trustPolicies: [String: ServerTrustPolicy]? = nil
         ) {
-            manager = Alamofire.Manager(configuration: configuration)
+            let serverTrustPolicyManager = trustPolicies.map { ServerTrustPolicyManager(policies: $0) }
+            manager = Alamofire.Manager(configuration: configuration, serverTrustPolicyManager: serverTrustPolicyManager)
     }
     
     /// Singleton instance
