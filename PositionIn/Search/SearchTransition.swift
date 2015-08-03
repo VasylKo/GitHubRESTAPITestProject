@@ -70,10 +70,10 @@ class SearchAppearanceAnimationController: NSObject,UIViewControllerAnimatedTran
         }
     }
     
-    //    // This is a convenience and if implemented will be invoked by the system when the transition context's completeTransition: method is invoked.
-    //    func animationEnded(transitionCompleted: Bool) {
-    //
-    //    }
+//    // This is a convenience and if implemented will be invoked by the system when the transition context's completeTransition: method is invoked.
+//    func animationEnded(transitionCompleted: Bool) {
+//
+//    }
     
     private func snapshotView(view: UIView) -> UIImage {
         UIGraphicsBeginImageContext(view.bounds.size)
