@@ -34,7 +34,7 @@ class MainMenuViewController: UIViewController {
             MainMenuItem(title: NSLocalizedString("For You", comment: "Main Menu: For You"), imageName: "MainMenuForYou", action: .ForYou),
             MainMenuItem(title: NSLocalizedString("New", comment: "Main Menu: new"), imageName: "MainMenuNew", action: .New),
             MainMenuItem(title: NSLocalizedString("Messages", comment: "Main Menu: Messages"), imageName: "MainMenuMessages", action: .Messages),
-            MainMenuItem(title: NSLocalizedString("Filters", comment: "Main Menu: Filters"), imageName: "MainMenuFilters"),
+            MainMenuItem(title: NSLocalizedString("Filters", comment: "Main Menu: Filters"), imageName: "MainMenuFilters", action: .New),
             MainMenuItem(title: NSLocalizedString("Categories", comment: "Main Menu: Categories"), imageName: "MainMenuCategories"),
             MainMenuItem(title: NSLocalizedString("Community", comment: "Main Menu: Community"), imageName: "MainMenuCommunity"),
             MainMenuItem(title: NSLocalizedString("Wallet", comment: "Main Menu: Wallet"), imageName: "MainMenuWallet"),
