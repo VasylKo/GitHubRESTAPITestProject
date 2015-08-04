@@ -36,11 +36,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         #endif
         let baseURL = NSURL(string: "https://app-dev.positionin.com/api/")!
         #if DEBUG
-        let trustPolicies: [String: ServerTrustPolicy] = [
+        let trustPolicies: [String: ServerTrustPolicy]? = [
             baseURL.host! : .DisableEvaluation
             ]
         #else
-        let trustPolicies: [String: ServerTrustPolicy] = nil
+        let trustPolicies: [String: ServerTrustPolicy]? = nil
         #endif
         let dataProvider = PosInCore.NetworkDataProvider(configuration: urlSessionConfig, trustPolicies: trustPolicies)
         api = APIService(url: baseURL, dataProvider: dataProvider)
