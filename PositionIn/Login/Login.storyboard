@@ -103,6 +103,11 @@
                                             <constraint firstItem="AiG-t9-3Te" firstAttribute="trailing" secondItem="VmY-gq-ys2" secondAttribute="trailing" id="qkg-qk-YVh"/>
                                             <constraint firstItem="VmY-gq-ys2" firstAttribute="top" secondItem="SRk-Dj-WEV" secondAttribute="bottom" constant="17" id="uXT-Ou-0oS"/>
                                         </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="backgroundColor">
+                                                <color key="value" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                     </view>
                                 </subviews>
                                 <constraints>
@@ -122,7 +127,7 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.84705882349999995" green="0.86666666670000003" blue="0.87058823529999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="BT1-Fz-1Vn" firstAttribute="width" secondItem="6Jk-vT-iGf" secondAttribute="width" multiplier="0.9" id="3Cr-r2-2NV"/>
                             <constraint firstItem="QF7-vR-jeG" firstAttribute="width" secondItem="6Jk-vT-iGf" secondAttribute="width" multiplier="0.9" id="GsU-yR-olQ"/>
@@ -155,7 +160,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yvy-Oo-AWn">
-                                <rect key="frame" x="30" y="21" width="540" height="480"/>
+                                <rect key="frame" x="30" y="105" width="540" height="480"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4lp-Tq-1E7">
                                         <rect key="frame" x="0.0" y="0.0" width="540" height="292"/>
@@ -226,6 +231,11 @@
                                             <constraint firstItem="QzI-s4-fzm" firstAttribute="top" secondItem="nRy-1a-hX9" secondAttribute="bottom" constant="4" id="raY-83-EYi"/>
                                             <constraint firstItem="iIE-Fe-9Ta" firstAttribute="top" secondItem="IYm-6L-hgy" secondAttribute="bottom" constant="8" id="xwh-Pu-HHI"/>
                                         </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="backgroundColor">
+                                                <color key="value" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                     </view>
                                 </subviews>
                                 <constraints>
@@ -236,12 +246,12 @@
                                 </constraints>
                             </scrollView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.84705882349999995" green="0.86666666670000003" blue="0.87058823529999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="yvy-Oo-AWn" firstAttribute="height" secondItem="M4q-Qf-4E2" secondAttribute="height" multiplier="0.8" id="CZS-to-beU"/>
                             <constraint firstItem="4lp-Tq-1E7" firstAttribute="width" secondItem="M4q-Qf-4E2" secondAttribute="width" multiplier="0.9" id="O0n-NY-z8J"/>
                             <constraint firstItem="yvy-Oo-AWn" firstAttribute="width" secondItem="M4q-Qf-4E2" secondAttribute="width" multiplier="0.9" id="htD-qj-fw0"/>
-                            <constraint firstAttribute="centerY" secondItem="yvy-Oo-AWn" secondAttribute="centerY" multiplier="1.15" id="lg9-mB-cY9"/>
+                            <constraint firstItem="yvy-Oo-AWn" firstAttribute="centerY" secondItem="M4q-Qf-4E2" secondAttribute="centerY" multiplier="1.15" id="lg9-mB-cY9"/>
                             <constraint firstAttribute="centerX" secondItem="yvy-Oo-AWn" secondAttribute="centerX" id="uQQ-Og-UGA"/>
                         </constraints>
                     </view>
@@ -269,7 +279,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0uZ-Oh-6sF">
-                                <rect key="frame" x="30" y="21" width="540" height="480"/>
+                                <rect key="frame" x="30" y="105" width="540" height="480"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hS7-ec-JKq">
                                         <rect key="frame" x="0.0" y="0.0" width="540" height="273"/>
@@ -342,6 +352,11 @@
                                             <constraint firstAttribute="trailing" secondItem="nPU-6W-rZn" secondAttribute="trailing" id="qxx-BW-PvL"/>
                                             <constraint firstItem="nPU-6W-rZn" firstAttribute="top" secondItem="OX4-wi-1Px" secondAttribute="bottom" constant="2" id="txV-eT-u7c"/>
                                         </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="backgroundColor">
+                                                <color key="value" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                     </view>
                                 </subviews>
                                 <constraints>
@@ -352,13 +367,13 @@
                                 </constraints>
                             </scrollView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.84705882349999995" green="0.86666666670000003" blue="0.87058823529999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="0uZ-Oh-6sF" firstAttribute="width" secondItem="BoA-mq-WbT" secondAttribute="width" multiplier="0.9" id="3MC-LS-haG"/>
                             <constraint firstItem="0uZ-Oh-6sF" firstAttribute="height" secondItem="BoA-mq-WbT" secondAttribute="height" multiplier="0.8" id="GS4-iZ-nzU"/>
                             <constraint firstItem="hS7-ec-JKq" firstAttribute="width" secondItem="BoA-mq-WbT" secondAttribute="width" multiplier="0.9" id="OkY-un-ULt"/>
                             <constraint firstAttribute="centerX" secondItem="0uZ-Oh-6sF" secondAttribute="centerX" id="Qe0-r6-gAT"/>
-                            <constraint firstAttribute="centerY" secondItem="0uZ-Oh-6sF" secondAttribute="centerY" multiplier="1.15" id="w7u-Zx-5EF"/>
+                            <constraint firstItem="0uZ-Oh-6sF" firstAttribute="centerY" secondItem="BoA-mq-WbT" secondAttribute="centerY" multiplier="1.15" id="w7u-Zx-5EF"/>
                         </constraints>
                     </view>
                     <connections>
