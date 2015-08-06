@@ -7,10 +7,10 @@
 //
 
 import UIKit
-import PosInCore
+import XLForm
 import CleanroomLogger
 
-class AddPromotionViewController: UIViewController {
+class AddPromotionViewController: XLFormViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,12 +20,6 @@ class AddPromotionViewController: UIViewController {
     @IBAction func didTapPost(sender: AnyObject) {
         Log.debug?.message("Should post")
     }
-    
-    @IBAction func didTapCancel(sender: AnyObject) {
-    }
-    
-
-    @IBOutlet private weak var tableView: TableView!
-
+        
 
 }

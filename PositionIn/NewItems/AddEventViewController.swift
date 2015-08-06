@@ -7,10 +7,10 @@
 //
 
 import UIKit
-import PosInCore
+import XLForm
 import CleanroomLogger
 
-class AddEventViewController: UIViewController {
+class AddEventViewController: XLFormViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,11 +21,5 @@ class AddEventViewController: UIViewController {
         Log.debug?.message("Should post")
     }
     
-    @IBAction func didTapCancel(sender: AnyObject) {
-    }
-    
-
-    @IBOutlet private weak var tableView: TableView!
-
 
 }

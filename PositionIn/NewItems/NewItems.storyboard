@@ -16,9 +16,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="ZCh-p4-VNf" customClass="TableView" customModule="PosInCore">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="ZCh-p4-VNf">
                                 <rect key="frame" x="0.0" y="64" width="600" height="536"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -32,7 +32,6 @@
                     <navigationItem key="navigationItem" title="New Product" id="sFY-2B-Y6p">
                         <barButtonItem key="leftBarButtonItem" title="Cancel" id="j7T-4t-dw1">
                             <connections>
-                                <action selector="didTapCancel:" destination="gZh-E3-Gdl" id="Psa-XE-7NC"/>
                                 <segue destination="6lO-fr-kHe" kind="unwind" unwindAction="prepareForUnwind:" id="Cam-WD-IHs"/>
                             </connections>
                         </barButtonItem>
@@ -44,7 +43,7 @@
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
-                        <outlet property="tableView" destination="ZCh-p4-VNf" id="THr-rQ-FH3"/>
+                        <outlet property="tableView" destination="ZCh-p4-VNf" id="L9Y-Yc-Sd7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FVL-24-8yV" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -64,9 +63,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="qDe-Oj-0BN" customClass="TableView" customModule="PosInCore">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="qDe-Oj-0BN">
                                 <rect key="frame" x="0.0" y="64" width="600" height="536"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -80,7 +79,6 @@
                     <navigationItem key="navigationItem" title="New Promotion" id="vgd-Be-vbf">
                         <barButtonItem key="leftBarButtonItem" title="Cancel" id="H9W-Kr-8Eb">
                             <connections>
-                                <action selector="didTapCancel:" destination="cwi-76-myR" id="uXd-0l-7gF"/>
                                 <segue destination="ZbV-uT-dT6" kind="unwind" unwindAction="prepareForUnwind:" id="uFR-G3-s5a"/>
                             </connections>
                         </barButtonItem>
@@ -112,9 +110,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="wMh-t8-86e" customClass="TableView" customModule="PosInCore">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="wMh-t8-86e">
                                 <rect key="frame" x="0.0" y="64" width="600" height="536"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -128,7 +126,6 @@
                     <navigationItem key="navigationItem" title="New Event" id="tPF-w0-6Vv">
                         <barButtonItem key="leftBarButtonItem" title="Cancel" id="0CB-cJ-dru">
                             <connections>
-                                <action selector="didTapCancel:" destination="lU0-ED-9bg" id="7fw-xK-eL4"/>
                                 <segue destination="ltf-3h-gpn" kind="unwind" unwindAction="prepareForUnwind:" id="TjO-Vt-RhX"/>
                             </connections>
                         </barButtonItem>

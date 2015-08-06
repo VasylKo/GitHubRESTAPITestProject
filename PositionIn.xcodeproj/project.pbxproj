@@ -78,7 +78,6 @@
 		E661159C1B73A0CB003DB5B3 /* PositionIn.ListProductCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E66115951B73A0CB003DB5B3 /* PositionIn.ListProductCell.xib */; };
 		E661159D1B73A0CB003DB5B3 /* BrowseMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66115971B73A0CB003DB5B3 /* BrowseMapViewController.swift */; };
 		E661159E1B73A0CB003DB5B3 /* PositionIn.BrowseMapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E66115981B73A0CB003DB5B3 /* PositionIn.BrowseMapViewController.xib */; };
-		E66115A01B73A0EE003DB5B3 /* DatePickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E661159F1B73A0EE003DB5B3 /* DatePickerCell.swift */; };
 		E66115A31B73A18C003DB5B3 /* NewItems.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E66115A21B73A18C003DB5B3 /* NewItems.storyboard */; };
 		E66115A51B73A920003DB5B3 /* AddProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66115A41B73A920003DB5B3 /* AddProductViewController.swift */; };
 		E66115A81B73AE0F003DB5B3 /* AddPromotionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66115A61B73AE0F003DB5B3 /* AddPromotionViewController.swift */; };
@@ -367,7 +366,6 @@
 		E66115951B73A0CB003DB5B3 /* PositionIn.ListProductCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.ListProductCell.xib; sourceTree = "<group>"; };
 		E66115971B73A0CB003DB5B3 /* BrowseMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowseMapViewController.swift; sourceTree = "<group>"; };
 		E66115981B73A0CB003DB5B3 /* PositionIn.BrowseMapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.BrowseMapViewController.xib; sourceTree = "<group>"; };
-		E661159F1B73A0EE003DB5B3 /* DatePickerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerCell.swift; sourceTree = "<group>"; };
 		E66115A21B73A18C003DB5B3 /* NewItems.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = NewItems.storyboard; sourceTree = "<group>"; };
 		E66115A41B73A920003DB5B3 /* AddProductViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddProductViewController.swift; sourceTree = "<group>"; };
 		E66115A61B73AE0F003DB5B3 /* AddPromotionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddPromotionViewController.swift; sourceTree = "<group>"; };
@@ -829,7 +827,6 @@
 		E6325F581B57D46C00996480 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				E661159F1B73A0EE003DB5B3 /* DatePickerCell.swift */,
 				E69421001B666A1600F34F06 /* PositionIn.ActionCell.xib */,
 				E69421011B666A1600F34F06 /* ActionCell.swift */,
 				E6829B031B5E6CF800FB1E1D /* RoundButton.swift */,
@@ -2465,7 +2462,6 @@
 				E66115AF1B73B40C003DB5B3 /* CategoriesViewController.swift in Sources */,
 				E661158B1B73774B003DB5B3 /* RegisterViewController.swift in Sources */,
 				E6325F651B57D89A00996480 /* SidebarViewController.swift in Sources */,
-				E66115A01B73A0EE003DB5B3 /* DatePickerCell.swift in Sources */,
 				E66115891B73771E003DB5B3 /* LoginViewController.swift in Sources */,
 				E6681A321B67C6F0003096D6 /* XMPPProcess+Future.swift in Sources */,
 				E6A869F21B60FF0500797D16 /* CRUDObject.swift in Sources */,

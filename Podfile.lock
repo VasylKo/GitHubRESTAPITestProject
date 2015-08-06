@@ -4,6 +4,7 @@ PODS:
   - BrightFutures (2.0.1):
     - Result (~> 0.4.3)
   - HanekeSwift (0.9.1)
+  - ImagePickerSheetController (0.1.7)
   - KeychainAccess (1.2.1)
   - KYDrawerController (1.0.3)
   - ObjectMapper (0.12)
@@ -15,14 +16,17 @@ PODS:
   - Result (0.4.4):
     - Box (~> 1.2)
   - UIImageEffects (0.0.1)
+  - XLForm (3.0.1)
 
 DEPENDENCIES:
   - HanekeSwift
+  - ImagePickerSheetController (~> 0.1.7)
   - KeychainAccess
   - KYDrawerController
   - PosInCore (from `PosInCore`)
   - ResponseDetective
   - UIImageEffects
+  - XLForm (~> 3.0.1)
 
 EXTERNAL SOURCES:
   PosInCore:
@@ -33,6 +37,7 @@ SPEC CHECKSUMS:
   Box: a92e8aa4c099e6bc0733829665caf9e668ef53b8
   BrightFutures: 27704272a695324b42538a2d85b20ac3f24228bd
   HanekeSwift: 50d37bfbc4432edc649167e538c259feccb4a2bb
+  ImagePickerSheetController: 127cc7a5e8da7fa17d42aa4ba7509f72af9cd71f
   KeychainAccess: 3d7922baf90762a976adb7f6030d74c1a4110a1d
   KYDrawerController: 114902057e9b9a2a0aa951e976151b285afa9c3e
   ObjectMapper: ef4a369cbab75546029ceb7e8155772b5f8e8841
@@ -40,5 +45,6 @@ SPEC CHECKSUMS:
   ResponseDetective: 70fb3337c5411efc5f0eec63e0d13218cbfdcd2b
   Result: b44f6bc8762bbffaf2c5df58f2c7d12c3496ced8
   UIImageEffects: 37b99fa461e4965f332ca82e92f2c22a1075ee84
+  XLForm: 1a20da41c009e4f99e802e886a8eef5f2b086644
 
 COCOAPODS: 0.38.2
