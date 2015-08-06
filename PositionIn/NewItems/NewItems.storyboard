@@ -32,7 +32,6 @@
                     <navigationItem key="navigationItem" title="New Product" id="sFY-2B-Y6p">
                         <barButtonItem key="leftBarButtonItem" title="Cancel" id="j7T-4t-dw1">
                             <connections>
-                                <action selector="didTapCancel:" destination="gZh-E3-Gdl" id="Psa-XE-7NC"/>
                                 <segue destination="6lO-fr-kHe" kind="unwind" unwindAction="prepareForUnwind:" id="Cam-WD-IHs"/>
                             </connections>
                         </barButtonItem>
@@ -80,7 +79,6 @@
                     <navigationItem key="navigationItem" title="New Promotion" id="vgd-Be-vbf">
                         <barButtonItem key="leftBarButtonItem" title="Cancel" id="H9W-Kr-8Eb">
                             <connections>
-                                <action selector="didTapCancel:" destination="cwi-76-myR" id="uXd-0l-7gF"/>
                                 <segue destination="ZbV-uT-dT6" kind="unwind" unwindAction="prepareForUnwind:" id="uFR-G3-s5a"/>
                             </connections>
                         </barButtonItem>
@@ -128,7 +126,6 @@
                     <navigationItem key="navigationItem" title="New Event" id="tPF-w0-6Vv">
                         <barButtonItem key="leftBarButtonItem" title="Cancel" id="0CB-cJ-dru">
                             <connections>
-                                <action selector="didTapCancel:" destination="lU0-ED-9bg" id="7fw-xK-eL4"/>
                                 <segue destination="ltf-3h-gpn" kind="unwind" unwindAction="prepareForUnwind:" id="TjO-Vt-RhX"/>
                             </connections>
                         </barButtonItem>

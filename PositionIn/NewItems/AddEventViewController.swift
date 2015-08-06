@@ -21,8 +21,5 @@ class AddEventViewController: XLFormViewController {
         Log.debug?.message("Should post")
     }
     
-    @IBAction func didTapCancel(sender: AnyObject) {
-    }    
-
 
 }

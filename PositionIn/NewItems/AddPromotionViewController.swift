@@ -20,9 +20,6 @@ class AddPromotionViewController: XLFormViewController {
     @IBAction func didTapPost(sender: AnyObject) {
         Log.debug?.message("Should post")
     }
-    
-    @IBAction func didTapCancel(sender: AnyObject) {
-    }
-    
+        
 
 }

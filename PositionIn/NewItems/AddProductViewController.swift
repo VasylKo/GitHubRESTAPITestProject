@@ -18,6 +18,7 @@ class AddProductViewController: XLFormViewController {
         case StartDate = "startDate"
         case EndDate = "endDate"
         case Community = "community"
+        case Photo = "photo"
     }
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
@@ -79,7 +80,10 @@ class AddProductViewController: XLFormViewController {
         let photoSection = XLFormSectionDescriptor.formSection()
         form.addFormSection(photoSection)
         //Photo row
-        
+        let photoRow = XLFormRowDescriptor(tag: Tags.Photo.rawValue, rowType: XLFormRowDescriptorTypeButton, title: NSLocalizedString("Insert photo", comment: "New product: insert photo"))
+        photoRow.cellConfig["textLabel.textColor"] = UIColor(red: 0.0, green: 122.0/255.0, blue: 1.0, alpha: 1.0)
+        photoRow.action.formSelector = "didTouchPhoto:"
+        photoSection.addFormRow(photoRow)
 
         //Dates section
         let datesSection = XLFormSectionDescriptor.formSectionWithTitle(NSLocalizedString("Pick-up Availability (Optional)", comment: "New product: dates section header"))
@@ -100,6 +104,11 @@ class AddProductViewController: XLFormViewController {
     
 
     //MARK: - Actions -
+    
+    func didTouchPhoto(sender: XLFormRowDescriptor) {
+        self.deselectFormRow(sender)
+    }
+    
     @IBAction func didTapPost(sender: AnyObject) {
         let validationErrors : Array<NSError> = self.formValidationErrors() as! Array<NSError>
         if (validationErrors.count > 0){
@@ -111,8 +120,6 @@ class AddProductViewController: XLFormViewController {
         Log.debug?.message("Should post")
     }
     
-    @IBAction func didTapCancel(sender: AnyObject) {
-    }
 
 
 }
