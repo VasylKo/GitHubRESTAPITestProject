@@ -8,6 +8,7 @@ target 'PositionIn' do
     pod 'HanekeSwift'
     pod 'KYDrawerController'
     pod 'UIImageEffects', :inhibit_warnings => true
+    pod 'XLForm', '~> 3.0.1'
     
     pod 'ResponseDetective'
     pod 'PosInCore', :path => 'PosInCore'

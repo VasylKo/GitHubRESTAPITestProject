@@ -15,6 +15,7 @@ PODS:
   - Result (0.4.4):
     - Box (~> 1.2)
   - UIImageEffects (0.0.1)
+  - XLForm (3.0.1)
 
 DEPENDENCIES:
   - HanekeSwift
@@ -23,6 +24,7 @@ DEPENDENCIES:
   - PosInCore (from `PosInCore`)
   - ResponseDetective
   - UIImageEffects
+  - XLForm (~> 3.0.1)
 
 EXTERNAL SOURCES:
   PosInCore:
@@ -40,5 +42,6 @@ SPEC CHECKSUMS:
   ResponseDetective: 70fb3337c5411efc5f0eec63e0d13218cbfdcd2b
   Result: b44f6bc8762bbffaf2c5df58f2c7d12c3496ced8
   UIImageEffects: 37b99fa461e4965f332ca82e92f2c22a1075ee84
+  XLForm: 1a20da41c009e4f99e802e886a8eef5f2b086644
 
 COCOAPODS: 0.38.2
