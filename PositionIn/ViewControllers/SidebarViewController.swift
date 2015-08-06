@@ -24,11 +24,17 @@ class SidebarViewController: KYDrawerController {
         case Wallet
         case UserProfile
         case Settings
+        case Login
     }
 
     func executeAction(action: Action) {
         if !isViewLoaded() {
             dispatch_delay(0){ self.executeAction(action) }
+            return
+        }
+        if action == .Login {
+            setDrawerState(.Closed, animated: true)
+            presentViewController(Storyboards.Login.instantiateInitialViewController(), animated: true, completion: nil)            
             return
         }
         let (segue: SidebarViewController.Segue?, sender: AnyObject?) = {

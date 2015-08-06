@@ -67,6 +67,10 @@
 		E660E52E1B5AC23B00F52050 /* PositionIn.MainMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E660E52C1B5AC23B00F52050 /* PositionIn.MainMenuViewController.xib */; };
 		E660E5301B5AC28600F52050 /* MainMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E660E52F1B5AC28600F52050 /* MainMenuCell.swift */; };
 		E660E5321B5AC2A200F52050 /* PositionIn.MainMenuCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E660E5311B5AC2A200F52050 /* PositionIn.MainMenuCell.xib */; };
+		E66115871B7376F4003DB5B3 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E66115861B7376F4003DB5B3 /* Login.storyboard */; };
+		E66115891B73771E003DB5B3 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66115881B73771E003DB5B3 /* LoginViewController.swift */; };
+		E661158B1B73774B003DB5B3 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E661158A1B73774A003DB5B3 /* RegisterViewController.swift */; };
+		E661158D1B73778B003DB5B3 /* RecoverPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E661158C1B73778B003DB5B3 /* RecoverPasswordViewController.swift */; };
 		E6681A241B676345003096D6 /* XMPPLogFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = E6681A221B676345003096D6 /* XMPPLogFormatter.h */; };
 		E6681A251B676345003096D6 /* XMPPLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = E6681A231B676345003096D6 /* XMPPLogFormatter.m */; };
 		E6681A2A1B679C87003096D6 /* XMPPProcess.h in Headers */ = {isa = PBXBuildFile; fileRef = E6681A281B679C87003096D6 /* XMPPProcess.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -344,6 +348,10 @@
 		E660E53F1B5BCF1A00F52050 /* TableRefreshHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableRefreshHeaderView.swift; sourceTree = "<group>"; };
 		E660E5411B5BCF3800F52050 /* TableViewSectionHeaderFooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewSectionHeaderFooterView.swift; sourceTree = "<group>"; };
 		E660E5431B5BE43900F52050 /* TableViewSectionHeaderFooterLabelView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewSectionHeaderFooterLabelView.swift; sourceTree = "<group>"; };
+		E66115861B7376F4003DB5B3 /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
+		E66115881B73771E003DB5B3 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		E661158A1B73774A003DB5B3 /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		E661158C1B73778B003DB5B3 /* RecoverPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecoverPasswordViewController.swift; sourceTree = "<group>"; };
 		E6681A221B676345003096D6 /* XMPPLogFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPLogFormatter.h; sourceTree = "<group>"; };
 		E6681A231B676345003096D6 /* XMPPLogFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPLogFormatter.m; sourceTree = "<group>"; };
 		E6681A281B679C87003096D6 /* XMPPProcess.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPProcess.h; sourceTree = "<group>"; };
@@ -883,6 +891,7 @@
 				E69420F71B66354E00F34F06 /* ProductDetails */,
 				E689F0751B6B90CA00597587 /* ProductInventory */,
 				E689F07E1B6B99FA00597587 /* SellerProfile */,
+				E66115851B7376DE003DB5B3 /* Login */,
 				E62B16F91B5CDED600D446BC /* Messaging */,
 				E660E5251B5AB82000F52050 /* Models */,
 				E6325F5F1B57D89A00996480 /* ViewControllers */,
@@ -963,6 +972,17 @@
 				E660E5431B5BE43900F52050 /* TableViewSectionHeaderFooterLabelView.swift */,
 			);
 			path = TableView;
+			sourceTree = "<group>";
+		};
+		E66115851B7376DE003DB5B3 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				E66115861B7376F4003DB5B3 /* Login.storyboard */,
+				E66115881B73771E003DB5B3 /* LoginViewController.swift */,
+				E661158A1B73774A003DB5B3 /* RegisterViewController.swift */,
+				E661158C1B73778B003DB5B3 /* RecoverPasswordViewController.swift */,
+			);
+			path = Login;
 			sourceTree = "<group>";
 		};
 		E6681A271B679C72003096D6 /* Processes */ = {
@@ -2217,6 +2237,7 @@
 				E6A869E51B6000C800797D16 /* PositionIn.BrowseMapViewController.xib in Resources */,
 				E660E52E1B5AC23B00F52050 /* PositionIn.MainMenuViewController.xib in Resources */,
 				E62B16F51B5C1AA700D446BC /* PositionIn.MainMenuUserCell.xib in Resources */,
+				E66115871B7376F4003DB5B3 /* Login.storyboard in Resources */,
 				E689F07D1B6B976100597587 /* PositionIn.ProductInventoryCell.xib in Resources */,
 				E62B16FD1B5CDF2400D446BC /* PositionIn.MessagesListViewController.xib in Resources */,
 				E689F0801B6B9A1200597587 /* PositionIn.SellerProfileViewController.xib in Resources */,
@@ -2362,6 +2383,7 @@
 				E62B16FF1B5CE0F800D446BC /* BesideMenuViewController.swift in Sources */,
 				E660E52D1B5AC23B00F52050 /* MainMenuViewController.swift in Sources */,
 				E6AC64561B5EC5B1007D7952 /* AddMenuView.swift in Sources */,
+				E661158D1B73778B003DB5B3 /* RecoverPasswordViewController.swift in Sources */,
 				E6A869F41B60FF2100797D16 /* UserProfile.swift in Sources */,
 				E69420F91B66358000F34F06 /* ProductDetailsViewController.swift in Sources */,
 				E689F0771B6B90F400597587 /* ProductInventoryViewController.swift in Sources */,
@@ -2385,7 +2407,9 @@
 				E6A869DB1B5FD1E100797D16 /* BrowseTabbar.swift in Sources */,
 				E62B16F81B5C6BBF00D446BC /* AvatarView.swift in Sources */,
 				E689F0821B6B9A2200597587 /* SellerProfileViewController.swift in Sources */,
+				E661158B1B73774B003DB5B3 /* RegisterViewController.swift in Sources */,
 				E6325F651B57D89A00996480 /* SidebarViewController.swift in Sources */,
+				E66115891B73771E003DB5B3 /* LoginViewController.swift in Sources */,
 				E6681A321B67C6F0003096D6 /* XMPPProcess+Future.swift in Sources */,
 				E6A869F21B60FF0500797D16 /* CRUDObject.swift in Sources */,
 				E6A869EC1B60D3E300797D16 /* APIService+Auth.swift in Sources */,
