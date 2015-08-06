@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LoginViewController: UIViewController {
+class LoginViewController: BaseLoginViewController {
     @IBAction func prepareForUnwind(segue: UIStoryboardSegue) {
         
     }

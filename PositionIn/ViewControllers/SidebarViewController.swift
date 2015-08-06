@@ -65,7 +65,7 @@ class SidebarViewController: KYDrawerController {
         
         if let (segue, sender: AnyObject?) = action.nextSegue() {
             performSegue(segue, sender: sender)
-        }        
+        }
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
