@@ -94,6 +94,10 @@ struct Storyboards {
             return self.storyboard.instantiateViewControllerWithIdentifier("AddPromotionViewController") as! AddPromotionViewController
         }
 
+        static func instantiateLocationSelectorViewController() -> LocationSelectorViewController! {
+            return self.storyboard.instantiateViewControllerWithIdentifier("LocationSelectorViewController") as! LocationSelectorViewController
+        }
+
         static func instantiateAddEventViewController() -> AddEventViewController! {
             return self.storyboard.instantiateViewControllerWithIdentifier("AddEventViewController") as! AddEventViewController
         }
@@ -492,5 +496,7 @@ extension LoginViewController {
 //MARK: - AddProductViewController
 
 //MARK: - AddPromotionViewController
+
+//MARK: - LocationSelectorViewController
 
 //MARK: - AddEventViewController

@@ -21,11 +21,6 @@ class BrowseMapViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
-    @IBAction func showMenu(sender: AnyObject) {
-        let sidebar = sideBarController
-//        sidebar?.toggleSidebar(sender)
-    }
     
     /*
     // MARK: - Navigation

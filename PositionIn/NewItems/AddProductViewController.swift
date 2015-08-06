@@ -10,6 +10,8 @@ import UIKit
 import CleanroomLogger
 import XLForm
 
+import MapKit
+
 import ImagePickerSheetController
 import MobileCoreServices
 import Photos
@@ -23,6 +25,7 @@ class AddProductViewController: XLFormViewController {
         case EndDate = "End date"
         case Community = "Community"
         case Photo = "Photo"
+        case Location = "Location"
     }
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
@@ -68,6 +71,13 @@ class AddProductViewController: XLFormViewController {
         ]
         infoSection.addFormRow(categoryRow)
         // Location
+        let locationRow = XLFormRowDescriptor(tag: Tags.Location.rawValue, rowType: XLFormRowDescriptorTypeSelectorPush, title: NSLocalizedString("Location", comment: "New product: location"))
+        locationRow.action.formSegueClass = NSClassFromString("UIStoryboardPushSegue")
+        locationRow.action.viewControllerClass = LocationSelectorViewController.self
+        locationRow.valueTransformer = CLLocationValueTrasformer.self
+        locationRow.value = CLLocation(latitude: -33, longitude: -56)
+        infoSection.addFormRow(locationRow)
+
         // Community
         let communityCaption = NSLocalizedString("Community", comment: "New product: comunity caption")
         let communityRow = XLFormRowDescriptor(tag: Tags.Community.rawValue, rowType:XLFormRowDescriptorTypeSelectorPush, title: communityCaption)
