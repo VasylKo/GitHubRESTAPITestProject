@@ -47,6 +47,9 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="didTapLogin:" destination="JGW-l6-Shb" eventType="touchUpInside" id="19q-Eg-aRp"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AiG-t9-3Te">
                                                 <rect key="frame" x="0.0" y="233" width="540" height="32"/>
@@ -109,17 +112,29 @@
                                     <constraint firstAttribute="bottom" secondItem="QF7-vR-jeG" secondAttribute="bottom" id="hgi-ff-bO4"/>
                                 </constraints>
                             </scrollView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EQN-pb-rUZ">
+                                <rect key="frame" x="550" y="30" width="40" height="30"/>
+                                <state key="normal" title="Close">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="didTapClose:" destination="JGW-l6-Shb" eventType="touchUpInside" id="NNl-pY-eSC"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="BT1-Fz-1Vn" firstAttribute="width" secondItem="6Jk-vT-iGf" secondAttribute="width" multiplier="0.9" id="3Cr-r2-2NV"/>
                             <constraint firstItem="QF7-vR-jeG" firstAttribute="width" secondItem="6Jk-vT-iGf" secondAttribute="width" multiplier="0.9" id="GsU-yR-olQ"/>
+                            <constraint firstItem="EQN-pb-rUZ" firstAttribute="top" secondItem="cEq-LH-m4U" secondAttribute="bottom" constant="10" id="LPF-Qp-Rj7"/>
                             <constraint firstAttribute="centerX" secondItem="BT1-Fz-1Vn" secondAttribute="centerX" id="LmK-gj-X8e"/>
                             <constraint firstItem="BT1-Fz-1Vn" firstAttribute="centerY" secondItem="6Jk-vT-iGf" secondAttribute="centerY" multiplier="0.95" id="M1x-DS-AJA"/>
                             <constraint firstItem="BT1-Fz-1Vn" firstAttribute="height" secondItem="6Jk-vT-iGf" secondAttribute="height" multiplier="0.9" id="Uhh-fU-msa"/>
+                            <constraint firstAttribute="trailing" secondItem="EQN-pb-rUZ" secondAttribute="trailing" constant="10" id="oAJ-NN-zo6"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="loginButton" destination="VmY-gq-ys2" id="KSa-0A-YNl"/>
                         <outlet property="scrollView" destination="BT1-Fz-1Vn" id="gSU-PC-wBM"/>
                     </connections>
                 </viewController>

@@ -9,8 +9,23 @@
 import UIKit
 
 class LoginViewController: BaseLoginViewController {
+    
     @IBAction func prepareForUnwind(segue: UIStoryboardSegue) {
         
     }
 
+    @IBAction func didTapClose(sender: AnyObject) {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    @IBAction func didTapLogin(sender: AnyObject) {
+        
+    }
+    
+    override func keyboardTargetView() -> UIView? {
+        return loginButton
+    }
+    
+    @IBOutlet private weak var loginButton: UIButton!
+    
 }
