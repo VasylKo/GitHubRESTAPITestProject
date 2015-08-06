@@ -7,9 +7,12 @@
 //
 
 import UIKit
-import XLForm
-import ImagePickerSheetController
 import CleanroomLogger
+import XLForm
+
+import ImagePickerSheetController
+import MobileCoreServices
+import Photos
 
 class AddProductViewController: XLFormViewController {
     private enum Tags : String {
@@ -106,28 +109,6 @@ class AddProductViewController: XLFormViewController {
 
     //MARK: - Actions -
     
-    func didTouchPhoto(sender: XLFormRowDescriptor) {
-        let controller = ImagePickerSheetController()
-        controller.addAction(ImageAction(title: NSLocalizedString("Take Photo Or Video", comment: "Action Title"), secondaryTitle: NSLocalizedString("Add comment", comment: "Action Title"), handler: { _ in
-//            presentImagePickerController(.Camera)
-            Log.debug?.message("Camera")
-            }, secondaryHandler: { _, numberOfPhotos in
-                Log.debug?.message("Comment \(numberOfPhotos) photos")
-        }))
-        controller.addAction(ImageAction(title: NSLocalizedString("Photo Library", comment: "Action Title"), secondaryTitle: { NSString.localizedStringWithFormat(NSLocalizedString("ImagePickerSheet.button1.Send %lu Photo", comment: "Action Title"), $0) as String}, handler: { _ in
-                Log.debug?.message("Photo")
-//            presentImagePickerController(.PhotoLibrary)
-            }, secondaryHandler: { _, numberOfPhotos in
-                Log.debug?.message("Send \(controller.selectedImageAssets)")
-        }))
-        controller.addAction(ImageAction(title: NSLocalizedString("Cancel", comment: "Action Title"), style: .Cancel, handler: { _ in
-            Log.debug?.message("Cancelled")
-        }))
-        
-        presentViewController(controller, animated: true, completion: nil)
-        self.deselectFormRow(sender)
-    }
-    
     @IBAction func didTapPost(sender: AnyObject) {
         let validationErrors : Array<NSError> = self.formValidationErrors() as! Array<NSError>
         if (validationErrors.count > 0){
@@ -139,6 +120,69 @@ class AddProductViewController: XLFormViewController {
         Log.debug?.message("Should post")
     }
     
+    //MARK: - Image picker -
+    
+    func didTouchPhoto(sender: XLFormRowDescriptor) {
+        let controller = ImagePickerSheetController()
+        controller.maximumSelection = 2
+        controller.addAction(ImageAction(
+            title: NSLocalizedString("Take Photo", comment: "Take Photo"),
+            handler: { [weak self] _ in
+                self?.presentImagePicker(.Camera)
+            }))
+        controller.addAction(ImageAction(
+            title: NSLocalizedString("Photo Library", comment: "Photo Library"),
+            secondaryTitle: { NSString.localizedStringWithFormat(NSLocalizedString("Add %lu Photo", comment: "Add photo"), $0) as String},
+            handler: { [weak self] _ in
+                self?.presentImagePicker(.PhotoLibrary)
+            },
+            secondaryHandler: { [weak self] _, numberOfPhotos in
+                self?.addAssets(controller.selectedImageAssets)
+            }))
+        controller.addAction(ImageAction(title: NSLocalizedString("Cancel", comment: "Action Title"), style: .Cancel, handler: { _ in
+            Log.debug?.message("Cancelled")
+        }))
+        
+        presentViewController(controller, animated: true, completion: nil)
+        self.deselectFormRow(sender)
+    }
+    
 
+    
+    private func presentImagePicker(sourceType: UIImagePickerControllerSourceType) {
+        if UIImagePickerController.isSourceTypeAvailable(sourceType) {
+            Log.debug?.message("Presenting picker for source \(sourceType)")
+            let picker = UIImagePickerController()
+            picker.sourceType = sourceType
+            picker.allowsEditing = false
+            picker.mediaTypes = [kUTTypeImage]
+            picker.delegate = self
+            self.presentViewController(picker, animated: true, completion: nil)
+        } else {
+            Log.error?.message("Unavailable source type: \(sourceType)")
+        }
+    }
+    
+    private func addAssets(assets: [PHAsset]) {
+        Log.debug?.message("Select images \(assets)")
+    }
+    
+}
 
+extension AddProductViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
+        if let referenceURL = info[UIImagePickerControllerReferenceURL] as? NSURL,
+           let asset = PHAsset.fetchAssetsWithALAssetURLs([referenceURL], options: PHFetchOptions()).firstObject as? PHAsset {
+            self.addAssets([asset])
+        } else {
+            Log.error?.message("Get invalid media info: \(info)")
+        }
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
+        Log.debug?.message("Cancel image selection")
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
 }
