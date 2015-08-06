@@ -4,6 +4,7 @@ PODS:
   - BrightFutures (2.0.1):
     - Result (~> 0.4.3)
   - HanekeSwift (0.9.1)
+  - ImagePickerSheetController (0.1.7)
   - KeychainAccess (1.2.1)
   - KYDrawerController (1.0.3)
   - ObjectMapper (0.12)
@@ -19,6 +20,7 @@ PODS:
 
 DEPENDENCIES:
   - HanekeSwift
+  - ImagePickerSheetController (~> 0.1.7)
   - KeychainAccess
   - KYDrawerController
   - PosInCore (from `PosInCore`)
@@ -35,6 +37,7 @@ SPEC CHECKSUMS:
   Box: a92e8aa4c099e6bc0733829665caf9e668ef53b8
   BrightFutures: 27704272a695324b42538a2d85b20ac3f24228bd
   HanekeSwift: 50d37bfbc4432edc649167e538c259feccb4a2bb
+  ImagePickerSheetController: 127cc7a5e8da7fa17d42aa4ba7509f72af9cd71f
   KeychainAccess: 3d7922baf90762a976adb7f6030d74c1a4110a1d
   KYDrawerController: 114902057e9b9a2a0aa951e976151b285afa9c3e
   ObjectMapper: ef4a369cbab75546029ceb7e8155772b5f8e8841

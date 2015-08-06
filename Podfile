@@ -9,6 +9,7 @@ target 'PositionIn' do
     pod 'KYDrawerController'
     pod 'UIImageEffects', :inhibit_warnings => true
     pod 'XLForm', '~> 3.0.1'
+    pod 'ImagePickerSheetController', '~> 0.1.7'
     
     pod 'ResponseDetective'
     pod 'PosInCore', :path => 'PosInCore'

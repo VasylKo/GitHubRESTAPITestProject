@@ -8,17 +8,18 @@
 
 import UIKit
 import XLForm
+import ImagePickerSheetController
 import CleanroomLogger
 
 class AddProductViewController: XLFormViewController {
     private enum Tags : String {
-        case Title = "title"
-        case Price = "price"
-        case Category = "categories"
-        case StartDate = "startDate"
-        case EndDate = "endDate"
-        case Community = "community"
-        case Photo = "photo"
+        case Title = "Title"
+        case Price = "Price"
+        case Category = "Category"
+        case StartDate = "Start date"
+        case EndDate = "End date"
+        case Community = "Community"
+        case Photo = "Photo"
     }
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
@@ -106,6 +107,24 @@ class AddProductViewController: XLFormViewController {
     //MARK: - Actions -
     
     func didTouchPhoto(sender: XLFormRowDescriptor) {
+        let controller = ImagePickerSheetController()
+        controller.addAction(ImageAction(title: NSLocalizedString("Take Photo Or Video", comment: "Action Title"), secondaryTitle: NSLocalizedString("Add comment", comment: "Action Title"), handler: { _ in
+//            presentImagePickerController(.Camera)
+            Log.debug?.message("Camera")
+            }, secondaryHandler: { _, numberOfPhotos in
+                Log.debug?.message("Comment \(numberOfPhotos) photos")
+        }))
+        controller.addAction(ImageAction(title: NSLocalizedString("Photo Library", comment: "Action Title"), secondaryTitle: { NSString.localizedStringWithFormat(NSLocalizedString("ImagePickerSheet.button1.Send %lu Photo", comment: "Action Title"), $0) as String}, handler: { _ in
+                Log.debug?.message("Photo")
+//            presentImagePickerController(.PhotoLibrary)
+            }, secondaryHandler: { _, numberOfPhotos in
+                Log.debug?.message("Send \(controller.selectedImageAssets)")
+        }))
+        controller.addAction(ImageAction(title: NSLocalizedString("Cancel", comment: "Action Title"), style: .Cancel, handler: { _ in
+            Log.debug?.message("Cancelled")
+        }))
+        
+        presentViewController(controller, animated: true, completion: nil)
         self.deselectFormRow(sender)
     }
     
