@@ -7,11 +7,19 @@
 //
 
 import UIKit
+import CleanroomLogger
 
 class RecoverPasswordViewController: BaseLoginViewController {
     
+    
+    @IBAction func didTapSubmitButton(sender: AnyObject) {
+        Log.debug?.message("Should call recover")
+    }
+    
+    
     override func keyboardTargetView() -> UIView? {
-        return nil
+        return submitButton
     }
 
+    @IBOutlet private weak var submitButton: UIButton!
 }
