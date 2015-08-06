@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CleanroomLogger
 
 class LoginViewController: BaseLoginViewController {
     
@@ -19,7 +20,7 @@ class LoginViewController: BaseLoginViewController {
     }
     
     @IBAction func didTapLogin(sender: AnyObject) {
-        
+        Log.debug?.message("Should call login")
     }
     
     override func keyboardTargetView() -> UIView? {

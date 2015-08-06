@@ -8,6 +8,10 @@
 
 import UIKit
 
-class RecoverPasswordViewController: UIViewController {
+class RecoverPasswordViewController: BaseLoginViewController {
     
+    override func keyboardTargetView() -> UIView? {
+        return nil
+    }
+
 }

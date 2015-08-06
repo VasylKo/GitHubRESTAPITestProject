@@ -7,7 +7,18 @@
 //
 
 import UIKit
+import CleanroomLogger
 
-class RegisterViewController: UIViewController {
+class RegisterViewController: BaseLoginViewController {
+
+    @IBAction func didTapSignupButton(sender: AnyObject) {
+        Log.debug?.message("Should call register")
+    }
+
     
+    override func keyboardTargetView() -> UIView? {
+        return signupButton
+    }
+    
+    @IBOutlet private weak var signupButton: UIButton!
 }
