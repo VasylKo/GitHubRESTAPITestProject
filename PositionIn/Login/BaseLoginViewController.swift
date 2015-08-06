@@ -15,6 +15,7 @@ class BaseLoginViewController: UIViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         registerForKeyboardNotifications()
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "didTapOutsideTextFields:"))
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -57,4 +58,8 @@ class BaseLoginViewController: UIViewController {
         scrollView.setContentOffset(CGPointZero, animated: true)
     }
 
+    func didTapOutsideTextFields(sender: UIGestureRecognizer) {
+        view.endEditing(true)
+    }
+    
 }
