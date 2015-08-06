@@ -39,6 +39,10 @@ class BrowseViewController: BesideMenuViewController {
         })
     }
     
+    @IBAction func prepareForUnwind(segue: UIStoryboardSegue) {
+        
+    }
+    
     
     @IBOutlet private weak var contentView: UIView!
     @IBOutlet private weak var addMenu: AddMenuView!
@@ -175,15 +179,6 @@ class BrowseViewController: BesideMenuViewController {
         let searchBar = SearchBar()
         searchBar.delegate = self
         return searchBar
-//        let vPadding: CGFloat = 5
-//        let frame = CGRect(
-//            x: 0,
-//            y: vPadding,
-//            width: self.view.bounds.width,
-//            height: self.navigationController!.navigationBar.bounds.height - 2 * vPadding
-//        )
-//        let searchBar = SearchBar(frame: frame)
-//        return searchBar
         }()
 
 }
@@ -191,7 +186,6 @@ class BrowseViewController: BesideMenuViewController {
 extension BrowseViewController: UISearchBarDelegate {
     func searchBarShouldBeginEditing(searchBar: UISearchBar) -> Bool {
         SearchViewController.present(searchbar, presenter: self)
-//        self.performSegue(BrowseViewController.Segue.ShowSearch)
         return false
     }
 }
@@ -204,25 +198,33 @@ extension BrowseViewController {
                 title: NSLocalizedString("PRODUCT",comment: "Add menu: PRODUCT"),
                 icon: UIImage(named: "AddProduct")!,
                 color: UIScheme.productAddMenuColor,
-                action: {Log.debug?.message("Product")}
+                action: {[weak self] in
+                    self?.navigationController?.pushViewController(Storyboards.NewItems.instantiateAddProductViewController(), animated: true)
+                }
             ),
             AddMenuView.MenuItem(
                 title: NSLocalizedString("EVENT",comment: "Add menu: EVENT"),
                 icon: UIImage(named: "AddEvent")!,
                 color: UIScheme.eventAddMenuColor,
-                action: {Log.debug?.message("Event")}
+                action: {[weak self] in
+                    self?.navigationController?.pushViewController(Storyboards.NewItems.instantiateAddEventViewController(), animated: true)
+                }
             ),
             AddMenuView.MenuItem(
                 title: NSLocalizedString("PROMOTION",comment: "Add menu: PROMOTION"),
                 icon: UIImage(named: "AddPromotion")!,
                 color: UIScheme.promotionAddMenuColor,
-                action: {Log.debug?.message("Promotion")}
+                action: {[weak self] in
+                    self?.navigationController?.pushViewController(Storyboards.NewItems.instantiateAddPromotionViewController(), animated: true)
+                }
             ),
             AddMenuView.MenuItem(
                 title: NSLocalizedString("INVITE",comment: "Add menu: INVITE"),
                 icon: UIImage(named: "AddFriend")!,
                 color: UIScheme.inviteAddMenuColor,
-                action: {Log.debug?.message("invite")}
+                action: {[weak self] in
+                    Log.debug?.message("Should call invite")
+                }
             ),
         ])
         addMenu.delegate = self

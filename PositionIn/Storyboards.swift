@@ -73,6 +73,31 @@ struct Storyboards {
             return self.storyboard.instantiateViewControllerWithIdentifier("RecoverPasswordViewController") as! RecoverPasswordViewController
         }
     }
+
+    struct NewItems {
+
+        static let identifier = "NewItems"
+
+        static var storyboard: UIStoryboard {
+            return UIStoryboard(name: self.identifier, bundle: nil)
+        }
+
+        static func instantiateViewControllerWithIdentifier(identifier: String) -> UIViewController {
+            return self.storyboard.instantiateViewControllerWithIdentifier(identifier) as! UIViewController
+        }
+
+        static func instantiateAddProductViewController() -> AddProductViewController! {
+            return self.storyboard.instantiateViewControllerWithIdentifier("AddProductViewController") as! AddProductViewController
+        }
+
+        static func instantiateAddPromotionViewController() -> AddPromotionViewController! {
+            return self.storyboard.instantiateViewControllerWithIdentifier("AddPromotionViewController") as! AddPromotionViewController
+        }
+
+        static func instantiateAddEventViewController() -> AddEventViewController! {
+            return self.storyboard.instantiateViewControllerWithIdentifier("AddEventViewController") as! AddEventViewController
+        }
+    }
 }
 
 //MARK: - ReusableKind
@@ -453,3 +478,9 @@ extension LoginViewController {
 //MARK: - RegisterViewController
 
 //MARK: - RecoverPasswordViewController
+
+//MARK: - AddProductViewController
+
+//MARK: - AddPromotionViewController
+
+//MARK: - AddEventViewController
