@@ -35,6 +35,8 @@
                         <segue destination="BFL-Ne-hYV" kind="custom" identifier="DrawerSegue" customClass="KYEmbedDrawerControllerSegue" customModule="KYDrawerController" id="57u-Oa-0ja"/>
                         <segue destination="hew-RE-2CB" kind="custom" identifier="ShowBrowse" customClass="KYEmbedMainControllerSegue" customModule="KYDrawerController" id="h47-6p-FJa"/>
                         <segue destination="Eth-nv-VYE" kind="custom" identifier="ShowMessagesList" customClass="KYEmbedMainControllerSegue" customModule="KYDrawerController" id="dj9-Kt-1RB"/>
+                        <segue destination="Oij-7x-Obb" kind="custom" identifier="ShowFilters" customClass="KYEmbedMainControllerSegue" customModule="KYDrawerController" id="pmj-Te-KcZ"/>
+                        <segue destination="EYE-Yu-7Hz" kind="custom" identifier="ShowCategories" customClass="KYEmbedMainControllerSegue" customModule="KYDrawerController" id="6nJ-g4-1E5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LQ4-lF-MRq" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -85,6 +87,50 @@
             </objects>
             <point key="canvasLocation" x="241" y="564"/>
         </scene>
+        <!--Filters Navigation Controller Scene-->
+        <scene sceneID="j9a-3S-pI8">
+            <objects>
+                <navigationController storyboardIdentifier="FiltersNavigationController" id="Oij-7x-Obb" userLabel="Filters Navigation Controller Scene" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="sGA-Vl-cEr">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" red="0.13725490200000001" green="0.4431372549" blue="0.83529411760000005" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="barTintColor" red="0.13725490200000001" green="0.4431372549" blue="0.83529411760000005" alpha="1" colorSpace="calibratedRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="K9G-R8-bQ8" kind="relationship" relationship="rootViewController" id="gTC-td-TKI"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Zec-Kg-fVr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="241" y="1238"/>
+        </scene>
+        <!--Categories Navigation Controller Scene-->
+        <scene sceneID="aQj-Si-aQ9">
+            <objects>
+                <navigationController storyboardIdentifier="CategoriesNavigationController" id="EYE-Yu-7Hz" userLabel="Categories Navigation Controller Scene" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="QVK-nA-qgU">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" red="0.13725490200000001" green="0.4431372549" blue="0.83529411760000005" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="barTintColor" red="0.13725490200000001" green="0.4431372549" blue="0.83529411760000005" alpha="1" colorSpace="calibratedRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="vEJ-YL-N7Q" kind="relationship" relationship="rootViewController" id="62Q-zs-0nd"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wQW-Sj-Mrr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="253" y="1894"/>
+        </scene>
         <!--Messages-->
         <scene sceneID="HVo-4m-TZx">
             <objects>
@@ -96,6 +142,82 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4CW-wc-yjP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="914" y="564"/>
+        </scene>
+        <!--Filters-->
+        <scene sceneID="7z0-MQ-MCn">
+            <objects>
+                <viewController id="K9G-R8-bQ8" customClass="FilterViewController" customModule="PositionIn" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="2Gd-ni-q0r"/>
+                        <viewControllerLayoutGuide type="bottom" id="kJ7-ZP-Vtb"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="NDg-LM-QRt">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="OAU-5D-fy1" customClass="TableView" customModule="PosInCore">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="OAU-5D-fy1" firstAttribute="leading" secondItem="NDg-LM-QRt" secondAttribute="leading" id="Elr-Ea-HZF"/>
+                            <constraint firstAttribute="trailing" secondItem="OAU-5D-fy1" secondAttribute="trailing" id="Pzf-zh-Tbm"/>
+                            <constraint firstItem="kJ7-ZP-Vtb" firstAttribute="top" secondItem="OAU-5D-fy1" secondAttribute="bottom" id="ep2-Ka-UZj"/>
+                            <constraint firstItem="OAU-5D-fy1" firstAttribute="top" secondItem="2Gd-ni-q0r" secondAttribute="bottom" id="gAp-Ft-0Of"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Filters" id="yMh-mP-AMn">
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="YEr-zF-XpM">
+                            <connections>
+                                <action selector="didTapCancel:" destination="K9G-R8-bQ8" id="kFF-rr-7Mm"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Done" id="hBm-78-kfM">
+                            <connections>
+                                <action selector="didTapApply:" destination="K9G-R8-bQ8" id="y62-V5-N5l"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="tableView" destination="OAU-5D-fy1" id="jWw-T1-KE8"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EFp-4v-aFT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="919" y="1238"/>
+        </scene>
+        <!--Categories-->
+        <scene sceneID="3eR-4z-S8f">
+            <objects>
+                <viewController id="vEJ-YL-N7Q" customClass="CategoriesViewController" customModule="PositionIn" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="lBb-RC-DxT"/>
+                        <viewControllerLayoutGuide type="bottom" id="2sI-R9-Hi7"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="1AN-Jr-rO9">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Not-j0-RZR" customClass="TableView" customModule="PosInCore">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Not-j0-RZR" firstAttribute="leading" secondItem="1AN-Jr-rO9" secondAttribute="leading" id="5GD-N4-JMG"/>
+                            <constraint firstItem="Not-j0-RZR" firstAttribute="top" secondItem="1AN-Jr-rO9" secondAttribute="top" id="Kgu-mE-hDp"/>
+                            <constraint firstItem="2sI-R9-Hi7" firstAttribute="top" secondItem="Not-j0-RZR" secondAttribute="bottom" id="SWG-CT-vga"/>
+                            <constraint firstAttribute="trailing" secondItem="Not-j0-RZR" secondAttribute="trailing" id="Vas-mB-KIg"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Categories" id="l7r-48-h9u"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ycR-9I-XLq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="917" y="1902"/>
         </scene>
         <!--Search View Controller-->
         <scene sceneID="em1-oT-Uzw">

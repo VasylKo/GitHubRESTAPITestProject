@@ -43,6 +43,10 @@ class SidebarViewController: KYDrawerController {
                 return (SidebarViewController.Segue.ShowBrowse, Box(BrowseViewController.DisplayMode.Map, BrowseViewController.BrowseMode.ForYou))
             case .New:
                 return (SidebarViewController.Segue.ShowBrowse, Box(BrowseViewController.DisplayMode.Map, BrowseViewController.BrowseMode.New))
+            case .Filters:
+                return (SidebarViewController.Segue.ShowFilters, nil)
+            case .Categories:
+                return (SidebarViewController.Segue.ShowCategories, nil)
             default:
                 return nil
             }
