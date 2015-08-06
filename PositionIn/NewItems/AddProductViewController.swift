@@ -31,7 +31,7 @@ class AddProductViewController: XLFormViewController {
     }
 
     func initializeForm() {
-        let form = XLFormDescriptor(title: "newProduct")
+        let form = XLFormDescriptor(title: NSLocalizedString("New Product", comment: "New product: form caption"))
         
         // Description section
         let descriptionSection = XLFormSectionDescriptor.formSection()
@@ -51,7 +51,7 @@ class AddProductViewController: XLFormViewController {
         // Category
         let categoryCaption = NSLocalizedString("Category", comment: "New product: category caption")
         let categoryRow = XLFormRowDescriptor(tag: Tags.Category.rawValue, rowType:XLFormRowDescriptorTypeMultipleSelector, title: categoryCaption)
-        categoryRow.value = XLFormOptionsObject(value: 0, displayText: "Other")
+        categoryRow.value = [ XLFormOptionsObject(value: 0, displayText: "Other") ]
         categoryRow.selectorTitle = categoryCaption
         categoryRow.selectorOptions = [
             XLFormOptionsObject(value: 0, displayText: "Other"),
@@ -65,14 +65,12 @@ class AddProductViewController: XLFormViewController {
         // Location
         // Community
         let communityCaption = NSLocalizedString("Community", comment: "New product: comunity caption")
-        let communityRow = XLFormRowDescriptor(tag: Tags.Community.rawValue, rowType:XLFormRowDescriptorTypeMultipleSelector, title: communityCaption)
+        let communityRow = XLFormRowDescriptor(tag: Tags.Community.rawValue, rowType:XLFormRowDescriptorTypeSelectorPush, title: communityCaption)
         communityRow.selectorTitle = communityCaption
-        communityRow.value = XLFormOptionsObject(value: 0, displayText:"All")
+        communityRow.value =  XLFormOptionsObject(value: 0, displayText:"All")
         communityRow.selectorOptions = [
             XLFormOptionsObject(value: 0, displayText:"All"),
-            XLFormOptionsObject(value: 1, displayText:"Community 1"),
-            XLFormOptionsObject(value: 2, displayText:"Community 2"),
-            XLFormOptionsObject(value: 3, displayText:"Community 3"),
+            XLFormOptionsObject(value: 1, displayText:"Selected"),
         ]
         infoSection.addFormRow(communityRow)
         
