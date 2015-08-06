@@ -24,15 +24,19 @@ class SidebarViewController: KYDrawerController {
         case Wallet
         case UserProfile
         case Settings
-    }
-
-    func executeAction(action: Action) {
-        if !isViewLoaded() {
-            dispatch_delay(0){ self.executeAction(action) }
-            return
+        case Login
+        
+        func nextController() -> UIViewController? {
+            switch self {
+            case .Login:
+                return Storyboards.Login.instantiateInitialViewController()
+            default:
+                return nil
+            }
         }
-        let (segue: SidebarViewController.Segue?, sender: AnyObject?) = {
-            switch action {
+        
+        func nextSegue() -> SegueInfo? {
+            switch self {
             case .Messages:
                 return (SidebarViewController.Segue.ShowMessagesList, nil)
             case .ForYou:
@@ -40,11 +44,26 @@ class SidebarViewController: KYDrawerController {
             case .New:
                 return (SidebarViewController.Segue.ShowBrowse, Box(BrowseViewController.DisplayMode.Map, BrowseViewController.BrowseMode.New))
             default:
-                return (nil, nil)
+                return nil
             }
-            }()
-        if let segue = segue {
-            setDrawerState(.Closed, animated: true)
+        }
+        
+        typealias SegueInfo = (segue: SidebarViewController.Segue, sender: AnyObject?)
+    }
+
+    func executeAction(action: Action) {
+        if !isViewLoaded() {
+            dispatch_delay(0){ self.executeAction(action) }
+            return
+        }
+        
+        setDrawerState(.Closed, animated: true)
+        
+        if let controller = action.nextController() {
+            presentViewController(controller, animated: true, completion: nil)
+        }
+        
+        if let (segue, sender: AnyObject?) = action.nextSegue() {
             performSegue(segue, sender: sender)
         }
     }

@@ -44,6 +44,35 @@ struct Storyboards {
             return self.storyboard.instantiateViewControllerWithIdentifier("MapViewController") as! BrowseViewController
         }
     }
+
+    struct Login {
+
+        static let identifier = "Login"
+
+        static var storyboard: UIStoryboard {
+            return UIStoryboard(name: self.identifier, bundle: nil)
+        }
+
+        static func instantiateInitialViewController() -> LoginViewController! {
+            return self.storyboard.instantiateInitialViewController() as! LoginViewController
+        }
+
+        static func instantiateViewControllerWithIdentifier(identifier: String) -> UIViewController {
+            return self.storyboard.instantiateViewControllerWithIdentifier(identifier) as! UIViewController
+        }
+
+        static func instantiateLoginViewController() -> LoginViewController! {
+            return self.storyboard.instantiateViewControllerWithIdentifier("LoginViewController") as! LoginViewController
+        }
+
+        static func instantiateRegisterViewController() -> RegisterViewController! {
+            return self.storyboard.instantiateViewControllerWithIdentifier("RegisterViewController") as! RegisterViewController
+        }
+
+        static func instantiateRecoverPasswordViewController() -> RecoverPasswordViewController! {
+            return self.storyboard.instantiateViewControllerWithIdentifier("RecoverPasswordViewController") as! RecoverPasswordViewController
+        }
+    }
 }
 
 //MARK: - ReusableKind
@@ -348,13 +377,10 @@ extension BrowseViewController {
 
     enum Segue: String, Printable, SegueProtocol {
         case ShowProductDetails = "ShowProductDetails"
-        case ShowSearch = "ShowSearch"
 
         var kind: SegueKind? {
             switch (self) {
             case ShowProductDetails:
-                return SegueKind(rawValue: "show")
-            case ShowSearch:
                 return SegueKind(rawValue: "show")
             default:
                 preconditionFailure("Invalid value")
@@ -366,8 +392,6 @@ extension BrowseViewController {
             switch (self) {
             case ShowProductDetails:
                 return ProductDetailsViewController.self
-            case ShowSearch:
-                return SearchViewController.self
             default:
                 assertionFailure("Unknown destination")
                 return nil
@@ -379,3 +403,53 @@ extension BrowseViewController {
     }
 
 }
+
+//MARK: - LoginViewController
+extension UIStoryboardSegue {
+    func selection() -> LoginViewController.Segue? {
+        if let identifier = self.identifier {
+            return LoginViewController.Segue(rawValue: identifier)
+        }
+        return nil
+    }
+}
+
+extension LoginViewController { 
+
+    enum Segue: String, Printable, SegueProtocol {
+        case ShowRegister = "ShowRegister"
+        case ShowRecoverPassword = "ShowRecoverPassword"
+
+        var kind: SegueKind? {
+            switch (self) {
+            case ShowRegister:
+                return SegueKind(rawValue: "show")
+            case ShowRecoverPassword:
+                return SegueKind(rawValue: "show")
+            default:
+                preconditionFailure("Invalid value")
+                break
+            }
+        }
+
+        var destination: UIViewController.Type? {
+            switch (self) {
+            case ShowRegister:
+                return RegisterViewController.self
+            case ShowRecoverPassword:
+                return RecoverPasswordViewController.self
+            default:
+                assertionFailure("Unknown destination")
+                return nil
+            }
+        }
+
+        var identifier: String? { return self.description } 
+        var description: String { return self.rawValue }
+    }
+
+}
+
+//MARK: - RegisterViewController
+
+//MARK: - RecoverPasswordViewController
