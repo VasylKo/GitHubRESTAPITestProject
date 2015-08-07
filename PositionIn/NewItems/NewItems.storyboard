@@ -98,40 +98,6 @@
             </objects>
             <point key="canvasLocation" x="1374" y="371"/>
         </scene>
-        <!--Select location-->
-        <scene sceneID="tee-b4-UcE">
-            <objects>
-                <viewController storyboardIdentifier="LocationSelectorViewController" id="kqL-zS-RSk" customClass="LocationSelectorViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="IEL-LP-Vlr"/>
-                        <viewControllerLayoutGuide type="bottom" id="Kla-dR-lSm"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="3Z8-EF-ork">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="bdS-ep-0kO">
-                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
-                            </mapView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="bdS-ep-0kO" firstAttribute="top" secondItem="IEL-LP-Vlr" secondAttribute="bottom" id="Jfe-wT-rnB"/>
-                            <constraint firstAttribute="bottom" secondItem="bdS-ep-0kO" secondAttribute="bottom" id="NB2-3G-GfN"/>
-                            <constraint firstItem="bdS-ep-0kO" firstAttribute="leading" secondItem="3Z8-EF-ork" secondAttribute="leading" id="dRQ-Ow-WEa"/>
-                            <constraint firstAttribute="trailing" secondItem="bdS-ep-0kO" secondAttribute="trailing" id="hXr-bl-kpw"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" title="Select location" id="bON-aa-DZs"/>
-                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
-                    <connections>
-                        <outlet property="mapView" destination="bdS-ep-0kO" id="7T9-dK-ZdG"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="PTf-cA-Ucu" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1291" y="1049"/>
-        </scene>
         <!--New Event-->
         <scene sceneID="MCV-Of-FI1">
             <objects>

@@ -35,7 +35,7 @@
                         <segue destination="BFL-Ne-hYV" kind="custom" identifier="DrawerSegue" customClass="KYEmbedDrawerControllerSegue" customModule="KYDrawerController" id="57u-Oa-0ja"/>
                         <segue destination="hew-RE-2CB" kind="custom" identifier="ShowBrowse" customClass="KYEmbedMainControllerSegue" customModule="KYDrawerController" id="h47-6p-FJa"/>
                         <segue destination="Eth-nv-VYE" kind="custom" identifier="ShowMessagesList" customClass="KYEmbedMainControllerSegue" customModule="KYDrawerController" id="dj9-Kt-1RB"/>
-                        <segue destination="Oij-7x-Obb" kind="custom" identifier="ShowFilters" customClass="KYEmbedMainControllerSegue" customModule="KYDrawerController" id="pmj-Te-KcZ"/>
+                        <segue destination="Oij-7x-Obb" kind="presentation" identifier="ShowFilters" modalTransitionStyle="crossDissolve" id="pmj-Te-KcZ"/>
                         <segue destination="EYE-Yu-7Hz" kind="custom" identifier="ShowCategories" customClass="KYEmbedMainControllerSegue" customModule="KYDrawerController" id="6nJ-g4-1E5"/>
                     </connections>
                 </viewController>
@@ -171,7 +171,7 @@
                     <navigationItem key="navigationItem" title="Filters" id="yMh-mP-AMn">
                         <barButtonItem key="leftBarButtonItem" title="Cancel" id="YEr-zF-XpM">
                             <connections>
-                                <action selector="didTapCancel:" destination="K9G-R8-bQ8" id="kFF-rr-7Mm"/>
+                                <action selector="didTapCancel:" destination="K9G-R8-bQ8" id="Gm6-4b-vLE"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Done" id="hBm-78-kfM">

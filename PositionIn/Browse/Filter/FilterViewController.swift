@@ -23,6 +23,7 @@ class FilterViewController: UIViewController {
     
     @IBAction func didTapCancel(sender: AnyObject) {
         Log.debug?.message("Should cancel filter")
+        dismissViewControllerAnimated(true, completion: nil)
     }
     
 
