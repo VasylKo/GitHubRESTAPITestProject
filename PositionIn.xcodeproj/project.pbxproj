@@ -716,6 +716,21 @@
 		E6D4D5B41B6F8B9F003134CB /* SearchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		E6D4D5B71B6FA7A7003134CB /* SearchTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTransition.swift; sourceTree = "<group>"; };
 		E6D7C2911B5D546C004F3AA9 /* NibView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NibView.swift; sourceTree = "<group>"; };
+		E6DB13D91B74C84900E4BA96 /* .env */ = {isa = PBXFileReference; lastKnownFileType = text; path = .env; sourceTree = "<group>"; };
+		E6DB13DB1B74C84900E4BA96 /* Appfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Appfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		E6DB13DC1B74C84900E4BA96 /* Deliverfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Deliverfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		E6DB13DD1B74C84900E4BA96 /* Fastfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Fastfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		E6DB13DE1B74C84900E4BA96 /* report.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = report.xml; sourceTree = "<group>"; };
+		E6DB13E11B74C84900E4BA96 /* en-US-iPad-0-LandingScreen-portrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "en-US-iPad-0-LandingScreen-portrait.png"; sourceTree = "<group>"; };
+		E6DB13E21B74C84900E4BA96 /* en-US-iPhone4-0-LandingScreen-portrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "en-US-iPhone4-0-LandingScreen-portrait.png"; sourceTree = "<group>"; };
+		E6DB13E31B74C84900E4BA96 /* en-US-iPhone5-0-LandingScreen-portrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "en-US-iPhone5-0-LandingScreen-portrait.png"; sourceTree = "<group>"; };
+		E6DB13E41B74C84900E4BA96 /* en-US-iPhone6-0-LandingScreen-portrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "en-US-iPhone6-0-LandingScreen-portrait.png"; sourceTree = "<group>"; };
+		E6DB13E51B74C84900E4BA96 /* en-US-iPhone6Plus-0-LandingScreen-portrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "en-US-iPhone6Plus-0-LandingScreen-portrait.png"; sourceTree = "<group>"; };
+		E6DB13E61B74C84900E4BA96 /* screenshots.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = screenshots.html; sourceTree = "<group>"; };
+		E6DB13E71B74C84900E4BA96 /* Snapfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Snapfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		E6DB13E81B74C84900E4BA96 /* snapshot-iPad.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = "snapshot-iPad.js"; sourceTree = "<group>"; };
+		E6DB13E91B74C84900E4BA96 /* snapshot.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = snapshot.js; sourceTree = "<group>"; };
+		E6DB13EA1B74C84900E4BA96 /* SnapshotHelper.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = SnapshotHelper.js; sourceTree = "<group>"; };
 		E6E2FE881B66F61300880F3C /* Messaging.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Messaging.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6E2FE8B1B66F61300880F3C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E6E2FE8C1B66F61300880F3C /* Messaging.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Messaging.h; sourceTree = "<group>"; };
@@ -875,8 +890,9 @@
 			isa = PBXGroup;
 			children = (
 				E689F0741B6B8E5400597587 /* README.md */,
-				E689EE861B6A86A700597587 /* Cartfile */,
 				E660E5351B5B192100F52050 /* PositionIn.playground */,
+				E689EE861B6A86A700597587 /* Cartfile */,
+				E6DB13D81B74C84900E4BA96 /* fastlane */,
 				E6736ADC1B4E56EB0003580D /* Scripts */,
 				E64DC34C1B4E53C90011D37C /* PositionIn */,
 				E64DC3621B4E53CA0011D37C /* PositionInTests */,
@@ -2006,6 +2022,52 @@
 			path = Search;
 			sourceTree = "<group>";
 		};
+		E6DB13D81B74C84900E4BA96 /* fastlane */ = {
+			isa = PBXGroup;
+			children = (
+				E6DB13D91B74C84900E4BA96 /* .env */,
+				E6DB13DA1B74C84900E4BA96 /* actions */,
+				E6DB13DB1B74C84900E4BA96 /* Appfile */,
+				E6DB13DC1B74C84900E4BA96 /* Deliverfile */,
+				E6DB13DD1B74C84900E4BA96 /* Fastfile */,
+				E6DB13DE1B74C84900E4BA96 /* report.xml */,
+				E6DB13DF1B74C84900E4BA96 /* screenshots */,
+				E6DB13E71B74C84900E4BA96 /* Snapfile */,
+				E6DB13E81B74C84900E4BA96 /* snapshot-iPad.js */,
+				E6DB13E91B74C84900E4BA96 /* snapshot.js */,
+				E6DB13EA1B74C84900E4BA96 /* SnapshotHelper.js */,
+			);
+			path = fastlane;
+			sourceTree = "<group>";
+		};
+		E6DB13DA1B74C84900E4BA96 /* actions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = actions;
+			sourceTree = "<group>";
+		};
+		E6DB13DF1B74C84900E4BA96 /* screenshots */ = {
+			isa = PBXGroup;
+			children = (
+				E6DB13E01B74C84900E4BA96 /* en-US */,
+				E6DB13E61B74C84900E4BA96 /* screenshots.html */,
+			);
+			path = screenshots;
+			sourceTree = "<group>";
+		};
+		E6DB13E01B74C84900E4BA96 /* en-US */ = {
+			isa = PBXGroup;
+			children = (
+				E6DB13E11B74C84900E4BA96 /* en-US-iPad-0-LandingScreen-portrait.png */,
+				E6DB13E21B74C84900E4BA96 /* en-US-iPhone4-0-LandingScreen-portrait.png */,
+				E6DB13E31B74C84900E4BA96 /* en-US-iPhone5-0-LandingScreen-portrait.png */,
+				E6DB13E41B74C84900E4BA96 /* en-US-iPhone6-0-LandingScreen-portrait.png */,
+				E6DB13E51B74C84900E4BA96 /* en-US-iPhone6Plus-0-LandingScreen-portrait.png */,
+			);
+			path = "en-US";
+			sourceTree = "<group>";
+		};
 		E6E2FE891B66F61300880F3C /* Messaging */ = {
 			isa = PBXGroup;
 			children = (
@@ -2680,7 +2742,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -2860,6 +2922,7 @@
 				CLANG_WARN_OBJC_EXPLICIT_OWNERSHIP_TYPE = YES;
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_REPEATED_USE_OF_WEAK = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
