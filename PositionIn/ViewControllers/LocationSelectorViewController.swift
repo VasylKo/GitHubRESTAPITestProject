@@ -16,7 +16,13 @@ class LocationSelectorViewController: UIViewController, XLFormRowDescriptorViewC
 
     var rowDescriptor: XLFormRowDescriptor?
     
-    @IBOutlet private weak var mapView: MKMapView!
+    
+    lazy var mapView : MKMapView = {
+        let mapView = MKMapView(frame: self.view.frame)
+        self.view.addSubViewOnEntireSize(mapView)
+        return mapView
+        }()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
