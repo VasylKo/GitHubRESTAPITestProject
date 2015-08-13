@@ -80,6 +80,8 @@ extension CommunityListViewController {
                     return UserListCell.reuseId()
                 case .Body:
                     return CommunityInfoCell.reuseId()
+                case .Actions:
+                    return CommunityActionCell.reuseId()
                 default:
                     break;
                 }
