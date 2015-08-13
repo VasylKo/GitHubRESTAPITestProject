@@ -3,6 +3,7 @@ PODS:
   - Box (1.2.2)
   - BrightFutures (2.0.1):
     - Result (~> 0.4.3)
+  - GoogleMaps (1.10.1)
   - HanekeSwift (0.9.1)
   - ImagePickerSheetController (0.1.7)
   - KeychainAccess (1.2.1)
@@ -19,6 +20,7 @@ PODS:
   - XLForm (3.0.1)
 
 DEPENDENCIES:
+  - GoogleMaps
   - HanekeSwift
   - ImagePickerSheetController (~> 0.1.7)
   - KeychainAccess
@@ -36,6 +38,7 @@ SPEC CHECKSUMS:
   Alamofire: e4ab637e3195b645c814b87a652373439e59f2a4
   Box: a92e8aa4c099e6bc0733829665caf9e668ef53b8
   BrightFutures: 27704272a695324b42538a2d85b20ac3f24228bd
+  GoogleMaps: ebf08677f181d9c2dcdbd1721d206f02beccc9b1
   HanekeSwift: 50d37bfbc4432edc649167e538c259feccb4a2bb
   ImagePickerSheetController: 127cc7a5e8da7fa17d42aa4ba7509f72af9cd71f
   KeychainAccess: 3d7922baf90762a976adb7f6030d74c1a4110a1d
