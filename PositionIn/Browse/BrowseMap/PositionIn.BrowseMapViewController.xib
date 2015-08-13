@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BrowseMapViewController" customModule="PositionIn" customModuleProvider="target">
             <connections>
-                <outlet property="mapView" destination="k3H-1B-hTO" id="J85-HV-IQN"/>
                 <outlet property="view" destination="apz-CI-lnL" id="Ctj-nF-5fk"/>
             </connections>
         </placeholder>
@@ -14,19 +13,7 @@
         <view contentMode="scaleToFill" id="apz-CI-lnL">
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-            <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k3H-1B-hTO" customClass="GMSMapView" customModule="GoogleMaps">
-                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                </view>
-            </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-            <constraints>
-                <constraint firstAttribute="trailing" secondItem="k3H-1B-hTO" secondAttribute="trailing" id="31D-fH-APf"/>
-                <constraint firstAttribute="bottom" secondItem="k3H-1B-hTO" secondAttribute="bottom" id="Fqs-WL-JPg"/>
-                <constraint firstItem="k3H-1B-hTO" firstAttribute="top" secondItem="apz-CI-lnL" secondAttribute="top" id="waG-Ox-RkM"/>
-                <constraint firstItem="k3H-1B-hTO" firstAttribute="leading" secondItem="apz-CI-lnL" secondAttribute="leading" id="xvE-Ze-CdW"/>
-            </constraints>
         </view>
     </objects>
 </document>
