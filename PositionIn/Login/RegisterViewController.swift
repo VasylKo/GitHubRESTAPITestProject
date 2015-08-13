@@ -9,7 +9,7 @@
 import UIKit
 import CleanroomLogger
 
-class RegisterViewController: BaseLoginViewController {
+final class RegisterViewController: BaseLoginViewController {
 
     @IBAction func didTapSignupButton(sender: AnyObject) {
         Log.debug?.message("Should call register")

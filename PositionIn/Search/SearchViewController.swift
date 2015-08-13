@@ -9,7 +9,7 @@
 import UIKit
 import PosInCore
 
-class SearchViewController: UIViewController {
+final class SearchViewController: UIViewController {
     
     class func present(searchBar: SearchBar, presenter: UIViewController) {
         let searchController = Storyboards.Main.instantiateSearchViewController()

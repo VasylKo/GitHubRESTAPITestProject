@@ -10,7 +10,7 @@ import UIKit
 
 class BaseLoginViewController: UIViewController {
 
-    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet private weak var scrollView: UIScrollView!
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)

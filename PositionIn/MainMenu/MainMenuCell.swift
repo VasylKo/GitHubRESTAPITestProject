@@ -9,11 +9,11 @@
 import UIKit
 import PosInCore
 
-class MainMenuCell: TableViewCell {
+final class MainMenuCell: TableViewCell {
     
-    @IBOutlet weak var selectionIndicatorView: UIView!
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var iconImageView: UIImageView!
+    @IBOutlet private weak var selectionIndicatorView: UIView!
+    @IBOutlet private weak var titleLabel: UILabel!
+    @IBOutlet private weak var iconImageView: UIImageView!
     
     override func setModel(model: TableViewCellModel) {
         let m = model as? TableViewCellImageTextModel

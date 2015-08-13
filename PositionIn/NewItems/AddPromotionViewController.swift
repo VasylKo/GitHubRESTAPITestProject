@@ -10,7 +10,7 @@ import UIKit
 import XLForm
 import CleanroomLogger
 
-class AddPromotionViewController: BaseAddItemViewController {
+final class AddPromotionViewController: BaseAddItemViewController {
 
     private enum Tags : String {
         case Title = "Title"

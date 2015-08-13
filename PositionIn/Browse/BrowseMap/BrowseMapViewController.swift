@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BrowseMapViewController: UIViewController {
+final class BrowseMapViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

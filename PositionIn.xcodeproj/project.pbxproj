@@ -86,7 +86,6 @@
 		E66115A81B73AE0F003DB5B3 /* AddPromotionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66115A61B73AE0F003DB5B3 /* AddPromotionViewController.swift */; };
 		E66115A91B73AE0F003DB5B3 /* AddEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66115A71B73AE0F003DB5B3 /* AddEventViewController.swift */; };
 		E66115AD1B73B1A8003DB5B3 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66115AC1B73B1A8003DB5B3 /* FilterViewController.swift */; };
-		E66115AF1B73B40C003DB5B3 /* CategoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66115AE1B73B40C003DB5B3 /* CategoriesViewController.swift */; };
 		E6681A241B676345003096D6 /* XMPPLogFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = E6681A221B676345003096D6 /* XMPPLogFormatter.h */; };
 		E6681A251B676345003096D6 /* XMPPLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = E6681A231B676345003096D6 /* XMPPLogFormatter.m */; };
 		E6681A2A1B679C87003096D6 /* XMPPProcess.h in Headers */ = {isa = PBXBuildFile; fileRef = E6681A281B679C87003096D6 /* XMPPProcess.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -387,7 +386,6 @@
 		E66115A61B73AE0F003DB5B3 /* AddPromotionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddPromotionViewController.swift; sourceTree = "<group>"; };
 		E66115A71B73AE0F003DB5B3 /* AddEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddEventViewController.swift; sourceTree = "<group>"; };
 		E66115AC1B73B1A8003DB5B3 /* FilterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
-		E66115AE1B73B40C003DB5B3 /* CategoriesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoriesViewController.swift; sourceTree = "<group>"; };
 		E6681A221B676345003096D6 /* XMPPLogFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPLogFormatter.h; sourceTree = "<group>"; };
 		E6681A231B676345003096D6 /* XMPPLogFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPLogFormatter.m; sourceTree = "<group>"; };
 		E6681A281B679C87003096D6 /* XMPPProcess.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPProcess.h; sourceTree = "<group>"; };
@@ -855,7 +853,6 @@
 			children = (
 				E66115911B73A0CB003DB5B3 /* BrowseList */,
 				E66115961B73A0CB003DB5B3 /* BrowseMap */,
-				E66115AA1B73B15D003DB5B3 /* Categories */,
 				E66115AB1B73B15D003DB5B3 /* Filter */,
 				E62B17051B5CE3EB00D446BC /* BrowseViewController.swift */,
 				E62B17091B5CE46500D446BC /* PositionIn.BrowseViewController.xib */,
@@ -1080,14 +1077,6 @@
 				E64D00691B7CA2DC007693E0 /* AddCommunityViewController.swift */,
 			);
 			path = NewItems;
-			sourceTree = "<group>";
-		};
-		E66115AA1B73B15D003DB5B3 /* Categories */ = {
-			isa = PBXGroup;
-			children = (
-				E66115AE1B73B40C003DB5B3 /* CategoriesViewController.swift */,
-			);
-			path = Categories;
 			sourceTree = "<group>";
 		};
 		E66115AB1B73B15D003DB5B3 /* Filter */ = {
@@ -2013,8 +2002,8 @@
 		E689F07E1B6B99FA00597587 /* SellerProfile */ = {
 			isa = PBXGroup;
 			children = (
-				E689F07F1B6B9A1200597587 /* PositionIn.SellerProfileViewController.xib */,
 				E689F0811B6B9A2200597587 /* SellerProfileViewController.swift */,
+				E689F07F1B6B9A1200597587 /* PositionIn.SellerProfileViewController.xib */,
 			);
 			path = SellerProfile;
 			sourceTree = "<group>";
@@ -2580,7 +2569,6 @@
 				E6A10AC61B74232100047D74 /* LocationSelectorViewController.swift in Sources */,
 				E62B16F81B5C6BBF00D446BC /* AvatarView.swift in Sources */,
 				E689F0821B6B9A2200597587 /* SellerProfileViewController.swift in Sources */,
-				E66115AF1B73B40C003DB5B3 /* CategoriesViewController.swift in Sources */,
 				E661158B1B73774B003DB5B3 /* RegisterViewController.swift in Sources */,
 				E6325F651B57D89A00996480 /* SidebarViewController.swift in Sources */,
 				E66115891B73771E003DB5B3 /* LoginViewController.swift in Sources */,

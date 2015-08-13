@@ -9,7 +9,7 @@
 import UIKit
 import CleanroomLogger
 
-class LoginViewController: BaseLoginViewController {
+final class LoginViewController: BaseLoginViewController {
     
     @IBAction func prepareForUnwind(segue: UIStoryboardSegue) {
         

@@ -8,7 +8,8 @@
 
 import UIKit
 import PosInCore
-class SearchBar: UISearchBar {
+
+final class SearchBar: UISearchBar {
     enum Style {
         case Categories
         case Location

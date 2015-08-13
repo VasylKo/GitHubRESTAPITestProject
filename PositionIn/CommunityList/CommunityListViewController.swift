@@ -9,7 +9,7 @@
 import UIKit
 import PosInCore
 
-class CommunityListViewController: BesideMenuViewController {
+final class CommunityListViewController: BesideMenuViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

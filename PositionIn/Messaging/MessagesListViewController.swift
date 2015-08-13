@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MessagesListViewController: BesideMenuViewController {
+final class MessagesListViewController: BesideMenuViewController {
 
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet private weak var tableView: UITableView!
 }

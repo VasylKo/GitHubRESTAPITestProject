@@ -9,7 +9,7 @@
 import UIKit
 import CleanroomLogger
 
-class RecoverPasswordViewController: BaseLoginViewController {
+final class RecoverPasswordViewController: BaseLoginViewController {
     
     
     @IBAction func didTapSubmitButton(sender: AnyObject) {

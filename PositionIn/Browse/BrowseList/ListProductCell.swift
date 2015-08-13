@@ -11,7 +11,7 @@ import PosInCore
 import Haneke
 
 
-class ListProductCell: TableViewCell {
+final class ListProductCell: TableViewCell {
 
     @IBOutlet private weak var productImage: UIImageView!
     @IBOutlet private weak var headerLabel: UILabel!

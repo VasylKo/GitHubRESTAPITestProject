@@ -9,7 +9,7 @@
 import UIImageEffects
 
 
-class SearchTransitioningDelegate: NSObject, UIViewControllerTransitioningDelegate {
+final class SearchTransitioningDelegate: NSObject, UIViewControllerTransitioningDelegate {
     weak var startView: UIView?
     
     func animationControllerForPresentedController(presented: UIViewController, presentingController presenting: UIViewController, sourceController source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
@@ -25,7 +25,7 @@ class SearchTransitioningDelegate: NSObject, UIViewControllerTransitioningDelega
 
 
 
-class SearchAppearanceAnimationController: NSObject,UIViewControllerAnimatedTransitioning {
+final class SearchAppearanceAnimationController: NSObject,UIViewControllerAnimatedTransitioning {
     let transitionDuration: NSTimeInterval = 0.5
     let startFrame: CGRect
     

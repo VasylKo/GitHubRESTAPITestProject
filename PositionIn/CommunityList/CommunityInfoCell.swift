@@ -9,7 +9,7 @@
 import UIKit
 import PosInCore
 
-class CommunityInfoCell: TableViewCell {
+final class CommunityInfoCell: TableViewCell {
     override func setModel(model: TableViewCellModel) {
         let m = model as? TableViewCellInvalidModel
         assert(m != nil, "Invalid model passed")

@@ -10,7 +10,7 @@ import UIKit
 import PosInCore
 
 
-class SellerProfileViewController: UIViewController {
+final class SellerProfileViewController: UIViewController {
     
     @IBOutlet private weak var avatarView: AvatarView!
     @IBOutlet private weak var tableView: UITableView!

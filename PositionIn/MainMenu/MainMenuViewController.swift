@@ -10,9 +10,9 @@ import UIKit
 import PosInCore
 import CleanroomLogger
 
-class MainMenuViewController: UIViewController {
+final class MainMenuViewController: UIViewController {
 
-    @IBOutlet weak var tableView: TableView!
+    @IBOutlet private weak var tableView: TableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()

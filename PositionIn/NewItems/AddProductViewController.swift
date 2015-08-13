@@ -11,7 +11,7 @@ import CleanroomLogger
 import XLForm
 
 
-class AddProductViewController: BaseAddItemViewController {
+final class AddProductViewController: BaseAddItemViewController {
     private enum Tags : String {
         case Title = "Title"
         case Price = "Price"

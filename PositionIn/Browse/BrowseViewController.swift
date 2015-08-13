@@ -18,7 +18,7 @@ protocol BrowseActionConsumer: class {
     func browseController(controller: BrowseActionProducer, didSelectPost post: Post)
 }
 
-class BrowseViewController: BesideMenuViewController {
+final class BrowseViewController: BesideMenuViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,7 +46,7 @@ class BrowseViewController: BesideMenuViewController {
     
     @IBOutlet private weak var contentView: UIView!
     @IBOutlet private weak var addMenu: AddMenuView!
-    @IBOutlet weak var tabbar: BrowseTabbar!
+    @IBOutlet private weak var tabbar: BrowseTabbar!
     
 //MARK: Blur
     

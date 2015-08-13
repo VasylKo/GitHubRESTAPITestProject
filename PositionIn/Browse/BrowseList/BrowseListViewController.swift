@@ -9,7 +9,7 @@
 import UIKit
 import PosInCore
 
-class BrowseListViewController: UIViewController, BrowseActionProducer {
+final class BrowseListViewController: UIViewController, BrowseActionProducer {
 
     override func viewDidLoad() {
         super.viewDidLoad()

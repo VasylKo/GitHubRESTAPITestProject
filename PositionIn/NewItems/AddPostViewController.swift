@@ -11,7 +11,7 @@ import CleanroomLogger
 import XLForm
 
 
-class AddPostViewController: BaseAddItemViewController {
+final class AddPostViewController: BaseAddItemViewController {
     private enum Tags : String {
         case Message = "Message"
         case Community = "Community"

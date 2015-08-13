@@ -9,7 +9,7 @@
 import UIKit
 import PosInCore
 
-class UserListCell: TableViewCell {
+final class UserListCell: TableViewCell {
 
     override func prepareForReuse() {
         super.prepareForReuse()

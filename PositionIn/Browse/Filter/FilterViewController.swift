@@ -10,7 +10,7 @@ import UIKit
 import PosInCore
 import CleanroomLogger
 
-class FilterViewController: UIViewController {
+final class FilterViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

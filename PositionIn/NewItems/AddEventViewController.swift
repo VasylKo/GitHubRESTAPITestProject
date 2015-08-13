@@ -10,7 +10,7 @@ import UIKit
 import XLForm
 import CleanroomLogger
 
-class AddEventViewController: BaseAddItemViewController {
+final class AddEventViewController: BaseAddItemViewController {
 
     private enum Tags : String {
         case Title = "Title"
