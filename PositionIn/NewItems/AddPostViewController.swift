@@ -59,12 +59,5 @@ class AddPostViewController: BaseAddItemViewController {
         self.form = form
     }
     
-
-    //MARK: - Actions -
-    
-    
-
-    
-
     
 }

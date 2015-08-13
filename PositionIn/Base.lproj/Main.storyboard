@@ -36,6 +36,7 @@
                         <segue destination="hew-RE-2CB" kind="custom" identifier="ShowBrowse" customClass="KYEmbedMainControllerSegue" customModule="KYDrawerController" id="h47-6p-FJa"/>
                         <segue destination="Eth-nv-VYE" kind="custom" identifier="ShowMessagesList" customClass="KYEmbedMainControllerSegue" customModule="KYDrawerController" id="dj9-Kt-1RB"/>
                         <segue destination="Oij-7x-Obb" kind="presentation" identifier="ShowFilters" modalTransitionStyle="crossDissolve" id="pmj-Te-KcZ"/>
+                        <segue destination="m7Z-Ea-gJH" kind="custom" identifier="ShowCommunities" customClass="KYEmbedMainControllerSegue" customModule="KYDrawerController" id="wfo-ox-TEa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LQ4-lF-MRq" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -164,6 +165,31 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EFp-4v-aFT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="919" y="1238"/>
+        </scene>
+        <!--Community-->
+        <scene sceneID="4gx-Nw-hq8">
+            <objects>
+                <viewController storyboardIdentifier="CommunityViewController" id="a7d-7X-88d" customClass="CommunityViewController" customModule="PositionIn" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="IpE-oS-kfI"/>
+                        <viewControllerLayoutGuide type="bottom" id="huf-l9-Bkp"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="coB-m4-XRB">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Community" id="IFL-7w-zce">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="UqC-Xw-9tt">
+                            <connections>
+                                <action selector="addCommunityTouched:" destination="a7d-7X-88d" id="xbB-Jo-920"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="o8N-bY-vrv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="914" y="1921"/>
         </scene>
         <!--Search View Controller-->
         <scene sceneID="em1-oT-Uzw">
@@ -624,6 +650,28 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="spd-ov-gak" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="980" y="-90"/>
+        </scene>
+        <!--Community Navigation Controller Scene-->
+        <scene sceneID="dhN-rE-DIK">
+            <objects>
+                <navigationController storyboardIdentifier="CommunityNavigationController" id="m7Z-Ea-gJH" userLabel="Community Navigation Controller Scene" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="WNH-Qo-9Qk">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" red="0.13725490200000001" green="0.4431372549" blue="0.83529411760000005" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="barTintColor" red="0.13725490200000001" green="0.4431372549" blue="0.83529411760000005" alpha="1" colorSpace="calibratedRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="a7d-7X-88d" kind="relationship" relationship="rootViewController" id="Pnl-jS-ZcB"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="c7h-2z-YjG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="246" y="1921"/>
         </scene>
     </scenes>
     <resources>

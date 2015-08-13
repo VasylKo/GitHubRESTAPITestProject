@@ -28,6 +28,10 @@ struct Storyboards {
             return self.storyboard.instantiateViewControllerWithIdentifier("MainMenuViewController") as! MainMenuViewController
         }
 
+        static func instantiateCommunityViewController() -> CommunityViewController! {
+            return self.storyboard.instantiateViewControllerWithIdentifier("CommunityViewController") as! CommunityViewController
+        }
+
         static func instantiateSearchViewController() -> SearchViewController! {
             return self.storyboard.instantiateViewControllerWithIdentifier("SearchViewController") as! SearchViewController
         }
@@ -92,6 +96,10 @@ struct Storyboards {
 
         static func instantiateAddPostViewController() -> AddPostViewController! {
             return self.storyboard.instantiateViewControllerWithIdentifier("AddPostViewController") as! AddPostViewController
+        }
+
+        static func instantiateAddCommunityViewController() -> AddCommunityViewController! {
+            return self.storyboard.instantiateViewControllerWithIdentifier("AddCommunityViewController") as! AddCommunityViewController
         }
 
         static func instantiateAddPromotionViewController() -> AddPromotionViewController! {
@@ -262,6 +270,7 @@ extension SidebarViewController {
         case ShowBrowse = "ShowBrowse"
         case ShowMessagesList = "ShowMessagesList"
         case ShowFilters = "ShowFilters"
+        case ShowCommunities = "ShowCommunities"
 
         var kind: SegueKind? {
             switch (self) {
@@ -273,6 +282,8 @@ extension SidebarViewController {
                 return SegueKind(rawValue: "custom")
             case ShowFilters:
                 return SegueKind(rawValue: "presentation")
+            case ShowCommunities:
+                return SegueKind(rawValue: "custom")
             default:
                 preconditionFailure("Invalid value")
                 break
@@ -298,6 +309,8 @@ extension SidebarViewController {
 //MARK: - MessagesListViewController
 
 //MARK: - FilterViewController
+
+//MARK: - CommunityViewController
 
 //MARK: - SearchViewController
 
@@ -491,6 +504,8 @@ extension LoginViewController {
 //MARK: - AddProductViewController
 
 //MARK: - AddPostViewController
+
+//MARK: - AddCommunityViewController
 
 //MARK: - AddPromotionViewController
 
