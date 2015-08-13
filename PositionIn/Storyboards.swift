@@ -262,7 +262,6 @@ extension SidebarViewController {
         case ShowBrowse = "ShowBrowse"
         case ShowMessagesList = "ShowMessagesList"
         case ShowFilters = "ShowFilters"
-        case ShowCategories = "ShowCategories"
 
         var kind: SegueKind? {
             switch (self) {
@@ -274,8 +273,6 @@ extension SidebarViewController {
                 return SegueKind(rawValue: "custom")
             case ShowFilters:
                 return SegueKind(rawValue: "presentation")
-            case ShowCategories:
-                return SegueKind(rawValue: "custom")
             default:
                 preconditionFailure("Invalid value")
                 break
@@ -301,8 +298,6 @@ extension SidebarViewController {
 //MARK: - MessagesListViewController
 
 //MARK: - FilterViewController
-
-//MARK: - CategoriesViewController
 
 //MARK: - SearchViewController
 

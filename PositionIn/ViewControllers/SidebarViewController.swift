@@ -19,7 +19,6 @@ class SidebarViewController: KYDrawerController {
         case New
         case Messages
         case Filters
-        case Categories
         case Community
         case Wallet
         case UserProfile
@@ -45,8 +44,6 @@ class SidebarViewController: KYDrawerController {
                 return (SidebarViewController.Segue.ShowBrowse, Box(BrowseViewController.DisplayMode.Map, BrowseViewController.BrowseMode.New))
             case .Filters:
                 return (SidebarViewController.Segue.ShowFilters, nil)
-            case .Categories:
-                return (SidebarViewController.Segue.ShowCategories, nil)
             default:
                 return nil
             }
