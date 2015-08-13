@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CommunityViewController: BesideMenuViewController {
+class CommunityListViewController: BesideMenuViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

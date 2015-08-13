@@ -169,7 +169,7 @@
         <!--Community-->
         <scene sceneID="4gx-Nw-hq8">
             <objects>
-                <viewController storyboardIdentifier="CommunityViewController" id="a7d-7X-88d" customClass="CommunityViewController" customModule="PositionIn" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CommunityListViewController" id="a7d-7X-88d" customClass="CommunityListViewController" customModule="PositionIn" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" title="Community" id="IFL-7w-zce">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="UqC-Xw-9tt">
                             <connections>

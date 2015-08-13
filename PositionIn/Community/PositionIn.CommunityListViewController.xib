@@ -4,7 +4,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CommunityViewController" customModule="PositionIn" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CommunityListViewController" customModule="PositionIn" customModuleProvider="target">
             <connections>
                 <outlet property="view" destination="KYN-Bw-xJK" id="FSq-UZ-6ju"/>
             </connections>
@@ -33,7 +33,7 @@
                         <constraint firstAttribute="bottom" secondItem="V6Y-Zk-sdq" secondAttribute="bottom" constant="5" id="SR6-fS-rEj"/>
                     </constraints>
                 </view>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="9ae-G5-ANH">
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="9ae-G5-ANH" customClass="TableView" customModule="PosInCore">
                     <rect key="frame" x="0.0" y="38" width="600" height="562"/>
                     <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                 </tableView>
