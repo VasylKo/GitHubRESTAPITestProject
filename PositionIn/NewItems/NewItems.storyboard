@@ -51,6 +51,53 @@
             </objects>
             <point key="canvasLocation" x="733" y="371"/>
         </scene>
+        <!--New Post-->
+        <scene sceneID="GGy-b4-LSp">
+            <objects>
+                <viewController storyboardIdentifier="AddPostViewController" id="qOY-DZ-FOE" userLabel="New Post" customClass="AddPostViewController" customModule="PositionIn" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="QBC-kK-Ux3"/>
+                        <viewControllerLayoutGuide type="bottom" id="Vet-xK-uNf"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="7Bi-l8-0QH">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="fLX-h7-hea">
+                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="fLX-h7-hea" secondAttribute="trailing" id="0D5-qh-59S"/>
+                            <constraint firstAttribute="bottom" secondItem="fLX-h7-hea" secondAttribute="bottom" id="30q-kj-A52"/>
+                            <constraint firstItem="fLX-h7-hea" firstAttribute="leading" secondItem="7Bi-l8-0QH" secondAttribute="leading" id="8Fu-Sl-Bsr"/>
+                            <constraint firstItem="fLX-h7-hea" firstAttribute="top" secondItem="QBC-kK-Ux3" secondAttribute="bottom" id="KVU-1c-6Rv"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="New Post" id="SqS-4X-I9N">
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="mtS-TP-bWL">
+                            <connections>
+                                <segue destination="Ale-x3-v8m" kind="unwind" unwindAction="prepareForUnwind:" id="qfC-li-TYq"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Post" id="F0j-WI-8AA">
+                            <connections>
+                                <action selector="didTapPost:" destination="qOY-DZ-FOE" id="ZwC-sF-hAv"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outlet property="tableView" destination="fLX-h7-hea" id="eEV-mp-IeG"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dPW-uz-YpO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="Ale-x3-v8m" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="119" y="371"/>
+        </scene>
         <!--New Promotion-->
         <scene sceneID="a6q-c8-Teh">
             <objects>

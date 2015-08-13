@@ -90,12 +90,12 @@ struct Storyboards {
             return self.storyboard.instantiateViewControllerWithIdentifier("AddProductViewController") as! AddProductViewController
         }
 
-        static func instantiateAddPromotionViewController() -> AddPromotionViewController! {
-            return self.storyboard.instantiateViewControllerWithIdentifier("AddPromotionViewController") as! AddPromotionViewController
+        static func instantiateAddPostViewController() -> AddPostViewController! {
+            return self.storyboard.instantiateViewControllerWithIdentifier("AddPostViewController") as! AddPostViewController
         }
 
-        static func instantiateLocationSelectorViewController() -> LocationSelectorViewController! {
-            return self.storyboard.instantiateViewControllerWithIdentifier("LocationSelectorViewController") as! LocationSelectorViewController
+        static func instantiateAddPromotionViewController() -> AddPromotionViewController! {
+            return self.storyboard.instantiateViewControllerWithIdentifier("AddPromotionViewController") as! AddPromotionViewController
         }
 
         static func instantiateAddEventViewController() -> AddEventViewController! {
@@ -273,7 +273,7 @@ extension SidebarViewController {
             case ShowMessagesList:
                 return SegueKind(rawValue: "custom")
             case ShowFilters:
-                return SegueKind(rawValue: "custom")
+                return SegueKind(rawValue: "presentation")
             case ShowCategories:
                 return SegueKind(rawValue: "custom")
             default:
@@ -495,8 +495,8 @@ extension LoginViewController {
 
 //MARK: - AddProductViewController
 
-//MARK: - AddPromotionViewController
+//MARK: - AddPostViewController
 
-//MARK: - LocationSelectorViewController
+//MARK: - AddPromotionViewController
 
 //MARK: - AddEventViewController
