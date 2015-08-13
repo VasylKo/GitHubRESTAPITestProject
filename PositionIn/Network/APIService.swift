@@ -14,6 +14,11 @@ import BrightFutures
 import CleanroomLogger
 
 struct APIService {
+    func session() -> Future<Void ,NSError> {
+        return sessionController.session().map() { _ in
+            return ()
+        }
+    }
     
     func getAll<C: CRUDObject>(endpoint: String) -> Future<CollectionResponse<C>,NSError> {
         return sessionController.session().flatMap {

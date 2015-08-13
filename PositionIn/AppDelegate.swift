@@ -92,12 +92,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             sidebarViewController.executeAction(defaultAction)
         }
         
-        return true
+
         
         //        let username = "ios-777@bekitzur.com"
         //        let password = "pwd"
         //        api.createProfile(username: username, password: password);
         //        return true
+        
+
+        api.session().onSuccess {
+            self.runProfileAPI()
+        }.onFailure { error in
+                Log.error?.value(error)
+        }
+        
+        return true
         
         api.sessionController.session().recoverWith { [unowned self]
             (error: NSError) -> Future<APIService.AuthResponse.Token ,NSError>  in
@@ -112,6 +121,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }.onFailure { error in
                 Log.error?.value(error)
         }
+        
+        return true
         
         self.chatClient.auth("ixmpp@beewellapp.com", password: "1HateD0m2").future().onSuccess { [unowned self] in
             Log.info?.message("XMPP authorized")
