@@ -11,9 +11,15 @@ import CleanroomLogger
 
 struct UserProfile: CRUDObject {
     private(set) var objectId: CRUDObjectId
-    var firstName: NSString?
-    var middleName: NSString?
-    var lastName: NSString?
+    var firstName: String?
+    var middleName: String?
+    var lastName: String?
+    var userDescription: String?
+//    "gender": <gender enum>
+//    "dob": <date>,
+    var phone: String?
+    var avatar: String?
+    var backgroundImage: String?
     var location: Location?
     
     init?(_ map: Map) {
@@ -34,6 +40,10 @@ struct UserProfile: CRUDObject {
         firstName <- map["firstName"]
         middleName <- map["middleName"]
         lastName <- map["lastName"]
+        userDescription <- map["description"]
+        phone <- map["phone"]
+        avatar <- map["avatar"]
+        backgroundImage <- map["background"]
         location <- map["location"]
     }
     

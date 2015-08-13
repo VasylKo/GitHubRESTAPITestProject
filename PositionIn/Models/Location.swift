@@ -8,21 +8,22 @@
 
 import CleanroomLogger
 import ObjectMapper
+import CoreLocation
 
 struct Location: Mappable, Printable {
-    private(set) var x: Double!
-    private(set) var y: Double!
-    private(set) var street1: String?
-    private(set) var street2: String?
-    private(set) var country: String?
-    private(set) var state: String?
-    private(set) var city: String?
-    private(set) var zip: String?
+    private(set) var objectId: CRUDObjectId
+    var coordinates: CLLocationCoordinate2D!
+    var street1: String?
+    var street2: String?
+    var country: String?
+    var state: String?
+    var city: String?
+    var zip: String?
     
     
     init?(_ map: Map) {
         mapping(map)
-        switch (x, y) {
+        switch (objectId, coordinates) {
         case (.Some, .Some):
             break
         default:
@@ -34,18 +35,29 @@ struct Location: Mappable, Printable {
     }
     
     mutating func mapping(map: Map) {
-        x <- map["x"]
-        y <- map["y"]
+        let coordinatesTransform = TransformOf<CLLocationCoordinate2D,NSArray>(fromJSON: { (array: NSArray?) -> CLLocationCoordinate2D? in
+            if let array = array as? [Double] where count(array) == 2 {
+                return CLLocationCoordinate2D(latitude: array.first!, longitude: array.last!)
+            }
+            return nil
+            }, toJSON: { coord in
+                if let coord = coord {
+                    return [coord.latitude, coord.longitude]
+                }
+                return nil
+                
+        })
         street1 <- map["street1"]
         street2 <- map["street2"]
         country <- map["country"]
         state <- map["state"]
         city <- map["city"]
         zip <- map["zip"]
+        coordinates <- (map["coordinates"], coordinatesTransform)
     }
     
     var description: String {
-        return "<\(self.dynamicType):\(x),\(y)>"
+        return "<\(self.dynamicType):\(coordinates.latitude),\(coordinates.longitude)>"
     }
 
 }
