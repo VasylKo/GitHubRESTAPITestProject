@@ -2,10 +2,12 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CommunityListViewController" customModule="PositionIn" customModuleProvider="target">
             <connections>
+                <outlet property="tableView" destination="9ae-G5-ANH" id="8Uf-O9-fvG"/>
                 <outlet property="view" destination="KYN-Bw-xJK" id="FSq-UZ-6ju"/>
             </connections>
         </placeholder>
@@ -34,20 +36,28 @@
                     </constraints>
                 </view>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="9ae-G5-ANH" customClass="TableView" customModule="PosInCore">
-                    <rect key="frame" x="0.0" y="38" width="600" height="562"/>
+                    <rect key="frame" x="13" y="38" width="574" height="562"/>
                     <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                 </tableView>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803915" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="9ae-G5-ANH" secondAttribute="bottom" id="1Tw-h5-fhi"/>
                 <constraint firstItem="9ae-G5-ANH" firstAttribute="leading" secondItem="KYN-Bw-xJK" secondAttribute="leading" id="9kM-ms-Jbj"/>
                 <constraint firstAttribute="trailing" secondItem="5fc-CC-Rc6" secondAttribute="trailing" id="G8Y-38-92M"/>
                 <constraint firstItem="5fc-CC-Rc6" firstAttribute="top" secondItem="KYN-Bw-xJK" secondAttribute="top" id="MEr-ee-XeH"/>
                 <constraint firstAttribute="trailing" secondItem="9ae-G5-ANH" secondAttribute="trailing" id="Xd7-Kf-krd"/>
+                <constraint firstAttribute="trailingMargin" secondItem="9ae-G5-ANH" secondAttribute="trailing" constant="5" id="avc-Kt-qeQ"/>
                 <constraint firstItem="9ae-G5-ANH" firstAttribute="top" secondItem="5fc-CC-Rc6" secondAttribute="bottom" id="cDy-Om-kck"/>
+                <constraint firstItem="9ae-G5-ANH" firstAttribute="leading" secondItem="KYN-Bw-xJK" secondAttribute="leadingMargin" constant="5" id="hEW-UJ-1kw"/>
                 <constraint firstItem="5fc-CC-Rc6" firstAttribute="leading" secondItem="KYN-Bw-xJK" secondAttribute="leading" id="hcg-WE-pfG"/>
             </constraints>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="9kM-ms-Jbj"/>
+                    <exclude reference="Xd7-Kf-krd"/>
+                </mask>
+            </variation>
             <point key="canvasLocation" x="272" y="265"/>
         </view>
     </objects>

@@ -11,6 +11,11 @@ import Foundation
 public protocol TableViewCellModel {
 }
 
+public struct  TableViewCellInvalidModel: TableViewCellModel {
+    public init() {
+    }    
+}
+
 public struct TableViewCellTextModel: TableViewCellModel {
     public let title: String
     
