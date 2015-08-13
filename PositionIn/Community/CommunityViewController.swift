@@ -25,6 +25,10 @@ class CommunityViewController: BesideMenuViewController {
         navigationController?.pushViewController(Storyboards.NewItems.instantiateAddCommunityViewController(), animated: true)
     }
 
+    @IBAction func prepareForUnwind(segue: UIStoryboardSegue) {
+        
+    }
+
     /*
     // MARK: - Navigation
 
