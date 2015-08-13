@@ -15,9 +15,26 @@ class BrowseListViewController: UIViewController, BrowseActionProducer {
         super.viewDidLoad()
         dataSource.configureTable(tableView)
     }
+    
+    var filter: Filter = .All {
+        didSet {
+            tableView?.reloadData()
+        }
+    }
+    
+    enum Filter: Int {
+        case All = 0
+        case Products
+        case Events
+        case Promotions
+        case Posts
+    }
 
     
     @IBAction func displayModeSegmentedControlChanged(sender: UISegmentedControl) {
+        if let newFilterValue = Filter(rawValue: sender.selectedSegmentIndex) {
+            filter = newFilterValue
+        }
     }
     
     private lazy var dataSource: ProductListDataSource = {
