@@ -10,16 +10,9 @@ import UIKit
 import XLForm
 import CleanroomLogger
 
-class AddEventViewController: XLFormViewController {
+class AddEventViewController: BaseAddItemViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-    }
     
-    @IBAction func didTapPost(sender: AnyObject) {
-        Log.debug?.message("Should post")
-    }
     
 
 }
