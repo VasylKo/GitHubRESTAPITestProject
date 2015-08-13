@@ -10,8 +10,6 @@ import UIKit
 import CleanroomLogger
 import XLForm
 
-import CoreLocation
-
 
 class AddProductViewController: BaseAddItemViewController {
     private enum Tags : String {
@@ -57,7 +55,7 @@ class AddProductViewController: BaseAddItemViewController {
         let categoryRow = categoryRowDescriptor(Tags.Category.rawValue)
         infoSection.addFormRow(categoryRow)
         // Location
-        let locationRow = locationRowDescriptor(Tags.Location.rawValue, location: CLLocation(latitude: -33, longitude: -56))
+        let locationRow = locationRowDescriptor(Tags.Location.rawValue)
         infoSection.addFormRow(locationRow)
 
         // Community
@@ -84,8 +82,6 @@ class AddProductViewController: BaseAddItemViewController {
         let endDate = XLFormRowDescriptor(tag: Tags.EndDate.rawValue, rowType: XLFormRowDescriptorTypeDateTimeInline, title: NSLocalizedString("End date", comment: "New product: End date"))
         endDate.value = NSDate(timeIntervalSinceNow: 60*60*25)
         datesSection.addFormRow(endDate)
-
-        
         
         self.form = form
     }

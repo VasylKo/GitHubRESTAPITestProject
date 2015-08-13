@@ -23,12 +23,12 @@ class BaseAddItemViewController: XLFormViewController {
     var maximumSelectedImages: Int = 2
 
     
-    func locationRowDescriptor(tag: String, location: CLLocation) -> XLFormRowDescriptor {
+    func locationRowDescriptor(tag: String, location: CLLocation? = nil) -> XLFormRowDescriptor {
         let locationRow = XLFormRowDescriptor(tag: tag, rowType: XLFormRowDescriptorTypeSelectorPush, title: NSLocalizedString("Location", comment: "New item: location"))
         locationRow.action.formSegueClass = NSClassFromString("UIStoryboardPushSegue")
         locationRow.action.viewControllerClass = LocationSelectorViewController.self
         locationRow.valueTransformer = CLLocationValueTrasformer.self
-        locationRow.value = location
+        locationRow.value = location ?? CLLocation(latitude: -33, longitude: -56)
         return locationRow
     }
     
