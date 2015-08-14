@@ -16,7 +16,7 @@ final class MainMenuViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        dataSource.items = defaultMainMenuItems()
+        dataSource.items = menuItemsForUser(nil)
         dataSource.configureTable(tableView)
         subscribeToNotifications()
     }
@@ -26,11 +26,24 @@ final class MainMenuViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    private func menuItemsForUser(user: UserProfile?) -> [MainMenuItem] {
+        let firstItem: MainMenuItem =  user.map { user in
+            let title: String
+            switch (user.firstName, user.lastName) {
+            case (.Some, .Some):
+                title = "\(user.firstName!) \(user.lastName!)"
+            default:
+                title = NSLocalizedString("Unknown", comment: "Main Menu: Unnamed user")
+            }
+            return MainMenuItem(title: title, imageName: "https://pbs.twimg.com/profile_images/3255786215/509fd5bc902d71141990920bf207edea.jpeg", action: .UserProfile)
+        } ?? MainMenuItem(title: NSLocalizedString("Login", comment: "Main Menu: Login"), imageName: "MainMenuUserProfile", action: .Login)
+
+        return [firstItem] + defaultMainMenuItems()
+    }
     
     private func defaultMainMenuItems() -> [MainMenuItem] {
         //TODO: refactor
         return [
-            MainMenuItem(title: "Username", imageName: "https://pbs.twimg.com/profile_images/3255786215/509fd5bc902d71141990920bf207edea.jpeg", action: .Login),
             MainMenuItem(title: NSLocalizedString("For You", comment: "Main Menu: For You"), imageName: "MainMenuForYou", action: .ForYou),
             MainMenuItem(title: NSLocalizedString("New", comment: "Main Menu: new"), imageName: "MainMenuNew", action: .New),
             MainMenuItem(title: NSLocalizedString("Messages", comment: "Main Menu: Messages"), imageName: "MainMenuMessages", action: .Messages),
@@ -52,7 +65,7 @@ final class MainMenuViewController: UIViewController {
     }
     
     private func subscribeToNotifications(){
-        let block: NSNotification! -> Void = { [weak self] notification in
+        let browseModeBlock: NSNotification! -> Void = { [weak self] notification in
             if  let menuController = self,
                 let browseController = notification.object as? BrowseViewController,
                 let action = menuController.actionForMode(browseController.browseMode) {
@@ -70,14 +83,33 @@ final class MainMenuViewController: UIViewController {
             BrowseViewController.BrowseModeDidchangeNotification,
             object: nil,
             queue: nil,
-            usingBlock: block
+            usingBlock: browseModeBlock
         )
+        
+        let userChangeBlock: NSNotification! -> Void = { [weak self] notification in
+            let newProfile = notification.object as? UserProfile
+            dispatch_async(dispatch_get_main_queue()) {
+                if let menuController = self {
+                    menuController.dataSource.items = menuController.menuItemsForUser(newProfile)
+                    menuController.tableView.reloadData()
+                }
+            }
+        }
+        
+        userDidChangeNotification = NSNotificationCenter.defaultCenter().addObserverForName(
+            UserProfile.CurrentUserDidChangeNotification,
+            object: nil,
+            queue: nil,
+            usingBlock: userChangeBlock)
     }
     
+    
     private var browseModeUpdateObserver: NSObjectProtocol!
+    private var userDidChangeNotification: NSObjectProtocol!
     
     deinit {
         NSNotificationCenter.defaultCenter().removeObserver(browseModeUpdateObserver)
+        NSNotificationCenter.defaultCenter().removeObserver(userDidChangeNotification)
     }
     
     

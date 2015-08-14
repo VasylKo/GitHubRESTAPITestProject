@@ -9,7 +9,7 @@
 import ObjectMapper
 import CleanroomLogger
 
-struct UserProfile: CRUDObject {
+final class UserProfile: CRUDObject {
     var objectId: CRUDObjectId = CRUDObjectInvalidId
     var firstName: String?
     var middleName: String?
@@ -32,7 +32,7 @@ struct UserProfile: CRUDObject {
         }
     }
     
-    mutating func mapping(map: Map) {
+    func mapping(map: Map) {
         objectId <- (map["id"], CRUDObjectIdTransform())
         firstName <- map["firstName"]
         middleName <- map["middleName"]
@@ -55,5 +55,6 @@ struct UserProfile: CRUDObject {
     var description: String {
         return "<\(self.dynamicType):\(objectId)>"
     }
-    
+ 
+    static let CurrentUserDidChangeNotification = "CurrentUserDidChangeNotification"
 }

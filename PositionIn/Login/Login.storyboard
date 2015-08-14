@@ -32,7 +32,7 @@
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bpc-bC-u3L">
                                                 <rect key="frame" x="0.0" y="108" width="540" height="30"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                                             </textField>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SRk-Dj-WEV">
                                                 <rect key="frame" x="0.0" y="146" width="540" height="30"/>
@@ -142,7 +142,9 @@
                     </view>
                     <connections>
                         <outlet property="loginButton" destination="VmY-gq-ys2" id="KSa-0A-YNl"/>
+                        <outlet property="passwordTextField" destination="SRk-Dj-WEV" id="5cI-Yu-VC2"/>
                         <outlet property="scrollView" destination="BT1-Fz-1Vn" id="gSU-PC-wBM"/>
+                        <outlet property="usernameTextField" destination="bpc-bC-u3L" id="H26-8M-EdK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Z3I-kB-SGj" userLabel="First Responder" sceneMemberID="firstResponder"/>

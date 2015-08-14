@@ -100,6 +100,9 @@ extension UIViewController {
         if let sideBar = searchSideBarController(self.navigationController) {
             return sideBar
         }
+        if let sideBar = searchSideBarController(self.presentingViewController) {
+            return sideBar
+        }
         return searchSideBarController(self)
     }
     

@@ -22,7 +22,10 @@ extension APIService {
     }
     
     func logout() -> Future<Void, NoError> {
-        return sessionController.logout()
+        return sessionController.logout().onComplete { _ in
+            NSNotificationCenter.defaultCenter().postNotificationName(UserProfile.CurrentUserDidChangeNotification,
+                object: nil, userInfo: nil)
+        }
     }
     
     func auth(#username: String, password: String) -> Future<UserProfile, NSError> {

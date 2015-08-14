@@ -9,7 +9,6 @@
 import Foundation
 import ObjectMapper
 
-//TODO: refactor CRUDObjectId
 typealias CRUDObjectId = String
 let CRUDObjectInvalidId: CRUDObjectId = ""
 

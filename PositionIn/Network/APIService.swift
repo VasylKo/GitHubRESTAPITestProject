@@ -20,7 +20,12 @@ struct APIService {
             (token: AuthResponse.Token) -> Future<UserProfile,NSError> in
             let request = self.readRequest(token, endpoint: UserProfile.myProfileEndpoint())
             let (_ , future): (Alamofire.Request, Future<UserProfile,NSError>) = self.dataProvider.objectRequest(request)
-            return future
+            return future.andThen { result in
+                if let profile = result.value {
+                    NSNotificationCenter.defaultCenter().postNotificationName(UserProfile.CurrentUserDidChangeNotification,
+                        object: profile, userInfo: nil)
+                }
+            }
             
         }
     }

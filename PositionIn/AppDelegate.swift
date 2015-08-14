@@ -50,64 +50,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     
-    func runProfileAPI() {
-        var myProfileId = CRUDObjectInvalidId
-        api.getMyProfile().flatMap { (profile: UserProfile) -> Future<Void,NSError> in
-            myProfileId = profile.objectId
-            var newProfile = profile
-            newProfile.firstName = "Alex"
-            newProfile.middleName = "The"
-            newProfile.lastName = "Great"
-            newProfile.userDescription = "User description"
-            newProfile.phone = "911"
-            newProfile.avatar = NSURL(string:"https://pbs.twimg.com/profile_images/3255786215/509fd5bc902d71141990920bf207edea.jpeg")!
-            return self.api.updateMyProfile(newProfile)
-        }.flatMap { ( _: Void ) -> Future<UserProfile,NSError> in
-                return self.api.get(myProfileId)
-        }.onSuccess { profile in
-            Log.info?.value(profile)
-            self.runPostsAPI(profile)
-        }.onFailure { error in
-            Log.error?.value(error)
-        }
-    }
-    
-    func runPostsAPI(user: UserProfile) {
-        self.api.getUserPosts(user.objectId, page: APIService.Page())
-        .flatMap { (response) -> Future<Post, NSError> in
-            var post = Post(objectId: CRUDObjectInvalidId)
-            post.name = "Cool post"
-            post.text = "Big Post text"
-            return self.api.createUserPost(user.objectId, post: post)
-        }.flatMap { (_: Post) -> Future<CollectionResponse<FeedItem>,NSError> in
-            return self.api.getFeed(APIService.Page())
 
-        }.onSuccess { response in
-            Log.info?.value(response.items)
-        }.onFailure { error in
-           Log.error?.value(error)
-        }
-
-//            .onSuccess { post in
-//            Log.debug?.value(post)
-//        }.onFailure { error in
-//           Log.error?.value(error)
-//        }
-    }
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
-        if let sidebarViewController = window?.rootViewController as? SidebarViewController {
-            let defaultAction: SidebarViewController.Action = .ForYou
-            sidebarViewController.executeAction(defaultAction)
+        api.getMyProfile().onComplete { result in
+            let defaultAction: SidebarViewController.Action
+            if let profile = result.value {
+                defaultAction = .ForYou
+            } else {
+                defaultAction = .Login
+            }
+            if let sidebarViewController = self.window?.rootViewController as? SidebarViewController {
+                sidebarViewController.executeAction(defaultAction)
+            }
         }
         
-
+        return true
         
-//                let username = "ios-777@bekitzur.com"
-//                let password = "pwd"
-//                api.createProfile(username: username, password: password);
-//                return true
         
 //        api.logout()
 //        return  true
@@ -121,7 +81,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }.onSuccess { [unowned self] _  in
             Log.debug?.message("Session ok")
-//            self.runProfileAPI()
         }.onFailure { [unowned self] error in
             Log.error?.value(error)
         }
