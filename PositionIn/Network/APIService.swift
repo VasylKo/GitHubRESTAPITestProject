@@ -49,10 +49,10 @@ struct APIService {
         }
     }
     
-    func get<C: CRUDObject>(objectID: CRUDObjectId?) -> Future<C, NSError> {
+    func get<C: CRUDObject>(objectID: CRUDObjectId) -> Future<C, NSError> {
         return sessionController.session().flatMap {
             (token: AuthResponse.Token) -> Future<C, NSError> in
-            let request = self.crudRequest(token, endpoint: C.endpoint().stringByAppendingPathComponent(objectID ?? ""), method: .GET, params: nil)
+            let request = self.crudRequest(token, endpoint: C.endpoint().stringByAppendingPathComponent(objectID), method: .GET, params: nil)
             let (_ , future): (Alamofire.Request, Future<C, NSError>) = self.dataProvider.objectRequest(request)
             return future
         }
@@ -146,4 +146,19 @@ struct APIService {
     internal let dataProvider: NetworkDataProvider
     internal let sessionController: SessionController
     
+}
+
+extension APIService {
+    struct Page {
+        let skip: Int
+        let take: Int
+        init(size:Int, start: Int = 0) {
+            skip = start
+            take = size
+        }
+        
+        func next() -> Page {
+            return Page(size: take, start: skip + take)
+        }
+    }
 }

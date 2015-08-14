@@ -51,7 +51,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     
     func runProfileAPI() {
+        var myProfileId = CRUDObjectInvalidId
         api.getMyProfile().flatMap { (profile: UserProfile) -> Future<Void,NSError> in
+            myProfileId = profile.objectId
             var newProfile = profile
             newProfile.firstName = "Alex"
             newProfile.middleName = "The"
@@ -61,7 +63,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             newProfile.avatar = "https://pbs.twimg.com/profile_images/3255786215/509fd5bc902d71141990920bf207edea.jpeg"
             return self.api.updateMyProfile(newProfile)
         }.flatMap { ( _: Void ) -> Future<UserProfile,NSError> in
-                return self.api.getMyProfile()
+                return self.api.get(myProfileId)
         }.onSuccess { profile in
             Log.info?.value(profile)
             self.runPostsAPI(profile)
