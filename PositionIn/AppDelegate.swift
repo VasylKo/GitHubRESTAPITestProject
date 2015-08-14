@@ -51,14 +51,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     
     func runProfileAPI() {
-        api.get(nil).flatMap { (profile: UserProfile) -> Future<Void,NSError> in
+        var myProfileId = CRUDObjectInvalidId
+        api.getMyProfile().flatMap { (profile: UserProfile) -> Future<Void,NSError> in
+            myProfileId = profile.objectId
             var newProfile = profile
             newProfile.firstName = "Alex"
             newProfile.middleName = "The"
             newProfile.lastName = "Great"
-            return self.api.update(newProfile)
+            newProfile.userDescription = "User description"
+            newProfile.phone = "911"
+            newProfile.avatar = "https://pbs.twimg.com/profile_images/3255786215/509fd5bc902d71141990920bf207edea.jpeg"
+            return self.api.updateMyProfile(newProfile)
         }.flatMap { ( _: Void ) -> Future<UserProfile,NSError> in
-                return self.api.get(nil)
+                return self.api.get(myProfileId)
         }.onSuccess { profile in
             Log.info?.value(profile)
             self.runPostsAPI(profile)
@@ -68,20 +73,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func runPostsAPI(user: UserProfile) {
-        var post = Post(objectId: CRUDObjectInvalidId)
-        post.name = "Cool post"
-        post.text = "Big Post text"
-        
-        api.post(post).flatMap { (post: Post) -> Future<Void, NSError> in
-            var updatedPost = post
-            updatedPost.name = "Updated post"
-            return self.api.update(post)
-        }.flatMap { ( _: Void ) -> Future<CollectionResponse<Post>, NSError> in
-            return self.api.getAll(Post.allEndpoint(user.objectId))
-        }.onSuccess { response in
-            Log.info?.value(response.items)
+        self.api.getUserPosts(user.objectId, page: APIService.Page())
+//        CollectionResponse<Post>
+            .flatMap { (response) -> Future<Post, NSError> in
+            var post = Post(objectId: CRUDObjectInvalidId)
+            post.name = "Cool post"
+            post.text = "Big Post text"
+            return self.api.createUserPost(user.objectId, post: post)
+        }.onSuccess { post in
+            Log.debug?.value(post)
         }.onFailure { error in
-            Log.error?.value(error)
+           Log.error?.value(error)
         }
     }
     
@@ -92,26 +94,32 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             sidebarViewController.executeAction(defaultAction)
         }
         
-        return true
+
         
-        //        let username = "ios-777@bekitzur.com"
-        //        let password = "pwd"
-        //        api.createProfile(username: username, password: password);
-        //        return true
+//                let username = "ios-777@bekitzur.com"
+//                let password = "pwd"
+//                api.createProfile(username: username, password: password);
+//                return true
         
-        api.sessionController.session().recoverWith { [unowned self]
-            (error: NSError) -> Future<APIService.AuthResponse.Token ,NSError>  in
+
+        api.session().recoverWith { [unowned self]
+            (error: NSError) -> Future<Void ,NSError>  in
             Log.error?.value(error)
             let username = "ios-777@bekitzur.com"
             let password = "pwd"
             return self.api.auth(username: username, password: password).map { response in
-                return response.accessToken
+                return ()
             }
-            }.onSuccess { _ in
-                self.runProfileAPI()
-            }.onFailure { error in
-                Log.error?.value(error)
+        }.onSuccess { [unowned self] _  in
+            Log.debug?.message("Session ok")
+            self.runProfileAPI()
+        }.onFailure { [unowned self] error in
+            Log.error?.value(error)
         }
+        
+  
+        
+        return true
         
         self.chatClient.auth("ixmpp@beewellapp.com", password: "1HateD0m2").future().onSuccess { [unowned self] in
             Log.info?.message("XMPP authorized")
