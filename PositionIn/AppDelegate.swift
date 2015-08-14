@@ -74,17 +74,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func runPostsAPI(user: UserProfile) {
         self.api.getUserPosts(user.objectId, page: APIService.Page())
-//        CollectionResponse<Post>
-            .flatMap { (response) -> Future<Post, NSError> in
+        .flatMap { (response) -> Future<Post, NSError> in
             var post = Post(objectId: CRUDObjectInvalidId)
             post.name = "Cool post"
             post.text = "Big Post text"
             return self.api.createUserPost(user.objectId, post: post)
-        }.onSuccess { post in
-            Log.debug?.value(post)
+        }.flatMap { (_: Post) -> Future<CollectionResponse<FeedItem>,NSError> in
+            return self.api.getFeed(APIService.Page())
+
+        }.onSuccess { response in
+            Log.info?.value(response.items)
         }.onFailure { error in
            Log.error?.value(error)
         }
+
+//            .onSuccess { post in
+//            Log.debug?.value(post)
+//        }.onFailure { error in
+//           Log.error?.value(error)
+//        }
     }
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {

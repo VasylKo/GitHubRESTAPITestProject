@@ -40,11 +40,12 @@ struct APIService {
         }
     }
     
+    
     func getUserPosts(userId: CRUDObjectId, page: Page) -> Future<CollectionResponse<Post>,NSError> {
         return sessionController.session().flatMap {
             (token: AuthResponse.Token) -> Future<CollectionResponse<Post>, NSError> in
             let endpoint = Post.userPostsEndpoint(userId)
-            let params = page.value
+            let params = page.query
             let request = self.readRequest(token, endpoint: endpoint, params: params)
             let (_ , future): (Alamofire.Request, Future<CollectionResponse<Post>, NSError>) = self.dataProvider.objectRequest(request)
             return future
@@ -66,6 +67,17 @@ struct APIService {
         }
     }
     
+    func getFeed(params: APIServiceQueryConvertible) -> Future<CollectionResponse<FeedItem>,NSError> {
+        return sessionController.session().flatMap {
+            (token: AuthResponse.Token) -> Future<CollectionResponse<FeedItem>, NSError> in
+            let request = self.readRequest(token, endpoint: FeedItem.endpoint(), params: params.query)
+            let (_ , future): (Alamofire.Request, Future<CollectionResponse<FeedItem>, NSError>) = self.dataProvider.objectRequest(request)
+            return future
+        }
+
+    }
+    
+    
     //TODO: check usage
     func getAll<C: CRUDObject>(endpoint: String) -> Future<CollectionResponse<C>, NSError> {
         return sessionController.session().flatMap {
@@ -77,6 +89,7 @@ struct APIService {
         }
     }
     
+    //TODO: check usage
     func get<C: CRUDObject>(objectID: CRUDObjectId) -> Future<C, NSError> {
         return sessionController.session().flatMap {
             (token: AuthResponse.Token) -> Future<C, NSError> in
@@ -86,6 +99,7 @@ struct APIService {
         }
     }
     
+    //TODO: check usage
     func update<C: CRUDObject>(object: C) -> Future<Void,NSError> {
         return sessionController.session().flatMap {
             (token: AuthResponse.Token) -> Future<Void,NSError> in
@@ -221,8 +235,26 @@ extension APIService {
     }
 }
 
+protocol APIServiceQueryConvertible {
+    var query: [String : AnyObject]  { get }
+}
+
+final class APIServiceQuery: APIServiceQueryConvertible {
+    private var values: [String : AnyObject] = [:]
+
+    func append(query newItems:APIServiceQueryConvertible) {
+        for (key,value) in newItems.query {
+            values.updateValue(value, forKey:key)
+        }
+    }
+    
+    var query: [String : AnyObject]  {
+        return values
+    }
+}
+
 extension APIService {
-    struct Page {
+    struct Page: APIServiceQueryConvertible {
         let skip: Int
         let take: Int
         init(start: Int = 0, size: Int = 20) {
@@ -234,7 +266,7 @@ extension APIService {
             return Page(size: take, start: skip + take)
         }
         
-        var value: [String : AnyObject]  {
+        var query: [String : AnyObject]  {
             return [
                 "skip" : skip,
                 "take" : take,
