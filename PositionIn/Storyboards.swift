@@ -47,6 +47,10 @@ struct Storyboards {
         static func instantiateMapViewController() -> BrowseViewController! {
             return self.storyboard.instantiateViewControllerWithIdentifier("MapViewController") as! BrowseViewController
         }
+
+        static func instantiateSettingsViewController() -> SettingsViewController! {
+            return self.storyboard.instantiateViewControllerWithIdentifier("SettingsViewController") as! SettingsViewController
+        }
     }
 
     struct Login {
@@ -271,6 +275,7 @@ extension SidebarViewController {
         case ShowMessagesList = "ShowMessagesList"
         case ShowFilters = "ShowFilters"
         case ShowCommunities = "ShowCommunities"
+        case ShowSettings = "ShowSettings"
 
         var kind: SegueKind? {
             switch (self) {
@@ -283,6 +288,8 @@ extension SidebarViewController {
             case ShowFilters:
                 return SegueKind(rawValue: "presentation")
             case ShowCommunities:
+                return SegueKind(rawValue: "custom")
+            case ShowSettings:
                 return SegueKind(rawValue: "custom")
             default:
                 preconditionFailure("Invalid value")
@@ -450,6 +457,8 @@ extension BrowseViewController {
     }
 
 }
+
+//MARK: - SettingsViewController
 
 //MARK: - LoginViewController
 extension UIStoryboardSegue {

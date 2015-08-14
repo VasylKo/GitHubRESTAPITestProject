@@ -37,6 +37,7 @@
                         <segue destination="Eth-nv-VYE" kind="custom" identifier="ShowMessagesList" customClass="KYEmbedMainControllerSegue" customModule="KYDrawerController" id="dj9-Kt-1RB"/>
                         <segue destination="Oij-7x-Obb" kind="presentation" identifier="ShowFilters" modalTransitionStyle="crossDissolve" id="pmj-Te-KcZ"/>
                         <segue destination="m7Z-Ea-gJH" kind="custom" identifier="ShowCommunities" customClass="KYEmbedMainControllerSegue" customModule="KYDrawerController" id="wfo-ox-TEa"/>
+                        <segue destination="R25-sL-Pvy" kind="custom" identifier="ShowSettings" customClass="KYEmbedMainControllerSegue" customModule="KYDrawerController" id="uSD-ON-chU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LQ4-lF-MRq" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -663,6 +664,63 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="c7h-2z-YjG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="246" y="1921"/>
+        </scene>
+        <!--Settings Navigation Controller Scene-->
+        <scene sceneID="Fp0-Ay-3lu">
+            <objects>
+                <navigationController storyboardIdentifier="SettingsNavigationController" id="R25-sL-Pvy" userLabel="Settings Navigation Controller Scene" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="GuH-RF-B9V">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" red="0.13725490200000001" green="0.4431372549" blue="0.83529411760000005" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="barTintColor" red="0.13725490200000001" green="0.4431372549" blue="0.83529411760000005" alpha="1" colorSpace="calibratedRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="BLF-bw-Lcw" kind="relationship" relationship="rootViewController" id="oml-JK-oLj"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jGr-Ze-Vb7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-970" y="329"/>
+        </scene>
+        <!--Settings-->
+        <scene sceneID="Pme-xu-DE1">
+            <objects>
+                <viewController storyboardIdentifier="SettingsViewController" id="BLF-bw-Lcw" customClass="SettingsViewController" customModule="PositionIn" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="B1s-Nz-ayc"/>
+                        <viewControllerLayoutGuide type="bottom" id="nRo-2U-OMz"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="IcZ-Qf-ALt">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8cE-G8-MVg">
+                                <rect key="frame" x="273.5" y="252" width="53" height="32"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                <state key="normal" title="Logout">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="logoutTouched:" destination="BLF-bw-Lcw" eventType="touchUpInside" id="v1c-TG-YP5"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="centerY" secondItem="8cE-G8-MVg" secondAttribute="centerY" id="tk4-hY-tyA"/>
+                            <constraint firstAttribute="centerX" secondItem="8cE-G8-MVg" secondAttribute="centerX" id="vum-co-eB8"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Settings" id="FcZ-fa-4Bo"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZRn-8Z-5zo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-959" y="1105"/>
         </scene>
     </scenes>
     <resources>

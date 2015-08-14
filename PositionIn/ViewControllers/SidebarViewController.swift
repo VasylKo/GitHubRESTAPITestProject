@@ -46,6 +46,8 @@ class SidebarViewController: KYDrawerController {
                 return (SidebarViewController.Segue.ShowFilters, nil)
             case .Community:
                 return (SidebarViewController.Segue.ShowCommunities, nil)
+            case .Settings:
+                return (SidebarViewController.Segue.ShowSettings, nil)
             default:
                 return nil
             }

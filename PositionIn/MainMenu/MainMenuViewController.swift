@@ -51,7 +51,7 @@ final class MainMenuViewController: UIViewController {
             MainMenuItem(title: NSLocalizedString("Community", comment: "Main Menu: Community"), imageName: "MainMenuCommunity", action: .Community),
             MainMenuItem(title: NSLocalizedString("People", comment: "Main Menu: People"), imageName: "MainMenuCommunity"),            
             MainMenuItem(title: NSLocalizedString("Wallet", comment: "Main Menu: Wallet"), imageName: "MainMenuWallet"),
-            MainMenuItem(title: NSLocalizedString("Settings", comment: "Main Menu: Settings"), imageName: "MainMenuSettings"),
+            MainMenuItem(title: NSLocalizedString("Settings", comment: "Main Menu: Settings"), imageName: "MainMenuSettings", action: .Settings),
         ]
     }
     

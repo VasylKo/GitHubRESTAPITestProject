@@ -45,6 +45,7 @@
 /* Begin PBXBuildFile section */
 		451B04D684C5CB71F3D6581C /* Pods_PositionIn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7CE5A186774ECEB07E96F58 /* Pods_PositionIn.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		E61B20D51B7DD47C005EAB2C /* FeedItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61B20D41B7DD47C005EAB2C /* FeedItem.swift */; };
+		E61B20D81B7E0838005EAB2C /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61B20D71B7E0838005EAB2C /* SettingsViewController.swift */; };
 		E62B16F51B5C1AA700D446BC /* PositionIn.MainMenuUserCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E62B16F31B5C1AA700D446BC /* PositionIn.MainMenuUserCell.xib */; };
 		E62B16F61B5C1AA700D446BC /* MainMenuUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E62B16F41B5C1AA700D446BC /* MainMenuUserCell.swift */; };
 		E62B16F81B5C6BBF00D446BC /* AvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E62B16F71B5C6BBF00D446BC /* AvatarView.swift */; };
@@ -329,6 +330,7 @@
 		AF836D0B902FDFFA6CB4A412 /* Pods_Messaging.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Messaging.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB73828B80F64D347BB9F14D /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E61B20D41B7DD47C005EAB2C /* FeedItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedItem.swift; sourceTree = "<group>"; };
+		E61B20D71B7E0838005EAB2C /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		E62B16F31B5C1AA700D446BC /* PositionIn.MainMenuUserCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.MainMenuUserCell.xib; sourceTree = "<group>"; };
 		E62B16F41B5C1AA700D446BC /* MainMenuUserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuUserCell.swift; sourceTree = "<group>"; };
 		E62B16F71B5C6BBF00D446BC /* AvatarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarView.swift; sourceTree = "<group>"; };
@@ -843,6 +845,14 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		E61B20D61B7E0806005EAB2C /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				E61B20D71B7E0838005EAB2C /* SettingsViewController.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
 		E62B16F91B5CDED600D446BC /* Messaging */ = {
 			isa = PBXGroup;
 			children = (
@@ -954,6 +964,7 @@
 				E6DA53C01B7D00DB000087A7 /* CommunityList */,
 				E689F07E1B6B99FA00597587 /* SellerProfile */,
 				E66115851B7376DE003DB5B3 /* Login */,
+				E61B20D61B7E0806005EAB2C /* Settings */,
 				E62B16F91B5CDED600D446BC /* Messaging */,
 				E6325F5F1B57D89A00996480 /* ViewControllers */,
 				E6325F581B57D46C00996480 /* Views */,
@@ -2586,6 +2597,7 @@
 				E6A869EC1B60D3E300797D16 /* APIService+Auth.swift in Sources */,
 				E6D4D5B81B6FA7A7003134CB /* SearchTransition.swift in Sources */,
 				E660E5301B5AC28600F52050 /* MainMenuCell.swift in Sources */,
+				E61B20D81B7E0838005EAB2C /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
