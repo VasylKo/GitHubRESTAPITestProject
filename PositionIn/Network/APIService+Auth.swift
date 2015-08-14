@@ -29,10 +29,7 @@ extension APIService {
     }
     
     func auth(#username: String, password: String) -> Future<UserProfile, NSError> {
-
-        let (_, future): (Alamofire.Request, Future<AuthResponse, NSError>) = dataProvider.objectRequest(AuthRouter.Auth(api: self, username: username, password: password))
-        return future.flatMap { (authResponse: AuthResponse) -> Future<UserProfile, NSError> in
-            self.sessionController.setAuth(authResponse)
+        return authRequest(username: username, password: password).flatMap { _ in
             return self.getMyProfile()
         }.andThen { result in
             if let profile = result.value {
@@ -41,11 +38,29 @@ extension APIService {
         }
     }
     
-    func createProfile(#username: String, password: String) -> Future<UserProfile, NSError> {
-        let (request, future): (Alamofire.Request, Future<UserProfile, NSError>) = dataProvider.objectRequest(AuthRouter.Register(api: self, username: username, password: password))
-        request.validate(statusCode: [201])
-        return future    
+    func createProfile(#username: String, password: String) -> Future<Void, NSError> {
+        let (request, future): (Alamofire.Request, Future<UserProfile, NSError>) = dataProvider.objectRequest(AuthRouter.Register(api: self, username: username, password: password), validation: self.statusCodeValidation(statusCode: [201]))
+        return future.andThen { result in
+            if let profile = result.value {
+                self.sessionController.setUserId(profile.objectId)
+            }
+        }.flatMap { _ in
+            return self.authRequest(username: username, password: password)
+        }.map { _ in
+            return ()
+        }
     }
+
+    
+    private func authRequest(#username: String, password: String) -> Future<AuthResponse, NSError> {
+        let (_, future): (Alamofire.Request, Future<AuthResponse, NSError>) = dataProvider.objectRequest(AuthRouter.Auth(api: self, username: username, password: password))
+        return future.andThen { result in
+            if let response = result.value {
+                self.sessionController.setAuth(response)
+            }
+        }
+    }
+    
     
     
     private enum AuthRouter: URLRequestConvertible {

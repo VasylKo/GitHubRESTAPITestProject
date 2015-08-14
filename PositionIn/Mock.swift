@@ -12,7 +12,7 @@ import ObjectMapper
 struct Mock {
     static func userProfile() -> UserProfile {
         let json: [String : AnyObject] = [
-            "id" : CRUDObjectInvalidId,
+            "id" : "123",
             "firstName" : "First",
             "middleName" : "middle",
         ]

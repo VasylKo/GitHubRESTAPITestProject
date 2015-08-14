@@ -27,15 +27,11 @@ final class MainMenuViewController: UIViewController {
     }
     
     private func menuItemsForUser(user: UserProfile?) -> [MainMenuItem] {
+        
         let firstItem: MainMenuItem =  user.map { user in
-            let title: String
-            switch (user.firstName, user.lastName) {
-            case (.Some, .Some):
-                title = "\(user.firstName!) \(user.lastName!)"
-            default:
-                title = NSLocalizedString("Unknown", comment: "Main Menu: Unnamed user")
-            }
-            return MainMenuItem(title: title, imageName: "https://pbs.twimg.com/profile_images/3255786215/509fd5bc902d71141990920bf207edea.jpeg", action: .UserProfile)
+            let title: String =  user.firstName ?? NSLocalizedString("Unknown", comment: "Main Menu: Unnamed user")
+            let image = user.avatar?.absoluteString ?? ""
+            return MainMenuItem(title: title, imageName: image, action: .UserProfile)
         } ?? MainMenuItem(title: NSLocalizedString("Login", comment: "Main Menu: Login"), imageName: "MainMenuUserProfile", action: .Login)
 
         return [firstItem] + defaultMainMenuItems()

@@ -29,7 +29,7 @@
                                                     <constraint firstAttribute="height" constant="100" id="lMO-9J-mb2"/>
                                                 </constraints>
                                             </imageView>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bpc-bC-u3L">
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bpc-bC-u3L">
                                                 <rect key="frame" x="0.0" y="108" width="540" height="30"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
@@ -261,8 +261,11 @@
                     </view>
                     <navigationItem key="navigationItem" id="r6h-lC-HMG"/>
                     <connections>
+                        <outlet property="emailTextField" destination="BIi-2m-7M6" id="sYi-l3-9D5"/>
+                        <outlet property="passwordTextField" destination="QzI-s4-fzm" id="ZoJ-p2-bNM"/>
                         <outlet property="scrollView" destination="yvy-Oo-AWn" id="rFh-k9-MSt"/>
                         <outlet property="signupButton" destination="IYm-6L-hgy" id="Lta-86-0jH"/>
+                        <outlet property="usernameTextField" destination="nRy-1a-hX9" id="6DA-QZ-F4p"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MJB-Ax-fPF" userLabel="First Responder" sceneMemberID="firstResponder"/>

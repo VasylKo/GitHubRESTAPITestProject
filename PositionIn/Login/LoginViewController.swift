@@ -26,6 +26,8 @@ final class LoginViewController: BaseLoginViewController {
            let password = passwordTextField.text {
             api().auth(username: username, password: password).onSuccess() { [weak self] userProfile in
                 self?.didTapClose(sender)
+            }.onFailure { error in
+                Log.error?.value(error)
             }
         } else {
             Log.warning?.message("Invalid input")
