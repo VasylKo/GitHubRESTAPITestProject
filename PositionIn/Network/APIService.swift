@@ -29,6 +29,16 @@ struct APIService {
         }
     }
     
+    func updateMyProfile(object: UserProfile) -> Future<Void,NSError> {
+        return sessionController.session().flatMap {
+            (token: AuthResponse.Token) -> Future<Void,NSError> in
+            let urlRequest = self.crudRequest(token, endpoint: UserProfile.myProfileEndpoint(), method: .PUT, params: Mapper().toJSON(object))
+            let (request, future): (Alamofire.Request, Future<Void, NSError>) = self.dataProvider.jsonRequest(urlRequest, map: self.emptyResponseMapping())
+            request.validate(statusCode: [204])
+            return future
+        }
+    }
+    
     
     func getAll<C: CRUDObject>(endpoint: String) -> Future<CollectionResponse<C>,NSError> {
         return sessionController.session().flatMap {
@@ -52,16 +62,6 @@ struct APIService {
         return sessionController.session().flatMap {
             (token: AuthResponse.Token) -> Future<Void,NSError> in
             let urlRequest = self.crudRequest(token, endpoint: C.endpoint().stringByAppendingPathComponent(object.objectId), method: .PUT, params: Mapper().toJSON(object))
-            let (request, future): (Alamofire.Request, Future<Void, NSError>) = self.dataProvider.jsonRequest(urlRequest, map: self.emptyResponseMapping())
-            request.validate(statusCode: [204])
-            return future
-        }
-    }
-    
-    func update(object: UserProfile) -> Future<Void,NSError> {
-        return sessionController.session().flatMap {
-            (token: AuthResponse.Token) -> Future<Void,NSError> in
-            let urlRequest = self.crudRequest(token, endpoint: UserProfile.endpoint(), method: .PUT, params: Mapper().toJSON(object))
             let (request, future): (Alamofire.Request, Future<Void, NSError>) = self.dataProvider.jsonRequest(urlRequest, map: self.emptyResponseMapping())
             request.validate(statusCode: [204])
             return future

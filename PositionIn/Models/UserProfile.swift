@@ -48,7 +48,7 @@ struct UserProfile: CRUDObject {
     }
     
     static func endpoint() -> String {
-        return "/v1.0/user"
+        return "/v1.0/users"
     }
     
     static func myProfileEndpoint() -> String {

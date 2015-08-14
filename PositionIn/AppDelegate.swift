@@ -56,9 +56,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             newProfile.firstName = "Alex"
             newProfile.middleName = "The"
             newProfile.lastName = "Great"
-            return self.api.update(newProfile)
+            newProfile.userDescription = "User description"
+            newProfile.phone = "911"
+            newProfile.avatar = "https://pbs.twimg.com/profile_images/3255786215/509fd5bc902d71141990920bf207edea.jpeg"
+            return self.api.updateMyProfile(newProfile)
         }.flatMap { ( _: Void ) -> Future<UserProfile,NSError> in
-                return self.api.get(nil)
+                return self.api.getMyProfile()
         }.onSuccess { profile in
             Log.info?.value(profile)
             self.runPostsAPI(profile)
@@ -108,12 +111,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return self.api.auth(username: username, password: password).map { response in
                 return ()
             }
-        }.flatMap { [unowned self] _ in
-            return self.api.getMyProfile()
-            
-        }.onSuccess { [unowned self] profile  in
+        }.onSuccess { [unowned self] _  in
             Log.debug?.message("Session ok")
-            Log.error?.value(profile)
+            self.runProfileAPI()
         }.onFailure { [unowned self] error in
             Log.error?.value(error)
         }
