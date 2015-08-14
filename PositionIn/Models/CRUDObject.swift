@@ -9,11 +9,21 @@
 import Foundation
 import ObjectMapper
 
-typealias CRUDObjectId = String!
+//TODO: refactor CRUDObjectId
+typealias CRUDObjectId = String
 let CRUDObjectInvalidId: CRUDObjectId = ""
 
+let CRUDObjectIdTransform = TransformOf<CRUDObjectId, String>(fromJSON: { (jsonValue: String?) -> CRUDObjectId? in
+        return jsonValue ?? CRUDObjectInvalidId
+    }, toJSON: { value in
+        if let jsonValue = value where jsonValue !=  CRUDObjectInvalidId{
+            return jsonValue
+        }
+        return nil
+})
+
 protocol CRUDObject: Mappable, Printable {
-        
+    
 
     var objectId: CRUDObjectId { get }
     

@@ -10,15 +10,12 @@ import CleanroomLogger
 import ObjectMapper
 
 struct PhotoInfo: Mappable, Printable {
-    private(set) var objectId: CRUDObjectId
+    private(set) var objectId: CRUDObjectId = CRUDObjectInvalidId
     var url: String?
     
     init?(_ map: Map) {
         mapping(map)
-        switch (objectId) {
-        case (.Some):
-            break
-        default:
+        if objectId == CRUDObjectInvalidId {
             Log.error?.message("Error while parsing object")
             Log.debug?.trace()
             Log.verbose?.value(self)
@@ -27,7 +24,7 @@ struct PhotoInfo: Mappable, Printable {
     }
     
     mutating func mapping(map: Map) {
-        objectId <- map["id"]
+        objectId <- (map["id"], CRUDObjectIdTransform)
         url <- map["url"]
     }
     

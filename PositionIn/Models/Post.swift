@@ -10,7 +10,7 @@ import ObjectMapper
 import CleanroomLogger
 
 struct Post: CRUDObject {
-    private(set) var objectId: CRUDObjectId
+    private(set) var objectId: CRUDObjectId = CRUDObjectInvalidId
     var name: String?
     var text: String?
     //"date": <datetime>,
@@ -38,10 +38,7 @@ struct Post: CRUDObject {
     
     init?(_ map: Map) {
         mapping(map)
-        switch (objectId) {
-        case (.Some):
-            break
-        default:
+        if objectId == CRUDObjectInvalidId {
             Log.error?.message("Error while parsing object")
             Log.debug?.trace()
             Log.verbose?.value(self)
@@ -50,7 +47,7 @@ struct Post: CRUDObject {
     }
 
     mutating func mapping(map: Map) {
-        objectId <- map["id"]
+        objectId <- (map["id"], CRUDObjectIdTransform)
         name <- map["name"]
         text <- map["text"]
         photos <- map["photos"]
