@@ -23,7 +23,7 @@ class BaseProfileViewController: BesideMenuViewController {
 
     
     func prepareDatasource(dataSource: ProfileDataSource) {
-        dataSource.items = [ ProfileInfoCellModel(name: "Hello", avatar: nil, background: nil)]
+    
     }
     
     
@@ -53,7 +53,15 @@ extension BaseProfileViewController {
         }
         
         @objc override func tableView(tableView: UITableView, reuseIdentifierForIndexPath indexPath: NSIndexPath) -> String {
-            return ProfileInfoCell.reuseId()
+            let model = self.tableView(tableView, modelForIndexPath: indexPath)
+            switch model {
+            case let model as ProfileInfoCellModel:
+                return ProfileInfoCell.reuseId()
+            case let model as ProfileStatsCellModel:
+                return ProfileStatsCell.reuseId()
+            default:
+                return super.tableView(tableView, reuseIdentifierForIndexPath: indexPath)
+            }
         }
         
         override func tableView(tableView: UITableView, modelForIndexPath indexPath: NSIndexPath) -> TableViewCellModel {
@@ -62,7 +70,7 @@ extension BaseProfileViewController {
         }
         
         override func nibCellsId() -> [String] {
-            return [ProfileInfoCell.reuseId()]
+            return [ProfileInfoCell.reuseId(), ProfileStatsCell.reuseId()]
         }
         
         func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
