@@ -13,7 +13,7 @@ struct FeedItem: CRUDObject {
     var objectId: CRUDObjectId = CRUDObjectInvalidId
     var name: String?
     var text: String?
-//    "date": <datetime>,
+    var date: NSDate?
     var image: NSURL?
     var type: Type = .Unknown
     var location: Location?
@@ -30,10 +30,12 @@ struct FeedItem: CRUDObject {
     
     mutating func mapping(map: Map) {
         objectId <- (map["id"], CRUDObjectIdTransform())
+        date <- (map["date"], APIDateTransform())
         text <- map["text"]
         image <- (map["image"], URLTransform())
         type <- (map["type"], EnumTransform())
         location <- map["location"]
+
     }
     
     var description: String {
