@@ -20,6 +20,16 @@ struct APIService {
         }
     }
     
+    func getMyProfile() -> Future<UserProfile, NSError> {
+        return sessionController.session().flatMap {
+            (token: AuthResponse.Token) -> Future<UserProfile,NSError> in
+            let request = self.crudRequest(token, endpoint: UserProfile.myProfileEndpoint(), method: .GET, params: nil)
+            let (_ , future): (Alamofire.Request, Future<UserProfile,NSError>) = self.dataProvider.objectRequest(request)
+            return future
+        }
+    }
+    
+    
     func getAll<C: CRUDObject>(endpoint: String) -> Future<CollectionResponse<C>,NSError> {
         return sessionController.session().flatMap {
             (token: AuthResponse.Token) -> Future<CollectionResponse<C>,NSError> in

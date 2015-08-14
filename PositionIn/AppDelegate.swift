@@ -51,7 +51,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     
     func runProfileAPI() {
-        api.get(nil).flatMap { (profile: UserProfile) -> Future<Void,NSError> in
+        api.getMyProfile().flatMap { (profile: UserProfile) -> Future<Void,NSError> in
             var newProfile = profile
             newProfile.firstName = "Alex"
             newProfile.middleName = "The"
@@ -94,33 +94,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
 
         
-        //        let username = "ios-777@bekitzur.com"
-        //        let password = "pwd"
-        //        api.createProfile(username: username, password: password);
-        //        return true
+//                let username = "ios-777@bekitzur.com"
+//                let password = "pwd"
+//                api.createProfile(username: username, password: password);
+//                return true
         
 
-        api.session().onSuccess {
-            self.runProfileAPI()
-        }.onFailure { error in
-                Log.error?.value(error)
-        }
-        
-        return true
-        
-        api.sessionController.session().recoverWith { [unowned self]
-            (error: NSError) -> Future<APIService.AuthResponse.Token ,NSError>  in
+        api.session().recoverWith { [unowned self]
+            (error: NSError) -> Future<Void ,NSError>  in
             Log.error?.value(error)
             let username = "ios-777@bekitzur.com"
             let password = "pwd"
             return self.api.auth(username: username, password: password).map { response in
-                return response.accessToken
+                return ()
             }
-            }.onSuccess { _ in
-                self.runProfileAPI()
-            }.onFailure { error in
-                Log.error?.value(error)
+        }.flatMap { [unowned self] _ in
+            return self.api.getMyProfile()
+            
+        }.onSuccess { [unowned self] profile  in
+            Log.debug?.message("Session ok")
+            Log.error?.value(profile)
+        }.onFailure { [unowned self] error in
+            Log.error?.value(error)
         }
+        
+  
         
         return true
         

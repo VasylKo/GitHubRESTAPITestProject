@@ -31,8 +31,8 @@ extension APIService {
         return future
     }
     
-    func createProfile(#username: String, password: String) -> Future<Void, NSError> {
-        let (request, future): (Alamofire.Request, Future<Void, NSError>) = dataProvider.jsonRequest(AuthRouter.Register(api: self, username: username, password: password), map: emptyResponseMapping())
+    func createProfile(#username: String, password: String) -> Future<UserProfile, NSError> {
+        let (request, future): (Alamofire.Request, Future<UserProfile, NSError>) = dataProvider.objectRequest(AuthRouter.Register(api: self, username: username, password: password))
         request.validate(statusCode: [201])
         return future    
     }
@@ -67,10 +67,11 @@ extension APIService {
                 headers = [
                     "Authorization": "Basic \(base64Credentials)",
                     "Accept" : "application/json",
+                    "Content-Type" : "application/x-www-form-urlencoded",
                 ]
             case .Register(let api, let username, let password):
                 encoding = .JSON
-                url = api.https("/v1.0/user")
+                url = api.https("/v1.0/users")
                 headers = [:]
                 params = [
                     "email" : username,

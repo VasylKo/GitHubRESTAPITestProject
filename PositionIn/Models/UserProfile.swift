@@ -51,6 +51,10 @@ struct UserProfile: CRUDObject {
         return "/v1.0/user"
     }
     
+    static func myProfileEndpoint() -> String {
+        return "/v1.0/me"
+    }
+    
     var description: String {
         return "<\(self.dynamicType):\(objectId)>"
     }
