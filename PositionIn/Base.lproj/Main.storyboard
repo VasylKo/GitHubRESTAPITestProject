@@ -726,7 +726,7 @@
                     <navigationItem key="navigationItem" id="g3e-Vm-uZv">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="cJy-iY-99S">
                             <connections>
-                                <segue destination="uvo-6t-L2C" kind="unwind" unwindAction="prepareForUnwind:" id="Mqq-yG-Apy"/>
+                                <segue destination="uvo-6t-L2C" kind="unwind" unwindAction="prepareForUnwind:" id="8tR-VW-dAg"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="LOn-iV-2yb"/>
@@ -769,6 +769,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="tableView" destination="jzX-JK-7uD" id="9gP-7Q-IHv"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="04f-8U-Os0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

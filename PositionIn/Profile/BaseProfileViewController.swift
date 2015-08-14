@@ -17,8 +17,13 @@ class BaseProfileViewController: BesideMenuViewController {
         dataSource.configureTable(tableView)
     }
 
-    func prepareDatasource(dataSource: ProfileDataSource) {
+    @IBAction func prepareForUnwind(segue: UIStoryboardSegue) {
         
+    }
+
+    
+    func prepareDatasource(dataSource: ProfileDataSource) {
+        dataSource.items = [ ProfileInfoCellModel(name: "Hello", avatar: nil, background: nil)]
     }
     
     
@@ -31,8 +36,12 @@ class BaseProfileViewController: BesideMenuViewController {
 }
 
 
+protocol ProfileCellModel: TableViewCellModel {
+}
+
 extension BaseProfileViewController {
-    class ProfileDataSource: TableViewDataSource {
+    final class ProfileDataSource: TableViewDataSource {
+        var items: [ProfileCellModel] = []
         
         override func configureTable(tableView: UITableView) {
             tableView.estimatedRowHeight = 80.0
@@ -40,27 +49,25 @@ extension BaseProfileViewController {
         }
         
         @objc override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            return 100
+            return count(items)
         }
         
         @objc override func tableView(tableView: UITableView, reuseIdentifierForIndexPath indexPath: NSIndexPath) -> String {
-            return ListProductCell.reuseId()
+            return ProfileInfoCell.reuseId()
         }
         
         override func tableView(tableView: UITableView, modelForIndexPath indexPath: NSIndexPath) -> TableViewCellModel {
-            return TableViewCellTextModel(title: "\(Float(indexPath.row) / 100.0) miles")
+            return items[indexPath.row]
+            
         }
         
         override func nibCellsId() -> [String] {
-            return [ListProductCell.reuseId()]
+            return [ProfileInfoCell.reuseId()]
         }
         
         func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
             tableView.deselectRowAtIndexPath(indexPath, animated: true)
-            if let browseController = parentViewController as? BrowseActionProducer,
-                let actionConsumer = browseController.actionConsumer {
-                    actionConsumer.browseController(browseController, didSelectPost: Post(objectId: CRUDObjectInvalidId))
-            }
+
         }
     }
 }

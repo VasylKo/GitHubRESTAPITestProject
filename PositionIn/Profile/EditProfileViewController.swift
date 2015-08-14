@@ -10,9 +10,5 @@ import UIKit
 
 final class EditProfileViewController: UIViewController {
     
-    @IBAction func prepareForUnwind(segue: UIStoryboardSegue) {
-        
-    }
-
     
 }
