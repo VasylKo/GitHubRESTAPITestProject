@@ -14,21 +14,28 @@ import BrightFutures
 import CleanroomLogger
 
 extension APIService {
-        
-    func logout() -> Future<Void, NoError> {
-        return future {
-            self.sessionController.setAuth(AuthResponse.invalidAuth())
+    
+    func session() -> Future<Void ,NSError> {
+        return sessionController.session().map() { _ in
+            return ()
         }
     }
     
-    func auth(#username: String, password: String) -> Future<AuthResponse, NSError> {
+    func logout() -> Future<Void, NoError> {
+        return sessionController.logout()
+    }
+    
+    func auth(#username: String, password: String) -> Future<UserProfile, NSError> {
+
         let (_, future): (Alamofire.Request, Future<AuthResponse, NSError>) = dataProvider.objectRequest(AuthRouter.Auth(api: self, username: username, password: password))
-        future.andThen { result in
-            if let response = result.value {
-                self.sessionController.setAuth(response)
+        return future.flatMap { (authResponse: AuthResponse) -> Future<UserProfile, NSError> in
+            self.sessionController.setAuth(authResponse)
+            return self.getMyProfile()
+        }.andThen { result in
+            if let profile = result.value {
+                self.sessionController.setUserId(profile.objectId)
             }
         }
-        return future
     }
     
     func createProfile(#username: String, password: String) -> Future<UserProfile, NSError> {

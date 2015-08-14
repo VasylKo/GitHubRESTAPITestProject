@@ -109,7 +109,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //                api.createProfile(username: username, password: password);
 //                return true
         
-
+//        api.logout()
+//        return  true
         api.session().recoverWith { [unowned self]
             (error: NSError) -> Future<Void ,NSError>  in
             Log.error?.value(error)
@@ -120,7 +121,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }.onSuccess { [unowned self] _  in
             Log.debug?.message("Session ok")
-            self.runProfileAPI()
+//            self.runProfileAPI()
         }.onFailure { [unowned self] error in
             Log.error?.value(error)
         }

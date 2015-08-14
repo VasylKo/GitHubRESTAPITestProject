@@ -28,22 +28,38 @@ struct SessionController {
         }
     }
     
+    func logout() -> Future<Void, NoError> {
+        return future {
+            self.setAuth(APIService.AuthResponse.invalidAuth())
+            self.setUserId(nil)
+            return Result(value: ())
+        }
+    }
+    
     func setAuth(authResponse: APIService.AuthResponse) {
         Log.info?.message("Auth changed")
         Log.debug?.value(authResponse)
         let keychain = self.keychain
-        keychain[KeychainKeys.accessTokenKey] = authResponse.accessToken
-        keychain[KeychainKeys.refreshTokenKey] = authResponse.refreshToken
+        keychain[KeychainKeys.AccessTokenKey] = authResponse.accessToken
+        keychain[KeychainKeys.RefreshTokenKey] = authResponse.refreshToken
         let expiresIn = NSDate(timeIntervalSinceNow: NSTimeInterval(authResponse.expires!))
         keychain.set(NSKeyedArchiver.archivedDataWithRootObject(expiresIn), key: KeychainKeys.ExpireDateKey)
     }
     
+    func setUserId(userId : CRUDObjectId?) {
+        keychain[KeychainKeys.UserIdKey] = userId
+    }
+    
+    var userId: CRUDObjectId? {
+        return keychain[KeychainKeys.UserIdKey]
+    }
+    
     private var accessToken: String? {
-        return keychain[KeychainKeys.accessTokenKey]
+        return keychain[KeychainKeys.AccessTokenKey]
     }
     
     private var refreshToken: String? {
-        return keychain[KeychainKeys.refreshTokenKey]
+        return keychain[KeychainKeys.RefreshTokenKey]
     }
     
     private var expiresIn: NSDate? {
@@ -58,8 +74,10 @@ struct SessionController {
     }
 
     private struct KeychainKeys {
-        static let accessTokenKey = "at"
-        static let refreshTokenKey = "rt"
+        static let AccessTokenKey = "at"
+        static let RefreshTokenKey = "rt"
         static let ExpireDateKey = "ed"
+        
+        static let UserIdKey = "userId"
     }
 }
