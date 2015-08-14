@@ -1,22 +1,22 @@
 //
-//  CollectionResponse.swift
+//  PhotoInfo.swift
 //  PositionIn
 //
-//  Created by Alexandr Goncharov on 23/07/15.
+//  Created by Alexandr Goncharov on 14/08/15.
 //  Copyright (c) 2015 Soluna Labs. All rights reserved.
 //
 
-import ObjectMapper
 import CleanroomLogger
+import ObjectMapper
 
-struct CollectionResponse<C: CRUDObject>: Mappable {
-    private(set) var items: [C]!
-    private(set) var total: Int!
+struct PhotoInfo: Mappable, Printable {
+    private(set) var objectId: CRUDObjectId
+    var url: String?
     
     init?(_ map: Map) {
         mapping(map)
-        switch (items, total) {
-        case (.Some, .Some):
+        switch (objectId) {
+        case (.Some):
             break
         default:
             Log.error?.message("Error while parsing object")
@@ -27,11 +27,14 @@ struct CollectionResponse<C: CRUDObject>: Mappable {
     }
     
     mutating func mapping(map: Map) {
-        items <- map["data"]
-        total <- map["count"]
+        objectId <- map["id"]
+        url <- map["url"]
+    }
+    
+    
+    var description: String {
+        return "<\(self.dynamicType):\(objectId),>"
     }
 
-    var description: String {
-        return "<\(self.dynamicType)-(\(total)):\(items)>"
-    }
 }
+

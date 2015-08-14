@@ -39,12 +39,24 @@ struct APIService {
         }
     }
     
+    //TODO: use Page
+    func getUserPosts(userId: CRUDObjectId, page: Page) -> Future<CollectionResponse<Post>,NSError> {
+        return sessionController.session().flatMap {
+            (token: AuthResponse.Token) -> Future<CollectionResponse<Post>, NSError> in
+            let endpoint = Post.userPostsEndpoint(userId)
+            let request = self.crudRequest(token, endpoint: endpoint, method: .GET, params: nil)
+            let (_ , future): (Alamofire.Request, Future<CollectionResponse<Post>, NSError>) = self.dataProvider.objectRequest(request)
+            return future
+        }
+    }
     
-    func getAll<C: CRUDObject>(endpoint: String) -> Future<CollectionResponse<C>,NSError> {
+    
+    //TODO: check usage
+    func getAll<C: CRUDObject>(endpoint: String) -> Future<CollectionResponse<C>, NSError> {
         return sessionController.session().flatMap {
             (token: AuthResponse.Token) -> Future<CollectionResponse<C>,NSError> in
             let request = self.crudRequest(token, endpoint: endpoint, method: .GET, params: nil)
-            let (_ , future): (Alamofire.Request, Future<CollectionResponse<C>,NSError>) = self.dataProvider.objectRequest(request)
+            let (_ , future): (Alamofire.Request, Future<CollectionResponse<C>, NSError>) = self.dataProvider.objectRequest(request)
             return future
         }
     }
@@ -68,7 +80,7 @@ struct APIService {
         }
     }
 
-    
+    //TODO: check usage
     func post<C: CRUDObject>(object: C) -> Future<C,NSError> {
         return sessionController.session().flatMap {
             (token: AuthResponse.Token) -> Future<C,NSError> in
@@ -152,7 +164,7 @@ extension APIService {
     struct Page {
         let skip: Int
         let take: Int
-        init(size:Int, start: Int = 0) {
+        init(start: Int = 0, size: Int = 20) {
             skip = start
             take = size
         }

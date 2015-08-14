@@ -73,6 +73,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func runPostsAPI(user: UserProfile) {
+        self.api.getUserPosts(user.objectId, page: APIService.Page())
+        return
         var post = Post(objectId: CRUDObjectInvalidId)
         post.name = "Cool post"
         post.text = "Big Post text"

@@ -13,7 +13,24 @@ struct Post: CRUDObject {
     private(set) var objectId: CRUDObjectId
     var name: String?
     var text: String?
+    //"date": <datetime>,
+    var photos: [PhotoInfo]?
+    var likes: Int?
+    /*
+    "comments": {
+    data:[],
+    count: <number>
+    },
+    */
+    /*
+    "author": {
+    "id": <guid>,
+    "name": <string>,
+    "avatar": <string>
+    },
+    */
     var location: Location?
+
     
     init(objectId: CRUDObjectId) {
         self.objectId = objectId
@@ -36,11 +53,17 @@ struct Post: CRUDObject {
         objectId <- map["id"]
         name <- map["name"]
         text <- map["text"]
+        photos <- map["photos"]
+        likes <- map["likes"]
         location <- map["location"]
     }
     
     static func endpoint() -> String {
-        return "/v1.0/post"
+        return "/v1.0/posts"
+    }
+    
+    static func userPostsEndpoint(userId: CRUDObjectId) -> String {
+        return UserProfile.endpoint().stringByAppendingPathComponent("\(userId)/posts")
     }
     
     static func allEndpoint(userId: CRUDObjectId) -> String {
