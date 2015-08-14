@@ -74,21 +74,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func runPostsAPI(user: UserProfile) {
         self.api.getUserPosts(user.objectId, page: APIService.Page())
-        return
-        var post = Post(objectId: CRUDObjectInvalidId)
-        post.name = "Cool post"
-        post.text = "Big Post text"
-        
-        api.post(post).flatMap { (post: Post) -> Future<Void, NSError> in
-            var updatedPost = post
-            updatedPost.name = "Updated post"
-            return self.api.update(post)
-        }.flatMap { ( _: Void ) -> Future<CollectionResponse<Post>, NSError> in
-            return self.api.getAll(Post.allEndpoint(user.objectId))
-        }.onSuccess { response in
-            Log.info?.value(response.items)
+//        CollectionResponse<Post>
+            .flatMap { (response) -> Future<Post, NSError> in
+            var post = Post(objectId: CRUDObjectInvalidId)
+            post.name = "Cool post"
+            post.text = "Big Post text"
+            return self.api.createUserPost(user.objectId, post: post)
+        }.onSuccess { post in
+            Log.debug?.value(post)
         }.onFailure { error in
-            Log.error?.value(error)
+           Log.error?.value(error)
         }
     }
     

@@ -10,7 +10,7 @@ import ObjectMapper
 import CleanroomLogger
 
 struct UserProfile: CRUDObject {
-    private(set) var objectId: CRUDObjectId = CRUDObjectInvalidId
+    var objectId: CRUDObjectId = CRUDObjectInvalidId
     var firstName: String?
     var middleName: String?
     var lastName: String?

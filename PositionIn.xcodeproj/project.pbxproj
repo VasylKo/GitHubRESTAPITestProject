@@ -65,7 +65,7 @@
 		E64DC35A1B4E53C90011D37C /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = E64DC3581B4E53C90011D37C /* LaunchScreen.xib */; };
 		E64DC3661B4E53CA0011D37C /* PositionInTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64DC3651B4E53CA0011D37C /* PositionInTests.swift */; };
 		E65E872C1B611BA200AE444D /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = E65E872B1B611BA200AE444D /* Post.swift */; };
-		E65E87301B611FE700AE444D /* CollectionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = E65E872F1B611FE700AE444D /* CollectionResponse.swift */; };
+		E65E87301B611FE700AE444D /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = E65E872F1B611FE700AE444D /* Response.swift */; };
 		E65E87321B614A9900AE444D /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = E65E87311B614A9900AE444D /* Location.swift */; };
 		E660E52D1B5AC23B00F52050 /* MainMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E660E52B1B5AC23B00F52050 /* MainMenuViewController.swift */; };
 		E660E52E1B5AC23B00F52050 /* PositionIn.MainMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E660E52C1B5AC23B00F52050 /* PositionIn.MainMenuViewController.xib */; };
@@ -358,7 +358,7 @@
 		E64DC3651B4E53CA0011D37C /* PositionInTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PositionInTests.swift; sourceTree = "<group>"; };
 		E64DC36F1B4E54330011D37C /* PositionIn-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PositionIn-Bridging-Header.h"; sourceTree = "<group>"; };
 		E65E872B1B611BA200AE444D /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
-		E65E872F1B611FE700AE444D /* CollectionResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionResponse.swift; sourceTree = "<group>"; };
+		E65E872F1B611FE700AE444D /* Response.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
 		E65E87311B614A9900AE444D /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		E660E52B1B5AC23B00F52050 /* MainMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuViewController.swift; sourceTree = "<group>"; };
 		E660E52C1B5AC23B00F52050 /* PositionIn.MainMenuViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.MainMenuViewController.xib; sourceTree = "<group>"; };
@@ -2026,7 +2026,7 @@
 			children = (
 				E6A869ED1B60D42C00797D16 /* APIService.swift */,
 				E6A869EB1B60D3E300797D16 /* APIService+Auth.swift */,
-				E65E872F1B611FE700AE444D /* CollectionResponse.swift */,
+				E65E872F1B611FE700AE444D /* Response.swift */,
 				E6B3C32B1B621E6400EA613A /* SessionController.swift */,
 			);
 			path = Network;
@@ -2547,7 +2547,7 @@
 				E689F0771B6B90F400597587 /* ProductInventoryViewController.swift in Sources */,
 				E689F07B1B6B972F00597587 /* ProductInventoryCell.swift in Sources */,
 				E6DA53CA1B7D00DB000087A7 /* UserListCell.swift in Sources */,
-				E65E87301B611FE700AE444D /* CollectionResponse.swift in Sources */,
+				E65E87301B611FE700AE444D /* Response.swift in Sources */,
 				E65E87321B614A9900AE444D /* Location.swift in Sources */,
 				E661159A1B73A0CB003DB5B3 /* ListProductCell.swift in Sources */,
 				E62B17061B5CE3EB00D446BC /* BrowseViewController.swift in Sources */,

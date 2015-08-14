@@ -10,7 +10,7 @@ import CleanroomLogger
 import ObjectMapper
 
 struct PhotoInfo: Mappable, Printable {
-    private(set) var objectId: CRUDObjectId = CRUDObjectInvalidId
+    var objectId: CRUDObjectId = CRUDObjectInvalidId
     var url: String?
     
     init?(_ map: Map) {

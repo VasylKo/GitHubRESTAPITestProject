@@ -35,3 +35,27 @@ struct CollectionResponse<C: CRUDObject>: Mappable {
         return "<\(self.dynamicType)-(\(total)):\(items)>"
     }
 }
+
+struct UpdateResponse: Mappable{
+    private(set) var objectId: CRUDObjectId = CRUDObjectInvalidId
+    
+    init?(_ map: Map) {
+        mapping(map)
+        if objectId == CRUDObjectInvalidId {
+            Log.error?.message("Error while parsing object")
+            Log.debug?.trace()
+            Log.verbose?.value(self)
+            return nil
+        }
+    }
+    
+    mutating func mapping(map: Map) {
+        objectId <- (map["id"], CRUDObjectIdTransform)
+
+    }
+    
+    var description: String {
+        return "<\(self.dynamicType)-(\(objectId))>"
+    }
+
+}

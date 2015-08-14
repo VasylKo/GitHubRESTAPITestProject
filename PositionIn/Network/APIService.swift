@@ -44,14 +44,27 @@ struct APIService {
         return sessionController.session().flatMap {
             (token: AuthResponse.Token) -> Future<CollectionResponse<Post>, NSError> in
             let endpoint = Post.userPostsEndpoint(userId)
-            let params: [String : AnyObject] = page.value
+            let params = page.value
             let request = self.readRequest(token, endpoint: endpoint, params: params)
             let (_ , future): (Alamofire.Request, Future<CollectionResponse<Post>, NSError>) = self.dataProvider.objectRequest(request)
             return future
-            
         }
     }
     
+    func createUserPost(userId: CRUDObjectId, post object: Post) -> Future<Post, NSError> {
+        return sessionController.session().flatMap {
+            (token: AuthResponse.Token) -> Future<Post, NSError> in
+            let endpoint = Post.userPostsEndpoint(userId)
+            let params = Mapper().toJSON(object)
+            let request = self.updateRequest(token, endpoint: endpoint, method: .POST, params: params)
+            let (_ , future): (Alamofire.Request, Future<UpdateResponse, NSError>) = self.dataProvider.objectRequest(request)
+            return future.map { (updateResponse: UpdateResponse) -> Post in
+                var updatedObject = object
+                updatedObject.objectId = updateResponse.objectId
+                return updatedObject
+            }
+        }
+    }
     
     //TODO: check usage
     func getAll<C: CRUDObject>(endpoint: String) -> Future<CollectionResponse<C>, NSError> {

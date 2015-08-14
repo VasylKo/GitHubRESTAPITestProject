@@ -10,7 +10,7 @@ import ObjectMapper
 import CleanroomLogger
 
 struct Post: CRUDObject {
-    private(set) var objectId: CRUDObjectId = CRUDObjectInvalidId
+    var objectId: CRUDObjectId = CRUDObjectInvalidId
     var name: String?
     var text: String?
     //"date": <datetime>,

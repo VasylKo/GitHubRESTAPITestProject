@@ -11,7 +11,7 @@ import ObjectMapper
 import CoreLocation
 
 struct Location: Mappable, Printable {
-    private(set) var objectId: CRUDObjectId = CRUDObjectInvalidId
+    var objectId: CRUDObjectId = CRUDObjectInvalidId
     var coordinates: CLLocationCoordinate2D!
     var street1: String?
     var street2: String?
