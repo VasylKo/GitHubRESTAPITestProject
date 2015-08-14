@@ -40,12 +40,11 @@ struct APIService {
         }
     }
     
-    //TODO: use Page
     func getUserPosts(userId: CRUDObjectId, page: Page) -> Future<CollectionResponse<Post>,NSError> {
         return sessionController.session().flatMap {
             (token: AuthResponse.Token) -> Future<CollectionResponse<Post>, NSError> in
             let endpoint = Post.userPostsEndpoint(userId)
-            let params: [String : AnyObject]? = nil
+            let params: [String : AnyObject] = page.value
             let request = self.readRequest(token, endpoint: endpoint, params: params)
             let (_ , future): (Alamofire.Request, Future<CollectionResponse<Post>, NSError>) = self.dataProvider.objectRequest(request)
             return future
@@ -220,6 +219,13 @@ extension APIService {
         
         func next() -> Page {
             return Page(size: take, start: skip + take)
+        }
+        
+        var value: [String : AnyObject]  {
+            return [
+                "skip" : skip,
+                "take" : take,
+            ]
         }
     }
 }
