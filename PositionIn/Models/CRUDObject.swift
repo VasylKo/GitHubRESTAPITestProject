@@ -13,14 +13,6 @@ import ObjectMapper
 typealias CRUDObjectId = String
 let CRUDObjectInvalidId: CRUDObjectId = ""
 
-let CRUDObjectIdTransform = TransformOf<CRUDObjectId, String>(fromJSON: { (jsonValue: String?) -> CRUDObjectId? in
-        return jsonValue ?? CRUDObjectInvalidId
-    }, toJSON: { value in
-        if let jsonValue = value where jsonValue !=  CRUDObjectInvalidId{
-            return jsonValue
-        }
-        return nil
-})
 
 protocol CRUDObject: Mappable, Printable {
     
@@ -28,4 +20,22 @@ protocol CRUDObject: Mappable, Printable {
     var objectId: CRUDObjectId { get }
     
     static func endpoint() -> String    
+}
+
+final class CRUDObjectIdTransform: TransformType {
+    typealias Object = CRUDObjectId
+    typealias JSON = String
+    
+    init() {}
+    
+    func transformFromJSON(value: AnyObject?) -> CRUDObjectId? {
+        return (value as? Object) ?? CRUDObjectInvalidId
+    }
+    
+    func transformToJSON(value: CRUDObjectId?) -> String? {
+        if let jsonValue = value where jsonValue !=  CRUDObjectInvalidId {
+            return jsonValue
+        }
+        return nil
+    }
 }

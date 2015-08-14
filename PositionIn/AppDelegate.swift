@@ -60,7 +60,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             newProfile.lastName = "Great"
             newProfile.userDescription = "User description"
             newProfile.phone = "911"
-            newProfile.avatar = "https://pbs.twimg.com/profile_images/3255786215/509fd5bc902d71141990920bf207edea.jpeg"
+            newProfile.avatar = NSURL(string:"https://pbs.twimg.com/profile_images/3255786215/509fd5bc902d71141990920bf207edea.jpeg")!
             return self.api.updateMyProfile(newProfile)
         }.flatMap { ( _: Void ) -> Future<UserProfile,NSError> in
                 return self.api.get(myProfileId)

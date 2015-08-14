@@ -11,7 +11,7 @@ import ObjectMapper
 
 struct PhotoInfo: Mappable, Printable {
     var objectId: CRUDObjectId = CRUDObjectInvalidId
-    var url: String?
+    var url: NSURL?
     
     init?(_ map: Map) {
         mapping(map)
@@ -24,8 +24,8 @@ struct PhotoInfo: Mappable, Printable {
     }
     
     mutating func mapping(map: Map) {
-        objectId <- (map["id"], CRUDObjectIdTransform)
-        url <- map["url"]
+        objectId <- (map["id"], CRUDObjectIdTransform())
+        url <- (map["url"], URLTransform())
     }
     
     

@@ -18,8 +18,8 @@ struct UserProfile: CRUDObject {
 //    "gender": <gender enum>
 //    "dob": <date>,
     var phone: String?
-    var avatar: String?
-    var backgroundImage: String?
+    var avatar: NSURL?
+    var backgroundImage: NSURL?
     var location: Location?
     
     init?(_ map: Map) {
@@ -33,14 +33,14 @@ struct UserProfile: CRUDObject {
     }
     
     mutating func mapping(map: Map) {
-        objectId <- (map["id"], CRUDObjectIdTransform)
+        objectId <- (map["id"], CRUDObjectIdTransform())
         firstName <- map["firstName"]
         middleName <- map["middleName"]
         lastName <- map["lastName"]
         userDescription <- map["description"]
         phone <- map["phone"]
-        avatar <- map["avatar"]
-        backgroundImage <- map["background"]
+        avatar <- (map["avatar"], URLTransform())
+        backgroundImage <- (map["background"], URLTransform())
         location <- map["location"]
     }
     

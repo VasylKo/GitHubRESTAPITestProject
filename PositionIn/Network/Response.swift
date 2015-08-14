@@ -50,7 +50,7 @@ struct UpdateResponse: Mappable{
     }
     
     mutating func mapping(map: Map) {
-        objectId <- (map["id"], CRUDObjectIdTransform)
+        objectId <- (map["id"], CRUDObjectIdTransform())
 
     }
     

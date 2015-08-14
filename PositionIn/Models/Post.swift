@@ -47,7 +47,7 @@ struct Post: CRUDObject {
     }
 
     mutating func mapping(map: Map) {
-        objectId <- (map["id"], CRUDObjectIdTransform)
+        objectId <- (map["id"], CRUDObjectIdTransform())
         name <- map["name"]
         text <- map["text"]
         photos <- map["photos"]
