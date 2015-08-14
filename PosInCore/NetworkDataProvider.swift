@@ -22,12 +22,13 @@ public class NetworkDataProvider: NSObject {
     :returns: Tuple with request and future
     */
     public func objectRequest<T: Mappable>(
-        URLRequest: Alamofire.URLRequestConvertible
+        URLRequest: Alamofire.URLRequestConvertible,
+        validation: Alamofire.Request.Validation? = nil
         ) -> (Alamofire.Request, Future<T, NSError>) {
             let mapping: AnyObject? -> T? = { json in
                 return Mapper<T>().map(json)
             }
-            return jsonRequest(URLRequest, map: mapping)
+            return jsonRequest(URLRequest, map: mapping, validation: validation)
     }
     
     /**
@@ -38,12 +39,13 @@ public class NetworkDataProvider: NSObject {
     :returns: Tuple with request and future
     */
     public func arrayRequest<T: Mappable>(
-        URLRequest: Alamofire.URLRequestConvertible
+        URLRequest: Alamofire.URLRequestConvertible,
+        validation: Alamofire.Request.Validation? = nil
         ) -> (Alamofire.Request, Future<[T], NSError>) {
             let mapping: AnyObject? -> [T]? = { json in
                 return Mapper<T>().mapArray((json))
             }
-            return jsonRequest(URLRequest, map: mapping)
+            return jsonRequest(URLRequest, map: mapping, validation: validation)
     }
     
     /**
@@ -56,10 +58,11 @@ public class NetworkDataProvider: NSObject {
     */
     public  func jsonRequest<V>(
         URLRequest: Alamofire.URLRequestConvertible,
-        map: AnyObject?->V?
+        map: AnyObject?->V?,
+        validation: Alamofire.Request.Validation? = nil
         ) -> (Alamofire.Request, Future<V, NSError>) {
             let serializer = Alamofire.Request.CustomResponseSerializer(map)
-            return request(URLRequest, serializer: serializer)
+            return request(URLRequest, serializer: serializer, validation: validation)
     }
     
     /**
@@ -103,29 +106,36 @@ public class NetworkDataProvider: NSObject {
     */
     private func request<V,Serializer: Alamofire.ResponseSerializer where Serializer.SerializedObject == Box<V>>(
         URLRequest: Alamofire.URLRequestConvertible,
-        serializer: Serializer
+        serializer: Serializer,
+        validation: Alamofire.Request.Validation?
         ) -> (Alamofire.Request, Future<V, NSError>) {
             let p = Promise<V, NSError>()
         
             activityIndicator.increment()
-            let request = self.request(URLRequest).response(queue: Queue.global.underlyingQueue, responseSerializer: serializer) {
-                [unowned self] (request, response, object, error) in
-                self.activityIndicator.decrement()
-                if let object = object  {
-                    p.success(object.value)
-                } else {
-                    p.failure(error ?? ErrorCodes.InvalidResponseError.error())
-                }
+            let request =  self.request(URLRequest, validation: validation).response(
+                queue: Queue.global.underlyingQueue,
+                responseSerializer: serializer) {
+                    [unowned self] (request, response, object, error) in
+                    self.activityIndicator.decrement()
+                    if let object = object  {
+                        p.success(object.value)
+                    } else {
+                        p.failure(error ?? ErrorCodes.InvalidResponseError.error())
+                    }
             }
         return (request, p.future)
     }
     
-    private func request(URLRequest: Alamofire.URLRequestConvertible) -> Alamofire.Request {
+    private func request(URLRequest: Alamofire.URLRequestConvertible, validation: Alamofire.Request.Validation?) -> Alamofire.Request {
         let request = manager.request(URLRequest).validate()
 //        #if DEBUG
         println("Request:\n\(request.debugDescription)")
 //        #endif
-        return request
+        if let validation = validation {
+            return request.validate(validation)
+        } else {
+            return request.validate()
+        }
     }
 }
 
