@@ -23,19 +23,20 @@ struct APIService {
     func getMyProfile() -> Future<UserProfile, NSError> {
         return sessionController.session().flatMap {
             (token: AuthResponse.Token) -> Future<UserProfile,NSError> in
-            let request = self.crudRequest(token, endpoint: UserProfile.myProfileEndpoint(), method: .GET, params: nil)
+            let request = self.readRequest(token, endpoint: UserProfile.myProfileEndpoint())
             let (_ , future): (Alamofire.Request, Future<UserProfile,NSError>) = self.dataProvider.objectRequest(request)
             return future
+            
         }
     }
     
     func updateMyProfile(object: UserProfile) -> Future<Void,NSError> {
         return sessionController.session().flatMap {
             (token: AuthResponse.Token) -> Future<Void,NSError> in
-            let urlRequest = self.crudRequest(token, endpoint: UserProfile.myProfileEndpoint(), method: .PUT, params: Mapper().toJSON(object))
-            let (request, future): (Alamofire.Request, Future<Void, NSError>) = self.dataProvider.jsonRequest(urlRequest, map: self.emptyResponseMapping())
-            request.validate(statusCode: [204])
+            let urlRequest = self.updateRequest(token, endpoint: UserProfile.myProfileEndpoint(), method: .PUT, params: Mapper().toJSON(object))
+            let (request, future): (Alamofire.Request, Future<Void, NSError>) = self.dataProvider.jsonRequest(urlRequest, map: self.emptyResponseMapping(), validation: self.statusCodeValidation(statusCode: [204]))
             return future
+            
         }
     }
     
@@ -44,9 +45,11 @@ struct APIService {
         return sessionController.session().flatMap {
             (token: AuthResponse.Token) -> Future<CollectionResponse<Post>, NSError> in
             let endpoint = Post.userPostsEndpoint(userId)
-            let request = self.crudRequest(token, endpoint: endpoint, method: .GET, params: nil)
+            let params: [String : AnyObject]? = nil
+            let request = self.readRequest(token, endpoint: endpoint, params: params)
             let (_ , future): (Alamofire.Request, Future<CollectionResponse<Post>, NSError>) = self.dataProvider.objectRequest(request)
             return future
+            
         }
     }
     
@@ -55,16 +58,17 @@ struct APIService {
     func getAll<C: CRUDObject>(endpoint: String) -> Future<CollectionResponse<C>, NSError> {
         return sessionController.session().flatMap {
             (token: AuthResponse.Token) -> Future<CollectionResponse<C>,NSError> in
-            let request = self.crudRequest(token, endpoint: endpoint, method: .GET, params: nil)
+            let request = self.readRequest(token, endpoint: endpoint)
             let (_ , future): (Alamofire.Request, Future<CollectionResponse<C>, NSError>) = self.dataProvider.objectRequest(request)
             return future
+            
         }
     }
     
     func get<C: CRUDObject>(objectID: CRUDObjectId) -> Future<C, NSError> {
         return sessionController.session().flatMap {
             (token: AuthResponse.Token) -> Future<C, NSError> in
-            let request = self.crudRequest(token, endpoint: C.endpoint().stringByAppendingPathComponent(objectID), method: .GET, params: nil)
+            let request = self.readRequest(token, endpoint: C.endpoint().stringByAppendingPathComponent(objectID))
             let (_ , future): (Alamofire.Request, Future<C, NSError>) = self.dataProvider.objectRequest(request)
             return future
         }
@@ -73,9 +77,9 @@ struct APIService {
     func update<C: CRUDObject>(object: C) -> Future<Void,NSError> {
         return sessionController.session().flatMap {
             (token: AuthResponse.Token) -> Future<Void,NSError> in
-            let urlRequest = self.crudRequest(token, endpoint: C.endpoint().stringByAppendingPathComponent(object.objectId), method: .PUT, params: Mapper().toJSON(object))
-            let (request, future): (Alamofire.Request, Future<Void, NSError>) = self.dataProvider.jsonRequest(urlRequest, map: self.emptyResponseMapping())
-            request.validate(statusCode: [204])
+            
+            let urlRequest = self.updateRequest(token, endpoint: C.endpoint().stringByAppendingPathComponent(object.objectId), method: .PUT, params: Mapper().toJSON(object))
+            let (request, future): (Alamofire.Request, Future<Void, NSError>) = self.dataProvider.jsonRequest(urlRequest, map: self.emptyResponseMapping(), validation: self.statusCodeValidation(statusCode: [204]))
             return future
         }
     }
@@ -84,33 +88,12 @@ struct APIService {
     func post<C: CRUDObject>(object: C) -> Future<C,NSError> {
         return sessionController.session().flatMap {
             (token: AuthResponse.Token) -> Future<C,NSError> in
-            let urlRequest = self.crudRequest(token, endpoint: C.endpoint(), method: .POST, params: Mapper().toJSON(object))
-            let (request, future): (Alamofire.Request, Future<C, NSError>) = self.dataProvider.objectRequest(urlRequest)
-            request.validate(statusCode: [201])
+            let urlRequest = self.updateRequest(token, endpoint: C.endpoint(), method: .POST, params: Mapper().toJSON(object))
+            let (request, future): (Alamofire.Request, Future<C, NSError>) = self.dataProvider.objectRequest(urlRequest, validation: self.statusCodeValidation(statusCode: [201]))
             return future
         }
     }
     
-    private func crudRequest(token: String, endpoint: String, method: Alamofire.Method, params: [String : AnyObject]?) -> NSURLRequest {
-        let url = self.https(endpoint)
-        let headers: [String : AnyObject] = [
-            "Authorization": "Bearer \(token)",
-            "Accept" : "application/json",
-        ]
-        let r = NSMutableURLRequest(URL: url)
-        r.HTTPMethod = method.rawValue
-        r.allHTTPHeaderFields = headers
-        let encoding = Alamofire.ParameterEncoding.JSON
-        return encoding.encode(r, parameters: params).0
-    }
-    
-    internal func http(endpoint: String) -> NSURL {
-        return url(endpoint, scheme: "http")
-    }
-    
-    internal func https(endpoint: String) -> NSURL {
-        return url(endpoint, scheme: "https")
-    }
     
     var description: String {
         return "API: \(baseURL.absoluteString)"
@@ -138,7 +121,22 @@ struct APIService {
         }
     }
     
+    func statusCodeValidation<S: SequenceType where S.Generator.Element == Int>(statusCode acceptableStatusCode: S) -> Alamofire.Request.Validation {
+        return { _, response in
+            return contains(acceptableStatusCode, response.statusCode)
+        }
+    }
     
+    
+    //TODO: make private, move to request
+    internal func http(endpoint: String) -> NSURL {
+        return url(endpoint, scheme: "http")
+    }
+    //TODO: make private, move to request
+    internal func https(endpoint: String) -> NSURL {
+        return url(endpoint, scheme: "https")
+    }
+
     private func url(endpoint: String, scheme: String, port: Int? = nil) -> NSURL {
         if let components = NSURLComponents(URL: baseURL, resolvingAgainstBaseURL: false) {
             components.scheme = scheme
@@ -157,7 +155,58 @@ struct APIService {
 //TODO: make private
     internal let dataProvider: NetworkDataProvider
     internal let sessionController: SessionController
+
     
+    private func readRequest(token: String, endpoint: String, params: [String : AnyObject]? = nil) -> CRUDRequest {
+        var request = CRUDRequest(token: token, url: https(endpoint))
+        request.params = params
+        return request
+    }
+
+    private func updateRequest(token: String, endpoint: String, method: Alamofire.Method = .POST, params: [String : AnyObject]? = nil) -> CRUDRequest {
+        var request = CRUDRequest(token: token, url: https(endpoint))
+        request.encoding = .JSON
+        request.method = method
+        request.params = params
+        return request
+    }
+
+    
+}
+
+extension APIService {
+    private final class CRUDRequest: Alamofire.URLRequestConvertible {
+        
+        let token: String
+        let url: NSURL
+        
+        var additionalHeaders: [String : AnyObject]?
+        var method: Alamofire.Method = .GET
+        var params: [String : AnyObject]?
+        var encoding: Alamofire.ParameterEncoding = .URL
+        
+        init(token: String, url: NSURL) {
+            self.token = token
+            self.url = url
+        }
+        
+        
+        var URLRequest: NSURLRequest {
+            let r = NSMutableURLRequest(URL: url)
+            r.HTTPMethod = method.rawValue
+            var headers: [String : AnyObject] = [
+                "Authorization": "Bearer \(token)",
+                "Accept" : "application/json",
+            ]
+            if let additionalHeaders = additionalHeaders {
+                for (key,value) in additionalHeaders {
+                    headers.updateValue(value, forKey:key)
+                }
+            }
+            r.allHTTPHeaderFields = headers
+            return encoding.encode(r, parameters: params).0
+        }
+    }
 }
 
 extension APIService {
