@@ -43,15 +43,19 @@ protocol ProfileCellModel: TableViewCellModel {
 
 extension BaseProfileViewController {
     final class ProfileDataSource: TableViewDataSource {
-        var items: [ProfileCellModel] = []
+        var items: [[ProfileCellModel]] = [[],[]]
         
         override func configureTable(tableView: UITableView) {
             tableView.estimatedRowHeight = 80.0
             super.configureTable(tableView)
         }
         
-        @objc override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        func numberOfSectionsInTableView(tableView: UITableView) -> Int {
             return count(items)
+        }
+        
+        @objc override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+            return count(items[section])
         }
         
         @objc override func tableView(tableView: UITableView, reuseIdentifierForIndexPath indexPath: NSIndexPath) -> String {
@@ -67,8 +71,7 @@ extension BaseProfileViewController {
         }
         
         override func tableView(tableView: UITableView, modelForIndexPath indexPath: NSIndexPath) -> TableViewCellModel {
-            return items[indexPath.row]
-            
+            return items[indexPath.section][indexPath.row]
         }
         
         override func nibCellsId() -> [String] {

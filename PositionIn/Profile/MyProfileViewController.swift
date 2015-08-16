@@ -7,17 +7,27 @@
 //
 
 import UIKit
+import BrightFutures
 
 final class MyProfileViewController: BaseProfileViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        api().getMyProfile().onSuccess { [weak self] profile in
+        let page = APIService.Page()
+        //Future<CollectionResponse<Post>,NSError>
+        api().getMyProfile().flatMap {[weak self] (profile: UserProfile) -> Future<CollectionResponse<Post>,NSError> in
             self?.didReceiveProfile(profile)
+            return api().getUserPosts(profile.objectId, page: page)
+        }.onSuccess { [weak self] (posts: CollectionResponse<Post>) -> () in
+            self?.didReceivePosts(posts.items, page: page)
         }
     }
 
+    private func didReceivePosts(posts: [Post], page: APIService.Page) {
+        
+    }
+    
     private func didReceiveProfile(profile: UserProfile) {
-        dataSource.items = [
+        dataSource.items[0] = [
             ProfileInfoCellModel(name: profile.firstName, avatar: profile.avatar, background: profile.backgroundImage),
             ProfileStatsCellModel(countPosts: 113, countFollowers: 23, countFollowing: 2),
         ]

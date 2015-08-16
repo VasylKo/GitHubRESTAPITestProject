@@ -21,7 +21,6 @@ import Photos
 class BaseAddItemViewController: XLFormViewController {
     
     var maximumSelectedImages: Int = 2
-
     
     func locationRowDescriptor(tag: String, location: CLLocation? = nil) -> XLFormRowDescriptor {
         let locationRow = XLFormRowDescriptor(tag: tag, rowType: XLFormRowDescriptorTypeSelectorPush, title: NSLocalizedString("Location", comment: "New item: location"))
