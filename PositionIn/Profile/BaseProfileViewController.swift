@@ -14,6 +14,8 @@ class BaseProfileViewController: BesideMenuViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
+        navigationController?.navigationBar.shadowImage = UIImage()
         dataSource.configureTable(tableView)
     }
 
