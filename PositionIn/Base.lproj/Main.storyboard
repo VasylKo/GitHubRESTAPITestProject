@@ -729,7 +729,11 @@
                                 <segue destination="uvo-6t-L2C" kind="unwind" unwindAction="prepareForUnwind:" id="8tR-VW-dAg"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="LOn-iV-2yb"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="LOn-iV-2yb">
+                            <connections>
+                                <action selector="didTapSave:" destination="KbL-BH-nfb" id="ToF-Ig-emE"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NTy-a6-PyP" userLabel="First Responder" sceneMemberID="firstResponder"/>

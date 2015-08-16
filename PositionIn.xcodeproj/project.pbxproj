@@ -874,11 +874,11 @@
 				E61B20E01B7E4BED005EAB2C /* MyProfileViewController.swift */,
 				E61B20DA1B7E4AB4005EAB2C /* PositionIn.SellerProfileViewController.xib */,
 				E61B20DB1B7E4AB4005EAB2C /* SellerProfileViewController.swift */,
-				E61B20E21B7E4D58005EAB2C /* EditProfileViewController.swift */,
 				E61B20E41B7E5964005EAB2C /* ProfileInfoCell.swift */,
 				E61B20E61B7E5AF7005EAB2C /* PositionIn.ProfileInfoCell.xib */,
 				E61B20E81B7E6163005EAB2C /* ProfileStatsCell.swift */,
 				E61B20EA1B7E6233005EAB2C /* PositionIn.ProfileStatsCell.xib */,
+				E61B20E21B7E4D58005EAB2C /* EditProfileViewController.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
