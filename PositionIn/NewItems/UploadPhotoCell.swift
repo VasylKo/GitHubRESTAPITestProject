@@ -34,8 +34,30 @@ class UploadPhotoCell: XLFormBaseCell {
         imagePreviews.map { preview in
             preview.removeFromSuperview()
         }
+        imagePreviews = []
         if let assets = self.assets {
             self.textLabel!.text = "Assets: \(count(assets))"
+
+            let previewWidth: CGFloat = bounds.width / CGFloat(count(assets))
+            let previewHeight = bounds.height
+            let previewSize = CGSize(width: previewWidth, height: previewHeight)
+            let requestOptions = PHImageRequestOptions()
+            requestOptions.deliveryMode = .FastFormat
+            enumerate(assets)
+            for (index, asset) in enumerate(assets) {
+
+                let imageView = UIImageView(frame: CGRect(origin: CGPoint(x: previewWidth * CGFloat(index), y: 0), size: previewSize))
+                self.contentView.addSubview(imageView)
+                
+                self.imageManager.requestImageForAsset(asset,
+                    targetSize: previewSize,
+                    contentMode: .AspectFill,
+                    options: requestOptions,
+                    resultHandler: { [weak imageView] (image, info) -> Void in
+                        imageView?.image = image
+                })
+                imagePreviews.append(imageView)
+            }
         } else {
             self.textLabel!.font = UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline)
             self.textLabel!.text = NSLocalizedString("Insert photo", comment: "New item: insert photo")
@@ -45,11 +67,11 @@ class UploadPhotoCell: XLFormBaseCell {
     
     override func formDescriptorCellDidSelectedWithFormController(controller: XLFormViewController!) {
         self.rowDescriptor.value = nil
+        self.update()
+        controller.tableView .selectRowAtIndexPath(nil, animated: true, scrollPosition: UITableViewScrollPosition.None)
         if let addItemController = controller as? BaseAddItemViewController {
             addItemController.didTouchPhoto(self.rowDescriptor)
         }
-        self.update()
-        controller.tableView .selectRowAtIndexPath(nil, animated: true, scrollPosition: UITableViewScrollPosition.None)
     }
     
     var assets: [PHAsset]? {
@@ -57,5 +79,5 @@ class UploadPhotoCell: XLFormBaseCell {
     }
     
     private var imagePreviews: [UIImageView] = []
-    
+    private let imageManager = PHCachingImageManager()
 }

@@ -68,14 +68,7 @@ class BaseAddItemViewController: XLFormViewController {
     //MARK: - Actions -
     
     @IBAction func didTapPost(sender: AnyObject) {
-        let validationErrors : Array<NSError> = self.formValidationErrors() as! Array<NSError>
-        if (validationErrors.count > 0){
-            self.showFormValidationError(validationErrors.first)
-            return
-        }
-        self.tableView.endEditing(true)
-        
-        Log.debug?.message("Should post")
+        Log.error?.message("Abstract post new item")
     }
 
     //MARK: - Image picker -
