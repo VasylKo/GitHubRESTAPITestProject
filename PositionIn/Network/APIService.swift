@@ -74,7 +74,6 @@ struct APIService {
             let (_ , future): (Alamofire.Request, Future<CollectionResponse<FeedItem>, NSError>) = self.dataProvider.objectRequest(request)
             return future
         }
-
     }
     
     

@@ -21,7 +21,6 @@ import Photos
 class BaseAddItemViewController: XLFormViewController {
     
     var maximumSelectedImages: Int = 2
-
     
     func locationRowDescriptor(tag: String, location: CLLocation? = nil) -> XLFormRowDescriptor {
         let locationRow = XLFormRowDescriptor(tag: tag, rowType: XLFormRowDescriptorTypeSelectorPush, title: NSLocalizedString("Location", comment: "New item: location"))
@@ -61,28 +60,22 @@ class BaseAddItemViewController: XLFormViewController {
     }
     
     func photoRowDescriptor(tag: String) -> XLFormRowDescriptor {
-        let photoRow = XLFormRowDescriptor(tag: tag, rowType: XLFormRowDescriptorTypeButton, title: NSLocalizedString("Insert photo", comment: "New item: insert photo"))
-        photoRow.cellConfig["textLabel.textColor"] = UIColor(red: 0.0, green: 122.0/255.0, blue: 1.0, alpha: 1.0)
-        photoRow.action.formSelector = "didTouchPhoto:"
+        let photoRow = XLFormRowDescriptor(tag: tag, rowType: XLFormRowDescriptorTypeButton)
+        photoRow.cellClass = UploadPhotoCell.self
         return photoRow
     }
     
     //MARK: - Actions -
     
     @IBAction func didTapPost(sender: AnyObject) {
-        let validationErrors : Array<NSError> = self.formValidationErrors() as! Array<NSError>
-        if (validationErrors.count > 0){
-            self.showFormValidationError(validationErrors.first)
-            return
-        }
-        self.tableView.endEditing(true)
-        
-        Log.debug?.message("Should post")
+        Log.error?.message("Abstract post new item")
     }
 
     //MARK: - Image picker -
     
     func didTouchPhoto(sender: XLFormRowDescriptor) {
+        currentImageRowDescriptor = sender
+        
         let controller = ImagePickerSheetController()
         controller.maximumSelection = maximumSelectedImages
         controller.addAction(ImageAction(
@@ -123,7 +116,11 @@ class BaseAddItemViewController: XLFormViewController {
     
     private func addAssets(assets: [PHAsset]) {
         Log.debug?.message("Select images \(assets)")
+        currentImageRowDescriptor?.value = assets
+        currentImageRowDescriptor?.cellForFormController(self).update()
     }
+    
+    private var currentImageRowDescriptor: XLFormRowDescriptor?
     
 }
 

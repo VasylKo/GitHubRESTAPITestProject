@@ -49,6 +49,7 @@ final class UserListCell: TableViewCell {
     
 }
 
+
 public struct UserListCellModel: TableViewCellModel {
     let users: [UserProfile]
 }

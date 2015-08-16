@@ -48,6 +48,14 @@ struct Storyboards {
             return self.storyboard.instantiateViewControllerWithIdentifier("MapViewController") as! BrowseViewController
         }
 
+        static func instantiateEditProfileViewController() -> EditProfileViewController! {
+            return self.storyboard.instantiateViewControllerWithIdentifier("EditProfileViewController") as! EditProfileViewController
+        }
+
+        static func instantiateMyProfileViewController() -> MyProfileViewController! {
+            return self.storyboard.instantiateViewControllerWithIdentifier("MyProfileViewController") as! MyProfileViewController
+        }
+
         static func instantiateSettingsViewController() -> SettingsViewController! {
             return self.storyboard.instantiateViewControllerWithIdentifier("SettingsViewController") as! SettingsViewController
         }
@@ -276,6 +284,7 @@ extension SidebarViewController {
         case ShowFilters = "ShowFilters"
         case ShowCommunities = "ShowCommunities"
         case ShowSettings = "ShowSettings"
+        case ShowMyProfile = "ShowMyProfile"
 
         var kind: SegueKind? {
             switch (self) {
@@ -290,6 +299,8 @@ extension SidebarViewController {
             case ShowCommunities:
                 return SegueKind(rawValue: "custom")
             case ShowSettings:
+                return SegueKind(rawValue: "custom")
+            case ShowMyProfile:
                 return SegueKind(rawValue: "custom")
             default:
                 preconditionFailure("Invalid value")
@@ -457,6 +468,10 @@ extension BrowseViewController {
     }
 
 }
+
+//MARK: - EditProfileViewController
+
+//MARK: - MyProfileViewController
 
 //MARK: - SettingsViewController
 
