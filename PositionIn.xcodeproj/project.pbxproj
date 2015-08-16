@@ -55,6 +55,7 @@
 		E61B20E71B7E5AF7005EAB2C /* PositionIn.ProfileInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E61B20E61B7E5AF7005EAB2C /* PositionIn.ProfileInfoCell.xib */; };
 		E61B20E91B7E6163005EAB2C /* ProfileStatsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61B20E81B7E6163005EAB2C /* ProfileStatsCell.swift */; };
 		E61B20EB1B7E6233005EAB2C /* PositionIn.ProfileStatsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E61B20EA1B7E6233005EAB2C /* PositionIn.ProfileStatsCell.xib */; };
+		E61B20ED1B81286E005EAB2C /* UploadPhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61B20EC1B81286E005EAB2C /* UploadPhotoCell.swift */; };
 		E62B16F51B5C1AA700D446BC /* PositionIn.MainMenuUserCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E62B16F31B5C1AA700D446BC /* PositionIn.MainMenuUserCell.xib */; };
 		E62B16F61B5C1AA700D446BC /* MainMenuUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E62B16F41B5C1AA700D446BC /* MainMenuUserCell.swift */; };
 		E62B16F81B5C6BBF00D446BC /* AvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E62B16F71B5C6BBF00D446BC /* AvatarView.swift */; };
@@ -347,6 +348,7 @@
 		E61B20E61B7E5AF7005EAB2C /* PositionIn.ProfileInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.ProfileInfoCell.xib; sourceTree = "<group>"; };
 		E61B20E81B7E6163005EAB2C /* ProfileStatsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileStatsCell.swift; sourceTree = "<group>"; };
 		E61B20EA1B7E6233005EAB2C /* PositionIn.ProfileStatsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.ProfileStatsCell.xib; sourceTree = "<group>"; };
+		E61B20EC1B81286E005EAB2C /* UploadPhotoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadPhotoCell.swift; sourceTree = "<group>"; };
 		E62B16F31B5C1AA700D446BC /* PositionIn.MainMenuUserCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.MainMenuUserCell.xib; sourceTree = "<group>"; };
 		E62B16F41B5C1AA700D446BC /* MainMenuUserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuUserCell.swift; sourceTree = "<group>"; };
 		E62B16F71B5C6BBF00D446BC /* AvatarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarView.swift; sourceTree = "<group>"; };
@@ -1122,6 +1124,7 @@
 				E66115A61B73AE0F003DB5B3 /* AddPromotionViewController.swift */,
 				E66115A71B73AE0F003DB5B3 /* AddEventViewController.swift */,
 				E64D00691B7CA2DC007693E0 /* AddCommunityViewController.swift */,
+				E61B20EC1B81286E005EAB2C /* UploadPhotoCell.swift */,
 			);
 			path = NewItems;
 			sourceTree = "<group>";
@@ -2578,6 +2581,7 @@
 				E6AC64561B5EC5B1007D7952 /* AddMenuView.swift in Sources */,
 				E661158D1B73778B003DB5B3 /* RecoverPasswordViewController.swift in Sources */,
 				E661158F1B738844003DB5B3 /* BaseLoginViewController.swift in Sources */,
+				E61B20ED1B81286E005EAB2C /* UploadPhotoCell.swift in Sources */,
 				E66115AD1B73B1A8003DB5B3 /* FilterViewController.swift in Sources */,
 				E6A869F41B60FF2100797D16 /* UserProfile.swift in Sources */,
 				E69420F91B66358000F34F06 /* ProductDetailsViewController.swift in Sources */,

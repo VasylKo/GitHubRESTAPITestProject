@@ -39,6 +39,7 @@ final class EditProfileViewController: BaseAddItemViewController {
 
         //Info section
         let infoSection  = XLFormSectionDescriptor.formSection()
+        form.addFormSection(infoSection)
         //First name
         let firstnameRow = XLFormRowDescriptor(tag: Tags.FirstName.rawValue, rowType: XLFormRowDescriptorTypeText, title: NSLocalizedString("First name", comment: "Edit profile: First name"))
         firstnameRow.required = true
