@@ -85,11 +85,11 @@ struct APIService {
         }.flatMap { (response: AnyObject?) -> Future<NSURL, NSError> in
             let p = Promise<NSURL, NSError>()
             if  let JSON = response as? [String: AnyObject],
-                let urlString = JSON["uri"] as? String,
-                let url = NSURL(string: urlString) {
-                p.success(url)
+                let urlString = JSON["uri"] as? String {
+                 let url = self.amazonURL.URLByAppendingPathComponent(urlString)
+                 p.success(url)
             } else {
-                p.failure(NetworkDataProvider.ErrorCodes.InvalidResponseError.error())
+                 p.failure(NetworkDataProvider.ErrorCodes.InvalidResponseError.error())
             }
             return p.future
         }
@@ -143,8 +143,9 @@ struct APIService {
         return "API: \(baseURL.absoluteString)"
     }
     
-    init (url: NSURL, dataProvider: NetworkDataProvider = NetworkDataProvider()) {
+    init (url: NSURL, amazon: NSURL, dataProvider: NetworkDataProvider = NetworkDataProvider()) {
         baseURL = url
+        amazonURL = amazon
         self.dataProvider = dataProvider
         sessionController = SessionController()
     }
@@ -196,6 +197,7 @@ struct APIService {
     }
     
     private let baseURL: NSURL
+    private let amazonURL: NSURL
 //TODO: make private
     internal let dataProvider: NetworkDataProvider
     internal let sessionController: SessionController

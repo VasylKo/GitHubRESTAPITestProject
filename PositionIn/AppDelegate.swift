@@ -35,6 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        urlSessionConfig.protocolClasses = [InterceptingProtocol.self]
         #endif
         let baseURL = NSURL(string: "https://app-dev.positionin.com/api/")!
+        let amazonURL = NSURL(string: "https://pos-dev.s3.amazonaws.com/")!
         #if DEBUG
         let trustPolicies: [String: ServerTrustPolicy]? = [
             baseURL.host! : .DisableEvaluation
@@ -43,7 +44,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let trustPolicies: [String: ServerTrustPolicy]? = nil
         #endif
         let dataProvider = PosInCore.NetworkDataProvider(configuration: urlSessionConfig, trustPolicies: trustPolicies)
-        api = APIService(url: baseURL, dataProvider: dataProvider)
+        api = APIService(url: baseURL, amazon: amazonURL, dataProvider: dataProvider)
         let chatConfig = XMPPClientConfiguration.defaultConfiguration()
         chatClient = XMPPClient(configuration: chatConfig)
         super.init()
