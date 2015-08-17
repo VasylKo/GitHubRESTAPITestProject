@@ -78,24 +78,30 @@ public class NetworkDataProvider: NSObject {
         urls: [String: NSURL]
         ) -> (Future<AnyObject?, NSError>) {
             let p = Promise<AnyObject?, NSError>()
-            manager.upload(URLRequest, multipartFormData: { multipartFormData in
-                for (name, url) in urls {
-                    multipartFormData.appendBodyPart(fileURL: url, name: name)
-                }
-            },
-            encodingCompletion:{ encodingResult in
-                switch encodingResult {
-                case .Success(let upload, _, _):
-                    upload.validate(statusCode: [201]).responseJSON { request, response, JSON, uploadError in
-                        if let error = uploadError {
-                            p.failure(error)
-                        } else {
-                            p.success(JSON)
-                        }
+            manager.upload(URLRequest,
+                multipartFormData: { multipartFormData in
+                    for (name, url) in urls {
+                        multipartFormData.appendBodyPart(fileURL: url, name: name)
                     }
-                case .Failure(let encodingError):
-                    p.failure(encodingError)
-                }
+            },
+                encodingCompletion:{ encodingResult in
+                    switch encodingResult {
+                    //Success(request: Request, streamingFromDisk: Bool, streamFileURL: NSURL?)
+                    case .Success(let upload, let streamingFromDisk, let streamFileURL):
+                        //        #if DEBUG
+                        println("Request:\n\(upload.debugDescription)\n\nfrom disk = \(streamingFromDisk) => \(streamFileURL)")
+                        //        #endif
+
+                        upload.validate(statusCode: [201]).responseJSON { request, response, JSON, uploadError in
+                            if let error = uploadError {
+                                p.failure(error)
+                            } else {
+                                p.success(JSON)
+                            }
+                        }
+                    case .Failure(let encodingError):
+                        p.failure(encodingError)
+                    }
             })
             return p.future
     }

@@ -76,6 +76,26 @@ struct APIService {
         }
     }
     
+    func uploadImage(url: NSURL) -> Future<NSURL, NSError> {
+        
+        return sessionController.session().flatMap {
+            (token: AuthResponse.Token) -> Future<AnyObject?,NSError> in
+            let imageEndpoint = "/photos/upload"
+            let urlRequest = self.updateRequest(token, endpoint: imageEndpoint, method: .POST, params: nil)
+            return self.dataProvider.upload(urlRequest, urls: ["file" : url])
+        }.flatMap { (response: AnyObject?) -> Future<NSURL, NSError> in
+            let p = Promise<NSURL, NSError>()
+            if  let JSON = response as? [String: AnyObject],
+                let urlString = JSON["uri"] as? String,
+                let url = NSURL(string: urlString) {
+                p.success(url)
+            } else {
+                p.failure(NetworkDataProvider.ErrorCodes.InvalidResponseError.error())
+            }
+            return p.future
+        }
+    }
+    
     
     //TODO: check usage
     func getAll<C: CRUDObject>(endpoint: String) -> Future<CollectionResponse<C>, NSError> {

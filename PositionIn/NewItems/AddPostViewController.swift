@@ -10,6 +10,8 @@ import UIKit
 import CleanroomLogger
 import XLForm
 
+import BrightFutures
+import Photos
 
 final class AddPostViewController: BaseAddItemViewController {
     private enum Tags : String {
@@ -67,7 +69,22 @@ final class AddPostViewController: BaseAddItemViewController {
         }
         self.tableView.endEditing(true)
         Log.debug?.message("Should post")
-        Log.debug?.value(formValues())
+        let values = formValues()
+        Log.debug?.value(values)
+        
+        if let assets = values[Tags.Photo.rawValue] as? [PHAsset] {
+            let uploadImage = sequence( assets.map { asset in
+                self.fullSizeURLForAsset(asset).flatMap { url in
+                    return api().uploadImage(url)
+                }
+            }).onSuccess { urls in
+                Log.debug?.value(urls)
+            }.onFailure { error in
+                Log.error?.value(error.localizedDescription)
+            }
+        }
+        
+        
     }
     
     
