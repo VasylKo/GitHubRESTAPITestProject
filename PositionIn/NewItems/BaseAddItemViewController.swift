@@ -68,13 +68,21 @@ class BaseAddItemViewController: XLFormViewController {
         return photoRow
     }
     
-    func fullSizeURLForAsset(asset: PHAsset) -> Future<NSURL, NSError> {
-        let p = Promise<NSURL, NSError>()
+    func uploadAssets(assets: [PHAsset]) -> Future<[NSURL], NSError> {
+        return sequence( assets.map { asset in
+            self.fullSizeDataForAsset(asset).flatMap { data in
+                return api().uploadImage(data)
+            }
+        })
+    }
+    
+    func fullSizeDataForAsset(asset: PHAsset) -> Future<NSData, NSError> {
+        let p = Promise<NSData, NSError>()
         let options = PHImageRequestOptions()
         options.deliveryMode = .HighQualityFormat
         PHImageManager.defaultManager().requestImageDataForAsset(asset, options: options) { (imageData, dataUTI, orientation, info) -> Void in
-            if let url = info["PHImageFileURLKey"] as? NSURL {
-                p.success(url)
+            if let data = imageData {
+                p.success(data)
             } else if let error = info[PHImageErrorKey] as? NSError {
                 p.failure(error)
             } else {
@@ -82,6 +90,7 @@ class BaseAddItemViewController: XLFormViewController {
             }
         }
         return p.future
+
     }
     
     //MARK: - Actions -

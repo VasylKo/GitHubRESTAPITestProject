@@ -73,11 +73,7 @@ final class AddPostViewController: BaseAddItemViewController {
         Log.debug?.value(values)
         
         if let assets = values[Tags.Photo.rawValue] as? [PHAsset] {
-            let uploadImage = sequence( assets.map { asset in
-                self.fullSizeURLForAsset(asset).flatMap { url in
-                    return api().uploadImage(url)
-                }
-            }).onSuccess { urls in
+            self.uploadAssets(assets).onSuccess { urls in
                 Log.debug?.value(urls)
             }.onFailure { error in
                 Log.error?.value(error.localizedDescription)

@@ -76,13 +76,12 @@ struct APIService {
         }
     }
     
-    func uploadImage(url: NSURL) -> Future<NSURL, NSError> {
+    func uploadImage(data: NSData) -> Future<NSURL, NSError> {
         
         return sessionController.session().flatMap {
             (token: AuthResponse.Token) -> Future<AnyObject?,NSError> in
-            let imageEndpoint = "/photos/upload"
-            let urlRequest = self.updateRequest(token, endpoint: imageEndpoint, method: .POST, params: nil)
-            return self.dataProvider.upload(urlRequest, urls: ["file" : url])
+            let urlRequest = self.imageRequest(token)
+            return self.dataProvider.upload(urlRequest, content: ["file" : data])
         }.flatMap { (response: AnyObject?) -> Future<NSURL, NSError> in
             let p = Promise<NSURL, NSError>()
             if  let JSON = response as? [String: AnyObject],
@@ -213,6 +212,22 @@ struct APIService {
         request.encoding = .JSON
         request.method = method
         request.params = params
+        return request
+    }
+    
+    private func imageRequest(token: String) -> CRUDRequest {
+        func imageURL() -> NSURL {
+            if let components = NSURLComponents(URL: baseURL, resolvingAgainstBaseURL: false) {
+                components.scheme = "https"
+                components.path = "/photos/upload"
+                if let url = components.URL {
+                    return url
+                }
+            }
+            fatalError("Could not generate  url")
+        }
+        
+        var request = CRUDRequest(token: token, url: imageURL())
         return request
     }
 

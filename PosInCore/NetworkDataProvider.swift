@@ -75,13 +75,13 @@ public class NetworkDataProvider: NSObject {
     */
     public func upload(
         URLRequest: Alamofire.URLRequestConvertible,
-        urls: [String: NSURL]
+        content: [String: NSData]
         ) -> (Future<AnyObject?, NSError>) {
             let p = Promise<AnyObject?, NSError>()
             manager.upload(URLRequest,
                 multipartFormData: { multipartFormData in
-                    for (name, url) in urls {
-                        multipartFormData.appendBodyPart(fileURL: url, name: name)
+                    for (name, data) in content {
+                        multipartFormData.appendBodyPart(data: data, name: name)
                     }
             },
                 encodingCompletion:{ encodingResult in
