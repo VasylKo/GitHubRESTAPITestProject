@@ -66,6 +66,41 @@ public class NetworkDataProvider: NSObject {
     }
     
     /**
+    Uploads list of images
+    
+    :param: URLRequest url request
+    :param: urls       list of urls
+    
+    :returns: Request future
+    */
+    public func upload(
+        URLRequest: Alamofire.URLRequestConvertible,
+        urls: [String: NSURL]
+        ) -> (Future<AnyObject?, NSError>) {
+            let p = Promise<AnyObject?, NSError>()
+            manager.upload(URLRequest, multipartFormData: { multipartFormData in
+                for (name, url) in urls {
+                    multipartFormData.appendBodyPart(fileURL: url, name: name)
+                }
+            },
+            encodingCompletion:{ encodingResult in
+                switch encodingResult {
+                case .Success(let upload, _, _):
+                    upload.validate(statusCode: [201]).responseJSON { request, response, JSON, uploadError in
+                        if let error = uploadError {
+                            p.failure(error)
+                        } else {
+                            p.success(JSON)
+                        }
+                    }
+                case .Failure(let encodingError):
+                    p.failure(encodingError)
+                }
+            })
+            return p.future
+    }
+    
+    /**
     Designated initializer
     
     :param: api           api service
