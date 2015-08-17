@@ -76,6 +76,25 @@ struct APIService {
         }
     }
     
+    func uploadImage(data: NSData) -> Future<NSURL, NSError> {
+        
+        return sessionController.session().flatMap {
+            (token: AuthResponse.Token) -> Future<AnyObject?,NSError> in
+            let urlRequest = self.imageRequest(token)
+            return self.dataProvider.upload(urlRequest, content: ["file" : data])
+        }.flatMap { (response: AnyObject?) -> Future<NSURL, NSError> in
+            let p = Promise<NSURL, NSError>()
+            if  let JSON = response as? [String: AnyObject],
+                let urlString = JSON["uri"] as? String {
+                 let url = self.amazonURL.URLByAppendingPathComponent(urlString)
+                 p.success(url)
+            } else {
+                 p.failure(NetworkDataProvider.ErrorCodes.InvalidResponseError.error())
+            }
+            return p.future
+        }
+    }
+    
     
     //TODO: check usage
     func getAll<C: CRUDObject>(endpoint: String) -> Future<CollectionResponse<C>, NSError> {
@@ -124,8 +143,9 @@ struct APIService {
         return "API: \(baseURL.absoluteString)"
     }
     
-    init (url: NSURL, dataProvider: NetworkDataProvider = NetworkDataProvider()) {
+    init (url: NSURL, amazon: NSURL, dataProvider: NetworkDataProvider = NetworkDataProvider()) {
         baseURL = url
+        amazonURL = amazon
         self.dataProvider = dataProvider
         sessionController = SessionController()
     }
@@ -177,6 +197,7 @@ struct APIService {
     }
     
     private let baseURL: NSURL
+    private let amazonURL: NSURL
 //TODO: make private
     internal let dataProvider: NetworkDataProvider
     internal let sessionController: SessionController
@@ -193,6 +214,13 @@ struct APIService {
         request.encoding = .JSON
         request.method = method
         request.params = params
+        return request
+    }
+    
+    private func imageRequest(token: String) -> CRUDRequest {
+        let url = https("/v1.0/photos/upload")
+        var request = CRUDRequest(token: token, url: url)
+        request.method = .POST
         return request
     }
 

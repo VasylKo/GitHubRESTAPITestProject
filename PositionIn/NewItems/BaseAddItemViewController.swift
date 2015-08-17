@@ -13,6 +13,9 @@ import XLForm
 
 import CoreLocation
 
+import PosInCore
+import BrightFutures
+
 import ImagePickerSheetController
 import MobileCoreServices
 import Photos
@@ -20,7 +23,7 @@ import Photos
 
 class BaseAddItemViewController: XLFormViewController {
     
-    var maximumSelectedImages: Int = 2
+    var maximumSelectedImages: Int = 1
     
     func locationRowDescriptor(tag: String, location: CLLocation? = nil) -> XLFormRowDescriptor {
         let locationRow = XLFormRowDescriptor(tag: tag, rowType: XLFormRowDescriptorTypeSelectorPush, title: NSLocalizedString("Location", comment: "New item: location"))
@@ -63,6 +66,31 @@ class BaseAddItemViewController: XLFormViewController {
         let photoRow = XLFormRowDescriptor(tag: tag, rowType: XLFormRowDescriptorTypeButton)
         photoRow.cellClass = UploadPhotoCell.self
         return photoRow
+    }
+    
+    func uploadAssets(assets: [PHAsset]) -> Future<[NSURL], NSError> {
+        return sequence( assets.map { asset in
+            self.fullSizeDataForAsset(asset).flatMap { data in
+                return api().uploadImage(data)
+            }
+        })
+    }
+    
+    func fullSizeDataForAsset(asset: PHAsset) -> Future<NSData, NSError> {
+        let p = Promise<NSData, NSError>()
+        let options = PHImageRequestOptions()
+        options.deliveryMode = .HighQualityFormat
+        PHImageManager.defaultManager().requestImageDataForAsset(asset, options: options) { (imageData, dataUTI, orientation, info) -> Void in
+            if let data = imageData {
+                p.success(data)
+            } else if let error = info[PHImageErrorKey] as? NSError {
+                p.failure(error)
+            } else {
+                p.failure(NetworkDataProvider.ErrorCodes.UnknownError.error())
+            }
+        }
+        return p.future
+
     }
     
     //MARK: - Actions -
