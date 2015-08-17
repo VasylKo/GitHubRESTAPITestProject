@@ -81,16 +81,14 @@ public class NetworkDataProvider: NSObject {
             manager.upload(URLRequest,
                 multipartFormData: { multipartFormData in
                     for (name, data) in content {
-                        multipartFormData.appendBodyPart(data: data, name: name)
+                        multipartFormData.appendBodyPart(data: data, name: name, fileName: "upload.png", mimeType: "image/png")
                     }
             },
                 encodingCompletion:{ encodingResult in
                     switch encodingResult {
                     //Success(request: Request, streamingFromDisk: Bool, streamFileURL: NSURL?)
                     case .Success(let upload, let streamingFromDisk, let streamFileURL):
-                        //        #if DEBUG
-                        println("Request:\n\(upload.debugDescription)\n\nfrom disk = \(streamingFromDisk) => \(streamFileURL)")
-                        //        #endif
+                        println("Request:\n\(upload.debugDescription)")
 
                         upload.validate(statusCode: [201]).responseJSON { request, response, JSON, uploadError in
                             if let error = uploadError {

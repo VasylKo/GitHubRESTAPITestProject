@@ -216,18 +216,9 @@ struct APIService {
     }
     
     private func imageRequest(token: String) -> CRUDRequest {
-        func imageURL() -> NSURL {
-            if let components = NSURLComponents(URL: baseURL, resolvingAgainstBaseURL: false) {
-                components.scheme = "https"
-                components.path = "/photos/upload"
-                if let url = components.URL {
-                    return url
-                }
-            }
-            fatalError("Could not generate  url")
-        }
-        
-        var request = CRUDRequest(token: token, url: imageURL())
+        let url = https("/v1.0/photos/upload")
+        var request = CRUDRequest(token: token, url: url)
+        request.method = .POST
         return request
     }
 
