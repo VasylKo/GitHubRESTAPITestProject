@@ -68,7 +68,7 @@ final class AddPostViewController: BaseAddItemViewController {
             return
         }
         self.tableView.endEditing(true)
-        Log.debug?.message("Should post")
+        
         let values = formValues()
         Log.debug?.value(values)
         

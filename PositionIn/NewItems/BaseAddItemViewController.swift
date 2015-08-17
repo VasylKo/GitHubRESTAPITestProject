@@ -70,27 +70,29 @@ class BaseAddItemViewController: XLFormViewController {
     
     func uploadAssets(assets: [PHAsset]) -> Future<[NSURL], NSError> {
         return sequence( assets.map { asset in
-            self.fullSizeDataForAsset(asset).flatMap { data in
-                return api().uploadImage(data)
+            self.uploadDataForAsset(asset).flatMap { (let data, let dataUTI) in
+                return api().uploadImage(data, dataUTI: dataUTI)
             }
         })
     }
     
-    func fullSizeDataForAsset(asset: PHAsset) -> Future<NSData, NSError> {
-        let p = Promise<NSData, NSError>()
+    private func uploadDataForAsset(asset: PHAsset) -> Future<(NSData, String), NSError> {
+        let p = Promise<(NSData, String), NSError>()
         let options = PHImageRequestOptions()
         options.deliveryMode = .HighQualityFormat
         PHImageManager.defaultManager().requestImageDataForAsset(asset, options: options) { (imageData, dataUTI, orientation, info) -> Void in
-            if let data = imageData {
-                p.success(data)
-            } else if let error = info[PHImageErrorKey] as? NSError {
-                p.failure(error)
-            } else {
-                p.failure(NetworkDataProvider.ErrorCodes.UnknownError.error())
+            switch (imageData, dataUTI) {
+            case (.Some, .Some):
+                p.success((imageData!, dataUTI!))
+            default:
+                if let error = info[PHImageErrorKey] as? NSError {
+                    p.failure(error)
+                } else {
+                    p.failure(NetworkDataProvider.ErrorCodes.UnknownError.error())
+                }
             }
         }
         return p.future
-
     }
     
     //MARK: - Actions -

@@ -11,6 +11,7 @@ import Alamofire
 import ObjectMapper
 import BrightFutures
 import Box
+import MobileCoreServices
 
 public class NetworkDataProvider: NSObject {
     
@@ -65,44 +66,6 @@ public class NetworkDataProvider: NSObject {
             return request(URLRequest, serializer: serializer, validation: validation)
     }
     
-    /**
-    Uploads list of images
-    
-    :param: URLRequest url request
-    :param: urls       list of urls
-    
-    :returns: Request future
-    */
-    public func upload(
-        URLRequest: Alamofire.URLRequestConvertible,
-        content: [String: NSData]
-        ) -> (Future<AnyObject?, NSError>) {
-            let p = Promise<AnyObject?, NSError>()
-            manager.upload(URLRequest,
-                multipartFormData: { multipartFormData in
-                    for (name, data) in content {
-                        multipartFormData.appendBodyPart(data: data, name: name, fileName: "upload.png", mimeType: "image/png")
-                    }
-            },
-                encodingCompletion:{ encodingResult in
-                    switch encodingResult {
-                    //Success(request: Request, streamingFromDisk: Bool, streamFileURL: NSURL?)
-                    case .Success(let upload, let streamingFromDisk, let streamFileURL):
-                        println("Request:\n\(upload.debugDescription)")
-
-                        upload.validate(statusCode: [201]).responseJSON { request, response, JSON, uploadError in
-                            if let error = uploadError {
-                                p.failure(error)
-                            } else {
-                                p.success(JSON)
-                            }
-                        }
-                    case .Failure(let encodingError):
-                        p.failure(encodingError)
-                    }
-            })
-            return p.future
-    }
     
     /**
     Designated initializer
@@ -260,5 +223,78 @@ extension NetworkDataProvider {
                 return NSLocalizedString("UnknownError", comment: "Unknown error")
             }
         }
+    }
+}
+
+//MARK: Upload
+extension NetworkDataProvider {
+    
+    /// File upload info
+    final public class FileUpload {
+        let data: NSData
+        let name: String
+        let filename: String
+        let mimeType: String
+        
+        public init (data: NSData, dataUTI: String, name: String = "file") {
+            self.name = name
+            self.data = data
+            mimeType = copyTag(kUTTagClassMIMEType, fromUTI: dataUTI, defaultValue: "application/octet-stream")
+            let fileExtension = copyTag(kUTTagClassFilenameExtension, fromUTI: dataUTI, defaultValue: "png")
+            filename = name.stringByAppendingPathExtension(fileExtension) ?? name
+        }
+    }
+    
+    /**
+    Uploads a files
+    
+    :param: URLRequest url request
+    :param: urls       files info
+    
+    :returns: Request future
+    */
+    public func upload(
+        URLRequest: Alamofire.URLRequestConvertible,
+        files: [FileUpload]
+        ) -> (Future<AnyObject?, NSError>) {
+            let p = Promise<AnyObject?, NSError>()
+            manager.upload(URLRequest,
+                multipartFormData: { multipartFormData in
+                    for fileInfo in files {
+                        multipartFormData.appendBodyPart(
+                            data: fileInfo.data,
+                            name: fileInfo.name,
+                            fileName: fileInfo.filename,
+                            mimeType: fileInfo.mimeType
+                        )
+                    }
+                },
+                encodingCompletion:{ encodingResult in
+                    switch encodingResult {
+                        //Success(request: Request, streamingFromDisk: Bool, streamFileURL: NSURL?)
+                    case .Success(let upload, let streamingFromDisk, let streamFileURL):
+                        println("Request:\n\(upload.debugDescription)")
+                        
+                        upload.validate(statusCode: [201]).responseJSON { request, response, JSON, uploadError in
+                            if let error = uploadError {
+                                p.failure(error)
+                            } else {
+                                p.success(JSON)
+                            }
+                        }
+                    case .Failure(let encodingError):
+                        p.failure(encodingError)
+                    }
+            })
+            return p.future
+    }
+}
+
+private func copyTag(tag: CFString!, fromUTI dataUTI: String, #defaultValue: String) -> String {
+    var str = UTTypeCopyPreferredTagWithClass(dataUTI, tag)
+    if (str == nil) {
+        return defaultValue
+    } else {
+        return str.takeUnretainedValue() as String
     }
 }

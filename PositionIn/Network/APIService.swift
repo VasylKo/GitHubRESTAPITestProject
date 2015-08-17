@@ -76,26 +76,6 @@ struct APIService {
         }
     }
     
-    func uploadImage(data: NSData) -> Future<NSURL, NSError> {
-        
-        return sessionController.session().flatMap {
-            (token: AuthResponse.Token) -> Future<AnyObject?,NSError> in
-            let urlRequest = self.imageRequest(token)
-            return self.dataProvider.upload(urlRequest, content: ["file" : data])
-        }.flatMap { (response: AnyObject?) -> Future<NSURL, NSError> in
-            let p = Promise<NSURL, NSError>()
-            if  let JSON = response as? [String: AnyObject],
-                let urlString = JSON["uri"] as? String {
-                 let url = self.amazonURL.URLByAppendingPathComponent(urlString)
-                 p.success(url)
-            } else {
-                 p.failure(NetworkDataProvider.ErrorCodes.InvalidResponseError.error())
-            }
-            return p.future
-        }
-    }
-    
-    
     //TODO: check usage
     func getAll<C: CRUDObject>(endpoint: String) -> Future<CollectionResponse<C>, NSError> {
         return sessionController.session().flatMap {
@@ -217,14 +197,6 @@ struct APIService {
         return request
     }
     
-    private func imageRequest(token: String) -> CRUDRequest {
-        let url = https("/v1.0/photos/upload")
-        var request = CRUDRequest(token: token, url: url)
-        request.method = .POST
-        return request
-    }
-
-    
 }
 
 extension APIService {
@@ -300,4 +272,36 @@ extension APIService {
             ]
         }
     }
+}
+
+//MARK: images
+
+extension APIService {
+    
+    func uploadImage(data: NSData, dataUTI: String) -> Future<NSURL, NSError> {
+        let fileInfo = NetworkDataProvider.FileUpload(data: data, dataUTI: dataUTI)
+        return sessionController.session().flatMap {
+            (token: AuthResponse.Token) -> Future<AnyObject?,NSError> in
+            let urlRequest = self.imageRequest(token)
+            return self.dataProvider.upload(urlRequest, files: [fileInfo])
+            }.flatMap { (response: AnyObject?) -> Future<NSURL, NSError> in
+                let p = Promise<NSURL, NSError>()
+                if  let JSON = response as? [String: AnyObject],
+                    let urlString = JSON["uri"] as? String {
+                        let url = self.amazonURL.URLByAppendingPathComponent(urlString)
+                        p.success(url)
+                } else {
+                    p.failure(NetworkDataProvider.ErrorCodes.InvalidResponseError.error())
+                }
+                return p.future
+        }
+    }
+    
+    private func imageRequest(token: String) -> CRUDRequest {
+        let url = https("/v1.0/photos/upload")
+        var request = CRUDRequest(token: token, url: url)
+        request.method = .POST
+        return request
+    }
+
 }
