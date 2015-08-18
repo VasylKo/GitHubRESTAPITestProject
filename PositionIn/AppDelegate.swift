@@ -21,6 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     let api: APIService
     let chatClient: XMPPClient
+    let locationProvider: LocationProvider
     
     override init() {
         #if DEBUG
@@ -48,10 +49,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         api = APIService(url: baseURL, amazon: amazonURL, dataProvider: dataProvider)
         let chatConfig = XMPPClientConfiguration.defaultConfiguration()
         chatClient = XMPPClient(configuration: chatConfig)
+        locationProvider = LocationProvider()
         super.init()
     }
-
-    
 
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
@@ -67,7 +67,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 sidebarViewController.executeAction(defaultAction)
             }
         }
-        
+        locationProvider.startUpdatingLocation()
         return true
         
         
@@ -135,7 +135,6 @@ func api() -> APIService {
     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
     return appDelegate.api
 }
-
 
 struct CleanroomOutputStream: OutputStreamType {
     let logChannel: LogChannel?

@@ -66,7 +66,6 @@
 		E62B17061B5CE3EB00D446BC /* BrowseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E62B17051B5CE3EB00D446BC /* BrowseViewController.swift */; };
 		E62B170A1B5CE46500D446BC /* PositionIn.BrowseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E62B17091B5CE46500D446BC /* PositionIn.BrowseViewController.xib */; };
 		E6325F651B57D89A00996480 /* SidebarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6325F621B57D89A00996480 /* SidebarViewController.swift */; };
-		E6325F671B57DA4600996480 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6325F661B57DA4600996480 /* MapKit.framework */; };
 		E6325F721B57E1DA00996480 /* Storyboards.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6325F711B57E1DA00996480 /* Storyboards.swift */; };
 		E6365D351B7D709E00CB79CB /* PhotoInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6365D341B7D709E00CB79CB /* PhotoInfo.swift */; };
 		E64D00631B7C8FB7007693E0 /* AddPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64D00621B7C8FB7007693E0 /* AddPostViewController.swift */; };
@@ -752,6 +751,7 @@
 		E6D4D5B31B6F8B9F003134CB /* PositionIn.SearchBar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.SearchBar.xib; sourceTree = "<group>"; };
 		E6D4D5B41B6F8B9F003134CB /* SearchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		E6D4D5B71B6FA7A7003134CB /* SearchTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTransition.swift; sourceTree = "<group>"; };
+		E6D6E1911B83333F0087D489 /* LocationProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationProvider.swift; sourceTree = "<group>"; };
 		E6D7C2911B5D546C004F3AA9 /* NibView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NibView.swift; sourceTree = "<group>"; };
 		E6DA53BC1B7CFCCA000087A7 /* Mock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mock.swift; sourceTree = "<group>"; };
 		E6DA53C11B7D00DB000087A7 /* CommunityInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommunityInfoCell.swift; sourceTree = "<group>"; };
@@ -796,7 +796,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E6325F671B57DA4600996480 /* MapKit.framework in Frameworks */,
 				E6B3C3311B62581200EA613A /* CleanroomLogger.framework in Frameworks */,
 				E6B3C32F1B62581200EA613A /* CleanroomASL.framework in Frameworks */,
 				451B04D684C5CB71F3D6581C /* Pods_PositionIn.framework in Frameworks */,
@@ -942,6 +941,7 @@
 				E6325FC81B57FBE100996480 /* NetworkDataProvider.swift */,
 				E6325FD71B57FEAF00996480 /* NetworkActivityIndicatorManager.swift */,
 				E6D7C2911B5D546C004F3AA9 /* NibView.swift */,
+				E6D6E1911B83333F0087D489 /* LocationProvider.swift */,
 				E6325FA71B57F36E00996480 /* Supporting Files */,
 			);
 			path = PosInCore;

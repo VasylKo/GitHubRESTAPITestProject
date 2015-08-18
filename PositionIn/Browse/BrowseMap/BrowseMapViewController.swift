@@ -40,10 +40,8 @@ final class BrowseMapViewController: UIViewController {
     */
 
     lazy private var mapView: GMSMapView = {
-        let camera = GMSCameraPosition.cameraWithLatitude(-33.86,
-            longitude: 151.20, zoom: 6)
-
-        let map = GMSMapView.mapWithFrame(CGRectZero, camera: camera)
+        let map = GMSMapView(frame: self.view.bounds)
+        map.mapType = kGMSTypeTerrain
         self.view.addSubViewOnEntireSize(map)
         return map
     }()
