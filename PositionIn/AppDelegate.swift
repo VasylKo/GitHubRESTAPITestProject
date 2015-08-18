@@ -136,7 +136,6 @@ func api() -> APIService {
     return appDelegate.api
 }
 
-
 struct CleanroomOutputStream: OutputStreamType {
     let logChannel: LogChannel?
     func write(string: String) {

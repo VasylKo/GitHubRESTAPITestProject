@@ -100,7 +100,6 @@ public class LocationProvider: NSObject {
         }()
         if status != requiredStatus {
             method(self.locationManager)()
-            self.locationManager.requestAlwaysAuthorization()
             return true
         }
         return false
@@ -137,10 +136,13 @@ extension LocationProvider: CLLocationManagerDelegate {
     }
     
     public func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
-        if status == .Denied {
+        switch status {
+        case .Denied:
             locationDeniedByUser()
-        } else {
+        case .NotDetermined:
+            break
+        default:
             startUpdatingLocation()
         }
-    }    
+    }
 }
