@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import MapKit
+import GoogleMaps
 import XLForm
 import CleanroomLogger
 
@@ -17,10 +17,11 @@ class LocationSelectorViewController: UIViewController, XLFormRowDescriptorViewC
     var rowDescriptor: XLFormRowDescriptor?
     
     
-    lazy var mapView : MKMapView = {
-        let mapView = MKMapView(frame: self.view.frame)
-        self.view.addSubViewOnEntireSize(mapView)
-        return mapView
+    lazy private var mapView : GMSMapView = {
+        let map = GMSMapView(frame: self.view.bounds)
+        map.mapType = kGMSTypeSatellite
+        self.view.addSubViewOnEntireSize(map)
+        return map
         }()
 
     
@@ -28,8 +29,8 @@ class LocationSelectorViewController: UIViewController, XLFormRowDescriptorViewC
         super.viewDidLoad()
         if let rowDesc = self.rowDescriptor,
            let value = rowDesc.value as? CLLocation {
+            mapView.camera = GMSCameraPosition.cameraWithTarget(value.coordinate, zoom: 6)
             Log.debug?.value(value.coordinate)
-            mapView.setCenterCoordinate(value.coordinate, animated: false)
         }
 
         // Do any additional setup after loading the view.
