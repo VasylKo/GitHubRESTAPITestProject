@@ -11,13 +11,14 @@ import CleanroomLogger
 import XLForm
 
 import BrightFutures
-import Photos
 
 final class AddPostViewController: BaseAddItemViewController {
     private enum Tags : String {
         case Message = "Message"
         case Community = "Community"
         case Photo = "Photo"
+        case Title = "Title"
+        case Location = "location"
     }
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
@@ -36,6 +37,11 @@ final class AddPostViewController: BaseAddItemViewController {
         // Description section
         let descriptionSection = XLFormSectionDescriptor.formSection()
         form.addFormSection(descriptionSection)
+        // Title
+        let titleRow = XLFormRowDescriptor(tag: Tags.Title.rawValue, rowType: XLFormRowDescriptorTypeText)
+        titleRow.cellConfigAtConfigure["textField.placeholder"] = NSLocalizedString("Title", comment: "New promotion: title")
+        titleRow.required = true
+        descriptionSection.addFormRow(titleRow)
         // Message
         let messageRow = XLFormRowDescriptor(tag: Tags.Message.rawValue, rowType:XLFormRowDescriptorTypeTextView)
         messageRow.cellConfigAtConfigure["textView.placeholder"] = NSLocalizedString("Message", comment: "New post: message")
@@ -45,11 +51,13 @@ final class AddPostViewController: BaseAddItemViewController {
         // Info section
         let infoSection = XLFormSectionDescriptor.formSection()
         form.addFormSection(infoSection)
-
         // Community
         let communityRow = communityRowDescriptor(Tags.Community.rawValue)
         infoSection.addFormRow(communityRow)
-        
+        // Location
+        let locationRow = locationRowDescriptor(Tags.Location.rawValue)
+        infoSection.addFormRow(locationRow)
+
         
         //Photo section
         let photoSection = XLFormSectionDescriptor.formSection()
@@ -70,14 +78,27 @@ final class AddPostViewController: BaseAddItemViewController {
         self.tableView.endEditing(true)
         
         let values = formValues()
-        Log.debug?.value(values)
+        Log.debug?.value(values)        
         
-        if let assets = values[Tags.Photo.rawValue] as? [PHAsset] {
-            self.uploadAssets(assets).onSuccess { urls in
-                Log.debug?.value(urls)
-            }.onFailure { error in
-                Log.error?.value(error.localizedDescription)
-            }
+        if  let imageUpload = uploadAssets(values[Tags.Photo.rawValue]),
+            let getLocation = locationFromValue(values[Tags.Location.rawValue]) {
+                getLocation.zip(imageUpload).flatMap { (location: Location, urls: [NSURL]) -> Future<Post, NSError> in
+                    var post = Post()
+                    post.name = values[Tags.Title.rawValue] as? String
+                    post.text = values[Tags.Message.rawValue] as? String
+                    post.location = location
+                    post.photos = urls.map { url in
+                        var info = PhotoInfo()
+                        info.url = url
+                        return info
+                    }
+                    return api().createUserPost(post: post)
+                }.onSuccess { (post: Post) -> ()  in
+                    Log.debug?.value(post)
+                }.onFailure { error in
+                    Log.error?.value(error)
+                }
+                
         }
         
         

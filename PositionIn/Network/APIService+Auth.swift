@@ -27,7 +27,7 @@ extension APIService {
                 object: nil, userInfo: nil)
         }
     }
-    
+        
     func auth(#username: String, password: String) -> Future<UserProfile, NSError> {
         return authRequest(username: username, password: password).flatMap { _ in
             return self.getMyProfile()

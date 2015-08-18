@@ -36,11 +36,18 @@ class BaseAddItemViewController: XLFormViewController {
         locationRow.valueTransformer = CLLocationValueTrasformer.self
         locationRow.value = defaultLocation
         if withCurrentCoordinate {
-            getCurrentCoordinate().onSuccess { [weak locationRow] coordinate in
+            locationController().getCurrentCoordinate().onSuccess { [weak locationRow] coordinate in
                 locationRow?.value = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
             }
         }
         return locationRow
+    }
+    
+    func locationFromValue(value: AnyObject?) -> Future<Location, NSError>? {
+        if let location = value as? CLLocation {
+            return locationController().reverseGeocodeCoordinate(location.coordinate)
+        }
+        return nil
     }
     
     func categoryRowDescriptor(tag: String) -> XLFormRowDescriptor {
@@ -77,12 +84,15 @@ class BaseAddItemViewController: XLFormViewController {
         return photoRow
     }
     
-    func uploadAssets(assets: [PHAsset]) -> Future<[NSURL], NSError> {
-        return sequence( assets.map { asset in
-            self.uploadDataForAsset(asset).flatMap { (let data, let dataUTI) in
-                return api().uploadImage(data, dataUTI: dataUTI)
-            }
-        })
+    func uploadAssets(value: AnyObject?, optional: Bool = true) -> Future<[NSURL], NSError>? {
+        if let assets = value as? [PHAsset] {
+            return sequence( assets.map { asset in
+                self.uploadDataForAsset(asset).flatMap { (let data, let dataUTI) in
+                    return api().uploadImage(data, dataUTI: dataUTI)
+                }
+            })
+        }
+        return optional ? Future.succeeded([]) : nil
     }
     
     private func uploadDataForAsset(asset: PHAsset) -> Future<(NSData, String), NSError> {

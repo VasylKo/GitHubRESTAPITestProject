@@ -136,15 +136,11 @@ func api() -> APIService {
     return appDelegate.api
 }
 
-func getCurrentCoordinate() -> Future<CLLocationCoordinate2D, NSError> {
+func locationController() -> LocationController {
     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-    return appDelegate.locationController.getCurrentCoordinate()
+    return appDelegate.locationController
 }
 
-func getCurrentLocation() -> Future<Location, NSError> {
-    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-    return appDelegate.locationController.getCurrentLocation()
-}
 
 struct CleanroomOutputStream: OutputStreamType {
     let logChannel: LogChannel?

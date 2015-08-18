@@ -32,7 +32,7 @@ struct Post: CRUDObject {
     var location: Location?
 
     
-    init(objectId: CRUDObjectId) {
+    init(objectId: CRUDObjectId = CRUDObjectInvalidId) {
         self.objectId = objectId
     }
     

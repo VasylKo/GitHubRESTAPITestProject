@@ -8,6 +8,7 @@
 
 import UIKit
 import BrightFutures
+import CleanroomLogger
 
 final class MyProfileViewController: BaseProfileViewController {
     override func viewDidLoad() {
@@ -23,7 +24,7 @@ final class MyProfileViewController: BaseProfileViewController {
     }
 
     private func didReceivePosts(posts: [Post], page: APIService.Page) {
-        
+        Log.debug?.value(posts)
     }
     
     private func didReceiveProfile(profile: UserProfile) {

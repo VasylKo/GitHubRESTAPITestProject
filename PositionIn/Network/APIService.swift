@@ -52,9 +52,9 @@ struct APIService {
         }
     }
     
-    func createUserPost(userId: CRUDObjectId, post object: Post) -> Future<Post, NSError> {
-        return sessionController.session().flatMap {
-            (token: AuthResponse.Token) -> Future<Post, NSError> in
+    func createUserPost(post object: Post) -> Future<Post, NSError> {
+        return sessionController.session().zip(sessionController.currentUserId()).flatMap {
+            (token: AuthResponse.Token, userId: CRUDObjectId) -> Future<Post, NSError> in
             let endpoint = Post.userPostsEndpoint(userId)
             let params = Mapper().toJSON(object)
             let request = self.updateRequest(token, endpoint: endpoint, method: .POST, params: params)

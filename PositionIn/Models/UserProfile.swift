@@ -22,6 +22,12 @@ final class UserProfile: CRUDObject {
     var backgroundImage: NSURL?
     var location: Location?
     
+    enum Gender {
+        case Unknown
+        case Male
+        case Female
+    }
+    
     init?(_ map: Map) {
         mapping(map)
         if objectId == CRUDObjectInvalidId {

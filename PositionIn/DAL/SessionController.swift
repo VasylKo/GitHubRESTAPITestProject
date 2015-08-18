@@ -15,6 +15,18 @@ import CleanroomLogger
 
 struct SessionController {
     
+    func currentUserId() -> Future<CRUDObjectId, NSError> {
+        return future { () -> Result<CRUDObjectId ,NSError> in
+            if let userId = self.userIdValue {
+                return Result(value: userId)
+            } else {
+                Log.warning?.trace()
+                let errorCode = NetworkDataProvider.ErrorCodes.InvalidSessionError
+                return Result(error: errorCode.error())
+            }
+        }
+    }
+    
     func session() -> Future<APIService.AuthResponse.Token ,NSError> {
         return future { () -> Result<APIService.AuthResponse.Token ,NSError> in
             if  let token = self.accessToken,
@@ -50,7 +62,7 @@ struct SessionController {
         keychain[KeychainKeys.UserIdKey] = userId
     }
     
-    var userId: CRUDObjectId? {
+    private var userIdValue: CRUDObjectId? {
         return keychain[KeychainKeys.UserIdKey]
     }
     

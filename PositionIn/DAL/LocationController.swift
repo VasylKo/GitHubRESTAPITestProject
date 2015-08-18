@@ -14,7 +14,7 @@ final class LocationController {
         
     func getCurrentLocation() -> Future<Location, NSError> {
         return getCurrentCoordinate().flatMap { coordinate in
-            return reverseGeocodeCoordinate(coordinate)
+            return self.reverseGeocodeCoordinate(coordinate)
         }
     }
     
@@ -32,6 +32,33 @@ final class LocationController {
             }
         }
         return future
+    }
+    
+    func reverseGeocodeCoordinate(coordinate: CLLocationCoordinate2D) -> Future<Location, NSError> {
+        let promise = Promise<Location, NSError>()
+        let geocoder = GMSGeocoder()
+        GMSGeocoder().reverseGeocodeCoordinate(coordinate) { response, error in
+            if let error = error {
+                promise.failure(error)
+            } else if let address = response?.firstResult() {
+                var location = Location()
+                location.coordinates = address.coordinate
+                location.country = address.country
+                location.zip = address.postalCode
+                location.city = address.locality
+                location.state = address.administrativeArea
+                location.street1 = address.thoroughfare
+                promise.success(location)
+            } else {
+                let error = NSError(
+                    domain: LocationController.kLocationControllerErrorDomain,
+                    code: LocationController.ErrorCodes.CouldNotReverseGeocode.rawValue,
+                    userInfo: nil
+                )
+                promise.failure(error)
+            }
+        }
+        return promise.future
     }
     
     init() {
@@ -106,34 +133,6 @@ final class LocationController {
             cacheStorage.setObject(data, forKey: kLastKnownCoordinateKey)
         }
     }
-    
-    private func reverseGeocodeCoordinate(coordinate: CLLocationCoordinate2D) -> Future<Location, NSError> {
-        let promise = Promise<Location, NSError>()
-        let geocoder = GMSGeocoder()
-        GMSGeocoder().reverseGeocodeCoordinate(coordinate) { response, error in
-            if let error = error {
-                promise.failure(error)
-            } else if let address = response?.firstResult() {
-                var location = Location()
-                location.coordinates = address.coordinate
-                location.country = address.country
-                location.zip = address.postalCode
-                location.city = address.locality
-                location.state = address.administrativeArea
-                location.street1 = address.thoroughfare
-                promise.success(location)
-            } else {
-                let error = NSError(
-                    domain: LocationController.kLocationControllerErrorDomain,
-                    code: LocationController.ErrorCodes.CouldNotReverseGeocode.rawValue,
-                    userInfo: nil
-                )
-                promise.failure(error)
-            }
-        }
-        return promise.future
-    }
-
 
     static let kLocationControllerErrorDomain = "kLocationControllerErrorDomain"
     

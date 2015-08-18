@@ -13,7 +13,7 @@ final class BrowseMapViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        getCurrentCoordinate().onSuccess { [weak self] coordinate in
+        locationController().getCurrentCoordinate().onSuccess { [weak self] coordinate in
             self?.mapView.moveCamera(GMSCameraUpdate.setTarget(coordinate, zoom: 12))
         }
         
