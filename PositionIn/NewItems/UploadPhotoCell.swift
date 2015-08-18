@@ -79,5 +79,7 @@ class UploadPhotoCell: XLFormBaseCell {
     }
     
     private var imagePreviews: [UIImageView] = []
-    private let imageManager = PHCachingImageManager()
+    private lazy var imageManager: PHCachingImageManager = {
+        return PHCachingImageManager()
+    }()
 }
