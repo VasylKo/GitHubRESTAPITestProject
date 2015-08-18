@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     let api: APIService
     let chatClient: XMPPClient
-    let locationProvider: LocationProvider
+    let locationController: LocationController
     
     override init() {
         #if DEBUG
@@ -49,7 +49,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         api = APIService(url: baseURL, amazon: amazonURL, dataProvider: dataProvider)
         let chatConfig = XMPPClientConfiguration.defaultConfiguration()
         chatClient = XMPPClient(configuration: chatConfig)
-        locationProvider = LocationProvider()
+        locationController = LocationController()
         super.init()
     }
 
@@ -67,7 +67,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 sidebarViewController.executeAction(defaultAction)
             }
         }
-        locationProvider.startUpdatingLocation()
+        
+        getCurrentLocation().onSuccess { location in
+            Log.debug?.value(location)
+        }.onFailure { error in
+            Log.error?.value(error)
+        }
         return true
         
         
@@ -134,6 +139,16 @@ extension AppDelegate {
 func api() -> APIService {
     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
     return appDelegate.api
+}
+
+func getCurrentCoordinate() -> Future<CLLocationCoordinate2D, NSError> {
+    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+    return appDelegate.locationController.getCurrentCoordinate()
+}
+
+func getCurrentLocation() -> Future<Location, NSError> {
+    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+    return appDelegate.locationController.getCurrentLocation()
 }
 
 struct CleanroomOutputStream: OutputStreamType {

@@ -20,6 +20,9 @@ struct Location: Mappable, Printable {
     var city: String?
     var zip: String?
     
+    init(objectId: CRUDObjectId = CRUDObjectInvalidId) {
+        self.objectId = objectId
+    }
     
     init?(_ map: Map) {
         mapping(map)

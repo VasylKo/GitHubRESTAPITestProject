@@ -15,42 +15,60 @@ import CleanroomLogger
 class LocationSelectorViewController: UIViewController, XLFormRowDescriptorViewController {
 
     var rowDescriptor: XLFormRowDescriptor?
+        
+    var coordinate: CLLocationCoordinate2D? {
+        if  let rowDescriptor = self.rowDescriptor,
+            let location = rowDescriptor.value as? CLLocation where CLLocationCoordinate2DIsValid(location.coordinate) {
+             return location.coordinate
+        }
+        return nil
+    }
     
-    
-    lazy private var mapView : GMSMapView = {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        if let coordinate = self.coordinate {
+            Log.debug?.value(coordinate)
+            mapView.camera = GMSCameraPosition.cameraWithTarget(coordinate, zoom: 12)
+            self.mapView(mapView, didTapAtCoordinate: coordinate)
+        } else {
+            Log.error?.message("Initial coordinate did not set")
+        }
+    }
+
+    private lazy var mapView : GMSMapView = {
         let map = GMSMapView(frame: self.view.bounds)
+        map.delegate = self
+        map.settings.compassButton = true
+        map.myLocationEnabled = false
         map.mapType = kGMSTypeTerrain
         self.view.addSubViewOnEntireSize(map)
         return map
         }()
-
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        if let rowDesc = self.rowDescriptor,
-           let value = rowDesc.value as? CLLocation {
-            mapView.camera = GMSCameraPosition.cameraWithTarget(value.coordinate, zoom: 6)
-            Log.debug?.value(value.coordinate)
+    private lazy var selectionMarker: GMSMarker = {
+        let marker = GMSMarker()
+        self.coordinate.map { marker.position = $0 }
+        marker.appearAnimation = kGMSMarkerAnimationPop
+        marker.draggable = true
+        marker.map = self.mapView
+        return marker
+        }()
+    
+    private func updateTitle() {
+        if let coordinate = self.coordinate {
+            self.title = String(format: "%0.4f, %0.4f", coordinate.latitude, coordinate.longitude)
         }
-
-        // Do any additional setup after loading the view.
     }
+}
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+extension LocationSelectorViewController: GMSMapViewDelegate {
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func mapView(mapView: GMSMapView!, didTapAtCoordinate coordinate: CLLocationCoordinate2D) {
+        let location = CLLocation(latitude:coordinate.latitude, longitude:coordinate.longitude)
+        self.rowDescriptor?.value = location
+        selectionMarker.position = coordinate
+        updateTitle()
     }
-    */
 
 }
 
@@ -61,11 +79,9 @@ class CLLocationValueTrasformer : NSValueTransformer {
         return NSString.self
     }
     
-    
     override class func allowsReverseTransformation() -> Bool {
         return false
     }
-    
     
     override func transformedValue(value: AnyObject?) -> AnyObject? {
         if let valueData: AnyObject = value {

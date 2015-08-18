@@ -10,7 +10,8 @@ import Foundation
 import CoreLocation
 
 
-public class LocationProvider: NSObject {
+public final class LocationProvider: NSObject {
+    
     public enum LocationRequirements {
         case Always
         case WhenInUse
@@ -27,6 +28,7 @@ public class LocationProvider: NSObject {
     }
 
     private(set) public var state: State
+    
     public var accuracy: CLLocationAccuracy {
         set {
             dispatch_async(dispatch_get_main_queue()) {
@@ -52,6 +54,10 @@ public class LocationProvider: NSObject {
         locationManager = CLLocationManager()
         super.init()
         locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
+    }
+    
+    deinit {
+        locationManager.stopUpdatingLocation()
     }
     
     
@@ -113,9 +119,9 @@ public class LocationProvider: NSObject {
         NSNotificationCenter.defaultCenter().postNotificationName(notificationName, object: self, userInfo: info)
     }
     
-    static let DidStartLocatingNotification = "LocationProviderDidStartLocatingNotification"
-    static let DidFinishLocatingNotification = "LocationProviderDidFinishLocatingNotification"
-    static let DidUpdateCoordinateNotification = "LocationProviderDidUpdateCoordinateNotification"
+    public static let DidStartLocatingNotification = "LocationProviderDidStartLocatingNotification"
+    public static let DidFinishLocatingNotification = "LocationProviderDidFinishLocatingNotification"
+    public static let DidUpdateCoordinateNotification = "LocationProviderDidUpdateCoordinateNotification"
 }
 
 
