@@ -68,11 +68,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
         
-        getCurrentLocation().onSuccess { location in
-            Log.debug?.value(location)
-        }.onFailure { error in
-            Log.error?.value(error)
-        }
         return true
         
         

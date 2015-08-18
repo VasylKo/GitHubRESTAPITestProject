@@ -13,13 +13,10 @@ final class BrowseMapViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        getCurrentCoordinate().onSuccess { [weak self] coordinate in
+            self?.mapView.moveCamera(GMSCameraUpdate.setTarget(coordinate, zoom: 12))
+        }
         
-        let marker = GMSMarker()
-        marker.position = CLLocationCoordinate2DMake(-33.86, 151.20)
-        marker.title = "Sydney"
-        marker.snippet = "Australia"
-        marker.map = mapView
 
     }
 

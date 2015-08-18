@@ -27,14 +27,11 @@ final class LocationController {
             if let coordinate = self.lastKnownCoordinate
                 where self.lastKnownCoordinateExpirationDate.compare(NSDate()) == NSComparisonResult.OrderedDescending {
                     future = Future.succeeded(coordinate)
-//                    promise.success(coordinate)
             } else {
-                future = promise.future
                 self.pendingPromises.append(promise)
                 self.locationProvider.startUpdatingLocation()                
             }
         }
-
         return future
     }
     
