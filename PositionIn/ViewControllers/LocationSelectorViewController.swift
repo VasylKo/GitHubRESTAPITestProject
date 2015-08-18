@@ -56,7 +56,7 @@ class LocationSelectorViewController: UIViewController, XLFormRowDescriptorViewC
     
     private func updateTitle() {
         if let coordinate = self.coordinate {
-                self.title = String(format: "%0.4f, %0.4f", coordinate.latitude, coordinate.longitude)
+            self.title = String(format: "%0.4f, %0.4f", coordinate.latitude, coordinate.longitude)
         }
     }
 }
