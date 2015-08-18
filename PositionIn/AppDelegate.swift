@@ -13,6 +13,7 @@ import BrightFutures
 import CleanroomLogger
 import ResponseDetective
 import Messaging
+import GoogleMaps
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -54,7 +55,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        
+        setupMaps()
         api.getMyProfile().onComplete { result in
             let defaultAction: SidebarViewController.Action
             if let profile = result.value {
@@ -120,6 +121,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    }
+}
+
+extension AppDelegate {
+    func setupMaps() {
+        let apiKey = "AIzaSyA3NvrDKBcpIsnq4-ZACG41y7Mj-wSfVrY"
+        GMSServices.provideAPIKey(apiKey)
     }
 }
 

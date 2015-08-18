@@ -7,13 +7,20 @@
 //
 
 import UIKit
+import GoogleMaps
 
 final class BrowseMapViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        
+        let marker = GMSMarker()
+        marker.position = CLLocationCoordinate2DMake(-33.86, 151.20)
+        marker.title = "Sydney"
+        marker.snippet = "Australia"
+        marker.map = mapView
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -32,4 +39,13 @@ final class BrowseMapViewController: UIViewController {
     }
     */
 
+    lazy private var mapView: GMSMapView = {
+        let camera = GMSCameraPosition.cameraWithLatitude(-33.86,
+            longitude: 151.20, zoom: 6)
+
+        let map = GMSMapView.mapWithFrame(CGRectZero, camera: camera)
+        self.view.addSubViewOnEntireSize(map)
+        return map
+    }()
+    
 }

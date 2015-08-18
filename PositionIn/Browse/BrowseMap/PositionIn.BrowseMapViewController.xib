@@ -13,18 +13,7 @@
         <view contentMode="scaleToFill" id="apz-CI-lnL">
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-            <subviews>
-                <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="satellite" translatesAutoresizingMaskIntoConstraints="NO" id="Ciz-mK-IHm">
-                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                </mapView>
-            </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-            <constraints>
-                <constraint firstAttribute="trailing" secondItem="Ciz-mK-IHm" secondAttribute="trailing" id="IwO-ko-cvZ"/>
-                <constraint firstAttribute="bottom" secondItem="Ciz-mK-IHm" secondAttribute="bottom" id="Z1o-eZ-dRK"/>
-                <constraint firstItem="Ciz-mK-IHm" firstAttribute="top" secondItem="apz-CI-lnL" secondAttribute="top" id="dH6-qI-SYG"/>
-                <constraint firstItem="Ciz-mK-IHm" firstAttribute="leading" secondItem="apz-CI-lnL" secondAttribute="leading" id="qFN-NF-U6F"/>
-            </constraints>
         </view>
     </objects>
 </document>
