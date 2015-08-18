@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     let api: APIService
     let chatClient: XMPPClient
-    let locationProvider: LocationProvider
+    let locationController: LocationController
     
     override init() {
         #if DEBUG
@@ -49,7 +49,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         api = APIService(url: baseURL, amazon: amazonURL, dataProvider: dataProvider)
         let chatConfig = XMPPClientConfiguration.defaultConfiguration()
         chatClient = XMPPClient(configuration: chatConfig)
-        locationProvider = LocationProvider()
+        locationController = LocationController()
         super.init()
     }
 
@@ -67,7 +67,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 sidebarViewController.executeAction(defaultAction)
             }
         }
-        locationProvider.startUpdatingLocation()
         return true
         
         

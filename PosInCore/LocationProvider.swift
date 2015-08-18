@@ -10,7 +10,7 @@ import Foundation
 import CoreLocation
 
 
-public class LocationProvider: NSObject {
+public final class LocationProvider: NSObject {
     public enum LocationRequirements {
         case Always
         case WhenInUse
