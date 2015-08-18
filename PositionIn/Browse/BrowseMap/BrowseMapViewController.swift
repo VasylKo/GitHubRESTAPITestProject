@@ -40,9 +40,8 @@ final class BrowseMapViewController: UIViewController {
     */
 
     lazy private var mapView: GMSMapView = {
-
         let map = GMSMapView(frame: self.view.bounds)
-        map.mapType = kGMSTypeSatellite
+        map.mapType = kGMSTypeTerrain
         self.view.addSubViewOnEntireSize(map)
         return map
     }()

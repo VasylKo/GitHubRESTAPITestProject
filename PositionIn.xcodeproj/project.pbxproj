@@ -751,6 +751,7 @@
 		E6D4D5B31B6F8B9F003134CB /* PositionIn.SearchBar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.SearchBar.xib; sourceTree = "<group>"; };
 		E6D4D5B41B6F8B9F003134CB /* SearchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		E6D4D5B71B6FA7A7003134CB /* SearchTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTransition.swift; sourceTree = "<group>"; };
+		E6D6E1911B83333F0087D489 /* LocationProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationProvider.swift; sourceTree = "<group>"; };
 		E6D7C2911B5D546C004F3AA9 /* NibView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NibView.swift; sourceTree = "<group>"; };
 		E6DA53BC1B7CFCCA000087A7 /* Mock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mock.swift; sourceTree = "<group>"; };
 		E6DA53C11B7D00DB000087A7 /* CommunityInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommunityInfoCell.swift; sourceTree = "<group>"; };
@@ -940,6 +941,7 @@
 				E6325FC81B57FBE100996480 /* NetworkDataProvider.swift */,
 				E6325FD71B57FEAF00996480 /* NetworkActivityIndicatorManager.swift */,
 				E6D7C2911B5D546C004F3AA9 /* NibView.swift */,
+				E6D6E1911B83333F0087D489 /* LocationProvider.swift */,
 				E6325FA71B57F36E00996480 /* Supporting Files */,
 			);
 			path = PosInCore;
