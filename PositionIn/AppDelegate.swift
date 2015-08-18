@@ -67,6 +67,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 sidebarViewController.executeAction(defaultAction)
             }
         }
+        
+        getCurrentLocation().onSuccess { location in
+            Log.debug?.value(location)
+        }.onFailure { error in
+            Log.error?.value(error)
+        }
         return true
         
         
@@ -133,6 +139,16 @@ extension AppDelegate {
 func api() -> APIService {
     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
     return appDelegate.api
+}
+
+func getCurrentCoordinate() -> Future<CLLocationCoordinate2D, NSError> {
+    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+    return appDelegate.locationController.getCurrentCoordinate()
+}
+
+func getCurrentLocation() -> Future<Location, NSError> {
+    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+    return appDelegate.locationController.getCurrentLocation()
 }
 
 struct CleanroomOutputStream: OutputStreamType {

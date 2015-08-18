@@ -28,7 +28,7 @@ class LocationSelectorViewController: UIViewController, XLFormRowDescriptorViewC
         super.viewDidLoad()
         if let coordinate = self.coordinate {
             Log.debug?.value(coordinate)
-            mapView.camera = GMSCameraPosition.cameraWithTarget(coordinate, zoom: 11)
+            mapView.camera = GMSCameraPosition.cameraWithTarget(coordinate, zoom: 12)
             self.mapView(mapView, didTapAtCoordinate: coordinate)
         } else {
             Log.error?.message("Initial coordinate did not set")

@@ -119,9 +119,9 @@ public final class LocationProvider: NSObject {
         NSNotificationCenter.defaultCenter().postNotificationName(notificationName, object: self, userInfo: info)
     }
     
-    static let DidStartLocatingNotification = "LocationProviderDidStartLocatingNotification"
-    static let DidFinishLocatingNotification = "LocationProviderDidFinishLocatingNotification"
-    static let DidUpdateCoordinateNotification = "LocationProviderDidUpdateCoordinateNotification"
+    public static let DidStartLocatingNotification = "LocationProviderDidStartLocatingNotification"
+    public static let DidFinishLocatingNotification = "LocationProviderDidFinishLocatingNotification"
+    public static let DidUpdateCoordinateNotification = "LocationProviderDidUpdateCoordinateNotification"
 }
 
 
