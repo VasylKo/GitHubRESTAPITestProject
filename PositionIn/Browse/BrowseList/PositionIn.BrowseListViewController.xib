@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
@@ -21,13 +21,13 @@
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </tableView>
                 <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="a6X-i6-NUa">
-                    <rect key="frame" x="90" y="20" width="419" height="29"/>
+                    <rect key="frame" x="10" y="20" width="580" height="29"/>
                     <segments>
-                        <segment title="All"/>
-                        <segment title="Products"/>
-                        <segment title="Events"/>
-                        <segment title="Promotions"/>
-                        <segment title="Posts"/>
+                        <segment title="" image="FeedFilterAll"/>
+                        <segment title="" image="FeedFilterProduct"/>
+                        <segment title="" image="FeedFilterEvent"/>
+                        <segment title="" image="FeedFilterPromotion"/>
+                        <segment title="" image="FeedFilterPost"/>
                     </segments>
                     <color key="tintColor" red="0.13725490200000001" green="0.4431372549" blue="0.83529411760000005" alpha="1" colorSpace="calibratedRGB"/>
                     <connections>
@@ -37,10 +37,9 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="a6X-i6-NUa" secondAttribute="trailing" constant="5" id="7wr-hj-jfT"/>
+                <constraint firstAttribute="trailing" secondItem="a6X-i6-NUa" secondAttribute="trailing" constant="10" id="7wr-hj-jfT"/>
                 <constraint firstAttribute="bottom" secondItem="rSU-D8-03P" secondAttribute="bottom" id="BnK-3b-bE1"/>
-                <constraint firstAttribute="centerX" secondItem="a6X-i6-NUa" secondAttribute="centerX" id="Fdm-iw-UTr"/>
-                <constraint firstItem="a6X-i6-NUa" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="hh2-4T-SbM" secondAttribute="leading" constant="5" id="PTq-DO-NYs"/>
+                <constraint firstItem="a6X-i6-NUa" firstAttribute="leading" secondItem="hh2-4T-SbM" secondAttribute="leading" constant="10" id="PTq-DO-NYs"/>
                 <constraint firstItem="rSU-D8-03P" firstAttribute="top" secondItem="a6X-i6-NUa" secondAttribute="bottom" constant="20" id="daa-NX-VxE"/>
                 <constraint firstAttribute="trailing" secondItem="rSU-D8-03P" secondAttribute="trailing" id="fIA-t9-lYr"/>
                 <constraint firstItem="rSU-D8-03P" firstAttribute="leading" secondItem="hh2-4T-SbM" secondAttribute="leading" id="gIx-mh-q7l"/>
@@ -49,4 +48,11 @@
             <point key="canvasLocation" x="193" y="218"/>
         </view>
     </objects>
+    <resources>
+        <image name="FeedFilterAll" width="17" height="17"/>
+        <image name="FeedFilterEvent" width="17" height="17"/>
+        <image name="FeedFilterPost" width="17" height="17"/>
+        <image name="FeedFilterProduct" width="17" height="17"/>
+        <image name="FeedFilterPromotion" width="17" height="17"/>
+    </resources>
 </document>

@@ -95,9 +95,9 @@ class RoundButton: UIControl {
     override func layoutSublayersOfLayer(layer: CALayer!) {
         bubbleLayer.path = UIBezierPath(ovalInRect: bounds).CGPath
         bubbleLayer.frame = bounds
-            let imageInsetsSize: CGFloat = bounds.width / 5.0
-            let imageRect = CGRectInset(bounds, imageInsetsSize, imageInsetsSize)
-            iconLayer.frame = imageRect
+        let imageInsetsSize: CGFloat = bounds.width / 4.0
+        let imageRect = CGRectInset(bounds, imageInsetsSize, imageInsetsSize)
+        iconLayer.frame = imageRect
     }
     
     override func intrinsicContentSize() -> CGSize {
@@ -115,7 +115,7 @@ class RoundButton: UIControl {
     static let animationDuration: NSTimeInterval = 0.1
 }
 
-//MARK: touches
+//MARK: Touches
 extension RoundButton {
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
         super.touchesBegan(touches, withEvent: event)

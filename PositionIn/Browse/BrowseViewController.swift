@@ -220,7 +220,7 @@ extension BrowseViewController {
             ),
             AddMenuView.MenuItem(
                 title: NSLocalizedString("POST",comment: "Add menu: POST"),
-                icon: UIImage(named: "AddPromotion")!,
+                icon: UIImage(named: "AddPost")!,
                 color: UIScheme.postAddMenuColor,
                 action: {[weak self] in
                     self?.navigationController?.pushViewController(Storyboards.NewItems.instantiateAddPostViewController(), animated: true)
