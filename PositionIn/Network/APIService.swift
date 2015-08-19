@@ -12,8 +12,36 @@ import Alamofire
 import ObjectMapper
 import BrightFutures
 import CleanroomLogger
+import Result
 
 struct APIService {
+    
+    init (
+        url: NSURL,
+        amazon: NSURL,
+        dataProvider: NetworkDataProvider = NetworkDataProvider(),
+        sessionController: SessionController = SessionController()
+        ) {
+            baseURL = url
+            amazonURL = amazon
+            self.dataProvider = dataProvider
+            self.sessionController = SessionController()
+    }
+    
+    //MARK: - Variables -
+    
+    private let baseURL: NSURL
+    private let amazonURL: NSURL
+    //TODO: make private
+    internal let dataProvider: NetworkDataProvider
+    internal let sessionController: SessionController
+    
+    var description: String {
+        return "API: \(baseURL.absoluteString)"
+    }
+    
+    
+    //MARK: - Profile -
     
     func getMyProfile() -> Future<UserProfile, NSError> {
         return sessionController.session().flatMap {
@@ -40,6 +68,7 @@ struct APIService {
         }
     }
     
+    //MARK: - Posts -
     
     func getUserPosts(userId: CRUDObjectId, page: Page) -> Future<CollectionResponse<Post>,NSError> {
         return sessionController.session().flatMap {
@@ -67,6 +96,8 @@ struct APIService {
         }
     }
     
+    //MARK: - Search -
+    
     func getFeed(params: APIServiceQueryConvertible) -> Future<CollectionResponse<FeedItem>,NSError> {
         return sessionController.session().flatMap {
             (token: AuthResponse.Token) -> Future<CollectionResponse<FeedItem>, NSError> in
@@ -75,6 +106,8 @@ struct APIService {
             return future
         }
     }
+    
+    //MARK: - Generics (outdated) -
     
     //TODO: check usage
     func getAll<C: CRUDObject>(endpoint: String) -> Future<CollectionResponse<C>, NSError> {
@@ -118,17 +151,7 @@ struct APIService {
         }
     }
     
-    
-    var description: String {
-        return "API: \(baseURL.absoluteString)"
-    }
-    
-    init (url: NSURL, amazon: NSURL, dataProvider: NetworkDataProvider = NetworkDataProvider()) {
-        baseURL = url
-        amazonURL = amazon
-        self.dataProvider = dataProvider
-        sessionController = SessionController()
-    }
+    //MARK: - Helpers -
     
 //    @availability(*, unavailable)
     func emptyResponseMapping() -> (AnyObject? -> Void?) {
@@ -152,7 +175,6 @@ struct APIService {
         }
     }
     
-    
     //TODO: make private, move to request
     internal func http(endpoint: String) -> NSURL {
         return url(endpoint, scheme: "http")
@@ -162,6 +184,7 @@ struct APIService {
         return url(endpoint, scheme: "https")
     }
 
+    //TODO: move to request
     private func url(endpoint: String, scheme: String, port: Int? = nil) -> NSURL {
         if let components = NSURLComponents(URL: baseURL, resolvingAgainstBaseURL: false) {
             components.scheme = scheme
@@ -176,12 +199,6 @@ struct APIService {
         fatalError("Could not generate  url")
     }
     
-    private let baseURL: NSURL
-    private let amazonURL: NSURL
-//TODO: make private
-    internal let dataProvider: NetworkDataProvider
-    internal let sessionController: SessionController
-
     
     private func readRequest(token: String, endpoint: String, params: [String : AnyObject]? = nil) -> CRUDRequest {
         var request = CRUDRequest(token: token, url: https(endpoint))
@@ -199,7 +216,9 @@ struct APIService {
     
 }
 
+//MARK: - CRUD request -
 extension APIService {
+    
     private final class CRUDRequest: Alamofire.URLRequestConvertible {
         
         let token: String
@@ -234,6 +253,8 @@ extension APIService {
     }
 }
 
+//MARK: - Query -
+
 protocol APIServiceQueryConvertible {
     var query: [String : AnyObject]  { get }
 }
@@ -253,6 +274,7 @@ final class APIServiceQuery: APIServiceQueryConvertible {
 }
 
 extension APIService {
+    
     struct Page: APIServiceQueryConvertible {
         let skip: Int
         let take: Int
@@ -274,7 +296,7 @@ extension APIService {
     }
 }
 
-//MARK: images
+//MARK: - Images -
 
 extension APIService {
     
@@ -285,15 +307,15 @@ extension APIService {
             let urlRequest = self.imageRequest(token)
             return self.dataProvider.upload(urlRequest, files: [fileInfo])
             }.flatMap { (response: AnyObject?) -> Future<NSURL, NSError> in
-                let p = Promise<NSURL, NSError>()
-                if  let JSON = response as? [String: AnyObject],
-                    let urlString = JSON["uri"] as? String {
-                        let url = self.amazonURL.URLByAppendingPathComponent(urlString)
-                        p.success(url)
-                } else {
-                    p.failure(NetworkDataProvider.ErrorCodes.InvalidResponseError.error())
+                return future(context: ImmediateExecutionContext) { () -> Result<NSURL ,NSError> in                    
+                    if  let JSON = response as? [String: AnyObject],
+                        let urlString = JSON["uri"] as? String {
+                            let url = self.amazonURL.URLByAppendingPathComponent(urlString)
+                            return Result(value: url)
+                    } else {
+                        return Result(error: NetworkDataProvider.ErrorCodes.InvalidResponseError.error())
+                    }
                 }
-                return p.future
         }
     }
     

@@ -15,19 +15,23 @@ import CleanroomLogger
 
 extension APIService {
     
+    // Return existing session 
+    // (In future should also try to refresh token
     func session() -> Future<Void ,NSError> {
         return sessionController.session().map() { _ in
             return ()
         }
     }
     
+    // Logout from the current session
     func logout() -> Future<Void, NoError> {
         return sessionController.logout().onComplete { _ in
             NSNotificationCenter.defaultCenter().postNotificationName(UserProfile.CurrentUserDidChangeNotification,
                 object: nil, userInfo: nil)
         }
     }
-        
+    
+    // Auth new session and return my profile
     func auth(#username: String, password: String) -> Future<UserProfile, NSError> {
         return authRequest(username: username, password: password).flatMap { _ in
             return self.getMyProfile()
@@ -38,6 +42,7 @@ extension APIService {
         }
     }
     
+    // Register user and return new session
     func createProfile(#username: String, password: String) -> Future<Void, NSError> {
         let (request, future): (Alamofire.Request, Future<UserProfile, NSError>) = dataProvider.objectRequest(AuthRouter.Register(api: self, username: username, password: password), validation: self.statusCodeValidation(statusCode: [201]))
         return future.andThen { result in
@@ -51,7 +56,7 @@ extension APIService {
         }
     }
 
-    
+    // Create new session
     private func authRequest(#username: String, password: String) -> Future<AuthResponse, NSError> {
         let (_, future): (Alamofire.Request, Future<AuthResponse, NSError>) = dataProvider.objectRequest(AuthRouter.Auth(api: self, username: username, password: password))
         return future.andThen { result in
@@ -67,7 +72,7 @@ extension APIService {
         case Auth(api: APIService, username: String, password: String)
         case Register(api: APIService, username: String, password: String)
 
-        // MARK: URLRequestConvertible
+        // URLRequestConvertible
         var URLRequest: NSURLRequest {
             let encoding: Alamofire.ParameterEncoding
             let url:  NSURL
@@ -111,6 +116,7 @@ extension APIService {
         }
     }
     
+    // Create Session response
     struct AuthResponse: Mappable, DebugPrintable {
         typealias Token = String!
         private(set) var accessToken: Token
