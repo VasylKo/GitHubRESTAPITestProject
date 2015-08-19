@@ -39,6 +39,11 @@ final class BrowseMapViewController: UIViewController {
     lazy private var mapView: GMSMapView = {
         let map = GMSMapView(frame: self.view.bounds)
         map.mapType = kGMSTypeTerrain
+        map.settings.tiltGestures = false
+        map.settings.rotateGestures = false
+        map.settings.myLocationButton = true
+        map.settings.indoorPicker = false
+        map.myLocationEnabled = true
         self.view.addSubViewOnEntireSize(map)
         return map
     }()

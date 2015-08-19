@@ -39,6 +39,8 @@ class LocationSelectorViewController: UIViewController, XLFormRowDescriptorViewC
         let map = GMSMapView(frame: self.view.bounds)
         map.delegate = self
         map.settings.compassButton = true
+        map.settings.indoorPicker = false
+        map.settings.tiltGestures = false
         map.myLocationEnabled = false
         map.mapType = kGMSTypeTerrain
         self.view.addSubViewOnEntireSize(map)
