@@ -228,7 +228,7 @@ extension BrowseViewController {
             ),
             AddMenuView.MenuItem(
                 title: NSLocalizedString("INVITE",comment: "Add menu: INVITE"),
-                icon: UIImage(named: "AddFriend")!,
+                icon: UIImage(named: "AddInvite")!,
                 color: UIScheme.inviteAddMenuColor,
                 action: {[weak self] in
                     Log.debug?.message("Should call invite")
