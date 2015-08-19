@@ -355,7 +355,7 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="MainMenuCategories" translatesAutoresizingMaskIntoConstraints="NO" id="LNb-Ma-yB2">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="MainMenuMessages" translatesAutoresizingMaskIntoConstraints="NO" id="LNb-Ma-yB2">
                                                     <rect key="frame" x="10" y="2" width="40" height="40"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="40" id="7MC-Nn-2WB"/>
@@ -498,7 +498,7 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="SYh-Ob-oI3" id="H98-Wy-grl">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="MainMenuCategories" translatesAutoresizingMaskIntoConstraints="NO" id="QiL-33-irS">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="MainMenuMessages" translatesAutoresizingMaskIntoConstraints="NO" id="QiL-33-irS">
                                                     <rect key="frame" x="10" y="2" width="40" height="40"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="40" id="DaV-qZ-c3I"/>
@@ -820,8 +820,8 @@
     <resources>
         <image name="BrowseModeList" width="22" height="22"/>
         <image name="BrowseModeMap" width="22" height="22"/>
-        <image name="MainMenuCategories" width="24" height="24"/>
         <image name="MainMenuFilters" width="22" height="22"/>
+        <image name="MainMenuMessages" width="22" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="UGm-BP-OPQ"/>

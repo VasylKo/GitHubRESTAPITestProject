@@ -32,7 +32,7 @@ final class MainMenuViewController: UIViewController {
             let title: String =  user.firstName ?? NSLocalizedString("Unknown", comment: "Main Menu: Unnamed user")
             let image = user.avatar?.absoluteString ?? ""
             return MainMenuItem(title: title, imageName: image, action: .UserProfile)
-        } ?? MainMenuItem(title: NSLocalizedString("Login", comment: "Main Menu: Login"), imageName: "MainMenuUserProfile", action: .Login)
+        } ?? MainMenuItem(title: NSLocalizedString("Login", comment: "Main Menu: Login"), imageName: "MainMenuPeople", action: .Login)
 
         return [firstItem] + defaultMainMenuItems()
     }
@@ -45,7 +45,7 @@ final class MainMenuViewController: UIViewController {
             MainMenuItem(title: NSLocalizedString("Messages", comment: "Main Menu: Messages"), imageName: "MainMenuMessages", action: .Messages),
             MainMenuItem(title: NSLocalizedString("Filters", comment: "Main Menu: Filters"), imageName: "MainMenuFilters", action: .Filters),
             MainMenuItem(title: NSLocalizedString("Community", comment: "Main Menu: Community"), imageName: "MainMenuCommunity", action: .Community),
-            MainMenuItem(title: NSLocalizedString("People", comment: "Main Menu: People"), imageName: "MainMenuCommunity"),            
+            MainMenuItem(title: NSLocalizedString("People", comment: "Main Menu: People"), imageName: "MainMenuPeople"),
             MainMenuItem(title: NSLocalizedString("Wallet", comment: "Main Menu: Wallet"), imageName: "MainMenuWallet"),
             MainMenuItem(title: NSLocalizedString("Settings", comment: "Main Menu: Settings"), imageName: "MainMenuSettings", action: .Settings),
         ]

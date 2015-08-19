@@ -102,6 +102,6 @@ class AvatarView: UIView {
     private let maskLayer = CAShapeLayer()
     
     override func prepareForInterfaceBuilder() {
-        image = UIImage(named: "MainMenuUserProfile", inBundle: NSBundle(forClass: self.dynamicType), compatibleWithTraitCollection: self.traitCollection)
+        image = UIImage(named: "MainMenuPeople", inBundle: NSBundle(forClass: self.dynamicType), compatibleWithTraitCollection: self.traitCollection)
     }
 }
