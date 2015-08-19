@@ -93,8 +93,9 @@ final class AddPostViewController: BaseAddItemViewController {
                         return info
                     }
                     return api().createUserPost(post: post)
-                }.onSuccess { (post: Post) -> ()  in
+                }.onSuccess { [weak self] (post: Post) -> ()  in
                     Log.debug?.value(post)
+                    self?.performSegue(AddPostViewController.Segue.Close)
                 }.onFailure { error in
                     Log.error?.value(error)
                 }

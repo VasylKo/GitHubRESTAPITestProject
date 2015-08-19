@@ -526,11 +526,196 @@ extension LoginViewController {
 //MARK: - RecoverPasswordViewController
 
 //MARK: - AddProductViewController
+extension UIStoryboardSegue {
+    func selection() -> AddProductViewController.Segue? {
+        if let identifier = self.identifier {
+            return AddProductViewController.Segue(rawValue: identifier)
+        }
+        return nil
+    }
+}
+
+extension AddProductViewController { 
+
+    enum Segue: String, Printable, SegueProtocol {
+        case Close = "Close"
+
+        var kind: SegueKind? {
+            switch (self) {
+            case Close:
+                return SegueKind(rawValue: "unwind")
+            default:
+                preconditionFailure("Invalid value")
+                break
+            }
+        }
+
+        var destination: UIViewController.Type? {
+            switch (self) {
+            default:
+                assertionFailure("Unknown destination")
+                return nil
+            }
+        }
+
+        var identifier: String? { return self.description } 
+        var description: String { return self.rawValue }
+    }
+
+}
 
 //MARK: - AddPostViewController
+extension UIStoryboardSegue {
+    func selection() -> AddPostViewController.Segue? {
+        if let identifier = self.identifier {
+            return AddPostViewController.Segue(rawValue: identifier)
+        }
+        return nil
+    }
+}
+
+extension AddPostViewController { 
+
+    enum Segue: String, Printable, SegueProtocol {
+        case Close = "Close"
+
+        var kind: SegueKind? {
+            switch (self) {
+            case Close:
+                return SegueKind(rawValue: "unwind")
+            default:
+                preconditionFailure("Invalid value")
+                break
+            }
+        }
+
+        var destination: UIViewController.Type? {
+            switch (self) {
+            default:
+                assertionFailure("Unknown destination")
+                return nil
+            }
+        }
+
+        var identifier: String? { return self.description } 
+        var description: String { return self.rawValue }
+    }
+
+}
 
 //MARK: - AddCommunityViewController
+extension UIStoryboardSegue {
+    func selection() -> AddCommunityViewController.Segue? {
+        if let identifier = self.identifier {
+            return AddCommunityViewController.Segue(rawValue: identifier)
+        }
+        return nil
+    }
+}
+
+extension AddCommunityViewController { 
+
+    enum Segue: String, Printable, SegueProtocol {
+        case Close = "Close"
+
+        var kind: SegueKind? {
+            switch (self) {
+            case Close:
+                return SegueKind(rawValue: "unwind")
+            default:
+                preconditionFailure("Invalid value")
+                break
+            }
+        }
+
+        var destination: UIViewController.Type? {
+            switch (self) {
+            default:
+                assertionFailure("Unknown destination")
+                return nil
+            }
+        }
+
+        var identifier: String? { return self.description } 
+        var description: String { return self.rawValue }
+    }
+
+}
 
 //MARK: - AddPromotionViewController
+extension UIStoryboardSegue {
+    func selection() -> AddPromotionViewController.Segue? {
+        if let identifier = self.identifier {
+            return AddPromotionViewController.Segue(rawValue: identifier)
+        }
+        return nil
+    }
+}
+
+extension AddPromotionViewController { 
+
+    enum Segue: String, Printable, SegueProtocol {
+        case Close = "Close"
+
+        var kind: SegueKind? {
+            switch (self) {
+            case Close:
+                return SegueKind(rawValue: "unwind")
+            default:
+                preconditionFailure("Invalid value")
+                break
+            }
+        }
+
+        var destination: UIViewController.Type? {
+            switch (self) {
+            default:
+                assertionFailure("Unknown destination")
+                return nil
+            }
+        }
+
+        var identifier: String? { return self.description } 
+        var description: String { return self.rawValue }
+    }
+
+}
 
 //MARK: - AddEventViewController
+extension UIStoryboardSegue {
+    func selection() -> AddEventViewController.Segue? {
+        if let identifier = self.identifier {
+            return AddEventViewController.Segue(rawValue: identifier)
+        }
+        return nil
+    }
+}
+
+extension AddEventViewController { 
+
+    enum Segue: String, Printable, SegueProtocol {
+        case Close = "Close"
+
+        var kind: SegueKind? {
+            switch (self) {
+            case Close:
+                return SegueKind(rawValue: "unwind")
+            default:
+                preconditionFailure("Invalid value")
+                break
+            }
+        }
+
+        var destination: UIViewController.Type? {
+            switch (self) {
+            default:
+                assertionFailure("Unknown destination")
+                return nil
+            }
+        }
+
+        var identifier: String? { return self.description } 
+        var description: String { return self.rawValue }
+    }
+
+}
