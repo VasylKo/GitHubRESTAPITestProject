@@ -16,7 +16,7 @@ let CRUDObjectInvalidId: CRUDObjectId = ""
 protocol CRUDObject: Mappable, Printable {
     
 
-    var objectId: CRUDObjectId { get }
+    var objectId: CRUDObjectId { get  set}
     
     static func endpoint() -> String    
 }

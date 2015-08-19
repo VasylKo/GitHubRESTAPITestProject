@@ -63,6 +63,10 @@ struct Post: CRUDObject {
         return UserProfile.endpoint().stringByAppendingPathComponent("\(userId)/posts")
     }
     
+    static func communityPostsEndpoint(communityId: CRUDObjectId) -> String {
+        return Community.endpoint().stringByAppendingPathComponent("\(communityId)/posts")
+    }
+    
     static func allEndpoint(userId: CRUDObjectId) -> String {
         return UserProfile.endpoint().stringByAppendingPathComponent(userId).stringByAppendingPathComponent("posts")
     }
