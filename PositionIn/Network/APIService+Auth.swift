@@ -15,6 +15,11 @@ import CleanroomLogger
 
 extension APIService {
     
+    //Returns current user id
+    func currentUserId() -> Future<CRUDObjectId, NSError> {
+        return sessionController.currentUserId()
+    }
+    
     // Return existing session 
     // (In future should also try to refresh token
     func session() -> Future<Void ,NSError> {

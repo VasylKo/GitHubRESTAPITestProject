@@ -44,17 +44,12 @@ struct APIService {
     //MARK: - Profile -
     
     func getMyProfile() -> Future<UserProfile, NSError> {
-        return sessionController.session().flatMap {
-            (token: AuthResponse.Token) -> Future<UserProfile,NSError> in
-            let request = self.readRequest(token, endpoint: UserProfile.myProfileEndpoint())
-            let (_ , future): (Alamofire.Request, Future<UserProfile,NSError>) = self.dataProvider.objectRequest(request)
-            return future.andThen { result in
-                if let profile = result.value {
-                    NSNotificationCenter.defaultCenter().postNotificationName(UserProfile.CurrentUserDidChangeNotification,
-                        object: profile, userInfo: nil)
-                }
+        let endpoint = UserProfile.myProfileEndpoint()
+        return getObject(endpoint).andThen { result in
+            if let profile = result.value {
+                NSNotificationCenter.defaultCenter().postNotificationName(UserProfile.CurrentUserDidChangeNotification,
+                    object: profile, userInfo: nil)
             }
-            
         }
     }
     
@@ -66,14 +61,9 @@ struct APIService {
     //MARK: - Posts -
     
     func getUserPosts(userId: CRUDObjectId, page: Page) -> Future<CollectionResponse<Post>,NSError> {
-        return sessionController.session().flatMap {
-            (token: AuthResponse.Token) -> Future<CollectionResponse<Post>, NSError> in
-            let endpoint = Post.userPostsEndpoint(userId)
-            let params = page.query
-            let request = self.readRequest(token, endpoint: endpoint, params: params)
-            let (_ , future): (Alamofire.Request, Future<CollectionResponse<Post>, NSError>) = self.dataProvider.objectRequest(request)
-            return future
-        }
+        let endpoint = Post.userPostsEndpoint(userId)
+        let params = page.query
+        return getObjectsCollection(endpoint, params: params)
     }
     
     func createUserPost(post object: Post) -> Future<Post, NSError> {
@@ -92,39 +82,37 @@ struct APIService {
     
     //MARK: - Search -
     
-    func getFeed(params: APIServiceQueryConvertible) -> Future<CollectionResponse<FeedItem>,NSError> {
-        return sessionController.session().flatMap {
-            (token: AuthResponse.Token) -> Future<CollectionResponse<FeedItem>, NSError> in
-            let request = self.readRequest(token, endpoint: FeedItem.endpoint(), params: params.query)
-            let (_ , future): (Alamofire.Request, Future<CollectionResponse<FeedItem>, NSError>) = self.dataProvider.objectRequest(request)
-            return future
-        }
+    func getFeed(query: APIServiceQueryConvertible) -> Future<CollectionResponse<FeedItem>,NSError> {
+        let endpoint = FeedItem.endpoint()
+        let params = query.query
+        return getObjectsCollection(endpoint, params: params)
     }
     
     //MARK: - Generics -
     
-    //TODO: check usage (outdated)
-    func getAll<C: CRUDObject>(endpoint: String) -> Future<CollectionResponse<C>, NSError> {
+    private func getObjectsCollection<C: CRUDObject>(endpoint: String, params: [String : AnyObject]?) -> Future<CollectionResponse<C>, NSError> {
+        typealias CRUDResultType = (Alamofire.Request, Future<CollectionResponse<C>, NSError>)
+        
         return sessionController.session().flatMap {
-            (token: AuthResponse.Token) -> Future<CollectionResponse<C>,NSError> in
-            let request = self.readRequest(token, endpoint: endpoint)
-            let (_ , future): (Alamofire.Request, Future<CollectionResponse<C>, NSError>) = self.dataProvider.objectRequest(request)
+            (token: AuthResponse.Token) -> Future<CollectionResponse<C>, NSError> in
+            let request = self.readRequest(token, endpoint: endpoint, params: params)
+            let (_ , future): CRUDResultType = self.dataProvider.objectRequest(request)
             return future
-            
         }
     }
     
-    //TODO: check usage (outdated)
-    func get<C: CRUDObject>(objectID: CRUDObjectId) -> Future<C, NSError> {
+    private func getObject<C: CRUDObject>(endpoint: String) -> Future<C, NSError> {
+        typealias CRUDResultType = (Alamofire.Request, Future<C, NSError>)
+        
         return sessionController.session().flatMap {
             (token: AuthResponse.Token) -> Future<C, NSError> in
-            let request = self.readRequest(token, endpoint: C.endpoint().stringByAppendingPathComponent(objectID))
-            let (_ , future): (Alamofire.Request, Future<C, NSError>) = self.dataProvider.objectRequest(request)
+            let request = self.readRequest(token, endpoint: endpoint)
+            let (_, future): CRUDResultType = self.dataProvider.objectRequest(request)
             return future
         }
     }
     
-    func createObject<C: CRUDObject>(endpoint: String, object: C) -> Future<C, NSError> {
+    private func createObject<C: CRUDObject>(endpoint: String, object: C) -> Future<C, NSError> {
         typealias CRUDResultType = (Alamofire.Request, Future<UpdateResponse, NSError>)
         
         return sessionController.session().flatMap {
@@ -140,7 +128,7 @@ struct APIService {
         }
     }
     
-    func updateObject<C: CRUDObject>(endpoint: String, object: C) -> Future<Void, NSError> {
+    private func updateObject<C: CRUDObject>(endpoint: String, object: C) -> Future<Void, NSError> {
         typealias CRUDResultType = (Alamofire.Request, Future<Void, NSError>)
         
         return sessionController.session().flatMap {
