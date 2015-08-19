@@ -53,14 +53,19 @@ struct APIService {
         }
     }
     
-    func updateMyProfile(object: UserProfile) -> Future<Void,NSError> {
+    func updateMyProfile(object: UserProfile) -> Future<Void, NSError> {
         let endpoint = UserProfile.myProfileEndpoint()
         return updateObject(endpoint, object: object)
     }
     
+    func getUserProfile(userId: CRUDObjectId) -> Future<UserProfile, NSError> {
+        let endpoint = UserProfile.userEndpoint(userId)
+        return getObject(endpoint)
+    }
+    
     //MARK: - Posts -
     
-    func getUserPosts(userId: CRUDObjectId, page: Page) -> Future<CollectionResponse<Post>,NSError> {
+    func getUserPosts(userId: CRUDObjectId, page: Page) -> Future<CollectionResponse<Post>, NSError> {
         let endpoint = Post.userPostsEndpoint(userId)
         let params = page.query
         return getObjectsCollection(endpoint, params: params)
@@ -74,9 +79,37 @@ struct APIService {
         }
     }
     
-    func createCommunityPost(communityId: CRUDObjectId,post object: Post) -> Future<Post, NSError> {
+    func createCommunityPost(communityId: CRUDObjectId, post object: Post) -> Future<Post, NSError> {
         let endpoint = Post.communityPostsEndpoint(communityId)
         return createObject(endpoint, object: object)
+    }
+    
+    //MARK: - Community -
+    
+    func getCommunities(page: Page) -> Future<CollectionResponse<Community>,NSError> {
+        let endpoint = Community.endpoint()
+        let params = page.query
+        return getObjectsCollection(endpoint, params: params)
+    }
+
+    func getUserCommunities(userId: CRUDObjectId) -> Future<CollectionResponse<Community>,NSError> {
+        let endpoint = Community.userCommunitiesEndpoint(userId)
+        return getObjectsCollection(endpoint, params: nil)
+    }
+    
+    func getCommunity(communityId: CRUDObjectId) -> Future<Community, NSError> {
+        let endpoint = Community.communityEndpoint(communityId)
+        return getObject(endpoint)
+    }
+    
+    func createCommunity(community object: Community) -> Future<Community, NSError> {
+        let endpoint = Community.endpoint()
+        return createObject(endpoint, object: object)
+    }
+    
+    func updateCommunity(community object: Community) -> Future<Void, NSError> {
+        let endpoint = Community.communityEndpoint(object.objectId)
+        return updateObject(endpoint, object: object)
     }
     
     

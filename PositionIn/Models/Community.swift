@@ -28,7 +28,8 @@ struct Community: CRUDObject {
     },
     */
     var role: String?
-
+    var members: CollectionResponse<UserProfile>?
+    var location: Location?
 
     
     init?(_ map: Map) {
@@ -48,11 +49,18 @@ struct Community: CRUDObject {
         role <- map["role"]
         avatar <- (map["avatar"], URLTransform())
         isPrivate <- map["isPrivate"]
+        members <- map["members"]
+        location <- map["location"]
     }
     
     static func endpoint() -> String {
         return "/v1.0/community"
     }
+
+    static func communityEndpoint(communityId: CRUDObjectId) -> String {
+        return Community.endpoint().stringByAppendingPathComponent("\(communityId)")
+    }
+
     
     static func userCommunitiesEndpoint(userId: CRUDObjectId) -> String {
         return UserProfile.endpoint().stringByAppendingPathComponent("\(userId)/communities")

@@ -58,6 +58,11 @@ final class UserProfile: CRUDObject {
         return "/v1.0/me"
     }
     
+    static func userEndpoint(userId: CRUDObjectId) -> String {
+        return UserProfile.endpoint().stringByAppendingPathComponent("\(userId)")
+    }
+
+    
     var description: String {
         return "<\(self.dynamicType):\(objectId)>"
     }
