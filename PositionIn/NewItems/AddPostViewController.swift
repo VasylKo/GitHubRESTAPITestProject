@@ -78,7 +78,9 @@ final class AddPostViewController: BaseAddItemViewController {
         self.tableView.endEditing(true)
         
         let values = formValues()
-        Log.debug?.value(values)        
+        Log.debug?.value(values)
+        
+        let community =  communityValue(values[Tags.Community.rawValue])
         
         if  let imageUpload = uploadAssets(values[Tags.Photo.rawValue]),
             let getLocation = locationFromValue(values[Tags.Location.rawValue]) {
@@ -92,7 +94,11 @@ final class AddPostViewController: BaseAddItemViewController {
                         info.url = url
                         return info
                     }
-                    return api().createUserPost(post: post)
+                    if let communityId = community {
+                        return api().createCommunityPost(communityId, post: post)
+                    } else {
+                        return api().createUserPost(post: post)
+                    }
                 }.onSuccess { [weak self] (post: Post) -> ()  in
                     Log.debug?.value(post)
                     self?.performSegue(AddPostViewController.Segue.Close)

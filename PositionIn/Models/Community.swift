@@ -31,6 +31,10 @@ struct Community: CRUDObject {
     var members: CollectionResponse<UserProfile>?
     var location: Location?
 
+    init(objectId: CRUDObjectId = CRUDObjectInvalidId) {
+        self.objectId = objectId
+    }
+
     
     init?(_ map: Map) {
         mapping(map)

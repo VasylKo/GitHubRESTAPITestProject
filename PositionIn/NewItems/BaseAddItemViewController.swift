@@ -75,7 +75,37 @@ class BaseAddItemViewController: XLFormViewController {
             XLFormOptionsObject(value: 0, displayText:"All"),
             XLFormOptionsObject(value: 1, displayText:"Selected"),
         ]
+        
+        let emptyCommunity: Community = {
+            var c = Community()
+            c.objectId = CRUDObjectInvalidId
+            c.name = NSLocalizedString("None", comment: "New item: empty community")
+            return c
+        }()
+        let emptyOption = XLFormOptionsObject.formOptionsObjectWithCommunity(emptyCommunity)
+        
+        communityRow.value =  emptyOption
+        communityRow.selectorOptions = [ emptyOption ]
+        api().currentUserId().flatMap { userId in
+            return api().getUserCommunities(userId)
+            }.onSuccess { [weak communityRow] response in
+                Log.debug?.value(response.items)
+                let options = [emptyOption] + response.items.map { XLFormOptionsObject.formOptionsObjectWithCommunity($0) }
+                communityRow?.selectorOptions = options
+            }.onFailure { error in
+                Log.error?.value(error)
+        }        
+
         return communityRow
+    }
+    
+    func communityValue(value: AnyObject?) -> CRUDObjectId? {
+        if  let option = value as? XLFormOptionsObject,
+            let communityId = option.communityId
+            where communityId != CRUDObjectInvalidId {
+            return communityId
+        }
+        return nil
     }
     
     func photoRowDescriptor(tag: String) -> XLFormRowDescriptor {
