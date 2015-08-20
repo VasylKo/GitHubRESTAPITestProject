@@ -64,15 +64,39 @@ extension BrowseListViewController {
         }
         
         @objc override func tableView(tableView: UITableView, reuseIdentifierForIndexPath indexPath: NSIndexPath) -> String {
+            if indexPath.row % 4 == 0 {
+                return  EventListCell.reuseId()
+            }
+            
+            if indexPath.row % 3 == 0 {
+                return PromotionListCell.reuseId()
+            }
+            
+            if indexPath.row % 2 == 0 {
+                return PostListCell.reuseId()
+            }
+            
             return ListProductCell.reuseId()
         }
         
         override func tableView(tableView: UITableView, modelForIndexPath indexPath: NSIndexPath) -> TableViewCellModel {
-            return TableViewCellTextModel(title: "\(Float(indexPath.row) / 100.0) miles")
+            if indexPath.row % 4 == 0 {
+                return TableViewCellEventModel(title: "Art Gallery", date: NSDate(), info: "45 People are attending", imageURL: "https://www.daycounts.com/images/stories/virtuemart/product/Virtuemart_Bundl_4f6eaee37356e.png")
+            }
+            
+            if indexPath.row % 3 == 0 {
+                return TableViewCellPromotionModel(title: "Arts & Crafts Summer Sale", author: "The Sydney Art Store", discount: "Save 80%", imageURL: "https://www.daycounts.com/images/stories/virtuemart/product/Virtuemart_Bundl_4f6eaee37356e.png")
+            }
+            
+            if indexPath.row % 2 == 0 {
+                return TableViewCellPostModel(title: "Betty Wheeler", info: "Lovely day to go golfing", imageURL: "https://www.daycounts.com/images/stories/virtuemart/product/Virtuemart_Bundl_4f6eaee37356e.png")
+            }
+            
+            return TableViewCellProductModel(title: "The forest", owner: "Edwarn Ryan", distance: 0.09, imageURL: "https://www.daycounts.com/images/stories/virtuemart/product/Virtuemart_Bundl_4f6eaee37356e.png", price: 99.8)
         }
         
         override func nibCellsId() -> [String] {
-            return [ListProductCell.reuseId()]
+            return [ListProductCell.reuseId(), EventListCell.reuseId(), PromotionListCell.reuseId(), PostListCell.reuseId()]
         }
         
         func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
