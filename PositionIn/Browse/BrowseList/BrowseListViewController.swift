@@ -8,6 +8,7 @@
 
 import UIKit
 import PosInCore
+import CleanroomLogger
 
 final class BrowseListViewController: UIViewController, BrowseActionProducer {
     
@@ -31,15 +32,16 @@ final class BrowseListViewController: UIViewController, BrowseActionProducer {
             switch filter {
             case .ShowAll:
                 filteredItems = items
-            case .ShowPosts:
-                filteredItems = items.filter { $0.type == FeedItem.self.Type.Post }
+            case .ShowProducts:
+                filteredItems = items.filter { $0.type == FeedItem.ItemType.Item }
             case .ShowEvents:
-               filteredItems =  items.filter { $0.type == FeedItem.self.Type.Event }
+                filteredItems =  items.filter { $0.type == FeedItem.ItemType.Event }
             case .ShowPromotions:
-                filteredItems = items.filter { $0.type == FeedItem.self.Type.Promotion }
-            case .ShowEvents:
-                filteredItems = items.filter { $0.type == FeedItem.self.Type.Event }
+                filteredItems = items.filter { $0.type == FeedItem.ItemType.Promotion }
+            case .ShowPosts:
+                filteredItems = items.filter { $0.type == FeedItem.ItemType.Post }
             }
+            
             dataSource.setItems(filteredItems)
             tableView.reloadData()
             tableView.setContentOffset(CGPointZero, animated: false)
@@ -102,8 +104,7 @@ extension BrowseListViewController {
         
         @objc override func tableView(tableView: UITableView, reuseIdentifierForIndexPath indexPath: NSIndexPath) -> String {
             let model = self.tableView(tableView, modelForIndexPath: indexPath)
-            model.type
-            return TableViewCell.reuseId()
+            return showCompactCells ? modelFactory.compactCellReuseIdForModel(model) : modelFactory.detailCellReuseIdForModel(model)
         }
         
         override func nibCellsId() -> [String] {
@@ -112,9 +113,10 @@ extension BrowseListViewController {
         
         func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
             tableView.deselectRowAtIndexPath(indexPath, animated: true)
-            if let browseController = parentViewController as? BrowseActionProducer,
-               let actionConsumer = browseController.actionConsumer {
-                actionConsumer.browseController(browseController, didSelectPost: Post(objectId: CRUDObjectInvalidId))
+            if let model = self.tableView(tableView, modelForIndexPath: indexPath) as? FeedTableItemCellModel,
+               let actionConsumer = self.actionConsumer {
+                Log.debug?.message("Did select \(model.itemType) \(model.objectID)")
+                //actionConsumer.browseController(browseController, didSelectPost: Post(objectId: CRUDObjectInvalidId))
             }
         }
         
@@ -128,6 +130,11 @@ extension BrowseListViewController {
             } else {
                 models = feedItems.map { self.modelFactory.detailedModelsForItem($0) }
             }
+
+        }
+        
+        private var actionConsumer: BrowseActionConsumer? {
+            return flatMap(parentViewController as? BrowseActionProducer) { $0.actionConsumer }
 
         }
         

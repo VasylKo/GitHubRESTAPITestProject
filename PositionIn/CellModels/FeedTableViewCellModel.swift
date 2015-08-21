@@ -9,72 +9,36 @@
 import Foundation
 import PosInCore
 
-protocol FeedTableItemCellModel: TableViewCellModel {
-    var itemType: FeedItem.Type { get }
+protocol FeedTableCellModel: TableViewCellModel {
+    var itemType: FeedItem.ItemType { get }
     var objectID: CRUDObjectId { get }
 }
 
-class CompactFeedTableItemCellModel: TableViewCellModel {
-    let title: String
-    let info: String
-    let imageURL: NSURL?
-    let itemType: FeedItem.Type
+class CompactFeedTableCellModel: FeedTableCellModel {
+    
+    let itemType: FeedItem.ItemType
     let objectID: CRUDObjectId
-
+    
+    let title: String?
+    let details: String?
+    let info: String?
+    let imageURL: NSURL?
+    
+    init(item: FeedItem, title: String?, details: String?, info: String?, imageURL url: NSURL?) {
+        self.objectID = item.objectId
+        self.itemType = item.type
+        self.title = title
+        self.info = info
+        self.details = details
+        self.imageURL = url
+    }
 }
 
-public struct TableViewCellTitleImagePriceDistanceModel: TableViewCellModel {
-    public let title: String
-    public let owner: String
-    public let price: CGFloat
-    public let distance: CGFloat
-    public let imageURL: String
-    
-    public init(title: String, owner: String, distance: CGFloat, imageURL: String, price: CGFloat) {
-        self.title = title
-        self.owner = owner
-        self.distance = distance
-        self.imageURL = imageURL
+class ComapctPriceFeedTableCellModel : CompactFeedTableCellModel {
+    let price: Double?
+    init(item: FeedItem, title: String?, details: String?, info: String?, imageURL url: NSURL?, price: Double?) {
         self.price = price
+        super.init(item: item, title: title, details: details, info: info, imageURL: url)
     }
 }
 
-public struct TableViewCellTitleImageDateInfoModel: TableViewCellModel {
-    public let title: String
-    public let date: NSDate
-    public let info: String
-    public let imageURL: String
-    
-    public init(title: String, date: NSDate, info: String, imageURL: String) {
-        self.title = title
-        self.date = date
-        self.info = info
-        self.imageURL = imageURL
-    }
-}
-
-public struct TableViewCellTitleImageInfoModel: TableViewCellModel {
-    public let title: String
-    public let info: String
-    public let imageURL: String
-    
-    public init(title: String, info: String, imageURL: String) {
-        self.title = title
-        self.info = info
-        self.imageURL = imageURL
-    }
-}
-
-public struct TableViewCellTitleImageAuthorDiscountModel: TableViewCellModel {
-    public let title: String
-    public let author: String
-    public let discount: String
-    public let imageURL: String
-    
-    public init(title: String, author: String, discount: String, imageURL: String) {
-        self.title = title
-        self.author = author
-        self.discount = discount
-        self.imageURL = imageURL
-    }
-}
