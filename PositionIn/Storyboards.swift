@@ -497,7 +497,7 @@ extension LoginSignupViewController {
         var kind: SegueKind? {
             switch (self) {
             case LoginSegueId:
-                return SegueKind(rawValue: "showDetail")
+                return SegueKind(rawValue: "show")
             default:
                 preconditionFailure("Invalid value")
                 break
@@ -525,6 +525,45 @@ extension LoginSignupViewController {
 //MARK: - RecoverPasswordViewController
 
 //MARK: - LoginViewController
+extension UIStoryboardSegue {
+    func selection() -> LoginViewController.Segue? {
+        if let identifier = self.identifier {
+            return LoginViewController.Segue(rawValue: identifier)
+        }
+        return nil
+    }
+}
+
+extension LoginViewController { 
+
+    enum Segue: String, Printable, SegueProtocol {
+        case ForgotPasswordSegueId = "ForgotPasswordSegueId"
+
+        var kind: SegueKind? {
+            switch (self) {
+            case ForgotPasswordSegueId:
+                return SegueKind(rawValue: "show")
+            default:
+                preconditionFailure("Invalid value")
+                break
+            }
+        }
+
+        var destination: UIViewController.Type? {
+            switch (self) {
+            case ForgotPasswordSegueId:
+                return RecoverPasswordViewController.self
+            default:
+                assertionFailure("Unknown destination")
+                return nil
+            }
+        }
+
+        var identifier: String? { return self.description } 
+        var description: String { return self.rawValue }
+    }
+
+}
 
 //MARK: - AddProductViewController
 extension UIStoryboardSegue {

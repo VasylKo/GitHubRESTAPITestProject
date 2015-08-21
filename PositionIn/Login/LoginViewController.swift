@@ -21,6 +21,10 @@ final class LoginViewController: BaseLoginViewController {
         
     }
 
+    @IBAction func didTapForgot(sender: AnyObject) {
+        performSegue(LoginViewController.Segue.ForgotPasswordSegueId)
+    }
+    
     @IBAction func didTapClose(sender: AnyObject) {
         sideBarController?.executeAction(.ForYou)
         dismissViewControllerAnimated(true, completion: nil)
@@ -46,6 +50,8 @@ final class LoginViewController: BaseLoginViewController {
     
     @IBOutlet private weak var facebookButton: UIButton!
     @IBOutlet private weak var loginButton: UIButton!
+    
+    @IBOutlet private weak var forgotButton: UIButton!
     
     @IBOutlet private weak var usernameTextField: UITextField!
     @IBOutlet private weak var passwordTextField: UITextField!
