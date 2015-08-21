@@ -18,7 +18,7 @@ final class PromotionListCell: TableViewCell {
     @IBOutlet private weak var discountLabel: UILabel!
     
     override func setModel(model: TableViewCellModel) {
-        let m = model as? TableViewCellPromotionModel
+        let m = model as? TableViewCellTitleImageAuthorDiscountModel
         assert(m != nil, "Invalid model passed")
         
         if let url = NSURL(string: m!.imageURL) {

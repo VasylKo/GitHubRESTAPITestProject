@@ -17,7 +17,7 @@ final class PostListCell: TableViewCell {
     @IBOutlet private weak var infoLabel: UILabel!
     
     override func setModel(model: TableViewCellModel) {
-        let m = model as? TableViewCellPostModel
+        let m = model as? TableViewCellTitleImageInfoModel
         assert(m != nil, "Invalid model passed")
         
         if let url = NSURL(string: m!.imageURL) {

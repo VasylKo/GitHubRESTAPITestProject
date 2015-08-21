@@ -11,7 +11,7 @@ import PosInCore
 import Haneke
 
 
-final class ListProductCell: TableViewCell {
+final class ProductListCell: TableViewCell {
 
     @IBOutlet private weak var productImage: UIImageView!
     @IBOutlet private weak var headerLabel: UILabel!
@@ -20,7 +20,7 @@ final class ListProductCell: TableViewCell {
     @IBOutlet private weak var infoLabel: UILabel!
     
     override func setModel(model: TableViewCellModel) {
-        let m = model as? TableViewCellProductModel
+        let m = model as? TableViewCellTitleImagePriceDistanceModel
         assert(m != nil, "Invalid model passed")
 
         if let url = NSURL(string: m!.imageURL) {

@@ -13,25 +13,32 @@ final class BrowseListViewController: UIViewController, BrowseActionProducer {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+//        APIService.getFeed(APIService.Page()).onSuccess{ [unowned self] (response: CollectionResponse<FeedItem>) -> () in
+//            self.items = response.items
+//        }
+        
         dataSource.configureTable(tableView)
     }
     
     var filter: Filter = .All {
         didSet {
+            if let datasourse = dataSource as? GeneralListDataSource {
             switch filter {
             case .All:
-                dataSource = GeneralListDataSource()
+                datasourse.filteredItems = items
             case .Posts:
-                dataSource = PostListDataSource()
+                datasourse.filteredItems = items.filter({$0.type == FeedItem.self.Type.Post})
             case .Products:
-                dataSource = ProductListDataSource()
+               datasourse.filteredItems = items.filter({$0.type == FeedItem.self.Type.Item})
             case .Promotions:
-                dataSource = PromotionListDataSource()
+                datasourse.filteredItems = items.filter({$0.type == FeedItem.self.Type.Promotions})
             case .Events:
-                dataSource = EventListDataSource()
+                datasourse.filteredItems = items.filter({$0.type == FeedItem.self.Type.Event})
             }
+            dataSource = GeneralListDataSource()
             dataSource.configureTable(tableView)
             tableView.setContentOffset(CGPointZero, animated: true)
+            }
         }
     }
     
@@ -52,11 +59,13 @@ final class BrowseListViewController: UIViewController, BrowseActionProducer {
     
     private lazy var dataSource: TableViewDataSource = {
         let dataSource = GeneralListDataSource()
+        dataSource.filteredItems = self.items
         dataSource.parentViewController = self
         return dataSource
         }()
 
     weak var actionConsumer: BrowseActionConsumer?
+    var items: [FeedItem] = []
     
     @IBOutlet private weak var tableView: UITableView!
     @IBOutlet private weak var displayModeSegmentedControl: UISegmentedControl!
@@ -73,43 +82,19 @@ extension BrowseListViewController {
         }
         
         @objc override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            return 100
+            return filteredItems.count
         }
         
         @objc override func tableView(tableView: UITableView, reuseIdentifierForIndexPath indexPath: NSIndexPath) -> String {
-            if indexPath.row % 4 == 0 {
-                return  EventListCell.reuseId()
-            }
-            
-            if indexPath.row % 3 == 0 {
-                return PromotionListCell.reuseId()
-            }
-            
-            if indexPath.row % 2 == 0 {
-                return PostListCell.reuseId()
-            }
-            
-            return ListProductCell.reuseId()
+            return BrowseListCellsProvider.reuseIdFor(feedItem: filteredItems[indexPath.row])
         }
         
         override func tableView(tableView: UITableView, modelForIndexPath indexPath: NSIndexPath) -> TableViewCellModel {
-            if indexPath.row % 4 == 0 {
-                return TableViewCellEventModel(title: "Art Gallery", date: NSDate(), info: "45 People are attending", imageURL: "https://www.daycounts.com/images/stories/virtuemart/product/Virtuemart_Bundl_4f6eaee37356e.png")
-            }
-            
-            if indexPath.row % 3 == 0 {
-                return TableViewCellPromotionModel(title: "Arts & Crafts Summer Sale", author: "The Sydney Art Store", discount: "Save 80%", imageURL: "https://www.daycounts.com/images/stories/virtuemart/product/Virtuemart_Bundl_4f6eaee37356e.png")
-            }
-            
-            if indexPath.row % 2 == 0 {
-                return TableViewCellPostModel(title: "Betty Wheeler", info: "Lovely day to go golfing", imageURL: "https://www.daycounts.com/images/stories/virtuemart/product/Virtuemart_Bundl_4f6eaee37356e.png")
-            }
-            
-            return TableViewCellProductModel(title: "The forest", owner: "Edwarn Ryan", distance: 0.09, imageURL: "https://www.daycounts.com/images/stories/virtuemart/product/Virtuemart_Bundl_4f6eaee37356e.png", price: 99.8)
+            return BrowseListCellsProvider.modelFor(feedItem: filteredItems[indexPath.row])
         }
         
         override func nibCellsId() -> [String] {
-            return [ListProductCell.reuseId(), EventListCell.reuseId(), PromotionListCell.reuseId(), PostListCell.reuseId()]
+            return [ProductListCell.reuseId(), EventListCell.reuseId(), PromotionListCell.reuseId(), PostListCell.reuseId()]
         }
         
         func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -119,135 +104,8 @@ extension BrowseListViewController {
                 actionConsumer.browseController(browseController, didSelectPost: Post(objectId: CRUDObjectInvalidId))
             }
         }
+        
+        var filteredItems: [FeedItem] = []
     }
-    
-    internal class EventListDataSource: TableViewDataSource {
-        
-        override func configureTable(tableView: UITableView) {
-            tableView.estimatedRowHeight = 80.0
-            super.configureTable(tableView)
-        }
-        
-        @objc override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            return 100
-        }
-        
-        @objc override func tableView(tableView: UITableView, reuseIdentifierForIndexPath indexPath: NSIndexPath) -> String {
-            return  EventListCell.reuseId()
-        }
-        
-        override func tableView(tableView: UITableView, modelForIndexPath indexPath: NSIndexPath) -> TableViewCellModel {
-            return TableViewCellEventModel(title: "Art Gallery", date: NSDate(), info: "45 People are attending", imageURL: "https://www.daycounts.com/images/stories/virtuemart/product/Virtuemart_Bundl_4f6eaee37356e.png")
-        }
-        
-        override func nibCellsId() -> [String] {
-            return [EventListCell.reuseId()]
-        }
-        
-        func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-            tableView.deselectRowAtIndexPath(indexPath, animated: true)
-            if let browseController = parentViewController as? BrowseActionProducer,
-                let actionConsumer = browseController.actionConsumer {
-                    actionConsumer.browseController(browseController, didSelectPost: Post(objectId: CRUDObjectInvalidId))
-            }
-        }
-    }
-    
-    internal class ProductListDataSource: TableViewDataSource {
-        
-        override func configureTable(tableView: UITableView) {
-            tableView.estimatedRowHeight = 80.0
-            super.configureTable(tableView)
-        }
-        
-        @objc override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            return 100
-        }
-        
-        @objc override func tableView(tableView: UITableView, reuseIdentifierForIndexPath indexPath: NSIndexPath) -> String {
-            return ListProductCell.reuseId()
-        }
-        
-        override func tableView(tableView: UITableView, modelForIndexPath indexPath: NSIndexPath) -> TableViewCellModel {
-            return TableViewCellProductModel(title: "The forest", owner: "Edwarn Ryan", distance: 0.09, imageURL: "https://www.daycounts.com/images/stories/virtuemart/product/Virtuemart_Bundl_4f6eaee37356e.png", price: 99.8)
-        }
-        
-        override func nibCellsId() -> [String] {
-            return [ListProductCell.reuseId()]
-        }
-        
-        func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-            tableView.deselectRowAtIndexPath(indexPath, animated: true)
-            if let browseController = parentViewController as? BrowseActionProducer,
-                let actionConsumer = browseController.actionConsumer {
-                    actionConsumer.browseController(browseController, didSelectPost: Post(objectId: CRUDObjectInvalidId))
-            }
-        }
-    }
-
-    internal class PromotionListDataSource: TableViewDataSource {
-        
-        override func configureTable(tableView: UITableView) {
-            tableView.estimatedRowHeight = 80.0
-            super.configureTable(tableView)
-        }
-        
-        @objc override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            return 100
-        }
-        
-        @objc override func tableView(tableView: UITableView, reuseIdentifierForIndexPath indexPath: NSIndexPath) -> String {
-            return PromotionListCell.reuseId()
-        }
-        
-        override func tableView(tableView: UITableView, modelForIndexPath indexPath: NSIndexPath) -> TableViewCellModel {
-            return TableViewCellPromotionModel(title: "Arts & Crafts Summer Sale", author: "The Sydney Art Store", discount: "Save 80%", imageURL: "https://www.daycounts.com/images/stories/virtuemart/product/Virtuemart_Bundl_4f6eaee37356e.png")
-        }
-        
-        override func nibCellsId() -> [String] {
-            return [PromotionListCell.reuseId()]
-        }
-        
-        func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-            tableView.deselectRowAtIndexPath(indexPath, animated: true)
-            if let browseController = parentViewController as? BrowseActionProducer,
-                let actionConsumer = browseController.actionConsumer {
-                    actionConsumer.browseController(browseController, didSelectPost: Post(objectId: CRUDObjectInvalidId))
-            }
-        }
-    }
-
-    internal class PostListDataSource: TableViewDataSource {
-        
-        override func configureTable(tableView: UITableView) {
-            tableView.estimatedRowHeight = 80.0
-            super.configureTable(tableView)
-        }
-        
-        @objc override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            return 100
-        }
-        
-        @objc override func tableView(tableView: UITableView, reuseIdentifierForIndexPath indexPath: NSIndexPath) -> String {
-            return PostListCell.reuseId()
-        }
-        
-        override func tableView(tableView: UITableView, modelForIndexPath indexPath: NSIndexPath) -> TableViewCellModel {
-            return TableViewCellPostModel(title: "Betty Wheeler", info: "Lovely day to go golfing", imageURL: "https://www.daycounts.com/images/stories/virtuemart/product/Virtuemart_Bundl_4f6eaee37356e.png")
-        }
-        
-        override func nibCellsId() -> [String] {
-            return [PromotionListCell.reuseId()]
-        }
-        
-        func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-            tableView.deselectRowAtIndexPath(indexPath, animated: true)
-            if let browseController = parentViewController as? BrowseActionProducer,
-                let actionConsumer = browseController.actionConsumer {
-                    actionConsumer.browseController(browseController, didSelectPost: Post(objectId: CRUDObjectInvalidId))
-            }
-        }
-    }
-
 
 }

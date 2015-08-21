@@ -18,7 +18,7 @@ final class EventListCell: TableViewCell {
     @IBOutlet private weak var infoLabel: UILabel!
     
     override func setModel(model: TableViewCellModel) {
-        let m = model as? TableViewCellEventModel
+        let m = model as? TableViewCellTitleImageDateInfoModel
         assert(m != nil, "Invalid model passed")
         
         if let url = NSURL(string: m!.imageURL) {
