@@ -57,7 +57,7 @@ extension SearchViewController {
         }
         
         @objc override func tableView(tableView: UITableView, reuseIdentifierForIndexPath indexPath: NSIndexPath) -> String {
-            return ListProductCell.reuseId()
+            return ProductListCell.reuseId()
         }
         
         override func tableView(tableView: UITableView, modelForIndexPath indexPath: NSIndexPath) -> TableViewCellModel {
@@ -65,7 +65,7 @@ extension SearchViewController {
         }
         
         override func nibCellsId() -> [String] {
-            return [ListProductCell.reuseId()]
+            return [ProductListCell.reuseId()]
         }
         
         func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {

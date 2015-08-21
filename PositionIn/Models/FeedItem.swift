@@ -15,7 +15,7 @@ struct FeedItem: CRUDObject {
     var text: String?
     var date: NSDate?
     var image: NSURL?
-    var type: Type = .Unknown
+    var type: ItemType = .Unknown
     var location: Location?
     
     init?(_ map: Map) {
@@ -43,10 +43,10 @@ struct FeedItem: CRUDObject {
     }
 
     
-    enum Type: Int {
+    enum ItemType: Int {
         case Unknown
         case Event
-        case Promotions
+        case Promotion
         case Item
         case Person
         case Post

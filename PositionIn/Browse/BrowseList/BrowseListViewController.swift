@@ -8,26 +8,52 @@
 
 import UIKit
 import PosInCore
+import CleanroomLogger
 
 final class BrowseListViewController: UIViewController, BrowseActionProducer {
+    
+    let shoWCompactCells: Bool = true
 
     override func viewDidLoad() {
         super.viewDidLoad()
         dataSource.configureTable(tableView)
+        filter = .ShowAll
     }
     
-    var filter: Filter = .All {
+    //        APIService.getFeed(APIService.Page()).onSuccess{ [unowned self] (response: CollectionResponse<FeedItem>) -> () in
+    //            self.items = response.items
+    //        }
+
+    
+    var filter: Filter = .ShowAll {
         didSet {
-            tableView?.reloadData()
+            let filteredItems: [FeedItem]
+            
+            switch filter {
+            case .ShowAll:
+                filteredItems = items
+            case .ShowProducts:
+                filteredItems = items.filter { $0.type == FeedItem.ItemType.Item }
+            case .ShowEvents:
+                filteredItems =  items.filter { $0.type == FeedItem.ItemType.Event }
+            case .ShowPromotions:
+                filteredItems = items.filter { $0.type == FeedItem.ItemType.Promotion }
+            case .ShowPosts:
+                filteredItems = items.filter { $0.type == FeedItem.ItemType.Post }
+            }
+            
+            dataSource.setItems(filteredItems)
+            tableView.reloadData()
+            tableView.setContentOffset(CGPointZero, animated: false)
         }
     }
     
     enum Filter: Int {
-        case All = 0
-        case Products
-        case Events
-        case Promotions
-        case Posts
+        case ShowAll = 0
+        case ShowProducts
+        case ShowEvents
+        case ShowPromotions
+        case ShowPosts
     }
 
     
@@ -37,13 +63,14 @@ final class BrowseListViewController: UIViewController, BrowseActionProducer {
         }
     }
     
-    private lazy var dataSource: ProductListDataSource = {
-        let dataSource = ProductListDataSource()
+    private lazy var dataSource: FeedItemDatasource = {
+        let dataSource = FeedItemDatasource(shouldShowDetailedCells: self.shoWCompactCells)
         dataSource.parentViewController = self
         return dataSource
         }()
 
     weak var actionConsumer: BrowseActionConsumer?
+    var items: [FeedItem] = []
     
     @IBOutlet private weak var tableView: UITableView!
     @IBOutlet private weak var displayModeSegmentedControl: UISegmentedControl!
@@ -52,35 +79,69 @@ final class BrowseListViewController: UIViewController, BrowseActionProducer {
 
 
 extension BrowseListViewController {
-    internal class ProductListDataSource: TableViewDataSource {
+    internal class FeedItemDatasource: TableViewDataSource {
+        
+        init(shouldShowDetailedCells detailed: Bool) {
+            showCompactCells = detailed
+        }
                 
         override func configureTable(tableView: UITableView) {
-            tableView.estimatedRowHeight = 80.0
+            tableView.estimatedRowHeight = showCompactCells ? 80.0 : 120.0
             super.configureTable(tableView)
         }
         
-        @objc override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            return 100
+        func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+            return count(models)
         }
         
-        @objc override func tableView(tableView: UITableView, reuseIdentifierForIndexPath indexPath: NSIndexPath) -> String {
-            return ListProductCell.reuseId()
+        @objc override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+            return count(models[section])
         }
         
         override func tableView(tableView: UITableView, modelForIndexPath indexPath: NSIndexPath) -> TableViewCellModel {
-            return TableViewCellTextModel(title: "\(Float(indexPath.row) / 100.0) miles")
+            return models[indexPath.section][indexPath.row]
+        }
+        
+        @objc override func tableView(tableView: UITableView, reuseIdentifierForIndexPath indexPath: NSIndexPath) -> String {
+            let model = self.tableView(tableView, modelForIndexPath: indexPath)
+            return showCompactCells ? modelFactory.compactCellReuseIdForModel(model) : modelFactory.detailCellReuseIdForModel(model)
         }
         
         override func nibCellsId() -> [String] {
-            return [ListProductCell.reuseId()]
+            return [ProductListCell.reuseId(), EventListCell.reuseId(), PromotionListCell.reuseId(), PostListCell.reuseId()]
         }
         
         func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
             tableView.deselectRowAtIndexPath(indexPath, animated: true)
-            if let browseController = parentViewController as? BrowseActionProducer,
-               let actionConsumer = browseController.actionConsumer {
-                actionConsumer.browseController(browseController, didSelectPost: Post(objectId: CRUDObjectInvalidId))
+            if let model = self.tableView(tableView, modelForIndexPath: indexPath) as? FeedTableCellModel,
+               let actionConsumer = self.actionConsumer {
+                Log.debug?.message("Did select \(model.itemType) \(model.objectID)")
+                //actionConsumer.browseController(browseController, didSelectPost: Post(objectId: CRUDObjectInvalidId))
             }
         }
+        
+        
+        func setItems(feedItems: [FeedItem]) {
+            if showCompactCells {
+                let list =  feedItems.reduce([]) { models, feedItem  in
+                    return models + self.modelFactory.compactModelsForItem(feedItem)
+                }
+                models = [ list ]
+            } else {
+                models = feedItems.map { self.modelFactory.detailedModelsForItem($0) }
+            }
+
+        }
+        
+        private var actionConsumer: BrowseActionConsumer? {
+            return flatMap(parentViewController as? BrowseActionProducer) { $0.actionConsumer }
+
+        }
+        
+        let showCompactCells: Bool
+        private var models: [[TableViewCellModel]] = []
+        private let modelFactory = FeedItemCellModelFactory()
+        
     }
+
 }

@@ -11,22 +11,25 @@ import PosInCore
 import Haneke
 
 
-final class ListProductCell: TableViewCell {
+final class ProductListCell: TableViewCell {
 
     @IBOutlet private weak var productImage: UIImageView!
     @IBOutlet private weak var headerLabel: UILabel!
     @IBOutlet private weak var detailsLabel: UILabel!
+    @IBOutlet private weak var priceLabel: UILabel!
     @IBOutlet private weak var infoLabel: UILabel!
     
     override func setModel(model: TableViewCellModel) {
-        let m = model as? TableViewCellTextModel
+        let m = model as? ComapctPriceFeedTableCellModel
         assert(m != nil, "Invalid model passed")
 
-        if let url = NSURL(string: "https://www.daycounts.com/images/stories/virtuemart/product/Virtuemart_Bundl_4f6eaee37356e.png") {
+        if let url = m!.imageURL {
             productImage.hnk_setImageFromURL(url, placeholder: UIImage(named: "MainMenuForYou"))
         }
-        
-        infoLabel.text = m!.title
+        headerLabel.text = m!.title
+        detailsLabel.text = m!.details
+        infoLabel.text =  m!.info
+        priceLabel.text = "$\(m!.price)"
     }
     
     override func prepareForReuse() {

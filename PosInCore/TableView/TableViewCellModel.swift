@@ -9,6 +9,7 @@
 import Foundation
 
 public protocol TableViewCellModel {
+    
 }
 
 public struct  TableViewCellInvalidModel: TableViewCellModel {
@@ -31,6 +32,5 @@ public struct TableViewCellImageTextModel: TableViewCellModel {
     public init(title: String, imageName: String) {
         self.title = title
         image = imageName
-    }
-    
+    }    
 }
