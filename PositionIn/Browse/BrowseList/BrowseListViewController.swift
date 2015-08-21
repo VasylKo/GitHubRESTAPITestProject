@@ -10,44 +10,48 @@ import UIKit
 import PosInCore
 
 final class BrowseListViewController: UIViewController, BrowseActionProducer {
+    
+    let shoWCompactCells: Bool = true
 
     override func viewDidLoad() {
         super.viewDidLoad()
-//        APIService.getFeed(APIService.Page()).onSuccess{ [unowned self] (response: CollectionResponse<FeedItem>) -> () in
-//            self.items = response.items
-//        }
-        
         dataSource.configureTable(tableView)
+        filter = .ShowAll
     }
     
-    var filter: Filter = .All {
+    //        APIService.getFeed(APIService.Page()).onSuccess{ [unowned self] (response: CollectionResponse<FeedItem>) -> () in
+    //            self.items = response.items
+    //        }
+
+    
+    var filter: Filter = .ShowAll {
         didSet {
-            if let datasourse = dataSource as? GeneralListDataSource {
+            let filteredItems: [FeedItem]
+            
             switch filter {
-            case .All:
-                datasourse.filteredItems = items
-            case .Posts:
-                datasourse.filteredItems = items.filter({$0.type == FeedItem.self.Type.Post})
-            case .Products:
-               datasourse.filteredItems = items.filter({$0.type == FeedItem.self.Type.Item})
-            case .Promotions:
-                datasourse.filteredItems = items.filter({$0.type == FeedItem.self.Type.Promotions})
-            case .Events:
-                datasourse.filteredItems = items.filter({$0.type == FeedItem.self.Type.Event})
+            case .ShowAll:
+                filteredItems = items
+            case .ShowPosts:
+                filteredItems = items.filter { $0.type == FeedItem.self.Type.Post }
+            case .ShowEvents:
+               filteredItems =  items.filter { $0.type == FeedItem.self.Type.Event }
+            case .ShowPromotions:
+                filteredItems = items.filter { $0.type == FeedItem.self.Type.Promotion }
+            case .ShowEvents:
+                filteredItems = items.filter { $0.type == FeedItem.self.Type.Event }
             }
-            dataSource = GeneralListDataSource()
-            dataSource.configureTable(tableView)
-            tableView.setContentOffset(CGPointZero, animated: true)
-            }
+            dataSource.setItems(filteredItems)
+            tableView.reloadData()
+            tableView.setContentOffset(CGPointZero, animated: false)
         }
     }
     
     enum Filter: Int {
-        case All = 0
-        case Products
-        case Events
-        case Promotions
-        case Posts
+        case ShowAll = 0
+        case ShowProducts
+        case ShowEvents
+        case ShowPromotions
+        case ShowPosts
     }
 
     
@@ -57,9 +61,8 @@ final class BrowseListViewController: UIViewController, BrowseActionProducer {
         }
     }
     
-    private lazy var dataSource: TableViewDataSource = {
-        let dataSource = GeneralListDataSource()
-        dataSource.filteredItems = self.items
+    private lazy var dataSource: FeedItemDatasource = {
+        let dataSource = FeedItemDatasource(shouldShowDetailedCells: self.shoWCompactCells)
         dataSource.parentViewController = self
         return dataSource
         }()
@@ -74,23 +77,33 @@ final class BrowseListViewController: UIViewController, BrowseActionProducer {
 
 
 extension BrowseListViewController {
-    internal class GeneralListDataSource: TableViewDataSource {
+    internal class FeedItemDatasource: TableViewDataSource {
+        
+        init(shouldShowDetailedCells detailed: Bool) {
+            showCompactCells = detailed
+        }
                 
         override func configureTable(tableView: UITableView) {
-            tableView.estimatedRowHeight = 80.0
+            tableView.estimatedRowHeight = showCompactCells ? 80.0 : 120.0
             super.configureTable(tableView)
         }
         
-        @objc override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            return filteredItems.count
+        func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+            return count(models)
         }
         
-        @objc override func tableView(tableView: UITableView, reuseIdentifierForIndexPath indexPath: NSIndexPath) -> String {
-            return BrowseListCellsProvider.reuseIdFor(feedItem: filteredItems[indexPath.row])
+        @objc override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+            return count(models[section])
         }
         
         override func tableView(tableView: UITableView, modelForIndexPath indexPath: NSIndexPath) -> TableViewCellModel {
-            return BrowseListCellsProvider.modelFor(feedItem: filteredItems[indexPath.row])
+            return models[indexPath.section][indexPath.row]
+        }
+        
+        @objc override func tableView(tableView: UITableView, reuseIdentifierForIndexPath indexPath: NSIndexPath) -> String {
+            let model = self.tableView(tableView, modelForIndexPath: indexPath)
+            model.type
+            return TableViewCell.reuseId()
         }
         
         override func nibCellsId() -> [String] {
@@ -105,7 +118,23 @@ extension BrowseListViewController {
             }
         }
         
-        var filteredItems: [FeedItem] = []
+        
+        func setItems(feedItems: [FeedItem]) {
+            if showCompactCells {
+                let list =  feedItems.reduce([]) { models, feedItem  in
+                    return models + self.modelFactory.compactModelsForItem(feedItem)
+                }
+                models = [ list ]
+            } else {
+                models = feedItems.map { self.modelFactory.detailedModelsForItem($0) }
+            }
+
+        }
+        
+        let showCompactCells: Bool
+        private var models: [[TableViewCellModel]] = []
+        private let modelFactory = FeedItemCellModelFactory()
+        
     }
 
 }

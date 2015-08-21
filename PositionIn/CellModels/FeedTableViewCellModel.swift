@@ -9,6 +9,20 @@
 import Foundation
 import PosInCore
 
+protocol FeedTableItemCellModel: TableViewCellModel {
+    var itemType: FeedItem.Type { get }
+    var objectID: CRUDObjectId { get }
+}
+
+class CompactFeedTableItemCellModel: TableViewCellModel {
+    let title: String
+    let info: String
+    let imageURL: NSURL?
+    let itemType: FeedItem.Type
+    let objectID: CRUDObjectId
+
+}
+
 public struct TableViewCellTitleImagePriceDistanceModel: TableViewCellModel {
     public let title: String
     public let owner: String

@@ -51,8 +51,6 @@
 		24CE82701B861D9000450576 /* PositionIn.EventListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24CE826F1B861D9000450576 /* PositionIn.EventListCell.xib */; };
 		24CE82721B861F7F00450576 /* PromotionListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24CE82711B861F7F00450576 /* PromotionListCell.swift */; };
 		24CE82741B861F9300450576 /* PositionIn.PromotionListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24CE82731B861F9300450576 /* PositionIn.PromotionListCell.xib */; };
-		24D850081B871A49008CAE82 /* BrowseListCellsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D850071B871A49008CAE82 /* BrowseListCellsProvider.swift */; };
-		24D8500B1B872C7C008CAE82 /* TableViewCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D8500A1B872C7C008CAE82 /* TableViewCellModel.swift */; };
 		451B04D684C5CB71F3D6581C /* Pods_PositionIn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7CE5A186774ECEB07E96F58 /* Pods_PositionIn.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		E6018E501B849266001D22FA /* XMPPProcess+Future.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6018E4F1B849266001D22FA /* XMPPProcess+Future.swift */; };
 		E6018E521B8492EA001D22FA /* XLFormOptionsObject+Community.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6018E511B8492EA001D22FA /* XLFormOptionsObject+Community.swift */; };
@@ -108,7 +106,6 @@
 		E66115A51B73A920003DB5B3 /* AddProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66115A41B73A920003DB5B3 /* AddProductViewController.swift */; };
 		E66115A81B73AE0F003DB5B3 /* AddPromotionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66115A61B73AE0F003DB5B3 /* AddPromotionViewController.swift */; };
 		E66115A91B73AE0F003DB5B3 /* AddEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66115A71B73AE0F003DB5B3 /* AddEventViewController.swift */; };
-		E66115AD1B73B1A8003DB5B3 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66115AC1B73B1A8003DB5B3 /* FilterViewController.swift */; };
 		E6681A241B676345003096D6 /* XMPPLogFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = E6681A221B676345003096D6 /* XMPPLogFormatter.h */; };
 		E6681A251B676345003096D6 /* XMPPLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = E6681A231B676345003096D6 /* XMPPLogFormatter.m */; };
 		E6681A2A1B679C87003096D6 /* XMPPProcess.h in Headers */ = {isa = PBXBuildFile; fileRef = E6681A281B679C87003096D6 /* XMPPProcess.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -246,6 +243,9 @@
 		E689F0791B6B911F00597587 /* PositionIn.ProductInventoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E689F0781B6B911F00597587 /* PositionIn.ProductInventoryViewController.xib */; };
 		E689F07B1B6B972F00597587 /* ProductInventoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E689F07A1B6B972F00597587 /* ProductInventoryCell.swift */; };
 		E689F07D1B6B976100597587 /* PositionIn.ProductInventoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E689F07C1B6B976100597587 /* PositionIn.ProductInventoryCell.xib */; };
+		E68B52011B873545006B980C /* FeedTableViewCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E68B52001B873545006B980C /* FeedTableViewCellModel.swift */; };
+		E68B52031B873687006B980C /* FeedItemCellModelFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E68B52021B873687006B980C /* FeedItemCellModelFactory.swift */; };
+		E68B52061B8736F4006B980C /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E68B52051B8736F4006B980C /* FilterViewController.swift */; };
 		E69420F91B66358000F34F06 /* ProductDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E69420F81B66358000F34F06 /* ProductDetailsViewController.swift */; };
 		E69420FF1B665F5100F34F06 /* PositionIn.ProductDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E69420FE1B665F5100F34F06 /* PositionIn.ProductDetailsViewController.xib */; };
 		E69421021B666A1600F34F06 /* PositionIn.ActionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E69421001B666A1600F34F06 /* PositionIn.ActionCell.xib */; };
@@ -351,8 +351,6 @@
 		24CE826F1B861D9000450576 /* PositionIn.EventListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PositionIn.EventListCell.xib; path = ListCells/PositionIn.EventListCell.xib; sourceTree = "<group>"; };
 		24CE82711B861F7F00450576 /* PromotionListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PromotionListCell.swift; path = ListCells/PromotionListCell.swift; sourceTree = "<group>"; };
 		24CE82731B861F9300450576 /* PositionIn.PromotionListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PositionIn.PromotionListCell.xib; path = ListCells/PositionIn.PromotionListCell.xib; sourceTree = "<group>"; };
-		24D850071B871A49008CAE82 /* BrowseListCellsProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowseListCellsProvider.swift; sourceTree = "<group>"; };
-		24D8500A1B872C7C008CAE82 /* TableViewCellModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TableViewCellModel.swift; path = ViewModels/TableViewCellModel.swift; sourceTree = "<group>"; };
 		46EE2AF3395401D4D26EB34F /* Pods_PosInCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PosInCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8723017B34FF5C9F33CC0218 /* Pods-PositionIn.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PositionIn.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PositionIn/Pods-PositionIn.debug.xcconfig"; sourceTree = "<group>"; };
 		A7CE5A186774ECEB07E96F58 /* Pods_PositionIn.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PositionIn.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -431,7 +429,6 @@
 		E66115A41B73A920003DB5B3 /* AddProductViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddProductViewController.swift; sourceTree = "<group>"; };
 		E66115A61B73AE0F003DB5B3 /* AddPromotionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddPromotionViewController.swift; sourceTree = "<group>"; };
 		E66115A71B73AE0F003DB5B3 /* AddEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddEventViewController.swift; sourceTree = "<group>"; };
-		E66115AC1B73B1A8003DB5B3 /* FilterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 		E6681A221B676345003096D6 /* XMPPLogFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPLogFormatter.h; sourceTree = "<group>"; };
 		E6681A231B676345003096D6 /* XMPPLogFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPLogFormatter.m; sourceTree = "<group>"; };
 		E6681A281B679C87003096D6 /* XMPPProcess.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPProcess.h; sourceTree = "<group>"; };
@@ -752,6 +749,9 @@
 		E689F0781B6B911F00597587 /* PositionIn.ProductInventoryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.ProductInventoryViewController.xib; sourceTree = "<group>"; };
 		E689F07A1B6B972F00597587 /* ProductInventoryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductInventoryCell.swift; sourceTree = "<group>"; };
 		E689F07C1B6B976100597587 /* PositionIn.ProductInventoryCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.ProductInventoryCell.xib; sourceTree = "<group>"; };
+		E68B52001B873545006B980C /* FeedTableViewCellModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedTableViewCellModel.swift; sourceTree = "<group>"; };
+		E68B52021B873687006B980C /* FeedItemCellModelFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedItemCellModelFactory.swift; sourceTree = "<group>"; };
+		E68B52051B8736F4006B980C /* FilterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 		E69420F81B66358000F34F06 /* ProductDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductDetailsViewController.swift; sourceTree = "<group>"; };
 		E69420FE1B665F5100F34F06 /* PositionIn.ProductDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.ProductDetailsViewController.xib; sourceTree = "<group>"; };
 		E69421001B666A1600F34F06 /* PositionIn.ActionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.ActionCell.xib; sourceTree = "<group>"; };
@@ -870,14 +870,6 @@
 			name = ListCells;
 			sourceTree = "<group>";
 		};
-		24D850091B872C57008CAE82 /* ViewModels */ = {
-			isa = PBXGroup;
-			children = (
-				24D8500A1B872C7C008CAE82 /* TableViewCellModel.swift */,
-			);
-			name = ViewModels;
-			sourceTree = "<group>";
-		};
 		D659CB9D48D8D7A48A529E04 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -954,7 +946,6 @@
 			children = (
 				E66115911B73A0CB003DB5B3 /* BrowseList */,
 				E66115961B73A0CB003DB5B3 /* BrowseMap */,
-				E66115AB1B73B15D003DB5B3 /* Filter */,
 				E62B17051B5CE3EB00D446BC /* BrowseViewController.swift */,
 				E62B17091B5CE46500D446BC /* PositionIn.BrowseViewController.xib */,
 				E6AC64551B5EC5B1007D7952 /* AddMenuView.swift */,
@@ -1043,10 +1034,11 @@
 		E64DC34C1B4E53C90011D37C /* PositionIn */ = {
 			isa = PBXGroup;
 			children = (
-				24D850091B872C57008CAE82 /* ViewModels */,
+				E68B51FF1B87351E006B980C /* CellModels */,
 				E660E52A1B5AC23B00F52050 /* MainMenu */,
 				E62B17001B5CE39400D446BC /* Browse */,
 				E6D4D5B01B6F8186003134CB /* Search */,
+				E68B52041B8736F4006B980C /* Filter */,
 				E66115A11B73A175003DB5B3 /* NewItems */,
 				E69420F71B66354E00F34F06 /* ProductDetails */,
 				E689F0751B6B90CA00597587 /* ProductInventory */,
@@ -1103,7 +1095,6 @@
 			isa = PBXGroup;
 			children = (
 				E6A869F11B60FF0500797D16 /* CRUDObject.swift */,
-				24D850071B871A49008CAE82 /* BrowseListCellsProvider.swift */,
 				E61B20EE1B813C8C005EAB2C /* Community.swift */,
 				E6A869F31B60FF2100797D16 /* UserProfile.swift */,
 				E61B20D41B7DD47C005EAB2C /* FeedItem.swift */,
@@ -1185,14 +1176,6 @@
 				E61B20EC1B81286E005EAB2C /* UploadPhotoCell.swift */,
 			);
 			path = NewItems;
-			sourceTree = "<group>";
-		};
-		E66115AB1B73B15D003DB5B3 /* Filter */ = {
-			isa = PBXGroup;
-			children = (
-				E66115AC1B73B1A8003DB5B3 /* FilterViewController.swift */,
-			);
-			path = Filter;
 			sourceTree = "<group>";
 		};
 		E6681A271B679C72003096D6 /* Processes */ = {
@@ -2107,6 +2090,23 @@
 			path = ProductInventory;
 			sourceTree = "<group>";
 		};
+		E68B51FF1B87351E006B980C /* CellModels */ = {
+			isa = PBXGroup;
+			children = (
+				E68B52001B873545006B980C /* FeedTableViewCellModel.swift */,
+				E68B52021B873687006B980C /* FeedItemCellModelFactory.swift */,
+			);
+			path = CellModels;
+			sourceTree = "<group>";
+		};
+		E68B52041B8736F4006B980C /* Filter */ = {
+			isa = PBXGroup;
+			children = (
+				E68B52051B8736F4006B980C /* FilterViewController.swift */,
+			);
+			path = Filter;
+			sourceTree = "<group>";
+		};
 		E69420F71B66354E00F34F06 /* ProductDetails */ = {
 			isa = PBXGroup;
 			children = (
@@ -2654,7 +2654,6 @@
 				E661158D1B73778B003DB5B3 /* RecoverPasswordViewController.swift in Sources */,
 				E661158F1B738844003DB5B3 /* BaseLoginViewController.swift in Sources */,
 				E61B20ED1B81286E005EAB2C /* UploadPhotoCell.swift in Sources */,
-				E66115AD1B73B1A8003DB5B3 /* FilterViewController.swift in Sources */,
 				E6A869F41B60FF2100797D16 /* UserProfile.swift in Sources */,
 				E6C5CE1B1B83A24500265955 /* UIScheme.swift in Sources */,
 				E69420F91B66358000F34F06 /* ProductDetailsViewController.swift in Sources */,
@@ -2670,13 +2669,16 @@
 				E6A869EE1B60D42C00797D16 /* APIService.swift in Sources */,
 				E61B20E31B7E4D58005EAB2C /* EditProfileViewController.swift in Sources */,
 				E61B20E51B7E5964005EAB2C /* ProfileInfoCell.swift in Sources */,
+				E68B52031B873687006B980C /* FeedItemCellModelFactory.swift in Sources */,
 				E6829B041B5E6CF800FB1E1D /* RoundButton.swift in Sources */,
+				E68B52061B8736F4006B980C /* FilterViewController.swift in Sources */,
 				24CE82721B861F7F00450576 /* PromotionListCell.swift in Sources */,
 				E62B16F61B5C1AA700D446BC /* MainMenuUserCell.swift in Sources */,
 				E64DC3501B4E53C90011D37C /* AppDelegate.swift in Sources */,
 				E6C5CE1D1B83A28C00265955 /* SessionController.swift in Sources */,
 				E661159D1B73A0CB003DB5B3 /* BrowseMapViewController.swift in Sources */,
 				E61B20E11B7E4BED005EAB2C /* MyProfileViewController.swift in Sources */,
+				E68B52011B873545006B980C /* FeedTableViewCellModel.swift in Sources */,
 				E64D00651B7C9601007693E0 /* BaseAddItemViewController.swift in Sources */,
 				E65E872C1B611BA200AE444D /* Post.swift in Sources */,
 				E66115A91B73AE0F003DB5B3 /* AddEventViewController.swift in Sources */,
@@ -2693,7 +2695,6 @@
 				E62B16F81B5C6BBF00D446BC /* AvatarView.swift in Sources */,
 				E61B20D51B7DD47C005EAB2C /* FeedItem.swift in Sources */,
 				E6018E521B8492EA001D22FA /* XLFormOptionsObject+Community.swift in Sources */,
-				24D850081B871A49008CAE82 /* BrowseListCellsProvider.swift in Sources */,
 				E661158B1B73774B003DB5B3 /* RegisterViewController.swift in Sources */,
 				E6325F651B57D89A00996480 /* SidebarViewController.swift in Sources */,
 				E61B20DD1B7E4AB4005EAB2C /* SellerProfileViewController.swift in Sources */,
@@ -2702,7 +2703,6 @@
 				E6C5CE1F1B83A2B700265955 /* AppConfiguration.swift in Sources */,
 				E6DA53C61B7D00DB000087A7 /* CommunityInfoCell.swift in Sources */,
 				E6A869F21B60FF0500797D16 /* CRUDObject.swift in Sources */,
-				24D8500B1B872C7C008CAE82 /* TableViewCellModel.swift in Sources */,
 				E61B20EF1B813C8C005EAB2C /* Community.swift in Sources */,
 				E6A869EC1B60D3E300797D16 /* APIService+Auth.swift in Sources */,
 				E61B20E91B7E6163005EAB2C /* ProfileStatsCell.swift in Sources */,

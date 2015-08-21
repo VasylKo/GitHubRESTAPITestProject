@@ -46,7 +46,7 @@ struct FeedItem: CRUDObject {
     enum Type: Int {
         case Unknown
         case Event
-        case Promotions
+        case Promotion
         case Item
         case Person
         case Post
