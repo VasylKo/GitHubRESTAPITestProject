@@ -11,6 +11,15 @@ import UIKit
 
 class LoginSignupViewController: UIViewController {
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        loginButton.layer.cornerRadius = 2.0
+        facebookButton.layer.cornerRadius = 2.0
+        signupButton.layer.cornerRadius = 2.0
+        signupButton.layer.borderWidth = 1.0
+        signupButton.layer.borderColor = UIColor.whiteColor().CGColor
+    }
+    
     @IBAction func didTapClose(sender: AnyObject) {
         sideBarController?.executeAction(.ForYou)
         dismissViewControllerAnimated(true, completion: nil)
@@ -25,5 +34,7 @@ class LoginSignupViewController: UIViewController {
     }
     
     @IBOutlet private weak var loginButton: UIButton!
+    @IBOutlet private weak var facebookButton: UIButton!
+    @IBOutlet private weak var signupButton: UIButton!
 
 }

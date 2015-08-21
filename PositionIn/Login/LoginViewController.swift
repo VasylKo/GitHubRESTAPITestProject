@@ -11,6 +11,12 @@ import CleanroomLogger
 
 final class LoginViewController: BaseLoginViewController {
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        loginButton.layer.cornerRadius = 2.0
+        facebookButton.layer.cornerRadius = 2.0
+    }
+    
     @IBAction func prepareForUnwind(segue: UIStoryboardSegue) {
         
     }
@@ -38,6 +44,7 @@ final class LoginViewController: BaseLoginViewController {
         return loginButton
     }
     
+    @IBOutlet private weak var facebookButton: UIButton!
     @IBOutlet private weak var loginButton: UIButton!
     
     @IBOutlet private weak var usernameTextField: UITextField!
