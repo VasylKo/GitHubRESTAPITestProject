@@ -31,6 +31,7 @@ final class BrowseListViewController: UIViewController, BrowseActionProducer {
                 dataSource = EventListDataSource()
             }
             dataSource.configureTable(tableView)
+            tableView.setContentOffset(CGPointZero, animated: true)
         }
     }
     
