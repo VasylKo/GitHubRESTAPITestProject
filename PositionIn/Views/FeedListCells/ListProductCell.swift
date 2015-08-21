@@ -1,35 +1,40 @@
 //
-//  PostEventCell.swift
+//  ListProductCell.swift
 //  PositionIn
 //
-//  Created by Alex Goncharov on 8/20/15.
+//  Created by Alexandr Goncharov on 22/07/15.
 //  Copyright (c) 2015 Soluna Labs. All rights reserved.
 //
 
+import UIKit
 import PosInCore
 import Haneke
-import UIKit
 
-final class PostListCell: TableViewCell {
-    
+
+final class ProductListCell: TableViewCell {
+
     @IBOutlet private weak var productImage: UIImageView!
-    @IBOutlet private weak var titleLabel: UILabel!
+    @IBOutlet private weak var headerLabel: UILabel!
+    @IBOutlet private weak var detailsLabel: UILabel!
+    @IBOutlet private weak var priceLabel: UILabel!
     @IBOutlet private weak var infoLabel: UILabel!
     
     override func setModel(model: TableViewCellModel) {
-        let m = model as? TableViewCellTitleImageInfoModel
+        let m = model as? ComapctPriceFeedTableCellModel
         assert(m != nil, "Invalid model passed")
-        
-        if let url = NSURL(string: m!.imageURL) {
+
+        if let url = m!.imageURL {
             productImage.hnk_setImageFromURL(url, placeholder: UIImage(named: "MainMenuForYou"))
         }
-        
-        infoLabel.text = m!.info
-        titleLabel.text = m!.title
+        headerLabel.text = m!.title
+        detailsLabel.text = m!.details
+        infoLabel.text =  m!.info
+        priceLabel.text = "$\(m!.price)"
     }
     
     override func prepareForReuse() {
         super.prepareForReuse()
         productImage.hnk_cancelSetImage()
     }
+
 }

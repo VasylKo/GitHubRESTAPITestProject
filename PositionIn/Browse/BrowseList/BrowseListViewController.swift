@@ -113,7 +113,7 @@ extension BrowseListViewController {
         
         func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
             tableView.deselectRowAtIndexPath(indexPath, animated: true)
-            if let model = self.tableView(tableView, modelForIndexPath: indexPath) as? FeedTableItemCellModel,
+            if let model = self.tableView(tableView, modelForIndexPath: indexPath) as? FeedTableCellModel,
                let actionConsumer = self.actionConsumer {
                 Log.debug?.message("Did select \(model.itemType) \(model.objectID)")
                 //actionConsumer.browseController(browseController, didSelectPost: Post(objectId: CRUDObjectInvalidId))

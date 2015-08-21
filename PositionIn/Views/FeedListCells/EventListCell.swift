@@ -1,5 +1,5 @@
 //
-//  PromotionListCell.swift
+//  EventListCell.swift
 //  PositionIn
 //
 //  Created by Alex Goncharov on 8/20/15.
@@ -10,24 +10,25 @@ import PosInCore
 import Haneke
 import UIKit
 
-final class PromotionListCell: TableViewCell {
+final class EventListCell: TableViewCell {
     
     @IBOutlet private weak var productImage: UIImageView!
     @IBOutlet private weak var titleLabel: UILabel!
-    @IBOutlet private weak var authorLabel: UILabel!
-    @IBOutlet private weak var discountLabel: UILabel!
+    @IBOutlet private weak var dateLabel: UILabel!
+    @IBOutlet private weak var infoLabel: UILabel!
     
     override func setModel(model: TableViewCellModel) {
-        let m = model as? TableViewCellTitleImageAuthorDiscountModel
+        let m = model as? CompactFeedTableCellModel
         assert(m != nil, "Invalid model passed")
         
-        if let url = NSURL(string: m!.imageURL) {
+        if let url = m!.imageURL {
             productImage.hnk_setImageFromURL(url, placeholder: UIImage(named: "MainMenuForYou"))
         }
-        
-        authorLabel.text = m!.author
+
         titleLabel.text = m!.title
-        discountLabel.text = m!.discount
+        infoLabel.text = m!.details
+
+        dateLabel.text = m!.info
     }
     
     override func prepareForReuse() {

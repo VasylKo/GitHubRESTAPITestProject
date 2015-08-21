@@ -1,5 +1,5 @@
 //
-//  EventListCell.swift
+//  PostEventCell.swift
 //  PositionIn
 //
 //  Created by Alex Goncharov on 8/20/15.
@@ -10,31 +10,27 @@ import PosInCore
 import Haneke
 import UIKit
 
-final class EventListCell: TableViewCell {
+final class PostListCell: TableViewCell {
     
     @IBOutlet private weak var productImage: UIImageView!
     @IBOutlet private weak var titleLabel: UILabel!
-    @IBOutlet private weak var dateLabel: UILabel!
     @IBOutlet private weak var infoLabel: UILabel!
     
     override func setModel(model: TableViewCellModel) {
-        let m = model as? TableViewCellTitleImageDateInfoModel
+        let m = model as? CompactFeedTableCellModel
         assert(m != nil, "Invalid model passed")
         
-        if let url = NSURL(string: m!.imageURL) {
+        if let url = m!.imageURL {
             productImage.hnk_setImageFromURL(url, placeholder: UIImage(named: "MainMenuForYou"))
         }
         
-        infoLabel.text = m!.info
         titleLabel.text = m!.title
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
-        dateLabel.text = dateFormatter.stringFromDate(m!.date)
+        infoLabel.text = m!.details
+
     }
     
     override func prepareForReuse() {
         super.prepareForReuse()
         productImage.hnk_cancelSetImage()
     }
-    
 }
