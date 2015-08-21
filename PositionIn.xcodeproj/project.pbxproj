@@ -238,14 +238,14 @@
 		E68B52011B873545006B980C /* FeedTableViewCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E68B52001B873545006B980C /* FeedTableViewCellModel.swift */; };
 		E68B52031B873687006B980C /* FeedItemCellModelFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E68B52021B873687006B980C /* FeedItemCellModelFactory.swift */; };
 		E68B52061B8736F4006B980C /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E68B52051B8736F4006B980C /* FilterViewController.swift */; };
-		E68B52101B875B02006B980C /* EventListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E68B52081B875B02006B980C /* EventListCell.swift */; };
-		E68B52111B875B02006B980C /* ListProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E68B52091B875B02006B980C /* ListProductCell.swift */; };
-		E68B52121B875B02006B980C /* PositionIn.EventListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E68B520A1B875B02006B980C /* PositionIn.EventListCell.xib */; };
-		E68B52131B875B02006B980C /* PositionIn.ListProductCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E68B520B1B875B02006B980C /* PositionIn.ListProductCell.xib */; };
-		E68B52141B875B02006B980C /* PositionIn.PostListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E68B520C1B875B02006B980C /* PositionIn.PostListCell.xib */; };
-		E68B52151B875B02006B980C /* PositionIn.PromotionListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E68B520D1B875B02006B980C /* PositionIn.PromotionListCell.xib */; };
-		E68B52161B875B02006B980C /* PostListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E68B520E1B875B02006B980C /* PostListCell.swift */; };
-		E68B52171B875B02006B980C /* PromotionListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E68B520F1B875B02006B980C /* PromotionListCell.swift */; };
+		E68B52211B875F8F006B980C /* EventListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E68B52191B875F8F006B980C /* EventListCell.swift */; };
+		E68B52221B875F8F006B980C /* ListProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E68B521A1B875F8F006B980C /* ListProductCell.swift */; };
+		E68B52231B875F8F006B980C /* PositionIn.EventListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E68B521B1B875F8F006B980C /* PositionIn.EventListCell.xib */; };
+		E68B52241B875F8F006B980C /* PositionIn.ListProductCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E68B521C1B875F8F006B980C /* PositionIn.ListProductCell.xib */; };
+		E68B52251B875F8F006B980C /* PositionIn.PostListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E68B521D1B875F8F006B980C /* PositionIn.PostListCell.xib */; };
+		E68B52261B875F8F006B980C /* PositionIn.PromotionListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E68B521E1B875F8F006B980C /* PositionIn.PromotionListCell.xib */; };
+		E68B52271B875F8F006B980C /* PostListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E68B521F1B875F8F006B980C /* PostListCell.swift */; };
+		E68B52281B875F8F006B980C /* PromotionListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E68B52201B875F8F006B980C /* PromotionListCell.swift */; };
 		E69420F91B66358000F34F06 /* ProductDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E69420F81B66358000F34F06 /* ProductDetailsViewController.swift */; };
 		E69420FF1B665F5100F34F06 /* PositionIn.ProductDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E69420FE1B665F5100F34F06 /* PositionIn.ProductDetailsViewController.xib */; };
 		E69421021B666A1600F34F06 /* PositionIn.ActionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E69421001B666A1600F34F06 /* PositionIn.ActionCell.xib */; };
@@ -744,14 +744,14 @@
 		E68B52001B873545006B980C /* FeedTableViewCellModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedTableViewCellModel.swift; sourceTree = "<group>"; };
 		E68B52021B873687006B980C /* FeedItemCellModelFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedItemCellModelFactory.swift; sourceTree = "<group>"; };
 		E68B52051B8736F4006B980C /* FilterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
-		E68B52081B875B02006B980C /* EventListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventListCell.swift; sourceTree = "<group>"; };
-		E68B52091B875B02006B980C /* ListProductCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListProductCell.swift; sourceTree = "<group>"; };
-		E68B520A1B875B02006B980C /* PositionIn.EventListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.EventListCell.xib; sourceTree = "<group>"; };
-		E68B520B1B875B02006B980C /* PositionIn.ListProductCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.ListProductCell.xib; sourceTree = "<group>"; };
-		E68B520C1B875B02006B980C /* PositionIn.PostListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.PostListCell.xib; sourceTree = "<group>"; };
-		E68B520D1B875B02006B980C /* PositionIn.PromotionListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.PromotionListCell.xib; sourceTree = "<group>"; };
-		E68B520E1B875B02006B980C /* PostListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostListCell.swift; sourceTree = "<group>"; };
-		E68B520F1B875B02006B980C /* PromotionListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PromotionListCell.swift; sourceTree = "<group>"; };
+		E68B52191B875F8F006B980C /* EventListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventListCell.swift; sourceTree = "<group>"; };
+		E68B521A1B875F8F006B980C /* ListProductCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListProductCell.swift; sourceTree = "<group>"; };
+		E68B521B1B875F8F006B980C /* PositionIn.EventListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.EventListCell.xib; sourceTree = "<group>"; };
+		E68B521C1B875F8F006B980C /* PositionIn.ListProductCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.ListProductCell.xib; sourceTree = "<group>"; };
+		E68B521D1B875F8F006B980C /* PositionIn.PostListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.PostListCell.xib; sourceTree = "<group>"; };
+		E68B521E1B875F8F006B980C /* PositionIn.PromotionListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.PromotionListCell.xib; sourceTree = "<group>"; };
+		E68B521F1B875F8F006B980C /* PostListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostListCell.swift; sourceTree = "<group>"; };
+		E68B52201B875F8F006B980C /* PromotionListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PromotionListCell.swift; sourceTree = "<group>"; };
 		E69420F81B66358000F34F06 /* ProductDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductDetailsViewController.swift; sourceTree = "<group>"; };
 		E69420FE1B665F5100F34F06 /* PositionIn.ProductDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.ProductDetailsViewController.xib; sourceTree = "<group>"; };
 		E69421001B666A1600F34F06 /* PositionIn.ActionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.ActionCell.xib; sourceTree = "<group>"; };
@@ -942,7 +942,7 @@
 		E6325F581B57D46C00996480 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				E68B52071B875B02006B980C /* ListCells */,
+				E68B52181B875F8F006B980C /* FeedListCells */,
 				E69421011B666A1600F34F06 /* ActionCell.swift */,
 				E69421001B666A1600F34F06 /* PositionIn.ActionCell.xib */,
 				E6829B031B5E6CF800FB1E1D /* RoundButton.swift */,
@@ -2092,19 +2092,19 @@
 			path = Filter;
 			sourceTree = "<group>";
 		};
-		E68B52071B875B02006B980C /* ListCells */ = {
+		E68B52181B875F8F006B980C /* FeedListCells */ = {
 			isa = PBXGroup;
 			children = (
-				E68B52081B875B02006B980C /* EventListCell.swift */,
-				E68B52091B875B02006B980C /* ListProductCell.swift */,
-				E68B520A1B875B02006B980C /* PositionIn.EventListCell.xib */,
-				E68B520B1B875B02006B980C /* PositionIn.ListProductCell.xib */,
-				E68B520C1B875B02006B980C /* PositionIn.PostListCell.xib */,
-				E68B520D1B875B02006B980C /* PositionIn.PromotionListCell.xib */,
-				E68B520E1B875B02006B980C /* PostListCell.swift */,
-				E68B520F1B875B02006B980C /* PromotionListCell.swift */,
+				E68B52191B875F8F006B980C /* EventListCell.swift */,
+				E68B521A1B875F8F006B980C /* ListProductCell.swift */,
+				E68B521B1B875F8F006B980C /* PositionIn.EventListCell.xib */,
+				E68B521C1B875F8F006B980C /* PositionIn.ListProductCell.xib */,
+				E68B521D1B875F8F006B980C /* PositionIn.PostListCell.xib */,
+				E68B521E1B875F8F006B980C /* PositionIn.PromotionListCell.xib */,
+				E68B521F1B875F8F006B980C /* PostListCell.swift */,
+				E68B52201B875F8F006B980C /* PromotionListCell.swift */,
 			);
-			path = ListCells;
+			path = FeedListCells;
 			sourceTree = "<group>";
 		};
 		E69420F71B66354E00F34F06 /* ProductDetails */ = {
@@ -2481,7 +2481,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E68B52151B875B02006B980C /* PositionIn.PromotionListCell.xib in Resources */,
+				E68B52261B875F8F006B980C /* PositionIn.PromotionListCell.xib in Resources */,
 				E69420FF1B665F5100F34F06 /* PositionIn.ProductDetailsViewController.xib in Resources */,
 				E62B170A1B5CE46500D446BC /* PositionIn.BrowseViewController.xib in Resources */,
 				E689F0791B6B911F00597587 /* PositionIn.ProductInventoryViewController.xib in Resources */,
@@ -2491,8 +2491,8 @@
 				E62B16F51B5C1AA700D446BC /* PositionIn.MainMenuUserCell.xib in Resources */,
 				E661159E1B73A0CB003DB5B3 /* PositionIn.BrowseMapViewController.xib in Resources */,
 				E66115871B7376F4003DB5B3 /* Login.storyboard in Resources */,
-				E68B52121B875B02006B980C /* PositionIn.EventListCell.xib in Resources */,
-				E68B52131B875B02006B980C /* PositionIn.ListProductCell.xib in Resources */,
+				E68B52231B875F8F006B980C /* PositionIn.EventListCell.xib in Resources */,
+				E68B52241B875F8F006B980C /* PositionIn.ListProductCell.xib in Resources */,
 				E6DA53D01B7D0562000087A7 /* PositionIn.CommunityActionCell.xib in Resources */,
 				E689F07D1B6B976100597587 /* PositionIn.ProductInventoryCell.xib in Resources */,
 				E61B20DC1B7E4AB4005EAB2C /* PositionIn.SellerProfileViewController.xib in Resources */,
@@ -2503,7 +2503,7 @@
 				E61B20E71B7E5AF7005EAB2C /* PositionIn.ProfileInfoCell.xib in Resources */,
 				E64DC35A1B4E53C90011D37C /* LaunchScreen.xib in Resources */,
 				E6DA53C91B7D00DB000087A7 /* PositionIn.UserListCell.xib in Resources */,
-				E68B52141B875B02006B980C /* PositionIn.PostListCell.xib in Resources */,
+				E68B52251B875F8F006B980C /* PositionIn.PostListCell.xib in Resources */,
 				E64DC3571B4E53C90011D37C /* Images.xcassets in Resources */,
 				E6DA53C81B7D00DB000087A7 /* PositionIn.CommunityListViewController.xib in Resources */,
 				E660E5321B5AC2A200F52050 /* PositionIn.MainMenuCell.xib in Resources */,
@@ -2649,11 +2649,11 @@
 				E6365D351B7D709E00CB79CB /* PhotoInfo.swift in Sources */,
 				E660E52D1B5AC23B00F52050 /* MainMenuViewController.swift in Sources */,
 				E66115A81B73AE0F003DB5B3 /* AddPromotionViewController.swift in Sources */,
-				E68B52171B875B02006B980C /* PromotionListCell.swift in Sources */,
+				E68B52281B875F8F006B980C /* PromotionListCell.swift in Sources */,
 				E6AC64561B5EC5B1007D7952 /* AddMenuView.swift in Sources */,
 				E661158D1B73778B003DB5B3 /* RecoverPasswordViewController.swift in Sources */,
-				E68B52101B875B02006B980C /* EventListCell.swift in Sources */,
-				E68B52161B875B02006B980C /* PostListCell.swift in Sources */,
+				E68B52211B875F8F006B980C /* EventListCell.swift in Sources */,
+				E68B52271B875F8F006B980C /* PostListCell.swift in Sources */,
 				E661158F1B738844003DB5B3 /* BaseLoginViewController.swift in Sources */,
 				E61B20ED1B81286E005EAB2C /* UploadPhotoCell.swift in Sources */,
 				E6A869F41B60FF2100797D16 /* UserProfile.swift in Sources */,
@@ -2669,7 +2669,7 @@
 				E6D4D5B21B6F81A7003134CB /* SearchViewController.swift in Sources */,
 				E66115991B73A0CB003DB5B3 /* BrowseListViewController.swift in Sources */,
 				E6A869EE1B60D42C00797D16 /* APIService.swift in Sources */,
-				E68B52111B875B02006B980C /* ListProductCell.swift in Sources */,
+				E68B52221B875F8F006B980C /* ListProductCell.swift in Sources */,
 				E61B20E31B7E4D58005EAB2C /* EditProfileViewController.swift in Sources */,
 				E61B20E51B7E5964005EAB2C /* ProfileInfoCell.swift in Sources */,
 				E68B52031B873687006B980C /* FeedItemCellModelFactory.swift in Sources */,

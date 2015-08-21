@@ -82,6 +82,10 @@ struct FeedItemCellModelFactory {
         return TableViewCell.reuseId()
     }
     
+    func compactCellsReuseId() -> [String]  {
+        return [ProductListCell.reuseId(), EventListCell.reuseId(), PromotionListCell.reuseId(), PostListCell.reuseId()]
+    }
+    
     func detailedModelsForItem(feedItem: FeedItem) -> [TableViewCellModel] {
         switch feedItem.type {
             //Return expanded cells
@@ -96,6 +100,10 @@ struct FeedItemCellModelFactory {
         return TableViewCell.reuseId()
     }
 
+    func detailedCellsReuseId() -> [String]  {
+        return []
+    }
+    
     
     private let dateFormatter: NSDateFormatter = {
         let dateFormatter = NSDateFormatter()

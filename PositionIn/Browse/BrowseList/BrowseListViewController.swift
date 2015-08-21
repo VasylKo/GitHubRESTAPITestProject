@@ -108,7 +108,11 @@ extension BrowseListViewController {
         }
         
         override func nibCellsId() -> [String] {
-            return [ProductListCell.reuseId(), EventListCell.reuseId(), PromotionListCell.reuseId(), PostListCell.reuseId()]
+            if showCompactCells {
+                return modelFactory.compactCellsReuseId()
+            } else {
+                return modelFactory.detailedCellsReuseId()
+            }
         }
         
         func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
