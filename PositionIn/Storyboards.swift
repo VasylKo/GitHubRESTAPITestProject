@@ -69,16 +69,16 @@ struct Storyboards {
             return UIStoryboard(name: self.identifier, bundle: nil)
         }
 
-        static func instantiateInitialViewController() -> LoginViewController! {
-            return self.storyboard.instantiateInitialViewController() as! LoginViewController
+        static func instantiateInitialViewController() -> UINavigationController! {
+            return self.storyboard.instantiateInitialViewController() as! UINavigationController
         }
 
         static func instantiateViewControllerWithIdentifier(identifier: String) -> UIViewController {
             return self.storyboard.instantiateViewControllerWithIdentifier(identifier) as! UIViewController
         }
 
-        static func instantiateLoginViewController() -> LoginViewController! {
-            return self.storyboard.instantiateViewControllerWithIdentifier("LoginViewController") as! LoginViewController
+        static func instantiateLoginSignUpViewController() -> LoginSignupViewController! {
+            return self.storyboard.instantiateViewControllerWithIdentifier("LoginSignUpViewController") as! LoginSignupViewController
         }
 
         static func instantiateRegisterViewController() -> RegisterViewController! {
@@ -87,6 +87,10 @@ struct Storyboards {
 
         static func instantiateRecoverPasswordViewController() -> RecoverPasswordViewController! {
             return self.storyboard.instantiateViewControllerWithIdentifier("RecoverPasswordViewController") as! RecoverPasswordViewController
+        }
+
+        static func instantiateLoginViewController() -> LoginViewController! {
+            return self.storyboard.instantiateViewControllerWithIdentifier("LoginViewController") as! LoginViewController
         }
     }
 
@@ -475,28 +479,25 @@ extension BrowseViewController {
 
 //MARK: - SettingsViewController
 
-//MARK: - LoginViewController
+//MARK: - LoginSignupViewController
 extension UIStoryboardSegue {
-    func selection() -> LoginViewController.Segue? {
+    func selection() -> LoginSignupViewController.Segue? {
         if let identifier = self.identifier {
-            return LoginViewController.Segue(rawValue: identifier)
+            return LoginSignupViewController.Segue(rawValue: identifier)
         }
         return nil
     }
 }
 
-extension LoginViewController { 
+extension LoginSignupViewController { 
 
     enum Segue: String, Printable, SegueProtocol {
-        case ShowRegister = "ShowRegister"
-        case ShowRecoverPassword = "ShowRecoverPassword"
+        case LoginSegueId = "LoginSegueId"
 
         var kind: SegueKind? {
             switch (self) {
-            case ShowRegister:
-                return SegueKind(rawValue: "show")
-            case ShowRecoverPassword:
-                return SegueKind(rawValue: "show")
+            case LoginSegueId:
+                return SegueKind(rawValue: "showDetail")
             default:
                 preconditionFailure("Invalid value")
                 break
@@ -505,10 +506,8 @@ extension LoginViewController {
 
         var destination: UIViewController.Type? {
             switch (self) {
-            case ShowRegister:
-                return RegisterViewController.self
-            case ShowRecoverPassword:
-                return RecoverPasswordViewController.self
+            case LoginSegueId:
+                return LoginViewController.self
             default:
                 assertionFailure("Unknown destination")
                 return nil
@@ -524,6 +523,8 @@ extension LoginViewController {
 //MARK: - RegisterViewController
 
 //MARK: - RecoverPasswordViewController
+
+//MARK: - LoginViewController
 
 //MARK: - AddProductViewController
 extension UIStoryboardSegue {
