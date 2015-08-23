@@ -239,9 +239,9 @@
 		E68B52031B873687006B980C /* FeedItemCellModelFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E68B52021B873687006B980C /* FeedItemCellModelFactory.swift */; };
 		E68B52061B8736F4006B980C /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E68B52051B8736F4006B980C /* FilterViewController.swift */; };
 		E68B52211B875F8F006B980C /* EventListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E68B52191B875F8F006B980C /* EventListCell.swift */; };
-		E68B52221B875F8F006B980C /* ListProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E68B521A1B875F8F006B980C /* ListProductCell.swift */; };
+		E68B52221B875F8F006B980C /* ProductListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E68B521A1B875F8F006B980C /* ProductListCell.swift */; };
 		E68B52231B875F8F006B980C /* PositionIn.EventListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E68B521B1B875F8F006B980C /* PositionIn.EventListCell.xib */; };
-		E68B52241B875F8F006B980C /* PositionIn.ListProductCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E68B521C1B875F8F006B980C /* PositionIn.ListProductCell.xib */; };
+		E68B52241B875F8F006B980C /* PositionIn.ProductListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E68B521C1B875F8F006B980C /* PositionIn.ProductListCell.xib */; };
 		E68B52251B875F8F006B980C /* PositionIn.PostListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E68B521D1B875F8F006B980C /* PositionIn.PostListCell.xib */; };
 		E68B52261B875F8F006B980C /* PositionIn.PromotionListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E68B521E1B875F8F006B980C /* PositionIn.PromotionListCell.xib */; };
 		E68B52271B875F8F006B980C /* PostListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E68B521F1B875F8F006B980C /* PostListCell.swift */; };
@@ -745,9 +745,9 @@
 		E68B52021B873687006B980C /* FeedItemCellModelFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedItemCellModelFactory.swift; sourceTree = "<group>"; };
 		E68B52051B8736F4006B980C /* FilterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 		E68B52191B875F8F006B980C /* EventListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventListCell.swift; sourceTree = "<group>"; };
-		E68B521A1B875F8F006B980C /* ListProductCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListProductCell.swift; sourceTree = "<group>"; };
+		E68B521A1B875F8F006B980C /* ProductListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductListCell.swift; sourceTree = "<group>"; };
 		E68B521B1B875F8F006B980C /* PositionIn.EventListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.EventListCell.xib; sourceTree = "<group>"; };
-		E68B521C1B875F8F006B980C /* PositionIn.ListProductCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.ListProductCell.xib; sourceTree = "<group>"; };
+		E68B521C1B875F8F006B980C /* PositionIn.ProductListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.ProductListCell.xib; sourceTree = "<group>"; };
 		E68B521D1B875F8F006B980C /* PositionIn.PostListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.PostListCell.xib; sourceTree = "<group>"; };
 		E68B521E1B875F8F006B980C /* PositionIn.PromotionListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.PromotionListCell.xib; sourceTree = "<group>"; };
 		E68B521F1B875F8F006B980C /* PostListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostListCell.swift; sourceTree = "<group>"; };
@@ -2096,9 +2096,9 @@
 			isa = PBXGroup;
 			children = (
 				E68B52191B875F8F006B980C /* EventListCell.swift */,
-				E68B521A1B875F8F006B980C /* ListProductCell.swift */,
+				E68B521A1B875F8F006B980C /* ProductListCell.swift */,
 				E68B521B1B875F8F006B980C /* PositionIn.EventListCell.xib */,
-				E68B521C1B875F8F006B980C /* PositionIn.ListProductCell.xib */,
+				E68B521C1B875F8F006B980C /* PositionIn.ProductListCell.xib */,
 				E68B521D1B875F8F006B980C /* PositionIn.PostListCell.xib */,
 				E68B521E1B875F8F006B980C /* PositionIn.PromotionListCell.xib */,
 				E68B521F1B875F8F006B980C /* PostListCell.swift */,
@@ -2492,7 +2492,7 @@
 				E661159E1B73A0CB003DB5B3 /* PositionIn.BrowseMapViewController.xib in Resources */,
 				E66115871B7376F4003DB5B3 /* Login.storyboard in Resources */,
 				E68B52231B875F8F006B980C /* PositionIn.EventListCell.xib in Resources */,
-				E68B52241B875F8F006B980C /* PositionIn.ListProductCell.xib in Resources */,
+				E68B52241B875F8F006B980C /* PositionIn.ProductListCell.xib in Resources */,
 				E6DA53D01B7D0562000087A7 /* PositionIn.CommunityActionCell.xib in Resources */,
 				E689F07D1B6B976100597587 /* PositionIn.ProductInventoryCell.xib in Resources */,
 				E61B20DC1B7E4AB4005EAB2C /* PositionIn.SellerProfileViewController.xib in Resources */,
@@ -2669,7 +2669,7 @@
 				E6D4D5B21B6F81A7003134CB /* SearchViewController.swift in Sources */,
 				E66115991B73A0CB003DB5B3 /* BrowseListViewController.swift in Sources */,
 				E6A869EE1B60D42C00797D16 /* APIService.swift in Sources */,
-				E68B52221B875F8F006B980C /* ListProductCell.swift in Sources */,
+				E68B52221B875F8F006B980C /* ProductListCell.swift in Sources */,
 				E61B20E31B7E4D58005EAB2C /* EditProfileViewController.swift in Sources */,
 				E61B20E51B7E5964005EAB2C /* ProfileInfoCell.swift in Sources */,
 				E68B52031B873687006B980C /* FeedItemCellModelFactory.swift in Sources */,
