@@ -34,8 +34,7 @@ extension APIService {
     // Logout from the current session
     func logout() -> Future<Void, NoError> {
         return sessionController.logout().onComplete { _ in
-            NSNotificationCenter.defaultCenter().postNotificationName(UserProfile.CurrentUserDidChangeNotification,
-                object: nil, userInfo: nil)
+            self.sendUserDidChangeNotification(nil)
         }
     }
     
@@ -43,14 +42,14 @@ extension APIService {
     //Login existing user
     func login(#username: String, password: String) -> Future<UserProfile, NSError> {
         return loginRequest(username: username, password: password).flatMap { _ in
-            return self.updateCurrentProfile()
+            return self.updateCurrentProfileStatus()
         }
     }
     
     //Register anonymous user
     func register() -> Future<UserProfile, NSError> {
         return registerRequest(username: nil, password: nil, info: nil).flatMap { _ in
-            return self.updateCurrentProfile()
+            return self.updateCurrentProfileStatus()
         }
     }
     
@@ -64,11 +63,13 @@ extension APIService {
             info ["lastName"] = lastName
         }
         return registerRequest(username: username, password: password, info: info).flatMap { _ in
-            return self.updateCurrentProfile()
+            return self.updateCurrentProfileStatus()
         }
     }
     
     //MARK: - Private members -
+    
+    
     private func registerRequest(#username: String?, password: String?, info: [String: AnyObject]?) -> Future<AuthResponse, NSError> {
         let urlRequest = AuthRouter.Register(api: self, username: username, password: password, profileInfo: info)
         let (_, future): (Alamofire.Request, Future<AuthResponse, NSError>) = dataProvider.objectRequest(urlRequest)
@@ -89,10 +90,11 @@ extension APIService {
         }
     }
     
-    private func updateCurrentProfile() -> Future<UserProfile, NSError> {
+    private func updateCurrentProfileStatus() -> Future<UserProfile, NSError> {
         return getMyProfile().andThen { result in
             if let profile = result.value {
                 self.sessionController.setUserId(profile.objectId)
+                self.sendUserDidChangeNotification(profile)
             }
         }
     }
@@ -102,6 +104,13 @@ extension APIService {
             if let response = result.value {
                 self.sessionController.setAuth(response)
             }
+        }
+    }
+    
+    private func sendUserDidChangeNotification(profile: UserProfile?) {
+        dispatch_async(dispatch_get_main_queue()) {
+            NSNotificationCenter.defaultCenter().postNotificationName(UserProfile.CurrentUserDidChangeNotification,
+                object: profile, userInfo: nil)
         }
     }
     
