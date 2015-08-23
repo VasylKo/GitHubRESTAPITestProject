@@ -57,5 +57,46 @@ struct UpdateResponse: Mappable{
     var description: String {
         return "<\(self.dynamicType)-(\(objectId))>"
     }
+}
 
+
+// Session response
+struct AuthResponse: Mappable, DebugPrintable {
+    typealias Token = String!
+    private(set) var accessToken: Token
+    private(set) var refreshToken: Token
+    private(set) var expires: Int!
+    
+    init?(_ map: Map) {
+        mapping(map)
+        switch (accessToken,refreshToken,expires) {
+        case (.Some, .Some, .Some):
+            break
+        default:
+            Log.error?.message("Error while parsing object")
+            Log.debug?.trace()
+            Log.verbose?.value(self)
+            return nil
+        }
+    }
+    
+    private init(accessToken: Token, refreshToken: Token, expires: Int) {
+        self.accessToken = accessToken
+        self.refreshToken = refreshToken
+        self.expires = expires
+    }
+    
+    mutating func mapping(map: Map) {
+        accessToken <- map["access_token"]
+        refreshToken <- map["refresh_token"]
+        expires <- map["expires_in"]
+    }
+    
+    var debugDescription: String {
+        return "Access:\(accessToken), Refresh: \(refreshToken), Expires: \(expires)"
+    }
+    
+    static func invalidAuth() -> AuthResponse {
+        return  AuthResponse(accessToken: "",refreshToken: "",expires: -1)
+    }
 }

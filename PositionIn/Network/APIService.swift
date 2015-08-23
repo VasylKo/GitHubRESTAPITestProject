@@ -45,12 +45,7 @@ struct APIService {
     
     func getMyProfile() -> Future<UserProfile, NSError> {
         let endpoint = UserProfile.myProfileEndpoint()
-        return getObject(endpoint).andThen { result in
-            if let profile = result.value {
-                NSNotificationCenter.defaultCenter().postNotificationName(UserProfile.CurrentUserDidChangeNotification,
-                    object: profile, userInfo: nil)
-            }
-        }
+        return getObject(endpoint)
     }
     
     func updateMyProfile(object: UserProfile) -> Future<Void, NSError> {
