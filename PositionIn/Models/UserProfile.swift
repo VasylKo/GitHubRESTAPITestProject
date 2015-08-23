@@ -21,6 +21,7 @@ final class UserProfile: CRUDObject {
     var avatar: NSURL?
     var backgroundImage: NSURL?
     var location: Location?
+    var guest: Bool =  false
     
     enum Gender {
         case Unknown
@@ -48,6 +49,7 @@ final class UserProfile: CRUDObject {
         avatar <- (map["avatar"], URLTransform())
         backgroundImage <- (map["background"], URLTransform())
         location <- map["location"]
+        guest <- map["guest"]
     }
     
     static func endpoint() -> String {

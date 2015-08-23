@@ -20,7 +20,14 @@ extension APIService {
         return sessionController.currentUserId()
     }
     
-    // Return existing session or try to refresh token
+    //Success if user is not guest
+    func isUserAuthorized() -> Future<Void, NSError> {
+        return session().flatMap { _ in
+            return self.sessionController.isUserAuthorized()
+        }
+    }
+    
+    // Success on existing session or after token refresh
     func session() -> Future<Void ,NSError> {
         return sessionController.session().recoverWith { _ in
             return self.refreshToken().map { response in
@@ -93,7 +100,7 @@ extension APIService {
     private func updateCurrentProfileStatus() -> Future<UserProfile, NSError> {
         return getMyProfile().andThen { result in
             if let profile = result.value {
-                self.sessionController.setUserId(profile.objectId)
+                self.sessionController.updateCurrentStatus(profile)
                 self.sendUserDidChangeNotification(profile)
             }
         }

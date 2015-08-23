@@ -55,8 +55,20 @@ struct SessionController {
     func logout() -> Future<Void, NoError> {
         return future {
             self.setAuth(AuthResponse.invalidAuth())
-            self.setUserId(nil)
+            self.updateCurrentStatus(nil)
             return Result(value: ())
+        }
+    }
+    
+    func isUserAuthorized() -> Future<Void, NSError> {
+        return future { () -> Result<Void, NSError> in
+            if self.isGuest {
+                let errorCode = NetworkDataProvider.ErrorCodes.InvalidSessionError
+                return Result(error: errorCode.error())
+            } else {
+                return Result(value: ())
+            }
+            
         }
     }
     
@@ -72,9 +84,21 @@ struct SessionController {
         let expiresIn = NSDate(timeIntervalSinceNow: NSTimeInterval(expires))
         keychain.set(NSKeyedArchiver.archivedDataWithRootObject(expiresIn), key: KeychainKeys.ExpireDateKey)
     }
+
+    func updateCurrentStatus(profile: UserProfile?) {
+        keychain[KeychainKeys.UserIdKey] = profile?.objectId
+        var isGuest: Bool = profile?.guest ?? true
+        keychain.set(NSData(bytes: &isGuest, length: sizeof(Bool)), key: KeychainKeys.IsGuestKey)
+    }
     
-    func setUserId(userId : CRUDObjectId?) {
-        keychain[KeychainKeys.UserIdKey] = userId
+    private var isGuest: Bool {
+        let data = keychain.getData(KeychainKeys.IsGuestKey)
+        if let data = data {
+            var isGuest: Bool = true
+            data.getBytes(&isGuest, length:sizeof(Bool))
+            return isGuest
+        }
+        return true
     }
     
     private var userIdValue: CRUDObjectId? {
@@ -106,5 +130,6 @@ struct SessionController {
         static let ExpireDateKey = "ed"
         
         static let UserIdKey = "userId"
+        static let IsGuestKey = "isGuest"
     }
 }

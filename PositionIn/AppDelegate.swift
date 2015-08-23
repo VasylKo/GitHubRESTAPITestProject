@@ -56,11 +56,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         setupMaps()
-        api.getMyProfile().onComplete { result in
+        api.isUserAuthorized().onComplete { result in
             let defaultAction: SidebarViewController.Action
-            if let profile = result.value {
+            switch result.value {
+            case .Some:
                 defaultAction = .ForYou
-            } else {
+            default:
                 defaultAction = .Login
             }
             if let sidebarViewController = self.window?.rootViewController as? SidebarViewController {
