@@ -18,16 +18,13 @@ final class RegisterViewController: BaseLoginViewController {
            let password = passwordTextField.text,
            let email = emailTextField.text {
             
-            api().createProfile(username: email, password: password).flatMap { _ in
-                return api().getMyProfile()
-            }.flatMap {
+            let lastName: String? = nil
+            
+            api().register(username: email, password: password, firstName: username, lastName: lastName).flatMap {
                 (userProfile: UserProfile) ->  Future<Void,NSError> in
                 var updatedProfile = userProfile
-                updatedProfile.firstName = username
                 updatedProfile.avatar = NSURL(string:"http://i.imgur.com/5npTFKP.png")
                 return api().updateMyProfile(updatedProfile)
-            }.flatMap {  (_: Void) -> Future<UserProfile, NSError> in
-                return api().getMyProfile()
             }.onFailure { error in
                 Log.error?.value(error)
             }.onSuccess { [weak self] _ in
@@ -36,7 +33,7 @@ final class RegisterViewController: BaseLoginViewController {
                 self?.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
             }
             
-        }        
+        }
     }
 
     

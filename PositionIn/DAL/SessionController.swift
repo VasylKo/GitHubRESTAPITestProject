@@ -16,7 +16,7 @@ import CleanroomLogger
 struct SessionController {
     
     func currentUserId() -> Future<CRUDObjectId, NSError> {
-        return future { () -> Result<CRUDObjectId ,NSError> in
+        return future { () -> Result<CRUDObjectId, NSError> in
             if let userId = self.userIdValue {
                 return Result(value: userId)
             } else {
@@ -27,8 +27,20 @@ struct SessionController {
         }
     }
     
-    func session() -> Future<APIService.AuthResponse.Token ,NSError> {
-        return future { () -> Result<APIService.AuthResponse.Token ,NSError> in
+    func currentRefreshToken() -> Future<AuthResponse.Token, NSError> {
+        return future { () -> Result<AuthResponse.Token, NSError> in
+            if let refreshToken = self.refreshToken {
+                return Result(value: refreshToken)
+            } else {
+                Log.warning?.trace()
+                let errorCode = NetworkDataProvider.ErrorCodes.InvalidSessionError
+                return Result(error: errorCode.error())
+            }
+        }
+    }
+    
+    func session() -> Future<AuthResponse.Token, NSError> {
+        return future { () -> Result<AuthResponse.Token, NSError> in
             if  let token = self.accessToken,
                 let expirationDate = self.expiresIn
                 where expirationDate.compare(NSDate()) == NSComparisonResult.OrderedDescending {
@@ -42,19 +54,22 @@ struct SessionController {
     
     func logout() -> Future<Void, NoError> {
         return future {
-            self.setAuth(APIService.AuthResponse.invalidAuth())
+            self.setAuth(AuthResponse.invalidAuth())
             self.setUserId(nil)
             return Result(value: ())
         }
     }
     
-    func setAuth(authResponse: APIService.AuthResponse) {
+    func setAuth(authResponse: AuthResponse) {
         Log.info?.message("Auth changed")
         Log.debug?.value(authResponse)
         let keychain = self.keychain
-        keychain[KeychainKeys.AccessTokenKey] = authResponse.accessToken
-        keychain[KeychainKeys.RefreshTokenKey] = authResponse.refreshToken
-        let expiresIn = NSDate(timeIntervalSinceNow: NSTimeInterval(authResponse.expires!))
+        let expires: Int = authResponse.expires!
+        let accessToken = expires > 0 ? authResponse.accessToken : nil
+        let refreshToken = expires > 0 ? authResponse.refreshToken : nil
+        keychain[KeychainKeys.AccessTokenKey] = accessToken
+        keychain[KeychainKeys.RefreshTokenKey] = refreshToken
+        let expiresIn = NSDate(timeIntervalSinceNow: NSTimeInterval(expires))
         keychain.set(NSKeyedArchiver.archivedDataWithRootObject(expiresIn), key: KeychainKeys.ExpireDateKey)
     }
     

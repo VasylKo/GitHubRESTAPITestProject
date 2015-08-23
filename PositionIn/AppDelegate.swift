@@ -69,28 +69,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         return true
-        
-        
-//        api.logout()
-//        return  true
-        api.session().recoverWith { [unowned self]
-            (error: NSError) -> Future<Void ,NSError>  in
-            Log.error?.value(error)
-            let username = "ios-777@bekitzur.com"
-            let password = "pwd"
-            return self.api.auth(username: username, password: password).map { response in
-                return ()
-            }
-        }.onSuccess { [unowned self] _  in
-            Log.debug?.message("Session ok")
-        }.onFailure { [unowned self] error in
-            Log.error?.value(error)
-        }
-        
-  
-        
-        return true
-        
+                
         self.chatClient.auth("ixmpp@beewellapp.com", password: "1HateD0m2").future().onSuccess { [unowned self] in
             Log.info?.message("XMPP authorized")
             self.chatClient.sendTestMessage()
