@@ -16,7 +16,12 @@ final class LoginViewController: BaseLoginViewController {
     }
 
     @IBAction func didTapClose(sender: AnyObject) {
-        api().register().onSuccess { [weak self] _ in
+        //Use existing session or register new
+        api().session().recoverWith { _ in
+            return api().register().map { _ in
+                return ()
+            }
+        }.onSuccess { [weak self] _ in
             Log.info?.message("Anonymous login done")
             self?.dismissLogin()
         }.onFailure { error in
