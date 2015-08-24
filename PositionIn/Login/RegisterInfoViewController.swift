@@ -25,6 +25,8 @@ final class RegisterInfoViewController: BaseLoginViewController {
                     var updatedProfile = userProfile
                     updatedProfile.avatar = NSURL(string:"http://i.imgur.com/5npTFKP.png")
                     return api().updateMyProfile(updatedProfile)
+                }.flatMap { _ in
+                    return api().isUserAuthorized()
                 }.onFailure { error in
                     Log.error?.value(error)
                 }.onSuccess { [weak self] _ in
