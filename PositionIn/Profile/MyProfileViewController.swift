@@ -10,7 +10,7 @@ import UIKit
 import BrightFutures
 import CleanroomLogger
 
-final class MyProfileViewController: BaseProfileViewController {
+final class MyProfileViewController: BaseProfileListViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         let page = APIService.Page()

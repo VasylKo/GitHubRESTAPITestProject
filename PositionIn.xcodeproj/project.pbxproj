@@ -50,7 +50,7 @@
 		E61B20D81B7E0838005EAB2C /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61B20D71B7E0838005EAB2C /* SettingsViewController.swift */; };
 		E61B20DC1B7E4AB4005EAB2C /* PositionIn.SellerProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E61B20DA1B7E4AB4005EAB2C /* PositionIn.SellerProfileViewController.xib */; };
 		E61B20DD1B7E4AB4005EAB2C /* SellerProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61B20DB1B7E4AB4005EAB2C /* SellerProfileViewController.swift */; };
-		E61B20DF1B7E4BBF005EAB2C /* BaseProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61B20DE1B7E4BBF005EAB2C /* BaseProfileViewController.swift */; };
+		E61B20DF1B7E4BBF005EAB2C /* BaseProfileListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61B20DE1B7E4BBF005EAB2C /* BaseProfileListViewController.swift */; };
 		E61B20E11B7E4BED005EAB2C /* MyProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61B20E01B7E4BED005EAB2C /* MyProfileViewController.swift */; };
 		E61B20E31B7E4D58005EAB2C /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61B20E21B7E4D58005EAB2C /* EditProfileViewController.swift */; };
 		E61B20E51B7E5964005EAB2C /* ProfileInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61B20E41B7E5964005EAB2C /* ProfileInfoCell.swift */; };
@@ -357,7 +357,7 @@
 		E61B20D71B7E0838005EAB2C /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		E61B20DA1B7E4AB4005EAB2C /* PositionIn.SellerProfileViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.SellerProfileViewController.xib; sourceTree = "<group>"; };
 		E61B20DB1B7E4AB4005EAB2C /* SellerProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SellerProfileViewController.swift; sourceTree = "<group>"; };
-		E61B20DE1B7E4BBF005EAB2C /* BaseProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseProfileViewController.swift; sourceTree = "<group>"; };
+		E61B20DE1B7E4BBF005EAB2C /* BaseProfileListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseProfileListViewController.swift; sourceTree = "<group>"; };
 		E61B20E01B7E4BED005EAB2C /* MyProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyProfileViewController.swift; sourceTree = "<group>"; };
 		E61B20E21B7E4D58005EAB2C /* EditProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		E61B20E41B7E5964005EAB2C /* ProfileInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileInfoCell.swift; sourceTree = "<group>"; };
@@ -910,7 +910,7 @@
 		E61B20D91B7E4A85005EAB2C /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				E61B20DE1B7E4BBF005EAB2C /* BaseProfileViewController.swift */,
+				E61B20DE1B7E4BBF005EAB2C /* BaseProfileListViewController.swift */,
 				E61B20E01B7E4BED005EAB2C /* MyProfileViewController.swift */,
 				E61B20DA1B7E4AB4005EAB2C /* PositionIn.SellerProfileViewController.xib */,
 				E61B20DB1B7E4AB4005EAB2C /* SellerProfileViewController.swift */,
@@ -2651,7 +2651,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E6325F721B57E1DA00996480 /* Storyboards.swift in Sources */,
-				E61B20DF1B7E4BBF005EAB2C /* BaseProfileViewController.swift in Sources */,
+				E61B20DF1B7E4BBF005EAB2C /* BaseProfileListViewController.swift in Sources */,
 				E64D00631B7C8FB7007693E0 /* AddPostViewController.swift in Sources */,
 				E62B16FF1B5CE0F800D446BC /* BesideMenuViewController.swift in Sources */,
 				E66115A51B73A920003DB5B3 /* AddProductViewController.swift in Sources */,

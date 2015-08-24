@@ -9,7 +9,7 @@
 import UIKit
 import PosInCore
 
-class BaseProfileViewController: BesideMenuViewController {
+class BaseProfileListViewController: BesideMenuViewController {
     @IBOutlet weak var tableView: TableView!
     
     override func viewDidLoad() {
@@ -41,7 +41,7 @@ class BaseProfileViewController: BesideMenuViewController {
 protocol ProfileCellModel: TableViewCellModel {
 }
 
-extension BaseProfileViewController {
+extension BaseProfileListViewController {
     final class ProfileDataSource: TableViewDataSource {
         var items: [[ProfileCellModel]] = [[],[]]
         
