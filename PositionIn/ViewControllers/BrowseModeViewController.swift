@@ -44,7 +44,7 @@ import CleanroomLogger
         Log.verbose?.message("Apply browse mode: \(mode)")
         tabbar.selectedMode = mode
         NSNotificationCenter.defaultCenter().postNotificationName(
-            BrowseViewController.BrowseModeDidchangeNotification,
+            BrowseModeViewController.BrowseModeDidchangeNotification,
             object: self,
             userInfo: nil
         )

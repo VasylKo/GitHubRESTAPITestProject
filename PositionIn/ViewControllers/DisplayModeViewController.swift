@@ -122,7 +122,6 @@ protocol BrowseActionConsumer: class {
     //MARK: - BrowseActionConsumer: Browse actions -
     
     func browseController(controller: BrowseActionProducer, didSelectPost post: Post) {
-        //        performSegue(BrowseViewController.Segue.ShowProductDetails)
     }
 
     //MARK: - Search -

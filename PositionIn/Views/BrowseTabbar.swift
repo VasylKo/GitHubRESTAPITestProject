@@ -16,12 +16,12 @@ class BrowseTabbar: UITabBar {
     
     weak var browseDelegate: BrowseTabbarDelegate?
 
-    var selectedMode: BrowseViewController.BrowseMode {
+    var selectedMode: BrowseModeViewController.BrowseMode {
         get {
             if let selectedItem = selectedItem,
                let items = items as? [UITabBarItem],
                let index = find(items, selectedItem),
-               let mode = BrowseViewController.BrowseMode(rawValue: index) {
+               let mode = BrowseModeViewController.BrowseMode(rawValue: index) {
                     return mode
             }
             return .ForYou
