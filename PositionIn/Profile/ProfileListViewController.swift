@@ -6,10 +6,42 @@
 //  Copyright (c) 2015 Soluna Labs. All rights reserved.
 //
 
-import UIKit
 import PosInCore
+import BrightFutures
+import CleanroomLogger
 
-class BaseProfileListViewController: BesideMenuViewController {
+class ProfileListViewController: BesideMenuViewController {
+    //MARK: - Reload data -
+    
+    func reloadData() {
+        let page = APIService.Page()
+        //Future<CollectionResponse<Post>,NSError>
+        api().getMyProfile().flatMap {[weak self] (profile: UserProfile) -> Future<CollectionResponse<Post>,NSError> in
+            self?.didReceiveProfile(profile)
+            return api().getUserPosts(profile.objectId, page: page)
+        }.onSuccess { [weak self] (posts: CollectionResponse<Post>) -> () in
+                self?.didReceivePosts(posts.items, page: page)
+        }
+    }
+    
+    private func didReceivePosts(posts: [Post], page: APIService.Page) {
+        Log.debug?.value(posts)
+        dataSource.items[1] = [
+            BrowseListCellModel()
+        ]
+        tableView.reloadData()
+    }
+    
+    private func didReceiveProfile(profile: UserProfile) {
+        dataSource.items[0] = [
+            ProfileInfoCellModel(name: profile.firstName, avatar: profile.avatar, background: profile.backgroundImage),
+            ProfileStatsCellModel(countPosts: 113, countFollowers: 23, countFollowing: 2),
+        ]
+        tableView.reloadData()
+    }
+
+    
+    //MARK: - Table -
     @IBOutlet weak var tableView: TableView!
     
     override func viewDidLoad() {
@@ -17,6 +49,7 @@ class BaseProfileListViewController: BesideMenuViewController {
         navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
         navigationController?.navigationBar.shadowImage = UIImage()
         dataSource.configureTable(tableView)
+        reloadData()
     }
 
     @IBAction func prepareForUnwind(segue: UIStoryboardSegue) {
@@ -24,15 +57,9 @@ class BaseProfileListViewController: BesideMenuViewController {
     }
 
     
-    func prepareDatasource(dataSource: ProfileDataSource) {
-    
-    }
-    
-    
     lazy var dataSource: ProfileDataSource = {
         let dataSource = ProfileDataSource()
         dataSource.parentViewController = self
-        self.prepareDatasource(dataSource)
         return dataSource
         }()
 }
@@ -41,7 +68,7 @@ class BaseProfileListViewController: BesideMenuViewController {
 protocol ProfileCellModel: TableViewCellModel {
 }
 
-extension BaseProfileListViewController {
+extension ProfileListViewController {
     final class ProfileDataSource: TableViewDataSource {
         var items: [[ProfileCellModel]] = [[],[]]
         

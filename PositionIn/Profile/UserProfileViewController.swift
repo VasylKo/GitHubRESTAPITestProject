@@ -26,7 +26,7 @@ final class UserProfileViewController: BrowseModeViewController {
         case .Map:
             return Storyboards.Main.instantiateBrowseMapViewController()
         case .List:
-            return Storyboards.Main.instantiateMyProfileViewController()
+            return Storyboards.Main.instantiateProfileListViewController()
         }
     }
     

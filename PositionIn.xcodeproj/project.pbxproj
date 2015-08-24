@@ -50,8 +50,7 @@
 		E61B20D81B7E0838005EAB2C /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61B20D71B7E0838005EAB2C /* SettingsViewController.swift */; };
 		E61B20DC1B7E4AB4005EAB2C /* PositionIn.SellerProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E61B20DA1B7E4AB4005EAB2C /* PositionIn.SellerProfileViewController.xib */; };
 		E61B20DD1B7E4AB4005EAB2C /* SellerProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61B20DB1B7E4AB4005EAB2C /* SellerProfileViewController.swift */; };
-		E61B20DF1B7E4BBF005EAB2C /* BaseProfileListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61B20DE1B7E4BBF005EAB2C /* BaseProfileListViewController.swift */; };
-		E61B20E11B7E4BED005EAB2C /* MyProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61B20E01B7E4BED005EAB2C /* MyProfileViewController.swift */; };
+		E61B20DF1B7E4BBF005EAB2C /* ProfileListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61B20DE1B7E4BBF005EAB2C /* ProfileListViewController.swift */; };
 		E61B20E31B7E4D58005EAB2C /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61B20E21B7E4D58005EAB2C /* EditProfileViewController.swift */; };
 		E61B20E51B7E5964005EAB2C /* ProfileInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61B20E41B7E5964005EAB2C /* ProfileInfoCell.swift */; };
 		E61B20E71B7E5AF7005EAB2C /* PositionIn.ProfileInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E61B20E61B7E5AF7005EAB2C /* PositionIn.ProfileInfoCell.xib */; };
@@ -360,8 +359,7 @@
 		E61B20D71B7E0838005EAB2C /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		E61B20DA1B7E4AB4005EAB2C /* PositionIn.SellerProfileViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.SellerProfileViewController.xib; sourceTree = "<group>"; };
 		E61B20DB1B7E4AB4005EAB2C /* SellerProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SellerProfileViewController.swift; sourceTree = "<group>"; };
-		E61B20DE1B7E4BBF005EAB2C /* BaseProfileListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseProfileListViewController.swift; sourceTree = "<group>"; };
-		E61B20E01B7E4BED005EAB2C /* MyProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyProfileViewController.swift; sourceTree = "<group>"; };
+		E61B20DE1B7E4BBF005EAB2C /* ProfileListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileListViewController.swift; sourceTree = "<group>"; };
 		E61B20E21B7E4D58005EAB2C /* EditProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		E61B20E41B7E5964005EAB2C /* ProfileInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileInfoCell.swift; sourceTree = "<group>"; };
 		E61B20E61B7E5AF7005EAB2C /* PositionIn.ProfileInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.ProfileInfoCell.xib; sourceTree = "<group>"; };
@@ -917,10 +915,9 @@
 			isa = PBXGroup;
 			children = (
 				E6F2437B1B8B42D70033B13C /* UserProfileViewController.swift */,
-				E61B20DE1B7E4BBF005EAB2C /* BaseProfileListViewController.swift */,
-				E61B20E01B7E4BED005EAB2C /* MyProfileViewController.swift */,
-				E61B20DA1B7E4AB4005EAB2C /* PositionIn.SellerProfileViewController.xib */,
+				E61B20DE1B7E4BBF005EAB2C /* ProfileListViewController.swift */,
 				E61B20DB1B7E4AB4005EAB2C /* SellerProfileViewController.swift */,
+				E61B20DA1B7E4AB4005EAB2C /* PositionIn.SellerProfileViewController.xib */,
 				E61B20E41B7E5964005EAB2C /* ProfileInfoCell.swift */,
 				E61B20E61B7E5AF7005EAB2C /* PositionIn.ProfileInfoCell.xib */,
 				E61B20E81B7E6163005EAB2C /* ProfileStatsCell.swift */,
@@ -2661,7 +2658,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E6325F721B57E1DA00996480 /* Storyboards.swift in Sources */,
-				E61B20DF1B7E4BBF005EAB2C /* BaseProfileListViewController.swift in Sources */,
+				E61B20DF1B7E4BBF005EAB2C /* ProfileListViewController.swift in Sources */,
 				E64D00631B7C8FB7007693E0 /* AddPostViewController.swift in Sources */,
 				E62B16FF1B5CE0F800D446BC /* BesideMenuViewController.swift in Sources */,
 				E66115A51B73A920003DB5B3 /* AddProductViewController.swift in Sources */,
@@ -2700,7 +2697,6 @@
 				E6C5CE1D1B83A28C00265955 /* SessionController.swift in Sources */,
 				E661159D1B73A0CB003DB5B3 /* BrowseMapViewController.swift in Sources */,
 				E6F243701B8B17910033B13C /* DisplayModeViewController.swift in Sources */,
-				E61B20E11B7E4BED005EAB2C /* MyProfileViewController.swift in Sources */,
 				E68B52011B873545006B980C /* FeedTableViewCellModel.swift in Sources */,
 				E64D00651B7C9601007693E0 /* BaseAddItemViewController.swift in Sources */,
 				E65E872C1B611BA200AE444D /* Post.swift in Sources */,

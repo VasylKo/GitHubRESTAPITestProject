@@ -747,10 +747,10 @@
             </objects>
             <point key="canvasLocation" x="-2248" y="1105"/>
         </scene>
-        <!--My Profile View Controller-->
+        <!--Profile List View Controller-->
         <scene sceneID="D6q-d0-0ua">
             <objects>
-                <viewController storyboardIdentifier="MyProfileViewController" id="7kZ-Mg-mwO" customClass="MyProfileViewController" customModule="PositionIn" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ProfileListViewController" id="7kZ-Mg-mwO" customClass="ProfileListViewController" customModule="PositionIn" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="4Qg-uS-R4S"/>
                         <viewControllerLayoutGuide type="bottom" id="aqc-PM-S0r"/>

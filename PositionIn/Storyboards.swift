@@ -56,8 +56,8 @@ struct Storyboards {
             return self.storyboard.instantiateViewControllerWithIdentifier("EditProfileViewController") as! EditProfileViewController
         }
 
-        static func instantiateMyProfileViewController() -> MyProfileViewController! {
-            return self.storyboard.instantiateViewControllerWithIdentifier("MyProfileViewController") as! MyProfileViewController
+        static func instantiateProfileListViewController() -> ProfileListViewController! {
+            return self.storyboard.instantiateViewControllerWithIdentifier("ProfileListViewController") as! ProfileListViewController
         }
 
         static func instantiateSettingsViewController() -> SettingsViewController! {
@@ -477,7 +477,7 @@ extension BrowseViewController {
 
 //MARK: - EditProfileViewController
 
-//MARK: - MyProfileViewController
+//MARK: - ProfileListViewController
 
 //MARK: - SettingsViewController
 

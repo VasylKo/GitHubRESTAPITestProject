@@ -9,8 +9,8 @@
 import UIKit
 import PosInCore
 
-
-final class SellerProfileViewController: BaseProfileListViewController {
+//    @availability(*, unavailable)
+final class SellerProfileViewController: ProfileListViewController {
     
     @IBOutlet private weak var avatarView: AvatarView!
 
