@@ -18,26 +18,7 @@ final class LoginViewController: BaseLoginViewController {
     @IBAction func didTapForgot(sender: AnyObject) {
         performSegue(LoginViewController.Segue.ForgotPasswordSegueId)
     }
-    
-    @IBAction func didTapClose(sender: AnyObject) {
-        //Use existing session or register new
-        api().session().recoverWith { _ in
-            return api().register().map { _ in
-                return ()
-            }
-        }.onSuccess { [weak self] _ in
-            Log.info?.message("Anonymous login done")
-            self?.dismissLogin()
-        }.onFailure { error in
-            Log.error?.value(error)
-        }
-    }
-    
-    func dismissLogin() {
-        sideBarController?.executeAction(.ForYou)
-        dismissViewControllerAnimated(true, completion: nil)
-    }
-    
+        
     @IBAction func didTapLogin(sender: AnyObject) {
         //TODO: add validation
         if let username = usernameTextField.text,

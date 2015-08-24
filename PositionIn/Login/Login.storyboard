@@ -374,7 +374,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="r6h-lC-HMG">
-                        <barButtonItem key="rightBarButtonItem" title="Skip" id="cTy-bq-NNj"/>
+                        <barButtonItem key="rightBarButtonItem" title="Skip" id="cTy-bq-NNj">
+                            <connections>
+                                <action selector="didTapClose:" destination="zd3-fl-Vea" id="Nxn-lH-7wn"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="emailTextField" destination="Dk8-oL-kIO" id="nVA-dK-0UW"/>
@@ -618,6 +622,9 @@
                                                         <exclude reference="0JN-Ls-2Uh"/>
                                                     </mask>
                                                 </variation>
+                                                <connections>
+                                                    <action selector="didTapLogin:" destination="cOZ-SQ-Q1c" eventType="touchUpInside" id="6bK-4l-Wbn"/>
+                                                </connections>
                                             </button>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nUB-yS-bQO">
                                                 <rect key="frame" x="36" y="215" width="504" height="19"/>
@@ -864,6 +871,9 @@
                                                         <exclude reference="WDf-DM-1s2"/>
                                                     </mask>
                                                 </variation>
+                                                <connections>
+                                                    <action selector="didTapSignupButton:" destination="pfT-Kp-HW4" eventType="touchUpInside" id="cI3-Rg-wNT"/>
+                                                </connections>
                                             </button>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="First Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IH7-bo-DFg">
                                                 <rect key="frame" x="36" y="240" width="504" height="19"/>
@@ -1085,7 +1095,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="4xJ-HN-ZRJ">
-                        <barButtonItem key="rightBarButtonItem" title="Skip" id="a1l-NF-oVa"/>
+                        <barButtonItem key="rightBarButtonItem" title="Skip" id="a1l-NF-oVa">
+                            <connections>
+                                <action selector="didTapClose:" destination="pfT-Kp-HW4" id="DRX-tG-qKr"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <connections>

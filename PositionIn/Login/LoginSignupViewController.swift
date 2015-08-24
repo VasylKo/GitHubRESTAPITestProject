@@ -15,12 +15,7 @@ class LoginSignupViewController: UIViewController {
         super.viewDidLoad()
         signupButton.layer.borderColor = UIColor.whiteColor().CGColor
     }
-    
-    @IBAction func didTapClose(sender: AnyObject) {
-        sideBarController?.executeAction(.ForYou)
-        dismissViewControllerAnimated(true, completion: nil)
-    }
-    
+        
     @IBAction func didTapLogin(sender: AnyObject) {
         performSegue(LoginSignupViewController.Segue.LoginSegueId)
     }
