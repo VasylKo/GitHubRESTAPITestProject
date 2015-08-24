@@ -28,11 +28,15 @@ final class MainMenuViewController: UIViewController {
     
     private func menuItemsForUser(user: UserProfile?) -> [MainMenuItem] {
         
+        let loginItem = MainMenuItem(title: NSLocalizedString("Login", comment: "Main Menu: Login"), imageName: "MainMenuPeople", action: .Login)
         let firstItem: MainMenuItem =  user.map { user in
+            if user.guest == true {
+                return loginItem
+            }
             let title: String =  user.firstName ?? NSLocalizedString("Unknown", comment: "Main Menu: Unnamed user")
             let image = user.avatar?.absoluteString ?? ""
             return MainMenuItem(title: title, imageName: image, action: .UserProfile)
-        } ?? MainMenuItem(title: NSLocalizedString("Login", comment: "Main Menu: Login"), imageName: "MainMenuPeople", action: .Login)
+        } ?? loginItem
 
         return [firstItem] + defaultMainMenuItems()
     }
@@ -133,29 +137,37 @@ final class MainMenuViewController: UIViewController {
 
         var items: [MainMenuItem] = []
         
+        private func itemForIndexPath(indexPath: NSIndexPath) -> MainMenuItem {
+            return items[indexPath.row]
+        }
+        
         @objc override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
             return items.count
         }
         
         @objc override func tableView(tableView: UITableView, reuseIdentifierForIndexPath indexPath: NSIndexPath) -> String {
-            if indexPath.row == 0 {
+            switch itemForIndexPath(indexPath).action {
+            case .Login:
+                return MainMenuLoginCell.reuseId()
+            case .UserProfile:
                 return  MainMenuUserCell.reuseId()
+            default:
+                return MainMenuCell.reuseId()
             }
-            return MainMenuCell.reuseId()
         }
 
          override func tableView(tableView: UITableView, modelForIndexPath indexPath: NSIndexPath) -> TableViewCellModel {
-            let item = items[indexPath.row]
+            let item = itemForIndexPath(indexPath)
             let model = TableViewCellImageTextModel(title: item.title, imageName: item.image)
             return model
         }
      
         override func nibCellsId() -> [String] {
-            return [MainMenuCell.reuseId(), MainMenuUserCell.reuseId()]
+            return [MainMenuCell.reuseId(), MainMenuUserCell.reuseId(), MainMenuLoginCell.reuseId()]
         }
         
         func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-            let item = items[indexPath.row]
+            let item = itemForIndexPath(indexPath)
             Log.debug?.message("Select menu item: \(item.title)")
             parentViewController?.sideBarController?.executeAction(item.action)
         }
