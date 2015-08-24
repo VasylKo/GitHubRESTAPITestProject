@@ -120,6 +120,52 @@ extension AddMenuView {
         let icon: UIImage
         let color: UIColor
         let action: ItemAction?
+        
+        static func productItemWithAction(action: ItemAction?) -> MenuItem {
+            return MenuItem(
+                title: NSLocalizedString("PRODUCT",comment: "Add menu: PRODUCT"),
+                icon: UIImage(named: "AddProduct")!,
+                color: UIScheme.productAddMenuColor,
+                action: action
+            )
+        }
+        
+        static func eventItemWithAction(action: ItemAction?) -> MenuItem {
+            return MenuItem(
+                title: NSLocalizedString("EVENT",comment: "Add menu: EVENT"),
+                icon: UIImage(named: "AddEvent")!,
+                color: UIScheme.eventAddMenuColor,
+                action: action
+            )
+        }
+        
+        static func promotionItemWithAction(action: ItemAction?) -> MenuItem {
+            return MenuItem(
+                title: NSLocalizedString("PROMOTION",comment: "Add menu: PROMOTION"),
+                icon: UIImage(named: "AddPromotion")!,
+                color: UIScheme.promotionAddMenuColor,
+                action: action
+            )
+        }
+        
+        static func postItemWithAction(action: ItemAction?) -> MenuItem {
+            return MenuItem(
+                title: NSLocalizedString("POST",comment: "Add menu: POST"),
+                icon: UIImage(named: "AddPost")!,
+                color: UIScheme.postAddMenuColor,
+                action: action
+            )
+        }
+        
+        static func inviteItemWithAction(action: ItemAction?) -> MenuItem {
+            return MenuItem(
+                title: NSLocalizedString("INVITE",comment: "Add menu: INVITE"),
+                icon: UIImage(named: "AddInvite")!,
+                color: UIScheme.inviteAddMenuColor,
+                action: action
+            )
+        }
+        
     }
  
 }

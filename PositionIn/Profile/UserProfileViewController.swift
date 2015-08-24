@@ -20,6 +20,25 @@ final class UserProfileViewController: BrowseModeViewController {
         
     }
     
+    override var addMenuItems: [AddMenuView.MenuItem] {
+        return [
+            AddMenuView.MenuItem.productItemWithAction { [weak self] in
+                self?.navigationController?.pushViewController(Storyboards.NewItems.instantiateAddProductViewController(), animated: true)
+            },
+            AddMenuView.MenuItem.eventItemWithAction { [weak self] in
+                self?.navigationController?.pushViewController(Storyboards.NewItems.instantiateAddEventViewController(), animated: true)
+            },
+            AddMenuView.MenuItem.promotionItemWithAction { [weak self] in
+                self?.navigationController?.pushViewController(Storyboards.NewItems.instantiateAddPromotionViewController(), animated: true)
+            },
+            AddMenuView.MenuItem.postItemWithAction { [weak self] in
+                self?.navigationController?.pushViewController(Storyboards.NewItems.instantiateAddPostViewController(), animated: true)
+            },
+            AddMenuView.MenuItem.inviteItemWithAction { [weak self] in
+                Log.debug?.message("Should call invite")
+            },
+        ]
+    }
     
     override func viewControllerForMode(mode: DisplayModeViewController.DisplayMode) -> UIViewController {
         switch self.displayMode {
