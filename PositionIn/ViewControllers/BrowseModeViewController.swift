@@ -53,6 +53,7 @@ import CleanroomLogger
     static let BrowseModeDidchangeNotification = "BrowseModeDidchangeNotification"
     
     //MARK: - Views -
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tabbar.browseDelegate = self

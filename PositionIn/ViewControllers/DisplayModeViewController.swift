@@ -8,6 +8,7 @@
 
 import UIKit
 import CleanroomLogger
+import HMSegmentedControl
 
 protocol BrowseActionProducer {
     var actionConsumer: BrowseActionConsumer? { get set }
@@ -70,7 +71,6 @@ protocol BrowseActionConsumer: class {
         }
         
         displayModeSegmentedControl.selectedSegmentIndex = mode.rawValue
-
     }
     
 
@@ -87,18 +87,35 @@ protocol BrowseActionConsumer: class {
     
     //MARK: - Display segment -
     
-    private(set) internal lazy var displayModeSegmentedControl: UISegmentedControl = {
+    typealias DisplayModeSegmentedControl = HMSegmentedControl
+    
+    private(set) internal lazy var displayModeSegmentedControl: DisplayModeSegmentedControl = {
         let items = [
             UIImage(named: "BrowseModeMap")!,
             UIImage(named: "BrowseModeList")!,
         ]
-        let segment = UISegmentedControl(items: items)
-        segment.addTarget(self, action: "displayModeSegmentChanged:", forControlEvents: UIControlEvents.ValueChanged)
-        return segment
+        let selectedItems = [
+            UIImage(named: "BrowseModeMapSelected")!,
+            UIImage(named: "BrowseModeListSelected")!,
+        ]
+        
+        let segmentControl = DisplayModeSegmentedControl(sectionImages: items, sectionSelectedImages: selectedItems)
+        segmentControl.frame = CGRect(origin: CGPointZero, size: CGSize(width: 60, height: 44))
+        segmentControl.selectionIndicatorColor = UIColor.whiteColor()
+        segmentControl.backgroundColor = UIColor.clearColor()
+        segmentControl.segmentEdgeInset = UIEdgeInsetsZero
+        segmentControl.selectionIndicatorHeight = 2.0
+        segmentControl.borderWidth = 0.0
+        segmentControl.userDraggable = false
+        segmentControl.verticalDividerEnabled = false
+        segmentControl.selectionIndicatorLocation = HMSegmentedControlSelectionIndicatorLocationDown
+        segmentControl.selectionStyle = HMSegmentedControlSelectionStyleFullWidthStripe
+        segmentControl.addTarget(self, action: "displayModeSegmentChanged:", forControlEvents: UIControlEvents.ValueChanged)
+        return segmentControl
     }()
     
     
-    @IBAction private func displayModeSegmentChanged(sender: UISegmentedControl) {
+    @IBAction private func displayModeSegmentChanged(sender: HMSegmentedControl) {
         if let displayMode = DisplayMode(rawValue: sender.selectedSegmentIndex) {
             self.displayMode = displayMode
         } else {

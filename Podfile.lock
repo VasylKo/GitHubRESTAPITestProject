@@ -5,6 +5,7 @@ PODS:
     - Result (~> 0.4.3)
   - GoogleMaps (1.10.1)
   - HanekeSwift (0.9.1)
+  - HMSegmentedControl (1.5.2)
   - ImagePickerSheetController (0.1.7)
   - KeychainAccess (1.2.1)
   - KYDrawerController (1.0.3)
@@ -22,6 +23,7 @@ PODS:
 DEPENDENCIES:
   - GoogleMaps
   - HanekeSwift
+  - HMSegmentedControl
   - ImagePickerSheetController (~> 0.1.7)
   - KeychainAccess
   - KYDrawerController
@@ -40,6 +42,7 @@ SPEC CHECKSUMS:
   BrightFutures: 27704272a695324b42538a2d85b20ac3f24228bd
   GoogleMaps: ebf08677f181d9c2dcdbd1721d206f02beccc9b1
   HanekeSwift: 50d37bfbc4432edc649167e538c259feccb4a2bb
+  HMSegmentedControl: 83b9686022d2176fb6457d2bdb61e5d6393fed7d
   ImagePickerSheetController: 127cc7a5e8da7fa17d42aa4ba7509f72af9cd71f
   KeychainAccess: 3d7922baf90762a976adb7f6030d74c1a4110a1d
   KYDrawerController: 114902057e9b9a2a0aa951e976151b285afa9c3e

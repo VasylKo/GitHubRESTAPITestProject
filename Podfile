@@ -11,6 +11,7 @@ target 'PositionIn' do
     pod 'XLForm', '~> 3.0.1'
     pod 'ImagePickerSheetController', '~> 0.1.7'
     pod 'GoogleMaps'
+    pod 'HMSegmentedControl'
     
     pod 'ResponseDetective'
     pod 'PosInCore', :path => 'PosInCore'
