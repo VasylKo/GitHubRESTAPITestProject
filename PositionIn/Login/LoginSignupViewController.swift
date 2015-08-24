@@ -13,10 +13,6 @@ class LoginSignupViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        loginButton.layer.cornerRadius = 2.0
-        facebookButton.layer.cornerRadius = 2.0
-        signupButton.layer.cornerRadius = 2.0
-        signupButton.layer.borderWidth = 1.0
         signupButton.layer.borderColor = UIColor.whiteColor().CGColor
     }
     

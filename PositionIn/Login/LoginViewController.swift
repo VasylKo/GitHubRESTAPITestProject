@@ -10,13 +10,7 @@ import UIKit
 import CleanroomLogger
 
 final class LoginViewController: BaseLoginViewController {
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        loginButton.layer.cornerRadius = 2.0
-        facebookButton.layer.cornerRadius = 2.0
-    }
-    
+   
     @IBAction func prepareForUnwind(segue: UIStoryboardSegue) {
         
     }

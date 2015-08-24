@@ -11,10 +11,7 @@ import CleanroomLogger
 
 final class RecoverPasswordViewController: BaseLoginViewController {
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        submitButton.layer.cornerRadius = 2.0
-    }
+   
     
     @IBAction func didTapSubmitButton(sender: AnyObject) {
         Log.debug?.message("Should call recover")
