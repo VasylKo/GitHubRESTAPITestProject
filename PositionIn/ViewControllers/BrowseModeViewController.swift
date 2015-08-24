@@ -50,8 +50,9 @@ import CleanroomLogger
         )
     }
     
-    static let BrowseModeDidchangeNotification = "BrowseModeDidchangeNotification"    
+    static let BrowseModeDidchangeNotification = "BrowseModeDidchangeNotification"
     
+    //MARK: - Views -
     override func viewDidLoad() {
         super.viewDidLoad()
         tabbar.browseDelegate = self
@@ -86,11 +87,25 @@ import CleanroomLogger
         tabbar.setTranslatesAutoresizingMaskIntoConstraints(false)
         addMenu.setTranslatesAutoresizingMaskIntoConstraints(false)
         
+        let addMenuSize: CGFloat = 50
+        
         let views: [NSObject : AnyObject] = [ "tabbar": tabbar, "contentView" : contentView ]
         view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[tabbar]|", options: NSLayoutFormatOptions(0), metrics: nil, views: views))
         view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[contentView]|", options: NSLayoutFormatOptions(0), metrics: nil, views: views))
         view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[contentView][tabbar(50)]|", options: NSLayoutFormatOptions(0), metrics: nil, views: views))
         
+        view.addConstraint(NSLayoutConstraint(
+            item: view, attribute: .CenterX, relatedBy: .Equal,
+            toItem: addMenu, attribute: .CenterX, multiplier: 1.0, constant: 0))
+        view.addConstraint(NSLayoutConstraint(
+            item: view, attribute: .Bottom, relatedBy: .Equal,
+            toItem: addMenu, attribute: .Bottom, multiplier: 1.0, constant: 10))
+        addMenu.addConstraint(NSLayoutConstraint(
+            item: addMenu, attribute: .Width, relatedBy: .Equal,
+            toItem: addMenu, attribute: .Height, multiplier: 1.0, constant: 0))
+        addMenu.addConstraint(NSLayoutConstraint(
+            item: addMenu, attribute: .Width, relatedBy: .Equal,
+            toItem: nil, attribute: .NotAnAttribute, multiplier: 1.0, constant: addMenuSize))
     }
 
     
@@ -105,7 +120,7 @@ import CleanroomLogger
     private(set) internal weak var tabbar: BrowseTabbar!
 
     
-    //MARK: Blur
+    //MARK: - Blur -
     
     var blurDisplayed: Bool = false {
         didSet {
