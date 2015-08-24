@@ -10,30 +10,15 @@ import UIKit
 import CleanroomLogger
 
 final class LoginViewController: BaseLoginViewController {
-    
+   
     @IBAction func prepareForUnwind(segue: UIStoryboardSegue) {
         
     }
 
-    @IBAction func didTapClose(sender: AnyObject) {
-        //Use existing session or register new
-        api().session().recoverWith { _ in
-            return api().register().map { _ in
-                return ()
-            }
-        }.onSuccess { [weak self] _ in
-            Log.info?.message("Anonymous login done")
-            self?.dismissLogin()
-        }.onFailure { error in
-            Log.error?.value(error)
-        }
+    @IBAction func didTapForgot(sender: AnyObject) {
+        performSegue(LoginViewController.Segue.ForgotPasswordSegueId)
     }
-    
-    func dismissLogin() {
-        sideBarController?.executeAction(.ForYou)
-        dismissViewControllerAnimated(true, completion: nil)
-    }
-    
+        
     @IBAction func didTapLogin(sender: AnyObject) {
         //TODO: add validation
         if let username = usernameTextField.text,
@@ -55,7 +40,10 @@ final class LoginViewController: BaseLoginViewController {
         return loginButton
     }
     
+    @IBOutlet private weak var facebookButton: UIButton!
     @IBOutlet private weak var loginButton: UIButton!
+    
+    @IBOutlet private weak var forgotButton: UIButton!
     
     @IBOutlet private weak var usernameTextField: UITextField!
     @IBOutlet private weak var passwordTextField: UITextField!
