@@ -13,7 +13,7 @@ import UIKit
     optional func addMenuView(addMenuView: AddMenuView, didExpand expanded:Bool)
 }
 
-class AddMenuView: UIView {
+final class AddMenuView: UIView {
     typealias ItemAction = () -> Void
 
     override init(frame: CGRect) {

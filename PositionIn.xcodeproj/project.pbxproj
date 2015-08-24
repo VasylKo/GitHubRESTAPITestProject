@@ -288,6 +288,8 @@
 		E6F243721B8B1F460033B13C /* BrowseModeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6F243711B8B1F460033B13C /* BrowseModeViewController.swift */; };
 		E6F243751B8B31510033B13C /* AddMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6F243731B8B31510033B13C /* AddMenuView.swift */; };
 		E6F243761B8B31510033B13C /* BrowseTabbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6F243741B8B31510033B13C /* BrowseTabbar.swift */; };
+		E6F243781B8B3CDE0033B13C /* BrowseListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6F243771B8B3CDE0033B13C /* BrowseListTableViewCell.swift */; };
+		E6F2437A1B8B40380033B13C /* PositionIn.BrowseListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6F243791B8B40380033B13C /* PositionIn.BrowseListTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -816,6 +818,8 @@
 		E6F243711B8B1F460033B13C /* BrowseModeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowseModeViewController.swift; sourceTree = "<group>"; };
 		E6F243731B8B31510033B13C /* AddMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddMenuView.swift; sourceTree = "<group>"; };
 		E6F243741B8B31510033B13C /* BrowseTabbar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowseTabbar.swift; sourceTree = "<group>"; };
+		E6F243771B8B3CDE0033B13C /* BrowseListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowseListTableViewCell.swift; sourceTree = "<group>"; };
+		E6F243791B8B40380033B13C /* PositionIn.BrowseListTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.BrowseListTableViewCell.xib; sourceTree = "<group>"; };
 		E6FC63D01B5901060062F5C9 /* KVObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KVObserver.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -952,6 +956,8 @@
 				E62B16F71B5C6BBF00D446BC /* AvatarView.swift */,
 				E6F243731B8B31510033B13C /* AddMenuView.swift */,
 				E6F243741B8B31510033B13C /* BrowseTabbar.swift */,
+				E6F243771B8B3CDE0033B13C /* BrowseListTableViewCell.swift */,
+				E6F243791B8B40380033B13C /* PositionIn.BrowseListTableViewCell.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -2512,6 +2518,7 @@
 				E61B20E71B7E5AF7005EAB2C /* PositionIn.ProfileInfoCell.xib in Resources */,
 				E64DC35A1B4E53C90011D37C /* LaunchScreen.xib in Resources */,
 				E6DA53C91B7D00DB000087A7 /* PositionIn.UserListCell.xib in Resources */,
+				E6F2437A1B8B40380033B13C /* PositionIn.BrowseListTableViewCell.xib in Resources */,
 				E68B52251B875F8F006B980C /* PositionIn.PostListCell.xib in Resources */,
 				E64DC3571B4E53C90011D37C /* Images.xcassets in Resources */,
 				E6DA53C81B7D00DB000087A7 /* PositionIn.CommunityListViewController.xib in Resources */,
@@ -2721,6 +2728,7 @@
 				E61B20E91B7E6163005EAB2C /* ProfileStatsCell.swift in Sources */,
 				E6D4D5B81B6FA7A7003134CB /* SearchTransition.swift in Sources */,
 				E660E5301B5AC28600F52050 /* MainMenuCell.swift in Sources */,
+				E6F243781B8B3CDE0033B13C /* BrowseListTableViewCell.swift in Sources */,
 				E61B20D81B7E0838005EAB2C /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

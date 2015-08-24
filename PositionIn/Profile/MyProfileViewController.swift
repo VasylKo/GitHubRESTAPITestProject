@@ -25,6 +25,10 @@ final class MyProfileViewController: BaseProfileListViewController {
 
     private func didReceivePosts(posts: [Post], page: APIService.Page) {
         Log.debug?.value(posts)
+        dataSource.items[1] = [
+            BrowseListCellModel()
+        ]
+        tableView.reloadData()
     }
     
     private func didReceiveProfile(profile: UserProfile) {

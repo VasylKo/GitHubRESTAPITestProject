@@ -65,6 +65,8 @@ extension BaseProfileListViewController {
                 return ProfileInfoCell.reuseId()
             case let model as ProfileStatsCellModel:
                 return ProfileStatsCell.reuseId()
+            case let model as BrowseListCellModel:
+                return BrowseListTableViewCell.reuseId()
             default:
                 return super.tableView(tableView, reuseIdentifierForIndexPath: indexPath)
             }
@@ -75,7 +77,7 @@ extension BaseProfileListViewController {
         }
         
         override func nibCellsId() -> [String] {
-            return [ProfileInfoCell.reuseId(), ProfileStatsCell.reuseId()]
+            return [ProfileInfoCell.reuseId(), ProfileStatsCell.reuseId(), BrowseListTableViewCell.reuseId()]
         }
         
         func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {

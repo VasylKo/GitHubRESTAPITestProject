@@ -12,7 +12,7 @@ import UIKit
     func tabbarDidChangeMode(tabbar: BrowseTabbar)
 }
 
-class BrowseTabbar: UITabBar {
+final class BrowseTabbar: UITabBar {
     
     weak var browseDelegate: BrowseTabbarDelegate?
 
