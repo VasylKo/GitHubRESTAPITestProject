@@ -21,10 +21,12 @@ extension APIService {
     }
     
     //Success if user is not guest
-    func isUserAuthorized() -> Future<Void, NSError> {
+    func isUserAuthorized() -> Future<UserProfile, NSError> {
         return session().flatMap { _ in
             return self.sessionController.isUserAuthorized()
-        }
+        }.flatMap { _ in
+            return self.updateCurrentProfileStatus()
+        }        
     }
     
     // Success on existing session or after token refresh
