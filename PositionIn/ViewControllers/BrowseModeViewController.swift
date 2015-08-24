@@ -10,13 +10,13 @@ import UIKit
 
 import CleanroomLogger
 
-@objc class BrowseModeViewController: DisplayModeViewController, AddMenuViewDelegate,BrowseTabbarDelegate {
-    
-    //MARK: Browse mode
+@objc class BrowseModeViewController: DisplayModeViewController, AddMenuViewDelegate, BrowseTabbarDelegate {
     
     var addMenuItems: [AddMenuView.MenuItem] {
         return []
     }
+    
+    //MARK: Browse mode
     
     enum BrowseMode: Int, Printable {
         case ForYou
@@ -40,7 +40,6 @@ import CleanroomLogger
         }
     }
     
-    
     private func applyBrowseMode(mode: BrowseMode) {
         Log.verbose?.message("Apply browse mode: \(mode)")
         tabbar.selectedMode = mode
@@ -51,8 +50,7 @@ import CleanroomLogger
         )
     }
     
-    static let BrowseModeDidchangeNotification = "BrowseModeDidchangeNotification"
-    
+    static let BrowseModeDidchangeNotification = "BrowseModeDidchangeNotification"    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -75,10 +73,23 @@ import CleanroomLogger
     
     override func loadView() {
         super.loadView()
-        contentView.removeConstraints(contentView.constraints())
+
         let tabbar = BrowseTabbar()
-        view.addSubview(tabbar)
         self.tabbar = tabbar
+        view.addSubview(tabbar)
+        
+        let addMenu = AddMenuView()
+        self.addMenu = addMenu
+        view.addSubview(addMenu)
+        
+        view.removeConstraints(view.constraints())
+        tabbar.setTranslatesAutoresizingMaskIntoConstraints(false)
+        addMenu.setTranslatesAutoresizingMaskIntoConstraints(false)
+        
+        let views: [NSObject : AnyObject] = [ "tabbar": tabbar, "contentView" : contentView ]
+        view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[tabbar]|", options: NSLayoutFormatOptions(0), metrics: nil, views: views))
+        view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[contentView]|", options: NSLayoutFormatOptions(0), metrics: nil, views: views))
+        view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[contentView][tabbar(50)]|", options: NSLayoutFormatOptions(0), metrics: nil, views: views))
         
     }
 
@@ -113,6 +124,7 @@ import CleanroomLogger
         return blurView
         }()
 
+    
  //MARK: - AddMenuViewDelegate -
     
     func addMenuView(addMenuView: AddMenuView, willExpand expanded:Bool) {

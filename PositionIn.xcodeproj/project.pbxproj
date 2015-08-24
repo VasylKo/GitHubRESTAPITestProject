@@ -66,7 +66,6 @@
 		E62B16FD1B5CDF2400D446BC /* PositionIn.MessagesListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E62B16FC1B5CDF2400D446BC /* PositionIn.MessagesListViewController.xib */; };
 		E62B16FF1B5CE0F800D446BC /* BesideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E62B16FE1B5CE0F800D446BC /* BesideMenuViewController.swift */; };
 		E62B17061B5CE3EB00D446BC /* BrowseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E62B17051B5CE3EB00D446BC /* BrowseViewController.swift */; };
-		E62B170A1B5CE46500D446BC /* PositionIn.BrowseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E62B17091B5CE46500D446BC /* PositionIn.BrowseViewController.xib */; };
 		E6325F651B57D89A00996480 /* SidebarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6325F621B57D89A00996480 /* SidebarViewController.swift */; };
 		E6325F721B57E1DA00996480 /* Storyboards.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6325F711B57E1DA00996480 /* Storyboards.swift */; };
 		E6365D351B7D709E00CB79CB /* PhotoInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6365D341B7D709E00CB79CB /* PhotoInfo.swift */; };
@@ -374,7 +373,6 @@
 		E62B16FC1B5CDF2400D446BC /* PositionIn.MessagesListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.MessagesListViewController.xib; sourceTree = "<group>"; };
 		E62B16FE1B5CE0F800D446BC /* BesideMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BesideMenuViewController.swift; sourceTree = "<group>"; };
 		E62B17051B5CE3EB00D446BC /* BrowseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowseViewController.swift; sourceTree = "<group>"; };
-		E62B17091B5CE46500D446BC /* PositionIn.BrowseViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.BrowseViewController.xib; sourceTree = "<group>"; };
 		E6325F621B57D89A00996480 /* SidebarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SidebarViewController.swift; sourceTree = "<group>"; };
 		E6325F661B57DA4600996480 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		E6325F711B57E1DA00996480 /* Storyboards.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storyboards.swift; sourceTree = "<group>"; };
@@ -940,7 +938,6 @@
 				E66115911B73A0CB003DB5B3 /* BrowseList */,
 				E66115961B73A0CB003DB5B3 /* BrowseMap */,
 				E62B17051B5CE3EB00D446BC /* BrowseViewController.swift */,
-				E62B17091B5CE46500D446BC /* PositionIn.BrowseViewController.xib */,
 				E6AC64551B5EC5B1007D7952 /* AddMenuView.swift */,
 				E6A869DA1B5FD1E100797D16 /* BrowseTabbar.swift */,
 			);
@@ -2495,7 +2492,6 @@
 			files = (
 				E68B52261B875F8F006B980C /* PositionIn.PromotionListCell.xib in Resources */,
 				E69420FF1B665F5100F34F06 /* PositionIn.ProductDetailsViewController.xib in Resources */,
-				E62B170A1B5CE46500D446BC /* PositionIn.BrowseViewController.xib in Resources */,
 				E6F2436E1B8B0E3A0033B13C /* PositionIn.MainMenuLoginCell.xib in Resources */,
 				E689F0791B6B911F00597587 /* PositionIn.ProductInventoryViewController.xib in Resources */,
 				E6D4D5B51B6F8B9F003134CB /* PositionIn.SearchBar.xib in Resources */,
