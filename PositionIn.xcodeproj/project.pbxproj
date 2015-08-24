@@ -287,6 +287,8 @@
 		E6E2FEAE1B66F72100880F3C /* XMPPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = E6E2FEAC1B66F72100880F3C /* XMPPClient.m */; };
 		E6F2436C1B8B0E150033B13C /* MainMenuLoginCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6F2436B1B8B0E150033B13C /* MainMenuLoginCell.swift */; };
 		E6F2436E1B8B0E3A0033B13C /* PositionIn.MainMenuLoginCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6F2436D1B8B0E3A0033B13C /* PositionIn.MainMenuLoginCell.xib */; };
+		E6F243701B8B17910033B13C /* DisplayModeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6F2436F1B8B17910033B13C /* DisplayModeViewController.swift */; };
+		E6F243721B8B1F460033B13C /* BrowseModeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6F243711B8B1F460033B13C /* BrowseModeViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -814,6 +816,8 @@
 		E6E4816C1B6A846900500259 /* PosInCore.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = PosInCore.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		E6F2436B1B8B0E150033B13C /* MainMenuLoginCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuLoginCell.swift; sourceTree = "<group>"; };
 		E6F2436D1B8B0E3A0033B13C /* PositionIn.MainMenuLoginCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.MainMenuLoginCell.xib; sourceTree = "<group>"; };
+		E6F2436F1B8B17910033B13C /* DisplayModeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayModeViewController.swift; sourceTree = "<group>"; };
+		E6F243711B8B1F460033B13C /* BrowseModeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowseModeViewController.swift; sourceTree = "<group>"; };
 		E6FC63D01B5901060062F5C9 /* KVObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KVObserver.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -961,6 +965,8 @@
 				E6325F621B57D89A00996480 /* SidebarViewController.swift */,
 				E62B16FE1B5CE0F800D446BC /* BesideMenuViewController.swift */,
 				E6A10AC51B74232100047D74 /* LocationSelectorViewController.swift */,
+				E6F2436F1B8B17910033B13C /* DisplayModeViewController.swift */,
+				E6F243711B8B1F460033B13C /* BrowseModeViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -2687,6 +2693,7 @@
 				E64DC3501B4E53C90011D37C /* AppDelegate.swift in Sources */,
 				E6C5CE1D1B83A28C00265955 /* SessionController.swift in Sources */,
 				E661159D1B73A0CB003DB5B3 /* BrowseMapViewController.swift in Sources */,
+				E6F243701B8B17910033B13C /* DisplayModeViewController.swift in Sources */,
 				E61B20E11B7E4BED005EAB2C /* MyProfileViewController.swift in Sources */,
 				E68B52011B873545006B980C /* FeedTableViewCellModel.swift in Sources */,
 				E64D00651B7C9601007693E0 /* BaseAddItemViewController.swift in Sources */,
@@ -2702,6 +2709,7 @@
 				E6A869DB1B5FD1E100797D16 /* BrowseTabbar.swift in Sources */,
 				E6A10AC61B74232100047D74 /* LocationSelectorViewController.swift in Sources */,
 				E62B16F81B5C6BBF00D446BC /* AvatarView.swift in Sources */,
+				E6F243721B8B1F460033B13C /* BrowseModeViewController.swift in Sources */,
 				E61B20D51B7DD47C005EAB2C /* FeedItem.swift in Sources */,
 				E6018E521B8492EA001D22FA /* XLFormOptionsObject+Community.swift in Sources */,
 				E661158B1B73774B003DB5B3 /* RegisterViewController.swift in Sources */,
