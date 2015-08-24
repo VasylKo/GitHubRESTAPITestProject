@@ -622,22 +622,8 @@
                 <viewController storyboardIdentifier="MapViewController" id="nw9-Ck-dbi" customClass="BrowseViewController" customModule="PositionIn" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="TN7-xA-vpM">
                         <nil key="title"/>
-                        <barButtonItem key="rightBarButtonItem" id="YWJ-ev-aNl">
-                            <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="Hzh-Pp-w0S">
-                                <rect key="frame" x="-61" y="-14" width="133" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <segments>
-                                    <segment title="" image="BrowseModeMap"/>
-                                    <segment title="" image="BrowseModeList"/>
-                                </segments>
-                                <connections>
-                                    <action selector="displayModeSegmentChanged:" destination="nw9-Ck-dbi" eventType="valueChanged" id="ZQH-TG-ZTN"/>
-                                </connections>
-                            </segmentedControl>
-                        </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="displayModeSegmentedControl" destination="Hzh-Pp-w0S" id="T0S-bj-Beg"/>
                         <segue destination="S6u-6D-z8V" kind="show" identifier="ShowProductDetails" id="UGm-BP-OPQ"/>
                     </connections>
                 </viewController>
@@ -689,6 +675,25 @@
             </objects>
             <point key="canvasLocation" x="-970" y="329"/>
         </scene>
+        <!--User Profile View Controller-->
+        <scene sceneID="arf-ux-nM0">
+            <objects>
+                <viewController storyboardIdentifier="UserProfileViewController" id="2Iu-6t-chL" customClass="UserProfileViewController" customModule="PositionIn" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="PTl-ox-TtU"/>
+                        <viewControllerLayoutGuide type="bottom" id="uYr-ph-THO"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="HNT-o2-aLn">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="93a-Ey-Qr8"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mSi-Z8-bxF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2241" y="192"/>
+        </scene>
         <!--My Profile Navigation Controller Scene-->
         <scene sceneID="3kT-1q-vQU">
             <objects>
@@ -704,7 +709,7 @@
                         </textAttributes>
                     </navigationBar>
                     <connections>
-                        <segue destination="7kZ-Mg-mwO" kind="relationship" relationship="rootViewController" id="Fjb-QX-aaB"/>
+                        <segue destination="2Iu-6t-chL" kind="relationship" relationship="rootViewController" id="Y2f-e6-GbJ"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HGP-Kq-gVd" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -720,7 +725,7 @@
                         <viewControllerLayoutGuide type="bottom" id="wLg-6T-9w3"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="MZb-2I-LIG">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
+                        <rect key="frame" x="0.0" y="64" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -742,20 +747,20 @@
             </objects>
             <point key="canvasLocation" x="-2248" y="1105"/>
         </scene>
-        <!--My Profile View Controller-->
+        <!--Profile List View Controller-->
         <scene sceneID="D6q-d0-0ua">
             <objects>
-                <viewController storyboardIdentifier="MyProfileViewController" id="7kZ-Mg-mwO" customClass="MyProfileViewController" customModule="PositionIn" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ProfileListViewController" id="7kZ-Mg-mwO" customClass="ProfileListViewController" customModule="PositionIn" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="4Qg-uS-R4S"/>
                         <viewControllerLayoutGuide type="bottom" id="aqc-PM-S0r"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="vDg-jS-1vU">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
+                        <rect key="frame" x="0.0" y="64" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="jzX-JK-7uD" customClass="TableView" customModule="PosInCore">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
                         </subviews>
@@ -819,8 +824,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="BrowseModeList" width="22" height="22"/>
-        <image name="BrowseModeMap" width="22" height="22"/>
         <image name="MainMenuFilters" width="22" height="22"/>
         <image name="MainMenuMessages" width="22" height="22"/>
     </resources>

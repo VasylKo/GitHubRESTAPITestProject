@@ -39,9 +39,9 @@ class SidebarViewController: KYDrawerController {
             case .Messages:
                 return (SidebarViewController.Segue.ShowMessagesList, nil)
             case .ForYou:
-                return (SidebarViewController.Segue.ShowBrowse, Box(BrowseViewController.DisplayMode.Map, BrowseViewController.BrowseMode.ForYou))
+                return (SidebarViewController.Segue.ShowBrowse, Box(DisplayModeViewController.DisplayMode.Map, BrowseModeViewController.BrowseMode.ForYou))
             case .New:
-                return (SidebarViewController.Segue.ShowBrowse, Box(BrowseViewController.DisplayMode.Map, BrowseViewController.BrowseMode.New))
+                return (SidebarViewController.Segue.ShowBrowse, Box(DisplayModeViewController.DisplayMode.Map, BrowseModeViewController.BrowseMode.New))
             case .Filters:
                 return (SidebarViewController.Segue.ShowFilters, nil)
             case .Community:
@@ -81,7 +81,7 @@ class SidebarViewController: KYDrawerController {
             case SidebarViewController.Segue.ShowBrowse.identifier!:
                 if let navigationController = segue.destinationViewController as? UINavigationController,
                    let browseController = navigationController.topViewController as? BrowseViewController,
-                   let mode = sender as? Box<(BrowseViewController.DisplayMode, BrowseViewController.BrowseMode)> {
+                   let mode = sender as? Box<(DisplayModeViewController.DisplayMode, BrowseModeViewController.BrowseMode)> {
                     let (displayMode, browseMode) = mode.value
                         browseController.displayMode = displayMode
                         browseController.browseMode = browseMode
