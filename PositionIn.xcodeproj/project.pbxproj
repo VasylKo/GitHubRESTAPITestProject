@@ -290,6 +290,7 @@
 		E6F243761B8B31510033B13C /* BrowseTabbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6F243741B8B31510033B13C /* BrowseTabbar.swift */; };
 		E6F243781B8B3CDE0033B13C /* BrowseListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6F243771B8B3CDE0033B13C /* BrowseListTableViewCell.swift */; };
 		E6F2437A1B8B40380033B13C /* PositionIn.BrowseListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6F243791B8B40380033B13C /* PositionIn.BrowseListTableViewCell.xib */; };
+		E6F2437C1B8B42D70033B13C /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6F2437B1B8B42D70033B13C /* UserProfileViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -820,6 +821,7 @@
 		E6F243741B8B31510033B13C /* BrowseTabbar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowseTabbar.swift; sourceTree = "<group>"; };
 		E6F243771B8B3CDE0033B13C /* BrowseListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowseListTableViewCell.swift; sourceTree = "<group>"; };
 		E6F243791B8B40380033B13C /* PositionIn.BrowseListTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.BrowseListTableViewCell.xib; sourceTree = "<group>"; };
+		E6F2437B1B8B42D70033B13C /* UserProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
 		E6FC63D01B5901060062F5C9 /* KVObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KVObserver.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -914,6 +916,7 @@
 		E61B20D91B7E4A85005EAB2C /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				E6F2437B1B8B42D70033B13C /* UserProfileViewController.swift */,
 				E61B20DE1B7E4BBF005EAB2C /* BaseProfileListViewController.swift */,
 				E61B20E01B7E4BED005EAB2C /* MyProfileViewController.swift */,
 				E61B20DA1B7E4AB4005EAB2C /* PositionIn.SellerProfileViewController.xib */,
@@ -2704,6 +2707,7 @@
 				E66115A91B73AE0F003DB5B3 /* AddEventViewController.swift in Sources */,
 				E6DA53CF1B7D0562000087A7 /* CommunityActionCell.swift in Sources */,
 				E69421031B666A1600F34F06 /* ActionCell.swift in Sources */,
+				E6F2437C1B8B42D70033B13C /* UserProfileViewController.swift in Sources */,
 				E6D4D5B61B6F8B9F003134CB /* SearchBar.swift in Sources */,
 				E6C5CE191B83A21500265955 /* LocationController.swift in Sources */,
 				E6DA53BD1B7CFCCA000087A7 /* Mock.swift in Sources */,

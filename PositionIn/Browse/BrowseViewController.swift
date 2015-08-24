@@ -6,7 +6,6 @@
 //  Copyright (c) 2015 Soluna Labs. All rights reserved.
 //
 
-import UIKit
 import PosInCore
 import CleanroomLogger
 

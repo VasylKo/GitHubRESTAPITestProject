@@ -26,7 +26,7 @@ extension APIService {
             return self.sessionController.isUserAuthorized()
         }.flatMap { _ in
             return self.updateCurrentProfileStatus()
-        }        
+        }
     }
     
     // Success on existing session or after token refresh

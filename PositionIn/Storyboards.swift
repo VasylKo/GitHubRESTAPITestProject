@@ -48,6 +48,10 @@ struct Storyboards {
             return self.storyboard.instantiateViewControllerWithIdentifier("MapViewController") as! BrowseViewController
         }
 
+        static func instantiateUserProfileViewController() -> UserProfileViewController! {
+            return self.storyboard.instantiateViewControllerWithIdentifier("UserProfileViewController") as! UserProfileViewController
+        }
+
         static func instantiateEditProfileViewController() -> EditProfileViewController! {
             return self.storyboard.instantiateViewControllerWithIdentifier("EditProfileViewController") as! EditProfileViewController
         }
@@ -468,6 +472,8 @@ extension BrowseViewController {
     }
 
 }
+
+//MARK: - UserProfileViewController
 
 //MARK: - EditProfileViewController
 
