@@ -185,6 +185,7 @@ final class BrowseViewController: BesideMenuViewController {
 
 extension BrowseViewController: UISearchBarDelegate {
     func searchBarShouldBeginEditing(searchBar: UISearchBar) -> Bool {
+        searchBar.resignFirstResponder()
         SearchViewController.present(searchbar, presenter: self)
         return false
     }

@@ -241,9 +241,9 @@
 		E68B52031B873687006B980C /* FeedItemCellModelFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E68B52021B873687006B980C /* FeedItemCellModelFactory.swift */; };
 		E68B52061B8736F4006B980C /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E68B52051B8736F4006B980C /* FilterViewController.swift */; };
 		E68B52211B875F8F006B980C /* EventListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E68B52191B875F8F006B980C /* EventListCell.swift */; };
-		E68B52221B875F8F006B980C /* ListProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E68B521A1B875F8F006B980C /* ListProductCell.swift */; };
+		E68B52221B875F8F006B980C /* ProductListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E68B521A1B875F8F006B980C /* ProductListCell.swift */; };
 		E68B52231B875F8F006B980C /* PositionIn.EventListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E68B521B1B875F8F006B980C /* PositionIn.EventListCell.xib */; };
-		E68B52241B875F8F006B980C /* PositionIn.ListProductCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E68B521C1B875F8F006B980C /* PositionIn.ListProductCell.xib */; };
+		E68B52241B875F8F006B980C /* PositionIn.ProductListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E68B521C1B875F8F006B980C /* PositionIn.ProductListCell.xib */; };
 		E68B52251B875F8F006B980C /* PositionIn.PostListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E68B521D1B875F8F006B980C /* PositionIn.PostListCell.xib */; };
 		E68B52261B875F8F006B980C /* PositionIn.PromotionListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E68B521E1B875F8F006B980C /* PositionIn.PromotionListCell.xib */; };
 		E68B52271B875F8F006B980C /* PostListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E68B521F1B875F8F006B980C /* PostListCell.swift */; };
@@ -287,6 +287,8 @@
 		E6E2FEA01B66F61400880F3C /* Messaging.framework in Embed Core Framework */ = {isa = PBXBuildFile; fileRef = E6E2FE881B66F61300880F3C /* Messaging.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E6E2FEAD1B66F72100880F3C /* XMPPClient.h in Headers */ = {isa = PBXBuildFile; fileRef = E6E2FEAB1B66F72100880F3C /* XMPPClient.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E6E2FEAE1B66F72100880F3C /* XMPPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = E6E2FEAC1B66F72100880F3C /* XMPPClient.m */; };
+		E6F2436C1B8B0E150033B13C /* MainMenuLoginCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6F2436B1B8B0E150033B13C /* MainMenuLoginCell.swift */; };
+		E6F2436E1B8B0E3A0033B13C /* PositionIn.MainMenuLoginCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6F2436D1B8B0E3A0033B13C /* PositionIn.MainMenuLoginCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -749,9 +751,9 @@
 		E68B52021B873687006B980C /* FeedItemCellModelFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedItemCellModelFactory.swift; sourceTree = "<group>"; };
 		E68B52051B8736F4006B980C /* FilterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 		E68B52191B875F8F006B980C /* EventListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventListCell.swift; sourceTree = "<group>"; };
-		E68B521A1B875F8F006B980C /* ListProductCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListProductCell.swift; sourceTree = "<group>"; };
+		E68B521A1B875F8F006B980C /* ProductListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductListCell.swift; sourceTree = "<group>"; };
 		E68B521B1B875F8F006B980C /* PositionIn.EventListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.EventListCell.xib; sourceTree = "<group>"; };
-		E68B521C1B875F8F006B980C /* PositionIn.ListProductCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.ListProductCell.xib; sourceTree = "<group>"; };
+		E68B521C1B875F8F006B980C /* PositionIn.ProductListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.ProductListCell.xib; sourceTree = "<group>"; };
 		E68B521D1B875F8F006B980C /* PositionIn.PostListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.PostListCell.xib; sourceTree = "<group>"; };
 		E68B521E1B875F8F006B980C /* PositionIn.PromotionListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.PromotionListCell.xib; sourceTree = "<group>"; };
 		E68B521F1B875F8F006B980C /* PostListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostListCell.swift; sourceTree = "<group>"; };
@@ -814,6 +816,8 @@
 		E6E2FEAB1B66F72100880F3C /* XMPPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPClient.h; sourceTree = "<group>"; };
 		E6E2FEAC1B66F72100880F3C /* XMPPClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPClient.m; sourceTree = "<group>"; };
 		E6E4816C1B6A846900500259 /* PosInCore.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = PosInCore.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		E6F2436B1B8B0E150033B13C /* MainMenuLoginCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuLoginCell.swift; sourceTree = "<group>"; };
+		E6F2436D1B8B0E3A0033B13C /* PositionIn.MainMenuLoginCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.MainMenuLoginCell.xib; sourceTree = "<group>"; };
 		E6FC63D01B5901060062F5C9 /* KVObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KVObserver.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1104,6 +1108,8 @@
 				E660E5311B5AC2A200F52050 /* PositionIn.MainMenuCell.xib */,
 				E62B16F41B5C1AA700D446BC /* MainMenuUserCell.swift */,
 				E62B16F31B5C1AA700D446BC /* PositionIn.MainMenuUserCell.xib */,
+				E6F2436B1B8B0E150033B13C /* MainMenuLoginCell.swift */,
+				E6F2436D1B8B0E3A0033B13C /* PositionIn.MainMenuLoginCell.xib */,
 			);
 			path = MainMenu;
 			sourceTree = "<group>";
@@ -2102,9 +2108,9 @@
 			isa = PBXGroup;
 			children = (
 				E68B52191B875F8F006B980C /* EventListCell.swift */,
-				E68B521A1B875F8F006B980C /* ListProductCell.swift */,
+				E68B521A1B875F8F006B980C /* ProductListCell.swift */,
 				E68B521B1B875F8F006B980C /* PositionIn.EventListCell.xib */,
-				E68B521C1B875F8F006B980C /* PositionIn.ListProductCell.xib */,
+				E68B521C1B875F8F006B980C /* PositionIn.ProductListCell.xib */,
 				E68B521D1B875F8F006B980C /* PositionIn.PostListCell.xib */,
 				E68B521E1B875F8F006B980C /* PositionIn.PromotionListCell.xib */,
 				E68B521F1B875F8F006B980C /* PostListCell.swift */,
@@ -2490,6 +2496,7 @@
 				E68B52261B875F8F006B980C /* PositionIn.PromotionListCell.xib in Resources */,
 				E69420FF1B665F5100F34F06 /* PositionIn.ProductDetailsViewController.xib in Resources */,
 				E62B170A1B5CE46500D446BC /* PositionIn.BrowseViewController.xib in Resources */,
+				E6F2436E1B8B0E3A0033B13C /* PositionIn.MainMenuLoginCell.xib in Resources */,
 				E689F0791B6B911F00597587 /* PositionIn.ProductInventoryViewController.xib in Resources */,
 				E6D4D5B51B6F8B9F003134CB /* PositionIn.SearchBar.xib in Resources */,
 				E66115A31B73A18C003DB5B3 /* NewItems.storyboard in Resources */,
@@ -2498,7 +2505,7 @@
 				E661159E1B73A0CB003DB5B3 /* PositionIn.BrowseMapViewController.xib in Resources */,
 				E66115871B7376F4003DB5B3 /* Login.storyboard in Resources */,
 				E68B52231B875F8F006B980C /* PositionIn.EventListCell.xib in Resources */,
-				E68B52241B875F8F006B980C /* PositionIn.ListProductCell.xib in Resources */,
+				E68B52241B875F8F006B980C /* PositionIn.ProductListCell.xib in Resources */,
 				E6DA53D01B7D0562000087A7 /* PositionIn.CommunityActionCell.xib in Resources */,
 				E689F07D1B6B976100597587 /* PositionIn.ProductInventoryCell.xib in Resources */,
 				E61B20DC1B7E4AB4005EAB2C /* PositionIn.SellerProfileViewController.xib in Resources */,
@@ -2658,6 +2665,7 @@
 				E68B52281B875F8F006B980C /* PromotionListCell.swift in Sources */,
 				E6AC64561B5EC5B1007D7952 /* AddMenuView.swift in Sources */,
 				E661158D1B73778B003DB5B3 /* RecoverPasswordViewController.swift in Sources */,
+				E6F2436C1B8B0E150033B13C /* MainMenuLoginCell.swift in Sources */,
 				E68B52211B875F8F006B980C /* EventListCell.swift in Sources */,
 				E68B52271B875F8F006B980C /* PostListCell.swift in Sources */,
 				E661158F1B738844003DB5B3 /* BaseLoginViewController.swift in Sources */,
@@ -2676,7 +2684,7 @@
 				E6D4D5B21B6F81A7003134CB /* SearchViewController.swift in Sources */,
 				E66115991B73A0CB003DB5B3 /* BrowseListViewController.swift in Sources */,
 				E6A869EE1B60D42C00797D16 /* APIService.swift in Sources */,
-				E68B52221B875F8F006B980C /* ListProductCell.swift in Sources */,
+				E68B52221B875F8F006B980C /* ProductListCell.swift in Sources */,
 				E61B20E31B7E4D58005EAB2C /* EditProfileViewController.swift in Sources */,
 				E61B20E51B7E5964005EAB2C /* ProfileInfoCell.swift in Sources */,
 				E68B52031B873687006B980C /* FeedItemCellModelFactory.swift in Sources */,

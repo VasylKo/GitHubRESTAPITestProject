@@ -16,7 +16,7 @@ import CleanroomLogger
 struct SessionController {
     
     func currentUserId() -> Future<CRUDObjectId, NSError> {
-        return future { () -> Result<CRUDObjectId ,NSError> in
+        return future { () -> Result<CRUDObjectId, NSError> in
             if let userId = self.userIdValue {
                 return Result(value: userId)
             } else {
@@ -27,8 +27,20 @@ struct SessionController {
         }
     }
     
-    func session() -> Future<APIService.AuthResponse.Token ,NSError> {
-        return future { () -> Result<APIService.AuthResponse.Token ,NSError> in
+    func currentRefreshToken() -> Future<AuthResponse.Token, NSError> {
+        return future { () -> Result<AuthResponse.Token, NSError> in
+            if let refreshToken = self.refreshToken {
+                return Result(value: refreshToken)
+            } else {
+                Log.warning?.trace()
+                let errorCode = NetworkDataProvider.ErrorCodes.InvalidSessionError
+                return Result(error: errorCode.error())
+            }
+        }
+    }
+    
+    func session() -> Future<AuthResponse.Token, NSError> {
+        return future { () -> Result<AuthResponse.Token, NSError> in
             if  let token = self.accessToken,
                 let expirationDate = self.expiresIn
                 where expirationDate.compare(NSDate()) == NSComparisonResult.OrderedDescending {
@@ -42,24 +54,51 @@ struct SessionController {
     
     func logout() -> Future<Void, NoError> {
         return future {
-            self.setAuth(APIService.AuthResponse.invalidAuth())
-            self.setUserId(nil)
+            self.setAuth(AuthResponse.invalidAuth())
+            self.updateCurrentStatus(nil)
             return Result(value: ())
         }
     }
     
-    func setAuth(authResponse: APIService.AuthResponse) {
+    func isUserAuthorized() -> Future<Void, NSError> {
+        return future { () -> Result<Void, NSError> in
+            if self.isGuest {
+                let errorCode = NetworkDataProvider.ErrorCodes.InvalidSessionError
+                return Result(error: errorCode.error())
+            } else {
+                return Result(value: ())
+            }
+            
+        }
+    }
+    
+    func setAuth(authResponse: AuthResponse) {
         Log.info?.message("Auth changed")
         Log.debug?.value(authResponse)
         let keychain = self.keychain
-        keychain[KeychainKeys.AccessTokenKey] = authResponse.accessToken
-        keychain[KeychainKeys.RefreshTokenKey] = authResponse.refreshToken
-        let expiresIn = NSDate(timeIntervalSinceNow: NSTimeInterval(authResponse.expires!))
+        let expires: Int = authResponse.expires!
+        let accessToken = expires > 0 ? authResponse.accessToken : nil
+        let refreshToken = expires > 0 ? authResponse.refreshToken : nil
+        keychain[KeychainKeys.AccessTokenKey] = accessToken
+        keychain[KeychainKeys.RefreshTokenKey] = refreshToken
+        let expiresIn = NSDate(timeIntervalSinceNow: NSTimeInterval(expires))
         keychain.set(NSKeyedArchiver.archivedDataWithRootObject(expiresIn), key: KeychainKeys.ExpireDateKey)
     }
+
+    func updateCurrentStatus(profile: UserProfile?) {
+        keychain[KeychainKeys.UserIdKey] = profile?.objectId
+        var isGuest: Bool = profile?.guest ?? true
+        keychain.set(NSData(bytes: &isGuest, length: sizeof(Bool)), key: KeychainKeys.IsGuestKey)
+    }
     
-    func setUserId(userId : CRUDObjectId?) {
-        keychain[KeychainKeys.UserIdKey] = userId
+    private var isGuest: Bool {
+        let data = keychain.getData(KeychainKeys.IsGuestKey)
+        if let data = data {
+            var isGuest: Bool = true
+            data.getBytes(&isGuest, length:sizeof(Bool))
+            return isGuest
+        }
+        return true
     }
     
     private var userIdValue: CRUDObjectId? {
@@ -91,5 +130,6 @@ struct SessionController {
         static let ExpireDateKey = "ed"
         
         static let UserIdKey = "userId"
+        static let IsGuestKey = "isGuest"
     }
 }

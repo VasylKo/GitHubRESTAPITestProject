@@ -20,6 +20,20 @@ final class LoginViewController: BaseLoginViewController {
     }
     
     @IBAction func didTapClose(sender: AnyObject) {
+        //Use existing session or register new
+        api().session().recoverWith { _ in
+            return api().register().map { _ in
+                return ()
+            }
+        }.onSuccess { [weak self] _ in
+            Log.info?.message("Anonymous login done")
+            self?.dismissLogin()
+        }.onFailure { error in
+            Log.error?.value(error)
+        }
+    }
+    
+    func dismissLogin() {
         sideBarController?.executeAction(.ForYou)
         dismissViewControllerAnimated(true, completion: nil)
     }
@@ -28,11 +42,14 @@ final class LoginViewController: BaseLoginViewController {
         //TODO: add validation
         if let username = usernameTextField.text,
            let password = passwordTextField.text {
-            api().auth(username: username, password: password).onSuccess() { [weak self] userProfile in
-                self?.didTapClose(sender)
+            
+            api().login(username: username, password: password).onSuccess { [weak self] _ in
+                Log.info?.message("Logged in")
+                self?.dismissLogin()
             }.onFailure { error in
                 Log.error?.value(error)
             }
+            
         } else {
             Log.warning?.message("Invalid input")
         }

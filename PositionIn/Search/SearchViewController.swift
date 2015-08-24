@@ -8,6 +8,7 @@
 
 import UIKit
 import PosInCore
+import CleanroomLogger
 
 final class SearchViewController: UIViewController {
     
@@ -23,6 +24,7 @@ final class SearchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         dataSource.configureTable(tableView)
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "didTapOutsideSearch:"))
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -30,6 +32,13 @@ final class SearchViewController: UIViewController {
         categoriesSearchBar.becomeFirstResponder()
     }
     
+    func didTapOutsideSearch(sender: UIGestureRecognizer) {
+        view.endEditing(true)
+        transitioningDelegate = nil
+        dismissViewControllerAnimated(true, completion: nil)
+        Log.debug?.message("Should close search")
+    }
+
     
     @IBOutlet private(set) weak var categoriesSearchBar: UISearchBar!
     @IBOutlet private(set) weak var locationSearchBar: UISearchBar!
@@ -52,24 +61,32 @@ extension SearchViewController {
             super.configureTable(tableView)
         }
         
-        @objc override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            return 2
+        func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+            return count(models)
         }
         
-        @objc override func tableView(tableView: UITableView, reuseIdentifierForIndexPath indexPath: NSIndexPath) -> String {
-            return ProductListCell.reuseId()
+        @objc override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+            return count(models[section])
         }
         
         override func tableView(tableView: UITableView, modelForIndexPath indexPath: NSIndexPath) -> TableViewCellModel {
-            return TableViewCellTextModel(title: "\(Float(indexPath.row) / 100.0) miles")
+            return models[indexPath.section][indexPath.row]
+        }
+        
+        @objc override func tableView(tableView: UITableView, reuseIdentifierForIndexPath indexPath: NSIndexPath) -> String {
+            let model = self.tableView(tableView, modelForIndexPath: indexPath)
+            return modelFactory.compactCellReuseIdForModel(model)
         }
         
         override func nibCellsId() -> [String] {
-            return [ProductListCell.reuseId()]
+            return modelFactory.compactCellsReuseId()
         }
         
         func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
             tableView.deselectRowAtIndexPath(indexPath, animated: true)
         }
+        
+        private var models: [[TableViewCellModel]] = []
+        private let modelFactory = FeedItemCellModelFactory()
     }
 }
