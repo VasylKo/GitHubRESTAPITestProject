@@ -13,7 +13,7 @@ import UIKit
     optional func addMenuView(addMenuView: AddMenuView, didExpand expanded:Bool)
 }
 
-class AddMenuView: UIView {
+final class AddMenuView: UIView {
     typealias ItemAction = () -> Void
 
     override init(frame: CGRect) {
@@ -84,7 +84,9 @@ class AddMenuView: UIView {
 
     override func layoutSublayersOfLayer(layer: CALayer!) {
         super.layoutSublayersOfLayer(layer)
+        let decorationRect = bounds.rectByInsetting(dx: -decorationInset, dy: -decorationInset)
         decorationLayer.frame = bounds
+        decorationLayer.path = UIBezierPath(ovalInRect: decorationRect).CGPath
     }
     
     
@@ -135,9 +137,6 @@ extension AddMenuView {
         startButton.layer.zPosition = CGFloat(FLT_MAX)
         setTranslatesAutoresizingMaskIntoConstraints(false)
 
-        let decorationRect = bounds.rectByInsetting(dx: -decorationInset, dy: -decorationInset)
-        decorationLayer.frame = bounds
-        decorationLayer.path = UIBezierPath(ovalInRect: decorationRect).CGPath
         decorationLayer.fillColor = UIScheme.tabbarBackgroundColor.CGColor
         layer.addSublayer(decorationLayer)
         /*
