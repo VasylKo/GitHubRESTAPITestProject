@@ -1103,7 +1103,7 @@
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <connections>
-                        <outlet property="emailTextField" destination="IH7-bo-DFg" id="WgL-mO-68h"/>
+                        <outlet property="emailTextField" destination="MeG-G9-ab5" id="sxW-7g-o9S"/>
                         <outlet property="firstnameTextField" destination="IH7-bo-DFg" id="hhg-LT-wXy"/>
                         <outlet property="lastnameTextField" destination="A1a-lG-LuZ" id="o69-N1-Y07"/>
                         <outlet property="passwordTextField" destination="YbB-BB-RY4" id="xht-n9-pxw"/>

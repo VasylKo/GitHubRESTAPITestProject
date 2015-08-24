@@ -20,7 +20,7 @@ final class RegisterInfoViewController: BaseLoginViewController {
                 let firstName = firstnameTextField.text
                 let lastName = lastnameTextField.text
                 
-                api().register(username: username, password: password, firstName: username, lastName: lastName).flatMap {
+                api().register(username: username, password: password, firstName: firstName, lastName: lastName).flatMap {
                     (userProfile: UserProfile) ->  Future<Void,NSError> in
                     var updatedProfile = userProfile
                     updatedProfile.avatar = NSURL(string:"http://i.imgur.com/5npTFKP.png")
