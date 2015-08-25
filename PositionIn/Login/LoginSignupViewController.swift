@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class LoginSignupViewController: UIViewController {
+final class LoginSignupViewController: BaseLoginViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,7 +20,7 @@ class LoginSignupViewController: UIViewController {
         performSegue(LoginSignupViewController.Segue.LoginSegueId)
     }
     
-    func keyboardTargetView() -> UIView? {
+    override func keyboardTargetView() -> UIView? {
         return loginButton
     }
     

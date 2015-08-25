@@ -1146,9 +1146,9 @@
 			isa = PBXGroup;
 			children = (
 				E66115861B7376F4003DB5B3 /* Login.storyboard */,
+				E661158E1B738844003DB5B3 /* BaseLoginViewController.swift */,
 				24D850411B878730008CAE82 /* LoginSignupViewController.swift */,
 				E66115881B73771E003DB5B3 /* LoginViewController.swift */,
-				E661158E1B738844003DB5B3 /* BaseLoginViewController.swift */,
 				E661158A1B73774A003DB5B3 /* RegisterViewController.swift */,
 				243D0AA71B8AF90800B0E220 /* RegisterInfoViewController.swift */,
 				E661158C1B73778B003DB5B3 /* RecoverPasswordViewController.swift */,
