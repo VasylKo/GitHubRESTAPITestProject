@@ -15,6 +15,8 @@ final class FilterViewController: XLFormViewController {
         case Products = "Products"
         case Events = "Events"
         case Promotions = "Promotions"
+        
+        case Time = "Time"
     }
 
     override func viewDidLoad() {
@@ -32,20 +34,41 @@ final class FilterViewController: XLFormViewController {
         self.initializeForm()
     }
     
+    private let categories: [ItemCategory] = [
+        .AnimalsPetSupplies, .ApparelAccessories, .ArtsEntertainment, .BabyToddler, .BusinessIndustrial,
+        .CamerasOptics, .Electronics, .Food, .Furniture, .Hardware, .HealthBeauty, .HomeGarden, .LuggageBags,
+        .Media, .OfficeSupplies, .ReligiousCeremonial, .Software, .SportingGoods, .ToysGames, .VehiclesParts
+    ]
+    
     func initializeForm() {
         let form = XLFormDescriptor(title: NSLocalizedString("Filter", comment: "Update filter: form caption"))
-        
+        //Types
         let typeSection = XLFormSectionDescriptor.formSectionWithTitle(NSLocalizedString("Type", comment: "Update filter: type caption"))
         form.addFormSection(typeSection)
         typeSection.addFormRow(productsRow)
         typeSection.addFormRow(eventsRow)
         typeSection.addFormRow(promotionsRow)
         
+        //Options
         let optionsSection = XLFormSectionDescriptor.formSectionWithTitle(NSLocalizedString("Options", comment: "Update filter: options caption"))
         form.addFormSection(optionsSection)
+        //Time
+        let timeRow = XLFormRowDescriptor(tag: Tags.Time.rawValue, rowType:XLFormRowDescriptorTypeSelectorPickerViewInline, title:NSLocalizedString("Time", comment: "Update filter: time value"))
+        timeRow.selectorOptions = ["Now", "Today", "Tomorrow", "Upcoming 7 days"]
+        timeRow.value = "Now"
+        optionsSection.addFormRow(timeRow)
+        //TOO: localize strings
+        //TODO: custom date range
+
         
+        //Categories
         let categoriesSection = XLFormSectionDescriptor.formSectionWithTitle(NSLocalizedString("Categories", comment: "Update filter: categories caption"))
         form.addFormSection(categoriesSection)
+        categories.map { (category: ItemCategory) -> () in
+            let categoryRow = XLFormRowDescriptor(tag: category.string(), rowType: XLFormRowDescriptorTypeBooleanSwitch, title: category.string())
+            categoryRow.cellConfigAtConfigure["imageView.image"] = category.image()
+            categoriesSection.addFormRow(categoryRow)
+        }
         
         self.form = form
     }
@@ -88,6 +111,16 @@ final class FilterViewController: XLFormViewController {
         dismissViewControllerAnimated(true, completion: nil)
     }
     
+}
 
 
+extension ItemCategory {
+    func image() -> UIImage {
+        switch self {
+        case .Unknown:
+            fallthrough
+        default:
+            return UIImage(named: "BrowseModeList")!
+        }
+    }
 }
