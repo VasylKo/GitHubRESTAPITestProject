@@ -14,7 +14,7 @@ enum ItemCategory: Int, DebugPrintable {
          CamerasOptics, Electronics, Food, Furniture, Hardware, HealthBeauty, HomeGarden, LuggageBags,
          Media, OfficeSupplies, ReligiousCeremonial, Software, SportingGoods, ToysGames, VehiclesParts
     
-    func string() -> String {
+    func displayString() -> String {
         switch self {
         case .Unknown:
             fallthrough
@@ -64,6 +64,6 @@ enum ItemCategory: Int, DebugPrintable {
     }
     
     var debugDescription: String {
-        return "<ItemCategory:\(string())>"
+        return "<ItemCategory:\(displayString())>"
     }
 }
