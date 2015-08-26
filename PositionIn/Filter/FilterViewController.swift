@@ -50,12 +50,6 @@ final class FilterViewController: XLFormViewController {
     
     func initializeForm() {
         let form = XLFormDescriptor(title: NSLocalizedString("Filter", comment: "Update filter: form caption"))
-        //Types
-        let typeSection = XLFormSectionDescriptor.formSectionWithTitle(NSLocalizedString("Type", comment: "Update filter: type caption"))
-        form.addFormSection(typeSection)
-        typeSection.addFormRow(productsRow)
-        typeSection.addFormRow(eventsRow)
-        typeSection.addFormRow(promotionsRow)
         
         //Options
         let optionsSection = XLFormSectionDescriptor.formSectionWithTitle(NSLocalizedString("Options", comment: "Update filter: options caption"))
@@ -64,8 +58,7 @@ final class FilterViewController: XLFormViewController {
         //Price
         currencyFormatter.numberStyle = .CurrencyStyle
         
-        let startPriceRow = XLFormRowDescriptor(tag: Tags.StartPrice.rawValue, rowType: XLFormRowDescriptorTypeSlider, title: "")
-        let endPriceRow = XLFormRowDescriptor(tag: Tags.EndPrice.rawValue, rowType: XLFormRowDescriptorTypeSlider, title: "")
+        let priceRow = XLFormRowDescriptor(tag: Tags.StartPrice.rawValue, rowType: XLFormRowDescriptorTypeSlider, title: "")
         
         let updatePriceValue: (XLFormRowDescriptor, String, Float) -> () = { [weak self] descriptor, localizedTitle, value in
             let stringValue: String  = self?.currencyFormatter.stringFromNumber(value) ?? ""
@@ -73,47 +66,23 @@ final class FilterViewController: XLFormViewController {
             self?.reloadFormRow(descriptor)
         }
 
-        let startPriceTitle = NSLocalizedString("Start price", comment: "Update filter: start price")
-        let endPriceTitle = NSLocalizedString("End price", comment: "Update filter: end price")
+        let startPriceTitle = NSLocalizedString("Price up to", comment: "Update filter: price")
         
-        let startPriceChangeBlock: XLOnChangeBlock = {  oldValue, newValue, descriptor in
+        let priceChangeBlock: XLOnChangeBlock = {  oldValue, newValue, descriptor in
             let newValue = newValue as! Float
-            let endPriceValue = endPriceRow.value as! Float
-            if newValue < endPriceValue {
-                updatePriceValue(descriptor, startPriceTitle, newValue)
-            } else {
-                descriptor.value = oldValue
-            }
+            updatePriceValue(descriptor, startPriceTitle, newValue)
         }
         
-        let endPriceChangeBlock: XLOnChangeBlock = {  oldValue, newValue, descriptor in
-            let newValue = newValue as! Float
-            let startPriceValue = startPriceRow.value as! Float
-            if newValue > startPriceValue {
-                updatePriceValue(descriptor, endPriceTitle, newValue)
-            } else {
-                descriptor.value = oldValue
-            }
-        }
         
-        startPriceRow.onChangeBlock = startPriceChangeBlock
-        startPriceRow.value = Float(10)
-        startPriceRow.cellConfigAtConfigure["slider.maximumValue"] = Float(1000)
-        startPriceRow.cellConfigAtConfigure["slider.minimumValue"] = Float(0)
-        startPriceRow.cellConfigAtConfigure["steps"] = Float(10)
-        optionsSection.addFormRow(startPriceRow)
-        
-        endPriceRow.onChangeBlock = endPriceChangeBlock
-        endPriceRow.value = Float(900)
-        endPriceRow.cellConfigAtConfigure["slider.maximumValue"] = Float(1000)
-        endPriceRow.cellConfigAtConfigure["slider.minimumValue"] = Float(0)
-        endPriceRow.cellConfigAtConfigure["steps"] = Float(10)
-        optionsSection.addFormRow(endPriceRow)
-        
-
+        priceRow.onChangeBlock = priceChangeBlock
+        priceRow.value = Float(130)
+        priceRow.cellConfigAtConfigure["slider.maximumValue"] = Float(1000)
+        priceRow.cellConfigAtConfigure["slider.minimumValue"] = Float(0)
+        priceRow.cellConfigAtConfigure["steps"] = Float(100)
+        optionsSection.addFormRow(priceRow)
         
         //Radius
-        let radiusRow = XLFormRowDescriptor(tag: Tags.Radius.rawValue, rowType:XLFormRowDescriptorTypeSelectorPickerViewInline, title: NSLocalizedString("Distance", comment: "Update filter: radius value"))
+        let radiusRow = XLFormRowDescriptor(tag: Tags.Radius.rawValue, rowType:XLFormRowDescriptorTypeSelectorAlertView, title: NSLocalizedString("Distance", comment: "Update filter: radius value"))
         let radiusOptions = [
             XLFormOptionsObject(value: 1000, displayText: NSLocalizedString("1 km", comment: "Update filter: radius 1km")),
             XLFormOptionsObject(value: 5000, displayText: NSLocalizedString("5 km", comment: "Update filter: radius 5km")),
@@ -125,7 +94,7 @@ final class FilterViewController: XLFormViewController {
         optionsSection.addFormRow(radiusRow)
         
         //Time
-        let timeRow = XLFormRowDescriptor(tag: Tags.Time.rawValue, rowType:XLFormRowDescriptorTypeSelectorPickerViewInline, title: NSLocalizedString("Time", comment: "Update filter: time value"))
+        let timeRow = XLFormRowDescriptor(tag: Tags.Time.rawValue, rowType:XLFormRowDescriptorTypeSelectorAlertView, title: NSLocalizedString("Time", comment: "Update filter: time value"))
         let rawDateRanges: [DateRange] = [.Now, .Today, .Tomorrow, .Week, .Custom]
         let dateOptions: [XLFormOptionsObject] = rawDateRanges.map {
             XLFormOptionsObject(value: $0.rawValue, displayText: $0.displayString())
@@ -134,19 +103,31 @@ final class FilterViewController: XLFormViewController {
         timeRow.value = dateOptions.first
         optionsSection.addFormRow(timeRow)
         
-        let customDateHiddenPredicate = NSPredicate(format: "NOT $\(Tags.Time.rawValue).value.formValue == \(DateRange.Custom.rawValue)")
+        let customDateStatePredicate = NSPredicate(format: "NOT $\(Tags.Time.rawValue).value.formValue == \(DateRange.Custom.rawValue)")
         
         //Start date
-        let startDate = XLFormRowDescriptor(tag: Tags.StartDate.rawValue, rowType: XLFormRowDescriptorTypeDateTimeInline, title: NSLocalizedString("Start date", comment: "New event: Start date"))
-        startDate.value = NSDate(timeIntervalSinceNow: 60*60*24)
-        startDate.hidden = customDateHiddenPredicate
-        optionsSection.addFormRow(startDate)
+        let startDateRow = XLFormRowDescriptor(tag: Tags.StartDate.rawValue, rowType: XLFormRowDescriptorTypeDateTime, title: NSLocalizedString("Start date", comment: "New event: Start date"))
+        startDateRow.value = NSDate(timeIntervalSinceNow: 60*60*24)
+        startDateRow.disabled = customDateStatePredicate
+        optionsSection.addFormRow(startDateRow)
         //End date
-        let endDate = XLFormRowDescriptor(tag: Tags.EndDate.rawValue, rowType: XLFormRowDescriptorTypeDateTimeInline, title: NSLocalizedString("End date", comment: "New event: End date"))
-        endDate.value = NSDate(timeIntervalSinceNow: 60*60*25)
-        endDate.hidden = customDateHiddenPredicate
-        optionsSection.addFormRow(endDate)
-
+        let endDateRow = XLFormRowDescriptor(tag: Tags.EndDate.rawValue, rowType: XLFormRowDescriptorTypeDateTime, title: NSLocalizedString("End date", comment: "New event: End date"))
+        endDateRow.value = NSDate(timeIntervalSinceNow: 60*60*25)
+        endDateRow.disabled = customDateStatePredicate
+        optionsSection.addFormRow(endDateRow)
+        
+        //(AnyObject?, AnyObject?, XLFormRowDescriptor) -> Void
+        timeRow.onChangeBlock = { [weak startDateRow, weak endDateRow] _, newValue, descriptor in
+            if let option = newValue as? XLFormOptionsObject,
+                let rawValue = option.formValue() as? Int,
+                let range = DateRange(rawValue: rawValue) {
+                    let (startDate, endDate) = range.dates()
+                    startDateRow?.value = startDate
+                    endDateRow?.value = endDate
+            }
+        }
+        
+        //TODO: validate start date < end date
 
         
         //Categories
@@ -162,28 +143,7 @@ final class FilterViewController: XLFormViewController {
         
         self.form = form
     }
-    
-    private(set) lazy var productsRow: XLFormRowDescriptor = {
-        let row = XLFormRowDescriptor(tag: Tags.Products.rawValue, rowType: XLFormRowDescriptorTypeBooleanSwitch, title: NSLocalizedString("Products", comment: "Update filter: Products"))
-        row.cellConfigAtConfigure["imageView.image"] = UIImage(named: "BrowseModeList")!
-        row.value = NSNumber(bool: true)
-        return row
-    }()
-    
-    private(set) lazy var eventsRow: XLFormRowDescriptor = {
-        let row = XLFormRowDescriptor(tag: Tags.Events.rawValue, rowType: XLFormRowDescriptorTypeBooleanSwitch, title: NSLocalizedString("Events", comment: "Update filter: Events"))
-        row.cellConfigAtConfigure["imageView.image"] = UIImage(named: "BrowseModeList")!
-        row.value = NSNumber(bool: true)
-        return row
-    }()
-
-    private(set) lazy var promotionsRow: XLFormRowDescriptor = {
-        let row = XLFormRowDescriptor(tag: Tags.Promotions.rawValue, rowType: XLFormRowDescriptorTypeBooleanSwitch, title: NSLocalizedString("Promotions", comment: "Update filter: Promotions"))
-        row.cellConfigAtConfigure["imageView.image"] = UIImage(named: "BrowseModeList")!
-        row.value = NSNumber(bool: true)
-        return row
-        }()
-    
+        
     
     @IBAction func didTapApply(sender: AnyObject) {
         let validationErrors : Array<NSError> = self.formValidationErrors() as! Array<NSError>
@@ -222,6 +182,10 @@ final class FilterViewController: XLFormViewController {
             case .Custom:
                 return NSLocalizedString("Custom date range", comment: "Date range: Custom")
             }
+        }
+        
+        func dates() -> (NSDate, NSDate) {
+            return (NSDate(), NSDate())
         }
     }
     
