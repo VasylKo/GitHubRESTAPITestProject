@@ -1,5 +1,5 @@
 app_identifier "com.positionin.positionin" # The bundle identifier of your app
-#apple_id "" # Your Apple email address
+apple_id "adanfermer+rising@gmail.com" # Your Apple email address
 
 # You can uncomment any of the lines below and add your own
 # team selection in case you're in multiple teams
@@ -8,4 +8,4 @@ app_identifier "com.positionin.positionin" # The bundle identifier of your app
 
 
 # you can even provide different app identifiers, Apple IDs and team names per lane:
-# https://github.com/KrauseFx/fastlane/blob/master/docs/Advanced.md#the-appfile
+# https://github.com/KrauseFx/fastlane/blob/master/docs/Appfile.md

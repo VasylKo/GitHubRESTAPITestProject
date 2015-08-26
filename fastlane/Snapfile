@@ -6,13 +6,13 @@ devices([
   "iPhone 6 Plus",
   "iPhone 5",
   "iPhone 4s",
-  "iPad Air"
+  # "iPad Air"
 ])
 
 languages([
   'en-US',
-#  'de-DE',
-#  'it-IT'
+  # 'de-DE',
+  # 'it-IT'
 ])
 
 # Where should the resulting screenshots be stored?
@@ -24,7 +24,7 @@ screenshots_path "./screenshots"
 # js_file './snapshot.js'
 
 # The name of the project's scheme
- scheme 'PositionIn'
+scheme 'PositionIn'
 
 # Where is your project (or workspace)? Provide the full path here
 # project_path './YourProject.xcworkspace'
