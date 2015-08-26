@@ -8,6 +8,6 @@
 
 import UIKit
 
-class ProductInventoryCell: UICollectionViewCell {
+final class ProductInventoryCell: UICollectionViewCell {
 
 }

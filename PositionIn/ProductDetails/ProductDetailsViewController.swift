@@ -14,7 +14,7 @@ protocol ProductDetailsActionConsumer {
     func executeAction(action: ProductDetailsViewController.ProductDetailsAction)
 }
 
-class ProductDetailsViewController: UIViewController {
+final class ProductDetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()

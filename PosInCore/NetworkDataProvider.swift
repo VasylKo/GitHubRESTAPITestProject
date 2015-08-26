@@ -11,6 +11,7 @@ import Alamofire
 import ObjectMapper
 import BrightFutures
 import Box
+import MobileCoreServices
 
 public class NetworkDataProvider: NSObject {
     
@@ -22,12 +23,13 @@ public class NetworkDataProvider: NSObject {
     :returns: Tuple with request and future
     */
     public func objectRequest<T: Mappable>(
-        URLRequest: Alamofire.URLRequestConvertible
+        URLRequest: Alamofire.URLRequestConvertible,
+        validation: Alamofire.Request.Validation? = nil
         ) -> (Alamofire.Request, Future<T, NSError>) {
             let mapping: AnyObject? -> T? = { json in
                 return Mapper<T>().map(json)
             }
-            return jsonRequest(URLRequest, map: mapping)
+            return jsonRequest(URLRequest, map: mapping, validation: validation)
     }
     
     /**
@@ -38,12 +40,13 @@ public class NetworkDataProvider: NSObject {
     :returns: Tuple with request and future
     */
     public func arrayRequest<T: Mappable>(
-        URLRequest: Alamofire.URLRequestConvertible
-        ) -> (Alamofire.Request, Future<T, NSError>) {
+        URLRequest: Alamofire.URLRequestConvertible,
+        validation: Alamofire.Request.Validation? = nil
+        ) -> (Alamofire.Request, Future<[T], NSError>) {
             let mapping: AnyObject? -> [T]? = { json in
                 return Mapper<T>().mapArray((json))
             }
-            return jsonRequest(URLRequest, map: mapping)
+            return jsonRequest(URLRequest, map: mapping, validation: validation)
     }
     
     /**
@@ -54,13 +57,15 @@ public class NetworkDataProvider: NSObject {
     
     :returns: Tuple with request and future
     */
-    public  func jsonRequest<U,V>(
+    public  func jsonRequest<V>(
         URLRequest: Alamofire.URLRequestConvertible,
-        map: AnyObject?->U?
+        map: AnyObject?->V?,
+        validation: Alamofire.Request.Validation? = nil
         ) -> (Alamofire.Request, Future<V, NSError>) {
             let serializer = Alamofire.Request.CustomResponseSerializer(map)
-            return request(URLRequest, serializer: serializer)
+            return request(URLRequest, serializer: serializer, validation: validation)
     }
+    
     
     /**
     Designated initializer
@@ -71,9 +76,11 @@ public class NetworkDataProvider: NSObject {
     :returns: new instance
     */
     public init(
-        configuration: NSURLSessionConfiguration = NSURLSessionConfiguration.defaultSessionConfiguration()
+        configuration: NSURLSessionConfiguration = NSURLSessionConfiguration.defaultSessionConfiguration(),
+        trustPolicies: [String: ServerTrustPolicy]? = nil
         ) {
-            manager = Alamofire.Manager(configuration: configuration)
+            let serverTrustPolicyManager = trustPolicies.map { ServerTrustPolicyManager(policies: $0) }
+            manager = Alamofire.Manager(configuration: configuration, serverTrustPolicyManager: serverTrustPolicyManager)
     }
     
     /// Singleton instance
@@ -99,29 +106,38 @@ public class NetworkDataProvider: NSObject {
     
     :returns: Tuple with request and future
     */
-    private func request<V>(
+    private func request<V,Serializer: Alamofire.ResponseSerializer where Serializer.SerializedObject == Box<V>>(
         URLRequest: Alamofire.URLRequestConvertible,
-        serializer: Alamofire.Request.Serializer
+        serializer: Serializer,
+        validation: Alamofire.Request.Validation?
         ) -> (Alamofire.Request, Future<V, NSError>) {
             let p = Promise<V, NSError>()
         
             activityIndicator.increment()
-            let request = self.request(URLRequest).response(queue: Queue.global.underlyingQueue, serializer: serializer) {
-                [unowned self] (request, response, object, error) in
-                self.activityIndicator.decrement()
-                if let object = object as? Box<V> {
-                    p.success(object.value)
-                } else {
-                    p.failure(error ?? ErrorCodes.InvalidResponseError.error())
-                }
+            let request =  self.request(URLRequest, validation: validation).response(
+                queue: Queue.global.underlyingQueue,
+                responseSerializer: serializer) {
+                    [unowned self] (request, response, object, error) in
+                    self.activityIndicator.decrement()
+                    if let object = object  {
+                        p.success(object.value)
+                    } else {
+                        p.failure(error ?? ErrorCodes.InvalidResponseError.error())
+                    }
             }
         return (request, p.future)
     }
     
-    private func request(URLRequest: Alamofire.URLRequestConvertible) -> Alamofire.Request {
+    private func request(URLRequest: Alamofire.URLRequestConvertible, validation: Alamofire.Request.Validation?) -> Alamofire.Request {
         let request = manager.request(URLRequest).validate()
+//        #if DEBUG
         println("Request:\n\(request.debugDescription)")
-        return request
+//        #endif
+        if let validation = validation {
+            return request.validate(validation)
+        } else {
+            return request.validate()
+        }
     }
 }
 
@@ -129,11 +145,10 @@ public class NetworkDataProvider: NSObject {
 private extension Alamofire.Request {
     
     //MARK: - Custom serializer -
-    class func CustomResponseSerializer<T>(mapping:AnyObject? -> T?) -> Serializer {
-        
-        return { (request, response, data) in
+    class func CustomResponseSerializer<T>(mapping:AnyObject? -> T?) -> GenericResponseSerializer<Box<T>> {
+        return GenericResponseSerializer { request, response, data in
             let JSONSerializer = Request.JSONResponseSerializer(options: .AllowFragments)
-            let (json: AnyObject?, serializationError) = JSONSerializer(request, response, data)
+            let (json: AnyObject?, serializationError) = JSONSerializer.serializeResponse(request, response, data)
             switch (response, json, serializationError) {
             case (.None, _, _):
                 return (nil, NetworkDataProvider.ErrorCodes.TransferError.error())
@@ -208,5 +223,78 @@ extension NetworkDataProvider {
                 return NSLocalizedString("UnknownError", comment: "Unknown error")
             }
         }
+    }
+}
+
+//MARK: Upload
+extension NetworkDataProvider {
+    
+    /// File upload info
+    final public class FileUpload {
+        let data: NSData
+        let name: String
+        let filename: String
+        let mimeType: String
+        
+        public init (data: NSData, dataUTI: String, name: String = "file") {
+            self.name = name
+            self.data = data
+            mimeType = copyTag(kUTTagClassMIMEType, fromUTI: dataUTI, defaultValue: "application/octet-stream")
+            let fileExtension = copyTag(kUTTagClassFilenameExtension, fromUTI: dataUTI, defaultValue: "png")
+            filename = name.stringByAppendingPathExtension(fileExtension) ?? name
+        }
+    }
+    
+    /**
+    Uploads a files
+    
+    :param: URLRequest url request
+    :param: urls       files info
+    
+    :returns: Request future
+    */
+    public func upload(
+        URLRequest: Alamofire.URLRequestConvertible,
+        files: [FileUpload]
+        ) -> (Future<AnyObject?, NSError>) {
+            let p = Promise<AnyObject?, NSError>()
+            manager.upload(URLRequest,
+                multipartFormData: { multipartFormData in
+                    for fileInfo in files {
+                        multipartFormData.appendBodyPart(
+                            data: fileInfo.data,
+                            name: fileInfo.name,
+                            fileName: fileInfo.filename,
+                            mimeType: fileInfo.mimeType
+                        )
+                    }
+                },
+                encodingCompletion:{ encodingResult in
+                    switch encodingResult {
+                        //Success(request: Request, streamingFromDisk: Bool, streamFileURL: NSURL?)
+                    case .Success(let upload, let streamingFromDisk, let streamFileURL):
+                        println("Request:\n\(upload.debugDescription)")
+                        
+                        upload.validate(statusCode: [201]).responseJSON { request, response, JSON, uploadError in
+                            if let error = uploadError {
+                                p.failure(error)
+                            } else {
+                                p.success(JSON)
+                            }
+                        }
+                    case .Failure(let encodingError):
+                        p.failure(encodingError)
+                    }
+            })
+            return p.future
+    }
+}
+
+private func copyTag(tag: CFString!, fromUTI dataUTI: String, #defaultValue: String) -> String {
+    var str = UTTypeCopyPreferredTagWithClass(dataUTI, tag)
+    if (str == nil) {
+        return defaultValue
+    } else {
+        return str.takeUnretainedValue() as String
     }
 }

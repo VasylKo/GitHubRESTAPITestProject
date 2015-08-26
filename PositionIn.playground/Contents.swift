@@ -2,6 +2,15 @@
 
 import UIKit
 import XCPlayground
+import PosInCore
 
-let containerView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 375.0, height: 667.0))
+
+XCPSetExecutionShouldContinueIndefinitely(continueIndefinitely: true)
+
+let containerView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 20.0, height: 20.0))
+containerView.backgroundColor = UIColor.blueColor()
 XCPShowView("Container View", containerView)
+
+let p = NetworkDataProvider()
+
+

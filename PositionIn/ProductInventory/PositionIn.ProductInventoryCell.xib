@@ -13,7 +13,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="239" height="114"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="200" verticalHuggingPriority="200" image="MenuLogo" translatesAutoresizingMaskIntoConstraints="NO" id="dj9-z0-Yo4">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="200" verticalHuggingPriority="200" verticalCompressionResistancePriority="700" image="BigPlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="dj9-z0-Yo4">
                         <rect key="frame" x="0.0" y="0.0" width="239" height="67"/>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$99" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bAH-rQ-NuM">
@@ -48,6 +48,6 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="MenuLogo" width="173" height="38"/>
+        <image name="BigPlaceholder" width="311" height="207"/>
     </resources>
 </document>

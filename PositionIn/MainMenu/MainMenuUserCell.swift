@@ -9,10 +9,10 @@
 import UIKit
 import PosInCore
 
-class MainMenuUserCell: TableViewCell {
+final class MainMenuUserCell: TableViewCell {
     
-    @IBOutlet weak var avatarView: AvatarView!
-    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet private weak var avatarView: AvatarView!
+    @IBOutlet private weak var titleLabel: UILabel!
     
     override func setModel(model: TableViewCellModel) {
         let m = model as? TableViewCellImageTextModel

@@ -11,7 +11,9 @@ import PosInCore
 import Alamofire
 import BrightFutures
 import CleanroomLogger
+import ResponseDetective
 import Messaging
+import GoogleMaps
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -19,6 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     let api: APIService
     let chatClient: XMPPClient
+    let locationController: LocationController
     
     override init() {
         #if DEBUG
@@ -26,76 +29,53 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         #else
         Log.enable(minimumSeverity: .Info, synchronousMode: false)
         #endif
-        let baseURL = NSURL(string: "http://45.63.7.39:8080")!
-        api = APIService(url: baseURL)
+        let urlSessionConfig = NSURLSessionConfiguration.defaultSessionConfiguration()
+        #if DEBUG
+        InterceptingProtocol.registerRequestInterceptor(HeadersInterceptor(outputStream: CleanroomOutputStream(logChannel: Log.debug)))
+        InterceptingProtocol.registerRequestInterceptor(JSONInterceptor(outputStream: CleanroomOutputStream(logChannel: Log.debug)))
+        InterceptingProtocol.registerErrorInterceptor(HeadersInterceptor(outputStream: CleanroomOutputStream(logChannel: Log.error)))
+//        urlSessionConfig.protocolClasses = [InterceptingProtocol.self]
+        #endif
+        let baseURL = NSURL(string: "https://app-dev.positionin.com/api/")!
+        let amazonURL = NSURL(string: "https://pos-dev.s3.amazonaws.com/")!
+        #if DEBUG
+        let trustPolicies: [String: ServerTrustPolicy]? = [
+            baseURL.host! : .DisableEvaluation
+            ]
+        #else
+        let trustPolicies: [String: ServerTrustPolicy]? = nil
+        #endif
+        let dataProvider = PosInCore.NetworkDataProvider(configuration: urlSessionConfig, trustPolicies: trustPolicies)
+        api = APIService(url: baseURL, amazon: amazonURL, dataProvider: dataProvider)
         let chatConfig = XMPPClientConfiguration.defaultConfiguration()
         chatClient = XMPPClient(configuration: chatConfig)
+        locationController = LocationController()
         super.init()
     }
 
     
-    func runProfileAPI() {
-        
-        api.get(nil).flatMap { (profile: UserProfile) -> Future<Void,NSError> in
-            var newProfile = profile
-            newProfile.firstName = "Alex"
-            newProfile.middleName = "The"
-            newProfile.lastName = "Great"
-            return self.api.update(newProfile)
-        }.flatMap { ( _: Void ) -> Future<UserProfile,NSError> in
-                return self.api.get(nil)
-        }.onSuccess { profile in
-            Log.info?.value(profile)
-            self.runPostsAPI(profile)
-        }.onFailure { error in
-            Log.error?.value(error)
-        }
-    }
-    
-    func runPostsAPI(user: UserProfile) {
-        var post = Post(objectId: CRUDObjectInvalidId)
-        post.name = "Cool post"
-        post.text = "Big Post text"
-        
-        api.post(post).flatMap { ( _: Void ) -> Future<CollectionResponse<Post>, NSError> in
-            return self.api.getAll(Post.allEndpoint(user.objectId))
-        }.onSuccess { response in
-            Log.info?.value(response.items)
-        }.onFailure { error in
-            Log.error?.value(error)
-        }
-    }
-    
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-
-        api.sessionController.session().recoverWith { [unowned self]
-            (error: NSError) -> Future<APIService.AuthResponse.Token ,NSError>  in
-            Log.error?.value(error)
-            let username = "ios-777@bekitzur.com"
-            let password = "pwd"
-            return self.api.auth(username: username, password: password).map { response in
-                return response.accessToken
+        setupMaps()
+        api.isUserAuthorized().onComplete { result in
+            let defaultAction: SidebarViewController.Action
+            switch result.value {
+            case .Some:
+                defaultAction = .ForYou
+            default:
+                defaultAction = .Login
             }
-        }.onSuccess { _ in
-//            self.runProfileAPI()
-        }.onFailure { error in
-            Log.error?.value(error)
+            if let sidebarViewController = self.window?.rootViewController as? SidebarViewController {
+                sidebarViewController.executeAction(defaultAction)
+            }
         }
+        
+        return true
                 
-
-        dispatch_delay(5) {
-            self.chatClient.auth("ixmpp@beewellapp.com", password: "1HateD0m2").future().onSuccess {
-                Log.info?.message("XMPP authorized")
-                }.onFailure { error in
-                    Log.error?.value(error)
-            }
-            
-        }
-        
-        
-        if let sidebarViewController = window?.rootViewController as? SidebarViewController {
-            let defaultAction: SidebarViewController.Action = .ForYou
-            sidebarViewController.executeAction(defaultAction)
+        self.chatClient.auth("ixmpp@beewellapp.com", password: "1HateD0m2").future().onSuccess { [unowned self] in
+            Log.info?.message("XMPP authorized")
+            self.chatClient.sendTestMessage()
+            }.onFailure { error in
+                Log.error?.value(error)
         }
         
         return true
@@ -124,8 +104,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 }
 
+extension AppDelegate {
+    func setupMaps() {
+        let apiKey = "AIzaSyA3NvrDKBcpIsnq4-ZACG41y7Mj-wSfVrY"
+        GMSServices.provideAPIKey(apiKey)
+    }
+}
+
 func api() -> APIService {
     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
     return appDelegate.api
 }
 
+func locationController() -> LocationController {
+    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+    return appDelegate.locationController
+}
+
+
+struct CleanroomOutputStream: OutputStreamType {
+    let logChannel: LogChannel?
+    func write(string: String) {
+        logChannel?.message(string)
+    }
+}

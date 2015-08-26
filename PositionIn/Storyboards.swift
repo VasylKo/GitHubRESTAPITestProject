@@ -28,6 +28,14 @@ struct Storyboards {
             return self.storyboard.instantiateViewControllerWithIdentifier("MainMenuViewController") as! MainMenuViewController
         }
 
+        static func instantiateCommunityListViewController() -> CommunityListViewController! {
+            return self.storyboard.instantiateViewControllerWithIdentifier("CommunityListViewController") as! CommunityListViewController
+        }
+
+        static func instantiateSearchViewController() -> SearchViewController! {
+            return self.storyboard.instantiateViewControllerWithIdentifier("SearchViewController") as! SearchViewController
+        }
+
         static func instantiateBrowseMapViewController() -> BrowseMapViewController! {
             return self.storyboard.instantiateViewControllerWithIdentifier("BrowseMapViewController") as! BrowseMapViewController
         }
@@ -38,6 +46,88 @@ struct Storyboards {
 
         static func instantiateMapViewController() -> BrowseViewController! {
             return self.storyboard.instantiateViewControllerWithIdentifier("MapViewController") as! BrowseViewController
+        }
+
+        static func instantiateUserProfileViewController() -> UserProfileViewController! {
+            return self.storyboard.instantiateViewControllerWithIdentifier("UserProfileViewController") as! UserProfileViewController
+        }
+
+        static func instantiateEditProfileViewController() -> EditProfileViewController! {
+            return self.storyboard.instantiateViewControllerWithIdentifier("EditProfileViewController") as! EditProfileViewController
+        }
+
+        static func instantiateProfileListViewController() -> ProfileListViewController! {
+            return self.storyboard.instantiateViewControllerWithIdentifier("ProfileListViewController") as! ProfileListViewController
+        }
+
+        static func instantiateSettingsViewController() -> SettingsViewController! {
+            return self.storyboard.instantiateViewControllerWithIdentifier("SettingsViewController") as! SettingsViewController
+        }
+    }
+
+    struct Login {
+
+        static let identifier = "Login"
+
+        static var storyboard: UIStoryboard {
+            return UIStoryboard(name: self.identifier, bundle: nil)
+        }
+
+        static func instantiateInitialViewController() -> UINavigationController! {
+            return self.storyboard.instantiateInitialViewController() as! UINavigationController
+        }
+
+        static func instantiateViewControllerWithIdentifier(identifier: String) -> UIViewController {
+            return self.storyboard.instantiateViewControllerWithIdentifier(identifier) as! UIViewController
+        }
+
+        static func instantiateLoginSignUpViewController() -> LoginSignupViewController! {
+            return self.storyboard.instantiateViewControllerWithIdentifier("LoginSignUpViewController") as! LoginSignupViewController
+        }
+
+        static func instantiateRegisterViewController() -> RegisterViewController! {
+            return self.storyboard.instantiateViewControllerWithIdentifier("RegisterViewController") as! RegisterViewController
+        }
+
+        static func instantiateRecoverPasswordViewController() -> RecoverPasswordViewController! {
+            return self.storyboard.instantiateViewControllerWithIdentifier("RecoverPasswordViewController") as! RecoverPasswordViewController
+        }
+
+        static func instantiateLoginViewController() -> LoginViewController! {
+            return self.storyboard.instantiateViewControllerWithIdentifier("LoginViewController") as! LoginViewController
+        }
+    }
+
+    struct NewItems {
+
+        static let identifier = "NewItems"
+
+        static var storyboard: UIStoryboard {
+            return UIStoryboard(name: self.identifier, bundle: nil)
+        }
+
+        static func instantiateViewControllerWithIdentifier(identifier: String) -> UIViewController {
+            return self.storyboard.instantiateViewControllerWithIdentifier(identifier) as! UIViewController
+        }
+
+        static func instantiateAddProductViewController() -> AddProductViewController! {
+            return self.storyboard.instantiateViewControllerWithIdentifier("AddProductViewController") as! AddProductViewController
+        }
+
+        static func instantiateAddPostViewController() -> AddPostViewController! {
+            return self.storyboard.instantiateViewControllerWithIdentifier("AddPostViewController") as! AddPostViewController
+        }
+
+        static func instantiateAddCommunityViewController() -> AddCommunityViewController! {
+            return self.storyboard.instantiateViewControllerWithIdentifier("AddCommunityViewController") as! AddCommunityViewController
+        }
+
+        static func instantiateAddPromotionViewController() -> AddPromotionViewController! {
+            return self.storyboard.instantiateViewControllerWithIdentifier("AddPromotionViewController") as! AddPromotionViewController
+        }
+
+        static func instantiateAddEventViewController() -> AddEventViewController! {
+            return self.storyboard.instantiateViewControllerWithIdentifier("AddEventViewController") as! AddEventViewController
         }
     }
 }
@@ -199,6 +289,10 @@ extension SidebarViewController {
         case DrawerSegue = "DrawerSegue"
         case ShowBrowse = "ShowBrowse"
         case ShowMessagesList = "ShowMessagesList"
+        case ShowFilters = "ShowFilters"
+        case ShowCommunities = "ShowCommunities"
+        case ShowSettings = "ShowSettings"
+        case ShowMyProfile = "ShowMyProfile"
 
         var kind: SegueKind? {
             switch (self) {
@@ -207,6 +301,14 @@ extension SidebarViewController {
             case ShowBrowse:
                 return SegueKind(rawValue: "custom")
             case ShowMessagesList:
+                return SegueKind(rawValue: "custom")
+            case ShowFilters:
+                return SegueKind(rawValue: "presentation")
+            case ShowCommunities:
+                return SegueKind(rawValue: "custom")
+            case ShowSettings:
+                return SegueKind(rawValue: "custom")
+            case ShowMyProfile:
                 return SegueKind(rawValue: "custom")
             default:
                 preconditionFailure("Invalid value")
@@ -231,6 +333,12 @@ extension SidebarViewController {
 }
 
 //MARK: - MessagesListViewController
+
+//MARK: - FilterViewController
+
+//MARK: - CommunityListViewController
+
+//MARK: - SearchViewController
 
 //MARK: - BrowseMapViewController
 
@@ -357,6 +465,295 @@ extension BrowseViewController {
             switch (self) {
             case ShowProductDetails:
                 return ProductDetailsViewController.self
+            default:
+                assertionFailure("Unknown destination")
+                return nil
+            }
+        }
+
+        var identifier: String? { return self.description } 
+        var description: String { return self.rawValue }
+    }
+
+}
+
+//MARK: - UserProfileViewController
+
+//MARK: - EditProfileViewController
+
+//MARK: - ProfileListViewController
+
+//MARK: - SettingsViewController
+
+//MARK: - LoginSignupViewController
+extension UIStoryboardSegue {
+    func selection() -> LoginSignupViewController.Segue? {
+        if let identifier = self.identifier {
+            return LoginSignupViewController.Segue(rawValue: identifier)
+        }
+        return nil
+    }
+}
+
+extension LoginSignupViewController { 
+
+    enum Segue: String, Printable, SegueProtocol {
+        case LoginSegueId = "LoginSegueId"
+
+        var kind: SegueKind? {
+            switch (self) {
+            case LoginSegueId:
+                return SegueKind(rawValue: "show")
+            default:
+                preconditionFailure("Invalid value")
+                break
+            }
+        }
+
+        var destination: UIViewController.Type? {
+            switch (self) {
+            case LoginSegueId:
+                return LoginViewController.self
+            default:
+                assertionFailure("Unknown destination")
+                return nil
+            }
+        }
+
+        var identifier: String? { return self.description } 
+        var description: String { return self.rawValue }
+    }
+
+}
+
+//MARK: - RegisterViewController
+
+//MARK: - RecoverPasswordViewController
+
+//MARK: - LoginViewController
+extension UIStoryboardSegue {
+    func selection() -> LoginViewController.Segue? {
+        if let identifier = self.identifier {
+            return LoginViewController.Segue(rawValue: identifier)
+        }
+        return nil
+    }
+}
+
+extension LoginViewController { 
+
+    enum Segue: String, Printable, SegueProtocol {
+        case ForgotPasswordSegueId = "ForgotPasswordSegueId"
+
+        var kind: SegueKind? {
+            switch (self) {
+            case ForgotPasswordSegueId:
+                return SegueKind(rawValue: "show")
+            default:
+                preconditionFailure("Invalid value")
+                break
+            }
+        }
+
+        var destination: UIViewController.Type? {
+            switch (self) {
+            case ForgotPasswordSegueId:
+                return RecoverPasswordViewController.self
+            default:
+                assertionFailure("Unknown destination")
+                return nil
+            }
+        }
+
+        var identifier: String? { return self.description } 
+        var description: String { return self.rawValue }
+    }
+
+}
+
+//MARK: - AddProductViewController
+extension UIStoryboardSegue {
+    func selection() -> AddProductViewController.Segue? {
+        if let identifier = self.identifier {
+            return AddProductViewController.Segue(rawValue: identifier)
+        }
+        return nil
+    }
+}
+
+extension AddProductViewController { 
+
+    enum Segue: String, Printable, SegueProtocol {
+        case Close = "Close"
+
+        var kind: SegueKind? {
+            switch (self) {
+            case Close:
+                return SegueKind(rawValue: "unwind")
+            default:
+                preconditionFailure("Invalid value")
+                break
+            }
+        }
+
+        var destination: UIViewController.Type? {
+            switch (self) {
+            default:
+                assertionFailure("Unknown destination")
+                return nil
+            }
+        }
+
+        var identifier: String? { return self.description } 
+        var description: String { return self.rawValue }
+    }
+
+}
+
+//MARK: - AddPostViewController
+extension UIStoryboardSegue {
+    func selection() -> AddPostViewController.Segue? {
+        if let identifier = self.identifier {
+            return AddPostViewController.Segue(rawValue: identifier)
+        }
+        return nil
+    }
+}
+
+extension AddPostViewController { 
+
+    enum Segue: String, Printable, SegueProtocol {
+        case Close = "Close"
+
+        var kind: SegueKind? {
+            switch (self) {
+            case Close:
+                return SegueKind(rawValue: "unwind")
+            default:
+                preconditionFailure("Invalid value")
+                break
+            }
+        }
+
+        var destination: UIViewController.Type? {
+            switch (self) {
+            default:
+                assertionFailure("Unknown destination")
+                return nil
+            }
+        }
+
+        var identifier: String? { return self.description } 
+        var description: String { return self.rawValue }
+    }
+
+}
+
+//MARK: - AddCommunityViewController
+extension UIStoryboardSegue {
+    func selection() -> AddCommunityViewController.Segue? {
+        if let identifier = self.identifier {
+            return AddCommunityViewController.Segue(rawValue: identifier)
+        }
+        return nil
+    }
+}
+
+extension AddCommunityViewController { 
+
+    enum Segue: String, Printable, SegueProtocol {
+        case Close = "Close"
+
+        var kind: SegueKind? {
+            switch (self) {
+            case Close:
+                return SegueKind(rawValue: "unwind")
+            default:
+                preconditionFailure("Invalid value")
+                break
+            }
+        }
+
+        var destination: UIViewController.Type? {
+            switch (self) {
+            default:
+                assertionFailure("Unknown destination")
+                return nil
+            }
+        }
+
+        var identifier: String? { return self.description } 
+        var description: String { return self.rawValue }
+    }
+
+}
+
+//MARK: - AddPromotionViewController
+extension UIStoryboardSegue {
+    func selection() -> AddPromotionViewController.Segue? {
+        if let identifier = self.identifier {
+            return AddPromotionViewController.Segue(rawValue: identifier)
+        }
+        return nil
+    }
+}
+
+extension AddPromotionViewController { 
+
+    enum Segue: String, Printable, SegueProtocol {
+        case Close = "Close"
+
+        var kind: SegueKind? {
+            switch (self) {
+            case Close:
+                return SegueKind(rawValue: "unwind")
+            default:
+                preconditionFailure("Invalid value")
+                break
+            }
+        }
+
+        var destination: UIViewController.Type? {
+            switch (self) {
+            default:
+                assertionFailure("Unknown destination")
+                return nil
+            }
+        }
+
+        var identifier: String? { return self.description } 
+        var description: String { return self.rawValue }
+    }
+
+}
+
+//MARK: - AddEventViewController
+extension UIStoryboardSegue {
+    func selection() -> AddEventViewController.Segue? {
+        if let identifier = self.identifier {
+            return AddEventViewController.Segue(rawValue: identifier)
+        }
+        return nil
+    }
+}
+
+extension AddEventViewController { 
+
+    enum Segue: String, Printable, SegueProtocol {
+        case Close = "Close"
+
+        var kind: SegueKind? {
+            switch (self) {
+            case Close:
+                return SegueKind(rawValue: "unwind")
+            default:
+                preconditionFailure("Invalid value")
+                break
+            }
+        }
+
+        var destination: UIViewController.Type? {
+            switch (self) {
             default:
                 assertionFailure("Unknown destination")
                 return nil

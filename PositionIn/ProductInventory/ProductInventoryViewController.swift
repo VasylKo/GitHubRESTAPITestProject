@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ProductInventoryViewController: UIViewController {
+final class ProductInventoryViewController: UIViewController {
 
     @IBOutlet private weak var usernameLabel: UILabel!
     @IBOutlet private weak var avatarView: AvatarView!

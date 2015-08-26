@@ -14,6 +14,7 @@
 
 #import "XMPPProcess+Private.h"
 #import "XMPPAuthProcess.h"
+#import "XMPPRegisterProcess.h"
 
 static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
 
@@ -35,8 +36,6 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
     XMPPClientConfiguration *config = [XMPPClientConfiguration new];
     config.hostName = hostName;
     config.port = port;
-    config.userJid = @"ixmpp@beewellapp.com";
-    config.userpwd = @"1HateD0m2";
     return config;
 }
 @end
@@ -103,7 +102,6 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
 
     [self.xmppStream addDelegate:self.xmppDelegate delegateQueue:delegateQueue];
 
-    self.xmppStream.myJID = [XMPPJID jidWithString:configuration.userJid];
     self.xmppStream.hostName = configuration.hostName;
     self.xmppStream.hostPort = configuration.port;
     
@@ -114,9 +112,6 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
     self.xmppRoster = [[XMPPRoster alloc] initWithRosterStorage:[XMPPRosterMemoryStorage new]];
     [self.xmppRoster activate:self.xmppStream];
     [self.xmppRoster addDelegate:self.xmppDelegate delegateQueue:delegateQueue];
-
-    
-    [self.xmppReconect manualStart];
 }
 
 
@@ -159,39 +154,21 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
 
 #pragma mark - Processes -
 
-- (void)connect {
-    XMPPLogInfo(@"Connecting");
-    NSError *error = nil;
-    
-    if (![self.xmppStream connectWithTimeout:XMPPStreamTimeoutNone error:&error]) {
-        XMPPLogError(@"Error while connecting: %@", error);
-    }
-}
 
 - (nonnull XMPPProcess *)auth:(nonnull NSString *)jidString password:(nonnull  NSString *)password {
-    XMPPJID *jid = [XMPPJID jidWithString:jidString];
     XMPPAuthProcess *process = [[XMPPAuthProcess alloc] initWithStream:self.xmppStream queue:[XMPPProcess defaultProcessingQueue]];
+    XMPPJID *jid = [XMPPJID jidWithString:jidString];
     process.password = password;
     process.jid = jid;
     return process;
-    
 }
 
-- (void)registerJiD:(XMPPJID *)jid {
-    XMPPLogInfo(@"Registering JID: %@", jid.user);
-    NSError *error = nil;
-    NSString *passowrd = self.config.userpwd;
-    if(![self.xmppStream registerWithPassword:passowrd error:&error]) {
-        XMPPLogError(@"Error while registering: %@", error);
-    }
-}
-
-- (void)didAuth {
-    [self logPresense:self.xmppStream.myPresence];
-    XMPPPresence *presence = [XMPPPresence presence];
-    [presence addChild:[DDXMLNode elementWithName:@"show" stringValue:@"chat"]];
-    
-    [self.xmppStream sendElement:presence];
+- (nonnull XMPPProcess *)registerJid:(nonnull NSString *)jidString password:(nonnull  NSString *)password {
+    XMPPRegisterProcess *process = [[XMPPRegisterProcess alloc] initWithStream:self.xmppStream queue:[XMPPProcess defaultProcessingQueue]];
+    XMPPJID *jid = [XMPPJID jidWithString:jidString];
+    process.password = password;
+    process.jid = jid;
+    return process;
 }
 
 - (void)sendTestMessage {
@@ -202,17 +179,5 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
     [self.xmppStream sendElement:msg];
 }
 
-
-#pragma mark - Logs -
-
-- (void)logPresense:(XMPPPresence *)presence {
-    XMPPLogVerbose(@"Presense %@ %@ %@",[presence type], [presence status], [presence show]);
-    XMPPLogVerbose(@"%@",[presence XMLString]);
-}
-
-- (void)logMessage:(XMPPMessage *)msg {
-    XMPPLogVerbose(@"Message %@ %@ %@ %@",[msg type], [msg subject], [msg body], [msg thread]);
-    XMPPLogVerbose(@"%@",[msg XMLString]);
-}
 
 @end

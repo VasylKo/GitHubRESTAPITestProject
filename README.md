@@ -5,4 +5,4 @@
 
 1. carthage update
 2. pod install
-3. ipa build --no-archive --clean -s PositionIn
+3. xcodebuild -configuration "Release" -scheme "PositionIn" -workspace "PositionIn.xcworkspace" build 

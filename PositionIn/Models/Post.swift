@@ -10,21 +10,35 @@ import ObjectMapper
 import CleanroomLogger
 
 struct Post: CRUDObject {
-    private(set) var objectId: CRUDObjectId
+    var objectId: CRUDObjectId = CRUDObjectInvalidId
     var name: String?
     var text: String?
+    //"date": <datetime>,
+    var photos: [PhotoInfo]?
+    var likes: Int?
+    /*
+    "comments": {
+    data:[],
+    count: <number>
+    },
+    */
+    /*
+    "author": {
+    "id": <guid>,
+    "name": <string>,
+    "avatar": <string>
+    },
+    */
     var location: Location?
+
     
-    init(objectId: CRUDObjectId) {
+    init(objectId: CRUDObjectId = CRUDObjectInvalidId) {
         self.objectId = objectId
     }
     
     init?(_ map: Map) {
         mapping(map)
-        switch (objectId) {
-        case (.Some):
-            break
-        default:
+        if objectId == CRUDObjectInvalidId {
             Log.error?.message("Error while parsing object")
             Log.debug?.trace()
             Log.verbose?.value(self)
@@ -33,14 +47,24 @@ struct Post: CRUDObject {
     }
 
     mutating func mapping(map: Map) {
-        objectId <- map["id"]
+        objectId <- (map["id"], CRUDObjectIdTransform())
         name <- map["name"]
         text <- map["text"]
+        photos <- map["photos"]
+        likes <- map["likes"]
         location <- map["location"]
     }
     
     static func endpoint() -> String {
-        return "/v1.0/post"
+        return "/v1.0/posts"
+    }
+    
+    static func userPostsEndpoint(userId: CRUDObjectId) -> String {
+        return UserProfile.endpoint().stringByAppendingPathComponent("\(userId)/posts")
+    }
+    
+    static func communityPostsEndpoint(communityId: CRUDObjectId) -> String {
+        return Community.endpoint().stringByAppendingPathComponent("\(communityId)/posts")
     }
     
     static func allEndpoint(userId: CRUDObjectId) -> String {

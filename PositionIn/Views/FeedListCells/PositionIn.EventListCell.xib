@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="PositionIn.EventListCell" id="GnF-Pv-vLq" customClass="EventListCell" customModule="PositionIn" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="74"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="GnF-Pv-vLq" id="TFc-Vu-PWQ">
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="200" verticalHuggingPriority="200" translatesAutoresizingMaskIntoConstraints="NO" id="2Qd-Ow-tWX">
+                        <rect key="frame" x="2" y="2" width="69" height="69"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="2Qd-Ow-tWX" secondAttribute="height" multiplier="1:1" id="PQm-fX-z5F"/>
+                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="80" id="WB3-Uy-Dcz"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Wizard of the Coast" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4VF-n0-3AX">
+                        <rect key="frame" x="76" y="7" width="198" height="20"/>
+                        <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="270" text="0.09 miles" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0f6-m8-Qsa">
+                        <rect key="frame" x="76" y="54" width="198" height="17"/>
+                        <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                        <color key="textColor" red="0.70196078429999997" green="0.086274509799999996" blue="0.20784313730000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="260" verticalHuggingPriority="260" text="Edward Ryan" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JmL-oh-349">
+                        <rect key="frame" x="76" y="32" width="198" height="17"/>
+                        <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                        <color key="textColor" red="0.61176470589999998" green="0.61176470589999998" blue="0.61176470589999998" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="0f6-m8-Qsa" firstAttribute="leading" secondItem="JmL-oh-349" secondAttribute="leading" id="6EF-2p-gYe"/>
+                    <constraint firstItem="2Qd-Ow-tWX" firstAttribute="bottom" secondItem="0f6-m8-Qsa" secondAttribute="bottom" id="AZC-Hy-a2F"/>
+                    <constraint firstItem="0f6-m8-Qsa" firstAttribute="top" secondItem="JmL-oh-349" secondAttribute="bottom" constant="5" id="Hpz-PV-Adl"/>
+                    <constraint firstItem="4VF-n0-3AX" firstAttribute="trailing" secondItem="JmL-oh-349" secondAttribute="trailing" id="Upg-pp-f6L"/>
+                    <constraint firstItem="JmL-oh-349" firstAttribute="top" secondItem="4VF-n0-3AX" secondAttribute="bottom" constant="5" id="V1c-cQ-woW"/>
+                    <constraint firstItem="0f6-m8-Qsa" firstAttribute="trailing" secondItem="JmL-oh-349" secondAttribute="trailing" id="bd4-on-vxi"/>
+                    <constraint firstItem="2Qd-Ow-tWX" firstAttribute="top" secondItem="TFc-Vu-PWQ" secondAttribute="top" constant="2" id="ex0-lE-0Gv"/>
+                    <constraint firstAttribute="bottom" secondItem="2Qd-Ow-tWX" secondAttribute="bottom" constant="2" id="gOt-fW-GCx"/>
+                    <constraint firstItem="4VF-n0-3AX" firstAttribute="leading" secondItem="JmL-oh-349" secondAttribute="leading" id="i1t-yv-W5O"/>
+                    <constraint firstItem="2Qd-Ow-tWX" firstAttribute="top" secondItem="4VF-n0-3AX" secondAttribute="top" constant="-5" id="jCf-VP-GxF"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="4VF-n0-3AX" secondAttribute="trailing" constant="5" id="lhm-Fh-s2y"/>
+                    <constraint firstItem="4VF-n0-3AX" firstAttribute="leading" secondItem="2Qd-Ow-tWX" secondAttribute="trailing" constant="5" id="r6c-ik-d2E"/>
+                    <constraint firstItem="2Qd-Ow-tWX" firstAttribute="leading" secondItem="TFc-Vu-PWQ" secondAttribute="leading" constant="2" id="zKS-IW-jyf"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="dateLabel" destination="JmL-oh-349" id="6D6-X8-75Q"/>
+                <outlet property="infoLabel" destination="0f6-m8-Qsa" id="y7v-QQ-e0L"/>
+                <outlet property="productImage" destination="2Qd-Ow-tWX" id="zZc-Rk-OQd"/>
+                <outlet property="titleLabel" destination="4VF-n0-3AX" id="tyH-8V-KL1"/>
+            </connections>
+            <point key="canvasLocation" x="214" y="196"/>
+        </tableViewCell>
+    </objects>
+</document>

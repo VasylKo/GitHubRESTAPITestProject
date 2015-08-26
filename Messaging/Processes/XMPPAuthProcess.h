@@ -8,7 +8,6 @@
 
 #import "XMPPProcess+Private.h"
 
-
 @interface XMPPAuthProcess : XMPPProcess
 
 @property (nonatomic, copy) XMPPJID *jid;

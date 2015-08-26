@@ -14,116 +14,179 @@ import BrightFutures
 import CleanroomLogger
 
 extension APIService {
-        
-    func logout() -> Future<Void, NoError> {
-        return future {
-            self.sessionController.setAuth(AuthResponse.invalidAuth())
+    
+    //Returns current user id
+    func currentUserId() -> Future<CRUDObjectId, NSError> {
+        return sessionController.currentUserId()
+    }
+    
+    //Success if user is not guest
+    func isUserAuthorized() -> Future<UserProfile, NSError> {
+        return session().flatMap { _ in
+            return self.sessionController.isUserAuthorized()
+        }.flatMap { _ in
+            return self.updateCurrentProfileStatus()
         }
     }
     
-    func auth(#username: String, password: String) -> Future<AuthResponse, NSError> {
-        let (_, future): (Alamofire.Request, Future<AuthResponse, NSError>) = dataProvider.objectRequest(AuthRouter.Auth(api: self, username: username, password: password))
-        future.andThen { result in
+    // Success on existing session or after token refresh
+    func session() -> Future<Void ,NSError> {
+        return sessionController.session().recoverWith { _ in
+            return self.refreshToken().map { response in
+                return response.accessToken
+            }
+        }.map() { _ in
+            return ()
+        }
+    }
+    
+    // Logout from the current session
+    func logout() -> Future<Void, NoError> {
+        return sessionController.logout().onComplete { _ in
+            self.sendUserDidChangeNotification(nil)
+        }
+    }
+    
+    
+    //Login existing user
+    func login(#username: String, password: String) -> Future<UserProfile, NSError> {
+        return loginRequest(username: username, password: password).flatMap { _ in
+            return self.updateCurrentProfileStatus()
+        }
+    }
+    
+    //Register anonymous user
+    func register() -> Future<UserProfile, NSError> {
+        return registerRequest(username: nil, password: nil, info: nil).flatMap { _ in
+            return self.updateCurrentProfileStatus()
+        }
+    }
+    
+    //Register new user
+    func register(#username: String, password: String, firstName: String?, lastName: String?) -> Future<UserProfile, NSError> {
+        var info: [String: AnyObject] = [:]
+        if let firstName = firstName {
+            info ["firstName"] = firstName
+        }
+        if let lastName = lastName {
+            info ["lastName"] = lastName
+        }
+        return registerRequest(username: username, password: password, info: info).flatMap { _ in
+            return self.updateCurrentProfileStatus()
+        }
+    }
+    
+    //MARK: - Private members -
+    
+    
+    private func registerRequest(#username: String?, password: String?, info: [String: AnyObject]?) -> Future<AuthResponse, NSError> {
+        let urlRequest = AuthRouter.Register(api: self, username: username, password: password, profileInfo: info)
+        let (_, future): (Alamofire.Request, Future<AuthResponse, NSError>) = dataProvider.objectRequest(urlRequest)
+        return self.updateAuth(future)
+    }
+    
+    private func loginRequest(#username: String, password: String) -> Future<AuthResponse, NSError> {
+        let urlRequest = AuthRouter.Login(api: self, username: username, password: password)
+        let (_, future): (Alamofire.Request, Future<AuthResponse, NSError>) = dataProvider.objectRequest(urlRequest)
+        return self.updateAuth(future)
+    }
+    
+    private func refreshToken() -> Future<AuthResponse, NSError> {
+        return sessionController.currentRefreshToken().flatMap { (token: AuthResponse.Token) -> Future<AuthResponse, NSError> in
+            let urlRequest = AuthRouter.Refresh(api: self, token: token)
+            let (_, future): (Alamofire.Request, Future<AuthResponse, NSError>) = self.dataProvider.objectRequest(urlRequest)
+            return self.updateAuth(future)
+        }
+    }
+    
+    private func updateCurrentProfileStatus() -> Future<UserProfile, NSError> {
+        return getMyProfile().andThen { result in
+            if let profile = result.value {
+                self.sessionController.updateCurrentStatus(profile)
+                self.sendUserDidChangeNotification(profile)
+            }
+        }
+    }
+    
+    private func updateAuth(future: Future<AuthResponse, NSError>) -> Future<AuthResponse, NSError> {
+        return future.andThen { result in
             if let response = result.value {
                 self.sessionController.setAuth(response)
             }
         }
-        return future
     }
     
-    func createProfile(#username: String, password: String) -> Future<Void, NSError> {
-        let (request, future): (Alamofire.Request, Future<Void, NSError>) = dataProvider.jsonRequest(AuthRouter.Register(api: self, username: username, password: password), map: emptyResponseMapping())
-        request.validate(statusCode: [201])
-        return future    
+    private func sendUserDidChangeNotification(profile: UserProfile?) {
+        dispatch_async(dispatch_get_main_queue()) {
+            NSNotificationCenter.defaultCenter().postNotificationName(UserProfile.CurrentUserDidChangeNotification,
+                object: profile, userInfo: nil)
+        }
     }
-    
     
     private enum AuthRouter: URLRequestConvertible {
-        case Auth(api: APIService, username: String, password: String)
-        case Register(api: APIService, username: String, password: String)
+        
+        case Login(api: APIService, username: String, password: String)
+        case Register(api: APIService, username: String?, password: String?, profileInfo: [String: AnyObject]?)
+        case Refresh(api: APIService, token: String)
 
-        // MARK: URLRequestConvertible
+        // URLRequestConvertible
         var URLRequest: NSURLRequest {
-            let encoding: Alamofire.ParameterEncoding
             let url:  NSURL
-            let headers: [String : AnyObject]
-            let params: [String: AnyObject]
-            let method: Alamofire.Method = .POST
+            var encoding: Alamofire.ParameterEncoding = .JSON
+            var method: Alamofire.Method = .POST
+            var headers: [String : AnyObject] = [ "Content-Type" : "application/json"]
+            var params: [String: AnyObject] = [:]
 
             switch self {
-            case .Auth(let api, let username, let password):
+            case .Refresh(let api, let token):
+                url = api.https("/v1.0/users/token")
+                method = .GET
                 encoding = .URL
-                url = api.http("/oauth/token")
-                params = [
-                    "scope" : "read write",
-                    "grant_type" : "password",
-                    "username" : username,
-                    "password" : password,
-                ]
-                let clientId = "11111111111111111111111111111111"
-                let clientSecret = "22222222222222222222222222222222"
-                let credentialData = "\(clientId):\(clientSecret)".dataUsingEncoding(NSUTF8StringEncoding)!
-                let base64Credentials = credentialData.base64EncodedStringWithOptions(nil)
-                headers = [
-                    "Authorization": "Basic \(base64Credentials)",
-                    "Accept" : "application/json",
-                ]
-            case .Register(let api, let username, let password):
-                encoding = .JSON
-                url = api.http("/v1.0/user")
                 headers = [:]
+                params = ["token" : token]
+            case .Login(let api, let username, let password):
+                url = api.https("/v1.0/users/login")
                 params = [
                     "email" : username,
                     "password" : password,
-                ]                
+                    "device" : deviceInfo(),
+                ]
+            case .Register(let api,  let username, let password, let profile):
+                url = api.https("/v1.0/users/register")
+                method = .POST
+                encoding = .JSON
+                headers = [ "Content-Type" : "application/json"]
+                params = [
+                    "device" : deviceInfo(),
+                ]
+                if let username = username {
+                    params["email"] = username
+                }
+                if let password = password {
+                    params["password"] = password
+                }
+                if let profile = profile {
+                    params["profile"] = profile
+                }
             }
+            
             let request = NSMutableURLRequest(URL: url)
             request.HTTPMethod = method.rawValue
             request.allHTTPHeaderFields = headers
             
             return encoding.encode(request, parameters: params).0
         }
+        
+        private func deviceInfo() -> [String : AnyObject] {
+            let device = UIDevice.currentDevice()
+            return [
+                "make" : device.localizedModel,
+                "model" : "\(device.systemName) \(device.systemVersion)",
+                "uuid" : device.identifierForVendor.UUIDString,
+            ]
+        }
     }
     
-    struct AuthResponse: Mappable, DebugPrintable {
-        typealias Token = String!
-        private(set) var accessToken: Token
-        private(set) var refreshToken: Token
-        private(set) var expires: Int!
-        
-        init?(_ map: Map) {
-            mapping(map)
-            switch (accessToken,refreshToken,expires) {
-            case (.Some, .Some, .Some):
-                break
-            default:
-                Log.error?.message("Error while parsing object")
-                Log.debug?.trace()
-                Log.verbose?.value(self)
-                return nil
-            }
-        }
-        
-        private init(accessToken: Token, refreshToken: Token, expires: Int) {
-            self.accessToken = accessToken
-            self.refreshToken = refreshToken
-            self.expires = expires
-        }
-        
-        mutating func mapping(map: Map) {
-            accessToken <- map["access_token"]
-            refreshToken <- map["refresh_token"]
-            expires <- map["expires_in"]
-        }
-        
-        var debugDescription: String {
-            return "Access:\(accessToken), Refresh: \(refreshToken), Expires: \(expires)"
-        }
-        
-        static func invalidAuth() -> AuthResponse {
-            return  AuthResponse(accessToken: "",refreshToken: "",expires: -1)
-        }
-    }
 }
 
 

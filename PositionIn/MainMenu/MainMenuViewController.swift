@@ -10,13 +10,13 @@ import UIKit
 import PosInCore
 import CleanroomLogger
 
-class MainMenuViewController: UIViewController {
+final class MainMenuViewController: UIViewController {
 
-    @IBOutlet weak var tableView: TableView!
+    @IBOutlet private weak var tableView: TableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        dataSource.items = defaultMainMenuItems()
+        dataSource.items = menuItemsForUser(nil)
         dataSource.configureTable(tableView)
         subscribeToNotifications()
     }
@@ -26,24 +26,36 @@ class MainMenuViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    private func menuItemsForUser(user: UserProfile?) -> [MainMenuItem] {
+        
+        let loginItem = MainMenuItem(title: NSLocalizedString("Login", comment: "Main Menu: Login"), imageName: "MainMenuPeople", action: .Login)
+        let firstItem: MainMenuItem =  user.map { user in
+            if user.guest == true {
+                return loginItem
+            }
+            let title: String =  user.firstName ?? NSLocalizedString("Unknown", comment: "Main Menu: Unnamed user")
+            let image = user.avatar?.absoluteString ?? ""
+            return MainMenuItem(title: title, imageName: image, action: .UserProfile)
+        } ?? loginItem
+
+        return [firstItem] + defaultMainMenuItems()
+    }
     
     private func defaultMainMenuItems() -> [MainMenuItem] {
         //TODO: refactor
         return [
-            MainMenuItem(title: "Username", imageName: "https://pbs.twimg.com/profile_images/3255786215/509fd5bc902d71141990920bf207edea.jpeg"),
             MainMenuItem(title: NSLocalizedString("For You", comment: "Main Menu: For You"), imageName: "MainMenuForYou", action: .ForYou),
             MainMenuItem(title: NSLocalizedString("New", comment: "Main Menu: new"), imageName: "MainMenuNew", action: .New),
             MainMenuItem(title: NSLocalizedString("Messages", comment: "Main Menu: Messages"), imageName: "MainMenuMessages", action: .Messages),
-            MainMenuItem(title: NSLocalizedString("Filters", comment: "Main Menu: Filters"), imageName: "MainMenuFilters"),
-            MainMenuItem(title: NSLocalizedString("Categories", comment: "Main Menu: Categories"), imageName: "MainMenuCategories"),
-            MainMenuItem(title: NSLocalizedString("Community", comment: "Main Menu: Community"), imageName: "MainMenuCommunity"),
+            MainMenuItem(title: NSLocalizedString("Filters", comment: "Main Menu: Filters"), imageName: "MainMenuFilters", action: .Filters),
+            MainMenuItem(title: NSLocalizedString("Community", comment: "Main Menu: Community"), imageName: "MainMenuCommunity", action: .Community),
+            MainMenuItem(title: NSLocalizedString("People", comment: "Main Menu: People"), imageName: "MainMenuPeople"),
             MainMenuItem(title: NSLocalizedString("Wallet", comment: "Main Menu: Wallet"), imageName: "MainMenuWallet"),
-            MainMenuItem(title: NSLocalizedString("User Profile", comment: "Main Menu: User Profile"), imageName: "MainMenuUserProfile"),
-            MainMenuItem(title: NSLocalizedString("Settings", comment: "Main Menu: Settings"), imageName: "MainMenuSettings"),
+            MainMenuItem(title: NSLocalizedString("Settings", comment: "Main Menu: Settings"), imageName: "MainMenuSettings", action: .Settings),
         ]
     }
     
-    private func actionForMode(browseMode: BrowseViewController.BrowseMode) -> SidebarViewController.Action? {
+    private func actionForMode(browseMode: BrowseModeViewController.BrowseMode) -> SidebarViewController.Action? {
         switch browseMode {
         case .ForYou:
             return .ForYou
@@ -53,7 +65,7 @@ class MainMenuViewController: UIViewController {
     }
     
     private func subscribeToNotifications(){
-        let block: NSNotification! -> Void = { [weak self] notification in
+        let browseModeBlock: NSNotification! -> Void = { [weak self] notification in
             if  let menuController = self,
                 let browseController = notification.object as? BrowseViewController,
                 let action = menuController.actionForMode(browseController.browseMode) {
@@ -68,17 +80,36 @@ class MainMenuViewController: UIViewController {
         }
 
         browseModeUpdateObserver = NSNotificationCenter.defaultCenter().addObserverForName(
-            BrowseViewController.BrowseModeDidchangeNotification,
+            BrowseModeViewController.BrowseModeDidchangeNotification,
             object: nil,
             queue: nil,
-            usingBlock: block
+            usingBlock: browseModeBlock
         )
+        
+        let userChangeBlock: NSNotification! -> Void = { [weak self] notification in
+            let newProfile = notification.object as? UserProfile
+            dispatch_async(dispatch_get_main_queue()) {
+                if let menuController = self {
+                    menuController.dataSource.items = menuController.menuItemsForUser(newProfile)
+                    menuController.tableView.reloadData()
+                }
+            }
+        }
+        
+        userDidChangeNotification = NSNotificationCenter.defaultCenter().addObserverForName(
+            UserProfile.CurrentUserDidChangeNotification,
+            object: nil,
+            queue: nil,
+            usingBlock: userChangeBlock)
     }
     
+    
     private var browseModeUpdateObserver: NSObjectProtocol!
+    private var userDidChangeNotification: NSObjectProtocol!
     
     deinit {
         NSNotificationCenter.defaultCenter().removeObserver(browseModeUpdateObserver)
+        NSNotificationCenter.defaultCenter().removeObserver(userDidChangeNotification)
     }
     
     
@@ -106,29 +137,37 @@ class MainMenuViewController: UIViewController {
 
         var items: [MainMenuItem] = []
         
+        private func itemForIndexPath(indexPath: NSIndexPath) -> MainMenuItem {
+            return items[indexPath.row]
+        }
+        
         @objc override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
             return items.count
         }
         
         @objc override func tableView(tableView: UITableView, reuseIdentifierForIndexPath indexPath: NSIndexPath) -> String {
-            if indexPath.row == 0 {
+            switch itemForIndexPath(indexPath).action {
+            case .Login:
+                return MainMenuLoginCell.reuseId()
+            case .UserProfile:
                 return  MainMenuUserCell.reuseId()
+            default:
+                return MainMenuCell.reuseId()
             }
-            return MainMenuCell.reuseId()
         }
 
          override func tableView(tableView: UITableView, modelForIndexPath indexPath: NSIndexPath) -> TableViewCellModel {
-            let item = items[indexPath.row]
+            let item = itemForIndexPath(indexPath)
             let model = TableViewCellImageTextModel(title: item.title, imageName: item.image)
             return model
         }
      
         override func nibCellsId() -> [String] {
-            return [MainMenuCell.reuseId(), MainMenuUserCell.reuseId()]
+            return [MainMenuCell.reuseId(), MainMenuUserCell.reuseId(), MainMenuLoginCell.reuseId()]
         }
         
         func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-            let item = items[indexPath.row]
+            let item = itemForIndexPath(indexPath)
             Log.debug?.message("Select menu item: \(item.title)")
             parentViewController?.sideBarController?.executeAction(item.action)
         }
