@@ -115,7 +115,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
-                                                    <segue destination="zd3-fl-Vea" kind="show" id="Y6r-oV-QZR"/>
+                                                    <segue destination="zd3-fl-Vea" kind="show" id="SCq-Vd-4cR"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -272,7 +272,7 @@
                                                     </mask>
                                                 </variation>
                                                 <connections>
-                                                    <segue destination="pfT-Kp-HW4" kind="show" id="rkQ-CI-toi"/>
+                                                    <action selector="didTapSignupButton:" destination="zd3-fl-Vea" eventType="touchUpInside" id="FBf-ne-27g"/>
                                                 </connections>
                                             </button>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Dk8-oL-kIO">
@@ -384,6 +384,7 @@
                         <outlet property="emailTextField" destination="Dk8-oL-kIO" id="nVA-dK-0UW"/>
                         <outlet property="scrollView" destination="yvy-Oo-AWn" id="rFh-k9-MSt"/>
                         <outlet property="signupButton" destination="t6o-k1-Alw" id="Ack-F3-nQ9"/>
+                        <segue destination="pfT-Kp-HW4" kind="show" identifier="SignUpSegue" id="h5R-3o-1r8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MJB-Ax-fPF" userLabel="First Responder" sceneMemberID="firstResponder"/>

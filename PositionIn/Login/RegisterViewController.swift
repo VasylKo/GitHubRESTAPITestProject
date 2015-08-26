@@ -13,8 +13,14 @@ import CleanroomLogger
 final class RegisterViewController: BaseLoginViewController {
 
     @IBAction func didTapSignupButton(sender: AnyObject) {
-        //TODO: add validation
-
+        
+        let username = emailTextField.text
+        if let error = EmailTextValidator.validate(string: username) {
+            let  alert = UIAlertView(title: "Errro", message: error.localizedDescription, delegate: nil, cancelButtonTitle: "OK")
+            alert.show()
+            return
+        }
+        performSegue(RegisterViewController.Segue.SignUpSegue)
     }
 
     
@@ -24,6 +30,4 @@ final class RegisterViewController: BaseLoginViewController {
     
     @IBOutlet private weak var signupButton: UIButton!
     @IBOutlet private weak var emailTextField: UITextField!
-    @IBOutlet private weak var passwordTextField: UITextField!
-    @IBOutlet private weak var usernameTextField: UITextField!
 }
