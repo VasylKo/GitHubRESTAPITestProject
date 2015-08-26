@@ -2459,6 +2459,7 @@
 					};
 					E64DC3491B4E53C90011D37C = {
 						CreatedOnToolsVersion = 6.4;
+						DevelopmentTeam = WVE53RRC7C;
 					};
 					E64DC35E1B4E53CA0011D37C = {
 						CreatedOnToolsVersion = 6.4;
@@ -2472,6 +2473,7 @@
 					};
 					E6E2FE871B66F61300880F3C = {
 						CreatedOnToolsVersion = 6.4;
+						DevelopmentTeam = WVE53RRC7C;
 					};
 					E6E2FE911B66F61300880F3C = {
 						CreatedOnToolsVersion = 6.4;
@@ -3068,6 +3070,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Media Applications ltd";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Media Applications ltd";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -3213,6 +3216,7 @@
 				CLANG_WARN_OBJC_EXPLICIT_OWNERSHIP_TYPE = YES;
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_REPEATED_USE_OF_WEAK = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -3256,7 +3260,8 @@
 				CLANG_WARN_OBJC_EXPLICIT_OWNERSHIP_TYPE = YES;
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_REPEATED_USE_OF_WEAK = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
