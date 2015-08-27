@@ -46,8 +46,8 @@ final class UserProfile: CRUDObject {
         lastName <- map["lastName"]
         userDescription <- map["description"]
         phone <- map["phone"]
-        avatar <- (map["avatar"], URLTransform())
-        backgroundImage <- (map["background"], URLTransform())
+        avatar <- (map["avatar"], AmazonURLTransform())
+        backgroundImage <- (map["background"], AmazonURLTransform())
         location <- map["location"]
         guest <- map["guest"]
     }

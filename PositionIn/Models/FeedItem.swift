@@ -32,7 +32,7 @@ struct FeedItem: CRUDObject {
         objectId <- (map["id"], CRUDObjectIdTransform())
         date <- (map["date"], APIDateTransform())
         text <- map["text"]
-        image <- (map["image"], URLTransform())
+        image <- (map["image"], AmazonURLTransform())
         type <- (map["type"], EnumTransform())
         location <- map["location"]
 
