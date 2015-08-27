@@ -38,6 +38,7 @@ Version.h
 
 *.app
 *.app.zip
+*.dsym.zip
 
 fastlane/screenshots/*
 fastlane/report.xml
