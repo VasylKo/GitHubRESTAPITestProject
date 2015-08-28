@@ -12,6 +12,12 @@ import CleanroomLogger
 
 final class RegisterInfoViewController: BaseLoginViewController {
     
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        emailTextField.text = initialEmail
+    }
+    
     @IBAction func didTapSignupButton(sender: AnyObject) {
        
         let username = emailTextField.text
@@ -69,4 +75,6 @@ final class RegisterInfoViewController: BaseLoginViewController {
     
     @IBOutlet private weak var firstnameTextField: UITextField!
     @IBOutlet private weak var lastnameTextField: UITextField!
+    
+    var initialEmail: String?
 }

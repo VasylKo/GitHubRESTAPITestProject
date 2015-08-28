@@ -16,13 +16,21 @@ final class RegisterViewController: BaseLoginViewController {
         
         let username = emailTextField.text
         if let error = EmailTextValidator.validate(string: username) {
-            let  alert = UIAlertView(title: "Errro", message: error.localizedDescription, delegate: nil, cancelButtonTitle: "OK")
+            let  alert = UIAlertView(title: "Error", message: error.localizedDescription, delegate: nil, cancelButtonTitle: "OK")
             alert.show()
             return
         }
         performSegue(RegisterViewController.Segue.SignUpSegue)
     }
 
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue == RegisterViewController.Segue.SignUpSegue {
+            if let controller = segue.destinationViewController as? RegisterInfoViewController {
+                controller.initialEmail = emailTextField.text
+            }
+        }
+    }
     
     override func keyboardTargetView() -> UIView? {
         return signupButton
