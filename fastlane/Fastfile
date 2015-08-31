@@ -54,7 +54,7 @@ platform :ios do
   lane :beta do
     snapshot
     s3
-    puts lane_context[SharedValues::S3_IPA_OUTPUT_PATH, lane_context[SharedValues::S3_PLIST_OUTPUT_PATH, lane_context[SharedValues::, lane_context[SharedValues::S3_HTML_OUTPUT_PATH,  lane_context[SharedValues::S3_VERSION_OUTPUT_PATH
+    puts(lane_context[SharedValues::S3_IPA_OUTPUT_PATH], lane_context[SharedValues::S3_PLIST_OUTPUT_PATH], lane_context[SharedValues::S3_DSYM_OUTPUT_PATH], lane_context[SharedValues::S3_HTML_OUTPUT_PATH],  lane_context[SharedValues::S3_VERSION_OUTPUT_PATH])
     # sigh
     # deliver(beta: true)
 
