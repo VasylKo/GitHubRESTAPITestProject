@@ -139,7 +139,15 @@ protocol BrowseActionConsumer: class {
     //MARK: - BrowseActionConsumer: Browse actions -
     
     func browseController(controller: BrowseActionProducer, didSelectItem objectId: CRUDObjectId, type itemType:FeedItem.ItemType) {
-        Log.debug?.message("Did select \(itemType) \(objectId)")
+        switch itemType {
+        case .Item:
+            let controller =  Storyboards.Main.instantiateProductDetailsViewControllerId()
+            controller.objectId = objectId
+            navigationController?.pushViewController(controller, animated: true)
+        default:
+            Log.debug?.message("Did select \(itemType) \(objectId)")
+            
+        }
     }
 
     //MARK: - Search -

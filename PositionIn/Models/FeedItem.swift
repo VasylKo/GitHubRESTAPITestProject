@@ -12,6 +12,7 @@ import CleanroomLogger
 struct FeedItem: CRUDObject {
     var objectId: CRUDObjectId = CRUDObjectInvalidId
     var name: String?
+    var price: Int?
     var text: String?
     var details: String?
     var date: NSDate?
@@ -43,6 +44,7 @@ struct FeedItem: CRUDObject {
         author <- map["author"]
         community <- map["community"]
         name <- map["name"]
+        price <- map["price"]
     }
     
     var description: String {

@@ -29,7 +29,7 @@ final class ProductListCell: TableViewCell {
         headerLabel.text = m!.title
         detailsLabel.text = m!.details
         infoLabel.text =  m!.info
-        priceLabel.text = "$\(m!.price)"
+        priceLabel.text = "$\(m?.price ?? 0)"
     }
     
     override func prepareForReuse() {

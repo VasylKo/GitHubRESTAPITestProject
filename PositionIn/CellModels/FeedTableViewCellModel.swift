@@ -35,9 +35,9 @@ class CompactFeedTableCellModel: FeedTableCellModel {
 }
 
 class ComapctPriceFeedTableCellModel : CompactFeedTableCellModel {
-    let price: Double?
+    let price: Int?
     init(item: FeedItem, title: String?, details: String?, info: String?, imageURL url: NSURL?, price: Double?) {
-        self.price = price
+        self.price = item.price
         super.init(item: item, title: title, details: details, info: info, imageURL: url)
     }
 }

@@ -44,6 +44,10 @@ struct Storyboards {
             return self.storyboard.instantiateViewControllerWithIdentifier("BrowseListViewController") as! BrowseListViewController
         }
 
+        static func instantiateProductDetailsViewControllerId() -> ProductDetailsViewController! {
+            return self.storyboard.instantiateViewControllerWithIdentifier("ProductDetailsViewControllerId") as! ProductDetailsViewController
+        }
+
         static func instantiateMapViewController() -> BrowseViewController! {
             return self.storyboard.instantiateViewControllerWithIdentifier("MapViewController") as! BrowseViewController
         }
