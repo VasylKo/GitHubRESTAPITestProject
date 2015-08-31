@@ -52,6 +52,7 @@ struct ShopItemProduct: CRUDObject {
     }
     
     mutating func mapping(map: Map) {
+        
         objectId <- (map["id"], CRUDObjectIdTransform())
         name <- map["name"]
         descriptionProd <- map["description"]

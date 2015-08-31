@@ -48,6 +48,7 @@
 		2429FFAE1B8E12050061B4E0 /* EmailTextValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2429FFAD1B8E12050061B4E0 /* EmailTextValidator.swift */; };
 		2431EBDC1B945F5A009FB158 /* Promotion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2431EBDB1B945F5A009FB158 /* Promotion.swift */; };
 		2431EBDE1B947442009FB158 /* ShopItemProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2431EBDD1B947442009FB158 /* ShopItemProduct.swift */; };
+		2431EBE01B94C1DC009FB158 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2431EBDF1B94C1DC009FB158 /* Event.swift */; };
 		243D0AA81B8AF90800B0E220 /* RegisterInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243D0AA71B8AF90800B0E220 /* RegisterInfoViewController.swift */; };
 		24D850421B878730008CAE82 /* LoginSignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D850411B878730008CAE82 /* LoginSignupViewController.swift */; };
 		451B04D684C5CB71F3D6581C /* Pods_PositionIn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7CE5A186774ECEB07E96F58 /* Pods_PositionIn.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
@@ -363,6 +364,7 @@
 		2429FFAD1B8E12050061B4E0 /* EmailTextValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EmailTextValidator.swift; path = Utils/EmailTextValidator.swift; sourceTree = "<group>"; };
 		2431EBDB1B945F5A009FB158 /* Promotion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Promotion.swift; sourceTree = "<group>"; };
 		2431EBDD1B947442009FB158 /* ShopItemProduct.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShopItemProduct.swift; sourceTree = "<group>"; };
+		2431EBDF1B94C1DC009FB158 /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		243D0AA71B8AF90800B0E220 /* RegisterInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterInfoViewController.swift; sourceTree = "<group>"; };
 		24D850411B878730008CAE82 /* LoginSignupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginSignupViewController.swift; sourceTree = "<group>"; };
 		46EE2AF3395401D4D26EB34F /* Pods_PosInCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PosInCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1127,6 +1129,7 @@
 			isa = PBXGroup;
 			children = (
 				E60EBF751B8EF9B50014B6ED /* DataTransforms.swift */,
+				2431EBDF1B94C1DC009FB158 /* Event.swift */,
 				E6A869F11B60FF0500797D16 /* CRUDObject.swift */,
 				E61B20EE1B813C8C005EAB2C /* Community.swift */,
 				2431EBDD1B947442009FB158 /* ShopItemProduct.swift */,
@@ -2739,6 +2742,7 @@
 				E68B52031B873687006B980C /* FeedItemCellModelFactory.swift in Sources */,
 				E6829B041B5E6CF800FB1E1D /* RoundButton.swift in Sources */,
 				E6DADBA01B8C5907009A5694 /* ItemCategory.swift in Sources */,
+				2431EBE01B94C1DC009FB158 /* Event.swift in Sources */,
 				E68B52061B8736F4006B980C /* FilterViewController.swift in Sources */,
 				E62B16F61B5C1AA700D446BC /* MainMenuUserCell.swift in Sources */,
 				E64DC3501B4E53C90011D37C /* AppDelegate.swift in Sources */,
