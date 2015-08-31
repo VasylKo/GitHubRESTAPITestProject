@@ -53,7 +53,7 @@ struct SearchFilter: Mappable {
     init() {
         startPrice = 1
         endPrice = 1000
-        radius = 5
+        radius = 99
         itemTypes = [.Unknown]
     }
     

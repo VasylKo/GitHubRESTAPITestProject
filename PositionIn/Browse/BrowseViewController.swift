@@ -49,11 +49,3 @@ final class BrowseViewController: BrowseModeViewController {
 
     
 }
-
-
-//MARK: Browse actions
-//extension BrowseViewController: BrowseActionConsumer {
-//    func browseController(controller: BrowseActionProducer, didSelectPost post: Post) {
-//        performSegue(BrowseViewController.Segue.ShowProductDetails)
-//    }
-//}

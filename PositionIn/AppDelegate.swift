@@ -66,7 +66,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             if let sidebarViewController = self.window?.rootViewController as? SidebarViewController {
                 sidebarViewController.executeAction(defaultAction)
             }
-        }
+        }                
         
         return true
                 

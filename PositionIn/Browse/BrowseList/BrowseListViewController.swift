@@ -17,49 +17,38 @@ final class BrowseListViewController: UIViewController, BrowseActionProducer {
     override func viewDidLoad() {
         super.viewDidLoad()
         dataSource.configureTable(tableView)
-        filter = .ShowAll
+        getFeedItems(filter)
+        
     }
     
-    //        APIService.getFeed(APIService.Page()).onSuccess{ [unowned self] (response: CollectionResponse<FeedItem>) -> () in
-    //            self.items = response.items
-    //        }
-
+    var filter = SearchFilter.currentFilter
     
-    var filter: Filter = .ShowAll {
+    var selectedItemType: FeedItem.ItemType = .Unknown {
         didSet {
-            let filteredItems: [FeedItem]
-            
-            switch filter {
-            case .ShowAll:
-                filteredItems = items
-            case .ShowProducts:
-                filteredItems = items.filter { $0.type == FeedItem.ItemType.Item }
-            case .ShowEvents:
-                filteredItems =  items.filter { $0.type == FeedItem.ItemType.Event }
-            case .ShowPromotions:
-                filteredItems = items.filter { $0.type == FeedItem.ItemType.Promotion }
-            case .ShowPosts:
-                filteredItems = items.filter { $0.type == FeedItem.ItemType.Post }
-            }
-            
-            dataSource.setItems(filteredItems)
-            tableView.reloadData()
-            tableView.setContentOffset(CGPointZero, animated: false)
+            var f = filter
+            f.itemTypes = [selectedItemType]
+            getFeedItems(f)
         }
     }
     
-    enum Filter: Int {
-        case ShowAll = 0
-        case ShowProducts
-        case ShowEvents
-        case ShowPromotions
-        case ShowPosts
+    private func getFeedItems(searchFilter: SearchFilter, page: APIService.Page = APIService.Page()) {
+        api().getFeed(searchFilter, page: page).onFailure { error in
+            Log.error?.value(error)
+        }.onSuccess { [weak self] response in
+            Log.debug?.value(response.items)
+            if let strongSelf = self,
+               let itemTypes = searchFilter.itemTypes
+               where contains(itemTypes, strongSelf.selectedItemType) {
+                strongSelf.dataSource.setItems(response.items)
+                strongSelf.tableView.reloadData()
+                strongSelf.tableView.setContentOffset(CGPointZero, animated: false)
+            }            
+        }
     }
-
     
     @IBAction func displayModeSegmentedControlChanged(sender: UISegmentedControl) {
-        if let newFilterValue = Filter(rawValue: sender.selectedSegmentIndex) {
-            filter = newFilterValue
+        if let newFilterValue = FeedItem.ItemType(rawValue: sender.selectedSegmentIndex) {
+            selectedItemType = newFilterValue
         }
     }
     
@@ -70,7 +59,6 @@ final class BrowseListViewController: UIViewController, BrowseActionProducer {
         }()
 
     weak var actionConsumer: BrowseActionConsumer?
-    var items: [FeedItem] = []
     
     @IBOutlet private weak var tableView: UITableView!
     @IBOutlet private weak var displayModeSegmentedControl: UISegmentedControl!
@@ -118,9 +106,9 @@ extension BrowseListViewController {
         func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
             tableView.deselectRowAtIndexPath(indexPath, animated: true)
             if let model = self.tableView(tableView, modelForIndexPath: indexPath) as? FeedTableCellModel,
+               let actionProducer = parentViewController as? BrowseActionProducer,
                let actionConsumer = self.actionConsumer {
-                Log.debug?.message("Did select \(model.itemType) \(model.objectID)")
-                //actionConsumer.browseController(browseController, didSelectPost: Post(objectId: CRUDObjectInvalidId))
+                actionConsumer.browseController(actionProducer, didSelectItem: model.objectID, type: model.itemType)
             }
         }
         

@@ -15,7 +15,7 @@ protocol BrowseActionProducer {
 }
 
 protocol BrowseActionConsumer: class {
-    func browseController(controller: BrowseActionProducer, didSelectPost post: Post)
+    func browseController(controller: BrowseActionProducer, didSelectItem objectId: CRUDObjectId, type itemType:FeedItem.ItemType)
 }
 
 
@@ -138,7 +138,8 @@ protocol BrowseActionConsumer: class {
     
     //MARK: - BrowseActionConsumer: Browse actions -
     
-    func browseController(controller: BrowseActionProducer, didSelectPost post: Post) {
+    func browseController(controller: BrowseActionProducer, didSelectItem objectId: CRUDObjectId, type itemType:FeedItem.ItemType) {
+        Log.debug?.message("Did select \(itemType) \(objectId)")
     }
 
     //MARK: - Search -
