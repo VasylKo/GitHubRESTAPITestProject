@@ -76,6 +76,54 @@ struct APIService {
         return createObject(endpoint, object: object)
     }
     
+    //MARK: - Promotions -
+    
+    func getUserPromotions(userId: CRUDObjectId, page: Page) -> Future<CollectionResponse<Promotion>, NSError> {
+        let endpoint = Promotion.endpoint()
+        let params = page.query
+        return getObjectsCollection(endpoint, params: params)
+    }
+    
+    func createUserPromotion(promotion object: Promotion) -> Future<Promotion, NSError> {
+        return sessionController.currentUserId().flatMap {
+            (userId: CRUDObjectId) -> Future<Promotion, NSError> in
+            let endpoint = Promotion.endpoint()
+            return self.createObject(endpoint, object: object)
+        }
+    }
+    
+    func createCommunityPromotion(communityId: CRUDObjectId, promotion object: Promotion) -> Future<Promotion, NSError> {
+        let endpoint = Promotion.communityPromotionsEndpoint(communityId)
+        return createObject(endpoint, object: object)
+    }
+
+    
+    //MARK: - Products -
+    
+    func getUserProducts(userId: CRUDObjectId, page: Page) -> Future<CollectionResponse<ShopItemProduct>, NSError> {
+        let endpoint = ShopItemProduct.userProductsEndpoint(userId)
+        let params = page.query
+        return getObjectsCollection(endpoint, params: params)
+    }
+    
+    func createUserProduct(product object: ShopItemProduct) -> Future<ShopItemProduct, NSError> {
+        return sessionController.currentUserId().flatMap {
+            (userId: CRUDObjectId) -> Future<ShopItemProduct, NSError> in
+            let endpoint = ShopItemProduct.userProductsEndpoint(userId)
+            return self.createObject(endpoint, object: object)
+        }
+    }
+    
+    func createCommunityProduct(communityId: CRUDObjectId, product object: ShopItemProduct) -> Future<ShopItemProduct, NSError> {
+        let endpoint = ShopItemProduct.communityProductsEndpoint(communityId)
+        return createObject(endpoint, object: object)
+    }
+
+    func getProduct(objectId: String) -> Future<ShopItemProduct, NSError> {
+        let endpoint = ShopItemProduct.endpoint(objectId)
+        return getObject(endpoint)
+    }
+    
     //MARK: - Community -
     
     func getCommunities(page: Page) -> Future<CollectionResponse<Community>,NSError> {

@@ -44,6 +44,10 @@ struct Storyboards {
             return self.storyboard.instantiateViewControllerWithIdentifier("BrowseListViewController") as! BrowseListViewController
         }
 
+        static func instantiateProductDetailsViewControllerId() -> ProductDetailsViewController! {
+            return self.storyboard.instantiateViewControllerWithIdentifier("ProductDetailsViewControllerId") as! ProductDetailsViewController
+        }
+
         static func instantiateMapViewController() -> BrowseViewController! {
             return self.storyboard.instantiateViewControllerWithIdentifier("MapViewController") as! BrowseViewController
         }
@@ -95,6 +99,10 @@ struct Storyboards {
 
         static func instantiateLoginViewController() -> LoginViewController! {
             return self.storyboard.instantiateViewControllerWithIdentifier("LoginViewController") as! LoginViewController
+        }
+
+        static func instantiateRegisterInfoViewController() -> RegisterInfoViewController! {
+            return self.storyboard.instantiateViewControllerWithIdentifier("RegisterInfoViewController") as! RegisterInfoViewController
         }
     }
 
@@ -527,6 +535,45 @@ extension LoginSignupViewController {
 }
 
 //MARK: - RegisterViewController
+extension UIStoryboardSegue {
+    func selection() -> RegisterViewController.Segue? {
+        if let identifier = self.identifier {
+            return RegisterViewController.Segue(rawValue: identifier)
+        }
+        return nil
+    }
+}
+
+extension RegisterViewController { 
+
+    enum Segue: String, Printable, SegueProtocol {
+        case SignUpSegue = "SignUpSegue"
+
+        var kind: SegueKind? {
+            switch (self) {
+            case SignUpSegue:
+                return SegueKind(rawValue: "show")
+            default:
+                preconditionFailure("Invalid value")
+                break
+            }
+        }
+
+        var destination: UIViewController.Type? {
+            switch (self) {
+            case SignUpSegue:
+                return RegisterInfoViewController.self
+            default:
+                assertionFailure("Unknown destination")
+                return nil
+            }
+        }
+
+        var identifier: String? { return self.description } 
+        var description: String { return self.rawValue }
+    }
+
+}
 
 //MARK: - RecoverPasswordViewController
 
@@ -570,6 +617,8 @@ extension LoginViewController {
     }
 
 }
+
+//MARK: - RegisterInfoViewController
 
 //MARK: - AddProductViewController
 extension UIStoryboardSegue {

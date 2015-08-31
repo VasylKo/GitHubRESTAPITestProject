@@ -17,7 +17,7 @@ final class BrowseListViewController: UIViewController, BrowseActionProducer {
     override func viewDidLoad() {
         super.viewDidLoad()
         dataSource.configureTable(tableView)
-        getFeedItems(filter)
+        selectedItemType = FeedItem.ItemType.Unknown
         
     }
     
@@ -42,6 +42,9 @@ final class BrowseListViewController: UIViewController, BrowseActionProducer {
             Log.error?.value(error)
         }.onSuccess { [weak self] response in
             Log.debug?.value(response.items)
+            Log.debug?.value(searchFilter.itemTypes)
+            
+            Log.debug?.value(self?.selectedItemType)
             if let strongSelf = self,
                let itemTypes = searchFilter.itemTypes
                where contains(itemTypes, strongSelf.selectedItemType) {

@@ -10,11 +10,13 @@ import UIKit
 import CleanroomLogger
 import XLForm
 
+import BrightFutures
 
 final class AddProductViewController: BaseAddItemViewController {
     private enum Tags : String {
         case Title = "Title"
         case Price = "Price"
+        case Description = "Description"
         case Category = "Category"
         case StartDate = "Start date"
         case EndDate = "End date"
@@ -32,7 +34,7 @@ final class AddProductViewController: BaseAddItemViewController {
         super.init(coder: aDecoder)
         self.initializeForm()
     }
-
+    
     func initializeForm() {
         let form = XLFormDescriptor(title: NSLocalizedString("New Product", comment: "New product: form caption"))
         
@@ -44,6 +46,12 @@ final class AddProductViewController: BaseAddItemViewController {
         titleRow.cellConfigAtConfigure["textField.placeholder"] = NSLocalizedString("Title", comment: "New product: title")
         titleRow.required = true
         descriptionSection.addFormRow(titleRow)
+        
+        //Description
+        let descriptionRow = XLFormRowDescriptor(tag: Tags.Description.rawValue, rowType: XLFormRowDescriptorTypeText)
+        descriptionRow.cellConfigAtConfigure["textField.placeholder"] = NSLocalizedString("Desription", comment: "New product: description")
+        descriptionRow.required = true
+        descriptionSection.addFormRow(descriptionRow)
         // Price
         let priceRow = XLFormRowDescriptor(tag: Tags.Price.rawValue, rowType: XLFormRowDescriptorTypeDecimal, title: NSLocalizedString("Price ($)", comment: "New product: price"))
         descriptionSection.addFormRow(priceRow)
@@ -57,7 +65,7 @@ final class AddProductViewController: BaseAddItemViewController {
         // Location
         let locationRow = locationRowDescriptor(Tags.Location.rawValue)
         infoSection.addFormRow(locationRow)
-
+        
         // Community
         let communityRow = communityRowDescriptor(Tags.Community.rawValue)
         infoSection.addFormRow(communityRow)
@@ -69,8 +77,8 @@ final class AddProductViewController: BaseAddItemViewController {
         //Photo row
         let photoRow = photoRowDescriptor(Tags.Photo.rawValue)
         photoSection.addFormRow(photoRow)
-
-
+        
+        
         //Dates section
         let datesSection = XLFormSectionDescriptor.formSectionWithTitle(NSLocalizedString("Pick-up Availability (Optional)", comment: "New product: dates section header"))
         form.addFormSection(datesSection)
@@ -86,7 +94,47 @@ final class AddProductViewController: BaseAddItemViewController {
         self.form = form
     }
     
-
-    //MARK: - Actions -
     
+    //MARK: - Actions -
+    override func didTapPost(sender: AnyObject) {
+        let validationErrors : Array<NSError> = self.formValidationErrors() as! Array<NSError>
+        if (validationErrors.count > 0){
+            self.showFormValidationError(validationErrors.first)
+            return
+        }
+        self.tableView.endEditing(true)
+        
+        let values = formValues()
+        Log.debug?.value(values)
+        
+        let community =  communityValue(values[Tags.Community.rawValue])
+        
+        if  let imageUpload = uploadAssets(values[Tags.Photo.rawValue]),
+            let getLocation = locationFromValue(values[Tags.Location.rawValue]) {
+                getLocation.zip(imageUpload).flatMap { (location: Location, urls: [NSURL]) -> Future<ShopItemProduct, NSError> in
+                    var product = ShopItemProduct()
+                    product.name = values[Tags.Title.rawValue] as? String
+                    product.category = 1
+                    product.price = values[Tags.Price.rawValue] as? Int
+                    product.descriptionProd = values[Tags.Description.rawValue] as? String
+                    product.deliveryMethod = 1
+                    product.location = location
+                    product.photos = urls.map { url in
+                        var info = PhotoInfo()
+                        info.url = url
+                        return info
+                    }
+                    if let communityId = community {
+                        return api().createCommunityProduct(communityId, product: product)
+                    } else {
+                        return api().createUserProduct(product: product)
+                    }
+                    }.onSuccess { [weak self] (product: ShopItemProduct) -> ()  in
+                        Log.debug?.value(product)
+                        self?.performSegue(AddProductViewController.Segue.Close)
+                    }.onFailure { error in
+                        Log.error?.value(error)
+                }
+        }
+    }
 }

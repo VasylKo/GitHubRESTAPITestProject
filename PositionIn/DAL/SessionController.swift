@@ -47,7 +47,7 @@ struct SessionController {
         return future { () -> Result<AuthResponse.Token, NSError> in
             if  let token = self.accessToken,
                 let expirationDate = self.expiresIn
-                where expirationDate.compare(NSDate()) == NSComparisonResult.OrderedDescending {
+                 {
                     return Result(value: token)
             }
             Log.warning?.trace()

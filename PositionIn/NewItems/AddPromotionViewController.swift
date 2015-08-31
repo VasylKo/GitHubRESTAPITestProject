@@ -10,6 +10,8 @@ import UIKit
 import XLForm
 import CleanroomLogger
 
+import BrightFutures
+
 final class AddPromotionViewController: BaseAddItemViewController {
 
     private enum Tags : String {
@@ -86,4 +88,50 @@ final class AddPromotionViewController: BaseAddItemViewController {
         self.form = form
     }
     
+    override func didTapPost(sender: AnyObject) {
+        let validationErrors : Array<NSError> = self.formValidationErrors() as! Array<NSError>
+        if (validationErrors.count > 0){
+            self.showFormValidationError(validationErrors.first)
+            return
+        }
+        self.tableView.endEditing(true)
+        
+        let values = formValues()
+        Log.debug?.value(values)
+        
+        let community =  communityValue(values[Tags.Community.rawValue])
+        
+        if  let imageUpload = uploadAssets(values[Tags.Photo.rawValue]),
+            let getLocation = locationFromValue(values[Tags.Location.rawValue]) {
+                getLocation.zip(imageUpload).flatMap { (location: Location, urls: [NSURL]) -> Future<Promotion, NSError> in
+                    var promotion = Promotion()
+                    promotion.name = values[Tags.Title.rawValue] as? String
+                    promotion.discount = values[Tags.Discount.rawValue] as? Float
+                    promotion.location = location
+                    promotion.endDate = values[Tags.EndDate.rawValue] as? NSDate
+                    promotion.startDate = values[Tags.StartDate.rawValue] as? NSDate
+                    if let shopId = NSUserDefaults.standardUserDefaults().valueForKey("shopId")  as? String {
+                        promotion.shopId = shopId
+                    }
+                    promotion.photos = urls.map { url in
+                        var info = PhotoInfo()
+                        info.url = url
+                        return info
+                    }
+                    if let communityId = community {
+                        return api().createCommunityPromotion(communityId, promotion: promotion)
+                    } else {
+                        return api().createUserPromotion(promotion: promotion)
+                    }
+                    }.onSuccess { [weak self] (promotion: Promotion) -> ()  in
+                        Log.debug?.value(promotion)
+                        self?.performSegue(AddPromotionViewController.Segue.Close)
+                    }.onFailure { error in
+                        Log.error?.value(error)
+                }
+                
+        }
+        
+    }
+
 }

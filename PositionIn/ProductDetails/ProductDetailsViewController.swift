@@ -20,8 +20,17 @@ final class ProductDetailsViewController: UIViewController {
         super.viewDidLoad()
         dataSource.items = productAcionItems()
         dataSource.configureTable(actionTableView)
+        reloadData()
     }
     
+    
+    private func reloadData() {
+        let page = APIService.Page()
+        api().getProduct(objectId!).onSuccess { [weak self] product in
+            self?.product = product
+        }
+
+    }
     
     private lazy var dataSource: ProductDetailsDataSource = {
         let dataSource = ProductDetailsDataSource()
@@ -44,6 +53,15 @@ final class ProductDetailsViewController: UIViewController {
         
     }
     
+    private var product:  ShopItemProduct? {
+        didSet{
+            headerLabel.text = product?.name
+            infoLabel.text = product?.descriptionProd
+            detailsLabel.text = "$\(product?.price ?? 123)"
+        }
+    }
+    
+    var objectId: CRUDObjectId?
     
     @IBOutlet private weak var actionTableView: UITableView!
     @IBOutlet private weak var productImageView: UIImageView!
@@ -69,6 +87,7 @@ extension ProductDetailsViewController {
             }
         }
     }
+    
     
     struct ProductActionItem {
         let title: String

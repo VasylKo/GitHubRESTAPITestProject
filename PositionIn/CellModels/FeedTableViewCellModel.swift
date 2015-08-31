@@ -2,7 +2,7 @@
 //  TableViewCellModels.swift
 //  PositionIn
 //
-//  Created by Xenia Chugunova on 8/21/15.
+//  Created by Alex Goncharov on 8/21/15.
 //  Copyright (c) 2015 Soluna Labs. All rights reserved.
 //
 
@@ -27,17 +27,17 @@ class CompactFeedTableCellModel: FeedTableCellModel {
     init(item: FeedItem, title: String?, details: String?, info: String?, imageURL url: NSURL?) {
         self.objectID = item.objectId
         self.itemType = item.type
-        self.title = title
+        self.title = item.name
         self.info = info
-        self.details = details
+        self.details = item.text
         self.imageURL = url
     }
 }
 
 class ComapctPriceFeedTableCellModel : CompactFeedTableCellModel {
-    let price: Double?
+    let price: Int?
     init(item: FeedItem, title: String?, details: String?, info: String?, imageURL url: NSURL?, price: Double?) {
-        self.price = price
+        self.price = item.price
         super.init(item: item, title: title, details: details, info: info, imageURL: url)
     }
 }

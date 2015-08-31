@@ -22,6 +22,14 @@ final class UserProfile: CRUDObject {
     var backgroundImage: NSURL?
     var location: Location?
     var guest: Bool =  false
+    var shops: [Dictionary<String, String>]? {
+        didSet {
+            if let shopId = shops?.first {
+                NSUserDefaults.standardUserDefaults().setValue(shopId["id"], forKey: "shopId")
+                NSUserDefaults.standardUserDefaults().synchronize()
+            }
+        }
+    }
         
     enum Gender {
         case Unknown
@@ -58,6 +66,7 @@ final class UserProfile: CRUDObject {
         backgroundImage <- (map["background"], AmazonURLTransform())
         location <- map["location"]
         guest <- map["guest"]
+        shops <- map["shops.data"]
     }
     
     static func endpoint() -> String {
