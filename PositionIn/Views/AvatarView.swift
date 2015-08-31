@@ -13,7 +13,7 @@ import Haneke
 class AvatarView: UIView {
     func setImageFromURL(url: NSURL) {
         layoutIfNeeded()
-        imageView.hnk_setImageFromURL(url)
+        imageView.hnk_setImageFromURL(url, placeholder: UIImage(named: "AvatarPlaceholder"))
     }
     
     func cancelSetImage() {
