@@ -16,6 +16,11 @@ import CleanroomLogger
 extension APIService {
     
     //Returns current user id
+    func currentUserId() -> CRUDObjectId? {
+        return sessionController.currentUserId()
+    }
+    
+    //Returns current user id
     func currentUserId() -> Future<CRUDObjectId, NSError> {
         return sessionController.currentUserId()
     }

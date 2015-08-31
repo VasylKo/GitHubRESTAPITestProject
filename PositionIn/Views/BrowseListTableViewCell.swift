@@ -38,4 +38,5 @@ final class BrowseListTableViewCell: TableViewCell, TableViewChildViewController
 }
 
 public struct BrowseListCellModel: ProfileCellModel {
+    let objectId: CRUDObjectId
 }

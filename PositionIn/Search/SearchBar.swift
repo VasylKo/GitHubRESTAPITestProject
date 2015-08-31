@@ -28,11 +28,11 @@ final class SearchBar: UISearchBar {
     
     private func commonInt() {
         placeholder = NSLocalizedString("Search", comment: "Search placeholder")
-        backgroundColor = UIScheme.searchbarActiveColor
-        backgroundImage = UIImage()
-        setSearchFieldBackgroundImage(UIImage(), forState: UIControlState.Normal)
+//        backgroundColor = UIScheme.searchbarActiveColor
+//        backgroundImage = UIImage()
+//        setSearchFieldBackgroundImage(UIImage(), forState: UIControlState.Normal)
         tintColor = UIColor.whiteColor()
-        layer.cornerRadius = 5        
+//        layer.cornerRadius = 5
     }
     
 }

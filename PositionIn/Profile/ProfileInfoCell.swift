@@ -17,6 +17,25 @@ final class ProfileInfoCell: TableViewCell {
         nameLabel.text = m!.name
         m!.avatar.map { self.avatarView.setImageFromURL($0) }
         m!.background.map { self.backImageView.hnk_setImageFromURL($0) }
+        updateButton(leftActionButton, forAction: m!.leftAction)
+        updateButton(rightActionButton, forAction: m!.rightAction)
+        actionDelegate = m!.actionDelegate
+    }
+    
+    @IBAction func actionTapped(sender: UIButton) {
+        if let action = UserProfileViewController.ProfileAction(rawValue: sender.tag) where action != .None {
+            actionDelegate?.shouldExecuteAction(action)
+        }
+    }
+    
+    private func updateButton(btn: UIButton, forAction action: UserProfileViewController.ProfileAction) {
+        btn.tag = action.rawValue
+        switch action {
+        case .None:
+            fallthrough
+        default:
+            btn.setImage(nil, forState: UIControlState.Normal)
+        }
     }
     
     override func prepareForReuse() {
@@ -24,15 +43,22 @@ final class ProfileInfoCell: TableViewCell {
         backImageView.hnk_cancelSetImage()
         avatarView.cancelSetImage()
     }
+    @IBOutlet weak var leftActionTapped: UIButton!
     
     @IBOutlet private weak var backImageView: UIImageView!
     @IBOutlet private weak var avatarView: AvatarView!
     @IBOutlet private weak var nameLabel: UILabel!
+    @IBOutlet private weak var leftActionButton: UIButton!
+    @IBOutlet private weak var rightActionButton: UIButton!
     
+    private weak var actionDelegate: UserProfileActionConsumer?
 }
 
 public struct ProfileInfoCellModel: ProfileCellModel {
     let name: String?
     let avatar: NSURL?
     let background: NSURL?
+    let leftAction: UserProfileViewController.ProfileAction
+    let rightAction: UserProfileViewController.ProfileAction
+    weak var actionDelegate: UserProfileActionConsumer?
 }
