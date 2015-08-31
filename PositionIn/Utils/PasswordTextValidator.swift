@@ -12,7 +12,7 @@ let  kValidationErrorCodePassword = 602
 
 struct PasswordTextValidator {
     static func validate(#string: String) -> NSError? {
-        let passwordRegex: String = "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,32}) "
+        let passwordRegex: String = "^[a-zA-Z0-9]*$"
         let passwordTest: NSPredicate = NSPredicate(format: "SELF MATCHES %@", passwordRegex)
         if !passwordTest.evaluateWithObject(string) {
             return NSError(domain: kTextValidationErrorDomain, code: kValidationErrorCodePassword, userInfo: [NSLocalizedDescriptionKey : NSLocalizedString("Please enter valid password", comment: "")])
