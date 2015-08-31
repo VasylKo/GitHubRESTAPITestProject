@@ -108,6 +108,11 @@ final class AddPromotionViewController: BaseAddItemViewController {
                     promotion.name = values[Tags.Title.rawValue] as? String
                     promotion.discount = values[Tags.Discount.rawValue] as? Float
                     promotion.location = location
+                    promotion.endDate = values[Tags.EndDate.rawValue] as? NSDate
+                    promotion.startDate = values[Tags.StartDate.rawValue] as? NSDate
+                    if let shopId = NSUserDefaults.standardUserDefaults().valueForKey("shopId")  as? String {
+                        promotion.shopId = shopId
+                    }
                     promotion.photos = urls.map { url in
                         var info = PhotoInfo()
                         info.url = url

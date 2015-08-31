@@ -14,9 +14,12 @@ struct Promotion: CRUDObject {
     var name: String?
     var text: String?
     var discount: Float?
+    var shopId: String?
     //"date": <datetime>,
     var photos: [PhotoInfo]?
     var likes: Int?
+    var endDate: NSDate?
+    var startDate: NSDate?
     /*
     "comments": {
     data:[],
@@ -48,6 +51,8 @@ struct Promotion: CRUDObject {
     }
     
     mutating func mapping(map: Map) {
+        let dateTransform =  CustomDateFormatTransform(formatString: "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+        
         objectId <- (map["id"], CRUDObjectIdTransform())
         name <- map["name"]
         text <- map["text"]
@@ -55,6 +60,9 @@ struct Promotion: CRUDObject {
         likes <- map["likes"]
         location <- map["location"]
         discount <- map["discount"]
+        shopId <- map["shop"]
+        endDate <- (map["endDate"], dateTransform)
+        startDate <- (map["startDate"], dateTransform)
     }
     
     static func endpoint() -> String {
