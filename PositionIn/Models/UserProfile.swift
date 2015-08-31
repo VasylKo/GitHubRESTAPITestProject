@@ -39,6 +39,10 @@ final class UserProfile: CRUDObject {
         }
     }
     
+    init() {
+        
+    }
+    
     func mapping(map: Map) {
         objectId <- (map["id"], CRUDObjectIdTransform())
         firstName <- map["firstName"]

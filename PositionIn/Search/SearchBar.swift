@@ -17,14 +17,22 @@ final class SearchBar: UISearchBar {
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        commonInt()
     }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        placeholder = "sdf"
+        commonInt()
+    }
+    
+    
+    private func commonInt() {
+        placeholder = NSLocalizedString("Search", comment: "Search placeholder")
+        backgroundColor = UIScheme.searchbarActiveColor
+        backgroundImage = UIImage()
+        setSearchFieldBackgroundImage(UIImage(), forState: UIControlState.Normal)
+        tintColor = UIColor.whiteColor()
+        layer.cornerRadius = 5        
     }
     
 }
-//class SearchBar: NibView {
-//    @IBOutlet private weak var textField: UITextField!
-//}

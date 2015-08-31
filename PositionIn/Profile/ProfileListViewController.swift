@@ -49,6 +49,7 @@ class ProfileListViewController: BesideMenuViewController {
         navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
         navigationController?.navigationBar.shadowImage = UIImage()
         dataSource.configureTable(tableView)
+        didReceiveProfile(UserProfile())
         reloadData()
     }
 
