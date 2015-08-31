@@ -13,10 +13,14 @@ struct FeedItem: CRUDObject {
     var objectId: CRUDObjectId = CRUDObjectInvalidId
     var name: String?
     var text: String?
+    var details: String?
     var date: NSDate?
     var image: NSURL?
     var type: ItemType = .Unknown
     var location: Location?
+    
+    var author: CRUDObjectId = CRUDObjectInvalidId
+    var community: CRUDObjectId = CRUDObjectInvalidId
     
     init?(_ map: Map) {
         mapping(map)
@@ -35,7 +39,9 @@ struct FeedItem: CRUDObject {
         image <- (map["image"], AmazonURLTransform())
         type <- (map["type"], EnumTransform())
         location <- map["location"]
-
+        details <- map["details"]
+        author <- map["author"]
+        community <- map["community"]
     }
     
     var description: String {
@@ -53,6 +59,6 @@ struct FeedItem: CRUDObject {
     }
     
     static func endpoint() -> String {
-        return "/v1.0/feed"
+        return "/v1.0/search"
     }
 }

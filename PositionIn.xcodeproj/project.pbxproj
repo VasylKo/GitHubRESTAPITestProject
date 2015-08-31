@@ -763,6 +763,7 @@
 		E68B521E1B875F8F006B980C /* PositionIn.PromotionListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.PromotionListCell.xib; sourceTree = "<group>"; };
 		E68B521F1B875F8F006B980C /* PostListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostListCell.swift; sourceTree = "<group>"; };
 		E68B52201B875F8F006B980C /* PromotionListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PromotionListCell.swift; sourceTree = "<group>"; };
+		E69244461B9055A3004B17C0 /* DataTransforms.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTransforms.swift; sourceTree = "<group>"; };
 		E69420F81B66358000F34F06 /* ProductDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductDetailsViewController.swift; sourceTree = "<group>"; };
 		E69420FE1B665F5100F34F06 /* PositionIn.ProductDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.ProductDetailsViewController.xib; sourceTree = "<group>"; };
 		E69421001B666A1600F34F06 /* PositionIn.ActionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.ActionCell.xib; sourceTree = "<group>"; };
@@ -996,6 +997,7 @@
 				E6325FD71B57FEAF00996480 /* NetworkActivityIndicatorManager.swift */,
 				E6D7C2911B5D546C004F3AA9 /* NibView.swift */,
 				E6D6E1911B83333F0087D489 /* LocationProvider.swift */,
+				E69244461B9055A3004B17C0 /* DataTransforms.swift */,
 				E6325FA71B57F36E00996480 /* Supporting Files */,
 			);
 			path = PosInCore;

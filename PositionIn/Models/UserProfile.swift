@@ -22,7 +22,7 @@ final class UserProfile: CRUDObject {
     var backgroundImage: NSURL?
     var location: Location?
     var guest: Bool =  false
-    
+        
     enum Gender {
         case Unknown
         case Male

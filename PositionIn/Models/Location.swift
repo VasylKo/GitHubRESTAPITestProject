@@ -58,25 +58,3 @@ struct Location: Mappable, Printable {
         return "<\(self.dynamicType):\(coordinates.latitude),\(coordinates.longitude)>"
     }
 }
-
-
-final class LocationCoordinateTransform: TransformType {
-    typealias Object = CLLocationCoordinate2D
-    typealias JSON = [Double]
-    
-    init() {}
-    
-    func transformFromJSON(value: AnyObject?) -> CLLocationCoordinate2D? {
-        if let array = value as? JSON where count(array) == 2 {
-            return CLLocationCoordinate2D(latitude: array.first!, longitude: array.last!)
-        }
-        return nil
-    }
-    
-    func transformToJSON(value: CLLocationCoordinate2D?) -> [Double]? {
-        if let coord = value {
-            return [coord.latitude, coord.longitude]
-        }
-        return nil
-    }
-}

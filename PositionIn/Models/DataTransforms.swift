@@ -8,6 +8,28 @@
 
 import Foundation
 import ObjectMapper
+import PosInCore
+import CoreLocation
+
+final class CRUDObjectIdTransform: TransformType {
+    typealias Object = CRUDObjectId
+    typealias JSON = String
+    
+    init() {}
+    
+    func transformFromJSON(value: AnyObject?) -> CRUDObjectId? {
+        return (value as? Object) ?? CRUDObjectInvalidId
+    }
+    
+    func transformToJSON(value: CRUDObjectId?) -> String? {
+        if let jsonValue = value where jsonValue !=  CRUDObjectInvalidId {
+            return jsonValue
+        }
+        return nil
+    }
+}
+
+
 
 final class APIDateTransform: DateFormaterTransform {
     
@@ -21,35 +43,30 @@ final class APIDateTransform: DateFormaterTransform {
     
 }
 
-
-class RelativeURLTransform: TransformType {
-    init(baseURL: NSURL) {
-        self.baseURL = baseURL
-    }
-    
-    func transformFromJSON(value: AnyObject?) -> NSURL? {
-        if let URLString = value as? String {
-            return NSURL(string: URLString, relativeToURL: baseURL)
-        }
-        return nil
-    }
-    
-    func transformToJSON(value: NSURL?) -> String? {
-        if let URL = value,
-           let components = NSURLComponents(URL: URL, resolvingAgainstBaseURL: true) {
-            let result = components.URLRelativeToURL(baseURL)?.relativePath
-            println(result)
-            return result
-        
-        }
-        return nil
-    }
-    
-    private let baseURL: NSURL
-}
-
 class AmazonURLTransform: RelativeURLTransform {
     init() {
         super.init(baseURL: AppConfiguration().amazonURL)
+    }
+}
+
+
+final class LocationCoordinateTransform: TransformType {
+    typealias Object = CLLocationCoordinate2D
+    typealias JSON = [Double]
+    
+    init() {}
+    
+    func transformFromJSON(value: AnyObject?) -> CLLocationCoordinate2D? {
+        if let array = value as? JSON where count(array) == 2 {
+            return CLLocationCoordinate2D(latitude: array.first!, longitude: array.last!)
+        }
+        return nil
+    }
+    
+    func transformToJSON(value: CLLocationCoordinate2D?) -> [Double]? {
+        if let coord = value {
+            return [coord.latitude, coord.longitude]
+        }
+        return nil
     }
 }

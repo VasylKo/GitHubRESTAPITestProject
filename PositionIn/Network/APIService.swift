@@ -107,10 +107,18 @@ struct APIService {
     
     //MARK: - Search -
     
-    func getFeed(query: APIServiceQueryConvertible) -> Future<CollectionResponse<FeedItem>,NSError> {
+    func getFeed(query: APIServiceQueryConvertible, page: Page) -> Future<CollectionResponse<FeedItem>,NSError> {
         let endpoint = FeedItem.endpoint()
-        let params = query.query
-        return getObjectsCollection(endpoint, params: params)
+        let params = APIServiceQuery()
+        params.append(query: query)
+        params.append(query: page)
+        
+        return sessionController.session().flatMap {
+            (token: AuthResponse.Token) -> Future<CollectionResponse<FeedItem>, NSError> in
+            let request = self.updateRequest(token, endpoint: endpoint, params: params.query)
+            let (_ , future): (Alamofire.Request, Future<CollectionResponse<FeedItem>, NSError>) = self.dataProvider.objectRequest(request)
+            return future
+        }
     }
     
     //MARK: - Generics -
@@ -168,7 +176,7 @@ struct APIService {
     //MARK: - Helpers -
     
 //    @availability(*, unavailable)
-    func emptyResponseMapping() -> (AnyObject? -> Void?) {
+    private func emptyResponseMapping() -> (AnyObject? -> Void?) {
         return  { response in
             if let json = response as? NSDictionary {
                 if let errorMessage = json["message"] as? String {
@@ -273,17 +281,20 @@ protocol APIServiceQueryConvertible {
     var query: [String : AnyObject]  { get }
 }
 
-final class APIServiceQuery: APIServiceQueryConvertible {
-    private var values: [String : AnyObject] = [:]
-
-    func append(query newItems:APIServiceQueryConvertible) {
-        for (key,value) in newItems.query {
-            values.updateValue(value, forKey:key)
-        }
-    }
+extension APIService {
     
-    var query: [String : AnyObject]  {
-        return values
+    final class APIServiceQuery: APIServiceQueryConvertible {
+        private var values: [String : AnyObject] = [:]
+
+        func append(query newItems:APIServiceQueryConvertible) {
+            for (key,value) in newItems.query {
+                values.updateValue(value, forKey:key)
+            }
+        }
+        
+        var query: [String : AnyObject]  {
+            return values
+        }
     }
 }
 
