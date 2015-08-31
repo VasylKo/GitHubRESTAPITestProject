@@ -23,22 +23,12 @@ class ProfileListViewController: BesideMenuViewController {
     
     func reloadData() {
         let page = APIService.Page()
-        
-        api().getUserProfile(profile.objectId).flatMap {[weak self] (profile: UserProfile) -> Future<CollectionResponse<Post>,NSError> in
+        api().getUserProfile(profile.objectId).onSuccess { [weak self] profile in
             self?.didReceiveProfile(profile)
-            return api().getUserPosts(profile.objectId, page: page)
-        }.onSuccess { [weak self] (posts: CollectionResponse<Post>) -> () in
-            self?.didReceivePosts(posts.items, page: page)
         }
+            
     }
     
-    private func didReceivePosts(posts: [Post], page: APIService.Page) {
-        Log.debug?.value(posts)
-        dataSource.items[1] = [
-            BrowseListCellModel(objectId: profile.objectId)
-        ]
-        tableView.reloadData()
-    }
     
     private func didReceiveProfile(profile: UserProfile) {
         let (leftAction, rightAction): (UserProfileViewController.ProfileAction, UserProfileViewController.ProfileAction) = {
@@ -52,6 +42,9 @@ class ProfileListViewController: BesideMenuViewController {
         dataSource.items[0] = [
             ProfileInfoCellModel(name: profile.firstName, avatar: profile.avatar, background: profile.backgroundImage, leftAction: leftAction, rightAction: rightAction, actionDelegate: actionDelegate),
             ProfileStatsCellModel(countPosts: 113, countFollowers: 23, countFollowing: 2),
+        ]
+        dataSource.items[1] = [
+            BrowseListCellModel(objectId: profile.objectId)
         ]
         tableView.reloadData()
     }

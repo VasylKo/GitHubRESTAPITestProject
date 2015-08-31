@@ -60,5 +60,5 @@ public struct ProfileInfoCellModel: ProfileCellModel {
     let background: NSURL?
     let leftAction: UserProfileViewController.ProfileAction
     let rightAction: UserProfileViewController.ProfileAction
-    weak var actionDelegate: UserProfileActionConsumer?
+    let actionDelegate: UserProfileActionConsumer?
 }

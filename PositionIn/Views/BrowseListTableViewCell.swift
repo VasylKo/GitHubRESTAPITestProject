@@ -14,6 +14,9 @@ final class BrowseListTableViewCell: TableViewCell, TableViewChildViewController
     override func setModel(model: TableViewCellModel) {
         let m = model as? BrowseListCellModel
         assert(m != nil, "Invalid model passed")
+        var filter = listController.filter
+        filter.users = [ m!.objectId ]
+        listController.filter = filter
     }
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
