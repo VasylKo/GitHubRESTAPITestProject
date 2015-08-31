@@ -8,7 +8,7 @@ target 'PositionIn' do
     pod 'HanekeSwift'
     pod 'KYDrawerController'
     pod 'UIImageEffects', :inhibit_warnings => true
-    pod 'XLForm', '~> 3.0.1'
+    pod 'XLForm', '~> 3.0.2'
     pod 'ImagePickerSheetController', '~> 0.1.7'
     pod 'GoogleMaps'
     pod 'HMSegmentedControl'

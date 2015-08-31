@@ -19,7 +19,7 @@ struct SearchFilter: Mappable {
     var endDate: NSDate?
     var radius: Double? = 5
     var categories: [ItemCategory]?
-    var itemTypes: [FeedItem.ItemType]? = [.Unknown]
+    var itemTypes: [FeedItem.ItemType]? 
     var name: String?
     var users: [CRUDObjectId]?
     var communities: [CRUDObjectId]?
@@ -54,7 +54,7 @@ struct SearchFilter: Mappable {
         startPrice = 1
         endPrice = 1000
         radius = 99
-        itemTypes = [.Unknown]
+//        itemTypes = [.Unknown]
     }
     
     mutating func mapping(map: Map) {

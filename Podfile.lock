@@ -3,7 +3,7 @@ PODS:
   - Box (1.2.2)
   - BrightFutures (2.0.1):
     - Result (~> 0.4.3)
-  - GoogleMaps (1.10.1)
+  - GoogleMaps (1.10.2)
   - HanekeSwift (0.9.1)
   - HMSegmentedControl (1.5.2)
   - ImagePickerSheetController (0.1.7)
@@ -18,7 +18,7 @@ PODS:
   - Result (0.4.4):
     - Box (~> 1.2)
   - UIImageEffects (0.0.1)
-  - XLForm (3.0.1)
+  - XLForm (3.0.2)
 
 DEPENDENCIES:
   - GoogleMaps
@@ -30,7 +30,7 @@ DEPENDENCIES:
   - PosInCore (from `PosInCore`)
   - ResponseDetective
   - UIImageEffects
-  - XLForm (~> 3.0.1)
+  - XLForm (~> 3.0.2)
 
 EXTERNAL SOURCES:
   PosInCore:
@@ -40,7 +40,7 @@ SPEC CHECKSUMS:
   Alamofire: e4ab637e3195b645c814b87a652373439e59f2a4
   Box: a92e8aa4c099e6bc0733829665caf9e668ef53b8
   BrightFutures: 27704272a695324b42538a2d85b20ac3f24228bd
-  GoogleMaps: ebf08677f181d9c2dcdbd1721d206f02beccc9b1
+  GoogleMaps: 5c92e599b07b0a2a9b367c5dd128edc629bddfea
   HanekeSwift: 50d37bfbc4432edc649167e538c259feccb4a2bb
   HMSegmentedControl: 83b9686022d2176fb6457d2bdb61e5d6393fed7d
   ImagePickerSheetController: 127cc7a5e8da7fa17d42aa4ba7509f72af9cd71f
@@ -51,6 +51,6 @@ SPEC CHECKSUMS:
   ResponseDetective: c85f4b451f151180cced73c1420506c7aff7f63e
   Result: b44f6bc8762bbffaf2c5df58f2c7d12c3496ced8
   UIImageEffects: 37b99fa461e4965f332ca82e92f2c22a1075ee84
-  XLForm: 1a20da41c009e4f99e802e886a8eef5f2b086644
+  XLForm: 7817ce29f3f259186e837bb7309ac7e5b7e9b883
 
 COCOAPODS: 0.38.2
