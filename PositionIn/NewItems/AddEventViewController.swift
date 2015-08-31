@@ -10,6 +10,8 @@ import UIKit
 import XLForm
 import CleanroomLogger
 
+import BrightFutures
+
 final class AddEventViewController: BaseAddItemViewController {
 
     private enum Tags : String {
@@ -83,6 +85,49 @@ final class AddEventViewController: BaseAddItemViewController {
         self.form = form
     }
     
-    
+    //MARK: - Actions -
+    override func didTapPost(sender: AnyObject) {
+        let validationErrors : Array<NSError> = self.formValidationErrors() as! Array<NSError>
+        if (validationErrors.count > 0){
+            self.showFormValidationError(validationErrors.first)
+            return
+        }
+        self.tableView.endEditing(true)
+        
+        let values = formValues()
+        Log.debug?.value(values)
+        
+        let community =  communityValue(values[Tags.Community.rawValue])
+        
+        if  let imageUpload = uploadAssets(values[Tags.Photo.rawValue]),
+            let getLocation = locationFromValue(values[Tags.Location.rawValue]) {
+                getLocation.zip(imageUpload).flatMap { (location: Location, urls: [NSURL]) -> Future<Event, NSError> in
+                    var event = Event()
+                    event.name = values[Tags.Title.rawValue] as? String
+                    event.category = 1
+                    event.descriptionEvent = values[Tags.Description.rawValue] as? String
+                    event.location = location
+                    event.endDate = values[Tags.EndDate.rawValue] as? NSDate
+                    event.startDate = values[Tags.StartDate.rawValue] as? NSDate
+                    
+                    event.photos = urls.map { url in
+                        var info = PhotoInfo()
+                        info.url = url
+                        return info
+                    }
+                    if let communityId = community {
+                        return api().createCommunityEvent(communityId, event: event)
+                    } else {
+                        return api().createUserEvent(event: event)
+                    }
+                    }.onSuccess { [weak self] (event: Event) -> ()  in
+                        Log.debug?.value(event)
+                        self?.performSegue(AddEventViewController.Segue.Close)
+                    }.onFailure { error in
+                        Log.error?.value(error)
+                }
+        }
+    }
+
 
 }

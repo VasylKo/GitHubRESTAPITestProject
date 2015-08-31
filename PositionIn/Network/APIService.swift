@@ -98,6 +98,27 @@ struct APIService {
     }
 
     
+    //MARK: - Events -
+    
+    func getUserEvents(userId: CRUDObjectId, page: Page) -> Future<CollectionResponse<Event>, NSError> {
+        let endpoint = Event.userEventsEndpoint(userId)
+        let params = page.query
+        return getObjectsCollection(endpoint, params: params)
+    }
+    
+    func createUserEvent(event object: Event) -> Future<Event, NSError> {
+        return sessionController.currentUserId().flatMap {
+            (userId: CRUDObjectId) -> Future<Event, NSError> in
+            let endpoint = Event.userEventsEndpoint(userId)
+            return self.createObject(endpoint, object: object)
+        }
+    }
+    
+    func createCommunityEvent(communityId: CRUDObjectId, event object: Event) -> Future<Event, NSError> {
+        let endpoint = Event.communityEventsEndpoint(communityId)
+        return createObject(endpoint, object: object)
+    }
+
     //MARK: - Products -
     
     func getUserProducts(userId: CRUDObjectId, page: Page) -> Future<CollectionResponse<ShopItemProduct>, NSError> {
