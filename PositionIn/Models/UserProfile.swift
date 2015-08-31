@@ -39,8 +39,12 @@ final class UserProfile: CRUDObject {
         }
     }
     
-    init() {
-        
+    convenience init() {
+        self.init(objectId: CRUDObjectInvalidId)
+    }
+    
+    init(objectId: CRUDObjectId) {
+        self.objectId = objectId
     }
     
     func mapping(map: Map) {

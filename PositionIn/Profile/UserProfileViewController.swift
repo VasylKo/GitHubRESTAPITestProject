@@ -9,7 +9,18 @@
 import PosInCore
 import CleanroomLogger
 
+protocol UserProfileActionConsumer: class {
+    func shouldExecuteAction(action: UserProfileViewController.ProfileAction)
+}
+
 final class UserProfileViewController: BrowseModeViewController {
+    
+    enum ProfileAction: Int {
+        case None
+        case Call, Chat, Edit
+    }
+    
+    var objectId: CRUDObjectId = api().currentUserId() ?? CRUDObjectInvalidId
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,11 +54,25 @@ final class UserProfileViewController: BrowseModeViewController {
     override func viewControllerForMode(mode: DisplayModeViewController.DisplayMode) -> UIViewController {
         switch self.displayMode {
         case .Map:
-            return Storyboards.Main.instantiateBrowseMapViewController()
+            let controller = Storyboards.Main.instantiateBrowseMapViewController()
+            var filter = controller.filter
+            filter.users = [ objectId ]
+            controller.filter = filter
+            return controller
         case .List:
-            return Storyboards.Main.instantiateProfileListViewController()
+            let profile = UserProfile(objectId: objectId)
+            let controller = Storyboards.Main.instantiateProfileListViewController()
+            controller.profile = profile
+            return controller
         }
     }
     
     
+}
+
+extension UserProfileViewController: UserProfileActionConsumer {
+    func shouldExecuteAction(action: UserProfileViewController.ProfileAction) {
+        Log.debug?.value(action)
+    }
+
 }

@@ -21,13 +21,19 @@ final class BrowseListViewController: UIViewController, BrowseActionProducer {
         
     }
     
-    var filter = SearchFilter.currentFilter
+    var filter = SearchFilter.currentFilter {
+        didSet {
+            if isViewLoaded() {
+                getFeedItems(filter)
+            }
+        }
+    }
     
     var selectedItemType: FeedItem.ItemType = .Unknown {
         didSet {
             var f = filter
             f.itemTypes = [selectedItemType]
-            getFeedItems(f)
+            filter = f
         }
     }
     

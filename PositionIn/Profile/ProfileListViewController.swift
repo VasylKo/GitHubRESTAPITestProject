@@ -13,29 +13,38 @@ import CleanroomLogger
 class ProfileListViewController: BesideMenuViewController {
     //MARK: - Reload data -
     
-    func reloadData() {
-        let page = APIService.Page()
-        //Future<CollectionResponse<Post>,NSError>
-        api().getMyProfile().flatMap {[weak self] (profile: UserProfile) -> Future<CollectionResponse<Post>,NSError> in
-            self?.didReceiveProfile(profile)
-            return api().getUserPosts(profile.objectId, page: page)
-        }.onSuccess { [weak self] (posts: CollectionResponse<Post>) -> () in
-                self?.didReceivePosts(posts.items, page: page)
+    var profile: UserProfile = UserProfile(objectId: CRUDObjectInvalidId) {
+        didSet {
+            if isViewLoaded() {
+                didReceiveProfile(profile)
+            }
         }
     }
     
-    private func didReceivePosts(posts: [Post], page: APIService.Page) {
-        Log.debug?.value(posts)
-        dataSource.items[1] = [
-            BrowseListCellModel()
-        ]
-        tableView.reloadData()
+    func reloadData() {
+        let page = APIService.Page()
+        api().getUserProfile(profile.objectId).onSuccess { [weak self] profile in
+            self?.didReceiveProfile(profile)
+        }
+            
     }
     
+    
     private func didReceiveProfile(profile: UserProfile) {
+        let (leftAction, rightAction): (UserProfileViewController.ProfileAction, UserProfileViewController.ProfileAction) = {
+            if let currentUserId = api().currentUserId() where currentUserId == profile.objectId {
+                return (.None, .Edit)
+            } else {
+                return (.Call, .Chat)
+            }
+        }()
+        let actionDelegate = self.parentViewController as? UserProfileActionConsumer
         dataSource.items[0] = [
-            ProfileInfoCellModel(name: profile.firstName, avatar: profile.avatar, background: profile.backgroundImage),
+            ProfileInfoCellModel(name: profile.firstName, avatar: profile.avatar, background: profile.backgroundImage, leftAction: leftAction, rightAction: rightAction, actionDelegate: actionDelegate),
             ProfileStatsCellModel(countPosts: 113, countFollowers: 23, countFollowing: 2),
+        ]
+        dataSource.items[1] = [
+            BrowseListCellModel(objectId: profile.objectId)
         ]
         tableView.reloadData()
     }
@@ -49,7 +58,7 @@ class ProfileListViewController: BesideMenuViewController {
         navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
         navigationController?.navigationBar.shadowImage = UIImage()
         dataSource.configureTable(tableView)
-        didReceiveProfile(UserProfile())
+        didReceiveProfile(profile)
         reloadData()
     }
 
