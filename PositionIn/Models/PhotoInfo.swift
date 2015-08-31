@@ -31,7 +31,7 @@ struct PhotoInfo: Mappable, Printable {
     
     mutating func mapping(map: Map) {
         objectId <- (map["id"], CRUDObjectIdTransform())
-        url <- (map["url"], URLTransform())
+        url <- (map["url"], AmazonURLTransform())
     }
     
     

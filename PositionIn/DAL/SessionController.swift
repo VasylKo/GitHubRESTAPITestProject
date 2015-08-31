@@ -15,6 +15,10 @@ import CleanroomLogger
 
 struct SessionController {
     
+    func currentUserId() -> CRUDObjectId? {
+        return self.userIdValue
+    }
+    
     func currentUserId() -> Future<CRUDObjectId, NSError> {
         return future { () -> Result<CRUDObjectId, NSError> in
             if let userId = self.userIdValue {

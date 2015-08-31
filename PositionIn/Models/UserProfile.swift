@@ -22,7 +22,7 @@ final class UserProfile: CRUDObject {
     var backgroundImage: NSURL?
     var location: Location?
     var guest: Bool =  false
-    
+        
     enum Gender {
         case Unknown
         case Male
@@ -39,6 +39,10 @@ final class UserProfile: CRUDObject {
         }
     }
     
+    init() {
+        
+    }
+    
     func mapping(map: Map) {
         objectId <- (map["id"], CRUDObjectIdTransform())
         firstName <- map["firstName"]
@@ -46,8 +50,8 @@ final class UserProfile: CRUDObject {
         lastName <- map["lastName"]
         userDescription <- map["description"]
         phone <- map["phone"]
-        avatar <- (map["avatar"], URLTransform())
-        backgroundImage <- (map["background"], URLTransform())
+        avatar <- (map["avatar"], AmazonURLTransform())
+        backgroundImage <- (map["background"], AmazonURLTransform())
         location <- map["location"]
         guest <- map["guest"]
     }

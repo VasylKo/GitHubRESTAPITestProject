@@ -10,7 +10,11 @@ import Foundation
 
 final class AppConfiguration {
     init() {
-        
+        baseURL = NSURL(string: "https://app-dev.positionin.com/api/")!
+        amazonURL = NSURL(string: "https://pos-dev.s3.amazonaws.com/")!
     }
+    
+    let baseURL : NSURL
+    let amazonURL : NSURL
 
 }

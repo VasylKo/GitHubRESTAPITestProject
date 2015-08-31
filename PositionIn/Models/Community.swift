@@ -51,7 +51,7 @@ struct Community: CRUDObject {
         name <- map["name"]
         communityDescription <- map["description"]
         role <- map["role"]
-        avatar <- (map["avatar"], URLTransform())
+        avatar <- (map["avatar"], AmazonURLTransform())
         isPrivate <- map["isPrivate"]
         members <- map["members"]
         location <- map["location"]
