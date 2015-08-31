@@ -37,13 +37,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        urlSessionConfig.protocolClasses = [InterceptingProtocol.self]
         #endif
         let baseURL = AppConfiguration().baseURL
-        #if DEBUG
+        //FIXME: dissallow self signed certificates in the future
         let trustPolicies: [String: ServerTrustPolicy]? = [
             baseURL.host! : .DisableEvaluation
             ]
-        #else
-        let trustPolicies: [String: ServerTrustPolicy]? = nil
-        #endif
         let dataProvider = PosInCore.NetworkDataProvider(configuration: urlSessionConfig, trustPolicies: trustPolicies)
         api = APIService(url: baseURL, dataProvider: dataProvider)
         let chatConfig = XMPPClientConfiguration.defaultConfiguration()
