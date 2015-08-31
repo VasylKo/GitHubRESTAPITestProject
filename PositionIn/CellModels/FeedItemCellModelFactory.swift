@@ -14,6 +14,7 @@ struct FeedItemCellModelFactory {
     //TODO: remove hardcoded data
     
     func compactModelsForItem(feedItem: FeedItem) -> [TableViewCellModel] {
+        
         switch feedItem.type {
         case .Event:
             return [
@@ -47,7 +48,7 @@ struct FeedItemCellModelFactory {
                     price: 99.8
                 ),
             ]
-        case .Post:
+        case .Person:
             return [
                 CompactFeedTableCellModel(
                     item: feedItem,
@@ -71,7 +72,7 @@ struct FeedItemCellModelFactory {
                 return PromotionListCell.reuseId()
             case .Event:
                 return EventListCell.reuseId()
-            case .Post:
+            case .Person:
                 return PostListCell.reuseId()
             case .Item:
                 return ProductListCell.reuseId()

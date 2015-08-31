@@ -42,6 +42,7 @@ struct FeedItem: CRUDObject {
         details <- map["details"]
         author <- map["author"]
         community <- map["community"]
+        name <- map["name"]
     }
     
     var description: String {
