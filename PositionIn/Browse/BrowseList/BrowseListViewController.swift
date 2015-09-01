@@ -9,10 +9,12 @@
 import UIKit
 import PosInCore
 import CleanroomLogger
+import BrightFutures
 
 final class BrowseListViewController: UIViewController, BrowseActionProducer {
     
     let shoWCompactCells: Bool = true
+    private var dataRequestToken = InvalidationToken()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,9 +40,11 @@ final class BrowseListViewController: UIViewController, BrowseActionProducer {
     }
     
     private func getFeedItems(searchFilter: SearchFilter, page: APIService.Page = APIService.Page()) {
+        dataRequestToken.invalidate()
+        dataRequestToken = InvalidationToken()
         api().getFeed(searchFilter, page: page).onFailure { error in
             Log.error?.value(error)
-        }.onSuccess { [weak self] response in
+        }.onSuccess(token: dataRequestToken) { [weak self] response in
             Log.debug?.value(response.items)
             Log.debug?.value(searchFilter.itemTypes)
             
