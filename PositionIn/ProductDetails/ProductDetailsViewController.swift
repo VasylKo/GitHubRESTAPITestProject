@@ -58,6 +58,9 @@ final class ProductDetailsViewController: UIViewController {
             headerLabel.text = product?.name
             infoLabel.text = product?.descriptionProd
             detailsLabel.text = "$\(product?.price ?? 123)"
+            if let imgURL = product?.photos?.first?.url {
+                productImageView.hnk_setImageFromURL(imgURL)
+            }
         }
     }
     
