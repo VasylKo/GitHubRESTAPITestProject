@@ -10,8 +10,10 @@ import PosInCore
 import BrightFutures
 import CleanroomLogger
 
-class ProfileListViewController: BesideMenuViewController {
-    //MARK: - Reload data -
+class ProfileListViewController: BesideMenuViewController, BrowseActionProducer {
+    
+    weak var actionConsumer: BrowseActionConsumer?
+
     
     var profile: UserProfile = UserProfile(objectId: CRUDObjectInvalidId) {
         didSet {
@@ -20,6 +22,8 @@ class ProfileListViewController: BesideMenuViewController {
             }
         }
     }
+
+    //MARK: - Reload data -
     
     func reloadData() {
         let page = APIService.Page()

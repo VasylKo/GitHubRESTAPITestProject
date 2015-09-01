@@ -16,6 +16,7 @@ final class BrowseListTableViewCell: TableViewCell, TableViewChildViewController
         var filter = listController.filter
         filter.users = [ m!.objectId ]
         listController.filter = filter
+        listController.actionConsumer = actionConsumer
     }
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
@@ -56,10 +57,17 @@ final class BrowseListTableViewCell: TableViewCell, TableViewChildViewController
         return listController
     }
     
+    var actionConsumer: BrowseActionConsumer? {
+        if let actionProducer = listController.parentViewController as? BrowseActionProducer {
+            return actionProducer.actionConsumer
+        }
+        return nil
+    }
+    
     let listController = Storyboards.Main.instantiateBrowseListViewController()
     
     private var listTableHeightConstraint: NSLayoutConstraint!
-    private var contentSizeObserver: KVObserver<String>!
+    private var contentSizeObserver: KVObserver<NSValue>!
 }
 
 public struct BrowseListCellModel: ProfileCellModel {
