@@ -18,6 +18,7 @@ final class ProductDetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = NSLocalizedString("Product", comment: "Product details: title")
         dataSource.items = productAcionItems()
         dataSource.configureTable(actionTableView)
         reloadData()
@@ -56,8 +57,8 @@ final class ProductDetailsViewController: UIViewController {
     private var product:  ShopItemProduct? {
         didSet{
             headerLabel.text = product?.name
-            infoLabel.text = product?.descriptionProd
-            detailsLabel.text = "$\(product?.price ?? 123)"
+            detailsLabel.text = product?.descriptionProd
+            priceLabel.text = "$\(product?.price ?? 123)"
             if let imgURL = product?.photos?.first?.url {
                 productImageView.hnk_setImageFromURL(imgURL)
             }
@@ -70,6 +71,9 @@ final class ProductDetailsViewController: UIViewController {
     @IBOutlet private weak var productImageView: UIImageView!
     @IBOutlet private weak var headerLabel: UILabel!
     @IBOutlet private weak var infoLabel: UILabel!
+    
+    @IBOutlet private weak var nameLabel: UILabel!
+    @IBOutlet private weak var priceLabel: UILabel!
     @IBOutlet private weak var detailsLabel: UILabel!
 }
 
