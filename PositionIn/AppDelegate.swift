@@ -60,20 +60,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         api.recoverSession().onSuccess { [unowned self] _ in
             self.sidebarViewController?.executeAction(SidebarViewController.defaultAction)
         }
-        /*
-        api.isUserAuthorized().onComplete { result in
-            let defaultAction: SidebarViewController.Action
-            switch result.value {
-            case .Some:
-                defaultAction = .ForYou
-            default:
-                defaultAction = .Login
-            }
-            if let sidebarViewController = self.window?.rootViewController as? SidebarViewController {
-                sidebarViewController.executeAction(defaultAction)
-            }
-        }                
-        */
         return true
                 
         self.chatClient.auth("ixmpp@beewellapp.com", password: "1HateD0m2").future().onSuccess { [unowned self] in

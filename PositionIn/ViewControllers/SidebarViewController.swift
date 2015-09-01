@@ -28,6 +28,15 @@ class SidebarViewController: KYDrawerController {
         case Settings
         case Login
         
+        func isUnique() -> Bool {
+            switch self {
+            case .Login:
+                return true
+            default:
+                return false
+            }
+        }
+        
         func nextController() -> UIViewController? {
             switch self {
             case .Login:
@@ -69,6 +78,10 @@ class SidebarViewController: KYDrawerController {
         
         setDrawerState(.Closed, animated: true)
         
+        if action == lastAction && action.isUnique() {
+            return
+        }
+        
         if let controller = action.nextController() {
             presentViewController(controller, animated: true, completion: nil)
         }
@@ -76,7 +89,11 @@ class SidebarViewController: KYDrawerController {
         if let (segue, sender: AnyObject?) = action.nextSegue() {
             performSegue(segue, sender: sender)
         }
+        
+        lastAction = action
     }
+    
+    private var lastAction: Action = .None
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let segueId = segue.identifier {
