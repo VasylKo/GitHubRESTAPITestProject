@@ -13,11 +13,14 @@ final class BrowseListTableViewCell: TableViewCell, TableViewChildViewController
     override func setModel(model: TableViewCellModel) {
         let m = model as? BrowseListCellModel
         assert(m != nil, "Invalid model passed")
+        selectionStyle = .None
+        actionConsumer = m!.actionConsumer
+        listController.actionConsumer = self
         var filter = listController.filter
         filter.users = [ m!.objectId ]
         listController.filter = filter
-        listController.actionConsumer = self
-        selectionStyle = .None
+        
+
     }
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
@@ -49,12 +52,7 @@ final class BrowseListTableViewCell: TableViewCell, TableViewChildViewController
         return listController
     }
     
-    var actionConsumer: BrowseActionConsumer? {
-        if let actionProducer = listController.parentViewController as? BrowseActionProducer {
-            return actionProducer.actionConsumer
-        }
-        return nil
-    }
+    weak var actionConsumer: BrowseActionConsumer?
     
     let listController = Storyboards.Main.instantiateBrowseListViewController()
     
@@ -62,7 +60,7 @@ final class BrowseListTableViewCell: TableViewCell, TableViewChildViewController
 }
 
 extension BrowseListTableViewCell: BrowseActionConsumer {
-    func browseController(controller: BrowseActionProducer, didSelectItem objectId: CRUDObjectId, type itemType:FeedItem.ItemType) {
+    func browseController(controller: BrowseActionProducer, didSelectItem objectId: CRUDObjectId, type itemType: FeedItem.ItemType) {
         actionConsumer?.browseController(controller, didSelectItem: objectId, type: itemType)
     }
     
@@ -79,4 +77,5 @@ extension BrowseListTableViewCell: BrowseActionConsumer {
 
 public struct BrowseListCellModel: ProfileCellModel {
     let objectId: CRUDObjectId
+    unowned var actionConsumer: BrowseActionConsumer
 }

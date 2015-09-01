@@ -14,6 +14,9 @@ class ProfileListViewController: BesideMenuViewController, BrowseActionProducer 
     
     weak var actionConsumer: BrowseActionConsumer?
 
+    enum Sections: Int {
+        case Info, Feed
+    }
     
     var profile: UserProfile = UserProfile(objectId: CRUDObjectInvalidId) {
         didSet {
@@ -43,12 +46,12 @@ class ProfileListViewController: BesideMenuViewController, BrowseActionProducer 
             }
         }()
         let actionDelegate = self.parentViewController as? UserProfileActionConsumer
-        dataSource.items[0] = [
+        dataSource.items[Sections.Info.rawValue] = [
             ProfileInfoCellModel(name: profile.firstName, avatar: profile.avatar, background: profile.backgroundImage, leftAction: leftAction, rightAction: rightAction, actionDelegate: actionDelegate),
             ProfileStatsCellModel(countPosts: 113, countFollowers: 23, countFollowing: 2),
         ]
-        dataSource.items[1] = [
-            BrowseListCellModel(objectId: profile.objectId)
+        dataSource.items[Sections.Feed.rawValue] = [
+            BrowseListCellModel(objectId: profile.objectId, actionConsumer: self)
         ]
         tableView.reloadData()
         actionConsumer?.browseControllerDidChangeContent(self)
@@ -56,7 +59,7 @@ class ProfileListViewController: BesideMenuViewController, BrowseActionProducer 
 
     
     //MARK: - Table -
-    @IBOutlet weak var tableView: TableView!
+    @IBOutlet private weak var tableView: TableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -77,6 +80,20 @@ class ProfileListViewController: BesideMenuViewController, BrowseActionProducer 
         dataSource.parentViewController = self
         return dataSource
         }()
+}
+
+extension ProfileListViewController: BrowseActionConsumer {
+    func browseController(controller: BrowseActionProducer, didSelectItem objectId: CRUDObjectId, type itemType: FeedItem.ItemType) {
+        actionConsumer?.browseController(controller, didSelectItem: objectId, type: itemType)
+    }
+    
+    func browseControllerDidChangeContent(controller: BrowseActionProducer) {
+        UIView.setAnimationsEnabled(false)
+        tableView.beginUpdates()
+        tableView.endUpdates()
+        UIView.setAnimationsEnabled(true)
+        actionConsumer?.browseControllerDidChangeContent(controller)
+    }
 }
 
 
