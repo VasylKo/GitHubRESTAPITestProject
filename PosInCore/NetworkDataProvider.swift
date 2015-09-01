@@ -122,7 +122,13 @@ public class NetworkDataProvider: NSObject {
                     if let object = object  {
                         p.success(object.value)
                     } else {
-                        p.failure(error ?? ErrorCodes.InvalidResponseError.error())
+                        let e: NSError = {
+                            if let statusCode = response?.statusCode where statusCode == 401 {
+                                return ErrorCodes.InvalidSessionError.error(underlyingError: error)
+                            }
+                            return error ?? ErrorCodes.InvalidResponseError.error()
+                        }()
+                        p.failure(e)
                     }
             }
         return (request, p.future)
@@ -147,9 +153,6 @@ private extension Alamofire.Request {
     //MARK: - Custom serializer -
     class func CustomResponseSerializer<T>(mapping:AnyObject? -> T?) -> GenericResponseSerializer<Box<T>> {
         return GenericResponseSerializer { request, response, data in
-            if response?.statusCode == 401 {
-                return (nil, NetworkDataProvider.ErrorCodes.InvalidSessionError.error())
-            }
             let JSONSerializer = Request.JSONResponseSerializer(options: .AllowFragments)
             let (json: AnyObject?, serializationError) = JSONSerializer.serializeResponse(request, response, data)
             switch (response, json, serializationError) {
