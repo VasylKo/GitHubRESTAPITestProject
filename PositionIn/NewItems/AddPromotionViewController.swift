@@ -23,6 +23,7 @@ final class AddPromotionViewController: BaseAddItemViewController {
         case Community = "Community"
         case Photo = "Photo"
         case Location = "Location"
+        case Description = "Description"
     }
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
@@ -38,17 +39,18 @@ final class AddPromotionViewController: BaseAddItemViewController {
     func initializeForm() {
         let form = XLFormDescriptor(title: NSLocalizedString("New Promotion", comment: "New promotion: form caption"))
         
-        // Description section
-        let descriptionSection = XLFormSectionDescriptor.formSection()
-        form.addFormSection(descriptionSection)
+        // General info section
+        let infoGeneralSection = XLFormSectionDescriptor.formSection()
+        form.addFormSection(infoGeneralSection)
         // Title
         let titleRow = XLFormRowDescriptor(tag: Tags.Title.rawValue, rowType: XLFormRowDescriptorTypeText)
         titleRow.cellConfigAtConfigure["textField.placeholder"] = NSLocalizedString("Title", comment: "New promotion: title")
         titleRow.required = true
-        descriptionSection.addFormRow(titleRow)
+        infoGeneralSection.addFormRow(titleRow)
         // Discount
         let priceRow = XLFormRowDescriptor(tag: Tags.Discount.rawValue, rowType: XLFormRowDescriptorTypeDecimal, title: NSLocalizedString("Discount ($)", comment: "New promotion: discount"))
-        descriptionSection.addFormRow(priceRow)
+        priceRow.required = true
+        infoGeneralSection.addFormRow(priceRow)
         
         // Info section
         let infoSection = XLFormSectionDescriptor.formSection()
@@ -85,6 +87,14 @@ final class AddPromotionViewController: BaseAddItemViewController {
         endDate.value = NSDate(timeIntervalSinceNow: 60*60*25)
         datesSection.addFormRow(endDate)
         
+        //Description section
+        let descriptionSection = XLFormSectionDescriptor.formSection()
+        form.addFormSection(descriptionSection)
+        // Description
+        let descriptionRow = XLFormRowDescriptor(tag: Tags.Description.rawValue, rowType: XLFormRowDescriptorTypeTextView, title: NSLocalizedString("Description", comment: "New promotion: description"))
+
+        descriptionSection.addFormRow(descriptionRow)
+
         self.form = form
     }
     
@@ -108,6 +118,7 @@ final class AddPromotionViewController: BaseAddItemViewController {
                     promotion.name = values[Tags.Title.rawValue] as? String
                     promotion.discount = values[Tags.Discount.rawValue] as? Float
                     promotion.location = location
+                    promotion.text = values[Tags.Description.rawValue] as? String
                     promotion.endDate = values[Tags.EndDate.rawValue] as? NSDate
                     promotion.startDate = values[Tags.StartDate.rawValue] as? NSDate
                     if let shopId = NSUserDefaults.standardUserDefaults().valueForKey("shopId")  as? String {

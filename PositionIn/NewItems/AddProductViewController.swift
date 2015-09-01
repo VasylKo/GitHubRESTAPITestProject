@@ -54,6 +54,7 @@ final class AddProductViewController: BaseAddItemViewController {
         descriptionSection.addFormRow(descriptionRow)
         // Price
         let priceRow = XLFormRowDescriptor(tag: Tags.Price.rawValue, rowType: XLFormRowDescriptorTypeDecimal, title: NSLocalizedString("Price ($)", comment: "New product: price"))
+        priceRow.required = true
         descriptionSection.addFormRow(priceRow)
         
         // Info section

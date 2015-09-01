@@ -30,7 +30,7 @@ class CompactFeedTableCellModel: FeedTableCellModel {
         self.title = item.name
         self.info = info
         self.details = item.text
-        self.imageURL = url
+        self.imageURL = item.image ?? url
     }
 }
 
