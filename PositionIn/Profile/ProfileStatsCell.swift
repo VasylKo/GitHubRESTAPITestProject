@@ -16,6 +16,7 @@ class ProfileStatsCell: TableViewCell {
         postsLabel.text = m!.countPosts.map { String($0) }
         followersLabel.text = m!.countFollowers.map { String($0) }
         followingLabel.text = m!.countFollowing.map { String($0) }
+        selectionStyle = .None
     }
     
     override func prepareForReuse() {

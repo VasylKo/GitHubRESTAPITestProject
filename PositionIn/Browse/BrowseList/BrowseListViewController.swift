@@ -46,15 +46,14 @@ final class BrowseListViewController: UIViewController, BrowseActionProducer {
             Log.error?.value(error)
         }.onSuccess(token: dataRequestToken) { [weak self] response in
             Log.debug?.value(response.items)
-            Log.debug?.value(searchFilter.query)            
-            Log.debug?.value(self?.selectedItemType)
             if let strongSelf = self,
                let itemTypes = searchFilter.itemTypes
                where contains(itemTypes, strongSelf.selectedItemType) {
                 strongSelf.dataSource.setItems(response.items)
                 strongSelf.tableView.reloadData()
                 strongSelf.tableView.setContentOffset(CGPointZero, animated: false)
-            }            
+                strongSelf.actionConsumer?.browseControllerDidChangeContent(strongSelf)
+            }
         }
     }
     

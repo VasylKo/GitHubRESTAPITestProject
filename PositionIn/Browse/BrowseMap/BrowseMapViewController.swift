@@ -49,6 +49,7 @@ final class BrowseMapViewController: UIViewController, BrowseActionProducer {
             marker.userData = Box(item)
             return marker
         }
+        actionConsumer?.browseControllerDidChangeContent(self)
     }
     
     private var markers = [GMSMarker]()

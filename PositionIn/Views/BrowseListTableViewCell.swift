@@ -16,7 +16,8 @@ final class BrowseListTableViewCell: TableViewCell, TableViewChildViewController
         var filter = listController.filter
         filter.users = [ m!.objectId ]
         listController.filter = filter
-        listController.actionConsumer = actionConsumer
+        listController.actionConsumer = self
+        selectionStyle = .None
     }
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
@@ -42,15 +43,6 @@ final class BrowseListTableViewCell: TableViewCell, TableViewChildViewController
             constant: listTable.contentSize.height
         )
         listTable.addConstraint(listTableHeightConstraint)
-        contentSizeObserver = KVObserver(subject: listTable, keyPath: "contentSize") {
-            [weak listTable, weak self] _, _, _ in
-            if  /*let newSize = newSize, */
-                let table = listTable,
-                let strongSelf = self {
-                    strongSelf.listTableHeightConstraint.constant = table.contentSize.height
-                    strongSelf.setNeedsLayout()
-            }
-        }
     }
 
     var childViewController: UIViewController {
@@ -67,8 +59,23 @@ final class BrowseListTableViewCell: TableViewCell, TableViewChildViewController
     let listController = Storyboards.Main.instantiateBrowseListViewController()
     
     private var listTableHeightConstraint: NSLayoutConstraint!
-    private var contentSizeObserver: KVObserver<NSValue>!
 }
+
+extension BrowseListTableViewCell: BrowseActionConsumer {
+    func browseController(controller: BrowseActionProducer, didSelectItem objectId: CRUDObjectId, type itemType:FeedItem.ItemType) {
+        actionConsumer?.browseController(controller, didSelectItem: objectId, type: itemType)
+    }
+    
+    func browseControllerDidChangeContent(controller: BrowseActionProducer) {
+        
+        listTableHeightConstraint.constant = listController.tableView.contentSize.height
+        superview?.setNeedsLayout()
+        
+        actionConsumer?.browseControllerDidChangeContent(controller)
+    }
+    
+}
+
 
 public struct BrowseListCellModel: ProfileCellModel {
     let objectId: CRUDObjectId

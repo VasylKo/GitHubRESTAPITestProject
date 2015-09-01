@@ -51,6 +51,7 @@ class ProfileListViewController: BesideMenuViewController, BrowseActionProducer 
             BrowseListCellModel(objectId: profile.objectId)
         ]
         tableView.reloadData()
+        actionConsumer?.browseControllerDidChangeContent(self)
     }
 
     
