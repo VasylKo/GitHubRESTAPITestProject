@@ -46,6 +46,7 @@ final class BrowseListTableViewCell: TableViewCell, TableViewChildViewController
             constant: listTable.contentSize.height
         )
         listTable.addConstraint(listTableHeightConstraint)
+        listTable.scrollEnabled = false
     }
 
     var childViewController: UIViewController {
@@ -65,8 +66,8 @@ extension BrowseListTableViewCell: BrowseActionConsumer {
     }
     
     func browseControllerDidChangeContent(controller: BrowseActionProducer) {
-        
-        listTableHeightConstraint.constant = listController.tableView.contentSize.height
+        //TODO: use constraint outlet instead of magic number
+        listTableHeightConstraint.constant = listController.tableView.contentSize.height + 20 // Padding top
         superview?.setNeedsLayout()
         
         actionConsumer?.browseControllerDidChangeContent(controller)
