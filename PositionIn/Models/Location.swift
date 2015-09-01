@@ -26,12 +26,12 @@ struct Location: Mappable, Printable {
     
     init?(_ map: Map) {
         mapping(map)
-        if objectId == CRUDObjectInvalidId {
-            Log.error?.message("Error while parsing object")
-            Log.debug?.trace()
-            Log.verbose?.value(self)
-            return nil
-        }
+//        if objectId == CRUDObjectInvalidId {
+//            Log.error?.message("Error while parsing object")
+//            Log.debug?.trace()
+//            Log.verbose?.value(self)
+//            return nil
+//        }
         switch (coordinates) {
         case (.Some):
             break
