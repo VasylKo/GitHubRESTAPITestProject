@@ -74,6 +74,7 @@ protocol BrowseActionConsumer: class {
         displayModeSegmentedControl.selectedSegmentIndex = mode.rawValue
     }
     
+    
 
     //MARK: - UI -
     
@@ -145,6 +146,15 @@ protocol BrowseActionConsumer: class {
             let controller =  Storyboards.Main.instantiateProductDetailsViewControllerId()
             controller.objectId = objectId
             navigationController?.pushViewController(controller, animated: true)
+        case .Event:
+            let controller =  Storyboards.Main.instantiateEventDetailsViewControllerId()
+            controller.objectId = objectId
+            navigationController?.pushViewController(controller, animated: true)
+        case .Promotion:
+            let controller =  Storyboards.Main.instantiatePromotionDetailsViewControllerId()
+            controller.objectId = objectId
+            navigationController?.pushViewController(controller, animated: true)
+            
         default:
             Log.debug?.message("Did select \(itemType) \(objectId)")
             

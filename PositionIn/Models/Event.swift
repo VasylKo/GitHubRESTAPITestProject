@@ -68,6 +68,10 @@ struct Event: CRUDObject {
         return "/v1.0/events"
     }
     
+    static func endpoint(eventId: CRUDObjectId) -> String {
+        return "/v1.0/events/\(eventId)"
+    }
+    
     static func userEventsEndpoint(userId: CRUDObjectId) -> String {
         return UserProfile.endpoint().stringByAppendingPathComponent("\(userId)/events")
     }

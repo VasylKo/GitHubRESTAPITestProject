@@ -49,6 +49,10 @@
 		2431EBDC1B945F5A009FB158 /* Promotion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2431EBDB1B945F5A009FB158 /* Promotion.swift */; };
 		2431EBDE1B947442009FB158 /* ShopItemProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2431EBDD1B947442009FB158 /* ShopItemProduct.swift */; };
 		2431EBE01B94C1DC009FB158 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2431EBDF1B94C1DC009FB158 /* Event.swift */; };
+		2431EBE21B95B351009FB158 /* EventDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2431EBE11B95B351009FB158 /* EventDetailsViewController.swift */; };
+		2431EBE41B95B36D009FB158 /* PositionIn.EventDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2431EBE31B95B36D009FB158 /* PositionIn.EventDetailsViewController.xib */; };
+		2431EBE61B95BD2A009FB158 /* PromotionDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2431EBE51B95BD2A009FB158 /* PromotionDetailsViewController.swift */; };
+		2431EBE81B95BD3B009FB158 /* PositionIn.PromotionDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2431EBE71B95BD3B009FB158 /* PositionIn.PromotionDetailsViewController.xib */; };
 		243D0AA81B8AF90800B0E220 /* RegisterInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243D0AA71B8AF90800B0E220 /* RegisterInfoViewController.swift */; };
 		24D850421B878730008CAE82 /* LoginSignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D850411B878730008CAE82 /* LoginSignupViewController.swift */; };
 		451B04D684C5CB71F3D6581C /* Pods_PositionIn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7CE5A186774ECEB07E96F58 /* Pods_PositionIn.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
@@ -365,6 +369,10 @@
 		2431EBDB1B945F5A009FB158 /* Promotion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Promotion.swift; sourceTree = "<group>"; };
 		2431EBDD1B947442009FB158 /* ShopItemProduct.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShopItemProduct.swift; sourceTree = "<group>"; };
 		2431EBDF1B94C1DC009FB158 /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
+		2431EBE11B95B351009FB158 /* EventDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailsViewController.swift; sourceTree = "<group>"; };
+		2431EBE31B95B36D009FB158 /* PositionIn.EventDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.EventDetailsViewController.xib; sourceTree = "<group>"; };
+		2431EBE51B95BD2A009FB158 /* PromotionDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PromotionDetailsViewController.swift; sourceTree = "<group>"; };
+		2431EBE71B95BD3B009FB158 /* PositionIn.PromotionDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.PromotionDetailsViewController.xib; sourceTree = "<group>"; };
 		243D0AA71B8AF90800B0E220 /* RegisterInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterInfoViewController.swift; sourceTree = "<group>"; };
 		24D850411B878730008CAE82 /* LoginSignupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginSignupViewController.swift; sourceTree = "<group>"; };
 		46EE2AF3395401D4D26EB34F /* Pods_PosInCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PosInCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -2169,6 +2177,10 @@
 			children = (
 				E69420F81B66358000F34F06 /* ProductDetailsViewController.swift */,
 				E69420FE1B665F5100F34F06 /* PositionIn.ProductDetailsViewController.xib */,
+				2431EBE11B95B351009FB158 /* EventDetailsViewController.swift */,
+				2431EBE51B95BD2A009FB158 /* PromotionDetailsViewController.swift */,
+				2431EBE71B95BD3B009FB158 /* PositionIn.PromotionDetailsViewController.xib */,
+				2431EBE31B95B36D009FB158 /* PositionIn.EventDetailsViewController.xib */,
 			);
 			name = ProductDetails;
 			path = PositionIn/ProductDetails;
@@ -2559,6 +2571,8 @@
 				E62B16FD1B5CDF2400D446BC /* PositionIn.MessagesListViewController.xib in Resources */,
 				E69421021B666A1600F34F06 /* PositionIn.ActionCell.xib in Resources */,
 				E64DC3551B4E53C90011D37C /* Main.storyboard in Resources */,
+				2431EBE81B95BD3B009FB158 /* PositionIn.PromotionDetailsViewController.xib in Resources */,
+				2431EBE41B95B36D009FB158 /* PositionIn.EventDetailsViewController.xib in Resources */,
 				E6DA53CC1B7D0125000087A7 /* PositionIn.CommunityInfoCell.xib in Resources */,
 				E61B20E71B7E5AF7005EAB2C /* PositionIn.ProfileInfoCell.xib in Resources */,
 				E64DC35A1B4E53C90011D37C /* LaunchScreen.xib in Resources */,
@@ -2710,6 +2724,7 @@
 				E66115A51B73A920003DB5B3 /* AddProductViewController.swift in Sources */,
 				E6365D351B7D709E00CB79CB /* PhotoInfo.swift in Sources */,
 				E660E52D1B5AC23B00F52050 /* MainMenuViewController.swift in Sources */,
+				2431EBE61B95BD2A009FB158 /* PromotionDetailsViewController.swift in Sources */,
 				E66115A81B73AE0F003DB5B3 /* AddPromotionViewController.swift in Sources */,
 				E68B52281B875F8F006B980C /* PromotionListCell.swift in Sources */,
 				E661158D1B73778B003DB5B3 /* RecoverPasswordViewController.swift in Sources */,
@@ -2718,6 +2733,7 @@
 				E68B52271B875F8F006B980C /* PostListCell.swift in Sources */,
 				2429FFAC1B8E11EE0061B4E0 /* PasswordTextValidator.swift in Sources */,
 				2429FFAA1B8E03BD0061B4E0 /* NameTextValidator.swift in Sources */,
+				2431EBE21B95B351009FB158 /* EventDetailsViewController.swift in Sources */,
 				E661158F1B738844003DB5B3 /* BaseLoginViewController.swift in Sources */,
 				E61B20ED1B81286E005EAB2C /* UploadPhotoCell.swift in Sources */,
 				E6A869F41B60FF2100797D16 /* UserProfile.swift in Sources */,

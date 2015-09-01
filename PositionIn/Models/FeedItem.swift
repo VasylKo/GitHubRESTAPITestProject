@@ -19,6 +19,9 @@ struct FeedItem: CRUDObject {
     var image: NSURL?
     var type: ItemType = .Unknown
     var location: Location?
+    var startDate: NSDate?
+    var endDate: NSDate?
+    var discount: Float?
     
     var author: CRUDObjectId = CRUDObjectInvalidId
     var community: CRUDObjectId = CRUDObjectInvalidId
@@ -45,6 +48,9 @@ struct FeedItem: CRUDObject {
         community <- map["community"]
         name <- map["name"]
         price <- map["price"]
+        startDate <- map["startDate"]
+        endDate <- map["endDate"]
+        discount <- map["discount"]
     }
     
     var description: String {
