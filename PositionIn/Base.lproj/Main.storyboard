@@ -593,6 +593,14 @@
             </objects>
             <point key="canvasLocation" x="1765" y="-90"/>
         </scene>
+        <!--Event Details View Controller-->
+        <scene sceneID="TQA-tq-hsQ">
+            <objects>
+                <viewController storyboardIdentifier="EventDetailsViewControllerId" id="RQs-Yx-TSv" customClass="EventDetailsViewController" customModule="PositionIn" customModuleProvider="target" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ru2-xA-PBE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1764" y="604"/>
+        </scene>
         <!--Product Inventory-->
         <scene sceneID="Kkc-3q-c1D">
             <objects>
@@ -625,6 +633,7 @@
                     </navigationItem>
                     <connections>
                         <segue destination="S6u-6D-z8V" kind="show" identifier="ShowProductDetails" id="UGm-BP-OPQ"/>
+                        <segue destination="RQs-Yx-TSv" kind="show" identifier="ShowEventDetails" id="B0K-ir-QiG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="spd-ov-gak" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -73,7 +73,7 @@ protocol BrowseActionConsumer: class {
         displayModeSegmentedControl.selectedSegmentIndex = mode.rawValue
     }
     
-
+    
     //MARK: - UI -
     
     override func viewDidLoad() {
@@ -112,7 +112,7 @@ protocol BrowseActionConsumer: class {
         segmentControl.selectionStyle = HMSegmentedControlSelectionStyleFullWidthStripe
         segmentControl.addTarget(self, action: "displayModeSegmentChanged:", forControlEvents: UIControlEvents.ValueChanged)
         return segmentControl
-    }()
+        }()
     
     
     @IBAction private func displayModeSegmentChanged(sender: HMSegmentedControl) {
@@ -123,7 +123,7 @@ protocol BrowseActionConsumer: class {
         }
     }
     
-
+    
     //MARK: - Private -
     
     private weak var currentModeViewController: UIViewController?
@@ -144,12 +144,17 @@ protocol BrowseActionConsumer: class {
             let controller =  Storyboards.Main.instantiateProductDetailsViewControllerId()
             controller.objectId = objectId
             navigationController?.pushViewController(controller, animated: true)
+        case .Event:
+            let controller =  Storyboards.Main.instantiateEventDetailsViewControllerId()
+            controller.objectId = objectId
+            navigationController?.pushViewController(controller, animated: true)
+            
         default:
             Log.debug?.message("Did select \(itemType) \(objectId)")
             
         }
     }
-
+    
     //MARK: - Search -
     
     private lazy var searchbar: SearchBar = { [unowned self] in
@@ -157,12 +162,12 @@ protocol BrowseActionConsumer: class {
         searchBar.delegate = self
         return searchBar
         }()
-
+    
     func searchBarShouldBeginEditing(searchBar: UISearchBar) -> Bool {
         searchBar.resignFirstResponder()
         SearchViewController.present(searchbar, presenter: self)
         return false
     }
-
-
+    
+    
 }

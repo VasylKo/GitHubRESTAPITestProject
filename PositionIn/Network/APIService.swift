@@ -119,6 +119,11 @@ struct APIService {
         return createObject(endpoint, object: object)
     }
 
+    func getEvent(objectId: String) -> Future<Event, NSError> {
+        let endpoint = Event.endpoint(objectId)
+        return getObject(endpoint)
+    }
+    
     //MARK: - Products -
     
     func getUserProducts(userId: CRUDObjectId, page: Page) -> Future<CollectionResponse<ShopItemProduct>, NSError> {

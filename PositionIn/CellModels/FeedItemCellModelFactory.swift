@@ -21,8 +21,8 @@ struct FeedItemCellModelFactory {
                 CompactFeedTableCellModel(
                     item: feedItem,
                     title: "Art Gallery",
-                    details: dateFormatter.stringFromDate(NSDate()),
-                    info: "45 People are attending",
+                    details: "45 People are attending",
+                    info: dateFormatter.stringFromDate(feedItem.startDate ?? NSDate()),
                     imageURL: NSURL(string: "https://cdn4.iconfinder.com/data/icons/Pretty_office_icon_part_2/256/add-event.png")
                 ),
             ]
