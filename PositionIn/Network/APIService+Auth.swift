@@ -35,13 +35,11 @@ extension APIService {
     }
     
     // Success on existing session or after token refresh
-    func session() -> Future<Void ,NSError> {
+    func session() -> Future<AuthResponse.Token, NSError> {
         return sessionController.session().recoverWith { _ in
             return self.refreshToken().map { response in
                 return response.accessToken
             }
-        }.map() { _ in
-            return ()
         }
     }
     
