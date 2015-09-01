@@ -23,7 +23,7 @@ struct APIService {
         ) {
             baseURL = url
             self.dataProvider = dataProvider
-            self.sessionController = SessionController()
+            self.sessionController = sessionController
     }
     
     //MARK: - Variables -
@@ -181,8 +181,8 @@ struct APIService {
         let params = APIServiceQuery()
         params.append(query: query)
         params.append(query: page)
-        
-        return sessionController.session().flatMap {
+        Log.debug?.value(params.query)
+        return session().flatMap {
             (token: AuthResponse.Token) -> Future<CollectionResponse<FeedItem>, NSError> in
             let request = self.updateRequest(token, endpoint: endpoint, params: params.query)
             let (_ , future): (Alamofire.Request, Future<CollectionResponse<FeedItem>, NSError>) = self.dataProvider.objectRequest(request)
@@ -195,7 +195,7 @@ struct APIService {
     private func getObjectsCollection<C: CRUDObject>(endpoint: String, params: [String : AnyObject]?) -> Future<CollectionResponse<C>, NSError> {
         typealias CRUDResultType = (Alamofire.Request, Future<CollectionResponse<C>, NSError>)
         
-        return sessionController.session().flatMap {
+        return session().flatMap {
             (token: AuthResponse.Token) -> Future<CollectionResponse<C>, NSError> in
             let request = self.readRequest(token, endpoint: endpoint, params: params)
             let (_ , future): CRUDResultType = self.dataProvider.objectRequest(request)
@@ -206,7 +206,7 @@ struct APIService {
     private func getObject<C: CRUDObject>(endpoint: String) -> Future<C, NSError> {
         typealias CRUDResultType = (Alamofire.Request, Future<C, NSError>)
         
-        return sessionController.session().flatMap {
+        return session().flatMap {
             (token: AuthResponse.Token) -> Future<C, NSError> in
             let request = self.readRequest(token, endpoint: endpoint)
             let (_, future): CRUDResultType = self.dataProvider.objectRequest(request)
@@ -217,7 +217,7 @@ struct APIService {
     private func createObject<C: CRUDObject>(endpoint: String, object: C) -> Future<C, NSError> {
         typealias CRUDResultType = (Alamofire.Request, Future<UpdateResponse, NSError>)
         
-        return sessionController.session().flatMap {
+        return session().flatMap {
             (token: AuthResponse.Token) -> Future<C, NSError> in
             let params = Mapper().toJSON(object)
             let request = self.updateRequest(token, endpoint: endpoint, method: .POST, params: params)
@@ -233,7 +233,7 @@ struct APIService {
     private func updateObject<C: CRUDObject>(endpoint: String, object: C) -> Future<Void, NSError> {
         typealias CRUDResultType = (Alamofire.Request, Future<Void, NSError>)
         
-        return sessionController.session().flatMap {
+        return session().flatMap {
             (token: AuthResponse.Token) -> Future<Void, NSError> in
             let params = Mapper().toJSON(object)
             let request = self.updateRequest(token, endpoint: endpoint, method: .PUT, params: params)
@@ -396,7 +396,7 @@ extension APIService {
     
     func uploadImage(data: NSData, dataUTI: String) -> Future<NSURL, NSError> {
         let fileInfo = NetworkDataProvider.FileUpload(data: data, dataUTI: dataUTI)
-        return sessionController.session().flatMap {
+        return session().flatMap {
             (token: AuthResponse.Token) -> Future<AnyObject?,NSError> in
             let urlRequest = self.imageRequest(token)
             return self.dataProvider.upload(urlRequest, files: [fileInfo])

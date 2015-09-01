@@ -8,15 +8,19 @@
 
 import PosInCore
 
-
 final class BrowseListTableViewCell: TableViewCell, TableViewChildViewControllerCell {
     
     override func setModel(model: TableViewCellModel) {
         let m = model as? BrowseListCellModel
         assert(m != nil, "Invalid model passed")
+        selectionStyle = .None
+        actionConsumer = m!.actionConsumer
+        listController.actionConsumer = self
         var filter = listController.filter
         filter.users = [ m!.objectId ]
         listController.filter = filter
+        
+
     }
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
@@ -31,15 +35,47 @@ final class BrowseListTableViewCell: TableViewCell, TableViewChildViewController
     
     private func prepareChildController() {
         contentView.addSubViewOnEntireSize(listController.view)
+        let listTable = listController.tableView
+        listTableHeightConstraint = NSLayoutConstraint(
+            item: listTable,
+            attribute: .Height,
+            relatedBy: .Equal,
+            toItem: nil,
+            attribute: .NotAnAttribute,
+            multiplier: 1.0,
+            constant: listTable.contentSize.height
+        )
+        listTable.addConstraint(listTableHeightConstraint)
     }
 
     var childViewController: UIViewController {
         return listController
     }
     
+    weak var actionConsumer: BrowseActionConsumer?
+    
     let listController = Storyboards.Main.instantiateBrowseListViewController()
+    
+    private var listTableHeightConstraint: NSLayoutConstraint!
 }
+
+extension BrowseListTableViewCell: BrowseActionConsumer {
+    func browseController(controller: BrowseActionProducer, didSelectItem objectId: CRUDObjectId, type itemType: FeedItem.ItemType) {
+        actionConsumer?.browseController(controller, didSelectItem: objectId, type: itemType)
+    }
+    
+    func browseControllerDidChangeContent(controller: BrowseActionProducer) {
+        
+        listTableHeightConstraint.constant = listController.tableView.contentSize.height
+        superview?.setNeedsLayout()
+        
+        actionConsumer?.browseControllerDidChangeContent(controller)
+    }
+    
+}
+
 
 public struct BrowseListCellModel: ProfileCellModel {
     let objectId: CRUDObjectId
+    unowned var actionConsumer: BrowseActionConsumer
 }

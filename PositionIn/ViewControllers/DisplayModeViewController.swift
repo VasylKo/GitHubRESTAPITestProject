@@ -15,7 +15,8 @@ protocol BrowseActionProducer {
 }
 
 protocol BrowseActionConsumer: class {
-    func browseController(controller: BrowseActionProducer, didSelectItem objectId: CRUDObjectId, type itemType:FeedItem.ItemType)
+    func browseController(controller: BrowseActionProducer, didSelectItem objectId: CRUDObjectId, type itemType: FeedItem.ItemType)
+    func browseControllerDidChangeContent(controller: BrowseActionProducer)
 }
 
 
@@ -138,7 +139,7 @@ protocol BrowseActionConsumer: class {
     
     //MARK: - BrowseActionConsumer: Browse actions -
     
-    func browseController(controller: BrowseActionProducer, didSelectItem objectId: CRUDObjectId, type itemType:FeedItem.ItemType) {
+    func browseController(controller: BrowseActionProducer, didSelectItem objectId: CRUDObjectId, type itemType: FeedItem.ItemType) {
         switch itemType {
         case .Item:
             let controller =  Storyboards.Main.instantiateProductDetailsViewControllerId()
@@ -148,6 +149,10 @@ protocol BrowseActionConsumer: class {
             Log.debug?.message("Did select \(itemType) \(objectId)")
             
         }
+    }
+    
+    func browseControllerDidChangeContent(controller: BrowseActionProducer) {
+        Log.verbose?.message("\(controller) did change content")
     }
 
     //MARK: - Search -
