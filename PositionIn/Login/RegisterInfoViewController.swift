@@ -49,19 +49,11 @@ final class RegisterInfoViewController: BaseLoginViewController {
         }
         
         
-        api().register(username: username, password: password, firstName: firstName, lastName: lastName).flatMap {
-            (userProfile: UserProfile) ->  Future<Void,NSError> in
-            var updatedProfile = userProfile
-            updatedProfile.avatar = NSURL(string:"http://i.imgur.com/5npTFKP.png")
-            return api().updateMyProfile(updatedProfile)
-            }.flatMap { _ in
-                return api().isUserAuthorized()
-            }.onFailure { error in
-                Log.error?.value(error)
-            }.onSuccess { [weak self] _ in
-                Log.info?.message("Registration done")
-                self?.sideBarController?.executeAction(.ForYou)
-                self?.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
+        api().register(username: username, password: password, firstName: firstName, lastName: lastName).onSuccess {
+            [weak self] _ in
+            Log.info?.message("Registration done")
+            self?.sideBarController?.executeAction(SidebarViewController.defaultAction)
+            self?.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
         }
     }
     

@@ -12,6 +12,9 @@ import PosInCore
 import Box
 
 class SidebarViewController: KYDrawerController {
+    
+    static let defaultAction: Action = .ForYou
+    
     enum Action  {
         case None
         

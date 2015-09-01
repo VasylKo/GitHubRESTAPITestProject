@@ -26,7 +26,7 @@ class BaseLoginViewController: UIViewController {
     }
     
     func dismissLogin() {
-        sideBarController?.executeAction(.ForYou)
+        sideBarController?.executeAction(SidebarViewController.defaultAction)
         dismissViewControllerAnimated(true, completion: nil)
     }
 

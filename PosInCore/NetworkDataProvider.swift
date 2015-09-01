@@ -185,7 +185,7 @@ extension NetworkDataProvider {
     - ParsingError:    Response Parsing error
     */
     public enum ErrorCodes: Int {
-        static let errorDomain = "com.bekitzur.Network"
+        public static let errorDomain = "com.bekitzur.Network"
         
         case UnknownError, InvalidRequestError, TransferError, InvalidResponseError, ParsingError, InvalidSessionError
         

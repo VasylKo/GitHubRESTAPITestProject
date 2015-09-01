@@ -19,9 +19,13 @@ import GoogleMaps
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
-    let api: APIService
+    private(set) var api: APIService
     let chatClient: XMPPClient
     let locationController: LocationController
+    
+    var sidebarViewController: SidebarViewController? {
+        return self.window?.rootViewController as? SidebarViewController
+    }
     
     override init() {
         #if DEBUG
@@ -52,6 +56,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         setupMaps()
+        api.defaultErrorHandler = UIErrorHandler()
+        api.recoverSession().onSuccess { [unowned self] _ in
+            self.sidebarViewController?.executeAction(SidebarViewController.defaultAction)
+        }
+        /*
         api.isUserAuthorized().onComplete { result in
             let defaultAction: SidebarViewController.Action
             switch result.value {
@@ -64,7 +73,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 sidebarViewController.executeAction(defaultAction)
             }
         }                
-        
+        */
         return true
                 
         self.chatClient.auth("ixmpp@beewellapp.com", password: "1HateD0m2").future().onSuccess { [unowned self] in
@@ -104,6 +113,19 @@ extension AppDelegate {
     func setupMaps() {
         let apiKey = "AIzaSyA3NvrDKBcpIsnq4-ZACG41y7Mj-wSfVrY"
         GMSServices.provideAPIKey(apiKey)
+    }
+    
+    func UIErrorHandler() -> APIService.ErrorHandler {
+        return { [unowned self] error in
+            let baseErrorDomain: String = NetworkDataProvider.ErrorCodes.errorDomain
+            
+            switch (error.domain, error.code) {
+            case (baseErrorDomain, NetworkDataProvider.ErrorCodes.InvalidSessionError.rawValue):
+                Log.error?.message("Invalid session")
+            default:
+                Log.error?.value(error)
+            }
+        }
     }
 }
 
