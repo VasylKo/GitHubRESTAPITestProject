@@ -52,6 +52,10 @@ struct Storyboards {
             return self.storyboard.instantiateViewControllerWithIdentifier("EventDetailsViewControllerId") as! EventDetailsViewController
         }
 
+        static func instantiatePromotionDetailsViewControllerId() -> PromotionDetailsViewController! {
+            return self.storyboard.instantiateViewControllerWithIdentifier("PromotionDetailsViewControllerId") as! PromotionDetailsViewController
+        }
+
         static func instantiateMapViewController() -> BrowseViewController! {
             return self.storyboard.instantiateViewControllerWithIdentifier("MapViewController") as! BrowseViewController
         }
@@ -406,6 +410,8 @@ extension ProductDetailsViewController {
 }
 
 //MARK: - EventDetailsViewController
+
+//MARK: - PromotionDetailsViewController
 
 //MARK: - ProductInventoryViewController
 extension UIStoryboardSegue {

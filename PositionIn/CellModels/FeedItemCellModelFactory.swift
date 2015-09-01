@@ -28,12 +28,13 @@ struct FeedItemCellModelFactory {
             ]
 
         case .Promotion:
+            let discount: Float = feedItem.discount ?? 0.0
             return [
                 CompactFeedTableCellModel(
                     item: feedItem,
                     title: "Arts & Crafts Summer Sale",
                     details: "The Sydney Art Store",
-                    info: "Save 80%",
+                    info: "Save $\(discount)",
                     imageURL: NSURL(string: "http://2.bp.blogspot.com/-A8Yu--RWxYg/UxH1ZD-ZBuI/AAAAAAAAPkk/ZoP_JtpeKR4/s1600/promo.gif")
                 ),
             ]

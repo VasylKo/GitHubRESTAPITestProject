@@ -11,7 +11,6 @@
                 <outlet property="eventImageView" destination="wuA-wp-A6y" id="PDK-Ac-x36"/>
                 <outlet property="headerLabel" destination="vXA-Ry-YIz" id="C7r-BG-Ea0"/>
                 <outlet property="infoLabel" destination="Rnm-FN-YEx" id="9s5-6X-KRx"/>
-                <outlet property="nameLabel" destination="gbN-OU-vQG" id="kq2-aw-ujv"/>
                 <outlet property="priceLabel" destination="eMi-0H-hX8" id="Lap-Wh-HU7"/>
                 <outlet property="view" destination="g23-wy-9VV" id="fuD-ie-How"/>
             </connections>
@@ -81,12 +80,6 @@
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Edward Ryan" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gbN-OU-vQG">
-                    <rect key="frame" x="499" y="187" width="93" height="18"/>
-                    <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="15"/>
-                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
             </subviews>
             <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
@@ -96,7 +89,6 @@
                 <constraint firstItem="TXR-bg-eLp" firstAttribute="leading" secondItem="g23-wy-9VV" secondAttribute="leading" id="8Fa-Ah-0ds"/>
                 <constraint firstItem="eMi-0H-hX8" firstAttribute="leading" secondItem="g23-wy-9VV" secondAttribute="leading" constant="8" id="DPQ-9E-ZOV"/>
                 <constraint firstItem="wuA-wp-A6y" firstAttribute="top" secondItem="g23-wy-9VV" secondAttribute="top" id="Hx2-Zu-DbU"/>
-                <constraint firstAttribute="trailing" secondItem="gbN-OU-vQG" secondAttribute="trailing" constant="8" id="Hxw-oI-cdA"/>
                 <constraint firstItem="A9g-V6-spc" firstAttribute="top" secondItem="wuA-wp-A6y" secondAttribute="bottom" id="KAi-QG-rzU"/>
                 <constraint firstAttribute="bottom" secondItem="veO-FX-15o" secondAttribute="bottom" id="NO5-cG-TAQ"/>
                 <constraint firstItem="A9g-V6-spc" firstAttribute="leading" secondItem="g23-wy-9VV" secondAttribute="leading" id="Pwr-Fx-yVh"/>
@@ -106,7 +98,6 @@
                 <constraint firstItem="A9g-V6-spc" firstAttribute="top" secondItem="wuA-wp-A6y" secondAttribute="bottom" constant="-70" id="dDP-oU-xgT"/>
                 <constraint firstItem="wuA-wp-A6y" firstAttribute="leading" secondItem="g23-wy-9VV" secondAttribute="leading" id="dzx-8Q-l9E"/>
                 <constraint firstItem="veO-FX-15o" firstAttribute="top" secondItem="A9g-V6-spc" secondAttribute="bottom" id="eLB-Ny-bVa"/>
-                <constraint firstItem="eMi-0H-hX8" firstAttribute="centerY" secondItem="gbN-OU-vQG" secondAttribute="centerY" id="fUs-cJ-ik7"/>
                 <constraint firstAttribute="trailing" secondItem="wuA-wp-A6y" secondAttribute="trailing" id="q6g-Ha-jdr"/>
                 <constraint firstAttribute="trailing" secondItem="TXR-bg-eLp" secondAttribute="trailing" id="sx4-Rv-ANd"/>
             </constraints>

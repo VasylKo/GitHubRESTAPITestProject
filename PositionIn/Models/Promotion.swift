@@ -69,6 +69,10 @@ struct Promotion: CRUDObject {
         return "/v1.0/promotions"
     }
     
+    static func endpoint(promotionId: CRUDObjectId) -> String {
+        return "/v1.0/promotions/\(promotionId)"
+    }
+    
     static func userPromotionsEndpoint(userId: CRUDObjectId) -> String {
         return UserProfile.endpoint().stringByAppendingPathComponent("\(userId)/promotions")
     }

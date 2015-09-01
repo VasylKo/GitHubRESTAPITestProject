@@ -119,6 +119,9 @@
                     <navigationItem key="navigationItem" title="Messages" id="45E-vw-XYB">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="tdQ-rK-BMU"/>
                     </navigationItem>
+                    <connections>
+                        <segue destination="tr4-Tq-w9T" kind="show" id="8OV-WN-0ZF"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4CW-wc-yjP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -600,6 +603,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ru2-xA-PBE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1764" y="604"/>
+        </scene>
+        <!--Promotion Details View Controller-->
+        <scene sceneID="ec5-5d-AsZ">
+            <objects>
+                <viewController storyboardIdentifier="PromotionDetailsViewControllerId" id="tr4-Tq-w9T" customClass="PromotionDetailsViewController" customModule="PositionIn" customModuleProvider="target" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="r3T-61-MaQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1764" y="1273"/>
         </scene>
         <!--Product Inventory-->
         <scene sceneID="Kkc-3q-c1D">

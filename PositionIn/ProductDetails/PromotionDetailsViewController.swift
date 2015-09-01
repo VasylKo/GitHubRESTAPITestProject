@@ -1,5 +1,5 @@
 //
-//  EventDetailsViewController.swift
+//  PromotionDetailsViewController.swift
 //  PositionIn
 //
 //  Created by Alexandr Goncharov on 27/07/15.
@@ -10,16 +10,16 @@ import UIKit
 import PosInCore
 import CleanroomLogger
 
-protocol EventDetailsActionConsumer {
-    func executeAction(action: EventDetailsViewController.EventDetailsAction)
+protocol PromotionDetailsActionConsumer {
+    func executeAction(action: PromotionDetailsViewController.PromotionDetailsAction)
 }
 
-final class EventDetailsViewController: UIViewController {
+final class PromotionDetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
         title = NSLocalizedString("Event", comment: "Event details: title")
-        dataSource.items = eventActionItems()
+        dataSource.items = promotionActionItems()
         dataSource.configureTable(actionTableView)
         reloadData()
     }
@@ -27,51 +27,48 @@ final class EventDetailsViewController: UIViewController {
     
     private func reloadData() {
         let page = APIService.Page()
-        api().getEvent(objectId!).onSuccess { [weak self] event in
-            self?.event = event
+        api().getPromotion(objectId!).onSuccess { [weak self] promotion in
+            self?.promotion = promotion
         }
         
     }
     
-    private lazy var dataSource: EventDetailsDataSource = {
-        let dataSource = EventDetailsDataSource()
+    private lazy var dataSource: PromotionDetailsDataSource = {
+        let dataSource = PromotionDetailsDataSource()
         dataSource.parentViewController = self
         return dataSource
         }()
     
     
-    private func eventActionItems() -> [[EventActionItem]] {
+    private func promotionActionItems() -> [[PromotionActionItem]] {
         return [
             [ // 0 section
-                EventActionItem(title: NSLocalizedString("Attend", comment: "Event action: Attend"), image: "MainMenuMessages", action: .Attend),
+                PromotionActionItem(title: NSLocalizedString("Products on Sale", comment: "Promotion action: Products on Sale"), image: "MainMenuMessages", action: .ProductsOnSale),
             ],
             [ // 1 section
-                EventActionItem(title: NSLocalizedString("Products on Sale", comment: "Event action: Products on Sale"), image: "MainMenuMessages", action: .ProductsOnSale),
-                EventActionItem(title: NSLocalizedString("Send Message", comment: "Event action: Send Message"), image: "MainMenuMessages", action: .SendMessage),
-                EventActionItem(title: NSLocalizedString("Organizer Profile", comment: "Event action: Organizer Profile"), image: "MainMenuMessages", action: .OrganizerProfile),
-                EventActionItem(title: NSLocalizedString("Share", comment: "Event action: Share"), image: "MainMenuMessages", action: .Share),
-                EventActionItem(title: NSLocalizedString("Terms and Information", comment: "Event action: Terms and Information"), image: "MainMenuMessages", action: .TermsAndInformation),
-                EventActionItem(title: NSLocalizedString("Navigate", comment: "Event action: Navigate"), image: "MainMenuMessages", action: .Navigate)
-                
-                
+                PromotionActionItem(title: NSLocalizedString("Send Message", comment: "Promotion action: Send Message"), image: "MainMenuMessages", action: .SendMessage),
+                PromotionActionItem(title: NSLocalizedString("Seller Profile", comment: "Promotion action: Seller Profile"), image: "MainMenuMessages", action: .SellerProfile),
+                PromotionActionItem(title: NSLocalizedString("Terms and Information", comment: "Promotion action: Terms and Information"), image: "MainMenuMessages", action: .TermsAndInformation),
+                PromotionActionItem(title: NSLocalizedString("Navigate", comment: "Promotion action: Navigate"), image: "MainMenuMessages", action: .Navigate)
             ],
         ]
         
     }
     
-    private var event:  Event? {
+    private var promotion:  Promotion? {
         didSet{
-            headerLabel.text = event?.name
-            detailsLabel.text = event?.descriptionEvent
+            headerLabel.text = promotion?.name
+            detailsLabel.text = promotion?.text
             
             let dateFormatter = NSDateFormatter()
             dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
             
-            let startDate = dateFormatter.stringFromDate(event?.startDate ?? NSDate())
-            let endDate = dateFormatter.stringFromDate(event?.endDate ?? NSDate())
+            let startDate = dateFormatter.stringFromDate(promotion?.startDate ?? NSDate())
+            let endDate = dateFormatter.stringFromDate(promotion?.endDate ?? NSDate())
             priceLabel.text = "\(startDate) - \(endDate)"
-            if let imgURL = event?.photos?.first?.url {
-                eventImageView.hnk_setImageFromURL(imgURL)
+            infoLabel.text = "Save $\(promotion?.discount ?? 0)"
+            if let imgURL = promotion?.photos?.first?.url {
+                promotionImageView.hnk_setImageFromURL(imgURL)
             }
         }
     }
@@ -79,7 +76,7 @@ final class EventDetailsViewController: UIViewController {
     var objectId: CRUDObjectId?
     
     @IBOutlet private weak var actionTableView: UITableView!
-    @IBOutlet private weak var eventImageView: UIImageView!
+    @IBOutlet private weak var promotionImageView: UIImageView!
     @IBOutlet private weak var headerLabel: UILabel!
     @IBOutlet private weak var infoLabel: UILabel!
     
@@ -87,22 +84,18 @@ final class EventDetailsViewController: UIViewController {
     @IBOutlet private weak var detailsLabel: UILabel!
 }
 
-extension EventDetailsViewController {
-    enum EventDetailsAction: Printable {
-        case Attend, ProductsOnSale, SendMessage, OrganizerProfile, Share, TermsAndInformation, Navigate
+extension PromotionDetailsViewController {
+    enum PromotionDetailsAction: Printable {
+        case  ProductsOnSale, SendMessage, SellerProfile, TermsAndInformation, Navigate
         
         var description: String {
             switch self {
-            case .Attend:
-                return "Attend"
             case .ProductsOnSale:
                 return "Products on Sale"
             case .SendMessage:
                 return "Send Message"
-            case .OrganizerProfile:
-                return "Organizer Profile"
-            case .Share:
-                return "Share"
+            case .SellerProfile:
+                return "Seller Profile"
             case .TermsAndInformation:
                 return "Terms & Information"
             case .Navigate:
@@ -112,15 +105,15 @@ extension EventDetailsViewController {
     }
     
     
-    struct EventActionItem {
+    struct PromotionActionItem {
         let title: String
         let image: String
-        let action: EventDetailsAction
+        let action: PromotionDetailsAction
     }
 }
 
-extension EventDetailsViewController:EventDetailsActionConsumer {
-    func executeAction(action: EventDetailsAction) {
+extension PromotionDetailsViewController: PromotionDetailsActionConsumer {
+    func executeAction(action: PromotionDetailsAction) {
         switch action {
             
         default:
@@ -130,10 +123,10 @@ extension EventDetailsViewController:EventDetailsActionConsumer {
     }
 }
 
-extension EventDetailsViewController {
-    internal class EventDetailsDataSource: TableViewDataSource {
+extension PromotionDetailsViewController {
+    internal class PromotionDetailsDataSource: TableViewDataSource {
         
-        var items: [[EventActionItem]] = []
+        var items: [[PromotionActionItem]] = []
         
         override func configureTable(tableView: UITableView) {
             tableView.tableFooterView = UIView(frame: CGRectZero)
@@ -172,7 +165,7 @@ extension EventDetailsViewController {
         func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
             tableView.deselectRowAtIndexPath(indexPath, animated: true)
             let item = items[indexPath.section][indexPath.row]
-            if let actionConsumer = parentViewController as? EventDetailsActionConsumer {
+            if let actionConsumer = parentViewController as? PromotionDetailsActionConsumer {
                 actionConsumer.executeAction(item.action)
             }
         }

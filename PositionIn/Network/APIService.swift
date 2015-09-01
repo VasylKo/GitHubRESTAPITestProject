@@ -97,6 +97,10 @@ struct APIService {
         return createObject(endpoint, object: object)
     }
 
+    func getPromotion(objectId: String) -> Future<Promotion, NSError> {
+        let endpoint = Promotion.endpoint(objectId)
+        return getObject(endpoint)
+    }
     
     //MARK: - Events -
     
