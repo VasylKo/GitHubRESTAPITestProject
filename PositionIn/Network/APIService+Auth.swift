@@ -27,9 +27,10 @@ extension APIService {
     
     //Success if has valid session and user is not guest
     func recoverSession() -> Future<UserProfile, NSError> {
-        return session().flatMap { _ in
+        let f = session().flatMap { _ in
             return self.sessionController.isUserAuthorized()
-        }.flatMap { _ in
+        }
+        return handleFailure(f).flatMap { _ in
             return self.updateCurrentProfileStatus()
         }
     }
@@ -85,13 +86,13 @@ extension APIService {
     private func registerRequest(#username: String?, password: String?, info: [String: AnyObject]?) -> Future<AuthResponse, NSError> {
         let urlRequest = AuthRouter.Register(api: self, username: username, password: password, profileInfo: info)
         let (_, future): (Alamofire.Request, Future<AuthResponse, NSError>) = dataProvider.objectRequest(urlRequest)
-        return self.updateAuth(future)
+        return handleFailure(updateAuth(future))
     }
     
     private func loginRequest(#username: String, password: String) -> Future<AuthResponse, NSError> {
         let urlRequest = AuthRouter.Login(api: self, username: username, password: password)
         let (_, future): (Alamofire.Request, Future<AuthResponse, NSError>) = dataProvider.objectRequest(urlRequest)
-        return self.updateAuth(future)
+        return handleFailure(updateAuth(future))
     }
     
     private func refreshToken() -> Future<AuthResponse, NSError> {

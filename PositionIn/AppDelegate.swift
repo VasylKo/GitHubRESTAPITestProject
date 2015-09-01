@@ -14,6 +14,7 @@ import CleanroomLogger
 import ResponseDetective
 import Messaging
 import GoogleMaps
+import JDStatusBarNotification
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -103,13 +104,14 @@ extension AppDelegate {
     
     func UIErrorHandler() -> APIService.ErrorHandler {
         return { [unowned self] error in
-            Log.debug?.message(error.localizedDescription)
+            Log.error?.value(error)
             let baseErrorDomain: String = NetworkDataProvider.ErrorCodes.errorDomain
             switch (error.domain, error.code) {
             case (baseErrorDomain, NetworkDataProvider.ErrorCodes.InvalidSessionError.rawValue):
                 self.sidebarViewController?.executeAction(.Login)
+                JDStatusBarNotification.showWithStatus(error.localizedDescription, dismissAfter: 1.0, styleName: JDStatusBarStyleError)
             default:
-                Log.error?.value(error)
+                JDStatusBarNotification.showWithStatus(error.localizedDescription, dismissAfter: 1.0, styleName: JDStatusBarStyleWarning)
             }
         }
     }
