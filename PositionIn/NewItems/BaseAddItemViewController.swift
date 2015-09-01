@@ -88,13 +88,11 @@ class BaseAddItemViewController: XLFormViewController {
         communityRow.selectorOptions = [ emptyOption ]
         api().currentUserId().flatMap { userId in
             return api().getUserCommunities(userId)
-            }.onSuccess { [weak communityRow] response in
-                Log.debug?.value(response.items)
-                let options = [emptyOption] + response.items.map { XLFormOptionsObject.formOptionsObjectWithCommunity($0) }
-                communityRow?.selectorOptions = options
-            }.onFailure { error in
-                Log.error?.value(error)
-        }        
+        }.onSuccess { [weak communityRow] response in
+            Log.debug?.value(response.items)
+            let options = [emptyOption] + response.items.map { XLFormOptionsObject.formOptionsObjectWithCommunity($0) }
+            communityRow?.selectorOptions = options
+        }
 
         return communityRow
     }

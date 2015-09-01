@@ -79,7 +79,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.chatClient.auth("ixmpp@beewellapp.com", password: "1HateD0m2").future().onSuccess { [unowned self] in
             Log.info?.message("XMPP authorized")
             self.chatClient.sendTestMessage()
-            }.onFailure { error in
+        }.onFailure { error in
                 Log.error?.value(error)
         }
         
