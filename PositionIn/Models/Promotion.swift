@@ -55,7 +55,7 @@ struct Promotion: CRUDObject {
         
         objectId <- (map["id"], CRUDObjectIdTransform())
         name <- map["name"]
-        text <- map["text"]
+        text <- map["description"]
         photos <- map["photos"]
         likes <- map["likes"]
         location <- map["location"]
@@ -70,11 +70,11 @@ struct Promotion: CRUDObject {
     }
     
     static func userPromotionsEndpoint(userId: CRUDObjectId) -> String {
-        return "/v1.0/promotions"
+        return UserProfile.endpoint().stringByAppendingPathComponent("\(userId)/promotions")
     }
     
     static func communityPromotionsEndpoint(communityId: CRUDObjectId) -> String {
-        return Community.endpoint().stringByAppendingPathComponent("/promotions")
+        return Community.endpoint().stringByAppendingPathComponent("\(communityId)/promotions")
     }
     
     static func allEndpoint(userId: CRUDObjectId) -> String {

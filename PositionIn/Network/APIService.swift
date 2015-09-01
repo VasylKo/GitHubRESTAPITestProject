@@ -87,7 +87,7 @@ struct APIService {
     func createUserPromotion(promotion object: Promotion) -> Future<Promotion, NSError> {
         return sessionController.currentUserId().flatMap {
             (userId: CRUDObjectId) -> Future<Promotion, NSError> in
-            let endpoint = Promotion.endpoint()
+            let endpoint = Promotion.userPromotionsEndpoint(userId)
             return self.createObject(endpoint, object: object)
         }
     }
