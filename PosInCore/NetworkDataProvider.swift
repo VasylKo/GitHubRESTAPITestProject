@@ -147,6 +147,9 @@ private extension Alamofire.Request {
     //MARK: - Custom serializer -
     class func CustomResponseSerializer<T>(mapping:AnyObject? -> T?) -> GenericResponseSerializer<Box<T>> {
         return GenericResponseSerializer { request, response, data in
+            if response?.statusCode == 401 {
+                return (nil, NetworkDataProvider.ErrorCodes.InvalidSessionError.error())
+            }
             let JSONSerializer = Request.JSONResponseSerializer(options: .AllowFragments)
             let (json: AnyObject?, serializationError) = JSONSerializer.serializeResponse(request, response, data)
             switch (response, json, serializationError) {
