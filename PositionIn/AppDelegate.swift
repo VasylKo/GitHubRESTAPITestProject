@@ -117,11 +117,11 @@ extension AppDelegate {
     
     func UIErrorHandler() -> APIService.ErrorHandler {
         return { [unowned self] error in
+            Log.debug?.message(error.localizedDescription)
             let baseErrorDomain: String = NetworkDataProvider.ErrorCodes.errorDomain
-            
             switch (error.domain, error.code) {
             case (baseErrorDomain, NetworkDataProvider.ErrorCodes.InvalidSessionError.rawValue):
-                Log.error?.message("Invalid session")
+                self.sidebarViewController?.executeAction(.Login)
             default:
                 Log.error?.value(error)
             }

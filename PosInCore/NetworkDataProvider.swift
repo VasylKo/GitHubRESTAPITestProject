@@ -172,7 +172,7 @@ private extension Alamofire.Request {
     
 }
 
-//MARK: - Network errors -
+//MARK: - Network error codes -
 
 extension NetworkDataProvider {
     /**
@@ -188,6 +188,20 @@ extension NetworkDataProvider {
         public static let errorDomain = "com.bekitzur.Network"
         
         case UnknownError, InvalidRequestError, TransferError, InvalidResponseError, ParsingError, InvalidSessionError
+        
+        /**
+        Trying to construct Error code from NSError
+        
+        :param: error NSError instance
+        
+        :returns: Error code or nil
+        */
+        public static func fromError(error: NSError) -> ErrorCodes? {
+            if error.domain == ErrorCodes.errorDomain {
+                return ErrorCodes(rawValue: error.code)
+            }
+            return nil
+        }
         
         /**
         Converting Error code to the NSError

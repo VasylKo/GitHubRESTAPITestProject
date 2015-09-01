@@ -34,6 +34,9 @@ struct APIService {
     
     private func handleFailure<R>(future: Future<R, NSError>) -> Future<R, NSError> {
         return future.onFailure { error in
+            if let e = NetworkDataProvider.ErrorCodes.fromError(error) where e == .InvalidSessionError {
+                self.logout()
+            }
             self.defaultErrorHandler?(error)
         }
     }
