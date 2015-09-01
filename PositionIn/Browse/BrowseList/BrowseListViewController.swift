@@ -69,7 +69,7 @@ final class BrowseListViewController: UIViewController, BrowseActionProducer {
 
     weak var actionConsumer: BrowseActionConsumer?
     
-    @IBOutlet private weak var tableView: UITableView!
+    @IBOutlet private(set) internal weak var tableView: UITableView!
     @IBOutlet private weak var displayModeSegmentedControl: UISegmentedControl!
 
 }

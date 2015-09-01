@@ -8,7 +8,6 @@
 
 import PosInCore
 
-
 final class BrowseListTableViewCell: TableViewCell, TableViewChildViewControllerCell {
     
     override func setModel(model: TableViewCellModel) {
@@ -31,6 +30,26 @@ final class BrowseListTableViewCell: TableViewCell, TableViewChildViewController
     
     private func prepareChildController() {
         contentView.addSubViewOnEntireSize(listController.view)
+        let listTable = listController.tableView
+        listTableHeightConstraint = NSLayoutConstraint(
+            item: listTable,
+            attribute: .Height,
+            relatedBy: .Equal,
+            toItem: nil,
+            attribute: .NotAnAttribute,
+            multiplier: 1.0,
+            constant: listTable.contentSize.height
+        )
+        listTable.addConstraint(listTableHeightConstraint)
+        contentSizeObserver = KVObserver(subject: listTable, keyPath: "contentSize") {
+            [weak listTable, weak self] _, _, _ in
+            if  /*let newSize = newSize, */
+                let table = listTable,
+                let strongSelf = self {
+                    strongSelf.listTableHeightConstraint.constant = table.contentSize.height
+                    strongSelf.setNeedsLayout()
+            }
+        }
     }
 
     var childViewController: UIViewController {
@@ -38,6 +57,9 @@ final class BrowseListTableViewCell: TableViewCell, TableViewChildViewController
     }
     
     let listController = Storyboards.Main.instantiateBrowseListViewController()
+    
+    private var listTableHeightConstraint: NSLayoutConstraint!
+    private var contentSizeObserver: KVObserver<String>!
 }
 
 public struct BrowseListCellModel: ProfileCellModel {
