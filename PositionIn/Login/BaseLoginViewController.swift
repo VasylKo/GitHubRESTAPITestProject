@@ -27,6 +27,17 @@ class BaseLoginViewController: UIViewController {
         sideBarController?.executeAction(SidebarViewController.defaultAction)
         dismissViewControllerAnimated(true, completion: nil)
     }
+    
+    func validateInput(validationRules: [StringValidation.ValidationRule]) -> Bool {
+        if let validationResult = StringValidation.validate(validationRules) {
+            showWarning(validationResult.error.localizedDescription)
+            if let responder = validationResult.field as? UIResponder {
+                responder.becomeFirstResponder()
+            }
+            return false
+        }
+        return true
+    }
 
 
     @IBOutlet private weak var scrollView: UIScrollView!
