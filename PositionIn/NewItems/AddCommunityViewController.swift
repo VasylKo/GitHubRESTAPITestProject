@@ -45,6 +45,27 @@ final class AddCommunityViewController: BaseAddItemViewController {
         self.form = form
     }
     
-
-   
+    
+    //MARK: - Actions -
+    override func didTapPost(sender: AnyObject) {
+        let validationErrors : Array<NSError> = self.formValidationErrors() as! Array<NSError>
+        if (validationErrors.count > 0){
+            self.showFormValidationError(validationErrors.first)
+            return
+        }
+        self.tableView.endEditing(true)
+        
+        let values = formValues()
+        Log.debug?.value(values)
+        
+        var community = Community()
+        community.name = values[Tags.Title.rawValue] as? String
+        community.communityDescription = values[Tags.Description.rawValue] as? String
+        api().createCommunity(community: community).onSuccess{ [weak self] community  in
+            Log.debug?.value(community)
+            self?.performSegue(AddCommunityViewController.Segue.Close)
+            }.onFailure{ error in
+                Log.error?.value(error)
+        }
+    }
 }
