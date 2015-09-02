@@ -9,15 +9,17 @@
 import UIKit
 import PosInCore
 import CleanroomLogger
+import BrightFutures
 
 final class BrowseListViewController: UIViewController, BrowseActionProducer {
     
     let shoWCompactCells: Bool = true
+    private var dataRequestToken = InvalidationToken()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         dataSource.configureTable(tableView)
-        selectedItemType = FeedItem.ItemType.Unknown
+        selectedItemType = .Unknown
         
     }
     
@@ -38,20 +40,19 @@ final class BrowseListViewController: UIViewController, BrowseActionProducer {
     }
     
     private func getFeedItems(searchFilter: SearchFilter, page: APIService.Page = APIService.Page()) {
-        api().getFeed(searchFilter, page: page).onFailure { error in
-            Log.error?.value(error)
-        }.onSuccess { [weak self] response in
+        dataRequestToken.invalidate()
+        dataRequestToken = InvalidationToken()
+        api().getFeed(searchFilter, page: page).onSuccess(token: dataRequestToken) {
+            [weak self] response in
             Log.debug?.value(response.items)
-            Log.debug?.value(searchFilter.itemTypes)
-            
-            Log.debug?.value(self?.selectedItemType)
             if let strongSelf = self,
                let itemTypes = searchFilter.itemTypes
                where contains(itemTypes, strongSelf.selectedItemType) {
                 strongSelf.dataSource.setItems(response.items)
                 strongSelf.tableView.reloadData()
                 strongSelf.tableView.setContentOffset(CGPointZero, animated: false)
-            }            
+                strongSelf.actionConsumer?.browseControllerDidChangeContent(strongSelf)
+            }
         }
     }
     
@@ -69,7 +70,7 @@ final class BrowseListViewController: UIViewController, BrowseActionProducer {
 
     weak var actionConsumer: BrowseActionConsumer?
     
-    @IBOutlet private weak var tableView: UITableView!
+    @IBOutlet private(set) internal weak var tableView: UITableView!
     @IBOutlet private weak var displayModeSegmentedControl: UISegmentedControl!
 
 }

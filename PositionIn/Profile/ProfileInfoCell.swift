@@ -20,6 +20,7 @@ final class ProfileInfoCell: TableViewCell {
         updateButton(leftActionButton, forAction: m!.leftAction)
         updateButton(rightActionButton, forAction: m!.rightAction)
         actionDelegate = m!.actionDelegate
+        selectionStyle = .None
     }
     
     @IBAction func actionTapped(sender: UIButton) {

@@ -15,7 +15,8 @@ protocol BrowseActionProducer {
 }
 
 protocol BrowseActionConsumer: class {
-    func browseController(controller: BrowseActionProducer, didSelectItem objectId: CRUDObjectId, type itemType:FeedItem.ItemType)
+    func browseController(controller: BrowseActionProducer, didSelectItem objectId: CRUDObjectId, type itemType: FeedItem.ItemType)
+    func browseControllerDidChangeContent(controller: BrowseActionProducer)
 }
 
 
@@ -74,6 +75,7 @@ protocol BrowseActionConsumer: class {
     }
     
     
+
     //MARK: - UI -
     
     override func viewDidLoad() {
@@ -112,7 +114,7 @@ protocol BrowseActionConsumer: class {
         segmentControl.selectionStyle = HMSegmentedControlSelectionStyleFullWidthStripe
         segmentControl.addTarget(self, action: "displayModeSegmentChanged:", forControlEvents: UIControlEvents.ValueChanged)
         return segmentControl
-        }()
+    }()
     
     
     @IBAction private func displayModeSegmentChanged(sender: HMSegmentedControl) {
@@ -123,7 +125,7 @@ protocol BrowseActionConsumer: class {
         }
     }
     
-    
+
     //MARK: - Private -
     
     private weak var currentModeViewController: UIViewController?
@@ -138,7 +140,7 @@ protocol BrowseActionConsumer: class {
     
     //MARK: - BrowseActionConsumer: Browse actions -
     
-    func browseController(controller: BrowseActionProducer, didSelectItem objectId: CRUDObjectId, type itemType:FeedItem.ItemType) {
+    func browseController(controller: BrowseActionProducer, didSelectItem objectId: CRUDObjectId, type itemType: FeedItem.ItemType) {
         switch itemType {
         case .Item:
             let controller =  Storyboards.Main.instantiateProductDetailsViewControllerId()
@@ -159,6 +161,10 @@ protocol BrowseActionConsumer: class {
         }
     }
     
+    func browseControllerDidChangeContent(controller: BrowseActionProducer) {
+        Log.verbose?.message("\(controller) did change content")
+    }
+
     //MARK: - Search -
     
     private lazy var searchbar: SearchBar = { [unowned self] in
@@ -166,12 +172,12 @@ protocol BrowseActionConsumer: class {
         searchBar.delegate = self
         return searchBar
         }()
-    
+
     func searchBarShouldBeginEditing(searchBar: UISearchBar) -> Bool {
         searchBar.resignFirstResponder()
         SearchViewController.present(searchbar, presenter: self)
         return false
     }
-    
-    
+
+
 }

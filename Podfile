@@ -12,6 +12,7 @@ target 'PositionIn' do
     pod 'ImagePickerSheetController', '~> 0.1.7'
     pod 'GoogleMaps'
     pod 'HMSegmentedControl'
+    pod 'JDStatusBarNotification'
     
     pod 'ResponseDetective'
     pod 'PosInCore', :path => 'PosInCore'

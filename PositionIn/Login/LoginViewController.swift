@@ -27,8 +27,6 @@ final class LoginViewController: BaseLoginViewController {
             api().login(username: username, password: password).onSuccess { [weak self] _ in
                 Log.info?.message("Logged in")
                 self?.dismissLogin()
-            }.onFailure { error in
-                Log.error?.value(error)
             }
             
         } else {

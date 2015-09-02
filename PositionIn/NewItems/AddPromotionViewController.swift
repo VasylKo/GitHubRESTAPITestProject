@@ -137,9 +137,7 @@ final class AddPromotionViewController: BaseAddItemViewController {
                     }.onSuccess { [weak self] (promotion: Promotion) -> ()  in
                         Log.debug?.value(promotion)
                         self?.performSegue(AddPromotionViewController.Segue.Close)
-                    }.onFailure { error in
-                        Log.error?.value(error)
-                }
+                    }
                 
         }
         

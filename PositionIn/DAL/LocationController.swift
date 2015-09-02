@@ -31,7 +31,11 @@ final class LocationController {
                 self.locationProvider.startUpdatingLocation()                
             }
         }
-        return future
+        return future.onSuccess { coordinate in
+            var f = SearchFilter.currentFilter
+            f.coordinates = coordinate
+            SearchFilter.currentFilter = f
+        }
     }
     
     func reverseGeocodeCoordinate(coordinate: CLLocationCoordinate2D) -> Future<Location, NSError> {

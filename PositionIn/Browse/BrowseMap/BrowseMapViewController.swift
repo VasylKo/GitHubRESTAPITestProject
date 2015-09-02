@@ -16,6 +16,7 @@ final class BrowseMapViewController: UIViewController, BrowseActionProducer {
     override func viewDidLoad() {
         super.viewDidLoad()
         locationController().getCurrentCoordinate().onSuccess { [weak self] coordinate in
+            self?.filter.coordinates = coordinate
             self?.mapView.moveCamera(GMSCameraUpdate.setTarget(coordinate, zoom: 12))
         }
         
@@ -49,6 +50,7 @@ final class BrowseMapViewController: UIViewController, BrowseActionProducer {
             marker.userData = Box(item)
             return marker
         }
+        actionConsumer?.browseControllerDidChangeContent(self)
     }
     
     private var markers = [GMSMarker]()
@@ -65,9 +67,8 @@ extension BrowseMapViewController: GMSMapViewDelegate {
         if let coordinate = position?.target {
             var f = filter
             f.coordinates = coordinate
-            api().getFeed(f, page: APIService.Page()).onFailure { error in
-                Log.error?.value(error)
-            }.onSuccess { [weak self] response in
+            api().getFeed(f, page: APIService.Page()).onSuccess {
+                [weak self] response in
                 Log.debug?.value(response.items)
                 if let strongSelf = self
                    where strongSelf.isSameCoordinates(

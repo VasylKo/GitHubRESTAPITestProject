@@ -29,6 +29,12 @@ class BaseAddItemViewController: XLFormViewController {
         return CLLocation(latitude: 39.1746, longitude: -107.4470)
     }
     
+    override func showFormValidationError(error: NSError!) {
+        if let error = error {
+            showWarning(error.localizedDescription)
+        }
+    }
+    
     func locationRowDescriptor(tag: String, withCurrentCoordinate: Bool = true) -> XLFormRowDescriptor {
         let locationRow = XLFormRowDescriptor(tag: tag, rowType: XLFormRowDescriptorTypeSelectorPush, title: NSLocalizedString("Location", comment: "New item: location"))
         locationRow.action.formSegueClass = NSClassFromString("UIStoryboardPushSegue")
@@ -88,13 +94,11 @@ class BaseAddItemViewController: XLFormViewController {
         communityRow.selectorOptions = [ emptyOption ]
         api().currentUserId().flatMap { userId in
             return api().getUserCommunities(userId)
-            }.onSuccess { [weak communityRow] response in
-                Log.debug?.value(response.items)
-                let options = [emptyOption] + response.items.map { XLFormOptionsObject.formOptionsObjectWithCommunity($0) }
-                communityRow?.selectorOptions = options
-            }.onFailure { error in
-                Log.error?.value(error)
-        }        
+        }.onSuccess { [weak communityRow] response in
+            Log.debug?.value(response.items)
+            let options = [emptyOption] + response.items.map { XLFormOptionsObject.formOptionsObjectWithCommunity($0) }
+            communityRow?.selectorOptions = options
+        }
 
         return communityRow
     }

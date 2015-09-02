@@ -25,23 +25,22 @@ extension APIService {
         return sessionController.currentUserId()
     }
     
-    //Success if user is not guest
-    func isUserAuthorized() -> Future<UserProfile, NSError> {
-        return session().flatMap { _ in
+    //Success if has valid session and user is not guest
+    func recoverSession() -> Future<UserProfile, NSError> {
+        let f = session().flatMap { _ in
             return self.sessionController.isUserAuthorized()
-        }.flatMap { _ in
+        }
+        return handleFailure(f).flatMap { _ in
             return self.updateCurrentProfileStatus()
         }
     }
     
     // Success on existing session or after token refresh
-    func session() -> Future<Void ,NSError> {
+    func session() -> Future<AuthResponse.Token, NSError> {
         return sessionController.session().recoverWith { _ in
             return self.refreshToken().map { response in
                 return response.accessToken
             }
-        }.map() { _ in
-            return ()
         }
     }
     
@@ -87,13 +86,13 @@ extension APIService {
     private func registerRequest(#username: String?, password: String?, info: [String: AnyObject]?) -> Future<AuthResponse, NSError> {
         let urlRequest = AuthRouter.Register(api: self, username: username, password: password, profileInfo: info)
         let (_, future): (Alamofire.Request, Future<AuthResponse, NSError>) = dataProvider.objectRequest(urlRequest)
-        return self.updateAuth(future)
+        return handleFailure(updateAuth(future))
     }
     
     private func loginRequest(#username: String, password: String) -> Future<AuthResponse, NSError> {
         let urlRequest = AuthRouter.Login(api: self, username: username, password: password)
         let (_, future): (Alamofire.Request, Future<AuthResponse, NSError>) = dataProvider.objectRequest(urlRequest)
-        return self.updateAuth(future)
+        return handleFailure(updateAuth(future))
     }
     
     private func refreshToken() -> Future<AuthResponse, NSError> {

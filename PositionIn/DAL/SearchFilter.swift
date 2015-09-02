@@ -54,7 +54,8 @@ struct SearchFilter: Mappable {
         startPrice = 1
         endPrice = 1000
         radius = 99
-//        itemTypes = [.Unknown]
+        itemTypes = [.Unknown]
+        categories = [.Unknown]
     }
     
     mutating func mapping(map: Map) {

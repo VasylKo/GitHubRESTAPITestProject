@@ -19,9 +19,13 @@ import GoogleMaps
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
-    let api: APIService
+    private(set) var api: APIService
     let chatClient: XMPPClient
     let locationController: LocationController
+    
+    var sidebarViewController: SidebarViewController? {
+        return self.window?.rootViewController as? SidebarViewController
+    }
     
     override init() {
         #if DEBUG
@@ -52,25 +56,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         setupMaps()
-        api.isUserAuthorized().onComplete { result in
-            let defaultAction: SidebarViewController.Action
-            switch result.value {
-            case .Some:
-                defaultAction = .ForYou
-            default:
-                defaultAction = .Login
-            }
-            if let sidebarViewController = self.window?.rootViewController as? SidebarViewController {
-                sidebarViewController.executeAction(defaultAction)
-            }
-        }                
-        
+        api.defaultErrorHandler = UIErrorHandler()
+        api.recoverSession().onSuccess { [unowned self] _ in
+            self.sidebarViewController?.executeAction(SidebarViewController.defaultAction)
+        }
         return true
                 
         self.chatClient.auth("ixmpp@beewellapp.com", password: "1HateD0m2").future().onSuccess { [unowned self] in
             Log.info?.message("XMPP authorized")
             self.chatClient.sendTestMessage()
-            }.onFailure { error in
+        }.onFailure { error in
                 Log.error?.value(error)
         }
         
@@ -104,6 +99,20 @@ extension AppDelegate {
     func setupMaps() {
         let apiKey = "AIzaSyA3NvrDKBcpIsnq4-ZACG41y7Mj-wSfVrY"
         GMSServices.provideAPIKey(apiKey)
+    }
+    
+    func UIErrorHandler() -> APIService.ErrorHandler {
+        return { [unowned self] error in
+            Log.error?.value(error)
+            let baseErrorDomain: String = NetworkDataProvider.ErrorCodes.errorDomain
+            switch (error.domain, error.code) {
+            case (baseErrorDomain, NetworkDataProvider.ErrorCodes.InvalidSessionError.rawValue):
+                self.sidebarViewController?.executeAction(.Login)
+                showError(error.localizedDescription)
+            default:
+                showWarning(error.localizedDescription)
+            }
+        }
     }
 }
 

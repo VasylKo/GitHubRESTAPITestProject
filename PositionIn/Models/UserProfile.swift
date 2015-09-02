@@ -23,7 +23,9 @@ final class UserProfile: CRUDObject {
     var location: Location?
     var guest: Bool =  false
     var shops: [Dictionary<String, String>]? {
+         //FIXME: remove this ***
         didSet {
+            
             if let shopId = shops?.first {
                 NSUserDefaults.standardUserDefaults().setValue(shopId["id"], forKey: "shopId")
                 NSUserDefaults.standardUserDefaults().synchronize()
