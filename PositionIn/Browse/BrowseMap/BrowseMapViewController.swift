@@ -22,6 +22,7 @@ final class BrowseMapViewController: UIViewController, BrowseActionProducer {
         
 
     }
+    let visibleItemTypes: [FeedItem.ItemType] = [.Event, .Promotion, .Item]
     
     var filter = SearchFilter.currentFilter
     
@@ -42,11 +43,25 @@ final class BrowseMapViewController: UIViewController, BrowseActionProducer {
     
     
     private func displayFeedItems(items: [FeedItem]) {
+        func  markerIcon(item: FeedItem) -> UIImage? {
+            switch item.type {
+            case .Event:
+                return UIImage(named: "EventMarker")
+            case .Promotion:
+                return UIImage(named: "PromotionMarker")
+            case .Item:
+                return UIImage(named: "ProductMarker")
+            default:
+                return nil
+            }
+        }
         markers.map { $0.map = nil }
-        markers = items.map { item in
+        markers = items.filter { contains(self.visibleItemTypes, $0.type) }.map {
+            item in
             let marker = GMSMarker()
             marker.position = item.location?.coordinates ?? kCLLocationCoordinate2DInvalid
             marker.map = self.mapView
+            marker.icon = markerIcon(item)
             marker.userData = Box(item)
             return marker
         }
