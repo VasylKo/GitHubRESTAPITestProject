@@ -15,6 +15,8 @@ struct Community: CRUDObject {
     var communityDescription: String?
     var avatar: NSURL?
     var isPrivate: Bool = false
+    
+    var shops: [Dictionary<String, String>]?
     /*
     "members": {
     "data": [

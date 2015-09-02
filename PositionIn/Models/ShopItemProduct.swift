@@ -11,6 +11,7 @@ import CleanroomLogger
 
 struct ShopItemProduct: CRUDObject {
     var objectId: CRUDObjectId = CRUDObjectInvalidId
+    var author: CRUDObjectId?
     var name: String?
     var descriptionProd: String?
     var category: Int = 1
@@ -52,8 +53,8 @@ struct ShopItemProduct: CRUDObject {
     }
     
     mutating func mapping(map: Map) {
-        
         objectId <- (map["id"], CRUDObjectIdTransform())
+        author <- (map["author"], CRUDObjectIdTransform())
         name <- map["name"]
         descriptionProd <- map["description"]
         photos <- map["photos"]
@@ -66,32 +67,29 @@ struct ShopItemProduct: CRUDObject {
     }
     
     static func endpoint() -> String {
-        if let shopId = NSUserDefaults.standardUserDefaults().valueForKey("shopId")  as? String {
-            return "/v1.0/shops/\(shopId)/items"
-        }
-        return "/v1.0/shops"
+        return "/v1.0/shops/items"
     }
     
-    static func endpoint(productId: CRUDObjectId) -> String {
-        if let shopId = NSUserDefaults.standardUserDefaults().valueForKey("shopId")  as? String {
+    static func endpoint(productId: CRUDObjectId, author: UserProfile) -> String {
+        if let shop = author.shops?.first, let shopId = shop["id"]  {
             return "/v1.0/shops/\(shopId)/items/\(productId)"
         }
-        return "/v1.0/shops/1c7e5c2b-2b47-4d87-b173-98761058b868/items/\(productId)"
+        return "/v1.0/shops/items/\(productId)"
     }
     
-    static func userProductsEndpoint(userId: CRUDObjectId) -> String {
-        if let shopId = NSUserDefaults.standardUserDefaults().valueForKey("shopId")  as? String {
+    static func userProductsEndpoint(profile: UserProfile) -> String {
+        if let shop = profile.shops?.first, let shopId = shop["id"]  {
             return "/v1.0/shops/\(shopId)/items"
         }
-        return "v1.0/shops/1c7e5c2b-2b47-4d87-b173-98761058b868/items"
+        return "v1.0/shops/items"
     }
     
-    static func communityProductsEndpoint(communityId: CRUDObjectId) -> String {
-        if let shopId = NSUserDefaults.standardUserDefaults().valueForKey("shopId")  as? String {
-            Community.endpoint().stringByAppendingPathComponent("\(communityId)/shops/\(shopId)/items")
+    static func communityProductsEndpoint(community: Community) -> String {
+         if let shop = community.shops?.first, let shopId = shop["id"]  {
+            Community.endpoint().stringByAppendingPathComponent("\(community.objectId)/shops/\(shopId)/items")
         }
         
-        return Community.endpoint().stringByAppendingPathComponent("\(communityId)/shops/1c7e5c2b-2b47-4d87-b173-98761058b868/items")
+        return Community.endpoint().stringByAppendingPathComponent("\(community.objectId)/shops/items")
     }
     
     static func allEndpoint(userId: CRUDObjectId) -> String {

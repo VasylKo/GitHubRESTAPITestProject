@@ -145,6 +145,7 @@ protocol BrowseActionConsumer: class {
         case .Item:
             let controller =  Storyboards.Main.instantiateProductDetailsViewControllerId()
             controller.objectId = objectId
+            //TODO: pass authorId
             navigationController?.pushViewController(controller, animated: true)
         case .Event:
             let controller =  Storyboards.Main.instantiateEventDetailsViewControllerId()
