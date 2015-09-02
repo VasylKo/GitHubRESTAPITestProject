@@ -42,9 +42,8 @@ final class BrowseListViewController: UIViewController, BrowseActionProducer {
     private func getFeedItems(searchFilter: SearchFilter, page: APIService.Page = APIService.Page()) {
         dataRequestToken.invalidate()
         dataRequestToken = InvalidationToken()
-        api().getFeed(searchFilter, page: page).onFailure { error in
-            Log.error?.value(error)
-        }.onSuccess(token: dataRequestToken) { [weak self] response in
+        api().getFeed(searchFilter, page: page).onSuccess(token: dataRequestToken) {
+            [weak self] response in
             Log.debug?.value(response.items)
             if let strongSelf = self,
                let itemTypes = searchFilter.itemTypes

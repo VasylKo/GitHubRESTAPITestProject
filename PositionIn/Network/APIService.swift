@@ -26,6 +26,21 @@ struct APIService {
             self.sessionController = sessionController
     }
     
+    //MARK: - Error handling -
+    
+    typealias ErrorHandler = (NSError) -> ()
+    
+    var defaultErrorHandler: ErrorHandler?
+    
+    func handleFailure<R>(future: Future<R, NSError>) -> Future<R, NSError> {
+        return future.onFailure { error in
+            if let e = NetworkDataProvider.ErrorCodes.fromError(error) where e == .InvalidSessionError {
+                self.logout()
+            }
+            self.defaultErrorHandler?(error)
+        }
+    }
+    
     //MARK: - Variables -
     
     private let baseURL: NSURL
@@ -195,11 +210,11 @@ struct APIService {
             (token: AuthResponse.Token) -> Future<CollectionResponse<FeedItem>, NSError> in
             let request = self.updateRequest(token, endpoint: endpoint, params: params.query)
             let (_ , future): (Alamofire.Request, Future<CollectionResponse<FeedItem>, NSError>) = self.dataProvider.objectRequest(request)
-            return future
+            return self.handleFailure(future)
         }
     }
     
-    //MARK: - Generics -
+    //MARK: - Generic requests -
     
     private func getObjectsCollection<C: CRUDObject>(endpoint: String, params: [String : AnyObject]?) -> Future<CollectionResponse<C>, NSError> {
         typealias CRUDResultType = (Alamofire.Request, Future<CollectionResponse<C>, NSError>)
@@ -208,7 +223,7 @@ struct APIService {
             (token: AuthResponse.Token) -> Future<CollectionResponse<C>, NSError> in
             let request = self.readRequest(token, endpoint: endpoint, params: params)
             let (_ , future): CRUDResultType = self.dataProvider.objectRequest(request)
-            return future
+            return self.handleFailure(future)
         }
     }
     
@@ -219,7 +234,7 @@ struct APIService {
             (token: AuthResponse.Token) -> Future<C, NSError> in
             let request = self.readRequest(token, endpoint: endpoint)
             let (_, future): CRUDResultType = self.dataProvider.objectRequest(request)
-            return future
+            return self.handleFailure(future)
         }
     }
     
@@ -230,12 +245,12 @@ struct APIService {
             (token: AuthResponse.Token) -> Future<C, NSError> in
             let params = Mapper().toJSON(object)
             let request = self.updateRequest(token, endpoint: endpoint, method: .POST, params: params)
-            let (_ , future): CRUDResultType = self.dataProvider.objectRequest(request, validation: self.statusCodeValidation(statusCode: [201]))
-            return future.map { (updateResponse: UpdateResponse) -> C in
+            let (_ , future): CRUDResultType = self.dataProvider.objectRequest(request)
+            return self.handleFailure(future.map { (updateResponse: UpdateResponse) -> C in
                 var updatedObject = object
                 updatedObject.objectId = updateResponse.objectId
                 return updatedObject
-            }
+            })
         }
     }
     
@@ -247,13 +262,13 @@ struct APIService {
             let params = Mapper().toJSON(object)
             let request = self.updateRequest(token, endpoint: endpoint, method: .PUT, params: params)
             let (_, future): CRUDResultType = self.dataProvider.jsonRequest(request, map: self.emptyResponseMapping(), validation: self.statusCodeValidation(statusCode: [204]))
-            return future
+            return self.handleFailure(future)
         }
     }
     
     //MARK: - Helpers -
     
-//    @availability(*, unavailable)
+//TODO:    @availability(*, unavailable)
     private func emptyResponseMapping() -> (AnyObject? -> Void?) {
         return  { response in
             if let json = response as? NSDictionary {

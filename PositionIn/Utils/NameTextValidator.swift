@@ -8,6 +8,8 @@
 
 import Foundation
 
+//TODO: refactor 
+
 let  kTextValidationErrorDomain = "com.bekitzur.textValidator"
 let  kValidationErrorCodeName = 601
 

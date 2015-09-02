@@ -20,13 +20,11 @@ class BaseLoginViewController: UIViewController {
         }.onSuccess { [weak self] _ in
             Log.info?.message("Anonymous login done")
             self?.dismissLogin()
-        }.onFailure { error in
-            Log.error?.value(error)
         }
     }
     
     func dismissLogin() {
-        sideBarController?.executeAction(.ForYou)
+        sideBarController?.executeAction(SidebarViewController.defaultAction)
         dismissViewControllerAnimated(true, completion: nil)
     }
 

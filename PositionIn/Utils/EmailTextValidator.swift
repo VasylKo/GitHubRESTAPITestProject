@@ -8,6 +8,8 @@
 
 import Foundation
 
+//TODO: refactor 
+
 let  kValidationErrorCodeEmail = 603
 
 struct EmailTextValidator {

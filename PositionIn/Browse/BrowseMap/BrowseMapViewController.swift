@@ -67,9 +67,8 @@ extension BrowseMapViewController: GMSMapViewDelegate {
         if let coordinate = position?.target {
             var f = filter
             f.coordinates = coordinate
-            api().getFeed(f, page: APIService.Page()).onFailure { error in
-                Log.error?.value(error)
-            }.onSuccess { [weak self] response in
+            api().getFeed(f, page: APIService.Page()).onSuccess {
+                [weak self] response in
                 Log.debug?.value(response.items)
                 if let strongSelf = self
                    where strongSelf.isSameCoordinates(

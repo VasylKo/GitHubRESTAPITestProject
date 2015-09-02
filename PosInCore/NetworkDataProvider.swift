@@ -122,21 +122,28 @@ public class NetworkDataProvider: NSObject {
                     if let object = object  {
                         p.success(object.value)
                     } else {
-                        p.failure(error ?? ErrorCodes.InvalidResponseError.error())
+                        let e: NSError = {
+                            //Hard convert expired session error
+                            if let statusCode = response?.statusCode where statusCode == 401 {
+                                return ErrorCodes.InvalidSessionError.error(underlyingError: error)
+                            }
+                            return error ?? ErrorCodes.InvalidResponseError.error()
+                        }()
+                        p.failure(e)
                     }
             }
         return (request, p.future)
     }
     
     private func request(URLRequest: Alamofire.URLRequestConvertible, validation: Alamofire.Request.Validation?) -> Alamofire.Request {
-        let request = manager.request(URLRequest).validate()
+        let request = manager.request(URLRequest)
 //        #if DEBUG
         println("Request:\n\(request.debugDescription)")
 //        #endif
         if let validation = validation {
             return request.validate(validation)
         } else {
-            return request.validate()
+            return request.validate(statusCode: [] + (200..<300) + (400..<500) )
         }
     }
 }
@@ -147,9 +154,6 @@ private extension Alamofire.Request {
     //MARK: - Custom serializer -
     class func CustomResponseSerializer<T>(mapping:AnyObject? -> T?) -> GenericResponseSerializer<Box<T>> {
         return GenericResponseSerializer { request, response, data in
-            if response?.statusCode == 401 {
-                return (nil, NetworkDataProvider.ErrorCodes.InvalidSessionError.error())
-            }
             let JSONSerializer = Request.JSONResponseSerializer(options: .AllowFragments)
             let (json: AnyObject?, serializationError) = JSONSerializer.serializeResponse(request, response, data)
             switch (response, json, serializationError) {
@@ -160,16 +164,19 @@ private extension Alamofire.Request {
             default:
                 if let object  = mapping(json) {
                     return (Box(object), nil)
-                } else {
-                    return (nil, NetworkDataProvider.ErrorCodes.InvalidResponseError.error())
+                } else if
+                    let jsonDict = json as? [String: AnyObject],
+                    let msg = jsonDict["error"] as? String {
+                    return (nil, NetworkDataProvider.ErrorCodes.TransferError.error(localizedDescription: msg))                        
                 }
+                return (nil, NetworkDataProvider.ErrorCodes.InvalidResponseError.error())
             } // switch
         }
     }
     
 }
 
-//MARK: - Network errors -
+//MARK: - Network error codes -
 
 extension NetworkDataProvider {
     /**
@@ -182,20 +189,37 @@ extension NetworkDataProvider {
     - ParsingError:    Response Parsing error
     */
     public enum ErrorCodes: Int {
-        static let errorDomain = "com.bekitzur.Network"
+        public static let errorDomain = "com.bekitzur.Network"
         
         case UnknownError, InvalidRequestError, TransferError, InvalidResponseError, ParsingError, InvalidSessionError
+        
+        /**
+        Trying to construct Error code from NSError
+        
+        :param: error NSError instance
+        
+        :returns: Error code or nil
+        */
+        public static func fromError(error: NSError) -> ErrorCodes? {
+            if error.domain == ErrorCodes.errorDomain {
+                return ErrorCodes(rawValue: error.code)
+            }
+            return nil
+        }
         
         /**
         Converting Error code to the NSError
         
         :param: underlyingError underlying error
+        :param: description Localized description
         
         :returns: NSError instance
         */
-        public func error(underlyingError: NSError? = nil) -> NSError {
-            let description = NSString(format: NSLocalizedString("Network error: %@", comment: "Localized network error description"),
+        public func error(underlyingError: NSError? = nil, localizedDescription: String? = nil) -> NSError {
+            let description = localizedDescription ?? NSString(
+                format: NSLocalizedString("Network error: %@", comment: "Localized network error description"),
                 self.reason)
+        
             var userInfo: [NSObject : AnyObject] = [
                 NSLocalizedDescriptionKey: description,
                 NSLocalizedFailureReasonErrorKey: self.reason,

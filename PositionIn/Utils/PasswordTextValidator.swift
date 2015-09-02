@@ -8,6 +8,8 @@
 
 import Foundation
 
+//TODO: refactor 
+
 let  kValidationErrorCodePassword = 602
 
 struct PasswordTextValidator {
