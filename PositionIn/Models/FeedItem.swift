@@ -9,6 +9,8 @@
 import ObjectMapper
 import CleanroomLogger
 
+//TODO: clean from invalid ivars
+
 struct FeedItem: CRUDObject {
     var objectId: CRUDObjectId = CRUDObjectInvalidId
     var name: String?
