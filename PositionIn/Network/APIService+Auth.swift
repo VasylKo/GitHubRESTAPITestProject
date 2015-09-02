@@ -91,7 +91,7 @@ extension APIService {
     
     private func loginRequest(#username: String, password: String) -> Future<AuthResponse, NSError> {
         let urlRequest = AuthRouter.Login(api: self, username: username, password: password)
-        let (_, future): (Alamofire.Request, Future<AuthResponse, NSError>) = dataProvider.objectRequest(urlRequest, validation: self.statusCodeValidation(statusCode: [403] + (200..<300) ))
+        let (_, future): (Alamofire.Request, Future<AuthResponse, NSError>) = dataProvider.objectRequest(urlRequest)
         return handleFailure(updateAuth(future))
     }
     

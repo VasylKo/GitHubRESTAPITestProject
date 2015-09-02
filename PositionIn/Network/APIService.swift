@@ -245,7 +245,7 @@ struct APIService {
             (token: AuthResponse.Token) -> Future<C, NSError> in
             let params = Mapper().toJSON(object)
             let request = self.updateRequest(token, endpoint: endpoint, method: .POST, params: params)
-            let (_ , future): CRUDResultType = self.dataProvider.objectRequest(request, validation: self.statusCodeValidation(statusCode: [201]))
+            let (_ , future): CRUDResultType = self.dataProvider.objectRequest(request)
             return self.handleFailure(future.map { (updateResponse: UpdateResponse) -> C in
                 var updatedObject = object
                 updatedObject.objectId = updateResponse.objectId
@@ -268,7 +268,7 @@ struct APIService {
     
     //MARK: - Helpers -
     
-//    @availability(*, unavailable)
+//TODO:    @availability(*, unavailable)
     private func emptyResponseMapping() -> (AnyObject? -> Void?) {
         return  { response in
             if let json = response as? NSDictionary {

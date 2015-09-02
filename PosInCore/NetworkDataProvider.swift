@@ -123,6 +123,7 @@ public class NetworkDataProvider: NSObject {
                         p.success(object.value)
                     } else {
                         let e: NSError = {
+                            //Hard convert expired session error
                             if let statusCode = response?.statusCode where statusCode == 401 {
                                 return ErrorCodes.InvalidSessionError.error(underlyingError: error)
                             }
@@ -142,7 +143,7 @@ public class NetworkDataProvider: NSObject {
         if let validation = validation {
             return request.validate(validation)
         } else {
-            return request.validate()
+            return request.validate(statusCode: [] + (200..<300) + (400..<500) )
         }
     }
 }
