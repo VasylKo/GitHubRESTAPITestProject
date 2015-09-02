@@ -79,6 +79,7 @@
 		E62B16FF1B5CE0F800D446BC /* BesideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E62B16FE1B5CE0F800D446BC /* BesideMenuViewController.swift */; };
 		E62B17061B5CE3EB00D446BC /* BrowseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E62B17051B5CE3EB00D446BC /* BrowseViewController.swift */; };
 		E63201651B967A540066C62E /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = E63201641B967A540066C62E /* Notifications.swift */; };
+		E63201671B967CA70066C62E /* StringValidation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E63201661B967CA70066C62E /* StringValidation.swift */; };
 		E6325F651B57D89A00996480 /* SidebarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6325F621B57D89A00996480 /* SidebarViewController.swift */; };
 		E6325F721B57E1DA00996480 /* Storyboards.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6325F711B57E1DA00996480 /* Storyboards.swift */; };
 		E6365D351B7D709E00CB79CB /* PhotoInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6365D341B7D709E00CB79CB /* PhotoInfo.swift */; };
@@ -404,6 +405,7 @@
 		E62B16FE1B5CE0F800D446BC /* BesideMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BesideMenuViewController.swift; sourceTree = "<group>"; };
 		E62B17051B5CE3EB00D446BC /* BrowseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowseViewController.swift; sourceTree = "<group>"; };
 		E63201641B967A540066C62E /* Notifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Notifications.swift; path = Utils/Notifications.swift; sourceTree = "<group>"; };
+		E63201661B967CA70066C62E /* StringValidation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringValidation.swift; sourceTree = "<group>"; };
 		E6325F621B57D89A00996480 /* SidebarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SidebarViewController.swift; sourceTree = "<group>"; };
 		E6325F661B57DA4600996480 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		E6325F711B57E1DA00996480 /* Storyboards.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storyboards.swift; sourceTree = "<group>"; };
@@ -905,6 +907,7 @@
 				2429FFAB1B8E11EE0061B4E0 /* PasswordTextValidator.swift */,
 				2429FFAD1B8E12050061B4E0 /* EmailTextValidator.swift */,
 				E63201641B967A540066C62E /* Notifications.swift */,
+				E63201661B967CA70066C62E /* StringValidation.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -2786,6 +2789,7 @@
 				E62B16F81B5C6BBF00D446BC /* AvatarView.swift in Sources */,
 				E6F243721B8B1F460033B13C /* BrowseModeViewController.swift in Sources */,
 				E61B20D51B7DD47C005EAB2C /* FeedItem.swift in Sources */,
+				E63201671B967CA70066C62E /* StringValidation.swift in Sources */,
 				E6018E521B8492EA001D22FA /* XLFormOptionsObject+Community.swift in Sources */,
 				E6F243751B8B31510033B13C /* AddMenuView.swift in Sources */,
 				E661158B1B73774B003DB5B3 /* RegisterViewController.swift in Sources */,
