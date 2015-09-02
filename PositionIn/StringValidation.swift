@@ -6,18 +6,25 @@
 //  Copyright (c) 2015 Soluna Labs. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 //TODO: StringValidation: update validation rules
 //TODO: StringValidation: remove copy/paste
-//TODO: StringValidation: add validation operators
 //TODO: StringValidation: Use NSRegularExpression
+//TODO: StringValidation: Wrap in a class with ivar rules
+
+protocol StringValidatable {
+    var validationString: String? { get }
+}
+
 
 struct StringValidation {
     //Returns a error if strings is not pass validation
     typealias Validator = (String) -> NSError?
     
-    func sequence(s: [Validator]) -> Validator {
+    typealias ValidationRule = (field: StringValidatable, validator:StringValidation.Validator)
+    
+    static func sequence(s: [Validator]) -> Validator {
         return { string in
             return s.reduce(nil) { (e: NSError?, validator: Validator) -> NSError? in
                 return e ?? validator(string)
@@ -25,30 +32,33 @@ struct StringValidation {
         }
     }
     
-    func required() -> Validator {
+    static func required() -> Validator {
         return length(min: 1)
     }
     
-    func any() -> Validator {
+    static func any() -> Validator {
         return { _ in
             return nil
         }
     }
-
     
-    func length(min: Int = 0, max: Int = Int.max) -> Validator {
+    static func length(min: Int = 0, max: Int = 100) -> Validator {
         return { string in
             if contains(min..<max, count(string)) {
                 return nil
             }
+            let description = String(format: NSLocalizedString("This field cannot be less than %ld and longer than %ld ", comment: "Length validation"),
+                min,
+                max
+            )
             return StringValidation.error(
                 ErrorCode.TextLength.rawValue,
-                localizedDescription: NSLocalizedString("This field should have ", comment: "Length validation")
+                localizedDescription: description
             )
         }
     }
     
-    func name() -> Validator {
+    static func name() -> Validator {
         return { string in
             let nameRegex: String = "^[\\p{L}\\s'.-]+$"
             let nameTest: NSPredicate = NSPredicate(format: "SELF MATCHES %@", nameRegex)
@@ -62,7 +72,7 @@ struct StringValidation {
         }
     }
     
-    func password() -> Validator {
+    static func password() -> Validator {
         return { string in
             let passwordRegex: String = "^[a-zA-Z0-9]*$"
             let passwordTest: NSPredicate = NSPredicate(format: "SELF MATCHES %@", passwordRegex)
@@ -76,7 +86,7 @@ struct StringValidation {
         }
     }
     
-    func email() -> Validator {
+    static func email() -> Validator {
         return { string in
             let emailRegex: String = "[^\\s@<>]+@[^\\s@<>]+\\.[^\\s@<>]+"
             let emailTest: NSPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegex)
@@ -90,12 +100,27 @@ struct StringValidation {
         }
     }
     
+    static func validate(rules: [ValidationRule]) -> (field: StringValidatable, error: NSError)? {
+        for rule in rules {
+            let string = rule.field.validationString
+            switch string {
+            case .Some(let validationString):
+                if let error = rule.validator(validationString) {
+                    return (rule.field, error)
+                }
+            default:
+                return (rule.field, required()("")!)
+            }
+        }
+        return nil
+    }
+    
     static func error(code: Int, localizedDescription: String) -> NSError {
         return error(code, userInfo: [NSLocalizedDescriptionKey : localizedDescription])
     }
     
     static func error(code: Int, userInfo:[NSObject : AnyObject]? = nil) -> NSError {
-        return NSError(domain: kTextValidationErrorDomain, code: code, userInfo: userInfo)
+        return NSError(domain: errorDomain, code: code, userInfo: userInfo)
     }
     
     static let errorDomain = "com.bekitzur.stringValidation"
@@ -107,4 +132,10 @@ struct StringValidation {
         case Username
     }
     
+}
+
+extension UITextField: StringValidatable {
+    var validationString: String? {
+        return text
+    }
 }

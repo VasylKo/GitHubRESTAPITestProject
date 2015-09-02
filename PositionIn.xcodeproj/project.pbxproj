@@ -43,9 +43,6 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		2429FFAA1B8E03BD0061B4E0 /* NameTextValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2429FFA91B8E03BD0061B4E0 /* NameTextValidator.swift */; };
-		2429FFAC1B8E11EE0061B4E0 /* PasswordTextValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2429FFAB1B8E11EE0061B4E0 /* PasswordTextValidator.swift */; };
-		2429FFAE1B8E12050061B4E0 /* EmailTextValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2429FFAD1B8E12050061B4E0 /* EmailTextValidator.swift */; };
 		2431EBDC1B945F5A009FB158 /* Promotion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2431EBDB1B945F5A009FB158 /* Promotion.swift */; };
 		2431EBDE1B947442009FB158 /* ShopItemProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2431EBDD1B947442009FB158 /* ShopItemProduct.swift */; };
 		2431EBE01B94C1DC009FB158 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2431EBDF1B94C1DC009FB158 /* Event.swift */; };
@@ -365,9 +362,6 @@
 
 /* Begin PBXFileReference section */
 		040F01865A9A2BB68F3FDBFF /* Pods-PositionIn.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PositionIn.release.xcconfig"; path = "Pods/Target Support Files/Pods-PositionIn/Pods-PositionIn.release.xcconfig"; sourceTree = "<group>"; };
-		2429FFA91B8E03BD0061B4E0 /* NameTextValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NameTextValidator.swift; path = Utils/NameTextValidator.swift; sourceTree = "<group>"; };
-		2429FFAB1B8E11EE0061B4E0 /* PasswordTextValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PasswordTextValidator.swift; path = Utils/PasswordTextValidator.swift; sourceTree = "<group>"; };
-		2429FFAD1B8E12050061B4E0 /* EmailTextValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EmailTextValidator.swift; path = Utils/EmailTextValidator.swift; sourceTree = "<group>"; };
 		2431EBDB1B945F5A009FB158 /* Promotion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Promotion.swift; sourceTree = "<group>"; };
 		2431EBDD1B947442009FB158 /* ShopItemProduct.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShopItemProduct.swift; sourceTree = "<group>"; };
 		2431EBDF1B94C1DC009FB158 /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
@@ -903,9 +897,6 @@
 		2429FFA21B8E00770061B4E0 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				2429FFA91B8E03BD0061B4E0 /* NameTextValidator.swift */,
-				2429FFAB1B8E11EE0061B4E0 /* PasswordTextValidator.swift */,
-				2429FFAD1B8E12050061B4E0 /* EmailTextValidator.swift */,
 				E63201641B967A540066C62E /* Notifications.swift */,
 				E63201661B967CA70066C62E /* StringValidation.swift */,
 			);
@@ -2737,8 +2728,6 @@
 				E6F2436C1B8B0E150033B13C /* MainMenuLoginCell.swift in Sources */,
 				E68B52211B875F8F006B980C /* EventListCell.swift in Sources */,
 				E68B52271B875F8F006B980C /* PostListCell.swift in Sources */,
-				2429FFAC1B8E11EE0061B4E0 /* PasswordTextValidator.swift in Sources */,
-				2429FFAA1B8E03BD0061B4E0 /* NameTextValidator.swift in Sources */,
 				2431EBE21B95B351009FB158 /* EventDetailsViewController.swift in Sources */,
 				E661158F1B738844003DB5B3 /* BaseLoginViewController.swift in Sources */,
 				E61B20ED1B81286E005EAB2C /* UploadPhotoCell.swift in Sources */,
@@ -2780,7 +2769,6 @@
 				E6F2437C1B8B42D70033B13C /* UserProfileViewController.swift in Sources */,
 				E6D4D5B61B6F8B9F003134CB /* SearchBar.swift in Sources */,
 				E6C5CE191B83A21500265955 /* LocationController.swift in Sources */,
-				2429FFAE1B8E12050061B4E0 /* EmailTextValidator.swift in Sources */,
 				E6DA53BD1B7CFCCA000087A7 /* Mock.swift in Sources */,
 				E63201651B967A540066C62E /* Notifications.swift in Sources */,
 				E62B16FB1B5CDF0100D446BC /* MessagesListViewController.swift in Sources */,

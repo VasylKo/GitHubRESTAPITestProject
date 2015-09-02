@@ -14,13 +14,14 @@ final class RegisterViewController: BaseLoginViewController {
 
     @IBAction func didTapSignupButton(sender: AnyObject) {
         
-        let username = emailTextField.text
-        if let error = EmailTextValidator.validate(string: username) {
-            let  alert = UIAlertView(title: "Error", message: error.localizedDescription, delegate: nil, cancelButtonTitle: "OK")
-            alert.show()
-            return
+        let validationRules: [StringValidation.ValidationRule] = [
+            (emailTextField, StringValidation.sequence([StringValidation.required(),StringValidation.email()]) ),
+        ]
+        
+        if validateInput(validationRules) {
+            performSegue(RegisterViewController.Segue.SignUpSegue)
         }
-        performSegue(RegisterViewController.Segue.SignUpSegue)
+                        
     }
 
     
