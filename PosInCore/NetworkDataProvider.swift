@@ -135,7 +135,7 @@ public class NetworkDataProvider: NSObject {
     }
     
     private func request(URLRequest: Alamofire.URLRequestConvertible, validation: Alamofire.Request.Validation?) -> Alamofire.Request {
-        let request = manager.request(URLRequest).validate()
+        let request = manager.request(URLRequest)
 //        #if DEBUG
         println("Request:\n\(request.debugDescription)")
 //        #endif
@@ -163,9 +163,12 @@ private extension Alamofire.Request {
             default:
                 if let object  = mapping(json) {
                     return (Box(object), nil)
-                } else {
-                    return (nil, NetworkDataProvider.ErrorCodes.InvalidResponseError.error())
+                } else if
+                    let jsonDict = json as? [String: AnyObject],
+                    let msg = jsonDict["error"] as? String {
+                    return (nil, NetworkDataProvider.ErrorCodes.TransferError.error(localizedDescription: msg))                        
                 }
+                return (nil, NetworkDataProvider.ErrorCodes.InvalidResponseError.error())
             } // switch
         }
     }
@@ -207,12 +210,15 @@ extension NetworkDataProvider {
         Converting Error code to the NSError
         
         :param: underlyingError underlying error
+        :param: description Localized description
         
         :returns: NSError instance
         */
-        public func error(underlyingError: NSError? = nil) -> NSError {
-            let description = NSString(format: NSLocalizedString("Network error: %@", comment: "Localized network error description"),
+        public func error(underlyingError: NSError? = nil, localizedDescription: String? = nil) -> NSError {
+            let description = localizedDescription ?? NSString(
+                format: NSLocalizedString("Network error: %@", comment: "Localized network error description"),
                 self.reason)
+        
             var userInfo: [NSObject : AnyObject] = [
                 NSLocalizedDescriptionKey: description,
                 NSLocalizedFailureReasonErrorKey: self.reason,
