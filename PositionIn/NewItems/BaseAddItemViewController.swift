@@ -29,6 +29,12 @@ class BaseAddItemViewController: XLFormViewController {
         return CLLocation(latitude: 39.1746, longitude: -107.4470)
     }
     
+    override func showFormValidationError(error: NSError!) {
+        if let error = error {
+            showWarning(error.localizedDescription)
+        }
+    }
+    
     func locationRowDescriptor(tag: String, withCurrentCoordinate: Bool = true) -> XLFormRowDescriptor {
         let locationRow = XLFormRowDescriptor(tag: tag, rowType: XLFormRowDescriptorTypeSelectorPush, title: NSLocalizedString("Location", comment: "New item: location"))
         locationRow.action.formSegueClass = NSClassFromString("UIStoryboardPushSegue")

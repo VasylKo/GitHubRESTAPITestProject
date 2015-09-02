@@ -14,7 +14,6 @@ import CleanroomLogger
 import ResponseDetective
 import Messaging
 import GoogleMaps
-import JDStatusBarNotification
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -109,9 +108,9 @@ extension AppDelegate {
             switch (error.domain, error.code) {
             case (baseErrorDomain, NetworkDataProvider.ErrorCodes.InvalidSessionError.rawValue):
                 self.sidebarViewController?.executeAction(.Login)
-                JDStatusBarNotification.showWithStatus(error.localizedDescription, dismissAfter: 1.0, styleName: JDStatusBarStyleError)
+                showError(error.localizedDescription)
             default:
-                JDStatusBarNotification.showWithStatus(error.localizedDescription, dismissAfter: 1.0, styleName: JDStatusBarStyleWarning)
+                showWarning(error.localizedDescription)
             }
         }
     }
