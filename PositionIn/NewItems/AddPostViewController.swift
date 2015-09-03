@@ -101,6 +101,7 @@ final class AddPostViewController: BaseAddItemViewController {
                     }
                 }.onSuccess { [weak self] (post: Post) -> ()  in
                     Log.debug?.value(post)
+                    self?.sendUpdateNotification()
                     self?.performSegue(AddPostViewController.Segue.Close)
                 }
         }
