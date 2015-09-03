@@ -154,6 +154,16 @@ class BaseAddItemViewController: XLFormViewController {
         Log.error?.message("Abstract post new item")
     }
 
+    func sendUpdateNotification(aUserInfo: [NSObject : AnyObject]? = nil) {
+        NSNotificationCenter.defaultCenter().postNotificationName(
+            BaseAddItemViewController.NewContentAvailableNotification,
+            object: self,
+            userInfo: nil
+        )
+    }
+    
+    static let NewContentAvailableNotification = "NewContentAvailableNotification"
+    
     //MARK: - Image picker -
     
     func didTouchPhoto(sender: XLFormRowDescriptor) {

@@ -47,8 +47,9 @@ class ProfileListViewController: BesideMenuViewController, BrowseActionProducer 
         }()
         let actionDelegate = self.parentViewController as? UserProfileActionConsumer
         dataSource.items[Sections.Info.rawValue] = [
-            ProfileInfoCellModel(name: profile.firstName, avatar: profile.avatar, background: profile.backgroundImage, leftAction: leftAction, rightAction: rightAction, actionDelegate: actionDelegate),
-            ProfileStatsCellModel(countPosts: 113, countFollowers: 23, countFollowing: 2),
+            ProfileInfoCellModel(name: profile.displayName, avatar: profile.avatar, background: profile.backgroundImage, leftAction: leftAction, rightAction: rightAction, actionDelegate: actionDelegate),
+            TableViewCellTextModel(title: profile.userDescription ?? ""),
+            ProfileStatsCellModel(countPosts: profile.countPosts, countFollowers: profile.countFollowers, countFollowing: profile.countFollowing),
         ]
         dataSource.items[Sections.Feed.rawValue] = [
             BrowseListCellModel(objectId: profile.objectId, actionConsumer: self)
@@ -100,6 +101,10 @@ extension ProfileListViewController: BrowseActionConsumer {
 protocol ProfileCellModel: TableViewCellModel {
 }
 
+extension TableViewCellTextModel: ProfileCellModel {
+    
+}
+
 extension ProfileListViewController {
     final class ProfileDataSource: TableViewDataSource {
         var items: [[ProfileCellModel]] = [[],[]]
@@ -126,6 +131,8 @@ extension ProfileListViewController {
                 return ProfileStatsCell.reuseId()
             case let model as BrowseListCellModel:
                 return BrowseListTableViewCell.reuseId()
+            case let model as TableViewCellTextModel:
+                return DescriptionTableViewCell.reuseId()
             default:
                 return super.tableView(tableView, reuseIdentifierForIndexPath: indexPath)
             }
@@ -136,12 +143,19 @@ extension ProfileListViewController {
         }
         
         override func nibCellsId() -> [String] {
-            return [ProfileInfoCell.reuseId(), ProfileStatsCell.reuseId(), BrowseListTableViewCell.reuseId()]
+            return [ProfileInfoCell.reuseId(), ProfileStatsCell.reuseId(), BrowseListTableViewCell.reuseId(), DescriptionTableViewCell.reuseId()]
         }
         
         func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
             tableView.deselectRowAtIndexPath(indexPath, animated: true)
-
+        }
+        
+        @objc override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+            if let model = self.tableView(tableView, modelForIndexPath: indexPath) as? TableViewCellTextModel
+               where count(model.title) == 0 {
+                return 0.0
+            }
+            return super.tableView(tableView, heightForRowAtIndexPath: indexPath)
         }
     }
 }

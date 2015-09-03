@@ -63,9 +63,8 @@ final class AddCommunityViewController: BaseAddItemViewController {
         community.communityDescription = values[Tags.Description.rawValue] as? String
         api().createCommunity(community: community).onSuccess{ [weak self] community  in
             Log.debug?.value(community)
+            self?.sendUpdateNotification()
             self?.performSegue(AddCommunityViewController.Segue.Close)
-            }.onFailure{ error in
-                Log.error?.value(error)
         }
     }
 }

@@ -121,9 +121,7 @@ final class AddPromotionViewController: BaseAddItemViewController {
                     promotion.text = values[Tags.Description.rawValue] as? String
                     promotion.endDate = values[Tags.EndDate.rawValue] as? NSDate
                     promotion.startDate = values[Tags.StartDate.rawValue] as? NSDate
-                    if let shopId = NSUserDefaults.standardUserDefaults().valueForKey("shopId")  as? String {
-                        promotion.shopId = shopId
-                    }
+                   
                     promotion.photos = urls.map { url in
                         var info = PhotoInfo()
                         info.url = url
@@ -136,6 +134,7 @@ final class AddPromotionViewController: BaseAddItemViewController {
                     }
                     }.onSuccess { [weak self] (promotion: Promotion) -> ()  in
                         Log.debug?.value(promotion)
+                        self?.sendUpdateNotification()
                         self?.performSegue(AddPromotionViewController.Segue.Close)
                     }
                 

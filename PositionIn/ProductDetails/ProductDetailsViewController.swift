@@ -27,29 +27,31 @@ final class ProductDetailsViewController: UIViewController {
     
     private func reloadData() {
         let page = APIService.Page()
-        api().getProduct(objectId!).onSuccess { [weak self] product in
-            self?.product = product
+        if let author = authorId {
+            api().getProduct(objectId!, author: author).onSuccess { [weak self] product in
+                self?.product = product
+            }
         }
-
+        
     }
     
     private lazy var dataSource: ProductDetailsDataSource = {
         let dataSource = ProductDetailsDataSource()
         dataSource.parentViewController = self
         return dataSource
-    }()
+        }()
     
     
     private func productAcionItems() -> [[ProductActionItem]] {
         return [
             [ // 0 section
                 ProductActionItem(title: NSLocalizedString("Buy Product", comment: "Product action: Buy Product"), image: "MainMenuMessages", action: .Buy),
-                ],
+            ],
             [ // 1 section
                 ProductActionItem(title: NSLocalizedString("Send Message", comment: "Product action: Send Message"), image: "MainMenuMessages", action: .SendMessage),
                 ProductActionItem(title: NSLocalizedString("Product Inventory", comment: "Product action: Product Inventory"), image: "MainMenuMessages", action: .ProductInventory),
                 ProductActionItem(title: NSLocalizedString("Seller Profile", comment: "Product action: Seller Profile"), image: "MainMenuMessages", action: .SellerProfile),
-                ],
+            ],
         ]
         
     }
@@ -66,6 +68,7 @@ final class ProductDetailsViewController: UIViewController {
     }
     
     var objectId: CRUDObjectId?
+    var authorId: CRUDObjectId?
     
     @IBOutlet private weak var actionTableView: UITableView!
     @IBOutlet private weak var productImageView: UIImageView!
@@ -130,7 +133,7 @@ extension ProductDetailsViewController {
             tableView.tableFooterView = UIView(frame: CGRectZero)
             super.configureTable(tableView)
         }
-
+        
         func numberOfSectionsInTableView(tableView: UITableView) -> Int {
             return items.count
         }
@@ -167,7 +170,7 @@ extension ProductDetailsViewController {
                 actionConsumer.executeAction(item.action)
             }
         }
-
+        
     }
 }
 

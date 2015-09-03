@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="PositionIn.DescriptionTableViewCell" id="9ym-Ln-MfI" customClass="DescriptionTableViewCell" customModule="PositionIn" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9ym-Ln-MfI" id="V3r-q3-k3e">
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="juf-L0-aFu">
+                        <rect key="frame" x="10" y="0.0" width="300" height="43.5"/>
+                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <color key="backgroundColor" red="0.13725490200000001" green="0.4431372549" blue="0.83529411760000005" alpha="1" colorSpace="calibratedRGB"/>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="juf-L0-aFu" secondAttribute="bottom" id="6tf-Ne-WOI"/>
+                    <constraint firstAttribute="trailing" secondItem="juf-L0-aFu" secondAttribute="trailing" constant="10" id="GrH-dN-JI2"/>
+                    <constraint firstItem="juf-L0-aFu" firstAttribute="top" secondItem="V3r-q3-k3e" secondAttribute="top" id="l6y-bZ-kOY"/>
+                    <constraint firstItem="juf-L0-aFu" firstAttribute="leading" secondItem="V3r-q3-k3e" secondAttribute="leading" constant="10" id="zKo-xW-bgY"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="descriptionLabel" destination="juf-L0-aFu" id="Cel-vG-81d"/>
+            </connections>
+            <point key="canvasLocation" x="439" y="294"/>
+        </tableViewCell>
+    </objects>
+</document>

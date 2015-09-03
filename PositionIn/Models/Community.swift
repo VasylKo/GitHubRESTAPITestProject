@@ -15,6 +15,8 @@ struct Community: CRUDObject {
     var communityDescription: String?
     var avatar: NSURL?
     var isPrivate: Bool = false
+    
+    var shops: [ObjectInfo]?
     /*
     "members": {
     "data": [
@@ -55,6 +57,7 @@ struct Community: CRUDObject {
         isPrivate <- map["isPrivate"]
         members <- map["members"]
         location <- map["location"]
+        shops <- map["shops.data"]
     }
     
     static func endpoint() -> String {

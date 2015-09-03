@@ -22,21 +22,30 @@ final class UserProfile: CRUDObject {
     var backgroundImage: NSURL?
     var location: Location?
     var guest: Bool =  false
-    var shops: [Dictionary<String, String>]? {
-         //FIXME: remove this ***
-        didSet {
-            
-            if let shopId = shops?.first {
-                NSUserDefaults.standardUserDefaults().setValue(shopId["id"], forKey: "shopId")
-                NSUserDefaults.standardUserDefaults().synchronize()
-            }
-        }
-    }
-        
+    var shops: [ObjectInfo]?
+    
     enum Gender {
         case Unknown
         case Male
         case Female
+    }
+    
+    
+    var countFollowers: Int?
+    var countFollowing: Int?
+    var countPosts: Int?
+    
+    var defaultShopId: CRUDObjectId  {
+        return shops?.first?.objectId ?? CRUDObjectInvalidId
+    }
+    
+    var displayName: String {
+        switch (firstName, lastName) {
+        case (.None, .None):
+            return NSLocalizedString("Unknown", comment: "Unnamed user display name")
+        default:
+            return String(format: "%@ %@", firstName ?? "", lastName ?? "")
+        }
     }
     
     init?(_ map: Map) {
@@ -69,6 +78,9 @@ final class UserProfile: CRUDObject {
         location <- map["location"]
         guest <- map["guest"]
         shops <- map["shops.data"]
+        countFollowers <- map["followers.count"]
+        countFollowing <- map["following.count"]
+        countPosts <- map["posts.count"]
     }
     
     static func endpoint() -> String {
