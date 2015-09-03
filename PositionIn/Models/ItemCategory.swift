@@ -14,6 +14,14 @@ enum ItemCategory: Int, DebugPrintable {
          CamerasOptics, Electronics, Food, Furniture, Hardware, HealthBeauty, HomeGarden, LuggageBags,
          Media, OfficeSupplies, ReligiousCeremonial, Software, SportingGoods, ToysGames, VehiclesParts
     
+    static func all() -> [ItemCategory] {
+        return [
+            .AnimalsPetSupplies, .ApparelAccessories, .ArtsEntertainment, .BabyToddler, .BusinessIndustrial,
+            .CamerasOptics, .Electronics, .Food, .Furniture, .Hardware, .HealthBeauty, .HomeGarden, .LuggageBags,
+            .Media, .OfficeSupplies, .ReligiousCeremonial, .Software, .SportingGoods, .ToysGames, .VehiclesParts
+        ]
+    }
+    
     func displayString() -> String {
         switch self {
         case .AnimalsPetSupplies:

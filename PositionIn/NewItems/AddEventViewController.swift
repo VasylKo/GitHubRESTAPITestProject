@@ -60,7 +60,10 @@ final class AddEventViewController: BaseAddItemViewController {
         // Community
         let communityRow = communityRowDescriptor(Tags.Community.rawValue)
         infoSection.addFormRow(communityRow)
-        
+        // Category
+        let categoryRow = categoryRowDescriptor(Tags.Category.rawValue)
+        infoSection.addFormRow(categoryRow)
+
         
         //Photo section
         let photoSection = XLFormSectionDescriptor.formSection()
@@ -97,7 +100,8 @@ final class AddEventViewController: BaseAddItemViewController {
         let values = formValues()
         Log.debug?.value(values)
         
-        let community =  communityValue(values[Tags.Community.rawValue])
+        let community = communityValue(values[Tags.Community.rawValue])
+        let category = categoryValue(values[Tags.Category.rawValue])
         
         if  let imageUpload = uploadAssets(values[Tags.Photo.rawValue]),
             let getLocation = locationFromValue(values[Tags.Location.rawValue]) {
@@ -106,7 +110,7 @@ final class AddEventViewController: BaseAddItemViewController {
                     event.name = values[Tags.Title.rawValue] as? String
                     event.eventDescription = values[Tags.Description.rawValue] as? String
                     event.location = location
-                    event.category = .AnimalsPetSupplies
+                    event.category = category
                     event.endDate = values[Tags.EndDate.rawValue] as? NSDate
                     event.startDate = values[Tags.StartDate.rawValue] as? NSDate
                     

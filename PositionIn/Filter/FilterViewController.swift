@@ -42,12 +42,6 @@ final class FilterViewController: XLFormViewController {
         self.initializeForm()
     }
     
-    private let categories: [ItemCategory] = [
-        .AnimalsPetSupplies, .ApparelAccessories, .ArtsEntertainment, .BabyToddler, .BusinessIndustrial,
-        .CamerasOptics, .Electronics, .Food, .Furniture, .Hardware, .HealthBeauty, .HomeGarden, .LuggageBags,
-        .Media, .OfficeSupplies, .ReligiousCeremonial, .Software, .SportingGoods, .ToysGames, .VehiclesParts
-    ]
-    
     func initializeForm() {
         let form = XLFormDescriptor(title: NSLocalizedString("Filter", comment: "Update filter: form caption"))
         
@@ -134,6 +128,7 @@ final class FilterViewController: XLFormViewController {
         let categoriesSection = XLFormSectionDescriptor.formSectionWithTitle(NSLocalizedString("Categories", comment: "Update filter: categories caption"))
         categoriesSection.multivaluedTag = Tags.Categories.rawValue
         form.addFormSection(categoriesSection)
+        let categories = ItemCategory.all()
         categories.map { (category: ItemCategory) -> () in
             let categoryRow = XLFormRowDescriptor(tag: category.displayString(), rowType: XLFormRowDescriptorTypeBooleanSwitch, title: category.displayString())
             categoryRow.cellConfigAtConfigure["imageView.image"] = category.image()
