@@ -9,47 +9,40 @@
 import ObjectMapper
 import CleanroomLogger
 
-struct Promotion: CRUDObject {
+struct Product: CRUDObject {
     var objectId: CRUDObjectId = CRUDObjectInvalidId
     var name: String?
     var text: String?
-    var endDate: NSDate?
-    var startDate: NSDate?
-    var discount: Float?
     var category: ItemCategory?
+    var quantity: Int?
+    var price: Float?
+    var deliveryMethod: DeliveryMethod? = .Unknown
     var photos: [PhotoInfo]?
     var location: Location?
     
-//
-
-
-    /*
-    TODO:
-
-    "community": <guid?>,
+/*
+    //TODO:
+    "itemCategory": <guid>
+*/
     
-    "shop": <guid>,
-    "items": [<guid>],
-    */
-    
-    /*
-    Details:
-    
-    "items": [{
-    "data":{
+
+/* Details
+    "itemCategory": {
     "id": <guid>,
-    "name": <string>,
-    "photos": [{
-				"id": <guid>,
-				"url": <string>
-				}]
+    "name": <string>
     },
-    "count": <number>
-    }]
     "author": <guid?>,
+    "community": <guid?>,
+*/
 
     
-    */
+    
+    
+    enum DeliveryMethod: Int {
+        case Unknown
+        case Pickup, Deliver, PickupOrDeliver
+    }
+    
     
     init(objectId: CRUDObjectId = CRUDObjectInvalidId) {
         self.objectId = objectId
@@ -66,35 +59,26 @@ struct Promotion: CRUDObject {
     }
     
     mutating func mapping(map: Map) {
-        
         objectId <- (map["id"], CRUDObjectIdTransform())
         name <- map["name"]
         text <- map["description"]
-        endDate <- (map["endDate"], APIDateTransform())
-        startDate <- (map["startDate"], APIDateTransform())
-        discount <- map["discount"]
         category <- (map["category"], EnumTransform())
+        quantity <- map["quantity"]
+        price <- map["price"]
+        deliveryMethod <- (map["deliveryMethod"], EnumTransform())
         photos <- map["photos"]
         location <- map["location"]
-
-//        shopId <- map["shop"]
     }
     
-    static func endpoint() -> String {
-        return "/v1.0/promotions"
+    
+    static func shopItemsEndpoint(shopId: CRUDObjectId, productId: CRUDObjectId) -> String {
+        return Product.shopItemsEndpoint(shopId).stringByAppendingPathComponent("\(productId)")
     }
     
-    static func endpoint(promotionId: CRUDObjectId) -> String {
-        return Promotion.endpoint().stringByAppendingPathComponent("\(promotionId)")
+    static func shopItemsEndpoint(shopId: CRUDObjectId) -> String {
+        return Shop.endpoint().stringByAppendingPathComponent("\(shopId)/items")
     }
-    
-    static func userPromotionsEndpoint(userId: CRUDObjectId) -> String {
-        return UserProfile.userEndpoint(userId).stringByAppendingPathComponent("promotions")
-    }
-    
-    static func communityPromotionsEndpoint(communityId: CRUDObjectId) -> String {
-        return Community.endpoint().stringByAppendingPathComponent("\(communityId)/promotions")
-    }
+        
     
     var description: String {
         return "<\(self.dynamicType):\(objectId)>"

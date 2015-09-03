@@ -110,6 +110,7 @@ final class AddPromotionViewController: BaseAddItemViewController {
         Log.debug?.value(values)
         
         let community =  communityValue(values[Tags.Community.rawValue])
+        let category = categoryValue(values[Tags.Category.rawValue])
         
         if  let imageUpload = uploadAssets(values[Tags.Photo.rawValue]),
             let getLocation = locationFromValue(values[Tags.Location.rawValue]) {
@@ -117,10 +118,11 @@ final class AddPromotionViewController: BaseAddItemViewController {
                     var promotion = Promotion()
                     promotion.name = values[Tags.Title.rawValue] as? String
                     promotion.discount = values[Tags.Discount.rawValue] as? Float
-                    promotion.location = location
-                    promotion.text = values[Tags.Description.rawValue] as? String
+                    promotion.category = category
                     promotion.endDate = values[Tags.EndDate.rawValue] as? NSDate
                     promotion.startDate = values[Tags.StartDate.rawValue] as? NSDate
+                    promotion.location = location
+                    promotion.text = values[Tags.Description.rawValue] as? String
                    
                     promotion.photos = urls.map { url in
                         var info = PhotoInfo()

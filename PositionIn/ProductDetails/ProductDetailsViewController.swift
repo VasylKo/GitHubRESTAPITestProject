@@ -56,10 +56,10 @@ final class ProductDetailsViewController: UIViewController {
         
     }
     
-    private var product:  ShopItemProduct? {
+    private var product:  Product? {
         didSet{
             headerLabel.text = product?.name
-            detailsLabel.text = product?.descriptionProd
+            detailsLabel.text = product?.text
             priceLabel.text = "$\(product?.price ?? 123)"
             if let imgURL = product?.photos?.first?.url {
                 productImageView.hnk_setImageFromURL(imgURL)

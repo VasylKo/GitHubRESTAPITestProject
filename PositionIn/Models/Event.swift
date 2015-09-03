@@ -22,7 +22,7 @@ struct Event: CRUDObject {
    
     
 /* 
-    Todo:
+    TODO:
     "items": [<guid>],
 */
     

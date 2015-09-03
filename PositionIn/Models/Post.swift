@@ -13,24 +13,10 @@ struct Post: CRUDObject {
     var objectId: CRUDObjectId = CRUDObjectInvalidId
     var name: String?
     var text: String?
-    //"date": <datetime>,
     var photos: [PhotoInfo]?
-    var likes: Int?
-    /*
-    "comments": {
-    data:[],
-    count: <number>
-    },
-    */
-    /*
-    "author": {
-    "id": <guid>,
-    "name": <string>,
-    "avatar": <string>
-    },
-    */
     var location: Location?
-
+    
+    var likes: Int?
     
     init(objectId: CRUDObjectId = CRUDObjectInvalidId) {
         self.objectId = objectId

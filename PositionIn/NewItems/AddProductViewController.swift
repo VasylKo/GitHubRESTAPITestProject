@@ -112,13 +112,13 @@ final class AddProductViewController: BaseAddItemViewController {
         
         if  let imageUpload = uploadAssets(values[Tags.Photo.rawValue]),
             let getLocation = locationFromValue(values[Tags.Location.rawValue]) {
-                getLocation.zip(imageUpload).flatMap { (location: Location, urls: [NSURL]) -> Future<ShopItemProduct, NSError> in
-                    var product = ShopItemProduct()
+                getLocation.zip(imageUpload).flatMap { (location: Location, urls: [NSURL]) -> Future<Product, NSError> in
+                    var product = Product()
                     product.name = values[Tags.Title.rawValue] as? String
-                    product.category = 1
-                    product.price = values[Tags.Price.rawValue] as? Int
-                    product.descriptionProd = values[Tags.Description.rawValue] as? String
-                    product.deliveryMethod = 1
+//                    product.category = 1
+                    product.price = values[Tags.Price.rawValue] as? Float
+                    product.text = values[Tags.Description.rawValue] as? String
+//                    product.deliveryMethod = 1
                     product.location = location
                     product.photos = urls.map { url in
                         var info = PhotoInfo()
@@ -130,7 +130,7 @@ final class AddProductViewController: BaseAddItemViewController {
                     } else {
                         return api().createUserProduct(product: product)
                     }
-                    }.onSuccess { [weak self] (product: ShopItemProduct) -> ()  in
+                    }.onSuccess { [weak self] (product: Product) -> ()  in
                         Log.debug?.value(product)
                         self?.sendUpdateNotification()
                         self?.performSegue(AddProductViewController.Segue.Close)
