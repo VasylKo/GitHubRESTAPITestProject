@@ -65,7 +65,6 @@ struct FeedItem: CRUDObject {
         case Event
         case Promotion
         case Item
-        case Person
         case Post
     }
     

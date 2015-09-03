@@ -49,7 +49,7 @@ struct FeedItemCellModelFactory {
                     price: 99.8
                 ),
             ]
-        case .Person:
+        case .Post:
             return [
                 CompactFeedTableCellModel(
                     item: feedItem,
@@ -73,7 +73,7 @@ struct FeedItemCellModelFactory {
                 return PromotionListCell.reuseId()
             case .Event:
                 return EventListCell.reuseId()
-            case .Person:
+            case .Post:
                 return PostListCell.reuseId()
             case .Item:
                 return ProductListCell.reuseId()
