@@ -38,6 +38,7 @@
                             <constraint firstAttribute="height" constant="30" id="J06-Cg-o0N"/>
                             <constraint firstAttribute="width" constant="30" id="sLz-2A-Ims"/>
                         </constraints>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <state key="normal">
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
@@ -57,6 +58,7 @@
                             <constraint firstAttribute="height" constant="30" id="Jf9-He-bQF"/>
                             <constraint firstAttribute="width" constant="30" id="T7w-8H-hLz"/>
                         </constraints>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <state key="normal">
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>

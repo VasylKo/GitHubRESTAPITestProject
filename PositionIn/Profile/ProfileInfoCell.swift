@@ -12,6 +12,7 @@ import Haneke
 
 final class ProfileInfoCell: TableViewCell {
     override func setModel(model: TableViewCellModel) {
+        selectionStyle = .None
         let m = model as? ProfileInfoCellModel
         assert(m != nil, "Invalid model passed")
         nameLabel.text = m!.name
@@ -20,7 +21,6 @@ final class ProfileInfoCell: TableViewCell {
         updateButton(leftActionButton, forAction: m!.leftAction)
         updateButton(rightActionButton, forAction: m!.rightAction)
         actionDelegate = m!.actionDelegate
-        selectionStyle = .None
     }
     
     @IBAction func actionTapped(sender: UIButton) {
@@ -32,10 +32,12 @@ final class ProfileInfoCell: TableViewCell {
     private func updateButton(btn: UIButton, forAction action: UserProfileViewController.ProfileAction) {
         btn.tag = action.rawValue
         switch action {
+        case .Edit:
+            btn.setImage(UIImage(named: "MainMenuSettings"), forState: .Normal)
         case .None:
             fallthrough
         default:
-            btn.setImage(nil, forState: UIControlState.Normal)
+            btn.setImage(nil, forState: .Normal)
         }
     }
     

@@ -34,6 +34,15 @@ final class UserProfile: CRUDObject {
         return shops?.first?.objectId ?? CRUDObjectInvalidId
     }
     
+    var displayName: String {
+        switch (firstName, lastName) {
+        case (.None, .None):
+            return NSLocalizedString("Unknown", comment: "Unnamed user display name")
+        default:
+            return String(format: "%@ %@", firstName ?? "", lastName ?? "")
+        }
+    }
+    
     init?(_ map: Map) {
         mapping(map)
         if objectId == CRUDObjectInvalidId {

@@ -33,9 +33,9 @@ final class MainMenuViewController: UIViewController {
             if user.guest == true {
                 return loginItem
             }
-            let title: String =  user.firstName ?? NSLocalizedString("Unknown", comment: "Main Menu: Unnamed user")
+
             let image = user.avatar?.absoluteString ?? ""
-            return MainMenuItem(title: title, imageName: image, action: .UserProfile)
+            return MainMenuItem(title: user.displayName, imageName: image, action: .UserProfile)
         } ?? loginItem
 
         return [firstItem] + defaultMainMenuItems()

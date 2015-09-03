@@ -47,7 +47,7 @@ class ProfileListViewController: BesideMenuViewController, BrowseActionProducer 
         }()
         let actionDelegate = self.parentViewController as? UserProfileActionConsumer
         dataSource.items[Sections.Info.rawValue] = [
-            ProfileInfoCellModel(name: profile.firstName, avatar: profile.avatar, background: profile.backgroundImage, leftAction: leftAction, rightAction: rightAction, actionDelegate: actionDelegate),
+            ProfileInfoCellModel(name: profile.displayName, avatar: profile.avatar, background: profile.backgroundImage, leftAction: leftAction, rightAction: rightAction, actionDelegate: actionDelegate),
             ProfileStatsCellModel(countPosts: 113, countFollowers: 23, countFollowing: 2),
         ]
         dataSource.items[Sections.Feed.rawValue] = [

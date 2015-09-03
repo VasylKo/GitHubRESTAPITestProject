@@ -15,9 +15,22 @@ protocol UserProfileActionConsumer: class {
 
 final class UserProfileViewController: BrowseModeViewController {
     
-    enum ProfileAction: Int {
+    enum ProfileAction: Int, Printable {
         case None
         case Call, Chat, Edit
+        var description: String {
+            switch self {
+            case .None:
+                return "Empty action"
+            case .Call:
+                return "Contact"
+            case .Chat:
+                return "SendMessage"
+            case .Edit:
+                return "Edit profile"
+            }
+        }
+
     }
     
     var objectId: CRUDObjectId = api().currentUserId() ?? CRUDObjectInvalidId
