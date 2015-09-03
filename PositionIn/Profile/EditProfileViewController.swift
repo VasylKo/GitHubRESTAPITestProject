@@ -64,6 +64,7 @@ final class EditProfileViewController: BaseAddItemViewController {
                 strongSelf.aboutRow.value = profile.userDescription
                 //TODO: fill email field
                 //strongSelf.emailRow.value = profile WHAT?
+                strongSelf.tableView.reloadData()
             }
         }
     }
