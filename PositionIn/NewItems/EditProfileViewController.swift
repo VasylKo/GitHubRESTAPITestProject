@@ -9,6 +9,7 @@
 import UIKit
 import XLForm
 import CleanroomLogger
+import BrightFutures
 
 final class EditProfileViewController: BaseAddItemViewController {
     
@@ -111,21 +112,25 @@ final class EditProfileViewController: BaseAddItemViewController {
         let values = formValues()
         Log.debug?.value(values)
         
-        if let userProfile = userProfile {
-            userProfile.firstName = values[Tags.FirstName.rawValue] as? String
-            userProfile.lastName = values[Tags.LastName.rawValue] as? String
-            userProfile.phone = values[Tags.Phone.rawValue] as? String
-            userProfile.userDescription = values[Tags.About.rawValue] as? String
-            
-            api().updateMyProfile(userProfile).onSuccess { [weak self] in
-                NSNotificationCenter.defaultCenter().postNotificationName(
-                    UserProfile.CurrentUserDidChangeNotification,
-                    object: userProfile,
-                    userInfo: nil
-                )
-                self?.sendUpdateNotification()
-                self?.performSegue(EditProfileViewController.Segue.Close)
-            }
+        if  let userProfile = userProfile,
+            let avatarUpload = uploadAssets(values[Tags.Photo.rawValue]) {
+                userProfile.firstName = values[Tags.FirstName.rawValue] as? String
+                userProfile.lastName = values[Tags.LastName.rawValue] as? String
+                userProfile.phone = values[Tags.Phone.rawValue] as? String
+                userProfile.userDescription = values[Tags.About.rawValue] as? String
+                
+                avatarUpload.flatMap { (urls: [NSURL]) -> Future<Void, NSError> in
+                    userProfile.avatar = urls.first
+                    return api().updateMyProfile(userProfile)
+                }.onSuccess { [weak self] in
+                    NSNotificationCenter.defaultCenter().postNotificationName(
+                        UserProfile.CurrentUserDidChangeNotification,
+                        object: userProfile,
+                        userInfo: nil
+                    )
+                    self?.sendUpdateNotification()
+                    self?.performSegue(EditProfileViewController.Segue.Close)
+                }
         } else {
             showError(NSLocalizedString("Failed to fetch user data", comment: "Edit profile: Prefetch failure"))
         }
