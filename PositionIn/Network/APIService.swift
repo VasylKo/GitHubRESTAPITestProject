@@ -147,7 +147,7 @@ struct APIService {
     
     func getUserProducts(userId: CRUDObjectId, page: Page) -> Future<CollectionResponse<Product>, NSError> {
        return self.getUserProfile(userId).flatMap { profile -> Future<CollectionResponse<Product>, NSError> in
-            let endpoint = Product.userProductsEndpoint(profile.defaultShopId)
+            let endpoint = Product.shopItemsEndpoint(profile.defaultShopId)
             let params = page.query
             return self.getObjectsCollection(endpoint, params: params)
         }

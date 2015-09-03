@@ -18,5 +18,6 @@ protocol CRUDObject: Mappable, Printable {
 
     var objectId: CRUDObjectId { get  set}
     
-    static func endpoint() -> String    
+    //TODO: remove from protocol
+    static func endpoint() -> String
 }

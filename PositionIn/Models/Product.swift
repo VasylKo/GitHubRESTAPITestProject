@@ -70,13 +70,16 @@ struct Product: CRUDObject {
         location <- map["location"]
     }
     
+    static func endpoint() -> String {
+        return Shop.endpoint()
+    }
     
     static func shopItemsEndpoint(shopId: CRUDObjectId, productId: CRUDObjectId) -> String {
         return Product.shopItemsEndpoint(shopId).stringByAppendingPathComponent("\(productId)")
     }
     
     static func shopItemsEndpoint(shopId: CRUDObjectId) -> String {
-        return Shop.endpoint().stringByAppendingPathComponent("\(shopId)/items")
+        return Product.endpoint().stringByAppendingPathComponent("\(shopId)/items")
     }
         
     
