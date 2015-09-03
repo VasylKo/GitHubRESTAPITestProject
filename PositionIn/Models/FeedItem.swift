@@ -13,20 +13,22 @@ import CleanroomLogger
 
 struct FeedItem: CRUDObject {
     var objectId: CRUDObjectId = CRUDObjectInvalidId
-    var name: String?
-    var price: Int?
-    var text: String?
+    var name: String?    
     var details: String?
+    var text: String?
+    var category: ItemCategory?
+    var price: Float?
+    var startDate: NSDate?
+    var endDate: NSDate?
+    var author: CRUDObjectId = CRUDObjectInvalidId
+    var community: CRUDObjectId = CRUDObjectInvalidId
     var date: NSDate?
     var image: NSURL?
     var type: ItemType = .Unknown
     var location: Location?
-    var startDate: NSDate?
-    var endDate: NSDate?
-    var discount: Float?
     
-    var author: CRUDObjectId = CRUDObjectInvalidId
-    var community: CRUDObjectId = CRUDObjectInvalidId
+    
+    
     
     init?(_ map: Map) {
         mapping(map)
@@ -40,19 +42,19 @@ struct FeedItem: CRUDObject {
     
     mutating func mapping(map: Map) {
         objectId <- (map["id"], CRUDObjectIdTransform())
-        date <- (map["date"], APIDateTransform())
+        name <- map["name"]
+        details <- map["details"]
         text <- map["text"]
+        category <- (map["category"], EnumTransform())
+        price <- map["price"]
+        startDate <- (map["startDate"], APIDateTransform())
+        endDate <- (map["endDate"], APIDateTransform())
+        author <- (map["author"], CRUDObjectIdTransform())
+        community <- (map["community"], CRUDObjectIdTransform())
+        date <- (map["date"], APIDateTransform())
         image <- (map["image"], AmazonURLTransform())
         type <- (map["type"], EnumTransform())
-        location <- map["location"]
-        details <- map["details"]
-        author <- map["author"]
-        community <- map["community"]
-        name <- map["name"]
-        price <- map["price"]
-        startDate <- map["startDate"]
-        endDate <- map["endDate"]
-        discount <- map["discount"]
+        location <- map["location"]        
     }
     
     var description: String {

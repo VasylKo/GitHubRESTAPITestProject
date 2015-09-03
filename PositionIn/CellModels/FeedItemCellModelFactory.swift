@@ -28,7 +28,7 @@ struct FeedItemCellModelFactory {
             ]
 
         case .Promotion:
-            let discount: Float = feedItem.discount ?? 0.0
+            let discount: Float =  146.0
             return [
                 CompactFeedTableCellModel(
                     item: feedItem,
