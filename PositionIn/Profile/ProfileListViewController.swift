@@ -150,5 +150,13 @@ extension ProfileListViewController {
             tableView.deselectRowAtIndexPath(indexPath, animated: true)
 
         }
+        
+        @objc override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+            if let model = self.tableView(tableView, modelForIndexPath: indexPath) as? TableViewCellTextModel
+               where count(model.title) == 0 {
+                return 0.0
+            }
+            return super.tableView(tableView, heightForRowAtIndexPath: indexPath)
+        }
     }
 }
