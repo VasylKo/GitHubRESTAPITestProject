@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CleanroomLogger
 
 /// Controller with Main menu button
 class BesideMenuViewController: UIViewController {
@@ -26,4 +27,27 @@ class BesideMenuViewController: UIViewController {
         return UIBarButtonItem(image: UIImage(named: "MainMenuIcon")!, style: .Plain, target: self, action: "showMainMenu:")
     }
 
+    //MARK: Notifications
+    
+    func subscribeForContentUpdates(sender: AnyObject) {
+        NSNotificationCenter.defaultCenter().addObserver(
+            self,
+            selector: "didReceiveContentUpdateNotification:",
+            name: BaseAddItemViewController.NewContentAvailableNotification,
+            object: sender
+        )
+    }
+    
+    func didReceiveContentUpdateNotification(notification: NSNotification) {
+        contentDidChange(notification.object, info: notification.userInfo)
+    }
+    
+    func contentDidChange(sender: AnyObject?, info: [NSObject : AnyObject]?) {
+        Log.debug?.message("Receive update notification from \(sender)")
+    }
+    
+    deinit{
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+    
 }
