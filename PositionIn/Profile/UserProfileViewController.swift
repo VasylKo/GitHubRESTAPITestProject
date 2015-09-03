@@ -86,6 +86,14 @@ final class UserProfileViewController: BrowseModeViewController {
 extension UserProfileViewController: UserProfileActionConsumer {
     func shouldExecuteAction(action: UserProfileViewController.ProfileAction) {
         Log.debug?.value(action)
+        switch action {
+        case .Edit:
+            navigationController?.pushViewController(Storyboards.NewItems.instantiateEditProfileViewController(), animated: true)
+        case .None:
+            fallthrough
+        default:
+            Log.warning?.message("Unhandled action \(action)")
+        }
     }
 
 }

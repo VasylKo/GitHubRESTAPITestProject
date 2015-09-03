@@ -103,11 +103,7 @@ final class AddPostViewController: BaseAddItemViewController {
                     Log.debug?.value(post)
                     self?.performSegue(AddPostViewController.Segue.Close)
                 }
-                
         }
-        
-        
     }
-    
     
 }
