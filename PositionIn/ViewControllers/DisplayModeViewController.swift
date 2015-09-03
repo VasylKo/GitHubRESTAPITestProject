@@ -22,6 +22,14 @@ protocol BrowseActionConsumer: class {
 
 @objc class DisplayModeViewController: BesideMenuViewController, BrowseActionConsumer, UISearchBarDelegate {
     
+    //MARK: - Updates -
+    
+    override func contentDidChange(sender: AnyObject?, info: [NSObject : AnyObject]?) {
+        if isViewLoaded() {
+            applyDisplayMode(displayMode)
+        }
+    }
+    
     //MARK: - Display mode -
     
     enum DisplayMode: Int, Printable {

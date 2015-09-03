@@ -137,6 +137,7 @@ final class EditProfileViewController: BaseAddItemViewController {
                     object: userProfile,
                     userInfo: nil
                 )
+                self?.sendUpdateNotification()
                 self?.performSegue(EditProfileViewController.Segue.Close)
             }
         } else {
