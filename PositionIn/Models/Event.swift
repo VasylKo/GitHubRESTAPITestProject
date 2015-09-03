@@ -12,28 +12,59 @@ import CleanroomLogger
 struct Event: CRUDObject {
     var objectId: CRUDObjectId = CRUDObjectInvalidId
     var name: String?
-    var descriptionEvent: String?
-    var category: Int = 1
-    //"date": <datetime>,
-    var photos: [PhotoInfo]?
-    var likes: Int?
-    
+    var eventDescription: String?
     var endDate: NSDate?
     var startDate: NSDate?
-    /*
-    "comments": {
-    data:[],
-    count: <number>
-    },
-    */
-    /*
-    "author": {
+    var photos: [PhotoInfo]?
+    var location: Location?
+    var category: ItemCategory?
+
+   
+    
+/* 
+    Todo:
+    "items": [<guid>],
+*/
+    
+/*
+    
+    Not send
+    
+"attendees": <number>,
+"author": {
     "id": <guid>,
     "name": <string>,
-    "avatar": <string>
+    "avatar": <string>,
+    "isCommunity": <bool>
+},
+    
+*/
+    
+/*
+    Details
+    
+    
+    "shop": <guid>,
+    "items": [{
+        "data":{
+        "id": <guid>,
+        "name": <string>,
+        "photos": [{
+				"id": <guid>,
+				"url": <string>
+				}]
+        },
+        "count": <number>
+    }],
+    "participants": {
+        "count": <number>
     },
-    */
-    var location: Location?
+    
+    "author": <guid?>,
+    "community": <guid?>,
+    
+*/
+    
     
     
     init(objectId: CRUDObjectId = CRUDObjectInvalidId) {
@@ -51,17 +82,15 @@ struct Event: CRUDObject {
     }
     
     mutating func mapping(map: Map) {
-        let dateTransform =  CustomDateFormatTransform(formatString: "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
         
         objectId <- (map["id"], CRUDObjectIdTransform())
         name <- map["name"]
-        descriptionEvent <- map["description"]
+        eventDescription <- map["description"]
+        startDate <- (map["startDate"], APIDateTransform())
+        endDate <- (map["endDate"], APIDateTransform())
         photos <- map["photos"]
-        likes <- map["likes"]
         location <- map["location"]
-        category <- map["category"]
-        endDate <- (map["endDate"], dateTransform)
-        startDate <- (map["startDate"], dateTransform)
+        category <- (map["category"], EnumTransform())
     }
     
     static func endpoint() -> String {

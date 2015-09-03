@@ -62,7 +62,7 @@ final class EventDetailsViewController: UIViewController {
     private var event:  Event? {
         didSet{
             headerLabel.text = event?.name
-            detailsLabel.text = event?.descriptionEvent
+            detailsLabel.text = event?.eventDescription
             
             let dateFormatter = NSDateFormatter()
             dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle

@@ -104,9 +104,9 @@ final class AddEventViewController: BaseAddItemViewController {
                 getLocation.zip(imageUpload).flatMap { (location: Location, urls: [NSURL]) -> Future<Event, NSError> in
                     var event = Event()
                     event.name = values[Tags.Title.rawValue] as? String
-                    event.category = 1
-                    event.descriptionEvent = values[Tags.Description.rawValue] as? String
+                    event.eventDescription = values[Tags.Description.rawValue] as? String
                     event.location = location
+                    event.category = .AnimalsPetSupplies
                     event.endDate = values[Tags.EndDate.rawValue] as? NSDate
                     event.startDate = values[Tags.StartDate.rawValue] as? NSDate
                     

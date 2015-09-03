@@ -16,8 +16,6 @@ enum ItemCategory: Int, DebugPrintable {
     
     func displayString() -> String {
         switch self {
-        case .Unknown:
-            fallthrough
         case .AnimalsPetSupplies:
             return NSLocalizedString("Animals & Pet Supplies", comment: "ItemCategory: AnimalsPetSupplies")
         case .ApparelAccessories:
@@ -58,8 +56,10 @@ enum ItemCategory: Int, DebugPrintable {
             return NSLocalizedString("Toys & Games", comment: "ItemCategory: ToysGames")
         case .VehiclesParts:
             return NSLocalizedString("Vehicles & Parts", comment: "ItemCategory: VehiclesParts")
+        case .Unknown:
+            fallthrough
         default:
-            return NSLocalizedString("Unknown", comment: "ItemCategory: Unknown")
+            return NSLocalizedString("All", comment: "ItemCategory: Unknown")
         }
     }
     
