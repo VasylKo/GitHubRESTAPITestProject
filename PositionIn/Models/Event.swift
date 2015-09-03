@@ -12,7 +12,7 @@ import CleanroomLogger
 struct Event: CRUDObject {
     var objectId: CRUDObjectId = CRUDObjectInvalidId
     var name: String?
-    var eventDescription: String?
+    var text: String?
     var endDate: NSDate?
     var startDate: NSDate?
     var photos: [PhotoInfo]?
@@ -85,7 +85,7 @@ struct Event: CRUDObject {
         
         objectId <- (map["id"], CRUDObjectIdTransform())
         name <- map["name"]
-        eventDescription <- map["description"]
+        text <- map["description"]
         startDate <- (map["startDate"], APIDateTransform())
         endDate <- (map["endDate"], APIDateTransform())
         photos <- map["photos"]
@@ -98,21 +98,17 @@ struct Event: CRUDObject {
     }
     
     static func endpoint(eventId: CRUDObjectId) -> String {
-        return "/v1.0/events/\(eventId)"
+        return Event.endpoint().stringByAppendingPathComponent("\(eventId)")
     }
     
     static func userEventsEndpoint(userId: CRUDObjectId) -> String {
-        return UserProfile.endpoint().stringByAppendingPathComponent("\(userId)/events")
+            return UserProfile.userEndpoint(userId).stringByAppendingPathComponent("events")
     }
     
     static func communityEventsEndpoint(communityId: CRUDObjectId) -> String {
         return Community.endpoint().stringByAppendingPathComponent("\(communityId)/events")
     }
-    
-    static func allEndpoint(userId: CRUDObjectId) -> String {
-        return UserProfile.endpoint().stringByAppendingPathComponent(userId).stringByAppendingPathComponent("events")
-    }
-    
+        
     var description: String {
         return "<\(self.dynamicType):\(objectId)>"
     }

@@ -112,7 +112,7 @@ struct APIService {
         return createObject(endpoint, object: object)
     }
 
-    func getPromotion(objectId: String) -> Future<Promotion, NSError> {
+    func getPromotion(objectId: CRUDObjectId) -> Future<Promotion, NSError> {
         let endpoint = Promotion.endpoint(objectId)
         return getObject(endpoint)
     }
@@ -138,7 +138,7 @@ struct APIService {
         return createObject(endpoint, object: object)
     }
 
-    func getEvent(objectId: String) -> Future<Event, NSError> {
+    func getEvent(objectId: CRUDObjectId) -> Future<Event, NSError> {
         let endpoint = Event.endpoint(objectId)
         return getObject(endpoint)
     }
@@ -167,7 +167,7 @@ struct APIService {
         }
     }
 
-    func getProduct(objectId: String, author: String) -> Future<ShopItemProduct, NSError> {
+    func getProduct(objectId: CRUDObjectId, author: CRUDObjectId) -> Future<ShopItemProduct, NSError> {
         return self.getUserProfile(author).flatMap { profile -> Future<ShopItemProduct, NSError> in
             let endpoint = ShopItemProduct.endpoint(objectId, shopId: profile.defaultShopId)
             return self.getObject(endpoint)

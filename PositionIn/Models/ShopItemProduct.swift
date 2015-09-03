@@ -18,23 +18,10 @@ struct ShopItemProduct: CRUDObject {
     var price: Int? 
     var quantity: Int = 1
     var deliveryMethod: Int = 1
-    //"date": <datetime>,
+
     var photos: [PhotoInfo]?
-    var likes: Int?
+
     
-    /*
-    "comments": {
-    data:[],
-    count: <number>
-    },
-    */
-    /*
-    "author": {
-    "id": <guid>,
-    "name": <string>,
-    "avatar": <string>
-    },
-    */
     var location: Location?
     
     
@@ -58,7 +45,6 @@ struct ShopItemProduct: CRUDObject {
         name <- map["name"]
         descriptionProd <- map["description"]
         photos <- map["photos"]
-        likes <- map["likes"]
         location <- map["location"]
         category <- map["category"]
         deliveryMethod <- map["deliveryMethod"]
@@ -89,9 +75,6 @@ struct ShopItemProduct: CRUDObject {
         return Community.endpoint().stringByAppendingPathComponent("\(community.objectId)/shops/items")
     }
     
-    static func allEndpoint(userId: CRUDObjectId) -> String {
-        return UserProfile.endpoint().stringByAppendingPathComponent(userId).stringByAppendingPathComponent("items")
-    }
     
     var description: String {
         return "<\(self.dynamicType):\(objectId)>"

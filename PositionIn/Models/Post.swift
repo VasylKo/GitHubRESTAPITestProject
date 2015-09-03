@@ -66,11 +66,7 @@ struct Post: CRUDObject {
     static func communityPostsEndpoint(communityId: CRUDObjectId) -> String {
         return Community.endpoint().stringByAppendingPathComponent("\(communityId)/posts")
     }
-    
-    static func allEndpoint(userId: CRUDObjectId) -> String {
-        return UserProfile.endpoint().stringByAppendingPathComponent(userId).stringByAppendingPathComponent("posts")
-    }
-    
+        
     var description: String {
         return "<\(self.dynamicType):\(objectId)>"
     }

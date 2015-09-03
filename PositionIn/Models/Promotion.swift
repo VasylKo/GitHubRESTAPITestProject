@@ -13,28 +13,43 @@ struct Promotion: CRUDObject {
     var objectId: CRUDObjectId = CRUDObjectInvalidId
     var name: String?
     var text: String?
-    var discount: Float?
-    var shopId: String?
-    //"date": <datetime>,
-    var photos: [PhotoInfo]?
-    var likes: Int?
     var endDate: NSDate?
     var startDate: NSDate?
-    /*
-    "comments": {
-    data:[],
-    count: <number>
-    },
-    */
-    /*
-    "author": {
-    "id": <guid>,
-    "name": <string>,
-    "avatar": <string>
-    },
-    */
+    var discount: Float?
+    var category: ItemCategory?
+    var photos: [PhotoInfo]?
     var location: Location?
     
+//
+
+
+    /*
+    Todo:
+
+    "community": <guid?>,
+    
+    "shop": <guid>,
+    "items": [<guid>],
+    */
+    
+    /*
+    Details:
+    
+    "items": [{
+    "data":{
+    "id": <guid>,
+    "name": <string>,
+    "photos": [{
+				"id": <guid>,
+				"url": <string>
+				}]
+    },
+    "count": <number>
+    }]
+    "author": <guid?>,
+
+    
+    */
     
     init(objectId: CRUDObjectId = CRUDObjectInvalidId) {
         self.objectId = objectId
@@ -51,18 +66,18 @@ struct Promotion: CRUDObject {
     }
     
     mutating func mapping(map: Map) {
-        let dateTransform =  CustomDateFormatTransform(formatString: "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
         
         objectId <- (map["id"], CRUDObjectIdTransform())
         name <- map["name"]
         text <- map["description"]
-        photos <- map["photos"]
-        likes <- map["likes"]
-        location <- map["location"]
+        endDate <- (map["endDate"], APIDateTransform())
+        startDate <- (map["startDate"], APIDateTransform())
         discount <- map["discount"]
-        shopId <- map["shop"]
-        endDate <- (map["endDate"], dateTransform)
-        startDate <- (map["startDate"], dateTransform)
+        category <- (map["category"], EnumTransform())
+        photos <- map["photos"]
+        location <- map["location"]
+
+//        shopId <- map["shop"]
     }
     
     static func endpoint() -> String {
@@ -70,19 +85,15 @@ struct Promotion: CRUDObject {
     }
     
     static func endpoint(promotionId: CRUDObjectId) -> String {
-        return "/v1.0/promotions/\(promotionId)"
+        return Promotion.endpoint().stringByAppendingPathComponent("\(promotionId)")
     }
     
     static func userPromotionsEndpoint(userId: CRUDObjectId) -> String {
-        return UserProfile.endpoint().stringByAppendingPathComponent("\(userId)/promotions")
+        return UserProfile.userEndpoint(userId).stringByAppendingPathComponent("promotions")
     }
     
     static func communityPromotionsEndpoint(communityId: CRUDObjectId) -> String {
         return Community.endpoint().stringByAppendingPathComponent("\(communityId)/promotions")
-    }
-    
-    static func allEndpoint(userId: CRUDObjectId) -> String {
-        return UserProfile.endpoint().stringByAppendingPathComponent(userId).stringByAppendingPathComponent("promotions")
     }
     
     var description: String {
