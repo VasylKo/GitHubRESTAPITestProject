@@ -28,7 +28,7 @@ struct FeedItemCellModelFactory {
             ]
 
         case .Promotion:
-            let discount: Float = feedItem.discount ?? 0.0
+            let discount: Float =  146.0
             return [
                 CompactFeedTableCellModel(
                     item: feedItem,
@@ -49,7 +49,7 @@ struct FeedItemCellModelFactory {
                     price: 99.8
                 ),
             ]
-        case .Person:
+        case .Post:
             return [
                 CompactFeedTableCellModel(
                     item: feedItem,
@@ -73,7 +73,7 @@ struct FeedItemCellModelFactory {
                 return PromotionListCell.reuseId()
             case .Event:
                 return EventListCell.reuseId()
-            case .Person:
+            case .Post:
                 return PostListCell.reuseId()
             case .Item:
                 return ProductListCell.reuseId()

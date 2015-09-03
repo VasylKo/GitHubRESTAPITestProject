@@ -80,11 +80,11 @@ final class AddPromotionViewController: BaseAddItemViewController {
         form.addFormSection(datesSection)
         //Start date
         let startDate = XLFormRowDescriptor(tag: Tags.StartDate.rawValue, rowType: XLFormRowDescriptorTypeDateTimeInline, title: NSLocalizedString("Start date", comment: "New promotion: Start date"))
-        startDate.value = NSDate(timeIntervalSinceNow: 60*60*24)
+        startDate.value = defaultStartDate
         datesSection.addFormRow(startDate)
         //End date
         let endDate = XLFormRowDescriptor(tag: Tags.EndDate.rawValue, rowType: XLFormRowDescriptorTypeDateTimeInline, title: NSLocalizedString("End date", comment: "New promotion: End date"))
-        endDate.value = NSDate(timeIntervalSinceNow: 60*60*25)
+        endDate.value = defaultEndDate
         datesSection.addFormRow(endDate)
         
         //Description section
@@ -92,7 +92,6 @@ final class AddPromotionViewController: BaseAddItemViewController {
         form.addFormSection(descriptionSection)
         // Description
         let descriptionRow = XLFormRowDescriptor(tag: Tags.Description.rawValue, rowType: XLFormRowDescriptorTypeTextView, title: NSLocalizedString("Description", comment: "New promotion: description"))
-
         descriptionSection.addFormRow(descriptionRow)
 
         self.form = form
@@ -110,18 +109,31 @@ final class AddPromotionViewController: BaseAddItemViewController {
         Log.debug?.value(values)
         
         let community =  communityValue(values[Tags.Community.rawValue])
+        let category = categoryValue(values[Tags.Category.rawValue])
+        
+        let getShop: Future<CRUDObjectId, NSError>
+        switch community {
+        case .Some(let communityId):
+            getShop = Shop.defaultCommunityShop(communityId)
+        default:
+            getShop = Shop.defaultUserShop()
+        }
         
         if  let imageUpload = uploadAssets(values[Tags.Photo.rawValue]),
             let getLocation = locationFromValue(values[Tags.Location.rawValue]) {
-                getLocation.zip(imageUpload).flatMap { (location: Location, urls: [NSURL]) -> Future<Promotion, NSError> in
+            
+                getLocation.zip(getShop).zip(imageUpload).flatMap {
+                    (info, urls: [NSURL]) -> Future<Promotion, NSError> in
+                    let (location: Location, shop: CRUDObjectId) = info
                     var promotion = Promotion()
                     promotion.name = values[Tags.Title.rawValue] as? String
                     promotion.discount = values[Tags.Discount.rawValue] as? Float
-                    promotion.location = location
-                    promotion.text = values[Tags.Description.rawValue] as? String
+                    promotion.category = category
                     promotion.endDate = values[Tags.EndDate.rawValue] as? NSDate
                     promotion.startDate = values[Tags.StartDate.rawValue] as? NSDate
-                   
+                    promotion.location = location
+                    promotion.text = values[Tags.Description.rawValue] as? String
+                    promotion.shop = shop
                     promotion.photos = urls.map { url in
                         var info = PhotoInfo()
                         info.url = url
@@ -130,9 +142,9 @@ final class AddPromotionViewController: BaseAddItemViewController {
                     if let communityId = community {
                         return api().createCommunityPromotion(communityId, promotion: promotion)
                     } else {
-                        return api().createUserPromotion(promotion: promotion)
+                        return api().createUserPromotion(promotion)
                     }
-                    }.onSuccess { [weak self] (promotion: Promotion) -> ()  in
+                }.onSuccess { [weak self] (promotion: Promotion) -> ()  in
                         Log.debug?.value(promotion)
                         self?.sendUpdateNotification()
                         self?.performSegue(AddPromotionViewController.Segue.Close)

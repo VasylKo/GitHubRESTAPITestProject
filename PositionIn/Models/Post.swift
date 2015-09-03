@@ -13,24 +13,10 @@ struct Post: CRUDObject {
     var objectId: CRUDObjectId = CRUDObjectInvalidId
     var name: String?
     var text: String?
-    //"date": <datetime>,
     var photos: [PhotoInfo]?
-    var likes: Int?
-    /*
-    "comments": {
-    data:[],
-    count: <number>
-    },
-    */
-    /*
-    "author": {
-    "id": <guid>,
-    "name": <string>,
-    "avatar": <string>
-    },
-    */
     var location: Location?
-
+    
+    var likes: Int?
     
     init(objectId: CRUDObjectId = CRUDObjectInvalidId) {
         self.objectId = objectId
@@ -66,11 +52,7 @@ struct Post: CRUDObject {
     static func communityPostsEndpoint(communityId: CRUDObjectId) -> String {
         return Community.endpoint().stringByAppendingPathComponent("\(communityId)/posts")
     }
-    
-    static func allEndpoint(userId: CRUDObjectId) -> String {
-        return UserProfile.endpoint().stringByAppendingPathComponent(userId).stringByAppendingPathComponent("posts")
-    }
-    
+        
     var description: String {
         return "<\(self.dynamicType):\(objectId)>"
     }

@@ -36,7 +36,7 @@ final class APIDateTransform: DateFormaterTransform {
     init() {
         let formatter = NSDateFormatter()
         formatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
-        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.ZZZ'Z'"
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
         
         super.init(dateFormatter: formatter)
     }

@@ -20,4 +20,16 @@ extension XLFormOptionsObject {
     var communityId: CRUDObjectId? {
         return formValue() as? CRUDObjectId
     }
+    
+    class func formOptionsObjectWithItemCategory(category: ItemCategory) -> XLFormOptionsObject! {
+        return XLFormOptionsObject(value: category.rawValue, displayText: category.displayString())
+    }
+    
+    var itemCatefory: ItemCategory? {
+        if let rawValue = formValue() as? Int {
+            return ItemCategory(rawValue: rawValue)
+        }
+        return nil
+    }
+
 }

@@ -60,7 +60,10 @@ final class AddEventViewController: BaseAddItemViewController {
         // Community
         let communityRow = communityRowDescriptor(Tags.Community.rawValue)
         infoSection.addFormRow(communityRow)
-        
+        // Category
+        let categoryRow = categoryRowDescriptor(Tags.Category.rawValue)
+        infoSection.addFormRow(categoryRow)
+
         
         //Photo section
         let photoSection = XLFormSectionDescriptor.formSection()
@@ -75,11 +78,11 @@ final class AddEventViewController: BaseAddItemViewController {
         form.addFormSection(datesSection)
         //Start date
         let startDate = XLFormRowDescriptor(tag: Tags.StartDate.rawValue, rowType: XLFormRowDescriptorTypeDateTimeInline, title: NSLocalizedString("Start date", comment: "New event: Start date"))
-        startDate.value = NSDate(timeIntervalSinceNow: 60*60*24)
+        startDate.value = defaultStartDate
         datesSection.addFormRow(startDate)
         //End date
         let endDate = XLFormRowDescriptor(tag: Tags.EndDate.rawValue, rowType: XLFormRowDescriptorTypeDateTimeInline, title: NSLocalizedString("End date", comment: "New event: End date"))
-        endDate.value = NSDate(timeIntervalSinceNow: 60*60*25)
+        endDate.value = defaultEndDate
         datesSection.addFormRow(endDate)
         
         self.form = form
@@ -97,16 +100,17 @@ final class AddEventViewController: BaseAddItemViewController {
         let values = formValues()
         Log.debug?.value(values)
         
-        let community =  communityValue(values[Tags.Community.rawValue])
+        let community = communityValue(values[Tags.Community.rawValue])
+        let category = categoryValue(values[Tags.Category.rawValue])
         
         if  let imageUpload = uploadAssets(values[Tags.Photo.rawValue]),
             let getLocation = locationFromValue(values[Tags.Location.rawValue]) {
                 getLocation.zip(imageUpload).flatMap { (location: Location, urls: [NSURL]) -> Future<Event, NSError> in
                     var event = Event()
                     event.name = values[Tags.Title.rawValue] as? String
-                    event.category = 1
-                    event.descriptionEvent = values[Tags.Description.rawValue] as? String
+                    event.text = values[Tags.Description.rawValue] as? String
                     event.location = location
+                    event.category = category
                     event.endDate = values[Tags.EndDate.rawValue] as? NSDate
                     event.startDate = values[Tags.StartDate.rawValue] as? NSDate
                     
@@ -118,7 +122,7 @@ final class AddEventViewController: BaseAddItemViewController {
                     if let communityId = community {
                         return api().createCommunityEvent(communityId, event: event)
                     } else {
-                        return api().createUserEvent(event: event)
+                        return api().createUserEvent(event)
                     }
                     }.onSuccess { [weak self] (event: Event) -> ()  in
                         Log.debug?.value(event)
