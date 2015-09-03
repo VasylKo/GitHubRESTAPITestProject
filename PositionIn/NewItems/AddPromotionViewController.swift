@@ -80,11 +80,11 @@ final class AddPromotionViewController: BaseAddItemViewController {
         form.addFormSection(datesSection)
         //Start date
         let startDate = XLFormRowDescriptor(tag: Tags.StartDate.rawValue, rowType: XLFormRowDescriptorTypeDateTimeInline, title: NSLocalizedString("Start date", comment: "New promotion: Start date"))
-        startDate.value = NSDate(timeIntervalSinceNow: -60*60*24)
+        startDate.value = defaultStartDate
         datesSection.addFormRow(startDate)
         //End date
         let endDate = XLFormRowDescriptor(tag: Tags.EndDate.rawValue, rowType: XLFormRowDescriptorTypeDateTimeInline, title: NSLocalizedString("End date", comment: "New promotion: End date"))
-        endDate.value = NSDate(timeIntervalSinceNow: 60*60*25)
+        endDate.value = defaultEndDate
         datesSection.addFormRow(endDate)
         
         //Description section
@@ -92,7 +92,6 @@ final class AddPromotionViewController: BaseAddItemViewController {
         form.addFormSection(descriptionSection)
         // Description
         let descriptionRow = XLFormRowDescriptor(tag: Tags.Description.rawValue, rowType: XLFormRowDescriptorTypeTextView, title: NSLocalizedString("Description", comment: "New promotion: description"))
-
         descriptionSection.addFormRow(descriptionRow)
 
         self.form = form

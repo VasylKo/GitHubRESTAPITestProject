@@ -24,17 +24,29 @@ import Photos
 
 class BaseAddItemViewController: XLFormViewController {
     
+    //MARK: - Defaults -
+    
     var maximumSelectedImages: Int = 1
     
     var defaultLocation: CLLocation {
         return CLLocation(latitude: 39.1746, longitude: -107.4470)
     }
     
+    var defaultStartDate: NSDate = {
+       return NSDate(timeIntervalSinceNow: -60*60*24)
+    }()
+    
+    var defaultEndDate: NSDate = {
+        return NSDate(timeIntervalSinceNow: 60*60*24)
+        }()
+    
     override func showFormValidationError(error: NSError!) {
         if let error = error {
             showWarning(error.localizedDescription)
         }
     }
+    
+    //MARK: - Descriptors -
     
     func locationRowDescriptor(tag: String, withCurrentCoordinate: Bool = true) -> XLFormRowDescriptor {
         let locationRow = XLFormRowDescriptor(tag: tag, rowType: XLFormRowDescriptorTypeSelectorPush, title: NSLocalizedString("Location", comment: "New item: location"))

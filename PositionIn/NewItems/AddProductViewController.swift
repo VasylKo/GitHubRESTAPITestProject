@@ -38,24 +38,19 @@ final class AddProductViewController: BaseAddItemViewController {
     func initializeForm() {
         let form = XLFormDescriptor(title: NSLocalizedString("New Product", comment: "New product: form caption"))
         
-        // Description section
-        let descriptionSection = XLFormSectionDescriptor.formSection()
-        form.addFormSection(descriptionSection)
+        // Caption section
+        let captionSection = XLFormSectionDescriptor.formSection()
+        form.addFormSection(captionSection)
         // Title
         let titleRow = XLFormRowDescriptor(tag: Tags.Title.rawValue, rowType: XLFormRowDescriptorTypeText)
         titleRow.cellConfigAtConfigure["textField.placeholder"] = NSLocalizedString("Title", comment: "New product: title")
         titleRow.required = true
-        descriptionSection.addFormRow(titleRow)
+        captionSection.addFormRow(titleRow)
         
-        //Description
-        let descriptionRow = XLFormRowDescriptor(tag: Tags.Description.rawValue, rowType: XLFormRowDescriptorTypeText)
-        descriptionRow.cellConfigAtConfigure["textField.placeholder"] = NSLocalizedString("Desription", comment: "New product: description")
-        descriptionRow.required = true
-        descriptionSection.addFormRow(descriptionRow)
         // Price
         let priceRow = XLFormRowDescriptor(tag: Tags.Price.rawValue, rowType: XLFormRowDescriptorTypeDecimal, title: NSLocalizedString("Price ($)", comment: "New product: price"))
         priceRow.required = true
-        descriptionSection.addFormRow(priceRow)
+        captionSection.addFormRow(priceRow)
         
         // Info section
         let infoSection = XLFormSectionDescriptor.formSection()
@@ -85,12 +80,19 @@ final class AddProductViewController: BaseAddItemViewController {
         form.addFormSection(datesSection)
         //Start date
         let startDate = XLFormRowDescriptor(tag: Tags.StartDate.rawValue, rowType: XLFormRowDescriptorTypeDateTimeInline, title: NSLocalizedString("Start date", comment: "New product: Start date"))
-        startDate.value = NSDate(timeIntervalSinceNow: -60*60*24)
+        startDate.value = defaultStartDate
         datesSection.addFormRow(startDate)
         //End date
         let endDate = XLFormRowDescriptor(tag: Tags.EndDate.rawValue, rowType: XLFormRowDescriptorTypeDateTimeInline, title: NSLocalizedString("End date", comment: "New product: End date"))
-        endDate.value = NSDate(timeIntervalSinceNow: 60*60*25)
+        endDate.value = defaultEndDate
         datesSection.addFormRow(endDate)
+        
+        //Description section
+        let descriptionSection = XLFormSectionDescriptor.formSection()
+        form.addFormSection(descriptionSection)
+        // Description
+        let descriptionRow = XLFormRowDescriptor(tag: Tags.Description.rawValue, rowType: XLFormRowDescriptorTypeTextView, title: NSLocalizedString("Description", comment: "New promotion: description"))
+        descriptionSection.addFormRow(descriptionRow)
         
         self.form = form
     }

@@ -78,11 +78,11 @@ final class AddEventViewController: BaseAddItemViewController {
         form.addFormSection(datesSection)
         //Start date
         let startDate = XLFormRowDescriptor(tag: Tags.StartDate.rawValue, rowType: XLFormRowDescriptorTypeDateTimeInline, title: NSLocalizedString("Start date", comment: "New event: Start date"))
-        startDate.value = NSDate(timeIntervalSinceNow: -60*60*24)
+        startDate.value = defaultStartDate
         datesSection.addFormRow(startDate)
         //End date
         let endDate = XLFormRowDescriptor(tag: Tags.EndDate.rawValue, rowType: XLFormRowDescriptorTypeDateTimeInline, title: NSLocalizedString("End date", comment: "New event: End date"))
-        endDate.value = NSDate(timeIntervalSinceNow: 60*60*25)
+        endDate.value = defaultEndDate
         datesSection.addFormRow(endDate)
         
         self.form = form
