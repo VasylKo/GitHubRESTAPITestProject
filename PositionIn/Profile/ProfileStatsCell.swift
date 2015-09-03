@@ -13,9 +13,10 @@ class ProfileStatsCell: TableViewCell {
     override func setModel(model: TableViewCellModel) {
         let m = model as? ProfileStatsCellModel
         assert(m != nil, "Invalid model passed")
-        postsLabel.text = m!.countPosts.map { String($0) }
-        followersLabel.text = m!.countFollowers.map { String($0) }
-        followingLabel.text = m!.countFollowing.map { String($0) }
+        let emptyValue = NSLocalizedString("-", comment: "Counter empty value")
+        postsLabel.text = m!.countPosts.map { String($0) } ?? emptyValue
+        followersLabel.text = m!.countFollowers.map { String($0) } ?? emptyValue
+        followingLabel.text = m!.countFollowing.map { String($0) } ?? emptyValue
         selectionStyle = .None
     }
     

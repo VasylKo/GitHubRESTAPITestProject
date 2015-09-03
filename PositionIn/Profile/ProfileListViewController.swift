@@ -49,7 +49,7 @@ class ProfileListViewController: BesideMenuViewController, BrowseActionProducer 
         dataSource.items[Sections.Info.rawValue] = [
             ProfileInfoCellModel(name: profile.displayName, avatar: profile.avatar, background: profile.backgroundImage, leftAction: leftAction, rightAction: rightAction, actionDelegate: actionDelegate),
             TableViewCellTextModel(title: profile.userDescription ?? ""),
-            ProfileStatsCellModel(countPosts: 113, countFollowers: 23, countFollowing: 2),
+            ProfileStatsCellModel(countPosts: profile.countPosts, countFollowers: profile.countFollowers, countFollowing: profile.countFollowing),
         ]
         dataSource.items[Sections.Feed.rawValue] = [
             BrowseListCellModel(objectId: profile.objectId, actionConsumer: self)

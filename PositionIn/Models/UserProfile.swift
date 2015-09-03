@@ -30,6 +30,11 @@ final class UserProfile: CRUDObject {
         case Female
     }
     
+    
+    var countFollowers: Int?
+    var countFollowing: Int?
+    var countPosts: Int?
+    
     var defaultShopId: CRUDObjectId  {
         return shops?.first?.objectId ?? CRUDObjectInvalidId
     }
@@ -73,6 +78,9 @@ final class UserProfile: CRUDObject {
         location <- map["location"]
         guest <- map["guest"]
         shops <- map["shops.data"]
+        countFollowers <- map["followers.count"]
+        countFollowing <- map["following.count"]
+        countPosts <- map["posts.count"]
     }
     
     static func endpoint() -> String {
