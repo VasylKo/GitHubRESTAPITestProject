@@ -15,6 +15,7 @@ import CoreLocation
 
 import PosInCore
 import BrightFutures
+import Result
 
 import ImagePickerSheetController
 import MobileCoreServices
@@ -215,21 +216,50 @@ class BaseAddItemViewController: XLFormViewController {
     
     private var currentImageRowDescriptor: XLFormRowDescriptor?
     
+    private func fetchAssetFromPickerInfo(info: [NSObject : AnyObject]) -> Future<PHAsset, NSError> {
+        let promise = Promise<PHAsset, NSError>()
+        var future = promise.future
+
+        if let referenceURL = info[UIImagePickerControllerReferenceURL] as? NSURL,
+            let asset = PHAsset.fetchAssetsWithALAssetURLs([referenceURL], options: PHFetchOptions()).firstObject as? PHAsset {
+                future = Future.succeeded(asset)
+        } else if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            var assetPlaceholder: PHObjectPlaceholder!
+            PHPhotoLibrary.sharedPhotoLibrary().performChanges({
+                let createAssetRequest = PHAssetChangeRequest.creationRequestForAssetFromImage(image)
+                createAssetRequest.creationDate = NSDate()
+                assetPlaceholder = createAssetRequest.placeholderForCreatedAsset
+            }, completionHandler: { success, error in
+                if success == true,
+                  let asset = PHAsset.fetchAssetsWithLocalIdentifiers([assetPlaceholder.localIdentifier], options: PHFetchOptions()).firstObject as? PHAsset {
+                    promise.success(asset)
+                } else {
+                    promise.failure(error)
+                }
+            })
+        } else {
+            Log.error?.message("Get invalid media info: \(info)")
+            future = Future.failed(NSError())
+        }
+        return future
+    }
+    
 }
 
 extension BaseAddItemViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
-        if let referenceURL = info[UIImagePickerControllerReferenceURL] as? NSURL,
-            let asset = PHAsset.fetchAssetsWithALAssetURLs([referenceURL], options: PHFetchOptions()).firstObject as? PHAsset {
-                self.addAssets([asset])
-        } else {
-            Log.error?.message("Get invalid media info: \(info)")
+        Log.info?.message("Did pick image")
+        fetchAssetFromPickerInfo(info).onComplete { [weak self] _ in
+            self?.dismissViewControllerAnimated(true, completion: nil)
+        }.onFailure { error in
+            showWarning(error.localizedDescription)
+        }.onSuccess { [weak self] asset in
+            self?.addAssets([asset])
         }
-        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
-        Log.debug?.message("Cancel image selection")
+        Log.info?.message("Cancel image selection")
         self.dismissViewControllerAnimated(true, completion: nil)
     }
 }
