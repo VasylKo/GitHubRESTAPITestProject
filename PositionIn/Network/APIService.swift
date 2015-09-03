@@ -147,7 +147,7 @@ struct APIService {
     
     func getUserProducts(userId: CRUDObjectId, page: Page) -> Future<CollectionResponse<ShopItemProduct>, NSError> {
        return self.getUserProfile(userId).flatMap { profile -> Future<CollectionResponse<ShopItemProduct>, NSError> in
-            let endpoint = ShopItemProduct.userProductsEndpoint(profile)
+            let endpoint = ShopItemProduct.userProductsEndpoint(profile.defaultShopId)
             let params = page.query
             return self.getObjectsCollection(endpoint, params: params)
         }
@@ -155,7 +155,7 @@ struct APIService {
     
     func createUserProduct(product object: ShopItemProduct) -> Future<ShopItemProduct, NSError> {
              return self.getMyProfile().flatMap { profile -> Future<ShopItemProduct, NSError>  in
-                    let endpoint = ShopItemProduct.userProductsEndpoint(profile)
+                    let endpoint = ShopItemProduct.userProductsEndpoint(profile.defaultShopId)
                     return self.createObject(endpoint, object: object)
         }
     }
@@ -169,7 +169,7 @@ struct APIService {
 
     func getProduct(objectId: String, author: String) -> Future<ShopItemProduct, NSError> {
         return self.getUserProfile(author).flatMap { profile -> Future<ShopItemProduct, NSError> in
-            let endpoint = ShopItemProduct.endpoint(objectId, author: profile)
+            let endpoint = ShopItemProduct.endpoint(objectId, shopId: profile.defaultShopId)
             return self.getObject(endpoint)
         }
     }

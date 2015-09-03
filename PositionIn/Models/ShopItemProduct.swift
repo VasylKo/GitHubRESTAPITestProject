@@ -70,24 +70,21 @@ struct ShopItemProduct: CRUDObject {
         return "/v1.0/shops/items"
     }
     
-    static func endpoint(productId: CRUDObjectId, author: UserProfile) -> String {
-        if let shop = author.shops?.first, let shopId = shop["id"]  {
-            return "/v1.0/shops/\(shopId)/items/\(productId)"
-        }
+    static func endpoint(productId: CRUDObjectId, shopId: CRUDObjectId) -> String {
+        return "/v1.0/shops/\(shopId)/items/\(productId)"
         return "/v1.0/shops/items/\(productId)"
     }
     
-    static func userProductsEndpoint(profile: UserProfile) -> String {
-        if let shop = profile.shops?.first, let shopId = shop["id"]  {
-            return "/v1.0/shops/\(shopId)/items"
-        }
+    static func userProductsEndpoint(shopId: CRUDObjectId) -> String {
+        return "/v1.0/shops/\(shopId)/items"
         return "v1.0/shops/items"
     }
     
     static func communityProductsEndpoint(community: Community) -> String {
-         if let shop = community.shops?.first, let shopId = shop["id"]  {
-            Community.endpoint().stringByAppendingPathComponent("\(community.objectId)/shops/\(shopId)/items")
-        }
+        //TODO: fix this
+//         if let shop = community.shops?.first, let shopId = shop["id"]  {
+//            Community.endpoint().stringByAppendingPathComponent("\(community.objectId)/shops/\(shopId)/items")
+//        }
         
         return Community.endpoint().stringByAppendingPathComponent("\(community.objectId)/shops/items")
     }
