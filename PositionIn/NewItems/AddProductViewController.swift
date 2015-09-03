@@ -85,7 +85,7 @@ final class AddProductViewController: BaseAddItemViewController {
         form.addFormSection(datesSection)
         //Start date
         let startDate = XLFormRowDescriptor(tag: Tags.StartDate.rawValue, rowType: XLFormRowDescriptorTypeDateTimeInline, title: NSLocalizedString("Start date", comment: "New product: Start date"))
-        startDate.value = NSDate(timeIntervalSinceNow: 60*60*24)
+        startDate.value = NSDate(timeIntervalSinceNow: -60*60*24)
         datesSection.addFormRow(startDate)
         //End date
         let endDate = XLFormRowDescriptor(tag: Tags.EndDate.rawValue, rowType: XLFormRowDescriptorTypeDateTimeInline, title: NSLocalizedString("End date", comment: "New product: End date"))

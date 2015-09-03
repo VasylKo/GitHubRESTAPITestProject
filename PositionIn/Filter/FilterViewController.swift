@@ -101,7 +101,7 @@ final class FilterViewController: XLFormViewController {
         
         //Start date
         let startDateRow = XLFormRowDescriptor(tag: Tags.StartDate.rawValue, rowType: XLFormRowDescriptorTypeDateTime, title: NSLocalizedString("Start date", comment: "New event: Start date"))
-        startDateRow.value = NSDate(timeIntervalSinceNow: 60*60*24)
+        startDateRow.value = NSDate(timeIntervalSinceNow: -60*60*24)
         startDateRow.disabled = customDateStatePredicate
         optionsSection.addFormRow(startDateRow)
         //End date
