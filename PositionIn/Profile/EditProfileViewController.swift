@@ -59,15 +59,17 @@ final class EditProfileViewController: BaseAddItemViewController {
             if let strongSelf = self {
                 strongSelf.firstnameRow.value = profile.firstName
                 strongSelf.lastnameRow.value = profile.lastName
-
                 strongSelf.phoneRow.value = profile.phone
                 strongSelf.aboutRow.value = profile.userDescription
                 //TODO: fill email field
                 //strongSelf.emailRow.value = profile WHAT?
                 strongSelf.tableView.reloadData()
+                strongSelf.userProfile = profile
             }
         }
     }
+    
+    private var userProfile: UserProfile?
     
     //First name
     lazy private var firstnameRow: XLFormRowDescriptor = {
@@ -121,29 +123,24 @@ final class EditProfileViewController: BaseAddItemViewController {
         let values = formValues()
         Log.debug?.value(values)
         
-//        let community =  communityValue(values[Tags.Community.rawValue])
-//        
-//        if  let imageUpload = uploadAssets(values[Tags.Photo.rawValue]),
-//            let getLocation = locationFromValue(values[Tags.Location.rawValue]) {
-//                getLocation.zip(imageUpload).flatMap { (location: Location, urls: [NSURL]) -> Future<Post, NSError> in
-//                    var post = Post()
-//                    post.name = values[Tags.Title.rawValue] as? String
-//                    post.text = values[Tags.Message.rawValue] as? String
-//                    post.location = location
-//                    post.photos = urls.map { url in
-//                        var info = PhotoInfo()
-//                        info.url = url
-//                        return info
-//                    }
-//                    if let communityId = community {
-//                        return api().createCommunityPost(communityId, post: post)
-//                    } else {
-//                        return api().createUserPost(post: post)
-//                    }
-//                    }.onSuccess { [weak self] (post: Post) -> ()  in
-//                        Log.debug?.value(post)
-//                        self?.performSegue(AddPostViewController.Segue.Close)
-//                }
-//        }
+        if let userProfile = userProfile {
+            userProfile.firstName = values[Tags.FirstName.rawValue] as? String
+            userProfile.lastName = values[Tags.LastName.rawValue] as? String
+            userProfile.phone = values[Tags.Phone.rawValue] as? String
+            userProfile.userDescription = values[Tags.About.rawValue] as? String
+            //TODO: fill email field
+            //userProfile.email WHAT?
+            
+            api().updateMyProfile(userProfile).onSuccess { [weak self] in
+                NSNotificationCenter.defaultCenter().postNotificationName(
+                    UserProfile.CurrentUserDidChangeNotification,
+                    object: userProfile,
+                    userInfo: nil
+                )
+                self?.performSegue(EditProfileViewController.Segue.Close)
+            }
+        } else {
+            showError(NSLocalizedString("Failed to fetch user data", comment: "Edit profile: Prefetch failure"))
+        }
     }
 }
