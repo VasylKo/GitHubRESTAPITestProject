@@ -8,11 +8,19 @@
 
 import ObjectMapper
 import CleanroomLogger
+import BrightFutures
 
 struct Shop {
 
+    static func defaultUserShop() -> Future<CRUDObjectId?, NSError> {
+        return api().getMyProfile().map { $0.defaultShopId }
+    }
+    
+    static func defaultCommunityShop(communityId: CRUDObjectId) -> Future<CRUDObjectId?, NSError> {
+        return api().getCommunity(communityId).map { $0.defaultShopId }
+    }
     
     static func endpoint() -> String {
-        return " /v1.0/shops/"
+        return "/v1.0/shops/"
     }
 }

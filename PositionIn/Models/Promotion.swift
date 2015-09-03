@@ -19,6 +19,7 @@ struct Promotion: CRUDObject {
     var category: ItemCategory?
     var photos: [PhotoInfo]?
     var location: Location?
+    var shop: CRUDObjectId?
     
 //
 
@@ -27,8 +28,6 @@ struct Promotion: CRUDObject {
     TODO:
 
     "community": <guid?>,
-    
-    "shop": <guid>,
     "items": [<guid>],
     */
     
@@ -76,8 +75,8 @@ struct Promotion: CRUDObject {
         category <- (map["category"], EnumTransform())
         photos <- map["photos"]
         location <- map["location"]
-
-//        shopId <- map["shop"]
+        shop <- (map["shop"], CRUDObjectIdTransform())
+//
     }
     
     static func endpoint() -> String {

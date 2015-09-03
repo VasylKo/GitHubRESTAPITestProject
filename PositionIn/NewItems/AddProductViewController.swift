@@ -23,6 +23,7 @@ final class AddProductViewController: BaseAddItemViewController {
         case Community = "Community"
         case Photo = "Photo"
         case Location = "Location"
+        case Quantity =  "Quantity"
     }
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
@@ -66,6 +67,13 @@ final class AddProductViewController: BaseAddItemViewController {
         let communityRow = communityRowDescriptor(Tags.Community.rawValue)
         infoSection.addFormRow(communityRow)
         
+        // Quantity
+        let quantityRow = XLFormRowDescriptor(tag: Tags.Quantity.rawValue, rowType: XLFormRowDescriptorTypeStepCounter, title: NSLocalizedString("Quantity", comment: "New product: Quantity"))
+        quantityRow.value = 1
+        quantityRow.cellConfigAtConfigure["stepControl.minimumValue"] = 1
+        quantityRow.cellConfigAtConfigure["stepControl.maximumValue"] = 100
+        quantityRow.cellConfigAtConfigure["stepControl.stepValue"] = 1
+        infoSection.addFormRow(quantityRow)
         
         //Photo section
         let photoSection = XLFormSectionDescriptor.formSection()
