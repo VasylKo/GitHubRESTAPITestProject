@@ -12,17 +12,17 @@
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rxR-OP-zHP" id="l6k-cS-svb">
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9Su-Et-d32" userLabel="Block View">
-                        <rect key="frame" x="0.0" y="0.0" width="107" height="70"/>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Su-Et-d32" userLabel="Block View">
+                        <rect key="frame" x="0.0" y="2" width="106.5" height="68"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="200" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pEK-YI-ub0" userLabel="postsLabel">
-                                <rect key="frame" x="0.0" y="0.0" width="107" height="52"/>
+                                <rect key="frame" x="0.0" y="0.0" width="106.5" height="51"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                 <color key="textColor" red="0.0039215686269999999" green="0.58823529409999997" blue="0.98823529409999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Posts" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V8Z-B1-DUc">
-                                <rect key="frame" x="0.0" y="52" width="107" height="17"/>
+                                <rect key="frame" x="0.0" y="51" width="106.5" height="17"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                 <color key="textColor" red="0.74901960779999999" green="0.74901960779999999" blue="0.74901960779999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -44,17 +44,17 @@
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </view>
-                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rCa-IH-7u9" userLabel="Block View">
-                        <rect key="frame" x="107" y="0.0" width="107" height="70"/>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rCa-IH-7u9" userLabel="Block View">
+                        <rect key="frame" x="106.5" y="2" width="107" height="68"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="200" misplaced="YES" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jsj-bW-eZQ" userLabel="followersLabel">
-                                <rect key="frame" x="0.0" y="0.0" width="107" height="52"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="200" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jsj-bW-eZQ" userLabel="followersLabel">
+                                <rect key="frame" x="0.0" y="0.0" width="107" height="51"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                 <color key="textColor" red="0.0039215686269999999" green="0.58823529409999997" blue="0.98823529409999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Followers" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bxy-Wx-3lk">
-                                <rect key="frame" x="0.0" y="52" width="107" height="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Followers" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bxy-Wx-3lk">
+                                <rect key="frame" x="0.0" y="51" width="107" height="17"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                 <color key="textColor" red="0.74901960779999999" green="0.74901960779999999" blue="0.74901960779999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -76,17 +76,17 @@
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </view>
-                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="q0r-G4-s8h" userLabel="Block View">
-                        <rect key="frame" x="214" y="0.0" width="107" height="70"/>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q0r-G4-s8h" userLabel="Block View">
+                        <rect key="frame" x="213.5" y="2" width="106.5" height="68"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="200" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fRL-uI-V7u" userLabel="followingLabel">
-                                <rect key="frame" x="0.0" y="0.0" width="107" height="52"/>
+                                <rect key="frame" x="0.0" y="0.0" width="106.5" height="51"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                 <color key="textColor" red="0.0039215686269999999" green="0.58823529409999997" blue="0.98823529409999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Following" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5z4-YA-Rt9">
-                                <rect key="frame" x="0.0" y="52" width="107" height="17"/>
+                                <rect key="frame" x="0.0" y="51" width="106.5" height="17"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                 <color key="textColor" red="0.74901960779999999" green="0.74901960779999999" blue="0.74901960779999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -114,15 +114,27 @@
                     <constraint firstAttribute="bottom" secondItem="9Su-Et-d32" secondAttribute="bottom" id="8Cv-7q-3cT"/>
                     <constraint firstItem="rCa-IH-7u9" firstAttribute="leading" secondItem="9Su-Et-d32" secondAttribute="trailing" id="AmS-AM-mCB"/>
                     <constraint firstAttribute="bottom" secondItem="rCa-IH-7u9" secondAttribute="bottom" id="O7V-mq-xmV"/>
-                    <constraint firstItem="9Su-Et-d32" firstAttribute="top" secondItem="l6k-cS-svb" secondAttribute="top" id="Rsy-wi-gzc"/>
+                    <constraint firstItem="rCa-IH-7u9" firstAttribute="bottom" secondItem="9Su-Et-d32" secondAttribute="bottom" id="PrG-nZ-lm0"/>
+                    <constraint firstItem="rCa-IH-7u9" firstAttribute="top" secondItem="9Su-Et-d32" secondAttribute="top" id="RJn-C8-PjV"/>
+                    <constraint firstItem="9Su-Et-d32" firstAttribute="top" secondItem="l6k-cS-svb" secondAttribute="top" constant="2" id="Rsy-wi-gzc"/>
                     <constraint firstItem="9Su-Et-d32" firstAttribute="leading" secondItem="l6k-cS-svb" secondAttribute="leading" id="Tgw-v2-FrL"/>
                     <constraint firstItem="9Su-Et-d32" firstAttribute="width" secondItem="rCa-IH-7u9" secondAttribute="width" id="UNz-EZ-iJB"/>
+                    <constraint firstItem="rCa-IH-7u9" firstAttribute="bottom" secondItem="q0r-G4-s8h" secondAttribute="bottom" id="YMH-BF-zds"/>
                     <constraint firstAttribute="trailing" secondItem="q0r-G4-s8h" secondAttribute="trailing" id="Zye-R3-Hqr"/>
                     <constraint firstAttribute="bottom" secondItem="q0r-G4-s8h" secondAttribute="bottom" id="aFU-us-G9Y"/>
                     <constraint firstItem="q0r-G4-s8h" firstAttribute="top" secondItem="l6k-cS-svb" secondAttribute="top" id="dOQ-iE-HcJ"/>
                     <constraint firstItem="rCa-IH-7u9" firstAttribute="top" secondItem="l6k-cS-svb" secondAttribute="top" id="l9H-Kn-MaH"/>
                     <constraint firstItem="q0r-G4-s8h" firstAttribute="leading" secondItem="rCa-IH-7u9" secondAttribute="trailing" id="pXd-Sc-ddZ"/>
+                    <constraint firstItem="rCa-IH-7u9" firstAttribute="top" secondItem="q0r-G4-s8h" secondAttribute="top" id="tJM-D0-L2g"/>
                 </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="O7V-mq-xmV"/>
+                        <exclude reference="l9H-Kn-MaH"/>
+                        <exclude reference="aFU-us-G9Y"/>
+                        <exclude reference="dOQ-iE-HcJ"/>
+                    </mask>
+                </variation>
             </tableViewCellContentView>
             <connections>
                 <outlet property="followersLabel" destination="Jsj-bW-eZQ" id="1SF-iE-2eS"/>

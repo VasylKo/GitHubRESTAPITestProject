@@ -733,37 +733,6 @@
             </objects>
             <point key="canvasLocation" x="-1601" y="329"/>
         </scene>
-        <!--Edit Profile View Controller-->
-        <scene sceneID="ZtL-PG-543">
-            <objects>
-                <viewController storyboardIdentifier="EditProfileViewController" id="KbL-BH-nfb" customClass="EditProfileViewController" customModule="PositionIn" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="bsQ-fC-e9w"/>
-                        <viewControllerLayoutGuide type="bottom" id="wLg-6T-9w3"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="MZb-2I-LIG">
-                        <rect key="frame" x="0.0" y="64" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="g3e-Vm-uZv">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="cJy-iY-99S">
-                            <connections>
-                                <segue destination="uvo-6t-L2C" kind="unwind" unwindAction="prepareForUnwind:" id="8tR-VW-dAg"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="LOn-iV-2yb">
-                            <connections>
-                                <action selector="didTapSave:" destination="KbL-BH-nfb" id="ToF-Ig-emE"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="NTy-a6-PyP" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="uvo-6t-L2C" userLabel="Exit" sceneMemberID="exit"/>
-            </objects>
-            <point key="canvasLocation" x="-2248" y="1105"/>
-        </scene>
         <!--Profile List View Controller-->
         <scene sceneID="D6q-d0-0ua">
             <objects>
@@ -790,11 +759,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="h53-Xc-NxY">
-                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="btY-Vf-6mP">
-                            <connections>
-                                <segue destination="KbL-BH-nfb" kind="show" id="cso-QL-gJh"/>
-                            </connections>
-                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="btY-Vf-6mP"/>
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="jzX-JK-7uD" id="9gP-7Q-IHv"/>

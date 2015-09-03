@@ -15,9 +15,22 @@ protocol UserProfileActionConsumer: class {
 
 final class UserProfileViewController: BrowseModeViewController {
     
-    enum ProfileAction: Int {
+    enum ProfileAction: Int, Printable {
         case None
         case Call, Chat, Edit
+        var description: String {
+            switch self {
+            case .None:
+                return "Empty action"
+            case .Call:
+                return "Contact"
+            case .Chat:
+                return "SendMessage"
+            case .Edit:
+                return "Edit profile"
+            }
+        }
+
     }
     
     var objectId: CRUDObjectId = api().currentUserId() ?? CRUDObjectInvalidId
@@ -73,6 +86,14 @@ final class UserProfileViewController: BrowseModeViewController {
 extension UserProfileViewController: UserProfileActionConsumer {
     func shouldExecuteAction(action: UserProfileViewController.ProfileAction) {
         Log.debug?.value(action)
+        switch action {
+        case .Edit:
+            navigationController?.pushViewController(Storyboards.NewItems.instantiateEditProfileViewController(), animated: true)
+        case .None:
+            fallthrough
+        default:
+            Log.warning?.message("Unhandled action \(action)")
+        }
     }
 
 }

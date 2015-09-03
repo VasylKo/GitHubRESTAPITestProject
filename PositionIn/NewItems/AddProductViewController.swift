@@ -132,6 +132,7 @@ final class AddProductViewController: BaseAddItemViewController {
                     }
                     }.onSuccess { [weak self] (product: ShopItemProduct) -> ()  in
                         Log.debug?.value(product)
+                        self?.sendUpdateNotification()
                         self?.performSegue(AddProductViewController.Segue.Close)
                     }
         }

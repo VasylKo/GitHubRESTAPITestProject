@@ -5,6 +5,7 @@
 
 import UIKit
 
+
 //MARK: - Storyboards
 struct Storyboards {
 
@@ -62,10 +63,6 @@ struct Storyboards {
 
         static func instantiateUserProfileViewController() -> UserProfileViewController! {
             return self.storyboard.instantiateViewControllerWithIdentifier("UserProfileViewController") as! UserProfileViewController
-        }
-
-        static func instantiateEditProfileViewController() -> EditProfileViewController! {
-            return self.storyboard.instantiateViewControllerWithIdentifier("EditProfileViewController") as! EditProfileViewController
         }
 
         static func instantiateProfileListViewController() -> ProfileListViewController! {
@@ -136,6 +133,10 @@ struct Storyboards {
 
         static func instantiateAddCommunityViewController() -> AddCommunityViewController! {
             return self.storyboard.instantiateViewControllerWithIdentifier("AddCommunityViewController") as! AddCommunityViewController
+        }
+
+        static func instantiateEditProfileViewController() -> EditProfileViewController! {
+            return self.storyboard.instantiateViewControllerWithIdentifier("EditProfileViewController") as! EditProfileViewController
         }
 
         static func instantiateAddPromotionViewController() -> AddPromotionViewController! {
@@ -504,8 +505,6 @@ extension BrowseViewController {
 
 //MARK: - UserProfileViewController
 
-//MARK: - EditProfileViewController
-
 //MARK: - ProfileListViewController
 
 //MARK: - SettingsViewController
@@ -726,6 +725,45 @@ extension UIStoryboardSegue {
 }
 
 extension AddCommunityViewController { 
+
+    enum Segue: String, Printable, SegueProtocol {
+        case Close = "Close"
+
+        var kind: SegueKind? {
+            switch (self) {
+            case Close:
+                return SegueKind(rawValue: "unwind")
+            default:
+                preconditionFailure("Invalid value")
+                break
+            }
+        }
+
+        var destination: UIViewController.Type? {
+            switch (self) {
+            default:
+                assertionFailure("Unknown destination")
+                return nil
+            }
+        }
+
+        var identifier: String? { return self.description } 
+        var description: String { return self.rawValue }
+    }
+
+}
+
+//MARK: - EditProfileViewController
+extension UIStoryboardSegue {
+    func selection() -> EditProfileViewController.Segue? {
+        if let identifier = self.identifier {
+            return EditProfileViewController.Segue(rawValue: identifier)
+        }
+        return nil
+    }
+}
+
+extension EditProfileViewController { 
 
     enum Segue: String, Printable, SegueProtocol {
         case Close = "Close"
