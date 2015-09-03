@@ -15,7 +15,6 @@ final class EditProfileViewController: BaseAddItemViewController {
     private enum Tags : String {
         case FirstName = "FirstName"
         case LastName = "LastName"
-        case Email = "Email"
         case Phone = "Phone"
         case About = "About"
         case Photo = "Photo"
@@ -44,7 +43,6 @@ final class EditProfileViewController: BaseAddItemViewController {
         form.addFormSection(infoSection)
         infoSection.addFormRow(firstnameRow)
         infoSection.addFormRow(lastnameRow)
-        infoSection.addFormRow(emailRow)
         infoSection.addFormRow(phoneRow)
         
         //About me
@@ -61,8 +59,6 @@ final class EditProfileViewController: BaseAddItemViewController {
                 strongSelf.lastnameRow.value = profile.lastName
                 strongSelf.phoneRow.value = profile.phone
                 strongSelf.aboutRow.value = profile.userDescription
-                //TODO: fill email field
-                //strongSelf.emailRow.value = profile WHAT?
                 strongSelf.tableView.reloadData()
                 strongSelf.userProfile = profile
             }
@@ -90,14 +86,6 @@ final class EditProfileViewController: BaseAddItemViewController {
         return row
         }()
     
-    // Email
-    lazy private var emailRow: XLFormRowDescriptor = {
-        let row = XLFormRowDescriptor(tag: Tags.Email.rawValue, rowType: XLFormRowDescriptorTypeEmail, title: NSLocalizedString("User name", comment: "Edit profile: Email"))
-        // validate the email
-        row.addValidator(XLFormValidator.emailValidator())
-        return row
-        }()
-
     //About me
     lazy private var aboutRow: XLFormRowDescriptor = {
         let row = XLFormRowDescriptor(tag: Tags.About.rawValue, rowType: XLFormRowDescriptorTypeTextView)
@@ -128,8 +116,6 @@ final class EditProfileViewController: BaseAddItemViewController {
             userProfile.lastName = values[Tags.LastName.rawValue] as? String
             userProfile.phone = values[Tags.Phone.rawValue] as? String
             userProfile.userDescription = values[Tags.About.rawValue] as? String
-            //TODO: fill email field
-            //userProfile.email WHAT?
             
             api().updateMyProfile(userProfile).onSuccess { [weak self] in
                 NSNotificationCenter.defaultCenter().postNotificationName(
