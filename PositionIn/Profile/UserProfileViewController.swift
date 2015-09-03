@@ -45,21 +45,17 @@ final class UserProfileViewController: BrowseModeViewController {
     }
     
     override var addMenuItems: [AddMenuView.MenuItem] {
+        let pushAndSubscribe: (UIViewController) -> () = { [weak self] controller in
+            self?.navigationController?.pushViewController(controller, animated: true)
+            self?.subscribeForContentUpdates(controller)
+        }
         return [
-            AddMenuView.MenuItem.productItemWithAction { [weak self] in
-                self?.navigationController?.pushViewController(Storyboards.NewItems.instantiateAddProductViewController(), animated: true)
-            },
-            AddMenuView.MenuItem.eventItemWithAction { [weak self] in
-                self?.navigationController?.pushViewController(Storyboards.NewItems.instantiateAddEventViewController(), animated: true)
-            },
-            AddMenuView.MenuItem.promotionItemWithAction { [weak self] in
-                self?.navigationController?.pushViewController(Storyboards.NewItems.instantiateAddPromotionViewController(), animated: true)
-            },
-            AddMenuView.MenuItem.postItemWithAction { [weak self] in
-                self?.navigationController?.pushViewController(Storyboards.NewItems.instantiateAddPostViewController(), animated: true)
-            },
+            AddMenuView.MenuItem.productItemWithAction { pushAndSubscribe(Storyboards.NewItems.instantiateAddProductViewController()) },
+            AddMenuView.MenuItem.eventItemWithAction { pushAndSubscribe(Storyboards.NewItems.instantiateAddEventViewController()) },
+            AddMenuView.MenuItem.promotionItemWithAction { pushAndSubscribe(Storyboards.NewItems.instantiateAddPromotionViewController()) },
+            AddMenuView.MenuItem.postItemWithAction { pushAndSubscribe(Storyboards.NewItems.instantiateAddPostViewController()) },
             AddMenuView.MenuItem.inviteItemWithAction { [weak self] in
-                Log.debug?.message("Should call invite")
+                Log.error?.message("Should call invite")
             },
         ]
     }
@@ -79,8 +75,6 @@ final class UserProfileViewController: BrowseModeViewController {
             return controller
         }
     }
-    
-    
 }
 
 extension UserProfileViewController: UserProfileActionConsumer {
@@ -88,7 +82,9 @@ extension UserProfileViewController: UserProfileActionConsumer {
         Log.debug?.value(action)
         switch action {
         case .Edit:
-            navigationController?.pushViewController(Storyboards.NewItems.instantiateEditProfileViewController(), animated: true)
+            let updateController = Storyboards.NewItems.instantiateEditProfileViewController()
+            subscribeForContentUpdates(updateController)
+            navigationController?.pushViewController(updateController, animated: true)
         case .None:
             fallthrough
         default:
