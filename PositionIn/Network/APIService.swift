@@ -99,7 +99,7 @@ struct APIService {
         return getObjectsCollection(endpoint, params: params)
     }
     
-    func createUserPromotion(promotion object: Promotion) -> Future<Promotion, NSError> {
+    func createUserPromotion(object: Promotion) -> Future<Promotion, NSError> {
         return sessionController.currentUserId().flatMap {
             (userId: CRUDObjectId) -> Future<Promotion, NSError> in
             let endpoint = Promotion.userPromotionsEndpoint(userId)
@@ -125,7 +125,7 @@ struct APIService {
         return getObjectsCollection(endpoint, params: params)
     }
     
-    func createUserEvent(event object: Event) -> Future<Event, NSError> {
+    func createUserEvent(object: Event) -> Future<Event, NSError> {
         return sessionController.currentUserId().flatMap {
             (userId: CRUDObjectId) -> Future<Event, NSError> in
             let endpoint = Event.userEventsEndpoint(userId)
@@ -153,20 +153,13 @@ struct APIService {
         }
     }
     
-    func createUserProduct(product object: Product) -> Future<Product, NSError> {
-         return self.getMyProfile().flatMap { profile -> Future<Product, NSError>  in
-            let endpoint = Product.shopItemsEndpoint(profile.defaultShopId)
-            return self.createObject(endpoint, object: object)
-        }
+    
+    func createProduct(object: Product, inShop shop: CRUDObjectId) -> Future<Product, NSError> {
+        let endpoint = Product.shopItemsEndpoint(shop)
+        return self.createObject(endpoint, object: object)
     }
     
-    func createCommunityProduct(communityId: CRUDObjectId, product object: Product) -> Future<Product, NSError> {
-        return self.getCommunity(communityId).flatMap { community -> Future<Product, NSError> in
-            let endpoint = Product.shopItemsEndpoint(community.defaultShopId)
-            return self.createObject(endpoint, object: object)
-        }
-    }
-
+    
     func getProduct(objectId: CRUDObjectId, author: CRUDObjectId) -> Future<Product, NSError> {
         return self.getUserProfile(author).flatMap { profile -> Future<Product, NSError> in
             let endpoint = Product.shopItemsEndpoint(profile.defaultShopId, productId: objectId)

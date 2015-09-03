@@ -111,7 +111,7 @@ final class AddPromotionViewController: BaseAddItemViewController {
         let community =  communityValue(values[Tags.Community.rawValue])
         let category = categoryValue(values[Tags.Category.rawValue])
         
-        let getShop: Future<CRUDObjectId?, NSError>
+        let getShop: Future<CRUDObjectId, NSError>
         switch community {
         case .Some(let communityId):
             getShop = Shop.defaultCommunityShop(communityId)
@@ -124,7 +124,7 @@ final class AddPromotionViewController: BaseAddItemViewController {
             
                 getLocation.zip(getShop).zip(imageUpload).flatMap {
                     (info, urls: [NSURL]) -> Future<Promotion, NSError> in
-                    let (location: Location, shop: CRUDObjectId?) = info
+                    let (location: Location, shop: CRUDObjectId) = info
                     var promotion = Promotion()
                     promotion.name = values[Tags.Title.rawValue] as? String
                     promotion.discount = values[Tags.Discount.rawValue] as? Float
@@ -142,7 +142,7 @@ final class AddPromotionViewController: BaseAddItemViewController {
                     if let communityId = community {
                         return api().createCommunityPromotion(communityId, promotion: promotion)
                     } else {
-                        return api().createUserPromotion(promotion: promotion)
+                        return api().createUserPromotion(promotion)
                     }
                 }.onSuccess { [weak self] (promotion: Promotion) -> ()  in
                         Log.debug?.value(promotion)

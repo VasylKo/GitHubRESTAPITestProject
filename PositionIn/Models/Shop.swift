@@ -12,11 +12,11 @@ import BrightFutures
 
 struct Shop {
 
-    static func defaultUserShop() -> Future<CRUDObjectId?, NSError> {
+    static func defaultUserShop() -> Future<CRUDObjectId, NSError> {        
         return api().getMyProfile().map { $0.defaultShopId }
     }
     
-    static func defaultCommunityShop(communityId: CRUDObjectId) -> Future<CRUDObjectId?, NSError> {
+    static func defaultCommunityShop(communityId: CRUDObjectId) -> Future<CRUDObjectId, NSError> {
         return api().getCommunity(communityId).map { $0.defaultShopId }
     }
     

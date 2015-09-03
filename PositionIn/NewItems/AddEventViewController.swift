@@ -122,7 +122,7 @@ final class AddEventViewController: BaseAddItemViewController {
                     if let communityId = community {
                         return api().createCommunityEvent(communityId, event: event)
                     } else {
-                        return api().createUserEvent(event: event)
+                        return api().createUserEvent(event)
                     }
                     }.onSuccess { [weak self] (event: Event) -> ()  in
                         Log.debug?.value(event)

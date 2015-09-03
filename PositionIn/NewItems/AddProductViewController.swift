@@ -99,7 +99,7 @@ final class AddProductViewController: BaseAddItemViewController {
         let descriptionSection = XLFormSectionDescriptor.formSection()
         form.addFormSection(descriptionSection)
         // Description
-        let descriptionRow = XLFormRowDescriptor(tag: Tags.Description.rawValue, rowType: XLFormRowDescriptorTypeTextView, title: NSLocalizedString("Description", comment: "New promotion: description"))
+        let descriptionRow = XLFormRowDescriptor(tag: Tags.Description.rawValue, rowType: XLFormRowDescriptorTypeTextView, title: NSLocalizedString("Description", comment: "New product: description"))
         descriptionSection.addFormRow(descriptionRow)
         
         self.form = form
@@ -119,32 +119,46 @@ final class AddProductViewController: BaseAddItemViewController {
         Log.debug?.value(values)
         
         let community =  communityValue(values[Tags.Community.rawValue])
+        let category = categoryValue(values[Tags.Category.rawValue])
+        
+        let getShop: Future<CRUDObjectId, NSError>
+        switch community {
+        case .Some(let communityId):
+            getShop = Shop.defaultCommunityShop(communityId)
+        default:
+            getShop = Shop.defaultUserShop()
+        }
+
         
         if  let imageUpload = uploadAssets(values[Tags.Photo.rawValue]),
             let getLocation = locationFromValue(values[Tags.Location.rawValue]) {
-                getLocation.zip(imageUpload).flatMap { (location: Location, urls: [NSURL]) -> Future<Product, NSError> in
+                getLocation.zip(getShop).zip(imageUpload).flatMap {
+                    (info, urls: [NSURL]) -> Future<Product, NSError> in
+                    let (location: Location, shop: CRUDObjectId) = info
                     var product = Product()
                     product.name = values[Tags.Title.rawValue] as? String
-//                    product.category = 1
                     product.price = values[Tags.Price.rawValue] as? Float
                     product.text = values[Tags.Description.rawValue] as? String
-//                    product.deliveryMethod = 1
+                    product.quantity = map(values[Tags.Quantity.rawValue] as? Double) { Int($0) }
+                    product.category = category
                     product.location = location
+                    
+                    //TODO: set additional values
+                    product.deliveryMethod = .Unknown
+                    //Start Date
+                    // End Date
+                    
                     product.photos = urls.map { url in
                         var info = PhotoInfo()
                         info.url = url
                         return info
                     }
-                    if let communityId = community {
-                        return api().createCommunityProduct(communityId, product: product)
-                    } else {
-                        return api().createUserProduct(product: product)
-                    }
-                    }.onSuccess { [weak self] (product: Product) -> ()  in
-                        Log.debug?.value(product)
-                        self?.sendUpdateNotification()
-                        self?.performSegue(AddProductViewController.Segue.Close)
-                    }
+                    return api().createProduct(product, inShop: shop)
+                }.onSuccess { [weak self] (product: Product) -> ()  in
+                    Log.debug?.value(product)
+                    self?.sendUpdateNotification()
+                    self?.performSegue(AddProductViewController.Segue.Close)
+                }
         }
     }
 }
