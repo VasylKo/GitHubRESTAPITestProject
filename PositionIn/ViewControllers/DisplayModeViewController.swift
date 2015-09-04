@@ -153,7 +153,7 @@ protocol BrowseActionConsumer: class {
         case .Item:
             let controller =  Storyboards.Main.instantiateProductDetailsViewControllerId()
             controller.objectId = objectId
-            controller.authorId = map(data as? ObjectInfo) { $0.objectId }
+            controller.author = data as? ObjectInfo
             //TODO: pass authorId
             navigationController?.pushViewController(controller, animated: true)
         case .Event:

@@ -27,9 +27,11 @@ final class ProductDetailsViewController: UIViewController {
     
     
     private func reloadData() {
-        switch (objectId, authorId) {
+        self.infoLabel.text = NSLocalizedString("Calculating...", comment: "Distance calculation process")
+        nameLabel.text = author?.title
+        switch (objectId, author) {
         case (.Some(let objectId), .Some(let author) ):
-            api().getUserProfile(author).flatMap { (profile: UserProfile) -> Future<Product, NSError> in
+            api().getUserProfile(author.objectId).flatMap { (profile: UserProfile) -> Future<Product, NSError> in
                 let page = APIService.Page()
                 return api().getProduct(objectId, inShop: profile.defaultShopId)
             }.onSuccess { [weak self] product in
@@ -47,11 +49,21 @@ final class ProductDetailsViewController: UIViewController {
         let url = product.photos?.first?.url
         let image = product.category?.productPlaceholderImage()
         productImageView.setImageFromURL(url, placeholder: image)
+        if let coordinates = product.location?.coordinates {
+            locationRequestToken.invalidate()
+            locationRequestToken = InvalidationToken()
+            locationController().distanceFromCoordinate(coordinates).onSuccess(token: locationRequestToken) {
+                [weak self] distance in
+                let format = NSLocalizedString("%.2f km", comment: "Distance format")
+                self?.infoLabel.text = String(format: format, distance)
+            }
+        }
     }
     
     var objectId: CRUDObjectId?
-    var authorId: CRUDObjectId?
-
+    var author: ObjectInfo?
+    
+    private var locationRequestToken = InvalidationToken()
     
     private lazy var dataSource: ProductDetailsDataSource = {
         let dataSource = ProductDetailsDataSource()
