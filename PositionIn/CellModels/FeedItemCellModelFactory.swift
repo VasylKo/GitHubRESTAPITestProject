@@ -61,7 +61,7 @@ struct FeedItemCellModelFactory {
                     details: feedItem.text,
                     info: map(feedItem.date) {dateFormatter.stringFromDate($0)},
                     imageURL: feedItem.image,
-                    badge: map(feedItem.price) { "$\($0)"}
+                    badge: map(feedItem.price) { "$\(Int($0))"}
                 ),
             ]
         case .Unknown:

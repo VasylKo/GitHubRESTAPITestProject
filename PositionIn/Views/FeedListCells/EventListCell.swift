@@ -7,7 +7,6 @@
 //
 
 import PosInCore
-import Haneke
 import UIKit
 
 final class EventListCell: TableViewCell {
@@ -21,10 +20,7 @@ final class EventListCell: TableViewCell {
         let m = model as? CompactFeedTableCellModel
         assert(m != nil, "Invalid model passed")
         
-        if let url = m!.imageURL {
-            productImage.hnk_setImageFromURL(url, placeholder: UIImage(named: "MainMenuForYou"))
-        }
-
+        productImage.setImageFromURL(m!.imageURL, placeholder: UIImage(named: "compactPlaceholder"))
         titleLabel.text = m!.title
         infoLabel.text = m!.info
         dateLabel.text = m!.details
