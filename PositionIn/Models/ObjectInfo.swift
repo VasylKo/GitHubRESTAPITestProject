@@ -12,7 +12,7 @@ import ObjectMapper
 struct ObjectInfo: Mappable, Printable {
     var objectId: CRUDObjectId = CRUDObjectInvalidId
     var title: String?
-    
+
     
     init(objectId: CRUDObjectId = CRUDObjectInvalidId) {
         self.objectId = objectId

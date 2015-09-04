@@ -32,6 +32,11 @@ struct Community: CRUDObject {
     var role: String?
     var members: CollectionResponse<UserProfile>?
     var location: Location?
+    
+    var defaultShopId: CRUDObjectId  {
+        return shops?.first?.objectId ?? CRUDObjectInvalidId
+    }
+
 
     init(objectId: CRUDObjectId = CRUDObjectInvalidId) {
         self.objectId = objectId

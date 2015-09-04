@@ -24,17 +24,29 @@ import Photos
 
 class BaseAddItemViewController: XLFormViewController {
     
+    //MARK: - Defaults -
+    
     var maximumSelectedImages: Int = 1
     
     var defaultLocation: CLLocation {
         return CLLocation(latitude: 39.1746, longitude: -107.4470)
     }
     
+    var defaultStartDate: NSDate = {
+       return NSDate(timeIntervalSinceNow: -60*60*24)
+    }()
+    
+    var defaultEndDate: NSDate = {
+        return NSDate(timeIntervalSinceNow: 60*60*24)
+        }()
+    
     override func showFormValidationError(error: NSError!) {
         if let error = error {
             showWarning(error.localizedDescription)
         }
     }
+    
+    //MARK: - Descriptors -
     
     func locationRowDescriptor(tag: String, withCurrentCoordinate: Bool = true) -> XLFormRowDescriptor {
         let locationRow = XLFormRowDescriptor(tag: tag, rowType: XLFormRowDescriptorTypeSelectorPush, title: NSLocalizedString("Location", comment: "New item: location"))
@@ -59,17 +71,11 @@ class BaseAddItemViewController: XLFormViewController {
     
     func categoryRowDescriptor(tag: String) -> XLFormRowDescriptor {
         let categoryCaption = NSLocalizedString("Category", comment: "New item: category caption")
-        let categoryRow = XLFormRowDescriptor(tag: tag, rowType:XLFormRowDescriptorTypeMultipleSelector, title: categoryCaption)
-        categoryRow.value = [ XLFormOptionsObject(value: 0, displayText: "Other") ]
+        let categoryRow = XLFormRowDescriptor(tag: tag, rowType:XLFormRowDescriptorTypeSelectorPush, title: categoryCaption)
         categoryRow.selectorTitle = categoryCaption
-        categoryRow.selectorOptions = [
-            XLFormOptionsObject(value: 0, displayText: "Other"),
-            XLFormOptionsObject(value: 1, displayText: "Category 1"),
-            XLFormOptionsObject(value: 2, displayText: "Category 2"),
-            XLFormOptionsObject(value: 3, displayText: "Category 3"),
-            XLFormOptionsObject(value: 4, displayText: "Category 4"),
-            XLFormOptionsObject(value: 5, displayText: "Category 5")
-        ]
+        let options: [XLFormOptionObject] = ItemCategory.all().map { XLFormOptionsObject.formOptionsObjectWithItemCategory($0) }
+        categoryRow.value = options.first
+        categoryRow.selectorOptions = options
         return categoryRow
     }
     
@@ -77,11 +83,6 @@ class BaseAddItemViewController: XLFormViewController {
         let communityCaption = NSLocalizedString("Community", comment: "New item: comunity caption")
         let communityRow = XLFormRowDescriptor(tag: tag, rowType:XLFormRowDescriptorTypeSelectorPush, title: communityCaption)
         communityRow.selectorTitle = communityCaption
-        communityRow.value =  XLFormOptionsObject(value: 0, displayText:"All")
-        communityRow.selectorOptions = [
-            XLFormOptionsObject(value: 0, displayText:"All"),
-            XLFormOptionsObject(value: 1, displayText:"Selected"),
-        ]
         
         let emptyCommunity: Community = {
             var c = Community()
@@ -109,6 +110,13 @@ class BaseAddItemViewController: XLFormViewController {
             let communityId = option.communityId
             where communityId != CRUDObjectInvalidId {
             return communityId
+        }
+        return nil
+    }
+    
+    func categoryValue(value: AnyObject?) -> ItemCategory? {
+        if  let option = value as? XLFormOptionsObject {
+            return option.itemCatefory
         }
         return nil
     }

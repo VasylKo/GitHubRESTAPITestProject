@@ -12,28 +12,59 @@ import CleanroomLogger
 struct Event: CRUDObject {
     var objectId: CRUDObjectId = CRUDObjectInvalidId
     var name: String?
-    var descriptionEvent: String?
-    var category: Int = 1
-    //"date": <datetime>,
-    var photos: [PhotoInfo]?
-    var likes: Int?
-    
+    var text: String?
     var endDate: NSDate?
     var startDate: NSDate?
-    /*
-    "comments": {
-    data:[],
-    count: <number>
-    },
-    */
-    /*
-    "author": {
+    var photos: [PhotoInfo]?
+    var location: Location?
+    var category: ItemCategory?
+
+   
+    
+/* 
+    TODO:
+    "items": [<guid>],
+*/
+    
+/*
+    
+    Not send
+    
+"attendees": <number>,
+"author": {
     "id": <guid>,
     "name": <string>,
-    "avatar": <string>
+    "avatar": <string>,
+    "isCommunity": <bool>
+},
+    
+*/
+    
+/*
+    Details
+    
+    
+    "shop": <guid>,
+    "items": [{
+        "data":{
+        "id": <guid>,
+        "name": <string>,
+        "photos": [{
+				"id": <guid>,
+				"url": <string>
+				}]
+        },
+        "count": <number>
+    }],
+    "participants": {
+        "count": <number>
     },
-    */
-    var location: Location?
+    
+    "author": <guid?>,
+    "community": <guid?>,
+    
+*/
+    
     
     
     init(objectId: CRUDObjectId = CRUDObjectInvalidId) {
@@ -51,17 +82,15 @@ struct Event: CRUDObject {
     }
     
     mutating func mapping(map: Map) {
-        let dateTransform =  CustomDateFormatTransform(formatString: "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
         
         objectId <- (map["id"], CRUDObjectIdTransform())
         name <- map["name"]
-        descriptionEvent <- map["description"]
+        text <- map["description"]
+        startDate <- (map["startDate"], APIDateTransform())
+        endDate <- (map["endDate"], APIDateTransform())
         photos <- map["photos"]
-        likes <- map["likes"]
         location <- map["location"]
-        category <- map["category"]
-        endDate <- (map["endDate"], dateTransform)
-        startDate <- (map["startDate"], dateTransform)
+        category <- (map["category"], EnumTransform())
     }
     
     static func endpoint() -> String {
@@ -69,21 +98,17 @@ struct Event: CRUDObject {
     }
     
     static func endpoint(eventId: CRUDObjectId) -> String {
-        return "/v1.0/events/\(eventId)"
+        return Event.endpoint().stringByAppendingPathComponent("\(eventId)")
     }
     
     static func userEventsEndpoint(userId: CRUDObjectId) -> String {
-        return UserProfile.endpoint().stringByAppendingPathComponent("\(userId)/events")
+            return UserProfile.userEndpoint(userId).stringByAppendingPathComponent("events")
     }
     
     static func communityEventsEndpoint(communityId: CRUDObjectId) -> String {
         return Community.endpoint().stringByAppendingPathComponent("\(communityId)/events")
     }
-    
-    static func allEndpoint(userId: CRUDObjectId) -> String {
-        return UserProfile.endpoint().stringByAppendingPathComponent(userId).stringByAppendingPathComponent("events")
-    }
-    
+        
     var description: String {
         return "<\(self.dynamicType):\(objectId)>"
     }

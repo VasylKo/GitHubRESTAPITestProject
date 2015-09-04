@@ -99,7 +99,7 @@ struct APIService {
         return getObjectsCollection(endpoint, params: params)
     }
     
-    func createUserPromotion(promotion object: Promotion) -> Future<Promotion, NSError> {
+    func createUserPromotion(object: Promotion) -> Future<Promotion, NSError> {
         return sessionController.currentUserId().flatMap {
             (userId: CRUDObjectId) -> Future<Promotion, NSError> in
             let endpoint = Promotion.userPromotionsEndpoint(userId)
@@ -112,7 +112,7 @@ struct APIService {
         return createObject(endpoint, object: object)
     }
 
-    func getPromotion(objectId: String) -> Future<Promotion, NSError> {
+    func getPromotion(objectId: CRUDObjectId) -> Future<Promotion, NSError> {
         let endpoint = Promotion.endpoint(objectId)
         return getObject(endpoint)
     }
@@ -125,7 +125,7 @@ struct APIService {
         return getObjectsCollection(endpoint, params: params)
     }
     
-    func createUserEvent(event object: Event) -> Future<Event, NSError> {
+    func createUserEvent(object: Event) -> Future<Event, NSError> {
         return sessionController.currentUserId().flatMap {
             (userId: CRUDObjectId) -> Future<Event, NSError> in
             let endpoint = Event.userEventsEndpoint(userId)
@@ -138,38 +138,31 @@ struct APIService {
         return createObject(endpoint, object: object)
     }
 
-    func getEvent(objectId: String) -> Future<Event, NSError> {
+    func getEvent(objectId: CRUDObjectId) -> Future<Event, NSError> {
         let endpoint = Event.endpoint(objectId)
         return getObject(endpoint)
     }
     
     //MARK: - Products -
     
-    func getUserProducts(userId: CRUDObjectId, page: Page) -> Future<CollectionResponse<ShopItemProduct>, NSError> {
-       return self.getUserProfile(userId).flatMap { profile -> Future<CollectionResponse<ShopItemProduct>, NSError> in
-            let endpoint = ShopItemProduct.userProductsEndpoint(profile.defaultShopId)
+    func getUserProducts(userId: CRUDObjectId, page: Page) -> Future<CollectionResponse<Product>, NSError> {
+       return self.getUserProfile(userId).flatMap { profile -> Future<CollectionResponse<Product>, NSError> in
+            let endpoint = Product.shopItemsEndpoint(profile.defaultShopId)
             let params = page.query
             return self.getObjectsCollection(endpoint, params: params)
         }
     }
     
-    func createUserProduct(product object: ShopItemProduct) -> Future<ShopItemProduct, NSError> {
-             return self.getMyProfile().flatMap { profile -> Future<ShopItemProduct, NSError>  in
-                    let endpoint = ShopItemProduct.userProductsEndpoint(profile.defaultShopId)
-                    return self.createObject(endpoint, object: object)
-        }
+    
+    func createProduct(object: Product, inShop shop: CRUDObjectId) -> Future<Product, NSError> {
+        let endpoint = Product.shopItemsEndpoint(shop)
+        return self.createObject(endpoint, object: object)
     }
     
-    func createCommunityProduct(communityId: CRUDObjectId, product object: ShopItemProduct) -> Future<ShopItemProduct, NSError> {
-        return self.getCommunity(communityId).flatMap { community -> Future<ShopItemProduct, NSError> in
-            let endpoint = ShopItemProduct.communityProductsEndpoint(community)
-            return self.createObject(endpoint, object: object)
-        }
-    }
-
-    func getProduct(objectId: String, author: String) -> Future<ShopItemProduct, NSError> {
-        return self.getUserProfile(author).flatMap { profile -> Future<ShopItemProduct, NSError> in
-            let endpoint = ShopItemProduct.endpoint(objectId, shopId: profile.defaultShopId)
+    
+    func getProduct(objectId: CRUDObjectId, author: CRUDObjectId) -> Future<Product, NSError> {
+        return self.getUserProfile(author).flatMap { profile -> Future<Product, NSError> in
+            let endpoint = Product.shopItemsEndpoint(profile.defaultShopId, productId: objectId)
             return self.getObject(endpoint)
         }
     }

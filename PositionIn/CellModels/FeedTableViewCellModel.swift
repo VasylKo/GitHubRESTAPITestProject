@@ -24,21 +24,21 @@ class CompactFeedTableCellModel: FeedTableCellModel {
     let info: String?
     let imageURL: NSURL?
     
-    init(item: FeedItem, title: String?, details: String?, info: String?, imageURL url: NSURL?) {
-        self.objectID = item.objectId
-        self.itemType = item.type
-        self.title = item.name
+    init(itemType: FeedItem.ItemType, objectID: CRUDObjectId, title: String?, details: String?, info: String?, imageURL url: NSURL?) {
+        self.objectID = objectID
+        self.itemType = itemType
+        self.title = title
         self.info = info
-        self.details = item.text
-        self.imageURL = item.image ?? url
+        self.details = details
+        self.imageURL = url
     }
 }
 
-class ComapctPriceFeedTableCellModel : CompactFeedTableCellModel {
-    let price: Int?
-    init(item: FeedItem, title: String?, details: String?, info: String?, imageURL url: NSURL?, price: Double?) {
-        self.price = item.price
-        super.init(item: item, title: title, details: details, info: info, imageURL: url)
+class ComapctBadgeFeedTableCellModel : CompactFeedTableCellModel {
+    let badge: String?
+    init(itemType: FeedItem.ItemType, objectID: CRUDObjectId, title: String?, details: String?, info: String?, imageURL url: NSURL?, badge: String?) {
+        self.badge = badge
+        super.init(itemType: itemType, objectID: objectID, title: title, details: details, info: info, imageURL: url)
     }
 }
 
