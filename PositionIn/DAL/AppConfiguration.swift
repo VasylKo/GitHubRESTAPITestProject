@@ -17,4 +17,7 @@ final class AppConfiguration {
     let baseURL : NSURL
     let amazonURL : NSURL
 
+    var appVersion: String? { CFBundleVersion
+        return NSBundle.mainBundle().infoDictionary?[kCFBundleVersionKey] as? String
+    }
 }

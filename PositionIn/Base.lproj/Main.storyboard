@@ -792,14 +792,25 @@
                                     <action selector="logoutTouched:" destination="BLF-bw-Lcw" eventType="touchUpInside" id="v1c-TG-YP5"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="versionLabel" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U5F-Ak-Xmw">
+                                <rect key="frame" x="10" y="505.5" width="97.5" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.74901960779999999" green="0.74901960779999999" blue="0.74901960779999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="nRo-2U-OMz" firstAttribute="top" secondItem="U5F-Ak-Xmw" secondAttribute="bottom" constant="10" id="diw-Lc-hj1"/>
+                            <constraint firstItem="U5F-Ak-Xmw" firstAttribute="leading" secondItem="IcZ-Qf-ALt" secondAttribute="leading" constant="10" id="m2i-1W-vIN"/>
                             <constraint firstAttribute="centerY" secondItem="8cE-G8-MVg" secondAttribute="centerY" id="tk4-hY-tyA"/>
                             <constraint firstAttribute="centerX" secondItem="8cE-G8-MVg" secondAttribute="centerX" id="vum-co-eB8"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Settings" id="FcZ-fa-4Bo"/>
+                    <connections>
+                        <outlet property="versionLabel" destination="U5F-Ak-Xmw" id="DYe-3f-JVY"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZRn-8Z-5zo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
