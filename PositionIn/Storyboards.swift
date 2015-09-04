@@ -5,7 +5,6 @@
 
 import UIKit
 
-
 //MARK: - Storyboards
 struct Storyboards {
 
@@ -472,12 +471,15 @@ extension BrowseViewController {
     enum Segue: String, Printable, SegueProtocol {
         case ShowProductDetails = "ShowProductDetails"
         case ShowEventDetails = "ShowEventDetails"
+        case ShowPromotionDetails = "ShowPromotionDetails"
 
         var kind: SegueKind? {
             switch (self) {
             case ShowProductDetails:
                 return SegueKind(rawValue: "show")
             case ShowEventDetails:
+                return SegueKind(rawValue: "show")
+            case ShowPromotionDetails:
                 return SegueKind(rawValue: "show")
             default:
                 preconditionFailure("Invalid value")
@@ -491,6 +493,8 @@ extension BrowseViewController {
                 return ProductDetailsViewController.self
             case ShowEventDetails:
                 return EventDetailsViewController.self
+            case ShowPromotionDetails:
+                return PromotionDetailsViewController.self
             default:
                 assertionFailure("Unknown destination")
                 return nil

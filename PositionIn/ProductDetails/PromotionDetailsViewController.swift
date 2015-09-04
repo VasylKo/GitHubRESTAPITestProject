@@ -18,7 +18,7 @@ final class PromotionDetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = NSLocalizedString("Event", comment: "Event details: title")
+        title = NSLocalizedString("Promotion", comment: "Promotion details: title")
         dataSource.items = promotionActionItems()
         dataSource.configureTable(actionTableView)
         reloadData()
