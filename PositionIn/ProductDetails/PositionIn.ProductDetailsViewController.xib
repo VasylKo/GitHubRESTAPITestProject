@@ -21,8 +21,9 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BigPlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="djR-mn-LSG">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="djR-mn-LSG">
                     <rect key="frame" x="0.0" y="0.0" width="600" height="220"/>
+                    <color key="backgroundColor" red="0.63529411759999999" green="0.72549019609999998" blue="0.15686274510000001" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="220" id="H8t-zH-e1y"/>
                     </constraints>
@@ -119,7 +120,4 @@
             </variation>
         </view>
     </objects>
-    <resources>
-        <image name="BigPlaceholder" width="311" height="207"/>
-    </resources>
 </document>

@@ -20,7 +20,7 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BigPlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="Qwg-Pi-gi5">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PromotionDetailsPlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="Qwg-Pi-gi5">
                     <rect key="frame" x="0.0" y="0.0" width="600" height="220"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="220" id="3tG-eR-Kw1"/>
@@ -111,6 +111,6 @@
         </view>
     </objects>
     <resources>
-        <image name="BigPlaceholder" width="311" height="207"/>
+        <image name="PromotionDetailsPlaceholder" width="375" height="172"/>
     </resources>
 </document>

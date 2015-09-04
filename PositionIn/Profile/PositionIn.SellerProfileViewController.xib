@@ -17,7 +17,7 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BigPlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="Wti-6U-Ori">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AvatarPlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="Wti-6U-Ori">
                     <rect key="frame" x="0.0" y="0.0" width="600" height="150"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="150" id="MDg-8U-VgA"/>
@@ -76,6 +76,6 @@
         </view>
     </objects>
     <resources>
-        <image name="BigPlaceholder" width="311" height="207"/>
+        <image name="AvatarPlaceholder" width="107" height="107"/>
     </resources>
 </document>

@@ -175,3 +175,13 @@ extension ProductDetailsViewController {
 }
 
 
+extension ItemCategory {
+    func productPlaceholderImage() -> UIImage {
+        switch self {
+        case .Unknown:
+            fallthrough
+        default:
+            return UIImage(named: "BrowseModeList")!
+        }
+    }
+}
