@@ -65,6 +65,14 @@ final class LocationController {
         return promise.future
     }
     
+    func distanceFromCoordinate(coordinate: CLLocationCoordinate2D) -> Future<CLLocationDistance, NSError> {
+        return getCurrentCoordinate().map { myCoordinate in
+            let myLocation = CLLocation(latitude: myCoordinate.latitude, longitude: myCoordinate.longitude)
+            let startLocation = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
+            return myLocation.distanceFromLocation(startLocation)
+        }
+    }
+    
     init() {
         cacheStorage = NSUserDefaults.standardUserDefaults()
         locationProvider = LocationProvider(requirements: .WhenInUse)

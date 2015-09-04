@@ -160,11 +160,9 @@ struct APIService {
     }
     
     
-    func getProduct(objectId: CRUDObjectId, author: CRUDObjectId) -> Future<Product, NSError> {
-        return self.getUserProfile(author).flatMap { profile -> Future<Product, NSError> in
-            let endpoint = Product.shopItemsEndpoint(profile.defaultShopId, productId: objectId)
+    func getProduct(objectId: CRUDObjectId, inShop shop: CRUDObjectId) -> Future<Product, NSError> {
+            let endpoint = Product.shopItemsEndpoint(shop, productId: objectId)
             return self.getObject(endpoint)
-        }
     }
     
     //MARK: - Community -

@@ -124,11 +124,11 @@ final class AddEventViewController: BaseAddItemViewController {
                     } else {
                         return api().createUserEvent(event)
                     }
-                    }.onSuccess { [weak self] (event: Event) -> ()  in
-                        Log.debug?.value(event)
-                        self?.sendUpdateNotification()
-                        self?.performSegue(AddEventViewController.Segue.Close)
-                    }
+            }.onSuccess { [weak self] (event: Event) -> ()  in
+                    Log.debug?.value(event)
+                    self?.sendUpdateNotification()
+                    self?.performSegue(AddEventViewController.Segue.Close)
+            }
         }
     }
 

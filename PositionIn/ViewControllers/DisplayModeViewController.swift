@@ -15,7 +15,7 @@ protocol BrowseActionProducer {
 }
 
 protocol BrowseActionConsumer: class {
-    func browseController(controller: BrowseActionProducer, didSelectItem objectId: CRUDObjectId, type itemType: FeedItem.ItemType)
+    func browseController(controller: BrowseActionProducer, didSelectItem objectId: CRUDObjectId, type itemType: FeedItem.ItemType, data: Any?)
     func browseControllerDidChangeContent(controller: BrowseActionProducer)
 }
 
@@ -148,11 +148,12 @@ protocol BrowseActionConsumer: class {
     
     //MARK: - BrowseActionConsumer: Browse actions -
     
-    func browseController(controller: BrowseActionProducer, didSelectItem objectId: CRUDObjectId, type itemType: FeedItem.ItemType) {
+    func browseController(controller: BrowseActionProducer, didSelectItem objectId: CRUDObjectId, type itemType: FeedItem.ItemType, data: Any?) {
         switch itemType {
         case .Item:
             let controller =  Storyboards.Main.instantiateProductDetailsViewControllerId()
             controller.objectId = objectId
+            controller.author = data as? ObjectInfo
             //TODO: pass authorId
             navigationController?.pushViewController(controller, animated: true)
         case .Event:
@@ -165,7 +166,7 @@ protocol BrowseActionConsumer: class {
             navigationController?.pushViewController(controller, animated: true)
             
         default:
-            Log.debug?.message("Did select \(itemType) \(objectId)")
+            Log.debug?.message("Did select \(itemType)<\(objectId)>")
             
         }
     }

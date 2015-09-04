@@ -23,7 +23,8 @@ struct FeedItemCellModelFactory {
                     title: feedItem.name,
                     details: feedItem.text,
                     info: map(feedItem.endDate) {dateFormatter.stringFromDate($0)},
-                    imageURL: feedItem.image
+                    imageURL: feedItem.image,
+                    data: feedItem.itemData
                 ),
             ]
             
@@ -35,7 +36,8 @@ struct FeedItemCellModelFactory {
                     title: feedItem.name,
                     details: feedItem.text,
                     info: nil,
-                    imageURL: feedItem.image
+                    imageURL: feedItem.image,
+                    data: feedItem.itemData
                 ),
             ]
 
@@ -49,7 +51,8 @@ struct FeedItemCellModelFactory {
                     title: feedItem.name,
                     details: map(feedItem.category) { $0.displayString() },
                     info: map(feedItem.details) { String(format: discountFormat, $0 )} ,
-                    imageURL: feedItem.image
+                    imageURL: feedItem.image,
+                    data: feedItem.itemData
                 ),
             ]
         case .Item:
@@ -58,10 +61,11 @@ struct FeedItemCellModelFactory {
                     itemType: feedItem.type,
                     objectID: feedItem.objectId,
                     title: feedItem.name,
-                    details: feedItem.text,
+                    details: feedItem.author?.title,
                     info: map(feedItem.date) {dateFormatter.stringFromDate($0)},
                     imageURL: feedItem.image,
-                    badge: map(feedItem.price) { "$\(Int($0))"}
+                    badge: map(feedItem.price) { "$\(Int($0))"},
+                    data: feedItem.itemData
                 ),
             ]
         case .Unknown:

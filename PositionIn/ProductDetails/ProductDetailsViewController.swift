@@ -9,6 +9,7 @@
 import UIKit
 import PosInCore
 import CleanroomLogger
+import BrightFutures
 
 protocol ProductDetailsActionConsumer {
     func executeAction(action: ProductDetailsViewController.ProductDetailsAction)
@@ -26,14 +27,43 @@ final class ProductDetailsViewController: UIViewController {
     
     
     private func reloadData() {
-        let page = APIService.Page()
-        if let author = authorId {
-            api().getProduct(objectId!, author: author).onSuccess { [weak self] product in
-                self?.product = product
+        self.infoLabel.text = NSLocalizedString("Calculating...", comment: "Distance calculation process")
+        nameLabel.text = author?.title
+        switch (objectId, author) {
+        case (.Some(let objectId), .Some(let author) ):
+            api().getUserProfile(author.objectId).flatMap { (profile: UserProfile) -> Future<Product, NSError> in
+                let page = APIService.Page()
+                return api().getProduct(objectId, inShop: profile.defaultShopId)
+            }.onSuccess { [weak self] product in
+                self?.didReceiveProductDetails(product)
+            }
+        default:
+            Log.error?.message("Not enough data to load product")
+        }
+    }
+    
+    private func didReceiveProductDetails(product: Product) {
+        headerLabel.text = product.name
+        detailsLabel.text = product.text
+        priceLabel.text = map(product.price) { "$\($0)" }
+        let url = product.photos?.first?.url
+        let image = product.category?.productPlaceholderImage()
+        productImageView.setImageFromURL(url, placeholder: image)
+        if let coordinates = product.location?.coordinates {
+            locationRequestToken.invalidate()
+            locationRequestToken = InvalidationToken()
+            locationController().distanceFromCoordinate(coordinates).onSuccess(token: locationRequestToken) {
+                [weak self] distance in
+                let format = NSLocalizedString("%.2f km", comment: "Distance format")
+                self?.infoLabel.text = String(format: format, distance)
             }
         }
-        
     }
+    
+    var objectId: CRUDObjectId?
+    var author: ObjectInfo?
+    
+    private var locationRequestToken = InvalidationToken()
     
     private lazy var dataSource: ProductDetailsDataSource = {
         let dataSource = ProductDetailsDataSource()
@@ -55,20 +85,6 @@ final class ProductDetailsViewController: UIViewController {
         ]
         
     }
-    
-    private var product:  Product? {
-        didSet{
-            headerLabel.text = product?.name
-            detailsLabel.text = product?.text
-            priceLabel.text = "$\(product?.price ?? 123)"
-            if let imgURL = product?.photos?.first?.url {
-                productImageView.hnk_setImageFromURL(imgURL)
-            }
-        }
-    }
-    
-    var objectId: CRUDObjectId?
-    var authorId: CRUDObjectId?
     
     @IBOutlet private weak var actionTableView: UITableView!
     @IBOutlet private weak var productImageView: UIImageView!
@@ -175,3 +191,13 @@ extension ProductDetailsViewController {
 }
 
 
+extension ItemCategory {
+    func productPlaceholderImage() -> UIImage {
+        switch self {
+        case .Unknown:
+            fallthrough
+        default:
+            return UIImage(named: "BrowseModeList")!
+        }
+    }
+}

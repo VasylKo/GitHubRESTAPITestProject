@@ -20,7 +20,7 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BigPlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="wuA-wp-A6y">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="eventDetailsPlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="wuA-wp-A6y">
                     <rect key="frame" x="0.0" y="0.0" width="600" height="220"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="220" id="8MY-C7-6GZ"/>
@@ -104,13 +104,13 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <variation key="default">
                 <mask key="constraints">
-                    <exclude reference="dDP-oU-xgT"/>
                     <exclude reference="KAi-QG-rzU"/>
+                    <exclude reference="dDP-oU-xgT"/>
                 </mask>
             </variation>
         </view>
     </objects>
     <resources>
-        <image name="BigPlaceholder" width="311" height="207"/>
+        <image name="eventDetailsPlaceholder" width="375" height="172"/>
     </resources>
 </document>

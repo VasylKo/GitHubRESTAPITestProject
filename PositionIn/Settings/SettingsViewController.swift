@@ -15,4 +15,11 @@ class SettingsViewController: BesideMenuViewController {
             self?.sideBarController?.executeAction(.Login)
         }
     }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        versionLabel.text = AppConfiguration().appVersion
+    }
+    
+    @IBOutlet private weak var versionLabel: UILabel!
 }
