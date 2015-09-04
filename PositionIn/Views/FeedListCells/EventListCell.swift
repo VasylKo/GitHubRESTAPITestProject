@@ -26,9 +26,8 @@ final class EventListCell: TableViewCell {
         }
 
         titleLabel.text = m!.title
-        infoLabel.text = m!.details
-
-        dateLabel.text = m!.info
+        infoLabel.text = m!.info
+        dateLabel.text = m!.details
     }
     
     override func prepareForReuse() {

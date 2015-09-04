@@ -14,16 +14,16 @@ struct FeedItemCellModelFactory {
     //TODO: remove hardcoded data
     
     func compactModelsForItem(feedItem: FeedItem) -> [TableViewCellModel] {
-        
         switch feedItem.type {
         case .Event:
             return [
                 CompactFeedTableCellModel(
-                    item: feedItem,
-                    title: "Art Gallery",
-                    details: "45 People are attending",
-                    info: dateFormatter.stringFromDate(feedItem.startDate ?? NSDate()),
-                    imageURL: NSURL(string: "https://cdn4.iconfinder.com/data/icons/Pretty_office_icon_part_2/256/add-event.png")
+                    itemType: feedItem.type,
+                    objectID: feedItem.objectId,
+                    title: feedItem.name,
+                    details: feedItem.text,
+                    info: map(feedItem.endDate) {dateFormatter.stringFromDate($0)},
+                    imageURL: feedItem.image
                 ),
             ]
 
@@ -31,7 +31,8 @@ struct FeedItemCellModelFactory {
             let discount: Float =  146.0
             return [
                 CompactFeedTableCellModel(
-                    item: feedItem,
+                    itemType: feedItem.type,
+                    objectID: feedItem.objectId,
                     title: "Arts & Crafts Summer Sale",
                     details: "The Sydney Art Store",
                     info: "Save $\(discount)",
@@ -41,7 +42,8 @@ struct FeedItemCellModelFactory {
         case .Item:
             return [
                 ComapctPriceFeedTableCellModel (
-                    item: feedItem,
+                    itemType: feedItem.type,
+                    objectID: feedItem.objectId,
                     title: "The forest",
                     details: "Edwarn Ryan",
                     info: "0.09 miles",
@@ -52,7 +54,8 @@ struct FeedItemCellModelFactory {
         case .Post:
             return [
                 CompactFeedTableCellModel(
-                    item: feedItem,
+                    itemType: feedItem.type,
+                    objectID: feedItem.objectId,
                     title: "Betty Wheeler",
                     details: "Lovely day to go golfing",
                     info: "",

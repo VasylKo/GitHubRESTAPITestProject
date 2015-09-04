@@ -2170,13 +2170,13 @@
 			isa = PBXGroup;
 			children = (
 				E68B52191B875F8F006B980C /* EventListCell.swift */,
-				E68B521A1B875F8F006B980C /* ProductListCell.swift */,
 				E68B521B1B875F8F006B980C /* PositionIn.EventListCell.xib */,
+				E68B521A1B875F8F006B980C /* ProductListCell.swift */,
 				E68B521C1B875F8F006B980C /* PositionIn.ProductListCell.xib */,
-				E68B521D1B875F8F006B980C /* PositionIn.PostListCell.xib */,
-				E68B521E1B875F8F006B980C /* PositionIn.PromotionListCell.xib */,
 				E68B521F1B875F8F006B980C /* PostListCell.swift */,
+				E68B521D1B875F8F006B980C /* PositionIn.PostListCell.xib */,
 				E68B52201B875F8F006B980C /* PromotionListCell.swift */,
+				E68B521E1B875F8F006B980C /* PositionIn.PromotionListCell.xib */,
 			);
 			path = FeedListCells;
 			sourceTree = "<group>";
