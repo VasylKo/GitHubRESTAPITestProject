@@ -20,13 +20,21 @@ struct FeedItem: CRUDObject {
     var price: Float?
     var startDate: NSDate?
     var endDate: NSDate?
-    var author: ObjectInfo
+    var author: ObjectInfo?
     var community: CRUDObjectId = CRUDObjectInvalidId
     var date: NSDate?
     var image: NSURL?
     var type: ItemType = .Unknown
     var location: Location?
-            
+    
+    var itemData: Any? {
+        switch type {
+        case .Item:
+            return author
+        default:
+            return nil
+        }
+    }
     
     init?(_ map: Map) {
         mapping(map)

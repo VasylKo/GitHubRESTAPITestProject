@@ -35,6 +35,10 @@ final class ProductDetailsViewController: UIViewController {
         
     }
     
+    var objectId: CRUDObjectId?
+    var authorId: CRUDObjectId?
+
+    
     private lazy var dataSource: ProductDetailsDataSource = {
         let dataSource = ProductDetailsDataSource()
         dataSource.parentViewController = self
@@ -66,9 +70,6 @@ final class ProductDetailsViewController: UIViewController {
             }
         }
     }
-    
-    var objectId: CRUDObjectId?
-    var authorId: CRUDObjectId?
     
     @IBOutlet private weak var actionTableView: UITableView!
     @IBOutlet private weak var productImageView: UIImageView!

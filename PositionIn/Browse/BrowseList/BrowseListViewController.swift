@@ -125,7 +125,7 @@ extension BrowseListViewController {
             if let model = self.tableView(tableView, modelForIndexPath: indexPath) as? FeedTableCellModel,
                let actionProducer = parentViewController as? BrowseActionProducer,
                let actionConsumer = self.actionConsumer {
-                actionConsumer.browseController(actionProducer, didSelectItem: model.objectID, type: model.itemType)
+                actionConsumer.browseController(actionProducer, didSelectItem: model.objectID, type: model.itemType, data: model.data)
             }
         }
         

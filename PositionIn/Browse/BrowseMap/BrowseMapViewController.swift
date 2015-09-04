@@ -101,7 +101,7 @@ extension BrowseMapViewController: GMSMapViewDelegate {
     func mapView(mapView: GMSMapView!, didTapMarker marker: GMSMarker!) -> Bool {
         if let box = marker.userData  as? Box<FeedItem> {
             let feedItem = box.value
-            actionConsumer?.browseController(self, didSelectItem: feedItem.objectId, type: feedItem.type)
+            actionConsumer?.browseController(self, didSelectItem: feedItem.objectId, type: feedItem.type, data:feedItem.itemData)
         
         }
         
