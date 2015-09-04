@@ -20,7 +20,7 @@ final class ProductListCell: TableViewCell {
     @IBOutlet private weak var infoLabel: UILabel!
     
     override func setModel(model: TableViewCellModel) {
-        let m = model as? ComapctPriceFeedTableCellModel
+        let m = model as? ComapctBadgeFeedTableCellModel
         assert(m != nil, "Invalid model passed")
 
         if let url = m!.imageURL {
@@ -29,7 +29,7 @@ final class ProductListCell: TableViewCell {
         headerLabel.text = m!.title
         detailsLabel.text = m!.details
         infoLabel.text =  m!.info
-        priceLabel.text = "$\(m?.price ?? 0)"
+        priceLabel.text = m!.badge
     }
     
     override func prepareForReuse() {

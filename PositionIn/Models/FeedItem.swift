@@ -26,9 +26,7 @@ struct FeedItem: CRUDObject {
     var image: NSURL?
     var type: ItemType = .Unknown
     var location: Location?
-    
-    
-    
+            
     
     init?(_ map: Map) {
         mapping(map)

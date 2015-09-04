@@ -34,10 +34,10 @@ class CompactFeedTableCellModel: FeedTableCellModel {
     }
 }
 
-class ComapctPriceFeedTableCellModel : CompactFeedTableCellModel {
-    let price: Float?
-    init(itemType: FeedItem.ItemType, objectID: CRUDObjectId, title: String?, details: String?, info: String?, imageURL url: NSURL?, price: Float?) {
-        self.price = price
+class ComapctBadgeFeedTableCellModel : CompactFeedTableCellModel {
+    let badge: String?
+    init(itemType: FeedItem.ItemType, objectID: CRUDObjectId, title: String?, details: String?, info: String?, imageURL url: NSURL?, badge: String?) {
+        self.badge = badge
         super.init(itemType: itemType, objectID: objectID, title: title, details: details, info: info, imageURL: url)
     }
 }

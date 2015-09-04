@@ -26,40 +26,42 @@ struct FeedItemCellModelFactory {
                     imageURL: feedItem.image
                 ),
             ]
-
-        case .Promotion:
-            let discount: Float =  146.0
-            return [
-                CompactFeedTableCellModel(
-                    itemType: feedItem.type,
-                    objectID: feedItem.objectId,
-                    title: "Arts & Crafts Summer Sale",
-                    details: "The Sydney Art Store",
-                    info: "Save $\(discount)",
-                    imageURL: NSURL(string: "http://2.bp.blogspot.com/-A8Yu--RWxYg/UxH1ZD-ZBuI/AAAAAAAAPkk/ZoP_JtpeKR4/s1600/promo.gif")
-                ),
-            ]
-        case .Item:
-            return [
-                ComapctPriceFeedTableCellModel (
-                    itemType: feedItem.type,
-                    objectID: feedItem.objectId,
-                    title: "The forest",
-                    details: "Edwarn Ryan",
-                    info: "0.09 miles",
-                    imageURL: NSURL(string: "http://2.bp.blogspot.com/-A8Yu--RWxYg/UxH1ZD-ZBuI/AAAAAAAAPkk/ZoP_JtpeKR4/s1600/promo.gif"),
-                    price: 99.8
-                ),
-            ]
+            
         case .Post:
             return [
                 CompactFeedTableCellModel(
                     itemType: feedItem.type,
                     objectID: feedItem.objectId,
-                    title: "Betty Wheeler",
-                    details: "Lovely day to go golfing",
-                    info: "",
-                    imageURL: NSURL(string: "http://2.bp.blogspot.com/-A8Yu--RWxYg/UxH1ZD-ZBuI/AAAAAAAAPkk/ZoP_JtpeKR4/s1600/promo.gif")
+                    title: feedItem.name,
+                    details: feedItem.text,
+                    info: nil,
+                    imageURL: feedItem.image
+                ),
+            ]
+
+        case .Promotion:
+            let discountFormat = NSLocalizedString("Save $%@", comment: "Compact feed: DiscountFormat")
+            let discount: Float =  146.0
+            return [
+                CompactFeedTableCellModel(
+                    itemType: feedItem.type,
+                    objectID: feedItem.objectId,
+                    title: feedItem.name,
+                    details: map(feedItem.category) { $0.displayString() },
+                    info: map(feedItem.details) { String(format: discountFormat, $0 )} ,
+                    imageURL: feedItem.image
+                ),
+            ]
+        case .Item:
+            return [
+                ComapctBadgeFeedTableCellModel (
+                    itemType: feedItem.type,
+                    objectID: feedItem.objectId,
+                    title: feedItem.name,
+                    details: feedItem.text,
+                    info: map(feedItem.date) {dateFormatter.stringFromDate($0)},
+                    imageURL: feedItem.image,
+                    badge: map(feedItem.price) { "$\($0)"}
                 ),
             ]
         case .Unknown:
