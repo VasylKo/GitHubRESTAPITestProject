@@ -14,49 +14,54 @@ struct FeedItemCellModelFactory {
     //TODO: remove hardcoded data
     
     func compactModelsForItem(feedItem: FeedItem) -> [TableViewCellModel] {
-        
         switch feedItem.type {
         case .Event:
             return [
                 CompactFeedTableCellModel(
-                    item: feedItem,
-                    title: "Art Gallery",
-                    details: "45 People are attending",
-                    info: dateFormatter.stringFromDate(feedItem.startDate ?? NSDate()),
-                    imageURL: NSURL(string: "https://cdn4.iconfinder.com/data/icons/Pretty_office_icon_part_2/256/add-event.png")
+                    itemType: feedItem.type,
+                    objectID: feedItem.objectId,
+                    title: feedItem.name,
+                    details: feedItem.text,
+                    info: map(feedItem.endDate) {dateFormatter.stringFromDate($0)},
+                    imageURL: feedItem.image
+                ),
+            ]
+            
+        case .Post:
+            return [
+                CompactFeedTableCellModel(
+                    itemType: feedItem.type,
+                    objectID: feedItem.objectId,
+                    title: feedItem.name,
+                    details: feedItem.text,
+                    info: nil,
+                    imageURL: feedItem.image
                 ),
             ]
 
         case .Promotion:
+            let discountFormat = NSLocalizedString("Save $%@", comment: "Compact feed: DiscountFormat")
             let discount: Float =  146.0
             return [
                 CompactFeedTableCellModel(
-                    item: feedItem,
-                    title: "Arts & Crafts Summer Sale",
-                    details: "The Sydney Art Store",
-                    info: "Save $\(discount)",
-                    imageURL: NSURL(string: "http://2.bp.blogspot.com/-A8Yu--RWxYg/UxH1ZD-ZBuI/AAAAAAAAPkk/ZoP_JtpeKR4/s1600/promo.gif")
+                    itemType: feedItem.type,
+                    objectID: feedItem.objectId,
+                    title: feedItem.name,
+                    details: map(feedItem.category) { $0.displayString() },
+                    info: map(feedItem.details) { String(format: discountFormat, $0 )} ,
+                    imageURL: feedItem.image
                 ),
             ]
         case .Item:
             return [
-                ComapctPriceFeedTableCellModel (
-                    item: feedItem,
-                    title: "The forest",
-                    details: "Edwarn Ryan",
-                    info: "0.09 miles",
-                    imageURL: NSURL(string: "http://2.bp.blogspot.com/-A8Yu--RWxYg/UxH1ZD-ZBuI/AAAAAAAAPkk/ZoP_JtpeKR4/s1600/promo.gif"),
-                    price: 99.8
-                ),
-            ]
-        case .Post:
-            return [
-                CompactFeedTableCellModel(
-                    item: feedItem,
-                    title: "Betty Wheeler",
-                    details: "Lovely day to go golfing",
-                    info: "",
-                    imageURL: NSURL(string: "http://2.bp.blogspot.com/-A8Yu--RWxYg/UxH1ZD-ZBuI/AAAAAAAAPkk/ZoP_JtpeKR4/s1600/promo.gif")
+                ComapctBadgeFeedTableCellModel (
+                    itemType: feedItem.type,
+                    objectID: feedItem.objectId,
+                    title: feedItem.name,
+                    details: feedItem.text,
+                    info: map(feedItem.date) {dateFormatter.stringFromDate($0)},
+                    imageURL: feedItem.image,
+                    badge: map(feedItem.price) { "$\(Int($0))"}
                 ),
             ]
         case .Unknown:

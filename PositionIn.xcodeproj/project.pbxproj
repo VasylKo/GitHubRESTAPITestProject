@@ -81,6 +81,7 @@
 		E63201721B984E2D0066C62E /* PositionIn.DescriptionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E63201711B984E2D0066C62E /* PositionIn.DescriptionTableViewCell.xib */; };
 		E63201741B9872C60066C62E /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E63201731B9872C60066C62E /* EditProfileViewController.swift */; };
 		E63201761B98D2DA0066C62E /* Shop.swift in Sources */ = {isa = PBXBuildFile; fileRef = E63201751B98D2DA0066C62E /* Shop.swift */; };
+		E63201781B9927900066C62E /* UIImageView+URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = E63201771B9927900066C62E /* UIImageView+URL.swift */; };
 		E6325F651B57D89A00996480 /* SidebarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6325F621B57D89A00996480 /* SidebarViewController.swift */; };
 		E6325F721B57E1DA00996480 /* Storyboards.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6325F711B57E1DA00996480 /* Storyboards.swift */; };
 		E6365D351B7D709E00CB79CB /* PhotoInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6365D341B7D709E00CB79CB /* PhotoInfo.swift */; };
@@ -408,6 +409,7 @@
 		E63201711B984E2D0066C62E /* PositionIn.DescriptionTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.DescriptionTableViewCell.xib; sourceTree = "<group>"; };
 		E63201731B9872C60066C62E /* EditProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		E63201751B98D2DA0066C62E /* Shop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shop.swift; sourceTree = "<group>"; };
+		E63201771B9927900066C62E /* UIImageView+URL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+URL.swift"; sourceTree = "<group>"; };
 		E6325F621B57D89A00996480 /* SidebarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SidebarViewController.swift; sourceTree = "<group>"; };
 		E6325F661B57DA4600996480 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		E6325F711B57E1DA00996480 /* Storyboards.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storyboards.swift; sourceTree = "<group>"; };
@@ -907,6 +909,7 @@
 			children = (
 				E63201641B967A540066C62E /* Notifications.swift */,
 				E63201661B967CA70066C62E /* StringValidation.swift */,
+				E63201771B9927900066C62E /* UIImageView+URL.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -2170,13 +2173,13 @@
 			isa = PBXGroup;
 			children = (
 				E68B52191B875F8F006B980C /* EventListCell.swift */,
-				E68B521A1B875F8F006B980C /* ProductListCell.swift */,
 				E68B521B1B875F8F006B980C /* PositionIn.EventListCell.xib */,
+				E68B521A1B875F8F006B980C /* ProductListCell.swift */,
 				E68B521C1B875F8F006B980C /* PositionIn.ProductListCell.xib */,
-				E68B521D1B875F8F006B980C /* PositionIn.PostListCell.xib */,
-				E68B521E1B875F8F006B980C /* PositionIn.PromotionListCell.xib */,
 				E68B521F1B875F8F006B980C /* PostListCell.swift */,
+				E68B521D1B875F8F006B980C /* PositionIn.PostListCell.xib */,
 				E68B52201B875F8F006B980C /* PromotionListCell.swift */,
+				E68B521E1B875F8F006B980C /* PositionIn.PromotionListCell.xib */,
 			);
 			path = FeedListCells;
 			sourceTree = "<group>";
@@ -2778,6 +2781,7 @@
 				E6F243701B8B17910033B13C /* DisplayModeViewController.swift in Sources */,
 				E68B52011B873545006B980C /* FeedTableViewCellModel.swift in Sources */,
 				E64D00651B7C9601007693E0 /* BaseAddItemViewController.swift in Sources */,
+				E63201781B9927900066C62E /* UIImageView+URL.swift in Sources */,
 				E65E872C1B611BA200AE444D /* Post.swift in Sources */,
 				E66115A91B73AE0F003DB5B3 /* AddEventViewController.swift in Sources */,
 				E6DA53CF1B7D0562000087A7 /* CommunityActionCell.swift in Sources */,
