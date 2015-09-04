@@ -642,6 +642,7 @@
                     <connections>
                         <segue destination="S6u-6D-z8V" kind="show" identifier="ShowProductDetails" id="UGm-BP-OPQ"/>
                         <segue destination="RQs-Yx-TSv" kind="show" identifier="ShowEventDetails" id="B0K-ir-QiG"/>
+                        <segue destination="tr4-Tq-w9T" kind="show" identifier="ShowPromotionDetails" id="iJW-SS-i8n"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="spd-ov-gak" userLabel="First Responder" sceneMemberID="firstResponder"/>
