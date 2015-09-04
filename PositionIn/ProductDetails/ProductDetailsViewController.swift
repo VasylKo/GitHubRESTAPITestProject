@@ -9,6 +9,7 @@
 import UIKit
 import PosInCore
 import CleanroomLogger
+import BrightFutures
 
 protocol ProductDetailsActionConsumer {
     func executeAction(action: ProductDetailsViewController.ProductDetailsAction)
@@ -26,13 +27,26 @@ final class ProductDetailsViewController: UIViewController {
     
     
     private func reloadData() {
-        let page = APIService.Page()
-        if let author = authorId {
-            api().getProduct(objectId!, author: author).onSuccess { [weak self] product in
-                self?.product = product
+        switch (objectId, authorId) {
+        case (.Some(let objectId), .Some(let author) ):
+            api().getUserProfile(author).flatMap { (profile: UserProfile) -> Future<Product, NSError> in
+                let page = APIService.Page()
+                return api().getProduct(objectId, inShop: profile.defaultShopId)
+            }.onSuccess { [weak self] product in
+                self?.didReceiveProductDetails(product)
             }
+        default:
+            Log.error?.message("Not enough data to load product")
         }
-        
+    }
+    
+    private func didReceiveProductDetails(product: Product) {
+        headerLabel.text = product.name
+        detailsLabel.text = product.text
+        priceLabel.text = map(product.price) { "$\($0)" }
+        let url = product.photos?.first?.url
+        let image = product.category?.productPlaceholderImage()
+        productImageView.setImageFromURL(url, placeholder: image)
     }
     
     var objectId: CRUDObjectId?
@@ -58,17 +72,6 @@ final class ProductDetailsViewController: UIViewController {
             ],
         ]
         
-    }
-    
-    private var product:  Product? {
-        didSet{
-            headerLabel.text = product?.name
-            detailsLabel.text = product?.text
-            priceLabel.text = "$\(product?.price ?? 123)"
-            if let imgURL = product?.photos?.first?.url {
-                productImageView.hnk_setImageFromURL(imgURL)
-            }
-        }
     }
     
     @IBOutlet private weak var actionTableView: UITableView!
