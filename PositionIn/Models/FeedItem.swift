@@ -20,7 +20,7 @@ struct FeedItem: CRUDObject {
     var price: Float?
     var startDate: NSDate?
     var endDate: NSDate?
-    var author: CRUDObjectId = CRUDObjectInvalidId
+    var author: ObjectInfo
     var community: CRUDObjectId = CRUDObjectInvalidId
     var date: NSDate?
     var image: NSURL?
@@ -47,7 +47,7 @@ struct FeedItem: CRUDObject {
         price <- map["price"]
         startDate <- (map["startDate"], APIDateTransform())
         endDate <- (map["endDate"], APIDateTransform())
-        author <- (map["author"], CRUDObjectIdTransform())
+        author <- map["author"]
         community <- (map["community"], CRUDObjectIdTransform())
         date <- (map["date"], APIDateTransform())
         image <- (map["image"], AmazonURLTransform())
@@ -60,12 +60,27 @@ struct FeedItem: CRUDObject {
     }
 
     
-    enum ItemType: Int {
+    enum ItemType: Int, Printable {
         case Unknown
         case Event
         case Promotion
         case Item
         case Post
+        
+        var description: String {
+            switch self {
+            case .Unknown:
+                return "Unknown/All"
+            case .Event:
+                return "Event"
+            case .Promotion:
+                return "Promotion"
+            case Item:
+                return "Product"
+            case Post:
+                return "Post"
+            }
+        }
     }
     
     static func endpoint() -> String {

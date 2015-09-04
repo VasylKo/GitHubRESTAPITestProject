@@ -165,7 +165,7 @@ protocol BrowseActionConsumer: class {
             navigationController?.pushViewController(controller, animated: true)
             
         default:
-            Log.debug?.message("Did select \(itemType) \(objectId)")
+            Log.debug?.message("Did select \(itemType)<\(objectId)>")
             
         }
     }
