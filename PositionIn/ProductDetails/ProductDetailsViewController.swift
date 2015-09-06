@@ -25,6 +25,11 @@ final class ProductDetailsViewController: UIViewController {
         reloadData()
     }
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let orderController = segue.destinationViewController  as? OrderViewController {
+            orderController.product = self.product
+        }
+    }
     
     private func reloadData() {
         self.infoLabel.text = NSLocalizedString("Calculating...", comment: "Distance calculation process")
@@ -42,6 +47,7 @@ final class ProductDetailsViewController: UIViewController {
     }
     
     private func didReceiveProductDetails(product: Product) {
+        self.product = product
         headerLabel.text = product.name
         detailsLabel.text = product.text
         priceLabel.text = map(product.price) { "$\($0)" }
@@ -61,7 +67,7 @@ final class ProductDetailsViewController: UIViewController {
     
     var objectId: CRUDObjectId?
     var author: ObjectInfo?
-    
+    private var product: Product?
     private var locationRequestToken = InvalidationToken()
     
     private lazy var dataSource: ProductDetailsDataSource = {
