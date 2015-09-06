@@ -40,6 +40,7 @@ platform :ios do
     gym(
         scheme: "PositionIn",
         output_directory: "Build",
+        clean: true,
         ) # Build app
 
     # xctool # run the tests of your app
