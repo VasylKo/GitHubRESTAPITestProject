@@ -13,7 +13,14 @@ struct BrowseCommunityCellFactory {
         var models: [TableViewCellModel] = []
         models.append(BrowseCommunityHeaderCellModel(objectId: community.objectId, title:community.name ?? "", url:community.avatar))
         models.append(BrowseCommunityInfoCellModel(objectId: community.objectId, members: community.members?.total, text: community.communityDescription))
-        models.append(BrowseCommunityActionCellModel(objectId: community.objectId, actions:actionsForCommunity(community)))
+        let actions: [BrowseCommunityViewController.Action]
+        switch mode {
+        case .MyGroups:
+            actions = myActionsForCommunity(community)
+        case .Explore:
+            actions = exploreActionsForCommunity(community)
+        }
+        models.append(BrowseCommunityActionCellModel(objectId: community.objectId, actions: actions))
         return models
     }
     
@@ -36,8 +43,12 @@ struct BrowseCommunityCellFactory {
         return TableViewCell.reuseId()
     }
 
-    private func actionsForCommunity(community: Community) -> [BrowseCommunityViewController.Action] {
+    private func myActionsForCommunity(community: Community) -> [BrowseCommunityViewController.Action] {
         return []
+    }
+    
+    private func exploreActionsForCommunity(community: Community) -> [BrowseCommunityViewController.Action] {
+        return [.Join]
     }
 
 }

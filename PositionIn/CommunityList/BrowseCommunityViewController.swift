@@ -9,6 +9,16 @@
 import UIKit
 import PosInCore
 import BrightFutures
+import CleanroomLogger
+
+protocol BrowseCommunityActionConsumer {
+    func executeAction(action: BrowseCommunityViewController.Action, community: CRUDObjectId)
+}
+
+protocol BrowseCommunityActionProvider {
+    var actionConsumer: BrowseCommunityActionConsumer? { get set }
+}
+
 
 final class BrowseCommunityViewController: BesideMenuViewController {
     
@@ -54,6 +64,7 @@ final class BrowseCommunityViewController: BesideMenuViewController {
         }
         communitiesRequest.onSuccess(token: dataRequestToken) { [weak self] response in
             if let communities = response.items {
+                Log.debug?.value(communities)
                 self?.dataSource.setCommunities(communities, mode: browseMode)
                 self?.tableView.reloadData()
             }
@@ -106,6 +117,10 @@ final class BrowseCommunityViewController: BesideMenuViewController {
 extension BrowseCommunityViewController {
     internal class BrowseCommunityDataSource: TableViewDataSource {
         
+        var actionConsumer: BrowseCommunityActionConsumer? {
+            return parentViewController as? BrowseCommunityActionConsumer
+        }
+        
         private var items: [[TableViewCellModel]] = []
         private let cellFactory = BrowseCommunityCellFactory()
         
@@ -141,7 +156,14 @@ extension BrowseCommunityViewController {
         
         func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
             tableView.deselectRowAtIndexPath(indexPath, animated: false)
-
+            
         }
     }
+}
+
+extension BrowseCommunityViewController: BrowseCommunityActionConsumer {
+    func executeAction(action: BrowseCommunityViewController.Action, community: CRUDObjectId) {
+        
+    }
+   
 }

@@ -11,7 +11,7 @@ import PosInCore
 
 final class CommunityHeaderCell: TableViewCell {
     override func setModel(model: TableViewCellModel) {
-        let m = model as? TableViewCellURLTextModel
+        let m = model as? BrowseCommunityHeaderCellModel
         assert(m != nil, "Invalid model passed")
         captionLabel.text = m!.title
         contentImageView.setImageFromURL(m!.url, placeholder: UIImage(named: ""))
