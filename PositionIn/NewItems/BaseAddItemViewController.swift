@@ -76,6 +76,12 @@ class BaseAddItemViewController: XLFormViewController {
         let options: [XLFormOptionObject] = ItemCategory.all().map { XLFormOptionsObject.formOptionsObjectWithItemCategory($0) }
         categoryRow.value = options.first
         categoryRow.selectorOptions = options
+        categoryRow.onChangeBlock = {[unowned categoryRow]   oldValue, newValue, descriptor in
+            if let newValue = newValue as? NSNull {
+                categoryRow.value = oldValue
+            }
+        }
+
         return categoryRow
     }
     
