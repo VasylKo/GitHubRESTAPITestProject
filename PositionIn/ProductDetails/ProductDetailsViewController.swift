@@ -32,7 +32,6 @@ final class ProductDetailsViewController: UIViewController {
         switch (objectId, author) {
         case (.Some(let objectId), .Some(let author) ):
             api().getUserProfile(author.objectId).flatMap { (profile: UserProfile) -> Future<Product, NSError> in
-                let page = APIService.Page()
                 return api().getProduct(objectId, inShop: profile.defaultShopId)
             }.onSuccess { [weak self] product in
                 self?.didReceiveProductDetails(product)
