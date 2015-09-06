@@ -574,10 +574,14 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Order" id="UPq-u8-PC3"/>
                     <connections>
+                        <outlet property="feeLabel" destination="1xi-IL-uMK" id="nSv-og-9Nt"/>
                         <outlet property="itemImageView" destination="Y7E-rp-6gx" id="g7U-I9-DyX"/>
                         <outlet property="itemNameLabel" destination="jrL-a7-YEK" id="5hy-Xy-I3q"/>
                         <outlet property="quantityLabel" destination="rfC-Ne-mcD" id="34A-Yn-WV4"/>
                         <outlet property="quantityStepper" destination="lLd-ES-7ov" id="1qr-gw-TUC"/>
+                        <outlet property="subtotalLabel" destination="81O-19-HiU" id="szl-jK-zO9"/>
+                        <outlet property="taxLabel" destination="aFM-fp-bxL" id="KH0-hr-Cam"/>
+                        <outlet property="totalLabel" destination="BAI-Bq-Sdo" id="3oa-0k-6yG"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SjP-7l-6Pr" userLabel="First Responder" sceneMemberID="firstResponder"/>
