@@ -26,11 +26,25 @@ final class PromotionDetailsViewController: UIViewController {
     
     
     private func reloadData() {
-        let page = APIService.Page()
-        api().getPromotion(objectId!).onSuccess { [weak self] promotion in
-            self?.promotion = promotion
+        if let objectId = objectId {
+            api().getPromotion(objectId).onSuccess { [weak self] promotion in
+                self?.didReceivePromotionDetails(promotion)
+            }
         }
+    }
+    
+    private func didReceivePromotionDetails(promotion: Promotion) {
+        headerLabel.text = promotion.name
+        detailsLabel.text = promotion.text
         
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
+        
+        let startDate = dateFormatter.stringFromDate(promotion.startDate ?? NSDate())
+        let endDate = dateFormatter.stringFromDate(promotion.endDate ?? NSDate())
+        priceLabel.text = "\(startDate) - \(endDate)"
+        infoLabel.text = "Save $\(promotion.discount ?? 0)"
+        promotionImageView.setImageFromURL(promotion.photos?.first?.url, placeholder: UIImage(named: "PromotionDetailsPlaceholder"))
     }
     
     private lazy var dataSource: PromotionDetailsDataSource = {
@@ -54,25 +68,6 @@ final class PromotionDetailsViewController: UIViewController {
         ]
         
     }
-    
-    private var promotion:  Promotion? {
-        didSet{
-            headerLabel.text = promotion?.name
-            detailsLabel.text = promotion?.text
-            
-            let dateFormatter = NSDateFormatter()
-            dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
-            
-            let startDate = dateFormatter.stringFromDate(promotion?.startDate ?? NSDate())
-            let endDate = dateFormatter.stringFromDate(promotion?.endDate ?? NSDate())
-            priceLabel.text = "\(startDate) - \(endDate)"
-            infoLabel.text = "Save $\(promotion?.discount ?? 0)"
-            if let imgURL = promotion?.photos?.first?.url {
-                promotionImageView.hnk_setImageFromURL(imgURL)
-            }
-        }
-    }
-    
     var objectId: CRUDObjectId?
     
     @IBOutlet private weak var actionTableView: UITableView!
