@@ -646,7 +646,17 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="feL-Ea-Em3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2975" y="699"/>
+            <point key="canvasLocation" x="2983" y="683"/>
+        </scene>
+        <!--Post-->
+        <scene sceneID="jbP-64-jST">
+            <objects>
+                <viewController storyboardIdentifier="PostViewController" id="Mgd-dn-9Dr" customClass="PostViewController" customModule="PositionIn" customModuleProvider="target" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" title="Post" id="uLq-Z3-dHY"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CyR-kB-3vV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2687" y="1420"/>
         </scene>
         <!--Browse View Controller-->
         <scene sceneID="wfN-Bx-Jle">
@@ -659,6 +669,7 @@
                         <segue destination="S6u-6D-z8V" kind="show" identifier="ShowProductDetails" id="UGm-BP-OPQ"/>
                         <segue destination="RQs-Yx-TSv" kind="show" identifier="ShowEventDetails" id="B0K-ir-QiG"/>
                         <segue destination="tr4-Tq-w9T" kind="show" identifier="ShowPromotionDetails" id="iJW-SS-i8n"/>
+                        <segue destination="Mgd-dn-9Dr" kind="show" identifier="ShowPost" id="kB5-ah-mJe"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="spd-ov-gak" userLabel="First Responder" sceneMemberID="firstResponder"/>

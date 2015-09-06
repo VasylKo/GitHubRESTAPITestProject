@@ -274,6 +274,8 @@
 		E6B3C3301B62581200EA613A /* CleanroomASL.framework in Embed Core Framework */ = {isa = PBXBuildFile; fileRef = E6B3C32D1B62581200EA613A /* CleanroomASL.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E6B3C3311B62581200EA613A /* CleanroomLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6B3C32E1B62581200EA613A /* CleanroomLogger.framework */; };
 		E6B3C3321B62581200EA613A /* CleanroomLogger.framework in Embed Core Framework */ = {isa = PBXBuildFile; fileRef = E6B3C32E1B62581200EA613A /* CleanroomLogger.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E6BEF1C41B9C54EF00511B46 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6BEF1C31B9C54EF00511B46 /* PostViewController.swift */; };
+		E6BEF1C61B9C556300511B46 /* PositionIn.PostViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6BEF1C51B9C556300511B46 /* PositionIn.PostViewController.xib */; };
 		E6C5CE191B83A21500265955 /* LocationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C5CE181B83A21500265955 /* LocationController.swift */; };
 		E6C5CE1B1B83A24500265955 /* UIScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C5CE1A1B83A24500265955 /* UIScheme.swift */; };
 		E6C5CE1D1B83A28C00265955 /* SessionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C5CE1C1B83A28C00265955 /* SessionController.swift */; };
@@ -803,6 +805,8 @@
 		E6A869F31B60FF2100797D16 /* UserProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
 		E6B3C32D1B62581200EA613A /* CleanroomASL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CleanroomASL.framework; path = Carthage/Build/iOS/CleanroomASL.framework; sourceTree = "<group>"; };
 		E6B3C32E1B62581200EA613A /* CleanroomLogger.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CleanroomLogger.framework; path = Carthage/Build/iOS/CleanroomLogger.framework; sourceTree = "<group>"; };
+		E6BEF1C31B9C54EF00511B46 /* PostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
+		E6BEF1C51B9C556300511B46 /* PositionIn.PostViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.PostViewController.xib; sourceTree = "<group>"; };
 		E6C5CE181B83A21500265955 /* LocationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationController.swift; sourceTree = "<group>"; };
 		E6C5CE1A1B83A24500265955 /* UIScheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIScheme.swift; sourceTree = "<group>"; };
 		E6C5CE1C1B83A28C00265955 /* SessionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionController.swift; sourceTree = "<group>"; };
@@ -1092,6 +1096,7 @@
 				E68B52041B8736F4006B980C /* Filter */,
 				E66115A11B73A175003DB5B3 /* NewItems */,
 				E69420F71B66354E00F34F06 /* ProductDetails */,
+				E6BEF1C21B9C54D800511B46 /* Post */,
 				E689F0751B6B90CA00597587 /* ProductInventory */,
 				E6DA53C01B7D00DB000087A7 /* CommunityList */,
 				E61B20D91B7E4A85005EAB2C /* Profile */,
@@ -2190,9 +2195,9 @@
 				E69420F81B66358000F34F06 /* ProductDetailsViewController.swift */,
 				E69420FE1B665F5100F34F06 /* PositionIn.ProductDetailsViewController.xib */,
 				2431EBE11B95B351009FB158 /* EventDetailsViewController.swift */,
+				2431EBE31B95B36D009FB158 /* PositionIn.EventDetailsViewController.xib */,
 				2431EBE51B95BD2A009FB158 /* PromotionDetailsViewController.swift */,
 				2431EBE71B95BD3B009FB158 /* PositionIn.PromotionDetailsViewController.xib */,
-				2431EBE31B95B36D009FB158 /* PositionIn.EventDetailsViewController.xib */,
 			);
 			name = ProductDetails;
 			path = PositionIn/ProductDetails;
@@ -2206,6 +2211,15 @@
 				E65E872F1B611FE700AE444D /* Response.swift */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		E6BEF1C21B9C54D800511B46 /* Post */ = {
+			isa = PBXGroup;
+			children = (
+				E6BEF1C31B9C54EF00511B46 /* PostViewController.swift */,
+				E6BEF1C51B9C556300511B46 /* PositionIn.PostViewController.xib */,
+			);
+			path = Post;
 			sourceTree = "<group>";
 		};
 		E6C5CE171B83A21500265955 /* DAL */ = {
@@ -2579,6 +2593,7 @@
 				E68B52241B875F8F006B980C /* PositionIn.ProductListCell.xib in Resources */,
 				E6DA53D01B7D0562000087A7 /* PositionIn.CommunityActionCell.xib in Resources */,
 				E689F07D1B6B976100597587 /* PositionIn.ProductInventoryCell.xib in Resources */,
+				E6BEF1C61B9C556300511B46 /* PositionIn.PostViewController.xib in Resources */,
 				E61B20DC1B7E4AB4005EAB2C /* PositionIn.SellerProfileViewController.xib in Resources */,
 				E62B16FD1B5CDF2400D446BC /* PositionIn.MessagesListViewController.xib in Resources */,
 				E69421021B666A1600F34F06 /* PositionIn.ActionCell.xib in Resources */,
@@ -2783,6 +2798,7 @@
 				E64D00651B7C9601007693E0 /* BaseAddItemViewController.swift in Sources */,
 				E63201781B9927900066C62E /* UIImageView+URL.swift in Sources */,
 				E65E872C1B611BA200AE444D /* Post.swift in Sources */,
+				E6BEF1C41B9C54EF00511B46 /* PostViewController.swift in Sources */,
 				E66115A91B73AE0F003DB5B3 /* AddEventViewController.swift in Sources */,
 				E6DA53CF1B7D0562000087A7 /* CommunityActionCell.swift in Sources */,
 				E69421031B666A1600F34F06 /* ActionCell.swift in Sources */,

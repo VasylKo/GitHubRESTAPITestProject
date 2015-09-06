@@ -154,7 +154,6 @@ protocol BrowseActionConsumer: class {
             let controller =  Storyboards.Main.instantiateProductDetailsViewControllerId()
             controller.objectId = objectId
             controller.author = data as? ObjectInfo
-            //TODO: pass authorId
             navigationController?.pushViewController(controller, animated: true)
         case .Event:
             let controller =  Storyboards.Main.instantiateEventDetailsViewControllerId()
@@ -164,7 +163,10 @@ protocol BrowseActionConsumer: class {
             let controller =  Storyboards.Main.instantiatePromotionDetailsViewControllerId()
             controller.objectId = objectId
             navigationController?.pushViewController(controller, animated: true)
-            
+        case .Post:
+            let controller = Storyboards.Main.instantiatePostViewController()
+            controller.objectId = objectId
+            navigationController?.pushViewController(controller, animated: true)            
         default:
             Log.debug?.message("Did select \(itemType)<\(objectId)>")
             

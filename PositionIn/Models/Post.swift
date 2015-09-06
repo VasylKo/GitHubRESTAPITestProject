@@ -44,6 +44,10 @@ struct Post: CRUDObject {
     static func endpoint() -> String {
         return "/v1.0/posts"
     }
+
+    static func endpoint(postId: CRUDObjectId) -> String {
+        return Post.endpoint().stringByAppendingPathComponent("\(postId)")
+    }
     
     static func userPostsEndpoint(userId: CRUDObjectId) -> String {
         return UserProfile.endpoint().stringByAppendingPathComponent("\(userId)/posts")
