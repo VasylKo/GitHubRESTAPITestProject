@@ -6,7 +6,6 @@
 //  Copyright (c) 2015 Soluna Labs. All rights reserved.
 //
 
-import Foundation
 import UIKit
 import PosInCore
 

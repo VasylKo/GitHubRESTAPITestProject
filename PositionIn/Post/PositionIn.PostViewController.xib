@@ -15,17 +15,18 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="hjz-f2-eqH" customClass="TableView" customModule="PosInCore">
-                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="hjz-f2-eqH" customClass="TableView" customModule="PosInCore">
+                    <rect key="frame" x="5" y="5" width="590" height="590"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                 </tableView>
             </subviews>
-            <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" red="0.93333333333333335" green="0.93333333333333335" blue="0.93333333333333335" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
-                <constraint firstItem="hjz-f2-eqH" firstAttribute="leading" secondItem="g23-wy-9VV" secondAttribute="leading" id="JCk-ck-0D0"/>
-                <constraint firstAttribute="bottom" secondItem="hjz-f2-eqH" secondAttribute="bottom" id="KRT-Z9-4xC"/>
-                <constraint firstAttribute="trailing" secondItem="hjz-f2-eqH" secondAttribute="trailing" id="Wd3-sh-b70"/>
-                <constraint firstItem="hjz-f2-eqH" firstAttribute="top" secondItem="g23-wy-9VV" secondAttribute="top" id="mDH-jh-16R"/>
+                <constraint firstItem="hjz-f2-eqH" firstAttribute="leading" secondItem="g23-wy-9VV" secondAttribute="leading" constant="5" id="JCk-ck-0D0"/>
+                <constraint firstAttribute="bottom" secondItem="hjz-f2-eqH" secondAttribute="bottom" constant="5" id="KRT-Z9-4xC"/>
+                <constraint firstAttribute="trailing" secondItem="hjz-f2-eqH" secondAttribute="trailing" constant="5" id="Wd3-sh-b70"/>
+                <constraint firstItem="hjz-f2-eqH" firstAttribute="top" secondItem="g23-wy-9VV" secondAttribute="top" constant="5" id="mDH-jh-16R"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
         </view>
