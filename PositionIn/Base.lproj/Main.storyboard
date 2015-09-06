@@ -169,10 +169,10 @@
             </objects>
             <point key="canvasLocation" x="919" y="1238"/>
         </scene>
-        <!--Community List View Controller-->
+        <!--Browse Community View Controller-->
         <scene sceneID="4gx-Nw-hq8">
             <objects>
-                <viewController storyboardIdentifier="CommunityListViewController" id="a7d-7X-88d" customClass="CommunityListViewController" customModule="PositionIn" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="BrowseCommunityViewController" id="a7d-7X-88d" customClass="BrowseCommunityViewController" customModule="PositionIn" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="IFL-7w-zce">
                         <nil key="title"/>
                         <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="gHl-GL-4FX">

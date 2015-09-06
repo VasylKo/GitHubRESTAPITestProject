@@ -221,15 +221,15 @@ extension ItemCategory {
         case .LuggageBags:
             imageName = "luggage_bags_img_default"
         case .Media:
-            imageName = "mature_img_default"
-        case .OfficeSupplies:
             imageName = "media_img_default"
-        case .ReligiousCeremonial:
+        case .OfficeSupplies:
             imageName = "office_supplies_img_default"
-        case .Software:
+        case .ReligiousCeremonial:
             imageName = "religious_ceremonial_img_default"
-        case .SportingGoods:
+        case .Software:
             imageName = "software_img_default"
+        case .SportingGoods:
+            imageName = "mature_img_default"
         case .ToysGames:
             imageName = "toys_games_img_default"
         case .VehiclesParts:

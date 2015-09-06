@@ -35,6 +35,17 @@ public struct TableViewCellImageTextModel: TableViewCellModel {
     }    
 }
 
+public struct TableViewCellURLTextModel: TableViewCellModel {
+    public let title: String
+    public let url: NSURL?
+    
+    public init(title: String, url: NSURL?) {
+        self.title = title
+        self.url = url
+    }
+}
+
+
 public struct TableViewCellURLModel: TableViewCellModel {
    public let url: NSURL?
     

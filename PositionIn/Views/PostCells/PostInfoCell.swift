@@ -16,6 +16,11 @@ class PostInfoCell: TableViewCell {
         firstLineLabel.text = m!.firstLine
         secondLineLabel.text = m!.secondLine
     }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        avatarView.cancelSetImage()
+    }
 
     @IBOutlet weak var firstLineLabel: UILabel!
     @IBOutlet weak var secondLineLabel: UILabel!
