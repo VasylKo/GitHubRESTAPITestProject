@@ -11,9 +11,9 @@ import Haneke
 
 @IBDesignable
 class AvatarView: UIView {
-    func setImageFromURL(url: NSURL) {
+    func setImageFromURL(url: NSURL?) {
         layoutIfNeeded()
-        imageView.hnk_setImageFromURL(url, placeholder: UIImage(named: "AvatarPlaceholder"))
+        imageView.setImageFromURL(url, placeholder: UIImage(named: "AvatarPlaceholder"))
     }
     
     func cancelSetImage() {

@@ -18,9 +18,7 @@ final class MainMenuUserCell: TableViewCell {
         let m = model as? TableViewCellImageTextModel
         assert(m != nil, "Invalid model passed")
         titleLabel?.text = m!.title
-        if let imageURL = NSURL(string: m!.image) {
-            avatarView.setImageFromURL(imageURL)
-        }
+        avatarView.setImageFromURL(NSURL(string: m!.image))
     }
     
     override func prepareForReuse() {

@@ -193,11 +193,53 @@ extension ProductDetailsViewController {
 
 extension ItemCategory {
     func productPlaceholderImage() -> UIImage {
+        let imageName: String
         switch self {
+        case .AnimalsPetSupplies:
+            imageName = "animals_pet_supplies_img_default"
+        case .ApparelAccessories:
+            imageName = "apparel_accessories_img_default"
+        case .ArtsEntertainment:
+            imageName = "arts_entertainment_img_default"
+        case .BabyToddler:
+            imageName = "baby_toddler_img_default"
+        case .BusinessIndustrial:
+            imageName = "business_industrial_img_default"
+        case .CamerasOptics:
+            imageName = "cameras_optics_img_default"
+        case .Electronics:
+            imageName = "electronics_img_default"
+        case .Food:
+            imageName = "food_img_default"
+        case .Furniture:
+            imageName = "furniture_img_default"
+        case .Hardware:
+            imageName = "hardware_img_default"
+        case .HealthBeauty:
+            imageName = "health_beauty_img_default"
+        case .HomeGarden:
+            imageName = "home_garden_img_default"
+        case .LuggageBags:
+            imageName = "luggage_bags_img_default"
+        case .Media:
+            imageName = "mature_img_default"
+        case .OfficeSupplies:
+            imageName = "media_img_default"
+        case .ReligiousCeremonial:
+            imageName = "office_supplies_img_default"
+        case .Software:
+            imageName = "religious_ceremonial_img_default"
+        case .SportingGoods:
+            imageName = "software_img_default"
+        case .ToysGames:
+            imageName = "toys_games_img_default"
+        case .VehiclesParts:
+            imageName = "vehicles_parts_img_default"
         case .Unknown:
             fallthrough
         default:
-            return UIImage(named: "BrowseModeList")!
+            imageName = ""
         }
+        return UIImage(named: imageName) ?? UIImage()
     }
 }
