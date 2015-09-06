@@ -397,7 +397,7 @@ extension APIService {
     struct Page: APIServiceQueryConvertible {
         let skip: Int
         let take: Int
-        init(start: Int = 0, size: Int = 20) {
+        init(start: Int = 0, size: Int = 100) {
             skip = start
             take = size
         }
