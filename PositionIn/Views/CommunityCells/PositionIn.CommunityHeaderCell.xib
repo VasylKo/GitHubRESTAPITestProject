@@ -24,7 +24,7 @@
                             </mask>
                         </variation>
                     </imageView>
-                    <view alpha="0.64999999999999969" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fVh-Nj-957">
+                    <view alpha="0.39999999999999963" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fVh-Nj-957">
                         <rect key="frame" x="0.0" y="80" width="320" height="40"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
