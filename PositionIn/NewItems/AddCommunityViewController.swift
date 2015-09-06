@@ -48,6 +48,9 @@ final class AddCommunityViewController: BaseAddItemViewController {
     
     //MARK: - Actions -
     override func didTapPost(sender: AnyObject) {
+        if view.userInteractionEnabled == false {
+            return
+        }
         let validationErrors : Array<NSError> = self.formValidationErrors() as! Array<NSError>
         if (validationErrors.count > 0){
             self.showFormValidationError(validationErrors.first)
@@ -61,10 +64,15 @@ final class AddCommunityViewController: BaseAddItemViewController {
         var community = Community()
         community.name = values[Tags.Title.rawValue] as? String
         community.communityDescription = values[Tags.Description.rawValue] as? String
+        view.userInteractionEnabled = false
         api().createCommunity(community: community).onSuccess{ [weak self] community  in
             Log.debug?.value(community)
             self?.sendUpdateNotification()
             self?.performSegue(AddCommunityViewController.Segue.Close)
+        }.onFailure { error in
+            showError(error.localizedDescription)
+        }.onComplete { [weak self] result in
+            self?.view.userInteractionEnabled = true
         }
     }
 }

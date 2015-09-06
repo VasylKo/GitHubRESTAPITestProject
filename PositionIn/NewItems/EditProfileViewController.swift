@@ -102,6 +102,9 @@ final class EditProfileViewController: BaseAddItemViewController {
 
     //MARK: Actions
     @IBAction override func didTapPost(sender: AnyObject) {
+        if view.userInteractionEnabled == false {
+            return
+        }
         let validationErrors : Array<NSError> = self.formValidationErrors() as! Array<NSError>
         if (validationErrors.count > 0){
             self.showFormValidationError(validationErrors.first)
@@ -114,6 +117,7 @@ final class EditProfileViewController: BaseAddItemViewController {
         
         if  let userProfile = userProfile,
             let avatarUpload = uploadAssets(values[Tags.Photo.rawValue]) {
+                view.userInteractionEnabled = false
                 userProfile.firstName = values[Tags.FirstName.rawValue] as? String
                 userProfile.lastName = values[Tags.LastName.rawValue] as? String
                 userProfile.phone = values[Tags.Phone.rawValue] as? String
@@ -130,6 +134,10 @@ final class EditProfileViewController: BaseAddItemViewController {
                     )
                     self?.sendUpdateNotification()
                     self?.performSegue(EditProfileViewController.Segue.Close)
+                }.onFailure { error in
+                    showError(error.localizedDescription)
+                }.onComplete { [weak self] result in
+                    self?.view.userInteractionEnabled = true
                 }
         } else {
             showError(NSLocalizedString("Failed to fetch user data", comment: "Edit profile: Prefetch failure"))

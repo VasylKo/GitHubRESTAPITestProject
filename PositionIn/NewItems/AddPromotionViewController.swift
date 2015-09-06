@@ -98,6 +98,9 @@ final class AddPromotionViewController: BaseAddItemViewController {
     }
     
     override func didTapPost(sender: AnyObject) {
+        if view.userInteractionEnabled == false {
+            return
+        }
         let validationErrors : Array<NSError> = self.formValidationErrors() as! Array<NSError>
         if (validationErrors.count > 0){
             self.showFormValidationError(validationErrors.first)
@@ -121,7 +124,7 @@ final class AddPromotionViewController: BaseAddItemViewController {
         
         if  let imageUpload = uploadAssets(values[Tags.Photo.rawValue]),
             let getLocation = locationFromValue(values[Tags.Location.rawValue]) {
-            
+                view.userInteractionEnabled = false
                 getLocation.zip(getShop).zip(imageUpload).flatMap {
                     (info, urls: [NSURL]) -> Future<Promotion, NSError> in
                     let (location: Location, shop: CRUDObjectId) = info
@@ -148,7 +151,11 @@ final class AddPromotionViewController: BaseAddItemViewController {
                         Log.debug?.value(promotion)
                         self?.sendUpdateNotification()
                         self?.performSegue(AddPromotionViewController.Segue.Close)
-                    }
+                }.onFailure { error in
+                    showError(error.localizedDescription)
+                }.onComplete { [weak self] result in
+                    self?.view.userInteractionEnabled = true
+                }
                 
         }
         
