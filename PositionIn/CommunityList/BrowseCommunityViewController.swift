@@ -156,14 +156,29 @@ extension BrowseCommunityViewController {
         
         func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
             tableView.deselectRowAtIndexPath(indexPath, animated: false)
-            
+            let model = self.tableView(tableView, modelForIndexPath: indexPath) as? BrowseCommunityTableViewCellModel
+            let communityId: CRUDObjectId = map(model) { $0.objectId} ?? CRUDObjectInvalidId
+            actionConsumer?.executeAction(.Browse, community: communityId)
         }
     }
 }
 
 extension BrowseCommunityViewController: BrowseCommunityActionConsumer {
     func executeAction(action: BrowseCommunityViewController.Action, community: CRUDObjectId) {
-        
+        switch action {
+        case .Browse:
+            let controller = Storyboards.Main.instantiateCommunityViewController()
+            controller.objectId = community
+            navigationController?.pushViewController(controller, animated: true)
+        case .Join:
+            break
+        case .Post:
+            break
+        case .Invite:
+            break
+        case .Edit:
+            break
+        }
     }
    
 }

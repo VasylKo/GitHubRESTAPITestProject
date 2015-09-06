@@ -71,8 +71,9 @@ struct SearchFilter: Mappable {
         categories <- (map["categories"], ListTransform(itemTransform: EnumTransform()))
         users <- (map["users"], ListTransform(itemTransform: CRUDObjectIdTransform()))
         communities <- (map["communities"], ListTransform(itemTransform: CRUDObjectIdTransform()))
-        lat <- map["lat"]
-        lon <- map["lon"]
+        //TODO: enable location in filter
+//        lat <- map["lat"]
+//        lon <- map["lon"]
         
     }
     

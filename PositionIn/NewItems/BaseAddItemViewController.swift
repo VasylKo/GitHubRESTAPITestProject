@@ -26,6 +26,8 @@ class BaseAddItemViewController: XLFormViewController {
     
     //MARK: - Defaults -
     
+    var preselectedCommunity: CRUDObjectId?
+    
     var maximumSelectedImages: Int = 1
     
     var defaultLocation: CLLocation {
