@@ -44,7 +44,7 @@ class CommunityFeedViewController: BesideMenuViewController, BrowseActionProduce
             ProfileStatsCellModel(countPosts: 0, countFollowers: 0, countFollowing: 0)
         ]
         dataSource.items[Sections.Feed.rawValue] = [
-            BrowseListCellModel(objectId: community.objectId, actionConsumer: self)
+            BrowseListCellModel(objectId: community.objectId, actionConsumer: self, filterType: .Community)
         ]
         tableView.reloadData()
         actionConsumer?.browseControllerDidChangeContent(self)

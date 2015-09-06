@@ -17,10 +17,13 @@ final class BrowseListTableViewCell: TableViewCell, TableViewChildViewController
         actionConsumer = m!.actionConsumer
         listController.actionConsumer = self
         var filter = listController.filter
-        filter.users = [ m!.objectId ]
+        switch m!.filterType {
+        case .User:
+            filter.users = [ m!.objectId ]
+        case .Community:
+            filter.communities = [ m!.objectId ]
+        }        
         listController.filter = filter
-        
-
     }
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
@@ -78,5 +81,17 @@ extension BrowseListTableViewCell: BrowseActionConsumer {
 
 public struct BrowseListCellModel: ProfileCellModel {
     let objectId: CRUDObjectId
+    let filterType: FilterType
     unowned var actionConsumer: BrowseActionConsumer
+    
+    init(objectId: CRUDObjectId, actionConsumer: BrowseActionConsumer, filterType: FilterType = .User) {
+        self.objectId = objectId
+        self.actionConsumer = actionConsumer
+        self.filterType = filterType
+    }
+    
+    enum FilterType {
+        case User
+        case Community
+    }
 }
