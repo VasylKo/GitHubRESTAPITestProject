@@ -145,6 +145,53 @@
             </objects>
             <point key="canvasLocation" x="119" y="1024"/>
         </scene>
+        <!--New Community-->
+        <scene sceneID="AJe-P3-Rdr">
+            <objects>
+                <viewController storyboardIdentifier="EditCommunityViewController" id="Obq-pU-XMH" userLabel="New Community" customClass="EditCommunityViewController" customModule="PositionIn" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Kwt-fj-KXF"/>
+                        <viewControllerLayoutGuide type="bottom" id="YAo-nd-Ia5"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="pt2-3d-Zni">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="ca2-gS-a5u">
+                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="ca2-gS-a5u" secondAttribute="bottom" id="J6j-9S-n0D"/>
+                            <constraint firstItem="ca2-gS-a5u" firstAttribute="top" secondItem="Kwt-fj-KXF" secondAttribute="bottom" id="bRR-uT-GgN"/>
+                            <constraint firstItem="ca2-gS-a5u" firstAttribute="leading" secondItem="pt2-3d-Zni" secondAttribute="leading" id="odn-nd-fa6"/>
+                            <constraint firstAttribute="trailing" secondItem="ca2-gS-a5u" secondAttribute="trailing" id="xKq-T1-FaQ"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="New Post" id="qUm-bV-OoW">
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="RtU-sC-tfp">
+                            <connections>
+                                <segue destination="TRG-Ii-AcV" kind="unwind" identifier="Close" unwindAction="prepareForUnwind:" id="siS-l5-qct"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Post" id="Xrw-f5-fZ3">
+                            <connections>
+                                <action selector="didTapPost:" destination="Obq-pU-XMH" id="RH3-tf-Az1"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outlet property="tableView" destination="ca2-gS-a5u" id="0d2-6y-KD2"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ogv-dl-oDN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="TRG-Ii-AcV" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="-519" y="1024"/>
+        </scene>
         <!--Edit Profile-->
         <scene sceneID="d02-5t-Dy8">
             <objects>

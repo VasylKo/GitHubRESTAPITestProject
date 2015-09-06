@@ -121,6 +121,7 @@
 		E6681A2F1B67A2DB003096D6 /* XMPPAuthProcess.m in Sources */ = {isa = PBXBuildFile; fileRef = E6681A2D1B67A2DB003096D6 /* XMPPAuthProcess.m */; };
 		E66945821B6E279E00332134 /* XMPPRegisterProcess.h in Headers */ = {isa = PBXBuildFile; fileRef = E66945801B6E279E00332134 /* XMPPRegisterProcess.h */; };
 		E66945831B6E279E00332134 /* XMPPRegisterProcess.m in Sources */ = {isa = PBXBuildFile; fileRef = E66945811B6E279E00332134 /* XMPPRegisterProcess.m */; };
+		E66A3E181B9CC90C005FA33B /* EditCommunityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66A3E171B9CC90C005FA33B /* EditCommunityViewController.swift */; };
 		E6829B041B5E6CF800FB1E1D /* RoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6829B031B5E6CF800FB1E1D /* RoundButton.swift */; };
 		E6846DB81B6D9B1400009411 /* XMPPIQ+XEP_0060.h in Headers */ = {isa = PBXBuildFile; fileRef = E689EFDF1B6A8A1000597587 /* XMPPIQ+XEP_0060.h */; };
 		E6846DB91B6D9B1400009411 /* XMPPIQ+XEP_0060.m in Sources */ = {isa = PBXBuildFile; fileRef = E689EFE01B6A8A1000597587 /* XMPPIQ+XEP_0060.m */; settings = {COMPILER_FLAGS = "-w"; }; };
@@ -483,6 +484,7 @@
 		E6681A301B67A66B003096D6 /* XMPPProcess+Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "XMPPProcess+Private.h"; sourceTree = "<group>"; };
 		E66945801B6E279E00332134 /* XMPPRegisterProcess.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPRegisterProcess.h; sourceTree = "<group>"; };
 		E66945811B6E279E00332134 /* XMPPRegisterProcess.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPRegisterProcess.m; sourceTree = "<group>"; };
+		E66A3E171B9CC90C005FA33B /* EditCommunityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditCommunityViewController.swift; sourceTree = "<group>"; };
 		E6736ADB1B4E56DD0003580D /* Version.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Version.h; sourceTree = "<group>"; };
 		E6736ADD1B4E56EB0003580D /* TODOwarn.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = TODOwarn.sh; sourceTree = "<group>"; };
 		E6736ADE1B4E56EB0003580D /* Version.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = Version.sh; sourceTree = "<group>"; };
@@ -1266,6 +1268,7 @@
 				E66115A61B73AE0F003DB5B3 /* AddPromotionViewController.swift */,
 				E66115A71B73AE0F003DB5B3 /* AddEventViewController.swift */,
 				E64D00691B7CA2DC007693E0 /* AddCommunityViewController.swift */,
+				E66A3E171B9CC90C005FA33B /* EditCommunityViewController.swift */,
 				E63201731B9872C60066C62E /* EditProfileViewController.swift */,
 				E61B20EC1B81286E005EAB2C /* UploadPhotoCell.swift */,
 			);
@@ -2877,6 +2880,7 @@
 				E6C5CE191B83A21500265955 /* LocationController.swift in Sources */,
 				E63201651B967A540066C62E /* Notifications.swift in Sources */,
 				E62B16FB1B5CDF0100D446BC /* MessagesListViewController.swift in Sources */,
+				E66A3E181B9CC90C005FA33B /* EditCommunityViewController.swift in Sources */,
 				E64D006A1B7CA2DC007693E0 /* AddCommunityViewController.swift in Sources */,
 				E6A10AC61B74232100047D74 /* LocationSelectorViewController.swift in Sources */,
 				E62B16F81B5C6BBF00D446BC /* AvatarView.swift in Sources */,

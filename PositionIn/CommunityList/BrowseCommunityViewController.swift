@@ -209,6 +209,10 @@ extension BrowseCommunityViewController: BrowseCommunityActionConsumer {
         case .Invite:
             break
         case .Edit:
+            let controller = Storyboards.NewItems.instantiateEditCommunityViewController()
+            controller.existingCommunityId = community
+            navigationController?.pushViewController(controller, animated: true)
+            self.subscribeForContentUpdates(controller)
             break
         case .None:
             break
