@@ -124,6 +124,7 @@
 		E66945821B6E279E00332134 /* XMPPRegisterProcess.h in Headers */ = {isa = PBXBuildFile; fileRef = E66945801B6E279E00332134 /* XMPPRegisterProcess.h */; };
 		E66945831B6E279E00332134 /* XMPPRegisterProcess.m in Sources */ = {isa = PBXBuildFile; fileRef = E66945811B6E279E00332134 /* XMPPRegisterProcess.m */; };
 		E66A3E181B9CC90C005FA33B /* EditCommunityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66A3E171B9CC90C005FA33B /* EditCommunityViewController.swift */; };
+		E66A3E1B1B9CE2D6005FA33B /* OrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66A3E1A1B9CE2D6005FA33B /* OrderViewController.swift */; };
 		E6829B041B5E6CF800FB1E1D /* RoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6829B031B5E6CF800FB1E1D /* RoundButton.swift */; };
 		E6846DB81B6D9B1400009411 /* XMPPIQ+XEP_0060.h in Headers */ = {isa = PBXBuildFile; fileRef = E689EFDF1B6A8A1000597587 /* XMPPIQ+XEP_0060.h */; };
 		E6846DB91B6D9B1400009411 /* XMPPIQ+XEP_0060.m in Sources */ = {isa = PBXBuildFile; fileRef = E689EFE01B6A8A1000597587 /* XMPPIQ+XEP_0060.m */; settings = {COMPILER_FLAGS = "-w"; }; };
@@ -489,6 +490,7 @@
 		E66945801B6E279E00332134 /* XMPPRegisterProcess.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPRegisterProcess.h; sourceTree = "<group>"; };
 		E66945811B6E279E00332134 /* XMPPRegisterProcess.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPRegisterProcess.m; sourceTree = "<group>"; };
 		E66A3E171B9CC90C005FA33B /* EditCommunityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditCommunityViewController.swift; sourceTree = "<group>"; };
+		E66A3E1A1B9CE2D6005FA33B /* OrderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderViewController.swift; sourceTree = "<group>"; };
 		E6736ADB1B4E56DD0003580D /* Version.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Version.h; sourceTree = "<group>"; };
 		E6736ADD1B4E56EB0003580D /* TODOwarn.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = TODOwarn.sh; sourceTree = "<group>"; };
 		E6736ADE1B4E56EB0003580D /* Version.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = Version.sh; sourceTree = "<group>"; };
@@ -1129,6 +1131,7 @@
 				E66115A11B73A175003DB5B3 /* NewItems */,
 				E69420F71B66354E00F34F06 /* ProductDetails */,
 				E6BEF1C21B9C54D800511B46 /* Post */,
+				E66A3E191B9CE2AB005FA33B /* Order */,
 				E689F0751B6B90CA00597587 /* ProductInventory */,
 				E6DA53C01B7D00DB000087A7 /* CommunityList */,
 				E6BEF1EB1B9C9D6400511B46 /* Community */,
@@ -1291,6 +1294,14 @@
 				E66945811B6E279E00332134 /* XMPPRegisterProcess.m */,
 			);
 			path = Processes;
+			sourceTree = "<group>";
+		};
+		E66A3E191B9CE2AB005FA33B /* Order */ = {
+			isa = PBXGroup;
+			children = (
+				E66A3E1A1B9CE2D6005FA33B /* OrderViewController.swift */,
+			);
+			path = Order;
 			sourceTree = "<group>";
 		};
 		E6736ADC1B4E56EB0003580D /* Scripts */ = {
@@ -2876,6 +2887,7 @@
 				E661159D1B73A0CB003DB5B3 /* BrowseMapViewController.swift in Sources */,
 				E6F243701B8B17910033B13C /* DisplayModeViewController.swift in Sources */,
 				E68B52011B873545006B980C /* FeedTableViewCellModel.swift in Sources */,
+				E66A3E1B1B9CE2D6005FA33B /* OrderViewController.swift in Sources */,
 				E64D00651B7C9601007693E0 /* BaseAddItemViewController.swift in Sources */,
 				E63201781B9927900066C62E /* UIImageView+URL.swift in Sources */,
 				E65E872C1B611BA200AE444D /* Post.swift in Sources */,

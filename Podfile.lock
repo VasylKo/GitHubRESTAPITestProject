@@ -1,6 +1,36 @@
 PODS:
   - Alamofire (1.3.1)
   - Box (1.2.2)
+  - Braintree (3.9.3):
+    - Braintree/API (= 3.9.3)
+    - Braintree/Coinbase (= 3.9.3)
+    - Braintree/Drop-In (= 3.9.3)
+    - Braintree/Payments (= 3.9.3)
+    - Braintree/PayPal (= 3.9.3)
+    - Braintree/UI (= 3.9.3)
+    - Braintree/Venmo (= 3.9.3)
+  - Braintree/API (3.9.3)
+  - Braintree/Coinbase (3.9.3):
+    - Braintree/API
+  - Braintree/Drop-In (3.9.3):
+    - Braintree/API
+    - Braintree/Coinbase
+    - Braintree/Payments
+    - Braintree/PayPal
+    - Braintree/UI
+    - Braintree/Venmo
+  - Braintree/Payments (3.9.3):
+    - Braintree/API
+    - Braintree/Coinbase
+    - Braintree/PayPal
+    - Braintree/Venmo
+  - Braintree/PayPal (3.9.3):
+    - Braintree/API
+    - Braintree/UI
+  - Braintree/UI (3.9.3):
+    - Braintree/API
+  - Braintree/Venmo (3.9.3):
+    - Braintree/API
   - BrightFutures (2.0.1):
     - Result (~> 0.4.3)
   - GoogleMaps (1.10.2)
@@ -15,13 +45,13 @@ PODS:
     - Alamofire (~> 1.3.1)
     - BrightFutures (~> 2.0.1)
     - ObjectMapper (= 0.12)
-  - ResponseDetective (0.2)
   - Result (0.4.4):
     - Box (~> 1.2)
   - UIImageEffects (0.0.1)
   - XLForm (3.0.2)
 
 DEPENDENCIES:
+  - Braintree
   - GoogleMaps
   - HanekeSwift
   - HMSegmentedControl
@@ -30,7 +60,6 @@ DEPENDENCIES:
   - KeychainAccess
   - KYDrawerController
   - PosInCore (from `PosInCore`)
-  - ResponseDetective
   - UIImageEffects
   - XLForm (~> 3.0.2)
 
@@ -41,6 +70,7 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   Alamofire: e4ab637e3195b645c814b87a652373439e59f2a4
   Box: a92e8aa4c099e6bc0733829665caf9e668ef53b8
+  Braintree: 996027dcc8633569f2405bc57dca11f367050c60
   BrightFutures: 27704272a695324b42538a2d85b20ac3f24228bd
   GoogleMaps: 5c92e599b07b0a2a9b367c5dd128edc629bddfea
   HanekeSwift: 50d37bfbc4432edc649167e538c259feccb4a2bb
@@ -51,7 +81,6 @@ SPEC CHECKSUMS:
   KYDrawerController: 114902057e9b9a2a0aa951e976151b285afa9c3e
   ObjectMapper: ef4a369cbab75546029ceb7e8155772b5f8e8841
   PosInCore: 965c6ba34512702a24e86c7f0411a3b634e29204
-  ResponseDetective: c85f4b451f151180cced73c1420506c7aff7f63e
   Result: b44f6bc8762bbffaf2c5df58f2c7d12c3496ced8
   UIImageEffects: 37b99fa461e4965f332ca82e92f2c22a1075ee84
   XLForm: 7817ce29f3f259186e837bb7309ac7e5b7e9b883
