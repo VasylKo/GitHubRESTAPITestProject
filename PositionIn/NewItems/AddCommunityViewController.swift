@@ -51,7 +51,7 @@ final class AddCommunityViewController: BaseAddItemViewController {
         descriptionSection.addFormRow(descriptionRow)
         
         let privateRow = XLFormRowDescriptor(tag: Tags.Private.rawValue, rowType: XLFormRowDescriptorTypeBooleanSwitch, title: NSLocalizedString("Private", comment: "New community: private"))
-        privateRow.value = NSNumber(bool: true)
+        privateRow.value = NSNumber(bool: false)
         descriptionSection.addFormRow(privateRow)
 
         
