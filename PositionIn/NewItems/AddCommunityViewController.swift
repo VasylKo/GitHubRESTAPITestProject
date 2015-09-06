@@ -30,7 +30,7 @@ final class AddCommunityViewController: BaseAddItemViewController {
     }
     
     func initializeForm() {
-        let form = XLFormDescriptor(title: NSLocalizedString("New Group", comment: "New community: form caption"))
+        let form = XLFormDescriptor(title: NSLocalizedString("New Community", comment: "New community: form caption"))
         
         // Description section
         let descriptionSection = XLFormSectionDescriptor.formSection()
