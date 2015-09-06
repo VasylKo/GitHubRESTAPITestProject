@@ -198,6 +198,10 @@ struct APIService {
         return updateObject(endpoint, object: object)
     }
     
+    func joinCommunity(communityId: CRUDObjectId) -> Future<Void, NSError> {
+        let endpoint = Community.membersEndpoint(communityId)
+        return updateCommand(endpoint)
+    }
     
     //MARK: - Search -
     
@@ -254,6 +258,19 @@ struct APIService {
             })
         }
     }
+
+    
+    private func updateCommand(endpoint: String, method: Alamofire.Method = .POST) -> Future<Void, NSError> {
+        typealias CRUDResultType = (Alamofire.Request, Future<Void, NSError>)
+        
+        return session().flatMap {
+            (token: AuthResponse.Token) -> Future<Void, NSError> in
+            let request = self.updateRequest(token, endpoint: endpoint, method: method, params: nil)
+            let (_, future): CRUDResultType = self.dataProvider.jsonRequest(request, map: self.emptyResponseMapping(), validation: self.statusCodeValidation(statusCode: [201]))
+            return self.handleFailure(future)
+        }
+    }
+
     
     private func updateObject<C: CRUDObject>(endpoint: String, object: C) -> Future<Void, NSError> {
         typealias CRUDResultType = (Alamofire.Request, Future<Void, NSError>)

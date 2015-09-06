@@ -17,24 +17,22 @@ struct Community: CRUDObject {
     var isPrivate: Bool = false
     
     var shops: [ObjectInfo]?
-    /*
-    "members": {
-    "data": [
-				{
-    "id": <guid>,
-    "name": <string>,
-    "avatar": <string>
-				}
-				],
-    "count": <number>
-    },
-    */
+
     var role: Role = .Unknown
     var members: CollectionResponse<UserInfo>?
     var location: Location?
     
     var defaultShopId: CRUDObjectId  {
         return shops?.first?.objectId ?? CRUDObjectInvalidId
+    }
+    
+    var canView: Bool {
+        switch role {
+        case .Unknown, .Invite :
+            return false
+        default:
+            return true
+        }
     }
 
     enum Role: Int, DebugPrintable {
@@ -100,6 +98,10 @@ struct Community: CRUDObject {
         return UserProfile.endpoint().stringByAppendingPathComponent("\(userId)/communities")
     }
     
+    static func membersEndpoint(communityId: CRUDObjectId) -> String {
+        return Community.communityEndpoint(communityId).stringByAppendingPathComponent("/members")
+        
+    }
     
     var description: String {
         return "<\(self.dynamicType):\(objectId)>"

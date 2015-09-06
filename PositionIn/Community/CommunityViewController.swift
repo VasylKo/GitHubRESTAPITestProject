@@ -1,5 +1,5 @@
 //
-//  UserProfileViewController.swift
+//  CommunityViewController.swift
 //  PositionIn
 //
 //  Created by Alexandr Goncharov on 24/08/15.

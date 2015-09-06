@@ -23,6 +23,7 @@ protocol BrowseCommunityActionProvider {
 final class BrowseCommunityViewController: BesideMenuViewController {
     
     enum Action: Int {
+        case None
         case Browse
         case Join
         case Post
@@ -156,9 +157,9 @@ extension BrowseCommunityViewController {
         
         func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
             tableView.deselectRowAtIndexPath(indexPath, animated: false)
-            let model = self.tableView(tableView, modelForIndexPath: indexPath) as? BrowseCommunityTableViewCellModel
-            let communityId: CRUDObjectId = map(model) { $0.objectId} ?? CRUDObjectInvalidId
-            actionConsumer?.executeAction(.Browse, community: communityId)
+            if let model = self.tableView(tableView, modelForIndexPath: indexPath) as? BrowseCommunityTableViewCellModel {
+                actionConsumer?.executeAction(model.tapAction, community: model.objectId)                
+            }            
         }
     }
 }
@@ -166,17 +167,25 @@ extension BrowseCommunityViewController {
 extension BrowseCommunityViewController: BrowseCommunityActionConsumer {
     func executeAction(action: BrowseCommunityViewController.Action, community: CRUDObjectId) {
         switch action {
+        case .Join:
+            api().joinCommunity(community).onSuccess { [weak self] _ in
+                self?.reloadData()
+            }
+            break
         case .Browse:
             let controller = Storyboards.Main.instantiateCommunityViewController()
             controller.objectId = community
             navigationController?.pushViewController(controller, animated: true)
-        case .Join:
-            break
         case .Post:
+            let controller = Storyboards.Main.instantiateCommunityViewController()
+            controller.objectId = community
+            navigationController?.pushViewController(controller, animated: true)
             break
         case .Invite:
             break
         case .Edit:
+            break
+        case .None:
             break
         }
     }

@@ -10,8 +10,10 @@ import PosInCore
 
 class BrowseCommunityTableViewCellModel: TableViewCellModel {
     let objectId: CRUDObjectId
-    init(objectId: CRUDObjectId) {
+    let tapAction: BrowseCommunityViewController.Action
+    init(objectId: CRUDObjectId, tapAction: BrowseCommunityViewController.Action) {
         self.objectId = objectId
+        self.tapAction = tapAction
     }
 }
 
@@ -19,27 +21,27 @@ final class BrowseCommunityHeaderCellModel: BrowseCommunityTableViewCellModel {
     let title: String
     let url: NSURL?
     
-    init(objectId: CRUDObjectId, title: String, url: NSURL?) {
+    init(objectId: CRUDObjectId, tapAction: BrowseCommunityViewController.Action, title: String, url: NSURL?) {
         self.title = title
         self.url = url
-        super.init(objectId: objectId)
+        super.init(objectId: objectId, tapAction: tapAction)
     }
 }
 
 final class BrowseCommunityInfoCellModel: BrowseCommunityTableViewCellModel {
     let membersCount: Int?
     let text: String?
-    init(objectId: CRUDObjectId, members: Int?, text: String?) {
+    init(objectId: CRUDObjectId, tapAction: BrowseCommunityViewController.Action, members: Int?, text: String?) {
         self.text = text
         membersCount = members
-        super.init(objectId: objectId)
+        super.init(objectId: objectId, tapAction: tapAction)
     }
 }
 
 final class BrowseCommunityActionCellModel: BrowseCommunityTableViewCellModel {
     let actions: [BrowseCommunityViewController.Action]
-    init(objectId: CRUDObjectId, actions: [BrowseCommunityViewController.Action]) {
+    init(objectId: CRUDObjectId, tapAction: BrowseCommunityViewController.Action, actions: [BrowseCommunityViewController.Action]) {
         self.actions = actions
-        super.init(objectId: objectId)
+        super.init(objectId: objectId, tapAction: tapAction)
     }
 }

@@ -1,5 +1,5 @@
 //
-//  BaseProfileViewController.swift
+//  CommunityFeedViewController.swift
 //  PositionIn
 //
 //  Created by Alexandr Goncharov on 14/08/15.
