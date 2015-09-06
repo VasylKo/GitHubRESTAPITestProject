@@ -14,7 +14,7 @@ final class CommunityHeaderCell: TableViewCell {
         let m = model as? BrowseCommunityHeaderCellModel
         assert(m != nil, "Invalid model passed")
         captionLabel.text = m!.title
-        contentImageView.setImageFromURL(m!.url, placeholder: UIImage(named: ""))
+        contentImageView.setImageFromURL(m!.url, placeholder: UIImage(named: "communityPlaceholder"))
     }
     
     override func prepareForReuse() {
