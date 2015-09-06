@@ -26,10 +26,26 @@ final class EventDetailsViewController: UIViewController {
     
     
     private func reloadData() {
-        let page = APIService.Page()
-        api().getEvent(objectId!).onSuccess { [weak self] event in
-            self?.event = event
+        if let objectId = objectId {
+            api().getEvent(objectId).onSuccess { [weak self] event in
+                self?.didReceiveEventDetails(event)
+            }
         }
+    }
+    
+    private func didReceiveEventDetails(event: Event) {
+        headerLabel.text = event.name
+        infoLabel.text = event.text
+        let eventDetailsFormat = NSLocalizedString("%d People are attending", comment: "Event details: details format")
+        detailsLabel.text = String(format: eventDetailsFormat, event.participants ?? 0)
+        
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
+        
+        let startDate = dateFormatter.stringFromDate(event.startDate ?? NSDate())
+        let endDate = dateFormatter.stringFromDate(event.endDate ?? NSDate())
+        priceLabel.text = "\(startDate) - \(endDate)"
+        eventImageView.setImageFromURL(event.photos?.first?.url, placeholder: UIImage(named: "eventDetailsPlaceholder"))
         
     }
     
@@ -57,23 +73,6 @@ final class EventDetailsViewController: UIViewController {
             ],
         ]
         
-    }
-    
-    private var event:  Event? {
-        didSet{
-            headerLabel.text = event?.name
-            detailsLabel.text = event?.text
-            
-            let dateFormatter = NSDateFormatter()
-            dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
-            
-            let startDate = dateFormatter.stringFromDate(event?.startDate ?? NSDate())
-            let endDate = dateFormatter.stringFromDate(event?.endDate ?? NSDate())
-            priceLabel.text = "\(startDate) - \(endDate)"
-            if let imgURL = event?.photos?.first?.url {
-                eventImageView.hnk_setImageFromURL(imgURL)
-            }
-        }
     }
     
     var objectId: CRUDObjectId?

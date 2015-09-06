@@ -38,7 +38,7 @@ class CompactFeedTableCellModel: FeedTableCellModel {
 }
 
 
-class ComapctBadgeFeedTableCellModel : CompactFeedTableCellModel {
+final class ComapctBadgeFeedTableCellModel : CompactFeedTableCellModel {
     let badge: String?
     init(itemType: FeedItem.ItemType, objectID: CRUDObjectId, title: String?, details: String?, info: String?, imageURL url: NSURL?, badge: String?, data: Any?) {
         self.badge = badge

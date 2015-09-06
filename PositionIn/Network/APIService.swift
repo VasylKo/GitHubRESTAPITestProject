@@ -78,6 +78,11 @@ struct APIService {
         return getObjectsCollection(endpoint, params: params)
     }
     
+    func getPost(postId: CRUDObjectId) -> Future<Post, NSError> {
+        let endpoint = Post.endpoint(postId)
+        return getObject(endpoint)
+    }
+    
     func createUserPost(post object: Post) -> Future<Post, NSError> {
         return sessionController.currentUserId().flatMap {
             (userId: CRUDObjectId) -> Future<Post, NSError> in

@@ -56,6 +56,10 @@ struct Storyboards {
             return self.storyboard.instantiateViewControllerWithIdentifier("PromotionDetailsViewControllerId") as! PromotionDetailsViewController
         }
 
+        static func instantiatePostViewController() -> PostViewController! {
+            return self.storyboard.instantiateViewControllerWithIdentifier("PostViewController") as! PostViewController
+        }
+
         static func instantiateMapViewController() -> BrowseViewController! {
             return self.storyboard.instantiateViewControllerWithIdentifier("MapViewController") as! BrowseViewController
         }
@@ -456,6 +460,8 @@ extension ProductInventoryViewController {
 
 //MARK: - SellerProfileViewController
 
+//MARK: - PostViewController
+
 //MARK: - BrowseViewController
 extension UIStoryboardSegue {
     func selection() -> BrowseViewController.Segue? {
@@ -472,6 +478,7 @@ extension BrowseViewController {
         case ShowProductDetails = "ShowProductDetails"
         case ShowEventDetails = "ShowEventDetails"
         case ShowPromotionDetails = "ShowPromotionDetails"
+        case ShowPost = "ShowPost"
 
         var kind: SegueKind? {
             switch (self) {
@@ -480,6 +487,8 @@ extension BrowseViewController {
             case ShowEventDetails:
                 return SegueKind(rawValue: "show")
             case ShowPromotionDetails:
+                return SegueKind(rawValue: "show")
+            case ShowPost:
                 return SegueKind(rawValue: "show")
             default:
                 preconditionFailure("Invalid value")
@@ -495,6 +504,8 @@ extension BrowseViewController {
                 return EventDetailsViewController.self
             case ShowPromotionDetails:
                 return PromotionDetailsViewController.self
+            case ShowPost:
+                return PostViewController.self
             default:
                 assertionFailure("Unknown destination")
                 return nil

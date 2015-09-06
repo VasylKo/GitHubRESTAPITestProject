@@ -9,7 +9,7 @@
 import CleanroomLogger
 import ObjectMapper
 
-struct ObjectInfo: Mappable, Printable {
+class ObjectInfo: Mappable, Printable {
     var objectId: CRUDObjectId = CRUDObjectInvalidId
     var title: String?
 
@@ -19,7 +19,7 @@ struct ObjectInfo: Mappable, Printable {
     }
     
     
-    init?(_ map: Map) {
+    required init?(_ map: Map) {
         mapping(map)
         if objectId == CRUDObjectInvalidId {
             Log.error?.message("Error while parsing object")
@@ -29,7 +29,7 @@ struct ObjectInfo: Mappable, Printable {
         }
     }
     
-    mutating func mapping(map: Map) {
+    func mapping(map: Map) {
         objectId <- (map["id"], CRUDObjectIdTransform())
         title <- map["name"]
     }
@@ -39,4 +39,19 @@ struct ObjectInfo: Mappable, Printable {
         return "<\(self.dynamicType):\(objectId),>"
     }
     
+}
+
+
+class UserInfo: ObjectInfo {
+    var isCommunity: Bool = false
+    var avatar: NSURL?
+    
+    override func mapping(map: Map) {
+        super.mapping(map)
+        avatar <- (map["avatar"], AmazonURLTransform())
+        isCommunity <- map["isCommunity"]
+    }
+    
+    
+
 }

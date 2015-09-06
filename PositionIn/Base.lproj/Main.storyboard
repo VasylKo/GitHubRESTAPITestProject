@@ -169,17 +169,33 @@
             </objects>
             <point key="canvasLocation" x="919" y="1238"/>
         </scene>
-        <!--Community-->
+        <!--Community List View Controller-->
         <scene sceneID="4gx-Nw-hq8">
             <objects>
                 <viewController storyboardIdentifier="CommunityListViewController" id="a7d-7X-88d" customClass="CommunityListViewController" customModule="PositionIn" customModuleProvider="target" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" title="Community" id="IFL-7w-zce">
+                    <navigationItem key="navigationItem" id="IFL-7w-zce">
+                        <nil key="title"/>
+                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="gHl-GL-4FX">
+                            <rect key="frame" x="180" y="7" width="240" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <segments>
+                                <segment title="My Groups"/>
+                                <segment title="Explore"/>
+                            </segments>
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="browseModeSegmentChanged:" destination="a7d-7X-88d" eventType="valueChanged" id="O5z-u2-baa"/>
+                            </connections>
+                        </segmentedControl>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="UqC-Xw-9tt">
                             <connections>
                                 <action selector="addCommunityTouched:" destination="a7d-7X-88d" id="xbB-Jo-920"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="browseModeSegmentedControl" destination="gHl-GL-4FX" id="5hf-cn-6sN"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o8N-bY-vrv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -630,7 +646,17 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="feL-Ea-Em3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2975" y="699"/>
+            <point key="canvasLocation" x="2983" y="683"/>
+        </scene>
+        <!--Post-->
+        <scene sceneID="jbP-64-jST">
+            <objects>
+                <viewController storyboardIdentifier="PostViewController" id="Mgd-dn-9Dr" customClass="PostViewController" customModule="PositionIn" customModuleProvider="target" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" title="Post" id="uLq-Z3-dHY"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CyR-kB-3vV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2687" y="1420"/>
         </scene>
         <!--Browse View Controller-->
         <scene sceneID="wfN-Bx-Jle">
@@ -643,6 +669,7 @@
                         <segue destination="S6u-6D-z8V" kind="show" identifier="ShowProductDetails" id="UGm-BP-OPQ"/>
                         <segue destination="RQs-Yx-TSv" kind="show" identifier="ShowEventDetails" id="B0K-ir-QiG"/>
                         <segue destination="tr4-Tq-w9T" kind="show" identifier="ShowPromotionDetails" id="iJW-SS-i8n"/>
+                        <segue destination="Mgd-dn-9Dr" kind="show" identifier="ShowPost" id="kB5-ah-mJe"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="spd-ov-gak" userLabel="First Responder" sceneMemberID="firstResponder"/>
