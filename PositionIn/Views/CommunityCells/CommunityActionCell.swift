@@ -25,6 +25,8 @@ final class CommunityActionCell: TableViewCell {
             let button = UIButton()
             button.tag = action.rawValue
             button.setTitle(action.displayText(), forState: .Normal)
+            button.setTitleColor(UIScheme.communityActionColor, forState: .Normal)
+            button.titleLabel?.font = UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline)
             button.addTarget(self, action: "executeAction:", forControlEvents: UIControlEvents.TouchUpInside)
             self.contentView.addSubview(button)
             return button
@@ -50,6 +52,7 @@ final class CommunityActionCell: TableViewCell {
         let height = frame.height
         for (idx, btn) in enumerate(actionButtons) {
             btn.frame = CGRect(x: width * CGFloat(idx), y: 0, width: width, height: height)
+            Log.debug?.value(btn)
         }
 
     }

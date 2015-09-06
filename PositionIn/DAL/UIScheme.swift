@@ -19,4 +19,7 @@ struct UIScheme {
     static let tabbarBackgroundColor = UIColor(red: 240/255.0, green: 240/255.0, blue: 240/255.0, alpha: 1.0)
     
     static let searchbarActiveColor = UIColor(red: 0/255.0, green: 73/255.0, blue: 168/255.0, alpha: 1.0)
+    
+    static let communityActionColor = UIColor(red: 35/255.0, green: 113/255.0, blue: 213/255.0, alpha: 1.0)
+
 }
