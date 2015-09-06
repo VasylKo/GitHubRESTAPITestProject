@@ -72,8 +72,16 @@ struct Storyboards {
             return self.storyboard.instantiateViewControllerWithIdentifier("ProfileListViewController") as! ProfileListViewController
         }
 
+        static func instantiateCommunityFeedViewController() -> CommunityFeedViewController! {
+            return self.storyboard.instantiateViewControllerWithIdentifier("CommunityFeedViewController") as! CommunityFeedViewController
+        }
+
         static func instantiateSettingsViewController() -> SettingsViewController! {
             return self.storyboard.instantiateViewControllerWithIdentifier("SettingsViewController") as! SettingsViewController
+        }
+
+        static func instantiateCommunityViewController() -> CommunityViewController! {
+            return self.storyboard.instantiateViewControllerWithIdentifier("CommunityViewController") as! CommunityViewController
         }
     }
 
@@ -522,7 +530,11 @@ extension BrowseViewController {
 
 //MARK: - ProfileListViewController
 
+//MARK: - CommunityFeedViewController
+
 //MARK: - SettingsViewController
+
+//MARK: - CommunityViewController
 
 //MARK: - LoginSignupViewController
 extension UIStoryboardSegue {

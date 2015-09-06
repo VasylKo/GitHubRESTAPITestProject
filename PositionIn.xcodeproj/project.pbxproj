@@ -293,6 +293,8 @@
 		E6BEF1E71B9C83F200511B46 /* PositionIn.CommunityHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6BEF1E11B9C83F200511B46 /* PositionIn.CommunityHeaderCell.xib */; };
 		E6BEF1E81B9C83F200511B46 /* PositionIn.CommunityInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6BEF1E21B9C83F200511B46 /* PositionIn.CommunityInfoCell.xib */; };
 		E6BEF1EA1B9C902400511B46 /* BrowseCommunityTableViewCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6BEF1E91B9C902400511B46 /* BrowseCommunityTableViewCellModel.swift */; };
+		E6BEF1EE1B9C9D6400511B46 /* CommunityFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6BEF1EC1B9C9D6400511B46 /* CommunityFeedViewController.swift */; };
+		E6BEF1EF1B9C9D6400511B46 /* CommunityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6BEF1ED1B9C9D6400511B46 /* CommunityViewController.swift */; };
 		E6C5CE191B83A21500265955 /* LocationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C5CE181B83A21500265955 /* LocationController.swift */; };
 		E6C5CE1B1B83A24500265955 /* UIScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C5CE1A1B83A24500265955 /* UIScheme.swift */; };
 		E6C5CE1D1B83A28C00265955 /* SessionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C5CE1C1B83A28C00265955 /* SessionController.swift */; };
@@ -301,7 +303,6 @@
 		E6D4D5B51B6F8B9F003134CB /* PositionIn.SearchBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6D4D5B31B6F8B9F003134CB /* PositionIn.SearchBar.xib */; };
 		E6D4D5B61B6F8B9F003134CB /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D4D5B41B6F8B9F003134CB /* SearchBar.swift */; };
 		E6D4D5B81B6FA7A7003134CB /* SearchTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D4D5B71B6FA7A7003134CB /* SearchTransition.swift */; };
-		E6DA53BD1B7CFCCA000087A7 /* Mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6DA53BC1B7CFCCA000087A7 /* Mock.swift */; };
 		E6DA53C71B7D00DB000087A7 /* BrowseCommunityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6DA53C21B7D00DB000087A7 /* BrowseCommunityViewController.swift */; };
 		E6DA53C81B7D00DB000087A7 /* PositionIn.BrowseCommunityViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6DA53C31B7D00DB000087A7 /* PositionIn.BrowseCommunityViewController.xib */; };
 		E6DADB9E1B8C5799009A5694 /* SearchFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6DADB9D1B8C5799009A5694 /* SearchFilter.swift */; };
@@ -835,6 +836,8 @@
 		E6BEF1E11B9C83F200511B46 /* PositionIn.CommunityHeaderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.CommunityHeaderCell.xib; sourceTree = "<group>"; };
 		E6BEF1E21B9C83F200511B46 /* PositionIn.CommunityInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.CommunityInfoCell.xib; sourceTree = "<group>"; };
 		E6BEF1E91B9C902400511B46 /* BrowseCommunityTableViewCellModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowseCommunityTableViewCellModel.swift; sourceTree = "<group>"; };
+		E6BEF1EC1B9C9D6400511B46 /* CommunityFeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommunityFeedViewController.swift; sourceTree = "<group>"; };
+		E6BEF1ED1B9C9D6400511B46 /* CommunityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommunityViewController.swift; sourceTree = "<group>"; };
 		E6C5CE181B83A21500265955 /* LocationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationController.swift; sourceTree = "<group>"; };
 		E6C5CE1A1B83A24500265955 /* UIScheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIScheme.swift; sourceTree = "<group>"; };
 		E6C5CE1C1B83A28C00265955 /* SessionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionController.swift; sourceTree = "<group>"; };
@@ -845,7 +848,6 @@
 		E6D4D5B71B6FA7A7003134CB /* SearchTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTransition.swift; sourceTree = "<group>"; };
 		E6D6E1911B83333F0087D489 /* LocationProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationProvider.swift; sourceTree = "<group>"; };
 		E6D7C2911B5D546C004F3AA9 /* NibView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NibView.swift; sourceTree = "<group>"; };
-		E6DA53BC1B7CFCCA000087A7 /* Mock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mock.swift; sourceTree = "<group>"; };
 		E6DA53C21B7D00DB000087A7 /* BrowseCommunityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowseCommunityViewController.swift; sourceTree = "<group>"; };
 		E6DA53C31B7D00DB000087A7 /* PositionIn.BrowseCommunityViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.BrowseCommunityViewController.xib; sourceTree = "<group>"; };
 		E6DADB9D1B8C5799009A5694 /* SearchFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchFilter.swift; sourceTree = "<group>"; };
@@ -1123,6 +1125,7 @@
 				E6BEF1C21B9C54D800511B46 /* Post */,
 				E689F0751B6B90CA00597587 /* ProductInventory */,
 				E6DA53C01B7D00DB000087A7 /* CommunityList */,
+				E6BEF1EB1B9C9D6400511B46 /* Community */,
 				E61B20D91B7E4A85005EAB2C /* Profile */,
 				E66115851B7376DE003DB5B3 /* Login */,
 				E61B20D61B7E0806005EAB2C /* Settings */,
@@ -1135,7 +1138,6 @@
 				E64DC34F1B4E53C90011D37C /* AppDelegate.swift */,
 				E6325F711B57E1DA00996480 /* Storyboards.swift */,
 				E6018E4E1B849266001D22FA /* ClassExtensions */,
-				E6DA53BC1B7CFCCA000087A7 /* Mock.swift */,
 				E64DC3531B4E53C90011D37C /* Main.storyboard */,
 				E64DC3561B4E53C90011D37C /* Images.xcassets */,
 				E64DC3581B4E53C90011D37C /* LaunchScreen.xib */,
@@ -2277,6 +2279,15 @@
 			path = CommunityCells;
 			sourceTree = "<group>";
 		};
+		E6BEF1EB1B9C9D6400511B46 /* Community */ = {
+			isa = PBXGroup;
+			children = (
+				E6BEF1ED1B9C9D6400511B46 /* CommunityViewController.swift */,
+				E6BEF1EC1B9C9D6400511B46 /* CommunityFeedViewController.swift */,
+			);
+			path = Community;
+			sourceTree = "<group>";
+		};
 		E6C5CE171B83A21500265955 /* DAL */ = {
 			isa = PBXGroup;
 			children = (
@@ -2844,11 +2855,13 @@
 				E6DADBA01B8C5907009A5694 /* ItemCategory.swift in Sources */,
 				E6BEF1CD1B9C5E7200511B46 /* PostImageCell.swift in Sources */,
 				2431EBE01B94C1DC009FB158 /* Event.swift in Sources */,
+				E6BEF1EF1B9C9D6400511B46 /* CommunityViewController.swift in Sources */,
 				E68B52061B8736F4006B980C /* FilterViewController.swift in Sources */,
 				E62B16F61B5C1AA700D446BC /* MainMenuUserCell.swift in Sources */,
 				E64DC3501B4E53C90011D37C /* AppDelegate.swift in Sources */,
 				E6C5CE1D1B83A28C00265955 /* SessionController.swift in Sources */,
 				E63201761B98D2DA0066C62E /* Shop.swift in Sources */,
+				E6BEF1EE1B9C9D6400511B46 /* CommunityFeedViewController.swift in Sources */,
 				E661159D1B73A0CB003DB5B3 /* BrowseMapViewController.swift in Sources */,
 				E6F243701B8B17910033B13C /* DisplayModeViewController.swift in Sources */,
 				E68B52011B873545006B980C /* FeedTableViewCellModel.swift in Sources */,
@@ -2862,7 +2875,6 @@
 				E6F2437C1B8B42D70033B13C /* UserProfileViewController.swift in Sources */,
 				E6D4D5B61B6F8B9F003134CB /* SearchBar.swift in Sources */,
 				E6C5CE191B83A21500265955 /* LocationController.swift in Sources */,
-				E6DA53BD1B7CFCCA000087A7 /* Mock.swift in Sources */,
 				E63201651B967A540066C62E /* Notifications.swift in Sources */,
 				E62B16FB1B5CDF0100D446BC /* MessagesListViewController.swift in Sources */,
 				E64D006A1B7CA2DC007693E0 /* AddCommunityViewController.swift in Sources */,

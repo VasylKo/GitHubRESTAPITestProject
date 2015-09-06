@@ -37,9 +37,26 @@ struct Community: CRUDObject {
         return shops?.first?.objectId ?? CRUDObjectInvalidId
     }
 
-    enum Role: Int {
+    enum Role: Int, DebugPrintable {
         case Unknown
-        case Owner, Moderator, Member, Invitee
+        case Owner, Moderator, Member, Invite
+        
+        var debugDescription: String {
+            let displayString: String
+            switch self {
+            case Unknown:
+                displayString = "Unknown"
+            case Owner:
+                displayString = "Owner"
+            case Moderator:
+                displayString = "Moderator"
+            case Member:
+                displayString = "Member"
+            case Invite:
+                displayString = "Invitee"
+            }
+            return "<Role:\(displayString)>"
+        }
     }
     
 
