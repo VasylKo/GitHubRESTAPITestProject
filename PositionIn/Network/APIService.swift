@@ -266,7 +266,7 @@ struct APIService {
         return session().flatMap {
             (token: AuthResponse.Token) -> Future<Void, NSError> in
             let request = self.updateRequest(token, endpoint: endpoint, method: method, params: nil)
-            let (_, future): CRUDResultType = self.dataProvider.jsonRequest(request, map: self.emptyResponseMapping(), validation: self.statusCodeValidation(statusCode: [201]))
+            let (_, future): CRUDResultType = self.dataProvider.jsonRequest(request, map: self.commandMapping(), validation: self.statusCodeValidation(statusCode: [201]))
             return self.handleFailure(future)
         }
     }
@@ -301,6 +301,26 @@ struct APIService {
             return ()
         }
     }
+    
+    private func commandMapping() -> (AnyObject? -> Void?) {
+        return  { response in
+            if let json = response as? NSDictionary {
+                if let success = json["success"] as? Bool where success == true{
+                        return ()
+                } else {
+                    Log.error?.message("Got unexpected response")
+                    Log.debug?.value(json)
+                    return nil
+                }
+            } else {
+                Log.error?.message("Got unexpected response: \(response)")
+                return nil
+            }
+        }
+    }
+
+    
+    
     
     func statusCodeValidation<S: SequenceType where S.Generator.Element == Int>(statusCode acceptableStatusCode: S) -> Alamofire.Request.Validation {
         return { _, response in

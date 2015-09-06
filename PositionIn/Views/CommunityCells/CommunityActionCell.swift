@@ -52,9 +52,7 @@ final class CommunityActionCell: TableViewCell {
         let height = frame.height
         for (idx, btn) in enumerate(actionButtons) {
             btn.frame = CGRect(x: width * CGFloat(idx), y: 0, width: width, height: height)
-            Log.debug?.value(btn)
         }
-
     }
 
 }
