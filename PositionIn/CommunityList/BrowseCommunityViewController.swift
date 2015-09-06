@@ -11,7 +11,7 @@ import PosInCore
 import BrightFutures
 import CleanroomLogger
 
-protocol BrowseCommunityActionConsumer {
+protocol BrowseCommunityActionConsumer: class {
     func executeAction(action: BrowseCommunityViewController.Action, community: CRUDObjectId)
 }
 
@@ -22,13 +22,38 @@ protocol BrowseCommunityActionProvider {
 
 final class BrowseCommunityViewController: BesideMenuViewController {
     
-    enum Action: Int {
+    deinit {
+        Log.debug?.trace()
+    }
+    
+    enum Action: Int, Printable {
         case None
         case Browse
         case Join
         case Post
         case Invite
         case Edit
+        
+        func displayText() -> String {
+            switch self {
+            case .None, .Browse:
+                return NSLocalizedString("VIEV", comment: "Community action: view")
+            case .Join:
+                return NSLocalizedString("JOIN", comment: "Community action: Join")
+            case .Post:
+                return NSLocalizedString("POST", comment: "Community action: Post")
+            case .Invite:
+                return NSLocalizedString("INVITE", comment: "Community action: Invite")
+            case .Edit:
+                return NSLocalizedString("EDIT", comment: "Community action: Edit")
+                
+            }
+
+        }
+        
+        var description: String {
+            return "<Community Action:\(displayText())>"
+        }
     }
 
     override func viewDidLoad() {
@@ -126,7 +151,7 @@ extension BrowseCommunityViewController {
         private let cellFactory = BrowseCommunityCellFactory()
         
         func setCommunities(communities: [Community], mode: BrowseCommunityViewController.BrowseMode) {
-            items = communities.map { self.cellFactory.modelsForCommunity($0, mode: mode) }
+            items = communities.map { self.cellFactory.modelsForCommunity($0, mode: mode, actionConsumer: self.actionConsumer) }
         }
         
         override func configureTable(tableView: UITableView) {
@@ -158,7 +183,7 @@ extension BrowseCommunityViewController {
         func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
             tableView.deselectRowAtIndexPath(indexPath, animated: false)
             if let model = self.tableView(tableView, modelForIndexPath: indexPath) as? BrowseCommunityTableViewCellModel {
-                actionConsumer?.executeAction(model.tapAction, community: model.objectId)                
+                actionConsumer?.executeAction(model.tapAction, community: model.objectId)
             }            
         }
     }

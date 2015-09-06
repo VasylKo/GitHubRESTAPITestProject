@@ -40,6 +40,7 @@ final class BrowseCommunityInfoCellModel: BrowseCommunityTableViewCellModel {
 
 final class BrowseCommunityActionCellModel: BrowseCommunityTableViewCellModel {
     let actions: [BrowseCommunityViewController.Action]
+    weak var actionConsumer: BrowseCommunityActionConsumer?
     init(objectId: CRUDObjectId, tapAction: BrowseCommunityViewController.Action, actions: [BrowseCommunityViewController.Action]) {
         self.actions = actions
         super.init(objectId: objectId, tapAction: tapAction)

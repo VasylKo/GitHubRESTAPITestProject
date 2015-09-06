@@ -11,46 +11,6 @@
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="LnB-1Z-Tnm" id="2NY-pq-cAG">
                 <autoresizingMask key="autoresizingMask"/>
-                <subviews>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DBi-73-QMg">
-                        <rect key="frame" x="5" y="7" width="76" height="30"/>
-                        <state key="normal" title="VIEW">
-                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                        </state>
-                    </button>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Er-lX-LVB">
-                        <rect key="frame" x="83" y="7" width="76" height="30"/>
-                        <state key="normal" title="POST">
-                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                        </state>
-                    </button>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mOz-TU-tCC">
-                        <rect key="frame" x="161" y="7" width="76" height="30"/>
-                        <state key="normal" title="INVITE">
-                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                        </state>
-                    </button>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cBy-0P-QGt">
-                        <rect key="frame" x="239" y="7" width="76" height="30"/>
-                        <state key="normal" title="EDIT">
-                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                        </state>
-                    </button>
-                </subviews>
-                <constraints>
-                    <constraint firstAttribute="centerY" secondItem="DBi-73-QMg" secondAttribute="centerY" id="4vF-Q0-N2Q"/>
-                    <constraint firstAttribute="trailing" secondItem="cBy-0P-QGt" secondAttribute="trailing" constant="5" id="EzW-XV-auv"/>
-                    <constraint firstItem="9Er-lX-LVB" firstAttribute="centerY" secondItem="mOz-TU-tCC" secondAttribute="centerY" id="PHp-mH-OA0"/>
-                    <constraint firstItem="mOz-TU-tCC" firstAttribute="width" secondItem="cBy-0P-QGt" secondAttribute="width" id="S2Z-cp-IeR"/>
-                    <constraint firstItem="mOz-TU-tCC" firstAttribute="leading" secondItem="9Er-lX-LVB" secondAttribute="trailing" constant="2" id="Zzq-hW-iwd"/>
-                    <constraint firstItem="9Er-lX-LVB" firstAttribute="width" secondItem="mOz-TU-tCC" secondAttribute="width" id="bYe-Lg-2jF"/>
-                    <constraint firstItem="DBi-73-QMg" firstAttribute="width" secondItem="9Er-lX-LVB" secondAttribute="width" id="cx9-d5-vAm"/>
-                    <constraint firstItem="DBi-73-QMg" firstAttribute="leading" secondItem="2NY-pq-cAG" secondAttribute="leading" constant="5" id="iZ9-Zj-e7r"/>
-                    <constraint firstItem="cBy-0P-QGt" firstAttribute="leading" secondItem="mOz-TU-tCC" secondAttribute="trailing" constant="2" id="jtu-SW-EI9"/>
-                    <constraint firstItem="mOz-TU-tCC" firstAttribute="centerY" secondItem="cBy-0P-QGt" secondAttribute="centerY" id="oB3-1l-7D1"/>
-                    <constraint firstItem="9Er-lX-LVB" firstAttribute="centerY" secondItem="DBi-73-QMg" secondAttribute="centerY" id="qM1-ey-s5c"/>
-                    <constraint firstItem="9Er-lX-LVB" firstAttribute="leading" secondItem="DBi-73-QMg" secondAttribute="trailing" constant="2" id="un3-Sy-KEx"/>
-                </constraints>
             </tableViewCellContentView>
             <point key="canvasLocation" x="315" y="332"/>
         </tableViewCell>

@@ -10,13 +10,15 @@ import PosInCore
 import CleanroomLogger
 
 struct BrowseCommunityCellFactory {
-    func modelsForCommunity(community: Community, mode: BrowseCommunityViewController.BrowseMode) -> [TableViewCellModel] {
+    func modelsForCommunity(community: Community, mode: BrowseCommunityViewController.BrowseMode, actionConsumer: BrowseCommunityActionConsumer?) -> [TableViewCellModel] {
         var models: [TableViewCellModel] = []
         let tapAction = tapActionForCommunity(community)
         models.append(BrowseCommunityHeaderCellModel(objectId: community.objectId, tapAction: tapAction, title:community.name ?? "", url:community.avatar))
         models.append(BrowseCommunityInfoCellModel(objectId: community.objectId, tapAction: tapAction, members: community.members?.total, text: community.communityDescription))
-        let actions: [BrowseCommunityViewController.Action]
-        models.append(BrowseCommunityActionCellModel(objectId: community.objectId, tapAction: tapAction, actions: actionListForCommunity(community)))
+
+        let actionModel = BrowseCommunityActionCellModel(objectId: community.objectId, tapAction: tapAction, actions: actionListForCommunity(community))
+        actionModel.actionConsumer = actionConsumer
+        models.append(actionModel)
         return models
     }
     
@@ -49,7 +51,11 @@ struct BrowseCommunityCellFactory {
         case .Moderator:
             return [.Post, .Invite]            
         default:
-            return [.Post]
+            if community.isPrivate {
+                return [.Post]
+            } else {
+                return [.Post, .Invite]
+            }
         }
         
     }
