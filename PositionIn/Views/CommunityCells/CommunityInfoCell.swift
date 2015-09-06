@@ -11,9 +11,13 @@ import PosInCore
 
 final class CommunityInfoCell: TableViewCell {
     override func setModel(model: TableViewCellModel) {
-        let m = model as? TableViewCellInvalidModel
+        let m = model as? BrowseCommunityInfoCellModel
         assert(m != nil, "Invalid model passed")
+        let countFormat = NSLocalizedString("%d Members", comment: "Browse community: count members")
+        countLabel.text = map(m!.membersCount) { String(format:countFormat, $0) }
     }
     
     
+    @IBOutlet weak var countLabel: UILabel!
+    @IBOutlet weak var descriptionLabel: UILabel!
 }

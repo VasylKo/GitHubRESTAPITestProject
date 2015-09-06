@@ -292,6 +292,7 @@
 		E6BEF1E61B9C83F200511B46 /* PositionIn.CommunityActionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6BEF1E01B9C83F200511B46 /* PositionIn.CommunityActionCell.xib */; };
 		E6BEF1E71B9C83F200511B46 /* PositionIn.CommunityHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6BEF1E11B9C83F200511B46 /* PositionIn.CommunityHeaderCell.xib */; };
 		E6BEF1E81B9C83F200511B46 /* PositionIn.CommunityInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6BEF1E21B9C83F200511B46 /* PositionIn.CommunityInfoCell.xib */; };
+		E6BEF1EA1B9C902400511B46 /* BrowseCommunityTableViewCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6BEF1E91B9C902400511B46 /* BrowseCommunityTableViewCellModel.swift */; };
 		E6C5CE191B83A21500265955 /* LocationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C5CE181B83A21500265955 /* LocationController.swift */; };
 		E6C5CE1B1B83A24500265955 /* UIScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C5CE1A1B83A24500265955 /* UIScheme.swift */; };
 		E6C5CE1D1B83A28C00265955 /* SessionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C5CE1C1B83A28C00265955 /* SessionController.swift */; };
@@ -833,6 +834,7 @@
 		E6BEF1E01B9C83F200511B46 /* PositionIn.CommunityActionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.CommunityActionCell.xib; sourceTree = "<group>"; };
 		E6BEF1E11B9C83F200511B46 /* PositionIn.CommunityHeaderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.CommunityHeaderCell.xib; sourceTree = "<group>"; };
 		E6BEF1E21B9C83F200511B46 /* PositionIn.CommunityInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.CommunityInfoCell.xib; sourceTree = "<group>"; };
+		E6BEF1E91B9C902400511B46 /* BrowseCommunityTableViewCellModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowseCommunityTableViewCellModel.swift; sourceTree = "<group>"; };
 		E6C5CE181B83A21500265955 /* LocationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationController.swift; sourceTree = "<group>"; };
 		E6C5CE1A1B83A24500265955 /* UIScheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIScheme.swift; sourceTree = "<group>"; };
 		E6C5CE1C1B83A28C00265955 /* SessionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionController.swift; sourceTree = "<group>"; };
@@ -2188,6 +2190,7 @@
 				E6BEF1C71B9C5A0C00511B46 /* PostCellModelFactory.swift */,
 				E6BEF1CE1B9C60B500511B46 /* PostTableViewCellModel.swift */,
 				E6BEF1DA1B9C7F9D00511B46 /* BrowseCommunityCellFactory.swift */,
+				E6BEF1E91B9C902400511B46 /* BrowseCommunityTableViewCellModel.swift */,
 			);
 			path = CellModels;
 			sourceTree = "<group>";
@@ -2824,6 +2827,7 @@
 				E689F07B1B6B972F00597587 /* ProductInventoryCell.swift in Sources */,
 				E65E87301B611FE700AE444D /* Response.swift in Sources */,
 				E6BEF1D91B9C671D00511B46 /* PostInfoCell.swift in Sources */,
+				E6BEF1EA1B9C902400511B46 /* BrowseCommunityTableViewCellModel.swift in Sources */,
 				E63201741B9872C60066C62E /* EditProfileViewController.swift in Sources */,
 				E65E87321B614A9900AE444D /* Location.swift in Sources */,
 				E62B17061B5CE3EB00D446BC /* BrowseViewController.swift in Sources */,

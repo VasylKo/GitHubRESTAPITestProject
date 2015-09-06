@@ -11,9 +11,8 @@ import PosInCore
 
 final class CommunityActionCell: TableViewCell {
     override func setModel(model: TableViewCellModel) {
-        let m = model as? TableViewCellInvalidModel
+        let m = model as? BrowseCommunityActionCellModel
         assert(m != nil, "Invalid model passed")
-    }
-    
+    }    
     
 }

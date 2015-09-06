@@ -11,6 +11,14 @@ import PosInCore
 import BrightFutures
 
 final class BrowseCommunityViewController: BesideMenuViewController {
+    
+    enum Action: Int {
+        case Browse
+        case Join
+        case Post
+        case Invite
+        case Edit
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
