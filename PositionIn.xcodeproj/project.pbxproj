@@ -285,6 +285,7 @@
 		E6BEF1D51B9C657B00511B46 /* PostBodyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6BEF1D41B9C657B00511B46 /* PostBodyCell.swift */; };
 		E6BEF1D81B9C671D00511B46 /* PositionIn.PostInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6BEF1D61B9C671D00511B46 /* PositionIn.PostInfoCell.xib */; };
 		E6BEF1D91B9C671D00511B46 /* PostInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6BEF1D71B9C671D00511B46 /* PostInfoCell.swift */; };
+		E6BEF1DB1B9C7F9D00511B46 /* BrowseCommunityCellFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6BEF1DA1B9C7F9D00511B46 /* BrowseCommunityCellFactory.swift */; };
 		E6C5CE191B83A21500265955 /* LocationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C5CE181B83A21500265955 /* LocationController.swift */; };
 		E6C5CE1B1B83A24500265955 /* UIScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C5CE1A1B83A24500265955 /* UIScheme.swift */; };
 		E6C5CE1D1B83A28C00265955 /* SessionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C5CE1C1B83A28C00265955 /* SessionController.swift */; };
@@ -295,10 +296,8 @@
 		E6D4D5B81B6FA7A7003134CB /* SearchTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D4D5B71B6FA7A7003134CB /* SearchTransition.swift */; };
 		E6DA53BD1B7CFCCA000087A7 /* Mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6DA53BC1B7CFCCA000087A7 /* Mock.swift */; };
 		E6DA53C61B7D00DB000087A7 /* CommunityInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6DA53C11B7D00DB000087A7 /* CommunityInfoCell.swift */; };
-		E6DA53C71B7D00DB000087A7 /* CommunityListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6DA53C21B7D00DB000087A7 /* CommunityListViewController.swift */; };
-		E6DA53C81B7D00DB000087A7 /* PositionIn.CommunityListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6DA53C31B7D00DB000087A7 /* PositionIn.CommunityListViewController.xib */; };
-		E6DA53C91B7D00DB000087A7 /* PositionIn.UserListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6DA53C41B7D00DB000087A7 /* PositionIn.UserListCell.xib */; };
-		E6DA53CA1B7D00DB000087A7 /* UserListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6DA53C51B7D00DB000087A7 /* UserListCell.swift */; };
+		E6DA53C71B7D00DB000087A7 /* BrowseCommunityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6DA53C21B7D00DB000087A7 /* BrowseCommunityViewController.swift */; };
+		E6DA53C81B7D00DB000087A7 /* PositionIn.BrowseCommunityViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6DA53C31B7D00DB000087A7 /* PositionIn.BrowseCommunityViewController.xib */; };
 		E6DA53CC1B7D0125000087A7 /* PositionIn.CommunityInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6DA53CB1B7D0125000087A7 /* PositionIn.CommunityInfoCell.xib */; };
 		E6DA53CF1B7D0562000087A7 /* CommunityActionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6DA53CD1B7D0562000087A7 /* CommunityActionCell.swift */; };
 		E6DA53D01B7D0562000087A7 /* PositionIn.CommunityActionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6DA53CE1B7D0562000087A7 /* PositionIn.CommunityActionCell.xib */; };
@@ -825,6 +824,7 @@
 		E6BEF1D41B9C657B00511B46 /* PostBodyCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostBodyCell.swift; sourceTree = "<group>"; };
 		E6BEF1D61B9C671D00511B46 /* PositionIn.PostInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.PostInfoCell.xib; sourceTree = "<group>"; };
 		E6BEF1D71B9C671D00511B46 /* PostInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostInfoCell.swift; sourceTree = "<group>"; };
+		E6BEF1DA1B9C7F9D00511B46 /* BrowseCommunityCellFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowseCommunityCellFactory.swift; sourceTree = "<group>"; };
 		E6C5CE181B83A21500265955 /* LocationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationController.swift; sourceTree = "<group>"; };
 		E6C5CE1A1B83A24500265955 /* UIScheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIScheme.swift; sourceTree = "<group>"; };
 		E6C5CE1C1B83A28C00265955 /* SessionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionController.swift; sourceTree = "<group>"; };
@@ -837,10 +837,8 @@
 		E6D7C2911B5D546C004F3AA9 /* NibView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NibView.swift; sourceTree = "<group>"; };
 		E6DA53BC1B7CFCCA000087A7 /* Mock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mock.swift; sourceTree = "<group>"; };
 		E6DA53C11B7D00DB000087A7 /* CommunityInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommunityInfoCell.swift; sourceTree = "<group>"; };
-		E6DA53C21B7D00DB000087A7 /* CommunityListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommunityListViewController.swift; sourceTree = "<group>"; };
-		E6DA53C31B7D00DB000087A7 /* PositionIn.CommunityListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.CommunityListViewController.xib; sourceTree = "<group>"; };
-		E6DA53C41B7D00DB000087A7 /* PositionIn.UserListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.UserListCell.xib; sourceTree = "<group>"; };
-		E6DA53C51B7D00DB000087A7 /* UserListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserListCell.swift; sourceTree = "<group>"; };
+		E6DA53C21B7D00DB000087A7 /* BrowseCommunityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowseCommunityViewController.swift; sourceTree = "<group>"; };
+		E6DA53C31B7D00DB000087A7 /* PositionIn.BrowseCommunityViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.BrowseCommunityViewController.xib; sourceTree = "<group>"; };
 		E6DA53CB1B7D0125000087A7 /* PositionIn.CommunityInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.CommunityInfoCell.xib; sourceTree = "<group>"; };
 		E6DA53CD1B7D0562000087A7 /* CommunityActionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommunityActionCell.swift; sourceTree = "<group>"; };
 		E6DA53CE1B7D0562000087A7 /* PositionIn.CommunityActionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.CommunityActionCell.xib; sourceTree = "<group>"; };
@@ -2184,6 +2182,7 @@
 				E68B52021B873687006B980C /* FeedItemCellModelFactory.swift */,
 				E6BEF1C71B9C5A0C00511B46 /* PostCellModelFactory.swift */,
 				E6BEF1CE1B9C60B500511B46 /* PostTableViewCellModel.swift */,
+				E6BEF1DA1B9C7F9D00511B46 /* BrowseCommunityCellFactory.swift */,
 			);
 			path = CellModels;
 			sourceTree = "<group>";
@@ -2283,10 +2282,8 @@
 		E6DA53C01B7D00DB000087A7 /* CommunityList */ = {
 			isa = PBXGroup;
 			children = (
-				E6DA53C21B7D00DB000087A7 /* CommunityListViewController.swift */,
-				E6DA53C31B7D00DB000087A7 /* PositionIn.CommunityListViewController.xib */,
-				E6DA53C51B7D00DB000087A7 /* UserListCell.swift */,
-				E6DA53C41B7D00DB000087A7 /* PositionIn.UserListCell.xib */,
+				E6DA53C21B7D00DB000087A7 /* BrowseCommunityViewController.swift */,
+				E6DA53C31B7D00DB000087A7 /* PositionIn.BrowseCommunityViewController.xib */,
 				E6DA53C11B7D00DB000087A7 /* CommunityInfoCell.swift */,
 				E6DA53CB1B7D0125000087A7 /* PositionIn.CommunityInfoCell.xib */,
 				E6DA53CD1B7D0562000087A7 /* CommunityActionCell.swift */,
@@ -2641,12 +2638,11 @@
 				E6DA53CC1B7D0125000087A7 /* PositionIn.CommunityInfoCell.xib in Resources */,
 				E61B20E71B7E5AF7005EAB2C /* PositionIn.ProfileInfoCell.xib in Resources */,
 				E64DC35A1B4E53C90011D37C /* LaunchScreen.xib in Resources */,
-				E6DA53C91B7D00DB000087A7 /* PositionIn.UserListCell.xib in Resources */,
 				E6F2437A1B8B40380033B13C /* PositionIn.BrowseListTableViewCell.xib in Resources */,
 				E63201721B984E2D0066C62E /* PositionIn.DescriptionTableViewCell.xib in Resources */,
 				E68B52251B875F8F006B980C /* PositionIn.PostListCell.xib in Resources */,
 				E64DC3571B4E53C90011D37C /* Images.xcassets in Resources */,
-				E6DA53C81B7D00DB000087A7 /* PositionIn.CommunityListViewController.xib in Resources */,
+				E6DA53C81B7D00DB000087A7 /* PositionIn.BrowseCommunityViewController.xib in Resources */,
 				E660E5321B5AC2A200F52050 /* PositionIn.MainMenuCell.xib in Resources */,
 				E61B20EB1B7E6233005EAB2C /* PositionIn.ProfileStatsCell.xib in Resources */,
 				E661159B1B73A0CB003DB5B3 /* PositionIn.BrowseListViewController.xib in Resources */,
@@ -2807,11 +2803,10 @@
 				E6C5CE1B1B83A24500265955 /* UIScheme.swift in Sources */,
 				E69420F91B66358000F34F06 /* ProductDetailsViewController.swift in Sources */,
 				E63201701B984D8B0066C62E /* DescriptionTableViewCell.swift in Sources */,
-				E6DA53C71B7D00DB000087A7 /* CommunityListViewController.swift in Sources */,
+				E6DA53C71B7D00DB000087A7 /* BrowseCommunityViewController.swift in Sources */,
 				E689F0771B6B90F400597587 /* ProductInventoryViewController.swift in Sources */,
 				2431EBDC1B945F5A009FB158 /* Promotion.swift in Sources */,
 				E689F07B1B6B972F00597587 /* ProductInventoryCell.swift in Sources */,
-				E6DA53CA1B7D00DB000087A7 /* UserListCell.swift in Sources */,
 				E65E87301B611FE700AE444D /* Response.swift in Sources */,
 				E6BEF1D91B9C671D00511B46 /* PostInfoCell.swift in Sources */,
 				E63201741B9872C60066C62E /* EditProfileViewController.swift in Sources */,
@@ -2875,6 +2870,7 @@
 				E6A869EC1B60D3E300797D16 /* APIService+Auth.swift in Sources */,
 				E61B20E91B7E6163005EAB2C /* ProfileStatsCell.swift in Sources */,
 				E6D4D5B81B6FA7A7003134CB /* SearchTransition.swift in Sources */,
+				E6BEF1DB1B9C7F9D00511B46 /* BrowseCommunityCellFactory.swift in Sources */,
 				E660E5301B5AC28600F52050 /* MainMenuCell.swift in Sources */,
 				E6F243781B8B3CDE0033B13C /* BrowseListTableViewCell.swift in Sources */,
 				E61B20D81B7E0838005EAB2C /* SettingsViewController.swift in Sources */,

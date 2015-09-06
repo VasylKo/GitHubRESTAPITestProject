@@ -5,7 +5,7 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CommunityListViewController" customModule="PositionIn" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BrowseCommunityViewController" customModule="PositionIn" customModuleProvider="target">
             <connections>
                 <outlet property="tableView" destination="9ae-G5-ANH" id="8Uf-O9-fvG"/>
                 <outlet property="view" destination="KYN-Bw-xJK" id="FSq-UZ-6ju"/>

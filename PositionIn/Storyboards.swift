@@ -28,8 +28,8 @@ struct Storyboards {
             return self.storyboard.instantiateViewControllerWithIdentifier("MainMenuViewController") as! MainMenuViewController
         }
 
-        static func instantiateCommunityListViewController() -> CommunityListViewController! {
-            return self.storyboard.instantiateViewControllerWithIdentifier("CommunityListViewController") as! CommunityListViewController
+        static func instantiateBrowseCommunityViewController() -> BrowseCommunityViewController! {
+            return self.storyboard.instantiateViewControllerWithIdentifier("BrowseCommunityViewController") as! BrowseCommunityViewController
         }
 
         static func instantiateSearchViewController() -> SearchViewController! {
@@ -356,7 +356,7 @@ extension SidebarViewController {
 
 //MARK: - FilterViewController
 
-//MARK: - CommunityListViewController
+//MARK: - BrowseCommunityViewController
 
 //MARK: - SearchViewController
 
