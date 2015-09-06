@@ -41,7 +41,7 @@ class CommunityFeedViewController: BesideMenuViewController, BrowseActionProduce
         let actionDelegate = self.parentViewController as? BrowseActionConsumer
         dataSource.items[Sections.Info.rawValue] = [
             BrowseCommunityHeaderCellModel(objectId: community.objectId, tapAction: .None, title: community.name ?? "", url: community.avatar),
-            ProfileStatsCellModel(countPosts: 0, countFollowers: 0, countFollowing: 0)
+             CommunityStatsCellModel(countMembers: community.membersCount, countPosts: community.postsCount, countEvents: community.eventsCount)
         ]
         dataSource.items[Sections.Feed.rawValue] = [
             BrowseListCellModel(objectId: community.objectId, actionConsumer: self, filterType: .Community)
@@ -113,8 +113,8 @@ extension CommunityFeedViewController {
             switch model {
             case let model as BrowseCommunityHeaderCellModel:
                 return CommunityHeaderCell.reuseId()
-            case let model as ProfileStatsCellModel:
-                return ProfileStatsCell.reuseId()
+            case let model as CommunityStatsCellModel:
+                return CommunityStatsCell.reuseId()
             case let model as BrowseListCellModel:
                 return BrowseListTableViewCell.reuseId()
             default:
@@ -127,7 +127,7 @@ extension CommunityFeedViewController {
         }
         
         override func nibCellsId() -> [String] {
-       return [CommunityHeaderCell.reuseId(), ProfileStatsCell.reuseId(), BrowseListTableViewCell.reuseId()]
+       return [CommunityHeaderCell.reuseId(), CommunityStatsCell.reuseId(), BrowseListTableViewCell.reuseId()]
         }
         
         func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
