@@ -12,8 +12,8 @@ import CleanroomLogger
 import BrightFutures
 
 final class BrowseListViewController: UIViewController, BrowseActionProducer {
-    
-    let shoWCompactCells: Bool = true
+    var excludeCommunityItems = false
+    var shoWCompactCells: Bool = true
     private var dataRequestToken = InvalidationToken()
 
     override func viewDidLoad() {
@@ -48,7 +48,11 @@ final class BrowseListViewController: UIViewController, BrowseActionProducer {
             if let strongSelf = self,
                let itemTypes = searchFilter.itemTypes
                where contains(itemTypes, strongSelf.selectedItemType) {
-                strongSelf.dataSource.setItems(response.items)
+                var items: [FeedItem] = response.items
+                if strongSelf.excludeCommunityItems {
+                    items = items.filter { $0.community == CRUDObjectInvalidId }
+                }
+                strongSelf.dataSource.setItems(items)
                 strongSelf.tableView.reloadData()
                 strongSelf.tableView.setContentOffset(CGPointZero, animated: false)
                 strongSelf.actionConsumer?.browseControllerDidChangeContent(strongSelf)

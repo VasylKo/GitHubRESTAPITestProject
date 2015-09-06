@@ -7,20 +7,18 @@
 //
 
 import PosInCore
+import CleanroomLogger
 
 struct BrowseCommunityCellFactory {
-    func modelsForCommunity(community: Community, mode: BrowseCommunityViewController.BrowseMode) -> [TableViewCellModel] {
+    func modelsForCommunity(community: Community, mode: BrowseCommunityViewController.BrowseMode, actionConsumer: BrowseCommunityActionConsumer?) -> [TableViewCellModel] {
         var models: [TableViewCellModel] = []
-        models.append(BrowseCommunityHeaderCellModel(objectId: community.objectId, title:community.name ?? "", url:community.avatar))
-        models.append(BrowseCommunityInfoCellModel(objectId: community.objectId, members: community.members?.total, text: community.communityDescription))
-        let actions: [BrowseCommunityViewController.Action]
-        switch mode {
-        case .MyGroups:
-            actions = myActionsForCommunity(community)
-        case .Explore:
-            actions = exploreActionsForCommunity(community)
-        }
-        models.append(BrowseCommunityActionCellModel(objectId: community.objectId, actions: actions))
+        let tapAction = tapActionForCommunity(community)
+        models.append(BrowseCommunityHeaderCellModel(objectId: community.objectId, tapAction: tapAction, title:community.name ?? "", url:community.avatar))
+        models.append(BrowseCommunityInfoCellModel(objectId: community.objectId, tapAction: tapAction, members: community.members?.total, text: community.communityDescription))
+
+        let actionModel = BrowseCommunityActionCellModel(objectId: community.objectId, tapAction: tapAction, actions: actionListForCommunity(community))
+        actionModel.actionConsumer = actionConsumer
+        models.append(actionModel)
         return models
     }
     
@@ -43,12 +41,26 @@ struct BrowseCommunityCellFactory {
         return TableViewCell.reuseId()
     }
 
-    private func myActionsForCommunity(community: Community) -> [BrowseCommunityViewController.Action] {
-        return []
+    private func actionListForCommunity(community: Community) -> [BrowseCommunityViewController.Action] {
+        Log.debug?.value(community.role)
+        switch community.role {
+        case .Invite, .Unknown:
+            return [.Join]
+        case .Owner:
+            return [.Post, .Invite, .Edit]
+        case .Moderator:
+            return [.Post, .Invite]            
+        default:
+            if community.isPrivate {
+                return [.Post]
+            } else {
+                return [.Post, .Invite]
+            }
+        }
+        
     }
     
-    private func exploreActionsForCommunity(community: Community) -> [BrowseCommunityViewController.Action] {
-        return [.Join]
+    private func tapActionForCommunity(community: Community) -> BrowseCommunityViewController.Action {
+        return community.canView ? .Browse : .None
     }
-
 }

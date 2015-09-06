@@ -198,6 +198,10 @@ struct APIService {
         return updateObject(endpoint, object: object)
     }
     
+    func joinCommunity(communityId: CRUDObjectId) -> Future<Void, NSError> {
+        let endpoint = Community.membersEndpoint(communityId)
+        return updateCommand(endpoint)
+    }
     
     //MARK: - Search -
     
@@ -254,6 +258,19 @@ struct APIService {
             })
         }
     }
+
+    
+    private func updateCommand(endpoint: String, method: Alamofire.Method = .POST) -> Future<Void, NSError> {
+        typealias CRUDResultType = (Alamofire.Request, Future<Void, NSError>)
+        
+        return session().flatMap {
+            (token: AuthResponse.Token) -> Future<Void, NSError> in
+            let request = self.updateRequest(token, endpoint: endpoint, method: method, params: nil)
+            let (_, future): CRUDResultType = self.dataProvider.jsonRequest(request, map: self.commandMapping(), validation: self.statusCodeValidation(statusCode: [201]))
+            return self.handleFailure(future)
+        }
+    }
+
     
     private func updateObject<C: CRUDObject>(endpoint: String, object: C) -> Future<Void, NSError> {
         typealias CRUDResultType = (Alamofire.Request, Future<Void, NSError>)
@@ -284,6 +301,26 @@ struct APIService {
             return ()
         }
     }
+    
+    private func commandMapping() -> (AnyObject? -> Void?) {
+        return  { response in
+            if let json = response as? NSDictionary {
+                if let success = json["success"] as? Bool where success == true{
+                        return ()
+                } else {
+                    Log.error?.message("Got unexpected response")
+                    Log.debug?.value(json)
+                    return nil
+                }
+            } else {
+                Log.error?.message("Got unexpected response: \(response)")
+                return nil
+            }
+        }
+    }
+
+    
+    
     
     func statusCodeValidation<S: SequenceType where S.Generator.Element == Int>(statusCode acceptableStatusCode: S) -> Alamofire.Request.Validation {
         return { _, response in

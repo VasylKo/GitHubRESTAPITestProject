@@ -146,6 +146,10 @@ struct Storyboards {
             return self.storyboard.instantiateViewControllerWithIdentifier("AddCommunityViewController") as! AddCommunityViewController
         }
 
+        static func instantiateEditCommunityViewController() -> EditCommunityViewController! {
+            return self.storyboard.instantiateViewControllerWithIdentifier("EditCommunityViewController") as! EditCommunityViewController
+        }
+
         static func instantiateEditProfileViewController() -> EditProfileViewController! {
             return self.storyboard.instantiateViewControllerWithIdentifier("EditProfileViewController") as! EditProfileViewController
         }
@@ -752,6 +756,45 @@ extension UIStoryboardSegue {
 }
 
 extension AddCommunityViewController { 
+
+    enum Segue: String, Printable, SegueProtocol {
+        case Close = "Close"
+
+        var kind: SegueKind? {
+            switch (self) {
+            case Close:
+                return SegueKind(rawValue: "unwind")
+            default:
+                preconditionFailure("Invalid value")
+                break
+            }
+        }
+
+        var destination: UIViewController.Type? {
+            switch (self) {
+            default:
+                assertionFailure("Unknown destination")
+                return nil
+            }
+        }
+
+        var identifier: String? { return self.description } 
+        var description: String { return self.rawValue }
+    }
+
+}
+
+//MARK: - EditCommunityViewController
+extension UIStoryboardSegue {
+    func selection() -> EditCommunityViewController.Segue? {
+        if let identifier = self.identifier {
+            return EditCommunityViewController.Segue(rawValue: identifier)
+        }
+        return nil
+    }
+}
+
+extension EditCommunityViewController { 
 
     enum Segue: String, Printable, SegueProtocol {
         case Close = "Close"

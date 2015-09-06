@@ -11,13 +11,30 @@ import XLForm
 import CleanroomLogger
 import BrightFutures
 
-final class AddCommunityViewController: BaseAddItemViewController {
+final class EditCommunityViewController: BaseAddItemViewController {
     private enum Tags : String {
         case Title = "Title"
         case Description = "Description"
         case Private = "Private"
         case Photo = "Photo"
     }
+    
+    var existingCommunityId: CRUDObjectId? {
+        didSet {
+            if let communityId = existingCommunityId {
+                api().getCommunity(communityId).onSuccess { [weak self] community in
+                    if let strongSelf = self {
+                        strongSelf.titleRow.value = community.name
+                        strongSelf.descriptionRow.value = community.communityDescription
+                        strongSelf.privateRow.value = NSNumber(bool: community.isPrivate)
+                        strongSelf.tableView?.reloadData()
+                        strongSelf.existingCommunity = community
+                    }                    
+                }
+            }
+        }
+    }
+    private var existingCommunity: Community?
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -30,7 +47,7 @@ final class AddCommunityViewController: BaseAddItemViewController {
     }
     
     func initializeForm() {
-        let form = XLFormDescriptor(title: NSLocalizedString("New Group", comment: "New community: form caption"))
+        let form = XLFormDescriptor(title: NSLocalizedString("Edit Group", comment: "Edit community: form caption"))
         
         // Description section
         let descriptionSection = XLFormSectionDescriptor.formSection()
@@ -41,23 +58,33 @@ final class AddCommunityViewController: BaseAddItemViewController {
         descriptionSection.addFormRow(photoRow)
 
         // Title
-        let titleRow = XLFormRowDescriptor(tag: Tags.Title.rawValue, rowType: XLFormRowDescriptorTypeText)
-        titleRow.cellConfigAtConfigure["textField.placeholder"] = NSLocalizedString("Title", comment: "New community: title")
-        titleRow.required = true
         descriptionSection.addFormRow(titleRow)
         // Description
-        let descriptionRow = XLFormRowDescriptor(tag: Tags.Description.rawValue, rowType:XLFormRowDescriptorTypeTextView)
-        descriptionRow.cellConfigAtConfigure["textView.placeholder"] = NSLocalizedString("Description", comment: "New community: description")
         descriptionSection.addFormRow(descriptionRow)
-        
-        let privateRow = XLFormRowDescriptor(tag: Tags.Private.rawValue, rowType: XLFormRowDescriptorTypeBooleanSwitch, title: NSLocalizedString("Private", comment: "New community: private"))
-        privateRow.value = NSNumber(bool: false)
+        //Private
         descriptionSection.addFormRow(privateRow)
-
         
         self.form = form
     }
     
+    lazy private var titleRow: XLFormRowDescriptor = {
+        let row = XLFormRowDescriptor(tag: Tags.Title.rawValue, rowType: XLFormRowDescriptorTypeText)
+        row.cellConfigAtConfigure["textField.placeholder"] = NSLocalizedString("Title", comment: "New community: title")
+        row.required = true
+        return row
+    }()
+    
+    lazy private var descriptionRow: XLFormRowDescriptor = {
+        let row = XLFormRowDescriptor(tag: Tags.Description.rawValue, rowType:XLFormRowDescriptorTypeTextView)
+        row.cellConfigAtConfigure["textView.placeholder"] = NSLocalizedString("Description", comment: "New community: description")
+        return row
+    }()
+    
+    lazy private var privateRow: XLFormRowDescriptor = {
+        let row = XLFormRowDescriptor(tag: Tags.Private.rawValue, rowType: XLFormRowDescriptorTypeBooleanSwitch, title: NSLocalizedString("Private", comment: "New community: private"))
+        row.value = NSNumber(bool: false)
+        return row
+    }()
     
     //MARK: - Actions -
     override func didTapPost(sender: AnyObject) {
@@ -74,19 +101,18 @@ final class AddCommunityViewController: BaseAddItemViewController {
         let values = formValues()
         Log.debug?.value(values)
         
-        if  let imageUpload = uploadAssets(values[Tags.Photo.rawValue]) {
+        if  var community = existingCommunity,
+            let imageUpload = uploadAssets(values[Tags.Photo.rawValue]) {
             view.userInteractionEnabled = false
             locationController().getCurrentLocation().zip(imageUpload).flatMap {
-                (location: Location, urls: [NSURL]) -> Future<Community, NSError> in
-                var community = Community()
+                (location: Location, urls: [NSURL]) -> Future<Void, NSError> in
                 community.name = values[Tags.Title.rawValue] as? String
                 community.communityDescription = values[Tags.Description.rawValue] as? String
                 let rawPrivate = values[Tags.Private.rawValue] as? NSNumber
                 community.isPrivate = map(rawPrivate) { $0.boolValue} ?? true
                 community.avatar = urls.first
-
-                return api().createCommunity(community: community)
-            }.onSuccess{ [weak self] community  in
+                return api().updateCommunity(community: community)
+            }.onSuccess{ [weak self] _  in
                 Log.debug?.value(community)
                 self?.sendUpdateNotification()
                 self?.performSegue(AddCommunityViewController.Segue.Close)
