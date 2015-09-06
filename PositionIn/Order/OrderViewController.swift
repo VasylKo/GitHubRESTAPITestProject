@@ -21,6 +21,7 @@ class OrderViewController: UITableViewController {
             let image = product.category?.productPlaceholderImage()
             itemImageView.setImageFromURL(url, placeholder: image)
         }
+        initializeBranTree()
     }
 
     @IBAction func quantityStepperDidChange(sender: UIStepper) {
@@ -33,19 +34,20 @@ class OrderViewController: UITableViewController {
     @IBOutlet private weak var quantityLabel: UILabel!
     
     private let quantityFormatter = NSNumberFormatter()
-    private let braintree = Braintree()
+    private var braintree: Braintree?
     
     private var quantityString: String {
         return quantityFormatter.stringFromNumber(NSNumber(double: round(quantityStepper.value))) ?? ""
     }
     
     @IBAction func didTapCheckout(sender: AnyObject) {
-        let dropInViewController = braintree.dropInViewControllerWithDelegate(self)
-        dropInViewController.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Cancel, target: self, action: "userDidCancelPayment:")
-        let summaryFormat =  NSLocalizedString("%@ %@", comment: "Order: Summary format")
-        dropInViewController.summaryTitle = String(format: summaryFormat, quantityString, product?.name ?? "")
-        let navigationController = UINavigationController(rootViewController: dropInViewController)
-        presentViewController(navigationController, animated: true, completion: nil)
+        if let dropInViewController = braintree?.dropInViewControllerWithDelegate(self) {
+            dropInViewController.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Cancel, target: self, action: "userDidCancelPayment:")
+            let summaryFormat =  NSLocalizedString("%@ %@", comment: "Order: Summary format")
+            dropInViewController.summaryTitle = String(format: summaryFormat, quantityString, product?.name ?? "")
+            let navigationController = UINavigationController(rootViewController: dropInViewController)
+            presentViewController(navigationController, animated: true, completion: nil)
+        }
     }
     
     @IBAction func userDidCancelPayment(sender: AnyObject) {
@@ -54,6 +56,20 @@ class OrderViewController: UITableViewController {
     
     private func dismissPaymentsController() {
         dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    private func initializeBranTree() {
+        if let clientTokenURL = NSURL(string: "https://braintree-sample-merchant.herokuapp.com/client_token") {
+            var clientTokenRequest = NSMutableURLRequest(URL: clientTokenURL)
+            clientTokenRequest.setValue("text/plain", forHTTPHeaderField: "Accept")
+            NSURLConnection.sendAsynchronousRequest(clientTokenRequest, queue: NSOperationQueue.mainQueue()) {
+                (response, data, error) in
+                if  let data = data,
+                    let clientToken = NSString(data: data, encoding: NSUTF8StringEncoding) as? String {
+                        self.braintree = Braintree(clientToken: clientToken)
+                }
+            }
+        }
     }
 }
 
