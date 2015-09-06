@@ -90,6 +90,9 @@ final class AddEventViewController: BaseAddItemViewController {
     
     //MARK: - Actions -
     override func didTapPost(sender: AnyObject) {
+        if view.userInteractionEnabled == false {
+            return
+        }
         let validationErrors : Array<NSError> = self.formValidationErrors() as! Array<NSError>
         if (validationErrors.count > 0){
             self.showFormValidationError(validationErrors.first)
@@ -105,6 +108,7 @@ final class AddEventViewController: BaseAddItemViewController {
         
         if  let imageUpload = uploadAssets(values[Tags.Photo.rawValue]),
             let getLocation = locationFromValue(values[Tags.Location.rawValue]) {
+                view.userInteractionEnabled = false
                 getLocation.zip(imageUpload).flatMap { (location: Location, urls: [NSURL]) -> Future<Event, NSError> in
                     var event = Event()
                     event.name = values[Tags.Title.rawValue] as? String
@@ -124,11 +128,15 @@ final class AddEventViewController: BaseAddItemViewController {
                     } else {
                         return api().createUserEvent(event)
                     }
-            }.onSuccess { [weak self] (event: Event) -> ()  in
+                }.onSuccess { [weak self] (event: Event) -> ()  in
                     Log.debug?.value(event)
                     self?.sendUpdateNotification()
                     self?.performSegue(AddEventViewController.Segue.Close)
-            }
+                }.onFailure { error in
+                    showError(error.localizedDescription)
+                }.onComplete { [weak self] result in
+                    self?.view.userInteractionEnabled = true
+                }
         }
     }
 
