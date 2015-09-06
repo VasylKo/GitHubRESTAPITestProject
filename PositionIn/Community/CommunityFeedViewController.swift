@@ -29,24 +29,23 @@ class CommunityFeedViewController: BesideMenuViewController, BrowseActionProduce
     //MARK: - Reload data -
     
     func reloadData() {
-//        api().getUserProfile(profile.objectId).onSuccess { [weak self] profile in
-//            self?.didReceiveProfile(profile)
-//        }
+        api().getCommunity(community.objectId).onSuccess { [weak self] community in
+            self?.didReceiveCommunity(community)
+        }
         
     }
     
     
     private func didReceiveCommunity(community: Community) {
 
-//        let actionDelegate = self.parentViewController as? UserProfileActionConsumer
-//        dataSource.items[Sections.Info.rawValue] = [
-//            ProfileInfoCellModel(name: profile.displayName, avatar: profile.avatar, background: profile.backgroundImage, leftAction: leftAction, rightAction: rightAction, actionDelegate: actionDelegate),
-//            TableViewCellTextModel(title: profile.userDescription ?? ""),
-//            ProfileStatsCellModel(countPosts: profile.countPosts, countFollowers: profile.countFollowers, countFollowing: profile.countFollowing),
-//        ]
-//        dataSource.items[Sections.Feed.rawValue] = [
-//            BrowseListCellModel(objectId: profile.objectId, actionConsumer: self)
-//        ]
+        let actionDelegate = self.parentViewController as? BrowseActionConsumer
+        dataSource.items[Sections.Info.rawValue] = [
+            BrowseCommunityHeaderCellModel(objectId: community.objectId, title: community.name!, url: community.avatar),
+            ProfileStatsCellModel(countPosts: 0, countFollowers: 0, countFollowing: 0)
+        ]
+        dataSource.items[Sections.Feed.rawValue] = [
+            BrowseListCellModel(objectId: community.objectId, actionConsumer: self)
+        ]
         tableView.reloadData()
         actionConsumer?.browseControllerDidChangeContent(self)
     }
@@ -60,7 +59,7 @@ class CommunityFeedViewController: BesideMenuViewController, BrowseActionProduce
         navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
         navigationController?.navigationBar.shadowImage = UIImage()
         dataSource.configureTable(tableView)
-        didReceiveCommunity(community)
+       // didReceiveCommunity(community)
         reloadData()
     }
 
@@ -112,14 +111,12 @@ extension CommunityFeedViewController {
         @objc override func tableView(tableView: UITableView, reuseIdentifierForIndexPath indexPath: NSIndexPath) -> String {
             let model = self.tableView(tableView, modelForIndexPath: indexPath)
             switch model {
-//            case let model as ProfileInfoCellModel:
-//                return ProfileInfoCell.reuseId()
-//            case let model as ProfileStatsCellModel:
-//                return ProfileStatsCell.reuseId()
-//            case let model as BrowseListCellModel:
-//                return BrowseListTableViewCell.reuseId()
-//            case let model as TableViewCellTextModel:
-//                return DescriptionTableViewCell.reuseId()
+            case let model as BrowseCommunityHeaderCellModel:
+                return CommunityHeaderCell.reuseId()
+            case let model as ProfileStatsCellModel:
+                return ProfileStatsCell.reuseId()
+            case let model as BrowseListCellModel:
+                return BrowseListTableViewCell.reuseId()
             default:
                 return super.tableView(tableView, reuseIdentifierForIndexPath: indexPath)
             }
@@ -130,8 +127,7 @@ extension CommunityFeedViewController {
         }
         
         override func nibCellsId() -> [String] {
-            return []
-//            return [ProfileInfoCell.reuseId(), ProfileStatsCell.reuseId(), BrowseListTableViewCell.reuseId(), DescriptionTableViewCell.reuseId()]
+       return [CommunityHeaderCell.reuseId(), ProfileStatsCell.reuseId(), BrowseListTableViewCell.reuseId()]
         }
         
         func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
