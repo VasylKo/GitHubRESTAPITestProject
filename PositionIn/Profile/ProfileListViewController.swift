@@ -101,9 +101,6 @@ extension ProfileListViewController: BrowseActionConsumer {
 protocol ProfileCellModel: TableViewCellModel {
 }
 
-protocol CommunityCellModel: TableViewCellModel {
-}
-
 
 extension TableViewCellTextModel: ProfileCellModel {
     

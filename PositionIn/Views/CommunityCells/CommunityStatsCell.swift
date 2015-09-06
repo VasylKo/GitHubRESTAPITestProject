@@ -32,7 +32,7 @@ class CommunityStatsCell: TableViewCell {
     @IBOutlet private weak var eventsLabel: UILabel!
 }
 
-public struct CommunityStatsCellModel: CommunityCellModel {
+public struct CommunityStatsCellModel: TableViewCellModel {
     let countMembers: Int?
     let countPosts: Int?
     let countEvents: Int?
