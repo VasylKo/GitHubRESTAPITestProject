@@ -14,8 +14,9 @@ target 'PositionIn' do
     pod 'HMSegmentedControl'
     pod 'JDStatusBarNotification'
     
-    pod 'ResponseDetective'
     pod 'PosInCore', :path => 'PosInCore'
+    
+    pod 'Braintree'
 end
 
 target 'PositionInTests' do
