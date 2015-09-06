@@ -11,7 +11,6 @@ import PosInCore
 import Alamofire
 import BrightFutures
 import CleanroomLogger
-import ResponseDetective
 import Messaging
 import GoogleMaps
 
