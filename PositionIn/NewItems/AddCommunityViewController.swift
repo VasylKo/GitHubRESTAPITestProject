@@ -9,11 +9,14 @@
 import UIKit
 import XLForm
 import CleanroomLogger
+import BrightFutures
 
 final class AddCommunityViewController: BaseAddItemViewController {
     private enum Tags : String {
         case Title = "Title"
         case Description = "Description"
+        case Private = "Private"
+        case Photo = "Photo"
     }
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
@@ -32,6 +35,11 @@ final class AddCommunityViewController: BaseAddItemViewController {
         // Description section
         let descriptionSection = XLFormSectionDescriptor.formSection()
         form.addFormSection(descriptionSection)
+        
+        //Photo row
+        let photoRow = photoRowDescriptor(Tags.Photo.rawValue)
+        descriptionSection.addFormRow(photoRow)
+
         // Title
         let titleRow = XLFormRowDescriptor(tag: Tags.Title.rawValue, rowType: XLFormRowDescriptorTypeText)
         titleRow.cellConfigAtConfigure["textField.placeholder"] = NSLocalizedString("Title", comment: "New community: title")
@@ -41,6 +49,11 @@ final class AddCommunityViewController: BaseAddItemViewController {
         let descriptionRow = XLFormRowDescriptor(tag: Tags.Description.rawValue, rowType:XLFormRowDescriptorTypeTextView)
         descriptionRow.cellConfigAtConfigure["textView.placeholder"] = NSLocalizedString("Description", comment: "New community: description")
         descriptionSection.addFormRow(descriptionRow)
+        
+        let privateRow = XLFormRowDescriptor(tag: Tags.Private.rawValue, rowType: XLFormRowDescriptorTypeBooleanSwitch, title: NSLocalizedString("Private", comment: "New community: private"))
+        privateRow.value = NSNumber(bool: true)
+        descriptionSection.addFormRow(privateRow)
+
         
         self.form = form
     }
@@ -61,18 +74,27 @@ final class AddCommunityViewController: BaseAddItemViewController {
         let values = formValues()
         Log.debug?.value(values)
         
-        var community = Community()
-        community.name = values[Tags.Title.rawValue] as? String
-        community.communityDescription = values[Tags.Description.rawValue] as? String
-        view.userInteractionEnabled = false
-        api().createCommunity(community: community).onSuccess{ [weak self] community  in
-            Log.debug?.value(community)
-            self?.sendUpdateNotification()
-            self?.performSegue(AddCommunityViewController.Segue.Close)
-        }.onFailure { error in
-            showError(error.localizedDescription)
-        }.onComplete { [weak self] result in
-            self?.view.userInteractionEnabled = true
+        if  let imageUpload = uploadAssets(values[Tags.Photo.rawValue]) {
+            view.userInteractionEnabled = false
+            locationController().getCurrentLocation().zip(imageUpload).flatMap {
+                (location: Location, urls: [NSURL]) -> Future<Community, NSError> in
+                var community = Community()
+                community.name = values[Tags.Title.rawValue] as? String
+                community.communityDescription = values[Tags.Description.rawValue] as? String
+                let rawPrivate = values[Tags.Private.rawValue] as? NSNumber
+                community.isPrivate = map(rawPrivate) { $0.boolValue} ?? true
+                community.avatar = urls.first
+
+                return api().createCommunity(community: community)
+            }.onSuccess{ [weak self] community  in
+                Log.debug?.value(community)
+                self?.sendUpdateNotification()
+                self?.performSegue(AddCommunityViewController.Segue.Close)
+            }.onFailure { error in
+                showError(error.localizedDescription)
+            }.onComplete { [weak self] result in
+                self?.view.userInteractionEnabled = true
+            }
         }
     }
 }
