@@ -34,12 +34,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Log.enable(minimumSeverity: .Info, synchronousMode: false)
         #endif
         let urlSessionConfig = NSURLSessionConfiguration.defaultSessionConfiguration()
-        #if DEBUG
-        InterceptingProtocol.registerRequestInterceptor(HeadersInterceptor(outputStream: CleanroomOutputStream(logChannel: Log.debug)))
-        InterceptingProtocol.registerRequestInterceptor(JSONInterceptor(outputStream: CleanroomOutputStream(logChannel: Log.debug)))
-        InterceptingProtocol.registerErrorInterceptor(HeadersInterceptor(outputStream: CleanroomOutputStream(logChannel: Log.error)))
-//        urlSessionConfig.protocolClasses = [InterceptingProtocol.self]
-        #endif
         let baseURL = AppConfiguration().baseURL
         //FIXME: dissallow self signed certificates in the future
         let trustPolicies: [String: ServerTrustPolicy]? = [
@@ -124,12 +118,4 @@ func api() -> APIService {
 func locationController() -> LocationController {
     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
     return appDelegate.locationController
-}
-
-
-struct CleanroomOutputStream: OutputStreamType {
-    let logChannel: LogChannel?
-    func write(string: String) {
-        logChannel?.message(string)
-    }
 }
