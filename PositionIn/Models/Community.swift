@@ -18,6 +18,22 @@ struct Community: CRUDObject {
     
     var shops: [ObjectInfo]?
 
+    /*
+    "members": {
+    "data": [
+				{
+    "id": <guid>,
+    "name": <string>,
+    "avatar": <string>
+				}
+				],
+    "count": <number>
+    },
+    */
+    var membersCount: Int = 0
+    var postsCount: Int = 0
+    var eventsCount: Int = 0
+    
     var role: Role = .Unknown
     var members: CollectionResponse<UserInfo>?
     var location: Location?
@@ -83,6 +99,9 @@ struct Community: CRUDObject {
         members <- map["members"]
         location <- map["location"]
         shops <- map["shops.data"]
+        membersCount <- map["members.count"]
+        postsCount <- map["posts.count"]
+        eventsCount <- map["events.count"]
     }
     
     static func endpoint() -> String {
