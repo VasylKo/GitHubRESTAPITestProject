@@ -38,6 +38,9 @@ final class CommunityListViewController: BesideMenuViewController {
         
     }
 
+    @IBAction func browseModeSegmentChanged(sender: AnyObject) {
+    }
+    @IBOutlet private weak var browseModeSegmentedControl: UISegmentedControl!
     /*
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
