@@ -9,7 +9,7 @@
 import CleanroomLogger
 import ObjectMapper
 
-class ObjectInfo: Mappable, Printable {
+class ObjectInfo: CRUDObject {
     var objectId: CRUDObjectId = CRUDObjectInvalidId
     var title: String?
 
@@ -34,6 +34,9 @@ class ObjectInfo: Mappable, Printable {
         title <- map["name"]
     }
     
+    static func endpoint() -> String {
+        return ""
+    }
     
     var description: String {
         return "<\(self.dynamicType):\(objectId),>"

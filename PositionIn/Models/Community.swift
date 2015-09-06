@@ -29,14 +29,19 @@ struct Community: CRUDObject {
     "count": <number>
     },
     */
-    var role: String?
-    var members: CollectionResponse<UserProfile>?
+    var role: Role = .Unknown
+    var members: CollectionResponse<UserInfo>?
     var location: Location?
     
     var defaultShopId: CRUDObjectId  {
         return shops?.first?.objectId ?? CRUDObjectInvalidId
     }
 
+    enum Role: Int {
+        case Unknown
+        case Owner, Moderator, Member, Invitee
+    }
+    
 
     init(objectId: CRUDObjectId = CRUDObjectInvalidId) {
         self.objectId = objectId
@@ -57,7 +62,7 @@ struct Community: CRUDObject {
         objectId <- (map["id"], CRUDObjectIdTransform())
         name <- map["name"]
         communityDescription <- map["description"]
-        role <- map["role"]
+        role <- (map["role"], EnumTransform())
         avatar <- (map["avatar"], AmazonURLTransform())
         isPrivate <- map["isPrivate"]
         members <- map["members"]

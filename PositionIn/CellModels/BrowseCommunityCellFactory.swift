@@ -11,6 +11,7 @@ import PosInCore
 struct BrowseCommunityCellFactory {
     func modelsForCommunity(community: Community, mode: BrowseCommunityViewController.BrowseMode) -> [TableViewCellModel] {
         var models: [TableViewCellModel] = []
+        models.append(TableViewCellURLTextModel(title:community.name ?? "", url:community.avatar))
 //        if let url = post.photos?.first?.url {
 //            models.append(TableViewCellURLModel(url: url))
 //        }
@@ -24,19 +25,14 @@ struct BrowseCommunityCellFactory {
     }
     
     func communityCellsReuseId() -> [String]  {
-        return [CommunityInfoCell.reuseId(),CommunityActionCell.reuseId()]
+        return [CommunityInfoCell.reuseId(),CommunityActionCell.reuseId(), CommunityHeaderCell.reuseId()]
     }
     
     func cellReuseIdForModel(model: TableViewCellModel) -> String {
-//        if model is TableViewCellURLModel {
-//            return PostImageCell.reuseId()
-//        }
-//        if model is PostInfoModel {
-//            return PostInfoCell.reuseId()
-//        }
-//        if model is TableViewCellTextModel {
-//            return PostBodyCell.reuseId()
-//        }
+        
+        if model is TableViewCellURLTextModel {
+            return CommunityHeaderCell.reuseId()
+        }
         
         return TableViewCell.reuseId()
     }
