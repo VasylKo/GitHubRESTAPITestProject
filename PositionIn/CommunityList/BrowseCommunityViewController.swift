@@ -21,11 +21,7 @@ protocol BrowseCommunityActionProvider {
 
 
 final class BrowseCommunityViewController: BesideMenuViewController {
-    
-    deinit {
-        Log.debug?.trace()
-    }
-    
+        
     enum Action: Int, Printable {
         case None
         case Browse

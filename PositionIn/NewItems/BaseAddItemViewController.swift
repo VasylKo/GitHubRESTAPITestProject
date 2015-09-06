@@ -104,10 +104,22 @@ class BaseAddItemViewController: XLFormViewController {
         communityRow.selectorOptions = [ emptyOption ]
         api().currentUserId().flatMap { userId in
             return api().getUserCommunities(userId)
-        }.onSuccess { [weak communityRow] response in
+        }.onSuccess { [weak communityRow, weak self] response in
             Log.debug?.value(response.items)
             let options = [emptyOption] + response.items.map { XLFormOptionsObject.formOptionsObjectWithCommunity($0) }
             communityRow?.selectorOptions = options
+            if  let preselectedCommunity = self?.preselectedCommunity {
+                let filteredOptions = options.filter { (option: XLFormOptionsObject!) -> Bool in
+                    if let communityId = option.communityId where communityId == preselectedCommunity {
+                        return true
+                    }
+                    return false
+                }
+                if let value = filteredOptions.first {
+                    communityRow?.value = value
+                    self?.tableView?.reloadData()
+                }
+            }
         }
 
         return communityRow

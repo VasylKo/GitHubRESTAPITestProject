@@ -27,7 +27,7 @@ final class EditCommunityViewController: BaseAddItemViewController {
                         strongSelf.titleRow.value = community.name
                         strongSelf.descriptionRow.value = community.communityDescription
                         strongSelf.privateRow.value = NSNumber(bool: community.isPrivate)
-                        strongSelf.tableView.reloadData()
+                        strongSelf.tableView?.reloadData()
                         strongSelf.existingCommunity = community
                     }                    
                 }
