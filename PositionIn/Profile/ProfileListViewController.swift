@@ -51,9 +51,10 @@ class ProfileListViewController: BesideMenuViewController, BrowseActionProducer 
             TableViewCellTextModel(title: profile.userDescription ?? ""),
             ProfileStatsCellModel(countPosts: profile.countPosts, countFollowers: profile.countFollowers, countFollowing: profile.countFollowing),
         ]
-        dataSource.items[Sections.Feed.rawValue] = [
-            BrowseListCellModel(objectId: profile.objectId, actionConsumer: self)
-        ]
+        var feedModel = BrowseListCellModel(objectId: profile.objectId, actionConsumer: self)
+        feedModel.excludeCommunityItems = true
+        
+        dataSource.items[Sections.Feed.rawValue] = [ feedModel ]
         tableView.reloadData()
         actionConsumer?.browseControllerDidChangeContent(self)
     }
