@@ -21,7 +21,7 @@ struct FeedItemCellModelFactory {
                     objectID: feedItem.objectId,
                     title: feedItem.name,
                     details: feedItem.text,
-                    info: map(feedItem.endDate) {dateFormatter.stringFromDate($0)},
+                    info: map(feedItem.date) {dateFormatter.stringFromDate($0)},
                     imageURL: feedItem.image,
                     data: feedItem.itemData
                 ),

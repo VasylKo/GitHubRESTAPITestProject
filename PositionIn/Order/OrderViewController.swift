@@ -21,21 +21,30 @@ class OrderViewController: UITableViewController {
             itemImageView.setImageFromURL(url, placeholder: image)
         }
         initializeBranTree()
+        updateLabels()
     }
 
     @IBAction func quantityStepperDidChange(sender: UIStepper) {
+        updateLabels()
+    }
+    
+    private func updateLabels() {
         quantityLabel.text = quantityString
         if let price = product?.price {
             let subtotal: Float = price * Float(quantity)
             subtotalLabel.text = currencyFormatter.stringFromNumber(NSNumber(float: subtotal))
-            let tax = subtotal * 0.027
+            let tax = subtotal * 0.05
             taxLabel.text = currencyFormatter.stringFromNumber(NSNumber(float: tax))
-            let fee: Float = 0.40
+            let fee: Float = subtotal * 0.03
             feeLabel.text = currencyFormatter.stringFromNumber(NSNumber(float: fee))
             let total = subtotal + tax + fee
             totalLabel.text = currencyFormatter.stringFromNumber(NSNumber(float: total))
+        } else {
+            subtotalLabel.text = nil
+            taxLabel.text = nil
+            feeLabel.text = nil
+            totalLabel.text = nil
         }
-        
     }
     
     @IBOutlet private weak var itemImageView: UIImageView!
