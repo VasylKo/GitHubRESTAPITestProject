@@ -23,6 +23,7 @@ final class AddEventViewController: BaseAddItemViewController {
         case Community = "Community"
         case Photo = "Photo"
         case Location = "Location"
+        case Terms = "Terms"        
     }
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
@@ -84,6 +85,11 @@ final class AddEventViewController: BaseAddItemViewController {
         let endDate = XLFormRowDescriptor(tag: Tags.EndDate.rawValue, rowType: XLFormRowDescriptorTypeDateTimeInline, title: NSLocalizedString("End date", comment: "New event: End date"))
         endDate.value = defaultEndDate
         datesSection.addFormRow(endDate)
+        
+        //Terms
+        let termsSection = XLFormSectionDescriptor.formSection()
+        form.addFormSection(termsSection)
+        termsSection.addFormRow(termsRowDescriptor(Tags.Terms.rawValue))
         
         self.form = form
     }

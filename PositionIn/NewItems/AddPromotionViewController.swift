@@ -24,6 +24,7 @@ final class AddPromotionViewController: BaseAddItemViewController {
         case Photo = "Photo"
         case Location = "Location"
         case Description = "Description"
+        case Terms = "Terms"
     }
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
@@ -94,6 +95,12 @@ final class AddPromotionViewController: BaseAddItemViewController {
         let descriptionRow = XLFormRowDescriptor(tag: Tags.Description.rawValue, rowType: XLFormRowDescriptorTypeTextView, title: NSLocalizedString("Description", comment: "New promotion: description"))
         descriptionSection.addFormRow(descriptionRow)
 
+        //Terms
+        let termsSection = XLFormSectionDescriptor.formSection()
+        form.addFormSection(termsSection)
+        termsSection.addFormRow(termsRowDescriptor(Tags.Terms.rawValue))
+
+        
         self.form = form
     }
     

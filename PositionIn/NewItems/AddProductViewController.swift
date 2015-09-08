@@ -24,6 +24,7 @@ final class AddProductViewController: BaseAddItemViewController {
         case Photo = "Photo"
         case Location = "Location"
         case Quantity =  "Quantity"
+        case Terms = "Terms"
     }
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
@@ -101,6 +102,11 @@ final class AddProductViewController: BaseAddItemViewController {
         // Description
         let descriptionRow = XLFormRowDescriptor(tag: Tags.Description.rawValue, rowType: XLFormRowDescriptorTypeTextView, title: NSLocalizedString("Description", comment: "New product: description"))
         descriptionSection.addFormRow(descriptionRow)
+        
+        //Terms
+        let termsSection = XLFormSectionDescriptor.formSection()
+        form.addFormSection(termsSection)
+        termsSection.addFormRow(termsRowDescriptor(Tags.Terms.rawValue))
         
         self.form = form
     }
