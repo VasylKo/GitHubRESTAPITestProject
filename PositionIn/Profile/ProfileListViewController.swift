@@ -29,7 +29,6 @@ class ProfileListViewController: BesideMenuViewController, BrowseActionProducer 
     //MARK: - Reload data -
     
     func reloadData() {
-        let page = APIService.Page()
         api().getUserProfile(profile.objectId).onSuccess { [weak self] profile in
             self?.didReceiveProfile(profile)
         }
@@ -38,11 +37,16 @@ class ProfileListViewController: BesideMenuViewController, BrowseActionProducer 
     
     
     private func didReceiveProfile(profile: UserProfile) {
+        let isCurrentUser = api().isCurrentUser(profile.objectId)
+        let isUserAuthorized = api().isUserAuthorized()
         let (leftAction, rightAction): (UserProfileViewController.ProfileAction, UserProfileViewController.ProfileAction) = {
-            if let currentUserId = api().currentUserId() where currentUserId == profile.objectId {
+            switch(isCurrentUser, isUserAuthorized) {
+            case (true, _):
                 return (.None, .Edit)
-            } else {
+            case (_, true):
                 return (.Call, .Chat)
+            default:
+                return (.None, .None)
             }
         }()
         let actionDelegate = self.parentViewController as? UserProfileActionConsumer

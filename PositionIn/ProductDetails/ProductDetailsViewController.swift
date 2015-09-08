@@ -29,6 +29,10 @@ final class ProductDetailsViewController: UIViewController {
         if let orderController = segue.destinationViewController  as? OrderViewController {
             orderController.product = self.product
         }
+        if let profileController = segue.destinationViewController  as? UserProfileViewController,
+           let userId = author?.objectId {
+            profileController.objectId = userId
+        }
     }
     
     private func reloadData() {

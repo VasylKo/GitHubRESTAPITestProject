@@ -25,7 +25,21 @@ extension APIService {
         return sessionController.currentUserId()
     }
     
-    //Success if has valid session and user is not guest
+    func isUserAuthorized() -> Bool {
+        if let currentUserId = currentUserId() {
+            return self.sessionController.isGuest == false
+        }
+        return false
+    }
+    
+    func isCurrentUser(userId: CRUDObjectId) -> Bool {
+        if let currentUserId = api().currentUserId() {
+            return currentUserId == userId
+        }
+        return false
+    }
+    
+    //Success if has valid session and user is not a guest
     func recoverSession() -> Future<UserProfile, NSError> {
         let f = session().flatMap { _ in
             return self.sessionController.isUserAuthorized()

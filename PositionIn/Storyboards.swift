@@ -64,6 +64,10 @@ struct Storyboards {
             return self.storyboard.instantiateViewControllerWithIdentifier("MapViewController") as! BrowseViewController
         }
 
+        static func instantiatePeopleViewController() -> PeopleViewController! {
+            return self.storyboard.instantiateViewControllerWithIdentifier("PeopleViewController") as! PeopleViewController
+        }
+
         static func instantiateUserProfileViewController() -> UserProfileViewController! {
             return self.storyboard.instantiateViewControllerWithIdentifier("UserProfileViewController") as! UserProfileViewController
         }
@@ -325,6 +329,7 @@ extension SidebarViewController {
         case ShowCommunities = "ShowCommunities"
         case ShowSettings = "ShowSettings"
         case ShowMyProfile = "ShowMyProfile"
+        case ShowPeople = "ShowPeople"
 
         var kind: SegueKind? {
             switch (self) {
@@ -341,6 +346,8 @@ extension SidebarViewController {
             case ShowSettings:
                 return SegueKind(rawValue: "custom")
             case ShowMyProfile:
+                return SegueKind(rawValue: "custom")
+            case ShowPeople:
                 return SegueKind(rawValue: "custom")
             default:
                 preconditionFailure("Invalid value")
@@ -376,6 +383,8 @@ extension SidebarViewController {
 
 //MARK: - BrowseListViewController
 
+//MARK: - OrderViewController
+
 //MARK: - ProductDetailsViewController
 extension UIStoryboardSegue {
     func selection() -> ProductDetailsViewController.Segue? {
@@ -390,16 +399,16 @@ extension ProductDetailsViewController {
 
     enum Segue: String, Printable, SegueProtocol {
         case ShowProductInventory = "ShowProductInventory"
-        case ShowSellerProfile = "ShowSellerProfile"
         case ShowBuyScreen = "ShowBuyScreen"
+        case ShowSellerProfile = "ShowSellerProfile"
 
         var kind: SegueKind? {
             switch (self) {
             case ShowProductInventory:
                 return SegueKind(rawValue: "show")
-            case ShowSellerProfile:
-                return SegueKind(rawValue: "show")
             case ShowBuyScreen:
+                return SegueKind(rawValue: "show")
+            case ShowSellerProfile:
                 return SegueKind(rawValue: "show")
             default:
                 preconditionFailure("Invalid value")
@@ -411,8 +420,10 @@ extension ProductDetailsViewController {
             switch (self) {
             case ShowProductInventory:
                 return ProductInventoryViewController.self
+            case ShowBuyScreen:
+                return OrderViewController.self
             case ShowSellerProfile:
-                return SellerProfileViewController.self
+                return UserProfileViewController.self
             default:
                 assertionFailure("Unknown destination")
                 return nil
@@ -426,8 +437,86 @@ extension ProductDetailsViewController {
 }
 
 //MARK: - EventDetailsViewController
+extension UIStoryboardSegue {
+    func selection() -> EventDetailsViewController.Segue? {
+        if let identifier = self.identifier {
+            return EventDetailsViewController.Segue(rawValue: identifier)
+        }
+        return nil
+    }
+}
+
+extension EventDetailsViewController { 
+
+    enum Segue: String, Printable, SegueProtocol {
+        case ShowOrganizerProfile = "ShowOrganizerProfile"
+
+        var kind: SegueKind? {
+            switch (self) {
+            case ShowOrganizerProfile:
+                return SegueKind(rawValue: "show")
+            default:
+                preconditionFailure("Invalid value")
+                break
+            }
+        }
+
+        var destination: UIViewController.Type? {
+            switch (self) {
+            case ShowOrganizerProfile:
+                return UserProfileViewController.self
+            default:
+                assertionFailure("Unknown destination")
+                return nil
+            }
+        }
+
+        var identifier: String? { return self.description } 
+        var description: String { return self.rawValue }
+    }
+
+}
 
 //MARK: - PromotionDetailsViewController
+extension UIStoryboardSegue {
+    func selection() -> PromotionDetailsViewController.Segue? {
+        if let identifier = self.identifier {
+            return PromotionDetailsViewController.Segue(rawValue: identifier)
+        }
+        return nil
+    }
+}
+
+extension PromotionDetailsViewController { 
+
+    enum Segue: String, Printable, SegueProtocol {
+        case ShowSellerProfile = "ShowSellerProfile"
+
+        var kind: SegueKind? {
+            switch (self) {
+            case ShowSellerProfile:
+                return SegueKind(rawValue: "show")
+            default:
+                preconditionFailure("Invalid value")
+                break
+            }
+        }
+
+        var destination: UIViewController.Type? {
+            switch (self) {
+            case ShowSellerProfile:
+                return UserProfileViewController.self
+            default:
+                assertionFailure("Unknown destination")
+                return nil
+            }
+        }
+
+        var identifier: String? { return self.description } 
+        var description: String { return self.rawValue }
+    }
+
+}
 
 //MARK: - ProductInventoryViewController
 extension UIStoryboardSegue {
@@ -470,9 +559,46 @@ extension ProductInventoryViewController {
 
 }
 
-//MARK: - SellerProfileViewController
-
 //MARK: - PostViewController
+extension UIStoryboardSegue {
+    func selection() -> PostViewController.Segue? {
+        if let identifier = self.identifier {
+            return PostViewController.Segue(rawValue: identifier)
+        }
+        return nil
+    }
+}
+
+extension PostViewController { 
+
+    enum Segue: String, Printable, SegueProtocol {
+        case ShowUserProfile = "ShowUserProfile"
+
+        var kind: SegueKind? {
+            switch (self) {
+            case ShowUserProfile:
+                return SegueKind(rawValue: "show")
+            default:
+                preconditionFailure("Invalid value")
+                break
+            }
+        }
+
+        var destination: UIViewController.Type? {
+            switch (self) {
+            case ShowUserProfile:
+                return UserProfileViewController.self
+            default:
+                assertionFailure("Unknown destination")
+                return nil
+            }
+        }
+
+        var identifier: String? { return self.description } 
+        var description: String { return self.rawValue }
+    }
+
+}
 
 //MARK: - BrowseViewController
 extension UIStoryboardSegue {
@@ -518,6 +644,47 @@ extension BrowseViewController {
                 return PromotionDetailsViewController.self
             case ShowPost:
                 return PostViewController.self
+            default:
+                assertionFailure("Unknown destination")
+                return nil
+            }
+        }
+
+        var identifier: String? { return self.description } 
+        var description: String { return self.rawValue }
+    }
+
+}
+
+//MARK: - PeopleViewController
+extension UIStoryboardSegue {
+    func selection() -> PeopleViewController.Segue? {
+        if let identifier = self.identifier {
+            return PeopleViewController.Segue(rawValue: identifier)
+        }
+        return nil
+    }
+}
+
+extension PeopleViewController { 
+
+    enum Segue: String, Printable, SegueProtocol {
+        case ShowUserProfile = "ShowUserProfile"
+
+        var kind: SegueKind? {
+            switch (self) {
+            case ShowUserProfile:
+                return SegueKind(rawValue: "show")
+            default:
+                preconditionFailure("Invalid value")
+                break
+            }
+        }
+
+        var destination: UIViewController.Type? {
+            switch (self) {
+            case ShowUserProfile:
+                return UserProfileViewController.self
             default:
                 assertionFailure("Unknown destination")
                 return nil

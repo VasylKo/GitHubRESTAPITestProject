@@ -17,7 +17,7 @@ final class UserProfileViewController: BrowseModeViewController {
     
     enum ProfileAction: Int, Printable {
         case None
-        case Call, Chat, Edit
+        case Call, Chat, Edit, Follow, UnFollow
         var description: String {
             switch self {
             case .None:
@@ -28,6 +28,10 @@ final class UserProfileViewController: BrowseModeViewController {
                 return "SendMessage"
             case .Edit:
                 return "Edit profile"
+            case .Follow:
+                return "Follow"
+            case .UnFollow:
+                return "Unfollow"
             }
         }
 
