@@ -27,6 +27,7 @@ class SidebarViewController: KYDrawerController {
         case UserProfile
         case Settings
         case Login
+        case People
         
         func isUnique() -> Bool {
             switch self {
@@ -62,6 +63,8 @@ class SidebarViewController: KYDrawerController {
                 return (SidebarViewController.Segue.ShowSettings, nil)
             case .UserProfile:
                 return (SidebarViewController.Segue.ShowMyProfile, nil)
+            case .People:
+                return (SidebarViewController.Segue.ShowPeople, nil)
             default:
                 return nil
             }
