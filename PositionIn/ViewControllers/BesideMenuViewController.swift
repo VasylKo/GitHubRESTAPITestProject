@@ -11,13 +11,32 @@ import CleanroomLogger
 
 /// Controller with Main menu button
 class BesideMenuViewController: UIViewController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.hidesBackButton = true
-        self.navigationItem.leftBarButtonItem = drawerBarButtonItem()
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
     }
     
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        if  let rootController = navigationController?.viewControllers.first as? UIViewController
+            where rootController == self {
+                drawerButtonVisible = true
+        }
+    }
+    
+    var drawerButtonVisible: Bool = false {
+        didSet {
+            let (backVisible: Bool, leftItem: UIBarButtonItem?) = {
+                return self.drawerButtonVisible
+                    ? (true, self.drawerBarButtonItem())
+                    : (false, nil)
+                
+            }()
+            self.navigationItem.hidesBackButton = backVisible
+            self.navigationItem.leftBarButtonItem = leftItem
+        }
+    }
     
     @IBAction func showMainMenu(sender: AnyObject) {
         sideBarController?.setDrawerState(.Opened, animated: true)

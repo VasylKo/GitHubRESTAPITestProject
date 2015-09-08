@@ -15,9 +15,6 @@ final class CommunityViewController: BrowseModeViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.hidesBackButton = false
-        self.navigationItem.leftBarButtonItem = nil
-
         displayMode = .List
     }
     
