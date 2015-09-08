@@ -124,10 +124,12 @@ extension EventDetailsViewController {
 extension EventDetailsViewController: EventDetailsActionConsumer {
     func executeAction(action: EventDetailsAction) {
         switch action {
-//        case .OrganizerProfile:
-//            if let userId = event. {
-//                
-//            }
+        case .OrganizerProfile:
+            if let userId = event?.author {
+                let profileController = Storyboards.Main.instantiateUserProfileViewController()
+                profileController.objectId = userId
+                navigationController?.pushViewController(profileController, animated: true)                
+            }
         default:
             Log.warning?.message("Unhandled action: \(action)")
             return

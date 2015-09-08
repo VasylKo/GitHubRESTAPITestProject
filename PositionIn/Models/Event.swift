@@ -19,7 +19,7 @@ struct Event: CRUDObject {
     var location: Location?
     var category: ItemCategory?
     var participants: Int? = 0
-   
+    var author: CRUDObjectId?
     
 /* 
     TODO:
@@ -92,6 +92,7 @@ struct Event: CRUDObject {
         location <- map["location"]
         category <- (map["category"], EnumTransform())
         participants <- map["participants.count"]
+        author <- (map["author"], CRUDObjectIdTransform())
     }
     
     static func endpoint() -> String {
