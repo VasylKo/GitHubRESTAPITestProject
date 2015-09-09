@@ -6,7 +6,6 @@
 //  Copyright (c) 2015 Soluna Labs. All rights reserved.
 //
 
-import UIKit
 import PosInCore
 import BrightFutures
 import CleanroomLogger
@@ -193,15 +192,10 @@ extension BrowseCommunityViewController: BrowseCommunityActionConsumer {
                 self?.reloadData()
             }
             break
-        case .Browse:
+        case .Browse, .Post:
             let controller = Storyboards.Main.instantiateCommunityViewController()
             controller.objectId = community
             navigationController?.pushViewController(controller, animated: true)
-        case .Post:
-            let controller = Storyboards.Main.instantiateCommunityViewController()
-            controller.objectId = community
-            navigationController?.pushViewController(controller, animated: true)
-            break
         case .Invite:
             break
         case .Edit:
@@ -209,7 +203,7 @@ extension BrowseCommunityViewController: BrowseCommunityActionConsumer {
             controller.existingCommunityId = community
             navigationController?.pushViewController(controller, animated: true)
             self.subscribeForContentUpdates(controller)
-            break
+
         case .None:
             break
         }

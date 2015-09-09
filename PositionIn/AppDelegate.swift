@@ -118,3 +118,8 @@ func locationController() -> LocationController {
     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
     return appDelegate.locationController
 }
+
+func chat() -> XMPPClient {
+    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+    return appDelegate.chatClient
+}

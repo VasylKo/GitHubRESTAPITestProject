@@ -34,6 +34,10 @@ final class ProfileInfoCell: TableViewCell {
         switch action {
         case .Edit:
             btn.setImage(UIImage(named: "MainMenuSettings"), forState: .Normal)
+        case .Chat:
+            btn.setImage(UIImage(named: "MainMenuMessages"), forState: .Normal)
+        case .Call:
+            btn.setImage(UIImage(named: "MainMenuPeople"), forState: .Normal)
         case .None:
             fallthrough
         default:
@@ -46,7 +50,7 @@ final class ProfileInfoCell: TableViewCell {
         backImageView.hnk_cancelSetImage()
         avatarView.cancelSetImage()
     }
-    @IBOutlet weak var leftActionTapped: UIButton!
+    
     
     @IBOutlet private weak var backImageView: UIImageView!
     @IBOutlet private weak var avatarView: AvatarView!

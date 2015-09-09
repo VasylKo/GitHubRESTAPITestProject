@@ -34,6 +34,7 @@ final class PromotionDetailsViewController: UIViewController {
     }
     
     private func didReceivePromotionDetails(promotion: Promotion) {
+        self.promotion = promotion
         headerLabel.text = promotion.name
         detailsLabel.text = promotion.text
         
@@ -66,9 +67,11 @@ final class PromotionDetailsViewController: UIViewController {
                 PromotionActionItem(title: NSLocalizedString("Navigate", comment: "Promotion action: Navigate"), image: "MainMenuMessages", action: .Navigate)
             ],
         ]
-        
     }
+    
+    
     var objectId: CRUDObjectId?
+    private var promotion: Promotion?
     
     @IBOutlet private weak var actionTableView: UITableView!
     @IBOutlet private weak var promotionImageView: UIImageView!
@@ -110,7 +113,13 @@ extension PromotionDetailsViewController {
 extension PromotionDetailsViewController: PromotionDetailsActionConsumer {
     func executeAction(action: PromotionDetailsAction) {
         switch action {
-            
+        case .SellerProfile:
+            if let userId = promotion?.author {
+                let profileController = Storyboards.Main.instantiateUserProfileViewController()
+                profileController.objectId = userId
+                navigationController?.pushViewController(profileController, animated: true)
+            }
+
         default:
             Log.warning?.message("Unhandled action: \(action)")
             return

@@ -34,6 +34,7 @@ final class EventDetailsViewController: UIViewController {
     }
     
     private func didReceiveEventDetails(event: Event) {
+        self.event = event
         headerLabel.text = event.name
         infoLabel.text = event.text
         let eventDetailsFormat = NSLocalizedString("%d People are attending", comment: "Event details: details format")
@@ -77,6 +78,8 @@ final class EventDetailsViewController: UIViewController {
     
     var objectId: CRUDObjectId?
     
+    private var event: Event?
+    
     @IBOutlet private weak var actionTableView: UITableView!
     @IBOutlet private weak var eventImageView: UIImageView!
     @IBOutlet private weak var headerLabel: UILabel!
@@ -118,10 +121,15 @@ extension EventDetailsViewController {
     }
 }
 
-extension EventDetailsViewController:EventDetailsActionConsumer {
+extension EventDetailsViewController: EventDetailsActionConsumer {
     func executeAction(action: EventDetailsAction) {
         switch action {
-            
+        case .OrganizerProfile:
+            if let userId = event?.author {
+                let profileController = Storyboards.Main.instantiateUserProfileViewController()
+                profileController.objectId = userId
+                navigationController?.pushViewController(profileController, animated: true)                
+            }
         default:
             Log.warning?.message("Unhandled action: \(action)")
             return

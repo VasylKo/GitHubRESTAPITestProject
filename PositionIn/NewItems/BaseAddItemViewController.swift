@@ -125,6 +125,11 @@ class BaseAddItemViewController: XLFormViewController {
         return communityRow
     }
     
+    func termsRowDescriptor(tag: String) -> XLFormRowDescriptor {
+        let row = XLFormRowDescriptor(tag: tag, rowType: XLFormRowDescriptorTypeTextView, title: NSLocalizedString("Terms & Information", comment: "New item: Terms & Information"))
+        return row
+    }
+    
     func communityValue(value: AnyObject?) -> CRUDObjectId? {
         if  let option = value as? XLFormOptionsObject,
             let communityId = option.communityId

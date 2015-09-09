@@ -20,7 +20,7 @@ struct Promotion: CRUDObject {
     var photos: [PhotoInfo]?
     var location: Location?
     var shop: CRUDObjectId?
-    
+    var author: CRUDObjectId?
 //
 
 
@@ -76,7 +76,7 @@ struct Promotion: CRUDObject {
         photos <- map["photos"]
         location <- map["location"]
         shop <- (map["shop"], CRUDObjectIdTransform())
-//
+        author <- (map["author"], CRUDObjectIdTransform())
     }
     
     static func endpoint() -> String {

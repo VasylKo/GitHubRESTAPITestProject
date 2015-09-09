@@ -95,7 +95,7 @@ struct SessionController {
         keychain.set(NSData(bytes: &isGuest, length: sizeof(Bool)), key: KeychainKeys.IsGuestKey)
     }
     
-    private var isGuest: Bool {
+    var isGuest: Bool {
         let data = keychain.getData(KeychainKeys.IsGuestKey)
         if let data = data {
             var isGuest: Bool = true
