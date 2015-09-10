@@ -19,9 +19,8 @@ final class BrowseMapViewController: UIViewController, BrowseActionProducer {
             self?.filter.coordinates = coordinate
             self?.mapView.moveCamera(GMSCameraUpdate.setTarget(coordinate, zoom: 12))
         }
-        
-
     }
+    
     let visibleItemTypes: [FeedItem.ItemType] = [.Event, .Promotion, .Item]
     
     var filter = SearchFilter.currentFilter
@@ -70,10 +69,6 @@ final class BrowseMapViewController: UIViewController, BrowseActionProducer {
     
     private var markers = [GMSMarker]()
     
-    private func isSameCoordinates(#coord1: CLLocationCoordinate2D, coord2:CLLocationCoordinate2D, epsilon: CLLocationDegrees) -> Bool {
-        return fabs(coord1.latitude - coord2.latitude) <= epsilon && fabs(coord1.longitude - coord2.longitude) <= epsilon
-    }
-
 }
 
 
@@ -86,9 +81,9 @@ extension BrowseMapViewController: GMSMapViewDelegate {
                 [weak self] response in
                 Log.debug?.value(response.items)
                 if let strongSelf = self
-                   where strongSelf.isSameCoordinates(
+                   where isSameCoordinates(
                     //TODO: set valid epsilon
-                    coord1: strongSelf.mapView.camera.target, coord2: position.target, epsilon: 0.3) {
+                    strongSelf.mapView.camera.target, position.target, epsilon: 0.3) {
                         strongSelf.displayFeedItems(response.items)
                 } else {
                     Log.debug?.message("Skip map response :\(response.items)")

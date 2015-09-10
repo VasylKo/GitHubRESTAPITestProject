@@ -1,5 +1,5 @@
 //
-//  XLFormOptionsObject+Community.swift
+//  XLFormOptionsObject+PositionIn.swift
 //  PositionIn
 //
 //  Created by Alexandr Goncharov on 19/08/15.
@@ -26,8 +26,23 @@ extension XLFormOptionsObject {
     }
     
     var itemCatefory: ItemCategory? {
-        if let rawValue = formValue() as? Int {
-            return ItemCategory(rawValue: rawValue)
+        return enumValue()
+    }
+    
+    
+    class func formOptionsObjectWithSearchDistance(distance: SearchFilter.Distance) -> XLFormOptionsObject! {
+        return XLFormOptionsObject(value: distance.rawValue, displayText: distance.displayString())
+    }
+    
+    var searchDistance: SearchFilter.Distance? {
+        return enumValue()
+    }
+    
+    
+    
+    private func enumValue<T: RawRepresentable>() -> T? {
+        if let rawValue = formValue() as? T.RawValue {
+            return T(rawValue: rawValue)
         }
         return nil
     }
