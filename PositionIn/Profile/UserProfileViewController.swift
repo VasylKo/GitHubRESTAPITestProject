@@ -79,16 +79,35 @@ final class UserProfileViewController: BrowseModeViewController {
             return controller
         }
     }
+    
+    static let SubscriptionDidChangeNotification = "SubscriptionDidChangeNotification"
+    
+    private func sendSubscriptionUpdateNotification(aUserInfo: [NSObject : AnyObject]? = nil) {
+        NSNotificationCenter.defaultCenter().postNotificationName(
+            UserProfileViewController.SubscriptionDidChangeNotification,
+            object: self,
+            userInfo: nil
+        )
+    }
 }
 
 extension UserProfileViewController: UserProfileActionConsumer {
     func shouldExecuteAction(action: UserProfileViewController.ProfileAction) {
-        Log.debug?.value(action)
         switch action {
         case .Edit:
             let updateController = Storyboards.NewItems.instantiateEditProfileViewController()
             subscribeForContentUpdates(updateController)
             navigationController?.pushViewController(updateController, animated: true)
+        case .Follow:
+            api().followUser(objectId).onSuccess { [weak self] in
+                self?.displayMode = .List
+                self?.sendSubscriptionUpdateNotification(aUserInfo: nil)
+            }
+        case .UnFollow:
+            api().unFollowUser(objectId).onSuccess { [weak self] in
+                self?.displayMode = .List
+                self?.sendSubscriptionUpdateNotification(aUserInfo: nil)
+            }
         case .None:
             fallthrough
         default:

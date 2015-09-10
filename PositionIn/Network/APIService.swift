@@ -84,7 +84,7 @@ struct APIService {
     }
     
     func createUserPost(post object: Post) -> Future<Post, NSError> {
-        return sessionController.currentUserId().flatMap {
+        return currentUserId().flatMap {
             (userId: CRUDObjectId) -> Future<Post, NSError> in
             let endpoint = Post.userPostsEndpoint(userId)
             return self.createObject(endpoint, object: object)
@@ -105,7 +105,7 @@ struct APIService {
     }
     
     func createUserPromotion(object: Promotion) -> Future<Promotion, NSError> {
-        return sessionController.currentUserId().flatMap {
+        return currentUserId().flatMap {
             (userId: CRUDObjectId) -> Future<Promotion, NSError> in
             let endpoint = Promotion.userPromotionsEndpoint(userId)
             return self.createObject(endpoint, object: object)
@@ -131,7 +131,7 @@ struct APIService {
     }
     
     func createUserEvent(object: Event) -> Future<Event, NSError> {
-        return sessionController.currentUserId().flatMap {
+        return currentUserId().flatMap {
             (userId: CRUDObjectId) -> Future<Event, NSError> in
             let endpoint = Event.userEventsEndpoint(userId)
             return self.createObject(endpoint, object: object)
@@ -202,6 +202,52 @@ struct APIService {
         let endpoint = Community.membersEndpoint(communityId)
         return updateCommand(endpoint)
     }
+    
+    //MARK: - People -
+    
+    func getUsers(page: Page) -> Future<CollectionResponse<UserInfo>,NSError> {
+        let endpoint = UserProfile.endpoint()
+        let params = page.query
+        return getObjectsCollection(endpoint, params: params)
+    }
+    
+    func getMySubscriptions() -> Future<CollectionResponse<UserInfo>,NSError> {
+        return currentUserId().flatMap { userId in
+            return self.getUserSubscriptions(userId)
+        }
+    }
+    
+    func getUserSubscriptions(userId: CRUDObjectId) -> Future<CollectionResponse<UserInfo>,NSError> {
+        let endpoint = UserProfile.subscripttionEndpoint(userId)
+        return getObjectsCollection(endpoint, params: nil)
+    }
+    
+    func getSubscriptionStateForUser(userId: CRUDObjectId) -> Future<UserProfile.SubscriptionState, NSError> {
+        //TODO: use follow":true from user profile response
+        if isCurrentUser(userId) {
+            return future { () -> Result<UserProfile.SubscriptionState, NSError> in
+                return Result(value:.SameUser)
+            }
+        }
+        return getMySubscriptions().map { (response: CollectionResponse<UserInfo>) -> UserProfile.SubscriptionState in
+            if count( response.items.filter { $0.objectId == userId } ) > 0 {
+                return .Following
+            } else {
+                return .NotFollowing
+            }
+        }
+    }
+    
+    func followUser(userId: CRUDObjectId) -> Future<Void, NSError> {
+        let endpoint = UserProfile.subscripttionEndpoint(userId)
+        return updateCommand(endpoint)
+    }
+
+    func unFollowUser(userId: CRUDObjectId) -> Future<Void, NSError> {
+        let endpoint = UserProfile.subscripttionEndpoint(userId)
+        return updateCommand(endpoint, method: .DELETE)
+    }
+
     
     //MARK: - Search -
     
