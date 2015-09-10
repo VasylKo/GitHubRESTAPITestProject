@@ -94,6 +94,10 @@ final class UserProfile: CRUDObject {
     static func userEndpoint(userId: CRUDObjectId) -> String {
         return UserProfile.endpoint().stringByAppendingPathComponent("\(userId)")
     }
+    
+    static func subscripttionEndpoint(userId: CRUDObjectId) -> String {
+        return UserProfile.userEndpoint(userId).stringByAppendingPathComponent("subscription")
+    }
 
     
     var description: String {

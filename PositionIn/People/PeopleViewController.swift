@@ -34,6 +34,14 @@ final class PeopleViewController: BesideMenuViewController {
     func reloadData() {
         dataRequestToken.invalidate()
         dataRequestToken = InvalidationToken()
+        let peopleRequest: Future<CollectionResponse<UserInfo>,NSError>
+        switch browseMode {
+        case .Following:
+            peopleRequest = api().getMySubscriptions()
+        case .Explore:
+            peopleRequest = api().getUsers(APIService.Page())
+        }
+        
     }
 
     

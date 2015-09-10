@@ -772,6 +772,9 @@
                                 <segment title="Explore"/>
                             </segments>
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="browseModeSegmentChanged:" destination="eAB-D2-ac0" eventType="valueChanged" id="7bb-WQ-gak"/>
+                            </connections>
                         </segmentedControl>
                     </navigationItem>
                     <connections>
