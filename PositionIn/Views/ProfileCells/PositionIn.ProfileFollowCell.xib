@@ -13,7 +13,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E75-hX-tog">
-                        <rect key="frame" x="100" y="10" width="120" height="39.5"/>
+                        <rect key="frame" x="100" y="10" width="120" height="44.5"/>
                         <color key="backgroundColor" red="0.63529411759999999" green="0.72549019609999998" blue="0.15686274510000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="width" relation="lessThanOrEqual" constant="320" id="3SW-wX-jrY"/>
@@ -31,7 +31,7 @@
                 <constraints>
                     <constraint firstItem="E75-hX-tog" firstAttribute="top" secondItem="l6k-cS-svb" secondAttribute="top" constant="10" id="A8i-71-dRf"/>
                     <constraint firstAttribute="centerX" secondItem="E75-hX-tog" secondAttribute="centerX" id="c7Q-r9-hSx"/>
-                    <constraint firstAttribute="bottom" secondItem="E75-hX-tog" secondAttribute="bottom" constant="10" id="fwx-mA-9cJ"/>
+                    <constraint firstAttribute="bottom" secondItem="E75-hX-tog" secondAttribute="bottom" constant="5" id="fwx-mA-9cJ"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

@@ -223,6 +223,7 @@ struct APIService {
     }
     
     func getSubscriptionStateForUser(userId: CRUDObjectId) -> Future<UserProfile.SubscriptionState, NSError> {
+        //TODO: use follow":true from user profile response
         if isCurrentUser(userId) {
             return future { () -> Result<UserProfile.SubscriptionState, NSError> in
                 return Result(value:.SameUser)
@@ -236,6 +237,17 @@ struct APIService {
             }
         }
     }
+    
+    func followUser(userId: CRUDObjectId) -> Future<Void, NSError> {
+        let endpoint = UserProfile.subscripttionEndpoint(userId)
+        return updateCommand(endpoint)
+    }
+
+    func unFollowUser(userId: CRUDObjectId) -> Future<Void, NSError> {
+        let endpoint = UserProfile.subscripttionEndpoint(userId)
+        return updateCommand(endpoint, method: .DELETE)
+    }
+
     
     //MARK: - Search -
     

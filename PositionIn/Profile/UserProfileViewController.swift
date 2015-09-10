@@ -88,6 +88,14 @@ extension UserProfileViewController: UserProfileActionConsumer {
             let updateController = Storyboards.NewItems.instantiateEditProfileViewController()
             subscribeForContentUpdates(updateController)
             navigationController?.pushViewController(updateController, animated: true)
+        case .Follow:
+            api().followUser(objectId).onSuccess { [weak self] in
+                self?.displayMode = .List
+            }
+        case .UnFollow:
+            api().unFollowUser(objectId).onSuccess { [weak self] in
+                self?.displayMode = .List
+            }
         case .None:
             fallthrough
         default:
