@@ -83,7 +83,6 @@ final class UserProfileViewController: BrowseModeViewController {
 
 extension UserProfileViewController: UserProfileActionConsumer {
     func shouldExecuteAction(action: UserProfileViewController.ProfileAction) {
-        Log.debug?.value(action)
         switch action {
         case .Edit:
             let updateController = Storyboards.NewItems.instantiateEditProfileViewController()

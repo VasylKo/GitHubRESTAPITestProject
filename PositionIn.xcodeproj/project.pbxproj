@@ -306,7 +306,7 @@
 		E6C952361BA1D9960032254F /* ProfileInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C952321BA1D9960032254F /* ProfileInfoCell.swift */; };
 		E6C952371BA1D9960032254F /* ProfileStatsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C952331BA1D9960032254F /* ProfileStatsCell.swift */; };
 		E6C952391BA1DA400032254F /* ProfileFollowCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C952381BA1DA400032254F /* ProfileFollowCell.swift */; };
-		E6C9523B1BA1DC910032254F /* ProfileFollowCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6C9523A1BA1DC910032254F /* ProfileFollowCell.xib */; };
+		E6C9523B1BA1DC910032254F /* PositionIn.ProfileFollowCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6C9523A1BA1DC910032254F /* PositionIn.ProfileFollowCell.xib */; };
 		E6D4D5B21B6F81A7003134CB /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D4D5B11B6F81A7003134CB /* SearchViewController.swift */; };
 		E6D4D5B51B6F8B9F003134CB /* PositionIn.SearchBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6D4D5B31B6F8B9F003134CB /* PositionIn.SearchBar.xib */; };
 		E6D4D5B61B6F8B9F003134CB /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D4D5B41B6F8B9F003134CB /* SearchBar.swift */; };
@@ -857,7 +857,7 @@
 		E6C952321BA1D9960032254F /* ProfileInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileInfoCell.swift; sourceTree = "<group>"; };
 		E6C952331BA1D9960032254F /* ProfileStatsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileStatsCell.swift; sourceTree = "<group>"; };
 		E6C952381BA1DA400032254F /* ProfileFollowCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileFollowCell.swift; sourceTree = "<group>"; };
-		E6C9523A1BA1DC910032254F /* ProfileFollowCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileFollowCell.xib; sourceTree = "<group>"; };
+		E6C9523A1BA1DC910032254F /* PositionIn.ProfileFollowCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.ProfileFollowCell.xib; sourceTree = "<group>"; };
 		E6D4D5B11B6F81A7003134CB /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		E6D4D5B31B6F8B9F003134CB /* PositionIn.SearchBar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.SearchBar.xib; sourceTree = "<group>"; };
 		E6D4D5B41B6F8B9F003134CB /* SearchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
@@ -2343,7 +2343,7 @@
 				E6C952331BA1D9960032254F /* ProfileStatsCell.swift */,
 				E6C952311BA1D9960032254F /* PositionIn.ProfileStatsCell.xib */,
 				E6C952381BA1DA400032254F /* ProfileFollowCell.swift */,
-				E6C9523A1BA1DC910032254F /* ProfileFollowCell.xib */,
+				E6C9523A1BA1DC910032254F /* PositionIn.ProfileFollowCell.xib */,
 			);
 			path = ProfileCells;
 			sourceTree = "<group>";
@@ -2707,7 +2707,7 @@
 				E68B52231B875F8F006B980C /* PositionIn.EventListCell.xib in Resources */,
 				E68B52241B875F8F006B980C /* PositionIn.ProductListCell.xib in Resources */,
 				E6BEF1D31B9C657100511B46 /* PositionIn.PostBodyCell.xib in Resources */,
-				E6C9523B1BA1DC910032254F /* ProfileFollowCell.xib in Resources */,
+				E6C9523B1BA1DC910032254F /* PositionIn.ProfileFollowCell.xib in Resources */,
 				E6BEF1CC1B9C5E7200511B46 /* PositionIn.PostImageCell.xib in Resources */,
 				E689F07D1B6B976100597587 /* PositionIn.ProductInventoryCell.xib in Resources */,
 				E6BEF1E61B9C83F200511B46 /* PositionIn.CommunityActionCell.xib in Resources */,
