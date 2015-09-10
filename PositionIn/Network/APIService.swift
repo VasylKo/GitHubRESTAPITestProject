@@ -221,7 +221,21 @@ struct APIService {
         let endpoint = UserProfile.subscripttionEndpoint(userId)
         return getObjectsCollection(endpoint, params: nil)
     }
-        
+    
+    func getSubscriptionStateForUser(userId: CRUDObjectId) -> Future<UserProfile.SubscriptionState, NSError> {
+        if isCurrentUser(userId) {
+            return future { () -> Result<UserProfile.SubscriptionState, NSError> in
+                return Result(value:.SameUser)
+            }
+        }
+        return getMySubscriptions().map { (response: CollectionResponse<UserInfo>) -> UserProfile.SubscriptionState in
+            if count( response.items.filter { $0.objectId == userId } ) > 0 {
+                return .Following
+            } else {
+                return .NotFollowing
+            }
+        }
+    }
     
     //MARK: - Search -
     

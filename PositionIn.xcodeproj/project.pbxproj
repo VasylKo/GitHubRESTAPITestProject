@@ -62,10 +62,6 @@
 		E61B20D51B7DD47C005EAB2C /* FeedItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61B20D41B7DD47C005EAB2C /* FeedItem.swift */; };
 		E61B20D81B7E0838005EAB2C /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61B20D71B7E0838005EAB2C /* SettingsViewController.swift */; };
 		E61B20DF1B7E4BBF005EAB2C /* ProfileListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61B20DE1B7E4BBF005EAB2C /* ProfileListViewController.swift */; };
-		E61B20E51B7E5964005EAB2C /* ProfileInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61B20E41B7E5964005EAB2C /* ProfileInfoCell.swift */; };
-		E61B20E71B7E5AF7005EAB2C /* PositionIn.ProfileInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E61B20E61B7E5AF7005EAB2C /* PositionIn.ProfileInfoCell.xib */; };
-		E61B20E91B7E6163005EAB2C /* ProfileStatsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61B20E81B7E6163005EAB2C /* ProfileStatsCell.swift */; };
-		E61B20EB1B7E6233005EAB2C /* PositionIn.ProfileStatsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E61B20EA1B7E6233005EAB2C /* PositionIn.ProfileStatsCell.xib */; };
 		E61B20ED1B81286E005EAB2C /* UploadPhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61B20EC1B81286E005EAB2C /* UploadPhotoCell.swift */; };
 		E61B20EF1B813C8C005EAB2C /* Community.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61B20EE1B813C8C005EAB2C /* Community.swift */; };
 		E62B16F51B5C1AA700D446BC /* PositionIn.MainMenuUserCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E62B16F31B5C1AA700D446BC /* PositionIn.MainMenuUserCell.xib */; };
@@ -305,6 +301,12 @@
 		E6C9522A1BA1A82F0032254F /* UIImageView+URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C952281BA1A82F0032254F /* UIImageView+URL.swift */; };
 		E6C9522C1BA1BB0E0032254F /* PeopleListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C9522B1BA1BB0E0032254F /* PeopleListCell.swift */; };
 		E6C9522E1BA1BB470032254F /* PositionIn.PeopleListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6C9522D1BA1BB470032254F /* PositionIn.PeopleListCell.xib */; };
+		E6C952341BA1D9960032254F /* PositionIn.ProfileInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6C952301BA1D9960032254F /* PositionIn.ProfileInfoCell.xib */; };
+		E6C952351BA1D9960032254F /* PositionIn.ProfileStatsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6C952311BA1D9960032254F /* PositionIn.ProfileStatsCell.xib */; };
+		E6C952361BA1D9960032254F /* ProfileInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C952321BA1D9960032254F /* ProfileInfoCell.swift */; };
+		E6C952371BA1D9960032254F /* ProfileStatsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C952331BA1D9960032254F /* ProfileStatsCell.swift */; };
+		E6C952391BA1DA400032254F /* ProfileFollowCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C952381BA1DA400032254F /* ProfileFollowCell.swift */; };
+		E6C9523B1BA1DC910032254F /* ProfileFollowCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6C9523A1BA1DC910032254F /* ProfileFollowCell.xib */; };
 		E6D4D5B21B6F81A7003134CB /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D4D5B11B6F81A7003134CB /* SearchViewController.swift */; };
 		E6D4D5B51B6F8B9F003134CB /* PositionIn.SearchBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6D4D5B31B6F8B9F003134CB /* PositionIn.SearchBar.xib */; };
 		E6D4D5B61B6F8B9F003134CB /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D4D5B41B6F8B9F003134CB /* SearchBar.swift */; };
@@ -410,10 +412,6 @@
 		E61B20D41B7DD47C005EAB2C /* FeedItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedItem.swift; sourceTree = "<group>"; };
 		E61B20D71B7E0838005EAB2C /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		E61B20DE1B7E4BBF005EAB2C /* ProfileListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileListViewController.swift; sourceTree = "<group>"; };
-		E61B20E41B7E5964005EAB2C /* ProfileInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileInfoCell.swift; sourceTree = "<group>"; };
-		E61B20E61B7E5AF7005EAB2C /* PositionIn.ProfileInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.ProfileInfoCell.xib; sourceTree = "<group>"; };
-		E61B20E81B7E6163005EAB2C /* ProfileStatsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileStatsCell.swift; sourceTree = "<group>"; };
-		E61B20EA1B7E6233005EAB2C /* PositionIn.ProfileStatsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.ProfileStatsCell.xib; sourceTree = "<group>"; };
 		E61B20EC1B81286E005EAB2C /* UploadPhotoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadPhotoCell.swift; sourceTree = "<group>"; };
 		E61B20EE1B813C8C005EAB2C /* Community.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Community.swift; sourceTree = "<group>"; };
 		E62B16F31B5C1AA700D446BC /* PositionIn.MainMenuUserCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.MainMenuUserCell.xib; sourceTree = "<group>"; };
@@ -854,6 +852,12 @@
 		E6C952281BA1A82F0032254F /* UIImageView+URL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+URL.swift"; sourceTree = "<group>"; };
 		E6C9522B1BA1BB0E0032254F /* PeopleListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeopleListCell.swift; sourceTree = "<group>"; };
 		E6C9522D1BA1BB470032254F /* PositionIn.PeopleListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.PeopleListCell.xib; sourceTree = "<group>"; };
+		E6C952301BA1D9960032254F /* PositionIn.ProfileInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.ProfileInfoCell.xib; sourceTree = "<group>"; };
+		E6C952311BA1D9960032254F /* PositionIn.ProfileStatsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.ProfileStatsCell.xib; sourceTree = "<group>"; };
+		E6C952321BA1D9960032254F /* ProfileInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileInfoCell.swift; sourceTree = "<group>"; };
+		E6C952331BA1D9960032254F /* ProfileStatsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileStatsCell.swift; sourceTree = "<group>"; };
+		E6C952381BA1DA400032254F /* ProfileFollowCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileFollowCell.swift; sourceTree = "<group>"; };
+		E6C9523A1BA1DC910032254F /* ProfileFollowCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileFollowCell.xib; sourceTree = "<group>"; };
 		E6D4D5B11B6F81A7003134CB /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		E6D4D5B31B6F8B9F003134CB /* PositionIn.SearchBar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.SearchBar.xib; sourceTree = "<group>"; };
 		E6D4D5B41B6F8B9F003134CB /* SearchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
@@ -1016,10 +1020,6 @@
 			children = (
 				E6F2437B1B8B42D70033B13C /* UserProfileViewController.swift */,
 				E61B20DE1B7E4BBF005EAB2C /* ProfileListViewController.swift */,
-				E61B20E41B7E5964005EAB2C /* ProfileInfoCell.swift */,
-				E61B20E61B7E5AF7005EAB2C /* PositionIn.ProfileInfoCell.xib */,
-				E61B20E81B7E6163005EAB2C /* ProfileStatsCell.swift */,
-				E61B20EA1B7E6233005EAB2C /* PositionIn.ProfileStatsCell.xib */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -1049,6 +1049,7 @@
 				E68B52181B875F8F006B980C /* FeedListCells */,
 				E6BEF1C91B9C5E7200511B46 /* PostCells */,
 				E6BEF1DC1B9C83F200511B46 /* CommunityCells */,
+				E6C9522F1BA1D9960032254F /* ProfileCells */,
 				E69421011B666A1600F34F06 /* ActionCell.swift */,
 				E69421001B666A1600F34F06 /* PositionIn.ActionCell.xib */,
 				E6829B031B5E6CF800FB1E1D /* RoundButton.swift */,
@@ -2334,6 +2335,19 @@
 			path = DAL;
 			sourceTree = "<group>";
 		};
+		E6C9522F1BA1D9960032254F /* ProfileCells */ = {
+			isa = PBXGroup;
+			children = (
+				E6C952321BA1D9960032254F /* ProfileInfoCell.swift */,
+				E6C952301BA1D9960032254F /* PositionIn.ProfileInfoCell.xib */,
+				E6C952331BA1D9960032254F /* ProfileStatsCell.swift */,
+				E6C952311BA1D9960032254F /* PositionIn.ProfileStatsCell.xib */,
+				E6C952381BA1DA400032254F /* ProfileFollowCell.swift */,
+				E6C9523A1BA1DC910032254F /* ProfileFollowCell.xib */,
+			);
+			path = ProfileCells;
+			sourceTree = "<group>";
+		};
 		E6D4D5B01B6F8186003134CB /* Search */ = {
 			isa = PBXGroup;
 			children = (
@@ -2679,9 +2693,11 @@
 				E69420FF1B665F5100F34F06 /* PositionIn.ProductDetailsViewController.xib in Resources */,
 				E6F2436E1B8B0E3A0033B13C /* PositionIn.MainMenuLoginCell.xib in Resources */,
 				E689F0791B6B911F00597587 /* PositionIn.ProductInventoryViewController.xib in Resources */,
+				E6C952341BA1D9960032254F /* PositionIn.ProfileInfoCell.xib in Resources */,
 				E6D4D5B51B6F8B9F003134CB /* PositionIn.SearchBar.xib in Resources */,
 				E66115A31B73A18C003DB5B3 /* NewItems.storyboard in Resources */,
 				E660E52E1B5AC23B00F52050 /* PositionIn.MainMenuViewController.xib in Resources */,
+				E6C952351BA1D9960032254F /* PositionIn.ProfileStatsCell.xib in Resources */,
 				E62B16F51B5C1AA700D446BC /* PositionIn.MainMenuUserCell.xib in Resources */,
 				E6BEF1D81B9C671D00511B46 /* PositionIn.PostInfoCell.xib in Resources */,
 				E661159E1B73A0CB003DB5B3 /* PositionIn.BrowseMapViewController.xib in Resources */,
@@ -2691,6 +2707,7 @@
 				E68B52231B875F8F006B980C /* PositionIn.EventListCell.xib in Resources */,
 				E68B52241B875F8F006B980C /* PositionIn.ProductListCell.xib in Resources */,
 				E6BEF1D31B9C657100511B46 /* PositionIn.PostBodyCell.xib in Resources */,
+				E6C9523B1BA1DC910032254F /* ProfileFollowCell.xib in Resources */,
 				E6BEF1CC1B9C5E7200511B46 /* PositionIn.PostImageCell.xib in Resources */,
 				E689F07D1B6B976100597587 /* PositionIn.ProductInventoryCell.xib in Resources */,
 				E6BEF1E61B9C83F200511B46 /* PositionIn.CommunityActionCell.xib in Resources */,
@@ -2700,7 +2717,6 @@
 				E64DC3551B4E53C90011D37C /* Main.storyboard in Resources */,
 				2431EBE81B95BD3B009FB158 /* PositionIn.PromotionDetailsViewController.xib in Resources */,
 				2431EBE41B95B36D009FB158 /* PositionIn.EventDetailsViewController.xib in Resources */,
-				E61B20E71B7E5AF7005EAB2C /* PositionIn.ProfileInfoCell.xib in Resources */,
 				E64DC35A1B4E53C90011D37C /* LaunchScreen.xib in Resources */,
 				E6F2437A1B8B40380033B13C /* PositionIn.BrowseListTableViewCell.xib in Resources */,
 				E63201721B984E2D0066C62E /* PositionIn.DescriptionTableViewCell.xib in Resources */,
@@ -2708,7 +2724,6 @@
 				E64DC3571B4E53C90011D37C /* Images.xcassets in Resources */,
 				E6DA53C81B7D00DB000087A7 /* PositionIn.BrowseCommunityViewController.xib in Resources */,
 				E660E5321B5AC2A200F52050 /* PositionIn.MainMenuCell.xib in Resources */,
-				E61B20EB1B7E6233005EAB2C /* PositionIn.ProfileStatsCell.xib in Resources */,
 				E661159B1B73A0CB003DB5B3 /* PositionIn.BrowseListViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2867,6 +2882,7 @@
 				E6C5CE1B1B83A24500265955 /* UIScheme.swift in Sources */,
 				E69420F91B66358000F34F06 /* ProductDetailsViewController.swift in Sources */,
 				E63201701B984D8B0066C62E /* DescriptionTableViewCell.swift in Sources */,
+				E6C952371BA1D9960032254F /* ProfileStatsCell.swift in Sources */,
 				E6DA53C71B7D00DB000087A7 /* BrowseCommunityViewController.swift in Sources */,
 				E6C952291BA1A82F0032254F /* CLLocationCoordinate2D+Equal.swift in Sources */,
 				E689F0771B6B90F400597587 /* ProductInventoryViewController.swift in Sources */,
@@ -2882,11 +2898,11 @@
 				243D0AA81B8AF90800B0E220 /* RegisterInfoViewController.swift in Sources */,
 				E6D4D5B21B6F81A7003134CB /* SearchViewController.swift in Sources */,
 				E66115991B73A0CB003DB5B3 /* BrowseListViewController.swift in Sources */,
+				E6C952361BA1D9960032254F /* ProfileInfoCell.swift in Sources */,
 				E6C9522C1BA1BB0E0032254F /* PeopleListCell.swift in Sources */,
 				E6F243761B8B31510033B13C /* BrowseTabbar.swift in Sources */,
 				E6A869EE1B60D42C00797D16 /* APIService.swift in Sources */,
 				E68B52221B875F8F006B980C /* ProductListCell.swift in Sources */,
-				E61B20E51B7E5964005EAB2C /* ProfileInfoCell.swift in Sources */,
 				E68B52031B873687006B980C /* FeedItemCellModelFactory.swift in Sources */,
 				E6829B041B5E6CF800FB1E1D /* RoundButton.swift in Sources */,
 				E6DADBA01B8C5907009A5694 /* ItemCategory.swift in Sources */,
@@ -2939,10 +2955,10 @@
 				2431EBDE1B947442009FB158 /* Product.swift in Sources */,
 				E6A869EC1B60D3E300797D16 /* APIService+Auth.swift in Sources */,
 				E6199BB71B9F3B7400E3C69D /* PeopleViewController.swift in Sources */,
-				E61B20E91B7E6163005EAB2C /* ProfileStatsCell.swift in Sources */,
 				E6D4D5B81B6FA7A7003134CB /* SearchTransition.swift in Sources */,
 				E6BEF1DB1B9C7F9D00511B46 /* BrowseCommunityCellFactory.swift in Sources */,
 				E660E5301B5AC28600F52050 /* MainMenuCell.swift in Sources */,
+				E6C952391BA1DA400032254F /* ProfileFollowCell.swift in Sources */,
 				E6C952261BA1A8230032254F /* StringValidation.swift in Sources */,
 				E6F243781B8B3CDE0033B13C /* BrowseListTableViewCell.swift in Sources */,
 				E61B20D81B7E0838005EAB2C /* SettingsViewController.swift in Sources */,

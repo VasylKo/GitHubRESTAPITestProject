@@ -22,8 +22,8 @@ class PeopleListCell: TableViewCell {
      
     }
 
-    @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var avatarView: AvatarView!
+    @IBOutlet private weak var nameLabel: UILabel!
+    @IBOutlet private weak var avatarView: AvatarView!
 }
 
 struct UserInfoTableViewCellModel: TableViewCellModel {

@@ -100,6 +100,12 @@ final class UserProfile: CRUDObject {
     }
 
     
+    enum SubscriptionState: Int {
+        case SameUser
+        case Following
+        case NotFollowing
+    }
+    
     var description: String {
         return "<\(self.dynamicType):\(objectId)>"
     }
