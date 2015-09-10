@@ -12,9 +12,13 @@ import PosInCore
 import CoreLocation
 
 struct SearchFilter: Mappable {
+    typealias Money = Double
+    static let minPrice: Money = 1
+    static let maxPrice: Money = 1000
+    static let CurrentFilterDidChangeNotification = "CurrentFilterDidChangeNotification"
 
-    var startPrice: Double?
-    var endPrice: Double?
+    var startPrice: Money?
+    var endPrice: Money?
     var startDate: NSDate?
     var endDate: NSDate?
     var radius: Double?
@@ -51,8 +55,8 @@ struct SearchFilter: Mappable {
     }
     
     init() {
-        startPrice = 1
-        endPrice = 1000
+        startPrice = SearchFilter.minPrice
+        endPrice = SearchFilter.maxPrice
         radius = 99
         itemTypes = [.Unknown]
         categories = ItemCategory.all()
@@ -71,9 +75,8 @@ struct SearchFilter: Mappable {
         categories <- (map["categories"], ListTransform(itemTransform: EnumTransform()))
         users <- (map["users"], ListTransform(itemTransform: CRUDObjectIdTransform()))
         communities <- (map["communities"], ListTransform(itemTransform: CRUDObjectIdTransform()))
-        //TODO: enable location in filter
-//        lat <- map["lat"]
-//        lon <- map["lon"]
+        lat <- map["lat"]
+        lon <- map["lon"]
         
     }
     
@@ -90,6 +93,7 @@ struct SearchFilter: Mappable {
             let defaults = NSUserDefaults.standardUserDefaults()
             let json = Mapper<SearchFilter>().toJSON(newValue)
             defaults.setObject(json, forKey: kCurrentFilterKey)
+            NSNotificationCenter.defaultCenter().postNotificationName(SearchFilter.CurrentFilterDidChangeNotification, object: nil)
         }
     }
     
