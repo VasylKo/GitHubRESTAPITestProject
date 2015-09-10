@@ -281,12 +281,15 @@
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="color" keyPath="_placeholderLabel.textColor">
                                                         <color key="value" red="0.81176470588235294" green="0.80784313725490198" blue="0.81568627450980391" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <outlet property="delegate" destination="zd3-fl-Vea" id="o3O-lJ-VK7"/>
+                                                </connections>
                                             </textField>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LoginEmailIcon" translatesAutoresizingMaskIntoConstraints="NO" id="2ie-iR-ppu">
                                                 <rect key="frame" x="9" y="248" width="20" height="21"/>
@@ -463,12 +466,15 @@
                                                 </constraints>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" returnKeyType="go" enablesReturnKeyAutomatically="YES"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="color" keyPath="_placeholderLabel.textColor">
                                                         <color key="value" red="0.81176470588235294" green="0.80784313725490198" blue="0.81568627450980391" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <outlet property="delegate" destination="cgn-EO-laz" id="aGi-ZG-ZBZ"/>
+                                                </connections>
                                             </textField>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LoginEmailIcon" translatesAutoresizingMaskIntoConstraints="NO" id="oB4-AE-T4H">
                                                 <rect key="frame" x="9" y="227" width="22" height="21"/>
@@ -633,12 +639,15 @@
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
-                                                <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="color" keyPath="_placeholderLabel.textColor">
                                                         <color key="value" red="0.81176470588235294" green="0.80784313725490198" blue="0.81568627450980391" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <outlet property="delegate" destination="cOZ-SQ-Q1c" id="jL3-DZ-RM4"/>
+                                                </connections>
                                             </textField>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LoginEmailIcon" translatesAutoresizingMaskIntoConstraints="NO" id="sdF-rq-WSF">
                                                 <rect key="frame" x="9" y="216" width="20" height="21"/>
@@ -663,12 +672,15 @@
                                                 </constraints>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
-                                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                                <textInputTraits key="textInputTraits" returnKeyType="go" enablesReturnKeyAutomatically="YES" secureTextEntry="YES"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="color" keyPath="_placeholderLabel.textColor">
                                                         <color key="value" red="0.81176470588235294" green="0.80784313725490198" blue="0.81568627450980391" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <outlet property="delegate" destination="cOZ-SQ-Q1c" id="GZC-xN-kfS"/>
+                                                </connections>
                                             </textField>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LoginLockIcon" translatesAutoresizingMaskIntoConstraints="NO" id="Mtp-jW-qE6">
                                                 <rect key="frame" x="10" y="275" width="21" height="21"/>
@@ -882,12 +894,15 @@
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" returnKeyType="next"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="color" keyPath="_placeholderLabel.textColor">
                                                         <color key="value" red="0.81176470590000005" green="0.80784313730000001" blue="0.81568627449999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <outlet property="delegate" destination="pfT-Kp-HW4" id="BCI-G6-QPj"/>
+                                                </connections>
                                             </textField>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LoginUserIcon" translatesAutoresizingMaskIntoConstraints="NO" id="JYg-NR-Y1V">
                                                 <rect key="frame" x="9" y="239" width="21" height="21"/>
@@ -909,12 +924,15 @@
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" returnKeyType="go"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="color" keyPath="_placeholderLabel.textColor">
                                                         <color key="value" red="0.81176470590000005" green="0.80784313730000001" blue="0.81568627449999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <outlet property="delegate" destination="pfT-Kp-HW4" id="MP2-cD-rRJ"/>
+                                                </connections>
                                             </textField>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LoginUserIcon" translatesAutoresizingMaskIntoConstraints="NO" id="onY-7P-33Y">
                                                 <rect key="frame" x="9" y="294" width="21" height="21"/>
@@ -939,12 +957,15 @@
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="color" keyPath="_placeholderLabel.textColor">
                                                         <color key="value" red="0.81176470590000005" green="0.80784313730000001" blue="0.81568627449999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <outlet property="delegate" destination="pfT-Kp-HW4" id="qJv-Nv-Vl2"/>
+                                                </connections>
                                             </textField>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LoginEmailIcon" translatesAutoresizingMaskIntoConstraints="NO" id="HXu-5W-0Wm">
                                                 <rect key="frame" x="9" y="129" width="20" height="21"/>
@@ -969,12 +990,15 @@
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
-                                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                                <textInputTraits key="textInputTraits" returnKeyType="next" enablesReturnKeyAutomatically="YES" secureTextEntry="YES"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="color" keyPath="_placeholderLabel.textColor">
                                                         <color key="value" red="0.81176470590000005" green="0.80784313730000001" blue="0.81568627449999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <outlet property="delegate" destination="pfT-Kp-HW4" id="gEa-Ae-LQW"/>
+                                                </connections>
                                             </textField>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LoginLockIcon" translatesAutoresizingMaskIntoConstraints="NO" id="bLj-NO-X4y">
                                                 <rect key="frame" x="9" y="184" width="22" height="21"/>
@@ -1088,7 +1112,7 @@
                             <constraint firstAttribute="trailing" secondItem="2aj-01-HqT" secondAttribute="trailing" id="4YL-gM-2t5"/>
                             <constraint firstItem="2aj-01-HqT" firstAttribute="leading" secondItem="iNE-GN-LDk" secondAttribute="leading" id="DEI-bz-7G5"/>
                             <constraint firstItem="2aj-01-HqT" firstAttribute="top" secondItem="iNE-GN-LDk" secondAttribute="top" id="RoQ-41-b9g"/>
-                            <constraint firstItem="vKo-xD-S5W" firstAttribute="centerY" secondItem="iNE-GN-LDk" secondAttribute="centerY" multiplier="1.15" constant="-53.699999999999989" id="ZYb-GQ-08W"/>
+                            <constraint firstItem="vKo-xD-S5W" firstAttribute="centerY" secondItem="iNE-GN-LDk" secondAttribute="centerY" multiplier="1.15" constant="-54" id="ZYb-GQ-08W"/>
                             <constraint firstAttribute="centerX" secondItem="vKo-xD-S5W" secondAttribute="centerX" id="fRp-r2-5iB"/>
                             <constraint firstItem="RTp-86-fWC" firstAttribute="top" secondItem="2aj-01-HqT" secondAttribute="bottom" id="iT8-rk-osh"/>
                             <constraint firstItem="vKo-xD-S5W" firstAttribute="width" secondItem="iNE-GN-LDk" secondAttribute="width" multiplier="0.9" id="pCG-vp-5Au"/>

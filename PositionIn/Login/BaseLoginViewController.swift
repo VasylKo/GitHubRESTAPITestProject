@@ -78,14 +78,14 @@ class BaseLoginViewController: UIViewController {
             let targetFrame = targetView.convertRect(targetView.bounds, toView: view)
             if !visibleRect.contains(targetFrame.origin) {
                 let scrollPoint = CGPoint(x: 0, y: targetFrame.minY - visibleRect.height + targetFrame.height)
-                scrollView.setContentOffset(scrollPoint, animated: true)
+                scrollView?.setContentOffset(scrollPoint, animated: true)
             }
         }
         
     }
     
     func keyboardWillBeHidden(notification: NSNotification) {
-        scrollView.setContentOffset(CGPointZero, animated: true)
+        scrollView?.setContentOffset(CGPointZero, animated: true)
     }
 
     func didTapOutsideTextFields(sender: UIGestureRecognizer) {
