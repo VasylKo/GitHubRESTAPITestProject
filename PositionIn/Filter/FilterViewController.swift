@@ -15,16 +15,12 @@ final class FilterViewController: XLFormViewController {
         case Products = "Products"
         case Events = "Events"
         case Promotions = "Promotions"
-
-        case StartPrice = "StartPrice"
         case EndPrice = "EndPrice"
         case Radius = "Radius"
         case Time = "Time"
         case StartDate = "StartDate"
         case EndDate = "EndDate"
-        
         case Categories = "Categories"
-
     }
 
     override func viewDidLoad() {
@@ -43,8 +39,10 @@ final class FilterViewController: XLFormViewController {
     }
     
     func initializeForm() {
-        let form = XLFormDescriptor(title: NSLocalizedString("Filter", comment: "Update filter: form caption"))
+        let filter = SearchFilter.currentFilter
         
+        let form = XLFormDescriptor(title: NSLocalizedString("Filter", comment: "Update filter: form caption"))
+
         //Options
         let optionsSection = XLFormSectionDescriptor.formSectionWithTitle(NSLocalizedString("Options", comment: "Update filter: options caption"))
         form.addFormSection(optionsSection)
@@ -52,7 +50,8 @@ final class FilterViewController: XLFormViewController {
         //Price
         currencyFormatter.numberStyle = .CurrencyStyle
         
-        let priceRow = XLFormRowDescriptor(tag: Tags.StartPrice.rawValue, rowType: XLFormRowDescriptorTypeSlider, title: "")
+        let priceRow = XLFormRowDescriptor(tag: Tags.EndPrice.rawValue, rowType: XLFormRowDescriptorTypeSlider, title: "")
+        let startPriceTitle = NSLocalizedString("Price up to", comment: "Update filter: price")
         
         let updatePriceValue: (XLFormRowDescriptor, String, Float) -> () = { [weak self] descriptor, localizedTitle, value in
             let stringValue: String  = self?.currencyFormatter.stringFromNumber(value) ?? ""
@@ -60,31 +59,24 @@ final class FilterViewController: XLFormViewController {
             self?.reloadFormRow(descriptor)
         }
 
-        let startPriceTitle = NSLocalizedString("Price up to", comment: "Update filter: price")
-        
         let priceChangeBlock: XLOnChangeBlock = {  oldValue, newValue, descriptor in
             let newValue = newValue as! Float
             updatePriceValue(descriptor, startPriceTitle, newValue)
         }
         
-        
         priceRow.onChangeBlock = priceChangeBlock
-        priceRow.value = Float(130)
-        priceRow.cellConfigAtConfigure["slider.maximumValue"] = Float(1000)
-        priceRow.cellConfigAtConfigure["slider.minimumValue"] = Float(0)
-        priceRow.cellConfigAtConfigure["steps"] = Float(100)
+        priceRow.value = filter.endPrice ?? SearchFilter.maxPrice
+        priceRow.cellConfigAtConfigure["slider.maximumValue"] = SearchFilter.maxPrice
+        priceRow.cellConfigAtConfigure["slider.minimumValue"] = SearchFilter.minPrice
+        priceRow.cellConfigAtConfigure["steps"] = SearchFilter.Money(100)
         optionsSection.addFormRow(priceRow)
         
         //Radius
         let radiusRow = XLFormRowDescriptor(tag: Tags.Radius.rawValue, rowType:XLFormRowDescriptorTypeSelectorAlertView, title: NSLocalizedString("Distance", comment: "Update filter: radius value"))
-        let radiusOptions = [
-            XLFormOptionsObject(value: 1000, displayText: NSLocalizedString("1 km", comment: "Update filter: radius 1km")),
-            XLFormOptionsObject(value: 5000, displayText: NSLocalizedString("5 km", comment: "Update filter: radius 5km")),
-            XLFormOptionsObject(value: 20000, displayText: NSLocalizedString("20 km", comment: "Update filter: radius 20km")),
-            XLFormOptionsObject(value: 100000, displayText: NSLocalizedString("100 km", comment: "Update filter: radius 100km")),
-        ]
+        let radiusItems: [SearchFilter.Distance] = [.Km1, .Km5, .Km20, .Km100, .Anywhere]
+        let radiusOptions = radiusItems.map { XLFormOptionsObject.formOptionsObjectWithSearchDistance($0) }
         radiusRow.selectorOptions = radiusOptions
-        radiusRow.value = radiusOptions.first
+        radiusRow.value =  XLFormOptionsObject.formOptionsObjectWithSearchDistance( filter.distance ?? .Anywhere )
         optionsSection.addFormRow(radiusRow)
         
         //Time
@@ -122,9 +114,19 @@ final class FilterViewController: XLFormViewController {
         }
         
         //TODO: validate start date < end date
-
         
         //Categories
+        
+        let filterCategories = filter.categories
+        let categoryValue: (ItemCategory) -> Bool = { category in
+            if let filterCategories = filterCategories {
+                return contains(filterCategories, category) || contains(filterCategories, .Unknown)
+            } else {
+                return true
+            }
+        }
+
+        
         let categoriesSection = XLFormSectionDescriptor.formSectionWithTitle(NSLocalizedString("Categories", comment: "Update filter: categories caption"))
         categoriesSection.multivaluedTag = Tags.Categories.rawValue
         form.addFormSection(categoriesSection)
@@ -132,13 +134,14 @@ final class FilterViewController: XLFormViewController {
         categories.map { (category: ItemCategory) -> () in
             let categoryRow = XLFormRowDescriptor(tag: category.displayString(), rowType: XLFormRowDescriptorTypeBooleanSwitch, title: category.displayString())
             categoryRow.cellConfigAtConfigure["imageView.image"] = category.image()
-            categoryRow.value = NSNumber(bool: false)
+            let value = categoryValue(category)
+            categoryRow.value = NSNumber(bool: value)
             categoriesSection.addFormRow(categoryRow)
         }
         
         self.form = form
     }
-        
+    
     
     @IBAction func didTapApply(sender: AnyObject) {
         let validationErrors : Array<NSError> = self.formValidationErrors() as! Array<NSError>
@@ -150,14 +153,34 @@ final class FilterViewController: XLFormViewController {
         
         let values = formValues()
         Log.debug?.value(values)
-
-        Log.debug?.message("Should apply filter")
+        
+        var filter = SearchFilter.currentFilter
+        
+        filter.categories = categoriesValue(values[Tags.Categories.rawValue])
+        filter.endPrice = map(values[Tags.EndPrice.rawValue] as?  SearchFilter.Money) { round($0) }
+        filter.distance = flatMap(values[Tags.Radius.rawValue] as? XLFormOptionsObject) { $0.searchDistance }
+        SearchFilter.currentFilter = filter
+        didTapCancel(sender)
     }
     
     @IBAction func didTapCancel(sender: AnyObject) {
-        Log.debug?.message("Should cancel filter")
         dismissViewControllerAnimated(true, completion: nil)
     }
+    
+    private func categoriesValue(values: AnyObject?) -> [ItemCategory]? {
+        if let values = values as? [NSNumber] {
+            let categories = ItemCategory.all()
+            var result: [ItemCategory] = []
+            for (idx, value) in enumerate(values) {
+                if value.boolValue == true {
+                    result.append(categories[idx])
+                }
+            }
+            return result
+        }
+        return nil
+    }
+
     
     private let currencyFormatter = NSNumberFormatter()
     

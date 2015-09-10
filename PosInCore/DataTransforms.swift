@@ -20,7 +20,7 @@ public class ListTransform<ItemTransform: TransformType>: TransformType {
     let itemTransform: ItemTransform
     
     public func transformFromJSON(value: AnyObject?) -> Object? {
-        if let values = value as? [AnyObject?] {
+        if let values = value as? [AnyObject] {
             return values.reduce(Object()) { result, item in
                 if let v = itemTransform.transformFromJSON(item) {
                     return result + [v]

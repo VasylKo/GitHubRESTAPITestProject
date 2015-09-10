@@ -29,14 +29,14 @@ class ProfileListViewController: BesideMenuViewController, BrowseActionProducer 
     //MARK: - Reload data -
     
     func reloadData() {
-        api().getUserProfile(profile.objectId).onSuccess { [weak self] profile in
-            self?.didReceiveProfile(profile)
+        api().getUserProfile(profile.objectId).zip(api().getSubscriptionStateForUser(profile.objectId)).onSuccess {
+            [weak self] profile, state in
+            self?.didReceiveProfile(profile, state: state)
         }
-            
     }
     
     
-    private func didReceiveProfile(profile: UserProfile) {
+    private func didReceiveProfile(profile: UserProfile, state: UserProfile.SubscriptionState = .SameUser) {
         let isCurrentUser = api().isCurrentUser(profile.objectId)
         let isUserAuthorized = api().isUserAuthorized()
         let (leftAction, rightAction): (UserProfileViewController.ProfileAction, UserProfileViewController.ProfileAction) = {
@@ -50,15 +50,24 @@ class ProfileListViewController: BesideMenuViewController, BrowseActionProducer 
             }
         }()
         let actionDelegate = self.parentViewController as? UserProfileActionConsumer
-        dataSource.items[Sections.Info.rawValue] = [
+        var infoSection: [ProfileCellModel] = [
             ProfileInfoCellModel(name: profile.displayName, avatar: profile.avatar, background: profile.backgroundImage, leftAction: leftAction, rightAction: rightAction, actionDelegate: actionDelegate),
             TableViewCellTextModel(title: profile.userDescription ?? ""),
             ProfileStatsCellModel(countPosts: profile.countPosts, countFollowers: profile.countFollowers, countFollowing: profile.countFollowing),
         ]
+        switch state {
+        case .SameUser:
+            break
+        default:
+            infoSection.append(ProfileFollowCellModel(state: state, actionDelegate: actionDelegate))
+            break
+        }
+        dataSource.items[Sections.Info.rawValue] = infoSection
+        
         var feedModel = BrowseListCellModel(objectId: profile.objectId, actionConsumer: self)
         feedModel.excludeCommunityItems = true
-        
         dataSource.items[Sections.Feed.rawValue] = [ feedModel ]
+        
         tableView.reloadData()
         actionConsumer?.browseControllerDidChangeContent(self)
     }
@@ -139,6 +148,8 @@ extension ProfileListViewController {
                 return BrowseListTableViewCell.reuseId()
             case let model as TableViewCellTextModel:
                 return DescriptionTableViewCell.reuseId()
+            case let model as ProfileFollowCellModel:
+                return ProfileFollowCell.reuseId()
             default:
                 return super.tableView(tableView, reuseIdentifierForIndexPath: indexPath)
             }
@@ -149,7 +160,7 @@ extension ProfileListViewController {
         }
         
         override func nibCellsId() -> [String] {
-            return [ProfileInfoCell.reuseId(), ProfileStatsCell.reuseId(), BrowseListTableViewCell.reuseId(), DescriptionTableViewCell.reuseId()]
+            return [ProfileInfoCell.reuseId(), ProfileStatsCell.reuseId(), BrowseListTableViewCell.reuseId(), DescriptionTableViewCell.reuseId(), ProfileFollowCell.reuseId()]
         }
         
         func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {

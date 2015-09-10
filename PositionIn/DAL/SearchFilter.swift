@@ -6,18 +6,21 @@
 //  Copyright (c) 2015 Soluna Labs. All rights reserved.
 //
 
-import Foundation
 import ObjectMapper
 import PosInCore
 import CoreLocation
+import CleanroomLogger
 
 struct SearchFilter: Mappable {
+    typealias Money = Double
+    static let minPrice: Money = 1
+    static let maxPrice: Money = 1000
+    static let CurrentFilterDidChangeNotification = "CurrentFilterDidChangeNotification"
 
-    var startPrice: Double?
-    var endPrice: Double?
+    var startPrice: Money?
+    var endPrice: Money?
     var startDate: NSDate?
     var endDate: NSDate?
-    var radius: Double?
     var categories: [ItemCategory]?
     var itemTypes: [FeedItem.ItemType]? 
     var name: String?
@@ -45,15 +48,57 @@ struct SearchFilter: Mappable {
     private var lat: CLLocationDegrees?
     private var lon: CLLocationDegrees?
     
+
+    var distance: Distance? {
+        set {
+            radius = newValue?.value()
+        }
+        get {
+            return flatMap(radius) { Distance(rawValue: $0) } ?? .Anywhere
+        }
+    }
+    
+    private var radius: Double?
+    
+    enum Distance: Double, Printable {
+        case Km1 = 1
+        case Km5 = 5
+        case Km20 = 20
+        case Km100 = 100
+        case Anywhere = 0
+        
+        func value() -> Double? {
+            switch self {
+            case .Anywhere:
+                return nil
+            default:
+                return Double(self.rawValue)
+            }
+        }
+        
+        func displayString() -> String {
+            switch self {
+            case .Anywhere:
+                return NSLocalizedString("Anywhere", comment: "Update filter: Anywhere")
+            default:
+                let formatter = NSLengthFormatter()
+                let unit: NSLengthFormatterUnit = SearchFilter.localeUsesMetricSystem() ? .Kilometer : .Mile
+                return formatter.stringFromValue(value() ?? 0, unit: unit)
+            }
+        }
+        
+        var description: String {
+            return "<Distance: \(displayString())"
+        }
+    }
     
     init?(_ map: Map) {
         mapping(map)
     }
     
     init() {
-        startPrice = 1
-        endPrice = 1000
-        radius = 99
+        startPrice = SearchFilter.minPrice
+        endPrice = SearchFilter.maxPrice
         itemTypes = [.Unknown]
         categories = ItemCategory.all()
     }
@@ -71,9 +116,8 @@ struct SearchFilter: Mappable {
         categories <- (map["categories"], ListTransform(itemTransform: EnumTransform()))
         users <- (map["users"], ListTransform(itemTransform: CRUDObjectIdTransform()))
         communities <- (map["communities"], ListTransform(itemTransform: CRUDObjectIdTransform()))
-        //TODO: enable location in filter
-//        lat <- map["lat"]
-//        lon <- map["lon"]
+        lat <- map["lat"]
+        lon <- map["lon"]
         
     }
     
@@ -90,14 +134,23 @@ struct SearchFilter: Mappable {
             let defaults = NSUserDefaults.standardUserDefaults()
             let json = Mapper<SearchFilter>().toJSON(newValue)
             defaults.setObject(json, forKey: kCurrentFilterKey)
+            NSNotificationCenter.defaultCenter().postNotificationName(SearchFilter.CurrentFilterDidChangeNotification, object: nil)
         }
     }
     
     private static let kCurrentFilterKey = "kCurrentFilterKey"
+    
+    private static func localeUsesMetricSystem() -> Bool {
+        return map(NSLocale.currentLocale().objectForKey(NSLocaleUsesMetricSystem) as? NSNumber) { $0.boolValue} ?? true
+    }
 }
 
 extension SearchFilter: APIServiceQueryConvertible {
     var query: [String : AnyObject]  {
-        return Mapper<SearchFilter>().toJSON(self)
+        var params = Mapper<SearchFilter>().toJSON(self)
+        if let radius = radius where SearchFilter.localeUsesMetricSystem() == false {
+            params["radius"] =  radius * 1.60934
+        }
+        return params
     }
 }

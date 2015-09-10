@@ -63,8 +63,8 @@ final class ProductDetailsViewController: UIViewController {
             locationRequestToken = InvalidationToken()
             locationController().distanceFromCoordinate(coordinates).onSuccess(token: locationRequestToken) {
                 [weak self] distance in
-                let format = NSLocalizedString("%.2f km", comment: "Distance format")
-                self?.infoLabel.text = String(format: format, distance)
+                let formatter = NSLengthFormatter()
+                self?.infoLabel.text = formatter.stringFromMeters(distance)
             }
         }
     }

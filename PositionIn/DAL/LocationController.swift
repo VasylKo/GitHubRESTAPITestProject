@@ -32,9 +32,12 @@ final class LocationController {
             }
         }
         return future.onSuccess { coordinate in
-            var f = SearchFilter.currentFilter
-            f.coordinates = coordinate
-            SearchFilter.currentFilter = f
+            //TODO: set valid epsilon
+            if !isSameCoordinates(coordinate, SearchFilter.currentFilter.coordinates ?? kCLLocationCoordinate2DInvalid, epsilon: 0.2) {
+                var f = SearchFilter.currentFilter
+                f.coordinates = coordinate
+                SearchFilter.currentFilter = f
+            }
         }
     }
     

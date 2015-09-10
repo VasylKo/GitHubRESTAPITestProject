@@ -15,6 +15,13 @@ class BesideMenuViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
+        NSNotificationCenter.defaultCenter().addObserver(
+            self,
+            selector: "didReceiveContentUpdateNotification:",
+            name: SearchFilter.CurrentFilterDidChangeNotification,
+            object: nil
+        )
+
     }
     
     override func viewDidAppear(animated: Bool) {
