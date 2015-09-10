@@ -17,6 +17,7 @@ final class PeopleViewController: BesideMenuViewController {
         super.viewDidLoad()
         dataSource.configureTable(tableView)
         browseMode = .Following
+        subscribeToNotifications()
     }
     
     var browseMode: BrowseMode = .Following {
@@ -51,6 +52,23 @@ final class PeopleViewController: BesideMenuViewController {
         
     }
 
+    private func subscribeToNotifications() {
+        subscriptionUpdateObserver = NSNotificationCenter.defaultCenter().addObserverForName(
+            UserProfileViewController.SubscriptionDidChangeNotification,
+            object: nil,
+            queue: nil) { [weak self] (_: NSNotification!) -> Void in
+                if let viewLoaded = self?.isViewLoaded() where viewLoaded == true {
+                    self?.reloadData()
+                }
+        }
+    }
+    
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(subscriptionUpdateObserver)
+
+    }
+    
+    private var subscriptionUpdateObserver: NSObjectProtocol!
     
     override func contentDidChange(sender: AnyObject?, info: [NSObject : AnyObject]?) {
         if isViewLoaded() {
