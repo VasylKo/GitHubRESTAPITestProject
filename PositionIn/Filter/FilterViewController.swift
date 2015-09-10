@@ -165,7 +165,7 @@ final class FilterViewController: XLFormViewController {
         
         var filter = SearchFilter.currentFilter
         filter.categories = categoriesValue(values[Tags.Categories.rawValue])
-        filter.endPrice = values[Tags.EndPrice.rawValue] as?  SearchFilter.Money
+        filter.endPrice = map(values[Tags.EndPrice.rawValue] as?  SearchFilter.Money) { round($0) }
         SearchFilter.currentFilter = filter
         didTapCancel(sender)
     }

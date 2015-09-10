@@ -58,6 +58,7 @@
 		E6018E501B849266001D22FA /* XMPPProcess+Future.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6018E4F1B849266001D22FA /* XMPPProcess+Future.swift */; };
 		E6018E521B8492EA001D22FA /* XLFormOptionsObject+Community.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6018E511B8492EA001D22FA /* XLFormOptionsObject+Community.swift */; };
 		E60EBF761B8EF9B50014B6ED /* DataTransforms.swift in Sources */ = {isa = PBXBuildFile; fileRef = E60EBF751B8EF9B50014B6ED /* DataTransforms.swift */; };
+		E614FD6E1BA1902200A07458 /* CLLocationCoordinate2D+Equal.swift in Sources */ = {isa = PBXBuildFile; fileRef = E614FD6D1BA1902200A07458 /* CLLocationCoordinate2D+Equal.swift */; };
 		E6199BB71B9F3B7400E3C69D /* PeopleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6199BB61B9F3B7400E3C69D /* PeopleViewController.swift */; };
 		E61B20D51B7DD47C005EAB2C /* FeedItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61B20D41B7DD47C005EAB2C /* FeedItem.swift */; };
 		E61B20D81B7E0838005EAB2C /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61B20D71B7E0838005EAB2C /* SettingsViewController.swift */; };
@@ -403,6 +404,7 @@
 		E6018E4F1B849266001D22FA /* XMPPProcess+Future.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "XMPPProcess+Future.swift"; sourceTree = "<group>"; };
 		E6018E511B8492EA001D22FA /* XLFormOptionsObject+Community.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "XLFormOptionsObject+Community.swift"; sourceTree = "<group>"; };
 		E60EBF751B8EF9B50014B6ED /* DataTransforms.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataTransforms.swift; sourceTree = "<group>"; };
+		E614FD6D1BA1902200A07458 /* CLLocationCoordinate2D+Equal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CLLocationCoordinate2D+Equal.swift"; sourceTree = "<group>"; };
 		E6199BB61B9F3B7400E3C69D /* PeopleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeopleViewController.swift; sourceTree = "<group>"; };
 		E61B20D41B7DD47C005EAB2C /* FeedItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedItem.swift; sourceTree = "<group>"; };
 		E61B20D71B7E0838005EAB2C /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -944,6 +946,7 @@
 				E63201641B967A540066C62E /* Notifications.swift */,
 				E63201661B967CA70066C62E /* StringValidation.swift */,
 				E63201771B9927900066C62E /* UIImageView+URL.swift */,
+				E614FD6D1BA1902200A07458 /* CLLocationCoordinate2D+Equal.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -2891,6 +2894,7 @@
 				E661159D1B73A0CB003DB5B3 /* BrowseMapViewController.swift in Sources */,
 				E6F243701B8B17910033B13C /* DisplayModeViewController.swift in Sources */,
 				E68B52011B873545006B980C /* FeedTableViewCellModel.swift in Sources */,
+				E614FD6E1BA1902200A07458 /* CLLocationCoordinate2D+Equal.swift in Sources */,
 				E66A3E1B1B9CE2D6005FA33B /* OrderViewController.swift in Sources */,
 				E64D00651B7C9601007693E0 /* BaseAddItemViewController.swift in Sources */,
 				E63201781B9927900066C62E /* UIImageView+URL.swift in Sources */,
