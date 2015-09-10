@@ -76,6 +76,14 @@ final class LocationController {
         }
     }
     
+    func localeUsesMetricSystem() -> Bool {
+        return map(NSLocale.currentLocale().objectForKey(NSLocaleUsesMetricSystem) as? NSNumber) { $0.boolValue} ?? true
+    }
+    
+    func lengthFormatUnit() -> NSLengthFormatterUnit {
+        return localeUsesMetricSystem() ? .Kilometer : .Mile
+    }
+    
     init() {
         cacheStorage = NSUserDefaults.standardUserDefaults()
         locationProvider = LocationProvider(requirements: .WhenInUse)
