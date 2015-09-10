@@ -15,15 +15,12 @@ final class FilterViewController: XLFormViewController {
         case Products = "Products"
         case Events = "Events"
         case Promotions = "Promotions"
-
         case EndPrice = "EndPrice"
         case Radius = "Radius"
         case Time = "Time"
         case StartDate = "StartDate"
         case EndDate = "EndDate"
-        
         case Categories = "Categories"
-
     }
 
     override func viewDidLoad() {
@@ -76,14 +73,10 @@ final class FilterViewController: XLFormViewController {
         
         //Radius
         let radiusRow = XLFormRowDescriptor(tag: Tags.Radius.rawValue, rowType:XLFormRowDescriptorTypeSelectorAlertView, title: NSLocalizedString("Distance", comment: "Update filter: radius value"))
-        let radiusOptions = [
-            XLFormOptionsObject(value: 1, displayText: NSLocalizedString("1 km", comment: "Update filter: radius 1km")),
-            XLFormOptionsObject(value: 5, displayText: NSLocalizedString("5 km", comment: "Update filter: radius 5km")),
-            XLFormOptionsObject(value: 20, displayText: NSLocalizedString("20 km", comment: "Update filter: radius 20km")),
-            XLFormOptionsObject(value: 100, displayText: NSLocalizedString("100 km", comment: "Update filter: radius 100km")),
-        ]
+        let radiusItems: [SearchFilter.Distance] = [.Km1, .Km5, .Km20, .Km100]
+        let radiusOptions = radiusItems.map { XLFormOptionsObject.formOptionsObjectWithSearchDistance($0) }
         radiusRow.selectorOptions = radiusOptions
-        radiusRow.value = radiusOptions.first
+        radiusRow.value =  XLFormOptionsObject.formOptionsObjectWithSearchDistance( filter.distance ?? .Anywhere )
         optionsSection.addFormRow(radiusRow)
         
         //Time
@@ -125,7 +118,6 @@ final class FilterViewController: XLFormViewController {
         //Categories
         
         let filterCategories = filter.categories
-        Log.debug?.value(filterCategories)
         let categoryValue: (ItemCategory) -> Bool = { category in
             if let filterCategories = filterCategories {
                 return contains(filterCategories, category) || contains(filterCategories, .Unknown)
@@ -161,11 +153,12 @@ final class FilterViewController: XLFormViewController {
         
         let values = formValues()
         Log.debug?.value(values)
-        Log.debug?.value(categoriesValue(values[Tags.Categories.rawValue]))
         
         var filter = SearchFilter.currentFilter
+        
         filter.categories = categoriesValue(values[Tags.Categories.rawValue])
         filter.endPrice = map(values[Tags.EndPrice.rawValue] as?  SearchFilter.Money) { round($0) }
+        filter.distance = flatMap(values[Tags.Radius.rawValue] as? XLFormOptionsObject) { $0.searchDistance }
         SearchFilter.currentFilter = filter
         didTapCancel(sender)
     }

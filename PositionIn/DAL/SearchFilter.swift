@@ -9,6 +9,7 @@
 import ObjectMapper
 import PosInCore
 import CoreLocation
+import CleanroomLogger
 
 struct SearchFilter: Mappable {
     typealias Money = Double
@@ -20,7 +21,6 @@ struct SearchFilter: Mappable {
     var endPrice: Money?
     var startDate: NSDate?
     var endDate: NSDate?
-    var radius: Double?
     var categories: [ItemCategory]?
     var itemTypes: [FeedItem.ItemType]? 
     var name: String?
@@ -48,6 +48,52 @@ struct SearchFilter: Mappable {
     private var lat: CLLocationDegrees?
     private var lon: CLLocationDegrees?
     
+
+    var distance: Distance? {
+        set {
+            radius = newValue?.value()
+        }
+        get {
+            if let radius = radius {
+                return Distance(rawValue: radius)
+            }
+            return .Anywhere
+        }
+    }
+    
+    private var radius: Double?
+    
+    enum Distance: Double, Printable {
+        case Km1 = 1
+        case Km5 = 5
+        case Km20 = 20
+        case Km100 = 100
+        case Anywhere = 0
+        
+        func value() -> Double? {
+            switch self {
+            case .Anywhere:
+                return nil
+            default:
+                return Double(self.rawValue)
+            }
+        }
+        
+        func displayString() -> String {
+            switch self {
+            case .Anywhere:
+                return NSLocalizedString("Anywhere", comment: "Update filter: Anywhere")
+            default:
+                let formatter = NSLengthFormatter()
+                let kilometers = map(value()) { $0 * Double(1000) }
+                return formatter.stringFromMeters(kilometers ?? 0)
+            }
+        }
+        
+        var description: String {
+            return "<Distance: \(displayString())"
+        }
+    }
     
     init?(_ map: Map) {
         mapping(map)
@@ -56,7 +102,6 @@ struct SearchFilter: Mappable {
     init() {
         startPrice = SearchFilter.minPrice
         endPrice = SearchFilter.maxPrice
-        radius = 99
         itemTypes = [.Unknown]
         categories = ItemCategory.all()
     }
