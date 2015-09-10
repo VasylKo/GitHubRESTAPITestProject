@@ -10,10 +10,10 @@ import PosInCore
 
 class PeopleListCell: TableViewCell {
     override func setModel(model: TableViewCellModel) {
-        let m = model as? TableViewCellURLTextModel
+        let m = model as? UserInfoTableViewCellModel
         assert(m != nil, "Invalid model passed")
-        avatarView.setImageFromURL(m!.url)
-        nameLabel.text = m!.title
+        avatarView.setImageFromURL(m!.userInfo.avatar)
+        nameLabel.text = m!.userInfo.title
     }
     
     override func prepareForReuse() {
@@ -24,4 +24,12 @@ class PeopleListCell: TableViewCell {
 
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var avatarView: AvatarView!
+}
+
+struct UserInfoTableViewCellModel: TableViewCellModel {
+    let userInfo: UserInfo
+    
+    init(userInfo: UserInfo) {
+        self.userInfo = userInfo
+    }
 }

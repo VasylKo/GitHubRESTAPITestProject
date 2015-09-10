@@ -15,8 +15,8 @@ final class PeopleViewController: BesideMenuViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        dataSource.configureTable(tableView)
         browseMode = .Following
-
     }
     
     var browseMode: BrowseMode = .Following {
@@ -41,6 +41,13 @@ final class PeopleViewController: BesideMenuViewController {
         case .Explore:
             peopleRequest = api().getUsers(APIService.Page())
         }
+        peopleRequest.onSuccess(token: dataRequestToken) { [weak self] response in
+            if let userList = response.items {
+                Log.debug?.value(userList)
+                self?.dataSource.setUserList(userList)
+                self?.tableView.reloadData()
+            }
+        }
         
     }
 
@@ -63,11 +70,21 @@ final class PeopleViewController: BesideMenuViewController {
     
     private var dataRequestToken = InvalidationToken()
 
+    private lazy var dataSource: PeopleListDataSource = {
+        let dataSource = PeopleListDataSource()
+        dataSource.parentViewController = self
+        return dataSource
+        }()
+
 }
 
 final class PeopleListDataSource: TableViewDataSource {
-    private var items: [[TableViewCellModel]] = []
+    private var items: [UserInfoTableViewCellModel] = []
 
+    
+    func setUserList(users: [UserInfo]) {
+        items = users.map { UserInfoTableViewCellModel(userInfo: $0) }
+    }
     
     override func configureTable(tableView: UITableView) {
         tableView.estimatedRowHeight = 60.0
@@ -75,11 +92,11 @@ final class PeopleListDataSource: TableViewDataSource {
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return items.count
+        return 1
     }
     
     @objc override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return items[section].count
+        return items.count
     }
     
     @objc override func tableView(tableView: UITableView, reuseIdentifierForIndexPath indexPath: NSIndexPath) -> String {
@@ -87,9 +104,8 @@ final class PeopleListDataSource: TableViewDataSource {
     }
     
     override func tableView(tableView: UITableView, modelForIndexPath indexPath: NSIndexPath) -> TableViewCellModel {
-        return items[indexPath.section][indexPath.row]
+        return items[indexPath.row]
     }
-    
     
     override func nibCellsId() -> [String] {
         return [ PeopleListCell.reuseId() ]
@@ -97,6 +113,14 @@ final class PeopleListDataSource: TableViewDataSource {
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: false)
+        //TODO: move logic to the controller
+        
+        if let model = self.tableView(tableView, modelForIndexPath: indexPath) as? UserInfoTableViewCellModel,
+           let parentViewController = parentViewController{
+            let profileController = Storyboards.Main.instantiateUserProfileViewController()
+            profileController.objectId = model.userInfo.objectId
+            parentViewController.navigationController?.pushViewController(profileController, animated: true)
+        }
     }
 
 }
