@@ -56,3 +56,39 @@ final class PeopleViewController: BesideMenuViewController {
     private var dataRequestToken = InvalidationToken()
 
 }
+
+final class PeopleListDataSource: TableViewDataSource {
+    private var items: [[TableViewCellModel]] = []
+
+    
+    override func configureTable(tableView: UITableView) {
+        tableView.estimatedRowHeight = 60.0
+        super.configureTable(tableView)
+    }
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return items.count
+    }
+    
+    @objc override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return items[section].count
+    }
+    
+    @objc override func tableView(tableView: UITableView, reuseIdentifierForIndexPath indexPath: NSIndexPath) -> String {
+        return PeopleListCell.reuseId()
+    }
+    
+    override func tableView(tableView: UITableView, modelForIndexPath indexPath: NSIndexPath) -> TableViewCellModel {
+        return items[indexPath.section][indexPath.row]
+    }
+    
+    
+    override func nibCellsId() -> [String] {
+        return [ PeopleListCell.reuseId() ]
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: false)
+    }
+
+}

@@ -303,6 +303,8 @@
 		E6C952261BA1A8230032254F /* StringValidation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C952251BA1A8230032254F /* StringValidation.swift */; };
 		E6C952291BA1A82F0032254F /* CLLocationCoordinate2D+Equal.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C952271BA1A82F0032254F /* CLLocationCoordinate2D+Equal.swift */; };
 		E6C9522A1BA1A82F0032254F /* UIImageView+URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C952281BA1A82F0032254F /* UIImageView+URL.swift */; };
+		E6C9522C1BA1BB0E0032254F /* PeopleListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6C9522B1BA1BB0E0032254F /* PeopleListCell.swift */; };
+		E6C9522E1BA1BB470032254F /* PositionIn.PeopleListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6C9522D1BA1BB470032254F /* PositionIn.PeopleListCell.xib */; };
 		E6D4D5B21B6F81A7003134CB /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D4D5B11B6F81A7003134CB /* SearchViewController.swift */; };
 		E6D4D5B51B6F8B9F003134CB /* PositionIn.SearchBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6D4D5B31B6F8B9F003134CB /* PositionIn.SearchBar.xib */; };
 		E6D4D5B61B6F8B9F003134CB /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D4D5B41B6F8B9F003134CB /* SearchBar.swift */; };
@@ -850,6 +852,8 @@
 		E6C952251BA1A8230032254F /* StringValidation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StringValidation.swift; path = Utils/StringValidation.swift; sourceTree = "<group>"; };
 		E6C952271BA1A82F0032254F /* CLLocationCoordinate2D+Equal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CLLocationCoordinate2D+Equal.swift"; sourceTree = "<group>"; };
 		E6C952281BA1A82F0032254F /* UIImageView+URL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+URL.swift"; sourceTree = "<group>"; };
+		E6C9522B1BA1BB0E0032254F /* PeopleListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeopleListCell.swift; sourceTree = "<group>"; };
+		E6C9522D1BA1BB470032254F /* PositionIn.PeopleListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.PeopleListCell.xib; sourceTree = "<group>"; };
 		E6D4D5B11B6F81A7003134CB /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		E6D4D5B31B6F8B9F003134CB /* PositionIn.SearchBar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.SearchBar.xib; sourceTree = "<group>"; };
 		E6D4D5B41B6F8B9F003134CB /* SearchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
@@ -993,6 +997,8 @@
 			isa = PBXGroup;
 			children = (
 				E6199BB61B9F3B7400E3C69D /* PeopleViewController.swift */,
+				E6C9522B1BA1BB0E0032254F /* PeopleListCell.swift */,
+				E6C9522D1BA1BB470032254F /* PositionIn.PeopleListCell.xib */,
 			);
 			path = People;
 			sourceTree = "<group>";
@@ -2679,6 +2685,7 @@
 				E62B16F51B5C1AA700D446BC /* PositionIn.MainMenuUserCell.xib in Resources */,
 				E6BEF1D81B9C671D00511B46 /* PositionIn.PostInfoCell.xib in Resources */,
 				E661159E1B73A0CB003DB5B3 /* PositionIn.BrowseMapViewController.xib in Resources */,
+				E6C9522E1BA1BB470032254F /* PositionIn.PeopleListCell.xib in Resources */,
 				240A9B9C1B9CCDA4007C77E3 /* PositionIn.CommunityStatsCell.xib in Resources */,
 				E66115871B7376F4003DB5B3 /* Login.storyboard in Resources */,
 				E68B52231B875F8F006B980C /* PositionIn.EventListCell.xib in Resources */,
@@ -2875,6 +2882,7 @@
 				243D0AA81B8AF90800B0E220 /* RegisterInfoViewController.swift in Sources */,
 				E6D4D5B21B6F81A7003134CB /* SearchViewController.swift in Sources */,
 				E66115991B73A0CB003DB5B3 /* BrowseListViewController.swift in Sources */,
+				E6C9522C1BA1BB0E0032254F /* PeopleListCell.swift in Sources */,
 				E6F243761B8B31510033B13C /* BrowseTabbar.swift in Sources */,
 				E6A869EE1B60D42C00797D16 /* APIService.swift in Sources */,
 				E68B52221B875F8F006B980C /* ProductListCell.swift in Sources */,
