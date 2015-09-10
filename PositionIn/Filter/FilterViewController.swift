@@ -73,7 +73,7 @@ final class FilterViewController: XLFormViewController {
         
         //Radius
         let radiusRow = XLFormRowDescriptor(tag: Tags.Radius.rawValue, rowType:XLFormRowDescriptorTypeSelectorAlertView, title: NSLocalizedString("Distance", comment: "Update filter: radius value"))
-        let radiusItems: [SearchFilter.Distance] = [.Km1, .Km5, .Km20, .Km100]
+        let radiusItems: [SearchFilter.Distance] = [.Km1, .Km5, .Km20, .Km100, .Anywhere]
         let radiusOptions = radiusItems.map { XLFormOptionsObject.formOptionsObjectWithSearchDistance($0) }
         radiusRow.selectorOptions = radiusOptions
         radiusRow.value =  XLFormOptionsObject.formOptionsObjectWithSearchDistance( filter.distance ?? .Anywhere )
