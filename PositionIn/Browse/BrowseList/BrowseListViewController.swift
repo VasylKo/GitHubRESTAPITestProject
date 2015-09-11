@@ -73,7 +73,7 @@ final class BrowseListViewController: UIViewController, BrowseActionProducer {
         }
     }
     
-    private lazy var dataSource: FeedItemDatasource = {
+    private lazy var dataSource: FeedItemDatasource = { [unowned self] in
         let dataSource = FeedItemDatasource(shouldShowDetailedCells: self.shoWCompactCells)
         dataSource.parentViewController = self
         return dataSource

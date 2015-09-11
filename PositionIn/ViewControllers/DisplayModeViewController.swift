@@ -99,7 +99,7 @@ protocol BrowseActionConsumer: class {
     
     typealias DisplayModeSegmentedControl = HMSegmentedControl
     
-    private(set) internal lazy var displayModeSegmentedControl: DisplayModeSegmentedControl = {
+    private(set) internal lazy var displayModeSegmentedControl: DisplayModeSegmentedControl = { [unowned self] in
         let items = [
             UIImage(named: "BrowseModeMap")!,
             UIImage(named: "BrowseModeList")!,

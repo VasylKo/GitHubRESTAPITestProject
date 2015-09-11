@@ -90,7 +90,7 @@ class ProfileListViewController: BesideMenuViewController, BrowseActionProducer 
     }
 
     
-    lazy var dataSource: ProfileDataSource = {
+    lazy var dataSource: ProfileDataSource = { [unowned self] in
         let dataSource = ProfileDataSource()
         dataSource.parentViewController = self
         return dataSource

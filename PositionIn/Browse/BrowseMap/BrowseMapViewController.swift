@@ -27,7 +27,7 @@ final class BrowseMapViewController: UIViewController, BrowseActionProducer {
     
     weak var actionConsumer: BrowseActionConsumer?
     
-    lazy private var mapView: GMSMapView = {
+    lazy private var mapView: GMSMapView = { [unowned self] in
         let map = GMSMapView(frame: self.view.bounds)
         map.mapType = kGMSTypeTerrain
         map.settings.tiltGestures = false
