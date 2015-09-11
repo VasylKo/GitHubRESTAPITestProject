@@ -41,6 +41,25 @@ final class LocationController {
         }
     }
     
+    func geocodeString(string: String) -> Future<[Location], NSError> {
+        let promise = Promise<[Location], NSError>()
+        CLGeocoder().geocodeAddressString(string) { (placemarks, error) in
+            if let error = error {
+                promise.failure(error)
+            } else if let placemarks = placemarks  as? [CLPlacemark] {
+                promise.success(placemarks.map { Location.fromPlacemark($0) } )
+            } else {
+                let error = NSError(
+                    domain: LocationController.kLocationControllerErrorDomain,
+                    code: LocationController.ErrorCodes.CouldNotGeocode.rawValue,
+                    userInfo: nil
+                )
+                promise.failure(error)
+            }
+        }
+        return promise.future
+    }
+    
     func reverseGeocodeCoordinate(coordinate: CLLocationCoordinate2D) -> Future<Location, NSError> {
         let promise = Promise<Location, NSError>()
         let geocoder = GMSGeocoder()
@@ -48,14 +67,7 @@ final class LocationController {
             if let error = error {
                 promise.failure(error)
             } else if let address = response?.firstResult() {
-                var location = Location()
-                location.coordinates = address.coordinate
-                location.country = address.country
-                location.zip = address.postalCode
-                location.city = address.locality
-                location.state = address.administrativeArea
-                location.street1 = address.thoroughfare
-                promise.success(location)
+                promise.success(Location.fromAddress(address))
             } else {
                 let error = NSError(
                     domain: LocationController.kLocationControllerErrorDomain,
@@ -74,6 +86,14 @@ final class LocationController {
             let startLocation = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
             return myLocation.distanceFromLocation(startLocation)
         }
+    }
+    
+    func localeUsesMetricSystem() -> Bool {
+        return map(NSLocale.currentLocale().objectForKey(NSLocaleUsesMetricSystem) as? NSNumber) { $0.boolValue} ?? true
+    }
+    
+    func lengthFormatUnit() -> NSLengthFormatterUnit {
+        return localeUsesMetricSystem() ? .Kilometer : .Mile
     }
     
     init() {
@@ -154,6 +174,7 @@ final class LocationController {
     enum ErrorCodes: Int {
         case CouldNotGetCoordinate
         case CouldNotReverseGeocode
+        case CouldNotGeocode
     }
     
     private let kCoordinateExpirationThreshold: NSTimeInterval = 60 * 2
@@ -163,3 +184,29 @@ final class LocationController {
     private let kLastKnownCoordinateExpirationKey = "kLastKnownCoordinateExpirationKey"
 }
 
+extension Location {
+    static func fromPlacemark(placemark: CLPlacemark) -> Location {
+        var location = Location()
+        location.name = placemark.name
+        location.coordinates = placemark.location.coordinate
+        location.country = placemark.country
+        location.zip = placemark.postalCode
+        location.state = placemark.administrativeArea
+        location.city = placemark.locality
+        location.street1 = placemark.thoroughfare
+        location.street2 = placemark.subThoroughfare
+        return location
+    }
+    
+    static func fromAddress(address: GMSAddress) -> Location {
+        var location = Location()
+        location.name =  address.lines.first as? String
+        location.coordinates = address.coordinate
+        location.country = address.country
+        location.zip = address.postalCode
+        location.city = address.locality
+        location.state = address.administrativeArea
+        location.street1 = address.thoroughfare
+        return location
+    }
+}

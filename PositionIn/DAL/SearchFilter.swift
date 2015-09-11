@@ -82,8 +82,7 @@ struct SearchFilter: Mappable {
                 return NSLocalizedString("Anywhere", comment: "Update filter: Anywhere")
             default:
                 let formatter = NSLengthFormatter()
-                let unit: NSLengthFormatterUnit = SearchFilter.localeUsesMetricSystem() ? .Kilometer : .Mile
-                return formatter.stringFromValue(value() ?? 0, unit: unit)
+                return formatter.stringFromValue(value() ?? 0, unit: locationController().lengthFormatUnit())
             }
         }
         
@@ -139,16 +138,12 @@ struct SearchFilter: Mappable {
     }
     
     private static let kCurrentFilterKey = "kCurrentFilterKey"
-    
-    private static func localeUsesMetricSystem() -> Bool {
-        return map(NSLocale.currentLocale().objectForKey(NSLocaleUsesMetricSystem) as? NSNumber) { $0.boolValue} ?? true
-    }
 }
 
 extension SearchFilter: APIServiceQueryConvertible {
     var query: [String : AnyObject]  {
         var params = Mapper<SearchFilter>().toJSON(self)
-        if let radius = radius where SearchFilter.localeUsesMetricSystem() == false {
+        if let radius = radius where locationController().localeUsesMetricSystem() == false {
             params["radius"] =  radius * 1.60934
         }
         return params

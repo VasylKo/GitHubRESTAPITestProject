@@ -40,3 +40,11 @@ final class RegisterViewController: BaseLoginViewController {
     @IBOutlet private weak var signupButton: UIButton!
     @IBOutlet private weak var emailTextField: UITextField!
 }
+
+extension RegisterViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        didTapSignupButton(textField)
+        return false
+    }
+}

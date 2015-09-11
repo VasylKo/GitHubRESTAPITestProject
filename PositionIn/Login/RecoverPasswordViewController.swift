@@ -24,3 +24,11 @@ final class RecoverPasswordViewController: BaseLoginViewController {
 
     @IBOutlet private weak var submitButton: UIButton!
 }
+
+extension RecoverPasswordViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        didTapSubmitButton(textField)
+        return false
+    }
+}

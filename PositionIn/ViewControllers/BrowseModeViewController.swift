@@ -132,7 +132,7 @@ import CleanroomLogger
         }
     }
     
-    private lazy var blurView: UIView = {
+    private lazy var blurView: UIView = { [unowned self] in
         let blur = UIBlurEffect(style: .Dark)
         let blurView = UIVisualEffectView(effect: blur)
         self.contentView.addSubViewOnEntireSize(blurView)

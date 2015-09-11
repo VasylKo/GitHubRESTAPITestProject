@@ -35,7 +35,7 @@ class LocationSelectorViewController: UIViewController, XLFormRowDescriptorViewC
         }
     }
 
-    private lazy var mapView : GMSMapView = {
+    private lazy var mapView : GMSMapView = { [unowned self] in
         let map = GMSMapView(frame: self.view.bounds)
         map.delegate = self
         map.settings.compassButton = true
@@ -47,7 +47,7 @@ class LocationSelectorViewController: UIViewController, XLFormRowDescriptorViewC
         return map
         }()
     
-    private lazy var selectionMarker: GMSMarker = {
+    private lazy var selectionMarker: GMSMarker = { [unowned self] in
         let marker = GMSMarker()
         self.coordinate.map { marker.position = $0 }
         marker.appearAnimation = kGMSMarkerAnimationPop

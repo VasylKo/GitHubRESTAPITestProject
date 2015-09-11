@@ -74,7 +74,7 @@ final class ProductDetailsViewController: UIViewController {
     private var product: Product?
     private var locationRequestToken = InvalidationToken()
     
-    private lazy var dataSource: ProductDetailsDataSource = {
+    private lazy var dataSource: ProductDetailsDataSource = { [unowned self] in
         let dataSource = ProductDetailsDataSource()
         dataSource.parentViewController = self
         return dataSource

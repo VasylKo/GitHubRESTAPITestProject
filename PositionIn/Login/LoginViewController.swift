@@ -46,3 +46,18 @@ final class LoginViewController: BaseLoginViewController {
     @IBOutlet private weak var usernameTextField: UITextField!
     @IBOutlet private weak var passwordTextField: UITextField!
 }
+
+extension LoginViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        switch textField {
+        case usernameTextField:
+            passwordTextField.becomeFirstResponder()
+        case passwordTextField:
+            passwordTextField.resignFirstResponder()
+            didTapLogin(textField)
+        default:
+            return true
+        }
+        return false
+    }
+}

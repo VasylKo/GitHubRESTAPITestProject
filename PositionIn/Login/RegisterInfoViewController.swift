@@ -16,6 +16,7 @@ final class RegisterInfoViewController: BaseLoginViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         emailTextField.text = initialEmail
+        passwordTextField.becomeFirstResponder()
     }    
     
     @IBAction func didTapSignupButton(sender: AnyObject) {
@@ -53,4 +54,24 @@ final class RegisterInfoViewController: BaseLoginViewController {
     @IBOutlet private weak var lastnameTextField: UITextField!
     
     var initialEmail: String?
+}
+
+extension RegisterInfoViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        switch textField {
+        case emailTextField:
+            passwordTextField.becomeFirstResponder()
+        case passwordTextField:
+            firstnameTextField.becomeFirstResponder()
+        case firstnameTextField:
+            firstnameTextField.resignFirstResponder()
+            lastnameTextField.becomeFirstResponder()
+        case lastnameTextField:
+            lastnameTextField.resignFirstResponder()
+            didTapSignupButton(textField)
+        default:
+            return true
+        }
+        return false
+    }
 }
