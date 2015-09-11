@@ -22,7 +22,7 @@ class LocationSearchResultsController {
     }
     
     func reloadData() {
-        locationController().geocodeString("San").onSuccess { [weak self] locations in
+        locationController().geocodeString("Times Square").onSuccess { [weak self] locations in
             Log.debug?.value(locations)
             self?.resultStorage?.setLocations(locations)
             self?.locationsTable?.reloadData()

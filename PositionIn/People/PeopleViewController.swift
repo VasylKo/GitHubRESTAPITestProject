@@ -88,7 +88,7 @@ final class PeopleViewController: BesideMenuViewController {
     
     private var dataRequestToken = InvalidationToken()
 
-    private lazy var dataSource: PeopleListDataSource = {
+    private lazy var dataSource: PeopleListDataSource = { [unowned self] in
         let dataSource = PeopleListDataSource()
         dataSource.parentViewController = self
         return dataSource

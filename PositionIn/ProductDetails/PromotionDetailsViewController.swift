@@ -48,7 +48,7 @@ final class PromotionDetailsViewController: UIViewController {
         promotionImageView.setImageFromURL(promotion.photos?.first?.url, placeholder: UIImage(named: "PromotionDetailsPlaceholder"))
     }
     
-    private lazy var dataSource: PromotionDetailsDataSource = {
+    private lazy var dataSource: PromotionDetailsDataSource = { [unowned self] in
         let dataSource = PromotionDetailsDataSource()
         dataSource.parentViewController = self
         return dataSource

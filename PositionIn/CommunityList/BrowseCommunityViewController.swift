@@ -93,7 +93,7 @@ final class BrowseCommunityViewController: BesideMenuViewController {
     }
     
     
-    private lazy var dataSource: BrowseCommunityDataSource = {
+    private lazy var dataSource: BrowseCommunityDataSource = { [unowned self] in
         let dataSource = BrowseCommunityDataSource()
         dataSource.parentViewController = self
         return dataSource
