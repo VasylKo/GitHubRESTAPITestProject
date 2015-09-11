@@ -41,6 +41,7 @@
                         <segue destination="R25-sL-Pvy" kind="custom" identifier="ShowSettings" customClass="KYEmbedMainControllerSegue" customModule="KYDrawerController" id="uSD-ON-chU"/>
                         <segue destination="ZKO-MO-mOX" kind="custom" identifier="ShowMyProfile" customClass="KYEmbedMainControllerSegue" customModule="KYDrawerController" id="7U6-ac-Hmp"/>
                         <segue destination="xiK-gL-Br7" kind="custom" identifier="ShowPeople" customClass="KYEmbedMainControllerSegue" customModule="KYDrawerController" id="A4b-9B-OIj"/>
+                        <segue destination="1fT-LL-K0F" kind="custom" identifier="ShowWallet" customClass="KYEmbedMainControllerSegue" customModule="KYDrawerController" id="29X-rr-VGm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LQ4-lF-MRq" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -402,13 +403,13 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Quantity:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xXK-cs-MQO">
-                                                    <rect key="frame" x="10" y="12" width="66" height="19.5"/>
+                                                    <rect key="frame" x="10" y="12" width="66" height="20"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                     <color key="textColor" red="0.61176470589999998" green="0.61176470589999998" blue="0.61176470589999998" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rfC-Ne-mcD">
-                                                    <rect key="frame" x="81" y="12" width="9" height="19.5"/>
+                                                    <rect key="frame" x="81" y="12" width="9" height="20"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
@@ -551,7 +552,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="By purchasing, you agree to PositionIn Terms of Service and Privacy Policy" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rTw-vy-Shm">
-                                                    <rect key="frame" x="2" y="2" width="596" height="75.5"/>
+                                                    <rect key="frame" x="2" y="2" width="596" height="76"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                                     <color key="textColor" red="0.61176470589999998" green="0.61176470589999998" blue="0.61176470589999998" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -923,7 +924,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="versionLabel" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U5F-Ak-Xmw">
-                                <rect key="frame" x="10" y="505.5" width="97.5" height="20.5"/>
+                                <rect key="frame" x="10" y="506" width="98" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.74901960779999999" green="0.74901960779999999" blue="0.74901960779999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -985,7 +986,39 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jJT-b7-Mxx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1638" y="-706"/>
+            <point key="canvasLocation" x="-2951" y="-843"/>
+        </scene>
+        <!--Wallet Navigation Controller Scene-->
+        <scene sceneID="H9N-cw-Bn0">
+            <objects>
+                <navigationController storyboardIdentifier="WalletNavigationController" id="1fT-LL-K0F" userLabel="Wallet Navigation Controller Scene" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="6AR-cm-Ysn">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" red="0.13725490200000001" green="0.4431372549" blue="0.83529411760000005" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="barTintColor" red="0.13725490200000001" green="0.4431372549" blue="0.83529411760000005" alpha="1" colorSpace="calibratedRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="nii-dD-WN8" kind="relationship" relationship="rootViewController" id="p7W-ZN-GMv"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IRb-nU-VUE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2564" y="-1594"/>
+        </scene>
+        <!--Wallet-->
+        <scene sceneID="81D-an-flJ">
+            <objects>
+                <viewController storyboardIdentifier="WalletViewController" id="nii-dD-WN8" customClass="WalletViewController" customModule="PositionIn" customModuleProvider="target" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" title="Wallet" id="C2n-Op-QL6"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PjA-9H-5Fk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1893" y="-1594"/>
         </scene>
     </scenes>
     <resources>

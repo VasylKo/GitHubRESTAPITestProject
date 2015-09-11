@@ -65,6 +65,8 @@ class SidebarViewController: KYDrawerController {
                 return (SidebarViewController.Segue.ShowMyProfile, nil)
             case .People:
                 return (SidebarViewController.Segue.ShowPeople, nil)
+            case .Wallet:
+                return (SidebarViewController.Segue.ShowWallet, nil)
             default:
                 return nil
             }
