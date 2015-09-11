@@ -36,6 +36,7 @@ final class SearchViewController: UIViewController {
                 dataSource = locationsDataSource
             }
             dataSource.configureTable(tableView)
+            locationSearchController.reloadData()
         }
     }
     
@@ -46,12 +47,6 @@ final class SearchViewController: UIViewController {
         categoriesSearchBar.becomeFirstResponder()
         
         searchMode = .Locations
-        locationController().geocodeString("Times Square").onSuccess { [weak self] locations in
-            Log.debug?.value(locations)
-            self?.locationsDataSource.setLocations(locations)
-        }.onFailure { error in
-            Log.error?.value(error)
-        }
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -71,19 +66,23 @@ final class SearchViewController: UIViewController {
     @IBOutlet private(set) weak var locationSearchBar: UISearchBar!
     @IBOutlet private(set) weak var backImageView: UIImageView!
     
-    @IBOutlet private weak var tableView: UITableView!
+    @IBOutlet private weak var tableView: TableView!
     
-    private lazy var itemsDataSource: ItemsSearchResultDataSource = {
+    private lazy var itemsDataSource: ItemsSearchResultDataSource = { [unowned self] in
         let dataSource = ItemsSearchResultDataSource()
         dataSource.parentViewController = self
         return dataSource
         }()
 
-    private lazy var locationsDataSource: LocationSearchResultDataSource = {
+    private lazy var locationsDataSource: LocationSearchResultDataSource = { [unowned self] in
         let dataSource = LocationSearchResultDataSource()
         dataSource.parentViewController = self
         return dataSource
         }()
+    
+    private lazy var locationSearchController: LocationSearchResultsController = { [unowned self] in
+        return LocationSearchResultsController(table: self.tableView, resultStorage: self.locationsDataSource)
+    }()
     
 }
 

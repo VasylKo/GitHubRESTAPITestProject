@@ -1,5 +1,5 @@
 //
-//  LocationSearchResult.swift
+//  LocationSearchResultDataSource.swift
 //  PositionIn
 //
 //  Created by Alexandr Goncharov on 11/09/15.
@@ -8,8 +8,7 @@
 
 import PosInCore
 
-
-class LocationSearchResultDataSource: TableViewDataSource {
+class LocationSearchResultDataSource: TableViewDataSource, LocationSearchResultStorage {
     
     func setLocations(locations: [Location]) {
         locationModels = locations.map { location in
