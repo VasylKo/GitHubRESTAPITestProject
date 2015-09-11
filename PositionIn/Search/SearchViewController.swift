@@ -43,7 +43,9 @@ final class SearchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "didTapOutsideSearch:"))
+        let dismissRecognizer = UITapGestureRecognizer(target: self, action: "didTapOutsideSearch:")
+        dismissRecognizer.cancelsTouchesInView = false
+        view.addGestureRecognizer(dismissRecognizer)
         categoriesSearchBar.becomeFirstResponder()
         
         searchMode = .Locations
