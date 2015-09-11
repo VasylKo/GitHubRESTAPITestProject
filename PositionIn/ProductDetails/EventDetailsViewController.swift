@@ -50,7 +50,7 @@ final class EventDetailsViewController: UIViewController {
         
     }
     
-    private lazy var dataSource: EventDetailsDataSource = {
+    private lazy var dataSource: EventDetailsDataSource = { [unowned self] in
         let dataSource = EventDetailsDataSource()
         dataSource.parentViewController = self
         return dataSource

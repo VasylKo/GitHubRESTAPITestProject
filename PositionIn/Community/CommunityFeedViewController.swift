@@ -68,7 +68,7 @@ class CommunityFeedViewController: BesideMenuViewController, BrowseActionProduce
     }
 
     
-    lazy var dataSource: CommunityFeedDataSource = {
+    lazy var dataSource: CommunityFeedDataSource = { [unowned self] in
         let dataSource = CommunityFeedDataSource()
         dataSource.parentViewController = self
         return dataSource

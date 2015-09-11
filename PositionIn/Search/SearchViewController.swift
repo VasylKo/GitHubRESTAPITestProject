@@ -21,10 +21,34 @@ final class SearchViewController: UIViewController {
         }
     }
     
+    enum SearchMode {
+        case Items
+        case Locations
+    }
+    
+    var searchMode: SearchMode = .Items {
+        didSet {
+            let dataSource: TableViewDataSource
+            switch searchMode {
+            case .Items:
+                dataSource = itemsDataSource
+            case .Locations:
+                dataSource = locationsDataSource
+            }
+            dataSource.configureTable(tableView)
+            locationSearchController.reloadData()
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        dataSource.configureTable(tableView)
-        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "didTapOutsideSearch:"))
+        
+        let dismissRecognizer = UITapGestureRecognizer(target: self, action: "didTapOutsideSearch:")
+        dismissRecognizer.cancelsTouchesInView = false
+        view.addGestureRecognizer(dismissRecognizer)
+        categoriesSearchBar.becomeFirstResponder()
+        
+        searchMode = .Locations
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -44,17 +68,28 @@ final class SearchViewController: UIViewController {
     @IBOutlet private(set) weak var locationSearchBar: UISearchBar!
     @IBOutlet private(set) weak var backImageView: UIImageView!
     
-    @IBOutlet private weak var tableView: UITableView!
-    private lazy var dataSource: SearchResultDataSource = {
-        let dataSource = SearchResultDataSource()
+    @IBOutlet private weak var tableView: TableView!
+    
+    private lazy var itemsDataSource: ItemsSearchResultDataSource = { [unowned self] in
+        let dataSource = ItemsSearchResultDataSource()
+        dataSource.parentViewController = self
+        return dataSource
+        }()
+
+    private lazy var locationsDataSource: LocationSearchResultDataSource = { [unowned self] in
+        let dataSource = LocationSearchResultDataSource()
         dataSource.parentViewController = self
         return dataSource
         }()
     
+    private lazy var locationSearchController: LocationSearchResultsController = { [unowned self] in
+        return LocationSearchResultsController(table: self.tableView, resultStorage: self.locationsDataSource)
+    }()
+    
 }
 
 extension SearchViewController {
-    internal class SearchResultDataSource: TableViewDataSource {
+    class ItemsSearchResultDataSource: TableViewDataSource {
         
         override func configureTable(tableView: UITableView) {
             tableView.estimatedRowHeight = 80.0
@@ -90,3 +125,4 @@ extension SearchViewController {
         private let modelFactory = FeedItemCellModelFactory()
     }
 }
+

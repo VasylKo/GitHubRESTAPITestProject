@@ -113,7 +113,7 @@ final class MainMenuViewController: UIViewController {
     }
     
     
-    private lazy var dataSource: MainMenuItemsDatasource = {
+    private lazy var dataSource: MainMenuItemsDatasource = { [unowned self] in
         let dataSource = MainMenuItemsDatasource()
         dataSource.parentViewController = self
         return dataSource

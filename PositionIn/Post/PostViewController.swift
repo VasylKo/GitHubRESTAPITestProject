@@ -25,7 +25,7 @@ final class PostViewController: UIViewController {
         }
     }
     
-    private lazy var dataSource: PostDataSource = {
+    private lazy var dataSource: PostDataSource = { [unowned self] in
         let dataSource = PostDataSource()
         dataSource.parentViewController = self
         return dataSource
