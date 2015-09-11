@@ -87,6 +87,10 @@ struct Storyboards {
         static func instantiateCommunityViewController() -> CommunityViewController! {
             return self.storyboard.instantiateViewControllerWithIdentifier("CommunityViewController") as! CommunityViewController
         }
+
+        static func instantiateWalletViewController() -> WalletViewController! {
+            return self.storyboard.instantiateViewControllerWithIdentifier("WalletViewController") as! WalletViewController
+        }
     }
 
     struct Login {
@@ -330,6 +334,7 @@ extension SidebarViewController {
         case ShowSettings = "ShowSettings"
         case ShowMyProfile = "ShowMyProfile"
         case ShowPeople = "ShowPeople"
+        case ShowWallet = "ShowWallet"
 
         var kind: SegueKind? {
             switch (self) {
@@ -348,6 +353,8 @@ extension SidebarViewController {
             case ShowMyProfile:
                 return SegueKind(rawValue: "custom")
             case ShowPeople:
+                return SegueKind(rawValue: "custom")
+            case ShowWallet:
                 return SegueKind(rawValue: "custom")
             default:
                 preconditionFailure("Invalid value")
@@ -706,6 +713,8 @@ extension PeopleViewController {
 //MARK: - SettingsViewController
 
 //MARK: - CommunityViewController
+
+//MARK: - WalletViewController
 
 //MARK: - LoginSignupViewController
 extension UIStoryboardSegue {

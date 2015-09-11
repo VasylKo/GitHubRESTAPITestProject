@@ -331,6 +331,8 @@
 		E6F243781B8B3CDE0033B13C /* BrowseListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6F243771B8B3CDE0033B13C /* BrowseListTableViewCell.swift */; };
 		E6F2437A1B8B40380033B13C /* PositionIn.BrowseListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6F243791B8B40380033B13C /* PositionIn.BrowseListTableViewCell.xib */; };
 		E6F2437C1B8B42D70033B13C /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6F2437B1B8B42D70033B13C /* UserProfileViewController.swift */; };
+		E6F7A4701BA333D70069152A /* WalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6F7A46F1BA333D70069152A /* WalletViewController.swift */; };
+		E6F7A4721BA335070069152A /* PositionIn.WalletViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6F7A4711BA335070069152A /* PositionIn.WalletViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -903,6 +905,8 @@
 		E6F243771B8B3CDE0033B13C /* BrowseListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowseListTableViewCell.swift; sourceTree = "<group>"; };
 		E6F243791B8B40380033B13C /* PositionIn.BrowseListTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.BrowseListTableViewCell.xib; sourceTree = "<group>"; };
 		E6F2437B1B8B42D70033B13C /* UserProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
+		E6F7A46F1BA333D70069152A /* WalletViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletViewController.swift; sourceTree = "<group>"; };
+		E6F7A4711BA335070069152A /* PositionIn.WalletViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.WalletViewController.xib; sourceTree = "<group>"; };
 		E6FC63D01B5901060062F5C9 /* KVObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KVObserver.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1154,6 +1158,7 @@
 				E6199BB51B9F3B4400E3C69D /* People */,
 				E66115851B7376DE003DB5B3 /* Login */,
 				E61B20D61B7E0806005EAB2C /* Settings */,
+				E6F7A46E1BA333B30069152A /* Wallet */,
 				E62B16F91B5CDED600D446BC /* Messaging */,
 				E6325F5F1B57D89A00996480 /* ViewControllers */,
 				E6325F581B57D46C00996480 /* Views */,
@@ -2456,6 +2461,15 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		E6F7A46E1BA333B30069152A /* Wallet */ = {
+			isa = PBXGroup;
+			children = (
+				E6F7A46F1BA333D70069152A /* WalletViewController.swift */,
+				E6F7A4711BA335070069152A /* PositionIn.WalletViewController.xib */,
+			);
+			path = Wallet;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -2711,6 +2725,7 @@
 				E6BEF1CC1B9C5E7200511B46 /* PositionIn.PostImageCell.xib in Resources */,
 				E689F07D1B6B976100597587 /* PositionIn.ProductInventoryCell.xib in Resources */,
 				E6BEF1E61B9C83F200511B46 /* PositionIn.CommunityActionCell.xib in Resources */,
+				E6F7A4721BA335070069152A /* PositionIn.WalletViewController.xib in Resources */,
 				E6BEF1C61B9C556300511B46 /* PositionIn.PostViewController.xib in Resources */,
 				E62B16FD1B5CDF2400D446BC /* PositionIn.MessagesListViewController.xib in Resources */,
 				E69421021B666A1600F34F06 /* PositionIn.ActionCell.xib in Resources */,
@@ -2902,6 +2917,7 @@
 				E6C9522C1BA1BB0E0032254F /* PeopleListCell.swift in Sources */,
 				E6F243761B8B31510033B13C /* BrowseTabbar.swift in Sources */,
 				E6A869EE1B60D42C00797D16 /* APIService.swift in Sources */,
+				E6F7A4701BA333D70069152A /* WalletViewController.swift in Sources */,
 				E68B52221B875F8F006B980C /* ProductListCell.swift in Sources */,
 				E68B52031B873687006B980C /* FeedItemCellModelFactory.swift in Sources */,
 				E6829B041B5E6CF800FB1E1D /* RoundButton.swift in Sources */,
