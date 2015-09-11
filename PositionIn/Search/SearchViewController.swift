@@ -21,10 +21,37 @@ final class SearchViewController: UIViewController {
         }
     }
     
+    enum SearchMode {
+        case Items
+        case Locations
+    }
+    
+    var searchMode: SearchMode = .Items {
+        didSet {
+            let dataSource: TableViewDataSource
+            switch searchMode {
+            case .Items:
+                dataSource = itemsDataSource
+            case .Locations:
+                dataSource = locationsDataSource
+            }
+            dataSource.configureTable(tableView)
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        dataSource.configureTable(tableView)
+        
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "didTapOutsideSearch:"))
+        categoriesSearchBar.becomeFirstResponder()
+        
+        searchMode = .Locations
+        locationController().geocodeString("Times Square").onSuccess { [weak self] locations in
+            Log.debug?.value(locations)
+            self?.locationsDataSource.setLocations(locations)
+        }.onFailure { error in
+            Log.error?.value(error)
+        }
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -45,8 +72,15 @@ final class SearchViewController: UIViewController {
     @IBOutlet private(set) weak var backImageView: UIImageView!
     
     @IBOutlet private weak var tableView: UITableView!
-    private lazy var dataSource: SearchResultDataSource = {
-        let dataSource = SearchResultDataSource()
+    
+    private lazy var itemsDataSource: ItemsSearchResultDataSource = {
+        let dataSource = ItemsSearchResultDataSource()
+        dataSource.parentViewController = self
+        return dataSource
+        }()
+
+    private lazy var locationsDataSource: LocationSearchResultDataSource = {
+        let dataSource = LocationSearchResultDataSource()
         dataSource.parentViewController = self
         return dataSource
         }()
@@ -54,7 +88,7 @@ final class SearchViewController: UIViewController {
 }
 
 extension SearchViewController {
-    internal class SearchResultDataSource: TableViewDataSource {
+    class ItemsSearchResultDataSource: TableViewDataSource {
         
         override func configureTable(tableView: UITableView) {
             tableView.estimatedRowHeight = 80.0
@@ -90,3 +124,4 @@ extension SearchViewController {
         private let modelFactory = FeedItemCellModelFactory()
     }
 }
+

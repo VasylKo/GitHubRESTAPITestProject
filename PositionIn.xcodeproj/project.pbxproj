@@ -333,6 +333,9 @@
 		E6F2437C1B8B42D70033B13C /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6F2437B1B8B42D70033B13C /* UserProfileViewController.swift */; };
 		E6F7A4701BA333D70069152A /* WalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6F7A46F1BA333D70069152A /* WalletViewController.swift */; };
 		E6F7A4721BA335070069152A /* PositionIn.WalletViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6F7A4711BA335070069152A /* PositionIn.WalletViewController.xib */; };
+		E6F7A4751BA34E3A0069152A /* PositionIn.LocationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6F7A4731BA34E3A0069152A /* PositionIn.LocationCell.xib */; };
+		E6F7A4761BA34E3A0069152A /* LocationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6F7A4741BA34E3A0069152A /* LocationCell.swift */; };
+		E6F7A4781BA34F280069152A /* LocationSearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6F7A4771BA34F280069152A /* LocationSearchResult.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -907,6 +910,9 @@
 		E6F2437B1B8B42D70033B13C /* UserProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
 		E6F7A46F1BA333D70069152A /* WalletViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletViewController.swift; sourceTree = "<group>"; };
 		E6F7A4711BA335070069152A /* PositionIn.WalletViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.WalletViewController.xib; sourceTree = "<group>"; };
+		E6F7A4731BA34E3A0069152A /* PositionIn.LocationCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.LocationCell.xib; sourceTree = "<group>"; };
+		E6F7A4741BA34E3A0069152A /* LocationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationCell.swift; sourceTree = "<group>"; };
+		E6F7A4771BA34F280069152A /* LocationSearchResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationSearchResult.swift; sourceTree = "<group>"; };
 		E6FC63D01B5901060062F5C9 /* KVObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KVObserver.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -2358,6 +2364,9 @@
 			children = (
 				E6D4D5B11B6F81A7003134CB /* SearchViewController.swift */,
 				E6D4D5B71B6FA7A7003134CB /* SearchTransition.swift */,
+				E6F7A4771BA34F280069152A /* LocationSearchResult.swift */,
+				E6F7A4741BA34E3A0069152A /* LocationCell.swift */,
+				E6F7A4731BA34E3A0069152A /* PositionIn.LocationCell.xib */,
 				E6D4D5B31B6F8B9F003134CB /* PositionIn.SearchBar.xib */,
 				E6D4D5B41B6F8B9F003134CB /* SearchBar.swift */,
 			);
@@ -2740,6 +2749,7 @@
 				E6DA53C81B7D00DB000087A7 /* PositionIn.BrowseCommunityViewController.xib in Resources */,
 				E660E5321B5AC2A200F52050 /* PositionIn.MainMenuCell.xib in Resources */,
 				E661159B1B73A0CB003DB5B3 /* PositionIn.BrowseListViewController.xib in Resources */,
+				E6F7A4751BA34E3A0069152A /* PositionIn.LocationCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2934,6 +2944,7 @@
 				240A9B9E1B9CCDB4007C77E3 /* CommunityStatsCell.swift in Sources */,
 				E661159D1B73A0CB003DB5B3 /* BrowseMapViewController.swift in Sources */,
 				E6F243701B8B17910033B13C /* DisplayModeViewController.swift in Sources */,
+				E6F7A4761BA34E3A0069152A /* LocationCell.swift in Sources */,
 				E68B52011B873545006B980C /* FeedTableViewCellModel.swift in Sources */,
 				E66A3E1B1B9CE2D6005FA33B /* OrderViewController.swift in Sources */,
 				E64D00651B7C9601007693E0 /* BaseAddItemViewController.swift in Sources */,
@@ -2962,6 +2973,7 @@
 				E6325F651B57D89A00996480 /* SidebarViewController.swift in Sources */,
 				24D850421B878730008CAE82 /* LoginSignupViewController.swift in Sources */,
 				E66115891B73771E003DB5B3 /* LoginViewController.swift in Sources */,
+				E6F7A4781BA34F280069152A /* LocationSearchResult.swift in Sources */,
 				E6018E501B849266001D22FA /* XMPPProcess+Future.swift in Sources */,
 				E6BEF1E31B9C83F200511B46 /* CommunityActionCell.swift in Sources */,
 				E6C5CE1F1B83A2B700265955 /* AppConfiguration.swift in Sources */,
