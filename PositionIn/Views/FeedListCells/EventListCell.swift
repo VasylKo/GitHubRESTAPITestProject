@@ -20,7 +20,7 @@ final class EventListCell: TableViewCell {
         let m = model as? CompactFeedTableCellModel
         assert(m != nil, "Invalid model passed")
         
-        productImage.setImageFromURL(m!.imageURL, placeholder: UIImage(named: "compactPlaceholder"))
+        productImage.setImageFromURL(m!.imageURL, placeholder: UIImage(named: "placeholderEvent"))
         titleLabel.text = m!.title
         infoLabel.text = m!.info
         dateLabel.text = m!.details

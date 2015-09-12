@@ -41,7 +41,7 @@ struct FeedItemCellModelFactory {
             ]
 
         case .Promotion:
-            let discountFormat = NSLocalizedString("Save $%@", comment: "Compact feed: DiscountFormat")
+            let discountFormat = NSLocalizedString("Save %@%", comment: "Compact feed: DiscountFormat")
             let discount: Float =  146.0
             return [
                 CompactFeedTableCellModel(

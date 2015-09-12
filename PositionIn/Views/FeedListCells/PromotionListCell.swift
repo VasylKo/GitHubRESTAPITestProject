@@ -20,7 +20,7 @@ final class PromotionListCell: TableViewCell {
         let m = model as? CompactFeedTableCellModel
         assert(m != nil, "Invalid model passed")
         
-        productImage.setImageFromURL(m!.imageURL, placeholder: UIImage(named: "compactPlaceholder"))
+        productImage.setImageFromURL(m!.imageURL, placeholder: UIImage(named: "placeholderPromotion"))
         titleLabel.text = m!.title
         authorLabel.text = m!.details
         discountLabel.text = m!.info

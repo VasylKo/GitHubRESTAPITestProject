@@ -49,7 +49,7 @@ final class AddPromotionViewController: BaseAddItemViewController {
         titleRow.required = true
         infoGeneralSection.addFormRow(titleRow)
         // Discount
-        let priceRow = XLFormRowDescriptor(tag: Tags.Discount.rawValue, rowType: XLFormRowDescriptorTypeDecimal, title: NSLocalizedString("Discount ($)", comment: "New promotion: discount"))
+        let priceRow = XLFormRowDescriptor(tag: Tags.Discount.rawValue, rowType: XLFormRowDescriptorTypeDecimal, title: NSLocalizedString("Discount (%)", comment: "New promotion: discount"))
         priceRow.required = true
         infoGeneralSection.addFormRow(priceRow)
         

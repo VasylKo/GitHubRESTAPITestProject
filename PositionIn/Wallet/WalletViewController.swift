@@ -28,12 +28,11 @@ final class WalletViewController: BesideMenuViewController {
     }
     
     func fillMockItems() {
-        let item1 = ShopItem(feedItem: FeedItem(nameTmp: "Forest", detailsTmp: "Edward Rayan"), walletType: ShopItem.WalletType.Inventory)
-        let item2 = ShopItem(feedItem: FeedItem(nameTmp: "Wizard", detailsTmp: "Edward Rayan"), walletType: ShopItem.WalletType.Sold)
-        let item3 = ShopItem(feedItem: FeedItem(nameTmp: "Venus", detailsTmp: "Edward Rayan"), walletType: ShopItem.WalletType.Purchased)
+        let item1 = ShopItem(feedItem: FeedItem(nameTmp: "Forest", detailsTmp: "Edward Rayan", textTmp: "9 miles", priceTmp: 12.0), walletType: ShopItem.WalletType.Inventory)
+        let text = map(NSDate()){dateFormatter.stringFromDate($0)}
+        let item2 = ShopItem(feedItem: FeedItem(nameTmp: "Wizard", detailsTmp: "Edward Rayan", textTmp: text ?? "01.02.2015", priceTmp: 123.23), walletType: ShopItem.WalletType.Sold)
+        let item3 = ShopItem(feedItem: FeedItem(nameTmp: "Venus", detailsTmp: "Edward Rayan", textTmp: text ?? "01.02.2015", priceTmp: 214.32), walletType: ShopItem.WalletType.Purchased)
         items = [item1, item2, item3]
-        
-        
     }
     
     @IBAction func displayModeSegmentedControlChanged(sender: UISegmentedControl) {
@@ -53,6 +52,12 @@ final class WalletViewController: BesideMenuViewController {
         return dataSource
         }()
     
+    private let dateFormatter: NSDateFormatter = {
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
+        return dateFormatter
+        }()
+
     var items: [ShopItem] = []
     @IBOutlet private(set) internal weak var tableView: UITableView!
     @IBOutlet private weak var displayModeSegmentedControl: UISegmentedControl!
