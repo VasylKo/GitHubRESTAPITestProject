@@ -28,11 +28,13 @@ final class WalletViewController: BesideMenuViewController {
     }
     
     func fillMockItems() {
-        let item1 = ShopItem(feedItem: FeedItem(nameTmp: "Forest", detailsTmp: "Edward Rayan", textTmp: "9 miles", priceTmp: 12.0), walletType: ShopItem.WalletType.Inventory)
+        let item1 = ShopItem(feedItem: FeedItem(nameTmp: "The Forest", detailsTmp: "Edward Rayan", textTmp: "9 miles", priceTmp: 12.0), walletType: ShopItem.WalletType.Inventory)
+        let item4 = ShopItem(feedItem: FeedItem(nameTmp: "Albuquerque", detailsTmp: "Amber Tran", textTmp: "9 miles", priceTmp: 12.0), walletType: ShopItem.WalletType.Inventory)
+        let item5 = ShopItem(feedItem: FeedItem(nameTmp: "World X1", detailsTmp: "Sharon Brewer", textTmp: "9 miles", priceTmp: 12.0), walletType: ShopItem.WalletType.Inventory)
         let text = map(NSDate()){dateFormatter.stringFromDate($0)}
-        let item2 = ShopItem(feedItem: FeedItem(nameTmp: "Wizard", detailsTmp: "Edward Rayan", textTmp: text ?? "01.02.2015", priceTmp: 123.23), walletType: ShopItem.WalletType.Sold)
-        let item3 = ShopItem(feedItem: FeedItem(nameTmp: "Venus", detailsTmp: "Edward Rayan", textTmp: text ?? "01.02.2015", priceTmp: 214.32), walletType: ShopItem.WalletType.Purchased)
-        items = [item1, item2, item3]
+        let item2 = ShopItem(feedItem: FeedItem(nameTmp: "Wizard of the Coast", detailsTmp: "Edward Rayan", textTmp: text ?? "01.02.2015", priceTmp: 123.23), walletType: ShopItem.WalletType.Sold)
+        let item3 = ShopItem(feedItem: FeedItem(nameTmp: "Venus Poster", detailsTmp: "Arthur Anderson", textTmp: text ?? "01.02.2015", priceTmp: 214.32), walletType: ShopItem.WalletType.Purchased)
+        items = [item1, item4, item5, item2, item3]
     }
     
     @IBAction func displayModeSegmentedControlChanged(sender: UISegmentedControl) {
@@ -57,7 +59,7 @@ final class WalletViewController: BesideMenuViewController {
         dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
         return dateFormatter
         }()
-
+    
     var items: [ShopItem] = []
     @IBOutlet private(set) internal weak var tableView: UITableView!
     @IBOutlet private weak var displayModeSegmentedControl: UISegmentedControl!
@@ -87,7 +89,7 @@ extension WalletViewController {
         }
         
         @objc override func tableView(tableView: UITableView, reuseIdentifierForIndexPath indexPath: NSIndexPath) -> String {
-         
+            
             return  ProductListCell.reuseId()
         }
         
@@ -95,24 +97,24 @@ extension WalletViewController {
             return [ProductListCell.reuseId()]
         }
         
-//        func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-//            tableView.deselectRowAtIndexPath(indexPath, animated: true)
-//            if let model = self.tableView(tableView, modelForIndexPath: indexPath) as? FeedTableCellModel,
-//                let actionProducer = parentViewController as? BrowseActionProducer,
-//                let actionConsumer = self.actionConsumer {
-//                    actionConsumer.browseController(actionProducer, didSelectItem: model.objectID, type: model.itemType, data: model.data)
-//            }
-//        }
-//        
+        //        func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        //            tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        //            if let model = self.tableView(tableView, modelForIndexPath: indexPath) as? FeedTableCellModel,
+        //                let actionProducer = parentViewController as? BrowseActionProducer,
+        //                let actionConsumer = self.actionConsumer {
+        //                    actionConsumer.browseController(actionProducer, didSelectItem: model.objectID, type: model.itemType, data: model.data)
+        //            }
+        //        }
+        //
         
         func setItems(shopItems: [ShopItem]) {
             models = shopItems.map { self.modelFactory.modelsForItem($0) }
         }
         
-//        private var actionConsumer: BrowseActionConsumer? {
-//            return flatMap(parentViewController as? BrowseActionProducer) { $0.actionConsumer }
-//            
-//        }
+        //        private var actionConsumer: BrowseActionConsumer? {
+        //            return flatMap(parentViewController as? BrowseActionProducer) { $0.actionConsumer }
+        //
+        //        }
         
         private var models: [[TableViewCellModel]] = []
         private let modelFactory = WalletCellFactory()
