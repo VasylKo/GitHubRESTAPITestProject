@@ -84,12 +84,12 @@ final class ProductDetailsViewController: UIViewController {
     private func productAcionItems() -> [[ProductActionItem]] {
         return [
             [ // 0 section
-                ProductActionItem(title: NSLocalizedString("Buy Product", comment: "Product action: Buy Product"), image: "MainMenuMessages", action: .Buy),
+                ProductActionItem(title: NSLocalizedString("Buy Product", comment: "Product action: Buy Product"), image: "productBuyProduct", action: .Buy),
             ],
             [ // 1 section
-                ProductActionItem(title: NSLocalizedString("Send Message", comment: "Product action: Send Message"), image: "MainMenuMessages", action: .SendMessage),
-                ProductActionItem(title: NSLocalizedString("Product Inventory", comment: "Product action: Product Inventory"), image: "MainMenuMessages", action: .ProductInventory),
-                ProductActionItem(title: NSLocalizedString("Seller Profile", comment: "Product action: Seller Profile"), image: "MainMenuMessages", action: .SellerProfile),
+                ProductActionItem(title: NSLocalizedString("Send Message", comment: "Product action: Send Message"), image: "productSendMessage", action: .SendMessage),
+                ProductActionItem(title: NSLocalizedString("Seller Profile", comment: "Product action: Seller Profile"), image: "productSellerProfile", action: .SellerProfile),
+                ProductActionItem(title: NSLocalizedString("Navigate", comment: "Product action: Navigate"), image: "productNavigate", action: .ProductInventory),
             ],
         ]
         
