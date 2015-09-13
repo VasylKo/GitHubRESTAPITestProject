@@ -44,7 +44,8 @@ final class PromotionDetailsViewController: UIViewController {
         let startDate = dateFormatter.stringFromDate(promotion.startDate ?? NSDate())
         let endDate = dateFormatter.stringFromDate(promotion.endDate ?? NSDate())
         priceLabel.text = "\(startDate) - \(endDate)"
-        infoLabel.text = "Save $\(promotion.discount ?? 0)"
+        let discountFormat = NSLocalizedString("Save %.1f%%", comment: "Promotion details: DiscountFormat")
+        infoLabel.text = map(promotion.discount) { String(format: discountFormat, $0 )}
         promotionImageView.setImageFromURL(promotion.photos?.first?.url, placeholder: UIImage(named: "PromotionDetailsPlaceholder"))
     }
     
@@ -58,13 +59,13 @@ final class PromotionDetailsViewController: UIViewController {
     private func promotionActionItems() -> [[PromotionActionItem]] {
         return [
             [ // 0 section
-                PromotionActionItem(title: NSLocalizedString("Products on Sale", comment: "Promotion action: Products on Sale"), image: "MainMenuMessages", action: .ProductsOnSale),
+                PromotionActionItem(title: NSLocalizedString("Products on Sale", comment: "Promotion action: Products on Sale"), image: "productBuyProduct", action: .ProductsOnSale),
             ],
             [ // 1 section
-                PromotionActionItem(title: NSLocalizedString("Send Message", comment: "Promotion action: Send Message"), image: "MainMenuMessages", action: .SendMessage),
-                PromotionActionItem(title: NSLocalizedString("Seller Profile", comment: "Promotion action: Seller Profile"), image: "MainMenuMessages", action: .SellerProfile),
-                PromotionActionItem(title: NSLocalizedString("Terms and Information", comment: "Promotion action: Terms and Information"), image: "MainMenuMessages", action: .TermsAndInformation),
-                PromotionActionItem(title: NSLocalizedString("Navigate", comment: "Promotion action: Navigate"), image: "MainMenuMessages", action: .Navigate)
+                PromotionActionItem(title: NSLocalizedString("Send Message", comment: "Promotion action: Send Message"), image: "productSendMessage", action: .SendMessage),
+                PromotionActionItem(title: NSLocalizedString("Seller Profile", comment: "Promotion action: Seller Profile"), image: "productSellerProfile", action: .SellerProfile),
+                PromotionActionItem(title: NSLocalizedString("Terms and Information", comment: "Promotion action: Terms and Information"), image: "productTerms&Info", action: .TermsAndInformation),
+                PromotionActionItem(title: NSLocalizedString("Navigate", comment: "Promotion action: Navigate"), image: "productNavigate", action: .Navigate)
             ],
         ]
     }

@@ -36,6 +36,13 @@ struct FeedItem: CRUDObject {
         }
     }
     
+    init(name: String, details: String, text: String, price: Float) {
+        self.name = name
+        self.details = details
+        self.text = text
+        self.price = price
+    }
+    
     init?(_ map: Map) {
         mapping(map)
         if objectId == CRUDObjectInvalidId {

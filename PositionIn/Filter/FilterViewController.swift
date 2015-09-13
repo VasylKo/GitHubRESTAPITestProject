@@ -213,10 +213,48 @@ final class FilterViewController: XLFormViewController {
 extension ItemCategory {
     func image() -> UIImage {
         switch self {
+        case .AnimalsPetSupplies:
+            return UIImage(named: "category_animals_pet_supplies")!
+        case .ApparelAccessories:
+            return UIImage(named: "category_apparel_accessories")!
+        case .ArtsEntertainment:
+            return UIImage(named: "category_arts_entertainment")!
+        case .BabyToddler:
+            return UIImage(named: "category_baby_toddler")!
+        case .BusinessIndustrial:
+            return UIImage(named: "category_business_industrial")!
+        case .CamerasOptics:
+            return UIImage(named: "category_cameras_optics")!
+        case .Electronics:
+            return UIImage(named: "category_electronics")!
+        case .Food:
+            return UIImage(named: "category_food")!
+        case .Furniture:
+            return UIImage(named: "category_furniture")!
+        case .Hardware:
+            return UIImage(named: "category_hardware")!
+        case .HealthBeauty:
+            return UIImage(named: "category_health_beauty")!
+        case .HomeGarden:
+            return UIImage(named: "category_home_garden")!
+        case .LuggageBags:
+            return UIImage(named: "category_luggage_bags")!
+        case .Media:
+            return UIImage(named: "category_media")!
+        case .OfficeSupplies:
+            return UIImage(named: "category_office_supplies")!
+        case .ReligiousCeremonial:
+            return UIImage(named: "category_religious_ceremonial")!
+        case .Software:
+            return UIImage(named: "category_software")!
+        case .SportingGoods:
+            return UIImage(named: "category_sports")!
+        case .ToysGames:
+            return UIImage(named: "category_toys_games")!
+        case .VehiclesParts:
+            return UIImage(named: "category_vehicles_parts")!
         case .Unknown:
-            fallthrough
-        default:
-            return UIImage(named: "BrowseModeList")!
+            return UIImage()
         }
-    }
+  }
 }
