@@ -58,10 +58,6 @@ struct StringValidation {
         }
     }
     
-    static func percentage() -> Validator {
-        return length(min: 1, max: 2)
-    }
-
     static func name() -> Validator {
         return { string in
             let nameRegex: String = "^[\\p{L}\\s'.-]+$"

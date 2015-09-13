@@ -11,40 +11,56 @@ import PosInCore
 import CleanroomLogger
 
 final class WalletViewController: BesideMenuViewController {
+    enum BrowseMode {
+        case Inventory, Sold, Purchased
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         dataSource.configureTable(tableView)
-        
-        fillMockItems()
-        selectedItemType = .Inventory
+        browseMode = .Inventory
     }
     
-    var selectedItemType: ShopItem.WalletType = .Inventory {
+    func reloadData() {
+        let items = mockData(browseMode)
+        dataSource.setItems(items)
+        tableView.reloadData()
+    }
+    
+    var browseMode: BrowseMode = .Inventory {
         didSet{
-            dataSource.setItems(items.filter{[unowned self] in $0.walletType == self.selectedItemType})
-            tableView.reloadData()
+            reloadData()
         }
     }
     
-    func fillMockItems() {
-        let item1 = ShopItem(feedItem: FeedItem(nameTmp: "The Forest", detailsTmp: "Edward Rayan", textTmp: "9 miles", priceTmp: 12.0), walletType: ShopItem.WalletType.Inventory)
-        let item4 = ShopItem(feedItem: FeedItem(nameTmp: "Albuquerque", detailsTmp: "Amber Tran", textTmp: "9 miles", priceTmp: 12.0), walletType: ShopItem.WalletType.Inventory)
-        let item5 = ShopItem(feedItem: FeedItem(nameTmp: "World X1", detailsTmp: "Sharon Brewer", textTmp: "9 miles", priceTmp: 12.0), walletType: ShopItem.WalletType.Inventory)
-        let text = map(NSDate()){dateFormatter.stringFromDate($0)}
-        let item2 = ShopItem(feedItem: FeedItem(nameTmp: "Wizard of the Coast", detailsTmp: "Edward Rayan", textTmp: text ?? "01.02.2015", priceTmp: 123.23), walletType: ShopItem.WalletType.Sold)
-        let item3 = ShopItem(feedItem: FeedItem(nameTmp: "Venus Poster", detailsTmp: "Arthur Anderson", textTmp: text ?? "01.02.2015", priceTmp: 214.32), walletType: ShopItem.WalletType.Purchased)
-        items = [item1, item4, item5, item2, item3]
+    func mockData(mode: BrowseMode) -> [FeedItem] {
+        let dateText = map(NSDate()){dateFormatter.stringFromDate($0)}
+        switch mode {
+        case .Inventory:
+            return  [
+                FeedItem(name: "The Forest", details: "Edward Rayan", text: "9 miles", price: 12.0),
+                FeedItem(name: "Albuquerque", details: "Amber Tran", text: "9 miles", price: 12.0),
+                FeedItem(name: "World X1", details: "Sharon Brewer", text: "9 miles", price: 12.0)
+            ]
+        case .Sold:
+            return [
+                FeedItem(name: "Wizard of the Coast", details: "Edward Rayan", text: dateText ?? "01.02.2015", price: 123.23)
+            ]
+        case .Purchased:
+            return [
+                FeedItem(name: "Venus Poster", details: "Arthur Anderson", text: dateText ?? "01.02.2015", price: 214.32)
+            ]
+        }
     }
     
     @IBAction func displayModeSegmentedControlChanged(sender: UISegmentedControl) {
-        let segmentMapping: [Int: ShopItem.WalletType] = [
+        let segmentMapping: [Int: BrowseMode] = [
             0: .Inventory,
             1: .Sold,
             2: .Purchased
         ]
         if let newFilterValue = segmentMapping[sender.selectedSegmentIndex]{
-            selectedItemType = newFilterValue
+            browseMode = newFilterValue
         }
     }
     
@@ -60,7 +76,6 @@ final class WalletViewController: BesideMenuViewController {
         return dateFormatter
         }()
     
-    var items: [ShopItem] = []
     @IBOutlet private(set) internal weak var tableView: UITableView!
     @IBOutlet private weak var displayModeSegmentedControl: UISegmentedControl!
     
@@ -89,35 +104,25 @@ extension WalletViewController {
         }
         
         @objc override func tableView(tableView: UITableView, reuseIdentifierForIndexPath indexPath: NSIndexPath) -> String {
-            
-            return  ProductListCell.reuseId()
+            let model = self.tableView(tableView, modelForIndexPath: indexPath)
+            return modelFactory.walletReuseIdForModel(model)
         }
         
         override func nibCellsId() -> [String] {
-            return [ProductListCell.reuseId()]
+            return modelFactory.walletReuseId()
         }
         
-        //        func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        //            tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        //            if let model = self.tableView(tableView, modelForIndexPath: indexPath) as? FeedTableCellModel,
-        //                let actionProducer = parentViewController as? BrowseActionProducer,
-        //                let actionConsumer = self.actionConsumer {
-        //                    actionConsumer.browseController(actionProducer, didSelectItem: model.objectID, type: model.itemType, data: model.data)
-        //            }
-        //        }
-        //
-        
-        func setItems(shopItems: [ShopItem]) {
-            models = shopItems.map { self.modelFactory.modelsForItem($0) }
+        func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+            tableView.deselectRowAtIndexPath(indexPath, animated: true)
         }
+
         
-        //        private var actionConsumer: BrowseActionConsumer? {
-        //            return flatMap(parentViewController as? BrowseActionProducer) { $0.actionConsumer }
-        //
-        //        }
+        func setItems(feedItems: [FeedItem]) {
+            models = feedItems.map { self.modelFactory.walletModelsForItem($0) }
+        }
         
         private var models: [[TableViewCellModel]] = []
-        private let modelFactory = WalletCellFactory()
+        private let modelFactory = FeedItemCellModelFactory()
     }
     
     

@@ -10,7 +10,6 @@ import UIKit
 import PosInCore
 
 struct FeedItemCellModelFactory {
-    //TODO: remove hardcoded data
     
     func compactModelsForItem(feedItem: FeedItem) -> [TableViewCellModel] {
         switch feedItem.type {
@@ -41,15 +40,14 @@ struct FeedItemCellModelFactory {
             ]
 
         case .Promotion:
-            let discountFormat = NSLocalizedString("Save %.@", comment: "Compact feed: DiscountFormat")
-            let discount: Float =  146.0
+            let discountFormat = NSLocalizedString("Save %@%%", comment: "Compact feed: DiscountFormat")
             return [
                 CompactFeedTableCellModel(
                     itemType: feedItem.type,
                     objectID: feedItem.objectId,
                     title: feedItem.name,
                     details: map(feedItem.category) { $0.displayString() },
-                    info: (map(feedItem.details) { String(format: discountFormat, $0 )} ?? "") + "%",
+                    info: map(feedItem.details) { String(format: discountFormat, $0 )},
                     imageURL: feedItem.image,
                     data: feedItem.itemData
                 ),
@@ -114,6 +112,29 @@ struct FeedItemCellModelFactory {
         return []
     }
     
+    func walletModelsForItem(feedItem: FeedItem) -> [TableViewCellModel] {
+        return [
+            ComapctBadgeFeedTableCellModel (
+                itemType: feedItem.type,
+                objectID: feedItem.objectId,
+                title: feedItem.name,
+                details: feedItem.author?.title,
+                info: map(feedItem.date) {dateFormatter.stringFromDate($0)},
+                imageURL: feedItem.image,
+                badge: map(feedItem.price) { "$\(Int($0))"},
+                data: feedItem.itemData
+            ),
+        ]
+    }
+    
+    func walletReuseIdForModel(model: TableViewCellModel) -> String {
+        return ProductListCell.reuseId()
+    }
+    
+    func walletReuseId() -> [String]  {
+        return [ProductListCell.reuseId()]
+    }
+
     
     private let dateFormatter: NSDateFormatter = {
         let dateFormatter = NSDateFormatter()

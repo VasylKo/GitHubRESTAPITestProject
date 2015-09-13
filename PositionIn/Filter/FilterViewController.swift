@@ -254,7 +254,7 @@ extension ItemCategory {
         case .VehiclesParts:
             return UIImage(named: "category_vehicles_parts")!
         case .Unknown:
-            return UIImage(named: "category_vehicles_parts")!
+            return UIImage()
         }
   }
 }
