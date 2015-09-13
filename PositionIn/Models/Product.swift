@@ -36,8 +36,6 @@ struct Product: CRUDObject {
 */
 
     
-    
-    
     enum DeliveryMethod: Int {
         case Unknown
         case Pickup, Deliver, PickupOrDeliver

@@ -21,7 +21,7 @@ final class ProductListCell: TableViewCell {
         let m = model as? ComapctBadgeFeedTableCellModel
         assert(m != nil, "Invalid model passed")
 
-        productImage.setImageFromURL(m!.imageURL, placeholder: UIImage(named: "compactPlaceholder"))
+        productImage.setImageFromURL(m!.imageURL, placeholder: UIImage(named: "placeholderProduct"))
         headerLabel.text = m!.title
         detailsLabel.text = m!.details
         infoLabel.text =  m!.info

@@ -36,7 +36,7 @@
                             <rect key="frame" x="0.0" y="252" width="600" height="48"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$99" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Qb-Kh-vAf">
-                                    <rect key="frame" x="10" y="6" width="50.5" height="36"/>
+                                    <rect key="frame" x="10" y="6" width="51" height="36"/>
                                     <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="30"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
@@ -45,7 +45,7 @@
                                     </userDefinedRuntimeAttributes>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Edward Ryan" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yjp-Xw-pBL">
-                                    <rect key="frame" x="497.5" y="15" width="92.5" height="18"/>
+                                    <rect key="frame" x="497" y="15" width="93" height="18"/>
                                     <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="15"/>
                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
@@ -64,10 +64,10 @@
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PoZ-37-1wp">
-                            <rect key="frame" x="0.0" y="300" width="600" height="100.5"/>
+                            <rect key="frame" x="0.0" y="300" width="600" height="100"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The Forest" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ati-oP-ynl">
-                                    <rect key="frame" x="10" y="10" width="580" height="25.5"/>
+                                    <rect key="frame" x="10" y="10" width="580" height="26"/>
                                     <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="21"/>
                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <nil key="highlightedColor"/>
@@ -76,7 +76,7 @@
                                     </userDefinedRuntimeAttributes>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.09 miles" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QaN-CP-TKD">
-                                    <rect key="frame" x="10" y="45" width="580" height="18"/>
+                                    <rect key="frame" x="31" y="45" width="559" height="18"/>
                                     <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="15"/>
                                     <color key="textColor" red="0.63529411759999999" green="0.72549019609999998" blue="0.15686274510000001" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
@@ -93,23 +93,32 @@
                                         <userDefinedRuntimeAttribute type="string" keyPath="text" value=""/>
                                     </userDefinedRuntimeAttributes>
                                 </label>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="productPinDistance" translatesAutoresizingMaskIntoConstraints="NO" id="mMa-Jq-qtK">
+                                    <rect key="frame" x="10" y="43" width="16" height="17"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="17" id="EnQ-S2-B56"/>
+                                        <constraint firstAttribute="width" constant="16" id="imt-pN-ITT"/>
+                                    </constraints>
+                                </imageView>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstItem="QaN-CP-TKD" firstAttribute="trailing" secondItem="gro-Dr-DFI" secondAttribute="trailing" id="29c-TW-KEy"/>
                                 <constraint firstItem="QaN-CP-TKD" firstAttribute="trailing" secondItem="ati-oP-ynl" secondAttribute="trailing" id="7ZM-rV-amT"/>
                                 <constraint firstItem="ati-oP-ynl" firstAttribute="leading" secondItem="PoZ-37-1wp" secondAttribute="leading" constant="10" id="8aV-fP-lub"/>
+                                <constraint firstItem="mMa-Jq-qtK" firstAttribute="leading" secondItem="PoZ-37-1wp" secondAttribute="leading" constant="10" id="HZb-ar-5z6"/>
                                 <constraint firstItem="ati-oP-ynl" firstAttribute="top" secondItem="PoZ-37-1wp" secondAttribute="top" constant="10" id="O4p-AZ-F4r"/>
+                                <constraint firstItem="mMa-Jq-qtK" firstAttribute="bottom" secondItem="QaN-CP-TKD" secondAttribute="bottom" constant="-3" id="eWW-ZO-yem"/>
                                 <constraint firstItem="gro-Dr-DFI" firstAttribute="top" secondItem="QaN-CP-TKD" secondAttribute="bottom" constant="10" id="jcN-Cs-Iub"/>
-                                <constraint firstItem="QaN-CP-TKD" firstAttribute="top" secondItem="ati-oP-ynl" secondAttribute="bottom" constant="10" id="kjn-LV-hNg"/>
-                                <constraint firstItem="QaN-CP-TKD" firstAttribute="leading" secondItem="ati-oP-ynl" secondAttribute="leading" id="lGH-YA-hk1"/>
+                                <constraint firstItem="QaN-CP-TKD" firstAttribute="top" secondItem="ati-oP-ynl" secondAttribute="bottom" constant="9" id="kjn-LV-hNg"/>
+                                <constraint firstItem="QaN-CP-TKD" firstAttribute="leading" secondItem="ati-oP-ynl" secondAttribute="leading" constant="21" id="lGH-YA-hk1"/>
                                 <constraint firstAttribute="trailing" secondItem="ati-oP-ynl" secondAttribute="trailing" constant="10" id="s6g-ec-upz"/>
                                 <constraint firstAttribute="bottom" secondItem="gro-Dr-DFI" secondAttribute="bottom" constant="10" id="xeH-Cx-vb8"/>
-                                <constraint firstItem="QaN-CP-TKD" firstAttribute="leading" secondItem="gro-Dr-DFI" secondAttribute="leading" id="zwt-ZE-b2B"/>
+                                <constraint firstItem="QaN-CP-TKD" firstAttribute="leading" secondItem="gro-Dr-DFI" secondAttribute="leading" constant="21" id="zwt-ZE-b2B"/>
                             </constraints>
                         </view>
                         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" style="plain" rowHeight="45" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="G9T-Mf-Naw" customClass="TableView" customModule="PosInCore">
-                            <rect key="frame" x="0.0" y="400.5" width="600" height="300"/>
+                            <rect key="frame" x="0.0" y="400" width="600" height="300"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="300" id="hXo-g6-KSI"/>
@@ -145,4 +154,7 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
         </view>
     </objects>
+    <resources>
+        <image name="productPinDistance" width="22" height="22"/>
+    </resources>
 </document>

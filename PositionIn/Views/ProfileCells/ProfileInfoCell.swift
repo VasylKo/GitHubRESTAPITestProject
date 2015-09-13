@@ -33,11 +33,11 @@ final class ProfileInfoCell: TableViewCell {
         btn.tag = action.rawValue
         switch action {
         case .Edit:
-            btn.setImage(UIImage(named: "MainMenuSettings"), forState: .Normal)
+            btn.setImage(UIImage(named: "profileEdit"), forState: .Normal)
         case .Chat:
-            btn.setImage(UIImage(named: "MainMenuMessages"), forState: .Normal)
+            btn.setImage(UIImage(named: "profileChat"), forState: .Normal)
         case .Call:
-            btn.setImage(UIImage(named: "MainMenuPeople"), forState: .Normal)
+            btn.setImage(UIImage(named: "profileCall"), forState: .Normal)
         case .None:
             fallthrough
         default:
