@@ -52,6 +52,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         api.defaultErrorHandler = UIErrorHandler()
         api.recoverSession().onSuccess { [unowned self] _ in
             self.sidebarViewController?.executeAction(SidebarViewController.defaultAction)
+        }.onFailure { [unowned self] error in
+            Log.error?.value(error)
+            self.sidebarViewController?.executeAction(.Login)
         }
         return true
                 
