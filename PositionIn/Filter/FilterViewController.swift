@@ -8,6 +8,7 @@
 
 import XLForm
 import CleanroomLogger
+import BrightFutures
 
 final class FilterViewController: XLFormViewController {
     
@@ -42,35 +43,29 @@ final class FilterViewController: XLFormViewController {
         let filter = SearchFilter.currentFilter
         
         let form = XLFormDescriptor(title: NSLocalizedString("Filter", comment: "Update filter: form caption"))
-
+        
         //Options
         let optionsSection = XLFormSectionDescriptor.formSectionWithTitle(NSLocalizedString("Options", comment: "Update filter: options caption"))
         form.addFormSection(optionsSection)
-        
+
         //Price
         currencyFormatter.numberStyle = .CurrencyStyle
-        
         let priceRow = XLFormRowDescriptor(tag: Tags.EndPrice.rawValue, rowType: XLFormRowDescriptorTypeSlider, title: "")
-        let startPriceTitle = NSLocalizedString("Price up to", comment: "Update filter: price")
-        
-        let updatePriceValue: (XLFormRowDescriptor, String, Float) -> () = { [weak self] descriptor, localizedTitle, value in
-            let stringValue: String  = self?.currencyFormatter.stringFromNumber(value) ?? ""
-            descriptor.title = String(format: "%@: %@", localizedTitle, stringValue)
-            self?.reloadFormRow(descriptor)
-        }
-
-        let priceChangeBlock: XLOnChangeBlock = {  oldValue, newValue, descriptor in
+        priceRow.onChangeBlock = { [weak self] oldValue, newValue, descriptor in
             let newValue = newValue as! Float
-            updatePriceValue(descriptor, startPriceTitle, newValue)
+            let priceFormat = NSLocalizedString("Price up to: %@", comment: "Update filter: price format")
+            let stringValue: String  = self?.currencyFormatter.stringFromNumber(newValue) ?? ""
+            Queue.main.async { [weak descriptor, weak self] in
+                descriptor?.title = String(format: priceFormat, stringValue)
+                self?.reloadFormRow(descriptor)
+            }
         }
-        
-        priceRow.onChangeBlock = priceChangeBlock
         priceRow.value = filter.endPrice ?? SearchFilter.maxPrice
         priceRow.cellConfigAtConfigure["slider.maximumValue"] = SearchFilter.maxPrice
         priceRow.cellConfigAtConfigure["slider.minimumValue"] = SearchFilter.minPrice
         priceRow.cellConfigAtConfigure["steps"] = SearchFilter.Money(100)
         optionsSection.addFormRow(priceRow)
-        
+
         //Radius
         let radiusRow = XLFormRowDescriptor(tag: Tags.Radius.rawValue, rowType:XLFormRowDescriptorTypeSelectorAlertView, title: NSLocalizedString("Distance", comment: "Update filter: radius value"))
         let radiusItems: [SearchFilter.Distance] = [.Km1, .Km5, .Km20, .Km100, .Anywhere]
@@ -78,7 +73,7 @@ final class FilterViewController: XLFormViewController {
         radiusRow.selectorOptions = radiusOptions
         radiusRow.value =  XLFormOptionsObject.formOptionsObjectWithSearchDistance( filter.distance ?? .Anywhere )
         optionsSection.addFormRow(radiusRow)
-        
+
         //Time
         let timeRow = XLFormRowDescriptor(tag: Tags.Time.rawValue, rowType:XLFormRowDescriptorTypeSelectorAlertView, title: NSLocalizedString("Time", comment: "Update filter: time value"))
         let rawDateRanges: [DateRange] = [.Now, .Today, .Tomorrow, .Week, .Custom]
@@ -92,28 +87,33 @@ final class FilterViewController: XLFormViewController {
         let customDateStatePredicate = NSPredicate(format: "NOT $\(Tags.Time.rawValue).value.formValue == \(DateRange.Custom.rawValue)")
         
         //Start date
-        let startDateRow = XLFormRowDescriptor(tag: Tags.StartDate.rawValue, rowType: XLFormRowDescriptorTypeDateTime, title: NSLocalizedString("Start date", comment: "New event: Start date"))
+        let startDateRow = XLFormRowDescriptor(tag: Tags.StartDate.rawValue, rowType: XLFormRowDescriptorTypeDateTime, title: NSLocalizedString("Start date", comment: "Filter: Start date"))
         startDateRow.value = NSDate(timeIntervalSinceNow: -60*60*24)
         startDateRow.disabled = customDateStatePredicate
         optionsSection.addFormRow(startDateRow)
         //End date
-        let endDateRow = XLFormRowDescriptor(tag: Tags.EndDate.rawValue, rowType: XLFormRowDescriptorTypeDateTime, title: NSLocalizedString("End date", comment: "New event: End date"))
+        let endDateRow = XLFormRowDescriptor(tag: Tags.EndDate.rawValue, rowType: XLFormRowDescriptorTypeDateTime, title: NSLocalizedString("End date", comment: "Filter: End date"))
         endDateRow.value = NSDate(timeIntervalSinceNow: 60*60*25)
         endDateRow.disabled = customDateStatePredicate
         optionsSection.addFormRow(endDateRow)
-        
-        //(AnyObject?, AnyObject?, XLFormRowDescriptor) -> Void
-        timeRow.onChangeBlock = { [weak startDateRow, weak endDateRow] _, newValue, descriptor in
+
+        timeRow.onChangeBlock = { _, newValue, descriptor in
             if let option = newValue as? XLFormOptionsObject,
                 let rawValue = option.formValue() as? Int,
                 let range = DateRange(rawValue: rawValue) {
                     let (startDate, endDate) = range.dates()
-                    startDateRow?.value = startDate
-                    endDateRow?.value = endDate
+                    Queue.main.async { [weak self] in
+                        let startDateRow = self?.form.formRowWithTag(Tags.StartDate.rawValue)
+                        let endDateRow = self?.form.formRowWithTag(Tags.EndDate.rawValue)
+                        startDateRow?.value = startDate
+                        endDateRow?.value = endDate
+                        self?.reloadFormRow(startDateRow)
+                        self?.reloadFormRow(endDateRow)
+                    }
             }
         }
-        
         //TODO: validate start date < end date
+
         
         //Categories
         
@@ -205,6 +205,15 @@ final class FilterViewController: XLFormViewController {
         func dates() -> (NSDate, NSDate) {
             return (NSDate(), NSDate())
         }
+    }
+    
+    //MARK: - Table fixes -
+    
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        if let descriptor = form.formRowAtIndex(indexPath) where descriptor.rowType == XLFormRowDescriptorTypeBooleanSwitch {
+            return 44.0
+        }
+        return super.tableView(tableView, heightForRowAtIndexPath: indexPath)
     }
     
 }
