@@ -3,7 +3,6 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -31,13 +30,13 @@
                         </variation>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Wizard of the Coast" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YCe-Jb-HX6">
-                        <rect key="frame" x="77" y="7" width="197" height="20"/>
+                        <rect key="frame" x="77" y="7" width="205" height="19.5"/>
                         <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="260" verticalHuggingPriority="260" text="Edward Ryan" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IWa-cV-Xtr">
-                        <rect key="frame" x="77" y="32" width="197" height="17"/>
+                        <rect key="frame" x="77" y="31.5" width="205" height="17"/>
                         <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                         <color key="textColor" red="0.61176470589999998" green="0.61176470589999998" blue="0.61176470589999998" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -45,7 +44,7 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="7AG-PS-UOU" firstAttribute="top" secondItem="YCe-Jb-HX6" secondAttribute="top" constant="-5" id="3p0-rB-mmk"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="YCe-Jb-HX6" secondAttribute="trailing" constant="5" id="6vP-8h-fhF"/>
+                    <constraint firstAttribute="trailing" secondItem="YCe-Jb-HX6" secondAttribute="trailing" constant="5" id="6vP-8h-fhF"/>
                     <constraint firstItem="YCe-Jb-HX6" firstAttribute="trailing" secondItem="IWa-cV-Xtr" secondAttribute="trailing" id="H0e-Hq-yKS"/>
                     <constraint firstItem="7AG-PS-UOU" firstAttribute="top" secondItem="HG4-WR-57l" secondAttribute="top" constant="2" id="KSy-dX-NNj"/>
                     <constraint firstItem="YCe-Jb-HX6" firstAttribute="leading" secondItem="IWa-cV-Xtr" secondAttribute="leading" id="RAf-o4-BJm"/>

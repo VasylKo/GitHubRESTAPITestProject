@@ -18,16 +18,8 @@
                         <rect key="frame" x="2" y="2" width="70" height="70"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="2Qd-Ow-tWX" secondAttribute="height" multiplier="1:1" id="PQm-fX-z5F"/>
-                            <constraint firstAttribute="width" constant="69" id="WB3-Uy-Dcz"/>
-                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="70" id="cUc-ta-SHf"/>
                             <constraint firstAttribute="height" constant="70" id="qND-6Y-zqH"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="WB3-Uy-Dcz"/>
-                                <exclude reference="cUc-ta-SHf"/>
-                            </mask>
-                        </variation>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Wizard of the Coast" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4VF-n0-3AX">
                         <rect key="frame" x="76" y="7" width="198" height="20"/>

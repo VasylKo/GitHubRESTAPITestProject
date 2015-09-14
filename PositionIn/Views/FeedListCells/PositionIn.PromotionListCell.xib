@@ -3,7 +3,6 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -29,19 +28,19 @@
                         </variation>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Wizard of the Coast" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LBD-18-T9O">
-                        <rect key="frame" x="77" y="7" width="197" height="21"/>
+                        <rect key="frame" x="77" y="7" width="205" height="21"/>
                         <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="270" text="0.09 miles" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7E7-Ln-r18">
-                        <rect key="frame" x="77" y="55" width="197" height="17"/>
+                        <rect key="frame" x="77" y="55" width="205" height="17"/>
                         <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                         <color key="textColor" red="0.98823529409999999" green="0.6705882353" blue="0.1843137255" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="260" verticalHuggingPriority="260" text="Edward Ryan" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L3b-77-ibG">
-                        <rect key="frame" x="77" y="33" width="197" height="17"/>
+                        <rect key="frame" x="77" y="33" width="205" height="17"/>
                         <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                         <color key="textColor" red="0.61176470589999998" green="0.61176470589999998" blue="0.61176470589999998" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -59,7 +58,7 @@
                     <constraint firstItem="nnm-En-mIc" firstAttribute="top" secondItem="ywF-FZ-osV" secondAttribute="top" constant="2" id="i4u-ks-iB8"/>
                     <constraint firstItem="nnm-En-mIc" firstAttribute="bottom" secondItem="7E7-Ln-r18" secondAttribute="bottom" id="kta-qa-sQY"/>
                     <constraint firstItem="LBD-18-T9O" firstAttribute="leading" secondItem="nnm-En-mIc" secondAttribute="trailing" constant="5" id="td1-sg-SG0"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="LBD-18-T9O" secondAttribute="trailing" constant="5" id="unS-BB-lAh"/>
+                    <constraint firstAttribute="trailing" secondItem="LBD-18-T9O" secondAttribute="trailing" constant="5" id="unS-BB-lAh"/>
                     <constraint firstItem="LBD-18-T9O" firstAttribute="trailing" secondItem="L3b-77-ibG" secondAttribute="trailing" id="wNM-Ua-E5N"/>
                 </constraints>
             </tableViewCellContentView>

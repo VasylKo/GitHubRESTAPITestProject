@@ -3,7 +3,6 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -36,19 +35,19 @@
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Wizard of the Coast" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tLP-DN-pMX">
-                        <rect key="frame" x="77" y="7" width="197" height="21"/>
+                        <rect key="frame" x="77" y="7" width="205" height="21"/>
                         <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="270" text="0.09 miles" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oe9-gN-uiv">
-                        <rect key="frame" x="77" y="55" width="197" height="17"/>
+                        <rect key="frame" x="77" y="55" width="205" height="17"/>
                         <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                         <color key="textColor" red="0.63529411764705879" green="0.72549019607843135" blue="0.15686274509803921" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="260" verticalHuggingPriority="260" text="Edward Ryan" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Hb-XH-FwV">
-                        <rect key="frame" x="77" y="33" width="197" height="17"/>
+                        <rect key="frame" x="77" y="33" width="205" height="17"/>
                         <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                         <color key="textColor" red="0.61176470589999998" green="0.61176470589999998" blue="0.61176470589999998" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -70,7 +69,7 @@
                     <constraint firstItem="RJf-1C-axm" firstAttribute="top" secondItem="tLP-DN-pMX" secondAttribute="top" constant="-5" id="S9t-MQ-Gyu"/>
                     <constraint firstItem="RJf-1C-axm" firstAttribute="leading" secondItem="I0E-6Z-tMw" secondAttribute="leading" id="VOM-bD-Lyf"/>
                     <constraint firstItem="RJf-1C-axm" firstAttribute="bottom" secondItem="Oe9-gN-uiv" secondAttribute="bottom" id="X85-65-K87"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="tLP-DN-pMX" secondAttribute="trailing" constant="5" id="iEN-Ey-ZwU"/>
+                    <constraint firstAttribute="trailing" secondItem="tLP-DN-pMX" secondAttribute="trailing" constant="5" id="iEN-Ey-ZwU"/>
                     <constraint firstItem="RJf-1C-axm" firstAttribute="trailing" secondItem="I0E-6Z-tMw" secondAttribute="trailing" id="iFk-Ej-Xkt"/>
                     <constraint firstItem="tEG-ov-PMh" firstAttribute="top" secondItem="I0E-6Z-tMw" secondAttribute="top" constant="4" id="iqg-PB-tdR"/>
                     <constraint firstItem="tLP-DN-pMX" firstAttribute="leading" secondItem="RJf-1C-axm" secondAttribute="trailing" constant="5" id="qds-Jr-OZ9"/>
