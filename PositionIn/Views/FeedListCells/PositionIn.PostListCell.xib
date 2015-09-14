@@ -18,9 +18,14 @@
                         <rect key="frame" x="2" y="2" width="69" height="69"/>
                         <constraints>
                             <constraint firstAttribute="width" relation="lessThanOrEqual" constant="80" id="Q5a-Is-YRy"/>
-                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="69" id="i8j-3P-WfX"/>
+                            <constraint firstAttribute="width" constant="69" id="i8j-3P-WfX"/>
                             <constraint firstAttribute="width" secondItem="7AG-PS-UOU" secondAttribute="height" multiplier="1:1" id="nc4-L3-TqF"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="Q5a-Is-YRy"/>
+                            </mask>
+                        </variation>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Wizard of the Coast" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YCe-Jb-HX6">
                         <rect key="frame" x="76" y="7" width="198" height="20"/>

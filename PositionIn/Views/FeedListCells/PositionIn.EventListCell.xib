@@ -18,7 +18,7 @@
                         <rect key="frame" x="2" y="2" width="69" height="69"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="2Qd-Ow-tWX" secondAttribute="height" multiplier="1:1" id="PQm-fX-z5F"/>
-                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="80" id="WB3-Uy-Dcz"/>
+                            <constraint firstAttribute="width" constant="69" id="WB3-Uy-Dcz"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Wizard of the Coast" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4VF-n0-3AX">
