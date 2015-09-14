@@ -118,6 +118,7 @@
 		E66945831B6E279E00332134 /* XMPPRegisterProcess.m in Sources */ = {isa = PBXBuildFile; fileRef = E66945811B6E279E00332134 /* XMPPRegisterProcess.m */; };
 		E66A3E181B9CC90C005FA33B /* EditCommunityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66A3E171B9CC90C005FA33B /* EditCommunityViewController.swift */; };
 		E66A3E1B1B9CE2D6005FA33B /* OrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66A3E1A1B9CE2D6005FA33B /* OrderViewController.swift */; };
+		E66F901B1BA6A5C100280B77 /* ChatController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66F901A1BA6A5C100280B77 /* ChatController.swift */; };
 		E6829B041B5E6CF800FB1E1D /* RoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6829B031B5E6CF800FB1E1D /* RoundButton.swift */; };
 		E6846DB81B6D9B1400009411 /* XMPPIQ+XEP_0060.h in Headers */ = {isa = PBXBuildFile; fileRef = E689EFDF1B6A8A1000597587 /* XMPPIQ+XEP_0060.h */; };
 		E6846DB91B6D9B1400009411 /* XMPPIQ+XEP_0060.m in Sources */ = {isa = PBXBuildFile; fileRef = E689EFE01B6A8A1000597587 /* XMPPIQ+XEP_0060.m */; settings = {COMPILER_FLAGS = "-w"; }; };
@@ -495,6 +496,7 @@
 		E66945811B6E279E00332134 /* XMPPRegisterProcess.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPRegisterProcess.m; sourceTree = "<group>"; };
 		E66A3E171B9CC90C005FA33B /* EditCommunityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditCommunityViewController.swift; sourceTree = "<group>"; };
 		E66A3E1A1B9CE2D6005FA33B /* OrderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderViewController.swift; sourceTree = "<group>"; };
+		E66F901A1BA6A5C100280B77 /* ChatController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatController.swift; sourceTree = "<group>"; };
 		E6736ADB1B4E56DD0003580D /* Version.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Version.h; sourceTree = "<group>"; };
 		E6736ADD1B4E56EB0003580D /* TODOwarn.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = TODOwarn.sh; sourceTree = "<group>"; };
 		E6736ADE1B4E56EB0003580D /* Version.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = Version.sh; sourceTree = "<group>"; };
@@ -2347,6 +2349,7 @@
 				E6C5CE1E1B83A2B700265955 /* AppConfiguration.swift */,
 				E6C5CE1A1B83A24500265955 /* UIScheme.swift */,
 				E6DADB9D1B8C5799009A5694 /* SearchFilter.swift */,
+				E66F901A1BA6A5C100280B77 /* ChatController.swift */,
 			);
 			path = DAL;
 			sourceTree = "<group>";
@@ -2903,6 +2906,7 @@
 				E64D00631B7C8FB7007693E0 /* AddPostViewController.swift in Sources */,
 				E6F7A4811BA356500069152A /* LocationSearchResultDataSource.swift in Sources */,
 				E62B16FF1B5CE0F800D446BC /* BesideMenuViewController.swift in Sources */,
+				E66F901B1BA6A5C100280B77 /* ChatController.swift in Sources */,
 				E66115A51B73A920003DB5B3 /* AddProductViewController.swift in Sources */,
 				E6365D351B7D709E00CB79CB /* PhotoInfo.swift in Sources */,
 				E660E52D1B5AC23B00F52050 /* MainMenuViewController.swift in Sources */,
