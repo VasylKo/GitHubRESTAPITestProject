@@ -8,6 +8,7 @@
 
 import Messaging
 import JSQMessagesViewController
+import CleanroomLogger
 
 final class ChatController {
     init(interlocutor: CRUDObjectId) {
