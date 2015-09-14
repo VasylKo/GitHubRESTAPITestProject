@@ -38,6 +38,9 @@ PODS:
   - HMSegmentedControl (1.5.2)
   - ImagePickerSheetController (0.1.7)
   - JDStatusBarNotification (1.5.2)
+  - JSQMessagesViewController (7.1.0):
+    - JSQSystemSoundPlayer (~> 2.0.1)
+  - JSQSystemSoundPlayer (2.0.1)
   - KeychainAccess (1.2.1)
   - KYDrawerController (1.0.3)
   - ObjectMapper (0.12)
@@ -57,6 +60,7 @@ DEPENDENCIES:
   - HMSegmentedControl
   - ImagePickerSheetController (~> 0.1.7)
   - JDStatusBarNotification
+  - JSQMessagesViewController (~> 7.1.0)
   - KeychainAccess
   - KYDrawerController
   - PosInCore (from `PosInCore`)
@@ -77,6 +81,8 @@ SPEC CHECKSUMS:
   HMSegmentedControl: 83b9686022d2176fb6457d2bdb61e5d6393fed7d
   ImagePickerSheetController: 127cc7a5e8da7fa17d42aa4ba7509f72af9cd71f
   JDStatusBarNotification: a36d09ccbb047217572b074a61e7ca10dddc5f0a
+  JSQMessagesViewController: ca11f86fa68ca70835f05e169df9244147c1dc40
+  JSQSystemSoundPlayer: c5850e77a4363ffd374cd851154b9af93264ed8d
   KeychainAccess: 3d7922baf90762a976adb7f6030d74c1a4110a1d
   KYDrawerController: 114902057e9b9a2a0aa951e976151b285afa9c3e
   ObjectMapper: ef4a369cbab75546029ceb7e8155772b5f8e8841

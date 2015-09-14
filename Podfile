@@ -13,6 +13,7 @@ target 'PositionIn' do
     pod 'GoogleMaps'
     pod 'HMSegmentedControl'
     pod 'JDStatusBarNotification'
+    pod 'JSQMessagesViewController', '~> 7.1.0'
     
     pod 'PosInCore', :path => 'PosInCore'
     
