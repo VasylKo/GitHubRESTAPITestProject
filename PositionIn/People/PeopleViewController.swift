@@ -11,6 +11,11 @@ import BrightFutures
 import CleanroomLogger
 
 
+protocol PeopleActionConsumer {
+    func showProfileScreen(userId: CRUDObjectId)
+}
+
+
 final class PeopleViewController: BesideMenuViewController {
     
     override func viewDidLoad() {
@@ -96,6 +101,14 @@ final class PeopleViewController: BesideMenuViewController {
 
 }
 
+extension PeopleViewController: PeopleActionConsumer {
+    func showProfileScreen(userId: CRUDObjectId) {
+        let profileController = Storyboards.Main.instantiateUserProfileViewController()
+        profileController.objectId = userId
+        navigationController?.pushViewController(profileController, animated: true)
+    }
+}
+
 final class PeopleListDataSource: TableViewDataSource {
     private var items: [UserInfoTableViewCellModel] = []
 
@@ -131,13 +144,10 @@ final class PeopleListDataSource: TableViewDataSource {
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: false)
-        //TODO: move logic to the controller
         
         if let model = self.tableView(tableView, modelForIndexPath: indexPath) as? UserInfoTableViewCellModel,
-           let parentViewController = parentViewController{
-            let profileController = Storyboards.Main.instantiateUserProfileViewController()
-            profileController.objectId = model.userInfo.objectId
-            parentViewController.navigationController?.pushViewController(profileController, animated: true)
+           let parentViewController = parentViewController as? PeopleActionConsumer {
+            parentViewController.showProfileScreen(model.userInfo.objectId)
         }
     }
 

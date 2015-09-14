@@ -18,4 +18,5 @@ struct PostInfoModel: TableViewCellModel {
     let firstLine: String?
     let secondLine: String?
     let imageUrl: NSURL?
+    let userId: CRUDObjectId?
 }
