@@ -101,4 +101,9 @@ extension BrowseMapViewController: GMSMapViewDelegate {
         
         return true
     }
+    
+    func didTapMyLocationButtonForMapView(mapView: GMSMapView!) -> Bool {
+        SearchFilter.setLocation(nil)
+        return true
+    }
 }

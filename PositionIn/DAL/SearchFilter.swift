@@ -28,6 +28,11 @@ struct SearchFilter: Mappable {
     var users: [CRUDObjectId]?
     var communities: [CRUDObjectId]?
 
+    /**
+    Sets filter location.
+    
+    :param: location location or nil for user location
+    */
     static func setLocation(location: Location?) {
         var filter = SearchFilter.currentFilter
         filter.locationName = location?.name

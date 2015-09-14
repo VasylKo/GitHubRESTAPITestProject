@@ -45,8 +45,8 @@ final class SearchViewController: UIViewController {
         
         let dismissRecognizer = UITapGestureRecognizer(target: self, action: "didTapOutsideSearch:")
         dismissRecognizer.cancelsTouchesInView = false
-        view.addGestureRecognizer(dismissRecognizer)
-        
+        tableView.addGestureRecognizer(dismissRecognizer)
+        locationSearchBar.text = SearchFilter.currentFilter.locationName
         locationsDataSource.delegate = self
         locationSearchController.delegate = self
         
