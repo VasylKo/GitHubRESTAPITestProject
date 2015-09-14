@@ -50,6 +50,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         setupMaps()
         api.defaultErrorHandler = UIErrorHandler()
+        if SearchFilter.isCustomLocationSet == false {
+           SearchFilter.updateCurrentLocation()
+        }
         api.recoverSession().onSuccess { [unowned self] _ in
             self.sidebarViewController?.executeAction(SidebarViewController.defaultAction)
         }.onFailure { [unowned self] error in

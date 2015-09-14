@@ -130,6 +130,9 @@ extension EventDetailsViewController: EventDetailsActionConsumer {
                 profileController.objectId = userId
                 navigationController?.pushViewController(profileController, animated: true)                
             }
+        case .SendMessage:
+            let chatController = ConversationViewController.conversationController()
+            navigationController?.pushViewController(chatController, animated: true)            
         default:
             Log.warning?.message("Unhandled action: \(action)")
             return
