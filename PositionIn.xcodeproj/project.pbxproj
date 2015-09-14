@@ -322,6 +322,7 @@
 		E6E2FEA01B66F61400880F3C /* Messaging.framework in Embed Core Framework */ = {isa = PBXBuildFile; fileRef = E6E2FE881B66F61300880F3C /* Messaging.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E6E2FEAD1B66F72100880F3C /* XMPPClient.h in Headers */ = {isa = PBXBuildFile; fileRef = E6E2FEAB1B66F72100880F3C /* XMPPClient.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E6E2FEAE1B66F72100880F3C /* XMPPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = E6E2FEAC1B66F72100880F3C /* XMPPClient.m */; };
+		E6F074AF1BA6980D00D2566B /* ConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6F074AE1BA6980D00D2566B /* ConversationViewController.swift */; };
 		E6F2436C1B8B0E150033B13C /* MainMenuLoginCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6F2436B1B8B0E150033B13C /* MainMenuLoginCell.swift */; };
 		E6F2436E1B8B0E3A0033B13C /* PositionIn.MainMenuLoginCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6F2436D1B8B0E3A0033B13C /* PositionIn.MainMenuLoginCell.xib */; };
 		E6F243701B8B17910033B13C /* DisplayModeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6F2436F1B8B17910033B13C /* DisplayModeViewController.swift */; };
@@ -900,6 +901,7 @@
 		E6E2FEAB1B66F72100880F3C /* XMPPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPClient.h; sourceTree = "<group>"; };
 		E6E2FEAC1B66F72100880F3C /* XMPPClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPClient.m; sourceTree = "<group>"; };
 		E6E4816C1B6A846900500259 /* PosInCore.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = PosInCore.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		E6F074AE1BA6980D00D2566B /* ConversationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationViewController.swift; sourceTree = "<group>"; };
 		E6F2436B1B8B0E150033B13C /* MainMenuLoginCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuLoginCell.swift; sourceTree = "<group>"; };
 		E6F2436D1B8B0E3A0033B13C /* PositionIn.MainMenuLoginCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.MainMenuLoginCell.xib; sourceTree = "<group>"; };
 		E6F2436F1B8B17910033B13C /* DisplayModeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayModeViewController.swift; sourceTree = "<group>"; };
@@ -1041,6 +1043,7 @@
 			children = (
 				E62B16FA1B5CDF0100D446BC /* MessagesListViewController.swift */,
 				E62B16FC1B5CDF2400D446BC /* PositionIn.MessagesListViewController.xib */,
+				E6F074AE1BA6980D00D2566B /* ConversationViewController.swift */,
 			);
 			path = Messaging;
 			sourceTree = "<group>";
@@ -2935,6 +2938,7 @@
 				243D0AA81B8AF90800B0E220 /* RegisterInfoViewController.swift in Sources */,
 				E6D4D5B21B6F81A7003134CB /* SearchViewController.swift in Sources */,
 				E66115991B73A0CB003DB5B3 /* BrowseListViewController.swift in Sources */,
+				E6F074AF1BA6980D00D2566B /* ConversationViewController.swift in Sources */,
 				E6C952361BA1D9960032254F /* ProfileInfoCell.swift in Sources */,
 				E6C9522C1BA1BB0E0032254F /* PeopleListCell.swift in Sources */,
 				E6F243761B8B31510033B13C /* BrowseTabbar.swift in Sources */,

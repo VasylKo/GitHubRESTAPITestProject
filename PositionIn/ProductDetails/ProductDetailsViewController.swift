@@ -141,6 +141,10 @@ extension ProductDetailsViewController: ProductDetailsActionConsumer {
             segue = .ShowProductInventory
         case .SellerProfile:
             segue = .ShowSellerProfile
+        case .SendMessage:
+            let chatController = ConversationViewController.conversationController()
+            navigationController?.pushViewController(chatController, animated: true)
+            return 
         default:
             Log.warning?.message("Unhandled action: \(action)")
             return
