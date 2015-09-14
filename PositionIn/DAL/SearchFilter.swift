@@ -10,6 +10,7 @@ import ObjectMapper
 import PosInCore
 import CoreLocation
 import CleanroomLogger
+import BrightFutures
 
 struct SearchFilter: Mappable {
     typealias Money = Double
@@ -27,10 +28,35 @@ struct SearchFilter: Mappable {
     var users: [CRUDObjectId]?
     var communities: [CRUDObjectId]?
 
-    func setLocation(location: Location?) {
-        
+    static func setLocation(location: Location?) {
+        var filter = SearchFilter.currentFilter
+        filter.locationName = location?.name
+        if let coordinates = location?.coordinates {
+            filter.coordinates = coordinates
+        } else {
+            SearchFilter.updateCurrentLocation()
+        }
+        SearchFilter.currentFilter = filter
     }
     
+    static var isCustomLocationSet: Bool {
+        var filter = SearchFilter.currentFilter
+        return filter.locationName != nil
+    }
+    
+    private static var currentLocationToken = InvalidationToken()
+    
+    static func updateCurrentLocation() {
+        currentLocationToken.invalidate()
+        currentLocationToken = InvalidationToken()
+        locationController().getCurrentCoordinate().onSuccess(token: currentLocationToken) { coordinate in
+            var filter = SearchFilter.currentFilter
+            filter.coordinates = coordinate
+            SearchFilter.currentFilter = filter
+        }
+    }
+    
+    var locationName: String?
     
     var coordinates: CLLocationCoordinate2D? {
         set {
@@ -121,7 +147,7 @@ struct SearchFilter: Mappable {
         communities <- (map["communities"], ListTransform(itemTransform: CRUDObjectIdTransform()))
         lat <- map["lat"]
         lon <- map["lon"]
-        
+        locationName <- map["locationName"]
     }
     
     static var currentFilter: SearchFilter {
@@ -146,10 +172,10 @@ struct SearchFilter: Mappable {
 
 extension SearchFilter: APIServiceQueryConvertible {
     var query: [String : AnyObject]  {
-        var params = Mapper<SearchFilter>().toJSON(self)
-        if let radius = radius where locationController().localeUsesMetricSystem() == false {
-            params["radius"] =  radius * 1.60934
-        }
+        var filter = self
+        filter.locationName = nil
+        filter.radius = map(filter.radius) { locationController().localeUsesMetricSystem() ? $0 : $0 * 1.60934}
+        var params = Mapper<SearchFilter>().toJSON(filter)
         return params
     }
 }

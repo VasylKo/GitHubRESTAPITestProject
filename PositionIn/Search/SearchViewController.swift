@@ -93,7 +93,7 @@ extension SearchViewController: LocationSearchResultsDelegate {
     }
     
     func didSelectLocation(location: Location?) {
-        SearchFilter.currentFilter.setLocation(location)
+        SearchFilter.setLocation(location)
     }
 }
 

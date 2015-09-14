@@ -43,8 +43,9 @@ class LocationSearchResultDataSource: TableViewDataSource, LocationSearchResultS
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        let model = self.tableView(tableView, modelForIndexPath: indexPath)
-        delegate?.didSelectLocation(model.location)
+        if let model = self.tableView(tableView, modelForIndexPath: indexPath) as? LocationCellModel {
+            delegate?.didSelectLocation(model.location)
+        }
     }
     
     weak var delegate: LocationSearchResultsDelegate?
