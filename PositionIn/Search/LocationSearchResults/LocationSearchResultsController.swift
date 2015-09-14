@@ -17,6 +17,7 @@ protocol LocationSearchResultStorage: class {
 
 protocol LocationSearchResultsDelegate: class {
     func shouldDisplayLocationSearchResults()
+    func didSelectLocation(location: Location?)
 }
 
 final class LocationSearchResultsController: NSObject {
@@ -51,6 +52,7 @@ final class LocationSearchResultsController: NSObject {
                     Log.error?.value(error)
             }
         } else {
+            delegate?.didSelectLocation(nil)
             completion([])
         }
     }
@@ -71,6 +73,7 @@ final class LocationSearchResultsController: NSObject {
 }
 
 extension LocationSearchResultsController: UISearchBarDelegate {
+    
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
         shouldReloadSearch()
         

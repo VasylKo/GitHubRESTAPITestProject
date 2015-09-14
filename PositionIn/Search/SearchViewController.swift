@@ -47,6 +47,7 @@ final class SearchViewController: UIViewController {
         dismissRecognizer.cancelsTouchesInView = false
         view.addGestureRecognizer(dismissRecognizer)
         
+        locationsDataSource.delegate = self
         locationSearchController.delegate = self
         
         locationSearchBar.becomeFirstResponder()
@@ -89,6 +90,10 @@ final class SearchViewController: UIViewController {
 extension SearchViewController: LocationSearchResultsDelegate {
     func shouldDisplayLocationSearchResults() {
         searchMode = .Locations
+    }
+    
+    func didSelectLocation(location: Location?) {
+        SearchFilter.currentFilter.setLocation(location)
     }
 }
 

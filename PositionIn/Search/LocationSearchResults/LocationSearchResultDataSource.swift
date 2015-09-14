@@ -11,8 +11,7 @@ import PosInCore
 class LocationSearchResultDataSource: TableViewDataSource, LocationSearchResultStorage {
     
     func setLocations(locations: [Location]) {
-        locationModels = locations.map { location in
-            return LocationCellModel(title: location.name ?? "", coordinate: location.coordinates)
+        locationModels = locations.map { LocationCellModel(location: $0)
         }
     }
     
@@ -44,7 +43,10 @@ class LocationSearchResultDataSource: TableViewDataSource, LocationSearchResultS
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        let model = self.tableView(tableView, modelForIndexPath: indexPath)
+        delegate?.didSelectLocation(model.location)
     }
     
-    private var locationModels: [TableViewCellModel] = []
+    weak var delegate: LocationSearchResultsDelegate?
+    private var locationModels: [LocationCellModel] = []
 }

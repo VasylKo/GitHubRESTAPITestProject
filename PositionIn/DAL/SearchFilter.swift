@@ -27,6 +27,10 @@ struct SearchFilter: Mappable {
     var users: [CRUDObjectId]?
     var communities: [CRUDObjectId]?
 
+    func setLocation(location: Location?) {
+        
+    }
+    
     
     var coordinates: CLLocationCoordinate2D? {
         set {
