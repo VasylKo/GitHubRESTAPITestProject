@@ -9,26 +9,35 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <tableViewCell contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="PositionIn.PostListCell" id="vm7-65-h3D" customClass="PostListCell" customModule="PositionIn" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="74"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="75"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="vm7-65-h3D" id="HG4-WR-57l">
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="200" verticalHuggingPriority="200" translatesAutoresizingMaskIntoConstraints="NO" id="7AG-PS-UOU">
-                        <rect key="frame" x="2" y="2" width="69" height="69"/>
+                        <rect key="frame" x="2" y="2" width="70" height="70"/>
                         <constraints>
+                            <constraint firstAttribute="width" constant="70" id="7mT-He-sPl"/>
                             <constraint firstAttribute="width" relation="lessThanOrEqual" constant="80" id="Q5a-Is-YRy"/>
+                            <constraint firstAttribute="height" constant="70" id="hBV-V7-pbq"/>
+                            <constraint firstAttribute="width" constant="69" id="i8j-3P-WfX"/>
                             <constraint firstAttribute="width" secondItem="7AG-PS-UOU" secondAttribute="height" multiplier="1:1" id="nc4-L3-TqF"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="Q5a-Is-YRy"/>
+                                <exclude reference="i8j-3P-WfX"/>
+                            </mask>
+                        </variation>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Wizard of the Coast" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YCe-Jb-HX6">
-                        <rect key="frame" x="76" y="7" width="198" height="20"/>
+                        <rect key="frame" x="77" y="7" width="197" height="20"/>
                         <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="260" verticalHuggingPriority="260" text="Edward Ryan" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IWa-cV-Xtr">
-                        <rect key="frame" x="76" y="32" width="198" height="17"/>
+                        <rect key="frame" x="77" y="32" width="197" height="17"/>
                         <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                         <color key="textColor" red="0.61176470589999998" green="0.61176470589999998" blue="0.61176470589999998" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>

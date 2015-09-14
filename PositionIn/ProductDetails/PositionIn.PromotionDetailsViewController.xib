@@ -80,8 +80,8 @@
                                         <userDefinedRuntimeAttribute type="string" keyPath="text" value=""/>
                                     </userDefinedRuntimeAttributes>
                                 </label>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="promotionDiscount" translatesAutoresizingMaskIntoConstraints="NO" id="R1p-pj-I6d">
-                                    <rect key="frame" x="11" y="44" width="24" height="21"/>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="promotionDiscount" translatesAutoresizingMaskIntoConstraints="NO" id="R1p-pj-I6d">
+                                    <rect key="frame" x="11" y="44" width="24" height="22"/>
                                 </imageView>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -95,6 +95,9 @@
                                 <constraint firstItem="6vD-w9-isT" firstAttribute="top" secondItem="Vnj-oB-x5O" secondAttribute="bottom" constant="10" id="BmU-6K-q0P"/>
                                 <constraint firstItem="Vnj-oB-x5O" firstAttribute="trailing" secondItem="jOH-eI-DHE" secondAttribute="trailing" id="FNE-n3-9Oo"/>
                                 <constraint firstItem="Vnj-oB-x5O" firstAttribute="trailing" secondItem="6vD-w9-isT" secondAttribute="trailing" id="G1K-h5-esa"/>
+                                <constraint firstItem="R1p-pj-I6d" firstAttribute="centerY" secondItem="Vnj-oB-x5O" secondAttribute="centerY" id="b9C-Nm-qPr"/>
+                                <constraint firstItem="R1p-pj-I6d" firstAttribute="leading" secondItem="vVB-RK-h3e" secondAttribute="leading" constant="11" id="lG8-8E-tea"/>
+                                <constraint firstItem="Vnj-oB-x5O" firstAttribute="leading" secondItem="R1p-pj-I6d" secondAttribute="trailing" constant="7" id="nCA-ol-s4d"/>
                                 <constraint firstItem="jOH-eI-DHE" firstAttribute="leading" secondItem="vVB-RK-h3e" secondAttribute="leading" constant="10" id="omX-8c-9mW"/>
                             </constraints>
                         </view>
