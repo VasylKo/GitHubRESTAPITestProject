@@ -36,7 +36,7 @@ final class SearchViewController: UIViewController {
                 dataSource = locationsDataSource
             }
             dataSource.configureTable(tableView)
-            locationSearchController.reloadData()
+            locationSearchController.shouldReloadSearch()
         }
     }
     
@@ -46,15 +46,12 @@ final class SearchViewController: UIViewController {
         let dismissRecognizer = UITapGestureRecognizer(target: self, action: "didTapOutsideSearch:")
         dismissRecognizer.cancelsTouchesInView = false
         view.addGestureRecognizer(dismissRecognizer)
-        categoriesSearchBar.becomeFirstResponder()
         
-        searchMode = .Locations
+        locationSearchController.delegate = self
+        
+        locationSearchBar.becomeFirstResponder()
     }
     
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        categoriesSearchBar.becomeFirstResponder()
-    }
     
     func didTapOutsideSearch(sender: UIGestureRecognizer) {
         view.endEditing(true)
@@ -83,9 +80,16 @@ final class SearchViewController: UIViewController {
         }()
     
     private lazy var locationSearchController: LocationSearchResultsController = { [unowned self] in
-        return LocationSearchResultsController(table: self.tableView, resultStorage: self.locationsDataSource)
+        let controller = LocationSearchResultsController(table: self.tableView, resultStorage: self.locationsDataSource, searchBar: self.locationSearchBar)
+        return controller
     }()
     
+}
+
+extension SearchViewController: LocationSearchResultsDelegate {
+    func shouldDisplayLocationSearchResults() {
+        searchMode = .Locations
+    }
 }
 
 extension SearchViewController {
