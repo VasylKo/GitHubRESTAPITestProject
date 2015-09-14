@@ -12,6 +12,10 @@ import CleanroomLogger
 import BrightFutures
 
 
+protocol PostActionConsumer {
+    func showProfileScreen(userId: CRUDObjectId)
+}
+
 final class PostViewController: UIViewController {
 
     override func viewDidLoad() {
@@ -36,6 +40,13 @@ final class PostViewController: UIViewController {
     var objectId: CRUDObjectId?
 }
 
+extension PostViewController: PostActionConsumer {
+    func showProfileScreen(userId: CRUDObjectId) {
+        let profileController = Storyboards.Main.instantiateUserProfileViewController()
+        profileController.objectId = userId
+        navigationController?.pushViewController(profileController, animated: true)
+    }
+}
 
 extension PostViewController {
     internal class PostDataSource: TableViewDataSource {
@@ -73,6 +84,11 @@ extension PostViewController {
         
         func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
             tableView.deselectRowAtIndexPath(indexPath, animated: true)
+            if  let actionConsumer = parentViewController as? PostActionConsumer,
+                let model = self.tableView(tableView, modelForIndexPath: indexPath) as? PostInfoModel,
+                let userId = model.userId {
+                    actionConsumer.showProfileScreen(userId)
+            }
         }
     }
 }

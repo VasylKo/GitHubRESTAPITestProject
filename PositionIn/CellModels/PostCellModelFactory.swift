@@ -19,7 +19,7 @@ struct PostCellModelFactory {
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
         let date: String? = map(post.date) { dateFormatter.stringFromDate($0) }
-        models.append(PostInfoModel(firstLine: post.author?.title, secondLine: date, imageUrl: post.author?.avatar))
+        models.append(PostInfoModel(firstLine: post.author?.title, secondLine: date, imageUrl: post.author?.avatar, userId: post.author?.objectId))
         models.append(TableViewCellTextModel(title: post.name ?? ""))
         
         return models
