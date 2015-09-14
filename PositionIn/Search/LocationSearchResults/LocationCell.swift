@@ -21,11 +21,17 @@ class LocationCell: TableViewCell {
 }
 
 struct LocationCellModel: TableViewCellModel {
-    let title: String
-    let coordinate: CLLocationCoordinate2D
+    var title: String? {
+        return location.name
+    }
     
-    init(title: String, coordinate: CLLocationCoordinate2D) {
-        self.title = title
-        self.coordinate = coordinate
+    var coordinate: CLLocationCoordinate2D {
+        return location.coordinates
+    }
+    
+    let location: Location
+    
+    init(location: Location) {
+        self.location = location
     }
 }

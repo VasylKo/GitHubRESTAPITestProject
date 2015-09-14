@@ -27,7 +27,7 @@ final class SearchBar: UISearchBar {
     
     
     private func commonInt() {
-        placeholder = NSLocalizedString("Search", comment: "Search placeholder")
+//        placeholder = NSLocalizedString("Search", comment: "Search placeholder")
 //        backgroundColor = UIScheme.searchbarActiveColor
 //        backgroundImage = UIImage()
 //        setSearchFieldBackgroundImage(UIImage(), forState: UIControlState.Normal)

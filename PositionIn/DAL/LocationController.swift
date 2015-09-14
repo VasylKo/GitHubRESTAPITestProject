@@ -31,14 +31,7 @@ final class LocationController {
                 self.locationProvider.startUpdatingLocation()                
             }
         }
-        return future.onSuccess { coordinate in
-            //TODO: set valid epsilon
-            if !isSameCoordinates(coordinate, SearchFilter.currentFilter.coordinates ?? kCLLocationCoordinate2DInvalid, epsilon: 0.2) {
-                var f = SearchFilter.currentFilter
-                f.coordinates = coordinate
-                SearchFilter.currentFilter = f
-            }
-        }
+        return future
     }
     
     func geocodeString(string: String) -> Future<[Location], NSError> {

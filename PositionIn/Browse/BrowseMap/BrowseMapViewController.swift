@@ -15,9 +15,8 @@ final class BrowseMapViewController: UIViewController, BrowseActionProducer {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        locationController().getCurrentCoordinate().onSuccess { [weak self] coordinate in
-            self?.filter.coordinates = coordinate
-            self?.mapView.moveCamera(GMSCameraUpdate.setTarget(coordinate, zoom: 12))
+        if let coordinate = filter.coordinates {
+            self.mapView.moveCamera(GMSCameraUpdate.setTarget(coordinate, zoom: 12))
         }
     }
     
@@ -100,6 +99,11 @@ extension BrowseMapViewController: GMSMapViewDelegate {
         
         }
         
+        return true
+    }
+    
+    func didTapMyLocationButtonForMapView(mapView: GMSMapView!) -> Bool {
+        SearchFilter.setLocation(nil)
         return true
     }
 }
