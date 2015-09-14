@@ -8,6 +8,7 @@
 
 import UIKit
 import JSQMessagesViewController
+import CleanroomLogger
 
 final class ConversationViewController: JSQMessagesViewController {
     class func conversationController(interlocutor: CRUDObjectId = CRUDObjectInvalidId) -> ConversationViewController {
@@ -51,7 +52,46 @@ final class ConversationViewController: JSQMessagesViewController {
     *  @param sender The accessory button that was pressed by the user.
     */
     override func didPressAccessoryButton(sender: UIButton!) {
+        let sendCompletion: () -> () = { [weak self] in
+            JSQSystemSoundPlayer.jsq_playMessageSentSound()
+            self?.finishSendingMessageAnimated(true)
+        }
+        let sheet = UIAlertController(
+            title: NSLocalizedString("Media messages", comment: "Chat Actions: Title"),
+            message: nil,
+            preferredStyle: .ActionSheet)
+        sheet.addAction(UIAlertAction(
+            title: NSLocalizedString("Send location", comment: "Chat Actions: Location"),
+            style: .Default,
+            handler: { [weak self] action in
+                if let strongSelf = self {
+                    weak var collectionView = strongSelf.collectionView
+                    self?.sendLocationMediaMessage {
+                        collectionView?.reloadData()
+                    }
+                    sendCompletion()
+                }
+        }))
+        sheet.addAction(UIAlertAction(
+            title: NSLocalizedString("Send image", comment: "Chat Actions: Image"),
+            style: .Default,
+            handler: { [weak self] action in
+                self?.sendPhotoMessage()
+                sendCompletion()
+            }))
+        sheet.addAction(UIAlertAction(
+            title: NSLocalizedString("Send video", comment: "Chat Actions: Video"),
+            style: .Default,
+            handler: { [weak self] action in
+                self?.sendVideoMessage()
+                sendCompletion()
+            }))
         
+        sheet.addAction(UIAlertAction(
+            title: NSLocalizedString("Cancel", comment: "Chat Actions: Cancel"),
+            style: .Cancel,
+            handler: nil))
+        presentViewController(sheet, animated: true, completion: nil)
     }
     
     //MARK: - JSQMessages CollectionView DataSource -
@@ -98,7 +138,36 @@ final class ConversationViewController: JSQMessagesViewController {
         return bubbleImageFactory.incomingMessagesBubbleImageWithColor(UIColor.jsq_messageBubbleGreenColor())
     }()
     
+}
 
+//MARK: - Media data -
 
+extension ConversationViewController {
 
+    func sendLocationMediaMessage(completion: JSQLocationMediaItemCompletionBlock) {
+        locationController().getCurrentCoordinate().onSuccess { [weak self] coordinate in
+            if let strongSelf = self {
+                let location = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
+                let locationItem = JSQLocationMediaItem()
+                locationItem.setLocation(location, withCompletionHandler: completion)
+                let locationMessage = JSQMessage(senderId: strongSelf.senderId, senderDisplayName: strongSelf.senderDisplayName, date: NSDate(), media: locationItem)
+                strongSelf.chatController.sendMessage(locationMessage)
+            }
+        }.onFailure { error in
+            Log.error?.value(error)
+        }
+    }
+    
+    func sendVideoMessage() {
+        let videoURL: NSURL = NSURL(string: "file://")!
+        let videoItem = JSQVideoMediaItem(fileURL: videoURL, isReadyToPlay: true)
+        let videoMessage = JSQMessage(senderId: senderId, senderDisplayName: senderDisplayName, date: NSDate(), media: videoItem)
+        chatController.sendMessage(videoMessage)
+    }
+    
+    func sendPhotoMessage() {
+        let photoItem = JSQPhotoMediaItem(image: UIImage(named:"MenuLogo")!)
+        let photoMessage = JSQMessage(senderId: senderId, senderDisplayName: senderDisplayName, date: NSDate(), media: photoItem)
+        chatController.sendMessage(photoMessage)
+    }
 }
