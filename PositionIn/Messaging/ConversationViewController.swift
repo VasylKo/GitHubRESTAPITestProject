@@ -130,12 +130,12 @@ final class ConversationViewController: JSQMessagesViewController {
     
     lazy private var outgoingBubbleImageData: JSQMessagesBubbleImage = {
        let bubbleImageFactory = JSQMessagesBubbleImageFactory()
-        return bubbleImageFactory.outgoingMessagesBubbleImageWithColor(UIColor.jsq_messageBubbleLightGrayColor())
+        return bubbleImageFactory.outgoingMessagesBubbleImageWithColor(UIColor.jsq_messageBubbleGreenColor())
     }()
     
     lazy private var incomingBubbleImageData: JSQMessagesBubbleImage = {
         let bubbleImageFactory = JSQMessagesBubbleImageFactory()
-        return bubbleImageFactory.incomingMessagesBubbleImageWithColor(UIColor.jsq_messageBubbleGreenColor())
+        return bubbleImageFactory.incomingMessagesBubbleImageWithColor(UIColor.jsq_messageBubbleLightGrayColor())
     }()
     
 }
