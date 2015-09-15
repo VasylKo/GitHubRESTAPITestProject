@@ -55,7 +55,7 @@ final class MainMenuViewController: UIViewController {
         ]
     }
     
-    private func actionForMode(browseMode: BrowseModeViewController.BrowseMode) -> SidebarViewController.Action? {
+    private func actionForMode(browseMode: BrowseModeTabbarViewController.BrowseMode) -> SidebarViewController.Action? {
         switch browseMode {
         case .ForYou:
             return .ForYou
@@ -80,7 +80,7 @@ final class MainMenuViewController: UIViewController {
         }
 
         browseModeUpdateObserver = NSNotificationCenter.defaultCenter().addObserverForName(
-            BrowseModeViewController.BrowseModeDidchangeNotification,
+            BrowseModeTabbarViewController.BrowseModeDidchangeNotification,
             object: nil,
             queue: nil,
             usingBlock: browseModeBlock

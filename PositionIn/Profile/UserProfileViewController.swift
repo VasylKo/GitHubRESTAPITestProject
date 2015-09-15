@@ -13,7 +13,7 @@ protocol UserProfileActionConsumer: class {
     func shouldExecuteAction(action: UserProfileViewController.ProfileAction)
 }
 
-final class UserProfileViewController: BrowseModeViewController {
+final class UserProfileViewController: BrowseModeTabbarViewController {
     
     enum ProfileAction: Int, Printable {
         case None
