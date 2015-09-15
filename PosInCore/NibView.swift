@@ -9,7 +9,6 @@
 import UIKit
 
 public class NibView: UIView {
-
     
     override public init(frame: CGRect) {
         super.init(frame: frame)
