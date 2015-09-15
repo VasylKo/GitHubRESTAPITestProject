@@ -134,7 +134,6 @@ struct FeedItemCellModelFactory {
     func walletReuseId() -> [String]  {
         return [ProductListCell.reuseId()]
     }
-
     
     private let dateFormatter: NSDateFormatter = {
         let dateFormatter = NSDateFormatter()

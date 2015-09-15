@@ -13,4 +13,8 @@ XCPShowView("Container View", containerView)
 
 let p = NetworkDataProvider()
 
+let a: [Int] = [1,2,3]
+let b: [String] = ["a", "b", "c"]
+let z = Array(zip(a, b))
+
 
