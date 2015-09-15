@@ -118,8 +118,8 @@ struct FeedItemCellModelFactory {
                 itemType: feedItem.type,
                 objectID: feedItem.objectId,
                 title: feedItem.name,
-                details: feedItem.author?.title,
-                info: map(feedItem.date) {dateFormatter.stringFromDate($0)},
+                details: feedItem.details,
+                info: feedItem.text,
                 imageURL: feedItem.image,
                 badge: map(feedItem.price) { "$\(Int($0))"},
                 data: feedItem.itemData
