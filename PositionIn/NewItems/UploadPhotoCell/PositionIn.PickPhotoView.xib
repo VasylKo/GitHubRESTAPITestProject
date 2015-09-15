@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PickPhotoView" customModule="PositionIn" customModuleProvider="target">
+            <connections>
+                <outlet property="contentView" destination="iN0-l3-epB" id="QBD-of-ayT"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="200"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="newItemCamera" translatesAutoresizingMaskIntoConstraints="NO" id="WwA-14-YRK">
+                    <rect key="frame" x="5" y="5" width="190" height="190"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="WwA-14-YRK" secondAttribute="height" multiplier="1:1" id="0Bc-Q3-46H"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Insert photo" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nMr-8N-dii">
+                    <rect key="frame" x="200" y="90" width="395" height="19.5"/>
+                    <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                    <color key="textColor" red="0.13725490200000001" green="0.4431372549" blue="0.83529411760000005" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="nMr-8N-dii" secondAttribute="trailing" constant="5" id="3sO-FJ-jcR"/>
+                <constraint firstItem="WwA-14-YRK" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="5" id="E8E-TX-iLz"/>
+                <constraint firstAttribute="bottom" secondItem="WwA-14-YRK" secondAttribute="bottom" constant="5" id="ICU-Of-6Ry"/>
+                <constraint firstItem="WwA-14-YRK" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="5" id="IXP-nK-uIu"/>
+                <constraint firstAttribute="centerY" secondItem="nMr-8N-dii" secondAttribute="centerY" id="Q61-R5-G0A"/>
+                <constraint firstItem="nMr-8N-dii" firstAttribute="leading" secondItem="WwA-14-YRK" secondAttribute="trailing" constant="5" id="xTr-rb-2ER"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="newItemCamera" width="22" height="22"/>
+    </resources>
+</document>

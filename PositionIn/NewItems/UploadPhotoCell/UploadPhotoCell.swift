@@ -25,42 +25,36 @@ class UploadPhotoCell: XLFormBaseCell {
     override func configure() {
         super.configure()
         self.selectionStyle = .None
-        self.textLabel!.textColor = UIColor(red: 0.0, green: 122.0/255.0, blue: 1.0, alpha: 1.0)
-        self.textLabel!.textAlignment = .Center
+        let invitationView = PickPhotoView(frame: CGRectZero)
+        self.invitationView = invitationView
+        contentView.addSubViewOnEntireSize(invitationView)
+        let previewView = AttachedPhotosView(frame: CGRectZero)
+        assetsPreviewView = previewView
+        contentView.addSubViewOnEntireSize(previewView)
     }
     
     override func update() {
         super.update()
-        imagePreviews.map { preview in
-            preview.removeFromSuperview()
-        }
-        imagePreviews = []
-        if let assets = self.assets {
-            self.textLabel!.text = "Assets: \(count(assets))"
-
-            let previewWidth: CGFloat = bounds.width / CGFloat(count(assets))
-            let previewHeight = bounds.height
-            let previewSize = CGSize(width: previewWidth, height: previewHeight)
+        if let asset = assets?.first {
+            assetsPreviewView.hidden = false
+            invitationView.hidden = true
+            assetsPreviewView.assetImageView.image = UIImage(named: "compactPlaceholder")
+            assetsPreviewView.layoutIfNeeded()
+            let previewSize = assetsPreviewView.bounds.size
             let requestOptions = PHImageRequestOptions()
             requestOptions.deliveryMode = .FastFormat
-            enumerate(assets)
-            for (index, asset) in enumerate(assets) {
-
-                let imageView = UIImageView(frame: CGRect(origin: CGPoint(x: previewWidth * CGFloat(index), y: 0), size: previewSize))
-                self.contentView.addSubview(imageView)
-                
-                self.imageManager.requestImageForAsset(asset,
-                    targetSize: previewSize,
-                    contentMode: .AspectFill,
-                    options: requestOptions,
-                    resultHandler: { [weak imageView] (image, info) -> Void in
-                        imageView?.image = image
-                })
-                imagePreviews.append(imageView)
-            }
+            imageManager.requestImageForAsset(asset,
+                targetSize: previewSize,
+                contentMode: .AspectFit,
+                options: requestOptions,
+                resultHandler: {
+                    [weak imageView = self.assetsPreviewView.assetImageView]
+                    (image, info) -> Void in
+                    imageView?.image = image
+            })
         } else {
-            self.textLabel!.font = UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline)
-            self.textLabel!.text = NSLocalizedString("Insert photo", comment: "New item: insert photo")
+            assetsPreviewView.hidden = true
+            invitationView.hidden = false
         }
     }
     
@@ -78,7 +72,8 @@ class UploadPhotoCell: XLFormBaseCell {
         return self.rowDescriptor.value as? [PHAsset]
     }
     
-    private var imagePreviews: [UIImageView] = []
+    private weak var invitationView: PickPhotoView!
+    private weak var assetsPreviewView: AttachedPhotosView!
     private lazy var imageManager: PHCachingImageManager = {
         return PHCachingImageManager()
     }()
