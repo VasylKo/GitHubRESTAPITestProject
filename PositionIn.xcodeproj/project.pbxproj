@@ -330,7 +330,7 @@
 		E6F2436C1B8B0E150033B13C /* MainMenuLoginCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6F2436B1B8B0E150033B13C /* MainMenuLoginCell.swift */; };
 		E6F2436E1B8B0E3A0033B13C /* PositionIn.MainMenuLoginCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6F2436D1B8B0E3A0033B13C /* PositionIn.MainMenuLoginCell.xib */; };
 		E6F243701B8B17910033B13C /* DisplayModeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6F2436F1B8B17910033B13C /* DisplayModeViewController.swift */; };
-		E6F243721B8B1F460033B13C /* BrowseModeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6F243711B8B1F460033B13C /* BrowseModeViewController.swift */; };
+		E6F243721B8B1F460033B13C /* BrowseModeTabbarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6F243711B8B1F460033B13C /* BrowseModeTabbarViewController.swift */; };
 		E6F243751B8B31510033B13C /* AddMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6F243731B8B31510033B13C /* AddMenuView.swift */; };
 		E6F243761B8B31510033B13C /* BrowseTabbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6F243741B8B31510033B13C /* BrowseTabbar.swift */; };
 		E6F243781B8B3CDE0033B13C /* BrowseListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6F243771B8B3CDE0033B13C /* BrowseListTableViewCell.swift */; };
@@ -918,7 +918,7 @@
 		E6F2436B1B8B0E150033B13C /* MainMenuLoginCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuLoginCell.swift; sourceTree = "<group>"; };
 		E6F2436D1B8B0E3A0033B13C /* PositionIn.MainMenuLoginCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.MainMenuLoginCell.xib; sourceTree = "<group>"; };
 		E6F2436F1B8B17910033B13C /* DisplayModeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayModeViewController.swift; sourceTree = "<group>"; };
-		E6F243711B8B1F460033B13C /* BrowseModeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowseModeViewController.swift; sourceTree = "<group>"; };
+		E6F243711B8B1F460033B13C /* BrowseModeTabbarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowseModeTabbarViewController.swift; sourceTree = "<group>"; };
 		E6F243731B8B31510033B13C /* AddMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddMenuView.swift; sourceTree = "<group>"; };
 		E6F243741B8B31510033B13C /* BrowseTabbar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowseTabbar.swift; sourceTree = "<group>"; };
 		E6F243771B8B3CDE0033B13C /* BrowseListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowseListTableViewCell.swift; sourceTree = "<group>"; };
@@ -1114,7 +1114,7 @@
 				E62B16FE1B5CE0F800D446BC /* BesideMenuViewController.swift */,
 				E6A10AC51B74232100047D74 /* LocationSelectorViewController.swift */,
 				E6F2436F1B8B17910033B13C /* DisplayModeViewController.swift */,
-				E6F243711B8B1F460033B13C /* BrowseModeViewController.swift */,
+				E6F243711B8B1F460033B13C /* BrowseModeTabbarViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -3029,7 +3029,7 @@
 				E64D006A1B7CA2DC007693E0 /* AddCommunityViewController.swift in Sources */,
 				E6A10AC61B74232100047D74 /* LocationSelectorViewController.swift in Sources */,
 				E62B16F81B5C6BBF00D446BC /* AvatarView.swift in Sources */,
-				E6F243721B8B1F460033B13C /* BrowseModeViewController.swift in Sources */,
+				E6F243721B8B1F460033B13C /* BrowseModeTabbarViewController.swift in Sources */,
 				E61B20D51B7DD47C005EAB2C /* FeedItem.swift in Sources */,
 				E6018E521B8492EA001D22FA /* XLFormOptionsObject+PositionIn.swift in Sources */,
 				E6BEF1CF1B9C60B500511B46 /* PostTableViewCellModel.swift in Sources */,

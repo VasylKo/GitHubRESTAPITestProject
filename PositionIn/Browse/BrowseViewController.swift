@@ -9,7 +9,7 @@
 import PosInCore
 import CleanroomLogger
 
-final class BrowseViewController: BrowseModeViewController {
+final class BrowseViewController: BrowseModeTabbarViewController {
     
     
     @IBAction func prepareForUnwind(segue: UIStoryboardSegue) {

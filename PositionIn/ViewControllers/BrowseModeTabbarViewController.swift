@@ -1,5 +1,5 @@
 //
-//  BrowseModeViewController.swift
+//  BrowseModeTabbarViewController.swift
 //  PositionIn
 //
 //  Created by Alexandr Goncharov on 24/08/15.
@@ -10,7 +10,11 @@ import UIKit
 
 import CleanroomLogger
 
-@objc class BrowseModeViewController: DisplayModeViewController, AddMenuViewDelegate, BrowseTabbarDelegate {
+protocol BrowseModeDisplay {
+    var browseMode: BrowseModeTabbarViewController.BrowseMode { get set }
+}
+
+@objc class BrowseModeTabbarViewController: DisplayModeViewController, AddMenuViewDelegate, BrowseTabbarDelegate {
     
     var addMenuItems: [AddMenuView.MenuItem] {
         return []
@@ -36,6 +40,7 @@ import CleanroomLogger
         didSet {
             if isViewLoaded() {
                 applyBrowseMode(browseMode)
+                applyDisplayMode(displayMode)
             }
         }
     }
@@ -44,11 +49,18 @@ import CleanroomLogger
         Log.verbose?.message("Apply browse mode: \(mode)")
         tabbar.selectedMode = mode
         NSNotificationCenter.defaultCenter().postNotificationName(
-            BrowseModeViewController.BrowseModeDidchangeNotification,
+            BrowseModeTabbarViewController.BrowseModeDidchangeNotification,
             object: self,
             userInfo: nil
         )
     }
+    
+    override func prepareDisplayController(controller: UIViewController) {
+        if var display = controller as? BrowseModeDisplay {
+            display.browseMode = browseMode
+        }
+    }
+
     
     static let BrowseModeDidchangeNotification = "BrowseModeDidchangeNotification"
     

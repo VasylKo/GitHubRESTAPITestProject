@@ -9,7 +9,7 @@
 import PosInCore
 import CleanroomLogger
 
-final class CommunityViewController: BrowseModeViewController {
+final class CommunityViewController: BrowseModeTabbarViewController {
     
     var objectId: CRUDObjectId =  CRUDObjectInvalidId
     

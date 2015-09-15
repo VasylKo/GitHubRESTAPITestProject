@@ -68,6 +68,7 @@ protocol BrowseActionConsumer: class {
         }
         
         let childController = viewControllerForMode(self.displayMode)
+        prepareDisplayController(childController)
         childController.willMoveToParentViewController(self)
         self.addChildViewController(childController)
         self.contentView.addSubViewOnEntireSize(childController.view)
@@ -82,6 +83,9 @@ protocol BrowseActionConsumer: class {
         displayModeSegmentedControl.selectedSegmentIndex = mode.rawValue
     }
     
+    func prepareDisplayController(controller: UIViewController) {
+        Log.verbose?.message("Preparing display controller: \(controller)")
+    }
     
 
     //MARK: - UI -

@@ -11,11 +11,13 @@ import PosInCore
 import CleanroomLogger
 import BrightFutures
 
-final class BrowseListViewController: UIViewController, BrowseActionProducer {
+final class BrowseListViewController: UIViewController, BrowseActionProducer, BrowseModeDisplay {
     var excludeCommunityItems = false
     var shoWCompactCells: Bool = true
     private var dataRequestToken = InvalidationToken()
 
+    var browseMode: BrowseModeTabbarViewController.BrowseMode = .ForYou
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         dataSource.configureTable(tableView)
@@ -42,7 +44,14 @@ final class BrowseListViewController: UIViewController, BrowseActionProducer {
     private func getFeedItems(searchFilter: SearchFilter, page: APIService.Page = APIService.Page()) {
         dataRequestToken.invalidate()
         dataRequestToken = InvalidationToken()
-        api().getFeed(searchFilter, page: page).onSuccess(token: dataRequestToken) {
+        let request: Future<CollectionResponse<FeedItem>,NSError>
+        switch browseMode {
+        case .ForYou:
+            request = api().forYou(searchFilter, page: page)
+        case .New:
+            request = api().getFeed(searchFilter, page: page)
+        }
+        request.onSuccess(token: dataRequestToken) {
             [weak self] response in
             Log.debug?.value(response.items)
             if let strongSelf = self,
