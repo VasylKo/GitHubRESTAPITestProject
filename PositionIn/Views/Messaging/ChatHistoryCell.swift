@@ -9,25 +9,24 @@
 import PosInCore
 import UIKit
 
-final class MessageListCell: TableViewCell {
+final class ChatHistoryCell: TableViewCell {
     
-    @IBOutlet private weak var avatar: UIImageView!
+    @IBOutlet private weak var avatar: AvatarView!
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var dateLabel: UILabel!
     @IBOutlet private weak var infoLabel: UILabel!
     
     override func setModel(model: TableViewCellModel) {
-        let m = model as? MessageTableViewCellModel
+        let m = model as? ChatHistoryCellModel
         assert(m != nil, "Invalid model passed")
-        
-        avatar.setImageFromURL(m!.imageUrl, placeholder: UIImage(named: "placeholderEvent"))
-        titleLabel.text = m!.title
-        infoLabel.text = m!.info
+        avatar.setImageFromURL(m!.imageUrl)
+        titleLabel.text = m!.name
+        infoLabel.text = m!.message
         dateLabel.text = m!.date
     }
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        avatar.hnk_cancelSetImage()
+        avatar.cancelSetImage()
     }
 }

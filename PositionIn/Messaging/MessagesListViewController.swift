@@ -9,6 +9,7 @@
 import UIKit
 import PosInCore
 import CleanroomLogger
+import JSQMessagesViewController
 
 final class MessagesListViewController: BesideMenuViewController {
 
@@ -24,15 +25,28 @@ final class MessagesListViewController: BesideMenuViewController {
         tableView.reloadData()
     }
     
+    typealias ChatHistoryResponse = (UserInfo, JSQMessage)
     
-    func mockData() -> [Message] {
-        return [
-            Message(name: "The Forest", text: "Edward Rayan Edward Rayan Edward Rayan ", imageUrl: "", date: NSDate()),
-            Message(name: "The Forest", text: "Edward Rayan", imageUrl: "", date: NSDate()),
-            Message(name: "The Forest", text: "Edward Rayan", imageUrl: "", date: NSDate())
+    func mockData() -> [ChatHistoryResponse] {
+        let dolph = UserInfo()
+        dolph.title = "Dolph Lundgren"
+        dolph.avatar = NSURL(string: "http://www.flickeringmyth.com/wp-content/uploads/2014/09/dolph-lundgren.jpg")
+        let tony =  UserInfo()
+        tony.title = "Tony Soprano"
+        tony.avatar = NSURL(string: "http://static.giantbomb.com/uploads/original/2/23298/1058360-tonysoprano1.jpg")
+        let charlie = UserInfo()
+        charlie.title = "Charlie Sheen"
+        charlie.avatar = NSURL(string: "http://img2-2.timeinc.net/people/i/2011/news/110314/charlie-sheen-5240.jpg")
+        let users: [UserInfo] = [dolph, tony, charlie]
+        
+        let messages: [JSQMessage] = [
+            JSQMessage(senderId: "", senderDisplayName: "", date: NSDate(timeIntervalSinceNow: (-60) * 14), text: "Nicolas Cage is a great actor and he's done some good action movies too."),
+            JSQMessage(senderId: "", senderDisplayName: "", date: NSDate(timeIntervalSinceNow: (-60) * 60 * 3 - 60 * 4 ), text: "We're soldiers. Soldiers don't go to hell. It's war. Soldiers kill other soldiers. We're in a situation where everyone involved knows the stakes and if you are going to accept those stakes, you've got to do certain things. It's business."),
+            JSQMessage(senderId: "", senderDisplayName: "", date: NSDate(timeIntervalSinceNow: (-60) * 60 * 4 - 60 * 23), text: "The only thing I'm addicted to is winning. This bootleg cult, arrogantly referred to as Alcoholics Anonymous, reports a 5 percent success rate. My success rate is 100 percent."),
         ]
+        
+        return Array(zip(users, messages))
     }
-    
 
     @IBOutlet private weak var tableView: UITableView!
     
@@ -53,37 +67,42 @@ extension MessagesListViewController {
             super.configureTable(tableView)
         }
         
-        func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        @objc override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
             return count(models)
         }
         
-        @objc override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            return count(models[section])
-        }
-        
         override func tableView(tableView: UITableView, modelForIndexPath indexPath: NSIndexPath) -> TableViewCellModel {
-            return models[indexPath.section][indexPath.row]
+            return models[indexPath.row]
         }
         
         @objc override func tableView(tableView: UITableView, reuseIdentifierForIndexPath indexPath: NSIndexPath) -> String {
-            let model = self.tableView(tableView, modelForIndexPath: indexPath)
-            return modelFactory.messageReuseIdForModel(model)
+            return ChatHistoryCell.reuseId()
         }
         
         override func nibCellsId() -> [String] {
-            return modelFactory.messageReuseId()
+            return [ ChatHistoryCell.reuseId() ]
         }
         
         func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
             tableView.deselectRowAtIndexPath(indexPath, animated: true)
         }
         
-        func setItems(messages: [Message]) {
-            models = messages.map { self.modelFactory.messageModelsForItem($0) }
+        func setItems(messages: [ChatHistoryResponse]) {
+            let dateFormatter = NSDateFormatter()
+            dateFormatter.dateStyle = .NoStyle
+            dateFormatter.timeStyle = .MediumStyle
+            models = messages.map { (user, message) -> ChatHistoryCellModel in
+                return ChatHistoryCellModel(
+                    user: user.objectId,
+                    name: user.title,
+                    message: message.text,
+                    imageURL: user.avatar,
+                    date: map(message.date) { dateFormatter.stringFromDate($0) }
+                )
+            }
         }
         
         
-        private var models: [[MessageTableViewCellModel]] = []
-        private let modelFactory = FeedItemCellModelFactory()
+        private var models: [ChatHistoryCellModel] = []
     }
 }
