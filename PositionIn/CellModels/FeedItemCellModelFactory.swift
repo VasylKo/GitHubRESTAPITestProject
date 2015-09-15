@@ -134,6 +134,23 @@ struct FeedItemCellModelFactory {
     func walletReuseId() -> [String]  {
         return [ProductListCell.reuseId()]
     }
+    
+    func messageModelsForItem(message: Message) -> [MessageTableViewCellModel] {
+        let dateText = map(message.date){dateFormatter.stringFromDate($0)}
+        
+        return [
+            MessageTableViewCellModel(title: message.name!, info: message.text, imageURL: NSURL(string: message.imageUrl!), date: dateText!)
+        ]
+    }
+    
+    func messageReuseIdForModel(model: TableViewCellModel) -> String {
+        return MessageListCell.reuseId()
+    }
+    
+    func messageReuseId() -> [String]  {
+        return [MessageListCell.reuseId()]
+    }
+
 
     
     private let dateFormatter: NSDateFormatter = {

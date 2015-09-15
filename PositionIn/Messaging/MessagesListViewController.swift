@@ -15,9 +15,25 @@ final class MessagesListViewController: BesideMenuViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         dataSource.configureTable(tableView)
+        reloadData()
     }
 
+    func reloadData() {
+        let items = mockData()
+        dataSource.setItems(items)
+        tableView.reloadData()
+    }
     
+    
+    func mockData() -> [Message] {
+        return [
+            Message(name: "The Forest", text: "Edward Rayan Edward Rayan Edward Rayan ", imageUrl: "", date: NSDate()),
+            Message(name: "The Forest", text: "Edward Rayan", imageUrl: "", date: NSDate()),
+            Message(name: "The Forest", text: "Edward Rayan", imageUrl: "", date: NSDate())
+        ]
+    }
+    
+
     @IBOutlet private weak var tableView: UITableView!
     
     private lazy var dataSource: ChatHistoryDataSource = { [unowned self] in
@@ -51,18 +67,23 @@ extension MessagesListViewController {
         
         @objc override func tableView(tableView: UITableView, reuseIdentifierForIndexPath indexPath: NSIndexPath) -> String {
             let model = self.tableView(tableView, modelForIndexPath: indexPath)
-            return modelFactory.compactCellReuseIdForModel(model)
+            return modelFactory.messageReuseIdForModel(model)
         }
         
         override func nibCellsId() -> [String] {
-            return modelFactory.compactCellsReuseId()
+            return modelFactory.messageReuseId()
         }
         
         func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
             tableView.deselectRowAtIndexPath(indexPath, animated: true)
         }
         
-        private var models: [[TableViewCellModel]] = []
+        func setItems(messages: [Message]) {
+            models = messages.map { self.modelFactory.messageModelsForItem($0) }
+        }
+        
+        
+        private var models: [[MessageTableViewCellModel]] = []
         private let modelFactory = FeedItemCellModelFactory()
     }
 }
