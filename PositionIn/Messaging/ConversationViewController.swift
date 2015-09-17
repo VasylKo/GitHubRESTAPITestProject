@@ -13,8 +13,8 @@ import CleanroomLogger
 final class ConversationViewController: JSQMessagesViewController {
     class func conversationController(conversation: Conversation) -> ConversationViewController {
         let instance = ConversationViewController()
-        instance.senderId = api().currentUserId()
         instance.senderDisplayName = NSLocalizedString("Me", comment: "Chat: Current user name")
+        instance.senderId = conversation.currentUserId
         instance.chatController = ChatController(conversation: conversation)
         return instance
     }
@@ -176,7 +176,9 @@ extension ConversationViewController {
 
 extension UIViewController {
     func showChatViewController(conversation: Conversation) {
-        let chatController = ConversationViewController.conversationController(conversation)
-        navigationController?.pushViewController(chatController, animated: true)
+        api().isUserAuthorized().onSuccess { [weak self] _ in
+            let chatController = ConversationViewController.conversationController(conversation)
+            self?.navigationController?.pushViewController(chatController, animated: true)
+        }
     }
 }

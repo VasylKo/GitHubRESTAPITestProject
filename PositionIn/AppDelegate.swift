@@ -96,8 +96,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 extension AppDelegate {
     func setupMaps() {
-        let apiKey = "AIzaSyA3NvrDKBcpIsnq4-ZACG41y7Mj-wSfVrY"
-        GMSServices.provideAPIKey(apiKey)
+        GMSServices.provideAPIKey(AppConfiguration().googleMapsKey)
     }
     
     func UIErrorHandler() -> APIService.ErrorHandler {

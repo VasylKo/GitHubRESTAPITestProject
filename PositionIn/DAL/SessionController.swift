@@ -65,16 +65,25 @@ struct SessionController {
     }
     
     func isUserAuthorized() -> Future<Void, NSError> {
-        return future { () -> Result<Void, NSError> in
-            if self.isGuest {
-                let errorCode = NetworkDataProvider.ErrorCodes.InvalidSessionError
-                return Result(error: errorCode.error())
-            } else {
-                return Result(value: ())
+        return self.currentUserId().flatMap { _ in
+            return future { () -> Result<Void, NSError> in
+                if self.isGuest {
+                    let errorCode = NetworkDataProvider.ErrorCodes.InvalidSessionError
+                    return Result(error: errorCode.error())
+                } else {
+                    return Result(value: ())
+                }
             }
-            
         }
     }
+    
+    func isUserAuthorized() -> Bool {
+        if let currentUserId = currentUserId() {
+            return !isGuest
+        }
+        return false
+    }
+    
     
     func setAuth(authResponse: AuthResponse) {
         Log.info?.message("Auth changed")
@@ -95,7 +104,7 @@ struct SessionController {
         keychain.set(NSData(bytes: &isGuest, length: sizeof(Bool)), key: KeychainKeys.IsGuestKey)
     }
     
-    var isGuest: Bool {
+    private var isGuest: Bool {
         let data = keychain.getData(KeychainKeys.IsGuestKey)
         if let data = data {
             var isGuest: Bool = true

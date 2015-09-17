@@ -38,7 +38,7 @@ class ProfileListViewController: BesideMenuViewController, BrowseActionProducer 
     
     private func didReceiveProfile(profile: UserProfile, state: UserProfile.SubscriptionState = .SameUser) {
         let isCurrentUser = api().isCurrentUser(profile.objectId)
-        let isUserAuthorized = api().isUserAuthorized()
+        let isUserAuthorized: Bool = api().isUserAuthorized()
         let (leftAction, rightAction): (UserProfileViewController.ProfileAction, UserProfileViewController.ProfileAction) = {
             switch(isCurrentUser, isUserAuthorized) {
             case (true, _):

@@ -18,6 +18,6 @@ final class Conversation {
         recipients = interlocutors
     }
     
-    
+    let currentUserId: CRUDObjectId = api().currentUserId() ?? CRUDObjectInvalidId
     private(set) var recipients: [CRUDObjectId]
 }

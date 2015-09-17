@@ -26,10 +26,11 @@ extension APIService {
     }
     
     func isUserAuthorized() -> Bool {
-        if let currentUserId = currentUserId() {
-            return self.sessionController.isGuest == false
-        }
-        return false
+        return sessionController.isUserAuthorized()
+    }
+    
+    func isUserAuthorized() -> Future<Void, NSError> {
+        return handleFailure(sessionController.isUserAuthorized())
     }
     
     func isCurrentUser(userId: CRUDObjectId) -> Bool {
