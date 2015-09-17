@@ -19,8 +19,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
     private(set) var api: APIService
-    let chatClient: XMPPClient
+    private(set) var chatClient: XMPPClient
     let locationController: LocationController
+    private var userDidChangeObserver: NSObjectProtocol!
     
     var sidebarViewController: SidebarViewController? {
         return self.window?.rootViewController as? SidebarViewController
@@ -32,20 +33,32 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         #else
         Log.enable(minimumSeverity: .Info, synchronousMode: false)
         #endif
+        let appConfig = AppConfiguration()
         let urlSessionConfig = NSURLSessionConfiguration.defaultSessionConfiguration()
-        let baseURL = AppConfiguration().baseURL
+        let baseURL = appConfig.baseURL
         //FIXME: dissallow self signed certificates in the future
         let trustPolicies: [String: ServerTrustPolicy]? = [
             baseURL.host! : .DisableEvaluation
             ]
         let dataProvider = PosInCore.NetworkDataProvider(configuration: urlSessionConfig, trustPolicies: trustPolicies)
         api = APIService(url: baseURL, dataProvider: dataProvider)
-        let chatConfig = XMPPClientConfiguration.defaultConfiguration()
+        let chatConfig = XMPPClientConfiguration(with: appConfig.xmppHostname, port: appConfig.xmppPort)
         chatClient = XMPPClient(configuration: chatConfig)
         locationController = LocationController()
         super.init()
+        
+        userDidChangeObserver = NSNotificationCenter.defaultCenter().addObserverForName(
+            UserProfile.CurrentUserDidChangeNotification,
+            object: nil,
+            queue: nil) { [weak self] notification in
+                let newProfile = notification.object as? UserProfile
+                self?.currentUserDidChange(newProfile)
+        }
     }
 
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(userDidChangeObserver)
+    }
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         setupMaps()
@@ -59,15 +72,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             Log.error?.value(error)
             self.sidebarViewController?.executeAction(.Login)
         }
-        return true
-                
-        self.chatClient.auth("ixmpp@beewellapp.com", password: "1HateD0m2").future().onSuccess { [unowned self] in
-            Log.info?.message("XMPP authorized")
-            self.chatClient.sendTestMessage()
-        }.onFailure { error in
-                Log.error?.value(error)
-        }
-        
         return true
     }
 
@@ -91,6 +95,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    }
+
+}
+
+extension AppDelegate {
+    func currentUserDidChange(profile: UserProfile?) {
+        switch profile {
+        case .Some(let user):
+            chatClient.auth("ixmpp@beewellapp.com", password: "1HateD0m2").future().onSuccess { [unowned self] in
+                Log.info?.message("XMPP authorized")
+                self.chatClient.sendTestMessage()
+                }.onFailure { error in
+                    Log.error?.value(error)
+            }
+
+        case .None:
+            //TODO: Logout
+            break
+        }
     }
 }
 
@@ -126,5 +149,9 @@ func locationController() -> LocationController {
 
 func chat() -> XMPPClient {
     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-    return appDelegate.chatClient
+    var chatClient: XMPPClient!
+    synced(appDelegate) {
+        chatClient = appDelegate.chatClient
+    }
+    return chatClient
 }

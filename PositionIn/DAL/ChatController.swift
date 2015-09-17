@@ -11,7 +11,9 @@ import JSQMessagesViewController
 import CleanroomLogger
 
 final class ChatController {
+    
     init(conversation: Conversation) {
+        chatClient = chat()
         messages = [
             JSQMessage(senderId: "123", displayName: "John Doe", text: "Hi!"),
             JSQMessage(senderId: "123", displayName: "John Doe", text: "Please give me a call."),            
@@ -20,6 +22,7 @@ final class ChatController {
     
     func sendMessage(msg: JSQMessageData) {
         messages.append(msg)
+        chatClient.sendTestMessage()
     }
     
     func messagesCount() -> Int {
@@ -40,5 +43,7 @@ final class ChatController {
     lazy private var defaultAvatar: JSQMessagesAvatarImage = {
         return JSQMessagesAvatarImageFactory.avatarImageWithPlaceholder(UIImage(named: "AvatarPlaceholder")!, diameter: UInt(kJSQMessagesCollectionViewAvatarSizeDefault))
     }()
+    
+    private unowned var chatClient: XMPPClient
 }
 
