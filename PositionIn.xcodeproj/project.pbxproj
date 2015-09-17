@@ -347,6 +347,7 @@
 		E6F7A47E1BA356130069152A /* LocationSearchResultsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6F7A47B1BA356130069152A /* LocationSearchResultsController.swift */; };
 		E6F7A47F1BA356130069152A /* PositionIn.LocationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6F7A47C1BA356130069152A /* PositionIn.LocationCell.xib */; };
 		E6F7A4811BA356500069152A /* LocationSearchResultDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6F7A4801BA356500069152A /* LocationSearchResultDataSource.swift */; };
+		E6FC24C31BAAEC23006FE7A0 /* Conversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6FC24C21BAAEC23006FE7A0 /* Conversation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -935,6 +936,7 @@
 		E6F7A47B1BA356130069152A /* LocationSearchResultsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationSearchResultsController.swift; sourceTree = "<group>"; };
 		E6F7A47C1BA356130069152A /* PositionIn.LocationCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.LocationCell.xib; sourceTree = "<group>"; };
 		E6F7A4801BA356500069152A /* LocationSearchResultDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationSearchResultDataSource.swift; sourceTree = "<group>"; };
+		E6FC24C21BAAEC23006FE7A0 /* Conversation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Conversation.swift; sourceTree = "<group>"; };
 		E6FC63D01B5901060062F5C9 /* KVObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KVObserver.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1260,6 +1262,7 @@
 				E6365D341B7D709E00CB79CB /* PhotoInfo.swift */,
 				E632016D1B9834910066C62E /* ObjectInfo.swift */,
 				E6DADB9F1B8C5907009A5694 /* ItemCategory.swift */,
+				E6FC24C21BAAEC23006FE7A0 /* Conversation.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -2954,6 +2957,7 @@
 				E6365D351B7D709E00CB79CB /* PhotoInfo.swift in Sources */,
 				E660E52D1B5AC23B00F52050 /* MainMenuViewController.swift in Sources */,
 				2431EBE61B95BD2A009FB158 /* PromotionDetailsViewController.swift in Sources */,
+				E6FC24C31BAAEC23006FE7A0 /* Conversation.swift in Sources */,
 				E66115A81B73AE0F003DB5B3 /* AddPromotionViewController.swift in Sources */,
 				E68B52281B875F8F006B980C /* PromotionListCell.swift in Sources */,
 				E661158D1B73778B003DB5B3 /* RecoverPasswordViewController.swift in Sources */,

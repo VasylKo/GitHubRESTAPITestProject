@@ -11,7 +11,7 @@ import JSQMessagesViewController
 import CleanroomLogger
 
 final class ChatController {
-    init(interlocutor: CRUDObjectId) {
+    init(conversation: Conversation) {
         messages = [
             JSQMessage(senderId: "123", displayName: "John Doe", text: "Hi!"),
             JSQMessage(senderId: "123", displayName: "John Doe", text: "Please give me a call."),            

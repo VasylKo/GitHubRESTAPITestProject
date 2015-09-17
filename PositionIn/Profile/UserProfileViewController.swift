@@ -109,8 +109,7 @@ extension UserProfileViewController: UserProfileActionConsumer {
                 self?.sendSubscriptionUpdateNotification(aUserInfo: nil)
             }
         case .Chat:
-            let chatController = ConversationViewController.conversationController(interlocutor: objectId)
-            navigationController?.pushViewController(chatController, animated: true)
+            showChatViewController(Conversation(userId: objectId))
         case .None:
             fallthrough
         default:

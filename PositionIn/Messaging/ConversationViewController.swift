@@ -11,11 +11,11 @@ import JSQMessagesViewController
 import CleanroomLogger
 
 final class ConversationViewController: JSQMessagesViewController {
-    class func conversationController(interlocutor: CRUDObjectId = CRUDObjectInvalidId) -> ConversationViewController {
+    class func conversationController(conversation: Conversation) -> ConversationViewController {
         let instance = ConversationViewController()
         instance.senderId = api().currentUserId()
         instance.senderDisplayName = NSLocalizedString("Me", comment: "Chat: Current user name")
-        instance.chatController = ChatController(interlocutor: interlocutor)
+        instance.chatController = ChatController(conversation: conversation)
         return instance
     }
     
@@ -169,5 +169,14 @@ extension ConversationViewController {
         let photoItem = JSQPhotoMediaItem(image: UIImage(named:"MenuLogo")!)
         let photoMessage = JSQMessage(senderId: senderId, senderDisplayName: senderDisplayName, date: NSDate(), media: photoItem)
         chatController.sendMessage(photoMessage)
+    }
+}
+
+//MARK: - Navigation  -
+
+extension UIViewController {
+    func showChatViewController(conversation: Conversation) {
+        let chatController = ConversationViewController.conversationController(conversation)
+        navigationController?.pushViewController(chatController, animated: true)
     }
 }

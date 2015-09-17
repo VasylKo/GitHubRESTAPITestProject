@@ -9,7 +9,7 @@
 import UIKit
 import CleanroomLogger
 
-/// Controller with Main menu button
+/// Base Controller with Main menu button
 class BesideMenuViewController: UIViewController {
     
     override func viewDidLoad() {
@@ -75,5 +75,5 @@ class BesideMenuViewController: UIViewController {
     deinit{
         NSNotificationCenter.defaultCenter().removeObserver(self)
     }
-    
+        
 }
