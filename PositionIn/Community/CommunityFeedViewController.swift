@@ -10,7 +10,7 @@ import PosInCore
 import BrightFutures
 import CleanroomLogger
 
-class CommunityFeedViewController: BesideMenuViewController, BrowseActionProducer {
+class CommunityFeedViewController: BesideMenuViewController, BrowseActionProducer, BrowseModeDisplay {
     
     weak var actionConsumer: BrowseActionConsumer?
 
@@ -25,6 +25,8 @@ class CommunityFeedViewController: BesideMenuViewController, BrowseActionProduce
             }
         }
     }
+    
+    var browseMode: BrowseModeTabbarViewController.BrowseMode = .ForYou
 
     //MARK: - Reload data -
     
@@ -32,9 +34,7 @@ class CommunityFeedViewController: BesideMenuViewController, BrowseActionProduce
         api().getCommunity(community.objectId).onSuccess { [weak self] community in
             self?.didReceiveCommunity(community)
         }
-        
     }
-    
     
     private func didReceiveCommunity(community: Community) {
 
@@ -44,7 +44,7 @@ class CommunityFeedViewController: BesideMenuViewController, BrowseActionProduce
              CommunityStatsCellModel(countMembers: community.membersCount, countPosts: community.postsCount, countEvents: community.eventsCount)
         ]
         dataSource.items[Sections.Feed.rawValue] = [
-            BrowseListCellModel(objectId: community.objectId, actionConsumer: self, filterType: .Community)
+            BrowseListCellModel(objectId: community.objectId, actionConsumer: self, browseMode: browseMode, filterType: .Community)
         ]
         tableView.reloadData()
         actionConsumer?.browseControllerDidChangeContent(self)

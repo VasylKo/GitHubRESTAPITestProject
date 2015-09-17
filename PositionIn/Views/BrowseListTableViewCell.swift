@@ -18,6 +18,7 @@ final class BrowseListTableViewCell: TableViewCell, TableViewChildViewController
         listController.actionConsumer = self
         listController.excludeCommunityItems = m!.excludeCommunityItems
         listController.shoWCompactCells = m!.shoWCompactCells
+        listController.browseMode = m!.browseMode
         var filter = listController.filter
         switch m!.filterType {
         case .User:
@@ -87,9 +88,11 @@ public struct BrowseListCellModel: ProfileCellModel {
     var excludeCommunityItems = false
     var shoWCompactCells: Bool = true
     unowned var actionConsumer: BrowseActionConsumer
+    let browseMode: BrowseModeTabbarViewController.BrowseMode
     
-    init(objectId: CRUDObjectId, actionConsumer: BrowseActionConsumer, filterType: FilterType = .User) {
+    init(objectId: CRUDObjectId, actionConsumer: BrowseActionConsumer, browseMode: BrowseModeTabbarViewController.BrowseMode, filterType: FilterType = .User) {
         self.objectId = objectId
+        self.browseMode = browseMode
         self.actionConsumer = actionConsumer
         self.filterType = filterType
     }

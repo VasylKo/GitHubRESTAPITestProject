@@ -9,9 +9,10 @@
 import UIKit
 import GoogleMaps
 import CleanroomLogger
+import BrightFutures
 import Box
 
-final class BrowseMapViewController: UIViewController, BrowseActionProducer {
+final class BrowseMapViewController: UIViewController, BrowseActionProducer, BrowseModeDisplay {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,6 +20,8 @@ final class BrowseMapViewController: UIViewController, BrowseActionProducer {
             self.mapView.moveCamera(GMSCameraUpdate.setTarget(coordinate, zoom: 12))
         }
     }
+    
+    var browseMode: BrowseModeTabbarViewController.BrowseMode = .ForYou
     
     let visibleItemTypes: [FeedItem.ItemType] = [.Event, .Promotion, .Item]
     
@@ -76,7 +79,14 @@ extension BrowseMapViewController: GMSMapViewDelegate {
         if let coordinate = position?.target {
             var f = filter
             f.coordinates = coordinate
-            api().getFeed(f, page: APIService.Page()).onSuccess {
+            let request: Future<CollectionResponse<FeedItem>,NSError>
+            switch browseMode {
+            case .ForYou:
+                request = api().forYou(f, page: APIService.Page())
+            case .New:
+                request = api().getFeed(f, page: APIService.Page())
+            }
+            request.onSuccess {
                 [weak self] response in
                 Log.debug?.value(response.items)
                 if let strongSelf = self
