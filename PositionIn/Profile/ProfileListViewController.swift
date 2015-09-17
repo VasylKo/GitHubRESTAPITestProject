@@ -10,7 +10,7 @@ import PosInCore
 import BrightFutures
 import CleanroomLogger
 
-class ProfileListViewController: BesideMenuViewController, BrowseActionProducer {
+class ProfileListViewController: BesideMenuViewController, BrowseActionProducer, BrowseModeDisplay {
     
     weak var actionConsumer: BrowseActionConsumer?
 
@@ -25,6 +25,8 @@ class ProfileListViewController: BesideMenuViewController, BrowseActionProducer 
             }
         }
     }
+    
+    var browseMode: BrowseModeTabbarViewController.BrowseMode = .ForYou
 
     //MARK: - Reload data -
     
@@ -64,7 +66,7 @@ class ProfileListViewController: BesideMenuViewController, BrowseActionProducer 
         }
         dataSource.items[Sections.Info.rawValue] = infoSection
         
-        var feedModel = BrowseListCellModel(objectId: profile.objectId, actionConsumer: self)
+        var feedModel = BrowseListCellModel(objectId: profile.objectId, actionConsumer: self, browseMode: browseMode)
         feedModel.excludeCommunityItems = true
         dataSource.items[Sections.Feed.rawValue] = [ feedModel ]
         
