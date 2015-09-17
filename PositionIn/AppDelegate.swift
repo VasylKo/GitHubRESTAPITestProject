@@ -101,18 +101,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 extension AppDelegate {
     func currentUserDidChange(profile: UserProfile?) {
-        switch profile {
-        case .Some(let user):
-            chatClient.auth("ixmpp@beewellapp.com", password: "1HateD0m2").future().onSuccess { [unowned self] in
-                Log.info?.message("XMPP authorized")
-                self.chatClient.sendTestMessage()
-                }.onFailure { error in
-                    Log.error?.value(error)
-            }
-
-        case .None:
-            //TODO: Logout
-            break
+        //TODO: logout
+        if  let user = profile,
+            let chatCredentials = self.api.getChatCredentials() {
+                chatClient.auth(chatCredentials.jid, password: chatCredentials.password).future().onSuccess { [unowned self] in
+                    Log.info?.message("XMPP authorized")
+                    self.chatClient.sendTestMessage()
+                    }.onFailure { error in
+                        Log.error?.value(error)
+                }
         }
     }
 }

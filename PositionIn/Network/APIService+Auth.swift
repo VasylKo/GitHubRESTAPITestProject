@@ -25,19 +25,35 @@ extension APIService {
         return sessionController.currentUserId()
     }
     
+    //Returns true if user is registered
     func isUserAuthorized() -> Bool {
         return sessionController.isUserAuthorized()
     }
     
+    //Success if user is registered
     func isUserAuthorized() -> Future<Void, NSError> {
         return handleFailure(sessionController.isUserAuthorized())
     }
     
+    //Returns true if it is current user
     func isCurrentUser(userId: CRUDObjectId) -> Bool {
         if let currentUserId = api().currentUserId() {
             return currentUserId == userId
         }
         return false
+    }
+    
+    func getChatCredentials() -> ChatCredentials? {
+        let userId: CRUDObjectId? = currentUserId()
+        let pwd = sessionController.userPassword
+        switch (userId, pwd) {
+        case (.Some(let user), .Some(let password)):
+            let hostname = AppConfiguration().xmppHostname
+            let jid = "\(user)@\(hostname)"
+            return ChatCredentials(jid: jid, password: password)
+        default:
+            return nil
+        }
     }
     
     //Success if has valid session and user is not a guest
@@ -70,7 +86,7 @@ extension APIService {
     //Login existing user
     func login(#username: String, password: String) -> Future<UserProfile, NSError> {
         return loginRequest(username: username, password: password).flatMap { _ in
-            return self.updateCurrentProfileStatus()
+            return self.updateCurrentProfileStatus(newPasword: password)
         }
     }
     
@@ -91,7 +107,7 @@ extension APIService {
             info ["lastName"] = lastName
         }
         return registerRequest(username: username, password: password, info: info).flatMap { _ in
-            return self.updateCurrentProfileStatus()
+            return self.updateCurrentProfileStatus(newPasword: password)
         }
     }
     
@@ -118,10 +134,13 @@ extension APIService {
         }
     }
     
-    private func updateCurrentProfileStatus() -> Future<UserProfile, NSError> {
+    private func updateCurrentProfileStatus(newPasword: String? = nil) -> Future<UserProfile, NSError> {
         return getMyProfile().andThen { result in
             if let profile = result.value {
                 self.sessionController.updateCurrentStatus(profile)
+                if let newPassword = newPasword {
+                    self.sessionController.updatePassword(newPassword)
+                }
                 self.sendUserDidChangeNotification(profile)
             }
         }
