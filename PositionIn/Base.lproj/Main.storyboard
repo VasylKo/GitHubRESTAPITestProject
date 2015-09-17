@@ -31,6 +31,7 @@
                             <real key="value" value="270"/>
                         </userDefinedRuntimeAttribute>
                         <userDefinedRuntimeAttribute type="string" keyPath="drawerSegueIdentifier" value="DrawerSegue"/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="mainSegueIdentifier" value="ShowSplash"/>
                     </userDefinedRuntimeAttributes>
                     <connections>
                         <segue destination="BFL-Ne-hYV" kind="custom" identifier="DrawerSegue" customClass="KYEmbedDrawerControllerSegue" customModule="KYDrawerController" id="57u-Oa-0ja"/>
@@ -42,6 +43,7 @@
                         <segue destination="ZKO-MO-mOX" kind="custom" identifier="ShowMyProfile" customClass="KYEmbedMainControllerSegue" customModule="KYDrawerController" id="7U6-ac-Hmp"/>
                         <segue destination="xiK-gL-Br7" kind="custom" identifier="ShowPeople" customClass="KYEmbedMainControllerSegue" customModule="KYDrawerController" id="A4b-9B-OIj"/>
                         <segue destination="1fT-LL-K0F" kind="custom" identifier="ShowWallet" customClass="KYEmbedMainControllerSegue" customModule="KYDrawerController" id="29X-rr-VGm"/>
+                        <segue destination="cty-Pr-cFc" kind="custom" identifier="ShowSplash" customClass="KYEmbedMainControllerSegue" customModule="KYDrawerController" id="W2z-TX-m8Z"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LQ4-lF-MRq" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -437,37 +439,37 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Subtotal" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OMe-pX-vyT">
-                                                    <rect key="frame" x="10" y="5" width="62" height="20"/>
+                                                    <rect key="frame" x="10" y="5" width="61.5" height="19.5"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                     <color key="textColor" red="0.61176470589999998" green="0.61176470589999998" blue="0.61176470589999998" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tax" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zKC-88-j6N">
-                                                    <rect key="frame" x="10" y="30" width="25" height="20"/>
+                                                    <rect key="frame" x="10" y="29.5" width="25" height="19.5"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                     <color key="textColor" red="0.61176470589999998" green="0.61176470589999998" blue="0.61176470589999998" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Fee" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k1j-rJ-qPa">
-                                                    <rect key="frame" x="10" y="55" width="27" height="20"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fee" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k1j-rJ-qPa">
+                                                    <rect key="frame" x="10" y="54" width="27" height="19.5"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                     <color key="textColor" red="0.61176470589999998" green="0.61176470589999998" blue="0.61176470589999998" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$99.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="81O-19-HiU">
-                                                    <rect key="frame" x="545" y="5" width="50" height="20"/>
+                                                    <rect key="frame" x="545" y="5" width="50" height="19.5"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                     <color key="textColor" red="0.61176470589999998" green="0.61176470589999998" blue="0.61176470589999998" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$2.74" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aFM-fp-bxL">
-                                                    <rect key="frame" x="554" y="30" width="41" height="20"/>
+                                                    <rect key="frame" x="554" y="29.5" width="41" height="19.5"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                     <color key="textColor" red="0.61176470589999998" green="0.61176470589999998" blue="0.61176470589999998" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="$0.40" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1xi-IL-uMK">
-                                                    <rect key="frame" x="554" y="55" width="41" height="20"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$0.40" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1xi-IL-uMK">
+                                                    <rect key="frame" x="554" y="54" width="41" height="19.5"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                     <color key="textColor" red="0.61176470589999998" green="0.61176470589999998" blue="0.61176470589999998" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -1010,6 +1012,35 @@
             </objects>
             <point key="canvasLocation" x="-2564" y="-1594"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="jHI-at-ZQD">
+            <objects>
+                <viewController storyboardIdentifier="SplashViewController" id="cty-Pr-cFc" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="rtx-Tx-ybj"/>
+                        <viewControllerLayoutGuide type="bottom" id="JeA-3D-Gt2"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="5IQ-Q9-xWk">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SplashImage" translatesAutoresizingMaskIntoConstraints="NO" id="xVM-zu-7o0">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="xVM-zu-7o0" firstAttribute="top" secondItem="5IQ-Q9-xWk" secondAttribute="top" id="8Xo-Xt-1LM"/>
+                            <constraint firstAttribute="trailing" secondItem="xVM-zu-7o0" secondAttribute="trailing" id="AVM-3a-2nG"/>
+                            <constraint firstItem="JeA-3D-Gt2" firstAttribute="top" secondItem="xVM-zu-7o0" secondAttribute="bottom" id="XFB-pt-IeI"/>
+                            <constraint firstItem="xVM-zu-7o0" firstAttribute="leading" secondItem="5IQ-Q9-xWk" secondAttribute="leading" id="qXG-wL-a9R"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="I0P-Wh-YiQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1618" y="-2294"/>
+        </scene>
         <!--Wallet-->
         <scene sceneID="81D-an-flJ">
             <objects>
@@ -1022,6 +1053,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="SplashImage" width="375" height="667"/>
         <image name="communityAddNewCommunity" width="22" height="22"/>
         <image name="productClockAvailability" width="22" height="22"/>
     </resources>
