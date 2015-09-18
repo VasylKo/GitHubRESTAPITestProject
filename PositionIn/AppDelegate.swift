@@ -106,9 +106,8 @@ extension AppDelegate {
             let chatCredentials = self.api.getChatCredentials() {
                 chatClient.auth(chatCredentials.jid, password: chatCredentials.password).future().onSuccess { [unowned self] in
                     Log.info?.message("XMPP authorized")
-                    self.chatClient.sendTestMessage()
-                    }.onFailure { error in
-                        Log.error?.value(error)
+                }.onFailure { error in
+                    Log.error?.value(error)
                 }
         }
     }
