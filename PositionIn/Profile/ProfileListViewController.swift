@@ -51,6 +51,10 @@ class ProfileListViewController: BesideMenuViewController, BrowseActionProducer,
                 return (.None, .None)
             }
         }()
+        
+        let parentController = self.parentViewController as? UserProfileViewController
+        parentController!.phoneNumber = profile.phone
+        
         let actionDelegate = self.parentViewController as? UserProfileActionConsumer
         var infoSection: [ProfileCellModel] = [
             ProfileInfoCellModel(name: profile.displayName, avatar: profile.avatar, background: profile.backgroundImage, leftAction: leftAction, rightAction: rightAction, actionDelegate: actionDelegate),
