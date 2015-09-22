@@ -37,11 +37,7 @@ final class AddPostViewController: BaseAddItemViewController {
         // Description section
         let descriptionSection = XLFormSectionDescriptor.formSection()
         form.addFormSection(descriptionSection)
-        // Title
-        let titleRow = XLFormRowDescriptor(tag: Tags.Title.rawValue, rowType: XLFormRowDescriptorTypeText)
-        titleRow.cellConfigAtConfigure["textField.placeholder"] = NSLocalizedString("Title", comment: "New promotion: title")
-        titleRow.required = true
-        descriptionSection.addFormRow(titleRow)
+
         // Message
         let messageRow = XLFormRowDescriptor(tag: Tags.Message.rawValue, rowType:XLFormRowDescriptorTypeTextView)
         messageRow.cellConfigAtConfigure["textView.placeholder"] = NSLocalizedString("Message", comment: "New post: message")
@@ -54,10 +50,6 @@ final class AddPostViewController: BaseAddItemViewController {
         // Community
         let communityRow = communityRowDescriptor(Tags.Community.rawValue)
         infoSection.addFormRow(communityRow)
-        // Location
-        let locationRow = locationRowDescriptor(Tags.Location.rawValue)
-        infoSection.addFormRow(locationRow)
-
         
         //Photo section
         let photoSection = XLFormSectionDescriptor.formSection()
