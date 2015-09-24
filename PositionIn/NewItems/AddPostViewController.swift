@@ -37,11 +37,7 @@ final class AddPostViewController: BaseAddItemViewController {
         // Description section
         let descriptionSection = XLFormSectionDescriptor.formSection()
         form.addFormSection(descriptionSection)
-        // Title
-        let titleRow = XLFormRowDescriptor(tag: Tags.Title.rawValue, rowType: XLFormRowDescriptorTypeText)
-        titleRow.cellConfigAtConfigure["textField.placeholder"] = NSLocalizedString("Title", comment: "New promotion: title")
-        titleRow.required = true
-        descriptionSection.addFormRow(titleRow)
+
         // Message
         let messageRow = XLFormRowDescriptor(tag: Tags.Message.rawValue, rowType:XLFormRowDescriptorTypeTextView)
         messageRow.cellConfigAtConfigure["textView.placeholder"] = NSLocalizedString("Message", comment: "New post: message")
@@ -54,10 +50,6 @@ final class AddPostViewController: BaseAddItemViewController {
         // Community
         let communityRow = communityRowDescriptor(Tags.Community.rawValue)
         infoSection.addFormRow(communityRow)
-        // Location
-        let locationRow = locationRowDescriptor(Tags.Location.rawValue)
-        infoSection.addFormRow(locationRow)
-
         
         //Photo section
         let photoSection = XLFormSectionDescriptor.formSection()
@@ -85,12 +77,12 @@ final class AddPostViewController: BaseAddItemViewController {
         
         let community =  communityValue(values[Tags.Community.rawValue])
         
-        if  let imageUpload = uploadAssets(values[Tags.Photo.rawValue]),
-            let getLocation = locationFromValue(values[Tags.Location.rawValue]) {
+        if  let imageUpload = uploadAssets(values[Tags.Photo.rawValue]) {
+            let getLocation = locationController().getCurrentLocation()
                 view.userInteractionEnabled = false
                 getLocation.zip(imageUpload).flatMap { (location: Location, urls: [NSURL]) -> Future<Post, NSError> in
                     var post = Post()
-                    post.name = values[Tags.Title.rawValue] as? String
+                    post.name = values[Tags.Message.rawValue] as? String
                     post.text = values[Tags.Message.rawValue] as? String
                     post.location = location
                     post.photos = urls.map { url in
@@ -112,7 +104,6 @@ final class AddPostViewController: BaseAddItemViewController {
                 }.onComplete { [weak self] result in
                     self?.view.userInteractionEnabled = true
                 }
-                
         }
     }
     

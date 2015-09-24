@@ -38,6 +38,7 @@ final class UserProfileViewController: BrowseModeTabbarViewController {
     }
     
     var objectId: CRUDObjectId = api().currentUserId() ?? CRUDObjectInvalidId
+    var phoneNumber: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -111,11 +112,16 @@ extension UserProfileViewController: UserProfileActionConsumer {
         case .Chat:
             let chatController = ConversationViewController.conversationController(interlocutor: objectId)
             navigationController?.pushViewController(chatController, animated: true)
+        case .Call:
+            if let phone = phoneNumber,
+                let phoneNumberURL = NSURL(string: "tel://" + phone)
+                where UIApplication.sharedApplication().canOpenURL(phoneNumberURL) == true {
+                    UIApplication.sharedApplication().openURL(phoneNumberURL)
+            }
         case .None:
             fallthrough
         default:
             Log.warning?.message("Unhandled action \(action)")
         }
     }
-
 }
