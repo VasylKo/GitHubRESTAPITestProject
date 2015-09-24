@@ -77,12 +77,12 @@ final class AddPostViewController: BaseAddItemViewController {
         
         let community =  communityValue(values[Tags.Community.rawValue])
         
-        if  let imageUpload = uploadAssets(values[Tags.Photo.rawValue]),
-            let getLocation = locationFromValue(values[Tags.Location.rawValue]) {
+        if  let imageUpload = uploadAssets(values[Tags.Photo.rawValue]) {
+            let getLocation = locationController().getCurrentLocation()
                 view.userInteractionEnabled = false
                 getLocation.zip(imageUpload).flatMap { (location: Location, urls: [NSURL]) -> Future<Post, NSError> in
                     var post = Post()
-                    post.name = values[Tags.Title.rawValue] as? String
+                    post.name = values[Tags.Message.rawValue] as? String
                     post.text = values[Tags.Message.rawValue] as? String
                     post.location = location
                     post.photos = urls.map { url in
@@ -104,7 +104,6 @@ final class AddPostViewController: BaseAddItemViewController {
                 }.onComplete { [weak self] result in
                     self?.view.userInteractionEnabled = true
                 }
-                
         }
     }
     

@@ -53,7 +53,7 @@ class ProfileListViewController: BesideMenuViewController, BrowseActionProducer,
         }()
         
         let parentController = self.parentViewController as? UserProfileViewController
-        parentController!.phoneNumber = profile.phone
+        parentController?.phoneNumber = profile.phone
         
         let actionDelegate = self.parentViewController as? UserProfileActionConsumer
         var infoSection: [ProfileCellModel] = [
