@@ -211,6 +211,13 @@ struct APIService {
         return getObjectsCollection(endpoint, params: params)
     }
     
+    func getUsers(userIds: [CRUDObjectId]) -> Future<CollectionResponse<UserInfo>,NSError> {
+        let endpoint = UserProfile.endpoint()
+        let params = APIServiceQuery()
+        params.append("ids", value: userIds)
+        return getObjectsCollection(endpoint, params: params.query)
+    }
+    
     func getMySubscriptions() -> Future<CollectionResponse<UserInfo>,NSError> {
         return currentUserId().flatMap { userId in
             return self.getUserSubscriptions(userId)
@@ -481,6 +488,10 @@ extension APIService {
             for (key,value) in newItems.query {
                 values.updateValue(value, forKey:key)
             }
+        }
+        
+        func append(key: String, value: AnyObject) {
+            values.updateValue(value, forKey:key)
         }
         
         var query: [String : AnyObject]  {
