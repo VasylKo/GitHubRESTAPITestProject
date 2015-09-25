@@ -13,7 +13,13 @@ protocol UserProfileActionConsumer: class {
     func shouldExecuteAction(action: UserProfileViewController.ProfileAction)
 }
 
-final class UserProfileViewController: BrowseModeTabbarViewController {
+final class UserProfileViewController: BesideMenuViewController, BrowseActionProducer, BrowseModeDisplay, UISearchBarDelegate {
+    
+    weak var actionConsumer: BrowseActionConsumer?
+    
+    enum Sections: Int {
+        case Info, Feed
+    }
     
     enum ProfileAction: Int, Printable {
         case None
@@ -34,61 +40,148 @@ final class UserProfileViewController: BrowseModeTabbarViewController {
                 return "Unfollow"
             }
         }
-
     }
     
     var objectId: CRUDObjectId = api().currentUserId() ?? CRUDObjectInvalidId
-    var phoneNumber: String?
+    
+    var profile: UserProfile = UserProfile(objectId: CRUDObjectInvalidId) {
+        didSet {
+            if isViewLoaded() {
+                didReceiveProfile(profile)
+            }
+        }
+    }
+
+    static let SubscriptionDidChangeNotification = "SubscriptionDidChangeNotification"
+    
+    var browseMode: BrowseModeTabbarViewController.BrowseMode = .ForYou
+    
+    //MARK: - Reload data -
+    
+    func reloadData() {
+        api().getUserProfile(objectId).zip(api().getSubscriptionStateForUser(objectId)).onSuccess {
+            [weak self] profile, state in
+            self?.didReceiveProfile(profile, state: state)
+        }
+    }
+    
+    private func didReceiveProfile(profile: UserProfile, state: UserProfile.SubscriptionState = .SameUser) {
+        let isCurrentUser = api().isCurrentUser(objectId)
+        let isUserAuthorized = api().isUserAuthorized()
+        let (leftAction, rightAction): (UserProfileViewController.ProfileAction, UserProfileViewController.ProfileAction) =
+        (.None, .None)
+        
+        setNavigationBarButtonItem(isCurrentUser)
+        
+        var infoSection: [ProfileCellModel] = [
+            ProfileInfoCellModel(name: profile.displayName, avatar: profile.avatar, background: profile.backgroundImage, leftAction: leftAction, rightAction: rightAction, actionDelegate: self),
+            TableViewCellTextModel(title: profile.userDescription ?? ""),
+            ProfileStatsCellModel(countPosts: profile.countPosts, countFollowers: profile.countFollowers, countFollowing: profile.countFollowing),
+        ]
+        switch state {
+        case .SameUser:
+            break
+        default:
+            infoSection.append(ProfileFollowCellModel(state: state, actionDelegate: self))
+            break
+        }
+        dataSource.items[Sections.Info.rawValue] = infoSection
+        
+        var feedModel = BrowseListCellModel(objectId: profile.objectId, actionConsumer: self, browseMode: browseMode)
+        feedModel.excludeCommunityItems = true
+        dataSource.items[Sections.Feed.rawValue] = [ feedModel ]
+        
+        tableView.reloadData()
+        actionConsumer?.browseControllerDidChangeContent(self)
+    }
+    
+    func setNavigationBarButtonItem(isCurrentUser: Bool) {
+        if (isCurrentUser) {
+            let profileEditButton = UIButton()
+            profileEditButton.tintColor = UIColor.whiteColor()
+            profileEditButton.setImage(UIImage(named: "profileEdit")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate), forState: UIControlState.Normal)
+            profileEditButton.frame = CGRectMake(0, 0, 40, 40)
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: profileEditButton)
+            profileEditButton.tag = ProfileAction.Edit.rawValue
+            profileEditButton.addTarget(self, action: "handleNavigationBarButtonItemTap:",
+                forControlEvents: UIControlEvents.TouchUpInside)
+        }
+        else {
+            let chatButton = UIButton()
+            chatButton.tintColor = UIColor.whiteColor()
+            chatButton.setImage(UIImage(named: "profileChat")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate), forState: UIControlState.Normal)
+            chatButton.frame = CGRectMake(0, 0, 40, 40)
+            chatButton.tag = ProfileAction.Chat.rawValue
+            chatButton.addTarget(self, action: "handleNavigationBarButtonItemTap:",
+                forControlEvents: UIControlEvents.TouchUpInside)
+            
+            let callButton = UIButton()
+            callButton.tintColor = UIColor.whiteColor()
+            callButton.setImage(UIImage(named: "profileCall")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate), forState: UIControlState.Normal)
+            callButton.frame = CGRectMake(40, 0, 40, 40)
+            callButton.tag = ProfileAction.Call.rawValue
+            callButton.addTarget(self, action: "handleNavigationBarButtonItemTap:",
+                forControlEvents: UIControlEvents.TouchUpInside)
+            
+            let containerView = UIView()
+            containerView.frame = CGRectMake(0, 0, 80, 40)
+            containerView.addSubview(callButton)
+            containerView.addSubview(chatButton)
+            
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: containerView)
+        }
+    }
+    
+    @IBAction func handleNavigationBarButtonItemTap(sender: UIButton) {
+        if let action = UserProfileViewController.ProfileAction(rawValue: sender.tag) where action != .None {
+            self.shouldExecuteAction(action)
+        }
+    }
+    
+    //MARK: - Table -
+    @IBOutlet private weak var tableView: TableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        displayMode = .List
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
+        navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationItem.titleView = searchbar
+        dataSource.configureTable(tableView)
+        didReceiveProfile(profile)
+        reloadData()
     }
     
     @IBAction func prepareForUnwind(segue: UIStoryboardSegue) {
         
     }
     
-    override var addMenuItems: [AddMenuView.MenuItem] {
-        let pushAndSubscribe: (UIViewController) -> () = { [weak self] controller in
-            self?.navigationController?.pushViewController(controller, animated: true)
-            self?.subscribeForContentUpdates(controller)
-        }
-        return [
-            AddMenuView.MenuItem.productItemWithAction { pushAndSubscribe(Storyboards.NewItems.instantiateAddProductViewController()) },
-            AddMenuView.MenuItem.eventItemWithAction { pushAndSubscribe(Storyboards.NewItems.instantiateAddEventViewController()) },
-            AddMenuView.MenuItem.promotionItemWithAction { pushAndSubscribe(Storyboards.NewItems.instantiateAddPromotionViewController()) },
-            AddMenuView.MenuItem.postItemWithAction { pushAndSubscribe(Storyboards.NewItems.instantiateAddPostViewController()) },
-            AddMenuView.MenuItem.inviteItemWithAction { [weak self] in
-                Log.error?.message("Should call invite")
-            },
-        ]
-    }
+    lazy var dataSource: ProfileDataSource = { [unowned self] in
+        let dataSource = ProfileDataSource()
+        dataSource.parentViewController = self
+        return dataSource
+        }()
     
-    override func viewControllerForMode(mode: DisplayModeViewController.DisplayMode) -> UIViewController {
-        switch self.displayMode {
-        case .Map:
-            let controller = Storyboards.Main.instantiateBrowseMapViewController()
-            var filter = controller.filter
-            filter.users = [ objectId ]
-            controller.filter = filter
-            return controller
-        case .List:
-            let profile = UserProfile(objectId: objectId)
-            let controller = Storyboards.Main.instantiateProfileListViewController()
-            controller.profile = profile
-            return controller
-        }
-    }
-    
-    static let SubscriptionDidChangeNotification = "SubscriptionDidChangeNotification"
-    
+
     private func sendSubscriptionUpdateNotification(aUserInfo: [NSObject : AnyObject]? = nil) {
         NSNotificationCenter.defaultCenter().postNotificationName(
             UserProfileViewController.SubscriptionDidChangeNotification,
             object: self,
             userInfo: nil
         )
+    }
+    
+    //MARK: - Search -
+    
+    private lazy var searchbar: SearchBar = { [unowned self] in
+        let searchBar = SearchBar()
+        searchBar.delegate = self
+        return searchBar
+        }()
+    
+    func searchBarShouldBeginEditing(searchBar: UISearchBar) -> Bool {
+        searchBar.resignFirstResponder()
+        SearchViewController.present(searchbar, presenter: self)
+        return false
     }
 }
 
@@ -98,22 +191,21 @@ extension UserProfileViewController: UserProfileActionConsumer {
         case .Edit:
             let updateController = Storyboards.NewItems.instantiateEditProfileViewController()
             subscribeForContentUpdates(updateController)
-            navigationController?.pushViewController(updateController, animated: true)
+            let navigationController = UINavigationController(rootViewController: updateController)
+            presentViewController(navigationController, animated: true, completion: nil)
         case .Follow:
             api().followUser(objectId).onSuccess { [weak self] in
-                self?.displayMode = .List
                 self?.sendSubscriptionUpdateNotification(aUserInfo: nil)
             }
         case .UnFollow:
             api().unFollowUser(objectId).onSuccess { [weak self] in
-                self?.displayMode = .List
                 self?.sendSubscriptionUpdateNotification(aUserInfo: nil)
             }
         case .Chat:
             let chatController = ConversationViewController.conversationController(interlocutor: objectId)
             navigationController?.pushViewController(chatController, animated: true)
         case .Call:
-            if let phone = phoneNumber,
+            if let phone = profile.phone,
                 let phoneNumberURL = NSURL(string: "tel://" + phone)
                 where UIApplication.sharedApplication().canOpenURL(phoneNumberURL) == true {
                     UIApplication.sharedApplication().openURL(phoneNumberURL)
@@ -122,6 +214,107 @@ extension UserProfileViewController: UserProfileActionConsumer {
             fallthrough
         default:
             Log.warning?.message("Unhandled action \(action)")
+        }
+    }
+}
+
+extension UserProfileViewController: BrowseActionConsumer {
+    
+    func browseController(controller: BrowseActionProducer, didSelectItem objectId: CRUDObjectId, type itemType: FeedItem.ItemType, data: Any?) {
+        switch itemType {
+        case .Item:
+            let controller =  Storyboards.Main.instantiateProductDetailsViewControllerId()
+            controller.objectId = objectId
+            controller.author = data as? ObjectInfo
+            navigationController?.pushViewController(controller, animated: true)
+        case .Event:
+            let controller =  Storyboards.Main.instantiateEventDetailsViewControllerId()
+            controller.objectId = objectId
+            navigationController?.pushViewController(controller, animated: true)
+        case .Promotion:
+            let controller =  Storyboards.Main.instantiatePromotionDetailsViewControllerId()
+            controller.objectId = objectId
+            navigationController?.pushViewController(controller, animated: true)
+        case .Post:
+            let controller = Storyboards.Main.instantiatePostViewController()
+            controller.objectId = objectId
+            navigationController?.pushViewController(controller, animated: true)
+        default:
+            Log.debug?.message("Did select \(itemType)<\(objectId)>")
+        }
+    }
+    
+    func browseControllerDidChangeContent(controller: BrowseActionProducer) {
+        UIView.setAnimationsEnabled(false)
+        tableView.beginUpdates()
+        tableView.endUpdates()
+        UIView.setAnimationsEnabled(true)
+        actionConsumer?.browseControllerDidChangeContent(controller)
+    }
+}
+
+
+protocol ProfileCellModel: TableViewCellModel {
+    
+}
+
+extension TableViewCellTextModel: ProfileCellModel {
+    
+}
+
+extension UserProfileViewController {
+    final class ProfileDataSource: TableViewDataSource {
+        var items: [[ProfileCellModel]] = [[],[]]
+        
+        override func configureTable(tableView: UITableView) {
+            tableView.estimatedRowHeight = 80.0
+            super.configureTable(tableView)
+        }
+        
+        func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+            return count(items)
+        }
+        
+        @objc override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+            return count(items[section])
+        }
+        
+        @objc override func tableView(tableView: UITableView, reuseIdentifierForIndexPath indexPath: NSIndexPath) -> String {
+            let model = self.tableView(tableView, modelForIndexPath: indexPath)
+            switch model {
+            case let model as ProfileInfoCellModel:
+                return ProfileInfoCell.reuseId()
+            case let model as ProfileStatsCellModel:
+                return ProfileStatsCell.reuseId()
+            case let model as BrowseListCellModel:
+                return BrowseListTableViewCell.reuseId()
+            case let model as TableViewCellTextModel:
+                return DescriptionTableViewCell.reuseId()
+            case let model as ProfileFollowCellModel:
+                return ProfileFollowCell.reuseId()
+            default:
+                return super.tableView(tableView, reuseIdentifierForIndexPath: indexPath)
+            }
+        }
+        
+        override func tableView(tableView: UITableView, modelForIndexPath indexPath: NSIndexPath) -> TableViewCellModel {
+            return items[indexPath.section][indexPath.row]
+        }
+        
+        override func nibCellsId() -> [String] {
+            return [ProfileInfoCell.reuseId(), ProfileStatsCell.reuseId(), BrowseListTableViewCell.reuseId(), DescriptionTableViewCell.reuseId(), ProfileFollowCell.reuseId()]
+        }
+        
+        func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+            tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        }
+        
+        @objc override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+            if let model = self.tableView(tableView, modelForIndexPath: indexPath) as? TableViewCellTextModel
+                where count(model.title) == 0 {
+                    return 0.0
+            }
+            return super.tableView(tableView, heightForRowAtIndexPath: indexPath)
         }
     }
 }
