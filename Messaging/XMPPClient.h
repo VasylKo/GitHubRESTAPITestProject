@@ -27,4 +27,5 @@
 
 - (void)sendTestMessage;
 @property (nonatomic, readonly, assign) BOOL isConnected;
+- (void)disconnect;
 @end

@@ -49,8 +49,6 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
 @property (nonatomic, strong) XMPPReconnect *xmppReconect;
 @property (nonatomic, strong) XMPPRoster *xmppRoster;
 @property (nonatomic, strong) XMPPPing *xmppPing;
-
-@property (nonatomic, readwrite, assign) BOOL isConnected;
 @end
 
 
@@ -77,6 +75,14 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
 
 - (void)dealloc {
     [self teardownStream];
+}
+
+- (void)disconnect {
+    [self teardownStream];
+}
+
+- (BOOL)isConnected {
+    return self.xmppStream.isConnected;
 }
 
 #pragma mark - Stream LifeCycle -

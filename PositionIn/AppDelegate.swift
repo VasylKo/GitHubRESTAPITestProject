@@ -42,8 +42,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             ]
         let dataProvider = PosInCore.NetworkDataProvider(configuration: urlSessionConfig, trustPolicies: trustPolicies)
         api = APIService(url: baseURL, dataProvider: dataProvider)
-        let chatConfig = XMPPClientConfiguration(with: appConfig.xmppHostname, port: appConfig.xmppPort)
-        chatClient = XMPPClient(configuration: chatConfig)
+        chatClient = AppDelegate.chatClientInstance()
         locationController = LocationController()
         super.init()
         
@@ -100,20 +99,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 }
 
 extension AppDelegate {
+    
+    private class func chatClientInstance() -> XMPPClient {
+        let appConfig = AppConfiguration()
+        let chatConfig = XMPPClientConfiguration(with: appConfig.xmppHostname, port: appConfig.xmppPort)
+        return XMPPClient(configuration: chatConfig)
+    }
+    
     func currentUserDidChange(profile: UserProfile?) {
-        //TODO: logout
         if  let user = profile,
             let chatCredentials = self.api.getChatCredentials() {
+                chatClient = AppDelegate.chatClientInstance()
                 chatClient.auth(chatCredentials.jid, password: chatCredentials.password).future().onSuccess { [unowned self] in
                     Log.info?.message("XMPP authorized")
                 }.onFailure { error in
                     Log.error?.value(error)
                 }
+        } else {
+            chatClient.disconnect()
         }
     }
-}
-
-extension AppDelegate {
+    
     func setupMaps() {
         GMSServices.provideAPIKey(AppConfiguration().googleMapsKey)
     }
