@@ -286,6 +286,10 @@
 		E6AAC2AB1BB4522300919469 /* XMPPRoomMessageMemoryStorageObject.m in Sources */ = {isa = PBXBuildFile; fileRef = E689EFB11B6A8A1000597587 /* XMPPRoomMessageMemoryStorageObject.m */; settings = {COMPILER_FLAGS = "-w"; }; };
 		E6AAC2AC1BB4522300919469 /* XMPPRoomOccupantMemoryStorageObject.h in Headers */ = {isa = PBXBuildFile; fileRef = E689EFB21B6A8A1000597587 /* XMPPRoomOccupantMemoryStorageObject.h */; };
 		E6AAC2AD1BB4522300919469 /* XMPPRoomOccupantMemoryStorageObject.m in Sources */ = {isa = PBXBuildFile; fileRef = E689EFB31B6A8A1000597587 /* XMPPRoomOccupantMemoryStorageObject.m */; settings = {COMPILER_FLAGS = "-w"; }; };
+		E6AAC2AE1BB521D000919469 /* XMPPAutoPing.h in Headers */ = {isa = PBXBuildFile; fileRef = E689F0331B6A8A1000597587 /* XMPPAutoPing.h */; };
+		E6AAC2AF1BB521D000919469 /* XMPPAutoPing.m in Sources */ = {isa = PBXBuildFile; fileRef = E689F0341B6A8A1000597587 /* XMPPAutoPing.m */; settings = {COMPILER_FLAGS = "-w"; }; };
+		E6AAC2B01BB521D000919469 /* XMPPPing.h in Headers */ = {isa = PBXBuildFile; fileRef = E689F0351B6A8A1000597587 /* XMPPPing.h */; };
+		E6AAC2B11BB521D000919469 /* XMPPPing.m in Sources */ = {isa = PBXBuildFile; fileRef = E689F0361B6A8A1000597587 /* XMPPPing.m */; settings = {COMPILER_FLAGS = "-w"; }; };
 		E6B3C32F1B62581200EA613A /* CleanroomASL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6B3C32D1B62581200EA613A /* CleanroomASL.framework */; };
 		E6B3C3301B62581200EA613A /* CleanroomASL.framework in Embed Core Framework */ = {isa = PBXBuildFile; fileRef = E6B3C32D1B62581200EA613A /* CleanroomASL.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E6B3C3311B62581200EA613A /* CleanroomLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6B3C32E1B62581200EA613A /* CleanroomLogger.framework */; };
@@ -2605,6 +2609,7 @@
 				E6681A241B676345003096D6 /* XMPPLogFormatter.h in Headers */,
 				E6AAC2A11BB4521600919469 /* XMPPMUC.h in Headers */,
 				E689EF371B6A89D000597587 /* DDASLLogger.h in Headers */,
+				E6AAC2AE1BB521D000919469 /* XMPPAutoPing.h in Headers */,
 				E689EF1F1B6A89D000597587 /* XMPPParser.h in Headers */,
 				E689F0681B6A8F3600597587 /* XMPPUser.h in Headers */,
 				E689EF2B1B6A89D000597587 /* XMPPIDTracker.h in Headers */,
@@ -2623,6 +2628,7 @@
 				E689EF541B6A89D000597587 /* stringprep.h in Headers */,
 				E689EF3B1B6A89D000597587 /* DDLog+LOGV.h in Headers */,
 				E6AAC2A61BB4521600919469 /* XMPPRoomOccupant.h in Headers */,
+				E6AAC2B01BB521D000919469 /* XMPPPing.h in Headers */,
 				E689EF4C1B6A89D000597587 /* DDXMLElement.h in Headers */,
 				E689EF161B6A89D000597587 /* XMPPIQ.h in Headers */,
 				E689EF0E1B6A89D000597587 /* NSXMLElement+XMPP.h in Headers */,
@@ -3122,6 +3128,7 @@
 				E689EF4D1B6A89D000597587 /* DDXMLElement.m in Sources */,
 				E689EF261B6A89D000597587 /* DDList.m in Sources */,
 				E6846DBF1B6D9B4700009411 /* XMPPDateTimeProfiles.m in Sources */,
+				E6AAC2AF1BB521D000919469 /* XMPPAutoPing.m in Sources */,
 				E6846DB91B6D9B1400009411 /* XMPPIQ+XEP_0060.m in Sources */,
 				E689EF011B6A89D000597587 /* XMPPPlainAuthentication.m in Sources */,
 				E689EF431B6A89D000597587 /* DDDispatchQueueLogFormatter.m in Sources */,
@@ -3161,6 +3168,7 @@
 				E6846DC31B6D9B9600009411 /* NSXMLElement+XEP_0203.m in Sources */,
 				E689EEFB1B6A89D000597587 /* XMPPDeprecatedDigestAuthentication.m in Sources */,
 				E689EF481B6A89D000597587 /* NSString+DDXML.m in Sources */,
+				E6AAC2B11BB521D000919469 /* XMPPPing.m in Sources */,
 				E689EF1C1B6A89D000597587 /* XMPPMessage.m in Sources */,
 				E689EF301B6A89D000597587 /* XMPPStringPrep.m in Sources */,
 				E689EF191B6A89D000597587 /* XMPPJID.m in Sources */,

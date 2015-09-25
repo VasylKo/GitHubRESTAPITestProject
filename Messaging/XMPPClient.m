@@ -48,6 +48,7 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
 @property (nonatomic, strong) XMPPDelegate *xmppDelegate;
 @property (nonatomic, strong) XMPPReconnect *xmppReconect;
 @property (nonatomic, strong) XMPPRoster *xmppRoster;
+@property (nonatomic, strong) XMPPPing *xmppPing;
 
 @property (nonatomic, readwrite, assign) BOOL isConnected;
 @end
@@ -105,6 +106,10 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
     self.xmppStream.hostName = configuration.hostName;
     self.xmppStream.hostPort = configuration.port;
     
+    self.xmppPing = [XMPPPing new];
+    self.xmppPing.respondsToQueries = YES;
+    [self.xmppPing activate:self.xmppStream];
+    
     self.xmppReconect = [XMPPReconnect new];
     [self.xmppReconect activate:self.xmppStream];
     [self.xmppReconect addDelegate:self.xmppDelegate delegateQueue:delegateQueue];
@@ -116,14 +121,21 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
 
 
 - (void)teardownStream {
+    
+    [self.xmppPing deactivate];
 
     [self.xmppReconect removeDelegate:self];
     [self.xmppReconect deactivate];
     
+    [self.xmppRoster removeDelegate:self.xmppDelegate];
+    [self.xmppRoster deactivate];
+    
     [self.xmppStream removeDelegate:self.xmppDelegate];
     [self.xmppStream disconnect];
     
+    self.xmppPing = nil;
     self.xmppReconect = nil;
+    self.xmppRoster = nil;
     self.xmppStream = nil;
 }
 
