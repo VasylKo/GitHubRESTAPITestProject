@@ -11,13 +11,19 @@ import Foundation
 final class Conversation {
     
     convenience init(userId: CRUDObjectId) {
-        self.init(interlocutors: [userId])
+        self.init(room: userId, interlocutors: [userId])
     }
     
-    init(interlocutors: [CRUDObjectId]) {
+    init(room: CRUDObjectId, interlocutors: [CRUDObjectId]) {
+        roomId = room
         recipients = interlocutors
     }
     
     let currentUserId: CRUDObjectId = api().currentUserId() ?? CRUDObjectInvalidId
-    private(set) var recipients: [CRUDObjectId]
+    let roomId: CRUDObjectId
+    var participants: [CRUDObjectId] {
+        return recipients + [currentUserId]
+    }
+    
+    private var recipients: [CRUDObjectId]
 }
