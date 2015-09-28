@@ -43,6 +43,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let chatConfig = XMPPClientConfiguration.defaultConfiguration()
         chatClient = XMPPClient(configuration: chatConfig)
         locationController = LocationController()
+        
+        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.bt_colorWithBytesR(133, g: 186, b: 255)]
+        
         super.init()
     }
 
