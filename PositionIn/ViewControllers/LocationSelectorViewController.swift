@@ -88,10 +88,7 @@ class CLLocationValueTrasformer : NSValueTransformer {
     override func transformedValue(value: AnyObject?) -> AnyObject? {
         if let valueData: AnyObject = value {
             let location = valueData as! CLLocation
-            let coordinate = CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude)
-            locationController().reverseGeocodeCoordinate(coordinate).onSuccess {location in
-                return String(format: "%@, %@", location.city!, location.name!)
-            }
+            return String(format: "%0.4f, %0.4f", location.coordinate.latitude, location.coordinate.longitude)
         }
         return nil
     }

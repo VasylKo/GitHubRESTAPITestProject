@@ -13,7 +13,7 @@ protocol UserProfileActionConsumer: class {
     func shouldExecuteAction(action: UserProfileViewController.ProfileAction)
 }
 
-final class UserProfileViewController: BesideMenuViewController, BrowseActionProducer, BrowseModeDisplay, UISearchBarDelegate {
+final class UserProfileViewController: BesideMenuViewController, BrowseActionProducer, UISearchBarDelegate {
     
     weak var actionConsumer: BrowseActionConsumer?
     
@@ -54,8 +54,6 @@ final class UserProfileViewController: BesideMenuViewController, BrowseActionPro
 
     static let SubscriptionDidChangeNotification = "SubscriptionDidChangeNotification"
     
-    var browseMode: BrowseModeTabbarViewController.BrowseMode = .ForYou
-    
     //MARK: - Reload data -
     
     func reloadData() {
@@ -87,7 +85,7 @@ final class UserProfileViewController: BesideMenuViewController, BrowseActionPro
         }
         dataSource.items[Sections.Info.rawValue] = infoSection
         
-        var feedModel = BrowseListCellModel(objectId: profile.objectId, actionConsumer: self, browseMode: browseMode)
+        var feedModel = BrowseListCellModel(objectId: profile.objectId, actionConsumer: self, browseMode: .New)
         feedModel.excludeCommunityItems = true
         dataSource.items[Sections.Feed.rawValue] = [ feedModel ]
         
