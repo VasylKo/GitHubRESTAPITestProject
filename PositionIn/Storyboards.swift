@@ -72,10 +72,6 @@ struct Storyboards {
             return self.storyboard.instantiateViewControllerWithIdentifier("UserProfileViewController") as! UserProfileViewController
         }
 
-        static func instantiateProfileListViewController() -> ProfileListViewController! {
-            return self.storyboard.instantiateViewControllerWithIdentifier("ProfileListViewController") as! ProfileListViewController
-        }
-
         static func instantiateCommunityFeedViewController() -> CommunityFeedViewController! {
             return self.storyboard.instantiateViewControllerWithIdentifier("CommunityFeedViewController") as! CommunityFeedViewController
         }
@@ -335,6 +331,7 @@ extension SidebarViewController {
         case ShowMyProfile = "ShowMyProfile"
         case ShowPeople = "ShowPeople"
         case ShowWallet = "ShowWallet"
+        case ShowSplash = "ShowSplash"
 
         var kind: SegueKind? {
             switch (self) {
@@ -355,6 +352,8 @@ extension SidebarViewController {
             case ShowPeople:
                 return SegueKind(rawValue: "custom")
             case ShowWallet:
+                return SegueKind(rawValue: "custom")
+            case ShowSplash:
                 return SegueKind(rawValue: "custom")
             default:
                 preconditionFailure("Invalid value")
@@ -705,8 +704,6 @@ extension PeopleViewController {
 }
 
 //MARK: - UserProfileViewController
-
-//MARK: - ProfileListViewController
 
 //MARK: - CommunityFeedViewController
 

@@ -65,7 +65,6 @@
 		E6199BB71B9F3B7400E3C69D /* PeopleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6199BB61B9F3B7400E3C69D /* PeopleViewController.swift */; };
 		E61B20D51B7DD47C005EAB2C /* FeedItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61B20D41B7DD47C005EAB2C /* FeedItem.swift */; };
 		E61B20D81B7E0838005EAB2C /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61B20D71B7E0838005EAB2C /* SettingsViewController.swift */; };
-		E61B20DF1B7E4BBF005EAB2C /* ProfileListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61B20DE1B7E4BBF005EAB2C /* ProfileListViewController.swift */; };
 		E61B20EF1B813C8C005EAB2C /* Community.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61B20EE1B813C8C005EAB2C /* Community.swift */; };
 		E62B16F51B5C1AA700D446BC /* PositionIn.MainMenuUserCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E62B16F31B5C1AA700D446BC /* PositionIn.MainMenuUserCell.xib */; };
 		E62B16F61B5C1AA700D446BC /* MainMenuUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E62B16F41B5C1AA700D446BC /* MainMenuUserCell.swift */; };
@@ -431,7 +430,6 @@
 		E6199BB61B9F3B7400E3C69D /* PeopleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeopleViewController.swift; sourceTree = "<group>"; };
 		E61B20D41B7DD47C005EAB2C /* FeedItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedItem.swift; sourceTree = "<group>"; };
 		E61B20D71B7E0838005EAB2C /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
-		E61B20DE1B7E4BBF005EAB2C /* ProfileListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileListViewController.swift; sourceTree = "<group>"; };
 		E61B20EE1B813C8C005EAB2C /* Community.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Community.swift; sourceTree = "<group>"; };
 		E62B16F31B5C1AA700D446BC /* PositionIn.MainMenuUserCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.MainMenuUserCell.xib; sourceTree = "<group>"; };
 		E62B16F41B5C1AA700D446BC /* MainMenuUserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuUserCell.swift; sourceTree = "<group>"; };
@@ -1062,7 +1060,6 @@
 			isa = PBXGroup;
 			children = (
 				E6F2437B1B8B42D70033B13C /* UserProfileViewController.swift */,
-				E61B20DE1B7E4BBF005EAB2C /* ProfileListViewController.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -2964,7 +2961,6 @@
 				E6325F721B57E1DA00996480 /* Storyboards.swift in Sources */,
 				E6BEF1D11B9C61F900511B46 /* Comment.swift in Sources */,
 				E6DADB9E1B8C5799009A5694 /* SearchFilter.swift in Sources */,
-				E61B20DF1B7E4BBF005EAB2C /* ProfileListViewController.swift in Sources */,
 				E64D00631B7C8FB7007693E0 /* AddPostViewController.swift in Sources */,
 				E6F7A4811BA356500069152A /* LocationSearchResultDataSource.swift in Sources */,
 				E62B16FF1B5CE0F800D446BC /* BesideMenuViewController.swift in Sources */,
