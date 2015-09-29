@@ -15,7 +15,8 @@ import BrightFutures
 struct SearchFilter: Mappable {
     typealias Money = Double
     static let minPrice: Money = 1
-    static let maxPrice: Money = 1000
+    static let maxPrice: Money = 10000
+    static let defaultPrice: Money = 125
     static let CurrentFilterDidChangeNotification = "CurrentFilterDidChangeNotification"
 
     var startPrice: Money?
