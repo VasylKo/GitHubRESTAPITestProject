@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PositionIn.CommentCell" rowHeight="86" id="v8M-6B-ZG5" customClass="CommentCell" customModule="PositionIn" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="317" height="86"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="v8M-6B-ZG5" id="Dqh-Bo-qXP">
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="LfW-dp-Eo5" customClass="AvatarView" customModule="PositionIn" customModuleProvider="target">
+                        <rect key="frame" x="13" y="13" width="50" height="50"/>
+                        <color key="backgroundColor" red="0.97254901959999995" green="0.83921568629999999" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="50" id="E4K-OZ-hyc"/>
+                            <constraint firstAttribute="height" constant="50" id="TEt-2y-veM"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="backgroundColor">
+                                <color key="value" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Ev-k8-dOD" userLabel="LabelsContainer">
+                        <rect key="frame" x="71" y="0.0" width="246" height="85"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pif-sd-dGN" userLabel="NameLabel">
+                                <rect key="frame" x="0.0" y="0.0" width="238" height="20"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="text" value=""/>
+                                </userDefinedRuntimeAttributes>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jC6-Fv-csn" userLabel="DateLabel">
+                                <rect key="frame" x="0.0" y="68" width="238" height="17"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                <color key="textColor" red="0.74901960779999999" green="0.74901960779999999" blue="0.74901960779999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5RN-WH-csu" userLabel="CommentLabel">
+                                <rect key="frame" x="0.0" y="25" width="238" height="38"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                <color key="textColor" red="0.13333333333333333" green="0.13333333333333333" blue="0.13333333333333333" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="5RN-WH-csu" firstAttribute="top" secondItem="pif-sd-dGN" secondAttribute="bottom" constant="5" id="INT-Y6-FVs"/>
+                            <constraint firstAttribute="bottom" secondItem="jC6-Fv-csn" secondAttribute="bottom" id="PjH-9E-WAj"/>
+                            <constraint firstItem="jC6-Fv-csn" firstAttribute="leading" secondItem="4Ev-k8-dOD" secondAttribute="leading" id="VAw-b2-Qxq"/>
+                            <constraint firstAttribute="trailing" secondItem="pif-sd-dGN" secondAttribute="trailing" constant="8" id="aYH-Pl-Fla"/>
+                            <constraint firstItem="pif-sd-dGN" firstAttribute="top" secondItem="4Ev-k8-dOD" secondAttribute="top" id="b1x-D8-faG"/>
+                            <constraint firstItem="pif-sd-dGN" firstAttribute="leading" secondItem="4Ev-k8-dOD" secondAttribute="leading" id="bBE-BN-RwM"/>
+                            <constraint firstItem="jC6-Fv-csn" firstAttribute="top" secondItem="5RN-WH-csu" secondAttribute="bottom" constant="5" id="ber-bB-M30"/>
+                            <constraint firstItem="5RN-WH-csu" firstAttribute="leading" secondItem="4Ev-k8-dOD" secondAttribute="leading" id="eBK-Ms-SI3"/>
+                            <constraint firstAttribute="trailing" secondItem="5RN-WH-csu" secondAttribute="trailing" constant="8" id="fO4-Vm-bKu"/>
+                            <constraint firstAttribute="trailing" secondItem="jC6-Fv-csn" secondAttribute="trailing" constant="8" id="gjL-RR-tXn"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="LfW-dp-Eo5" firstAttribute="leading" secondItem="Dqh-Bo-qXP" secondAttribute="leading" constant="13" id="2DG-sM-L0I"/>
+                    <constraint firstItem="4Ev-k8-dOD" firstAttribute="leading" secondItem="LfW-dp-Eo5" secondAttribute="trailing" constant="8" id="aHU-Cv-rfG"/>
+                    <constraint firstAttribute="trailing" secondItem="4Ev-k8-dOD" secondAttribute="trailing" id="fyD-PZ-1nt"/>
+                    <constraint firstItem="LfW-dp-Eo5" firstAttribute="top" secondItem="Dqh-Bo-qXP" secondAttribute="top" constant="13" id="iKK-JQ-GfY"/>
+                    <constraint firstItem="4Ev-k8-dOD" firstAttribute="top" secondItem="Dqh-Bo-qXP" secondAttribute="top" id="sZP-Vn-Y6d"/>
+                    <constraint firstAttribute="bottom" secondItem="4Ev-k8-dOD" secondAttribute="bottom" id="v6F-LW-hf2"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="avatarView" destination="LfW-dp-Eo5" id="zJa-1x-hKp"/>
+                <outlet property="commentLabel" destination="5RN-WH-csu" id="GK2-VV-hdi"/>
+                <outlet property="dateLabel" destination="jC6-Fv-csn" id="GL6-Fv-Rz0"/>
+                <outlet property="userNameLabel" destination="pif-sd-dGN" id="7U2-jN-YWE"/>
+            </connections>
+            <point key="canvasLocation" x="446.5" y="215"/>
+        </tableViewCell>
+    </objects>
+</document>

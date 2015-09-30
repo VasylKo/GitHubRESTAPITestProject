@@ -17,6 +17,7 @@ struct Post: CRUDObject {
     var location: Location?
     
     var likes: Int?
+    var isLiked: Bool = false
     var author: UserInfo?
     var comments: [Comment]?
     var date: NSDate?
@@ -42,7 +43,7 @@ struct Post: CRUDObject {
         photos <- map["photos"]
         likes <- map["likes"]
         location <- map["location"]
-        likes <- map["likes"]
+        isLiked <- map["isLiked"]
         author <- map["author"]
         comments <- map["comments"]
         date <- (map["date"], APIDateTransform())        
@@ -56,6 +57,10 @@ struct Post: CRUDObject {
         return Post.endpoint().stringByAppendingPathComponent("\(postId)")
     }
     
+    static func likeEndpoint(postId: CRUDObjectId) -> String {
+        return Post.endpoint().stringByAppendingPathComponent("\(postId)/like")
+    }
+     
     static func userPostsEndpoint(userId: CRUDObjectId) -> String {
         return UserProfile.endpoint().stringByAppendingPathComponent("\(userId)/posts")
     }

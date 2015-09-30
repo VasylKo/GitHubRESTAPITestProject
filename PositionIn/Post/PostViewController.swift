@@ -12,8 +12,13 @@ import CleanroomLogger
 import BrightFutures
 
 
-protocol PostActionConsumer {
+protocol PostActionConsumer: class {
     func showProfileScreen(userId: CRUDObjectId)
+    func likePost()
+}
+
+protocol PostActionProvider {
+    var actionConsumer: PostActionConsumer? { get set }
 }
 
 final class PostViewController: UIViewController {
@@ -23,11 +28,14 @@ final class PostViewController: UIViewController {
         dataSource.configureTable(tableView)
         if let objectId = objectId {
             api().getPost(objectId).onSuccess { [weak self] post in
+                self?.post = post
                 self?.dataSource.setPost(post)
                 self?.tableView.reloadData()
             }
         }
     }
+    
+    private var post: Post?
     
     private lazy var dataSource: PostDataSource = { [unowned self] in
         let dataSource = PostDataSource()
@@ -35,7 +43,7 @@ final class PostViewController: UIViewController {
         return dataSource
         }()
 
-    
+
     @IBOutlet weak var tableView: TableView!
     var objectId: CRUDObjectId?
 }
@@ -46,15 +54,42 @@ extension PostViewController: PostActionConsumer {
         profileController.objectId = userId
         navigationController?.pushViewController(profileController, animated: true)
     }
+    
+    func likePost() {
+        
+        //TODO: refactor this
+        
+        if let tempPost = post {
+            if (tempPost.isLiked) {
+                api().unlikePost(tempPost.objectId).onSuccess{
+                    self.dataSource.setPost(tempPost)
+                    self.tableView.reloadData()
+                    self.post = tempPost
+                }
+            }
+            else {
+                api().likePost(tempPost.objectId).onSuccess{
+                    self.dataSource.setPost(tempPost)
+                    self.tableView.reloadData()
+                    self.post = tempPost
+                }
+            }
+        }
+    }
 }
 
 extension PostViewController {
     internal class PostDataSource: TableViewDataSource {
+        
+        var actionConsumer: PostActionConsumer? {
+            return parentViewController as? PostActionConsumer
+        }
+        
         private let cellFactory = PostCellModelFactory()
-        private var items: [[TableViewCellModel]] = []
+        private var items: [[TableViewCellModel]] =  [[],[]]
         
         func setPost(post: Post) {
-            items = [cellFactory.modelsForPost(post)]
+            items = cellFactory.modelsForPost(post, actionConsumer: self.actionConsumer)
         }
         
         override func configureTable(tableView: UITableView) {

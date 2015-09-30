@@ -96,6 +96,16 @@ struct APIService {
         return createObject(endpoint, object: object)
     }
     
+    func likePost(postId: CRUDObjectId) -> Future<Void, NSError> {
+        let endpoint = Post.likeEndpoint(postId)
+        return updateCommand(endpoint)
+    }
+    
+    func unlikePost(postId: CRUDObjectId) -> Future<Void, NSError> {
+        let endpoint = Post.likeEndpoint(postId)
+        return updateCommand(endpoint, method: .DELETE)
+    }
+    
     //MARK: - Promotions -
     
     func getUserPromotions(userId: CRUDObjectId, page: Page) -> Future<CollectionResponse<Promotion>, NSError> {
