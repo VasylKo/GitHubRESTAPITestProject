@@ -36,7 +36,7 @@ struct PostCellModelFactory {
                 secondSection.append(PostCommentCellModel(userId: comment.author!.objectId, name: comment.author!.title, comment: comment.text, date:dateString, imageUrl: comment.author!.avatar))
             }
         }
-        models.append(secondSection)        
+        models.append(secondSection)
         return models
     }
     

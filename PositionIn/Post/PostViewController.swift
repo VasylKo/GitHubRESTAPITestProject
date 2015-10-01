@@ -21,7 +21,7 @@ protocol PostActionProvider {
     var actionConsumer: PostActionConsumer? { get set }
 }
 
-final class PostViewController: UIViewController {
+final class PostViewController: UIViewController, UITextFieldDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,6 +33,48 @@ final class PostViewController: UIViewController {
                 self?.tableView.reloadData()
             }
         }
+        self.enterCommentField.delegate = self;
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        self.subscribeOnKeyboardNotification()
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.unsubscribeFromKeyboardNotification()
+    }
+    
+    private func subscribeOnKeyboardNotification() {
+        
+        let animationClosure : (NSNotification!) -> Void = {[weak self] (note: NSNotification!) -> Void in
+            let userInfo: NSDictionary = note.userInfo!
+            let keyboardEndFrameValue: NSValue = userInfo.valueForKey(UIKeyboardFrameEndUserInfoKey) as! NSValue;
+            let keyboardEndFrame: CGRect = keyboardEndFrameValue.CGRectValue();
+            let duration = userInfo.objectForKey(UIKeyboardAnimationDurationUserInfoKey) as! NSTimeInterval
+            let notificationName = note.name
+            
+            var bottomMargin: CGFloat = 5.0
+            if notificationName == UIKeyboardWillShowNotification {
+                bottomMargin += keyboardEndFrame.height
+            }
+            
+            self?.enterCommentFieldBottomSpaceConstraint.constant = bottomMargin
+            self?.view.setNeedsUpdateConstraints();
+            
+            UIView.animateWithDuration(duration, animations: {
+                self?.view.layoutIfNeeded()
+            })
+        }
+        
+        NSNotificationCenter.defaultCenter().addObserverForName(UIKeyboardWillShowNotification, object: nil, queue: nil, usingBlock: animationClosure)
+        
+        NSNotificationCenter.defaultCenter().addObserverForName(UIKeyboardWillHideNotification, object: nil, queue: nil, usingBlock: animationClosure)
+    }
+    
+    private func unsubscribeFromKeyboardNotification() {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
     private var post: Post?
@@ -45,7 +87,28 @@ final class PostViewController: UIViewController {
 
 
     @IBOutlet weak var tableView: TableView!
+    @IBOutlet weak var enterCommentField: UITextField!
+    @IBOutlet weak var enterCommentFieldBottomSpaceConstraint: NSLayoutConstraint!
     var objectId: CRUDObjectId?
+}
+
+extension PostViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        
+        if (count(textField.text) > 0) {
+            var comment = Comment()
+            comment.text = textField.text
+            if let tempPost = post {
+                
+                api().createPostComment(tempPost.objectId, object: comment).onSuccess {comment in
+                    textField.text = nil
+                }
+            }
+        }
+        
+        return true;
+    }
 }
 
 extension PostViewController: PostActionConsumer {
@@ -56,23 +119,13 @@ extension PostViewController: PostActionConsumer {
     }
     
     func likePost() {
-        
-        //TODO: refactor this
-        
+        //TODO: need add update screen
         if let tempPost = post {
             if (tempPost.isLiked) {
-                api().unlikePost(tempPost.objectId).onSuccess{
-                    self.dataSource.setPost(tempPost)
-                    self.tableView.reloadData()
-                    self.post = tempPost
-                }
+                api().unlikePost(tempPost.objectId)
             }
             else {
-                api().likePost(tempPost.objectId).onSuccess{
-                    self.dataSource.setPost(tempPost)
-                    self.tableView.reloadData()
-                    self.post = tempPost
-                }
+                api().likePost(tempPost.objectId)
             }
         }
     }

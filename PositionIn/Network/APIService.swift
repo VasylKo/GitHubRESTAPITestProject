@@ -52,7 +52,6 @@ struct APIService {
         return "API: \(baseURL.absoluteString)"
     }
     
-    
     //MARK: - Profile -
     
     func getMyProfile() -> Future<UserProfile, NSError> {
@@ -104,6 +103,11 @@ struct APIService {
     func unlikePost(postId: CRUDObjectId) -> Future<Void, NSError> {
         let endpoint = Post.likeEndpoint(postId)
         return updateCommand(endpoint, method: .DELETE)
+    }
+    
+    func createPostComment(postId: CRUDObjectId, object: Comment) -> Future<Comment, NSError> {
+        let endpoint = Post.postCommentEndpoint(postId)
+        return createObject(endpoint, object: object)
     }
     
     //MARK: - Promotions -
@@ -374,6 +378,7 @@ struct APIService {
     
     private func commandMapping() -> (AnyObject? -> Void?) {
         return  { response in
+            //TODO: need handle nil response
             if let json = response as? NSDictionary {
                 if let success = json["success"] as? Bool where success == true{
                         return ()

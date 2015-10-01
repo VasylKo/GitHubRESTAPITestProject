@@ -60,7 +60,11 @@ struct Post: CRUDObject {
     static func likeEndpoint(postId: CRUDObjectId) -> String {
         return Post.endpoint().stringByAppendingPathComponent("\(postId)/like")
     }
-     
+    
+    static func postCommentEndpoint(postId: CRUDObjectId) -> String {
+        return Post.endpoint().stringByAppendingPathComponent("\(postId)/comment")
+    }
+    
     static func userPostsEndpoint(userId: CRUDObjectId) -> String {
         return UserProfile.endpoint().stringByAppendingPathComponent("\(userId)/posts")
     }
