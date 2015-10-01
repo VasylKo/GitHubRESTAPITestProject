@@ -17,6 +17,10 @@ struct Comment: CRUDObject {
     var date: NSDate?
     var author: UserInfo?
     
+    init(objectId: CRUDObjectId = CRUDObjectInvalidId) {
+        self.objectId = objectId
+    }
+    
     init?(_ map: Map) {
         mapping(map)
         if objectId == CRUDObjectInvalidId {

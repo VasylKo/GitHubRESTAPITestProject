@@ -8,25 +8,40 @@
 
 import UIKit
 import PosInCore
-
+import CleanroomLogger
 
 struct PostCellModelFactory {
-    func modelsForPost(post: Post) -> [TableViewCellModel] {
-        var models: [TableViewCellModel] = []
+    func modelsForPost(post: Post, actionConsumer: PostActionConsumer?) -> [[TableViewCellModel]] {
+        var models: [[TableViewCellModel]] = []
+        var firstSection: [TableViewCellModel] = []
+        
         if let url = post.photos?.first?.url {
-            models.append(TableViewCellURLModel(url: url))
+            firstSection.append(TableViewCellURLModel(url: url))
         }
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
         let date: String? = map(post.date) { dateFormatter.stringFromDate($0) }
-        models.append(PostInfoModel(firstLine: post.author?.title, secondLine: date, imageUrl: post.author?.avatar, userId: post.author?.objectId))
-        models.append(TableViewCellTextModel(title: post.name ?? ""))
+        firstSection.append(PostInfoModel(firstLine: post.author?.title, secondLine: date, imageUrl: post.author?.avatar, userId: post.author?.objectId))
+        firstSection.append(TableViewCellTextModel(title: post.name ?? ""))
+        Log.verbose?.value(post.likes!)
+        Log.verbose?.value(post.comments!)
+        firstSection.append(PostLikesCountModel(likes: post.likes!, comments: post.comments!.count, actionConsumer: actionConsumer))
+        models.append(firstSection)
         
+        var secondSection: [TableViewCellModel] = []
+        
+        if let comments = post.comments {
+            for comment: Comment in comments {
+                let dateString = dateFormatter.stringFromDate(comment.date ?? NSDate())
+                secondSection.append(PostCommentCellModel(userId: comment.author!.objectId, name: comment.author!.title, comment: comment.text, date:dateString, imageUrl: comment.author!.avatar))
+            }
+        }
+        models.append(secondSection)
         return models
     }
     
     func postCellsReuseId() -> [String]  {
-        return [PostImageCell.reuseId(),PostBodyCell.reuseId(),PostInfoCell.reuseId()]
+        return [PostImageCell.reuseId(),PostBodyCell.reuseId(),PostInfoCell.reuseId(), PostLikeCommentCell.reuseId(),  CommentCell.reuseId()]
     }
     
     func cellReuseIdForModel(model: TableViewCellModel) -> String {
@@ -39,10 +54,13 @@ struct PostCellModelFactory {
         if model is TableViewCellTextModel {
             return PostBodyCell.reuseId()
         }
-
+        if model is PostLikesCountModel {
+            return PostLikeCommentCell.reuseId()
+        }
+        if model is PostCommentCellModel {
+            return CommentCell.reuseId()
+        }
+        
         return TableViewCell.reuseId()
     }
-
-    
-    
 }
