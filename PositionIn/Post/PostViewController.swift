@@ -26,14 +26,8 @@ final class PostViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         dataSource.configureTable(tableView)
-        if let objectId = objectId {
-            api().getPost(objectId).onSuccess { [weak self] post in
-                self?.post = post
-                self?.dataSource.setPost(post)
-                self?.tableView.reloadData()
-            }
-        }
         self.enterCommentField.delegate = self;
+        self.getPost()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -44,6 +38,19 @@ final class PostViewController: UIViewController, UITextFieldDelegate {
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         self.unsubscribeFromKeyboardNotification()
+    }
+    
+    private func getPost(completion: () -> Void = {}) {
+        if let objectId = objectId {
+            api().getPost(objectId).onSuccess { [weak self] post in
+                self?.post = post
+                self?.dataSource.setPost(post)
+                self?.tableView.reloadData()
+                self?.tableView.layoutIfNeeded();
+                
+                completion()
+            }
+        }
     }
     
     private func subscribeOnKeyboardNotification() {
@@ -101,7 +108,12 @@ extension PostViewController: UITextFieldDelegate {
             comment.text = textField.text
             if let tempPost = post {
                 
-                api().createPostComment(tempPost.objectId, object: comment).onSuccess {comment in
+                api().createPostComment(tempPost.objectId, object: comment).onSuccess {[weak self] comment in
+                    self?.getPost(completion: {
+                        
+                        //TODO: need scroll to bottom if tableView
+                        
+                    })
                     textField.text = nil
                 }
             }
@@ -122,10 +134,14 @@ extension PostViewController: PostActionConsumer {
         //TODO: need add update screen
         if let tempPost = post {
             if (tempPost.isLiked) {
-                api().unlikePost(tempPost.objectId)
+                api().unlikePost(tempPost.objectId).onSuccess{[weak self] in
+                    self?.getPost()
+                }
             }
             else {
-                api().likePost(tempPost.objectId)
+                api().likePost(tempPost.objectId).onSuccess{[weak self] in
+                    self?.getPost()
+                }
             }
         }
     }
