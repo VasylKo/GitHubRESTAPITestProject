@@ -73,7 +73,6 @@ struct FeedItem: CRUDObject {
     var description: String {
         return "<\(self.dynamicType):\(objectId)>"
     }
-
     
     enum ItemType: Int, Printable {
         case Unknown
@@ -104,5 +103,9 @@ struct FeedItem: CRUDObject {
     
     static func forYouEndpoint() -> String {
         return "/v1.0/recommended"
+    }
+    
+    static func quickSearchEndpoint() -> String {
+        return "/v1.0/feed"
     }
 }

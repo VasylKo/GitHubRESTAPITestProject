@@ -9,6 +9,49 @@
 import ObjectMapper
 import CleanroomLogger
 
+struct QuickSearchResponse<C: CRUDObject>: Mappable {
+    //TODO: need add categories
+//    private(set) var categories: [C]!
+    private(set) var promotions: [C]!
+    private(set) var communities: [C]!
+    private(set) var items: [C]!
+    private(set) var events: [C]!
+    private(set) var peoples: [C]!
+    
+    init?(_ map: Map) {
+        mapping(map)
+        switch (items, promotions, communities, events, peoples) {
+        case (.Some, .Some, .Some, .Some, .Some):
+            break
+        default:
+            Log.error?.message("Error while parsing object")
+            Log.debug?.trace()
+            Log.verbose?.value(self)
+            return nil
+        }
+    }
+    
+    mutating func mapping(map: Map) {
+        items <- map["items"]
+        promotions <- map["promotions"]
+        communities <- map["communities"]
+        events <- map["events"]
+//        categories <- map["categories"]
+        peoples <- map["peoples"]
+        
+        Log.verbose?.value(items)
+        Log.verbose?.value(promotions)
+        Log.verbose?.value(communities)
+        Log.verbose?.value(events)
+//        Log.verbose?.value(categories)
+        Log.verbose?.value(peoples)
+    }
+    
+    var description: String {
+        return "<\(self.dynamicType)-(\(items)):\(promotions):\(communities):\(events)c:\(peoples)>"
+    }
+}
+
 struct CollectionResponse<C: CRUDObject>: Mappable {
     private(set) var items: [C]!
     private(set) var total: Int!
@@ -51,7 +94,6 @@ struct UpdateResponse: Mappable{
     
     mutating func mapping(map: Map) {
         objectId <- (map["id"], CRUDObjectIdTransform())
-
     }
     
     var description: String {

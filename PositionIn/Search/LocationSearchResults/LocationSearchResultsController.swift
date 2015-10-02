@@ -21,7 +21,7 @@ protocol LocationSearchResultsDelegate: class {
 }
 
 final class LocationSearchResultsController: NSObject {
-    
+        
     init(table: TableView?, resultStorage: LocationSearchResultStorage?, searchBar: UISearchBar?) {
         locationsTable = table
         self.resultStorage = resultStorage
@@ -76,7 +76,6 @@ extension LocationSearchResultsController: UISearchBarDelegate {
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
         shouldReloadSearch()
-        
     }
     
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {

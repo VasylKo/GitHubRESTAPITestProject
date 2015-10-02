@@ -32,11 +32,13 @@ final class SearchViewController: UIViewController {
             switch searchMode {
             case .Items:
                 dataSource = itemsDataSource
+                //TODO add items controller reload data
+                itemsSearchController.shouldReloadSearch()
             case .Locations:
                 dataSource = locationsDataSource
+                locationSearchController.shouldReloadSearch()
             }
             dataSource.configureTable(tableView)
-            locationSearchController.shouldReloadSearch()
         }
     }
     
@@ -46,13 +48,17 @@ final class SearchViewController: UIViewController {
         let dismissRecognizer = UITapGestureRecognizer(target: self, action: "didTapOutsideSearch:")
         dismissRecognizer.cancelsTouchesInView = false
         tableView.addGestureRecognizer(dismissRecognizer)
+        
         locationSearchBar.text = SearchFilter.currentFilter.locationName
         locationsDataSource.delegate = self
         locationSearchController.delegate = self
         
-        locationSearchBar.becomeFirstResponder()
+        categoriesSearchBar.text = SearchFilter.currentFilter.name
+        itemsDataSource.delegate = self
+        itemsSearchController.delegate = self
+        
+        categoriesSearchBar.becomeFirstResponder()
     }
-    
     
     func didTapOutsideSearch(sender: UIGestureRecognizer) {
         view.endEditing(true)
@@ -60,7 +66,6 @@ final class SearchViewController: UIViewController {
         dismissViewControllerAnimated(true, completion: nil)
         Log.debug?.message("Should close search")
     }
-
     
     @IBOutlet private(set) weak var categoriesSearchBar: UISearchBar!
     @IBOutlet private(set) weak var locationSearchBar: UISearchBar!
@@ -85,6 +90,10 @@ final class SearchViewController: UIViewController {
         return controller
     }()
     
+    private lazy var itemsSearchController: ItemsSearchResultsController = { [unowned self] in
+        let controller = ItemsSearchResultsController(table: self.tableView, resultStorage: self.itemsDataSource, searchBar: self.categoriesSearchBar)
+        return controller
+        }()
 }
 
 extension SearchViewController: LocationSearchResultsDelegate {
@@ -97,41 +106,13 @@ extension SearchViewController: LocationSearchResultsDelegate {
     }
 }
 
-extension SearchViewController {
-    class ItemsSearchResultDataSource: TableViewDataSource {
+extension SearchViewController: ItemsSearchResultsDelegate {
+    
+    func shouldDisplayItemsSearchResults() {
+        searchMode = .Items
+    }
+    
+    func didSelectItem(item: FeedItem?) {
         
-        override func configureTable(tableView: UITableView) {
-            tableView.estimatedRowHeight = 80.0
-            super.configureTable(tableView)
-        }
-        
-        func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-            return count(models)
-        }
-        
-        @objc override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            return count(models[section])
-        }
-        
-        override func tableView(tableView: UITableView, modelForIndexPath indexPath: NSIndexPath) -> TableViewCellModel {
-            return models[indexPath.section][indexPath.row]
-        }
-        
-        @objc override func tableView(tableView: UITableView, reuseIdentifierForIndexPath indexPath: NSIndexPath) -> String {
-            let model = self.tableView(tableView, modelForIndexPath: indexPath)
-            return modelFactory.compactCellReuseIdForModel(model)
-        }
-        
-        override func nibCellsId() -> [String] {
-            return modelFactory.compactCellsReuseId()
-        }
-        
-        func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-            tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        }
-        
-        private var models: [[TableViewCellModel]] = []
-        private let modelFactory = FeedItemCellModelFactory()
     }
 }
-
