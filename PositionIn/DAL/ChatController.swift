@@ -13,6 +13,10 @@ import PosInCore
 import Haneke
 import BrightFutures
 
+protocol ChatControllerDelegate {
+    func didUpdateMessages()
+}
+
 final class ChatController {
     
     init(conversation: Conversation) {
@@ -20,10 +24,6 @@ final class ChatController {
         self.conversation = conversation
         prepareCache()
         loadInfoForUsers(conversation.participants)
-        messages = [
-            JSQMessage(senderId: conversation.currentUserId, displayName: "John Doe", text: "Hi!"),
-            JSQMessage(senderId: "123", displayName: "John Doe", text: "Please give me a call."),            
-        ]
     }
     
     func sendMessage(msg: JSQMessageData) {
@@ -81,32 +81,60 @@ final class ChatController {
         api().getUsers(userIds).onSuccess {[weak self] response in
             Log.debug?.value(response.items)
             if let strongSelf = self {
-                self?.participantsInfo = response.items
+                strongSelf.participantsInfo = response.items
+                strongSelf.loadConversationHistory(strongSelf.conversation)
+                strongSelf.delegate?.didUpdateMessages()
                 let usersWithAvatars = response.items.filter { $0.avatar != nil }
-                usersWithAvatars.map { info in
+                let avatarDownloads = usersWithAvatars.map { info in
                     avatarDownloadFuture(info.avatar!).onSuccess { [weak strongSelf] image in
                         strongSelf?.addAvatar(image, user: info.objectId)
                     }
+                }
+                sequence(avatarDownloads).onComplete { [weak strongSelf] _ in
+                    strongSelf?.delegate?.didUpdateMessages()
                 }
             }
             
         }
     }
         
-    func addAvatar(image: UIImage, user: CRUDObjectId) {
+    private func addAvatar(image: UIImage, user: CRUDObjectId) {
         let dataSource = JSQMessagesAvatarImageFactory.avatarImageWithImage(image, diameter: UInt(kJSQMessagesCollectionViewAvatarSizeDefault))
         synced(avatarsCache) {
             self.avatarsCache[user] = dataSource
         }
     }
     
-    func avatarDataSourceForUser(user: CRUDObjectId) -> JSQMessageAvatarImageDataSource? {
+    private func avatarDataSourceForUser(user: CRUDObjectId) -> JSQMessageAvatarImageDataSource? {
         var dataSource: JSQMessageAvatarImageDataSource?
         synced(avatarsCache) {
             dataSource = self.avatarsCache[user]
         }
         return dataSource
     }
+    
+    private func displayNameForUser(user: CRUDObjectId) -> String {
+        if  let info = (participantsInfo.filter { $0.objectId == user }).first,
+            let displayName = info.title {
+                return displayName
+        }
+        let defaultName = NSLocalizedString("Unnamed", comment: "Chat: Unknown user name")
+        return defaultName
+    }
+    
+    private func loadConversationHistory(conversation: Conversation) {
+        //TODO: load history
+        messages = [
+            JSQMessage(senderId: conversation.currentUserId, displayName: displayNameForUser(conversation.currentUserId), text: "Hi!"),
+            JSQMessage(senderId: conversation.participants.first!, displayName: displayNameForUser(conversation.participants.first!), text: "Please give me a call."),
+            JSQMessage(senderId: conversation.participants.first!, displayName: displayNameForUser(conversation.participants.first!), text: "Another."),
+            JSQMessage(senderId: conversation.currentUserId, displayName: displayNameForUser(conversation.currentUserId), text: "Me 1"),
+            JSQMessage(senderId: conversation.currentUserId, displayName: displayNameForUser(conversation.currentUserId), text: "Me 2"),
+        ]
+    }
+    
+    
+    var delegate: ChatControllerDelegate?
     
     private var messages: [JSQMessageData] = []
     
