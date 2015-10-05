@@ -13,7 +13,7 @@ import PosInCore
 import Haneke
 import BrightFutures
 
-protocol ChatControllerDelegate {
+protocol ChatControllerDelegate: class  {
     func didUpdateMessages()
 }
 
@@ -28,9 +28,12 @@ final class ChatController: NSObject {
         chatClient.addMessageListener(self)
     }
     
-    deinit {
-        //TODO: fix retain cycle
+    func closeSession() {
         chatClient.removeMessageListener(self)
+    }
+    
+    deinit {
+        closeSession()
     }
     
     func sendMessage(msg: JSQMessageData) {
@@ -141,7 +144,7 @@ final class ChatController: NSObject {
     }
     
     
-    var delegate: ChatControllerDelegate?
+    weak var delegate: ChatControllerDelegate?
     
     private var messages: [JSQMessageData] = []
     

@@ -27,6 +27,10 @@ final class ConversationViewController: JSQMessagesViewController {
         title = NSLocalizedString("Chat", comment: "Chat: Default chat title")
     }
     
+    deinit {
+        chatController?.closeSession()
+    }
+    
     //MARK: - Overrides -
     
     /**
