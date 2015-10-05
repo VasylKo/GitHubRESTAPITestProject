@@ -28,7 +28,11 @@ final class ChatController {
     
     func sendMessage(msg: JSQMessageData) {
         messages.append(msg)
-        chatClient.sendTestMessage()
+        if msg.isMediaMessage() {
+            //TODO: send media
+        } else {
+            chatClient.sendTextMessage(msg.text!(), to: conversation.roomId)
+        }
     }
     
     func messagesCount() -> Int {

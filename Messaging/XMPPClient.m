@@ -189,10 +189,10 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
     return process;
 }
 
-- (void)sendTestMessage {
-    
-    XMPPMessage *msg = [XMPPMessage messageWithType:@"chat" to:[XMPPJID jidWithString:@"adan@beewellapp.com"]];
-    [msg addBody:@"Test message"];
+- (void)sendTextMessage:(nonnull NSString *)text to:(nonnull NSString *)username {
+    XMPPJID *jid = [XMPPJID jidWithString:[NSString stringWithFormat:@"%@@%@", username, self.config.hostName]];
+    XMPPMessage *msg = [XMPPMessage messageWithType:@"chat" to:jid];
+    [msg addBody:text];
     XMPPLogInfo(@"Sending message %@", [msg XMLString]);
     [self.xmppStream sendElement:msg];
 }

@@ -215,7 +215,15 @@ struct APIService {
         let endpoint = UserProfile.endpoint()
         let params = APIServiceQuery()
         params.append("ids", value: userIds)
-        return getObjectsCollection(endpoint, params: params.query)
+        
+        //TODO: refactor, use generics
+        typealias CRUDResultType = (Alamofire.Request, Future<CollectionResponse<UserInfo>, NSError>)        
+        return session().flatMap {
+            (token: AuthResponse.Token) -> Future<CollectionResponse<UserInfo>, NSError> in
+            let request = self.updateRequest(token, endpoint: endpoint, params: params.query)
+            let (_ , future): CRUDResultType = self.dataProvider.objectRequest(request)
+            return self.handleFailure(future)
+        }
     }
     
     func getMySubscriptions() -> Future<CollectionResponse<UserInfo>,NSError> {

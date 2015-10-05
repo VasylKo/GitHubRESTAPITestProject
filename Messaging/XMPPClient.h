@@ -25,7 +25,7 @@
 - (nonnull XMPPProcess *)auth:(nonnull NSString *)jidString password:(nonnull  NSString *)password;
 - (nonnull XMPPProcess *)registerJid:(nonnull NSString *)jidString password:(nonnull  NSString *)password;
 
-- (void)sendTestMessage;
+- (void)sendTextMessage:(nonnull NSString *)text to:(nonnull NSString *)username;
 @property (nonatomic, readonly, assign) BOOL isConnected;
 - (void)disconnect;
 @end
