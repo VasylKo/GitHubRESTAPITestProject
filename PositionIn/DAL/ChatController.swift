@@ -17,13 +17,20 @@ protocol ChatControllerDelegate {
     func didUpdateMessages()
 }
 
-final class ChatController {
+final class ChatController: NSObject {
     
     init(conversation: Conversation) {
         chatClient = chat()
         self.conversation = conversation
+        super.init()
         prepareCache()
         loadInfoForUsers(conversation.participants)
+        chatClient.addMessageListener(self)
+    }
+    
+    deinit {
+        //TODO: fix retain cycle
+        chatClient.removeMessageListener(self)
     }
     
     func sendMessage(msg: JSQMessageData) {
@@ -124,13 +131,13 @@ final class ChatController {
     
     private func loadConversationHistory(conversation: Conversation) {
         //TODO: load history
-        messages = [
-            JSQMessage(senderId: conversation.currentUserId, displayName: displayNameForUser(conversation.currentUserId), text: "Hi!"),
-            JSQMessage(senderId: conversation.participants.first!, displayName: displayNameForUser(conversation.participants.first!), text: "Please give me a call."),
-            JSQMessage(senderId: conversation.participants.first!, displayName: displayNameForUser(conversation.participants.first!), text: "Another."),
-            JSQMessage(senderId: conversation.currentUserId, displayName: displayNameForUser(conversation.currentUserId), text: "Me 1"),
-            JSQMessage(senderId: conversation.currentUserId, displayName: displayNameForUser(conversation.currentUserId), text: "Me 2"),
-        ]
+//        messages = [
+//            JSQMessage(senderId: conversation.currentUserId, displayName: displayNameForUser(conversation.currentUserId), text: "Hi!"),
+//            JSQMessage(senderId: conversation.participants.first!, displayName: displayNameForUser(conversation.participants.first!), text: "Please give me a call."),
+//            JSQMessage(senderId: conversation.participants.first!, displayName: displayNameForUser(conversation.participants.first!), text: "Another."),
+//            JSQMessage(senderId: conversation.currentUserId, displayName: displayNameForUser(conversation.currentUserId), text: "Me 1"),
+//            JSQMessage(senderId: conversation.currentUserId, displayName: displayNameForUser(conversation.currentUserId), text: "Me 2"),
+//        ]
     }
     
     
@@ -149,3 +156,17 @@ final class ChatController {
 
 }
 
+extension ChatController: XMPPMessageListener {
+    @objc func didReceiveTextMessage(text: String, from: String, to: String, date: NSDate) {
+        //TODO: fix logic
+        if let _  = (participantsInfo.filter { $0.objectId == from }).first {
+            let message = JSQMessage(senderId: from, senderDisplayName: displayNameForUser(from), date: date, text: text)
+            Queue.main.async { [weak self] in
+                if let strongSelf = self {
+                    strongSelf.messages = strongSelf.messages + [message]
+                    strongSelf.delegate?.didUpdateMessages()
+                }
+            }
+        }
+    }
+}

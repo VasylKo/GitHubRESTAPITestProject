@@ -49,6 +49,8 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
 @property (nonatomic, strong) XMPPReconnect *xmppReconect;
 @property (nonatomic, strong) XMPPRoster *xmppRoster;
 @property (nonatomic, strong) XMPPPing *xmppPing;
+
+@property (nonatomic, retain) NSMutableArray *messageListeners;
 @end
 
 
@@ -67,6 +69,7 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
 - (instancetype)initWithConfiguration:(XMPPClientConfiguration *)configuration {
     self = [super init];
     if (self) {
+        self.messageListeners = [NSMutableArray  new];
         self.config = configuration;
         [self setupStreamWithConfig:configuration];
     }
@@ -107,7 +110,9 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
     }
 #endif
 
-    [self.xmppStream addDelegate:self.xmppDelegate delegateQueue:delegateQueue];
+    [self.xmppStream addDelegate:self delegateQueue:delegateQueue]; // Need for message listeners
+    
+    [self.xmppStream addDelegate:self.xmppDelegate delegateQueue:delegateQueue]; // Debugging
 
     self.xmppStream.hostName = configuration.hostName;
     self.xmppStream.hostPort = configuration.port;
@@ -136,6 +141,7 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
     [self.xmppRoster removeDelegate:self.xmppDelegate];
     [self.xmppRoster deactivate];
     
+    [self.xmppStream removeDelegate:self];
     [self.xmppStream removeDelegate:self.xmppDelegate];
     [self.xmppStream disconnect];
     
@@ -197,5 +203,38 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
     [self.xmppStream sendElement:msg];
 }
 
+
+#pragma mark - Message listeners -
+
+- (void)addMessageListener:(nonnull id<XMPPMessageListener>)listener {
+    @synchronized(self) {
+        [self.messageListeners addObject:listener];
+    }
+}
+
+- (void)removeMessageListener:(nonnull id<XMPPMessageListener>)listener {
+    @synchronized(self) {
+        [self.messageListeners removeObject:listener];
+    }
+}
+
+- (void)xmppStream:(XMPPStream *)sender didReceiveMessage:(XMPPMessage *)message {
+    if ([message isChatMessageWithBody]) {
+        NSArray *listeners = nil;
+        @synchronized(self) {
+            listeners = self.messageListeners;
+        }
+        NSString *text = [message body];
+        NSString *from = [message from].user;
+        NSString *to = [message to].user;
+        NSDate *date = [NSDate date];
+        if ([message wasDelayed]) {
+            date = [message delayedDeliveryDate];
+        }
+        for (id<XMPPMessageListener> listener in listeners) {
+            [listener didReceiveTextMessage:text from:from to:to date:date];
+        }
+    }
+}
 
 @end

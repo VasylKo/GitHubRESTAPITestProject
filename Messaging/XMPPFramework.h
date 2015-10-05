@@ -78,4 +78,6 @@
 //
 //#import "XMPPElement+Delay.h"
 
+#import "NSXMLElement+XEP_0203.h"
+
 #import "XMPPLogging.h"
