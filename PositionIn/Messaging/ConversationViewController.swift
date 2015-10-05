@@ -11,11 +11,12 @@ import JSQMessagesViewController
 import CleanroomLogger
 
 final class ConversationViewController: JSQMessagesViewController {
-    class func conversationController(interlocutor: CRUDObjectId = CRUDObjectInvalidId) -> ConversationViewController {
+    class func conversationController(conversation: Conversation) -> ConversationViewController {
         let instance = ConversationViewController()
-        instance.senderId = api().currentUserId()
         instance.senderDisplayName = NSLocalizedString("Me", comment: "Chat: Current user name")
-        instance.chatController = ChatController(interlocutor: interlocutor)
+        instance.senderId = conversation.currentUserId
+        instance.chatController = ChatController(conversation: conversation)
+        instance.chatController.delegate = instance
         return instance
     }
     
@@ -24,6 +25,10 @@ final class ConversationViewController: JSQMessagesViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = NSLocalizedString("Chat", comment: "Chat: Default chat title")
+    }
+    
+    deinit {
+        chatController?.closeSession()
     }
     
     //MARK: - Overrides -
@@ -98,7 +103,6 @@ final class ConversationViewController: JSQMessagesViewController {
 
     override func collectionView(collectionView: JSQMessagesCollectionView!, messageDataForItemAtIndexPath indexPath: NSIndexPath!) -> JSQMessageData! {
         return chatController.messageAtIndex(indexPath.item)
-        
     }
     
     override func collectionView(collectionView: JSQMessagesCollectionView!, messageBubbleImageDataForItemAtIndexPath indexPath: NSIndexPath!) -> JSQMessageBubbleImageDataSource! {
@@ -110,6 +114,35 @@ final class ConversationViewController: JSQMessagesViewController {
     override func collectionView(collectionView: JSQMessagesCollectionView!, avatarImageDataForItemAtIndexPath indexPath: NSIndexPath!) -> JSQMessageAvatarImageDataSource! {
         let message = self.collectionView(collectionView, messageDataForItemAtIndexPath: indexPath)
         return chatController.avatarForSender(message.senderId())
+    }
+    
+    override func collectionView(collectionView: JSQMessagesCollectionView!, attributedTextForCellTopLabelAtIndexPath indexPath: NSIndexPath!) -> NSAttributedString! {
+        /**
+        *  This logic should be consistent with what you return from `heightForCellTopLabelAtIndexPath:`
+        *  The other label text delegate methods should follow a similar pattern.
+        *
+        *  Show a timestamp for every 3rd message
+        */
+        if indexPath.item % 3 == 0 {
+            let message = self.collectionView(collectionView, messageDataForItemAtIndexPath: indexPath)
+            return JSQMessagesTimestampFormatter.sharedFormatter().attributedTimestampForDate(message.date())
+        }
+        return nil
+    }
+    
+    override func collectionView(collectionView: JSQMessagesCollectionView!, attributedTextForMessageBubbleTopLabelAtIndexPath indexPath: NSIndexPath!) -> NSAttributedString! {
+        let message = self.collectionView(collectionView, messageDataForItemAtIndexPath: indexPath)
+        if message.senderId() == senderId {
+            return nil
+        }
+        if indexPath.item - 1 > 0 {
+            let previousIndexPath = NSIndexPath(forItem: indexPath.item - 1, inSection: indexPath.section)
+            let previousMessage = self.collectionView(collectionView, messageDataForItemAtIndexPath: previousIndexPath)
+            if previousMessage.senderId() == message.senderId() {
+                return nil
+            }
+        }
+        return NSAttributedString(string: message.senderDisplayName())
     }
     
     //MARK: - UICollectionView DataSource -
@@ -124,6 +157,19 @@ final class ConversationViewController: JSQMessagesViewController {
             return cell
         }
         return UICollectionViewCell()
+    }
+    
+    //MARK: - JSQMessages collection view flow layout delegate -
+    
+    override func collectionView(collectionView: JSQMessagesCollectionView!, layout collectionViewLayout: JSQMessagesCollectionViewFlowLayout!, heightForCellTopLabelAtIndexPath indexPath: NSIndexPath!) -> CGFloat {
+        return  (indexPath.item % 3 == 0) ? kJSQMessagesCollectionViewCellLabelHeightDefault : 0.0
+    }
+    
+    override func collectionView(collectionView: JSQMessagesCollectionView!, layout collectionViewLayout: JSQMessagesCollectionViewFlowLayout!, heightForMessageBubbleTopLabelAtIndexPath indexPath: NSIndexPath!) -> CGFloat {
+        if let _ = self.collectionView(collectionView, attributedTextForMessageBubbleTopLabelAtIndexPath: indexPath) {
+            return kJSQMessagesCollectionViewCellLabelHeightDefault
+        }
+        return 0.0
     }
     
     //MARK: - Helpers -
@@ -171,3 +217,25 @@ extension ConversationViewController {
         chatController.sendMessage(photoMessage)
     }
 }
+
+//MARK: - Chat Controller delegate -
+
+extension ConversationViewController: ChatControllerDelegate {
+    func didUpdateMessages() {
+        JSQSystemSoundPlayer.jsq_playMessageReceivedSound()
+        scrollToBottomAnimated(true)
+        finishReceivingMessage()
+    }
+}
+
+//MARK: - Navigation  -
+
+extension UIViewController {
+    func showChatViewController(conversation: Conversation) {
+        api().isUserAuthorized().onSuccess { [weak self] _ in
+            let chatController = ConversationViewController.conversationController(conversation)
+            self?.navigationController?.pushViewController(chatController, animated: true)
+        }
+    }
+}
+

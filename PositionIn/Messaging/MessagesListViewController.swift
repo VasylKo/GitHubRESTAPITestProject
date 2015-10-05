@@ -85,9 +85,10 @@ extension MessagesListViewController {
         
         func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
             tableView.deselectRowAtIndexPath(indexPath, animated: true)
-            //TODO: move logic to the controller
-            let chatController = ConversationViewController.conversationController()
-            parentViewController?.navigationController?.pushViewController(chatController, animated: true)
+            if let model = self.tableView(tableView, modelForIndexPath: indexPath) as? ChatHistoryCellModel {
+                //TODO: move logic to the controller
+                parentViewController?.showChatViewController(Conversation(userId: model.userId))
+            }
         }
         
         func setItems(messages: [ChatHistoryResponse]) {
