@@ -225,6 +225,21 @@ struct APIService {
         return getObjectsCollection(endpoint, params: params)
     }
     
+    func getUsers(userIds: [CRUDObjectId]) -> Future<CollectionResponse<UserInfo>,NSError> {
+        let endpoint = UserProfile.endpoint()
+        let params = APIServiceQuery()
+        params.append("ids", value: userIds)
+        
+        //TODO: refactor, use generics
+        typealias CRUDResultType = (Alamofire.Request, Future<CollectionResponse<UserInfo>, NSError>)        
+        return session().flatMap {
+            (token: AuthResponse.Token) -> Future<CollectionResponse<UserInfo>, NSError> in
+            let request = self.updateRequest(token, endpoint: endpoint, params: params.query)
+            let (_ , future): CRUDResultType = self.dataProvider.objectRequest(request)
+            return self.handleFailure(future)
+        }
+    }
+    
     func getMySubscriptions() -> Future<CollectionResponse<UserInfo>,NSError> {
         return currentUserId().flatMap { userId in
             return self.getUserSubscriptions(userId)
@@ -514,6 +529,10 @@ extension APIService {
             for (key,value) in newItems.query {
                 values.updateValue(value, forKey:key)
             }
+        }
+        
+        func append(key: String, value: AnyObject) {
+            values.updateValue(value, forKey:key)
         }
         
         var query: [String : AnyObject]  {

@@ -96,7 +96,7 @@ final class MainMenuViewController: UIViewController {
             }
         }
         
-        userDidChangeNotification = NSNotificationCenter.defaultCenter().addObserverForName(
+        userDidChangeObserver = NSNotificationCenter.defaultCenter().addObserverForName(
             UserProfile.CurrentUserDidChangeNotification,
             object: nil,
             queue: nil,
@@ -105,11 +105,11 @@ final class MainMenuViewController: UIViewController {
     
     
     private var browseModeUpdateObserver: NSObjectProtocol!
-    private var userDidChangeNotification: NSObjectProtocol!
+    private var userDidChangeObserver: NSObjectProtocol!
     
     deinit {
         NSNotificationCenter.defaultCenter().removeObserver(browseModeUpdateObserver)
-        NSNotificationCenter.defaultCenter().removeObserver(userDidChangeNotification)
+        NSNotificationCenter.defaultCenter().removeObserver(userDidChangeObserver)
     }
     
     

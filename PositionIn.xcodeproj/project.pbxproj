@@ -276,6 +276,25 @@
 		E6A869EE1B60D42C00797D16 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A869ED1B60D42C00797D16 /* APIService.swift */; };
 		E6A869F21B60FF0500797D16 /* CRUDObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A869F11B60FF0500797D16 /* CRUDObject.swift */; };
 		E6A869F41B60FF2100797D16 /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A869F31B60FF2100797D16 /* UserProfile.swift */; };
+		E6AAC29F1BB4521600919469 /* XMPPMessage+XEP0045.h in Headers */ = {isa = PBXBuildFile; fileRef = E689EFB41B6A8A1000597587 /* XMPPMessage+XEP0045.h */; };
+		E6AAC2A01BB4521600919469 /* XMPPMessage+XEP0045.m in Sources */ = {isa = PBXBuildFile; fileRef = E689EFB51B6A8A1000597587 /* XMPPMessage+XEP0045.m */; settings = {COMPILER_FLAGS = "-w"; }; };
+		E6AAC2A11BB4521600919469 /* XMPPMUC.h in Headers */ = {isa = PBXBuildFile; fileRef = E689EFB61B6A8A1000597587 /* XMPPMUC.h */; };
+		E6AAC2A21BB4521600919469 /* XMPPMUC.m in Sources */ = {isa = PBXBuildFile; fileRef = E689EFB71B6A8A1000597587 /* XMPPMUC.m */; settings = {COMPILER_FLAGS = "-w"; }; };
+		E6AAC2A31BB4521600919469 /* XMPPRoom.h in Headers */ = {isa = PBXBuildFile; fileRef = E689EFB81B6A8A1000597587 /* XMPPRoom.h */; };
+		E6AAC2A41BB4521600919469 /* XMPPRoom.m in Sources */ = {isa = PBXBuildFile; fileRef = E689EFB91B6A8A1000597587 /* XMPPRoom.m */; settings = {COMPILER_FLAGS = "-w"; }; };
+		E6AAC2A51BB4521600919469 /* XMPPRoomMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = E689EFBA1B6A8A1000597587 /* XMPPRoomMessage.h */; };
+		E6AAC2A61BB4521600919469 /* XMPPRoomOccupant.h in Headers */ = {isa = PBXBuildFile; fileRef = E689EFBB1B6A8A1000597587 /* XMPPRoomOccupant.h */; };
+		E6AAC2A71BB4521600919469 /* XMPPRoomPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = E689EFBC1B6A8A1000597587 /* XMPPRoomPrivate.h */; };
+		E6AAC2A81BB4522300919469 /* XMPPRoomMemoryStorage.h in Headers */ = {isa = PBXBuildFile; fileRef = E689EFAE1B6A8A1000597587 /* XMPPRoomMemoryStorage.h */; };
+		E6AAC2A91BB4522300919469 /* XMPPRoomMemoryStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = E689EFAF1B6A8A1000597587 /* XMPPRoomMemoryStorage.m */; settings = {COMPILER_FLAGS = "-w"; }; };
+		E6AAC2AA1BB4522300919469 /* XMPPRoomMessageMemoryStorageObject.h in Headers */ = {isa = PBXBuildFile; fileRef = E689EFB01B6A8A1000597587 /* XMPPRoomMessageMemoryStorageObject.h */; };
+		E6AAC2AB1BB4522300919469 /* XMPPRoomMessageMemoryStorageObject.m in Sources */ = {isa = PBXBuildFile; fileRef = E689EFB11B6A8A1000597587 /* XMPPRoomMessageMemoryStorageObject.m */; settings = {COMPILER_FLAGS = "-w"; }; };
+		E6AAC2AC1BB4522300919469 /* XMPPRoomOccupantMemoryStorageObject.h in Headers */ = {isa = PBXBuildFile; fileRef = E689EFB21B6A8A1000597587 /* XMPPRoomOccupantMemoryStorageObject.h */; };
+		E6AAC2AD1BB4522300919469 /* XMPPRoomOccupantMemoryStorageObject.m in Sources */ = {isa = PBXBuildFile; fileRef = E689EFB31B6A8A1000597587 /* XMPPRoomOccupantMemoryStorageObject.m */; settings = {COMPILER_FLAGS = "-w"; }; };
+		E6AAC2AE1BB521D000919469 /* XMPPAutoPing.h in Headers */ = {isa = PBXBuildFile; fileRef = E689F0331B6A8A1000597587 /* XMPPAutoPing.h */; };
+		E6AAC2AF1BB521D000919469 /* XMPPAutoPing.m in Sources */ = {isa = PBXBuildFile; fileRef = E689F0341B6A8A1000597587 /* XMPPAutoPing.m */; settings = {COMPILER_FLAGS = "-w"; }; };
+		E6AAC2B01BB521D000919469 /* XMPPPing.h in Headers */ = {isa = PBXBuildFile; fileRef = E689F0351B6A8A1000597587 /* XMPPPing.h */; };
+		E6AAC2B11BB521D000919469 /* XMPPPing.m in Sources */ = {isa = PBXBuildFile; fileRef = E689F0361B6A8A1000597587 /* XMPPPing.m */; settings = {COMPILER_FLAGS = "-w"; }; };
 		E6B3C32F1B62581200EA613A /* CleanroomASL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6B3C32D1B62581200EA613A /* CleanroomASL.framework */; };
 		E6B3C3301B62581200EA613A /* CleanroomASL.framework in Embed Core Framework */ = {isa = PBXBuildFile; fileRef = E6B3C32D1B62581200EA613A /* CleanroomASL.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E6B3C3311B62581200EA613A /* CleanroomLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6B3C32E1B62581200EA613A /* CleanroomLogger.framework */; };
@@ -352,6 +371,7 @@
 		E6F7A47E1BA356130069152A /* LocationSearchResultsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6F7A47B1BA356130069152A /* LocationSearchResultsController.swift */; };
 		E6F7A47F1BA356130069152A /* PositionIn.LocationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6F7A47C1BA356130069152A /* PositionIn.LocationCell.xib */; };
 		E6F7A4811BA356500069152A /* LocationSearchResultDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6F7A4801BA356500069152A /* LocationSearchResultDataSource.swift */; };
+		E6FC24C31BAAEC23006FE7A0 /* Conversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6FC24C21BAAEC23006FE7A0 /* Conversation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -947,6 +967,7 @@
 		E6F7A47B1BA356130069152A /* LocationSearchResultsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationSearchResultsController.swift; sourceTree = "<group>"; };
 		E6F7A47C1BA356130069152A /* PositionIn.LocationCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.LocationCell.xib; sourceTree = "<group>"; };
 		E6F7A4801BA356500069152A /* LocationSearchResultDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationSearchResultDataSource.swift; sourceTree = "<group>"; };
+		E6FC24C21BAAEC23006FE7A0 /* Conversation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Conversation.swift; sourceTree = "<group>"; };
 		E6FC63D01B5901060062F5C9 /* KVObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KVObserver.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1291,6 +1312,7 @@
 				E6365D341B7D709E00CB79CB /* PhotoInfo.swift */,
 				E632016D1B9834910066C62E /* ObjectInfo.swift */,
 				E6DADB9F1B8C5907009A5694 /* ItemCategory.swift */,
+				E6FC24C21BAAEC23006FE7A0 /* Conversation.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -2587,6 +2609,7 @@
 				E6846DC21B6D9B9600009411 /* NSXMLElement+XEP_0203.h in Headers */,
 				E689EF251B6A89D000597587 /* DDList.h in Headers */,
 				E689F06D1B6A8FE800597587 /* XMPPRosterMemoryStoragePrivate.h in Headers */,
+				E6AAC2A71BB4521600919469 /* XMPPRoomPrivate.h in Headers */,
 				E689EEFA1B6A89D000597587 /* XMPPDeprecatedDigestAuthentication.h in Headers */,
 				E6846DBA1B6D9B1400009411 /* XMPPPubSub.h in Headers */,
 				E689F06B1B6A8FE800597587 /* XMPPRosterMemoryStorage.h in Headers */,
@@ -2597,15 +2620,19 @@
 				E689EF131B6A89D000597587 /* XMPPElement.h in Headers */,
 				E689EF041B6A89D000597587 /* XMPPXFacebookPlatformAuthentication.h in Headers */,
 				E689EF061B6A89D000597587 /* XMPPXOAuth2Google.h in Headers */,
+				E6AAC2A31BB4521600919469 /* XMPPRoom.h in Headers */,
 				E689EF311B6A89D000597587 /* XMPPTimer.h in Headers */,
 				E6846DBE1B6D9B4700009411 /* XMPPDateTimeProfiles.h in Headers */,
+				E6AAC2AA1BB4522300919469 /* XMPPRoomMessageMemoryStorageObject.h in Headers */,
 				E689F0621B6A8EDA00597587 /* XMPPReconnect.h in Headers */,
 				E689F0671B6A8F2E00597587 /* XMPPRosterPrivate.h in Headers */,
+				E6AAC2AC1BB4522300919469 /* XMPPRoomOccupantMemoryStorageObject.h in Headers */,
 				E6846DB81B6D9B1400009411 /* XMPPIQ+XEP_0060.h in Headers */,
 				E689F0641B6A8F2200597587 /* XMPPResource.h in Headers */,
 				E689EF351B6A89D000597587 /* DDAbstractDatabaseLogger.h in Headers */,
 				E689EEF81B6A89D000597587 /* XMPPAnonymousAuthentication.h in Headers */,
 				E689EEFC1B6A89D000597587 /* XMPPDeprecatedPlainAuthentication.h in Headers */,
+				E6AAC2A81BB4522300919469 /* XMPPRoomMemoryStorage.h in Headers */,
 				E689EF4E1B6A89D000597587 /* DDXMLNode.h in Headers */,
 				E689EF231B6A89D000597587 /* XMPPStream.h in Headers */,
 				E689EF271B6A89D000597587 /* GCDMulticastDelegate.h in Headers */,
@@ -2613,9 +2640,12 @@
 				E689EF0C1B6A89D000597587 /* NSNumber+XMPP.h in Headers */,
 				E689EF291B6A89D000597587 /* RFImageToDataTransformer.h in Headers */,
 				E689EF4A1B6A89D000597587 /* DDXMLDocument.h in Headers */,
+				E6AAC29F1BB4521600919469 /* XMPPMessage+XEP0045.h in Headers */,
 				E689F0611B6A8CF900597587 /* XMPPFramework.h in Headers */,
 				E6681A241B676345003096D6 /* XMPPLogFormatter.h in Headers */,
+				E6AAC2A11BB4521600919469 /* XMPPMUC.h in Headers */,
 				E689EF371B6A89D000597587 /* DDASLLogger.h in Headers */,
+				E6AAC2AE1BB521D000919469 /* XMPPAutoPing.h in Headers */,
 				E689EF1F1B6A89D000597587 /* XMPPParser.h in Headers */,
 				E689F0681B6A8F3600597587 /* XMPPUser.h in Headers */,
 				E689EF2B1B6A89D000597587 /* XMPPIDTracker.h in Headers */,
@@ -2633,9 +2663,12 @@
 				E689EF1D1B6A89D000597587 /* XMPPModule.h in Headers */,
 				E689EF541B6A89D000597587 /* stringprep.h in Headers */,
 				E689EF3B1B6A89D000597587 /* DDLog+LOGV.h in Headers */,
+				E6AAC2A61BB4521600919469 /* XMPPRoomOccupant.h in Headers */,
+				E6AAC2B01BB521D000919469 /* XMPPPing.h in Headers */,
 				E689EF4C1B6A89D000597587 /* DDXMLElement.h in Headers */,
 				E689EF161B6A89D000597587 /* XMPPIQ.h in Headers */,
 				E689EF0E1B6A89D000597587 /* NSXMLElement+XMPP.h in Headers */,
+				E6AAC2A51BB4521600919469 /* XMPPRoomMessage.h in Headers */,
 				E6E2FE8D1B66F61300880F3C /* Messaging.h in Headers */,
 				E689EF181B6A89D000597587 /* XMPPJID.h in Headers */,
 				E689EF521B6A89D000597587 /* idn-int.h in Headers */,
@@ -3006,6 +3039,7 @@
 				E6365D351B7D709E00CB79CB /* PhotoInfo.swift in Sources */,
 				E660E52D1B5AC23B00F52050 /* MainMenuViewController.swift in Sources */,
 				2431EBE61B95BD2A009FB158 /* PromotionDetailsViewController.swift in Sources */,
+				E6FC24C31BAAEC23006FE7A0 /* Conversation.swift in Sources */,
 				E66115A81B73AE0F003DB5B3 /* AddPromotionViewController.swift in Sources */,
 				E68B52281B875F8F006B980C /* PromotionListCell.swift in Sources */,
 				E661158D1B73778B003DB5B3 /* RecoverPasswordViewController.swift in Sources */,
@@ -3133,6 +3167,7 @@
 				E689EF341B6A89D000597587 /* GCDAsyncSocket.m in Sources */,
 				E689EF171B6A89D000597587 /* XMPPIQ.m in Sources */,
 				E66945831B6E279E00332134 /* XMPPRegisterProcess.m in Sources */,
+				E6AAC2A21BB4521600919469 /* XMPPMUC.m in Sources */,
 				E689EF0B1B6A89D000597587 /* NSData+XMPP.m in Sources */,
 				E6681A2B1B679C87003096D6 /* XMPPProcess.m in Sources */,
 				E689F06F1B6A8FE800597587 /* XMPPUserMemoryStorageObject.m in Sources */,
@@ -3149,6 +3184,7 @@
 				E689EF4D1B6A89D000597587 /* DDXMLElement.m in Sources */,
 				E689EF261B6A89D000597587 /* DDList.m in Sources */,
 				E6846DBF1B6D9B4700009411 /* XMPPDateTimeProfiles.m in Sources */,
+				E6AAC2AF1BB521D000919469 /* XMPPAutoPing.m in Sources */,
 				E6846DB91B6D9B1400009411 /* XMPPIQ+XEP_0060.m in Sources */,
 				E689EF011B6A89D000597587 /* XMPPPlainAuthentication.m in Sources */,
 				E689EF431B6A89D000597587 /* DDDispatchQueueLogFormatter.m in Sources */,
@@ -3156,9 +3192,13 @@
 				E689EF071B6A89D000597587 /* XMPPXOAuth2Google.m in Sources */,
 				E689EF281B6A89D000597587 /* GCDMulticastDelegate.m in Sources */,
 				E689EEFD1B6A89D000597587 /* XMPPDeprecatedPlainAuthentication.m in Sources */,
+				E6AAC2AD1BB4522300919469 /* XMPPRoomOccupantMemoryStorageObject.m in Sources */,
 				E689F06C1B6A8FE800597587 /* XMPPRosterMemoryStorage.m in Sources */,
+				E6AAC2AB1BB4522300919469 /* XMPPRoomMessageMemoryStorageObject.m in Sources */,
 				E689EF141B6A89D000597587 /* XMPPElement.m in Sources */,
+				E6AAC2A91BB4522300919469 /* XMPPRoomMemoryStorage.m in Sources */,
 				E689F0731B6A909200597587 /* XMPPDelegate.m in Sources */,
+				E6AAC2A41BB4521600919469 /* XMPPRoom.m in Sources */,
 				E689EF451B6A89D000597587 /* DDMultiFormatter.m in Sources */,
 				E689EF2C1B6A89D000597587 /* XMPPIDTracker.m in Sources */,
 				E689EF1E1B6A89D000597587 /* XMPPModule.m in Sources */,
@@ -3174,6 +3214,7 @@
 				E689EF0D1B6A89D000597587 /* NSNumber+XMPP.m in Sources */,
 				E689EF3F1B6A89D000597587 /* DDTTYLogger.m in Sources */,
 				E689EF0F1B6A89D000597587 /* NSXMLElement+XMPP.m in Sources */,
+				E6AAC2A01BB4521600919469 /* XMPPMessage+XEP0045.m in Sources */,
 				E6846DBB1B6D9B1400009411 /* XMPPPubSub.m in Sources */,
 				E689EF321B6A89D000597587 /* XMPPTimer.m in Sources */,
 				E689EF381B6A89D000597587 /* DDASLLogger.m in Sources */,
@@ -3183,6 +3224,7 @@
 				E6846DC31B6D9B9600009411 /* NSXMLElement+XEP_0203.m in Sources */,
 				E689EEFB1B6A89D000597587 /* XMPPDeprecatedDigestAuthentication.m in Sources */,
 				E689EF481B6A89D000597587 /* NSString+DDXML.m in Sources */,
+				E6AAC2B11BB521D000919469 /* XMPPPing.m in Sources */,
 				E689EF1C1B6A89D000597587 /* XMPPMessage.m in Sources */,
 				E689EF301B6A89D000597587 /* XMPPStringPrep.m in Sources */,
 				E689EF191B6A89D000597587 /* XMPPJID.m in Sources */,

@@ -142,9 +142,10 @@ extension ProductDetailsViewController: ProductDetailsActionConsumer {
         case .SellerProfile:
             segue = .ShowSellerProfile
         case .SendMessage:
-            let chatController = ConversationViewController.conversationController()
-            navigationController?.pushViewController(chatController, animated: true)
-            return 
+            if let userId = author?.objectId {
+                showChatViewController(Conversation(userId: userId))
+            }
+            return
         default:
             Log.warning?.message("Unhandled action: \(action)")
             return

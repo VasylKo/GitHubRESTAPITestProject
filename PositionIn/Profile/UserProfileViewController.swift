@@ -65,10 +65,10 @@ final class UserProfileViewController: BesideMenuViewController, BrowseActionPro
     
     private func didReceiveProfile(profile: UserProfile, state: UserProfile.SubscriptionState = .SameUser) {
         let isCurrentUser = api().isCurrentUser(objectId)
-        let isUserAuthorized = api().isUserAuthorized()
+        let isUserAuthorized: Bool = api().isUserAuthorized()
         let (leftAction, rightAction): (UserProfileViewController.ProfileAction, UserProfileViewController.ProfileAction) =
         (.None, .None)
-        
+        //TODO: should use info about current auth status
         setNavigationBarButtonItem(isCurrentUser)
         
         var infoSection: [ProfileCellModel] = [
@@ -200,8 +200,7 @@ extension UserProfileViewController: UserProfileActionConsumer {
                 self?.sendSubscriptionUpdateNotification(aUserInfo: nil)
             }
         case .Chat:
-            let chatController = ConversationViewController.conversationController(interlocutor: objectId)
-            navigationController?.pushViewController(chatController, animated: true)
+            showChatViewController(Conversation(userId: objectId))
         case .Call:
             if let phone = profile.phone,
                 let phoneNumberURL = NSURL(string: "tel://" + phone)

@@ -43,9 +43,9 @@
 //
 //#import "XMPPPrivacy.h"
 //
-//#import "XMPPMUC.h"
-//#import "XMPPRoom.h"
-//#import "XMPPRoomMemoryStorage.h"
+#import "XMPPMUC.h"
+#import "XMPPRoom.h"
+#import "XMPPRoomMemoryStorage.h"
 //#import "XMPPRoomCoreDataStorage.h"
 //#import "XMPPRoomHybridStorage.h"
 //
@@ -56,8 +56,8 @@
 //
 //#import "TURNSocket.h"
 //
-//#import "XMPPDateTimeProfiles.h"
-//#import "NSDate+XMPPDateTimeProfiles.h"
+#import "XMPPDateTimeProfiles.h"
+#import "NSDate+XMPPDateTimeProfiles.h"
 //
 //#import "XMPPMessage+XEP_0085.h"
 //
@@ -70,12 +70,14 @@
 //
 //#import "XMPPMessage+XEP_0184.h"
 //
-//#import "XMPPPing.h"
+#import "XMPPPing.h"
 //#import "XMPPAutoPing.h"
 //
 //#import "XMPPTime.h"
 //#import "XMPPAutoTime.h"
 //
 //#import "XMPPElement+Delay.h"
+
+#import "NSXMLElement+XEP_0203.h"
 
 #import "XMPPLogging.h"
