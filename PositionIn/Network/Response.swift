@@ -8,47 +8,39 @@
 
 import ObjectMapper
 import CleanroomLogger
+import PosInCore
 
-struct QuickSearchResponse<C: CRUDObject>: Mappable {
+struct QuickSearchResponse: Mappable {
     //TODO: need add categories
-//    private(set) var categories: [C]!
-    private(set) var promotions: [C]!
-    private(set) var communities: [C]!
-    private(set) var items: [C]!
-    private(set) var events: [C]!
-    private(set) var peoples: [C]!
+    private(set) var categories: [ItemCategory]!
+    private(set) var products: [ObjectInfo]!
+    private(set) var promotions: [ObjectInfo]!
+    private(set) var communities: [UserInfo]!
+    private(set) var events: [ObjectInfo]!
+    private(set) var peoples: [UserInfo]!
     
     init?(_ map: Map) {
         mapping(map)
-        switch (items, promotions, communities, events, peoples) {
-        case (.Some, .Some, .Some, .Some, .Some):
-            break
-        default:
-            Log.error?.message("Error while parsing object")
-            Log.debug?.trace()
-            Log.verbose?.value(self)
-            return nil
-        }
     }
     
     mutating func mapping(map: Map) {
-        items <- map["items"]
+        products <- map["items"] //TODO: need check
         promotions <- map["promotions"]
         communities <- map["communities"]
         events <- map["events"]
-//        categories <- map["categories"]
+        categories <- (map["categories"], ListTransform(itemTransform:EnumTransform()))
         peoples <- map["peoples"]
         
-        Log.verbose?.value(items)
         Log.verbose?.value(promotions)
         Log.verbose?.value(communities)
         Log.verbose?.value(events)
-//        Log.verbose?.value(categories)
+        Log.verbose?.value(peoples)
+        Log.verbose?.value(categories)
         Log.verbose?.value(peoples)
     }
     
     var description: String {
-        return "<\(self.dynamicType)-(\(items)):\(promotions):\(communities):\(events)c:\(peoples)>"
+        return "<\(self.dynamicType)-(\(peoples)):\(promotions):\(communities):\(events)c:\(peoples)>"
     }
 }
 

@@ -42,6 +42,7 @@ final class LocationSearchResultsController: NSObject {
             Log.debug?.value(locations)
             self?.resultStorage?.setLocations(locations)
             self?.locationsTable?.reloadData()
+            self?.locationsTable?.scrollEnabled = self?.locationsTable?.frame.size.height < self?.locationsTable?.contentSize.height
         }
         let searchString = map(searchBar?.text) { $0.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet()) }
         if let searchString = searchString where count(searchString) > 0 {

@@ -103,6 +103,10 @@ extension SearchViewController: LocationSearchResultsDelegate {
     
     func didSelectLocation(location: Location?) {
         SearchFilter.setLocation(location)
+        view.endEditing(true)
+        transitioningDelegate = nil
+        dismissViewControllerAnimated(true, completion: nil)
+        Log.debug?.message("Should close search")
     }
 }
 
@@ -113,6 +117,9 @@ extension SearchViewController: ItemsSearchResultsDelegate {
     }
     
     func didSelectItem(item: FeedItem?) {
-        
+        view.endEditing(true)
+        transitioningDelegate = nil
+        dismissViewControllerAnimated(true, completion: nil)
+        Log.debug?.message("Should close search")
     }
 }

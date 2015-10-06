@@ -280,16 +280,16 @@ struct APIService {
     
     //MARK: - Search -
     
-    func getSearchFeed(query: APIServiceQueryConvertible, page: Page) -> Future<QuickSearchResponse<FeedItem>,NSError> {
-        let endpoint = FeedItem.quickSearchEndpoint()
+    func getSearchFeed(query: APIServiceQueryConvertible, page: Page) -> Future<QuickSearchResponse,NSError> {
+        let endpoint = SearchItem.endpoint()
         let params = APIServiceQuery()
         params.append(query: query)
         params.append(query: page)
         Log.debug?.value(params.query)
         return session().flatMap {
-            (token: AuthResponse.Token) -> Future<QuickSearchResponse<FeedItem>, NSError> in
+            (token: AuthResponse.Token) -> Future<QuickSearchResponse, NSError> in
             let request = self.updateRequest(token, endpoint: endpoint, params: params.query)
-            let (_ , future): (Alamofire.Request, Future<QuickSearchResponse<FeedItem>, NSError>) = self.dataProvider.objectRequest(request)
+            let (_ , future): (Alamofire.Request, Future<QuickSearchResponse, NSError>) = self.dataProvider.objectRequest(request)
             return self.handleFailure(future)
         }
     }

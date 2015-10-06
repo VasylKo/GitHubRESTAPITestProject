@@ -11,41 +11,48 @@ import PosInCore
 import CleanroomLogger
 
 class ItemsSearchResultDataSource: TableViewDataSource, ItemsSearchResultStorage {
-    func setItems(feedItems: [[FeedItem]]) {
+    func setItems(feedItems:  [TableViewCellModel]) {
         itemModels = feedItems
-        
     }
     
     override func configureTable(tableView: UITableView) {
         tableView.estimatedRowHeight = 50.0
+        tableView.keyboardDismissMode = .OnDrag
         super.configureTable(tableView)
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return itemModels.count
+        return 1
     }
     
     @objc override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return itemModels[section].count
+        return itemModels.count
     }
     
     override func tableView(tableView: UITableView, modelForIndexPath indexPath: NSIndexPath) -> TableViewCellModel {
-        let feedItem = self.itemModels[indexPath.section][indexPath.row]
-        
-        return CompactFeedTableCellModel(itemType: feedItem.type, objectID: feedItem.objectId, title: feedItem.text, details: feedItem.details, info: "", imageURL: feedItem.image, data: nil)
+        return self.itemModels[indexPath.row]
     }
     
     @objc override func tableView(tableView: UITableView, reuseIdentifierForIndexPath indexPath: NSIndexPath) -> String {
         let model = self.tableView(tableView, modelForIndexPath: indexPath)
-        //TODO: change to correct type
-        return EventListCell.reuseId()
+        
+        if let sectionModel = model as? SearchSectionCellModel {
+            return SearchSectionCell.reuseId()
+        }
+        
+        if let itemModel = model as? SearchItemCellModel {
+            return SearchEntityCell.reuseId()
+        }
+        
+        return TableViewCell.reuseId()
     }
     
     override func nibCellsId() -> [String] {
-        return [ EventListCell.reuseId() ]
+        return [SearchEntityCell.reuseId(), SearchSectionCell.reuseId()]
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         if let model = self.tableView(tableView, modelForIndexPath: indexPath) as? LocationCellModel {
 
@@ -53,6 +60,5 @@ class ItemsSearchResultDataSource: TableViewDataSource, ItemsSearchResultStorage
     }
     
     weak var delegate: ItemsSearchResultsDelegate?
-    private var itemModels: [[FeedItem]] = []
+    private var itemModels: [TableViewCellModel] = []
 }
-
