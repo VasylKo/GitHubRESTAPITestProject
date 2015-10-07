@@ -299,6 +299,7 @@
 		E6B3C3301B62581200EA613A /* CleanroomASL.framework in Embed Core Framework */ = {isa = PBXBuildFile; fileRef = E6B3C32D1B62581200EA613A /* CleanroomASL.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E6B3C3311B62581200EA613A /* CleanroomLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6B3C32E1B62581200EA613A /* CleanroomLogger.framework */; };
 		E6B3C3321B62581200EA613A /* CleanroomLogger.framework in Embed Core Framework */ = {isa = PBXBuildFile; fileRef = E6B3C32E1B62581200EA613A /* CleanroomLogger.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E6BB09FE1BC51369008D59B7 /* CreateConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6BB09FD1BC51369008D59B7 /* CreateConversationViewController.swift */; };
 		E6BEF1C41B9C54EF00511B46 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6BEF1C31B9C54EF00511B46 /* PostViewController.swift */; };
 		E6BEF1C61B9C556300511B46 /* PositionIn.PostViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6BEF1C51B9C556300511B46 /* PositionIn.PostViewController.xib */; };
 		E6BEF1C81B9C5A0C00511B46 /* PostCellModelFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6BEF1C71B9C5A0C00511B46 /* PostCellModelFactory.swift */; };
@@ -878,6 +879,7 @@
 		E6AAC28F1BB4256B00919469 /* natalie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = natalie.swift; sourceTree = "<group>"; };
 		E6B3C32D1B62581200EA613A /* CleanroomASL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CleanroomASL.framework; path = Carthage/Build/iOS/CleanroomASL.framework; sourceTree = "<group>"; };
 		E6B3C32E1B62581200EA613A /* CleanroomLogger.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CleanroomLogger.framework; path = Carthage/Build/iOS/CleanroomLogger.framework; sourceTree = "<group>"; };
+		E6BB09FD1BC51369008D59B7 /* CreateConversationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateConversationViewController.swift; sourceTree = "<group>"; };
 		E6BEF1C31B9C54EF00511B46 /* PostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		E6BEF1C51B9C556300511B46 /* PositionIn.PostViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.PostViewController.xib; sourceTree = "<group>"; };
 		E6BEF1C71B9C5A0C00511B46 /* PostCellModelFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostCellModelFactory.swift; sourceTree = "<group>"; };
@@ -1124,6 +1126,7 @@
 				E62B16FA1B5CDF0100D446BC /* MessagesListViewController.swift */,
 				E62B16FC1B5CDF2400D446BC /* PositionIn.MessagesListViewController.xib */,
 				E6F074AE1BA6980D00D2566B /* ConversationViewController.swift */,
+				E6BB09FD1BC51369008D59B7 /* CreateConversationViewController.swift */,
 			);
 			path = Messaging;
 			sourceTree = "<group>";
@@ -3087,6 +3090,7 @@
 				E68B52031B873687006B980C /* FeedItemCellModelFactory.swift in Sources */,
 				E6829B041B5E6CF800FB1E1D /* RoundButton.swift in Sources */,
 				E6DADBA01B8C5907009A5694 /* ItemCategory.swift in Sources */,
+				E6BB09FE1BC51369008D59B7 /* CreateConversationViewController.swift in Sources */,
 				E6BEF1CD1B9C5E7200511B46 /* PostImageCell.swift in Sources */,
 				2431EBE01B94C1DC009FB158 /* Event.swift in Sources */,
 				24EF62111BA81A6B00472531 /* ChatHistoryCellModel.swift in Sources */,

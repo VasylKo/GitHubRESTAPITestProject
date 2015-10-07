@@ -17,12 +17,18 @@ final class MessagesListViewController: BesideMenuViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         dataSource.configureTable(tableView)
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         reloadData()
     }
 
     func reloadData() {
         if let conversations = chat().history.conversationList() as? [XMPPConversation] {
-            dataSource.setItems(conversations)
+            dataSource.setItems(conversations.sorted {
+                return $0.lastActivityDate.compare($1.lastActivityDate) == NSComparisonResult.OrderedDescending
+                })
         }
         tableView.reloadData()
 
