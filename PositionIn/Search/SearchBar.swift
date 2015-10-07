@@ -34,5 +34,4 @@ final class SearchBar: UISearchBar {
         tintColor = UIColor.whiteColor()
 //        layer.cornerRadius = 5
     }
-    
 }

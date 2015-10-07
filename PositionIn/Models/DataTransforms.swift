@@ -29,8 +29,6 @@ final class CRUDObjectIdTransform: TransformType {
     }
 }
 
-
-
 final class APIDateTransform: DateFormaterTransform {
     
     init() {

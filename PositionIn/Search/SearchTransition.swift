@@ -22,9 +22,6 @@ final class SearchTransitioningDelegate: NSObject, UIViewControllerTransitioning
     }
 }
 
-
-
-
 final class SearchAppearanceAnimationController: NSObject,UIViewControllerAnimatedTransitioning {
     let transitionDuration: NSTimeInterval = 0.5
     let startFrame: CGRect
