@@ -37,12 +37,6 @@ platform :ios do
 
     # increment_build_number
 
-    gym(
-        scheme: "PositionIn",
-        output_directory: "Build",
-        clean: true,
-        ) # Build app
-
     # xctool # run the tests of your app
   end
 
@@ -51,17 +45,40 @@ platform :ios do
     snapshot
   end
 
-  desc "Submit a new Beta Build to Amazon S3"
-  lane :beta do
-    snapshot
-    s3
-    
-    # sigh
-    # deliver(beta: true)
-
-    # sh "your_script.sh"
-    # You can also use other beta testing services here
+  desc "Submit a new Dev Build to Amazon S3"
+  lane :Dev do
+    gym(
+        scheme: "PositionIn",
+        configuration: "DevRelease",
+        output_directory: "Build",
+        clean: true,
+        ) # Build app
+        s3(html_file_name: "dev.html", version_file_name: "dev.version.json")
   end
+
+    desc "Submit a new Staging Build to Amazon S3"
+    lane :Staging do
+      gym(
+        scheme: "PositionIn",
+        configuration: "StagingRelease",
+        output_directory: "Build",
+        clean: true,
+        ) # Build app
+      snapshot
+      s3(html_file_name: "staging.html", version_file_name: "staging.version.json")
+    end
+
+    desc "Submit a new Production Build to Amazon S3"
+    lane :Production do
+        gym(
+            scheme: "PositionIn",
+            configuration: "ProdRelease",
+            output_directory: "Build",
+            clean: true,
+            ) # Build app
+        snapshot
+        s3(html_file_name: "production.html", version_file_name: "production.version.json")
+    end
 
   desc "Deploy a new version to the App Store"
   desc "** Full Markdown** Support: `code`"
