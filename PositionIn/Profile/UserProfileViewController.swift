@@ -53,6 +53,8 @@ final class UserProfileViewController: BesideMenuViewController, BrowseActionPro
     }
 
     static let SubscriptionDidChangeNotification = "SubscriptionDidChangeNotification"
+    private static let NavigationBarButtonActionSelector : Selector = "handleNavigationBarButtonItemTap:"
+    private let NavigationBarButtonWidthSize : CGFloat = 40
     
     //MARK: - Reload data -
     
@@ -69,7 +71,9 @@ final class UserProfileViewController: BesideMenuViewController, BrowseActionPro
         let (leftAction, rightAction): (UserProfileViewController.ProfileAction, UserProfileViewController.ProfileAction) =
         (.None, .None)
         //TODO: should use info about current auth status
-        setNavigationBarButtonItem(isCurrentUser)
+        if isUserAuthorized {
+            setNavigationBarButtonItem(isCurrentUser)
+        }
         
         var infoSection: [ProfileCellModel] = [
             ProfileInfoCellModel(name: profile.displayName, avatar: profile.avatar, background: profile.backgroundImage, leftAction: leftAction, rightAction: rightAction, actionDelegate: self),
@@ -98,31 +102,31 @@ final class UserProfileViewController: BesideMenuViewController, BrowseActionPro
             let profileEditButton = UIButton()
             profileEditButton.tintColor = UIColor.whiteColor()
             profileEditButton.setImage(UIImage(named: "profileEdit")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate), forState: UIControlState.Normal)
-            profileEditButton.frame = CGRectMake(0, 0, 40, 40)
+            profileEditButton.frame = CGRectMake(0, 0, NavigationBarButtonWidthSize, NavigationBarButtonWidthSize)
             self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: profileEditButton)
             profileEditButton.tag = ProfileAction.Edit.rawValue
-            profileEditButton.addTarget(self, action: "handleNavigationBarButtonItemTap:",
+            profileEditButton.addTarget(self, action: UserProfileViewController.NavigationBarButtonActionSelector,
                 forControlEvents: UIControlEvents.TouchUpInside)
         }
         else {
             let chatButton = UIButton()
             chatButton.tintColor = UIColor.whiteColor()
             chatButton.setImage(UIImage(named: "profileChat")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate), forState: UIControlState.Normal)
-            chatButton.frame = CGRectMake(0, 0, 40, 40)
+            chatButton.frame = CGRectMake(0, 0, NavigationBarButtonWidthSize, NavigationBarButtonWidthSize)
             chatButton.tag = ProfileAction.Chat.rawValue
-            chatButton.addTarget(self, action: "handleNavigationBarButtonItemTap:",
+            chatButton.addTarget(self, action: UserProfileViewController.NavigationBarButtonActionSelector,
                 forControlEvents: UIControlEvents.TouchUpInside)
             
             let callButton = UIButton()
             callButton.tintColor = UIColor.whiteColor()
             callButton.setImage(UIImage(named: "profileCall")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate), forState: UIControlState.Normal)
-            callButton.frame = CGRectMake(40, 0, 40, 40)
+            callButton.frame = CGRectMake(NavigationBarButtonWidthSize, 0, NavigationBarButtonWidthSize, NavigationBarButtonWidthSize)
             callButton.tag = ProfileAction.Call.rawValue
-            callButton.addTarget(self, action: "handleNavigationBarButtonItemTap:",
+            callButton.addTarget(self, action: UserProfileViewController.NavigationBarButtonActionSelector,
                 forControlEvents: UIControlEvents.TouchUpInside)
             
             let containerView = UIView()
-            containerView.frame = CGRectMake(0, 0, 80, 40)
+            containerView.frame = CGRectMake(0, 0, NavigationBarButtonWidthSize * 2, NavigationBarButtonWidthSize)
             containerView.addSubview(callButton)
             containerView.addSubview(chatButton)
             
