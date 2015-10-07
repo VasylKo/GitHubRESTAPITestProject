@@ -26,6 +26,7 @@ final class ChatController: NSObject {
         prepareCache()
         loadInfoForUsers(conversation.participants)
         chatClient.addMessageListener(self)
+        chatClient.history.startConversationWithUser(conversation.roomId)
     }
     
     func closeSession() {
@@ -133,7 +134,12 @@ final class ChatController: NSObject {
     }
     
     private func loadConversationHistory(conversation: Conversation) {
-        //TODO: load history
+        if let rawMessages = chatClient.history.messagesForConversationWithUser(conversation.roomId) as? [XMPPTextMessage] {
+            messages = map(rawMessages) { m in
+                return JSQMessage(senderId: m.from, senderDisplayName: self.displayNameForUser(m.from), date: m.date, text: m.text)
+            }
+        }
+
 //        messages = [
 //            JSQMessage(senderId: conversation.currentUserId, displayName: displayNameForUser(conversation.currentUserId), text: "Hi!"),
 //            JSQMessage(senderId: conversation.participants.first!, displayName: displayNameForUser(conversation.participants.first!), text: "Please give me a call."),

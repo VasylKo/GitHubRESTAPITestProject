@@ -265,6 +265,8 @@
 		E68B52261B875F8F006B980C /* PositionIn.PromotionListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E68B521E1B875F8F006B980C /* PositionIn.PromotionListCell.xib */; };
 		E68B52271B875F8F006B980C /* PostListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E68B521F1B875F8F006B980C /* PostListCell.swift */; };
 		E68B52281B875F8F006B980C /* PromotionListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E68B52201B875F8F006B980C /* PromotionListCell.swift */; };
+		E68DF1771BC4E58E0054482D /* XMPPChatHistory.h in Headers */ = {isa = PBXBuildFile; fileRef = E68DF1751BC4E58E0054482D /* XMPPChatHistory.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E68DF1781BC4E58E0054482D /* XMPPChatHistory.m in Sources */ = {isa = PBXBuildFile; fileRef = E68DF1761BC4E58E0054482D /* XMPPChatHistory.m */; };
 		E69420F91B66358000F34F06 /* ProductDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E69420F81B66358000F34F06 /* ProductDetailsViewController.swift */; };
 		E69420FF1B665F5100F34F06 /* PositionIn.ProductDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E69420FE1B665F5100F34F06 /* PositionIn.ProductDetailsViewController.xib */; };
 		E69421021B666A1600F34F06 /* PositionIn.ActionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E69421001B666A1600F34F06 /* PositionIn.ActionCell.xib */; };
@@ -860,6 +862,8 @@
 		E68B521E1B875F8F006B980C /* PositionIn.PromotionListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.PromotionListCell.xib; sourceTree = "<group>"; };
 		E68B521F1B875F8F006B980C /* PostListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostListCell.swift; sourceTree = "<group>"; };
 		E68B52201B875F8F006B980C /* PromotionListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PromotionListCell.swift; sourceTree = "<group>"; };
+		E68DF1751BC4E58E0054482D /* XMPPChatHistory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPChatHistory.h; sourceTree = "<group>"; };
+		E68DF1761BC4E58E0054482D /* XMPPChatHistory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPChatHistory.m; sourceTree = "<group>"; };
 		E69244461B9055A3004B17C0 /* DataTransforms.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTransforms.swift; sourceTree = "<group>"; };
 		E69420F81B66358000F34F06 /* ProductDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductDetailsViewController.swift; sourceTree = "<group>"; };
 		E69420FE1B665F5100F34F06 /* PositionIn.ProductDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.ProductDetailsViewController.xib; sourceTree = "<group>"; };
@@ -2529,6 +2533,8 @@
 				E6E2FEAC1B66F72100880F3C /* XMPPClient.m */,
 				E689F0701B6A909200597587 /* XMPPDelegate.h */,
 				E689F0711B6A909200597587 /* XMPPDelegate.m */,
+				E68DF1751BC4E58E0054482D /* XMPPChatHistory.h */,
+				E68DF1761BC4E58E0054482D /* XMPPChatHistory.m */,
 				E6681A271B679C72003096D6 /* Processes */,
 			);
 			path = Messaging;
@@ -2641,6 +2647,7 @@
 				E689F0611B6A8CF900597587 /* XMPPFramework.h in Headers */,
 				E6681A241B676345003096D6 /* XMPPLogFormatter.h in Headers */,
 				E6AAC2A11BB4521600919469 /* XMPPMUC.h in Headers */,
+				E68DF1771BC4E58E0054482D /* XMPPChatHistory.h in Headers */,
 				E689EF371B6A89D000597587 /* DDASLLogger.h in Headers */,
 				E6AAC2AE1BB521D000919469 /* XMPPAutoPing.h in Headers */,
 				E689EF1F1B6A89D000597587 /* XMPPParser.h in Headers */,
@@ -3165,6 +3172,7 @@
 				E6AAC2A21BB4521600919469 /* XMPPMUC.m in Sources */,
 				E689EF0B1B6A89D000597587 /* NSData+XMPP.m in Sources */,
 				E6681A2B1B679C87003096D6 /* XMPPProcess.m in Sources */,
+				E68DF1781BC4E58E0054482D /* XMPPChatHistory.m in Sources */,
 				E689F06F1B6A8FE800597587 /* XMPPUserMemoryStorageObject.m in Sources */,
 				E689EF4B1B6A89D000597587 /* DDXMLDocument.m in Sources */,
 				E6681A251B676345003096D6 /* XMPPLogFormatter.m in Sources */,
