@@ -49,18 +49,18 @@ platform :ios do
   lane :Dev do
     gym(
         scheme: "PositionIn",
-        configuration: "DevRelease"
+        configuration: "DevRelease",
         output_directory: "Build",
         clean: true,
         ) # Build app
         s3(html_file_name: "dev.html", version_file_name: "dev.version.json")
   end
 
-    desc "Submit a new Dev Build to Amazon S3"
+    desc "Submit a new Staging Build to Amazon S3"
     lane :Staging do
       gym(
         scheme: "PositionIn",
-        configuration: "StagingRelease"
+        configuration: "StagingRelease",
         output_directory: "Build",
         clean: true,
         ) # Build app
@@ -68,11 +68,11 @@ platform :ios do
       s3(html_file_name: "staging.html", version_file_name: "staging.version.json")
     end
 
-    desc "Submit a new Dev Build to Amazon S3"
+    desc "Submit a new Production Build to Amazon S3"
     lane :Production do
         gym(
             scheme: "PositionIn",
-            configuration: "ProdRelease"
+            configuration: "ProdRelease",
             output_directory: "Build",
             clean: true,
             ) # Build app
