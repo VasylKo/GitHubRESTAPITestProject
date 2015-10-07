@@ -11,9 +11,12 @@
 @class XMPPMessage;
 
 @interface XMPPConversation : NSObject
-- (nonnull instancetype)initWithUser:(nonnull  NSString *)userId;
+
 @property (readonly, copy, nonnull ) NSArray *participants;
 @property (nonatomic, readonly, nonnull) NSDate *lastActivityDate;
+@property (nonatomic, readonly, copy, nonnull) NSString *name;
+@property (nonatomic, readonly, strong, nullable) NSURL *imageURL;
+@property (nonatomic, readonly, copy, nonnull) NSString *roomId;
 @end
 
 @interface XMPPTextMessage : NSObject
@@ -27,7 +30,7 @@
 @interface XMPPChatHistory : NSObject
 - (nonnull instancetype)initWithCurrentUser:(nonnull NSString *)currentUserId;
 - (nonnull NSArray *)conversationList;
-- (void)startConversationWithUser:(nonnull NSString *)userId;
+- (void)startConversationWithUser:(nonnull NSString *)userId name:(nonnull NSString*)displayName imageURL:(nullable NSURL *)url;
 - (nonnull NSArray *)messagesForConversationWithUser:(nonnull NSString *)userId;
 - (void)addTextMessage:(nonnull XMPPTextMessage *)message outgoing:(BOOL)outgoing;
 @end

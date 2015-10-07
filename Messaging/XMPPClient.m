@@ -153,7 +153,7 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
     self.xmppRoster = nil;
     self.xmppStream = nil;
     
-    self.history = nil;
+    self.history = [XMPPChatHistory new];
 }
 
 #pragma mark - Log -
