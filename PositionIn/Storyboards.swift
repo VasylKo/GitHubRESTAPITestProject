@@ -28,6 +28,10 @@ struct Storyboards {
             return self.storyboard.instantiateViewControllerWithIdentifier("MainMenuViewController") as! MainMenuViewController
         }
 
+        static func instantiateCreateConversationViewController() -> CreateConversationViewController! {
+            return self.storyboard.instantiateViewControllerWithIdentifier("CreateConversationViewController") as! CreateConversationViewController
+        }
+
         static func instantiateBrowseCommunityViewController() -> BrowseCommunityViewController! {
             return self.storyboard.instantiateViewControllerWithIdentifier("BrowseCommunityViewController") as! BrowseCommunityViewController
         }
@@ -378,6 +382,8 @@ extension SidebarViewController {
 }
 
 //MARK: - MessagesListViewController
+
+//MARK: - CreateConversationViewController
 
 //MARK: - FilterViewController
 
