@@ -112,6 +112,7 @@ extension AppDelegate {
     func currentUserDidChange(profile: UserProfile?) {
         if  let user = profile,
             let chatCredentials = self.api.getChatCredentials() {
+                chatClient.disconnect()
                 chatClient = AppDelegate.chatClientInstance()
                 chatClient.auth(chatCredentials.jid, password: chatCredentials.password).future().onSuccess { [unowned self] in
                     Log.info?.message("XMPP authorized")
