@@ -10,44 +10,33 @@ import UIKit
 import PosInCore
 import CleanroomLogger
 import JSQMessagesViewController
+import Messaging
 
 final class MessagesListViewController: BesideMenuViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         dataSource.configureTable(tableView)
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         reloadData()
     }
 
     func reloadData() {
-        let items = mockData()
-        dataSource.setItems(items)
+        if let conversations = chat().history.conversationList() as? [XMPPConversation] {
+            dataSource.setItems(conversations.sorted {
+                return $0.lastActivityDate.compare($1.lastActivityDate) == NSComparisonResult.OrderedDescending
+                })
+        }
         tableView.reloadData()
-    }
-    
-    typealias ChatHistoryResponse = (UserInfo, JSQMessage)
-    
-    func mockData() -> [ChatHistoryResponse] {
-        let dolph = UserInfo()
-        dolph.title = "Dolph Lundgren"
-        dolph.avatar = NSURL(string: "http://www.flickeringmyth.com/wp-content/uploads/2014/09/dolph-lundgren.jpg")
-        let tony =  UserInfo()
-        tony.title = "Tony Soprano"
-        tony.avatar = NSURL(string: "http://static.giantbomb.com/uploads/original/2/23298/1058360-tonysoprano1.jpg")
-        let charlie = UserInfo()
-        charlie.title = "Charlie Sheen"
-        charlie.avatar = NSURL(string: "http://img2-2.timeinc.net/people/i/2011/news/110314/charlie-sheen-5240.jpg")
-        let users: [UserInfo] = [dolph, tony, charlie]
-        
-        let messages: [JSQMessage] = [
-            JSQMessage(senderId: "", senderDisplayName: "", date: NSDate(timeIntervalSinceNow: (-60) * 14), text: "Nicolas Cage is a great actor and he's done some good action movies too."),
-            JSQMessage(senderId: "", senderDisplayName: "", date: NSDate(timeIntervalSinceNow: (-60) * 60 * 3 - 60 * 4 ), text: "We're soldiers. Soldiers don't go to hell. It's war. Soldiers kill other soldiers. We're in a situation where everyone involved knows the stakes and if you are going to accept those stakes, you've got to do certain things. It's business."),
-            JSQMessage(senderId: "", senderDisplayName: "", date: NSDate(timeIntervalSinceNow: (-60) * 60 * 4 - 60 * 23), text: "The only thing I'm addicted to is winning. This bootleg cult, arrogantly referred to as Alcoholics Anonymous, reports a 5 percent success rate. My success rate is 100 percent."),
-        ]
-        
-        return Array(zip(users, messages))
-    }
 
+    }
+    
+//    typealias ChatHistoryResponse = (UserInfo, JSQMessage)
+    typealias ChatHistoryResponse = XMPPConversation
+    
     @IBOutlet private weak var tableView: UITableView!
     
     private lazy var dataSource: ChatHistoryDataSource = { [unowned self] in
@@ -95,13 +84,13 @@ extension MessagesListViewController {
             let dateFormatter = NSDateFormatter()
             dateFormatter.dateStyle = .NoStyle
             dateFormatter.timeStyle = .MediumStyle
-            models = messages.map { (user, message) -> ChatHistoryCellModel in
+            models = messages.map { conversation -> ChatHistoryCellModel in
                 return ChatHistoryCellModel(
-                    user: user.objectId,
-                    name: user.title,
-                    message: message.text,
-                    imageURL: user.avatar,
-                    date: map(message.date) { dateFormatter.stringFromDate($0) }
+                    user: conversation.roomId,
+                    name: conversation.name,
+                    message: "",
+                    imageURL: conversation.imageURL,
+                    date: map(conversation.lastActivityDate) { dateFormatter.stringFromDate($0) }
                 )
             }
         }

@@ -8,6 +8,8 @@
 
 @import Foundation;
 
+@class XMPPChatHistory;
+
 @interface XMPPClientConfiguration : NSObject
 + (nonnull instancetype)configurationWith:(nonnull NSString *)hostName port:(NSInteger)port;
 + (nonnull instancetype)defaultConfiguration;
@@ -36,4 +38,7 @@
 
 @property (nonatomic, readonly, assign) BOOL isConnected;
 - (void)disconnect;
+
+
+@property (nonnull, readonly, strong) XMPPChatHistory *history;
 @end

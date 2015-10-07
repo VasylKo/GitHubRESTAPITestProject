@@ -92,6 +92,8 @@ final class ChatController: NSObject {
             Log.debug?.value(response.items)
             if let strongSelf = self {
                 strongSelf.participantsInfo = response.items
+                let conversation = strongSelf.conversation
+                strongSelf.chatClient.history.startConversationWithUser(conversation.roomId, name: strongSelf.displayNameForUser(conversation.roomId), imageURL: nil)
                 strongSelf.loadConversationHistory(strongSelf.conversation)
                 strongSelf.delegate?.didUpdateMessages()
                 let usersWithAvatars = response.items.filter { $0.avatar != nil }
@@ -133,14 +135,11 @@ final class ChatController: NSObject {
     }
     
     private func loadConversationHistory(conversation: Conversation) {
-        //TODO: load history
-//        messages = [
-//            JSQMessage(senderId: conversation.currentUserId, displayName: displayNameForUser(conversation.currentUserId), text: "Hi!"),
-//            JSQMessage(senderId: conversation.participants.first!, displayName: displayNameForUser(conversation.participants.first!), text: "Please give me a call."),
-//            JSQMessage(senderId: conversation.participants.first!, displayName: displayNameForUser(conversation.participants.first!), text: "Another."),
-//            JSQMessage(senderId: conversation.currentUserId, displayName: displayNameForUser(conversation.currentUserId), text: "Me 1"),
-//            JSQMessage(senderId: conversation.currentUserId, displayName: displayNameForUser(conversation.currentUserId), text: "Me 2"),
-//        ]
+        if let rawMessages = chatClient.history.messagesForConversationWithUser(conversation.roomId) as? [XMPPTextMessage] {
+            messages = map(rawMessages) { m in
+                return JSQMessage(senderId: m.from, senderDisplayName: self.displayNameForUser(m.from), date: m.date, text: m.text)
+            }
+        }
     }
     
     

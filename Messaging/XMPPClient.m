@@ -12,6 +12,7 @@
 #import "XMPPLogFormatter.h"
 #import "XMPPDelegate.h"
 
+#import "XMPPChatHistory.h"
 #import "XMPPProcess+Private.h"
 #import "XMPPAuthProcess.h"
 #import "XMPPRegisterProcess.h"
@@ -51,6 +52,8 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
 @property (nonatomic, strong) XMPPPing *xmppPing;
 
 @property (nonatomic, retain) NSMutableArray *messageListeners;
+
+@property (nonnull, readwrite, strong) XMPPChatHistory *history;
 @end
 
 
@@ -149,6 +152,8 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
     self.xmppReconect = nil;
     self.xmppRoster = nil;
     self.xmppStream = nil;
+    
+    self.history = [XMPPChatHistory new];
 }
 
 #pragma mark - Log -
@@ -184,6 +189,8 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
     XMPPJID *jid = [XMPPJID jidWithString:jidString];
     process.password = password;
     process.jid = jid;
+    
+    self.history = [[XMPPChatHistory alloc] initWithCurrentUser:[jid user]];
     return process;
 }
 
@@ -218,8 +225,18 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
     }
 }
 
+- (void)xmppStream:(XMPPStream *)sender didSendMessage:(XMPPMessage *)message {
+    if ([message isChatMessageWithBody]) {
+        XMPPTextMessage *textMessage = [[XMPPTextMessage alloc] initWithMessage:message];
+        [self.history addTextMessage:textMessage outgoing:true];
+    }
+}
+
 - (void)xmppStream:(XMPPStream *)sender didReceiveMessage:(XMPPMessage *)message {
     if ([message isChatMessageWithBody]) {
+        XMPPTextMessage *textMessage = [[XMPPTextMessage alloc] initWithMessage:message];
+        [self.history addTextMessage:textMessage outgoing:false];
+        
         NSArray *listeners = nil;
         @synchronized(self) {
             listeners = self.messageListeners;
