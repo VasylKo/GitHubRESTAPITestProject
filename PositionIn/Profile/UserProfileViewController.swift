@@ -13,7 +13,7 @@ protocol UserProfileActionConsumer: class {
     func shouldExecuteAction(action: UserProfileViewController.ProfileAction)
 }
 
-final class UserProfileViewController: BesideMenuViewController, BrowseActionProducer, UISearchBarDelegate {
+final class UserProfileViewController: BesideMenuViewController, BrowseActionProducer, SearchViewControllerDelegate ,UISearchBarDelegate {
     
     weak var actionConsumer: BrowseActionConsumer?
     
@@ -181,6 +181,10 @@ final class UserProfileViewController: BesideMenuViewController, BrowseActionPro
         SearchViewController.present(searchbar, presenter: self)
         return false
     }
+    
+    func searchViewControllerModelSelected(model: TableViewCellModel?) {
+        //TODO: need implement
+    }
 }
 
 extension UserProfileViewController: UserProfileActionConsumer {
@@ -194,10 +198,12 @@ extension UserProfileViewController: UserProfileActionConsumer {
         case .Follow:
             api().followUser(objectId).onSuccess { [weak self] in
                 self?.sendSubscriptionUpdateNotification(aUserInfo: nil)
+                self?.reloadData()
             }
         case .UnFollow:
             api().unFollowUser(objectId).onSuccess { [weak self] in
                 self?.sendSubscriptionUpdateNotification(aUserInfo: nil)
+                self?.reloadData()
             }
         case .Chat:
             showChatViewController(Conversation(userId: objectId))

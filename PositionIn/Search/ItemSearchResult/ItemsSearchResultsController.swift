@@ -16,7 +16,7 @@ protocol ItemsSearchResultStorage: class {
 
 protocol ItemsSearchResultsDelegate: class {
     func shouldDisplayItemsSearchResults()
-    func didSelectItem(item: FeedItem?)
+    func didSelectModel(model: TableViewCellModel?)
 }
 
 class ItemsSearchResultsController: NSObject {

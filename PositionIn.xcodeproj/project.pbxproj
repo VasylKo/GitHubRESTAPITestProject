@@ -2946,7 +2946,7 @@
 		};
 		50FA91181BB4211E00B56810 /* Copy Simulator app */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 8;
+			buildActionMask = 12;
 			files = (
 			);
 			inputPaths = (
@@ -2954,7 +2954,7 @@
 			name = "Copy Simulator app";
 			outputPaths = (
 			);
-			runOnlyForDeploymentPostprocessing = 1;
+			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PROJECT_DIR}/Scripts/CopyApp.sh\"";
 		};

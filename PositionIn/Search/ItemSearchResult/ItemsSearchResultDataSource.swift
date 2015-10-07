@@ -54,9 +54,8 @@ class ItemsSearchResultDataSource: TableViewDataSource, ItemsSearchResultStorage
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        if let model = self.tableView(tableView, modelForIndexPath: indexPath) as? LocationCellModel {
-
-        }
+        let model = self.tableView(tableView, modelForIndexPath: indexPath)
+        self.delegate?.didSelectModel(model)
     }
     
     weak var delegate: ItemsSearchResultsDelegate?

@@ -10,13 +10,18 @@ import UIKit
 import PosInCore
 import CleanroomLogger
 
+protocol SearchViewControllerDelegate: class  {
+    func searchViewControllerModelSelected(model: TableViewCellModel?)
+}
+
 final class SearchViewController: UIViewController {
     
-    class func present(searchBar: SearchBar, presenter: UIViewController) {
+    class func present<T: UIViewController where T: SearchViewControllerDelegate>(searchBar: SearchBar, presenter: T) {
         let searchController = Storyboards.Main.instantiateSearchViewController()
         let transitionDelegate = SearchTransitioningDelegate()
         transitionDelegate.startView = searchBar
         searchController.transitioningDelegate = transitionDelegate
+        searchController.delegate = presenter
         presenter.presentViewController(searchController, animated: true) {
         }
     }
@@ -25,6 +30,8 @@ final class SearchViewController: UIViewController {
         case Items
         case Locations
     }
+    
+    weak var delegate: SearchViewControllerDelegate?
     
     var searchMode: SearchMode = .Items {
         didSet {
@@ -58,6 +65,9 @@ final class SearchViewController: UIViewController {
         itemsSearchController.delegate = self
         
         categoriesSearchBar.becomeFirstResponder()
+        
+        SearchFilter.currentFilter.communities = []
+        SearchFilter.currentFilter.users = []
     }
     
     func didTapOutsideSearch(sender: UIGestureRecognizer) {
@@ -116,9 +126,10 @@ extension SearchViewController: ItemsSearchResultsDelegate {
         searchMode = .Items
     }
     
-    func didSelectItem(item: FeedItem?) {
+    func didSelectModel(model: TableViewCellModel?) {
         view.endEditing(true)
         transitioningDelegate = nil
+        self.delegate?.searchViewControllerModelSelected(model)
         dismissViewControllerAnimated(true, completion: nil)
         Log.debug?.message("Should close search")
     }
