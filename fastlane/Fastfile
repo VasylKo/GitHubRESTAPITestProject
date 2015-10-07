@@ -53,7 +53,11 @@ platform :ios do
         output_directory: "Build",
         clean: true,
         ) # Build app
-        s3(html_file_name: "dev.html", version_file_name: "dev.version.json")
+    s3(
+       html_file_name: "dev.html",
+       version_file_name: "dev.version.json",
+       path: 'dev/v{CFBundleShortVersionString}_b{CFBundleVersion}/'
+       )
   end
 
     desc "Submit a new Staging Build to Amazon S3"
@@ -65,7 +69,11 @@ platform :ios do
         clean: true,
         ) # Build app
       snapshot
-      s3(html_file_name: "staging.html", version_file_name: "staging.version.json")
+      s3(
+         html_file_name: "staging.html",
+         version_file_name: "staging.version.json",
+         path: 'staging/v{CFBundleShortVersionString}_b{CFBundleVersion}/'
+         )
     end
 
     desc "Submit a new Production Build to Amazon S3"
@@ -77,7 +85,11 @@ platform :ios do
             clean: true,
             ) # Build app
         snapshot
-        s3(html_file_name: "production.html", version_file_name: "production.version.json")
+        s3(
+           html_file_name: "production.html",
+           version_file_name: "production.version.json",
+           path: 'prod/v{CFBundleShortVersionString}_b{CFBundleVersion}/'
+           )
     end
 
   desc "Deploy a new version to the App Store"
