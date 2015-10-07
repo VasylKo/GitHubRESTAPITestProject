@@ -10,18 +10,18 @@ import UIKit
 import PosInCore
 
 protocol SearchTableCellModel: TableViewCellModel {
-    var objectID: CRUDObjectId { get }
+    var itemType: SearchItem.SearchItemType { get }
 }
 
 final class SearchSectionCellModel: SearchTableCellModel {
-    let objectID: CRUDObjectId
+    let itemType: SearchItem.SearchItemType
     let title: String?
     var isTappable: Bool = false
     
-    init(objectID: CRUDObjectId, title: String?, isTappable: Bool) {
-        self.objectID = objectID
+    init(itemType: SearchItem.SearchItemType, title: String?, isTappable: Bool) {
         self.title = title
         self.isTappable = isTappable
+        self.itemType = itemType
     }
 }
 

@@ -36,12 +36,13 @@ class ItemsSearchResultDataSource: TableViewDataSource, ItemsSearchResultStorage
     @objc override func tableView(tableView: UITableView, reuseIdentifierForIndexPath indexPath: NSIndexPath) -> String {
         let model = self.tableView(tableView, modelForIndexPath: indexPath)
         
-        if let sectionModel = model as? SearchSectionCellModel {
+        switch model {
+        case let sectionModel as SearchSectionCellModel:
             return SearchSectionCell.reuseId()
-        }
-        
-        if let itemModel = model as? SearchItemCellModel {
+        case let itemModel as SearchItemCellModel:
             return SearchEntityCell.reuseId()
+        default:
+            break
         }
         
         return TableViewCell.reuseId()

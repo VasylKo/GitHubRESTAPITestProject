@@ -50,7 +50,7 @@ class ItemsSearchResultsController: NSObject {
             f.name = searchString
             api().getSearchFeed(f, page: APIService.Page()).onSuccess(token: dataRequestToken) {
                 [weak self] response in
-                let models = self?.modelsArray(response)
+                let models = self?.modelsForResponse(response)
                 self?.resultStorage?.setItems(models!)
                 self?.itemsTable?.reloadData()
                 self?.itemsTable?.scrollEnabled = self?.itemsTable?.frame.size.height < self?.itemsTable?.contentSize.height
@@ -58,40 +58,40 @@ class ItemsSearchResultsController: NSObject {
         }
     }
     
-    func modelsArray(response: QuickSearchResponse) -> [TableViewCellModel] {
+    func modelsForResponse(response: QuickSearchResponse) -> [TableViewCellModel] {
         var tableViewModels: [TableViewCellModel] = []
-        //TODO: localizedString
         
-        let categories = self.modelsSubArrayFromEnum(response.categories, title: "TOP HIT",
-            type: SearchItem.SearchItemType.Category)
-        tableViewModels.extend(categories)
-        
-        let products = self.modelsSubArrayFromEnum(response.products, title: "PRODUCTS",
+        let products = self.modelsSubArrayFromResponseArray(response.products, title: NSLocalizedString("PRODUCTS",
+            comment: "quick search"),
             type: SearchItem.SearchItemType.Product)
         tableViewModels.extend(products)
         
-        let promotions = self.modelsSubArrayFromEnum(response.promotions, title: "PROMOTIONS",
+        let promotions = self.modelsSubArrayFromResponseArray(response.promotions, title: NSLocalizedString("PROMOTIONS",
+            comment: "quick search"),
             type: SearchItem.SearchItemType.Promotion)
         tableViewModels.extend(promotions)
         
-        let events = self.modelsSubArrayFromEnum(response.events, title: "EVENTS",
+        let events = self.modelsSubArrayFromResponseArray(response.events, title: NSLocalizedString("EVENTS",
+            comment: "quick search"),
             type: SearchItem.SearchItemType.Event)
         tableViewModels.extend(events)
         
         
-        let community = self.modelsSubArrayFromEnum(response.communities, title: "COMMUNITY",
+        let community = self.modelsSubArrayFromResponseArray(response.communities, title: NSLocalizedString("COMMUNITY",
+            comment: "quick search"),
             type: SearchItem.SearchItemType.Community)
         tableViewModels.extend(community)
         
         
-        let people = self.modelsSubArrayFromEnum(response.peoples, title: "PEOPLE",
+        let people = self.modelsSubArrayFromResponseArray(response.peoples, title: NSLocalizedString("PEOPLE",
+            comment: "quick search"),
             type: SearchItem.SearchItemType.People)
         tableViewModels.extend(people)
         
         return tableViewModels
     }
     
-    func modelsSubArrayFromEnum<T>(array: Array<T>, title: String, type:SearchItem.SearchItemType)
+    func modelsSubArrayFromResponseArray(array: Array<ObjectInfo>, title: String, type:SearchItem.SearchItemType)
         -> [TableViewCellModel] {
             var tableViewModels: [TableViewCellModel] = []
             
@@ -103,32 +103,26 @@ class ItemsSearchResultsController: NSObject {
                 case .Unknown:
                     break
                 case .Category:
-                    if let model = array[i] as? ItemCategory  {
-                        let searchItemCellModel = SearchItemCellModel(itemType: type, objectID: String(model.rawValue),
-                            title: model.displayString(), searchString: searchBar?.text, subtitle: nil, localImageName: "placeholderProduct", remoteImageURL: nil)
-                        tableViewModels.append(searchItemCellModel)
-                    }
+                    break
                 case .Event:
-                    if let model = array[i] as? ObjectInfo  {
-                        let searchItemCellModel = SearchItemCellModel(itemType: type, objectID: model.objectId,
-                            title: model.title, searchString: searchBar?.text, subtitle: nil, localImageName: "placeholderEvent", remoteImageURL: nil)
-                        tableViewModels.append(searchItemCellModel)
-                        isHeaderCellTappable = true
-                    }
+                    let model = array[i]
+                    let searchItemCellModel = SearchItemCellModel(itemType: type, objectID: model.objectId,
+                        title: model.title, searchString: searchBar?.text, subtitle: nil, localImageName: "placeholderEvent", remoteImageURL: nil)
+                    tableViewModels.append(searchItemCellModel)
+                    isHeaderCellTappable = true
                 case .Product:
-                    if let model = array[i] as? ObjectInfo  {
-                        let searchItemCellModel = SearchItemCellModel(itemType: type, objectID: model.objectId,
-                            title: model.title, searchString: searchBar?.text,subtitle: nil, localImageName: "placeholderProduct", remoteImageURL: nil)
-                        tableViewModels.append(searchItemCellModel)
-                        isHeaderCellTappable = true
-                    }
+                    let model = array[i]
+                    let searchItemCellModel = SearchItemCellModel(itemType: type, objectID: model.objectId,
+                        title: model.title, searchString: searchBar?.text,subtitle: nil, localImageName: "placeholderProduct", remoteImageURL: nil)
+                    tableViewModels.append(searchItemCellModel)
+                    isHeaderCellTappable = true
+                    
                 case .Promotion:
-                    if let model = array[i] as? ObjectInfo  {
-                        let searchItemCellModel = SearchItemCellModel(itemType: type, objectID: model.objectId,
-                            title: model.title, searchString: searchBar?.text,subtitle: nil, localImageName: "placeholderPromotion", remoteImageURL: nil)
-                        tableViewModels.append(searchItemCellModel)
-                        isHeaderCellTappable = true
-                    }
+                    let model = array[i]
+                    let searchItemCellModel = SearchItemCellModel(itemType: type, objectID: model.objectId,
+                        title: model.title, searchString: searchBar?.text,subtitle: nil, localImageName: "placeholderPromotion", remoteImageURL: nil)
+                    tableViewModels.append(searchItemCellModel)
+                    isHeaderCellTappable = true
                 case .Community:
                     if let model = array[i] as? UserInfo  {
                         let searchItemCellModel = SearchItemCellModel(itemType: type, objectID: model.objectId,
@@ -150,8 +144,7 @@ class ItemsSearchResultsController: NSObject {
                 }
                 
                 if (i == 0) {
-                    //TODO: OBJ ID
-                    let model = SearchSectionCellModel(objectID: "", title: title,
+                    let model = SearchSectionCellModel(itemType: type, title: title,
                         isTappable: isHeaderCellTappable)
                     tableViewModels.insert(model, atIndex: 0)
                 }

@@ -36,15 +36,14 @@ class SearchEntityCell: TableViewCell {
         
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
+    override func awakeFromNib() {
+        super.awakeFromNib()
         self.entityImageView.layer.cornerRadius = self.entityImageView.frame.size.width / 2
     }
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        
-        entityImageView.image = nil
+        entityImageView.hnk_cancelSetImage()
     }
     
     @IBOutlet weak var titleLabel: UILabel!

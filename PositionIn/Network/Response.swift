@@ -11,7 +11,6 @@ import CleanroomLogger
 import PosInCore
 
 struct QuickSearchResponse: Mappable {
-    //TODO: need add categories
     private(set) var categories: [ItemCategory]!
     private(set) var products: [ObjectInfo]!
     private(set) var promotions: [ObjectInfo]!
@@ -21,6 +20,15 @@ struct QuickSearchResponse: Mappable {
     
     init?(_ map: Map) {
         mapping(map)
+        switch (categories, products, promotions, communities, events, peoples) {
+        case (.Some, .Some, .Some, .Some, .Some, .Some):
+            break
+        default:
+            Log.error?.message("Error while parsing object")
+            Log.debug?.trace()
+            Log.verbose?.value(self)
+            return nil
+        }
     }
     
     mutating func mapping(map: Map) {
