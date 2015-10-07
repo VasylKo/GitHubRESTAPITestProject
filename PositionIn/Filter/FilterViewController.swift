@@ -50,6 +50,10 @@ final class FilterViewController: XLFormViewController {
 
         //Price
         currencyFormatter.numberStyle = .CurrencyStyle
+        currencyFormatter.generatesDecimalNumbers = false
+        currencyFormatter.maximumFractionDigits = 0
+        currencyFormatter.roundingMode = .RoundDown
+        
         let priceRow = XLFormRowDescriptor(tag: Tags.EndPrice.rawValue, rowType: XLFormRowDescriptorTypeSlider, title: "")
         priceRow.onChangeBlock = { [weak self] oldValue, newValue, descriptor in
             let newValue = newValue as! Float
@@ -60,10 +64,11 @@ final class FilterViewController: XLFormViewController {
                 self?.reloadFormRow(descriptor)
             }
         }
-        priceRow.value = filter.endPrice ?? SearchFilter.maxPrice
+
         priceRow.cellConfigAtConfigure["slider.maximumValue"] = SearchFilter.maxPrice
         priceRow.cellConfigAtConfigure["slider.minimumValue"] = SearchFilter.minPrice
-        priceRow.cellConfigAtConfigure["steps"] = SearchFilter.Money(100)
+        priceRow.cellConfigAtConfigure["steps"] = SearchFilter.Money(400)
+        priceRow.value = SearchFilter.defaultPrice
         optionsSection.addFormRow(priceRow)
 
         //Radius

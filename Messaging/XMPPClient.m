@@ -12,6 +12,7 @@
 #import "XMPPLogFormatter.h"
 #import "XMPPDelegate.h"
 
+#import "XMPPChatHistory.h"
 #import "XMPPProcess+Private.h"
 #import "XMPPAuthProcess.h"
 #import "XMPPRegisterProcess.h"
@@ -48,8 +49,11 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
 @property (nonatomic, strong) XMPPDelegate *xmppDelegate;
 @property (nonatomic, strong) XMPPReconnect *xmppReconect;
 @property (nonatomic, strong) XMPPRoster *xmppRoster;
+@property (nonatomic, strong) XMPPPing *xmppPing;
 
-@property (nonatomic, readwrite, assign) BOOL isConnected;
+@property (nonatomic, retain) NSMutableArray *messageListeners;
+
+@property (nonnull, readwrite, strong) XMPPChatHistory *history;
 @end
 
 
@@ -68,6 +72,7 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
 - (instancetype)initWithConfiguration:(XMPPClientConfiguration *)configuration {
     self = [super init];
     if (self) {
+        self.messageListeners = [NSMutableArray  new];
         self.config = configuration;
         [self setupStreamWithConfig:configuration];
     }
@@ -76,6 +81,14 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
 
 - (void)dealloc {
     [self teardownStream];
+}
+
+- (void)disconnect {
+    [self teardownStream];
+}
+
+- (BOOL)isConnected {
+    return self.xmppStream.isConnected;
 }
 
 #pragma mark - Stream LifeCycle -
@@ -100,10 +113,16 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
     }
 #endif
 
-    [self.xmppStream addDelegate:self.xmppDelegate delegateQueue:delegateQueue];
+    [self.xmppStream addDelegate:self delegateQueue:delegateQueue]; // Need for message listeners
+    
+    [self.xmppStream addDelegate:self.xmppDelegate delegateQueue:delegateQueue]; // Debugging
 
     self.xmppStream.hostName = configuration.hostName;
     self.xmppStream.hostPort = configuration.port;
+    
+    self.xmppPing = [XMPPPing new];
+    self.xmppPing.respondsToQueries = YES;
+    [self.xmppPing activate:self.xmppStream];
     
     self.xmppReconect = [XMPPReconnect new];
     [self.xmppReconect activate:self.xmppStream];
@@ -116,15 +135,25 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
 
 
 - (void)teardownStream {
+    
+    [self.xmppPing deactivate];
 
     [self.xmppReconect removeDelegate:self];
     [self.xmppReconect deactivate];
     
+    [self.xmppRoster removeDelegate:self.xmppDelegate];
+    [self.xmppRoster deactivate];
+    
+    [self.xmppStream removeDelegate:self];
     [self.xmppStream removeDelegate:self.xmppDelegate];
     [self.xmppStream disconnect];
     
+    self.xmppPing = nil;
     self.xmppReconect = nil;
+    self.xmppRoster = nil;
     self.xmppStream = nil;
+    
+    self.history = [XMPPChatHistory new];
 }
 
 #pragma mark - Log -
@@ -160,6 +189,8 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
     XMPPJID *jid = [XMPPJID jidWithString:jidString];
     process.password = password;
     process.jid = jid;
+    
+    self.history = [[XMPPChatHistory alloc] initWithCurrentUser:[jid user]];
     return process;
 }
 
@@ -171,13 +202,56 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
     return process;
 }
 
-- (void)sendTestMessage {
-    
-    XMPPMessage *msg = [XMPPMessage messageWithType:@"chat" to:[XMPPJID jidWithString:@"adan@beewellapp.com"]];
-    [msg addBody:@"Test message"];
+- (void)sendTextMessage:(nonnull NSString *)text to:(nonnull NSString *)username {
+    XMPPJID *jid = [XMPPJID jidWithString:[NSString stringWithFormat:@"%@@%@", username, self.config.hostName]];
+    XMPPMessage *msg = [XMPPMessage messageWithType:@"chat" to:jid];
+    [msg addBody:text];
     XMPPLogInfo(@"Sending message %@", [msg XMLString]);
     [self.xmppStream sendElement:msg];
 }
 
+
+#pragma mark - Message listeners -
+
+- (void)addMessageListener:(nonnull id<XMPPMessageListener>)listener {
+    @synchronized(self) {
+        [self.messageListeners addObject:listener];
+    }
+}
+
+- (void)removeMessageListener:(nonnull id<XMPPMessageListener>)listener {
+    @synchronized(self) {
+        [self.messageListeners removeObject:listener];
+    }
+}
+
+- (void)xmppStream:(XMPPStream *)sender didSendMessage:(XMPPMessage *)message {
+    if ([message isChatMessageWithBody]) {
+        XMPPTextMessage *textMessage = [[XMPPTextMessage alloc] initWithMessage:message];
+        [self.history addTextMessage:textMessage outgoing:true];
+    }
+}
+
+- (void)xmppStream:(XMPPStream *)sender didReceiveMessage:(XMPPMessage *)message {
+    if ([message isChatMessageWithBody]) {
+        XMPPTextMessage *textMessage = [[XMPPTextMessage alloc] initWithMessage:message];
+        [self.history addTextMessage:textMessage outgoing:false];
+        
+        NSArray *listeners = nil;
+        @synchronized(self) {
+            listeners = self.messageListeners;
+        }
+        NSString *text = [message body];
+        NSString *from = [message from].user;
+        NSString *to = [message to].user;
+        NSDate *date = [NSDate date];
+        if ([message wasDelayed]) {
+            date = [message delayedDeliveryDate];
+        }
+        for (id<XMPPMessageListener> listener in listeners) {
+            [listener didReceiveTextMessage:text from:from to:to date:date];
+        }
+    }
+}
 
 @end

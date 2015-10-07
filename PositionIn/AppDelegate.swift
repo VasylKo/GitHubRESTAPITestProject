@@ -19,8 +19,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
     private(set) var api: APIService
-    let chatClient: XMPPClient
+    private(set) var chatClient: XMPPClient
     let locationController: LocationController
+    private var userDidChangeObserver: NSObjectProtocol!
     
     var sidebarViewController: SidebarViewController? {
         return self.window?.rootViewController as? SidebarViewController
@@ -32,20 +33,34 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         #else
         Log.enable(minimumSeverity: .Info, synchronousMode: false)
         #endif
+        let appConfig = AppConfiguration()
         let urlSessionConfig = NSURLSessionConfiguration.defaultSessionConfiguration()
-        let baseURL = AppConfiguration().baseURL
+        let baseURL = appConfig.baseURL
         //FIXME: dissallow self signed certificates in the future
         let trustPolicies: [String: ServerTrustPolicy]? = [
             baseURL.host! : .DisableEvaluation
             ]
         let dataProvider = PosInCore.NetworkDataProvider(configuration: urlSessionConfig, trustPolicies: trustPolicies)
         api = APIService(url: baseURL, dataProvider: dataProvider)
-        let chatConfig = XMPPClientConfiguration.defaultConfiguration()
-        chatClient = XMPPClient(configuration: chatConfig)
+        chatClient = AppDelegate.chatClientInstance()
         locationController = LocationController()
+        
+        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.bt_colorWithBytesR(133, g: 186, b: 255)]
+        
         super.init()
+        
+        userDidChangeObserver = NSNotificationCenter.defaultCenter().addObserverForName(
+            UserProfile.CurrentUserDidChangeNotification,
+            object: nil,
+            queue: nil) { [weak self] notification in
+                let newProfile = notification.object as? UserProfile
+                self?.currentUserDidChange(newProfile)
+        }
     }
 
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(userDidChangeObserver)
+    }
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         setupMaps()
@@ -59,15 +74,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             Log.error?.value(error)
             self.sidebarViewController?.executeAction(.Login)
         }
-        return true
-                
-        self.chatClient.auth("ixmpp@beewellapp.com", password: "1HateD0m2").future().onSuccess { [unowned self] in
-            Log.info?.message("XMPP authorized")
-            self.chatClient.sendTestMessage()
-        }.onFailure { error in
-                Log.error?.value(error)
-        }
-        
         return true
     }
 
@@ -92,12 +98,34 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
+
 }
 
 extension AppDelegate {
+    
+    private class func chatClientInstance() -> XMPPClient {
+        let appConfig = AppConfiguration()
+        let chatConfig = XMPPClientConfiguration(with: appConfig.xmppHostname, port: appConfig.xmppPort)
+        return XMPPClient(configuration: chatConfig)
+    }
+    
+    func currentUserDidChange(profile: UserProfile?) {
+        if  let user = profile,
+            let chatCredentials = self.api.getChatCredentials() {
+                chatClient.disconnect()
+                chatClient = AppDelegate.chatClientInstance()
+                chatClient.auth(chatCredentials.jid, password: chatCredentials.password).future().onSuccess { [unowned self] in
+                    Log.info?.message("XMPP authorized")
+                }.onFailure { error in
+                    Log.error?.value(error)
+                }
+        } else {
+            chatClient.disconnect()
+        }
+    }
+    
     func setupMaps() {
-        let apiKey = "AIzaSyA3NvrDKBcpIsnq4-ZACG41y7Mj-wSfVrY"
-        GMSServices.provideAPIKey(apiKey)
+        GMSServices.provideAPIKey(AppConfiguration().googleMapsKey)
     }
     
     func UIErrorHandler() -> APIService.ErrorHandler {
@@ -127,5 +155,9 @@ func locationController() -> LocationController {
 
 func chat() -> XMPPClient {
     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-    return appDelegate.chatClient
+    var chatClient: XMPPClient!
+    synced(appDelegate) {
+        chatClient = appDelegate.chatClient
+    }
+    return chatClient
 }

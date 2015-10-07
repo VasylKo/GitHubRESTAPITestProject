@@ -100,3 +100,9 @@ struct AuthResponse: Mappable, DebugPrintable {
         return  AuthResponse(accessToken: "",refreshToken: "",expires: -1)
     }
 }
+
+// XMPP credentials
+struct ChatCredentials {
+    let jid: String
+    let password: String
+}

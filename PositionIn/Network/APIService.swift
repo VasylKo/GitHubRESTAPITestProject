@@ -52,7 +52,6 @@ struct APIService {
         return "API: \(baseURL.absoluteString)"
     }
     
-    
     //MARK: - Profile -
     
     func getMyProfile() -> Future<UserProfile, NSError> {
@@ -93,6 +92,21 @@ struct APIService {
     
     func createCommunityPost(communityId: CRUDObjectId, post object: Post) -> Future<Post, NSError> {
         let endpoint = Post.communityPostsEndpoint(communityId)
+        return createObject(endpoint, object: object)
+    }
+    
+    func likePost(postId: CRUDObjectId) -> Future<Void, NSError> {
+        let endpoint = Post.likeEndpoint(postId)
+        return updateCommand(endpoint)
+    }
+    
+    func unlikePost(postId: CRUDObjectId) -> Future<Void, NSError> {
+        let endpoint = Post.likeEndpoint(postId)
+        return updateCommand(endpoint, method: .DELETE)
+    }
+    
+    func createPostComment(postId: CRUDObjectId, object: Comment) -> Future<Comment, NSError> {
+        let endpoint = Post.postCommentEndpoint(postId)
         return createObject(endpoint, object: object)
     }
     
@@ -209,6 +223,21 @@ struct APIService {
         let endpoint = UserProfile.endpoint()
         let params = page.query
         return getObjectsCollection(endpoint, params: params)
+    }
+    
+    func getUsers(userIds: [CRUDObjectId]) -> Future<CollectionResponse<UserInfo>,NSError> {
+        let endpoint = UserProfile.endpoint()
+        let params = APIServiceQuery()
+        params.append("ids", value: userIds)
+        
+        //TODO: refactor, use generics
+        typealias CRUDResultType = (Alamofire.Request, Future<CollectionResponse<UserInfo>, NSError>)        
+        return session().flatMap {
+            (token: AuthResponse.Token) -> Future<CollectionResponse<UserInfo>, NSError> in
+            let request = self.updateRequest(token, endpoint: endpoint, params: params.query)
+            let (_ , future): CRUDResultType = self.dataProvider.objectRequest(request)
+            return self.handleFailure(future)
+        }
     }
     
     func getMySubscriptions() -> Future<CollectionResponse<UserInfo>,NSError> {
@@ -364,6 +393,7 @@ struct APIService {
     
     private func commandMapping() -> (AnyObject? -> Void?) {
         return  { response in
+            //TODO: need handle nil response
             if let json = response as? NSDictionary {
                 if let success = json["success"] as? Bool where success == true{
                         return ()
@@ -481,6 +511,10 @@ extension APIService {
             for (key,value) in newItems.query {
                 values.updateValue(value, forKey:key)
             }
+        }
+        
+        func append(key: String, value: AnyObject) {
+            values.updateValue(value, forKey:key)
         }
         
         var query: [String : AnyObject]  {

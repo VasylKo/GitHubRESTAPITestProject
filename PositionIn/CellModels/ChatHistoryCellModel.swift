@@ -10,6 +10,7 @@ import Foundation
 import PosInCore
 
 final class ChatHistoryCellModel: TableViewCellModel {
+    //TODO: use conversation instead of userId
     let userId: CRUDObjectId
     let name: String?
     let message: String?

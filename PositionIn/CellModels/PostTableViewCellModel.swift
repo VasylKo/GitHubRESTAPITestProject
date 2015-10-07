@@ -12,6 +12,7 @@ import PosInCore
 struct PostLikesCountModel: TableViewCellModel {
     let likes: Int
     let comments: Int
+    let actionConsumer: PostActionConsumer?
 }
 
 struct PostInfoModel: TableViewCellModel {
@@ -19,4 +20,12 @@ struct PostInfoModel: TableViewCellModel {
     let secondLine: String?
     let imageUrl: NSURL?
     let userId: CRUDObjectId?
+}
+
+struct PostCommentCellModel: TableViewCellModel {
+    let userId: CRUDObjectId
+    let name: String?
+    let comment: String?
+    let date: String?
+    let imageUrl: NSURL?
 }

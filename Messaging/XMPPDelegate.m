@@ -261,7 +261,8 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
  **/
 - (BOOL)xmppStream:(XMPPStream *)sender didReceiveIQ:(XMPPIQ *)iq {
     XMPPLogTrace();
-    return YES;
+    XMPPLogVerbose(@"%@", [iq compactXMLString]);
+    return NO;
 }
 - (void)xmppStream:(XMPPStream *)sender didReceiveMessage:(XMPPMessage *)message {
     XMPPLogTrace();
@@ -540,6 +541,23 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
 }
 
 @end
+
+@interface XMPPDelegate (XMPPPingDelegate)
+
+@end
+
+@implementation XMPPDelegate (XMPPPingDelegate)
+
+- (void)xmppPing:(XMPPPing *)sender didReceivePong:(XMPPIQ *)pong withRTT:(NSTimeInterval)rtt {
+    XMPPLogTrace();
+}
+
+- (void)xmppPing:(XMPPPing *)sender didNotReceivePong:(NSString *)pingID dueToTimeout:(NSTimeInterval)timeout {
+    XMPPLogTrace();
+}
+
+@end
+
 
 @implementation XMPPDelegate
 @end

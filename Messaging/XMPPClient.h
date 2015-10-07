@@ -8,6 +8,8 @@
 
 @import Foundation;
 
+@class XMPPChatHistory;
+
 @interface XMPPClientConfiguration : NSObject
 + (nonnull instancetype)configurationWith:(nonnull NSString *)hostName port:(NSInteger)port;
 + (nonnull instancetype)defaultConfiguration;
@@ -18,6 +20,10 @@
 
 @class XMPPProcess;
 
+@protocol XMPPMessageListener <NSObject>
+- (void)didReceiveTextMessage:(nonnull NSString *)text from:(nonnull NSString *)from to:(nonnull NSString *)to date:(nonnull NSDate *)date;
+@end
+
 @interface XMPPClient : NSObject
 
 - (nonnull instancetype)initWithConfiguration:(nonnull XMPPClientConfiguration  * )configuration;
@@ -25,6 +31,14 @@
 - (nonnull XMPPProcess *)auth:(nonnull NSString *)jidString password:(nonnull  NSString *)password;
 - (nonnull XMPPProcess *)registerJid:(nonnull NSString *)jidString password:(nonnull  NSString *)password;
 
-- (void)sendTestMessage;
+- (void)sendTextMessage:(nonnull NSString *)text to:(nonnull NSString *)username;
+
+- (void)addMessageListener:(nonnull id<XMPPMessageListener>)listener;
+- (void)removeMessageListener:(nonnull id<XMPPMessageListener>)listener;
+
 @property (nonatomic, readonly, assign) BOOL isConnected;
+- (void)disconnect;
+
+
+@property (nonnull, readonly, strong) XMPPChatHistory *history;
 @end

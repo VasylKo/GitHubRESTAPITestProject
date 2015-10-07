@@ -28,6 +28,10 @@ struct Storyboards {
             return self.storyboard.instantiateViewControllerWithIdentifier("MainMenuViewController") as! MainMenuViewController
         }
 
+        static func instantiateCreateConversationViewController() -> CreateConversationViewController! {
+            return self.storyboard.instantiateViewControllerWithIdentifier("CreateConversationViewController") as! CreateConversationViewController
+        }
+
         static func instantiateBrowseCommunityViewController() -> BrowseCommunityViewController! {
             return self.storyboard.instantiateViewControllerWithIdentifier("BrowseCommunityViewController") as! BrowseCommunityViewController
         }
@@ -70,10 +74,6 @@ struct Storyboards {
 
         static func instantiateUserProfileViewController() -> UserProfileViewController! {
             return self.storyboard.instantiateViewControllerWithIdentifier("UserProfileViewController") as! UserProfileViewController
-        }
-
-        static func instantiateProfileListViewController() -> ProfileListViewController! {
-            return self.storyboard.instantiateViewControllerWithIdentifier("ProfileListViewController") as! ProfileListViewController
         }
 
         static func instantiateCommunityFeedViewController() -> CommunityFeedViewController! {
@@ -335,6 +335,7 @@ extension SidebarViewController {
         case ShowMyProfile = "ShowMyProfile"
         case ShowPeople = "ShowPeople"
         case ShowWallet = "ShowWallet"
+        case ShowSplash = "ShowSplash"
 
         var kind: SegueKind? {
             switch (self) {
@@ -355,6 +356,8 @@ extension SidebarViewController {
             case ShowPeople:
                 return SegueKind(rawValue: "custom")
             case ShowWallet:
+                return SegueKind(rawValue: "custom")
+            case ShowSplash:
                 return SegueKind(rawValue: "custom")
             default:
                 preconditionFailure("Invalid value")
@@ -379,6 +382,8 @@ extension SidebarViewController {
 }
 
 //MARK: - MessagesListViewController
+
+//MARK: - CreateConversationViewController
 
 //MARK: - FilterViewController
 
@@ -705,8 +710,6 @@ extension PeopleViewController {
 }
 
 //MARK: - UserProfileViewController
-
-//MARK: - ProfileListViewController
 
 //MARK: - CommunityFeedViewController
 
