@@ -20,7 +20,6 @@ protocol BrowseActionConsumer: class {
     func browseControllerDidChangeContent(controller: BrowseActionProducer)
 }
 
-
 @objc class DisplayModeViewController: BesideMenuViewController, BrowseActionConsumer, SearchViewControllerDelegate, UISearchBarDelegate {
     
     //MARK: - Updates -
@@ -195,20 +194,13 @@ protocol BrowseActionConsumer: class {
         return false
     }
     
-    func searchViewControllerModelSelected(model: TableViewCellModel?) {
-        
-        if let model = model as? SearchSectionCellModel {
-            
-        }
-        
-        if let model = model as? SearchItemCellModel {
-
-            
+    func searchViewControllerItemSelected(model: SearchItemCellModel?) {
+        if let model = model {
             switch model.itemType {
             case .Unknown:
-                print("")
+                break
             case .Category:
-                print("")
+                break
             case .Product:
                 let controller =  Storyboards.Main.instantiateProductDetailsViewControllerId()
                 controller.objectId = model.objectID
@@ -229,5 +221,9 @@ protocol BrowseActionConsumer: class {
                 break
             }
         }
+    }
+    
+    func searchViewControllerSectionSelected(model: SearchSectionCellModel?) {
+        
     }
 }

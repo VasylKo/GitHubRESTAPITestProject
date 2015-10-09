@@ -10,8 +10,9 @@ import UIKit
 import PosInCore
 import CleanroomLogger
 
-protocol SearchViewControllerDelegate: class  {
-    func searchViewControllerModelSelected(model: TableViewCellModel?)
+protocol SearchViewControllerDelegate: class  {   
+    func searchViewControllerItemSelected(model: SearchItemCellModel?)
+    func searchViewControllerSectionSelected(model: SearchSectionCellModel?)
 }
 
 final class SearchViewController: UIViewController {
@@ -52,6 +53,9 @@ final class SearchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        SearchFilter.currentFilter.communities = []
+        SearchFilter.currentFilter.users = []
+        
         let dismissRecognizer = UITapGestureRecognizer(target: self, action: "didTapOutsideSearch:")
         dismissRecognizer.cancelsTouchesInView = false
         tableView.addGestureRecognizer(dismissRecognizer)
@@ -63,11 +67,8 @@ final class SearchViewController: UIViewController {
         categoriesSearchBar.text = SearchFilter.currentFilter.name
         itemsDataSource.delegate = self
         itemsSearchController.delegate = self
-        
+
         categoriesSearchBar.becomeFirstResponder()
-        
-        SearchFilter.currentFilter.communities = []
-        SearchFilter.currentFilter.users = []
     }
     
     func didTapOutsideSearch(sender: UIGestureRecognizer) {
@@ -129,8 +130,16 @@ extension SearchViewController: ItemsSearchResultsDelegate {
     func didSelectModel(model: TableViewCellModel?) {
         view.endEditing(true)
         transitioningDelegate = nil
-        self.delegate?.searchViewControllerModelSelected(model)
         dismissViewControllerAnimated(true, completion: nil)
         Log.debug?.message("Should close search")
+
+        switch model {
+        case let sectionModel as SearchSectionCellModel:
+            self.delegate?.searchViewControllerSectionSelected(sectionModel)
+        case let itemModel as SearchItemCellModel:
+            self.delegate?.searchViewControllerItemSelected(itemModel)
+        default:
+            break
+        }
     }
 }

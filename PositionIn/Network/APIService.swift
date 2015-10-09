@@ -416,6 +416,11 @@ struct APIService {
                     return nil
                 }
             }
+            //TODO: need handle nil response
+            else if response == nil {
+                return ()
+            }
+
             else {
                 Log.error?.message("Got unexpected response: \(response)")
                 return nil

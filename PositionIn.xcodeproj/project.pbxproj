@@ -65,6 +65,9 @@
 		500D7FA91BC2CD39008C8C82 /* PositionIn.SearchEntityCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 500D7FA71BC2CD39008C8C82 /* PositionIn.SearchEntityCell.xib */; };
 		500D7FAC1BC2CD51008C8C82 /* SearchSectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500D7FAA1BC2CD51008C8C82 /* SearchSectionCell.swift */; };
 		500D7FAD1BC2CD51008C8C82 /* PositionIn.SearchSectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 500D7FAB1BC2CD51008C8C82 /* PositionIn.SearchSectionCell.xib */; };
+		50C7B5B21BC6A32900E8E8B4 /* PositionIn.SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50C7B5B11BC6A32900E8E8B4 /* PositionIn.SettingsViewController.xib */; };
+		50C7B5B71BC6BC6900E8E8B4 /* SettingsHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50C7B5B51BC6BC6900E8E8B4 /* SettingsHeaderCell.swift */; };
+		50C7B5B81BC6BC6900E8E8B4 /* PositionIn.SettingsHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50C7B5B61BC6BC6900E8E8B4 /* PositionIn.SettingsHeaderCell.xib */; };
 		50D1AFA61BBAD21400957882 /* PostLikeCommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50D1AFA41BBAD21400957882 /* PostLikeCommentCell.swift */; };
 		50D1AFA71BBAD21400957882 /* PositionIn.PostLikeCommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50D1AFA51BBAD21400957882 /* PositionIn.PostLikeCommentCell.xib */; };
 		50F730591BBBE86A008D3D94 /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F730571BBBE86A008D3D94 /* CommentCell.swift */; };
@@ -463,6 +466,9 @@
 		500D7FA71BC2CD39008C8C82 /* PositionIn.SearchEntityCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.SearchEntityCell.xib; sourceTree = "<group>"; };
 		500D7FAA1BC2CD51008C8C82 /* SearchSectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchSectionCell.swift; sourceTree = "<group>"; };
 		500D7FAB1BC2CD51008C8C82 /* PositionIn.SearchSectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.SearchSectionCell.xib; sourceTree = "<group>"; };
+		50C7B5B11BC6A32900E8E8B4 /* PositionIn.SettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.SettingsViewController.xib; sourceTree = "<group>"; };
+		50C7B5B51BC6BC6900E8E8B4 /* SettingsHeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsHeaderCell.swift; sourceTree = "<group>"; };
+		50C7B5B61BC6BC6900E8E8B4 /* PositionIn.SettingsHeaderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.SettingsHeaderCell.xib; sourceTree = "<group>"; };
 		50D1AFA41BBAD21400957882 /* PostLikeCommentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostLikeCommentCell.swift; sourceTree = "<group>"; };
 		50D1AFA51BBAD21400957882 /* PositionIn.PostLikeCommentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.PostLikeCommentCell.xib; sourceTree = "<group>"; };
 		50F730571BBBE86A008D3D94 /* CommentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
@@ -1142,6 +1148,9 @@
 			isa = PBXGroup;
 			children = (
 				E61B20D71B7E0838005EAB2C /* SettingsViewController.swift */,
+				50C7B5B11BC6A32900E8E8B4 /* PositionIn.SettingsViewController.xib */,
+				50C7B5B51BC6BC6900E8E8B4 /* SettingsHeaderCell.swift */,
+				50C7B5B61BC6BC6900E8E8B4 /* PositionIn.SettingsHeaderCell.xib */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -2884,6 +2893,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				50C7B5B21BC6A32900E8E8B4 /* PositionIn.SettingsViewController.xib in Resources */,
 				E6BEF1E81B9C83F200511B46 /* PositionIn.CommunityInfoCell.xib in Resources */,
 				E6BEF1E71B9C83F200511B46 /* PositionIn.CommunityHeaderCell.xib in Resources */,
 				E68B52261B875F8F006B980C /* PositionIn.PromotionListCell.xib in Resources */,
@@ -2893,6 +2903,7 @@
 				500D7FA91BC2CD39008C8C82 /* PositionIn.SearchEntityCell.xib in Resources */,
 				E6C952341BA1D9960032254F /* PositionIn.ProfileInfoCell.xib in Resources */,
 				E6D4D5B51B6F8B9F003134CB /* PositionIn.SearchBar.xib in Resources */,
+				50C7B5B81BC6BC6900E8E8B4 /* PositionIn.SettingsHeaderCell.xib in Resources */,
 				E66115A31B73A18C003DB5B3 /* NewItems.storyboard in Resources */,
 				24EF62161BA81DCB00472531 /* PositionIn.ChatHistoryCell.xib in Resources */,
 				E660E52E1B5AC23B00F52050 /* PositionIn.MainMenuViewController.xib in Resources */,
@@ -3190,6 +3201,7 @@
 				E60EBF761B8EF9B50014B6ED /* DataTransforms.swift in Sources */,
 				50F730591BBBE86A008D3D94 /* CommentCell.swift in Sources */,
 				E61B20EF1B813C8C005EAB2C /* Community.swift in Sources */,
+				50C7B5B71BC6BC6900E8E8B4 /* SettingsHeaderCell.swift in Sources */,
 				2431EBDE1B947442009FB158 /* Product.swift in Sources */,
 				E6A869EC1B60D3E300797D16 /* APIService+Auth.swift in Sources */,
 				50FE7D891BBE77BB005676E2 /* ItemsSearchResultDataSource.swift in Sources */,
