@@ -12,6 +12,7 @@ import Alamofire
 import ObjectMapper
 import BrightFutures
 import CleanroomLogger
+import Messaging
 
 extension APIService {
     
@@ -43,17 +44,28 @@ extension APIService {
         return false
     }
     
-    func getChatCredentials() -> ChatCredentials? {
-        let userId: CRUDObjectId? = currentUserId()
-        let pwd = sessionController.userPassword
-        switch (userId, pwd) {
-        case (.Some(let user), .Some(let password)):
-            let hostname = AppConfiguration().xmppHostname
-            let jid = "\(user)@\(hostname)"
-            return ChatCredentials(jid: jid, password: password)
-        default:
-            return nil
+    func chatCredentialsProvider() -> XMPPCredentialsProvider {
+        class ChatCredentialsProvider: NSObject, XMPPCredentialsProvider {
+            init(apiService: APIService) {
+                self.apiService = apiService
+                super.init()
+            }
+            @objc func getChatCredentials() -> XMPPCredentials? {
+                let userId: CRUDObjectId? = apiService.currentUserId()
+                let accessToken = apiService.sessionController.accessToken
+                switch (userId, accessToken) {
+                case (.Some(let user), .Some(let token)):
+                    let hostname = AppConfiguration().xmppHostname
+                    let jid = "\(user)@\(hostname)"
+                    return XMPPCredentials(jid: jid, password: token)
+                default:
+                    return nil
+                }
+            }
+            
+            private let apiService: APIService
         }
+        return ChatCredentialsProvider(apiService: self)
     }
     
     //Success if has valid session and user is not a guest
@@ -86,7 +98,7 @@ extension APIService {
     //Login existing user
     func login(#username: String, password: String) -> Future<UserProfile, NSError> {
         return loginRequest(username: username, password: password).flatMap { _ in
-            return self.updateCurrentProfileStatus(newPasword: password)
+            return self.updateCurrentProfileStatus()
         }
     }
     
@@ -107,7 +119,7 @@ extension APIService {
             info ["lastName"] = lastName
         }
         return registerRequest(username: username, password: password, info: info).flatMap { _ in
-            return self.updateCurrentProfileStatus(newPasword: password)
+            return self.updateCurrentProfileStatus()
         }
     }
     
@@ -134,13 +146,10 @@ extension APIService {
         }
     }
     
-    private func updateCurrentProfileStatus(newPasword: String? = nil) -> Future<UserProfile, NSError> {
+    private func updateCurrentProfileStatus() -> Future<UserProfile, NSError> {
         return getMyProfile().andThen { result in
             if let profile = result.value {
                 self.sessionController.updateCurrentStatus(profile)
-                if let newPassword = newPasword {
-                    self.sessionController.updatePassword(newPassword)
-                }
                 self.sendUserDidChangeNotification(profile)
             }
         }

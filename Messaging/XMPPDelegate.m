@@ -559,5 +559,72 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
 @end
 
 
+@interface XMPPDelegate (XMPPMUCDelegate)
+@end
+
+@implementation XMPPDelegate (XMPPMUCDelegate)
+- (void)xmppMUC:(XMPPMUC *)sender roomJID:(XMPPJID *)roomJID didReceiveInvitation:(XMPPMessage *)message {
+    XMPPLogTrace();
+}
+
+- (void)xmppMUC:(XMPPMUC *)sender roomJID:(XMPPJID *)roomJID didReceiveInvitationDecline:(XMPPMessage *)message {
+    XMPPLogTrace();
+}
+
+/**
+ * Implement this method when calling [mucInstance discoverServices]. It will be invoked if the request
+ * for discovering services is successfully executed and receives a successful response.
+ *
+ * @param sender XMPPMUC object invoking this delegate method.
+ * @param services An array of NSXMLElements in the form shown below. You will need to extract the data you
+ *                 wish to use.
+ *
+ *                 <item jid='chat.shakespeare.lit' name='Chatroom Service'/>
+ */
+- (void)xmppMUC:(XMPPMUC *)sender didDiscoverServices:(NSArray *)services {
+    XMPPLogTrace();
+}
+
+/**
+ * Implement this method when calling [mucInstanse discoverServices]. It will be invoked if the request
+ * for discovering services is unsuccessfully executed or receives an unsuccessful response.
+ *
+ * @param sender XMPPMUC object invoking this delegate method.
+ * @param error NSError containing more details of the failure.
+ */
+- (void)xmppMUCFailedToDiscoverServices:(XMPPMUC *)sender withError:(NSError *)error {
+    XMPPLogTrace();
+}
+
+/**
+ * Implement this method when calling [mucInstance discoverRoomsForServiceNamed:]. It will be invoked if
+ * the request for discovering rooms is successfully executed and receives a successful response.
+ *
+ * @param sender XMPPMUC object invoking this delegate method.
+ * @param rooms An array of NSXMLElements in the form shown below. You will need to extract the data you
+ *              wish to use.
+ *
+ *              <item jid='forres@chat.shakespeare.lit' name='The Palace'/>
+ *
+ * @param serviceName The name of the service for which rooms were discovered.
+ */
+- (void)xmppMUC:(XMPPMUC *)sender didDiscoverRooms:(NSArray *)rooms forServiceNamed:(NSString *)serviceName {
+    XMPPLogTrace();
+}
+
+/**
+ * Implement this method when calling [mucInstance discoverRoomsForServiceNamed:]. It will be invoked if
+ * the request for discovering rooms is unsuccessfully executed or receives an unsuccessful response.
+ *
+ * @param sender XMPPMUC object invoking this delegate method.
+ * @param serviceName The name of the service for which rooms were attempted to be discovered.
+ * @param error NSError containing more details of the failure.
+ */
+- (void)xmppMUC:(XMPPMUC *)sender failedToDiscoverRoomsForServiceNamed:(NSString *)serviceName withError:(NSError *)error {
+    XMPPLogTrace();
+}
+@end
+
+
 @implementation XMPPDelegate
 @end

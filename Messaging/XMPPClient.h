@@ -9,6 +9,7 @@
 @import Foundation;
 
 @class XMPPChatHistory;
+@protocol XMPPCredentialsProvider;
 
 @interface XMPPClientConfiguration : NSObject
 + (nonnull instancetype)configurationWith:(nonnull NSString *)hostName port:(NSInteger)port;
@@ -26,9 +27,9 @@
 
 @interface XMPPClient : NSObject
 
-- (nonnull instancetype)initWithConfiguration:(nonnull XMPPClientConfiguration  * )configuration;
+- (nonnull instancetype)initWithConfiguration:(nonnull XMPPClientConfiguration  * )configuration credentialsProvider:(nonnull id<XMPPCredentialsProvider>)credentialsProvider;
 
-- (nonnull XMPPProcess *)auth:(nonnull NSString *)jidString password:(nonnull  NSString *)password;
+- (nonnull XMPPProcess *)auth;
 - (nonnull XMPPProcess *)registerJid:(nonnull NSString *)jidString password:(nonnull  NSString *)password;
 
 - (void)sendTextMessage:(nonnull NSString *)text to:(nonnull NSString *)username;

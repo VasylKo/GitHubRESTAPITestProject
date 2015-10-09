@@ -16,6 +16,7 @@
 #import "XMPPProcess+Private.h"
 #import "XMPPAuthProcess.h"
 #import "XMPPRegisterProcess.h"
+#import "XMPPCredentials.h"
 
 static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
 
@@ -50,10 +51,12 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
 @property (nonatomic, strong) XMPPReconnect *xmppReconect;
 @property (nonatomic, strong) XMPPRoster *xmppRoster;
 @property (nonatomic, strong) XMPPPing *xmppPing;
+@property (nonatomic, strong) XMPPMUC *xmppMUC;
 
 @property (nonatomic, retain) NSMutableArray *messageListeners;
 
 @property (nonnull, readwrite, strong) XMPPChatHistory *history;
+@property (nonnull, nonatomic, strong) id<XMPPCredentialsProvider> credentialsProvider;
 @end
 
 
@@ -65,13 +68,14 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
     }
 }
 
-- (instancetype)init {
-    return [self initWithConfiguration:[XMPPClientConfiguration defaultConfiguration]];
+- (instancetype)initWithCredentialsProvider:(nonnull id<XMPPCredentialsProvider>)credentialsProvider {
+    return [self initWithConfiguration: [XMPPClientConfiguration defaultConfiguration] credentialsProvider: credentialsProvider];
 }
 
-- (instancetype)initWithConfiguration:(XMPPClientConfiguration *)configuration {
+- (nonnull instancetype)initWithConfiguration:(nonnull XMPPClientConfiguration  * )configuration credentialsProvider:(nonnull id<XMPPCredentialsProvider>)credentialsProvider {
     self = [super init];
     if (self) {
+        self.credentialsProvider = credentialsProvider;
         self.messageListeners = [NSMutableArray  new];
         self.config = configuration;
         [self setupStreamWithConfig:configuration];
@@ -131,6 +135,10 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
     self.xmppRoster = [[XMPPRoster alloc] initWithRosterStorage:[XMPPRosterMemoryStorage new]];
     [self.xmppRoster activate:self.xmppStream];
     [self.xmppRoster addDelegate:self.xmppDelegate delegateQueue:delegateQueue];
+    
+    self.xmppMUC = [[XMPPMUC alloc] init];
+    [self.xmppMUC addDelegate:self.xmppDelegate delegateQueue:delegateQueue];
+    [self.xmppMUC activate:self.xmppStream];
 }
 
 
@@ -143,6 +151,9 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
     
     [self.xmppRoster removeDelegate:self.xmppDelegate];
     [self.xmppRoster deactivate];
+
+    [self.xmppMUC removeDelegate:self.xmppDelegate];
+    [self.xmppMUC deactivate];
     
     [self.xmppStream removeDelegate:self];
     [self.xmppStream removeDelegate:self.xmppDelegate];
@@ -151,6 +162,7 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
     self.xmppPing = nil;
     self.xmppReconect = nil;
     self.xmppRoster = nil;
+    self.xmppMUC = nil;
     self.xmppStream = nil;
     
     self.history = [XMPPChatHistory new];
@@ -184,10 +196,11 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
 #pragma mark - Processes -
 
 
-- (nonnull XMPPProcess *)auth:(nonnull NSString *)jidString password:(nonnull  NSString *)password {
+- (nonnull XMPPProcess *)auth {
+    XMPPCredentials *credentials = [self.credentialsProvider getChatCredentials];
     XMPPAuthProcess *process = [[XMPPAuthProcess alloc] initWithStream:self.xmppStream queue:[XMPPProcess defaultProcessingQueue]];
-    XMPPJID *jid = [XMPPJID jidWithString:jidString];
-    process.password = password;
+    XMPPJID *jid = [XMPPJID jidWithString:credentials.jid];
+    process.password = credentials.password;
     process.jid = jid;
     
     self.history = [[XMPPChatHistory alloc] initWithCurrentUser:[jid user]];
