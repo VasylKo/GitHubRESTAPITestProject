@@ -107,11 +107,16 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
     return  [self.conversations allKeys];
 }
 
-- (void)startConversationWithUser:(nonnull NSString *)userId name:(nonnull NSString*)displayName imageURL:(nullable NSURL *)url {
+- (nonnull XMPPConversation *)startConversationWithUser:(nonnull NSString *)userId name:(nonnull NSString*)displayName imageURL:(nullable NSURL *)url {
     XMPPConversation *conversation = [[XMPPConversation alloc] initWithUser:userId name:displayName imageURL:url];
+    return [self startConversation:conversation];
+}
+
+- (nonnull XMPPConversation *)startConversation:(nonnull XMPPConversation *)conversation {
     if (self.conversations[conversation] == nil) {
         self.conversations[conversation] = [NSMutableArray new];
     }
+    return conversation;
 }
 
 
@@ -131,15 +136,17 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
     NSUInteger index = [conversationList indexOfObjectPassingTest:^BOOL(XMPPConversation *conversation, NSUInteger idx, BOOL *stop) {
         return [conversation.participants containsObject:user];
     }];
-    if (index != NSNotFound) {
-        XMPPConversation *conversation = conversationList[index];
-        conversation.lastActivityDate = [NSDate date];
-        NSMutableArray *messages = self.conversations[conversation];
-        [messages addObject:message];
-        self.conversations[conversation] = messages;
+    XMPPConversation *conversation = nil;
+    if (index == NSNotFound) {
+        NSString *userId = (outgoing)? message.to : message.from;
+        conversation = [self startConversation:[[XMPPConversation alloc] initWithUser:userId]];
     } else {
-        XMPPLogError(@"Invalid conversation for message %@", message);
+        conversation = conversationList[index];
     }
+    conversation.lastActivityDate = [NSDate date];
+    NSMutableArray *messages = self.conversations[conversation];
+    [messages addObject:message];
+    self.conversations[conversation] = messages;
     
 }
 @end

@@ -30,7 +30,7 @@
 @interface XMPPChatHistory : NSObject
 - (nonnull instancetype)initWithCurrentUser:(nonnull NSString *)currentUserId;
 - (nonnull NSArray *)conversationList;
-- (void)startConversationWithUser:(nonnull NSString *)userId name:(nonnull NSString*)displayName imageURL:(nullable NSURL *)url;
+- (nonnull XMPPConversation *)startConversationWithUser:(nonnull NSString *)userId name:(nonnull NSString*)displayName imageURL:(nullable NSURL *)url;
 - (nonnull NSArray *)messagesForConversationWithUser:(nonnull NSString *)userId;
 - (void)addTextMessage:(nonnull XMPPTextMessage *)message outgoing:(BOOL)outgoing;
 @end
