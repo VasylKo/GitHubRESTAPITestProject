@@ -24,21 +24,13 @@ class SettingsViewController: XLFormViewController {
         drawerButtonVisible = true
         self.initializeForm()
         
-        //TODO: need turn off separator for first cell
-        self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
-        
-        self.versionLabel = UILabel()
         self.versionLabel.text = AppConfiguration().appVersion
         self.view.addSubview(self.versionLabel)
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        self.versionLabel.sizeToFit()
-        var frame = self.versionLabel.frame
-        frame.origin.x = 20
-        frame.origin.y = self.view.frame.size.height - frame.size.height - 20
-        self.versionLabel.frame = frame
+        self.tableView.scrollEnabled = (self.tableView.frame.size.height < self.tableView.contentSize.height)
     }
     
     private func initializeForm() {
@@ -47,21 +39,19 @@ class SettingsViewController: XLFormViewController {
         XLFormViewController.cellClassesForRowDescriptorTypes().setObject("PositionIn.SettingsHeaderCell",
             forKey: settingCellDescription)
         
-        self.tableView.scrollEnabled = false
-        
         var form : XLFormDescriptor
         var section : XLFormSectionDescriptor
         var row : XLFormRowDescriptor
         
-        form = XLFormDescriptor(title: "Settings") as XLFormDescriptor
+        form = XLFormDescriptor(title: "Settings")
         
-        section = XLFormSectionDescriptor.formSection() as XLFormSectionDescriptor
+        section = XLFormSectionDescriptor.formSection()
         form.addFormSection(section)
         row = XLFormRowDescriptor(tag: Tags.Header.rawValue, rowType:  settingCellDescription)
         section.addFormRow(row)
         form.addFormSection(section)
         
-        section = XLFormSectionDescriptor.formSection() as XLFormSectionDescriptor
+        section = XLFormSectionDescriptor.formSection()
         form.addFormSection(section)
         row = XLFormRowDescriptor(tag: Tags.ChangePassword.rawValue,
             rowType: XLFormRowDescriptorTypeSelectorPush, title:Tags.ChangePassword.rawValue)
@@ -76,7 +66,7 @@ class SettingsViewController: XLFormViewController {
         section.addFormRow(row)
         
         if (api().isUserAuthorized()) {
-            section = XLFormSectionDescriptor.formSection() as XLFormSectionDescriptor
+            section = XLFormSectionDescriptor.formSection()
             form.addFormSection(section)
             
             row = XLFormRowDescriptor(tag: Tags.SignOut.rawValue,
@@ -87,7 +77,7 @@ class SettingsViewController: XLFormViewController {
                 }
             }
             row.cellConfig.setObject(UIColor.bt_colorWithBytesR(181, g: 51, b: 59), forKey: "textLabel.textColor")
-            row.cellConfigAtConfigure.setObject(NSTextAlignment.Right.rawValue, forKey:"textLabel.textAlignment");
+            row.cellConfig.setObject(NSTextAlignment.Center.rawValue, forKey:"textLabel.textAlignment");
             
             section.addFormRow(row)
         }
