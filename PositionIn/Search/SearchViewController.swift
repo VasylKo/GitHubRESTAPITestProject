@@ -10,9 +10,7 @@ import UIKit
 import PosInCore
 import CleanroomLogger
 
-protocol SearchViewControllerDelegate: class  {
-//    func searchViewControllerModelSelected(model: TableViewCellModel?)
-    
+protocol SearchViewControllerDelegate: class  {   
     func searchViewControllerItemSelected(model: SearchItemCellModel?)
     func searchViewControllerSectionSelected(model: SearchSectionCellModel?)
 }

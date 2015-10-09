@@ -198,9 +198,9 @@ protocol BrowseActionConsumer: class {
         if let model = model {
             switch model.itemType {
             case .Unknown:
-                print("")
+                break
             case .Category:
-                print("")
+                break
             case .Product:
                 let controller =  Storyboards.Main.instantiateProductDetailsViewControllerId()
                 controller.objectId = model.objectID
