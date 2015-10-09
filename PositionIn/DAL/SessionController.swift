@@ -104,6 +104,14 @@ struct SessionController {
         keychain.set(NSData(bytes: &isGuest, length: sizeof(Bool)), key: KeychainKeys.IsGuestKey)
     }
     
+    func updatePassword(newPassword: String) {
+        keychain[KeychainKeys.UserPasswordKey] = newPassword
+    }
+    
+    var userPassword: String? {
+        return keychain[KeychainKeys.UserPasswordKey]
+    }
+    
     private var isGuest: Bool {
         let data = keychain.getData(KeychainKeys.IsGuestKey)
         if let data = data {
@@ -144,5 +152,6 @@ struct SessionController {
         
         static let UserIdKey = "userId"
         static let IsGuestKey = "isGuest"
+        static let UserPasswordKey = "UserPassword"
     }
 }

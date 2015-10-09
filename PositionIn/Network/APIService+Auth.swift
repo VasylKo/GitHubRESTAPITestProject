@@ -52,12 +52,12 @@ extension APIService {
             }
             @objc func getChatCredentials() -> XMPPCredentials? {
                 let userId: CRUDObjectId? = apiService.currentUserId()
-                let accessToken = apiService.sessionController.accessToken
-                switch (userId, accessToken) {
-                case (.Some(let user), .Some(let token)):
+                let userPassword = apiService.sessionController.userPassword
+                switch (userId, userPassword) {
+                case (.Some(let user), .Some(let password)):
                     let hostname = AppConfiguration().xmppHostname
                     let jid = "\(user)@\(hostname)"
-                    return XMPPCredentials(jid: jid, password: token)
+                    return XMPPCredentials(jid: jid, password: password)
                 default:
                     return nil
                 }
@@ -98,7 +98,7 @@ extension APIService {
     //Login existing user
     func login(#username: String, password: String) -> Future<UserProfile, NSError> {
         return loginRequest(username: username, password: password).flatMap { _ in
-            return self.updateCurrentProfileStatus()
+            return self.updateCurrentProfileStatus(newPasword: password)
         }
     }
     
@@ -119,7 +119,7 @@ extension APIService {
             info ["lastName"] = lastName
         }
         return registerRequest(username: username, password: password, info: info).flatMap { _ in
-            return self.updateCurrentProfileStatus()
+            return self.updateCurrentProfileStatus(newPasword: password)
         }
     }
     
@@ -146,10 +146,13 @@ extension APIService {
         }
     }
     
-    private func updateCurrentProfileStatus() -> Future<UserProfile, NSError> {
+    private func updateCurrentProfileStatus(newPasword: String? = nil) -> Future<UserProfile, NSError> {
         return getMyProfile().andThen { result in
             if let profile = result.value {
                 self.sessionController.updateCurrentStatus(profile)
+                if let newPassword = newPasword {
+                    self.sessionController.updatePassword(newPassword)
+                }
                 self.sendUserDidChangeNotification(profile)
             }
         }

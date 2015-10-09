@@ -13,6 +13,11 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
 @implementation XMPPAuthProcess
 
 - (void)run {
+    if ( self.jid == nil || self.password == nil) {
+        NSError *error = [self errorWithReason:NSLocalizedString(@"Invalid Chat Credentials", "XMPP Invalid Credentials")];
+        [self complete:nil error:error];
+        return;
+    }
     self.xmppStream.myJID = self.jid;
     if ([self.xmppStream isDisconnected] && ![self.xmppStream isConnecting]) {
         NSError *error = nil;
@@ -20,7 +25,6 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
             XMPPLogError(@"Error while connecting: %@", error);
             [self complete:nil error:error];
         }
-
     } else {
         [self auth];
     }
