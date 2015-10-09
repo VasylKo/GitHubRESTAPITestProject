@@ -58,7 +58,7 @@
 		24EF62141BA81B5800472531 /* ChatHistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24EF62131BA81B5800472531 /* ChatHistoryCell.swift */; };
 		24EF62161BA81DCB00472531 /* PositionIn.ChatHistoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24EF62151BA81DCB00472531 /* PositionIn.ChatHistoryCell.xib */; };
 		24EF62181BA8230000472531 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24EF62171BA8230000472531 /* Message.swift */; };
-		451B04D684C5CB71F3D6581C /* Pods_PositionIn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7CE5A186774ECEB07E96F58 /* Pods_PositionIn.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		451B04D684C5CB71F3D6581C /* Pods_PositionIn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7CE5A186774ECEB07E96F58 /* Pods_PositionIn.framework */; };
 		500D7FA31BC2AACF008C8C82 /* SearchItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500D7FA21BC2AACF008C8C82 /* SearchItem.swift */; };
 		500D7FA51BC2ADFE008C8C82 /* SearchItemCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500D7FA41BC2ADFE008C8C82 /* SearchItemCellModel.swift */; };
 		500D7FA81BC2CD39008C8C82 /* SearchEntityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500D7FA61BC2CD39008C8C82 /* SearchEntityCell.swift */; };

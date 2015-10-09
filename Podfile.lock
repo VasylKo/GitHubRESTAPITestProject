@@ -33,7 +33,7 @@ PODS:
     - Braintree/API
   - BrightFutures (2.0.1):
     - Result (~> 0.4.3)
-  - GoogleMaps (1.10.2)
+  - GoogleMaps (1.10.3)
   - HanekeSwift (0.9.1)
   - HMSegmentedControl (1.5.2)
   - ImagePickerSheetController (0.1.7)
@@ -54,15 +54,15 @@ PODS:
   - XLForm (3.0.2)
 
 DEPENDENCIES:
-  - Braintree
+  - Braintree (= 3.9.3)
   - GoogleMaps
-  - HanekeSwift
+  - HanekeSwift (~> 0.9.1)
   - HMSegmentedControl
   - ImagePickerSheetController (~> 0.1.7)
   - JDStatusBarNotification
   - JSQMessagesViewController (~> 7.1.0)
-  - KeychainAccess
-  - KYDrawerController
+  - KeychainAccess (~> 1.2.1)
+  - KYDrawerController (~> 1.0.3)
   - PosInCore (from `PosInCore`)
   - UIImageEffects
   - XLForm (~> 3.0.2)
@@ -76,7 +76,7 @@ SPEC CHECKSUMS:
   Box: a92e8aa4c099e6bc0733829665caf9e668ef53b8
   Braintree: 996027dcc8633569f2405bc57dca11f367050c60
   BrightFutures: 27704272a695324b42538a2d85b20ac3f24228bd
-  GoogleMaps: 5c92e599b07b0a2a9b367c5dd128edc629bddfea
+  GoogleMaps: 945e4ac3b74bcca3ddada51df256eb7beddb474d
   HanekeSwift: 50d37bfbc4432edc649167e538c259feccb4a2bb
   HMSegmentedControl: 83b9686022d2176fb6457d2bdb61e5d6393fed7d
   ImagePickerSheetController: 127cc7a5e8da7fa17d42aa4ba7509f72af9cd71f
@@ -91,4 +91,4 @@ SPEC CHECKSUMS:
   UIImageEffects: 37b99fa461e4965f332ca82e92f2c22a1075ee84
   XLForm: 7817ce29f3f259186e837bb7309ac7e5b7e9b883
 
-COCOAPODS: 0.39.0.beta.5
+COCOAPODS: 0.39.0.rc.1
