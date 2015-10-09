@@ -4,9 +4,9 @@ use_frameworks!
 
 
 target 'PositionIn' do
-    pod 'KeychainAccess'
-    pod 'HanekeSwift'
-    pod 'KYDrawerController'
+    pod 'KeychainAccess' , '~> 1.2.1'
+    pod 'HanekeSwift' , '~> 0.9.1'
+    pod 'KYDrawerController' , '~> 1.0.3'
     pod 'UIImageEffects', :inhibit_warnings => true
     pod 'XLForm', '~> 3.0.2'
     pod 'ImagePickerSheetController', '~> 0.1.7'
@@ -16,8 +16,9 @@ target 'PositionIn' do
     pod 'JSQMessagesViewController', '~> 7.1.0'
     
     pod 'PosInCore', :path => 'PosInCore'
+
+    pod 'Braintree', '3.9.3'
     
-    pod 'Braintree'
 end
 
 target 'PositionInTests' do

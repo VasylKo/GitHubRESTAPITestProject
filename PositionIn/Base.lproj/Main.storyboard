@@ -488,7 +488,7 @@
                                                     <color key="textColor" red="0.61176470589999998" green="0.61176470589999998" blue="0.61176470589999998" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fee" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k1j-rJ-qPa">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Fee" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k1j-rJ-qPa">
                                                     <rect key="frame" x="10" y="54" width="27" height="20"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                     <color key="textColor" red="0.61176470589999998" green="0.61176470589999998" blue="0.61176470589999998" alpha="1" colorSpace="calibratedRGB"/>
@@ -506,7 +506,7 @@
                                                     <color key="textColor" red="0.61176470589999998" green="0.61176470589999998" blue="0.61176470589999998" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$0.40" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1xi-IL-uMK">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="$0.40" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1xi-IL-uMK">
                                                     <rect key="frame" x="554" y="54" width="41" height="20"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                     <color key="textColor" red="0.61176470589999998" green="0.61176470589999998" blue="0.61176470589999998" alpha="1" colorSpace="calibratedRGB"/>
@@ -924,43 +924,7 @@
         <scene sceneID="Pme-xu-DE1">
             <objects>
                 <viewController storyboardIdentifier="SettingsViewController" id="BLF-bw-Lcw" customClass="SettingsViewController" customModule="PositionIn" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="B1s-Nz-ayc"/>
-                        <viewControllerLayoutGuide type="bottom" id="nRo-2U-OMz"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="IcZ-Qf-ALt">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8cE-G8-MVg">
-                                <rect key="frame" x="274" y="252" width="53" height="32"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                <state key="normal" title="Logout">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="logoutTouched:" destination="BLF-bw-Lcw" eventType="touchUpInside" id="v1c-TG-YP5"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="versionLabel" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U5F-Ak-Xmw">
-                                <rect key="frame" x="10" y="506" width="98" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.74901960779999999" green="0.74901960779999999" blue="0.74901960779999999" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="nRo-2U-OMz" firstAttribute="top" secondItem="U5F-Ak-Xmw" secondAttribute="bottom" constant="10" id="diw-Lc-hj1"/>
-                            <constraint firstItem="U5F-Ak-Xmw" firstAttribute="leading" secondItem="IcZ-Qf-ALt" secondAttribute="leading" constant="10" id="m2i-1W-vIN"/>
-                            <constraint firstAttribute="centerY" secondItem="8cE-G8-MVg" secondAttribute="centerY" id="tk4-hY-tyA"/>
-                            <constraint firstAttribute="centerX" secondItem="8cE-G8-MVg" secondAttribute="centerX" id="vum-co-eB8"/>
-                        </constraints>
-                    </view>
                     <navigationItem key="navigationItem" title="Settings" id="FcZ-fa-4Bo"/>
-                    <connections>
-                        <outlet property="versionLabel" destination="U5F-Ak-Xmw" id="DYe-3f-JVY"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZRn-8Z-5zo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1076,6 +1040,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="UGm-BP-OPQ"/>
-        <segue reference="OnQ-Ex-OI6"/>
+        <segue reference="gvg-eL-WZN"/>
     </inferredMetricsTieBreakers>
 </document>

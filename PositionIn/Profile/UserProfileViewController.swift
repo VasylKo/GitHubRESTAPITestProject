@@ -13,7 +13,7 @@ protocol UserProfileActionConsumer: class {
     func shouldExecuteAction(action: UserProfileViewController.ProfileAction)
 }
 
-final class UserProfileViewController: BesideMenuViewController, BrowseActionProducer, SearchViewControllerDelegate ,UISearchBarDelegate {
+final class UserProfileViewController: BesideMenuViewController, BrowseActionProducer, UISearchBarDelegate, SearchViewControllerDelegate {
     
     weak var actionConsumer: BrowseActionConsumer?
     
@@ -187,8 +187,12 @@ final class UserProfileViewController: BesideMenuViewController, BrowseActionPro
         return false
     }
     
-    func searchViewControllerModelSelected(model: TableViewCellModel?) {
-        //TODO: need implement
+    func searchViewControllerItemSelected(model: SearchItemCellModel?) {
+        
+    }
+    
+    func searchViewControllerSectionSelected(model: SearchSectionCellModel?) {
+        
     }
 }
 
