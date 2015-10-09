@@ -42,7 +42,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             ]
         let dataProvider = PosInCore.NetworkDataProvider(configuration: urlSessionConfig, trustPolicies: trustPolicies)
         api = APIService(url: baseURL, dataProvider: dataProvider)
-        chatClient = AppDelegate.chatClientInstance()
+        chatClient = XMPPClient()
         locationController = LocationController()
         
         UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.bt_colorWithBytesR(133, g: 186, b: 255)]
@@ -106,21 +106,19 @@ extension AppDelegate {
     private class func chatClientInstance() -> XMPPClient {
         let appConfig = AppConfiguration()
         let chatConfig = XMPPClientConfiguration(with: appConfig.xmppHostname, port: appConfig.xmppPort)
-        return XMPPClient(configuration: chatConfig)
+        let credentialsProvider = appDelegate().api.chatCredentialsProvider()
+        return XMPPClient(configuration: chatConfig, credentialsProvider: credentialsProvider)
     }
     
     func currentUserDidChange(profile: UserProfile?) {
-        if  let user = profile,
-            let chatCredentials = self.api.getChatCredentials() {
-                chatClient.disconnect()
+        chatClient.disconnect()
+        if  let user = profile {
                 chatClient = AppDelegate.chatClientInstance()
-                chatClient.auth(chatCredentials.jid, password: chatCredentials.password).future().onSuccess { [unowned self] in
+                chatClient.auth().future().onSuccess { [unowned self] in
                     Log.info?.message("XMPP authorized")
                 }.onFailure { error in
                     Log.error?.value(error)
                 }
-        } else {
-            chatClient.disconnect()
         }
     }
     
@@ -143,21 +141,23 @@ extension AppDelegate {
     }
 }
 
+func appDelegate() -> AppDelegate {
+    return UIApplication.sharedApplication().delegate as! AppDelegate
+}
+
 func api() -> APIService {
-    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-    return appDelegate.api
+    return appDelegate().api
 }
 
 func locationController() -> LocationController {
-    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-    return appDelegate.locationController
+    return appDelegate().locationController
 }
 
 func chat() -> XMPPClient {
-    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+    let applicationDelegate = appDelegate()
     var chatClient: XMPPClient!
-    synced(appDelegate) {
-        chatClient = appDelegate.chatClient
+    synced(applicationDelegate) {
+        chatClient = applicationDelegate.chatClient
     }
     return chatClient
 }

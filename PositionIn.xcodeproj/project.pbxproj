@@ -73,6 +73,8 @@
 		50FE7D8A1BBE77BB005676E2 /* ItemsSearchResultsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FE7D881BBE77BB005676E2 /* ItemsSearchResultsController.swift */; };
 		E6018E501B849266001D22FA /* XMPPProcess+Future.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6018E4F1B849266001D22FA /* XMPPProcess+Future.swift */; };
 		E6018E521B8492EA001D22FA /* XLFormOptionsObject+PositionIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6018E511B8492EA001D22FA /* XLFormOptionsObject+PositionIn.swift */; };
+		E603D2581BC7E5B000E684C5 /* XMPPCredentials.h in Headers */ = {isa = PBXBuildFile; fileRef = E603D2561BC7E5B000E684C5 /* XMPPCredentials.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E603D2591BC7E5B000E684C5 /* XMPPCredentials.m in Sources */ = {isa = PBXBuildFile; fileRef = E603D2571BC7E5B000E684C5 /* XMPPCredentials.m */; };
 		E60EBF761B8EF9B50014B6ED /* DataTransforms.swift in Sources */ = {isa = PBXBuildFile; fileRef = E60EBF751B8EF9B50014B6ED /* DataTransforms.swift */; };
 		E6199BB71B9F3B7400E3C69D /* PeopleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6199BB61B9F3B7400E3C69D /* PeopleViewController.swift */; };
 		E61B20D51B7DD47C005EAB2C /* FeedItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61B20D41B7DD47C005EAB2C /* FeedItem.swift */; };
@@ -477,6 +479,8 @@
 		C5785CCFFE7238C562E6E52F /* Pods-PositionIn.devrelease.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PositionIn.devrelease.xcconfig"; path = "Pods/Target Support Files/Pods-PositionIn/Pods-PositionIn.devrelease.xcconfig"; sourceTree = "<group>"; };
 		E6018E4F1B849266001D22FA /* XMPPProcess+Future.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "XMPPProcess+Future.swift"; sourceTree = "<group>"; };
 		E6018E511B8492EA001D22FA /* XLFormOptionsObject+PositionIn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "XLFormOptionsObject+PositionIn.swift"; sourceTree = "<group>"; };
+		E603D2561BC7E5B000E684C5 /* XMPPCredentials.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPCredentials.h; sourceTree = "<group>"; };
+		E603D2571BC7E5B000E684C5 /* XMPPCredentials.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPCredentials.m; sourceTree = "<group>"; };
 		E60EBF751B8EF9B50014B6ED /* DataTransforms.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataTransforms.swift; sourceTree = "<group>"; };
 		E6199BB61B9F3B7400E3C69D /* PeopleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeopleViewController.swift; sourceTree = "<group>"; };
 		E61B20D41B7DD47C005EAB2C /* FeedItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedItem.swift; sourceTree = "<group>"; };
@@ -2571,6 +2575,8 @@
 				E689F0711B6A909200597587 /* XMPPDelegate.m */,
 				E68DF1751BC4E58E0054482D /* XMPPChatHistory.h */,
 				E68DF1761BC4E58E0054482D /* XMPPChatHistory.m */,
+				E603D2561BC7E5B000E684C5 /* XMPPCredentials.h */,
+				E603D2571BC7E5B000E684C5 /* XMPPCredentials.m */,
 				E6681A271B679C72003096D6 /* Processes */,
 			);
 			path = Messaging;
@@ -2654,6 +2660,7 @@
 				E689F06B1B6A8FE800597587 /* XMPPRosterMemoryStorage.h in Headers */,
 				E689EF501B6A89D000597587 /* DDXMLPrivate.h in Headers */,
 				E6E2FEAD1B66F72100880F3C /* XMPPClient.h in Headers */,
+				E603D2581BC7E5B000E684C5 /* XMPPCredentials.h in Headers */,
 				E689EF021B6A89D000597587 /* XMPPSCRAMSHA1Authentication.h in Headers */,
 				E689EF2D1B6A89D000597587 /* XMPPSRVResolver.h in Headers */,
 				E689EF131B6A89D000597587 /* XMPPElement.h in Headers */,
@@ -3243,6 +3250,7 @@
 				E6AAC2AD1BB4522300919469 /* XMPPRoomOccupantMemoryStorageObject.m in Sources */,
 				E689F06C1B6A8FE800597587 /* XMPPRosterMemoryStorage.m in Sources */,
 				E6AAC2AB1BB4522300919469 /* XMPPRoomMessageMemoryStorageObject.m in Sources */,
+				E603D2591BC7E5B000E684C5 /* XMPPCredentials.m in Sources */,
 				E689EF141B6A89D000597587 /* XMPPElement.m in Sources */,
 				E6AAC2A91BB4522300919469 /* XMPPRoomMemoryStorage.m in Sources */,
 				E689F0731B6A909200597587 /* XMPPDelegate.m in Sources */,
