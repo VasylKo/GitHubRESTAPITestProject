@@ -12,9 +12,9 @@ final class AppConfiguration {
     init() {
         #if PROD_ENV
         //Prod
-        baseURL = NSURL(string: "https://positionin.com/api/")!
+            baseURL = NSURL(string: "https://app.positionin.com/api/")!
         amazonURL = NSURL(string: "https://pos-prod.s3.amazonaws.com/")!
-        xmppHostname = "positionin.com"
+            xmppHostname = "app.positionin.com"
         #elseif STAGING_ENV
         //Staging
         baseURL = NSURL(string: "https://app-sta.positionin.com/api/")!
