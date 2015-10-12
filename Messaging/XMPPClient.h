@@ -30,9 +30,10 @@
 - (nonnull instancetype)initWithConfiguration:(nonnull XMPPClientConfiguration  * )configuration credentialsProvider:(nonnull id<XMPPCredentialsProvider>)credentialsProvider;
 
 - (void)auth;
+- (void)updateRooms;
 - (nonnull XMPPProcess *)registerJid:(nonnull NSString *)jidString password:(nonnull  NSString *)password;
 
-- (void)sendTextMessage:(nonnull NSString *)text to:(nonnull NSString *)username;
+- (void)sendTextMessage:(nonnull NSString *)text to:(nonnull NSString *)username groupChat:(BOOL)groupChat;
 
 - (void)addMessageListener:(nonnull id<XMPPMessageListener>)listener;
 - (void)removeMessageListener:(nonnull id<XMPPMessageListener>)listener;
@@ -41,6 +42,7 @@
 @property (nonatomic, readonly, assign) BOOL isConnected;
 - (void)disconnect;
 
+@property (nonatomic, copy, nullable) NSString *nickName;
 
 @property (nonnull, readonly, strong) XMPPChatHistory *history;
 @end

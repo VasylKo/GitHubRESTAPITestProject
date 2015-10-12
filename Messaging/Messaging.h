@@ -20,3 +20,4 @@ FOUNDATION_EXPORT const unsigned char MessagingVersionString[];
 #import <Messaging/XMPPProcess.h>
 #import <Messaging/XMPPChatHistory.h>
 #import <Messaging/XMPPCredentials.h>
+#import <Messaging/XMPPConversation.h>

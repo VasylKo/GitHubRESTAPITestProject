@@ -76,7 +76,13 @@ extension MessagesListViewController {
             tableView.deselectRowAtIndexPath(indexPath, animated: true)
             if let model = self.tableView(tableView, modelForIndexPath: indexPath) as? ChatHistoryCellModel {
                 //TODO: move logic to the controller
-                parentViewController?.showChatViewController(Conversation(userId: model.userId))
+                let conversation: Conversation
+                if model.isGoupChat {
+                    conversation = Conversation(roomId: model.userId)
+                } else {
+                    conversation = Conversation(userId: model.userId)
+                }
+                parentViewController?.showChatViewController(conversation)
             }
         }
         
@@ -90,7 +96,8 @@ extension MessagesListViewController {
                     name: conversation.name,
                     message: "",
                     imageURL: conversation.imageURL,
-                    date: map(conversation.lastActivityDate) { dateFormatter.stringFromDate($0) }
+                    date: map(conversation.lastActivityDate) { dateFormatter.stringFromDate($0) },
+                    muc: conversation.isMultiUser
                 )
             }
         }

@@ -12,7 +12,7 @@
 #import "XMPPLogFormatter.h"
 #import "XMPPDelegate.h"
 
-#import "XMPPChatHistory.h"
+#import "XMPPChatHistory+Private.h"
 #import "XMPPProcess+Private.h"
 #import "XMPPAuthProcess.h"
 #import "XMPPRegisterProcess.h"
@@ -60,7 +60,6 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
 
 @property (readwrite, assign) BOOL authorized;
 
-@property (nonatomic, strong) NSMutableArray *rooms;
 @end
 
 
@@ -149,16 +148,12 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
     [self.xmppMUC addDelegate:self delegateQueue:delegateQueue];
     [self.xmppMUC addDelegate:self.xmppDelegate delegateQueue:delegateQueue];
     [self.xmppMUC activate:self.xmppStream];
-    
-    self.rooms = [NSMutableArray new];
 }
 
 
 - (void)teardownStream {
-    for (XMPPRoom *room in self.rooms) {
-        [room deactivate];
-    }
-    self.rooms = nil;
+    self.nickName = nil;
+    [self.history cleanRooms];
     
     [self.xmppPing deactivate];
 
@@ -213,23 +208,27 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
 
 #pragma mark - Processes -
 
+- (void)updateRooms {
+    [self.xmppMUC discoverServices];
+}
 
 - (void)auth {
     XMPPCredentials *credentials = [self.credentialsProvider getChatCredentials];
     if (credentials != nil) {
         XMPPJID *jid = [XMPPJID jidWithString:credentials.jid];
-        self.history = [[XMPPChatHistory alloc] initWithCurrentUser:[jid user]];
+        self.history = [[XMPPChatHistory alloc] initWithUserId:[jid user] nick:self.nickName];
         XMPPAuthProcess *process = [[XMPPAuthProcess alloc] initWithStream:self.xmppStream queue:[XMPPProcess defaultProcessingQueue]];
         process.password = credentials.password;
         process.jid = jid;
         __weak XMPPClient *weakClient = self;
         [process executeWithCompletion:^(id __nullable result, NSError * __nullable error) {
+            XMPPClient *client = weakClient;
+            client.authorized = (error == nil);
             if (error) {
                 XMPPLogError(@"Auth error: %@", [error localizedDescription]);
             } else {
-                [self.xmppMUC discoverServices];
+                [client updateRooms];
             }
-            weakClient.authorized = (error == nil);
         }];
     } else {
         XMPPLogWarn(@"Empty credentials");
@@ -244,12 +243,16 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
     return process;
 }
 
-- (void)sendTextMessage:(nonnull NSString *)text to:(nonnull NSString *)username {
-    XMPPJID *jid = [XMPPJID jidWithString:[NSString stringWithFormat:@"%@@%@", username, self.config.hostName]];
-    XMPPMessage *msg = [XMPPMessage messageWithType:@"chat" to:jid];
-    [msg addBody:text];
-    XMPPLogInfo(@"Sending message %@", [msg XMLString]);
-    [self.xmppStream sendElement:msg];
+- (void)sendTextMessage:(nonnull NSString *)text to:(nonnull NSString *)username groupChat:(BOOL)groupChat {
+    if (groupChat) {
+        [[self.history roomWithId:username] sendMessageWithBody:text];     
+    } else {
+        XMPPJID *jid = [XMPPJID jidWithString:[NSString stringWithFormat:@"%@@%@", username, self.config.hostName]];
+        XMPPMessage *msg = [XMPPMessage messageWithType:@"chat" to:jid];
+        [msg addBody:text];
+        XMPPLogInfo(@"Sending message %@", [msg XMLString]);
+        [self.xmppStream sendElement:msg];
+    }
 }
 
 
@@ -311,17 +314,7 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
 
 - (void)xmppMUC:(XMPPMUC *)sender didDiscoverRooms:(NSArray *)rooms forServiceNamed:(NSString *)serviceName {
     XMPPLogInfo(@"Rooms: %@", rooms);
-    for (NSXMLElement *roomXML in rooms) {
-        XMPPJID *roomJid = [XMPPJID jidWithString:[[roomXML attributeForName:@"jid"] stringValue]];
-        XMPPRoom *room = [[XMPPRoom alloc] initWithRoomStorage:[XMPPRoomMemoryStorage new] jid:roomJid];
-        [room activate:sender.xmppStream];
-        [room addDelegate:self.xmppDelegate delegateQueue:sender.moduleQueue];
-        #warning check if already exist
-        [self.rooms addObject:room];
-        NSXMLElement *history = [NSXMLElement elementWithName:@"history"];
-        [history addAttributeWithName:@"maxstanzas" intValue:20];
-        [room joinRoomUsingNickname:@"Another Test" history:history];
-    }
+    [self.history didDiscoverRooms:rooms stream:sender.xmppStream];
 }
 
 

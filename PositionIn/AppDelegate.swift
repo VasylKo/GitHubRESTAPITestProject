@@ -114,6 +114,7 @@ extension AppDelegate {
         chatClient.disconnect()
         if  let user = profile {
                 chatClient = AppDelegate.chatClientInstance()
+                chatClient.nickName = user.displayName
                 chatClient.auth()
         }
     }

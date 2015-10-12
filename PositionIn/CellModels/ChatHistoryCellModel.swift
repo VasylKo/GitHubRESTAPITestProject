@@ -16,13 +16,15 @@ final class ChatHistoryCellModel: TableViewCellModel {
     let message: String?
     let date: String?
     let imageUrl: NSURL?
+    let isGoupChat: Bool
     
-    init(user: CRUDObjectId, name: String?, message: String?, imageURL: NSURL?, date: String?) {
+    init(user: CRUDObjectId, name: String?, message: String?, imageURL: NSURL?, date: String?, muc: Bool = false) {
         userId = user
         self.name = name
         self.message = message
         self.date = date
         self.imageUrl = imageURL
+        isGoupChat = muc
     }
 }
 
