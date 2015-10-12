@@ -71,6 +71,9 @@ final class BrowseMapViewController: UIViewController, BrowseActionProducer, Bro
     
     private var markers = [GMSMarker]()
     
+    func reloadData() {
+        //TODO: reloadData
+    }
 }
 
 
@@ -106,7 +109,7 @@ extension BrowseMapViewController: GMSMapViewDelegate {
         if let box = marker.userData  as? Box<FeedItem> {
             let feedItem = box.value
             actionConsumer?.browseController(self, didSelectItem: feedItem.objectId, type: feedItem.type, data:feedItem.itemData)
-        
+            
         }
         
         return true

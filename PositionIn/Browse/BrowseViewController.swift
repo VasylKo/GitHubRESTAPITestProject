@@ -11,6 +11,7 @@ import CleanroomLogger
 
 protocol SearchFilterProtocol {
     var filter: SearchFilter {get set}
+    func reloadData()
 }
 
 final class BrowseViewController: BrowseModeTabbarViewController, SearchViewControllerDelegate {
@@ -19,7 +20,6 @@ final class BrowseViewController: BrowseModeTabbarViewController, SearchViewCont
     @IBAction func prepareForUnwind(segue: UIStoryboardSegue) {
         
     }
-    
     
     override func viewControllerForMode(mode: DisplayModeViewController.DisplayMode) -> UIViewController {
         switch self.displayMode {
@@ -54,37 +54,55 @@ final class BrowseViewController: BrowseModeTabbarViewController, SearchViewCont
     }
     
     override func searchViewControllerItemSelected(model: SearchItemCellModel?) {
-        let controller = self.currentModeViewController
-        
         if let model = model {
-            switch model.itemType {
-            case .Unknown:
-                break
-            case .Category:
-                break
-            case .Product:
-                let controller =  Storyboards.Main.instantiateProductDetailsViewControllerId()
-                controller.objectId = model.objectID
-                navigationController?.pushViewController(controller, animated: true)
-            case .Event:
-                let controller =  Storyboards.Main.instantiateEventDetailsViewControllerId()
-                controller.objectId = model.objectID
-                navigationController?.pushViewController(controller, animated: true)
-            case .Promotion:
-                let controller =  Storyboards.Main.instantiatePromotionDetailsViewControllerId()
-                controller.objectId =  model.objectID
-                navigationController?.pushViewController(controller, animated: true)
-            case .Community:
-                SearchFilter.currentFilter.communities = [model.objectID]
-            case .People:
-                SearchFilter.currentFilter.users = [model.objectID]
-            default:
-                break
+            if var filterApplicator = self.currentModeViewController as? SearchFilterProtocol {
+                switch model.itemType {
+                case .Unknown:
+                    break
+                case .Category:
+                    break
+                case .Product:
+                    let controller =  Storyboards.Main.instantiateProductDetailsViewControllerId()
+                    controller.objectId = model.objectID
+                    navigationController?.pushViewController(controller, animated: true)
+                case .Event:
+                    let controller =  Storyboards.Main.instantiateEventDetailsViewControllerId()
+                    controller.objectId = model.objectID
+                    navigationController?.pushViewController(controller, animated: true)
+                case .Promotion:
+                    let controller =  Storyboards.Main.instantiatePromotionDetailsViewControllerId()
+                    controller.objectId =  model.objectID
+                    navigationController?.pushViewController(controller, animated: true)
+                case .Community:
+                    filterApplicator.filter.communities = [model.objectID]
+                case .People:
+                    filterApplicator.filter.users = [model.objectID]
+                default:
+                    break
+                }
+                filterApplicator.reloadData()
             }
         }
     }
 
     override func searchViewControllerSectionSelected(model: SearchSectionCellModel?) {
         let controller = self.currentModeViewController
+        if let model = model {
+            if var filterApplicator = self.currentModeViewController as? SearchFilterProtocol {
+                switch model.itemType {
+                case .Unknown:
+                    break;
+                case .Event:
+                    filterApplicator.filter.itemTypes = [.Event]
+                case .Promotion:
+                    filterApplicator.filter.itemTypes = [.Promotion]
+                case .Item:
+                    filterApplicator.filter.itemTypes = [.Item]
+                case .Post:
+                    filterApplicator.filter.itemTypes = [.Post]
+                }
+                filterApplicator.reloadData()
+            }
+        }
     }
 }

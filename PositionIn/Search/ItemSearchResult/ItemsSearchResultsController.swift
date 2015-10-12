@@ -98,6 +98,7 @@ class ItemsSearchResultsController: NSObject {
             for var i = 0; i < array.count; i++ {
                 
                 var isHeaderCellTappable: Bool = false
+                var feedItemType: FeedItem.ItemType = FeedItem.ItemType.Unknown
                 
                 switch type {
                 case .Unknown:
@@ -110,19 +111,21 @@ class ItemsSearchResultsController: NSObject {
                         title: model.title, searchString: searchBar?.text, subtitle: nil, localImageName: "placeholderEvent", remoteImageURL: nil)
                     tableViewModels.append(searchItemCellModel)
                     isHeaderCellTappable = true
+                    feedItemType = FeedItem.ItemType.Event
                 case .Product:
                     let model = array[i]
                     let searchItemCellModel = SearchItemCellModel(itemType: type, objectID: model.objectId,
                         title: model.title, searchString: searchBar?.text,subtitle: nil, localImageName: "placeholderProduct", remoteImageURL: nil)
                     tableViewModels.append(searchItemCellModel)
                     isHeaderCellTappable = true
-                    
+                    feedItemType = FeedItem.ItemType.Item
                 case .Promotion:
                     let model = array[i]
                     let searchItemCellModel = SearchItemCellModel(itemType: type, objectID: model.objectId,
                         title: model.title, searchString: searchBar?.text,subtitle: nil, localImageName: "placeholderPromotion", remoteImageURL: nil)
                     tableViewModels.append(searchItemCellModel)
                     isHeaderCellTappable = true
+                    feedItemType = FeedItem.ItemType.Promotion
                 case .Community:
                     if let model = array[i] as? UserInfo  {
                         let searchItemCellModel = SearchItemCellModel(itemType: type, objectID: model.objectId,
@@ -144,7 +147,7 @@ class ItemsSearchResultsController: NSObject {
                 }
                 
                 if (i == 0) {
-                    let model = SearchSectionCellModel(itemType: type, title: title,
+                    let model = SearchSectionCellModel(itemType: feedItemType, title: title,
                         isTappable: isHeaderCellTappable)
                     tableViewModels.insert(model, atIndex: 0)
                 }

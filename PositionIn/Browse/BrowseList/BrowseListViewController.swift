@@ -41,6 +41,10 @@ final class BrowseListViewController: UIViewController, BrowseActionProducer, Br
         }
     }
     
+    func reloadData() {
+        getFeedItems(filter)
+    }
+    
     private func getFeedItems(searchFilter: SearchFilter, page: APIService.Page = APIService.Page()) {
         dataRequestToken.invalidate()
         dataRequestToken = InvalidationToken()

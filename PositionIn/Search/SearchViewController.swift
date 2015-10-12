@@ -74,7 +74,7 @@ final class SearchViewController: UIViewController {
     func didTapOutsideSearch(sender: UIGestureRecognizer) {
         view.endEditing(true)
         transitioningDelegate = nil
-        dismissViewControllerAnimated(true, completion: nil)
+//        dismissViewControllerAnimated(true, completion: nil)
         Log.debug?.message("Should close search")
     }
     
