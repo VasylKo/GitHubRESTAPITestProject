@@ -8,6 +8,49 @@
 
 import ObjectMapper
 import CleanroomLogger
+import PosInCore
+
+struct QuickSearchResponse: Mappable {
+    private(set) var categories: [ItemCategory]!
+    private(set) var products: [ObjectInfo]!
+    private(set) var promotions: [ObjectInfo]!
+    private(set) var communities: [UserInfo]!
+    private(set) var events: [ObjectInfo]!
+    private(set) var peoples: [UserInfo]!
+    
+    init?(_ map: Map) {
+        mapping(map)
+        switch (categories, products, promotions, communities, events, peoples) {
+        case (.Some, .Some, .Some, .Some, .Some, .Some):
+            break
+        default:
+            Log.error?.message("Error while parsing object")
+            Log.debug?.trace()
+            Log.verbose?.value(self)
+            return nil
+        }
+    }
+    
+    mutating func mapping(map: Map) {
+        products <- map["items"] //TODO: need check
+        promotions <- map["promotions"]
+        communities <- map["communities"]
+        events <- map["events"]
+        categories <- (map["categories"], ListTransform(itemTransform:EnumTransform()))
+        peoples <- map["peoples"]
+        
+        Log.verbose?.value(promotions)
+        Log.verbose?.value(communities)
+        Log.verbose?.value(events)
+        Log.verbose?.value(peoples)
+        Log.verbose?.value(categories)
+        Log.verbose?.value(peoples)
+    }
+    
+    var description: String {
+        return "<\(self.dynamicType)-(\(peoples)):\(promotions):\(communities):\(events)c:\(peoples)>"
+    }
+}
 
 struct CollectionResponse<C: CRUDObject>: Mappable {
     private(set) var items: [C]!
@@ -51,7 +94,6 @@ struct UpdateResponse: Mappable{
     
     mutating func mapping(map: Map) {
         objectId <- (map["id"], CRUDObjectIdTransform())
-
     }
     
     var description: String {
@@ -99,10 +141,4 @@ struct AuthResponse: Mappable, DebugPrintable {
     static func invalidAuth() -> AuthResponse {
         return  AuthResponse(accessToken: "",refreshToken: "",expires: -1)
     }
-}
-
-// XMPP credentials
-struct ChatCredentials {
-    let jid: String
-    let password: String
 }

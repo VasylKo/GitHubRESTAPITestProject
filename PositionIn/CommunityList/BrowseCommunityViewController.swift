@@ -111,6 +111,7 @@ final class BrowseCommunityViewController: BesideMenuViewController {
     }
 
     override func contentDidChange(sender: AnyObject?, info: [NSObject : AnyObject]?) {
+        chat().updateRooms()
         if isViewLoaded() {
             reloadData()
         }
@@ -190,6 +191,7 @@ extension BrowseCommunityViewController: BrowseCommunityActionConsumer {
         case .Join:
             api().joinCommunity(community).onSuccess { [weak self] _ in
                 self?.reloadData()
+                chat().updateRooms()
             }
             break
         case .Browse, .Post:

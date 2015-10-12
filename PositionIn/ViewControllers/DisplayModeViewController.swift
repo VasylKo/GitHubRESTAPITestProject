@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import PosInCore
 import CleanroomLogger
 import HMSegmentedControl
 
@@ -19,8 +20,7 @@ protocol BrowseActionConsumer: class {
     func browseControllerDidChangeContent(controller: BrowseActionProducer)
 }
 
-
-@objc class DisplayModeViewController: BesideMenuViewController, BrowseActionConsumer, UISearchBarDelegate {
+@objc class DisplayModeViewController: BesideMenuViewController, BrowseActionConsumer, SearchViewControllerDelegate, UISearchBarDelegate {
     
     //MARK: - Updates -
     
@@ -173,7 +173,6 @@ protocol BrowseActionConsumer: class {
             navigationController?.pushViewController(controller, animated: true)            
         default:
             Log.debug?.message("Did select \(itemType)<\(objectId)>")
-            
         }
     }
     
@@ -194,6 +193,37 @@ protocol BrowseActionConsumer: class {
         SearchViewController.present(searchbar, presenter: self)
         return false
     }
-
-
+    
+    func searchViewControllerItemSelected(model: SearchItemCellModel?) {
+        if let model = model {
+            switch model.itemType {
+            case .Unknown:
+                break
+            case .Category:
+                break
+            case .Product:
+                let controller =  Storyboards.Main.instantiateProductDetailsViewControllerId()
+                controller.objectId = model.objectID
+                navigationController?.pushViewController(controller, animated: true)
+            case .Event:
+                let controller =  Storyboards.Main.instantiateEventDetailsViewControllerId()
+                controller.objectId = model.objectID
+                navigationController?.pushViewController(controller, animated: true)
+            case .Promotion:
+                let controller =  Storyboards.Main.instantiatePromotionDetailsViewControllerId()
+                controller.objectId =  model.objectID
+                navigationController?.pushViewController(controller, animated: true)
+            case .Community:
+                SearchFilter.currentFilter.communities = [model.objectID]
+            case .People:
+                SearchFilter.currentFilter.users = [model.objectID]
+            default:
+                break
+            }
+        }
+    }
+    
+    func searchViewControllerSectionSelected(model: SearchSectionCellModel?) {
+        
+    }
 }

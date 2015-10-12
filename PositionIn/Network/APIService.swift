@@ -280,6 +280,20 @@ struct APIService {
     
     //MARK: - Search -
     
+    func getSearchFeed(query: APIServiceQueryConvertible, page: Page) -> Future<QuickSearchResponse,NSError> {
+        let endpoint = SearchItem.endpoint()
+        let params = APIServiceQuery()
+        params.append(query: query)
+        params.append(query: page)
+        Log.debug?.value(params.query)
+        return session().flatMap {
+            (token: AuthResponse.Token) -> Future<QuickSearchResponse, NSError> in
+            let request = self.updateRequest(token, endpoint: endpoint, params: params.query)
+            let (_ , future): (Alamofire.Request, Future<QuickSearchResponse, NSError>) = self.dataProvider.objectRequest(request)
+            return self.handleFailure(future)
+        }
+    }
+    
     func getFeed(query: APIServiceQueryConvertible, page: Page) -> Future<CollectionResponse<FeedItem>,NSError> {
         let endpoint = FeedItem.endpoint()
         let params = APIServiceQuery()
@@ -393,7 +407,6 @@ struct APIService {
     
     private func commandMapping() -> (AnyObject? -> Void?) {
         return  { response in
-            //TODO: need handle nil response
             if let json = response as? NSDictionary {
                 if let success = json["success"] as? Bool where success == true{
                         return ()
@@ -402,15 +415,18 @@ struct APIService {
                     Log.debug?.value(json)
                     return nil
                 }
-            } else {
+            }
+            //TODO: need handle nil response
+            else if response == nil {
+                return ()
+            }
+
+            else {
                 Log.error?.message("Got unexpected response: \(response)")
                 return nil
             }
         }
     }
-
-    
-    
     
     func statusCodeValidation<S: SequenceType where S.Generator.Element == Int>(statusCode acceptableStatusCode: S) -> Alamofire.Request.Validation {
         return { _, response in

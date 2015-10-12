@@ -9,15 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @class XMPPMessage;
-
-@interface XMPPConversation : NSObject
-
-@property (readonly, copy, nonnull ) NSArray *participants;
-@property (nonatomic, readonly, nonnull) NSDate *lastActivityDate;
-@property (nonatomic, readonly, copy, nonnull) NSString *name;
-@property (nonatomic, readonly, strong, nullable) NSURL *imageURL;
-@property (nonatomic, readonly, copy, nonnull) NSString *roomId;
-@end
+@class XMPPConversation;
 
 @interface XMPPTextMessage : NSObject
 - (nonnull instancetype)initWithMessage:(nonnull XMPPMessage *)message;
@@ -28,9 +20,12 @@
 @end
 
 @interface XMPPChatHistory : NSObject
-- (nonnull instancetype)initWithCurrentUser:(nonnull NSString *)currentUserId;
+- (nonnull instancetype)initWithUserId:(nonnull NSString *)currentUserId nick:(nonnull NSString *)nick;
 - (nonnull NSArray *)conversationList;
-- (void)startConversationWithUser:(nonnull NSString *)userId name:(nonnull NSString*)displayName imageURL:(nullable NSURL *)url;
+- (nonnull XMPPConversation *)startConversationWithUser:(nonnull NSString *)userId name:(nonnull NSString*)displayName imageURL:(nullable NSURL *)url;
 - (nonnull NSArray *)messagesForConversationWithUser:(nonnull NSString *)userId;
+- (nonnull NSArray *)messagesForConversationWithCommunity:(nonnull NSString *)roomId;
 - (void)addTextMessage:(nonnull XMPPTextMessage *)message outgoing:(BOOL)outgoing;
+
+@property (nonatomic, copy, readonly, nonnull) NSString *nickName;
 @end

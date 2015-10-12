@@ -126,7 +126,7 @@ struct SessionController {
         return keychain[KeychainKeys.UserIdKey]
     }
     
-    private var accessToken: String? {
+    var accessToken: String? {
         return keychain[KeychainKeys.AccessTokenKey]
     }
     

@@ -12,6 +12,7 @@ import Alamofire
 import ObjectMapper
 import BrightFutures
 import CleanroomLogger
+import Messaging
 
 extension APIService {
     
@@ -43,17 +44,28 @@ extension APIService {
         return false
     }
     
-    func getChatCredentials() -> ChatCredentials? {
-        let userId: CRUDObjectId? = currentUserId()
-        let pwd = sessionController.userPassword
-        switch (userId, pwd) {
-        case (.Some(let user), .Some(let password)):
-            let hostname = AppConfiguration().xmppHostname
-            let jid = "\(user)@\(hostname)"
-            return ChatCredentials(jid: jid, password: password)
-        default:
-            return nil
+    func chatCredentialsProvider() -> XMPPCredentialsProvider {
+        class ChatCredentialsProvider: NSObject, XMPPCredentialsProvider {
+            init(apiService: APIService) {
+                self.apiService = apiService
+                super.init()
+            }
+            @objc func getChatCredentials() -> XMPPCredentials? {
+                let userId: CRUDObjectId? = apiService.currentUserId()
+                let userPassword = apiService.sessionController.userPassword
+                switch (userId, userPassword) {
+                case (.Some(let user), .Some(let password)):
+                    let hostname = AppConfiguration().xmppHostname
+                    let jid = "\(user)@\(hostname)"
+                    return XMPPCredentials(jid: jid, password: password)
+                default:
+                    return nil
+                }
+            }
+            
+            private let apiService: APIService
         }
+        return ChatCredentialsProvider(apiService: self)
     }
     
     //Success if has valid session and user is not a guest

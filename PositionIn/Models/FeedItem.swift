@@ -73,7 +73,6 @@ struct FeedItem: CRUDObject {
     var description: String {
         return "<\(self.dynamicType):\(objectId)>"
     }
-
     
     enum ItemType: Int, Printable {
         case Unknown

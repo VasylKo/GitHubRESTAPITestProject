@@ -10,22 +10,21 @@ import Foundation
 
 final class AppConfiguration {
     init() {
-        #if PROD_ENV
-        //Prod
-        baseURL = NSURL(string: "https://positionin.com/api/")!
-        amazonURL = NSURL(string: "https://pos-prod.s3.amazonaws.com/")!
-        xmppHostname = "positionin.com"
-        #elseif STAGING_ENV
-        //Staging
-        baseURL = NSURL(string: "https://app-sta.positionin.com/api/")!
-        amazonURL = NSURL(string: "https://pos-sta.s3.amazonaws.com/")!
-        xmppHostname = "app-sta.positionin.com"
-        #else
-        //Dev
-        baseURL = NSURL(string: "https://app-dev.positionin.com/api/")!
-        amazonURL = NSURL(string: "https://pos-dev.s3.amazonaws.com/")!
-        xmppHostname = "app-dev.positionin.com"
-        #endif
+        switch AppConfiguration.environment {
+        case .Prod:
+            baseURL = NSURL(string: "https://app.positionin.com/api/")!
+            amazonURL = NSURL(string: "https://pos-prod.s3.amazonaws.com/")!
+            xmppHostname = "app.positionin.com"
+        case .Staging:
+            baseURL = NSURL(string: "https://app-sta.positionin.com/api/")!
+            amazonURL = NSURL(string: "https://pos-sta.s3.amazonaws.com/")!
+            xmppHostname = "app-sta.positionin.com"
+        case .Dev:
+            baseURL = NSURL(string: "https://app-dev.positionin.com/api/")!
+            amazonURL = NSURL(string: "https://pos-dev.s3.amazonaws.com/")!
+            xmppHostname = "app-dev.positionin.com"
+        }
+
         googleMapsKey = "AIzaSyA3NvrDKBcpIsnq4-ZACG41y7Mj-wSfVrY"
         xmppPort = 5222
     }
@@ -37,8 +36,25 @@ final class AppConfiguration {
     
     let xmppHostname: String
     let xmppPort: Int
+    
+    private enum Environment: String {
+        case Dev = "Dev"
+        case Staging = "Staging"
+        case Prod = "Production"
+    }
+    
+    private static var environment: Environment {
+        #if PROD_ENV
+            return .Production
+        #elseif STAGING_ENV
+            return .Staging
+        #else
+            return .Dev
+        #endif
+    }
 
-    var appVersion: String? { 
-        return NSBundle.mainBundle().infoDictionary?[kCFBundleVersionKey] as? String
+    var appVersion: String? {
+        let env = AppConfiguration.environment.rawValue
+        return map(NSBundle.mainBundle().infoDictionary?[kCFBundleVersionKey] as? String) {"\($0)-\(env)"}
     }
 }

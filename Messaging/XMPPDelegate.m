@@ -559,5 +559,196 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
 @end
 
 
+@interface XMPPDelegate (XMPPMUCDelegate)
+@end
+
+@implementation XMPPDelegate (XMPPMUCDelegate)
+- (void)xmppMUC:(XMPPMUC *)sender roomJID:(XMPPJID *)roomJID didReceiveInvitation:(XMPPMessage *)message {
+    XMPPLogTrace();
+}
+
+- (void)xmppMUC:(XMPPMUC *)sender roomJID:(XMPPJID *)roomJID didReceiveInvitationDecline:(XMPPMessage *)message {
+    XMPPLogTrace();
+}
+
+/**
+ * Implement this method when calling [mucInstance discoverServices]. It will be invoked if the request
+ * for discovering services is successfully executed and receives a successful response.
+ *
+ * @param sender XMPPMUC object invoking this delegate method.
+ * @param services An array of NSXMLElements in the form shown below. You will need to extract the data you
+ *                 wish to use.
+ *
+ *                 <item jid='chat.shakespeare.lit' name='Chatroom Service'/>
+ */
+- (void)xmppMUC:(XMPPMUC *)sender didDiscoverServices:(NSArray *)services {
+    XMPPLogTrace();
+}
+
+/**
+ * Implement this method when calling [mucInstanse discoverServices]. It will be invoked if the request
+ * for discovering services is unsuccessfully executed or receives an unsuccessful response.
+ *
+ * @param sender XMPPMUC object invoking this delegate method.
+ * @param error NSError containing more details of the failure.
+ */
+- (void)xmppMUCFailedToDiscoverServices:(XMPPMUC *)sender withError:(NSError *)error {
+    XMPPLogTrace();
+}
+
+/**
+ * Implement this method when calling [mucInstance discoverRoomsForServiceNamed:]. It will be invoked if
+ * the request for discovering rooms is successfully executed and receives a successful response.
+ *
+ * @param sender XMPPMUC object invoking this delegate method.
+ * @param rooms An array of NSXMLElements in the form shown below. You will need to extract the data you
+ *              wish to use.
+ *
+ *              <item jid='forres@chat.shakespeare.lit' name='The Palace'/>
+ *
+ * @param serviceName The name of the service for which rooms were discovered.
+ */
+- (void)xmppMUC:(XMPPMUC *)sender didDiscoverRooms:(NSArray *)rooms forServiceNamed:(NSString *)serviceName {
+    XMPPLogTrace();
+}
+
+/**
+ * Implement this method when calling [mucInstance discoverRoomsForServiceNamed:]. It will be invoked if
+ * the request for discovering rooms is unsuccessfully executed or receives an unsuccessful response.
+ *
+ * @param sender XMPPMUC object invoking this delegate method.
+ * @param serviceName The name of the service for which rooms were attempted to be discovered.
+ * @param error NSError containing more details of the failure.
+ */
+- (void)xmppMUC:(XMPPMUC *)sender failedToDiscoverRoomsForServiceNamed:(NSString *)serviceName withError:(NSError *)error {
+    XMPPLogTrace();
+}
+@end
+
+
+@interface XMPPDelegate (XMPPRoomDelegate)
+
+@end
+
+@implementation XMPPDelegate (XMPPRoomDelegate)
+- (void)xmppRoomDidCreate:(XMPPRoom *)sender {
+    XMPPLogTrace();
+}
+
+/**
+ * Invoked with the results of a request to fetch the configuration form.
+ * The given config form will look something like:
+ *
+ * <x xmlns='jabber:x:data' type='form'>
+ *   <title>Configuration for MUC Room</title>
+ *   <field type='hidden'
+ *           var='FORM_TYPE'>
+ *     <value>http://jabber.org/protocol/muc#roomconfig</value>
+ *   </field>
+ *   <field label='Natural-Language Room Name'
+ *           type='text-single'
+ *            var='muc#roomconfig_roomname'/>
+ *   <field label='Enable Public Logging?'
+ *           type='boolean'
+ *            var='muc#roomconfig_enablelogging'>
+ *     <value>0</value>
+ *   </field>
+ *   ...
+ * </x>
+ *
+ * The form is to be filled out and then submitted via the configureRoomUsingOptions: method.
+ *
+ * @see fetchConfigurationForm:
+ * @see configureRoomUsingOptions:
+ **/
+- (void)xmppRoom:(XMPPRoom *)sender didFetchConfigurationForm:(NSXMLElement *)configForm {
+    XMPPLogTrace();
+}
+
+- (void)xmppRoom:(XMPPRoom *)sender willSendConfiguration:(XMPPIQ *)roomConfigForm {
+    XMPPLogTrace();
+}
+
+- (void)xmppRoom:(XMPPRoom *)sender didConfigure:(XMPPIQ *)iqResult {
+    XMPPLogTrace();
+}
+
+- (void)xmppRoom:(XMPPRoom *)sender didNotConfigure:(XMPPIQ *)iqResult {
+    XMPPLogTrace();
+}
+
+- (void)xmppRoomDidJoin:(XMPPRoom *)sender {
+    XMPPLogTrace();
+}
+
+- (void)xmppRoomDidLeave:(XMPPRoom *)sender {
+    XMPPLogTrace();
+}
+
+
+- (void)xmppRoomDidDestroy:(XMPPRoom *)sender {
+    XMPPLogTrace();
+}
+
+- (void)xmppRoom:(XMPPRoom *)sender didFailToDestroy:(XMPPIQ *)iqError {
+    XMPPLogTrace();
+}
+
+
+- (void)xmppRoom:(XMPPRoom *)sender occupantDidJoin:(XMPPJID *)occupantJID withPresence:(XMPPPresence *)presence {
+    XMPPLogTrace();
+}
+
+- (void)xmppRoom:(XMPPRoom *)sender occupantDidLeave:(XMPPJID *)occupantJID withPresence:(XMPPPresence *)presence {
+    XMPPLogTrace();
+}
+
+- (void)xmppRoom:(XMPPRoom *)sender occupantDidUpdate:(XMPPJID *)occupantJID withPresence:(XMPPPresence *)presence {
+    XMPPLogTrace();
+}
+
+/**
+ * Invoked when a message is received.
+ * The occupant parameter may be nil if the message came directly from the room, or from a non-occupant.
+ **/
+- (void)xmppRoom:(XMPPRoom *)sender didReceiveMessage:(XMPPMessage *)message fromOccupant:(XMPPJID *)occupantJID {
+    XMPPLogTrace();
+}
+
+- (void)xmppRoom:(XMPPRoom *)sender didFetchBanList:(NSArray *)items {
+    XMPPLogTrace();
+}
+
+- (void)xmppRoom:(XMPPRoom *)sender didNotFetchBanList:(XMPPIQ *)iqError {
+    XMPPLogTrace();
+}
+
+- (void)xmppRoom:(XMPPRoom *)sender didFetchMembersList:(NSArray *)items {
+    XMPPLogTrace();
+}
+
+- (void)xmppRoom:(XMPPRoom *)sender didNotFetchMembersList:(XMPPIQ *)iqError {
+    XMPPLogTrace();
+}
+
+- (void)xmppRoom:(XMPPRoom *)sender didFetchModeratorsList:(NSArray *)items {
+    XMPPLogTrace();
+}
+
+- (void)xmppRoom:(XMPPRoom *)sender didNotFetchModeratorsList:(XMPPIQ *)iqError {
+    XMPPLogTrace();
+}
+
+- (void)xmppRoom:(XMPPRoom *)sender didEditPrivileges:(XMPPIQ *)iqResult {
+    XMPPLogTrace();
+}
+
+- (void)xmppRoom:(XMPPRoom *)sender didNotEditPrivileges:(XMPPIQ *)iqError {
+    XMPPLogTrace();
+}
+
+@end
+
 @implementation XMPPDelegate
+
 @end

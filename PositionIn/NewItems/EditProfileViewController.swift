@@ -78,6 +78,7 @@ final class EditProfileViewController: BaseAddItemViewController {
     //Last name
     lazy private var lastnameRow: XLFormRowDescriptor = {
         let row = XLFormRowDescriptor(tag: Tags.LastName.rawValue, rowType: XLFormRowDescriptorTypeText, title: NSLocalizedString("Last name", comment: "Edit profile: Last name"))
+        row.required = true
         return row
     }()
     
