@@ -11,7 +11,11 @@ import CleanroomLogger
 
 final class RecoverPasswordViewController: BaseLoginViewController {
     
-   
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        submitButton.layer.borderColor = UIColor.bt_colorWithBytesR(225, g: 0, b: 38).CGColor
+        submitButton.layer.borderWidth = 1
+    }
     
     @IBAction func didTapSubmitButton(sender: AnyObject) {
         Log.debug?.message("Should call recover")

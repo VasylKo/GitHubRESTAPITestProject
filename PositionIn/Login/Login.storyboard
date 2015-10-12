@@ -15,7 +15,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.11372549019607843" green="0.34901960784313724" blue="0.792156862745098" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <color key="barTintColor" red="0.1137254902" green="0.34901960780000002" blue="0.79215686269999996" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="barTintColor" red="0.88235294117647056" green="0.0" blue="0.14901960784313725" alpha="1" colorSpace="calibratedRGB"/>
                         <textAttributes key="titleTextAttributes">
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </textAttributes>
@@ -55,52 +55,15 @@
                                                     <constraint firstAttribute="height" constant="103" id="lMO-9J-mb2"/>
                                                 </constraints>
                                             </imageView>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dXR-k3-5rQ">
-                                                <rect key="frame" x="0.0" y="167" width="540" height="45"/>
-                                                <color key="backgroundColor" red="0.22352941176470587" green="0.31764705882352939" blue="0.52156862745098043" alpha="1" colorSpace="calibratedRGB"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="45" id="QiD-cI-9Dj"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                                <inset key="titleEdgeInsets" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                                <state key="normal" title="LOGIN WITH FACEBOOK" image="LoginFbIcon">
-                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                </state>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                        <integer key="value" value="2"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ugW-zo-uTv">
-                                                <rect key="frame" x="0.0" y="228" width="540" height="45"/>
-                                                <color key="backgroundColor" red="1" green="0.73333333333333328" blue="0.31764705882352939" alpha="1" colorSpace="calibratedRGB"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="45" id="stZ-3I-4se"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                                <state key="normal" title="LOGIN">
-                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                </state>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                        <integer key="value" value="2"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                                <connections>
-                                                    <action selector="didTapLogin:" destination="JGW-l6-Shb" eventType="touchUpInside" id="Bkz-ce-YFC"/>
-                                                </connections>
-                                            </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aXa-R3-BMg">
                                                 <rect key="frame" x="0.0" y="289" width="540" height="45"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="45" id="oUj-iX-1wO"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                                <state key="normal" title="SIGN UP">
-                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <state key="normal" title="BECOME A MEMBER">
+                                                    <color key="titleColor" red="0.88235294117647056" green="0.0" blue="0.14901960784313725" alpha="1" colorSpace="calibratedRGB"/>
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <userDefinedRuntimeAttributes>
@@ -118,23 +81,73 @@
                                                     <segue destination="zd3-fl-Vea" kind="show" id="SCq-Vd-4cR"/>
                                                 </connections>
                                             </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OSW-D1-BDU">
+                                                <rect key="frame" x="0.0" y="167" width="540" height="45"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="45" id="zRx-r5-GZg"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                                <state key="normal" title="LOGIN">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                                        <integer key="value" value="1"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="layer.borderUIColor">
+                                                        <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="2"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <segue destination="cOZ-SQ-Q1c" kind="show" id="nJw-7U-eNC"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="shh-Ve-xTn">
+                                                <rect key="frame" x="0.0" y="228" width="540" height="45"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="45" id="qZZ-y8-BW0"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                                <state key="normal" title="VOLUNTEER">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                                        <integer key="value" value="1"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="layer.borderUIColor">
+                                                        <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="2"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <segue destination="zd3-fl-Vea" kind="show" id="MuX-Xx-gu7"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstItem="ugW-zo-uTv" firstAttribute="top" secondItem="dXR-k3-5rQ" secondAttribute="bottom" constant="16" id="3ah-9G-pks"/>
-                                            <constraint firstItem="dXR-k3-5rQ" firstAttribute="leading" secondItem="QF7-vR-jeG" secondAttribute="leading" id="5q2-Az-c1h"/>
                                             <constraint firstItem="ZTE-fZ-TL1" firstAttribute="top" secondItem="QF7-vR-jeG" secondAttribute="top" id="9qo-QJ-Vrd"/>
+                                            <constraint firstItem="shh-Ve-xTn" firstAttribute="top" secondItem="OSW-D1-BDU" secondAttribute="bottom" constant="16" id="A7i-RS-QDK"/>
                                             <constraint firstItem="aXa-R3-BMg" firstAttribute="leading" secondItem="QF7-vR-jeG" secondAttribute="leading" id="BFd-L4-1lT"/>
                                             <constraint firstAttribute="trailing" secondItem="ZTE-fZ-TL1" secondAttribute="trailing" constant="381" id="FIm-su-JK2"/>
                                             <constraint firstAttribute="bottom" secondItem="aXa-R3-BMg" secondAttribute="bottom" constant="7" id="FzM-VX-jeN"/>
                                             <constraint firstAttribute="trailing" secondItem="aXa-R3-BMg" secondAttribute="trailing" id="Nb1-GJ-uqS"/>
-                                            <constraint firstAttribute="trailing" secondItem="dXR-k3-5rQ" secondAttribute="trailing" id="O2r-jm-cfq"/>
+                                            <constraint firstItem="shh-Ve-xTn" firstAttribute="leading" secondItem="QF7-vR-jeG" secondAttribute="leading" id="SC7-9u-meJ"/>
+                                            <constraint firstAttribute="trailing" secondItem="OSW-D1-BDU" secondAttribute="trailing" id="Uik-8m-Viy"/>
+                                            <constraint firstAttribute="trailing" secondItem="shh-Ve-xTn" secondAttribute="trailing" id="Yok-dC-Ydj"/>
                                             <constraint firstItem="ZTE-fZ-TL1" firstAttribute="leading" secondItem="QF7-vR-jeG" secondAttribute="leading" id="a5e-UT-S2c"/>
-                                            <constraint firstItem="aXa-R3-BMg" firstAttribute="top" secondItem="ugW-zo-uTv" secondAttribute="bottom" constant="16" id="eIn-tG-wvU"/>
+                                            <constraint firstItem="OSW-D1-BDU" firstAttribute="top" secondItem="ZTE-fZ-TL1" secondAttribute="bottom" constant="64" id="brd-tu-Vo1"/>
                                             <constraint firstAttribute="centerX" secondItem="ZTE-fZ-TL1" secondAttribute="centerX" id="gYQ-uP-MFU"/>
-                                            <constraint firstItem="ugW-zo-uTv" firstAttribute="leading" secondItem="QF7-vR-jeG" secondAttribute="leading" id="gzK-C5-nxe"/>
-                                            <constraint firstItem="dXR-k3-5rQ" firstAttribute="top" secondItem="ZTE-fZ-TL1" secondAttribute="bottom" constant="64" id="hbd-zG-djt"/>
-                                            <constraint firstAttribute="trailing" secondItem="ugW-zo-uTv" secondAttribute="trailing" id="lgH-gq-Xzr"/>
+                                            <constraint firstItem="aXa-R3-BMg" firstAttribute="top" secondItem="shh-Ve-xTn" secondAttribute="bottom" constant="16" id="hTn-C2-l8k"/>
+                                            <constraint firstItem="OSW-D1-BDU" firstAttribute="leading" secondItem="QF7-vR-jeG" secondAttribute="leading" id="hsm-QU-rCf"/>
                                         </constraints>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="color" keyPath="backgroundColor">
@@ -178,18 +191,11 @@
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" id="VKm-dI-cDT">
-                        <barButtonItem key="rightBarButtonItem" title="Skip" id="RRn-lW-Phz">
-                            <connections>
-                                <action selector="didTapClose:" destination="JGW-l6-Shb" id="dak-a4-Jga"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="VKm-dI-cDT"/>
                     <connections>
-                        <outlet property="facebookButton" destination="dXR-k3-5rQ" id="agC-Sd-QEg"/>
-                        <outlet property="loginButton" destination="ugW-zo-uTv" id="iQb-hT-rkC"/>
+                        <outlet property="loginButton" destination="OSW-D1-BDU" id="CAy-Fl-K6u"/>
                         <outlet property="signupButton" destination="aXa-R3-BMg" id="8hH-n5-gHb"/>
-                        <segue destination="cOZ-SQ-Q1c" kind="show" identifier="LoginSegueId" id="ax9-Ma-kqU"/>
+                        <outlet property="volunteerButton" destination="shh-Ve-xTn" id="5my-1t-K53"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Z3I-kB-SGj" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -231,34 +237,16 @@
                                                     <constraint firstAttribute="height" constant="103" id="GeE-15-OaE"/>
                                                 </constraints>
                                             </imageView>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fdQ-73-cqh">
-                                                <rect key="frame" x="0.0" y="131" width="540" height="45"/>
-                                                <color key="backgroundColor" red="0.22352941179999999" green="0.31764705879999999" blue="0.52156862749999999" alpha="1" colorSpace="calibratedRGB"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="45" id="ZMW-7D-wpT"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                                <inset key="titleEdgeInsets" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                                <state key="normal" title="LOGIN WITH FACEBOOK" image="LoginFbIcon">
-                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                </state>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                        <integer key="value" value="2"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                            </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t6o-k1-Alw">
                                                 <rect key="frame" x="0.0" y="322" width="540" height="45"/>
-                                                <color key="backgroundColor" red="1" green="0.73333333329999995" blue="0.31764705879999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="45" id="1Y1-fI-U0p"/>
                                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="45" id="GcV-8W-c2T"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                 <state key="normal" title="SIGN UP">
-                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="titleColor" red="0.88235294117647056" green="0.0" blue="0.14901960784313725" alpha="1" colorSpace="calibratedRGB"/>
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <userDefinedRuntimeAttributes>
@@ -314,10 +302,8 @@
                                             <constraint firstAttribute="trailing" secondItem="OYe-59-Xyi" secondAttribute="trailing" constant="381" id="D9F-YY-xRS"/>
                                             <constraint firstAttribute="centerX" secondItem="OYe-59-Xyi" secondAttribute="centerX" id="J8V-Qf-nGH"/>
                                             <constraint firstItem="Dk8-oL-kIO" firstAttribute="centerY" secondItem="2ie-iR-ppu" secondAttribute="centerY" id="Lhr-tj-1UO"/>
-                                            <constraint firstAttribute="trailing" secondItem="fdQ-73-cqh" secondAttribute="trailing" id="MH3-7t-jE1"/>
-                                            <constraint firstItem="fdQ-73-cqh" firstAttribute="leading" secondItem="0ce-Xg-u8z" secondAttribute="leading" id="MRW-Wp-viC"/>
+                                            <constraint firstItem="Dk8-oL-kIO" firstAttribute="top" secondItem="OYe-59-Xyi" secondAttribute="bottom" constant="146" id="Li3-dj-LJy"/>
                                             <constraint firstAttribute="trailing" secondItem="Dk8-oL-kIO" secondAttribute="trailing" id="NRY-Hz-Ur7"/>
-                                            <constraint firstItem="2ie-iR-ppu" firstAttribute="top" secondItem="fdQ-73-cqh" secondAttribute="bottom" constant="42" id="Stu-Db-AoG"/>
                                             <constraint firstItem="t6o-k1-Alw" firstAttribute="leading" secondItem="0ce-Xg-u8z" secondAttribute="leading" id="TGk-0S-dG6"/>
                                             <constraint firstItem="OYe-59-Xyi" firstAttribute="top" secondItem="0ce-Xg-u8z" secondAttribute="top" id="W9e-ZC-hNw"/>
                                             <constraint firstItem="2ie-iR-ppu" firstAttribute="leading" secondItem="0ce-Xg-u8z" secondAttribute="leading" constant="9" id="XxC-wp-xtH"/>
@@ -327,10 +313,7 @@
                                             <constraint firstItem="yh1-xR-fIr" firstAttribute="leading" secondItem="0ce-Xg-u8z" secondAttribute="leading" constant="9" id="gMr-pO-K2A"/>
                                             <constraint firstItem="t6o-k1-Alw" firstAttribute="leading" secondItem="0ce-Xg-u8z" secondAttribute="leading" id="hGI-yd-3sA"/>
                                             <constraint firstItem="OYe-59-Xyi" firstAttribute="leading" secondItem="0ce-Xg-u8z" secondAttribute="leading" id="jIx-vu-4Gb"/>
-                                            <constraint firstItem="2ie-iR-ppu" firstAttribute="top" secondItem="fdQ-73-cqh" secondAttribute="bottom" constant="72" id="kVl-ul-y9T"/>
-                                            <constraint firstItem="t6o-k1-Alw" firstAttribute="top" secondItem="fdQ-73-cqh" secondAttribute="bottom" constant="16" id="p6X-uo-DJH"/>
                                             <constraint firstItem="yh1-xR-fIr" firstAttribute="top" secondItem="Dk8-oL-kIO" secondAttribute="bottom" constant="11" id="tOV-o3-Lgt"/>
-                                            <constraint firstItem="fdQ-73-cqh" firstAttribute="top" secondItem="OYe-59-Xyi" secondAttribute="bottom" constant="28" id="vO4-R2-rua"/>
                                             <constraint firstAttribute="trailing" secondItem="t6o-k1-Alw" secondAttribute="trailing" id="z5F-ZU-Rso"/>
                                         </constraints>
                                         <userDefinedRuntimeAttributes>
@@ -343,8 +326,6 @@
                                                 <exclude reference="atz-9F-gnd"/>
                                                 <exclude reference="D9F-YY-xRS"/>
                                                 <exclude reference="jIx-vu-4Gb"/>
-                                                <exclude reference="Stu-Db-AoG"/>
-                                                <exclude reference="p6X-uo-DJH"/>
                                             </mask>
                                         </variation>
                                     </view>
@@ -376,13 +357,7 @@
                             <constraint firstAttribute="centerX" secondItem="yvy-Oo-AWn" secondAttribute="centerX" id="uQQ-Og-UGA"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="r6h-lC-HMG">
-                        <barButtonItem key="rightBarButtonItem" title="Skip" id="cTy-bq-NNj">
-                            <connections>
-                                <action selector="didTapClose:" destination="zd3-fl-Vea" id="Nxn-lH-7wn"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="r6h-lC-HMG"/>
                     <connections>
                         <outlet property="emailTextField" destination="Dk8-oL-kIO" id="nVA-dK-0UW"/>
                         <outlet property="scrollView" destination="yvy-Oo-AWn" id="rFh-k9-MSt"/>
@@ -417,13 +392,13 @@
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JOh-mS-msW">
                                                 <rect key="frame" x="0.0" y="304" width="540" height="46"/>
-                                                <color key="backgroundColor" red="1" green="0.73725490199999999" blue="0.31764705879999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="46" id="0Hv-Vu-KJg"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                 <state key="normal" title="SEND">
-                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="titleColor" red="0.88235294117647056" green="0.0" blue="0.14901960784313725" alpha="1" colorSpace="calibratedRGB"/>
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <userDefinedRuntimeAttributes>
@@ -589,50 +564,6 @@
                                                     <constraint firstAttribute="height" constant="103" id="NQd-wh-AcA"/>
                                                 </constraints>
                                             </imageView>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IvJ-ul-Oh0">
-                                                <rect key="frame" x="0.0" y="129" width="540" height="45"/>
-                                                <color key="backgroundColor" red="0.22352941179999999" green="0.31764705879999999" blue="0.52156862749999999" alpha="1" colorSpace="calibratedRGB"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="45" id="NZu-2m-TZr"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                                <inset key="titleEdgeInsets" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                                <state key="normal" title="LOGIN WITH FACEBOOK" image="LoginFbIcon">
-                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                </state>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                        <integer key="value" value="2"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3yP-kR-Kvh">
-                                                <rect key="frame" x="0.0" y="348" width="540" height="45"/>
-                                                <color key="backgroundColor" red="1" green="0.73333333329999995" blue="0.31764705879999999" alpha="1" colorSpace="calibratedRGB"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="45" id="0JN-Ls-2Uh"/>
-                                                    <constraint firstAttribute="height" constant="45" id="ygW-J6-M9b"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                                <state key="normal" title="LOGIN">
-                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                </state>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                        <integer key="value" value="2"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                                <variation key="default">
-                                                    <mask key="constraints">
-                                                        <exclude reference="0JN-Ls-2Uh"/>
-                                                    </mask>
-                                                </variation>
-                                                <connections>
-                                                    <action selector="didTapLogin:" destination="cOZ-SQ-Q1c" eventType="touchUpInside" id="6bK-4l-Wbn"/>
-                                                </connections>
-                                            </button>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nUB-yS-bQO">
                                                 <rect key="frame" x="36" y="215" width="504" height="19"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -706,9 +637,9 @@
                                                 </constraints>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2E3-ia-pQI">
-                                                <rect key="frame" x="0.0" y="401" width="540" height="30"/>
+                                                <rect key="frame" x="0.0" y="401" width="540" height="35"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="30" id="TPQ-Og-l9d"/>
+                                                    <constraint firstAttribute="height" constant="35" id="TPQ-Og-l9d"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                                 <state key="normal" title="Forgot password?">
@@ -719,21 +650,43 @@
                                                     <action selector="didTapForgot:" destination="cOZ-SQ-Q1c" eventType="touchUpInside" id="wOV-wd-c9e"/>
                                                 </connections>
                                             </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3yP-kR-Kvh">
+                                                <rect key="frame" x="0.0" y="348" width="540" height="45"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="45" id="0JN-Ls-2Uh"/>
+                                                    <constraint firstAttribute="height" constant="45" id="ygW-J6-M9b"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                                <state key="normal" title="LOGIN">
+                                                    <color key="titleColor" red="0.88235294117647056" green="0.0" blue="0.14901960784313725" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="2"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <variation key="default">
+                                                    <mask key="constraints">
+                                                        <exclude reference="0JN-Ls-2Uh"/>
+                                                    </mask>
+                                                </variation>
+                                                <connections>
+                                                    <action selector="didTapLogin:" destination="cOZ-SQ-Q1c" eventType="touchUpInside" id="6bK-4l-Wbn"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstItem="nUB-yS-bQO" firstAttribute="top" secondItem="IvJ-ul-Oh0" secondAttribute="bottom" constant="41" id="0Z6-Gy-Bkc"/>
                                             <constraint firstItem="eHK-OG-WAI" firstAttribute="leading" secondItem="bIC-Jp-AHT" secondAttribute="leading" constant="9" id="1F8-UI-Xun"/>
                                             <constraint firstItem="dtP-Xu-Y0i" firstAttribute="leading" secondItem="Mtp-jW-qE6" secondAttribute="trailing" constant="5" id="2rR-Dq-5gc"/>
-                                            <constraint firstAttribute="trailing" secondItem="IvJ-ul-Oh0" secondAttribute="trailing" id="6G3-Pg-h50"/>
                                             <constraint firstItem="dtP-Xu-Y0i" firstAttribute="top" secondItem="eHK-OG-WAI" secondAttribute="bottom" constant="28" id="7Kb-z7-8tR"/>
                                             <constraint firstItem="2E3-ia-pQI" firstAttribute="leading" secondItem="3yP-kR-Kvh" secondAttribute="leading" id="8sT-qf-jJG"/>
                                             <constraint firstItem="Mtp-jW-qE6" firstAttribute="top" secondItem="eHK-OG-WAI" secondAttribute="bottom" constant="29" id="8vu-Rz-hJJ"/>
                                             <constraint firstItem="TS8-7W-Dri" firstAttribute="top" secondItem="bIC-Jp-AHT" secondAttribute="top" id="Bw2-0m-NGt"/>
                                             <constraint firstAttribute="trailing" secondItem="3yP-kR-Kvh" secondAttribute="trailing" id="G84-hC-7Hc"/>
-                                            <constraint firstItem="IvJ-ul-Oh0" firstAttribute="leading" secondItem="bIC-Jp-AHT" secondAttribute="leading" id="MOX-EO-R3V"/>
                                             <constraint firstAttribute="height" constant="453" id="P7x-xs-zud"/>
-                                            <constraint firstItem="3yP-kR-Kvh" firstAttribute="top" secondItem="IvJ-ul-Oh0" secondAttribute="bottom" constant="16" id="QyU-bK-poZ"/>
                                             <constraint firstItem="sdF-rq-WSF" firstAttribute="leading" secondItem="bIC-Jp-AHT" secondAttribute="leading" constant="9" id="SLN-7o-9XD"/>
                                             <constraint firstItem="nUB-yS-bQO" firstAttribute="leading" secondItem="bIC-Jp-AHT" secondAttribute="leading" constant="36" id="T1C-ZI-ivE"/>
                                             <constraint firstAttribute="trailing" secondItem="TS8-7W-Dri" secondAttribute="trailing" constant="381" id="TTW-87-p1f"/>
@@ -748,13 +701,13 @@
                                             <constraint firstItem="eHK-OG-WAI" firstAttribute="top" secondItem="nUB-yS-bQO" secondAttribute="bottom" constant="11" id="hdX-iK-eFw"/>
                                             <constraint firstItem="qMW-n2-USa" firstAttribute="leading" secondItem="bIC-Jp-AHT" secondAttribute="leading" constant="9" id="hhK-Hm-myq"/>
                                             <constraint firstAttribute="centerX" secondItem="TS8-7W-Dri" secondAttribute="centerX" id="iTb-BJ-D3Z"/>
-                                            <constraint firstItem="IvJ-ul-Oh0" firstAttribute="top" secondItem="TS8-7W-Dri" secondAttribute="bottom" constant="26" id="jyh-jE-pjG"/>
                                             <constraint firstItem="2E3-ia-pQI" firstAttribute="top" secondItem="3yP-kR-Kvh" secondAttribute="bottom" constant="8" id="k7P-hw-ALi"/>
+                                            <constraint firstItem="nUB-yS-bQO" firstAttribute="top" secondItem="TS8-7W-Dri" secondAttribute="bottom" constant="112" id="kEk-7h-dqI"/>
                                             <constraint firstAttribute="trailing" secondItem="nUB-yS-bQO" secondAttribute="trailing" id="prm-h6-TyY"/>
                                             <constraint firstItem="Mtp-jW-qE6" firstAttribute="leading" secondItem="bIC-Jp-AHT" secondAttribute="leading" constant="10" id="qRL-RD-tXL"/>
-                                            <constraint firstItem="sdF-rq-WSF" firstAttribute="top" secondItem="IvJ-ul-Oh0" secondAttribute="bottom" constant="42" id="s2z-aX-xTa"/>
                                             <constraint firstItem="3yP-kR-Kvh" firstAttribute="top" secondItem="qMW-n2-USa" secondAttribute="bottom" constant="42" id="sjF-da-4VE"/>
                                             <constraint firstItem="2E3-ia-pQI" firstAttribute="trailing" secondItem="3yP-kR-Kvh" secondAttribute="trailing" id="wU2-tU-zXM"/>
+                                            <constraint firstItem="eHK-OG-WAI" firstAttribute="top" secondItem="sdF-rq-WSF" secondAttribute="bottom" constant="8" symbolic="YES" id="xWG-mk-s07"/>
                                             <constraint firstAttribute="trailing" secondItem="qMW-n2-USa" secondAttribute="trailing" id="zH8-Fu-cgd"/>
                                         </constraints>
                                         <userDefinedRuntimeAttributes>
@@ -767,7 +720,6 @@
                                                 <exclude reference="TTW-87-p1f"/>
                                                 <exclude reference="X9f-hd-qWT"/>
                                                 <exclude reference="e9f-bB-AyB"/>
-                                                <exclude reference="QyU-bK-poZ"/>
                                             </mask>
                                         </variation>
                                     </view>
@@ -805,17 +757,9 @@
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" id="kf3-3G-LQA">
-                        <barButtonItem key="rightBarButtonItem" title="Skip" id="eta-B4-liW">
-                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <connections>
-                                <action selector="didTapClose:" destination="cOZ-SQ-Q1c" id="orr-AD-PwG"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="kf3-3G-LQA"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
-                        <outlet property="facebookButton" destination="IvJ-ul-Oh0" id="Z68-Ag-p95"/>
                         <outlet property="loginButton" destination="3yP-kR-Kvh" id="TBo-H0-lGJ"/>
                         <outlet property="passwordTextField" destination="dtP-Xu-Y0i" id="rdq-5b-M6t"/>
                         <outlet property="scrollView" destination="prw-Bu-zJJ" id="kno-6T-3ik"/>
@@ -862,32 +806,6 @@
                                                     <constraint firstAttribute="height" constant="103" id="4Qq-3M-wkj"/>
                                                 </constraints>
                                             </imageView>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TyS-IK-9VQ">
-                                                <rect key="frame" x="0.0" y="360" width="540" height="45"/>
-                                                <color key="backgroundColor" red="1" green="0.73333333329999995" blue="0.31764705879999999" alpha="1" colorSpace="calibratedRGB"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="45" id="WDf-DM-1s2"/>
-                                                    <constraint firstAttribute="height" constant="45" id="n34-Bg-R5m"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                                <state key="normal" title="SIGN UP">
-                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                </state>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                        <integer key="value" value="2"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                                <variation key="default">
-                                                    <mask key="constraints">
-                                                        <exclude reference="WDf-DM-1s2"/>
-                                                    </mask>
-                                                </variation>
-                                                <connections>
-                                                    <action selector="didTapSignupButton:" destination="pfT-Kp-HW4" eventType="touchUpInside" id="cI3-Rg-wNT"/>
-                                                </connections>
-                                            </button>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="First Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IH7-bo-DFg">
                                                 <rect key="frame" x="36" y="240" width="504" height="19"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1017,6 +935,32 @@
                                                     <constraint firstAttribute="height" constant="1" id="kvi-I8-b7d"/>
                                                 </constraints>
                                             </view>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TyS-IK-9VQ">
+                                                <rect key="frame" x="0.0" y="360" width="540" height="45"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="45" id="WDf-DM-1s2"/>
+                                                    <constraint firstAttribute="height" constant="45" id="n34-Bg-R5m"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                                <state key="normal" title="SIGN UP">
+                                                    <color key="titleColor" red="1" green="0.0" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="2"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <variation key="default">
+                                                    <mask key="constraints">
+                                                        <exclude reference="WDf-DM-1s2"/>
+                                                    </mask>
+                                                </variation>
+                                                <connections>
+                                                    <action selector="didTapSignupButton:" destination="pfT-Kp-HW4" eventType="touchUpInside" id="cI3-Rg-wNT"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -1119,13 +1063,7 @@
                             <constraint firstItem="vKo-xD-S5W" firstAttribute="height" secondItem="iNE-GN-LDk" secondAttribute="height" multiplier="0.8" id="uYg-OA-ddE"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="4xJ-HN-ZRJ">
-                        <barButtonItem key="rightBarButtonItem" title="Skip" id="a1l-NF-oVa">
-                            <connections>
-                                <action selector="didTapClose:" destination="pfT-Kp-HW4" id="DRX-tG-qKr"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="4xJ-HN-ZRJ"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <connections>
                         <outlet property="emailTextField" destination="MeG-G9-ab5" id="sxW-7g-o9S"/>
@@ -1144,9 +1082,11 @@
     <resources>
         <image name="LoginBg" width="320" height="650"/>
         <image name="LoginEmailIcon" width="22" height="22"/>
-        <image name="LoginFbIcon" width="28" height="28"/>
         <image name="LoginLockIcon" width="22" height="22"/>
         <image name="LoginLogo" width="158" height="103"/>
         <image name="LoginUserIcon" width="22" height="22"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="SCq-Vd-4cR"/>
+    </inferredMetricsTieBreakers>
 </document>

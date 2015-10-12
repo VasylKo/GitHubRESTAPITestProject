@@ -17,7 +17,10 @@ final class RegisterInfoViewController: BaseLoginViewController {
         super.viewDidLoad()
         emailTextField.text = initialEmail
         passwordTextField.becomeFirstResponder()
-    }    
+        
+        signupButton.layer.borderColor = UIColor.bt_colorWithBytesR(225, g: 0, b: 38).CGColor
+        signupButton.layer.borderWidth = 1
+    }
     
     @IBAction func didTapSignupButton(sender: AnyObject) {
         let validationRules: [StringValidation.ValidationRule] = [

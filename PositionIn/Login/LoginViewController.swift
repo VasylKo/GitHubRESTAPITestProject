@@ -11,6 +11,12 @@ import CleanroomLogger
 
 final class LoginViewController: BaseLoginViewController {
    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        loginButton.layer.borderColor = UIColor.bt_colorWithBytesR(225, g: 0, b: 38).CGColor
+        loginButton.layer.borderWidth = 1
+    }
+    
     @IBAction func prepareForUnwind(segue: UIStoryboardSegue) {
         
     }

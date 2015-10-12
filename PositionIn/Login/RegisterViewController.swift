@@ -12,6 +12,12 @@ import CleanroomLogger
 
 final class RegisterViewController: BaseLoginViewController {
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        signupButton.layer.borderColor = UIColor.bt_colorWithBytesR(225, g: 0, b: 38).CGColor
+        signupButton.layer.borderWidth = 1
+    }
+    
     @IBAction func didTapSignupButton(sender: AnyObject) {
         
         let validationRules: [StringValidation.ValidationRule] = [

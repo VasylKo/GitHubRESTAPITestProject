@@ -13,7 +13,9 @@ final class LoginSignupViewController: BaseLoginViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        signupButton.layer.borderColor = UIColor.whiteColor().CGColor
+        signupButton.layer.borderColor = UIColor.bt_colorWithBytesR(225, g: 0, b: 38).CGColor
+        loginButton.layer.borderColor = UIColor.whiteColor().CGColor
+        volunteerButton.layer.borderColor = UIColor.whiteColor().CGColor
     }
         
     @IBAction func didTapLogin(sender: AnyObject) {
@@ -23,9 +25,9 @@ final class LoginSignupViewController: BaseLoginViewController {
     override func keyboardTargetView() -> UIView? {
         return loginButton
     }
-    
-    @IBOutlet private weak var loginButton: UIButton!
-    @IBOutlet private weak var facebookButton: UIButton!
+
+    @IBOutlet weak var loginButton: UIButton!
+    @IBOutlet weak var volunteerButton: UIButton!
     @IBOutlet private weak var signupButton: UIButton!
 
 }
