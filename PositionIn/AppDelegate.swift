@@ -45,7 +45,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         chatClient = XMPPClient()
         locationController = LocationController()
         
-        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.bt_colorWithBytesR(133, g: 186, b: 255)]
+        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.bt_colorWithBytesR(254, g: 187, b: 182)]
+        UINavigationBar.appearance().barTintColor = UIColor.bt_colorWithBytesR(225, g: 0, b: 38)
         
         super.init()
         

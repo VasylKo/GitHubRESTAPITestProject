@@ -44,8 +44,8 @@ final class MainMenuViewController: UIViewController {
     private func defaultMainMenuItems() -> [MainMenuItem] {
         //TODO: refactor
         return [
-            MainMenuItem(title: NSLocalizedString("For You", comment: "Main Menu: For You"), imageName: "MainMenuForYou", action: .ForYou),
-            MainMenuItem(title: NSLocalizedString("New", comment: "Main Menu: new"), imageName: "MainMenuNew", action: .New),
+            MainMenuItem(title: NSLocalizedString("Recent", comment: "Main Menu: For You"), imageName: "MainMenuForYou", action: .ForYou),
+            MainMenuItem(title: NSLocalizedString("Relevant", comment: "Main Menu: new"), imageName: "MainMenuNew", action: .New),
             MainMenuItem(title: NSLocalizedString("Messages", comment: "Main Menu: Messages"), imageName: "MainMenuMessages", action: .Messages),
             MainMenuItem(title: NSLocalizedString("Filters", comment: "Main Menu: Filters"), imageName: "MainMenuFilters", action: .Filters),
             MainMenuItem(title: NSLocalizedString("Communities", comment: "Main Menu: Community"), imageName: "MainMenuCommunity", action: .Community),

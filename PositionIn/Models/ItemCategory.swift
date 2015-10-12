@@ -11,59 +11,43 @@ import Foundation
 enum ItemCategory: Int, DebugPrintable {
     case Unknown
     case AnimalsPetSupplies, ApparelAccessories, ArtsEntertainment, BabyToddler, BusinessIndustrial,
-         CamerasOptics, Electronics, Food, Furniture, Hardware, HealthBeauty, HomeGarden, LuggageBags,
-         Media, OfficeSupplies, ReligiousCeremonial, Software, SportingGoods, ToysGames, VehiclesParts
+         CamerasOptics, Electronics, Food, Furniture, Hardware, HealthBeauty, HomeGarden, LuggageBags
     
     static func all() -> [ItemCategory] {
         return [
             .AnimalsPetSupplies, .ApparelAccessories, .ArtsEntertainment, .BabyToddler, .BusinessIndustrial,
-            .CamerasOptics, .Electronics, .Food, .Furniture, .Hardware, .HealthBeauty, .HomeGarden, .LuggageBags,
-            .Media, .OfficeSupplies, .ReligiousCeremonial, .Software, .SportingGoods, .ToysGames, .VehiclesParts
+            .CamerasOptics, .Electronics, .Food, .Furniture, .Hardware, .HealthBeauty, .HomeGarden, .LuggageBags
         ]
     }
     
     func displayString() -> String {
         switch self {
         case .AnimalsPetSupplies:
-            return NSLocalizedString("Animals & Pet Supplies", comment: "ItemCategory: AnimalsPetSupplies")
+            return NSLocalizedString("Blood", comment: "ItemCategory: AnimalsPetSupplies")
         case .ApparelAccessories:
-            return NSLocalizedString("Apparel & Accessories", comment: "ItemCategory: ApparelAccessories")
+            return NSLocalizedString("Construction", comment: "ItemCategory: ApparelAccessories")
         case .ArtsEntertainment:
-            return NSLocalizedString("Arts & Entertainment", comment: "ItemCategory: ArtsEntertainment")
+            return NSLocalizedString("Clothes", comment: "ItemCategory: ArtsEntertainment")
         case .BabyToddler:
-            return NSLocalizedString("Baby & Toddler", comment: "ItemCategory: BabyToddler")
+            return NSLocalizedString("Electronics", comment: "ItemCategory: BabyToddler")
         case .BusinessIndustrial:
-            return NSLocalizedString("Business & Industrial", comment: "ItemCategory: BusinessIndustrial")
+            return NSLocalizedString("Fire", comment: "ItemCategory: BusinessIndustrial")
         case .CamerasOptics:
-            return NSLocalizedString("Cameras & Optics", comment: "ItemCategory: CamerasOptics")
+            return NSLocalizedString("Food", comment: "ItemCategory: CamerasOptics")
         case .Electronics:
-            return NSLocalizedString("Electronics", comment: "ItemCategory: Electronics")
+            return NSLocalizedString("Hardware", comment: "ItemCategory: Electronics")
         case .Food:
-            return NSLocalizedString("Food", comment: "ItemCategory: Food")
+            return NSLocalizedString("Healthcare", comment: "ItemCategory: Food")
         case .Furniture:
-            return NSLocalizedString("Furniture", comment: "ItemCategory: Furniture")
+            return NSLocalizedString("Medicine", comment: "ItemCategory: Furniture")
         case .Hardware:
-            return NSLocalizedString("Hardware", comment: "ItemCategory: Hardware")
+            return NSLocalizedString("Manpower", comment: "ItemCategory: Hardware")
         case .HealthBeauty:
-            return NSLocalizedString("Health & Beauty", comment: "ItemCategory: HealthBeauty")
+            return NSLocalizedString("Religious & Ceremonial", comment: "ItemCategory: HealthBeauty")
         case .HomeGarden:
-            return NSLocalizedString("Home & Garden", comment: "ItemCategory: HomeGarden")
+            return NSLocalizedString("Vehicles & Parts", comment: "ItemCategory: HomeGarden")
         case .LuggageBags:
-            return NSLocalizedString("Luggage & Bags", comment: "ItemCategory: LuggageBags")
-        case .Media:
-            return NSLocalizedString("Media", comment: "ItemCategory: Media")
-        case .OfficeSupplies:
-            return NSLocalizedString("Office Supplies", comment: "ItemCategory: OfficeSupplies")
-        case .ReligiousCeremonial:
-            return NSLocalizedString("Religious & Ceremonial", comment: "ItemCategory: ReligiousCeremonial")
-        case .Software:
-            return NSLocalizedString("Software", comment: "ItemCategory: Software")
-        case .SportingGoods:
-            return NSLocalizedString("Sporting Goods", comment: "ItemCategory: SportingGoods")
-        case .ToysGames:
-            return NSLocalizedString("Toys & Games", comment: "ItemCategory: ToysGames")
-        case .VehiclesParts:
-            return NSLocalizedString("Vehicles & Parts", comment: "ItemCategory: VehiclesParts")
+            return NSLocalizedString("Water", comment: "ItemCategory: LuggageBags")
         case .Unknown:
             fallthrough
         default:

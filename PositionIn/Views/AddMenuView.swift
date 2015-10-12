@@ -141,7 +141,7 @@ extension AddMenuView {
         
         static func promotionItemWithAction(action: ItemAction?) -> MenuItem {
             return MenuItem(
-                title: NSLocalizedString("PROMOTION",comment: "Add menu: PROMOTION"),
+                title: NSLocalizedString("EMERGENCY",comment: "Add menu: PROMOTION"),
                 icon: UIImage(named: "AddPromotion")!,
                 color: UIScheme.promotionAddMenuColor,
                 action: action
@@ -159,7 +159,7 @@ extension AddMenuView {
         
         static func inviteItemWithAction(action: ItemAction?) -> MenuItem {
             return MenuItem(
-                title: NSLocalizedString("INVITE",comment: "Add menu: INVITE"),
+                title: NSLocalizedString("DONATE",comment: "Add menu: INVITE"),
                 icon: UIImage(named: "AddInvite")!,
                 color: UIScheme.inviteAddMenuColor,
                 action: action
@@ -167,9 +167,7 @@ extension AddMenuView {
         }
         
     }
- 
 }
-
 
 //MARK: Private
 extension AddMenuView {
