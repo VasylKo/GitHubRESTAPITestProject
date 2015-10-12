@@ -57,6 +57,10 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
 
 @property (nonnull, readwrite, strong) XMPPChatHistory *history;
 @property (nonnull, nonatomic, strong) id<XMPPCredentialsProvider> credentialsProvider;
+
+@property (readwrite, assign) BOOL authorized;
+
+@property (nonatomic, strong) NSMutableArray *rooms;
 @end
 
 
@@ -95,6 +99,10 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
     return self.xmppStream.isConnected;
 }
 
+- (BOOL)isAuthorized {
+    return [self isConnected] && [self authorized];
+}
+
 #pragma mark - Stream LifeCycle -
 
 - (void)setupStreamWithConfig:(XMPPClientConfiguration *)configuration {
@@ -131,27 +139,37 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
     self.xmppReconect = [XMPPReconnect new];
     [self.xmppReconect activate:self.xmppStream];
     [self.xmppReconect addDelegate:self.xmppDelegate delegateQueue:delegateQueue];
+    [self.xmppReconect addDelegate:self delegateQueue:delegateQueue];
     
     self.xmppRoster = [[XMPPRoster alloc] initWithRosterStorage:[XMPPRosterMemoryStorage new]];
     [self.xmppRoster activate:self.xmppStream];
     [self.xmppRoster addDelegate:self.xmppDelegate delegateQueue:delegateQueue];
     
     self.xmppMUC = [[XMPPMUC alloc] init];
+    [self.xmppMUC addDelegate:self delegateQueue:delegateQueue];
     [self.xmppMUC addDelegate:self.xmppDelegate delegateQueue:delegateQueue];
     [self.xmppMUC activate:self.xmppStream];
+    
+    self.rooms = [NSMutableArray new];
 }
 
 
 - (void)teardownStream {
+    for (XMPPRoom *room in self.rooms) {
+        [room deactivate];
+    }
+    self.rooms = nil;
     
     [self.xmppPing deactivate];
 
     [self.xmppReconect removeDelegate:self];
+    [self.xmppReconect removeDelegate:self.xmppDelegate];
     [self.xmppReconect deactivate];
     
     [self.xmppRoster removeDelegate:self.xmppDelegate];
     [self.xmppRoster deactivate];
 
+    [self.xmppMUC removeDelegate:self];
     [self.xmppMUC removeDelegate:self.xmppDelegate];
     [self.xmppMUC deactivate];
     
@@ -196,15 +214,26 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
 #pragma mark - Processes -
 
 
-- (nonnull XMPPProcess *)auth {
+- (void)auth {
     XMPPCredentials *credentials = [self.credentialsProvider getChatCredentials];
-    XMPPAuthProcess *process = [[XMPPAuthProcess alloc] initWithStream:self.xmppStream queue:[XMPPProcess defaultProcessingQueue]];
-    XMPPJID *jid = [XMPPJID jidWithString:credentials.jid];
-    process.password = credentials.password;
-    process.jid = jid;
-    
-    self.history = [[XMPPChatHistory alloc] initWithCurrentUser:[jid user]];
-    return process;
+    if (credentials != nil) {
+        XMPPJID *jid = [XMPPJID jidWithString:credentials.jid];
+        self.history = [[XMPPChatHistory alloc] initWithCurrentUser:[jid user]];
+        XMPPAuthProcess *process = [[XMPPAuthProcess alloc] initWithStream:self.xmppStream queue:[XMPPProcess defaultProcessingQueue]];
+        process.password = credentials.password;
+        process.jid = jid;
+        __weak XMPPClient *weakClient = self;
+        [process executeWithCompletion:^(id __nullable result, NSError * __nullable error) {
+            if (error) {
+                XMPPLogError(@"Auth error: %@", [error localizedDescription]);
+            } else {
+                [self.xmppMUC discoverServices];
+            }
+            weakClient.authorized = (error == nil);
+        }];
+    } else {
+        XMPPLogWarn(@"Empty credentials");
+    }
 }
 
 - (nonnull XMPPProcess *)registerJid:(nonnull NSString *)jidString password:(nonnull  NSString *)password {
@@ -266,5 +295,53 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
         }
     }
 }
+
+#pragma mark - MUC -
+
+- (void)xmppMUC:(XMPPMUC *)sender didDiscoverServices:(NSArray *)services {
+    XMPPLogInfo(@"Services: %@", services);
+    static NSString  *const chatServiceName = @"Public Chatrooms";
+    [services enumerateObjectsUsingBlock:^(NSXMLElement *service, NSUInteger idx, BOOL *stop) {
+        if ([[[service attributeForName:@"name"] stringValue] isEqualToString:chatServiceName]) {
+            [sender discoverRoomsForServiceNamed:[[service attributeForName:@"jid"] stringValue]];
+            *stop = YES;
+        }
+    }];
+}
+
+- (void)xmppMUC:(XMPPMUC *)sender didDiscoverRooms:(NSArray *)rooms forServiceNamed:(NSString *)serviceName {
+    XMPPLogInfo(@"Rooms: %@", rooms);
+    for (NSXMLElement *roomXML in rooms) {
+        XMPPJID *roomJid = [XMPPJID jidWithString:[[roomXML attributeForName:@"jid"] stringValue]];
+        XMPPRoom *room = [[XMPPRoom alloc] initWithRoomStorage:[XMPPRoomMemoryStorage new] jid:roomJid];
+        [room activate:sender.xmppStream];
+        [room addDelegate:self.xmppDelegate delegateQueue:sender.moduleQueue];
+        #warning check if already exist
+        [self.rooms addObject:room];
+        NSXMLElement *history = [NSXMLElement elementWithName:@"history"];
+        [history addAttributeWithName:@"maxstanzas" intValue:20];
+        [room joinRoomUsingNickname:@"Another Test" history:history];
+    }
+}
+
+
+#pragma mark - Reconnect -
+
+// * This method may be used to fine tune when we
+// * should and should not attempt an auto reconnect.
+// *
+// * For example, if on the iPhone, one may want to prevent auto reconnect when WiFi is not available.
+
+
+- (void)xmppReconnect:(XMPPReconnect *)sender didDetectAccidentalDisconnect:(SCNetworkConnectionFlags)connectionFlags {
+    XMPPLogTrace();
+    [self auth];
+}
+
+- (BOOL)xmppReconnect:(XMPPReconnect *)sender shouldAttemptAutoReconnect:(SCNetworkConnectionFlags)connectionFlags {
+    XMPPLogTrace();
+    return NO;
+}
+
 
 @end

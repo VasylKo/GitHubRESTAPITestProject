@@ -29,7 +29,7 @@
 
 - (nonnull instancetype)initWithConfiguration:(nonnull XMPPClientConfiguration  * )configuration credentialsProvider:(nonnull id<XMPPCredentialsProvider>)credentialsProvider;
 
-- (nonnull XMPPProcess *)auth;
+- (void)auth;
 - (nonnull XMPPProcess *)registerJid:(nonnull NSString *)jidString password:(nonnull  NSString *)password;
 
 - (void)sendTextMessage:(nonnull NSString *)text to:(nonnull NSString *)username;
@@ -37,6 +37,7 @@
 - (void)addMessageListener:(nonnull id<XMPPMessageListener>)listener;
 - (void)removeMessageListener:(nonnull id<XMPPMessageListener>)listener;
 
+@property (nonatomic, readonly, assign) BOOL isAuthorized;
 @property (nonatomic, readonly, assign) BOOL isConnected;
 - (void)disconnect;
 

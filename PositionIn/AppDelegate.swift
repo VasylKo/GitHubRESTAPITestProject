@@ -114,11 +114,7 @@ extension AppDelegate {
         chatClient.disconnect()
         if  let user = profile {
                 chatClient = AppDelegate.chatClientInstance()
-                chatClient.auth().future().onSuccess { [unowned self] in
-                    Log.info?.message("XMPP authorized")
-                }.onFailure { error in
-                    Log.error?.value(error)
-                }
+                chatClient.auth()
         }
     }
     
