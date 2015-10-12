@@ -11,7 +11,7 @@ import PosInCore
 import CleanroomLogger
 import BrightFutures
 
-final class BrowseListViewController: UIViewController, BrowseActionProducer, BrowseModeDisplay {
+final class BrowseListViewController: UIViewController, BrowseActionProducer, BrowseModeDisplay, SearchFilterProtocol {
     var excludeCommunityItems = false
     var shoWCompactCells: Bool = true
     private var dataRequestToken = InvalidationToken()

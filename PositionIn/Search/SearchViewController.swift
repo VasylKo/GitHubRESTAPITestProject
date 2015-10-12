@@ -130,7 +130,7 @@ extension SearchViewController: ItemsSearchResultsDelegate {
     func didSelectModel(model: TableViewCellModel?) {
         view.endEditing(true)
         transitioningDelegate = nil
-        dismissViewControllerAnimated(true, completion: nil)
+        dismissViewControllerAnimated(false, completion: nil)
         Log.debug?.message("Should close search")
 
         switch model {

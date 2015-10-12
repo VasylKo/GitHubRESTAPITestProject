@@ -140,7 +140,7 @@ protocol BrowseActionConsumer: class {
 
     //MARK: - Private -
     
-    private weak var currentModeViewController: UIViewController?
+    weak var currentModeViewController: UIViewController?
     
     override func loadView() {
         let view = UIView()

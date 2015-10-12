@@ -9,7 +9,11 @@
 import PosInCore
 import CleanroomLogger
 
-final class BrowseViewController: BrowseModeTabbarViewController {
+protocol SearchFilterProtocol {
+    var filter: SearchFilter {get set}
+}
+
+final class BrowseViewController: BrowseModeTabbarViewController, SearchViewControllerDelegate {
     
     
     @IBAction func prepareForUnwind(segue: UIStoryboardSegue) {
@@ -43,5 +47,44 @@ final class BrowseViewController: BrowseModeTabbarViewController {
         ]
     }
 
+    override func searchBarShouldBeginEditing(searchBar: UISearchBar) -> Bool {
+        super.searchBarShouldBeginEditing(searchBar)
+        
+        return true
+    }
     
+    override func searchViewControllerItemSelected(model: SearchItemCellModel?) {
+        let controller = self.currentModeViewController
+        
+        if let model = model {
+            switch model.itemType {
+            case .Unknown:
+                break
+            case .Category:
+                break
+            case .Product:
+                let controller =  Storyboards.Main.instantiateProductDetailsViewControllerId()
+                controller.objectId = model.objectID
+                navigationController?.pushViewController(controller, animated: true)
+            case .Event:
+                let controller =  Storyboards.Main.instantiateEventDetailsViewControllerId()
+                controller.objectId = model.objectID
+                navigationController?.pushViewController(controller, animated: true)
+            case .Promotion:
+                let controller =  Storyboards.Main.instantiatePromotionDetailsViewControllerId()
+                controller.objectId =  model.objectID
+                navigationController?.pushViewController(controller, animated: true)
+            case .Community:
+                SearchFilter.currentFilter.communities = [model.objectID]
+            case .People:
+                SearchFilter.currentFilter.users = [model.objectID]
+            default:
+                break
+            }
+        }
+    }
+
+    override func searchViewControllerSectionSelected(model: SearchSectionCellModel?) {
+        let controller = self.currentModeViewController
+    }
 }

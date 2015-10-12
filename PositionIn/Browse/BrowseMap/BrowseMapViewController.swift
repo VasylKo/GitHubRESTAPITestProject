@@ -12,7 +12,7 @@ import CleanroomLogger
 import BrightFutures
 import Box
 
-final class BrowseMapViewController: UIViewController, BrowseActionProducer, BrowseModeDisplay {
+final class BrowseMapViewController: UIViewController, BrowseActionProducer, BrowseModeDisplay, SearchFilterProtocol {
 
     override func viewDidLoad() {
         super.viewDidLoad()
