@@ -139,6 +139,7 @@ final class FilterViewController: XLFormViewController {
         categories.map { (category: ItemCategory) -> () in
             let categoryRow = XLFormRowDescriptor(tag: category.displayString(), rowType: XLFormRowDescriptorTypeBooleanSwitch, title: category.displayString())
             categoryRow.cellConfigAtConfigure["imageView.image"] = category.image()
+            categoryRow.cellConfig.setObject(UIColor.bt_colorWithBytesR(225, g: 0, b: 38), forKey: "switchControl.onTintColor")
             let value = categoryValue(category)
             categoryRow.value = NSNumber(bool: value)
             categoriesSection.addFormRow(categoryRow)
@@ -253,20 +254,6 @@ extension ItemCategory {
             return UIImage(named: "category_home_garden")!
         case .LuggageBags:
             return UIImage(named: "category_luggage_bags")!
-        case .Media:
-            return UIImage(named: "category_media")!
-        case .OfficeSupplies:
-            return UIImage(named: "category_office_supplies")!
-        case .ReligiousCeremonial:
-            return UIImage(named: "category_religious_ceremonial")!
-        case .Software:
-            return UIImage(named: "category_software")!
-        case .SportingGoods:
-            return UIImage(named: "category_sports")!
-        case .ToysGames:
-            return UIImage(named: "category_toys_games")!
-        case .VehiclesParts:
-            return UIImage(named: "category_vehicles_parts")!
         case .Unknown:
             return UIImage()
         }

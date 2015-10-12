@@ -235,20 +235,6 @@ extension ItemCategory {
             imageName = "home_garden_img_default"
         case .LuggageBags:
             imageName = "luggage_bags_img_default"
-        case .Media:
-            imageName = "media_img_default"
-        case .OfficeSupplies:
-            imageName = "office_supplies_img_default"
-        case .ReligiousCeremonial:
-            imageName = "religious_ceremonial_img_default"
-        case .Software:
-            imageName = "software_img_default"
-        case .SportingGoods:
-            imageName = "mature_img_default"
-        case .ToysGames:
-            imageName = "toys_games_img_default"
-        case .VehiclesParts:
-            imageName = "vehicles_parts_img_default"
         case .Unknown:
             fallthrough
         default:
