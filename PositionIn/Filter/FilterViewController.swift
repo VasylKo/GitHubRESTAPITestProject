@@ -254,20 +254,6 @@ extension ItemCategory {
             return UIImage(named: "category_home_garden")!
         case .LuggageBags:
             return UIImage(named: "category_luggage_bags")!
-        case .Media:
-            return UIImage(named: "category_media")!
-        case .OfficeSupplies:
-            return UIImage(named: "category_office_supplies")!
-        case .ReligiousCeremonial:
-            return UIImage(named: "category_religious_ceremonial")!
-        case .Software:
-            return UIImage(named: "category_software")!
-        case .SportingGoods:
-            return UIImage(named: "category_sports")!
-        case .ToysGames:
-            return UIImage(named: "category_toys_games")!
-        case .VehiclesParts:
-            return UIImage(named: "category_vehicles_parts")!
         case .Unknown:
             return UIImage()
         }
