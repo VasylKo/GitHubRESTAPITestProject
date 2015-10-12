@@ -45,15 +45,15 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
     self = [super init];
     if (self) {
         self.conversations = [NSMutableDictionary new];
-        self.rooms = [NSMutableDictionary new];
         self.currentUserId = currentUserId;
         self.nickName = nick;
+        [self cleanRooms];
     }
     return self;
 }
 
 - (void)didDiscoverRooms:(nonnull NSArray *)rooms stream:(nonnull XMPPStream *)stream {
-    self.rooms = [NSMutableDictionary new];
+    [self cleanRooms];
     dispatch_queue_t delegateQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     for (NSXMLElement *roomXML in rooms) {
         NSString * __nonnull roomId = [[roomXML attributeForName:@"jid"] stringValue];
@@ -112,8 +112,16 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
         XMPPRoomMemoryStorage *storage = room.xmppRoomStorage;
         NSMutableArray *messages = [NSMutableArray new];
         for (XMPPRoomMessageMemoryStorageObject *storedMessage in [storage messages]) {
-            XMPPTextMessage *msg = [[XMPPTextMessage alloc] initWithMessage:storedMessage.message];
-            [messages addObject:msg];
+#warning Fix saved messages
+            XMPPMessage *msg = storedMessage.message;
+            if (msg.from == nil) {
+                [msg addAttributeWithName:@"from" stringValue:[room.myRoomJID full]];
+            }
+            if (msg.to == nil) {
+                [msg addAttributeWithName:@"to" stringValue:[room.myRoomJID full]];
+            }
+            XMPPTextMessage *textMsg = [[XMPPTextMessage alloc] initWithMessage:msg];
+            [messages addObject:textMsg];
         }
         return messages;
     }

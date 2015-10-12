@@ -137,7 +137,6 @@ final class ChatController: NSObject {
     private func loadConversationHistory(conversation: Conversation) {
         let fetchRequest: XMPPChatHistory -> (String) -> [AnyObject] = conversation.isGroupChat ? XMPPChatHistory.messagesForConversationWithCommunity : XMPPChatHistory.messagesForConversationWithUser
         if let rawMessages = fetchRequest(chatClient.history)(conversation.roomId) as? [XMPPTextMessage] {
-//        if let rawMessages = chatClient.history.messagesForConversationWithUser(conversation.roomId) as? [XMPPTextMessage] {
             messages = map(rawMessages) { m in
                 return JSQMessage(senderId: m.from, senderDisplayName: self.displayNameForUser(m.from), date: m.date, text: m.text)
             }

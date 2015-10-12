@@ -47,6 +47,10 @@
     return [self.participants firstObject];
 }
 
+- (NSString *)description {
+    return [NSString stringWithFormat:@"{%@ -> Group:%d,Occupants:%@}",[super description], self.isMultiUser, self.participants];
+}
+
 
 - (BOOL)isEqual:(id)anObject {
     if (![anObject isKindOfClass:[XMPPConversation class]]) {
@@ -63,9 +67,9 @@
 - (id)copyWithZone:(NSZone *)zone {
     XMPPConversation *conversation;
     if (self.isMultiUser) {
-        conversation = [[XMPPConversation allocWithZone:zone] initWithUser:[self.participants firstObject] name:self.name imageURL:self.imageURL];
+        conversation = [[XMPPConversation allocWithZone:zone] initWithCommunity:[self.participants firstObject] name:self.name imageURL:self.imageURL];
     } else {
-        conversation = [[XMPPConversation allocWithZone:zone] initWithCommunity:[self.participants firstObject] name:self.name imageURL:self.imageURL];        
+        conversation = [[XMPPConversation allocWithZone:zone] initWithUser:[self.participants firstObject] name:self.name imageURL:self.imageURL];        
     }
     conversation.lastActivityDate = self.lastActivityDate;
     return conversation;
