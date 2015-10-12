@@ -45,7 +45,7 @@ final class AppConfiguration {
     
     private static var environment: Environment {
         #if PROD_ENV
-            return .Production
+            return .Prod
         #elseif STAGING_ENV
             return .Staging
         #else
