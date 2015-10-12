@@ -130,20 +130,20 @@ final class ConversationViewController: JSQMessagesViewController {
         return nil
     }
     
-    override func collectionView(collectionView: JSQMessagesCollectionView!, attributedTextForMessageBubbleTopLabelAtIndexPath indexPath: NSIndexPath!) -> NSAttributedString! {
-        let message = self.collectionView(collectionView, messageDataForItemAtIndexPath: indexPath)
-        if message.senderId() == senderId {
-            return nil
-        }
-        if indexPath.item - 1 > 0 {
-            let previousIndexPath = NSIndexPath(forItem: indexPath.item - 1, inSection: indexPath.section)
-            let previousMessage = self.collectionView(collectionView, messageDataForItemAtIndexPath: previousIndexPath)
-            if previousMessage.senderId() == message.senderId() {
-                return nil
-            }
-        }
-        return NSAttributedString(string: message.senderDisplayName())
-    }
+//    override func collectionView(collectionView: JSQMessagesCollectionView!, attributedTextForMessageBubbleTopLabelAtIndexPath indexPath: NSIndexPath!) -> NSAttributedString! {
+//        let message = self.collectionView(collectionView, messageDataForItemAtIndexPath: indexPath)
+//        if message.senderId() == senderId {
+//            return nil
+//        }
+//        if indexPath.item - 1 > 0 {
+//            let previousIndexPath = NSIndexPath(forItem: indexPath.item - 1, inSection: indexPath.section)
+//            let previousMessage = self.collectionView(collectionView, messageDataForItemAtIndexPath: previousIndexPath)
+//            if previousMessage.senderId() == message.senderId() {
+//                return nil
+//            }
+//        }
+//        return NSAttributedString(string: message.senderDisplayName())
+//    }
     
     //MARK: - UICollectionView DataSource -
     
@@ -165,12 +165,12 @@ final class ConversationViewController: JSQMessagesViewController {
         return  (indexPath.item % 3 == 0) ? kJSQMessagesCollectionViewCellLabelHeightDefault : 0.0
     }
     
-    override func collectionView(collectionView: JSQMessagesCollectionView!, layout collectionViewLayout: JSQMessagesCollectionViewFlowLayout!, heightForMessageBubbleTopLabelAtIndexPath indexPath: NSIndexPath!) -> CGFloat {
-        if let _ = self.collectionView(collectionView, attributedTextForMessageBubbleTopLabelAtIndexPath: indexPath) {
-            return kJSQMessagesCollectionViewCellLabelHeightDefault
-        }
-        return 0.0
-    }
+//    override func collectionView(collectionView: JSQMessagesCollectionView!, layout collectionViewLayout: JSQMessagesCollectionViewFlowLayout!, heightForMessageBubbleTopLabelAtIndexPath indexPath: NSIndexPath!) -> CGFloat {
+//        if let _ = self.collectionView(collectionView, attributedTextForMessageBubbleTopLabelAtIndexPath: indexPath) {
+//            return kJSQMessagesCollectionViewCellLabelHeightDefault
+//        }
+//        return 0.0
+//    }
     
     //MARK: - Helpers -
     
