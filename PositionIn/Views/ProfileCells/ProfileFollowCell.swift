@@ -30,23 +30,32 @@ final class ProfileFollowCell: TableViewCell {
         let action:UserProfileViewController.ProfileAction
         let title: String?
         let backColor: UIColor
+        var textColor: UIColor = UIColor.whiteColor()
         switch state {
         case .Following:
             action = .UnFollow
             title = NSLocalizedString("Following", comment: "Follow button: Following")
             backColor = UIScheme.unfollowActionColor
+            textColor = UIColor.whiteColor()
         case .NotFollowing:
             action = .Follow
             title = NSLocalizedString("Follow", comment: "Follow button: Follow")
             backColor = UIScheme.followActionColor
+            textColor = UIColor.bt_colorWithBytesR(237, g: 27, b: 46)
         case .SameUser:
             action = .None
             title = nil
             backColor = UIColor.clearColor()
+            textColor = UIColor.clearColor()
         }
         actionButton.tag = action.rawValue
         actionButton.setTitle(title, forState: .Normal)
         actionButton.backgroundColor = backColor
+        actionButton.titleLabel!.textColor = textColor
+        actionButton.layer.borderWidth = 2
+        actionButton.layer.cornerRadius = 2
+        actionButton.layer.borderColor = UIColor.bt_colorWithBytesR(237, g: 27, b: 46).CGColor
+        actionButton.clipsToBounds = true
     }
     
     @IBOutlet private weak var actionButton: UIButton!

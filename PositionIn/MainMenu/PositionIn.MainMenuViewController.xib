@@ -53,6 +53,6 @@
         </view>
     </objects>
     <resources>
-        <image name="MenuLogo" width="173" height="38"/>
+        <image name="MenuLogo" width="255" height="38"/>
     </resources>
 </document>

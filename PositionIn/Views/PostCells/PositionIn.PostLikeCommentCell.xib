@@ -13,23 +13,15 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="communityPost" translatesAutoresizingMaskIntoConstraints="NO" id="4qH-CD-DX8">
-                        <rect key="frame" x="149" y="11" width="22" height="22"/>
-                    </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HO7-Ff-nIN">
-                        <rect key="frame" x="53" y="13" width="9" height="18"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                        <color key="textColor" red="0.13333333333333333" green="0.36862745098039218" blue="0.79607843137254897" alpha="1" colorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cEz-rY-ao3">
                         <rect key="frame" x="179" y="13" width="9" height="18"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                        <color key="textColor" red="0.1333333333" green="0.36862745099999999" blue="0.79607843140000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="textColor" red="0.92941176469999998" green="0.1058823529" blue="0.18039215689999999" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HuE-yi-xLX">
                         <rect key="frame" x="23" y="11" width="22" height="22"/>
+                        <color key="tintColor" red="0.92941176469999998" green="0.1058823529" blue="0.18039215689999999" alpha="1" colorSpace="calibratedRGB"/>
                         <state key="normal" image="communityLike">
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
@@ -37,14 +29,30 @@
                             <action selector="likeButtonPressed:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="sWC-Bd-kns"/>
                         </connections>
                     </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="77z-vS-LWT">
+                        <rect key="frame" x="149" y="11" width="22" height="22"/>
+                        <color key="tintColor" red="0.92941176469999998" green="0.1058823529" blue="0.18039215689999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <state key="normal" image="communityPost">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <connections>
+                            <action selector="likeButtonPressed:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="HuF-xT-Mf5"/>
+                        </connections>
+                    </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HO7-Ff-nIN">
+                        <rect key="frame" x="53" y="13" width="9" height="18"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" red="0.92941176469999998" green="0.1058823529" blue="0.18039215689999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="4qH-CD-DX8" firstAttribute="leading" secondItem="HO7-Ff-nIN" secondAttribute="trailing" constant="87" id="74d-aX-7fW"/>
                     <constraint firstItem="HuE-yi-xLX" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="23" id="Aaj-MQ-Ukg"/>
-                    <constraint firstAttribute="centerY" secondItem="4qH-CD-DX8" secondAttribute="centerY" id="JdR-J6-1Hk"/>
-                    <constraint firstItem="cEz-rY-ao3" firstAttribute="leading" secondItem="4qH-CD-DX8" secondAttribute="trailing" constant="8" id="XFA-Bd-HMc"/>
+                    <constraint firstItem="cEz-rY-ao3" firstAttribute="leading" secondItem="77z-vS-LWT" secondAttribute="trailing" constant="8" id="Gjd-R9-iXP"/>
+                    <constraint firstAttribute="centerY" secondItem="77z-vS-LWT" secondAttribute="centerY" id="Wd3-DA-FsY"/>
                     <constraint firstAttribute="centerY" secondItem="HO7-Ff-nIN" secondAttribute="centerY" id="enG-nX-os2"/>
                     <constraint firstItem="HO7-Ff-nIN" firstAttribute="leading" secondItem="HuE-yi-xLX" secondAttribute="trailing" constant="8" id="gwA-EJ-kdY"/>
+                    <constraint firstItem="77z-vS-LWT" firstAttribute="leading" secondItem="HO7-Ff-nIN" secondAttribute="trailing" constant="87" id="l2G-Ky-E2E"/>
                     <constraint firstItem="HO7-Ff-nIN" firstAttribute="leading" secondItem="HuE-yi-xLX" secondAttribute="trailing" constant="8" id="mZy-1l-n1m"/>
                     <constraint firstAttribute="centerY" secondItem="cEz-rY-ao3" secondAttribute="centerY" id="q0A-TB-phu"/>
                     <constraint firstAttribute="centerY" secondItem="HuE-yi-xLX" secondAttribute="centerY" id="q3N-l3-7BO"/>

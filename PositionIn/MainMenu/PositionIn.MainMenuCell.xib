@@ -15,7 +15,7 @@
                 <subviews>
                     <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BPh-TQ-57b">
                         <rect key="frame" x="0.0" y="0.0" width="10" height="48"/>
-                        <color key="backgroundColor" red="0.88235294119999996" green="0.0" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.92941176470588238" green="0.10588235294117647" blue="0.1803921568627451" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="tintColor" red="0.88235294119999996" green="0.0" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="10" id="PI8-7U-wMh"/>

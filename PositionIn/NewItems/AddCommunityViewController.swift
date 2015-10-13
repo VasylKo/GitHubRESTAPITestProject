@@ -51,6 +51,7 @@ final class AddCommunityViewController: BaseAddItemViewController {
         descriptionSection.addFormRow(descriptionRow)
         
         let privateRow = XLFormRowDescriptor(tag: Tags.Private.rawValue, rowType: XLFormRowDescriptorTypeBooleanSwitch, title: NSLocalizedString("Private", comment: "New community: private"))
+        privateRow.cellConfig.setObject(UIColor.bt_colorWithBytesR(237, g: 27, b: 46), forKey: "switchControl.onTintColor")
         privateRow.value = NSNumber(bool: false)
         descriptionSection.addFormRow(privateRow)
 

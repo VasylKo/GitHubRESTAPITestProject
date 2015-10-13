@@ -176,7 +176,7 @@ final class ConversationViewController: JSQMessagesViewController {
     
     lazy private var outgoingBubbleImageData: JSQMessagesBubbleImage = {
        let bubbleImageFactory = JSQMessagesBubbleImageFactory()
-        return bubbleImageFactory.outgoingMessagesBubbleImageWithColor(UIColor.jsq_messageBubbleGreenColor())
+        return bubbleImageFactory.outgoingMessagesBubbleImageWithColor(UIColor.bt_colorWithBytesR(237, g: 27, b: 46))
     }()
     
     lazy private var incomingBubbleImageData: JSQMessagesBubbleImage = {
