@@ -13,7 +13,9 @@ final class AppConfiguration {
         switch AppConfiguration.environment {
         case .Prod:
             baseURL = NSURL(string: "https://app.positionin.com/api/")!
-            amazonURL = NSURL(string: "https://pos-prod.s3.amazonaws.com/")!
+//            amazonURL = NSURL(string: "https://pos-prod.s3.amazonaws.com/")!
+            //Workaround bug in S3
+            amazonURL = NSURL(string: "https://app.positionin.com")!
             xmppHostname = "app.positionin.com"
         case .Staging:
             baseURL = NSURL(string: "https://app-sta.positionin.com/api/")!
@@ -45,7 +47,7 @@ final class AppConfiguration {
     
     private static var environment: Environment {
         #if PROD_ENV
-            return .Production
+            return .Prod
         #elseif STAGING_ENV
             return .Staging
         #else
