@@ -12,6 +12,8 @@ import CoreLocation
 import CleanroomLogger
 import BrightFutures
 
+typealias SearchFilterUpdate = (SearchFilter) -> SearchFilter
+
 struct SearchFilter: Mappable {
     typealias Money = Double
     static let minPrice: Money = 1

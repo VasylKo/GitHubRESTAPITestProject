@@ -11,7 +11,7 @@ import CleanroomLogger
 
 protocol SearchFilterProtocol {
     var filter: SearchFilter {get set}
-    func reloadData()
+    func applyFilterUpdate(update: SearchFilterUpdate)
 }
 
 final class BrowseViewController: BrowseModeTabbarViewController, SearchViewControllerDelegate {
@@ -55,7 +55,7 @@ final class BrowseViewController: BrowseModeTabbarViewController, SearchViewCont
     
     override func searchViewControllerItemSelected(model: SearchItemCellModel?) {
         if let model = model {
-            if var filterApplicator = self.currentModeViewController as? SearchFilterProtocol {
+
                 switch model.itemType {
                 case .Unknown:
                     break
@@ -74,35 +74,44 @@ final class BrowseViewController: BrowseModeTabbarViewController, SearchViewCont
                     controller.objectId =  model.objectID
                     navigationController?.pushViewController(controller, animated: true)
                 case .Community:
-                    filterApplicator.filter.communities = [model.objectID]
+                    childFilterUpdate = { (filter: SearchFilter) -> SearchFilter in
+                        var f = filter
+                        f.communities = [model.objectID]
+                        return f
+                    }
+                    applyDisplayMode(displayMode)
                 case .People:
-                    filterApplicator.filter.users = [model.objectID]
+                    childFilterUpdate = { (filter: SearchFilter) -> SearchFilter in
+                        var f = filter
+                        f.users = [model.objectID]
+                        return f
+                    }
+                    applyDisplayMode(displayMode)
                 default:
                     break
                 }
-                filterApplicator.reloadData()
-            }
         }
     }
 
     override func searchViewControllerSectionSelected(model: SearchSectionCellModel?) {
-        let controller = self.currentModeViewController
         if let model = model {
-            if var filterApplicator = self.currentModeViewController as? SearchFilterProtocol {
-                switch model.itemType {
-                case .Unknown:
-                    break;
-                case .Event:
-                    filterApplicator.filter.itemTypes = [.Event]
-                case .Promotion:
-                    filterApplicator.filter.itemTypes = [.Promotion]
-                case .Item:
-                    filterApplicator.filter.itemTypes = [.Item]
-                case .Post:
-                    filterApplicator.filter.itemTypes = [.Post]
-                }
-                filterApplicator.reloadData()
+            let itemType = model.itemType
+            childFilterUpdate = { (filter: SearchFilter) -> SearchFilter in
+                var f = filter
+                f.itemTypes = [ itemType ]
+                return f
             }
+            applyDisplayMode(displayMode)
+        }
+    }
+    
+    var childFilterUpdate: SearchFilterUpdate?
+    
+    override func prepareDisplayController(controller: UIViewController) {
+        super.prepareDisplayController(controller)
+        if let filterUpdate = childFilterUpdate,
+           let filterApplicator = self.currentModeViewController as? SearchFilterProtocol {
+            filterApplicator.applyFilterUpdate(filterUpdate)
         }
     }
 }

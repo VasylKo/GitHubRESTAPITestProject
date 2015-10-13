@@ -12,7 +12,7 @@ import CleanroomLogger
 import BrightFutures
 import Box
 
-final class BrowseMapViewController: UIViewController, BrowseActionProducer, BrowseModeDisplay, SearchFilterProtocol {
+final class BrowseMapViewController: UIViewController, BrowseActionProducer, BrowseModeDisplay {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,6 +20,8 @@ final class BrowseMapViewController: UIViewController, BrowseActionProducer, Bro
             self.mapView.moveCamera(GMSCameraUpdate.setTarget(coordinate, zoom: 12))
         }
     }
+    
+    var shouldApplySectionFilter = true
     
     var browseMode: BrowseModeTabbarViewController.BrowseMode = .ForYou
     
