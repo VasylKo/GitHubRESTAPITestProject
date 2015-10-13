@@ -26,6 +26,10 @@ final class ProfileFollowCell: TableViewCell {
         }
     }
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+    }
+    
     private func updateButtonForState(state: UserProfile.SubscriptionState) {
         let action:UserProfileViewController.ProfileAction
         let title: String?
@@ -51,8 +55,8 @@ final class ProfileFollowCell: TableViewCell {
         actionButton.tag = action.rawValue
         actionButton.setTitle(title, forState: .Normal)
         actionButton.backgroundColor = backColor
-        actionButton.titleLabel!.textColor = textColor
-        actionButton.layer.borderWidth = 2
+        actionButton.setTitleColor(textColor, forState: UIControlState.Normal)
+        actionButton.layer.borderWidth = 1
         actionButton.layer.cornerRadius = 2
         actionButton.layer.borderColor = UIColor.bt_colorWithBytesR(237, g: 27, b: 46).CGColor
         actionButton.clipsToBounds = true

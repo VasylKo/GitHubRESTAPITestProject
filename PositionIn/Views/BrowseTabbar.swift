@@ -49,7 +49,7 @@ final class BrowseTabbar: UITabBar {
         //TODO: need fix for selected relevant
         items = [
             UITabBarItem(title: NSLocalizedString("Recent", comment: "Tabbar: For You"), image: UIImage(named: "TabbarForYou"), selectedImage: UIImage(named: "TabbarForYouSelected")),
-            UITabBarItem(title: NSLocalizedString("Relevant", comment: "Tabbar: New"), image: UIImage(named: "TabbarNear"), selectedImage: UIImage(named: "TabbarNearSelected")),
+            UITabBarItem(title: NSLocalizedString("Relevant", comment: "Tabbar: New"), image: UIImage(named: "TabbarNear"), selectedImage: UIImage(named: "TabbarNear")),
         ]
         delegate = self
         
