@@ -18,7 +18,7 @@ final class RegisterInfoViewController: BaseLoginViewController {
         emailTextField.text = initialEmail
         passwordTextField.becomeFirstResponder()
         
-        signupButton.layer.borderColor = UIColor.bt_colorWithBytesR(225, g: 0, b: 38).CGColor
+        signupButton.layer.borderColor = UIColor.bt_colorWithBytesR(237, g: 27, b: 46).CGColor
         signupButton.layer.borderWidth = 1
     }
     

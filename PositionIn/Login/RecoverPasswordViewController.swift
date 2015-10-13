@@ -13,7 +13,7 @@ final class RecoverPasswordViewController: BaseLoginViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        submitButton.layer.borderColor = UIColor.bt_colorWithBytesR(225, g: 0, b: 38).CGColor
+        submitButton.layer.borderColor = UIColor.bt_colorWithBytesR(237, g: 27, b: 46).CGColor
         submitButton.layer.borderWidth = 1
     }
     
