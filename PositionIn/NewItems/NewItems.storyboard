@@ -219,11 +219,13 @@
                     </view>
                     <navigationItem key="navigationItem" title="Edit profile" id="I2O-1Q-dsP">
                         <barButtonItem key="leftBarButtonItem" title="Cancel" id="cjI-h2-n50">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <segue destination="giS-Z4-BLu" kind="unwind" identifier="Close" unwindAction="prepareForUnwind:" id="FBm-sG-wS5"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Save" id="q57-eP-2H1">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="didTapPost:" destination="ar9-rL-frm" id="OZq-QY-NUw"/>
                             </connections>

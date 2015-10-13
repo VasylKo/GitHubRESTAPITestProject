@@ -68,6 +68,7 @@ final class FilterViewController: XLFormViewController {
         priceRow.cellConfigAtConfigure["slider.maximumValue"] = SearchFilter.maxPrice
         priceRow.cellConfigAtConfigure["slider.minimumValue"] = SearchFilter.minPrice
         priceRow.cellConfigAtConfigure["steps"] = SearchFilter.Money(400)
+        priceRow.cellConfigAtConfigure["slider.minimumTrackTintColor"] = UIScheme.mainThemeColor
         priceRow.value = SearchFilter.defaultPrice
         optionsSection.addFormRow(priceRow)
 

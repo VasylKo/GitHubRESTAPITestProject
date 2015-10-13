@@ -15,13 +15,13 @@ struct UIScheme {
     static let productAddMenuColor = UIColor(red: 162/255.0, green: 185/255.0, blue: 40/255.0, alpha: 1.0)
     static let postAddMenuColor = UIColor(red: 35/255.0, green: 113/255.0, blue: 213/255.0, alpha: 1.0)
     
-    static let mainThemeColor = UIColor(red: 35/255.0, green: 113/255.0, blue: 213/255.0, alpha: 1.0)
+    static let mainThemeColor = UIColor(red: 237/255.0, green: 27/255.0, blue: 46/255.0, alpha: 1.0)
     static let tabbarBackgroundColor = UIColor(red: 240/255.0, green: 240/255.0, blue: 240/255.0, alpha: 1.0)
     
     static let searchbarActiveColor = UIColor(red: 0/255.0, green: 73/255.0, blue: 168/255.0, alpha: 1.0)
     
-    static let communityActionColor = UIColor(red: 35/255.0, green: 113/255.0, blue: 213/255.0, alpha: 1.0)
+    static let communityActionColor = UIColor(red: 237/255.0, green: 27/255.0, blue: 46/255.0, alpha: 1.0)
     
-    static let followActionColor = UIColor(red: 35/255.0, green: 113/255.0, blue: 213/255.0, alpha: 1.0)
-    static let unfollowActionColor = UIColor(red: 162/255.0, green: 185/255.0, blue: 40/255.0, alpha: 1.0)
+    static let followActionColor = UIColor(red: 35/255.0, green: 113/255.0, blue: 213/255.0, alpha: 0.0)
+    static let unfollowActionColor = UIColor(red: 237/255.0, green: 27/255.0, blue: 46/255.0, alpha: 1.0)
 }

@@ -21,6 +21,7 @@ final class MainMenuCell: TableViewCell {
         titleLabel?.text = m!.title
         let image = UIImage(named: m!.image)
         iconImageView.image = image
+        iconImageView.tintColor = UIColor.bt_colorWithBytesR(237, g: 27, b: 46)
         iconImageView.highlightedImage = image?.imageWithRenderingMode(.AlwaysTemplate)
     }
     
