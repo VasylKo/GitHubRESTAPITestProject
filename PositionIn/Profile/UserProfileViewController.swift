@@ -13,7 +13,7 @@ protocol UserProfileActionConsumer: class {
     func shouldExecuteAction(action: UserProfileViewController.ProfileAction)
 }
 
-final class UserProfileViewController: BesideMenuViewController, BrowseActionProducer, UISearchBarDelegate, SearchViewControllerDelegate {
+final class UserProfileViewController: BesideMenuViewController, BrowseActionProducer, UITextFieldDelegate, SearchViewControllerDelegate {
     
     weak var actionConsumer: BrowseActionConsumer?
     
@@ -175,14 +175,20 @@ final class UserProfileViewController: BesideMenuViewController, BrowseActionPro
     
     //MARK: - Search -
     
-    private lazy var searchbar: SearchBar = { [unowned self] in
-        let searchBar = SearchBar()
+    private lazy var searchbar: UITextField = { [unowned self] in
+        let searchBar = UITextField(frame: CGRectMake(0, 0, UIScreen.mainScreen().applicationFrame.size.width * 0.7, 25))
+        searchBar.tintColor = UIColor.whiteColor()
+        searchBar.backgroundColor = UIColor.whiteColor()
+        searchBar.borderStyle = UITextBorderStyle.RoundedRect
+        let leftView = UIImageView(image: UIImage(named: "search_icon"))
+        searchBar.leftView = leftView
+        searchBar.leftViewMode = .Always
         searchBar.delegate = self
         return searchBar
         }()
     
-    func searchBarShouldBeginEditing(searchBar: UISearchBar) -> Bool {
-        searchBar.resignFirstResponder()
+    func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
         SearchViewController.present(searchbar, presenter: self)
         return false
     }

@@ -51,17 +51,17 @@ final class SearchAppearanceAnimationController: NSObject,UIViewControllerAnimat
         let searchView = searchController.view
         conrainerView.addSubview(searchView)
         
-        let categoriesFrame = searchController.categoriesSearchBar.frame
-        searchController.categoriesSearchBar.frame = startFrame
-        let locationsFrame = searchController.locationSearchBar.frame
-        searchController.locationSearchBar.frame = startFrame
+        let categoriesFrame = searchController.searchTextField.frame
+        searchController.searchTextField.frame = startFrame
+        let locationsFrame = searchController.locationSearchTextField.frame
+        searchController.locationSearchTextField.frame = startFrame
         UIView.animateWithDuration(
             transitionDuration(transitionContext),
             delay: 0,
             options: UIViewAnimationOptions.CurveEaseInOut | UIViewAnimationOptions.BeginFromCurrentState,
             animations: {
-                searchController.categoriesSearchBar.frame = categoriesFrame
-                searchController.locationSearchBar.frame = locationsFrame
+                searchController.searchTextField.frame = categoriesFrame
+                searchController.locationSearchTextField.frame = locationsFrame
             }) { finished in
                 transitionContext.completeTransition(finished)
         }
