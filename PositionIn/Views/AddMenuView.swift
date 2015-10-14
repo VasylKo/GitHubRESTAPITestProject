@@ -66,6 +66,7 @@ final class AddMenuView: UIView {
         
         menuItemViews = items.map() { menuItem in
             let menuItemView = AddMenuItemView(direction: self.direction, menuItem: menuItem)
+            menuItemView.tintColor = UIScheme.mainThemeColor
             menuItemView.sizeToFit()
             menuItemView.setNeedsLayout()
             
@@ -125,7 +126,7 @@ extension AddMenuView {
             return MenuItem(
                 title: NSLocalizedString("PRODUCT",comment: "Add menu: PRODUCT"),
                 icon: UIImage(named: "AddProduct")!,
-                color: UIScheme.productAddMenuColor,
+                color: UIColor.whiteColor(),
                 action: action
             )
         }
@@ -134,7 +135,7 @@ extension AddMenuView {
             return MenuItem(
                 title: NSLocalizedString("EVENT",comment: "Add menu: EVENT"),
                 icon: UIImage(named: "AddEvent")!,
-                color: UIScheme.eventAddMenuColor,
+                color: UIColor.whiteColor(),
                 action: action
             )
         }
@@ -143,7 +144,7 @@ extension AddMenuView {
             return MenuItem(
                 title: NSLocalizedString("EMERGENCY",comment: "Add menu: PROMOTION"),
                 icon: UIImage(named: "AddPromotion")!,
-                color: UIScheme.promotionAddMenuColor,
+                color: UIScheme.mainThemeColor,
                 action: action
             )
         }
@@ -152,7 +153,7 @@ extension AddMenuView {
             return MenuItem(
                 title: NSLocalizedString("POST",comment: "Add menu: POST"),
                 icon: UIImage(named: "AddPost")!,
-                color: UIScheme.postAddMenuColor,
+                color: UIColor.whiteColor(),
                 action: action
             )
         }
@@ -161,7 +162,7 @@ extension AddMenuView {
             return MenuItem(
                 title: NSLocalizedString("DONATE",comment: "Add menu: INVITE"),
                 icon: UIImage(named: "AddInvite")!,
-                color: UIScheme.inviteAddMenuColor,
+                color: UIColor.whiteColor(),
                 action: action
             )
         }

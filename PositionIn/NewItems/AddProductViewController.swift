@@ -75,7 +75,6 @@ final class AddProductViewController: BaseAddItemViewController {
         quantityRow.cellConfigAtConfigure["stepControl.maximumValue"] = 100
         quantityRow.cellConfigAtConfigure["stepControl.stepValue"] = 1
         quantityRow.cellConfigAtConfigure["stepControl.tintColor"] = UIColor.bt_colorWithBytesR(237, g: 27, b: 46)
-        quantityRow.cellConfigAtConfigure["stepControl.currentStepValue.textColor"] = UIColor.bt_colorWithBytesR(237, g: 27, b: 46)
         infoSection.addFormRow(quantityRow)
         
         //Photo section
