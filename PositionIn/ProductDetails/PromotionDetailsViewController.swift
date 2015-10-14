@@ -44,8 +44,9 @@ final class PromotionDetailsViewController: UIViewController {
         let startDate = dateFormatter.stringFromDate(promotion.startDate ?? NSDate())
         let endDate = dateFormatter.stringFromDate(promotion.endDate ?? NSDate())
         priceLabel.text = "\(startDate) - \(endDate)"
-        let discountFormat = NSLocalizedString("Save %.1f%%", comment: "Promotion details: DiscountFormat")
-        infoLabel.text = map(promotion.discount) { String(format: discountFormat, $0 )}
+//        let discountFormat = NSLocalizedString("Save %.1f%%", comment: "Promotion details: DiscountFormat")
+//        infoLabel.text = map(promotion.discount) { String(format: discountFormat, $0 )}
+        infoLabel.text = ""
         promotionImageView.setImageFromURL(promotion.photos?.first?.url, placeholder: UIImage(named: "PromotionDetailsPlaceholder"))
     }
     

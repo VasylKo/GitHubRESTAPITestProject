@@ -23,7 +23,7 @@ class ItemsSearchResultsController: NSObject {
     
     private var filter = SearchFilter.currentFilter
     
-    init(table: TableView?, resultStorage: ItemsSearchResultStorage?, searchBar: UISearchBar?) {
+    init(table: TableView?, resultStorage: ItemsSearchResultStorage?, searchBar: UITextField?) {
         itemsTable = table
         self.resultStorage = resultStorage
         self.searchBar = searchBar
@@ -160,24 +160,20 @@ class ItemsSearchResultsController: NSObject {
     weak var delegate: ItemsSearchResultsDelegate?
     private weak var resultStorage: ItemsSearchResultStorage?
     private weak var itemsTable: TableView?
-    private weak var searchBar: UISearchBar?
+    private weak var searchBar: UITextField?
     private var dataRequestToken = InvalidationToken()
     private var searchTimer: NSTimer?
     
     let searchDelay: NSTimeInterval = 1.5
 }
 
-extension ItemsSearchResultsController: UISearchBarDelegate {
-    
-    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+extension ItemsSearchResultsController: UITextFieldDelegate {
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool{
         shouldReloadSearch()
+        return true
     }
     
-    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
-        shouldReloadSearch()
-    }
-    
-    func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
+    func textFieldDidBeginEditing(textField: UITextField) {
         delegate?.shouldDisplayItemsSearchResults()
     }
 }

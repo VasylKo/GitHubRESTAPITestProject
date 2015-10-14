@@ -22,7 +22,7 @@ protocol LocationSearchResultsDelegate: class {
 
 final class LocationSearchResultsController: NSObject {
         
-    init(table: TableView?, resultStorage: LocationSearchResultStorage?, searchBar: UISearchBar?) {
+    init(table: TableView?, resultStorage: LocationSearchResultStorage?, searchBar: UITextField?) {
         locationsTable = table
         self.resultStorage = resultStorage
         self.searchBar = searchBar
@@ -66,24 +66,20 @@ final class LocationSearchResultsController: NSObject {
     weak var delegate: LocationSearchResultsDelegate? 
     private weak var resultStorage: LocationSearchResultStorage?
     private weak var locationsTable: TableView?
-    private weak var searchBar: UISearchBar?
+    private weak var searchBar: UITextField?
     private var dataRequestToken = InvalidationToken()
     private var searchTimer: NSTimer?
     
     let searchDelay: NSTimeInterval = 1.5
 }
 
-extension LocationSearchResultsController: UISearchBarDelegate {
-    
-    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+extension LocationSearchResultsController: UITextFieldDelegate {
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool{
         shouldReloadSearch()
+        return true
     }
     
-    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
-        shouldReloadSearch()
-    }
-    
-    func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
+    func textFieldDidBeginEditing(textField: UITextField) {
         delegate?.shouldDisplayLocationSearchResults()
     }
 }

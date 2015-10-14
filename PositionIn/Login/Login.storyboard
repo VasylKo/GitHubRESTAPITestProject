@@ -1017,11 +1017,11 @@
                                         <variation key="default">
                                             <mask key="constraints">
                                                 <exclude reference="xDW-aK-Wda"/>
+                                                <exclude reference="4gw-l6-rpm"/>
+                                                <exclude reference="oJH-he-YMM"/>
                                                 <exclude reference="H4j-2M-2wY"/>
                                                 <exclude reference="br2-nR-yVh"/>
                                                 <exclude reference="qkO-eJ-kvP"/>
-                                                <exclude reference="4gw-l6-rpm"/>
-                                                <exclude reference="oJH-he-YMM"/>
                                                 <exclude reference="uKb-pp-dvq"/>
                                                 <exclude reference="M21-tC-q2v"/>
                                             </mask>
