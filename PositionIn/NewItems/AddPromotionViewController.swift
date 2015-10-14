@@ -38,7 +38,7 @@ final class AddPromotionViewController: BaseAddItemViewController {
     }
     
     func initializeForm() {
-        let form = XLFormDescriptor(title: NSLocalizedString("New Promotion", comment: "New promotion: form caption"))
+        let form = XLFormDescriptor(title: NSLocalizedString("Emergency", comment: "New promotion: form caption"))
         
         // General info section
         let infoGeneralSection = XLFormSectionDescriptor.formSection()
@@ -48,10 +48,10 @@ final class AddPromotionViewController: BaseAddItemViewController {
         titleRow.cellConfigAtConfigure["textField.placeholder"] = NSLocalizedString("Title", comment: "New promotion: title")
         titleRow.required = true
         infoGeneralSection.addFormRow(titleRow)
-        // Discount
-        let priceRow = XLFormRowDescriptor(tag: Tags.Discount.rawValue, rowType: XLFormRowDescriptorTypeDecimal, title: NSLocalizedString("Discount (%)", comment: "New promotion: discount"))
-        priceRow.required = true
-        infoGeneralSection.addFormRow(priceRow)
+//        // Discount
+//        let priceRow = XLFormRowDescriptor(tag: Tags.Discount.rawValue, rowType: XLFormRowDescriptorTypeDecimal, title: NSLocalizedString("Discount (%)", comment: "New promotion: discount"))
+//        priceRow.required = true
+//        infoGeneralSection.addFormRow(priceRow)
         
         // Info section
         let infoSection = XLFormSectionDescriptor.formSection()

@@ -88,7 +88,7 @@ struct FeedItem: CRUDObject {
             case .Event:
                 return "Event"
             case .Promotion:
-                return "Promotion"
+                return "Emergency"
             case Item:
                 return "Product"
             case Post:

@@ -53,7 +53,7 @@ struct SearchItem: CRUDObject {
             case .Event:
                 return "Event"
             case .Promotion:
-                return "Promotion"
+                return "Emergency"
             case Community:
                 return "Community"
             case People:
