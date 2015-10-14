@@ -81,6 +81,11 @@ class OrderViewController: UITableViewController {
     @IBAction func didTapCheckout(sender: AnyObject) {
         if let dropInViewController = braintree?.dropInViewControllerWithDelegate(self) {
             dropInViewController.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Cancel, target: self, action: "userDidCancelPayment:")
+            dropInViewController.navigationItem.leftBarButtonItem?.tintColor = UIColor.whiteColor()
+            dropInViewController.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.bt_colorWithBytesR(254,
+                g: 187,
+                b: 182)]
+            dropInViewController.title = NSLocalizedString("Payment Method", comment: "braintree title")
             let summaryFormat =  NSLocalizedString("%@ %@", comment: "Order: Summary format")
             dropInViewController.summaryTitle = String(format: summaryFormat, quantityString, product?.name ?? "")
             dropInViewController.displayAmount = totalLabel.text
