@@ -47,9 +47,8 @@ final class BrowseViewController: BrowseModeTabbarViewController, SearchViewCont
         ]
     }
 
-    override func searchBarShouldBeginEditing(searchBar: UISearchBar) -> Bool {
-        super.searchBarShouldBeginEditing(searchBar)
-        
+    override func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
+        super.textFieldShouldBeginEditing(textField)
         return true
     }
     
