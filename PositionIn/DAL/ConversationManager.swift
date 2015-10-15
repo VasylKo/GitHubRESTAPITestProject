@@ -15,6 +15,7 @@ import Messaging
 final class ConversationManager {
     
     internal func sendText(text: String, conversation: Conversation) {
+        conversation.lastActivityDate = NSDate()
         chat().sendTextMessage(text, to: conversation.roomId, groupChat: conversation.isGroupChat)
     }
     

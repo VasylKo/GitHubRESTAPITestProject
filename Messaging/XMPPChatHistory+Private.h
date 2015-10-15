@@ -14,11 +14,11 @@
 - (nonnull instancetype)initWithUserId:(nonnull NSString *)currentUserId stream:(nonnull XMPPStream *)stream;
 
 @property (nonatomic, copy, nonnull) NSString *currentUserId;
-@property (nonatomic, strong, nonnull) NSMutableDictionary *conversations;
+@property (nonatomic, strong, nonnull) NSMutableDictionary *directMessages;
 @property (nonatomic, strong, nonnull) NSMutableDictionary *rooms;
 @property (nonatomic, weak, nullable) XMPPStream *stream;
 
-- (void)addTextMessage:(nonnull XMPPTextMessage *)message outgoing:(BOOL)outgoing;
+- (void)addDirectMessage:(nonnull XMPPTextMessage *)message outgoing:(BOOL)outgoing;
 - (void)cleanRooms;
 - (nullable XMPPRoom *)roomWithId:(nonnull NSString *)roomId;
 @end

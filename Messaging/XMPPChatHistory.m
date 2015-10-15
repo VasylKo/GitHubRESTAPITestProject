@@ -45,7 +45,7 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
     self = [super init];
     if (self) {
         self.stream = stream;
-        self.conversations = [NSMutableDictionary new];
+        self.directMessages = [NSMutableDictionary new];
         self.currentUserId = currentUserId;
         [self cleanRooms];
     }
@@ -108,38 +108,26 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
 }
 
 - (void)joinChat:(nonnull NSString *)userId {
-    
+    if (self.directMessages[userId] == nil) {
+        self.directMessages[userId] = [NSMutableArray array];
+    }
 }
 
 - (nonnull NSArray *)messagesForChat:(nonnull NSString *)userId {
-    return @[];
+    return self.directMessages[userId] != nil ? self.directMessages[userId] : @[];
 }
 
 
-- (void)addTextMessage:(nonnull XMPPTextMessage *)message outgoing:(BOOL)outgoing {
-    /*
+- (void)addDirectMessage:(nonnull XMPPTextMessage *)message outgoing:(BOOL)outgoing {
     if (outgoing) {
         message.from = self.currentUserId;
     } else {
         message.to = self.currentUserId;
     }
-    NSString *user = outgoing ? message.to : message.from;
-    NSArray *conversationList = [self conversationList];
-    NSUInteger index = [conversationList indexOfObjectPassingTest:^BOOL(XMPPConversation *conversation, NSUInteger idx, BOOL *stop) {
-        return [conversation.participants containsObject:user];
-    }];
-    XMPPConversation *conversation = nil;
-    if (index == NSNotFound) {
-        NSString *userId = (outgoing)? message.to : message.from;
-        conversation = [self startConversation:[[XMPPConversation alloc] initWithUser:userId]];
-    } else {
-        conversation = conversationList[index];
-    }
-    conversation.lastActivityDate = [NSDate date];
-    NSMutableArray *messages = self.conversations[conversation];
+    NSString *chatId = outgoing ? message.to : message.from;
+    [self joinChat:chatId];
+    NSMutableArray *messages = self.directMessages[chatId];
     [messages addObject:message];
-    self.conversations[conversation] = messages;
-    */
 }
 
 #pragma mark - Room Delegate -
