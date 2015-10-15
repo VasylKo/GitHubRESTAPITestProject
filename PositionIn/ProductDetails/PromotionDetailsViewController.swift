@@ -123,7 +123,7 @@ extension PromotionDetailsViewController: PromotionDetailsActionConsumer {
             }
         case .SendMessage:
             if let userId = promotion?.author {
-                showChatViewController(Conversation(userId: userId))
+                showChatViewController(userId)
             }
 
         default:

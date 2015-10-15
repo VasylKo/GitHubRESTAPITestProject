@@ -143,7 +143,7 @@ extension ProductDetailsViewController: ProductDetailsActionConsumer {
             segue = .ShowSellerProfile
         case .SendMessage:
             if let userId = author?.objectId {
-                showChatViewController(Conversation(userId: userId))
+                showChatViewController(userId)
             }
             return
         default:

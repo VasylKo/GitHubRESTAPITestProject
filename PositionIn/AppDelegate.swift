@@ -75,6 +75,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             Log.error?.value(error)
             self.sidebarViewController?.executeAction(.Login)
         }
+        ConversationManager.sharedInstance().flush()
         return true
     }
 
@@ -115,8 +116,8 @@ extension AppDelegate {
         chatClient.disconnect()
         if  let user = profile {
                 chatClient = AppDelegate.chatClientInstance()
-                chatClient.nickName = user.displayName
                 chatClient.auth()
+                chatClient.delegate = ConversationManager.sharedInstance()
         }
     }
     

@@ -24,7 +24,8 @@ final class ChatController: NSObject {
         self.conversation = conversation
         super.init()
         prepareCache()
-        loadInfoForUsers(conversation.participants)
+        ConversationManager.sharedInstance().didEnterConversation(conversation)
+        loadConversationHistory(conversation)
         chatClient.addMessageListener(self)
     }
     
@@ -41,7 +42,7 @@ final class ChatController: NSObject {
         if msg.isMediaMessage() {
             //TODO: send media
         } else {
-            chatClient.sendTextMessage(msg.text!(), to: conversation.roomId, groupChat: conversation.isGroupChat)
+            ConversationManager.sharedInstance().sendText(msg.text!(), conversation: conversation)
         }
     }
     
@@ -77,6 +78,8 @@ final class ChatController: NSObject {
     }
     
     private func loadInfoForUsers(userIds: [CRUDObjectId]) {
+        
+        /*
         func avatarDownloadFuture(url: NSURL) -> Future<UIImage, NSError> {
             let promise = Promise<UIImage, NSError>()
             Shared.imageCache.fetch(URL: url, formatName: ChatController.avatarCacheFormatName, failure: { (e) -> () in
@@ -108,6 +111,7 @@ final class ChatController: NSObject {
             }
             
         }
+        */
     }
         
     private func addAvatar(image: UIImage, user: CRUDObjectId) {
@@ -135,11 +139,8 @@ final class ChatController: NSObject {
     }
     
     private func loadConversationHistory(conversation: Conversation) {
-        let fetchRequest: XMPPChatHistory -> (String) -> [AnyObject] = conversation.isGroupChat ? XMPPChatHistory.messagesForConversationWithCommunity : XMPPChatHistory.messagesForConversationWithUser
-        if let rawMessages = fetchRequest(chatClient.history)(conversation.roomId) as? [XMPPTextMessage] {
-            messages = map(rawMessages) { m in
+        messages = map(ConversationManager.sharedInstance().getHistory(conversation)) { m in
                 return JSQMessage(senderId: m.from, senderDisplayName: self.displayNameForUser(m.from), date: m.date, text: m.text)
-            }
         }
     }
     
@@ -161,8 +162,7 @@ final class ChatController: NSObject {
 
 extension ChatController: XMPPMessageListener {
     @objc func didReceiveTextMessage(text: String, from: String, to: String, date: NSDate) {
-        //TODO: fix logic
-        if let _  = (participantsInfo.filter { $0.objectId == from }).first {
+        if from == conversation.roomId {
             let message = JSQMessage(senderId: from, senderDisplayName: displayNameForUser(from), date: date, text: text)
             Queue.main.async { [weak self] in
                 if let strongSelf = self {

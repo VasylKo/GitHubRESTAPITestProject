@@ -10,12 +10,15 @@
 #import "XMPPFramework.h"
 
 @interface XMPPChatHistory()
-@property (nonatomic, copy, readwrite, nonnull) NSString *nickName;
-@property (nonatomic, copy, nonnull) NSString *currentUserId;
-@property (nonatomic, strong, nonnull) NSMutableDictionary *conversations;
-@property (nonatomic, strong, nonnull) NSMutableDictionary *rooms;
 
-- (void)didDiscoverRooms:(nonnull NSArray *)rooms stream:(nonnull XMPPStream *)stream;
+- (nonnull instancetype)initWithUserId:(nonnull NSString *)currentUserId stream:(nonnull XMPPStream *)stream;
+
+@property (nonatomic, copy, nonnull) NSString *currentUserId;
+@property (nonatomic, strong, nonnull) NSMutableDictionary *directMessages;
+@property (nonatomic, strong, nonnull) NSMutableDictionary *rooms;
+@property (nonatomic, weak, nullable) XMPPStream *stream;
+
+- (void)addDirectMessage:(nonnull XMPPTextMessage *)message outgoing:(BOOL)outgoing;
 - (void)cleanRooms;
 - (nullable XMPPRoom *)roomWithId:(nonnull NSString *)roomId;
 @end
