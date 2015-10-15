@@ -9,12 +9,27 @@
 import Foundation
 import BrightFutures
 import CleanroomLogger
-
+import PosInCore
 
 final class ConversationManager {
+    internal func didEnterConversation(conversation: Conversation) {
+        if conversation.isGroupChat == false {
+            directConversations.insert(conversation)
+        } else if mucConversations.contains(conversation) == false {
+            fatalError("Unknown group chat")
+        }
+    }
+    
+    internal func getSenderId(conversation: Conversation) -> String {
+        if conversation.isGroupChat,
+           let senderId = chat().history.senderIdForRoom(conversation.roomId) {
+            return senderId
+        }
+        return currentUserId
+    }
     
     internal func all() ->  [Conversation] {
-        return (directConversations + mucConversations).sorted {
+        return Array(directConversations.union(mucConversations)).sorted {
             return $0.lastActivityDate.compare($1.lastActivityDate) == NSComparisonResult.OrderedDescending
         }
     }
@@ -28,17 +43,19 @@ final class ConversationManager {
         currentUserId = CRUDObjectInvalidId
         directConversations = []
         mucConversations = []
+        nickName = ""
     }
     
     internal func groupConversation(roomId: String) -> Conversation? {
-        return mucConversations.filter { $0.roomId == roomId }.first
+        return Array(mucConversations).filter { $0.roomId == roomId }.first
     }
     
     internal func directConversation(roomId: String) -> Conversation? {
-        return directConversations.filter { $0.roomId == roomId }.first
+        return Array(directConversations).filter { $0.roomId == roomId }.first
     }
     
     private func loadConversations(userId: CRUDObjectId, nickName: String) {
+        self.nickName =  nickName
         currentUserId = userId
         refresh()
     }
@@ -53,10 +70,20 @@ final class ConversationManager {
     }
     
     private func populateMucConversations(conversations: [Conversation]) {
-        mucConversations = conversations
-        let chatClient = chat()
+        if chat().isAuthorized == false {
+            dispatch_delay(0.5) { [weak self] in
+                self?.populateMucConversations(conversations)
+            }
+            return
+        }
+        mucConversations = Set(conversations)
+        let host = AppConfiguration().xmppHostname
+        let jid: (String) -> String = { user in
+            return "\(user)@conference.\(host)"
+        }
+        let history = chat().history
         for conversation in conversations {
-            
+            history.joinRoom(jid(conversation.roomId), nickName: nickName)
         }
     }
     
@@ -91,8 +118,9 @@ final class ConversationManager {
         NSNotificationCenter.defaultCenter().removeObserver(userDidChangeObserver)
     }
     
-    private var directConversations: [Conversation] = []
-    private var mucConversations: [Conversation] = []
+    private var nickName: String = ""
+    private var directConversations = Set<Conversation>()
+    private var mucConversations = Set<Conversation>()
     private var currentUserId: CRUDObjectId = CRUDObjectInvalidId
     private var userDidChangeObserver: NSObjectProtocol!
 }

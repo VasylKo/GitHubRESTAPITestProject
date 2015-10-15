@@ -17,7 +17,6 @@ final class Conversation {
     
     let roomId: String
     let isGroupChat: Bool
-    let currentUserId: String = api().currentUserId() ?? CRUDObjectInvalidId
     
     convenience init(community: Community) {
         let name = community.name ?? NSLocalizedString("Unnamed community", comment: "Chat: community default")
@@ -39,4 +38,14 @@ final class Conversation {
         unreadCount = 0
         
     }
+}
+
+extension Conversation: Hashable {
+    var hashValue: Int {
+        return (roomId.hashValue << 8) + isGroupChat.hashValue
+    }
+}
+
+func == (lhs: Conversation, rhs: Conversation) -> Bool {
+    return lhs.roomId == rhs.roomId && lhs.isGroupChat == rhs.isGroupChat
 }

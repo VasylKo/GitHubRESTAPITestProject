@@ -24,6 +24,7 @@ final class ChatController: NSObject {
         self.conversation = conversation
         super.init()
         prepareCache()
+        ConversationManager.sharedInstance().didEnterConversation(conversation)
 //        loadInfoForUsers(conversation.participants)
         chatClient.addMessageListener(self)
     }

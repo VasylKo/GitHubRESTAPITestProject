@@ -21,11 +21,11 @@
 
 @interface XMPPChatHistory : NSObject
 
-- (nonnull NSArray *)conversationList;
+- (void)joinRoom:(nonnull NSString *)roomId nickName:(nonnull NSString *)nickName;
+- (nullable NSString *)senderIdForRoom:(nonnull NSString *)roomId;
+
 - (nonnull XMPPConversation *)startConversationWithUser:(nonnull NSString *)userId name:(nonnull NSString*)displayName imageURL:(nullable NSURL *)url;
 - (nonnull NSArray *)messagesForConversationWithUser:(nonnull NSString *)userId;
 - (nonnull NSArray *)messagesForConversationWithCommunity:(nonnull NSString *)roomId;
-- (void)addTextMessage:(nonnull XMPPTextMessage *)message outgoing:(BOOL)outgoing;
 
-@property (nonatomic, copy, readonly, nonnull) NSString *nickName;
 @end

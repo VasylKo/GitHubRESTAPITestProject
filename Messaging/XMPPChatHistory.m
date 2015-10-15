@@ -41,34 +41,28 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
 
 @implementation XMPPChatHistory
 
-- (nonnull instancetype)initWithUserId:(nonnull NSString *)currentUserId nick:(nonnull NSString *)nick {
+- (nonnull instancetype)initWithUserId:(nonnull NSString *)currentUserId stream:(nonnull XMPPStream *)stream {
     self = [super init];
     if (self) {
+        self.stream = stream;
         self.conversations = [NSMutableDictionary new];
         self.currentUserId = currentUserId;
-        self.nickName = nick;
         [self cleanRooms];
     }
     return self;
 }
 
-- (void)didDiscoverRooms:(nonnull NSArray *)rooms stream:(nonnull XMPPStream *)stream {
-    [self cleanRooms];
+- (void)joinRoom:(nonnull NSString *)roomId nickName:(nonnull NSString *)nickName {
+    XMPPLogInfo(@"Joining room %@ (%@)", roomId, nickName);
     dispatch_queue_t delegateQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    for (NSXMLElement *roomXML in rooms) {
-        NSString * __nonnull roomId = [[roomXML attributeForName:@"jid"] stringValue];
-        NSString *roomName = [[roomXML attributeForName:@"name"] stringValue];
-        XMPPConversation *conversation = [[XMPPConversation alloc] initWithCommunity:roomId name:roomName imageURL:nil];
-        XMPPJID  * roomJid = [XMPPJID jidWithString:roomId];
-        XMPPRoom *room = [[XMPPRoom alloc] initWithRoomStorage:[XMPPRoomMemoryStorage new] jid:roomJid];
-        [room activate:stream];
-        [room addDelegate:self delegateQueue:delegateQueue];
-#warning check if already exist
-        self.rooms[conversation] = room;
-        NSXMLElement *history = [NSXMLElement elementWithName:@"history"];
-        [history addAttributeWithName:@"maxstanzas" intValue:20];
-        [room joinRoomUsingNickname:self.nickName history:history];
-    }
+    XMPPJID  * roomJid = [XMPPJID jidWithString:roomId];
+    XMPPRoom *room = [[XMPPRoom alloc] initWithRoomStorage:[XMPPRoomMemoryStorage new] jid:roomJid];
+    [room activate:self.stream];
+    [room addDelegate:self delegateQueue:delegateQueue];
+    self.rooms[roomJid.user] = room;
+    NSXMLElement *history = [NSXMLElement elementWithName:@"history"];
+    [history addAttributeWithName:@"maxstanzas" intValue:20];
+    [room joinRoomUsingNickname:nickName history:history];
 }
 
 - (void)cleanRooms {
@@ -83,10 +77,15 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
     [self cleanRooms];
 }
 
-
-- (NSArray *)conversationList {
-    return  [[self.conversations allKeys] arrayByAddingObjectsFromArray:[self.rooms allKeys]];
+- (nullable XMPPRoom *)roomWithId:(nonnull NSString *)roomId {
+    return  self.rooms[roomId];
 }
+
+
+- (nullable NSString *)senderIdForRoom:(nonnull NSString *)roomId {
+    return [self roomWithId:roomId].myRoomJID.full;
+}
+
 
 - (nonnull XMPPConversation *)startConversationWithUser:(nonnull NSString *)userId name:(nonnull NSString*)displayName imageURL:(nullable NSURL *)url {
     XMPPConversation *conversation = [[XMPPConversation alloc] initWithUser:userId name:displayName imageURL:url];
@@ -128,12 +127,9 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
     return @[];
 }
 
-- (nullable XMPPRoom *)roomWithId:(nonnull NSString *)roomId {
-    XMPPConversation *conversation = [[XMPPConversation alloc] initWithCommunity:roomId];
-    return  self.rooms[conversation];
-}
 
 - (void)addTextMessage:(nonnull XMPPTextMessage *)message outgoing:(BOOL)outgoing {
+    /*
     if (outgoing) {
         message.from = self.currentUserId;
     } else {
@@ -155,7 +151,7 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
     NSMutableArray *messages = self.conversations[conversation];
     [messages addObject:message];
     self.conversations[conversation] = messages;
-    
+    */
 }
 
 #pragma mark - Room Delegate -

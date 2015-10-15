@@ -14,7 +14,7 @@ final class ConversationViewController: JSQMessagesViewController {
     class func conversationController(conversation: Conversation) -> ConversationViewController {
         let instance = ConversationViewController()
         instance.senderDisplayName = NSLocalizedString("Me", comment: "Chat: Current user name")
-        instance.senderId = conversation.currentUserId
+        instance.senderId = ConversationManager.sharedInstance().getSenderId(conversation)
         instance.chatController = ChatController(conversation: conversation)
         instance.chatController.delegate = instance
         return instance
