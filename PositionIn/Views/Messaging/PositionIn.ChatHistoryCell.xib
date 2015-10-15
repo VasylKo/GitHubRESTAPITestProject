@@ -13,8 +13,8 @@
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="O2G-54-lF9" id="hGU-Hz-3X8">
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Wizard of the Coast" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gm5-hf-zhP">
-                        <rect key="frame" x="52" y="16" width="167" height="20"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="200" text="Wizard of the Coast" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gm5-hf-zhP">
+                        <rect key="frame" x="52" y="16" width="165" height="20"/>
                         <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -22,7 +22,7 @@
                             <userDefinedRuntimeAttribute type="string" keyPath="text" value=""/>
                         </userDefinedRuntimeAttributes>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="270" text="Yesterday" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SUJ-Dx-J12">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="270" horizontalCompressionResistancePriority="800" text="Yesterday" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SUJ-Dx-J12">
                         <rect key="frame" x="219" y="18" width="63" height="17"/>
                         <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -32,7 +32,7 @@
                         </userDefinedRuntimeAttributes>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="260" verticalHuggingPriority="260" text="Edward RyanEdward Ryan Edward RyanEdward Rya " lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XAD-5v-fHL">
-                        <rect key="frame" x="52" y="42" width="230" height="41"/>
+                        <rect key="frame" x="52" y="42" width="230" height="40"/>
                         <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                         <color key="textColor" red="0.61176470589999998" green="0.61176470589999998" blue="0.61176470589999998" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -40,10 +40,6 @@
                             <userDefinedRuntimeAttribute type="string" keyPath="text" value=""/>
                         </userDefinedRuntimeAttributes>
                     </label>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zCU-vb-lNZ">
-                        <rect key="frame" x="-84" y="94" width="68" height="97"/>
-                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WUO-HG-vnr" customClass="AvatarView" customModule="PositionIn" customModuleProvider="target">
                         <rect key="frame" x="10" y="10" width="32" height="32"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -59,7 +55,7 @@
                     <constraint firstItem="WUO-HG-vnr" firstAttribute="top" secondItem="hGU-Hz-3X8" secondAttribute="top" constant="10" id="LH7-o5-dyU"/>
                     <constraint firstAttribute="trailing" secondItem="XAD-5v-fHL" secondAttribute="trailing" constant="5" id="Lb7-22-409"/>
                     <constraint firstItem="XAD-5v-fHL" firstAttribute="top" secondItem="WUO-HG-vnr" secondAttribute="bottom" id="NZ2-Jq-Isk"/>
-                    <constraint firstItem="SUJ-Dx-J12" firstAttribute="leading" secondItem="Gm5-hf-zhP" secondAttribute="trailing" id="PnS-vO-uuH"/>
+                    <constraint firstItem="SUJ-Dx-J12" firstAttribute="leading" secondItem="Gm5-hf-zhP" secondAttribute="trailing" constant="2" id="PnS-vO-uuH"/>
                     <constraint firstItem="SUJ-Dx-J12" firstAttribute="centerY" secondItem="Gm5-hf-zhP" secondAttribute="centerY" id="Z5U-L3-9si"/>
                     <constraint firstItem="SUJ-Dx-J12" firstAttribute="trailing" secondItem="XAD-5v-fHL" secondAttribute="trailing" id="bw9-HU-1FD"/>
                     <constraint firstAttribute="bottom" secondItem="XAD-5v-fHL" secondAttribute="bottom" constant="5" id="n1v-Pd-Zgv"/>
