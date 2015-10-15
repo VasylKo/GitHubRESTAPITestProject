@@ -74,7 +74,8 @@ final class AddProductViewController: BaseAddItemViewController {
         quantityRow.cellConfigAtConfigure["stepControl.minimumValue"] = 1
         quantityRow.cellConfigAtConfigure["stepControl.maximumValue"] = 100
         quantityRow.cellConfigAtConfigure["stepControl.stepValue"] = 1
-        quantityRow.cellConfigAtConfigure["stepControl.tintColor"] = UIColor.bt_colorWithBytesR(237, g: 27, b: 46)
+        quantityRow.cellConfigAtConfigure["stepControl.tintColor"] = UIScheme.mainThemeColor
+        quantityRow.cellConfigAtConfigure["tintColor"] = UIScheme.mainThemeColor
         infoSection.addFormRow(quantityRow)
         
         //Photo section
@@ -83,7 +84,6 @@ final class AddProductViewController: BaseAddItemViewController {
         //Photo row
         let photoRow = photoRowDescriptor(Tags.Photo.rawValue)
         photoSection.addFormRow(photoRow)
-        
         
         //Dates section
         let datesSection = XLFormSectionDescriptor.formSectionWithTitle(NSLocalizedString("Pick-up Availability (Optional)", comment: "New product: dates section header"))

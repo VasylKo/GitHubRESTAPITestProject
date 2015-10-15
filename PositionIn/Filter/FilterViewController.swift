@@ -140,6 +140,7 @@ final class FilterViewController: XLFormViewController {
         categories.map { (category: ItemCategory) -> () in
             let categoryRow = XLFormRowDescriptor(tag: category.displayString(), rowType: XLFormRowDescriptorTypeBooleanSwitch, title: category.displayString())
             categoryRow.cellConfigAtConfigure["imageView.image"] = category.image()
+            categoryRow.cellConfigAtConfigure["imageView.tintColor"] = UIScheme.mainThemeColor
             categoryRow.cellConfig.setObject(UIColor.bt_colorWithBytesR(237, g: 27, b: 46), forKey: "switchControl.onTintColor")
             let value = categoryValue(category)
             categoryRow.value = NSNumber(bool: value)
