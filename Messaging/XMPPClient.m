@@ -100,10 +100,6 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
 }
 
 
-- (nullable NSString *)senderIdForRoom:(nonnull NSString *)roomId {
-    return [self roomWithId:roomId].myRoomJID.full;
-}
-
 - (nonnull NSArray *)messagesForRoom:(nonnull NSString *)roomId {
     XMPPRoom *room = [self roomWithId:roomId];
     if (room) {
@@ -112,10 +108,10 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
         for (XMPPRoomMessageMemoryStorageObject *storedMessage in [storage messages]) {
             XMPPMessage *msg = storedMessage.message;
             if (msg.from == nil) {
-                [msg addAttributeWithName:@"from" stringValue:[room.myRoomJID full]];
+                [msg addAttributeWithName:@"from" stringValue:[room.myRoomJID resource]];
             }
             if (msg.to == nil) {
-                [msg addAttributeWithName:@"to" stringValue:[room.myRoomJID full]];
+                [msg addAttributeWithName:@"to" stringValue:[room.myRoomJID resource]];
             }
             XMPPTextMessage *textMsg = [[XMPPTextMessage alloc] initWithMessage:msg];
             [messages addObject:textMsg];

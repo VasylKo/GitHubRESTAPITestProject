@@ -36,7 +36,6 @@
 
 
 - (void)joinRoom:(nonnull NSString *)roomId nickName:(nonnull NSString *)nickName;
-- (nullable NSString *)senderIdForRoom:(nonnull NSString *)roomId;
 - (nonnull NSArray *)messagesForRoom:(nonnull NSString *)roomId;
 
 - (void)joinChat:(nonnull NSString *)userId;
