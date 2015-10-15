@@ -8,7 +8,6 @@
 
 @import Foundation;
 
-@class XMPPChatHistory;
 @protocol XMPPCredentialsProvider;
 @protocol XMPPClientDelegate;
 @protocol XMPPMessageListener;
@@ -33,8 +32,17 @@
 
 @property (nonatomic, copy, nullable) NSString *nickName;
 
-@property (nonnull, readonly, strong) XMPPChatHistory *history;
 @property (nullable, nonatomic, weak) id<XMPPClientDelegate> delegate;
+
+
+- (void)joinRoom:(nonnull NSString *)roomId nickName:(nonnull NSString *)nickName;
+- (nullable NSString *)senderIdForRoom:(nonnull NSString *)roomId;
+- (nonnull NSArray *)messagesForRoom:(nonnull NSString *)roomId;
+
+- (void)joinChat:(nonnull NSString *)userId;
+- (nonnull NSArray *)messagesForChat:(nonnull NSString *)userId;
+
+
 @end
 
 
@@ -47,6 +55,7 @@
 
 @protocol XMPPMessageListener <NSObject>
 - (void)didReceiveTextMessage:(nonnull NSString *)text from:(nonnull NSString *)from to:(nonnull NSString *)to date:(nonnull NSDate *)date;
+- (void)didReceiveGroupTextMessage:(nonnull NSString *)roomId text:(nonnull NSString *)text from:(nonnull NSString *)from to:(nonnull NSString *)to date:(nonnull NSDate *)date;
 @end
 
 
