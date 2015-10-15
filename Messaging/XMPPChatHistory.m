@@ -8,7 +8,6 @@
 
 #import "XMPPChatHistory+Private.h"
 #import "XMPPFramework.h"
-#import "XMPPConversation+Private.h"
 
 static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
 
@@ -86,32 +85,12 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
     return [self roomWithId:roomId].myRoomJID.full;
 }
 
-
-- (nonnull XMPPConversation *)startConversationWithUser:(nonnull NSString *)userId name:(nonnull NSString*)displayName imageURL:(nullable NSURL *)url {
-    XMPPConversation *conversation = [[XMPPConversation alloc] initWithUser:userId name:displayName imageURL:url];
-    return [self startConversation:conversation];
-}
-
-- (nonnull XMPPConversation *)startConversation:(nonnull XMPPConversation *)conversation {
-    if (self.conversations[conversation] == nil) {
-        self.conversations[conversation] = [NSMutableArray new];
-    }
-    return conversation;
-}
-
-
-- (nonnull NSArray *)messagesForConversationWithUser:(nonnull NSString *)userId {
-    XMPPConversation *conversation = [[XMPPConversation alloc] initWithUser:userId];
-    return self.conversations[conversation] ?: @[];
-}
-
-- (nonnull NSArray *)messagesForConversationWithCommunity:(nonnull NSString *)roomId {
+- (nonnull NSArray *)messagesForRoom:(nonnull NSString *)roomId {
     XMPPRoom *room = [self roomWithId:roomId];
     if (room) {
         XMPPRoomMemoryStorage *storage = room.xmppRoomStorage;
         NSMutableArray *messages = [NSMutableArray new];
         for (XMPPRoomMessageMemoryStorageObject *storedMessage in [storage messages]) {
-#warning Fix saved messages
             XMPPMessage *msg = storedMessage.message;
             if (msg.from == nil) {
                 [msg addAttributeWithName:@"from" stringValue:[room.myRoomJID full]];
@@ -124,6 +103,14 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
         }
         return messages;
     }
+    return @[];
+}
+
+- (void)joinChat:(nonnull NSString *)userId {
+    
+}
+
+- (nonnull NSArray *)messagesForChat:(nonnull NSString *)userId {
     return @[];
 }
 

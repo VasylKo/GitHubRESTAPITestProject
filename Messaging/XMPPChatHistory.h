@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @class XMPPMessage;
-@class XMPPConversation;
+
 
 @interface XMPPTextMessage : NSObject
 - (nonnull instancetype)initWithMessage:(nonnull XMPPMessage *)message;
@@ -23,9 +23,11 @@
 
 - (void)joinRoom:(nonnull NSString *)roomId nickName:(nonnull NSString *)nickName;
 - (nullable NSString *)senderIdForRoom:(nonnull NSString *)roomId;
+- (nonnull NSArray *)messagesForRoom:(nonnull NSString *)roomId;
 
-- (nonnull XMPPConversation *)startConversationWithUser:(nonnull NSString *)userId name:(nonnull NSString*)displayName imageURL:(nullable NSURL *)url;
-- (nonnull NSArray *)messagesForConversationWithUser:(nonnull NSString *)userId;
-- (nonnull NSArray *)messagesForConversationWithCommunity:(nonnull NSString *)roomId;
+- (void)joinChat:(nonnull NSString *)userId;
+- (nonnull NSArray *)messagesForChat:(nonnull NSString *)userId;
+
+
 
 @end

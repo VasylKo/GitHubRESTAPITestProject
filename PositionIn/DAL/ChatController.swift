@@ -25,7 +25,7 @@ final class ChatController: NSObject {
         super.init()
         prepareCache()
         ConversationManager.sharedInstance().didEnterConversation(conversation)
-//        loadInfoForUsers(conversation.participants)
+        loadConversationHistory(conversation)
         chatClient.addMessageListener(self)
     }
     
@@ -78,6 +78,8 @@ final class ChatController: NSObject {
     }
     
     private func loadInfoForUsers(userIds: [CRUDObjectId]) {
+        
+        /*
         func avatarDownloadFuture(url: NSURL) -> Future<UIImage, NSError> {
             let promise = Promise<UIImage, NSError>()
             Shared.imageCache.fetch(URL: url, formatName: ChatController.avatarCacheFormatName, failure: { (e) -> () in
@@ -109,6 +111,7 @@ final class ChatController: NSObject {
             }
             
         }
+        */
     }
         
     private func addAvatar(image: UIImage, user: CRUDObjectId) {
@@ -136,11 +139,8 @@ final class ChatController: NSObject {
     }
     
     private func loadConversationHistory(conversation: Conversation) {
-        let fetchRequest: XMPPChatHistory -> (String) -> [AnyObject] = conversation.isGroupChat ? XMPPChatHistory.messagesForConversationWithCommunity : XMPPChatHistory.messagesForConversationWithUser
-        if let rawMessages = fetchRequest(chatClient.history)(conversation.roomId) as? [XMPPTextMessage] {
-            messages = map(rawMessages) { m in
+        messages = map(ConversationManager.sharedInstance().getHistory(conversation)) { m in
                 return JSQMessage(senderId: m.from, senderDisplayName: self.displayNameForUser(m.from), date: m.date, text: m.text)
-            }
         }
     }
     

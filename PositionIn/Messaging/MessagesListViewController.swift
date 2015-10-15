@@ -25,7 +25,7 @@ final class MessagesListViewController: BesideMenuViewController {
     }
 
     func reloadData() {
-        dataSource.setItems(ConversationManager.sharedInstance().all())
+        dataSource.setItems(ConversationManager.sharedInstance().conversations())
         tableView.reloadData()
     }
     

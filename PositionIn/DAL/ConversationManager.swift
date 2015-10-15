@@ -10,6 +10,7 @@ import Foundation
 import BrightFutures
 import CleanroomLogger
 import PosInCore
+import Messaging
 
 final class ConversationManager {
     internal func didEnterConversation(conversation: Conversation) {
@@ -17,6 +18,14 @@ final class ConversationManager {
             directConversations.insert(conversation)
         } else if mucConversations.contains(conversation) == false {
             fatalError("Unknown group chat")
+        }
+    }
+    
+    internal func getHistory(conversation: Conversation) -> [XMPPTextMessage] {
+        if conversation.isGroupChat {
+            return chat().history.messagesForRoom(conversation.roomId) as! [XMPPTextMessage]
+        } else {
+            return chat().history.messagesForChat(conversation.roomId)as! [XMPPTextMessage]
         }
     }
     
@@ -28,7 +37,7 @@ final class ConversationManager {
         return currentUserId
     }
     
-    internal func all() ->  [Conversation] {
+    internal func conversations() ->  [Conversation] {
         return Array(directConversations.union(mucConversations)).sorted {
             return $0.lastActivityDate.compare($1.lastActivityDate) == NSComparisonResult.OrderedDescending
         }
