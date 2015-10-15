@@ -474,8 +474,9 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="productClockAvailability" translatesAutoresizingMaskIntoConstraints="NO" id="LNb-Ma-yB2">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TabbarForYou" translatesAutoresizingMaskIntoConstraints="NO" id="LNb-Ma-yB2">
                                                     <rect key="frame" x="26" y="11" width="20" height="20"/>
+                                                    <color key="tintColor" red="0.92941176469999998" green="0.1058823529" blue="0.18039215689999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20" id="7MC-Nn-2WB"/>
                                                         <constraint firstAttribute="width" constant="20" id="sMa-bd-OSY"/>
@@ -512,6 +513,7 @@
                                                 </label>
                                                 <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="lLd-ES-7ov">
                                                     <rect key="frame" x="496" y="7" width="94" height="29"/>
+                                                    <color key="tintColor" red="0.92941176469999998" green="0.1058823529" blue="0.18039215689999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <connections>
                                                         <action selector="quantityStepperDidChange:" destination="9PQ-zJ-hEA" eventType="valueChanged" id="8Tk-Cc-9h8"/>
                                                     </connections>
@@ -1091,8 +1093,8 @@
     </scenes>
     <resources>
         <image name="SplashImage" width="375" height="667"/>
+        <image name="TabbarForYou" width="32" height="32"/>
         <image name="communityAddNewCommunity" width="22" height="22"/>
-        <image name="productClockAvailability" width="22" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="UGm-BP-OPQ"/>
