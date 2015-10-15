@@ -36,10 +36,6 @@ final class ConversationManager: NSObject {
     }
     
     internal func getSenderId(conversation: Conversation) -> String {
-        if conversation.isGroupChat,
-           let senderId = chat().senderIdForRoom(conversation.roomId) {
-            return senderId
-        }
         return currentUserId
     }
     
@@ -67,11 +63,9 @@ final class ConversationManager: NSObject {
         currentUserId = CRUDObjectInvalidId
         directConversations = []
         mucConversations = []
-        nickName = ""
     }
     
-    private func loadConversations(userId: CRUDObjectId, nickName: String) {
-        self.nickName =  nickName
+    private func loadConversations(userId: CRUDObjectId) {
         currentUserId = userId
         refresh()
     }
@@ -99,7 +93,7 @@ final class ConversationManager: NSObject {
         }
         let chatClient = chat()
         for conversation in conversations {
-            chatClient.joinRoom(jid(conversation.roomId), nickName: nickName)
+            chatClient.joinRoom(jid(conversation.roomId), nickName: currentUserId)
         }
     }
     
@@ -118,7 +112,7 @@ final class ConversationManager: NSObject {
                 if let manager = self {
                     manager.flush()
                     map(notification.object as? UserProfile) {
-                        manager.loadConversations($0.objectId, nickName: $0.displayName)
+                        manager.loadConversations($0.objectId)
                     }
                 }
             }
@@ -135,7 +129,7 @@ final class ConversationManager: NSObject {
         NSNotificationCenter.defaultCenter().removeObserver(userDidChangeObserver)
     }
     
-    private var nickName: String = ""
+
     private var directConversations = Set<Conversation>()
     private var mucConversations = Set<Conversation>()
     private var currentUserId: CRUDObjectId = CRUDObjectInvalidId
