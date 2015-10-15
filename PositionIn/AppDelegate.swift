@@ -65,6 +65,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         setupMaps()
         api.defaultErrorHandler = UIErrorHandler()
+        ConversationManager.sharedInstance().flush()
         if SearchFilter.isCustomLocationSet == false {
            SearchFilter.updateCurrentLocation()
         }
@@ -74,7 +75,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             Log.error?.value(error)
             self.sidebarViewController?.executeAction(.Login)
         }
-        ConversationManager.sharedInstance().flush()
         return true
     }
 

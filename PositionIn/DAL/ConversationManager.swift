@@ -23,21 +23,21 @@ final class ConversationManager: NSObject {
         if conversation.isGroupChat == false {
             directConversations.insert(conversation)
         } else if mucConversations.contains(conversation) == false {
-            fatalError("Unknown group chat")
+            Log.error?.message("Unknown group chat \(conversation.roomId)")
         }
     }
     
     internal func getHistory(conversation: Conversation) -> [XMPPTextMessage] {
         if conversation.isGroupChat {
-            return chat().history.messagesForRoom(conversation.roomId) as! [XMPPTextMessage]
+            return chat().messagesForRoom(conversation.roomId) as! [XMPPTextMessage]
         } else {
-            return chat().history.messagesForChat(conversation.roomId)as! [XMPPTextMessage]
+            return chat().messagesForChat(conversation.roomId)as! [XMPPTextMessage]
         }
     }
     
     internal func getSenderId(conversation: Conversation) -> String {
         if conversation.isGroupChat,
-           let senderId = chat().history.senderIdForRoom(conversation.roomId) {
+           let senderId = chat().senderIdForRoom(conversation.roomId) {
             return senderId
         }
         return currentUserId
@@ -54,12 +54,6 @@ final class ConversationManager: NSObject {
         refreshMucConversations()
     }
     
-    internal func flush() {
-        currentUserId = CRUDObjectInvalidId
-        directConversations = []
-        mucConversations = []
-        nickName = ""
-    }
     
     internal func groupConversation(roomId: String) -> Conversation? {
         return Array(mucConversations).filter { $0.roomId == roomId }.first
@@ -67,6 +61,13 @@ final class ConversationManager: NSObject {
     
     internal func directConversation(roomId: String) -> Conversation? {
         return Array(directConversations).filter { $0.roomId == roomId }.first
+    }
+    
+    func flush() {
+        currentUserId = CRUDObjectInvalidId
+        directConversations = []
+        mucConversations = []
+        nickName = ""
     }
     
     private func loadConversations(userId: CRUDObjectId, nickName: String) {
@@ -96,9 +97,9 @@ final class ConversationManager: NSObject {
         let jid: (String) -> String = { user in
             return "\(user)@conference.\(host)"
         }
-        let history = chat().history
+        let chatClient = chat()
         for conversation in conversations {
-            history.joinRoom(jid(conversation.roomId), nickName: nickName)
+            chatClient.joinRoom(jid(conversation.roomId), nickName: nickName)
         }
     }
     
@@ -152,12 +153,16 @@ extension ConversationManager: XMPPClientDelegate {
                     self?.directConversations.insert(Conversation(user: info))
                 }
             }
-            //add
         }
     }
     
     func chatClient(client: XMPPClient, didUpdateGroupChat roomId: String) {
-        
+        if let conversation = (Array(mucConversations).filter { $0.roomId == roomId }).first {
+            conversation.lastActivityDate = NSDate()
+        } else {
+             Log.error?.message("Unknown group chat \(roomId)")
+        }
+
     }
    
 }
