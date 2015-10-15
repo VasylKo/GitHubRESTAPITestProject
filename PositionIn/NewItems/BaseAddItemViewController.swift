@@ -53,6 +53,7 @@ class BaseAddItemViewController: XLFormViewController {
     func locationRowDescriptor(tag: String, withCurrentCoordinate: Bool = true) -> XLFormRowDescriptor {
         let locationRow = XLFormRowDescriptor(tag: tag, rowType: XLFormRowDescriptorTypeSelectorPush, title: NSLocalizedString("Location", comment: "New item: location"))
         locationRow.action.formSegueClass = NSClassFromString("UIStoryboardPushSegue")
+
         locationRow.action.viewControllerClass = LocationSelectorViewController.self
         locationRow.valueTransformer = CLLocationValueTrasformer.self
         locationRow.value = defaultLocation
@@ -77,6 +78,7 @@ class BaseAddItemViewController: XLFormViewController {
         categoryRow.selectorTitle = categoryCaption
         let options: [XLFormOptionObject] = ItemCategory.all().map { XLFormOptionsObject.formOptionsObjectWithItemCategory($0) }
         categoryRow.value = options.first
+        categoryRow.cellConfigAtConfigure["tintColor"] = UIScheme.mainThemeColor
         categoryRow.selectorOptions = options
         categoryRow.onChangeBlock = {[unowned categoryRow]   oldValue, newValue, descriptor in
             if let newValue = newValue as? NSNull {
@@ -108,6 +110,7 @@ class BaseAddItemViewController: XLFormViewController {
             Log.debug?.value(response.items)
             let options = [emptyOption] + response.items.map { XLFormOptionsObject.formOptionsObjectWithCommunity($0) }
             communityRow?.selectorOptions = options
+            communityRow?.cellConfigAtConfigure["tintColor"] = UIScheme.mainThemeColor
             if  let preselectedCommunity = self?.preselectedCommunity {
                 let filteredOptions = options.filter { (option: XLFormOptionsObject!) -> Bool in
                     if let communityId = option.communityId where communityId == preselectedCommunity {
@@ -127,6 +130,7 @@ class BaseAddItemViewController: XLFormViewController {
     
     func termsRowDescriptor(tag: String) -> XLFormRowDescriptor {
         let row = XLFormRowDescriptor(tag: tag, rowType: XLFormRowDescriptorTypeTextView, title: NSLocalizedString("Terms & Information", comment: "New item: Terms & Information"))
+        row.cellConfigAtConfigure["tintColor"] = UIScheme.mainThemeColor
         return row
     }
     

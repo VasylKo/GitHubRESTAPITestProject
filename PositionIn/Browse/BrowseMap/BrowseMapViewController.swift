@@ -76,40 +76,40 @@ final class BrowseMapViewController: UIViewController, BrowseActionProducer, Bro
 }
 
 extension ItemCategory {
-    
     func displayImage() -> UIImage? {
         let image: UIImage?
         switch self {
-        case .ApparelAccessories:
+        case .AnimalsPetSupplies:
             image =  UIImage(named: "category_blood_map")
-        case .ArtsEntertainment:
+        case .ApparelAccessories:
             image =  UIImage(named: "construction_map")
+        case .ArtsEntertainment:
+            image =  UIImage(named: "ProductMarker")
         case .BabyToddler:
-            image =  UIImage(named: "ProductMarker")
-        case .BusinessIndustrial:
             image =  UIImage(named: "category_electronics_map")
-        case .CamerasOptics:
+        case .BusinessIndustrial:
             image =  UIImage(named: "ProductMarker")
-        case .Electronics:
+        case .CamerasOptics:
             image =  UIImage(named: "category_food_map")
-        case .Food:
+        case .Electronics:
             image =  UIImage(named: "category_hardware_map")
-        case .Furniture:
+        case .Food:
             image =  UIImage(named: "category_health_beauty_map")
+        case .Furniture:
+            image =  UIImage(named: "ProductMarker")
         case .Hardware:
             image =  UIImage(named: "ProductMarker")
         case .HealthBeauty:
-            image =  UIImage(named: "ProductMarker")
-        case .HomeGarden:
             image =  UIImage(named: "category_religious_ceremonial_map")
-        case .LuggageBags:
+        case .HomeGarden:
             image =  UIImage(named: "category_vehicles_parts_map")
-        default:
+        case .LuggageBags:
             image =  UIImage(named: "category_water_map")
+        default:
+            image = nil
         }
         return image
     }
-    
 }
 
 

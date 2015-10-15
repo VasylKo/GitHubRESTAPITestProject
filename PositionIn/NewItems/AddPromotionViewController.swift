@@ -82,10 +82,12 @@ final class AddPromotionViewController: BaseAddItemViewController {
         //Start date
         let startDate = XLFormRowDescriptor(tag: Tags.StartDate.rawValue, rowType: XLFormRowDescriptorTypeDateTimeInline, title: NSLocalizedString("Start date", comment: "New promotion: Start date"))
         startDate.value = defaultStartDate
+        startDate.cellConfigAtConfigure["tintColor"] = UIScheme.mainThemeColor
         datesSection.addFormRow(startDate)
         //End date
         let endDate = XLFormRowDescriptor(tag: Tags.EndDate.rawValue, rowType: XLFormRowDescriptorTypeDateTimeInline, title: NSLocalizedString("End date", comment: "New promotion: End date"))
         endDate.value = defaultEndDate
+        endDate.cellConfigAtConfigure["tintColor"] = UIScheme.mainThemeColor
         datesSection.addFormRow(endDate)
         
         //Description section
@@ -93,13 +95,13 @@ final class AddPromotionViewController: BaseAddItemViewController {
         form.addFormSection(descriptionSection)
         // Description
         let descriptionRow = XLFormRowDescriptor(tag: Tags.Description.rawValue, rowType: XLFormRowDescriptorTypeTextView, title: NSLocalizedString("Description", comment: "New promotion: description"))
+        descriptionRow.cellConfigAtConfigure["tintColor"] = UIScheme.mainThemeColor
         descriptionSection.addFormRow(descriptionRow)
 
         //Terms
         let termsSection = XLFormSectionDescriptor.formSection()
         form.addFormSection(termsSection)
         termsSection.addFormRow(termsRowDescriptor(Tags.Terms.rawValue))
-
         
         self.form = form
     }

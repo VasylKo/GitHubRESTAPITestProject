@@ -82,6 +82,7 @@ final class EditCommunityViewController: BaseAddItemViewController {
     
     lazy private var privateRow: XLFormRowDescriptor = {
         let row = XLFormRowDescriptor(tag: Tags.Private.rawValue, rowType: XLFormRowDescriptorTypeBooleanSwitch, title: NSLocalizedString("Private", comment: "New community: private"))
+        row.cellConfig.setObject(UIColor.bt_colorWithBytesR(237, g: 27, b: 46), forKey: "switchControl.onTintColor")
         row.value = NSNumber(bool: false)
         return row
     }()
