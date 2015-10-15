@@ -113,10 +113,12 @@ extension AppDelegate {
     
     func currentUserDidChange(profile: UserProfile?) {
         chatClient.disconnect()
-        if  let user = profile {
-                chatClient = AppDelegate.chatClientInstance()
-                chatClient.auth()
-                chatClient.delegate = ConversationManager.sharedInstance()
+        if let user = profile {
+            let conversationManager = ConversationManager.sharedInstance()
+            conversationManager.updateUserId(user.objectId)
+            chatClient = AppDelegate.chatClientInstance()
+            chatClient.delegate = conversationManager
+            chatClient.auth()
         }
     }
     

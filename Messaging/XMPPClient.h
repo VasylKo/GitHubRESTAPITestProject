@@ -35,7 +35,7 @@
 @property (nullable, nonatomic, weak) id<XMPPClientDelegate> delegate;
 
 
-- (void)joinRoom:(nonnull NSString *)roomId nickName:(nonnull NSString *)nickName;
+- (void)joinRoom:(nonnull NSString *)roomJID nickName:(nonnull NSString *)nickName;
 - (nonnull NSArray *)messagesForRoom:(nonnull NSString *)roomId;
 
 - (void)joinChat:(nonnull NSString *)userId;
@@ -49,6 +49,7 @@
 
 - (void)chatClient:(nonnull XMPPClient *) client didUpdateDirectChat:(nonnull NSString *)userId;
 - (void)chatClient:(nonnull XMPPClient *) client didUpdateGroupChat:(nonnull NSString *)roomId;
+- (void)chatClientDidAuthorize:(nonnull XMPPClient *) client;
 
 @end
 

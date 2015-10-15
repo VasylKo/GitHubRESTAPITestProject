@@ -14,6 +14,12 @@ import Messaging
 
 final class ConversationManager: NSObject {
     
+    internal func updateUserId(objectId: CRUDObjectId) {
+        flush()
+        currentUserId = objectId
+        refresh()
+    }
+    
     internal func sendText(text: String, conversation: Conversation) {
         conversation.lastActivityDate = NSDate()
         chat().sendTextMessage(text, to: conversation.roomId, groupChat: conversation.isGroupChat)
@@ -65,11 +71,6 @@ final class ConversationManager: NSObject {
         mucConversations = []
     }
     
-    private func loadConversations(userId: CRUDObjectId) {
-        currentUserId = userId
-        refresh()
-    }
-    
     private func refreshDirectConversations() {
     }
     
@@ -104,36 +105,10 @@ final class ConversationManager: NSObject {
         return Shared.instance
     }
     
-    override init() {
-        super.init()
-        let userChangeBlock: NSNotification! -> Void = { [weak self] notification in
-            
-            dispatch_async(dispatch_get_main_queue()) {
-                if let manager = self {
-                    manager.flush()
-                    map(notification.object as? UserProfile) {
-                        manager.loadConversations($0.objectId)
-                    }
-                }
-            }
-        }
-        userDidChangeObserver = NSNotificationCenter.defaultCenter().addObserverForName(
-            UserProfile.CurrentUserDidChangeNotification,
-            object: nil,
-            queue: nil,
-            usingBlock: userChangeBlock)
-    }
-    
-    
-    deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(userDidChangeObserver)
-    }
-    
-
     private var directConversations = Set<Conversation>()
     private var mucConversations = Set<Conversation>()
     private var currentUserId: CRUDObjectId = CRUDObjectInvalidId
-    private var userDidChangeObserver: NSObjectProtocol!
+
 }
 
 
@@ -156,7 +131,10 @@ extension ConversationManager: XMPPClientDelegate {
         } else {
              Log.error?.message("Unknown group chat \(roomId)")
         }
-
+    }
+    
+    func chatClientDidAuthorize(client: XMPPClient) {
+        refresh()
     }
    
 }
