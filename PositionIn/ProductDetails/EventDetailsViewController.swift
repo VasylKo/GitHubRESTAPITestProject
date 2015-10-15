@@ -132,7 +132,7 @@ extension EventDetailsViewController: EventDetailsActionConsumer {
             }
         case .SendMessage:
             if let userId = event?.author {
-                showChatViewController(Conversation(userId: userId))
+                showChatViewController(userId)
             }
         default:
             Log.warning?.message("Unhandled action: \(action)")

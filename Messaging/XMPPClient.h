@@ -10,27 +10,16 @@
 
 @class XMPPChatHistory;
 @protocol XMPPCredentialsProvider;
-
-@interface XMPPClientConfiguration : NSObject
-+ (nonnull instancetype)configurationWith:(nonnull NSString *)hostName port:(NSInteger)port;
-+ (nonnull instancetype)defaultConfiguration;
-
-@property (nonnull, nonatomic, copy) NSString *hostName;
-@property (nonatomic, assign) NSInteger port;
-@end
-
+@protocol XMPPClientDelegate;
+@protocol XMPPMessageListener;
 @class XMPPProcess;
-
-@protocol XMPPMessageListener <NSObject>
-- (void)didReceiveTextMessage:(nonnull NSString *)text from:(nonnull NSString *)from to:(nonnull NSString *)to date:(nonnull NSDate *)date;
-@end
+@class XMPPClientConfiguration;
 
 @interface XMPPClient : NSObject
 
 - (nonnull instancetype)initWithConfiguration:(nonnull XMPPClientConfiguration  * )configuration credentialsProvider:(nonnull id<XMPPCredentialsProvider>)credentialsProvider;
 
 - (void)auth;
-- (void)updateRooms;
 - (nonnull XMPPProcess *)registerJid:(nonnull NSString *)jidString password:(nonnull  NSString *)password;
 
 - (void)sendTextMessage:(nonnull NSString *)text to:(nonnull NSString *)username groupChat:(BOOL)groupChat;
@@ -45,4 +34,29 @@
 @property (nonatomic, copy, nullable) NSString *nickName;
 
 @property (nonnull, readonly, strong) XMPPChatHistory *history;
+@property (nullable, nonatomic, weak) id<XMPPClientDelegate> delegate;
 @end
+
+
+@protocol XMPPClientDelegate <NSObject>
+
+- (void)chatClient:(nonnull XMPPClient *) client didUpdateDirectChat:(nonnull NSString *)userId;
+- (void)chatClient:(nonnull XMPPClient *) client didUpdateGroupChat:(nonnull NSString *)roomId;
+
+@end
+
+@protocol XMPPMessageListener <NSObject>
+- (void)didReceiveTextMessage:(nonnull NSString *)text from:(nonnull NSString *)from to:(nonnull NSString *)to date:(nonnull NSDate *)date;
+@end
+
+
+@interface XMPPClientConfiguration : NSObject
++ (nonnull instancetype)configurationWith:(nonnull NSString *)hostName port:(NSInteger)port;
++ (nonnull instancetype)defaultConfiguration;
+
+@property (nonnull, nonatomic, copy) NSString *hostName;
+@property (nonatomic, assign) NSInteger port;
+@end
+
+
+
