@@ -62,7 +62,6 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
 
 
 - (void)storeDirectMessage:(nonnull XMPPTextMessage *)message outgoing:(BOOL)outgoing;
-- (void)cleanRooms;
 - (nullable XMPPRoom *)roomWithId:(nonnull NSString *)roomId;
 
 @property (nonatomic, copy, nonnull) NSString *currentUserId;
@@ -372,6 +371,12 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
 
 }
 
+
+#pragma mark - Stream disconnect -
+
+- (void)xmppStreamDidDisconnect:(XMPPStream *)sender withError:(NSError *)error {
+    [self.delegate chatClientDidDisconnect:self];
+}
 
 #pragma mark - Reconnect -
 

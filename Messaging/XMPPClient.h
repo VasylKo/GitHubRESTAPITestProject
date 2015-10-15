@@ -37,6 +37,7 @@
 
 - (void)joinRoom:(nonnull NSString *)roomJID nickName:(nonnull NSString *)nickName;
 - (nonnull NSArray *)messagesForRoom:(nonnull NSString *)roomId;
+- (void)cleanRooms;
 
 - (void)joinChat:(nonnull NSString *)userId;
 - (nonnull NSArray *)messagesForChat:(nonnull NSString *)userId;
@@ -50,6 +51,7 @@
 - (void)chatClient:(nonnull XMPPClient *) client didUpdateDirectChat:(nonnull NSString *)userId;
 - (void)chatClient:(nonnull XMPPClient *) client didUpdateGroupChat:(nonnull NSString *)roomId;
 - (void)chatClientDidAuthorize:(nonnull XMPPClient *) client;
+- (void)chatClientDidDisconnect:(nonnull XMPPClient *) client;
 
 @end
 

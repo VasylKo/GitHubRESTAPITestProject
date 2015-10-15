@@ -93,6 +93,7 @@ final class ConversationManager: NSObject {
             return "\(user)@conference.\(host)"
         }
         let chatClient = chat()
+        chatClient.cleanRooms()
         for conversation in conversations {
             chatClient.joinRoom(jid(conversation.roomId), nickName: currentUserId)
         }
@@ -135,6 +136,10 @@ extension ConversationManager: XMPPClientDelegate {
     
     func chatClientDidAuthorize(client: XMPPClient) {
         refresh()
+    }
+    
+    func chatClientDidDisconnect(client: XMPPClient) {
+        //TODO: clean
     }
    
 }
