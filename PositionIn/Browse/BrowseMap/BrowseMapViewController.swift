@@ -44,6 +44,7 @@ final class BrowseMapViewController: UIViewController, BrowseActionProducer, Bro
     
     
     private func displayFeedItems(items: [FeedItem]) {
+        
         func  markerIcon(item: FeedItem) -> UIImage? {
             switch item.type {
             case .Event:
@@ -51,11 +52,12 @@ final class BrowseMapViewController: UIViewController, BrowseActionProducer, Bro
             case .Promotion:
                 return UIImage(named: "PromotionMarker")
             case .Item:
-                return UIImage(named: "ProductMarker")
+                return item.category?.displayImage()
             default:
                 return nil
             }
         }
+        
         markers.map { $0.map = nil }
         markers = items.filter { contains(self.visibleItemTypes, $0.type) }.map {
             item in

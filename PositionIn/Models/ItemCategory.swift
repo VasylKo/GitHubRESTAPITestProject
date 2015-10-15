@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 enum ItemCategory: Int, DebugPrintable {
     case Unknown
@@ -53,6 +54,39 @@ enum ItemCategory: Int, DebugPrintable {
         default:
             return NSLocalizedString("All", comment: "ItemCategory: Unknown")
         }
+    }
+    
+    func displayImage() -> UIImage? {
+        let image: UIImage?
+        switch self {
+        case .ApparelAccessories:
+            image =  UIImage(named: "category_blood_map")
+        case .ArtsEntertainment:
+            image =  UIImage(named: "construction_map")
+        case .BabyToddler:
+            image =  UIImage(named: "ProductMarker")
+        case .BusinessIndustrial:
+            image =  UIImage(named: "category_electronics_map")
+        case .CamerasOptics:
+            image =  UIImage(named: "ProductMarker")
+        case .Electronics:
+            image =  UIImage(named: "category_food_map")
+        case .Food:
+            image =  UIImage(named: "category_hardware_map")
+        case .Furniture:
+            image =  UIImage(named: "category_health_beauty_map")
+        case .Hardware:
+            image =  UIImage(named: "ProductMarker")
+        case .HealthBeauty:
+            image =  UIImage(named: "ProductMarker")
+        case .HomeGarden:
+            image =  UIImage(named: "category_religious_ceremonial_map")
+        case .LuggageBags:
+            image =  UIImage(named: "category_vehicles_parts_map")
+        default:
+            image =  UIImage(named: "category_water_map")
+        }
+        return image
     }
     
     var debugDescription: String {
