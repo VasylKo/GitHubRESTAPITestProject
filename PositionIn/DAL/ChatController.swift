@@ -177,7 +177,7 @@ extension ChatController: XMPPMessageListener {
     }
     
     @objc func didReceiveGroupTextMessage(roomId: String, text: String, from: String, to: String, date: NSDate) {
-        if conversation.roomId == roomId {
+        if conversation.roomId == roomId && from != ConversationManager.sharedInstance().getSenderId(conversation) {
             let message = JSQMessage(senderId: from, senderDisplayName: displayNameForUser(from), date: date, text: text)
             appendMessage(message)
         }
