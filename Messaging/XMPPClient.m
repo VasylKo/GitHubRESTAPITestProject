@@ -11,6 +11,7 @@
 #import "DDTTYLogger.h"
 #import "XMPPLogFormatter.h"
 #import "XMPPDelegate.h"
+#import "XMPPMessage+XEP0045.h"
 
 #import "XMPPTextMessage+Private.h"
 #import "XMPPProcess+Private.h"
@@ -108,10 +109,7 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
         for (XMPPRoomMessageMemoryStorageObject *storedMessage in [storage messages]) {
             XMPPMessage *msg = storedMessage.message;
             if (msg.from == nil) {
-                [msg addAttributeWithName:@"from" stringValue:[room.myRoomJID resource]];
-            }
-            if (msg.to == nil) {
-                [msg addAttributeWithName:@"to" stringValue:[room.myRoomJID resource]];
+                [msg addAttributeWithName:@"from" stringValue:[room.myRoomJID full]];
             }
             XMPPTextMessage *textMsg = [[XMPPTextMessage alloc] initWithMessage:msg];
             [messages addObject:textMsg];
@@ -479,8 +477,10 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
 - (void)xmppRoom:(XMPPRoom *)sender didReceiveMessage:(XMPPMessage *)message fromOccupant:(XMPPJID *)occupantJID {
     XMPPLogTrace();
     XMPPLogInfo(@"MUC Message from: %@,\n msg %@", [occupantJID full], [message compactXMLString]);
-    [self.delegate chatClient:self didUpdateGroupChat:sender.roomJID.user];
-    [self broadcastMessage:[[XMPPTextMessage alloc] initWithMessage:message] room:sender.roomJID.user];
+    if ([message isGroupChatMessageWithBody]) {
+        [self.delegate chatClient:self didUpdateGroupChat:sender.roomJID.user];
+        [self broadcastMessage:[[XMPPTextMessage alloc] initWithMessage:message] room:sender.roomJID.user];
+    }
 }
 
 - (void)xmppRoom:(XMPPRoom *)sender didFetchBanList:(NSArray *)items {
