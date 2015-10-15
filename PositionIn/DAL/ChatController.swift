@@ -144,6 +144,14 @@ final class ChatController: NSObject {
         }
     }
     
+    private func appendMessage(message: JSQMessage) {
+        Queue.main.async { [weak self] in
+            if let strongSelf = self {
+                strongSelf.messages = strongSelf.messages + [message]
+                strongSelf.delegate?.didUpdateMessages()
+            }
+        }
+    }
     
     weak var delegate: ChatControllerDelegate?
     
@@ -162,14 +170,16 @@ final class ChatController: NSObject {
 
 extension ChatController: XMPPMessageListener {
     @objc func didReceiveTextMessage(text: String, from: String, to: String, date: NSDate) {
-        if from == conversation.roomId {
+        if conversation.roomId == from {
             let message = JSQMessage(senderId: from, senderDisplayName: displayNameForUser(from), date: date, text: text)
-            Queue.main.async { [weak self] in
-                if let strongSelf = self {
-                    strongSelf.messages = strongSelf.messages + [message]
-                    strongSelf.delegate?.didUpdateMessages()
-                }
-            }
+            appendMessage(message)
+        }
+    }
+    
+    @objc func didReceiveGroupTextMessage(roomId: String, text: String, from: String, to: String, date: NSDate) {
+        if conversation.roomId == roomId {
+            let message = JSQMessage(senderId: from, senderDisplayName: displayNameForUser(from), date: date, text: text)
+            appendMessage(message)
         }
     }
 }
