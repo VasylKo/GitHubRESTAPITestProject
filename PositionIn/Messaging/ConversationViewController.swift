@@ -17,15 +17,11 @@ final class ConversationViewController: JSQMessagesViewController {
         instance.senderId = ConversationManager.sharedInstance().getSenderId(conversation)
         instance.chatController = ChatController(conversation: conversation)
         instance.chatController.delegate = instance
+        instance.title = conversation.name
         return instance
     }
     
     private var chatController: ChatController!
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        title = NSLocalizedString("Chat", comment: "Chat: Default chat title")
-    }
     
     deinit {
         chatController?.closeSession()
