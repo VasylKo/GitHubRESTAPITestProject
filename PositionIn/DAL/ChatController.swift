@@ -42,7 +42,7 @@ final class ChatController: NSObject {
         if msg.isMediaMessage() {
             //TODO: send media
         } else {
-            chatClient.sendTextMessage(msg.text!(), to: conversation.roomId, groupChat: conversation.isGroupChat)
+            ConversationManager.sharedInstance().sendText(msg.text!(), conversation: conversation)
         }
     }
     

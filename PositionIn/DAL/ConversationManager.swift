@@ -13,6 +13,11 @@ import PosInCore
 import Messaging
 
 final class ConversationManager {
+    
+    internal func sendText(text: String, conversation: Conversation) {
+        chat().sendTextMessage(text, to: conversation.roomId, groupChat: conversation.isGroupChat)
+    }
+    
     internal func didEnterConversation(conversation: Conversation) {
         if conversation.isGroupChat == false {
             directConversations.insert(conversation)
