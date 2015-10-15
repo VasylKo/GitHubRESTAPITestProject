@@ -12,7 +12,7 @@ import CleanroomLogger
 import PosInCore
 import Messaging
 
-final class ConversationManager {
+final class ConversationManager: NSObject {
     
     internal func sendText(text: String, conversation: Conversation) {
         conversation.lastActivityDate = NSDate()
@@ -109,7 +109,8 @@ final class ConversationManager {
         return Shared.instance
     }
     
-    init() {
+    override init() {
+        super.init()
         let userChangeBlock: NSNotification! -> Void = { [weak self] notification in
             
             dispatch_async(dispatch_get_main_queue()) {
@@ -138,4 +139,25 @@ final class ConversationManager {
     private var mucConversations = Set<Conversation>()
     private var currentUserId: CRUDObjectId = CRUDObjectInvalidId
     private var userDidChangeObserver: NSObjectProtocol!
+}
+
+
+extension ConversationManager: XMPPClientDelegate {
+    func chatClient(client: XMPPClient, didUpdateDirectChat userId: String) {
+        if let conversation = (Array(directConversations).filter { $0.roomId == userId }).first {
+            conversation.lastActivityDate = NSDate()
+        } else {
+            api().getUsers([userId]).onSuccess { [weak self] response in
+                if let info = response.items.first {
+                    self?.directConversations.insert(Conversation(user: info))
+                }
+            }
+            //add
+        }
+    }
+    
+    func chatClient(client: XMPPClient, didUpdateGroupChat roomId: String) {
+        
+    }
+   
 }

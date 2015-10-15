@@ -115,7 +115,8 @@ extension AppDelegate {
         chatClient.disconnect()
         if  let user = profile {
                 chatClient = AppDelegate.chatClientInstance()
-                chatClient.auth()                
+                chatClient.auth()
+                chatClient.delegate = ConversationManager.sharedInstance()
         }
     }
     

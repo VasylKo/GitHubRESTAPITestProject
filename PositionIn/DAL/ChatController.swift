@@ -162,8 +162,7 @@ final class ChatController: NSObject {
 
 extension ChatController: XMPPMessageListener {
     @objc func didReceiveTextMessage(text: String, from: String, to: String, date: NSDate) {
-        //TODO: fix logic
-        if let _  = (participantsInfo.filter { $0.objectId == from }).first {
+        if from == conversation.roomId {
             let message = JSQMessage(senderId: from, senderDisplayName: displayNameForUser(from), date: date, text: text)
             Queue.main.async { [weak self] in
                 if let strongSelf = self {

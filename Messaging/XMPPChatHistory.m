@@ -25,8 +25,8 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
     self = [super init];
     if (self) {
         self.text = [message body];
-        self.from = [message isGroupChatMessage]? [message from].full :[message from].user;
-        self.to = [message to].user;
+        self.from = [message isGroupChatMessage] ? [message from].full :[message from].user;
+        self.to = [message isGroupChatMessage] ? [message to].full :[message to].user;
         NSDate *date = [NSDate date];
         if ([message wasDelayed]) {
             date = [message delayedDeliveryDate];

@@ -255,14 +255,16 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
 - (void)xmppStream:(XMPPStream *)sender didSendMessage:(XMPPMessage *)message {
     if ([message isChatMessageWithBody]) {
         XMPPTextMessage *textMessage = [[XMPPTextMessage alloc] initWithMessage:message];
-        [self.history addTextMessage:textMessage outgoing:true];
+        [self.history addDirectMessage:textMessage outgoing:true];
     }
 }
 
 - (void)xmppStream:(XMPPStream *)sender didReceiveMessage:(XMPPMessage *)message {
     if ([message isChatMessageWithBody]) {
         XMPPTextMessage *textMessage = [[XMPPTextMessage alloc] initWithMessage:message];
-        [self.history addTextMessage:textMessage outgoing:false];
+#warning add conversation
+        [self.history addDirectMessage:textMessage outgoing:false];
+        [self.delegate chatClient:self didUpdateDirectChat:textMessage.from];
         
         NSArray *listeners = nil;
         @synchronized(self) {
