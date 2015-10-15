@@ -10,6 +10,9 @@
 #import "XMPPFramework.h"
 
 @interface XMPPChatHistory()
+
+- (nonnull instancetype)initWithUserId:(nonnull NSString *)currentUserId nick:(nonnull NSString *)nick;
+
 @property (nonatomic, copy, readwrite, nonnull) NSString *nickName;
 @property (nonatomic, copy, nonnull) NSString *currentUserId;
 @property (nonatomic, strong, nonnull) NSMutableDictionary *conversations;

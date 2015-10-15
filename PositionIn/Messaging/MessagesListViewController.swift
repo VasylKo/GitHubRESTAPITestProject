@@ -25,17 +25,12 @@ final class MessagesListViewController: BesideMenuViewController {
     }
 
     func reloadData() {
-        if let conversations = chat().history.conversationList() as? [XMPPConversation] {
-            dataSource.setItems(conversations.sorted {
-                return $0.lastActivityDate.compare($1.lastActivityDate) == NSComparisonResult.OrderedDescending
-                })
-        }
+        dataSource.setItems(ConversationManager.sharedInstance().all())
         tableView.reloadData()
-
     }
     
-//    typealias ChatHistoryResponse = (UserInfo, JSQMessage)
-    typealias ChatHistoryResponse = XMPPConversation
+
+    typealias ChatHistoryResponseItem = Conversation
     
     @IBOutlet private weak var tableView: UITableView!
     
@@ -76,17 +71,17 @@ extension MessagesListViewController {
             tableView.deselectRowAtIndexPath(indexPath, animated: true)
             if let model = self.tableView(tableView, modelForIndexPath: indexPath) as? ChatHistoryCellModel {
                 //TODO: move logic to the controller
-                let conversation: Conversation
+                let conversation: Conversation?
                 if model.isGoupChat {
-                    conversation = Conversation(roomId: model.userId)
+                    conversation = ConversationManager.sharedInstance().groupConversation(model.userId)
                 } else {
-                    conversation = Conversation(userId: model.userId)
+                    conversation = ConversationManager.sharedInstance().directConversation(model.userId)
                 }
-                parentViewController?.showChatViewController(conversation)
+                map(conversation) { parentViewController?.showChatViewController($0) }
             }
         }
         
-        func setItems(messages: [ChatHistoryResponse]) {
+        func setItems(messages: [ChatHistoryResponseItem]) {
             let dateFormatter = NSDateFormatter()
             dateFormatter.dateStyle = .NoStyle
             dateFormatter.timeStyle = .MediumStyle
@@ -97,7 +92,7 @@ extension MessagesListViewController {
                     message: "",
                     imageURL: conversation.imageURL,
                     date: map(conversation.lastActivityDate) { dateFormatter.stringFromDate($0) },
-                    muc: conversation.isMultiUser
+                    muc: conversation.isGroupChat
                 )
             }
         }

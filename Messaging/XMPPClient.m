@@ -305,10 +305,10 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
     XMPPLogInfo(@"Services: %@", services);
     static NSString  *const chatServiceName = @"Public Chatrooms";
     [services enumerateObjectsUsingBlock:^(NSXMLElement *service, NSUInteger idx, BOOL *stop) {
-        if ([[[service attributeForName:@"name"] stringValue] isEqualToString:chatServiceName]) {
+//        if ([[[service attributeForName:@"name"] stringValue] isEqualToString:chatServiceName]) {
             [sender discoverRoomsForServiceNamed:[[service attributeForName:@"jid"] stringValue]];
-            *stop = YES;
-        }
+//            *stop = YES;
+//        }
     }];
 }
 

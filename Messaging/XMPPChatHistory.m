@@ -209,12 +209,12 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
 
 - (void)xmppRoomDidJoin:(XMPPRoom *)sender {
     XMPPLogTrace();
+    XMPPLogInfo(@"My jid : %@ in room %@", [sender.myRoomJID full], [sender.roomJID full]);
 }
 
 - (void)xmppRoomDidLeave:(XMPPRoom *)sender {
     XMPPLogTrace();
 }
-
 
 - (void)xmppRoomDidDestroy:(XMPPRoom *)sender {
     XMPPLogTrace();
@@ -243,6 +243,7 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
  **/
 - (void)xmppRoom:(XMPPRoom *)sender didReceiveMessage:(XMPPMessage *)message fromOccupant:(XMPPJID *)occupantJID {
     XMPPLogTrace();
+    XMPPLogInfo(@"MUC Message from: %@,\n msg %@", [occupantJID full], [message compactXMLString]);
 }
 
 - (void)xmppRoom:(XMPPRoom *)sender didFetchBanList:(NSArray *)items {

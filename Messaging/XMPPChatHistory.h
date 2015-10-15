@@ -20,7 +20,7 @@
 @end
 
 @interface XMPPChatHistory : NSObject
-- (nonnull instancetype)initWithUserId:(nonnull NSString *)currentUserId nick:(nonnull NSString *)nick;
+
 - (nonnull NSArray *)conversationList;
 - (nonnull XMPPConversation *)startConversationWithUser:(nonnull NSString *)userId name:(nonnull NSString*)displayName imageURL:(nullable NSURL *)url;
 - (nonnull NSArray *)messagesForConversationWithUser:(nonnull NSString *)userId;

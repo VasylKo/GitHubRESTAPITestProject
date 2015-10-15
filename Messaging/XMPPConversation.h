@@ -10,10 +10,13 @@
 
 @interface XMPPConversation : NSObject
 
-@property (readonly, copy, nonnull ) NSArray *participants;
-@property (nonatomic, readonly, nonnull) NSDate *lastActivityDate;
 @property (nonatomic, readonly, copy, nonnull) NSString *name;
 @property (nonatomic, readonly, strong, nullable) NSURL *imageURL;
-@property (nonatomic, readonly, copy, nonnull) NSString *roomId;
+
 @property (nonatomic, readonly, assign) BOOL isMultiUser;
+@property (nonatomic, readonly, nonnull) NSDate *lastActivityDate;
+
+@property (readonly, copy, nonnull ) NSArray *participants;
+@property (nonatomic, readonly, copy, nonnull) NSString *roomId;
+
 @end

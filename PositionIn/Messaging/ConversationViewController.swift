@@ -233,6 +233,15 @@ extension ConversationViewController: ChatControllerDelegate {
 //MARK: - Navigation  -
 
 extension UIViewController {
+    func showChatViewController(userId: CRUDObjectId) {
+        api().getUsers([userId]).onSuccess { [weak self] response in
+            if let info = response.items.first {
+                self?.showChatViewController(Conversation(user: info))
+            }
+            
+        }
+    }
+    
     func showChatViewController(conversation: Conversation) {
         api().isUserAuthorized().onSuccess { [weak self] _ in
             let chatController = ConversationViewController.conversationController(conversation)

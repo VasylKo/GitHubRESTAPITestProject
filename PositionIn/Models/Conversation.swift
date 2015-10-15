@@ -10,27 +10,33 @@ import Foundation
 
 final class Conversation {
 
-    convenience init(roomId: CRUDObjectId) {
-        self.init(room: roomId, interlocutors: [], muc: true)
-    }
+    let name: String
+    let imageURL: NSURL?
+    var lastActivityDate: NSDate
+    var unreadCount: UInt = 1
     
-    
-    convenience init(userId: CRUDObjectId) {
-        self.init(room: userId, interlocutors: [userId], muc: false)
-    }
-    
-    init(room: CRUDObjectId, interlocutors: [CRUDObjectId], muc: Bool) {
-        roomId = room
-        recipients = interlocutors
-        isGroupChat = muc
-    }
-    
+    let roomId: String
     let isGroupChat: Bool
-    let currentUserId: CRUDObjectId = api().currentUserId() ?? CRUDObjectInvalidId
-    let roomId: CRUDObjectId
-    var participants: [CRUDObjectId] {
-        return recipients + [currentUserId]
+    let currentUserId: String = api().currentUserId() ?? CRUDObjectInvalidId
+    
+    convenience init(community: Community) {
+        let name = community.name ?? NSLocalizedString("Unnamed community", comment: "Chat: community default")
+        self.init(roomID: community.objectId, isMultiUser: true, caption: name, url: community.avatar)
     }
     
-    private var recipients: [CRUDObjectId]
+    convenience init(user: UserInfo) {
+        let name = user.title ?? NSLocalizedString("Unnamed user", comment: "Chat: user default")
+        self.init(roomID: user.objectId, isMultiUser: false, caption: name, url: user.avatar)
+    }
+    
+    init(roomID: String, isMultiUser: Bool, caption: String, url: NSURL?) {
+        roomId = roomID
+        isGroupChat = isMultiUser
+        name = caption
+        imageURL = url
+        
+        lastActivityDate = NSDate()
+        unreadCount = 0
+        
+    }
 }
