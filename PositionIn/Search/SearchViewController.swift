@@ -57,8 +57,11 @@ final class SearchViewController: UIViewController {
         dismissRecognizer.cancelsTouchesInView = false
         tableView.addGestureRecognizer(dismissRecognizer)
         
-        searchTextField.leftView = UIImageView(image: UIImage(named: "search_icon"))
         searchTextField.leftViewMode = .Always
+        let leftView: UIImageView = UIImageView(image: UIImage(named: "search_icon"))
+        leftView.frame = CGRectMake(0.0, 0.0, leftView.frame.size.width + 5.0, leftView.frame.size.height);
+        leftView.contentMode = .Right
+        searchTextField.leftView = leftView
         searchTextField.text = SearchFilter.currentFilter.name
         searchTextField.becomeFirstResponder()
         itemsDataSource.delegate = self
@@ -67,10 +70,13 @@ final class SearchViewController: UIViewController {
         locationSearchTextField.text = SearchFilter.currentFilter.locationName
         locationsDataSource.delegate = self
         locationSearchController.delegate = self
-        locationSearchTextField.leftView = UIImageView(image: UIImage(named: "search_icon"))
+        let leftLocationView: UIImageView = UIImageView(image: UIImage(named: "search_location_focus"))
+        leftLocationView.frame = CGRectMake(0.0, 0.0, leftLocationView.frame.size.width + 5.0, leftView.frame.size.height);
+        leftLocationView.contentMode = .Right
+        locationSearchTextField.leftView = leftLocationView
         locationSearchTextField.leftViewMode = .Always
-
-
+        locationSearchTextField.backgroundColor = UIColor.bt_colorWithBytesR(0, g: 0, b: 0, a: 102)
+        locationSearchTextField.textColor = UIColor.whiteColor()
     }
     
     @IBAction func cancelButtonPressed(sender: AnyObject) {
@@ -84,7 +90,7 @@ final class SearchViewController: UIViewController {
     func shouldCloseSearch() {
         view.endEditing(true)
         transitioningDelegate = nil
-//        dismissViewControllerAnimated(true, completion: nil)
+        dismissViewControllerAnimated(true, completion: nil)
         Log.debug?.message("Should close search")
     }
     
