@@ -68,7 +68,7 @@ platform :ios do
         output_directory: "Build",
         clean: true,
         ) # Build app
-      snapshot
+        #      snapshot
       s3(
          html_file_name: "staging.html",
          version_file_name: "staging.version.json",
