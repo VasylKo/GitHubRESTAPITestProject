@@ -25,8 +25,7 @@ final class ChatController: NSObject {
         super.init()
         prepareCache()
         ConversationManager.sharedInstance().didEnterConversation(conversation)
-        loadConversationHistory(conversation)
-        chatClient.addMessageListener(self)
+        fetchMetadata()
     }
     
     func closeSession() {
@@ -77,31 +76,37 @@ final class ChatController: NSObject {
         }
     }
     
+    private func fetchMetadata() {
+        let participants: [CRUDObjectId]
+        if conversation.isGroupChat {
+            participants = [ ConversationManager.sharedInstance().getSenderId(conversation) ]
+        } else {
+            participants = [ ConversationManager.sharedInstance().getSenderId(conversation), conversation.roomId ]
+        }
+        loadInfoForUsers(participants)
+        loadConversationHistory(conversation)
+        chatClient.addMessageListener(self)
+    }
+    
     private func loadInfoForUsers(userIds: [CRUDObjectId]) {
         
-        /*
-        func avatarDownloadFuture(url: NSURL) -> Future<UIImage, NSError> {
+        let fetchAvatar: (NSURL) -> Future<UIImage, NSError>  = { url in
             let promise = Promise<UIImage, NSError>()
             Shared.imageCache.fetch(URL: url, formatName: ChatController.avatarCacheFormatName, failure: { (e) -> () in
                 //TODO: add default error
                 let error =  e ??  NSError()
                 promise.failure(error)
-            }, success: {image in
-                promise.success(image)
+                }, success: {image in
+                    promise.success(image)
             })
             return promise.future
-        }
-        api().getUsers(userIds).onSuccess {[weak self] response in
-            Log.debug?.value(response.items)
+
+        }        
+        api().getUsers(userIds).onSuccess { [weak self] response in
             if let strongSelf = self {
-                strongSelf.participantsInfo = response.items
-                let conversation = strongSelf.conversation
-                strongSelf.chatClient.history.startConversationWithUser(conversation.roomId, name: strongSelf.displayNameForUser(conversation.roomId), imageURL: nil)
-                strongSelf.loadConversationHistory(strongSelf.conversation)
-                strongSelf.delegate?.didUpdateMessages()
                 let usersWithAvatars = response.items.filter { $0.avatar != nil }
                 let avatarDownloads = usersWithAvatars.map { info in
-                    avatarDownloadFuture(info.avatar!).onSuccess { [weak strongSelf] image in
+                    fetchAvatar(info.avatar!).onSuccess { [weak strongSelf] image in
                         strongSelf?.addAvatar(image, user: info.objectId)
                     }
                 }
@@ -109,11 +114,9 @@ final class ChatController: NSObject {
                     strongSelf?.delegate?.didUpdateMessages()
                 }
             }
-            
         }
-        */
     }
-        
+    
     private func addAvatar(image: UIImage, user: CRUDObjectId) {
         let dataSource = JSQMessagesAvatarImageFactory.avatarImageWithImage(image, diameter: UInt(kJSQMessagesCollectionViewAvatarSizeDefault))
         synced(avatarsCache) {
