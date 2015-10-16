@@ -525,6 +525,8 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
  **/
 - (void)xmppRosterDidEndPopulating:(XMPPRoster *)sender {
     XMPPLogTrace();
+    XMPPRosterMemoryStorage *storage = sender.xmppRosterStorage;
+    XMPPLogInfo(@"Roster: %@", [storage sortedUsersByName]);
 }
 
 /**

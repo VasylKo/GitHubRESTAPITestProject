@@ -221,7 +221,7 @@ extension UserProfileViewController: UserProfileActionConsumer {
                 self?.reloadData()
             }
         case .Chat:
-            showChatViewController(Conversation(userId: objectId))
+            showChatViewController(objectId)
         case .Call:
             if let phone = profile.phone,
                 let phoneNumberURL = NSURL(string: "tel://" + phone)

@@ -11,8 +11,9 @@
 #import "DDTTYLogger.h"
 #import "XMPPLogFormatter.h"
 #import "XMPPDelegate.h"
+#import "XMPPMessage+XEP0045.h"
 
-#import "XMPPChatHistory+Private.h"
+#import "XMPPTextMessage+Private.h"
 #import "XMPPProcess+Private.h"
 #import "XMPPAuthProcess.h"
 #import "XMPPRegisterProcess.h"
@@ -42,7 +43,8 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
 }
 @end
 
-#pragma mark - Client
+
+#pragma mark - Client -
 
 @interface XMPPClient ()
 @property (nonatomic, strong) XMPPClientConfiguration *config;
@@ -51,19 +53,97 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
 @property (nonatomic, strong) XMPPReconnect *xmppReconect;
 @property (nonatomic, strong) XMPPRoster *xmppRoster;
 @property (nonatomic, strong) XMPPPing *xmppPing;
-@property (nonatomic, strong) XMPPMUC *xmppMUC;
 
 @property (nonatomic, retain) NSMutableArray *messageListeners;
 
-@property (nonnull, readwrite, strong) XMPPChatHistory *history;
 @property (nonnull, nonatomic, strong) id<XMPPCredentialsProvider> credentialsProvider;
 
 @property (readwrite, assign) BOOL authorized;
+
+
+- (void)storeDirectMessage:(nonnull XMPPTextMessage *)message outgoing:(BOOL)outgoing;
+- (nullable XMPPRoom *)roomWithId:(nonnull NSString *)roomId;
+
+@property (nonatomic, copy, nonnull) NSString *currentUserId;
+@property (nonatomic, strong, nonnull) NSMutableDictionary *directMessages;
+@property (nonatomic, strong, nonnull) NSMutableDictionary *rooms;
 
 @end
 
 
 @implementation XMPPClient
+
+#pragma mark - Conversations -
+
+- (void)joinRoom:(nonnull NSString *)roomJID nickName:(nonnull NSString *)nickName {
+    XMPPLogInfo(@"Joining room %@ (%@)", roomJID, nickName);
+    XMPPJID  * jid = [XMPPJID jidWithString:roomJID];
+    XMPPRoom *room = [[XMPPRoom alloc] initWithRoomStorage:[XMPPRoomMemoryStorage new] jid: jid];
+    [room activate:self.xmppStream];
+    [room addDelegate:self delegateQueue:[self delegateQueue]];
+    self.rooms[jid.user] = room;
+    NSXMLElement *history = [NSXMLElement elementWithName:@"history"];
+    [history addAttributeWithName:@"maxstanzas" intValue:20];
+    [room joinRoomUsingNickname:nickName history:history];
+}
+
+- (void)cleanRooms {
+    for (XMPPRoom *room in [self.rooms allValues]) {
+        [room removeDelegate:self];
+        [room deactivate];
+    }
+    self.rooms = [NSMutableDictionary new];
+}
+
+- (nullable XMPPRoom *)roomWithId:(nonnull NSString *)roomId {
+    return  self.rooms[roomId];
+}
+
+
+- (nonnull NSArray *)messagesForRoom:(nonnull NSString *)roomId {
+    XMPPRoom *room = [self roomWithId:roomId];
+    if (room) {
+        XMPPRoomMemoryStorage *storage = room.xmppRoomStorage;
+        NSMutableArray *messages = [NSMutableArray new];
+        for (XMPPRoomMessageMemoryStorageObject *storedMessage in [storage messages]) {
+            XMPPMessage *msg = storedMessage.message;
+            if (msg.from == nil) {
+                [msg addAttributeWithName:@"from" stringValue:[room.myRoomJID full]];
+            }
+            XMPPTextMessage *textMsg = [[XMPPTextMessage alloc] initWithMessage:msg];
+            [messages addObject:textMsg];
+        }
+        return messages;
+    }
+    return @[];
+}
+
+
+- (void)joinChat:(nonnull NSString *)userId {
+    if (self.directMessages[userId] == nil) {
+        self.directMessages[userId] = [NSMutableArray array];
+    }
+}
+
+- (nonnull NSArray *)messagesForChat:(nonnull NSString *)userId {
+    return self.directMessages[userId] != nil ? self.directMessages[userId] : @[];
+}
+
+
+- (void)storeDirectMessage:(nonnull XMPPTextMessage *)message outgoing:(BOOL)outgoing {
+    if (outgoing) {
+        message.from = self.currentUserId;
+    } else {
+        message.to = self.currentUserId;
+    }
+    NSString *chatId = outgoing ? message.to : message.from;
+    [self joinChat:chatId];
+    NSMutableArray *messages = self.directMessages[chatId];
+    [messages addObject:message];
+}
+
+
+#pragma mark - Lifecycle -
 
 + (void)initialize {
     if(self == [XMPPClient class]) {
@@ -102,12 +182,16 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
     return [self isConnected] && [self authorized];
 }
 
+- (dispatch_queue_t)delegateQueue {
+    return dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+}
+
 #pragma mark - Stream LifeCycle -
 
 - (void)setupStreamWithConfig:(XMPPClientConfiguration *)configuration {
     self.xmppDelegate = [XMPPDelegate new];
     self.xmppStream = [XMPPStream new];
-    dispatch_queue_t delegateQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_queue_t delegateQueue = [self delegateQueue];
 #if !TARGET_IPHONE_SIMULATOR
     {
         // Want xmpp to run in the background?
@@ -140,20 +224,14 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
     [self.xmppReconect addDelegate:self.xmppDelegate delegateQueue:delegateQueue];
     [self.xmppReconect addDelegate:self delegateQueue:delegateQueue];
     
-    self.xmppRoster = [[XMPPRoster alloc] initWithRosterStorage:[XMPPRosterMemoryStorage new]];
-    [self.xmppRoster activate:self.xmppStream];
-    [self.xmppRoster addDelegate:self.xmppDelegate delegateQueue:delegateQueue];
-    
-    self.xmppMUC = [[XMPPMUC alloc] init];
-    [self.xmppMUC addDelegate:self delegateQueue:delegateQueue];
-    [self.xmppMUC addDelegate:self.xmppDelegate delegateQueue:delegateQueue];
-    [self.xmppMUC activate:self.xmppStream];
+//    self.xmppRoster = [[XMPPRoster alloc] initWithRosterStorage:[XMPPRosterMemoryStorage new]];
+//    [self.xmppRoster activate:self.xmppStream];
+//    [self.xmppRoster addDelegate:self.xmppDelegate delegateQueue:delegateQueue];
 }
 
 
 - (void)teardownStream {
-    self.nickName = nil;
-    [self.history cleanRooms];
+    [self cleanRooms];
     
     [self.xmppPing deactivate];
 
@@ -163,10 +241,6 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
     
     [self.xmppRoster removeDelegate:self.xmppDelegate];
     [self.xmppRoster deactivate];
-
-    [self.xmppMUC removeDelegate:self];
-    [self.xmppMUC removeDelegate:self.xmppDelegate];
-    [self.xmppMUC deactivate];
     
     [self.xmppStream removeDelegate:self];
     [self.xmppStream removeDelegate:self.xmppDelegate];
@@ -175,10 +249,7 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
     self.xmppPing = nil;
     self.xmppReconect = nil;
     self.xmppRoster = nil;
-    self.xmppMUC = nil;
     self.xmppStream = nil;
-    
-    self.history = [XMPPChatHistory new];
 }
 
 #pragma mark - Log -
@@ -208,15 +279,13 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
 
 #pragma mark - Processes -
 
-- (void)updateRooms {
-    [self.xmppMUC discoverServices];
-}
-
 - (void)auth {
     XMPPCredentials *credentials = [self.credentialsProvider getChatCredentials];
     if (credentials != nil) {
         XMPPJID *jid = [XMPPJID jidWithString:credentials.jid];
-        self.history = [[XMPPChatHistory alloc] initWithUserId:[jid user] nick:self.nickName];
+        self.directMessages = [NSMutableDictionary new];
+        self.currentUserId = [jid user];
+        [self cleanRooms];
         XMPPAuthProcess *process = [[XMPPAuthProcess alloc] initWithStream:self.xmppStream queue:[XMPPProcess defaultProcessingQueue]];
         process.password = credentials.password;
         process.jid = jid;
@@ -226,8 +295,9 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
             client.authorized = (error == nil);
             if (error) {
                 XMPPLogError(@"Auth error: %@", [error localizedDescription]);
-            } else {
-                [client updateRooms];
+            }
+            if (client.isAuthorized) {
+                [client.delegate chatClientDidAuthorize:client];
             }
         }];
     } else {
@@ -245,7 +315,7 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
 
 - (void)sendTextMessage:(nonnull NSString *)text to:(nonnull NSString *)username groupChat:(BOOL)groupChat {
     if (groupChat) {
-        [[self.history roomWithId:username] sendMessageWithBody:text];     
+        [[self roomWithId:username] sendMessageWithBody:text];
     } else {
         XMPPJID *jid = [XMPPJID jidWithString:[NSString stringWithFormat:@"%@@%@", username, self.config.hostName]];
         XMPPMessage *msg = [XMPPMessage messageWithType:@"chat" to:jid];
@@ -273,50 +343,40 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
 - (void)xmppStream:(XMPPStream *)sender didSendMessage:(XMPPMessage *)message {
     if ([message isChatMessageWithBody]) {
         XMPPTextMessage *textMessage = [[XMPPTextMessage alloc] initWithMessage:message];
-        [self.history addTextMessage:textMessage outgoing:true];
+        [self storeDirectMessage:textMessage outgoing:true];
     }
 }
 
 - (void)xmppStream:(XMPPStream *)sender didReceiveMessage:(XMPPMessage *)message {
     if ([message isChatMessageWithBody]) {
         XMPPTextMessage *textMessage = [[XMPPTextMessage alloc] initWithMessage:message];
-        [self.history addTextMessage:textMessage outgoing:false];
-        
-        NSArray *listeners = nil;
-        @synchronized(self) {
-            listeners = self.messageListeners;
-        }
-        NSString *text = [message body];
-        NSString *from = [message from].user;
-        NSString *to = [message to].user;
-        NSDate *date = [NSDate date];
-        if ([message wasDelayed]) {
-            date = [message delayedDeliveryDate];
-        }
-        for (id<XMPPMessageListener> listener in listeners) {
-            [listener didReceiveTextMessage:text from:from to:to date:date];
-        }
+        [self storeDirectMessage:textMessage outgoing:false];
+        [self.delegate chatClient:self didUpdateDirectChat:textMessage.from];
+        [self broadcastMessage:textMessage room:nil];
     }
 }
 
-#pragma mark - MUC -
-
-- (void)xmppMUC:(XMPPMUC *)sender didDiscoverServices:(NSArray *)services {
-    XMPPLogInfo(@"Services: %@", services);
-    static NSString  *const chatServiceName = @"Public Chatrooms";
-    [services enumerateObjectsUsingBlock:^(NSXMLElement *service, NSUInteger idx, BOOL *stop) {
-        if ([[[service attributeForName:@"name"] stringValue] isEqualToString:chatServiceName]) {
-            [sender discoverRoomsForServiceNamed:[[service attributeForName:@"jid"] stringValue]];
-            *stop = YES;
+- (void)broadcastMessage:(XMPPTextMessage *)textMessage room:(NSString *)roomId {
+    NSArray *listeners = nil;
+    @synchronized(self) {
+        listeners = self.messageListeners;
+    }
+    for (id<XMPPMessageListener> listener in listeners) {
+        if (roomId) {
+            [listener didReceiveGroupTextMessage:roomId text:textMessage.text from:textMessage.from to:textMessage.to date:textMessage.date];
+        } else {
+            [listener didReceiveTextMessage:textMessage.text from:textMessage.from to:textMessage.to date:textMessage.date];
         }
-    }];
+    }
+
 }
 
-- (void)xmppMUC:(XMPPMUC *)sender didDiscoverRooms:(NSArray *)rooms forServiceNamed:(NSString *)serviceName {
-    XMPPLogInfo(@"Rooms: %@", rooms);
-    [self.history didDiscoverRooms:rooms stream:sender.xmppStream];
-}
 
+#pragma mark - Stream disconnect -
+
+- (void)xmppStreamDidDisconnect:(XMPPStream *)sender withError:(NSError *)error {
+    [self.delegate chatClientDidDisconnect:self];
+}
 
 #pragma mark - Reconnect -
 
@@ -334,6 +394,130 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
 - (BOOL)xmppReconnect:(XMPPReconnect *)sender shouldAttemptAutoReconnect:(SCNetworkConnectionFlags)connectionFlags {
     XMPPLogTrace();
     return NO;
+}
+
+#pragma mark - Room Delegate -
+
+
+- (void)xmppRoomDidCreate:(XMPPRoom *)sender {
+    XMPPLogTrace();
+}
+
+/**
+ * Invoked with the results of a request to fetch the configuration form.
+ * The given config form will look something like:
+ *
+ * <x xmlns='jabber:x:data' type='form'>
+ *   <title>Configuration for MUC Room</title>
+ *   <field type='hidden'
+ *           var='FORM_TYPE'>
+ *     <value>http://jabber.org/protocol/muc#roomconfig</value>
+ *   </field>
+ *   <field label='Natural-Language Room Name'
+ *           type='text-single'
+ *            var='muc#roomconfig_roomname'/>
+ *   <field label='Enable Public Logging?'
+ *           type='boolean'
+ *            var='muc#roomconfig_enablelogging'>
+ *     <value>0</value>
+ *   </field>
+ *   ...
+ * </x>
+ *
+ * The form is to be filled out and then submitted via the configureRoomUsingOptions: method.
+ *
+ * @see fetchConfigurationForm:
+ * @see configureRoomUsingOptions:
+ **/
+- (void)xmppRoom:(XMPPRoom *)sender didFetchConfigurationForm:(NSXMLElement *)configForm {
+    XMPPLogTrace();
+}
+
+- (void)xmppRoom:(XMPPRoom *)sender willSendConfiguration:(XMPPIQ *)roomConfigForm {
+    XMPPLogTrace();
+}
+
+- (void)xmppRoom:(XMPPRoom *)sender didConfigure:(XMPPIQ *)iqResult {
+    XMPPLogTrace();
+}
+
+- (void)xmppRoom:(XMPPRoom *)sender didNotConfigure:(XMPPIQ *)iqResult {
+    XMPPLogTrace();
+}
+
+- (void)xmppRoomDidJoin:(XMPPRoom *)sender {
+    XMPPLogTrace();
+    XMPPLogInfo(@"My jid : %@ in room %@", [sender.myRoomJID full], [sender.roomJID full]);
+}
+
+- (void)xmppRoomDidLeave:(XMPPRoom *)sender {
+    XMPPLogTrace();
+}
+
+- (void)xmppRoomDidDestroy:(XMPPRoom *)sender {
+    XMPPLogTrace();
+}
+
+- (void)xmppRoom:(XMPPRoom *)sender didFailToDestroy:(XMPPIQ *)iqError {
+    XMPPLogTrace();
+}
+
+
+- (void)xmppRoom:(XMPPRoom *)sender occupantDidJoin:(XMPPJID *)occupantJID withPresence:(XMPPPresence *)presence {
+    XMPPLogTrace();
+}
+
+- (void)xmppRoom:(XMPPRoom *)sender occupantDidLeave:(XMPPJID *)occupantJID withPresence:(XMPPPresence *)presence {
+    XMPPLogTrace();
+}
+
+- (void)xmppRoom:(XMPPRoom *)sender occupantDidUpdate:(XMPPJID *)occupantJID withPresence:(XMPPPresence *)presence {
+    XMPPLogTrace();
+}
+
+/**
+ * Invoked when a message is received.
+ * The occupant parameter may be nil if the message came directly from the room, or from a non-occupant.
+ **/
+- (void)xmppRoom:(XMPPRoom *)sender didReceiveMessage:(XMPPMessage *)message fromOccupant:(XMPPJID *)occupantJID {
+    XMPPLogTrace();
+    XMPPLogInfo(@"MUC Message from: %@,\n msg %@", [occupantJID full], [message compactXMLString]);
+    if ([message isGroupChatMessageWithBody]) {
+        [self.delegate chatClient:self didUpdateGroupChat:sender.roomJID.user];
+        [self broadcastMessage:[[XMPPTextMessage alloc] initWithMessage:message] room:sender.roomJID.user];
+    }
+}
+
+- (void)xmppRoom:(XMPPRoom *)sender didFetchBanList:(NSArray *)items {
+    XMPPLogTrace();
+}
+
+- (void)xmppRoom:(XMPPRoom *)sender didNotFetchBanList:(XMPPIQ *)iqError {
+    XMPPLogTrace();
+}
+
+- (void)xmppRoom:(XMPPRoom *)sender didFetchMembersList:(NSArray *)items {
+    XMPPLogTrace();
+}
+
+- (void)xmppRoom:(XMPPRoom *)sender didNotFetchMembersList:(XMPPIQ *)iqError {
+    XMPPLogTrace();
+}
+
+- (void)xmppRoom:(XMPPRoom *)sender didFetchModeratorsList:(NSArray *)items {
+    XMPPLogTrace();
+}
+
+- (void)xmppRoom:(XMPPRoom *)sender didNotFetchModeratorsList:(XMPPIQ *)iqError {
+    XMPPLogTrace();
+}
+
+- (void)xmppRoom:(XMPPRoom *)sender didEditPrivileges:(XMPPIQ *)iqResult {
+    XMPPLogTrace();
+}
+
+- (void)xmppRoom:(XMPPRoom *)sender didNotEditPrivileges:(XMPPIQ *)iqError {
+    XMPPLogTrace();
 }
 
 

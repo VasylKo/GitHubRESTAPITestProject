@@ -65,6 +65,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         setupMaps()
         api.defaultErrorHandler = UIErrorHandler()
+        ConversationManager.sharedInstance().flush()
         if SearchFilter.isCustomLocationSet == false {
            SearchFilter.updateCurrentLocation()
         }
@@ -112,10 +113,12 @@ extension AppDelegate {
     
     func currentUserDidChange(profile: UserProfile?) {
         chatClient.disconnect()
-        if  let user = profile {
-                chatClient = AppDelegate.chatClientInstance()
-                chatClient.nickName = user.displayName
-                chatClient.auth()
+        if let user = profile {
+            let conversationManager = ConversationManager.sharedInstance()
+            conversationManager.updateUserId(user.objectId)
+            chatClient = AppDelegate.chatClientInstance()
+            chatClient.delegate = conversationManager
+            chatClient.auth()
         }
     }
     

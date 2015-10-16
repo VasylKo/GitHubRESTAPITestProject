@@ -59,10 +59,15 @@ final class FilterViewController: XLFormViewController {
             let newValue = newValue as! Float
             let priceFormat = NSLocalizedString("Price up to: %@", comment: "Update filter: price format")
             let stringValue: String  = self?.currencyFormatter.stringFromNumber(newValue) ?? ""
+            let title = String(format: priceFormat, stringValue)
+            if let currentTitle = descriptor.title where currentTitle == title {
+                return
+            }
             Queue.main.async { [weak descriptor, weak self] in
-                descriptor?.title = String(format: priceFormat, stringValue)
+                descriptor?.title = title
                 self?.reloadFormRow(descriptor)
             }
+            
         }
 
         priceRow.cellConfigAtConfigure["slider.maximumValue"] = SearchFilter.maxPrice

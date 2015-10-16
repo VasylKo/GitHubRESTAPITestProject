@@ -41,7 +41,7 @@ extension CreateConversationViewController: PeopleActionConsumer {
         if let navigationController = navigationController {
             navigationController.popViewControllerAnimated(false)
             dispatch_delay(0.0) {
-                navigationController.visibleViewController?.showChatViewController(Conversation(userId: userId))
+                navigationController.visibleViewController?.showChatViewController(userId)
             }
         }
     }

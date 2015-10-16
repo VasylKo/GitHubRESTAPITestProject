@@ -14,18 +14,14 @@ final class ConversationViewController: JSQMessagesViewController {
     class func conversationController(conversation: Conversation) -> ConversationViewController {
         let instance = ConversationViewController()
         instance.senderDisplayName = NSLocalizedString("Me", comment: "Chat: Current user name")
-        instance.senderId = conversation.currentUserId
+        instance.senderId = ConversationManager.sharedInstance().getSenderId(conversation)
         instance.chatController = ChatController(conversation: conversation)
         instance.chatController.delegate = instance
+        instance.title = conversation.name
         return instance
     }
     
     private var chatController: ChatController!
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        title = NSLocalizedString("Chat", comment: "Chat: Default chat title")
-    }
     
     deinit {
         chatController?.closeSession()
@@ -233,6 +229,15 @@ extension ConversationViewController: ChatControllerDelegate {
 //MARK: - Navigation  -
 
 extension UIViewController {
+    func showChatViewController(userId: CRUDObjectId) {
+        api().getUsers([userId]).onSuccess { [weak self] response in
+            if let info = response.items.first {
+                self?.showChatViewController(Conversation(user: info))
+            }
+            
+        }
+    }
+    
     func showChatViewController(conversation: Conversation) {
         api().isUserAuthorized().onSuccess { [weak self] _ in
             let chatController = ConversationViewController.conversationController(conversation)
