@@ -219,7 +219,7 @@ extension ConversationViewController {
 extension ConversationViewController: ChatControllerDelegate {
     func didUpdateMessages() {
         if chatController.messagesCount() > 0 {
-            JSQSystemSoundPlayer.jsq_playMessageReceivedSound()
+//            JSQSystemSoundPlayer.jsq_playMessageReceivedSound()
         }
         scrollToBottomAnimated(true)
         finishReceivingMessage()
