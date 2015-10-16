@@ -95,6 +95,14 @@ final class UserProfileViewController: BesideMenuViewController, BrowseActionPro
         actionConsumer?.browseControllerDidChangeContent(self)
     }
     
+    override func contentDidChange(sender: AnyObject?, info: [NSObject : AnyObject]?) {
+        super.contentDidChange(sender, info: info)
+        if isViewLoaded() {
+            reloadData()
+        }
+    }
+
+    
     func setNavigationBarButtonItem(isCurrentUser: Bool) {
         let navigationBarButtonActionSelector : Selector = "handleNavigationBarButtonItemTap:"
         let navigationBarButtonWidthSize : CGFloat = 40
@@ -196,6 +204,8 @@ final class UserProfileViewController: BesideMenuViewController, BrowseActionPro
     }
 }
 
+//MARK: - Actions -
+
 extension UserProfileViewController: UserProfileActionConsumer {
     func shouldExecuteAction(action: UserProfileViewController.ProfileAction) {
         switch action {
@@ -265,6 +275,7 @@ extension UserProfileViewController: BrowseActionConsumer {
     }
 }
 
+//MARK: - Table -
 
 protocol ProfileCellModel: TableViewCellModel {
     

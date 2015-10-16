@@ -76,6 +76,7 @@ final class PeopleViewController: BesideMenuViewController {
     private var subscriptionUpdateObserver: NSObjectProtocol!
     
     override func contentDidChange(sender: AnyObject?, info: [NSObject : AnyObject]?) {
+        super.contentDidChange(sender, info: info)
         if isViewLoaded() {
             reloadData()
         }

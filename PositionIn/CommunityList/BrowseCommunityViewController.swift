@@ -111,6 +111,7 @@ final class BrowseCommunityViewController: BesideMenuViewController {
     }
 
     override func contentDidChange(sender: AnyObject?, info: [NSObject : AnyObject]?) {
+        super.contentDidChange(sender, info: info)
         ConversationManager.sharedInstance().refresh()
         if isViewLoaded() {
             reloadData()

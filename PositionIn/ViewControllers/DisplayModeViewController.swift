@@ -25,6 +25,7 @@ protocol BrowseActionConsumer: class {
     //MARK: - Updates -
     
     override func contentDidChange(sender: AnyObject?, info: [NSObject : AnyObject]?) {
+        super.contentDidChange(sender, info: info)
         if isViewLoaded() {
             applyDisplayMode(displayMode)
         }
