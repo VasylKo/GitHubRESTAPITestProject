@@ -103,7 +103,7 @@ final class ChatController: NSObject {
         var userIds: [CRUDObjectId] = []
         synced(self) {
             userIds = filter(self.query) { self.occupants.contains($0) == false }
-            self.occupants.union(self.query)
+            self.occupants.unionInPlace(self.query)
             self.query =  Set()
         }
         if userIds.isEmpty {
