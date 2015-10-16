@@ -106,11 +106,13 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
         NSMutableArray *messages = [NSMutableArray new];
         for (XMPPRoomMessageMemoryStorageObject *storedMessage in [storage messages]) {
             XMPPMessage *msg = storedMessage.message;
-            if (msg.from == nil) {
-                [msg addAttributeWithName:@"from" stringValue:[room.myRoomJID full]];
+            if ([msg isGroupChatMessageWithBody]) {
+                if (msg.from == nil) {
+                    [msg addAttributeWithName:@"from" stringValue:[room.myRoomJID full]];
+                }
+                XMPPTextMessage *textMsg = [[XMPPTextMessage alloc] initWithMessage:msg];
+                [messages addObject:textMsg];
             }
-            XMPPTextMessage *textMsg = [[XMPPTextMessage alloc] initWithMessage:msg];
-            [messages addObject:textMsg];
         }
         return messages;
     }
