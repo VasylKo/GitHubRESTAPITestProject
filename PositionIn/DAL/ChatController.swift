@@ -25,8 +25,7 @@ final class ChatController: NSObject {
         super.init()
         prepareCache()
         ConversationManager.sharedInstance().didEnterConversation(conversation)
-        loadConversationHistory(conversation)
-        chatClient.addMessageListener(self)
+        fetchMetadata()
     }
     
     func closeSession() {
@@ -34,6 +33,7 @@ final class ChatController: NSObject {
     }
     
     deinit {
+        queryTimer?.invalidate()
         closeSession()
     }
     
@@ -55,7 +55,12 @@ final class ChatController: NSObject {
     }
     
     func avatarForSender(senderId: CRUDObjectId) -> JSQMessageAvatarImageDataSource {
-        return  avatarDataSourceForUser(senderId) ??  defaultAvatar
+        if let dataSource = avatarDataSourceForUser(senderId) {
+            return dataSource
+        } else {
+            loadUserInfo(senderId)
+            return defaultAvatar
+        }
     }
     
     lazy private var defaultAvatar: JSQMessagesAvatarImage = {
@@ -77,31 +82,51 @@ final class ChatController: NSObject {
         }
     }
     
-    private func loadInfoForUsers(userIds: [CRUDObjectId]) {
-        
-        /*
-        func avatarDownloadFuture(url: NSURL) -> Future<UIImage, NSError> {
+    private func fetchMetadata() {
+        loadUserInfo(ConversationManager.sharedInstance().getSenderId(conversation))
+        if conversation.isGroupChat == false {
+            loadUserInfo(conversation.roomId)
+        }
+        loadConversationHistory(conversation)
+        chatClient.addMessageListener(self)
+    }
+    
+    private func loadUserInfo(userId: CRUDObjectId) {
+        synced(self) {
+            self.queryTimer?.invalidate()
+            self.queryTimer = NSTimer.scheduledTimerWithTimeInterval(self.queryDelay, target: self, selector: "executePendingQuery", userInfo: nil, repeats: false)
+            self.query.insert(userId)
+        }
+    }
+    
+    func executePendingQuery() {
+        var userIds: [CRUDObjectId] = []
+        synced(self) {
+            userIds = filter(self.query) { self.occupants.contains($0) == false }
+            self.occupants.union(self.query)
+            self.query =  Set()
+        }
+        if userIds.isEmpty {
+            return
+        }
+        let fetchAvatar: (NSURL) -> Future<UIImage, NSError>  = { url in
             let promise = Promise<UIImage, NSError>()
             Shared.imageCache.fetch(URL: url, formatName: ChatController.avatarCacheFormatName, failure: { (e) -> () in
                 //TODO: add default error
                 let error =  e ??  NSError()
                 promise.failure(error)
-            }, success: {image in
-                promise.success(image)
+                }, success: {image in
+                    promise.success(image)
             })
             return promise.future
+
         }
-        api().getUsers(userIds).onSuccess {[weak self] response in
-            Log.debug?.value(response.items)
+        Log.info?.message("Fetching info for users \(userIds)")
+        api().getUsers(userIds).onSuccess { [weak self] response in
             if let strongSelf = self {
-                strongSelf.participantsInfo = response.items
-                let conversation = strongSelf.conversation
-                strongSelf.chatClient.history.startConversationWithUser(conversation.roomId, name: strongSelf.displayNameForUser(conversation.roomId), imageURL: nil)
-                strongSelf.loadConversationHistory(strongSelf.conversation)
-                strongSelf.delegate?.didUpdateMessages()
                 let usersWithAvatars = response.items.filter { $0.avatar != nil }
                 let avatarDownloads = usersWithAvatars.map { info in
-                    avatarDownloadFuture(info.avatar!).onSuccess { [weak strongSelf] image in
+                    fetchAvatar(info.avatar!).onSuccess { [weak strongSelf] image in
                         strongSelf?.addAvatar(image, user: info.objectId)
                     }
                 }
@@ -109,11 +134,9 @@ final class ChatController: NSObject {
                     strongSelf?.delegate?.didUpdateMessages()
                 }
             }
-            
         }
-        */
     }
-        
+    
     private func addAvatar(image: UIImage, user: CRUDObjectId) {
         let dataSource = JSQMessagesAvatarImageFactory.avatarImageWithImage(image, diameter: UInt(kJSQMessagesCollectionViewAvatarSizeDefault))
         synced(avatarsCache) {
@@ -162,6 +185,11 @@ final class ChatController: NSObject {
     private var participantsInfo: [UserInfo] = []
     private unowned var chatClient: XMPPClient
     private let conversation: Conversation
+    
+    private var queryTimer: NSTimer?
+    private let queryDelay: NSTimeInterval = 0.3
+    private var query: Set<CRUDObjectId> = Set()
+    private var occupants: Set<CRUDObjectId> = Set()
     
     static private var cacheOnceToken = dispatch_once_t()
     static private let avatarCacheFormatName = "ChatAvatars"

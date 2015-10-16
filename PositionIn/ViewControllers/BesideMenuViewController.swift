@@ -69,7 +69,7 @@ class BesideMenuViewController: UIViewController {
     }
     
     func contentDidChange(sender: AnyObject?, info: [NSObject : AnyObject]?) {
-        Log.debug?.message("Receive update notification from \(sender)")
+        Log.debug?.message("\(self) did receive update notification from \(sender) info: \(info)")
     }
     
     deinit{

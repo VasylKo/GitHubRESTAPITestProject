@@ -51,7 +51,6 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
 @property (nonatomic, strong) XMPPStream *xmppStream;
 @property (nonatomic, strong) XMPPDelegate *xmppDelegate;
 @property (nonatomic, strong) XMPPReconnect *xmppReconect;
-@property (nonatomic, strong) XMPPRoster *xmppRoster;
 @property (nonatomic, strong) XMPPPing *xmppPing;
 
 @property (nonatomic, retain) NSMutableArray *messageListeners;
@@ -223,10 +222,6 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
     [self.xmppReconect activate:self.xmppStream];
     [self.xmppReconect addDelegate:self.xmppDelegate delegateQueue:delegateQueue];
     [self.xmppReconect addDelegate:self delegateQueue:delegateQueue];
-    
-//    self.xmppRoster = [[XMPPRoster alloc] initWithRosterStorage:[XMPPRosterMemoryStorage new]];
-//    [self.xmppRoster activate:self.xmppStream];
-//    [self.xmppRoster addDelegate:self.xmppDelegate delegateQueue:delegateQueue];
 }
 
 
@@ -239,16 +234,12 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
     [self.xmppReconect removeDelegate:self.xmppDelegate];
     [self.xmppReconect deactivate];
     
-    [self.xmppRoster removeDelegate:self.xmppDelegate];
-    [self.xmppRoster deactivate];
-    
     [self.xmppStream removeDelegate:self];
     [self.xmppStream removeDelegate:self.xmppDelegate];
     [self.xmppStream disconnect];
     
     self.xmppPing = nil;
     self.xmppReconect = nil;
-    self.xmppRoster = nil;
     self.xmppStream = nil;
 }
 
