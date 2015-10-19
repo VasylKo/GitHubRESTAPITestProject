@@ -188,7 +188,9 @@ final class UserProfileViewController: BesideMenuViewController, BrowseActionPro
         searchBar.tintColor = UIColor.whiteColor()
         searchBar.backgroundColor = UIColor.whiteColor()
         searchBar.borderStyle = UITextBorderStyle.RoundedRect
-        let leftView = UIImageView(image: UIImage(named: "search_icon"))
+        let leftView: UIImageView = UIImageView(image: UIImage(named: "search_icon"))
+        leftView.frame = CGRectMake(0.0, 0.0, leftView.frame.size.width + 10.0, leftView.frame.size.height);
+        leftView.contentMode = .Center
         searchBar.leftView = leftView
         searchBar.leftViewMode = .Always
         searchBar.delegate = self

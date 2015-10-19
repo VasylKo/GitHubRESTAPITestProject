@@ -9,13 +9,18 @@
 import PosInCore
 import CleanroomLogger
 
-final class BrowseViewController: BrowseModeTabbarViewController {
+protocol SearchFilterProtocol {
+    var filter: SearchFilter {get set}
+    func applyFilterUpdate(update: SearchFilterUpdate, canAffect: Bool)
+    var canAffectFilter: Bool {get set}
+}
+
+final class BrowseViewController: BrowseModeTabbarViewController, SearchViewControllerDelegate {
     
     
     @IBAction func prepareForUnwind(segue: UIStoryboardSegue) {
         
     }
-    
     
     override func viewControllerForMode(mode: DisplayModeViewController.DisplayMode) -> UIViewController {
         switch self.displayMode {
@@ -42,6 +47,88 @@ final class BrowseViewController: BrowseModeTabbarViewController {
             },
         ]
     }
-
     
+    override func presentSearchViewController() {
+        
+        childFilterUpdate = { (filter: SearchFilter) -> SearchFilter in
+            var f = filter
+            f =  SearchFilter.currentFilter
+            return f
+        }
+        canAffectOnFilter = true
+        applyDisplayMode(displayMode)
+        super.presentSearchViewController()
+    }
+
+    override func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
+        super.textFieldShouldBeginEditing(textField)
+        return true
+    }
+    
+    
+    override func searchViewControllerItemSelected(model: SearchItemCellModel?) {
+        if let model = model {
+
+                switch model.itemType {
+                case .Unknown:
+                    break
+                case .Category:
+                    break
+                case .Product:
+                    let controller =  Storyboards.Main.instantiateProductDetailsViewControllerId()
+                    controller.objectId = model.objectID
+                    navigationController?.pushViewController(controller, animated: true)
+                case .Event:
+                    let controller =  Storyboards.Main.instantiateEventDetailsViewControllerId()
+                    controller.objectId = model.objectID
+                    navigationController?.pushViewController(controller, animated: true)
+                case .Promotion:
+                    let controller =  Storyboards.Main.instantiatePromotionDetailsViewControllerId()
+                    controller.objectId =  model.objectID
+                    navigationController?.pushViewController(controller, animated: true)
+                case .Community:
+                    childFilterUpdate = { (filter: SearchFilter) -> SearchFilter in
+                        var f = filter
+                        f.communities = [model.objectID]
+                        return f
+                    }
+                    canAffectOnFilter = false
+                    applyDisplayMode(displayMode)
+                case .People:
+                    childFilterUpdate = { (filter: SearchFilter) -> SearchFilter in
+                        var f = filter
+                        f.users = [model.objectID]
+                        return f
+                    }
+                    canAffectOnFilter = false
+                    applyDisplayMode(displayMode)
+                default:
+                    break
+                }
+        }
+    }
+
+    override func searchViewControllerSectionSelected(model: SearchSectionCellModel?) {
+        if let model = model {
+            let itemType = model.itemType
+            childFilterUpdate = { (filter: SearchFilter) -> SearchFilter in
+                var f = filter
+                f.itemTypes = [ itemType ]
+                return f
+            }
+            canAffectOnFilter = false
+            applyDisplayMode(displayMode)
+        }
+    }
+    
+    var childFilterUpdate: SearchFilterUpdate?
+    var canAffectOnFilter: Bool = true
+    
+    override func prepareDisplayController(controller: UIViewController) {
+        super.prepareDisplayController(controller)
+        if let filterUpdate = childFilterUpdate,
+           let filterApplicator = controller as? SearchFilterProtocol {
+            filterApplicator.applyFilterUpdate(filterUpdate, canAffect: canAffectOnFilter)
+        }
+    }
 }

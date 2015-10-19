@@ -69,9 +69,10 @@ protocol BrowseActionConsumer: class {
         }
         
         let childController = viewControllerForMode(self.displayMode)
-        prepareDisplayController(childController)
         childController.willMoveToParentViewController(self)
+        prepareDisplayController(childController)
         self.addChildViewController(childController)
+
         self.contentView.addSubViewOnEntireSize(childController.view)
         childController.didMoveToParentViewController(self)
         currentModeViewController = childController
@@ -88,7 +89,6 @@ protocol BrowseActionConsumer: class {
         Log.verbose?.message("Preparing display controller: \(controller)")
     }
     
-
     //MARK: - UI -
     
     override func viewDidLoad() {
@@ -141,7 +141,7 @@ protocol BrowseActionConsumer: class {
 
     //MARK: - Private -
     
-    private weak var currentModeViewController: UIViewController?
+    weak var currentModeViewController: UIViewController?
     
     override func loadView() {
         let view = UIView()
@@ -188,7 +188,9 @@ protocol BrowseActionConsumer: class {
         searchBar.tintColor = UIColor.whiteColor()
         searchBar.backgroundColor = UIColor.whiteColor()
         searchBar.borderStyle = UITextBorderStyle.RoundedRect
-        let leftView = UIImageView(image: UIImage(named: "search_icon"))
+        let leftView: UIImageView = UIImageView(image: UIImage(named: "search_icon"))
+        leftView.frame = CGRectMake(0.0, 0.0, leftView.frame.size.width + 10.0, leftView.frame.size.height);
+        leftView.contentMode = .Center
         searchBar.leftView = leftView
         searchBar.leftViewMode = .Always
         searchBar.delegate = self
@@ -197,37 +199,16 @@ protocol BrowseActionConsumer: class {
     
     func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
         textField.resignFirstResponder()
-        SearchViewController.present(searchbar, presenter: self)
+        self.presentSearchViewController()
         return false
     }
     
+    func presentSearchViewController() {
+        SearchViewController.present(searchbar, presenter: self)
+    }
+    
     func searchViewControllerItemSelected(model: SearchItemCellModel?) {
-        if let model = model {
-            switch model.itemType {
-            case .Unknown:
-                break
-            case .Category:
-                break
-            case .Product:
-                let controller =  Storyboards.Main.instantiateProductDetailsViewControllerId()
-                controller.objectId = model.objectID
-                navigationController?.pushViewController(controller, animated: true)
-            case .Event:
-                let controller =  Storyboards.Main.instantiateEventDetailsViewControllerId()
-                controller.objectId = model.objectID
-                navigationController?.pushViewController(controller, animated: true)
-            case .Promotion:
-                let controller =  Storyboards.Main.instantiatePromotionDetailsViewControllerId()
-                controller.objectId =  model.objectID
-                navigationController?.pushViewController(controller, animated: true)
-            case .Community:
-                SearchFilter.currentFilter.communities = [model.objectID]
-            case .People:
-                SearchFilter.currentFilter.users = [model.objectID]
-            default:
-                break
-            }
-        }
+        
     }
     
     func searchViewControllerSectionSelected(model: SearchSectionCellModel?) {
