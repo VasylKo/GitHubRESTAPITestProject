@@ -11,7 +11,7 @@ import PosInCore
 import CleanroomLogger
 import BrightFutures
 
-final class BrowseListViewController: UIViewController, BrowseActionProducer, BrowseModeDisplay {
+final class BrowseListViewController: UIViewController, BrowseActionProducer, BrowseModeDisplay, SearchFilterProtocol {
     var excludeCommunityItems = false
     var shoWCompactCells: Bool = true
     private var dataRequestToken = InvalidationToken()
@@ -33,15 +33,31 @@ final class BrowseListViewController: UIViewController, BrowseActionProducer, Br
         }
     }
     
+    func applyFilterUpdate(update: SearchFilterUpdate) {
+        canAffectFilter = false
+        filter = update(filter)
+    }
+    
+    private var canAffectFilter = true
+    
     var selectedItemType: FeedItem.ItemType = .Unknown {
         didSet {
             var f = filter
-            f.itemTypes = [selectedItemType]
+            if (canAffectFilter) {
+                f.itemTypes = [selectedItemType]
+            }
             filter = f
         }
     }
     
+    func reloadData() {
+        getFeedItems(filter)
+        self.selectedItemType = FeedItem.ItemType.Promotion
+    }
+    
     private func getFeedItems(searchFilter: SearchFilter, page: APIService.Page = APIService.Page()) {
+        Log.debug?.trace()
+        Log.debug?.value(self)
         dataRequestToken.invalidate()
         dataRequestToken = InvalidationToken()
         let request: Future<CollectionResponse<FeedItem>,NSError>

@@ -20,7 +20,7 @@ protocol BrowseActionConsumer: class {
     func browseControllerDidChangeContent(controller: BrowseActionProducer)
 }
 
-@objc class DisplayModeViewController: BesideMenuViewController, BrowseActionConsumer, SearchViewControllerDelegate, UISearchBarDelegate {
+@objc class DisplayModeViewController: BesideMenuViewController, BrowseActionConsumer, SearchViewControllerDelegate, UITextFieldDelegate {
     
     //MARK: - Updates -
     
@@ -141,7 +141,7 @@ protocol BrowseActionConsumer: class {
 
     //MARK: - Private -
     
-    private weak var currentModeViewController: UIViewController?
+    weak var currentModeViewController: UIViewController?
     
     override func loadView() {
         let view = UIView()
@@ -183,14 +183,22 @@ protocol BrowseActionConsumer: class {
 
     //MARK: - Search -
     
-    private lazy var searchbar: SearchBar = { [unowned self] in
-        let searchBar = SearchBar()
+    private lazy var searchbar: UITextField = { [unowned self] in
+        let searchBar = UITextField(frame: CGRectMake(0, 0, UIScreen.mainScreen().applicationFrame.size.width * 0.7, 25))
+        searchBar.tintColor = UIColor.whiteColor()
+        searchBar.backgroundColor = UIColor.whiteColor()
+        searchBar.borderStyle = UITextBorderStyle.RoundedRect
+        let leftView: UIImageView = UIImageView(image: UIImage(named: "search_icon"))
+        leftView.frame = CGRectMake(0.0, 0.0, leftView.frame.size.width + 10.0, leftView.frame.size.height);
+        leftView.contentMode = .Center
+        searchBar.leftView = leftView
+        searchBar.leftViewMode = .Always
         searchBar.delegate = self
         return searchBar
         }()
-
-    func searchBarShouldBeginEditing(searchBar: UISearchBar) -> Bool {
-        searchBar.resignFirstResponder()
+    
+    func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
         SearchViewController.present(searchbar, presenter: self)
         return false
     }
