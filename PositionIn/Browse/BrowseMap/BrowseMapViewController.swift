@@ -12,7 +12,7 @@ import CleanroomLogger
 import BrightFutures
 import Box
 
-final class BrowseMapViewController: UIViewController, BrowseActionProducer, BrowseModeDisplay {
+final class BrowseMapViewController: UIViewController, BrowseActionProducer, BrowseModeDisplay, SearchFilterProtocol {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,11 +71,15 @@ final class BrowseMapViewController: UIViewController, BrowseActionProducer, Bro
         actionConsumer?.browseControllerDidChangeContent(self)
     }
     
-    private var markers = [GMSMarker]()
-    
-    func reloadData() {
-        //TODO: reloadData
+    func applyFilterUpdate(update: SearchFilterUpdate, canAffect: Bool) {
+        canAffectFilter = canAffect
+        
+        filter = update(filter)
     }
+    
+    internal var canAffectFilter = true
+    
+    private var markers = [GMSMarker]()
 }
 
 

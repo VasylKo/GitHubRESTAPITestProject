@@ -34,11 +34,10 @@ final class BrowseListViewController: UIViewController, BrowseActionProducer, Br
 
     func applyFilterUpdate(update: SearchFilterUpdate, canAffect: Bool) {
         canAffectFilter = canAffect
-        
         filter = update(filter)
     }
     
-    private var canAffectFilter = true
+    internal var canAffectFilter = true
     
     var selectedItemType: FeedItem.ItemType = .Unknown {
         didSet {
@@ -47,7 +46,7 @@ final class BrowseListViewController: UIViewController, BrowseActionProducer, Br
                 f.itemTypes = [selectedItemType]
             }
             else {
-//                contains(itemTypes, strongSelf.selectedItemType)
+                //TODO: need refactor
                 if filter.itemTypes?.first == selectedItemType || selectedItemType == .Unknown {
                     filter = f
                 }

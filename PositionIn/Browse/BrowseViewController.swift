@@ -12,6 +12,7 @@ import CleanroomLogger
 protocol SearchFilterProtocol {
     var filter: SearchFilter {get set}
     func applyFilterUpdate(update: SearchFilterUpdate, canAffect: Bool)
+    var canAffectFilter: Bool {get set}
 }
 
 final class BrowseViewController: BrowseModeTabbarViewController, SearchViewControllerDelegate {
@@ -54,7 +55,7 @@ final class BrowseViewController: BrowseModeTabbarViewController, SearchViewCont
             f =  SearchFilter.currentFilter
             return f
         }
-                            canAffectOnFilter = true
+        canAffectOnFilter = true
         applyDisplayMode(displayMode)
         super.presentSearchViewController()
     }
@@ -63,6 +64,7 @@ final class BrowseViewController: BrowseModeTabbarViewController, SearchViewCont
         super.textFieldShouldBeginEditing(textField)
         return true
     }
+    
     
     override func searchViewControllerItemSelected(model: SearchItemCellModel?) {
         if let model = model {
@@ -114,7 +116,7 @@ final class BrowseViewController: BrowseModeTabbarViewController, SearchViewCont
                 f.itemTypes = [ itemType ]
                 return f
             }
-                                canAffectOnFilter = false
+            canAffectOnFilter = false
             applyDisplayMode(displayMode)
         }
     }
