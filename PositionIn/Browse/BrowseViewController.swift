@@ -11,7 +11,7 @@ import CleanroomLogger
 
 protocol SearchFilterProtocol {
     var filter: SearchFilter {get set}
-    func applyFilterUpdate(update: SearchFilterUpdate)
+    func applyFilterUpdate(update: SearchFilterUpdate, canAffect: Bool)
 }
 
 final class BrowseViewController: BrowseModeTabbarViewController, SearchViewControllerDelegate {
@@ -46,6 +46,18 @@ final class BrowseViewController: BrowseModeTabbarViewController, SearchViewCont
             },
         ]
     }
+    
+    override func presentSearchViewController() {
+        
+        childFilterUpdate = { (filter: SearchFilter) -> SearchFilter in
+            var f = filter
+            f =  SearchFilter.currentFilter
+            return f
+        }
+                            canAffectOnFilter = true
+        applyDisplayMode(displayMode)
+        super.presentSearchViewController()
+    }
 
     override func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
         super.textFieldShouldBeginEditing(textField)
@@ -78,6 +90,7 @@ final class BrowseViewController: BrowseModeTabbarViewController, SearchViewCont
                         f.communities = [model.objectID]
                         return f
                     }
+                    canAffectOnFilter = false
                     applyDisplayMode(displayMode)
                 case .People:
                     childFilterUpdate = { (filter: SearchFilter) -> SearchFilter in
@@ -85,6 +98,7 @@ final class BrowseViewController: BrowseModeTabbarViewController, SearchViewCont
                         f.users = [model.objectID]
                         return f
                     }
+                    canAffectOnFilter = false
                     applyDisplayMode(displayMode)
                 default:
                     break
@@ -100,17 +114,19 @@ final class BrowseViewController: BrowseModeTabbarViewController, SearchViewCont
                 f.itemTypes = [ itemType ]
                 return f
             }
+                                canAffectOnFilter = false
             applyDisplayMode(displayMode)
         }
     }
     
     var childFilterUpdate: SearchFilterUpdate?
+    var canAffectOnFilter: Bool = true
     
     override func prepareDisplayController(controller: UIViewController) {
         super.prepareDisplayController(controller)
         if let filterUpdate = childFilterUpdate,
-           let filterApplicator = self.currentModeViewController as? SearchFilterProtocol {
-            filterApplicator.applyFilterUpdate(filterUpdate)
+           let filterApplicator = controller as? SearchFilterProtocol {
+            filterApplicator.applyFilterUpdate(filterUpdate, canAffect: canAffectOnFilter)
         }
     }
 }
