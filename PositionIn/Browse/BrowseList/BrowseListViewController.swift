@@ -1,4 +1,4 @@
-//
+	//
 //  BrowseListViewController.swift
 //  PositionIn
 //
@@ -22,9 +22,8 @@ final class BrowseListViewController: UIViewController, BrowseActionProducer, Br
         super.viewDidLoad()
         dataSource.configureTable(tableView)
         selectedItemType = .Unknown
-        
     }
-    
+        
     var filter = SearchFilter.currentFilter {
         didSet {
             if isViewLoaded() {
@@ -32,13 +31,13 @@ final class BrowseListViewController: UIViewController, BrowseActionProducer, Br
             }
         }
     }
-    
-    func applyFilterUpdate(update: SearchFilterUpdate) {
-        canAffectFilter = false
+
+    func applyFilterUpdate(update: SearchFilterUpdate, canAffect: Bool) {
+        canAffectFilter = canAffect
         filter = update(filter)
     }
     
-    private var canAffectFilter = true
+    internal var canAffectFilter = true
     
     var selectedItemType: FeedItem.ItemType = .Unknown {
         didSet {
@@ -46,13 +45,22 @@ final class BrowseListViewController: UIViewController, BrowseActionProducer, Br
             if (canAffectFilter) {
                 f.itemTypes = [selectedItemType]
             }
+            else {
+                //TODO: need refactor
+                if filter.itemTypes?.first == selectedItemType || selectedItemType == .Unknown {
+                    filter = f
+                }
+                else {
+                    self.dataSource.setItems([])
+                    self.tableView.reloadData()
+                }
+            }
             filter = f
         }
     }
-    
+
     func reloadData() {
         getFeedItems(filter)
-        self.selectedItemType = FeedItem.ItemType.Promotion
     }
     
     private func getFeedItems(searchFilter: SearchFilter, page: APIService.Page = APIService.Page()) {
@@ -72,7 +80,8 @@ final class BrowseListViewController: UIViewController, BrowseActionProducer, Br
             Log.debug?.value(response.items)
             if let strongSelf = self,
                let itemTypes = searchFilter.itemTypes
-               where contains(itemTypes, strongSelf.selectedItemType) {
+                //TODO: need discuss this moment
+               where contains(itemTypes, strongSelf.selectedItemType) || strongSelf.selectedItemType == .Unknown  {
                 var items: [FeedItem] = response.items
                 if strongSelf.excludeCommunityItems {
                     items = items.filter { $0.community == CRUDObjectInvalidId }
