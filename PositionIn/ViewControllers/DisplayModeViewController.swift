@@ -214,4 +214,8 @@ protocol BrowseActionConsumer: class {
     func searchViewControllerSectionSelected(model: SearchSectionCellModel?) {
         
     }
+    
+    func searchViewControllerCancelSearch() {
+        
+    }
 }

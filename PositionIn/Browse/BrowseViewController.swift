@@ -17,7 +17,6 @@ protocol SearchFilterProtocol {
 
 final class BrowseViewController: BrowseModeTabbarViewController, SearchViewControllerDelegate {
     
-    
     @IBAction func prepareForUnwind(segue: UIStoryboardSegue) {
         
     }
@@ -59,12 +58,6 @@ final class BrowseViewController: BrowseModeTabbarViewController, SearchViewCont
         applyDisplayMode(displayMode)
         super.presentSearchViewController()
     }
-
-    override func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
-        super.textFieldShouldBeginEditing(textField)
-        return true
-    }
-    
     
     override func searchViewControllerItemSelected(model: SearchItemCellModel?) {
         if let model = model {

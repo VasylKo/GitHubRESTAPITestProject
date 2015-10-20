@@ -10,7 +10,8 @@ import UIKit
 import PosInCore
 import CleanroomLogger
 
-protocol SearchViewControllerDelegate: class  {   
+protocol SearchViewControllerDelegate: class  {
+    func searchViewControllerCancelSearch()
     func searchViewControllerItemSelected(model: SearchItemCellModel?)
     func searchViewControllerSectionSelected(model: SearchSectionCellModel?)
 }
@@ -81,6 +82,7 @@ final class SearchViewController: UIViewController {
     
     @IBAction func cancelButtonPressed(sender: AnyObject) {
         self.shouldCloseSearch()
+        self.delegate?.searchViewControllerCancelSearch()
     }
     
     func didTapOutsideSearch(sender: UIGestureRecognizer) {
