@@ -191,9 +191,12 @@ final class UserProfileViewController: BesideMenuViewController, BrowseActionPro
     //MARK: - Search -
     
     private lazy var searchbar: UITextField = { [unowned self] in
-        let searchBar = UITextField(frame: CGRectMake(0, 0, UIScreen.mainScreen().applicationFrame.size.width * 0.7, 25))
+        let width = self.navigationController?.navigationBar.frame.size.width
+        let searchBar = UITextField(frame: CGRectMake(0, 0, width! * 0.7, 25))
         searchBar.tintColor = UIColor.whiteColor()
-        searchBar.backgroundColor = UIColor.whiteColor()
+        searchBar.backgroundColor = UIColor.bt_colorWithBytesR(0, g: 73, b: 167)
+        searchBar.font = UIFont.systemFontOfSize(12)
+        searchBar.textColor = UIColor.whiteColor()
         searchBar.borderStyle = UITextBorderStyle.RoundedRect
         let leftView: UIImageView = UIImageView(image: UIImage(named: "search_icon"))
         leftView.frame = CGRectMake(0.0, 0.0, leftView.frame.size.width + 10.0, leftView.frame.size.height);
@@ -210,7 +213,7 @@ final class UserProfileViewController: BesideMenuViewController, BrowseActionPro
         return false
     }
     
-    func searchViewControllerItemSelected(model: SearchItemCellModel?) {
+    func searchViewControllerItemSelected(model: SearchItemCellModel?, searchString: String?, locationString: String?) {
         if let model = model {
             
             switch model.itemType {
@@ -249,10 +252,11 @@ final class UserProfileViewController: BesideMenuViewController, BrowseActionPro
             default:
                 break
             }
+            self.searchbar.text = model.title! + " " + searchString! + " " + locationString!
         }
     }
     
-    func searchViewControllerSectionSelected(model: SearchSectionCellModel?) {
+    func searchViewControllerSectionSelected(model: SearchSectionCellModel?, searchString: String?, locationString: String?) {
         if let model = model {
             let itemType = model.itemType
             childFilterUpdate = { (filter: SearchFilter) -> SearchFilter in
@@ -260,8 +264,10 @@ final class UserProfileViewController: BesideMenuViewController, BrowseActionPro
                 f.itemTypes = [ itemType ]
                 return f
             }
+            self.searchbar.text = itemType.description
             canAffectOnFilter = false
             self.updateFeed()
+            self.searchbar.text = model.title! + " " + searchString! + " " + locationString!
         }
     }
     
@@ -275,8 +281,8 @@ final class UserProfileViewController: BesideMenuViewController, BrowseActionPro
         }
         canAffectOnFilter = true
         self.updateFeed()
+        searchbar.text = nil
     }
-
 }
 
 //MARK: - Actions -

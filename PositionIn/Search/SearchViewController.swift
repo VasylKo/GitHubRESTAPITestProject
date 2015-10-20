@@ -12,8 +12,8 @@ import CleanroomLogger
 
 protocol SearchViewControllerDelegate: class  {
     func searchViewControllerCancelSearch()
-    func searchViewControllerItemSelected(model: SearchItemCellModel?)
-    func searchViewControllerSectionSelected(model: SearchSectionCellModel?)
+    func searchViewControllerItemSelected(model: SearchItemCellModel?, searchString: String?, locationString: String?)
+    func searchViewControllerSectionSelected(model: SearchSectionCellModel?, searchString: String?, locationString: String?)
 }
 
 final class SearchViewController: UIViewController {
@@ -146,9 +146,11 @@ extension SearchViewController: ItemsSearchResultsDelegate {
 
         switch model {
         case let sectionModel as SearchSectionCellModel:
-            self.delegate?.searchViewControllerSectionSelected(sectionModel)
+            self.delegate?.searchViewControllerSectionSelected(sectionModel, searchString: searchTextField.text,
+                locationString: self.locationSearchTextField.text)
         case let itemModel as SearchItemCellModel:
-            self.delegate?.searchViewControllerItemSelected(itemModel)
+            self.delegate?.searchViewControllerItemSelected(itemModel, searchString: searchTextField.text,
+                locationString: self.locationSearchTextField.text)
         default:
             break
         }
