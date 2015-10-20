@@ -43,7 +43,8 @@ final class UserProfileViewController: BesideMenuViewController, BrowseActionPro
     }
     
     var objectId: CRUDObjectId = api().currentUserId() ?? CRUDObjectInvalidId
-    
+    var childFilterUpdate: SearchFilterUpdate?
+    var canAffectOnFilter: Bool = true
     var profile: UserProfile = UserProfile(objectId: CRUDObjectInvalidId) {
         didSet {
             if isViewLoaded() {
@@ -87,8 +88,14 @@ final class UserProfileViewController: BesideMenuViewController, BrowseActionPro
         }
         dataSource.items[Sections.Info.rawValue] = infoSection
         
+        self.updateFeed()
+    }
+    
+    private func updateFeed() {
         var feedModel = BrowseListCellModel(objectId: profile.objectId, actionConsumer: self, browseMode: .New)
         feedModel.excludeCommunityItems = true
+        feedModel.childFilterUpdate = self.childFilterUpdate
+        feedModel.canAffectOnFilter = canAffectOnFilter
         dataSource.items[Sections.Feed.rawValue] = [ feedModel ]
         
         tableView.reloadData()
@@ -184,9 +191,12 @@ final class UserProfileViewController: BesideMenuViewController, BrowseActionPro
     //MARK: - Search -
     
     private lazy var searchbar: UITextField = { [unowned self] in
-        let searchBar = UITextField(frame: CGRectMake(0, 0, UIScreen.mainScreen().applicationFrame.size.width * 0.7, 25))
+        let width = self.navigationController?.navigationBar.frame.size.width
+        let searchBar = UITextField(frame: CGRectMake(0, 0, width! * 0.7, 25))
         searchBar.tintColor = UIColor.whiteColor()
-        searchBar.backgroundColor = UIColor.whiteColor()
+        searchBar.backgroundColor = UIColor.bt_colorWithBytesR(0, g: 73, b: 167)
+        searchBar.font = UIFont.systemFontOfSize(12)
+        searchBar.textColor = UIColor.whiteColor()
         searchBar.borderStyle = UITextBorderStyle.RoundedRect
         let leftView: UIImageView = UIImageView(image: UIImage(named: "search_icon"))
         leftView.frame = CGRectMake(0.0, 0.0, leftView.frame.size.width + 10.0, leftView.frame.size.height);
@@ -203,12 +213,75 @@ final class UserProfileViewController: BesideMenuViewController, BrowseActionPro
         return false
     }
     
-    func searchViewControllerItemSelected(model: SearchItemCellModel?) {
-        
+    func searchViewControllerItemSelected(model: SearchItemCellModel?, searchString: String?, locationString: String?) {
+        if let model = model {
+            
+            switch model.itemType {
+            case .Unknown:
+                break
+            case .Category:
+                break
+            case .Product:
+                let controller =  Storyboards.Main.instantiateProductDetailsViewControllerId()
+                controller.objectId = model.objectID
+                navigationController?.pushViewController(controller, animated: true)
+            case .Event:
+                let controller =  Storyboards.Main.instantiateEventDetailsViewControllerId()
+                controller.objectId = model.objectID
+                navigationController?.pushViewController(controller, animated: true)
+            case .Promotion:
+                let controller =  Storyboards.Main.instantiatePromotionDetailsViewControllerId()
+                controller.objectId =  model.objectID
+                navigationController?.pushViewController(controller, animated: true)
+            case .Community:
+                childFilterUpdate = { (filter: SearchFilter) -> SearchFilter in
+                    var f = filter
+                    f.communities = [model.objectID]
+                    return f
+                }
+                canAffectOnFilter = false
+                self.updateFeed()
+            case .People:
+                childFilterUpdate = { (filter: SearchFilter) -> SearchFilter in
+                    var f = filter
+                    f.users = [model.objectID]
+                    return f
+                }
+                canAffectOnFilter = false
+                self.updateFeed()
+            default:
+                break
+            }
+            self.searchbar.text = model.title! + " " + searchString! + " " + locationString!
+        }
     }
     
-    func searchViewControllerSectionSelected(model: SearchSectionCellModel?) {
-        
+    func searchViewControllerSectionSelected(model: SearchSectionCellModel?, searchString: String?, locationString: String?) {
+        if let model = model {
+            let itemType = model.itemType
+            childFilterUpdate = { (filter: SearchFilter) -> SearchFilter in
+                var f = filter
+                f.itemTypes = [ itemType ]
+                return f
+            }
+            self.searchbar.text = itemType.description
+            canAffectOnFilter = false
+            self.updateFeed()
+            self.searchbar.text = model.title! + " " + searchString! + " " + locationString!
+        }
+    }
+    
+    func searchViewControllerCancelSearch() {
+        childFilterUpdate = { (filter: SearchFilter) -> SearchFilter in
+            var f = filter
+            var user = filter.users
+            f =  SearchFilter.currentFilter
+            f.users = user
+            return f
+        }
+        canAffectOnFilter = true
+        self.updateFeed()
+        searchbar.text = nil
     }
 }
 

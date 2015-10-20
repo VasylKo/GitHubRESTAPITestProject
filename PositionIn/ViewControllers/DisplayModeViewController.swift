@@ -184,10 +184,13 @@ protocol BrowseActionConsumer: class {
     //MARK: - Search -
     
     private lazy var searchbar: UITextField = { [unowned self] in
-        let searchBar = UITextField(frame: CGRectMake(0, 0, UIScreen.mainScreen().applicationFrame.size.width * 0.7, 25))
+        let width = self.navigationController?.navigationBar.frame.size.width
+        let searchBar = UITextField(frame: CGRectMake(0, 0, width! * 0.7, 25))
         searchBar.tintColor = UIColor.whiteColor()
-        searchBar.backgroundColor = UIColor.whiteColor()
+        searchBar.backgroundColor = UIColor.bt_colorWithBytesR(0, g: 73, b: 167)
         searchBar.borderStyle = UITextBorderStyle.RoundedRect
+        searchBar.font = UIFont.systemFontOfSize(12)
+        searchBar.textColor = UIColor.whiteColor()
         let leftView: UIImageView = UIImageView(image: UIImage(named: "search_icon"))
         leftView.frame = CGRectMake(0.0, 0.0, leftView.frame.size.width + 10.0, leftView.frame.size.height);
         leftView.contentMode = .Center
@@ -207,11 +210,19 @@ protocol BrowseActionConsumer: class {
         SearchViewController.present(searchbar, presenter: self)
     }
     
-    func searchViewControllerItemSelected(model: SearchItemCellModel?) {
-        
+    func searchViewControllerCancelSearch() {
+        self.searchbar.text = nil
     }
     
-    func searchViewControllerSectionSelected(model: SearchSectionCellModel?) {
-        
+    func searchViewControllerItemSelected(model: SearchItemCellModel?, searchString: String?, locationString: String?) {
+        if let model = model {
+            self.searchbar.text = model.title! + " " + searchString! + " " + locationString!
+        }
+    }
+    
+    func searchViewControllerSectionSelected(model: SearchSectionCellModel?, searchString: String?, locationString: String?) {
+        if let model = model {
+            self.searchbar.text = model.title! + " " + searchString! + " " + locationString!
+        }
     }
 }

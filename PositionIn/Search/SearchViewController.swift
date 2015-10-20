@@ -10,9 +10,10 @@ import UIKit
 import PosInCore
 import CleanroomLogger
 
-protocol SearchViewControllerDelegate: class  {   
-    func searchViewControllerItemSelected(model: SearchItemCellModel?)
-    func searchViewControllerSectionSelected(model: SearchSectionCellModel?)
+protocol SearchViewControllerDelegate: class  {
+    func searchViewControllerCancelSearch()
+    func searchViewControllerItemSelected(model: SearchItemCellModel?, searchString: String?, locationString: String?)
+    func searchViewControllerSectionSelected(model: SearchSectionCellModel?, searchString: String?, locationString: String?)
 }
 
 final class SearchViewController: UIViewController {
@@ -76,11 +77,11 @@ final class SearchViewController: UIViewController {
         locationSearchTextField.leftView = leftLocationView
         locationSearchTextField.leftViewMode = .Always
         locationSearchTextField.backgroundColor = UIColor.bt_colorWithBytesR(0, g: 0, b: 0, a: 102)
-        locationSearchTextField.textColor = UIColor.whiteColor()
     }
     
     @IBAction func cancelButtonPressed(sender: AnyObject) {
         self.shouldCloseSearch()
+        self.delegate?.searchViewControllerCancelSearch()
     }
     
     func didTapOutsideSearch(sender: UIGestureRecognizer) {
@@ -145,9 +146,11 @@ extension SearchViewController: ItemsSearchResultsDelegate {
 
         switch model {
         case let sectionModel as SearchSectionCellModel:
-            self.delegate?.searchViewControllerSectionSelected(sectionModel)
+            self.delegate?.searchViewControllerSectionSelected(sectionModel, searchString: searchTextField.text,
+                locationString: self.locationSearchTextField.text)
         case let itemModel as SearchItemCellModel:
-            self.delegate?.searchViewControllerItemSelected(itemModel)
+            self.delegate?.searchViewControllerItemSelected(itemModel, searchString: searchTextField.text,
+                locationString: self.locationSearchTextField.text)
         default:
             break
         }

@@ -81,7 +81,7 @@ extension LocationSearchResultsController: UITextFieldDelegate {
     
     func textFieldDidEndEditing(textField: UITextField) {
         textField.backgroundColor = UIColor.bt_colorWithBytesR(0, g: 0, b: 0, a: 102)
-        textField.textColor = UIColor.whiteColor()
+        textField.textColor = UIColor.blackColor()
     }
     
     func textFieldDidBeginEditing(textField: UITextField) {
