@@ -26,6 +26,8 @@ class CommunityFeedViewController: BesideMenuViewController, BrowseActionProduce
         }
     }
     
+    var childFilterUpdate: SearchFilterUpdate?
+    var canAffectOnFilter: Bool = true
     var browseMode: BrowseModeTabbarViewController.BrowseMode = .ForYou
 
     //MARK: - Reload data -
@@ -37,19 +39,24 @@ class CommunityFeedViewController: BesideMenuViewController, BrowseActionProduce
     }
     
     private func didReceiveCommunity(community: Community) {
-
+        
         let actionDelegate = self.parentViewController as? BrowseActionConsumer
         dataSource.items[Sections.Info.rawValue] = [
             BrowseCommunityHeaderCellModel(objectId: community.objectId, tapAction: .None, title: community.name ?? "", url: community.avatar),
-             CommunityStatsCellModel(countMembers: community.membersCount, countPosts: community.postsCount, countEvents: community.eventsCount)
+            CommunityStatsCellModel(countMembers: community.membersCount, countPosts: community.postsCount, countEvents: community.eventsCount)
         ]
-        dataSource.items[Sections.Feed.rawValue] = [
-            BrowseListCellModel(objectId: community.objectId, actionConsumer: self, browseMode: browseMode, filterType: .Community)
-        ]
+        self.updateFeed()
+    }
+
+    func updateFeed() {
+        var model: BrowseListCellModel = BrowseListCellModel(objectId: community.objectId, actionConsumer: self, browseMode: browseMode,
+            filterType: .Community)
+        model.canAffectOnFilter = canAffectOnFilter
+        model.childFilterUpdate = childFilterUpdate
+        dataSource.items[Sections.Feed.rawValue] = [model]
         tableView.reloadData()
         actionConsumer?.browseControllerDidChangeContent(self)
     }
-
     
     //MARK: - Table -
     @IBOutlet private weak var tableView: TableView!
@@ -67,7 +74,6 @@ class CommunityFeedViewController: BesideMenuViewController, BrowseActionProduce
         
     }
 
-    
     lazy var dataSource: CommunityFeedDataSource = { [unowned self] in
         let dataSource = CommunityFeedDataSource()
         dataSource.parentViewController = self
@@ -88,8 +94,6 @@ extension CommunityFeedViewController: BrowseActionConsumer {
         actionConsumer?.browseControllerDidChangeContent(controller)
     }
 }
-
-
 
 extension CommunityFeedViewController {
     final class CommunityFeedDataSource: TableViewDataSource {
@@ -133,6 +137,5 @@ extension CommunityFeedViewController {
         func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
             tableView.deselectRowAtIndexPath(indexPath, animated: true)
         }
-        
     }
 }
