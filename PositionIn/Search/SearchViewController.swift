@@ -77,7 +77,6 @@ final class SearchViewController: UIViewController {
         locationSearchTextField.leftView = leftLocationView
         locationSearchTextField.leftViewMode = .Always
         locationSearchTextField.backgroundColor = UIColor.bt_colorWithBytesR(0, g: 0, b: 0, a: 102)
-        locationSearchTextField.textColor = UIColor.whiteColor()
     }
     
     @IBAction func cancelButtonPressed(sender: AnyObject) {

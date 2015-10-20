@@ -183,7 +183,7 @@ extension ItemsSearchResultsController: UITextFieldDelegate {
     
     func textFieldDidBeginEditing(textField: UITextField) {
         textField.backgroundColor = UIColor.bt_colorWithBytesR(255, g: 255, b: 255, a: 255)
-        textField.textColor = UIColor.whiteColor()
+        textField.textColor = UIColor.blackColor()
         
         delegate?.shouldDisplayItemsSearchResults()
     }
