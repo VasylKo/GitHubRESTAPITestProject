@@ -27,6 +27,12 @@ final class LocationSearchResultsController: NSObject {
         self.resultStorage = resultStorage
         self.searchBar = searchBar
         super.init()
+        
+        
+        let str = NSAttributedString(string: self.searchBar!.placeholder!,
+            attributes: [NSForegroundColorAttributeName:UIColor.whiteColor()])
+        self.searchBar!.attributedPlaceholder = str
+        
         searchBar?.delegate = self
     }
 
@@ -52,9 +58,16 @@ final class LocationSearchResultsController: NSObject {
                 callback: completion).onFailure { error in
                     Log.error?.value(error)
             }
-        } else {
-            delegate?.didSelectLocation(nil)
-            completion([])
+        }
+        else {
+            locationController().getCurrentLocation().onSuccess(token: dataRequestToken, callback: { [weak self] location in
+                    print(location.name)
+                var tempLocation: Location = location
+                tempLocation.name =  NSLocalizedString("Current location", comment: "currentLocation")
+                self?.resultStorage?.setLocations([tempLocation])
+                self?.locationsTable?.reloadData()
+                self?.locationsTable?.scrollEnabled = self?.locationsTable?.frame.size.height < self?.locationsTable?.contentSize.height
+            })
         }
     }
     
@@ -81,12 +94,17 @@ extension LocationSearchResultsController: UITextFieldDelegate {
     
     func textFieldDidEndEditing(textField: UITextField) {
         textField.backgroundColor = UIColor.bt_colorWithBytesR(0, g: 0, b: 0, a: 102)
-        textField.textColor = UIColor.blackColor()
+        let str = NSAttributedString(string: textField.placeholder!,
+            attributes: [NSForegroundColorAttributeName:UIColor.whiteColor()])
+        textField.attributedPlaceholder = str
     }
     
     func textFieldDidBeginEditing(textField: UITextField) {
         textField.backgroundColor = UIColor.bt_colorWithBytesR(255, g: 255, b: 255, a: 255)
-        textField.textColor = UIColor.blackColor()
+        let str = NSAttributedString(string: textField.placeholder!,
+            attributes: [NSForegroundColorAttributeName:UIColor(white: 201/255, alpha: 1)])
+        textField.attributedPlaceholder = str
+        
         delegate?.shouldDisplayLocationSearchResults()
     }
 }
