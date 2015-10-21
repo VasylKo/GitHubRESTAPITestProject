@@ -192,11 +192,13 @@ protocol BrowseActionConsumer: class {
         searchBar.font = UIFont.systemFontOfSize(12)
         searchBar.textColor = UIColor.whiteColor()
         let leftView: UIImageView = UIImageView(image: UIImage(named: "search_icon"))
-        leftView.frame = CGRectMake(0.0, 0.0, leftView.frame.size.width + 10.0, leftView.frame.size.height);
+        leftView.frame = CGRectMake(0.0, 0.0, leftView.frame.size.width + 5.0, leftView.frame.size.height);
         leftView.contentMode = .Center
         searchBar.leftView = leftView
         searchBar.leftViewMode = .Always
         searchBar.delegate = self
+        let str = NSAttributedString(string: "Search...", attributes: [NSForegroundColorAttributeName:UIColor(white: 201/255, alpha: 1)])
+        searchBar.attributedPlaceholder =  str
         return searchBar
         }()
     
@@ -215,14 +217,27 @@ protocol BrowseActionConsumer: class {
     }
     
     func searchViewControllerItemSelected(model: SearchItemCellModel?, searchString: String?, locationString: String?) {
+        self.searchbar.text = nil
         if let model = model {
-            self.searchbar.text = model.title! + " " + searchString! + " " + locationString!
+            self.searchbar.attributedText = self.searchBarAttributedText(model.title, searchString: searchString, locationString: locationString)
         }
     }
     
     func searchViewControllerSectionSelected(model: SearchSectionCellModel?, searchString: String?, locationString: String?) {
+        self.searchbar.text = nil
         if let model = model {
-            self.searchbar.text = model.title! + " " + searchString! + " " + locationString!
+            self.searchbar.attributedText = self.searchBarAttributedText(model.title, searchString: searchString, locationString: locationString)
         }
+    }
+    
+    func searchBarAttributedText(modelTitle: String?, searchString: String?, locationString: String?) -> NSAttributedString {
+        let locationString = count(locationString!) > 0 ? locationString : NSLocalizedString("current location",
+            comment: "currentLocation")
+        let searchBarString = modelTitle! + " " + searchString! + " " + locationString!
+        
+        let str = NSMutableAttributedString(string: searchBarString,
+            attributes: [NSForegroundColorAttributeName:UIColor.whiteColor()])
+        
+        return str
     }
 }

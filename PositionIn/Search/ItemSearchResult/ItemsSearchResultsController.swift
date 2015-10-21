@@ -178,13 +178,16 @@ extension ItemsSearchResultsController: UITextFieldDelegate {
 
     func textFieldDidEndEditing(textField: UITextField) {
         textField.backgroundColor = UIColor.bt_colorWithBytesR(0, g: 0, b: 0, a: 102)
-        textField.textColor = UIColor.blackColor()
+        let str = NSAttributedString(string: textField.placeholder!,
+            attributes: [NSForegroundColorAttributeName:UIColor.whiteColor()])
+        textField.attributedPlaceholder = str
     }
     
     func textFieldDidBeginEditing(textField: UITextField) {
         textField.backgroundColor = UIColor.bt_colorWithBytesR(255, g: 255, b: 255, a: 255)
-        textField.textColor = UIColor.blackColor()
-        
+        let str = NSAttributedString(string: textField.placeholder!,
+            attributes: [NSForegroundColorAttributeName:UIColor(white: 201/255, alpha: 1)])
+        textField.attributedPlaceholder = str
         delegate?.shouldDisplayItemsSearchResults()
     }
 }
