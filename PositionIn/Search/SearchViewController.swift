@@ -67,8 +67,7 @@ final class SearchViewController: UIViewController {
         itemsDataSource.delegate = self
         itemsSearchController.delegate = self
 
-        let isCurrentLocation: Bool = (SearchFilter.currentFilter.locationName?.caseInsensitiveCompare("current location")) == NSComparisonResult.OrderedSame
-        locationSearchTextField.text = isCurrentLocation ? nil : SearchFilter.currentFilter.locationName
+        locationSearchTextField.text = SearchFilter.currentFilter.locationName
         locationsDataSource.delegate = self
         locationSearchController.delegate = self
         let leftLocationView: UIImageView = UIImageView(image: UIImage(named: "search_location_focus"))
@@ -131,8 +130,7 @@ extension SearchViewController: LocationSearchResultsDelegate {
     
     func didSelectLocation(location: Location?) {
         SearchFilter.setLocation(location)
-        let isCurrentLocation: Bool = (SearchFilter.currentFilter.locationName?.caseInsensitiveCompare("current location")) == NSComparisonResult.OrderedSame
-        locationSearchTextField.text = isCurrentLocation ? nil : SearchFilter.currentFilter.locationName
+        locationSearchTextField.text =  SearchFilter.currentFilter.locationName
         self.shouldCloseSearch()
     }
 }

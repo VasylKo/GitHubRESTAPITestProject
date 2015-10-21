@@ -44,7 +44,20 @@ class LocationSearchResultDataSource: TableViewDataSource, LocationSearchResultS
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         if let model = self.tableView(tableView, modelForIndexPath: indexPath) as? LocationCellModel {
-            delegate?.didSelectLocation(model.location)
+            
+            let locationName: String? = SearchFilter.currentFilter.locationName
+            if let locationName = locationName {
+                let isCurrentLocation: Bool = (locationName.caseInsensitiveCompare("Current location")) == NSComparisonResult.OrderedSame
+                if isCurrentLocation {
+                    delegate?.didSelectLocation(nil)
+                }
+                else {
+                    delegate?.didSelectLocation(model.location)
+                }
+            }
+            else {
+                delegate?.didSelectLocation(nil)
+            }
         }
     }
     

@@ -61,7 +61,6 @@ final class LocationSearchResultsController: NSObject {
         }
         else {
             locationController().getCurrentLocation().onSuccess(token: dataRequestToken, callback: { [weak self] location in
-                    print(location.name)
                 var tempLocation: Location = location
                 tempLocation.name =  NSLocalizedString("Current location", comment: "currentLocation")
                 self?.resultStorage?.setLocations([tempLocation])
