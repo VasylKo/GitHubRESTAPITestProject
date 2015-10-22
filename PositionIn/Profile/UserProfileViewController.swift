@@ -276,12 +276,19 @@ final class UserProfileViewController: BesideMenuViewController, BrowseActionPro
     }
     
     func searchBarAttributedText(modelTitle: String?, searchString: String?, locationString: String?) -> NSAttributedString {
-        let locationString = count(locationString!) > 0 ? locationString : NSLocalizedString("current location",
-            comment: "currentLocation")
-        let searchBarString = modelTitle! + " " + searchString! + " " + locationString!
         
-        let str = NSMutableAttributedString(string: searchBarString,
-            attributes: [NSForegroundColorAttributeName:UIColor.whiteColor()])
+        var str: NSMutableAttributedString = NSMutableAttributedString()
+        
+        if let modelTitle = modelTitle,
+            searchString = searchString,
+            locationString = locationString {
+                let locationString = count(locationString) > 0 ? locationString : NSLocalizedString("current location",
+                    comment: "currentLocation")
+                let searchBarString = modelTitle + " " + searchString + " " + locationString
+                
+                str = NSMutableAttributedString(string: searchBarString,
+                    attributes: [NSForegroundColorAttributeName:UIColor.whiteColor()])
+        }
         
         return str
     }

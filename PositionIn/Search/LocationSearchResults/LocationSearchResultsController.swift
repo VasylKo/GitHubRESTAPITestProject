@@ -61,9 +61,7 @@ final class LocationSearchResultsController: NSObject {
         }
         else {
             locationController().getCurrentLocation().onSuccess(token: dataRequestToken, callback: { [weak self] location in
-                var tempLocation: Location = location
-                tempLocation.name =  NSLocalizedString("Current location", comment: "currentLocation")
-                self?.resultStorage?.setLocations([tempLocation])
+                self?.resultStorage?.setLocations([LocationController.currentLocation])
                 self?.locationsTable?.reloadData()
                 self?.locationsTable?.scrollEnabled = self?.locationsTable?.frame.size.height < self?.locationsTable?.contentSize.height
             })
@@ -96,6 +94,7 @@ extension LocationSearchResultsController: UITextFieldDelegate {
         let str = NSAttributedString(string: textField.placeholder!,
             attributes: [NSForegroundColorAttributeName:UIColor.whiteColor()])
         textField.attributedPlaceholder = str
+        textField.textColor = UIColor.whiteColor()
     }
     
     func textFieldDidBeginEditing(textField: UITextField) {
@@ -103,7 +102,7 @@ extension LocationSearchResultsController: UITextFieldDelegate {
         let str = NSAttributedString(string: textField.placeholder!,
             attributes: [NSForegroundColorAttributeName:UIColor(white: 201/255, alpha: 1)])
         textField.attributedPlaceholder = str
-        
+        textField.textColor = UIColor.blackColor()
         delegate?.shouldDisplayLocationSearchResults()
     }
 }
