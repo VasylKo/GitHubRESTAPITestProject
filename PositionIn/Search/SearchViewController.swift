@@ -60,7 +60,7 @@ final class SearchViewController: UIViewController {
         searchTextField.leftViewMode = .Always
         let leftView: UIImageView = UIImageView(image: UIImage(named: "search_icon"))
         leftView.frame = CGRectMake(0.0, 0.0, leftView.frame.size.width + 5.0, leftView.frame.size.height);
-        leftView.contentMode = .Right
+        leftView.contentMode = .Center
         searchTextField.leftView = leftView
         searchTextField.text = SearchFilter.currentFilter.name
         searchTextField.becomeFirstResponder()
@@ -72,7 +72,7 @@ final class SearchViewController: UIViewController {
         locationSearchController.delegate = self
         let leftLocationView: UIImageView = UIImageView(image: UIImage(named: "search_location_focus"))
         leftLocationView.frame = CGRectMake(0.0, 0.0, leftLocationView.frame.size.width + 5.0, leftView.frame.size.height);
-        leftLocationView.contentMode = .Right
+        leftLocationView.contentMode = .Center
         locationSearchTextField.leftView = leftLocationView
         locationSearchTextField.leftViewMode = .Always
         locationSearchTextField.backgroundColor = UIColor.bt_colorWithBytesR(0, g: 0, b: 0, a: 102)
