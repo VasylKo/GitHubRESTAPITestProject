@@ -96,6 +96,7 @@ extension LocationSearchResultsController: UITextFieldDelegate {
         let str = NSAttributedString(string: textField.placeholder!,
             attributes: [NSForegroundColorAttributeName:UIColor.whiteColor()])
         textField.attributedPlaceholder = str
+        textField.textColor = UIColor.whiteColor()
     }
     
     func textFieldDidBeginEditing(textField: UITextField) {
@@ -103,7 +104,7 @@ extension LocationSearchResultsController: UITextFieldDelegate {
         let str = NSAttributedString(string: textField.placeholder!,
             attributes: [NSForegroundColorAttributeName:UIColor(white: 201/255, alpha: 1)])
         textField.attributedPlaceholder = str
-        
+        textField.textColor = UIColor.blackColor()
         delegate?.shouldDisplayLocationSearchResults()
     }
 }
