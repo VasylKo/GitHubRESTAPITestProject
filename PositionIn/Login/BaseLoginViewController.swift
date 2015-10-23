@@ -25,7 +25,7 @@ class BaseLoginViewController: UIViewController {
         }
     }
     
-    @IBAction func facebookPressed(sender: AnyObject) {
+    @IBAction func facebookTouched(sender: AnyObject) {
         FBSDKLoginManager().logInWithReadPermissions(["public_profile"], fromViewController: self,
             handler: { (result:FBSDKLoginManagerLoginResult!, error:NSError!) -> Void in
                 if error != nil {

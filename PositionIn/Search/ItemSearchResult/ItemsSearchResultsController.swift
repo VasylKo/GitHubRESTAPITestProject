@@ -77,7 +77,7 @@ class ItemsSearchResultsController: NSObject {
         tableViewModels.extend(events)
         
         
-        let community = self.modelsSubArrayFromResponseArray(response.communities, title: NSLocalizedString("COMMUNITY",
+        let community = self.modelsSubArrayFromResponseArray(response.communities, title: NSLocalizedString("COMMUNITIES",
             comment: "quick search"),
             type: SearchItem.SearchItemType.Community)
         tableViewModels.extend(community)
