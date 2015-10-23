@@ -25,26 +25,6 @@ final class RegisterViewController: BaseLoginViewController {
         }
                         
     }
-
-    
-    @IBAction func facebookPressed(sender: AnyObject) {
-        FBSDKLoginManager().logInWithReadPermissions(["public_profile"], fromViewController: self,
-            handler: { (result:FBSDKLoginManagerLoginResult!, error:NSError!) -> Void in
-                
-                if error != nil {
-                    FBSDKLoginManager().logOut()
-                } else if result.isCancelled {
-                    FBSDKLoginManager().logOut()
-                } else {
-                    let fbToken = result.token.tokenString
-                    
-                    api().loginViaFB(fbToken).onSuccess { [weak self] _ in
-                        Log.info?.message("Logged in")
-                        self?.dismissLogin()
-                    }
-                }
-        })
-    }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue == RegisterViewController.Segue.SignUpSegue {
