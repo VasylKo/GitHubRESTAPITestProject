@@ -71,6 +71,8 @@
 		50F7305A1BBBE86A008D3D94 /* PositionIn.CommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50F730581BBBE86A008D3D94 /* PositionIn.CommentCell.xib */; };
 		50FE7D891BBE77BB005676E2 /* ItemsSearchResultDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FE7D871BBE77BB005676E2 /* ItemsSearchResultDataSource.swift */; };
 		50FE7D8A1BBE77BB005676E2 /* ItemsSearchResultsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FE7D881BBE77BB005676E2 /* ItemsSearchResultsController.swift */; };
+		D1F20EFD1BDA36B2007D76D6 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1F20EFB1BDA36B2007D76D6 /* FBSDKCoreKit.framework */; };
+		D1F20EFE1BDA36B2007D76D6 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1F20EFC1BDA36B2007D76D6 /* FBSDKLoginKit.framework */; };
 		E6018E501B849266001D22FA /* XMPPProcess+Future.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6018E4F1B849266001D22FA /* XMPPProcess+Future.swift */; };
 		E6018E521B8492EA001D22FA /* XLFormOptionsObject+PositionIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6018E511B8492EA001D22FA /* XLFormOptionsObject+PositionIn.swift */; };
 		E603D2581BC7E5B000E684C5 /* XMPPCredentials.h in Headers */ = {isa = PBXBuildFile; fileRef = E603D2561BC7E5B000E684C5 /* XMPPCredentials.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -479,6 +481,8 @@
 		AF836D0B902FDFFA6CB4A412 /* Pods_Messaging.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Messaging.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB73828B80F64D347BB9F14D /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5785CCFFE7238C562E6E52F /* Pods-PositionIn.devrelease.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PositionIn.devrelease.xcconfig"; path = "Pods/Target Support Files/Pods-PositionIn/Pods-PositionIn.devrelease.xcconfig"; sourceTree = "<group>"; };
+		D1F20EFB1BDA36B2007D76D6 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		D1F20EFC1BDA36B2007D76D6 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		E6018E4F1B849266001D22FA /* XMPPProcess+Future.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "XMPPProcess+Future.swift"; sourceTree = "<group>"; };
 		E6018E511B8492EA001D22FA /* XLFormOptionsObject+PositionIn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "XLFormOptionsObject+PositionIn.swift"; sourceTree = "<group>"; };
 		E603D2561BC7E5B000E684C5 /* XMPPCredentials.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPCredentials.h; sourceTree = "<group>"; };
@@ -1008,7 +1012,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D1F20EFD1BDA36B2007D76D6 /* FBSDKCoreKit.framework in Frameworks */,
 				E6B3C3311B62581200EA613A /* CleanroomLogger.framework in Frameworks */,
+				D1F20EFE1BDA36B2007D76D6 /* FBSDKLoginKit.framework in Frameworks */,
 				E6B3C32F1B62581200EA613A /* CleanroomASL.framework in Frameworks */,
 				451B04D684C5CB71F3D6581C /* Pods_PositionIn.framework in Frameworks */,
 				E6E2FE9F1B66F61400880F3C /* Messaging.framework in Frameworks */,
@@ -1089,6 +1095,8 @@
 		D659CB9D48D8D7A48A529E04 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D1F20EFB1BDA36B2007D76D6 /* FBSDKCoreKit.framework */,
+				D1F20EFC1BDA36B2007D76D6 /* FBSDKLoginKit.framework */,
 				E689F05E1B6A8AA500597587 /* libresolv.dylib */,
 				E689F05C1B6A8A9A00597587 /* libxml2.dylib */,
 				E689F05A1B6A8A8F00597587 /* Security.framework */,
@@ -3459,6 +3467,8 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"/Users/mpolyevin/Downloads/FacebookSDKs-iOS-20151007",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = "PositionIn/Supporting Files/Info.plist";
 				INFOPLIST_PREFIX_HEADER = "PositionIn/Supporting Files/Version.h";
@@ -3544,6 +3554,8 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"/Users/mpolyevin/Downloads/FacebookSDKs-iOS-20151007",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = "PositionIn/Supporting Files/Info.plist";
 				INFOPLIST_PREFIX_HEADER = "PositionIn/Supporting Files/Version.h";
@@ -3732,6 +3744,8 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"/Users/mpolyevin/Downloads/FacebookSDKs-iOS-20151007",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = "PositionIn/Supporting Files/Info.plist";
 				INFOPLIST_PREFIX_HEADER = "PositionIn/Supporting Files/Version.h";
@@ -3957,6 +3971,8 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"/Users/mpolyevin/Downloads/FacebookSDKs-iOS-20151007",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = "PositionIn/Supporting Files/Info.plist";
 				INFOPLIST_PREFIX_HEADER = "PositionIn/Supporting Files/Version.h";
@@ -4176,6 +4192,8 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"/Users/mpolyevin/Downloads/FacebookSDKs-iOS-20151007",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = "PositionIn/Supporting Files/Info.plist";
 				INFOPLIST_PREFIX_HEADER = "PositionIn/Supporting Files/Version.h";
@@ -4401,6 +4419,8 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"/Users/mpolyevin/Downloads/FacebookSDKs-iOS-20151007",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = "PositionIn/Supporting Files/Info.plist";
 				INFOPLIST_PREFIX_HEADER = "PositionIn/Supporting Files/Version.h";
