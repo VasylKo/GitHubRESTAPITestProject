@@ -8,6 +8,9 @@
 
 import Foundation
 import UIKit
+import CleanroomLogger
+import FBSDKCoreKit
+import FBSDKLoginKit
 
 final class LoginSignupViewController: BaseLoginViewController {
     
