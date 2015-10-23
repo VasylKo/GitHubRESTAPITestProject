@@ -34,8 +34,7 @@ class BaseLoginViewController: UIViewController {
                     FBSDKLoginManager().logOut()
                 } else {
                     let fbToken = result.token.tokenString
-                    
-                    api().loginViaFB(fbToken).onSuccess { [weak self] _ in
+                    api().login(fbToken).onSuccess { [weak self] _ in
                         Log.info?.message("Logged in")
                         self?.dismissLogin()
                     }

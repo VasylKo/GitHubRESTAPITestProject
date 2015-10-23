@@ -103,8 +103,8 @@ extension APIService {
     }
     
     //Login via fb
-    func loginViaFB(fbToken: String) -> Future<UserProfile, NSError> {
-        return loginViaFBRequest(fbToken).flatMap { _ in
+    func login(fbToken: String) -> Future<UserProfile, NSError> {
+        return facebookLoginRequest(fbToken).flatMap { _ in
             return self.updateCurrentProfileStatus()
         }
     }
@@ -145,7 +145,7 @@ extension APIService {
         return handleFailure(updateAuth(future))
     }
     
-    private func loginViaFBRequest(fbToken: String) -> Future<AuthResponse, NSError> {
+    private func facebookLoginRequest(fbToken: String) -> Future<AuthResponse, NSError> {
         let urlRequest = AuthRouter.Facebook(api: self, fbToken: fbToken)
         let (_, future): (Alamofire.Request, Future<AuthResponse, NSError>) = dataProvider.objectRequest(urlRequest)
         return handleFailure(updateAuth(future))

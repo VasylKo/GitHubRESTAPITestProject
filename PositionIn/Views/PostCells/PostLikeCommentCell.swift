@@ -21,12 +21,15 @@ class PostLikeCommentCell: TableViewCell {
         self.amountOfCommentsLabel.text = String(m!.comments)
         self.amountOfLikesLabel.text = String(m!.likes)
         self.actionConsumer = m!.actionConsumer
+        likeButton.userInteractionEnabled = true
     }
     
     @IBAction func likeButtonPressed(sender: AnyObject) {
+        likeButton.userInteractionEnabled = false
         actionConsumer?.likePost()
     }
     @IBOutlet weak var amountOfCommentsLabel: UILabel!
     @IBOutlet weak var amountOfLikesLabel: UILabel!
+    @IBOutlet weak var likeButton: UIButton!
     weak var actionConsumer: PostActionConsumer?
 }

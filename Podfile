@@ -18,7 +18,8 @@ target 'PositionIn' do
     pod 'PosInCore', :path => 'PosInCore'
 
     pod 'Braintree', '3.9.3'
-    
+    pod 'FBSDKCoreKit'
+    pod 'FBSDKLoginKit'
 end
 
 target 'PositionInTests' do
