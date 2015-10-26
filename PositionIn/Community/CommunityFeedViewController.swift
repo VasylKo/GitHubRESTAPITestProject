@@ -10,7 +10,7 @@ import PosInCore
 import BrightFutures
 import CleanroomLogger
 
-class CommunityFeedViewController: BesideMenuViewController, BrowseActionProducer, BrowseModeDisplay {
+class CommunityFeedViewController: BesideMenuViewController, BrowseActionProducer, BrowseModeDisplay, SearchFilterProtocol {
     
     weak var actionConsumer: BrowseActionConsumer?
 
@@ -27,9 +27,20 @@ class CommunityFeedViewController: BesideMenuViewController, BrowseActionProduce
     }
     
     var childFilterUpdate: SearchFilterUpdate?
-    var canAffectOnFilter: Bool = true
+    
+    func applyFilterUpdate(update: SearchFilterUpdate, canAffect: Bool) {
+        canAffectFilter = canAffect
+        if let tempFilter = self.filter {
+            self.filter = update(tempFilter)
+        }
+    }
+    
+    internal var canAffectFilter = true
+    
     var browseMode: BrowseModeTabbarViewController.BrowseMode = .ForYou
-
+    
+    var filter: SearchFilter?
+    
     //MARK: - Reload data -
     
     func reloadData() {
@@ -51,7 +62,7 @@ class CommunityFeedViewController: BesideMenuViewController, BrowseActionProduce
     func updateFeed() {
         var model: BrowseListCellModel = BrowseListCellModel(objectId: community.objectId, actionConsumer: self, browseMode: browseMode,
             filterType: .Community)
-        model.canAffectOnFilter = canAffectOnFilter
+        model.canAffectFilter = canAffectFilter
         model.childFilterUpdate = childFilterUpdate
         dataSource.items[Sections.Feed.rawValue] = [model]
         tableView.reloadData()

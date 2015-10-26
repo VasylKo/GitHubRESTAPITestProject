@@ -44,7 +44,7 @@ final class UserProfileViewController: BesideMenuViewController, BrowseActionPro
     
     var objectId: CRUDObjectId = api().currentUserId() ?? CRUDObjectInvalidId
     var childFilterUpdate: SearchFilterUpdate?
-    var canAffectOnFilter: Bool = true
+    var canAffectFilter: Bool = true
     var profile: UserProfile = UserProfile(objectId: CRUDObjectInvalidId) {
         didSet {
             if isViewLoaded() {
@@ -95,7 +95,7 @@ final class UserProfileViewController: BesideMenuViewController, BrowseActionPro
         var feedModel = BrowseListCellModel(objectId: profile.objectId, actionConsumer: self, browseMode: .New)
         feedModel.excludeCommunityItems = true
         feedModel.childFilterUpdate = self.childFilterUpdate
-        feedModel.canAffectOnFilter = canAffectOnFilter
+        feedModel.canAffectFilter = canAffectFilter
         dataSource.items[Sections.Feed.rawValue] = [ feedModel ]
         
         tableView.reloadData()
@@ -241,7 +241,7 @@ final class UserProfileViewController: BesideMenuViewController, BrowseActionPro
                     f.communities = [model.objectID]
                     return f
                 }
-                canAffectOnFilter = false
+                canAffectFilter = false
                 self.updateFeed()
             case .People:
                 childFilterUpdate = { (filter: SearchFilter) -> SearchFilter in
@@ -249,7 +249,7 @@ final class UserProfileViewController: BesideMenuViewController, BrowseActionPro
                     f.users = [model.objectID]
                     return f
                 }
-                canAffectOnFilter = false
+                canAffectFilter = false
                 self.updateFeed()
             default:
                 break
@@ -268,7 +268,7 @@ final class UserProfileViewController: BesideMenuViewController, BrowseActionPro
                 return f
             }
             self.searchbar.text = itemType.description
-            canAffectOnFilter = false
+            canAffectFilter = false
             self.updateFeed()
             self.searchbar.text = nil
             self.searchbar.attributedText = self.searchBarAttributedText(model.title, searchString: searchString, locationString: locationString)
@@ -301,7 +301,7 @@ final class UserProfileViewController: BesideMenuViewController, BrowseActionPro
             f.users = user
             return f
         }
-        canAffectOnFilter = true
+        canAffectFilter = true
         self.updateFeed()
         searchbar.text = nil
     }
