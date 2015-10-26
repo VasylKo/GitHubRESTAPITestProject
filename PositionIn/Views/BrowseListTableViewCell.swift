@@ -28,7 +28,7 @@ final class BrowseListTableViewCell: TableViewCell, TableViewChildViewController
         }
         listController.filter = filter
         if let cfu = m!.childFilterUpdate {
-            listController.applyFilterUpdate(cfu, canAffect: m!.canAffectOnFilter)
+            listController.applyFilterUpdate(cfu, canAffect: m!.canAffectFilter)
         }
     }
     
@@ -94,7 +94,7 @@ public struct BrowseListCellModel: ProfileCellModel {
     unowned var actionConsumer: BrowseActionConsumer
     let browseMode: BrowseModeTabbarViewController.BrowseMode
     var childFilterUpdate: SearchFilterUpdate?
-    var canAffectOnFilter: Bool = true
+    var canAffectFilter: Bool = true
     
     init(objectId: CRUDObjectId, actionConsumer: BrowseActionConsumer, browseMode: BrowseModeTabbarViewController.BrowseMode, filterType: FilterType = .User) {
         self.objectId = objectId

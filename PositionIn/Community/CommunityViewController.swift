@@ -62,7 +62,7 @@ final class CommunityViewController: BrowseModeTabbarViewController, SearchViewC
             f =  SearchFilter.currentFilter
             return f
         }
-        canAffectOnFilter = true
+        canAffectFilter = true
         applyDisplayMode(displayMode)
         super.presentSearchViewController()
     }
@@ -75,7 +75,7 @@ final class CommunityViewController: BrowseModeTabbarViewController, SearchViewC
             f.communities = user
             return f
         }
-        canAffectOnFilter = true
+        canAffectFilter = true
         applyDisplayMode(displayMode)
     }
     
@@ -106,7 +106,7 @@ final class CommunityViewController: BrowseModeTabbarViewController, SearchViewC
                     f.communities = [model.objectID]
                     return f
                 }
-                canAffectOnFilter = false
+                canAffectFilter = false
                 applyDisplayMode(displayMode)
             case .People:
                 childFilterUpdate = { (filter: SearchFilter) -> SearchFilter in
@@ -114,7 +114,7 @@ final class CommunityViewController: BrowseModeTabbarViewController, SearchViewC
                     f.users = [model.objectID]
                     return f
                 }
-                canAffectOnFilter = false
+                canAffectFilter = false
                 applyDisplayMode(displayMode)
             default:
                 break
@@ -126,13 +126,7 @@ final class CommunityViewController: BrowseModeTabbarViewController, SearchViewC
         super.prepareDisplayController(controller)
         if let filterUpdate = childFilterUpdate,
             let filterApplicator = controller as? SearchFilterProtocol {
-                filterApplicator.applyFilterUpdate(filterUpdate, canAffect: canAffectOnFilter)
-        }
-            //TODO: need refactor this
-        else if let filterUpdate = childFilterUpdate,
-            let filterApplicator = controller as? CommunityFeedViewController {
-                filterApplicator.canAffectOnFilter = canAffectOnFilter
-                filterApplicator.childFilterUpdate = filterUpdate
+                filterApplicator.applyFilterUpdate(filterUpdate, canAffect: canAffectFilter)
         }
     }
     
@@ -145,11 +139,11 @@ final class CommunityViewController: BrowseModeTabbarViewController, SearchViewC
                 f.itemTypes = [ itemType ]
                 return f
             }
-            canAffectOnFilter = false
+            canAffectFilter = false
             applyDisplayMode(displayMode)
         }
     }
     
     var childFilterUpdate: SearchFilterUpdate?
-    var canAffectOnFilter: Bool = true
+    var canAffectFilter: Bool = true
 }

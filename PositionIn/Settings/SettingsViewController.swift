@@ -33,9 +33,19 @@ class SettingsViewController: BesideMenuViewController, MFMailComposeViewControl
         self.scrollView.contentSize = contentView.frame.size
     }
     
+    @IBAction func termsConditionsButtonPressed(sender: AnyObject) {
+        let url: NSURL? = NSURL(string: "http://www.positionin.com/terms-and-conditions.html")
+        if let url = url {
+//            [[UIApplication sharedApplication] openURL:url];
+            UIApplication.sharedApplication().openURL(url)
+        }
+    }
+    
     func customizeButton(button: UIButton) {
         button.layer.borderColor = UIColor(white: 213/255, alpha: 1).CGColor
         button.layer.borderWidth = 1 / UIScreen.mainScreen().scale
+        button.setBackgroundImage(self.imageWithColor(UIColor(white: 213/255, alpha: 1)), forState: .Highlighted)
+        button.setBackgroundImage(self.imageWithColor(UIColor.whiteColor()), forState: .Normal)
     }
     
     @IBAction func spreadTheWordPressed(sender: AnyObject) {
@@ -76,6 +86,16 @@ class SettingsViewController: BesideMenuViewController, MFMailComposeViewControl
     func mailComposeController(controller: MFMailComposeViewController!, didFinishWithResult result: MFMailComposeResult,
         error: NSError!) {
         controller.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func imageWithColor(color: UIColor) -> UIImage {
+        let rect = CGRectMake(0, 0, 1, 1)
+        UIGraphicsBeginImageContextWithOptions(rect.size, false, 0)
+        color.setFill()
+        UIRectFill(rect)
+        let image: UIImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return image
     }
     
     @IBOutlet weak var contentView: UIView!
