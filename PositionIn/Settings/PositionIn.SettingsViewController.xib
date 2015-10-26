@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
@@ -13,7 +13,6 @@
                 <outlet property="spreadTheWordButton" destination="IfA-sb-Ayr" id="A9w-gt-iyk"/>
                 <outlet property="supportButton" destination="S0w-2X-ySo" id="eKk-yg-LgJ"/>
                 <outlet property="termsConditionsButton" destination="sZh-7v-iPi" id="tke-eJ-gpt"/>
-                <outlet property="termsConditionsPressed" destination="sZh-7v-iPi" id="Smy-7J-Zwj"/>
                 <outlet property="versionLabel" destination="T1p-jq-JD3" id="kLb-AW-Jv0"/>
                 <outlet property="view" destination="BC7-UL-uHh" id="8gM-4A-Bpy"/>
             </connections>
@@ -102,6 +101,9 @@
                                         <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
+                                    <connections>
+                                        <action selector="termsConditionsButtonPressed:" destination="-1" eventType="touchUpInside" id="dob-3N-Fi5"/>
+                                    </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9lT-hg-Zdr">
                                     <rect key="frame" x="0.0" y="375" width="600" height="48"/>
