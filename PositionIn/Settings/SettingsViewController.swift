@@ -19,8 +19,6 @@ class SettingsViewController: BesideMenuViewController, MFMailComposeViewControl
         customizeButton(self.termsConditionsButton)
         customizeButton(self.supportButton)
         customizeButton(self.passwordButton)
-        
-        self.signOutButton.hidden = !api().isUserAuthorized()
     }
     
     override func viewDidLayoutSubviews() {

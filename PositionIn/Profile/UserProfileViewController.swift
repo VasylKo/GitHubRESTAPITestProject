@@ -320,9 +320,16 @@ extension UserProfileViewController: UserProfileActionConsumer {
             let navigationController = UINavigationController(rootViewController: updateController)
             presentViewController(navigationController, animated: true, completion: nil)
         case .Follow:
-            api().followUser(objectId).onSuccess { [weak self] in
-                self?.sendSubscriptionUpdateNotification(aUserInfo: nil)
-                self?.reloadData()
+            if api().isUserAuthorized() {
+                api().followUser(objectId).onSuccess { [weak self] in
+                    self?.sendSubscriptionUpdateNotification(aUserInfo: nil)
+                    self?.reloadData()
+                }
+            }
+            else {
+                api().logout().onComplete {[weak self] _ in
+                    self?.sideBarController?.executeAction(.Login)
+                }
             }
         case .UnFollow:
             api().unFollowUser(objectId).onSuccess { [weak self] in
