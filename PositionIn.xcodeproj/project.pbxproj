@@ -2832,6 +2832,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = PIN;
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0640;
 				ORGANIZATIONNAME = "Soluna Labs";
 				TargetAttributes = {

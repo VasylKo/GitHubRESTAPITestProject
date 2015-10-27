@@ -204,12 +204,12 @@ protocol BrowseActionConsumer: class {
     
     func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
         textField.resignFirstResponder()
-        self.presentSearchViewController()
+        self.presentSearchViewController(SearchFilter.currentFilter)
         return false
     }
     
-    func presentSearchViewController() {
-        SearchViewController.present(searchbar, presenter: self)
+    func presentSearchViewController(filter: SearchFilter) {
+        SearchViewController.present(searchbar, presenter: self, filter: filter)
     }
     
     func searchViewControllerCancelSearch() {

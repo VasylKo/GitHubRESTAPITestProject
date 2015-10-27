@@ -92,7 +92,7 @@ final class UserProfileViewController: BesideMenuViewController, BrowseActionPro
     }
     
     private func updateFeed() {
-        var feedModel = BrowseListCellModel(objectId: profile.objectId, actionConsumer: self, browseMode: .New)
+        var feedModel = BrowseListCellModel(objectId: objectId, actionConsumer: self, browseMode: .New)
         feedModel.excludeCommunityItems = true
         feedModel.childFilterUpdate = self.childFilterUpdate
         feedModel.canAffectFilter = canAffectFilter
@@ -211,7 +211,9 @@ final class UserProfileViewController: BesideMenuViewController, BrowseActionPro
     
     func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
         textField.resignFirstResponder()
-        SearchViewController.present(searchbar, presenter: self)
+        var searchFilter: SearchFilter = SearchFilter.currentFilter
+        searchFilter.users = [objectId]
+        SearchViewController.present(searchbar, presenter: self, filter: searchFilter)
         return false
     }
     
