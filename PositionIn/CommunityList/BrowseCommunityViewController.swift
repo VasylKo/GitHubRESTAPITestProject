@@ -56,7 +56,14 @@ final class BrowseCommunityViewController: BesideMenuViewController {
         tableView.layoutMargins = UIEdgeInsets(top: 0, left: 30, bottom: 0, right: 30)
         dataSource.configureTable(tableView)
         browseMode = .MyGroups
+        //Remove following section for not registred users
+        if !api().isUserAuthorized() {
+            browseMode = .Explore
+            self.browseModeSegmentedControl.removeSegmentAtIndex(0, animated: false)
+        }
     }
+    
+    private var firstLoad: Bool = true
     
     var browseMode: BrowseMode = .MyGroups {
         didSet {
@@ -78,7 +85,12 @@ final class BrowseCommunityViewController: BesideMenuViewController {
         switch browseMode {
         case .MyGroups:
             communitiesRequest = api().currentUserId().flatMap { userId in
-                return api().getUserCommunities(userId)
+                return api().getUserCommunities(userId).onSuccess { [weak self] communities in
+                    if api().isUserAuthorized() && (self?.firstLoad == true) {
+                        self?.browseMode = .Explore
+                        self?.firstLoad = false
+                    }
+                }
             }
         case .Explore:
             communitiesRequest = api().getCommunities(APIService.Page())
@@ -189,9 +201,16 @@ extension BrowseCommunityViewController: BrowseCommunityActionConsumer {
     func executeAction(action: BrowseCommunityViewController.Action, community: CRUDObjectId) {
         switch action {
         case .Join:
-            api().joinCommunity(community).onSuccess { [weak self] _ in
-                self?.reloadData()
-                ConversationManager.sharedInstance().refresh()
+            if api().isUserAuthorized() {
+                api().joinCommunity(community).onSuccess { [weak self] _ in
+                    self?.reloadData()
+                    ConversationManager.sharedInstance().refresh()
+                }
+            }
+            else {
+                api().logout().onComplete {[weak self] _ in
+                    self?.sideBarController?.executeAction(.Login)
+                }
             }
             break
         case .Browse, .Post:

@@ -44,7 +44,7 @@ final class BrowseViewController: BrowseModeTabbarViewController, SearchViewCont
         ]
     }
     
-    override func presentSearchViewController() {
+    override func presentSearchViewController(filter: SearchFilter) {
         
         childFilterUpdate = { (filter: SearchFilter) -> SearchFilter in
             var f = filter
@@ -53,7 +53,7 @@ final class BrowseViewController: BrowseModeTabbarViewController, SearchViewCont
         }
         canAffectFilter = true
         applyDisplayMode(displayMode)
-        super.presentSearchViewController()
+        super.presentSearchViewController(filter)
     }
     
     override func searchViewControllerItemSelected(model: SearchItemCellModel?, searchString: String?, locationString: String?) {

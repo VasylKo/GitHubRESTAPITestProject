@@ -21,7 +21,8 @@ protocol ItemsSearchResultsDelegate: class {
 
 class ItemsSearchResultsController: NSObject {
     
-    private var filter = SearchFilter.currentFilter
+    var filter = SearchFilter.currentFilter
+    
     
     init(table: TableView?, resultStorage: ItemsSearchResultStorage?, searchBar: UITextField?) {
         itemsTable = table
@@ -39,9 +40,6 @@ class ItemsSearchResultsController: NSObject {
     func reloadSearch() {
         dataRequestToken.invalidate()
         dataRequestToken = InvalidationToken()
-        let completion: ([[FeedItem]]) -> Void = { [weak self] items in
-            
-        }
         let searchString = map(searchBar?.text) { $0.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet()) }
         if let searchString = searchString where count(searchString) > 0 {
             

@@ -18,12 +18,13 @@ protocol SearchViewControllerDelegate: class  {
 
 final class SearchViewController: UIViewController {
     
-    class func present<T: UIViewController where T: SearchViewControllerDelegate>(searchBar: UITextField, presenter: T) {
+    class func present<T: UIViewController where T: SearchViewControllerDelegate>(searchBar: UITextField, presenter: T, filter: SearchFilter) {
         let searchController = Storyboards.Main.instantiateSearchViewController()
         let transitionDelegate = SearchTransitioningDelegate()
         transitionDelegate.startView = searchBar
         searchController.transitioningDelegate = transitionDelegate
         searchController.delegate = presenter
+        searchController.filter = filter
         presenter.presentViewController(searchController, animated: true) {
         }
     }
@@ -34,6 +35,7 @@ final class SearchViewController: UIViewController {
     }
     
     weak var delegate: SearchViewControllerDelegate?
+    var filter: SearchFilter = SearchFilter.currentFilter
     
     var searchMode: SearchMode = .Items {
         didSet {
@@ -119,6 +121,7 @@ final class SearchViewController: UIViewController {
     
     private lazy var itemsSearchController: ItemsSearchResultsController = { [unowned self] in
         let controller = ItemsSearchResultsController(table: self.tableView, resultStorage: self.itemsDataSource, searchBar: self.searchTextField)
+        controller.filter = self.filter
         return controller
         }()
 }

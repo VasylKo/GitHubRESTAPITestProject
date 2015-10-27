@@ -92,7 +92,7 @@ final class UserProfileViewController: BesideMenuViewController, BrowseActionPro
     }
     
     private func updateFeed() {
-        var feedModel = BrowseListCellModel(objectId: profile.objectId, actionConsumer: self, browseMode: .New)
+        var feedModel = BrowseListCellModel(objectId: objectId, actionConsumer: self, browseMode: .New)
         feedModel.excludeCommunityItems = true
         feedModel.childFilterUpdate = self.childFilterUpdate
         feedModel.canAffectFilter = canAffectFilter
@@ -211,7 +211,9 @@ final class UserProfileViewController: BesideMenuViewController, BrowseActionPro
     
     func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
         textField.resignFirstResponder()
-        SearchViewController.present(searchbar, presenter: self)
+        var searchFilter: SearchFilter = SearchFilter.currentFilter
+        searchFilter.users = [objectId]
+        SearchViewController.present(searchbar, presenter: self, filter: searchFilter)
         return false
     }
     
@@ -318,9 +320,16 @@ extension UserProfileViewController: UserProfileActionConsumer {
             let navigationController = UINavigationController(rootViewController: updateController)
             presentViewController(navigationController, animated: true, completion: nil)
         case .Follow:
-            api().followUser(objectId).onSuccess { [weak self] in
-                self?.sendSubscriptionUpdateNotification(aUserInfo: nil)
-                self?.reloadData()
+            if api().isUserAuthorized() {
+                api().followUser(objectId).onSuccess { [weak self] in
+                    self?.sendSubscriptionUpdateNotification(aUserInfo: nil)
+                    self?.reloadData()
+                }
+            }
+            else {
+                api().logout().onComplete {[weak self] _ in
+                    self?.sideBarController?.executeAction(.Login)
+                }
             }
         case .UnFollow:
             api().unFollowUser(objectId).onSuccess { [weak self] in

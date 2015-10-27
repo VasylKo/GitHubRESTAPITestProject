@@ -55,7 +55,7 @@ final class CommunityViewController: BrowseModeTabbarViewController, SearchViewC
         }
     }
     
-    override func presentSearchViewController() {
+    override func presentSearchViewController(filter: SearchFilter) {
         
         childFilterUpdate = { (filter: SearchFilter) -> SearchFilter in
             var f = filter
@@ -64,7 +64,11 @@ final class CommunityViewController: BrowseModeTabbarViewController, SearchViewC
         }
         canAffectFilter = true
         applyDisplayMode(displayMode)
-        super.presentSearchViewController()
+        
+        var searchFilter: SearchFilter = SearchFilter.currentFilter
+        searchFilter.communities = [ objectId ]
+
+        super.presentSearchViewController(searchFilter)
     }
     
     override func searchViewControllerCancelSearch() {
