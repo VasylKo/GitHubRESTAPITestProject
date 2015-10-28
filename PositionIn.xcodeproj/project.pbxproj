@@ -3460,7 +3460,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
-					"/Users/mpolyevin/Downloads/FacebookSDKs-iOS-20151007",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = "PositionIn/Supporting Files/Info.plist";
@@ -3547,7 +3546,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
-					"/Users/mpolyevin/Downloads/FacebookSDKs-iOS-20151007",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = "PositionIn/Supporting Files/Info.plist";
@@ -3737,7 +3735,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
-					"/Users/mpolyevin/Downloads/FacebookSDKs-iOS-20151007",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = "PositionIn/Supporting Files/Info.plist";
@@ -3964,7 +3961,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
-					"/Users/mpolyevin/Downloads/FacebookSDKs-iOS-20151007",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = "PositionIn/Supporting Files/Info.plist";
@@ -4185,7 +4181,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
-					"/Users/mpolyevin/Downloads/FacebookSDKs-iOS-20151007",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = "PositionIn/Supporting Files/Info.plist";
@@ -4412,7 +4407,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
-					"/Users/mpolyevin/Downloads/FacebookSDKs-iOS-20151007",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = "PositionIn/Supporting Files/Info.plist";
