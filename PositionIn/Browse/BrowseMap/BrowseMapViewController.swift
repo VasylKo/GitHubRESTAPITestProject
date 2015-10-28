@@ -12,7 +12,7 @@ import CleanroomLogger
 import BrightFutures
 import Box
 
-final class BrowseMapViewController: UIViewController, BrowseActionProducer, BrowseModeDisplay {
+final class BrowseMapViewController: UIViewController, BrowseActionProducer, BrowseModeDisplay, SearchFilterProtocol {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,6 +20,8 @@ final class BrowseMapViewController: UIViewController, BrowseActionProducer, Bro
             self.mapView.moveCamera(GMSCameraUpdate.setTarget(coordinate, zoom: 12))
         }
     }
+    
+    var shouldApplySectionFilter = true
     
     var browseMode: BrowseModeTabbarViewController.BrowseMode = .ForYou
     
@@ -69,8 +71,11 @@ final class BrowseMapViewController: UIViewController, BrowseActionProducer, Bro
         actionConsumer?.browseControllerDidChangeContent(self)
     }
     
-    private var markers = [GMSMarker]()
+    func applyFilterUpdate(update: SearchFilterUpdate, canAffect: Bool) {
+        filter = update(filter)
+    }
     
+    private var markers = [GMSMarker]()
 }
 
 
@@ -106,7 +111,7 @@ extension BrowseMapViewController: GMSMapViewDelegate {
         if let box = marker.userData  as? Box<FeedItem> {
             let feedItem = box.value
             actionConsumer?.browseController(self, didSelectItem: feedItem.objectId, type: feedItem.type, data:feedItem.itemData)
-        
+            
         }
         
         return true

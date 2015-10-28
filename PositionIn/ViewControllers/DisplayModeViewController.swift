@@ -20,7 +20,7 @@ protocol BrowseActionConsumer: class {
     func browseControllerDidChangeContent(controller: BrowseActionProducer)
 }
 
-@objc class DisplayModeViewController: BesideMenuViewController, BrowseActionConsumer, SearchViewControllerDelegate, UISearchBarDelegate {
+@objc class DisplayModeViewController: BesideMenuViewController, BrowseActionConsumer, SearchViewControllerDelegate, UITextFieldDelegate {
     
     //MARK: - Updates -
     
@@ -69,9 +69,10 @@ protocol BrowseActionConsumer: class {
         }
         
         let childController = viewControllerForMode(self.displayMode)
-        prepareDisplayController(childController)
         childController.willMoveToParentViewController(self)
+        prepareDisplayController(childController)
         self.addChildViewController(childController)
+
         self.contentView.addSubViewOnEntireSize(childController.view)
         childController.didMoveToParentViewController(self)
         currentModeViewController = childController
@@ -88,7 +89,6 @@ protocol BrowseActionConsumer: class {
         Log.verbose?.message("Preparing display controller: \(controller)")
     }
     
-
     //MARK: - UI -
     
     override func viewDidLoad() {
@@ -141,7 +141,7 @@ protocol BrowseActionConsumer: class {
 
     //MARK: - Private -
     
-    private weak var currentModeViewController: UIViewController?
+    weak var currentModeViewController: UIViewController?
     
     override func loadView() {
         let view = UIView()
@@ -183,48 +183,68 @@ protocol BrowseActionConsumer: class {
 
     //MARK: - Search -
     
-    private lazy var searchbar: SearchBar = { [unowned self] in
-        let searchBar = SearchBar()
+    private lazy var searchbar: UITextField = { [unowned self] in
+        let width = self.navigationController?.navigationBar.frame.size.width
+        let searchBar = UITextField(frame: CGRectMake(0, 0, width! * 0.7, 25))
+        searchBar.tintColor = UIColor.whiteColor()
+        searchBar.backgroundColor = UIColor.bt_colorWithBytesR(0, g: 73, b: 167)
+        searchBar.borderStyle = UITextBorderStyle.RoundedRect
+        searchBar.font = UIFont.systemFontOfSize(12)
+        searchBar.textColor = UIColor.whiteColor()
+        let leftView: UIImageView = UIImageView(image: UIImage(named: "search_icon"))
+        leftView.frame = CGRectMake(0.0, 0.0, leftView.frame.size.width + 5.0, leftView.frame.size.height);
+        leftView.contentMode = .Center
+        searchBar.leftView = leftView
+        searchBar.leftViewMode = .Always
         searchBar.delegate = self
+        let str = NSAttributedString(string: "Search...", attributes: [NSForegroundColorAttributeName:UIColor(white: 201/255, alpha: 1)])
+        searchBar.attributedPlaceholder =  str
         return searchBar
         }()
-
-    func searchBarShouldBeginEditing(searchBar: UISearchBar) -> Bool {
-        searchBar.resignFirstResponder()
-        SearchViewController.present(searchbar, presenter: self)
+    
+    func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        self.presentSearchViewController(SearchFilter.currentFilter)
         return false
     }
     
-    func searchViewControllerItemSelected(model: SearchItemCellModel?) {
+    func presentSearchViewController(filter: SearchFilter) {
+        SearchViewController.present(searchbar, presenter: self, filter: filter)
+    }
+    
+    func searchViewControllerCancelSearch() {
+        self.searchbar.text = nil
+    }
+    
+    func searchViewControllerItemSelected(model: SearchItemCellModel?, searchString: String?, locationString: String?) {
+        self.searchbar.text = nil
         if let model = model {
-            switch model.itemType {
-            case .Unknown:
-                break
-            case .Category:
-                break
-            case .Product:
-                let controller =  Storyboards.Main.instantiateProductDetailsViewControllerId()
-                controller.objectId = model.objectID
-                navigationController?.pushViewController(controller, animated: true)
-            case .Event:
-                let controller =  Storyboards.Main.instantiateEventDetailsViewControllerId()
-                controller.objectId = model.objectID
-                navigationController?.pushViewController(controller, animated: true)
-            case .Promotion:
-                let controller =  Storyboards.Main.instantiatePromotionDetailsViewControllerId()
-                controller.objectId =  model.objectID
-                navigationController?.pushViewController(controller, animated: true)
-            case .Community:
-                SearchFilter.currentFilter.communities = [model.objectID]
-            case .People:
-                SearchFilter.currentFilter.users = [model.objectID]
-            default:
-                break
-            }
+            self.searchbar.attributedText = self.searchBarAttributedText(model.title, searchString: searchString, locationString: locationString)
         }
     }
     
-    func searchViewControllerSectionSelected(model: SearchSectionCellModel?) {
+    func searchViewControllerSectionSelected(model: SearchSectionCellModel?, searchString: String?, locationString: String?) {
+        self.searchbar.text = nil
+        if let model = model {
+            self.searchbar.attributedText = self.searchBarAttributedText(model.title, searchString: searchString, locationString: locationString)
+        }
+    }
+    
+    func searchBarAttributedText(modelTitle: String?, searchString: String?, locationString: String?) -> NSAttributedString {
         
+        var str: NSMutableAttributedString = NSMutableAttributedString()
+        
+        if let modelTitle = modelTitle,
+            searchString = searchString,
+            locationString = locationString {
+                let locationString = count(locationString) > 0 ? locationString : NSLocalizedString("current location",
+                    comment: "currentLocation")
+                let searchBarString = modelTitle + " " + searchString + " " + locationString
+                
+                str = NSMutableAttributedString(string: searchBarString,
+                    attributes: [NSForegroundColorAttributeName:UIColor.whiteColor()])
+        }
+        
+        return str
     }
 }

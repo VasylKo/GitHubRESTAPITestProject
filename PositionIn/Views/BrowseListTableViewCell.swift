@@ -25,9 +25,13 @@ final class BrowseListTableViewCell: TableViewCell, TableViewChildViewController
             filter.users = [ m!.objectId ]
         case .Community:
             filter.communities = [ m!.objectId ]
-        }        
+        }
         listController.filter = filter
+        if let cfu = m!.childFilterUpdate {
+            listController.applyFilterUpdate(cfu, canAffect: m!.canAffectFilter)
+        }
     }
+    
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -89,6 +93,8 @@ public struct BrowseListCellModel: ProfileCellModel {
     var shoWCompactCells: Bool = true
     unowned var actionConsumer: BrowseActionConsumer
     let browseMode: BrowseModeTabbarViewController.BrowseMode
+    var childFilterUpdate: SearchFilterUpdate?
+    var canAffectFilter: Bool = true
     
     init(objectId: CRUDObjectId, actionConsumer: BrowseActionConsumer, browseMode: BrowseModeTabbarViewController.BrowseMode, filterType: FilterType = .User) {
         self.objectId = objectId

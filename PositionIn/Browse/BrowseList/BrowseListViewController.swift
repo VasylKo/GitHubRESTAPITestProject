@@ -1,4 +1,4 @@
-//
+	//
 //  BrowseListViewController.swift
 //  PositionIn
 //
@@ -11,7 +11,7 @@ import PosInCore
 import CleanroomLogger
 import BrightFutures
 
-final class BrowseListViewController: UIViewController, BrowseActionProducer, BrowseModeDisplay {
+final class BrowseListViewController: UIViewController, BrowseActionProducer, BrowseModeDisplay, SearchFilterProtocol {
     var excludeCommunityItems = false
     var shoWCompactCells: Bool = true
     private var dataRequestToken = InvalidationToken()
@@ -22,9 +22,8 @@ final class BrowseListViewController: UIViewController, BrowseActionProducer, Br
         super.viewDidLoad()
         dataSource.configureTable(tableView)
         selectedItemType = .Unknown
-        
     }
-    
+        
     var filter = SearchFilter.currentFilter {
         didSet {
             if isViewLoaded() {
@@ -32,16 +31,36 @@ final class BrowseListViewController: UIViewController, BrowseActionProducer, Br
             }
         }
     }
+
+    func applyFilterUpdate(update: SearchFilterUpdate, canAffect: Bool) {
+        canAffectFilter = canAffect
+        filter = update(filter)
+    }
+    
+    internal var canAffectFilter = true
     
     var selectedItemType: FeedItem.ItemType = .Unknown {
         didSet {
             var f = filter
-            f.itemTypes = [selectedItemType]
+            if (canAffectFilter) {
+                f.itemTypes = [selectedItemType]
+            }
+            else if (filter.itemTypes!.filter { $0 == FeedItem.ItemType.Unknown }.count == 0)
+                || selectedItemType != FeedItem.ItemType.Unknown {
+                self.dataSource.setItems([])
+                self.tableView.reloadData()
+            }
             filter = f
         }
     }
+
+    func reloadData() {
+        getFeedItems(filter)
+    }
     
     private func getFeedItems(searchFilter: SearchFilter, page: APIService.Page = APIService.Page()) {
+        Log.debug?.trace()
+        Log.debug?.value(self)
         dataRequestToken.invalidate()
         dataRequestToken = InvalidationToken()
         let request: Future<CollectionResponse<FeedItem>,NSError>
@@ -56,7 +75,8 @@ final class BrowseListViewController: UIViewController, BrowseActionProducer, Br
             Log.debug?.value(response.items)
             if let strongSelf = self,
                let itemTypes = searchFilter.itemTypes
-               where contains(itemTypes, strongSelf.selectedItemType) {
+                //TODO: need discuss this moment
+               where contains(itemTypes, strongSelf.selectedItemType) || strongSelf.selectedItemType == .Unknown  {
                 var items: [FeedItem] = response.items
                 if strongSelf.excludeCommunityItems {
                     items = items.filter { $0.community == CRUDObjectInvalidId }
@@ -165,5 +185,4 @@ extension BrowseListViewController {
         private let modelFactory = FeedItemCellModelFactory()
         
     }
-
 }

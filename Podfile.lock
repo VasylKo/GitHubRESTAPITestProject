@@ -1,5 +1,11 @@
 PODS:
   - Alamofire (1.3.1)
+  - Bolts (1.4.0):
+    - Bolts/AppLinks (= 1.4.0)
+    - Bolts/Tasks (= 1.4.0)
+  - Bolts/AppLinks (1.4.0):
+    - Bolts/Tasks
+  - Bolts/Tasks (1.4.0)
   - Box (1.2.2)
   - Braintree (3.9.3):
     - Braintree/API (= 3.9.3)
@@ -33,6 +39,17 @@ PODS:
     - Braintree/API
   - BrightFutures (2.0.1):
     - Result (~> 0.4.3)
+  - FBSDKCoreKit (4.7.0):
+    - Bolts (~> 1.1)
+    - FBSDKCoreKit/arc (= 4.7.0)
+    - FBSDKCoreKit/no-arc (= 4.7.0)
+  - FBSDKCoreKit/arc (4.7.0):
+    - Bolts (~> 1.1)
+  - FBSDKCoreKit/no-arc (4.7.0):
+    - Bolts (~> 1.1)
+    - FBSDKCoreKit/arc
+  - FBSDKLoginKit (4.7.0):
+    - FBSDKCoreKit
   - GoogleMaps (1.10.3)
   - HanekeSwift (0.9.1)
   - HMSegmentedControl (1.5.2)
@@ -55,6 +72,8 @@ PODS:
 
 DEPENDENCIES:
   - Braintree (= 3.9.3)
+  - FBSDKCoreKit (= 4.7.0)
+  - FBSDKLoginKit (= 4.7.0)
   - GoogleMaps
   - HanekeSwift (~> 0.9.1)
   - HMSegmentedControl
@@ -73,9 +92,12 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Alamofire: e4ab637e3195b645c814b87a652373439e59f2a4
+  Bolts: 0e9bce58b9b9f5e8a7a4d47b16d2fabec289072b
   Box: a92e8aa4c099e6bc0733829665caf9e668ef53b8
   Braintree: 996027dcc8633569f2405bc57dca11f367050c60
   BrightFutures: 27704272a695324b42538a2d85b20ac3f24228bd
+  FBSDKCoreKit: eb580bfc2040ad44f4c0b4f4d0befb1d35bce59c
+  FBSDKLoginKit: 01bce8dd3f3a26a023b0ba4ffdde7ef5062889fe
   GoogleMaps: 945e4ac3b74bcca3ddada51df256eb7beddb474d
   HanekeSwift: 50d37bfbc4432edc649167e538c259feccb4a2bb
   HMSegmentedControl: 83b9686022d2176fb6457d2bdb61e5d6393fed7d
@@ -91,4 +113,4 @@ SPEC CHECKSUMS:
   UIImageEffects: 37b99fa461e4965f332ca82e92f2c22a1075ee84
   XLForm: 7817ce29f3f259186e837bb7309ac7e5b7e9b883
 
-COCOAPODS: 0.39.0.rc.1
+COCOAPODS: 0.39.0

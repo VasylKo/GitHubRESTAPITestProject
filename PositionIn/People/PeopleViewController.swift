@@ -23,7 +23,14 @@ final class PeopleViewController: BesideMenuViewController {
         dataSource.configureTable(tableView)
         browseMode = .Following
         subscribeToNotifications()
+        //Remove following section for not registred users
+        if !api().isUserAuthorized() {
+            browseMode = .Explore
+            self.browseModeSegmentedControl.removeSegmentAtIndex(0, animated: false)
+        }
     }
+    
+    private var firstLoad: Bool = true
     
     var browseMode: BrowseMode = .Following {
         didSet {
@@ -49,12 +56,15 @@ final class PeopleViewController: BesideMenuViewController {
         }
         peopleRequest.onSuccess(token: dataRequestToken) { [weak self] response in
             if let userList = response.items {
+                if ((self?.browseMode == .Following) && (userList.count == 0) && (self?.firstLoad == true)) {
+                    self?.browseMode = .Explore
+                    self?.firstLoad = false
+                }
                 Log.debug?.value(userList)
                 self?.dataSource.setUserList(userList)
                 self?.tableView.reloadData()
             }
         }
-        
     }
 
     private func subscribeToNotifications() {

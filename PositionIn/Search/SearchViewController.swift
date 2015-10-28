@@ -10,19 +10,21 @@ import UIKit
 import PosInCore
 import CleanroomLogger
 
-protocol SearchViewControllerDelegate: class  {   
-    func searchViewControllerItemSelected(model: SearchItemCellModel?)
-    func searchViewControllerSectionSelected(model: SearchSectionCellModel?)
+protocol SearchViewControllerDelegate: class  {
+    func searchViewControllerCancelSearch()
+    func searchViewControllerItemSelected(model: SearchItemCellModel?, searchString: String?, locationString: String?)
+    func searchViewControllerSectionSelected(model: SearchSectionCellModel?, searchString: String?, locationString: String?)
 }
 
 final class SearchViewController: UIViewController {
     
-    class func present<T: UIViewController where T: SearchViewControllerDelegate>(searchBar: SearchBar, presenter: T) {
+    class func present<T: UIViewController where T: SearchViewControllerDelegate>(searchBar: UITextField, presenter: T, filter: SearchFilter) {
         let searchController = Storyboards.Main.instantiateSearchViewController()
         let transitionDelegate = SearchTransitioningDelegate()
         transitionDelegate.startView = searchBar
         searchController.transitioningDelegate = transitionDelegate
         searchController.delegate = presenter
+        searchController.filter = filter
         presenter.presentViewController(searchController, animated: true) {
         }
     }
@@ -33,6 +35,7 @@ final class SearchViewController: UIViewController {
     }
     
     weak var delegate: SearchViewControllerDelegate?
+    var filter: SearchFilter = SearchFilter.currentFilter
     
     var searchMode: SearchMode = .Items {
         didSet {
@@ -40,7 +43,6 @@ final class SearchViewController: UIViewController {
             switch searchMode {
             case .Items:
                 dataSource = itemsDataSource
-                //TODO add items controller reload data
                 itemsSearchController.shouldReloadSearch()
             case .Locations:
                 dataSource = locationsDataSource
@@ -53,34 +55,50 @@ final class SearchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        SearchFilter.currentFilter.communities = []
-        SearchFilter.currentFilter.users = []
-        
         let dismissRecognizer = UITapGestureRecognizer(target: self, action: "didTapOutsideSearch:")
         dismissRecognizer.cancelsTouchesInView = false
         tableView.addGestureRecognizer(dismissRecognizer)
         
-        locationSearchBar.text = SearchFilter.currentFilter.locationName
-        locationsDataSource.delegate = self
-        locationSearchController.delegate = self
-        
-        categoriesSearchBar.text = SearchFilter.currentFilter.name
+        searchTextField.leftViewMode = .Always
+        let leftView: UIImageView = UIImageView(image: UIImage(named: "search_icon"))
+        leftView.frame = CGRectMake(0.0, 0.0, leftView.frame.size.width + 5.0, leftView.frame.size.height);
+        leftView.contentMode = .Center
+        searchTextField.leftView = leftView
+        searchTextField.text = SearchFilter.currentFilter.name
+        searchTextField.becomeFirstResponder()
         itemsDataSource.delegate = self
         itemsSearchController.delegate = self
 
-        categoriesSearchBar.becomeFirstResponder()
+        locationSearchTextField.text = SearchFilter.currentFilter.locationName
+        locationsDataSource.delegate = self
+        locationSearchController.delegate = self
+        let leftLocationView: UIImageView = UIImageView(image: UIImage(named: "search_location_focus"))
+        leftLocationView.frame = CGRectMake(0.0, 0.0, leftLocationView.frame.size.width + 5.0, leftView.frame.size.height);
+        leftLocationView.contentMode = .Center
+        locationSearchTextField.leftView = leftLocationView
+        locationSearchTextField.leftViewMode = .Always
+        locationSearchTextField.backgroundColor = UIColor.bt_colorWithBytesR(0, g: 0, b: 0, a: 102)
+    }
+    
+    @IBAction func cancelButtonPressed(sender: AnyObject) {
+        self.shouldCloseSearch()
+        self.delegate?.searchViewControllerCancelSearch()
     }
     
     func didTapOutsideSearch(sender: UIGestureRecognizer) {
+        self.shouldCloseSearch()
+    }
+    
+    func shouldCloseSearch() {
         view.endEditing(true)
         transitioningDelegate = nil
         dismissViewControllerAnimated(true, completion: nil)
         Log.debug?.message("Should close search")
     }
     
-    @IBOutlet private(set) weak var categoriesSearchBar: UISearchBar!
-    @IBOutlet private(set) weak var locationSearchBar: UISearchBar!
     @IBOutlet private(set) weak var backImageView: UIImageView!
+    @IBOutlet private(set) weak var searchTextField: UITextField!
+    @IBOutlet private(set) weak var locationSearchTextField: UITextField!
     
     @IBOutlet private weak var tableView: TableView!
     
@@ -97,12 +115,13 @@ final class SearchViewController: UIViewController {
         }()
     
     private lazy var locationSearchController: LocationSearchResultsController = { [unowned self] in
-        let controller = LocationSearchResultsController(table: self.tableView, resultStorage: self.locationsDataSource, searchBar: self.locationSearchBar)
+        let controller = LocationSearchResultsController(table: self.tableView, resultStorage: self.locationsDataSource, searchBar: self.locationSearchTextField)
         return controller
     }()
     
     private lazy var itemsSearchController: ItemsSearchResultsController = { [unowned self] in
-        let controller = ItemsSearchResultsController(table: self.tableView, resultStorage: self.itemsDataSource, searchBar: self.categoriesSearchBar)
+        let controller = ItemsSearchResultsController(table: self.tableView, resultStorage: self.itemsDataSource, searchBar: self.searchTextField)
+        controller.filter = self.filter
         return controller
         }()
 }
@@ -114,10 +133,8 @@ extension SearchViewController: LocationSearchResultsDelegate {
     
     func didSelectLocation(location: Location?) {
         SearchFilter.setLocation(location)
-        view.endEditing(true)
-        transitioningDelegate = nil
-        dismissViewControllerAnimated(true, completion: nil)
-        Log.debug?.message("Should close search")
+        locationSearchTextField.text =  SearchFilter.currentFilter.locationName
+        self.shouldCloseSearch()
     }
 }
 
@@ -128,16 +145,15 @@ extension SearchViewController: ItemsSearchResultsDelegate {
     }
     
     func didSelectModel(model: TableViewCellModel?) {
-        view.endEditing(true)
-        transitioningDelegate = nil
-        dismissViewControllerAnimated(true, completion: nil)
-        Log.debug?.message("Should close search")
+        self.shouldCloseSearch()
 
         switch model {
         case let sectionModel as SearchSectionCellModel:
-            self.delegate?.searchViewControllerSectionSelected(sectionModel)
+            self.delegate?.searchViewControllerSectionSelected(sectionModel, searchString: searchTextField.text,
+                locationString: self.locationSearchTextField.text)
         case let itemModel as SearchItemCellModel:
-            self.delegate?.searchViewControllerItemSelected(itemModel)
+            self.delegate?.searchViewControllerItemSelected(itemModel, searchString: searchTextField.text,
+                locationString: self.locationSearchTextField.text)
         default:
             break
         }

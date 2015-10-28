@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
@@ -12,17 +12,12 @@
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="LnB-1Z-Tnm" id="2NY-pq-cAG">
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="eCc-QS-ao5">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="eCc-QS-ao5">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="119"/>
                         <gestureRecognizers/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="120" id="hKS-5D-3D3"/>
+                            <constraint firstAttribute="height" constant="119" id="EQ3-Hu-RYv"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="hKS-5D-3D3"/>
-                            </mask>
-                        </variation>
                     </imageView>
                     <view alpha="0.39999999999999963" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fVh-Nj-957">
                         <rect key="frame" x="0.0" y="80" width="320" height="40"/>
@@ -50,26 +45,14 @@
                 <constraints>
                     <constraint firstItem="2rt-Jw-7c4" firstAttribute="centerY" secondItem="fVh-Nj-957" secondAttribute="centerY" id="2Na-0e-TOR"/>
                     <constraint firstItem="fVh-Nj-957" firstAttribute="leading" secondItem="2NY-pq-cAG" secondAttribute="leading" id="6jH-af-dyR"/>
-                    <constraint firstItem="2rt-Jw-7c4" firstAttribute="bottom" secondItem="fVh-Nj-957" secondAttribute="bottom" constant="-1" id="8t3-jb-L3c"/>
                     <constraint firstAttribute="trailing" secondItem="fVh-Nj-957" secondAttribute="trailing" id="CYo-bX-8A8"/>
                     <constraint firstAttribute="bottom" secondItem="eCc-QS-ao5" secondAttribute="bottom" id="Rff-27-e1M"/>
                     <constraint firstAttribute="trailing" secondItem="eCc-QS-ao5" secondAttribute="trailing" id="SwY-o8-c1A"/>
-                    <constraint firstItem="2rt-Jw-7c4" firstAttribute="trailing" secondItem="fVh-Nj-957" secondAttribute="trailing" id="jIC-FR-kg7"/>
                     <constraint firstItem="2rt-Jw-7c4" firstAttribute="centerX" secondItem="fVh-Nj-957" secondAttribute="centerX" id="kt7-gw-MWl"/>
-                    <constraint firstItem="2rt-Jw-7c4" firstAttribute="leading" secondItem="fVh-Nj-957" secondAttribute="leading" id="nuM-fn-sS8"/>
                     <constraint firstItem="eCc-QS-ao5" firstAttribute="top" secondItem="2NY-pq-cAG" secondAttribute="top" id="oce-W3-y5K"/>
                     <constraint firstAttribute="bottom" secondItem="fVh-Nj-957" secondAttribute="bottom" constant="-1" id="oj2-0A-gCO"/>
                     <constraint firstItem="eCc-QS-ao5" firstAttribute="leading" secondItem="2NY-pq-cAG" secondAttribute="leading" id="sgt-lo-xGj"/>
-                    <constraint firstItem="2rt-Jw-7c4" firstAttribute="top" secondItem="fVh-Nj-957" secondAttribute="top" constant="14" id="the-KL-WQq"/>
                 </constraints>
-                <variation key="default">
-                    <mask key="constraints">
-                        <exclude reference="8t3-jb-L3c"/>
-                        <exclude reference="jIC-FR-kg7"/>
-                        <exclude reference="nuM-fn-sS8"/>
-                        <exclude reference="the-KL-WQq"/>
-                    </mask>
-                </variation>
             </tableViewCellContentView>
             <connections>
                 <outlet property="captionLabel" destination="2rt-Jw-7c4" id="DDK-Hj-xGj"/>

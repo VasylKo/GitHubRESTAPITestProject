@@ -9,6 +9,8 @@
 import UIKit
 import BrightFutures
 import CleanroomLogger
+import FBSDKCoreKit
+import FBSDKLoginKit
 
 final class RegisterViewController: BaseLoginViewController {
 
@@ -23,7 +25,6 @@ final class RegisterViewController: BaseLoginViewController {
         }
                         
     }
-
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue == RegisterViewController.Segue.SignUpSegue {

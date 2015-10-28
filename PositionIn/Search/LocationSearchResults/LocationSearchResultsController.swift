@@ -22,11 +22,17 @@ protocol LocationSearchResultsDelegate: class {
 
 final class LocationSearchResultsController: NSObject {
         
-    init(table: TableView?, resultStorage: LocationSearchResultStorage?, searchBar: UISearchBar?) {
+    init(table: TableView?, resultStorage: LocationSearchResultStorage?, searchBar: UITextField?) {
         locationsTable = table
         self.resultStorage = resultStorage
         self.searchBar = searchBar
         super.init()
+        
+        
+        let str = NSAttributedString(string: self.searchBar!.placeholder!,
+            attributes: [NSForegroundColorAttributeName:UIColor.whiteColor()])
+        self.searchBar!.attributedPlaceholder = str
+        
         searchBar?.delegate = self
     }
 
@@ -52,9 +58,13 @@ final class LocationSearchResultsController: NSObject {
                 callback: completion).onFailure { error in
                     Log.error?.value(error)
             }
-        } else {
-            delegate?.didSelectLocation(nil)
-            completion([])
+        }
+        else {
+            locationController().getCurrentLocation().onSuccess(token: dataRequestToken, callback: { [weak self] location in
+                self?.resultStorage?.setLocations([LocationController.currentLocation])
+                self?.locationsTable?.reloadData()
+                self?.locationsTable?.scrollEnabled = self?.locationsTable?.frame.size.height < self?.locationsTable?.contentSize.height
+            })
         }
     }
     
@@ -66,24 +76,33 @@ final class LocationSearchResultsController: NSObject {
     weak var delegate: LocationSearchResultsDelegate? 
     private weak var resultStorage: LocationSearchResultStorage?
     private weak var locationsTable: TableView?
-    private weak var searchBar: UISearchBar?
+    private weak var searchBar: UITextField?
     private var dataRequestToken = InvalidationToken()
     private var searchTimer: NSTimer?
     
     let searchDelay: NSTimeInterval = 1.5
 }
 
-extension LocationSearchResultsController: UISearchBarDelegate {
-    
-    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+extension LocationSearchResultsController: UITextFieldDelegate {
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool{
         shouldReloadSearch()
+        return true
     }
     
-    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
-        shouldReloadSearch()
+    func textFieldDidEndEditing(textField: UITextField) {
+        textField.backgroundColor = UIColor.bt_colorWithBytesR(0, g: 0, b: 0, a: 102)
+        let str = NSAttributedString(string: textField.placeholder!,
+            attributes: [NSForegroundColorAttributeName:UIColor.whiteColor()])
+        textField.attributedPlaceholder = str
+        textField.textColor = UIColor.whiteColor()
     }
     
-    func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
+    func textFieldDidBeginEditing(textField: UITextField) {
+        textField.backgroundColor = UIColor.bt_colorWithBytesR(255, g: 255, b: 255, a: 255)
+        let str = NSAttributedString(string: textField.placeholder!,
+            attributes: [NSForegroundColorAttributeName:UIColor(white: 201/255, alpha: 1)])
+        textField.attributedPlaceholder = str
+        textField.textColor = UIColor.blackColor()
         delegate?.shouldDisplayLocationSearchResults()
     }
 }
