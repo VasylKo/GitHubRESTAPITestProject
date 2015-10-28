@@ -25,6 +25,7 @@ platform :ios do
 
   before_all do
     # ENV["SLACK_URL"] = "https://hooks.slack.com/services/..."
+    sh 'rm -rf ~/Library/Caches/org.carthage.CarthageKit/dependencies/'
 
     carthage(
       use_ssh: false,         # Use SSH for downloading GitHub repositories.
