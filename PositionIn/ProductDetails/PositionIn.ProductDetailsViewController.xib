@@ -25,7 +25,7 @@
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="214-ZE-nbB">
                     <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="djR-mn-LSG">
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="djR-mn-LSG">
                             <rect key="frame" x="0.0" y="0.0" width="600" height="300"/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="djR-mn-LSG" secondAttribute="height" multiplier="2:1" id="eKo-kP-UL2"/>

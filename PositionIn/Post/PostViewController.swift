@@ -131,7 +131,6 @@ extension PostViewController: PostActionConsumer {
     }
     
     func likePost() {
-        //TODO: need add update screen
         if let tempPost = post {
             if (tempPost.isLiked) {
                 api().unlikePost(tempPost.objectId).onSuccess{[weak self] in

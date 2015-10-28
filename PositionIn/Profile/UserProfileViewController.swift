@@ -43,7 +43,8 @@ final class UserProfileViewController: BesideMenuViewController, BrowseActionPro
     }
     
     var objectId: CRUDObjectId = api().currentUserId() ?? CRUDObjectInvalidId
-    
+    var childFilterUpdate: SearchFilterUpdate?
+    var canAffectFilter: Bool = true
     var profile: UserProfile = UserProfile(objectId: CRUDObjectInvalidId) {
         didSet {
             if isViewLoaded() {
@@ -87,8 +88,14 @@ final class UserProfileViewController: BesideMenuViewController, BrowseActionPro
         }
         dataSource.items[Sections.Info.rawValue] = infoSection
         
-        var feedModel = BrowseListCellModel(objectId: profile.objectId, actionConsumer: self, browseMode: .New)
+        self.updateFeed()
+    }
+    
+    private func updateFeed() {
+        var feedModel = BrowseListCellModel(objectId: objectId, actionConsumer: self, browseMode: .New)
         feedModel.excludeCommunityItems = true
+        feedModel.childFilterUpdate = self.childFilterUpdate
+        feedModel.canAffectFilter = canAffectFilter
         dataSource.items[Sections.Feed.rawValue] = [ feedModel ]
         
         tableView.reloadData()
@@ -184,31 +191,121 @@ final class UserProfileViewController: BesideMenuViewController, BrowseActionPro
     //MARK: - Search -
     
     private lazy var searchbar: UITextField = { [unowned self] in
-        let searchBar = UITextField(frame: CGRectMake(0, 0, UIScreen.mainScreen().applicationFrame.size.width * 0.7, 25))
+        let width = self.navigationController?.navigationBar.frame.size.width
+        let searchBar = UITextField(frame: CGRectMake(0, 0, width! * 0.7, 25))
         searchBar.tintColor = UIColor.whiteColor()
-        searchBar.backgroundColor = UIColor.whiteColor()
+        searchBar.backgroundColor = UIColor.bt_colorWithBytesR(0, g: 73, b: 167)
+        searchBar.font = UIFont.systemFontOfSize(12)
+        searchBar.textColor = UIColor.whiteColor()
         searchBar.borderStyle = UITextBorderStyle.RoundedRect
         let leftView: UIImageView = UIImageView(image: UIImage(named: "search_icon"))
-        leftView.frame = CGRectMake(0.0, 0.0, leftView.frame.size.width + 10.0, leftView.frame.size.height);
+        leftView.frame = CGRectMake(0.0, 0.0, leftView.frame.size.width + 5.0, leftView.frame.size.height);
         leftView.contentMode = .Center
         searchBar.leftView = leftView
         searchBar.leftViewMode = .Always
         searchBar.delegate = self
+        let str = NSAttributedString(string: "Search...", attributes: [NSForegroundColorAttributeName:UIColor(white: 201/255, alpha: 1)])
+        searchBar.attributedPlaceholder =  str
         return searchBar
         }()
     
     func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
         textField.resignFirstResponder()
-        SearchViewController.present(searchbar, presenter: self)
+        var searchFilter: SearchFilter = SearchFilter.currentFilter
+        searchFilter.users = [objectId]
+        SearchViewController.present(searchbar, presenter: self, filter: searchFilter)
         return false
     }
     
-    func searchViewControllerItemSelected(model: SearchItemCellModel?) {
-        
+    func searchViewControllerItemSelected(model: SearchItemCellModel?, searchString: String?, locationString: String?) {
+        if let model = model {
+            
+            switch model.itemType {
+            case .Unknown:
+                break
+            case .Category:
+                break
+            case .Product:
+                let controller =  Storyboards.Main.instantiateProductDetailsViewControllerId()
+                controller.objectId = model.objectID
+                navigationController?.pushViewController(controller, animated: true)
+            case .Event:
+                let controller =  Storyboards.Main.instantiateEventDetailsViewControllerId()
+                controller.objectId = model.objectID
+                navigationController?.pushViewController(controller, animated: true)
+            case .Promotion:
+                let controller =  Storyboards.Main.instantiatePromotionDetailsViewControllerId()
+                controller.objectId =  model.objectID
+                navigationController?.pushViewController(controller, animated: true)
+            case .Community:
+                childFilterUpdate = { (filter: SearchFilter) -> SearchFilter in
+                    var f = filter
+                    f.communities = [model.objectID]
+                    return f
+                }
+                canAffectFilter = false
+                self.updateFeed()
+            case .People:
+                childFilterUpdate = { (filter: SearchFilter) -> SearchFilter in
+                    var f = filter
+                    f.users = [model.objectID]
+                    return f
+                }
+                canAffectFilter = false
+                self.updateFeed()
+            default:
+                break
+            }
+            self.searchbar.text = nil
+            self.searchbar.attributedText = self.searchBarAttributedText(model.title, searchString: searchString, locationString: locationString)
+        }
     }
     
-    func searchViewControllerSectionSelected(model: SearchSectionCellModel?) {
+    func searchViewControllerSectionSelected(model: SearchSectionCellModel?, searchString: String?, locationString: String?) {
+        if let model = model {
+            let itemType = model.itemType
+            childFilterUpdate = { (filter: SearchFilter) -> SearchFilter in
+                var f = filter
+                f.itemTypes = [ itemType ]
+                return f
+            }
+            self.searchbar.text = itemType.description
+            canAffectFilter = false
+            self.updateFeed()
+            self.searchbar.text = nil
+            self.searchbar.attributedText = self.searchBarAttributedText(model.title, searchString: searchString, locationString: locationString)
+        }
+    }
+    
+    func searchBarAttributedText(modelTitle: String?, searchString: String?, locationString: String?) -> NSAttributedString {
         
+        var str: NSMutableAttributedString = NSMutableAttributedString()
+        
+        if let modelTitle = modelTitle,
+            searchString = searchString,
+            locationString = locationString {
+                let locationString = count(locationString) > 0 ? locationString : NSLocalizedString("current location",
+                    comment: "currentLocation")
+                let searchBarString = modelTitle + " " + searchString + " " + locationString
+                
+                str = NSMutableAttributedString(string: searchBarString,
+                    attributes: [NSForegroundColorAttributeName:UIColor.whiteColor()])
+        }
+        
+        return str
+    }
+    
+    func searchViewControllerCancelSearch() {
+        childFilterUpdate = { (filter: SearchFilter) -> SearchFilter in
+            var f = filter
+            var user = filter.users
+            f =  SearchFilter.currentFilter
+            f.users = user
+            return f
+        }
+        canAffectFilter = true
+        self.updateFeed()
+        searchbar.text = nil
     }
 }
 
@@ -223,9 +320,16 @@ extension UserProfileViewController: UserProfileActionConsumer {
             let navigationController = UINavigationController(rootViewController: updateController)
             presentViewController(navigationController, animated: true, completion: nil)
         case .Follow:
-            api().followUser(objectId).onSuccess { [weak self] in
-                self?.sendSubscriptionUpdateNotification(aUserInfo: nil)
-                self?.reloadData()
+            if api().isUserAuthorized() {
+                api().followUser(objectId).onSuccess { [weak self] in
+                    self?.sendSubscriptionUpdateNotification(aUserInfo: nil)
+                    self?.reloadData()
+                }
+            }
+            else {
+                api().logout().onComplete {[weak self] _ in
+                    self?.sideBarController?.executeAction(.Login)
+                }
             }
         case .UnFollow:
             api().unFollowUser(objectId).onSuccess { [weak self] in

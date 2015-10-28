@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
@@ -14,10 +13,10 @@
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="GnF-Pv-vLq" id="TFc-Vu-PWQ">
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="200" verticalHuggingPriority="200" translatesAutoresizingMaskIntoConstraints="NO" id="2Qd-Ow-tWX">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="200" verticalHuggingPriority="200" translatesAutoresizingMaskIntoConstraints="NO" id="2Qd-Ow-tWX">
                         <rect key="frame" x="2" y="2" width="70" height="70"/>
                         <constraints>
-                            <constraint firstAttribute="width" secondItem="2Qd-Ow-tWX" secondAttribute="height" multiplier="1:1" id="PQm-fX-z5F"/>
+                            <constraint firstAttribute="width" constant="70" id="npE-Ed-CXI"/>
                             <constraint firstAttribute="height" constant="70" id="qND-6Y-zqH"/>
                         </constraints>
                     </imageView>
@@ -50,7 +49,6 @@
                     <constraint firstItem="2Qd-Ow-tWX" firstAttribute="top" secondItem="TFc-Vu-PWQ" secondAttribute="top" constant="2" id="ex0-lE-0Gv"/>
                     <constraint firstAttribute="bottom" secondItem="2Qd-Ow-tWX" secondAttribute="bottom" constant="2" id="gOt-fW-GCx"/>
                     <constraint firstItem="4VF-n0-3AX" firstAttribute="leading" secondItem="JmL-oh-349" secondAttribute="leading" id="i1t-yv-W5O"/>
-                    <constraint firstItem="2Qd-Ow-tWX" firstAttribute="top" secondItem="4VF-n0-3AX" secondAttribute="top" constant="-5" id="jCf-VP-GxF"/>
                     <constraint firstAttribute="trailingMargin" secondItem="4VF-n0-3AX" secondAttribute="trailing" constant="5" id="lhm-Fh-s2y"/>
                     <constraint firstItem="4VF-n0-3AX" firstAttribute="leading" secondItem="2Qd-Ow-tWX" secondAttribute="trailing" constant="4" id="r6c-ik-d2E"/>
                     <constraint firstItem="2Qd-Ow-tWX" firstAttribute="leading" secondItem="TFc-Vu-PWQ" secondAttribute="leading" constant="2" id="zKS-IW-jyf"/>

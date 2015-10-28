@@ -126,8 +126,6 @@ protocol BrowseModeDisplay {
         super.applyDisplayMode(mode)
         addMenu.setExpanded(false, animated: false)
     }
-    
-    
 
     private(set) internal weak var addMenu: AddMenuView!
     private(set) internal weak var tabbar: BrowseTabbar!
@@ -151,7 +149,6 @@ protocol BrowseModeDisplay {
         blurView.hidden = true
         return blurView
         }()
-
     
  //MARK: - AddMenuViewDelegate -
     
@@ -172,6 +169,4 @@ protocol BrowseModeDisplay {
     @objc func tabbarDidChangeMode(tabbar: BrowseTabbar) {
         browseMode = tabbar.selectedMode
     }
-
-    
 }

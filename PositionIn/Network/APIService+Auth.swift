@@ -102,6 +102,13 @@ extension APIService {
         }
     }
     
+    //Login via fb
+    func login(fbToken: String) -> Future<UserProfile, NSError> {
+        return facebookLoginRequest(fbToken).flatMap { _ in
+            return self.updateCurrentProfileStatus()
+        }
+    }
+    
     //Register anonymous user
     func register() -> Future<UserProfile, NSError> {
         return registerRequest(username: nil, password: nil, info: nil).flatMap { _ in
@@ -134,6 +141,12 @@ extension APIService {
     
     private func loginRequest(#username: String, password: String) -> Future<AuthResponse, NSError> {
         let urlRequest = AuthRouter.Login(api: self, username: username, password: password)
+        let (_, future): (Alamofire.Request, Future<AuthResponse, NSError>) = dataProvider.objectRequest(urlRequest)
+        return handleFailure(updateAuth(future))
+    }
+    
+    private func facebookLoginRequest(fbToken: String) -> Future<AuthResponse, NSError> {
+        let urlRequest = AuthRouter.Facebook(api: self, fbToken: fbToken)
         let (_, future): (Alamofire.Request, Future<AuthResponse, NSError>) = dataProvider.objectRequest(urlRequest)
         return handleFailure(updateAuth(future))
     }
@@ -176,6 +189,7 @@ extension APIService {
     private enum AuthRouter: URLRequestConvertible {
         
         case Login(api: APIService, username: String, password: String)
+        case Facebook(api: APIService, fbToken: String)
         case Register(api: APIService, username: String?, password: String?, profileInfo: [String: AnyObject]?)
         case Refresh(api: APIService, token: String)
 
@@ -199,6 +213,12 @@ extension APIService {
                 params = [
                     "email" : username,
                     "password" : password,
+                    "device" : deviceInfo(),
+                ]
+            case .Facebook(let api, let fbToken):
+                url = api.https("/v1.0/users/login")
+                params = [
+                    "fbToken" : fbToken,
                     "device" : deviceInfo(),
                 ]
             case .Register(let api,  let username, let password, let profile):

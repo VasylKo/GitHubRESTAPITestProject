@@ -184,34 +184,67 @@ protocol BrowseActionConsumer: class {
     //MARK: - Search -
     
     private lazy var searchbar: UITextField = { [unowned self] in
-        let searchBar = UITextField(frame: CGRectMake(0, 0, UIScreen.mainScreen().applicationFrame.size.width * 0.7, 25))
+        let width = self.navigationController?.navigationBar.frame.size.width
+        let searchBar = UITextField(frame: CGRectMake(0, 0, width! * 0.7, 25))
         searchBar.tintColor = UIColor.whiteColor()
-        searchBar.backgroundColor = UIColor.whiteColor()
+        searchBar.backgroundColor = UIColor.bt_colorWithBytesR(0, g: 73, b: 167)
         searchBar.borderStyle = UITextBorderStyle.RoundedRect
+        searchBar.font = UIFont.systemFontOfSize(12)
+        searchBar.textColor = UIColor.whiteColor()
         let leftView: UIImageView = UIImageView(image: UIImage(named: "search_icon"))
-        leftView.frame = CGRectMake(0.0, 0.0, leftView.frame.size.width + 10.0, leftView.frame.size.height);
+        leftView.frame = CGRectMake(0.0, 0.0, leftView.frame.size.width + 5.0, leftView.frame.size.height);
         leftView.contentMode = .Center
         searchBar.leftView = leftView
         searchBar.leftViewMode = .Always
         searchBar.delegate = self
+        let str = NSAttributedString(string: "Search...", attributes: [NSForegroundColorAttributeName:UIColor(white: 201/255, alpha: 1)])
+        searchBar.attributedPlaceholder =  str
         return searchBar
         }()
     
     func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
         textField.resignFirstResponder()
-        self.presentSearchViewController()
+        self.presentSearchViewController(SearchFilter.currentFilter)
         return false
     }
     
-    func presentSearchViewController() {
-        SearchViewController.present(searchbar, presenter: self)
+    func presentSearchViewController(filter: SearchFilter) {
+        SearchViewController.present(searchbar, presenter: self, filter: filter)
     }
     
-    func searchViewControllerItemSelected(model: SearchItemCellModel?) {
-        
+    func searchViewControllerCancelSearch() {
+        self.searchbar.text = nil
     }
     
-    func searchViewControllerSectionSelected(model: SearchSectionCellModel?) {
+    func searchViewControllerItemSelected(model: SearchItemCellModel?, searchString: String?, locationString: String?) {
+        self.searchbar.text = nil
+        if let model = model {
+            self.searchbar.attributedText = self.searchBarAttributedText(model.title, searchString: searchString, locationString: locationString)
+        }
+    }
+    
+    func searchViewControllerSectionSelected(model: SearchSectionCellModel?, searchString: String?, locationString: String?) {
+        self.searchbar.text = nil
+        if let model = model {
+            self.searchbar.attributedText = self.searchBarAttributedText(model.title, searchString: searchString, locationString: locationString)
+        }
+    }
+    
+    func searchBarAttributedText(modelTitle: String?, searchString: String?, locationString: String?) -> NSAttributedString {
         
+        var str: NSMutableAttributedString = NSMutableAttributedString()
+        
+        if let modelTitle = modelTitle,
+            searchString = searchString,
+            locationString = locationString {
+                let locationString = count(locationString) > 0 ? locationString : NSLocalizedString("current location",
+                    comment: "currentLocation")
+                let searchBarString = modelTitle + " " + searchString + " " + locationString
+                
+                str = NSMutableAttributedString(string: searchBarString,
+                    attributes: [NSForegroundColorAttributeName:UIColor.whiteColor()])
+        }
+        
+        return str
     }
 }

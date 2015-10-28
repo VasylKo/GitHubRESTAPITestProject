@@ -23,7 +23,7 @@ class SearchSectionCell: TableViewCell {
         }
         else {
             self.selectionStyle = UITableViewCellSelectionStyle.None
-            self.contentView.backgroundColor = UIColor.whiteColor()
+            self.contentView.backgroundColor = UIColor(white: 240/255, alpha: 1)
             self.userInteractionEnabled = false
             self.accessoryType = UITableViewCellAccessoryType.None
         }

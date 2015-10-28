@@ -13,7 +13,7 @@
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ag8-W7-UIb" id="qmI-xV-Jq0">
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bjU-xc-Dqf">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bjU-xc-Dqf">
                         <rect key="frame" x="10" y="10" width="40" height="40"/>
                         <color key="tintColor" red="0.92941176469999998" green="0.1058823529" blue="0.18039215689999999" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -21,7 +21,7 @@
                             <constraint firstAttribute="width" secondItem="bjU-xc-Dqf" secondAttribute="height" multiplier="1:1" id="uwu-oH-Q6m"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="po7-Yf-WhE">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="po7-Yf-WhE">
                         <rect key="frame" x="60" y="20" width="250" height="20"/>
                         <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>

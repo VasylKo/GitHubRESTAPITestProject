@@ -74,12 +74,8 @@ final class BrowseMapViewController: UIViewController, BrowseActionProducer, Bro
     }
     
     func applyFilterUpdate(update: SearchFilterUpdate, canAffect: Bool) {
-        canAffectFilter = canAffect
-        
         filter = update(filter)
     }
-    
-    internal var canAffectFilter = true
     
     private var markers = [GMSMarker]()
 }

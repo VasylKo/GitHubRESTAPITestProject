@@ -45,15 +45,10 @@ final class BrowseListViewController: UIViewController, BrowseActionProducer, Br
             if (canAffectFilter) {
                 f.itemTypes = [selectedItemType]
             }
-            else {
-                //TODO: need refactor
-                if filter.itemTypes?.first == selectedItemType || selectedItemType == .Unknown {
-                    filter = f
-                }
-                else {
-                    self.dataSource.setItems([])
-                    self.tableView.reloadData()
-                }
+            else if (filter.itemTypes!.filter { $0 == FeedItem.ItemType.Unknown }.count == 0)
+                || selectedItemType != FeedItem.ItemType.Unknown {
+                self.dataSource.setItems([])
+                self.tableView.reloadData()
             }
             filter = f
         }
@@ -190,5 +185,4 @@ extension BrowseListViewController {
         private let modelFactory = FeedItemCellModelFactory()
         
     }
-
 }

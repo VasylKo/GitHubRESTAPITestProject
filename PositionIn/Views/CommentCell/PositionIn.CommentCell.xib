@@ -12,7 +12,7 @@
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="v8M-6B-ZG5" id="Dqh-Bo-qXP">
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="LfW-dp-Eo5" customClass="AvatarView" customModule="PositionIn" customModuleProvider="target">
+                    <view clipsSubviews="YES" contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="LfW-dp-Eo5" customClass="AvatarView" customModule="PositionIn" customModuleProvider="target">
                         <rect key="frame" x="13" y="13" width="50" height="50"/>
                         <color key="backgroundColor" red="0.97254901959999995" green="0.83921568629999999" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -31,7 +31,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pif-sd-dGN" userLabel="NameLabel">
                                 <rect key="frame" x="0.0" y="0.0" width="238" height="20"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="text" value=""/>

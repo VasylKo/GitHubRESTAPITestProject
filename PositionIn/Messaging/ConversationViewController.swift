@@ -168,6 +168,14 @@ final class ConversationViewController: JSQMessagesViewController {
 //        return 0.0
 //    }
     
+    override func collectionView(collectionView: JSQMessagesCollectionView!, didTapAvatarImageView avatarImageView: UIImageView!, atIndexPath indexPath: NSIndexPath!) {
+        if let userId = self.collectionView(collectionView, messageDataForItemAtIndexPath: indexPath).senderId() {
+            let profileController = Storyboards.Main.instantiateUserProfileViewController()
+            profileController.objectId = userId
+            navigationController?.pushViewController(profileController, animated: true)
+        }
+    }
+    
     //MARK: - Helpers -
     
     lazy private var outgoingBubbleImageData: JSQMessagesBubbleImage = {

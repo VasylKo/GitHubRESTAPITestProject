@@ -55,7 +55,36 @@ final class CommunityViewController: BrowseModeTabbarViewController, SearchViewC
         }
     }
     
-    override func searchViewControllerItemSelected(model: SearchItemCellModel?) {
+    override func presentSearchViewController(filter: SearchFilter) {
+        
+        childFilterUpdate = { (filter: SearchFilter) -> SearchFilter in
+            var f = filter
+            f =  SearchFilter.currentFilter
+            return f
+        }
+        canAffectFilter = true
+        applyDisplayMode(displayMode)
+        
+        var searchFilter: SearchFilter = SearchFilter.currentFilter
+        searchFilter.communities = [ objectId ]
+
+        super.presentSearchViewController(searchFilter)
+    }
+    
+    override func searchViewControllerCancelSearch() {
+        childFilterUpdate = { (filter: SearchFilter) -> SearchFilter in
+            var f = filter
+            var user = filter.communities
+            f =  SearchFilter.currentFilter
+            f.communities = user
+            return f
+        }
+        canAffectFilter = true
+        applyDisplayMode(displayMode)
+    }
+    
+    override func searchViewControllerItemSelected(model: SearchItemCellModel?, searchString: String?, locationString: String?) {
+        super.searchViewControllerItemSelected(model, searchString: searchString, locationString: locationString)
         if let model = model {
             
             switch model.itemType {
@@ -81,7 +110,7 @@ final class CommunityViewController: BrowseModeTabbarViewController, SearchViewC
                     f.communities = [model.objectID]
                     return f
                 }
-                canAffectOnFilter = false
+                canAffectFilter = false
                 applyDisplayMode(displayMode)
             case .People:
                 childFilterUpdate = { (filter: SearchFilter) -> SearchFilter in
@@ -89,7 +118,7 @@ final class CommunityViewController: BrowseModeTabbarViewController, SearchViewC
                     f.users = [model.objectID]
                     return f
                 }
-                canAffectOnFilter = false
+                canAffectFilter = false
                 applyDisplayMode(displayMode)
             default:
                 break
@@ -97,7 +126,16 @@ final class CommunityViewController: BrowseModeTabbarViewController, SearchViewC
         }
     }
     
-    override func searchViewControllerSectionSelected(model: SearchSectionCellModel?) {
+    override func prepareDisplayController(controller: UIViewController) {
+        super.prepareDisplayController(controller)
+        if let filterUpdate = childFilterUpdate,
+            let filterApplicator = controller as? SearchFilterProtocol {
+                filterApplicator.applyFilterUpdate(filterUpdate, canAffect: canAffectFilter)
+        }
+    }
+    
+    override func searchViewControllerSectionSelected(model: SearchSectionCellModel?, searchString: String?, locationString: String?) {
+        super.searchViewControllerSectionSelected(model, searchString: searchString, locationString: locationString)
         if let model = model {
             let itemType = model.itemType
             childFilterUpdate = { (filter: SearchFilter) -> SearchFilter in
@@ -105,11 +143,11 @@ final class CommunityViewController: BrowseModeTabbarViewController, SearchViewC
                 f.itemTypes = [ itemType ]
                 return f
             }
-            canAffectOnFilter = false
+            canAffectFilter = false
             applyDisplayMode(displayMode)
         }
     }
     
     var childFilterUpdate: SearchFilterUpdate?
-    var canAffectOnFilter: Bool = true
+    var canAffectFilter: Bool = true
 }

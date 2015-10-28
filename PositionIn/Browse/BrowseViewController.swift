@@ -10,13 +10,10 @@ import PosInCore
 import CleanroomLogger
 
 protocol SearchFilterProtocol {
-    var filter: SearchFilter {get set}
     func applyFilterUpdate(update: SearchFilterUpdate, canAffect: Bool)
-    var canAffectFilter: Bool {get set}
 }
 
 final class BrowseViewController: BrowseModeTabbarViewController, SearchViewControllerDelegate {
-    
     
     @IBAction func prepareForUnwind(segue: UIStoryboardSegue) {
         
@@ -30,7 +27,6 @@ final class BrowseViewController: BrowseModeTabbarViewController, SearchViewCont
             return Storyboards.Main.instantiateBrowseListViewController()
         }
     }
-
     
     override var addMenuItems: [AddMenuView.MenuItem] {
         let pushAndSubscribe: (UIViewController) -> () = { [weak self] controller in
@@ -48,25 +44,20 @@ final class BrowseViewController: BrowseModeTabbarViewController, SearchViewCont
         ]
     }
     
-    override func presentSearchViewController() {
+    override func presentSearchViewController(filter: SearchFilter) {
         
         childFilterUpdate = { (filter: SearchFilter) -> SearchFilter in
             var f = filter
             f =  SearchFilter.currentFilter
             return f
         }
-        canAffectOnFilter = true
+        canAffectFilter = true
         applyDisplayMode(displayMode)
-        super.presentSearchViewController()
-    }
-
-    override func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
-        super.textFieldShouldBeginEditing(textField)
-        return true
+        super.presentSearchViewController(filter)
     }
     
-    
-    override func searchViewControllerItemSelected(model: SearchItemCellModel?) {
+    override func searchViewControllerItemSelected(model: SearchItemCellModel?, searchString: String?, locationString: String?) {
+        super.searchViewControllerItemSelected(model, searchString: searchString, locationString: locationString)
         if let model = model {
 
                 switch model.itemType {
@@ -92,7 +83,7 @@ final class BrowseViewController: BrowseModeTabbarViewController, SearchViewCont
                         f.communities = [model.objectID]
                         return f
                     }
-                    canAffectOnFilter = false
+                    canAffectFilter = false
                     applyDisplayMode(displayMode)
                 case .People:
                     childFilterUpdate = { (filter: SearchFilter) -> SearchFilter in
@@ -100,15 +91,17 @@ final class BrowseViewController: BrowseModeTabbarViewController, SearchViewCont
                         f.users = [model.objectID]
                         return f
                     }
-                    canAffectOnFilter = false
+                    canAffectFilter = false
                     applyDisplayMode(displayMode)
+                    
                 default:
                     break
                 }
         }
     }
 
-    override func searchViewControllerSectionSelected(model: SearchSectionCellModel?) {
+    override func searchViewControllerSectionSelected(model: SearchSectionCellModel?, searchString: String?, locationString: String?) {
+        super.searchViewControllerSectionSelected(model, searchString: searchString, locationString: locationString)
         if let model = model {
             let itemType = model.itemType
             childFilterUpdate = { (filter: SearchFilter) -> SearchFilter in
@@ -116,19 +109,19 @@ final class BrowseViewController: BrowseModeTabbarViewController, SearchViewCont
                 f.itemTypes = [ itemType ]
                 return f
             }
-            canAffectOnFilter = false
+            canAffectFilter = false
             applyDisplayMode(displayMode)
         }
     }
     
     var childFilterUpdate: SearchFilterUpdate?
-    var canAffectOnFilter: Bool = true
+    var canAffectFilter: Bool = true
     
     override func prepareDisplayController(controller: UIViewController) {
         super.prepareDisplayController(controller)
         if let filterUpdate = childFilterUpdate,
            let filterApplicator = controller as? SearchFilterProtocol {
-            filterApplicator.applyFilterUpdate(filterUpdate, canAffect: canAffectOnFilter)
+            filterApplicator.applyFilterUpdate(filterUpdate, canAffect: canAffectFilter)
         }
     }
 }

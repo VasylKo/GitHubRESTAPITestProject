@@ -21,7 +21,8 @@ protocol ItemsSearchResultsDelegate: class {
 
 class ItemsSearchResultsController: NSObject {
     
-    private var filter = SearchFilter.currentFilter
+    var filter = SearchFilter.currentFilter
+    
     
     init(table: TableView?, resultStorage: ItemsSearchResultStorage?, searchBar: UITextField?) {
         itemsTable = table
@@ -39,9 +40,6 @@ class ItemsSearchResultsController: NSObject {
     func reloadSearch() {
         dataRequestToken.invalidate()
         dataRequestToken = InvalidationToken()
-        let completion: ([[FeedItem]]) -> Void = { [weak self] items in
-            
-        }
         let searchString = map(searchBar?.text) { $0.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet()) }
         if let searchString = searchString where count(searchString) > 0 {
             
@@ -77,7 +75,7 @@ class ItemsSearchResultsController: NSObject {
         tableViewModels.extend(events)
         
         
-        let community = self.modelsSubArrayFromResponseArray(response.communities, title: NSLocalizedString("COMMUNITY",
+        let community = self.modelsSubArrayFromResponseArray(response.communities, title: NSLocalizedString("COMMUNITIES",
             comment: "quick search"),
             type: SearchItem.SearchItemType.Community)
         tableViewModels.extend(community)
@@ -178,13 +176,18 @@ extension ItemsSearchResultsController: UITextFieldDelegate {
 
     func textFieldDidEndEditing(textField: UITextField) {
         textField.backgroundColor = UIColor.bt_colorWithBytesR(0, g: 0, b: 0, a: 102)
-        textField.textColor = UIColor.blackColor()
+        let str = NSAttributedString(string: textField.placeholder!,
+            attributes: [NSForegroundColorAttributeName:UIColor.whiteColor()])
+        textField.attributedPlaceholder = str
+        textField.textColor = UIColor.whiteColor()
     }
     
     func textFieldDidBeginEditing(textField: UITextField) {
         textField.backgroundColor = UIColor.bt_colorWithBytesR(255, g: 255, b: 255, a: 255)
-        textField.textColor = UIColor.whiteColor()
-        
+        let str = NSAttributedString(string: textField.placeholder!,
+            attributes: [NSForegroundColorAttributeName:UIColor(white: 201/255, alpha: 1)])
+        textField.attributedPlaceholder = str
         delegate?.shouldDisplayItemsSearchResults()
+        textField.textColor = UIColor.blackColor()
     }
 }

@@ -13,6 +13,7 @@ import BrightFutures
 import CleanroomLogger
 import Messaging
 import GoogleMaps
+import FBSDKCoreKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -76,7 +77,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             Log.error?.value(error)
             self.sidebarViewController?.executeAction(.Login)
         }
-        return true
+        return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
+    }
+    
+    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool {
+        return FBSDKApplicationDelegate.sharedInstance().application(application, openURL: url,
+            sourceApplication: sourceApplication, annotation: annotation)
     }
 
     func applicationWillResignActive(application: UIApplication) {

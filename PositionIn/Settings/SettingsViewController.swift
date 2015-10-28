@@ -8,113 +8,101 @@
 
 import UIKit
 import XLForm
+import MessageUI
 
-class SettingsViewController: XLFormViewController {
-    
-    private enum Tags : String {
-        case Header = "Header"
-        case ChangePassword = "Change Password"
-        case ContactSupport = "Contact Support"
-        case TermsConditions = "Terms & Conditions"
-        case SignOut = "Sign Out"
-    }
+class SettingsViewController: BesideMenuViewController, MFMailComposeViewControllerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        drawerButtonVisible = true
-        self.initializeForm()
-        
         self.versionLabel.text = AppConfiguration().appVersion
-        self.view.addSubview(self.versionLabel)
+        customizeButton(self.signOutButton)
+        customizeButton(self.termsConditionsButton)
+        customizeButton(self.supportButton)
+        customizeButton(self.passwordButton)
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        self.tableView.scrollEnabled = (self.tableView.frame.size.height < self.tableView.contentSize.height)
+        
+        var frame = self.contentView.frame
+        frame.size.height = CGRectGetMaxY(self.versionLabel.frame) + 10
+        self.contentView.frame = frame
+        
+        self.scrollView.contentSize = contentView.frame.size
     }
     
-    private func initializeForm() {
-        let settingCellDescription = "SettingsCell"
+    @IBAction func termsConditionsButtonPressed(sender: AnyObject) {
+        let url: NSURL? = NSURL(string: "http://www.positionin.com/terms-and-conditions.html")
+        if let url = url {
+//            [[UIApplication sharedApplication] openURL:url];
+            UIApplication.sharedApplication().openURL(url)
+        }
+    }
+    
+    func customizeButton(button: UIButton) {
+        button.layer.borderColor = UIColor(white: 213/255, alpha: 1).CGColor
+        button.layer.borderWidth = 1 / UIScreen.mainScreen().scale
+        button.setBackgroundImage(self.imageWithColor(UIColor(white: 213/255, alpha: 1)), forState: .Highlighted)
+        button.setBackgroundImage(self.imageWithColor(UIColor.whiteColor()), forState: .Normal)
+    }
+    
+    @IBAction func spreadTheWordPressed(sender: AnyObject) {
+        self.showMailControllerWithRecepientEmail(nil)
+    }
+
+    @IBAction func changePasswordPressed(sender: AnyObject) {
         
-        XLFormViewController.cellClassesForRowDescriptorTypes().setObject("PositionIn.SettingsHeaderCell",
-            forKey: settingCellDescription)
-        
-        var form : XLFormDescriptor
-        var section : XLFormSectionDescriptor
-        var row : XLFormRowDescriptor
-        
-        form = XLFormDescriptor(title: "Settings")
-        
-        section = XLFormSectionDescriptor.formSection()
-        form.addFormSection(section)
-        row = XLFormRowDescriptor(tag: Tags.Header.rawValue, rowType:  settingCellDescription)
-        section.addFormRow(row)
-        form.addFormSection(section)
-        
-        section = XLFormSectionDescriptor.formSection()
-        form.addFormSection(section)
-        row = XLFormRowDescriptor(tag: Tags.ChangePassword.rawValue,
-            rowType: XLFormRowDescriptorTypeSelectorPush, title:Tags.ChangePassword.rawValue)
-        section.addFormRow(row)
-        
-        row = XLFormRowDescriptor(tag: Tags.ContactSupport.rawValue,
-            rowType: XLFormRowDescriptorTypeSelectorPush, title:Tags.ContactSupport.rawValue)
-        section.addFormRow(row)
-        
-        row = XLFormRowDescriptor(tag: Tags.TermsConditions.rawValue,
-            rowType: XLFormRowDescriptorTypeSelectorPush, title:Tags.TermsConditions.rawValue)
-        section.addFormRow(row)
-        
-        if (api().isUserAuthorized()) {
-            section = XLFormSectionDescriptor.formSection()
-            form.addFormSection(section)
-            
-            row = XLFormRowDescriptor(tag: Tags.SignOut.rawValue,
-                rowType: XLFormRowDescriptorTypeButton, title:Tags.SignOut.rawValue)
-            row.action.formBlock = {[weak self](sender: XLFormRowDescriptor!) -> Void in
-                api().logout().onComplete {_ in
-                    self?.sideBarController?.executeAction(.Login)
-                }
+    }
+    
+    @IBAction func contactSupportPressed(sender: AnyObject) {
+        self.showMailControllerWithRecepientEmail("support@positionin.com")
+    }
+    
+    @IBAction func signOutPressed(sender: AnyObject) {
+        api().logout().onComplete {[weak self] _ in
+            self?.sideBarController?.executeAction(.Login)
+        }
+    }
+    
+    func showMailControllerWithRecepientEmail(email: String?) {
+        if MFMailComposeViewController.canSendMail() {
+            let mailController = MFMailComposeViewController()
+            mailController.mailComposeDelegate = self
+            if let email = email {
+                mailController.setToRecipients([email])
             }
-            row.cellConfig.setObject(UIColor.bt_colorWithBytesR(181, g: 51, b: 59), forKey: "textLabel.textColor")
-            row.cellConfig.setObject(NSTextAlignment.Center.rawValue, forKey:"textLabel.textAlignment");
-            
-            section.addFormRow(row)
+            self.presentViewController(mailController, animated: true, completion: nil)
         }
-        
-        self.form = form;
-    }
-    
-    @IBOutlet private var versionLabel: UILabel!
-        
-    @IBAction func showMainMenu(sender: AnyObject) {
-        sideBarController?.setDrawerState(.Opened, animated: true)
-    }
-    
-    var drawerButtonVisible: Bool = false {
-        didSet {
-            let (backVisible: Bool, leftItem: UIBarButtonItem?) = {
-                return self.drawerButtonVisible
-                    ? (true, self.drawerBarButtonItem())
-                    : (false, nil)
-                
-                }()
-            self.navigationItem.hidesBackButton = backVisible
-            self.navigationItem.leftBarButtonItem = leftItem
+        else {
+            let sendMailErrorAlert = UIAlertView(title: "Could Not Send Email",
+                message: "Your device could not send e-mail.  Please check e-mail configuration and try again.",
+                delegate: nil, cancelButtonTitle: "OK")
+            sendMailErrorAlert.show()
         }
     }
     
-    func drawerBarButtonItem() -> UIBarButtonItem {
-        return UIBarButtonItem(image: UIImage(named: "MainMenuIcon")!, style: .Plain, target: self, action: "showMainMenu:")
+    func mailComposeController(controller: MFMailComposeViewController!, didFinishWithResult result: MFMailComposeResult,
+        error: NSError!) {
+        controller.dismissViewControllerAnimated(true, completion: nil)
     }
     
-    override func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return !(indexPath.compare(NSIndexPath(forRow: 0, inSection: 0)) == NSComparisonResult.OrderedSame)
+    func imageWithColor(color: UIColor) -> UIImage {
+        let rect = CGRectMake(0, 0, 1, 1)
+        UIGraphicsBeginImageContextWithOptions(rect.size, false, 0)
+        color.setFill()
+        UIRectFill(rect)
+        let image: UIImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return image
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        super.tableView(tableView, didSelectRowAtIndexPath: indexPath)
-        self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
-    }
-    
+    @IBOutlet weak var contentView: UIView!
+    @IBOutlet private weak var signOutButton: UIButton!
+    @IBOutlet private weak var termsConditionsPressed: UIButton!
+    @IBOutlet private weak var termsConditionsButton: UIButton!
+    @IBOutlet private weak var supportButton: UIButton!
+    @IBOutlet private weak var spreadTheWordButton: UIButton!
+    @IBOutlet private weak var passwordButton: UIButton!
+    @IBOutlet private weak var versionLabel: UILabel!
+    @IBOutlet weak var scrollView: UIScrollView!
 }

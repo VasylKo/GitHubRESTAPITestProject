@@ -13,7 +13,7 @@
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="z2W-Ud-uUE" id="ade-Nw-2uh">
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="200" verticalHuggingPriority="200" translatesAutoresizingMaskIntoConstraints="NO" id="RJf-1C-axm">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="200" verticalHuggingPriority="200" translatesAutoresizingMaskIntoConstraints="NO" id="RJf-1C-axm">
                         <rect key="frame" x="2" y="2" width="70" height="70"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="70" id="8Mf-QC-YOx"/>

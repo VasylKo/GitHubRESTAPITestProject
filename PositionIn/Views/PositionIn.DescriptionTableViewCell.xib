@@ -12,14 +12,14 @@
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9ym-Ln-MfI" id="V3r-q3-k3e">
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="juf-L0-aFu">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="juf-L0-aFu">
                         <rect key="frame" x="10" y="0.0" width="300" height="44"/>
                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
-                <color key="backgroundColor" red="0.92941176469999998" green="0.1058823529" blue="0.18039215689999999" alpha="1" colorSpace="calibratedRGB"/>
+                <color key="backgroundColor" red="0.13725490200000001" green="0.4431372549" blue="0.83529411760000005" alpha="1" colorSpace="calibratedRGB"/>
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="juf-L0-aFu" secondAttribute="bottom" id="6tf-Ne-WOI"/>
                     <constraint firstAttribute="trailing" secondItem="juf-L0-aFu" secondAttribute="trailing" constant="10" id="GrH-dN-JI2"/>
