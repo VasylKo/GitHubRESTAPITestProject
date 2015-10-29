@@ -141,6 +141,8 @@ protocol BrowseActionConsumer: class {
 
     //MARK: - Private -
     
+    var childFilterUpdate: SearchFilterUpdate?
+    
     weak var currentModeViewController: UIViewController?
     
     override func loadView() {
@@ -214,10 +216,12 @@ protocol BrowseActionConsumer: class {
     
     func searchViewControllerCancelSearch() {
         self.searchbar.text = nil
+        self.searchbar.attributedText = nil
     }
     
     func searchViewControllerItemSelected(model: SearchItemCellModel?, searchString: String?, locationString: String?) {
         self.searchbar.text = nil
+        self.searchbar.attributedText = nil
         if let model = model {
             self.searchbar.attributedText = self.searchBarAttributedText(model.title, searchString: searchString, locationString: locationString)
         }
@@ -225,6 +229,7 @@ protocol BrowseActionConsumer: class {
     
     func searchViewControllerSectionSelected(model: SearchSectionCellModel?, searchString: String?, locationString: String?) {
         self.searchbar.text = nil
+        self.searchbar.attributedText = nil
         if let model = model {
             self.searchbar.attributedText = self.searchBarAttributedText(model.title, searchString: searchString, locationString: locationString)
         }

@@ -9,8 +9,8 @@
 import PosInCore
 import CleanroomLogger
 
-protocol SearchFilterProtocol {
-    func applyFilterUpdate(update: SearchFilterUpdate, canAffect: Bool)
+protocol UpdateFilterProtocol {
+    func applyFilterUpdate(update: SearchFilterUpdate)
 }
 
 final class BrowseViewController: BrowseModeTabbarViewController, SearchViewControllerDelegate {
@@ -46,12 +46,7 @@ final class BrowseViewController: BrowseModeTabbarViewController, SearchViewCont
     
     override func presentSearchViewController(filter: SearchFilter) {
         
-        childFilterUpdate = { (filter: SearchFilter) -> SearchFilter in
-            var f = filter
-            f =  SearchFilter.currentFilter
-            return f
-        }
-        canAffectFilter = true
+        childFilterUpdate = nil
         applyDisplayMode(displayMode)
         super.presentSearchViewController(filter)
     }
@@ -83,7 +78,6 @@ final class BrowseViewController: BrowseModeTabbarViewController, SearchViewCont
                         f.communities = [model.objectID]
                         return f
                     }
-                    canAffectFilter = false
                     applyDisplayMode(displayMode)
                 case .People:
                     childFilterUpdate = { (filter: SearchFilter) -> SearchFilter in
@@ -91,7 +85,6 @@ final class BrowseViewController: BrowseModeTabbarViewController, SearchViewCont
                         f.users = [model.objectID]
                         return f
                     }
-                    canAffectFilter = false
                     applyDisplayMode(displayMode)
                     
                 default:
@@ -109,19 +102,15 @@ final class BrowseViewController: BrowseModeTabbarViewController, SearchViewCont
                 f.itemTypes = [ itemType ]
                 return f
             }
-            canAffectFilter = false
             applyDisplayMode(displayMode)
         }
     }
     
-    var childFilterUpdate: SearchFilterUpdate?
-    var canAffectFilter: Bool = true
-    
     override func prepareDisplayController(controller: UIViewController) {
         super.prepareDisplayController(controller)
         if let filterUpdate = childFilterUpdate,
-           let filterApplicator = controller as? SearchFilterProtocol {
-            filterApplicator.applyFilterUpdate(filterUpdate, canAffect: canAffectFilter)
+           let filterApplicator = controller as? UpdateFilterProtocol {
+            filterApplicator.applyFilterUpdate(filterUpdate)
         }
     }
 }

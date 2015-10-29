@@ -12,7 +12,7 @@ import CleanroomLogger
 import BrightFutures
 import Box
 
-final class BrowseMapViewController: UIViewController, BrowseActionProducer, BrowseModeDisplay, SearchFilterProtocol {
+final class BrowseMapViewController: UIViewController, BrowseActionProducer, BrowseModeDisplay, UpdateFilterProtocol {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,7 +71,7 @@ final class BrowseMapViewController: UIViewController, BrowseActionProducer, Bro
         actionConsumer?.browseControllerDidChangeContent(self)
     }
     
-    func applyFilterUpdate(update: SearchFilterUpdate, canAffect: Bool) {
+    func applyFilterUpdate(update: SearchFilterUpdate) {
         filter = update(filter)
     }
     
