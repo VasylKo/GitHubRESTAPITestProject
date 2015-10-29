@@ -21,7 +21,7 @@ final class ChatHistoryCell: TableViewCell {
         assert(m != nil, "Invalid model passed")
         avatar.setImageFromURL(m!.imageUrl)
         titleLabel.text = m!.name
-        infoLabel.text = m!.message
+        infoLabel.text = "\(m!.message) (\(m!.unreadCount))"
         dateLabel.text = m!.date
     }
     
