@@ -8,6 +8,8 @@
 
 #import "BadgeView.h"
 
+#warning rewrite this class
+
 static CAAnimation *newFadeOutAnimation(void)
 {
     CABasicAnimation *transformAnimation = [CABasicAnimation animationWithKeyPath:@"transform"];
