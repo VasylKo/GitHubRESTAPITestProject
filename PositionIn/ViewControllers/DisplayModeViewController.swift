@@ -141,6 +141,8 @@ protocol BrowseActionConsumer: class {
 
     //MARK: - Private -
     
+    var childFilterUpdate: SearchFilterUpdate?
+    
     weak var currentModeViewController: UIViewController?
     
     override func loadView() {
@@ -187,6 +189,7 @@ protocol BrowseActionConsumer: class {
         let width = self.navigationController?.navigationBar.frame.size.width
         let searchBar = UITextField(frame: CGRectMake(0, 0, width! * 0.7, 25))
         searchBar.tintColor = UIColor.whiteColor()
+        q
         searchBar.backgroundColor = UIColor.bt_colorWithBytesR(0, g: 73, b: 167)
         searchBar.borderStyle = UITextBorderStyle.RoundedRect
         searchBar.font = UIFont.systemFontOfSize(12)
@@ -214,19 +217,65 @@ protocol BrowseActionConsumer: class {
     
     func searchViewControllerCancelSearch() {
         self.searchbar.text = nil
+        self.searchbar.attributedText = nil
     }
     
     func searchViewControllerItemSelected(model: SearchItemCellModel?, searchString: String?, locationString: String?) {
         self.searchbar.text = nil
+        self.searchbar.attributedText = nil
         if let model = model {
+            switch model.itemType {
+            case .Unknown:
+                break
+            case .Category:
+                break
+            case .Product:
+                let controller =  Storyboards.Main.instantiateProductDetailsViewControllerId()
+                controller.objectId = model.objectID
+                navigationController?.pushViewController(controller, animated: true)
+            case .Event:
+                let controller =  Storyboards.Main.instantiateEventDetailsViewControllerId()
+                controller.objectId = model.objectID
+                navigationController?.pushViewController(controller, animated: true)
+            case .Promotion:
+                let controller =  Storyboards.Main.instantiatePromotionDetailsViewControllerId()
+                controller.objectId =  model.objectID
+                navigationController?.pushViewController(controller, animated: true)
+            case .Community:
+                childFilterUpdate = { (filter: SearchFilter) -> SearchFilter in
+                    var f = filter
+                    f.communities = [model.objectID]
+                    return f
+                }
+                applyDisplayMode(displayMode)
+            case .People:
+                childFilterUpdate = { (filter: SearchFilter) -> SearchFilter in
+                    var f = filter
+                    f.users = [model.objectID]
+                    return f
+                }
+                applyDisplayMode(displayMode)
+                
+            default:
+                break
+            }
+            
             self.searchbar.attributedText = self.searchBarAttributedText(model.title, searchString: searchString, locationString: locationString)
         }
     }
     
     func searchViewControllerSectionSelected(model: SearchSectionCellModel?, searchString: String?, locationString: String?) {
         self.searchbar.text = nil
+        self.searchbar.attributedText = nil
         if let model = model {
             self.searchbar.attributedText = self.searchBarAttributedText(model.title, searchString: searchString, locationString: locationString)
+            let itemType = model.itemType
+            childFilterUpdate = { (filter: SearchFilter) -> SearchFilter in
+                var f = filter
+                f.itemTypes = [ itemType ]
+                return f
+            }
+            applyDisplayMode(displayMode)
         }
     }
     

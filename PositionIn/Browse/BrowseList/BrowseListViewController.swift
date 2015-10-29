@@ -11,7 +11,7 @@ import PosInCore
 import CleanroomLogger
 import BrightFutures
 
-final class BrowseListViewController: UIViewController, BrowseActionProducer, BrowseModeDisplay, SearchFilterProtocol {
+final class BrowseListViewController: UIViewController, BrowseActionProducer, BrowseModeDisplay, UpdateFilterProtocol {
     var excludeCommunityItems = false
     var shoWCompactCells: Bool = true
     private var dataRequestToken = InvalidationToken()
@@ -32,12 +32,19 @@ final class BrowseListViewController: UIViewController, BrowseActionProducer, Br
         }
     }
 
-    func applyFilterUpdate(update: SearchFilterUpdate, canAffect: Bool) {
-        canAffectFilter = canAffect
+    func applyFilterUpdate(update: SearchFilterUpdate) {
+        canAffectFilter = false
         filter = update(filter)
     }
     
-    internal var canAffectFilter = true
+    var canAffectFilter = true {
+        didSet {
+            if self.isViewLoaded() {
+                self.displayModeSegmentedControl.selectedSegmentIndex = 0
+            }
+            selectedItemType = .Unknown
+        }
+    }
     
     var selectedItemType: FeedItem.ItemType = .Unknown {
         didSet {
@@ -112,9 +119,7 @@ final class BrowseListViewController: UIViewController, BrowseActionProducer, Br
     
     @IBOutlet private(set) internal weak var tableView: UITableView!
     @IBOutlet private weak var displayModeSegmentedControl: UISegmentedControl!
-
 }
-
 
 extension BrowseListViewController {
     internal class FeedItemDatasource: TableViewDataSource {

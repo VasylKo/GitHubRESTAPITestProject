@@ -9,8 +9,8 @@
 import PosInCore
 import CleanroomLogger
 
-protocol SearchFilterProtocol {
-    func applyFilterUpdate(update: SearchFilterUpdate, canAffect: Bool)
+protocol UpdateFilterProtocol {
+    func applyFilterUpdate(update: SearchFilterUpdate)
 }
 
 final class BrowseViewController: BrowseModeTabbarViewController, SearchViewControllerDelegate {
@@ -46,82 +46,16 @@ final class BrowseViewController: BrowseModeTabbarViewController, SearchViewCont
     
     override func presentSearchViewController(filter: SearchFilter) {
         
-        childFilterUpdate = { (filter: SearchFilter) -> SearchFilter in
-            var f = filter
-            f =  SearchFilter.currentFilter
-            return f
-        }
-        canAffectFilter = true
+        childFilterUpdate = nil
         applyDisplayMode(displayMode)
         super.presentSearchViewController(filter)
     }
     
-    override func searchViewControllerItemSelected(model: SearchItemCellModel?, searchString: String?, locationString: String?) {
-        super.searchViewControllerItemSelected(model, searchString: searchString, locationString: locationString)
-        if let model = model {
-
-                switch model.itemType {
-                case .Unknown:
-                    break
-                case .Category:
-                    break
-                case .Product:
-                    let controller =  Storyboards.Main.instantiateProductDetailsViewControllerId()
-                    controller.objectId = model.objectID
-                    navigationController?.pushViewController(controller, animated: true)
-                case .Event:
-                    let controller =  Storyboards.Main.instantiateEventDetailsViewControllerId()
-                    controller.objectId = model.objectID
-                    navigationController?.pushViewController(controller, animated: true)
-                case .Promotion:
-                    let controller =  Storyboards.Main.instantiatePromotionDetailsViewControllerId()
-                    controller.objectId =  model.objectID
-                    navigationController?.pushViewController(controller, animated: true)
-                case .Community:
-                    childFilterUpdate = { (filter: SearchFilter) -> SearchFilter in
-                        var f = filter
-                        f.communities = [model.objectID]
-                        return f
-                    }
-                    canAffectFilter = false
-                    applyDisplayMode(displayMode)
-                case .People:
-                    childFilterUpdate = { (filter: SearchFilter) -> SearchFilter in
-                        var f = filter
-                        f.users = [model.objectID]
-                        return f
-                    }
-                    canAffectFilter = false
-                    applyDisplayMode(displayMode)
-                    
-                default:
-                    break
-                }
-        }
-    }
-
-    override func searchViewControllerSectionSelected(model: SearchSectionCellModel?, searchString: String?, locationString: String?) {
-        super.searchViewControllerSectionSelected(model, searchString: searchString, locationString: locationString)
-        if let model = model {
-            let itemType = model.itemType
-            childFilterUpdate = { (filter: SearchFilter) -> SearchFilter in
-                var f = filter
-                f.itemTypes = [ itemType ]
-                return f
-            }
-            canAffectFilter = false
-            applyDisplayMode(displayMode)
-        }
-    }
-    
-    var childFilterUpdate: SearchFilterUpdate?
-    var canAffectFilter: Bool = true
-    
     override func prepareDisplayController(controller: UIViewController) {
         super.prepareDisplayController(controller)
         if let filterUpdate = childFilterUpdate,
-           let filterApplicator = controller as? SearchFilterProtocol {
-            filterApplicator.applyFilterUpdate(filterUpdate, canAffect: canAffectFilter)
+           let filterApplicator = controller as? UpdateFilterProtocol {
+            filterApplicator.applyFilterUpdate(filterUpdate)
         }
     }
 }

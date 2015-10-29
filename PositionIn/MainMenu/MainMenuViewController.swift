@@ -20,11 +20,6 @@ final class MainMenuViewController: UIViewController {
         dataSource.configureTable(tableView)
         subscribeToNotifications()
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
     private func menuItemsForUser(user: UserProfile?) -> [MainMenuItem] {
         

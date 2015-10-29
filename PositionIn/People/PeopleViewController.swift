@@ -30,8 +30,6 @@ final class PeopleViewController: BesideMenuViewController {
         }
     }
     
-    private var firstLoad: Bool = true
-    
     var browseMode: BrowseMode = .Following {
         didSet {
             browseModeSegmentedControl.selectedSegmentIndex = browseMode.rawValue
@@ -50,16 +48,32 @@ final class PeopleViewController: BesideMenuViewController {
         let peopleRequest: Future<CollectionResponse<UserInfo>,NSError>
         switch browseMode {
         case .Following:
-            peopleRequest = api().getMySubscriptions()
+            let mySubscriptionsRequest = api().getMySubscriptions()
+            if firstFollowingRequestToken.isInvalid {
+                peopleRequest = mySubscriptionsRequest
+            } else {
+                // On first load switch to explore if not following any user
+                firstFollowingRequestToken.invalidate()
+                peopleRequest = mySubscriptionsRequest.flatMap { response -> Future<CollectionResponse<UserInfo>,NSError> in
+                    if let userList = response.items  where userList.count == 0 {
+                        return Future.failed(NSError())
+                    } else {
+                        return Future.succeeded(response)
+                    }
+                }.andThen { [weak self] result in
+                    switch result {
+                    case .Failure(_):
+                        self?.browseMode = .Explore
+                    default:
+                        break
+                    }
+                }
+            }
         case .Explore:
             peopleRequest = api().getUsers(APIService.Page())
         }
         peopleRequest.onSuccess(token: dataRequestToken) { [weak self] response in
             if let userList = response.items {
-                if ((self?.browseMode == .Following) && (userList.count == 0) && (self?.firstLoad == true)) {
-                    self?.browseMode = .Explore
-                    self?.firstLoad = false
-                }
                 Log.debug?.value(userList)
                 self?.dataSource.setUserList(userList)
                 self?.tableView.reloadData()
@@ -103,6 +117,7 @@ final class PeopleViewController: BesideMenuViewController {
     @IBOutlet private weak var tableView: TableView!
     
     private var dataRequestToken = InvalidationToken()
+    private let firstFollowingRequestToken = InvalidationToken()
 
     private lazy var dataSource: PeopleListDataSource = { [unowned self] in
         let dataSource = PeopleListDataSource()

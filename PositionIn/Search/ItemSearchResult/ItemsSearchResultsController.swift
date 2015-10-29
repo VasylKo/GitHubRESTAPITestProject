@@ -183,6 +183,7 @@ extension ItemsSearchResultsController: UITextFieldDelegate {
     }
     
     func textFieldDidBeginEditing(textField: UITextField) {
+        qwe
         textField.backgroundColor = UIColor.bt_colorWithBytesR(255, g: 255, b: 255, a: 255)
         let str = NSAttributedString(string: textField.placeholder!,
             attributes: [NSForegroundColorAttributeName:UIColor(white: 201/255, alpha: 1)])
