@@ -15,6 +15,7 @@ final class ChatHistoryCell: TableViewCell {
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var dateLabel: UILabel!
     @IBOutlet private weak var infoLabel: UILabel!
+    @IBOutlet private weak var badgeView: BadgeView!
     
     override func setModel(model: TableViewCellModel) {
         let m = model as? ChatHistoryCellModel
@@ -23,6 +24,9 @@ final class ChatHistoryCell: TableViewCell {
         titleLabel.text = m!.name
         infoLabel.text = m!.message
         dateLabel.text = m!.date
+        badgeView.hidden = m!.unreadCount == 0
+        badgeView.setText(String(m!.unreadCount),  animated: false)
+        badgeView.badgeColor = UIScheme.mainThemeColor
     }
     
     override func prepareForReuse() {

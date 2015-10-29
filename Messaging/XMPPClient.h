@@ -35,7 +35,7 @@
 @property (nullable, nonatomic, weak) id<XMPPClientDelegate> delegate;
 
 
-- (void)joinRoom:(nonnull NSString *)roomJID nickName:(nonnull NSString *)nickName;
+- (void)joinRoom:(nonnull NSString *)roomJID nickName:(nonnull NSString *)nickName lastHistoryStamp:(nonnull NSDate *)date;
 - (nonnull NSArray *)messagesForRoom:(nonnull NSString *)roomId;
 - (void)cleanRooms;
 
