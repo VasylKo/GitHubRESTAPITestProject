@@ -31,6 +31,12 @@ final class ConversationManager: NSObject {
         } else if mucConversations.contains(conversation) == false {
             Log.error?.message("Unknown group chat \(conversation.roomId)")
         }
+        conversation.resetUnreadCount()
+        sendConversationDidChangeNotification()
+    }
+    
+    internal func didLeaveConversation(conversation: Conversation) {
+        sendConversationDidChangeNotification()
     }
     
     internal func getHistory(conversation: Conversation) -> [XMPPTextMessage] {
@@ -126,10 +132,13 @@ final class ConversationManager: NSObject {
 extension ConversationManager: XMPPClientDelegate {
     func chatClient(client: XMPPClient, didUpdateDirectChat userId: String) {
         if let conversation = (Array(directConversations).filter { $0.roomId == userId }).first {
-            conversation.lastActivityDate = NSDate()
+            conversation.didChange()
+            sendConversationDidChangeNotification()
         } else {
             api().getUsers([userId]).onSuccess { [weak self] response in
                 if let info = response.items.first {
+                    let conversation = Conversation(user: info)
+                    conversation.didChange()
                     self?.directConversations.insert(Conversation(user: info))
                 }
             }
@@ -138,7 +147,8 @@ extension ConversationManager: XMPPClientDelegate {
     
     func chatClient(client: XMPPClient, didUpdateGroupChat roomId: String) {
         if let conversation = (Array(mucConversations).filter { $0.roomId == roomId }).first {
-            conversation.lastActivityDate = NSDate()
+            conversation.didChange()
+            sendConversationDidChangeNotification()
         } else {
              Log.error?.message("Unknown group chat \(roomId)")
         }

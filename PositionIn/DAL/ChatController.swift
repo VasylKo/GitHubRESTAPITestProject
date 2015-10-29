@@ -30,6 +30,7 @@ final class ChatController: NSObject {
     
     func closeSession() {
         chatClient.removeMessageListener(self)
+        ConversationManager.sharedInstance().didLeaveConversation(conversation)
     }
     
     deinit {
@@ -168,6 +169,7 @@ final class ChatController: NSObject {
     }
     
     private func appendMessage(message: JSQMessage) {
+        conversation.resetUnreadCount()
         Queue.main.async { [weak self] in
             if let strongSelf = self {
                 strongSelf.messages = strongSelf.messages + [message]

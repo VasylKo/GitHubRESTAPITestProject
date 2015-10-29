@@ -7,13 +7,20 @@
 //
 
 import Foundation
+import PosInCore
 
 final class Conversation {
 
     let name: String
     let imageURL: NSURL?
     var lastActivityDate: NSDate
-    var unreadCount: UInt = 0
+    var unreadCount: UInt  {
+        var result: UInt = 0
+        synced(self) {
+            result = self._unreadCount
+        }
+        return result
+    }
     
     let roomId: String
     let isGroupChat: Bool
@@ -35,8 +42,23 @@ final class Conversation {
         imageURL = url
         
         lastActivityDate = NSDate()
-        unreadCount = 0
+        _unreadCount = 0
     }
+    
+    func resetUnreadCount() {
+        synced(self) {
+            self._unreadCount = 0
+        }
+    }
+    
+    func didChange() {
+        synced(self) {
+            self._unreadCount += 1
+        }
+        lastActivityDate = NSDate()
+    }
+    
+    private var _unreadCount: UInt  = 0
 }
 
 extension Conversation: Hashable {
@@ -70,7 +92,7 @@ extension Conversation: NSCoding {
         
         self.init(roomID: roomId, isMultiUser: isGroupChat, caption: caption, url: image)
         map(date) { lastActivityDate = $0 }
-        unreadCount = unread
+        _unreadCount = unread
     }
     
     private struct CodingKeys {
