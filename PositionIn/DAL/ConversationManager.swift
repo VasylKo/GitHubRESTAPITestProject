@@ -106,7 +106,7 @@ final class ConversationManager: NSObject {
         let chatClient = chat()
         chatClient.cleanRooms()
         for conversation in conversations {
-            chatClient.joinRoom(jid(conversation.roomId), nickName: currentUserId)
+            chatClient.joinRoom(jid(conversation.roomId), nickName: currentUserId, lastHistoryStamp: conversation.lastActivityDate)
         }
     }
     

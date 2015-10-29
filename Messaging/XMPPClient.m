@@ -74,7 +74,7 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
 
 #pragma mark - Conversations -
 
-- (void)joinRoom:(nonnull NSString *)roomJID nickName:(nonnull NSString *)nickName {
+- (void)joinRoom:(nonnull NSString *)roomJID nickName:(nonnull NSString *)nickName lastHistoryStamp:(nonnull NSDate *)date {
     XMPPLogInfo(@"Joining room %@ (%@)", roomJID, nickName);
     XMPPJID  * jid = [XMPPJID jidWithString:roomJID];
     XMPPRoom *room = [[XMPPRoom alloc] initWithRoomStorage:[XMPPRoomMemoryStorage new] jid: jid];
@@ -82,7 +82,8 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
     [room addDelegate:self delegateQueue:[self delegateQueue]];
     self.rooms[jid.user] = room;
     NSXMLElement *history = [NSXMLElement elementWithName:@"history"];
-    [history addAttributeWithName:@"maxstanzas" intValue:20];
+//    [history addAttributeWithName:@"maxstanzas" intValue:20];
+    [history addAttributeWithName:@"since" stringValue:[date xmppDateTimeString]];
     [room joinRoomUsingNickname:nickName history:history];
 }
 
