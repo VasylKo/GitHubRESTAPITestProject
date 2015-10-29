@@ -34,7 +34,6 @@ class SettingsViewController: BesideMenuViewController, MFMailComposeViewControl
     @IBAction func termsConditionsButtonPressed(sender: AnyObject) {
         let url: NSURL? = NSURL(string: "http://www.positionin.com/terms-and-conditions.html")
         if let url = url {
-//            [[UIApplication sharedApplication] openURL:url];
             UIApplication.sharedApplication().openURL(url)
         }
     }
