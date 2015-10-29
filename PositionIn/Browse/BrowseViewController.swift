@@ -51,61 +51,6 @@ final class BrowseViewController: BrowseModeTabbarViewController, SearchViewCont
         super.presentSearchViewController(filter)
     }
     
-    override func searchViewControllerItemSelected(model: SearchItemCellModel?, searchString: String?, locationString: String?) {
-        super.searchViewControllerItemSelected(model, searchString: searchString, locationString: locationString)
-        if let model = model {
-
-                switch model.itemType {
-                case .Unknown:
-                    break
-                case .Category:
-                    break
-                case .Product:
-                    let controller =  Storyboards.Main.instantiateProductDetailsViewControllerId()
-                    controller.objectId = model.objectID
-                    navigationController?.pushViewController(controller, animated: true)
-                case .Event:
-                    let controller =  Storyboards.Main.instantiateEventDetailsViewControllerId()
-                    controller.objectId = model.objectID
-                    navigationController?.pushViewController(controller, animated: true)
-                case .Promotion:
-                    let controller =  Storyboards.Main.instantiatePromotionDetailsViewControllerId()
-                    controller.objectId =  model.objectID
-                    navigationController?.pushViewController(controller, animated: true)
-                case .Community:
-                    childFilterUpdate = { (filter: SearchFilter) -> SearchFilter in
-                        var f = filter
-                        f.communities = [model.objectID]
-                        return f
-                    }
-                    applyDisplayMode(displayMode)
-                case .People:
-                    childFilterUpdate = { (filter: SearchFilter) -> SearchFilter in
-                        var f = filter
-                        f.users = [model.objectID]
-                        return f
-                    }
-                    applyDisplayMode(displayMode)
-                    
-                default:
-                    break
-                }
-        }
-    }
-
-    override func searchViewControllerSectionSelected(model: SearchSectionCellModel?, searchString: String?, locationString: String?) {
-        super.searchViewControllerSectionSelected(model, searchString: searchString, locationString: locationString)
-        if let model = model {
-            let itemType = model.itemType
-            childFilterUpdate = { (filter: SearchFilter) -> SearchFilter in
-                var f = filter
-                f.itemTypes = [ itemType ]
-                return f
-            }
-            applyDisplayMode(displayMode)
-        }
-    }
-    
     override func prepareDisplayController(controller: UIViewController) {
         super.prepareDisplayController(controller)
         if let filterUpdate = childFilterUpdate,
