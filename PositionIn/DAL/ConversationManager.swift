@@ -51,6 +51,10 @@ final class ConversationManager: NSObject {
         }
     }
     
+    internal func countUnreadConversations() -> UInt {
+        return conversations().reduce(0) { count, conversation in count + conversation.unreadCount }
+    }
+    
     internal func refresh() {
         refreshDirectConversations()
         refreshMucConversations()
@@ -77,6 +81,7 @@ final class ConversationManager: NSObject {
     private func refreshMucConversations() {
         api().getUserCommunities(currentUserId).onSuccess { [weak self] response in
             self?.populateMucConversations(response.items.map { Conversation(community: $0) })
+            self?.sendConversationDidChangeNotification()
         }
     }
     
@@ -106,10 +111,15 @@ final class ConversationManager: NSObject {
         return Shared.instance
     }
     
+    private func sendConversationDidChangeNotification() {
+        NSNotificationCenter.defaultCenter().postNotificationName(ConversationManager.ConversationsDidChangeNotification, object: self)
+    }
+    
     private var directConversations = Set<Conversation>()
     private var mucConversations = Set<Conversation>()
     private var currentUserId: CRUDObjectId = CRUDObjectInvalidId
-
+    
+    static let ConversationsDidChangeNotification = "ConversationsDidChangeNotification"
 }
 
 

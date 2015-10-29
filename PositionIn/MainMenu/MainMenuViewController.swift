@@ -101,15 +101,32 @@ final class MainMenuViewController: UIViewController {
             object: nil,
             queue: nil,
             usingBlock: userChangeBlock)
+        
+        let conversationChangeBlock: NSNotification! -> Void = { [weak self] notification in
+            let newProfile = notification.object as? UserProfile
+            dispatch_async(dispatch_get_main_queue()) {
+                if let menuController = self {
+                    menuController.tableView.reloadData()
+                }
+            }
+        }
+        
+        conversationDidChangeObserver = NSNotificationCenter.defaultCenter().addObserverForName(
+            ConversationManager.ConversationsDidChangeNotification,
+            object: nil,
+            queue: nil,
+            usingBlock: conversationChangeBlock)
     }
     
     
     private var browseModeUpdateObserver: NSObjectProtocol!
     private var userDidChangeObserver: NSObjectProtocol!
+    private var conversationDidChangeObserver: NSObjectProtocol!
     
     deinit {
         NSNotificationCenter.defaultCenter().removeObserver(browseModeUpdateObserver)
         NSNotificationCenter.defaultCenter().removeObserver(userDidChangeObserver)
+        NSNotificationCenter.defaultCenter().removeObserver(conversationDidChangeObserver)
     }
     
     
@@ -141,6 +158,17 @@ final class MainMenuViewController: UIViewController {
             return items[indexPath.row]
         }
         
+        private func cellModelForItem(item: MainMenuItem) -> TableViewCellModel {
+            switch item.action {
+            case .Messages:
+                let unreadCount = ConversationManager.sharedInstance().countUnreadConversations()
+                let badge: String? = unreadCount > 0 ? String(unreadCount) : nil
+                return TableViewCellWithBadgetModel(title: item.title, imageName: item.image, badge: badge)
+            default:
+                return TableViewCellImageTextModel(title: item.title, imageName: item.image)
+            }
+        }
+        
         @objc override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
             return items.count
         }
@@ -151,19 +179,19 @@ final class MainMenuViewController: UIViewController {
                 return MainMenuLoginCell.reuseId()
             case .UserProfile:
                 return  MainMenuUserCell.reuseId()
+            case .Messages:
+                return MainMenuBadgeCell.reuseId()
             default:
                 return MainMenuCell.reuseId()
             }
         }
 
          override func tableView(tableView: UITableView, modelForIndexPath indexPath: NSIndexPath) -> TableViewCellModel {
-            let item = itemForIndexPath(indexPath)
-            let model = TableViewCellImageTextModel(title: item.title, imageName: item.image)
-            return model
+            return cellModelForItem(itemForIndexPath(indexPath))
         }
      
         override func nibCellsId() -> [String] {
-            return [MainMenuCell.reuseId(), MainMenuUserCell.reuseId(), MainMenuLoginCell.reuseId()]
+            return [MainMenuCell.reuseId(), MainMenuUserCell.reuseId(), MainMenuLoginCell.reuseId(), MainMenuBadgeCell.reuseId()]
         }
         
         func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {

@@ -13,7 +13,7 @@ final class Conversation {
     let name: String
     let imageURL: NSURL?
     var lastActivityDate: NSDate
-    var unreadCount: UInt = 1
+    var unreadCount: UInt = 0
     
     let roomId: String
     let isGroupChat: Bool
@@ -36,7 +36,6 @@ final class Conversation {
         
         lastActivityDate = NSDate()
         unreadCount = 0
-        
     }
 }
 

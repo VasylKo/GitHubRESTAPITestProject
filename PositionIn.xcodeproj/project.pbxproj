@@ -352,6 +352,8 @@
 		E6D4D5B51B6F8B9F003134CB /* PositionIn.SearchBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6D4D5B31B6F8B9F003134CB /* PositionIn.SearchBar.xib */; };
 		E6D4D5B61B6F8B9F003134CB /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D4D5B41B6F8B9F003134CB /* SearchBar.swift */; };
 		E6D4D5B81B6FA7A7003134CB /* SearchTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D4D5B71B6FA7A7003134CB /* SearchTransition.swift */; };
+		E6D7F83B1BE24AE500A544F4 /* MainMenuBadgeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D7F8391BE24AE500A544F4 /* MainMenuBadgeCell.swift */; };
+		E6D7F83C1BE24AE500A544F4 /* PositionIn.MainMenuBadgeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6D7F83A1BE24AE500A544F4 /* PositionIn.MainMenuBadgeCell.xib */; };
 		E6DA53C71B7D00DB000087A7 /* BrowseCommunityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6DA53C21B7D00DB000087A7 /* BrowseCommunityViewController.swift */; };
 		E6DA53C81B7D00DB000087A7 /* PositionIn.BrowseCommunityViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6DA53C31B7D00DB000087A7 /* PositionIn.BrowseCommunityViewController.xib */; };
 		E6DADB9E1B8C5799009A5694 /* SearchFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6DADB9D1B8C5799009A5694 /* SearchFilter.swift */; };
@@ -946,6 +948,8 @@
 		E6D4D5B71B6FA7A7003134CB /* SearchTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTransition.swift; sourceTree = "<group>"; };
 		E6D6E1911B83333F0087D489 /* LocationProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationProvider.swift; sourceTree = "<group>"; };
 		E6D7C2911B5D546C004F3AA9 /* NibView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NibView.swift; sourceTree = "<group>"; };
+		E6D7F8391BE24AE500A544F4 /* MainMenuBadgeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuBadgeCell.swift; sourceTree = "<group>"; };
+		E6D7F83A1BE24AE500A544F4 /* PositionIn.MainMenuBadgeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.MainMenuBadgeCell.xib; sourceTree = "<group>"; };
 		E6DA53C21B7D00DB000087A7 /* BrowseCommunityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowseCommunityViewController.swift; sourceTree = "<group>"; };
 		E6DA53C31B7D00DB000087A7 /* PositionIn.BrowseCommunityViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.BrowseCommunityViewController.xib; sourceTree = "<group>"; };
 		E6DADB9D1B8C5799009A5694 /* SearchFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchFilter.swift; sourceTree = "<group>"; };
@@ -1372,6 +1376,8 @@
 				E62B16F31B5C1AA700D446BC /* PositionIn.MainMenuUserCell.xib */,
 				E6F2436B1B8B0E150033B13C /* MainMenuLoginCell.swift */,
 				E6F2436D1B8B0E3A0033B13C /* PositionIn.MainMenuLoginCell.xib */,
+				E6D7F8391BE24AE500A544F4 /* MainMenuBadgeCell.swift */,
+				E6D7F83A1BE24AE500A544F4 /* PositionIn.MainMenuBadgeCell.xib */,
 			);
 			path = MainMenu;
 			sourceTree = "<group>";
@@ -2897,6 +2903,7 @@
 				E6BEF1E71B9C83F200511B46 /* PositionIn.CommunityHeaderCell.xib in Resources */,
 				E68B52261B875F8F006B980C /* PositionIn.PromotionListCell.xib in Resources */,
 				E69420FF1B665F5100F34F06 /* PositionIn.ProductDetailsViewController.xib in Resources */,
+				E6D7F83C1BE24AE500A544F4 /* PositionIn.MainMenuBadgeCell.xib in Resources */,
 				E6F2436E1B8B0E3A0033B13C /* PositionIn.MainMenuLoginCell.xib in Resources */,
 				E689F0791B6B911F00597587 /* PositionIn.ProductInventoryViewController.xib in Resources */,
 				500D7FA91BC2CD39008C8C82 /* PositionIn.SearchEntityCell.xib in Resources */,
@@ -3127,6 +3134,7 @@
 				E689F07B1B6B972F00597587 /* ProductInventoryCell.swift in Sources */,
 				E65E87301B611FE700AE444D /* Response.swift in Sources */,
 				E6BEF1D91B9C671D00511B46 /* PostInfoCell.swift in Sources */,
+				E6D7F83B1BE24AE500A544F4 /* MainMenuBadgeCell.swift in Sources */,
 				E6BEF1EA1B9C902400511B46 /* BrowseCommunityTableViewCellModel.swift in Sources */,
 				E63201741B9872C60066C62E /* EditProfileViewController.swift in Sources */,
 				E65E87321B614A9900AE444D /* Location.swift in Sources */,
