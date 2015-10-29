@@ -17,6 +17,7 @@ final class MessagesListViewController: BesideMenuViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         dataSource.configureTable(tableView)
+        subscribeForNotifications()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -40,6 +41,24 @@ final class MessagesListViewController: BesideMenuViewController {
         return dataSource
         }()
 
+    private func subscribeForNotifications() {
+        let conversationChangeBlock: NSNotification! -> Void = { [weak self] notification in
+            self?.reloadData()
+        }
+        
+        conversationDidChangeObserver = NSNotificationCenter.defaultCenter().addObserverForName(
+            ConversationManager.ConversationsDidChangeNotification,
+            object: nil,
+            queue: nil,
+            usingBlock: conversationChangeBlock)
+    }
+
+    private var conversationDidChangeObserver: NSObjectProtocol!
+    
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(conversationDidChangeObserver)
+    }
+    
 }
 
 
@@ -92,7 +111,8 @@ extension MessagesListViewController {
                     message: "",
                     imageURL: conversation.imageURL,
                     date: map(conversation.lastActivityDate) { dateFormatter.stringFromDate($0) },
-                    muc: conversation.isGroupChat
+                    muc: conversation.isGroupChat,
+                    unreadCount: conversation.unreadCount
                 )
             }
         }
