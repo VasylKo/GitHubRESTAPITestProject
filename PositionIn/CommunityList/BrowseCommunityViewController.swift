@@ -84,12 +84,27 @@ final class BrowseCommunityViewController: BesideMenuViewController {
         let browseMode = self.browseMode
         switch browseMode {
         case .MyGroups:
-            communitiesRequest = api().currentUserId().flatMap { userId in
-                return api().getUserCommunities(userId).onSuccess { [weak self] communities in
-                    if api().isUserAuthorized() && (self?.firstLoad == true) {
-                        self?.browseMode = .Explore
-                        self?.firstLoad = false
-                    }
+            let mySubscriptionsRequest = api().currentUserId().flatMap { userId in
+                return api().getUserCommunities(userId)
+            }
+            if firstFollowingRequestToken.isInvalid {
+                communitiesRequest = mySubscriptionsRequest
+            } else {
+                // On first load switch to explore if not following any user
+                firstFollowingRequestToken.invalidate()
+                communitiesRequest = mySubscriptionsRequest.flatMap {  response -> Future<CollectionResponse<Community>,NSError> in
+                    if let communitiesList = response.items  where communitiesList.count == 0 {
+                        return Future.failed(NSError())
+                    } else {
+                        return Future.succeeded(response)
+                        }
+                    }.andThen { [weak self] result in
+                        switch result {
+                        case .Failure(_):
+                            self?.browseMode = .Explore
+                        default:
+                            break
+                        }
                 }
             }
         case .Explore:
@@ -144,6 +159,8 @@ final class BrowseCommunityViewController: BesideMenuViewController {
     @IBOutlet private weak var browseModeSegmentedControl: UISegmentedControl!
 
     @IBOutlet private weak var tableView: TableView!
+    
+    private let firstFollowingRequestToken = InvalidationToken()
     
     private var dataRequestToken = InvalidationToken()
 }
