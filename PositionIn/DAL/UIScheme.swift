@@ -18,7 +18,7 @@ struct UIScheme {
     static let mainThemeColor = UIColor(red: 237/255.0, green: 27/255.0, blue: 46/255.0, alpha: 1.0)
     static let tabbarBackgroundColor = UIColor(red: 240/255.0, green: 240/255.0, blue: 240/255.0, alpha: 1.0)
     
-    static let searchbarBgColor = UIColor(red: 144/255.0, green: 13/255.0, blue: 22/255.0, alpha: 1.0)
+    static let searchbarBgColor = UIColor(red: 142/255.0, green: 16/255.0, blue: 27/255.0, alpha: 1.0)
     
     static let communityActionColor = UIColor(red: 237/255.0, green: 27/255.0, blue: 46/255.0, alpha: 1.0)
     

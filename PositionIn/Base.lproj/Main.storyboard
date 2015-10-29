@@ -287,7 +287,7 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="0.13725490200000001" green="0.4431372549" blue="0.83529411760000005" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.92941176470588238" green="0.10588235294117647" blue="0.1803921568627451" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="Lrk-8R-Gfe" firstAttribute="top" secondItem="fUl-gm-R24" secondAttribute="top" constant="8" id="277-Lt-b41"/>
                                     <constraint firstAttribute="trailing" secondItem="3P6-Ny-j89" secondAttribute="trailing" constant="8" id="4j8-VO-FLb"/>
@@ -308,7 +308,7 @@
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zk0-xD-ugu">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="20"/>
-                                <color key="backgroundColor" red="0.13725490200000001" green="0.4431372549" blue="0.83529411760000005" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.92941176469999998" green="0.1058823529" blue="0.18039215689999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="IQv-lv-7LR"/>
                                 </constraints>

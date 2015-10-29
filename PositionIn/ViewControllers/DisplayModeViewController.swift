@@ -189,8 +189,7 @@ protocol BrowseActionConsumer: class {
         let width = self.navigationController?.navigationBar.frame.size.width
         let searchBar = UITextField(frame: CGRectMake(0, 0, width! * 0.7, 25))
         searchBar.tintColor = UIColor.whiteColor()
-        q
-        searchBar.backgroundColor = UIColor.bt_colorWithBytesR(0, g: 73, b: 167)
+        searchBar.backgroundColor = UIScheme.searchbarBgColor
         searchBar.borderStyle = UITextBorderStyle.RoundedRect
         searchBar.font = UIFont.systemFontOfSize(12)
         searchBar.textColor = UIColor.whiteColor()
