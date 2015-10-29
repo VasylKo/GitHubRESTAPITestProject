@@ -52,6 +52,19 @@
                             <constraint firstAttribute="width" secondItem="WUO-HG-vnr" secondAttribute="height" multiplier="1:1" id="UaC-IO-6jI"/>
                         </constraints>
                     </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pTt-Vo-D4i" customClass="BadgeView">
+                        <rect key="frame" x="22" y="22" width="20" height="20"/>
+                        <color key="backgroundColor" red="1" green="0.73725490199999999" blue="0.31764705879999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="20" id="5A1-kg-hnO"/>
+                            <constraint firstAttribute="width" secondItem="pTt-Vo-D4i" secondAttribute="height" multiplier="1:1" id="SDb-IM-Oz1"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="backgroundColor">
+                                <color key="value" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
                 </subviews>
                 <constraints>
                     <constraint firstItem="Gm5-hf-zhP" firstAttribute="leading" secondItem="XAD-5v-fHL" secondAttribute="leading" id="4qu-SX-t2U"/>
@@ -60,15 +73,18 @@
                     <constraint firstAttribute="trailing" secondItem="XAD-5v-fHL" secondAttribute="trailing" constant="5" id="Lb7-22-409"/>
                     <constraint firstItem="XAD-5v-fHL" firstAttribute="top" secondItem="WUO-HG-vnr" secondAttribute="bottom" id="NZ2-Jq-Isk"/>
                     <constraint firstItem="SUJ-Dx-J12" firstAttribute="leading" secondItem="Gm5-hf-zhP" secondAttribute="trailing" id="PnS-vO-uuH"/>
+                    <constraint firstItem="WUO-HG-vnr" firstAttribute="bottom" secondItem="pTt-Vo-D4i" secondAttribute="bottom" id="XEf-4r-nsR"/>
                     <constraint firstItem="SUJ-Dx-J12" firstAttribute="centerY" secondItem="Gm5-hf-zhP" secondAttribute="centerY" id="Z5U-L3-9si"/>
                     <constraint firstItem="SUJ-Dx-J12" firstAttribute="trailing" secondItem="XAD-5v-fHL" secondAttribute="trailing" id="bw9-HU-1FD"/>
                     <constraint firstAttribute="bottom" secondItem="XAD-5v-fHL" secondAttribute="bottom" constant="5" id="n1v-Pd-Zgv"/>
                     <constraint firstItem="Gm5-hf-zhP" firstAttribute="centerY" secondItem="WUO-HG-vnr" secondAttribute="centerY" id="ncW-gZ-bgF"/>
                     <constraint firstItem="Gm5-hf-zhP" firstAttribute="leading" secondItem="WUO-HG-vnr" secondAttribute="trailing" constant="10" id="rh6-pU-S7Q"/>
+                    <constraint firstItem="WUO-HG-vnr" firstAttribute="trailing" secondItem="pTt-Vo-D4i" secondAttribute="trailing" id="sdT-ZH-cTc"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="avatar" destination="WUO-HG-vnr" id="AUP-lL-O19"/>
+                <outlet property="badgeView" destination="pTt-Vo-D4i" id="eqq-1a-qeq"/>
                 <outlet property="dateLabel" destination="SUJ-Dx-J12" id="g9J-ao-LEa"/>
                 <outlet property="infoLabel" destination="XAD-5v-fHL" id="Pro-09-XpG"/>
                 <outlet property="titleLabel" destination="Gm5-hf-zhP" id="6P7-sE-fck"/>

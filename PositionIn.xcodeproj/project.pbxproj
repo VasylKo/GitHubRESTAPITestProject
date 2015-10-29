@@ -76,6 +76,7 @@
 		E603D2581BC7E5B000E684C5 /* XMPPCredentials.h in Headers */ = {isa = PBXBuildFile; fileRef = E603D2561BC7E5B000E684C5 /* XMPPCredentials.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E603D2591BC7E5B000E684C5 /* XMPPCredentials.m in Sources */ = {isa = PBXBuildFile; fileRef = E603D2571BC7E5B000E684C5 /* XMPPCredentials.m */; };
 		E60EBF761B8EF9B50014B6ED /* DataTransforms.swift in Sources */ = {isa = PBXBuildFile; fileRef = E60EBF751B8EF9B50014B6ED /* DataTransforms.swift */; };
+		E60F91331BE2CA2F005F416A /* BadgeView.m in Sources */ = {isa = PBXBuildFile; fileRef = E60F91321BE2CA2F005F416A /* BadgeView.m */; };
 		E6199BB71B9F3B7400E3C69D /* PeopleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6199BB61B9F3B7400E3C69D /* PeopleViewController.swift */; };
 		E61B20D51B7DD47C005EAB2C /* FeedItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61B20D41B7DD47C005EAB2C /* FeedItem.swift */; };
 		E61B20D81B7E0838005EAB2C /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61B20D71B7E0838005EAB2C /* SettingsViewController.swift */; };
@@ -486,6 +487,8 @@
 		E603D2561BC7E5B000E684C5 /* XMPPCredentials.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPCredentials.h; sourceTree = "<group>"; };
 		E603D2571BC7E5B000E684C5 /* XMPPCredentials.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPCredentials.m; sourceTree = "<group>"; };
 		E60EBF751B8EF9B50014B6ED /* DataTransforms.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataTransforms.swift; sourceTree = "<group>"; };
+		E60F91311BE2CA2F005F416A /* BadgeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BadgeView.h; sourceTree = "<group>"; };
+		E60F91321BE2CA2F005F416A /* BadgeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BadgeView.m; sourceTree = "<group>"; };
 		E6199BB61B9F3B7400E3C69D /* PeopleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeopleViewController.swift; sourceTree = "<group>"; };
 		E61B20D41B7DD47C005EAB2C /* FeedItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedItem.swift; sourceTree = "<group>"; };
 		E61B20D71B7E0838005EAB2C /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -1202,6 +1205,8 @@
 				E6F243771B8B3CDE0033B13C /* BrowseListTableViewCell.swift */,
 				E6F243791B8B40380033B13C /* PositionIn.BrowseListTableViewCell.xib */,
 				E632016F1B984D8B0066C62E /* DescriptionTableViewCell.swift */,
+				E60F91311BE2CA2F005F416A /* BadgeView.h */,
+				E60F91321BE2CA2F005F416A /* BadgeView.m */,
 				E63201711B984E2D0066C62E /* PositionIn.DescriptionTableViewCell.xib */,
 			);
 			path = Views;
@@ -3163,6 +3168,7 @@
 				E64DC3501B4E53C90011D37C /* AppDelegate.swift in Sources */,
 				E6F3093E1BA81FAF00C9420C /* PickPhotoView.swift in Sources */,
 				E6C5CE1D1B83A28C00265955 /* SessionController.swift in Sources */,
+				E60F91331BE2CA2F005F416A /* BadgeView.m in Sources */,
 				E63201761B98D2DA0066C62E /* Shop.swift in Sources */,
 				E6BEF1EE1B9C9D6400511B46 /* CommunityFeedViewController.swift in Sources */,
 				240A9B9E1B9CCDB4007C77E3 /* CommunityStatsCell.swift in Sources */,

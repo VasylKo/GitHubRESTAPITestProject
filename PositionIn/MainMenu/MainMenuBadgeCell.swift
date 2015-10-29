@@ -14,7 +14,7 @@ final class MainMenuBadgeCell: TableViewCell {
     @IBOutlet private weak var selectionIndicatorView: UIView!
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var iconImageView: UIImageView!    
-    @IBOutlet private weak var badgeView: UILabel!
+    @IBOutlet private weak var badgeView: BadgeView!
     
     override func setModel(model: TableViewCellModel) {
         let m = model as? TableViewCellWithBadgetModel
@@ -23,13 +23,9 @@ final class MainMenuBadgeCell: TableViewCell {
         let image = UIImage(named: m!.image)
         iconImageView.image = image
         iconImageView.highlightedImage = image?.imageWithRenderingMode(.AlwaysTemplate)
-        if let badgeText = m!.badge {
-            badgeView.text = badgeText
-            badgeView.hidden = false
-        } else {
-            badgeView.hidden = true
-        }
-        badgeView.backgroundColor = UIScheme.mainThemeColor
+        badgeView.hidden = m!.badge == nil
+        badgeView.setText(m!.badge,  animated: false)
+        badgeView.badgeColor = UIScheme.mainThemeColor
     }
     
     override func setSelected(selected: Bool, animated: Bool) {
