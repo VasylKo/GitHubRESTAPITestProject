@@ -10,8 +10,6 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-#warning rewrite this class
-
 @interface BadgeView : UIView
 
 /**
