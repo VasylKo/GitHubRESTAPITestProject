@@ -39,13 +39,10 @@ final class BrowseListViewController: UIViewController, BrowseActionProducer, Br
     
     var canAffectFilter = true {
         didSet {
-            self.dataSource.setItems([])
-            
-            if canAffectFilter {
-                //select all items section
+            if (self.displayModeSegmentedControl != nil) {
                 self.displayModeSegmentedControl.selectedSegmentIndex = 0
-                selectedItemType = .Unknown
             }
+            selectedItemType = .Unknown
         }
     }
     

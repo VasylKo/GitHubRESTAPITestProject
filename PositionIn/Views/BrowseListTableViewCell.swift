@@ -31,7 +31,7 @@ final class BrowseListTableViewCell: TableViewCell, TableViewChildViewController
             listController.applyFilterUpdate(cfu)
         }
         else {
-            listController.у = true
+            listController.canAffectFilter = true
         }
     }
     
