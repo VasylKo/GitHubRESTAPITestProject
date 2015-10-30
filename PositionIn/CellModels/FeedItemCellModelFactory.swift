@@ -61,7 +61,9 @@ struct FeedItemCellModelFactory {
                     details: feedItem.author?.title,
                     info: map(feedItem.date) {dateFormatter.stringFromDate($0)},
                     imageURL: feedItem.image,
-                    badge: map(feedItem.price) { "KSh \(Int($0))"},
+                    badge: map(feedItem.price) {
+                        let newValue = $0 as Float
+                        return currencyFormatter.stringFromNumber(NSNumber(float: newValue)) ?? ""},
                     data: feedItem.itemData
                 ),
             ]
@@ -121,7 +123,9 @@ struct FeedItemCellModelFactory {
                 details: feedItem.details,
                 info: feedItem.text,
                 imageURL: feedItem.image,
-                badge: map(feedItem.price) { "KSh \(Int($0))"},
+                badge: map(feedItem.price) {
+                    let newValue = $0 as Float
+                    return currencyFormatter.stringFromNumber(NSNumber(float: newValue)) ?? ""},
                 data: feedItem.itemData
             ),
         ]
@@ -134,6 +138,16 @@ struct FeedItemCellModelFactory {
     func walletReuseId() -> [String]  {
         return [ProductListCell.reuseId()]
     }
+
+    private let currencyFormatter: NSNumberFormatter = {
+        let currencyFormatter = NSNumberFormatter()
+        currencyFormatter.currencySymbol = "KSh"
+        currencyFormatter.numberStyle = .CurrencyStyle
+        currencyFormatter.generatesDecimalNumbers = false
+        currencyFormatter.maximumFractionDigits = 0
+        currencyFormatter.roundingMode = .RoundDown
+        return currencyFormatter
+        }()
     
     private let dateFormatter: NSDateFormatter = {
         let dateFormatter = NSDateFormatter()
