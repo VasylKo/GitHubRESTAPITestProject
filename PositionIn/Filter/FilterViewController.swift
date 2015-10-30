@@ -50,6 +50,7 @@ final class FilterViewController: XLFormViewController {
 
         //Price
         currencyFormatter.numberStyle = .CurrencyStyle
+        currencyFormatter.currencySymbol = "$"
         currencyFormatter.generatesDecimalNumbers = false
         currencyFormatter.maximumFractionDigits = 0
         currencyFormatter.roundingMode = .RoundDown
