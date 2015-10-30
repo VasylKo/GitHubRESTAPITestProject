@@ -129,9 +129,11 @@ final class BrowseCommunityViewController: BesideMenuViewController {
     }
     
     @IBAction func addCommunityTouched(sender: AnyObject) {
-        let controller = Storyboards.NewItems.instantiateAddCommunityViewController()
-        navigationController?.pushViewController(controller, animated: true)
-        self.subscribeForContentUpdates(controller)
+        api().isUserAuthorized().onSuccess {[weak self] in
+            let controller = Storyboards.NewItems.instantiateAddCommunityViewController()
+            self?.navigationController?.pushViewController(controller, animated: true)
+            self?.subscribeForContentUpdates(controller)
+        }
     }
 
     override func contentDidChange(sender: AnyObject?, info: [NSObject : AnyObject]?) {

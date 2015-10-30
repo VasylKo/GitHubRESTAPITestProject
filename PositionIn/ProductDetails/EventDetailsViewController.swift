@@ -134,6 +134,16 @@ extension EventDetailsViewController: EventDetailsActionConsumer {
             if let userId = event?.author {
                 showChatViewController(userId)
             }
+        case .Attend :
+            if api().isUserAuthorized() {
+                //TODO: need implement
+            } else {
+                api().logout().onComplete {[weak self] _ in
+                    self?.sideBarController?.executeAction(.Login)
+                }
+                return
+            }
+
         default:
             Log.warning?.message("Unhandled action: \(action)")
             return
