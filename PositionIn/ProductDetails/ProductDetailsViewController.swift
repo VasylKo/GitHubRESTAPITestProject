@@ -54,7 +54,7 @@ final class ProductDetailsViewController: UIViewController {
         self.product = product
         headerLabel.text = product.name
         detailsLabel.text = product.text
-        priceLabel.text = map(product.price) { "$\($0)" }
+        priceLabel.text = map(product.price) { "KSh \($0)" }
         let url = product.photos?.first?.url
         let image = product.category?.productPlaceholderImage()
         productImageView.setImageFromURL(url, placeholder: image)

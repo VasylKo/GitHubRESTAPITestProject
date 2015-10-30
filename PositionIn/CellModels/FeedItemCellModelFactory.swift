@@ -61,7 +61,7 @@ struct FeedItemCellModelFactory {
                     details: feedItem.author?.title,
                     info: map(feedItem.date) {dateFormatter.stringFromDate($0)},
                     imageURL: feedItem.image,
-                    badge: map(feedItem.price) { "$\(Int($0))"},
+                    badge: map(feedItem.price) { "KSh \(Int($0))"},
                     data: feedItem.itemData
                 ),
             ]
@@ -121,7 +121,7 @@ struct FeedItemCellModelFactory {
                 details: feedItem.details,
                 info: feedItem.text,
                 imageURL: feedItem.image,
-                badge: map(feedItem.price) { "$\(Int($0))"},
+                badge: map(feedItem.price) { "KSh \(Int($0))"},
                 data: feedItem.itemData
             ),
         ]
