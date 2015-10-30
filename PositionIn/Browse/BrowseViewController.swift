@@ -34,12 +34,24 @@ final class BrowseViewController: BrowseModeTabbarViewController, SearchViewCont
             self?.subscribeForContentUpdates(controller)
         }
         return [
-            AddMenuView.MenuItem.promotionItemWithAction { pushAndSubscribe(Storyboards.NewItems.instantiateAddPromotionViewController()) },
-            AddMenuView.MenuItem.eventItemWithAction { pushAndSubscribe(Storyboards.NewItems.instantiateAddEventViewController()) },
-            AddMenuView.MenuItem.productItemWithAction { pushAndSubscribe(Storyboards.NewItems.instantiateAddProductViewController()) },
-            AddMenuView.MenuItem.postItemWithAction { pushAndSubscribe(Storyboards.NewItems.instantiateAddPostViewController()) },
-            AddMenuView.MenuItem.inviteItemWithAction { [weak self] in
-                Log.error?.message("Should call invite")
+            AddMenuView.MenuItem.productItemWithAction {
+                api().isUserAuthorized().onSuccess { [weak self] _ in
+                    pushAndSubscribe(Storyboards.NewItems.instantiateAddProductViewController())
+                }},
+            AddMenuView.MenuItem.eventItemWithAction {
+                api().isUserAuthorized().onSuccess { [weak self] _ in
+                    pushAndSubscribe(Storyboards.NewItems.instantiateAddEventViewController())
+                }},
+            AddMenuView.MenuItem.promotionItemWithAction {
+                api().isUserAuthorized().onSuccess { [weak self] _ in pushAndSubscribe(Storyboards.NewItems.instantiateAddPromotionViewController())
+                }},
+            AddMenuView.MenuItem.postItemWithAction {
+                api().isUserAuthorized().onSuccess { [weak self] _ in
+                    pushAndSubscribe(Storyboards.NewItems.instantiateAddPostViewController())
+                }},
+            AddMenuView.MenuItem.inviteItemWithAction {
+                api().isUserAuthorized().onSuccess { [weak self] _ in
+                    Log.error?.message("Should call invite")}
             },
         ]
     }

@@ -136,7 +136,14 @@ extension ProductDetailsViewController: ProductDetailsActionConsumer {
         let segue: ProductDetailsViewController.Segue
         switch action {
         case .Buy:
-            segue = .ShowBuyScreen
+            if api().isUserAuthorized() {
+                segue = .ShowBuyScreen
+            } else {
+                api().logout().onComplete {[weak self] _ in
+                    self?.sideBarController?.executeAction(.Login)
+                }
+                return
+            }
         case .ProductInventory:
             segue = .ShowProductInventory
         case .SellerProfile:
