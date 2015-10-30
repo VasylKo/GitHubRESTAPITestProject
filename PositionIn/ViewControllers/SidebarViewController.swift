@@ -91,6 +91,14 @@ class SidebarViewController: KYDrawerController {
             presentViewController(controller, animated: true, completion: nil)
         }
         
+        //Redirect user to login screen if he is not authorized and choose Wallet in Menu
+        if !api().isUserAuthorized() && action == .Wallet {
+            api().logout().onComplete {[weak self] _ in
+                self?.sideBarController?.executeAction(.Login)
+            }
+            return
+        }
+        
         if let (segue, sender: AnyObject?) = action.nextSegue() {
             performSegue(segue, sender: sender)
         }
