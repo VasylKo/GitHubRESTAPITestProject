@@ -85,11 +85,11 @@ final class BrowseCommunityViewController: BesideMenuViewController {
             let mySubscriptionsRequest = api().currentUserId().flatMap { userId in
                 return api().getUserCommunities(userId)
             }
-            if firstFollowingRequestToken.isInvalid {
+            if firstMyCommunityRequestToken.isInvalid {
                 communitiesRequest = mySubscriptionsRequest
             } else {
                 // On first load switch to explore if not join any community
-                firstFollowingRequestToken.invalidate()
+                firstMyCommunityRequestToken.invalidate()
                 communitiesRequest = mySubscriptionsRequest.flatMap {  response -> Future<CollectionResponse<Community>,NSError> in
                     if let communitiesList = response.items  where communitiesList.count == 0 {
                         return Future.failed(NSError())
@@ -160,7 +160,7 @@ final class BrowseCommunityViewController: BesideMenuViewController {
 
     @IBOutlet private weak var tableView: TableView!
     
-    private let firstFollowingRequestToken = InvalidationToken()
+    private let firstMyCommunityRequestToken = InvalidationToken()
     
     private var dataRequestToken = InvalidationToken()
 }
