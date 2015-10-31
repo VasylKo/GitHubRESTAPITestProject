@@ -211,17 +211,18 @@ protocol BrowseActionConsumer: class {
     }
     
     func presentSearchViewController(filter: SearchFilter) {
+        self.searchbar.attributedText = nil
         SearchViewController.present(searchbar, presenter: self, filter: filter)
     }
     
     func searchViewControllerCancelSearch() {
-        self.searchbar.text = nil
-        self.searchbar.attributedText = nil
+        if let locationString = SearchFilter.currentFilter.locationName {
+            self.searchbar.attributedText = NSMutableAttributedString(string: locationString,
+                attributes: [NSForegroundColorAttributeName:UIColor.whiteColor()])
+        }
     }
     
     func searchViewControllerItemSelected(model: SearchItemCellModel?, searchString: String?, locationString: String?) {
-        self.searchbar.text = nil
-        self.searchbar.attributedText = nil
         if let model = model {
             switch model.itemType {
             case .Unknown:
@@ -260,6 +261,13 @@ protocol BrowseActionConsumer: class {
             }
             
             self.searchbar.attributedText = self.searchBarAttributedText(model.title, searchString: searchString, locationString: locationString)
+        }
+    }
+    
+    func searchViewControllerLocationSelected(locationString: String?) {
+        if let locationString = locationString {
+            self.searchbar.attributedText = NSMutableAttributedString(string: locationString,
+                attributes: [NSForegroundColorAttributeName:UIColor.whiteColor()])
         }
     }
     

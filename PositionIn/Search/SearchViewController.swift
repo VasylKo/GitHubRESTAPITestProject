@@ -14,6 +14,7 @@ protocol SearchViewControllerDelegate: class  {
     func searchViewControllerCancelSearch()
     func searchViewControllerItemSelected(model: SearchItemCellModel?, searchString: String?, locationString: String?)
     func searchViewControllerSectionSelected(model: SearchSectionCellModel?, searchString: String?, locationString: String?)
+    func searchViewControllerLocationSelected(locationString: String?)
 }
 
 final class SearchViewController: UIViewController {
@@ -134,6 +135,7 @@ extension SearchViewController: LocationSearchResultsDelegate {
     func didSelectLocation(location: Location?) {
         SearchFilter.setLocation(location)
         locationSearchTextField.text =  SearchFilter.currentFilter.locationName
+        self.delegate?.searchViewControllerLocationSelected(SearchFilter.currentFilter.locationName)
         self.shouldCloseSearch()
     }
 }
