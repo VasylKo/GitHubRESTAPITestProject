@@ -217,6 +217,18 @@ final class UserProfileViewController: BesideMenuViewController, BrowseActionPro
         return false
     }
     
+    func searchViewControllerSearchStringSelected(searchString: String?, locationString: String?) {
+        self.searchbar.attributedText = self.searchBarAttributedText(nil,
+            searchString: searchString,
+            locationString: locationString)
+        childFilterUpdate = { (filter: SearchFilter) -> SearchFilter in
+            var f = filter
+            f.name = searchString
+            return f
+        }
+        self.updateFeed()
+    }
+    
     func searchViewControllerItemSelected(model: SearchItemCellModel?, searchString: String?, locationString: String?) {
         if let model = model {
             
@@ -283,17 +295,22 @@ final class UserProfileViewController: BesideMenuViewController, BrowseActionPro
     func searchBarAttributedText(modelTitle: String?, searchString: String?, locationString: String?) -> NSAttributedString {
         
         var str: NSMutableAttributedString = NSMutableAttributedString()
+        var searchBarString: String = ""
         
-        if let modelTitle = modelTitle,
-            searchString = searchString,
-            locationString = locationString {
-                let locationString = count(locationString) > 0 ? locationString : NSLocalizedString("current location",
-                    comment: "currentLocation")
-                let searchBarString = modelTitle + " " + searchString + " " + locationString
-                
-                str = NSMutableAttributedString(string: searchBarString,
-                    attributes: [NSForegroundColorAttributeName:UIColor.whiteColor()])
+        if let modelTitle = modelTitle {
+            searchBarString = modelTitle
         }
+        
+        if let searchString = searchString {
+            searchBarString = searchBarString + " " + searchString
+        }
+        
+        if let locationString = locationString {
+            searchBarString = searchBarString + " " + locationString
+        }
+        
+        str = NSMutableAttributedString(string: searchBarString,
+            attributes: [NSForegroundColorAttributeName:UIColor.whiteColor()])
         
         return str
     }
