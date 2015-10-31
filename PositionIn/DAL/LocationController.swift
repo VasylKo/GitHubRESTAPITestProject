@@ -12,24 +12,6 @@ import GoogleMaps
 
 final class LocationController {
     
-    static var currentLocation: Location {
-        get {
-            var location = Location()
-            location.coordinates = kCLLocationCoordinate2DInvalid
-            location.name = NSLocalizedString("Current Location", comment: "Current Location")
-            return location
-        }
-    }
-    
-    func isCurrentLocation(location: Location) -> Bool {
-        var isValidCoordinates: Bool = CLLocationCoordinate2DIsValid(location.coordinates)
-        var isCurrentLocationName: Bool = false
-        if let name = location.name {
-            isCurrentLocationName = name.caseInsensitiveCompare("Current location") == NSComparisonResult.OrderedSame
-        }
-        return isCurrentLocationName || isValidCoordinates
-    }
-    
     func getCurrentLocation() -> Future<Location, NSError> {
         return getCurrentCoordinate().flatMap { coordinate in
             return self.reverseGeocodeCoordinate(coordinate)
