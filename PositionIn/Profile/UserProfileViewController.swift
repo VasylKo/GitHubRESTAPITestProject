@@ -212,6 +212,8 @@ final class UserProfileViewController: BesideMenuViewController, BrowseActionPro
         var searchFilter: SearchFilter = SearchFilter.currentFilter
         searchFilter.users = [objectId]
         SearchViewController.present(searchbar, presenter: self, filter: searchFilter)
+        self.searchbar.text = nil
+        self.searchbar.attributedText = nil
         return false
     }
     
@@ -257,6 +259,13 @@ final class UserProfileViewController: BesideMenuViewController, BrowseActionPro
         }
     }
     
+    func searchViewControllerLocationSelected(locationString: String?) {
+        if let locationString = locationString {
+            self.searchbar.attributedText = NSMutableAttributedString(string: locationString,
+                attributes: [NSForegroundColorAttributeName:UIColor.whiteColor()])
+        }
+    }
+    
     func searchViewControllerSectionSelected(model: SearchSectionCellModel?, searchString: String?, locationString: String?) {
         if let model = model {
             let itemType = model.itemType
@@ -292,8 +301,11 @@ final class UserProfileViewController: BesideMenuViewController, BrowseActionPro
     func searchViewControllerCancelSearch() {
         childFilterUpdate = nil
         self.updateFeed()
-        searchbar.text = nil
-        self.searchbar.attributedText = nil
+        
+        if let locationString = SearchFilter.currentFilter.locationName {
+            self.searchbar.attributedText = NSMutableAttributedString(string: locationString,
+                attributes: [NSForegroundColorAttributeName:UIColor.whiteColor()])
+        }
     }
 }
 
