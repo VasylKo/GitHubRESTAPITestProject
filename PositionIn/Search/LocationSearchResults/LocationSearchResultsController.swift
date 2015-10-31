@@ -61,7 +61,7 @@ final class LocationSearchResultsController: NSObject {
         }
         else {
             locationController().getCurrentLocation().onSuccess(token: dataRequestToken, callback: { [weak self] location in
-                self?.resultStorage?.setLocations([LocationController.currentLocation])
+                self?.resultStorage?.setLocations([Location.currentLocation])
                 self?.locationsTable?.reloadData()
                 self?.locationsTable?.scrollEnabled = self?.locationsTable?.frame.size.height < self?.locationsTable?.contentSize.height
             })
