@@ -17,12 +17,12 @@ protocol ItemsSearchResultStorage: class {
 protocol ItemsSearchResultsDelegate: class {
     func shouldDisplayItemsSearchResults()
     func didSelectModel(model: TableViewCellModel?)
+    func didSearchString()
 }
 
 class ItemsSearchResultsController: NSObject {
     
     var filter = SearchFilter.currentFilter
-    
     
     init(table: TableView?, resultStorage: ItemsSearchResultStorage?, searchBar: UITextField?) {
         itemsTable = table
@@ -189,5 +189,12 @@ extension ItemsSearchResultsController: UITextFieldDelegate {
         textField.attributedPlaceholder = str
         delegate?.shouldDisplayItemsSearchResults()
         textField.textColor = UIColor.blackColor()
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        if (count(textField.text) > 0) {
+            self.delegate?.didSearchString()
+        }
+        return true
     }
 }

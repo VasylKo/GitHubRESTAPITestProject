@@ -72,7 +72,7 @@ protocol BrowseActionConsumer: class {
         childController.willMoveToParentViewController(self)
         prepareDisplayController(childController)
         self.addChildViewController(childController)
-
+        
         self.contentView.addSubViewOnEntireSize(childController.view)
         childController.didMoveToParentViewController(self)
         currentModeViewController = childController
@@ -127,7 +127,7 @@ protocol BrowseActionConsumer: class {
         segmentControl.selectionStyle = HMSegmentedControlSelectionStyleFullWidthStripe
         segmentControl.addTarget(self, action: "displayModeSegmentChanged:", forControlEvents: UIControlEvents.ValueChanged)
         return segmentControl
-    }()
+        }()
     
     
     @IBAction private func displayModeSegmentChanged(sender: HMSegmentedControl) {
@@ -138,7 +138,7 @@ protocol BrowseActionConsumer: class {
         }
     }
     
-
+    
     //MARK: - Private -
     
     var childFilterUpdate: SearchFilterUpdate?
@@ -173,7 +173,7 @@ protocol BrowseActionConsumer: class {
         case .Post:
             let controller = Storyboards.Main.instantiatePostViewController()
             controller.objectId = objectId
-            navigationController?.pushViewController(controller, animated: true)            
+            navigationController?.pushViewController(controller, animated: true)
         default:
             Log.debug?.message("Did select \(itemType)<\(objectId)>")
         }
@@ -182,7 +182,7 @@ protocol BrowseActionConsumer: class {
     func browseControllerDidChangeContent(controller: BrowseActionProducer) {
         Log.verbose?.message("\(controller) did change content")
     }
-
+    
     //MARK: - Search -
     
     private lazy var searchbar: UITextField = { [unowned self] in
@@ -216,10 +216,7 @@ protocol BrowseActionConsumer: class {
     }
     
     func searchViewControllerCancelSearch() {
-        if let locationString = SearchFilter.currentFilter.locationName {
-            self.searchbar.attributedText = NSMutableAttributedString(string: locationString,
-                attributes: [NSForegroundColorAttributeName:UIColor.whiteColor()])
-        }
+        self.searchbar.attributedText = self.searchBarAttributedText(nil, searchString: nil, locationString: SearchFilter.currentFilter.locationName)
     }
     
     func searchViewControllerItemSelected(model: SearchItemCellModel?, searchString: String?, locationString: String?) {
@@ -271,9 +268,19 @@ protocol BrowseActionConsumer: class {
         }
     }
     
+    func searchViewControllerSearchStringSelected(searchString: String?, locationString: String?) {
+        self.searchbar.attributedText = self.searchBarAttributedText(nil,
+            searchString: searchString,
+            locationString: locationString)
+        childFilterUpdate = { (filter: SearchFilter) -> SearchFilter in
+            var f = filter
+            f.name = searchString
+            return f
+        }
+        applyDisplayMode(displayMode)
+    }
+    
     func searchViewControllerSectionSelected(model: SearchSectionCellModel?, searchString: String?, locationString: String?) {
-        self.searchbar.text = nil
-        self.searchbar.attributedText = nil
         if let model = model {
             self.searchbar.attributedText = self.searchBarAttributedText(model.title, searchString: searchString, locationString: locationString)
             let itemType = model.itemType
@@ -289,17 +296,22 @@ protocol BrowseActionConsumer: class {
     func searchBarAttributedText(modelTitle: String?, searchString: String?, locationString: String?) -> NSAttributedString {
         
         var str: NSMutableAttributedString = NSMutableAttributedString()
+        var searchBarString: String = ""
         
-        if let modelTitle = modelTitle,
-            searchString = searchString,
-            locationString = locationString {
-                let locationString = count(locationString) > 0 ? locationString : NSLocalizedString("current location",
-                    comment: "currentLocation")
-                let searchBarString = modelTitle + " " + searchString + " " + locationString
-                
-                str = NSMutableAttributedString(string: searchBarString,
-                    attributes: [NSForegroundColorAttributeName:UIColor.whiteColor()])
+        if let modelTitle = modelTitle {
+            searchBarString = modelTitle
         }
+        
+        if let searchString = searchString {
+            searchBarString = searchBarString + " " + searchString
+        }
+        
+        if let locationString = locationString {
+            searchBarString = searchBarString + " " + locationString
+        }
+        
+        str = NSMutableAttributedString(string: searchBarString,
+            attributes: [NSForegroundColorAttributeName:UIColor.whiteColor()])
         
         return str
     }
