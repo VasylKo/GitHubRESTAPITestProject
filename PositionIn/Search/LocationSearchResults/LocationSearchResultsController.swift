@@ -28,7 +28,6 @@ final class LocationSearchResultsController: NSObject {
         self.searchBar = searchBar
         super.init()
         
-        
         let str = NSAttributedString(string: self.searchBar!.placeholder!,
             attributes: [NSForegroundColorAttributeName:UIColor.whiteColor()])
         self.searchBar!.attributedPlaceholder = str

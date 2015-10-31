@@ -269,6 +269,7 @@
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Current location" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="3P6-Ny-j89">
                                         <rect key="frame" x="8" y="55" width="584" height="30"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" returnKeyType="search"/>
                                     </textField>
@@ -1083,7 +1084,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="SplashImage" width="375" height="667"/>
+        <image name="SplashImage" width="320" height="568"/>
         <image name="communityAddNewCommunity" width="22" height="22"/>
         <image name="productClockAvailability" width="22" height="22"/>
     </resources>
