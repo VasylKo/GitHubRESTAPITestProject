@@ -1,12 +1,11 @@
 PODS:
-  - Alamofire (1.3.1)
+  - Alamofire (3.1.1)
   - Bolts (1.4.0):
     - Bolts/AppLinks (= 1.4.0)
     - Bolts/Tasks (= 1.4.0)
   - Bolts/AppLinks (1.4.0):
     - Bolts/Tasks
   - Bolts/Tasks (1.4.0)
-  - Box (1.2.2)
   - Braintree (3.9.3):
     - Braintree/API (= 3.9.3)
     - Braintree/Coinbase (= 3.9.3)
@@ -37,8 +36,8 @@ PODS:
     - Braintree/API
   - Braintree/Venmo (3.9.3):
     - Braintree/API
-  - BrightFutures (2.0.1):
-    - Result (~> 0.4.3)
+  - BrightFutures (3.0.0):
+    - Result (= 0.6.0-beta.4)
   - FBSDKCoreKit (4.7.0):
     - Bolts (~> 1.1)
     - FBSDKCoreKit/arc (= 4.7.0)
@@ -51,37 +50,36 @@ PODS:
   - FBSDKLoginKit (4.7.0):
     - FBSDKCoreKit
   - GoogleMaps (1.10.3)
-  - HanekeSwift (0.9.1)
+  - HanekeSwift (0.10.0)
   - HMSegmentedControl (1.5.2)
-  - ImagePickerSheetController (0.1.7)
+  - ImagePickerSheetController (0.9.1)
   - JDStatusBarNotification (1.5.2)
-  - JSQMessagesViewController (7.1.0):
+  - JSQMessagesViewController (7.2.0):
     - JSQSystemSoundPlayer (~> 2.0.1)
   - JSQSystemSoundPlayer (2.0.1)
-  - KeychainAccess (1.2.1)
-  - KYDrawerController (1.0.3)
-  - ObjectMapper (0.12)
+  - KeychainAccess (2.3.1)
+  - KYDrawerController (1.1.1)
+  - ObjectMapper (1.0.0)
   - PosInCore (0.0.1):
-    - Alamofire (~> 1.3.1)
-    - BrightFutures (~> 2.0.1)
-    - ObjectMapper (= 0.12)
-  - Result (0.4.4):
-    - Box (~> 1.2)
+    - Alamofire (~> 3.1)
+    - BrightFutures (~> 3.0)
+    - ObjectMapper (~> 1.0)
+  - Result (0.6.0-beta.4)
   - UIImageEffects (0.0.1)
   - XLForm (3.0.2)
 
 DEPENDENCIES:
-  - Braintree (= 3.9.3)
-  - FBSDKCoreKit (= 4.7.0)
-  - FBSDKLoginKit (= 4.7.0)
-  - GoogleMaps
-  - HanekeSwift (~> 0.9.1)
-  - HMSegmentedControl
-  - ImagePickerSheetController (~> 0.1.7)
-  - JDStatusBarNotification
-  - JSQMessagesViewController (~> 7.1.0)
-  - KeychainAccess (~> 1.2.1)
-  - KYDrawerController (~> 1.0.3)
+  - Braintree (~> 3.9)
+  - FBSDKCoreKit (~> 4.7)
+  - FBSDKLoginKit (~> 4.7)
+  - GoogleMaps (~> 1.10)
+  - HanekeSwift (~> 0.10)
+  - HMSegmentedControl (~> 1.5.2)
+  - ImagePickerSheetController (~> 0.9)
+  - JDStatusBarNotification (~> 1.5)
+  - JSQMessagesViewController (~> 7.2)
+  - KeychainAccess (~> 2.3.1)
+  - KYDrawerController (~> 1.1)
   - PosInCore (from `PosInCore`)
   - UIImageEffects
   - XLForm (~> 3.0.2)
@@ -91,25 +89,24 @@ EXTERNAL SOURCES:
     :path: PosInCore
 
 SPEC CHECKSUMS:
-  Alamofire: e4ab637e3195b645c814b87a652373439e59f2a4
+  Alamofire: 9b0a7188b961a03914a99304488bd226b0e46c0e
   Bolts: 0e9bce58b9b9f5e8a7a4d47b16d2fabec289072b
-  Box: a92e8aa4c099e6bc0733829665caf9e668ef53b8
   Braintree: 996027dcc8633569f2405bc57dca11f367050c60
-  BrightFutures: 27704272a695324b42538a2d85b20ac3f24228bd
+  BrightFutures: 4a3f46747e5633562bdcef55c9e291bfb7288c34
   FBSDKCoreKit: eb580bfc2040ad44f4c0b4f4d0befb1d35bce59c
   FBSDKLoginKit: 01bce8dd3f3a26a023b0ba4ffdde7ef5062889fe
   GoogleMaps: 945e4ac3b74bcca3ddada51df256eb7beddb474d
-  HanekeSwift: 50d37bfbc4432edc649167e538c259feccb4a2bb
+  HanekeSwift: d6f5bdf9dbdbbc09d59623b2c1d533e46463dd4d
   HMSegmentedControl: 83b9686022d2176fb6457d2bdb61e5d6393fed7d
-  ImagePickerSheetController: 127cc7a5e8da7fa17d42aa4ba7509f72af9cd71f
+  ImagePickerSheetController: 3c58c9fee6dcf36485222358a021f6b734f997ba
   JDStatusBarNotification: a36d09ccbb047217572b074a61e7ca10dddc5f0a
-  JSQMessagesViewController: ca11f86fa68ca70835f05e169df9244147c1dc40
+  JSQMessagesViewController: 73cab48aa92fc2d512f3b6724f3425cc47a19eb5
   JSQSystemSoundPlayer: c5850e77a4363ffd374cd851154b9af93264ed8d
-  KeychainAccess: 3d7922baf90762a976adb7f6030d74c1a4110a1d
-  KYDrawerController: 114902057e9b9a2a0aa951e976151b285afa9c3e
-  ObjectMapper: ef4a369cbab75546029ceb7e8155772b5f8e8841
-  PosInCore: 965c6ba34512702a24e86c7f0411a3b634e29204
-  Result: b44f6bc8762bbffaf2c5df58f2c7d12c3496ced8
+  KeychainAccess: d54b31c75745cfa595b3654590e8cb491a75d411
+  KYDrawerController: 33f16abd6ce2b0cc7d6e2c7df2502b5dab23ecb6
+  ObjectMapper: 0cd8372a0da95ae146afc63d8b512c32dd372a49
+  PosInCore: d343ffa2e13b1fba322212eb498bdc452a305c54
+  Result: f7927152cbaec0c043abb06ba0bc432678818418
   UIImageEffects: 37b99fa461e4965f332ca82e92f2c22a1075ee84
   XLForm: 7817ce29f3f259186e837bb7309ac7e5b7e9b883
 
