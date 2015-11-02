@@ -43,7 +43,9 @@ final class SearchAppearanceAnimationController: NSObject,UIViewControllerAnimat
     
     // This method can only  be a nop if the transition is interactive and not a percentDriven interactive transition.
     func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
-        let conrainerView = transitionContext.containerView()
+        guard let conrainerView = transitionContext.containerView() else {
+            fatalError("No container view during transition")
+        }
         let searchController = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey) as! SearchViewController
         let fromViewController = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)!
         searchController.backImageView.image = snapshotView(fromViewController.view)

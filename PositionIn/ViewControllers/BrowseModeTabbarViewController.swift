@@ -102,7 +102,7 @@ protocol BrowseModeDisplay {
         
         let addMenuSize: CGFloat = 50
         
-        let views: [NSObject : AnyObject] = [ "tabbar": tabbar, "contentView" : contentView ]
+        let views = [ "tabbar": tabbar, "contentView" : contentView ]
         view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[tabbar]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: views))
         view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[contentView]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: views))
         view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[contentView][tabbar(50)]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: views))

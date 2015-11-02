@@ -37,9 +37,9 @@ class ItemsSearchResultDataSource: TableViewDataSource, ItemsSearchResultStorage
         let model = self.tableView(tableView, modelForIndexPath: indexPath)
         
         switch model {
-        case let sectionModel as SearchSectionCellModel:
+        case _ as SearchSectionCellModel:
             return SearchSectionCell.reuseId()
-        case let itemModel as SearchItemCellModel:
+        case _ as SearchItemCellModel:
             return SearchEntityCell.reuseId()
         default:
             break

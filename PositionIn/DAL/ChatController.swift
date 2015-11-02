@@ -113,8 +113,7 @@ final class ChatController: NSObject {
         let fetchAvatar: (NSURL) -> Future<UIImage, NSError>  = { url in
             let promise = Promise<UIImage, NSError>()
             Shared.imageCache.fetch(URL: url, formatName: ChatController.avatarCacheFormatName, failure: { (e) -> () in
-                //TODO: add default error
-                let error =  e ??  NSError()
+                let error =  e ??  NetworkDataProvider.ErrorCodes.InvalidResponseError.error()
                 promise.failure(error)
                 }, success: {image in
                     promise.success(image)
@@ -131,7 +130,7 @@ final class ChatController: NSObject {
                         strongSelf?.addAvatar(image, user: info.objectId)
                     }
                 }
-                sequence(avatarDownloads).onComplete { [weak strongSelf] _ in
+                avatarDownloads.sequence().onComplete { [weak strongSelf] _ in
                     strongSelf?.delegate?.didUpdateMessages()
                 }
             }

@@ -38,7 +38,7 @@ extension APIService {
     
     //Returns true if it is current user
     func isCurrentUser(userId: CRUDObjectId) -> Bool {
-        if let currentUserId = api().currentUserId() {
+        if let currentUserId: CRUDObjectId = api().currentUserId() {
             return currentUserId == userId
         }
         return false
@@ -98,7 +98,7 @@ extension APIService {
     //Login existing user
     func login(username username: String, password: String) -> Future<UserProfile, NSError> {
         return loginRequest(username: username, password: password).flatMap { _ in
-            return self.updateCurrentProfileStatus(newPasword: password)
+            return self.updateCurrentProfileStatus(password)
         }
     }
     
@@ -126,7 +126,7 @@ extension APIService {
             info ["lastName"] = lastName
         }
         return registerRequest(username: username, password: password, info: info).flatMap { _ in
-            return self.updateCurrentProfileStatus(newPasword: password)
+            return self.updateCurrentProfileStatus(password)
         }
     }
     
@@ -194,11 +194,11 @@ extension APIService {
         case Refresh(api: APIService, token: String)
 
         // URLRequestConvertible
-        var URLRequest: NSURLRequest {
+        var URLRequest: NSMutableURLRequest {
             let url:  NSURL
             var encoding: Alamofire.ParameterEncoding = .JSON
             var method: Alamofire.Method = .POST
-            var headers: [String : AnyObject] = [ "Content-Type" : "application/json"]
+            var headers: [String : String] = [ "Content-Type" : "application/json"]
             var params: [String: AnyObject] = [:]
 
             switch self {
@@ -249,11 +249,14 @@ extension APIService {
         
         private func deviceInfo() -> [String : AnyObject] {
             let device = UIDevice.currentDevice()
-            return [
+            var info = [
                 "make" : device.localizedModel,
-                "model" : "\(device.systemName) \(device.systemVersion)",
-                "uuid" : device.identifierForVendor.UUIDString,
-            ]
+                "model" : "\(device.systemName) \(device.systemVersion)"
+            ];
+            if let uuid = device.identifierForVendor {
+                info["uuid"] = uuid.UUIDString
+            }
+            return info
         }
     }
     

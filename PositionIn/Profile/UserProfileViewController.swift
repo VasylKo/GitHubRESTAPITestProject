@@ -339,7 +339,7 @@ extension UserProfileViewController: UserProfileActionConsumer {
         case .Follow:
             if api().isUserAuthorized() {
                 api().followUser(objectId).onSuccess { [weak self] in
-                    self?.sendSubscriptionUpdateNotification(aUserInfo: nil)
+                    self?.sendSubscriptionUpdateNotification(nil)
                     self?.reloadData()
                 }
             }
@@ -350,7 +350,7 @@ extension UserProfileViewController: UserProfileActionConsumer {
             }
         case .UnFollow:
             api().unFollowUser(objectId).onSuccess { [weak self] in
-                self?.sendSubscriptionUpdateNotification(aUserInfo: nil)
+                self?.sendSubscriptionUpdateNotification(nil)
                 self?.reloadData()
             }
         case .Chat:
@@ -434,15 +434,15 @@ extension UserProfileViewController {
         @objc override func tableView(tableView: UITableView, reuseIdentifierForIndexPath indexPath: NSIndexPath) -> String {
             let model = self.tableView(tableView, modelForIndexPath: indexPath)
             switch model {
-            case let model as ProfileInfoCellModel:
+            case  _ as ProfileInfoCellModel:
                 return ProfileInfoCell.reuseId()
-            case let model as ProfileStatsCellModel:
+            case  _ as ProfileStatsCellModel:
                 return ProfileStatsCell.reuseId()
-            case let model as BrowseListCellModel:
+            case _ as BrowseListCellModel:
                 return BrowseListTableViewCell.reuseId()
-            case let model as TableViewCellTextModel:
+            case _ as TableViewCellTextModel:
                 return DescriptionTableViewCell.reuseId()
-            case let model as ProfileFollowCellModel:
+            case _ as ProfileFollowCellModel:
                 return ProfileFollowCell.reuseId()
             default:
                 return super.tableView(tableView, reuseIdentifierForIndexPath: indexPath)
@@ -463,7 +463,7 @@ extension UserProfileViewController {
         
         @objc override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
             if let model = self.tableView(tableView, modelForIndexPath: indexPath) as? TableViewCellTextModel
-                where count(model.title) == 0 {
+                where model.title.characters.count == 0 {
                     return 0.0
             }
             return super.tableView(tableView, heightForRowAtIndexPath: indexPath)

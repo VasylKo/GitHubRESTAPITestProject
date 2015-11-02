@@ -92,9 +92,9 @@ final class BrowseCommunityViewController: BesideMenuViewController {
                 firstMyCommunityRequestToken.invalidate()
                 communitiesRequest = mySubscriptionsRequest.flatMap {  response -> Future<CollectionResponse<Community>,NSError> in
                     if let communitiesList = response.items  where communitiesList.count == 0 {
-                        return Future.failed(NSError())
+                        return Future(error: NetworkDataProvider.ErrorCodes.InvalidRequestError.error())
                     } else {
-                        return Future.succeeded(response)
+                        return Future(value: response)
                         }
                     }.andThen { [weak self] result in
                         switch result {

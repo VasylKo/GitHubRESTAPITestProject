@@ -254,9 +254,7 @@ struct APIService {
     func getSubscriptionStateForUser(userId: CRUDObjectId) -> Future<UserProfile.SubscriptionState, NSError> {
         //TODO: use follow":true from user profile response
         if isCurrentUser(userId) {
-            return future { () -> Result<UserProfile.SubscriptionState, NSError> in
-                return Result(value:.SameUser)
-            }
+            return Future(value: .SameUser)
         }
         return getMySubscriptions().map { (response: CollectionResponse<UserInfo>) -> UserProfile.SubscriptionState in
             if (response.items.filter { $0.objectId == userId }).count > 0 {
@@ -430,7 +428,11 @@ struct APIService {
     
     func statusCodeValidation<S: SequenceType where S.Generator.Element == Int>(statusCode acceptableStatusCode: S) -> Alamofire.Request.Validation {
         return { _, response in
-            return contains(acceptableStatusCode, response.statusCode)
+            if acceptableStatusCode.contains(response.statusCode) {
+                return .Success
+            } else {
+                return .Failure(NetworkDataProvider.ErrorCodes.TransferError.error())
+            }
         }
     }
     
@@ -572,15 +574,14 @@ extension APIService {
             let urlRequest = self.imageRequest(token)
             return self.dataProvider.upload(urlRequest, files: [fileInfo])
             }.flatMap { (response: AnyObject?) -> Future<NSURL, NSError> in
-                return future(context: ImmediateExecutionContext) { () -> Result<NSURL ,NSError> in                    
-                    if  let JSON = response as? [String: AnyObject],
-                        let url = AmazonURLTransform().transformFromJSON(JSON["url"]) {
-                            return Result(value: url)
-                            
-                    } else {
-                        return Result(error: NetworkDataProvider.ErrorCodes.InvalidResponseError.error())
+                let f: Future<NSURL, NSError> = future {
+                    guard let JSON = response as? [String: AnyObject],
+                          let url = AmazonURLTransform().transformFromJSON(JSON["url"])  else {
+                            return Result(error: NetworkDataProvider.ErrorCodes.InvalidResponseError.error())
                     }
+                    return Result(value: url)
                 }
+                return f
         }
     }
     

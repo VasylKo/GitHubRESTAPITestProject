@@ -116,11 +116,11 @@ extension CommunityFeedViewController {
         @objc override func tableView(tableView: UITableView, reuseIdentifierForIndexPath indexPath: NSIndexPath) -> String {
             let model = self.tableView(tableView, modelForIndexPath: indexPath)
             switch model {
-            case let model as BrowseCommunityHeaderCellModel:
+            case _ as BrowseCommunityHeaderCellModel:
                 return CommunityHeaderCell.reuseId()
-            case let model as CommunityStatsCellModel:
+            case _ as CommunityStatsCellModel:
                 return CommunityStatsCell.reuseId()
-            case let model as BrowseListCellModel:
+            case _ as BrowseListCellModel:
                 return BrowseListTableViewCell.reuseId()
             default:
                 return super.tableView(tableView, reuseIdentifierForIndexPath: indexPath)

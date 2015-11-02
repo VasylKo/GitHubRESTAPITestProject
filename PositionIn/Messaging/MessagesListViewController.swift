@@ -96,7 +96,9 @@ extension MessagesListViewController {
                 } else {
                     conversation = ConversationManager.sharedInstance().directConversation(model.userId)
                 }
-                map(conversation) { parentViewController?.showChatViewController($0) }
+                if let conversation = conversation {
+                    parentViewController?.showChatViewController(conversation)
+                }
             }
         }
         
