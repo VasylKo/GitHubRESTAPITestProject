@@ -96,7 +96,7 @@ extension APIService {
     
     
     //Login existing user
-    func login(#username: String, password: String) -> Future<UserProfile, NSError> {
+    func login(username username: String, password: String) -> Future<UserProfile, NSError> {
         return loginRequest(username: username, password: password).flatMap { _ in
             return self.updateCurrentProfileStatus(newPasword: password)
         }
@@ -117,7 +117,7 @@ extension APIService {
     }
     
     //Register new user
-    func register(#username: String, password: String, firstName: String?, lastName: String?) -> Future<UserProfile, NSError> {
+    func register(username username: String, password: String, firstName: String?, lastName: String?) -> Future<UserProfile, NSError> {
         var info: [String: AnyObject] = [:]
         if let firstName = firstName {
             info ["firstName"] = firstName
@@ -133,13 +133,13 @@ extension APIService {
     //MARK: - Private members -
     
     
-    private func registerRequest(#username: String?, password: String?, info: [String: AnyObject]?) -> Future<AuthResponse, NSError> {
+    private func registerRequest(username username: String?, password: String?, info: [String: AnyObject]?) -> Future<AuthResponse, NSError> {
         let urlRequest = AuthRouter.Register(api: self, username: username, password: password, profileInfo: info)
         let (_, future): (Alamofire.Request, Future<AuthResponse, NSError>) = dataProvider.objectRequest(urlRequest)
         return handleFailure(updateAuth(future))
     }
     
-    private func loginRequest(#username: String, password: String) -> Future<AuthResponse, NSError> {
+    private func loginRequest(username username: String, password: String) -> Future<AuthResponse, NSError> {
         let urlRequest = AuthRouter.Login(api: self, username: username, password: password)
         let (_, future): (Alamofire.Request, Future<AuthResponse, NSError>) = dataProvider.objectRequest(urlRequest)
         return handleFailure(updateAuth(future))

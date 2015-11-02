@@ -22,7 +22,7 @@ protocol BrowseModeDisplay {
     
     //MARK: Browse mode
     
-    enum BrowseMode: Int, Printable {
+    enum BrowseMode: Int, CustomStringConvertible {
         case ForYou
         case New
         
@@ -96,16 +96,16 @@ protocol BrowseModeDisplay {
         self.addMenu = addMenu
         view.addSubview(addMenu)
         
-        view.removeConstraints(view.constraints())
-        tabbar.setTranslatesAutoresizingMaskIntoConstraints(false)
-        addMenu.setTranslatesAutoresizingMaskIntoConstraints(false)
+        view.removeConstraints(view.constraints)
+        tabbar.translatesAutoresizingMaskIntoConstraints = false
+        addMenu.translatesAutoresizingMaskIntoConstraints = false
         
         let addMenuSize: CGFloat = 50
         
         let views: [NSObject : AnyObject] = [ "tabbar": tabbar, "contentView" : contentView ]
-        view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[tabbar]|", options: NSLayoutFormatOptions(0), metrics: nil, views: views))
-        view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[contentView]|", options: NSLayoutFormatOptions(0), metrics: nil, views: views))
-        view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[contentView][tabbar(50)]|", options: NSLayoutFormatOptions(0), metrics: nil, views: views))
+        view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[tabbar]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: views))
+        view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[contentView]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: views))
+        view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[contentView][tabbar(50)]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: views))
         
         view.addConstraint(NSLayoutConstraint(
             item: view, attribute: .CenterX, relatedBy: .Equal,

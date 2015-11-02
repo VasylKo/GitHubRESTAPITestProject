@@ -8,7 +8,7 @@
 
 import Foundation
 
-@objc
+
 public final class KVObserver<T>: NSObject {
     
     /// Observe closure - observer, old value, new value
@@ -23,10 +23,10 @@ public final class KVObserver<T>: NSObject {
         self.keyPath = keyPath
         block = closure
         super.init()
-        subject.addObserver(self, forKeyPath: keyPath, options: .New | .Old, context: &KVObserverContext)
+        subject.addObserver(self, forKeyPath: keyPath, options: [.New, .Old], context: &KVObserverContext)
     }
     
-    public override func observeValueForKeyPath(keyPath: String, ofObject object: AnyObject, change: [NSObject : AnyObject], context: UnsafeMutablePointer<Void>) {
+    public override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
         if context == &KVObserverContext {
             let oldValue = change[NSKeyValueChangeOldKey] as? T
             let newValue = change[NSKeyValueChangeNewKey] as? T

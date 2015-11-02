@@ -131,7 +131,7 @@ final class FilterViewController: XLFormViewController {
         let filterCategories = filter.categories
         let categoryValue: (ItemCategory) -> Bool = { category in
             if let filterCategories = filterCategories {
-                return contains(filterCategories, category) || contains(filterCategories, .Unknown)
+                return filterCategories.contains(category) || filterCategories.contains(.Unknown)
             } else {
                 return true
             }
@@ -182,7 +182,7 @@ final class FilterViewController: XLFormViewController {
         if let values = values as? [NSNumber] {
             let categories = ItemCategory.all()
             var result: [ItemCategory] = []
-            for (idx, value) in enumerate(values) {
+            for (idx, value) in values.enumerate() {
                 if value.boolValue == true {
                     result.append(categories[idx])
                 }

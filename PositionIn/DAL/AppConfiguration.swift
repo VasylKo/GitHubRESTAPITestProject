@@ -57,6 +57,6 @@ final class AppConfiguration {
 
     var appVersion: String? {
         let env = AppConfiguration.environment.rawValue
-        return map(NSBundle.mainBundle().infoDictionary?[kCFBundleVersionKey] as? String) {"\($0)-\(env)"}
+        return (NSBundle.mainBundle().infoDictionary?[kCFBundleVersionKey] as? String).map {"\($0)-\(env)"}
     }
 }

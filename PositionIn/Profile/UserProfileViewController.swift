@@ -21,7 +21,7 @@ final class UserProfileViewController: BesideMenuViewController, BrowseActionPro
         case Info, Feed
     }
     
-    enum ProfileAction: Int, Printable {
+    enum ProfileAction: Int, CustomStringConvertible {
         case None
         case Call, Chat, Edit, Follow, UnFollow
         var description: String {
@@ -424,11 +424,11 @@ extension UserProfileViewController {
         }
         
         func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-            return count(items)
+            return items.count
         }
         
         @objc override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            return count(items[section])
+            return items[section].count
         }
         
         @objc override func tableView(tableView: UITableView, reuseIdentifierForIndexPath indexPath: NSIndexPath) -> String {

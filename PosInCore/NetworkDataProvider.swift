@@ -18,9 +18,9 @@ public class NetworkDataProvider: NSObject {
     /**
     Create request for mappable object
     
-    :param: URLRequest The URL request
+    - parameter URLRequest: The URL request
     
-    :returns: Tuple with request and future
+    - returns: Tuple with request and future
     */
     public func objectRequest<T: Mappable>(
         URLRequest: Alamofire.URLRequestConvertible,
@@ -35,9 +35,9 @@ public class NetworkDataProvider: NSObject {
     /**
     Create request for multiple mappable objects
     
-    :param: URLRequest The URL request
+    - parameter URLRequest: The URL request
     
-    :returns: Tuple with request and future
+    - returns: Tuple with request and future
     */
     public func arrayRequest<T: Mappable>(
         URLRequest: Alamofire.URLRequestConvertible,
@@ -52,10 +52,10 @@ public class NetworkDataProvider: NSObject {
     /**
     Create request with JSON mapping
     
-    :param: URLRequest The URL request
-    :param: map        Response mapping function
+    - parameter URLRequest: The URL request
+    - parameter map:        Response mapping function
     
-    :returns: Tuple with request and future
+    - returns: Tuple with request and future
     */
     public  func jsonRequest<V>(
         URLRequest: Alamofire.URLRequestConvertible,
@@ -70,10 +70,10 @@ public class NetworkDataProvider: NSObject {
     /**
     Designated initializer
     
-    :param: api           api service
-    :param: configuration session configuration
+    - parameter api:           api service
+    - parameter configuration: session configuration
     
-    :returns: new instance
+    - returns: new instance
     */
     public init(
         configuration: NSURLSessionConfiguration = NSURLSessionConfiguration.defaultSessionConfiguration(),
@@ -101,10 +101,10 @@ public class NetworkDataProvider: NSObject {
     /**
     Create request with serializer
     
-    :param: URLRequest The URL request
-    :param: serializer Response serializer
+    - parameter URLRequest: The URL request
+    - parameter serializer: Response serializer
     
-    :returns: Tuple with request and future
+    - returns: Tuple with request and future
     */
     private func request<V,Serializer: Alamofire.ResponseSerializer where Serializer.SerializedObject == Box<V>>(
         URLRequest: Alamofire.URLRequestConvertible,
@@ -155,7 +155,7 @@ private extension Alamofire.Request {
     class func CustomResponseSerializer<T>(mapping:AnyObject? -> T?) -> GenericResponseSerializer<Box<T>> {
         return GenericResponseSerializer { request, response, data in
             let JSONSerializer = Request.JSONResponseSerializer(options: .AllowFragments)
-            let (json: AnyObject?, serializationError) = JSONSerializer.serializeResponse(request, response, data)
+            let (json: AnyObject,?, serializationError) = JSONSerializer.serializeResponse(request, response, data)
             switch (response, json, serializationError) {
             case (.None, _, _):
                 return (nil, NetworkDataProvider.ErrorCodes.TransferError.error())
@@ -196,9 +196,9 @@ extension NetworkDataProvider {
         /**
         Trying to construct Error code from NSError
         
-        :param: error NSError instance
+        - parameter error: NSError instance
         
-        :returns: Error code or nil
+        - returns: Error code or nil
         */
         public static func fromError(error: NSError) -> ErrorCodes? {
             if error.domain == ErrorCodes.errorDomain {
@@ -210,10 +210,10 @@ extension NetworkDataProvider {
         /**
         Converting Error code to the NSError
         
-        :param: underlyingError underlying error
-        :param: description Localized description
+        - parameter underlyingError: underlying error
+        - parameter description: Localized description
         
-        :returns: NSError instance
+        - returns: NSError instance
         */
         public func error(underlyingError: NSError? = nil, localizedDescription: String? = nil) -> NSError {
             let description = localizedDescription ?? NSString(
@@ -268,17 +268,17 @@ extension NetworkDataProvider {
             self.data = data
             mimeType = copyTag(kUTTagClassMIMEType, fromUTI: dataUTI, defaultValue: "application/octet-stream")
             let fileExtension = copyTag(kUTTagClassFilenameExtension, fromUTI: dataUTI, defaultValue: "png")
-            filename = name.stringByAppendingPathExtension(fileExtension) ?? name
+            filename = (name as NSString).stringByAppendingPathExtension(fileExtension) ?? name
         }
     }
     
     /**
     Uploads a files
     
-    :param: URLRequest url request
-    :param: urls       files info
+    - parameter URLRequest: url request
+    - parameter urls:       files info
     
-    :returns: Request future
+    - returns: Request future
     */
     public func upload(
         URLRequest: Alamofire.URLRequestConvertible,
@@ -317,8 +317,8 @@ extension NetworkDataProvider {
     }
 }
 
-private func copyTag(tag: CFString!, fromUTI dataUTI: String, #defaultValue: String) -> String {
-    var str = UTTypeCopyPreferredTagWithClass(dataUTI, tag)
+private func copyTag(tag: CFString!, fromUTI dataUTI: String, defaultValue: String) -> String {
+    let str = UTTypeCopyPreferredTagWithClass(dataUTI, tag)
     if (str == nil) {
         return defaultValue
     } else {

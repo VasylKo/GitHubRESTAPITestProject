@@ -54,23 +54,23 @@ struct Post: CRUDObject {
     }
 
     static func endpoint(postId: CRUDObjectId) -> String {
-        return Post.endpoint().stringByAppendingPathComponent("\(postId)")
+        return (Post.endpoint() as NSString).stringByAppendingPathComponent("\(postId)")
     }
     
     static func likeEndpoint(postId: CRUDObjectId) -> String {
-        return Post.endpoint().stringByAppendingPathComponent("\(postId)/like")
+        return (Post.endpoint() as NSString).stringByAppendingPathComponent("\(postId)/like")
     }
     
     static func postCommentEndpoint(postId: CRUDObjectId) -> String {
-        return Post.endpoint().stringByAppendingPathComponent("\(postId)/comment")
+        return (Post.endpoint() as NSString).stringByAppendingPathComponent("\(postId)/comment")
     }
     
     static func userPostsEndpoint(userId: CRUDObjectId) -> String {
-        return UserProfile.endpoint().stringByAppendingPathComponent("\(userId)/posts")
+        return (UserProfile.endpoint() as NSString).stringByAppendingPathComponent("\(userId)/posts")
     }
     
     static func communityPostsEndpoint(communityId: CRUDObjectId) -> String {
-        return Community.endpoint().stringByAppendingPathComponent("\(communityId)/posts")
+        return (Community.endpoint() as NSString).stringByAppendingPathComponent("\(communityId)/posts")
     }
         
     var description: String {

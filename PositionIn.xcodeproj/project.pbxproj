@@ -2843,6 +2843,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = PIN;
+				LastSwiftMigration = 0710;
 				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0640;
 				ORGANIZATIONNAME = "Soluna Labs";

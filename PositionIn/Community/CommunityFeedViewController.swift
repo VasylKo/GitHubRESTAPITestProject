@@ -108,11 +108,11 @@ extension CommunityFeedViewController {
         }
         
         func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-            return count(items)
+            return (items).count
         }
         
         @objc override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            return count(items[section])
+            return items[section].count
         }
         
         @objc override func tableView(tableView: UITableView, reuseIdentifierForIndexPath indexPath: NSIndexPath) -> String {

@@ -82,7 +82,7 @@ final class LocationController {
     }
     
     func localeUsesMetricSystem() -> Bool {
-        return map(NSLocale.currentLocale().objectForKey(NSLocaleUsesMetricSystem) as? NSNumber) { $0.boolValue} ?? true
+        return (NSLocale.currentLocale().objectForKey(NSLocaleUsesMetricSystem) as? NSNumber).map { $0.boolValue} ?? true
     }
     
     func lengthFormatUnit() -> NSLengthFormatterUnit {
@@ -136,7 +136,7 @@ final class LocationController {
             cacheStorage.setObject(newValue, forKey: kLastKnownCoordinateExpirationKey)
         }
         get {
-            return (cacheStorage.objectForKey(kLastKnownCoordinateExpirationKey) as? NSDate) ?? (NSDate.distantPast() as! NSDate)
+            return (cacheStorage.objectForKey(kLastKnownCoordinateExpirationKey) as? NSDate) ?? (NSDate.distantPast() )
         }
     }
     

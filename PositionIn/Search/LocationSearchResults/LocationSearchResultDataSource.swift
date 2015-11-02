@@ -25,7 +25,7 @@ class LocationSearchResultDataSource: TableViewDataSource, LocationSearchResultS
     }
     
     @objc override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return count(locationModels)
+        return locationModels.count
     }
     
     override func tableView(tableView: UITableView, modelForIndexPath indexPath: NSIndexPath) -> TableViewCellModel {

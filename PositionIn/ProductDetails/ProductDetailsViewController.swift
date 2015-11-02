@@ -55,7 +55,7 @@ final class ProductDetailsViewController: UIViewController {
         headerLabel.text = product.name
         detailsLabel.text = product.text
         
-        priceLabel.text = map(product.price) {
+        priceLabel.text = product.price.map {
             let newValue = $0 as Float
             return currencyFormatter.stringFromNumber(NSNumber(float: newValue)) ?? ""}
         let url = product.photos?.first?.url
@@ -120,7 +120,7 @@ final class ProductDetailsViewController: UIViewController {
 }
 
 extension ProductDetailsViewController {
-    enum ProductDetailsAction: Printable {
+    enum ProductDetailsAction: CustomStringConvertible {
         case Buy, ProductInventory, SellerProfile, SendMessage
         
         var description: String {

@@ -32,7 +32,7 @@ class RoundButton: UIControl {
         configure()
     }
     
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         configure()
     }
@@ -87,12 +87,12 @@ class RoundButton: UIControl {
         bubbleLayer.shadowRadius = 2
         iconLayer.contentsGravity = kCAGravityResize
         iconLayer.masksToBounds = true
-        setTranslatesAutoresizingMaskIntoConstraints(false)
+        translatesAutoresizingMaskIntoConstraints = false
 
     }
     
     
-    override func layoutSublayersOfLayer(layer: CALayer!) {
+    override func layoutSublayersOfLayer(layer: CALayer) {
         bubbleLayer.path = UIBezierPath(ovalInRect: bounds).CGPath
         bubbleLayer.frame = bounds
         let imageInsetsSize: CGFloat = bounds.width / 4.0
@@ -117,18 +117,18 @@ class RoundButton: UIControl {
 
 //MARK: Touches
 extension RoundButton {
-    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         super.touchesBegan(touches, withEvent: event)
         animatedToSelectedState()
     }
     
-    override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
+    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
         super.touchesEnded(touches, withEvent: event)
         animatedToDeselectedState()
         sendActionsForControlEvents(UIControlEvents.ValueChanged)
     }
     
-    override func touchesCancelled(touches: Set<NSObject>!, withEvent event: UIEvent!) {
+    override func touchesCancelled(touches: Set<UITouch>?, withEvent event: UIEvent?) {
         super.touchesCancelled(touches, withEvent: event)
         animatedToDeselectedState()
         sendActionsForControlEvents(UIControlEvents.TouchCancel)

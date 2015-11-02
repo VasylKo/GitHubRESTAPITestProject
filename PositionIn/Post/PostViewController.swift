@@ -103,7 +103,7 @@ extension PostViewController: UITextFieldDelegate {
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         
-        if (count(textField.text) > 0) {
+        if (textField.text.characters.count > 0) {
             var comment = Comment()
             comment.text = textField.text
             if let tempPost = post {

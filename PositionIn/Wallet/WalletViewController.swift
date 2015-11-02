@@ -34,7 +34,7 @@ final class WalletViewController: BesideMenuViewController {
     }
     
     func mockData(mode: BrowseMode) -> [FeedItem] {
-        let dateText = map(NSDate()){dateFormatter.stringFromDate($0)}
+        let dateText = Optional(NSDate()).map{dateFormatter.stringFromDate($0)}
         switch mode {
         case .Inventory:
             return  [
@@ -92,11 +92,11 @@ extension WalletViewController {
         }
         
         func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-            return count(models)
+            return (models).count
         }
         
         @objc override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            return count(models[section])
+            return models[section].count
         }
         
         override func tableView(tableView: UITableView, modelForIndexPath indexPath: NSIndexPath) -> TableViewCellModel {

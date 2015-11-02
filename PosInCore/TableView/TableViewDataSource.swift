@@ -25,7 +25,7 @@ public class TableViewDataSource: NSObject {
     }
     
     public func tableView(tableView: UITableView, configureFooter footer: TableViewSectionHeaderFooterView, forSection section: Int) {
-        footer.position = (tableView.numberOfSections() - 1 == section) ? .LastFooter : .Footer
+        footer.position = (tableView.numberOfSections - 1 == section) ? .LastFooter : .Footer
     }
     
     

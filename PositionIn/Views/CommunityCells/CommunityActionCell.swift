@@ -48,9 +48,9 @@ final class CommunityActionCell: TableViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        let width: CGFloat = frame.width / CGFloat(count(actionButtons))
+        let width: CGFloat = frame.width / CGFloat((actionButtons).count)
         let height = frame.height
-        for (idx, btn) in enumerate(actionButtons) {
+        for (idx, btn) in actionButtons.enumerate() {
             btn.frame = CGRect(x: width * CGFloat(idx), y: 0, width: width, height: height)
         }
     }

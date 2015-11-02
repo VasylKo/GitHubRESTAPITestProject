@@ -34,7 +34,7 @@ class BesideMenuViewController: UIViewController {
     
     var drawerButtonVisible: Bool = false {
         didSet {
-            let (backVisible: Bool, leftItem: UIBarButtonItem?) = {
+            let (backVisible, leftItem): (Bool, UIBarButtonItem?) = {
                 return self.drawerButtonVisible
                     ? (true, self.drawerBarButtonItem())
                     : (false, nil)

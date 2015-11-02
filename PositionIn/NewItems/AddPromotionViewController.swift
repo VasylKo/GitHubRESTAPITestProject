@@ -134,7 +134,7 @@ final class AddPromotionViewController: BaseAddItemViewController {
                 view.userInteractionEnabled = false
                 getLocation.zip(getShop).zip(imageUpload).flatMap {
                     (info, urls: [NSURL]) -> Future<Promotion, NSError> in
-                    let (location: Location, shop: CRUDObjectId) = info
+                    let (location, shop): (Location, CRUDObjectId) = info
                     var promotion = Promotion()
                     promotion.name = values[Tags.Title.rawValue] as? String
                     promotion.discount = values[Tags.Discount.rawValue] as? Float

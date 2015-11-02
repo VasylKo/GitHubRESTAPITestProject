@@ -48,7 +48,7 @@ final class ChatController: NSObject {
     }
     
     func messagesCount() -> Int {
-        return count(messages)
+        return (messages).count
     }
     
     func messageAtIndex(index: Int) -> JSQMessageData {

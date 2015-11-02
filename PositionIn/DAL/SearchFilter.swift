@@ -34,7 +34,7 @@ struct SearchFilter: Mappable {
     /**
     Sets filter location.
     
-    :param: location location or nil for user location
+    - parameter location: location or nil for user location
     */
     static func setLocation(location: Location?) {
         var filter = SearchFilter.currentFilter
@@ -92,13 +92,13 @@ struct SearchFilter: Mappable {
             radius = newValue?.value()
         }
         get {
-            return flatMap(radius) { Distance(rawValue: $0) } ?? .Anywhere
+            return radius.flatMap { Distance(rawValue: $0) } ?? .Anywhere
         }
     }
     
     private var radius: Double?
     
-    enum Distance: Double, Printable {
+    enum Distance: Double, CustomStringConvertible {
         case Km1 = 1
         case Km5 = 5
         case Km20 = 20
@@ -182,7 +182,7 @@ extension SearchFilter: APIServiceQueryConvertible {
     var query: [String : AnyObject]  {
         var filter = self
         filter.locationName = nil
-        filter.radius = map(filter.radius) { locationController().localeUsesMetricSystem() ? $0 : $0 * 1.60934}
+        filter.radius = filter.radius.map { locationController().localeUsesMetricSystem() ? $0 : $0 * 1.60934}
         var params = Mapper<SearchFilter>().toJSON(filter)
         return params
     }

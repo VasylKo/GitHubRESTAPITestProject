@@ -80,8 +80,8 @@ class SettingsViewController: BesideMenuViewController, MFMailComposeViewControl
         }
     }
     
-    func mailComposeController(controller: MFMailComposeViewController!, didFinishWithResult result: MFMailComposeResult,
-        error: NSError!) {
+    func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult,
+        error: NSError?) {
         controller.dismissViewControllerAnimated(true, completion: nil)
     }
     

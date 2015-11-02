@@ -21,7 +21,7 @@ struct Storyboards {
         }
 
         static func instantiateViewControllerWithIdentifier(identifier: String) -> UIViewController {
-            return self.storyboard.instantiateViewControllerWithIdentifier(identifier) as! UIViewController
+            return self.storyboard.instantiateViewControllerWithIdentifier(identifier) 
         }
 
         static func instantiateMainMenuViewController() -> MainMenuViewController! {
@@ -106,7 +106,7 @@ struct Storyboards {
         }
 
         static func instantiateViewControllerWithIdentifier(identifier: String) -> UIViewController {
-            return self.storyboard.instantiateViewControllerWithIdentifier(identifier) as! UIViewController
+            return self.storyboard.instantiateViewControllerWithIdentifier(identifier) 
         }
 
         static func instantiateLoginSignUpViewController() -> LoginSignupViewController! {
@@ -139,7 +139,7 @@ struct Storyboards {
         }
 
         static func instantiateViewControllerWithIdentifier(identifier: String) -> UIViewController {
-            return self.storyboard.instantiateViewControllerWithIdentifier(identifier) as! UIViewController
+            return self.storyboard.instantiateViewControllerWithIdentifier(identifier) 
         }
 
         static func instantiateAddProductViewController() -> AddProductViewController! {
@@ -173,7 +173,7 @@ struct Storyboards {
 }
 
 //MARK: - ReusableKind
-enum ReusableKind: String, Printable {
+enum ReusableKind: String, CustomStringConvertible {
     case TableViewCell = "tableViewCell"
     case CollectionViewCell = "collectionViewCell"
 
@@ -181,7 +181,7 @@ enum ReusableKind: String, Printable {
 }
 
 //MARK: - SegueKind
-enum SegueKind: String, Printable {    
+enum SegueKind: String, CustomStringConvertible {    
     case Relationship = "relationship" 
     case Show = "show"                 
     case Presentation = "presentation" 
@@ -325,7 +325,7 @@ extension UIStoryboardSegue {
 
 extension SidebarViewController { 
 
-    enum Segue: String, Printable, SegueProtocol {
+    enum Segue: String, CustomStringConvertible, SegueProtocol {
         case DrawerSegue = "DrawerSegue"
         case ShowBrowse = "ShowBrowse"
         case ShowMessagesList = "ShowMessagesList"
@@ -409,7 +409,7 @@ extension UIStoryboardSegue {
 
 extension ProductDetailsViewController { 
 
-    enum Segue: String, Printable, SegueProtocol {
+    enum Segue: String, CustomStringConvertible, SegueProtocol {
         case ShowProductInventory = "ShowProductInventory"
         case ShowBuyScreen = "ShowBuyScreen"
         case ShowSellerProfile = "ShowSellerProfile"
@@ -460,7 +460,7 @@ extension UIStoryboardSegue {
 
 extension EventDetailsViewController { 
 
-    enum Segue: String, Printable, SegueProtocol {
+    enum Segue: String, CustomStringConvertible, SegueProtocol {
         case ShowOrganizerProfile = "ShowOrganizerProfile"
 
         var kind: SegueKind? {
@@ -501,7 +501,7 @@ extension UIStoryboardSegue {
 
 extension PromotionDetailsViewController { 
 
-    enum Segue: String, Printable, SegueProtocol {
+    enum Segue: String, CustomStringConvertible, SegueProtocol {
         case ShowSellerProfile = "ShowSellerProfile"
 
         var kind: SegueKind? {
@@ -542,7 +542,7 @@ extension UIStoryboardSegue {
 
 extension ProductInventoryViewController { 
 
-    enum Segue: String, Printable, SegueProtocol {
+    enum Segue: String, CustomStringConvertible, SegueProtocol {
         case ShowProductDetails = "ShowProductDetails"
 
         var kind: SegueKind? {
@@ -583,7 +583,7 @@ extension UIStoryboardSegue {
 
 extension PostViewController { 
 
-    enum Segue: String, Printable, SegueProtocol {
+    enum Segue: String, CustomStringConvertible, SegueProtocol {
         case ShowUserProfile = "ShowUserProfile"
 
         var kind: SegueKind? {
@@ -624,7 +624,7 @@ extension UIStoryboardSegue {
 
 extension BrowseViewController { 
 
-    enum Segue: String, Printable, SegueProtocol {
+    enum Segue: String, CustomStringConvertible, SegueProtocol {
         case ShowProductDetails = "ShowProductDetails"
         case ShowEventDetails = "ShowEventDetails"
         case ShowPromotionDetails = "ShowPromotionDetails"
@@ -680,7 +680,7 @@ extension UIStoryboardSegue {
 
 extension PeopleViewController { 
 
-    enum Segue: String, Printable, SegueProtocol {
+    enum Segue: String, CustomStringConvertible, SegueProtocol {
         case ShowUserProfile = "ShowUserProfile"
 
         var kind: SegueKind? {
@@ -731,7 +731,7 @@ extension UIStoryboardSegue {
 
 extension LoginSignupViewController { 
 
-    enum Segue: String, Printable, SegueProtocol {
+    enum Segue: String, CustomStringConvertible, SegueProtocol {
         case LoginSegueId = "LoginSegueId"
 
         var kind: SegueKind? {
@@ -772,7 +772,7 @@ extension UIStoryboardSegue {
 
 extension RegisterViewController { 
 
-    enum Segue: String, Printable, SegueProtocol {
+    enum Segue: String, CustomStringConvertible, SegueProtocol {
         case SignUpSegue = "SignUpSegue"
 
         var kind: SegueKind? {
@@ -815,7 +815,7 @@ extension UIStoryboardSegue {
 
 extension LoginViewController { 
 
-    enum Segue: String, Printable, SegueProtocol {
+    enum Segue: String, CustomStringConvertible, SegueProtocol {
         case ForgotPasswordSegueId = "ForgotPasswordSegueId"
 
         var kind: SegueKind? {
@@ -858,7 +858,7 @@ extension UIStoryboardSegue {
 
 extension AddProductViewController { 
 
-    enum Segue: String, Printable, SegueProtocol {
+    enum Segue: String, CustomStringConvertible, SegueProtocol {
         case Close = "Close"
 
         var kind: SegueKind? {
@@ -897,7 +897,7 @@ extension UIStoryboardSegue {
 
 extension AddPostViewController { 
 
-    enum Segue: String, Printable, SegueProtocol {
+    enum Segue: String, CustomStringConvertible, SegueProtocol {
         case Close = "Close"
 
         var kind: SegueKind? {
@@ -936,7 +936,7 @@ extension UIStoryboardSegue {
 
 extension AddCommunityViewController { 
 
-    enum Segue: String, Printable, SegueProtocol {
+    enum Segue: String, CustomStringConvertible, SegueProtocol {
         case Close = "Close"
 
         var kind: SegueKind? {
@@ -975,7 +975,7 @@ extension UIStoryboardSegue {
 
 extension EditCommunityViewController { 
 
-    enum Segue: String, Printable, SegueProtocol {
+    enum Segue: String, CustomStringConvertible, SegueProtocol {
         case Close = "Close"
 
         var kind: SegueKind? {
@@ -1014,7 +1014,7 @@ extension UIStoryboardSegue {
 
 extension EditProfileViewController { 
 
-    enum Segue: String, Printable, SegueProtocol {
+    enum Segue: String, CustomStringConvertible, SegueProtocol {
         case Close = "Close"
 
         var kind: SegueKind? {
@@ -1053,7 +1053,7 @@ extension UIStoryboardSegue {
 
 extension AddPromotionViewController { 
 
-    enum Segue: String, Printable, SegueProtocol {
+    enum Segue: String, CustomStringConvertible, SegueProtocol {
         case Close = "Close"
 
         var kind: SegueKind? {
@@ -1092,7 +1092,7 @@ extension UIStoryboardSegue {
 
 extension AddEventViewController { 
 
-    enum Segue: String, Printable, SegueProtocol {
+    enum Segue: String, CustomStringConvertible, SegueProtocol {
         case Close = "Close"
 
         var kind: SegueKind? {

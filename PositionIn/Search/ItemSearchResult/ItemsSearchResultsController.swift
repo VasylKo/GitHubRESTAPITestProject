@@ -40,8 +40,8 @@ class ItemsSearchResultsController: NSObject {
     func reloadSearch() {
         dataRequestToken.invalidate()
         dataRequestToken = InvalidationToken()
-        let searchString = map(searchBar?.text) { $0.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet()) }
-        if let searchString = searchString where count(searchString) > 0 {
+        let searchString = Optional(searchBar?.text).map { $0.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet()) }
+        if let searchString = searchString where searchString.characters.count > 0 {
             
             Log.info?.message("Search string: \(searchString)")
             var f = filter
@@ -192,7 +192,7 @@ extension ItemsSearchResultsController: UITextFieldDelegate {
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
-        if (count(textField.text) > 0) {
+        if textField.text.characters.count > 0 {
             self.delegate?.didSearchString()
         }
         return true

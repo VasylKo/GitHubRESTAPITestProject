@@ -50,8 +50,8 @@ final class LocationSearchResultsController: NSObject {
             self?.locationsTable?.reloadData()
             self?.locationsTable?.scrollEnabled = self?.locationsTable?.frame.size.height < self?.locationsTable?.contentSize.height
         }
-        let searchString = map(searchBar?.text) { $0.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet()) }
-        if let searchString = searchString where count(searchString) > 0 {
+        let searchString = Optional(searchBar?.text).map { $0.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet()) }
+        if let searchString = searchString where searchString.characters.count > 0 {
             Log.info?.message("Geocoding location: \(searchString)")
             locationController().geocodeString(searchString).onSuccess(
                 token: dataRequestToken,

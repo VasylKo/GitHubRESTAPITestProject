@@ -12,7 +12,7 @@ import CoreLocation
 
 let LocationObjectInvalidId: CRUDObjectId = "LocationObjectInvalidId"
 
-struct Location: Mappable, Printable {
+struct Location: Mappable, CustomStringConvertible {
     var objectId: CRUDObjectId = CRUDObjectInvalidId
     var coordinates: CLLocationCoordinate2D!
     var street1: String?

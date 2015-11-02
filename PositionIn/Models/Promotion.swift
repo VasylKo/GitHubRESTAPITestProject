@@ -84,15 +84,15 @@ struct Promotion: CRUDObject {
     }
     
     static func endpoint(promotionId: CRUDObjectId) -> String {
-        return Promotion.endpoint().stringByAppendingPathComponent("\(promotionId)")
+        return (Promotion.endpoint() as NSString).stringByAppendingPathComponent("\(promotionId)")
     }
     
     static func userPromotionsEndpoint(userId: CRUDObjectId) -> String {
-        return UserProfile.userEndpoint(userId).stringByAppendingPathComponent("promotions")
+        return (UserProfile.userEndpoint(userId) as NSString).stringByAppendingPathComponent("promotions")
     }
     
     static func communityPromotionsEndpoint(communityId: CRUDObjectId) -> String {
-        return Community.endpoint().stringByAppendingPathComponent("\(communityId)/promotions")
+        return (Community.endpoint() as NSString).stringByAppendingPathComponent("\(communityId)/promotions")
     }
     
     var description: String {

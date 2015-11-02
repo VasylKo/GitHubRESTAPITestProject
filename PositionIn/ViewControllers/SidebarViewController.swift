@@ -99,7 +99,7 @@ class SidebarViewController: KYDrawerController {
             return
         }
         
-        if let (segue, sender: AnyObject?) = action.nextSegue() {
+        if let (segue, sender): (SidebarViewController.Segue, AnyObject?) = action.nextSegue() {
             performSegue(segue, sender: sender)
         }
         

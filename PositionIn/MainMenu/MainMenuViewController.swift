@@ -69,7 +69,7 @@ final class MainMenuViewController: UIViewController {
             if  let menuController = self,
                 let browseController = notification.object as? BrowseViewController,
                 let action = menuController.actionForMode(browseController.browseMode) {
-                    for (idx, item) in enumerate(menuController.dataSource.items) {
+                    for (idx, item) in menuController.dataSource.items.enumerate() {
                         if item.action == action {
                             let indexPath = NSIndexPath(forRow: idx, inSection: 0)
                             menuController.tableView.selectRowAtIndexPath(indexPath, animated: true, scrollPosition: .Top)

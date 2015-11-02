@@ -21,7 +21,7 @@ protocol BrowseCommunityActionProvider {
 
 final class BrowseCommunityViewController: BesideMenuViewController {
         
-    enum Action: Int, Printable {
+    enum Action: Int, CustomStringConvertible {
         case None
         case Browse
         case Join

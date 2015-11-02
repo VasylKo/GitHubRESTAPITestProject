@@ -447,7 +447,7 @@ struct APIService {
     private func url(endpoint: String, scheme: String, port: Int? = nil) -> NSURL {
         if let components = NSURLComponents(URL: baseURL, resolvingAgainstBaseURL: false) {
             components.scheme = scheme
-            components.path = (components.path ?? "").stringByAppendingPathComponent(endpoint)
+            components.path = ((components.path ?? "") as NSString).stringByAppendingPathComponent(endpoint)
             if let port = port {
                 components.port = port
             }
@@ -460,7 +460,7 @@ struct APIService {
     
     
     private func readRequest(token: String, endpoint: String, params: [String : AnyObject]? = nil) -> CRUDRequest {
-        var request = CRUDRequest(token: token, url: https(endpoint))
+        let request = CRUDRequest(token: token, url: https(endpoint))
         request.params = params
         return request
     }

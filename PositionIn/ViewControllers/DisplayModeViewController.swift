@@ -33,7 +33,7 @@ protocol BrowseActionConsumer: class {
     
     //MARK: - Display mode -
     
-    enum DisplayMode: Int, Printable {
+    enum DisplayMode: Int, CustomStringConvertible {
         case Map = 0
         case List = 1
         

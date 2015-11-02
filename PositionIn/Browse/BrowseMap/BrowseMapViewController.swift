@@ -59,7 +59,7 @@ final class BrowseMapViewController: UIViewController, BrowseActionProducer, Bro
             }
         }
         markers.map { $0.map = nil }
-        markers = items.filter { contains(self.visibleItemTypes, $0.type) }.map {
+        markers = items.filter { self.visibleItemTypes.contains($0.type) }.map {
             item in
             let marker = GMSMarker()
             marker.position = item.location?.coordinates ?? kCLLocationCoordinate2DInvalid

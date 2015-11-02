@@ -16,7 +16,7 @@ public class TableView: UITableView {
         configure()
     }
     
-    public required init(coder aDecoder: NSCoder) {
+    public required init?(coder aDecoder: NSCoder) {
         state = .Loading
         super.init(coder: aDecoder)
         configure()

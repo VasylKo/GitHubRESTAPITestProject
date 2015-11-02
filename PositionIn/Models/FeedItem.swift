@@ -74,7 +74,7 @@ struct FeedItem: CRUDObject {
         return "<\(self.dynamicType):\(objectId)>"
     }
     
-    enum ItemType: Int, Printable {
+    enum ItemType: Int, CustomStringConvertible {
         case Unknown
         case Event
         case Promotion
