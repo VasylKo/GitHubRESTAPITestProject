@@ -69,12 +69,16 @@ public  extension NSDictionary {
     - returns: JSON string
     */
     public func jsonString() -> String {
-        if  NSJSONSerialization.isValidJSONObject(self),
-            let data = try? NSJSONSerialization.dataWithJSONObject(self, options: NSJSONWritingOptions()),
-            let string = NSString(data: data, encoding: NSUTF8StringEncoding) {
-                return string as String
+        let invalidJSON = ""
+        guard NSJSONSerialization.isValidJSONObject(self) == true else {
+            return invalidJSON
         }
-        return ""
+        do {
+            let data = try NSJSONSerialization.dataWithJSONObject(self, options: NSJSONWritingOptions())
+            return (NSString(data: data, encoding: NSUTF8StringEncoding) ?? invalidJSON) as String
+        } catch {
+            return invalidJSON
+        }
     }
     
 }
@@ -96,7 +100,7 @@ public extension UIView {
     public func addSubViewOnEntireSize(contentView: UIView) {
         addSubview(contentView)
         contentView.translatesAutoresizingMaskIntoConstraints = false
-        let views: [NSObject : AnyObject] = [ "contentView": contentView ]
+        let views = [ "contentView": contentView ]
         addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[contentView]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: views))
         addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[contentView]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: views))
         setNeedsLayout()        

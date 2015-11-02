@@ -82,7 +82,7 @@ public class TableViewSectionHeaderFooterView: UITableViewHeaderFooterView {
                 fatalError("undefined position")
             }
         }()
-        let metrics: [NSObject: AnyObject] = {
+        let metrics: [String: AnyObject] = {
            let edgeInsets = self.totalInsents()
             return [
                 "left": edgeInsets.left,
@@ -92,10 +92,10 @@ public class TableViewSectionHeaderFooterView: UITableViewHeaderFooterView {
                 "priorityNotRequired": (/*UILayoutPriorityRequired*/1000 - 1)
             ]
         }()
-        let views: [NSObject: AnyObject] = [ "contentLayoutGuideView" : contentLayoutGuideView ]
+        let views = [ "contentLayoutGuideView" : contentLayoutGuideView ]
 
-        let verticalConstraints = NSLayoutConstraint.constraintsWithVisualFormat(vfl, options: NSLayoutFormatOptions(rawValue: 0), metrics: metrics, views: views) as! [NSLayoutConstraint]
-        let horizontalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("H:|-left-[_contentLayoutGuideView]", options: NSLayoutFormatOptions(rawValue: 0), metrics: metrics, views: views) as! [NSLayoutConstraint]
+        let verticalConstraints = NSLayoutConstraint.constraintsWithVisualFormat(vfl, options: NSLayoutFormatOptions(rawValue: 0), metrics: metrics, views: views)
+        let horizontalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("H:|-left-[_contentLayoutGuideView]", options: NSLayoutFormatOptions(rawValue: 0), metrics: metrics, views: views) 
 
         contentView.addConstraints(verticalConstraints + horizontalConstraints)
         super.updateConstraints()

@@ -12,7 +12,7 @@ import Foundation
 public final class KVObserver<T>: NSObject {
     
     /// Observe closure - observer, old value, new value
-    typealias ObserverClosure = (KVObserver, T?, T?) -> Void
+    public typealias ObserverClosure = (KVObserver, T?, T?) -> Void
     
     private(set) public var subject: AnyObject?
     private(set) public var keyPath: String
@@ -27,11 +27,14 @@ public final class KVObserver<T>: NSObject {
     }
     
     public override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
-        if context == &KVObserverContext {
-            let oldValue = change[NSKeyValueChangeOldKey] as? T
-            let newValue = change[NSKeyValueChangeNewKey] as? T
-            block(self, oldValue, newValue)
+        guard context == &KVObserverContext else {
+            return
         } // NSObject does not implement observeValueForKeyPath
+        
+
+        let oldValue = change?[NSKeyValueChangeOldKey] as? T
+        let newValue = change?[NSKeyValueChangeNewKey] as? T
+        block(self, oldValue, newValue)
     }
     
     func stopObservation() {

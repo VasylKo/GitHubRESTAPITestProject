@@ -128,10 +128,11 @@ public final class LocationProvider: NSObject {
 extension LocationProvider: CLLocationManagerDelegate {
     
     public func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if let location = locations.last  as? CLLocation {
-            coord = location.coordinate
-            self.postNotification(LocationProvider.DidUpdateCoordinateNotification)
+        guard let location = locations.last else {
+            return
         }
+        coord = location.coordinate
+        self.postNotification(LocationProvider.DidUpdateCoordinateNotification)
     }
     
     

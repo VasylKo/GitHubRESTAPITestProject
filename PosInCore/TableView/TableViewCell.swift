@@ -27,7 +27,7 @@ public class TableViewCell: UITableViewCell {
     func configure() {
         // this prevents the temporary unsatisfiable constraint state that the cell's contentView could
         // enter since it starts off 44pts tall
-        self.contentView.autoresizingMask |= .FlexibleHeight;
+        self.contentView.autoresizingMask.insert(.FlexibleHeight)
     }
     
     public func setModel(model: TableViewCellModel) {

@@ -10,7 +10,6 @@ import Foundation
 import Alamofire
 import ObjectMapper
 import BrightFutures
-import Box
 import MobileCoreServices
 
 public class NetworkDataProvider: NSObject {
@@ -106,7 +105,7 @@ public class NetworkDataProvider: NSObject {
     
     - returns: Tuple with request and future
     */
-    private func request<V,Serializer: Alamofire.ResponseSerializer where Serializer.SerializedObject == Box<V>>(
+    private func request<V, Serializer: Alamofire.ResponseSerializerType where Serializer.SerializedObject == V, Serializer.ErrorObject == NSError> (
         URLRequest: Alamofire.URLRequestConvertible,
         serializer: Serializer,
         validation: Alamofire.Request.Validation?
@@ -116,29 +115,24 @@ public class NetworkDataProvider: NSObject {
             activityIndicator.increment()
             let request =  self.request(URLRequest, validation: validation).response(
                 queue: Queue.global.underlyingQueue,
-                responseSerializer: serializer) {
-                    [unowned self] (request, response, object, error) in
+                responseSerializer: serializer) { [unowned self] response in
                     self.activityIndicator.decrement()
-                    if let object = object  {
-                        p.success(object.value)
-                    } else {
-                        let e: NSError = {
-                            //Hard convert expired session error
-                            if let statusCode = response?.statusCode where statusCode == 401 {
-                                return ErrorCodes.InvalidSessionError.error(underlyingError: error)
-                            }
-                            return error ?? ErrorCodes.InvalidResponseError.error()
-                        }()
-                        p.failure(e)
+                    switch response.result {
+                    case .Success(let value):
+                        p.success(value)
+                    case .Failure(let error):
+                        p.failure(error)
                     }
+                    
             }
+            
         return (request, p.future)
     }
     
     private func request(URLRequest: Alamofire.URLRequestConvertible, validation: Alamofire.Request.Validation?) -> Alamofire.Request {
         let request = manager.request(URLRequest)
 //        #if DEBUG
-        println("Request:\n\(request.debugDescription)")
+        print("Request:\n\(request.debugDescription)")
 //        #endif
         if let validation = validation {
             return request.validate(validation)
@@ -152,25 +146,30 @@ public class NetworkDataProvider: NSObject {
 private extension Alamofire.Request {
     
     //MARK: - Custom serializer -
-    class func CustomResponseSerializer<T>(mapping:AnyObject? -> T?) -> GenericResponseSerializer<Box<T>> {
-        return GenericResponseSerializer { request, response, data in
-            let JSONSerializer = Request.JSONResponseSerializer(options: .AllowFragments)
-            let (json: AnyObject,?, serializationError) = JSONSerializer.serializeResponse(request, response, data)
-            switch (response, json, serializationError) {
-            case (.None, _, _):
-                return (nil, NetworkDataProvider.ErrorCodes.TransferError.error())
-            case (_, _, .Some(let error)):
-                return (nil, NetworkDataProvider.ErrorCodes.ParsingError.error(underlyingError: error))
-            default:
-                if let object  = mapping(json) {
-                    return (Box(object), nil)
-                } else if
-                    let jsonDict = json as? [String: AnyObject],
-                    let msg = jsonDict["error"] as? String {
-                    return (nil, NetworkDataProvider.ErrorCodes.TransferError.error(localizedDescription: msg))                        
+    private static func CustomResponseSerializer<T>(mapping: AnyObject? -> T?) -> ResponseSerializer<T, NSError> {
+        return ResponseSerializer { request, response, data, error in
+            guard error == nil else { return .Failure(error!) }
+            if let statusCode = response?.statusCode where statusCode == 401 {
+                return .Failure(NetworkDataProvider.ErrorCodes.InvalidSessionError.error())
+            }
+            
+            let JSONResponseSerializer = Request.JSONResponseSerializer(options: .AllowFragments)
+            let result = JSONResponseSerializer.serializeResponse(request, response, data, error)
+            
+            switch result {
+            case .Success(let json):
+                guard let object = mapping(json) else {
+                    if  let jsonDict = json as? [String: AnyObject],
+                        let msg = jsonDict["error"] as? String {
+                            return .Failure(NetworkDataProvider.ErrorCodes.TransferError.error(localizedDescription: msg))
+                    }
+                    return .Failure(NetworkDataProvider.ErrorCodes.InvalidResponseError.error())
                 }
-                return (nil, NetworkDataProvider.ErrorCodes.InvalidResponseError.error())
-            } // switch
+                return .Success(object)
+            case .Failure(let error):
+                return .Failure(NetworkDataProvider.ErrorCodes.ParsingError.error(error))
+            }
+            
         }
     }
     
@@ -285,6 +284,7 @@ extension NetworkDataProvider {
         files: [FileUpload]
         ) -> (Future<AnyObject?, NSError>) {
             let p = Promise<AnyObject?, NSError>()
+            
             manager.upload(URLRequest,
                 multipartFormData: { multipartFormData in
                     for fileInfo in files {
@@ -298,19 +298,18 @@ extension NetworkDataProvider {
                 },
                 encodingCompletion:{ encodingResult in
                     switch encodingResult {
-                        //Success(request: Request, streamingFromDisk: Bool, streamFileURL: NSURL?)
-                    case .Success(let upload, let streamingFromDisk, let streamFileURL):
-                        println("Request:\n\(upload.debugDescription)")
-                        
-                        upload.validate(statusCode: [201]).responseJSON { request, response, JSON, uploadError in
-                            if let error = uploadError {
-                                p.failure(error)
-                            } else {
+                    case .Success(let upload, _, _):
+                        print("Request:\n\(upload.debugDescription)")
+                        upload.validate(statusCode: [201]).responseJSON { response in
+                            switch response.result {
+                            case .Success(let JSON):
                                 p.success(JSON)
+                            case .Failure(let error):
+                                p.failure(error)
                             }
                         }
                     case .Failure(let encodingError):
-                        p.failure(encodingError)
+                        p.failure(encodingError as NSError)
                     }
             })
             return p.future
@@ -318,10 +317,8 @@ extension NetworkDataProvider {
 }
 
 private func copyTag(tag: CFString!, fromUTI dataUTI: String, defaultValue: String) -> String {
-    let str = UTTypeCopyPreferredTagWithClass(dataUTI, tag)
-    if (str == nil) {
+    guard let str = UTTypeCopyPreferredTagWithClass(dataUTI, tag) else {
         return defaultValue
-    } else {
-        return str.takeUnretainedValue() as String
     }
+    return str.takeRetainedValue() as String
 }
