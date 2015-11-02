@@ -9,7 +9,7 @@
 import PosInCore
 import CleanroomLogger
 
-final class CommunityViewController: BrowseModeTabbarViewController, SearchViewControllerDelegate {
+final class CommunityViewController: BrowseModeTabbarViewController {
     
     var objectId: CRUDObjectId =  CRUDObjectInvalidId
     
@@ -33,7 +33,7 @@ final class CommunityViewController: BrowseModeTabbarViewController, SearchViewC
             AddMenuView.MenuItem.eventItemWithAction { pushAndSubscribe(Storyboards.NewItems.instantiateAddEventViewController()) },
             AddMenuView.MenuItem.promotionItemWithAction { pushAndSubscribe(Storyboards.NewItems.instantiateAddPromotionViewController()) },
             AddMenuView.MenuItem.postItemWithAction { pushAndSubscribe(Storyboards.NewItems.instantiateAddPostViewController()) },
-            AddMenuView.MenuItem.inviteItemWithAction { [weak self] in
+            AddMenuView.MenuItem.inviteItemWithAction {
                 Log.error?.message("Should call invite")
             },
         ]

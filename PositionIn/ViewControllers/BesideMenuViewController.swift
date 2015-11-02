@@ -26,10 +26,10 @@ class BesideMenuViewController: UIViewController {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        if  let rootController = navigationController?.viewControllers.first as? UIViewController
-            where rootController == self {
-                drawerButtonVisible = true
+        guard let rootController = navigationController?.viewControllers.first where rootController == self else {
+            return
         }
+        drawerButtonVisible = true
     }
     
     var drawerButtonVisible: Bool = false {

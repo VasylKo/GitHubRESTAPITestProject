@@ -145,7 +145,7 @@ struct Storyboards {
         }
 
         static func instantiateSplashViewController() -> UIViewController {
-            return self.storyboard.instantiateViewControllerWithIdentifier("SplashViewController") as! UIViewController
+            return self.storyboard.instantiateViewControllerWithIdentifier("SplashViewController") 
         }
 
         static func instantiateWalletViewController() -> WalletViewController {

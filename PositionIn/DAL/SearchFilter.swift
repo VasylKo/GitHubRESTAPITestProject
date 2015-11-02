@@ -57,7 +57,7 @@ struct SearchFilter: Mappable {
     static func updateCurrentLocation() {
         currentLocationToken.invalidate()
         currentLocationToken = InvalidationToken()
-        locationController().getCurrentCoordinate().onSuccess(token: currentLocationToken) { coordinate in
+        locationController().getCurrentCoordinate().onSuccess(currentLocationToken.validContext) { coordinate in
             var filter = SearchFilter.currentFilter
             filter.coordinates = coordinate
             SearchFilter.currentFilter = filter
@@ -183,7 +183,7 @@ extension SearchFilter: APIServiceQueryConvertible {
         var filter = self
         filter.locationName = nil
         filter.radius = filter.radius.map { locationController().localeUsesMetricSystem() ? $0 : $0 * 1.60934}
-        var params = Mapper<SearchFilter>().toJSON(filter)
+        let params = Mapper<SearchFilter>().toJSON(filter)
         return params
     }
 }

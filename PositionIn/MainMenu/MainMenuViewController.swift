@@ -65,6 +65,7 @@ final class MainMenuViewController: UIViewController {
     }
     
     private func subscribeToNotifications(){
+        //Browse mode did change
         let browseModeBlock: NSNotification! -> Void = { [weak self] notification in
             if  let menuController = self,
                 let browseController = notification.object as? BrowseViewController,
@@ -86,6 +87,7 @@ final class MainMenuViewController: UIViewController {
             usingBlock: browseModeBlock
         )
         
+        //User did change
         let userChangeBlock: NSNotification! -> Void = { [weak self] notification in
             let newProfile = notification.object as? UserProfile
             dispatch_async(dispatch_get_main_queue()) {
@@ -102,15 +104,15 @@ final class MainMenuViewController: UIViewController {
             queue: nil,
             usingBlock: userChangeBlock)
         
+        
+        //Conversations did change
         let conversationChangeBlock: NSNotification! -> Void = { [weak self] notification in
-            let newProfile = notification.object as? UserProfile
             dispatch_async(dispatch_get_main_queue()) {
                 if let menuController = self {
                     menuController.tableView.reloadData()
                 }
             }
         }
-        
         conversationDidChangeObserver = NSNotificationCenter.defaultCenter().addObserverForName(
             ConversationManager.ConversationsDidChangeNotification,
             object: nil,

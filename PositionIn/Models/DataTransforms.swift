@@ -29,7 +29,7 @@ final class CRUDObjectIdTransform: TransformType {
     }
 }
 
-final class APIDateTransform: DateFormaterTransform {
+final class APIDateTransform: DateFormatterTransform {
     
     init() {
         let formatter = NSDateFormatter()

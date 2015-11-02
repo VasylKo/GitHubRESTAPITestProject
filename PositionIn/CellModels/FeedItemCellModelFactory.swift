@@ -20,7 +20,7 @@ struct FeedItemCellModelFactory {
                     objectID: feedItem.objectId,
                     title: feedItem.name,
                     details: feedItem.text,
-                    info: map(feedItem.date) {dateFormatter.stringFromDate($0)},
+                    info: feedItem.date.map {dateFormatter.stringFromDate($0)},
                     imageURL: feedItem.image,
                     data: feedItem.itemData
                 ),
@@ -46,8 +46,8 @@ struct FeedItemCellModelFactory {
                     itemType: feedItem.type,
                     objectID: feedItem.objectId,
                     title: feedItem.name,
-                    details: map(feedItem.category) { $0.displayString() },
-                    info: map(feedItem.details) { String(format: discountFormat, $0 )},
+                    details: feedItem.category.map { $0.displayString() },
+                    info: feedItem.details.map { String(format: discountFormat, $0 )},
                     imageURL: feedItem.image,
                     data: feedItem.itemData
                 ),
@@ -59,9 +59,9 @@ struct FeedItemCellModelFactory {
                     objectID: feedItem.objectId,
                     title: feedItem.name,
                     details: feedItem.author?.title,
-                    info: map(feedItem.date) {dateFormatter.stringFromDate($0)},
+                    info: feedItem.date.map {dateFormatter.stringFromDate($0)},
                     imageURL: feedItem.image,
-                    badge: map(feedItem.price) {
+                    badge: feedItem.price.map {
                         let newValue = $0 as Float
                         return currencyFormatter.stringFromNumber(NSNumber(float: newValue)) ?? ""},
                     data: feedItem.itemData
@@ -123,7 +123,7 @@ struct FeedItemCellModelFactory {
                 details: feedItem.details,
                 info: feedItem.text,
                 imageURL: feedItem.image,
-                badge: map(feedItem.price) {
+                badge: feedItem.price.map {
                     let newValue = $0 as Float
                     return currencyFormatter.stringFromNumber(NSNumber(float: newValue)) ?? ""},
                 data: feedItem.itemData

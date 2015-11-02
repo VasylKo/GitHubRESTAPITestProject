@@ -108,7 +108,7 @@ final class BrowseCommunityViewController: BesideMenuViewController {
         case .Explore:
             communitiesRequest = api().getCommunities(APIService.Page())
         }
-        communitiesRequest.onSuccess(token: dataRequestToken) { [weak self] response in
+        communitiesRequest.onSuccess(dataRequestToken.validContext) { [weak self] response in
             if let communities = response.items {
                 Log.debug?.value(communities)
                 self?.dataSource.setCommunities(communities, mode: browseMode)

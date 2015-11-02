@@ -64,7 +64,7 @@ final class ProductDetailsViewController: UIViewController {
         if let coordinates = product.location?.coordinates {
             locationRequestToken.invalidate()
             locationRequestToken = InvalidationToken()
-            locationController().distanceFromCoordinate(coordinates).onSuccess(token: locationRequestToken) {
+            locationController().distanceFromCoordinate(coordinates).onSuccess(locationRequestToken.validContext) {
                 [weak self] distance in
                 let formatter = NSLengthFormatter()
                 self?.infoLabel.text = formatter.stringFromMeters(distance)

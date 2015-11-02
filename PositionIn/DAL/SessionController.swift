@@ -21,38 +21,37 @@ struct SessionController {
     
     func currentUserId() -> Future<CRUDObjectId, NSError> {
         return future { () -> Result<CRUDObjectId, NSError> in
-            if let userId = self.userIdValue {
-                return Result(value: userId)
-            } else {
+            guard let userId = self.userIdValue else {
                 Log.warning?.trace()
                 let errorCode = NetworkDataProvider.ErrorCodes.InvalidSessionError
                 return Result(error: errorCode.error())
             }
+            return Result(value: userId)
         }
     }
     
     func currentRefreshToken() -> Future<AuthResponse.Token, NSError> {
         return future { () -> Result<AuthResponse.Token, NSError> in
-            if let refreshToken = self.refreshToken {
-                return Result(value: refreshToken)
-            } else {
+            guard let refreshToken = self.refreshToken else {
                 Log.warning?.trace()
                 let errorCode = NetworkDataProvider.ErrorCodes.InvalidSessionError
                 return Result(error: errorCode.error())
             }
+            return Result(value: refreshToken)
         }
     }
     
     func session() -> Future<AuthResponse.Token, NSError> {
         return future { () -> Result<AuthResponse.Token, NSError> in
-            if  let token = self.accessToken,
-                let expirationDate = self.expiresIn
-                 {
-                    return Result(value: token)
+            //TODO: check expiration date
+            guard let token = self.accessToken,
+                let expirationDate = self.expiresIn else {
+                    Log.warning?.trace()
+                    let errorCode = NetworkDataProvider.ErrorCodes.InvalidSessionError
+                    return Result(error: errorCode.error())
             }
-            Log.warning?.trace()
-            let errorCode = NetworkDataProvider.ErrorCodes.InvalidSessionError
-            return Result(error: errorCode.error())
+
+            return Result(value: token)
         }
     }
     

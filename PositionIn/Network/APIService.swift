@@ -259,7 +259,7 @@ struct APIService {
             }
         }
         return getMySubscriptions().map { (response: CollectionResponse<UserInfo>) -> UserProfile.SubscriptionState in
-            if count( response.items.filter { $0.objectId == userId } ) > 0 {
+            if (response.items.filter { $0.objectId == userId }).count > 0 {
                 return .Following
             } else {
                 return .NotFollowing
@@ -466,7 +466,7 @@ struct APIService {
     }
 
     private func updateRequest(token: String, endpoint: String, method: Alamofire.Method = .POST, params: [String : AnyObject]? = nil) -> CRUDRequest {
-        var request = CRUDRequest(token: token, url: https(endpoint))
+        let request = CRUDRequest(token: token, url: https(endpoint))
         request.encoding = .JSON
         request.method = method
         request.params = params
@@ -483,7 +483,7 @@ extension APIService {
         let token: String
         let url: NSURL
         
-        var additionalHeaders: [String : AnyObject]?
+        var additionalHeaders: [String : String]?
         var method: Alamofire.Method = .GET
         var params: [String : AnyObject]?
         var encoding: Alamofire.ParameterEncoding = .URL
@@ -493,11 +493,10 @@ extension APIService {
             self.url = url
         }
         
-        
-        var URLRequest: NSURLRequest {
+        var URLRequest: NSMutableURLRequest {
             let r = NSMutableURLRequest(URL: url)
             r.HTTPMethod = method.rawValue
-            var headers: [String : AnyObject] = [
+            var headers = [
                 "Authorization": "Bearer \(token)",
                 "Accept" : "application/json",
             ]

@@ -33,7 +33,6 @@ class LocationSearchResultDataSource: TableViewDataSource, LocationSearchResultS
     }
     
     @objc override func tableView(tableView: UITableView, reuseIdentifierForIndexPath indexPath: NSIndexPath) -> String {
-        let model = self.tableView(tableView, modelForIndexPath: indexPath)
         return LocationCell.reuseId()
     }
     

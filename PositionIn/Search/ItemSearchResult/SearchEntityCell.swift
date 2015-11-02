@@ -23,9 +23,9 @@ class SearchEntityCell: TableViewCell {
         if let searchString = m!.searchString {
             let range: NSRange = (m!.title!.lowercaseString as NSString).rangeOfString(searchString)
             if (range.length > 0) {
-                var attrString = NSMutableAttributedString(string: m!.title!)
+                let attrString = NSMutableAttributedString(string: m!.title!)
                 let attributes = [NSFontAttributeName:UIFont.boldSystemFontOfSize(15)]
-                var range: NSRange = (m!.title!.lowercaseString as NSString).rangeOfString(searchString)
+                let range: NSRange = (m!.title!.lowercaseString as NSString).rangeOfString(searchString)
                 
                 attrString.addAttributes(attributes, range: range)
                 titleLabel?.attributedText = attrString

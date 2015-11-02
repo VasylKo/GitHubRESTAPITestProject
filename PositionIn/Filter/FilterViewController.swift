@@ -34,7 +34,7 @@ final class FilterViewController: XLFormViewController {
         self.initializeForm()
     }
     
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.initializeForm()
     }
@@ -141,8 +141,7 @@ final class FilterViewController: XLFormViewController {
         let categoriesSection = XLFormSectionDescriptor.formSectionWithTitle(NSLocalizedString("Categories", comment: "Update filter: categories caption"))
         categoriesSection.multivaluedTag = Tags.Categories.rawValue
         form.addFormSection(categoriesSection)
-        let categories = ItemCategory.all()
-        categories.map { (category: ItemCategory) -> () in
+        for category in ItemCategory.all() {
             let categoryRow = XLFormRowDescriptor(tag: category.displayString(), rowType: XLFormRowDescriptorTypeBooleanSwitch, title: category.displayString())
             categoryRow.cellConfigAtConfigure["imageView.image"] = category.image()
             let value = categoryValue(category)
@@ -168,8 +167,8 @@ final class FilterViewController: XLFormViewController {
         var filter = SearchFilter.currentFilter
         
         filter.categories = categoriesValue(values[Tags.Categories.rawValue])
-        filter.endPrice = map(values[Tags.EndPrice.rawValue] as?  SearchFilter.Money) { round($0) }
-        filter.distance = flatMap(values[Tags.Radius.rawValue] as? XLFormOptionsObject) { $0.searchDistance }
+        filter.endPrice = (values[Tags.EndPrice.rawValue] as?  SearchFilter.Money).map { round($0) }
+        filter.distance = (values[Tags.Radius.rawValue] as? XLFormOptionsObject).flatMap { $0.searchDistance }
         SearchFilter.currentFilter = filter
         didTapCancel(sender)
     }

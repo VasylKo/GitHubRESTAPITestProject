@@ -27,7 +27,7 @@ final class PostViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         dataSource.configureTable(tableView)
         self.enterCommentField.delegate = self;
-        self.getPost()
+        self.reloadPost()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -40,15 +40,14 @@ final class PostViewController: UIViewController, UITextFieldDelegate {
         self.unsubscribeFromKeyboardNotification()
     }
     
-    private func getPost(completion: () -> Void = {}) {
+    //TODO: remove this call
+    private func reloadPost() {
         if let objectId = objectId {
             api().getPost(objectId).onSuccess { [weak self] post in
                 self?.post = post
                 self?.dataSource.setPost(post)
                 self?.tableView.reloadData()
                 self?.tableView.layoutIfNeeded();
-                
-                completion()
             }
         }
     }
@@ -99,25 +98,22 @@ final class PostViewController: UIViewController, UITextFieldDelegate {
     var objectId: CRUDObjectId?
 }
 
-extension PostViewController: UITextFieldDelegate {
+extension PostViewController {
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         textField.resignFirstResponder()
-        
-        if (textField.text.characters.count > 0) {
-            var comment = Comment()
-            comment.text = textField.text
-            if let tempPost = post {
-                
-                api().createPostComment(tempPost.objectId, object: comment).onSuccess {[weak self] comment in
-                    self?.getPost(completion: {
-                        
-                        //TODO: need scroll to bottom if tableView
-                        
-                    })
-                    textField.text = nil
-                }
-            }
+        guard let text = textField.text where text.characters.count > 0, let post = post else  {
+            return true
         }
+
+        var comment = Comment()
+        comment.text = text
+                
+        api().createPostComment(post.objectId, object: comment).onSuccess {[weak self, weak textField] comment in
+            self?.reloadPost()
+            textField?.text = nil
+        }
+
+
         
         return true;
     }
@@ -134,12 +130,12 @@ extension PostViewController: PostActionConsumer {
         if let tempPost = post {
             if (tempPost.isLiked) {
                 api().unlikePost(tempPost.objectId).onSuccess{[weak self] in
-                    self?.getPost()
+                    self?.reloadPost()
                 }
             }
             else {
                 api().likePost(tempPost.objectId).onSuccess{[weak self] in
-                    self?.getPost()
+                    self?.reloadPost()
                 }
             }
         }

@@ -103,7 +103,7 @@ final class ChatController: NSObject {
     func executePendingQuery() {
         var userIds: [CRUDObjectId] = []
         synced(self) {
-            userIds = filter(self.query) { self.occupants.contains($0) == false }
+            userIds = self.query.filter { self.occupants.contains($0) == false }
             self.occupants.unionInPlace(self.query)
             self.query =  Set()
         }
@@ -163,7 +163,7 @@ final class ChatController: NSObject {
     }
     
     private func loadConversationHistory(conversation: Conversation) {
-        messages = map(ConversationManager.sharedInstance().getHistory(conversation)) { m in
+        messages = ConversationManager.sharedInstance().getHistory(conversation).map { m in
                 return JSQMessage(senderId: m.from, senderDisplayName: self.displayNameForUser(m.from), date: m.date, text: m.text)
         }
     }

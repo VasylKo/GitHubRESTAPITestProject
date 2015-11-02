@@ -79,7 +79,7 @@ class BaseAddItemViewController: XLFormViewController {
         categoryRow.value = options.first
         categoryRow.selectorOptions = options
         categoryRow.onChangeBlock = {[unowned categoryRow]   oldValue, newValue, descriptor in
-            if let newValue = newValue as? NSNull {
+            if let _ = newValue as? NSNull {
                 categoryRow.value = oldValue
             }
         }
@@ -203,7 +203,7 @@ class BaseAddItemViewController: XLFormViewController {
     func didTouchPhoto(sender: XLFormRowDescriptor) {
         currentImageRowDescriptor = sender
         
-        let controller = ImagePickerSheetController()
+        let controller = ImagePickerSheetController(mediaType: .Image)
         controller.maximumSelection = maximumSelectedImages
         controller.addAction(ImageAction(
             title: NSLocalizedString("Take Photo", comment: "Take Photo"),

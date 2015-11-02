@@ -19,7 +19,7 @@ final class BrowseTabbar: UITabBar {
     var selectedMode: BrowseModeTabbarViewController.BrowseMode {
         get {
             if let selectedItem = selectedItem,
-               let items = items as? [UITabBarItem],
+               let items = items,
                let index = items.indexOf(selectedItem),
                let mode = BrowseModeTabbarViewController.BrowseMode(rawValue: index) {
                     return mode
@@ -28,7 +28,7 @@ final class BrowseTabbar: UITabBar {
         }
         set {
             let index = newValue.rawValue        
-            if let items = items as? [UITabBarItem] where items.indices ~= index {
+            if let items = items  where items.indices ~= index {
                     selectedItem = items[index]
             }
         }
