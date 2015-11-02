@@ -6,6 +6,7 @@ PODS:
   - Bolts/AppLinks (1.4.0):
     - Bolts/Tasks
   - Bolts/Tasks (1.4.0)
+  - Box (2.0)
   - Braintree (3.9.3):
     - Braintree/API (= 3.9.3)
     - Braintree/Coinbase (= 3.9.3)
@@ -69,6 +70,7 @@ PODS:
   - XLForm (3.0.2)
 
 DEPENDENCIES:
+  - Box (~> 2.0)
   - Braintree (~> 3.9)
   - FBSDKCoreKit (~> 4.7)
   - FBSDKLoginKit (~> 4.7)
@@ -91,6 +93,7 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   Alamofire: 9b0a7188b961a03914a99304488bd226b0e46c0e
   Bolts: 0e9bce58b9b9f5e8a7a4d47b16d2fabec289072b
+  Box: 70713ca3679e4e11ad4c470e9b58265f506fc659
   Braintree: 996027dcc8633569f2405bc57dca11f367050c60
   BrightFutures: 4a3f46747e5633562bdcef55c9e291bfb7288c34
   FBSDKCoreKit: eb580bfc2040ad44f4c0b4f4d0befb1d35bce59c

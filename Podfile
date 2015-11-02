@@ -20,6 +20,7 @@ target 'PositionIn' do
     pod 'Braintree', '~> 3.9'
     pod 'FBSDKCoreKit', '~> 4.7'
     pod 'FBSDKLoginKit', '~> 4.7'
+    pod 'Box', '~> 2.0'
 end
 
 target 'PositionInTests' do

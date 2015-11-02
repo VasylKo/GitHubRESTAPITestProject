@@ -58,9 +58,10 @@ final class BrowseMapViewController: UIViewController, BrowseActionProducer, Bro
                 return nil
             }
         }
-        markers.map { $0.map = nil }
-        markers = items.filter { self.visibleItemTypes.contains($0.type) }.map {
-            item in
+        for m in markers {
+            m.map = nil
+        }
+        markers = items.filter { self.visibleItemTypes.contains($0.type) }.map { item in
             let marker = GMSMarker()
             marker.position = item.location?.coordinates ?? kCLLocationCoordinate2DInvalid
             marker.map = self.mapView
@@ -97,7 +98,7 @@ extension BrowseMapViewController: GMSMapViewDelegate {
                 if let strongSelf = self
                    where isSameCoordinates(
                     //TODO: set valid epsilon
-                    strongSelf.mapView.camera.target, position.target, epsilon: 0.3) {
+                    strongSelf.mapView.camera.target, coord2: position.target, epsilon: 0.3) {
                         strongSelf.displayFeedItems(response.items)
                 } else {
                     Log.debug?.message("Skip map response :\(response.items)")
@@ -108,12 +109,11 @@ extension BrowseMapViewController: GMSMapViewDelegate {
     }
     
     func mapView(mapView: GMSMapView!, didTapMarker marker: GMSMarker!) -> Bool {
-        if let box = marker.userData  as? Box<FeedItem> {
-            let feedItem = box.value
-            actionConsumer?.browseController(self, didSelectItem: feedItem.objectId, type: feedItem.type, data:feedItem.itemData)
-            
+        guard let box = marker.userData as? Box<FeedItem> else {
+            return false
         }
-        
+        let feedItem = box.value
+        actionConsumer?.browseController(self, didSelectItem: feedItem.objectId, type: feedItem.type, data:feedItem.itemData)
         return true
     }
     
