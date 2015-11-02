@@ -9,7 +9,7 @@
 import Foundation
 
 
-class NetworkActivityIndicatorManager {
+class NetworkActivityIndicatorManager: NSObject {
     private var activityCount: Int
     private var activityIndicatorVisibilityTimer: NSTimer?
     
@@ -17,8 +17,9 @@ class NetworkActivityIndicatorManager {
         return activityCount > 0
     }
     
-    init() {
+    override init() {
         activityCount = 0
+        super.init()
     }
     
     func increment() {
