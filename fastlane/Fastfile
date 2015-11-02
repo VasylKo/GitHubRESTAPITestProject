@@ -31,7 +31,7 @@ platform :ios do
       use_ssh: false,         # Use SSH for downloading GitHub repositories.
       use_submodules: false,  # Add dependencies as Git submodules.
       use_binaries: true,     # Check out dependency repositories even when prebuilt frameworks exist
-      platform: "all"         # Define which platform to build for
+      platform: "iOS"         # Define which platform to build for
     )
 
     cocoapods
