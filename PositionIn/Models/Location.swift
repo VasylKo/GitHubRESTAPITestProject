@@ -10,6 +10,8 @@ import CleanroomLogger
 import ObjectMapper
 import CoreLocation
 
+let LocationObjectInvalidId: CRUDObjectId = "LocationObjectInvalidId"
+
 struct Location: Mappable, Printable {
     var objectId: CRUDObjectId = CRUDObjectInvalidId
     var coordinates: CLLocationCoordinate2D!
@@ -44,6 +46,18 @@ struct Location: Mappable, Printable {
             Log.verbose?.value(self)
             return nil
         }
+    }
+    
+    static var currentLocation: Location {
+        get {
+            var location = Location(objectId:LocationObjectInvalidId)
+            location.name = NSLocalizedString("Current Location", comment: "Current Location")
+            return location
+        }
+    }
+    
+    func isCurrentLocation() -> Bool {
+        return self.objectId == LocationObjectInvalidId
     }
     
     mutating func mapping(map: Map) {
