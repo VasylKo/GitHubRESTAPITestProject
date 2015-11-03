@@ -7,50 +7,50 @@ PODS:
     - Bolts/Tasks
   - Bolts/Tasks (1.4.0)
   - Box (2.0)
-  - Braintree (3.9.3):
-    - Braintree/API (= 3.9.3)
-    - Braintree/Coinbase (= 3.9.3)
-    - Braintree/Drop-In (= 3.9.3)
-    - Braintree/Payments (= 3.9.3)
-    - Braintree/PayPal (= 3.9.3)
-    - Braintree/UI (= 3.9.3)
-    - Braintree/Venmo (= 3.9.3)
-  - Braintree/API (3.9.3)
-  - Braintree/Coinbase (3.9.3):
+  - Braintree (3.9.6):
+    - Braintree/API (= 3.9.6)
+    - Braintree/Coinbase (= 3.9.6)
+    - Braintree/Drop-In (= 3.9.6)
+    - Braintree/Payments (= 3.9.6)
+    - Braintree/PayPal (= 3.9.6)
+    - Braintree/UI (= 3.9.6)
+    - Braintree/Venmo (= 3.9.6)
+  - Braintree/API (3.9.6)
+  - Braintree/Coinbase (3.9.6):
     - Braintree/API
-  - Braintree/Drop-In (3.9.3):
+  - Braintree/Drop-In (3.9.6):
     - Braintree/API
     - Braintree/Coinbase
     - Braintree/Payments
     - Braintree/PayPal
     - Braintree/UI
     - Braintree/Venmo
-  - Braintree/Payments (3.9.3):
+  - Braintree/Payments (3.9.6):
     - Braintree/API
     - Braintree/Coinbase
     - Braintree/PayPal
     - Braintree/Venmo
-  - Braintree/PayPal (3.9.3):
+  - Braintree/PayPal (3.9.6):
     - Braintree/API
     - Braintree/UI
-  - Braintree/UI (3.9.3):
+  - Braintree/UI (3.9.6):
     - Braintree/API
-  - Braintree/Venmo (3.9.3):
+  - Braintree/Venmo (3.9.6):
     - Braintree/API
   - BrightFutures (3.0.0):
     - Result (= 0.6.0-beta.4)
-  - FBSDKCoreKit (4.7.0):
+  - FBSDKCoreKit (4.7.1):
     - Bolts (~> 1.1)
-    - FBSDKCoreKit/arc (= 4.7.0)
-    - FBSDKCoreKit/no-arc (= 4.7.0)
-  - FBSDKCoreKit/arc (4.7.0):
+    - FBSDKCoreKit/arc (= 4.7.1)
+    - FBSDKCoreKit/no-arc (= 4.7.1)
+  - FBSDKCoreKit/arc (4.7.1):
     - Bolts (~> 1.1)
-  - FBSDKCoreKit/no-arc (4.7.0):
+  - FBSDKCoreKit/no-arc (4.7.1):
     - Bolts (~> 1.1)
     - FBSDKCoreKit/arc
-  - FBSDKLoginKit (4.7.0):
+  - FBSDKLoginKit (4.7.1):
     - FBSDKCoreKit
-  - GoogleMaps (1.10.3)
+  - GoogleMaps (1.10.5)
   - HanekeSwift (0.10.0)
   - HMSegmentedControl (1.5.2)
   - ImagePickerSheetController (0.9.1)
@@ -94,11 +94,11 @@ SPEC CHECKSUMS:
   Alamofire: 9b0a7188b961a03914a99304488bd226b0e46c0e
   Bolts: 0e9bce58b9b9f5e8a7a4d47b16d2fabec289072b
   Box: 70713ca3679e4e11ad4c470e9b58265f506fc659
-  Braintree: 996027dcc8633569f2405bc57dca11f367050c60
+  Braintree: 74f0bd85743c2227147c361cc2c5c9aefe083ae8
   BrightFutures: 4a3f46747e5633562bdcef55c9e291bfb7288c34
-  FBSDKCoreKit: eb580bfc2040ad44f4c0b4f4d0befb1d35bce59c
-  FBSDKLoginKit: 01bce8dd3f3a26a023b0ba4ffdde7ef5062889fe
-  GoogleMaps: 945e4ac3b74bcca3ddada51df256eb7beddb474d
+  FBSDKCoreKit: 9141b70960a37930850370495fe565f4a27ac141
+  FBSDKLoginKit: c11ed3c2833472db3bb4a4aecf27af4a6f69b173
+  GoogleMaps: da51c62c338c2d9c47cdad470a0d1e0e4b8544e4
   HanekeSwift: d6f5bdf9dbdbbc09d59623b2c1d533e46463dd4d
   HMSegmentedControl: 83b9686022d2176fb6457d2bdb61e5d6393fed7d
   ImagePickerSheetController: 3c58c9fee6dcf36485222358a021f6b734f997ba
