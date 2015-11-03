@@ -26,13 +26,16 @@ final class AppConfiguration {
             amazonURL = NSURL(string: "https://pos-dev.s3.amazonaws.com/")!
             xmppHostname = "app-dev.positionin.com"
         }
-
+        
+        currencySymbol = "$"
         googleMapsKey = "AIzaSyA3NvrDKBcpIsnq4-ZACG41y7Mj-wSfVrY"
         xmppPort = 5222
     }
     
     let baseURL : NSURL
     let amazonURL : NSURL
+    
+    let currencySymbol: String
     
     let googleMapsKey: String
     

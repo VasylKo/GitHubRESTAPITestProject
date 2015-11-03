@@ -40,6 +40,7 @@ final class FilterViewController: XLFormViewController {
     }
     
     func initializeForm() {
+        
         let filter = SearchFilter.currentFilter
         
         let form = XLFormDescriptor(title: NSLocalizedString("Filter", comment: "Update filter: form caption"))
@@ -50,7 +51,7 @@ final class FilterViewController: XLFormViewController {
 
         //Price
         currencyFormatter.numberStyle = .CurrencyStyle
-        currencyFormatter.currencySymbol = "$"
+        currencyFormatter.currencySymbol = AppConfiguration().currencySymbol
         currencyFormatter.generatesDecimalNumbers = false
         currencyFormatter.maximumFractionDigits = 0
         currencyFormatter.roundingMode = .RoundDown

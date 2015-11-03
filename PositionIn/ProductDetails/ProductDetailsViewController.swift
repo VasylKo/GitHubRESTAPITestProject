@@ -79,7 +79,7 @@ final class ProductDetailsViewController: UIViewController {
     
     private let currencyFormatter: NSNumberFormatter = {
         let currencyFormatter = NSNumberFormatter()
-        currencyFormatter.currencySymbol = "$"
+        currencyFormatter.currencySymbol = AppConfiguration().currencySymbol
         currencyFormatter.numberStyle = .CurrencyStyle
         currencyFormatter.generatesDecimalNumbers = false
         currencyFormatter.maximumFractionDigits = 0

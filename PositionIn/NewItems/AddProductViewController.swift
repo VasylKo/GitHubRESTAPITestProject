@@ -50,7 +50,8 @@ final class AddProductViewController: BaseAddItemViewController {
         captionSection.addFormRow(titleRow)
         
         // Price
-        let priceRow = XLFormRowDescriptor(tag: Tags.Price.rawValue, rowType: XLFormRowDescriptorTypeDecimal, title: NSLocalizedString("Price ($)", comment: "New product: price"))
+        let priceRow = XLFormRowDescriptor(tag: Tags.Price.rawValue, rowType: XLFormRowDescriptorTypeDecimal,
+            title: NSLocalizedString("Price (\(AppConfiguration().currencySymbol))", comment: "New product: price"))
         priceRow.required = true
         captionSection.addFormRow(priceRow)
         
