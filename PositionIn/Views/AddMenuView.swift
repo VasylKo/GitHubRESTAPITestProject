@@ -79,7 +79,9 @@ final class AddMenuView: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
         startButton.frame = bounds
-        menuItemViews.map() { $0.frame = self.bounds }
+        for item in menuItemViews {
+            item.frame = self.bounds
+        }
     }
 
     override func layoutSublayersOfLayer(layer: CALayer) {

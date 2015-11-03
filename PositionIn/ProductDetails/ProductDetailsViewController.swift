@@ -167,9 +167,6 @@ extension ProductDetailsViewController: ProductDetailsActionConsumer {
                 showChatViewController(userId)
             }
             return
-        default:
-            Log.warning?.message("Unhandled action: \(action)")
-            return
         }
         performSegue(segue)
     }

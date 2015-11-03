@@ -48,8 +48,7 @@ struct SearchFilter: Mappable {
     }
     
     static var isCustomLocationSet: Bool {
-        var filter = SearchFilter.currentFilter
-        return filter.locationName != nil
+        return SearchFilter.currentFilter.locationName != nil
     }
     
     private static var currentLocationToken = InvalidationToken()

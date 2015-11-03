@@ -75,7 +75,9 @@ extension Conversation: NSCoding {
     
     @objc func encodeWithCoder(aCoder: NSCoder) {
         aCoder.encodeObject(name, forKey: CodingKeys.name)
-        imageURL.map { aCoder.encodeObject($0, forKey: CodingKeys.image) }
+        if let imageURL = imageURL {
+            aCoder.encodeObject(imageURL, forKey: CodingKeys.image)
+        }
         aCoder.encodeObject(lastActivityDate, forKey: CodingKeys.date)
         aCoder.encodeObject(roomId, forKey: CodingKeys.roomId)
         aCoder.encodeBool(isGroupChat, forKey: CodingKeys.isGroup)
@@ -91,7 +93,9 @@ extension Conversation: NSCoding {
         let unread = UInt(aDecoder.decodeIntegerForKey(CodingKeys.unread))
         
         self.init(roomID: roomId, isMultiUser: isGroupChat, caption: caption, url: image)
-        date.map { lastActivityDate = $0 }
+        if let date = date {
+            lastActivityDate = date
+        }
         _unreadCount = unread
     }
     

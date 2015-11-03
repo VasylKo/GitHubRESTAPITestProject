@@ -587,7 +587,7 @@ extension APIService {
     
     private func imageRequest(token: String) -> CRUDRequest {
         let url = https("/v1.0/photos/upload")
-        var request = CRUDRequest(token: token, url: url)
+        let request = CRUDRequest(token: token, url: url)
         request.method = .POST
         return request
     }

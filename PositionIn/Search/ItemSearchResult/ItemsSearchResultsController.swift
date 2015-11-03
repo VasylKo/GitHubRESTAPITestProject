@@ -126,10 +126,7 @@ class ItemsSearchResultsController: NSObject {
                             localImageName: "AvatarPlaceholder", remoteImageURL: model.avatar)
                         
                         tableViewModels.append(searchItemCellModel)
-                    }
-                    
-                default:
-                    print("")
+                    }                    
                 }
                 
                 if (i == 0) {

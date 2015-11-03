@@ -45,7 +45,9 @@ struct SessionController {
         return future { () -> Result<AuthResponse.Token, NSError> in
             //TODO: check expiration date
             guard let token = self.accessToken,
-                let expirationDate = self.expiresIn else {
+                let expirationDate = self.expiresIn
+                where  NSDate().compare(expirationDate) == NSComparisonResult.OrderedDescending
+                else {
                     Log.warning?.trace()
                     let errorCode = NetworkDataProvider.ErrorCodes.InvalidSessionError
                     return Result(error: errorCode.error())

@@ -17,7 +17,7 @@ final class CommunityActionCell: TableViewCell {
         objectId = m!.objectId
         actionConsumer = m!.actionConsumer
         Log.debug?.value(m!.actions)
-        actionButtons.map { (btn: UIButton) -> Void in
+        for btn in actionButtons {
             btn.removeFromSuperview()
         }
         

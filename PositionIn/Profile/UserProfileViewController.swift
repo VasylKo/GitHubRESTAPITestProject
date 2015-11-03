@@ -263,8 +263,6 @@ final class UserProfileViewController: BesideMenuViewController, BrowseActionPro
                     return f
                 }
                 self.updateFeed()
-            default:
-                break
             }
             self.searchbar.text = nil
             self.searchbar.attributedText = self.searchBarAttributedText(model.title, searchString: searchString, locationString: locationString)

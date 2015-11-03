@@ -17,7 +17,9 @@ final class ProfileInfoCell: TableViewCell {
         assert(m != nil, "Invalid model passed")
         nameLabel.text = m!.name
         avatarView.setImageFromURL(m!.avatar)
-        m!.background.map { self.backImageView.hnk_setImageFromURL($0) }
+        if let imageURL = m!.background {
+            self.backImageView.hnk_setImageFromURL(imageURL)
+        }
         updateButton(leftActionButton, forAction: m!.leftAction)
         updateButton(rightActionButton, forAction: m!.rightAction)
         actionDelegate = m!.actionDelegate

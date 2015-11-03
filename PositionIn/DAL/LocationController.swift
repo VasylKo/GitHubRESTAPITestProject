@@ -110,7 +110,9 @@ final class LocationController {
             if let coordinate = self.locationProvider.currentCoordinate {
                 self.lastKnownCoordinate = coordinate
                 self.lastKnownCoordinateExpirationDate = NSDate(timeIntervalSinceNow: self.kCoordinateExpirationThreshold)
-                self.pendingPromises.map { $0.success(coordinate) }
+                for p in self.pendingPromises {
+                    p.success(coordinate)
+                }
                 self.pendingPromises = []
             }
             self.locationProvider.stopUpdatingLocation()
@@ -124,7 +126,9 @@ final class LocationController {
                 code: LocationController.ErrorCodes.CouldNotGetCoordinate.rawValue,
                 userInfo: nil
             )
-            self.pendingPromises.map { $0.failure(error) }
+            for p in self.pendingPromises {
+                p.failure(error)
+            }
             self.pendingPromises = []
         }
     }
