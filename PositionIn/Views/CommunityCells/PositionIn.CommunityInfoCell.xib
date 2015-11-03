@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
@@ -13,8 +13,8 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="38 Members" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XQk-UL-8mz">
-                        <rect key="frame" x="2" y="5" width="316" height="14"/>
-                        <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
+                        <rect key="frame" x="16" y="5" width="288" height="17.5"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                         <color key="textColor" red="0.74901960784313726" green="0.74901960784313726" blue="0.74901960784313726" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                         <userDefinedRuntimeAttributes>
@@ -22,7 +22,7 @@
                         </userDefinedRuntimeAttributes>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="200" verticalCompressionResistancePriority="749" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tat-Wc-Uju">
-                        <rect key="frame" x="2" y="24" width="316" height="101"/>
+                        <rect key="frame" x="16" y="27.5" width="288" height="97"/>
                         <string key="text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</string>
                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -35,13 +35,14 @@
                 <constraints>
                     <constraint firstItem="XQk-UL-8mz" firstAttribute="trailing" secondItem="tat-Wc-Uju" secondAttribute="trailing" id="4av-xu-aau"/>
                     <constraint firstAttribute="bottom" secondItem="tat-Wc-Uju" secondAttribute="bottom" constant="5" id="6Im-ls-Ac1"/>
-                    <constraint firstItem="XQk-UL-8mz" firstAttribute="leading" secondItem="2NY-pq-cAG" secondAttribute="leading" constant="2" id="H4r-cc-pdv"/>
-                    <constraint firstAttribute="trailing" secondItem="XQk-UL-8mz" secondAttribute="trailing" constant="2" id="WXy-r7-OgR"/>
+                    <constraint firstItem="XQk-UL-8mz" firstAttribute="leading" secondItem="2NY-pq-cAG" secondAttribute="leading" constant="16" id="H4r-cc-pdv"/>
+                    <constraint firstAttribute="trailing" secondItem="XQk-UL-8mz" secondAttribute="trailing" constant="16" id="WXy-r7-OgR"/>
                     <constraint firstItem="XQk-UL-8mz" firstAttribute="top" secondItem="2NY-pq-cAG" secondAttribute="top" constant="5" id="ckJ-fy-aqz"/>
                     <constraint firstItem="XQk-UL-8mz" firstAttribute="leading" secondItem="tat-Wc-Uju" secondAttribute="leading" id="qNv-Se-qcw"/>
                     <constraint firstItem="tat-Wc-Uju" firstAttribute="top" secondItem="XQk-UL-8mz" secondAttribute="bottom" constant="5" id="yRC-wV-cX9"/>
                 </constraints>
             </tableViewCellContentView>
+            <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
             <connections>
                 <outlet property="countLabel" destination="XQk-UL-8mz" id="0PA-o9-LFQ"/>
                 <outlet property="descriptionLabel" destination="tat-Wc-Uju" id="8zr-YB-hqn"/>
