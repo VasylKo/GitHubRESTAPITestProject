@@ -957,9 +957,7 @@
 		E6DA53C31B7D00DB000087A7 /* PositionIn.BrowseCommunityViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.BrowseCommunityViewController.xib; sourceTree = "<group>"; };
 		E6DADB9D1B8C5799009A5694 /* SearchFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchFilter.swift; sourceTree = "<group>"; };
 		E6DADB9F1B8C5907009A5694 /* ItemCategory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemCategory.swift; sourceTree = "<group>"; };
-		E6DB13D91B74C84900E4BA96 /* .env */ = {isa = PBXFileReference; lastKnownFileType = text; path = .env; sourceTree = "<group>"; };
 		E6DB13DB1B74C84900E4BA96 /* Appfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Appfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		E6DB13DC1B74C84900E4BA96 /* Deliverfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Deliverfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		E6DB13DD1B74C84900E4BA96 /* Fastfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Fastfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		E6DB13DE1B74C84900E4BA96 /* report.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = report.xml; sourceTree = "<group>"; };
 		E6DB13E11B74C84900E4BA96 /* en-US-iPad-0-LandingScreen-portrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "en-US-iPad-0-LandingScreen-portrait.png"; sourceTree = "<group>"; };
@@ -2534,10 +2532,8 @@
 		E6DB13D81B74C84900E4BA96 /* fastlane */ = {
 			isa = PBXGroup;
 			children = (
-				E6DB13D91B74C84900E4BA96 /* .env */,
 				E6DB13DA1B74C84900E4BA96 /* actions */,
 				E6DB13DB1B74C84900E4BA96 /* Appfile */,
-				E6DB13DC1B74C84900E4BA96 /* Deliverfile */,
 				E6DB13DD1B74C84900E4BA96 /* Fastfile */,
 				E6DB13DE1B74C84900E4BA96 /* report.xml */,
 				E6DB13DF1B74C84900E4BA96 /* screenshots */,

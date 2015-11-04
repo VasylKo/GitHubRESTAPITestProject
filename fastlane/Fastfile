@@ -53,6 +53,7 @@ platform :ios do
         configuration: "DevRelease",
         output_directory: "Build",
         clean: true,
+        use_legacy_build_api: true,
         ) # Build app
     s3(
        html_file_name: "dev.html",
