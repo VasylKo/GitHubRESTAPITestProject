@@ -32,13 +32,13 @@ class OrderViewController: UITableViewController {
         quantityLabel.text = quantityString
         if let price = product?.price {
             let subtotal: Float = price * Float(quantity)
-            subtotalLabel.text = currencyFormatter.stringFromNumber(NSNumber(float: subtotal))
+            subtotalLabel.text = AppConfiguration().currencyFormatter.stringFromNumber(NSNumber(float: subtotal))
             let tax = subtotal * 0.05
-            taxLabel.text = currencyFormatter.stringFromNumber(NSNumber(float: tax))
+            taxLabel.text = AppConfiguration().currencyFormatter.stringFromNumber(NSNumber(float: tax))
             let fee: Float = subtotal * 0.03
-            feeLabel.text = currencyFormatter.stringFromNumber(NSNumber(float: fee))
+            feeLabel.text = AppConfiguration().currencyFormatter.stringFromNumber(NSNumber(float: fee))
             let total = subtotal + tax + fee
-            totalLabel.text = currencyFormatter.stringFromNumber(NSNumber(float: total))
+            totalLabel.text = AppConfiguration().currencyFormatter.stringFromNumber(NSNumber(float: total))
         } else {
             subtotalLabel.text = nil
             taxLabel.text = nil
@@ -59,11 +59,6 @@ class OrderViewController: UITableViewController {
     lazy private var quantityFormatter: NSNumberFormatter = {
         let formatter = NSNumberFormatter()
         formatter.numberStyle = .DecimalStyle
-        return formatter
-    }()
-    lazy private var currencyFormatter: NSNumberFormatter = {
-        let formatter = NSNumberFormatter()
-        formatter.numberStyle = .CurrencyStyle
         return formatter
     }()
     
