@@ -18,10 +18,21 @@ final class BrowseListViewController: UIViewController, BrowseActionProducer, Br
 
     var browseMode: BrowseModeTabbarViewController.BrowseMode = .ForYou
     
+    var hideSeparatorLinesNearSegmentedControl: Bool = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         dataSource.configureTable(tableView)
         selectedItemType = .Unknown
+        
+        self.topSeparatorLine.hidden = hideSeparatorLinesNearSegmentedControl
+        self.bottomSeparatorLine.hidden = hideSeparatorLinesNearSegmentedControl
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        self.topSeparatorHeightConstraint.constant = 1 / UIScreen.mainScreen().scale
+        self.bottomSeparatorHeightConstraint.constant = 1 / UIScreen.mainScreen().scale
     }
         
     var filter = SearchFilter.currentFilter {
@@ -108,6 +119,14 @@ final class BrowseListViewController: UIViewController, BrowseActionProducer, Br
             selectedItemType = newFilterValue
         }
     }
+    
+    
+    
+    @IBOutlet weak var topSeparatorLine: UIView!
+    @IBOutlet weak var bottomSeparatorLine: UIView!
+    
+    @IBOutlet weak var topSeparatorHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var bottomSeparatorHeightConstraint: NSLayoutConstraint!
     
     private lazy var dataSource: FeedItemDatasource = { [unowned self] in
         let dataSource = FeedItemDatasource(shouldShowDetailedCells: self.shoWCompactCells)

@@ -57,7 +57,7 @@ final class ProductDetailsViewController: UIViewController {
         
         priceLabel.text = map(product.price) {
             let newValue = $0 as Float
-            return currencyFormatter.stringFromNumber(NSNumber(float: newValue)) ?? ""}
+            return AppConfiguration().currencyFormatter.stringFromNumber(NSNumber(float: newValue)) ?? ""}
         let url = product.photos?.first?.url
         let image = product.category?.productPlaceholderImage()
         productImageView.setImageFromURL(url, placeholder: image)
@@ -76,17 +76,6 @@ final class ProductDetailsViewController: UIViewController {
     var author: ObjectInfo?
     private var product: Product?
     private var locationRequestToken = InvalidationToken()
-    
-    private let currencyFormatter: NSNumberFormatter = {
-        let currencyFormatter = NSNumberFormatter()
-        currencyFormatter.currencySymbol = AppConfiguration().currencySymbol
-        currencyFormatter.numberStyle = .CurrencyStyle
-        currencyFormatter.generatesDecimalNumbers = false
-        currencyFormatter.maximumFractionDigits = 0
-        currencyFormatter.roundingMode = .RoundDown
-        return currencyFormatter
-        }()
-
     
     private lazy var dataSource: ProductDetailsDataSource = { [unowned self] in
         let dataSource = ProductDetailsDataSource()

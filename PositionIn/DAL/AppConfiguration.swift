@@ -26,16 +26,12 @@ final class AppConfiguration {
             amazonURL = NSURL(string: "https://pos-dev.s3.amazonaws.com/")!
             xmppHostname = "app-dev.positionin.com"
         }
-        
-        currencySymbol = "$"
         googleMapsKey = "AIzaSyA3NvrDKBcpIsnq4-ZACG41y7Mj-wSfVrY"
         xmppPort = 5222
     }
     
     let baseURL : NSURL
     let amazonURL : NSURL
-    
-    let currencySymbol: String
     
     let googleMapsKey: String
     
@@ -57,6 +53,16 @@ final class AppConfiguration {
             return .Dev
         #endif
     }
+    
+    let currencyFormatter: NSNumberFormatter = {
+        let currencyFormatter = NSNumberFormatter()
+        currencyFormatter.currencySymbol = "$"
+        currencyFormatter.numberStyle = .CurrencyStyle
+        currencyFormatter.generatesDecimalNumbers = false
+        currencyFormatter.maximumFractionDigits = 0
+        currencyFormatter.roundingMode = .RoundDown
+        return currencyFormatter
+        }()
 
     var appVersion: String? {
         let env = AppConfiguration.environment.rawValue

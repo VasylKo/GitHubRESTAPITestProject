@@ -122,7 +122,7 @@
             <objects>
                 <viewController id="WCn-eT-80Y" customClass="MessagesListViewController" customModule="PositionIn" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" title="Messages" id="45E-vw-XYB">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="tdQ-rK-BMU">
+                        <barButtonItem key="rightBarButtonItem" image="newChat" id="tdQ-rK-BMU">
                             <connections>
                                 <segue destination="wRQ-Sd-Bqd" kind="show" id="BGH-D0-iow"/>
                             </connections>
@@ -1084,7 +1084,8 @@
     </scenes>
     <resources>
         <image name="SplashImage" width="375" height="667"/>
-        <image name="communityAddNewCommunity" width="22" height="22"/>
+        <image name="communityAddNewCommunity" width="28" height="28"/>
+        <image name="newChat" width="24" height="24"/>
         <image name="productClockAvailability" width="22" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>

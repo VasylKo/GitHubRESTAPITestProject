@@ -48,19 +48,12 @@ final class FilterViewController: XLFormViewController {
         //Options
         let optionsSection = XLFormSectionDescriptor.formSectionWithTitle(NSLocalizedString("Options", comment: "Update filter: options caption"))
         form.addFormSection(optionsSection)
-
-        //Price
-        currencyFormatter.numberStyle = .CurrencyStyle
-        currencyFormatter.currencySymbol = AppConfiguration().currencySymbol
-        currencyFormatter.generatesDecimalNumbers = false
-        currencyFormatter.maximumFractionDigits = 0
-        currencyFormatter.roundingMode = .RoundDown
         
         let priceRow = XLFormRowDescriptor(tag: Tags.EndPrice.rawValue, rowType: XLFormRowDescriptorTypeSlider, title: "")
         priceRow.onChangeBlock = { [weak self] oldValue, newValue, descriptor in
             let newValue = newValue as! Float
             let priceFormat = NSLocalizedString("Price up to: %@", comment: "Update filter: price format")
-            let stringValue: String  = self?.currencyFormatter.stringFromNumber(newValue) ?? ""
+            let stringValue: String  = AppConfiguration().currencyFormatter.stringFromNumber(newValue) ?? ""
             let title = String(format: priceFormat, stringValue)
             if let currentTitle = descriptor.title where currentTitle == title {
                 return
@@ -192,9 +185,6 @@ final class FilterViewController: XLFormViewController {
         }
         return nil
     }
-
-    
-    private let currencyFormatter = NSNumberFormatter()
     
     private enum DateRange: Int {
         case Now, Today, Tomorrow, Week, Custom
