@@ -50,7 +50,7 @@ final class AddProductViewController: BaseAddItemViewController {
         captionSection.addFormRow(titleRow)
         
         // Price
-        let currencySymbol: String
+        var currencySymbol: String = ""
         if let cs = AppConfiguration().currencyFormatter.currencySymbol {
             currencySymbol = cs
         }
