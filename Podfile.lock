@@ -60,7 +60,7 @@ PODS:
   - JSQSystemSoundPlayer (2.0.1)
   - KeychainAccess (2.3.1)
   - KYDrawerController (1.1.1)
-  - ObjectMapper (1.0.0)
+  - ObjectMapper (1.0.1)
   - PosInCore (0.0.1):
     - Alamofire (~> 3.1)
     - BrightFutures (~> 3.0)
@@ -107,7 +107,7 @@ SPEC CHECKSUMS:
   JSQSystemSoundPlayer: c5850e77a4363ffd374cd851154b9af93264ed8d
   KeychainAccess: d54b31c75745cfa595b3654590e8cb491a75d411
   KYDrawerController: 33f16abd6ce2b0cc7d6e2c7df2502b5dab23ecb6
-  ObjectMapper: 0cd8372a0da95ae146afc63d8b512c32dd372a49
+  ObjectMapper: 98524bac0dca46c6b3d5ee02cd410fc700ec6ce2
   PosInCore: d343ffa2e13b1fba322212eb498bdc452a305c54
   Result: f7927152cbaec0c043abb06ba0bc432678818418
   UIImageEffects: 37b99fa461e4965f332ca82e92f2c22a1075ee84

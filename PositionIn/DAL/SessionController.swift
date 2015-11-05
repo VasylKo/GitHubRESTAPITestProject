@@ -46,7 +46,7 @@ struct SessionController {
             //TODO: check expiration date
             guard let token = self.accessToken,
                 let expirationDate = self.expiresIn
-                where  NSDate().compare(expirationDate) == NSComparisonResult.OrderedDescending
+                where  NSDate().compare(expirationDate) == NSComparisonResult.OrderedAscending
                 else {
                     Log.warning?.trace()
                     let errorCode = NetworkDataProvider.ErrorCodes.InvalidSessionError
