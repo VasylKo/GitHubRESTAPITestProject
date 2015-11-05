@@ -18,7 +18,7 @@ final class PromotionDetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = NSLocalizedString("Emergency", comment: "Promotion details: title")
+        title = NSLocalizedString("Promotion", comment: "Promotion details: title")
         dataSource.items = promotionActionItems()
         dataSource.configureTable(actionTableView)
         reloadData()
@@ -44,9 +44,8 @@ final class PromotionDetailsViewController: UIViewController {
         let startDate = dateFormatter.stringFromDate(promotion.startDate ?? NSDate())
         let endDate = dateFormatter.stringFromDate(promotion.endDate ?? NSDate())
         priceLabel.text = "\(startDate) - \(endDate)"
-//        let discountFormat = NSLocalizedString("Save %.1f%%", comment: "Promotion details: DiscountFormat")
-//        infoLabel.text = map(promotion.discount) { String(format: discountFormat, $0 )}
-        infoLabel.text = ""
+        let discountFormat = NSLocalizedString("Save %.1f%%", comment: "Promotion details: DiscountFormat")
+        infoLabel.text = promotion.discount.map { String(format: discountFormat, $0 )}
         promotionImageView.setImageFromURL(promotion.photos?.first?.url, placeholder: UIImage(named: "PromotionDetailsPlaceholder"))
     }
     
@@ -85,7 +84,7 @@ final class PromotionDetailsViewController: UIViewController {
 }
 
 extension PromotionDetailsViewController {
-    enum PromotionDetailsAction: Printable {
+    enum PromotionDetailsAction: CustomStringConvertible {
         case  ProductsOnSale, SendMessage, SellerProfile, TermsAndInformation, Navigate
         
         var description: String {

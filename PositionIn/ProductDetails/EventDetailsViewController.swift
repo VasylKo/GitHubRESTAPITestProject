@@ -90,7 +90,7 @@ final class EventDetailsViewController: UIViewController {
 }
 
 extension EventDetailsViewController {
-    enum EventDetailsAction: Printable {
+    enum EventDetailsAction: CustomStringConvertible {
         case Attend, ProductsOnSale, SendMessage, OrganizerProfile, Share, TermsAndInformation, Navigate
         
         var description: String {

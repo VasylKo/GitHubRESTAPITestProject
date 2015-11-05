@@ -34,7 +34,8 @@ class ImageNetworkFetcher<T: DataConvertible>: NetworkFetcher<T> {
 
 private let imageURLSession: NSURLSession = {
     class ImageURLSessionDelegate: NSObject, NSURLSessionDelegate {
-        func URLSession(session: NSURLSession, didReceiveChallenge challenge: NSURLAuthenticationChallenge, completionHandler: (NSURLSessionAuthChallengeDisposition, NSURLCredential!) -> Void) {
+        
+        @objc func URLSession(session: NSURLSession, didReceiveChallenge challenge: NSURLAuthenticationChallenge, completionHandler: (NSURLSessionAuthChallengeDisposition, NSURLCredential?) -> Void) {
             let serverTrust = challenge.protectionSpace.serverTrust!
             completionHandler(.UseCredential, NSURLCredential(forTrust: serverTrust))
         }

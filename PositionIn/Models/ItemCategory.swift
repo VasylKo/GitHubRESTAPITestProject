@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum ItemCategory: Int, DebugPrintable {
+enum ItemCategory: Int, CustomDebugStringConvertible {
     case Unknown
     case AnimalsPetSupplies, ApparelAccessories, ArtsEntertainment, BabyToddler, BusinessIndustrial,
          CamerasOptics, Electronics, Food, Furniture, Hardware, HealthBeauty, HomeGarden, LuggageBags

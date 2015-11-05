@@ -96,7 +96,7 @@ public final class LocationProvider: NSObject {
     
     private func requestAuthForStatus(status: CLAuthorizationStatus) -> Bool {
         
-        let (requiredStatus: CLAuthorizationStatus, method: (CLLocationManager)->() -> Void) = {
+        let (requiredStatus, method): (CLAuthorizationStatus, (CLLocationManager)->() -> Void) = {
             switch self.requirements {
             case .Always:
                 return (.AuthorizedAlways, CLLocationManager.requestAlwaysAuthorization)
@@ -127,21 +127,22 @@ public final class LocationProvider: NSObject {
 
 extension LocationProvider: CLLocationManagerDelegate {
     
-    public func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
-        if let location = locations.last  as? CLLocation {
-            coord = location.coordinate
-            self.postNotification(LocationProvider.DidUpdateCoordinateNotification)
+    public func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let location = locations.last else {
+            return
         }
+        coord = location.coordinate
+        self.postNotification(LocationProvider.DidUpdateCoordinateNotification)
     }
     
     
-    public func locationManager(manager: CLLocationManager!, didFailWithError error: NSError!) {
+    public func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
         if error.code == CLError.Denied.rawValue {
             locationDeniedByUser()
         }
     }
     
-    public func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+    public func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
         switch status {
         case .Denied:
             locationDeniedByUser()

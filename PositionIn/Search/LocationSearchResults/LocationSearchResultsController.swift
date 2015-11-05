@@ -41,6 +41,9 @@ final class LocationSearchResultsController: NSObject {
     }
     
     func reloadSearch() {
+        guard let searchBar = searchBar else {
+            return
+        }
         dataRequestToken.invalidate()
         dataRequestToken = InvalidationToken()
         let completion: ([Location]) -> Void = { [weak self] locations in
@@ -49,17 +52,16 @@ final class LocationSearchResultsController: NSObject {
             self?.locationsTable?.reloadData()
             self?.locationsTable?.scrollEnabled = self?.locationsTable?.frame.size.height < self?.locationsTable?.contentSize.height
         }
-        let searchString = map(searchBar?.text) { $0.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet()) }
-        if let searchString = searchString where count(searchString) > 0 {
+        
+        let searchString = searchBar.text.map { $0.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet()) }
+        if let searchString = searchString where searchString.characters.count > 0 {
             Log.info?.message("Geocoding location: \(searchString)")
-            locationController().geocodeString(searchString).onSuccess(
-                token: dataRequestToken,
-                callback: completion).onFailure { error in
+            locationController().geocodeString(searchString).onSuccess(dataRequestToken.validContext, callback: completion).onFailure { error in
                     Log.error?.value(error)
             }
         }
         else {
-            locationController().getCurrentLocation().onSuccess(token: dataRequestToken, callback: { [weak self] location in
+            locationController().getCurrentLocation().onSuccess(dataRequestToken.validContext, callback: { [weak self] location in
                 self?.resultStorage?.setLocations([Location.currentLocation])
                 self?.locationsTable?.reloadData()
                 self?.locationsTable?.scrollEnabled = self?.locationsTable?.frame.size.height < self?.locationsTable?.contentSize.height

@@ -14,7 +14,7 @@ public class TableViewSectionHeaderFooterLabelView : TableViewSectionHeaderFoote
         installLabel()
     }
     
-    public required init(coder aDecoder: NSCoder) {
+    public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         installLabel()
     }

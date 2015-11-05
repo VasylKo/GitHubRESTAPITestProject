@@ -71,7 +71,7 @@ extension MessagesListViewController {
         }
         
         @objc override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            return count(models)
+            return models.count
         }
         
         override func tableView(tableView: UITableView, modelForIndexPath indexPath: NSIndexPath) -> TableViewCellModel {
@@ -96,7 +96,9 @@ extension MessagesListViewController {
                 } else {
                     conversation = ConversationManager.sharedInstance().directConversation(model.userId)
                 }
-                map(conversation) { parentViewController?.showChatViewController($0) }
+                if let conversation = conversation {
+                    parentViewController?.showChatViewController(conversation)
+                }
             }
         }
         
@@ -110,7 +112,7 @@ extension MessagesListViewController {
                     name: conversation.name,
                     message: "",
                     imageURL: conversation.imageURL,
-                    date: map(conversation.lastActivityDate) { dateFormatter.stringFromDate($0) },
+                    date: Optional(conversation.lastActivityDate).map { dateFormatter.stringFromDate($0) },
                     muc: conversation.isGroupChat,
                     unreadCount: conversation.unreadCount
                 )

@@ -21,7 +21,7 @@ final class AddMenuView: UIView {
         configure()
     }
     
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         configure()
     }
@@ -80,12 +80,14 @@ final class AddMenuView: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
         startButton.frame = bounds
-        menuItemViews.map() { $0.frame = self.bounds }
+        for item in menuItemViews {
+            item.frame = self.bounds
+        }
     }
 
-    override func layoutSublayersOfLayer(layer: CALayer!) {
+    override func layoutSublayersOfLayer(layer: CALayer) {
         super.layoutSublayersOfLayer(layer)
-        let decorationRect = bounds.rectByInsetting(dx: -decorationInset, dy: -decorationInset)
+        let decorationRect = bounds.insetBy(dx: -decorationInset, dy: -decorationInset)
         decorationLayer.frame = bounds
         decorationLayer.path = UIBezierPath(ovalInRect: decorationRect).CGPath
     }
@@ -180,7 +182,7 @@ extension AddMenuView {
         addSubview(startButton)
         startButton.addTarget(self, action: "toogleMenuTapped:", forControlEvents: UIControlEvents.ValueChanged)
         startButton.layer.zPosition = CGFloat(FLT_MAX)
-        setTranslatesAutoresizingMaskIntoConstraints(false)
+        translatesAutoresizingMaskIntoConstraints = false
 
         decorationLayer.fillColor = UIScheme.tabbarBackgroundColor.CGColor
         layer.addSublayer(decorationLayer)
@@ -197,7 +199,7 @@ extension AddMenuView {
     private func applyExpandAnimation(duration: NSTimeInterval) {
         let expandAnimation: () -> Void = {
             self.startButton.transform = CGAffineTransformMakeRotation(CGFloat(M_PI_4))
-            for (idx, itemView) in enumerate(self.menuItemViews) {
+            for (idx, itemView) in self.menuItemViews.enumerate() {
                 itemView.hidden = false
                 let translation = -(itemView.bounds.height + self.itemsPadding) * CGFloat(idx + 1) - self.decorationInset
                 let transform: CGAffineTransform =  CGAffineTransformMakeTranslation(0, translation)
@@ -206,7 +208,7 @@ extension AddMenuView {
         }
         let expandCompletion: (Bool) -> Void = { _ in
             UIView.animateWithDuration(0.2, animations: {
-            for (_, itemView) in enumerate(self.menuItemViews) {
+            for (_, itemView) in self.menuItemViews.enumerate() {
                     itemView.label.alpha = 1.0
                 }
                 }) { _ in
@@ -226,13 +228,13 @@ extension AddMenuView {
         let transform = CGAffineTransformIdentity
         let collapseAnimation: () -> Void = {
             self.startButton.transform = CGAffineTransformIdentity
-            for (_, itemView) in enumerate(self.menuItemViews) {
+            for (_, itemView) in self.menuItemViews.enumerate() {
                 itemView.transform = transform
                 itemView.label.alpha = 0.0
             }
         }
         let collapseCompletion: (Bool) -> Void = { _ in
-            for (_, itemView) in enumerate(self.menuItemViews) {
+            for (_, itemView) in self.menuItemViews.enumerate() {
                 itemView.hidden = true
             }
             self.mExpanded = false
@@ -275,7 +277,7 @@ extension AddMenuView {
             self.action = action
             
             super.init(frame: CGRectZero)
-            setTranslatesAutoresizingMaskIntoConstraints(false)
+            translatesAutoresizingMaskIntoConstraints = false
             bounds = CGRect(origin: CGPointZero, size: contentSize())
             backgroundColor = UIColor.clearColor()
             userInteractionEnabled = true
@@ -295,7 +297,7 @@ extension AddMenuView {
             }
         }
         
-        required init(coder aDecoder: NSCoder) {
+        required init?(coder aDecoder: NSCoder) {
             fatalError(" \(__FUNCTION__) does not implemented")
         }
         

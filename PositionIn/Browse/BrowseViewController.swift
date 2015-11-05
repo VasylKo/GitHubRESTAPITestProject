@@ -13,7 +13,7 @@ protocol UpdateFilterProtocol {
     func applyFilterUpdate(update: SearchFilterUpdate)
 }
 
-final class BrowseViewController: BrowseModeTabbarViewController, SearchViewControllerDelegate {
+final class BrowseViewController: BrowseModeTabbarViewController {
     
     @IBAction func prepareForUnwind(segue: UIStoryboardSegue) {
         
@@ -37,22 +37,22 @@ final class BrowseViewController: BrowseModeTabbarViewController, SearchViewCont
         }
         return [
             AddMenuView.MenuItem.productItemWithAction {
-                api().isUserAuthorized().onSuccess { [weak self] _ in
+                api().isUserAuthorized().onSuccess {  _ in
                     pushAndSubscribe(Storyboards.NewItems.instantiateAddProductViewController())
                 }},
             AddMenuView.MenuItem.eventItemWithAction {
-                api().isUserAuthorized().onSuccess { [weak self] _ in
+                api().isUserAuthorized().onSuccess {  _ in
                     pushAndSubscribe(Storyboards.NewItems.instantiateAddEventViewController())
                 }},
             AddMenuView.MenuItem.promotionItemWithAction {
-                api().isUserAuthorized().onSuccess { [weak self] _ in pushAndSubscribe(Storyboards.NewItems.instantiateAddPromotionViewController())
+                api().isUserAuthorized().onSuccess {  _ in pushAndSubscribe(Storyboards.NewItems.instantiateAddPromotionViewController())
                 }},
             AddMenuView.MenuItem.postItemWithAction {
-                api().isUserAuthorized().onSuccess { [weak self] _ in
+                api().isUserAuthorized().onSuccess {  _ in
                     pushAndSubscribe(Storyboards.NewItems.instantiateAddPostViewController())
                 }},
             AddMenuView.MenuItem.inviteItemWithAction {
-                api().isUserAuthorized().onSuccess { [weak self] _ in
+                api().isUserAuthorized().onSuccess {  _ in
                     Log.error?.message("Should call invite")}
             },
         ]

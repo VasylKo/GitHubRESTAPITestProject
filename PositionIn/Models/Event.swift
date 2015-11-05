@@ -100,15 +100,15 @@ struct Event: CRUDObject {
     }
     
     static func endpoint(eventId: CRUDObjectId) -> String {
-        return Event.endpoint().stringByAppendingPathComponent("\(eventId)")
+        return (Event.endpoint() as NSString).stringByAppendingPathComponent("\(eventId)")
     }
     
     static func userEventsEndpoint(userId: CRUDObjectId) -> String {
-            return UserProfile.userEndpoint(userId).stringByAppendingPathComponent("events")
+            return (UserProfile.userEndpoint(userId) as NSString).stringByAppendingPathComponent("events")
     }
     
     static func communityEventsEndpoint(communityId: CRUDObjectId) -> String {
-        return Community.endpoint().stringByAppendingPathComponent("\(communityId)/events")
+        return (Community.endpoint() as NSString).stringByAppendingPathComponent("\(communityId)/events")
     }
         
     var description: String {

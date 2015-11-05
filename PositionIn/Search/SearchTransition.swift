@@ -37,13 +37,15 @@ final class SearchAppearanceAnimationController: NSObject,UIViewControllerAnimat
     
     // This is used for percent driven interactive transitions, as well as for container controllers that have companion animations that might need to
     // synchronize with the main animation.
-    func transitionDuration(transitionContext: UIViewControllerContextTransitioning) -> NSTimeInterval {
+    func transitionDuration(transitionContext: UIViewControllerContextTransitioning?) -> NSTimeInterval {
         return transitionDuration
     }
     
     // This method can only  be a nop if the transition is interactive and not a percentDriven interactive transition.
     func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
-        let conrainerView = transitionContext.containerView()
+        guard let conrainerView = transitionContext.containerView() else {
+            fatalError("No container view during transition")
+        }
         let searchController = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey) as! SearchViewController
         let fromViewController = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)!
         searchController.backImageView.image = snapshotView(fromViewController.view)
@@ -58,7 +60,7 @@ final class SearchAppearanceAnimationController: NSObject,UIViewControllerAnimat
         UIView.animateWithDuration(
             transitionDuration(transitionContext),
             delay: 0,
-            options: UIViewAnimationOptions.CurveEaseInOut | UIViewAnimationOptions.BeginFromCurrentState,
+            options: [UIViewAnimationOptions.CurveEaseInOut, UIViewAnimationOptions.BeginFromCurrentState],
             animations: {
                 searchController.searchTextField.frame = categoriesFrame
                 searchController.locationSearchTextField.frame = locationsFrame

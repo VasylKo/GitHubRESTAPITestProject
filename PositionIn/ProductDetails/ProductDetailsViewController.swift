@@ -55,7 +55,7 @@ final class ProductDetailsViewController: UIViewController {
         headerLabel.text = product.name
         detailsLabel.text = product.text
         
-        priceLabel.text = map(product.price) {
+        priceLabel.text = product.price.map {
             let newValue = $0 as Float
             return AppConfiguration().currencyFormatter.stringFromNumber(NSNumber(float: newValue)) ?? ""}
         let url = product.photos?.first?.url
@@ -64,7 +64,7 @@ final class ProductDetailsViewController: UIViewController {
         if let coordinates = product.location?.coordinates {
             locationRequestToken.invalidate()
             locationRequestToken = InvalidationToken()
-            locationController().distanceFromCoordinate(coordinates).onSuccess(token: locationRequestToken) {
+            locationController().distanceFromCoordinate(coordinates).onSuccess(locationRequestToken.validContext) {
                 [weak self] distance in
                 let formatter = NSLengthFormatter()
                 self?.infoLabel.text = formatter.stringFromMeters(distance)
@@ -109,7 +109,7 @@ final class ProductDetailsViewController: UIViewController {
 }
 
 extension ProductDetailsViewController {
-    enum ProductDetailsAction: Printable {
+    enum ProductDetailsAction: CustomStringConvertible {
         case Buy, ProductInventory, SellerProfile, SendMessage
         
         var description: String {
@@ -155,9 +155,6 @@ extension ProductDetailsViewController: ProductDetailsActionConsumer {
             if let userId = author?.objectId {
                 showChatViewController(userId)
             }
-            return
-        default:
-            Log.warning?.message("Unhandled action: \(action)")
             return
         }
         performSegue(segue)

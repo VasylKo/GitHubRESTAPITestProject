@@ -52,7 +52,7 @@ final class ConversationManager: NSObject {
     }
     
     internal func conversations() ->  [Conversation] {
-        return Array(directConversations.union(mucConversations)).sorted {
+        return Array(directConversations.union(mucConversations)).sort {
             return $0.lastActivityDate.compare($1.lastActivityDate) == NSComparisonResult.OrderedDescending
         }
     }

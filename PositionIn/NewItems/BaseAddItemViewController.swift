@@ -81,7 +81,7 @@ class BaseAddItemViewController: XLFormViewController {
         categoryRow.cellConfigAtConfigure["tintColor"] = UIScheme.mainThemeColor
         categoryRow.selectorOptions = options
         categoryRow.onChangeBlock = {[unowned categoryRow]   oldValue, newValue, descriptor in
-            if let newValue = newValue as? NSNull {
+            if let _ = newValue as? NSNull {
                 categoryRow.value = oldValue
             }
         }
@@ -158,13 +158,14 @@ class BaseAddItemViewController: XLFormViewController {
     
     func uploadAssets(value: AnyObject?, optional: Bool = true) -> Future<[NSURL], NSError>? {
         if let assets = value as? [PHAsset] {
-            return sequence( assets.map { asset in
+            return assets.map { asset in
                 self.uploadDataForAsset(asset).flatMap { (let data, let dataUTI) in
                     return api().uploadImage(data, dataUTI: dataUTI)
                 }
-            })
+            }.sequence()
         }
-        return optional ? Future.succeeded([]) : nil
+        
+        return optional ? Future(value: []) : nil
     }
     
     private func uploadDataForAsset(asset: PHAsset) -> Future<(NSData, String), NSError> {
@@ -176,7 +177,7 @@ class BaseAddItemViewController: XLFormViewController {
             case (.Some, .Some):
                 p.success((imageData!, dataUTI!))
             default:
-                if let error = info[PHImageErrorKey] as? NSError {
+                if let error = info?[PHImageErrorKey] as? NSError {
                     p.failure(error)
                 } else {
                     p.failure(NetworkDataProvider.ErrorCodes.UnknownError.error())
@@ -207,14 +208,14 @@ class BaseAddItemViewController: XLFormViewController {
     func didTouchPhoto(sender: XLFormRowDescriptor) {
         currentImageRowDescriptor = sender
         
-        let controller = ImagePickerSheetController()
+        let controller = ImagePickerSheetController(mediaType: .Image)
         controller.maximumSelection = maximumSelectedImages
-        controller.addAction(ImageAction(
+        controller.addAction(ImagePickerAction(
             title: NSLocalizedString("Take Photo", comment: "Take Photo"),
             handler: { [weak self] _ in
                 self?.presentImagePicker(.Camera)
             }))
-        controller.addAction(ImageAction(
+        controller.addAction(ImagePickerAction(
             title: NSLocalizedString("Photo Library", comment: "Photo Library"),
             secondaryTitle: { NSString.localizedStringWithFormat(NSLocalizedString("Add %lu Photo", comment: "Add photo"), $0) as String},
             handler: { [weak self] _ in
@@ -223,7 +224,7 @@ class BaseAddItemViewController: XLFormViewController {
             secondaryHandler: { [weak self] _, numberOfPhotos in
                 self?.addAssets(controller.selectedImageAssets)
             }))
-        controller.addAction(ImageAction(title: NSLocalizedString("Cancel", comment: "Action Title"), style: .Cancel, handler: { _ in
+        controller.addAction(ImagePickerAction(title: NSLocalizedString("Cancel", comment: "Action Title"), style: .Cancel, handler: { _ in
             Log.debug?.message("Cancelled")
         }))
         
@@ -237,7 +238,7 @@ class BaseAddItemViewController: XLFormViewController {
             let picker = UIImagePickerController()
             picker.sourceType = sourceType
             picker.allowsEditing = false
-            picker.mediaTypes = [kUTTypeImage]
+            picker.mediaTypes = [kUTTypeImage as String]
             picker.delegate = self
             self.presentViewController(picker, animated: true, completion: nil)
         } else {
@@ -259,7 +260,7 @@ class BaseAddItemViewController: XLFormViewController {
 
         if let referenceURL = info[UIImagePickerControllerReferenceURL] as? NSURL,
             let asset = PHAsset.fetchAssetsWithALAssetURLs([referenceURL], options: PHFetchOptions()).firstObject as? PHAsset {
-                future = Future.succeeded(asset)
+                future = Future(value: asset)
         } else if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
             var assetPlaceholder: PHObjectPlaceholder!
             PHPhotoLibrary.sharedPhotoLibrary().performChanges({
@@ -271,12 +272,13 @@ class BaseAddItemViewController: XLFormViewController {
                   let asset = PHAsset.fetchAssetsWithLocalIdentifiers([assetPlaceholder.localIdentifier], options: PHFetchOptions()).firstObject as? PHAsset {
                     promise.success(asset)
                 } else {
-                    promise.failure(error)
+                    let e = error ?? NetworkDataProvider.ErrorCodes.ParsingError.error()
+                    promise.failure(e)
                 }
             })
         } else {
             Log.error?.message("Get invalid media info: \(info)")
-            future = Future.failed(NSError())
+            future = Future(error: NetworkDataProvider.ErrorCodes.InvalidResponseError.error())
         }
         return future
     }
@@ -284,7 +286,7 @@ class BaseAddItemViewController: XLFormViewController {
 }
 
 extension BaseAddItemViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         Log.info?.message("Did pick image")
         fetchAssetFromPickerInfo(info).onComplete { [weak self] _ in
             self?.dismissViewControllerAnimated(true, completion: nil)

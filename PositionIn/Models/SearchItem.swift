@@ -33,7 +33,7 @@ struct SearchItem: CRUDObject {
         return "<\(self.dynamicType):\(objectId)>"
     }
     
-    enum SearchItemType: Int, Printable {
+    enum SearchItemType: Int, CustomStringConvertible {
         case Unknown
         case Category
         case Product

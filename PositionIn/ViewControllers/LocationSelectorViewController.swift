@@ -49,7 +49,9 @@ class LocationSelectorViewController: UIViewController, XLFormRowDescriptorViewC
     
     private lazy var selectionMarker: GMSMarker = { [unowned self] in
         let marker = GMSMarker()
-        self.coordinate.map { marker.position = $0 }
+        if let position = self.coordinate {
+            marker.position = position
+        }
         marker.appearAnimation = kGMSMarkerAnimationPop
         marker.draggable = true
         marker.map = self.mapView

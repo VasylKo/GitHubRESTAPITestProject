@@ -56,9 +56,9 @@ final class PeopleViewController: BesideMenuViewController {
                 firstFollowingRequestToken.invalidate()
                 peopleRequest = mySubscriptionsRequest.flatMap { response -> Future<CollectionResponse<UserInfo>,NSError> in
                     if let userList = response.items  where userList.count == 0 {
-                        return Future.failed(NSError())
+                        return Future(error: NetworkDataProvider.ErrorCodes.InvalidRequestError.error())
                     } else {
-                        return Future.succeeded(response)
+                        return Future(value: response)
                     }
                 }.andThen { [weak self] result in
                     switch result {
@@ -72,7 +72,7 @@ final class PeopleViewController: BesideMenuViewController {
         case .Explore:
             peopleRequest = api().getUsers(APIService.Page())
         }
-        peopleRequest.onSuccess(token: dataRequestToken) { [weak self] response in
+        peopleRequest.onSuccess(dataRequestToken.validContext) { [weak self] response in
             if let userList = response.items {
                 Log.debug?.value(userList)
                 self?.dataSource.setUserList(userList)

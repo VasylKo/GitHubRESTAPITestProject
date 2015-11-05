@@ -19,8 +19,8 @@ final class BrowseTabbar: UITabBar {
     var selectedMode: BrowseModeTabbarViewController.BrowseMode {
         get {
             if let selectedItem = selectedItem,
-               let items = items as? [UITabBarItem],
-               let index = find(items, selectedItem),
+               let items = items,
+               let index = items.indexOf(selectedItem),
                let mode = BrowseModeTabbarViewController.BrowseMode(rawValue: index) {
                     return mode
             }
@@ -28,7 +28,7 @@ final class BrowseTabbar: UITabBar {
         }
         set {
             let index = newValue.rawValue        
-            if let items = items as? [UITabBarItem] where indices(items) ~= index {
+            if let items = items  where items.indices ~= index {
                     selectedItem = items[index]
             }
         }
@@ -40,7 +40,7 @@ final class BrowseTabbar: UITabBar {
         configure()
     }
     
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         configure()
     }
@@ -58,7 +58,7 @@ final class BrowseTabbar: UITabBar {
 }
 
 extension BrowseTabbar: UITabBarDelegate {
-    func tabBar(tabBar: UITabBar, didSelectItem item: UITabBarItem!) {
+    func tabBar(tabBar: UITabBar, didSelectItem item: UITabBarItem) {
         browseDelegate?.tabbarDidChangeMode(self)
     }
 }

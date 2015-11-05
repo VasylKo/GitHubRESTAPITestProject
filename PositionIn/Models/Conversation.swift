@@ -75,14 +75,16 @@ extension Conversation: NSCoding {
     
     @objc func encodeWithCoder(aCoder: NSCoder) {
         aCoder.encodeObject(name, forKey: CodingKeys.name)
-        map(imageURL) { aCoder.encodeObject($0, forKey: CodingKeys.image) }
+        if let imageURL = imageURL {
+            aCoder.encodeObject(imageURL, forKey: CodingKeys.image)
+        }
         aCoder.encodeObject(lastActivityDate, forKey: CodingKeys.date)
         aCoder.encodeObject(roomId, forKey: CodingKeys.roomId)
         aCoder.encodeBool(isGroupChat, forKey: CodingKeys.isGroup)
         aCoder.encodeInteger(Int(unreadCount), forKey: CodingKeys.unread)
     }
     
-    @objc convenience init(coder aDecoder: NSCoder) {
+    @objc convenience init?(coder aDecoder: NSCoder) {
         let image = aDecoder.decodeObjectForKey(CodingKeys.image) as? NSURL
         let caption = aDecoder.decodeObjectForKey(CodingKeys.name) as? String ?? NSLocalizedString("Unnamed", comment: "Chat: Unknown conversation")
         let isGroupChat = aDecoder.decodeBoolForKey(CodingKeys.isGroup)
@@ -91,7 +93,9 @@ extension Conversation: NSCoding {
         let unread = UInt(aDecoder.decodeIntegerForKey(CodingKeys.unread))
         
         self.init(roomID: roomId, isMultiUser: isGroupChat, caption: caption, url: image)
-        map(date) { lastActivityDate = $0 }
+        if let date = date {
+            lastActivityDate = date
+        }
         _unreadCount = unread
     }
     

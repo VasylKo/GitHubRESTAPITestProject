@@ -33,7 +33,7 @@ protocol BrowseActionConsumer: class {
     
     //MARK: - Display mode -
     
-    enum DisplayMode: Int, Printable {
+    enum DisplayMode: Int, CustomStringConvertible {
         case Map = 0
         case List = 1
         
@@ -257,10 +257,7 @@ protocol BrowseActionConsumer: class {
                     f.users = [model.objectID]
                     return f
                 }
-                applyDisplayMode(displayMode)
-                
-            default:
-                break
+                applyDisplayMode(displayMode)                
             }
             
             self.searchbar.attributedText = self.searchBarAttributedText(model.title, searchString: searchString, locationString: locationString)

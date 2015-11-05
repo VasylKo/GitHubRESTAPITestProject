@@ -38,7 +38,7 @@ extension APIService {
     
     //Returns true if it is current user
     func isCurrentUser(userId: CRUDObjectId) -> Bool {
-        if let currentUserId = api().currentUserId() {
+        if let currentUserId: CRUDObjectId = api().currentUserId() {
             return currentUserId == userId
         }
         return false
@@ -96,9 +96,9 @@ extension APIService {
     
     
     //Login existing user
-    func login(#username: String, password: String) -> Future<UserProfile, NSError> {
+    func login(username username: String, password: String) -> Future<UserProfile, NSError> {
         return loginRequest(username: username, password: password).flatMap { _ in
-            return self.updateCurrentProfileStatus(newPasword: password)
+            return self.updateCurrentProfileStatus(password)
         }
     }
     
@@ -117,7 +117,7 @@ extension APIService {
     }
     
     //Register new user
-    func register(#username: String, password: String, firstName: String?, lastName: String?) -> Future<UserProfile, NSError> {
+    func register(username username: String, password: String, firstName: String?, lastName: String?) -> Future<UserProfile, NSError> {
         var info: [String: AnyObject] = [:]
         if let firstName = firstName {
             info ["firstName"] = firstName
@@ -126,20 +126,20 @@ extension APIService {
             info ["lastName"] = lastName
         }
         return registerRequest(username: username, password: password, info: info).flatMap { _ in
-            return self.updateCurrentProfileStatus(newPasword: password)
+            return self.updateCurrentProfileStatus(password)
         }
     }
     
     //MARK: - Private members -
     
     
-    private func registerRequest(#username: String?, password: String?, info: [String: AnyObject]?) -> Future<AuthResponse, NSError> {
+    private func registerRequest(username username: String?, password: String?, info: [String: AnyObject]?) -> Future<AuthResponse, NSError> {
         let urlRequest = AuthRouter.Register(api: self, username: username, password: password, profileInfo: info)
         let (_, future): (Alamofire.Request, Future<AuthResponse, NSError>) = dataProvider.objectRequest(urlRequest)
         return handleFailure(updateAuth(future))
     }
     
-    private func loginRequest(#username: String, password: String) -> Future<AuthResponse, NSError> {
+    private func loginRequest(username username: String, password: String) -> Future<AuthResponse, NSError> {
         let urlRequest = AuthRouter.Login(api: self, username: username, password: password)
         let (_, future): (Alamofire.Request, Future<AuthResponse, NSError>) = dataProvider.objectRequest(urlRequest)
         return handleFailure(updateAuth(future))
@@ -194,11 +194,11 @@ extension APIService {
         case Refresh(api: APIService, token: String)
 
         // URLRequestConvertible
-        var URLRequest: NSURLRequest {
+        var URLRequest: NSMutableURLRequest {
             let url:  NSURL
             var encoding: Alamofire.ParameterEncoding = .JSON
             var method: Alamofire.Method = .POST
-            var headers: [String : AnyObject] = [ "Content-Type" : "application/json"]
+            var headers: [String : String] = [ "Content-Type" : "application/json"]
             var params: [String: AnyObject] = [:]
 
             switch self {
@@ -249,11 +249,14 @@ extension APIService {
         
         private func deviceInfo() -> [String : AnyObject] {
             let device = UIDevice.currentDevice()
-            return [
+            var info = [
                 "make" : device.localizedModel,
-                "model" : "\(device.systemName) \(device.systemVersion)",
-                "uuid" : device.identifierForVendor.UUIDString,
-            ]
+                "model" : "\(device.systemName) \(device.systemVersion)"
+            ];
+            if let uuid = device.identifierForVendor {
+                info["uuid"] = uuid.UUIDString
+            }
+            return info
         }
     }
     

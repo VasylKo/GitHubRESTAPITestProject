@@ -21,6 +21,8 @@
             continueAfterRunningActions = "No"
             symbolName = "objc_exception_throw "
             moduleName = "">
+            <Locations>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -39,6 +41,8 @@
                   </ActionContent>
                </BreakpointActionProxy>
             </Actions>
+            <Locations>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

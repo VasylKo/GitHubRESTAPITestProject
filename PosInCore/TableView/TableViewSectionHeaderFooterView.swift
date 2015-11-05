@@ -15,7 +15,7 @@ public class TableViewSectionHeaderFooterView: UITableViewHeaderFooterView {
         installContentLayoutGuide()
     }
     
-    public required init(coder aDecoder: NSCoder) {
+    public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         installContentLayoutGuide()
     }
@@ -38,7 +38,7 @@ public class TableViewSectionHeaderFooterView: UITableViewHeaderFooterView {
     
     private func installContentLayoutGuide(){
         contentLayoutGuideView = UIView()
-        contentLayoutGuideView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        contentLayoutGuideView.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(contentLayoutGuideView)
         // For some reason, doing |-left-[_contentLayoutGuideView]-(right@999)-| doesn't work when the header's label is more than one line long, so we have to do this as a width.
         contentLayoutGuideWidthConstraint = NSLayoutConstraint(item: contentLayoutGuideView, attribute: .Width, relatedBy: .Equal,
@@ -49,7 +49,7 @@ public class TableViewSectionHeaderFooterView: UITableViewHeaderFooterView {
     }
     
     public var contentLayoutGuideInsets: UIEdgeInsets {
-        let (top: CGFloat, bottom: CGFloat) = {
+        let (top, bottom): (CGFloat, CGFloat) = {
             switch self.position {
             case .Header, .FirstHeader:
                 return (self.kLargeVerticalPadding, self.kSmallVerticalPadding)
@@ -82,7 +82,7 @@ public class TableViewSectionHeaderFooterView: UITableViewHeaderFooterView {
                 fatalError("undefined position")
             }
         }()
-        let metrics: [NSObject: AnyObject] = {
+        let metrics: [String: AnyObject] = {
            let edgeInsets = self.totalInsents()
             return [
                 "left": edgeInsets.left,
@@ -92,10 +92,10 @@ public class TableViewSectionHeaderFooterView: UITableViewHeaderFooterView {
                 "priorityNotRequired": (/*UILayoutPriorityRequired*/1000 - 1)
             ]
         }()
-        let views: [NSObject: AnyObject] = [ "contentLayoutGuideView" : contentLayoutGuideView ]
+        let views = [ "contentLayoutGuideView" : contentLayoutGuideView ]
 
-        let verticalConstraints = NSLayoutConstraint.constraintsWithVisualFormat(vfl, options: NSLayoutFormatOptions(0), metrics: metrics, views: views) as! [NSLayoutConstraint]
-        let horizontalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("H:|-left-[_contentLayoutGuideView]", options: NSLayoutFormatOptions(0), metrics: metrics, views: views) as! [NSLayoutConstraint]
+        let verticalConstraints = NSLayoutConstraint.constraintsWithVisualFormat(vfl, options: NSLayoutFormatOptions(rawValue: 0), metrics: metrics, views: views)
+        let horizontalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("H:|-left-[_contentLayoutGuideView]", options: NSLayoutFormatOptions(rawValue: 0), metrics: metrics, views: views) 
 
         contentView.addConstraints(verticalConstraints + horizontalConstraints)
         super.updateConstraints()

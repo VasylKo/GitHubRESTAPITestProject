@@ -254,12 +254,10 @@ struct APIService {
     func getSubscriptionStateForUser(userId: CRUDObjectId) -> Future<UserProfile.SubscriptionState, NSError> {
         //TODO: use follow":true from user profile response
         if isCurrentUser(userId) {
-            return future { () -> Result<UserProfile.SubscriptionState, NSError> in
-                return Result(value:.SameUser)
-            }
+            return Future(value: .SameUser)
         }
         return getMySubscriptions().map { (response: CollectionResponse<UserInfo>) -> UserProfile.SubscriptionState in
-            if count( response.items.filter { $0.objectId == userId } ) > 0 {
+            if (response.items.filter { $0.objectId == userId }).count > 0 {
                 return .Following
             } else {
                 return .NotFollowing
@@ -430,7 +428,11 @@ struct APIService {
     
     func statusCodeValidation<S: SequenceType where S.Generator.Element == Int>(statusCode acceptableStatusCode: S) -> Alamofire.Request.Validation {
         return { _, response in
-            return contains(acceptableStatusCode, response.statusCode)
+            if acceptableStatusCode.contains(response.statusCode) {
+                return .Success
+            } else {
+                return .Failure(NetworkDataProvider.ErrorCodes.TransferError.error())
+            }
         }
     }
     
@@ -447,7 +449,7 @@ struct APIService {
     private func url(endpoint: String, scheme: String, port: Int? = nil) -> NSURL {
         if let components = NSURLComponents(URL: baseURL, resolvingAgainstBaseURL: false) {
             components.scheme = scheme
-            components.path = (components.path ?? "").stringByAppendingPathComponent(endpoint)
+            components.path = ((components.path ?? "") as NSString).stringByAppendingPathComponent(endpoint)
             if let port = port {
                 components.port = port
             }
@@ -460,13 +462,13 @@ struct APIService {
     
     
     private func readRequest(token: String, endpoint: String, params: [String : AnyObject]? = nil) -> CRUDRequest {
-        var request = CRUDRequest(token: token, url: https(endpoint))
+        let request = CRUDRequest(token: token, url: https(endpoint))
         request.params = params
         return request
     }
 
     private func updateRequest(token: String, endpoint: String, method: Alamofire.Method = .POST, params: [String : AnyObject]? = nil) -> CRUDRequest {
-        var request = CRUDRequest(token: token, url: https(endpoint))
+        let request = CRUDRequest(token: token, url: https(endpoint))
         request.encoding = .JSON
         request.method = method
         request.params = params
@@ -483,7 +485,7 @@ extension APIService {
         let token: String
         let url: NSURL
         
-        var additionalHeaders: [String : AnyObject]?
+        var additionalHeaders: [String : String]?
         var method: Alamofire.Method = .GET
         var params: [String : AnyObject]?
         var encoding: Alamofire.ParameterEncoding = .URL
@@ -493,11 +495,10 @@ extension APIService {
             self.url = url
         }
         
-        
-        var URLRequest: NSURLRequest {
+        var URLRequest: NSMutableURLRequest {
             let r = NSMutableURLRequest(URL: url)
             r.HTTPMethod = method.rawValue
-            var headers: [String : AnyObject] = [
+            var headers = [
                 "Authorization": "Bearer \(token)",
                 "Accept" : "application/json",
             ]
@@ -573,21 +574,20 @@ extension APIService {
             let urlRequest = self.imageRequest(token)
             return self.dataProvider.upload(urlRequest, files: [fileInfo])
             }.flatMap { (response: AnyObject?) -> Future<NSURL, NSError> in
-                return future(context: ImmediateExecutionContext) { () -> Result<NSURL ,NSError> in                    
-                    if  let JSON = response as? [String: AnyObject],
-                        let url = AmazonURLTransform().transformFromJSON(JSON["url"]) {
-                            return Result(value: url)
-                            
-                    } else {
-                        return Result(error: NetworkDataProvider.ErrorCodes.InvalidResponseError.error())
+                let f: Future<NSURL, NSError> = future {
+                    guard let JSON = response as? [String: AnyObject],
+                          let url = AmazonURLTransform().transformFromJSON(JSON["url"])  else {
+                            return Result(error: NetworkDataProvider.ErrorCodes.InvalidResponseError.error())
                     }
+                    return Result(value: url)
                 }
+                return f
         }
     }
     
     private func imageRequest(token: String) -> CRUDRequest {
         let url = https("/v1.0/photos/upload")
-        var request = CRUDRequest(token: token, url: url)
+        let request = CRUDRequest(token: token, url: url)
         request.method = .POST
         return request
     }

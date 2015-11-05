@@ -33,7 +33,7 @@ struct StringValidation {
     }
     
     static func required() -> Validator {
-        return length(min: 1)
+        return length(1)
     }
     
     static func any() -> Validator {
@@ -44,7 +44,7 @@ struct StringValidation {
     
     static func length(min: Int = 0, max: Int = 100) -> Validator {
         return { string in
-            if contains(min..<max, count(string)) {
+            if (min..<max).contains(string.characters.count) {
                 return nil
             }
             let description = String(format: NSLocalizedString("This field cannot be less than %ld and longer than %ld ", comment: "Length validation"),

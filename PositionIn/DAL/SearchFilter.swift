@@ -34,7 +34,7 @@ struct SearchFilter: Mappable {
     /**
     Sets filter location.
     
-    :param: location location or nil for user location
+    - parameter location: location or nil for user location
     */
     static func setLocation(location: Location?) {
         var filter = SearchFilter.currentFilter
@@ -48,8 +48,7 @@ struct SearchFilter: Mappable {
     }
     
     static var isCustomLocationSet: Bool {
-        var filter = SearchFilter.currentFilter
-        return filter.locationName != nil
+        return SearchFilter.currentFilter.locationName != nil
     }
     
     private static var currentLocationToken = InvalidationToken()
@@ -57,7 +56,7 @@ struct SearchFilter: Mappable {
     static func updateCurrentLocation() {
         currentLocationToken.invalidate()
         currentLocationToken = InvalidationToken()
-        locationController().getCurrentCoordinate().onSuccess(token: currentLocationToken) { coordinate in
+        locationController().getCurrentCoordinate().onSuccess(currentLocationToken.validContext) { coordinate in
             var filter = SearchFilter.currentFilter
             filter.coordinates = coordinate
             SearchFilter.currentFilter = filter
@@ -92,13 +91,13 @@ struct SearchFilter: Mappable {
             radius = newValue?.value()
         }
         get {
-            return flatMap(radius) { Distance(rawValue: $0) } ?? .Anywhere
+            return radius.flatMap { Distance(rawValue: $0) } ?? .Anywhere
         }
     }
     
     private var radius: Double?
     
-    enum Distance: Double, Printable {
+    enum Distance: Double, CustomStringConvertible {
         case Km1 = 1
         case Km5 = 5
         case Km20 = 20
@@ -182,8 +181,8 @@ extension SearchFilter: APIServiceQueryConvertible {
     var query: [String : AnyObject]  {
         var filter = self
         filter.locationName = nil
-        filter.radius = map(filter.radius) { locationController().localeUsesMetricSystem() ? $0 : $0 * 1.60934}
-        var params = Mapper<SearchFilter>().toJSON(filter)
+        filter.radius = filter.radius.map { locationController().localeUsesMetricSystem() ? $0 : $0 * 1.60934}
+        let params = Mapper<SearchFilter>().toJSON(filter)
         return params
     }
 }

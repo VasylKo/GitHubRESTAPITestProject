@@ -30,9 +30,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     override init() {
         #if DEBUG
-        Log.enable(minimumSeverity: .Verbose, synchronousMode: true)
+        Log.enable(.Verbose, synchronousMode: true)
         #else
-        Log.enable(minimumSeverity: .Info, synchronousMode: false)
+        Log.enable(.Info, synchronousMode: false)
         #endif
         let appConfig = AppConfiguration()
         let urlSessionConfig = NSURLSessionConfiguration.defaultSessionConfiguration()
@@ -80,7 +80,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
     }
     
-    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool {
+    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
         return FBSDKApplicationDelegate.sharedInstance().application(application, openURL: url,
             sourceApplication: sourceApplication, annotation: annotation)
     }

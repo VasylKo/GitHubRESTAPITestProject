@@ -92,11 +92,11 @@ final class UserProfile: CRUDObject {
     }
     
     static func userEndpoint(userId: CRUDObjectId) -> String {
-        return UserProfile.endpoint().stringByAppendingPathComponent("\(userId)")
+        return (UserProfile.endpoint() as NSString).stringByAppendingPathComponent("\(userId)")
     }
     
     static func subscripttionEndpoint(userId: CRUDObjectId) -> String {
-        return UserProfile.userEndpoint(userId).stringByAppendingPathComponent("subscription")
+        return (UserProfile.userEndpoint(userId) as NSString).stringByAppendingPathComponent("subscription")
     }
 
     

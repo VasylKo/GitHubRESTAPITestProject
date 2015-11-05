@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "ABAD453CE39F86678A6F6D3E97CB02EDA2157B0A",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "B775552D1BBEEADC6A0BBB2FD048B6AA26CB309D" : 0,
+    "ABAD453CE39F86678A6F6D3E97CB02EDA2157B0A" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "67136111-F6FF-4A0B-B826-E2CFB6349EB9",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "B775552D1BBEEADC6A0BBB2FD048B6AA26CB309D" : "position-in-ios\/XMPPFramework",
+    "ABAD453CE39F86678A6F6D3E97CB02EDA2157B0A" : "position-in-ios"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "PositionIn",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "PositionIn.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/solunalabs\/position-in-ios.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "ABAD453CE39F86678A6F6D3E97CB02EDA2157B0A"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/robbiehanson\/XMPPFramework.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "B775552D1BBEEADC6A0BBB2FD048B6AA26CB309D"
+    }
+  ]
+}

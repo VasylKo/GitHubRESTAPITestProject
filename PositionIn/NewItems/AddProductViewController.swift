@@ -32,7 +32,7 @@ final class AddProductViewController: BaseAddItemViewController {
         self.initializeForm()
     }
     
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.initializeForm()
     }
@@ -149,12 +149,12 @@ final class AddProductViewController: BaseAddItemViewController {
                 view.userInteractionEnabled = false
                 getLocation.zip(getShop).zip(imageUpload).flatMap {
                     (info, urls: [NSURL]) -> Future<Product, NSError> in
-                    let (location: Location, shop: CRUDObjectId) = info
+                    let (location, shop): (Location, CRUDObjectId) = info
                     var product = Product()
                     product.name = values[Tags.Title.rawValue] as? String
                     product.price = values[Tags.Price.rawValue] as? Float
                     product.text = values[Tags.Description.rawValue] as? String
-                    product.quantity = map(values[Tags.Quantity.rawValue] as? Double) { Int($0) }
+                    product.quantity = (values[Tags.Quantity.rawValue] as? Double).map { Int($0) }
                     product.category = category
                     product.location = location
                     

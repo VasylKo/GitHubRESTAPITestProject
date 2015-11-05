@@ -18,7 +18,7 @@ class UploadPhotoCell: XLFormBaseCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
     }
     
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
@@ -60,16 +60,18 @@ class UploadPhotoCell: XLFormBaseCell {
     
     
     override func formDescriptorCellDidSelectedWithFormController(controller: XLFormViewController!) {
-        self.rowDescriptor.value = nil
+        self.rowDescriptor?.value = nil
         self.update()
         controller.tableView .selectRowAtIndexPath(nil, animated: true, scrollPosition: UITableViewScrollPosition.None)
-        if let addItemController = controller as? BaseAddItemViewController {
-            addItemController.didTouchPhoto(self.rowDescriptor)
+        guard  let addItemController = controller as? BaseAddItemViewController,
+               let descriptor = self.rowDescriptor else {
+                return
         }
+        addItemController.didTouchPhoto(descriptor)
     }
     
     var assets: [PHAsset]? {
-        return self.rowDescriptor.value as? [PHAsset]
+        return self.rowDescriptor?.value as? [PHAsset]
     }
     
     private weak var invitationView: PickPhotoView!

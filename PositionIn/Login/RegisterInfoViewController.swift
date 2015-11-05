@@ -31,8 +31,11 @@ final class RegisterInfoViewController: BaseLoginViewController {
         ]
         
         if validateInput(validationRules) {
-            let username = emailTextField.text
-            let password = passwordTextField.text
+            guard let username = emailTextField.text,
+                password = passwordTextField.text else {
+                    return
+            }
+            
             let firstName = firstnameTextField.text
             let lastName = lastnameTextField.text
             
