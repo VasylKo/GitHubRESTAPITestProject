@@ -56,7 +56,7 @@ final class AppConfiguration {
     
     let currencyFormatter: NSNumberFormatter = {
         let currencyFormatter = NSNumberFormatter()
-        currencyFormatter.currencySymbol = "$"
+        currencyFormatter.currencySymbol = "KSh"
         currencyFormatter.numberStyle = .CurrencyStyle
         currencyFormatter.generatesDecimalNumbers = false
         currencyFormatter.maximumFractionDigits = 0
