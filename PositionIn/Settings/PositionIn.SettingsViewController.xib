@@ -26,16 +26,16 @@
                     <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iN0-l3-epB" userLabel="Content View">
-                            <rect key="frame" x="0.0" y="0.0" width="600" height="472"/>
+                            <rect key="frame" x="0.0" y="0.0" width="600" height="481"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T1p-jq-JD3">
-                                    <rect key="frame" x="8" y="443" width="584" height="21"/>
+                                    <rect key="frame" x="8" y="452" width="584" height="21"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IfA-sb-Ayr">
-                                    <rect key="frame" x="20" y="113" width="560" height="48"/>
+                                    <rect key="frame" x="20" y="122" width="560" height="48"/>
                                     <color key="backgroundColor" red="0.92941176469999998" green="0.1058823529" blue="0.18039215689999999" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="48" id="liL-D3-M3M"/>
@@ -54,14 +54,14 @@
                                     </connections>
                                 </button>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="positionin_settings_icon" translatesAutoresizingMaskIntoConstraints="NO" id="5Ot-Y4-rBN">
-                                    <rect key="frame" x="255" y="30" width="90" height="63"/>
+                                    <rect key="frame" x="243" y="30" width="114" height="72"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="63" id="SyF-fi-InK"/>
-                                        <constraint firstAttribute="width" constant="90" id="gj6-Kg-SBu"/>
+                                        <constraint firstAttribute="height" constant="72" id="SyF-fi-InK"/>
+                                        <constraint firstAttribute="width" constant="114" id="gj6-Kg-SBu"/>
                                     </constraints>
                                 </imageView>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="brc-L0-rwf">
-                                    <rect key="frame" x="0.0" y="191" width="600" height="48"/>
+                                    <rect key="frame" x="0.0" y="200" width="600" height="48"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="48" id="5xa-2R-e0v"/>
@@ -76,7 +76,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S0w-2X-ySo">
-                                    <rect key="frame" x="0.0" y="239" width="600" height="48"/>
+                                    <rect key="frame" x="0.0" y="248" width="600" height="48"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="48" id="HP2-F4-W3E"/>
@@ -91,7 +91,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sZh-7v-iPi">
-                                    <rect key="frame" x="0.0" y="287" width="600" height="48"/>
+                                    <rect key="frame" x="0.0" y="296" width="600" height="48"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="48" id="EGz-KV-uUs"/>
@@ -106,7 +106,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9lT-hg-Zdr">
-                                    <rect key="frame" x="0.0" y="375" width="600" height="48"/>
+                                    <rect key="frame" x="0.0" y="384" width="600" height="48"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="48" id="zPL-3A-fxf"/>
@@ -168,6 +168,6 @@
         </view>
     </objects>
     <resources>
-        <image name="positionin_settings_icon" width="90" height="60"/>
+        <image name="positionin_settings_icon" width="114" height="71"/>
     </resources>
 </document>

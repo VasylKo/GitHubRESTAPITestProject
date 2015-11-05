@@ -183,7 +183,13 @@
                             <constraint firstAttribute="bottomMargin" secondItem="BT1-Fz-1Vn" secondAttribute="bottom" constant="67" id="t6b-n3-6eG"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="VKm-dI-cDT"/>
+                    <navigationItem key="navigationItem" id="5In-5m-b7e">
+                        <barButtonItem key="rightBarButtonItem" title="Skip" id="caP-KM-u8L">
+                            <connections>
+                                <action selector="didTapClose:" destination="JGW-l6-Shb" id="k6W-P3-mvM"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="loginButton" destination="OSW-D1-BDU" id="CAy-Fl-K6u"/>
                         <outlet property="signupButton" destination="aXa-R3-BMg" id="8hH-n5-gHb"/>
@@ -192,7 +198,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Z3I-kB-SGj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="595" y="348"/>
+            <point key="canvasLocation" x="495" y="484"/>
         </scene>
         <!--Register View Controller-->
         <scene sceneID="H6T-Z4-yaB">
@@ -349,7 +355,13 @@
                             <constraint firstAttribute="centerX" secondItem="yvy-Oo-AWn" secondAttribute="centerX" id="uQQ-Og-UGA"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="r6h-lC-HMG"/>
+                    <navigationItem key="navigationItem" id="n9Q-kk-SVI">
+                        <barButtonItem key="rightBarButtonItem" title="Skip" id="Ykm-3c-Uy1">
+                            <connections>
+                                <action selector="didTapClose:" destination="zd3-fl-Vea" id="ZSo-9m-9BI"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="emailTextField" destination="Dk8-oL-kIO" id="nVA-dK-0UW"/>
                         <outlet property="scrollView" destination="yvy-Oo-AWn" id="rFh-k9-MSt"/>
@@ -376,14 +388,14 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LoginBg" translatesAutoresizingMaskIntoConstraints="NO" id="yyT-AO-tQ7">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
                             </imageView>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0uZ-Oh-6sF">
-                                <rect key="frame" x="30" y="40" width="540" height="429"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0uZ-Oh-6sF">
+                                <rect key="frame" x="30" y="51" width="540" height="481"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hS7-ec-JKq">
                                         <rect key="frame" x="0.0" y="0.0" width="540" height="419"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JOh-mS-msW">
-                                                <rect key="frame" x="0.0" y="335" width="540" height="46"/>
+                                                <rect key="frame" x="0.0" y="334" width="540" height="46"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="46" id="0Hv-Vu-KJg"/>
@@ -425,7 +437,7 @@
                                                 </constraints>
                                             </imageView>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VdK-K2-a8E">
-                                                <rect key="frame" x="40" y="258" width="500" height="19"/>
+                                                <rect key="frame" x="40" y="257" width="500" height="19"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
@@ -444,7 +456,7 @@
                                                 </connections>
                                             </textField>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LoginEmailIcon" translatesAutoresizingMaskIntoConstraints="NO" id="oB4-AE-T4H">
-                                                <rect key="frame" x="9" y="258" width="22" height="21"/>
+                                                <rect key="frame" x="9" y="257" width="22" height="21"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="21" id="573-IA-9ZX"/>
                                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21" id="DBX-TF-LtO"/>
@@ -453,7 +465,7 @@
                                                 </constraints>
                                             </imageView>
                                             <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cGd-51-38A">
-                                                <rect key="frame" x="9" y="288" width="531" height="1"/>
+                                                <rect key="frame" x="9" y="287" width="531" height="1"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="1" id="S3z-7t-Erh"/>
@@ -518,7 +530,13 @@
                         </constraints>
                     </view>
                     <toolbarItems/>
-                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
+                    <navigationItem key="navigationItem" id="sMI-MB-qRh">
+                        <barButtonItem key="rightBarButtonItem" title="Skip" id="oNu-Qa-HXG">
+                            <connections>
+                                <action selector="didTapClose:" destination="cgn-EO-laz" id="g6N-0K-vAG"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="scrollView" destination="0uZ-Oh-6sF" id="DWB-Me-wxk"/>
@@ -538,14 +556,14 @@
                         <viewControllerLayoutGuide type="bottom" id="lrc-dN-y4z"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="wbo-Q2-GLY">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LoginBg" translatesAutoresizingMaskIntoConstraints="NO" id="Chd-Fb-zU4">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
                             </imageView>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="prw-Bu-zJJ">
-                                <rect key="frame" x="30" y="103" width="540" height="499"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="prw-Bu-zJJ">
+                                <rect key="frame" x="30" y="103" width="540" height="448"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bIC-Jp-AHT">
                                         <rect key="frame" x="0.0" y="0.0" width="540" height="453"/>
@@ -749,8 +767,13 @@
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" id="kf3-3G-LQA"/>
-                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <navigationItem key="navigationItem" id="pa5-3p-aQD">
+                        <barButtonItem key="rightBarButtonItem" title="Skip" id="RQ2-hC-Vte">
+                            <connections>
+                                <action selector="didTapClose:" destination="cOZ-SQ-Q1c" id="Dhh-OY-NiX"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="loginButton" destination="3yP-kR-Kvh" id="TBo-H0-lGJ"/>
                         <outlet property="passwordTextField" destination="dtP-Xu-Y0i" id="rdq-5b-M6t"/>
@@ -1055,8 +1078,13 @@
                             <constraint firstItem="vKo-xD-S5W" firstAttribute="height" secondItem="iNE-GN-LDk" secondAttribute="height" multiplier="0.8" id="uYg-OA-ddE"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="4xJ-HN-ZRJ"/>
-                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
+                    <navigationItem key="navigationItem" id="VS7-4a-QfQ">
+                        <barButtonItem key="rightBarButtonItem" title="Skip" id="W89-CK-RxH">
+                            <connections>
+                                <action selector="didTapClose:" destination="pfT-Kp-HW4" id="Ncb-NX-hw4"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="emailTextField" destination="MeG-G9-ab5" id="sxW-7g-o9S"/>
                         <outlet property="firstnameTextField" destination="IH7-bo-DFg" id="hhg-LT-wXy"/>
@@ -1079,6 +1107,6 @@
         <image name="LoginUserIcon" width="22" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="SCq-Vd-4cR"/>
+        <segue reference="MuX-Xx-gu7"/>
     </inferredMetricsTieBreakers>
 </document>
