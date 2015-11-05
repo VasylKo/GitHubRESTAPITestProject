@@ -65,11 +65,12 @@ final class MainMenuViewController: UIViewController {
     }
     
     private func subscribeToNotifications(){
+        //Browse mode did change
         let browseModeBlock: NSNotification! -> Void = { [weak self] notification in
             if  let menuController = self,
                 let browseController = notification.object as? BrowseViewController,
                 let action = menuController.actionForMode(browseController.browseMode) {
-                    for (idx, item) in enumerate(menuController.dataSource.items) {
+                    for (idx, item) in menuController.dataSource.items.enumerate() {
                         if item.action == action {
                             let indexPath = NSIndexPath(forRow: idx, inSection: 0)
                             menuController.tableView.selectRowAtIndexPath(indexPath, animated: true, scrollPosition: .Top)
@@ -86,6 +87,7 @@ final class MainMenuViewController: UIViewController {
             usingBlock: browseModeBlock
         )
         
+        //User did change
         let userChangeBlock: NSNotification! -> Void = { [weak self] notification in
             let newProfile = notification.object as? UserProfile
             dispatch_async(dispatch_get_main_queue()) {
@@ -102,15 +104,15 @@ final class MainMenuViewController: UIViewController {
             queue: nil,
             usingBlock: userChangeBlock)
         
+        
+        //Conversations did change
         let conversationChangeBlock: NSNotification! -> Void = { [weak self] notification in
-            let newProfile = notification.object as? UserProfile
             dispatch_async(dispatch_get_main_queue()) {
                 if let menuController = self {
                     menuController.tableView.reloadData()
                 }
             }
         }
-        
         conversationDidChangeObserver = NSNotificationCenter.defaultCenter().addObserverForName(
             ConversationManager.ConversationsDidChangeNotification,
             object: nil,

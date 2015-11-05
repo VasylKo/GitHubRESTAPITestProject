@@ -25,7 +25,7 @@ public class TableViewDataSource: NSObject {
     }
     
     public func tableView(tableView: UITableView, configureFooter footer: TableViewSectionHeaderFooterView, forSection section: Int) {
-        footer.position = (tableView.numberOfSections() - 1 == section) ? .LastFooter : .Footer
+        footer.position = (tableView.numberOfSections - 1 == section) ? .LastFooter : .Footer
     }
     
     
@@ -123,29 +123,28 @@ extension TableViewDataSource: UITableViewDelegate {
 //MARK: ChildViewController support
 extension TableViewDataSource {
     @objc public func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-        if cell.conformsToProtocol(TableViewChildViewControllerCell) {
-            if let parentController = parentViewController {
-                let viewControllerCell = cell as! TableViewChildViewControllerCell
-                let childController = viewControllerCell.childViewController
-                childController.willMoveToParentViewController(parentController)
-                parentController.addChildViewController(childController)
-                childController.didMoveToParentViewController(parentController)
-            } else {
-                fatalError("Must have a parent view controller to support cell \(cell)")
-            }
+        guard cell.conformsToProtocol(TableViewChildViewControllerCell) else  {
+            return
         }
+        guard let parentController = parentViewController else {
+            fatalError("Must have a parent view controller to support cell \(cell)")
+        }
+        let viewControllerCell = cell as! TableViewChildViewControllerCell
+        let childController = viewControllerCell.childViewController
+        childController.willMoveToParentViewController(parentController)
+        parentController.addChildViewController(childController)
+        childController.didMoveToParentViewController(parentController)
     }
     
     @objc public func tableView(tableView: UITableView, didEndDisplayingCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         if cell.conformsToProtocol(TableViewChildViewControllerCell) {
-            if let parentController = parentViewController {
-                let viewControllerCell = cell as! TableViewChildViewControllerCell
-                let childController = viewControllerCell.childViewController
-                childController.willMoveToParentViewController(nil)
-                childController.removeFromParentViewController()
-            } else {
+            guard let _ = parentViewController else {
                 fatalError("Must have a parent view controller to support cell \(cell)")
             }
+            let viewControllerCell = cell as! TableViewChildViewControllerCell
+            let childController = viewControllerCell.childViewController
+            childController.willMoveToParentViewController(nil)
+            childController.removeFromParentViewController()
         }
     }
     

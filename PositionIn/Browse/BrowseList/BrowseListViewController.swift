@@ -88,22 +88,24 @@ final class BrowseListViewController: UIViewController, BrowseActionProducer, Br
         case .New:
             request = api().getFeed(searchFilter, page: page)
         }
-        request.onSuccess(token: dataRequestToken) {
+        request.onSuccess(dataRequestToken.validContext) {
             [weak self] response in
             Log.debug?.value(response.items)
-            if let strongSelf = self,
-               let itemTypes = searchFilter.itemTypes
+            guard let strongSelf = self,
+                let itemTypes = searchFilter.itemTypes
                 //TODO: need discuss this moment
-               where contains(itemTypes, strongSelf.selectedItemType) || strongSelf.selectedItemType == .Unknown  {
-                var items: [FeedItem] = response.items
-                if strongSelf.excludeCommunityItems {
-                    items = items.filter { $0.community == CRUDObjectInvalidId }
-                }
-                strongSelf.dataSource.setItems(items)
-                strongSelf.tableView.reloadData()
-                strongSelf.tableView.setContentOffset(CGPointZero, animated: false)
-                strongSelf.actionConsumer?.browseControllerDidChangeContent(strongSelf)
+                where itemTypes.contains(strongSelf.selectedItemType) || strongSelf.selectedItemType == .Unknown  else {
+                    return
             }
+
+            var items: [FeedItem] = response.items
+            if strongSelf.excludeCommunityItems {
+                items = items.filter { $0.community == CRUDObjectInvalidId }
+            }
+            strongSelf.dataSource.setItems(items)
+            strongSelf.tableView.reloadData()
+            strongSelf.tableView.setContentOffset(CGPointZero, animated: false)
+            strongSelf.actionConsumer?.browseControllerDidChangeContent(strongSelf)
         }
     }
     
@@ -153,11 +155,11 @@ extension BrowseListViewController {
         }
         
         func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-            return count(models)
+            return models.count
         }
         
         @objc override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            return count(models[section])
+            return models[section].count
         }
         
         override func tableView(tableView: UITableView, modelForIndexPath indexPath: NSIndexPath) -> TableViewCellModel {
@@ -200,7 +202,7 @@ extension BrowseListViewController {
         }
         
         private var actionConsumer: BrowseActionConsumer? {
-            return flatMap(parentViewController as? BrowseActionProducer) { $0.actionConsumer }
+            return (parentViewController as? BrowseActionProducer).flatMap { $0.actionConsumer }
 
         }
         

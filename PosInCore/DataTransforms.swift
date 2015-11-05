@@ -60,7 +60,7 @@ public class RelativeURLTransform: TransformType {
         if let URL = value,
             let components = NSURLComponents(URL: URL, resolvingAgainstBaseURL: true) {
                 let result = components.URLRelativeToURL(baseURL)?.relativePath
-                println(result)
+                print(result)
                 return result
                 
         }

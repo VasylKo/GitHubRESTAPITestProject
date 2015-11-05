@@ -6,9 +6,25 @@
 import UIKit
 
 //MARK: - Storyboards
+
+extension UIStoryboard {
+    func instantiateViewController<T: UIViewController where T: IdentifiableProtocol>(type: T.Type) -> T? {
+        let instance = type.init()
+        if let identifier = instance.identifier {
+            return self.instantiateViewControllerWithIdentifier(identifier) as? T
+        }
+        return nil
+    }
+}
+
+protocol Storyboard {
+    static var storyboard: UIStoryboard { get }
+    static var identifier: String { get }
+}
+
 struct Storyboards {
 
-    struct Main {
+    struct Main: Storyboard {
 
         static let identifier = "Main"
 
@@ -16,84 +32,128 @@ struct Storyboards {
             return UIStoryboard(name: self.identifier, bundle: nil)
         }
 
-        static func instantiateInitialViewController() -> SidebarViewController! {
+        static func instantiateInitialViewController() -> SidebarViewController {
             return self.storyboard.instantiateInitialViewController() as! SidebarViewController
         }
 
         static func instantiateViewControllerWithIdentifier(identifier: String) -> UIViewController {
-            return self.storyboard.instantiateViewControllerWithIdentifier(identifier) as! UIViewController
+            return self.storyboard.instantiateViewControllerWithIdentifier(identifier)
         }
 
-        static func instantiateMainMenuViewController() -> MainMenuViewController! {
+        static func instantiateViewController<T: UIViewController where T: IdentifiableProtocol>(type: T.Type) -> T? {
+            return self.storyboard.instantiateViewController(type)
+        }
+
+        static func instantiateMainMenuViewController() -> MainMenuViewController {
             return self.storyboard.instantiateViewControllerWithIdentifier("MainMenuViewController") as! MainMenuViewController
         }
 
-        static func instantiateCreateConversationViewController() -> CreateConversationViewController! {
+        static func instantiateMapNavigationController() -> UINavigationController {
+            return self.storyboard.instantiateViewControllerWithIdentifier("MapNavigationController") as! UINavigationController
+        }
+
+        static func instantiateMessagingNavigationController() -> UINavigationController {
+            return self.storyboard.instantiateViewControllerWithIdentifier("MessagingNavigationController") as! UINavigationController
+        }
+
+        static func instantiateFiltersNavigationController() -> UINavigationController {
+            return self.storyboard.instantiateViewControllerWithIdentifier("FiltersNavigationController") as! UINavigationController
+        }
+
+        static func instantiateCreateConversationViewController() -> CreateConversationViewController {
             return self.storyboard.instantiateViewControllerWithIdentifier("CreateConversationViewController") as! CreateConversationViewController
         }
 
-        static func instantiateBrowseCommunityViewController() -> BrowseCommunityViewController! {
+        static func instantiateBrowseCommunityViewController() -> BrowseCommunityViewController {
             return self.storyboard.instantiateViewControllerWithIdentifier("BrowseCommunityViewController") as! BrowseCommunityViewController
         }
 
-        static func instantiateSearchViewController() -> SearchViewController! {
+        static func instantiateSearchViewController() -> SearchViewController {
             return self.storyboard.instantiateViewControllerWithIdentifier("SearchViewController") as! SearchViewController
         }
 
-        static func instantiateBrowseMapViewController() -> BrowseMapViewController! {
+        static func instantiateBrowseMapViewController() -> BrowseMapViewController {
             return self.storyboard.instantiateViewControllerWithIdentifier("BrowseMapViewController") as! BrowseMapViewController
         }
 
-        static func instantiateBrowseListViewController() -> BrowseListViewController! {
+        static func instantiateBrowseListViewController() -> BrowseListViewController {
             return self.storyboard.instantiateViewControllerWithIdentifier("BrowseListViewController") as! BrowseListViewController
         }
 
-        static func instantiateProductDetailsViewControllerId() -> ProductDetailsViewController! {
+        static func instantiateProductDetailsViewControllerId() -> ProductDetailsViewController {
             return self.storyboard.instantiateViewControllerWithIdentifier("ProductDetailsViewControllerId") as! ProductDetailsViewController
         }
 
-        static func instantiateEventDetailsViewControllerId() -> EventDetailsViewController! {
+        static func instantiateEventDetailsViewControllerId() -> EventDetailsViewController {
             return self.storyboard.instantiateViewControllerWithIdentifier("EventDetailsViewControllerId") as! EventDetailsViewController
         }
 
-        static func instantiatePromotionDetailsViewControllerId() -> PromotionDetailsViewController! {
+        static func instantiatePromotionDetailsViewControllerId() -> PromotionDetailsViewController {
             return self.storyboard.instantiateViewControllerWithIdentifier("PromotionDetailsViewControllerId") as! PromotionDetailsViewController
         }
 
-        static func instantiatePostViewController() -> PostViewController! {
+        static func instantiatePostViewController() -> PostViewController {
             return self.storyboard.instantiateViewControllerWithIdentifier("PostViewController") as! PostViewController
         }
 
-        static func instantiateMapViewController() -> BrowseViewController! {
+        static func instantiateMapViewController() -> BrowseViewController {
             return self.storyboard.instantiateViewControllerWithIdentifier("MapViewController") as! BrowseViewController
         }
 
-        static func instantiatePeopleViewController() -> PeopleViewController! {
+        static func instantiateBrowseCommunityNavigationController() -> UINavigationController {
+            return self.storyboard.instantiateViewControllerWithIdentifier("BrowseCommunityNavigationController") as! UINavigationController
+        }
+
+        static func instantiateSettingsNavigationController() -> UINavigationController {
+            return self.storyboard.instantiateViewControllerWithIdentifier("SettingsNavigationController") as! UINavigationController
+        }
+
+        static func instantiatePeopleNavigationController() -> UINavigationController {
+            return self.storyboard.instantiateViewControllerWithIdentifier("PeopleNavigationController") as! UINavigationController
+        }
+
+        static func instantiatePeopleViewController() -> PeopleViewController {
             return self.storyboard.instantiateViewControllerWithIdentifier("PeopleViewController") as! PeopleViewController
         }
 
-        static func instantiateUserProfileViewController() -> UserProfileViewController! {
+        static func instantiateUserProfileViewController() -> UserProfileViewController {
             return self.storyboard.instantiateViewControllerWithIdentifier("UserProfileViewController") as! UserProfileViewController
         }
 
-        static func instantiateCommunityFeedViewController() -> CommunityFeedViewController! {
+        static func instantiateMyProfileNavigationController() -> UINavigationController {
+            return self.storyboard.instantiateViewControllerWithIdentifier("MyProfileNavigationController") as! UINavigationController
+        }
+
+        static func instantiateCommunityFeedViewController() -> CommunityFeedViewController {
             return self.storyboard.instantiateViewControllerWithIdentifier("CommunityFeedViewController") as! CommunityFeedViewController
         }
 
-        static func instantiateSettingsViewController() -> SettingsViewController! {
+        static func instantiateSettingsViewController() -> SettingsViewController {
             return self.storyboard.instantiateViewControllerWithIdentifier("SettingsViewController") as! SettingsViewController
         }
 
-        static func instantiateCommunityViewController() -> CommunityViewController! {
+        static func instantiateCommunityViewController() -> CommunityViewController {
             return self.storyboard.instantiateViewControllerWithIdentifier("CommunityViewController") as! CommunityViewController
         }
 
-        static func instantiateWalletViewController() -> WalletViewController! {
+        static func instantiateCommunityNavigationController() -> UINavigationController {
+            return self.storyboard.instantiateViewControllerWithIdentifier("CommunityNavigationController") as! UINavigationController
+        }
+
+        static func instantiateWalletNavigationController() -> UINavigationController {
+            return self.storyboard.instantiateViewControllerWithIdentifier("WalletNavigationController") as! UINavigationController
+        }
+
+        static func instantiateSplashViewController() -> UIViewController {
+            return self.storyboard.instantiateViewControllerWithIdentifier("SplashViewController") 
+        }
+
+        static func instantiateWalletViewController() -> WalletViewController {
             return self.storyboard.instantiateViewControllerWithIdentifier("WalletViewController") as! WalletViewController
         }
     }
 
-    struct Login {
+    struct Login: Storyboard {
 
         static let identifier = "Login"
 
@@ -101,36 +161,40 @@ struct Storyboards {
             return UIStoryboard(name: self.identifier, bundle: nil)
         }
 
-        static func instantiateInitialViewController() -> UINavigationController! {
+        static func instantiateInitialViewController() -> UINavigationController {
             return self.storyboard.instantiateInitialViewController() as! UINavigationController
         }
 
         static func instantiateViewControllerWithIdentifier(identifier: String) -> UIViewController {
-            return self.storyboard.instantiateViewControllerWithIdentifier(identifier) as! UIViewController
+            return self.storyboard.instantiateViewControllerWithIdentifier(identifier)
         }
 
-        static func instantiateLoginSignUpViewController() -> LoginSignupViewController! {
+        static func instantiateViewController<T: UIViewController where T: IdentifiableProtocol>(type: T.Type) -> T? {
+            return self.storyboard.instantiateViewController(type)
+        }
+
+        static func instantiateLoginSignUpViewController() -> LoginSignupViewController {
             return self.storyboard.instantiateViewControllerWithIdentifier("LoginSignUpViewController") as! LoginSignupViewController
         }
 
-        static func instantiateRegisterViewController() -> RegisterViewController! {
+        static func instantiateRegisterViewController() -> RegisterViewController {
             return self.storyboard.instantiateViewControllerWithIdentifier("RegisterViewController") as! RegisterViewController
         }
 
-        static func instantiateRecoverPasswordViewController() -> RecoverPasswordViewController! {
+        static func instantiateRecoverPasswordViewController() -> RecoverPasswordViewController {
             return self.storyboard.instantiateViewControllerWithIdentifier("RecoverPasswordViewController") as! RecoverPasswordViewController
         }
 
-        static func instantiateLoginViewController() -> LoginViewController! {
+        static func instantiateLoginViewController() -> LoginViewController {
             return self.storyboard.instantiateViewControllerWithIdentifier("LoginViewController") as! LoginViewController
         }
 
-        static func instantiateRegisterInfoViewController() -> RegisterInfoViewController! {
+        static func instantiateRegisterInfoViewController() -> RegisterInfoViewController {
             return self.storyboard.instantiateViewControllerWithIdentifier("RegisterInfoViewController") as! RegisterInfoViewController
         }
     }
 
-    struct NewItems {
+    struct NewItems: Storyboard {
 
         static let identifier = "NewItems"
 
@@ -139,41 +203,45 @@ struct Storyboards {
         }
 
         static func instantiateViewControllerWithIdentifier(identifier: String) -> UIViewController {
-            return self.storyboard.instantiateViewControllerWithIdentifier(identifier) as! UIViewController
+            return self.storyboard.instantiateViewControllerWithIdentifier(identifier)
         }
 
-        static func instantiateAddProductViewController() -> AddProductViewController! {
+        static func instantiateViewController<T: UIViewController where T: IdentifiableProtocol>(type: T.Type) -> T? {
+            return self.storyboard.instantiateViewController(type)
+        }
+
+        static func instantiateAddProductViewController() -> AddProductViewController {
             return self.storyboard.instantiateViewControllerWithIdentifier("AddProductViewController") as! AddProductViewController
         }
 
-        static func instantiateAddPostViewController() -> AddPostViewController! {
+        static func instantiateAddPostViewController() -> AddPostViewController {
             return self.storyboard.instantiateViewControllerWithIdentifier("AddPostViewController") as! AddPostViewController
         }
 
-        static func instantiateAddCommunityViewController() -> AddCommunityViewController! {
+        static func instantiateAddCommunityViewController() -> AddCommunityViewController {
             return self.storyboard.instantiateViewControllerWithIdentifier("AddCommunityViewController") as! AddCommunityViewController
         }
 
-        static func instantiateEditCommunityViewController() -> EditCommunityViewController! {
+        static func instantiateEditCommunityViewController() -> EditCommunityViewController {
             return self.storyboard.instantiateViewControllerWithIdentifier("EditCommunityViewController") as! EditCommunityViewController
         }
 
-        static func instantiateEditProfileViewController() -> EditProfileViewController! {
+        static func instantiateEditProfileViewController() -> EditProfileViewController {
             return self.storyboard.instantiateViewControllerWithIdentifier("EditProfileViewController") as! EditProfileViewController
         }
 
-        static func instantiateAddPromotionViewController() -> AddPromotionViewController! {
+        static func instantiateAddPromotionViewController() -> AddPromotionViewController {
             return self.storyboard.instantiateViewControllerWithIdentifier("AddPromotionViewController") as! AddPromotionViewController
         }
 
-        static func instantiateAddEventViewController() -> AddEventViewController! {
+        static func instantiateAddEventViewController() -> AddEventViewController {
             return self.storyboard.instantiateViewControllerWithIdentifier("AddEventViewController") as! AddEventViewController
         }
     }
 }
 
 //MARK: - ReusableKind
-enum ReusableKind: String, Printable {
+enum ReusableKind: String, CustomStringConvertible {
     case TableViewCell = "tableViewCell"
     case CollectionViewCell = "collectionViewCell"
 
@@ -181,12 +249,17 @@ enum ReusableKind: String, Printable {
 }
 
 //MARK: - SegueKind
-enum SegueKind: String, Printable {    
+enum SegueKind: String, CustomStringConvertible {    
     case Relationship = "relationship" 
     case Show = "show"                 
     case Presentation = "presentation" 
     case Embed = "embed"               
     case Unwind = "unwind"             
+    case Push = "push"                 
+    case Modal = "modal"               
+    case Popover = "popover"           
+    case Replace = "replace"           
+    case Custom = "custom"             
 
     var description: String { return self.rawValue } 
 }
@@ -200,28 +273,36 @@ public protocol SegueProtocol: IdentifiableProtocol {
 }
 
 public func ==<T: SegueProtocol, U: SegueProtocol>(lhs: T, rhs: U) -> Bool {
-   return lhs.identifier == rhs.identifier
+    return lhs.identifier == rhs.identifier
 }
 
 public func ~=<T: SegueProtocol, U: SegueProtocol>(lhs: T, rhs: U) -> Bool {
-   return lhs.identifier == rhs.identifier
+    return lhs.identifier == rhs.identifier
 }
 
 public func ==<T: SegueProtocol>(lhs: T, rhs: String) -> Bool {
-   return lhs.identifier == rhs
+    return lhs.identifier == rhs
 }
 
 public func ~=<T: SegueProtocol>(lhs: T, rhs: String) -> Bool {
-   return lhs.identifier == rhs
+    return lhs.identifier == rhs
+}
+
+public func ==<T: SegueProtocol>(lhs: String, rhs: T) -> Bool {
+    return lhs == rhs.identifier
+}
+
+public func ~=<T: SegueProtocol>(lhs: String, rhs: T) -> Bool {
+    return lhs == rhs.identifier
 }
 
 //MARK: - ReusableViewProtocol
 public protocol ReusableViewProtocol: IdentifiableProtocol {
-    var viewType: UIView.Type? {get}
+    var viewType: UIView.Type? { get }
 }
 
 public func ==<T: ReusableViewProtocol, U: ReusableViewProtocol>(lhs: T, rhs: U) -> Bool {
-   return lhs.identifier == rhs.identifier
+    return lhs.identifier == rhs.identifier
 }
 
 //MARK: - Protocol Implementation
@@ -229,23 +310,25 @@ extension UIStoryboardSegue: SegueProtocol {
 }
 
 extension UICollectionReusableView: ReusableViewProtocol {
-    public var viewType: UIView.Type? { return self.dynamicType}
-    public var identifier: String? { return self.reuseIdentifier}
+    public var viewType: UIView.Type? { return self.dynamicType }
+    public var identifier: String? { return self.reuseIdentifier }
 }
 
 extension UITableViewCell: ReusableViewProtocol {
-    public var viewType: UIView.Type? { return self.dynamicType}
-    public var identifier: String? { return self.reuseIdentifier}
+    public var viewType: UIView.Type? { return self.dynamicType }
+    public var identifier: String? { return self.reuseIdentifier }
 }
 
 //MARK: - UIViewController extension
 extension UIViewController {
     func performSegue<T: SegueProtocol>(segue: T, sender: AnyObject?) {
-       performSegueWithIdentifier(segue.identifier, sender: sender)
+        if let identifier = segue.identifier {
+            performSegueWithIdentifier(identifier, sender: sender)
+        }
     }
 
     func performSegue<T: SegueProtocol>(segue: T) {
-       performSegue(segue, sender: nil)
+        performSegue(segue, sender: nil)
     }
 }
 
@@ -255,7 +338,7 @@ extension UICollectionView {
 
     func dequeueReusableCell<T: ReusableViewProtocol>(reusable: T, forIndexPath: NSIndexPath!) -> UICollectionViewCell? {
         if let identifier = reusable.identifier {
-            return dequeueReusableCellWithReuseIdentifier(identifier, forIndexPath: forIndexPath) as? UICollectionViewCell
+            return dequeueReusableCellWithReuseIdentifier(identifier, forIndexPath: forIndexPath)
         }
         return nil
     }
@@ -268,7 +351,7 @@ extension UICollectionView {
 
     func dequeueReusableSupplementaryViewOfKind<T: ReusableViewProtocol>(elementKind: String, withReusable reusable: T, forIndexPath: NSIndexPath!) -> UICollectionReusableView? {
         if let identifier = reusable.identifier {
-            return dequeueReusableSupplementaryViewOfKind(elementKind, withReuseIdentifier: identifier, forIndexPath: forIndexPath) as? UICollectionReusableView
+            return dequeueReusableSupplementaryViewOfKind(elementKind, withReuseIdentifier: identifier, forIndexPath: forIndexPath)
         }
         return nil
     }
@@ -285,7 +368,7 @@ extension UITableView {
 
     func dequeueReusableCell<T: ReusableViewProtocol>(reusable: T, forIndexPath: NSIndexPath!) -> UITableViewCell? {
         if let identifier = reusable.identifier {
-            return dequeueReusableCellWithIdentifier(identifier, forIndexPath: forIndexPath) as? UITableViewCell
+            return dequeueReusableCellWithIdentifier(identifier, forIndexPath: forIndexPath)
         }
         return nil
     }
@@ -298,7 +381,7 @@ extension UITableView {
 
     func dequeueReusableHeaderFooter<T: ReusableViewProtocol>(reusable: T) -> UITableViewHeaderFooterView? {
         if let identifier = reusable.identifier {
-            return dequeueReusableHeaderFooterViewWithIdentifier(identifier) as? UITableViewHeaderFooterView
+            return dequeueReusableHeaderFooterViewWithIdentifier(identifier)
         }
         return nil
     }
@@ -312,6 +395,11 @@ extension UITableView {
 
 
 //MARK: - MainMenuViewController
+extension MainMenuViewController: IdentifiableProtocol { 
+    var identifier: String? { return "MainMenuViewController" }
+    static var identifier: String? { return "MainMenuViewController" }
+}
+
 
 //MARK: - SidebarViewController
 extension UIStoryboardSegue {
@@ -325,7 +413,7 @@ extension UIStoryboardSegue {
 
 extension SidebarViewController { 
 
-    enum Segue: String, Printable, SegueProtocol {
+    enum Segue: String, CustomStringConvertible, SegueProtocol {
         case DrawerSegue = "DrawerSegue"
         case ShowBrowse = "ShowBrowse"
         case ShowMessagesList = "ShowMessagesList"
@@ -359,9 +447,6 @@ extension SidebarViewController {
                 return SegueKind(rawValue: "custom")
             case ShowSplash:
                 return SegueKind(rawValue: "custom")
-            default:
-                preconditionFailure("Invalid value")
-                break
             }
         }
 
@@ -369,9 +454,24 @@ extension SidebarViewController {
             switch (self) {
             case DrawerSegue:
                 return MainMenuViewController.self
-            default:
-                assertionFailure("Unknown destination")
-                return nil
+            case ShowBrowse:
+                return UINavigationController.self
+            case ShowMessagesList:
+                return UINavigationController.self
+            case ShowFilters:
+                return UINavigationController.self
+            case ShowCommunities:
+                return UINavigationController.self
+            case ShowSettings:
+                return UINavigationController.self
+            case ShowMyProfile:
+                return UINavigationController.self
+            case ShowPeople:
+                return UINavigationController.self
+            case ShowWallet:
+                return UINavigationController.self
+            case ShowSplash:
+                return UIViewController.self
             }
         }
 
@@ -384,16 +484,41 @@ extension SidebarViewController {
 //MARK: - MessagesListViewController
 
 //MARK: - CreateConversationViewController
+extension CreateConversationViewController: IdentifiableProtocol { 
+    var identifier: String? { return "CreateConversationViewController" }
+    static var identifier: String? { return "CreateConversationViewController" }
+}
+
 
 //MARK: - FilterViewController
 
 //MARK: - BrowseCommunityViewController
+extension BrowseCommunityViewController: IdentifiableProtocol { 
+    var identifier: String? { return "BrowseCommunityViewController" }
+    static var identifier: String? { return "BrowseCommunityViewController" }
+}
+
 
 //MARK: - SearchViewController
+extension SearchViewController: IdentifiableProtocol { 
+    var identifier: String? { return "SearchViewController" }
+    static var identifier: String? { return "SearchViewController" }
+}
+
 
 //MARK: - BrowseMapViewController
+extension BrowseMapViewController: IdentifiableProtocol { 
+    var identifier: String? { return "BrowseMapViewController" }
+    static var identifier: String? { return "BrowseMapViewController" }
+}
+
 
 //MARK: - BrowseListViewController
+extension BrowseListViewController: IdentifiableProtocol { 
+    var identifier: String? { return "BrowseListViewController" }
+    static var identifier: String? { return "BrowseListViewController" }
+}
+
 
 //MARK: - OrderViewController
 
@@ -407,9 +532,14 @@ extension UIStoryboardSegue {
     }
 }
 
+extension ProductDetailsViewController: IdentifiableProtocol { 
+    var identifier: String? { return "ProductDetailsViewControllerId" }
+    static var identifier: String? { return "ProductDetailsViewControllerId" }
+}
+
 extension ProductDetailsViewController { 
 
-    enum Segue: String, Printable, SegueProtocol {
+    enum Segue: String, CustomStringConvertible, SegueProtocol {
         case ShowProductInventory = "ShowProductInventory"
         case ShowBuyScreen = "ShowBuyScreen"
         case ShowSellerProfile = "ShowSellerProfile"
@@ -422,9 +552,6 @@ extension ProductDetailsViewController {
                 return SegueKind(rawValue: "show")
             case ShowSellerProfile:
                 return SegueKind(rawValue: "show")
-            default:
-                preconditionFailure("Invalid value")
-                break
             }
         }
 
@@ -436,9 +563,6 @@ extension ProductDetailsViewController {
                 return OrderViewController.self
             case ShowSellerProfile:
                 return UserProfileViewController.self
-            default:
-                assertionFailure("Unknown destination")
-                return nil
             }
         }
 
@@ -458,18 +582,20 @@ extension UIStoryboardSegue {
     }
 }
 
+extension EventDetailsViewController: IdentifiableProtocol { 
+    var identifier: String? { return "EventDetailsViewControllerId" }
+    static var identifier: String? { return "EventDetailsViewControllerId" }
+}
+
 extension EventDetailsViewController { 
 
-    enum Segue: String, Printable, SegueProtocol {
+    enum Segue: String, CustomStringConvertible, SegueProtocol {
         case ShowOrganizerProfile = "ShowOrganizerProfile"
 
         var kind: SegueKind? {
             switch (self) {
             case ShowOrganizerProfile:
                 return SegueKind(rawValue: "show")
-            default:
-                preconditionFailure("Invalid value")
-                break
             }
         }
 
@@ -477,9 +603,6 @@ extension EventDetailsViewController {
             switch (self) {
             case ShowOrganizerProfile:
                 return UserProfileViewController.self
-            default:
-                assertionFailure("Unknown destination")
-                return nil
             }
         }
 
@@ -499,18 +622,20 @@ extension UIStoryboardSegue {
     }
 }
 
+extension PromotionDetailsViewController: IdentifiableProtocol { 
+    var identifier: String? { return "PromotionDetailsViewControllerId" }
+    static var identifier: String? { return "PromotionDetailsViewControllerId" }
+}
+
 extension PromotionDetailsViewController { 
 
-    enum Segue: String, Printable, SegueProtocol {
+    enum Segue: String, CustomStringConvertible, SegueProtocol {
         case ShowSellerProfile = "ShowSellerProfile"
 
         var kind: SegueKind? {
             switch (self) {
             case ShowSellerProfile:
                 return SegueKind(rawValue: "show")
-            default:
-                preconditionFailure("Invalid value")
-                break
             }
         }
 
@@ -518,9 +643,6 @@ extension PromotionDetailsViewController {
             switch (self) {
             case ShowSellerProfile:
                 return UserProfileViewController.self
-            default:
-                assertionFailure("Unknown destination")
-                return nil
             }
         }
 
@@ -542,16 +664,13 @@ extension UIStoryboardSegue {
 
 extension ProductInventoryViewController { 
 
-    enum Segue: String, Printable, SegueProtocol {
+    enum Segue: String, CustomStringConvertible, SegueProtocol {
         case ShowProductDetails = "ShowProductDetails"
 
         var kind: SegueKind? {
             switch (self) {
             case ShowProductDetails:
                 return SegueKind(rawValue: "show")
-            default:
-                preconditionFailure("Invalid value")
-                break
             }
         }
 
@@ -559,9 +678,6 @@ extension ProductInventoryViewController {
             switch (self) {
             case ShowProductDetails:
                 return ProductDetailsViewController.self
-            default:
-                assertionFailure("Unknown destination")
-                return nil
             }
         }
 
@@ -581,18 +697,20 @@ extension UIStoryboardSegue {
     }
 }
 
+extension PostViewController: IdentifiableProtocol { 
+    var identifier: String? { return "PostViewController" }
+    static var identifier: String? { return "PostViewController" }
+}
+
 extension PostViewController { 
 
-    enum Segue: String, Printable, SegueProtocol {
+    enum Segue: String, CustomStringConvertible, SegueProtocol {
         case ShowUserProfile = "ShowUserProfile"
 
         var kind: SegueKind? {
             switch (self) {
             case ShowUserProfile:
                 return SegueKind(rawValue: "show")
-            default:
-                preconditionFailure("Invalid value")
-                break
             }
         }
 
@@ -600,9 +718,6 @@ extension PostViewController {
             switch (self) {
             case ShowUserProfile:
                 return UserProfileViewController.self
-            default:
-                assertionFailure("Unknown destination")
-                return nil
             }
         }
 
@@ -622,9 +737,14 @@ extension UIStoryboardSegue {
     }
 }
 
+extension BrowseViewController: IdentifiableProtocol { 
+    var identifier: String? { return "MapViewController" }
+    static var identifier: String? { return "MapViewController" }
+}
+
 extension BrowseViewController { 
 
-    enum Segue: String, Printable, SegueProtocol {
+    enum Segue: String, CustomStringConvertible, SegueProtocol {
         case ShowProductDetails = "ShowProductDetails"
         case ShowEventDetails = "ShowEventDetails"
         case ShowPromotionDetails = "ShowPromotionDetails"
@@ -640,9 +760,6 @@ extension BrowseViewController {
                 return SegueKind(rawValue: "show")
             case ShowPost:
                 return SegueKind(rawValue: "show")
-            default:
-                preconditionFailure("Invalid value")
-                break
             }
         }
 
@@ -656,9 +773,6 @@ extension BrowseViewController {
                 return PromotionDetailsViewController.self
             case ShowPost:
                 return PostViewController.self
-            default:
-                assertionFailure("Unknown destination")
-                return nil
             }
         }
 
@@ -678,18 +792,20 @@ extension UIStoryboardSegue {
     }
 }
 
+extension PeopleViewController: IdentifiableProtocol { 
+    var identifier: String? { return "PeopleViewController" }
+    static var identifier: String? { return "PeopleViewController" }
+}
+
 extension PeopleViewController { 
 
-    enum Segue: String, Printable, SegueProtocol {
+    enum Segue: String, CustomStringConvertible, SegueProtocol {
         case ShowUserProfile = "ShowUserProfile"
 
         var kind: SegueKind? {
             switch (self) {
             case ShowUserProfile:
                 return SegueKind(rawValue: "show")
-            default:
-                preconditionFailure("Invalid value")
-                break
             }
         }
 
@@ -697,9 +813,6 @@ extension PeopleViewController {
             switch (self) {
             case ShowUserProfile:
                 return UserProfileViewController.self
-            default:
-                assertionFailure("Unknown destination")
-                return nil
             }
         }
 
@@ -710,14 +823,39 @@ extension PeopleViewController {
 }
 
 //MARK: - UserProfileViewController
+extension UserProfileViewController: IdentifiableProtocol { 
+    var identifier: String? { return "UserProfileViewController" }
+    static var identifier: String? { return "UserProfileViewController" }
+}
+
 
 //MARK: - CommunityFeedViewController
+extension CommunityFeedViewController: IdentifiableProtocol { 
+    var identifier: String? { return "CommunityFeedViewController" }
+    static var identifier: String? { return "CommunityFeedViewController" }
+}
+
 
 //MARK: - SettingsViewController
+extension SettingsViewController: IdentifiableProtocol { 
+    var identifier: String? { return "SettingsViewController" }
+    static var identifier: String? { return "SettingsViewController" }
+}
+
 
 //MARK: - CommunityViewController
+extension CommunityViewController: IdentifiableProtocol { 
+    var identifier: String? { return "CommunityViewController" }
+    static var identifier: String? { return "CommunityViewController" }
+}
+
 
 //MARK: - WalletViewController
+extension WalletViewController: IdentifiableProtocol { 
+    var identifier: String? { return "WalletViewController" }
+    static var identifier: String? { return "WalletViewController" }
+}
+
 
 //MARK: - LoginSignupViewController
 extension UIStoryboardSegue {
@@ -729,18 +867,20 @@ extension UIStoryboardSegue {
     }
 }
 
+extension LoginSignupViewController: IdentifiableProtocol { 
+    var identifier: String? { return "LoginSignUpViewController" }
+    static var identifier: String? { return "LoginSignUpViewController" }
+}
+
 extension LoginSignupViewController { 
 
-    enum Segue: String, Printable, SegueProtocol {
+    enum Segue: String, CustomStringConvertible, SegueProtocol {
         case LoginSegueId = "LoginSegueId"
 
         var kind: SegueKind? {
             switch (self) {
             case LoginSegueId:
                 return SegueKind(rawValue: "show")
-            default:
-                preconditionFailure("Invalid value")
-                break
             }
         }
 
@@ -748,9 +888,6 @@ extension LoginSignupViewController {
             switch (self) {
             case LoginSegueId:
                 return LoginViewController.self
-            default:
-                assertionFailure("Unknown destination")
-                return nil
             }
         }
 
@@ -770,18 +907,20 @@ extension UIStoryboardSegue {
     }
 }
 
+extension RegisterViewController: IdentifiableProtocol { 
+    var identifier: String? { return "RegisterViewController" }
+    static var identifier: String? { return "RegisterViewController" }
+}
+
 extension RegisterViewController { 
 
-    enum Segue: String, Printable, SegueProtocol {
+    enum Segue: String, CustomStringConvertible, SegueProtocol {
         case SignUpSegue = "SignUpSegue"
 
         var kind: SegueKind? {
             switch (self) {
             case SignUpSegue:
                 return SegueKind(rawValue: "show")
-            default:
-                preconditionFailure("Invalid value")
-                break
             }
         }
 
@@ -789,9 +928,6 @@ extension RegisterViewController {
             switch (self) {
             case SignUpSegue:
                 return RegisterInfoViewController.self
-            default:
-                assertionFailure("Unknown destination")
-                return nil
             }
         }
 
@@ -802,6 +938,11 @@ extension RegisterViewController {
 }
 
 //MARK: - RecoverPasswordViewController
+extension RecoverPasswordViewController: IdentifiableProtocol { 
+    var identifier: String? { return "RecoverPasswordViewController" }
+    static var identifier: String? { return "RecoverPasswordViewController" }
+}
+
 
 //MARK: - LoginViewController
 extension UIStoryboardSegue {
@@ -813,18 +954,20 @@ extension UIStoryboardSegue {
     }
 }
 
+extension LoginViewController: IdentifiableProtocol { 
+    var identifier: String? { return "LoginViewController" }
+    static var identifier: String? { return "LoginViewController" }
+}
+
 extension LoginViewController { 
 
-    enum Segue: String, Printable, SegueProtocol {
+    enum Segue: String, CustomStringConvertible, SegueProtocol {
         case ForgotPasswordSegueId = "ForgotPasswordSegueId"
 
         var kind: SegueKind? {
             switch (self) {
             case ForgotPasswordSegueId:
                 return SegueKind(rawValue: "show")
-            default:
-                preconditionFailure("Invalid value")
-                break
             }
         }
 
@@ -832,9 +975,6 @@ extension LoginViewController {
             switch (self) {
             case ForgotPasswordSegueId:
                 return RecoverPasswordViewController.self
-            default:
-                assertionFailure("Unknown destination")
-                return nil
             }
         }
 
@@ -845,6 +985,11 @@ extension LoginViewController {
 }
 
 //MARK: - RegisterInfoViewController
+extension RegisterInfoViewController: IdentifiableProtocol { 
+    var identifier: String? { return "RegisterInfoViewController" }
+    static var identifier: String? { return "RegisterInfoViewController" }
+}
+
 
 //MARK: - AddProductViewController
 extension UIStoryboardSegue {
@@ -856,18 +1001,20 @@ extension UIStoryboardSegue {
     }
 }
 
+extension AddProductViewController: IdentifiableProtocol { 
+    var identifier: String? { return "AddProductViewController" }
+    static var identifier: String? { return "AddProductViewController" }
+}
+
 extension AddProductViewController { 
 
-    enum Segue: String, Printable, SegueProtocol {
+    enum Segue: String, CustomStringConvertible, SegueProtocol {
         case Close = "Close"
 
         var kind: SegueKind? {
             switch (self) {
             case Close:
                 return SegueKind(rawValue: "unwind")
-            default:
-                preconditionFailure("Invalid value")
-                break
             }
         }
 
@@ -895,18 +1042,20 @@ extension UIStoryboardSegue {
     }
 }
 
+extension AddPostViewController: IdentifiableProtocol { 
+    var identifier: String? { return "AddPostViewController" }
+    static var identifier: String? { return "AddPostViewController" }
+}
+
 extension AddPostViewController { 
 
-    enum Segue: String, Printable, SegueProtocol {
+    enum Segue: String, CustomStringConvertible, SegueProtocol {
         case Close = "Close"
 
         var kind: SegueKind? {
             switch (self) {
             case Close:
                 return SegueKind(rawValue: "unwind")
-            default:
-                preconditionFailure("Invalid value")
-                break
             }
         }
 
@@ -934,18 +1083,20 @@ extension UIStoryboardSegue {
     }
 }
 
+extension AddCommunityViewController: IdentifiableProtocol { 
+    var identifier: String? { return "AddCommunityViewController" }
+    static var identifier: String? { return "AddCommunityViewController" }
+}
+
 extension AddCommunityViewController { 
 
-    enum Segue: String, Printable, SegueProtocol {
+    enum Segue: String, CustomStringConvertible, SegueProtocol {
         case Close = "Close"
 
         var kind: SegueKind? {
             switch (self) {
             case Close:
                 return SegueKind(rawValue: "unwind")
-            default:
-                preconditionFailure("Invalid value")
-                break
             }
         }
 
@@ -973,18 +1124,20 @@ extension UIStoryboardSegue {
     }
 }
 
+extension EditCommunityViewController: IdentifiableProtocol { 
+    var identifier: String? { return "EditCommunityViewController" }
+    static var identifier: String? { return "EditCommunityViewController" }
+}
+
 extension EditCommunityViewController { 
 
-    enum Segue: String, Printable, SegueProtocol {
+    enum Segue: String, CustomStringConvertible, SegueProtocol {
         case Close = "Close"
 
         var kind: SegueKind? {
             switch (self) {
             case Close:
                 return SegueKind(rawValue: "unwind")
-            default:
-                preconditionFailure("Invalid value")
-                break
             }
         }
 
@@ -1012,18 +1165,20 @@ extension UIStoryboardSegue {
     }
 }
 
+extension EditProfileViewController: IdentifiableProtocol { 
+    var identifier: String? { return "EditProfileViewController" }
+    static var identifier: String? { return "EditProfileViewController" }
+}
+
 extension EditProfileViewController { 
 
-    enum Segue: String, Printable, SegueProtocol {
+    enum Segue: String, CustomStringConvertible, SegueProtocol {
         case Close = "Close"
 
         var kind: SegueKind? {
             switch (self) {
             case Close:
                 return SegueKind(rawValue: "unwind")
-            default:
-                preconditionFailure("Invalid value")
-                break
             }
         }
 
@@ -1051,18 +1206,20 @@ extension UIStoryboardSegue {
     }
 }
 
+extension AddPromotionViewController: IdentifiableProtocol { 
+    var identifier: String? { return "AddPromotionViewController" }
+    static var identifier: String? { return "AddPromotionViewController" }
+}
+
 extension AddPromotionViewController { 
 
-    enum Segue: String, Printable, SegueProtocol {
+    enum Segue: String, CustomStringConvertible, SegueProtocol {
         case Close = "Close"
 
         var kind: SegueKind? {
             switch (self) {
             case Close:
                 return SegueKind(rawValue: "unwind")
-            default:
-                preconditionFailure("Invalid value")
-                break
             }
         }
 
@@ -1090,18 +1247,20 @@ extension UIStoryboardSegue {
     }
 }
 
+extension AddEventViewController: IdentifiableProtocol { 
+    var identifier: String? { return "AddEventViewController" }
+    static var identifier: String? { return "AddEventViewController" }
+}
+
 extension AddEventViewController { 
 
-    enum Segue: String, Printable, SegueProtocol {
+    enum Segue: String, CustomStringConvertible, SegueProtocol {
         case Close = "Close"
 
         var kind: SegueKind? {
             switch (self) {
             case Close:
                 return SegueKind(rawValue: "unwind")
-            default:
-                preconditionFailure("Invalid value")
-                break
             }
         }
 

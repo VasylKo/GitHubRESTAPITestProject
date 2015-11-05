@@ -13,7 +13,7 @@ typealias CRUDObjectId = String
 let CRUDObjectInvalidId: CRUDObjectId = ""
 
 
-protocol CRUDObject: Mappable, Printable {
+protocol CRUDObject: Mappable, CustomStringConvertible {
     
 
     var objectId: CRUDObjectId { get  set}

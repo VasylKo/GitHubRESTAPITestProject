@@ -18,7 +18,7 @@ public class TableRefreshHeaderView: UIControl {
         configure()
     }
     
-    public required init(coder aDecoder: NSCoder) {
+    public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         configure()
     }
@@ -103,7 +103,7 @@ extension TableRefreshHeaderView  {
     /**
     Called from scrollViewDidScroll: to update the refresh header
     
-    :param: scrollView scroll view
+    - parameter scrollView: scroll view
     */
     internal func containingScrollViewDidScroll(scrollView: UIScrollView) {
         if scrollView.dragging {
@@ -121,7 +121,7 @@ extension TableRefreshHeaderView  {
     /**
     Called from scrollViewDidEndDragging: to potentially start the refresh
     
-    :param: scrollView scroll view
+    - parameter scrollView: scroll view
     */
     internal func containingScrollViewDidEndDragging(scrollView: UIScrollView) {
         // Trigger the action if it was pulled far enough.

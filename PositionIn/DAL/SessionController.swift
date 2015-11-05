@@ -21,38 +21,39 @@ struct SessionController {
     
     func currentUserId() -> Future<CRUDObjectId, NSError> {
         return future { () -> Result<CRUDObjectId, NSError> in
-            if let userId = self.userIdValue {
-                return Result(value: userId)
-            } else {
+            guard let userId = self.userIdValue else {
                 Log.warning?.trace()
                 let errorCode = NetworkDataProvider.ErrorCodes.InvalidSessionError
                 return Result(error: errorCode.error())
             }
+            return Result(value: userId)
         }
     }
     
     func currentRefreshToken() -> Future<AuthResponse.Token, NSError> {
         return future { () -> Result<AuthResponse.Token, NSError> in
-            if let refreshToken = self.refreshToken {
-                return Result(value: refreshToken)
-            } else {
+            guard let refreshToken = self.refreshToken else {
                 Log.warning?.trace()
                 let errorCode = NetworkDataProvider.ErrorCodes.InvalidSessionError
                 return Result(error: errorCode.error())
             }
+            return Result(value: refreshToken)
         }
     }
     
     func session() -> Future<AuthResponse.Token, NSError> {
         return future { () -> Result<AuthResponse.Token, NSError> in
-            if  let token = self.accessToken,
+            //TODO: check expiration date
+            guard let token = self.accessToken,
                 let expirationDate = self.expiresIn
-                where (expirationDate.compare(NSDate()) == NSComparisonResult.OrderedDescending) {
-                return Result(value: token)
+                where  NSDate().compare(expirationDate) == NSComparisonResult.OrderedAscending
+                else {
+                    Log.warning?.trace()
+                    let errorCode = NetworkDataProvider.ErrorCodes.InvalidSessionError
+                    return Result(error: errorCode.error())
             }
-            Log.warning?.trace()
-            let errorCode = NetworkDataProvider.ErrorCodes.InvalidSessionError
-            return Result(error: errorCode.error())
+
+            return Result(value: token)
         }
     }
     
@@ -78,7 +79,7 @@ struct SessionController {
     }
     
     func isUserAuthorized() -> Bool {
-        if let currentUserId = currentUserId() {
+        if let _: CRUDObjectId = currentUserId() {
             return !isGuest
         }
         return false
@@ -95,13 +96,21 @@ struct SessionController {
         keychain[KeychainKeys.AccessTokenKey] = accessToken
         keychain[KeychainKeys.RefreshTokenKey] = refreshToken
         let expiresIn = NSDate(timeIntervalSinceNow: NSTimeInterval(expires))
-        keychain.set(NSKeyedArchiver.archivedDataWithRootObject(expiresIn), key: KeychainKeys.ExpireDateKey)
+        do  {
+            try keychain.set(NSKeyedArchiver.archivedDataWithRootObject(expiresIn), key: KeychainKeys.ExpireDateKey)
+        } catch let error {
+            Log.error?.value(error)
+        }
     }
 
     func updateCurrentStatus(profile: UserProfile?) {
         keychain[KeychainKeys.UserIdKey] = profile?.objectId
         var isGuest: Bool = profile?.guest ?? true
-        keychain.set(NSData(bytes: &isGuest, length: sizeof(Bool)), key: KeychainKeys.IsGuestKey)
+        do {
+            try keychain.set(NSData(bytes: &isGuest, length: sizeof(Bool)), key: KeychainKeys.IsGuestKey)
+        } catch let error {
+            Log.error?.value(error)
+        }
     }
     
     func updatePassword(newPassword: String) {
@@ -113,11 +122,14 @@ struct SessionController {
     }
     
     private var isGuest: Bool {
-        let data = keychain.getData(KeychainKeys.IsGuestKey)
-        if let data = data {
-            var isGuest: Bool = true
-            data.getBytes(&isGuest, length:sizeof(Bool))
-            return isGuest
+        do {
+            if let data = try keychain.getData(KeychainKeys.IsGuestKey) {
+                var isGuest: Bool = true
+                data.getBytes(&isGuest, length:sizeof(Bool))
+                return isGuest
+            }
+        } catch let error {
+            Log.error?.value(error)
         }
         return true
     }
@@ -135,8 +147,12 @@ struct SessionController {
     }
     
     private var expiresIn: NSDate? {
-        if let data = keychain.getData(KeychainKeys.ExpireDateKey) {
-            return NSKeyedUnarchiver.unarchiveObjectWithData(data) as? NSDate
+        do {
+            if let data = try keychain.getData(KeychainKeys.ExpireDateKey) {
+                return NSKeyedUnarchiver.unarchiveObjectWithData(data) as? NSDate
+            }
+        } catch let error {
+            Log.error?.value(error)
         }
         return nil
     }

@@ -45,7 +45,7 @@ final class PromotionDetailsViewController: UIViewController {
         let endDate = dateFormatter.stringFromDate(promotion.endDate ?? NSDate())
         priceLabel.text = "\(startDate) - \(endDate)"
         let discountFormat = NSLocalizedString("Save %.1f%%", comment: "Promotion details: DiscountFormat")
-        infoLabel.text = map(promotion.discount) { String(format: discountFormat, $0 )}
+        infoLabel.text = promotion.discount.map { String(format: discountFormat, $0 )}
         promotionImageView.setImageFromURL(promotion.photos?.first?.url, placeholder: UIImage(named: "PromotionDetailsPlaceholder"))
     }
     
@@ -84,7 +84,7 @@ final class PromotionDetailsViewController: UIViewController {
 }
 
 extension PromotionDetailsViewController {
-    enum PromotionDetailsAction: Printable {
+    enum PromotionDetailsAction: CustomStringConvertible {
         case  ProductsOnSale, SendMessage, SellerProfile, TermsAndInformation, Navigate
         
         var description: String {

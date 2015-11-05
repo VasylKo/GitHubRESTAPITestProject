@@ -29,7 +29,7 @@ final class CRUDObjectIdTransform: TransformType {
     }
 }
 
-final class APIDateTransform: DateFormaterTransform {
+final class APIDateTransform: DateFormatterTransform {
     
     init() {
         let formatter = NSDateFormatter()
@@ -55,7 +55,7 @@ final class LocationCoordinateTransform: TransformType {
     init() {}
     
     func transformFromJSON(value: AnyObject?) -> CLLocationCoordinate2D? {
-        if let array = value as? JSON where count(array) == 2 {
+        if let array = value as? JSON where array.count == 2 {
             return CLLocationCoordinate2D(latitude: array.first!, longitude: array.last!)
         }
         return nil

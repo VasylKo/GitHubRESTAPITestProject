@@ -51,7 +51,7 @@ struct Community: CRUDObject {
         }
     }
 
-    enum Role: Int, DebugPrintable {
+    enum Role: Int, CustomDebugStringConvertible {
         case Unknown
         case Owner, Moderator, Member, Invite
         
@@ -109,16 +109,16 @@ struct Community: CRUDObject {
     }
 
     static func communityEndpoint(communityId: CRUDObjectId) -> String {
-        return Community.endpoint().stringByAppendingPathComponent("\(communityId)")
+        return (Community.endpoint() as NSString).stringByAppendingPathComponent("\(communityId)")
     }
 
     
     static func userCommunitiesEndpoint(userId: CRUDObjectId) -> String {
-        return UserProfile.endpoint().stringByAppendingPathComponent("\(userId)/communities")
+        return (UserProfile.endpoint() as NSString).stringByAppendingPathComponent("\(userId)/communities")
     }
     
     static func membersEndpoint(communityId: CRUDObjectId) -> String {
-        return Community.communityEndpoint(communityId).stringByAppendingPathComponent("/members")
+        return (Community.communityEndpoint(communityId) as NSString).stringByAppendingPathComponent("/members")
         
     }
     

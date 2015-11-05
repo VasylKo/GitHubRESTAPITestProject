@@ -25,7 +25,7 @@ final class LocationController {
         synced(self) {
             if let coordinate = self.lastKnownCoordinate
                 where self.lastKnownCoordinateExpirationDate.compare(NSDate()) == NSComparisonResult.OrderedDescending {
-                    future = Future.succeeded(coordinate)
+                    future = Future(value: coordinate)
             } else {
                 self.pendingPromises.append(promise)
                 self.locationProvider.startUpdatingLocation()                
@@ -39,7 +39,7 @@ final class LocationController {
         CLGeocoder().geocodeAddressString(string) { (placemarks, error) in
             if let error = error {
                 promise.failure(error)
-            } else if let placemarks = placemarks  as? [CLPlacemark] {
+            } else if let placemarks = placemarks  {
                 promise.success(placemarks.map { Location.fromPlacemark($0) } )
             } else {
                 let error = NSError(
@@ -55,7 +55,6 @@ final class LocationController {
     
     func reverseGeocodeCoordinate(coordinate: CLLocationCoordinate2D) -> Future<Location, NSError> {
         let promise = Promise<Location, NSError>()
-        let geocoder = GMSGeocoder()
         GMSGeocoder().reverseGeocodeCoordinate(coordinate) { response, error in
             if let error = error {
                 promise.failure(error)
@@ -82,7 +81,7 @@ final class LocationController {
     }
     
     func localeUsesMetricSystem() -> Bool {
-        return map(NSLocale.currentLocale().objectForKey(NSLocaleUsesMetricSystem) as? NSNumber) { $0.boolValue} ?? true
+        return (NSLocale.currentLocale().objectForKey(NSLocaleUsesMetricSystem) as? NSNumber).map { $0.boolValue} ?? true
     }
     
     func lengthFormatUnit() -> NSLengthFormatterUnit {
@@ -111,7 +110,9 @@ final class LocationController {
             if let coordinate = self.locationProvider.currentCoordinate {
                 self.lastKnownCoordinate = coordinate
                 self.lastKnownCoordinateExpirationDate = NSDate(timeIntervalSinceNow: self.kCoordinateExpirationThreshold)
-                self.pendingPromises.map { $0.success(coordinate) }
+                for p in self.pendingPromises {
+                    p.success(coordinate)
+                }
                 self.pendingPromises = []
             }
             self.locationProvider.stopUpdatingLocation()
@@ -125,7 +126,9 @@ final class LocationController {
                 code: LocationController.ErrorCodes.CouldNotGetCoordinate.rawValue,
                 userInfo: nil
             )
-            self.pendingPromises.map { $0.failure(error) }
+            for p in self.pendingPromises {
+                p.failure(error)
+            }
             self.pendingPromises = []
         }
     }
@@ -136,7 +139,7 @@ final class LocationController {
             cacheStorage.setObject(newValue, forKey: kLastKnownCoordinateExpirationKey)
         }
         get {
-            return (cacheStorage.objectForKey(kLastKnownCoordinateExpirationKey) as? NSDate) ?? (NSDate.distantPast() as! NSDate)
+            return (cacheStorage.objectForKey(kLastKnownCoordinateExpirationKey) as? NSDate) ?? (NSDate.distantPast() )
         }
     }
     
@@ -181,7 +184,7 @@ extension Location {
     static func fromPlacemark(placemark: CLPlacemark) -> Location {
         var location = Location()
         location.name = placemark.name
-        location.coordinates = placemark.location.coordinate
+        location.coordinates = placemark.location?.coordinate
         location.country = placemark.country
         location.zip = placemark.postalCode
         location.state = placemark.administrativeArea

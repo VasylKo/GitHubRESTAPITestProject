@@ -24,7 +24,7 @@ final class AddCommunityViewController: BaseAddItemViewController {
         self.initializeForm()
     }
     
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.initializeForm()
     }
@@ -82,7 +82,7 @@ final class AddCommunityViewController: BaseAddItemViewController {
                 community.name = values[Tags.Title.rawValue] as? String
                 community.communityDescription = values[Tags.Description.rawValue] as? String
                 let rawPrivate = values[Tags.Private.rawValue] as? NSNumber
-                community.isPrivate = map(rawPrivate) { $0.boolValue} ?? true
+                community.isPrivate = rawPrivate.map { $0.boolValue} ?? true
                 community.avatar = urls.first
 
                 return api().createCommunity(community: community)

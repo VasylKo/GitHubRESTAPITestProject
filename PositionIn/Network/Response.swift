@@ -103,7 +103,7 @@ struct UpdateResponse: Mappable{
 
 
 // Session response
-struct AuthResponse: Mappable, DebugPrintable {
+struct AuthResponse: Mappable, CustomDebugStringConvertible {
     typealias Token = String!
     private(set) var accessToken: Token
     private(set) var refreshToken: Token

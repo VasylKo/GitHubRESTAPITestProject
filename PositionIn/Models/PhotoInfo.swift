@@ -9,7 +9,7 @@
 import CleanroomLogger
 import ObjectMapper
 
-struct PhotoInfo: Mappable, Printable {
+struct PhotoInfo: Mappable, CustomStringConvertible {
     var objectId: CRUDObjectId = CRUDObjectInvalidId
     var url: NSURL?
 

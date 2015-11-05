@@ -21,7 +21,7 @@ protocol BrowseCommunityActionProvider {
 
 final class BrowseCommunityViewController: BesideMenuViewController {
         
-    enum Action: Int, Printable {
+    enum Action: Int, CustomStringConvertible {
         case None
         case Browse
         case Join
@@ -92,9 +92,9 @@ final class BrowseCommunityViewController: BesideMenuViewController {
                 firstMyCommunityRequestToken.invalidate()
                 communitiesRequest = mySubscriptionsRequest.flatMap {  response -> Future<CollectionResponse<Community>,NSError> in
                     if let communitiesList = response.items  where communitiesList.count == 0 {
-                        return Future.failed(NSError())
+                        return Future(error: NetworkDataProvider.ErrorCodes.InvalidRequestError.error())
                     } else {
-                        return Future.succeeded(response)
+                        return Future(value: response)
                         }
                     }.andThen { [weak self] result in
                         switch result {
@@ -108,7 +108,7 @@ final class BrowseCommunityViewController: BesideMenuViewController {
         case .Explore:
             communitiesRequest = api().getCommunities(APIService.Page())
         }
-        communitiesRequest.onSuccess(token: dataRequestToken) { [weak self] response in
+        communitiesRequest.onSuccess(dataRequestToken.validContext) { [weak self] response in
             if let communities = response.items {
                 Log.debug?.value(communities)
                 self?.dataSource.setCommunities(communities, mode: browseMode)

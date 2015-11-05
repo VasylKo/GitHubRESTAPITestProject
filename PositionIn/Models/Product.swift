@@ -73,11 +73,11 @@ struct Product: CRUDObject {
     }
     
     static func shopItemsEndpoint(shopId: CRUDObjectId, productId: CRUDObjectId) -> String {
-        return Product.shopItemsEndpoint(shopId).stringByAppendingPathComponent("\(productId)")
+        return (Product.shopItemsEndpoint(shopId) as NSString).stringByAppendingPathComponent("\(productId)")
     }
     
     static func shopItemsEndpoint(shopId: CRUDObjectId) -> String {
-        return Product.endpoint().stringByAppendingPathComponent("\(shopId)/items")
+        return (Product.endpoint() as NSString).stringByAppendingPathComponent("\(shopId)/items")
     }
         
     

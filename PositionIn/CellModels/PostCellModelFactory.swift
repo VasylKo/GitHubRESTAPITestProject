@@ -20,7 +20,7 @@ struct PostCellModelFactory {
         }
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
-        let date: String? = map(post.date) { dateFormatter.stringFromDate($0) }
+        let date: String? = post.date.map { dateFormatter.stringFromDate($0) }
         firstSection.append(PostInfoModel(firstLine: post.author?.title, secondLine: date, imageUrl: post.author?.avatar, userId: post.author?.objectId))
         firstSection.append(TableViewCellTextModel(title: post.name ?? ""))
         Log.verbose?.value(post.likes!)

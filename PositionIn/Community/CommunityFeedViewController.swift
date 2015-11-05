@@ -42,9 +42,7 @@ class CommunityFeedViewController: BesideMenuViewController, BrowseActionProduce
         }
     }
     
-    private func didReceiveCommunity(community: Community) {
-        
-        let actionDelegate = self.parentViewController as? BrowseActionConsumer
+    private func didReceiveCommunity(community: Community) {        
         dataSource.items[Sections.Info.rawValue] = [
             BrowseCommunityHeaderCellModel(objectId: community.objectId, tapAction: .None, title: community.name ?? "", url: community.avatar),
             CommunityStatsCellModel(countMembers: community.membersCount, countPosts: community.postsCount, countEvents: community.eventsCount)
@@ -108,21 +106,21 @@ extension CommunityFeedViewController {
         }
         
         func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-            return count(items)
+            return (items).count
         }
         
         @objc override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            return count(items[section])
+            return items[section].count
         }
         
         @objc override func tableView(tableView: UITableView, reuseIdentifierForIndexPath indexPath: NSIndexPath) -> String {
             let model = self.tableView(tableView, modelForIndexPath: indexPath)
             switch model {
-            case let model as BrowseCommunityHeaderCellModel:
+            case _ as BrowseCommunityHeaderCellModel:
                 return CommunityHeaderCell.reuseId()
-            case let model as CommunityStatsCellModel:
+            case _ as CommunityStatsCellModel:
                 return CommunityStatsCell.reuseId()
-            case let model as BrowseListCellModel:
+            case _ as BrowseListCellModel:
                 return BrowseListTableViewCell.reuseId()
             default:
                 return super.tableView(tableView, reuseIdentifierForIndexPath: indexPath)
