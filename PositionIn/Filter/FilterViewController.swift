@@ -40,6 +40,7 @@ final class FilterViewController: XLFormViewController {
     }
     
     func initializeForm() {
+        
         let filter = SearchFilter.currentFilter
         
         let form = XLFormDescriptor(title: NSLocalizedString("Filter", comment: "Update filter: form caption"))
@@ -47,19 +48,13 @@ final class FilterViewController: XLFormViewController {
         //Options
         let optionsSection = XLFormSectionDescriptor.formSectionWithTitle(NSLocalizedString("Options", comment: "Update filter: options caption"))
         form.addFormSection(optionsSection)
-
-        //Price
-        currencyFormatter.numberStyle = .CurrencyStyle
-        currencyFormatter.currencySymbol = "KSh"
-        currencyFormatter.generatesDecimalNumbers = false
-        currencyFormatter.maximumFractionDigits = 0
-        currencyFormatter.roundingMode = .RoundDown
         
         let priceRow = XLFormRowDescriptor(tag: Tags.EndPrice.rawValue, rowType: XLFormRowDescriptorTypeSlider, title: "")
+        
         priceRow.onChangeBlock = { [weak self] oldValue, newValue, descriptor in
             let newValue = newValue as! Float
             let priceFormat = NSLocalizedString("Price up to: %@", comment: "Update filter: price format")
-            let stringValue: String  = self?.currencyFormatter.stringFromNumber(newValue) ?? ""
+            let stringValue: String  = AppConfiguration().currencyFormatter.stringFromNumber(newValue) ?? ""
             let title = String(format: priceFormat, stringValue)
             if let currentTitle = descriptor.title where currentTitle == title {
                 return
@@ -73,8 +68,8 @@ final class FilterViewController: XLFormViewController {
 
         priceRow.cellConfigAtConfigure["slider.maximumValue"] = SearchFilter.maxPrice
         priceRow.cellConfigAtConfigure["slider.minimumValue"] = SearchFilter.minPrice
-        priceRow.cellConfigAtConfigure["steps"] = SearchFilter.Money(400)
         priceRow.cellConfigAtConfigure["slider.minimumTrackTintColor"] = UIScheme.mainThemeColor
+        priceRow.cellConfigAtConfigure["steps"] = SearchFilter.Money(400)
         priceRow.value = SearchFilter.defaultPrice
         optionsSection.addFormRow(priceRow)
 
@@ -146,11 +141,11 @@ final class FilterViewController: XLFormViewController {
         categories.map { (category: ItemCategory) -> () in
             let categoryRow = XLFormRowDescriptor(tag: category.displayString(), rowType: XLFormRowDescriptorTypeBooleanSwitch, title: category.displayString())
             categoryRow.cellConfigAtConfigure["imageView.image"] = category.image()
-            categoryRow.cellConfigAtConfigure["imageView.tintColor"] = UIScheme.mainThemeColor
-            categoryRow.cellConfig.setObject(UIColor.bt_colorWithBytesR(237, g: 27, b: 46), forKey: "switchControl.onTintColor")
             let value = categoryValue(category)
             categoryRow.value = NSNumber(bool: value)
             categoriesSection.addFormRow(categoryRow)
+            categoryRow.cellConfigAtConfigure["imageView.tintColor"] = UIScheme.mainThemeColor
+            categoryRow.cellConfig.setObject(UIColor.bt_colorWithBytesR(237, g: 27, b: 46), forKey: "switchControl.onTintColor")
         }
         
         self.form = form
@@ -194,9 +189,6 @@ final class FilterViewController: XLFormViewController {
         }
         return nil
     }
-
-    
-    private let currencyFormatter = NSNumberFormatter()
     
     private enum DateRange: Int {
         case Now, Today, Tomorrow, Week, Custom

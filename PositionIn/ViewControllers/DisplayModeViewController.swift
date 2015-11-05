@@ -94,7 +94,12 @@ protocol BrowseActionConsumer: class {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.titleView = searchbar
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: displayModeSegmentedControl)
+        let segmentButton = UIBarButtonItem(customView: displayModeSegmentedControl)
+        let spacer = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FixedSpace, target: nil,
+            action: nil)
+        spacer.width = -15;
+        self.navigationItem.rightBarButtonItems = [spacer, segmentButton]
+        
         applyDisplayMode(displayMode)
     }
     
@@ -115,7 +120,7 @@ protocol BrowseActionConsumer: class {
         ]
         
         let segmentControl = DisplayModeSegmentedControl(sectionImages: items, sectionSelectedImages: selectedItems)
-        segmentControl.frame = CGRect(origin: CGPointZero, size: CGSize(width: 60, height: 44))
+        segmentControl.frame = CGRect(origin: CGPointZero, size: CGSize(width: 80, height: 44))
         segmentControl.selectionIndicatorColor = UIColor.whiteColor()
         segmentControl.backgroundColor = UIColor.clearColor()
         segmentControl.segmentEdgeInset = UIEdgeInsetsZero
@@ -187,11 +192,11 @@ protocol BrowseActionConsumer: class {
     
     private lazy var searchbar: UITextField = { [unowned self] in
         let width = self.navigationController?.navigationBar.frame.size.width
-        let searchBar = UITextField(frame: CGRectMake(0, 0, width! * 0.7, 25))
+        let searchBar = UITextField(frame: CGRectMake(0, 0, width! * 0.7, 32))
         searchBar.tintColor = UIColor.whiteColor()
         searchBar.backgroundColor = UIScheme.searchbarBgColor
         searchBar.borderStyle = UITextBorderStyle.RoundedRect
-        searchBar.font = UIFont.systemFontOfSize(12)
+        searchBar.font = UIFont(name: "Helvetica", size: 16)
         searchBar.textColor = UIColor.whiteColor()
         let leftView: UIImageView = UIImageView(image: UIImage(named: "search_icon"))
         leftView.frame = CGRectMake(0.0, 0.0, leftView.frame.size.width + 5.0, leftView.frame.size.height);
@@ -199,7 +204,8 @@ protocol BrowseActionConsumer: class {
         searchBar.leftView = leftView
         searchBar.leftViewMode = .Always
         searchBar.delegate = self
-        let str = NSAttributedString(string: "Search...", attributes: [NSForegroundColorAttributeName:UIColor(white: 201/255, alpha: 1)])
+        let str = NSAttributedString(string: "Search...", attributes: [NSForegroundColorAttributeName:UIColor(white: 255, alpha: 0.5),
+            NSFontAttributeName: UIFont(name: "Helvetica", size: 16)!])
         searchBar.attributedPlaceholder =  str
         return searchBar
         }()

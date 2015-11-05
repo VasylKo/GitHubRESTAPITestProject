@@ -190,19 +190,20 @@ final class UserProfileViewController: BesideMenuViewController, BrowseActionPro
     
     private lazy var searchbar: UITextField = { [unowned self] in
         let width = self.navigationController?.navigationBar.frame.size.width
-        let searchBar = UITextField(frame: CGRectMake(0, 0, width! * 0.7, 25))
+        let searchBar = UITextField(frame: CGRectMake(0, 0, width! * 0.7, 32))
         searchBar.tintColor = UIColor.whiteColor()
         searchBar.backgroundColor = UIScheme.searchbarBgColor
-        searchBar.font = UIFont.systemFontOfSize(12)
-        searchBar.textColor = UIColor.whiteColor()
         searchBar.borderStyle = UITextBorderStyle.RoundedRect
+        searchBar.font = UIFont(name: "Helvetica", size: 16)
+        searchBar.textColor = UIColor.whiteColor()
         let leftView: UIImageView = UIImageView(image: UIImage(named: "search_icon"))
         leftView.frame = CGRectMake(0.0, 0.0, leftView.frame.size.width + 5.0, leftView.frame.size.height);
         leftView.contentMode = .Center
         searchBar.leftView = leftView
         searchBar.leftViewMode = .Always
         searchBar.delegate = self
-        let str = NSAttributedString(string: "Search...", attributes: [NSForegroundColorAttributeName:UIColor(white: 201/255, alpha: 1)])
+        let str = NSAttributedString(string: "Search...", attributes: [NSForegroundColorAttributeName:UIColor(white: 255, alpha: 0.5),
+            NSFontAttributeName: UIFont(name: "Helvetica", size: 16)!])
         searchBar.attributedPlaceholder =  str
         return searchBar
         }()
@@ -335,6 +336,9 @@ extension UserProfileViewController: UserProfileActionConsumer {
             let updateController = Storyboards.NewItems.instantiateEditProfileViewController()
             subscribeForContentUpdates(updateController)
             let navigationController = UINavigationController(rootViewController: updateController)
+            navigationController.navigationBar.barTintColor = UIScheme.mainThemeColor
+            navigationController.navigationBar.translucent = false
+            navigationController.navigationBar.tintColor = UIColor.whiteColor()
             presentViewController(navigationController, animated: true, completion: nil)
         case .Follow:
             if api().isUserAuthorized() {

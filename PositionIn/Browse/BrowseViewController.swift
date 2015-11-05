@@ -24,7 +24,9 @@ final class BrowseViewController: BrowseModeTabbarViewController, SearchViewCont
         case .Map:
             return Storyboards.Main.instantiateBrowseMapViewController()
         case .List:
-            return Storyboards.Main.instantiateBrowseListViewController()
+            let listController = Storyboards.Main.instantiateBrowseListViewController()
+            listController.hideSeparatorLinesNearSegmentedControl = true
+            return listController
         }
     }
     

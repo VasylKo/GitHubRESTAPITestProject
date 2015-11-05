@@ -50,7 +50,12 @@ final class AddProductViewController: BaseAddItemViewController {
         captionSection.addFormRow(titleRow)
         
         // Price
-        let priceRow = XLFormRowDescriptor(tag: Tags.Price.rawValue, rowType: XLFormRowDescriptorTypeDecimal, title: NSLocalizedString("Price (KSh)", comment: "New product: price"))
+        var currencySymbol: String = ""
+        if let cs = AppConfiguration().currencyFormatter.currencySymbol {
+            currencySymbol = cs
+        }
+        let priceRow = XLFormRowDescriptor(tag: Tags.Price.rawValue, rowType: XLFormRowDescriptorTypeDecimal,
+            title: NSLocalizedString("Price (\(currencySymbol))", comment: "New product: price"))
         priceRow.required = true
         captionSection.addFormRow(priceRow)
         
@@ -74,8 +79,6 @@ final class AddProductViewController: BaseAddItemViewController {
         quantityRow.cellConfigAtConfigure["stepControl.minimumValue"] = 1
         quantityRow.cellConfigAtConfigure["stepControl.maximumValue"] = 100
         quantityRow.cellConfigAtConfigure["stepControl.stepValue"] = 1
-        quantityRow.cellConfigAtConfigure["stepControl.tintColor"] = UIScheme.mainThemeColor
-        quantityRow.cellConfigAtConfigure["tintColor"] = UIScheme.mainThemeColor
         infoSection.addFormRow(quantityRow)
         
         //Photo section
@@ -85,18 +88,17 @@ final class AddProductViewController: BaseAddItemViewController {
         let photoRow = photoRowDescriptor(Tags.Photo.rawValue)
         photoSection.addFormRow(photoRow)
         
+        
         //Dates section
         let datesSection = XLFormSectionDescriptor.formSectionWithTitle(NSLocalizedString("Pick-up Availability (Optional)", comment: "New product: dates section header"))
         form.addFormSection(datesSection)
         //Start date
         let startDate = XLFormRowDescriptor(tag: Tags.StartDate.rawValue, rowType: XLFormRowDescriptorTypeDateTimeInline, title: NSLocalizedString("Start date", comment: "New product: Start date"))
         startDate.value = defaultStartDate
-        startDate.cellConfigAtConfigure["tintColor"] = UIScheme.mainThemeColor
         datesSection.addFormRow(startDate)
         //End date
         let endDate = XLFormRowDescriptor(tag: Tags.EndDate.rawValue, rowType: XLFormRowDescriptorTypeDateTimeInline, title: NSLocalizedString("End date", comment: "New product: End date"))
         endDate.value = defaultEndDate
-        endDate.cellConfigAtConfigure["tintColor"] = UIScheme.mainThemeColor
         datesSection.addFormRow(endDate)
         
         //Description section
@@ -104,7 +106,6 @@ final class AddProductViewController: BaseAddItemViewController {
         form.addFormSection(descriptionSection)
         // Description
         let descriptionRow = XLFormRowDescriptor(tag: Tags.Description.rawValue, rowType: XLFormRowDescriptorTypeTextView, title: NSLocalizedString("Description", comment: "New product: description"))
-        descriptionRow.cellConfigAtConfigure["tintColor"] = UIScheme.mainThemeColor
         descriptionSection.addFormRow(descriptionRow)
         
         //Terms
