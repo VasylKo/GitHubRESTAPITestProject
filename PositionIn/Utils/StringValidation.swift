@@ -74,7 +74,7 @@ struct StringValidation {
     
     static func password() -> Validator {
         return { string in
-            let passwordRegex: String = "^[a-zA-Z0-9]*$"
+            let passwordRegex: String = "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,32})"
             let passwordTest: NSPredicate = NSPredicate(format: "SELF MATCHES %@", passwordRegex)
             if !passwordTest.evaluateWithObject(string) {
                 return StringValidation.error(
