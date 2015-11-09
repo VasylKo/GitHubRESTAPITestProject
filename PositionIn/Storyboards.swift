@@ -128,6 +128,10 @@ struct Storyboards {
             return self.storyboard.instantiateViewControllerWithIdentifier("CommunityFeedViewController") as! CommunityFeedViewController
         }
 
+        static func instantiateChangePasswordController() -> ChangePasswordViewController {
+            return self.storyboard.instantiateViewControllerWithIdentifier("ChangePasswordController") as! ChangePasswordViewController
+        }
+
         static func instantiateSettingsViewController() -> SettingsViewController {
             return self.storyboard.instantiateViewControllerWithIdentifier("SettingsViewController") as! SettingsViewController
         }
@@ -145,7 +149,7 @@ struct Storyboards {
         }
 
         static func instantiateSplashViewController() -> UIViewController {
-            return self.storyboard.instantiateViewControllerWithIdentifier("SplashViewController") 
+            return self.storyboard.instantiateViewControllerWithIdentifier("SplashViewController") as! UIViewController
         }
 
         static func instantiateWalletViewController() -> WalletViewController {
@@ -836,12 +840,52 @@ extension CommunityFeedViewController: IdentifiableProtocol {
 }
 
 
+//MARK: - ChangePasswordViewController
+extension ChangePasswordViewController: IdentifiableProtocol { 
+    var identifier: String? { return "ChangePasswordController" }
+    static var identifier: String? { return "ChangePasswordController" }
+}
+
+
 //MARK: - SettingsViewController
+extension UIStoryboardSegue {
+    func selection() -> SettingsViewController.Segue? {
+        if let identifier = self.identifier {
+            return SettingsViewController.Segue(rawValue: identifier)
+        }
+        return nil
+    }
+}
+
 extension SettingsViewController: IdentifiableProtocol { 
     var identifier: String? { return "SettingsViewController" }
     static var identifier: String? { return "SettingsViewController" }
 }
 
+extension SettingsViewController { 
+
+    enum Segue: String, CustomStringConvertible, SegueProtocol {
+        case showChangePassword = "showChangePassword"
+
+        var kind: SegueKind? {
+            switch (self) {
+            case showChangePassword:
+                return SegueKind(rawValue: "show")
+            }
+        }
+
+        var destination: UIViewController.Type? {
+            switch (self) {
+            case showChangePassword:
+                return ChangePasswordViewController.self
+            }
+        }
+
+        var identifier: String? { return self.description } 
+        var description: String { return self.rawValue }
+    }
+
+}
 
 //MARK: - CommunityViewController
 extension CommunityViewController: IdentifiableProtocol { 

@@ -74,12 +74,12 @@ struct StringValidation {
     
     static func password() -> Validator {
         return { string in
-            let passwordRegex: String = "^[a-zA-Z0-9]*$"
+            let passwordRegex: String = "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,32})"
             let passwordTest: NSPredicate = NSPredicate(format: "SELF MATCHES %@", passwordRegex)
             if !passwordTest.evaluateWithObject(string) {
                 return StringValidation.error(
                     ErrorCode.Password.rawValue,
-                    localizedDescription: NSLocalizedString("Please enter a valid password", comment: "Password validation")
+                    localizedDescription: NSLocalizedString("Password should be at least 6 symbols long. For your account security we recommend that password include mix of uppercase and lowercase letters, numbers and special symbols", comment: "Password validation")
                 )
             }
             return nil
