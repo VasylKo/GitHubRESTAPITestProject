@@ -27,7 +27,7 @@ class ChangePasswordViewController: UIViewController, UITextFieldDelegate {
         }
         return true
     }
-    @IBAction func sabeButtonPressed(sender: AnyObject) {
+    @IBAction func saveButtonPressed(sender: AnyObject) {
         
         
     }
