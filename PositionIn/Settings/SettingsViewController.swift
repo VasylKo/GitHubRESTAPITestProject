@@ -50,8 +50,15 @@ class SettingsViewController: BesideMenuViewController, MFMailComposeViewControl
     }
 
     @IBAction func changePasswordPressed(sender: AnyObject) {
-        let changePasswordController = Storyboards.Main.instantiateChangePasswordController()
-        self.navigationController?.pushViewController(changePasswordController, animated: true)
+        if api().isUserAuthorized() {
+            let changePasswordController = Storyboards.Main.instantiateChangePasswordController()
+            self.navigationController?.pushViewController(changePasswordController, animated: true)
+        }
+        else {
+            api().logout().onComplete {[weak self] _ in
+                self?.sideBarController?.executeAction(.Login)
+            }
+        }
     }
     
     @IBAction func contactSupportPressed(sender: AnyObject) {
