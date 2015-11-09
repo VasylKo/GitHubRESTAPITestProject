@@ -79,7 +79,7 @@ struct StringValidation {
             if !passwordTest.evaluateWithObject(string) {
                 return StringValidation.error(
                     ErrorCode.Password.rawValue,
-                    localizedDescription: NSLocalizedString("Please enter a valid password", comment: "Password validation")
+                    localizedDescription: NSLocalizedString("Password should be at least 6 symbols long. For your account security we recommend that password include mix of uppercase and lowercase letters, numbers and special symbols", comment: "Password validation")
                 )
             }
             return nil
