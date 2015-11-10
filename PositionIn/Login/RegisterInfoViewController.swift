@@ -38,6 +38,12 @@ final class RegisterInfoViewController: BaseLoginViewController {
             
             api().register(username: username, password: password, firstName: firstName, lastName: lastName).onSuccess {
                 [weak self] _ in
+                
+                let tracker = GAI.sharedInstance().defaultTracker
+                let builder = GAIDictionaryBuilder.createEventWithCategory("Auth",
+                    action: "Click", label: "Signup", value:nil)
+                tracker.send(builder.build() as [NSObject : AnyObject])
+                
                 Log.info?.message("Registration done")
                 self?.sideBarController?.executeAction(SidebarViewController.defaultAction)
                 self?.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
