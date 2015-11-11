@@ -919,10 +919,13 @@ extension LoginSignupViewController: IdentifiableProtocol {
 extension LoginSignupViewController { 
 
     enum Segue: String, CustomStringConvertible, SegueProtocol {
+        case SignUpSegueId = "SignUpSegueId"
         case LoginSegueId = "LoginSegueId"
 
         var kind: SegueKind? {
             switch (self) {
+            case SignUpSegueId:
+                return SegueKind(rawValue: "show")
             case LoginSegueId:
                 return SegueKind(rawValue: "show")
             }
@@ -930,6 +933,8 @@ extension LoginSignupViewController {
 
         var destination: UIViewController.Type? {
             switch (self) {
+            case SignUpSegueId:
+                return RegisterViewController.self
             case LoginSegueId:
                 return LoginViewController.self
             }

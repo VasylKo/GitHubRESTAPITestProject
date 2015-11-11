@@ -119,7 +119,8 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
-                                                    <segue destination="zd3-fl-Vea" kind="show" id="SCq-Vd-4cR"/>
+                                                    <action selector="didTapSignUp:" destination="JGW-l6-Shb" eventType="touchUpInside" id="BJh-BI-zmU"/>
+                                                    <segue destination="zd3-fl-Vea" kind="show" identifier="SignUpSegueId" id="SCq-Vd-4cR"/>
                                                 </connections>
                                             </button>
                                         </subviews>

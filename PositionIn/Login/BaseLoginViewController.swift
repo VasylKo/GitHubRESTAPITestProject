@@ -26,6 +26,9 @@ class BaseLoginViewController: UIViewController {
     }
     
     @IBAction func facebookTouched(sender: AnyObject) {
+        
+        trackGoogleAnalyticsEvent("Auth", action: "Click", label: "Login With Facebook")
+        
         FBSDKLoginManager().logInWithReadPermissions(["public_profile"], fromViewController: self,
             handler: { (result:FBSDKLoginManagerLoginResult!, error:NSError!) -> Void in
                 if error != nil {
@@ -37,11 +40,6 @@ class BaseLoginViewController: UIViewController {
                     api().login(fbToken).onSuccess { [weak self] _ in
                         Log.info?.message("Logged in")
                         self?.dismissLogin()
-                        
-                        let tracker = GAI.sharedInstance().defaultTracker
-                        let builder = GAIDictionaryBuilder.createEventWithCategory("Auth",
-                            action: "Click", label: "Login With Facebook", value:nil)
-                        tracker.send(builder.build() as [NSObject : AnyObject])
                     }
                 }
         })
