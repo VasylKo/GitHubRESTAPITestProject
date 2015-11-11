@@ -61,6 +61,7 @@ struct SessionController {
         return future {
             self.setAuth(AuthResponse.invalidAuth())
             self.updateCurrentStatus(nil)
+            self.keychain[KeychainKeys.UserName] = nil
             return Result(value: ())
         }
     }
@@ -138,7 +139,15 @@ struct SessionController {
         return keychain[KeychainKeys.UserIdKey]
     }
     
-    var accessToken: String? {
+    var userName: String? {
+        return keychain[KeychainKeys.UserName]
+    }
+    
+    func setUserName(userName: String?) {
+        keychain[KeychainKeys.UserName] = userName
+    }
+    
+    private var accessToken: String? {
         return keychain[KeychainKeys.AccessTokenKey]
     }
     
@@ -167,6 +176,7 @@ struct SessionController {
         static let ExpireDateKey = "ed"
         
         static let UserIdKey = "userId"
+        static let UserName = "userName"
         static let IsGuestKey = "isGuest"
         static let UserPasswordKey = "UserPassword"
     }

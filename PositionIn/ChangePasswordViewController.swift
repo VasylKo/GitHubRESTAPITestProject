@@ -29,7 +29,40 @@ class ChangePasswordViewController: UIViewController, UITextFieldDelegate {
     }
     @IBAction func saveButtonPressed(sender: AnyObject) {
         
-        
+        if let oldPassword = self.newPasswordTextField.text,
+            let newPassword = self.confirmNewPasswordTextField.text,
+            let confirmNewPassword = self.confirmNewPasswordTextField.text {
+                if (oldPassword.characters.count == 0 || newPassword.characters.count == 0 || confirmNewPassword.characters.count == 0) {
+                    showWarning(NSLocalizedString("Please, fill all fields", comment: "Change Password"))
+                    return
+                }
+                
+                if (oldPassword != confirmNewPassword) {
+                    showWarning(NSLocalizedString("Passwords should match", comment: "Change Password"))
+                    return
+                }
+                
+                let validationRules: [StringValidation.ValidationRule] = [
+                    (newPasswordTextField, StringValidation.sequence([StringValidation.required(),StringValidation.password()]))
+                ]
+                
+                if let validationResult = StringValidation.validate(validationRules) {
+                    showWarning(validationResult.error.localizedDescription)
+                    if let responder = validationResult.field as? UIResponder {
+                        responder.becomeFirstResponder()
+                    }
+                    return
+                }
+                
+                api().changePassword(SessionController().userName,
+                    oldPassword: self.oldPasswordTextField.text,
+                newPassword: self.newPasswordTextField.text).onSuccess(callback: {[weak self] _ in
+                    self?.navigationController?.popToRootViewControllerAnimated(true)
+                })
+        }
+        else {
+            showWarning(NSLocalizedString("Please, fill all fields", comment: "Change Password"))
+        }
     }
     
     @IBAction func tapOutsideKeyboard(sender: AnyObject) {
