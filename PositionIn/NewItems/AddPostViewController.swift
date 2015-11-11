@@ -40,6 +40,7 @@ final class AddPostViewController: BaseAddItemViewController {
 
         // Message
         let messageRow = XLFormRowDescriptor(tag: Tags.Message.rawValue, rowType:XLFormRowDescriptorTypeTextView)
+        messageRow.required = true
         messageRow.cellConfigAtConfigure["textView.placeholder"] = NSLocalizedString("Message", comment: "New post: message")
         descriptionSection.addFormRow(messageRow)
 
