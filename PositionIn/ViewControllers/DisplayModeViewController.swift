@@ -20,7 +20,7 @@ protocol BrowseActionConsumer: class {
     func browseControllerDidChangeContent(controller: BrowseActionProducer)
 }
 
-@objc class DisplayModeViewController: BesideMenuViewController, BrowseActionConsumer, SearchViewControllerDelegate, UITextFieldDelegate {
+@objc class DisplayModeViewController: BesideMenuViewController, BrowseActionConsumer, SearchViewControllerDelegate, BrowseMapViewControllerDelegate, UITextFieldDelegate {
     
     //MARK: - Updates -
     
@@ -147,6 +147,7 @@ protocol BrowseActionConsumer: class {
     //MARK: - Private -
     
     var childFilterUpdate: SearchFilterUpdate?
+    var searchString: String?
     
     weak var currentModeViewController: UIViewController?
     
@@ -188,9 +189,13 @@ protocol BrowseActionConsumer: class {
         Log.verbose?.message("\(controller) did change content")
     }
     
+    func browseMapViewControllerCenterMapOnLocation(location: Location) {
+        self.searchbar.attributedText = self.searchBarAttributedText(self.searchString, searchString: nil, locationString: SearchFilter.currentFilter.locationName)
+    }
+    
     //MARK: - Search -
     
-    private lazy var searchbar: UITextField = { [unowned self] in
+    lazy var searchbar: UITextField = { [unowned self] in
         let width = self.navigationController?.navigationBar.frame.size.width
         let searchBar = UITextField(frame: CGRectMake(0, 0, width! * 0.7, 32))
         searchBar.tintColor = UIColor.whiteColor()
@@ -218,6 +223,7 @@ protocol BrowseActionConsumer: class {
     
     func presentSearchViewController(filter: SearchFilter) {
         self.searchbar.attributedText = nil
+        self.searchString = nil
         SearchViewController.present(searchbar, presenter: self, filter: filter)
     }
     
@@ -303,14 +309,16 @@ protocol BrowseActionConsumer: class {
         
         if let modelTitle = modelTitle {
             searchBarString = modelTitle
+            self.searchString = modelTitle
         }
         
         if let searchString = searchString {
-            searchBarString = searchBarString + " " + searchString
+            searchBarString = "\(searchBarString) \(searchString)"
+            self.searchString = searchBarString
         }
         
         if let locationString = locationString {
-            searchBarString = searchBarString + " " + locationString
+            searchBarString = "\(searchBarString) \(locationString)"
         }
         
         str = NSMutableAttributedString(string: searchBarString,

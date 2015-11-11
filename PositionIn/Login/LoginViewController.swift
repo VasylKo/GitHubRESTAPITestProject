@@ -32,6 +32,12 @@ final class LoginViewController: BaseLoginViewController {
             
             api().login(username: username, password: password).onSuccess { [weak self] _ in
                 Log.info?.message("Logged in")
+                
+                let tracker = GAI.sharedInstance().defaultTracker
+                let builder = GAIDictionaryBuilder.createEventWithCategory("Auth",
+                    action: "Click", label: "Login", value:nil)
+                tracker.send(builder.build() as [NSObject : AnyObject])
+                
                 self?.dismissLogin()
             }
             

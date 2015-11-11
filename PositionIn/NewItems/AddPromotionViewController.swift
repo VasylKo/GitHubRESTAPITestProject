@@ -81,6 +81,21 @@ final class AddPromotionViewController: BaseAddItemViewController {
         form.addFormSection(datesSection)
         //Start date
         let startDate = XLFormRowDescriptor(tag: Tags.StartDate.rawValue, rowType: XLFormRowDescriptorTypeDateTimeInline, title: NSLocalizedString("Start date", comment: "New promotion: Start date"))
+        startDate.onChangeBlock = { [weak self] oldValue, newValue, descriptor in
+            let row = self?.form.formRowWithTag(Tags.EndDate.rawValue)
+            if let row = row {
+                Queue.main.async { _ in
+                    if let newValueDate = newValue as? NSDate,
+                        let rowDate = row.value as? NSDate {
+                            row.cellConfig.setObject(newValueDate, forKey: "minimumDate")
+                            if rowDate.compare(newValueDate) == NSComparisonResult.OrderedAscending {
+                                row.value = newValue
+                            }
+                            self?.reloadFormRow(row)
+                    }
+                }
+            }
+        }
         startDate.value = defaultStartDate
         startDate.cellConfigAtConfigure["tintColor"] = UIScheme.mainThemeColor
         datesSection.addFormRow(startDate)
@@ -88,6 +103,7 @@ final class AddPromotionViewController: BaseAddItemViewController {
         let endDate = XLFormRowDescriptor(tag: Tags.EndDate.rawValue, rowType: XLFormRowDescriptorTypeDateTimeInline, title: NSLocalizedString("End date", comment: "New promotion: End date"))
         endDate.value = defaultEndDate
         endDate.cellConfigAtConfigure["tintColor"] = UIScheme.mainThemeColor
+        endDate.cellConfigAtConfigure["minimumDate"] = defaultStartDate
         datesSection.addFormRow(endDate)
         
         //Description section

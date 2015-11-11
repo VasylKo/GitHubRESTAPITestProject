@@ -95,12 +95,30 @@ final class FilterViewController: XLFormViewController {
         
         //Start date
         let startDateRow = XLFormRowDescriptor(tag: Tags.StartDate.rawValue, rowType: XLFormRowDescriptorTypeDateTime, title: NSLocalizedString("Start date", comment: "Filter: Start date"))
-        startDateRow.value = NSDate(timeIntervalSinceNow: -60*60*24)
+        let startDate = NSDate(timeIntervalSinceNow: -60*60*24)
+        startDateRow.value = startDate
         startDateRow.disabled = customDateStatePredicate
+        startDateRow.onChangeBlock = { [weak self] oldValue, newValue, descriptor in
+            let row = self?.form.formRowWithTag(Tags.EndDate.rawValue)
+            if let row = row {
+                Queue.main.async { _ in
+                    if let newValueDate = newValue as? NSDate,
+                        let rowDate = row.value as? NSDate {
+                            row.cellConfig.setObject(newValueDate, forKey: "minimumDate")
+                            if rowDate.compare(newValueDate) == NSComparisonResult.OrderedAscending {
+                                row.value = newValue
+                            }
+                            self?.reloadFormRow(row)
+                    }
+                }
+            }
+        }
+        
         optionsSection.addFormRow(startDateRow)
         //End date
         let endDateRow = XLFormRowDescriptor(tag: Tags.EndDate.rawValue, rowType: XLFormRowDescriptorTypeDateTime, title: NSLocalizedString("End date", comment: "Filter: End date"))
         endDateRow.value = NSDate(timeIntervalSinceNow: 60*60*25)
+        endDateRow.cellConfigAtConfigure["minimumDate"] = startDate
         endDateRow.disabled = customDateStatePredicate
         optionsSection.addFormRow(endDateRow)
 

@@ -3,3 +3,4 @@
 //
 
 #import "BadgeView.h"
+#import <Google/Analytics.h>

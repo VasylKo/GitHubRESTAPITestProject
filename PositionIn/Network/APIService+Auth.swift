@@ -91,12 +91,14 @@ extension APIService {
     func logout() -> Future<Void, NoError> {
         return sessionController.logout().onComplete { _ in
             self.sendUserDidChangeNotification(nil)
+
         }
     }
     
     
     //Login existing user
     func login(username username: String, password: String) -> Future<UserProfile, NSError> {
+        sessionController.setUserName(username)
         return loginRequest(username: username, password: password).flatMap { _ in
             return self.updateCurrentProfileStatus(password)
         }
@@ -105,12 +107,14 @@ extension APIService {
     //Login via fb
     func login(fbToken: String) -> Future<UserProfile, NSError> {
         return facebookLoginRequest(fbToken).flatMap { _ in
+            //TODO: need add saving userName to keychain
             return self.updateCurrentProfileStatus()
         }
     }
     
     //Register anonymous user
     func register() -> Future<UserProfile, NSError> {
+        sessionController.setUserName(nil)
         return registerRequest(username: nil, password: nil, info: nil).flatMap { _ in
             return self.updateCurrentProfileStatus()
         }
@@ -125,6 +129,7 @@ extension APIService {
         if let lastName = lastName {
             info ["lastName"] = lastName
         }
+        sessionController.setUserName(username)
         return registerRequest(username: username, password: password, info: info).flatMap { _ in
             return self.updateCurrentProfileStatus(password)
         }

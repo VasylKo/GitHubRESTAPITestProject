@@ -22,7 +22,9 @@ final class BrowseViewController: BrowseModeTabbarViewController {
     override func viewControllerForMode(mode: DisplayModeViewController.DisplayMode) -> UIViewController {
         switch self.displayMode {
         case .Map:
-            return Storyboards.Main.instantiateBrowseMapViewController()
+            let mapController = Storyboards.Main.instantiateBrowseMapViewController()
+            mapController.delegate = self
+            return mapController
         case .List:
             let listController = Storyboards.Main.instantiateBrowseListViewController()
             listController.hideSeparatorLinesNearSegmentedControl = true

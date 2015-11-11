@@ -12,6 +12,10 @@ import CleanroomLogger
 import BrightFutures
 import Box
 
+protocol BrowseMapViewControllerDelegate: class {
+    func browseMapViewControllerCenterMapOnLocation(location: Location)
+}
+
 final class BrowseMapViewController: UIViewController, BrowseActionProducer, BrowseModeDisplay, UpdateFilterProtocol {
 
     override func viewDidLoad() {
@@ -22,6 +26,7 @@ final class BrowseMapViewController: UIViewController, BrowseActionProducer, Bro
     }
     
     var shouldApplySectionFilter = true
+    var shouldReverseGeocodeCoordinate = false
     
     var browseMode: BrowseModeTabbarViewController.BrowseMode = .ForYou
     
@@ -30,6 +35,7 @@ final class BrowseMapViewController: UIViewController, BrowseActionProducer, Bro
     var filter = SearchFilter.currentFilter
     
     weak var actionConsumer: BrowseActionConsumer?
+    weak var delegate: BrowseMapViewControllerDelegate?
     
     lazy private var mapView: GMSMapView = { [unowned self] in
         let map = GMSMapView(frame: self.view.bounds)
@@ -83,6 +89,17 @@ final class BrowseMapViewController: UIViewController, BrowseActionProducer, Bro
 extension BrowseMapViewController: GMSMapViewDelegate {
     func mapView(mapView: GMSMapView!, didChangeCameraPosition position: GMSCameraPosition!) {
         if let coordinate = position?.target {
+            
+            if (shouldReverseGeocodeCoordinate) {
+                locationController().reverseGeocodeCoordinate(coordinate).onSuccess(callback: {[weak self] location in
+                    SearchFilter.shouldPostUpdateNotification = false
+                    SearchFilter.setLocation(location)
+                    self?.delegate?.browseMapViewControllerCenterMapOnLocation(location)
+                })
+            }
+
+            shouldReverseGeocodeCoordinate = true
+            
             var f = filter
             f.coordinates = coordinate
             let request: Future<CollectionResponse<FeedItem>,NSError>
@@ -118,6 +135,7 @@ extension BrowseMapViewController: GMSMapViewDelegate {
     }
     
     func didTapMyLocationButtonForMapView(mapView: GMSMapView!) -> Bool {
+        self.shouldReverseGeocodeCoordinate = false
         SearchFilter.setLocation(nil)
         return true
     }

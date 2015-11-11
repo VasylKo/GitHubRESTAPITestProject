@@ -45,6 +45,7 @@ struct SearchFilter: Mappable {
             SearchFilter.updateCurrentLocation()
         }
         SearchFilter.currentFilter = filter
+        self.shouldPostUpdateNotification = true
     }
     
     static var isCustomLocationSet: Bool {
@@ -157,6 +158,7 @@ struct SearchFilter: Mappable {
         locationName <- map["locationName"]
     }
     
+    static var shouldPostUpdateNotification: Bool = true
     static var currentFilter: SearchFilter {
         get {
             let defaults = NSUserDefaults.standardUserDefaults()
@@ -170,7 +172,10 @@ struct SearchFilter: Mappable {
             let defaults = NSUserDefaults.standardUserDefaults()
             let json = Mapper<SearchFilter>().toJSON(newValue)
             defaults.setObject(json, forKey: kCurrentFilterKey)
-            NSNotificationCenter.defaultCenter().postNotificationName(SearchFilter.CurrentFilterDidChangeNotification, object: nil)
+            
+            if (self.shouldPostUpdateNotification) {
+                NSNotificationCenter.defaultCenter().postNotificationName(SearchFilter.CurrentFilterDidChangeNotification, object: nil)
+            }
         }
     }
     

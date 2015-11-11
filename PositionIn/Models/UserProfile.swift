@@ -91,6 +91,10 @@ final class UserProfile: CRUDObject {
         return "/v1.0/me"
     }
     
+    static func changePasswordEndpoint() -> String {
+        return "/v1.0/users/changepassword"
+    }
+    
     static func userEndpoint(userId: CRUDObjectId) -> String {
         return (UserProfile.endpoint() as NSString).stringByAppendingPathComponent("\(userId)")
     }

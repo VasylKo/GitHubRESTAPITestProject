@@ -44,6 +44,7 @@ final class CommunityViewController: BrowseModeTabbarViewController {
         case .Map:
             let controller = Storyboards.Main.instantiateBrowseMapViewController()
             var filter = controller.filter
+            controller.delegate = self
             filter.communities = [ objectId ]
             controller.filter = filter
             return controller
