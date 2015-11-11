@@ -38,16 +38,16 @@ final class BrowseViewController: BrowseModeTabbarViewController {
             self?.subscribeForContentUpdates(controller)
         }
         return [
-            AddMenuView.MenuItem.productItemWithAction {
-                api().isUserAuthorized().onSuccess {  _ in
-                    pushAndSubscribe(Storyboards.NewItems.instantiateAddProductViewController())
+            AddMenuView.MenuItem.promotionItemWithAction {
+                api().isUserAuthorized().onSuccess {  _ in pushAndSubscribe(Storyboards.NewItems.instantiateAddPromotionViewController())
                 }},
             AddMenuView.MenuItem.eventItemWithAction {
                 api().isUserAuthorized().onSuccess {  _ in
                     pushAndSubscribe(Storyboards.NewItems.instantiateAddEventViewController())
                 }},
-            AddMenuView.MenuItem.promotionItemWithAction {
-                api().isUserAuthorized().onSuccess {  _ in pushAndSubscribe(Storyboards.NewItems.instantiateAddPromotionViewController())
+            AddMenuView.MenuItem.productItemWithAction {
+                api().isUserAuthorized().onSuccess {  _ in
+                    pushAndSubscribe(Storyboards.NewItems.instantiateAddProductViewController())
                 }},
             AddMenuView.MenuItem.postItemWithAction {
                 api().isUserAuthorized().onSuccess {  _ in
@@ -55,8 +55,8 @@ final class BrowseViewController: BrowseModeTabbarViewController {
                 }},
             AddMenuView.MenuItem.inviteItemWithAction {
                 api().isUserAuthorized().onSuccess {  _ in
-                    Log.error?.message("Should call invite")}
-            },
+                    Log.error?.message("Should call invite")
+                }},
         ]
     }
     
