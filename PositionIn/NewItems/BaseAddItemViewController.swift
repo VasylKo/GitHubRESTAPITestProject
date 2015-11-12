@@ -156,6 +156,29 @@ class BaseAddItemViewController: XLFormViewController {
         return photoRow
     }
     
+    func startDateRowDescription(startDateRowTag: String, endDateRowTag: String) ->XLFormRowDescriptor {
+        let startDate = XLFormRowDescriptor(tag: startDateRowTag,
+            rowType: XLFormRowDescriptorTypeDateTimeInline,
+            title: NSLocalizedString("Start date", comment: "New event: Start date"))
+        startDate.value = defaultStartDate
+        startDate.onChangeBlock = { [weak self] oldValue, newValue, descriptor in
+            let row = self?.form.formRowWithTag(endDateRowTag)
+            if let row = row {
+                Queue.main.async { _ in
+                    if let newValueDate = newValue as? NSDate,
+                        let rowDate = row.value as? NSDate {
+                            row.cellConfig.setObject(newValueDate, forKey: "minimumDate")
+                            if rowDate.compare(newValueDate) == NSComparisonResult.OrderedAscending {
+                                row.value = newValue
+                            }
+                            self?.reloadFormRow(row)
+                    }
+                }
+            }
+        }
+        return startDate
+    }
+    
     func uploadAssets(value: AnyObject?, optional: Bool = true) -> Future<[NSURL], NSError>? {
         if let assets = value as? [PHAsset] {
             return assets.map { asset in
