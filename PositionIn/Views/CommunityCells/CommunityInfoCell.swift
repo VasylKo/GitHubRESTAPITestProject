@@ -15,8 +15,12 @@ final class CommunityInfoCell: TableViewCell {
         assert(m != nil, "Invalid model passed")
         let countFormat = NSLocalizedString("%d Members", comment: "Browse community: count members")
         countLabel.text = (m!.membersCount).map { String(format:countFormat, $0) }
-        descriptionLabel.text = m!.text    
-    }    
+        descriptionLabel.text = m!.text
+        
+        self.preservesSuperviewLayoutMargins = false
+        self.layoutMargins = UIEdgeInsetsZero
+        self.separatorInset = UIEdgeInsetsZero
+    }
     
     @IBOutlet weak var countLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
