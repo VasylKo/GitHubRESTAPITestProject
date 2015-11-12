@@ -103,16 +103,13 @@ extension MessagesListViewController {
         }
         
         func setItems(messages: [ChatHistoryResponseItem]) {
-            let dateFormatter = NSDateFormatter()
-            dateFormatter.dateStyle = .NoStyle
-            dateFormatter.timeStyle = .MediumStyle
             models = messages.map { conversation -> ChatHistoryCellModel in
                 return ChatHistoryCellModel(
                     user: conversation.roomId,
                     name: conversation.name,
                     message: "",
                     imageURL: conversation.imageURL,
-                    date: Optional(conversation.lastActivityDate).map { dateFormatter.stringFromDate($0) },
+                    date: Optional(conversation.lastActivityDate).map { $0.formattedAsTimeAgo() },
                     muc: conversation.isGroupChat,
                     unreadCount: conversation.unreadCount
                 )
