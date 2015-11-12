@@ -22,6 +22,8 @@ final class BrowseMapViewController: UIViewController, BrowseActionProducer, Bro
         super.viewDidLoad()
         if let coordinate = filter.coordinates {
             self.mapView.moveCamera(GMSCameraUpdate.setTarget(coordinate, zoom: 12))
+            
+            self.mapMovementEnd( CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude))
         }
     }
     
