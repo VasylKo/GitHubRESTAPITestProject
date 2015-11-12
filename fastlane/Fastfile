@@ -69,6 +69,7 @@ platform :ios do
         configuration: "StagingRelease",
         output_directory: "Build",
         clean: true,
+        use_legacy_build_api: true,
         ) # Build app
         #      snapshot
       s3(
@@ -85,6 +86,7 @@ platform :ios do
             configuration: "ProdRelease",
             output_directory: "Build",
             clean: true,
+            use_legacy_build_api: true,            
             ) # Build app
         snapshot
         s3(
