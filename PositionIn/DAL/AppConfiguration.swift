@@ -17,18 +17,23 @@ final class AppConfiguration {
             //Workaround bug in S3
             amazonURL = NSURL(string: "https://app.positionin.com")!
             xmppHostname = "app.positionin.com"
+            googleAnalystLogLevel = GAILogLevel.Verbose
         case .Staging:
             baseURL = NSURL(string: "https://app-sta.positionin.com/api/")!
             amazonURL = NSURL(string: "https://pos-sta.s3.amazonaws.com/")!
             xmppHostname = "app-sta.positionin.com"
+            googleAnalystLogLevel = GAILogLevel.Verbose
         case .Dev:
             baseURL = NSURL(string: "https://app-dev.positionin.com/api/")!
             amazonURL = NSURL(string: "https://pos-dev.s3.amazonaws.com/")!
             xmppHostname = "app-dev.positionin.com"
+            googleAnalystLogLevel = GAILogLevel.None
         }
         googleMapsKey = "AIzaSyA3NvrDKBcpIsnq4-ZACG41y7Mj-wSfVrY"
         xmppPort = 5222
     }
+    
+    let googleAnalystLogLevel: GAILogLevel
     
     let baseURL : NSURL
     let amazonURL : NSURL

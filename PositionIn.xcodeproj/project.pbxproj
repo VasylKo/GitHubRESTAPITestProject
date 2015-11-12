@@ -71,9 +71,11 @@
 		50F7305A1BBBE86A008D3D94 /* PositionIn.CommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50F730581BBBE86A008D3D94 /* PositionIn.CommentCell.xib */; };
 		50FE7D891BBE77BB005676E2 /* ItemsSearchResultDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FE7D871BBE77BB005676E2 /* ItemsSearchResultDataSource.swift */; };
 		50FE7D8A1BBE77BB005676E2 /* ItemsSearchResultsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FE7D881BBE77BB005676E2 /* ItemsSearchResultsController.swift */; };
-		D18A1FDC1BEB95D9003F158D /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18A1FDA1BEB95D9003F158D /* ChangePasswordViewController.swift */; };
-		D18A1FDD1BEB95D9003F158D /* PositionIn.ChangePasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D18A1FDB1BEB95D9003F158D /* PositionIn.ChangePasswordViewController.xib */; };
-		D196225F1BF13075003BCD85 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D196225E1BF13075003BCD85 /* GoogleService-Info.plist */; };
+		D100DF0B1BF4AA0300C81054 /* GoogleAnalyticsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D100DF0A1BF4AA0300C81054 /* GoogleAnalyticsHelper.swift */; settings = {ASSET_TAGS = (); }; };
+		D100DF0F1BF4AA7900C81054 /* NSDate+NVTimeAgo.m in Sources */ = {isa = PBXBuildFile; fileRef = D100DF0E1BF4AA7900C81054 /* NSDate+NVTimeAgo.m */; settings = {ASSET_TAGS = (); }; };
+		D18A1FDC1BEB95D9003F158D /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18A1FDA1BEB95D9003F158D /* ChangePasswordViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		D18A1FDD1BEB95D9003F158D /* PositionIn.ChangePasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D18A1FDB1BEB95D9003F158D /* PositionIn.ChangePasswordViewController.xib */; settings = {ASSET_TAGS = (); }; };
+		D196225F1BF13075003BCD85 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D196225E1BF13075003BCD85 /* GoogleService-Info.plist */; settings = {ASSET_TAGS = (); }; };
 		E6018E501B849266001D22FA /* XMPPProcess+Future.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6018E4F1B849266001D22FA /* XMPPProcess+Future.swift */; };
 		E6018E521B8492EA001D22FA /* XLFormOptionsObject+PositionIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6018E511B8492EA001D22FA /* XLFormOptionsObject+PositionIn.swift */; };
 		E603D2581BC7E5B000E684C5 /* XMPPCredentials.h in Headers */ = {isa = PBXBuildFile; fileRef = E603D2561BC7E5B000E684C5 /* XMPPCredentials.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -493,6 +495,9 @@
 		AF836D0B902FDFFA6CB4A412 /* Pods_Messaging.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Messaging.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB73828B80F64D347BB9F14D /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5785CCFFE7238C562E6E52F /* Pods-PositionIn.devrelease.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PositionIn.devrelease.xcconfig"; path = "Pods/Target Support Files/Pods-PositionIn/Pods-PositionIn.devrelease.xcconfig"; sourceTree = "<group>"; };
+		D100DF0A1BF4AA0300C81054 /* GoogleAnalyticsHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GoogleAnalyticsHelper.swift; path = Utils/GoogleAnalyticsHelper.swift; sourceTree = "<group>"; };
+		D100DF0D1BF4AA7900C81054 /* NSDate+NVTimeAgo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+NVTimeAgo.h"; sourceTree = "<group>"; };
+		D100DF0E1BF4AA7900C81054 /* NSDate+NVTimeAgo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+NVTimeAgo.m"; sourceTree = "<group>"; };
 		D18A1FDA1BEB95D9003F158D /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
 		D18A1FDB1BEB95D9003F158D /* PositionIn.ChangePasswordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.ChangePasswordViewController.xib; sourceTree = "<group>"; };
 		D196225E1BF13075003BCD85 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -1077,6 +1082,8 @@
 		2429FFA21B8E00770061B4E0 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				D100DF0C1BF4AA6500C81054 /* NSDate-Time-Ago */,
+				D100DF0A1BF4AA0300C81054 /* GoogleAnalyticsHelper.swift */,
 				E63201641B967A540066C62E /* Notifications.swift */,
 				E6C952251BA1A8230032254F /* StringValidation.swift */,
 			);
@@ -1113,6 +1120,16 @@
 			);
 			name = ItemSearchController;
 			path = ItemSearchResult;
+			sourceTree = "<group>";
+		};
+		D100DF0C1BF4AA6500C81054 /* NSDate-Time-Ago */ = {
+			isa = PBXGroup;
+			children = (
+				D100DF0D1BF4AA7900C81054 /* NSDate+NVTimeAgo.h */,
+				D100DF0E1BF4AA7900C81054 /* NSDate+NVTimeAgo.m */,
+			);
+			name = "NSDate-Time-Ago";
+			path = "Utils/NSDate+NVTimeAgo";
 			sourceTree = "<group>";
 		};
 		D18A1FD91BEB95AF003F158D /* ChangePassword */ = {
@@ -3298,9 +3315,11 @@
 				50F730591BBBE86A008D3D94 /* CommentCell.swift in Sources */,
 				E61B20EF1B813C8C005EAB2C /* Community.swift in Sources */,
 				2431EBDE1B947442009FB158 /* Product.swift in Sources */,
+				D100DF0F1BF4AA7900C81054 /* NSDate+NVTimeAgo.m in Sources */,
 				E6A869EC1B60D3E300797D16 /* APIService+Auth.swift in Sources */,
 				50FE7D891BBE77BB005676E2 /* ItemsSearchResultDataSource.swift in Sources */,
 				E6199BB71B9F3B7400E3C69D /* PeopleViewController.swift in Sources */,
+				D100DF0B1BF4AA0300C81054 /* GoogleAnalyticsHelper.swift in Sources */,
 				E6D4D5B81B6FA7A7003134CB /* SearchTransition.swift in Sources */,
 				E6F3093D1BA81FAF00C9420C /* AttachedPhotosView.swift in Sources */,
 				E6BEF1DB1B9C7F9D00511B46 /* BrowseCommunityCellFactory.swift in Sources */,

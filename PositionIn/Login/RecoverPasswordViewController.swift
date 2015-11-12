@@ -11,8 +11,6 @@ import CleanroomLogger
 
 final class RecoverPasswordViewController: BaseLoginViewController {
     
-   
-    
     @IBAction func didTapSubmitButton(sender: AnyObject) {
         Log.debug?.message("Should call recover")
     }

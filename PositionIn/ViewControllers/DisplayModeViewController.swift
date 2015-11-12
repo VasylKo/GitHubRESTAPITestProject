@@ -324,6 +324,13 @@ protocol BrowseActionConsumer: class {
         str = NSMutableAttributedString(string: searchBarString,
             attributes: [NSForegroundColorAttributeName:UIColor.whiteColor()])
         
+        if let locationString = locationString {
+            let searchBarStringAsNSString: NSString = searchBarString
+            
+            str.addAttributes([NSForegroundColorAttributeName:UIColor(white: 1, alpha: 0.5)],
+                range: searchBarStringAsNSString.rangeOfString(locationString))
+        }
+        
         return str
     }
 }

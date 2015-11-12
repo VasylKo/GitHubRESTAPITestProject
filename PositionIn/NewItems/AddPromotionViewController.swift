@@ -80,23 +80,7 @@ final class AddPromotionViewController: BaseAddItemViewController {
         let datesSection = XLFormSectionDescriptor.formSectionWithTitle(NSLocalizedString("Duration", comment: "New promotion: dates section header"))
         form.addFormSection(datesSection)
         //Start date
-        let startDate = XLFormRowDescriptor(tag: Tags.StartDate.rawValue, rowType: XLFormRowDescriptorTypeDateTimeInline, title: NSLocalizedString("Start date", comment: "New promotion: Start date"))
-        startDate.onChangeBlock = { [weak self] oldValue, newValue, descriptor in
-            let row = self?.form.formRowWithTag(Tags.EndDate.rawValue)
-            if let row = row {
-                Queue.main.async { _ in
-                    if let newValueDate = newValue as? NSDate,
-                        let rowDate = row.value as? NSDate {
-                            row.cellConfig.setObject(newValueDate, forKey: "minimumDate")
-                            if rowDate.compare(newValueDate) == NSComparisonResult.OrderedAscending {
-                                row.value = newValue
-                            }
-                            self?.reloadFormRow(row)
-                    }
-                }
-            }
-        }
-        startDate.value = defaultStartDate
+        let startDate = startDateRowDescription(Tags.StartDate.rawValue, endDateRowTag: Tags.EndDate.rawValue)
         datesSection.addFormRow(startDate)
         //End date
         let endDate = XLFormRowDescriptor(tag: Tags.EndDate.rawValue, rowType: XLFormRowDescriptorTypeDateTimeInline, title: NSLocalizedString("End date", comment: "New promotion: End date"))
