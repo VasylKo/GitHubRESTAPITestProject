@@ -54,6 +54,7 @@ final class AddProductViewController: BaseAddItemViewController {
         let priceRow = XLFormRowDescriptor(tag: Tags.Price.rawValue, rowType: XLFormRowDescriptorTypeDecimal,
             title: NSLocalizedString("Price (\(currencySymbol))", comment: "New product: price"))
         priceRow.required = true
+        priceRow.cellConfig.setObject(UIScheme.mainThemeColor, forKey: "tintColor")
         priceRow.addValidator(XLFormRegexValidator(msg: NSLocalizedString("Incorrect price",
             comment: "Add event"), regex: "^([0-9]|[1-9][0-9]|10000)$"))
         captionSection.addFormRow(priceRow)
@@ -78,6 +79,8 @@ final class AddProductViewController: BaseAddItemViewController {
         quantityRow.cellConfigAtConfigure["stepControl.minimumValue"] = 1
         quantityRow.cellConfigAtConfigure["stepControl.maximumValue"] = 100
         quantityRow.cellConfigAtConfigure["stepControl.stepValue"] = 1
+        quantityRow.cellConfigAtConfigure["tintColor"] = UIScheme.mainThemeColor
+        quantityRow.cellConfigAtConfigure["currentStepValue.textColor"] = UIScheme.mainThemeColor
         infoSection.addFormRow(quantityRow)
         
         //Photo section
