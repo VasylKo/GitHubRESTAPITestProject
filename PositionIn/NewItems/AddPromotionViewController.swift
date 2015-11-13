@@ -44,10 +44,7 @@ final class AddPromotionViewController: BaseAddItemViewController {
         let infoGeneralSection = XLFormSectionDescriptor.formSection()
         form.addFormSection(infoGeneralSection)
         // Title
-        let titleRow = XLFormRowDescriptor(tag: Tags.Title.rawValue, rowType: XLFormRowDescriptorTypeText)
-        titleRow.cellConfigAtConfigure["textField.placeholder"] = NSLocalizedString("Title", comment: "New promotion: title")
-        titleRow.required = true
-        infoGeneralSection.addFormRow(titleRow)
+        infoGeneralSection.addFormRow(self.titleRowDescription(Tags.Title.rawValue))
         // Discount
         let priceRow = XLFormRowDescriptor(tag: Tags.Discount.rawValue, rowType: XLFormRowDescriptorTypeDecimal, title: NSLocalizedString("Discount (%)", comment: "New promotion: discount"))
         priceRow.required = true
@@ -92,8 +89,7 @@ final class AddPromotionViewController: BaseAddItemViewController {
         let descriptionSection = XLFormSectionDescriptor.formSection()
         form.addFormSection(descriptionSection)
         // Description
-        let descriptionRow = XLFormRowDescriptor(tag: Tags.Description.rawValue, rowType: XLFormRowDescriptorTypeTextView, title: NSLocalizedString("Description", comment: "New promotion: description"))
-        descriptionSection.addFormRow(descriptionRow)
+        descriptionSection.addFormRow(self.descriptionRowDesctiption(Tags.Description.rawValue))
 
         //Terms
         let termsSection = XLFormSectionDescriptor.formSection()
