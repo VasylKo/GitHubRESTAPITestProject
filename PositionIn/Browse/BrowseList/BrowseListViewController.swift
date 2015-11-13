@@ -16,7 +16,16 @@ final class BrowseListViewController: UIViewController, BrowseActionProducer, Br
     var shoWCompactCells: Bool = true
     private var dataRequestToken = InvalidationToken()
 
-    var browseMode: BrowseModeTabbarViewController.BrowseMode = .ForYou
+    var browseMode: BrowseModeTabbarViewController.BrowseMode = .ForYou {
+        didSet {
+            switch browseMode {
+            case .ForYou:
+                trackGoogleAnalyticsEvent("Main", action: "Click", label: "For You")
+            case .New:
+                trackGoogleAnalyticsEvent("Main", action: "Click", label: "New")
+            }
+        }
+    }
     
     var hideSeparatorLinesNearSegmentedControl: Bool = false
     

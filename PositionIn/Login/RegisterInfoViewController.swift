@@ -33,16 +33,20 @@ final class RegisterInfoViewController: BaseLoginViewController {
                     return
             }
             
+            trackGoogleAnalyticsEvent("Auth", action: "Click", label: "Signup Complete")
+            
             let firstName = firstnameTextField.text
             let lastName = lastnameTextField.text
             
             api().register(username: username, password: password, firstName: firstName, lastName: lastName).onSuccess {
                 [weak self] _ in
-                
+                trackGoogleAnalyticsEvent("Status", action: "Click", label: "Auth Success")
                 Log.info?.message("Registration done")
                 self?.sideBarController?.executeAction(SidebarViewController.defaultAction)
                 self?.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
-            }
+            }.onFailure(callback: {_ in
+                trackGoogleAnalyticsEvent("Status", action: "Click", label: "Auth Fail")
+            })
         } //validation
     }
     

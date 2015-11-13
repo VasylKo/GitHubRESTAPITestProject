@@ -51,6 +51,12 @@ protocol BrowseActionConsumer: class {
         didSet {
             if isViewLoaded() {
                 applyDisplayMode(displayMode)
+                switch displayMode {
+                case .Map:
+                    trackGoogleAnalyticsEvent("Main", action: "Click", label: "Map")
+                case .List:
+                    trackGoogleAnalyticsEvent("Main", action: "Click", label: "List")                    
+                }
             }
         }
     }
@@ -164,19 +170,23 @@ protocol BrowseActionConsumer: class {
     func browseController(controller: BrowseActionProducer, didSelectItem objectId: CRUDObjectId, type itemType: FeedItem.ItemType, data: Any?) {
         switch itemType {
         case .Item:
+            trackGoogleAnalyticsEvent("Main", action: "Click", label: "Product")
             let controller =  Storyboards.Main.instantiateProductDetailsViewControllerId()
             controller.objectId = objectId
             controller.author = data as? ObjectInfo
             navigationController?.pushViewController(controller, animated: true)
         case .Event:
+            trackGoogleAnalyticsEvent("Main", action: "Click", label: "Event")
             let controller =  Storyboards.Main.instantiateEventDetailsViewControllerId()
             controller.objectId = objectId
             navigationController?.pushViewController(controller, animated: true)
         case .Promotion:
+            trackGoogleAnalyticsEvent("Main", action: "Click", label: "Promotion")
             let controller =  Storyboards.Main.instantiatePromotionDetailsViewControllerId()
             controller.objectId = objectId
             navigationController?.pushViewController(controller, animated: true)
         case .Post:
+            trackGoogleAnalyticsEvent("Main", action: "Click", label: "Post")
             let controller = Storyboards.Main.instantiatePostViewController()
             controller.objectId = objectId
             navigationController?.pushViewController(controller, animated: true)

@@ -11,6 +11,11 @@ import CleanroomLogger
 
 final class RecoverPasswordViewController: BaseLoginViewController {
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        trackGoogleAnalyticsEvent("Auth", action: "Click", label: "Forgot Password")
+    }
+    
     @IBAction func didTapSubmitButton(sender: AnyObject) {
         Log.debug?.message("Should call recover")
     }
