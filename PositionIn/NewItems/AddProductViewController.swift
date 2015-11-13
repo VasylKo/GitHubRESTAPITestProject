@@ -44,10 +44,7 @@ final class AddProductViewController: BaseAddItemViewController {
         let captionSection = XLFormSectionDescriptor.formSection()
         form.addFormSection(captionSection)
         // Title
-        let titleRow = XLFormRowDescriptor(tag: Tags.Title.rawValue, rowType: XLFormRowDescriptorTypeText)
-        titleRow.cellConfigAtConfigure["textField.placeholder"] = NSLocalizedString("Title", comment: "New product: title")
-        titleRow.required = true
-        captionSection.addFormRow(titleRow)
+        captionSection.addFormRow(self.titleRowDescription(Tags.Title.rawValue))
         
         // Price
         var currencySymbol: String = ""
@@ -57,6 +54,8 @@ final class AddProductViewController: BaseAddItemViewController {
         let priceRow = XLFormRowDescriptor(tag: Tags.Price.rawValue, rowType: XLFormRowDescriptorTypeDecimal,
             title: NSLocalizedString("Price (\(currencySymbol))", comment: "New product: price"))
         priceRow.required = true
+        priceRow.addValidator(XLFormRegexValidator(msg: NSLocalizedString("Incorrect price",
+            comment: "Add event"), regex: "^([0-9]|[1-9][0-9]|10000)$"))
         captionSection.addFormRow(priceRow)
         
         // Info section
@@ -105,8 +104,7 @@ final class AddProductViewController: BaseAddItemViewController {
         let descriptionSection = XLFormSectionDescriptor.formSection()
         form.addFormSection(descriptionSection)
         // Description
-        let descriptionRow = XLFormRowDescriptor(tag: Tags.Description.rawValue, rowType: XLFormRowDescriptorTypeTextView, title: NSLocalizedString("Description", comment: "New product: description"))
-        descriptionSection.addFormRow(descriptionRow)
+        descriptionSection.addFormRow(self.descriptionRowDesctiption(Tags.Description.rawValue))
         
         //Terms
         let termsSection = XLFormSectionDescriptor.formSection()

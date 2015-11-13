@@ -41,14 +41,9 @@ final class AddCommunityViewController: BaseAddItemViewController {
         descriptionSection.addFormRow(photoRow)
 
         // Title
-        let titleRow = XLFormRowDescriptor(tag: Tags.Title.rawValue, rowType: XLFormRowDescriptorTypeText)
-        titleRow.cellConfigAtConfigure["textField.placeholder"] = NSLocalizedString("Title", comment: "New community: title")
-        titleRow.required = true
-        descriptionSection.addFormRow(titleRow)
+        descriptionSection.addFormRow(self.titleRowDescription(Tags.Title.rawValue))
         // Description
-        let descriptionRow = XLFormRowDescriptor(tag: Tags.Description.rawValue, rowType:XLFormRowDescriptorTypeTextView)
-        descriptionRow.cellConfigAtConfigure["textView.placeholder"] = NSLocalizedString("Description", comment: "New community: description")
-        descriptionSection.addFormRow(descriptionRow)
+        descriptionSection.addFormRow(self.descriptionRowDesctiption(Tags.Description.rawValue))
         
         let privateRow = XLFormRowDescriptor(tag: Tags.Private.rawValue, rowType: XLFormRowDescriptorTypeBooleanSwitch, title: NSLocalizedString("Private", comment: "New community: private"))
         privateRow.value = NSNumber(bool: false)
