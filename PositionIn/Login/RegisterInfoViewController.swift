@@ -1,5 +1,5 @@
 //
-//  RegisterViewController.swift
+//  RegisterInfoViewController
 //  PositionIn
 //
 //  Created by Alexandr Goncharov on 06/08/15.
@@ -41,6 +41,7 @@ final class RegisterInfoViewController: BaseLoginViewController {
             
             api().register(username: username, password: password, firstName: firstName, lastName: lastName).onSuccess {
                 [weak self] _ in
+                
                 Log.info?.message("Registration done")
                 self?.sideBarController?.executeAction(SidebarViewController.defaultAction)
                 self?.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)

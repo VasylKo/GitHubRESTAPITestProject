@@ -54,6 +54,24 @@ struct APIService {
     
     //MARK: - Profile -
     
+    func changePassword(email: String?, oldPassword: String?, newPassword: String?) -> Future<Void, NSError> {
+        typealias CRUDResultType = (Alamofire.Request, Future<Void, NSError>)
+        let endpoint = UserProfile.changePasswordEndpoint()
+        var params: [String: String]? = nil
+        if let email = email,
+            let oldPassword = oldPassword,
+            let newPassword = newPassword {
+                params = ["email" : email, "oldPassword" : oldPassword, "newPassword" : newPassword]
+        }
+        return session().flatMap {
+            (token: AuthResponse.Token) -> Future<Void, NSError> in
+            let request = self.updateRequest(token, endpoint: endpoint, method: .POST,
+                params: params)
+            let (_, future): CRUDResultType = self.dataProvider.jsonRequest(request, map: self.emptyResponseMapping(), validation: self.statusCodeValidation(statusCode: [200]))
+            return self.handleFailure(future)
+        }
+    }
+    
     func getMyProfile() -> Future<UserProfile, NSError> {
         let endpoint = UserProfile.myProfileEndpoint()
         return getObject(endpoint)

@@ -38,20 +38,17 @@ final class AddPromotionViewController: BaseAddItemViewController {
     }
     
     func initializeForm() {
-        let form = XLFormDescriptor(title: NSLocalizedString("Emergency", comment: "New promotion: form caption"))
+        let form = XLFormDescriptor(title: NSLocalizedString("New Promotion", comment: "New promotion: form caption"))
         
         // General info section
         let infoGeneralSection = XLFormSectionDescriptor.formSection()
         form.addFormSection(infoGeneralSection)
         // Title
-        let titleRow = XLFormRowDescriptor(tag: Tags.Title.rawValue, rowType: XLFormRowDescriptorTypeText)
-        titleRow.cellConfigAtConfigure["textField.placeholder"] = NSLocalizedString("Title", comment: "New promotion: title")
-        titleRow.required = true
-        infoGeneralSection.addFormRow(titleRow)
-//        // Discount
-//        let priceRow = XLFormRowDescriptor(tag: Tags.Discount.rawValue, rowType: XLFormRowDescriptorTypeDecimal, title: NSLocalizedString("Discount (%)", comment: "New promotion: discount"))
-//        priceRow.required = true
-//        infoGeneralSection.addFormRow(priceRow)
+        infoGeneralSection.addFormRow(self.titleRowDescription(Tags.Title.rawValue))
+        // Discount
+        let priceRow = XLFormRowDescriptor(tag: Tags.Discount.rawValue, rowType: XLFormRowDescriptorTypeDecimal, title: NSLocalizedString("Discount (%)", comment: "New promotion: discount"))
+        priceRow.required = true
+        infoGeneralSection.addFormRow(priceRow)
         
         // Info section
         let infoSection = XLFormSectionDescriptor.formSection()
@@ -80,28 +77,25 @@ final class AddPromotionViewController: BaseAddItemViewController {
         let datesSection = XLFormSectionDescriptor.formSectionWithTitle(NSLocalizedString("Duration", comment: "New promotion: dates section header"))
         form.addFormSection(datesSection)
         //Start date
-        let startDate = XLFormRowDescriptor(tag: Tags.StartDate.rawValue, rowType: XLFormRowDescriptorTypeDateTimeInline, title: NSLocalizedString("Start date", comment: "New promotion: Start date"))
-        startDate.value = defaultStartDate
-        startDate.cellConfigAtConfigure["tintColor"] = UIScheme.mainThemeColor
+        let startDate = startDateRowDescription(Tags.StartDate.rawValue, endDateRowTag: Tags.EndDate.rawValue)
         datesSection.addFormRow(startDate)
         //End date
         let endDate = XLFormRowDescriptor(tag: Tags.EndDate.rawValue, rowType: XLFormRowDescriptorTypeDateTimeInline, title: NSLocalizedString("End date", comment: "New promotion: End date"))
         endDate.value = defaultEndDate
-        endDate.cellConfigAtConfigure["tintColor"] = UIScheme.mainThemeColor
+        endDate.cellConfigAtConfigure["minimumDate"] = defaultStartDate
         datesSection.addFormRow(endDate)
         
         //Description section
         let descriptionSection = XLFormSectionDescriptor.formSection()
         form.addFormSection(descriptionSection)
         // Description
-        let descriptionRow = XLFormRowDescriptor(tag: Tags.Description.rawValue, rowType: XLFormRowDescriptorTypeTextView, title: NSLocalizedString("Description", comment: "New promotion: description"))
-        descriptionRow.cellConfigAtConfigure["tintColor"] = UIScheme.mainThemeColor
-        descriptionSection.addFormRow(descriptionRow)
+        descriptionSection.addFormRow(self.descriptionRowDesctiption(Tags.Description.rawValue))
 
         //Terms
         let termsSection = XLFormSectionDescriptor.formSection()
         form.addFormSection(termsSection)
         termsSection.addFormRow(termsRowDescriptor(Tags.Terms.rawValue))
+
         
         self.form = form
     }

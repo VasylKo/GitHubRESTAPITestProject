@@ -72,6 +72,7 @@ final class EditProfileViewController: BaseAddItemViewController {
     lazy private var firstnameRow: XLFormRowDescriptor = {
         let row = XLFormRowDescriptor(tag: Tags.FirstName.rawValue, rowType: XLFormRowDescriptorTypeText, title: NSLocalizedString("First name", comment: "Edit profile: First name"))
         row.required = true
+        row.cellConfig.setObject(UIScheme.mainThemeColor, forKey: "textLabel.textColor")
         row.cellConfig.setObject(UIScheme.mainThemeColor, forKey: "tintColor")
         return row
         }()
@@ -79,7 +80,8 @@ final class EditProfileViewController: BaseAddItemViewController {
     //Last name
     lazy private var lastnameRow: XLFormRowDescriptor = {
         let row = XLFormRowDescriptor(tag: Tags.LastName.rawValue, rowType: XLFormRowDescriptorTypeText, title: NSLocalizedString("Last name", comment: "Edit profile: Last name"))
-                row.cellConfig.setObject(UIScheme.mainThemeColor, forKey: "tintColor")
+        row.cellConfig.setObject(UIScheme.mainThemeColor, forKey: "textLabel.textColor")
+        row.cellConfig.setObject(UIScheme.mainThemeColor, forKey: "tintColor")
         row.required = true
         return row
         }()
@@ -88,6 +90,7 @@ final class EditProfileViewController: BaseAddItemViewController {
     lazy private var phoneRow: XLFormRowDescriptor = {
         let row = XLFormRowDescriptor(tag: Tags.Phone.rawValue, rowType: XLFormRowDescriptorTypePhone,
             title: NSLocalizedString("Phone", comment: "Edit profile: Phone"))
+        row.cellConfig.setObject(UIScheme.mainThemeColor, forKey: "textLabel.textColor")
         row.cellConfig.setObject(UIScheme.mainThemeColor, forKey: "tintColor")
         return row
         }()

@@ -26,6 +26,9 @@ class BaseLoginViewController: UIViewController {
     }
     
     @IBAction func facebookTouched(sender: AnyObject) {
+        
+        trackGoogleAnalyticsEvent("Auth", action: "Click", label: "Login With Facebook")
+        
         FBSDKLoginManager().logInWithReadPermissions(["public_profile"], fromViewController: self,
             handler: { (result:FBSDKLoginManagerLoginResult!, error:NSError!) -> Void in
                 if error != nil {

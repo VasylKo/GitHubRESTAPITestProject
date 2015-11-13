@@ -40,7 +40,10 @@ final class AddPostViewController: BaseAddItemViewController {
 
         // Message
         let messageRow = XLFormRowDescriptor(tag: Tags.Message.rawValue, rowType:XLFormRowDescriptorTypeTextView)
+        messageRow.required = true
         messageRow.cellConfigAtConfigure["textView.placeholder"] = NSLocalizedString("Message", comment: "New post: message")
+        messageRow.addValidator(XLFormRegexValidator(msg: NSLocalizedString("Incorrect message lenght",
+            comment: "Add post"), regex: "^.{0,500}$"))
         descriptionSection.addFormRow(messageRow)
 
         

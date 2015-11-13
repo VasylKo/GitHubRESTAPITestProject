@@ -1,5 +1,5 @@
 PODS:
-  - Alamofire (3.1.1)
+  - Alamofire (3.1.2)
   - Bolts (1.4.0):
     - Bolts/AppLinks (= 1.4.0)
     - Bolts/Tasks (= 1.4.0)
@@ -37,8 +37,8 @@ PODS:
     - Braintree/API
   - Braintree/Venmo (3.9.6):
     - Braintree/API
-  - BrightFutures (3.0.0):
-    - Result (= 0.6.0-beta.4)
+  - BrightFutures (3.1.2):
+    - Result (= 0.6.0-beta.6)
   - FBSDKCoreKit (4.7.1):
     - Bolts (~> 1.1)
     - FBSDKCoreKit/arc (= 4.7.1)
@@ -50,7 +50,23 @@ PODS:
     - FBSDKCoreKit/arc
   - FBSDKLoginKit (4.7.1):
     - FBSDKCoreKit
+  - Google/Analytics (1.2.1):
+    - Google/Core
+    - GoogleAnalytics (~> 3.12)
+  - Google/Core (1.2.1):
+    - GoogleInterchangeUtilities (~> 1.0)
+    - GoogleNetworkingUtilities (~> 1.0)
+    - GoogleSymbolUtilities (~> 1.0)
+    - GoogleUtilities (~> 1.1)
+  - GoogleAnalytics (3.13.0)
+  - GoogleInterchangeUtilities (1.1.0):
+    - GoogleSymbolUtilities (~> 1.0)
   - GoogleMaps (1.10.5)
+  - GoogleNetworkingUtilities (1.0.0):
+    - GoogleSymbolUtilities (~> 1.0)
+  - GoogleSymbolUtilities (1.0.3)
+  - GoogleUtilities (1.1.0):
+    - GoogleSymbolUtilities (~> 1.0.0)
   - HanekeSwift (0.10.0)
   - HMSegmentedControl (1.5.2)
   - ImagePickerSheetController (0.9.1)
@@ -65,7 +81,7 @@ PODS:
     - Alamofire (~> 3.1)
     - BrightFutures (~> 3.0)
     - ObjectMapper (~> 1.0)
-  - Result (0.6.0-beta.4)
+  - Result (0.6.0-beta.6)
   - UIImageEffects (0.0.1)
   - XLForm (3.0.2)
 
@@ -74,6 +90,7 @@ DEPENDENCIES:
   - Braintree (~> 3.9)
   - FBSDKCoreKit (~> 4.7)
   - FBSDKLoginKit (~> 4.7)
+  - Google/Analytics
   - GoogleMaps (~> 1.10)
   - HanekeSwift (~> 0.10)
   - HMSegmentedControl (~> 1.5.2)
@@ -91,14 +108,20 @@ EXTERNAL SOURCES:
     :path: PosInCore
 
 SPEC CHECKSUMS:
-  Alamofire: 9b0a7188b961a03914a99304488bd226b0e46c0e
+  Alamofire: 7c16ca65f3c7e681fd925fd7f2dec7747ff96855
   Bolts: 0e9bce58b9b9f5e8a7a4d47b16d2fabec289072b
   Box: 70713ca3679e4e11ad4c470e9b58265f506fc659
   Braintree: 74f0bd85743c2227147c361cc2c5c9aefe083ae8
-  BrightFutures: 4a3f46747e5633562bdcef55c9e291bfb7288c34
+  BrightFutures: 6b4b299decee4c3775a9e7188d1ecec55262e09c
   FBSDKCoreKit: 9141b70960a37930850370495fe565f4a27ac141
   FBSDKLoginKit: c11ed3c2833472db3bb4a4aecf27af4a6f69b173
+  Google: fd33b5fa40fa3aaee5176de49c873a74e3d11dce
+  GoogleAnalytics: fcf1f1cad57ae1a9a53520018f0f680ceeeb8b49
+  GoogleInterchangeUtilities: d7f7174176fbcf9710f696f1acebad4dbd98ac03
   GoogleMaps: da51c62c338c2d9c47cdad470a0d1e0e4b8544e4
+  GoogleNetworkingUtilities: 292992ab31b7b4ba32809a0e8b40e324cdfb2c0c
+  GoogleSymbolUtilities: 82ad9f93d3615244b3f4ce440f5ab2515e8b4f56
+  GoogleUtilities: 8ed9134debe11719097881711464752900668f10
   HanekeSwift: d6f5bdf9dbdbbc09d59623b2c1d533e46463dd4d
   HMSegmentedControl: 83b9686022d2176fb6457d2bdb61e5d6393fed7d
   ImagePickerSheetController: 3c58c9fee6dcf36485222358a021f6b734f997ba
@@ -109,7 +132,7 @@ SPEC CHECKSUMS:
   KYDrawerController: 33f16abd6ce2b0cc7d6e2c7df2502b5dab23ecb6
   ObjectMapper: 98524bac0dca46c6b3d5ee02cd410fc700ec6ce2
   PosInCore: d343ffa2e13b1fba322212eb498bdc452a305c54
-  Result: f7927152cbaec0c043abb06ba0bc432678818418
+  Result: dc390d0b58f9ec43fcd536f1ebdd130803cc6cbc
   UIImageEffects: 37b99fa461e4965f332ca82e92f2c22a1075ee84
   XLForm: 7817ce29f3f259186e837bb7309ac7e5b7e9b883
 

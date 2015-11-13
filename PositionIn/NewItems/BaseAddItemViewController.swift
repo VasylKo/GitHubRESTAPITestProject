@@ -128,9 +128,32 @@ class BaseAddItemViewController: XLFormViewController {
         return communityRow
     }
     
+    
+    func titleRowDescription(tag: String) -> XLFormRowDescriptor {
+        let titleRow = XLFormRowDescriptor(tag: tag, rowType: XLFormRowDescriptorTypeText)
+        titleRow.cellConfigAtConfigure["textField.placeholder"] = NSLocalizedString("Title", comment: "New item: title")
+        titleRow.required = true
+        titleRow.addValidator(XLFormRegexValidator(msg: NSLocalizedString("Incorrect title lenght",
+            comment: "Add item"), regex: "^.{0,150}$"))
+        return titleRow
+    }
+    
+    func descriptionRowDesctiption(tag: String) -> XLFormRowDescriptor {
+        let descriptionRow = XLFormRowDescriptor(tag: tag, rowType:XLFormRowDescriptorTypeTextView)
+        descriptionRow.cellConfigAtConfigure["textView.placeholder"] = NSLocalizedString("Description",
+            comment: "New item: description")
+        descriptionRow.addValidator(XLFormRegexValidator(msg: NSLocalizedString("Incorrect description lenght",
+            comment: "Add item"), regex: "^.{0,500}$"))
+        return descriptionRow
+    }
+    
     func termsRowDescriptor(tag: String) -> XLFormRowDescriptor {
-        let row = XLFormRowDescriptor(tag: tag, rowType: XLFormRowDescriptorTypeTextView, title: NSLocalizedString("Terms & Information", comment: "New item: Terms & Information"))
+        let row = XLFormRowDescriptor(tag: tag, rowType: XLFormRowDescriptorTypeTextView)
         row.cellConfigAtConfigure["tintColor"] = UIScheme.mainThemeColor
+        row.cellConfigAtConfigure["textView.placeholder"] = NSLocalizedString("Terms & Information",
+            comment: "New item: Terms & Information")
+        row.addValidator(XLFormRegexValidator(msg: NSLocalizedString("Incorrect Terms & Information lenght",
+            comment: "Add event"), regex: "^.{0,500}$"))
         return row
     }
     
@@ -154,6 +177,29 @@ class BaseAddItemViewController: XLFormViewController {
         let photoRow = XLFormRowDescriptor(tag: tag, rowType: XLFormRowDescriptorTypeButton)
         photoRow.cellClass = UploadPhotoCell.self
         return photoRow
+    }
+    
+    func startDateRowDescription(startDateRowTag: String, endDateRowTag: String) ->XLFormRowDescriptor {
+        let startDate = XLFormRowDescriptor(tag: startDateRowTag,
+            rowType: XLFormRowDescriptorTypeDateTimeInline,
+            title: NSLocalizedString("Start date", comment: "New event: Start date"))
+        startDate.value = defaultStartDate
+        startDate.onChangeBlock = { [weak self] oldValue, newValue, descriptor in
+            let row = self?.form.formRowWithTag(endDateRowTag)
+            if let row = row {
+                Queue.main.async { _ in
+                    if let newValueDate = newValue as? NSDate,
+                        let rowDate = row.value as? NSDate {
+                            row.cellConfig.setObject(newValueDate, forKey: "minimumDate")
+                            if rowDate.compare(newValueDate) == NSComparisonResult.OrderedAscending {
+                                row.value = newValue
+                            }
+                            self?.reloadFormRow(row)
+                    }
+                }
+            }
+        }
+        return startDate
     }
     
     func uploadAssets(value: AnyObject?, optional: Bool = true) -> Future<[NSURL], NSError>? {

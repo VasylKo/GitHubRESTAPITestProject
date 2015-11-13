@@ -14,7 +14,7 @@ target 'PositionIn' do
 	pod 'HMSegmentedControl', '~> 1.5.2'
     pod 'JDStatusBarNotification', '~> 1.5'
     pod 'JSQMessagesViewController', '~> 7.2'
-    
+    pod 'Google/Analytics'
     pod 'PosInCore', :path => 'PosInCore'
 
     pod 'Braintree', '~> 3.9'

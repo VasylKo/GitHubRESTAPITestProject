@@ -12,16 +12,23 @@ import CleanroomLogger
 import BrightFutures
 import Box
 
+protocol BrowseMapViewControllerDelegate: class {
+    func browseMapViewControllerCenterMapOnLocation(location: Location)
+}
+
 final class BrowseMapViewController: UIViewController, BrowseActionProducer, BrowseModeDisplay, UpdateFilterProtocol {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         if let coordinate = filter.coordinates {
             self.mapView.moveCamera(GMSCameraUpdate.setTarget(coordinate, zoom: 12))
+            self.shouldReverseGeocodeCoordinate = false
+            self.mapMovementEnd( CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude))
         }
     }
     
     var shouldApplySectionFilter = true
+    var shouldReverseGeocodeCoordinate = false
     
     var browseMode: BrowseModeTabbarViewController.BrowseMode = .ForYou
     
@@ -30,6 +37,7 @@ final class BrowseMapViewController: UIViewController, BrowseActionProducer, Bro
     var filter = SearchFilter.currentFilter
     
     weak var actionConsumer: BrowseActionConsumer?
+    weak var delegate: BrowseMapViewControllerDelegate?
     
     lazy private var mapView: GMSMapView = { [unowned self] in
         let map = GMSMapView(frame: self.view.bounds)
@@ -83,27 +91,47 @@ final class BrowseMapViewController: UIViewController, BrowseActionProducer, Bro
 extension BrowseMapViewController: GMSMapViewDelegate {
     func mapView(mapView: GMSMapView!, didChangeCameraPosition position: GMSCameraPosition!) {
         if let coordinate = position?.target {
-            var f = filter
-            f.coordinates = coordinate
-            let request: Future<CollectionResponse<FeedItem>,NSError>
-            switch browseMode {
-            case .ForYou:
-                request = api().forYou(f, page: APIService.Page())
-            case .New:
-                request = api().getFeed(f, page: APIService.Page())
-            }
-            request.onSuccess {
-                [weak self] response in
-                Log.debug?.value(response.items)
-                if let strongSelf = self
-                   where isSameCoordinates(
+            NSObject.cancelPreviousPerformRequestsWithTarget(self)
+            self.performSelector("mapMovementEnd:",
+                withObject: CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude),
+                afterDelay: 0.5)
+            
+        }
+    }
+    
+    @objc func mapMovementEnd(location: CLLocation) {
+        
+        let coordinate = location.coordinate
+        
+        if (shouldReverseGeocodeCoordinate) {
+            locationController().reverseGeocodeCoordinate(coordinate).onSuccess(callback: {[weak self] location in
+                SearchFilter.shouldPostUpdateNotification = false
+                SearchFilter.setLocation(location)
+                self?.delegate?.browseMapViewControllerCenterMapOnLocation(location)
+                })
+        }
+        
+        shouldReverseGeocodeCoordinate = true
+        
+        var f = filter
+        f.coordinates = coordinate
+        let request: Future<CollectionResponse<FeedItem>,NSError>
+        switch browseMode {
+        case .ForYou:
+            request = api().forYou(f, page: APIService.Page())
+        case .New:
+            request = api().getFeed(f, page: APIService.Page())
+        }
+        request.onSuccess {
+            [weak self] response in
+            Log.debug?.value(response.items)
+            if let strongSelf = self
+                where isSameCoordinates(
                     //TODO: set valid epsilon
-                    strongSelf.mapView.camera.target, coord2: position.target, epsilon: 0.3) {
+                    strongSelf.mapView.camera.target, coord2: coordinate, epsilon: 0.3) {
                         strongSelf.displayFeedItems(response.items)
-                } else {
-                    Log.debug?.message("Skip map response :\(response.items)")
-                }
-                
+            } else {
+                Log.debug?.message("Skip map response :\(response.items)")
             }
         }
     }
@@ -118,6 +146,7 @@ extension BrowseMapViewController: GMSMapViewDelegate {
     }
     
     func didTapMyLocationButtonForMapView(mapView: GMSMapView!) -> Bool {
+        self.shouldReverseGeocodeCoordinate = false
         SearchFilter.setLocation(nil)
         return true
     }

@@ -3,3 +3,5 @@
 //
 
 #import "BadgeView.h"
+#import "NSDate+NVTimeAgo.h"
+#import <Google/Analytics.h>

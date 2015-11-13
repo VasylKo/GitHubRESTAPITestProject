@@ -22,7 +22,14 @@ final class LoginSignupViewController: BaseLoginViewController {
     }
         
     @IBAction func didTapLogin(sender: AnyObject) {
+        trackGoogleAnalyticsEvent("Auth", action: "Click", label: "Login")
         performSegue(LoginSignupViewController.Segue.LoginSegueId)
+    }
+    
+
+    @IBAction func didTapSignUp(sender: AnyObject) {
+        trackGoogleAnalyticsEvent("Auth", action: "Click", label: "Signup")
+        performSegue(LoginSignupViewController.Segue.SignUpSegueId)
     }
     
     override func keyboardTargetView() -> UIView? {

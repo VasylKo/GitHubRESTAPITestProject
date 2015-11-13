@@ -84,9 +84,9 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "E6325FAE1B57F36E00996480"
-               BuildableName = "PosInCoreTests.xctest"
-               BlueprintName = "PosInCoreTests"
+               BlueprintIdentifier = "E6E2FE911B66F61300880F3C"
+               BuildableName = "MessagingTests.xctest"
+               BlueprintName = "MessagingTests"
                ReferencedContainer = "container:PositionIn.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -94,9 +94,9 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "E6E2FE911B66F61300880F3C"
-               BuildableName = "MessagingTests.xctest"
-               BlueprintName = "MessagingTests"
+               BlueprintIdentifier = "E62C35FF1BF4DF9200003A31"
+               BuildableName = "PositionInUITests.xctest"
+               BlueprintName = "PositionInUITests"
                ReferencedContainer = "container:PositionIn.xcodeproj">
             </BuildableReference>
          </TestableReference>
