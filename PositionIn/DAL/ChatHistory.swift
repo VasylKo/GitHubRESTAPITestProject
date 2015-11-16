@@ -17,14 +17,12 @@ class ChatHistory {
         setDefaultRealmWithName(realmName)
     }
     
-    func storeDirectMessage(msg: XMPPTextMessage, room: RoomType) {
-        let item = ChatHistoryItem()
-        item.room = room
-        item.from = msg.from
-        item.to = msg.to
-        item.text = msg.text
-        item.date = msg.date
-        insertItem(item)
+    func storeMessage(msg: XMPPTextMessage, room: RoomType) {
+        let item = ChatHistoryItem(textMessage: msg, room: room)
+        let realm = currentRealm()
+        try! realm.write {
+            realm.add(item)
+        }
     }
     
     func messagesForChat(room: RoomType) -> [XMPPTextMessage] {
@@ -35,17 +33,14 @@ class ChatHistory {
         return itemsForRoom(room)
     }
     
-    
     private func itemsForRoom(room: RoomType) -> [ XMPPTextMessage] {
-        let realm = try! Realm()
-        return realm.objects(ChatHistoryItem).filter("room == %@", room).sorted("date", ascending: true).map { $0.message() }
+        return currentRealm().objects(ChatHistoryItem).filter("room == %@", room).sorted("date", ascending: true).map { $0.message() }
     }
     
-    private func insertItem(item: ChatHistoryItem) {
+    
+    private func currentRealm() -> Realm {
         let realm = try! Realm()
-        try! realm.write {
-            realm.add(item)
-        }
+        return realm
     }
     
     private func setDefaultRealmWithName(realmName: String) {
@@ -60,24 +55,32 @@ class ChatHistory {
         Realm.Configuration.defaultConfiguration = config
     }
     
-    
-    private class ChatHistoryItem: Object {
-        dynamic var room: RoomType =  CRUDObjectInvalidId
-        
-        dynamic var from =  CRUDObjectInvalidId
-        dynamic var to =  CRUDObjectInvalidId
-        dynamic var text : String? = nil
-        dynamic var date =  NSDate()
-        
-        override static func indexedProperties() -> [String] {
-            return ["room", "date"]
-        }
-        
-        func message() -> XMPPTextMessage {
-            return XMPPTextMessage(text, from: from, to: to, date: date)
-        }
-    }
-    
 }
 
+class ChatHistoryItem: Object {
+    dynamic var room: ChatHistory.RoomType =  CRUDObjectInvalidId
+    
+    dynamic var from =  CRUDObjectInvalidId
+    dynamic var to =  CRUDObjectInvalidId
+    dynamic var text : String? = nil
+    dynamic var date =  NSDate()
+    
+    override static func indexedProperties() -> [String] {
+        return ["room", "date"]
+    }
+    
+    func message() -> XMPPTextMessage {
+        return XMPPTextMessage(text, from: from, to: to, date: date)
+    }
+    
+    convenience init(textMessage: XMPPTextMessage, room: ChatHistory.RoomType) {
+        self.init()
+        self.room = room
+        from = textMessage.from
+        to = textMessage.to
+        text = textMessage.text
+        date = textMessage.date
+        
+    }
+}
 

@@ -174,6 +174,10 @@ extension ConversationManager: XMPPClientDelegate {
     
     func storeDirectMessage(message: XMPPTextMessage, outgoing: Bool) {
         let room = outgoing ? message.to : message.from
-        chatHistory?.storeDirectMessage(message, room: room)
+        chatHistory?.storeMessage(message, room: room)
+    }
+    
+    func storeRoomMessage(message: XMPPTextMessage, room: CRUDObjectId) {
+        chatHistory?.storeMessage(message, room: room)        
     }
 }

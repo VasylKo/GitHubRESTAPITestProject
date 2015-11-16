@@ -37,7 +37,6 @@
 
 
 - (void)joinRoom:(nonnull NSString *)roomJID nickName:(nonnull NSString *)nickName lastHistoryStamp:(nonnull NSDate *)date;
-- (nonnull NSArray<XMPPTextMessage *> *)messagesForRoom:(nonnull NSString *)roomId;
 - (void)cleanRooms;
 
 
@@ -46,6 +45,7 @@
 
 @protocol XMPPClientDelegate <NSObject>
 - (void)storeDirectMessage:(nonnull XMPPTextMessage *)message outgoing:(BOOL)outgoing;
+- (void)storeRoomMessage:(nonnull XMPPTextMessage *)message room:(nonnull NSString *)room;
 - (void)chatClient:(nonnull XMPPClient *) client didUpdateDirectChat:(nonnull NSString *)userId;
 - (void)chatClient:(nonnull XMPPClient *) client didUpdateGroupChat:(nonnull NSString *)roomId;
 - (void)chatClientDidAuthorize:(nonnull XMPPClient *) client;
