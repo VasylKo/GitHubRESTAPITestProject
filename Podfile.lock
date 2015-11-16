@@ -81,6 +81,11 @@ PODS:
     - Alamofire (~> 3.1)
     - BrightFutures (~> 3.0)
     - ObjectMapper (~> 1.0)
+  - Realm (0.96.2):
+    - Realm/Headers (= 0.96.2)
+  - Realm/Headers (0.96.2)
+  - RealmSwift (0.96.2):
+    - Realm (= 0.96.2)
   - Result (0.6.0-beta.6)
   - UIImageEffects (0.0.1)
   - XLForm (3.0.2)
@@ -100,6 +105,7 @@ DEPENDENCIES:
   - KeychainAccess (~> 2.3.1)
   - KYDrawerController (~> 1.1)
   - PosInCore (from `PosInCore`)
+  - RealmSwift (~> 0.96.2)
   - UIImageEffects
   - XLForm (~> 3.0.2)
 
@@ -132,6 +138,8 @@ SPEC CHECKSUMS:
   KYDrawerController: 33f16abd6ce2b0cc7d6e2c7df2502b5dab23ecb6
   ObjectMapper: 98524bac0dca46c6b3d5ee02cd410fc700ec6ce2
   PosInCore: d343ffa2e13b1fba322212eb498bdc452a305c54
+  Realm: 3ce8448151c571e90b85002d984d7f93f54fc8a3
+  RealmSwift: 485599fe54e35461c4a0daa7d01d8fbf11424873
   Result: dc390d0b58f9ec43fcd536f1ebdd130803cc6cbc
   UIImageEffects: 37b99fa461e4965f332ca82e92f2c22a1075ee84
   XLForm: 7817ce29f3f259186e837bb7309ac7e5b7e9b883

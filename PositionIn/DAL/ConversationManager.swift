@@ -14,10 +14,14 @@ import Messaging
 
 final class ConversationManager: NSObject {
     
+    internal func refresh() {
+        updateUserId(currentUserId)
+    }
+    
     internal func updateUserId(objectId: CRUDObjectId) {
-        flush()
+        saveConversations()
         currentUserId = objectId
-        refresh()
+        loadConversations()
     }
     
     internal func sendText(text: String, conversation: Conversation) {
@@ -36,14 +40,18 @@ final class ConversationManager: NSObject {
     }
     
     internal func didLeaveConversation(conversation: Conversation) {
+        saveConversations()
         sendConversationDidChangeNotification()
     }
     
     internal func getHistory(conversation: Conversation) -> [XMPPTextMessage] {
+        guard let chatHistory = chatHistory else {
+            return []
+        }
         if conversation.isGroupChat {
-            return chat().messagesForRoom(conversation.roomId) as! [XMPPTextMessage]
+            return chatHistory.messagesForRoom(conversation.roomId)
         } else {
-            return chat().messagesForChat(conversation.roomId)as! [XMPPTextMessage]
+            return chatHistory.messagesForChat(conversation.roomId)
         }
     }
     
@@ -52,18 +60,21 @@ final class ConversationManager: NSObject {
     }
     
     internal func conversations() ->  [Conversation] {
-        return Array(directConversations.union(mucConversations)).sort {
+        return directConversations.union(visibleGroupConversations()).sort {
             return $0.lastActivityDate.compare($1.lastActivityDate) == NSComparisonResult.OrderedDescending
         }
     }
     
-    internal func countUnreadConversations() -> UInt {
-        return conversations().reduce(0) { count, conversation in count + conversation.unreadCount }
+    func visibleGroupConversations() -> [Conversation] {
+        return mucConversations.filter { $0.visible == true }
     }
     
-    internal func refresh() {
-        refreshDirectConversations()
-        refreshMucConversations()
+    func hiddenGroupConversations() -> [Conversation] {
+        return mucConversations.filter { $0.visible == false }
+    }
+    
+    internal func countUnreadConversations() -> UInt {
+        return conversations().reduce(0) { count, conversation in conversation.unreadCount > 0 ? count + 1 : count }
     }
     
     
@@ -75,21 +86,63 @@ final class ConversationManager: NSObject {
         return Array(directConversations).filter { $0.roomId == roomId }.first
     }
     
-    func flush() {
-        currentUserId = CRUDObjectInvalidId
-        directConversations = []
-        mucConversations = []
-    }
-    
-    private func refreshDirectConversations() {
-    }
-    
-    private func refreshMucConversations() {
-        api().getUserCommunities(currentUserId).onSuccess { [weak self] response in
-            self?.populateMucConversations(response.items.map { Conversation(community: $0) })
-            self?.sendConversationDidChangeNotification()
+    private func loadConversations() {
+        directConversations = Set()
+        mucConversations = Set()
+        if let allConversations = chatHistory?.loadConversations() {
+            directConversations = Set(allConversations.filter( { $0.isGroupChat == false }))
+            sendConversationDidChangeNotification()
+            let storedMucConversations = allConversations.filter { $0.isGroupChat == true }
+            api().getUserCommunities(currentUserId).onSuccess { [weak self] response in
+                if let strongSelf = self {
+                    strongSelf.populateMucConversations(storedMucConversations, communities: response.items, user: strongSelf.currentUserId)
+                }
+            }
         }
+
     }
+
+    
+    func saveConversations() {
+        chatHistory?.storeConversations(Array(directConversations.union(mucConversations)))
+    }
+    
+    private func populateMucConversations(stored: [Conversation], communities: [Community], user: CRUDObjectId) {
+        if currentUserId != user {
+            Log.warning?.message("Trying to populate conversations for invalid user")
+            return
+        }
+        if chat().isAuthorized == false {
+            Log.warning?.message("Trying to populate conversations for unathorized client")
+            return
+        }
+
+        let currentList = communities.map { Conversation(community: $0) }
+        let currentIds = currentList.map { $0.roomId }
+        let validStored = stored.filter { currentIds.contains($0.roomId) }
+        let validIds = validStored.map { $0.roomId }
+        let hidden = currentList.filter { validIds.contains($0.roomId) == false }
+        for c in hidden {
+            c.visible = false
+        }
+        
+        mucConversations = Set(validStored + hidden)
+        
+        let chatClient = chat()
+        chatClient.cleanRooms()
+        let host = AppConfiguration().xmppHostname
+        let jid: (String) -> String = { user in
+            return "\(user)@conference.\(host)"
+        }
+
+        for conversation in mucConversations {
+            chatClient.joinRoom(jid(conversation.roomId), nickName: currentUserId, lastHistoryStamp: conversation.lastActivityDate)
+        }
+
+
+        sendConversationDidChangeNotification()
+    }
+    
     
     private func populateMucConversations(conversations: [Conversation]) {
         if chat().isAuthorized == false {
@@ -123,9 +176,16 @@ final class ConversationManager: NSObject {
     
     private var directConversations = Set<Conversation>()
     private var mucConversations = Set<Conversation>()
-    private var currentUserId: CRUDObjectId = CRUDObjectInvalidId
+    private var currentUserId: CRUDObjectId = CRUDObjectInvalidId {
+        didSet {
+            chatHistory = ChatHistory(storageName: currentUserId)
+        }
+    }
+    private var chatHistory: ChatHistory?
+    
     
     static let ConversationsDidChangeNotification = "ConversationsDidChangeNotification"
+    
 }
 
 
@@ -139,14 +199,16 @@ extension ConversationManager: XMPPClientDelegate {
                 if let info = response.items.first {
                     let conversation = Conversation(user: info)
                     conversation.didChange()
-                    self?.directConversations.insert(Conversation(user: info))
+                    self?.directConversations.insert(conversation)
+                    self?.sendConversationDidChangeNotification()
                 }
             }
         }
     }
     
     func chatClient(client: XMPPClient, didUpdateGroupChat roomId: String) {
-        if let conversation = (Array(mucConversations).filter { $0.roomId == roomId }).first {
+        if let conversation = (mucConversations.filter { $0.roomId == roomId }).first {
+            conversation.visible = true
             conversation.didChange()
             sendConversationDidChangeNotification()
         } else {
@@ -161,5 +223,13 @@ extension ConversationManager: XMPPClientDelegate {
     func chatClientDidDisconnect(client: XMPPClient) {
         //TODO: clean
     }
-   
+    
+    func storeDirectMessage(message: XMPPTextMessage, outgoing: Bool) {
+        let room = outgoing ? message.to : message.from
+        chatHistory?.storeMessage(message, room: room)
+    }
+    
+    func storeRoomMessage(message: XMPPTextMessage, room: CRUDObjectId) {
+        chatHistory?.storeMessage(message, room: room)        
+    }
 }

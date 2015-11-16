@@ -13,6 +13,7 @@
 @protocol XMPPMessageListener;
 @class XMPPProcess;
 @class XMPPClientConfiguration;
+@class XMPPTextMessage;
 
 @interface XMPPClient : NSObject
 
@@ -36,18 +37,15 @@
 
 
 - (void)joinRoom:(nonnull NSString *)roomJID nickName:(nonnull NSString *)nickName lastHistoryStamp:(nonnull NSDate *)date;
-- (nonnull NSArray *)messagesForRoom:(nonnull NSString *)roomId;
 - (void)cleanRooms;
-
-- (void)joinChat:(nonnull NSString *)userId;
-- (nonnull NSArray *)messagesForChat:(nonnull NSString *)userId;
 
 
 @end
 
 
 @protocol XMPPClientDelegate <NSObject>
-
+- (void)storeDirectMessage:(nonnull XMPPTextMessage *)message outgoing:(BOOL)outgoing;
+- (void)storeRoomMessage:(nonnull XMPPTextMessage *)message room:(nonnull NSString *)room;
 - (void)chatClient:(nonnull XMPPClient *) client didUpdateDirectChat:(nonnull NSString *)userId;
 - (void)chatClient:(nonnull XMPPClient *) client didUpdateGroupChat:(nonnull NSString *)roomId;
 - (void)chatClientDidAuthorize:(nonnull XMPPClient *) client;
