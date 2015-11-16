@@ -14,12 +14,20 @@ class ChatHistory {
     typealias RoomType = CRUDObjectId
     
     init(storageName realmName: String) {
-        setDefaultRealmWithName(realmName)
+        currentRealm = realmWithName(realmName)
+    }
+    
+    func loadConversations() -> [Conversation] {
+        return []
+    }
+    
+    func storeConversations(conversations: [Conversation]) {
+        
     }
     
     func storeMessage(msg: XMPPTextMessage, room: RoomType) {
         let item = ChatHistoryItem(textMessage: msg, room: room)
-        let realm = currentRealm()
+        let realm = currentRealm
         try! realm.write {
             realm.add(item)
         }
@@ -34,25 +42,23 @@ class ChatHistory {
     }
     
     private func itemsForRoom(room: RoomType) -> [ XMPPTextMessage] {
-        return currentRealm().objects(ChatHistoryItem).filter("room == %@", room).sorted("date", ascending: true).map { $0.message() }
+        return currentRealm.objects(ChatHistoryItem).filter("room == %@", room).sorted("date", ascending: true).map { $0.message() }
     }
     
     
-    private func currentRealm() -> Realm {
-        let realm = try! Realm()
-        return realm
-    }
+    private var currentRealm: Realm!
     
-    private func setDefaultRealmWithName(realmName: String) {
+    
+    private func realmWithName(realmName: String) -> Realm {
         var config = Realm.Configuration()
-        
-        // Use the default directory, but replace the filename with the username
-        config.path = NSURL.fileURLWithPath(config.path!)
-            .URLByDeletingLastPathComponent?
-            .URLByAppendingPathComponent("\(realmName).realm")
-            .path
-        // Set this as the configuration used for the default Realm
-        Realm.Configuration.defaultConfiguration = config
+        if realmName != CRUDObjectInvalidId {
+            // Use the default directory, but replace the filename with the name
+            config.path = NSURL.fileURLWithPath(config.path!)
+                .URLByDeletingLastPathComponent?
+                .URLByAppendingPathComponent("\(realmName).realm")
+                .path
+        }
+        return try! Realm(configuration: config)
     }
     
 }

@@ -14,6 +14,7 @@ final class Conversation {
     let name: String
     let imageURL: NSURL?
     var lastActivityDate: NSDate
+    var visible = true
     var unreadCount: UInt  {
         var result: UInt = 0
         synced(self) {
@@ -53,6 +54,7 @@ final class Conversation {
     
     func didChange() {
         synced(self) {
+            self.visible = true
             self._unreadCount += 1
         }
         lastActivityDate = NSDate()
