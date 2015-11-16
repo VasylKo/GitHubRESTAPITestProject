@@ -751,6 +751,38 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
 
 @end
 
+#pragma mark - XMPPRoomStorage -
+
+@interface XMPPDelegate (XMPPRoomStorage) <XMPPRoomStorage>
+
+@end
+
+@implementation XMPPDelegate (XMPPRoomStorage)
+
+- (BOOL)configureWithParent:(XMPPRoom *)aParent queue:(dispatch_queue_t)queue {
+    return YES;
+}
+
+
+- (void)handlePresence:(XMPPPresence *)presence room:(XMPPRoom *)room {
+    
+}
+
+- (void)handleIncomingMessage:(XMPPMessage *)message room:(XMPPRoom *)room {
+    
+}
+
+- (void)handleOutgoingMessage:(XMPPMessage *)message room:(XMPPRoom *)room {
+    
+}
+
+- (void)handleDidLeaveRoom:(XMPPRoom *)room {
+    
+}
+
+@end
+
+
 @implementation XMPPDelegate
 
 @end

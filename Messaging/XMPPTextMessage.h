@@ -13,6 +13,8 @@
 
 @interface XMPPTextMessage : NSObject
 
+- (nonnull instancetype)init:(nullable NSString *)text from:(nonnull NSString *)from to:(nonnull NSString *)to date:(nonnull NSDate *)date NS_DESIGNATED_INITIALIZER;
+
 @property (nonatomic, copy, readonly, nullable) NSString *text;
 @property (nonatomic, copy, readonly, nonnull) NSString *from;
 @property (nonatomic, copy, readonly, nonnull)  NSString *to;

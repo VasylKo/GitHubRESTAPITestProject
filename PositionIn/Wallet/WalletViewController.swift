@@ -30,6 +30,14 @@ final class WalletViewController: BesideMenuViewController {
     var browseMode: BrowseMode = .Inventory {
         didSet{
             reloadData()
+            switch browseMode {
+            case .Inventory:
+                trackGoogleAnalyticsEvent("Wallet", action: "Click", label: "Inventory")
+            case .Purchased:
+                trackGoogleAnalyticsEvent("Wallet", action: "Click", label: "Purchased")
+            case .Sold:
+                trackGoogleAnalyticsEvent("Wallet", action: "Click", label: "Sold")
+            }
         }
     }
     
