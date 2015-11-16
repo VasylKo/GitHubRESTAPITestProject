@@ -14,6 +14,7 @@ final class Conversation {
     let name: String
     let imageURL: NSURL?
     var lastActivityDate: NSDate
+    var visible = true
     var unreadCount: UInt  {
         var result: UInt = 0
         synced(self) {
@@ -35,6 +36,13 @@ final class Conversation {
         self.init(roomID: user.objectId, isMultiUser: false, caption: name, url: user.avatar)
     }
     
+    convenience init(storage: ChatConversationStorageObject) {
+        let url = storage.imageURL.flatMap { NSURL(string: $0) }
+        self.init(roomID: storage.roomId, isMultiUser: storage.isGroupChat, caption: storage.name, url: url)
+        _unreadCount = UInt(storage.unreadCount)
+        lastActivityDate = storage.lastActivityDate
+    }
+    
     init(roomID: String, isMultiUser: Bool, caption: String, url: NSURL?) {
         roomId = roomID
         isGroupChat = isMultiUser
@@ -53,6 +61,7 @@ final class Conversation {
     
     func didChange() {
         synced(self) {
+            self.visible = true
             self._unreadCount += 1
         }
         lastActivityDate = NSDate()

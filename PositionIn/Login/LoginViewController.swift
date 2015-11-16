@@ -33,9 +33,11 @@ final class LoginViewController: BaseLoginViewController {
             
             api().login(username: username, password: password).onSuccess { [weak self] _ in
                 Log.info?.message("Logged in")
-
+                trackGoogleAnalyticsEvent("Status", action: "Click", label: "Auth Success")
                 self?.dismissLogin()
-            }
+            }.onFailure(callback: { _ in
+                trackGoogleAnalyticsEvent("Status", action: "Click", label: "Auth Fail")
+            })
             
         } else {
             Log.warning?.message("Invalid input")

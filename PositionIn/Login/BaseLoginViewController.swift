@@ -33,11 +33,14 @@ class BaseLoginViewController: UIViewController {
             handler: { (result:FBSDKLoginManagerLoginResult!, error:NSError!) -> Void in
                 if error != nil {
                     FBSDKLoginManager().logOut()
+                    trackGoogleAnalyticsEvent("Auth", action: "Status", label: "Auth Fail")
                 } else if result.isCancelled {
                     FBSDKLoginManager().logOut()
+                    trackGoogleAnalyticsEvent("Auth", action: "Status", label: "Auth Fail")
                 } else {
                     let fbToken = result.token.tokenString
                     api().login(fbToken).onSuccess { [weak self] _ in
+                        trackGoogleAnalyticsEvent("Status", action: "Click", label: "Auth Success")
                         Log.info?.message("Logged in")
                         self?.dismissLogin()
                     }
