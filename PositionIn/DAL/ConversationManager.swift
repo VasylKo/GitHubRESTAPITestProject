@@ -58,7 +58,7 @@ final class ConversationManager: NSObject {
     }
     
     internal func countUnreadConversations() -> UInt {
-        return conversations().reduce(0) { count, conversation in count + conversation.unreadCount }
+        return conversations().reduce(0) { count, conversation in conversation.unreadCount > 0 ? count + 1 : count }
     }
     
     internal func refresh() {
