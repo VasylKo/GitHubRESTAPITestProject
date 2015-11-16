@@ -21,6 +21,7 @@ import ImagePickerSheetController
 import MobileCoreServices
 import Photos
 
+import Box
 
 class BaseAddItemViewController: XLFormViewController {
     
@@ -31,7 +32,7 @@ class BaseAddItemViewController: XLFormViewController {
     var maximumSelectedImages: Int = 1
     
     var defaultLocation: CLLocation {
-        return CLLocation(latitude: 39.1746, longitude: -107.4470)
+        return CLLocation(latitude: 39.0942140786161, longitude: -108.551560007036)
     }
     
     var defaultStartDate: NSDate = {
@@ -56,7 +57,12 @@ class BaseAddItemViewController: XLFormViewController {
 
         locationRow.action.viewControllerClass = LocationSelectorViewController.self
         locationRow.valueTransformer = CLLocationValueTrasformer.self
-        locationRow.value = defaultLocation
+        
+        locationController().reverseGeocodeCoordinate(defaultLocation.coordinate).onSuccess(callback:{[weak self] location in
+            locationRow.value = Box(location)
+            self?.reloadFormRow(locationRow)
+        })
+        
         if withCurrentCoordinate {
             locationController().getCurrentCoordinate().onSuccess { [weak locationRow] coordinate in
                 locationRow?.value = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
