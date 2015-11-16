@@ -254,7 +254,9 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
                 XMPPLogError(@"Auth error: %@", [error localizedDescription]);
             }
             if (client.isAuthorized) {
-                [client.delegate chatClientDidAuthorize:client];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [client.delegate chatClientDidAuthorize:client];
+                });                
             }
         }];
     } else {

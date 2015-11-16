@@ -247,6 +247,12 @@ extension UIViewController {
         }
     }
     
+    func showGroupChatViewController(roomId: CRUDObjectId) {
+        if let conversation = ConversationManager.sharedInstance().groupConversation(roomId) {
+            showChatViewController(conversation)
+        }
+    }
+    
     func showChatViewController(conversation: Conversation) {
         view.userInteractionEnabled = false
         api().isUserAuthorized().onComplete{ [weak self] _ in
