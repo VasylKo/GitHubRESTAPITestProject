@@ -238,6 +238,7 @@ extension ConversationViewController: ChatControllerDelegate {
 
 extension UIViewController {
     func showChatViewController(userId: CRUDObjectId) {
+        view.userInteractionEnabled = false
         api().getUsers([userId]).onSuccess { [weak self] response in
             if let info = response.items.first {
                 self?.showChatViewController(Conversation(user: info))
@@ -246,8 +247,17 @@ extension UIViewController {
         }
     }
     
+    func showGroupChatViewController(roomId: CRUDObjectId) {
+        if let conversation = ConversationManager.sharedInstance().groupConversation(roomId) {
+            showChatViewController(conversation)
+        }
+    }
+    
     func showChatViewController(conversation: Conversation) {
-        api().isUserAuthorized().onSuccess { [weak self] _ in
+        view.userInteractionEnabled = false
+        api().isUserAuthorized().onComplete{ [weak self] _ in
+            self?.view?.userInteractionEnabled = true
+        }.onSuccess { [weak self] _ in
             let chatController = ConversationViewController.conversationController(conversation)
             self?.navigationController?.pushViewController(chatController, animated: true)
         }
