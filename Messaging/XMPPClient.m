@@ -302,16 +302,20 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
 - (void)xmppStream:(XMPPStream *)sender didSendMessage:(XMPPMessage *)message {
     if ([message isChatMessageWithBody]) {
         XMPPTextMessage *textMessage = [[XMPPTextMessage alloc] initWithMessage:message];
-        [self storeDirectMessage:textMessage outgoing:true];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self storeDirectMessage:textMessage outgoing:true];
+        });
     }
 }
 
 - (void)xmppStream:(XMPPStream *)sender didReceiveMessage:(XMPPMessage *)message {
     if ([message isChatMessageWithBody]) {
         XMPPTextMessage *textMessage = [[XMPPTextMessage alloc] initWithMessage:message];
-        [self storeDirectMessage:textMessage outgoing:false];
-        [self.delegate chatClient:self didUpdateDirectChat:textMessage.from];
-        [self broadcastMessage:textMessage room:nil];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self storeDirectMessage:textMessage outgoing:false];
+            [self.delegate chatClient:self didUpdateDirectChat:textMessage.from];
+            [self broadcastMessage:textMessage room:nil];
+        });
     }
 }
 
@@ -377,9 +381,11 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
         XMPPTextMessage *textMessage = [[XMPPTextMessage alloc] initWithMessage:message];
         NSString *room = sender.roomJID.user;
         id<XMPPClientDelegate> delegate = self.delegate;
-        [delegate storeRoomMessage:textMessage room:room];
-        [delegate chatClient:self didUpdateGroupChat:room];
-        [self broadcastMessage:textMessage room:room];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [delegate storeRoomMessage:textMessage room:room];
+            [delegate chatClient:self didUpdateGroupChat:room];
+            [self broadcastMessage:textMessage room:room];
+        });
     }
 }
 

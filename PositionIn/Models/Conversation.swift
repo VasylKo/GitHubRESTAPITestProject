@@ -36,6 +36,13 @@ final class Conversation {
         self.init(roomID: user.objectId, isMultiUser: false, caption: name, url: user.avatar)
     }
     
+    convenience init(storage: ChatConversationStorageObject) {
+        let url = storage.imageURL.flatMap { NSURL(string: $0) }
+        self.init(roomID: storage.roomId, isMultiUser: storage.isGroupChat, caption: storage.name, url: url)
+        _unreadCount = UInt(storage.unreadCount)
+        lastActivityDate = storage.lastActivityDate
+    }
+    
     init(roomID: String, isMultiUser: Bool, caption: String, url: NSURL?) {
         roomId = roomID
         isGroupChat = isMultiUser

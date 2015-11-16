@@ -18,15 +18,19 @@ class ChatHistory {
     }
     
     func loadConversations() -> [Conversation] {
-        return []
+        return currentRealm.objects(ChatConversationStorageObject).map { Conversation(storage: $0) }
     }
     
     func storeConversations(conversations: [Conversation]) {
-        
+        let storedObjects = conversations.filter { $0.visible == true }.map { ChatConversationStorageObject(source: $0) }
+        let realm = currentRealm
+        try! realm.write {
+            realm.add(storedObjects, update: true)
+        }
     }
     
     func storeMessage(msg: XMPPTextMessage, room: RoomType) {
-        let item = ChatHistoryItem(textMessage: msg, room: room)
+        let item = ChatMessageStorageObject(textMessage: msg, room: room)
         let realm = currentRealm
         try! realm.write {
             realm.add(item)
@@ -42,7 +46,7 @@ class ChatHistory {
     }
     
     private func itemsForRoom(room: RoomType) -> [ XMPPTextMessage] {
-        return currentRealm.objects(ChatHistoryItem).filter("room == %@", room).sorted("date", ascending: true).map { $0.message() }
+        return currentRealm.objects(ChatMessageStorageObject).filter("room == %@", room).sorted("date", ascending: true).map { $0.message() }
     }
     
     
@@ -63,7 +67,7 @@ class ChatHistory {
     
 }
 
-class ChatHistoryItem: Object {
+class ChatMessageStorageObject: Object {
     dynamic var room: ChatHistory.RoomType =  CRUDObjectInvalidId
     
     dynamic var from =  CRUDObjectInvalidId
@@ -90,3 +94,31 @@ class ChatHistoryItem: Object {
     }
 }
 
+
+class ChatConversationStorageObject: Object {
+    dynamic var name: String = ""
+    dynamic var imageURL: String?
+    dynamic var lastActivityDate: NSDate = NSDate()
+    dynamic var unreadCount: Int64 = 0
+    dynamic var roomId: String = CRUDObjectInvalidId
+    dynamic var isGroupChat: Bool = false
+
+    override static func primaryKey() -> String? {
+        return "roomId"
+    }
+    
+    override static func indexedProperties() -> [String] {
+        return ["isGroupChat", "lastActivityDate"]
+    }
+    
+    convenience required init(source: Conversation) {
+        self.init()
+        self.roomId = source.roomId
+        self.isGroupChat = source.isGroupChat
+        self.name = source.name
+        self.imageURL = source.imageURL?.absoluteString
+        self.lastActivityDate = source.lastActivityDate
+        self.unreadCount = Int64(source.unreadCount)
+    }    
+    
+}

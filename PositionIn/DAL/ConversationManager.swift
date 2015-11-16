@@ -40,6 +40,7 @@ final class ConversationManager: NSObject {
     }
     
     internal func didLeaveConversation(conversation: Conversation) {
+        saveConversations()
         sendConversationDidChangeNotification()
     }
     
