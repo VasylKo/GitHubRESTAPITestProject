@@ -40,10 +40,13 @@ final class ConversationManager: NSObject {
     }
     
     internal func getHistory(conversation: Conversation) -> [XMPPTextMessage] {
+        guard let chatHistory = chatHistory else {
+            return []
+        }
         if conversation.isGroupChat {
-            return chat().messagesForRoom(conversation.roomId) as! [XMPPTextMessage]
+            return chatHistory.messagesForRoom(conversation.roomId)
         } else {
-            return chat().messagesForChat(conversation.roomId)as! [XMPPTextMessage]
+            return chatHistory.messagesForChat(conversation.roomId)
         }
     }
     
@@ -123,9 +126,16 @@ final class ConversationManager: NSObject {
     
     private var directConversations = Set<Conversation>()
     private var mucConversations = Set<Conversation>()
-    private var currentUserId: CRUDObjectId = CRUDObjectInvalidId
+    private var currentUserId: CRUDObjectId = CRUDObjectInvalidId {
+        didSet {
+            chatHistory = ChatHistory(storageName: currentUserId)
+        }
+    }
+    private var chatHistory: ChatHistory?
+    
     
     static let ConversationsDidChangeNotification = "ConversationsDidChangeNotification"
+    
 }
 
 
@@ -161,5 +171,9 @@ extension ConversationManager: XMPPClientDelegate {
     func chatClientDidDisconnect(client: XMPPClient) {
         //TODO: clean
     }
-   
+    
+    func storeDirectMessage(message: XMPPTextMessage, outgoing: Bool) {
+        let room = outgoing ? message.to : message.from
+        chatHistory?.storeDirectMessage(message, room: room)
+    }
 }

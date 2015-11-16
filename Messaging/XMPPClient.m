@@ -64,7 +64,6 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
 - (nullable XMPPRoom *)roomWithId:(nonnull NSString *)roomId;
 
 @property (nonatomic, copy, nonnull) NSString *currentUserId;
-@property (nonatomic, strong, nonnull) NSMutableDictionary *directMessages;
 @property (nonatomic, strong, nonnull) NSMutableDictionary *rooms;
 
 @end
@@ -121,27 +120,13 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
 }
 
 
-- (void)joinChat:(nonnull NSString *)userId {
-    if (self.directMessages[userId] == nil) {
-        self.directMessages[userId] = [NSMutableArray array];
-    }
-}
-
-- (nonnull NSArray *)messagesForChat:(nonnull NSString *)userId {
-    return self.directMessages[userId] != nil ? self.directMessages[userId] : @[];
-}
-
-
 - (void)storeDirectMessage:(nonnull XMPPTextMessage *)message outgoing:(BOOL)outgoing {
     if (outgoing) {
         message.from = self.currentUserId;
     } else {
         message.to = self.currentUserId;
     }
-    NSString *chatId = outgoing ? message.to : message.from;
-    [self joinChat:chatId];
-    NSMutableArray *messages = self.directMessages[chatId];
-    [messages addObject:message];
+    [self.delegate storeDirectMessage:message outgoing:outgoing];
 }
 
 
@@ -277,7 +262,6 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
     XMPPCredentials *credentials = [self.credentialsProvider getChatCredentials];
     if (credentials != nil) {
         XMPPJID *jid = [XMPPJID jidWithString:credentials.jid];
-        self.directMessages = [NSMutableDictionary new];
         self.currentUserId = [jid user];
         [self cleanRooms];
         XMPPAuthProcess *process = [[XMPPAuthProcess alloc] initWithStream:self.xmppStream queue:[XMPPProcess defaultProcessingQueue]];
