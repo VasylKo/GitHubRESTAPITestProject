@@ -207,7 +207,8 @@ extension ConversationManager: XMPPClientDelegate {
     }
     
     func chatClient(client: XMPPClient, didUpdateGroupChat roomId: String) {
-        if let conversation = (mucConversations.filter { $0.roomId == roomId }).first {            
+        if let conversation = (mucConversations.filter { $0.roomId == roomId }).first {
+            conversation.visible = true
             conversation.didChange()
             sendConversationDidChangeNotification()
         } else {
