@@ -67,7 +67,7 @@ struct APIService {
             (token: AuthResponse.Token) -> Future<Void, NSError> in
             let request = self.updateRequest(token, endpoint: endpoint, method: .POST,
                 params: params)
-            let (_, future): CRUDResultType = self.dataProvider.jsonRequest(request, map: self.emptyResponseMapping(), validation: self.statusCodeValidation(statusCode: [200]))
+            let (_, future): CRUDResultType = self.dataProvider.jsonRequest(request, map: self.commandMapping(), validation: self.statusCodeValidation(statusCode: [200]))
             return self.handleFailure(future)
         }
     }
