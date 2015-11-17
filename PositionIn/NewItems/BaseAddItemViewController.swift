@@ -31,10 +31,6 @@ class BaseAddItemViewController: XLFormViewController {
     
     var maximumSelectedImages: Int = 1
     
-    var defaultLocation: CLLocation {
-        return CLLocation(latitude: 39.0942140786161, longitude: -108.551560007036)
-    }
-    
     var defaultStartDate: NSDate = {
        return NSDate(timeIntervalSinceNow: -60*60*24)
     }()
@@ -54,14 +50,14 @@ class BaseAddItemViewController: XLFormViewController {
     func locationRowDescriptor(tag: String, withCurrentCoordinate: Bool = true) -> XLFormRowDescriptor {
         let locationRow = XLFormRowDescriptor(tag: tag, rowType: XLFormRowDescriptorTypeSelectorPush, title: NSLocalizedString("Location", comment: "New item: location"))
         locationRow.action.formSegueClass = NSClassFromString("UIStoryboardPushSegue")
-
+        
         locationRow.action.viewControllerClass = LocationSelectorViewController.self
         locationRow.valueTransformer = CLLocationValueTrasformer.self
         
-        locationController().reverseGeocodeCoordinate(defaultLocation.coordinate).onSuccess(callback:{[weak self] location in
+        locationController().getCurrentLocation().onSuccess(callback:{[weak self] location in
             locationRow.value = Box(location)
             self?.reloadFormRow(locationRow)
-        })
+            })
         
         if withCurrentCoordinate {
             locationController().getCurrentCoordinate().onSuccess { [weak locationRow] coordinate in

@@ -183,7 +183,7 @@ struct APIService {
     //MARK: - Products -
     
     func getUserProducts(userId: CRUDObjectId, page: Page) -> Future<CollectionResponse<Product>, NSError> {
-       return self.getUserProfile(userId).flatMap { profile -> Future<CollectionResponse<Product>, NSError> in
+        return self.getUserProfile(userId).flatMap { profile -> Future<CollectionResponse<Product>, NSError> in
             let endpoint = Product.shopItemsEndpoint(profile.defaultShopId)
             let params = page.query
             return self.getObjectsCollection(endpoint, params: params)
@@ -198,8 +198,8 @@ struct APIService {
     
     
     func getProduct(objectId: CRUDObjectId, inShop shop: CRUDObjectId) -> Future<Product, NSError> {
-            let endpoint = Product.shopItemsEndpoint(shop, productId: objectId)
-            return self.getObject(endpoint)
+        let endpoint = Product.shopItemsEndpoint(shop, productId: objectId)
+        return self.getObject(endpoint)
     }
     
     //MARK: - Community -

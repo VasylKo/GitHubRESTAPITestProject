@@ -10,6 +10,7 @@ import UIKit
 import CleanroomLogger
 import XLForm
 
+import Box
 import BrightFutures
 
 final class AddProductViewController: BaseAddItemViewController {
@@ -56,7 +57,7 @@ final class AddProductViewController: BaseAddItemViewController {
         priceRow.required = true
         priceRow.cellConfig.setObject(UIScheme.mainThemeColor, forKey: "tintColor")
         priceRow.addValidator(XLFormRegexValidator(msg: NSLocalizedString("Incorrect price",
-            comment: "Add event"), regex: "^([0-9]|[1-9][0-9]|10000)$"))
+            comment: "Add event"), regex: "^(?:10000|[1-9]?[0-9]?[0-9]?[0-9]?[0-9])$"))
         captionSection.addFormRow(priceRow)
         
         // Info section
@@ -146,18 +147,18 @@ final class AddProductViewController: BaseAddItemViewController {
 
         
         if  let imageUpload = uploadAssets(values[Tags.Photo.rawValue]),
-            let getLocation = locationFromValue(values[Tags.Location.rawValue]) {
+            let location: Box<Location> = values[Tags.Location.rawValue] as? Box<Location> {
                 view.userInteractionEnabled = false
-                getLocation.zip(getShop).zip(imageUpload).flatMap {
+                getShop.zip(imageUpload).flatMap {
                     (info, urls: [NSURL]) -> Future<Product, NSError> in
-                    let (location, shop): (Location, CRUDObjectId) = info
+                    let (shop): (CRUDObjectId) = info
                     var product = Product()
                     product.name = values[Tags.Title.rawValue] as? String
                     product.price = values[Tags.Price.rawValue] as? Float
                     product.text = values[Tags.Description.rawValue] as? String
                     product.quantity = (values[Tags.Quantity.rawValue] as? Double).map { Int($0) }
                     product.category = category
-                    product.location = location
+                    product.location = location.value
                     
                     //TODO: set additional values
                     product.deliveryMethod = .Unknown
