@@ -101,18 +101,16 @@ struct UpdateResponse: Mappable{
     }
 }
 
-
 // Session response
 struct AuthResponse: Mappable, CustomDebugStringConvertible {
     typealias Token = String!
     private(set) var accessToken: Token
-    private(set) var refreshToken: Token
     private(set) var expires: Int!
     
     init?(_ map: Map) {
         mapping(map)
-        switch (accessToken,refreshToken,expires) {
-        case (.Some, .Some, .Some):
+        switch (accessToken, expires) {
+        case (.Some, .Some):
             break
         default:
             Log.error?.message("Error while parsing object")
@@ -122,23 +120,21 @@ struct AuthResponse: Mappable, CustomDebugStringConvertible {
         }
     }
     
-    private init(accessToken: Token, refreshToken: Token, expires: Int) {
+    private init(accessToken: Token, expires: Int) {
         self.accessToken = accessToken
-        self.refreshToken = refreshToken
         self.expires = expires
     }
     
     mutating func mapping(map: Map) {
         accessToken <- map["access_token"]
-        refreshToken <- map["refresh_token"]
         expires <- map["expires_in"]
     }
     
     var debugDescription: String {
-        return "Access:\(accessToken), Refresh: \(refreshToken), Expires: \(expires)"
+        return "Access:\(accessToken), Expires: \(expires)"
     }
     
     static func invalidAuth() -> AuthResponse {
-        return  AuthResponse(accessToken: "",refreshToken: "",expires: -1)
+        return  AuthResponse(accessToken: "",expires: -1)
     }
 }

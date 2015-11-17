@@ -93,9 +93,7 @@ struct SessionController {
         let keychain = self.keychain
         let expires: Int = authResponse.expires!
         let accessToken = expires > 0 ? authResponse.accessToken : nil
-        let refreshToken = expires > 0 ? authResponse.refreshToken : nil
         keychain[KeychainKeys.AccessTokenKey] = accessToken
-        keychain[KeychainKeys.RefreshTokenKey] = refreshToken
         let expiresIn = NSDate(timeIntervalSinceNow: NSTimeInterval(expires))
         do  {
             try keychain.set(NSKeyedArchiver.archivedDataWithRootObject(expiresIn), key: KeychainKeys.ExpireDateKey)
