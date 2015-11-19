@@ -61,7 +61,6 @@ struct SessionController {
         return future {
             self.setAuth(AuthResponse.invalidAuth())
             self.updateCurrentStatus(nil)
-            self.keychain[KeychainKeys.UserName] = nil
             return Result(value: ())
         }
     }
@@ -91,12 +90,25 @@ struct SessionController {
         Log.info?.message("Auth changed")
         Log.debug?.value(authResponse)
         let keychain = self.keychain
-        let expires: Int = authResponse.expires!
-        let accessToken = expires > 0 ? authResponse.accessToken : nil
+        let accessTokenExpires: Int = authResponse.accessTokenExpires!
+        let refreshTokenExpires: Int = authResponse.refreshTokenExpires!
+        
+        let accessToken = accessTokenExpires > 0 ? authResponse.accessToken : nil
+        let refreshToken = refreshTokenExpires > 0 ? authResponse.refreshToken : nil
+        
         keychain[KeychainKeys.AccessTokenKey] = accessToken
-        let expiresIn = NSDate(timeIntervalSinceNow: NSTimeInterval(expires))
+        keychain[KeychainKeys.RefreshTokenKey] = refreshToken
+        
+        let accessTokenExpiresIn = NSDate(timeIntervalSinceNow: NSTimeInterval(accessTokenExpires))
         do  {
-            try keychain.set(NSKeyedArchiver.archivedDataWithRootObject(expiresIn), key: KeychainKeys.ExpireDateKey)
+            try keychain.set(NSKeyedArchiver.archivedDataWithRootObject(accessTokenExpiresIn), key: KeychainKeys.ExpireDateKey)
+        } catch let error {
+            Log.error?.value(error)
+        }
+        
+        let refreshTokenExpiresIn = NSDate(timeIntervalSinceNow: NSTimeInterval(refreshTokenExpires))
+        do  {
+            try keychain.set(NSKeyedArchiver.archivedDataWithRootObject(refreshTokenExpiresIn), key: KeychainKeys.ExpireDateKey)
         } catch let error {
             Log.error?.value(error)
         }
@@ -137,14 +149,6 @@ struct SessionController {
         return keychain[KeychainKeys.UserIdKey]
     }
     
-    var userName: String? {
-        return keychain[KeychainKeys.UserName]
-    }
-    
-    func setUserName(userName: String?) {
-        keychain[KeychainKeys.UserName] = userName
-    }
-    
     private var accessToken: String? {
         return keychain[KeychainKeys.AccessTokenKey]
     }
@@ -174,7 +178,6 @@ struct SessionController {
         static let ExpireDateKey = "ed"
         
         static let UserIdKey = "userId"
-        static let UserName = "userName"
         static let IsGuestKey = "isGuest"
         static let UserPasswordKey = "UserPassword"
     }
