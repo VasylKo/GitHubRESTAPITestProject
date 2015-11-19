@@ -149,7 +149,7 @@ struct Storyboards {
         }
 
         static func instantiateSplashViewController() -> UIViewController {
-            return self.storyboard.instantiateViewControllerWithIdentifier("SplashViewController") 
+            return self.storyboard.instantiateViewControllerWithIdentifier("SplashViewController") as! UIViewController
         }
 
         static func instantiateWalletViewController() -> WalletViewController {
@@ -240,6 +240,27 @@ struct Storyboards {
 
         static func instantiateAddEventViewController() -> AddEventViewController {
             return self.storyboard.instantiateViewControllerWithIdentifier("AddEventViewController") as! AddEventViewController
+        }
+    }
+
+    struct Onboarding: Storyboard {
+
+        static let identifier = "Onboarding"
+
+        static var storyboard: UIStoryboard {
+            return UIStoryboard(name: self.identifier, bundle: nil)
+        }
+
+        static func instantiateInitialViewController() -> UINavigationController {
+            return self.storyboard.instantiateInitialViewController() as! UINavigationController
+        }
+
+        static func instantiateViewControllerWithIdentifier(identifier: String) -> UIViewController {
+            return self.storyboard.instantiateViewControllerWithIdentifier(identifier)
+        }
+
+        static func instantiateViewController<T: UIViewController where T: IdentifiableProtocol>(type: T.Type) -> T? {
+            return self.storyboard.instantiateViewController(type)
         }
     }
 }
@@ -1318,6 +1339,41 @@ extension AddEventViewController {
             default:
                 assertionFailure("Unknown destination")
                 return nil
+            }
+        }
+
+        var identifier: String? { return self.description } 
+        var description: String { return self.rawValue }
+    }
+
+}
+
+//MARK: - PhoneNumberViewController
+extension UIStoryboardSegue {
+    func selection() -> PhoneNumberViewController.Segue? {
+        if let identifier = self.identifier {
+            return PhoneNumberViewController.Segue(rawValue: identifier)
+        }
+        return nil
+    }
+}
+
+extension PhoneNumberViewController { 
+
+    enum Segue: String, CustomStringConvertible, SegueProtocol {
+        case PhoneNumberSegueId = "PhoneNumberSegueId"
+
+        var kind: SegueKind? {
+            switch (self) {
+            case PhoneNumberSegueId:
+                return SegueKind(rawValue: "show")
+            }
+        }
+
+        var destination: UIViewController.Type? {
+            switch (self) {
+            case PhoneNumberSegueId:
+                return UIViewController.self
             }
         }
 

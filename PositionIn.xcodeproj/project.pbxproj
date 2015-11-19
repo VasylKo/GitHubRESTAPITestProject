@@ -76,6 +76,8 @@
 		D18A1FDC1BEB95D9003F158D /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18A1FDA1BEB95D9003F158D /* ChangePasswordViewController.swift */; };
 		D18A1FDD1BEB95D9003F158D /* PositionIn.ChangePasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D18A1FDB1BEB95D9003F158D /* PositionIn.ChangePasswordViewController.xib */; };
 		D196225F1BF13075003BCD85 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D196225E1BF13075003BCD85 /* GoogleService-Info.plist */; };
+		D1F86CF11BFCAA96006E0C49 /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D1F86CF01BFCAA96006E0C49 /* Onboarding.storyboard */; };
+		D1F86CF31BFCBAD3006E0C49 /* PhoneNumberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F86CF21BFCBAD3006E0C49 /* PhoneNumberViewController.swift */; };
 		E6018E501B849266001D22FA /* XMPPProcess+Future.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6018E4F1B849266001D22FA /* XMPPProcess+Future.swift */; };
 		E6018E521B8492EA001D22FA /* XLFormOptionsObject+PositionIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6018E511B8492EA001D22FA /* XLFormOptionsObject+PositionIn.swift */; };
 		E603D2581BC7E5B000E684C5 /* XMPPCredentials.h in Headers */ = {isa = PBXBuildFile; fileRef = E603D2561BC7E5B000E684C5 /* XMPPCredentials.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -503,6 +505,8 @@
 		D18A1FDA1BEB95D9003F158D /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
 		D18A1FDB1BEB95D9003F158D /* PositionIn.ChangePasswordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.ChangePasswordViewController.xib; sourceTree = "<group>"; };
 		D196225E1BF13075003BCD85 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		D1F86CF01BFCAA96006E0C49 /* Onboarding.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Onboarding.storyboard; sourceTree = "<group>"; };
+		D1F86CF21BFCBAD3006E0C49 /* PhoneNumberViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhoneNumberViewController.swift; sourceTree = "<group>"; };
 		E6018E4F1B849266001D22FA /* XMPPProcess+Future.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "XMPPProcess+Future.swift"; sourceTree = "<group>"; };
 		E6018E511B8492EA001D22FA /* XLFormOptionsObject+PositionIn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "XLFormOptionsObject+PositionIn.swift"; sourceTree = "<group>"; };
 		E603D2561BC7E5B000E684C5 /* XMPPCredentials.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPCredentials.h; sourceTree = "<group>"; };
@@ -1142,6 +1146,15 @@
 			name = ChangePassword;
 			sourceTree = "<group>";
 		};
+		D1F86CEF1BFCAA72006E0C49 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				D1F86CF01BFCAA96006E0C49 /* Onboarding.storyboard */,
+				D1F86CF21BFCBAD3006E0C49 /* PhoneNumberViewController.swift */,
+			);
+			name = Onboarding;
+			sourceTree = "<group>";
+		};
 		D659CB9D48D8D7A48A529E04 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -1345,6 +1358,7 @@
 		E64DC34C1B4E53C90011D37C /* PositionIn */ = {
 			isa = PBXGroup;
 			children = (
+				D1F86CEF1BFCAA72006E0C49 /* Onboarding */,
 				2429FFA21B8E00770061B4E0 /* Utils */,
 				E6018E4E1B849266001D22FA /* ClassExtensions */,
 				E68B51FF1B87351E006B980C /* CellModels */,
@@ -2996,6 +3010,7 @@
 				50C7B5B21BC6A32900E8E8B4 /* PositionIn.SettingsViewController.xib in Resources */,
 				E6BEF1E81B9C83F200511B46 /* PositionIn.CommunityInfoCell.xib in Resources */,
 				E6BEF1E71B9C83F200511B46 /* PositionIn.CommunityHeaderCell.xib in Resources */,
+				D1F86CF11BFCAA96006E0C49 /* Onboarding.storyboard in Resources */,
 				E68B52261B875F8F006B980C /* PositionIn.PromotionListCell.xib in Resources */,
 				E69420FF1B665F5100F34F06 /* PositionIn.ProductDetailsViewController.xib in Resources */,
 				E6D7F83C1BE24AE500A544F4 /* PositionIn.MainMenuBadgeCell.xib in Resources */,
@@ -3255,6 +3270,7 @@
 				E6C9522C1BA1BB0E0032254F /* PeopleListCell.swift in Sources */,
 				E6F243761B8B31510033B13C /* BrowseTabbar.swift in Sources */,
 				E6A869EE1B60D42C00797D16 /* APIService.swift in Sources */,
+				D1F86CF31BFCBAD3006E0C49 /* PhoneNumberViewController.swift in Sources */,
 				E6F7A4701BA333D70069152A /* WalletViewController.swift in Sources */,
 				E68B52221B875F8F006B980C /* ProductListCell.swift in Sources */,
 				E68B52031B873687006B980C /* FeedItemCellModelFactory.swift in Sources */,
