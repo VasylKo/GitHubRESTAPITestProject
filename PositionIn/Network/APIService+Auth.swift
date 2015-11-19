@@ -174,18 +174,19 @@ extension APIService {
         return handleFailure(updateAuth(future))
     }
     
-    private func refreshToken() -> Future<AuthResponse, NSError> {
-        return sessionController.currentRefreshToken().flatMap { (token: AuthResponse.Token) -> Future<AuthResponse, NSError> in
+    private func refreshToken() -> Future<AccessTokenResponse, NSError> {
+        return sessionController.currentRefreshToken().flatMap { (token: AccessTokenResponse.Token) ->
+            Future<AccessTokenResponse, NSError> in
             let urlRequest = AuthRouter.Refresh(api: self, token: token)
             
-            let mapping: AnyObject? -> AuthResponse? = { json in
-                return Mapper<AuthResponse>().map(json)
+            let mapping: AnyObject? -> AccessTokenResponse? = { json in
+                return Mapper<AccessTokenResponse>().map(json)
             }
             
             let serializer = Alamofire.Request.AuthResponseSerializer(mapping)
-            let (_, future): (Alamofire.Request, Future<AuthResponse, NSError>) = self.dataProvider.request(urlRequest, serializer: serializer, validation: nil)
+            let (_, future): (Alamofire.Request, Future<AccessTokenResponse, NSError>) = self.dataProvider.request(urlRequest, serializer: serializer, validation: nil)
             
-            return self.updateAuth(future)
+            return self.updateAccessToken(future)
         }
     }
     
@@ -205,6 +206,15 @@ extension APIService {
         return future.andThen { result in
             if let response = result.value {
                 self.sessionController.setAuth(response)
+            }
+        }
+    }
+    
+    private func updateAccessToken(future: Future<AccessTokenResponse, NSError>)
+        -> Future<AccessTokenResponse, NSError> {
+        return future.andThen { result in
+            if let response = result.value {
+                self.sessionController.setAccessTokenResponse(response)
             }
         }
     }
