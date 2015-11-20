@@ -105,7 +105,7 @@ public class NetworkDataProvider: NSObject {
     
     - returns: Tuple with request and future
     */
-    private func request<V, Serializer: Alamofire.ResponseSerializerType where Serializer.SerializedObject == V, Serializer.ErrorObject == NSError> (
+    public func request<V, Serializer: Alamofire.ResponseSerializerType where Serializer.SerializedObject == V, Serializer.ErrorObject == NSError> (
         URLRequest: Alamofire.URLRequestConvertible,
         serializer: Serializer,
         validation: Alamofire.Request.Validation?
@@ -169,10 +169,8 @@ private extension Alamofire.Request {
             case .Failure(let error):
                 return .Failure(NetworkDataProvider.ErrorCodes.ParsingError.error(error))
             }
-            
         }
     }
-    
 }
 
 //MARK: - Network error codes -
