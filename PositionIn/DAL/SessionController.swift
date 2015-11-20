@@ -52,7 +52,6 @@ struct SessionController {
                     let errorCode = NetworkDataProvider.ErrorCodes.InvalidSessionError
                     return Result(error: errorCode.error())
             }
-
             return Result(value: token)
         }
     }
