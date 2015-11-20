@@ -91,9 +91,7 @@ extension APIService {
     func logout() -> Future<Void, NoError> {
         return sessionController.logout().onComplete { _ in
             self.sendUserDidChangeNotification(nil)
-            }.onSuccess(callback: {_ in
-                self.sessionController.setUserName(nil)
-            })
+        }
     }
     
     
@@ -101,9 +99,7 @@ extension APIService {
     func login(username username: String, password: String) -> Future<UserProfile, NSError> {
         return loginRequest(username: username, password: password).flatMap { _ in
             return self.updateCurrentProfileStatus(password)
-            }.onSuccess(callback: {_ in
-                self.sessionController.setUserName(username)
-            })
+        }
     }
 
     //Login via fb
@@ -118,9 +114,7 @@ extension APIService {
     func register() -> Future<UserProfile, NSError> {
         return registerRequest(username: nil, password: nil, info: nil).flatMap { _ in
             return self.updateCurrentProfileStatus()
-            }.onSuccess(callback: {_ in
-                self.sessionController.setUserName(nil)
-            })
+        }
     }
     
     //Register new user
@@ -134,9 +128,7 @@ extension APIService {
         }
         return registerRequest(username: username, password: password, info: info).flatMap { _ in
             return self.updateCurrentProfileStatus(password)
-            }.onSuccess(callback: {_ in
-                self.sessionController.setUserName(username)
-            })
+        }
     }
     
     //MARK: - Private members -
@@ -144,27 +136,57 @@ extension APIService {
     
     private func registerRequest(username username: String?, password: String?, info: [String: AnyObject]?) -> Future<AuthResponse, NSError> {
         let urlRequest = AuthRouter.Register(api: self, username: username, password: password, profileInfo: info)
-        let (_, future): (Alamofire.Request, Future<AuthResponse, NSError>) = dataProvider.objectRequest(urlRequest)
+        
+        let mapping: AnyObject? -> AuthResponse? = { json in
+            return Mapper<AuthResponse>().map(json)
+        }
+        
+        let serializer = Alamofire.Request.AuthResponseSerializer(mapping)
+        let (_, future): (Alamofire.Request, Future<AuthResponse, NSError>) = dataProvider.request(urlRequest, serializer: serializer, validation: nil)
+        
         return handleFailure(updateAuth(future))
     }
     
     private func loginRequest(username username: String, password: String) -> Future<AuthResponse, NSError> {
         let urlRequest = AuthRouter.Login(api: self, username: username, password: password)
-        let (_, future): (Alamofire.Request, Future<AuthResponse, NSError>) = dataProvider.objectRequest(urlRequest)
+        
+        let mapping: AnyObject? -> AuthResponse? = { json in
+            return Mapper<AuthResponse>().map(json)
+        }
+        
+        let serializer = Alamofire.Request.AuthResponseSerializer(mapping)
+        let (_, future): (Alamofire.Request, Future<AuthResponse, NSError>) = dataProvider.request(urlRequest, serializer: serializer, validation: nil)
         return handleFailure(updateAuth(future))
     }
     
     private func facebookLoginRequest(fbToken: String) -> Future<AuthResponse, NSError> {
         let urlRequest = AuthRouter.Facebook(api: self, fbToken: fbToken)
-        let (_, future): (Alamofire.Request, Future<AuthResponse, NSError>) = dataProvider.objectRequest(urlRequest)
+        
+        
+        let mapping: AnyObject? -> AuthResponse? = { json in
+            return Mapper<AuthResponse>().map(json)
+        }
+        
+        let serializer = Alamofire.Request.AuthResponseSerializer(mapping)
+        let (_, future): (Alamofire.Request, Future<AuthResponse, NSError>) = dataProvider.request(urlRequest, serializer: serializer, validation: nil)
+        
+    
         return handleFailure(updateAuth(future))
     }
     
-    private func refreshToken() -> Future<AuthResponse, NSError> {
-        return sessionController.currentRefreshToken().flatMap { (token: AuthResponse.Token) -> Future<AuthResponse, NSError> in
+    private func refreshToken() -> Future<AccessTokenResponse, NSError> {
+        return sessionController.currentRefreshToken().flatMap { (token: AccessTokenResponse.Token) ->
+            Future<AccessTokenResponse, NSError> in
             let urlRequest = AuthRouter.Refresh(api: self, token: token)
-            let (_, future): (Alamofire.Request, Future<AuthResponse, NSError>) = self.dataProvider.objectRequest(urlRequest)
-            return self.updateAuth(future)
+            
+            let mapping: AnyObject? -> AccessTokenResponse? = { json in
+                return Mapper<AccessTokenResponse>().map(json)
+            }
+            
+            let serializer = Alamofire.Request.AuthResponseSerializer(mapping)
+            let (_, future): (Alamofire.Request, Future<AccessTokenResponse, NSError>) = self.dataProvider.request(urlRequest, serializer: serializer, validation: nil)
+            
+            return self.updateAccessToken(future)
         }
     }
     
@@ -184,6 +206,15 @@ extension APIService {
         return future.andThen { result in
             if let response = result.value {
                 self.sessionController.setAuth(response)
+            }
+        }
+    }
+    
+    private func updateAccessToken(future: Future<AccessTokenResponse, NSError>)
+        -> Future<AccessTokenResponse, NSError> {
+        return future.andThen { result in
+            if let response = result.value {
+                self.sessionController.setAccessTokenResponse(response)
             }
         }
     }
@@ -215,8 +246,13 @@ extension APIService {
                 url = api.https("/v1.0/users/token")
                 method = .GET
                 encoding = .URL
-                headers = [:]
-                params = ["token" : token]
+                let cookie: NSHTTPCookie? = NSHTTPCookie(properties:[NSHTTPCookieName: "refresh_token",
+                    NSHTTPCookieValue: token, NSHTTPCookiePath: "/", NSHTTPCookieOriginURL: url])
+                
+                if let cookie = cookie {
+                    NSHTTPCookieStorage.sharedHTTPCookieStorage().setCookie(cookie)
+                }
+                
             case .Login(let api, let username, let password):
                 url = api.https("/v1.0/users/login")
                 params = [
@@ -268,7 +304,67 @@ extension APIService {
             return info
         }
     }
-    
 }
 
 
+private extension Alamofire.Request {
+    
+    //MARK: - Custom serializer -
+    private static func AuthResponseSerializer<T>(mapping: AnyObject? -> T?) -> ResponseSerializer<T, NSError> {
+        return ResponseSerializer { request, response, data, error in
+            guard error == nil else { return .Failure(error!) }
+            if let statusCode = response?.statusCode where statusCode == 401 {
+                return .Failure(NetworkDataProvider.ErrorCodes.InvalidSessionError.error())
+            }
+            
+            // Cookies parsing
+            var refreshTokenCookie: NSHTTPCookie? = nil
+            if let response = response,
+                let allFields = response.allHeaderFields as? [String : String] {
+                    var responseURL: NSURL = NSURL(string: "")!
+                    if let url: NSURL = response.URL {
+                        responseURL = url
+                    }
+                    let cookies = NSHTTPCookie.cookiesWithResponseHeaderFields(allFields, forURL:responseURL)
+                    func getRefreshTokenCookie(cookies: [NSHTTPCookie]) -> [NSHTTPCookie] {
+                        return cookies.filter{$0.name == "refresh_token"}
+                    }
+                    refreshTokenCookie = getRefreshTokenCookie(cookies).first
+            }
+            
+            // Response body parsing
+            var json: NSDictionary?
+            guard let validData = data where validData.length > 0 else {
+                let failureReason = "JSON could not be serialized. Input data was nil or zero length."
+                let error = Error.errorWithCode(.JSONSerializationFailed, failureReason: failureReason)
+                return .Failure(error)
+            }
+            do {
+                let JSON = try NSJSONSerialization.JSONObjectWithData(validData, options:  .AllowFragments) as? NSDictionary
+                json = JSON
+            } catch {
+                return .Failure(error as NSError)
+            }
+            
+            //Response body and refresh token association
+            var result: NSDictionary? = json
+            if let json = json, let rtc = refreshTokenCookie {
+                let mutableJSON = NSMutableDictionary(dictionary: json)
+                mutableJSON["refresh_token"] = rtc.value
+                mutableJSON["refresh_token_expires_in"] = rtc.expiresDate?.timeIntervalSinceDate(NSDate())
+                
+                result = mutableJSON
+            }
+
+            //Mapping reponse
+            guard let object = mapping(result) else {
+                if  let jsonDict = json as? [String: AnyObject],
+                    let msg = jsonDict["error"] as? String {
+                        return .Failure(NetworkDataProvider.ErrorCodes.TransferError.error(localizedDescription: msg))
+                }
+                return .Failure(NetworkDataProvider.ErrorCodes.InvalidResponseError.error())
+            }
+            return .Success(object)
+        }
+    }
+}

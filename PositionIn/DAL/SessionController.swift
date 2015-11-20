@@ -30,8 +30,8 @@ struct SessionController {
         }
     }
     
-    func currentRefreshToken() -> Future<AuthResponse.Token, NSError> {
-        return future { () -> Result<AuthResponse.Token, NSError> in
+    func currentRefreshToken() -> Future<AccessTokenResponse.Token, NSError> {
+        return future { () -> Result<AccessTokenResponse.Token, NSError> in
             guard let refreshToken = self.refreshToken else {
                 Log.warning?.trace()
                 let errorCode = NetworkDataProvider.ErrorCodes.InvalidSessionError
@@ -45,7 +45,7 @@ struct SessionController {
         return future { () -> Result<AuthResponse.Token, NSError> in
             //TODO: check expiration date
             guard let token = self.accessToken,
-                let expirationDate = self.expiresIn
+                let expirationDate = self.accessTokenExpiresIn
                 where  NSDate().compare(expirationDate) == NSComparisonResult.OrderedAscending
                 else {
                     Log.warning?.trace()
@@ -61,7 +61,6 @@ struct SessionController {
         return future {
             self.setAuth(AuthResponse.invalidAuth())
             self.updateCurrentStatus(nil)
-            self.keychain[KeychainKeys.UserName] = nil
             return Result(value: ())
         }
     }
@@ -91,12 +90,43 @@ struct SessionController {
         Log.info?.message("Auth changed")
         Log.debug?.value(authResponse)
         let keychain = self.keychain
-        let expires: Int = authResponse.expires!
-        let accessToken = expires > 0 ? authResponse.accessToken : nil
+        let accessTokenExpires: Int = authResponse.accessTokenExpires!
+        let refreshTokenExpires: Int = authResponse.refreshTokenExpires!
+        
+        let accessToken = accessTokenExpires > 0 ? authResponse.accessToken : nil
+        let refreshToken = refreshTokenExpires > 0 ? authResponse.refreshToken : nil
+        
         keychain[KeychainKeys.AccessTokenKey] = accessToken
-        let expiresIn = NSDate(timeIntervalSinceNow: NSTimeInterval(expires))
+        keychain[KeychainKeys.RefreshTokenKey] = refreshToken
+        
+        let accessTokenExpiresIn = NSDate(timeIntervalSinceNow: NSTimeInterval(accessTokenExpires))
         do  {
-            try keychain.set(NSKeyedArchiver.archivedDataWithRootObject(expiresIn), key: KeychainKeys.ExpireDateKey)
+            try keychain.set(NSKeyedArchiver.archivedDataWithRootObject(accessTokenExpiresIn), key: KeychainKeys.AccessTokenKey)
+        } catch let error {
+            Log.error?.value(error)
+        }
+        
+        let refreshTokenExpiresIn = NSDate(timeIntervalSinceNow: NSTimeInterval(refreshTokenExpires))
+        do  {
+            try keychain.set(NSKeyedArchiver.archivedDataWithRootObject(refreshTokenExpiresIn), key: KeychainKeys.ExpireDateKeyRT)
+        } catch let error {
+            Log.error?.value(error)
+        }
+    }
+    
+    func setAccessTokenResponse(accessTokenResponse: AccessTokenResponse) {
+        Log.info?.message("AccessTokenResponse changed")
+        Log.debug?.value(accessTokenResponse)
+        let keychain = self.keychain
+        let accessTokenExpires: Int = accessTokenResponse.accessTokenExpires!
+        
+        let accessToken = accessTokenExpires > 0 ? accessTokenResponse.accessToken : nil
+        
+        keychain[KeychainKeys.AccessTokenKey] = accessToken
+        
+        let accessTokenExpiresIn = NSDate(timeIntervalSinceNow: NSTimeInterval(accessTokenExpires))
+        do  {
+            try keychain.set(NSKeyedArchiver.archivedDataWithRootObject(accessTokenExpiresIn), key: KeychainKeys.ExpireDateKeyAT)
         } catch let error {
             Log.error?.value(error)
         }
@@ -137,14 +167,6 @@ struct SessionController {
         return keychain[KeychainKeys.UserIdKey]
     }
     
-    var userName: String? {
-        return keychain[KeychainKeys.UserName]
-    }
-    
-    func setUserName(userName: String?) {
-        keychain[KeychainKeys.UserName] = userName
-    }
-    
     private var accessToken: String? {
         return keychain[KeychainKeys.AccessTokenKey]
     }
@@ -153,9 +175,20 @@ struct SessionController {
         return keychain[KeychainKeys.RefreshTokenKey]
     }
     
-    private var expiresIn: NSDate? {
+    private var accessTokenExpiresIn: NSDate? {
         do {
-            if let data = try keychain.getData(KeychainKeys.ExpireDateKey) {
+            if let data = try keychain.getData(KeychainKeys.ExpireDateKeyAT) {
+                return NSKeyedUnarchiver.unarchiveObjectWithData(data) as? NSDate
+            }
+        } catch let error {
+            Log.error?.value(error)
+        }
+        return nil
+    }
+
+    private var refreshTokenExpiresIn: NSDate? {
+        do {
+            if let data = try keychain.getData(KeychainKeys.ExpireDateKeyRT) {
                 return NSKeyedUnarchiver.unarchiveObjectWithData(data) as? NSDate
             }
         } catch let error {
@@ -171,10 +204,10 @@ struct SessionController {
     private struct KeychainKeys {
         static let AccessTokenKey = "at"
         static let RefreshTokenKey = "rt"
-        static let ExpireDateKey = "ed"
+        static let ExpireDateKeyAT = "edat"
+        static let ExpireDateKeyRT = "edrt"
         
         static let UserIdKey = "userId"
-        static let UserName = "userName"
         static let IsGuestKey = "isGuest"
         static let UserPasswordKey = "UserPassword"
     }
