@@ -3,18 +3,17 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Navigation Controller-->
+        <!--Phone Number Navigation Controller-->
         <scene sceneID="aDR-uw-Ycf">
             <objects>
-                <navigationController id="EQ9-4A-h3E" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="RW0-jc-ju8">
+                <navigationController id="EQ9-4A-h3E" customClass="PhoneNumberNavigationController" customModule="PositionIn" customModuleProvider="target" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="RW0-jc-ju8">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <color key="barTintColor" red="0.88235294119999996" green="0.0" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="barTintColor" red="0.92941176469999998" green="0.1019607843" blue="0.18039215689999999" alpha="1" colorSpace="calibratedRGB"/>
                         <textAttributes key="titleTextAttributes">
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </textAttributes>
@@ -31,46 +30,15 @@
         <scene sceneID="szo-50-c55">
             <objects>
                 <viewController title="You Phone Number" id="2fi-rV-Mtc" customClass="PhoneNumberViewController" customModule="PositionIn" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="yFe-SM-0eK"/>
-                        <viewControllerLayoutGuide type="bottom" id="UmS-wd-xX1"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="gU2-6s-pca">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please confirm you country code and enter your phone number" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fWB-9X-X7s">
-                                <rect key="frame" x="30" y="104" width="540" height="20"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kuI-UM-jeq">
-                                <rect key="frame" x="30" y="144" width="540" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
-                            </textField>
-                        </subviews>
-                        <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
-                        <constraints>
-                            <constraint firstItem="fWB-9X-X7s" firstAttribute="leading" secondItem="gU2-6s-pca" secondAttribute="leadingMargin" constant="10" id="9ff-Uj-r6J"/>
-                            <constraint firstItem="kuI-UM-jeq" firstAttribute="leading" secondItem="gU2-6s-pca" secondAttribute="leadingMargin" constant="10" id="AhM-aI-OGV"/>
-                            <constraint firstItem="fWB-9X-X7s" firstAttribute="top" secondItem="yFe-SM-0eK" secondAttribute="bottom" constant="40" id="U7e-7L-8Bv"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="kuI-UM-jeq" secondAttribute="trailing" constant="10" id="dif-mY-DBV"/>
-                            <constraint firstItem="kuI-UM-jeq" firstAttribute="top" secondItem="fWB-9X-X7s" secondAttribute="bottom" constant="20" id="ksw-Id-6KL"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="fWB-9X-X7s" secondAttribute="trailing" constant="10" id="lrq-1M-62e"/>
-                        </constraints>
-                    </view>
                     <navigationItem key="navigationItem" title="You Phone Number" id="mld-VT-MUt">
                         <barButtonItem key="rightBarButtonItem" title="Done" id="MFI-dN-fQX">
                             <connections>
-                                <action selector="doneButtonPressed:" destination="2fi-rV-Mtc" id="ka4-yG-pPo"/>
+                                <action selector="doneButtonPressed:" destination="2fi-rV-Mtc" id="U6w-QN-id2"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="doneButton" destination="MFI-dN-fQX" id="wVy-os-7w3"/>
-                        <outlet property="phoneNumberTextField" destination="kuI-UM-jeq" id="BzW-0b-DQA"/>
                         <segue destination="IZ8-El-dW0" kind="show" identifier="PhoneNumberSegueId" id="VED-Id-0PD"/>
                     </connections>
                 </viewController>
@@ -81,53 +49,17 @@
         <!--Phone Verification-->
         <scene sceneID="K1O-qk-MMp">
             <objects>
-                <viewController id="IZ8-El-dW0" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="JUX-uK-w1c"/>
-                        <viewControllerLayoutGuide type="bottom" id="OIG-k2-tq6"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="RAf-mH-var">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="We sent you an SMS with a verification code" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nrk-IC-X1G">
-                                <rect key="frame" x="40" y="84" width="520" height="22"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="18"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To complete you phone number verification, please enter 6-digit activation code." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NEz-bp-6Wy">
-                                <rect key="frame" x="40" y="145" width="520" height="41"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oWE-yc-f26">
-                                <rect key="frame" x="40" y="227" width="520" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                        </subviews>
-                        <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
-                        <constraints>
-                            <constraint firstItem="oWE-yc-f26" firstAttribute="top" secondItem="NEz-bp-6Wy" secondAttribute="bottom" constant="40" id="20S-0Q-6mO"/>
-                            <constraint firstItem="NEz-bp-6Wy" firstAttribute="leading" secondItem="RAf-mH-var" secondAttribute="leadingMargin" constant="20" id="68X-8Z-Yhz"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="NEz-bp-6Wy" secondAttribute="trailing" constant="20" id="OUG-OR-P9W"/>
-                            <constraint firstItem="nrk-IC-X1G" firstAttribute="leading" secondItem="RAf-mH-var" secondAttribute="leadingMargin" constant="20" id="Rm9-5y-Ccw"/>
-                            <constraint firstItem="NEz-bp-6Wy" firstAttribute="top" secondItem="nrk-IC-X1G" secondAttribute="bottom" constant="40" id="W5S-gL-xfN"/>
-                            <constraint firstItem="nrk-IC-X1G" firstAttribute="top" secondItem="JUX-uK-w1c" secondAttribute="bottom" constant="20" id="Ype-M7-gDf"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="nrk-IC-X1G" secondAttribute="trailing" constant="20" id="ehs-VJ-MgE"/>
-                            <constraint firstItem="oWE-yc-f26" firstAttribute="leading" secondItem="RAf-mH-var" secondAttribute="leadingMargin" constant="20" id="kWd-FJ-KHG"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="oWE-yc-f26" secondAttribute="trailing" constant="20" id="z8k-1y-Qh0"/>
-                        </constraints>
-                    </view>
+                <viewController storyboardIdentifier="PhoneVerificationController" id="IZ8-El-dW0" customClass="PhoneVerificationViewController" customModule="PositionIn" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" title="Phone Verification" id="Iko-Vc-aUZ">
                         <barButtonItem key="rightBarButtonItem" title="Done" id="s5f-jO-1B8">
                             <connections>
-                                <segue destination="lJA-TZ-gvR" kind="show" id="cUe-c3-Ufj"/>
+                                <action selector="doneButtonPressed:" destination="IZ8-El-dW0" id="dVe-GY-cci"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="lJA-TZ-gvR" kind="show" identifier="ProfileSegueId" id="Ceq-Zr-sQd"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="D8F-6R-Va2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -136,16 +68,7 @@
         <!--Profile-->
         <scene sceneID="pEJ-I6-vVp">
             <objects>
-                <viewController id="lJA-TZ-gvR" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="mfg-DN-mPM"/>
-                        <viewControllerLayoutGuide type="bottom" id="3jg-Ly-d1U"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="WqN-Ol-9xg">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
-                    </view>
+                <viewController id="lJA-TZ-gvR" customClass="EditProfileViewController" customModule="PositionIn" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" title="Profile" id="A6t-W6-elN">
                         <barButtonItem key="rightBarButtonItem" title="Done" id="0Ke-OY-7Be"/>
                     </navigationItem>
@@ -155,4 +78,5 @@
             <point key="canvasLocation" x="1262" y="-246"/>
         </scene>
     </scenes>
+    <color key="tintColor" red="0.92941176470588238" green="0.10196078431372549" blue="0.1803921568627451" alpha="1" colorSpace="calibratedRGB"/>
 </document>

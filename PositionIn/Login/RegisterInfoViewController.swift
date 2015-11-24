@@ -41,7 +41,7 @@ final class RegisterInfoViewController: BaseLoginViewController {
             let firstName = firstnameTextField.text
             let lastName = lastnameTextField.text
             
-            api().register(username: username, password: password, firstName: firstName, lastName: lastName).onSuccess {
+            api().register(username: username, password: password, phoneNumber: nil, phoneVerificationCode: nil, firstName: firstName, lastName: lastName).onSuccess {
                 [weak self] _ in
                 trackGoogleAnalyticsEvent("Status", action: "Click", label: "Auth Success")
                 Log.info?.message("Registration done")

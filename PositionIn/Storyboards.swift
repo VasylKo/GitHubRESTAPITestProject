@@ -4,6 +4,7 @@
 //
 
 import UIKit
+import PositionIn
 
 //MARK: - Storyboards
 
@@ -251,8 +252,8 @@ struct Storyboards {
             return UIStoryboard(name: self.identifier, bundle: nil)
         }
 
-        static func instantiateInitialViewController() -> UINavigationController {
-            return self.storyboard.instantiateInitialViewController() as! UINavigationController
+        static func instantiateInitialViewController() -> PhoneNumberNavigationController {
+            return self.storyboard.instantiateInitialViewController() as! PhoneNumberNavigationController
         }
 
         static func instantiateViewControllerWithIdentifier(identifier: String) -> UIViewController {
@@ -261,6 +262,10 @@ struct Storyboards {
 
         static func instantiateViewController<T: UIViewController where T: IdentifiableProtocol>(type: T.Type) -> T? {
             return self.storyboard.instantiateViewController(type)
+        }
+
+        static func instantiatePhoneVerificationController() -> PhoneVerificationViewController {
+            return self.storyboard.instantiateViewControllerWithIdentifier("PhoneVerificationController") as! PhoneVerificationViewController
         }
     }
 }
@@ -1348,6 +1353,8 @@ extension AddEventViewController {
 
 }
 
+//MARK: - PhoneNumberNavigationController
+
 //MARK: - PhoneNumberViewController
 extension UIStoryboardSegue {
     func selection() -> PhoneNumberViewController.Segue? {
@@ -1373,7 +1380,7 @@ extension PhoneNumberViewController {
         var destination: UIViewController.Type? {
             switch (self) {
             case PhoneNumberSegueId:
-                return UIViewController.self
+                return PhoneVerificationViewController.self
             }
         }
 
@@ -1382,3 +1389,45 @@ extension PhoneNumberViewController {
     }
 
 }
+
+//MARK: - PhoneVerificationViewController
+extension UIStoryboardSegue {
+    func selection() -> PhoneVerificationViewController.Segue? {
+        if let identifier = self.identifier {
+            return PhoneVerificationViewController.Segue(rawValue: identifier)
+        }
+        return nil
+    }
+}
+
+extension PhoneVerificationViewController: IdentifiableProtocol { 
+    var identifier: String? { return "PhoneVerificationController" }
+    static var identifier: String? { return "PhoneVerificationController" }
+}
+
+extension PhoneVerificationViewController { 
+
+    enum Segue: String, CustomStringConvertible, SegueProtocol {
+        case ProfileSegueId = "ProfileSegueId"
+
+        var kind: SegueKind? {
+            switch (self) {
+            case ProfileSegueId:
+                return SegueKind(rawValue: "show")
+            }
+        }
+
+        var destination: UIViewController.Type? {
+            switch (self) {
+            case ProfileSegueId:
+                return EditProfileViewController.self
+            }
+        }
+
+        var identifier: String? { return self.description } 
+        var description: String { return self.rawValue }
+    }
+
+}
+
+//MARK: - EditProfileViewController

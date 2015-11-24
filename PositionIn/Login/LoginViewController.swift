@@ -31,7 +31,7 @@ final class LoginViewController: BaseLoginViewController {
         if let username = usernameTextField.text,
            let password = passwordTextField.text {
             
-            api().login(username: username, password: password).onSuccess { [weak self] _ in
+            api().login(username: username, password: password, phoneNumber: nil, phoneVerificationCode: nil).onSuccess { [weak self] _ in
                 Log.info?.message("Logged in")
                 trackGoogleAnalyticsEvent("Status", action: "Click", label: "Auth Success")
                 self?.dismissLogin()

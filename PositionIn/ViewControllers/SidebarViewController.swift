@@ -41,7 +41,7 @@ class SidebarViewController: KYDrawerController {
         func nextController() -> UIViewController? {
             switch self {
             case .Login:
-                return Storyboards.Login.instantiateInitialViewController()
+                return Storyboards.Onboarding.instantiateInitialViewController()
             default:
                 return nil
             }
