@@ -10,7 +10,7 @@ import UIKit
 import XLForm
 
 class PhoneNumberViewController: XLFormViewController {
-
+    
     private enum Tags : String {
         case CountryCode = "CountryCode"
         case Phone = "Phone"
@@ -51,7 +51,7 @@ class PhoneNumberViewController: XLFormViewController {
     
     func initializeForm() {
         let form = XLFormDescriptor(title: NSLocalizedString("You Phone Number", comment: "New post: form caption"))
-
+        
         //Country code section
         let countryCodeSection = XLFormSectionDescriptor.formSectionWithTitle("Please confirm you country code\nand enter your phone number")
         form.addFormSection(countryCodeSection)
@@ -75,7 +75,7 @@ class PhoneNumberViewController: XLFormViewController {
         
         coutryRow.selectorOptions = selectorOptions
         if let firstObject = selectorOptions.first {
-             coutryRow.title = firstObject.displayText()
+            coutryRow.title = firstObject.displayText()
         }
         coutryRow.onChangeBlock = {[unowned coutryRow] oldValue, newValue, descriptor in
             if let newValue = newValue as? XLFormOptionsObject {
@@ -101,7 +101,15 @@ class PhoneNumberViewController: XLFormViewController {
         self.form = form
     }
     
+    func dismissLogin() {
+        sideBarController?.executeAction(SidebarViewController.defaultAction)
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    
     @IBAction func doneButtonPressed(sender: AnyObject) {
+        
+        self.dismissLogin()
+        
         let validationErrors : Array<NSError> = self.formValidationErrors() as! Array<NSError>
         if (validationErrors.count > 0){
             self.showFormValidationError(validationErrors.first)
@@ -113,7 +121,7 @@ class PhoneNumberViewController: XLFormViewController {
         let countryCode: String?
         if let countryNumber = self.countryNumber,
             let country = Countries(rawValue: countryNumber) {
-            countryCode = self.countryPhoneCode(country)
+                countryCode = self.countryPhoneCode(country)
         } else {
             countryCode = nil
         }
@@ -122,7 +130,7 @@ class PhoneNumberViewController: XLFormViewController {
             let phoneRowString = phoneRow?.value {
                 
                 let phoneNumber = "\(countryCode)\(phoneRowString)"
-
+                
                 let alertController = UIAlertController(title: NSLocalizedString("Number Confirmation", comment: "Onboarding"),
                     message: "Is your phone number below correct?\n\(phoneNumber)", preferredStyle: .Alert)
                 
@@ -134,7 +142,7 @@ class PhoneNumberViewController: XLFormViewController {
                         let validationController = Storyboards.Onboarding.instantiatePhoneVerificationController()
                         validationController.phoneNumber = phoneNumber
                         self?.navigationController?.pushViewController(validationController, animated: true)
-                    })
+                        })
                 }
                 alertController.addAction(OKAction)
                 

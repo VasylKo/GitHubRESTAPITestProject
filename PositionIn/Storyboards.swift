@@ -77,6 +77,10 @@ struct Storyboards {
             return self.storyboard.instantiateViewControllerWithIdentifier("BrowseMapViewController") as! BrowseMapViewController
         }
 
+        static func instantiateBrowseGridViewController() -> BrowseGridViewController {
+            return self.storyboard.instantiateViewControllerWithIdentifier("BrowseGridViewController") as! BrowseGridViewController
+        }
+
         static func instantiateBrowseListViewController() -> BrowseListViewController {
             return self.storyboard.instantiateViewControllerWithIdentifier("BrowseListViewController") as! BrowseListViewController
         }
@@ -540,6 +544,13 @@ extension SearchViewController: IdentifiableProtocol {
 extension BrowseMapViewController: IdentifiableProtocol { 
     var identifier: String? { return "BrowseMapViewController" }
     static var identifier: String? { return "BrowseMapViewController" }
+}
+
+
+//MARK: - BrowseGridViewController
+extension BrowseGridViewController: IdentifiableProtocol { 
+    var identifier: String? { return "BrowseGridViewController" }
+    static var identifier: String? { return "BrowseGridViewController" }
 }
 
 

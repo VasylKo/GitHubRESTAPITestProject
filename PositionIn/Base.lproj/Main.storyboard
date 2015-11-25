@@ -67,12 +67,12 @@
                         </textAttributes>
                     </navigationBar>
                     <connections>
-                        <segue destination="nw9-Ck-dbi" kind="relationship" relationship="rootViewController" id="UuW-O4-vdY"/>
+                        <segue destination="nvI-OA-t3J" kind="relationship" relationship="rootViewController" id="w0N-bi-m2S"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="c2n-hZ-cGe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="241" y="-95"/>
+            <point key="canvasLocation" x="266" y="-108"/>
         </scene>
         <!--Messaging Navigation Controller Scene-->
         <scene sceneID="KYr-N5-trl">
@@ -391,6 +391,14 @@
             </objects>
             <point key="canvasLocation" x="1590" y="-882"/>
         </scene>
+        <!--Browse Grid View Controller-->
+        <scene sceneID="1dj-PM-lno">
+            <objects>
+                <viewController storyboardIdentifier="BrowseGridViewController" id="rxu-oZ-9vr" customClass="BrowseGridViewController" customModule="PositionIn" customModuleProvider="target" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="piZ-0i-2U8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2291" y="-1611"/>
+        </scene>
         <!--Browse List View Controller-->
         <scene sceneID="Jyj-3J-o7D">
             <objects>
@@ -707,7 +715,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kJS-3G-KqG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1765" y="-90"/>
+            <point key="canvasLocation" x="2273" y="-108"/>
         </scene>
         <!--Event Details View Controller-->
         <scene sceneID="TQA-tq-hsQ">
@@ -744,7 +752,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Se8-GM-xNb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3003" y="-90"/>
+            <point key="canvasLocation" x="3571" y="-150"/>
         </scene>
         <!--Post-->
         <scene sceneID="jbP-64-jST">
@@ -758,6 +766,19 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CyR-kB-3vV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2687" y="1420"/>
+        </scene>
+        <!--Browse Main Grid Controller-->
+        <scene sceneID="isn-gW-oiT">
+            <objects>
+                <viewController id="nvI-OA-t3J" customClass="BrowseMainGridController" customModule="PositionIn" customModuleProvider="target" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="uef-SI-qhw"/>
+                    <connections>
+                        <segue destination="nw9-Ck-dbi" kind="show" id="sID-M8-MPA"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0EC-ju-s0G" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="933" y="-117"/>
         </scene>
         <!--Browse View Controller-->
         <scene sceneID="wfN-Bx-Jle">
@@ -775,7 +796,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="spd-ov-gak" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="980" y="-90"/>
+            <point key="canvasLocation" x="1590" y="-108"/>
         </scene>
         <!--Community Navigation Controller Scene-->
         <scene sceneID="dhN-rE-DIK">
@@ -1125,6 +1146,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="UGm-BP-OPQ"/>
-        <segue reference="gvg-eL-WZN"/>
+        <segue reference="ND0-h7-Vra"/>
     </inferredMetricsTieBreakers>
 </document>
