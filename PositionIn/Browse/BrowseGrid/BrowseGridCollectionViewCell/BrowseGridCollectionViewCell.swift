@@ -10,11 +10,6 @@ import UIKit
 
 class BrowseGridCollectionViewCell: UICollectionViewCell {
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        self.homeItemNameLabel.text = name
-    }
-    
     var image: UIImage? {
         didSet {
             self.homeItemImage.image = image

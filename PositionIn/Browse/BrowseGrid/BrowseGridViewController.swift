@@ -23,6 +23,10 @@ class BrowseGridViewController: UIViewController {
         case Market = 9
         case BomaHotels = 10
         case Volunteer = 11
+        
+        static var count: Int {
+            return (HomeItems.Volunteer.rawValue + 1)
+        }
     }
     
     override func viewDidLoad() {
@@ -112,7 +116,7 @@ extension BrowseGridViewController: UICollectionViewDelegate {
 extension BrowseGridViewController: UICollectionViewDataSource {
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 12
+        return HomeItems.count
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
