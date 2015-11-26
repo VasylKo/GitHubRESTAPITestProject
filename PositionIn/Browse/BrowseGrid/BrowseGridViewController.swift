@@ -96,6 +96,19 @@ class BrowseGridViewController: UIViewController {
     @IBOutlet private weak var collectionView: UICollectionView!
 }
 
+
+extension BrowseGridViewController: UICollectionViewDelegate {
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        let homeItem = HomeItems(rawValue: indexPath.row)
+        if let homeItem = homeItem {
+            switch homeItem{
+            default:
+                break
+            }
+        }
+    }
+}
+
 extension BrowseGridViewController: UICollectionViewDataSource {
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

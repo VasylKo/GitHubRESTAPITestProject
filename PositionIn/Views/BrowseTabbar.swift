@@ -48,8 +48,8 @@ final class BrowseTabbar: UITabBar {
     private func configure() {
         //TODO: need fix for selected relevant
         items = [
-            UITabBarItem(title: NSLocalizedString("Recent", comment: "Tabbar: For You"), image: UIImage(named: "TabbarForYou"), selectedImage: UIImage(named: "TabbarForYouSelected")),
-            UITabBarItem(title: NSLocalizedString("Relevant", comment: "Tabbar: New"), image: UIImage(named: "TabbarNear"), selectedImage: UIImage(named: "TabbarNear")),
+            UITabBarItem(title: NSLocalizedString("Home", comment: "Tabbar: Home"), image: UIImage(named: "TabbarForYou"), selectedImage: UIImage(named: "TabbarForYouSelected")),
+            UITabBarItem(title: NSLocalizedString("Explore", comment: "Tabbar: Explore"), image: UIImage(named: "TabbarNear"), selectedImage: UIImage(named: "TabbarNear")),
         ]
         delegate = self
         

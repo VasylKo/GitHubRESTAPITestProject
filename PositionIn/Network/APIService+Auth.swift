@@ -315,7 +315,7 @@ extension APIService {
                     "fbToken" : fbToken,
                     "device" : deviceInfo(),
                 ]
-            case .Register(let api,  let username, let password, let profile, let phoneNumber, let phoneVerificationCode):
+            case .Register(let api,  let username, let password, let phoneNumber, let phoneVerificationCode, let profile):
                 url = api.https("/v1.0/users/register")
                 method = .POST
                 encoding = .JSON

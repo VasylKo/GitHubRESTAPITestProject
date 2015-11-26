@@ -4,7 +4,6 @@
 //
 
 import UIKit
-import PositionIn
 
 //MARK: - Storyboards
 
@@ -449,7 +448,7 @@ extension SidebarViewController {
 
     enum Segue: String, CustomStringConvertible, SegueProtocol {
         case DrawerSegue = "DrawerSegue"
-        case ShowBrowse = "ShowBrowse"
+        case ShowGridBrowse = "ShowGridBrowse"
         case ShowMessagesList = "ShowMessagesList"
         case ShowFilters = "ShowFilters"
         case ShowCommunities = "ShowCommunities"
@@ -458,12 +457,13 @@ extension SidebarViewController {
         case ShowPeople = "ShowPeople"
         case ShowWallet = "ShowWallet"
         case ShowSplash = "ShowSplash"
+        case ShowBrowse = "ShowBrowse"
 
         var kind: SegueKind? {
             switch (self) {
             case DrawerSegue:
                 return SegueKind(rawValue: "custom")
-            case ShowBrowse:
+            case ShowGridBrowse:
                 return SegueKind(rawValue: "custom")
             case ShowMessagesList:
                 return SegueKind(rawValue: "custom")
@@ -481,6 +481,8 @@ extension SidebarViewController {
                 return SegueKind(rawValue: "custom")
             case ShowSplash:
                 return SegueKind(rawValue: "custom")
+            case ShowBrowse:
+                return SegueKind(rawValue: "custom")
             }
         }
 
@@ -488,7 +490,7 @@ extension SidebarViewController {
             switch (self) {
             case DrawerSegue:
                 return MainMenuViewController.self
-            case ShowBrowse:
+            case ShowGridBrowse:
                 return UINavigationController.self
             case ShowMessagesList:
                 return UINavigationController.self
@@ -506,6 +508,8 @@ extension SidebarViewController {
                 return UINavigationController.self
             case ShowSplash:
                 return UIViewController.self
+            case ShowBrowse:
+                return UINavigationController.self
             }
         }
 
@@ -767,6 +771,8 @@ extension PostViewController {
     }
 
 }
+
+//MARK: - BrowseMainGridController
 
 //MARK: - BrowseViewController
 extension UIStoryboardSegue {

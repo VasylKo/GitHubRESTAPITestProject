@@ -144,7 +144,7 @@ extension AddMenuView {
         
         static func promotionItemWithAction(action: ItemAction?) -> MenuItem {
             return MenuItem(
-                title: NSLocalizedString("EMERGENCY",comment: "Add menu: PROMOTION"),
+                title: NSLocalizedString("Call an\nAmbuance",comment: "Add menu: PROMOTION"),
                 icon: UIImage(named: "AddPromotion")!,
                 color: UIScheme.mainThemeColor,
                 action: action
@@ -153,7 +153,7 @@ extension AddMenuView {
         
         static func postItemWithAction(action: ItemAction?) -> MenuItem {
             return MenuItem(
-                title: NSLocalizedString("POST",comment: "Add menu: POST"),
+                title: NSLocalizedString("Post",comment: "Add menu: POST"),
                 icon: UIImage(named: "AddPost")!,
                 color: UIColor.whiteColor(),
                 action: action
@@ -162,7 +162,7 @@ extension AddMenuView {
         
         static func inviteItemWithAction(action: ItemAction?) -> MenuItem {
             return MenuItem(
-                title: NSLocalizedString("DONATE",comment: "Add menu: INVITE"),
+                title: NSLocalizedString("Donate",comment: "Add menu: INVITE"),
                 icon: UIImage(named: "AddInvite")!,
                 color: UIColor.whiteColor(),
                 action: action
@@ -201,8 +201,18 @@ extension AddMenuView {
             self.startButton.transform = CGAffineTransformMakeRotation(CGFloat(M_PI_4))
             for (idx, itemView) in self.menuItemViews.enumerate() {
                 itemView.hidden = false
-                let translation = -(itemView.bounds.height + self.itemsPadding) * CGFloat(idx + 1) - self.decorationInset
-                let transform: CGAffineTransform =  CGAffineTransformMakeTranslation(0, translation)
+                let transform: CGAffineTransform
+                switch idx {
+                case 0:
+                    transform =  CGAffineTransformMakeTranslation(0, -itemView.bounds.height * 2)
+                case 1:
+                    transform =  CGAffineTransformMakeTranslation(-itemView.bounds.height * 2, -itemView.bounds.height * 1.5)
+                case 2:
+                    transform =  CGAffineTransformMakeTranslation(itemView.bounds.height * 2,  -itemView.bounds.height * 1.5)
+                default:
+                    transform  =  CGAffineTransformMakeTranslation(0, 0)
+                }
+                
                 itemView.transform = transform
             }
         }
@@ -262,7 +272,7 @@ extension AddMenuView {
         init(direction: AnimationDirection, icon: UIImage, color: UIColor, title: String, action: ItemAction?) {
             switch direction {
             case .TopRight:
-                layoutDirection = .LeftToRight
+                layoutDirection = .Center
             }
             
             button = RoundButton(image: icon, fillColor: color,shadowColor: UIColor.darkGrayColor())
@@ -270,8 +280,8 @@ extension AddMenuView {
             
             label = UILabel()
             label.text = title
-            label.font = UIFont(name: "Helvetica", size: 16)
-            label.numberOfLines = 1
+            label.font = UIFont(name: "Helvetica", size: 14)
+            label.numberOfLines = 2
             label.sizeToFit()
             
             self.action = action
@@ -286,7 +296,7 @@ extension AddMenuView {
             button.addTarget(self, action: actionSelector, forControlEvents: UIControlEvents.ValueChanged)
             addSubview(button)
             
-            label.backgroundColor = UIColor.clearColor()
+            label.backgroundColor = .clearColor()
             label.textColor = UIColor.whiteColor()
             label.addGestureRecognizer(UITapGestureRecognizer(target: self, action: actionSelector))
             addSubview(label)
@@ -294,6 +304,8 @@ extension AddMenuView {
             switch layoutDirection {
             case .LeftToRight:
                 label.textAlignment = .Left
+            case .Center:
+                label.textAlignment = .Center
             }
         }
         
@@ -305,13 +317,14 @@ extension AddMenuView {
             return contentSize()
         }
         
-        let  button: RoundButton
-        let  label: UILabel
+        let button: RoundButton
+        let label: UILabel
         let layoutDirection: LayoutDirection
         let labelPadding: CGFloat = 10.0
         
         enum LayoutDirection {
             case LeftToRight
+            case Center
         }
         
         override func layoutSubviews() {
@@ -320,9 +333,16 @@ extension AddMenuView {
             case .LeftToRight:
                 button.frame = CGRect(origin: CGPointZero, size: button.bounds.size)
                 label.frame = CGRect(origin: CGPoint(
-                    x: button.frame.maxX + labelPadding,
-                    y: (bounds.height - label.bounds.height) / 2.0
-                    ), size: label.bounds.size)
+                    x: (button.frame.size.width - label.bounds.size.width) / 2,
+                    y: button.frame.maxY + labelPadding),
+                    size: label.bounds.size)
+                
+            case .Center:
+                button.frame = CGRect(origin: CGPointZero, size: button.bounds.size)
+                label.frame = CGRect(origin: CGPoint(
+                    x: (button.frame.size.width - label.bounds.size.width) / 2,
+                    y: button.frame.maxY + labelPadding),
+                    size: label.bounds.size)
             }
         }
         

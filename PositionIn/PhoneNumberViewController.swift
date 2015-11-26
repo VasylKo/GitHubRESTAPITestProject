@@ -108,8 +108,6 @@ class PhoneNumberViewController: XLFormViewController {
     
     @IBAction func doneButtonPressed(sender: AnyObject) {
         
-        self.dismissLogin()
-        
         let validationErrors : Array<NSError> = self.formValidationErrors() as! Array<NSError>
         if (validationErrors.count > 0){
             self.showFormValidationError(validationErrors.first)

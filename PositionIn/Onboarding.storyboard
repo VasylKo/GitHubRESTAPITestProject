@@ -70,7 +70,11 @@
             <objects>
                 <viewController id="lJA-TZ-gvR" customClass="EditProfileViewController" customModule="PositionIn" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" title="Profile" id="A6t-W6-elN">
-                        <barButtonItem key="rightBarButtonItem" title="Done" id="0Ke-OY-7Be"/>
+                        <barButtonItem key="rightBarButtonItem" title="Done" id="0Ke-OY-7Be">
+                            <connections>
+                                <action selector="didTapDone:" destination="lJA-TZ-gvR" id="zrv-M6-jNK"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IcO-b8-OzB" userLabel="First Responder" sceneMemberID="firstResponder"/>

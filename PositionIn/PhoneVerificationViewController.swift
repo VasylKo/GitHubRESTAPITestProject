@@ -60,11 +60,12 @@ class PhoneVerificationViewController: XLFormViewController {
         
         let codeRow = self.form.formRowWithTag(Tags.ValidationCode.rawValue)
         
-        if let codeRowString = codeRow?.value,
+        if let codeRowValue = codeRow?.value,
             let phoneNumber = self.phoneNumber {
-                api().verifyPhoneCode(phoneNumber, code: "\(codeRowString)").onSuccess(callback: {[weak self] isExistingUser in
+                let codeString = "\(codeRowValue)"
+                api().verifyPhoneCode(phoneNumber, code: codeString).onSuccess(callback: {[weak self] isExistingUser in
                     if isExistingUser {
-                        api().login(username: nil, password: nil, phoneNumber: phoneNumber, phoneVerificationCode: "\(codeRowString)").onSuccess { [weak self] _ in
+                        api().login(username: nil, password: nil, phoneNumber: phoneNumber, phoneVerificationCode: codeString).onSuccess { [weak self] _ in
                             Log.info?.message("Logged in")
                             trackGoogleAnalyticsEvent("Status", action: "Click", label: "Auth Success")
                             self?.dismissLogin()
@@ -74,7 +75,11 @@ class PhoneVerificationViewController: XLFormViewController {
                     }
                     else {
                         //register
-                        self?.performSegue(PhoneVerificationViewController.Segue.ProfileSegueId)
+                        let controller = EditProfileViewController(nibName: nil, bundle: nil)
+                        controller.phoneNumber = self?.phoneNumber
+                        controller.validationCode = codeString
+                        
+                        self?.navigationController?.pushViewController(controller, animated: true)
                     }
                     })
         }

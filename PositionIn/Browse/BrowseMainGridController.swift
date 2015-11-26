@@ -17,7 +17,23 @@ class BrowseMainGridController: BrowseModeTabbarViewController {
     }
     
     override func viewControllerForMode(mode: DisplayModeViewController.DisplayMode) -> UIViewController {
-        return Storyboards.Main.instantiateBrowseGridViewController()
+        switch self.browseMode {
+        case .ForYou:
+            self.navigationItem.rightBarButtonItems = nil
+            return Storyboards.Main.instantiateBrowseGridViewController()
+        case .New:
+            super.setRightBarItems()
+            switch self.displayMode {
+            case .Map:
+                let mapController = Storyboards.Main.instantiateBrowseMapViewController()
+                mapController.delegate = self
+                return mapController
+            case .List:
+                let listController = Storyboards.Main.instantiateBrowseListViewController()
+                listController.hideSeparatorLinesNearSegmentedControl = true
+                return listController
+            }
+        }
     }
     
     override var addMenuItems: [AddMenuView.MenuItem] {
@@ -29,14 +45,14 @@ class BrowseMainGridController: BrowseModeTabbarViewController {
             AddMenuView.MenuItem.promotionItemWithAction {
                 api().isUserAuthorized().onSuccess {  _ in pushAndSubscribe(Storyboards.NewItems.instantiateAddPromotionViewController())
                 }},
-            AddMenuView.MenuItem.eventItemWithAction {
-                api().isUserAuthorized().onSuccess {  _ in
-                    pushAndSubscribe(Storyboards.NewItems.instantiateAddEventViewController())
-                }},
-            AddMenuView.MenuItem.productItemWithAction {
-                api().isUserAuthorized().onSuccess {  _ in
-                    pushAndSubscribe(Storyboards.NewItems.instantiateAddProductViewController())
-                }},
+//            AddMenuView.MenuItem.eventItemWithAction {
+//                api().isUserAuthorized().onSuccess {  _ in
+//                    pushAndSubscribe(Storyboards.NewItems.instantiateAddEventViewController())
+//                }},
+//            AddMenuView.MenuItem.productItemWithAction {
+//                api().isUserAuthorized().onSuccess {  _ in
+//                    pushAndSubscribe(Storyboards.NewItems.instantiateAddProductViewController())
+//                }},
             AddMenuView.MenuItem.postItemWithAction {
                 api().isUserAuthorized().onSuccess {  _ in
                     pushAndSubscribe(Storyboards.NewItems.instantiateAddPostViewController())

@@ -52,7 +52,7 @@ class SidebarViewController: KYDrawerController {
             case .Messages:
                 return (SidebarViewController.Segue.ShowMessagesList, nil)
             case .ForYou:
-                return (SidebarViewController.Segue.ShowBrowse, Box(DisplayModeViewController.DisplayMode.Map, BrowseModeTabbarViewController.BrowseMode.ForYou))
+                return (SidebarViewController.Segue.ShowGridBrowse, Box(DisplayModeViewController.DisplayMode.Map, BrowseModeTabbarViewController.BrowseMode.ForYou))
             case .New:
                 return (SidebarViewController.Segue.ShowBrowse, Box(DisplayModeViewController.DisplayMode.Map, BrowseModeTabbarViewController.BrowseMode.New))
             case .Filters:

@@ -10,6 +10,7 @@ import UIKit
 import XLForm
 import CleanroomLogger
 import BrightFutures
+import Photos
 
 final class EditProfileViewController: BaseAddItemViewController {
     
@@ -29,6 +30,18 @@ final class EditProfileViewController: BaseAddItemViewController {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.initializeForm()
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        if let _ = self.phoneNumber {
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Done", comment: "Registration"),
+                style: UIBarButtonItemStyle.Plain,
+                target: self,
+                action: "didTapDone:")
+            self.title = "My Profile"
+        }
     }
     
     func initializeForm() {
@@ -114,9 +127,22 @@ final class EditProfileViewController: BaseAddItemViewController {
         let values = formValues()
         Log.debug?.value(values)
         
-        
+        if let photos = values[Tags.Photo.rawValue]  as? [PHAsset] where (photos.count > 0) {
+            
+        } else {
+            api().register(username: nil, password: nil, phoneNumber: self.phoneNumber,
+                phoneVerificationCode: self.validationCode,
+                firstName: values[Tags.FirstName.rawValue] as? String,
+                lastName: values[Tags.FirstName.rawValue] as? String).onSuccess(callback: {[weak self] _ in
+                    trackGoogleAnalyticsEvent("Status", action: "Click", label: "Auth Success")
+                    Log.info?.message("Registration done")
+                    self?.sideBarController?.executeAction(SidebarViewController.defaultAction)
+                    self?.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
+                    }).onFailure(callback: {_ in
+                        trackGoogleAnalyticsEvent("Status", action: "Click", label: "Auth Fail")
+                    })
+        }
     }
-    
 
     //MARK: Actions
     @IBAction override func didTapPost(sender: AnyObject) {
