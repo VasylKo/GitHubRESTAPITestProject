@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BrowseListViewController" customModule="PositionIn" customModuleProvider="target">
@@ -21,12 +22,12 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" rowHeight="70" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="rSU-D8-03P" customClass="TableView" customModule="PosInCore">
-                    <rect key="frame" x="0.0" y="68" width="600" height="532"/>
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <color key="separatorColor" red="0.74901960779999999" green="0.74901960779999999" blue="0.74901960779999999" alpha="1" colorSpace="calibratedRGB"/>
                     <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                 </tableView>
-                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="a6X-i6-NUa">
+                <segmentedControl hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="a6X-i6-NUa">
                     <rect key="frame" x="10" y="20" width="580" height="29"/>
                     <segments>
                         <segment title="" image="FeedFilterAll"/>
@@ -40,14 +41,14 @@
                         <action selector="displayModeSegmentedControlChanged:" destination="-1" eventType="valueChanged" id="k7V-hb-Zuh"/>
                     </connections>
                 </segmentedControl>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wL4-UP-YuR" userLabel="TopSeparatorLine">
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wL4-UP-YuR" userLabel="TopSeparatorLine">
                     <rect key="frame" x="0.0" y="8" width="600" height="1"/>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="1" id="eCz-Ne-fKW"/>
                     </constraints>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KMW-lu-Cxa" userLabel="BottomSeparatorLine">
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KMW-lu-Cxa" userLabel="BottomSeparatorLine">
                     <rect key="frame" x="0.0" y="59" width="600" height="1"/>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
@@ -70,10 +71,12 @@
                 <constraint firstAttribute="trailing" secondItem="rSU-D8-03P" secondAttribute="trailing" id="fIA-t9-lYr"/>
                 <constraint firstItem="rSU-D8-03P" firstAttribute="leading" secondItem="hh2-4T-SbM" secondAttribute="leading" id="gIx-mh-q7l"/>
                 <constraint firstItem="KMW-lu-Cxa" firstAttribute="leading" secondItem="hh2-4T-SbM" secondAttribute="leading" id="hh7-tt-Ow5"/>
+                <constraint firstItem="rSU-D8-03P" firstAttribute="top" secondItem="hh2-4T-SbM" secondAttribute="top" id="itA-ns-fsF"/>
                 <constraint firstItem="a6X-i6-NUa" firstAttribute="top" secondItem="hh2-4T-SbM" secondAttribute="top" constant="20" id="lVf-v4-dAH"/>
             </constraints>
             <variation key="default">
                 <mask key="constraints">
+                    <exclude reference="daa-NX-VxE"/>
                     <exclude reference="NKy-UW-J58"/>
                 </mask>
             </variation>

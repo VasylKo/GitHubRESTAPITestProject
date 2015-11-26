@@ -94,10 +94,19 @@ extension APIService {
         }
     }
     
+    //Verify Phone
+    func verifyPhone(phoneNumber: String) -> Future<Void, NSError> {
+        return verifyPhoneRequest(phoneNumber)
+    }
+    
+    //Validate Code
+    func verifyPhoneCode(phoneNumber: String, code: String) -> Future<Bool, NSError> {
+        return verifyPhoneCodeRequest(phoneNumber, code: code)
+    }
     
     //Login existing user
-    func login(username username: String, password: String) -> Future<UserProfile, NSError> {
-        return loginRequest(username: username, password: password).flatMap { _ in
+    func login(username username: String?, password: String?, phoneNumber: String?, phoneVerificationCode: String?) -> Future<UserProfile, NSError> {
+        return loginRequest(username: username, password: password, phoneNumber: phoneNumber, phoneVerificationCode: phoneVerificationCode).flatMap { _ in
             return self.updateCurrentProfileStatus(password)
         }
     }
@@ -112,13 +121,13 @@ extension APIService {
     
     //Register anonymous user
     func register() -> Future<UserProfile, NSError> {
-        return registerRequest(username: nil, password: nil, info: nil).flatMap { _ in
+        return registerRequest(username: nil, password: nil, phoneNumber: nil, phoneVerificationCode: nil, info: nil).flatMap { _ in
             return self.updateCurrentProfileStatus()
         }
     }
     
     //Register new user
-    func register(username username: String, password: String, firstName: String?, lastName: String?) -> Future<UserProfile, NSError> {
+    func register(username username: String?, password: String?, phoneNumber: String?, phoneVerificationCode: String?, firstName: String?, lastName: String?) -> Future<UserProfile, NSError> {
         var info: [String: AnyObject] = [:]
         if let firstName = firstName {
             info ["firstName"] = firstName
@@ -126,16 +135,15 @@ extension APIService {
         if let lastName = lastName {
             info ["lastName"] = lastName
         }
-        return registerRequest(username: username, password: password, info: info).flatMap { _ in
+        return registerRequest(username: username, password: password, phoneNumber: phoneNumber, phoneVerificationCode: phoneVerificationCode, info: info).flatMap { _ in
             return self.updateCurrentProfileStatus(password)
         }
     }
     
     //MARK: - Private members -
     
-    
-    private func registerRequest(username username: String?, password: String?, info: [String: AnyObject]?) -> Future<AuthResponse, NSError> {
-        let urlRequest = AuthRouter.Register(api: self, username: username, password: password, profileInfo: info)
+    private func registerRequest(username username: String?, password: String?, phoneNumber: String?, phoneVerificationCode: String?, info: [String: AnyObject]?) -> Future<AuthResponse, NSError> {
+        let urlRequest = AuthRouter.Register(api: self, username: username, password: password, phoneNumber: phoneNumber, phoneVerificationCode: phoneVerificationCode, profileInfo: info)
         
         let mapping: AnyObject? -> AuthResponse? = { json in
             return Mapper<AuthResponse>().map(json)
@@ -147,8 +155,24 @@ extension APIService {
         return handleFailure(updateAuth(future))
     }
     
-    private func loginRequest(username username: String, password: String) -> Future<AuthResponse, NSError> {
-        let urlRequest = AuthRouter.Login(api: self, username: username, password: password)
+    private func verifyPhoneRequest(phoneNumber: String) ->  Future<Void, NSError> {
+        typealias CRUDResultType = (Alamofire.Request, Future<Void, NSError>)
+        let request = AuthRouter.PhoneVerification(api: self, phone: phoneNumber)
+        let (_, future): CRUDResultType = self.dataProvider.jsonRequest(request, map: self.commandMapping(), validation: self.statusCodeValidation(statusCode: [200]))
+        return self.handleFailure(future)
+    }
+    
+    private func verifyPhoneCodeRequest(phoneNumber: String, code: String) ->  Future<Bool, NSError> {
+        typealias CRUDResultType = (Alamofire.Request, Future<Bool, NSError>)
+        let request = AuthRouter.VerifyPhoneCode(api: self, phone: phoneNumber, code: code)
+        let (_, future): CRUDResultType = self.dataProvider.jsonRequest(request, map: self.phoneCodeValidation(), validation: self.statusCodeValidation(statusCode: [200]))
+        return self.handleFailure(future)
+    }
+    
+    private func loginRequest(username username: String?, password: String?, phoneNumber: String?, phoneVerificationCode: String?)
+        -> Future<AuthResponse, NSError> {
+        let urlRequest = AuthRouter.Login(api: self, username: username, password: password,
+            phoneNumber: phoneNumber, phoneVerificationCode: phoneVerificationCode)
         
         let mapping: AnyObject? -> AuthResponse? = { json in
             return Mapper<AuthResponse>().map(json)
@@ -228,11 +252,13 @@ extension APIService {
     
     private enum AuthRouter: URLRequestConvertible {
         
-        case Login(api: APIService, username: String, password: String)
+        case Login(api: APIService, username: String?, password: String?, phoneNumber: String?, phoneVerificationCode: String?)
         case Facebook(api: APIService, fbToken: String)
-        case Register(api: APIService, username: String?, password: String?, profileInfo: [String: AnyObject]?)
+        case Register(api: APIService, username: String?, password: String?, phoneNumber: String?, phoneVerificationCode: String?, profileInfo: [String: AnyObject]?)
         case Refresh(api: APIService, token: String)
-
+        case PhoneVerification(api: APIService, phone: String)
+        case VerifyPhoneCode(api: APIService, phone: String, code: String)
+        
         // URLRequestConvertible
         var URLRequest: NSMutableURLRequest {
             let url:  NSURL
@@ -242,6 +268,19 @@ extension APIService {
             var params: [String: AnyObject] = [:]
 
             switch self {
+            case .VerifyPhoneCode(let api, let phone, let code):
+                url = api.https("/v1.0/users/verifyPhoneVerificationCode")
+                params = [
+                    "phoneNumber" : phone,
+                    "phoneVerificationCode" : code,
+                    "device" : deviceInfo(),
+                ]
+            case .PhoneVerification(let api, let phone):
+                url = api.https("/v1.0/users/phoneVerification")
+                params = [
+                    "phoneNumber" : phone,
+                    "device" : deviceInfo(),
+                ]
             case .Refresh(let api, let token):
                 url = api.https("/v1.0/users/token")
                 method = .GET
@@ -253,20 +292,30 @@ extension APIService {
                     NSHTTPCookieStorage.sharedHTTPCookieStorage().setCookie(cookie)
                 }
                 
-            case .Login(let api, let username, let password):
+            case .Login(let api, let username, let password, let phoneNumber, let phoneVerificationCode):
                 url = api.https("/v1.0/users/login")
                 params = [
-                    "email" : username,
-                    "password" : password,
                     "device" : deviceInfo(),
                 ]
+                if let username = username {
+                    params["email"] = username
+                }
+                if let password = password {
+                    params["password"] = password
+                }
+                if let phoneNumber = phoneNumber {
+                    params["phoneNumber"] = phoneNumber
+                }
+                if let phoneVerificationCode = phoneVerificationCode {
+                    params["phoneVerificationCode"] = phoneVerificationCode
+                }
             case .Facebook(let api, let fbToken):
                 url = api.https("/v1.0/users/login")
                 params = [
                     "fbToken" : fbToken,
                     "device" : deviceInfo(),
                 ]
-            case .Register(let api,  let username, let password, let profile):
+            case .Register(let api,  let username, let password, let phoneNumber, let phoneVerificationCode, let profile):
                 url = api.https("/v1.0/users/register")
                 method = .POST
                 encoding = .JSON
@@ -279,6 +328,12 @@ extension APIService {
                 }
                 if let password = password {
                     params["password"] = password
+                }
+                if let phoneNumber = phoneNumber {
+                    params["phoneNumber"] = phoneNumber
+                }
+                if let phoneVerificationCode = phoneVerificationCode {
+                    params["phoneVerificationCode"] = phoneVerificationCode
                 }
                 if let profile = profile {
                     params["profile"] = profile

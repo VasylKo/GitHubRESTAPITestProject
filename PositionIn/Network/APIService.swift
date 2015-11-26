@@ -195,7 +195,6 @@ struct APIService {
         return self.createObject(endpoint, object: object)
     }
     
-    
     func getProduct(objectId: CRUDObjectId, inShop shop: CRUDObjectId) -> Future<Product, NSError> {
         let endpoint = Product.shopItemsEndpoint(shop, productId: objectId)
         return self.getObject(endpoint)
@@ -420,7 +419,7 @@ struct APIService {
         }
     }
     
-    private func commandMapping() -> (AnyObject? -> Void?) {
+    func commandMapping() -> (AnyObject? -> Void?) {
         return  { response in
             if let json = response as? NSDictionary {
                 if let success = json["success"] as? Bool where success == true{
@@ -440,6 +439,25 @@ struct APIService {
                 Log.error?.message("Got unexpected response: \(response)")
                 return nil
             }
+        }
+    }
+    
+    func phoneCodeValidation() -> (AnyObject? -> Bool?) {
+        return { response in
+            if let json = response as? NSDictionary {
+                if let isExistingUser = json["isExistingUser"] as? Bool{
+                    return isExistingUser
+                } else {
+                    Log.error?.message("Got unexpected response")
+                    Log.debug?.value(json)
+                    return nil
+                }
+            }
+            else {
+                Log.error?.message("Got unexpected response: \(response)")
+                return nil
+            }
+            
         }
     }
     

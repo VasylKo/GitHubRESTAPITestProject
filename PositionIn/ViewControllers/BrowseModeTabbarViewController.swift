@@ -17,7 +17,52 @@ protocol BrowseModeDisplay {
 @objc class BrowseModeTabbarViewController: DisplayModeViewController, AddMenuViewDelegate, BrowseTabbarDelegate {
     
     var addMenuItems: [AddMenuView.MenuItem] {
-        return []
+        let pushAndSubscribe: (UIViewController) -> () = { [weak self] controller in
+            self?.navigationController?.pushViewController(controller, animated: true)
+            self?.subscribeForContentUpdates(controller)
+        }
+        return [
+            AddMenuView.MenuItem.promotionItemWithAction {
+                api().isUserAuthorized().onSuccess {  _ in pushAndSubscribe(Storyboards.NewItems.instantiateAddPromotionViewController())
+                }},
+            // changes for 3 button UI(ambulance, post, donate)
+            //            AddMenuView.MenuItem.eventItemWithAction {
+            //                api().isUserAuthorized().onSuccess {  _ in
+            //                    pushAndSubscribe(Storyboards.NewItems.instantiateAddEventViewController())
+            //                }},
+            //            AddMenuView.MenuItem.productItemWithAction {
+            //                api().isUserAuthorized().onSuccess {  _ in
+            //                    pushAndSubscribe(Storyboards.NewItems.instantiateAddProductViewController())
+            //                }},
+            AddMenuView.MenuItem.postItemWithAction {
+                api().isUserAuthorized().onSuccess {  _ in
+                    pushAndSubscribe(Storyboards.NewItems.instantiateAddPostViewController())
+                }},
+            AddMenuView.MenuItem.inviteItemWithAction {
+                api().isUserAuthorized().onSuccess {  _ in
+                    Log.error?.message("Should call invite")
+                }},
+        ]
+    }
+    
+    override func viewControllerForMode(mode: DisplayModeViewController.DisplayMode) -> UIViewController {
+        switch self.browseMode {
+        case .ForYou:
+            self.navigationItem.rightBarButtonItems = nil
+            return Storyboards.Main.instantiateBrowseGridViewController()
+        case .New:
+            super.setRightBarItems()
+            switch self.displayMode {
+            case .Map:
+                let mapController = Storyboards.Main.instantiateBrowseMapViewController()
+                mapController.delegate = self
+                return mapController
+            case .List:
+                let listController = Storyboards.Main.instantiateBrowseListViewController()
+                listController.hideSeparatorLinesNearSegmentedControl = true
+                return listController
+            }
+        }
     }
     
     //MARK: Browse mode

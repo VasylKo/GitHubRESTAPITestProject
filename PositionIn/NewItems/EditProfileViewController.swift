@@ -10,6 +10,7 @@ import UIKit
 import XLForm
 import CleanroomLogger
 import BrightFutures
+import Photos
 
 final class EditProfileViewController: BaseAddItemViewController {
     
@@ -31,6 +32,18 @@ final class EditProfileViewController: BaseAddItemViewController {
         self.initializeForm()
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        if let _ = self.phoneNumber {
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Done", comment: "Registration"),
+                style: UIBarButtonItemStyle.Plain,
+                target: self,
+                action: "didTapDone:")
+            self.title = "My Profile"
+        }
+    }
+    
     func initializeForm() {
         let form = XLFormDescriptor(title: NSLocalizedString("Edit profile", comment: "Edit profile: form caption"))
 
@@ -45,13 +58,7 @@ final class EditProfileViewController: BaseAddItemViewController {
         infoSection.addFormRow(firstnameRow)
         infoSection.addFormRow(lastnameRow)
         infoSection.addFormRow(phoneRow)
-        
-        //About me
-        let aboutSection = XLFormSectionDescriptor.formSectionWithTitle(NSLocalizedString("About me", comment: "Edit profile: About me"))
-        form.addFormSection(aboutSection)
-        aboutSection.addFormRow(aboutRow)
-        
-        
+       
         self.form  = form
         
         api().getMyProfile().onSuccess { [weak self] profile in
@@ -59,7 +66,6 @@ final class EditProfileViewController: BaseAddItemViewController {
                 strongSelf.firstnameRow.value = profile.firstName
                 strongSelf.lastnameRow.value = profile.lastName
                 strongSelf.phoneRow.value = profile.phone
-                strongSelf.aboutRow.value = profile.userDescription
                 strongSelf.tableView.reloadData()
                 strongSelf.userProfile = profile
             }
@@ -88,8 +94,8 @@ final class EditProfileViewController: BaseAddItemViewController {
     
     // Phone
     lazy private var phoneRow: XLFormRowDescriptor = {
-        let row = XLFormRowDescriptor(tag: Tags.Phone.rawValue, rowType: XLFormRowDescriptorTypePhone,
-            title: NSLocalizedString("Phone", comment: "Edit profile: Phone"))
+        let row = XLFormRowDescriptor(tag: Tags.Phone.rawValue, rowType: XLFormRowDescriptorTypeEmail,
+            title: NSLocalizedString("Email", comment: "Edit profile: Email"))
         row.cellConfig.setObject(UIScheme.mainThemeColor, forKey: "textLabel.textColor")
         row.cellConfig.setObject(UIScheme.mainThemeColor, forKey: "tintColor")
         return row
@@ -106,7 +112,37 @@ final class EditProfileViewController: BaseAddItemViewController {
         let row = self.photoRowDescriptor(EditProfileViewController.Tags.Photo.rawValue)
         return row
         }()
-
+    
+    @IBAction func didTapDone(sender: AnyObject) {
+        if view.userInteractionEnabled == false {
+            return
+        }
+        let validationErrors : Array<NSError> = self.formValidationErrors() as! Array<NSError>
+        if (validationErrors.count > 0){
+            self.showFormValidationError(validationErrors.first)
+            return
+        }
+        self.tableView.endEditing(true)
+        
+        let values = formValues()
+        Log.debug?.value(values)
+        
+        if let photos = values[Tags.Photo.rawValue]  as? [PHAsset] where (photos.count > 0) {
+            
+        } else {
+            api().register(username: nil, password: nil, phoneNumber: self.phoneNumber,
+                phoneVerificationCode: self.validationCode,
+                firstName: values[Tags.FirstName.rawValue] as? String,
+                lastName: values[Tags.FirstName.rawValue] as? String).onSuccess(callback: {[weak self] _ in
+                    trackGoogleAnalyticsEvent("Status", action: "Click", label: "Auth Success")
+                    Log.info?.message("Registration done")
+                    self?.sideBarController?.executeAction(SidebarViewController.defaultAction)
+                    self?.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
+                    }).onFailure(callback: {_ in
+                        trackGoogleAnalyticsEvent("Status", action: "Click", label: "Auth Fail")
+                    })
+        }
+    }
 
     //MARK: Actions
     @IBAction override func didTapPost(sender: AnyObject) {
@@ -151,4 +187,7 @@ final class EditProfileViewController: BaseAddItemViewController {
             showError(NSLocalizedString("Failed to fetch user data", comment: "Edit profile: Prefetch failure"))
         }
     }
+    
+    var phoneNumber: String?
+    var validationCode: String?
 }

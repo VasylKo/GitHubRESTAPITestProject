@@ -76,6 +76,10 @@ struct Storyboards {
             return self.storyboard.instantiateViewControllerWithIdentifier("BrowseMapViewController") as! BrowseMapViewController
         }
 
+        static func instantiateBrowseGridViewController() -> BrowseGridViewController {
+            return self.storyboard.instantiateViewControllerWithIdentifier("BrowseGridViewController") as! BrowseGridViewController
+        }
+
         static func instantiateBrowseListViewController() -> BrowseListViewController {
             return self.storyboard.instantiateViewControllerWithIdentifier("BrowseListViewController") as! BrowseListViewController
         }
@@ -149,7 +153,7 @@ struct Storyboards {
         }
 
         static func instantiateSplashViewController() -> UIViewController {
-            return self.storyboard.instantiateViewControllerWithIdentifier("SplashViewController") 
+            return self.storyboard.instantiateViewControllerWithIdentifier("SplashViewController") as! UIViewController
         }
 
         static func instantiateWalletViewController() -> WalletViewController {
@@ -240,6 +244,31 @@ struct Storyboards {
 
         static func instantiateAddEventViewController() -> AddEventViewController {
             return self.storyboard.instantiateViewControllerWithIdentifier("AddEventViewController") as! AddEventViewController
+        }
+    }
+
+    struct Onboarding: Storyboard {
+
+        static let identifier = "Onboarding"
+
+        static var storyboard: UIStoryboard {
+            return UIStoryboard(name: self.identifier, bundle: nil)
+        }
+
+        static func instantiateInitialViewController() -> PhoneNumberNavigationController {
+            return self.storyboard.instantiateInitialViewController() as! PhoneNumberNavigationController
+        }
+
+        static func instantiateViewControllerWithIdentifier(identifier: String) -> UIViewController {
+            return self.storyboard.instantiateViewControllerWithIdentifier(identifier)
+        }
+
+        static func instantiateViewController<T: UIViewController where T: IdentifiableProtocol>(type: T.Type) -> T? {
+            return self.storyboard.instantiateViewController(type)
+        }
+
+        static func instantiatePhoneVerificationController() -> PhoneVerificationViewController {
+            return self.storyboard.instantiateViewControllerWithIdentifier("PhoneVerificationController") as! PhoneVerificationViewController
         }
     }
 }
@@ -419,7 +448,7 @@ extension SidebarViewController {
 
     enum Segue: String, CustomStringConvertible, SegueProtocol {
         case DrawerSegue = "DrawerSegue"
-        case ShowBrowse = "ShowBrowse"
+        case ShowGridBrowse = "ShowGridBrowse"
         case ShowMessagesList = "ShowMessagesList"
         case ShowFilters = "ShowFilters"
         case ShowCommunities = "ShowCommunities"
@@ -428,12 +457,13 @@ extension SidebarViewController {
         case ShowPeople = "ShowPeople"
         case ShowWallet = "ShowWallet"
         case ShowSplash = "ShowSplash"
+        case ShowBrowse = "ShowBrowse"
 
         var kind: SegueKind? {
             switch (self) {
             case DrawerSegue:
                 return SegueKind(rawValue: "custom")
-            case ShowBrowse:
+            case ShowGridBrowse:
                 return SegueKind(rawValue: "custom")
             case ShowMessagesList:
                 return SegueKind(rawValue: "custom")
@@ -451,6 +481,8 @@ extension SidebarViewController {
                 return SegueKind(rawValue: "custom")
             case ShowSplash:
                 return SegueKind(rawValue: "custom")
+            case ShowBrowse:
+                return SegueKind(rawValue: "custom")
             }
         }
 
@@ -458,7 +490,7 @@ extension SidebarViewController {
             switch (self) {
             case DrawerSegue:
                 return MainMenuViewController.self
-            case ShowBrowse:
+            case ShowGridBrowse:
                 return UINavigationController.self
             case ShowMessagesList:
                 return UINavigationController.self
@@ -476,6 +508,8 @@ extension SidebarViewController {
                 return UINavigationController.self
             case ShowSplash:
                 return UIViewController.self
+            case ShowBrowse:
+                return UINavigationController.self
             }
         }
 
@@ -514,6 +548,13 @@ extension SearchViewController: IdentifiableProtocol {
 extension BrowseMapViewController: IdentifiableProtocol { 
     var identifier: String? { return "BrowseMapViewController" }
     static var identifier: String? { return "BrowseMapViewController" }
+}
+
+
+//MARK: - BrowseGridViewController
+extension BrowseGridViewController: IdentifiableProtocol { 
+    var identifier: String? { return "BrowseGridViewController" }
+    static var identifier: String? { return "BrowseGridViewController" }
 }
 
 
@@ -730,6 +771,8 @@ extension PostViewController {
     }
 
 }
+
+//MARK: - BrowseMainGridController
 
 //MARK: - BrowseViewController
 extension UIStoryboardSegue {
@@ -1326,3 +1369,82 @@ extension AddEventViewController {
     }
 
 }
+
+//MARK: - PhoneNumberNavigationController
+
+//MARK: - PhoneNumberViewController
+extension UIStoryboardSegue {
+    func selection() -> PhoneNumberViewController.Segue? {
+        if let identifier = self.identifier {
+            return PhoneNumberViewController.Segue(rawValue: identifier)
+        }
+        return nil
+    }
+}
+
+extension PhoneNumberViewController { 
+
+    enum Segue: String, CustomStringConvertible, SegueProtocol {
+        case PhoneNumberSegueId = "PhoneNumberSegueId"
+
+        var kind: SegueKind? {
+            switch (self) {
+            case PhoneNumberSegueId:
+                return SegueKind(rawValue: "show")
+            }
+        }
+
+        var destination: UIViewController.Type? {
+            switch (self) {
+            case PhoneNumberSegueId:
+                return PhoneVerificationViewController.self
+            }
+        }
+
+        var identifier: String? { return self.description } 
+        var description: String { return self.rawValue }
+    }
+
+}
+
+//MARK: - PhoneVerificationViewController
+extension UIStoryboardSegue {
+    func selection() -> PhoneVerificationViewController.Segue? {
+        if let identifier = self.identifier {
+            return PhoneVerificationViewController.Segue(rawValue: identifier)
+        }
+        return nil
+    }
+}
+
+extension PhoneVerificationViewController: IdentifiableProtocol { 
+    var identifier: String? { return "PhoneVerificationController" }
+    static var identifier: String? { return "PhoneVerificationController" }
+}
+
+extension PhoneVerificationViewController { 
+
+    enum Segue: String, CustomStringConvertible, SegueProtocol {
+        case ProfileSegueId = "ProfileSegueId"
+
+        var kind: SegueKind? {
+            switch (self) {
+            case ProfileSegueId:
+                return SegueKind(rawValue: "show")
+            }
+        }
+
+        var destination: UIViewController.Type? {
+            switch (self) {
+            case ProfileSegueId:
+                return EditProfileViewController.self
+            }
+        }
+
+        var identifier: String? { return self.description } 
+        var description: String { return self.rawValue }
+    }
+
+}
+
+//MARK: - EditProfileViewController
