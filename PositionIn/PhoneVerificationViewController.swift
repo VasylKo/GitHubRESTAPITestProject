@@ -40,7 +40,7 @@ class PhoneVerificationViewController: XLFormViewController {
         form.addFormSection(phoneNumberSection)
         
         let codeRow: XLFormRowDescriptor = XLFormRowDescriptor(tag: Tags.ValidationCode.rawValue,
-            rowType: XLFormRowDescriptorTypeDecimal)
+            rowType: XLFormRowDescriptorTypePhone)
         codeRow.cellConfigAtConfigure["textField.placeholder"] = "Enter you validation code"
         codeRow.required = true
         codeRow.addValidator(XLFormRegexValidator(msg: NSLocalizedString("Incorrect validation code",

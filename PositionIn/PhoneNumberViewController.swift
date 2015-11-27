@@ -91,7 +91,7 @@ class PhoneNumberViewController: XLFormViewController {
         form.addFormSection(phoneNumberSection)
         
         let phoneRow: XLFormRowDescriptor = XLFormRowDescriptor(tag: Tags.Phone.rawValue,
-            rowType: XLFormRowDescriptorTypeDecimal)
+            rowType: XLFormRowDescriptorTypePhone)
         phoneRow.cellConfigAtConfigure["textField.placeholder"] = "Enter you phone number"
         phoneRow.required = true
         phoneRow.addValidator(XLFormRegexValidator(msg: NSLocalizedString("Please specify a valid phone number",

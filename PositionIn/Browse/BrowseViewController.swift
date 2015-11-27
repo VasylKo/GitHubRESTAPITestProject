@@ -14,10 +14,6 @@ protocol UpdateFilterProtocol {
 }
 
 final class BrowseViewController: BrowseModeTabbarViewController {
-    
-    @IBAction func prepareForUnwind(segue: UIStoryboardSegue) {
-        
-    }
         
     override func presentSearchViewController(filter: SearchFilter) {  
         childFilterUpdate = nil

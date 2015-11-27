@@ -304,6 +304,12 @@ protocol BrowseActionConsumer: class {
         applyDisplayMode(displayMode)
     }
     
+    func searchViewControllerHomeItemSelected(homeItem: HomeItem, locationString: String?) {
+        self.searchbar.attributedText = self.searchBarAttributedText(nil,
+            searchString: homeItem.displayString(),
+            locationString: locationString)
+    }
+    
     func searchViewControllerSectionSelected(model: SearchSectionCellModel?, searchString: String?, locationString: String?) {
         if let model = model {
             self.searchbar.attributedText = self.searchBarAttributedText(model.title, searchString: searchString, locationString: locationString)

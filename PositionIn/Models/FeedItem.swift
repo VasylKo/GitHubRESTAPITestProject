@@ -104,4 +104,8 @@ struct FeedItem: CRUDObject {
     static func forYouEndpoint() -> String {
         return "/v1.0/recommended"
     }
+    
+    static func getAllEndpoint() -> String {
+        return "/v1.0/getAllByType"
+    }
 }

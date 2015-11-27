@@ -26,8 +26,8 @@ final class BrowseListViewController: UIViewController, BrowseActionProducer, Br
             }
         }
     }
-    
-    var hideSeparatorLinesNearSegmentedControl: Bool = false
+    //hide separator lines
+    var hideSeparatorLinesNearSegmentedControl: Bool = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,11 +72,11 @@ final class BrowseListViewController: UIViewController, BrowseActionProducer, Br
             if (canAffectFilter) {
                 f.itemTypes = [selectedItemType]
             }
-            else if (filter.itemTypes!.filter { $0 == FeedItem.ItemType.Unknown }.count == 0)
-                || selectedItemType != FeedItem.ItemType.Unknown {
-                self.dataSource.setItems([])
-                self.tableView.reloadData()
-            }
+//            else if (filter.itemTypes!.filter { $0 == FeedItem.ItemType.Unknown }.count == 0)
+//                || selectedItemType != FeedItem.ItemType.Unknown {
+//                self.dataSource.setItems([])
+//                self.tableView.reloadData()
+//            }
             filter = f
         }
     }
@@ -90,20 +90,27 @@ final class BrowseListViewController: UIViewController, BrowseActionProducer, Br
         Log.debug?.value(self)
         dataRequestToken.invalidate()
         dataRequestToken = InvalidationToken()
-        let request: Future<CollectionResponse<FeedItem>,NSError>
-        switch browseMode {
-        case .ForYou:
-            request = api().forYou(searchFilter, page: page)
-        case .New:
-            request = api().getFeed(searchFilter, page: page)
+        
+        var homeItem = HomeItem.Unknown
+        if let tempHomeItem = searchFilter.homeItemType {
+            homeItem = tempHomeItem
         }
+        let request: Future<CollectionResponse<FeedItem>,NSError> = api().getAll(homeItem)
+        
+//        switch browseMode {
+//        case .ForYou:
+//            request = api().forYou(searchFilter, page: page)
+//        case .New:
+//            request = api().getFeed(searchFilter, page: page)
+//        }
         request.onSuccess(dataRequestToken.validContext) {
             [weak self] response in
             Log.debug?.value(response.items)
-            guard let strongSelf = self,
-                let itemTypes = searchFilter.itemTypes
-                //TODO: need discuss this moment
-                where itemTypes.contains(strongSelf.selectedItemType) || strongSelf.selectedItemType == .Unknown  else {
+            guard let strongSelf = self
+//                let itemTypes = searchFilter.itemTypes{
+//                //TODO: need discuss this moment
+//                where itemTypes.contains(strongSelf.selectedItemType) || strongSelf.selectedItemType == .Unknown 
+                else {
                     return
             }
 

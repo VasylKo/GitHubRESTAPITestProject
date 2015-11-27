@@ -14,7 +14,7 @@ protocol BrowseModeDisplay {
     var browseMode: BrowseModeTabbarViewController.BrowseMode { get set }
 }
 
-@objc class BrowseModeTabbarViewController: DisplayModeViewController, AddMenuViewDelegate, BrowseTabbarDelegate {
+@objc class BrowseModeTabbarViewController: DisplayModeViewController, AddMenuViewDelegate, BrowseTabbarDelegate, BrowseGridViewControllerDelegate {
     
     var addMenuItems: [AddMenuView.MenuItem] {
         let pushAndSubscribe: (UIViewController) -> () = { [weak self] controller in
@@ -34,14 +34,14 @@ protocol BrowseModeDisplay {
             //                api().isUserAuthorized().onSuccess {  _ in
             //                    pushAndSubscribe(Storyboards.NewItems.instantiateAddProductViewController())
             //                }},
-            AddMenuView.MenuItem.postItemWithAction {
-                api().isUserAuthorized().onSuccess {  _ in
-                    pushAndSubscribe(Storyboards.NewItems.instantiateAddPostViewController())
-                }},
             AddMenuView.MenuItem.inviteItemWithAction {
                 api().isUserAuthorized().onSuccess {  _ in
                     Log.error?.message("Should call invite")
                 }},
+            AddMenuView.MenuItem.postItemWithAction {
+                api().isUserAuthorized().onSuccess {  _ in
+                    pushAndSubscribe(Storyboards.NewItems.instantiateAddPostViewController())
+                }}
         ]
     }
     
@@ -49,7 +49,10 @@ protocol BrowseModeDisplay {
         switch self.browseMode {
         case .ForYou:
             self.navigationItem.rightBarButtonItems = nil
-            return Storyboards.Main.instantiateBrowseGridViewController()
+            let browseGridController = Storyboards.Main.instantiateBrowseGridViewController()
+            browseGridController.browseGridDelegate = self
+            self.searchbar.attributedText = nil
+            return browseGridController
         case .New:
             super.setRightBarItems()
             switch self.displayMode {
@@ -206,6 +209,31 @@ protocol BrowseModeDisplay {
     func addMenuView(addMenuView: AddMenuView, didExpand expanded: Bool) {
         if !expanded {
             blurDisplayed = expanded
+        }
+    }
+ 
+//MARK: - BrowseGridViewControllerDelegate
+    
+    func browseGridViewControllerSelectItem(itemType: HomeItem) {
+        switch itemType {
+        case .Emergency:
+            fallthrough
+        case .Training:
+            fallthrough
+        case .Projects:
+            self.tabbar.selectedMode = .New
+            self.displayMode = .List
+            
+            childFilterUpdate = { (filter: SearchFilter) -> SearchFilter in
+                var f = filter
+                f.homeItemType = itemType
+                return f
+            }
+  
+            self.searchViewControllerHomeItemSelected(itemType, locationString: nil)
+            self.tabbarDidChangeMode(self.tabbar)
+        default:
+            break
         }
     }
     
