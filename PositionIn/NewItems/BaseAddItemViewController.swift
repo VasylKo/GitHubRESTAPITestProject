@@ -21,6 +21,7 @@ import ImagePickerSheetController
 import MobileCoreServices
 import Photos
 
+import Box
 
 class BaseAddItemViewController: XLFormViewController {
     
@@ -29,10 +30,6 @@ class BaseAddItemViewController: XLFormViewController {
     var preselectedCommunity: CRUDObjectId?
     
     var maximumSelectedImages: Int = 1
-    
-    var defaultLocation: CLLocation {
-        return CLLocation(latitude: 39.1746, longitude: -107.4470)
-    }
     
     var defaultStartDate: NSDate = {
        return NSDate(timeIntervalSinceNow: -60*60*24)
@@ -53,10 +50,15 @@ class BaseAddItemViewController: XLFormViewController {
     func locationRowDescriptor(tag: String, withCurrentCoordinate: Bool = true) -> XLFormRowDescriptor {
         let locationRow = XLFormRowDescriptor(tag: tag, rowType: XLFormRowDescriptorTypeSelectorPush, title: NSLocalizedString("Location", comment: "New item: location"))
         locationRow.action.formSegueClass = NSClassFromString("UIStoryboardPushSegue")
-
+        
         locationRow.action.viewControllerClass = LocationSelectorViewController.self
         locationRow.valueTransformer = CLLocationValueTrasformer.self
-        locationRow.value = defaultLocation
+        
+        locationController().getCurrentLocation().onSuccess(callback:{[weak self] location in
+            locationRow.value = Box(location)
+            self?.reloadFormRow(locationRow)
+            })
+        
         if withCurrentCoordinate {
             locationController().getCurrentCoordinate().onSuccess { [weak locationRow] coordinate in
                 locationRow?.value = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)

@@ -54,20 +54,19 @@ struct APIService {
     
     //MARK: - Profile -
     
-    func changePassword(email: String?, oldPassword: String?, newPassword: String?) -> Future<Void, NSError> {
+    func changePassword(oldPassword: String?, newPassword: String?) -> Future<Void, NSError> {
         typealias CRUDResultType = (Alamofire.Request, Future<Void, NSError>)
         let endpoint = UserProfile.changePasswordEndpoint()
         var params: [String: String]? = nil
-        if let email = email,
-            let oldPassword = oldPassword,
+        if let oldPassword = oldPassword,
             let newPassword = newPassword {
-                params = ["email" : email, "oldPassword" : oldPassword, "newPassword" : newPassword]
+                params = ["oldPassword" : oldPassword, "newPassword" : newPassword]
         }
         return session().flatMap {
             (token: AuthResponse.Token) -> Future<Void, NSError> in
             let request = self.updateRequest(token, endpoint: endpoint, method: .POST,
                 params: params)
-            let (_, future): CRUDResultType = self.dataProvider.jsonRequest(request, map: self.emptyResponseMapping(), validation: self.statusCodeValidation(statusCode: [200]))
+            let (_, future): CRUDResultType = self.dataProvider.jsonRequest(request, map: self.commandMapping(), validation: self.statusCodeValidation(statusCode: [200]))
             return self.handleFailure(future)
         }
     }
@@ -183,7 +182,7 @@ struct APIService {
     //MARK: - Products -
     
     func getUserProducts(userId: CRUDObjectId, page: Page) -> Future<CollectionResponse<Product>, NSError> {
-       return self.getUserProfile(userId).flatMap { profile -> Future<CollectionResponse<Product>, NSError> in
+        return self.getUserProfile(userId).flatMap { profile -> Future<CollectionResponse<Product>, NSError> in
             let endpoint = Product.shopItemsEndpoint(profile.defaultShopId)
             let params = page.query
             return self.getObjectsCollection(endpoint, params: params)
@@ -196,10 +195,9 @@ struct APIService {
         return self.createObject(endpoint, object: object)
     }
     
-    
     func getProduct(objectId: CRUDObjectId, inShop shop: CRUDObjectId) -> Future<Product, NSError> {
-            let endpoint = Product.shopItemsEndpoint(shop, productId: objectId)
-            return self.getObject(endpoint)
+        let endpoint = Product.shopItemsEndpoint(shop, productId: objectId)
+        return self.getObject(endpoint)
     }
     
     //MARK: - Community -
@@ -310,25 +308,39 @@ struct APIService {
         }
     }
     
-    func getFeed(query: APIServiceQueryConvertible, page: Page) -> Future<CollectionResponse<FeedItem>,NSError> {
-        let endpoint = FeedItem.endpoint()
-        let params = APIServiceQuery()
-        params.append(query: query)
-        params.append(query: page)
-        Log.debug?.value(params.query)
-        return session().flatMap {
-            (token: AuthResponse.Token) -> Future<CollectionResponse<FeedItem>, NSError> in
-            let request = self.updateRequest(token, endpoint: endpoint, params: params.query)
-            let (_ , future): (Alamofire.Request, Future<CollectionResponse<FeedItem>, NSError>) = self.dataProvider.objectRequest(request)
-            return self.handleFailure(future)
-        }
-    }
+//    func getFeed(query: APIServiceQueryConvertible, page: Page) -> Future<CollectionResponse<FeedItem>,NSError> {
+//        let endpoint = FeedItem.endpoint()
+//        let params = APIServiceQuery()
+//        params.append(query: query)
+//        params.append(query: page)
+//        Log.debug?.value(params.query)
+//        return session().flatMap {
+//            (token: AuthResponse.Token) -> Future<CollectionResponse<FeedItem>, NSError> in
+//            let request = self.updateRequest(token, endpoint: endpoint, params: params.query)
+//            let (_ , future): (Alamofire.Request, Future<CollectionResponse<FeedItem>, NSError>) = self.dataProvider.objectRequest(request)
+//            return self.handleFailure(future)
+//        }
+//    }
+//    
+//    func forYou(query: APIServiceQueryConvertible, page: Page) -> Future<CollectionResponse<FeedItem>,NSError> {
+//        let endpoint = FeedItem.forYouEndpoint()
+//        let params = APIServiceQuery()
+//        params.append(query: query)
+//        params.append(query: page)
+//        Log.debug?.value(params.query)
+//        return session().flatMap {
+//            (token: AuthResponse.Token) -> Future<CollectionResponse<FeedItem>, NSError> in
+//            let request = self.updateRequest(token, endpoint: endpoint, params: params.query)
+//            let (_ , future): (Alamofire.Request, Future<CollectionResponse<FeedItem>, NSError>) = self.dataProvider.objectRequest(request)
+//            return self.handleFailure(future)
+//        }
+//    }
     
-    func forYou(query: APIServiceQueryConvertible, page: Page) -> Future<CollectionResponse<FeedItem>,NSError> {
-        let endpoint = FeedItem.forYouEndpoint()
+    func getAll(homeItem: HomeItem) -> Future<CollectionResponse<FeedItem>,NSError> {
+        
+        let endpoint = FeedItem.getAllEndpoint()
         let params = APIServiceQuery()
-        params.append(query: query)
-        params.append(query: page)
+        params.append("type", value: homeItem.valueForRequest())
         Log.debug?.value(params.query)
         return session().flatMap {
             (token: AuthResponse.Token) -> Future<CollectionResponse<FeedItem>, NSError> in
@@ -421,7 +433,7 @@ struct APIService {
         }
     }
     
-    private func commandMapping() -> (AnyObject? -> Void?) {
+    func commandMapping() -> (AnyObject? -> Void?) {
         return  { response in
             if let json = response as? NSDictionary {
                 if let success = json["success"] as? Bool where success == true{
@@ -441,6 +453,25 @@ struct APIService {
                 Log.error?.message("Got unexpected response: \(response)")
                 return nil
             }
+        }
+    }
+    
+    func phoneCodeValidation() -> (AnyObject? -> Bool?) {
+        return { response in
+            if let json = response as? NSDictionary {
+                if let isExistingUser = json["isExistingUser"] as? Bool{
+                    return isExistingUser
+                } else {
+                    Log.error?.message("Got unexpected response")
+                    Log.debug?.value(json)
+                    return nil
+                }
+            }
+            else {
+                Log.error?.message("Got unexpected response: \(response)")
+                return nil
+            }
+            
         }
     }
     

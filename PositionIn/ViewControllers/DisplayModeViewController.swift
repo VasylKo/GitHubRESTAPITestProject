@@ -100,13 +100,18 @@ protocol BrowseActionConsumer: class {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.titleView = searchbar
+
+        self.setRightBarItems()
+        
+        applyDisplayMode(displayMode)
+    }
+    
+    func setRightBarItems() {
         let segmentButton = UIBarButtonItem(customView: displayModeSegmentedControl)
         let spacer = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FixedSpace, target: nil,
             action: nil)
         spacer.width = -15;
         self.navigationItem.rightBarButtonItems = [spacer, segmentButton]
-        
-        applyDisplayMode(displayMode)
     }
     
     private(set) internal weak var contentView: UIView!
@@ -297,6 +302,12 @@ protocol BrowseActionConsumer: class {
             return f
         }
         applyDisplayMode(displayMode)
+    }
+    
+    func searchViewControllerHomeItemSelected(homeItem: HomeItem, locationString: String?) {
+        self.searchbar.attributedText = self.searchBarAttributedText(nil,
+            searchString: homeItem.displayString(),
+            locationString: locationString)
     }
     
     func searchViewControllerSectionSelected(model: SearchSectionCellModel?, searchString: String?, locationString: String?) {

@@ -54,11 +54,11 @@ class ChangePasswordViewController: UIViewController, UITextFieldDelegate {
                     return
                 }
                 
-                api().changePassword(SessionController().userName,
-                    oldPassword: self.oldPasswordTextField.text,
-                newPassword: self.newPasswordTextField.text).onSuccess(callback: {[weak self] _ in
-                    self?.navigationController?.popToRootViewControllerAnimated(true)
-                })
+                api().changePassword(self.oldPasswordTextField.text,
+                    newPassword: self.newPasswordTextField.text).onSuccess(callback: {[weak self] _ in
+                        self?.navigationController?.popToRootViewControllerAnimated(true)
+                        }
+                )
         }
         else {
             showWarning(NSLocalizedString("Please, fill all fields", comment: "Change Password"))

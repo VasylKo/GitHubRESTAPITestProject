@@ -22,42 +22,7 @@ final class CommunityViewController: BrowseModeTabbarViewController {
         
     }
     
-    override var addMenuItems: [AddMenuView.MenuItem] {
-        let pushAndSubscribe: (BaseAddItemViewController) -> () = { [weak self] controller in
-            controller.preselectedCommunity = self?.objectId
-            self?.navigationController?.pushViewController(controller, animated: true)
-            self?.subscribeForContentUpdates(controller)
-        }
-        return [
-            AddMenuView.MenuItem.productItemWithAction { pushAndSubscribe(Storyboards.NewItems.instantiateAddProductViewController()) },
-            AddMenuView.MenuItem.eventItemWithAction { pushAndSubscribe(Storyboards.NewItems.instantiateAddEventViewController()) },
-            AddMenuView.MenuItem.promotionItemWithAction { pushAndSubscribe(Storyboards.NewItems.instantiateAddPromotionViewController()) },
-            AddMenuView.MenuItem.postItemWithAction { pushAndSubscribe(Storyboards.NewItems.instantiateAddPostViewController()) },
-            AddMenuView.MenuItem.inviteItemWithAction {
-                Log.error?.message("Should call invite")
-            },
-        ]
-    }
-    
-    override func viewControllerForMode(mode: DisplayModeViewController.DisplayMode) -> UIViewController {
-        switch self.displayMode {
-        case .Map:
-            let controller = Storyboards.Main.instantiateBrowseMapViewController()
-            var filter = controller.filter
-            controller.delegate = self
-            filter.communities = [ objectId ]
-            controller.filter = filter
-            return controller
-        case .List:
-            let community = Community(objectId: objectId)
-            let controller = Storyboards.Main.instantiateCommunityFeedViewController()
-            controller.community = community
-            return controller
-        }
-    }
-    
-    override func presentSearchViewController(filter: SearchFilter) {
-        
+    override func presentSearchViewController(filter: SearchFilter) { 
         childFilterUpdate = { (filter: SearchFilter) -> SearchFilter in
             var f = filter
             f =  SearchFilter.currentFilter
