@@ -17,13 +17,7 @@ class PhoneNumberViewController: XLFormViewController {
     }
     
     private enum Countries : Int {
-        case Kenya = 0
-        case USA = 1
-        case UK = 2
-        case Swizerland = 3
-        case France = 4
-        case Israel = 5
-        case Russia = 6
+        case Kenya = 0, USA, UK, Swizerland, France, Israel, Russia
         
         static let allValues = [Kenya, USA, UK, Swizerland, France, Israel, Russia]
     }

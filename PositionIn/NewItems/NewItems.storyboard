@@ -80,12 +80,12 @@
                     <navigationItem key="navigationItem" title="New Post" id="SqS-4X-I9N">
                         <barButtonItem key="leftBarButtonItem" title="Cancel" id="mtS-TP-bWL">
                             <connections>
-                                <segue destination="Ale-x3-v8m" kind="unwind" identifier="Close" unwindAction="prepareForUnwind:" id="qfC-li-TYq"/>
+                                <action selector="cancelButtonTouched:" destination="qOY-DZ-FOE" id="gbx-tq-lFg"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Post" id="F0j-WI-8AA">
                             <connections>
-                                <action selector="didTapPost:" destination="qOY-DZ-FOE" id="ZwC-sF-hAv"/>
+                                <action selector="didTapPost:" destination="qOY-DZ-FOE" id="7uz-Sb-6Aq"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -95,7 +95,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dPW-uz-YpO" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="Ale-x3-v8m" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="119" y="371"/>
         </scene>
