@@ -23,7 +23,8 @@ protocol BrowseModeDisplay {
         }
         return [
             AddMenuView.MenuItem.promotionItemWithAction {
-                api().isUserAuthorized().onSuccess {  _ in pushAndSubscribe(Storyboards.NewItems.instantiateAddPromotionViewController())
+                api().isUserAuthorized().onSuccess {  _ in
+                    pushAndSubscribe(Storyboards.Onboarding.instantiateCallAmbulanceViewController())
                 }},
             // changes for 3 button UI(ambulance, post, donate)
             //            AddMenuView.MenuItem.eventItemWithAction {
@@ -34,9 +35,11 @@ protocol BrowseModeDisplay {
             //                api().isUserAuthorized().onSuccess {  _ in
             //                    pushAndSubscribe(Storyboards.NewItems.instantiateAddProductViewController())
             //                }},
+            
+            
             AddMenuView.MenuItem.inviteItemWithAction {
                 api().isUserAuthorized().onSuccess {  _ in
-                    Log.error?.message("Should call invite")
+                    pushAndSubscribe(Storyboards.NewItems.instantiateAddEventViewController())
                 }},
             AddMenuView.MenuItem.postItemWithAction {
                 api().isUserAuthorized().onSuccess {  _ in
@@ -232,7 +235,7 @@ protocol BrowseModeDisplay {
             self.searchViewControllerHomeItemSelected(itemType, locationString: nil)
             self.tabbarDidChangeMode(self.tabbar)
         case .Ambulance:
-            self.presentViewController(Storyboards.Onboarding.instantiatePhoneNumberNavigationController(), animated: true, completion: nil)
+            self.navigationController?.pushViewController(Storyboards.Onboarding.instantiateCallAmbulanceViewController(), animated: true)
         default:
             break
         }

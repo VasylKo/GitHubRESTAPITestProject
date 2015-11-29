@@ -116,6 +116,6 @@ class CallAmbulanceViewController: BaseAddItemViewController {
     }
 
     @IBAction func cancelButtonTouched(sender: AnyObject) {
-        self.navigationController?.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
+        self.navigationController?.popToRootViewControllerAnimated(true)
     }
 }

@@ -16,9 +16,9 @@ class AmbulanceBaseController: UIViewController {
     }
     
     @IBAction func closeButtonTapped(sender: AnyObject) {
-        self.navigationController?.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
+        self.navigationController?.popToRootViewControllerAnimated(true)
     }
     @IBAction func cancelRequestButtonTapped(sender: AnyObject) {
-        self.navigationController?.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
+        self.navigationController?.popToRootViewControllerAnimated(true)
     }
 }
