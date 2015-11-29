@@ -68,7 +68,7 @@ final class AddPostViewController: BaseAddItemViewController {
 
     }
     
-    @IBAction func cancelButtonTouched(sender: AnyObject) {
+    @IBAction func cancelButtonTouched() {
         self.navigationController?.popToRootViewControllerAnimated(true)
     }
 
@@ -111,7 +111,7 @@ final class AddPostViewController: BaseAddItemViewController {
                     Log.debug?.value(post)
                     self?.sendUpdateNotification()
 //                    self?.performSegue(AddPostViewController.Segue.Close)
-                    self?.cancelButtonTouched(nil)
+                    self?.cancelButtonTouched()
                 }.onFailure { error in
                     showError(error.localizedDescription)
                 }.onComplete { [weak self] result in

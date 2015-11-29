@@ -80,7 +80,7 @@
                     <navigationItem key="navigationItem" title="New Post" id="SqS-4X-I9N">
                         <barButtonItem key="leftBarButtonItem" title="Cancel" id="mtS-TP-bWL">
                             <connections>
-                                <action selector="cancelButtonTouched:" destination="qOY-DZ-FOE" id="gbx-tq-lFg"/>
+                                <action selector="cancelButtonTouched" destination="qOY-DZ-FOE" id="DXp-yN-RnU"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Post" id="F0j-WI-8AA">
