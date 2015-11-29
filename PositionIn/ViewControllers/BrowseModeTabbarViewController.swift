@@ -229,9 +229,10 @@ protocol BrowseModeDisplay {
                 f.homeItemType = itemType
                 return f
             }
-  
             self.searchViewControllerHomeItemSelected(itemType, locationString: nil)
             self.tabbarDidChangeMode(self.tabbar)
+        case .Ambulance:
+            self.presentViewController(Storyboards.Onboarding.instantiatePhoneNumberNavigationController(), animated: true, completion: nil)
         default:
             break
         }

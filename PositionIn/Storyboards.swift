@@ -255,8 +255,8 @@ struct Storyboards {
             return UIStoryboard(name: self.identifier, bundle: nil)
         }
 
-        static func instantiateInitialViewController() -> PhoneNumberNavigationController {
-            return self.storyboard.instantiateInitialViewController() as! PhoneNumberNavigationController
+        static func instantiateInitialViewController() -> OnboardingNavigationController {
+            return self.storyboard.instantiateInitialViewController() as! OnboardingNavigationController
         }
 
         static func instantiateViewControllerWithIdentifier(identifier: String) -> UIViewController {
@@ -269,6 +269,14 @@ struct Storyboards {
 
         static func instantiatePhoneVerificationController() -> PhoneVerificationViewController {
             return self.storyboard.instantiateViewControllerWithIdentifier("PhoneVerificationController") as! PhoneVerificationViewController
+        }
+
+        static func instantiatePhoneNumberNavigationController() -> OnboardingNavigationController {
+            return self.storyboard.instantiateViewControllerWithIdentifier("PhoneNumberNavigationController") as! OnboardingNavigationController
+        }
+
+        static func instantiateCallAmbulanceViewController() -> CallAmbulanceViewController {
+            return self.storyboard.instantiateViewControllerWithIdentifier("CallAmbulanceViewController") as! CallAmbulanceViewController
         }
     }
 }
@@ -1370,7 +1378,7 @@ extension AddEventViewController {
 
 }
 
-//MARK: - PhoneNumberNavigationController
+//MARK: - OnboardingNavigationController
 
 //MARK: - PhoneNumberViewController
 extension UIStoryboardSegue {
@@ -1448,3 +1456,87 @@ extension PhoneVerificationViewController {
 }
 
 //MARK: - EditProfileViewController
+
+//MARK: - OnboardingNavigationController
+extension OnboardingNavigationController: IdentifiableProtocol { 
+    var identifier: String? { return "PhoneNumberNavigationController" }
+    static var identifier: String? { return "PhoneNumberNavigationController" }
+}
+
+
+//MARK: - CallAmbulanceViewController
+extension UIStoryboardSegue {
+    func selection() -> CallAmbulanceViewController.Segue? {
+        if let identifier = self.identifier {
+            return CallAmbulanceViewController.Segue(rawValue: identifier)
+        }
+        return nil
+    }
+}
+
+extension CallAmbulanceViewController: IdentifiableProtocol { 
+    var identifier: String? { return "CallAmbulanceViewController" }
+    static var identifier: String? { return "CallAmbulanceViewController" }
+}
+
+extension CallAmbulanceViewController { 
+
+    enum Segue: String, CustomStringConvertible, SegueProtocol {
+        case AmbulanceRequestedSegueId = "AmbulanceRequestedSegueId"
+
+        var kind: SegueKind? {
+            switch (self) {
+            case AmbulanceRequestedSegueId:
+                return SegueKind(rawValue: "show")
+            }
+        }
+
+        var destination: UIViewController.Type? {
+            switch (self) {
+            case AmbulanceRequestedSegueId:
+                return AmbulanceRequestedViewController.self
+            }
+        }
+
+        var identifier: String? { return self.description } 
+        var description: String { return self.rawValue }
+    }
+
+}
+
+//MARK: - AmbulanceSentViewController
+
+//MARK: - AmbulanceRequestedViewController
+extension UIStoryboardSegue {
+    func selection() -> AmbulanceRequestedViewController.Segue? {
+        if let identifier = self.identifier {
+            return AmbulanceRequestedViewController.Segue(rawValue: identifier)
+        }
+        return nil
+    }
+}
+
+extension AmbulanceRequestedViewController { 
+
+    enum Segue: String, CustomStringConvertible, SegueProtocol {
+        case AmbulanceSentSegueId = "AmbulanceSentSegueId"
+
+        var kind: SegueKind? {
+            switch (self) {
+            case AmbulanceSentSegueId:
+                return SegueKind(rawValue: "show")
+            }
+        }
+
+        var destination: UIViewController.Type? {
+            switch (self) {
+            case AmbulanceSentSegueId:
+                return AmbulanceSentViewController.self
+            }
+        }
+
+        var identifier: String? { return self.description } 
+        var description: String { return self.rawValue }
+    }
+
+}
