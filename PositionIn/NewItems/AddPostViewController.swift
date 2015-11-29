@@ -111,7 +111,7 @@ final class AddPostViewController: BaseAddItemViewController {
                     Log.debug?.value(post)
                     self?.sendUpdateNotification()
 //                    self?.performSegue(AddPostViewController.Segue.Close)
-                    self.cancelButtonTouched(nil)
+                    self?.cancelButtonTouched(nil)
                 }.onFailure { error in
                     showError(error.localizedDescription)
                 }.onComplete { [weak self] result in
