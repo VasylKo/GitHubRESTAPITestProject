@@ -39,7 +39,7 @@ protocol BrowseModeDisplay {
             
             AddMenuView.MenuItem.inviteItemWithAction {
                 api().isUserAuthorized().onSuccess {  _ in
-                    pushAndSubscribe(Storyboards.NewItems.instantiateAddEventViewController())
+//                    pushAndSubscribe(Storyboards.NewItems.instantiateAddEventViewController())
                 }},
             AddMenuView.MenuItem.postItemWithAction {
                 api().isUserAuthorized().onSuccess {  _ in

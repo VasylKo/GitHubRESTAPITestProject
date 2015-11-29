@@ -64,6 +64,15 @@ final class AddPostViewController: BaseAddItemViewController {
         self.form = form
     }
     
+    @IBAction func prepareForUnwind(segue: UIStoryboardSegue) {
+
+    }
+    
+    @IBAction func cancelButtonTouched(sender: AnyObject) {
+        self.navigationController?.popToRootViewControllerAnimated(true)
+    }
+
+    
     @IBAction override func didTapPost(sender: AnyObject) {
         if view.userInteractionEnabled == false {
             return
