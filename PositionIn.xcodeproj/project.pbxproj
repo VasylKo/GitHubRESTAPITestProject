@@ -520,7 +520,7 @@
 		D15F47481C0B77D7009ED3FD /* AmbulanceBaseController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AmbulanceBaseController.swift; sourceTree = "<group>"; };
 		D15F474A1C0B77EF009ED3FD /* AmbulanceSentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AmbulanceSentViewController.swift; sourceTree = "<group>"; };
 		D15F474C1C0B7801009ED3FD /* AmbulanceRequestedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AmbulanceRequestedViewController.swift; sourceTree = "<group>"; };
-		D15F474E1C0C87E2009ED3FD /* dev.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = dev.html; sourceTree = "<group>"; };
+		D15F474F1C0CA3AC009ED3FD /* redcross.erb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = redcross.erb; sourceTree = "<group>"; };
 		D18A1FDA1BEB95D9003F158D /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
 		D18A1FDB1BEB95D9003F158D /* PositionIn.ChangePasswordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.ChangePasswordViewController.xib; sourceTree = "<group>"; };
 		D18EA2C71C031C9800A886A5 /* OnboardingNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingNavigationController.swift; sourceTree = "<group>"; };
@@ -1459,7 +1459,7 @@
 		E64DC34D1B4E53C90011D37C /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				D15F474E1C0C87E2009ED3FD /* dev.html */,
+				D15F474F1C0CA3AC009ED3FD /* redcross.erb */,
 				D196225E1BF13075003BCD85 /* GoogleService-Info.plist */,
 				E6736ADB1B4E56DD0003580D /* Version.h */,
 				E64DC34E1B4E53C90011D37C /* Info.plist */,
