@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PhoneNumberNavigationController: UINavigationController {
+class OnboardingNavigationController: UINavigationController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

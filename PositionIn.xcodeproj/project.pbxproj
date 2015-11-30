@@ -75,9 +75,13 @@
 		D100DF0F1BF4AA7900C81054 /* NSDate+NVTimeAgo.m in Sources */ = {isa = PBXBuildFile; fileRef = D100DF0E1BF4AA7900C81054 /* NSDate+NVTimeAgo.m */; };
 		D12EDEC71BFF4F0D00FB6245 /* PhoneVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D12EDEC61BFF4F0D00FB6245 /* PhoneVerificationViewController.swift */; };
 		D15F47441C088A26009ED3FD /* HomeItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15F47431C088A26009ED3FD /* HomeItem.swift */; };
+		D15F47471C0AFDAF009ED3FD /* CallAmbulanceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15F47461C0AFDAF009ED3FD /* CallAmbulanceViewController.swift */; };
+		D15F47491C0B77D7009ED3FD /* AmbulanceBaseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15F47481C0B77D7009ED3FD /* AmbulanceBaseController.swift */; };
+		D15F474B1C0B77EF009ED3FD /* AmbulanceSentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15F474A1C0B77EF009ED3FD /* AmbulanceSentViewController.swift */; };
+		D15F474D1C0B7801009ED3FD /* AmbulanceRequestedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15F474C1C0B7801009ED3FD /* AmbulanceRequestedViewController.swift */; };
 		D18A1FDC1BEB95D9003F158D /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18A1FDA1BEB95D9003F158D /* ChangePasswordViewController.swift */; };
 		D18A1FDD1BEB95D9003F158D /* PositionIn.ChangePasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D18A1FDB1BEB95D9003F158D /* PositionIn.ChangePasswordViewController.xib */; };
-		D18EA2C81C031C9800A886A5 /* PhoneNumberNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18EA2C71C031C9800A886A5 /* PhoneNumberNavigationController.swift */; };
+		D18EA2C81C031C9800A886A5 /* OnboardingNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18EA2C71C031C9800A886A5 /* OnboardingNavigationController.swift */; };
 		D18EA2CA1C04A3CA00A886A5 /* BrowseMainGridController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18EA2C91C04A3CA00A886A5 /* BrowseMainGridController.swift */; };
 		D18EA2CE1C04B38400A886A5 /* BrowseGridViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18EA2CC1C04B38400A886A5 /* BrowseGridViewController.swift */; };
 		D18EA2CF1C04B38400A886A5 /* PositionIn.BrowseGridViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D18EA2CD1C04B38400A886A5 /* PositionIn.BrowseGridViewController.xib */; };
@@ -512,9 +516,14 @@
 		D100DF0E1BF4AA7900C81054 /* NSDate+NVTimeAgo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+NVTimeAgo.m"; sourceTree = "<group>"; };
 		D12EDEC61BFF4F0D00FB6245 /* PhoneVerificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhoneVerificationViewController.swift; sourceTree = "<group>"; };
 		D15F47431C088A26009ED3FD /* HomeItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeItem.swift; sourceTree = "<group>"; };
+		D15F47461C0AFDAF009ED3FD /* CallAmbulanceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CallAmbulanceViewController.swift; sourceTree = "<group>"; };
+		D15F47481C0B77D7009ED3FD /* AmbulanceBaseController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AmbulanceBaseController.swift; sourceTree = "<group>"; };
+		D15F474A1C0B77EF009ED3FD /* AmbulanceSentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AmbulanceSentViewController.swift; sourceTree = "<group>"; };
+		D15F474C1C0B7801009ED3FD /* AmbulanceRequestedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AmbulanceRequestedViewController.swift; sourceTree = "<group>"; };
+		D15F47511C0CB420009ED3FD /* redcross.erb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = redcross.erb; sourceTree = "<group>"; };
 		D18A1FDA1BEB95D9003F158D /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
 		D18A1FDB1BEB95D9003F158D /* PositionIn.ChangePasswordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.ChangePasswordViewController.xib; sourceTree = "<group>"; };
-		D18EA2C71C031C9800A886A5 /* PhoneNumberNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhoneNumberNavigationController.swift; sourceTree = "<group>"; };
+		D18EA2C71C031C9800A886A5 /* OnboardingNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingNavigationController.swift; sourceTree = "<group>"; };
 		D18EA2C91C04A3CA00A886A5 /* BrowseMainGridController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowseMainGridController.swift; sourceTree = "<group>"; };
 		D18EA2CC1C04B38400A886A5 /* BrowseGridViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowseGridViewController.swift; sourceTree = "<group>"; };
 		D18EA2CD1C04B38400A886A5 /* PositionIn.BrowseGridViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.BrowseGridViewController.xib; sourceTree = "<group>"; };
@@ -1153,6 +1162,17 @@
 			path = "Utils/NSDate+NVTimeAgo";
 			sourceTree = "<group>";
 		};
+		D15F47451C0AFD14009ED3FD /* CallAmbulance */ = {
+			isa = PBXGroup;
+			children = (
+				D15F47461C0AFDAF009ED3FD /* CallAmbulanceViewController.swift */,
+				D15F47481C0B77D7009ED3FD /* AmbulanceBaseController.swift */,
+				D15F474A1C0B77EF009ED3FD /* AmbulanceSentViewController.swift */,
+				D15F474C1C0B7801009ED3FD /* AmbulanceRequestedViewController.swift */,
+			);
+			path = CallAmbulance;
+			sourceTree = "<group>";
+		};
 		D18A1FD91BEB95AF003F158D /* ChangePassword */ = {
 			isa = PBXGroup;
 			children = (
@@ -1187,7 +1207,7 @@
 				D1F86CF01BFCAA96006E0C49 /* Onboarding.storyboard */,
 				D1F86CF21BFCBAD3006E0C49 /* PhoneNumberViewController.swift */,
 				D12EDEC61BFF4F0D00FB6245 /* PhoneVerificationViewController.swift */,
-				D18EA2C71C031C9800A886A5 /* PhoneNumberNavigationController.swift */,
+				D18EA2C71C031C9800A886A5 /* OnboardingNavigationController.swift */,
 			);
 			name = Onboarding;
 			sourceTree = "<group>";
@@ -1397,6 +1417,7 @@
 		E64DC34C1B4E53C90011D37C /* PositionIn */ = {
 			isa = PBXGroup;
 			children = (
+				D15F47451C0AFD14009ED3FD /* CallAmbulance */,
 				D1F86CEF1BFCAA72006E0C49 /* Onboarding */,
 				2429FFA21B8E00770061B4E0 /* Utils */,
 				E6018E4E1B849266001D22FA /* ClassExtensions */,
@@ -2652,6 +2673,7 @@
 		E6DB13D81B74C84900E4BA96 /* fastlane */ = {
 			isa = PBXGroup;
 			children = (
+				D15F47511C0CB420009ED3FD /* redcross.erb */,
 				E6DB13DA1B74C84900E4BA96 /* actions */,
 				E6DB13DB1B74C84900E4BA96 /* Appfile */,
 				E6DB13DD1B74C84900E4BA96 /* Fastfile */,
@@ -3284,6 +3306,7 @@
 				2431EBE21B95B351009FB158 /* EventDetailsViewController.swift in Sources */,
 				E661158F1B738844003DB5B3 /* BaseLoginViewController.swift in Sources */,
 				50FE7D8A1BBE77BB005676E2 /* ItemsSearchResultsController.swift in Sources */,
+				D15F474B1C0B77EF009ED3FD /* AmbulanceSentViewController.swift in Sources */,
 				E6A869F41B60FF2100797D16 /* UserProfile.swift in Sources */,
 				E6BEF1C81B9C5A0C00511B46 /* PostCellModelFactory.swift in Sources */,
 				E6C5CE1B1B83A24500265955 /* UIScheme.swift in Sources */,
@@ -3319,6 +3342,7 @@
 				D1F86CF31BFCBAD3006E0C49 /* PhoneNumberViewController.swift in Sources */,
 				D15F47441C088A26009ED3FD /* HomeItem.swift in Sources */,
 				E6F7A4701BA333D70069152A /* WalletViewController.swift in Sources */,
+				D15F474D1C0B7801009ED3FD /* AmbulanceRequestedViewController.swift in Sources */,
 				E68B52221B875F8F006B980C /* ProductListCell.swift in Sources */,
 				E68B52031B873687006B980C /* FeedItemCellModelFactory.swift in Sources */,
 				E6829B041B5E6CF800FB1E1D /* RoundButton.swift in Sources */,
@@ -3339,7 +3363,9 @@
 				240A9B9E1B9CCDB4007C77E3 /* CommunityStatsCell.swift in Sources */,
 				E661159D1B73A0CB003DB5B3 /* BrowseMapViewController.swift in Sources */,
 				E6F243701B8B17910033B13C /* DisplayModeViewController.swift in Sources */,
+				D15F47491C0B77D7009ED3FD /* AmbulanceBaseController.swift in Sources */,
 				E6F7A47D1BA356130069152A /* LocationCell.swift in Sources */,
+				D15F47471C0AFDAF009ED3FD /* CallAmbulanceViewController.swift in Sources */,
 				E68B52011B873545006B980C /* FeedTableViewCellModel.swift in Sources */,
 				E6C5F4581BCE908800E3B8C7 /* ConversationManager.swift in Sources */,
 				E66A3E1B1B9CE2D6005FA33B /* OrderViewController.swift in Sources */,
@@ -3381,7 +3407,7 @@
 				2431EBDE1B947442009FB158 /* Product.swift in Sources */,
 				D100DF0F1BF4AA7900C81054 /* NSDate+NVTimeAgo.m in Sources */,
 				E6A869EC1B60D3E300797D16 /* APIService+Auth.swift in Sources */,
-				D18EA2C81C031C9800A886A5 /* PhoneNumberNavigationController.swift in Sources */,
+				D18EA2C81C031C9800A886A5 /* OnboardingNavigationController.swift in Sources */,
 				50FE7D891BBE77BB005676E2 /* ItemsSearchResultDataSource.swift in Sources */,
 				E6199BB71B9F3B7400E3C69D /* PeopleViewController.swift in Sources */,
 				E604B16E1BF96F14004DA20B /* ChatHistory.swift in Sources */,
