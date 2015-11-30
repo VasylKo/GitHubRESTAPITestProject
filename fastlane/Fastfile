@@ -56,7 +56,7 @@ platform :ios do
         use_legacy_build_api: true,
         ) # Build app
     s3(
-       html_template_path: "redcross.erb",
+       html_template_path: "./fastlane/redcross.erb",
        html_file_name: "dev.html",
        version_file_name: "dev.version.json",
        path: 'dev/v{CFBundleShortVersionString}_b{CFBundleVersion}/'
