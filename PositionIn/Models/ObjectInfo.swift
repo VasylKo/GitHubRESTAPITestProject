@@ -55,6 +55,4 @@ class UserInfo: ObjectInfo {
         isCommunity <- map["isCommunity"]
     }
     
-    
-
 }

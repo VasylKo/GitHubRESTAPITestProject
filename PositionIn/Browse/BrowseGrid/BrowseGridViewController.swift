@@ -31,10 +31,8 @@ class BrowseGridViewController: UIViewController {
 
 extension BrowseGridViewController: UICollectionViewDelegate {
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        let homeItem = HomeItem(rawValue: indexPath.row)
-        if let homeItem = homeItem {
-            self.browseGridDelegate?.browseGridViewControllerSelectItem(homeItem)
-        }
+        let homeItem = HomeItem.homeItemForUI(indexPath.row)
+        self.browseGridDelegate?.browseGridViewControllerSelectItem(homeItem)
     }
 }
 
@@ -47,10 +45,10 @@ extension BrowseGridViewController: UICollectionViewDataSource {
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(NSStringFromClass(BrowseGridCollectionViewCell.self), forIndexPath: indexPath)
         if let cell = cell as? BrowseGridCollectionViewCell {
-            if let homeItem = HomeItem(rawValue: indexPath.row) {
-                cell.name = homeItem.displayString()
-                cell.image = homeItem.image()
-            }
+            
+            let homeItem = HomeItem.homeItemForUI(indexPath.row)
+            cell.name = homeItem.displayString()
+            cell.image = homeItem.image()
         }
         return cell
     }

@@ -19,6 +19,7 @@ struct Product: CRUDObject {
     var deliveryMethod: DeliveryMethod? = .Unknown
     var photos: [PhotoInfo]?
     var location: Location?
+    var imageURLString: String?
     
 /*
     //TODO:
@@ -62,10 +63,11 @@ struct Product: CRUDObject {
         text <- map["description"]
         category <- (map["category"], EnumTransform())
         quantity <- map["quantity"]
-        price <- map["price"]
+        price <- map["donations"]
         deliveryMethod <- (map["deliveryMethod"], EnumTransform())
         photos <- map["photos"]
         location <- map["location"]
+        imageURLString <- map["image"]
     }
     
     static func endpoint() -> String {
