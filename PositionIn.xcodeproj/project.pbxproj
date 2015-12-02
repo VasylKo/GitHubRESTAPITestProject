@@ -86,6 +86,14 @@
 		D18EA2CE1C04B38400A886A5 /* BrowseGridViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18EA2CC1C04B38400A886A5 /* BrowseGridViewController.swift */; };
 		D18EA2CF1C04B38400A886A5 /* PositionIn.BrowseGridViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D18EA2CD1C04B38400A886A5 /* PositionIn.BrowseGridViewController.xib */; };
 		D196225F1BF13075003BCD85 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D196225E1BF13075003BCD85 /* GoogleService-Info.plist */; };
+		D1B780AD1C0E287A00EF5825 /* MembershipPlansViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B780AC1C0E287A00EF5825 /* MembershipPlansViewController.swift */; };
+		D1B780AF1C0E3A7700EF5825 /* PlansViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B780AE1C0E3A7700EF5825 /* PlansViewController.swift */; };
+		D1B780BB1C0E48E200EF5825 /* MembershipPlansCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B780B91C0E48E200EF5825 /* MembershipPlansCell.swift */; };
+		D1B780BC1C0E48E200EF5825 /* PositionIn.MembershipPlansCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1B780BA1C0E48E200EF5825 /* PositionIn.MembershipPlansCell.xib */; };
+		D1B780BE1C0E4D6000EF5825 /* MembershipPlansManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B780BD1C0E4D6000EF5825 /* MembershipPlansManager.swift */; };
+		D1B780C01C0E5BF600EF5825 /* SelectMembershipPlansViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B780BF1C0E5BF600EF5825 /* SelectMembershipPlansViewController.swift */; };
+		D1B780C31C0F07B700EF5825 /* MembershipBenefitCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B780C21C0F07B700EF5825 /* MembershipBenefitCell.swift */; };
+		D1B780C51C0F07D000EF5825 /* PositionIn.MembershipBenefitCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1B780C41C0F07D000EF5825 /* PositionIn.MembershipBenefitCell.xib */; };
 		D1DA176C1C05B7BE0091A8CE /* BrowseGridCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DA176A1C05B7BE0091A8CE /* BrowseGridCollectionViewCell.swift */; };
 		D1DA176D1C05B7BE0091A8CE /* PositionIn.BrowseGridCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1DA176B1C05B7BE0091A8CE /* PositionIn.BrowseGridCollectionViewCell.xib */; };
 		D1F86CF11BFCAA96006E0C49 /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D1F86CF01BFCAA96006E0C49 /* Onboarding.storyboard */; };
@@ -528,6 +536,14 @@
 		D18EA2CC1C04B38400A886A5 /* BrowseGridViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowseGridViewController.swift; sourceTree = "<group>"; };
 		D18EA2CD1C04B38400A886A5 /* PositionIn.BrowseGridViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.BrowseGridViewController.xib; sourceTree = "<group>"; };
 		D196225E1BF13075003BCD85 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		D1B780AC1C0E287A00EF5825 /* MembershipPlansViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MembershipPlansViewController.swift; sourceTree = "<group>"; };
+		D1B780AE1C0E3A7700EF5825 /* PlansViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlansViewController.swift; sourceTree = "<group>"; };
+		D1B780B91C0E48E200EF5825 /* MembershipPlansCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MembershipPlansCell.swift; sourceTree = "<group>"; };
+		D1B780BA1C0E48E200EF5825 /* PositionIn.MembershipPlansCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.MembershipPlansCell.xib; sourceTree = "<group>"; };
+		D1B780BD1C0E4D6000EF5825 /* MembershipPlansManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MembershipPlansManager.swift; sourceTree = "<group>"; };
+		D1B780BF1C0E5BF600EF5825 /* SelectMembershipPlansViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectMembershipPlansViewController.swift; sourceTree = "<group>"; };
+		D1B780C21C0F07B700EF5825 /* MembershipBenefitCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MembershipBenefitCell.swift; sourceTree = "<group>"; };
+		D1B780C41C0F07D000EF5825 /* PositionIn.MembershipBenefitCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.MembershipBenefitCell.xib; sourceTree = "<group>"; };
 		D1DA176A1C05B7BE0091A8CE /* BrowseGridCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowseGridCollectionViewCell.swift; sourceTree = "<group>"; };
 		D1DA176B1C05B7BE0091A8CE /* PositionIn.BrowseGridCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.BrowseGridCollectionViewCell.xib; sourceTree = "<group>"; };
 		D1F86CF01BFCAA96006E0C49 /* Onboarding.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Onboarding.storyboard; sourceTree = "<group>"; };
@@ -1192,6 +1208,37 @@
 			path = BrowseGrid;
 			sourceTree = "<group>";
 		};
+		D1B780AB1C0E27E500EF5825 /* MembershipPlans */ = {
+			isa = PBXGroup;
+			children = (
+				D1B780C11C0F076C00EF5825 /* MembershipBenefitCell */,
+				D1B780B21C0E475D00EF5825 /* MembershipPlansCell */,
+				D1B780AC1C0E287A00EF5825 /* MembershipPlansViewController.swift */,
+				D1B780AE1C0E3A7700EF5825 /* PlansViewController.swift */,
+				D1B780BF1C0E5BF600EF5825 /* SelectMembershipPlansViewController.swift */,
+				D1B780BD1C0E4D6000EF5825 /* MembershipPlansManager.swift */,
+			);
+			path = MembershipPlans;
+			sourceTree = "<group>";
+		};
+		D1B780B21C0E475D00EF5825 /* MembershipPlansCell */ = {
+			isa = PBXGroup;
+			children = (
+				D1B780B91C0E48E200EF5825 /* MembershipPlansCell.swift */,
+				D1B780BA1C0E48E200EF5825 /* PositionIn.MembershipPlansCell.xib */,
+			);
+			path = MembershipPlansCell;
+			sourceTree = "<group>";
+		};
+		D1B780C11C0F076C00EF5825 /* MembershipBenefitCell */ = {
+			isa = PBXGroup;
+			children = (
+				D1B780C21C0F07B700EF5825 /* MembershipBenefitCell.swift */,
+				D1B780C41C0F07D000EF5825 /* PositionIn.MembershipBenefitCell.xib */,
+			);
+			path = MembershipBenefitCell;
+			sourceTree = "<group>";
+		};
 		D1DA17691C05B71D0091A8CE /* BrowseGridCollectionViewCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -1417,6 +1464,7 @@
 		E64DC34C1B4E53C90011D37C /* PositionIn */ = {
 			isa = PBXGroup;
 			children = (
+				D1B780AB1C0E27E500EF5825 /* MembershipPlans */,
 				D15F47451C0AFD14009ED3FD /* CallAmbulance */,
 				D1F86CEF1BFCAA72006E0C49 /* Onboarding */,
 				2429FFA21B8E00770061B4E0 /* Utils */,
@@ -3080,6 +3128,7 @@
 				E689F0791B6B911F00597587 /* PositionIn.ProductInventoryViewController.xib in Resources */,
 				500D7FA91BC2CD39008C8C82 /* PositionIn.SearchEntityCell.xib in Resources */,
 				E6C952341BA1D9960032254F /* PositionIn.ProfileInfoCell.xib in Resources */,
+				D1B780C51C0F07D000EF5825 /* PositionIn.MembershipBenefitCell.xib in Resources */,
 				E6D4D5B51B6F8B9F003134CB /* PositionIn.SearchBar.xib in Resources */,
 				E66115A31B73A18C003DB5B3 /* NewItems.storyboard in Resources */,
 				24EF62161BA81DCB00472531 /* PositionIn.ChatHistoryCell.xib in Resources */,
@@ -3121,6 +3170,7 @@
 				E6DA53C81B7D00DB000087A7 /* PositionIn.BrowseCommunityViewController.xib in Resources */,
 				E660E5321B5AC2A200F52050 /* PositionIn.MainMenuCell.xib in Resources */,
 				D18EA2CF1C04B38400A886A5 /* PositionIn.BrowseGridViewController.xib in Resources */,
+				D1B780BC1C0E48E200EF5825 /* PositionIn.MembershipPlansCell.xib in Resources */,
 				E661159B1B73A0CB003DB5B3 /* PositionIn.BrowseListViewController.xib in Resources */,
 				E6F7A47F1BA356130069152A /* PositionIn.LocationCell.xib in Resources */,
 			);
@@ -3296,6 +3346,7 @@
 				E68B52281B875F8F006B980C /* PromotionListCell.swift in Sources */,
 				D12EDEC71BFF4F0D00FB6245 /* PhoneVerificationViewController.swift in Sources */,
 				500D7FA31BC2AACF008C8C82 /* SearchItem.swift in Sources */,
+				D1B780BE1C0E4D6000EF5825 /* MembershipPlansManager.swift in Sources */,
 				E661158D1B73778B003DB5B3 /* RecoverPasswordViewController.swift in Sources */,
 				50D1AFA61BBAD21400957882 /* PostLikeCommentCell.swift in Sources */,
 				E632016E1B9834910066C62E /* ObjectInfo.swift in Sources */,
@@ -3326,6 +3377,7 @@
 				D18A1FDC1BEB95D9003F158D /* ChangePasswordViewController.swift in Sources */,
 				E6D7F83B1BE24AE500A544F4 /* MainMenuBadgeCell.swift in Sources */,
 				E6BEF1EA1B9C902400511B46 /* BrowseCommunityTableViewCellModel.swift in Sources */,
+				D1B780C01C0E5BF600EF5825 /* SelectMembershipPlansViewController.swift in Sources */,
 				E63201741B9872C60066C62E /* EditProfileViewController.swift in Sources */,
 				E65E87321B614A9900AE444D /* Location.swift in Sources */,
 				E62B17061B5CE3EB00D446BC /* BrowseViewController.swift in Sources */,
@@ -3385,10 +3437,12 @@
 				E64D006A1B7CA2DC007693E0 /* AddCommunityViewController.swift in Sources */,
 				E6A10AC61B74232100047D74 /* LocationSelectorViewController.swift in Sources */,
 				E62B16F81B5C6BBF00D446BC /* AvatarView.swift in Sources */,
+				D1B780AD1C0E287A00EF5825 /* MembershipPlansViewController.swift in Sources */,
 				E6F243721B8B1F460033B13C /* BrowseModeTabbarViewController.swift in Sources */,
 				E61B20D51B7DD47C005EAB2C /* FeedItem.swift in Sources */,
 				E6018E521B8492EA001D22FA /* XLFormOptionsObject+PositionIn.swift in Sources */,
 				E6BEF1CF1B9C60B500511B46 /* PostTableViewCellModel.swift in Sources */,
+				D1B780BB1C0E48E200EF5825 /* MembershipPlansCell.swift in Sources */,
 				E6F243751B8B31510033B13C /* AddMenuView.swift in Sources */,
 				E661158B1B73774B003DB5B3 /* RegisterViewController.swift in Sources */,
 				E6BEF1E51B9C83F200511B46 /* CommunityInfoCell.swift in Sources */,
@@ -3418,8 +3472,10 @@
 				E660E5301B5AC28600F52050 /* MainMenuCell.swift in Sources */,
 				E6C952391BA1DA400032254F /* ProfileFollowCell.swift in Sources */,
 				E6C952261BA1A8230032254F /* StringValidation.swift in Sources */,
+				D1B780AF1C0E3A7700EF5825 /* PlansViewController.swift in Sources */,
 				E6F243781B8B3CDE0033B13C /* BrowseListTableViewCell.swift in Sources */,
 				E61B20D81B7E0838005EAB2C /* SettingsViewController.swift in Sources */,
+				D1B780C31C0F07B700EF5825 /* MembershipBenefitCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

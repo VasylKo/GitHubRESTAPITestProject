@@ -219,6 +219,9 @@ protocol BrowseModeDisplay {
     
     func browseGridViewControllerSelectItem(itemType: HomeItem) {
         switch itemType {
+        case .Membership:
+            self.navigationController?.pushViewController(Storyboards.Onboarding.instantiateMembershipPlansViewController(), animated: true)
+            
         case .Emergency:
             fallthrough
         case .Training:

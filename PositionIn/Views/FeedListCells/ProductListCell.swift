@@ -21,12 +21,12 @@ final class ProductListCell: TableViewCell {
         let m = model as? CompactFeedTableCellModel
         assert(m != nil, "Invalid model passed")
 
-        productImage.setImageFromURL(m!.imageURL, placeholder: UIImage(named: "placeholderProduct"))
+        productImage.setImageFromURL(m!.imageURL, placeholder: UIImage(named: "hardware_img_default"))
         headerLabel.text = m!.title
         detailsLabel.text = m!.details
         infoLabel.text =  m!.info
         if let price = m!.price {
-            infoLabel.text = "\(price) beneficiaries"
+            infoLabel.text = "\(Int(price)) beneficiaries"
         }
     }
     

@@ -56,7 +56,7 @@ final class ProductDetailsViewController: UIViewController {
         headerLabel.text = product.name
         detailsLabel.text = product.text?.stringByReplacingOccurrencesOfString("\\n", withString: "\n")
         if let price = product.price {
-            priceLabel.text = "\(price) beneficiaries"
+            priceLabel.text = "\(Int(price)) beneficiaries"
         }
         
 //        temporary decision
