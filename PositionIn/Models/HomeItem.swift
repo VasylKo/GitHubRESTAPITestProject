@@ -9,43 +9,42 @@
 import Foundation
 
 enum HomeItem: Int, CustomDebugStringConvertible {
-    case Unknown = -1
-    case Emergency, Ambulance, GiveBlood, News, Membership, Donate, Training, Events, Projects, Market, BomaHotels, Volunteer
+    case Unknown = 0
+    case Projects, Emergency, Training, Ambulance, GiveBlood, News, Membership, Donate, Events, Market, BomaHotels, Volunteer
     
     static var count: Int {
-        return (HomeItem.Volunteer.rawValue + 1)
+        return 12
     }
     
-    func valueForRequest() -> NSNumber {
-        switch self {
-        case .Emergency:
-            return 2
-        case .Ambulance:
-            return self.rawValue
-        case .GiveBlood:
-            return self.rawValue
-        case .News:
-            return self.rawValue
-        case .Membership:
-            return self.rawValue
-        case .Donate:
-            return self.rawValue
-        case .Training:
-            return 3
-        case .Events:
-            return self.rawValue
-        case .Projects:
-            return 1
-        case .Market:
-            return self.rawValue
-        case .BomaHotels:
-            return self.rawValue
-        case .Volunteer:
-            return self.rawValue
-        case .Unknown:
-            fallthrough
+    
+    static func homeItemForUI(value: Int) -> HomeItem {
+        switch value {
+        case 0:
+            return .Emergency
+        case 1:
+            return .Ambulance
+        case 2:
+            return .GiveBlood
+        case 3:
+            return .News
+        case 4:
+            return .Membership
+        case 5:
+            return .Donate
+        case 6:
+            return .Training
+        case 7:
+            return .Events
+        case 8:
+            return .Projects
+        case 9:
+            return .Market
+        case 10:
+            return .BomaHotels
+        case 11:
+            return .Volunteer
         default:
-            return 0
+            return .Unknown
         }
     }
     
@@ -68,7 +67,7 @@ enum HomeItem: Int, CustomDebugStringConvertible {
         case .Events:
             return NSLocalizedString("Events", comment: "HomeItem")
         case .Projects:
-            return NSLocalizedString("Project", comment: "HomeItem")
+            return NSLocalizedString("Projects", comment: "HomeItem")
         case .Market:
             return NSLocalizedString("Market", comment: "HomeItem")
         case .BomaHotels:
@@ -115,7 +114,6 @@ enum HomeItem: Int, CustomDebugStringConvertible {
             return nil
         }
     }
-
     
     var debugDescription: String {
         return "<HomeItem:\(displayString)>"

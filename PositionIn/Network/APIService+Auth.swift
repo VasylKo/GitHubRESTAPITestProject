@@ -165,7 +165,11 @@ extension APIService {
     private func verifyPhoneCodeRequest(phoneNumber: String, code: String) ->  Future<Bool, NSError> {
         typealias CRUDResultType = (Alamofire.Request, Future<Bool, NSError>)
         let request = AuthRouter.VerifyPhoneCode(api: self, phone: phoneNumber, code: code)
-        let (_, future): CRUDResultType = self.dataProvider.jsonRequest(request, map: self.phoneCodeValidation(), validation: self.statusCodeValidation(statusCode: [200]))
+        
+        let serializer = Alamofire.Request.validationCodeResponseSerializer(self.phoneCodeValidation())
+        let (_, future): (Alamofire.Request, Future<Bool, NSError>) = dataProvider.request(request,
+            serializer: serializer,
+            validation: nil)
         return self.handleFailure(future)
     }
     
@@ -363,6 +367,29 @@ extension APIService {
 
 
 private extension Alamofire.Request {
+    
+    //MARK: - Custom serializer -
+    private static func validationCodeResponseSerializer<T>(mapping: AnyObject? -> T?) -> ResponseSerializer<T, NSError> {
+        return ResponseSerializer { request, response, data, error in
+            
+            let JSONResponseSerializer = Request.JSONResponseSerializer(options: .AllowFragments)
+            let result = JSONResponseSerializer.serializeResponse(request, response, data, error)
+            
+            switch result {
+            case .Success(let json):
+                guard let object = mapping(json) else {
+                    if  let jsonDict = json as? [String: AnyObject],
+                        let msg = jsonDict["error"] as? String {
+                            return .Failure(NetworkDataProvider.ErrorCodes.TransferError.error(localizedDescription: msg))
+                    }
+                    return .Failure(NetworkDataProvider.ErrorCodes.InvalidResponseError.error())
+                }
+                return .Success(object)
+            case .Failure(let error):
+                return .Failure(NetworkDataProvider.ErrorCodes.ParsingError.error(error))
+            }
+        }
+    }
     
     //MARK: - Custom serializer -
     private static func AuthResponseSerializer<T>(mapping: AnyObject? -> T?) -> ResponseSerializer<T, NSError> {

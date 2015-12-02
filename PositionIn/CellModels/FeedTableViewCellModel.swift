@@ -24,15 +24,17 @@ class CompactFeedTableCellModel: FeedTableCellModel {
     let title: String?
     let details: String?
     let info: String?
+    let price: Float?
     let imageURL: NSURL?
     
-    init(itemType: FeedItem.ItemType, objectID: CRUDObjectId, title: String?, details: String?, info: String?, imageURL url: NSURL?, data: Any? = nil) {
+    init(itemType: FeedItem.ItemType, objectID: CRUDObjectId, title: String?, details: String?, info: String?, price: Float?, imageURL url: NSURL?, data: Any? = nil) {
         self.objectID = objectID
         self.itemType = itemType
         self.title = title
         self.info = info
         self.details = details
         self.imageURL = url
+        self.price = price
         self.data = data
     }
 }
@@ -42,7 +44,7 @@ final class ComapctBadgeFeedTableCellModel : CompactFeedTableCellModel {
     let badge: String?
     init(itemType: FeedItem.ItemType, objectID: CRUDObjectId, title: String?, details: String?, info: String?, imageURL url: NSURL?, badge: String?, data: Any?) {
         self.badge = badge
-        super.init(itemType: itemType, objectID: objectID, title: title, details: details, info: info, imageURL: url, data: data)
+        super.init(itemType: itemType, objectID: objectID, title: title, details: details, info: info, price: nil, imageURL: url, data: data)
     }
 }
 

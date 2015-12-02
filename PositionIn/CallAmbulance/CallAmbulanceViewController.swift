@@ -51,7 +51,6 @@ class CallAmbulanceViewController: BaseAddItemViewController {
         //Description Section
         let descriptionSection = XLFormSectionDescriptor.formSection()
         let descriptionRow = self.descriptionRowDesctiption(Tags.Description.rawValue)
-        descriptionRow.required = true
         descriptionSection.addFormRow(descriptionRow)
         form.addFormSection(descriptionSection)
         
@@ -71,7 +70,6 @@ class CallAmbulanceViewController: BaseAddItemViewController {
         }
         incedentRow.selectorOptions = selectorOptions
         incedentRow.value = selectorOptions.first
-        incedentRow.required = true
         incedentLocationSection.addFormRow(incedentRow)
         
         // Location
