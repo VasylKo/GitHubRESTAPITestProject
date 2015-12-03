@@ -237,6 +237,8 @@ protocol BrowseModeDisplay {
             }
             self.searchViewControllerHomeItemSelected(itemType, locationString: nil)
             self.tabbarDidChangeMode(self.tabbar)
+        case .Donate:
+            self.navigationController?.pushViewController(Storyboards.Onboarding.instantiateDonateViewController(), animated: true)
         case .Ambulance:
             self.navigationController?.pushViewController(Storyboards.Onboarding.instantiateCallAmbulanceViewController(), animated: true)
         default:

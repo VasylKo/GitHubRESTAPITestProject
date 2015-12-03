@@ -291,6 +291,14 @@ struct Storyboards {
         static func instantiateCallAmbulanceViewController() -> CallAmbulanceViewController {
             return self.storyboard.instantiateViewControllerWithIdentifier("CallAmbulanceViewController") as! CallAmbulanceViewController
         }
+
+        static func instantiateDonateViewController() -> DonateViewController {
+            return self.storyboard.instantiateViewControllerWithIdentifier("DonateViewController") as! DonateViewController
+        }
+
+        static func instantiateSelectPaymentMethodController() -> SelectPaymentMethodController {
+            return self.storyboard.instantiateViewControllerWithIdentifier("SelectPaymentMethodController") as! SelectPaymentMethodController
+        }
     }
 }
 
@@ -1505,6 +1513,20 @@ extension CallAmbulanceViewController {
 }
 
 //MARK: - AmbulanceSentViewController
+
+//MARK: - DonateViewController
+extension DonateViewController: IdentifiableProtocol { 
+    var identifier: String? { return "DonateViewController" }
+    static var identifier: String? { return "DonateViewController" }
+}
+
+
+//MARK: - SelectPaymentMethodController
+extension SelectPaymentMethodController: IdentifiableProtocol { 
+    var identifier: String? { return "SelectPaymentMethodController" }
+    static var identifier: String? { return "SelectPaymentMethodController" }
+}
+
 
 //MARK: - AmbulanceRequestedViewController
 extension UIStoryboardSegue {

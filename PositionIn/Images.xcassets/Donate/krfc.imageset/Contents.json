@@ -2,11 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
+      "filename" : "krfc.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "%10category_projects_map@2x.png",
       "scale" : "2x"
     },
     {

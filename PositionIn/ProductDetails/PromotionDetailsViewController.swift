@@ -63,9 +63,9 @@ final class PromotionDetailsViewController: UIViewController {
             ],
             [ // 1 section
                 PromotionActionItem(title: NSLocalizedString("Send Message", comment: "Promotion action: Send Message"), image: "productSendMessage", action: .SendMessage),
-                PromotionActionItem(title: NSLocalizedString("Seller Profile", comment: "Promotion action: Seller Profile"), image: "productSellerProfile", action: .SellerProfile),
+                PromotionActionItem(title: NSLocalizedString("Organize Profile", comment: "Promotion action: Seller Profile"), image: "productSellerProfile", action: .SellerProfile),
                 PromotionActionItem(title: NSLocalizedString("Terms and Information", comment: "Promotion action: Terms and Information"), image: "productTerms&Info", action: .TermsAndInformation),
-                PromotionActionItem(title: NSLocalizedString("Navigate", comment: "Promotion action: Navigate"), image: "productNavigate", action: .Navigate)
+                PromotionActionItem(title: NSLocalizedString("More Information", comment: "Promotion action: Navigate"), image: "productNavigate", action: .Navigate)
             ],
         ]
     }

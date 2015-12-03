@@ -135,7 +135,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mlN-9L-evu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-388" y="-2149"/>
+            <point key="canvasLocation" x="-418" y="-2494"/>
         </scene>
         <!--Plans View Controller-->
         <scene sceneID="BSN-xj-wVs">
@@ -291,7 +291,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iV6-Uo-TXt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1027" y="-2504"/>
+            <point key="canvasLocation" x="1027" y="-2494"/>
         </scene>
         <!--Onboarding Navigation Controller-->
         <scene sceneID="cQ4-mJ-K50">
@@ -405,6 +405,61 @@ heading you way</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bER-hm-hve" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3426" y="-1280"/>
+        </scene>
+        <!--Donate View Controller-->
+        <scene sceneID="RYp-9M-koP">
+            <objects>
+                <viewController storyboardIdentifier="DonateViewController" id="j56-kp-9vL" customClass="DonateViewController" customModule="PositionIn" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="CuW-0B-GRA"/>
+                        <viewControllerLayoutGuide type="bottom" id="b6u-Hv-jyF"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="gp0-09-9Ip">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tim-4q-COV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2468" y="-2561"/>
+        </scene>
+        <!--Select Payment Method Controller-->
+        <scene sceneID="30Y-8j-Wuy">
+            <objects>
+                <viewController storyboardIdentifier="SelectPaymentMethodController" id="aF0-qn-uMw" customClass="SelectPaymentMethodController" customModule="PositionIn" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="gby-IE-IQa"/>
+                        <viewControllerLayoutGuide type="bottom" id="udk-c3-jaY"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="WgW-TQ-96h">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="VhG-OG-BgN">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="aF0-qn-uMw" id="p4U-AJ-zhm"/>
+                                    <outlet property="delegate" destination="aF0-qn-uMw" id="zfC-B9-Tan"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="udk-c3-jaY" firstAttribute="top" secondItem="VhG-OG-BgN" secondAttribute="bottom" id="CsR-n6-3EU"/>
+                            <constraint firstAttribute="trailing" secondItem="VhG-OG-BgN" secondAttribute="trailing" id="SvQ-JC-tuo"/>
+                            <constraint firstItem="VhG-OG-BgN" firstAttribute="leading" secondItem="WgW-TQ-96h" secondAttribute="leading" id="hRF-r4-gKA"/>
+                            <constraint firstItem="VhG-OG-BgN" firstAttribute="top" secondItem="WgW-TQ-96h" secondAttribute="top" id="idl-W3-ezT"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="VhG-OG-BgN" id="6NV-dN-Jok"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Uh5-l8-57f" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3174" y="-2561"/>
         </scene>
         <!--Ambulance Requested View Controller-->
         <scene sceneID="ex4-MC-NUm">
