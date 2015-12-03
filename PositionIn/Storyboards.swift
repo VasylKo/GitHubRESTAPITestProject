@@ -299,6 +299,14 @@ struct Storyboards {
         static func instantiateSelectPaymentMethodController() -> SelectPaymentMethodController {
             return self.storyboard.instantiateViewControllerWithIdentifier("SelectPaymentMethodController") as! SelectPaymentMethodController
         }
+
+        static func instantiateDonateNotificationViewController() -> DonateNotificationViewController {
+            return self.storyboard.instantiateViewControllerWithIdentifier("DonateNotificationViewController") as! DonateNotificationViewController
+        }
+
+        static func instantiatePaymentCompletedViewController() -> PaymentCompletedViewController {
+            return self.storyboard.instantiateViewControllerWithIdentifier("PaymentCompletedViewController") as! PaymentCompletedViewController
+        }
     }
 }
 
@@ -1528,6 +1536,13 @@ extension SelectPaymentMethodController: IdentifiableProtocol {
 }
 
 
+//MARK: - DonateNotificationViewController
+extension DonateNotificationViewController: IdentifiableProtocol { 
+    var identifier: String? { return "DonateNotificationViewController" }
+    static var identifier: String? { return "DonateNotificationViewController" }
+}
+
+
 //MARK: - AmbulanceRequestedViewController
 extension UIStoryboardSegue {
     func selection() -> AmbulanceRequestedViewController.Segue? {
@@ -1562,3 +1577,10 @@ extension AmbulanceRequestedViewController {
     }
 
 }
+
+//MARK: - PaymentCompletedViewController
+extension PaymentCompletedViewController: IdentifiableProtocol { 
+    var identifier: String? { return "PaymentCompletedViewController" }
+    static var identifier: String? { return "PaymentCompletedViewController" }
+}
+

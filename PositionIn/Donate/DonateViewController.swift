@@ -15,6 +15,7 @@ class DonateViewController: XLFormViewController {
         case Project = "Project"
         case Money = "Money"
         case Payment = "Payment"
+        case Confirm = "Confirm"
     }
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
@@ -49,7 +50,6 @@ class DonateViewController: XLFormViewController {
             rowType: XLFormRowDescriptorTypeDonate)
         donateToSection.addFormRow(donateProjectRow)
         
-        
         let donatationSection = XLFormSectionDescriptor.formSectionWithTitle("Donation Amount (KSH)")
         form.addFormSection(donatationSection)
         
@@ -62,13 +62,25 @@ class DonateViewController: XLFormViewController {
         let paymentSection = XLFormSectionDescriptor.formSectionWithTitle("Payment")
         form.addFormSection(paymentSection)
         
-        let paymentRow: XLFormRowDescriptor = XLFormRowDescriptor(tag: Tags.Payment.rawValue, rowType: XLFormRowDescriptorTypeButton, title: NSLocalizedString("Select payment method", comment: "Payment"))
+        let paymentRow: XLFormRowDescriptor = XLFormRowDescriptor(tag: Tags.Payment.rawValue,
+            rowType: XLFormRowDescriptorTypeSelectorPush, title: NSLocalizedString("Select payment method", comment: "Payment"))
         
-//        SelectPaymentMethodController
         paymentRow.action.viewControllerClass = SelectPaymentMethodController.self
+        paymentRow.valueTransformer = CardItemValueTrasformer.self
+        paymentRow.value = nil
         paymentRow.cellConfig.setObject(UIScheme.mainThemeColor, forKey: "tintColor")
         paymentSection.addFormRow(paymentRow)
         
+        let confirmDonation = XLFormSectionDescriptor.formSection()
+        form.addFormSection(confirmDonation)
+        
+        let confirmRow: XLFormRowDescriptor = XLFormRowDescriptor(tag: Tags.Confirm.rawValue,
+            rowType: XLFormRowDescriptorTypeButton,
+            title: NSLocalizedString("Confirm Donation", comment: "Payment"))
+        
+        confirmRow.action.viewControllerStoryboardId = "DonateNotificationViewController";
+
+        confirmDonation.addFormRow(confirmRow)
 
         self.form = form
     }

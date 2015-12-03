@@ -6,6 +6,8 @@
 //  Copyright © 2015 Soluna Labs. All rights reserved.
 //
 
+import Box
+
 enum CardItem: Int {
     case MPesa, Airtel, OrangeMonde, PayPal, CreditDebitCard
     
@@ -40,5 +42,26 @@ enum CardItem: Int {
         case .CreditDebitCard:
             return UIImage(named: "creditcard")
         }
+    }
+}
+
+class CardItemValueTrasformer : NSValueTransformer {
+    
+    override class func transformedValueClass() -> AnyClass {
+        return NSString.self
+    }
+    
+    override class func allowsReverseTransformation() -> Bool {
+        return false
+    }
+    
+    override func transformedValue(value: AnyObject?) -> AnyObject? {
+        if let valueData: AnyObject = value {
+            if let box: Box<CardItem> = valueData as? Box {
+                return CardItem.cardName(box.value)
+            }
+        }
+        
+        return nil
     }
 }
