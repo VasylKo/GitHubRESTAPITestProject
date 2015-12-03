@@ -119,35 +119,39 @@ class PhoneNumberViewController: XLFormViewController {
             countryCode = nil
         }
         
-        if let countryCode = countryCode,
-            let phoneRow = phoneRow?.value {
-                let phoneRowString = "\(phoneRow)"
-                let phoneNumber : String
-
-                if phoneRowString.hasPrefix("+") {
-                    phoneNumber = phoneRowString
-                }
-                else {
+        if let phoneRow = phoneRow?.value {
+            let phoneRowString = "\(phoneRow)"
+            let phoneNumber : String
+            
+            if phoneRowString.hasPrefix("+") {
+                phoneNumber = phoneRowString
+            }
+            else {
+                if let countryCode = countryCode {
                     phoneNumber = "\(countryCode)\(phoneRowString)"
                 }
-                
-                let alertController = UIAlertController(title: NSLocalizedString("Number Confirmation",
-                    comment: "Onboarding"),
-                    message: "Is your phone number below correct?\n\(phoneNumber)", preferredStyle: .Alert)
-                
-                let cancelAction = UIAlertAction(title: "Edit", style: .Cancel, handler: nil)
-                alertController.addAction(cancelAction)
-                
-                let OKAction = UIAlertAction(title: "Yes", style: .Default) {[weak self] (action) in
-                    api().verifyPhone(phoneNumber).onSuccess(callback: {[weak self] in
-                        let validationController = Storyboards.Onboarding.instantiatePhoneVerificationController()
-                        validationController.phoneNumber = phoneNumber
-                        self?.navigationController?.pushViewController(validationController, animated: true)
-                        })
+                else {
+                    return
                 }
-                alertController.addAction(OKAction)
-                
-                self.presentViewController(alertController, animated: true, completion: nil)
+            }
+            
+            let alertController = UIAlertController(title: NSLocalizedString("Number Confirmation",
+                comment: "Onboarding"),
+                message: "Is your phone number below correct?\n\(phoneNumber)", preferredStyle: .Alert)
+            
+            let cancelAction = UIAlertAction(title: "Edit", style: .Cancel, handler: nil)
+            alertController.addAction(cancelAction)
+            
+            let OKAction = UIAlertAction(title: "Yes", style: .Default) {[weak self] (action) in
+                api().verifyPhone(phoneNumber).onSuccess(callback: {[weak self] in
+                    let validationController = Storyboards.Onboarding.instantiatePhoneVerificationController()
+                    validationController.phoneNumber = phoneNumber
+                    self?.navigationController?.pushViewController(validationController, animated: true)
+                    })
+            }
+            alertController.addAction(OKAction)
+            
+            self.presentViewController(alertController, animated: true, completion: nil)
         }
     }
     
@@ -189,7 +193,7 @@ class PhoneNumberViewController: XLFormViewController {
         }
     }
     
-    private var countryNumber: Int?
+    private var countryNumber: Int? = 0
     
     @IBOutlet private weak var doneButton: UIBarButtonItem!
     @IBOutlet private weak var phoneNumberTextField: UITextField!
