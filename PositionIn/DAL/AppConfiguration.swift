@@ -23,6 +23,11 @@ final class AppConfiguration {
             amazonURL = NSURL(string: "https://pos-sta.s3.amazonaws.com/")!
             xmppHostname = "app-sta.positionin.com"
             googleAnalystLogLevel = GAILogLevel.Verbose
+        case .StagingCopy:
+            baseURL = NSURL(string: "https://app-sta2.positionin.com/api/")!
+            amazonURL = NSURL(string: "https://pos-sta.s3.amazonaws.com/")!
+            xmppHostname = "app-sta2.positionin.com"
+            googleAnalystLogLevel = GAILogLevel.Verbose
         case .Dev:
             baseURL = NSURL(string: "https://app-dev.positionin.com/api/")!
             amazonURL = NSURL(string: "https://pos-dev.s3.amazonaws.com/")!
@@ -46,6 +51,7 @@ final class AppConfiguration {
     private enum Environment: String {
         case Dev = "Dev"
         case Staging = "Staging"
+        case StagingCopy = "StagingCopy"
         case Prod = "Production"
     }
     
@@ -54,6 +60,8 @@ final class AppConfiguration {
             return .Prod
         #elseif STAGING_ENV
             return .Staging
+        #elseif STAGING_COPY_ENV
+            return .StagingCopy
         #else
             return .Dev
         #endif
