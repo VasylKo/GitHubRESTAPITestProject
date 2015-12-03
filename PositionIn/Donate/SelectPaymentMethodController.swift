@@ -15,23 +15,27 @@ class SelectPaymentMethodController: UIViewController, XLFormRowDescriptorViewCo
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    }
-    
-    
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
         
         let reuseIdentifier = NSStringFromClass(CardTableViewCell.self)
         
+        self.tableView = UITableView(frame: CGRectZero, style: .Plain)
+        self.tableView.dataSource = self
+        self.tableView.delegate = self
         self.tableView.rowHeight = UITableViewAutomaticDimension;
         self.tableView.estimatedRowHeight = 80;
-        
         self.tableView.registerNib(UINib(nibName: reuseIdentifier,
             bundle: nil),
             forCellReuseIdentifier: reuseIdentifier)
+        
+        self.view.addSubview(self.tableView)
     }
     
-    @IBOutlet weak var tableView: UITableView!
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        self.tableView.frame = self.view.frame
+    }
+    
+    @IBOutlet var tableView: UITableView!
 }
 
 

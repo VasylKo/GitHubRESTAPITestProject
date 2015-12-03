@@ -65,8 +65,7 @@ class DonateViewController: XLFormViewController {
         let paymentRow: XLFormRowDescriptor = XLFormRowDescriptor(tag: Tags.Payment.rawValue, rowType: XLFormRowDescriptorTypeButton, title: NSLocalizedString("Select payment method", comment: "Payment"))
         
 //        SelectPaymentMethodController
-        
-//        paymentRow.action.viewControllerClass = SelectPaymentMethodController.self
+        paymentRow.action.viewControllerClass = SelectPaymentMethodController.self
         paymentRow.cellConfig.setObject(UIScheme.mainThemeColor, forKey: "tintColor")
         paymentSection.addFormRow(paymentRow)
         

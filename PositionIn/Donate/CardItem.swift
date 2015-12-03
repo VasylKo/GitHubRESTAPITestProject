@@ -7,14 +7,12 @@
 //
 
 enum CardItem: Int {
-    case Unknown, MPesa, Airtel, OrangeMonde, PayPal, CreditDebitCard
+    case MPesa, Airtel, OrangeMonde, PayPal, CreditDebitCard
     
     static var count = (CreditDebitCard.rawValue + 1)
     
     static func cardName(item: CardItem) -> String? {
         switch item {
-        case .Unknown:
-            return nil
         case .MPesa:
             return "M-Pesa"
         case .Airtel:
@@ -31,8 +29,6 @@ enum CardItem: Int {
     
     static func cardImage(item: CardItem) -> UIImage? {
         switch item {
-        case .Unknown:
-            return nil
         case .MPesa:
             return UIImage(named: "mpesa")
         case .Airtel:

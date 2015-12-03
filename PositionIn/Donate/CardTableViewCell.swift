@@ -13,13 +13,13 @@ class CardTableViewCell: UITableViewCell {
     
     var cardName: String? {
         didSet {
-            
+            self.cardNameLabel.text = cardName
         }
     }
     
     var cardImage: UIImage? {
         didSet {
-            
+            self.cardIconImageView.image = cardImage
         }
     }
     

@@ -435,27 +435,8 @@ heading you way</string>
                     <view key="view" contentMode="scaleToFill" id="WgW-TQ-96h">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="VhG-OG-BgN">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <connections>
-                                    <outlet property="dataSource" destination="aF0-qn-uMw" id="p4U-AJ-zhm"/>
-                                    <outlet property="delegate" destination="aF0-qn-uMw" id="zfC-B9-Tan"/>
-                                </connections>
-                            </tableView>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="udk-c3-jaY" firstAttribute="top" secondItem="VhG-OG-BgN" secondAttribute="bottom" id="CsR-n6-3EU"/>
-                            <constraint firstAttribute="trailing" secondItem="VhG-OG-BgN" secondAttribute="trailing" id="SvQ-JC-tuo"/>
-                            <constraint firstItem="VhG-OG-BgN" firstAttribute="leading" secondItem="WgW-TQ-96h" secondAttribute="leading" id="hRF-r4-gKA"/>
-                            <constraint firstItem="VhG-OG-BgN" firstAttribute="top" secondItem="WgW-TQ-96h" secondAttribute="top" id="idl-W3-ezT"/>
-                        </constraints>
                     </view>
-                    <connections>
-                        <outlet property="tableView" destination="VhG-OG-BgN" id="6NV-dN-Jok"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Uh5-l8-57f" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
