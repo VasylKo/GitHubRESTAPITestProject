@@ -17,9 +17,10 @@ class PhoneNumberViewController: XLFormViewController {
     }
     
     private enum Countries : Int {
-        case Kenya = 0, USA, UK, Swizerland, France, Israel, Russia
+        case Kenya = 0, Swizerland, France
+        //USA, UK, Swizerland, France, Israel, Russia
         
-        static let allValues = [Kenya, USA, UK, Swizerland, France, Israel, Russia]
+        static let allValues = [Kenya, Swizerland, France]
     }
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
@@ -89,7 +90,7 @@ class PhoneNumberViewController: XLFormViewController {
         phoneRow.cellConfigAtConfigure["textField.placeholder"] = "Enter you phone number"
         phoneRow.required = true
         phoneRow.addValidator(XLFormRegexValidator(msg: NSLocalizedString("Please specify a valid phone number",
-            comment: "Onboarding"), regex: "^\\d+$"))
+            comment: "Onboarding"), regex: "^\\+?\\d+$"))
         phoneNumberSection.addFormRow(phoneRow)
         
         self.form = form
@@ -119,11 +120,19 @@ class PhoneNumberViewController: XLFormViewController {
         }
         
         if let countryCode = countryCode,
-            let phoneRowString = phoneRow?.value {
+            let phoneRow = phoneRow?.value {
+                let phoneRowString = "\(phoneRow)"
+                let phoneNumber : String
+
+                if phoneRowString.hasPrefix("+") {
+                    phoneNumber = phoneRowString
+                }
+                else {
+                    phoneNumber = "\(countryCode)\(phoneRowString)"
+                }
                 
-                let phoneNumber = "\(countryCode)\(phoneRowString)"
-                
-                let alertController = UIAlertController(title: NSLocalizedString("Number Confirmation", comment: "Onboarding"),
+                let alertController = UIAlertController(title: NSLocalizedString("Number Confirmation",
+                    comment: "Onboarding"),
                     message: "Is your phone number below correct?\n\(phoneNumber)", preferredStyle: .Alert)
                 
                 let cancelAction = UIAlertAction(title: "Edit", style: .Cancel, handler: nil)
@@ -146,18 +155,18 @@ class PhoneNumberViewController: XLFormViewController {
         switch value {
         case .Kenya:
             return "Kenya"
-        case .USA:
-            return "United States"
-        case .UK:
-            return "United Kingdom"
+//        case .USA:
+//            return "United States"
+//        case .UK:
+//            return "United Kingdom"
         case .Swizerland:
             return "Swizerland"
         case .France:
             return "France"
-        case .Israel:
-            return "Israel"
-        case .Russia:
-            return "Russia"
+//        case .Israel:
+//            return "Israel"
+//        case .Russia:
+//            return "Russia"
         }
     }
     
@@ -165,18 +174,18 @@ class PhoneNumberViewController: XLFormViewController {
         switch value {
         case .Kenya:
             return "+254"
-        case .USA:
-            return "+1"
-        case .UK:
-            return "+44"
+//        case .USA:
+//            return "+1"
+//        case .UK:
+//            return "+44"
         case .Swizerland:
             return "+41"
         case .France:
             return "+33"
-        case .Israel:
-            return "+972"
-        case .Russia:
-            return "+7"
+//        case .Israel:
+//            return "+972"
+//        case .Russia:
+//            return "+7"
         }
     }
     
