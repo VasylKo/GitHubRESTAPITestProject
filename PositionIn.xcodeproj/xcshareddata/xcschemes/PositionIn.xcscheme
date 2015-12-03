@@ -114,7 +114,7 @@
       </AdditionalOptions>
    </TestAction>
    <LaunchAction
-      buildConfiguration = "StagingDebugCopy"
+      buildConfiguration = "StagingReleaseCopy"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       launchStyle = "0"
@@ -164,7 +164,7 @@
       buildConfiguration = "DevDebug">
    </AnalyzeAction>
    <ArchiveAction
-      buildConfiguration = "DevRelease"
+      buildConfiguration = "StagingReleaseCopy"
       revealArchiveInOrganizer = "YES">
    </ArchiveAction>
 </Scheme>
