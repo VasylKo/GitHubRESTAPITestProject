@@ -81,6 +81,7 @@
 		D153AB7E1C11BBDA00DFB5C9 /* PositionIn.EmergencyDetailsController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D153AB7C1C11BBDA00DFB5C9 /* PositionIn.EmergencyDetailsController.xib */; };
 		D153AB811C11D50800DFB5C9 /* TrainingDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D153AB7F1C11D50800DFB5C9 /* TrainingDetailsViewController.swift */; };
 		D153AB821C11D50800DFB5C9 /* PositionIn.TrainingDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D153AB801C11D50800DFB5C9 /* PositionIn.TrainingDetailsViewController.xib */; };
+		D153AB841C11FA9B00DFB5C9 /* AmbulanceRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D153AB831C11FA9B00DFB5C9 /* AmbulanceRequest.swift */; };
 		D15F47441C088A26009ED3FD /* HomeItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15F47431C088A26009ED3FD /* HomeItem.swift */; };
 		D15F47471C0AFDAF009ED3FD /* CallAmbulanceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15F47461C0AFDAF009ED3FD /* CallAmbulanceViewController.swift */; };
 		D15F47491C0B77D7009ED3FD /* AmbulanceBaseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15F47481C0B77D7009ED3FD /* AmbulanceBaseController.swift */; };
@@ -543,6 +544,7 @@
 		D153AB7C1C11BBDA00DFB5C9 /* PositionIn.EmergencyDetailsController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.EmergencyDetailsController.xib; sourceTree = "<group>"; };
 		D153AB7F1C11D50800DFB5C9 /* TrainingDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrainingDetailsViewController.swift; sourceTree = "<group>"; };
 		D153AB801C11D50800DFB5C9 /* PositionIn.TrainingDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.TrainingDetailsViewController.xib; sourceTree = "<group>"; };
+		D153AB831C11FA9B00DFB5C9 /* AmbulanceRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AmbulanceRequest.swift; sourceTree = "<group>"; };
 		D15F47431C088A26009ED3FD /* HomeItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeItem.swift; sourceTree = "<group>"; };
 		D15F47461C0AFDAF009ED3FD /* CallAmbulanceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CallAmbulanceViewController.swift; sourceTree = "<group>"; };
 		D15F47481C0B77D7009ED3FD /* AmbulanceBaseController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AmbulanceBaseController.swift; sourceTree = "<group>"; };
@@ -1601,6 +1603,7 @@
 				2431EBDF1B94C1DC009FB158 /* Event.swift */,
 				2431EBDD1B947442009FB158 /* Product.swift */,
 				2431EBDB1B945F5A009FB158 /* Promotion.swift */,
+				D153AB831C11FA9B00DFB5C9 /* AmbulanceRequest.swift */,
 				E65E872B1B611BA200AE444D /* Post.swift */,
 				E6BEF1D01B9C61F900511B46 /* Comment.swift */,
 				E63201751B98D2DA0066C62E /* Shop.swift */,
@@ -3531,6 +3534,7 @@
 				D1C475EC1C1081770096D383 /* PaymentCompletedViewController.swift in Sources */,
 				E6C5CE1F1B83A2B700265955 /* AppConfiguration.swift in Sources */,
 				E6A869F21B60FF0500797D16 /* CRUDObject.swift in Sources */,
+				D153AB841C11FA9B00DFB5C9 /* AmbulanceRequest.swift in Sources */,
 				E60EBF761B8EF9B50014B6ED /* DataTransforms.swift in Sources */,
 				50F730591BBBE86A008D3D94 /* CommentCell.swift in Sources */,
 				E61B20EF1B813C8C005EAB2C /* Community.swift in Sources */,

@@ -9,6 +9,7 @@
 import ObjectMapper
 import CleanroomLogger
 
+
 struct Product: CRUDObject {
     var objectId: CRUDObjectId = CRUDObjectInvalidId
     var name: String?

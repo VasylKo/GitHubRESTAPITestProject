@@ -8,6 +8,7 @@
 
 import UIKit
 import XLForm
+import BrightFutures
 
 class CallAmbulanceViewController: BaseAddItemViewController {
 
@@ -109,8 +110,30 @@ class CallAmbulanceViewController: BaseAddItemViewController {
             return
         }
         
-        self.performSegue(CallAmbulanceViewController.Segue.AmbulanceRequestedSegueId)
         
+        let values = formValues()
+        
+//        let community =  communityValue(values[Tags.Community.rawValue])
+//        
+        if  let imageUpload = uploadAssets(values[Tags.Photo.rawValue]) {
+            let getLocation = locationController().getCurrentLocation()
+            view.userInteractionEnabled = false
+            getLocation.zip(imageUpload).flatMap { (location: Location, urls: [NSURL]) -> Future<Void, NSError> in
+                var ambulanceRequest = AmbulanceRequest()
+                ambulanceRequest.text = values[Tags.Description.rawValue] as? String
+                ambulanceRequest.category = values[Tags.Incedent.rawValue] as? String
+                ambulanceRequest.location = location
+                ambulanceRequest.photos = urls.map { url in
+                    var info = PhotoInfo()
+                    info.url = url
+                    return info
+                }
+                
+                return api().createAmbulanceRequest(ambulanceRequest)
+            
+            }
+        self.performSegue(CallAmbulanceViewController.Segue.AmbulanceRequestedSegueId)
+        }
     }
 
     @IBAction func cancelButtonTouched(sender: AnyObject) {

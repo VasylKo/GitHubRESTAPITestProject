@@ -218,6 +218,18 @@ struct APIService {
         return getObject(endpoint)
     }
     
+    func createAmbulanceRequest(object: AmbulanceRequest) -> Future<Void, NSError> {
+        let endpoint = AmbulanceRequest.endpoint()
+        typealias CRUDResultType = (Alamofire.Request, Future<Void, NSError>)
+        let params = Mapper().toJSON(object)
+        return session().flatMap {
+            (token: AuthResponse.Token) -> Future<Void, NSError> in
+            let request = self.updateRequest(token, endpoint: endpoint, method: .POST, params: params)
+            let (_, future): CRUDResultType = self.dataProvider.jsonRequest(request, map: self.emptyResponseMapping(), validation: nil)
+            return future
+        }
+    }
+    
     func createCommunity(community object: Community) -> Future<Community, NSError> {
         let endpoint = Community.endpoint()
         return createObject(endpoint, object: object)
@@ -428,6 +440,7 @@ struct APIService {
     //MARK: - Helpers -
     
 //TODO:    @availability(*, unavailable)
+    
     private func emptyResponseMapping() -> (AnyObject? -> Void?) {
         return  { response in
             if let json = response as? NSDictionary {
