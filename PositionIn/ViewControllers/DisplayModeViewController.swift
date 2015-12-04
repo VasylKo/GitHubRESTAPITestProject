@@ -182,7 +182,7 @@ protocol BrowseActionConsumer: class {
             navigationController?.pushViewController(controller, animated: true)
         case .Training:
             trackGoogleAnalyticsEvent("Main", action: "Click", label: "Product")
-            let controller =  Storyboards.Main.instantiateProductDetailsViewControllerId()
+            let controller =  Storyboards.Main.instantiateTrainingDetailsViewControllerId()
             controller.objectId = objectId
             controller.author = data as? ObjectInfo
             navigationController?.pushViewController(controller, animated: true)

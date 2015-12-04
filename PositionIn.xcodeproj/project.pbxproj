@@ -79,6 +79,8 @@
 		D12EDEC71BFF4F0D00FB6245 /* PhoneVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D12EDEC61BFF4F0D00FB6245 /* PhoneVerificationViewController.swift */; };
 		D153AB7D1C11BBDA00DFB5C9 /* EmergencyDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D153AB7B1C11BBDA00DFB5C9 /* EmergencyDetailsController.swift */; };
 		D153AB7E1C11BBDA00DFB5C9 /* PositionIn.EmergencyDetailsController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D153AB7C1C11BBDA00DFB5C9 /* PositionIn.EmergencyDetailsController.xib */; };
+		D153AB811C11D50800DFB5C9 /* TrainingDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D153AB7F1C11D50800DFB5C9 /* TrainingDetailsViewController.swift */; };
+		D153AB821C11D50800DFB5C9 /* PositionIn.TrainingDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D153AB801C11D50800DFB5C9 /* PositionIn.TrainingDetailsViewController.xib */; };
 		D15F47441C088A26009ED3FD /* HomeItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15F47431C088A26009ED3FD /* HomeItem.swift */; };
 		D15F47471C0AFDAF009ED3FD /* CallAmbulanceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15F47461C0AFDAF009ED3FD /* CallAmbulanceViewController.swift */; };
 		D15F47491C0B77D7009ED3FD /* AmbulanceBaseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15F47481C0B77D7009ED3FD /* AmbulanceBaseController.swift */; };
@@ -539,6 +541,8 @@
 		D12EDEC61BFF4F0D00FB6245 /* PhoneVerificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhoneVerificationViewController.swift; sourceTree = "<group>"; };
 		D153AB7B1C11BBDA00DFB5C9 /* EmergencyDetailsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmergencyDetailsController.swift; sourceTree = "<group>"; };
 		D153AB7C1C11BBDA00DFB5C9 /* PositionIn.EmergencyDetailsController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.EmergencyDetailsController.xib; sourceTree = "<group>"; };
+		D153AB7F1C11D50800DFB5C9 /* TrainingDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrainingDetailsViewController.swift; sourceTree = "<group>"; };
+		D153AB801C11D50800DFB5C9 /* PositionIn.TrainingDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.TrainingDetailsViewController.xib; sourceTree = "<group>"; };
 		D15F47431C088A26009ED3FD /* HomeItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeItem.swift; sourceTree = "<group>"; };
 		D15F47461C0AFDAF009ED3FD /* CallAmbulanceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CallAmbulanceViewController.swift; sourceTree = "<group>"; };
 		D15F47481C0B77D7009ED3FD /* AmbulanceBaseController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AmbulanceBaseController.swift; sourceTree = "<group>"; };
@@ -2662,6 +2666,8 @@
 				2431EBE71B95BD3B009FB158 /* PositionIn.PromotionDetailsViewController.xib */,
 				D153AB7B1C11BBDA00DFB5C9 /* EmergencyDetailsController.swift */,
 				D153AB7C1C11BBDA00DFB5C9 /* PositionIn.EmergencyDetailsController.xib */,
+				D153AB7F1C11D50800DFB5C9 /* TrainingDetailsViewController.swift */,
+				D153AB801C11D50800DFB5C9 /* PositionIn.TrainingDetailsViewController.xib */,
 			);
 			name = ProductDetails;
 			path = PositionIn/ProductDetails;
@@ -3231,6 +3237,7 @@
 				D153AB7E1C11BBDA00DFB5C9 /* PositionIn.EmergencyDetailsController.xib in Resources */,
 				D18EA2CF1C04B38400A886A5 /* PositionIn.BrowseGridViewController.xib in Resources */,
 				D1B780BC1C0E48E200EF5825 /* PositionIn.MembershipPlansCell.xib in Resources */,
+				D153AB821C11D50800DFB5C9 /* PositionIn.TrainingDetailsViewController.xib in Resources */,
 				E661159B1B73A0CB003DB5B3 /* PositionIn.BrowseListViewController.xib in Resources */,
 				E6F7A47F1BA356130069152A /* PositionIn.LocationCell.xib in Resources */,
 			);
@@ -3406,6 +3413,7 @@
 				E6FC24C31BAAEC23006FE7A0 /* Conversation.swift in Sources */,
 				E66115A81B73AE0F003DB5B3 /* AddPromotionViewController.swift in Sources */,
 				D1C475EA1C106DB70096D383 /* DonateNotificationViewController.swift in Sources */,
+				D153AB811C11D50800DFB5C9 /* TrainingDetailsViewController.swift in Sources */,
 				E68B52281B875F8F006B980C /* PromotionListCell.swift in Sources */,
 				D12EDEC71BFF4F0D00FB6245 /* PhoneVerificationViewController.swift in Sources */,
 				500D7FA31BC2AACF008C8C82 /* SearchItem.swift in Sources */,
