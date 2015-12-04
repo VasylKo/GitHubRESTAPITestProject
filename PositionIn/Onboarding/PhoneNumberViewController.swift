@@ -17,9 +17,10 @@ class PhoneNumberViewController: XLFormViewController {
     }
     
     private enum Countries : Int {
-        case Kenya = 0, USA, UK, Swizerland, France, Israel, Russia
+        case Kenya = 0, Swizerland, France
+        //USA, UK, Swizerland, France, Israel, Russia
         
-        static let allValues = [Kenya, USA, UK, Swizerland, France, Israel, Russia]
+        static let allValues = [Kenya, Swizerland, France]
     }
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
@@ -44,10 +45,10 @@ class PhoneNumberViewController: XLFormViewController {
     }
     
     func initializeForm() {
-        let form = XLFormDescriptor(title: NSLocalizedString("You Phone Number", comment: "New post: form caption"))
+        let form = XLFormDescriptor(title: NSLocalizedString("Your Phone Number", comment: "New post: form caption"))
         
         //Country code section
-        let countryCodeSection = XLFormSectionDescriptor.formSectionWithTitle("Please confirm you country code\nand enter your phone number")
+        let countryCodeSection = XLFormSectionDescriptor.formSectionWithTitle("Please confirm your country code\nand enter your phone number")
         form.addFormSection(countryCodeSection)
         
         let coutryRow : XLFormRowDescriptor = XLFormRowDescriptor(tag: Tags.CountryCode.rawValue,
@@ -86,10 +87,10 @@ class PhoneNumberViewController: XLFormViewController {
         
         let phoneRow: XLFormRowDescriptor = XLFormRowDescriptor(tag: Tags.Phone.rawValue,
             rowType: XLFormRowDescriptorTypePhone)
-        phoneRow.cellConfigAtConfigure["textField.placeholder"] = "Enter you phone number"
+        phoneRow.cellConfigAtConfigure["textField.placeholder"] = "Enter your phone number"
         phoneRow.required = true
         phoneRow.addValidator(XLFormRegexValidator(msg: NSLocalizedString("Please specify a valid phone number",
-            comment: "Onboarding"), regex: "^\\d+$"))
+            comment: "Onboarding"), regex: "^\\+?\\d+$"))
         phoneNumberSection.addFormRow(phoneRow)
         
         self.form = form
@@ -118,27 +119,39 @@ class PhoneNumberViewController: XLFormViewController {
             countryCode = nil
         }
         
-        if let countryCode = countryCode,
-            let phoneRowString = phoneRow?.value {
-                
-                let phoneNumber = "\(countryCode)\(phoneRowString)"
-                
-                let alertController = UIAlertController(title: NSLocalizedString("Number Confirmation", comment: "Onboarding"),
-                    message: "Is your phone number below correct?\n\(phoneNumber)", preferredStyle: .Alert)
-                
-                let cancelAction = UIAlertAction(title: "Edit", style: .Cancel, handler: nil)
-                alertController.addAction(cancelAction)
-                
-                let OKAction = UIAlertAction(title: "Yes", style: .Default) {[weak self] (action) in
-                    api().verifyPhone(phoneNumber).onSuccess(callback: {[weak self] in
-                        let validationController = Storyboards.Onboarding.instantiatePhoneVerificationController()
-                        validationController.phoneNumber = phoneNumber
-                        self?.navigationController?.pushViewController(validationController, animated: true)
-                        })
+        if let phoneRow = phoneRow?.value {
+            let phoneRowString = "\(phoneRow)"
+            let phoneNumber : String
+            
+            if phoneRowString.hasPrefix("+") {
+                phoneNumber = phoneRowString
+            }
+            else {
+                if let countryCode = countryCode {
+                    phoneNumber = "\(countryCode)\(phoneRowString)"
                 }
-                alertController.addAction(OKAction)
-                
-                self.presentViewController(alertController, animated: true, completion: nil)
+                else {
+                    return
+                }
+            }
+            
+            let alertController = UIAlertController(title: NSLocalizedString("Number Confirmation",
+                comment: "Onboarding"),
+                message: "Is your phone number below correct?\n\(phoneNumber)", preferredStyle: .Alert)
+            
+            let cancelAction = UIAlertAction(title: "Edit", style: .Cancel, handler: nil)
+            alertController.addAction(cancelAction)
+            
+            let OKAction = UIAlertAction(title: "Yes", style: .Default) {[weak self] (action) in
+                api().verifyPhone(phoneNumber).onSuccess(callback: {[weak self] in
+                    let validationController = Storyboards.Onboarding.instantiatePhoneVerificationController()
+                    validationController.phoneNumber = phoneNumber
+                    self?.navigationController?.pushViewController(validationController, animated: true)
+                    })
+            }
+            alertController.addAction(OKAction)
+            
+            self.presentViewController(alertController, animated: true, completion: nil)
         }
     }
     
@@ -146,18 +159,18 @@ class PhoneNumberViewController: XLFormViewController {
         switch value {
         case .Kenya:
             return "Kenya"
-        case .USA:
-            return "United States"
-        case .UK:
-            return "United Kingdom"
+//        case .USA:
+//            return "United States"
+//        case .UK:
+//            return "United Kingdom"
         case .Swizerland:
             return "Swizerland"
         case .France:
             return "France"
-        case .Israel:
-            return "Israel"
-        case .Russia:
-            return "Russia"
+//        case .Israel:
+//            return "Israel"
+//        case .Russia:
+//            return "Russia"
         }
     }
     
@@ -165,22 +178,22 @@ class PhoneNumberViewController: XLFormViewController {
         switch value {
         case .Kenya:
             return "+254"
-        case .USA:
-            return "+1"
-        case .UK:
-            return "+44"
+//        case .USA:
+//            return "+1"
+//        case .UK:
+//            return "+44"
         case .Swizerland:
             return "+41"
         case .France:
             return "+33"
-        case .Israel:
-            return "+972"
-        case .Russia:
-            return "+7"
+//        case .Israel:
+//            return "+972"
+//        case .Russia:
+//            return "+7"
         }
     }
     
-    private var countryNumber: Int?
+    private var countryNumber: Int? = 0
     
     @IBOutlet private weak var doneButton: UIBarButtonItem!
     @IBOutlet private weak var phoneNumberTextField: UITextField!

@@ -18,7 +18,7 @@ final class PromotionDetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = NSLocalizedString("Promotion", comment: "Promotion details: title")
+        title = NSLocalizedString("Emergency", comment: "Promotion details: title")
         dataSource.items = promotionActionItems()
         dataSource.configureTable(actionTableView)
         reloadData()
@@ -27,26 +27,26 @@ final class PromotionDetailsViewController: UIViewController {
     
     private func reloadData() {
         if let objectId = objectId {
-            api().getPromotion(objectId).onSuccess { [weak self] promotion in
-                self?.didReceivePromotionDetails(promotion)
+            api().getOne(objectId).onSuccess {[weak self] product in
+                self?.didReceivePromotionDetails(product)
             }
         }
     }
     
-    private func didReceivePromotionDetails(promotion: Promotion) {
-        self.promotion = promotion
-        headerLabel.text = promotion.name
-        detailsLabel.text = promotion.text
+    private func didReceivePromotionDetails(product: Product) {
+        self.product = product
+        headerLabel.text = product.name
+        detailsLabel.text = product.text
         
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
         
-        let startDate = dateFormatter.stringFromDate(promotion.startDate ?? NSDate())
-        let endDate = dateFormatter.stringFromDate(promotion.endDate ?? NSDate())
-        priceLabel.text = "\(startDate) - \(endDate)"
-        let discountFormat = NSLocalizedString("Save %.1f%%", comment: "Promotion details: DiscountFormat")
-        infoLabel.text = promotion.discount.map { String(format: discountFormat, $0 )}
-        promotionImageView.setImageFromURL(promotion.photos?.first?.url, placeholder: UIImage(named: "PromotionDetailsPlaceholder"))
+//        let startDate = dateFormatter.stringFromDate(product.startDate ?? NSDate())
+//        let endDate = dateFormatter.stringFromDate(product.endDate ?? NSDate())
+//        priceLabel.text = "\(startDate) - \(endDate)"
+//        let discountFormat = NSLocalizedString("Save %.1f%%", comment: "Promotion details: DiscountFormat")
+//        infoLabel.text = product.discount.map { String(format: discountFormat, $0 )}
+        promotionImageView.setImageFromURL(product.photos?.first?.url, placeholder: UIImage(named: "PromotionDetailsPlaceholder"))
     }
     
     private lazy var dataSource: PromotionDetailsDataSource = { [unowned self] in
@@ -63,16 +63,16 @@ final class PromotionDetailsViewController: UIViewController {
             ],
             [ // 1 section
                 PromotionActionItem(title: NSLocalizedString("Send Message", comment: "Promotion action: Send Message"), image: "productSendMessage", action: .SendMessage),
-                PromotionActionItem(title: NSLocalizedString("Seller Profile", comment: "Promotion action: Seller Profile"), image: "productSellerProfile", action: .SellerProfile),
+                PromotionActionItem(title: NSLocalizedString("Organize Profile", comment: "Promotion action: Seller Profile"), image: "productSellerProfile", action: .SellerProfile),
                 PromotionActionItem(title: NSLocalizedString("Terms and Information", comment: "Promotion action: Terms and Information"), image: "productTerms&Info", action: .TermsAndInformation),
-                PromotionActionItem(title: NSLocalizedString("Navigate", comment: "Promotion action: Navigate"), image: "productNavigate", action: .Navigate)
+                PromotionActionItem(title: NSLocalizedString("More Information", comment: "Promotion action: Navigate"), image: "productNavigate", action: .Navigate)
             ],
         ]
     }
     
     
     var objectId: CRUDObjectId?
-    private var promotion: Promotion?
+    private var product: Product?
     
     @IBOutlet private weak var actionTableView: UITableView!
     @IBOutlet private weak var promotionImageView: UIImageView!
@@ -90,7 +90,7 @@ extension PromotionDetailsViewController {
         var description: String {
             switch self {
             case .ProductsOnSale:
-                return "Products on Sale"
+                return "Donate"
             case .SendMessage:
                 return "Send Message"
             case .SellerProfile:
@@ -109,21 +109,23 @@ extension PromotionDetailsViewController {
         let image: String
         let action: PromotionDetailsAction
     }
+    
+    
 }
 
 extension PromotionDetailsViewController: PromotionDetailsActionConsumer {
     func executeAction(action: PromotionDetailsAction) {
         switch action {
-        case .SellerProfile:
-            if let userId = promotion?.author {
-                let profileController = Storyboards.Main.instantiateUserProfileViewController()
-                profileController.objectId = userId
-                navigationController?.pushViewController(profileController, animated: true)
-            }
-        case .SendMessage:
-            if let userId = promotion?.author {
-                showChatViewController(userId)
-            }
+//        case .SellerProfile:
+//            if let userId = product?.author {
+//                let profileController = Storyboards.Main.instantiateUserProfileViewController()
+//                profileController.objectId = userId
+//                navigationController?.pushViewController(profileController, animated: true)
+//            }
+//        case .SendMessage:
+//            if let userId = product?.author {
+//                showChatViewController(userId)
+//            }
 
         default:
             Log.warning?.message("Unhandled action: \(action)")

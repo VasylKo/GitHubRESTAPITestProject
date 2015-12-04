@@ -32,7 +32,7 @@ final class BrowseMapViewController: UIViewController, BrowseActionProducer, Bro
     
     var browseMode: BrowseModeTabbarViewController.BrowseMode = .ForYou
     
-    let visibleItemTypes: [FeedItem.ItemType] = [.Event, .Promotion, .Item]
+    let visibleItemTypes: [FeedItem.ItemType] = [.Project, .Emergency, .Training]
     
     var filter = SearchFilter.currentFilter
     
@@ -56,11 +56,11 @@ final class BrowseMapViewController: UIViewController, BrowseActionProducer, Bro
     private func displayFeedItems(items: [FeedItem]) {
         func  markerIcon(item: FeedItem) -> UIImage? {
             switch item.type {
-            case .Event:
+            case .Project:
                 return UIImage(named: "EventMarker")
-            case .Promotion:
+            case .Emergency:
                 return UIImage(named: "PromotionMarker")
-            case .Item:
+            case .Training:
                 return UIImage(named: "ProductMarker")
             default:
                 return nil

@@ -97,21 +97,21 @@ class ItemsSearchResultsController: NSObject {
                         title: model.title, searchString: searchBar?.text, subtitle: nil, localImageName: "placeholderEvent", remoteImageURL: nil)
                     tableViewModels.append(searchItemCellModel)
                     isHeaderCellTappable = true
-                    feedItemType = FeedItem.ItemType.Event
+                    feedItemType = .Project
                 case .Product:
                     let model = array[i]
                     let searchItemCellModel = SearchItemCellModel(itemType: type, objectID: model.objectId,
                         title: model.title, searchString: searchBar?.text,subtitle: nil, localImageName: "placeholderProduct", remoteImageURL: nil)
                     tableViewModels.append(searchItemCellModel)
                     isHeaderCellTappable = true
-                    feedItemType = FeedItem.ItemType.Item
+                    feedItemType = .Training
                 case .Promotion:
                     let model = array[i]
                     let searchItemCellModel = SearchItemCellModel(itemType: type, objectID: model.objectId,
                         title: model.title, searchString: searchBar?.text,subtitle: nil, localImageName: "placeholderPromotion", remoteImageURL: nil)
                     tableViewModels.append(searchItemCellModel)
                     isHeaderCellTappable = true
-                    feedItemType = FeedItem.ItemType.Promotion
+                    feedItemType = .Emergency
                 case .Community:
                     if let model = array[i] as? UserInfo  {
                         let searchItemCellModel = SearchItemCellModel(itemType: type, objectID: model.objectId,

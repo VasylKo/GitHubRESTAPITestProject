@@ -9,6 +9,7 @@
 import ObjectMapper
 import CleanroomLogger
 
+
 struct Product: CRUDObject {
     var objectId: CRUDObjectId = CRUDObjectInvalidId
     var name: String?
@@ -16,9 +17,11 @@ struct Product: CRUDObject {
     var category: ItemCategory?
     var quantity: Int?
     var price: Float?
+    var donations: Float?
     var deliveryMethod: DeliveryMethod? = .Unknown
     var photos: [PhotoInfo]?
     var location: Location?
+    var imageURLString: String?
     
 /*
     //TODO:
@@ -63,9 +66,11 @@ struct Product: CRUDObject {
         category <- (map["category"], EnumTransform())
         quantity <- map["quantity"]
         price <- map["price"]
+        donations <- map["donations"]
         deliveryMethod <- (map["deliveryMethod"], EnumTransform())
         photos <- map["photos"]
         location <- map["location"]
+        imageURLString <- map["image"]
     }
     
     static func endpoint() -> String {

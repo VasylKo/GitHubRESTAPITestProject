@@ -219,6 +219,9 @@ protocol BrowseModeDisplay {
     
     func browseGridViewControllerSelectItem(itemType: HomeItem) {
         switch itemType {
+        case .Membership:
+            self.navigationController?.pushViewController(Storyboards.Onboarding.instantiateMembershipPlansViewController(), animated: true)
+            
         case .Emergency:
             fallthrough
         case .Training:
@@ -234,6 +237,8 @@ protocol BrowseModeDisplay {
             }
             self.searchViewControllerHomeItemSelected(itemType, locationString: nil)
             self.tabbarDidChangeMode(self.tabbar)
+        case .Donate:
+            self.navigationController?.pushViewController(Storyboards.Onboarding.instantiateDonateViewController(), animated: true)
         case .Ambulance:
             self.navigationController?.pushViewController(Storyboards.Onboarding.instantiateCallAmbulanceViewController(), animated: true)
         default:

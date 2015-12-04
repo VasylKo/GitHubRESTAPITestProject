@@ -195,10 +195,10 @@ struct APIService {
         return self.createObject(endpoint, object: object)
     }
     
-    func getProduct(objectId: CRUDObjectId, inShop shop: CRUDObjectId) -> Future<Product, NSError> {
-        let endpoint = Product.shopItemsEndpoint(shop, productId: objectId)
-        return self.getObject(endpoint)
-    }
+//    func getProduct(objectId: CRUDObjectId, inShop shop: CRUDObjectId) -> Future<Product, NSError> {
+//        let endpoint = Product.shopItemsEndpoint(shop, productId: objectId)
+//        return self.getObject(endpoint)
+//    }
     
     //MARK: - Community -
     
@@ -216,6 +216,18 @@ struct APIService {
     func getCommunity(communityId: CRUDObjectId) -> Future<Community, NSError> {
         let endpoint = Community.communityEndpoint(communityId)
         return getObject(endpoint)
+    }
+    
+    func createAmbulanceRequest(object: AmbulanceRequest) -> Future<Void, NSError> {
+        let endpoint = AmbulanceRequest.endpoint()
+        typealias CRUDResultType = (Alamofire.Request, Future<Void, NSError>)
+        let params = Mapper().toJSON(object)
+        return session().flatMap {
+            (token: AuthResponse.Token) -> Future<Void, NSError> in
+            let request = self.updateRequest(token, endpoint: endpoint, method: .POST, params: params)
+            let (_, future): CRUDResultType = self.dataProvider.jsonRequest(request, map: self.emptyResponseMapping(), validation: nil)
+            return future
+        }
     }
     
     func createCommunity(community object: Community) -> Future<Community, NSError> {
@@ -340,12 +352,22 @@ struct APIService {
         
         let endpoint = FeedItem.getAllEndpoint()
         let params = APIServiceQuery()
-        params.append("type", value: homeItem.valueForRequest())
+        params.append("type", value: homeItem.rawValue)
         Log.debug?.value(params.query)
         return session().flatMap {
             (token: AuthResponse.Token) -> Future<CollectionResponse<FeedItem>, NSError> in
             let request = self.updateRequest(token, endpoint: endpoint, params: params.query)
             let (_ , future): (Alamofire.Request, Future<CollectionResponse<FeedItem>, NSError>) = self.dataProvider.objectRequest(request)
+            return self.handleFailure(future)
+        }
+    }
+    
+    func getOne(objectId: CRUDObjectId) -> Future<Product, NSError> {
+        let endpoint = FeedItem.getOneEndpoint(objectId)
+        return session().flatMap {
+            (token: AuthResponse.Token) -> Future<Product, NSError> in
+            let request = self.updateRequest(token, endpoint: endpoint, params: nil, method: .GET)
+            let (_ , future): (Alamofire.Request, Future<Product, NSError>) = self.dataProvider.objectRequest(request)
             return self.handleFailure(future)
         }
     }
@@ -418,6 +440,7 @@ struct APIService {
     //MARK: - Helpers -
     
 //TODO:    @availability(*, unavailable)
+    
     private func emptyResponseMapping() -> (AnyObject? -> Void?) {
         return  { response in
             if let json = response as? NSDictionary {

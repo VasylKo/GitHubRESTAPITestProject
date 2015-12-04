@@ -4,6 +4,7 @@
 //
 
 import UIKit
+import PositionIn
 
 //MARK: - Storyboards
 
@@ -76,6 +77,10 @@ struct Storyboards {
             return self.storyboard.instantiateViewControllerWithIdentifier("BrowseMapViewController") as! BrowseMapViewController
         }
 
+        static func instantiateTrainingDetailsViewControllerId() -> TrainingDetailsViewController {
+            return self.storyboard.instantiateViewControllerWithIdentifier("TrainingDetailsViewControllerId") as! TrainingDetailsViewController
+        }
+
         static func instantiateBrowseGridViewController() -> BrowseGridViewController {
             return self.storyboard.instantiateViewControllerWithIdentifier("BrowseGridViewController") as! BrowseGridViewController
         }
@@ -86,6 +91,10 @@ struct Storyboards {
 
         static func instantiateProductDetailsViewControllerId() -> ProductDetailsViewController {
             return self.storyboard.instantiateViewControllerWithIdentifier("ProductDetailsViewControllerId") as! ProductDetailsViewController
+        }
+
+        static func instantiateEmergencyDetailsControllerId() -> EmergencyDetailsController {
+            return self.storyboard.instantiateViewControllerWithIdentifier("EmergencyDetailsControllerId") as! EmergencyDetailsController
         }
 
         static func instantiateEventDetailsViewControllerId() -> EventDetailsViewController {
@@ -271,12 +280,40 @@ struct Storyboards {
             return self.storyboard.instantiateViewControllerWithIdentifier("PhoneVerificationController") as! PhoneVerificationViewController
         }
 
+        static func instantiateMembershipPlansViewController() -> MembershipPlansViewController {
+            return self.storyboard.instantiateViewControllerWithIdentifier("MembershipPlansViewController") as! MembershipPlansViewController
+        }
+
+        static func instantiatePlansViewController() -> PlansViewController {
+            return self.storyboard.instantiateViewControllerWithIdentifier("PlansViewController") as! PlansViewController
+        }
+
+        static func instantiateSelectMembershipPlansViewController() -> SelectMembershipPlansViewController {
+            return self.storyboard.instantiateViewControllerWithIdentifier("SelectMembershipPlansViewController") as! SelectMembershipPlansViewController
+        }
+
         static func instantiatePhoneNumberNavigationController() -> OnboardingNavigationController {
             return self.storyboard.instantiateViewControllerWithIdentifier("PhoneNumberNavigationController") as! OnboardingNavigationController
         }
 
         static func instantiateCallAmbulanceViewController() -> CallAmbulanceViewController {
             return self.storyboard.instantiateViewControllerWithIdentifier("CallAmbulanceViewController") as! CallAmbulanceViewController
+        }
+
+        static func instantiateDonateViewController() -> DonateViewController {
+            return self.storyboard.instantiateViewControllerWithIdentifier("DonateViewController") as! DonateViewController
+        }
+
+        static func instantiateSelectPaymentMethodController() -> SelectPaymentMethodController {
+            return self.storyboard.instantiateViewControllerWithIdentifier("SelectPaymentMethodController") as! SelectPaymentMethodController
+        }
+
+        static func instantiateDonateNotificationViewController() -> DonateNotificationViewController {
+            return self.storyboard.instantiateViewControllerWithIdentifier("DonateNotificationViewController") as! DonateNotificationViewController
+        }
+
+        static func instantiatePaymentCompletedViewController() -> PaymentCompletedViewController {
+            return self.storyboard.instantiateViewControllerWithIdentifier("PaymentCompletedViewController") as! PaymentCompletedViewController
         }
     }
 }
@@ -559,6 +596,13 @@ extension BrowseMapViewController: IdentifiableProtocol {
 }
 
 
+//MARK: - TrainingDetailsViewController
+extension TrainingDetailsViewController: IdentifiableProtocol { 
+    var identifier: String? { return "TrainingDetailsViewControllerId" }
+    static var identifier: String? { return "TrainingDetailsViewControllerId" }
+}
+
+
 //MARK: - BrowseGridViewController
 extension BrowseGridViewController: IdentifiableProtocol { 
     var identifier: String? { return "BrowseGridViewController" }
@@ -624,6 +668,13 @@ extension ProductDetailsViewController {
     }
 
 }
+
+//MARK: - EmergencyDetailsController
+extension EmergencyDetailsController: IdentifiableProtocol { 
+    var identifier: String? { return "EmergencyDetailsControllerId" }
+    static var identifier: String? { return "EmergencyDetailsControllerId" }
+}
+
 
 //MARK: - EventDetailsViewController
 extension UIStoryboardSegue {
@@ -1133,45 +1184,11 @@ extension AddProductViewController {
 }
 
 //MARK: - AddPostViewController
-extension UIStoryboardSegue {
-    func selection() -> AddPostViewController.Segue? {
-        if let identifier = self.identifier {
-            return AddPostViewController.Segue(rawValue: identifier)
-        }
-        return nil
-    }
-}
-
 extension AddPostViewController: IdentifiableProtocol { 
     var identifier: String? { return "AddPostViewController" }
     static var identifier: String? { return "AddPostViewController" }
 }
 
-extension AddPostViewController { 
-
-    enum Segue: String, CustomStringConvertible, SegueProtocol {
-        case Close = "Close"
-
-        var kind: SegueKind? {
-            switch (self) {
-            case Close:
-                return SegueKind(rawValue: "unwind")
-            }
-        }
-
-        var destination: UIViewController.Type? {
-            switch (self) {
-            default:
-                assertionFailure("Unknown destination")
-                return nil
-            }
-        }
-
-        var identifier: String? { return self.description } 
-        var description: String { return self.rawValue }
-    }
-
-}
 
 //MARK: - AddCommunityViewController
 extension UIStoryboardSegue {
@@ -1457,6 +1474,27 @@ extension PhoneVerificationViewController {
 
 //MARK: - EditProfileViewController
 
+//MARK: - MembershipPlansViewController
+extension MembershipPlansViewController: IdentifiableProtocol { 
+    var identifier: String? { return "MembershipPlansViewController" }
+    static var identifier: String? { return "MembershipPlansViewController" }
+}
+
+
+//MARK: - PlansViewController
+extension PlansViewController: IdentifiableProtocol { 
+    var identifier: String? { return "PlansViewController" }
+    static var identifier: String? { return "PlansViewController" }
+}
+
+
+//MARK: - SelectMembershipPlansViewController
+extension SelectMembershipPlansViewController: IdentifiableProtocol { 
+    var identifier: String? { return "SelectMembershipPlansViewController" }
+    static var identifier: String? { return "SelectMembershipPlansViewController" }
+}
+
+
 //MARK: - OnboardingNavigationController
 extension OnboardingNavigationController: IdentifiableProtocol { 
     var identifier: String? { return "PhoneNumberNavigationController" }
@@ -1506,6 +1544,27 @@ extension CallAmbulanceViewController {
 
 //MARK: - AmbulanceSentViewController
 
+//MARK: - DonateViewController
+extension DonateViewController: IdentifiableProtocol { 
+    var identifier: String? { return "DonateViewController" }
+    static var identifier: String? { return "DonateViewController" }
+}
+
+
+//MARK: - SelectPaymentMethodController
+extension SelectPaymentMethodController: IdentifiableProtocol { 
+    var identifier: String? { return "SelectPaymentMethodController" }
+    static var identifier: String? { return "SelectPaymentMethodController" }
+}
+
+
+//MARK: - DonateNotificationViewController
+extension DonateNotificationViewController: IdentifiableProtocol { 
+    var identifier: String? { return "DonateNotificationViewController" }
+    static var identifier: String? { return "DonateNotificationViewController" }
+}
+
+
 //MARK: - AmbulanceRequestedViewController
 extension UIStoryboardSegue {
     func selection() -> AmbulanceRequestedViewController.Segue? {
@@ -1540,3 +1599,10 @@ extension AmbulanceRequestedViewController {
     }
 
 }
+
+//MARK: - PaymentCompletedViewController
+extension PaymentCompletedViewController: IdentifiableProtocol { 
+    var identifier: String? { return "PaymentCompletedViewController" }
+    static var identifier: String? { return "PaymentCompletedViewController" }
+}
+

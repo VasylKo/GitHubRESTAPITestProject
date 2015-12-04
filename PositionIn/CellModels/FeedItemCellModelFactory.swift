@@ -13,60 +13,63 @@ struct FeedItemCellModelFactory {
     
     func compactModelsForItem(feedItem: FeedItem) -> [TableViewCellModel] {
         switch feedItem.type {
-        case .Event:
-            return [
-                CompactFeedTableCellModel(
-                    itemType: feedItem.type,
-                    objectID: feedItem.objectId,
-                    title: feedItem.name,
-                    details: feedItem.text,
-                    info: feedItem.date.map {dateFormatter.stringFromDate($0)},
-                    imageURL: feedItem.image,
-                    data: feedItem.itemData
-                ),
-            ]
-            
-        case .Post:
-            return [
-                CompactFeedTableCellModel(
-                    itemType: feedItem.type,
-                    objectID: feedItem.objectId,
-                    title: feedItem.name,
-                    details: feedItem.text,
-                    info: nil,
-                    imageURL: feedItem.image,
-                    data: feedItem.itemData
-                ),
-            ]
+        case .Emergency:
+//            return [
+//                CompactFeedTableCellModel(
+//                    itemType: feedItem.type,
+//                    objectID: feedItem.objectId,
+//                    title: feedItem.name,
+//                    details: feedItem.text,
+//                    info: nil,
+//                    price: feedItem.donations,
+//                    imageURL: feedItem.image,
+//                    data: feedItem.itemData
+//                ),
+//            ]
+                fallthrough
 
-        case .Promotion:
-            let discountFormat = NSLocalizedString("Save %@%%", comment: "Compact feed: DiscountFormat")
+        case .Training:
+//            return [
+//                CompactFeedTableCellModel(
+//                    itemType: feedItem.type,
+//                    objectID: feedItem.objectId,
+//                    title: feedItem.name,
+//                    details: feedItem.author?.title,
+//                    info: nil,
+//                    price: feedItem.donations,
+//                    imageURL: feedItem.image,
+//                    data: feedItem.itemData
+//                ),
+//            ]
+            fallthrough
+        case .Project:
             return [
                 CompactFeedTableCellModel(
-                    itemType: feedItem.type,
-                    objectID: feedItem.objectId,
-                    title: feedItem.name,
-                    details: feedItem.category.map { $0.displayString() },
-                    info: feedItem.details.map { String(format: discountFormat, $0 )},
-                    imageURL: feedItem.image,
-                    data: feedItem.itemData
-                ),
-            ]
-        case .Item:
-            return [
-                ComapctBadgeFeedTableCellModel (
                     itemType: feedItem.type,
                     objectID: feedItem.objectId,
                     title: feedItem.name,
                     details: feedItem.author?.title,
-                    info: feedItem.date.map {dateFormatter.stringFromDate($0)},
+                    info: nil,
+                    price: feedItem.donations,
                     imageURL: feedItem.image,
-                    badge: feedItem.price.map {
-                        let newValue = $0 as Float
-                        return AppConfiguration().currencyFormatter.stringFromNumber(NSNumber(float: newValue)) ?? ""},
                     data: feedItem.itemData
                 ),
             ]
+//        case .Item:
+//            return [
+//                ComapctBadgeFeedTableCellModel (
+//                    itemType: feedItem.type,
+//                    objectID: feedItem.objectId,
+//                    title: feedItem.name,
+//                    details: feedItem.author?.title,
+//                    info: feedItem.date.map {dateFormatter.stringFromDate($0)},
+//                    imageURL: feedItem.image,
+//                    badge: feedItem.price.map {
+//                        let newValue = $0 as Float
+//                        return AppConfiguration().currencyFormatter.stringFromNumber(NSNumber(float: newValue)) ?? ""},
+//                    data: feedItem.itemData
+//                ),
+//            ]
         case .Unknown:
             fallthrough
         default:
@@ -77,13 +80,11 @@ struct FeedItemCellModelFactory {
     func compactCellReuseIdForModel(model: TableViewCellModel) -> String {
         if let model = model as? CompactFeedTableCellModel {
             switch model.itemType {
-            case .Promotion:
-                return PromotionListCell.reuseId()
-            case .Event:
-                return EventListCell.reuseId()
-            case .Post:
-                return PostListCell.reuseId()
-            case .Item:
+            case .Project:
+                return ProductListCell.reuseId()
+            case .Emergency:
+                return ProductListCell.reuseId()
+            case .Training:
                 return ProductListCell.reuseId()
             default:
                 break
@@ -93,7 +94,7 @@ struct FeedItemCellModelFactory {
     }
     
     func compactCellsReuseId() -> [String]  {
-        return [ProductListCell.reuseId(), EventListCell.reuseId(), PromotionListCell.reuseId(), PostListCell.reuseId()]
+        return [ProductListCell.reuseId()]
     }
     
     func detailedModelsForItem(feedItem: FeedItem) -> [TableViewCellModel] {

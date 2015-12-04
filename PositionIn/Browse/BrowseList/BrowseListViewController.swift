@@ -126,19 +126,17 @@ final class BrowseListViewController: UIViewController, BrowseActionProducer, Br
     }
     
     @IBAction func displayModeSegmentedControlChanged(sender: UISegmentedControl) {
-        let segmentMapping: [Int: FeedItem.ItemType] = [
-            0: .Unknown,
-            1: .Item,
-            2: .Event,
-            3: .Promotion,
-            4: .Post,
-        ]
-        if let newFilterValue = segmentMapping[sender.selectedSegmentIndex] {
-            selectedItemType = newFilterValue
-        }
+//        let segmentMapping: [Int: FeedItem.ItemType] = [
+//            0: .Unknown,
+//            1: .Item,
+//            2: .Event,
+//            3: .Promotion,
+//            4: .Post,
+//        ]
+//        if let newFilterValue = segmentMapping[sender.selectedSegmentIndex] {
+//            selectedItemType = newFilterValue
+//        }
     }
-    
-    
     
     @IBOutlet weak var topSeparatorLine: UIView!
     @IBOutlet weak var bottomSeparatorLine: UIView!

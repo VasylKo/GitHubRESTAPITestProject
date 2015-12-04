@@ -136,8 +136,8 @@ final class EditProfileViewController: BaseAddItemViewController {
                 lastName: values[Tags.FirstName.rawValue] as? String).onSuccess(callback: {[weak self] _ in
                     trackGoogleAnalyticsEvent("Status", action: "Click", label: "Auth Success")
                     Log.info?.message("Registration done")
-                    self?.sideBarController?.executeAction(SidebarViewController.defaultAction)
-                    self?.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
+                    self?.navigationController?.pushViewController(Storyboards.Onboarding.instantiateMembershipPlansViewController(),
+                               animated: true)
                     }).onFailure(callback: {_ in
                         trackGoogleAnalyticsEvent("Status", action: "Click", label: "Auth Fail")
                     })

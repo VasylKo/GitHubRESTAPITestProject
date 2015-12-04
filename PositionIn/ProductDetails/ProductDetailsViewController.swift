@@ -19,7 +19,8 @@ final class ProductDetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = NSLocalizedString("Product", comment: "Product details: title")
+        //temporary desicion - for december demo
+        title = NSLocalizedString("Project", comment: "Product details: title")
         dataSource.items = productAcionItems()
         dataSource.configureTable(actionTableView)
         reloadData()
@@ -37,11 +38,11 @@ final class ProductDetailsViewController: UIViewController {
     
     private func reloadData() {
         self.infoLabel.text = NSLocalizedString("Calculating...", comment: "Distance calculation process")
-        nameLabel.text = author?.title
+//        nameLabel.text = author?.title
         switch (objectId, author) {
         case (.Some(let objectId), .Some(let author) ):
             api().getUserProfile(author.objectId).flatMap { (profile: UserProfile) -> Future<Product, NSError> in
-                return api().getProduct(objectId, inShop: profile.defaultShopId)
+                return api().getOne(objectId)
             }.onSuccess { [weak self] product in
                 self?.didReceiveProductDetails(product)
             }
@@ -53,14 +54,27 @@ final class ProductDetailsViewController: UIViewController {
     private func didReceiveProductDetails(product: Product) {
         self.product = product
         headerLabel.text = product.name
-        detailsLabel.text = product.text
+        detailsLabel.text = product.text?.stringByReplacingOccurrencesOfString("\\n", withString: "\n")
+        if let price = product.donations {
+            priceLabel.text = "\(Int(price)) beneficiaries"
+        }
         
-        priceLabel.text = product.price.map {
-            let newValue = $0 as Float
-            return AppConfiguration().currencyFormatter.stringFromNumber(NSNumber(float: newValue)) ?? ""}
-        let url = product.photos?.first?.url
-        let image = product.category?.productPlaceholderImage()
-        productImageView.setImageFromURL(url, placeholder: image)
+//        temporary decision
+//        priceLabel.text = product.price.map {
+//            let newValue = $0 as Float
+//            return AppConfiguration().currencyFormatter.stringFromNumber(NSNumber(float: newValue)) ?? ""}
+        
+        let imageURL: NSURL?
+        
+        if let urlString = product.imageURLString {
+            imageURL = NSURL(string:urlString)
+        } else {
+            imageURL = nil
+        }
+        
+        let image = UIImage(named: "hardware_img_default")
+
+        productImageView.setImageFromURL(imageURL, placeholder: image)
         if let coordinates = product.location?.coordinates {
             locationRequestToken.invalidate()
             locationRequestToken = InvalidationToken()
@@ -74,6 +88,7 @@ final class ProductDetailsViewController: UIViewController {
     
     var objectId: CRUDObjectId?
     var author: ObjectInfo?
+    
     private var product: Product?
     private var locationRequestToken = InvalidationToken()
     
@@ -87,12 +102,14 @@ final class ProductDetailsViewController: UIViewController {
     private func productAcionItems() -> [[ProductActionItem]] {
         return [
             [ // 0 section
-                ProductActionItem(title: NSLocalizedString("Buy Product", comment: "Product action: Buy Product"), image: "productBuyProduct", action: .Buy),
+                ProductActionItem(title: NSLocalizedString("Donate", comment: "Product action: Buy Product"),
+                    image: "home_donate",
+                    action: .Buy),
             ],
             [ // 1 section
                 ProductActionItem(title: NSLocalizedString("Send Message", comment: "Product action: Send Message"), image: "productSendMessage", action: .SendMessage),
-                ProductActionItem(title: NSLocalizedString("Seller Profile", comment: "Product action: Seller Profile"), image: "productSellerProfile", action: .SellerProfile),
-                ProductActionItem(title: NSLocalizedString("Navigate", comment: "Product action: Navigate"), image: "productNavigate", action: .ProductInventory),
+                ProductActionItem(title: NSLocalizedString("Organizer Profile", comment: "Product action: Seller Profile"), image: "productSellerProfile", action: .SellerProfile),
+                ProductActionItem(title: NSLocalizedString("More Information", comment: "Product action: Navigate"), image: "productTerms&Info", action: .ProductInventory),
             ],
         ]
         

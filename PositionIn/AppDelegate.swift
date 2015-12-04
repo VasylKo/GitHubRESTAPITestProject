@@ -14,6 +14,7 @@ import CleanroomLogger
 import Messaging
 import GoogleMaps
 import FBSDKCoreKit
+import XLForm
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -77,7 +78,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self.sidebarViewController?.executeAction(.Login)
         }
         
-        
         // [START tracker_swift]
         // Configure tracker from GoogleService-Info.plist.
         var configureError: NSError?
@@ -88,7 +88,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let gai = GAI.sharedInstance()
         gai.trackUncaughtExceptions = true  // report uncaught exceptions
         gai.logger.logLevel = AppConfiguration().googleAnalystLogLevel
-
+        
+        XLFormViewController.cellClassesForRowDescriptorTypes()[XLFormRowDescriptorTypeDonate] =
+        "DonateCell"
         
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
     }

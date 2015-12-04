@@ -6,8 +6,8 @@
     },
     {
       "idiom" : "universal",
-      "scale" : "2x",
-      "filename" : "product_map@2x.png"
+      "filename" : "%10category_projects_map@2x.png",
+      "scale" : "2x"
     },
     {
       "idiom" : "universal",
