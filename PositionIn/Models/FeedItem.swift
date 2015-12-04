@@ -36,7 +36,7 @@ struct FeedItem: CRUDObject {
         case .Training:
             return author
         default:
-            return nil
+            return author
         }
     }
     

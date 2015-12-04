@@ -89,6 +89,10 @@ struct Storyboards {
             return self.storyboard.instantiateViewControllerWithIdentifier("ProductDetailsViewControllerId") as! ProductDetailsViewController
         }
 
+        static func instantiateEmergencyDetailsControllerId() -> EmergencyDetailsController {
+            return self.storyboard.instantiateViewControllerWithIdentifier("EmergencyDetailsControllerId") as! EmergencyDetailsController
+        }
+
         static func instantiateEventDetailsViewControllerId() -> EventDetailsViewController {
             return self.storyboard.instantiateViewControllerWithIdentifier("EventDetailsViewControllerId") as! EventDetailsViewController
         }
@@ -653,6 +657,13 @@ extension ProductDetailsViewController {
     }
 
 }
+
+//MARK: - EmergencyDetailsController
+extension EmergencyDetailsController: IdentifiableProtocol { 
+    var identifier: String? { return "EmergencyDetailsControllerId" }
+    static var identifier: String? { return "EmergencyDetailsControllerId" }
+}
+
 
 //MARK: - EventDetailsViewController
 extension UIStoryboardSegue {

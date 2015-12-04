@@ -77,6 +77,8 @@
 		D118A2AB1C0FBC380020B363 /* PositionIn.CardTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D118A2A91C0FBC380020B363 /* PositionIn.CardTableViewCell.xib */; };
 		D118A2AD1C0FBDF50020B363 /* CardItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D118A2AC1C0FBDF50020B363 /* CardItem.swift */; };
 		D12EDEC71BFF4F0D00FB6245 /* PhoneVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D12EDEC61BFF4F0D00FB6245 /* PhoneVerificationViewController.swift */; };
+		D153AB7D1C11BBDA00DFB5C9 /* EmergencyDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D153AB7B1C11BBDA00DFB5C9 /* EmergencyDetailsController.swift */; };
+		D153AB7E1C11BBDA00DFB5C9 /* PositionIn.EmergencyDetailsController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D153AB7C1C11BBDA00DFB5C9 /* PositionIn.EmergencyDetailsController.xib */; };
 		D15F47441C088A26009ED3FD /* HomeItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15F47431C088A26009ED3FD /* HomeItem.swift */; };
 		D15F47471C0AFDAF009ED3FD /* CallAmbulanceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15F47461C0AFDAF009ED3FD /* CallAmbulanceViewController.swift */; };
 		D15F47491C0B77D7009ED3FD /* AmbulanceBaseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15F47481C0B77D7009ED3FD /* AmbulanceBaseController.swift */; };
@@ -535,6 +537,8 @@
 		D118A2A91C0FBC380020B363 /* PositionIn.CardTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.CardTableViewCell.xib; sourceTree = "<group>"; };
 		D118A2AC1C0FBDF50020B363 /* CardItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardItem.swift; sourceTree = "<group>"; };
 		D12EDEC61BFF4F0D00FB6245 /* PhoneVerificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhoneVerificationViewController.swift; sourceTree = "<group>"; };
+		D153AB7B1C11BBDA00DFB5C9 /* EmergencyDetailsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmergencyDetailsController.swift; sourceTree = "<group>"; };
+		D153AB7C1C11BBDA00DFB5C9 /* PositionIn.EmergencyDetailsController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.EmergencyDetailsController.xib; sourceTree = "<group>"; };
 		D15F47431C088A26009ED3FD /* HomeItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeItem.swift; sourceTree = "<group>"; };
 		D15F47461C0AFDAF009ED3FD /* CallAmbulanceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CallAmbulanceViewController.swift; sourceTree = "<group>"; };
 		D15F47481C0B77D7009ED3FD /* AmbulanceBaseController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AmbulanceBaseController.swift; sourceTree = "<group>"; };
@@ -2656,6 +2660,8 @@
 				2431EBE31B95B36D009FB158 /* PositionIn.EventDetailsViewController.xib */,
 				2431EBE51B95BD2A009FB158 /* PromotionDetailsViewController.swift */,
 				2431EBE71B95BD3B009FB158 /* PositionIn.PromotionDetailsViewController.xib */,
+				D153AB7B1C11BBDA00DFB5C9 /* EmergencyDetailsController.swift */,
+				D153AB7C1C11BBDA00DFB5C9 /* PositionIn.EmergencyDetailsController.xib */,
 			);
 			name = ProductDetails;
 			path = PositionIn/ProductDetails;
@@ -3222,6 +3228,7 @@
 				E64DC3571B4E53C90011D37C /* Images.xcassets in Resources */,
 				E6DA53C81B7D00DB000087A7 /* PositionIn.BrowseCommunityViewController.xib in Resources */,
 				E660E5321B5AC2A200F52050 /* PositionIn.MainMenuCell.xib in Resources */,
+				D153AB7E1C11BBDA00DFB5C9 /* PositionIn.EmergencyDetailsController.xib in Resources */,
 				D18EA2CF1C04B38400A886A5 /* PositionIn.BrowseGridViewController.xib in Resources */,
 				D1B780BC1C0E48E200EF5825 /* PositionIn.MembershipPlansCell.xib in Resources */,
 				E661159B1B73A0CB003DB5B3 /* PositionIn.BrowseListViewController.xib in Resources */,
@@ -3389,6 +3396,7 @@
 				E64D00631B7C8FB7007693E0 /* AddPostViewController.swift in Sources */,
 				E6F7A4811BA356500069152A /* LocationSearchResultDataSource.swift in Sources */,
 				E62B16FF1B5CE0F800D446BC /* BesideMenuViewController.swift in Sources */,
+				D153AB7D1C11BBDA00DFB5C9 /* EmergencyDetailsController.swift in Sources */,
 				E66F901B1BA6A5C100280B77 /* ChatController.swift in Sources */,
 				D1B780C81C0F4E7700EF5825 /* DonateViewController.swift in Sources */,
 				E66115A51B73A920003DB5B3 /* AddProductViewController.swift in Sources */,

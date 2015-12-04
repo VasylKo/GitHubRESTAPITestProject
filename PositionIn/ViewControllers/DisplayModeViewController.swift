@@ -47,7 +47,7 @@ protocol BrowseActionConsumer: class {
         }
     }
     
-    var displayMode: DisplayMode = .Map {
+    var displayMode: DisplayMode = .List {
         didSet {
             if isViewLoaded() {
                 applyDisplayMode(displayMode)
@@ -188,8 +188,9 @@ protocol BrowseActionConsumer: class {
             navigationController?.pushViewController(controller, animated: true)
         case .Emergency:
             trackGoogleAnalyticsEvent("Main", action: "Click", label: "Promotion")
-            let controller =  Storyboards.Main.instantiatePromotionDetailsViewControllerId()
+            let controller =  Storyboards.Main.instantiateEmergencyDetailsControllerId()
             controller.objectId = objectId
+            controller.author = data as? ObjectInfo
             navigationController?.pushViewController(controller, animated: true)
 //        case .Post:
 //            trackGoogleAnalyticsEvent("Main", action: "Click", label: "Post")

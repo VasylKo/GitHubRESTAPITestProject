@@ -434,7 +434,7 @@
             <objects>
                 <tableViewController id="9PQ-zJ-hEA" customClass="OrderViewController" customModule="PositionIn" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="wKe-Ah-frR">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -737,7 +737,15 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kJS-3G-KqG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2909" y="-664"/>
+            <point key="canvasLocation" x="2909" y="-494"/>
+        </scene>
+        <!--Emergency Details Controller-->
+        <scene sceneID="NOv-N2-LSz">
+            <objects>
+                <viewController storyboardIdentifier="EmergencyDetailsControllerId" id="n7w-Q7-rLq" customClass="EmergencyDetailsController" customModule="PositionIn" customModuleProvider="target" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="miU-oS-y7b" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3129" y="313"/>
         </scene>
         <!--Event Details View Controller-->
         <scene sceneID="TQA-tq-hsQ">
@@ -749,7 +757,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ru2-xA-PBE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2421" y="600"/>
+            <point key="canvasLocation" x="2643" y="1052"/>
         </scene>
         <!--Promotion Details View Controller-->
         <scene sceneID="ec5-5d-AsZ">
@@ -814,6 +822,7 @@
                         <segue destination="RQs-Yx-TSv" kind="show" identifier="ShowEventDetails" id="B0K-ir-QiG"/>
                         <segue destination="tr4-Tq-w9T" kind="show" identifier="ShowPromotionDetails" id="iJW-SS-i8n"/>
                         <segue destination="Mgd-dn-9Dr" kind="show" identifier="ShowPost" id="kB5-ah-mJe"/>
+                        <segue destination="n7w-Q7-rLq" kind="show" id="EhP-nj-fin"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="spd-ov-gak" userLabel="First Responder" sceneMemberID="firstResponder"/>

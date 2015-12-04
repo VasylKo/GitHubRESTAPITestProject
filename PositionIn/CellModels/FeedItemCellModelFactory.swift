@@ -13,35 +13,36 @@ struct FeedItemCellModelFactory {
     
     func compactModelsForItem(feedItem: FeedItem) -> [TableViewCellModel] {
         switch feedItem.type {
-        case .Project:
-            return [
-                CompactFeedTableCellModel(
-                    itemType: feedItem.type,
-                    objectID: feedItem.objectId,
-                    title: feedItem.name,
-                    details: feedItem.author?.title,
-                    info: nil,
-                    price: feedItem.donations,
-                    imageURL: feedItem.image,
-                    data: feedItem.itemData
-                ),
-            ]
-            
         case .Emergency:
-            return [
-                CompactFeedTableCellModel(
-                    itemType: feedItem.type,
-                    objectID: feedItem.objectId,
-                    title: feedItem.name,
-                    details: feedItem.text,
-                    info: nil,
-                    price: feedItem.donations,
-                    imageURL: feedItem.image,
-                    data: feedItem.itemData
-                ),
-            ]
+//            return [
+//                CompactFeedTableCellModel(
+//                    itemType: feedItem.type,
+//                    objectID: feedItem.objectId,
+//                    title: feedItem.name,
+//                    details: feedItem.text,
+//                    info: nil,
+//                    price: feedItem.donations,
+//                    imageURL: feedItem.image,
+//                    data: feedItem.itemData
+//                ),
+//            ]
+                fallthrough
 
         case .Training:
+//            return [
+//                CompactFeedTableCellModel(
+//                    itemType: feedItem.type,
+//                    objectID: feedItem.objectId,
+//                    title: feedItem.name,
+//                    details: feedItem.author?.title,
+//                    info: nil,
+//                    price: feedItem.donations,
+//                    imageURL: feedItem.image,
+//                    data: feedItem.itemData
+//                ),
+//            ]
+            fallthrough
+        case .Project:
             return [
                 CompactFeedTableCellModel(
                     itemType: feedItem.type,
