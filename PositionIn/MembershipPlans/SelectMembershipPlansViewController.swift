@@ -34,8 +34,7 @@ class SelectMembershipPlansViewController: UIViewController {
     }
     
     @IBAction func selectPlanTapped(sender: AnyObject) {
-        sideBarController?.executeAction(SidebarViewController.defaultAction)
-        dismissViewControllerAnimated(true, completion: nil)
+        self.navigationController?.pushViewController(Storyboards.Onboarding.instantiateDonateViewController(), animated: true)
     }
     
     var corporatePlan: CorporatePlans?

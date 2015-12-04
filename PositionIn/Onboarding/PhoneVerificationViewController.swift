@@ -67,8 +67,7 @@ class PhoneVerificationViewController: XLFormViewController {
                 api().verifyPhoneCode(phoneNumber, code: codeString).onSuccess(callback: {[weak self] isExistingUser in
                     if isExistingUser {
                         api().login(username: nil, password: nil, phoneNumber: phoneNumber, phoneVerificationCode: codeString).onSuccess { [weak self] _ in
-                            self?.navigationController?.pushViewController(Storyboards.Onboarding.instantiateMembershipPlansViewController(),
-                                animated: true)
+                            self?.dismissLogin()
                             }.onFailure(callback: { _ in
                                 trackGoogleAnalyticsEvent("Status", action: "Click", label: "Auth Fail")
                             })

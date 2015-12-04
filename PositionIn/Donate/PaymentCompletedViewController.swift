@@ -12,6 +12,8 @@ class PaymentCompletedViewController: UIViewController {
 
 
     @IBAction func closeButtonTapped(sender: AnyObject) {
+        sideBarController?.executeAction(SidebarViewController.defaultAction)
+        dismissViewControllerAnimated(true, completion: nil)
         self.navigationController?.popToRootViewControllerAnimated(true)
     }
 

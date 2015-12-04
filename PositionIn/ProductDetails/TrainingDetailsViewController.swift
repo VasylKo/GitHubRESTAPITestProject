@@ -20,7 +20,7 @@ final class TrainingDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         //temporary desicion - for december demo
-        title = NSLocalizedString("Trainigs", comment: "Product details: title")
+        title = NSLocalizedString("Training", comment: "Product details: title")
         dataSource.items = trainingActionItems()
         dataSource.configureTable(actionTableView)
         reloadData()
@@ -188,6 +188,7 @@ extension TrainingDetailsViewController {
 //    }
 //}
 
+
 extension TrainingDetailsViewController {
     internal class TrainingDetailsDataSource: TableViewDataSource {
         
@@ -230,10 +231,11 @@ extension TrainingDetailsViewController {
         func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
             tableView.deselectRowAtIndexPath(indexPath, animated: true)
             let item = items[indexPath.section][indexPath.row]
-            if let actionConsumer = parentViewController as? ProductDetailsActionConsumer {
+            if let actionConsumer = parentViewController as? PromotionDetailsActionConsumer {
 //                actionConsumer.executeAction(item.action)
             }
         }
         
     }
 }
+
