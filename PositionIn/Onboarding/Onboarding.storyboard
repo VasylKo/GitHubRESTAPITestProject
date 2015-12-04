@@ -31,7 +31,7 @@
         <scene sceneID="szo-50-c55">
             <objects>
                 <viewController title="You Phone Number" id="2fi-rV-Mtc" customClass="PhoneNumberViewController" customModule="PositionIn" customModuleProvider="target" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" title="You Phone Number" id="mld-VT-MUt">
+                    <navigationItem key="navigationItem" title="Your Phone Number" id="mld-VT-MUt">
                         <barButtonItem key="rightBarButtonItem" title="Done" id="MFI-dN-fQX">
                             <connections>
                                 <action selector="doneButtonPressed:" destination="2fi-rV-Mtc" id="U6w-QN-id2"/>
@@ -787,7 +787,7 @@ M-Pesa PIN number</string>
     <resources>
         <image name="ambulance_requested" width="84" height="112"/>
         <image name="ambulance_sent" width="84" height="112"/>
-        <image name="krfc" width="120" height="120"/>
+        <image name="krfc" width="60" height="60"/>
         <image name="success_icon" width="48" height="48"/>
     </resources>
     <color key="tintColor" red="0.92941176470588238" green="0.10196078431372549" blue="0.1803921568627451" alpha="1" colorSpace="calibratedRGB"/>

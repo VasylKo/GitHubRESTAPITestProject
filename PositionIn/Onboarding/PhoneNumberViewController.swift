@@ -45,10 +45,10 @@ class PhoneNumberViewController: XLFormViewController {
     }
     
     func initializeForm() {
-        let form = XLFormDescriptor(title: NSLocalizedString("You Phone Number", comment: "New post: form caption"))
+        let form = XLFormDescriptor(title: NSLocalizedString("Your Phone Number", comment: "New post: form caption"))
         
         //Country code section
-        let countryCodeSection = XLFormSectionDescriptor.formSectionWithTitle("Please confirm you country code\nand enter your phone number")
+        let countryCodeSection = XLFormSectionDescriptor.formSectionWithTitle("Please confirm your country code\nand enter your phone number")
         form.addFormSection(countryCodeSection)
         
         let coutryRow : XLFormRowDescriptor = XLFormRowDescriptor(tag: Tags.CountryCode.rawValue,
@@ -87,7 +87,7 @@ class PhoneNumberViewController: XLFormViewController {
         
         let phoneRow: XLFormRowDescriptor = XLFormRowDescriptor(tag: Tags.Phone.rawValue,
             rowType: XLFormRowDescriptorTypePhone)
-        phoneRow.cellConfigAtConfigure["textField.placeholder"] = "Enter you phone number"
+        phoneRow.cellConfigAtConfigure["textField.placeholder"] = "Enter your phone number"
         phoneRow.required = true
         phoneRow.addValidator(XLFormRegexValidator(msg: NSLocalizedString("Please specify a valid phone number",
             comment: "Onboarding"), regex: "^\\+?\\d+$"))

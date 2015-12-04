@@ -33,15 +33,15 @@ class PhoneVerificationViewController: XLFormViewController {
     }
     
     func initializeForm() {
-        let form = XLFormDescriptor(title: NSLocalizedString("You Phone Number", comment: "New post: form caption"))
+        let form = XLFormDescriptor(title: NSLocalizedString("Phone Verification", comment: "New post: form caption"))
         
         // Validation number section
-        let phoneNumberSection = XLFormSectionDescriptor.formSectionWithTitle("We send you an SMS with\na verification code")
+        let phoneNumberSection = XLFormSectionDescriptor.formSectionWithTitle("We sent you an SMS with\na verification code\n\nTo complete your phone number\nverification, please enter the\n6-digit activation code")
         form.addFormSection(phoneNumberSection)
         
         let codeRow: XLFormRowDescriptor = XLFormRowDescriptor(tag: Tags.ValidationCode.rawValue,
             rowType: XLFormRowDescriptorTypePhone)
-        codeRow.cellConfigAtConfigure["textField.placeholder"] = "Enter you validation code"
+        codeRow.cellConfigAtConfigure["textField.placeholder"] = "Enter your validation code"
         codeRow.required = true
         codeRow.addValidator(XLFormRegexValidator(msg: NSLocalizedString("Incorrect validation code",
             comment: "Onboarding"), regex: "^\\d+$"))
