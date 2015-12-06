@@ -19,7 +19,6 @@ final class TrainingDetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //temporary desicion - for december demo
         title = NSLocalizedString("Training", comment: "Product details: title")
         dataSource.items = trainingActionItems()
         dataSource.configureTable(actionTableView)
