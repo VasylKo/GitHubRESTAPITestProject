@@ -19,7 +19,6 @@ class EmergencyDetailsController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //temporary desicion - for december demo
         title = NSLocalizedString("Emergency", comment: "Product details: title")
         dataSource.items = productAcionItems()
         dataSource.configureTable(actionTableView)

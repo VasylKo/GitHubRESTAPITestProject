@@ -55,6 +55,7 @@ class DonateViewController: XLFormViewController {
         
         let donatationRow: XLFormRowDescriptor = XLFormRowDescriptor(tag: Tags.Money.rawValue,
             rowType: XLFormRowDescriptorTypeDecimal)
+        donatationRow.required = true
         donatationRow.cellConfigAtConfigure["textField.placeholder"] = "Set a donation"
         donatationRow.cellConfig.setObject(UIScheme.mainThemeColor, forKey: "tintColor")
         donatationSection.addFormRow(donatationRow)
