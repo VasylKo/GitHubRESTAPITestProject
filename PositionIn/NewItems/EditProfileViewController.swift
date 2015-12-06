@@ -127,21 +127,26 @@ final class EditProfileViewController: BaseAddItemViewController {
         let values = formValues()
         Log.debug?.value(values)
         
-        if let photos = values[Tags.Photo.rawValue]  as? [PHAsset] where (photos.count > 0) {
-            
-        } else {
-            api().register(username: nil, password: nil, phoneNumber: self.phoneNumber,
-                phoneVerificationCode: self.validationCode,
-                firstName: values[Tags.FirstName.rawValue] as? String,
-                lastName: values[Tags.FirstName.rawValue] as? String).onSuccess(callback: {[weak self] _ in
-                    trackGoogleAnalyticsEvent("Status", action: "Click", label: "Auth Success")
-                    Log.info?.message("Registration done")
-                    self?.navigationController?.pushViewController(Storyboards.Onboarding.instantiateMembershipPlansViewController(),
-                               animated: true)
-                    }).onFailure(callback: {_ in
-                        trackGoogleAnalyticsEvent("Status", action: "Click", label: "Auth Fail")
-                    })
-        }
+        api().register(username: nil, password: nil, phoneNumber: self.phoneNumber,
+            phoneVerificationCode: self.validationCode,
+            firstName: values[Tags.FirstName.rawValue] as? String,
+            lastName: values[Tags.FirstName.rawValue] as? String).onSuccess(callback: {[weak self] userProfile in
+                trackGoogleAnalyticsEvent("Status", action: "Click", label: "Auth Success")
+                Log.info?.message("Registration done")
+                
+                
+                if let avatarUpload = self?.uploadAssets(values[Tags.Photo.rawValue]) {
+                    avatarUpload.flatMap { (urls: [NSURL]) -> Future<Void, NSError> in
+                        userProfile.avatar = urls.first
+                        return api().updateMyProfile(userProfile)
+                    }
+                }
+                
+                self?.navigationController?.pushViewController(Storyboards.Onboarding.instantiateMembershipPlansViewController(),
+                    animated: true)
+                }).onFailure(callback: {_ in
+                    trackGoogleAnalyticsEvent("Status", action: "Click", label: "Auth Fail")
+                })
     }
 
     //MARK: Actions
