@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -16,12 +17,11 @@
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Otu-Zf-BiP">
                         <rect key="frame" x="18" y="8" width="64" height="64"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="64" id="RFR-3N-kal"/>
-                            <constraint firstAttribute="height" constant="64" id="W2M-YT-OZu"/>
+                            <constraint firstAttribute="width" secondItem="Otu-Zf-BiP" secondAttribute="height" multiplier="1:1" id="9zM-AU-kdU"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4ET-CM-vnV">
-                        <rect key="frame" x="8" y="79" width="84" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4ET-CM-vnV">
+                        <rect key="frame" x="8" y="85" width="84" height="16"/>
                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
@@ -30,7 +30,7 @@
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
             <constraints>
-                <constraint firstItem="4ET-CM-vnV" firstAttribute="top" secondItem="Otu-Zf-BiP" secondAttribute="bottom" constant="7" id="D17-5g-BWf"/>
+                <constraint firstItem="4ET-CM-vnV" firstAttribute="top" secondItem="Otu-Zf-BiP" secondAttribute="bottom" constant="13" id="D17-5g-BWf"/>
                 <constraint firstAttribute="trailing" secondItem="Otu-Zf-BiP" secondAttribute="trailing" constant="18" id="JAv-cZ-NQC"/>
                 <constraint firstAttribute="bottom" secondItem="4ET-CM-vnV" secondAttribute="bottom" id="YgJ-Pf-07B"/>
                 <constraint firstItem="4ET-CM-vnV" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="8" id="ZEC-ZI-dJT"/>

@@ -19,8 +19,17 @@ class BrowseGridViewController: UIViewController {
         let reuseIdentifier = NSStringFromClass(BrowseGridCollectionViewCell.self)
         self.collectionView.registerNib(UINib(nibName: reuseIdentifier, bundle: nil), forCellWithReuseIdentifier: reuseIdentifier)
         let flowLayout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-        flowLayout.itemSize = CGSizeMake(96, 96)
-        flowLayout.minimumInteritemSpacing = 8
+
+        //different ui sizes for 6, 6+
+        if (UIScreen.mainScreen().bounds.size.height > 568) {
+            flowLayout.itemSize = CGSizeMake(117, 117)
+            flowLayout.minimumInteritemSpacing = 6
+        }
+        else {
+            flowLayout.itemSize = CGSizeMake(96, 96)
+            flowLayout.minimumInteritemSpacing = 8
+        }        
+        
         self.collectionView.setCollectionViewLayout(flowLayout, animated: false)
     }
     
