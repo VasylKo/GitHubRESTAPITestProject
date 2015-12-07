@@ -70,6 +70,21 @@ enum IndividualPlans: Int {
         }
     }
     
+    static func price(plan: IndividualPlans) -> Float? {
+        switch plan {
+        case Guest:
+            return nil
+        case SchoolMember:
+            return 100.0
+        case YouthMember:
+            return 500.0
+        case OrdinaryMember:
+            return 1000.0
+        case LifeMember:
+            return 5000.0
+        }
+    }
+    
     static func description(plan: IndividualPlans) -> String? {
         switch plan {
         case Guest:
@@ -119,6 +134,22 @@ enum CorporatePlans: Int {
             return UIImage(named: "ic_guest")
         case GoldPremiere:
             return UIImage(named: "ic_gold")
+        }
+    }
+    
+    
+    static func price(plan: CorporatePlans) -> Float? {
+        switch plan {
+        case Guest:
+            return nil
+        case Ordinary:
+            return 100.0
+        case Bronze:
+            return 500.0
+        case Silverline:
+            return 1000.0
+        case GoldPremiere:
+            return 5000.0
         }
     }
     
