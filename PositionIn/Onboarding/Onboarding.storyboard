@@ -442,6 +442,24 @@ heading your way</string>
             </objects>
             <point key="canvasLocation" x="3174" y="-2561"/>
         </scene>
+        <!--Payment View Controller-->
+        <scene sceneID="SJ9-1K-qAz">
+            <objects>
+                <viewController storyboardIdentifier="PaymentViewControllerId" id="B1L-15-fLh" customClass="PaymentViewController" customModule="PositionIn" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="euW-QC-1Xn"/>
+                        <viewControllerLayoutGuide type="bottom" id="mod-bM-Bin"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="psN-kL-hG3">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jrn-ev-dJs" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4302" y="-1776"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="76T-E3-VPP">
             <objects>
@@ -582,7 +600,7 @@ M-Pesa PIN number</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5li-eB-fRy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4332" y="-2590"/>
+            <point key="canvasLocation" x="4332" y="-2524"/>
         </scene>
         <!--Ambulance Requested View Controller-->
         <scene sceneID="ex4-MC-NUm">

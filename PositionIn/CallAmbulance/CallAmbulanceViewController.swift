@@ -58,7 +58,7 @@ class CallAmbulanceViewController: BaseAddItemViewController {
         //Incident & Location Section
         let incedentLocationSection = XLFormSectionDescriptor.formSection()
         let incedentRow : XLFormRowDescriptor = XLFormRowDescriptor(tag: Tags.Incedent.rawValue,
-            rowType:XLFormRowDescriptorTypeSelectorPush, title:NSLocalizedString("Incedent Type",
+            rowType:XLFormRowDescriptorTypeSelectorPush, title:NSLocalizedString("Incident Type",
                 comment: "Call Ambulance"))
         var selectorOptions: [XLFormOptionsObject] = []
         var counter = 0

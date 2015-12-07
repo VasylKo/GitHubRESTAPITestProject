@@ -34,7 +34,10 @@ class SelectMembershipPlansViewController: UIViewController {
     }
     
     @IBAction func selectPlanTapped(sender: AnyObject) {
-        self.navigationController?.pushViewController(Storyboards.Onboarding.instantiateDonateViewController(), animated: true)
+        let paymentController = Storyboards.Onboarding.instantiatePaymentViewControllerId()
+        paymentController.individualPlan = self.individualPlan
+        paymentController.corporatePlan = self.corporatePlan
+        self.navigationController?.pushViewController(paymentController, animated: true)
     }
     
     var corporatePlan: CorporatePlans?

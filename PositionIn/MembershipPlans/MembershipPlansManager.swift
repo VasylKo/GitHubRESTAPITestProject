@@ -20,21 +20,21 @@ enum IndividualPlans: Int {
         case SchoolMember:
             return ["Participate in KRCS youth club activities in school/college",
                 "Participate in localizing and implementation of the four part youth program",
-                "Participate in Formulation on and strategies for the youth club"]
+                "Participate in the formulation of strategies for the youth club"]
         case YouthMember:
-            return ["Vote, to elect and be elected as members of the different committees and Boards within the Kenya Red Cross Society governance structure.",
-                "Linking the society with resourceful strategic partnerships" ]
+            return ["Vote to elect and to be elected as members of the different committees and boards within the Kenyan Red Cross Society governance structure.",
+                "Linking society with resourceful strategic partnerships"]
         case OrdinaryMember:
-            return ["Vote, to elect and be elected as members of the different committees and Boards within the Kenya Red Cross Society governance structure",
-                "Invitations to attend special events e.g Life Members Day, KRC Gala, World Red Cross Day",
+            return ["Vote to elect and to be elected as members of the different committees and boards within the Kenyan Red Cross Society governance structure",
+                "Invitations to attend special events, e.g., Life Members Day, KRC Gala, World Red Cross Day",
                 "Participate in decision making, policy formulation and constitutional making/review",
                 "Linking the society with resourceful strategic partnerships"]
         case LifeMember:
             return ["Discount of KRCS related merchandise to partners",
-                "Upto 5% of discount for one year membership at Eplus",
-                "Upto 15% disount at the Boma",
-                "Invitations to attend special events e.g Life Members Day, KRCS Gala, World Red Cross Day",
-                "Up to date information on KRCS operations through; emails i.e. KRCS E-news",
+                "Up to 5% of discount for one year membership at EPlus",
+                "Up to 15% discount at the Boma",
+                "Invitations to attend special events, e.g., Life Members Day, KRC Gala, World Red Cross Day",
+                "Up-to-date information on KRCS operations through e-mails such as KRC E-news",
                 "Update on emergency precautions"
             ]
         }
@@ -60,13 +60,28 @@ enum IndividualPlans: Int {
         case Guest:
             return NSLocalizedString("Continue as Guest", comment: "Membership")
         case SchoolMember:
-            return NSLocalizedString("Youth Member is School", comment: "Membership")
+            return NSLocalizedString("Youth Member in School", comment: "Membership")
         case YouthMember:
             return NSLocalizedString("Youth Member Over 18", comment: "Membership")
         case OrdinaryMember:
             return NSLocalizedString("Ordinary Member", comment: "Membership")
         case LifeMember:
             return NSLocalizedString("Life Member", comment: "Membership")
+        }
+    }
+    
+    static func price(plan: IndividualPlans) -> Float? {
+        switch plan {
+        case Guest:
+            return nil
+        case SchoolMember:
+            return 100.0
+        case YouthMember:
+            return 500.0
+        case OrdinaryMember:
+            return 1000.0
+        case LifeMember:
+            return 5000.0
         }
     }
     
@@ -102,8 +117,16 @@ enum CorporatePlans: Int {
         case Silverline:
             fallthrough
         case GoldPremiere:
-            return ["Upto 5% of discount for one year membership at Eplus", "Upto 15% disount at the Boma", "Invitations to attend special events e.g Life Members Day, KRC Gala, World Red Cross Day", "Text sent to them to wish them a happy from KRCS or any other thing that they will be celebrating.", "One Member per quarter to be featured in the reach out.",
-                "Up to date information on KRCS operations through; emails i.e. KRC E-news", "Invitation to programe launches", "Update on emergency precautions", "School clubs will receive free basic FirstAid training"]
+            return [
+                "Up to 5% of discount for one year membership at EPlus",
+                "Up to 15% discount at the Boma",
+                "Invitations to attend special events, e.g., Life Members Day, KRC Gala, World Red Cross Day",
+                "Message sent to them from KRCS with birthday wishes or with greetings towards what they celebrate.",
+                "One member per quarter to be featured in the outreach.",
+                "Up-to-date information on KRCS operations through e-mails such as KRC E-news",
+                "Invitation to program launches",
+                "Update on emergency precautions",
+                "School clubs will receive free basic first aid training"]
         }
     }
     
@@ -119,6 +142,22 @@ enum CorporatePlans: Int {
             return UIImage(named: "ic_guest")
         case GoldPremiere:
             return UIImage(named: "ic_gold")
+        }
+    }
+    
+    
+    static func price(plan: CorporatePlans) -> Float? {
+        switch plan {
+        case Guest:
+            return nil
+        case Ordinary:
+            return 100.0
+        case Bronze:
+            return 500.0
+        case Silverline:
+            return 1000.0
+        case GoldPremiere:
+            return 5000.0
         }
     }
     

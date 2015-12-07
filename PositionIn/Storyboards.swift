@@ -308,6 +308,10 @@ struct Storyboards {
             return self.storyboard.instantiateViewControllerWithIdentifier("SelectPaymentMethodController") as! SelectPaymentMethodController
         }
 
+        static func instantiatePaymentViewControllerId() -> PaymentViewController {
+            return self.storyboard.instantiateViewControllerWithIdentifier("PaymentViewControllerId") as! PaymentViewController
+        }
+
         static func instantiateDonateNotificationViewController() -> DonateNotificationViewController {
             return self.storyboard.instantiateViewControllerWithIdentifier("DonateNotificationViewController") as! DonateNotificationViewController
         }
@@ -1555,6 +1559,13 @@ extension DonateViewController: IdentifiableProtocol {
 extension SelectPaymentMethodController: IdentifiableProtocol { 
     var identifier: String? { return "SelectPaymentMethodController" }
     static var identifier: String? { return "SelectPaymentMethodController" }
+}
+
+
+//MARK: - PaymentViewController
+extension PaymentViewController: IdentifiableProtocol { 
+    var identifier: String? { return "PaymentViewControllerId" }
+    static var identifier: String? { return "PaymentViewControllerId" }
 }
 
 

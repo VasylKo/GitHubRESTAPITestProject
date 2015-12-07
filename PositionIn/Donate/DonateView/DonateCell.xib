@@ -12,7 +12,7 @@
             <rect key="frame" x="0.0" y="0.0" width="478" height="80"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="CxP-0p-l3X" id="C7o-SB-ajs">
-                <rect key="frame" x="0.0" y="0.0" width="478" height="79.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="478" height="80"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="krfc" translatesAutoresizingMaskIntoConstraints="NO" id="5ny-HI-tRl">
@@ -54,6 +54,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="krfc" width="120" height="120"/>
+        <image name="krfc" width="60" height="60"/>
     </resources>
 </document>
