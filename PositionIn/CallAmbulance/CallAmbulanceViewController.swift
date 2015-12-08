@@ -110,18 +110,18 @@ class CallAmbulanceViewController: BaseAddItemViewController {
             return
         }
         
-        
         let values = formValues()
         
-//        let community =  communityValue(values[Tags.Community.rawValue])
-//        
         if  let imageUpload = uploadAssets(values[Tags.Photo.rawValue]) {
             let getLocation = locationController().getCurrentLocation()
             view.userInteractionEnabled = false
             getLocation.zip(imageUpload).flatMap { (location: Location, urls: [NSURL]) -> Future<Void, NSError> in
                 var ambulanceRequest = AmbulanceRequest()
                 ambulanceRequest.text = values[Tags.Description.rawValue] as? String
-                ambulanceRequest.category = values[Tags.Incedent.rawValue] as? String
+                
+                if let incidentType: XLFormOptionsObject = values[Tags.Incedent.rawValue] as? XLFormOptionsObject {
+                    ambulanceRequest.incidentType = incidentType.displayText()
+                }
                 ambulanceRequest.location = location
                 ambulanceRequest.photos = urls.map { url in
                     var info = PhotoInfo()

@@ -9,6 +9,7 @@
 import UIKit
 import XLForm
 import CleanroomLogger
+import BrightFutures
 
 class PhoneVerificationViewController: XLFormViewController {
     
@@ -45,6 +46,16 @@ class PhoneVerificationViewController: XLFormViewController {
         codeRow.required = true
         codeRow.addValidator(XLFormRegexValidator(msg: NSLocalizedString("Incorrect validation code",
             comment: "Onboarding"), regex: "^\\d+$"))
+        codeRow.onChangeBlock  = {[weak self] oldValue, newValue, descriptor in
+            if let newValue = newValue as? String {
+                if newValue.characters.count > 6 {
+                    descriptor.value = oldValue
+                    Queue.main.async { _ in
+                        self?.reloadFormRow(descriptor)
+                    }
+                }
+            }
+        }
         phoneNumberSection.addFormRow(codeRow)
         
         self.form = form
