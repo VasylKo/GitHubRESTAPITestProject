@@ -130,7 +130,7 @@ final class EditProfileViewController: BaseAddItemViewController {
         api().register(username: nil, password: nil, phoneNumber: self.phoneNumber,
             phoneVerificationCode: self.validationCode,
             firstName: values[Tags.FirstName.rawValue] as? String,
-            lastName: values[Tags.FirstName.rawValue] as? String).onSuccess(callback: {[weak self] userProfile in
+            lastName: values[Tags.LastName.rawValue] as? String).onSuccess(callback: {[weak self] userProfile in
                 trackGoogleAnalyticsEvent("Status", action: "Click", label: "Auth Success")
                 Log.info?.message("Registration done")
                 
