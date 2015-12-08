@@ -74,7 +74,7 @@ platform :ios do
         ) # Build app
         #      snapshot
       s3(
-         html_template_path: "./fastlane/redcross",
+         html_template_path: "./fastlane/redcross.erb",
          html_file_name: "staging.html",
          version_file_name: "staging.version.json",
          path: 'staging/v{CFBundleShortVersionString}_b{CFBundleVersion}/'
@@ -92,7 +92,7 @@ platform :ios do
             ) # Build app
 #        snapshot
         s3(
-           html_template_path: "./fastlane/redcross",
+           html_template_path: "./fastlane/redcross.erb",
            html_file_name: "production.html",
            version_file_name: "production.version.json",
            path: 'prod/v{CFBundleShortVersionString}_b{CFBundleVersion}/'

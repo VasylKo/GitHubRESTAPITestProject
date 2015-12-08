@@ -95,7 +95,7 @@ final class EditProfileViewController: BaseAddItemViewController {
     // Phone
     lazy private var phoneRow: XLFormRowDescriptor = {
         let row = XLFormRowDescriptor(tag: Tags.Phone.rawValue, rowType: XLFormRowDescriptorTypeEmail,
-            title: NSLocalizedString("Email", comment: "Edit profile: Email"))
+            title: NSLocalizedString("Phone", comment: "Edit profile: Email"))
         row.cellConfig.setObject(UIScheme.mainThemeColor, forKey: "textLabel.textColor")
         row.cellConfig.setObject(UIScheme.mainThemeColor, forKey: "tintColor")
         return row
