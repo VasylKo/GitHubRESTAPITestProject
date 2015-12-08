@@ -31,7 +31,7 @@ enum IndividualPlans: Int {
                 "Linking the society with resourceful strategic partnerships"]
         case LifeMember:
             return ["Discount of KRCS related merchandise to partners",
-                "Up to 5% of discount for one year membership at EPlus",
+                "Up to 5% discount for one year membership at EPlus",
                 "Up to 15% discount at the Boma",
                 "Invitations to attend special events, e.g., Life Members Day, KRC Gala, World Red Cross Day",
                 "Up-to-date information on KRCS operations through e-mails such as KRC E-news",
@@ -118,7 +118,7 @@ enum CorporatePlans: Int {
             fallthrough
         case GoldPremiere:
             return [
-                "Up to 5% of discount for one year membership at EPlus",
+                "Up to 5% discount for one year membership at EPlus",
                 "Up to 15% discount at the Boma",
                 "Invitations to attend special events, e.g., Life Members Day, KRC Gala, World Red Cross Day",
                 "Message sent to them from KRCS with birthday wishes or with greetings towards what they celebrate.",
