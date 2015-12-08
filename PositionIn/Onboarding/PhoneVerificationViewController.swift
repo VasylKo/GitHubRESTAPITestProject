@@ -54,7 +54,7 @@ class PhoneVerificationViewController: XLFormViewController {
                         self?.reloadFormRow(descriptor)
                     }
                 }
-            }7
+            }
         }
         phoneNumberSection.addFormRow(codeRow)
         
