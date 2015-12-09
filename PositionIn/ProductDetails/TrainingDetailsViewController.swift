@@ -19,7 +19,7 @@ final class TrainingDetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = NSLocalizedString("Training", comment: "Product details: title")
+        title = NSLocalizedString("Training", comment: "Training details: title")
         dataSource.items = trainingActionItems()
         dataSource.configureTable(actionTableView)
         reloadData()
@@ -37,7 +37,6 @@ final class TrainingDetailsViewController: UIViewController {
     
     private func reloadData() {
         self.infoLabel.text = NSLocalizedString("Calculating...", comment: "Distance calculation process")
-        //        nameLabel.text = author?.title
         switch (objectId, author) {
         case (.Some(let objectId), .Some(let author) ):
             api().getUserProfile(author.objectId).flatMap { (profile: UserProfile) -> Future<Product, NSError> in
@@ -116,10 +115,9 @@ final class TrainingDetailsViewController: UIViewController {
                     image: "productSellerProfile", action: .SellerProfile),
                 TrainingActionItem(title: NSLocalizedString("Navigate", comment: "Product action: Navigate"),
                     image: "productNavigate", action: .Navigate),
-                TrainingActionItem(title: NSLocalizedString("More Information", comment: "Promotion action: Navigate"), image: "productNavigate", action: .ProductInventory)
+                TrainingActionItem(title: NSLocalizedString("More Information", comment: "Promotion action: Navigate"), image: "productNavigate", action: .ProductInventory),
             ],
         ]
-        
     }
     
     @IBOutlet private weak var actionTableView: UITableView!
@@ -159,34 +157,6 @@ extension TrainingDetailsViewController {
         let action: TrainingDetailsAction
     }
 }
-//
-//extension ProductDetailsViewController: ProductDetailsActionConsumer {
-//    func executeAction(action: ProductDetailsAction) {
-//        let segue: ProductDetailsViewController.Segue
-//        switch action {
-//        case .Buy:
-//            if api().isUserAuthorized() {
-//                segue = .ShowBuyScreen
-//            } else {
-//                api().logout().onComplete {[weak self] _ in
-//                    self?.sideBarController?.executeAction(.Login)
-//                }
-//                return
-//            }
-//        case .ProductInventory:
-//            segue = .ShowProductInventory
-//        case .SellerProfile:
-//            segue = .ShowSellerProfile
-//        case .SendMessage:
-//            if let userId = author?.objectId {
-//                showChatViewController(userId)
-//            }
-//            return
-//        }
-//        performSegue(segue)
-//    }
-//}
-
 
 extension TrainingDetailsViewController {
     internal class TrainingDetailsDataSource: TableViewDataSource {
@@ -226,15 +196,6 @@ extension TrainingDetailsViewController {
         override func nibCellsId() -> [String] {
             return [ActionCell.reuseId()]
         }
-        
-        func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-            tableView.deselectRowAtIndexPath(indexPath, animated: true)
-            let item = items[indexPath.section][indexPath.row]
-            if let actionConsumer = parentViewController as? PromotionDetailsActionConsumer {
-//                actionConsumer.executeAction(item.action)
-            }
-        }
-        
     }
 }
 

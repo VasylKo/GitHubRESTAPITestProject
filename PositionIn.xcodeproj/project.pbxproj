@@ -113,6 +113,10 @@
 		D1DC3EAB1C15B21300E6B772 /* PaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DC3EAA1C15B21300E6B772 /* PaymentViewController.swift */; };
 		D1DC3EB11C15B3CF00E6B772 /* PaymentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DC3EAF1C15B3CF00E6B772 /* PaymentTableViewCell.swift */; };
 		D1DC3EB21C15B3CF00E6B772 /* PaymentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1DC3EB01C15B3CF00E6B772 /* PaymentTableViewCell.xib */; };
+		D1DC3EB51C1855B800E6B772 /* TrainingListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DC3EB31C1855B800E6B772 /* TrainingListCell.swift */; };
+		D1DC3EB61C1855B800E6B772 /* PositionIn.TrainingListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1DC3EB41C1855B800E6B772 /* PositionIn.TrainingListCell.xib */; };
+		D1DC3EB91C18743000E6B772 /* EmergencyListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DC3EB71C18743000E6B772 /* EmergencyListCell.swift */; };
+		D1DC3EBA1C18743000E6B772 /* PositionIn.EmergencyListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1DC3EB81C18743000E6B772 /* PositionIn.EmergencyListCell.xib */; };
 		D1F86CF11BFCAA96006E0C49 /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D1F86CF01BFCAA96006E0C49 /* Onboarding.storyboard */; };
 		D1F86CF31BFCBAD3006E0C49 /* PhoneNumberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F86CF21BFCBAD3006E0C49 /* PhoneNumberViewController.swift */; };
 		E6018E501B849266001D22FA /* XMPPProcess+Future.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6018E4F1B849266001D22FA /* XMPPProcess+Future.swift */; };
@@ -580,6 +584,10 @@
 		D1DC3EAA1C15B21300E6B772 /* PaymentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentViewController.swift; sourceTree = "<group>"; };
 		D1DC3EAF1C15B3CF00E6B772 /* PaymentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentTableViewCell.swift; sourceTree = "<group>"; };
 		D1DC3EB01C15B3CF00E6B772 /* PaymentTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PaymentTableViewCell.xib; sourceTree = "<group>"; };
+		D1DC3EB31C1855B800E6B772 /* TrainingListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrainingListCell.swift; sourceTree = "<group>"; };
+		D1DC3EB41C1855B800E6B772 /* PositionIn.TrainingListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.TrainingListCell.xib; sourceTree = "<group>"; };
+		D1DC3EB71C18743000E6B772 /* EmergencyListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmergencyListCell.swift; sourceTree = "<group>"; };
+		D1DC3EB81C18743000E6B772 /* PositionIn.EmergencyListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.EmergencyListCell.xib; sourceTree = "<group>"; };
 		D1F86CF01BFCAA96006E0C49 /* Onboarding.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Onboarding.storyboard; sourceTree = "<group>"; };
 		D1F86CF21BFCBAD3006E0C49 /* PhoneNumberViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhoneNumberViewController.swift; sourceTree = "<group>"; };
 		E6018E4F1B849266001D22FA /* XMPPProcess+Future.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "XMPPProcess+Future.swift"; sourceTree = "<group>"; };
@@ -2679,6 +2687,10 @@
 				E68B521D1B875F8F006B980C /* PositionIn.PostListCell.xib */,
 				E68B52201B875F8F006B980C /* PromotionListCell.swift */,
 				E68B521E1B875F8F006B980C /* PositionIn.PromotionListCell.xib */,
+				D1DC3EB31C1855B800E6B772 /* TrainingListCell.swift */,
+				D1DC3EB41C1855B800E6B772 /* PositionIn.TrainingListCell.xib */,
+				D1DC3EB71C18743000E6B772 /* EmergencyListCell.swift */,
+				D1DC3EB81C18743000E6B772 /* PositionIn.EmergencyListCell.xib */,
 			);
 			path = FeedListCells;
 			sourceTree = "<group>";
@@ -3241,6 +3253,7 @@
 				E68B52241B875F8F006B980C /* PositionIn.ProductListCell.xib in Resources */,
 				E6BEF1D31B9C657100511B46 /* PositionIn.PostBodyCell.xib in Resources */,
 				E6C9523B1BA1DC910032254F /* PositionIn.ProfileFollowCell.xib in Resources */,
+				D1DC3EB61C1855B800E6B772 /* PositionIn.TrainingListCell.xib in Resources */,
 				D196225F1BF13075003BCD85 /* GoogleService-Info.plist in Resources */,
 				E6BEF1CC1B9C5E7200511B46 /* PositionIn.PostImageCell.xib in Resources */,
 				E689F07D1B6B976100597587 /* PositionIn.ProductInventoryCell.xib in Resources */,
@@ -3265,6 +3278,7 @@
 				E660E5321B5AC2A200F52050 /* PositionIn.MainMenuCell.xib in Resources */,
 				D153AB7E1C11BBDA00DFB5C9 /* PositionIn.EmergencyDetailsController.xib in Resources */,
 				D18EA2CF1C04B38400A886A5 /* PositionIn.BrowseGridViewController.xib in Resources */,
+				D1DC3EBA1C18743000E6B772 /* PositionIn.EmergencyListCell.xib in Resources */,
 				D1B780BC1C0E48E200EF5825 /* PositionIn.MembershipPlansCell.xib in Resources */,
 				D153AB821C11D50800DFB5C9 /* PositionIn.TrainingDetailsViewController.xib in Resources */,
 				E661159B1B73A0CB003DB5B3 /* PositionIn.BrowseListViewController.xib in Resources */,
@@ -3474,11 +3488,13 @@
 				500D7FA51BC2ADFE008C8C82 /* SearchItemCellModel.swift in Sources */,
 				2431EBDC1B945F5A009FB158 /* Promotion.swift in Sources */,
 				E689F07B1B6B972F00597587 /* ProductInventoryCell.swift in Sources */,
+				D1DC3EB91C18743000E6B772 /* EmergencyListCell.swift in Sources */,
 				E65E87301B611FE700AE444D /* Response.swift in Sources */,
 				E6BEF1D91B9C671D00511B46 /* PostInfoCell.swift in Sources */,
 				D1B780CD1C0F519600EF5825 /* DonateCell.swift in Sources */,
 				D18A1FDC1BEB95D9003F158D /* ChangePasswordViewController.swift in Sources */,
 				E6D7F83B1BE24AE500A544F4 /* MainMenuBadgeCell.swift in Sources */,
+				D1DC3EB51C1855B800E6B772 /* TrainingListCell.swift in Sources */,
 				E6BEF1EA1B9C902400511B46 /* BrowseCommunityTableViewCellModel.swift in Sources */,
 				D1B780C01C0E5BF600EF5825 /* SelectMembershipPlansViewController.swift in Sources */,
 				E63201741B9872C60066C62E /* EditProfileViewController.swift in Sources */,

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="PositionIn.TrainingListCell" id="Bvq-4e-AT4" customClass="TrainingListCell" customModule="PositionIn" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="75"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Bvq-4e-AT4" id="bAB-xC-cHB">
+                <rect key="frame" x="0.0" y="0.0" width="287" height="75"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="200" verticalHuggingPriority="200" translatesAutoresizingMaskIntoConstraints="NO" id="LsU-XX-mUw">
+                        <rect key="frame" x="2" y="2" width="70" height="70"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="70" id="ryD-2Q-Qps"/>
+                            <constraint firstAttribute="height" constant="70" id="yiX-CF-fPE"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Wizard of the Coast" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WmM-7U-qGc">
+                        <rect key="frame" x="76" y="7" width="198" height="20"/>
+                        <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="270" text="0.09 miles" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ssp-wi-knk">
+                        <rect key="frame" x="76" y="54" width="198" height="17"/>
+                        <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                        <color key="textColor" red="0.92941176469999998" green="0.1058823529" blue="0.18039215689999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="260" verticalHuggingPriority="260" text="Edward Ryan" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hVe-54-K1k">
+                        <rect key="frame" x="76" y="32" width="198" height="17"/>
+                        <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                        <color key="textColor" red="0.61176470589999998" green="0.61176470589999998" blue="0.61176470589999998" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="ssp-wi-knk" firstAttribute="top" secondItem="hVe-54-K1k" secondAttribute="bottom" constant="5" id="60F-UX-6nd"/>
+                    <constraint firstItem="LsU-XX-mUw" firstAttribute="top" secondItem="bAB-xC-cHB" secondAttribute="top" constant="2" id="DLw-4X-r5Y"/>
+                    <constraint firstAttribute="bottom" secondItem="LsU-XX-mUw" secondAttribute="bottom" constant="2" id="FRX-3h-jaP"/>
+                    <constraint firstItem="hVe-54-K1k" firstAttribute="top" secondItem="WmM-7U-qGc" secondAttribute="bottom" constant="5" id="JPU-DT-Bhw"/>
+                    <constraint firstItem="WmM-7U-qGc" firstAttribute="leading" secondItem="hVe-54-K1k" secondAttribute="leading" id="SU6-RH-xBA"/>
+                    <constraint firstItem="WmM-7U-qGc" firstAttribute="trailing" secondItem="hVe-54-K1k" secondAttribute="trailing" id="W56-qq-b6S"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="WmM-7U-qGc" secondAttribute="trailing" constant="5" id="Z5Y-qk-hQE"/>
+                    <constraint firstItem="LsU-XX-mUw" firstAttribute="bottom" secondItem="ssp-wi-knk" secondAttribute="bottom" constant="1" id="cow-44-9Hp"/>
+                    <constraint firstItem="ssp-wi-knk" firstAttribute="trailing" secondItem="hVe-54-K1k" secondAttribute="trailing" id="lgv-tN-smy"/>
+                    <constraint firstItem="ssp-wi-knk" firstAttribute="leading" secondItem="hVe-54-K1k" secondAttribute="leading" id="m0b-3d-nwG"/>
+                    <constraint firstItem="LsU-XX-mUw" firstAttribute="leading" secondItem="bAB-xC-cHB" secondAttribute="leading" constant="2" id="txA-UW-57D"/>
+                    <constraint firstItem="WmM-7U-qGc" firstAttribute="leading" secondItem="LsU-XX-mUw" secondAttribute="trailing" constant="4" id="weN-nX-1v7"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="detailsLabel" destination="hVe-54-K1k" id="5tL-SB-FS2"/>
+                <outlet property="headerLabel" destination="WmM-7U-qGc" id="RIh-m2-ZXr"/>
+                <outlet property="infoLabel" destination="ssp-wi-knk" id="682-5s-7j9"/>
+                <outlet property="productImage" destination="LsU-XX-mUw" id="yyR-oT-YT3"/>
+            </connections>
+            <point key="canvasLocation" x="477" y="405.5"/>
+        </tableViewCell>
+    </objects>
+</document>

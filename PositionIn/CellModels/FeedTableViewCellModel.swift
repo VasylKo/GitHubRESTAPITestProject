@@ -8,6 +8,7 @@
 
 import Foundation
 import PosInCore
+import CoreLocation
 
 protocol FeedTableCellModel: TableViewCellModel {
     var itemType: FeedItem.ItemType { get }
@@ -26,8 +27,9 @@ class CompactFeedTableCellModel: FeedTableCellModel {
     let info: String?
     let price: Float?
     let imageURL: NSURL?
+    let location: Location?
     
-    init(itemType: FeedItem.ItemType, objectID: CRUDObjectId, title: String?, details: String?, info: String?, price: Float?, imageURL url: NSURL?, data: Any? = nil) {
+    init(itemType: FeedItem.ItemType, objectID: CRUDObjectId, title: String?, details: String?, info: String?, price: Float?, imageURL url: NSURL?, location: Location?, data: Any? = nil) {
         self.objectID = objectID
         self.itemType = itemType
         self.title = title
@@ -36,6 +38,7 @@ class CompactFeedTableCellModel: FeedTableCellModel {
         self.imageURL = url
         self.price = price
         self.data = data
+        self.location = location
     }
 }
 
@@ -44,7 +47,7 @@ final class ComapctBadgeFeedTableCellModel : CompactFeedTableCellModel {
     let badge: String?
     init(itemType: FeedItem.ItemType, objectID: CRUDObjectId, title: String?, details: String?, info: String?, imageURL url: NSURL?, badge: String?, data: Any?) {
         self.badge = badge
-        super.init(itemType: itemType, objectID: objectID, title: title, details: details, info: info, price: nil, imageURL: url, data: data)
+        super.init(itemType: itemType, objectID: objectID, title: title, details: details, info: info, price: nil, imageURL: url, location: nil,data: data)
     }
 }
 

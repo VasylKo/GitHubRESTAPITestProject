@@ -14,33 +14,8 @@ struct FeedItemCellModelFactory {
     func compactModelsForItem(feedItem: FeedItem) -> [TableViewCellModel] {
         switch feedItem.type {
         case .Emergency:
-//            return [
-//                CompactFeedTableCellModel(
-//                    itemType: feedItem.type,
-//                    objectID: feedItem.objectId,
-//                    title: feedItem.name,
-//                    details: feedItem.text,
-//                    info: nil,
-//                    price: feedItem.donations,
-//                    imageURL: feedItem.image,
-//                    data: feedItem.itemData
-//                ),
-//            ]
-                fallthrough
-
+            fallthrough
         case .Training:
-//            return [
-//                CompactFeedTableCellModel(
-//                    itemType: feedItem.type,
-//                    objectID: feedItem.objectId,
-//                    title: feedItem.name,
-//                    details: feedItem.author?.title,
-//                    info: nil,
-//                    price: feedItem.donations,
-//                    imageURL: feedItem.image,
-//                    data: feedItem.itemData
-//                ),
-//            ]
             fallthrough
         case .Project:
             return [
@@ -52,24 +27,10 @@ struct FeedItemCellModelFactory {
                     info: nil,
                     price: feedItem.donations,
                     imageURL: feedItem.image,
+                    location: feedItem.location,
                     data: feedItem.itemData
                 ),
             ]
-//        case .Item:
-//            return [
-//                ComapctBadgeFeedTableCellModel (
-//                    itemType: feedItem.type,
-//                    objectID: feedItem.objectId,
-//                    title: feedItem.name,
-//                    details: feedItem.author?.title,
-//                    info: feedItem.date.map {dateFormatter.stringFromDate($0)},
-//                    imageURL: feedItem.image,
-//                    badge: feedItem.price.map {
-//                        let newValue = $0 as Float
-//                        return AppConfiguration().currencyFormatter.stringFromNumber(NSNumber(float: newValue)) ?? ""},
-//                    data: feedItem.itemData
-//                ),
-//            ]
         case .Unknown:
             fallthrough
         default:
@@ -83,9 +44,9 @@ struct FeedItemCellModelFactory {
             case .Project:
                 return ProductListCell.reuseId()
             case .Emergency:
-                return ProductListCell.reuseId()
+                return EmergencyListCell.reuseId()
             case .Training:
-                return ProductListCell.reuseId()
+                return TrainingListCell.reuseId()
             default:
                 break
             }
@@ -94,7 +55,7 @@ struct FeedItemCellModelFactory {
     }
     
     func compactCellsReuseId() -> [String]  {
-        return [ProductListCell.reuseId()]
+        return [ProductListCell.reuseId(), TrainingListCell.reuseId(), EmergencyListCell.reuseId()]
     }
     
     func detailedModelsForItem(feedItem: FeedItem) -> [TableViewCellModel] {

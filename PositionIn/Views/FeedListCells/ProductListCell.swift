@@ -24,7 +24,6 @@ final class ProductListCell: TableViewCell {
         productImage.setImageFromURL(m!.imageURL, placeholder: UIImage(named: "hardware_img_default"))
         headerLabel.text = m!.title
         detailsLabel.text = m!.details
-        infoLabel.text =  m!.info
         if let price = m!.price {
             infoLabel.text = "\(Int(price)) beneficiaries"
         }
