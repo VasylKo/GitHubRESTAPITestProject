@@ -224,7 +224,6 @@ extension ProductDetailsViewController {
                 actionConsumer.executeAction(item.action)
             }
         }
-        
     }
 }
 

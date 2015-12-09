@@ -115,7 +115,7 @@ final class TrainingDetailsViewController: UIViewController {
                     image: "productSellerProfile", action: .SellerProfile),
                 TrainingActionItem(title: NSLocalizedString("Navigate", comment: "Product action: Navigate"),
                     image: "productNavigate", action: .Navigate),
-                TrainingActionItem(title: NSLocalizedString("More Information", comment: "Promotion action: Navigate"), image: "productNavigate", action: .ProductInventory),
+                TrainingActionItem(title: NSLocalizedString("More Information", comment: "Product action: More Information"), image: "productTerms&Info", action: .ProductInventory),
             ],
         ]
     }
