@@ -92,7 +92,7 @@ platform :ios do
             s3(
                html_file_name: "staging2.html",
                version_file_name: "staging2.version.json",
-               path: 'staging/v{CFBundleShortVersionString}_b{CFBundleVersion}/'
+               path: 'staging2/v{CFBundleShortVersionString}_b{CFBundleVersion}/'
                )
     end
 
