@@ -22,11 +22,11 @@ final class EventListCell: TableViewCell {
         
         productImage.setImageFromURL(m!.imageURL, placeholder: UIImage(named: "placeholderEvent"))
         titleLabel.text = m!.title
-        if let price = m!.price {
-            infoLabel.text = "\(price) beneficiaries"
-        }
         infoLabel.text = m!.info
         dateLabel.text = m!.details
+        //attending people
+        
+        
     }
     
     override func prepareForReuse() {
