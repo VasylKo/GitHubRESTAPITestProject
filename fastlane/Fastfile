@@ -73,6 +73,7 @@ platform :ios do
         ) # Build app
         #      snapshot
       s3(
+         html_template_path: "./fastlane/redcross.erb",
          html_file_name: "staging.html",
          version_file_name: "staging.version.json",
          path: 'staging/v{CFBundleShortVersionString}_b{CFBundleVersion}/'
@@ -90,12 +91,13 @@ platform :ios do
             ) # Build app
             #      snapshot
             s3(
+               html_template_path: "./fastlane/redcross.erb",
                html_file_name: "staging2.html",
                version_file_name: "staging2.version.json",
                path: 'staging2/v{CFBundleShortVersionString}_b{CFBundleVersion}/'
                )
     end
-
+    
 
     desc "Submit a new Production Build to Amazon S3"
     lane :Production do

@@ -502,6 +502,7 @@
 		D100DF0A1BF4AA0300C81054 /* GoogleAnalyticsHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GoogleAnalyticsHelper.swift; path = Utils/GoogleAnalyticsHelper.swift; sourceTree = "<group>"; };
 		D100DF0D1BF4AA7900C81054 /* NSDate+NVTimeAgo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+NVTimeAgo.h"; sourceTree = "<group>"; };
 		D100DF0E1BF4AA7900C81054 /* NSDate+NVTimeAgo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+NVTimeAgo.m"; sourceTree = "<group>"; };
+		D162DD7A1C19ED8500ABCE44 /* redcross.erb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = redcross.erb; sourceTree = "<group>"; };
 		D18A1FDA1BEB95D9003F158D /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
 		D18A1FDB1BEB95D9003F158D /* PositionIn.ChangePasswordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.ChangePasswordViewController.xib; sourceTree = "<group>"; };
 		D196225E1BF13075003BCD85 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -2602,6 +2603,7 @@
 		E6DB13D81B74C84900E4BA96 /* fastlane */ = {
 			isa = PBXGroup;
 			children = (
+				D162DD7A1C19ED8500ABCE44 /* redcross.erb */,
 				E6DB13DA1B74C84900E4BA96 /* actions */,
 				E6DB13DB1B74C84900E4BA96 /* Appfile */,
 				E6DB13DD1B74C84900E4BA96 /* Fastfile */,
