@@ -95,7 +95,6 @@ extension BrowseMapViewController: GMSMapViewDelegate {
             self.performSelector("mapMovementEnd:",
                 withObject: CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude),
                 afterDelay: 0.5)
-            
         }
     }
     

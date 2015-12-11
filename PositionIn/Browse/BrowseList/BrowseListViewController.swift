@@ -26,6 +26,7 @@ final class BrowseListViewController: UIViewController, BrowseActionProducer, Br
             }
         }
     }
+    
     //hide separator lines
     var hideSeparatorLinesNearSegmentedControl: Bool = true
     
@@ -201,7 +202,6 @@ extension BrowseListViewController {
                 actionConsumer.browseController(actionProducer, didSelectItem: model.objectID, type: model.itemType, data: model.data)
             }
         }
-        
         
         func setItems(feedItems: [FeedItem]) {
             if showCompactCells {

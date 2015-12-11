@@ -13,7 +13,19 @@ struct FeedItemCellModelFactory {
     
     func compactModelsForItem(feedItem: FeedItem) -> [TableViewCellModel] {
         switch feedItem.type {
-        case .Emergency:
+        case .GiveBlood:
+            fallthrough
+        case .News:
+            fallthrough
+        case .Event:
+            fallthrough
+        case .Project:
+            fallthrough
+        case .Market:
+            fallthrough
+        case .BomaHotels:
+            fallthrough
+        case .Volunteer:
             fallthrough
         case .Training:
             fallthrough
@@ -41,6 +53,18 @@ struct FeedItemCellModelFactory {
     func compactCellReuseIdForModel(model: TableViewCellModel) -> String {
         if let model = model as? CompactFeedTableCellModel {
             switch model.itemType {
+            case .GiveBlood:
+                fallthrough
+            case .News:
+                fallthrough
+            case .Event:
+                fallthrough
+            case .Market:
+                fallthrough
+            case .BomaHotels:
+                fallthrough
+            case .Volunteer:
+                fallthrough
             case .Project:
                 return ProductListCell.reuseId()
             case .Emergency:

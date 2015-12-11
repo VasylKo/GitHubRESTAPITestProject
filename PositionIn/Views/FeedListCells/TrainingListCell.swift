@@ -23,15 +23,7 @@ final class TrainingListCell: TableViewCell {
         productImage.setImageFromURL(m!.imageURL, placeholder: UIImage(named: "trainings_placeholder"))
         headerLabel.text = m!.title
         detailsLabel.text = m!.details
-        
-        infoLabel.text =  nil
-        if let coordinates = m!.location?.coordinates {
-            locationController().distanceFromCoordinate(coordinates).onSuccess {
-                [weak self] distance in
-                let formatter = NSLengthFormatter()
-                self?.infoLabel.text = formatter.stringFromMeters(distance)
-            }
-        }
+        infoLabel.text = m!.info
     }
     
     override func prepareForReuse() {

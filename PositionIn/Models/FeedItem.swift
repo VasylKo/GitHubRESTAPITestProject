@@ -85,11 +85,13 @@ struct FeedItem: CRUDObject {
         case Project
         case Emergency
         case Training
-//        case Event
-//        case Promotion
-//        case Item
-//        case Post
-//        
+        case GiveBlood
+        case News
+        case Event
+        case Market
+        case BomaHotels
+        case Volunteer
+        
         var description: String {
             switch self {
             case .Unknown:
@@ -100,6 +102,19 @@ struct FeedItem: CRUDObject {
                 return "Emergency"
             case Training:
                 return "Training"
+                
+            case GiveBlood:
+                return "GiveBlood"
+            case Event:
+                return "Event"
+            case News:
+                return "News"
+            case BomaHotels:
+                return "BomaHotels"
+            case Market:
+                return "Market"
+            case Volunteer:
+                return "Volunteer"
             }
         }
     }

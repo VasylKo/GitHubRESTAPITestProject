@@ -24,7 +24,7 @@ class CompactFeedTableCellModel: FeedTableCellModel {
     
     let title: String?
     let details: String?
-    let info: String?
+    var info: String?
     let price: Float?
     let imageURL: NSURL?
     let location: Location?
@@ -39,6 +39,14 @@ class CompactFeedTableCellModel: FeedTableCellModel {
         self.price = price
         self.data = data
         self.location = location
+        
+        if let location = location {
+            locationController().distanceFromCoordinate(location.coordinates).onSuccess {
+                [weak self] distance in
+                let formatter = NSLengthFormatter()
+                self?.info = formatter.stringFromMeters(distance)
+            }
+        }
     }
 }
 
@@ -50,4 +58,3 @@ final class ComapctBadgeFeedTableCellModel : CompactFeedTableCellModel {
         super.init(itemType: itemType, objectID: objectID, title: title, details: details, info: info, price: nil, imageURL: url, location: nil,data: data)
     }
 }
-

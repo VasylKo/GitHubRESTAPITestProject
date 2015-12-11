@@ -222,6 +222,19 @@ protocol BrowseModeDisplay {
         case .Membership:
             self.navigationController?.pushViewController(Storyboards.Onboarding.instantiateMembershipPlansViewController(), animated: true)
             
+//            Projects, Emergency, Training, Ambulance, GiveBlood, News, Membership, Donate, Events, Market, BomaHotels, Volunteer
+        case .Market:
+            fallthrough
+        case .Volunteer:
+            fallthrough
+        case .BomaHotels:
+            fallthrough
+        case .Events:
+            fallthrough
+        case .News:
+            fallthrough
+        case .GiveBlood:
+            fallthrough
         case .Emergency:
             fallthrough
         case .Training:

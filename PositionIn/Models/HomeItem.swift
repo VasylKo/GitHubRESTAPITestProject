@@ -13,7 +13,7 @@ enum HomeItem: Int, CustomDebugStringConvertible {
     case Projects, Emergency, Training, Ambulance, GiveBlood, News, Membership, Donate, Events, Market, BomaHotels, Volunteer
     
     static var count: Int {
-        return 12
+        return Volunteer.rawValue
     }
     
     
@@ -78,6 +78,41 @@ enum HomeItem: Int, CustomDebugStringConvertible {
             fallthrough
         default:
             return NSLocalizedString("All", comment: "HomeItem")
+        }
+    }
+    
+    func endpoint() -> String? {
+        switch self {
+        case .Emergency:
+            return "/v1.0/emergency/"
+        case .GiveBlood:
+            return "/v1.0/giveBlood/"
+        case .News:
+            return "/v1.0/news/"
+        case .Training:
+            return "/v1.0/training/"
+        case .Events:
+            return "/v1.0/events/"
+        case .Projects:
+            return "/v1.0/projects/"
+        case .Market:
+            return "/v1.0/market/"
+        case .BomaHotels:
+            return "/v1.0/bomaHotels/"
+        case .Volunteer:
+            return "/v1.0/volunteer/"
+        case .Unknown:
+            fallthrough
+        default:
+            return nil
+        }
+    }
+    
+    func endpoint(objectId: CRUDObjectId) -> String? {
+        if let enpoint = self.endpoint() {
+            return "\(enpoint)\(objectId)"
+        } else {
+            return nil
         }
     }
     
