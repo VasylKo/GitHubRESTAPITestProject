@@ -25,8 +25,6 @@ class DonateCell: XLFormBaseCell {
         }
     }
     
-    //MARK: - XLFormDescriptorCell
-    
     override func configure() {
         super.configure()
         selectionStyle = .None

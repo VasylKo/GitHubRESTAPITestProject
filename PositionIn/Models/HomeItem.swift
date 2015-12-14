@@ -48,6 +48,47 @@ enum HomeItem: Int, CustomDebugStringConvertible {
         }
     }
     
+    func endpoint(objectId: String) -> String? {
+        if let endpoint = self.endpoint() {
+            return "\(endpoint)\(objectId)"
+        }
+        
+        return nil
+    }
+    
+    func endpoint() -> String? {
+        switch self {
+        case .Emergency:
+            return "/v1.0/emergency/"
+        case .Ambulance:
+            return "/v1.0/ambulance/"
+        case .GiveBlood:
+            return "/v1.0/giveBlood/"
+        case .News:
+            return "/v1.0/news/"
+        case .Membership:
+            return "/v1.0/membership/"
+        case .Donate:
+            return "/v1.0/donate/"
+        case .Training:
+            return "/v1.0/training/"
+        case .Events:
+            return "/v1.0/events/"
+        case .Projects:
+            return "/v1.0/projects/"
+        case .Market:
+            return "/v1.0/market/"
+        case .BomaHotels:
+            return "/v1.0/bomaHotels/"
+        case .Volunteer:
+            return "/v1.0/volunteer/"
+        case .Unknown:
+            fallthrough
+        default:
+            return nil
+        }
+    }
+    
     func displayString() -> String {
         switch self {
         case .Emergency:
