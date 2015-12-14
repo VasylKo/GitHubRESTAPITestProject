@@ -1,25 +1,24 @@
 //
-//  ProductDetailsViewController.swift
+//  BomaHotelsDetailsViewController.swift
 //  PositionIn
 //
-//  Created by Alexandr Goncharov on 27/07/15.
-//  Copyright (c) 2015 Soluna Labs. All rights reserved.
-//
+//  Created by Mikhail Polyevin on 14/12/15.
+//  Copyright © 2015 Soluna Labs. All rights reserved.
 
 import UIKit
 import PosInCore
 import CleanroomLogger
 import BrightFutures
 
-protocol ProductDetailsActionConsumer {
-    func executeAction(action: ProductDetailsViewController.ProductDetailsAction)
+protocol BomaHotelsDetailsActionConsumer {
+//    func executeAction(action: ProductDetailsViewController.ProductDetailsAction)
 }
 
-final class ProductDetailsViewController: UIViewController {
+final class BomaHotelsDetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = NSLocalizedString("Project", comment: "Project details: title")
+        title = NSLocalizedString("Boma Hotels", comment: "Project details: title")
         dataSource.items = productAcionItems()
         dataSource.configureTable(actionTableView)
         reloadData()
@@ -30,8 +29,8 @@ final class ProductDetailsViewController: UIViewController {
             orderController.product = self.product
         }
         if let profileController = segue.destinationViewController  as? UserProfileViewController,
-           let userId = author?.objectId {
-            profileController.objectId = userId
+            let userId = author?.objectId {
+                profileController.objectId = userId
         }
     }
     
@@ -41,8 +40,8 @@ final class ProductDetailsViewController: UIViewController {
         case (.Some(let objectId), .Some(let author) ):
             api().getUserProfile(author.objectId).flatMap { (profile: UserProfile) -> Future<Product, NSError> in
                 return api().getOne(objectId)
-            }.onSuccess { [weak self] product in
-                self?.didReceiveProductDetails(product)
+                }.onSuccess { [weak self] product in
+                    self?.didReceiveProductDetails(product)
             }
         default:
             Log.error?.message("Not enough data to load product")
@@ -57,10 +56,10 @@ final class ProductDetailsViewController: UIViewController {
             priceLabel.text = "\(Int(price)) beneficiaries"
         }
         
-//        temporary decision
-//        priceLabel.text = product.price.map {
-//            let newValue = $0 as Float
-//            return AppConfiguration().currencyFormatter.stringFromNumber(NSNumber(float: newValue)) ?? ""}
+        //        temporary decision
+        //        priceLabel.text = product.price.map {
+        //            let newValue = $0 as Float
+        //            return AppConfiguration().currencyFormatter.stringFromNumber(NSNumber(float: newValue)) ?? ""}
         
         let imageURL: NSURL?
         
@@ -71,7 +70,7 @@ final class ProductDetailsViewController: UIViewController {
         }
         
         let image = UIImage(named: "hardware_img_default")
-
+        
         productImageView.setImageFromURL(imageURL, placeholder: image)
         if let coordinates = product.location?.coordinates {
             locationRequestToken.invalidate()
@@ -90,8 +89,8 @@ final class ProductDetailsViewController: UIViewController {
     private var product: Product?
     private var locationRequestToken = InvalidationToken()
     
-    private lazy var dataSource: ProductDetailsDataSource = { [unowned self] in
-        let dataSource = ProductDetailsDataSource()
+    private lazy var dataSource: BomaHotelsDetailsDataSource = { [unowned self] in
+        let dataSource = BomaHotelsDetailsDataSource()
         dataSource.parentViewController = self
         return dataSource
         }()
@@ -123,8 +122,8 @@ final class ProductDetailsViewController: UIViewController {
     @IBOutlet private weak var detailsLabel: UILabel!
 }
 
-extension ProductDetailsViewController {
-    enum ProductDetailsAction: CustomStringConvertible {
+extension BomaHotelsDetailsViewController {
+    enum BomaHotelsDetailsAction: CustomStringConvertible {
         case Buy, ProductInventory, SellerProfile, SendMessage
         
         var description: String {
@@ -145,39 +144,39 @@ extension ProductDetailsViewController {
     struct ProductActionItem {
         let title: String
         let image: String
-        let action: ProductDetailsAction
+        let action: BomaHotelsDetailsAction
     }
 }
+//
+//extension ProductDetailsViewController: ProductDetailsActionConsumer {
+//    func executeAction(action: ProductDetailsAction) {
+//        let segue: ProductDetailsViewController.Segue
+//        switch action {
+//        case .Buy:
+//            if api().isUserAuthorized() {
+//                segue = .ShowBuyScreen
+//            } else {
+//                api().logout().onComplete {[weak self] _ in
+//                    self?.sideBarController?.executeAction(.Login)
+//                }
+//                return
+//            }
+//        case .ProductInventory:
+//            segue = .ShowProductInventory
+//        case .SellerProfile:
+//            segue = .ShowSellerProfile
+//        case .SendMessage:
+//            if let userId = author?.objectId {
+//                showChatViewController(userId)
+//            }
+//            return
+//        }
+//        performSegue(segue)
+//    }
+//}
 
-extension ProductDetailsViewController: ProductDetailsActionConsumer {
-    func executeAction(action: ProductDetailsAction) {
-        let segue: ProductDetailsViewController.Segue
-        switch action {
-        case .Buy:
-            if api().isUserAuthorized() {
-                segue = .ShowBuyScreen
-            } else {
-                api().logout().onComplete {[weak self] _ in
-                    self?.sideBarController?.executeAction(.Login)
-                }
-                return
-            }
-        case .ProductInventory:
-            segue = .ShowProductInventory
-        case .SellerProfile:
-            segue = .ShowSellerProfile
-        case .SendMessage:
-            if let userId = author?.objectId {
-                showChatViewController(userId)
-            }
-            return
-        }
-        performSegue(segue)
-    }
-}
-
-extension ProductDetailsViewController {
-    internal class ProductDetailsDataSource: TableViewDataSource {
+extension BomaHotelsDetailsViewController {
+    internal class BomaHotelsDetailsDataSource: TableViewDataSource {
         
         var items: [[ProductActionItem]] = []
         
@@ -219,48 +218,8 @@ extension ProductDetailsViewController {
             tableView.deselectRowAtIndexPath(indexPath, animated: true)
             let item = items[indexPath.section][indexPath.row]
             if let actionConsumer = parentViewController as? ProductDetailsActionConsumer {
-                actionConsumer.executeAction(item.action)
+//                actionConsumer.executeAction(item.action)
             }
         }
-    }
-}
-
-
-extension ItemCategory {
-    func productPlaceholderImage() -> UIImage {
-        let imageName: String
-        switch self {
-        case .AnimalsPetSupplies:
-            imageName = "animals_pet_supplies_img_default"
-        case .ApparelAccessories:
-            imageName = "apparel_accessories_img_default"
-        case .ArtsEntertainment:
-            imageName = "arts_entertainment_img_default"
-        case .BabyToddler:
-            imageName = "baby_toddler_img_default"
-        case .BusinessIndustrial:
-            imageName = "business_industrial_img_default"
-        case .CamerasOptics:
-            imageName = "cameras_optics_img_default"
-        case .Electronics:
-            imageName = "electronics_img_default"
-        case .Food:
-            imageName = "food_img_default"
-        case .Furniture:
-            imageName = "furniture_img_default"
-        case .Hardware:
-            imageName = "hardware_img_default"
-        case .HealthBeauty:
-            imageName = "health_beauty_img_default"
-        case .HomeGarden:
-            imageName = "home_garden_img_default"
-        case .LuggageBags:
-            imageName = "luggage_bags_img_default"
-        case .Unknown:
-            fallthrough
-        default:
-            imageName = ""
-        }
-        return UIImage(named: imageName) ?? UIImage()
     }
 }

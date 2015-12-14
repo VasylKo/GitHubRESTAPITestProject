@@ -84,23 +84,24 @@ enum HomeItem: Int, CustomDebugStringConvertible {
     func endpoint() -> String? {
         switch self {
         case .Emergency:
-            return "/v1.0/emergency/"
+//            return "/v1.0/
+            return FeedItem.getAllEndpoint()
         case .GiveBlood:
             return "/v1.0/giveBlood/"
         case .News:
-            return "/v1.0/news/"
+            return "/v1.0/post/"
         case .Training:
-            return "/v1.0/training/"
+            return FeedItem.getAllEndpoint()
         case .Events:
             return "/v1.0/events/"
         case .Projects:
-            return "/v1.0/projects/"
+            return FeedItem.getAllEndpoint()
         case .Market:
-            return "/v1.0/market/"
+            return "/v1.0/products/"
         case .BomaHotels:
             return "/v1.0/bomaHotels/"
         case .Volunteer:
-            return "/v1.0/volunteer/"
+            return "/v1.0/community/"
         case .Unknown:
             fallthrough
         default:
