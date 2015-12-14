@@ -122,43 +122,6 @@ enum HomeItem: Int, CustomDebugStringConvertible {
         }
     }
     
-    func endpoint() -> String? {
-        switch self {
-        case .Emergency:
-//            return "/v1.0/
-            return FeedItem.getAllEndpoint()
-        case .GiveBlood:
-            return "/v1.0/giveBlood/"
-        case .News:
-            return "/v1.0/post/"
-        case .Training:
-            return FeedItem.getAllEndpoint()
-        case .Events:
-            return "/v1.0/events/"
-        case .Projects:
-            return FeedItem.getAllEndpoint()
-        case .Market:
-            return "/v1.0/products/"
-        case .BomaHotels:
-            return "/v1.0/bomaHotels/"
-        case .Volunteer:
-            return "/v1.0/community/"
-        case .Unknown:
-            fallthrough
-        default:
-            return nil
-        }
-    }
-    
-    func endpoint(objectId: CRUDObjectId) -> String? {
-        if let enpoint = self.endpoint() {
-            return "\(enpoint)\(objectId)"
-        } else {
-            return nil
-        }
-    }
-    
-    
     func image() -> UIImage? {
         switch self {
         case .Emergency:
