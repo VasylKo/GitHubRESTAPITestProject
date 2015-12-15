@@ -106,11 +106,11 @@ final class BrowseListViewController: UIViewController, BrowseActionProducer, Br
 //        }
         request.onSuccess(dataRequestToken.validContext) {
             [weak self] response in
-            Log.debug?.value(response.items)
+            //            Log.debug?.value(response.items)
             guard let strongSelf = self
-//                let itemTypes = searchFilter.itemTypes{
-//                //TODO: need discuss this moment
-//                where itemTypes.contains(strongSelf.selectedItemType) || strongSelf.selectedItemType == .Unknown 
+                //                let itemTypes = searchFilter.itemTypes{
+                //                //TODO: need discuss this moment
+                //                where itemTypes.contains(strongSelf.selectedItemType) || strongSelf.selectedItemType == .Unknown
                 else {
                     return
             }
@@ -126,7 +126,7 @@ final class BrowseListViewController: UIViewController, BrowseActionProducer, Br
         }
     }
     
-    @IBAction func displayModeSegmentedControlChanged(sender: UISegmentedControl) {
+//    @IBAction func displayModeSegmentedControlChanged(sender: UISegmentedControl) {
 //        let segmentMapping: [Int: FeedItem.ItemType] = [
 //            0: .Unknown,
 //            1: .Item,
@@ -137,7 +137,7 @@ final class BrowseListViewController: UIViewController, BrowseActionProducer, Br
 //        if let newFilterValue = segmentMapping[sender.selectedSegmentIndex] {
 //            selectedItemType = newFilterValue
 //        }
-    }
+//    }
     
     @IBOutlet weak var topSeparatorLine: UIView!
     @IBOutlet weak var bottomSeparatorLine: UIView!

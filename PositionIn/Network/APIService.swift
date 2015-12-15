@@ -320,20 +320,20 @@ struct APIService {
         }
     }
     
-//    func getFeed(query: APIServiceQueryConvertible, page: Page) -> Future<CollectionResponse<FeedItem>,NSError> {
-//        let endpoint = FeedItem.endpoint()
-//        let params = APIServiceQuery()
-//        params.append(query: query)
-//        params.append(query: page)
-//        Log.debug?.value(params.query)
-//        return session().flatMap {
-//            (token: AuthResponse.Token) -> Future<CollectionResponse<FeedItem>, NSError> in
-//            let request = self.updateRequest(token, endpoint: endpoint, params: params.query)
-//            let (_ , future): (Alamofire.Request, Future<CollectionResponse<FeedItem>, NSError>) = self.dataProvider.objectRequest(request)
-//            return self.handleFailure(future)
-//        }
-//    }
-//    
+    func getFeed(query: APIServiceQueryConvertible, page: Page) -> Future<CollectionResponse<FeedItem>,NSError> {
+        let endpoint = FeedItem.endpoint()
+        let params = APIServiceQuery()
+        params.append(query: query)
+        params.append(query: page)
+        Log.debug?.value(params.query)
+        return session().flatMap {
+            (token: AuthResponse.Token) -> Future<CollectionResponse<FeedItem>, NSError> in
+            let request = self.updateRequest(token, endpoint: endpoint, params: params.query)
+            let (_ , future): (Alamofire.Request, Future<CollectionResponse<FeedItem>, NSError>) = self.dataProvider.objectRequest(request)
+            return self.handleFailure(future)
+        }
+    }
+//
 //    func forYou(query: APIServiceQueryConvertible, page: Page) -> Future<CollectionResponse<FeedItem>,NSError> {
 //        let endpoint = FeedItem.forYouEndpoint()
 //        let params = APIServiceQuery()
@@ -351,12 +351,18 @@ struct APIService {
     func getAll(homeItem: HomeItem) -> Future<CollectionResponse<FeedItem>,NSError> {
         
         let endpoint = FeedItem.getAllEndpoint()
+        //homeItem.endpoint()
         let params = APIServiceQuery()
-        params.append("type", value: homeItem.rawValue)
+        //hardcoded value
+        params.append("type", value: 1)
         Log.debug?.value(params.query)
         return session().flatMap {
             (token: AuthResponse.Token) -> Future<CollectionResponse<FeedItem>, NSError> in
-            let request = self.updateRequest(token, endpoint: endpoint, params: params.query)
+            var endp = endpoint
+//            if let endpoint = endpoint {
+//                endp = endpoint
+//            }
+            let request = self.updateRequest(token, endpoint: endp, method: .POST, params: params.query)
             let (_ , future): (Alamofire.Request, Future<CollectionResponse<FeedItem>, NSError>) = self.dataProvider.objectRequest(request)
             return self.handleFailure(future)
         }

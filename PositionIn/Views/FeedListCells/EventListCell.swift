@@ -19,12 +19,31 @@ final class EventListCell: TableViewCell {
     override func setModel(model: TableViewCellModel) {
         let m = model as? CompactFeedTableCellModel
         assert(m != nil, "Invalid model passed")
-        
-        productImage.setImageFromURL(m!.imageURL, placeholder: UIImage(named: "placeholderEvent"))
-        titleLabel.text = m!.title
-        if let price = m!.price {
-            infoLabel.text = "\(price) beneficiaries"
+
+        switch m!.itemType {
+        case .Emergency:
+            productImage.setImageFromURL(m!.imageURL, placeholder: UIImage(named: "placeholderEvent"))
+        case .GiveBlood:
+            productImage.setImageFromURL(m!.imageURL, placeholder: UIImage(named: "placeholderEvent"))
+        case .Training:
+            productImage.setImageFromURL(m!.imageURL, placeholder: UIImage(named: "placeholderEvent"))
+        case .Volunteer:
+            productImage.setImageFromURL(m!.imageURL, placeholder: UIImage(named: "placeholderEvent"))
+        case .Market:
+            productImage.setImageFromURL(m!.imageURL, placeholder: UIImage(named: "placeholderEvent"))
+        case .BomaHotels:
+            productImage.setImageFromURL(m!.imageURL, placeholder: UIImage(named: "placeholderEvent"))
+        case .Project:
+            productImage.setImageFromURL(m!.imageURL, placeholder: UIImage(named: "placeholderEvent"))
+        case .Event:
+            fallthrough
+        case .News:
+            fallthrough
+        case .Unknown:
+            break
         }
+        
+        titleLabel.text = m!.title
         infoLabel.text = m!.info
         dateLabel.text = m!.details
     }

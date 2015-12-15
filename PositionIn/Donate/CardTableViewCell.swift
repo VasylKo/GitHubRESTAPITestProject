@@ -10,7 +10,6 @@ import UIKit
 
 class CardTableViewCell: UITableViewCell {
 
-    
     var cardName: String? {
         didSet {
             self.cardNameLabel.text = cardName

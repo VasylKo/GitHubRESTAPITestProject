@@ -53,9 +53,9 @@ struct FeedItemCellModelFactory {
     func compactCellReuseIdForModel(model: TableViewCellModel) -> String {
         if let model = model as? CompactFeedTableCellModel {
             switch model.itemType {
-            case .GiveBlood:
-                fallthrough
             case .News:
+                return PostListCell.reuseId()
+            case .GiveBlood:
                 fallthrough
             case .Event:
                 fallthrough
@@ -66,11 +66,11 @@ struct FeedItemCellModelFactory {
             case .Volunteer:
                 fallthrough
             case .Project:
-                return ProductListCell.reuseId()
+                fallthrough
             case .Emergency:
-                return EmergencyListCell.reuseId()
+                fallthrough
             case .Training:
-                return TrainingListCell.reuseId()
+                return EventListCell.reuseId()
             default:
                 break
             }
@@ -79,7 +79,7 @@ struct FeedItemCellModelFactory {
     }
     
     func compactCellsReuseId() -> [String]  {
-        return [ProductListCell.reuseId(), TrainingListCell.reuseId(), EmergencyListCell.reuseId()]
+        return [EventListCell.reuseId(), PostListCell.reuseId()]
     }
     
     func detailedModelsForItem(feedItem: FeedItem) -> [TableViewCellModel] {
@@ -118,11 +118,11 @@ struct FeedItemCellModelFactory {
     }
     
     func walletReuseIdForModel(model: TableViewCellModel) -> String {
-        return ProductListCell.reuseId()
+        return EventListCell.reuseId()
     }
     
     func walletReuseId() -> [String]  {
-        return [ProductListCell.reuseId()]
+        return [EventListCell.reuseId()]
     }
     
     private let dateFormatter: NSDateFormatter = {

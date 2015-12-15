@@ -376,7 +376,6 @@ extension UserProfileViewController: BrowseActionConsumer {
     func browseController(controller: BrowseActionProducer, didSelectItem objectId: CRUDObjectId, type itemType: FeedItem.ItemType, data: Any?) {
         switch itemType {
             
-//                case Projects, Emergency, Training, Ambulance, GiveBlood, News, Membership, Donate, Events, Market, BomaHotels, Volunteer
         case .Project:
             let controller =  Storyboards.Main.instantiateProductDetailsViewControllerId()
             controller.objectId = objectId
@@ -391,17 +390,17 @@ extension UserProfileViewController: BrowseActionConsumer {
             controller.objectId = objectId
             navigationController?.pushViewController(controller, animated: true)
         case .GiveBlood:
-            print("")
+            fallthrough
         case .News:
-            print("")
+            fallthrough
         case .Event:
-            print("")
+            fallthrough
         case .Market:
-            print("")
+            fallthrough
         case .BomaHotels:
-            print("")
+            fallthrough
         case .Volunteer:
-            print("")
+            fallthrough
         default:
             Log.debug?.message("Did select \(itemType)<\(objectId)>")
         }

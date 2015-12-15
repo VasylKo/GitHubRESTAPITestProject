@@ -173,6 +173,17 @@ protocol BrowseActionConsumer: class {
     //MARK: - BrowseActionConsumer: Browse actions -
     
     func browseController(controller: BrowseActionProducer, didSelectItem objectId: CRUDObjectId, type itemType: FeedItem.ItemType, data: Any?) {
+//        
+//        case Unknown
+//        case Project
+//        case Emergency
+//        case Training
+//        case GiveBlood
+//        case News
+//        case Event
+//        case Market
+//        case BomaHotels
+//        case Volunteer
         switch itemType {
         case .Project:
             trackGoogleAnalyticsEvent("Main", action: "Click", label: "Product")
@@ -187,7 +198,7 @@ protocol BrowseActionConsumer: class {
             controller.author = data as? ObjectInfo
             navigationController?.pushViewController(controller, animated: true)
         case .Emergency:
-            trackGoogleAnalyticsEvent("Main", action: "Click", label: "Promotion")
+            trackGoogleAnalyticsEvent("Main", action: "Click", label: "Emergency")
             let controller =  Storyboards.Main.instantiateEmergencyDetailsControllerId()
             controller.objectId = objectId
             controller.author = data as? ObjectInfo
