@@ -221,7 +221,6 @@ extension EmergencyDetailsController {
 //                actionConsumer.executeAction(item.action)
             }
         }
-        
     }
 }
 
