@@ -43,17 +43,24 @@ struct SessionController {
     
     func session() -> Future<AuthResponse.Token, NSError> {
         return future { () -> Result<AuthResponse.Token, NSError> in
-            //TODO: check expiration date
-            guard let token = self.accessToken,
-                let expirationDate = self.accessTokenExpiresIn
-                where  NSDate().compare(expirationDate) == NSComparisonResult.OrderedAscending
-                else {
-                    Log.warning?.trace()
-                    let errorCode = NetworkDataProvider.ErrorCodes.InvalidSessionError
-                    return Result(error: errorCode.error())
+            if let token = self.currentAccessToken() {
+                return Result(value: token)
+            } else {
+                Log.warning?.trace()
+                let errorCode = NetworkDataProvider.ErrorCodes.InvalidSessionError
+                return Result(error: errorCode.error())
             }
-            return Result(value: token)
         }
+    }
+    
+    func currentAccessToken() -> AuthResponse.Token? {
+        guard let token = self.accessToken,
+            let expirationDate = self.accessTokenExpiresIn
+            where  NSDate().compare(expirationDate) == NSComparisonResult.OrderedAscending
+            else {
+                return nil
+        }
+        return token
     }
     
     func logout() -> Future<Void, NoError> {
@@ -141,10 +148,12 @@ struct SessionController {
         }
     }
     
+    @available(*, deprecated=1.0)
     func updatePassword(newPassword: String) {
         keychain[KeychainKeys.UserPasswordKey] = newPassword
     }
     
+    @available(*, unavailable, message="We do not store password anymore")
     var userPassword: String? {
         return keychain[KeychainKeys.UserPasswordKey]
     }
@@ -208,6 +217,8 @@ struct SessionController {
         
         static let UserIdKey = "userId"
         static let IsGuestKey = "isGuest"
+        
+        @available(*, deprecated=1.0)
         static let UserPasswordKey = "UserPassword"
     }
 }
