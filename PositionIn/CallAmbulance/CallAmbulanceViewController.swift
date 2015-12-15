@@ -128,9 +128,7 @@ class CallAmbulanceViewController: BaseAddItemViewController {
                     info.url = url
                     return info
                 }
-                
                 return api().createAmbulanceRequest(ambulanceRequest)
-            
             }
         self.performSegue(CallAmbulanceViewController.Segue.AmbulanceRequestedSegueId)
         }

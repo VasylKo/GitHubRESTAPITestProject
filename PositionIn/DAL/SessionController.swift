@@ -183,6 +183,16 @@ struct SessionController {
         return keychain[KeychainKeys.RefreshTokenKey]
     }
     
+    var deviceToken: String? {
+        return keychain[KeychainKeys.DeviceToken]
+    }
+    
+    func setDeviceToken(deviceToken: String?) {
+        if let dt = deviceToken {
+            keychain[KeychainKeys.DeviceToken] = dt
+        }
+    }
+    
     private var accessTokenExpiresIn: NSDate? {
         do {
             if let data = try keychain.getData(KeychainKeys.ExpireDateKeyAT) {
@@ -217,6 +227,8 @@ struct SessionController {
         
         static let UserIdKey = "userId"
         static let IsGuestKey = "isGuest"
+        
+        static let DeviceToken = "dt"
         
         @available(*, deprecated=1.0)
         static let UserPasswordKey = "UserPassword"

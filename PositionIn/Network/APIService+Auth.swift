@@ -355,7 +355,8 @@ extension APIService {
             let device = UIDevice.currentDevice()
             var info = [
                 "make" : device.localizedModel,
-                "model" : "\(device.systemName) \(device.systemVersion)"
+                "model" : "\(device.systemName) \(device.systemVersion)",
+                "os" : "IOS"
             ];
             if let uuid = device.identifierForVendor {
                 info["uuid"] = uuid.UUIDString

@@ -144,6 +144,8 @@ final class EditProfileViewController: BaseAddItemViewController {
                 
                 self?.navigationController?.pushViewController(Storyboards.Onboarding.instantiateMembershipPlansViewController(),
                     animated: true)
+                }).onSuccess(callback: { _ in
+                    api().pushesRegistration(SessionController().deviceToken)
                 }).onFailure(callback: {_ in
                     trackGoogleAnalyticsEvent("Status", action: "Click", label: "Auth Fail")
                 })

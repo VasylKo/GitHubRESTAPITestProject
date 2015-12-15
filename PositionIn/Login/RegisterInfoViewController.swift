@@ -47,7 +47,9 @@ final class RegisterInfoViewController: BaseLoginViewController {
                 Log.info?.message("Registration done")
                 self?.sideBarController?.executeAction(SidebarViewController.defaultAction)
                 self?.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
-            }.onFailure(callback: {_ in
+                }.onSuccess(callback: { _ in
+                    api().pushesRegistration(SessionController().deviceToken)
+                }).onFailure(callback: {_ in
                 trackGoogleAnalyticsEvent("Status", action: "Click", label: "Auth Fail")
             })
         } //validation

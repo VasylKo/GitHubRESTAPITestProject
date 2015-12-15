@@ -3198,6 +3198,11 @@
 					E64DC3491B4E53C90011D37C = {
 						CreatedOnToolsVersion = 6.4;
 						DevelopmentTeam = WVE53RRC7C;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 					E64DC35E1B4E53CA0011D37C = {
 						CreatedOnToolsVersion = 6.4;
@@ -4224,7 +4229,7 @@
 					"-ObjC",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -D DEBUG";
-				PRODUCT_BUNDLE_IDENTIFIER = com.positionin.positionin;
+				PRODUCT_BUNDLE_IDENTIFIER = com.positionin.dev01;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				STRIP_INSTALLED_PRODUCT = NO;
@@ -4240,7 +4245,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Media Applications ltd";
+				CODE_SIGN_IDENTITY = "Apple Production IOS Push Services: com.positionin.dev01";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Media Applications ltd";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -4310,9 +4315,9 @@
 					"\"XLForm\"",
 					"-ObjC",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.positionin.positionin;
+				PRODUCT_BUNDLE_IDENTIFIER = com.positionin.dev01;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "6ac14aea-4af0-4175-a35d-6ddfa940a94a";
+				PROVISIONING_PROFILE = "b309cda0-57e8-4186-9226-7b24f18da37f";
 				SWIFT_OBJC_BRIDGING_HEADER = "PositionIn/PositionIn-Bridging-Header.h";
 			};
 			name = DevRelease;
@@ -4497,7 +4502,7 @@
 					"-ObjC",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -D DEBUG -D \"STAGING_ENV\"";
-				PRODUCT_BUNDLE_IDENTIFIER = com.positionin.positionin;
+				PRODUCT_BUNDLE_IDENTIFIER = com.positionin.dev01;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				STRIP_INSTALLED_PRODUCT = NO;
@@ -4651,7 +4656,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Media Applications ltd";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Media Applications ltd";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -4722,7 +4727,7 @@
 					"-ObjC",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -D \"STAGING_ENV\"";
-				PRODUCT_BUNDLE_IDENTIFIER = com.positionin.positionin;
+				PRODUCT_BUNDLE_IDENTIFIER = com.positionin.dev01;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "6ac14aea-4af0-4175-a35d-6ddfa940a94a";
 				SWIFT_OBJC_BRIDGING_HEADER = "PositionIn/PositionIn-Bridging-Header.h";
@@ -4941,7 +4946,7 @@
 					"-ObjC",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -D DEBUG -D \"PROD_ENV\"";
-				PRODUCT_BUNDLE_IDENTIFIER = com.positionin.positionin;
+				PRODUCT_BUNDLE_IDENTIFIER = com.positionin.dev01;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "PositionIn/PositionIn-Bridging-Header.h";
@@ -5094,7 +5099,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Media Applications ltd";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Media Applications ltd";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -5165,7 +5170,7 @@
 					"-ObjC",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -D \"PROD_ENV\"";
-				PRODUCT_BUNDLE_IDENTIFIER = com.positionin.positionin;
+				PRODUCT_BUNDLE_IDENTIFIER = com.positionin.dev01;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "6ac14aea-4af0-4175-a35d-6ddfa940a94a";
 				SWIFT_OBJC_BRIDGING_HEADER = "PositionIn/PositionIn-Bridging-Header.h";

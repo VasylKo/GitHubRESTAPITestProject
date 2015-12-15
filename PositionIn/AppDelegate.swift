@@ -97,8 +97,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         XLFormViewController.cellClassesForRowDescriptorTypes()[XLFormRowDescriptorTypePayment] =
         "PaymentTableViewCell"
         
-        let settings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
+        let settings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound],
+            categories: nil)
         UIApplication.sharedApplication().registerUserNotificationSettings(settings)
+        
+        UIApplication.sharedApplication().registerForRemoteNotifications()
+        
+        showWarning("subscript")
         
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
     }
@@ -115,22 +120,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
       
-//        let deviceTokenString: String = deviceToken.desctiprion
-        var characterSet: NSCharacterSet = NSCharacterSet( charactersInString: "<>" )
+        let characterSet: NSCharacterSet = NSCharacterSet( charactersInString: "<>" )
         
-        var deviceTokenString: String = (deviceToken.description as NSString)
+        let deviceTokenString: String = (deviceToken.description as NSString)
             .stringByTrimmingCharactersInSet( characterSet )
             .stringByReplacingOccurrencesOfString( " ", withString: "" ) as String
         
-        //send request
+        let sessionController = SessionController()
+        sessionController.setDeviceToken(deviceTokenString)
         
-        //show success
+        if sessionController.isUserAuthorized() {
+            api.pushesRegistration(deviceTokenString)
+        }
     }
     
-    func application( application: UIApplication!, didFailToRegisterForRemoteNotificationsWithError error: NSError! ) {
-        //show error
+    func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
+        //TODO handle
+        showError("didFailToRegisterForRemoteNotificationsWithError")
     }
-
+    
+    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
+        //TODO handle
+        showSuccess("push didReceiveRemoteNotification")
+    }
+    
     func applicationDidEnterBackground(application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.

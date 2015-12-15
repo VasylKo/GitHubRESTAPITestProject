@@ -52,6 +52,26 @@ struct APIService {
         return "API: \(baseURL.absoluteString)"
     }
     
+    //pushes
+    
+    func pushesRegistration(deviceToken: String?) -> Future<Void, NSError> {
+        let endpoint = UserProfile.pushesEndpoint()
+        typealias CRUDResultType = (Alamofire.Request, Future<Void, NSError>)
+        var params: [String: String]? = nil
+        let device = UIDevice.currentDevice()
+        if let dc = deviceToken,
+        let uuid = device.identifierForVendor{
+            params = ["registrationId": dc, "uuid" : uuid.UUIDString]
+        }
+        
+        return session().flatMap {
+            (token: AuthResponse.Token) -> Future<Void, NSError> in
+            let request = self.updateRequest(token, endpoint: endpoint, method: .POST, params: params)
+            let (_, future): CRUDResultType = self.dataProvider.jsonRequest(request, map: self.emptyResponseMapping(), validation: nil)
+            return future
+        }
+    }
+    
     //MARK: - Profile -
     
     func changePassword(oldPassword: String?, newPassword: String?) -> Future<Void, NSError> {
