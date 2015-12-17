@@ -18,18 +18,20 @@ final class AppConfiguration {
             amazonURL = NSURL(string: "https://app.positionin.com")!
             xmppHostname = "app.positionin.com"
             googleAnalystLogLevel = GAILogLevel.Verbose
+            googleMapsKey = "AIzaSyA3NvrDKBcpIsnq4-ZACG41y7Mj-wSfVrY"
         case .Staging:
             baseURL = NSURL(string: "https://app-sta.positionin.com/api/")!
             amazonURL = NSURL(string: "https://pos-sta.s3.amazonaws.com/")!
             xmppHostname = "app-sta.positionin.com"
             googleAnalystLogLevel = GAILogLevel.Verbose
+            googleMapsKey = "AIzaSyA3NvrDKBcpIsnq4-ZACG41y7Mj-wSfVrY"
         case .Dev:
             baseURL = NSURL(string: "https://app-dev.positionin.com/api/")!
             amazonURL = NSURL(string: "https://pos-dev.s3.amazonaws.com/")!
             xmppHostname = "app-dev.positionin.com"
             googleAnalystLogLevel = GAILogLevel.None
+            googleMapsKey = "AIzaSyDkUHOpFWNBDAW5Gu2I0E7iHe4FRWGyM6o"
         }
-        googleMapsKey = "AIzaSyA3NvrDKBcpIsnq4-ZACG41y7Mj-wSfVrY"
         xmppPort = 5223
     }
     
