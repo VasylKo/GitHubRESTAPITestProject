@@ -1,0 +1,11 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="PositionIn" type="AppleRunConfiguration" factoryName="Application" WORKING_DIR="" PASS_PARENT_ENVS="FALSE" PROJECT_NAME="PositionIn" TARGET_NAME="PositionIn" CONFIG_NAME="DevRelease" SCHEME_NAME="PositionIn" RUN_TARGET_PROJECT_NAME="PositionIn" RUN_TARGET_NAME="PositionIn" MAKE_ACTIVE="TRUE" WAIT_FOR="FALSE">
+    <envs>
+      <env name="XcodeColors" value="YES" />
+    </envs>
+    <EXTENSION ID="org.jetbrains.appcode.reveal.RevealRunConfigurationExtension">
+      <REVEAL_SETTINGS autoInject="false" autoInstall="true" askToEnableAutoInstall="true" />
+    </EXTENSION>
+    <method />
+  </configuration>
+</component>
