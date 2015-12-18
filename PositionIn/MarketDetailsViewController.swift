@@ -6,21 +6,13 @@
 //  Copyright © 2015 Soluna Labs. All rights reserved.
 //
 
-//import UIKit
-//
-//class MarketDetailsViewController: UIViewController {
-//
-//    
-//    
-//}
-
 import UIKit
 import PosInCore
 import CleanroomLogger
 import BrightFutures
 
 protocol MarketDetailsActionConsumer {
-    //    func executeAction(action: ProductDetailsViewController.ProductDetailsAction)
+        func executeAction(action: MarketDetailsViewController.MarketDetailsAction)
 }
 
 final class MarketDetailsViewController: UIViewController {
@@ -64,11 +56,6 @@ final class MarketDetailsViewController: UIViewController {
         if let price = product.donations {
             priceLabel.text = "\(Int(price)) beneficiaries"
         }
-        
-        //        temporary decision
-        //        priceLabel.text = product.price.map {
-        //            let newValue = $0 as Float
-        //            return AppConfiguration().currencyFormatter.stringFromNumber(NSNumber(float: newValue)) ?? ""}
         
         let imageURL: NSURL?
         
@@ -156,33 +143,12 @@ extension MarketDetailsViewController {
         let action: MarketDetailsAction
     }
 }
-//
-//extension ProductDetailsViewController: ProductDetailsActionConsumer {
-//    func executeAction(action: ProductDetailsAction) {
-//        let segue: ProductDetailsViewController.Segue
-//        switch action {
-//        case .Buy:
-//            if api().isUserAuthorized() {
-//                segue = .ShowBuyScreen
-//            } else {
-//                api().logout().onComplete {[weak self] _ in
-//                    self?.sideBarController?.executeAction(.Login)
-//                }
-//                return
-//            }
-//        case .ProductInventory:
-//            segue = .ShowProductInventory
-//        case .SellerProfile:
-//            segue = .ShowSellerProfile
-//        case .SendMessage:
-//            if let userId = author?.objectId {
-//                showChatViewController(userId)
-//            }
-//            return
-//        }
-//        performSegue(segue)
-//    }
-//}
+
+extension MarketDetailsViewController: MarketDetailsActionConsumer {
+    func executeAction(action: MarketDetailsAction) {
+
+    }
+}
 
 extension MarketDetailsViewController {
     internal class MarketDetailsDataSource: TableViewDataSource {
@@ -226,8 +192,8 @@ extension MarketDetailsViewController {
         func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
             tableView.deselectRowAtIndexPath(indexPath, animated: true)
             let item = items[indexPath.section][indexPath.row]
-            if let actionConsumer = parentViewController as? ProductDetailsActionConsumer {
-                //                actionConsumer.executeAction(item.action)
+            if let actionConsumer = parentViewController as? MarketDetailsActionConsumer {
+                actionConsumer.executeAction(item.action)
             }
         }
     }

@@ -755,6 +755,24 @@
             </objects>
             <point key="canvasLocation" x="3129" y="313"/>
         </scene>
+        <!--Volunteer Details View Controller-->
+        <scene sceneID="lhE-Ur-5NC">
+            <objects>
+                <viewController storyboardIdentifier="VolunteerDetailsViewControllerId" id="fxT-f9-lqb" customClass="VolunteerDetailsViewController" customModule="PositionIn" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="87g-dd-vLq"/>
+                        <viewControllerLayoutGuide type="bottom" id="RPJ-7g-gFG"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="63E-ln-7bL">
+                        <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EoD-kD-VVM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3523" y="1027"/>
+        </scene>
         <!--Event Details View Controller-->
         <scene sceneID="TQA-tq-hsQ">
             <objects>
@@ -832,11 +850,12 @@
                         <segue destination="Mgd-dn-9Dr" kind="show" identifier="ShowPost" id="kB5-ah-mJe"/>
                         <segue destination="n7w-Q7-rLq" kind="show" id="EhP-nj-fin"/>
                         <segue destination="MsN-6G-tYV" kind="show" id="ONJ-Hh-Mga"/>
+                        <segue destination="fxT-f9-lqb" kind="show" id="X7t-wp-vZe"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="spd-ov-gak" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2002" y="-77"/>
+            <point key="canvasLocation" x="1996" y="11"/>
         </scene>
         <!--Community Navigation Controller Scene-->
         <scene sceneID="dhN-rE-DIK">

@@ -1,20 +1,14 @@
-//
-//  BomaHotelsDetailsViewController.swift
-//  PositionIn
-//
-//  Created by Mikhail Polyevin on 14/12/15.
-//  Copyright © 2015 Soluna Labs. All rights reserved.
 
 import UIKit
 import PosInCore
 import CleanroomLogger
 import BrightFutures
 
-protocol BomaHotelsDetailsActionConsumer {
-//    func executeAction(action: ProductDetailsViewController.ProductDetailsAction)
+protocol VolunteerDetailsActionConsumer {
+    func executeAction(action: VolunteerDetailsViewController.VolunteerDetailsAction)
 }
 
-final class BomaHotelsDetailsViewController: UIViewController {
+class VolunteerDetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,11 +50,6 @@ final class BomaHotelsDetailsViewController: UIViewController {
             priceLabel.text = "\(Int(price)) beneficiaries"
         }
         
-        //        temporary decision
-        //        priceLabel.text = product.price.map {
-        //            let newValue = $0 as Float
-        //            return AppConfiguration().currencyFormatter.stringFromNumber(NSNumber(float: newValue)) ?? ""}
-        
         let imageURL: NSURL?
         
         if let urlString = product.imageURLString {
@@ -89,24 +78,24 @@ final class BomaHotelsDetailsViewController: UIViewController {
     private var product: Product?
     private var locationRequestToken = InvalidationToken()
     
-    private lazy var dataSource: BomaHotelsDetailsDataSource = { [unowned self] in
-        let dataSource = BomaHotelsDetailsDataSource()
+    private lazy var dataSource: VolunteerDetailsDataSource = { [unowned self] in
+        let dataSource = VolunteerDetailsDataSource()
         dataSource.parentViewController = self
         return dataSource
         }()
     
     
-    private func productAcionItems() -> [[ProductActionItem]] {
+    private func productAcionItems() -> [[VolunteerActionItem]] {
         return [
             [ // 0 section
-                ProductActionItem(title: NSLocalizedString("Booking", comment: "Product action: Buy Product"),
+                VolunteerActionItem(title: NSLocalizedString("Donate", comment: "Product action: Buy Product"),
                     image: "home_donate",
                     action: .Buy),
             ],
             [ // 1 section
-                ProductActionItem(title: NSLocalizedString("Send Message", comment: "Product action: Send Message"), image: "productSendMessage", action: .SendMessage),
-                ProductActionItem(title: NSLocalizedString("Organizer Profile", comment: "Product action: Seller Profile"), image: "productSellerProfile", action: .SellerProfile),
-                ProductActionItem(title: NSLocalizedString("More Information", comment: "Product action: Navigate"), image: "productTerms&Info", action: .ProductInventory),
+                VolunteerActionItem(title: NSLocalizedString("Send Message", comment: "Product action: Send Message"), image: "productSendMessage", action: .SendMessage),
+                VolunteerActionItem(title: NSLocalizedString("Organizer Profile", comment: "Product action: Seller Profile"), image: "productSellerProfile", action: .SellerProfile),
+                VolunteerActionItem(title: NSLocalizedString("More Information", comment: "Product action: Navigate"), image: "productTerms&Info", action: .ProductInventory),
             ],
         ]
         
@@ -122,8 +111,8 @@ final class BomaHotelsDetailsViewController: UIViewController {
     @IBOutlet private weak var detailsLabel: UILabel!
 }
 
-extension BomaHotelsDetailsViewController {
-    enum BomaHotelsDetailsAction: CustomStringConvertible {
+extension VolunteerDetailsViewController {
+    enum VolunteerDetailsAction: CustomStringConvertible {
         case Buy, ProductInventory, SellerProfile, SendMessage
         
         var description: String {
@@ -141,44 +130,23 @@ extension BomaHotelsDetailsViewController {
     }
     
     
-    struct ProductActionItem {
+    struct VolunteerActionItem {
         let title: String
         let image: String
-        let action: BomaHotelsDetailsAction
+        let action: VolunteerDetailsAction
     }
 }
-//
-//extension ProductDetailsViewController: ProductDetailsActionConsumer {
-//    func executeAction(action: ProductDetailsAction) {
-//        let segue: ProductDetailsViewController.Segue
-//        switch action {
-//        case .Buy:
-//            if api().isUserAuthorized() {
-//                segue = .ShowBuyScreen
-//            } else {
-//                api().logout().onComplete {[weak self] _ in
-//                    self?.sideBarController?.executeAction(.Login)
-//                }
-//                return
-//            }
-//        case .ProductInventory:
-//            segue = .ShowProductInventory
-//        case .SellerProfile:
-//            segue = .ShowSellerProfile
-//        case .SendMessage:
-//            if let userId = author?.objectId {
-//                showChatViewController(userId)
-//            }
-//            return
-//        }
-//        performSegue(segue)
-//    }
-//}
 
-extension BomaHotelsDetailsViewController {
-    internal class BomaHotelsDetailsDataSource: TableViewDataSource {
+extension VolunteerDetailsViewController: VolunteerDetailsActionConsumer {
+    func executeAction(action: VolunteerDetailsAction) {
         
-        var items: [[ProductActionItem]] = []
+    }
+}
+
+extension VolunteerDetailsViewController {
+    internal class VolunteerDetailsDataSource: TableViewDataSource {
+        
+        var items: [[VolunteerActionItem]] = []
         
         override func configureTable(tableView: UITableView) {
             tableView.tableFooterView = UIView(frame: CGRectZero)
@@ -217,8 +185,8 @@ extension BomaHotelsDetailsViewController {
         func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
             tableView.deselectRowAtIndexPath(indexPath, animated: true)
             let item = items[indexPath.section][indexPath.row]
-            if let actionConsumer = parentViewController as? ProductDetailsActionConsumer {
-//                actionConsumer.executeAction(item.action)
+            if let actionConsumer = parentViewController as? VolunteerDetailsActionConsumer {
+                actionConsumer.executeAction(item.action)
             }
         }
     }

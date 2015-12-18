@@ -4,6 +4,7 @@
 //
 
 import UIKit
+import PositionIn
 
 //MARK: - Storyboards
 
@@ -94,6 +95,10 @@ struct Storyboards {
 
         static func instantiateEmergencyDetailsControllerId() -> EmergencyDetailsController {
             return self.storyboard.instantiateViewControllerWithIdentifier("EmergencyDetailsControllerId") as! EmergencyDetailsController
+        }
+
+        static func instantiateVolunteerDetailsViewControllerId() -> VolunteerDetailsViewController {
+            return self.storyboard.instantiateViewControllerWithIdentifier("VolunteerDetailsViewControllerId") as! VolunteerDetailsViewController
         }
 
         static func instantiateEventDetailsViewControllerId() -> EventDetailsViewController {
@@ -676,6 +681,13 @@ extension ProductDetailsViewController {
 extension EmergencyDetailsController: IdentifiableProtocol { 
     var identifier: String? { return "EmergencyDetailsControllerId" }
     static var identifier: String? { return "EmergencyDetailsControllerId" }
+}
+
+
+//MARK: - VolunteerDetailsViewController
+extension VolunteerDetailsViewController: IdentifiableProtocol { 
+    var identifier: String? { return "VolunteerDetailsViewControllerId" }
+    static var identifier: String? { return "VolunteerDetailsViewControllerId" }
 }
 
 

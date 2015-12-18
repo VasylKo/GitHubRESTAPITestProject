@@ -63,7 +63,7 @@ enum HomeItem: Int, CustomDebugStringConvertible {
         case .Ambulance:
             return "/v1.0/ambulance/"
         case .GiveBlood:
-            return "/v1.0/giveBlood/"
+            return "/v1.0/give-blood/"
         case .News:
             return "/v1.0/news/"
         case .Membership:
@@ -79,9 +79,9 @@ enum HomeItem: Int, CustomDebugStringConvertible {
         case .Market:
             return "/v1.0/market/"
         case .BomaHotels:
-            return "/v1.0/bomaHotels/"
+            return "/v1.0/boma-hotels/"
         case .Volunteer:
-            return "/v1.0/volunteer/"
+            return "/v1.0/community"
         case .Unknown:
             fallthrough
         default:
