@@ -1,8 +1,8 @@
 //
-//  BomaHotelsDetailsViewController.swift
+//  GiveBloodDetailsViewController.swift
 //  PositionIn
 //
-//  Created by Mikhail Polyevin on 14/12/15.
+//  Created by Mikhail Polyevin on 18/12/15.
 //  Copyright © 2015 Soluna Labs. All rights reserved.
 
 import UIKit
@@ -10,11 +10,11 @@ import PosInCore
 import CleanroomLogger
 import BrightFutures
 
-protocol BomaHotelsDetailsActionConsumer {
-    func executeAction(action: BomaHotelsDetailsViewController.BomaHotelsDetailsAction)
+protocol GiveBloodDetailsActionConsumer {
+    func executeAction(action: GiveBloodDetailsViewController.GiveBloodDetailsAction)
 }
 
-final class BomaHotelsDetailsViewController: UIViewController {
+class GiveBloodDetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,7 +39,7 @@ final class BomaHotelsDetailsViewController: UIViewController {
         switch (objectId, author) {
         case (.Some(let objectId), .Some(let author) ):
             api().getUserProfile(author.objectId).flatMap { (profile: UserProfile) -> Future<Product, NSError> in
-                return api().getBomaHotelsDetails(objectId)
+                return api().getGiveBloodDetails(objectId)
                 }.onSuccess { [weak self] product in
                     self?.didReceiveProductDetails(product)
             }
@@ -55,7 +55,7 @@ final class BomaHotelsDetailsViewController: UIViewController {
         if let price = product.donations {
             priceLabel.text = "\(Int(price)) beneficiaries"
         }
-
+        
         let imageURL: NSURL?
         
         if let urlString = product.imageURLString {
@@ -84,25 +84,25 @@ final class BomaHotelsDetailsViewController: UIViewController {
     private var product: Product?
     private var locationRequestToken = InvalidationToken()
     
-    private lazy var dataSource: BomaHotelsDetailsDataSource = { [unowned self] in
-        let dataSource = BomaHotelsDetailsDataSource()
+    private lazy var dataSource: GiveBloodDetailsDataSource = { [unowned self] in
+        let dataSource = GiveBloodDetailsDataSource()
         dataSource.parentViewController = self
         return dataSource
         }()
     
     
-    private func productAcionItems() -> [[ProductActionItem]] {
+    private func productAcionItems() -> [[GiveBloodActionItem]] {
         return [
             [ // 0 section
-                ProductActionItem(title: NSLocalizedString("Booking", comment: "BomaHotels"),
-                    image: "home_donate",
+                GiveBloodActionItem(title: NSLocalizedString("Navigate", comment: "GiveBlood"),
+                    image: "productNavigate",
                     action: .Buy),
             ],
             [ // 1 section
-                ProductActionItem(title: NSLocalizedString("Send Message", comment: "BomaHotels"), image: "productSendMessage", action: .SendMessage),
-                ProductActionItem(title: NSLocalizedString("Organizer Profile", comment: "BomaHotels"), image: "productSellerProfile", action: .SellerProfile),
-                ProductActionItem(title: NSLocalizedString("Navigate", comment: "BomaHotels"), image: "productNavigate", action: .ProductInventory),
-                ProductActionItem(title: NSLocalizedString("More Information", comment: "BomaHotels"), image: "productTerms&Info", action: .ProductInventory),
+                GiveBloodActionItem(title: NSLocalizedString("Send Message", comment: "GiveBlood"), image: "productSendMessage", action: .SendMessage),
+                GiveBloodActionItem(title: NSLocalizedString("Office", comment: "GiveBlood"), image: "productSellerProfile", action: .ProductInventory),
+                GiveBloodActionItem(title: NSLocalizedString("More Information", comment: "GiveBlood"), image: "productTerms&Info",
+                    action: .ProductInventory),
             ],
         ]
         
@@ -118,8 +118,8 @@ final class BomaHotelsDetailsViewController: UIViewController {
     @IBOutlet private weak var detailsLabel: UILabel!
 }
 
-extension BomaHotelsDetailsViewController {
-    enum BomaHotelsDetailsAction: CustomStringConvertible {
+extension GiveBloodDetailsViewController {
+    enum GiveBloodDetailsAction: CustomStringConvertible {
         case Buy, ProductInventory, SellerProfile, SendMessage
         
         var description: String {
@@ -137,23 +137,23 @@ extension BomaHotelsDetailsViewController {
     }
     
     
-    struct ProductActionItem {
+    struct GiveBloodActionItem {
         let title: String
         let image: String
-        let action: BomaHotelsDetailsAction
+        let action: GiveBloodDetailsAction
     }
 }
 
-extension BomaHotelsDetailsViewController: BomaHotelsDetailsActionConsumer {
-    func executeAction(action: BomaHotelsDetailsAction) {
-        //need implement
-    }
-}
-
-extension BomaHotelsDetailsViewController {
-    internal class BomaHotelsDetailsDataSource: TableViewDataSource {
+extension GiveBloodDetailsViewController: GiveBloodDetailsActionConsumer {
+    func executeAction(action: GiveBloodDetailsAction) {
         
-        var items: [[ProductActionItem]] = []
+    }
+}
+
+extension GiveBloodDetailsViewController {
+    internal class GiveBloodDetailsDataSource: TableViewDataSource {
+        
+        var items: [[GiveBloodActionItem]] = []
         
         override func configureTable(tableView: UITableView) {
             tableView.tableFooterView = UIView(frame: CGRectZero)
@@ -191,7 +191,10 @@ extension BomaHotelsDetailsViewController {
         
         func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
             tableView.deselectRowAtIndexPath(indexPath, animated: true)
-            
+            let item = items[indexPath.section][indexPath.row]
+            if let actionConsumer = parentViewController as? GiveBloodDetailsActionConsumer {
+                actionConsumer.executeAction(item.action)
+            }
         }
     }
 }

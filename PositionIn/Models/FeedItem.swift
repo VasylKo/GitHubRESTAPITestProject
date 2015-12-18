@@ -30,14 +30,6 @@ struct FeedItem: CRUDObject {
     var location: Location?
     
     var itemData: Any? {
-//        switch type {
-//        case .Project:
-//            return author
-//        case .Training:
-//            return author
-//        default:
-//            return author
-//        }
         return author
     }
     
@@ -87,11 +79,11 @@ struct FeedItem: CRUDObject {
         case Emergency
         case Training
         case GiveBlood
-        case News
+        case Volunteer
+        case BomaHotels
         case Event
         case Market
-        case BomaHotels
-        case Volunteer
+        case News
         
         var description: String {
             switch self {

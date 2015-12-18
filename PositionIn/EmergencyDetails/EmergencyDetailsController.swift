@@ -147,33 +147,33 @@ extension EmergencyDetailsController {
     }
 }
 
-//extension EmergencyDetailsController: ProductDetailsActionConsumer {
-//    
-//    func executeAction(action: EmergencyDetailsAction) {
-//        let segue: ProductDetailsViewController.Segue
-//        switch action {
-//        case .Buy:
-//            if api().isUserAuthorized() {
-//                segue = .ShowBuyScreen
-//            } else {
-//                api().logout().onComplete {[weak self] _ in
-//                    self?.sideBarController?.executeAction(.Login)
-//                }
-//                return
-//            }
-//        case .ProductInventory:
-//            segue = .ShowProductInventory
-//        case .SellerProfile:
-//            segue = .ShowSellerProfile
-//        case .SendMessage:
-//            if let userId = author?.objectId {
-//                showChatViewController(userId)
-//            }
-//            return
-//        }
-//        performSegue(segue)
-//    }
-//}
+extension EmergencyDetailsController: EmergencyDetailsActionConsumer {
+    
+    func executeAction(action: EmergencyDetailsAction) {
+        let segue: ProductDetailsViewController.Segue
+        switch action {
+        case .Buy:
+            if api().isUserAuthorized() {
+                segue = .ShowBuyScreen
+            } else {
+                api().logout().onComplete {[weak self] _ in
+                    self?.sideBarController?.executeAction(.Login)
+                }
+                return
+            }
+        case .ProductInventory:
+            segue = .ShowProductInventory
+        case .SellerProfile:
+            segue = .ShowSellerProfile
+        case .SendMessage:
+            if let userId = author?.objectId {
+                showChatViewController(userId)
+            }
+            return
+        }
+        performSegue(segue)
+    }
+}
 
 extension EmergencyDetailsController {
     internal class EmergencyDetailsDataSource: TableViewDataSource {

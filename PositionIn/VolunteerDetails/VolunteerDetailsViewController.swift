@@ -88,13 +88,15 @@ class VolunteerDetailsViewController: UIViewController {
     private func productAcionItems() -> [[VolunteerActionItem]] {
         return [
             [ // 0 section
-                VolunteerActionItem(title: NSLocalizedString("Donate", comment: "Product action: Buy Product"),
-                    image: "home_donate",
+                VolunteerActionItem(title: NSLocalizedString("Volunteer", comment: "Volunteer"),
+                    //TODO: need add image
+                    image: "",
                     action: .Buy),
             ],
             [ // 1 section
                 VolunteerActionItem(title: NSLocalizedString("Send Message", comment: "Product action: Send Message"), image: "productSendMessage", action: .SendMessage),
                 VolunteerActionItem(title: NSLocalizedString("Organizer Profile", comment: "Product action: Seller Profile"), image: "productSellerProfile", action: .SellerProfile),
+                VolunteerActionItem(title: NSLocalizedString("Navigate", comment: "GiveBlood"), image: "productTerms&Info", action: .ProductInventory),
                 VolunteerActionItem(title: NSLocalizedString("More Information", comment: "Product action: Navigate"), image: "productTerms&Info", action: .ProductInventory),
             ],
         ]

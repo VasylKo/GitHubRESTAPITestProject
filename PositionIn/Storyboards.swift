@@ -101,6 +101,18 @@ struct Storyboards {
             return self.storyboard.instantiateViewControllerWithIdentifier("VolunteerDetailsViewControllerId") as! VolunteerDetailsViewController
         }
 
+        static func instantiateGiveBloodDetailsViewControllerId() -> GiveBloodDetailsViewController {
+            return self.storyboard.instantiateViewControllerWithIdentifier("GiveBloodDetailsViewControllerId") as! GiveBloodDetailsViewController
+        }
+
+        static func instantiateMarketDetailsViewControllerId() -> MarketDetailsViewController {
+            return self.storyboard.instantiateViewControllerWithIdentifier("MarketDetailsViewControllerId") as! MarketDetailsViewController
+        }
+
+        static func instantiateBomaHotelsDetailsViewControllerId() -> BomaHotelsDetailsViewController {
+            return self.storyboard.instantiateViewControllerWithIdentifier("BomaHotelsDetailsViewControllerId") as! BomaHotelsDetailsViewController
+        }
+
         static func instantiateEventDetailsViewControllerId() -> EventDetailsViewController {
             return self.storyboard.instantiateViewControllerWithIdentifier("EventDetailsViewControllerId") as! EventDetailsViewController
         }
@@ -688,6 +700,27 @@ extension EmergencyDetailsController: IdentifiableProtocol {
 extension VolunteerDetailsViewController: IdentifiableProtocol { 
     var identifier: String? { return "VolunteerDetailsViewControllerId" }
     static var identifier: String? { return "VolunteerDetailsViewControllerId" }
+}
+
+
+//MARK: - GiveBloodDetailsViewController
+extension GiveBloodDetailsViewController: IdentifiableProtocol { 
+    var identifier: String? { return "GiveBloodDetailsViewControllerId" }
+    static var identifier: String? { return "GiveBloodDetailsViewControllerId" }
+}
+
+
+//MARK: - MarketDetailsViewController
+extension MarketDetailsViewController: IdentifiableProtocol { 
+    var identifier: String? { return "MarketDetailsViewControllerId" }
+    static var identifier: String? { return "MarketDetailsViewControllerId" }
+}
+
+
+//MARK: - BomaHotelsDetailsViewController
+extension BomaHotelsDetailsViewController: IdentifiableProtocol { 
+    var identifier: String? { return "BomaHotelsDetailsViewControllerId" }
+    static var identifier: String? { return "BomaHotelsDetailsViewControllerId" }
 }
 
 

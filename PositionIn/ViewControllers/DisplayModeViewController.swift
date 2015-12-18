@@ -173,17 +173,6 @@ protocol BrowseActionConsumer: class {
     //MARK: - BrowseActionConsumer: Browse actions -
     
     func browseController(controller: BrowseActionProducer, didSelectItem objectId: CRUDObjectId, type itemType: FeedItem.ItemType, data: Any?) {
-//        
-//        case Unknown
-//        case Project
-//        case Emergency
-//        case Training
-//        case GiveBlood
-//        case News
-//        case Event
-//        case Market
-//        case BomaHotels
-//        case Volunteer
         switch itemType {
         case .Project:
             trackGoogleAnalyticsEvent("Main", action: "Click", label: "Product")
@@ -192,7 +181,7 @@ protocol BrowseActionConsumer: class {
             controller.author = data as? ObjectInfo
             navigationController?.pushViewController(controller, animated: true)
         case .Training:
-            trackGoogleAnalyticsEvent("Main", action: "Click", label: "Product")
+            trackGoogleAnalyticsEvent("Main", action: "Click", label: "Training")
             let controller =  Storyboards.Main.instantiateTrainingDetailsViewControllerId()
             controller.objectId = objectId
             controller.author = data as? ObjectInfo
@@ -203,14 +192,35 @@ protocol BrowseActionConsumer: class {
             controller.objectId = objectId
             controller.author = data as? ObjectInfo
             navigationController?.pushViewController(controller, animated: true)
-//        case .Post:
-//            trackGoogleAnalyticsEvent("Main", action: "Click", label: "Post")
-//            let controller = Storyboards.Main.instantiatePostViewController()
-//            controller.objectId = objectId
-//            navigationController?.pushViewController(controller, animated: true)
+        case .BomaHotels:
+            trackGoogleAnalyticsEvent("Main", action: "Click", label: "BomaHotels")
+            let controller =  Storyboards.Main.instantiateBomaHotelsDetailsViewControllerId()
+            controller.objectId = objectId
+            controller.author = data as? ObjectInfo
+            navigationController?.pushViewController(controller, animated: true)
+        case .GiveBlood:
+            trackGoogleAnalyticsEvent("Main", action: "Click", label: "GiveBlood")
+            let controller =  Storyboards.Main.instantiateGiveBloodDetailsViewControllerId()
+            controller.objectId = objectId
+            controller.author = data as? ObjectInfo
+            navigationController?.pushViewController(controller, animated: true)
+        case .News:
+            trackGoogleAnalyticsEvent("Main", action: "Click", label: "Post")
+            let controller = Storyboards.Main.instantiatePostViewController()
+            controller.objectId = objectId
+            navigationController?.pushViewController(controller, animated: true)
         default:
             Log.debug?.message("Did select \(itemType)<\(objectId)>")
         }
+
+        //        case Training
+        //        case GiveBlood
+        //        case News
+        //        case Event
+        //        case Market
+        //        case BomaHotels
+        //        case Volunteer
+        
     }
     
     func browseControllerDidChangeContent(controller: BrowseActionProducer) {

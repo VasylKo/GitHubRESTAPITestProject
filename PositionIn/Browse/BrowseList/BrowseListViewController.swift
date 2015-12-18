@@ -106,7 +106,7 @@ final class BrowseListViewController: UIViewController, BrowseActionProducer, Br
 //        }
         request.onSuccess(dataRequestToken.validContext) {
             [weak self] response in
-            //            Log.debug?.value(response.items)
+            Log.debug?.value(response.items)
             guard let strongSelf = self
                 //                let itemTypes = searchFilter.itemTypes{
                 //                //TODO: need discuss this moment
@@ -125,19 +125,6 @@ final class BrowseListViewController: UIViewController, BrowseActionProducer, Br
             strongSelf.actionConsumer?.browseControllerDidChangeContent(strongSelf)
         }
     }
-    
-//    @IBAction func displayModeSegmentedControlChanged(sender: UISegmentedControl) {
-//        let segmentMapping: [Int: FeedItem.ItemType] = [
-//            0: .Unknown,
-//            1: .Item,
-//            2: .Event,
-//            3: .Promotion,
-//            4: .Post,
-//        ]
-//        if let newFilterValue = segmentMapping[sender.selectedSegmentIndex] {
-//            selectedItemType = newFilterValue
-//        }
-//    }
     
     @IBOutlet weak var topSeparatorLine: UIView!
     @IBOutlet weak var bottomSeparatorLine: UIView!

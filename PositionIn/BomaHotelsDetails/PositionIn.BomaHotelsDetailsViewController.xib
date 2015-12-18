@@ -8,6 +8,13 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BomaHotelsDetailsViewController" customModule="PositionIn" customModuleProvider="target">
             <connections>
+                <outlet property="actionTableView" destination="4Nn-fx-mlC" id="K4v-6U-7Ef"/>
+                <outlet property="detailsLabel" destination="3NG-0g-fB5" id="Yl5-wD-Kdu"/>
+                <outlet property="headerLabel" destination="MRe-Pd-AsY" id="lZw-eD-o1o"/>
+                <outlet property="infoLabel" destination="iM6-cn-q7w" id="8zu-vE-2Yj"/>
+                <outlet property="nameLabel" destination="txQ-qU-rbx" id="WFj-EI-hb7"/>
+                <outlet property="priceLabel" destination="HKq-x0-GRJ" id="1w9-JP-tbh"/>
+                <outlet property="productImageView" destination="4eU-xx-L5M" id="vBt-Vj-NlO"/>
                 <outlet property="view" destination="Dpc-3y-Joe" id="BrM-0w-w9o"/>
             </connections>
         </placeholder>
@@ -38,7 +45,7 @@
                                     </userDefinedRuntimeAttributes>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Edward Ryan" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="txQ-qU-rbx">
-                                    <rect key="frame" x="497" y="15" width="93" height="18"/>
+                                    <rect key="frame" x="498" y="15" width="93" height="18"/>
                                     <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="15"/>
                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
@@ -69,7 +76,7 @@
                                     </userDefinedRuntimeAttributes>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.09 miles" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iM6-cn-q7w">
-                                    <rect key="frame" x="31" y="44" width="559" height="18"/>
+                                    <rect key="frame" x="31" y="45" width="559" height="18"/>
                                     <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="15"/>
                                     <color key="textColor" red="0.92941176469999998" green="0.1058823529" blue="0.18039215689999999" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
@@ -78,7 +85,7 @@
                                     </userDefinedRuntimeAttributes>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Edward Ryan" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3NG-0g-fB5">
-                                    <rect key="frame" x="10" y="72" width="580" height="17"/>
+                                    <rect key="frame" x="10" y="73" width="580" height="17"/>
                                     <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="14"/>
                                     <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
@@ -87,7 +94,7 @@
                                     </userDefinedRuntimeAttributes>
                                 </label>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="productPinDistance" translatesAutoresizingMaskIntoConstraints="NO" id="4Ia-UZ-BSs">
-                                    <rect key="frame" x="10" y="42" width="16" height="17"/>
+                                    <rect key="frame" x="10" y="43" width="16" height="17"/>
                                     <color key="tintColor" red="0.92941176469999998" green="0.1058823529" blue="0.18039215689999999" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="16" id="dfL-Ck-EzC"/>
@@ -112,10 +119,10 @@
                             </constraints>
                         </view>
                         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" style="plain" rowHeight="45" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="4Nn-fx-mlC" customClass="TableView" customModule="PosInCore">
-                            <rect key="frame" x="0.0" y="399" width="600" height="300"/>
+                            <rect key="frame" x="0.0" y="400" width="600" height="350"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="300" id="0QR-Lm-w8J"/>
+                                <constraint firstAttribute="height" constant="350" id="0QR-Lm-w8J"/>
                             </constraints>
                             <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </tableView>

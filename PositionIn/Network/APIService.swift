@@ -384,8 +384,18 @@ struct APIService {
         }
     }
     
-    func getOne(objectId: CRUDObjectId) -> Future<Product, NSError> {
-        let endpoint = FeedItem.getOneEndpoint(objectId)
+    func getBomaHotelsDetails(objectId: CRUDObjectId) -> Future<Product, NSError> {
+        let endpont = HomeItem.BomaHotels.endpoint(objectId)
+        return self.getOne(endpont!)
+    }
+    
+    func getGiveBloodDetails(objectId: CRUDObjectId) -> Future<Product, NSError> {
+        let endpont = HomeItem.GiveBlood.endpoint(objectId)
+        return self.getOne(endpont!)
+    }
+    
+    func getOne(endpoint: String) -> Future<Product, NSError> {
+        let endpoint = endpoint
         return session().flatMap {
             (token: AuthResponse.Token) -> Future<Product, NSError> in
             let request = self.updateRequest(token, endpoint: endpoint, params: nil, method: .GET)
