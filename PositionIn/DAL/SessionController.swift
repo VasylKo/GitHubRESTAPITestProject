@@ -63,6 +63,14 @@ struct SessionController {
         return token
     }
     
+    func currentDeviceToken() -> String? {
+        guard let token = self.deviceToken
+            else {
+                return nil
+        }
+        return token
+    }
+    
     func logout() -> Future<Void, NoError> {
         return future {
             self.setAuth(AuthResponse.invalidAuth())
@@ -137,6 +145,19 @@ struct SessionController {
             Log.error?.value(error)
         }
     }
+    
+    func setDeviceToken(deviceToken: String?) {
+        if let dt = deviceToken {
+            do {
+                try keychain.set(NSKeyedArchiver.archivedDataWithRootObject(dt),
+                    key: KeychainKeys.DeviceToken)
+            } catch let error {
+                Log.error?.value(error)
+            }
+            
+            keychain[KeychainKeys.DeviceToken] = dt
+        }
+    }
 
     func updateCurrentStatus(profile: UserProfile?) {
         keychain[KeychainKeys.UserIdKey] = profile?.objectId
@@ -183,14 +204,8 @@ struct SessionController {
         return keychain[KeychainKeys.RefreshTokenKey]
     }
     
-    var deviceToken: String? {
+    private var deviceToken: String? {
         return keychain[KeychainKeys.DeviceToken]
-    }
-    
-    func setDeviceToken(deviceToken: String?) {
-        if let dt = deviceToken {
-            keychain[KeychainKeys.DeviceToken] = dt
-        }
     }
     
     private var accessTokenExpiresIn: NSDate? {

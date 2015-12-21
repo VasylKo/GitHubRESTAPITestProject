@@ -80,7 +80,7 @@ class PhoneVerificationViewController: XLFormViewController {
                         api().login(username: nil, password: nil, phoneNumber: phoneNumber, phoneVerificationCode: codeString).onSuccess { [weak self] _ in
                             self?.dismissLogin()
                             }.onSuccess(callback: { _ in
-                                api().pushesRegistration(SessionController().deviceToken)
+                                api().pushesRegistration()
                             }).onFailure(callback: { _ in
                                 trackGoogleAnalyticsEvent("Status", action: "Click", label: "Auth Fail")
                             })

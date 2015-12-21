@@ -119,19 +119,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
-      
+        
         let characterSet: NSCharacterSet = NSCharacterSet( charactersInString: "<>" )
         
         let deviceTokenString: String = (deviceToken.description as NSString)
             .stringByTrimmingCharactersInSet( characterSet )
             .stringByReplacingOccurrencesOfString( " ", withString: "" ) as String
         
-        let sessionController = SessionController()
-        sessionController.setDeviceToken(deviceTokenString)
-        
-        if sessionController.isUserAuthorized() {
-            api.pushesRegistration(deviceTokenString)
-        }
+        api.setDeviceToken(deviceTokenString)
     }
     
     func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {

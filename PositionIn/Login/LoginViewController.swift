@@ -36,7 +36,7 @@ final class LoginViewController: BaseLoginViewController {
                 trackGoogleAnalyticsEvent("Status", action: "Click", label: "Auth Success")
                 self?.dismissLogin()
                 }.onSuccess(callback: { _ in
-                    api().pushesRegistration(SessionController().deviceToken)
+                    api().pushesRegistration()
                 }).onFailure(callback: { _ in
                 trackGoogleAnalyticsEvent("Status", action: "Click", label: "Auth Fail")
             })

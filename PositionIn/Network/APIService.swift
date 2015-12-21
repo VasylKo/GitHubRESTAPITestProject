@@ -54,7 +54,12 @@ struct APIService {
     
     //pushes
     
-    func pushesRegistration(deviceToken: String?) -> Future<Void, NSError> {
+    func setDeviceToken(deviceToken: String?) {
+        sessionController.setDeviceToken(deviceToken)
+    }
+    
+    func pushesRegistration() -> Future<Void, NSError> {
+        let deviceToken = sessionController.currentDeviceToken()
         let endpoint = UserProfile.pushesEndpoint()
         typealias CRUDResultType = (Alamofire.Request, Future<Void, NSError>)
         var params: [String: String]? = nil
@@ -391,6 +396,11 @@ struct APIService {
     
     func getGiveBloodDetails(objectId: CRUDObjectId) -> Future<Product, NSError> {
         let endpont = HomeItem.GiveBlood.endpoint(objectId)
+        return self.getOne(endpont!)
+    }
+    
+    func getEmergencyDetails(objectId: CRUDObjectId) -> Future<Product, NSError> {
+        let endpont = HomeItem.Emergency.endpoint(objectId)
         return self.getOne(endpont!)
     }
     
