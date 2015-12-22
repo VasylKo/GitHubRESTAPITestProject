@@ -18,7 +18,7 @@ class GiveBloodDetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = NSLocalizedString("Boma Hotels", comment: "Project details: title")
+        title = NSLocalizedString("Give Blood", comment: "Give Blood details: title")
         dataSource.items = productAcionItems()
         dataSource.configureTable(actionTableView)
         reloadData()

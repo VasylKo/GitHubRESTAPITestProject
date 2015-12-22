@@ -40,7 +40,7 @@ final class ProductDetailsViewController: UIViewController {
         switch (objectId, author) {
         case (.Some(let objectId), .Some(let author) ):
             api().getUserProfile(author.objectId).flatMap { (profile: UserProfile) -> Future<Product, NSError> in
-                return api().getOne(objectId)
+                return api().getProjectsDetails(objectId)
             }.onSuccess { [weak self] product in
                 self?.didReceiveProductDetails(product)
             }

@@ -358,7 +358,7 @@ struct APIService {
             return self.handleFailure(future)
         }
     }
-//
+
 //    func forYou(query: APIServiceQueryConvertible, page: Page) -> Future<CollectionResponse<FeedItem>,NSError> {
 //        let endpoint = FeedItem.forYouEndpoint()
 //        let params = APIServiceQuery()
@@ -375,15 +375,19 @@ struct APIService {
     
     func getAll(homeItem: HomeItem) -> Future<CollectionResponse<FeedItem>,NSError> {
         let endpoint = homeItem.endpoint()
+//        //TODO: change this when it will be fixed on backend
+        let method: Alamofire.Method = .POST
         let params = APIServiceQuery()
-        Log.debug?.value(params.query)
+        
+        params.append("type", value: [homeItem.rawValue])
+
         return session().flatMap {
             (token: AuthResponse.Token) -> Future<CollectionResponse<FeedItem>, NSError> in
             var endp = ""
             if let endpoint = endpoint {
                 endp = endpoint
             }
-            let request = self.updateRequest(token, endpoint: endp, method: .GET, params: params.query)
+            let request = self.updateRequest(token, endpoint: endp, method: method, params: params.query)
             let (_ , future): (Alamofire.Request, Future<CollectionResponse<FeedItem>, NSError>) = self.dataProvider.objectRequest(request)
             return self.handleFailure(future)
         }
@@ -391,6 +395,13 @@ struct APIService {
     
     func getBomaHotelsDetails(objectId: CRUDObjectId) -> Future<Product, NSError> {
         let endpont = HomeItem.BomaHotels.endpoint(objectId)
+        //TODO need fix downcastng
+        return self.getOne(endpont!)
+    }
+    
+    func getProjectsDetails(objectId: CRUDObjectId) -> Future<Product, NSError> {
+        let endpont = HomeItem.Projects.endpoint(objectId)
+        //TODO need fix downcastng
         return self.getOne(endpont!)
     }
     
@@ -404,8 +415,22 @@ struct APIService {
         return self.getOne(endpont!)
     }
     
-    func getOne(endpoint: String) -> Future<Product, NSError> {
-        let endpoint = endpoint
+    func getMarketDetails(objectId: CRUDObjectId) -> Future<Product, NSError> {
+        let endpont = HomeItem.Market.endpoint(objectId)
+        return self.getOne(endpont!)
+    }
+    
+    func getVolunteerDetails(objectId: CRUDObjectId) -> Future<Product, NSError> {
+        let endpont = HomeItem.Volunteer.endpoint(objectId)
+        return self.getOne(endpont!)
+    }
+    
+    func getTrainingDetails(objectId: CRUDObjectId) -> Future<Product, NSError> {
+        let endpont = HomeItem.Training.endpoint(objectId)
+        return self.getOne(endpont!)
+    }
+    
+    private func getOne(endpoint: String) -> Future<Product, NSError> {
         return session().flatMap {
             (token: AuthResponse.Token) -> Future<Product, NSError> in
             let request = self.updateRequest(token, endpoint: endpoint, params: nil, method: .GET)

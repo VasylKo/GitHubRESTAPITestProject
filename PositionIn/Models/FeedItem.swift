@@ -82,8 +82,8 @@ struct FeedItem: CRUDObject {
         case Volunteer
         case BomaHotels
         case Event
-        case Market
-        case News
+        case Market = 9
+        case News = 10
         
         var description: String {
             switch self {

@@ -12,7 +12,7 @@ class VolunteerDetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = NSLocalizedString("Boma Hotels", comment: "Project details: title")
+        title = NSLocalizedString("Voluteer", comment: "Volunteer")
         dataSource.items = productAcionItems()
         dataSource.configureTable(actionTableView)
         reloadData()
@@ -33,7 +33,7 @@ class VolunteerDetailsViewController: UIViewController {
         switch (objectId, author) {
         case (.Some(let objectId), .Some(let author) ):
             api().getUserProfile(author.objectId).flatMap { (profile: UserProfile) -> Future<Product, NSError> in
-                return api().getOne(objectId)
+                return api().getVolunteerDetails(objectId)
                 }.onSuccess { [weak self] product in
                     self?.didReceiveProductDetails(product)
             }
@@ -94,10 +94,10 @@ class VolunteerDetailsViewController: UIViewController {
                     action: .Buy),
             ],
             [ // 1 section
-                VolunteerActionItem(title: NSLocalizedString("Send Message", comment: "Product action: Send Message"), image: "productSendMessage", action: .SendMessage),
-                VolunteerActionItem(title: NSLocalizedString("Organizer Profile", comment: "Product action: Seller Profile"), image: "productSellerProfile", action: .SellerProfile),
-                VolunteerActionItem(title: NSLocalizedString("Navigate", comment: "GiveBlood"), image: "productTerms&Info", action: .ProductInventory),
-                VolunteerActionItem(title: NSLocalizedString("More Information", comment: "Product action: Navigate"), image: "productTerms&Info", action: .ProductInventory),
+                VolunteerActionItem(title: NSLocalizedString("Send Message", comment: "Volunteer"), image: "productSendMessage", action: .SendMessage),
+                VolunteerActionItem(title: NSLocalizedString("Organizer Profile", comment: "Volunteer"), image: "productSellerProfile", action: .SellerProfile),
+                VolunteerActionItem(title: NSLocalizedString("Navigate", comment: "Volunteer"), image: "productNavigate", action: .ProductInventory),
+                VolunteerActionItem(title: NSLocalizedString("More Information", comment: "Volunteer"), image: "productTerms&Info", action: .ProductInventory),
             ],
         ]
         

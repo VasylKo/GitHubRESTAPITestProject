@@ -29,6 +29,8 @@ struct FeedItemCellModelFactory {
             fallthrough
         case .Training:
             fallthrough
+        case .Emergency:
+            fallthrough
         case .Project:
             return [
                 CompactFeedTableCellModel(

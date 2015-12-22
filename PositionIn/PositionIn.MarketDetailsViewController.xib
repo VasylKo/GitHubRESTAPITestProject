@@ -8,6 +8,13 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MarketDetailsViewController" customModule="PositionIn" customModuleProvider="target">
             <connections>
+                <outlet property="actionTableView" destination="tN3-qd-T3f" id="tvX-qb-SMF"/>
+                <outlet property="detailsLabel" destination="ucO-Wg-k6s" id="06o-6a-t6b"/>
+                <outlet property="headerLabel" destination="eae-BK-JFW" id="zPL-t5-KgY"/>
+                <outlet property="infoLabel" destination="HXh-sw-ZiT" id="Z2r-lt-KOI"/>
+                <outlet property="nameLabel" destination="auo-sU-iGl" id="w95-VX-Hwi"/>
+                <outlet property="priceLabel" destination="2Xi-ku-6wR" id="ama-uf-EOJ"/>
+                <outlet property="productImageView" destination="CV8-ai-ImP" id="BAU-Dh-Njl"/>
                 <outlet property="view" destination="IRE-eX-xEX" id="6O9-SH-Vyn"/>
             </connections>
         </placeholder>

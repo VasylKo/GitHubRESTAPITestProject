@@ -204,6 +204,18 @@ protocol BrowseActionConsumer: class {
             controller.objectId = objectId
             controller.author = data as? ObjectInfo
             navigationController?.pushViewController(controller, animated: true)
+        case .Market:
+            trackGoogleAnalyticsEvent("Main", action: "Click", label: "Post")
+            let controller = Storyboards.Main.instantiateMarketDetailsViewControllerId()
+            controller.objectId = objectId
+            controller.author = data as? ObjectInfo
+            navigationController?.pushViewController(controller, animated: true)
+        case .Volunteer:
+            trackGoogleAnalyticsEvent("Main", action: "Click", label: "Post")
+            let controller = Storyboards.Main.instantiateVolunteerDetailsViewControllerId()
+            controller.objectId = objectId
+            controller.author = data as? ObjectInfo
+            navigationController?.pushViewController(controller, animated: true)
         case .News:
             trackGoogleAnalyticsEvent("Main", action: "Click", label: "Post")
             let controller = Storyboards.Main.instantiatePostViewController()

@@ -19,7 +19,7 @@ final class MarketDetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = NSLocalizedString("Boma Hotels", comment: "Project details: title")
+        title = NSLocalizedString("Market", comment: "Market")
         dataSource.items = productAcionItems()
         dataSource.configureTable(actionTableView)
         reloadData()
@@ -40,7 +40,7 @@ final class MarketDetailsViewController: UIViewController {
         switch (objectId, author) {
         case (.Some(let objectId), .Some(let author) ):
             api().getUserProfile(author.objectId).flatMap { (profile: UserProfile) -> Future<Product, NSError> in
-                return api().getOne(objectId)
+                return api().getMarketDetails(objectId)
                 }.onSuccess { [weak self] product in
                     self?.didReceiveProductDetails(product)
             }
@@ -95,14 +95,14 @@ final class MarketDetailsViewController: UIViewController {
     private func productAcionItems() -> [[MarketActionItem]] {
         return [
             [ // 0 section
-                MarketActionItem(title: NSLocalizedString("Donate", comment: "Product action: Buy Product"),
+                MarketActionItem(title: NSLocalizedString("Donate", comment: "Donate: Market"),
                     image: "home_donate",
                     action: .Buy),
             ],
             [ // 1 section
-                MarketActionItem(title: NSLocalizedString("Send Message", comment: "Product action: Send Message"), image: "productSendMessage", action: .SendMessage),
-                MarketActionItem(title: NSLocalizedString("Organizer Profile", comment: "Product action: Seller Profile"), image: "productSellerProfile", action: .SellerProfile),
-                MarketActionItem(title: NSLocalizedString("More Information", comment: "Product action: Navigate"), image: "productTerms&Info", action: .ProductInventory),
+                MarketActionItem(title: NSLocalizedString("Send Message", comment: "Market"), image: "productSendMessage", action: .SendMessage),
+                MarketActionItem(title: NSLocalizedString("Organizer Profile", comment: "Market"), image: "productSellerProfile", action: .SellerProfile),
+                MarketActionItem(title: NSLocalizedString("More Information", comment: "Market"), image: "productTerms&Info", action: .ProductInventory),
             ],
         ]
         
