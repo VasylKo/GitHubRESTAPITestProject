@@ -13,57 +13,35 @@ struct FeedItemCellModelFactory {
     
     func compactModelsForItem(feedItem: FeedItem) -> [TableViewCellModel] {
         switch feedItem.type {
+        case .GiveBlood:
+            fallthrough
+        case .News:
+            fallthrough
         case .Event:
+            fallthrough
+        case .Project:
+            fallthrough
+        case .Market:
+            fallthrough
+        case .BomaHotels:
+            fallthrough
+        case .Volunteer:
+            fallthrough
+        case .Training:
+            fallthrough
+        case .Emergency:
+            fallthrough
+        case .Project:
             return [
                 CompactFeedTableCellModel(
-                    itemType: feedItem.type,
-                    objectID: feedItem.objectId,
-                    title: feedItem.name,
-                    details: feedItem.text,
-                    info: feedItem.date.map {dateFormatter.stringFromDate($0)},
-                    imageURL: feedItem.image,
-                    data: feedItem.itemData
-                ),
-            ]
-            
-        case .Post:
-            return [
-                CompactFeedTableCellModel(
-                    itemType: feedItem.type,
-                    objectID: feedItem.objectId,
-                    title: feedItem.name,
-                    details: feedItem.text,
-                    info: nil,
-                    imageURL: feedItem.image,
-                    data: feedItem.itemData
-                ),
-            ]
-
-        case .Promotion:
-            let discountFormat = NSLocalizedString("Save %@%%", comment: "Compact feed: DiscountFormat")
-            return [
-                CompactFeedTableCellModel(
-                    itemType: feedItem.type,
-                    objectID: feedItem.objectId,
-                    title: feedItem.name,
-                    details: feedItem.category.map { $0.displayString() },
-                    info: feedItem.details.map { String(format: discountFormat, $0 )},
-                    imageURL: feedItem.image,
-                    data: feedItem.itemData
-                ),
-            ]
-        case .Item:
-            return [
-                ComapctBadgeFeedTableCellModel (
                     itemType: feedItem.type,
                     objectID: feedItem.objectId,
                     title: feedItem.name,
                     details: feedItem.author?.title,
-                    info: feedItem.date.map {dateFormatter.stringFromDate($0)},
+                    info: nil,
+                    price: feedItem.donations,
                     imageURL: feedItem.image,
-                    badge: feedItem.price.map {
-                        let newValue = $0 as Float
-                        return AppConfiguration().currencyFormatter.stringFromNumber(NSNumber(float: newValue)) ?? ""},
+                    location: feedItem.location,
                     data: feedItem.itemData
                 ),
             ]
@@ -77,14 +55,24 @@ struct FeedItemCellModelFactory {
     func compactCellReuseIdForModel(model: TableViewCellModel) -> String {
         if let model = model as? CompactFeedTableCellModel {
             switch model.itemType {
-            case .Promotion:
-                return PromotionListCell.reuseId()
-            case .Event:
-                return EventListCell.reuseId()
-            case .Post:
+            case .News:
                 return PostListCell.reuseId()
-            case .Item:
-                return ProductListCell.reuseId()
+            case .GiveBlood:
+                fallthrough
+            case .Event:
+                fallthrough
+            case .Market:
+                fallthrough
+            case .BomaHotels:
+                fallthrough
+            case .Volunteer:
+                fallthrough
+            case .Project:
+                fallthrough
+            case .Emergency:
+                fallthrough
+            case .Training:
+                return EventListCell.reuseId()
             default:
                 break
             }
@@ -93,7 +81,7 @@ struct FeedItemCellModelFactory {
     }
     
     func compactCellsReuseId() -> [String]  {
-        return [ProductListCell.reuseId(), EventListCell.reuseId(), PromotionListCell.reuseId(), PostListCell.reuseId()]
+        return [EventListCell.reuseId(), PostListCell.reuseId()]
     }
     
     func detailedModelsForItem(feedItem: FeedItem) -> [TableViewCellModel] {
@@ -132,11 +120,11 @@ struct FeedItemCellModelFactory {
     }
     
     func walletReuseIdForModel(model: TableViewCellModel) -> String {
-        return ProductListCell.reuseId()
+        return EventListCell.reuseId()
     }
     
     func walletReuseId() -> [String]  {
-        return [ProductListCell.reuseId()]
+        return [EventListCell.reuseId()]
     }
     
     private let dateFormatter: NSDateFormatter = {

@@ -6,8 +6,8 @@
     },
     {
       "idiom" : "universal",
-      "scale" : "2x",
-      "filename" : "event_map@2x.png"
+      "filename" : "%10category_training_map@2x.png",
+      "scale" : "2x"
     },
     {
       "idiom" : "universal",

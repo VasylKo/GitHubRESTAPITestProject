@@ -10,16 +10,17 @@ import UIKit
 import GoogleMaps
 import XLForm
 import CleanroomLogger
+import Box
 
 @objc(LocationSelectorViewController)
 class LocationSelectorViewController: UIViewController, XLFormRowDescriptorViewController {
 
     var rowDescriptor: XLFormRowDescriptor?
-        
+    
     var coordinate: CLLocationCoordinate2D? {
         if  let rowDescriptor = self.rowDescriptor,
-            let location = rowDescriptor.value as? CLLocation where CLLocationCoordinate2DIsValid(location.coordinate) {
-             return location.coordinate
+            let location: Box<Location> = rowDescriptor.value as? Box<Location> {
+                return location.value.coordinates
         }
         return nil
     }
@@ -59,8 +60,9 @@ class LocationSelectorViewController: UIViewController, XLFormRowDescriptorViewC
         }()
     
     private func updateTitle() {
-        if let coordinate = self.coordinate {
-            self.title = String(format: "%0.4f, %0.4f", coordinate.latitude, coordinate.longitude)
+        if  let rowDescriptor = self.rowDescriptor,
+            let location: Box<Location> = rowDescriptor.value as? Box<Location> {
+                self.title = location.value.name
         }
     }
 }
@@ -69,11 +71,15 @@ extension LocationSelectorViewController: GMSMapViewDelegate {
     
     func mapView(mapView: GMSMapView!, didTapAtCoordinate coordinate: CLLocationCoordinate2D) {
         let location = CLLocation(latitude:coordinate.latitude, longitude:coordinate.longitude)
-        self.rowDescriptor?.value = location
+        
+        locationController().reverseGeocodeCoordinate(location.coordinate).onSuccess(callback: { location in
+            self.rowDescriptor?.value = Box(location)
+        })
+        
         selectionMarker.position = coordinate
-        updateTitle()
+        
+        self.updateTitle()
     }
-
 }
 
 
@@ -89,10 +95,10 @@ class CLLocationValueTrasformer : NSValueTransformer {
     
     override func transformedValue(value: AnyObject?) -> AnyObject? {
         if let valueData: AnyObject = value {
-            let location = valueData as! CLLocation
-            return String(format: "%0.4f, %0.4f", location.coordinate.latitude, location.coordinate.longitude)
+            if let box: Box<Location> = valueData as? Box {
+                return box.value.name
+            }
         }
         return nil
     }
-    
 }

@@ -64,6 +64,15 @@ final class AddPostViewController: BaseAddItemViewController {
         self.form = form
     }
     
+    @IBAction func prepareForUnwind(segue: UIStoryboardSegue) {
+
+    }
+    
+    @IBAction func cancelButtonTouched() {
+        self.navigationController?.popToRootViewControllerAnimated(true)
+    }
+
+    
     @IBAction override func didTapPost(sender: AnyObject) {
         if view.userInteractionEnabled == false {
             return
@@ -101,7 +110,8 @@ final class AddPostViewController: BaseAddItemViewController {
                 }.onSuccess { [weak self] (post: Post) -> ()  in
                     Log.debug?.value(post)
                     self?.sendUpdateNotification()
-                    self?.performSegue(AddPostViewController.Segue.Close)
+//                    self?.performSegue(AddPostViewController.Segue.Close)
+                    self?.cancelButtonTouched()
                 }.onFailure { error in
                     showError(error.localizedDescription)
                 }.onComplete { [weak self] result in

@@ -10,6 +10,7 @@ import UIKit
 import XLForm
 import CleanroomLogger
 
+import Box
 import BrightFutures
 
 final class AddEventViewController: BaseAddItemViewController {
@@ -109,13 +110,13 @@ final class AddEventViewController: BaseAddItemViewController {
         let category = categoryValue(values[Tags.Category.rawValue])
         
         if  let imageUpload = uploadAssets(values[Tags.Photo.rawValue]),
-            let getLocation = locationFromValue(values[Tags.Location.rawValue]) {
+            let location: Box<Location> = values[Tags.Location.rawValue] as? Box<Location> {
                 view.userInteractionEnabled = false
-                getLocation.zip(imageUpload).flatMap { (location: Location, urls: [NSURL]) -> Future<Event, NSError> in
+                imageUpload.flatMap { (urls: [NSURL]) -> Future<Event, NSError> in
                     var event = Event()
                     event.name = values[Tags.Title.rawValue] as? String
                     event.text = values[Tags.Description.rawValue] as? String
-                    event.location = location
+                    event.location = location.value
                     event.category = category
                     event.endDate = values[Tags.EndDate.rawValue] as? NSDate
                     event.startDate = values[Tags.StartDate.rawValue] as? NSDate
@@ -141,6 +142,5 @@ final class AddEventViewController: BaseAddItemViewController {
                 }
         }
     }
-
 
 }

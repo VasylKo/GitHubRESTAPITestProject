@@ -14,10 +14,61 @@ protocol BrowseModeDisplay {
     var browseMode: BrowseModeTabbarViewController.BrowseMode { get set }
 }
 
-@objc class BrowseModeTabbarViewController: DisplayModeViewController, AddMenuViewDelegate, BrowseTabbarDelegate {
+@objc class BrowseModeTabbarViewController: DisplayModeViewController, AddMenuViewDelegate, BrowseTabbarDelegate, BrowseGridViewControllerDelegate {
     
     var addMenuItems: [AddMenuView.MenuItem] {
-        return []
+        let pushAndSubscribe: (UIViewController) -> () = { [weak self] controller in
+            self?.navigationController?.pushViewController(controller, animated: true)
+            self?.subscribeForContentUpdates(controller)
+        }
+        return [
+            AddMenuView.MenuItem.promotionItemWithAction {
+                api().isUserAuthorized().onSuccess {  _ in
+                    pushAndSubscribe(Storyboards.Onboarding.instantiateCallAmbulanceViewController())
+                }},
+            // changes for 3 button UI(ambulance, post, donate)
+            //            AddMenuView.MenuItem.eventItemWithAction {
+            //                api().isUserAuthorized().onSuccess {  _ in
+            //                    pushAndSubscribe(Storyboards.NewItems.instantiateAddEventViewController())
+            //                }},
+            //            AddMenuView.MenuItem.productItemWithAction {
+            //                api().isUserAuthorized().onSuccess {  _ in
+            //                    pushAndSubscribe(Storyboards.NewItems.instantiateAddProductViewController())
+            //                }},
+            
+            
+            AddMenuView.MenuItem.inviteItemWithAction {
+                api().isUserAuthorized().onSuccess {  _ in
+//                    pushAndSubscribe(Storyboards.NewItems.instantiateAddEventViewController())
+                }},
+            AddMenuView.MenuItem.postItemWithAction {
+                api().isUserAuthorized().onSuccess {  _ in
+                    pushAndSubscribe(Storyboards.NewItems.instantiateAddPostViewController())
+                }}
+        ]
+    }
+    
+    override func viewControllerForMode(mode: DisplayModeViewController.DisplayMode) -> UIViewController {
+        switch self.browseMode {
+        case .ForYou:
+            self.navigationItem.rightBarButtonItems = nil
+            let browseGridController = Storyboards.Main.instantiateBrowseGridViewController()
+            browseGridController.browseGridDelegate = self
+            self.searchbar.attributedText = nil
+            return browseGridController
+        case .New:
+            super.setRightBarItems()
+            switch self.displayMode {
+            case .Map:
+                let mapController = Storyboards.Main.instantiateBrowseMapViewController()
+                mapController.delegate = self
+                return mapController
+            case .List:
+                let listController = Storyboards.Main.instantiateBrowseListViewController()
+                listController.hideSeparatorLinesNearSegmentedControl = true
+                return listController
+            }
+        }
     }
     
     //MARK: Browse mode
@@ -161,6 +212,49 @@ protocol BrowseModeDisplay {
     func addMenuView(addMenuView: AddMenuView, didExpand expanded: Bool) {
         if !expanded {
             blurDisplayed = expanded
+        }
+    }
+ 
+//MARK: - BrowseGridViewControllerDelegate
+    
+    func browseGridViewControllerSelectItem(itemType: HomeItem) {
+        switch itemType {
+        case .Membership:
+        self.navigationController?.pushViewController(Storyboards.Onboarding.instantiateMembershipPlansViewController(), animated: true)
+        case .Market:
+            fallthrough
+        case .Volunteer:
+            fallthrough
+        case .BomaHotels:
+            fallthrough
+        case .Events:
+            fallthrough
+        case .News:
+            fallthrough
+        case .GiveBlood:
+            fallthrough
+        case .Emergency:
+            fallthrough
+        case .Training:
+            fallthrough
+        case .Projects:
+            
+            let filterUpdate = { (filter: SearchFilter) -> SearchFilter in
+                var f = filter
+                f.homeItemType = itemType
+                return f
+            }
+            
+            let controller = Storyboards.Main.instantiateExploreViewControllerId()
+            controller.childFilterUpdate = filterUpdate
+            controller.title = itemType.displayString()
+            self.navigationController?.pushViewController(controller, animated: true)
+        case .Donate:
+            self.navigationController?.pushViewController(Storyboards.Onboarding.instantiateDonateViewController(), animated: true)
+        case .Ambulance:
+            self.navigationController?.pushViewController(Storyboards.Onboarding.instantiateCallAmbulanceViewController(), animated: true)
+        default:
+            break
         }
     }
     

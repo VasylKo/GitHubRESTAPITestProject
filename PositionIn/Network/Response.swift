@@ -101,18 +101,18 @@ struct UpdateResponse: Mappable{
     }
 }
 
-
-// Session response
+// Auth response
 struct AuthResponse: Mappable, CustomDebugStringConvertible {
     typealias Token = String!
     private(set) var accessToken: Token
     private(set) var refreshToken: Token
-    private(set) var expires: Int!
+    private(set) var accessTokenExpires: Int!
+    private(set) var refreshTokenExpires: Int!
     
     init?(_ map: Map) {
         mapping(map)
-        switch (accessToken,refreshToken,expires) {
-        case (.Some, .Some, .Some):
+        switch (accessToken, refreshToken, accessTokenExpires, refreshTokenExpires) {
+        case (.Some, .Some, .Some, .Some):
             break
         default:
             Log.error?.message("Error while parsing object")
@@ -122,23 +122,63 @@ struct AuthResponse: Mappable, CustomDebugStringConvertible {
         }
     }
     
-    private init(accessToken: Token, refreshToken: Token, expires: Int) {
+    private init(accessToken: Token, refreshToken: Token, accessTokenExpires: Int, refreshTokenExpires: Int) {
         self.accessToken = accessToken
         self.refreshToken = refreshToken
-        self.expires = expires
+        self.accessTokenExpires = accessTokenExpires
+        self.refreshTokenExpires = refreshTokenExpires
     }
     
     mutating func mapping(map: Map) {
         accessToken <- map["access_token"]
         refreshToken <- map["refresh_token"]
-        expires <- map["expires_in"]
+        accessTokenExpires <- map["expires_in"]
+        refreshTokenExpires <- map["refresh_token_expires_in"]
     }
     
     var debugDescription: String {
-        return "Access:\(accessToken), Refresh: \(refreshToken), Expires: \(expires)"
+        return "Access:\(accessToken), Refresh: \(refreshToken), Access Expires: \(accessTokenExpires), Refresh Expires: \(refreshTokenExpires)"
+    }
+
+    static func invalidAuth() -> AuthResponse {
+        return  AuthResponse(accessToken: "",refreshToken: "", accessTokenExpires: -1, refreshTokenExpires: -1)
+    }
+}
+
+// Auth response
+struct AccessTokenResponse: Mappable, CustomDebugStringConvertible {
+    typealias Token = String!
+    private(set) var accessToken: Token
+    private(set) var accessTokenExpires: Int!
+    
+    init?(_ map: Map) {
+        mapping(map)
+        switch (accessToken, accessTokenExpires) {
+        case (.Some, .Some):
+            break
+        default:
+            Log.error?.message("Error while parsing object")
+            Log.debug?.trace()
+            Log.verbose?.value(self)
+            return nil
+        }
     }
     
-    static func invalidAuth() -> AuthResponse {
-        return  AuthResponse(accessToken: "",refreshToken: "",expires: -1)
+    private init(accessToken: Token, accessTokenExpires: Int) {
+        self.accessToken = accessToken
+        self.accessTokenExpires = accessTokenExpires
+    }
+    
+    mutating func mapping(map: Map) {
+        accessToken <- map["access_token"]
+        accessTokenExpires <- map["expires_in"]
+    }
+    
+    var debugDescription: String {
+        return "Access:\(accessToken), Access Expires: \(accessTokenExpires)"
+    }
+    
+    static func invalidAccessToken() -> AccessTokenResponse {
+        return  AccessTokenResponse(accessToken: "", accessTokenExpires: -1)
     }
 }

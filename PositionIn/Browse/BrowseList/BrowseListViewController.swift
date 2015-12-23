@@ -27,7 +27,8 @@ final class BrowseListViewController: UIViewController, BrowseActionProducer, Br
         }
     }
     
-    var hideSeparatorLinesNearSegmentedControl: Bool = false
+    //hide separator lines
+    var hideSeparatorLinesNearSegmentedControl: Bool = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,11 +73,11 @@ final class BrowseListViewController: UIViewController, BrowseActionProducer, Br
             if (canAffectFilter) {
                 f.itemTypes = [selectedItemType]
             }
-            else if (filter.itemTypes!.filter { $0 == FeedItem.ItemType.Unknown }.count == 0)
-                || selectedItemType != FeedItem.ItemType.Unknown {
-                self.dataSource.setItems([])
-                self.tableView.reloadData()
-            }
+//            else if (filter.itemTypes!.filter { $0 == FeedItem.ItemType.Unknown }.count == 0)
+//                || selectedItemType != FeedItem.ItemType.Unknown {
+//                self.dataSource.setItems([])
+//                self.tableView.reloadData()
+//            }
             filter = f
         }
     }
@@ -90,20 +91,27 @@ final class BrowseListViewController: UIViewController, BrowseActionProducer, Br
         Log.debug?.value(self)
         dataRequestToken.invalidate()
         dataRequestToken = InvalidationToken()
-        let request: Future<CollectionResponse<FeedItem>,NSError>
-        switch browseMode {
-        case .ForYou:
-            request = api().forYou(searchFilter, page: page)
-        case .New:
-            request = api().getFeed(searchFilter, page: page)
+        
+        var homeItem = HomeItem.Unknown
+        if let tempHomeItem = searchFilter.homeItemType {
+            homeItem = tempHomeItem
         }
+        let request: Future<CollectionResponse<FeedItem>,NSError> = api().getAll(homeItem)
+        
+//        switch browseMode {
+//        case .ForYou:
+//            request = api().forYou(searchFilter, page: page)
+//        case .New:
+//            request = api().getFeed(searchFilter, page: page)
+//        }
         request.onSuccess(dataRequestToken.validContext) {
             [weak self] response in
             Log.debug?.value(response.items)
-            guard let strongSelf = self,
-                let itemTypes = searchFilter.itemTypes
-                //TODO: need discuss this moment
-                where itemTypes.contains(strongSelf.selectedItemType) || strongSelf.selectedItemType == .Unknown  else {
+            guard let strongSelf = self
+                //                let itemTypes = searchFilter.itemTypes{
+                //                //TODO: need discuss this moment
+                //                where itemTypes.contains(strongSelf.selectedItemType) || strongSelf.selectedItemType == .Unknown
+                else {
                     return
             }
 
@@ -117,21 +125,6 @@ final class BrowseListViewController: UIViewController, BrowseActionProducer, Br
             strongSelf.actionConsumer?.browseControllerDidChangeContent(strongSelf)
         }
     }
-    
-    @IBAction func displayModeSegmentedControlChanged(sender: UISegmentedControl) {
-        let segmentMapping: [Int: FeedItem.ItemType] = [
-            0: .Unknown,
-            1: .Item,
-            2: .Event,
-            3: .Promotion,
-            4: .Post,
-        ]
-        if let newFilterValue = segmentMapping[sender.selectedSegmentIndex] {
-            selectedItemType = newFilterValue
-        }
-    }
-    
-    
     
     @IBOutlet weak var topSeparatorLine: UIView!
     @IBOutlet weak var bottomSeparatorLine: UIView!
@@ -196,7 +189,6 @@ extension BrowseListViewController {
                 actionConsumer.browseController(actionProducer, didSelectItem: model.objectID, type: model.itemType, data: model.data)
             }
         }
-        
         
         func setItems(feedItems: [FeedItem]) {
             if showCompactCells {

@@ -32,7 +32,7 @@ final class BrowseMapViewController: UIViewController, BrowseActionProducer, Bro
     
     var browseMode: BrowseModeTabbarViewController.BrowseMode = .ForYou
     
-    let visibleItemTypes: [FeedItem.ItemType] = [.Event, .Promotion, .Item]
+    let visibleItemTypes: [FeedItem.ItemType] = [.Project, .Emergency, .Training]
     
     var filter = SearchFilter.currentFilter
     
@@ -56,11 +56,11 @@ final class BrowseMapViewController: UIViewController, BrowseActionProducer, Bro
     private func displayFeedItems(items: [FeedItem]) {
         func  markerIcon(item: FeedItem) -> UIImage? {
             switch item.type {
-            case .Event:
+            case .Project:
                 return UIImage(named: "EventMarker")
-            case .Promotion:
+            case .Emergency:
                 return UIImage(named: "PromotionMarker")
-            case .Item:
+            case .Training:
                 return UIImage(named: "ProductMarker")
             default:
                 return nil
@@ -95,7 +95,6 @@ extension BrowseMapViewController: GMSMapViewDelegate {
             self.performSelector("mapMovementEnd:",
                 withObject: CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude),
                 afterDelay: 0.5)
-            
         }
     }
     
@@ -115,13 +114,19 @@ extension BrowseMapViewController: GMSMapViewDelegate {
         
         var f = filter
         f.coordinates = coordinate
-        let request: Future<CollectionResponse<FeedItem>,NSError>
-        switch browseMode {
-        case .ForYou:
-            request = api().forYou(f, page: APIService.Page())
-        case .New:
-            request = api().getFeed(f, page: APIService.Page())
+        
+        var homeItem = HomeItem.Unknown
+        if let tempHomeItem = f.homeItemType {
+            homeItem = tempHomeItem
         }
+        let request: Future<CollectionResponse<FeedItem>,NSError> = api().getAll(homeItem)
+        
+//        switch browseMode {
+//        case .ForYou:
+//            request = api().forYou(f, page: APIService.Page())
+//        case .New:
+//            request = api().getFeed(f, page: APIService.Page())
+//        }
         request.onSuccess {
             [weak self] response in
             Log.debug?.value(response.items)

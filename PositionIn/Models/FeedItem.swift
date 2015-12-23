@@ -13,11 +13,13 @@ import CleanroomLogger
 
 struct FeedItem: CRUDObject {
     var objectId: CRUDObjectId = CRUDObjectInvalidId
-    var name: String?    
+    var name: String?
+    var descr: String?
     var details: String?
     var text: String?
     var category: ItemCategory?
     var price: Float?
+    var donations: Float?
     var startDate: NSDate?
     var endDate: NSDate?
     var author: ObjectInfo?
@@ -28,12 +30,7 @@ struct FeedItem: CRUDObject {
     var location: Location?
     
     var itemData: Any? {
-        switch type {
-        case .Item:
-            return author
-        default:
-            return nil
-        }
+        return author
     }
     
     init(name: String, details: String, text: String, price: Float) {
@@ -56,10 +53,12 @@ struct FeedItem: CRUDObject {
     mutating func mapping(map: Map) {
         objectId <- (map["id"], CRUDObjectIdTransform())
         name <- map["name"]
+        descr <- map["desctiption"]
         details <- map["details"]
         text <- map["text"]
         category <- (map["category"], EnumTransform())
         price <- map["price"]
+        donations <- map["donations"]
         startDate <- (map["startDate"], APIDateTransform())
         endDate <- (map["endDate"], APIDateTransform())
         author <- map["author"]
@@ -76,23 +75,38 @@ struct FeedItem: CRUDObject {
     
     enum ItemType: Int, CustomStringConvertible {
         case Unknown
+        case Project
+        case Emergency
+        case Training
+        case GiveBlood
+        case Volunteer
+        case BomaHotels
         case Event
-        case Promotion
-        case Item
-        case Post
+        case Market = 9
+        case News = 10
         
         var description: String {
             switch self {
             case .Unknown:
                 return "Unknown/All"
-            case .Event:
-                return "Event"
-            case .Promotion:
+            case .Project:
+                return "Project"
+            case .Emergency:
                 return "Emergency"
-            case Item:
-                return "Product"
-            case Post:
-                return "Post"
+            case Training:
+                return "Training"
+            case GiveBlood:
+                return "GiveBlood"
+            case Event:
+                return "Event"
+            case News:
+                return "News"
+            case BomaHotels:
+                return "BomaHotels"
+            case Market:
+                return "Market"
+            case Volunteer:
+                return "Volunteer"
             }
         }
     }
@@ -103,5 +117,13 @@ struct FeedItem: CRUDObject {
     
     static func forYouEndpoint() -> String {
         return "/v1.0/recommended"
+    }
+    
+    static func getAllEndpoint() -> String {
+        return "/v1.0/getAllByType"
+    }
+    
+    static func getOneEndpoint(objectId: CRUDObjectId) -> String {
+        return "/v1.0/getOneById/\(objectId)"
     }
 }

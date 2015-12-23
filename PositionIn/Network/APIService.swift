@@ -52,22 +52,46 @@ struct APIService {
         return "API: \(baseURL.absoluteString)"
     }
     
+    //pushes
+    
+    func setDeviceToken(deviceToken: String?) {
+        sessionController.setDeviceToken(deviceToken)
+    }
+    
+    func pushesRegistration() -> Future<Void, NSError> {
+        let deviceToken = sessionController.currentDeviceToken()
+        let endpoint = UserProfile.pushesEndpoint()
+        typealias CRUDResultType = (Alamofire.Request, Future<Void, NSError>)
+        var params: [String: String]? = nil
+        let device = UIDevice.currentDevice()
+        if let dc = deviceToken,
+        let uuid = device.identifierForVendor{
+            params = ["registrationId": dc, "uuid" : uuid.UUIDString]
+        }
+        
+        return session().flatMap {
+            (token: AuthResponse.Token) -> Future<Void, NSError> in
+            let request = self.updateRequest(token, endpoint: endpoint, method: .POST, params: params)
+            let (_, future): CRUDResultType = self.dataProvider.jsonRequest(request, map: self.emptyResponseMapping(), validation: nil)
+            return future
+        }
+    }
+    
     //MARK: - Profile -
     
-    func changePassword(email: String?, oldPassword: String?, newPassword: String?) -> Future<Void, NSError> {
+    func changePassword(oldPassword: String?, newPassword: String?) -> Future<Void, NSError> {
         typealias CRUDResultType = (Alamofire.Request, Future<Void, NSError>)
         let endpoint = UserProfile.changePasswordEndpoint()
         var params: [String: String]? = nil
-        if let email = email,
-            let oldPassword = oldPassword,
+        if let oldPassword = oldPassword,
             let newPassword = newPassword {
-                params = ["email" : email, "oldPassword" : oldPassword, "newPassword" : newPassword]
+                params = ["oldPassword" : oldPassword, "newPassword" : newPassword]
         }
         return session().flatMap {
             (token: AuthResponse.Token) -> Future<Void, NSError> in
             let request = self.updateRequest(token, endpoint: endpoint, method: .POST,
                 params: params)
-            let (_, future): CRUDResultType = self.dataProvider.jsonRequest(request, map: self.emptyResponseMapping(), validation: self.statusCodeValidation(statusCode: [200]))
+            let (_, future): CRUDResultType = self.dataProvider.jsonRequest(request, map: self.commandMapping(), validation: self.statusCodeValidation(statusCode: [200]))
             return self.handleFailure(future)
         }
     }
@@ -183,7 +207,7 @@ struct APIService {
     //MARK: - Products -
     
     func getUserProducts(userId: CRUDObjectId, page: Page) -> Future<CollectionResponse<Product>, NSError> {
-       return self.getUserProfile(userId).flatMap { profile -> Future<CollectionResponse<Product>, NSError> in
+        return self.getUserProfile(userId).flatMap { profile -> Future<CollectionResponse<Product>, NSError> in
             let endpoint = Product.shopItemsEndpoint(profile.defaultShopId)
             let params = page.query
             return self.getObjectsCollection(endpoint, params: params)
@@ -196,11 +220,10 @@ struct APIService {
         return self.createObject(endpoint, object: object)
     }
     
-    
-    func getProduct(objectId: CRUDObjectId, inShop shop: CRUDObjectId) -> Future<Product, NSError> {
-            let endpoint = Product.shopItemsEndpoint(shop, productId: objectId)
-            return self.getObject(endpoint)
-    }
+//    func getProduct(objectId: CRUDObjectId, inShop shop: CRUDObjectId) -> Future<Product, NSError> {
+//        let endpoint = Product.shopItemsEndpoint(shop, productId: objectId)
+//        return self.getObject(endpoint)
+//    }
     
     //MARK: - Community -
     
@@ -218,6 +241,18 @@ struct APIService {
     func getCommunity(communityId: CRUDObjectId) -> Future<Community, NSError> {
         let endpoint = Community.communityEndpoint(communityId)
         return getObject(endpoint)
+    }
+    
+    func createAmbulanceRequest(object: AmbulanceRequest) -> Future<Void, NSError> {
+        let endpoint = AmbulanceRequest.endpoint()
+        typealias CRUDResultType = (Alamofire.Request, Future<Void, NSError>)
+        let params = Mapper().toJSON(object)
+        return session().flatMap {
+            (token: AuthResponse.Token) -> Future<Void, NSError> in
+            let request = self.updateRequest(token, endpoint: endpoint, method: .POST, params: params)
+            let (_, future): CRUDResultType = self.dataProvider.jsonRequest(request, map: self.emptyResponseMapping(), validation: nil)
+            return future
+        }
     }
     
     func createCommunity(community object: Community) -> Future<Community, NSError> {
@@ -323,17 +358,84 @@ struct APIService {
             return self.handleFailure(future)
         }
     }
+
+//    func forYou(query: APIServiceQueryConvertible, page: Page) -> Future<CollectionResponse<FeedItem>,NSError> {
+//        let endpoint = FeedItem.forYouEndpoint()
+//        let params = APIServiceQuery()
+//        params.append(query: query)
+//        params.append(query: page)
+//        Log.debug?.value(params.query)
+//        return session().flatMap {
+//            (token: AuthResponse.Token) -> Future<CollectionResponse<FeedItem>, NSError> in
+//            let request = self.updateRequest(token, endpoint: endpoint, params: params.query)
+//            let (_ , future): (Alamofire.Request, Future<CollectionResponse<FeedItem>, NSError>) = self.dataProvider.objectRequest(request)
+//            return self.handleFailure(future)
+//        }
+//    }
     
-    func forYou(query: APIServiceQueryConvertible, page: Page) -> Future<CollectionResponse<FeedItem>,NSError> {
-        let endpoint = FeedItem.forYouEndpoint()
+    func getAll(homeItem: HomeItem) -> Future<CollectionResponse<FeedItem>,NSError> {
+        let endpoint = homeItem.endpoint()
+//        //TODO: change this when it will be fixed on backend
+        let method: Alamofire.Method = .POST
         let params = APIServiceQuery()
-        params.append(query: query)
-        params.append(query: page)
-        Log.debug?.value(params.query)
+        
+        params.append("type", value: [homeItem.rawValue])
+
         return session().flatMap {
             (token: AuthResponse.Token) -> Future<CollectionResponse<FeedItem>, NSError> in
-            let request = self.updateRequest(token, endpoint: endpoint, params: params.query)
+            //TODO: fix endp
+            var endp = ""
+            if let endpoint = endpoint {
+                endp = endpoint
+            }
+            let request = self.updateRequest(token, endpoint: endp, method: method, params: params.query)
             let (_ , future): (Alamofire.Request, Future<CollectionResponse<FeedItem>, NSError>) = self.dataProvider.objectRequest(request)
+            return self.handleFailure(future)
+        }
+    }
+    
+    func getBomaHotelsDetails(objectId: CRUDObjectId) -> Future<Product, NSError> {
+        let endpont = HomeItem.BomaHotels.endpoint(objectId)
+        //TODO need fix downcastng
+        return self.getOne(endpont!)
+    }
+    
+    func getProjectsDetails(objectId: CRUDObjectId) -> Future<Product, NSError> {
+        let endpont = HomeItem.Projects.endpoint(objectId)
+        //TODO need fix downcastng
+        return self.getOne(endpont!)
+    }
+    
+    func getGiveBloodDetails(objectId: CRUDObjectId) -> Future<Product, NSError> {
+        let endpont = HomeItem.GiveBlood.endpoint(objectId)
+        return self.getOne(endpont!)
+    }
+    
+    func getEmergencyDetails(objectId: CRUDObjectId) -> Future<Product, NSError> {
+        let endpont = HomeItem.Emergency.endpoint(objectId)
+        return self.getOne(endpont!)
+    }
+    
+    func getMarketDetails(objectId: CRUDObjectId) -> Future<Product, NSError> {
+        let endpont = HomeItem.Market.endpoint(objectId)
+        return self.getOne(endpont!)
+    }
+    
+    func getVolunteerDetails(objectId: CRUDObjectId) -> Future<Product, NSError> {
+        let endpont = HomeItem.Volunteer.endpoint(objectId)
+        return self.getOne(endpont!)
+    }
+    
+    func getTrainingDetails(objectId: CRUDObjectId) -> Future<Product, NSError> {
+        let endpont = HomeItem.Training.endpoint(objectId)
+        return self.getOne(endpont!)
+    }
+    
+    private func getOne(endpoint: String) -> Future<Product, NSError> {
+        return session().flatMap {
+            (token: AuthResponse.Token) -> Future<Product, NSError> in
+            let request = self.updateRequest(token, endpoint: endpoint, params: nil, method: .GET)
+            let (_ , future): (Alamofire.Request, Future<Product, NSError>) = self.dataProvider.objectRequest(request)
             return self.handleFailure(future)
         }
     }
@@ -406,6 +508,7 @@ struct APIService {
     //MARK: - Helpers -
     
 //TODO:    @availability(*, unavailable)
+    
     private func emptyResponseMapping() -> (AnyObject? -> Void?) {
         return  { response in
             if let json = response as? NSDictionary {
@@ -421,7 +524,7 @@ struct APIService {
         }
     }
     
-    private func commandMapping() -> (AnyObject? -> Void?) {
+    func commandMapping() -> (AnyObject? -> Void?) {
         return  { response in
             if let json = response as? NSDictionary {
                 if let success = json["success"] as? Bool where success == true{
@@ -441,6 +544,25 @@ struct APIService {
                 Log.error?.message("Got unexpected response: \(response)")
                 return nil
             }
+        }
+    }
+    
+    func phoneCodeValidation() -> (AnyObject? -> Bool?) {
+        return { response in
+            if let json = response as? NSDictionary {
+                if let isExistingUser = json["isExistingUser"] as? Bool{
+                    return isExistingUser
+                } else {
+                    Log.error?.message("Got unexpected response")
+                    Log.debug?.value(json)
+                    return nil
+                }
+            }
+            else {
+                Log.error?.message("Got unexpected response: \(response)")
+                return nil
+            }
+            
         }
     }
     

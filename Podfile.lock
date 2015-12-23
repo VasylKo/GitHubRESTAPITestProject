@@ -1,5 +1,5 @@
 PODS:
-  - Alamofire (3.1.3)
+  - Alamofire (3.1.4)
   - Bolts (1.4.0):
     - Bolts/AppLinks (= 1.4.0)
     - Bolts/Tasks (= 1.4.0)
@@ -37,8 +37,8 @@ PODS:
     - Braintree/API
   - Braintree/Venmo (3.9.6):
     - Braintree/API
-  - BrightFutures (3.2.0):
-    - Result (= 1.0.0)
+  - BrightFutures (3.2.2):
+    - Result (~> 1.0)
   - FBSDKCoreKit (4.7.1):
     - Bolts (~> 1.1)
     - FBSDKCoreKit/arc (= 4.7.1)
@@ -86,7 +86,7 @@ PODS:
   - Realm/Headers (0.96.2)
   - RealmSwift (0.96.2):
     - Realm (= 0.96.2)
-  - Result (1.0.0)
+  - Result (1.0.1)
   - UIImageEffects (0.0.1)
   - XLForm (3.0.2)
 
@@ -114,11 +114,11 @@ EXTERNAL SOURCES:
     :path: PosInCore
 
 SPEC CHECKSUMS:
-  Alamofire: 9f93b56389e48def9220dd57d1f44b1927229a5a
+  Alamofire: fbc829692f351fa1d8a31dd75fd7f7f56fea31fb
   Bolts: 0e9bce58b9b9f5e8a7a4d47b16d2fabec289072b
   Box: 70713ca3679e4e11ad4c470e9b58265f506fc659
   Braintree: 74f0bd85743c2227147c361cc2c5c9aefe083ae8
-  BrightFutures: 894dcfc04059093b5477c2197ed4c0fb4ad07180
+  BrightFutures: 1722a83fa8415aef78d66319a6c6add6685a7a87
   FBSDKCoreKit: 9141b70960a37930850370495fe565f4a27ac141
   FBSDKLoginKit: c11ed3c2833472db3bb4a4aecf27af4a6f69b173
   Google: fd33b5fa40fa3aaee5176de49c873a74e3d11dce
@@ -140,7 +140,7 @@ SPEC CHECKSUMS:
   PosInCore: d343ffa2e13b1fba322212eb498bdc452a305c54
   Realm: 3ce8448151c571e90b85002d984d7f93f54fc8a3
   RealmSwift: 485599fe54e35461c4a0daa7d01d8fbf11424873
-  Result: feaaff535eb59c414c6c7f95e6145ab991b1b07f
+  Result: caef80340451e1f07492fa1e89117f83613bce24
   UIImageEffects: 37b99fa461e4965f332ca82e92f2c22a1075ee84
   XLForm: 7817ce29f3f259186e837bb7309ac7e5b7e9b883
 

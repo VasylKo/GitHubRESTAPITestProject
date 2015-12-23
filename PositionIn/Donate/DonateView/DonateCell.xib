@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="CxP-0p-l3X" customClass="DonateCell" customModule="PositionIn" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="478" height="80"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="CxP-0p-l3X" id="C7o-SB-ajs">
+                <rect key="frame" x="0.0" y="0.0" width="478" height="80"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="krfc" translatesAutoresizingMaskIntoConstraints="NO" id="5ny-HI-tRl">
+                        <rect key="frame" x="8" y="8" width="64" height="64"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="64" id="49c-uY-rQy"/>
+                            <constraint firstAttribute="height" constant="64" id="jAk-Yh-KGT"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Donate to" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xRq-TR-JvH">
+                        <rect key="frame" x="80" y="14" width="390" height="17"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="14"/>
+                        <color key="textColor" red="0.60784313729999995" green="0.60784313729999995" blue="0.60784313729999995" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Kenya Red Cross Society" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Aab-H9-LHA">
+                        <rect key="frame" x="80" y="39" width="390" height="21"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="17"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="5ny-HI-tRl" firstAttribute="top" secondItem="C7o-SB-ajs" secondAttribute="topMargin" id="HNj-lG-6wM"/>
+                    <constraint firstItem="Aab-H9-LHA" firstAttribute="trailing" secondItem="C7o-SB-ajs" secondAttribute="trailingMargin" id="Hcr-vb-eOL"/>
+                    <constraint firstItem="xRq-TR-JvH" firstAttribute="top" secondItem="C7o-SB-ajs" secondAttribute="topMargin" constant="6.5" id="V58-lT-jbR"/>
+                    <constraint firstItem="5ny-HI-tRl" firstAttribute="leading" secondItem="C7o-SB-ajs" secondAttribute="leadingMargin" id="XwP-jV-1Hu"/>
+                    <constraint firstItem="xRq-TR-JvH" firstAttribute="leading" secondItem="5ny-HI-tRl" secondAttribute="trailing" constant="8" id="bw1-Vc-LS0"/>
+                    <constraint firstItem="Aab-H9-LHA" firstAttribute="top" secondItem="xRq-TR-JvH" secondAttribute="bottom" constant="8" id="hsx-Zk-NkU"/>
+                    <constraint firstItem="xRq-TR-JvH" firstAttribute="trailing" secondItem="C7o-SB-ajs" secondAttribute="trailingMargin" id="n25-dg-qBK"/>
+                    <constraint firstItem="Aab-H9-LHA" firstAttribute="leading" secondItem="5ny-HI-tRl" secondAttribute="trailing" constant="8" id="zaJ-5g-lm6"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="projectIconImageView" destination="5ny-HI-tRl" id="zs6-0g-UvQ"/>
+                <outlet property="projectNameLabel" destination="Aab-H9-LHA" id="Ddc-io-Wn5"/>
+            </connections>
+            <point key="canvasLocation" x="448" y="14"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="krfc" width="60" height="60"/>
+    </resources>
+</document>

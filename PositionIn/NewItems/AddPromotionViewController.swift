@@ -10,6 +10,7 @@ import UIKit
 import XLForm
 import CleanroomLogger
 
+import Box
 import BrightFutures
 
 final class AddPromotionViewController: BaseAddItemViewController {
@@ -48,6 +49,9 @@ final class AddPromotionViewController: BaseAddItemViewController {
         // Discount
         let priceRow = XLFormRowDescriptor(tag: Tags.Discount.rawValue, rowType: XLFormRowDescriptorTypeDecimal, title: NSLocalizedString("Discount (%)", comment: "New promotion: discount"))
         priceRow.required = true
+        priceRow.addValidator(XLFormRegexValidator(msg: NSLocalizedString("Incorrect discount",
+            comment: "Add event"), regex: "^(?:99|[0-9]?[0-9])$"))
+        priceRow.cellConfig.setObject(UIScheme.mainThemeColor, forKey: "tintColor")
         infoGeneralSection.addFormRow(priceRow)
         
         // Info section
@@ -126,18 +130,18 @@ final class AddPromotionViewController: BaseAddItemViewController {
         }
         
         if  let imageUpload = uploadAssets(values[Tags.Photo.rawValue]),
-            let getLocation = locationFromValue(values[Tags.Location.rawValue]) {
+            let location: Box<Location> = values[Tags.Location.rawValue] as? Box<Location> {
                 view.userInteractionEnabled = false
-                getLocation.zip(getShop).zip(imageUpload).flatMap {
+                getShop.zip(imageUpload).flatMap {
                     (info, urls: [NSURL]) -> Future<Promotion, NSError> in
-                    let (location, shop): (Location, CRUDObjectId) = info
+                    let (shop): (CRUDObjectId) = info
                     var promotion = Promotion()
                     promotion.name = values[Tags.Title.rawValue] as? String
                     promotion.discount = values[Tags.Discount.rawValue] as? Float
                     promotion.category = category
                     promotion.endDate = values[Tags.EndDate.rawValue] as? NSDate
                     promotion.startDate = values[Tags.StartDate.rawValue] as? NSDate
-                    promotion.location = location
+                    promotion.location = location.value
                     promotion.text = values[Tags.Description.rawValue] as? String
                     promotion.shop = shop
                     promotion.photos = urls.map { url in

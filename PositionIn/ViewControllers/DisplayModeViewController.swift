@@ -47,7 +47,7 @@ protocol BrowseActionConsumer: class {
         }
     }
     
-    var displayMode: DisplayMode = .Map {
+    var displayMode: DisplayMode = .List {
         didSet {
             if isViewLoaded() {
                 applyDisplayMode(displayMode)
@@ -100,13 +100,18 @@ protocol BrowseActionConsumer: class {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.titleView = searchbar
+
+        self.setRightBarItems()
+        
+        applyDisplayMode(displayMode)
+    }
+    
+    func setRightBarItems() {
         let segmentButton = UIBarButtonItem(customView: displayModeSegmentedControl)
         let spacer = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FixedSpace, target: nil,
             action: nil)
         spacer.width = -15;
         self.navigationItem.rightBarButtonItems = [spacer, segmentButton]
-        
-        applyDisplayMode(displayMode)
     }
     
     private(set) internal weak var contentView: UIView!
@@ -169,23 +174,49 @@ protocol BrowseActionConsumer: class {
     
     func browseController(controller: BrowseActionProducer, didSelectItem objectId: CRUDObjectId, type itemType: FeedItem.ItemType, data: Any?) {
         switch itemType {
-        case .Item:
+        case .Project:
             trackGoogleAnalyticsEvent("Main", action: "Click", label: "Product")
             let controller =  Storyboards.Main.instantiateProductDetailsViewControllerId()
             controller.objectId = objectId
             controller.author = data as? ObjectInfo
             navigationController?.pushViewController(controller, animated: true)
-        case .Event:
-            trackGoogleAnalyticsEvent("Main", action: "Click", label: "Event")
-            let controller =  Storyboards.Main.instantiateEventDetailsViewControllerId()
+        case .Training:
+            trackGoogleAnalyticsEvent("Main", action: "Click", label: "Training")
+            let controller =  Storyboards.Main.instantiateTrainingDetailsViewControllerId()
             controller.objectId = objectId
+            controller.author = data as? ObjectInfo
             navigationController?.pushViewController(controller, animated: true)
-        case .Promotion:
-            trackGoogleAnalyticsEvent("Main", action: "Click", label: "Promotion")
-            let controller =  Storyboards.Main.instantiatePromotionDetailsViewControllerId()
+        case .Emergency:
+            trackGoogleAnalyticsEvent("Main", action: "Click", label: "Emergency")
+            let controller =  Storyboards.Main.instantiateEmergencyDetailsControllerId()
             controller.objectId = objectId
+            controller.author = data as? ObjectInfo
             navigationController?.pushViewController(controller, animated: true)
-        case .Post:
+        case .BomaHotels:
+            trackGoogleAnalyticsEvent("Main", action: "Click", label: "BomaHotels")
+            let controller =  Storyboards.Main.instantiateBomaHotelsDetailsViewControllerId()
+            controller.objectId = objectId
+            controller.author = data as? ObjectInfo
+            navigationController?.pushViewController(controller, animated: true)
+        case .GiveBlood:
+            trackGoogleAnalyticsEvent("Main", action: "Click", label: "GiveBlood")
+            let controller =  Storyboards.Main.instantiateGiveBloodDetailsViewControllerId()
+            controller.objectId = objectId
+            controller.author = data as? ObjectInfo
+            navigationController?.pushViewController(controller, animated: true)
+        case .Market:
+            trackGoogleAnalyticsEvent("Main", action: "Click", label: "Post")
+            let controller = Storyboards.Main.instantiateMarketDetailsViewControllerId()
+            controller.objectId = objectId
+            controller.author = data as? ObjectInfo
+            navigationController?.pushViewController(controller, animated: true)
+        case .Volunteer:
+            trackGoogleAnalyticsEvent("Main", action: "Click", label: "Post")
+            let controller = Storyboards.Main.instantiateVolunteerDetailsViewControllerId()
+            controller.objectId = objectId
+            controller.author = data as? ObjectInfo
+            navigationController?.pushViewController(controller, animated: true)
+        case .News:
             trackGoogleAnalyticsEvent("Main", action: "Click", label: "Post")
             let controller = Storyboards.Main.instantiatePostViewController()
             controller.objectId = objectId
@@ -193,6 +224,15 @@ protocol BrowseActionConsumer: class {
         default:
             Log.debug?.message("Did select \(itemType)<\(objectId)>")
         }
+
+        //        case Training
+        //        case GiveBlood
+        //        case News
+        //        case Event
+        //        case Market
+        //        case BomaHotels
+        //        case Volunteer
+        
     }
     
     func browseControllerDidChangeContent(controller: BrowseActionProducer) {
@@ -297,6 +337,12 @@ protocol BrowseActionConsumer: class {
             return f
         }
         applyDisplayMode(displayMode)
+    }
+    
+    func searchViewControllerHomeItemSelected(homeItem: HomeItem, locationString: String?) {
+        self.searchbar.attributedText = self.searchBarAttributedText(nil,
+            searchString: homeItem.displayString(),
+            locationString: locationString)
     }
     
     func searchViewControllerSectionSelected(model: SearchSectionCellModel?, searchString: String?, locationString: String?) {

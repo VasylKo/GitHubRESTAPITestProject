@@ -25,6 +25,7 @@ struct SearchFilter: Mappable {
     var endPrice: Money?
     var startDate: NSDate?
     var endDate: NSDate?
+    var homeItemType: HomeItem?
     var categories: [ItemCategory]?
     var itemTypes: [FeedItem.ItemType]? 
     var name: String?
@@ -138,6 +139,7 @@ struct SearchFilter: Mappable {
         endPrice = SearchFilter.maxPrice
         itemTypes = [.Unknown]
         categories = ItemCategory.all()
+        homeItemType = .Unknown
     }
     
     mutating func mapping(map: Map) {
@@ -148,8 +150,11 @@ struct SearchFilter: Mappable {
         endDate <- (map["time.to"], APIDateTransform())
         radius <- map["radius"]
         name <- map["name"]
+        homeItemType <- (map["type"], EnumTransform())
         
-        itemTypes <- (map["type"], ListTransform(itemTransform: EnumTransform()))
+        //temporary decision
+//        itemTypes <- (map["type"], ListTransform(itemTransform: EnumTransform()))
+
         categories <- (map["categories"], ListTransform(itemTransform: EnumTransform()))
         users <- (map["users"], ListTransform(itemTransform: CRUDObjectIdTransform()))
         communities <- (map["communities"], ListTransform(itemTransform: CRUDObjectIdTransform()))
