@@ -220,9 +220,7 @@ protocol BrowseModeDisplay {
     func browseGridViewControllerSelectItem(itemType: HomeItem) {
         switch itemType {
         case .Membership:
-            self.navigationController?.pushViewController(Storyboards.Onboarding.instantiateMembershipPlansViewController(), animated: true)
-            
-//            Projects, Emergency, Training, Ambulance, GiveBlood, News, Membership, Donate, Events, Market, BomaHotels, Volunteer
+        self.navigationController?.pushViewController(Storyboards.Onboarding.instantiateMembershipPlansViewController(), animated: true)
         case .Market:
             fallthrough
         case .Volunteer:
@@ -240,16 +238,17 @@ protocol BrowseModeDisplay {
         case .Training:
             fallthrough
         case .Projects:
-            self.tabbar.selectedMode = .New
-            self.displayMode = .List
             
-            childFilterUpdate = { (filter: SearchFilter) -> SearchFilter in
+            let filterUpdate = { (filter: SearchFilter) -> SearchFilter in
                 var f = filter
                 f.homeItemType = itemType
                 return f
             }
-            self.searchViewControllerHomeItemSelected(itemType, locationString: nil)
-            self.tabbarDidChangeMode(self.tabbar)
+            
+            let controller = Storyboards.Main.instantiateExploreViewControllerId()
+            controller.childFilterUpdate = filterUpdate
+            controller.title = itemType.displayString()
+            self.navigationController?.pushViewController(controller, animated: true)
         case .Donate:
             self.navigationController?.pushViewController(Storyboards.Onboarding.instantiateDonateViewController(), animated: true)
         case .Ambulance:

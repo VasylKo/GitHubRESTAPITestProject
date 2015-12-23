@@ -102,7 +102,7 @@ enum HomeItem: Int, CustomDebugStringConvertible {
         case .Volunteer:
             return "/v1.0/search"
         case .Unknown:
-            fallthrough
+            return "/v1.0/search"
         default:
             return nil
         }

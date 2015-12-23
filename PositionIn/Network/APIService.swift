@@ -383,6 +383,7 @@ struct APIService {
 
         return session().flatMap {
             (token: AuthResponse.Token) -> Future<CollectionResponse<FeedItem>, NSError> in
+            //TODO: fix endp
             var endp = ""
             if let endpoint = endpoint {
                 endp = endpoint

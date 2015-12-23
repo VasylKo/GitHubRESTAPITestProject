@@ -429,6 +429,14 @@
             </objects>
             <point key="canvasLocation" x="3423" y="-1538"/>
         </scene>
+        <!--Explore View Controller-->
+        <scene sceneID="ABc-sq-kRO">
+            <objects>
+                <viewController storyboardIdentifier="ExploreViewControllerId" id="Mdd-1h-KyO" customClass="ExploreViewController" customModule="PositionIn" customModuleProvider="target" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7dm-E9-bhC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4159" y="-1544"/>
+        </scene>
         <!--Browse List View Controller-->
         <scene sceneID="Jyj-3J-o7D">
             <objects>
@@ -442,7 +450,7 @@
             <objects>
                 <tableViewController id="9PQ-zJ-hEA" customClass="OrderViewController" customModule="PositionIn" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="wKe-Ah-frR">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -1221,8 +1229,8 @@
         <image name="productClockAvailability" width="22" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="jVg-bh-JyA"/>
         <segue reference="sID-M8-MPA"/>
-        <segue reference="WXU-OU-n2l"/>
+        <segue reference="jVg-bh-JyA"/>
+        <segue reference="UGm-BP-OPQ"/>
     </inferredMetricsTieBreakers>
 </document>
