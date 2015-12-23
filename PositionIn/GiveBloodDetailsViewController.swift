@@ -146,7 +146,21 @@ extension GiveBloodDetailsViewController {
 
 extension GiveBloodDetailsViewController: GiveBloodDetailsActionConsumer {
     func executeAction(action: GiveBloodDetailsAction) {
-        
+        let segue: GiveBloodDetailsViewController.Segue
+        switch action {
+        case .SellerProfile:
+            segue = .ShowOrganizerProfile
+        case .SendMessage:
+            if let userId = author?.objectId {
+                showChatViewController(userId)
+            }
+            return
+        case .Buy:
+            segue = .ShowOrganizerProfile
+        case .ProductInventory:
+            return
+        }
+        performSegue(segue)
     }
 }
 

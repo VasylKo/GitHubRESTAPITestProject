@@ -80,6 +80,14 @@
                     <constraint firstItem="umJ-2H-3yl" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="eru-hs-T4b"/>
                 </constraints>
             </tableViewCellContentView>
+            <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+            <connections>
+                <outlet property="detailsLabel" destination="bIW-j8-Ivy" id="rjY-c5-QBV"/>
+                <outlet property="feedItemImageView" destination="0pT-aB-HBT" id="RKk-2B-J5U"/>
+                <outlet property="feedItemLogoImageView" destination="CAJ-3z-s5t" id="OCi-gr-gNC"/>
+                <outlet property="headerLabel" destination="ekZ-BY-Ygt" id="DV9-NB-eog"/>
+                <outlet property="infoLabel" destination="sWQ-1j-zOn" id="JSr-n4-B6h"/>
+            </connections>
             <point key="canvasLocation" x="215" y="321"/>
         </tableViewCell>
     </objects>

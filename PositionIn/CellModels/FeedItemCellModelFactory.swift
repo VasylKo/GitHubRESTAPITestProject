@@ -52,7 +52,7 @@ struct FeedItemCellModelFactory {
         }
     }
     
-    func compactCellReuseIdForModel(model: TableViewCellModel) -> String {
+    func compactCellReuseIdForModel(model: TableViewCellModel, showCardCells: Bool) -> String {
         if let model = model as? CompactFeedTableCellModel {
             switch model.itemType {
             case .News:
@@ -72,7 +72,7 @@ struct FeedItemCellModelFactory {
             case .Emergency:
                 fallthrough
             case .Training:
-                return EventListCell.reuseId()
+                return showCardCells ? ExploreCardCell.reuseId() : EventListCell.reuseId()
             default:
                 break
             }
@@ -81,7 +81,7 @@ struct FeedItemCellModelFactory {
     }
     
     func compactCellsReuseId() -> [String]  {
-        return [EventListCell.reuseId(), PostListCell.reuseId()]
+        return [EventListCell.reuseId(), PostListCell.reuseId(), ExploreCardCell.reuseId()]
     }
     
     func detailedModelsForItem(feedItem: FeedItem) -> [TableViewCellModel] {
@@ -95,11 +95,11 @@ struct FeedItemCellModelFactory {
     }
     
     func detailCellReuseIdForModel(model: TableViewCellModel) -> String {
-        return TableViewCell.reuseId()
+        return ExploreCardCell.reuseId()
     }
 
     func detailedCellsReuseId() -> [String]  {
-        return []
+        return [ExploreCardCell.reuseId()]
     }
     
     func walletModelsForItem(feedItem: FeedItem) -> [TableViewCellModel] {

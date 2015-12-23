@@ -95,13 +95,14 @@ final class MarketDetailsViewController: UIViewController {
     private func productAcionItems() -> [[MarketActionItem]] {
         return [
             [ // 0 section
-                MarketActionItem(title: NSLocalizedString("Donate", comment: "Donate: Market"),
+                MarketActionItem(title: NSLocalizedString("Buy Product", comment: "Buy: Market"),
                     image: "home_donate",
                     action: .Buy),
             ],
             [ // 1 section
                 MarketActionItem(title: NSLocalizedString("Send Message", comment: "Market"), image: "productSendMessage", action: .SendMessage),
                 MarketActionItem(title: NSLocalizedString("Organizer Profile", comment: "Market"), image: "productSellerProfile", action: .SellerProfile),
+                MarketActionItem(title: NSLocalizedString("Navigate", comment: "Market"), image: "productNavigate", action: .ProductInventory),
                 MarketActionItem(title: NSLocalizedString("More Information", comment: "Market"), image: "productTerms&Info", action: .ProductInventory),
             ],
         ]
@@ -120,7 +121,7 @@ final class MarketDetailsViewController: UIViewController {
 
 extension MarketDetailsViewController {
     enum MarketDetailsAction: CustomStringConvertible {
-        case Buy, ProductInventory, SellerProfile, SendMessage
+        case Buy, ProductInventory, SellerProfile, SendMessage, Navigate
         
         var description: String {
             switch self {
@@ -132,6 +133,8 @@ extension MarketDetailsViewController {
                 return "Seller profile"
             case .SendMessage:
                 return "Send message"
+            case .Navigate:
+                return "Navigate"
             }
         }
     }

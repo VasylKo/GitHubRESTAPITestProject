@@ -66,6 +66,7 @@ protocol BrowseModeDisplay {
             case .List:
                 let listController = Storyboards.Main.instantiateBrowseListViewController()
                 listController.hideSeparatorLinesNearSegmentedControl = true
+                listController.showCardCells = true
                 return listController
             }
         }

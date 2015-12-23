@@ -450,7 +450,7 @@
             <objects>
                 <tableViewController id="9PQ-zJ-hEA" customClass="OrderViewController" customModule="PositionIn" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="wKe-Ah-frR">
-                        <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -758,7 +758,11 @@
         <!--Emergency Details Controller-->
         <scene sceneID="NOv-N2-LSz">
             <objects>
-                <viewController storyboardIdentifier="EmergencyDetailsControllerId" id="n7w-Q7-rLq" customClass="EmergencyDetailsController" customModule="PositionIn" customModuleProvider="target" sceneMemberID="viewController"/>
+                <viewController storyboardIdentifier="EmergencyDetailsControllerId" id="n7w-Q7-rLq" customClass="EmergencyDetailsController" customModule="PositionIn" customModuleProvider="target" sceneMemberID="viewController">
+                    <connections>
+                        <segue destination="2Iu-6t-chL" kind="show" identifier="ShowOrganizerProfile" id="IN2-9C-ZzA"/>
+                    </connections>
+                </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="miU-oS-y7b" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4417" y="641"/>
@@ -766,7 +770,11 @@
         <!--Volunteer Details View Controller-->
         <scene sceneID="lhE-Ur-5NC">
             <objects>
-                <viewController storyboardIdentifier="VolunteerDetailsViewControllerId" id="fxT-f9-lqb" customClass="VolunteerDetailsViewController" customModule="PositionIn" customModuleProvider="target" sceneMemberID="viewController"/>
+                <viewController storyboardIdentifier="VolunteerDetailsViewControllerId" id="fxT-f9-lqb" customClass="VolunteerDetailsViewController" customModule="PositionIn" customModuleProvider="target" sceneMemberID="viewController">
+                    <connections>
+                        <segue destination="2Iu-6t-chL" kind="show" identifier="ShowOrganizerProfile" id="sAe-ix-Qfw"/>
+                    </connections>
+                </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EoD-kD-VVM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4379" y="1499"/>
@@ -774,7 +782,11 @@
         <!--Give Blood Details View Controller-->
         <scene sceneID="rof-Fp-RwV">
             <objects>
-                <viewController storyboardIdentifier="GiveBloodDetailsViewControllerId" id="rPY-3D-5GQ" customClass="GiveBloodDetailsViewController" customModule="PositionIn" customModuleProvider="target" sceneMemberID="viewController"/>
+                <viewController storyboardIdentifier="GiveBloodDetailsViewControllerId" id="rPY-3D-5GQ" customClass="GiveBloodDetailsViewController" customModule="PositionIn" customModuleProvider="target" sceneMemberID="viewController">
+                    <connections>
+                        <segue destination="2Iu-6t-chL" kind="show" identifier="ShowOrganizerProfile" id="BWc-h1-rTN"/>
+                    </connections>
+                </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xmN-JA-F9a" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="5481" y="-67"/>
@@ -782,15 +794,23 @@
         <!--Market Details View Controller-->
         <scene sceneID="gbE-i6-ukP">
             <objects>
-                <viewController storyboardIdentifier="MarketDetailsViewControllerId" id="xkp-77-qzE" customClass="MarketDetailsViewController" customModule="PositionIn" customModuleProvider="target" sceneMemberID="viewController"/>
+                <viewController storyboardIdentifier="MarketDetailsViewControllerId" id="xkp-77-qzE" customClass="MarketDetailsViewController" customModule="PositionIn" customModuleProvider="target" sceneMemberID="viewController">
+                    <connections>
+                        <segue destination="2Iu-6t-chL" kind="show" identifier="ShowOrganizerProfile" id="1fL-aw-xyq"/>
+                    </connections>
+                </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tkC-Ej-yUa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5493" y="657"/>
+            <point key="canvasLocation" x="6269" y="893"/>
         </scene>
         <!--Boma Hotels Details View Controller-->
         <scene sceneID="Z2Y-B0-mKm">
             <objects>
-                <viewController storyboardIdentifier="BomaHotelsDetailsViewControllerId" id="oTO-lU-rJE" customClass="BomaHotelsDetailsViewController" customModule="PositionIn" customModuleProvider="target" sceneMemberID="viewController"/>
+                <viewController storyboardIdentifier="BomaHotelsDetailsViewControllerId" id="oTO-lU-rJE" customClass="BomaHotelsDetailsViewController" customModule="PositionIn" customModuleProvider="target" sceneMemberID="viewController">
+                    <connections>
+                        <segue destination="2Iu-6t-chL" kind="show" identifier="ShowOrganizerProfile" id="IMW-fh-O1m"/>
+                    </connections>
+                </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0U6-4H-i4F" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="5465" y="1529"/>
@@ -830,7 +850,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Se8-GM-xNb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4851" y="-481"/>
+            <point key="canvasLocation" x="4927" y="-816"/>
         </scene>
         <!--Post-->
         <scene sceneID="jbP-64-jST">
@@ -1030,7 +1050,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mSi-Z8-bxF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2255" y="8"/>
+            <point key="canvasLocation" x="5021" y="2788"/>
         </scene>
         <!--My Profile Navigation Controller Scene-->
         <scene sceneID="3kT-1q-vQU">
@@ -1229,8 +1249,8 @@
         <image name="productClockAvailability" width="22" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="WXU-OU-n2l"/>
         <segue reference="sID-M8-MPA"/>
-        <segue reference="jVg-bh-JyA"/>
-        <segue reference="UGm-BP-OPQ"/>
+        <segue reference="BWc-h1-rTN"/>
     </inferredMetricsTieBreakers>
 </document>

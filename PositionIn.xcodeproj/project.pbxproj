@@ -74,7 +74,7 @@
 		D118A2AD1C0FBDF50020B363 /* CardItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D118A2AC1C0FBDF50020B363 /* CardItem.swift */; };
 		D12EDEC71BFF4F0D00FB6245 /* PhoneVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D12EDEC61BFF4F0D00FB6245 /* PhoneVerificationViewController.swift */; };
 		D1379E8D1C2A98710041AA4E /* ExploreCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1379E8B1C2A98710041AA4E /* ExploreCardCell.swift */; };
-		D1379E8E1C2A98710041AA4E /* ExploreCardCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1379E8C1C2A98710041AA4E /* ExploreCardCell.xib */; };
+		D1379E8E1C2A98710041AA4E /* PositionIn.ExploreCardCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1379E8C1C2A98710041AA4E /* PositionIn.ExploreCardCell.xib */; };
 		D1379E901C2AC58F0041AA4E /* ExploreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1379E8F1C2AC58F0041AA4E /* ExploreViewController.swift */; };
 		D153AB841C11FA9B00DFB5C9 /* AmbulanceRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D153AB831C11FA9B00DFB5C9 /* AmbulanceRequest.swift */; };
 		D15F47441C088A26009ED3FD /* HomeItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15F47431C088A26009ED3FD /* HomeItem.swift */; };
@@ -547,7 +547,7 @@
 		D118A2AC1C0FBDF50020B363 /* CardItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardItem.swift; sourceTree = "<group>"; };
 		D12EDEC61BFF4F0D00FB6245 /* PhoneVerificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhoneVerificationViewController.swift; sourceTree = "<group>"; };
 		D1379E8B1C2A98710041AA4E /* ExploreCardCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExploreCardCell.swift; sourceTree = "<group>"; };
-		D1379E8C1C2A98710041AA4E /* ExploreCardCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExploreCardCell.xib; sourceTree = "<group>"; };
+		D1379E8C1C2A98710041AA4E /* PositionIn.ExploreCardCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.ExploreCardCell.xib; sourceTree = "<group>"; };
 		D1379E8F1C2AC58F0041AA4E /* ExploreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExploreViewController.swift; sourceTree = "<group>"; };
 		D153AB831C11FA9B00DFB5C9 /* AmbulanceRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AmbulanceRequest.swift; sourceTree = "<group>"; };
 		D15F47431C088A26009ED3FD /* HomeItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeItem.swift; sourceTree = "<group>"; };
@@ -1239,7 +1239,7 @@
 			isa = PBXGroup;
 			children = (
 				D1379E8B1C2A98710041AA4E /* ExploreCardCell.swift */,
-				D1379E8C1C2A98710041AA4E /* ExploreCardCell.xib */,
+				D1379E8C1C2A98710041AA4E /* PositionIn.ExploreCardCell.xib */,
 			);
 			path = ExploreCardCell;
 			sourceTree = "<group>";
@@ -3334,7 +3334,7 @@
 				E6C9522E1BA1BB470032254F /* PositionIn.PeopleListCell.xib in Resources */,
 				240A9B9C1B9CCDA4007C77E3 /* PositionIn.CommunityStatsCell.xib in Resources */,
 				E66115871B7376F4003DB5B3 /* Login.storyboard in Resources */,
-				D1379E8E1C2A98710041AA4E /* ExploreCardCell.xib in Resources */,
+				D1379E8E1C2A98710041AA4E /* PositionIn.ExploreCardCell.xib in Resources */,
 				D118A2AB1C0FBC380020B363 /* PositionIn.CardTableViewCell.xib in Resources */,
 				D1DC3EB21C15B3CF00E6B772 /* PaymentTableViewCell.xib in Resources */,
 				D1FD85421C1EE8EA00C2E87B /* PositionIn.EventDetailsViewController.xib in Resources */,
