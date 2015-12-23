@@ -15,7 +15,6 @@ class ExploreViewController: DisplayModeViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.titleView = nil
-//        self.title = 
     }
     
     override func presentSearchViewController(filter: SearchFilter) {

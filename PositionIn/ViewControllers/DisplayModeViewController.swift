@@ -224,15 +224,6 @@ protocol BrowseActionConsumer: class {
         default:
             Log.debug?.message("Did select \(itemType)<\(objectId)>")
         }
-
-        //        case Training
-        //        case GiveBlood
-        //        case News
-        //        case Event
-        //        case Market
-        //        case BomaHotels
-        //        case Volunteer
-        
     }
     
     func browseControllerDidChangeContent(controller: BrowseActionProducer) {
