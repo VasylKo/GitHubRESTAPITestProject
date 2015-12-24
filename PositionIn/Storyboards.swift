@@ -61,8 +61,8 @@ struct Storyboards {
             return self.storyboard.instantiateViewControllerWithIdentifier("FiltersNavigationController") as! UINavigationController
         }
 
-        static func instantiateCreateConversationViewController() -> CreateConversationViewController {
-            return self.storyboard.instantiateViewControllerWithIdentifier("CreateConversationViewController") as! CreateConversationViewController
+        static func instantiateCreateConversationContainerViewController() -> CreateConversationContainerViewController {
+            return self.storyboard.instantiateViewControllerWithIdentifier("CreateConversationContainerViewController") as! CreateConversationContainerViewController
         }
 
         static func instantiateBrowseCommunityViewController() -> BrowseCommunityViewController {
@@ -187,6 +187,14 @@ struct Storyboards {
 
         static func instantiateWalletViewController() -> WalletViewController {
             return self.storyboard.instantiateViewControllerWithIdentifier("WalletViewController") as! WalletViewController
+        }
+
+        static func instantiateCreateCommunityConversationViewController() -> CreateCommunityConversationViewController {
+            return self.storyboard.instantiateViewControllerWithIdentifier("CreateCommunityConversationViewController") as! CreateCommunityConversationViewController
+        }
+
+        static func instantiateCreateUserConversationViewController() -> CreateUserConversationViewController {
+            return self.storyboard.instantiateViewControllerWithIdentifier("CreateUserConversationViewController") as! CreateUserConversationViewController
         }
     }
 
@@ -590,10 +598,10 @@ extension SidebarViewController {
 
 //MARK: - MessagesListViewController
 
-//MARK: - CreateConversationViewController
-extension CreateConversationViewController: IdentifiableProtocol { 
-    var identifier: String? { return "CreateConversationViewController" }
-    static var identifier: String? { return "CreateConversationViewController" }
+//MARK: - CreateConversationContainerViewController
+extension CreateConversationContainerViewController: IdentifiableProtocol { 
+    var identifier: String? { return "CreateConversationContainerViewController" }
+    static var identifier: String? { return "CreateConversationContainerViewController" }
 }
 
 
@@ -1226,6 +1234,22 @@ extension WalletViewController: IdentifiableProtocol {
     static var identifier: String? { return "WalletViewController" }
 }
 
+
+//MARK: - CreateCommunityConversationViewController
+extension CreateCommunityConversationViewController: IdentifiableProtocol { 
+    var identifier: String? { return "CreateCommunityConversationViewController" }
+    static var identifier: String? { return "CreateCommunityConversationViewController" }
+}
+
+
+//MARK: - CreateUserConversationViewController
+extension CreateUserConversationViewController: IdentifiableProtocol { 
+    var identifier: String? { return "CreateUserConversationViewController" }
+    static var identifier: String? { return "CreateUserConversationViewController" }
+}
+
+
+//MARK: - CreateConversationViewController
 
 //MARK: - LoginSignupViewController
 extension UIStoryboardSegue {
