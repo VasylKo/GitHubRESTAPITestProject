@@ -221,18 +221,14 @@ protocol BrowseActionConsumer: class {
             let controller = Storyboards.Main.instantiatePostViewController()
             controller.objectId = objectId
             navigationController?.pushViewController(controller, animated: true)
+        case .Event:
+            trackGoogleAnalyticsEvent("Main", action: "Click", label: "Post")
+            let controller = Storyboards.Main.instantiateEventDetailsViewControllerId()
+            controller.objectId = objectId
+            navigationController?.pushViewController(controller, animated: true)
         default:
             Log.debug?.message("Did select \(itemType)<\(objectId)>")
         }
-
-        //        case Training
-        //        case GiveBlood
-        //        case News
-        //        case Event
-        //        case Market
-        //        case BomaHotels
-        //        case Volunteer
-        
     }
     
     func browseControllerDidChangeContent(controller: BrowseActionProducer) {

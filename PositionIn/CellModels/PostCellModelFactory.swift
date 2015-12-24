@@ -23,19 +23,19 @@ struct PostCellModelFactory {
         let date: String? = post.date.map { dateFormatter.stringFromDate($0) }
         firstSection.append(PostInfoModel(firstLine: post.author?.title, secondLine: date, imageUrl: post.author?.avatar, userId: post.author?.objectId))
         firstSection.append(TableViewCellTextModel(title: post.name ?? ""))
-        Log.verbose?.value(post.likes!)
-        Log.verbose?.value(post.comments!)
-        firstSection.append(PostLikesCountModel(likes: post.likes!, comments: post.comments!.count, actionConsumer: actionConsumer))
+        
+        Log.verbose?.value(post.likes)
+        Log.verbose?.value(post.comments)
+        firstSection.append(PostLikesCountModel(likes: post.likes, comments: post.comments.count, actionConsumer: actionConsumer))
         models.append(firstSection)
         
         var secondSection: [TableViewCellModel] = []
         
-        if let comments = post.comments {
-            for comment: Comment in comments {
-                let dateString = dateFormatter.stringFromDate(comment.date ?? NSDate())
-                secondSection.append(PostCommentCellModel(userId: comment.author!.objectId, name: comment.author!.title, comment: comment.text, date:dateString, imageUrl: comment.author!.avatar))
-            }
+        for comment: Comment in post.comments {
+            let dateString = dateFormatter.stringFromDate(comment.date ?? NSDate())
+            secondSection.append(PostCommentCellModel(userId: comment.author!.objectId, name: comment.author!.title, comment: comment.text, date:dateString, imageUrl: comment.author!.avatar))
         }
+        
         models.append(secondSection)
         return models
     }

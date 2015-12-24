@@ -15,7 +15,6 @@ class ExploreViewController: DisplayModeViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.titleView = nil
-//        self.title = 
     }
     
     override func presentSearchViewController(filter: SearchFilter) {
@@ -41,8 +40,9 @@ class ExploreViewController: DisplayModeViewController {
             case .List:
                 let listController = Storyboards.Main.instantiateBrowseListViewController()
                 listController.hideSeparatorLinesNearSegmentedControl = true
+                listController.showCardCells = false
+                
                 return listController
         }
     }
-    
 }

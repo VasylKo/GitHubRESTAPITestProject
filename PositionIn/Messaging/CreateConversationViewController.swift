@@ -1,4 +1,4 @@
-//
+                                                                                                                                                                        //
 //  CreateConversationViewController.swift
 //  PositionIn
 //
@@ -14,46 +14,30 @@ protocol CreateConversationActionConsumer {
 }
 
 
-final class CreateConversationViewController: BesideMenuViewController {
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        dataSource.configureTable(tableView)
-        reloadData()
+class CreateConversationViewController: BesideMenuViewController {
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
     }
     
     func reloadData() {
-        api().getMySubscriptions().onSuccess { [weak self] response in
-            if let userList = response.items {
-                Log.debug?.value(userList)
-                self?.dataSource.setUserList(userList)
-                self?.tableView.reloadData()
-            }
-        }
+        fatalError("Abstract method – subclasses must implement \(__FUNCTION__).")
     }
 
-    @IBOutlet private weak var tableView: TableView!    
+//    @IBOutlet weak var tableView: TableView!
     
-    private lazy var dataSource: CreateConversationDataSource = { [unowned self] in
+    lazy var dataSource: CreateConversationDataSource = { [unowned self] in
         let dataSource = CreateConversationDataSource()
         dataSource.parentViewController = self
         return dataSource
         }()
 
     
-    final class CreateConversationDataSource: TableViewDataSource {
+    class CreateConversationDataSource: TableViewDataSource {
         private var items: [UserInfoTableViewCellModel] = []
         
-        
-        func setUserList(users: [UserInfo]) {
-            let peoples = users.map { UserInfoTableViewCellModel(userInfo: $0) }
-            let communities = ConversationManager.sharedInstance().hiddenGroupConversations().map { c  -> UserInfoTableViewCellModel in
-                let userInfo = UserInfo(objectId: c.roomId)
-                userInfo.title = c.name
-                userInfo.isCommunity = true
-                userInfo.avatar = c.imageURL
-                return UserInfoTableViewCellModel(userInfo: userInfo)
-            }
-            items = peoples + communities
+        func setUserList(users: [UserInfoTableViewCellModel]) {
+            items = users
         }
         
         override func configureTable(tableView: UITableView) {

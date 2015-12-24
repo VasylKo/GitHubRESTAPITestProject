@@ -14,6 +14,7 @@ import BrightFutures
 final class BrowseListViewController: UIViewController, BrowseActionProducer, BrowseModeDisplay, UpdateFilterProtocol {
     var excludeCommunityItems = false
     var shoWCompactCells: Bool = true
+    var showCardCells: Bool = false
     private var dataRequestToken = InvalidationToken()
 
     var browseMode: BrowseModeTabbarViewController.BrowseMode = .ForYou {
@@ -35,6 +36,7 @@ final class BrowseListViewController: UIViewController, BrowseActionProducer, Br
         dataSource.configureTable(tableView)
         selectedItemType = .Unknown
         
+        self.tableView.separatorStyle = self.showCardCells ? .None : .SingleLine
         self.topSeparatorLine.hidden = hideSeparatorLinesNearSegmentedControl
         self.bottomSeparatorLine.hidden = hideSeparatorLinesNearSegmentedControl
     }
@@ -43,6 +45,16 @@ final class BrowseListViewController: UIViewController, BrowseActionProducer, Br
         super.viewWillLayoutSubviews()
         self.topSeparatorHeightConstraint.constant = 1 / UIScreen.mainScreen().scale
         self.bottomSeparatorHeightConstraint.constant = 1 / UIScreen.mainScreen().scale
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+
+        //TODO: hot fix for distance 
+        let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(1 * Double(NSEC_PER_SEC)))
+        dispatch_after(delayTime, dispatch_get_main_queue()) { [weak self] in
+            self?.tableView.reloadData()
+        }
     }
         
     var filter = SearchFilter.currentFilter {
@@ -133,7 +145,8 @@ final class BrowseListViewController: UIViewController, BrowseActionProducer, Br
     @IBOutlet weak var bottomSeparatorHeightConstraint: NSLayoutConstraint!
     
     private lazy var dataSource: FeedItemDatasource = { [unowned self] in
-        let dataSource = FeedItemDatasource(shouldShowDetailedCells: self.shoWCompactCells)
+        let dataSource = FeedItemDatasource(shouldShowDetailedCells: self.shoWCompactCells,
+            showCardCells: self.showCardCells)
         dataSource.parentViewController = self
         return dataSource
         }()
@@ -147,8 +160,9 @@ final class BrowseListViewController: UIViewController, BrowseActionProducer, Br
 extension BrowseListViewController {
     internal class FeedItemDatasource: TableViewDataSource {
         
-        init(shouldShowDetailedCells detailed: Bool) {
+        init(shouldShowDetailedCells detailed: Bool, showCardCells: Bool) {
             showCompactCells = detailed
+            self.showCardCells = showCardCells
         }
                 
         override func configureTable(tableView: UITableView) {
@@ -170,7 +184,7 @@ extension BrowseListViewController {
         
         @objc override func tableView(tableView: UITableView, reuseIdentifierForIndexPath indexPath: NSIndexPath) -> String {
             let model = self.tableView(tableView, modelForIndexPath: indexPath)
-            return showCompactCells ? modelFactory.compactCellReuseIdForModel(model) : modelFactory.detailCellReuseIdForModel(model)
+            return showCompactCells ? modelFactory.compactCellReuseIdForModel(model, showCardCells: self.showCardCells) : modelFactory.detailCellReuseIdForModel(model)
         }
         
         override func nibCellsId() -> [String] {
@@ -204,9 +218,9 @@ extension BrowseListViewController {
         
         private var actionConsumer: BrowseActionConsumer? {
             return (parentViewController as? BrowseActionProducer).flatMap { $0.actionConsumer }
-
         }
-        
+
+        let showCardCells: Bool
         let showCompactCells: Bool
         private var models: [[TableViewCellModel]] = []
         private let modelFactory = FeedItemCellModelFactory()

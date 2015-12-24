@@ -420,10 +420,10 @@ struct APIService {
         let endpont = HomeItem.Market.endpoint(objectId)
         return self.getOne(endpont!)
     }
-    
-    func getVolunteerDetails(objectId: CRUDObjectId) -> Future<Product, NSError> {
-        let endpont = HomeItem.Volunteer.endpoint(objectId)
-        return self.getOne(endpont!)
+
+    func getVolunteerDetails(objectId: CRUDObjectId) -> Future<Event, NSError> {
+        let endpoint = HomeItem.Volunteer.endpoint(objectId)
+        return getObject(endpoint!)
     }
     
     func getTrainingDetails(objectId: CRUDObjectId) -> Future<Product, NSError> {

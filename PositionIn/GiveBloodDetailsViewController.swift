@@ -51,6 +51,7 @@ class GiveBloodDetailsViewController: UIViewController {
     private func didReceiveProductDetails(product: Product) {
         self.product = product
         headerLabel.text = product.name
+        nameLabel.text = author?.title
         detailsLabel.text = product.text?.stringByReplacingOccurrencesOfString("\\n", withString: "\n")
         if let price = product.donations {
             priceLabel.text = "\(Int(price)) beneficiaries"
@@ -146,7 +147,21 @@ extension GiveBloodDetailsViewController {
 
 extension GiveBloodDetailsViewController: GiveBloodDetailsActionConsumer {
     func executeAction(action: GiveBloodDetailsAction) {
-        
+        let segue: GiveBloodDetailsViewController.Segue
+        switch action {
+        case .SellerProfile:
+            return
+        case .SendMessage:
+            if let userId = author?.objectId {
+                showChatViewController(userId)
+            }
+            return
+        case .Buy:
+            return
+        case .ProductInventory:
+            segue = .ShowOrganizerProfile
+        }
+        performSegue(segue)
     }
 }
 

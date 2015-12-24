@@ -43,10 +43,21 @@ final class EventDetailsViewController: UIViewController {
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
         
+        let imageURL: NSURL?
+        
+        if let urlString = event.imageURLString {
+            imageURL = NSURL(string:urlString)
+        } else {
+            imageURL = nil
+        }
+        
+        let image = UIImage(named: "hardware_img_default")
+        
         let startDate = dateFormatter.stringFromDate(event.startDate ?? NSDate())
         let endDate = dateFormatter.stringFromDate(event.endDate ?? NSDate())
         priceLabel.text = "\(startDate) - \(endDate)"
-        eventImageView.setImageFromURL(event.photos?.first?.url, placeholder: UIImage(named: "eventDetailsPlaceholder"))
+//        eventImageView.setImageFromURL(event.photos?.first?.url, placeholder: UIImage(named: "eventDetailsPlaceholder"))
+        eventImageView.setImageFromURL(imageURL, placeholder: image)
         
     }
     
@@ -63,14 +74,10 @@ final class EventDetailsViewController: UIViewController {
                 EventActionItem(title: NSLocalizedString("Attend", comment: "Event action: Attend"), image: "eventAttend", action: .Attend),
             ],
             [ // 1 section
-                EventActionItem(title: NSLocalizedString("Products on Sale", comment: "Event action: Products on Sale"), image: "productBuyProduct", action: .ProductsOnSale),
                 EventActionItem(title: NSLocalizedString("Send Message", comment: "Event action: Send Message"), image: "productSendMessage", action: .SendMessage),
                 EventActionItem(title: NSLocalizedString("Organizer Profile", comment: "Event action: Organizer Profile"), image: "productSellerProfile", action: .OrganizerProfile),
-                EventActionItem(title: NSLocalizedString("Share", comment: "Event action: Share"), image: "eventShare", action: .Share),
-                EventActionItem(title: NSLocalizedString("Terms and Information", comment: "Event action: Terms and Information"), image: "productTerms&Info", action: .TermsAndInformation),
+                EventActionItem(title: NSLocalizedString("More Information", comment: "Event action: Terms and Information"), image: "productTerms&Info", action: .TermsAndInformation),
                 EventActionItem(title: NSLocalizedString("Navigate", comment: "Event action: Navigate"), image: "productNavigate", action: .Navigate)
-                
-                
             ],
         ]
         
@@ -91,20 +98,16 @@ final class EventDetailsViewController: UIViewController {
 
 extension EventDetailsViewController {
     enum EventDetailsAction: CustomStringConvertible {
-        case Attend, ProductsOnSale, SendMessage, OrganizerProfile, Share, TermsAndInformation, Navigate
+        case Attend, SendMessage, OrganizerProfile, TermsAndInformation, Navigate
         
         var description: String {
             switch self {
             case .Attend:
                 return "Attend"
-            case .ProductsOnSale:
-                return "Products on Sale"
             case .SendMessage:
                 return "Send Message"
             case .OrganizerProfile:
                 return "Organizer Profile"
-            case .Share:
-                return "Share"
             case .TermsAndInformation:
                 return "Terms & Information"
             case .Navigate:

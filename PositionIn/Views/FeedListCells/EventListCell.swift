@@ -20,6 +20,8 @@ final class EventListCell: TableViewCell {
         let m = model as? CompactFeedTableCellModel
         assert(m != nil, "Invalid model passed")
 
+        //todo: need update images
+        
         switch m!.itemType {
         case .Emergency:
             productImage.setImageFromURL(m!.imageURL, placeholder: UIImage(named: "placeholderEvent"))
@@ -32,13 +34,13 @@ final class EventListCell: TableViewCell {
         case .Market:
             productImage.setImageFromURL(m!.imageURL, placeholder: UIImage(named: "placeholderEvent"))
         case .BomaHotels:
-            productImage.setImageFromURL(m!.imageURL, placeholder: UIImage(named: "placeholderEvent"))
+            productImage.setImageFromURL(m!.imageURL, placeholder: UIImage(named: "bomaHotelPlaceholder"))
         case .Project:
             productImage.setImageFromURL(m!.imageURL, placeholder: UIImage(named: "placeholderEvent"))
         case .Event:
-            fallthrough
+            productImage.setImageFromURL(m!.imageURL, placeholder: UIImage(named: "placeholderEvent"))
         case .News:
-            fallthrough
+            productImage.setImageFromURL(m!.imageURL, placeholder: UIImage(named: "placeholderEvent"))
         case .Unknown:
             break
         }

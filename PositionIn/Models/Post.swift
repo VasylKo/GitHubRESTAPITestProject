@@ -16,10 +16,10 @@ struct Post: CRUDObject {
     var photos: [PhotoInfo]?
     var location: Location?
     
-    var likes: Int?
+    var likes: Int = 0
     var isLiked: Bool = false
     var author: UserInfo?
-    var comments: [Comment]?
+    var comments: [Comment] = []
     var date: NSDate?
     
     init(objectId: CRUDObjectId = CRUDObjectInvalidId) {

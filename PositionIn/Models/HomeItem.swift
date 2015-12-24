@@ -10,12 +10,11 @@ import Foundation
 
 enum HomeItem: Int, CustomDebugStringConvertible {
     case Unknown = 0
-    case Projects, Emergency, Training, GiveBlood, Volunteer, BomaHotels, Events, News, Market, Ambulance, Membership, Donate
+    case Projects, Emergency, Training, GiveBlood, Volunteer, BomaHotels, Events, Market = 9, News, Ambulance, Membership, Donate
     
     static var count: Int {
         return 12
     }
-    
     
     static func homeItemForUI(value: Int) -> HomeItem {
         switch value {
