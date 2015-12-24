@@ -110,14 +110,24 @@ class ChatConversationStorageObject: Object {
     dynamic var lastActivityDate: NSDate = NSDate()
     dynamic var unreadCount: Int64 = 0
     dynamic var roomId: String = CRUDObjectInvalidId
-    dynamic var isGroupChat: Bool = false
+    
+    var isGroupChat: Bool  {
+        get {
+            return _isGroupChat == 1
+        }
+        set {
+            _isGroupChat = newValue ? 1 : 0
+        }
+    }
+    
+    dynamic var _isGroupChat: Int = 0
 
     override static func primaryKey() -> String? {
         return "roomId"
     }
     
     override static func indexedProperties() -> [String] {
-        return ["isGroupChat", "lastActivityDate"]
+        return ["_isGroupChat"]
     }
     
     convenience required init(source: Conversation) {
@@ -128,6 +138,10 @@ class ChatConversationStorageObject: Object {
         self.imageURL = source.imageURL?.absoluteString
         self.lastActivityDate = source.lastActivityDate
         self.unreadCount = Int64(source.unreadCount)
-    }    
+    }
+    
+    override static func ignoredProperties() -> [String] {
+        return ["isGroupChat"]
+    }
     
 }

@@ -137,6 +137,8 @@
 		E61B20D51B7DD47C005EAB2C /* FeedItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61B20D41B7DD47C005EAB2C /* FeedItem.swift */; };
 		E61B20D81B7E0838005EAB2C /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61B20D71B7E0838005EAB2C /* SettingsViewController.swift */; };
 		E61B20EF1B813C8C005EAB2C /* Community.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61B20EE1B813C8C005EAB2C /* Community.swift */; };
+		E625F0BC1C2C43F600142F1E /* XMPPFetchChatListProcess.h in Headers */ = {isa = PBXBuildFile; fileRef = E625F0BA1C2C43F600142F1E /* XMPPFetchChatListProcess.h */; };
+		E625F0BD1C2C43F600142F1E /* XMPPFetchChatListProcess.m in Sources */ = {isa = PBXBuildFile; fileRef = E625F0BB1C2C43F600142F1E /* XMPPFetchChatListProcess.m */; };
 		E62B16F51B5C1AA700D446BC /* PositionIn.MainMenuUserCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E62B16F31B5C1AA700D446BC /* PositionIn.MainMenuUserCell.xib */; };
 		E62B16F61B5C1AA700D446BC /* MainMenuUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E62B16F41B5C1AA700D446BC /* MainMenuUserCell.swift */; };
 		E62B16F81B5C6BBF00D446BC /* AvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E62B16F71B5C6BBF00D446BC /* AvatarView.swift */; };
@@ -612,6 +614,8 @@
 		E61B20D41B7DD47C005EAB2C /* FeedItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedItem.swift; sourceTree = "<group>"; };
 		E61B20D71B7E0838005EAB2C /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		E61B20EE1B813C8C005EAB2C /* Community.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Community.swift; sourceTree = "<group>"; };
+		E625F0BA1C2C43F600142F1E /* XMPPFetchChatListProcess.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPFetchChatListProcess.h; sourceTree = "<group>"; };
+		E625F0BB1C2C43F600142F1E /* XMPPFetchChatListProcess.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPFetchChatListProcess.m; sourceTree = "<group>"; };
 		E62B16F31B5C1AA700D446BC /* PositionIn.MainMenuUserCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.MainMenuUserCell.xib; sourceTree = "<group>"; };
 		E62B16F41B5C1AA700D446BC /* MainMenuUserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuUserCell.swift; sourceTree = "<group>"; };
 		E62B16F71B5C6BBF00D446BC /* AvatarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarView.swift; sourceTree = "<group>"; };
@@ -1838,6 +1842,8 @@
 				E6681A2D1B67A2DB003096D6 /* XMPPAuthProcess.m */,
 				E66945801B6E279E00332134 /* XMPPRegisterProcess.h */,
 				E66945811B6E279E00332134 /* XMPPRegisterProcess.m */,
+				E625F0BA1C2C43F600142F1E /* XMPPFetchChatListProcess.h */,
+				E625F0BB1C2C43F600142F1E /* XMPPFetchChatListProcess.m */,
 			);
 			path = Processes;
 			sourceTree = "<group>";
@@ -3090,6 +3096,7 @@
 				E689EF1B1B6A89D000597587 /* XMPPMessage.h in Headers */,
 				E689EF491B6A89D000597587 /* DDXML.h in Headers */,
 				E689EF081B6A89D000597587 /* XMPPCustomBinding.h in Headers */,
+				E625F0BC1C2C43F600142F1E /* XMPPFetchChatListProcess.h in Headers */,
 				E6846DBC1B6D9B4700009411 /* NSDate+XMPPDateTimeProfiles.h in Headers */,
 				E689EF331B6A89D000597587 /* GCDAsyncSocket.h in Headers */,
 				E689EF1D1B6A89D000597587 /* XMPPModule.h in Headers */,
@@ -3704,6 +3711,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E6846DC11B6D9B6500009411 /* NSString+XEP_0106.m in Sources */,
+				E625F0BD1C2C43F600142F1E /* XMPPFetchChatListProcess.m in Sources */,
 				E689EF341B6A89D000597587 /* GCDAsyncSocket.m in Sources */,
 				E689EF171B6A89D000597587 /* XMPPIQ.m in Sources */,
 				E66945831B6E279E00332134 /* XMPPRegisterProcess.m in Sources */,

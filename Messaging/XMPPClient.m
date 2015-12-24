@@ -17,6 +17,7 @@
 #import "XMPPProcess+Private.h"
 #import "XMPPAuthProcess.h"
 #import "XMPPRegisterProcess.h"
+#import "XMPPFetchChatListProcess.h"
 #import "XMPPCredentials.h"
 
 static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
@@ -52,6 +53,7 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
 @property (nonatomic, strong) XMPPDelegate *xmppDelegate;
 @property (nonatomic, strong) XMPPReconnect *xmppReconect;
 @property (nonatomic, strong) XMPPPing *xmppPing;
+
 
 @property (nonatomic, retain) NSMutableArray *messageListeners;
 
@@ -262,6 +264,14 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
     } else {
         XMPPLogWarn(@"Empty credentials");
     }
+}
+
+- (nonnull XMPPProcess *)fetchChatList {
+    NSString *const kChatServiceName = @"Public Chatrooms";
+    
+    XMPPFetchChatListProcess *process = [[XMPPFetchChatListProcess alloc] initWithStream:self.xmppStream queue:[XMPPProcess defaultProcessingQueue]];
+    process.serviceName = kChatServiceName;
+    return process;
 }
 
 - (nonnull XMPPProcess *)registerJid:(nonnull NSString *)jidString password:(nonnull  NSString *)password {

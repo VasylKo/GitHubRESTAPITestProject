@@ -217,6 +217,11 @@ extension ConversationManager: XMPPClientDelegate {
     }
     
     func chatClientDidAuthorize(client: XMPPClient) {
+        client.fetchChatList().future().onSuccess {
+            print("Done")
+        }.onFailure { error in
+            print(error)
+        }
         refresh()
     }
     

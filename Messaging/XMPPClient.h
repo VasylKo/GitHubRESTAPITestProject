@@ -21,6 +21,7 @@
 
 - (void)auth;
 - (nonnull XMPPProcess *)registerJid:(nonnull NSString *)jidString password:(nonnull  NSString *)password;
+- (nonnull XMPPProcess *)fetchChatList;
 
 - (void)sendTextMessage:(nonnull NSString *)text to:(nonnull NSString *)username groupChat:(BOOL)groupChat;
 
