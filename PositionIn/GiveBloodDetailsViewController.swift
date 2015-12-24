@@ -157,7 +157,7 @@ extension GiveBloodDetailsViewController: GiveBloodDetailsActionConsumer {
             }
             return
         case .Buy:
-            segue = .ShowOrganizerProfile
+            return
         case .ProductInventory:
             segue = .ShowOrganizerProfile
         }
