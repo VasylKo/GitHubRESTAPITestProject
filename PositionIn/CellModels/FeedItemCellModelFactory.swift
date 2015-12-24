@@ -56,8 +56,7 @@ struct FeedItemCellModelFactory {
         if let model = model as? CompactFeedTableCellModel {
             switch model.itemType {
             case .News:
-                return showCardCells ? NewsCardCell.reuseId()
-                    : NewsCardCell.reuseId()
+                return NewsCardCell.reuseId()
             case .GiveBlood:
                 fallthrough
             case .Event:
