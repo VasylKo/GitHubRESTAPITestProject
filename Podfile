@@ -16,7 +16,7 @@ target 'PositionIn' do
     pod 'JSQMessagesViewController', '~> 7.2'
     pod 'Google/Analytics'
     pod 'PosInCore', :path => 'PosInCore'
-    pod 'RealmSwift', '~> 0.96.2'
+    pod 'RealmSwift', '~> 0.97.0'
 
     pod 'Braintree', '~> 3.9'
     pod 'FBSDKCoreKit', '~> 4.7'
