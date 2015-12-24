@@ -45,6 +45,16 @@ final class BrowseListViewController: UIViewController, BrowseActionProducer, Br
         self.topSeparatorHeightConstraint.constant = 1 / UIScreen.mainScreen().scale
         self.bottomSeparatorHeightConstraint.constant = 1 / UIScreen.mainScreen().scale
     }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+
+        //TODO: hot fix for distance 
+        let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(1 * Double(NSEC_PER_SEC)))
+        dispatch_after(delayTime, dispatch_get_main_queue()) { [weak self] in
+            self?.tableView.reloadData()
+        }
+    }
         
     var filter = SearchFilter.currentFilter {
         didSet {
