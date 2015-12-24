@@ -16,13 +16,37 @@ class ExploreCardCell: TableViewCell {
         let m = model as? CompactFeedTableCellModel
         assert(m != nil, "Invalid model passed")
         
-//        feedItemImageView.setImageFromURL(m!.imageURL)
+        switch m!.itemType {
+        case .Emergency:
+            feedItemLogoImageView.image = UIImage(named: "home_emergencies")
+        case .GiveBlood:
+            feedItemLogoImageView.image = UIImage(named: "home_blood")
+        case .Training:
+            feedItemLogoImageView.image = UIImage(named: "home_training")
+        case .Volunteer:
+            feedItemLogoImageView.image = UIImage(named: "home_volunteer")
+        case .Market:
+            feedItemLogoImageView.image = UIImage(named: "home_market")
+        case .BomaHotels:
+            feedItemLogoImageView.image = UIImage(named: "home_hotel")
+        case .Project:
+            feedItemLogoImageView.image = UIImage(named: "home_projects")
+        case .Event:
+            feedItemLogoImageView.image = UIImage(named: "home_event")
+        case .News:
+            feedItemLogoImageView.image = UIImage(named: "home_news")
+        case .Unknown:
+            break
+        }
+        
+        feedItemImageView.setImageFromURL(m!.imageURL)
         
         headerLabel.text = m!.title
         infoLabel.text = m!.info
         detailsLabel.text = m!.details
     }
     
+    @IBOutlet private weak var imageHeightConstaint: NSLayoutConstraint!
     @IBOutlet private weak var feedItemImageView: UIImageView!
     @IBOutlet private weak var headerLabel: UILabel!
     @IBOutlet private weak var infoLabel: UILabel!
