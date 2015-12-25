@@ -37,7 +37,7 @@ class EmergencyDetailsController: UIViewController {
     
     private func reloadData() {
         self.infoLabel.text = NSLocalizedString("Calculating...", comment: "Distance calculation process")
-        //        nameLabel.text = author?.title
+
         switch (objectId, author) {
         case (.Some(let objectId), .Some(let author) ):
             api().getUserProfile(author.objectId).flatMap { (profile: UserProfile) -> Future<Product, NSError> in

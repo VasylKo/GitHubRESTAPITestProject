@@ -18,8 +18,11 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="umJ-2H-3yl">
                         <rect key="frame" x="8" y="8" width="304" height="165.5"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0pT-aB-HBT">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0pT-aB-HBT">
                                 <rect key="frame" x="0.0" y="0.0" width="304" height="80"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="80" id="pvo-Io-WHF"/>
+                                </constraints>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="CAJ-3z-s5t">
                                 <rect key="frame" x="8" y="88" width="40" height="40"/>
@@ -67,12 +70,13 @@
                             <constraint firstAttribute="trailing" secondItem="sWQ-1j-zOn" secondAttribute="trailing" constant="8" id="ytB-ir-E82"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadious">
+                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                 <integer key="value" value="3"/>
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </view>
                 </subviews>
+                <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
                 <constraints>
                     <constraint firstItem="umJ-2H-3yl" firstAttribute="bottom" secondItem="H2p-sc-9uM" secondAttribute="bottomMargin" id="1rO-uT-krj"/>
                     <constraint firstItem="umJ-2H-3yl" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="93S-YS-5xi"/>
@@ -86,6 +90,7 @@
                 <outlet property="feedItemImageView" destination="0pT-aB-HBT" id="RKk-2B-J5U"/>
                 <outlet property="feedItemLogoImageView" destination="CAJ-3z-s5t" id="OCi-gr-gNC"/>
                 <outlet property="headerLabel" destination="ekZ-BY-Ygt" id="DV9-NB-eog"/>
+                <outlet property="imageHeightConstaint" destination="pvo-Io-WHF" id="SEi-1b-eGr"/>
                 <outlet property="infoLabel" destination="sWQ-1j-zOn" id="JSr-n4-B6h"/>
             </connections>
             <point key="canvasLocation" x="215" y="321"/>

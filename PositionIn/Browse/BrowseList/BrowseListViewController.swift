@@ -36,6 +36,7 @@ final class BrowseListViewController: UIViewController, BrowseActionProducer, Br
         dataSource.configureTable(tableView)
         selectedItemType = .Unknown
         
+        self.tableView.separatorStyle = self.showCardCells ? .None : .SingleLine
         self.topSeparatorLine.hidden = hideSeparatorLinesNearSegmentedControl
         self.bottomSeparatorLine.hidden = hideSeparatorLinesNearSegmentedControl
     }

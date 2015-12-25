@@ -34,7 +34,7 @@ final class EventListCell: TableViewCell {
         case .Market:
             productImage.setImageFromURL(m!.imageURL, placeholder: UIImage(named: "placeholderEvent"))
         case .BomaHotels:
-            productImage.setImageFromURL(m!.imageURL, placeholder: UIImage(named: "placeholderEvent"))
+            productImage.setImageFromURL(m!.imageURL, placeholder: UIImage(named: "bomaHotelPlaceholder"))
         case .Project:
             productImage.setImageFromURL(m!.imageURL, placeholder: UIImage(named: "placeholderEvent"))
         case .Event:

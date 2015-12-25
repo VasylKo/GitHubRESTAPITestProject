@@ -53,9 +53,12 @@ final class MarketDetailsViewController: UIViewController {
         self.product = product
         headerLabel.text = product.name
         detailsLabel.text = product.text?.stringByReplacingOccurrencesOfString("\\n", withString: "\n")
-        if let price = product.donations {
-            priceLabel.text = "\(Int(price)) beneficiaries"
-        }
+        
+        nameLabel.text = author?.title
+        
+        priceLabel.text = product.price.map {
+            let newValue = $0 as Float
+            return AppConfiguration().currencyFormatter.stringFromNumber(NSNumber(float: newValue)) ?? ""}
         
         let imageURL: NSURL?
         
@@ -96,7 +99,7 @@ final class MarketDetailsViewController: UIViewController {
         return [
             [ // 0 section
                 MarketActionItem(title: NSLocalizedString("Buy Product", comment: "Buy: Market"),
-                    image: "home_donate",
+                    image: "productBuyProduct",
                     action: .Buy),
             ],
             [ // 1 section
@@ -149,7 +152,19 @@ extension MarketDetailsViewController {
 
 extension MarketDetailsViewController: MarketDetailsActionConsumer {
     func executeAction(action: MarketDetailsAction) {
-
+        let segue: BomaHotelsDetailsViewController.Segue
+        switch action {
+        case .SellerProfile:
+            segue = .ShowOrganizerProfile
+        case .SendMessage:
+            if let userId = author?.objectId {
+                showChatViewController(userId)
+            }
+            return
+        default:
+            return
+        }
+        performSegue(segue)
     }
 }
 

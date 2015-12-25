@@ -18,7 +18,8 @@ final class BomaHotelsDetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = NSLocalizedString("Boma Hotels", comment: "Project details: title")
+        title = NSLocalizedString("Boma Hotels",
+            comment: "Project details: title")
         dataSource.items = productAcionItems()
         dataSource.configureTable(actionTableView)
         reloadData()
@@ -35,7 +36,8 @@ final class BomaHotelsDetailsViewController: UIViewController {
     }
     
     private func reloadData() {
-        self.infoLabel.text = NSLocalizedString("Calculating...", comment: "Distance calculation process")
+        self.infoLabel.text = NSLocalizedString("Calculating...",
+            comment: "Distance calculation process")
         switch (objectId, author) {
         case (.Some(let objectId), .Some(let author) ):
             api().getUserProfile(author.objectId).flatMap { (profile: UserProfile) -> Future<Product, NSError> in
@@ -64,7 +66,7 @@ final class BomaHotelsDetailsViewController: UIViewController {
             imageURL = nil
         }
         
-        let image = UIImage(named: "hardware_img_default")
+        let image = UIImage(named: "bomaHotelPlaceholder")
         
         productImageView.setImageFromURL(imageURL, placeholder: image)
         if let coordinates = product.location?.coordinates {
@@ -95,7 +97,7 @@ final class BomaHotelsDetailsViewController: UIViewController {
         return [
             [ // 0 section
                 ProductActionItem(title: NSLocalizedString("Booking", comment: "BomaHotels"),
-                    image: "home_donate",
+                    image: "productBuyProduct",
                     action: .Buy),
             ],
             [ // 1 section
@@ -136,7 +138,6 @@ extension BomaHotelsDetailsViewController {
         }
     }
     
-    
     struct ProductActionItem {
         let title: String
         let image: String
@@ -146,7 +147,19 @@ extension BomaHotelsDetailsViewController {
 
 extension BomaHotelsDetailsViewController: BomaHotelsDetailsActionConsumer {
     func executeAction(action: BomaHotelsDetailsAction) {
-        //need implement
+        let segue: BomaHotelsDetailsViewController.Segue
+        switch action {
+        case .SellerProfile:
+            segue = .ShowOrganizerProfile
+        case .SendMessage:
+            if let userId = author?.objectId {
+                showChatViewController(userId)
+            }
+            return
+        default:
+            return
+        }
+        performSegue(segue)
     }
 }
 
@@ -191,7 +204,10 @@ extension BomaHotelsDetailsViewController {
         
         func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
             tableView.deselectRowAtIndexPath(indexPath, animated: true)
-            
+            let item = items[indexPath.section][indexPath.row]
+            if let actionConsumer = parentViewController as? BomaHotelsDetailsViewController {
+                actionConsumer.executeAction(item.action)
+            }
         }
     }
 }

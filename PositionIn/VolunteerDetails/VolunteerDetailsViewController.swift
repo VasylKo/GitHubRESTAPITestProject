@@ -12,16 +12,13 @@ class VolunteerDetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = NSLocalizedString("Voluteer", comment: "Volunteer")
+        title = NSLocalizedString("Volunteer", comment: "Volunteer")
         dataSource.items = productAcionItems()
         dataSource.configureTable(actionTableView)
         reloadData()
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let orderController = segue.destinationViewController  as? OrderViewController {
-            orderController.product = self.product
-        }
         if let profileController = segue.destinationViewController  as? UserProfileViewController,
             let userId = author?.objectId {
                 profileController.objectId = userId
@@ -32,26 +29,25 @@ class VolunteerDetailsViewController: UIViewController {
         self.infoLabel.text = NSLocalizedString("Calculating...", comment: "Distance calculation process")
         switch (objectId, author) {
         case (.Some(let objectId), .Some(let author) ):
-            api().getUserProfile(author.objectId).flatMap { (profile: UserProfile) -> Future<Product, NSError> in
+            api().getUserProfile(author.objectId).flatMap { (profile: UserProfile) -> Future<Event, NSError> in
                 return api().getVolunteerDetails(objectId)
-                }.onSuccess { [weak self] product in
-                    self?.didReceiveProductDetails(product)
+                }.onSuccess { [weak self] volunteer in
+                    self?.didReceiveDetails(volunteer)
             }
         default:
             Log.error?.message("Not enough data to load product")
         }
     }
     
-    private func didReceiveProductDetails(product: Product) {
+    private func didReceiveDetails(product: Event) {
         self.product = product
         headerLabel.text = product.name
         detailsLabel.text = product.text?.stringByReplacingOccurrencesOfString("\\n", withString: "\n")
-        if let price = product.donations {
-            priceLabel.text = "\(Int(price)) beneficiaries"
+        if let participants = product.participants {
+            priceLabel.text = "\(Int(participants)) beneficiaries"
         }
         
         let imageURL: NSURL?
-        
         if let urlString = product.imageURLString {
             imageURL = NSURL(string:urlString)
         } else {
@@ -75,7 +71,7 @@ class VolunteerDetailsViewController: UIViewController {
     var objectId: CRUDObjectId?
     var author: ObjectInfo?
     
-    private var product: Product?
+    private var product: Event?
     private var locationRequestToken = InvalidationToken()
     
     private lazy var dataSource: VolunteerDetailsDataSource = { [unowned self] in
@@ -89,8 +85,7 @@ class VolunteerDetailsViewController: UIViewController {
         return [
             [ // 0 section
                 VolunteerActionItem(title: NSLocalizedString("Volunteer", comment: "Volunteer"),
-                    //TODO: need add image
-                    image: "",
+                    image: "home_volunteer",
                     action: .Buy),
             ],
             [ // 1 section
@@ -151,7 +146,7 @@ extension VolunteerDetailsViewController: VolunteerDetailsActionConsumer {
             }
             return
         case .Buy:
-            segue = .ShowOrganizerProfile
+            return
         case .ProductInventory:
             return
         }
