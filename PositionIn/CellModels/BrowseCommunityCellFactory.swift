@@ -47,14 +47,14 @@ struct BrowseCommunityCellFactory {
         case .Invite, .Unknown:
             return [.Join]
         case .Owner:
-            return [.Browse, .Invite, .Edit]
+            return [.Browse, /*.Invite,*/ .Edit]
         case .Moderator:
-            return [.Browse, .Invite]
+            return [.Browse, /*.Invite*/]
         default:
             if community.isPrivate {
                 return [.Browse]
             } else {
-                return [.Browse, .Invite]
+                return [.Browse, /*.Invite*/]
             }
         }
         
