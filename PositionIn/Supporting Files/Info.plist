@@ -92,6 +92,8 @@
 	<string>Location is required to find out where you are</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Location is required to find out where you are</string>
+	<key>UILaunchStoryboardName</key>
+	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
 	<key>UIRequiredDeviceCapabilities</key>

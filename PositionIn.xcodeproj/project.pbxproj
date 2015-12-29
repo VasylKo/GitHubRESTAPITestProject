@@ -3537,7 +3537,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "$PROJECT_DIR/Carthage/Checkouts/CleanroomLogger/BuildControl/bin/stripCarthageFrameworks.sh -p iOS";
+			shellScript = "$PROJECT_DIR/Carthage/Checkouts/CleanroomLogger/BuildControl/bin/stripCarthageFrameworks.sh --platform iOS";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -4244,7 +4244,6 @@
 			baseConfigurationReference = 63CC26C8BE01B93DC180BE00 /* Pods-PositionIn.devdebug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -4331,7 +4330,6 @@
 			baseConfigurationReference = C5785CCFFE7238C562E6E52F /* Pods-PositionIn.devrelease.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Production IOS Push Services: com.positionin.dev01";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Production IOS Push Services: com.positionin.dev01";
@@ -4519,7 +4517,6 @@
 			baseConfigurationReference = A8CE39DC2C33792AC988FB6F /* Pods-PositionIn.stagingdebug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				ENABLE_BITCODE = NO;
@@ -4743,7 +4740,6 @@
 			baseConfigurationReference = ECC822B2432C22D1C85FFC57 /* Pods-PositionIn.stagingrelease.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Media Applications ltd";
@@ -4963,7 +4959,6 @@
 			baseConfigurationReference = 696019E5F5D5A8184C75D0A2 /* Pods-PositionIn.proddebug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				ENABLE_BITCODE = NO;
@@ -5186,7 +5181,6 @@
 			baseConfigurationReference = EBB4ADD19B63BD62828B753E /* Pods-PositionIn.prodrelease.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Media Applications ltd";
