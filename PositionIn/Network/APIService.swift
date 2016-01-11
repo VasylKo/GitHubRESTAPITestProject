@@ -228,7 +228,7 @@ struct APIService {
     //MARK: - Community -
     
     func getCommunities(page: Page) -> Future<CollectionResponse<Community>,NSError> {
-        let endpoint = Community.endpoint()
+        let endpoint = Community.endpointCommunities()
         let params = page.query
         return getObjectsCollection(endpoint, params: params)
     }
