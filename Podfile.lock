@@ -7,36 +7,19 @@ PODS:
     - Bolts/Tasks
   - Bolts/Tasks (1.5.0)
   - Box (2.0)
-  - Braintree (3.9.7):
-    - Braintree/API (= 3.9.7)
-    - Braintree/Coinbase (= 3.9.7)
-    - Braintree/Drop-In (= 3.9.7)
-    - Braintree/Payments (= 3.9.7)
-    - Braintree/PayPal (= 3.9.7)
-    - Braintree/UI (= 3.9.7)
-    - Braintree/Venmo (= 3.9.7)
-  - Braintree/API (3.9.7)
-  - Braintree/Coinbase (3.9.7):
-    - Braintree/API
-  - Braintree/Drop-In (3.9.7):
-    - Braintree/API
-    - Braintree/Coinbase
-    - Braintree/Payments
-    - Braintree/PayPal
-    - Braintree/UI
-    - Braintree/Venmo
-  - Braintree/Payments (3.9.7):
-    - Braintree/API
-    - Braintree/Coinbase
-    - Braintree/PayPal
-    - Braintree/Venmo
-  - Braintree/PayPal (3.9.7):
-    - Braintree/API
-    - Braintree/UI
-  - Braintree/UI (3.9.7):
-    - Braintree/API
-  - Braintree/Venmo (3.9.7):
-    - Braintree/API
+  - Braintree (4.1.2):
+    - Braintree/Card (= 4.1.2)
+    - Braintree/Core (= 4.1.2)
+    - Braintree/PayPal (= 4.1.2)
+    - Braintree/UI (= 4.1.2)
+  - Braintree/Card (4.1.2):
+    - Braintree/Core
+  - Braintree/Core (4.1.2)
+  - Braintree/PayPal (4.1.2):
+    - Braintree/Core
+  - Braintree/UI (4.1.2):
+    - Braintree/Card
+    - Braintree/Core
   - BrightFutures (3.2.2):
     - Result (~> 1.0)
   - Crashlytics (3.5.0):
@@ -91,11 +74,11 @@ PODS:
     - Realm (= 0.97.0)
   - Result (1.0.1)
   - UIImageEffects (0.0.1)
-  - XLForm (3.0.2)
+  - XLForm (3.1.0)
 
 DEPENDENCIES:
   - Box (~> 2.0)
-  - Braintree (~> 3.9)
+  - Braintree (~> 4.1.2)
   - Crashlytics
   - Fabric
   - FBSDKCoreKit (~> 4.7)
@@ -112,7 +95,7 @@ DEPENDENCIES:
   - PosInCore (from `PosInCore`)
   - RealmSwift (~> 0.97.0)
   - UIImageEffects
-  - XLForm (~> 3.0.2)
+  - XLForm (~> 3.1.0)
 
 EXTERNAL SOURCES:
   PosInCore:
@@ -122,7 +105,7 @@ SPEC CHECKSUMS:
   Alamofire: fbc829692f351fa1d8a31dd75fd7f7f56fea31fb
   Bolts: 722ab9a4f8b50fc4ed1b9998a5a7a2b3f16d80b4
   Box: 70713ca3679e4e11ad4c470e9b58265f506fc659
-  Braintree: e26231d5a4b486db87da7efc97051ded67cd4598
+  Braintree: bb66f0a87e9809d36da89e698455e7e902aaeef6
   BrightFutures: 1722a83fa8415aef78d66319a6c6add6685a7a87
   Crashlytics: fabfd45d0e8b8dc936c682b97e302b9a49a1c827
   Fabric: e8296d4a1abb3c5eed770cc86b311c862f51d340
@@ -149,6 +132,6 @@ SPEC CHECKSUMS:
   RealmSwift: d014810dec75c9a3f1a33926d2dabfed855c582c
   Result: caef80340451e1f07492fa1e89117f83613bce24
   UIImageEffects: 37b99fa461e4965f332ca82e92f2c22a1075ee84
-  XLForm: 7817ce29f3f259186e837bb7309ac7e5b7e9b883
+  XLForm: 754b061f9f4b249a7ab7548efb22f1b586e26740
 
 COCOAPODS: 0.39.0
