@@ -9,11 +9,8 @@
 class MembershipPlansViewController: UIViewController {
 
     override func viewDidLoad() {
-        self.title = NSLocalizedString("Membership Plans", comment: "Membership")
         super.viewDidLoad()
-        
-        let backButton = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.Plain, target: navigationController, action: nil)
-        navigationItem.leftBarButtonItem = backButton
+        self.title = NSLocalizedString("Membership Plans", comment: "Membership")
     }
     
     override func viewWillAppear(animated: Bool) {
