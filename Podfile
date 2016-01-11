@@ -17,7 +17,8 @@ target 'PositionIn' do
     pod 'Google/Analytics'
     pod 'PosInCore', :path => 'PosInCore'
     pod 'RealmSwift', '~> 0.97.0'
-
+    pod 'Fabric'
+    pod 'Crashlytics'
     pod 'Braintree', '~> 3.9'
     pod 'FBSDKCoreKit', '~> 4.7'
     pod 'FBSDKLoginKit', '~> 4.7'
