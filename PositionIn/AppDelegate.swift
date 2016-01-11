@@ -15,6 +15,8 @@ import Messaging
 import GoogleMaps
 import FBSDKCoreKit
 import XLForm
+import Fabric
+import Crashlytics
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -98,11 +100,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let settings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound],
             categories: nil)
         UIApplication.sharedApplication().registerUserNotificationSettings(settings)
-        
         UIApplication.sharedApplication().registerForRemoteNotifications()
         
-        showWarning("subscript")
-        
+        Fabric.with([Crashlytics.self])
+
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
     }
     
@@ -124,12 +125,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
         //TODO handle
-        showError("didFailToRegisterForRemoteNotificationsWithError")
     }
     
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
         //TODO handle
-        showSuccess("push didReceiveRemoteNotification")
     }
 }
 
