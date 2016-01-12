@@ -99,7 +99,7 @@ enum HomeItem: Int, CustomDebugStringConvertible {
         case .BomaHotels:
             return "/v1.0/search"
         case .Volunteer:
-            return "/v1.0/search"
+            return "/v1.0/volunteers"
         case .Unknown:
             return "/v1.0/search"
         default:
