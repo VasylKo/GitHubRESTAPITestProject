@@ -369,29 +369,13 @@ struct APIService {
             return self.handleFailure(future)
         }
     }
-
-//    func forYou(query: APIServiceQueryConvertible, page: Page) -> Future<CollectionResponse<FeedItem>,NSError> {
-//        let endpoint = FeedItem.forYouEndpoint()
-//        let params = APIServiceQuery()
-//        params.append(query: query)
-//        params.append(query: page)
-//        Log.debug?.value(params.query)
-//        return session().flatMap {
-//            (token: AuthResponse.Token) -> Future<CollectionResponse<FeedItem>, NSError> in
-//            let request = self.updateRequest(token, endpoint: endpoint, params: params.query)
-//            let (_ , future): (Alamofire.Request, Future<CollectionResponse<FeedItem>, NSError>) = self.dataProvider.objectRequest(request)
-//            return self.handleFailure(future)
-//        }
-//    }
     
     func getAll(homeItem: HomeItem) -> Future<CollectionResponse<FeedItem>,NSError> {
         let endpoint = homeItem.endpoint()
 //        //TODO: change this when it will be fixed on backend
         let method: Alamofire.Method = .POST
         let params = APIServiceQuery()
-        
         params.append("type", value: [homeItem.rawValue])
-
         return session().flatMap {
             (token: AuthResponse.Token) -> Future<CollectionResponse<FeedItem>, NSError> in
             //TODO: fix endp
@@ -401,6 +385,18 @@ struct APIService {
             }
             let request = self.updateRequest(token, endpoint: endp, method: method, params: params.query)
             let (_ , future): (Alamofire.Request, Future<CollectionResponse<FeedItem>, NSError>) = self.dataProvider.objectRequest(request)
+            return self.handleFailure(future)
+        }
+    }
+    
+    //TODO: temporary method
+    func getVolunteers() -> Future<CollectionResponse<Community>,NSError> {
+        let endpoint = HomeItem.Volunteer.endpoint()
+        let method: Alamofire.Method = .GET
+        return session().flatMap {
+            (token: AuthResponse.Token) -> Future<CollectionResponse<Community>, NSError> in
+            let request = self.updateRequest(token, endpoint: endpoint!, method: method)
+            let (_ , future): (Alamofire.Request, Future<CollectionResponse<Community>, NSError>) = self.dataProvider.objectRequest(request)
             return self.handleFailure(future)
         }
     }

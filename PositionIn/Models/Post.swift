@@ -12,7 +12,7 @@ import CleanroomLogger
 struct Post: CRUDObject {
     var objectId: CRUDObjectId = CRUDObjectInvalidId
     var name: String?
-    var text: String?
+    var descriptionString: String?
     var photos: [PhotoInfo]?
     var location: Location?
     
@@ -39,7 +39,7 @@ struct Post: CRUDObject {
     mutating func mapping(map: Map) {
         objectId <- (map["id"], CRUDObjectIdTransform())
         name <- map["name"]
-        text <- map["text"]
+        descriptionString <- map["description"]
         photos <- map["photos"]
         likes <- map["likes"]
         location <- map["location"]
@@ -70,7 +70,7 @@ struct Post: CRUDObject {
     }
     
     static func communityPostsEndpoint(communityId: CRUDObjectId) -> String {
-        return (Community.endpoint() as NSString).stringByAppendingPathComponent("\(communityId)/posts")
+        return (Community.endpoint() as NSString).stringByAppendingPathComponent("\(communityId)/post")
     }
         
     var description: String {
