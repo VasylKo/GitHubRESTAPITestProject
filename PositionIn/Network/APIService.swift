@@ -390,13 +390,13 @@ struct APIService {
     }
     
     //TODO: temporary method
-    func getVolunteers() -> Future<CollectionResponse<FeedItem>,NSError> {
+    func getVolunteers() -> Future<CollectionResponse<Community>,NSError> {
         let endpoint = HomeItem.Volunteer.endpoint()
         let method: Alamofire.Method = .GET
         return session().flatMap {
-            (token: AuthResponse.Token) -> Future<CollectionResponse<FeedItem>, NSError> in
+            (token: AuthResponse.Token) -> Future<CollectionResponse<Community>, NSError> in
             let request = self.updateRequest(token, endpoint: endpoint!, method: method)
-            let (_ , future): (Alamofire.Request, Future<CollectionResponse<FeedItem>, NSError>) = self.dataProvider.objectRequest(request)
+            let (_ , future): (Alamofire.Request, Future<CollectionResponse<Community>, NSError>) = self.dataProvider.objectRequest(request)
             return self.handleFailure(future)
         }
     }

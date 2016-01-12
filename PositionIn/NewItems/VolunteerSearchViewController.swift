@@ -18,26 +18,34 @@ class VolunteerSearchViewController: UIViewController, XLFormRowDescriptorViewCo
     
     let cellIdentifier = "CellIdentifier"
     var rowDescriptor : XLFormRowDescriptor?
-    var volunteers : [Community]?
+    var volunteers : [Community] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        api().getVolunteers().onSuccess(callback: {[weak self] response in
+            self?.volunteers = response.items
+            self?.volunteerTableView.reloadData()
+            })
         self.volunteerTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return volunteers.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath)
-        cell.textLabel?.text = "vol"
+        
+        let volunteer = self.volunteers[indexPath.row]
+        cell.textLabel?.text = volunteer.name
         return cell
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        rowDescriptor?.value = "test"
+        let community = self.volunteers[indexPath.row]
+        
+        rowDescriptor?.value = community
         if self.navigationController != nil {
             self.navigationController!.popViewControllerAnimated(true)
         }
