@@ -341,7 +341,7 @@
         <!--Ambulance Sent View Controller-->
         <scene sceneID="r2b-Al-tSm">
             <objects>
-                <viewController id="KgA-Si-kOK" customClass="AmbulanceSentViewController" customModule="PositionIn" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AmbulanceSentViewControllerId" id="KgA-Si-kOK" customClass="AmbulanceSentViewController" customModule="PositionIn" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Thw-s6-nVg"/>
                         <viewControllerLayoutGuide type="bottom" id="DfT-Lp-Dqe"/>
@@ -605,7 +605,7 @@ M-Pesa PIN number</string>
         <!--Ambulance Requested View Controller-->
         <scene sceneID="ex4-MC-NUm">
             <objects>
-                <viewController id="Ffb-Kg-ByV" customClass="AmbulanceRequestedViewController" customModule="PositionIn" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AmbulanceRequestedViewControllerId" id="Ffb-Kg-ByV" customClass="AmbulanceRequestedViewController" customModule="PositionIn" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="sQV-Jv-WU9"/>
                         <viewControllerLayoutGuide type="bottom" id="Q8L-4V-lI4"/>
