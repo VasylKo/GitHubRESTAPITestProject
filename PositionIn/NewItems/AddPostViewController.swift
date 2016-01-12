@@ -15,7 +15,7 @@ import BrightFutures
 final class AddPostViewController: BaseAddItemViewController {
     private enum Tags : String {
         case Message = "Message"
-        case Community = "Community"
+        case PostTo = "Post to"
         case Photo = "Photo"
         case Title = "Title"
         case Location = "location"
@@ -45,14 +45,20 @@ final class AddPostViewController: BaseAddItemViewController {
         messageRow.addValidator(XLFormRegexValidator(msg: NSLocalizedString("Incorrect message lenght",
             comment: "Add post"), regex: "^.{0,500}$"))
         descriptionSection.addFormRow(messageRow)
+        // Community
+        let postToRow = XLFormRowDescriptor(tag:Tags.PostTo.rawValue,
+                                            rowType: XLFormRowDescriptorTypeSelectorPush,
+                                            title: "Post to")
+        postToRow.action.viewControllerClass = PostToContainerViewController.self
+        postToRow.valueTransformer = PostToValueTrasformer.self
+        descriptionSection.addFormRow(postToRow)
 
-        
         // Info section
         let infoSection = XLFormSectionDescriptor.formSection()
         form.addFormSection(infoSection)
-        // Community
-        let communityRow = communityRowDescriptor(Tags.Community.rawValue)
-        infoSection.addFormRow(communityRow)
+        // Location
+        let locationRow = locationRowDescriptor(Tags.Location.rawValue)
+        infoSection.addFormRow(locationRow)
         
         //Photo section
         let photoSection = XLFormSectionDescriptor.formSection()
@@ -87,7 +93,7 @@ final class AddPostViewController: BaseAddItemViewController {
         let values = formValues()
         Log.debug?.value(values)
         
-        let community =  communityValue(values[Tags.Community.rawValue])
+        let community =  communityValue(values[Tags.PostTo.rawValue])
         
         if  let imageUpload = uploadAssets(values[Tags.Photo.rawValue]) {
             let getLocation = locationController().getCurrentLocation()
@@ -117,6 +123,27 @@ final class AddPostViewController: BaseAddItemViewController {
                 }.onComplete { [weak self] result in
                     self?.view.userInteractionEnabled = true
                 }
+        }
+    }
+    
+    internal class PostToValueTrasformer : NSValueTransformer {
+        
+        override class func transformedValueClass() -> AnyClass {
+            return NSString.self
+        }
+        
+        override class func allowsReverseTransformation() -> Bool {
+            return false
+        }
+        
+        override func transformedValue(value: AnyObject?) -> AnyObject? {
+            return value + "asdf"
+//            if let valueData: AnyObject = value {
+//                if let box: Box<Location> = valueData as? Box {
+//                    return box.value.name
+//                }
+//            }
+//            return nil
         }
     }
     
