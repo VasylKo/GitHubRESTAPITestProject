@@ -9,6 +9,7 @@
 import UIKit
 import XLForm
 import CleanroomLogger
+import Box
 
 
 class VolunteerSearchViewController: UIViewController, XLFormRowDescriptorViewController, UITableViewDataSource, UITableViewDelegate {
@@ -46,8 +47,8 @@ class VolunteerSearchViewController: UIViewController, XLFormRowDescriptorViewCo
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let volunteer = self.volunteers[indexPath.row]
+        rowDescriptor?.value = Box(volunteer)
         
-        rowDescriptor?.value = volunteer.name
         if self.navigationController != nil {
             self.navigationController!.popViewControllerAnimated(true)
         }

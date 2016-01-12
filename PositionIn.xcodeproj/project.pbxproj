@@ -68,12 +68,12 @@
 		50FE7D891BBE77BB005676E2 /* ItemsSearchResultDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FE7D871BBE77BB005676E2 /* ItemsSearchResultDataSource.swift */; };
 		50FE7D8A1BBE77BB005676E2 /* ItemsSearchResultsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FE7D881BBE77BB005676E2 /* ItemsSearchResultsController.swift */; };
 		CDEDD96B1C45033C00396594 /* PostToContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDEDD9691C45033C00396594 /* PostToContainerViewController.swift */; };
-		CDEDD96C1C45033C00396594 /* PostToContainerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CDEDD96A1C45033C00396594 /* PostToContainerViewController.xib */; };
+		CDEDD96C1C45033C00396594 /* PositionIn.PostToContainerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CDEDD96A1C45033C00396594 /* PositionIn.PostToContainerViewController.xib */; };
 		CDEDD96E1C45169C00396594 /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDEDD96D1C45169C00396594 /* ContainerViewController.swift */; };
 		CDEDD9731C45242400396594 /* VolunteerSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDEDD9711C45242400396594 /* VolunteerSearchViewController.swift */; };
-		CDEDD9741C45242400396594 /* VolunteerSearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CDEDD9721C45242400396594 /* VolunteerSearchViewController.xib */; };
+		CDEDD9741C45242400396594 /* PositionIn.VolunteerSearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CDEDD9721C45242400396594 /* PositionIn.VolunteerSearchViewController.xib */; };
 		CDEDD9771C45243900396594 /* CommunitySearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDEDD9751C45243900396594 /* CommunitySearchViewController.swift */; };
-		CDEDD9781C45243900396594 /* CommunitySearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CDEDD9761C45243900396594 /* CommunitySearchViewController.xib */; };
+		CDEDD9781C45243900396594 /* PositionIn.CommunitySearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CDEDD9761C45243900396594 /* PositionIn.CommunitySearchViewController.xib */; };
 		D100DF0B1BF4AA0300C81054 /* GoogleAnalyticsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D100DF0A1BF4AA0300C81054 /* GoogleAnalyticsHelper.swift */; };
 		D100DF0F1BF4AA7900C81054 /* NSDate+NVTimeAgo.m in Sources */ = {isa = PBXBuildFile; fileRef = D100DF0E1BF4AA7900C81054 /* NSDate+NVTimeAgo.m */; };
 		D112D9D61C2C7EED0051039E /* CreateUserConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D112D9D51C2C7EED0051039E /* CreateUserConversationViewController.swift */; };
@@ -554,12 +554,12 @@
 		BB73828B80F64D347BB9F14D /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5785CCFFE7238C562E6E52F /* Pods-PositionIn.devrelease.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PositionIn.devrelease.xcconfig"; path = "Pods/Target Support Files/Pods-PositionIn/Pods-PositionIn.devrelease.xcconfig"; sourceTree = "<group>"; };
 		CDEDD9691C45033C00396594 /* PostToContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostToContainerViewController.swift; sourceTree = "<group>"; };
-		CDEDD96A1C45033C00396594 /* PostToContainerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PostToContainerViewController.xib; sourceTree = "<group>"; };
+		CDEDD96A1C45033C00396594 /* PositionIn.PostToContainerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.PostToContainerViewController.xib; sourceTree = "<group>"; };
 		CDEDD96D1C45169C00396594 /* ContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
 		CDEDD9711C45242400396594 /* VolunteerSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VolunteerSearchViewController.swift; sourceTree = "<group>"; };
-		CDEDD9721C45242400396594 /* VolunteerSearchViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VolunteerSearchViewController.xib; sourceTree = "<group>"; };
+		CDEDD9721C45242400396594 /* PositionIn.VolunteerSearchViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.VolunteerSearchViewController.xib; sourceTree = "<group>"; };
 		CDEDD9751C45243900396594 /* CommunitySearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommunitySearchViewController.swift; sourceTree = "<group>"; };
-		CDEDD9761C45243900396594 /* CommunitySearchViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommunitySearchViewController.xib; sourceTree = "<group>"; };
+		CDEDD9761C45243900396594 /* PositionIn.CommunitySearchViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.CommunitySearchViewController.xib; sourceTree = "<group>"; };
 		D100DF0A1BF4AA0300C81054 /* GoogleAnalyticsHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GoogleAnalyticsHelper.swift; path = Utils/GoogleAnalyticsHelper.swift; sourceTree = "<group>"; };
 		D100DF0D1BF4AA7900C81054 /* NSDate+NVTimeAgo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+NVTimeAgo.h"; sourceTree = "<group>"; };
 		D100DF0E1BF4AA7900C81054 /* NSDate+NVTimeAgo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+NVTimeAgo.m"; sourceTree = "<group>"; };
@@ -1867,11 +1867,11 @@
 				E63201731B9872C60066C62E /* EditProfileViewController.swift */,
 				E6F309381BA81FAF00C9420C /* UploadPhotoCell */,
 				CDEDD9691C45033C00396594 /* PostToContainerViewController.swift */,
-				CDEDD96A1C45033C00396594 /* PostToContainerViewController.xib */,
+				CDEDD96A1C45033C00396594 /* PositionIn.PostToContainerViewController.xib */,
 				CDEDD9711C45242400396594 /* VolunteerSearchViewController.swift */,
-				CDEDD9721C45242400396594 /* VolunteerSearchViewController.xib */,
+				CDEDD9721C45242400396594 /* PositionIn.VolunteerSearchViewController.xib */,
 				CDEDD9751C45243900396594 /* CommunitySearchViewController.swift */,
-				CDEDD9761C45243900396594 /* CommunitySearchViewController.xib */,
+				CDEDD9761C45243900396594 /* PositionIn.CommunitySearchViewController.xib */,
 			);
 			path = NewItems;
 			sourceTree = "<group>";
@@ -3364,7 +3364,7 @@
 				E6BEF1E71B9C83F200511B46 /* PositionIn.CommunityHeaderCell.xib in Resources */,
 				D1F86CF11BFCAA96006E0C49 /* Onboarding.storyboard in Resources */,
 				D1F1FF261C22F384006D2E75 /* PositionIn.VolunteerDetailsViewController.xib in Resources */,
-				CDEDD96C1C45033C00396594 /* PostToContainerViewController.xib in Resources */,
+				CDEDD96C1C45033C00396594 /* PositionIn.PostToContainerViewController.xib in Resources */,
 				E69420FF1B665F5100F34F06 /* PositionIn.ProductDetailsViewController.xib in Resources */,
 				D1FD854C1C1EFE0F00C2E87B /* PositionIn.MarketDetailsViewController.xib in Resources */,
 				E6D7F83C1BE24AE500A544F4 /* PositionIn.MainMenuBadgeCell.xib in Resources */,
@@ -3389,7 +3389,7 @@
 				240A9B9C1B9CCDA4007C77E3 /* PositionIn.CommunityStatsCell.xib in Resources */,
 				E66115871B7376F4003DB5B3 /* Login.storyboard in Resources */,
 				D1379E8E1C2A98710041AA4E /* PositionIn.ExploreCardCell.xib in Resources */,
-				CDEDD9781C45243900396594 /* CommunitySearchViewController.xib in Resources */,
+				CDEDD9781C45243900396594 /* PositionIn.CommunitySearchViewController.xib in Resources */,
 				D118A2AB1C0FBC380020B363 /* PositionIn.CardTableViewCell.xib in Resources */,
 				D1DC3EB21C15B3CF00E6B772 /* PaymentTableViewCell.xib in Resources */,
 				D1FD85421C1EE8EA00C2E87B /* PositionIn.EventDetailsViewController.xib in Resources */,
@@ -3402,7 +3402,7 @@
 				E6BEF1CC1B9C5E7200511B46 /* PositionIn.PostImageCell.xib in Resources */,
 				E689F07D1B6B976100597587 /* PositionIn.ProductInventoryCell.xib in Resources */,
 				E6BEF1E61B9C83F200511B46 /* PositionIn.CommunityActionCell.xib in Resources */,
-				CDEDD9741C45242400396594 /* VolunteerSearchViewController.xib in Resources */,
+				CDEDD9741C45242400396594 /* PositionIn.VolunteerSearchViewController.xib in Resources */,
 				E6F3093F1BA81FAF00C9420C /* PositionIn.AttachedPhotosView.xib in Resources */,
 				E6F7A4721BA335070069152A /* PositionIn.WalletViewController.xib in Resources */,
 				E6BEF1C61B9C556300511B46 /* PositionIn.PostViewController.xib in Resources */,

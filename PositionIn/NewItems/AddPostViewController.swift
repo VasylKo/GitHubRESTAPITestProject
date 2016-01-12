@@ -9,6 +9,7 @@
 import UIKit
 import CleanroomLogger
 import XLForm
+import Box
 
 import BrightFutures
 
@@ -93,7 +94,11 @@ final class AddPostViewController: BaseAddItemViewController {
         let values = formValues()
         Log.debug?.value(values)
         
-        let community =  communityValue(values[Tags.PostTo.rawValue])
+        var communityId: String?
+        
+        if let communityBox = values[Tags.PostTo.rawValue] as? Box<Community> {
+            communityId = communityBox.value.objectId
+        }
         
         if  let imageUpload = uploadAssets(values[Tags.Photo.rawValue]) {
             let getLocation = locationController().getCurrentLocation()
@@ -101,14 +106,14 @@ final class AddPostViewController: BaseAddItemViewController {
                 getLocation.zip(imageUpload).flatMap { (location: Location, urls: [NSURL]) -> Future<Post, NSError> in
                     var post = Post()
                     post.name = values[Tags.Message.rawValue] as? String
-                    post.text = values[Tags.Message.rawValue] as? String
+                    post.descriptionString = values[Tags.Message.rawValue] as? String
                     post.location = location
                     post.photos = urls.map { url in
                         var info = PhotoInfo()
                         info.url = url
                         return info
                     }
-                    if let communityId = community {
+                    if let communityId = communityId {
                         return api().createCommunityPost(communityId, post: post)
                     } else {
                         return api().createUserPost(post: post)
@@ -116,7 +121,6 @@ final class AddPostViewController: BaseAddItemViewController {
                 }.onSuccess { [weak self] (post: Post) -> ()  in
                     Log.debug?.value(post)
                     self?.sendUpdateNotification()
-//                    self?.performSegue(AddPostViewController.Segue.Close)
                     self?.cancelButtonTouched()
                 }.onFailure { error in
                     showError(error.localizedDescription)
@@ -137,13 +141,12 @@ final class AddPostViewController: BaseAddItemViewController {
         }
         
         override func transformedValue(value: AnyObject?) -> AnyObject? {
-            return value
-//            if let valueData: AnyObject = value {
-//                if let box: Box<Location> = valueData as? Box {
-//                    return box.value.name
-//                }
-//            }
-//            return nil
+            if let valueData: AnyObject = value {
+                if let box: Box<Community> = valueData as? Box {
+                    return box.value.name
+                }
+            }
+            return nil
         }
     }
     

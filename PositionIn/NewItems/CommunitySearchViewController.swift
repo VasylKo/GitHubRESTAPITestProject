@@ -9,6 +9,7 @@
 import UIKit
 import XLForm
 import CleanroomLogger
+import Box
 
 class CommunitySearchViewController: UIViewController, XLFormRowDescriptorViewController, UITableViewDataSource, UITableViewDelegate  {
 
@@ -47,8 +48,9 @@ class CommunitySearchViewController: UIViewController, XLFormRowDescriptorViewCo
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let community = items[indexPath.row]
-        rowDescriptor?.value = community.name
+        let community = self.items[indexPath.row]
+        rowDescriptor?.value = Box(community)
+        
         if self.navigationController != nil {
             self.navigationController!.popViewControllerAnimated(true)
         }

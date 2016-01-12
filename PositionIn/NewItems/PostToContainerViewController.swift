@@ -17,6 +17,8 @@ class PostToContainerViewController: ContainerViewController, XLFormRowDescripto
     
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     
+
+    
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         let communitySearchViewController = CommunitySearchViewController()
@@ -26,7 +28,11 @@ class PostToContainerViewController: ContainerViewController, XLFormRowDescripto
     }
 
     required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: aDecoder)
+        let communitySearchViewController = CommunitySearchViewController()
+        let volunteerSearchViewController = VolunteerSearchViewController()
+        containeredViewControllers = [communitySearchViewController, volunteerSearchViewController]
+        rowDescriptorViewControllers = [communitySearchViewController, volunteerSearchViewController]
     }
     
     override func viewDidLoad() {
