@@ -8,6 +8,8 @@
 
 class AmbulanceBaseController: UIViewController {
     
+    var ambulanceRequestObjectId: CRUDObjectId?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -18,7 +20,12 @@ class AmbulanceBaseController: UIViewController {
     @IBAction func closeButtonTapped(sender: AnyObject) {
         self.navigationController?.popToRootViewControllerAnimated(true)
     }
+    
     @IBAction func cancelRequestButtonTapped(sender: AnyObject) {
-        self.navigationController?.popToRootViewControllerAnimated(true)
+        if let objID = self.ambulanceRequestObjectId {
+            api().deleteAmbulanceRequest(objID).onSuccess(callback: {[weak self] in
+                self?.navigationController?.popToRootViewControllerAnimated(true)
+            })
+        }
     }
 }

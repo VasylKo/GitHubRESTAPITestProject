@@ -61,7 +61,7 @@ class CallAmbulanceViewController: BaseAddItemViewController {
             rowType:XLFormRowDescriptorTypeSelectorPush, title:NSLocalizedString("Incident Type",
                 comment: "Call Ambulance"))
         var selectorOptions: [XLFormOptionsObject] = []
-        var counter = 0
+        var counter = 1
         for value in IncidentType.allValues {
             if let incidentName = self.incedentType(value){
                 let optionObject = XLFormOptionsObject(value: counter, displayText: incidentName)
@@ -115,12 +115,14 @@ class CallAmbulanceViewController: BaseAddItemViewController {
         if  let imageUpload = uploadAssets(values[Tags.Photo.rawValue]) {
             let getLocation = locationController().getCurrentLocation()
             view.userInteractionEnabled = false
-            getLocation.zip(imageUpload).flatMap { (location: Location, urls: [NSURL]) -> Future<Void, NSError> in
+            getLocation.zip(imageUpload).flatMap { (location: Location, urls: [NSURL]) -> Future<AmbulanceRequest, NSError> in
                 var ambulanceRequest = AmbulanceRequest()
-                ambulanceRequest.text = values[Tags.Description.rawValue] as? String
+                ambulanceRequest.descriptionString = values[Tags.Description.rawValue] as? String
                 
                 if let incidentType: XLFormOptionsObject = values[Tags.Incedent.rawValue] as? XLFormOptionsObject {
-                    ambulanceRequest.incidentType = incidentType.displayText()
+                    if let incedentTypeValue = incidentType.valueData() as? NSNumber {
+                        ambulanceRequest.incidentType = incedentTypeValue
+                    }
                 }
                 ambulanceRequest.location = location
                 ambulanceRequest.photos = urls.map { url in
@@ -128,9 +130,12 @@ class CallAmbulanceViewController: BaseAddItemViewController {
                     info.url = url
                     return info
                 }
-                return api().createAmbulanceRequest(ambulanceRequest)
+                return api().createAmbulanceRequest(ambulanceRequest).onSuccess(callback: {[weak self] ambulanceRequest in
+                    let controller = Storyboards.Onboarding.instantiateAmbulanceRequestedViewControllerId()
+                    controller.ambulanceRequestObjectId = ambulanceRequest.objectId
+                    self?.navigationController?.pushViewController(controller, animated: true)
+                    })
             }
-        self.performSegue(CallAmbulanceViewController.Segue.AmbulanceRequestedSegueId)
         }
     }
 
