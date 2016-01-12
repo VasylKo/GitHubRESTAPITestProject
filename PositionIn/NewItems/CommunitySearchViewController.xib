@@ -7,6 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CommunitySearchViewController" customModule="PositionIn" customModuleProvider="target">
             <connections>
+                <outlet property="activityIndicator" destination="NOk-jn-4kw" id="EDH-AF-qSB"/>
                 <outlet property="communityTableView" destination="yXi-Re-U2g" id="TYs-0C-eWS"/>
                 <outlet property="searchBar" destination="WkX-1H-b4o" id="NbE-cJ-lQv"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -20,6 +21,7 @@
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="60" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="yXi-Re-U2g">
                     <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                     <searchBar key="tableHeaderView" contentMode="redraw" id="WkX-1H-b4o">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
@@ -30,13 +32,18 @@
                         <outlet property="delegate" destination="-1" id="3Xh-JY-dsb"/>
                     </connections>
                 </tableView>
+                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="NOk-jn-4kw">
+                    <rect key="frame" x="290" y="290" width="20" height="20"/>
+                </activityIndicatorView>
             </subviews>
             <color key="backgroundColor" red="1" green="0.60425593511544373" blue="0.45688336556993603" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="yXi-Re-U2g" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="AjG-QH-09L"/>
                 <constraint firstItem="yXi-Re-U2g" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="ESY-LD-KhL"/>
+                <constraint firstItem="NOk-jn-4kw" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="FPU-fP-PzL"/>
                 <constraint firstAttribute="bottom" secondItem="yXi-Re-U2g" secondAttribute="bottom" id="Tea-1N-6DK"/>
                 <constraint firstAttribute="trailing" secondItem="yXi-Re-U2g" secondAttribute="trailing" id="hrq-J2-hPB"/>
+                <constraint firstItem="NOk-jn-4kw" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="qb9-cm-ZWo"/>
             </constraints>
             <point key="canvasLocation" x="185" y="281"/>
         </view>

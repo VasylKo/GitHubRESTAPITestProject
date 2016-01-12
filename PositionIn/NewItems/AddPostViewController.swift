@@ -137,7 +137,7 @@ final class AddPostViewController: BaseAddItemViewController {
         }
         
         override func transformedValue(value: AnyObject?) -> AnyObject? {
-            return value + "asdf"
+            return value
 //            if let valueData: AnyObject = value {
 //                if let box: Box<Location> = valueData as? Box {
 //                    return box.value.name

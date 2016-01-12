@@ -13,6 +13,7 @@ import CleanroomLogger
 
 class VolunteerSearchViewController: UIViewController, XLFormRowDescriptorViewController, UITableViewDataSource, UITableViewDelegate {
     
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var volunteerTableView: UITableView!
     
@@ -24,6 +25,7 @@ class VolunteerSearchViewController: UIViewController, XLFormRowDescriptorViewCo
         super.viewDidLoad()
         api().getVolunteers().onSuccess(callback: {[weak self] response in
             self?.volunteers = response.items
+            self?.activityIndicator.stopAnimating()
             self?.volunteerTableView.reloadData()
             })
         self.volunteerTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
@@ -43,9 +45,9 @@ class VolunteerSearchViewController: UIViewController, XLFormRowDescriptorViewCo
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let community = self.volunteers[indexPath.row]
+        let volunteer = self.volunteers[indexPath.row]
         
-        rowDescriptor?.value = community
+        rowDescriptor?.value = volunteer.name
         if self.navigationController != nil {
             self.navigationController!.popViewControllerAnimated(true)
         }

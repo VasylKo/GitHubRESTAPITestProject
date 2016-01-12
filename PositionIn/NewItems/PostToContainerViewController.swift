@@ -42,42 +42,4 @@ class PostToContainerViewController: ContainerViewController, XLFormRowDescripto
     @IBAction func segmentControlValueChanged(sender: AnyObject) {
         activeIndex = self.segmentedControl.selectedSegmentIndex
     }
-//    func postToRowDescriptor(tag: String) -> XLFormRowDescriptor {
-//        let postToCaption = NSLocalizedString("Post to", comment: "New item: comunity caption")
-//        let postToRow = XLFormRowDescriptor(tag: tag, rowType:XLFormRowDescriptorTypeSelectorPush, title: postToCaption)
-//        postToRow.selectorTitle = postToCaption
-//        
-//        let emptyCommunity: Community = {
-//            var c = Community()
-//            c.objectId = CRUDObjectInvalidId
-//            c.name = NSLocalizedString("None", comment: "New item: empty community")
-//            return c
-//        }()
-//        let emptyOption = XLFormOptionsObject.formOptionsObjectWithCommunity(emptyCommunity)
-//        
-//        postToRow.value =  emptyOption
-//        postToRow.selectorOptions = [ emptyOption ]
-//        api().currentUserId().flatMap { userId in
-//            return api().getUserCommunities(userId)
-//            }.onSuccess { [weak postToRow, weak self] response in
-//                Log.debug?.value(response.items)
-//                let options = [emptyOption] + response.items.map { XLFormOptionsObject.formOptionsObjectWithCommunity($0) }
-//                postToRow?.selectorOptions = options
-//                postToRow?.cellConfigAtConfigure["tintColor"] = UIScheme.mainThemeColor
-//                if  let preselectedCommunity = self?.preselectedCommunity {
-//                    let filteredOptions = options.filter { (option: XLFormOptionsObject!) -> Bool in
-//                        if let communityId = option.communityId where communityId == preselectedCommunity {
-//                            return true
-//                        }
-//                        return false
-//                    }
-//                    if let value = filteredOptions.first {
-//                        postToRow?.value = value
-//                        self?.postToTableView?.reloadData()
-//                    }
-//                }
-//        }
-//        
-//        return postToRow
-//    }
 }
