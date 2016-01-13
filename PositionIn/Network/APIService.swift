@@ -228,7 +228,7 @@ struct APIService {
     //MARK: - Community -
     
     func getCommunities(page: Page) -> Future<CollectionResponse<Community>,NSError> {
-        let endpoint = Community.endpoint()
+        let endpoint = Community.endpointCommunities()
         let params = page.query
         return getObjectsCollection(endpoint, params: params)
     }
@@ -243,13 +243,24 @@ struct APIService {
         return getObject(endpoint)
     }
     
-    func createAmbulanceRequest(object: AmbulanceRequest) -> Future<Void, NSError> {
+    func createAmbulanceRequest(object: AmbulanceRequest) -> Future<AmbulanceRequest, NSError> {
         let endpoint = AmbulanceRequest.endpoint()
-        typealias CRUDResultType = (Alamofire.Request, Future<Void, NSError>)
+        typealias CRUDResultType = (Alamofire.Request, Future<AmbulanceRequest, NSError>)
         let params = Mapper().toJSON(object)
         return session().flatMap {
-            (token: AuthResponse.Token) -> Future<Void, NSError> in
+            (token: AuthResponse.Token) -> Future<AmbulanceRequest, NSError> in
             let request = self.updateRequest(token, endpoint: endpoint, method: .POST, params: params)
+             let (_, future): CRUDResultType = self.dataProvider.objectRequest(request)
+            return future
+        }
+    }
+    
+    func deleteAmbulanceRequest(objectId: CRUDObjectId) -> Future<Void, NSError> {
+        let endpoint = AmbulanceRequest.endpoint(objectId)
+        typealias CRUDResultType = (Alamofire.Request, Future<Void, NSError>)
+        return session().flatMap {
+            (token: AuthResponse.Token) -> Future<Void, NSError> in
+            let request = self.updateRequest(token, endpoint: endpoint, method: .DELETE)
             let (_, future): CRUDResultType = self.dataProvider.jsonRequest(request, map: self.emptyResponseMapping(), validation: nil)
             return future
         }
@@ -358,29 +369,13 @@ struct APIService {
             return self.handleFailure(future)
         }
     }
-
-//    func forYou(query: APIServiceQueryConvertible, page: Page) -> Future<CollectionResponse<FeedItem>,NSError> {
-//        let endpoint = FeedItem.forYouEndpoint()
-//        let params = APIServiceQuery()
-//        params.append(query: query)
-//        params.append(query: page)
-//        Log.debug?.value(params.query)
-//        return session().flatMap {
-//            (token: AuthResponse.Token) -> Future<CollectionResponse<FeedItem>, NSError> in
-//            let request = self.updateRequest(token, endpoint: endpoint, params: params.query)
-//            let (_ , future): (Alamofire.Request, Future<CollectionResponse<FeedItem>, NSError>) = self.dataProvider.objectRequest(request)
-//            return self.handleFailure(future)
-//        }
-//    }
     
     func getAll(homeItem: HomeItem) -> Future<CollectionResponse<FeedItem>,NSError> {
         let endpoint = homeItem.endpoint()
 //        //TODO: change this when it will be fixed on backend
         let method: Alamofire.Method = .POST
         let params = APIServiceQuery()
-        
         params.append("type", value: [homeItem.rawValue])
-
         return session().flatMap {
             (token: AuthResponse.Token) -> Future<CollectionResponse<FeedItem>, NSError> in
             //TODO: fix endp
@@ -390,6 +385,18 @@ struct APIService {
             }
             let request = self.updateRequest(token, endpoint: endp, method: method, params: params.query)
             let (_ , future): (Alamofire.Request, Future<CollectionResponse<FeedItem>, NSError>) = self.dataProvider.objectRequest(request)
+            return self.handleFailure(future)
+        }
+    }
+    
+    //TODO: temporary method
+    func getVolunteers() -> Future<CollectionResponse<Community>,NSError> {
+        let endpoint = HomeItem.Volunteer.endpoint()
+        let method: Alamofire.Method = .GET
+        return session().flatMap {
+            (token: AuthResponse.Token) -> Future<CollectionResponse<Community>, NSError> in
+            let request = self.updateRequest(token, endpoint: endpoint!, method: method)
+            let (_ , future): (Alamofire.Request, Future<CollectionResponse<Community>, NSError>) = self.dataProvider.objectRequest(request)
             return self.handleFailure(future)
         }
     }

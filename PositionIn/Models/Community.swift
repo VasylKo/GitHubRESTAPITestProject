@@ -107,6 +107,10 @@ struct Community: CRUDObject {
     static func endpoint() -> String {
         return "/v1.0/community"
     }
+    
+    static func endpointCommunities() -> String {
+        return "/v1.0/communities"
+    }
 
     static func communityEndpoint(communityId: CRUDObjectId) -> String {
         return (Community.endpoint() as NSString).stringByAppendingPathComponent("\(communityId)")

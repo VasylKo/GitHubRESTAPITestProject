@@ -328,6 +328,10 @@ struct Storyboards {
             return self.storyboard.instantiateViewControllerWithIdentifier("CallAmbulanceViewController") as! CallAmbulanceViewController
         }
 
+        static func instantiateAmbulanceSentViewControllerId() -> AmbulanceSentViewController {
+            return self.storyboard.instantiateViewControllerWithIdentifier("AmbulanceSentViewControllerId") as! AmbulanceSentViewController
+        }
+
         static func instantiateDonateViewController() -> DonateViewController {
             return self.storyboard.instantiateViewControllerWithIdentifier("DonateViewController") as! DonateViewController
         }
@@ -342,6 +346,10 @@ struct Storyboards {
 
         static func instantiateDonateNotificationViewController() -> DonateNotificationViewController {
             return self.storyboard.instantiateViewControllerWithIdentifier("DonateNotificationViewController") as! DonateNotificationViewController
+        }
+
+        static func instantiateAmbulanceRequestedViewControllerId() -> AmbulanceRequestedViewController {
+            return self.storyboard.instantiateViewControllerWithIdentifier("AmbulanceRequestedViewControllerId") as! AmbulanceRequestedViewController
         }
 
         static func instantiatePaymentCompletedViewController() -> PaymentCompletedViewController {
@@ -1791,6 +1799,11 @@ extension CallAmbulanceViewController {
 }
 
 //MARK: - AmbulanceSentViewController
+extension AmbulanceSentViewController: IdentifiableProtocol { 
+    var identifier: String? { return "AmbulanceSentViewControllerId" }
+    static var identifier: String? { return "AmbulanceSentViewControllerId" }
+}
+
 
 //MARK: - DonateViewController
 extension DonateViewController: IdentifiableProtocol { 
@@ -1828,6 +1841,11 @@ extension UIStoryboardSegue {
         }
         return nil
     }
+}
+
+extension AmbulanceRequestedViewController: IdentifiableProtocol { 
+    var identifier: String? { return "AmbulanceRequestedViewControllerId" }
+    static var identifier: String? { return "AmbulanceRequestedViewControllerId" }
 }
 
 extension AmbulanceRequestedViewController { 

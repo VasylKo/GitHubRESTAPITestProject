@@ -178,7 +178,7 @@ final class ConversationManager: NSObject {
     private var mucConversations = Set<Conversation>()
     private var currentUserId: CRUDObjectId = CRUDObjectInvalidId {
         didSet {
-            chatHistory = ChatHistory(storageName: currentUserId)
+            chatHistory = RealmChatHistory(storageName: currentUserId)
         }
     }
     private var chatHistory: ChatHistory?
@@ -217,6 +217,11 @@ extension ConversationManager: XMPPClientDelegate {
     }
     
     func chatClientDidAuthorize(client: XMPPClient) {
+        client.fetchChatList().future().onSuccess {
+            print("Done")
+        }.onFailure { error in
+            print(error)
+        }
         refresh()
     }
     

@@ -67,6 +67,13 @@
 		50F7305A1BBBE86A008D3D94 /* PositionIn.CommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50F730581BBBE86A008D3D94 /* PositionIn.CommentCell.xib */; };
 		50FE7D891BBE77BB005676E2 /* ItemsSearchResultDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FE7D871BBE77BB005676E2 /* ItemsSearchResultDataSource.swift */; };
 		50FE7D8A1BBE77BB005676E2 /* ItemsSearchResultsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FE7D881BBE77BB005676E2 /* ItemsSearchResultsController.swift */; };
+		CDEDD96B1C45033C00396594 /* PostToContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDEDD9691C45033C00396594 /* PostToContainerViewController.swift */; };
+		CDEDD96C1C45033C00396594 /* PositionIn.PostToContainerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CDEDD96A1C45033C00396594 /* PositionIn.PostToContainerViewController.xib */; };
+		CDEDD96E1C45169C00396594 /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDEDD96D1C45169C00396594 /* ContainerViewController.swift */; };
+		CDEDD9731C45242400396594 /* VolunteerSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDEDD9711C45242400396594 /* VolunteerSearchViewController.swift */; };
+		CDEDD9741C45242400396594 /* PositionIn.VolunteerSearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CDEDD9721C45242400396594 /* PositionIn.VolunteerSearchViewController.xib */; };
+		CDEDD9771C45243900396594 /* CommunitySearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDEDD9751C45243900396594 /* CommunitySearchViewController.swift */; };
+		CDEDD9781C45243900396594 /* PositionIn.CommunitySearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CDEDD9761C45243900396594 /* PositionIn.CommunitySearchViewController.xib */; };
 		D100DF0B1BF4AA0300C81054 /* GoogleAnalyticsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D100DF0A1BF4AA0300C81054 /* GoogleAnalyticsHelper.swift */; };
 		D100DF0F1BF4AA7900C81054 /* NSDate+NVTimeAgo.m in Sources */ = {isa = PBXBuildFile; fileRef = D100DF0E1BF4AA7900C81054 /* NSDate+NVTimeAgo.m */; };
 		D112D9D61C2C7EED0051039E /* CreateUserConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D112D9D51C2C7EED0051039E /* CreateUserConversationViewController.swift */; };
@@ -142,6 +149,8 @@
 		E61B20D51B7DD47C005EAB2C /* FeedItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61B20D41B7DD47C005EAB2C /* FeedItem.swift */; };
 		E61B20D81B7E0838005EAB2C /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61B20D71B7E0838005EAB2C /* SettingsViewController.swift */; };
 		E61B20EF1B813C8C005EAB2C /* Community.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61B20EE1B813C8C005EAB2C /* Community.swift */; };
+		E625F0BC1C2C43F600142F1E /* XMPPFetchChatListProcess.h in Headers */ = {isa = PBXBuildFile; fileRef = E625F0BA1C2C43F600142F1E /* XMPPFetchChatListProcess.h */; };
+		E625F0BD1C2C43F600142F1E /* XMPPFetchChatListProcess.m in Sources */ = {isa = PBXBuildFile; fileRef = E625F0BB1C2C43F600142F1E /* XMPPFetchChatListProcess.m */; };
 		E62B16F51B5C1AA700D446BC /* PositionIn.MainMenuUserCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E62B16F31B5C1AA700D446BC /* PositionIn.MainMenuUserCell.xib */; };
 		E62B16F61B5C1AA700D446BC /* MainMenuUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E62B16F41B5C1AA700D446BC /* MainMenuUserCell.swift */; };
 		E62B16F81B5C6BBF00D446BC /* AvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E62B16F71B5C6BBF00D446BC /* AvatarView.swift */; };
@@ -546,6 +555,13 @@
 		AF836D0B902FDFFA6CB4A412 /* Pods_Messaging.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Messaging.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB73828B80F64D347BB9F14D /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5785CCFFE7238C562E6E52F /* Pods-PositionIn.devrelease.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PositionIn.devrelease.xcconfig"; path = "Pods/Target Support Files/Pods-PositionIn/Pods-PositionIn.devrelease.xcconfig"; sourceTree = "<group>"; };
+		CDEDD9691C45033C00396594 /* PostToContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostToContainerViewController.swift; sourceTree = "<group>"; };
+		CDEDD96A1C45033C00396594 /* PositionIn.PostToContainerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.PostToContainerViewController.xib; sourceTree = "<group>"; };
+		CDEDD96D1C45169C00396594 /* ContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
+		CDEDD9711C45242400396594 /* VolunteerSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VolunteerSearchViewController.swift; sourceTree = "<group>"; };
+		CDEDD9721C45242400396594 /* PositionIn.VolunteerSearchViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.VolunteerSearchViewController.xib; sourceTree = "<group>"; };
+		CDEDD9751C45243900396594 /* CommunitySearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommunitySearchViewController.swift; sourceTree = "<group>"; };
+		CDEDD9761C45243900396594 /* PositionIn.CommunitySearchViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.CommunitySearchViewController.xib; sourceTree = "<group>"; };
 		D100DF0A1BF4AA0300C81054 /* GoogleAnalyticsHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GoogleAnalyticsHelper.swift; path = Utils/GoogleAnalyticsHelper.swift; sourceTree = "<group>"; };
 		D100DF0D1BF4AA7900C81054 /* NSDate+NVTimeAgo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+NVTimeAgo.h"; sourceTree = "<group>"; };
 		D100DF0E1BF4AA7900C81054 /* NSDate+NVTimeAgo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+NVTimeAgo.m"; sourceTree = "<group>"; };
@@ -624,6 +640,8 @@
 		E61B20D41B7DD47C005EAB2C /* FeedItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedItem.swift; sourceTree = "<group>"; };
 		E61B20D71B7E0838005EAB2C /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		E61B20EE1B813C8C005EAB2C /* Community.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Community.swift; sourceTree = "<group>"; };
+		E625F0BA1C2C43F600142F1E /* XMPPFetchChatListProcess.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPFetchChatListProcess.h; sourceTree = "<group>"; };
+		E625F0BB1C2C43F600142F1E /* XMPPFetchChatListProcess.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPFetchChatListProcess.m; sourceTree = "<group>"; };
 		E62B16F31B5C1AA700D446BC /* PositionIn.MainMenuUserCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.MainMenuUserCell.xib; sourceTree = "<group>"; };
 		E62B16F41B5C1AA700D446BC /* MainMenuUserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuUserCell.swift; sourceTree = "<group>"; };
 		E62B16F71B5C6BBF00D446BC /* AvatarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarView.swift; sourceTree = "<group>"; };
@@ -1601,6 +1619,7 @@
 		E6325F5F1B57D89A00996480 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				CDEDD96D1C45169C00396594 /* ContainerViewController.swift */,
 				E6325F621B57D89A00996480 /* SidebarViewController.swift */,
 				E62B16FE1B5CE0F800D446BC /* BesideMenuViewController.swift */,
 				E6A10AC51B74232100047D74 /* LocationSelectorViewController.swift */,
@@ -1851,6 +1870,12 @@
 				E66A3E171B9CC90C005FA33B /* EditCommunityViewController.swift */,
 				E63201731B9872C60066C62E /* EditProfileViewController.swift */,
 				E6F309381BA81FAF00C9420C /* UploadPhotoCell */,
+				CDEDD9691C45033C00396594 /* PostToContainerViewController.swift */,
+				CDEDD96A1C45033C00396594 /* PositionIn.PostToContainerViewController.xib */,
+				CDEDD9711C45242400396594 /* VolunteerSearchViewController.swift */,
+				CDEDD9721C45242400396594 /* PositionIn.VolunteerSearchViewController.xib */,
+				CDEDD9751C45243900396594 /* CommunitySearchViewController.swift */,
+				CDEDD9761C45243900396594 /* PositionIn.CommunitySearchViewController.xib */,
 			);
 			path = NewItems;
 			sourceTree = "<group>";
@@ -1865,6 +1890,8 @@
 				E6681A2D1B67A2DB003096D6 /* XMPPAuthProcess.m */,
 				E66945801B6E279E00332134 /* XMPPRegisterProcess.h */,
 				E66945811B6E279E00332134 /* XMPPRegisterProcess.m */,
+				E625F0BA1C2C43F600142F1E /* XMPPFetchChatListProcess.h */,
+				E625F0BB1C2C43F600142F1E /* XMPPFetchChatListProcess.m */,
 			);
 			path = Processes;
 			sourceTree = "<group>";
@@ -3117,6 +3144,7 @@
 				E689EF1B1B6A89D000597587 /* XMPPMessage.h in Headers */,
 				E689EF491B6A89D000597587 /* DDXML.h in Headers */,
 				E689EF081B6A89D000597587 /* XMPPCustomBinding.h in Headers */,
+				E625F0BC1C2C43F600142F1E /* XMPPFetchChatListProcess.h in Headers */,
 				E6846DBC1B6D9B4700009411 /* NSDate+XMPPDateTimeProfiles.h in Headers */,
 				E689EF331B6A89D000597587 /* GCDAsyncSocket.h in Headers */,
 				E689EF1D1B6A89D000597587 /* XMPPModule.h in Headers */,
@@ -3181,6 +3209,7 @@
 				E6B3C3331B62589000EA613A /* Strip Cleanroom framework */,
 				373963105920A4E5BC0C1447 /* Copy Pods Resources */,
 				50FA91181BB4211E00B56810 /* Copy Simulator app */,
+				D1531E551C43DBF700B2A3A9 /* Fabric */,
 			);
 			buildRules = (
 			);
@@ -3339,6 +3368,7 @@
 				E6BEF1E71B9C83F200511B46 /* PositionIn.CommunityHeaderCell.xib in Resources */,
 				D1F86CF11BFCAA96006E0C49 /* Onboarding.storyboard in Resources */,
 				D1F1FF261C22F384006D2E75 /* PositionIn.VolunteerDetailsViewController.xib in Resources */,
+				CDEDD96C1C45033C00396594 /* PositionIn.PostToContainerViewController.xib in Resources */,
 				E69420FF1B665F5100F34F06 /* PositionIn.ProductDetailsViewController.xib in Resources */,
 				D1FD854C1C1EFE0F00C2E87B /* PositionIn.MarketDetailsViewController.xib in Resources */,
 				E6D7F83C1BE24AE500A544F4 /* PositionIn.MainMenuBadgeCell.xib in Resources */,
@@ -3363,6 +3393,7 @@
 				240A9B9C1B9CCDA4007C77E3 /* PositionIn.CommunityStatsCell.xib in Resources */,
 				E66115871B7376F4003DB5B3 /* Login.storyboard in Resources */,
 				D1379E8E1C2A98710041AA4E /* PositionIn.ExploreCardCell.xib in Resources */,
+				CDEDD9781C45243900396594 /* PositionIn.CommunitySearchViewController.xib in Resources */,
 				D118A2AB1C0FBC380020B363 /* PositionIn.CardTableViewCell.xib in Resources */,
 				D1DC3EB21C15B3CF00E6B772 /* PaymentTableViewCell.xib in Resources */,
 				D1FD85421C1EE8EA00C2E87B /* PositionIn.EventDetailsViewController.xib in Resources */,
@@ -3375,6 +3406,7 @@
 				E6BEF1CC1B9C5E7200511B46 /* PositionIn.PostImageCell.xib in Resources */,
 				E689F07D1B6B976100597587 /* PositionIn.ProductInventoryCell.xib in Resources */,
 				E6BEF1E61B9C83F200511B46 /* PositionIn.CommunityActionCell.xib in Resources */,
+				CDEDD9741C45242400396594 /* PositionIn.VolunteerSearchViewController.xib in Resources */,
 				E6F3093F1BA81FAF00C9420C /* PositionIn.AttachedPhotosView.xib in Resources */,
 				E6F7A4721BA335070069152A /* PositionIn.WalletViewController.xib in Resources */,
 				E6BEF1C61B9C556300511B46 /* PositionIn.PostViewController.xib in Resources */,
@@ -3483,6 +3515,20 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PositionIn/Pods-PositionIn-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		D1531E551C43DBF700B2A3A9 /* Fabric */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = Fabric;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" 27437daf7b0468aa7a96977842e169657c6b889e 58591b6e6e68aaf8d43a618c90f6c748e0b802f61f287d83e43e16f0542fba41";
+		};
 		E6325F6C1B57E0E600996480 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -3534,7 +3580,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = $PROJECT_DIR/Carthage/Checkouts/CleanroomLogger/BuildControl/bin/stripCarthageFrameworks.sh;
+			shellScript = "$PROJECT_DIR/Carthage/Checkouts/CleanroomLogger/BuildControl/bin/stripCarthageFrameworks.sh --platform iOS";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -3601,6 +3647,7 @@
 				E689F07B1B6B972F00597587 /* ProductInventoryCell.swift in Sources */,
 				E65E87301B611FE700AE444D /* Response.swift in Sources */,
 				E6BEF1D91B9C671D00511B46 /* PostInfoCell.swift in Sources */,
+				CDEDD96B1C45033C00396594 /* PostToContainerViewController.swift in Sources */,
 				D1B780CD1C0F519600EF5825 /* DonateCell.swift in Sources */,
 				D18A1FDC1BEB95D9003F158D /* ChangePasswordViewController.swift in Sources */,
 				E6D7F83B1BE24AE500A544F4 /* MainMenuBadgeCell.swift in Sources */,
@@ -3613,6 +3660,7 @@
 				243D0AA81B8AF90800B0E220 /* RegisterInfoViewController.swift in Sources */,
 				E6D4D5B21B6F81A7003134CB /* SearchViewController.swift in Sources */,
 				D1B780CA1C0F4E9E00EF5825 /* SelectPaymentMethodController.swift in Sources */,
+				CDEDD96E1C45169C00396594 /* ContainerViewController.swift in Sources */,
 				E66115991B73A0CB003DB5B3 /* BrowseListViewController.swift in Sources */,
 				D1FD853E1C1EE8D800C2E87B /* PromotionDetailsViewController.swift in Sources */,
 				E6F074AF1BA6980D00D2566B /* ConversationViewController.swift in Sources */,
@@ -3642,6 +3690,7 @@
 				E64DC3501B4E53C90011D37C /* AppDelegate.swift in Sources */,
 				E6F3093E1BA81FAF00C9420C /* PickPhotoView.swift in Sources */,
 				E6C5CE1D1B83A28C00265955 /* SessionController.swift in Sources */,
+				CDEDD9771C45243900396594 /* CommunitySearchViewController.swift in Sources */,
 				D1F1FF2E1C24265B006D2E75 /* GiveBloodDetailsViewController.swift in Sources */,
 				E60F91331BE2CA2F005F416A /* BadgeView.m in Sources */,
 				E63201761B98D2DA0066C62E /* Shop.swift in Sources */,
@@ -3656,6 +3705,7 @@
 				E6C5F4581BCE908800E3B8C7 /* ConversationManager.swift in Sources */,
 				E66A3E1B1B9CE2D6005FA33B /* OrderViewController.swift in Sources */,
 				E64D00651B7C9601007693E0 /* BaseAddItemViewController.swift in Sources */,
+				CDEDD9731C45242400396594 /* VolunteerSearchViewController.swift in Sources */,
 				E65E872C1B611BA200AE444D /* Post.swift in Sources */,
 				E6BEF1C41B9C54EF00511B46 /* PostViewController.swift in Sources */,
 				E66115A91B73AE0F003DB5B3 /* AddEventViewController.swift in Sources */,
@@ -3736,6 +3786,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E6846DC11B6D9B6500009411 /* NSString+XEP_0106.m in Sources */,
+				E625F0BD1C2C43F600142F1E /* XMPPFetchChatListProcess.m in Sources */,
 				E689EF341B6A89D000597587 /* GCDAsyncSocket.m in Sources */,
 				E689EF171B6A89D000597587 /* XMPPIQ.m in Sources */,
 				E66945831B6E279E00332134 /* XMPPRegisterProcess.m in Sources */,
@@ -4792,7 +4843,6 @@
 			baseConfigurationReference = 63CC26C8BE01B93DC180BE00 /* Pods-PositionIn.devdebug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -4879,7 +4929,6 @@
 			baseConfigurationReference = C5785CCFFE7238C562E6E52F /* Pods-PositionIn.devrelease.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Production IOS Push Services: com.positionin.dev01";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Production IOS Push Services: com.positionin.dev01";
@@ -5067,7 +5116,6 @@
 			baseConfigurationReference = A8CE39DC2C33792AC988FB6F /* Pods-PositionIn.stagingdebug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				ENABLE_BITCODE = NO;
@@ -5291,7 +5339,6 @@
 			baseConfigurationReference = ECC822B2432C22D1C85FFC57 /* Pods-PositionIn.stagingrelease.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Media Applications ltd";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Media Applications ltd";
@@ -5511,7 +5558,6 @@
 			baseConfigurationReference = 696019E5F5D5A8184C75D0A2 /* Pods-PositionIn.proddebug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				ENABLE_BITCODE = NO;
@@ -5734,7 +5780,6 @@
 			baseConfigurationReference = EBB4ADD19B63BD62828B753E /* Pods-PositionIn.prodrelease.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Media Applications ltd";

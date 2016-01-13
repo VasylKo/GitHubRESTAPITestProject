@@ -35,7 +35,7 @@ final class AppConfiguration {
             googleAnalystLogLevel = GAILogLevel.None
         }
         googleMapsKey = "AIzaSyA3NvrDKBcpIsnq4-ZACG41y7Mj-wSfVrY"
-        xmppPort = 5223
+        xmppPort = 5222
     }
     
     let googleAnalystLogLevel: GAILogLevel

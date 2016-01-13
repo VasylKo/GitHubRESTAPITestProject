@@ -1230,15 +1230,49 @@
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SplashImage" translatesAutoresizingMaskIntoConstraints="NO" id="xVM-zu-7o0">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="320" id="7P2-t8-2gM"/>
+                                    <constraint firstAttribute="height" constant="568" id="coS-eP-ZdV"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="7P2-t8-2gM"/>
+                                        <exclude reference="coS-eP-ZdV"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="7P2-t8-2gM"/>
+                                        <include reference="coS-eP-ZdV"/>
+                                    </mask>
+                                </variation>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="xVM-zu-7o0" firstAttribute="centerY" secondItem="5IQ-Q9-xWk" secondAttribute="centerY" id="5kQ-oD-dBJ"/>
                             <constraint firstItem="xVM-zu-7o0" firstAttribute="top" secondItem="5IQ-Q9-xWk" secondAttribute="top" id="8Xo-Xt-1LM"/>
                             <constraint firstAttribute="trailing" secondItem="xVM-zu-7o0" secondAttribute="trailing" id="AVM-3a-2nG"/>
                             <constraint firstItem="JeA-3D-Gt2" firstAttribute="top" secondItem="xVM-zu-7o0" secondAttribute="bottom" id="XFB-pt-IeI"/>
+                            <constraint firstItem="xVM-zu-7o0" firstAttribute="centerX" secondItem="5IQ-Q9-xWk" secondAttribute="centerX" id="iKQ-3Q-bte"/>
                             <constraint firstItem="xVM-zu-7o0" firstAttribute="leading" secondItem="5IQ-Q9-xWk" secondAttribute="leading" id="qXG-wL-a9R"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="5kQ-oD-dBJ"/>
+                                <exclude reference="iKQ-3Q-bte"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="constraints">
+                                <include reference="5kQ-oD-dBJ"/>
+                                <exclude reference="8Xo-Xt-1LM"/>
+                                <exclude reference="AVM-3a-2nG"/>
+                                <include reference="iKQ-3Q-bte"/>
+                                <exclude reference="qXG-wL-a9R"/>
+                                <exclude reference="XFB-pt-IeI"/>
+                            </mask>
+                        </variation>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="I0P-Wh-YiQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1272,7 +1306,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You don’t have community you follow" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NdB-2M-9QQ">
-                                <rect key="frame" x="0.0" y="288.5" width="600" height="23.5"/>
+                                <rect key="frame" x="0.0" y="289" width="600" height="24"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
@@ -1316,7 +1350,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You don’t have people you follow" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QuD-40-8QT">
-                                <rect key="frame" x="0.0" y="288.5" width="600" height="23.5"/>
+                                <rect key="frame" x="0.0" y="289" width="600" height="24"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>

@@ -27,6 +27,19 @@ final class ConversationViewController: JSQMessagesViewController {
         chatController?.closeSession()
     }
     
+    func shouldShowTimestamp(indexPath: NSIndexPath) -> Bool {
+        if indexPath.item == 0 {
+            return true
+        }
+        let message = self.collectionView(collectionView, messageDataForItemAtIndexPath: indexPath)
+        let previousIndexPath = NSIndexPath(forItem: indexPath.item - 1, inSection: indexPath.section)
+        let previousMessage = self.collectionView(collectionView, messageDataForItemAtIndexPath: previousIndexPath)
+        let getMinutes: (NSDate) -> Int = { date in
+            return NSCalendar.currentCalendar().component(.Hour, fromDate: date)
+        }
+        return getMinutes(message.date()) !=  getMinutes(previousMessage.date())
+    }
+    
     //MARK: - Overrides -
     
     /**
@@ -119,7 +132,7 @@ final class ConversationViewController: JSQMessagesViewController {
         *
         *  Show a timestamp for every 3rd message
         */
-        if indexPath.item % 3 == 0 {
+        if shouldShowTimestamp(indexPath) {
             let message = self.collectionView(collectionView, messageDataForItemAtIndexPath: indexPath)
             return JSQMessagesTimestampFormatter.sharedFormatter().attributedTimestampForDate(message.date())
         }
@@ -158,7 +171,7 @@ final class ConversationViewController: JSQMessagesViewController {
     //MARK: - JSQMessages collection view flow layout delegate -
     
     override func collectionView(collectionView: JSQMessagesCollectionView!, layout collectionViewLayout: JSQMessagesCollectionViewFlowLayout!, heightForCellTopLabelAtIndexPath indexPath: NSIndexPath!) -> CGFloat {
-        return  (indexPath.item % 3 == 0) ? kJSQMessagesCollectionViewCellLabelHeightDefault : 0.0
+        return  shouldShowTimestamp(indexPath) ? kJSQMessagesCollectionViewCellLabelHeightDefault : 0.0
     }
     
 //    override func collectionView(collectionView: JSQMessagesCollectionView!, layout collectionViewLayout: JSQMessagesCollectionViewFlowLayout!, heightForMessageBubbleTopLabelAtIndexPath indexPath: NSIndexPath!) -> CGFloat {
