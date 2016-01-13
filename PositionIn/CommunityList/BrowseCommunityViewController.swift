@@ -54,6 +54,7 @@ final class BrowseCommunityViewController: BesideMenuViewController {
         tableView.layoutMargins = UIEdgeInsets(top: 0, left: 30, bottom: 0, right: 30)
         dataSource.configureTable(tableView)
         browseMode = .MyGroups
+        self.browseModeSegmentedControl.tintColor = UIScheme.mainThemeColor
         //Remove following section for not registred users
         if !api().isUserAuthorized() {
             browseMode = .Explore
