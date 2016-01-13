@@ -132,8 +132,8 @@ struct APIService {
         }
     }
     
-    func createCommunityPost(communityId: CRUDObjectId, post object: Post) -> Future<Post, NSError> {
-        let endpoint = Post.communityPostsEndpoint(communityId)
+    func createCommunityPost(post object: Post) -> Future<Post, NSError> {
+        let endpoint = Post.communityPostsEndpoint()
         return createObject(endpoint, object: object)
     }
     

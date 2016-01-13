@@ -21,6 +21,7 @@ struct Post: CRUDObject {
     var author: UserInfo?
     var comments: [Comment] = []
     var date: NSDate?
+    var communityID: String?
     
     init(objectId: CRUDObjectId = CRUDObjectInvalidId) {
         self.objectId = objectId
@@ -46,6 +47,7 @@ struct Post: CRUDObject {
         isLiked <- map["isLiked"]
         author <- map["author"]
         comments <- map["comments"]
+        communityID <- map["communityId"]
         date <- (map["date"], APIDateTransform())        
     }
     
@@ -69,8 +71,8 @@ struct Post: CRUDObject {
         return (UserProfile.endpoint() as NSString).stringByAppendingPathComponent("\(userId)/posts")
     }
     
-    static func communityPostsEndpoint(communityId: CRUDObjectId) -> String {
-        return (Community.endpoint() as NSString).stringByAppendingPathComponent("\(communityId)/post")
+    static func communityPostsEndpoint() -> String {
+        return "/v1.0/posts"
     }
         
     var description: String {

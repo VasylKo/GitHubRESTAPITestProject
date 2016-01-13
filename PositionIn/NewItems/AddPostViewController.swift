@@ -114,7 +114,8 @@ final class AddPostViewController: BaseAddItemViewController {
                         return info
                     }
                     if let communityId = communityId {
-                        return api().createCommunityPost(communityId, post: post)
+                        post.communityID = communityId
+                        return api().createCommunityPost(post: post)
                     } else {
                         return api().createUserPost(post: post)
                     }
