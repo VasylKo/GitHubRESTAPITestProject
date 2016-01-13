@@ -123,11 +123,6 @@ final class BrowseCommunityViewController: BesideMenuViewController {
         return dataSource
         }()
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
     @IBAction func addCommunityTouched(sender: AnyObject) {
         api().isUserAuthorized().onSuccess {[weak self] in
             let controller = Storyboards.NewItems.instantiateAddCommunityViewController()
