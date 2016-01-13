@@ -17,8 +17,6 @@ class PostToContainerViewController: ContainerViewController, XLFormRowDescripto
     
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     
-
-    
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         let communitySearchViewController = CommunitySearchViewController()
