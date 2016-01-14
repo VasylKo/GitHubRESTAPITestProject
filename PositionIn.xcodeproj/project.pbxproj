@@ -3331,7 +3331,7 @@
 					};
 					E64DC3491B4E53C90011D37C = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = 57P7HQ93KU;
+						DevelopmentTeam = WVE53RRC7C;
 						SystemCapabilities = {
 							com.apple.Push = {
 								enabled = 1;
@@ -3350,7 +3350,7 @@
 					};
 					E6E2FE871B66F61300880F3C = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = 57P7HQ93KU;
+						DevelopmentTeam = WVE53RRC7C;
 					};
 					E6E2FE911B66F61300880F3C = {
 						CreatedOnToolsVersion = 6.4;
@@ -4419,7 +4419,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "Apple Production IOS Push Services: com.positionin.dev01";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Production IOS Push Services: com.positionin.dev01";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
