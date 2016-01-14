@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BrowseCommunityViewController" customModule="PositionIn" customModuleProvider="target">
             <connections>
+                <outlet property="browseModeSegmentedControl" destination="gTd-dd-xYa" id="xng-Xo-1jC"/>
                 <outlet property="tableView" destination="9ae-G5-ANH" id="8Uf-O9-fvG"/>
                 <outlet property="view" destination="KYN-Bw-xJK" id="FSq-UZ-6ju"/>
             </connections>
@@ -17,23 +19,38 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="9ae-G5-ANH" customClass="TableView" customModule="PosInCore">
-                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                    <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
+                    <rect key="frame" x="0.0" y="59" width="600" height="541"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                 </tableView>
+                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="gTd-dd-xYa">
+                    <rect key="frame" x="37" y="15" width="527" height="29"/>
+                    <segments>
+                        <segment title="Active"/>
+                        <segment title="Join"/>
+                    </segments>
+                    <connections>
+                        <action selector="browseModeSegmentChanged:" destination="-1" eventType="valueChanged" id="Rbg-db-ikF"/>
+                    </connections>
+                </segmentedControl>
             </subviews>
-            <color key="backgroundColor" red="0.93333333333333335" green="0.93333333333333335" blue="0.93333333333333335" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="9ae-G5-ANH" secondAttribute="bottom" id="1Tw-h5-fhi"/>
                 <constraint firstItem="9ae-G5-ANH" firstAttribute="leading" secondItem="KYN-Bw-xJK" secondAttribute="leading" id="9kM-ms-Jbj"/>
-                <constraint firstItem="9ae-G5-ANH" firstAttribute="top" secondItem="KYN-Bw-xJK" secondAttribute="top" id="B6A-s8-0DC"/>
+                <constraint firstItem="9ae-G5-ANH" firstAttribute="top" secondItem="KYN-Bw-xJK" secondAttribute="top" constant="59" id="B6A-s8-0DC"/>
+                <constraint firstItem="gTd-dd-xYa" firstAttribute="leading" secondItem="KYN-Bw-xJK" secondAttribute="leading" constant="37" id="MTl-Ei-uc6"/>
+                <constraint firstItem="gTd-dd-xYa" firstAttribute="top" secondItem="KYN-Bw-xJK" secondAttribute="top" constant="15" id="R95-nO-qOC"/>
+                <constraint firstAttribute="trailing" secondItem="gTd-dd-xYa" secondAttribute="trailing" constant="36" id="Sl2-7i-2vS"/>
                 <constraint firstAttribute="trailing" secondItem="9ae-G5-ANH" secondAttribute="trailing" id="Xd7-Kf-krd"/>
                 <constraint firstAttribute="trailingMargin" secondItem="9ae-G5-ANH" secondAttribute="trailing" constant="-8" id="avc-Kt-qeQ"/>
+                <constraint firstItem="9ae-G5-ANH" firstAttribute="top" secondItem="gTd-dd-xYa" secondAttribute="bottom" constant="16" id="cAi-It-f1W"/>
                 <constraint firstItem="9ae-G5-ANH" firstAttribute="leading" secondItem="KYN-Bw-xJK" secondAttribute="leadingMargin" constant="-8" id="hEW-UJ-1kw"/>
             </constraints>
             <variation key="default">
                 <mask key="constraints">
                     <exclude reference="9kM-ms-Jbj"/>
+                    <exclude reference="B6A-s8-0DC"/>
                     <exclude reference="Xd7-Kf-krd"/>
                 </mask>
             </variation>

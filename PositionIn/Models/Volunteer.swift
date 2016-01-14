@@ -1,15 +1,15 @@
 //
-//  Post.swift
+//  Volunteer.swift
 //  PositionIn
 //
-//  Created by Alexandr Goncharov on 23/07/15.
-//  Copyright (c) 2015 Soluna Labs. All rights reserved.
+//  Created by Mikhail Polyevin on 14/01/16.
+//  Copyright © 2016 Soluna Labs. All rights reserved.
 //
 
 import ObjectMapper
 import CleanroomLogger
 
-struct Community: CRUDObject {
+struct Volunteer: CRUDObject {
     var objectId: CRUDObjectId = CRUDObjectInvalidId
     var name: String?
     var communityDescription: String?
@@ -17,7 +17,7 @@ struct Community: CRUDObject {
     var isPrivate: Bool = false
     
     var shops: [ObjectInfo]?
-
+    
     /*
     "members": {
     "data": [
@@ -50,7 +50,7 @@ struct Community: CRUDObject {
             return true
         }
     }
-
+    
     enum Role: Int, CustomDebugStringConvertible {
         case Unknown
         case Owner, Moderator, Member, Invite
@@ -73,11 +73,11 @@ struct Community: CRUDObject {
         }
     }
     
-
+    
     init(objectId: CRUDObjectId = CRUDObjectInvalidId) {
         self.objectId = objectId
     }
-
+    
     
     init?(_ map: Map) {
         mapping(map)
@@ -88,7 +88,7 @@ struct Community: CRUDObject {
             return nil
         }
     }
-
+    
     mutating func mapping(map: Map) {
         objectId <- (map["id"], CRUDObjectIdTransform())
         name <- map["name"]
@@ -105,25 +105,13 @@ struct Community: CRUDObject {
     }
     
     static func endpoint() -> String {
-        return "/v1.0/community"
+        return "/v1.0/volunteers"
     }
     
-    static func endpointCommunities() -> String {
-        return "/v1.0/communities"
+    static func volunteerEndpoint(volunteerId: CRUDObjectId) -> String {
+        return (Volunteer.endpoint() as NSString).stringByAppendingPathComponent("\(volunteerId)")
     }
 
-    static func communityEndpoint(communityId: CRUDObjectId) -> String {
-        return (Community.endpoint() as NSString).stringByAppendingPathComponent("\(communityId)")
-    }
-    
-    static func userCommunitiesEndpoint(userId: CRUDObjectId) -> String {
-        return (UserProfile.endpoint() as NSString).stringByAppendingPathComponent("\(userId)/communities")
-    }
-    
-    static func membersEndpoint(communityId: CRUDObjectId) -> String {
-        return (Community.communityEndpoint(communityId) as NSString).stringByAppendingPathComponent("/members")
-    }
-    
     var description: String {
         return "<\(self.dynamicType):\(objectId)>"
     }

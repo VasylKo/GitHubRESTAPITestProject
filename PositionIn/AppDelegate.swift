@@ -15,6 +15,7 @@ import Messaging
 import GoogleMaps
 import FBSDKCoreKit
 import XLForm
+import Braintree
 import Fabric
 import Crashlytics
 
@@ -93,10 +94,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         XLFormViewController.cellClassesForRowDescriptorTypes()[XLFormRowDescriptorTypeDonate] =
         "DonateCell"
+
+        XLFormViewController.cellClassesForRowDescriptorTypes()[XLFormRowDescriptorTypeError] =
+        "ErrorCell"
         
         XLFormViewController.cellClassesForRowDescriptorTypes()[XLFormRowDescriptorTypePayment] =
         "PaymentTableViewCell"
         
+        BTAppSwitch.setReturnURLScheme("\(NSBundle.mainBundle().bundleIdentifier!).payments")
+
         let settings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound],
             categories: nil)
         UIApplication.sharedApplication().registerUserNotificationSettings(settings)
@@ -108,6 +114,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
+        if url.scheme.localizedCaseInsensitiveCompare("\(NSBundle.mainBundle().bundleIdentifier!).payments") == .OrderedSame {
+            return BTAppSwitch.handleOpenURL(url, sourceApplication:sourceApplication)
+        }
+
         return FBSDKApplicationDelegate.sharedInstance().application(application, openURL: url,
             sourceApplication: sourceApplication, annotation: annotation)
     }

@@ -54,6 +54,7 @@ final class BrowseCommunityViewController: BesideMenuViewController {
         tableView.layoutMargins = UIEdgeInsets(top: 0, left: 30, bottom: 0, right: 30)
         dataSource.configureTable(tableView)
         browseMode = .MyGroups
+        self.browseModeSegmentedControl.tintColor = UIScheme.mainThemeColor
         //Remove following section for not registred users
         if !api().isUserAuthorized() {
             browseMode = .Explore
@@ -122,11 +123,6 @@ final class BrowseCommunityViewController: BesideMenuViewController {
         dataSource.parentViewController = self
         return dataSource
         }()
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
     @IBAction func addCommunityTouched(sender: AnyObject) {
         api().isUserAuthorized().onSuccess {[weak self] in

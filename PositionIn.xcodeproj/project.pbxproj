@@ -43,6 +43,9 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		1A56454F1ADF6D1BF3022FB3 /* BraintreePaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A564EEB40AD56FD2C113F2A /* BraintreePaymentViewController.swift */; };
+		1A564902D955532DE5B29A65 /* ErrorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A56438E04F9AD6CBDA75AC9 /* ErrorCell.swift */; };
+		1A56491DAEFA315F9DB47400 /* PaymentReponseDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A5640E770D4CB872B2E4605 /* PaymentReponseDelegate.swift */; };
 		240A9B9C1B9CCDA4007C77E3 /* PositionIn.CommunityStatsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 240A9B9B1B9CCDA4007C77E3 /* PositionIn.CommunityStatsCell.xib */; };
 		240A9B9E1B9CCDB4007C77E3 /* CommunityStatsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 240A9B9D1B9CCDB4007C77E3 /* CommunityStatsCell.swift */; };
 		2431EBDC1B945F5A009FB158 /* Promotion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2431EBDB1B945F5A009FB158 /* Promotion.swift */; };
@@ -60,11 +63,14 @@
 		500D7FA91BC2CD39008C8C82 /* PositionIn.SearchEntityCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 500D7FA71BC2CD39008C8C82 /* PositionIn.SearchEntityCell.xib */; };
 		500D7FAC1BC2CD51008C8C82 /* SearchSectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500D7FAA1BC2CD51008C8C82 /* SearchSectionCell.swift */; };
 		500D7FAD1BC2CD51008C8C82 /* PositionIn.SearchSectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 500D7FAB1BC2CD51008C8C82 /* PositionIn.SearchSectionCell.xib */; };
+		5095611B1C3EBFCD00D3C207 /* BraintreePayment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5095611A1C3EBFCD00D3C207 /* BraintreePayment.swift */; };
 		50C7B5B21BC6A32900E8E8B4 /* PositionIn.SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50C7B5B11BC6A32900E8E8B4 /* PositionIn.SettingsViewController.xib */; };
 		50D1AFA61BBAD21400957882 /* PostLikeCommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50D1AFA41BBAD21400957882 /* PostLikeCommentCell.swift */; };
 		50D1AFA71BBAD21400957882 /* PositionIn.PostLikeCommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50D1AFA51BBAD21400957882 /* PositionIn.PostLikeCommentCell.xib */; };
 		50F730591BBBE86A008D3D94 /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F730571BBBE86A008D3D94 /* CommentCell.swift */; };
 		50F7305A1BBBE86A008D3D94 /* PositionIn.CommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50F730581BBBE86A008D3D94 /* PositionIn.CommentCell.xib */; };
+		50FA432C1C4404CC0050B00E /* PaymentProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FA432B1C4404CC0050B00E /* PaymentProtocol.swift */; };
+		50FA43301C44F0B50050B00E /* ErrorCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50FA432F1C44F0B50050B00E /* ErrorCell.xib */; };
 		50FE7D891BBE77BB005676E2 /* ItemsSearchResultDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FE7D871BBE77BB005676E2 /* ItemsSearchResultDataSource.swift */; };
 		50FE7D8A1BBE77BB005676E2 /* ItemsSearchResultsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FE7D881BBE77BB005676E2 /* ItemsSearchResultsController.swift */; };
 		CDEDD96B1C45033C00396594 /* PostToContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDEDD9691C45033C00396594 /* PostToContainerViewController.swift */; };
@@ -89,6 +95,7 @@
 		D1379E941C2C21F80041AA4E /* NewsCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1379E921C2C21F80041AA4E /* NewsCardCell.swift */; };
 		D1379E951C2C21F80041AA4E /* PositionIn.NewsCardCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1379E931C2C21F80041AA4E /* PositionIn.NewsCardCell.xib */; };
 		D153AB841C11FA9B00DFB5C9 /* AmbulanceRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D153AB831C11FA9B00DFB5C9 /* AmbulanceRequest.swift */; };
+		D154411A1C47D642006251B7 /* Volunteer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15441191C47D642006251B7 /* Volunteer.swift */; };
 		D15F47441C088A26009ED3FD /* HomeItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15F47431C088A26009ED3FD /* HomeItem.swift */; };
 		D15F47471C0AFDAF009ED3FD /* CallAmbulanceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15F47461C0AFDAF009ED3FD /* CallAmbulanceViewController.swift */; };
 		D15F47491C0B77D7009ED3FD /* AmbulanceBaseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15F47481C0B77D7009ED3FD /* AmbulanceBaseController.swift */; };
@@ -521,6 +528,9 @@
 
 /* Begin PBXFileReference section */
 		040F01865A9A2BB68F3FDBFF /* Pods-PositionIn.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PositionIn.release.xcconfig"; path = "Pods/Target Support Files/Pods-PositionIn/Pods-PositionIn.release.xcconfig"; sourceTree = "<group>"; };
+		1A5640E770D4CB872B2E4605 /* PaymentReponseDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentReponseDelegate.swift; sourceTree = "<group>"; };
+		1A56438E04F9AD6CBDA75AC9 /* ErrorCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorCell.swift; sourceTree = "<group>"; };
+		1A564EEB40AD56FD2C113F2A /* BraintreePaymentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BraintreePaymentViewController.swift; sourceTree = "<group>"; };
 		240A9B9B1B9CCDA4007C77E3 /* PositionIn.CommunityStatsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.CommunityStatsCell.xib; sourceTree = "<group>"; };
 		240A9B9D1B9CCDB4007C77E3 /* CommunityStatsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommunityStatsCell.swift; sourceTree = "<group>"; };
 		2431EBDB1B945F5A009FB158 /* Promotion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Promotion.swift; sourceTree = "<group>"; };
@@ -540,11 +550,14 @@
 		500D7FA71BC2CD39008C8C82 /* PositionIn.SearchEntityCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.SearchEntityCell.xib; sourceTree = "<group>"; };
 		500D7FAA1BC2CD51008C8C82 /* SearchSectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchSectionCell.swift; sourceTree = "<group>"; };
 		500D7FAB1BC2CD51008C8C82 /* PositionIn.SearchSectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.SearchSectionCell.xib; sourceTree = "<group>"; };
+		5095611A1C3EBFCD00D3C207 /* BraintreePayment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BraintreePayment.swift; sourceTree = "<group>"; };
 		50C7B5B11BC6A32900E8E8B4 /* PositionIn.SettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.SettingsViewController.xib; sourceTree = "<group>"; };
 		50D1AFA41BBAD21400957882 /* PostLikeCommentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostLikeCommentCell.swift; sourceTree = "<group>"; };
 		50D1AFA51BBAD21400957882 /* PositionIn.PostLikeCommentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.PostLikeCommentCell.xib; sourceTree = "<group>"; };
 		50F730571BBBE86A008D3D94 /* CommentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
 		50F730581BBBE86A008D3D94 /* PositionIn.CommentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.CommentCell.xib; sourceTree = "<group>"; };
+		50FA432B1C4404CC0050B00E /* PaymentProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentProtocol.swift; sourceTree = "<group>"; };
+		50FA432F1C44F0B50050B00E /* ErrorCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ErrorCell.xib; sourceTree = "<group>"; };
 		50FE7D871BBE77BB005676E2 /* ItemsSearchResultDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemsSearchResultDataSource.swift; sourceTree = "<group>"; };
 		50FE7D881BBE77BB005676E2 /* ItemsSearchResultsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemsSearchResultsController.swift; sourceTree = "<group>"; };
 		63CC26C8BE01B93DC180BE00 /* Pods-PositionIn.devdebug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PositionIn.devdebug.xcconfig"; path = "Pods/Target Support Files/Pods-PositionIn/Pods-PositionIn.devdebug.xcconfig"; sourceTree = "<group>"; };
@@ -578,6 +591,7 @@
 		D1379E921C2C21F80041AA4E /* NewsCardCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsCardCell.swift; sourceTree = "<group>"; };
 		D1379E931C2C21F80041AA4E /* PositionIn.NewsCardCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.NewsCardCell.xib; sourceTree = "<group>"; };
 		D153AB831C11FA9B00DFB5C9 /* AmbulanceRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AmbulanceRequest.swift; sourceTree = "<group>"; };
+		D15441191C47D642006251B7 /* Volunteer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Volunteer.swift; sourceTree = "<group>"; };
 		D15F47431C088A26009ED3FD /* HomeItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeItem.swift; sourceTree = "<group>"; };
 		D15F47461C0AFDAF009ED3FD /* CallAmbulanceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CallAmbulanceViewController.swift; sourceTree = "<group>"; };
 		D15F47481C0B77D7009ED3FD /* AmbulanceBaseController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AmbulanceBaseController.swift; sourceTree = "<group>"; };
@@ -1203,6 +1217,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1A564ECCDF0969356B20C9A5 /* ErrorView */ = {
+			isa = PBXGroup;
+			children = (
+				1A56438E04F9AD6CBDA75AC9 /* ErrorCell.swift */,
+				50FA432F1C44F0B50050B00E /* ErrorCell.xib */,
+			);
+			path = ErrorView;
+			sourceTree = "<group>";
+		};
+		1A564F438FBCAC524746510A /* BraintreePayment */ = {
+			isa = PBXGroup;
+			children = (
+				1A564EEB40AD56FD2C113F2A /* BraintreePaymentViewController.swift */,
+				50FA432B1C4404CC0050B00E /* PaymentProtocol.swift */,
+				1A5640E770D4CB872B2E4605 /* PaymentReponseDelegate.swift */,
+			);
+			path = BraintreePayment;
+			sourceTree = "<group>";
+		};
 		2429FFA21B8E00770061B4E0 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
@@ -1354,6 +1387,7 @@
 				D118A2AC1C0FBDF50020B363 /* CardItem.swift */,
 				D1C475E91C106DB70096D383 /* DonateNotificationViewController.swift */,
 				D1C475EB1C1081770096D383 /* PaymentCompletedViewController.swift */,
+				1A564ECCDF0969356B20C9A5 /* ErrorView */,
 			);
 			path = Donate;
 			sourceTree = "<group>";
@@ -1737,6 +1771,7 @@
 				E64DC3581B4E53C90011D37C /* LaunchScreen.xib */,
 				E64DC34D1B4E53C90011D37C /* Supporting Files */,
 				E64DC36F1B4E54330011D37C /* PositionIn-Bridging-Header.h */,
+				1A564F438FBCAC524746510A /* BraintreePayment */,
 			);
 			path = PositionIn;
 			sourceTree = "<group>";
@@ -1776,6 +1811,7 @@
 				E6A869F31B60FF2100797D16 /* UserProfile.swift */,
 				E61B20D41B7DD47C005EAB2C /* FeedItem.swift */,
 				E61B20EE1B813C8C005EAB2C /* Community.swift */,
+				D15441191C47D642006251B7 /* Volunteer.swift */,
 				2431EBDF1B94C1DC009FB158 /* Event.swift */,
 				2431EBDD1B947442009FB158 /* Product.swift */,
 				2431EBDB1B945F5A009FB158 /* Promotion.swift */,
@@ -1790,6 +1826,7 @@
 				E6FC24C21BAAEC23006FE7A0 /* Conversation.swift */,
 				500D7FA21BC2AACF008C8C82 /* SearchItem.swift */,
 				D15F47431C088A26009ED3FD /* HomeItem.swift */,
+				5095611A1C3EBFCD00D3C207 /* BraintreePayment.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -3298,6 +3335,7 @@
 					};
 					E64DC3491B4E53C90011D37C = {
 						CreatedOnToolsVersion = 6.4;
+						DevelopmentTeam = 57P7HQ93KU;
 						SystemCapabilities = {
 							com.apple.Push = {
 								enabled = 1;
@@ -3316,7 +3354,7 @@
 					};
 					E6E2FE871B66F61300880F3C = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = WVE53RRC7C;
+						DevelopmentTeam = 57P7HQ93KU;
 					};
 					E6E2FE911B66F61300880F3C = {
 						CreatedOnToolsVersion = 6.4;
@@ -3384,6 +3422,7 @@
 				D1DA176D1C05B7BE0091A8CE /* PositionIn.BrowseGridCollectionViewCell.xib in Resources */,
 				E660E52E1B5AC23B00F52050 /* PositionIn.MainMenuViewController.xib in Resources */,
 				E6C952351BA1D9960032254F /* PositionIn.ProfileStatsCell.xib in Resources */,
+				50FA43301C44F0B50050B00E /* ErrorCell.xib in Resources */,
 				E62B16F51B5C1AA700D446BC /* PositionIn.MainMenuUserCell.xib in Resources */,
 				E6BEF1D81B9C671D00511B46 /* PositionIn.PostInfoCell.xib in Resources */,
 				E661159E1B73A0CB003DB5B3 /* PositionIn.BrowseMapViewController.xib in Resources */,
@@ -3605,6 +3644,7 @@
 				E6DADB9E1B8C5799009A5694 /* SearchFilter.swift in Sources */,
 				D1FD853A1C1EE8BB00C2E87B /* TrainingDetailsViewController.swift in Sources */,
 				E64D00631B7C8FB7007693E0 /* AddPostViewController.swift in Sources */,
+				50FA432C1C4404CC0050B00E /* PaymentProtocol.swift in Sources */,
 				E6F7A4811BA356500069152A /* LocationSearchResultDataSource.swift in Sources */,
 				E62B16FF1B5CE0F800D446BC /* BesideMenuViewController.swift in Sources */,
 				E66F901B1BA6A5C100280B77 /* ChatController.swift in Sources */,
@@ -3655,6 +3695,7 @@
 				D1B780C01C0E5BF600EF5825 /* SelectMembershipPlansViewController.swift in Sources */,
 				E63201741B9872C60066C62E /* EditProfileViewController.swift in Sources */,
 				E65E87321B614A9900AE444D /* Location.swift in Sources */,
+				5095611B1C3EBFCD00D3C207 /* BraintreePayment.swift in Sources */,
 				E62B17061B5CE3EB00D446BC /* BrowseViewController.swift in Sources */,
 				E6BEF1E41B9C83F200511B46 /* CommunityHeaderCell.swift in Sources */,
 				243D0AA81B8AF90800B0E220 /* RegisterInfoViewController.swift in Sources */,
@@ -3719,6 +3760,7 @@
 				E6C5CE191B83A21500265955 /* LocationController.swift in Sources */,
 				E63201651B967A540066C62E /* Notifications.swift in Sources */,
 				E62B16FB1B5CDF0100D446BC /* MessagesListViewController.swift in Sources */,
+				D154411A1C47D642006251B7 /* Volunteer.swift in Sources */,
 				E66A3E181B9CC90C005FA33B /* EditCommunityViewController.swift in Sources */,
 				E64D006A1B7CA2DC007693E0 /* AddCommunityViewController.swift in Sources */,
 				E6A10AC61B74232100047D74 /* LocationSelectorViewController.swift in Sources */,
@@ -3770,6 +3812,9 @@
 				D1FD85411C1EE8EA00C2E87B /* EventDetailsViewController.swift in Sources */,
 				E61B20D81B7E0838005EAB2C /* SettingsViewController.swift in Sources */,
 				D1B780C31C0F07B700EF5825 /* MembershipBenefitCell.swift in Sources */,
+				1A56454F1ADF6D1BF3022FB3 /* BraintreePaymentViewController.swift in Sources */,
+				1A56491DAEFA315F9DB47400 /* PaymentReponseDelegate.swift in Sources */,
+				1A564902D955532DE5B29A65 /* ErrorCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4930,7 +4975,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "Apple Production IOS Push Services: com.positionin.dev01";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Production IOS Push Services: com.positionin.dev01";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -5242,6 +5287,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_REPEATED_USE_OF_WEAK = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -5273,6 +5319,7 @@
 				OTHER_LDFLAGS = "-lxml2";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.positionin.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -5488,6 +5535,7 @@
 				OTHER_LDFLAGS = "-lxml2";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.positionin.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -5683,6 +5731,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_REPEATED_USE_OF_WEAK = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -5714,6 +5763,7 @@
 				OTHER_LDFLAGS = "-lxml2";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.positionin.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -5929,6 +5979,7 @@
 				OTHER_LDFLAGS = "-lxml2";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.positionin.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -5957,6 +6008,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_REPEATED_USE_OF_WEAK = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -5988,6 +6040,7 @@
 				OTHER_LDFLAGS = "-lxml2";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.positionin.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -6031,6 +6084,7 @@
 				OTHER_LDFLAGS = "-lxml2";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.positionin.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
