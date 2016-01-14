@@ -89,6 +89,7 @@
 		D1379E941C2C21F80041AA4E /* NewsCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1379E921C2C21F80041AA4E /* NewsCardCell.swift */; };
 		D1379E951C2C21F80041AA4E /* PositionIn.NewsCardCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1379E931C2C21F80041AA4E /* PositionIn.NewsCardCell.xib */; };
 		D153AB841C11FA9B00DFB5C9 /* AmbulanceRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D153AB831C11FA9B00DFB5C9 /* AmbulanceRequest.swift */; };
+		D154411A1C47D642006251B7 /* Volunteer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15441191C47D642006251B7 /* Volunteer.swift */; };
 		D15F47441C088A26009ED3FD /* HomeItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15F47431C088A26009ED3FD /* HomeItem.swift */; };
 		D15F47471C0AFDAF009ED3FD /* CallAmbulanceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15F47461C0AFDAF009ED3FD /* CallAmbulanceViewController.swift */; };
 		D15F47491C0B77D7009ED3FD /* AmbulanceBaseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15F47481C0B77D7009ED3FD /* AmbulanceBaseController.swift */; };
@@ -576,6 +577,7 @@
 		D1379E921C2C21F80041AA4E /* NewsCardCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsCardCell.swift; sourceTree = "<group>"; };
 		D1379E931C2C21F80041AA4E /* PositionIn.NewsCardCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.NewsCardCell.xib; sourceTree = "<group>"; };
 		D153AB831C11FA9B00DFB5C9 /* AmbulanceRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AmbulanceRequest.swift; sourceTree = "<group>"; };
+		D15441191C47D642006251B7 /* Volunteer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Volunteer.swift; sourceTree = "<group>"; };
 		D15F47431C088A26009ED3FD /* HomeItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeItem.swift; sourceTree = "<group>"; };
 		D15F47461C0AFDAF009ED3FD /* CallAmbulanceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CallAmbulanceViewController.swift; sourceTree = "<group>"; };
 		D15F47481C0B77D7009ED3FD /* AmbulanceBaseController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AmbulanceBaseController.swift; sourceTree = "<group>"; };
@@ -1772,6 +1774,7 @@
 				E6A869F31B60FF2100797D16 /* UserProfile.swift */,
 				E61B20D41B7DD47C005EAB2C /* FeedItem.swift */,
 				E61B20EE1B813C8C005EAB2C /* Community.swift */,
+				D15441191C47D642006251B7 /* Volunteer.swift */,
 				2431EBDF1B94C1DC009FB158 /* Event.swift */,
 				2431EBDD1B947442009FB158 /* Product.swift */,
 				2431EBDB1B945F5A009FB158 /* Promotion.swift */,
@@ -3715,6 +3718,7 @@
 				E6C5CE191B83A21500265955 /* LocationController.swift in Sources */,
 				E63201651B967A540066C62E /* Notifications.swift in Sources */,
 				E62B16FB1B5CDF0100D446BC /* MessagesListViewController.swift in Sources */,
+				D154411A1C47D642006251B7 /* Volunteer.swift in Sources */,
 				E66A3E181B9CC90C005FA33B /* EditCommunityViewController.swift in Sources */,
 				E64D006A1B7CA2DC007693E0 /* AddCommunityViewController.swift in Sources */,
 				E6A10AC61B74232100047D74 /* LocationSelectorViewController.swift in Sources */,

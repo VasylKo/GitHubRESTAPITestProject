@@ -52,6 +52,7 @@ final class AddPostViewController: BaseAddItemViewController {
                                             title: "Post to")
         postToRow.action.viewControllerClass = PostToContainerViewController.self
         postToRow.valueTransformer = PostToValueTrasformer.self
+        postToRow.required = true
         descriptionSection.addFormRow(postToRow)
 
         // Info section
