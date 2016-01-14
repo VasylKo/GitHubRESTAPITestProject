@@ -389,7 +389,6 @@ struct APIService {
         }
     }
     
-    //TODO: temporary method
     func getVolunteers() -> Future<CollectionResponse<Community>,NSError> {
         let endpoint = HomeItem.Volunteer.endpoint()
         let method: Alamofire.Method = .GET
@@ -399,6 +398,11 @@ struct APIService {
             let (_ , future): (Alamofire.Request, Future<CollectionResponse<Community>, NSError>) = self.dataProvider.objectRequest(request)
             return self.handleFailure(future)
         }
+    }
+    
+    func getVolunteer(volunteer: CRUDObjectId) -> Future<Community, NSError> {
+        let endpoint = Volunteer.endpoint()
+        return getObject(endpoint)
     }
     
     func getBomaHotelsDetails(objectId: CRUDObjectId) -> Future<Product, NSError> {
