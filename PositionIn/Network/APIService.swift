@@ -401,7 +401,7 @@ struct APIService {
     }
     
     func getVolunteer(volunteer: CRUDObjectId) -> Future<Community, NSError> {
-        let endpoint = HomeItem.Volunteer.endpoint(volunteer)
+        let endpoint = Volunteer.endpoint()
         return getObject(endpoint)
     }
     
