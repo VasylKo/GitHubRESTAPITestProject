@@ -27,6 +27,7 @@ class BrowseVolunteerViewController: BrowseCommunityViewController {
         case .MyGroups:
             let mySubscriptionsRequest = api().currentUserId().flatMap { userId in
                 return api().getUserCommunities(userId)
+                //
             }
             if firstMyCommunityRequestToken.isInvalid {
                 communitiesRequest = mySubscriptionsRequest
@@ -49,7 +50,7 @@ class BrowseVolunteerViewController: BrowseCommunityViewController {
                 }
             }
         case .Explore:
-            communitiesRequest = api().getCommunities(APIService.Page())
+            communitiesRequest =  api().getVolunteers()
         }
         communitiesRequest.onSuccess(dataRequestToken.validContext) { [weak self] response in
             if let communities = response.items {
