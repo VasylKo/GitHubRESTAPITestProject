@@ -47,6 +47,7 @@
                         <segue destination="1fT-LL-K0F" kind="custom" identifier="ShowWallet" customClass="KYEmbedMainControllerSegue" customModule="KYDrawerController" id="29X-rr-VGm"/>
                         <segue destination="cty-Pr-cFc" kind="custom" identifier="ShowSplash" customClass="KYEmbedMainControllerSegue" customModule="KYDrawerController" id="W2z-TX-m8Z"/>
                         <segue destination="owf-sb-jIe" kind="custom" identifier="ShowBrowse" customClass="KYEmbedMainControllerSegue" customModule="KYDrawerController" id="YY1-1H-FYa"/>
+                        <segue destination="50p-NC-ghg" kind="custom" identifier="ShowVolunteers" customClass="KYEmbedMainControllerSegue" customModule="KYDrawerController" id="epE-1P-cOL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LQ4-lF-MRq" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -260,6 +261,16 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o8N-bY-vrv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1027.5" y="1920.75"/>
+        </scene>
+        <!--Browse Volunteer View Controller-->
+        <scene sceneID="2eh-JQ-YUZ">
+            <objects>
+                <viewController id="JIb-CZ-SRO" customClass="BrowseVolunteerViewController" customModule="PositionIn" customModuleProvider="target" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="4Mm-Vv-a0o"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rMv-UQ-wgc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1027" y="2803"/>
         </scene>
         <!--Search View Controller-->
         <scene sceneID="em1-oT-Uzw">
@@ -917,6 +928,28 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="c7h-2z-YjG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="246" y="1921"/>
+        </scene>
+        <!--Community Navigation Controller Scene-->
+        <scene sceneID="Gr4-jW-gNe">
+            <objects>
+                <navigationController id="50p-NC-ghg" userLabel="Community Navigation Controller Scene" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="IZs-VU-4Oy">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" red="0.13725490200000001" green="0.4431372549" blue="0.83529411760000005" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="barTintColor" red="0.13725490200000001" green="0.4431372549" blue="0.83529411760000005" alpha="1" colorSpace="calibratedRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="JIb-CZ-SRO" kind="relationship" relationship="rootViewController" id="AJL-4V-4fv"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AaT-vH-8ms" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="246" y="2803"/>
         </scene>
         <!--Settings Navigation Controller Scene-->
         <scene sceneID="Fp0-Ay-3lu">
