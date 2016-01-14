@@ -15,6 +15,7 @@ class BrowseVolunteerViewController: BrowseCommunityViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = "Volunteering"
     }
     
     override func reloadData() {

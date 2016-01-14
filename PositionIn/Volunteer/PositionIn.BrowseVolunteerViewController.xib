@@ -21,7 +21,7 @@
                     <rect key="frame" x="37" y="16" width="527" height="29"/>
                     <segments>
                         <segment title="Active"/>
-                        <segment title="Join"/>
+                        <segment title="Volunteer"/>
                     </segments>
                     <connections>
                         <action selector="browseModeSegmentChanged:" destination="-1" eventType="valueChanged" id="Tdz-3c-n2U"/>

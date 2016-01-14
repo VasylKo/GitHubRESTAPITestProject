@@ -51,6 +51,7 @@ class BrowseCommunityViewController: BesideMenuViewController, BrowseCommunityAc
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = "Communities"
         tableView.layoutMargins = UIEdgeInsets(top: 0, left: 30, bottom: 0, right: 30)
         dataSource.configureTable(tableView)
         browseMode = .MyGroups
