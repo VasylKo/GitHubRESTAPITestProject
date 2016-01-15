@@ -99,7 +99,8 @@ protocol BrowseActionConsumer: class {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.titleView = searchbar
+        //hide search functionality
+        //self.navigationItem.titleView = searchbar
 
         self.setRightBarItems()
         
