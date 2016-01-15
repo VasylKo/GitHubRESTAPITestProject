@@ -69,6 +69,10 @@ struct Storyboards {
             return self.storyboard.instantiateViewControllerWithIdentifier("BrowseCommunityViewController") as! BrowseCommunityViewController
         }
 
+        static func instantiateBrowseVolunteerViewController() -> BrowseVolunteerViewController {
+            return self.storyboard.instantiateViewControllerWithIdentifier("BrowseVolunteerViewController") as! BrowseVolunteerViewController
+        }
+
         static func instantiateSearchViewController() -> SearchViewController {
             return self.storyboard.instantiateViewControllerWithIdentifier("SearchViewController") as! SearchViewController
         }
@@ -135,6 +139,10 @@ struct Storyboards {
 
         static func instantiateBrowseCommunityNavigationController() -> UINavigationController {
             return self.storyboard.instantiateViewControllerWithIdentifier("BrowseCommunityNavigationController") as! UINavigationController
+        }
+
+        static func instantiateBrowseVolunteerNavigationController() -> UINavigationController {
+            return self.storyboard.instantiateViewControllerWithIdentifier("BrowseVolunteerNavigationController") as! UINavigationController
         }
 
         static func instantiateSettingsNavigationController() -> UINavigationController {
@@ -275,6 +283,10 @@ struct Storyboards {
             return self.storyboard.instantiateViewControllerWithIdentifier("EditProfileViewController") as! EditProfileViewController
         }
 
+        static func instantiatePostToContainerViewControllerId() -> PostToContainerViewController {
+            return self.storyboard.instantiateViewControllerWithIdentifier("PostToContainerViewControllerId") as! PostToContainerViewController
+        }
+
         static func instantiateAddPromotionViewController() -> AddPromotionViewController {
             return self.storyboard.instantiateViewControllerWithIdentifier("AddPromotionViewController") as! AddPromotionViewController
         }
@@ -342,6 +354,10 @@ struct Storyboards {
 
         static func instantiatePaymentViewControllerId() -> PaymentViewController {
             return self.storyboard.instantiateViewControllerWithIdentifier("PaymentViewControllerId") as! PaymentViewController
+        }
+
+        static func instantiateBraintreePaymentViewController() -> BraintreePaymentViewController {
+            return self.storyboard.instantiateViewControllerWithIdentifier("BraintreePaymentViewController") as! BraintreePaymentViewController
         }
 
         static func instantiateDonateNotificationViewController() -> DonateNotificationViewController {
@@ -543,6 +559,7 @@ extension SidebarViewController {
         case ShowWallet = "ShowWallet"
         case ShowSplash = "ShowSplash"
         case ShowBrowse = "ShowBrowse"
+        case ShowVolunteers = "ShowVolunteers"
 
         var kind: SegueKind? {
             switch (self) {
@@ -567,6 +584,8 @@ extension SidebarViewController {
             case ShowSplash:
                 return SegueKind(rawValue: "custom")
             case ShowBrowse:
+                return SegueKind(rawValue: "custom")
+            case ShowVolunteers:
                 return SegueKind(rawValue: "custom")
             }
         }
@@ -594,6 +613,8 @@ extension SidebarViewController {
             case ShowSplash:
                 return UIViewController.self
             case ShowBrowse:
+                return UINavigationController.self
+            case ShowVolunteers:
                 return UINavigationController.self
             }
         }
@@ -734,19 +755,24 @@ extension EmergencyDetailsController: IdentifiableProtocol {
 extension EmergencyDetailsController { 
 
     enum Segue: String, CustomStringConvertible, SegueProtocol {
-        case ShowOrganizerProfile = "ShowOrganizerProfile"
+        case ShowSellerProfile = "ShowSellerProfile"
+        case Donate = "Donate"
 
         var kind: SegueKind? {
             switch (self) {
-            case ShowOrganizerProfile:
+            case ShowSellerProfile:
+                return SegueKind(rawValue: "show")
+            case Donate:
                 return SegueKind(rawValue: "show")
             }
         }
 
         var destination: UIViewController.Type? {
             switch (self) {
-            case ShowOrganizerProfile:
+            case ShowSellerProfile:
                 return UserProfileViewController.self
+            case Donate:
+                return OrderViewController.self
             }
         }
 
@@ -1569,6 +1595,13 @@ extension EditProfileViewController {
 
 }
 
+//MARK: - PostToContainerViewController
+extension PostToContainerViewController: IdentifiableProtocol { 
+    var identifier: String? { return "PostToContainerViewControllerId" }
+    static var identifier: String? { return "PostToContainerViewControllerId" }
+}
+
+
 //MARK: - AddPromotionViewController
 extension UIStoryboardSegue {
     func selection() -> AddPromotionViewController.Segue? {
@@ -1806,11 +1839,49 @@ extension AmbulanceSentViewController: IdentifiableProtocol {
 
 
 //MARK: - DonateViewController
+extension UIStoryboardSegue {
+    func selection() -> DonateViewController.Segue? {
+        if let identifier = self.identifier {
+            return DonateViewController.Segue(rawValue: identifier)
+        }
+        return nil
+    }
+}
+
 extension DonateViewController: IdentifiableProtocol { 
     var identifier: String? { return "DonateViewController" }
     static var identifier: String? { return "DonateViewController" }
 }
 
+extension DonateViewController { 
+
+    enum Segue: String, CustomStringConvertible, SegueProtocol {
+        case ShowBraintree = "ShowBraintree"
+        case PaymentCompleted = "PaymentCompleted"
+
+        var kind: SegueKind? {
+            switch (self) {
+            case ShowBraintree:
+                return SegueKind(rawValue: "show")
+            case PaymentCompleted:
+                return SegueKind(rawValue: "show")
+            }
+        }
+
+        var destination: UIViewController.Type? {
+            switch (self) {
+            case ShowBraintree:
+                return BraintreePaymentViewController.self
+            case PaymentCompleted:
+                return UINavigationController.self
+            }
+        }
+
+        var identifier: String? { return self.description } 
+        var description: String { return self.rawValue }
+    }
+
+}
 
 //MARK: - SelectPaymentMethodController
 extension SelectPaymentMethodController: IdentifiableProtocol { 
@@ -1823,6 +1894,13 @@ extension SelectPaymentMethodController: IdentifiableProtocol {
 extension PaymentViewController: IdentifiableProtocol { 
     var identifier: String? { return "PaymentViewControllerId" }
     static var identifier: String? { return "PaymentViewControllerId" }
+}
+
+
+//MARK: - BraintreePaymentViewController
+extension BraintreePaymentViewController: IdentifiableProtocol { 
+    var identifier: String? { return "BraintreePaymentViewController" }
+    static var identifier: String? { return "BraintreePaymentViewController" }
 }
 
 

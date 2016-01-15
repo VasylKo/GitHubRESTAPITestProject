@@ -233,6 +233,11 @@ struct APIService {
         return getObjectsCollection(endpoint, params: params)
     }
 
+    func getUserVolunteers(userId: CRUDObjectId) -> Future<CollectionResponse<Volunteer>,NSError> {
+        let endpoint = Volunteer.userVolunteersEndpoint(userId)
+        return getObjectsCollection(endpoint, params: nil)
+    }
+    
     func getUserCommunities(userId: CRUDObjectId) -> Future<CollectionResponse<Community>,NSError> {
         let endpoint = Community.userCommunitiesEndpoint(userId)
         return getObjectsCollection(endpoint, params: nil)
@@ -405,10 +410,15 @@ struct APIService {
         return getObject(endpoint)
     }
     
-    func getBomaHotelsDetails(objectId: CRUDObjectId) -> Future<Product, NSError> {
-        let endpont = HomeItem.BomaHotels.endpoint(objectId)
+    func getBomaHotelsDetails(objectId: CRUDObjectId) -> Future<BomaHotel, NSError> {
+        let endpoint = HomeItem.BomaHotels.endpoint(objectId)
         //TODO need fix downcastng
-        return self.getOne(endpont!)
+        return session().flatMap {
+            (token: AuthResponse.Token) -> Future<BomaHotel, NSError> in
+            let request = self.updateRequest(token, endpoint: endpoint!, params: nil, method: .GET)
+            let (_ , future): (Alamofire.Request, Future<BomaHotel, NSError>) = self.dataProvider.objectRequest(request)
+            return self.handleFailure(future)
+        }
     }
     
     func getProjectsDetails(objectId: CRUDObjectId) -> Future<Product, NSError> {
