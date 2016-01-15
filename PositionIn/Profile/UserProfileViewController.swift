@@ -121,8 +121,7 @@ final class UserProfileViewController: BesideMenuViewController, BrowseActionPro
             profileEditButton.tag = ProfileAction.Edit.rawValue
             profileEditButton.addTarget(self, action: navigationBarButtonActionSelector,
                 forControlEvents: UIControlEvents.TouchUpInside)
-        }
-        else {
+        } else {
             let chatButton = UIButton()
             chatButton.tintColor = UIColor.whiteColor()
             chatButton.setImage(UIImage(named: "profileChat")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate), forState: UIControlState.Normal)
@@ -131,17 +130,8 @@ final class UserProfileViewController: BesideMenuViewController, BrowseActionPro
             chatButton.addTarget(self, action: navigationBarButtonActionSelector,
                 forControlEvents: UIControlEvents.TouchUpInside)
             
-            let callButton = UIButton()
-            callButton.tintColor = UIColor.whiteColor()
-            callButton.setImage(UIImage(named: "profileCall")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate), forState: UIControlState.Normal)
-            callButton.frame = CGRectMake(navigationBarButtonWidthSize, 0, navigationBarButtonWidthSize, navigationBarButtonWidthSize)
-            callButton.tag = ProfileAction.Call.rawValue
-            callButton.addTarget(self, action: navigationBarButtonActionSelector,
-                forControlEvents: UIControlEvents.TouchUpInside)
-            
             let containerView = UIView()
-            containerView.frame = CGRectMake(0, 0, navigationBarButtonWidthSize * 2, navigationBarButtonWidthSize)
-            containerView.addSubview(callButton)
+            containerView.frame = CGRectMake(0, 0, navigationBarButtonWidthSize, navigationBarButtonWidthSize)
             containerView.addSubview(chatButton)
             
             self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: containerView)
@@ -375,6 +365,7 @@ extension UserProfileViewController: BrowseActionConsumer {
     
     func browseController(controller: BrowseActionProducer, didSelectItem objectId: CRUDObjectId, type itemType: FeedItem.ItemType, data: Any?) {
         switch itemType {
+            
         case .Project:
             let controller =  Storyboards.Main.instantiateProductDetailsViewControllerId()
             controller.objectId = objectId
@@ -385,13 +376,21 @@ extension UserProfileViewController: BrowseActionConsumer {
             controller.objectId = objectId
             navigationController?.pushViewController(controller, animated: true)
         case .Training:
-            let controller =  Storyboards.Main.instantiatePromotionDetailsViewControllerId()
+            let controller =  Storyboards.Main.instantiateTrainingDetailsViewControllerId()
             controller.objectId = objectId
             navigationController?.pushViewController(controller, animated: true)
-//        case .Post:
-//            let controller = Storyboards.Main.instantiatePostViewController()
-//            controller.objectId = objectId
-//            navigationController?.pushViewController(controller, animated: true)
+        case .GiveBlood:
+            fallthrough
+        case .News:
+            fallthrough
+        case .Event:
+            fallthrough
+        case .Market:
+            fallthrough
+        case .BomaHotels:
+            fallthrough
+        case .Volunteer:
+            fallthrough
         default:
             Log.debug?.message("Did select \(itemType)<\(objectId)>")
         }

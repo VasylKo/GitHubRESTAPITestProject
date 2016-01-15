@@ -87,7 +87,7 @@ extension TableViewDataSource: UITableViewDataSource {
                 return header
         }
         return nil
-    }
+    }	
     
     @objc public func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         if let reuseID = self.tableView(tableView, reuseIdentifierForFooterInSection: section),

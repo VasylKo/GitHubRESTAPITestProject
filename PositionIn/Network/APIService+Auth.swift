@@ -52,9 +52,9 @@ extension APIService {
             }
             @objc func getChatCredentials() -> XMPPCredentials? {
                 let userId: CRUDObjectId? = apiService.currentUserId()
-                let userPassword = apiService.sessionController.userPassword
+                let userPassword = apiService.sessionController.currentAccessToken()
                 switch (userId, userPassword) {
-                case (.Some(let user), .Some(let password)):
+                case (let user?, let password?):
                     let hostname = AppConfiguration().xmppHostname
                     let jid = "\(user)@\(hostname)"
                     return XMPPCredentials(jid: jid, password: password)
@@ -221,7 +221,7 @@ extension APIService {
     private func updateCurrentProfileStatus(newPasword: String? = nil) -> Future<UserProfile, NSError> {
         return getMyProfile().andThen { result in
             if let profile = result.value {
-                self.sessionController.updateCurrentStatus(profile)
+                self.sessionController.updateCurrentStatus(profile)                
                 if let newPassword = newPasword {
                     self.sessionController.updatePassword(newPassword)
                 }
@@ -355,7 +355,8 @@ extension APIService {
             let device = UIDevice.currentDevice()
             var info = [
                 "make" : device.localizedModel,
-                "model" : "\(device.systemName) \(device.systemVersion)"
+                "model" : "\(device.systemName) \(device.systemVersion)",
+                "os" : "IOS"
             ];
             if let uuid = device.identifierForVendor {
                 info["uuid"] = uuid.UUIDString

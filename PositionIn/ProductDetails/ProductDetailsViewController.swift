@@ -19,8 +19,7 @@ final class ProductDetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //temporary desicion - for december demo
-        title = NSLocalizedString("Project", comment: "Product details: title")
+        title = NSLocalizedString("Project", comment: "Project details: title")
         dataSource.items = productAcionItems()
         dataSource.configureTable(actionTableView)
         reloadData()
@@ -38,11 +37,10 @@ final class ProductDetailsViewController: UIViewController {
     
     private func reloadData() {
         self.infoLabel.text = NSLocalizedString("Calculating...", comment: "Distance calculation process")
-//        nameLabel.text = author?.title
         switch (objectId, author) {
         case (.Some(let objectId), .Some(let author) ):
             api().getUserProfile(author.objectId).flatMap { (profile: UserProfile) -> Future<Product, NSError> in
-                return api().getOne(objectId)
+                return api().getProjectsDetails(objectId)
             }.onSuccess { [weak self] product in
                 self?.didReceiveProductDetails(product)
             }
@@ -224,7 +222,6 @@ extension ProductDetailsViewController {
                 actionConsumer.executeAction(item.action)
             }
         }
-        
     }
 }
 

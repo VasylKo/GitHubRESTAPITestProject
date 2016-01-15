@@ -10,8 +10,17 @@ import Foundation
 import Messaging
 import RealmSwift
 
-class ChatHistory {
-    typealias RoomType = CRUDObjectId
+typealias ChatRoomType = CRUDObjectId
+
+protocol ChatHistory {
+    func loadConversations() -> [Conversation]
+    func storeConversations(conversations: [Conversation])
+    func storeMessage(msg: XMPPTextMessage, room: ChatRoomType)
+    func messagesForChat(room: ChatRoomType) -> [XMPPTextMessage]
+    func messagesForRoom(room: ChatRoomType) -> [XMPPTextMessage]
+}
+
+class RealmChatHistory: ChatHistory {
     
     init(storageName realmName: String) {
         currentRealm = realmWithName(realmName)
@@ -29,7 +38,7 @@ class ChatHistory {
         }
     }
     
-    func storeMessage(msg: XMPPTextMessage, room: RoomType) {
+    func storeMessage(msg: XMPPTextMessage, room: ChatRoomType) {
         let item = ChatMessageStorageObject(textMessage: msg, room: room)
         let realm = currentRealm
         try! realm.write {
@@ -37,15 +46,15 @@ class ChatHistory {
         }
     }
     
-    func messagesForChat(room: RoomType) -> [XMPPTextMessage] {
+    func messagesForChat(room: ChatRoomType) -> [XMPPTextMessage] {
         return itemsForRoom(room)
     }
     
-    func messagesForRoom(room: RoomType) -> [XMPPTextMessage] {
+    func messagesForRoom(room: ChatRoomType) -> [XMPPTextMessage] {
         return itemsForRoom(room)
     }
     
-    private func itemsForRoom(room: RoomType) -> [ XMPPTextMessage] {
+    private func itemsForRoom(room: ChatRoomType) -> [ XMPPTextMessage] {
         return currentRealm.objects(ChatMessageStorageObject).filter("room == %@", room).sorted("date", ascending: true).map { $0.message() }
     }
     
@@ -68,7 +77,7 @@ class ChatHistory {
 }
 
 class ChatMessageStorageObject: Object {
-    dynamic var room: ChatHistory.RoomType =  CRUDObjectInvalidId
+    dynamic var room: ChatRoomType =  CRUDObjectInvalidId
     
     dynamic var from =  CRUDObjectInvalidId
     dynamic var to =  CRUDObjectInvalidId
@@ -76,14 +85,14 @@ class ChatMessageStorageObject: Object {
     dynamic var date =  NSDate()
     
     override static func indexedProperties() -> [String] {
-        return ["room", "date"]
+        return ["room"]
     }
     
     func message() -> XMPPTextMessage {
         return XMPPTextMessage(text, from: from, to: to, date: date)
     }
     
-    convenience init(textMessage: XMPPTextMessage, room: ChatHistory.RoomType) {
+    convenience init(textMessage: XMPPTextMessage, room: ChatRoomType) {
         self.init()
         self.room = room
         from = textMessage.from
@@ -101,14 +110,24 @@ class ChatConversationStorageObject: Object {
     dynamic var lastActivityDate: NSDate = NSDate()
     dynamic var unreadCount: Int64 = 0
     dynamic var roomId: String = CRUDObjectInvalidId
-    dynamic var isGroupChat: Bool = false
+    
+    var isGroupChat: Bool  {
+        get {
+            return _isGroupChat == 1
+        }
+        set {
+            _isGroupChat = newValue ? 1 : 0
+        }
+    }
+    
+    dynamic var _isGroupChat: Int = 0
 
     override static func primaryKey() -> String? {
         return "roomId"
     }
     
     override static func indexedProperties() -> [String] {
-        return ["isGroupChat", "lastActivityDate"]
+        return ["_isGroupChat"]
     }
     
     convenience required init(source: Conversation) {
@@ -119,6 +138,10 @@ class ChatConversationStorageObject: Object {
         self.imageURL = source.imageURL?.absoluteString
         self.lastActivityDate = source.lastActivityDate
         self.unreadCount = Int64(source.unreadCount)
-    }    
+    }
+    
+    override static func ignoredProperties() -> [String] {
+        return ["isGroupChat"]
+    }
     
 }

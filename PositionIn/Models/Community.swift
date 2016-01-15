@@ -107,11 +107,14 @@ struct Community: CRUDObject {
     static func endpoint() -> String {
         return "/v1.0/community"
     }
+    
+    static func endpointCommunities() -> String {
+        return "/v1.0/communities"
+    }
 
     static func communityEndpoint(communityId: CRUDObjectId) -> String {
         return (Community.endpoint() as NSString).stringByAppendingPathComponent("\(communityId)")
     }
-
     
     static func userCommunitiesEndpoint(userId: CRUDObjectId) -> String {
         return (UserProfile.endpoint() as NSString).stringByAppendingPathComponent("\(userId)/communities")
@@ -119,7 +122,6 @@ struct Community: CRUDObject {
     
     static func membersEndpoint(communityId: CRUDObjectId) -> String {
         return (Community.communityEndpoint(communityId) as NSString).stringByAppendingPathComponent("/members")
-        
     }
     
     var description: String {

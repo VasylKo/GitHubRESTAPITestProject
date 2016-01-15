@@ -10,12 +10,11 @@ import Foundation
 
 enum HomeItem: Int, CustomDebugStringConvertible {
     case Unknown = 0
-    case Projects, Emergency, Training, Ambulance, GiveBlood, News, Membership, Donate, Events, Market, BomaHotels, Volunteer
+    case Projects, Emergency, Training, GiveBlood, Volunteer, BomaHotels, Events, Market = 9, News, Ambulance, Membership, Donate
     
     static var count: Int {
         return 12
     }
-    
     
     static func homeItemForUI(value: Int) -> HomeItem {
         switch value {
@@ -48,6 +47,66 @@ enum HomeItem: Int, CustomDebugStringConvertible {
         }
     }
     
+    func endpoint(objectId: String) -> String? {
+        //todo cheng this when it fixed on backend
+//        if let endpoint = self.endpoint() {
+//            return "\(endpoint)\(objectId)"
+//        }
+        switch self {
+        case .Emergency:
+            return "/v1.0/emergencies/\(objectId)"
+        case .GiveBlood:
+            return "/v1.0/give-blood/\(objectId)"
+        case .News:
+            return "/v1.0/posts/\(objectId)"
+        case .Training:
+            return "/v1.0/trainings/\(objectId)"
+        case .Events:
+            return "/v1.0/events/\(objectId)"
+        case .Projects:
+            return "/v1.0/projects/\(objectId)"
+        case .Market:
+            return "/v1.0/products/\(objectId)"
+        case .BomaHotels:
+            return "/v1.0/boma-hotels/\(objectId)"
+        case .Volunteer:
+            return "/v1.0/volunteers/\(objectId)"
+        case .Unknown:
+            fallthrough
+        default:
+            return nil
+        }
+        
+        return nil
+    }
+    
+    func endpoint() -> String? {
+        switch self {
+        case .Emergency:
+            return "/v1.0/search"
+        case .GiveBlood:
+            return "/v1.0/search"
+        case .News:
+            return "/v1.0/search"
+        case .Training:
+            return "/v1.0/search"
+        case .Events:
+            return "/v1.0/search"
+        case .Projects:
+            return "/v1.0/search"
+        case .Market:
+            return "/v1.0/search"
+        case .BomaHotels:
+            return "/v1.0/search"
+        case .Volunteer:
+            return "/v1.0/volunteers"
+        case .Unknown:
+            return "/v1.0/search"
+        default:
+            return nil
+        }
+    }
+    
     func displayString() -> String {
         switch self {
         case .Emergency:
@@ -55,7 +114,7 @@ enum HomeItem: Int, CustomDebugStringConvertible {
         case .Ambulance:
             return NSLocalizedString("Ambulance", comment: "HomeItem")
         case .GiveBlood:
-            return NSLocalizedString("Blood", comment: "HomeItem")
+            return NSLocalizedString("Give Blood", comment: "HomeItem")
         case .News:
             return NSLocalizedString("News", comment: "HomeItem")
         case .Membership:
@@ -80,7 +139,6 @@ enum HomeItem: Int, CustomDebugStringConvertible {
             return NSLocalizedString("All", comment: "HomeItem")
         }
     }
-    
     
     func image() -> UIImage? {
         switch self {

@@ -12,15 +12,16 @@ import CleanroomLogger
 struct Post: CRUDObject {
     var objectId: CRUDObjectId = CRUDObjectInvalidId
     var name: String?
-    var text: String?
+    var descriptionString: String?
     var photos: [PhotoInfo]?
     var location: Location?
     
-    var likes: Int?
+    var likes: Int = 0
     var isLiked: Bool = false
     var author: UserInfo?
-    var comments: [Comment]?
+    var comments: [Comment] = []
     var date: NSDate?
+    var communityID: String?
     
     init(objectId: CRUDObjectId = CRUDObjectInvalidId) {
         self.objectId = objectId
@@ -39,13 +40,14 @@ struct Post: CRUDObject {
     mutating func mapping(map: Map) {
         objectId <- (map["id"], CRUDObjectIdTransform())
         name <- map["name"]
-        text <- map["text"]
+        descriptionString <- map["description"]
         photos <- map["photos"]
         likes <- map["likes"]
         location <- map["location"]
         isLiked <- map["isLiked"]
         author <- map["author"]
         comments <- map["comments"]
+        communityID <- map["communityId"]
         date <- (map["date"], APIDateTransform())        
     }
     
@@ -69,8 +71,8 @@ struct Post: CRUDObject {
         return (UserProfile.endpoint() as NSString).stringByAppendingPathComponent("\(userId)/posts")
     }
     
-    static func communityPostsEndpoint(communityId: CRUDObjectId) -> String {
-        return (Community.endpoint() as NSString).stringByAppendingPathComponent("\(communityId)/posts")
+    static func communityPostsEndpoint() -> String {
+        return "/v1.0/posts"
     }
         
     var description: String {

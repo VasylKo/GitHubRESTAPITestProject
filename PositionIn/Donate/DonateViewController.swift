@@ -8,15 +8,22 @@
 
 import UIKit
 import XLForm
+import Braintree
+import Box
 
-class DonateViewController: XLFormViewController {
-    
+class DonateViewController: XLFormViewController, PaymentReponseDelegate {
     private enum Tags : String {
         case Project = "Project"
         case Money = "Money"
         case Payment = "Payment"
         case Confirm = "Confirm"
+        case Error = "Error"
     }
+    
+    private var amount:Int = 0;
+    private var paymentType:String?
+    private var finishedSuccessfully = false
+    private var errorSection:XLFormSectionDescriptor?
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -33,6 +40,12 @@ class DonateViewController: XLFormViewController {
         view.tintColor = UIScheme.mainThemeColor
     }
     
+    override func viewDidAppear(animated: Bool) {
+        if(finishedSuccessfully) {
+            self.performSegueWithIdentifier("PaymentCompleted", sender: self)
+        }
+    }
+    
     override func showFormValidationError(error: NSError!) {
         if let error = error {
             showWarning(error.localizedDescription)
@@ -42,6 +55,20 @@ class DonateViewController: XLFormViewController {
     func initializeForm() {
         
         let form = XLFormDescriptor(title: NSLocalizedString("Donate", comment: "Donate"))
+        
+        //Error
+        errorSection = XLFormSectionDescriptor()
+        form.addFormSection(errorSection!)
+        
+        let errorRow = XLFormRowDescriptor(tag: Tags.Error.rawValue, rowType: XLFormRowDescriptorTypeError, title:"Error")
+        errorRow.cellConfigAtConfigure["backgroundColor"] = UIColor.purpleColor()
+        errorRow.cellConfig["textLabel.textAlignment"] =  NSTextAlignment.Left.rawValue
+        errorRow.disabled = NSNumber(bool: true)
+        
+        errorSection!.addFormRow(errorRow)
+        errorSection!.hidden = NSNumber(bool: true)
+
+        
         //Donate section
         let donateToSection = XLFormSectionDescriptor.formSection()
         form.addFormSection(donateToSection)
@@ -53,12 +80,20 @@ class DonateViewController: XLFormViewController {
         let donatationSection = XLFormSectionDescriptor.formSectionWithTitle("Donation Amount (KSH)")
         form.addFormSection(donatationSection)
         
-        let donatationRow: XLFormRowDescriptor = XLFormRowDescriptor(tag: Tags.Money.rawValue,
+        let donationRow: XLFormRowDescriptor = XLFormRowDescriptor(tag: Tags.Money.rawValue,
             rowType: XLFormRowDescriptorTypeDecimal)
-        donatationRow.required = true
-        donatationRow.cellConfigAtConfigure["textField.placeholder"] = "Set a donation"
-        donatationRow.cellConfig.setObject(UIScheme.mainThemeColor, forKey: "tintColor")
-        donatationSection.addFormRow(donatationRow)
+        donationRow.required = true
+        donationRow.cellConfigAtConfigure["textField.placeholder"] = "Set a donation"
+        donationRow.cellConfig.setObject(UIScheme.mainThemeColor, forKey: "tintColor")
+        donationRow.onChangeBlock =  { [weak self] oldValue, newValue, _ in
+            if let value = newValue as? NSNumber {
+                self?.amount = Int(value)
+            } else {
+                self?.amount = 0
+            }
+        }
+        
+        donatationSection.addFormRow(donationRow)
         
         let paymentSection = XLFormSectionDescriptor.formSectionWithTitle("Payment")
         form.addFormSection(paymentSection)
@@ -70,6 +105,14 @@ class DonateViewController: XLFormViewController {
         paymentRow.valueTransformer = CardItemValueTrasformer.self
         paymentRow.value = nil
         paymentRow.cellConfig.setObject(UIScheme.mainThemeColor, forKey: "tintColor")
+        paymentRow.onChangeBlock = { [weak self] oldValue, newValue, _ in
+            if let box: Box<CardItem> = newValue as? Box {
+                self?.paymentType = CardItem.cardPayment(box.value)
+            } else {
+                self?.paymentType = nil
+            }
+        }
+        
         paymentSection.addFormRow(paymentRow)
         
         let confirmDonation = XLFormSectionDescriptor.formSection()
@@ -79,10 +122,58 @@ class DonateViewController: XLFormViewController {
             rowType: XLFormRowDescriptorTypeButton,
             title: NSLocalizedString("Confirm Donation", comment: "Payment"))
         
-        confirmRow.action.viewControllerStoryboardId = "DonateNotificationViewController";
+        confirmRow.cellConfig["backgroundColor"] = UIScheme.mainThemeColor
+        confirmRow.cellConfig["textLabel.color"] = UIColor.whiteColor()
+        confirmRow.cellConfig["textLabel.textAlignment"] =  NSTextAlignment.Center.rawValue
 
+        confirmRow.action.formBlock = { [weak self] (sender: XLFormRowDescriptor!) -> Void in
+            if (self?.paymentType != nil && self?.amount != 0) {
+                self!.performSegueWithIdentifier("Show\((self?.paymentType)!)", sender: self!)
+                self?.setError(true, error: nil)
+            } else {
+                if(self?.amount == 0) {
+                   self?.setError(false, error: "The donation amount connot be 0")
+                } else {
+                   self?.setError(false, error: "You must select a payment method")
+                }
+            }
+            
+            self?.deselectFormRow(sender)
+        }
+        
         confirmDonation.addFormRow(confirmRow)
-
+        confirmDonation.footerTitle = "By purchasing, you agree to Red Cross Terms of service and Privecy Policy"
+        
         self.form = form
+    }
+    
+    func setError(hidden: Bool, error: String?) {
+        if(hidden || error == nil) {
+            errorSection?.hidden = NSNumber(bool: true)
+        } else {
+            errorSection?.hidden = NSNumber(bool: false)
+            let row = errorSection?.formRows.firstObject as! XLFormRowDescriptor
+            
+            row.title = error ?? ""
+            self.reloadFormRow(row)
+        }
+    }
+    
+    func paymentReponse(success: Bool, err: String?) {
+        if(success) {
+            finishedSuccessfully = true
+            setError(true, error: nil)
+        } else {
+            setError(false, error: err)
+        }
+    }
+
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
+        if var paymentProtocol = segue.destinationViewController as? PaymentProtocol {
+           paymentProtocol.amount = self.amount
+           paymentProtocol.delegate = self
+           paymentProtocol.productName = "Donation"
+           paymentProtocol.quantity = 1
+        }
     }
 }

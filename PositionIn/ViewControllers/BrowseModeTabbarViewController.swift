@@ -66,6 +66,7 @@ protocol BrowseModeDisplay {
             case .List:
                 let listController = Storyboards.Main.instantiateBrowseListViewController()
                 listController.hideSeparatorLinesNearSegmentedControl = true
+                listController.showCardCells = true
                 return listController
             }
         }
@@ -220,23 +221,35 @@ protocol BrowseModeDisplay {
     func browseGridViewControllerSelectItem(itemType: HomeItem) {
         switch itemType {
         case .Membership:
-            self.navigationController?.pushViewController(Storyboards.Onboarding.instantiateMembershipPlansViewController(), animated: true)
-            
+        self.navigationController?.pushViewController(Storyboards.Onboarding.instantiateMembershipPlansViewController(), animated: true)
+        case .Market:
+            fallthrough
+        case .Volunteer:
+            fallthrough
+        case .BomaHotels:
+            fallthrough
+        case .Events:
+            fallthrough
+        case .News:
+            fallthrough
+        case .GiveBlood:
+            fallthrough
         case .Emergency:
             fallthrough
         case .Training:
             fallthrough
         case .Projects:
-            self.tabbar.selectedMode = .New
-            self.displayMode = .List
             
-            childFilterUpdate = { (filter: SearchFilter) -> SearchFilter in
+            let filterUpdate = { (filter: SearchFilter) -> SearchFilter in
                 var f = filter
                 f.homeItemType = itemType
                 return f
             }
-            self.searchViewControllerHomeItemSelected(itemType, locationString: nil)
-            self.tabbarDidChangeMode(self.tabbar)
+            
+            let controller = Storyboards.Main.instantiateExploreViewControllerId()
+            controller.childFilterUpdate = filterUpdate
+            controller.title = itemType.displayString()
+            self.navigationController?.pushViewController(controller, animated: true)
         case .Donate:
             self.navigationController?.pushViewController(Storyboards.Onboarding.instantiateDonateViewController(), animated: true)
         case .Ambulance:

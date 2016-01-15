@@ -26,11 +26,7 @@ final class PromotionDetailsViewController: UIViewController {
     
     
     private func reloadData() {
-        if let objectId = objectId {
-            api().getOne(objectId).onSuccess {[weak self] product in
-                self?.didReceivePromotionDetails(product)
-            }
-        }
+        
     }
     
     private func didReceivePromotionDetails(product: Product) {

@@ -6,18 +6,16 @@
 //  Copyright © 2015 Soluna Labs. All rights reserved.
 //
 
-
-
 import ObjectMapper
 import CleanroomLogger
 
 struct AmbulanceRequest: CRUDObject {
     
     var objectId: CRUDObjectId = CRUDObjectInvalidId
-    var text: String?
+    var descriptionString: String?
     var photos: [PhotoInfo]?
     var location: Location?
-    var incidentType: String?
+    var incidentType: NSNumber?
     
     init(objectId: CRUDObjectId = CRUDObjectInvalidId) {
         self.objectId = objectId
@@ -35,14 +33,18 @@ struct AmbulanceRequest: CRUDObject {
     
     mutating func mapping(map: Map) {
         objectId <- (map["id"], CRUDObjectIdTransform())
-        text <- map["text"]
+        descriptionString <- map["description"]
         photos <- map["photos"]
         location <- map["location"]
-        incidentType <- map["incidentType"]
+        incidentType <- map["type"]
     }
     
     static func endpoint() -> String {
-        return "/v1.0/ambulanceRequests"
+        return "/v1.0/ambulance/"
+    }
+    
+    static func endpoint(id: String) -> String {
+        return "\(self.endpoint())\(id)"
     }
     
     var description: String {

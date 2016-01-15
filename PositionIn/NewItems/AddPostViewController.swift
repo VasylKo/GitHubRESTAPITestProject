@@ -9,13 +9,14 @@
 import UIKit
 import CleanroomLogger
 import XLForm
+import Box
 
 import BrightFutures
 
 final class AddPostViewController: BaseAddItemViewController {
     private enum Tags : String {
         case Message = "Message"
-        case Community = "Community"
+        case PostTo = "Post to"
         case Photo = "Photo"
         case Title = "Title"
         case Location = "location"
@@ -45,14 +46,21 @@ final class AddPostViewController: BaseAddItemViewController {
         messageRow.addValidator(XLFormRegexValidator(msg: NSLocalizedString("Incorrect message lenght",
             comment: "Add post"), regex: "^.{0,500}$"))
         descriptionSection.addFormRow(messageRow)
+        // Community
+        let postToRow = XLFormRowDescriptor(tag:Tags.PostTo.rawValue,
+                                            rowType: XLFormRowDescriptorTypeSelectorPush,
+                                            title: "Post to")
+        postToRow.action.viewControllerClass = PostToContainerViewController.self
+        postToRow.valueTransformer = PostToValueTrasformer.self
+        postToRow.required = true
+        descriptionSection.addFormRow(postToRow)
 
-        
         // Info section
         let infoSection = XLFormSectionDescriptor.formSection()
         form.addFormSection(infoSection)
-        // Community
-        let communityRow = communityRowDescriptor(Tags.Community.rawValue)
-        infoSection.addFormRow(communityRow)
+        // Location
+        let locationRow = locationRowDescriptor(Tags.Location.rawValue)
+        infoSection.addFormRow(locationRow)
         
         //Photo section
         let photoSection = XLFormSectionDescriptor.formSection()
@@ -87,7 +95,11 @@ final class AddPostViewController: BaseAddItemViewController {
         let values = formValues()
         Log.debug?.value(values)
         
-        let community =  communityValue(values[Tags.Community.rawValue])
+        var communityId: String?
+        
+        if let communityBox = values[Tags.PostTo.rawValue] as? Box<Community> {
+            communityId = communityBox.value.objectId
+        }
         
         if  let imageUpload = uploadAssets(values[Tags.Photo.rawValue]) {
             let getLocation = locationController().getCurrentLocation()
@@ -95,28 +107,48 @@ final class AddPostViewController: BaseAddItemViewController {
                 getLocation.zip(imageUpload).flatMap { (location: Location, urls: [NSURL]) -> Future<Post, NSError> in
                     var post = Post()
                     post.name = values[Tags.Message.rawValue] as? String
-                    post.text = values[Tags.Message.rawValue] as? String
+                    post.descriptionString = values[Tags.Message.rawValue] as? String
                     post.location = location
                     post.photos = urls.map { url in
                         var info = PhotoInfo()
                         info.url = url
                         return info
                     }
-                    if let communityId = community {
-                        return api().createCommunityPost(communityId, post: post)
+                    if let communityId = communityId {
+                        post.communityID = communityId
+                        return api().createCommunityPost(post: post)
                     } else {
                         return api().createUserPost(post: post)
                     }
                 }.onSuccess { [weak self] (post: Post) -> ()  in
                     Log.debug?.value(post)
                     self?.sendUpdateNotification()
-//                    self?.performSegue(AddPostViewController.Segue.Close)
                     self?.cancelButtonTouched()
                 }.onFailure { error in
                     showError(error.localizedDescription)
                 }.onComplete { [weak self] result in
                     self?.view.userInteractionEnabled = true
                 }
+        }
+    }
+    
+    internal class PostToValueTrasformer : NSValueTransformer {
+        
+        override class func transformedValueClass() -> AnyClass {
+            return NSString.self
+        }
+        
+        override class func allowsReverseTransformation() -> Bool {
+            return false
+        }
+        
+        override func transformedValue(value: AnyObject?) -> AnyObject? {
+            if let valueData: AnyObject = value {
+                if let box: Box<Community> = valueData as? Box {
+                    return box.value.name
+                }
+            }
+            return nil
         }
     }
     

@@ -1,25 +1,24 @@
 //
-//  EmergencyDetailsController.swift
+//  GiveBloodDetailsViewController.swift
 //  PositionIn
 //
-//  Created by Mikhail Polyevin on 04/12/15.
+//  Created by Mikhail Polyevin on 18/12/15.
 //  Copyright © 2015 Soluna Labs. All rights reserved.
-//
 
 import UIKit
 import PosInCore
 import CleanroomLogger
 import BrightFutures
 
-protocol EmergencyDetailsActionConsumer {
-    func executeAction(action: EmergencyDetailsController.EmergencyDetailsAction)
+protocol GiveBloodDetailsActionConsumer {
+    func executeAction(action: GiveBloodDetailsViewController.GiveBloodDetailsAction)
 }
 
-class EmergencyDetailsController: UIViewController {
+class GiveBloodDetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = NSLocalizedString("Emergency", comment: "Product details: title")
+        title = NSLocalizedString("Give Blood", comment: "Give Blood details: title")
         dataSource.items = productAcionItems()
         dataSource.configureTable(actionTableView)
         reloadData()
@@ -37,11 +36,10 @@ class EmergencyDetailsController: UIViewController {
     
     private func reloadData() {
         self.infoLabel.text = NSLocalizedString("Calculating...", comment: "Distance calculation process")
-        //        nameLabel.text = author?.title
         switch (objectId, author) {
         case (.Some(let objectId), .Some(let author) ):
             api().getUserProfile(author.objectId).flatMap { (profile: UserProfile) -> Future<Product, NSError> in
-                return api().getOne(objectId)
+                return api().getGiveBloodDetails(objectId)
                 }.onSuccess { [weak self] product in
                     self?.didReceiveProductDetails(product)
             }
@@ -53,15 +51,11 @@ class EmergencyDetailsController: UIViewController {
     private func didReceiveProductDetails(product: Product) {
         self.product = product
         headerLabel.text = product.name
+        nameLabel.text = author?.title
         detailsLabel.text = product.text?.stringByReplacingOccurrencesOfString("\\n", withString: "\n")
-        if let name = self.author?.title {
-            nameLabel.text = name
+        if let price = product.donations {
+            priceLabel.text = "\(Int(price)) beneficiaries"
         }
-        
-        //        temporary decision
-        //        priceLabel.text = product.price.map {
-        //            let newValue = $0 as Float
-        //            return AppConfiguration().currencyFormatter.stringFromNumber(NSNumber(float: newValue)) ?? ""}
         
         let imageURL: NSURL?
         
@@ -71,7 +65,7 @@ class EmergencyDetailsController: UIViewController {
             imageURL = nil
         }
         
-        let image = UIImage(named: "PromotionDetailsPlaceholder")
+        let image = UIImage(named: "hardware_img_default")
         
         productImageView.setImageFromURL(imageURL, placeholder: image)
         if let coordinates = product.location?.coordinates {
@@ -91,22 +85,25 @@ class EmergencyDetailsController: UIViewController {
     private var product: Product?
     private var locationRequestToken = InvalidationToken()
     
-    private lazy var dataSource: EmergencyDetailsDataSource = { [unowned self] in
-        let dataSource = EmergencyDetailsDataSource()
+    private lazy var dataSource: GiveBloodDetailsDataSource = { [unowned self] in
+        let dataSource = GiveBloodDetailsDataSource()
         dataSource.parentViewController = self
         return dataSource
         }()
     
     
-    private func productAcionItems() -> [[EmergencyActionItem]] {
+    private func productAcionItems() -> [[GiveBloodActionItem]] {
         return [
             [ // 0 section
-                EmergencyActionItem(title: NSLocalizedString("Donate", comment: "Product action: Buy Product"), image: "home_donate", action: .Buy),
+                GiveBloodActionItem(title: NSLocalizedString("Navigate", comment: "GiveBlood"),
+                    image: "productNavigate",
+                    action: .Buy),
             ],
             [ // 1 section
-                EmergencyActionItem(title: NSLocalizedString("Send Message", comment: "Product action: Send Message"), image: "productSendMessage", action: .SendMessage),
-                EmergencyActionItem(title: NSLocalizedString("Member Profile", comment: "Product action: Seller Profile"), image: "productSellerProfile", action: .SellerProfile),
-                EmergencyActionItem(title: NSLocalizedString("More Information", comment: "Product action: Navigate"), image: "productTerms&Info", action: .ProductInventory),
+                GiveBloodActionItem(title: NSLocalizedString("Send Message", comment: "GiveBlood"), image: "productSendMessage", action: .SendMessage),
+                GiveBloodActionItem(title: NSLocalizedString("Office", comment: "GiveBlood"), image: "productSellerProfile", action: .ProductInventory),
+                GiveBloodActionItem(title: NSLocalizedString("More Information", comment: "GiveBlood"), image: "productTerms&Info",
+                    action: .ProductInventory),
             ],
         ]
         
@@ -118,11 +115,12 @@ class EmergencyDetailsController: UIViewController {
     @IBOutlet private weak var infoLabel: UILabel!
     
     @IBOutlet private weak var nameLabel: UILabel!
+    @IBOutlet private weak var priceLabel: UILabel!
     @IBOutlet private weak var detailsLabel: UILabel!
 }
 
-extension EmergencyDetailsController {
-    enum EmergencyDetailsAction: CustomStringConvertible {
+extension GiveBloodDetailsViewController {
+    enum GiveBloodDetailsAction: CustomStringConvertible {
         case Buy, ProductInventory, SellerProfile, SendMessage
         
         var description: String {
@@ -140,45 +138,37 @@ extension EmergencyDetailsController {
     }
     
     
-    struct EmergencyActionItem {
+    struct GiveBloodActionItem {
         let title: String
         let image: String
-        let action: EmergencyDetailsAction
+        let action: GiveBloodDetailsAction
     }
 }
 
-//extension EmergencyDetailsController: ProductDetailsActionConsumer {
-//    
-//    func executeAction(action: EmergencyDetailsAction) {
-//        let segue: ProductDetailsViewController.Segue
-//        switch action {
-//        case .Buy:
-//            if api().isUserAuthorized() {
-//                segue = .ShowBuyScreen
-//            } else {
-//                api().logout().onComplete {[weak self] _ in
-//                    self?.sideBarController?.executeAction(.Login)
-//                }
-//                return
-//            }
-//        case .ProductInventory:
-//            segue = .ShowProductInventory
-//        case .SellerProfile:
-//            segue = .ShowSellerProfile
-//        case .SendMessage:
-//            if let userId = author?.objectId {
-//                showChatViewController(userId)
-//            }
-//            return
-//        }
-//        performSegue(segue)
-//    }
-//}
+extension GiveBloodDetailsViewController: GiveBloodDetailsActionConsumer {
+    func executeAction(action: GiveBloodDetailsAction) {
+        let segue: GiveBloodDetailsViewController.Segue
+        switch action {
+        case .SellerProfile:
+            return
+        case .SendMessage:
+            if let userId = author?.objectId {
+                showChatViewController(userId)
+            }
+            return
+        case .Buy:
+            return
+        case .ProductInventory:
+            segue = .ShowOrganizerProfile
+        }
+        performSegue(segue)
+    }
+}
 
-extension EmergencyDetailsController {
-    internal class EmergencyDetailsDataSource: TableViewDataSource {
+extension GiveBloodDetailsViewController {
+    internal class GiveBloodDetailsDataSource: TableViewDataSource {
         
-        var items: [[EmergencyActionItem]] = []
+        var items: [[GiveBloodActionItem]] = []
         
         override func configureTable(tableView: UITableView) {
             tableView.tableFooterView = UIView(frame: CGRectZero)
@@ -217,50 +207,9 @@ extension EmergencyDetailsController {
         func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
             tableView.deselectRowAtIndexPath(indexPath, animated: true)
             let item = items[indexPath.section][indexPath.row]
-            if let actionConsumer = parentViewController as? ProductDetailsActionConsumer {
-//                actionConsumer.executeAction(item.action)
+            if let actionConsumer = parentViewController as? GiveBloodDetailsActionConsumer {
+                actionConsumer.executeAction(item.action)
             }
         }
-        
     }
 }
-
-
-//extension ItemCategory {
-//    func productPlaceholderImage() -> UIImage {
-//        let imageName: String
-//        switch self {
-//        case .AnimalsPetSupplies:
-//            imageName = "animals_pet_supplies_img_default"
-//        case .ApparelAccessories:
-//            imageName = "apparel_accessories_img_default"
-//        case .ArtsEntertainment:
-//            imageName = "arts_entertainment_img_default"
-//        case .BabyToddler:
-//            imageName = "baby_toddler_img_default"
-//        case .BusinessIndustrial:
-//            imageName = "business_industrial_img_default"
-//        case .CamerasOptics:
-//            imageName = "cameras_optics_img_default"
-//        case .Electronics:
-//            imageName = "electronics_img_default"
-//        case .Food:
-//            imageName = "food_img_default"
-//        case .Furniture:
-//            imageName = "furniture_img_default"
-//        case .Hardware:
-//            imageName = "hardware_img_default"
-//        case .HealthBeauty:
-//            imageName = "health_beauty_img_default"
-//        case .HomeGarden:
-//            imageName = "home_garden_img_default"
-//        case .LuggageBags:
-//            imageName = "luggage_bags_img_default"
-//        case .Unknown:
-//            fallthrough
-//        default:
-//            imageName = ""
-//        }
-//        return UIImage(named: imageName) ?? UIImage()
-//    }
-//}

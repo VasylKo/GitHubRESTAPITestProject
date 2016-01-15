@@ -30,14 +30,7 @@ struct FeedItem: CRUDObject {
     var location: Location?
     
     var itemData: Any? {
-        switch type {
-        case .Project:
-            return author
-        case .Training:
-            return author
-        default:
-            return author
-        }
+        return author
     }
     
     init(name: String, details: String, text: String, price: Float) {
@@ -85,11 +78,13 @@ struct FeedItem: CRUDObject {
         case Project
         case Emergency
         case Training
-//        case Event
-//        case Promotion
-//        case Item
-//        case Post
-//        
+        case GiveBlood
+        case Volunteer
+        case BomaHotels
+        case Event
+        case Market = 9
+        case News = 10
+        
         var description: String {
             switch self {
             case .Unknown:
@@ -100,6 +95,18 @@ struct FeedItem: CRUDObject {
                 return "Emergency"
             case Training:
                 return "Training"
+            case GiveBlood:
+                return "GiveBlood"
+            case Event:
+                return "Event"
+            case News:
+                return "News"
+            case BomaHotels:
+                return "BomaHotels"
+            case Market:
+                return "Market"
+            case Volunteer:
+                return "Volunteer"
             }
         }
     }

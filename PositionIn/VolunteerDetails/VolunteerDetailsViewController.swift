@@ -1,34 +1,24 @@
-//
-//  TrainingDetailsViewController.swift
-//  PositionIn
-//
-//  Created by Mikhail Polyevin on 04/12/15.
-//  Copyright © 2015 Soluna Labs. All rights reserved.
-//
 
 import UIKit
 import PosInCore
 import CleanroomLogger
 import BrightFutures
-//
-//protocol ProductDetailsActionConsumer {
-//    func executeAction(action: ProductDetailsViewController.ProductDetailsAction)
-//}
 
-final class TrainingDetailsViewController: UIViewController {
+protocol VolunteerDetailsActionConsumer {
+    func executeAction(action: VolunteerDetailsViewController.VolunteerDetailsAction)
+}
+
+class VolunteerDetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = NSLocalizedString("Training", comment: "Product details: title")
-        dataSource.items = trainingActionItems()
+        title = NSLocalizedString("Volunteer", comment: "Volunteer")
+        dataSource.items = productAcionItems()
         dataSource.configureTable(actionTableView)
         reloadData()
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let orderController = segue.destinationViewController  as? OrderViewController {
-            orderController.product = self.product
-        }
         if let profileController = segue.destinationViewController  as? UserProfileViewController,
             let userId = author?.objectId {
                 profileController.objectId = userId
@@ -37,45 +27,34 @@ final class TrainingDetailsViewController: UIViewController {
     
     private func reloadData() {
         self.infoLabel.text = NSLocalizedString("Calculating...", comment: "Distance calculation process")
-        //        nameLabel.text = author?.title
         switch (objectId, author) {
         case (.Some(let objectId), .Some(let author) ):
-            api().getUserProfile(author.objectId).flatMap { (profile: UserProfile) -> Future<Product, NSError> in
-                return api().getOne(objectId)
-                }.onSuccess { [weak self] product in
-                    self?.didReceiveProductDetails(product)
+            api().getUserProfile(author.objectId).flatMap { (profile: UserProfile) -> Future<Event, NSError> in
+                return api().getVolunteerDetails(objectId)
+                }.onSuccess { [weak self] volunteer in
+                    self?.didReceiveDetails(volunteer)
             }
         default:
             Log.error?.message("Not enough data to load product")
         }
     }
     
-    private func didReceiveProductDetails(product: Product) {
+    private func didReceiveDetails(product: Event) {
         self.product = product
         headerLabel.text = product.name
         detailsLabel.text = product.text?.stringByReplacingOccurrencesOfString("\\n", withString: "\n")
-        if let price = product.price {
-            priceLabel.text = "\(Int(price)) KSH"
+        if let participants = product.participants {
+            priceLabel.text = "\(Int(participants)) beneficiaries"
         }
-        
-        if let name = author?.title {
-            nameLabel.text = name
-        }
-        
-        //        temporary decision
-        //        priceLabel.text = product.price.map {
-        //            let newValue = $0 as Float
-        //            return AppConfiguration().currencyFormatter.stringFromNumber(NSNumber(float: newValue)) ?? ""}
         
         let imageURL: NSURL?
-        
         if let urlString = product.imageURLString {
             imageURL = NSURL(string:urlString)
         } else {
             imageURL = nil
         }
         
-        let image = UIImage(named: "trainings_placeholder")
+        let image = UIImage(named: "hardware_img_default")
         
         productImageView.setImageFromURL(imageURL, placeholder: image)
         if let coordinates = product.location?.coordinates {
@@ -92,31 +71,28 @@ final class TrainingDetailsViewController: UIViewController {
     var objectId: CRUDObjectId?
     var author: ObjectInfo?
     
-    private var product: Product?
+    private var product: Event?
     private var locationRequestToken = InvalidationToken()
     
-    private lazy var dataSource: TrainingDetailsDataSource = { [unowned self] in
-        let dataSource = TrainingDetailsDataSource()
+    private lazy var dataSource: VolunteerDetailsDataSource = { [unowned self] in
+        let dataSource = VolunteerDetailsDataSource()
         dataSource.parentViewController = self
         return dataSource
         }()
     
     
-    private func trainingActionItems() -> [[TrainingActionItem]] {
+    private func productAcionItems() -> [[VolunteerActionItem]] {
         return [
             [ // 0 section
-                TrainingActionItem(title: NSLocalizedString("Sign Up", comment: "Product action: Buy Product"),
-                    image: "productBuyProduct",
+                VolunteerActionItem(title: NSLocalizedString("Volunteer", comment: "Volunteer"),
+                    image: "home_volunteer",
                     action: .Buy),
             ],
             [ // 1 section
-                TrainingActionItem(title: NSLocalizedString("Send Message", comment: "Product action: Send Message"),
-                    image: "productSendMessage", action: .SendMessage),
-                TrainingActionItem(title: NSLocalizedString("Organizer Profile", comment: "Product action: Seller Profile"),
-                    image: "productSellerProfile", action: .SellerProfile),
-                TrainingActionItem(title: NSLocalizedString("Navigate", comment: "Product action: Navigate"),
-                    image: "productNavigate", action: .Navigate),
-                TrainingActionItem(title: NSLocalizedString("More Information", comment: "Promotion action: Navigate"), image: "productNavigate", action: .ProductInventory)
+                VolunteerActionItem(title: NSLocalizedString("Send Message", comment: "Volunteer"), image: "productSendMessage", action: .SendMessage),
+                VolunteerActionItem(title: NSLocalizedString("Organizer Profile", comment: "Volunteer"), image: "productSellerProfile", action: .SellerProfile),
+                VolunteerActionItem(title: NSLocalizedString("Navigate", comment: "Volunteer"), image: "productNavigate", action: .ProductInventory),
+                VolunteerActionItem(title: NSLocalizedString("More Information", comment: "Volunteer"), image: "productTerms&Info", action: .ProductInventory),
             ],
         ]
         
@@ -132,9 +108,9 @@ final class TrainingDetailsViewController: UIViewController {
     @IBOutlet private weak var detailsLabel: UILabel!
 }
 
-extension TrainingDetailsViewController {
-    enum TrainingDetailsAction: CustomStringConvertible {
-        case Buy, ProductInventory, SellerProfile, SendMessage, Navigate
+extension VolunteerDetailsViewController {
+    enum VolunteerDetailsAction: CustomStringConvertible {
+        case Buy, ProductInventory, SellerProfile, SendMessage
         
         var description: String {
             switch self {
@@ -146,52 +122,42 @@ extension TrainingDetailsViewController {
                 return "Seller profile"
             case .SendMessage:
                 return "Send message"
-            case .Navigate:
-                return "Navigate"
             }
         }
     }
     
     
-    struct TrainingActionItem {
+    struct VolunteerActionItem {
         let title: String
         let image: String
-        let action: TrainingDetailsAction
+        let action: VolunteerDetailsAction
     }
 }
-//
-//extension ProductDetailsViewController: ProductDetailsActionConsumer {
-//    func executeAction(action: ProductDetailsAction) {
-//        let segue: ProductDetailsViewController.Segue
-//        switch action {
-//        case .Buy:
-//            if api().isUserAuthorized() {
-//                segue = .ShowBuyScreen
-//            } else {
-//                api().logout().onComplete {[weak self] _ in
-//                    self?.sideBarController?.executeAction(.Login)
-//                }
-//                return
-//            }
-//        case .ProductInventory:
-//            segue = .ShowProductInventory
-//        case .SellerProfile:
-//            segue = .ShowSellerProfile
-//        case .SendMessage:
-//            if let userId = author?.objectId {
-//                showChatViewController(userId)
-//            }
-//            return
-//        }
-//        performSegue(segue)
-//    }
-//}
 
+extension VolunteerDetailsViewController: VolunteerDetailsActionConsumer {
+    func executeAction(action: VolunteerDetailsAction) {
+        let segue: VolunteerDetailsViewController.Segue
+        switch action {
+        case .SellerProfile:
+            segue = .ShowOrganizerProfile
+        case .SendMessage:
+            if let userId = author?.objectId {
+                showChatViewController(userId)
+            }
+            return
+        case .Buy:
+            return
+        case .ProductInventory:
+            return
+        }
+        performSegue(segue)
+    }
+}
 
-extension TrainingDetailsViewController {
-    internal class TrainingDetailsDataSource: TableViewDataSource {
+extension VolunteerDetailsViewController {
+    internal class VolunteerDetailsDataSource: TableViewDataSource {
         
-        var items: [[TrainingActionItem]] = []
+        var items: [[VolunteerActionItem]] = []
         
         override func configureTable(tableView: UITableView) {
             tableView.tableFooterView = UIView(frame: CGRectZero)
@@ -230,11 +196,9 @@ extension TrainingDetailsViewController {
         func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
             tableView.deselectRowAtIndexPath(indexPath, animated: true)
             let item = items[indexPath.section][indexPath.row]
-            if let actionConsumer = parentViewController as? PromotionDetailsActionConsumer {
-//                actionConsumer.executeAction(item.action)
+            if let actionConsumer = parentViewController as? VolunteerDetailsActionConsumer {
+                actionConsumer.executeAction(item.action)
             }
         }
-        
     }
 }
-

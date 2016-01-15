@@ -99,6 +99,10 @@ final class UserProfile: CRUDObject {
         return "/v1.0/users/phoneVerification"
     }
     
+    static func pushesEndpoint() -> String {
+        return "/v1.0/users/registerPushNotifications"
+    }
+    
     static func userEndpoint(userId: CRUDObjectId) -> String {
         return (UserProfile.endpoint() as NSString).stringByAppendingPathComponent("\(userId)")
     }

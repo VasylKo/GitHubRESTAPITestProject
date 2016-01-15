@@ -16,13 +16,31 @@ final class CommunityViewController: BrowseModeTabbarViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         displayMode = .List
+        self.navigationItem.titleView = nil
+        self.title = NSLocalizedString("Community", comment: "CommunityViewController")
     }
     
     @IBAction func prepareForUnwind(segue: UIStoryboardSegue) {
         
     }
     
-    override func presentSearchViewController(filter: SearchFilter) { 
+    override func viewControllerForMode(mode: DisplayModeViewController.DisplayMode) -> UIViewController {
+        switch self.displayMode {
+        case .Map:
+            let controller = Storyboards.Main.instantiateBrowseMapViewController()
+            var filter = controller.filter
+            filter.communities = [ objectId ]
+            controller.filter = filter
+            return controller
+        case .List:
+            let community = Community(objectId: objectId)
+            let controller = Storyboards.Main.instantiateCommunityFeedViewController()
+            controller.community = community
+            return controller
+        }
+    }
+    
+    override func presentSearchViewController(filter: SearchFilter) {
         childFilterUpdate = { (filter: SearchFilter) -> SearchFilter in
             var f = filter
             f =  SearchFilter.currentFilter

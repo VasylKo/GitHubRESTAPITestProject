@@ -43,17 +43,32 @@ struct SessionController {
     
     func session() -> Future<AuthResponse.Token, NSError> {
         return future { () -> Result<AuthResponse.Token, NSError> in
-            //TODO: check expiration date
-            guard let token = self.accessToken,
-                let expirationDate = self.accessTokenExpiresIn
-                where  NSDate().compare(expirationDate) == NSComparisonResult.OrderedAscending
-                else {
-                    Log.warning?.trace()
-                    let errorCode = NetworkDataProvider.ErrorCodes.InvalidSessionError
-                    return Result(error: errorCode.error())
+            if let token = self.currentAccessToken() {
+                return Result(value: token)
+            } else {
+                Log.warning?.trace()
+                let errorCode = NetworkDataProvider.ErrorCodes.InvalidSessionError
+                return Result(error: errorCode.error())
             }
-            return Result(value: token)
         }
+    }
+    
+    func currentAccessToken() -> AuthResponse.Token? {
+        guard let token = self.accessToken,
+            let expirationDate = self.accessTokenExpiresIn
+            where  NSDate().compare(expirationDate) == NSComparisonResult.OrderedAscending
+            else {
+                return nil
+        }
+        return token
+    }
+    
+    func currentDeviceToken() -> String? {
+        guard let token = self.deviceToken
+            else {
+                return nil
+        }
+        return token
     }
     
     func logout() -> Future<Void, NoError> {
@@ -130,6 +145,19 @@ struct SessionController {
             Log.error?.value(error)
         }
     }
+    
+    func setDeviceToken(deviceToken: String?) {
+        if let dt = deviceToken {
+            do {
+                try keychain.set(NSKeyedArchiver.archivedDataWithRootObject(dt),
+                    key: KeychainKeys.DeviceToken)
+            } catch let error {
+                Log.error?.value(error)
+            }
+            
+            keychain[KeychainKeys.DeviceToken] = dt
+        }
+    }
 
     func updateCurrentStatus(profile: UserProfile?) {
         keychain[KeychainKeys.UserIdKey] = profile?.objectId
@@ -141,10 +169,12 @@ struct SessionController {
         }
     }
     
+    @available(*, deprecated=1.0)
     func updatePassword(newPassword: String) {
         keychain[KeychainKeys.UserPasswordKey] = newPassword
     }
     
+    @available(*, unavailable, message="We do not store password anymore")
     var userPassword: String? {
         return keychain[KeychainKeys.UserPasswordKey]
     }
@@ -172,6 +202,10 @@ struct SessionController {
     
     private var refreshToken: String? {
         return keychain[KeychainKeys.RefreshTokenKey]
+    }
+    
+    private var deviceToken: String? {
+        return keychain[KeychainKeys.DeviceToken]
     }
     
     private var accessTokenExpiresIn: NSDate? {
@@ -208,6 +242,10 @@ struct SessionController {
         
         static let UserIdKey = "userId"
         static let IsGuestKey = "isGuest"
+        
+        static let DeviceToken = "dt"
+        
+        @available(*, deprecated=1.0)
         static let UserPasswordKey = "UserPassword"
     }
 }
