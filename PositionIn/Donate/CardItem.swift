@@ -43,6 +43,21 @@ enum CardItem: Int {
             return UIImage(named: "creditcard")
         }
     }
+    
+    static func cardPayment(item: CardItem) -> String? {
+        switch item {
+        case .MPesa:
+            return "Mpesa"
+        case .Airtel:
+            return "Braintree"
+        case .OrangeMonde:
+            return "Braintree"
+        case .PayPal:
+            return "Braintree"
+        case .CreditDebitCard:
+            return "Braintree"
+        }
+    }
 }
 
 class CardItemValueTrasformer : NSValueTransformer {

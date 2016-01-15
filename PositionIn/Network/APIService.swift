@@ -410,10 +410,15 @@ struct APIService {
         return getObject(endpoint)
     }
     
-    func getBomaHotelsDetails(objectId: CRUDObjectId) -> Future<Product, NSError> {
-        let endpont = HomeItem.BomaHotels.endpoint(objectId)
+    func getBomaHotelsDetails(objectId: CRUDObjectId) -> Future<BomaHotel, NSError> {
+        let endpoint = HomeItem.BomaHotels.endpoint(objectId)
         //TODO need fix downcastng
-        return self.getOne(endpont!)
+        return session().flatMap {
+            (token: AuthResponse.Token) -> Future<BomaHotel, NSError> in
+            let request = self.updateRequest(token, endpoint: endpoint!, params: nil, method: .GET)
+            let (_ , future): (Alamofire.Request, Future<BomaHotel, NSError>) = self.dataProvider.objectRequest(request)
+            return self.handleFailure(future)
+        }
     }
     
     func getProjectsDetails(objectId: CRUDObjectId) -> Future<Product, NSError> {
@@ -455,7 +460,34 @@ struct APIService {
             return self.handleFailure(future)
         }
     }
-    
+
+    //MARK: - Braintree requests
+
+    func getToken() -> Future<String, NSError> {
+        let endpoint = BraintreePayment.tokenEndpoint()
+        typealias CRUDResultType = (Alamofire.Request, Future<String, NSError>)
+        
+        return session().flatMap {
+            (token: AuthResponse.Token) -> Future<String, NSError> in
+            let request = self.readRequest(token, endpoint: endpoint)
+            let (_, future): CRUDResultType = self.dataProvider.jsonRequest(request, map: BraintreePayment.tokenMapping(), validation: nil)
+            return self.handleFailure(future)
+        }
+    }
+
+    func checkoutBraintree(amount:String, nonce:String) -> Future<String, NSError> {
+        let endpoint = BraintreePayment.checkoutEndpoint()
+        let  params = ["payment_method_nonce": nonce, "amount" : amount]
+        typealias CRUDResultType = (Alamofire.Request, Future<String, NSError>)
+
+        return session().flatMap {
+            (token: AuthResponse.Token) -> Future<String, NSError> in
+            let request = self.updateRequest(token, endpoint: endpoint, method: .POST, params: params)
+            let (_, future): CRUDResultType = self.dataProvider.jsonRequest(request, map: BraintreePayment.checkoutMapping(), validation: nil)
+            return self.handleFailure(future)
+        }
+    }
+
     //MARK: - Generic requests -
     
     private func getObjectsCollection<C: CRUDObject>(endpoint: String, params: [String : AnyObject]?) -> Future<CollectionResponse<C>, NSError> {
