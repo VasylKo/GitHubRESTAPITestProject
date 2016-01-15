@@ -73,6 +73,7 @@
 		50FA43301C44F0B50050B00E /* ErrorCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50FA432F1C44F0B50050B00E /* ErrorCell.xib */; };
 		50FE7D891BBE77BB005676E2 /* ItemsSearchResultDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FE7D871BBE77BB005676E2 /* ItemsSearchResultDataSource.swift */; };
 		50FE7D8A1BBE77BB005676E2 /* ItemsSearchResultsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FE7D881BBE77BB005676E2 /* ItemsSearchResultsController.swift */; };
+		CDBDD9B31C491617007578BC /* BomaHotel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBDD9B21C491617007578BC /* BomaHotel.swift */; };
 		CDEDD96B1C45033C00396594 /* PostToContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDEDD9691C45033C00396594 /* PostToContainerViewController.swift */; };
 		CDEDD96C1C45033C00396594 /* PositionIn.PostToContainerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CDEDD96A1C45033C00396594 /* PositionIn.PostToContainerViewController.xib */; };
 		CDEDD96E1C45169C00396594 /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDEDD96D1C45169C00396594 /* ContainerViewController.swift */; };
@@ -566,6 +567,7 @@
 		AF836D0B902FDFFA6CB4A412 /* Pods_Messaging.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Messaging.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB73828B80F64D347BB9F14D /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5785CCFFE7238C562E6E52F /* Pods-PositionIn.devrelease.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PositionIn.devrelease.xcconfig"; path = "Pods/Target Support Files/Pods-PositionIn/Pods-PositionIn.devrelease.xcconfig"; sourceTree = "<group>"; };
+		CDBDD9B21C491617007578BC /* BomaHotel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BomaHotel.swift; sourceTree = "<group>"; };
 		CDEDD9691C45033C00396594 /* PostToContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostToContainerViewController.swift; sourceTree = "<group>"; };
 		CDEDD96A1C45033C00396594 /* PositionIn.PostToContainerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.PostToContainerViewController.xib; sourceTree = "<group>"; };
 		CDEDD96D1C45169C00396594 /* ContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
@@ -1810,6 +1812,7 @@
 				D15441191C47D642006251B7 /* Volunteer.swift */,
 				2431EBDF1B94C1DC009FB158 /* Event.swift */,
 				2431EBDD1B947442009FB158 /* Product.swift */,
+				CDBDD9B21C491617007578BC /* BomaHotel.swift */,
 				2431EBDB1B945F5A009FB158 /* Promotion.swift */,
 				D153AB831C11FA9B00DFB5C9 /* AmbulanceRequest.swift */,
 				E65E872B1B611BA200AE444D /* Post.swift */,
@@ -3770,6 +3773,7 @@
 				D1B780BB1C0E48E200EF5825 /* MembershipPlansCell.swift in Sources */,
 				E6F243751B8B31510033B13C /* AddMenuView.swift in Sources */,
 				D118A2AA1C0FBC380020B363 /* CardTableViewCell.swift in Sources */,
+				CDBDD9B31C491617007578BC /* BomaHotel.swift in Sources */,
 				E661158B1B73774B003DB5B3 /* RegisterViewController.swift in Sources */,
 				E6BEF1E51B9C83F200511B46 /* CommunityInfoCell.swift in Sources */,
 				E6325F651B57D89A00996480 /* SidebarViewController.swift in Sources */,
