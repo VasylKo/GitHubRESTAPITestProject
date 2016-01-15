@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CommunitySearchViewController" customModule="PositionIn" customModuleProvider="target">
             <connections>
                 <outlet property="activityIndicator" destination="NOk-jn-4kw" id="EDH-AF-qSB"/>
                 <outlet property="communityTableView" destination="yXi-Re-U2g" id="TYs-0C-eWS"/>
-                <outlet property="searchBar" destination="WkX-1H-b4o" id="NbE-cJ-lQv"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -22,11 +21,6 @@
                     <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                    <searchBar key="tableHeaderView" contentMode="redraw" id="WkX-1H-b4o">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                        <textInputTraits key="textInputTraits"/>
-                    </searchBar>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="xNo-kp-V2S"/>
                         <outlet property="delegate" destination="-1" id="3Xh-JY-dsb"/>
@@ -45,7 +39,7 @@
                 <constraint firstAttribute="trailing" secondItem="yXi-Re-U2g" secondAttribute="trailing" id="hrq-J2-hPB"/>
                 <constraint firstItem="NOk-jn-4kw" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="qb9-cm-ZWo"/>
             </constraints>
-            <point key="canvasLocation" x="185" y="281"/>
+            <point key="canvasLocation" x="274" y="266"/>
         </view>
     </objects>
 </document>
