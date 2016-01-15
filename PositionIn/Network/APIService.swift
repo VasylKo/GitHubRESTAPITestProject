@@ -405,10 +405,15 @@ struct APIService {
         return getObject(endpoint)
     }
     
-    func getBomaHotelsDetails(objectId: CRUDObjectId) -> Future<Product, NSError> {
-        let endpont = HomeItem.BomaHotels.endpoint(objectId)
+    func getBomaHotelsDetails(objectId: CRUDObjectId) -> Future<BomaHotel, NSError> {
+        let endpoint = HomeItem.BomaHotels.endpoint(objectId)
         //TODO need fix downcastng
-        return self.getOne(endpont!)
+        return session().flatMap {
+            (token: AuthResponse.Token) -> Future<BomaHotel, NSError> in
+            let request = self.updateRequest(token, endpoint: endpoint!, params: nil, method: .GET)
+            let (_ , future): (Alamofire.Request, Future<BomaHotel, NSError>) = self.dataProvider.objectRequest(request)
+            return self.handleFailure(future)
+        }
     }
     
     func getProjectsDetails(objectId: CRUDObjectId) -> Future<Product, NSError> {
