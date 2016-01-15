@@ -356,6 +356,10 @@ struct Storyboards {
             return self.storyboard.instantiateViewControllerWithIdentifier("PaymentViewControllerId") as! PaymentViewController
         }
 
+        static func instantiateBraintreePaymentViewController() -> BraintreePaymentViewController {
+            return self.storyboard.instantiateViewControllerWithIdentifier("BraintreePaymentViewController") as! BraintreePaymentViewController
+        }
+
         static func instantiateDonateNotificationViewController() -> DonateNotificationViewController {
             return self.storyboard.instantiateViewControllerWithIdentifier("DonateNotificationViewController") as! DonateNotificationViewController
         }
@@ -751,19 +755,24 @@ extension EmergencyDetailsController: IdentifiableProtocol {
 extension EmergencyDetailsController { 
 
     enum Segue: String, CustomStringConvertible, SegueProtocol {
-        case ShowOrganizerProfile = "ShowOrganizerProfile"
+        case ShowSellerProfile = "ShowSellerProfile"
+        case Donate = "Donate"
 
         var kind: SegueKind? {
             switch (self) {
-            case ShowOrganizerProfile:
+            case ShowSellerProfile:
+                return SegueKind(rawValue: "show")
+            case Donate:
                 return SegueKind(rawValue: "show")
             }
         }
 
         var destination: UIViewController.Type? {
             switch (self) {
-            case ShowOrganizerProfile:
+            case ShowSellerProfile:
                 return UserProfileViewController.self
+            case Donate:
+                return OrderViewController.self
             }
         }
 
@@ -1830,11 +1839,49 @@ extension AmbulanceSentViewController: IdentifiableProtocol {
 
 
 //MARK: - DonateViewController
+extension UIStoryboardSegue {
+    func selection() -> DonateViewController.Segue? {
+        if let identifier = self.identifier {
+            return DonateViewController.Segue(rawValue: identifier)
+        }
+        return nil
+    }
+}
+
 extension DonateViewController: IdentifiableProtocol { 
     var identifier: String? { return "DonateViewController" }
     static var identifier: String? { return "DonateViewController" }
 }
 
+extension DonateViewController { 
+
+    enum Segue: String, CustomStringConvertible, SegueProtocol {
+        case ShowBraintree = "ShowBraintree"
+        case PaymentCompleted = "PaymentCompleted"
+
+        var kind: SegueKind? {
+            switch (self) {
+            case ShowBraintree:
+                return SegueKind(rawValue: "show")
+            case PaymentCompleted:
+                return SegueKind(rawValue: "show")
+            }
+        }
+
+        var destination: UIViewController.Type? {
+            switch (self) {
+            case ShowBraintree:
+                return BraintreePaymentViewController.self
+            case PaymentCompleted:
+                return UINavigationController.self
+            }
+        }
+
+        var identifier: String? { return self.description } 
+        var description: String { return self.rawValue }
+    }
+
+}
 
 //MARK: - SelectPaymentMethodController
 extension SelectPaymentMethodController: IdentifiableProtocol { 
@@ -1847,6 +1894,13 @@ extension SelectPaymentMethodController: IdentifiableProtocol {
 extension PaymentViewController: IdentifiableProtocol { 
     var identifier: String? { return "PaymentViewControllerId" }
     static var identifier: String? { return "PaymentViewControllerId" }
+}
+
+
+//MARK: - BraintreePaymentViewController
+extension BraintreePaymentViewController: IdentifiableProtocol { 
+    var identifier: String? { return "BraintreePaymentViewController" }
+    static var identifier: String? { return "BraintreePaymentViewController" }
 }
 
 

@@ -226,6 +226,7 @@ protocol BrowseActionConsumer: class {
             trackGoogleAnalyticsEvent("Main", action: "Click", label: "Post")
             let controller = Storyboards.Main.instantiateEventDetailsViewControllerId()
             controller.objectId = objectId
+            controller.author = data as? ObjectInfo
             navigationController?.pushViewController(controller, animated: true)
         default:
             Log.debug?.message("Did select \(itemType)<\(objectId)>")
