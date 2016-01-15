@@ -233,6 +233,11 @@ struct APIService {
         return getObjectsCollection(endpoint, params: params)
     }
 
+    func getUserVolunteers(userId: CRUDObjectId) -> Future<CollectionResponse<Volunteer>,NSError> {
+        let endpoint = Volunteer.userVolunteersEndpoint(userId)
+        return getObjectsCollection(endpoint, params: nil)
+    }
+    
     func getUserCommunities(userId: CRUDObjectId) -> Future<CollectionResponse<Community>,NSError> {
         let endpoint = Community.userCommunitiesEndpoint(userId)
         return getObjectsCollection(endpoint, params: nil)
