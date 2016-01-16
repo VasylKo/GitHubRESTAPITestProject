@@ -10,7 +10,12 @@ import PosInCore
 import BrightFutures
 import CleanroomLogger
 
-class CommunityFeedViewController: BesideMenuViewController, BrowseActionProducer, BrowseModeDisplay, UpdateFilterProtocol {
+
+protocol CommunityFeedActionConsumer: class {
+    func communityFeedInfoTapped()
+}
+
+class CommunityFeedViewController: BesideMenuViewController, BrowseActionProducer, BrowseModeDisplay, UpdateFilterProtocol, CommunityFeedActionConsumer {
     
     weak var actionConsumer: BrowseActionConsumer?
 
@@ -42,9 +47,10 @@ class CommunityFeedViewController: BesideMenuViewController, BrowseActionProduce
         }
     }
     
-    private func didReceiveCommunity(community: Community) {        
-        dataSource.items[Sections.Info.rawValue] = [
-            BrowseCommunityHeaderCellModel(objectId: community.objectId, tapAction: .None, title: community.name ?? "", url: community.avatar),
+    private func didReceiveCommunity(community: Community) {
+        let headerModel = BrowseCommunityHeaderCellModel(objectId: community.objectId, tapAction: .None, title:community.name ?? "", url:community.avatar, showInfo: true)
+        headerModel.actionConsumer = self
+        dataSource.items[Sections.Info.rawValue] = [headerModel,
             CommunityStatsCellModel(countMembers: community.membersCount, countPosts: community.postsCount, countEvents: community.eventsCount)
         ]
         self.updateFeed()
@@ -79,6 +85,10 @@ class CommunityFeedViewController: BesideMenuViewController, BrowseActionProduce
         dataSource.parentViewController = self
         return dataSource
         }()
+    
+    func communityFeedInfoTapped() {
+        //push info controller
+    }
 }
 
 extension CommunityFeedViewController: BrowseActionConsumer {

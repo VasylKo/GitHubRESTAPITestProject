@@ -181,7 +181,6 @@ class BrowseCommunityViewController: BesideMenuViewController, BrowseCommunityAc
             controller.existingCommunityId = community
             navigationController?.pushViewController(controller, animated: true)
             self.subscribeForContentUpdates(controller)
-            
         case .None:
             break
         }
