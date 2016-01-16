@@ -1132,6 +1132,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="Hao-sg-863" id="dab-lt-yko"/>
+                        <segue destination="fxT-f9-lqb" kind="show" identifier="showVolunteerDetailsViewController" id="BPL-3F-vde"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="asv-43-s9G" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1433,8 +1434,9 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="9u4-qy-iVR"/>
-        <segue reference="ND0-h7-Vra"/>
+        <segue reference="BPL-3F-vde"/>
         <segue reference="WXU-OU-n2l"/>
+        <segue reference="ND0-h7-Vra"/>
         <segue reference="ulD-Z3-59i"/>
     </inferredMetricsTieBreakers>
 </document>

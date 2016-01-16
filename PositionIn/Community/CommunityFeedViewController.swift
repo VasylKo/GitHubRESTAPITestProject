@@ -38,17 +38,29 @@ class CommunityFeedViewController: BesideMenuViewController, BrowseActionProduce
     
     func reloadData() {
         api().getCommunity(community.objectId).onSuccess { [weak self] community in
-            self?.didReceiveCommunity(community)
+            self?.community = community
         }
     }
     
-    private func didReceiveCommunity(community: Community) {        
+    private func didReceiveCommunity(community: Community) {
         dataSource.items[Sections.Info.rawValue] = [
             BrowseCommunityHeaderCellModel(objectId: community.objectId, tapAction: .None, title: community.name ?? "", url: community.avatar),
             CommunityStatsCellModel(countMembers: community.membersCount, countPosts: community.postsCount, countEvents: community.eventsCount)
         ]
         self.updateFeed()
+        //
+        self.performSegue(CommunityFeedViewController.Segue.showVolunteerDetailsViewController)
     }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let volunteerDetailsViewController = segue.destinationViewController  as? VolunteerDetailsViewController {
+            volunteerDetailsViewController.objectId = self.community.objectId
+            if let owners = (self.community.members?.items.filter(){$0.role == Community.Role.Owner.rawValue}) {
+                volunteerDetailsViewController.author = owners.first
+            }
+        }
+    }
+    //
 
     func updateFeed() {
         var model: BrowseListCellModel = BrowseListCellModel(objectId: community.objectId, actionConsumer: self, browseMode: browseMode,

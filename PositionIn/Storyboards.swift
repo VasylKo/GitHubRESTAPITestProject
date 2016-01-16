@@ -638,6 +638,14 @@ extension BrowseCommunityViewController: IdentifiableProtocol {
     static var identifier: String? { return "BrowseCommunityViewController" }
 }
 
+
+//MARK: - BrowseVolunteerViewController
+//extension BrowseVolunteerViewController: IdentifiableProtocol { 
+//    var identifier: String? { return "BrowseVolunteerViewController" }
+//    static var identifier: String? { return "BrowseVolunteerViewController" }
+//}
+
+
 //MARK: - SearchViewController
 extension SearchViewController: IdentifiableProtocol { 
     var identifier: String? { return "SearchViewController" }
@@ -1197,11 +1205,44 @@ extension UserProfileViewController: IdentifiableProtocol {
 
 
 //MARK: - CommunityFeedViewController
+extension UIStoryboardSegue {
+    func selection() -> CommunityFeedViewController.Segue? {
+        if let identifier = self.identifier {
+            return CommunityFeedViewController.Segue(rawValue: identifier)
+        }
+        return nil
+    }
+}
+
 extension CommunityFeedViewController: IdentifiableProtocol { 
     var identifier: String? { return "CommunityFeedViewController" }
     static var identifier: String? { return "CommunityFeedViewController" }
 }
 
+extension CommunityFeedViewController { 
+
+    enum Segue: String, CustomStringConvertible, SegueProtocol {
+        case showVolunteerDetailsViewController = "showVolunteerDetailsViewController"
+
+        var kind: SegueKind? {
+            switch (self) {
+            case showVolunteerDetailsViewController:
+                return SegueKind(rawValue: "show")
+            }
+        }
+
+        var destination: UIViewController.Type? {
+            switch (self) {
+            case showVolunteerDetailsViewController:
+                return VolunteerDetailsViewController.self
+            }
+        }
+
+        var identifier: String? { return self.description } 
+        var description: String { return self.rawValue }
+    }
+
+}
 
 //MARK: - ChangePasswordViewController
 extension ChangePasswordViewController: IdentifiableProtocol { 

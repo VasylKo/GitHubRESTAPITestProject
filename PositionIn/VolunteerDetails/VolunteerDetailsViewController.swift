@@ -12,7 +12,12 @@ class VolunteerDetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = NSLocalizedString("Volunteer", comment: "Volunteer")
+        switch self.type {
+        case .Volunteers:
+            self.title = NSLocalizedString("Volunteer", comment:"")
+        case .Community:
+            self.title = NSLocalizedString("Community", comment: "")
+        }
         dataSource.items = productAcionItems()
         dataSource.configureTable(actionTableView)
         reloadData()
@@ -59,6 +64,12 @@ class VolunteerDetailsViewController: UIViewController {
         }
     }
     
+    enum Type : Int {
+        case Community, Volunteers
+    }
+    var type : Type = .Volunteers
+    var joinAction : Bool = true
+    
     var objectId: CRUDObjectId?
     var author: ObjectInfo?
     
@@ -73,20 +84,24 @@ class VolunteerDetailsViewController: UIViewController {
     
     
     private func productAcionItems() -> [[VolunteerActionItem]] {
-        return [
-            [ // 0 section
-                VolunteerActionItem(title: NSLocalizedString("Volunteer", comment: "Volunteer"),
-                    image: "home_volunteer",
-                    action: .Buy),
-            ],
-            [ // 1 section
-                VolunteerActionItem(title: NSLocalizedString("Send Message", comment: "Volunteer"), image: "productSendMessage", action: .SendMessage),
-                VolunteerActionItem(title: NSLocalizedString("Organizer Profile", comment: "Volunteer"), image: "productSellerProfile", action: .SellerProfile),
-                VolunteerActionItem(title: NSLocalizedString("Navigate", comment: "Volunteer"), image: "productNavigate", action: .ProductInventory),
-                VolunteerActionItem(title: NSLocalizedString("More Information", comment: "Volunteer"), image: "productTerms&Info", action: .ProductInventory),
-            ],
-        ]
+        let firstSection = [
+            VolunteerActionItem(title: NSLocalizedString("Send Message", comment: "Volunteer"), image: "productSendMessage", action: .SendMessage),
+            VolunteerActionItem(title: NSLocalizedString("Organizer Profile", comment: "Volunteer"), image: "productSellerProfile", action: .SellerProfile),
+            VolunteerActionItem(title: NSLocalizedString("More Information", comment: "Volunteer"), image: "productTerms&Info", action: .ProductInventory)]
         
+        if (self.joinAction != true) {
+            //public or joined case
+            return [firstSection]
+        } else {
+            var joinActionItem : VolunteerActionItem
+            switch self.type {
+            case .Volunteers:
+                joinActionItem = VolunteerActionItem(title: NSLocalizedString("Volunteer", comment: "Volunteer"), image: "home_volunteer",action: .Buy)
+            case .Community:
+                joinActionItem = VolunteerActionItem(title: NSLocalizedString("Join", comment: "Community"), image: "home_volunteer",action: .Buy)
+            }
+            return [[joinActionItem], firstSection]
+        }
     }
     
     @IBOutlet private weak var actionTableView: UITableView!
