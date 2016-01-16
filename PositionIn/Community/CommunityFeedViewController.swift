@@ -61,10 +61,7 @@ class CommunityFeedViewController: BesideMenuViewController, BrowseActionProduce
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let volunteerDetailsViewController = segue.destinationViewController  as? VolunteerDetailsViewController {
             volunteerDetailsViewController.objectId = self.community.objectId
-            if let owners = (self.community.members?.items.filter(){$0.role == Community.Role.Owner.rawValue}) {
-                volunteerDetailsViewController.author = owners.first
-            }
-//            volunteerDetailsViewController.joinAction = true/false
+            volunteerDetailsViewController.joinAction = false
             if let typeValue = VolunteerDetailsViewController.ControllerType(rawValue:self.controllerType.rawValue){
                 volunteerDetailsViewController.type = typeValue
             }

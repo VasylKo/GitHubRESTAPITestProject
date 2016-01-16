@@ -25,20 +25,18 @@ class VolunteerDetailsViewController: UIViewController {
         reloadData()
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let profileController = segue.destinationViewController  as? UserProfileViewController,
-            let userId = author?.objectId {
-                profileController.objectId = userId
-        }
-    }
+//    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+//        if let profileController = segue.destinationViewController  as? UserProfileViewController,
+//            let userId = author?.objectId {
+//                profileController.objectId = userId
+//        }
+//    }
     
     private func reloadData() {
         self.infoLabel.text = NSLocalizedString("Calculating...", comment: "Distance calculation process")
-        switch (objectId, author) {
-        case (.Some(let objectId), .Some(let author) ):
-            api().getUserProfile(author.objectId).flatMap { (profile: UserProfile) -> Future<Community, NSError> in
-                return api().getVolunteer(objectId)
-                }.onSuccess {[weak self] volunteer in
+        switch objectId {
+        case .Some(let objectId):
+            api().getVolunteer(objectId).onSuccess {[weak self] volunteer in
                     self?.didReceiveDetails(volunteer)
             }
         default:
@@ -153,9 +151,9 @@ extension VolunteerDetailsViewController: VolunteerDetailsActionConsumer {
         case .SellerProfile:
             segue = .ShowOrganizerProfile
         case .SendMessage:
-            if let userId = author?.objectId {
-                showChatViewController(userId)
-            }
+//            if let userId = author?.objectId {
+//                showChatViewController(userId)
+//            }
             return
         case .Join:
             if api().isUserAuthorized() && self.objectId != nil {
