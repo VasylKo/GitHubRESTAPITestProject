@@ -18,6 +18,14 @@ class BrowseVolunteerViewController: BrowseCommunityViewController {
         self.title = "Volunteering"
     }
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let volunteerDetailsViewController = segue.destinationViewController  as? VolunteerDetailsViewController {
+            volunteerDetailsViewController.objectId = self.selectedObjectId
+            volunteerDetailsViewController.joinAction = true
+            volunteerDetailsViewController.type = VolunteerDetailsViewController.ControllerType.Volunteer
+        }
+    }
+    
     override func reloadData() {
         dataRequestToken.invalidate()
         dataRequestToken = InvalidationToken()
@@ -26,8 +34,7 @@ class BrowseVolunteerViewController: BrowseCommunityViewController {
         switch browseMode {
         case .MyGroups:
             let mySubscriptionsRequest = api().currentUserId().flatMap { userId in
-                return api().getUserCommunities(userId)
-                //
+                return api().getUserVolunteers(userId)
             }
             if firstMyCommunityRequestToken.isInvalid {
                 communitiesRequest = mySubscriptionsRequest
@@ -79,6 +86,8 @@ class BrowseVolunteerViewController: BrowseCommunityViewController {
         case .Browse, .Post:
             let controller = Storyboards.Main.instantiateCommunityViewController()
             controller.objectId = community
+            controller.controllerType = .Volunteer
+            
             navigationController?.pushViewController(controller, animated: true)
         case .Invite:
             break
@@ -88,6 +97,8 @@ class BrowseVolunteerViewController: BrowseCommunityViewController {
             navigationController?.pushViewController(controller, animated: true)
             self.subscribeForContentUpdates(controller)
         case .None:
+            self.selectedObjectId = community
+            self.performSegue(BrowseVolunteerViewController.Segue.showVolunteerDetailsViewController)
             break
         }
     }

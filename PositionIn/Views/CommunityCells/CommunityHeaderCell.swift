@@ -15,15 +15,30 @@ final class CommunityHeaderCell: TableViewCell {
         assert(m != nil, "Invalid model passed")
         captionLabel.text = m!.title
         contentImageView.setImageFromURL(m!.url, placeholder: UIImage(named: "communityPlaceholder"))
+        self.infoButton.hidden = !m!.showInfo
+        shouldCallInfoAction = m!.showInfo
+        self.actionConsumer = m!.actionConsumer
+        self.communityType.image = m!.isClosed ?
+        UIImage(named: "closed_comm") :
+        UIImage(named: "public_comm")
     }
     
     override func prepareForReuse() {
         super.prepareForReuse()
         contentImageView.hnk_cancelSetImage()
     }
-
     
-    @IBOutlet weak var contentImageView: UIImageView!
-    @IBOutlet weak var captionLabel: UILabel!
+    weak var actionConsumer: CommunityFeedActionConsumer?
     
+    @IBAction func infoButtonTapped(sender: AnyObject) {
+        if shouldCallInfoAction, let actionConsumer = actionConsumer {
+            actionConsumer.communityFeedInfoTapped()
+        }
+    }
+    
+    private var shouldCallInfoAction: Bool = false
+    @IBOutlet private weak var infoButton: UIButton!
+    @IBOutlet private weak var contentImageView: UIImageView!
+    @IBOutlet private weak var captionLabel: UILabel!
+    @IBOutlet private weak var communityType: UIImageView!
 }

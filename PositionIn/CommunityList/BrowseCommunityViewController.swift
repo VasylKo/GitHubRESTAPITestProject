@@ -125,14 +125,6 @@ class BrowseCommunityViewController: BesideMenuViewController, BrowseCommunityAc
         return dataSource
         }()
     
-    //    @IBAction func addCommunityTouched(sender: AnyObject) {
-    //        api().isUserAuthorized().onSuccess {[weak self] in
-    //            let controller = Storyboards.NewItems.instantiateAddCommunityViewController()
-    //            self?.navigationController?.pushViewController(controller, animated: true)
-    //            self?.subscribeForContentUpdates(controller)
-    //        }
-    //    }
-    
     override func contentDidChange(sender: AnyObject?, info: [NSObject : AnyObject]?) {
         super.contentDidChange(sender, info: info)
         ConversationManager.sharedInstance().refresh()
@@ -142,6 +134,14 @@ class BrowseCommunityViewController: BesideMenuViewController, BrowseCommunityAc
     }
     
     // MARK: - Navigation
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let volunteerDetailsViewController = segue.destinationViewController  as? VolunteerDetailsViewController {
+            volunteerDetailsViewController.objectId = self.selectedObjectId
+            volunteerDetailsViewController.joinAction = true
+            volunteerDetailsViewController.type = VolunteerDetailsViewController.ControllerType.Community
+        }
+    }
     
     @IBAction func prepareForUnwind(segue: UIStoryboardSegue) {
         
@@ -163,6 +163,8 @@ class BrowseCommunityViewController: BesideMenuViewController, BrowseCommunityAc
     
     /* BrowseCommunityActionConsumer */
     
+    var selectedObjectId : CRUDObjectId?
+    
     func executeAction(action: BrowseCommunityViewController.Action, community: CRUDObjectId) {
         switch action {
         case .Join:
@@ -181,6 +183,7 @@ class BrowseCommunityViewController: BesideMenuViewController, BrowseCommunityAc
         case .Browse, .Post:
             let controller = Storyboards.Main.instantiateCommunityViewController()
             controller.objectId = community
+            controller.controllerType = .Community
             navigationController?.pushViewController(controller, animated: true)
         case .Invite:
             break
@@ -189,8 +192,9 @@ class BrowseCommunityViewController: BesideMenuViewController, BrowseCommunityAc
             controller.existingCommunityId = community
             navigationController?.pushViewController(controller, animated: true)
             self.subscribeForContentUpdates(controller)
-            
         case .None:
+            self.selectedObjectId = community
+            self.performSegue(BrowseCommunityViewController.Segue.showVolunteerDetailsViewController)
             break
         }
     }

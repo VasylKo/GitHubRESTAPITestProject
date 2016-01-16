@@ -28,7 +28,8 @@ struct FeedItem: CRUDObject {
     var image: NSURL?
     var type: ItemType = .Unknown
     var location: Location?
-    
+    var numOfLikes: Int?
+    var numOfComments: Int?
     var itemData: Any? {
         return author
     }
@@ -66,7 +67,9 @@ struct FeedItem: CRUDObject {
         date <- (map["date"], APIDateTransform())
         image <- (map["image"], AmazonURLTransform())
         type <- (map["type"], EnumTransform())
-        location <- map["location"]        
+        location <- map["location"]
+        numOfLikes <- map["numOfLikes"]
+        numOfComments <- map["numOfComments"]
     }
     
     var description: String {

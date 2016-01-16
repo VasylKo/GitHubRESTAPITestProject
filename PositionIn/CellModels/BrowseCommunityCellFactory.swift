@@ -13,7 +13,8 @@ struct BrowseCommunityCellFactory {
     func modelsForCommunity(community: Community, mode: BrowseCommunityViewController.BrowseMode, actionConsumer: BrowseCommunityActionConsumer?) -> [TableViewCellModel] {
         var models: [TableViewCellModel] = []
         let tapAction = tapActionForCommunity(community)
-        models.append(BrowseCommunityHeaderCellModel(objectId: community.objectId, tapAction: tapAction, title:community.name ?? "", url:community.avatar))
+        models.append(BrowseCommunityHeaderCellModel(objectId: community.objectId, tapAction: tapAction, title:community.name ?? "", url:community.avatar, showInfo: false, isClosed: community.closed))
+        
         models.append(BrowseCommunityInfoCellModel(objectId: community.objectId, tapAction: tapAction, members: community.members?.total, text: community.communityDescription))
 
         let actionModel = BrowseCommunityActionCellModel(objectId: community.objectId, tapAction: tapAction, actions: actionListForCommunity(community))
@@ -45,13 +46,13 @@ struct BrowseCommunityCellFactory {
         Log.debug?.value(community.role)
         switch community.role {
         case .Invite, .Unknown:
-            return [.Join]
+            return [.Browse]
         case .Owner:
-            return [.Browse, /*.Invite,*/ .Edit]
+            return [.Browse, /*.Invite,*/]
         case .Moderator:
             return [.Browse, /*.Invite*/]
         default:
-            if community.isPrivate {
+            if community.closed {
                 return [.Browse]
             } else {
                 return [.Browse, /*.Invite*/]

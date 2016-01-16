@@ -220,11 +220,6 @@ struct APIService {
         return self.createObject(endpoint, object: object)
     }
     
-//    func getProduct(objectId: CRUDObjectId, inShop shop: CRUDObjectId) -> Future<Product, NSError> {
-//        let endpoint = Product.shopItemsEndpoint(shop, productId: objectId)
-//        return self.getObject(endpoint)
-//    }
-    
     //MARK: - Community -
     
     func getCommunities(page: Page) -> Future<CollectionResponse<Community>,NSError> {
@@ -233,7 +228,7 @@ struct APIService {
         return getObjectsCollection(endpoint, params: params)
     }
 
-    func getUserVolunteers(userId: CRUDObjectId) -> Future<CollectionResponse<Volunteer>,NSError> {
+    func getUserVolunteers(userId: CRUDObjectId) -> Future<CollectionResponse<Community>,NSError> {
         let endpoint = Volunteer.userVolunteersEndpoint(userId)
         return getObjectsCollection(endpoint, params: nil)
     }
@@ -375,12 +370,25 @@ struct APIService {
         }
     }
     
-    func getAll(homeItem: HomeItem) -> Future<CollectionResponse<FeedItem>,NSError> {
+    func getAll(homeItem: HomeItem, seachFilter: SearchFilter) -> Future<CollectionResponse<FeedItem>,NSError> {
         let endpoint = homeItem.endpoint()
 //        //TODO: change this when it will be fixed on backend
         let method: Alamofire.Method = .POST
         let params = APIServiceQuery()
         params.append("type", value: [homeItem.rawValue])
+        if let itemTypes = seachFilter.itemTypes {
+            var itemTypesArray : [Int] = []
+            
+            for (_, value) in itemTypes.enumerate() {
+               itemTypesArray.append(value.rawValue)
+            }
+            params.append("type", value: itemTypesArray)
+        }
+        
+        if let communities = seachFilter.communities {
+            params.append("communityId", value: communities)
+        }
+        
         return session().flatMap {
             (token: AuthResponse.Token) -> Future<CollectionResponse<FeedItem>, NSError> in
             //TODO: fix endp
@@ -404,10 +412,15 @@ struct APIService {
             return self.handleFailure(future)
         }
     }
-    
-    func getVolunteer(volunteer: CRUDObjectId) -> Future<Community, NSError> {
-        let endpoint = Volunteer.endpoint()
+
+    func getVolunteer(volunteerId: CRUDObjectId) -> Future<Community, NSError> {
+        let endpoint = Volunteer.volunteerEndpoint(volunteerId)
         return getObject(endpoint)
+    }
+    
+    func joinVolunteer(communityId: CRUDObjectId) -> Future<Void, NSError> {
+        let endpoint = Volunteer.membersEndpoint(communityId)
+        return updateCommand(endpoint)
     }
     
     func getBomaHotelsDetails(objectId: CRUDObjectId) -> Future<BomaHotel, NSError> {
@@ -440,11 +453,6 @@ struct APIService {
     func getMarketDetails(objectId: CRUDObjectId) -> Future<Product, NSError> {
         let endpont = HomeItem.Market.endpoint(objectId)
         return self.getOne(endpont!)
-    }
-
-    func getVolunteerDetails(objectId: CRUDObjectId) -> Future<Event, NSError> {
-        let endpoint = HomeItem.Volunteer.endpoint(objectId)
-        return getObject(endpoint!)
     }
     
     func getTrainingDetails(objectId: CRUDObjectId) -> Future<Product, NSError> {

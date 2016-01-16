@@ -141,10 +141,6 @@ struct Storyboards {
             return self.storyboard.instantiateViewControllerWithIdentifier("BrowseCommunityNavigationController") as! UINavigationController
         }
 
-        static func instantiateBrowseVolunteerNavigationController() -> UINavigationController {
-            return self.storyboard.instantiateViewControllerWithIdentifier("BrowseVolunteerNavigationController") as! UINavigationController
-        }
-
         static func instantiateSettingsNavigationController() -> UINavigationController {
             return self.storyboard.instantiateViewControllerWithIdentifier("SettingsNavigationController") as! UINavigationController
         }
@@ -637,11 +633,84 @@ extension CreateConversationContainerViewController: IdentifiableProtocol {
 //MARK: - FilterViewController
 
 //MARK: - BrowseCommunityViewController
+extension UIStoryboardSegue {
+    func selection() -> BrowseCommunityViewController.Segue? {
+        if let identifier = self.identifier {
+            return BrowseCommunityViewController.Segue(rawValue: identifier)
+        }
+        return nil
+    }
+}
+
 extension BrowseCommunityViewController: IdentifiableProtocol { 
     var identifier: String? { return "BrowseCommunityViewController" }
     static var identifier: String? { return "BrowseCommunityViewController" }
 }
 
+extension BrowseCommunityViewController { 
+
+    enum Segue: String, CustomStringConvertible, SegueProtocol {
+        case showVolunteerDetailsViewController = "showVolunteerDetailsViewController"
+
+        var kind: SegueKind? {
+            switch (self) {
+            case showVolunteerDetailsViewController:
+                return SegueKind(rawValue: "show")
+            }
+        }
+
+        var destination: UIViewController.Type? {
+            switch (self) {
+            case showVolunteerDetailsViewController:
+                return VolunteerDetailsViewController.self
+            }
+        }
+
+        var identifier: String? { return self.description } 
+        var description: String { return self.rawValue }
+    }
+
+}
+
+//MARK: - BrowseVolunteerViewController
+//extension UIStoryboardSegue {
+//    func selection() -> BrowseVolunteerViewController.Segue? {
+//        if let identifier = self.identifier {
+//            return BrowseVolunteerViewController.Segue(rawValue: identifier)
+//        }
+//        return nil
+//    }
+//}
+//
+//extension BrowseVolunteerViewController: IdentifiableProtocol { 
+//    var identifier: String? { return "BrowseVolunteerViewController" }
+//    static var identifier: String? { return "BrowseVolunteerViewController" }
+//}
+
+extension BrowseVolunteerViewController { 
+
+    enum Segue: String, CustomStringConvertible, SegueProtocol {
+        case ShowVolunteerDetailsViewController = "showVolunteerDetailsViewController"
+
+        var kind: SegueKind? {
+            switch (self) {
+            case ShowVolunteerDetailsViewController:
+                return SegueKind(rawValue: "show")
+            }
+        }
+
+        var destination: UIViewController.Type? {
+            switch (self) {
+            case ShowVolunteerDetailsViewController:
+                return VolunteerDetailsViewController.self
+            }
+        }
+
+        var identifier: String? { return self.description } 
+        var description: String { return self.rawValue }
+    }
+
+}
 
 //MARK: - SearchViewController
 extension SearchViewController: IdentifiableProtocol { 
@@ -1202,11 +1271,44 @@ extension UserProfileViewController: IdentifiableProtocol {
 
 
 //MARK: - CommunityFeedViewController
+extension UIStoryboardSegue {
+    func selection() -> CommunityFeedViewController.Segue? {
+        if let identifier = self.identifier {
+            return CommunityFeedViewController.Segue(rawValue: identifier)
+        }
+        return nil
+    }
+}
+
 extension CommunityFeedViewController: IdentifiableProtocol { 
     var identifier: String? { return "CommunityFeedViewController" }
     static var identifier: String? { return "CommunityFeedViewController" }
 }
 
+extension CommunityFeedViewController { 
+
+    enum Segue: String, CustomStringConvertible, SegueProtocol {
+        case showVolunteerDetailsViewController = "showVolunteerDetailsViewController"
+
+        var kind: SegueKind? {
+            switch (self) {
+            case showVolunteerDetailsViewController:
+                return SegueKind(rawValue: "show")
+            }
+        }
+
+        var destination: UIViewController.Type? {
+            switch (self) {
+            case showVolunteerDetailsViewController:
+                return VolunteerDetailsViewController.self
+            }
+        }
+
+        var identifier: String? { return self.description } 
+        var description: String { return self.rawValue }
+    }
+
+}
 
 //MARK: - ChangePasswordViewController
 extension ChangePasswordViewController: IdentifiableProtocol { 

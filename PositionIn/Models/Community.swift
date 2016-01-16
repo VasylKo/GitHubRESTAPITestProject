@@ -14,7 +14,7 @@ struct Community: CRUDObject {
     var name: String?
     var communityDescription: String?
     var avatar: NSURL?
-    var isPrivate: Bool = false
+    var closed: Bool = false
     
     var shops: [ObjectInfo]?
 
@@ -95,7 +95,7 @@ struct Community: CRUDObject {
         communityDescription <- map["description"]
         role <- (map["role"], EnumTransform())
         avatar <- (map["avatar"], AmazonURLTransform())
-        isPrivate <- map["isPrivate"]
+        closed <- map["closed"]
         members <- map["members"]
         location <- map["location"]
         shops <- map["shops.data"]
