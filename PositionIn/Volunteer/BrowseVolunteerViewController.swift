@@ -18,6 +18,14 @@ class BrowseVolunteerViewController: BrowseCommunityViewController {
         self.title = "Volunteering"
     }
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let volunteerDetailsViewController = segue.destinationViewController  as? VolunteerDetailsViewController {
+            volunteerDetailsViewController.objectId = self.selectedObjectId
+            volunteerDetailsViewController.joinAction = true
+            volunteerDetailsViewController.type = VolunteerDetailsViewController.ControllerType.Volunteer
+        }
+    }
+    
     override func reloadData() {
         dataRequestToken.invalidate()
         dataRequestToken = InvalidationToken()
@@ -89,6 +97,8 @@ class BrowseVolunteerViewController: BrowseCommunityViewController {
             navigationController?.pushViewController(controller, animated: true)
             self.subscribeForContentUpdates(controller)
         case .None:
+            self.selectedObjectId = community
+            self.performSegue(BrowseCommunityViewController.Segue.showVolunteerDetailsViewController)
             break
         }
     }

@@ -135,6 +135,14 @@ class BrowseCommunityViewController: BesideMenuViewController, BrowseCommunityAc
     
     // MARK: - Navigation
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let volunteerDetailsViewController = segue.destinationViewController  as? VolunteerDetailsViewController {
+            volunteerDetailsViewController.objectId = self.selectedObjectId
+            volunteerDetailsViewController.joinAction = true
+            volunteerDetailsViewController.type = VolunteerDetailsViewController.ControllerType.Community
+        }
+    }
+    
     @IBAction func prepareForUnwind(segue: UIStoryboardSegue) {
         
     }
@@ -154,6 +162,8 @@ class BrowseCommunityViewController: BesideMenuViewController, BrowseCommunityAc
     
     
     /* BrowseCommunityActionConsumer */
+    
+    var selectedObjectId : CRUDObjectId?
     
     func executeAction(action: BrowseCommunityViewController.Action, community: CRUDObjectId) {
         switch action {
@@ -183,6 +193,8 @@ class BrowseCommunityViewController: BesideMenuViewController, BrowseCommunityAc
             navigationController?.pushViewController(controller, animated: true)
             self.subscribeForContentUpdates(controller)
         case .None:
+            self.selectedObjectId = community
+            self.performSegue(BrowseCommunityViewController.Segue.showVolunteerDetailsViewController)
             break
         }
     }

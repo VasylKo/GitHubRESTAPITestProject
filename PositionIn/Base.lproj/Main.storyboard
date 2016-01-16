@@ -257,6 +257,9 @@
                     <navigationItem key="navigationItem" id="IFL-7w-zce">
                         <nil key="title"/>
                     </navigationItem>
+                    <connections>
+                        <segue destination="fxT-f9-lqb" kind="show" identifier="showVolunteerDetailsViewController" id="D4Z-XH-9tb"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o8N-bY-vrv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -267,6 +270,9 @@
             <objects>
                 <viewController storyboardIdentifier="BrowseVolunteerViewController" id="JIb-CZ-SRO" customClass="BrowseVolunteerViewController" customModule="PositionIn" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="4Mm-Vv-a0o"/>
+                    <connections>
+                        <segue destination="fxT-f9-lqb" kind="show" identifier="" id="6ZU-Ck-PGM"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rMv-UQ-wgc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1433,10 +1439,10 @@
         <image name="productClockAvailability" width="22" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="6ZU-Ck-PGM"/>
         <segue reference="9u4-qy-iVR"/>
-        <segue reference="BPL-3F-vde"/>
         <segue reference="WXU-OU-n2l"/>
-        <segue reference="ND0-h7-Vra"/>
         <segue reference="ulD-Z3-59i"/>
+        <segue reference="ND0-h7-Vra"/>
     </inferredMetricsTieBreakers>
 </document>
