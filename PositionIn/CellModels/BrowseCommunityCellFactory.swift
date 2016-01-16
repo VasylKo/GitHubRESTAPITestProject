@@ -64,8 +64,4 @@ struct BrowseCommunityCellFactory {
     private func tapActionForCommunity(community: Community) -> BrowseCommunityViewController.Action {
         return community.canView ? .Browse : .None
     }
-    
-    private func tapActionForCommunityDetails(community: Community) -> BrowseCommunityViewController.Action {
-        return .Info
-    }
 }
