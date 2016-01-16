@@ -35,6 +35,16 @@ final class CommunityViewController: DisplayModeViewController {
         case .List:
             let community = Community(objectId: objectId)
             let controller = Storyboards.Main.instantiateCommunityFeedViewController()
+            
+            let filterUpdate = { (filter: SearchFilter) -> SearchFilter in
+                var f = filter
+                f.communities = [community.objectId]
+                f.itemTypes = [FeedItem.ItemType.Event, FeedItem.ItemType.News]
+                return f
+            }
+            
+            
+            controller.childFilterUpdate = filterUpdate
             controller.community = community
             return controller
         }

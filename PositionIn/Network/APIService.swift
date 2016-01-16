@@ -370,12 +370,25 @@ struct APIService {
         }
     }
     
-    func getAll(homeItem: HomeItem) -> Future<CollectionResponse<FeedItem>,NSError> {
+    func getAll(homeItem: HomeItem, seachFilter: SearchFilter) -> Future<CollectionResponse<FeedItem>,NSError> {
         let endpoint = homeItem.endpoint()
 //        //TODO: change this when it will be fixed on backend
         let method: Alamofire.Method = .POST
         let params = APIServiceQuery()
         params.append("type", value: [homeItem.rawValue])
+        if let itemTypes = seachFilter.itemTypes {
+            var itemTypesArray : [Int] = []
+            
+            for (_, value) in itemTypes.enumerate() {
+               itemTypesArray.append(value.rawValue)
+            }
+            params.append("type", value: itemTypesArray)
+        }
+        
+        if let communities = seachFilter.communities {
+            params.append("communityId", value: communities)
+        }
+        
         return session().flatMap {
             (token: AuthResponse.Token) -> Future<CollectionResponse<FeedItem>, NSError> in
             //TODO: fix endp

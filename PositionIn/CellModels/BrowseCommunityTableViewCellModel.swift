@@ -20,10 +20,13 @@ class BrowseCommunityTableViewCellModel: TableViewCellModel {
 final class BrowseCommunityHeaderCellModel: BrowseCommunityTableViewCellModel {
     let title: String
     let url: NSURL?
+    let showInfo: Bool
+    weak var actionConsumer: CommunityFeedActionConsumer?
     
-    init(objectId: CRUDObjectId, tapAction: BrowseCommunityViewController.Action, title: String, url: NSURL?) {
+    init(objectId: CRUDObjectId, tapAction: BrowseCommunityViewController.Action, title: String, url: NSURL?, showInfo: Bool) {
         self.title = title
         self.url = url
+        self.showInfo = showInfo
         super.init(objectId: objectId, tapAction: tapAction)
     }
 }

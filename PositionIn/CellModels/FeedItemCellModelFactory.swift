@@ -42,7 +42,9 @@ struct FeedItemCellModelFactory {
                     price: feedItem.donations,
                     imageURL: feedItem.image,
                     location: feedItem.location,
-                    data: feedItem.itemData
+                    data: feedItem.itemData,
+                    numOfLikes: feedItem.numOfLikes,
+                    numOfComments: feedItem.numOfComments
                 ),
             ]
         case .Unknown:

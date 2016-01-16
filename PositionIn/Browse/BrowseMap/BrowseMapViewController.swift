@@ -119,7 +119,8 @@ extension BrowseMapViewController: GMSMapViewDelegate {
         if let tempHomeItem = f.homeItemType {
             homeItem = tempHomeItem
         }
-        let request: Future<CollectionResponse<FeedItem>,NSError> = api().getAll(homeItem)
+        let request: Future<CollectionResponse<FeedItem>,NSError> = api().getAll(homeItem,
+            seachFilter: self.filter)
         
 //        switch browseMode {
 //        case .ForYou:

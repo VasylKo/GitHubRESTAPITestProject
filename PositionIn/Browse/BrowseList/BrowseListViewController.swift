@@ -108,7 +108,8 @@ final class BrowseListViewController: UIViewController, BrowseActionProducer, Br
         if let tempHomeItem = searchFilter.homeItemType {
             homeItem = tempHomeItem
         }
-        let request: Future<CollectionResponse<FeedItem>,NSError> = api().getAll(homeItem)
+        
+        let request: Future<CollectionResponse<FeedItem>,NSError> = api().getAll(homeItem, seachFilter: self.filter)
         
         request.onSuccess(dataRequestToken.validContext) {
             [weak self] response in

@@ -13,7 +13,8 @@ struct BrowseCommunityCellFactory {
     func modelsForCommunity(community: Community, mode: BrowseCommunityViewController.BrowseMode, actionConsumer: BrowseCommunityActionConsumer?) -> [TableViewCellModel] {
         var models: [TableViewCellModel] = []
         let tapAction = tapActionForCommunity(community)
-        models.append(BrowseCommunityHeaderCellModel(objectId: community.objectId, tapAction: tapAction, title:community.name ?? "", url:community.avatar))
+        models.append(BrowseCommunityHeaderCellModel(objectId: community.objectId, tapAction: tapAction, title:community.name ?? "", url:community.avatar, showInfo: false))
+        
         models.append(BrowseCommunityInfoCellModel(objectId: community.objectId, tapAction: tapAction, members: community.members?.total, text: community.communityDescription))
 
         let actionModel = BrowseCommunityActionCellModel(objectId: community.objectId, tapAction: tapAction, actions: actionListForCommunity(community))
@@ -62,5 +63,9 @@ struct BrowseCommunityCellFactory {
     
     private func tapActionForCommunity(community: Community) -> BrowseCommunityViewController.Action {
         return community.canView ? .Browse : .None
+    }
+    
+    private func tapActionForCommunityDetails(community: Community) -> BrowseCommunityViewController.Action {
+        return .Info
     }
 }
