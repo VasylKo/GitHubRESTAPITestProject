@@ -11,7 +11,13 @@ import CleanroomLogger
 
 final class CommunityViewController: DisplayModeViewController {
     
+    enum ControllerType : Int {
+        case Unknown, Community, Volunteer
+    }
+    
+    var controllerType: ControllerType = .Unknown
     var objectId: CRUDObjectId =  CRUDObjectInvalidId
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,14 +41,13 @@ final class CommunityViewController: DisplayModeViewController {
         case .List:
             let community = Community(objectId: objectId)
             let controller = Storyboards.Main.instantiateCommunityFeedViewController()
-            
+            controller.controllerType = self.controllerType
             let filterUpdate = { (filter: SearchFilter) -> SearchFilter in
                 var f = filter
                 f.communities = [community.objectId]
                 f.itemTypes = [FeedItem.ItemType.Event, FeedItem.ItemType.News]
                 return f
             }
-            
             
             controller.childFilterUpdate = filterUpdate
             controller.community = community

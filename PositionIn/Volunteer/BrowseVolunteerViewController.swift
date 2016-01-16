@@ -78,6 +78,8 @@ class BrowseVolunteerViewController: BrowseCommunityViewController {
         case .Browse, .Post:
             let controller = Storyboards.Main.instantiateCommunityViewController()
             controller.objectId = community
+            controller.controllerType = .Volunteer
+            
             navigationController?.pushViewController(controller, animated: true)
         case .Invite:
             break

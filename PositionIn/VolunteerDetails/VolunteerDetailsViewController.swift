@@ -13,10 +13,12 @@ class VolunteerDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         switch self.type {
-        case .Volunteers:
+        case .Volunteer:
             self.title = NSLocalizedString("Volunteer", comment:"")
         case .Community:
             self.title = NSLocalizedString("Community", comment: "")
+        default:
+            break
         }
         dataSource.items = productAcionItems()
         dataSource.configureTable(actionTableView)
@@ -64,10 +66,11 @@ class VolunteerDetailsViewController: UIViewController {
         }
     }
     
-    enum Type : Int {
-        case Community, Volunteers
+    enum ControllerType : Int {
+        case Unknown, Community, Volunteer
     }
-    var type : Type = .Volunteers
+    
+    var type : ControllerType = .Unknown
     var joinAction : Bool = true
     
     var objectId: CRUDObjectId?
@@ -99,6 +102,9 @@ class VolunteerDetailsViewController: UIViewController {
                 joinActionItem = VolunteerActionItem(title: NSLocalizedString("Volunteer", comment: "Volunteer"), image: "home_volunteer",action: .Join)
             case .Community:
                 joinActionItem = VolunteerActionItem(title: NSLocalizedString("Join", comment: "Community"), image: "home_volunteer",action: .Join)
+            case .Unknown:
+                //TODO:change .Buy
+                joinActionItem = VolunteerActionItem(title: "", image: "", action: .Buy)
             }
             return [[joinActionItem], firstSection]
         }

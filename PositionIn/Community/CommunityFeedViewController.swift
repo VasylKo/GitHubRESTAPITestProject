@@ -31,6 +31,8 @@ class CommunityFeedViewController: BesideMenuViewController, BrowseActionProduce
         }
     }
     
+    var controllerType: CommunityViewController.ControllerType = .Unknown
+    
     var childFilterUpdate: SearchFilterUpdate?
     
     func applyFilterUpdate(update: SearchFilterUpdate) {
@@ -63,7 +65,9 @@ class CommunityFeedViewController: BesideMenuViewController, BrowseActionProduce
                 volunteerDetailsViewController.author = owners.first
             }
 //            volunteerDetailsViewController.joinAction = true/false
-//            volunteerDetailsViewController.type = .Community/.Volunteer
+            if let typeValue = VolunteerDetailsViewController.ControllerType(rawValue:self.controllerType.rawValue){
+                volunteerDetailsViewController.type = typeValue
+            }
         }
     }
 

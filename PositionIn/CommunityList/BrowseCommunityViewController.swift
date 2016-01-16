@@ -173,6 +173,7 @@ class BrowseCommunityViewController: BesideMenuViewController, BrowseCommunityAc
         case .Browse, .Post:
             let controller = Storyboards.Main.instantiateCommunityViewController()
             controller.objectId = community
+            controller.controllerType = .Community
             navigationController?.pushViewController(controller, animated: true)
         case .Invite:
             break
