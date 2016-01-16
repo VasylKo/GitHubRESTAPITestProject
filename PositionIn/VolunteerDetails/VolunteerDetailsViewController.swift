@@ -98,13 +98,13 @@ class VolunteerDetailsViewController: UIViewController {
         } else {
             var joinActionItem : VolunteerActionItem
             switch self.type {
-            case .Volunteers:
+            case .Volunteer:
                 joinActionItem = VolunteerActionItem(title: NSLocalizedString("Volunteer", comment: "Volunteer"), image: "home_volunteer",action: .Join)
             case .Community:
                 joinActionItem = VolunteerActionItem(title: NSLocalizedString("Join", comment: "Community"), image: "home_volunteer",action: .Join)
             case .Unknown:
                 //TODO:change .Buy
-                joinActionItem = VolunteerActionItem(title: "", image: "", action: .Buy)
+                joinActionItem = VolunteerActionItem(title: "", image: "", action: .Join)
             }
             return [[joinActionItem], firstSection]
         }
@@ -160,7 +160,7 @@ extension VolunteerDetailsViewController: VolunteerDetailsActionConsumer {
         case .Join:
             if api().isUserAuthorized() && self.objectId != nil {
                 switch self.type {
-                case .Volunteers:
+                case .Volunteer:
                     if self.objectId != nil {
                         api().joinVolunteer(self.objectId!).onSuccess { [weak self] _ in
                             //on success
@@ -177,6 +177,8 @@ extension VolunteerDetailsViewController: VolunteerDetailsActionConsumer {
                     } else {
                         Log.error?.message("objectId is nil")
                     }
+                case .Unknown:
+                    break
                 }
             }
             else {
