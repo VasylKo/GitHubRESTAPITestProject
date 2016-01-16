@@ -98,7 +98,7 @@ class BrowseVolunteerViewController: BrowseCommunityViewController {
             self.subscribeForContentUpdates(controller)
         case .None:
             self.selectedObjectId = community
-            self.performSegue(BrowseCommunityViewController.Segue.showVolunteerDetailsViewController)
+            self.performSegue(BrowseVolunteerViewController.Segue.showVolunteerDetailsViewController)
             break
         }
     }

@@ -673,11 +673,44 @@ extension BrowseCommunityViewController {
 }
 
 //MARK: - BrowseVolunteerViewController
+//extension UIStoryboardSegue {
+//    func selection() -> BrowseVolunteerViewController.Segue? {
+//        if let identifier = self.identifier {
+//            return BrowseVolunteerViewController.Segue(rawValue: identifier)
+//        }
+//        return nil
+//    }
+//}
+//
 //extension BrowseVolunteerViewController: IdentifiableProtocol { 
 //    var identifier: String? { return "BrowseVolunteerViewController" }
 //    static var identifier: String? { return "BrowseVolunteerViewController" }
 //}
 
+extension BrowseVolunteerViewController { 
+
+    enum Segue: String, CustomStringConvertible, SegueProtocol {
+        case ShowVolunteerDetailsViewController = "showVolunteerDetailsViewController"
+
+        var kind: SegueKind? {
+            switch (self) {
+            case ShowVolunteerDetailsViewController:
+                return SegueKind(rawValue: "show")
+            }
+        }
+
+        var destination: UIViewController.Type? {
+            switch (self) {
+            case ShowVolunteerDetailsViewController:
+                return VolunteerDetailsViewController.self
+            }
+        }
+
+        var identifier: String? { return self.description } 
+        var description: String { return self.rawValue }
+    }
+
+}
 
 //MARK: - SearchViewController
 extension SearchViewController: IdentifiableProtocol { 
