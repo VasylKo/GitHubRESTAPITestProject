@@ -110,12 +110,6 @@ final class BrowseListViewController: UIViewController, BrowseActionProducer, Br
         }
         let request: Future<CollectionResponse<FeedItem>,NSError> = api().getAll(homeItem)
         
-//        switch browseMode {
-//        case .ForYou:
-//            request = api().forYou(searchFilter, page: page)
-//        case .New:
-//            request = api().getFeed(searchFilter, page: page)
-//        }
         request.onSuccess(dataRequestToken.validContext) {
             [weak self] response in
             Log.debug?.value(response.items)

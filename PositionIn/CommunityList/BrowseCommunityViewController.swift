@@ -125,14 +125,6 @@ class BrowseCommunityViewController: BesideMenuViewController, BrowseCommunityAc
         return dataSource
         }()
     
-    //    @IBAction func addCommunityTouched(sender: AnyObject) {
-    //        api().isUserAuthorized().onSuccess {[weak self] in
-    //            let controller = Storyboards.NewItems.instantiateAddCommunityViewController()
-    //            self?.navigationController?.pushViewController(controller, animated: true)
-    //            self?.subscribeForContentUpdates(controller)
-    //        }
-    //    }
-    
     override func contentDidChange(sender: AnyObject?, info: [NSObject : AnyObject]?) {
         super.contentDidChange(sender, info: info)
         ConversationManager.sharedInstance().refresh()

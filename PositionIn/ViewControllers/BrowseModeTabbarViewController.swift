@@ -225,7 +225,7 @@ protocol BrowseModeDisplay {
         case .Market:
             fallthrough
         case .Volunteer:
-            fallthrough
+            self.navigationController?.pushViewController(Storyboards.Main.instantiateBrowseVolunteerViewController(), animated: true)
         case .BomaHotels:
             fallthrough
         case .Events:

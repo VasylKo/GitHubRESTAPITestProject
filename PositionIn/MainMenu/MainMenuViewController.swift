@@ -42,7 +42,7 @@ final class MainMenuViewController: UIViewController {
             MainMenuItem(title: NSLocalizedString("Home", comment: "Main Menu: Home"), imageName: "MainMenuForYou", action: .ForYou),
             MainMenuItem(title: NSLocalizedString("Explore", comment: "Main Menu: Explore"), imageName: "MainMenuNew", action: .New),
             MainMenuItem(title: NSLocalizedString("Messages", comment: "Main Menu: Messages"), imageName: "MainMenuMessages", action: .Messages),
-            MainMenuItem(title: NSLocalizedString("Volunteers", comment: "Main Menu: Volunteers"), imageName: "MainMenuCommunity", action: .Volunteers),
+            MainMenuItem(title: NSLocalizedString("Volunteering", comment: "Main Menu: Volunteers"), imageName: "MainMenuCommunity", action: .Volunteers),
             MainMenuItem(title: NSLocalizedString("Communities", comment: "Main Menu: Community"), imageName: "MainMenuCommunity", action: .Community),
             MainMenuItem(title: NSLocalizedString("People", comment: "Main Menu: People"), imageName: "MainMenuPeople", action: .People),
             MainMenuItem(title: NSLocalizedString("Wallet", comment: "Main Menu: Wallet"), imageName: "MainMenuWallet", action: .Wallet),

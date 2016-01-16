@@ -29,9 +29,9 @@ class VolunteerDetailsViewController: UIViewController {
         self.infoLabel.text = NSLocalizedString("Calculating...", comment: "Distance calculation process")
         switch (objectId, author) {
         case (.Some(let objectId), .Some(let author) ):
-            api().getUserProfile(author.objectId).flatMap { (profile: UserProfile) -> Future<Event, NSError> in
-                return api().getVolunteerDetails(objectId)
-                }.onSuccess { [weak self] volunteer in
+            api().getUserProfile(author.objectId).flatMap { (profile: UserProfile) -> Future<Community, NSError> in
+                return api().getVolunteer(objectId)
+                }.onSuccess {[weak self] volunteer in
                     self?.didReceiveDetails(volunteer)
             }
         default:
@@ -39,25 +39,16 @@ class VolunteerDetailsViewController: UIViewController {
         }
     }
     
-    private func didReceiveDetails(product: Event) {
-        self.product = product
-        headerLabel.text = product.name
-        detailsLabel.text = product.text?.stringByReplacingOccurrencesOfString("\\n", withString: "\n")
-        if let participants = product.participants {
-            priceLabel.text = "\(Int(participants)) beneficiaries"
-        }
-        
-        let imageURL: NSURL?
-        if let urlString = product.imageURLString {
-            imageURL = NSURL(string:urlString)
-        } else {
-            imageURL = nil
-        }
+    private func didReceiveDetails(volunteer: Community) {
+        self.volunteer = volunteer
+        headerLabel.text = volunteer.name
+        detailsLabel.text = volunteer.communityDescription?.stringByReplacingOccurrencesOfString("\\n", withString: "\n")
+        priceLabel.text = "\(Int(volunteer.membersCount)) beneficiaries"
         
         let image = UIImage(named: "hardware_img_default")
         
-        productImageView.setImageFromURL(imageURL, placeholder: image)
-        if let coordinates = product.location?.coordinates {
+        productImageView.setImageFromURL(volunteer.avatar, placeholder: image)
+        if let coordinates = volunteer.location?.coordinates {
             locationRequestToken.invalidate()
             locationRequestToken = InvalidationToken()
             locationController().distanceFromCoordinate(coordinates).onSuccess(locationRequestToken.validContext) {
@@ -71,7 +62,7 @@ class VolunteerDetailsViewController: UIViewController {
     var objectId: CRUDObjectId?
     var author: ObjectInfo?
     
-    private var product: Event?
+    private var volunteer: Community?
     private var locationRequestToken = InvalidationToken()
     
     private lazy var dataSource: VolunteerDetailsDataSource = { [unowned self] in

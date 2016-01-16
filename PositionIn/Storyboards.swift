@@ -141,10 +141,6 @@ struct Storyboards {
             return self.storyboard.instantiateViewControllerWithIdentifier("BrowseCommunityNavigationController") as! UINavigationController
         }
 
-        static func instantiateBrowseVolunteerNavigationController() -> UINavigationController {
-            return self.storyboard.instantiateViewControllerWithIdentifier("BrowseVolunteerNavigationController") as! UINavigationController
-        }
-
         static func instantiateSettingsNavigationController() -> UINavigationController {
             return self.storyboard.instantiateViewControllerWithIdentifier("SettingsNavigationController") as! UINavigationController
         }
@@ -641,7 +637,6 @@ extension BrowseCommunityViewController: IdentifiableProtocol {
     var identifier: String? { return "BrowseCommunityViewController" }
     static var identifier: String? { return "BrowseCommunityViewController" }
 }
-
 
 //MARK: - SearchViewController
 extension SearchViewController: IdentifiableProtocol { 

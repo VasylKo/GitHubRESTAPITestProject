@@ -26,8 +26,7 @@ class BrowseVolunteerViewController: BrowseCommunityViewController {
         switch browseMode {
         case .MyGroups:
             let mySubscriptionsRequest = api().currentUserId().flatMap { userId in
-                return api().getUserCommunities(userId)
-                //
+                return api().getUserVolunteers(userId)
             }
             if firstMyCommunityRequestToken.isInvalid {
                 communitiesRequest = mySubscriptionsRequest

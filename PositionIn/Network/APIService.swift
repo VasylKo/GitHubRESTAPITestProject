@@ -220,11 +220,6 @@ struct APIService {
         return self.createObject(endpoint, object: object)
     }
     
-//    func getProduct(objectId: CRUDObjectId, inShop shop: CRUDObjectId) -> Future<Product, NSError> {
-//        let endpoint = Product.shopItemsEndpoint(shop, productId: objectId)
-//        return self.getObject(endpoint)
-//    }
-    
     //MARK: - Community -
     
     func getCommunities(page: Page) -> Future<CollectionResponse<Community>,NSError> {
@@ -233,7 +228,7 @@ struct APIService {
         return getObjectsCollection(endpoint, params: params)
     }
 
-    func getUserVolunteers(userId: CRUDObjectId) -> Future<CollectionResponse<Volunteer>,NSError> {
+    func getUserVolunteers(userId: CRUDObjectId) -> Future<CollectionResponse<Community>,NSError> {
         let endpoint = Volunteer.userVolunteersEndpoint(userId)
         return getObjectsCollection(endpoint, params: nil)
     }
@@ -404,9 +399,9 @@ struct APIService {
             return self.handleFailure(future)
         }
     }
-    
-    func getVolunteer(volunteer: CRUDObjectId) -> Future<Community, NSError> {
-        let endpoint = Volunteer.endpoint()
+
+    func getVolunteer(volunteerId: CRUDObjectId) -> Future<Community, NSError> {
+        let endpoint = Volunteer.volunteerEndpoint(volunteerId)
         return getObject(endpoint)
     }
     
@@ -440,11 +435,6 @@ struct APIService {
     func getMarketDetails(objectId: CRUDObjectId) -> Future<Product, NSError> {
         let endpont = HomeItem.Market.endpoint(objectId)
         return self.getOne(endpont!)
-    }
-
-    func getVolunteerDetails(objectId: CRUDObjectId) -> Future<Event, NSError> {
-        let endpoint = HomeItem.Volunteer.endpoint(objectId)
-        return getObject(endpoint!)
     }
     
     func getTrainingDetails(objectId: CRUDObjectId) -> Future<Product, NSError> {

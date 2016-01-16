@@ -67,7 +67,6 @@ class CommunityFeedViewController: BesideMenuViewController, BrowseActionProduce
         navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
         navigationController?.navigationBar.shadowImage = UIImage()
         dataSource.configureTable(tableView)
-       // didReceiveCommunity(community)
         reloadData()
     }
 
