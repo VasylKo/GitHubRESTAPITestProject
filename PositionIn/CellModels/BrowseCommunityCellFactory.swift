@@ -46,9 +46,9 @@ struct BrowseCommunityCellFactory {
         Log.debug?.value(community.role)
         switch community.role {
         case .Invite, .Unknown:
-            return [.Join]
+            return [.Browse]
         case .Owner:
-            return [.Browse, /*.Invite,*/ .Edit]
+            return [.Browse, /*.Invite,*/]
         case .Moderator:
             return [.Browse, /*.Invite*/]
         default:
