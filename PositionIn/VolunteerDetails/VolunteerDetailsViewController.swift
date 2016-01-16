@@ -193,8 +193,35 @@ extension VolunteerDetailsViewController: VolunteerDetailsActionConsumer {
                     return
                 case .Community:
                     if self.objectId != nil {
-                        api().joinCommunity(self.objectId!).onSuccess { [weak self] _ in
-                            //on success
+                        if let community = self.volunteer {
+                            if community.closed {
+                                let alertController = UIAlertController(title: nil, message:
+                                    "Kenya Red Cross will review your community request and respond within a few days", preferredStyle: UIAlertControllerStyle.Alert)
+                                alertController.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: nil))
+                                alertController.addAction(UIAlertAction(title: "Ok", style: .Default, handler: { action in
+                                    switch action.style{
+                                    case .Default:
+                                        if self.objectId != nil {
+                                            api().joinCommunity(self.objectId!).onSuccess { [weak self] _ in
+                                                //on success
+                                            }
+                                        } else {
+                                            Log.error?.message("objectId is nil")
+                                        }
+                                    case .Cancel:
+                                        print("cancel")
+                                        
+                                    case .Destructive:
+                                        print("destructive")
+                                    }
+                                    self.navigationController?.popViewControllerAnimated(true)
+                                }))
+                            } else {
+                                api().joinCommunity(self.objectId!).onSuccess { [weak self] _ in
+                                    //on success
+                                }
+                            }
+                            self.navigationController?.popViewControllerAnimated(true)
                         }
                     } else {
                         Log.error?.message("objectId is nil")
