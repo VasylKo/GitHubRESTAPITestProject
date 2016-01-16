@@ -96,9 +96,9 @@ class VolunteerDetailsViewController: UIViewController {
             var joinActionItem : VolunteerActionItem
             switch self.type {
             case .Volunteers:
-                joinActionItem = VolunteerActionItem(title: NSLocalizedString("Volunteer", comment: "Volunteer"), image: "home_volunteer",action: .Buy)
+                joinActionItem = VolunteerActionItem(title: NSLocalizedString("Volunteer", comment: "Volunteer"), image: "home_volunteer",action: .Join)
             case .Community:
-                joinActionItem = VolunteerActionItem(title: NSLocalizedString("Join", comment: "Community"), image: "home_volunteer",action: .Buy)
+                joinActionItem = VolunteerActionItem(title: NSLocalizedString("Join", comment: "Community"), image: "home_volunteer",action: .Join)
             }
             return [[joinActionItem], firstSection]
         }
@@ -116,12 +116,12 @@ class VolunteerDetailsViewController: UIViewController {
 
 extension VolunteerDetailsViewController {
     enum VolunteerDetailsAction: CustomStringConvertible {
-        case Buy, ProductInventory, SellerProfile, SendMessage
+        case Join, ProductInventory, SellerProfile, SendMessage
         
         var description: String {
             switch self {
-            case .Buy:
-                return "Buy"
+            case .Join:
+                return "Join"
             case .ProductInventory:
                 return "Product Inventory"
             case .SellerProfile:
@@ -151,7 +151,33 @@ extension VolunteerDetailsViewController: VolunteerDetailsActionConsumer {
                 showChatViewController(userId)
             }
             return
-        case .Buy:
+        case .Join:
+            if api().isUserAuthorized() && self.objectId != nil {
+                switch self.type {
+                case .Volunteers:
+                    if self.objectId != nil {
+                        api().joinVolunteer(self.objectId!).onSuccess { [weak self] _ in
+                            //on success
+                        }
+                    } else {
+                        Log.error?.message("objectId is nil")
+                    }
+                    return
+                case .Community:
+                    if self.objectId != nil {
+                        api().joinCommunity(self.objectId!).onSuccess { [weak self] _ in
+                            //on success
+                        }
+                    } else {
+                        Log.error?.message("objectId is nil")
+                    }
+                }
+            }
+            else {
+                api().logout().onComplete {[weak self] _ in
+                    self?.sideBarController?.executeAction(.Login)
+                }
+            }
             return
         case .ProductInventory:
             return

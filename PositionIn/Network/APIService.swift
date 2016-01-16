@@ -418,6 +418,11 @@ struct APIService {
         return getObject(endpoint)
     }
     
+    func joinVolunteer(communityId: CRUDObjectId) -> Future<Void, NSError> {
+        let endpoint = Volunteer.membersEndpoint(communityId)
+        return updateCommand(endpoint)
+    }
+    
     func getBomaHotelsDetails(objectId: CRUDObjectId) -> Future<BomaHotel, NSError> {
         let endpoint = HomeItem.BomaHotels.endpoint(objectId)
         //TODO need fix downcastng
