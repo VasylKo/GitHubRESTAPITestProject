@@ -25,19 +25,28 @@ class VolunteerDetailsViewController: UIViewController {
         reloadData()
     }
     
-//    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-//        if let profileController = segue.destinationViewController  as? UserProfileViewController,
-//            let userId = author?.objectId {
-//                profileController.objectId = userId
-//        }
-//    }
+    //    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    //        if let profileController = segue.destinationViewController  as? UserProfileViewController,
+    //            let userId = author?.objectId {
+    //                profileController.objectId = userId
+    //        }
+    //    }
     
     private func reloadData() {
         self.infoLabel.text = NSLocalizedString("Calculating...", comment: "Distance calculation process")
         switch objectId {
         case .Some(let objectId):
-            api().getVolunteer(objectId).onSuccess {[weak self] volunteer in
+            switch self.type {
+            case .Volunteer:
+                api().getVolunteer(objectId).onSuccess {[weak self] volunteer in
                     self?.didReceiveDetails(volunteer)
+                }
+            case .Community:
+                api().getCommunity(objectId).onSuccess {[weak self] volunteer in
+                    self?.didReceiveDetails(volunteer)
+                }
+            default:
+                break
             }
         default:
             Log.error?.message("Not enough data to load product")
@@ -151,21 +160,36 @@ extension VolunteerDetailsViewController: VolunteerDetailsActionConsumer {
         case .SellerProfile:
             segue = .ShowOrganizerProfile
         case .SendMessage:
-//            if let userId = author?.objectId {
-//                showChatViewController(userId)
-//            }
+            //            if let userId = author?.objectId {
+            //                showChatViewController(userId)
+            //            }
             return
         case .Join:
             if api().isUserAuthorized() && self.objectId != nil {
                 switch self.type {
                 case .Volunteer:
-                    if self.objectId != nil {
-                        api().joinVolunteer(self.objectId!).onSuccess { [weak self] _ in
-                            //on success
+                    let alertController = UIAlertController(title: nil, message:
+                        "Kenya Red Cross will review your volunteering request and respond within a few days", preferredStyle: UIAlertControllerStyle.Alert)
+                    alertController.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: nil))
+                    alertController.addAction(UIAlertAction(title: "Volunteer", style: .Default, handler: { action in
+                        switch action.style{
+                        case .Default:
+                            if self.objectId != nil {
+                                api().joinVolunteer(self.objectId!).onSuccess { [weak self] _ in
+                                    //on success
+                                }
+                            } else {
+                                Log.error?.message("objectId is nil")
+                            }
+                        case .Cancel:
+                            print("cancel")
+                            
+                        case .Destructive:
+                            print("destructive")
                         }
-                    } else {
-                        Log.error?.message("objectId is nil")
-                    }
+                        self.navigationController?.popViewControllerAnimated(true)
+                    }))
+                    self.presentViewController(alertController, animated: true, completion: nil)
                     return
                 case .Community:
                     if self.objectId != nil {
