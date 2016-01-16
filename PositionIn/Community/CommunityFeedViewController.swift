@@ -62,9 +62,10 @@ class CommunityFeedViewController: BesideMenuViewController, BrowseActionProduce
             if let owners = (self.community.members?.items.filter(){$0.role == Community.Role.Owner.rawValue}) {
                 volunteerDetailsViewController.author = owners.first
             }
+//            volunteerDetailsViewController.joinAction = true/false
+//            volunteerDetailsViewController.type = .Community/.Volunteer
         }
     }
-    //
 
     func updateFeed() {
         var model: BrowseListCellModel = BrowseListCellModel(objectId: community.objectId, actionConsumer: self, browseMode: browseMode,
@@ -97,7 +98,7 @@ class CommunityFeedViewController: BesideMenuViewController, BrowseActionProduce
         }()
     
     func communityFeedInfoTapped() {
-        //push info controller
+        self.performSegue(CommunityFeedViewController.Segue.showVolunteerDetailsViewController)
     }
 }
 
