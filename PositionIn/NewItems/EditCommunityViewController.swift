@@ -26,7 +26,7 @@ final class EditCommunityViewController: BaseAddItemViewController {
                     if let strongSelf = self {
                         strongSelf.titleRow.value = community.name
                         strongSelf.descriptionRow.value = community.communityDescription
-                        strongSelf.privateRow.value = NSNumber(bool: community.isPrivate)
+                        strongSelf.privateRow.value = NSNumber(bool: community.closed)
                         strongSelf.tableView?.reloadData()
                         strongSelf.existingCommunity = community
                     }                    
@@ -110,7 +110,7 @@ final class EditCommunityViewController: BaseAddItemViewController {
                 community.name = values[Tags.Title.rawValue] as? String
                 community.communityDescription = values[Tags.Description.rawValue] as? String
                 let rawPrivate = values[Tags.Private.rawValue] as? NSNumber
-                community.isPrivate = rawPrivate.map { $0.boolValue} ?? true
+                community.closed = rawPrivate.map { $0.boolValue} ?? true
                 community.avatar = urls.first
                 return api().updateCommunity(community: community)
             }.onSuccess{ [weak self] _  in

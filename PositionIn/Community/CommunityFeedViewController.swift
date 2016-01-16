@@ -50,7 +50,7 @@ class CommunityFeedViewController: BesideMenuViewController, BrowseActionProduce
     }
     
     private func didReceiveCommunity(community: Community) {
-        let headerModel = BrowseCommunityHeaderCellModel(objectId: community.objectId, tapAction: .None, title:community.name ?? "", url:community.avatar, showInfo: true)
+        let headerModel = BrowseCommunityHeaderCellModel(objectId: community.objectId, tapAction: .None, title:community.name ?? "", url:community.avatar, showInfo: true,  isClosed: community.closed)
         headerModel.actionConsumer = self
         dataSource.items[Sections.Info.rawValue] = [headerModel,
             CommunityStatsCellModel(countMembers: community.membersCount, countPosts: community.postsCount, countEvents: community.eventsCount)

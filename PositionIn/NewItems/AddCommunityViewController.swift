@@ -78,7 +78,7 @@ final class AddCommunityViewController: BaseAddItemViewController {
                 community.name = values[Tags.Title.rawValue] as? String
                 community.communityDescription = values[Tags.Description.rawValue] as? String
                 let rawPrivate = values[Tags.Private.rawValue] as? NSNumber
-                community.isPrivate = rawPrivate.map { $0.boolValue} ?? true
+                community.closed = rawPrivate.map { $0.boolValue} ?? true
                 community.avatar = urls.first
 
                 return api().createCommunity(community: community)

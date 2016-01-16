@@ -13,7 +13,7 @@ struct BrowseCommunityCellFactory {
     func modelsForCommunity(community: Community, mode: BrowseCommunityViewController.BrowseMode, actionConsumer: BrowseCommunityActionConsumer?) -> [TableViewCellModel] {
         var models: [TableViewCellModel] = []
         let tapAction = tapActionForCommunity(community)
-        models.append(BrowseCommunityHeaderCellModel(objectId: community.objectId, tapAction: tapAction, title:community.name ?? "", url:community.avatar, showInfo: false))
+        models.append(BrowseCommunityHeaderCellModel(objectId: community.objectId, tapAction: tapAction, title:community.name ?? "", url:community.avatar, showInfo: false, isClosed: community.closed))
         
         models.append(BrowseCommunityInfoCellModel(objectId: community.objectId, tapAction: tapAction, members: community.members?.total, text: community.communityDescription))
 
@@ -52,7 +52,7 @@ struct BrowseCommunityCellFactory {
         case .Moderator:
             return [.Browse, /*.Invite*/]
         default:
-            if community.isPrivate {
+            if community.closed {
                 return [.Browse]
             } else {
                 return [.Browse, /*.Invite*/]
