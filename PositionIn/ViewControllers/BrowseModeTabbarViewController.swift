@@ -222,10 +222,10 @@ protocol BrowseModeDisplay {
         switch itemType {
         case .Membership:
         self.navigationController?.pushViewController(Storyboards.Onboarding.instantiateMembershipPlansViewController(), animated: true)
-        case .Market:
-            fallthrough
         case .Volunteer:
             self.navigationController?.pushViewController(Storyboards.Main.instantiateBrowseVolunteerViewController(), animated: true)
+        case .Market:
+            fallthrough
         case .BomaHotels:
             fallthrough
         case .Events:
