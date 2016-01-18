@@ -281,6 +281,11 @@ struct APIService {
         return updateCommand(endpoint)
     }
     
+    func leaveCommunity(communityId: CRUDObjectId) -> Future<Void, NSError> {
+        let endpoint = Community.membersEndpoint(communityId)
+        return updateCommand(endpoint, method:.DELETE)
+    }
+    
     //MARK: - People -
     
     func getUsers(page: Page) -> Future<CollectionResponse<UserInfo>,NSError> {
@@ -421,6 +426,11 @@ struct APIService {
     func joinVolunteer(communityId: CRUDObjectId) -> Future<Void, NSError> {
         let endpoint = Volunteer.membersEndpoint(communityId)
         return updateCommand(endpoint)
+    }
+    
+    func leaveVolunteer(communityId: CRUDObjectId) -> Future<Void, NSError> {
+        let endpoint = Volunteer.membersEndpoint(communityId)
+        return updateCommand(endpoint, method:.DELETE)
     }
     
     func getBomaHotelsDetails(objectId: CRUDObjectId) -> Future<BomaHotel, NSError> {

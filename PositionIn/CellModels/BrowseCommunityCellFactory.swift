@@ -48,14 +48,14 @@ struct BrowseCommunityCellFactory {
         case .Invite, .Unknown:
             return [.Browse]
         case .Owner:
-            return [.Browse, /*.Invite,*/]
+            return [.Post, .Browse /*.Invite,*/]
         case .Moderator:
-            return [.Browse, /*.Invite*/]
+            return [.Post, .Browse, .Leave /*.Invite*/]
         default:
             if community.closed {
-                return [.Browse]
+                return [.Post, .Browse, .Leave]
             } else {
-                return [.Browse, /*.Invite*/]
+                return [.Post, .Browse, .Leave /*.Invite*/]
             }
         }
         

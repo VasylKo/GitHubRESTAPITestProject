@@ -28,6 +28,7 @@ class BrowseCommunityViewController: BesideMenuViewController, BrowseCommunityAc
         case Post
         case Invite
         case Edit
+        case Leave
         
         func displayText() -> String {
             switch self {
@@ -41,6 +42,8 @@ class BrowseCommunityViewController: BesideMenuViewController, BrowseCommunityAc
                 return NSLocalizedString("INVITE", comment: "Community action: Invite")
             case .Edit:
                 return NSLocalizedString("EDIT", comment: "Community action: Edit")
+            case .Leave:
+                return NSLocalizedString("LEAVE", comment: "Community action: Leave")
             }
         }
         
@@ -137,8 +140,9 @@ class BrowseCommunityViewController: BesideMenuViewController, BrowseCommunityAc
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let volunteerDetailsViewController = segue.destinationViewController  as? VolunteerDetailsViewController {
+
             volunteerDetailsViewController.objectId = self.selectedObjectId
-            volunteerDetailsViewController.joinAction = true
+            volunteerDetailsViewController.joinAction = (self.browseModeSegmentedControl.selectedSegmentIndex == 1) 
             volunteerDetailsViewController.type = VolunteerDetailsViewController.ControllerType.Community
         }
     }
@@ -181,10 +185,8 @@ class BrowseCommunityViewController: BesideMenuViewController, BrowseCommunityAc
             }
             break
         case .Browse, .Post:
-            let controller = Storyboards.Main.instantiateCommunityViewController()
-            controller.objectId = community
-            controller.controllerType = .Community
-            navigationController?.pushViewController(controller, animated: true)
+            self.selectedObjectId = community
+            self.performSegue(BrowseCommunityViewController.Segue.showVolunteerDetailsViewController)
         case .Invite:
             break
         case .Edit:
@@ -192,6 +194,11 @@ class BrowseCommunityViewController: BesideMenuViewController, BrowseCommunityAc
             controller.existingCommunityId = community
             navigationController?.pushViewController(controller, animated: true)
             self.subscribeForContentUpdates(controller)
+        case .Leave:
+            api().leaveCommunity(community).onSuccess(callback: { (Void) -> Void in
+                Log.error?.message("Done!!!!!")
+                self.reloadData()
+            })
         case .None:
             self.selectedObjectId = community
             self.performSegue(BrowseCommunityViewController.Segue.showVolunteerDetailsViewController)
