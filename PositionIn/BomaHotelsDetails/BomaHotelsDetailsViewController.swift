@@ -104,8 +104,8 @@ final class BomaHotelsDetailsViewController: UIViewController {
             [ // 1 section
                 BomaHotelActionItem(title: NSLocalizedString("Send Message", comment: "BomaHotels"), image: "productSendMessage", action: .SendMessage),
                 BomaHotelActionItem(title: NSLocalizedString("Organizer Profile", comment: "BomaHotels"), image: "productSellerProfile", action: .SellerProfile),
-                BomaHotelActionItem(title: NSLocalizedString("Navigate", comment: "BomaHotels"), image: "productNavigate", action: .ProductInventory),
-                BomaHotelActionItem(title: NSLocalizedString("More Information", comment: "BomaHotels"), image: "productTerms&Info", action: .ProductInventory),
+                /*BomaHotelActionItem(title: NSLocalizedString("Navigate", comment: "BomaHotels"), image: "productNavigate", action: .ProductInventory),
+                BomaHotelActionItem(title: NSLocalizedString("More Information", comment: "BomaHotels"), image: "productTerms&Info", action: .ProductInventory), */
             ],
         ]
         

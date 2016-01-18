@@ -97,9 +97,9 @@ class VolunteerDetailsViewController: UIViewController {
     
     private func productAcionItems() -> [[VolunteerActionItem]] {
         let firstSection = [
-            VolunteerActionItem(title: NSLocalizedString("Send Message", comment: "Volunteer"), image: "productSendMessage", action: .SendMessage),
+            /*VolunteerActionItem(title: NSLocalizedString("Send Message", comment: "Volunteer"), image: "productSendMessage", action: .SendMessage),*/
             VolunteerActionItem(title: NSLocalizedString("Organizer Profile", comment: "Volunteer"), image: "productSellerProfile", action: .SellerProfile),
-            VolunteerActionItem(title: NSLocalizedString("More Information", comment: "Volunteer"), image: "productTerms&Info", action: .ProductInventory)]
+            /*VolunteerActionItem(title: NSLocalizedString("More Information", comment: "Volunteer"), image: "productTerms&Info", action: .ProductInventory)*/]
         
         if (self.joinAction != true) {
             //public or joined case
@@ -236,7 +236,7 @@ extension VolunteerDetailsViewController: VolunteerDetailsActionConsumer {
             "Kenya Red Cross will review your community request and respond within a few days", preferredStyle: UIAlertControllerStyle.Alert)
         alertController.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: nil))
         alertController.addAction(UIAlertAction(title: "Ok", style: .Default, handler: { action in
-            switch action.style{
+            switch action.style {
             case .Default:
                 if self.objectId != nil {
                     api().joinCommunity(self.objectId!).onSuccess { [weak self] _ in
@@ -253,6 +253,8 @@ extension VolunteerDetailsViewController: VolunteerDetailsActionConsumer {
             }
             self.navigationController?.popViewControllerAnimated(true)
         }))
+        self.presentViewController(alertController, animated: true, completion: nil)
+        return
     }
 }
 
