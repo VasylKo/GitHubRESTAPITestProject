@@ -94,10 +94,12 @@ final class UserProfileViewController: BesideMenuViewController, BrowseActionPro
         var feedModel = BrowseListCellModel(objectId: objectId, actionConsumer: self, browseMode: .New)
         feedModel.excludeCommunityItems = true
         feedModel.childFilterUpdate = self.childFilterUpdate
-        dataSource.items[Sections.Feed.rawValue] = [ feedModel ]
+        
+        //hide user feed
+//        dataSource.items[Sections.Feed.rawValue] = [ feedModel ]
         
         tableView.reloadData()
-        actionConsumer?.browseControllerDidChangeContent(self)
+//        actionConsumer?.browseControllerDidChangeContent(self)
     }
     
     override func contentDidChange(sender: AnyObject?, info: [NSObject : AnyObject]?) {

@@ -44,6 +44,7 @@
 
 /* Begin PBXBuildFile section */
 		1A56454F1ADF6D1BF3022FB3 /* BraintreePaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A564EEB40AD56FD2C113F2A /* BraintreePaymentViewController.swift */; };
+		1A5647F5D0FCC84FA5BF21FF /* MpesaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A56419027EC5956741AF471 /* MpesaViewController.swift */; };
 		1A564902D955532DE5B29A65 /* ErrorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A56438E04F9AD6CBDA75AC9 /* ErrorCell.swift */; };
 		1A56491DAEFA315F9DB47400 /* PaymentReponseDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A5640E770D4CB872B2E4605 /* PaymentReponseDelegate.swift */; };
 		240A9B9C1B9CCDA4007C77E3 /* PositionIn.CommunityStatsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 240A9B9B1B9CCDA4007C77E3 /* PositionIn.CommunityStatsCell.xib */; };
@@ -532,6 +533,7 @@
 /* Begin PBXFileReference section */
 		040F01865A9A2BB68F3FDBFF /* Pods-PositionIn.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PositionIn.release.xcconfig"; path = "Pods/Target Support Files/Pods-PositionIn/Pods-PositionIn.release.xcconfig"; sourceTree = "<group>"; };
 		1A5640E770D4CB872B2E4605 /* PaymentReponseDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentReponseDelegate.swift; sourceTree = "<group>"; };
+		1A56419027EC5956741AF471 /* MpesaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MpesaViewController.swift; sourceTree = "<group>"; };
 		1A56438E04F9AD6CBDA75AC9 /* ErrorCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorCell.swift; sourceTree = "<group>"; };
 		1A564EEB40AD56FD2C113F2A /* BraintreePaymentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BraintreePaymentViewController.swift; sourceTree = "<group>"; };
 		240A9B9B1B9CCDA4007C77E3 /* PositionIn.CommunityStatsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.CommunityStatsCell.xib; sourceTree = "<group>"; };
@@ -1223,6 +1225,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1A564C3EC8DDC78E3A580F36 /* Mpesa */ = {
+			isa = PBXGroup;
+			children = (
+				1A56419027EC5956741AF471 /* MpesaViewController.swift */,
+			);
+			path = Mpesa;
+			sourceTree = "<group>";
+		};
 		1A564ECCDF0969356B20C9A5 /* ErrorView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1788,6 +1798,7 @@
 				E64DC34D1B4E53C90011D37C /* Supporting Files */,
 				E64DC36F1B4E54330011D37C /* PositionIn-Bridging-Header.h */,
 				1A564F438FBCAC524746510A /* BraintreePayment */,
+				1A564C3EC8DDC78E3A580F36 /* Mpesa */,
 			);
 			path = PositionIn;
 			sourceTree = "<group>";
@@ -3835,6 +3846,7 @@
 				1A56454F1ADF6D1BF3022FB3 /* BraintreePaymentViewController.swift in Sources */,
 				1A56491DAEFA315F9DB47400 /* PaymentReponseDelegate.swift in Sources */,
 				1A564902D955532DE5B29A65 /* ErrorCell.swift in Sources */,
+				1A5647F5D0FCC84FA5BF21FF /* MpesaViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

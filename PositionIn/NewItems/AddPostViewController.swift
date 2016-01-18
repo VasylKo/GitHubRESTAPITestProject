@@ -22,6 +22,8 @@ final class AddPostViewController: BaseAddItemViewController {
         case Location = "location"
     }
     
+    var communityId: CRUDObjectId?
+    
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         self.initializeForm()
@@ -30,6 +32,20 @@ final class AddPostViewController: BaseAddItemViewController {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.initializeForm()
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        if let communityId = self.communityId {
+            api().getCommunity(communityId).onSuccess(callback: {community in
+                let postToRowOptional = self.form.formRowWithTag(Tags.PostTo.rawValue)
+                
+                if let postToRow = postToRowOptional {
+                    postToRow.value = Box(community)
+                    self.tableView.reloadData()
+                }
+            })
+        }
     }
 
     func initializeForm() {

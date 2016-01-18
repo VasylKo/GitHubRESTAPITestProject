@@ -23,7 +23,15 @@ final class CommunityViewController: DisplayModeViewController {
         super.viewDidLoad()
         displayMode = .List
         self.navigationItem.titleView = nil
-        self.title = NSLocalizedString("Community", comment: "CommunityViewController")
+        switch controllerType {
+        case .Unknown:
+            break;
+        case .Community:
+            self.title = NSLocalizedString("Community", comment: "CommunityViewController")
+        case .Volunteer:
+            self.title = NSLocalizedString("Volunteer", comment: "CommunityViewController")
+        }
+
     }
     
     @IBAction func prepareForUnwind(segue: UIStoryboardSegue) {

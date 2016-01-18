@@ -18,7 +18,9 @@ protocol CommunityFeedActionConsumer: class {
 class CommunityFeedViewController: BesideMenuViewController, BrowseActionProducer, BrowseModeDisplay, UpdateFilterProtocol, CommunityFeedActionConsumer {
     
     weak var actionConsumer: BrowseActionConsumer?
-
+    
+    var controllerType: CommunityViewController.ControllerType = .Unknown
+    
     enum Sections: Int {
         case Info, Feed
     }
@@ -30,9 +32,7 @@ class CommunityFeedViewController: BesideMenuViewController, BrowseActionProduce
             }
         }
     }
-    
-    var controllerType: CommunityViewController.ControllerType = .Unknown
-    
+
     var childFilterUpdate: SearchFilterUpdate?
     
     func applyFilterUpdate(update: SearchFilterUpdate) {
@@ -50,7 +50,12 @@ class CommunityFeedViewController: BesideMenuViewController, BrowseActionProduce
     }
     
     private func didReceiveCommunity(community: Community) {
-        let headerModel = BrowseCommunityHeaderCellModel(objectId: community.objectId, tapAction: .None, title:community.name ?? "", url:community.avatar, showInfo: true,  isClosed: community.closed)
+        //TODO: hide icon for volunteer
+        var closed: Bool? = nil
+        if self.controllerType == .Community {
+            closed = community.closed
+        }
+        let headerModel = BrowseCommunityHeaderCellModel(objectId: community.objectId, tapAction: .None, title:community.name ?? "", url:community.avatar, showInfo: true,  isClosed: closed)
         headerModel.actionConsumer = self
         dataSource.items[Sections.Info.rawValue] = [headerModel,
             CommunityStatsCellModel(countMembers: community.membersCount, countPosts: community.postsCount, countEvents: community.eventsCount)

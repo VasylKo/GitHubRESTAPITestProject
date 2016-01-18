@@ -18,9 +18,11 @@ final class CommunityHeaderCell: TableViewCell {
         self.infoButton.hidden = !m!.showInfo
         shouldCallInfoAction = m!.showInfo
         self.actionConsumer = m!.actionConsumer
-        self.communityType.image = m!.isClosed ?
-        UIImage(named: "closed_comm") :
-        UIImage(named: "public_comm")
+        if let isClosed = m!.isClosed {
+            self.communityType.image = isClosed ?
+            UIImage(named: "closed_comm") :
+            UIImage(named: "public_comm")
+        }
     }
     
     override func prepareForReuse() {

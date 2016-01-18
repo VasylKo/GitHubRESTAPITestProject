@@ -85,7 +85,7 @@ class OrderViewController: UITableViewController {
         dropInViewController.title = NSLocalizedString("Payment Method", comment: "braintree title")
         let summaryFormat = NSLocalizedString("%@ %@", comment: "Order: Summary format")
         dropInViewController.paymentRequest?.summaryTitle = String(format: summaryFormat, quantityString, product?.name ?? "")
-        dropInViewController.paymentRequest?.displayAmount = totalLabel.text!
+        dropInViewController.paymentRequest?.displayAmount = totalLabel.text ?? ""
         dropInViewController.paymentRequest?.summaryDescription = product?.text
         dropInViewController.paymentRequest?.callToActionText = NSLocalizedString("Checkout", comment: "Order: Checkout")
         let navigationController = UINavigationController(rootViewController: dropInViewController)
