@@ -23,7 +23,7 @@ class SidebarViewController: KYDrawerController {
         case Messages
         case Filters
         case Community
-        case Wallet
+//        case Wallet
         case UserProfile
         case Settings
         case Login
@@ -65,8 +65,8 @@ class SidebarViewController: KYDrawerController {
                 return (SidebarViewController.Segue.ShowMyProfile, nil)
             case .People:
                 return (SidebarViewController.Segue.ShowPeople, nil)
-            case .Wallet:
-                return (SidebarViewController.Segue.ShowWallet, nil)
+//            case .Wallet:
+//                return (SidebarViewController.Segue.ShowWallet, nil)
             default:
                 return nil
             }
@@ -92,12 +92,12 @@ class SidebarViewController: KYDrawerController {
         }
         
         //Redirect user to login screen if he is not authorized and choose Wallet in Menu
-        if !api().isUserAuthorized() && action == .Wallet {
-            api().logout().onComplete {[weak self] _ in
-                self?.sideBarController?.executeAction(.Login)
-            }
-            return
-        }
+//        if !api().isUserAuthorized() && action == .Wallet {
+//            api().logout().onComplete {[weak self] _ in
+//                self?.sideBarController?.executeAction(.Login)
+//            }
+//            return
+//        }
         
         if let (segue, sender): (SidebarViewController.Segue, AnyObject?) = action.nextSegue() {
             performSegue(segue, sender: sender)
