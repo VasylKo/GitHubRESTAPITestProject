@@ -62,7 +62,14 @@ class BrowseVolunteerViewController: BrowseCommunityViewController {
         communitiesRequest.onSuccess(dataRequestToken.validContext) { [weak self] response in
             if let communities = response.items {
                 Log.debug?.value(communities)
-                self?.dataSource.setCommunities(communities, mode: browseMode)
+                
+//               TODO should fix than, (hide lock icon on volunteer)
+                var updateCommunity: [Community] = []
+                for var community in communities {
+                    community.closed = nil
+                    updateCommunity.append(community)
+                }
+                self?.dataSource.setCommunities(updateCommunity, mode: browseMode)
                 self?.tableView.reloadData()
             }
         }

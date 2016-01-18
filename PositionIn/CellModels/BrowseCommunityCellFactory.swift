@@ -52,9 +52,14 @@ struct BrowseCommunityCellFactory {
         case .Moderator:
             return [.Browse, /*.Invite*/]
         default:
-            if community.closed {
-                return [.Browse]
-            } else {
+            if let closed = community.closed {
+                if closed {
+                    return [.Browse]
+                } else {
+                    return [.Browse, /*.Invite*/]
+                }
+            }
+            else {
                 return [.Browse, /*.Invite*/]
             }
         }
