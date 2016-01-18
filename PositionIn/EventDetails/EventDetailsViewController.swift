@@ -75,8 +75,8 @@ final class EventDetailsViewController: UIViewController {
             [ // 1 section
                 EventActionItem(title: NSLocalizedString("Send Message", comment: "Event action: Send Message"), image: "productSendMessage", action: .SendMessage),
                 EventActionItem(title: NSLocalizedString("Organizer Profile", comment: "Event action: Organizer Profile"), image: "productSellerProfile", action: .OrganizerProfile),
-                EventActionItem(title: NSLocalizedString("More Information", comment: "Event action: Terms and Information"), image: "productTerms&Info", action: .TermsAndInformation),
-                EventActionItem(title: NSLocalizedString("Navigate", comment: "Event action: Navigate"), image: "productNavigate", action: .Navigate)
+                /*EventActionItem(title: NSLocalizedString("More Information", comment: "Event action: Terms and Information"), image: "productTerms&Info", action: .TermsAndInformation),
+                EventActionItem(title: NSLocalizedString("Navigate", comment: "Event action: Navigate"), image: "productNavigate", action: .Navigate)*/
             ],
         ]
         

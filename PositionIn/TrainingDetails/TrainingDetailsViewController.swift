@@ -104,9 +104,9 @@ final class TrainingDetailsViewController: UIViewController {
                     image: "productSendMessage", action: .SendMessage),
                 TrainingActionItem(title: NSLocalizedString("Organizer Profile", comment: "Product action: Seller Profile"),
                     image: "productSellerProfile", action: .SellerProfile),
-                TrainingActionItem(title: NSLocalizedString("Navigate", comment: "Product action: Navigate"),
+                /*TrainingActionItem(title: NSLocalizedString("Navigate", comment: "Product action: Navigate"),
                     image: "productNavigate", action: .Navigate),
-                TrainingActionItem(title: NSLocalizedString("More Information", comment: "Product action: More Information"), image: "productTerms&Info", action: .ProductInventory),
+                TrainingActionItem(title: NSLocalizedString("More Information", comment: "Product action: More Information"), image: "productTerms&Info", action: .ProductInventory),*/
             ],
         ]
     }

@@ -108,9 +108,9 @@ class EmergencyDetailsController: UIViewController {
                 EmergencyActionItem(title: NSLocalizedString("Member Profile", comment: "Product action: Seller Profile"),
                     image: "productSellerProfile",
                     action: .MemberProfile),
-                EmergencyActionItem(title: NSLocalizedString("More Information", comment: "Product action: Navigate"),
+                /*EmergencyActionItem(title: NSLocalizedString("More Information", comment: "Product action: Navigate"),
                     image: "productTerms&Info",
-                    action: .MoreInformation),
+                    action: .MoreInformation),*/
             ],
         ]
         
