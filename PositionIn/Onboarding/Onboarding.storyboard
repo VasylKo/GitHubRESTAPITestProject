@@ -422,6 +422,7 @@ heading your way</string>
                     <connections>
                         <segue destination="ppY-Jd-qZV" kind="show" identifier="ShowBraintree" id="A4U-as-cuu"/>
                         <segue destination="RUw-L3-ejb" kind="show" identifier="PaymentCompleted" id="83A-no-RMr"/>
+                        <segue destination="R6s-Cc-jvz" kind="show" identifier="ShowMpesa" id="QiO-zr-IMb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tim-4q-COV" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -463,6 +464,24 @@ heading your way</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jrn-ev-dJs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4302" y="-1776"/>
+        </scene>
+        <!--Mpesa View Controller-->
+        <scene sceneID="Sl6-MU-07D">
+            <objects>
+                <viewController id="R6s-Cc-jvz" customClass="MpesaViewController" customModule="PositionIn" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Ytp-JA-GB5"/>
+                        <viewControllerLayoutGuide type="bottom" id="DyM-R0-Ag6"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ZQn-HT-WYx">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4vT-FV-IE1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2320" y="-3447"/>
         </scene>
         <!--Braintree Payment View Controller-->
         <scene sceneID="Gvy-vv-dgq">

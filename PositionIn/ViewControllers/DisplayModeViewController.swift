@@ -99,7 +99,8 @@ protocol BrowseActionConsumer: class {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.titleView = searchbar
+        //hide search functionality
+        //self.navigationItem.titleView = searchbar
 
         self.setRightBarItems()
         
@@ -225,6 +226,7 @@ protocol BrowseActionConsumer: class {
             trackGoogleAnalyticsEvent("Main", action: "Click", label: "Post")
             let controller = Storyboards.Main.instantiateEventDetailsViewControllerId()
             controller.objectId = objectId
+            controller.author = data as? ObjectInfo
             navigationController?.pushViewController(controller, animated: true)
         default:
             Log.debug?.message("Did select \(itemType)<\(objectId)>")

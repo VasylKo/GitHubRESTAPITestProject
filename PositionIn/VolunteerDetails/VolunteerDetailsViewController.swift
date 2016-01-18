@@ -12,52 +12,59 @@ class VolunteerDetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = NSLocalizedString("Volunteer", comment: "Volunteer")
+        switch self.type {
+        case .Volunteer:
+            self.title = NSLocalizedString("Volunteer", comment:"")
+        case .Community:
+            self.title = NSLocalizedString("Community", comment: "")
+        default:
+            break
+        }
         dataSource.items = productAcionItems()
         dataSource.configureTable(actionTableView)
         reloadData()
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let profileController = segue.destinationViewController  as? UserProfileViewController,
-            let userId = author?.objectId {
-                profileController.objectId = userId
-        }
-    }
+    //    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    //        if let profileController = segue.destinationViewController  as? UserProfileViewController,
+    //            let userId = author?.objectId {
+    //                profileController.objectId = userId
+    //        }
+    //    }
     
     private func reloadData() {
         self.infoLabel.text = NSLocalizedString("Calculating...", comment: "Distance calculation process")
-        switch (objectId, author) {
-        case (.Some(let objectId), .Some(let author) ):
-            api().getUserProfile(author.objectId).flatMap { (profile: UserProfile) -> Future<Event, NSError> in
-                return api().getVolunteerDetails(objectId)
-                }.onSuccess { [weak self] volunteer in
+        switch objectId {
+        case .Some(let objectId):
+            switch self.type {
+            case .Volunteer:
+                api().getVolunteer(objectId).onSuccess {[weak self] volunteer in
+                    var volunteerVar = volunteer
+                    volunteerVar.closed = nil
+                    self?.didReceiveDetails(volunteerVar)
+                }
+            case .Community:
+                api().getCommunity(objectId).onSuccess {[weak self] volunteer in
                     self?.didReceiveDetails(volunteer)
+                }
+            default:
+                break
             }
         default:
             Log.error?.message("Not enough data to load product")
         }
     }
     
-    private func didReceiveDetails(product: Event) {
-        self.product = product
-        headerLabel.text = product.name
-        detailsLabel.text = product.text?.stringByReplacingOccurrencesOfString("\\n", withString: "\n")
-        if let participants = product.participants {
-            priceLabel.text = "\(Int(participants)) beneficiaries"
-        }
-        
-        let imageURL: NSURL?
-        if let urlString = product.imageURLString {
-            imageURL = NSURL(string:urlString)
-        } else {
-            imageURL = nil
-        }
+    private func didReceiveDetails(volunteer: Community) {
+        self.volunteer = volunteer
+        headerLabel.text = volunteer.name
+        detailsLabel.text = volunteer.communityDescription?.stringByReplacingOccurrencesOfString("\\n", withString: "\n")
+        priceLabel.text = "\(Int(volunteer.membersCount)) beneficiaries"
         
         let image = UIImage(named: "hardware_img_default")
         
-        productImageView.setImageFromURL(imageURL, placeholder: image)
-        if let coordinates = product.location?.coordinates {
+        productImageView.setImageFromURL(volunteer.avatar, placeholder: image)
+        if let coordinates = volunteer.location?.coordinates {
             locationRequestToken.invalidate()
             locationRequestToken = InvalidationToken()
             locationController().distanceFromCoordinate(coordinates).onSuccess(locationRequestToken.validContext) {
@@ -68,10 +75,17 @@ class VolunteerDetailsViewController: UIViewController {
         }
     }
     
+    enum ControllerType : Int {
+        case Unknown, Community, Volunteer
+    }
+    
+    var type : ControllerType = .Unknown
+    var joinAction : Bool = true
+    
     var objectId: CRUDObjectId?
     var author: ObjectInfo?
     
-    private var product: Event?
+    private var volunteer: Community?
     private var locationRequestToken = InvalidationToken()
     
     private lazy var dataSource: VolunteerDetailsDataSource = { [unowned self] in
@@ -82,20 +96,27 @@ class VolunteerDetailsViewController: UIViewController {
     
     
     private func productAcionItems() -> [[VolunteerActionItem]] {
-        return [
-            [ // 0 section
-                VolunteerActionItem(title: NSLocalizedString("Volunteer", comment: "Volunteer"),
-                    image: "home_volunteer",
-                    action: .Buy),
-            ],
-            [ // 1 section
-                VolunteerActionItem(title: NSLocalizedString("Send Message", comment: "Volunteer"), image: "productSendMessage", action: .SendMessage),
-                VolunteerActionItem(title: NSLocalizedString("Organizer Profile", comment: "Volunteer"), image: "productSellerProfile", action: .SellerProfile),
-                VolunteerActionItem(title: NSLocalizedString("Navigate", comment: "Volunteer"), image: "productNavigate", action: .ProductInventory),
-                VolunteerActionItem(title: NSLocalizedString("More Information", comment: "Volunteer"), image: "productTerms&Info", action: .ProductInventory),
-            ],
-        ]
+        let firstSection = [
+            /*VolunteerActionItem(title: NSLocalizedString("Send Message", comment: "Volunteer"), image: "productSendMessage", action: .SendMessage),*/
+            VolunteerActionItem(title: NSLocalizedString("Organizer Profile", comment: "Volunteer"), image: "productSellerProfile", action: .SellerProfile),
+            /*VolunteerActionItem(title: NSLocalizedString("More Information", comment: "Volunteer"), image: "productTerms&Info", action: .ProductInventory)*/]
         
+        if (self.joinAction != true) {
+            //public or joined case
+            return [firstSection]
+        } else {
+            var joinActionItem : VolunteerActionItem
+            switch self.type {
+            case .Volunteer:
+                joinActionItem = VolunteerActionItem(title: NSLocalizedString("Volunteer", comment: "Volunteer"), image: "home_volunteer",action: .Join)
+            case .Community:
+                joinActionItem = VolunteerActionItem(title: NSLocalizedString("Join", comment: "Community"), image: "home_volunteer",action: .Join)
+            case .Unknown:
+                //TODO:change .Buy
+                joinActionItem = VolunteerActionItem(title: "", image: "", action: .Join)
+            }
+            return [[joinActionItem], firstSection]
+        }
     }
     
     @IBOutlet private weak var actionTableView: UITableView!
@@ -110,12 +131,12 @@ class VolunteerDetailsViewController: UIViewController {
 
 extension VolunteerDetailsViewController {
     enum VolunteerDetailsAction: CustomStringConvertible {
-        case Buy, ProductInventory, SellerProfile, SendMessage
+        case Join, ProductInventory, SellerProfile, SendMessage
         
         var description: String {
             switch self {
-            case .Buy:
-                return "Buy"
+            case .Join:
+                return "Join"
             case .ProductInventory:
                 return "Product Inventory"
             case .SellerProfile:
@@ -141,16 +162,99 @@ extension VolunteerDetailsViewController: VolunteerDetailsActionConsumer {
         case .SellerProfile:
             segue = .ShowOrganizerProfile
         case .SendMessage:
-            if let userId = author?.objectId {
-                showChatViewController(userId)
-            }
+            //            if let userId = author?.objectId {
+            //                showChatViewController(userId)
+            //            }
             return
-        case .Buy:
+        case .Join:
+            if api().isUserAuthorized() && self.objectId != nil {
+                switch self.type {
+                case .Volunteer:
+                    let alertController = UIAlertController(title: nil, message:
+                        "Kenya Red Cross will review your volunteering request and respond within a few days", preferredStyle: UIAlertControllerStyle.Alert)
+                    alertController.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: nil))
+                    alertController.addAction(UIAlertAction(title: "Volunteer", style: .Default, handler: { action in
+                        switch action.style{
+                        case .Default:
+                    if let objId = self.objectId {
+                                api().joinVolunteer(objId).onSuccess { [weak self] _ in
+                                    //on success
+                                }
+                            } else {
+                                Log.error?.message("objectId is nil")
+                            }
+                        case .Cancel:
+                            print("cancel")
+                            
+                        case .Destructive:
+                            print("destructive")
+                        }
+                        self.navigationController?.popViewControllerAnimated(true)
+                    }))
+                    self.presentViewController(alertController, animated: true, completion: nil)
+                    return
+                case .Community:
+                    if let objId = self.objectId {
+                        if let community = self.volunteer {
+                            
+                            if let closed = community.closed {
+                                if closed {
+                                    self.joinClosedCommunity(community)
+                                }
+                                else {
+                                    api().joinCommunity(objId).onSuccess { [weak self] _ in
+                                        //on success
+                                    }
+                                }
+                            }
+                            else {
+                                self.joinClosedCommunity(community)
+                            }
+                            self.navigationController?.popViewControllerAnimated(true)
+                        }
+                    } else {
+                        Log.error?.message("objectId is nil")
+                    }
+                case .Unknown:
+                    break
+                }
+            }
+            else {
+                api().logout().onComplete {[weak self] _ in
+                    self?.sideBarController?.executeAction(.Login)
+                }
+            }
             return
         case .ProductInventory:
             return
         }
         performSegue(segue)
+    }
+    
+    private func joinClosedCommunity(community: Community) {
+        let alertController = UIAlertController(title: nil, message:
+            "Kenya Red Cross will review your community request and respond within a few days", preferredStyle: UIAlertControllerStyle.Alert)
+        alertController.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: nil))
+        alertController.addAction(UIAlertAction(title: "Ok", style: .Default, handler: { action in
+            switch action.style {
+            case .Default:
+                if self.objectId != nil {
+                    api().joinCommunity(self.objectId!).onSuccess { [weak self] _ in
+                        //on success
+                    }
+                } else {
+                    Log.error?.message("objectId is nil")
+                }
+            case .Cancel:
+                print("cancel")
+                
+            case .Destructive:
+                print("destructive")
+            }
+            self.navigationController?.popViewControllerAnimated(true)
+        }))
+        self.presentViewController(alertController, animated: true, completion: nil)
+        return
     }
 }
 

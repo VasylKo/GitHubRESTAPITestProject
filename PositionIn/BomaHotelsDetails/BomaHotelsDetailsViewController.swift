@@ -20,15 +20,16 @@ final class BomaHotelsDetailsViewController: UIViewController {
         super.viewDidLoad()
         title = NSLocalizedString("Boma Hotels",
             comment: "Project details: title")
-        dataSource.items = productAcionItems()
+        dataSource.items = bomaHotelAcionItems()
         dataSource.configureTable(actionTableView)
         reloadData()
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let orderController = segue.destinationViewController  as? OrderViewController {
-            orderController.product = self.product
-        }
+// unsupported functionality?
+//        if let orderController = segue.destinationViewController  as? OrderViewController {
+//            orderController.product = product
+//        }
         if let profileController = segue.destinationViewController  as? UserProfileViewController,
             let userId = author?.objectId {
                 profileController.objectId = userId
@@ -40,27 +41,27 @@ final class BomaHotelsDetailsViewController: UIViewController {
             comment: "Distance calculation process")
         switch (objectId, author) {
         case (.Some(let objectId), .Some(let author) ):
-            api().getUserProfile(author.objectId).flatMap { (profile: UserProfile) -> Future<Product, NSError> in
+            api().getUserProfile(author.objectId).flatMap { (profile: UserProfile) -> Future<BomaHotel, NSError> in
                 return api().getBomaHotelsDetails(objectId)
-                }.onSuccess { [weak self] product in
-                    self?.didReceiveProductDetails(product)
+                }.onSuccess { [weak self] bomaHotel in
+                    self?.didReceiveBomaHotelDetails(bomaHotel)
             }
         default:
-            Log.error?.message("Not enough data to load product")
+            Log.error?.message("Not enough data to load boma hotel")
         }
     }
     
-    private func didReceiveProductDetails(product: Product) {
-        self.product = product
-        headerLabel.text = product.name
-        detailsLabel.text = product.text?.stringByReplacingOccurrencesOfString("\\n", withString: "\n")
-        if let price = product.donations {
+    private func didReceiveBomaHotelDetails(bomaHotel: BomaHotel) {
+        self.bomaHotel = bomaHotel
+        headerLabel.text = bomaHotel.name
+        detailsLabel.text = bomaHotel.text?.stringByReplacingOccurrencesOfString("\\n", withString: "\n")
+        if let price = bomaHotel.donations {
             priceLabel.text = "\(Int(price)) beneficiaries"
         }
 
         let imageURL: NSURL?
         
-        if let urlString = product.imageURLString {
+        if let urlString = bomaHotel.imageURLString {
             imageURL = NSURL(string:urlString)
         } else {
             imageURL = nil
@@ -69,7 +70,7 @@ final class BomaHotelsDetailsViewController: UIViewController {
         let image = UIImage(named: "bomaHotelPlaceholder")
         
         productImageView.setImageFromURL(imageURL, placeholder: image)
-        if let coordinates = product.location?.coordinates {
+        if let coordinates = bomaHotel.location?.coordinates {
             locationRequestToken.invalidate()
             locationRequestToken = InvalidationToken()
             locationController().distanceFromCoordinate(coordinates).onSuccess(locationRequestToken.validContext) {
@@ -83,7 +84,7 @@ final class BomaHotelsDetailsViewController: UIViewController {
     var objectId: CRUDObjectId?
     var author: ObjectInfo?
     
-    private var product: Product?
+    private var bomaHotel: BomaHotel?
     private var locationRequestToken = InvalidationToken()
     
     private lazy var dataSource: BomaHotelsDetailsDataSource = { [unowned self] in
@@ -93,18 +94,18 @@ final class BomaHotelsDetailsViewController: UIViewController {
         }()
     
     
-    private func productAcionItems() -> [[ProductActionItem]] {
+    private func bomaHotelAcionItems() -> [[BomaHotelActionItem]] {
         return [
             [ // 0 section
-                ProductActionItem(title: NSLocalizedString("Booking", comment: "BomaHotels"),
+                BomaHotelActionItem(title: NSLocalizedString("Booking", comment: "BomaHotels"),
                     image: "productBuyProduct",
                     action: .Buy),
             ],
             [ // 1 section
-                ProductActionItem(title: NSLocalizedString("Send Message", comment: "BomaHotels"), image: "productSendMessage", action: .SendMessage),
-                ProductActionItem(title: NSLocalizedString("Organizer Profile", comment: "BomaHotels"), image: "productSellerProfile", action: .SellerProfile),
-                ProductActionItem(title: NSLocalizedString("Navigate", comment: "BomaHotels"), image: "productNavigate", action: .ProductInventory),
-                ProductActionItem(title: NSLocalizedString("More Information", comment: "BomaHotels"), image: "productTerms&Info", action: .ProductInventory),
+                BomaHotelActionItem(title: NSLocalizedString("Send Message", comment: "BomaHotels"), image: "productSendMessage", action: .SendMessage),
+                BomaHotelActionItem(title: NSLocalizedString("Organizer Profile", comment: "BomaHotels"), image: "productSellerProfile", action: .SellerProfile),
+                /*BomaHotelActionItem(title: NSLocalizedString("Navigate", comment: "BomaHotels"), image: "productNavigate", action: .ProductInventory),
+                BomaHotelActionItem(title: NSLocalizedString("More Information", comment: "BomaHotels"), image: "productTerms&Info", action: .ProductInventory), */
             ],
         ]
         
@@ -138,7 +139,7 @@ extension BomaHotelsDetailsViewController {
         }
     }
     
-    struct ProductActionItem {
+    struct BomaHotelActionItem {
         let title: String
         let image: String
         let action: BomaHotelsDetailsAction
@@ -156,6 +157,11 @@ extension BomaHotelsDetailsViewController: BomaHotelsDetailsActionConsumer {
                 showChatViewController(userId)
             }
             return
+        case .Buy:
+            if let bookingURL = self.bomaHotel?.bookingURL {
+                UIApplication.sharedApplication().openURL(bookingURL)
+            }
+            return
         default:
             return
         }
@@ -166,7 +172,7 @@ extension BomaHotelsDetailsViewController: BomaHotelsDetailsActionConsumer {
 extension BomaHotelsDetailsViewController {
     internal class BomaHotelsDetailsDataSource: TableViewDataSource {
         
-        var items: [[ProductActionItem]] = []
+        var items: [[BomaHotelActionItem]] = []
         
         override func configureTable(tableView: UITableView) {
             tableView.tableFooterView = UIView(frame: CGRectZero)

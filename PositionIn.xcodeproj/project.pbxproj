@@ -44,6 +44,7 @@
 
 /* Begin PBXBuildFile section */
 		1A56454F1ADF6D1BF3022FB3 /* BraintreePaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A564EEB40AD56FD2C113F2A /* BraintreePaymentViewController.swift */; };
+		1A5647F5D0FCC84FA5BF21FF /* MpesaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A56419027EC5956741AF471 /* MpesaViewController.swift */; };
 		1A564902D955532DE5B29A65 /* ErrorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A56438E04F9AD6CBDA75AC9 /* ErrorCell.swift */; };
 		1A56491DAEFA315F9DB47400 /* PaymentReponseDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A5640E770D4CB872B2E4605 /* PaymentReponseDelegate.swift */; };
 		240A9B9C1B9CCDA4007C77E3 /* PositionIn.CommunityStatsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 240A9B9B1B9CCDA4007C77E3 /* PositionIn.CommunityStatsCell.xib */; };
@@ -73,6 +74,9 @@
 		50FA43301C44F0B50050B00E /* ErrorCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50FA432F1C44F0B50050B00E /* ErrorCell.xib */; };
 		50FE7D891BBE77BB005676E2 /* ItemsSearchResultDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FE7D871BBE77BB005676E2 /* ItemsSearchResultDataSource.swift */; };
 		50FE7D8A1BBE77BB005676E2 /* ItemsSearchResultsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FE7D881BBE77BB005676E2 /* ItemsSearchResultsController.swift */; };
+		CDBDD9AA1C47AFDD007578BC /* BrowseVolunteerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBDD9A81C47AFDD007578BC /* BrowseVolunteerViewController.swift */; };
+		CDBDD9B11C47CAAB007578BC /* PositionIn.BrowseVolunteerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CDBDD9B01C47CAAB007578BC /* PositionIn.BrowseVolunteerViewController.xib */; };
+		CDBDD9B31C491617007578BC /* BomaHotel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBDD9B21C491617007578BC /* BomaHotel.swift */; };
 		CDEDD96B1C45033C00396594 /* PostToContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDEDD9691C45033C00396594 /* PostToContainerViewController.swift */; };
 		CDEDD96C1C45033C00396594 /* PositionIn.PostToContainerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CDEDD96A1C45033C00396594 /* PositionIn.PostToContainerViewController.xib */; };
 		CDEDD96E1C45169C00396594 /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDEDD96D1C45169C00396594 /* ContainerViewController.swift */; };
@@ -529,6 +533,7 @@
 /* Begin PBXFileReference section */
 		040F01865A9A2BB68F3FDBFF /* Pods-PositionIn.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PositionIn.release.xcconfig"; path = "Pods/Target Support Files/Pods-PositionIn/Pods-PositionIn.release.xcconfig"; sourceTree = "<group>"; };
 		1A5640E770D4CB872B2E4605 /* PaymentReponseDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentReponseDelegate.swift; sourceTree = "<group>"; };
+		1A56419027EC5956741AF471 /* MpesaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MpesaViewController.swift; sourceTree = "<group>"; };
 		1A56438E04F9AD6CBDA75AC9 /* ErrorCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorCell.swift; sourceTree = "<group>"; };
 		1A564EEB40AD56FD2C113F2A /* BraintreePaymentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BraintreePaymentViewController.swift; sourceTree = "<group>"; };
 		240A9B9B1B9CCDA4007C77E3 /* PositionIn.CommunityStatsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.CommunityStatsCell.xib; sourceTree = "<group>"; };
@@ -566,6 +571,9 @@
 		AF836D0B902FDFFA6CB4A412 /* Pods_Messaging.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Messaging.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB73828B80F64D347BB9F14D /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5785CCFFE7238C562E6E52F /* Pods-PositionIn.devrelease.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PositionIn.devrelease.xcconfig"; path = "Pods/Target Support Files/Pods-PositionIn/Pods-PositionIn.devrelease.xcconfig"; sourceTree = "<group>"; };
+		CDBDD9A81C47AFDD007578BC /* BrowseVolunteerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowseVolunteerViewController.swift; sourceTree = "<group>"; };
+		CDBDD9B01C47CAAB007578BC /* PositionIn.BrowseVolunteerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.BrowseVolunteerViewController.xib; sourceTree = "<group>"; };
+		CDBDD9B21C491617007578BC /* BomaHotel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BomaHotel.swift; sourceTree = "<group>"; };
 		CDEDD9691C45033C00396594 /* PostToContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostToContainerViewController.swift; sourceTree = "<group>"; };
 		CDEDD96A1C45033C00396594 /* PositionIn.PostToContainerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.PostToContainerViewController.xib; sourceTree = "<group>"; };
 		CDEDD96D1C45169C00396594 /* ContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
@@ -1215,6 +1223,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1A564C3EC8DDC78E3A580F36 /* Mpesa */ = {
+			isa = PBXGroup;
+			children = (
+				1A56419027EC5956741AF471 /* MpesaViewController.swift */,
+			);
+			path = Mpesa;
+			sourceTree = "<group>";
+		};
 		1A564ECCDF0969356B20C9A5 /* ErrorView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1275,6 +1291,15 @@
 			);
 			name = ItemSearchController;
 			path = ItemSearchResult;
+			sourceTree = "<group>";
+		};
+		CDBDD9A71C47AFB2007578BC /* Volunteer */ = {
+			isa = PBXGroup;
+			children = (
+				CDBDD9A81C47AFDD007578BC /* BrowseVolunteerViewController.swift */,
+				CDBDD9B01C47CAAB007578BC /* PositionIn.BrowseVolunteerViewController.xib */,
+			);
+			path = Volunteer;
 			sourceTree = "<group>";
 		};
 		D100DF0C1BF4AA6500C81054 /* NSDate-Time-Ago */ = {
@@ -1721,6 +1746,7 @@
 		E64DC34C1B4E53C90011D37C /* PositionIn */ = {
 			isa = PBXGroup;
 			children = (
+				CDBDD9A71C47AFB2007578BC /* Volunteer */,
 				D1F1FF271C242476006D2E75 /* GiveBlood */,
 				D1F1FF201C22F23A006D2E75 /* VolunteerDetails */,
 				D1FD85481C1EF94E00C2E87B /* MarketDetails */,
@@ -1768,6 +1794,7 @@
 				E64DC34D1B4E53C90011D37C /* Supporting Files */,
 				E64DC36F1B4E54330011D37C /* PositionIn-Bridging-Header.h */,
 				1A564F438FBCAC524746510A /* BraintreePayment */,
+				1A564C3EC8DDC78E3A580F36 /* Mpesa */,
 			);
 			path = PositionIn;
 			sourceTree = "<group>";
@@ -1810,6 +1837,7 @@
 				D15441191C47D642006251B7 /* Volunteer.swift */,
 				2431EBDF1B94C1DC009FB158 /* Event.swift */,
 				2431EBDD1B947442009FB158 /* Product.swift */,
+				CDBDD9B21C491617007578BC /* BomaHotel.swift */,
 				2431EBDB1B945F5A009FB158 /* Promotion.swift */,
 				D153AB831C11FA9B00DFB5C9 /* AmbulanceRequest.swift */,
 				E65E872B1B611BA200AE444D /* Post.swift */,
@@ -3445,6 +3473,7 @@
 				E6F3093F1BA81FAF00C9420C /* PositionIn.AttachedPhotosView.xib in Resources */,
 				E6F7A4721BA335070069152A /* PositionIn.WalletViewController.xib in Resources */,
 				E6BEF1C61B9C556300511B46 /* PositionIn.PostViewController.xib in Resources */,
+				CDBDD9B11C47CAAB007578BC /* PositionIn.BrowseVolunteerViewController.xib in Resources */,
 				E62B16FD1B5CDF2400D446BC /* PositionIn.MessagesListViewController.xib in Resources */,
 				D1B780CF1C0F51A800EF5825 /* DonateCell.xib in Resources */,
 				E69421021B666A1600F34F06 /* PositionIn.ActionCell.xib in Resources */,
@@ -3661,6 +3690,7 @@
 				E6F2436C1B8B0E150033B13C /* MainMenuLoginCell.swift in Sources */,
 				E68B52211B875F8F006B980C /* EventListCell.swift in Sources */,
 				E68B52271B875F8F006B980C /* PostListCell.swift in Sources */,
+				CDBDD9AA1C47AFDD007578BC /* BrowseVolunteerViewController.swift in Sources */,
 				500D7FAC1BC2CD51008C8C82 /* SearchSectionCell.swift in Sources */,
 				E661158F1B738844003DB5B3 /* BaseLoginViewController.swift in Sources */,
 				50FE7D8A1BBE77BB005676E2 /* ItemsSearchResultsController.swift in Sources */,
@@ -3770,6 +3800,7 @@
 				D1B780BB1C0E48E200EF5825 /* MembershipPlansCell.swift in Sources */,
 				E6F243751B8B31510033B13C /* AddMenuView.swift in Sources */,
 				D118A2AA1C0FBC380020B363 /* CardTableViewCell.swift in Sources */,
+				CDBDD9B31C491617007578BC /* BomaHotel.swift in Sources */,
 				E661158B1B73774B003DB5B3 /* RegisterViewController.swift in Sources */,
 				E6BEF1E51B9C83F200511B46 /* CommunityInfoCell.swift in Sources */,
 				E6325F651B57D89A00996480 /* SidebarViewController.swift in Sources */,
@@ -3811,6 +3842,7 @@
 				1A56454F1ADF6D1BF3022FB3 /* BraintreePaymentViewController.swift in Sources */,
 				1A56491DAEFA315F9DB47400 /* PaymentReponseDelegate.swift in Sources */,
 				1A564902D955532DE5B29A65 /* ErrorCell.swift in Sources */,
+				1A5647F5D0FCC84FA5BF21FF /* MpesaViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

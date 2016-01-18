@@ -94,16 +94,16 @@ class GiveBloodDetailsViewController: UIViewController {
     
     private func productAcionItems() -> [[GiveBloodActionItem]] {
         return [
-            [ // 0 section
+           /* [
                 GiveBloodActionItem(title: NSLocalizedString("Navigate", comment: "GiveBlood"),
                     image: "productNavigate",
                     action: .Buy),
-            ],
-            [ // 1 section
+            ], */
+            [ // 0 section
                 GiveBloodActionItem(title: NSLocalizedString("Send Message", comment: "GiveBlood"), image: "productSendMessage", action: .SendMessage),
                 GiveBloodActionItem(title: NSLocalizedString("Office", comment: "GiveBlood"), image: "productSellerProfile", action: .ProductInventory),
-                GiveBloodActionItem(title: NSLocalizedString("More Information", comment: "GiveBlood"), image: "productTerms&Info",
-                    action: .ProductInventory),
+                /* GiveBloodActionItem(title: NSLocalizedString("More Information", comment: "GiveBlood"), image: "productTerms&Info",
+                    action: .ProductInventory), */
             ],
         ]
         

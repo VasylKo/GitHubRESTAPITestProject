@@ -19,8 +19,8 @@ protocol BrowseCommunityActionProvider {
 }
 
 
-final class BrowseCommunityViewController: BesideMenuViewController {
-        
+class BrowseCommunityViewController: BesideMenuViewController, BrowseCommunityActionConsumer {
+    
     enum Action: Int, CustomStringConvertible {
         case None
         case Browse
@@ -28,6 +28,7 @@ final class BrowseCommunityViewController: BesideMenuViewController {
         case Post
         case Invite
         case Edit
+        case Leave
         
         func displayText() -> String {
             switch self {
@@ -41,6 +42,8 @@ final class BrowseCommunityViewController: BesideMenuViewController {
                 return NSLocalizedString("INVITE", comment: "Community action: Invite")
             case .Edit:
                 return NSLocalizedString("EDIT", comment: "Community action: Edit")
+            case .Leave:
+                return NSLocalizedString("LEAVE", comment: "Community action: Leave")
             }
         }
         
@@ -48,9 +51,10 @@ final class BrowseCommunityViewController: BesideMenuViewController {
             return "<Community Action:\(displayText())>"
         }
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = "Communities"
         tableView.layoutMargins = UIEdgeInsets(top: 0, left: 30, bottom: 0, right: 30)
         dataSource.configureTable(tableView)
         browseMode = .MyGroups
@@ -75,7 +79,7 @@ final class BrowseCommunityViewController: BesideMenuViewController {
         case MyGroups
         case Explore
     }
-
+    
     func reloadData() {
         dataRequestToken.invalidate()
         dataRequestToken = InvalidationToken()
@@ -96,7 +100,7 @@ final class BrowseCommunityViewController: BesideMenuViewController {
                         return Future(error: NetworkDataProvider.ErrorCodes.InvalidRequestError.error())
                     } else {
                         return Future(value: response)
-                        }
+                    }
                     }.andThen { [weak self] result in
                         switch result {
                         case .Failure(_):
@@ -118,20 +122,12 @@ final class BrowseCommunityViewController: BesideMenuViewController {
         }
     }
     
-    private lazy var dataSource: BrowseCommunityDataSource = { [unowned self] in
+    lazy var dataSource: BrowseCommunityDataSource = { [unowned self] in
         let dataSource = BrowseCommunityDataSource()
         dataSource.parentViewController = self
         return dataSource
         }()
     
-    @IBAction func addCommunityTouched(sender: AnyObject) {
-        api().isUserAuthorized().onSuccess {[weak self] in
-            let controller = Storyboards.NewItems.instantiateAddCommunityViewController()
-            self?.navigationController?.pushViewController(controller, animated: true)
-            self?.subscribeForContentUpdates(controller)
-        }
-    }
-
     override func contentDidChange(sender: AnyObject?, info: [NSObject : AnyObject]?) {
         super.contentDidChange(sender, info: info)
         ConversationManager.sharedInstance().refresh()
@@ -142,23 +138,82 @@ final class BrowseCommunityViewController: BesideMenuViewController {
     
     // MARK: - Navigation
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let volunteerDetailsViewController = segue.destinationViewController  as? VolunteerDetailsViewController {
+
+            volunteerDetailsViewController.objectId = self.selectedObjectId
+            volunteerDetailsViewController.joinAction = (self.browseModeSegmentedControl.selectedSegmentIndex == 1) 
+            volunteerDetailsViewController.type = VolunteerDetailsViewController.ControllerType.Community
+        }
+    }
+    
     @IBAction func prepareForUnwind(segue: UIStoryboardSegue) {
         
     }
-
+    
     @IBAction func browseModeSegmentChanged(sender: UISegmentedControl) {
         if let mode = BrowseMode(rawValue: sender.selectedSegmentIndex) {
             browseMode = mode
         }
     }
     
-    @IBOutlet private weak var browseModeSegmentedControl: UISegmentedControl!
-
-    @IBOutlet private weak var tableView: TableView!
+    /* access control: protected variables (only for inheritance usage) */
+    @IBOutlet weak var browseModeSegmentedControl: UISegmentedControl!
+    @IBOutlet weak var tableView: TableView!
     
-    private let firstMyCommunityRequestToken = InvalidationToken()
+    let firstMyCommunityRequestToken = InvalidationToken()
+    var dataRequestToken = InvalidationToken()
     
-    private var dataRequestToken = InvalidationToken()
+    
+    /* BrowseCommunityActionConsumer */
+    
+    var selectedObjectId : CRUDObjectId?
+    
+    func executeAction(action: BrowseCommunityViewController.Action, community: CRUDObjectId) {
+        switch action {
+        case .Join:
+            if api().isUserAuthorized() {
+                api().joinCommunity(community).onSuccess { [weak self] _ in
+                    self?.reloadData()
+                    ConversationManager.sharedInstance().refresh()
+                }
+            }
+            else {
+                api().logout().onComplete {[weak self] _ in
+                    self?.sideBarController?.executeAction(.Login)
+                }
+            }
+            break
+        case .Browse, .None:
+            switch self.browseModeSegmentedControl.selectedSegmentIndex {
+            case 0:
+                let controller = Storyboards.Main.instantiateCommunityViewController()
+                controller.objectId = community
+                controller.controllerType = .Community
+                navigationController?.pushViewController(controller, animated: true)
+            case 1:
+                self.selectedObjectId = community
+                self.performSegue(BrowseCommunityViewController.Segue.showVolunteerDetailsViewController)
+            default:
+                break
+            }
+        case .Post:
+            let controller = Storyboards.NewItems.instantiateAddPostViewController()
+            controller.communityId = community
+            navigationController?.pushViewController(controller, animated: true)
+        case .Invite:
+            break
+        case .Edit:
+            let controller = Storyboards.NewItems.instantiateEditCommunityViewController()
+            controller.existingCommunityId = community
+            navigationController?.pushViewController(controller, animated: true)
+            self.subscribeForContentUpdates(controller)
+        case .Leave:
+            api().leaveCommunity(community).onSuccess(callback: { (Void) -> Void in
+                self.reloadData()
+            })
+        }
+    }
 }
 
 extension BrowseCommunityViewController {
@@ -184,18 +239,17 @@ extension BrowseCommunityViewController {
             return items.count
         }
         
-        @objc override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
             return items[section].count
         }
         
-        @objc override func tableView(tableView: UITableView, reuseIdentifierForIndexPath indexPath: NSIndexPath) -> String {
+        override func tableView(tableView: UITableView, reuseIdentifierForIndexPath indexPath: NSIndexPath) -> String {
             return cellFactory.cellReuseIdForModel(self.tableView(tableView, modelForIndexPath: indexPath))
         }
         
         override func tableView(tableView: UITableView, modelForIndexPath indexPath: NSIndexPath) -> TableViewCellModel {
             return items[indexPath.section][indexPath.row]
         }
-
         
         override func nibCellsId() -> [String] {
             return cellFactory.communityCellsReuseId()
@@ -205,42 +259,7 @@ extension BrowseCommunityViewController {
             tableView.deselectRowAtIndexPath(indexPath, animated: false)
             if let model = self.tableView(tableView, modelForIndexPath: indexPath) as? BrowseCommunityTableViewCellModel {
                 actionConsumer?.executeAction(model.tapAction, community: model.objectId)
-            }            
+            }
         }
     }
-}
-
-extension BrowseCommunityViewController: BrowseCommunityActionConsumer {
-    func executeAction(action: BrowseCommunityViewController.Action, community: CRUDObjectId) {
-        switch action {
-        case .Join:
-            if api().isUserAuthorized() {
-                api().joinCommunity(community).onSuccess { [weak self] _ in
-                    self?.reloadData()
-                    ConversationManager.sharedInstance().refresh()
-                }
-            }
-            else {
-                api().logout().onComplete {[weak self] _ in
-                    self?.sideBarController?.executeAction(.Login)
-                }
-            }
-            break
-        case .Browse, .Post:
-            let controller = Storyboards.Main.instantiateCommunityViewController()
-            controller.objectId = community
-            navigationController?.pushViewController(controller, animated: true)
-        case .Invite:
-            break
-        case .Edit:
-            let controller = Storyboards.NewItems.instantiateEditCommunityViewController()
-            controller.existingCommunityId = community
-            navigationController?.pushViewController(controller, animated: true)
-            self.subscribeForContentUpdates(controller)
-
-        case .None:
-            break
-        }
-    }
-   
 }

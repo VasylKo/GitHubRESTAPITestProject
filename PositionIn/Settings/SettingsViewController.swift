@@ -32,7 +32,7 @@ class SettingsViewController: BesideMenuViewController, MFMailComposeViewControl
     }
     
     @IBAction func termsConditionsButtonPressed(sender: AnyObject) {
-        let url: NSURL? = NSURL(string: "http://www.positionin.com/terms-and-conditions.html")
+        let url: NSURL? = NSURL(string: "http://www.redcross.or.ke/")
         if let url = url {
             UIApplication.sharedApplication().openURL(url)
         }
@@ -62,7 +62,7 @@ class SettingsViewController: BesideMenuViewController, MFMailComposeViewControl
     }
     
     @IBAction func contactSupportPressed(sender: AnyObject) {
-        self.showMailControllerWithRecepientEmail("support@positionin.com")
+        self.showMailControllerWithRecepientEmail("rcapp@redcross.or.ke")
     }
     
     @IBAction func signOutPressed(sender: AnyObject) {

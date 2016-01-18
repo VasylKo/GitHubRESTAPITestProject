@@ -9,15 +9,29 @@
 import PosInCore
 import CleanroomLogger
 
-final class CommunityViewController: BrowseModeTabbarViewController {
+final class CommunityViewController: DisplayModeViewController {
     
+    enum ControllerType : Int {
+        case Unknown, Community, Volunteer
+    }
+    
+    var controllerType: ControllerType = .Unknown
     var objectId: CRUDObjectId =  CRUDObjectInvalidId
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         displayMode = .List
         self.navigationItem.titleView = nil
-        self.title = NSLocalizedString("Community", comment: "CommunityViewController")
+        switch controllerType {
+        case .Unknown:
+            break;
+        case .Community:
+            self.title = NSLocalizedString("Community", comment: "CommunityViewController")
+        case .Volunteer:
+            self.title = NSLocalizedString("Volunteer", comment: "CommunityViewController")
+        }
+
     }
     
     @IBAction func prepareForUnwind(segue: UIStoryboardSegue) {
@@ -35,6 +49,15 @@ final class CommunityViewController: BrowseModeTabbarViewController {
         case .List:
             let community = Community(objectId: objectId)
             let controller = Storyboards.Main.instantiateCommunityFeedViewController()
+            controller.controllerType = self.controllerType
+            let filterUpdate = { (filter: SearchFilter) -> SearchFilter in
+                var f = filter
+                f.communities = [community.objectId]
+                f.itemTypes = [FeedItem.ItemType.Event, FeedItem.ItemType.News]
+                return f
+            }
+            
+            controller.childFilterUpdate = filterUpdate
             controller.community = community
             return controller
         }

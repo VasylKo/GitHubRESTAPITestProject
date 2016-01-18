@@ -48,11 +48,13 @@ class ObjectInfo: CRUDObject {
 class UserInfo: ObjectInfo {
     var isCommunity: Bool = false
     var avatar: NSURL?
+    var role : Int = 0
     
     override func mapping(map: Map) {
         super.mapping(map)
         avatar <- (map["avatar"], AmazonURLTransform())
         isCommunity <- map["isCommunity"]
+        role <- map["role"]
     }
     
 }

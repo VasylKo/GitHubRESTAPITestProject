@@ -56,7 +56,6 @@ final class EventDetailsViewController: UIViewController {
         let startDate = dateFormatter.stringFromDate(event.startDate ?? NSDate())
         let endDate = dateFormatter.stringFromDate(event.endDate ?? NSDate())
         priceLabel.text = "\(startDate) - \(endDate)"
-//        eventImageView.setImageFromURL(event.photos?.first?.url, placeholder: UIImage(named: "eventDetailsPlaceholder"))
         eventImageView.setImageFromURL(imageURL, placeholder: image)
         
     }
@@ -76,14 +75,15 @@ final class EventDetailsViewController: UIViewController {
             [ // 1 section
                 EventActionItem(title: NSLocalizedString("Send Message", comment: "Event action: Send Message"), image: "productSendMessage", action: .SendMessage),
                 EventActionItem(title: NSLocalizedString("Organizer Profile", comment: "Event action: Organizer Profile"), image: "productSellerProfile", action: .OrganizerProfile),
-                EventActionItem(title: NSLocalizedString("More Information", comment: "Event action: Terms and Information"), image: "productTerms&Info", action: .TermsAndInformation),
-                EventActionItem(title: NSLocalizedString("Navigate", comment: "Event action: Navigate"), image: "productNavigate", action: .Navigate)
+                /*EventActionItem(title: NSLocalizedString("More Information", comment: "Event action: Terms and Information"), image: "productTerms&Info", action: .TermsAndInformation),
+                EventActionItem(title: NSLocalizedString("Navigate", comment: "Event action: Navigate"), image: "productNavigate", action: .Navigate)*/
             ],
         ]
         
     }
     
     var objectId: CRUDObjectId?
+    var author: ObjectInfo?
     
     private var event: Event?
     
@@ -128,14 +128,14 @@ extension EventDetailsViewController: EventDetailsActionConsumer {
     func executeAction(action: EventDetailsAction) {
         switch action {
         case .OrganizerProfile:
-            if let userId = event?.author {
+            if let author = author {
                 let profileController = Storyboards.Main.instantiateUserProfileViewController()
-                profileController.objectId = userId
+                profileController.objectId = author.objectId
                 navigationController?.pushViewController(profileController, animated: true)                
             }
         case .SendMessage:
-            if let userId = event?.author {
-                showChatViewController(userId)
+            if let author = author {
+                showChatViewController(author.objectId)
             }
         case .Attend :
             if api().isUserAuthorized() {
@@ -200,7 +200,6 @@ extension EventDetailsViewController {
                 actionConsumer.executeAction(item.action)
             }
         }
-        
     }
 }
 

@@ -58,16 +58,12 @@ class EmergencyDetailsController: UIViewController {
             nameLabel.text = name
         }
         
-        //        temporary decision
-        //        priceLabel.text = product.price.map {
-        //            let newValue = $0 as Float
-        //            return AppConfiguration().currencyFormatter.stringFromNumber(NSNumber(float: newValue)) ?? ""}
-        
         let imageURL: NSURL?
         
         if let urlString = product.imageURLString {
             imageURL = NSURL(string:urlString)
-        } else {
+        }
+        else {
             imageURL = nil
         }
         
@@ -101,12 +97,20 @@ class EmergencyDetailsController: UIViewController {
     private func productAcionItems() -> [[EmergencyActionItem]] {
         return [
             [ // 0 section
-                EmergencyActionItem(title: NSLocalizedString("Donate", comment: "Product action: Buy Product"), image: "home_donate", action: .Buy),
+                EmergencyActionItem(title: NSLocalizedString("Donate", comment: "Product action: Buy Product"),
+                    image: "home_donate",
+                    action: .Donate),
             ],
             [ // 1 section
-                EmergencyActionItem(title: NSLocalizedString("Send Message", comment: "Product action: Send Message"), image: "productSendMessage", action: .SendMessage),
-                EmergencyActionItem(title: NSLocalizedString("Member Profile", comment: "Product action: Seller Profile"), image: "productSellerProfile", action: .SellerProfile),
-                EmergencyActionItem(title: NSLocalizedString("More Information", comment: "Product action: Navigate"), image: "productTerms&Info", action: .ProductInventory),
+                EmergencyActionItem(title: NSLocalizedString("Send Message", comment: "Product action: Send Message"),
+                    image: "productSendMessage",
+                    action: .SendMessage),
+                EmergencyActionItem(title: NSLocalizedString("Member Profile", comment: "Product action: Seller Profile"),
+                    image: "productSellerProfile",
+                    action: .MemberProfile),
+                /*EmergencyActionItem(title: NSLocalizedString("More Information", comment: "Product action: Navigate"),
+                    image: "productTerms&Info",
+                    action: .MoreInformation),*/
             ],
         ]
         
@@ -123,18 +127,18 @@ class EmergencyDetailsController: UIViewController {
 
 extension EmergencyDetailsController {
     enum EmergencyDetailsAction: CustomStringConvertible {
-        case Buy, ProductInventory, SellerProfile, SendMessage
+        case Donate, SendMessage, MemberProfile, MoreInformation
         
         var description: String {
             switch self {
-            case .Buy:
-                return "Buy"
-            case .ProductInventory:
-                return "Product Inventory"
-            case .SellerProfile:
-                return "Seller profile"
+            case .Donate:
+                return "Donate"
             case .SendMessage:
-                return "Send message"
+                return "Send Message"
+            case .MemberProfile:
+                return "Member Profile"
+            case .MoreInformation:
+                return "More Information"
             }
         }
     }
@@ -150,25 +154,18 @@ extension EmergencyDetailsController {
 extension EmergencyDetailsController: EmergencyDetailsActionConsumer {
     
     func executeAction(action: EmergencyDetailsAction) {
-        let segue: ProductDetailsViewController.Segue
+        let segue: EmergencyDetailsController.Segue
         switch action {
-        case .Buy:
-            if api().isUserAuthorized() {
-                segue = .ShowBuyScreen
-            } else {
-                api().logout().onComplete {[weak self] _ in
-                    self?.sideBarController?.executeAction(.Login)
-                }
-                return
-            }
-        case .ProductInventory:
-            segue = .ShowProductInventory
-        case .SellerProfile:
-            segue = .ShowSellerProfile
+        case .Donate:
+            segue = .Donate
         case .SendMessage:
             if let userId = author?.objectId {
                 showChatViewController(userId)
             }
+            return
+        case .MemberProfile:
+            segue = .ShowSellerProfile
+        case .MoreInformation:
             return
         }
         performSegue(segue)
@@ -217,49 +214,9 @@ extension EmergencyDetailsController {
         func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
             tableView.deselectRowAtIndexPath(indexPath, animated: true)
             let item = items[indexPath.section][indexPath.row]
-            if let actionConsumer = parentViewController as? ProductDetailsActionConsumer {
-//                actionConsumer.executeAction(item.action)
+            if let actionConsumer = parentViewController as? EmergencyDetailsController {
+                actionConsumer.executeAction(item.action)
             }
         }
     }
 }
-
-
-//extension ItemCategory {
-//    func productPlaceholderImage() -> UIImage {
-//        let imageName: String
-//        switch self {
-//        case .AnimalsPetSupplies:
-//            imageName = "animals_pet_supplies_img_default"
-//        case .ApparelAccessories:
-//            imageName = "apparel_accessories_img_default"
-//        case .ArtsEntertainment:
-//            imageName = "arts_entertainment_img_default"
-//        case .BabyToddler:
-//            imageName = "baby_toddler_img_default"
-//        case .BusinessIndustrial:
-//            imageName = "business_industrial_img_default"
-//        case .CamerasOptics:
-//            imageName = "cameras_optics_img_default"
-//        case .Electronics:
-//            imageName = "electronics_img_default"
-//        case .Food:
-//            imageName = "food_img_default"
-//        case .Furniture:
-//            imageName = "furniture_img_default"
-//        case .Hardware:
-//            imageName = "hardware_img_default"
-//        case .HealthBeauty:
-//            imageName = "health_beauty_img_default"
-//        case .HomeGarden:
-//            imageName = "home_garden_img_default"
-//        case .LuggageBags:
-//            imageName = "luggage_bags_img_default"
-//        case .Unknown:
-//            fallthrough
-//        default:
-//            imageName = ""
-//        }
-//        return UIImage(named: imageName) ?? UIImage()
-//    }
-//}

@@ -10,10 +10,17 @@ import PosInCore
 import BrightFutures
 import CleanroomLogger
 
-class CommunityFeedViewController: BesideMenuViewController, BrowseActionProducer, BrowseModeDisplay, UpdateFilterProtocol {
+
+protocol CommunityFeedActionConsumer: class {
+    func communityFeedInfoTapped()
+}
+
+class CommunityFeedViewController: BesideMenuViewController, BrowseActionProducer, BrowseModeDisplay, UpdateFilterProtocol, CommunityFeedActionConsumer {
     
     weak var actionConsumer: BrowseActionConsumer?
-
+    
+    var controllerType: CommunityViewController.ControllerType = .Unknown
+    
     enum Sections: Int {
         case Info, Feed
     }
@@ -25,7 +32,7 @@ class CommunityFeedViewController: BesideMenuViewController, BrowseActionProduce
             }
         }
     }
-    
+
     var childFilterUpdate: SearchFilterUpdate?
     
     func applyFilterUpdate(update: SearchFilterUpdate) {
@@ -38,16 +45,32 @@ class CommunityFeedViewController: BesideMenuViewController, BrowseActionProduce
     
     func reloadData() {
         api().getCommunity(community.objectId).onSuccess { [weak self] community in
-            self?.didReceiveCommunity(community)
+            self?.community = community
         }
     }
     
-    private func didReceiveCommunity(community: Community) {        
-        dataSource.items[Sections.Info.rawValue] = [
-            BrowseCommunityHeaderCellModel(objectId: community.objectId, tapAction: .None, title: community.name ?? "", url: community.avatar),
+    private func didReceiveCommunity(community: Community) {
+        //TODO: hide icon for volunteer
+        var closed: Bool? = nil
+        if self.controllerType == .Community {
+            closed = community.closed
+        }
+        let headerModel = BrowseCommunityHeaderCellModel(objectId: community.objectId, tapAction: .None, title:community.name ?? "", url:community.avatar, showInfo: true,  isClosed: closed)
+        headerModel.actionConsumer = self
+        dataSource.items[Sections.Info.rawValue] = [headerModel,
             CommunityStatsCellModel(countMembers: community.membersCount, countPosts: community.postsCount, countEvents: community.eventsCount)
         ]
         self.updateFeed()
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let volunteerDetailsViewController = segue.destinationViewController  as? VolunteerDetailsViewController {
+            volunteerDetailsViewController.objectId = self.community.objectId
+            volunteerDetailsViewController.joinAction = false
+            if let typeValue = VolunteerDetailsViewController.ControllerType(rawValue:self.controllerType.rawValue){
+                volunteerDetailsViewController.type = typeValue
+            }
+        }
     }
 
     func updateFeed() {
@@ -67,7 +90,6 @@ class CommunityFeedViewController: BesideMenuViewController, BrowseActionProduce
         navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
         navigationController?.navigationBar.shadowImage = UIImage()
         dataSource.configureTable(tableView)
-       // didReceiveCommunity(community)
         reloadData()
     }
 
@@ -80,6 +102,10 @@ class CommunityFeedViewController: BesideMenuViewController, BrowseActionProduce
         dataSource.parentViewController = self
         return dataSource
         }()
+    
+    func communityFeedInfoTapped() {
+        self.performSegue(CommunityFeedViewController.Segue.showVolunteerDetailsViewController)
+    }
 }
 
 extension CommunityFeedViewController: BrowseActionConsumer {

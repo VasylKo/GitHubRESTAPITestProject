@@ -220,11 +220,6 @@ struct APIService {
         return self.createObject(endpoint, object: object)
     }
     
-//    func getProduct(objectId: CRUDObjectId, inShop shop: CRUDObjectId) -> Future<Product, NSError> {
-//        let endpoint = Product.shopItemsEndpoint(shop, productId: objectId)
-//        return self.getObject(endpoint)
-//    }
-    
     //MARK: - Community -
     
     func getCommunities(page: Page) -> Future<CollectionResponse<Community>,NSError> {
@@ -233,6 +228,11 @@ struct APIService {
         return getObjectsCollection(endpoint, params: params)
     }
 
+    func getUserVolunteers(userId: CRUDObjectId) -> Future<CollectionResponse<Community>,NSError> {
+        let endpoint = Volunteer.userVolunteersEndpoint(userId)
+        return getObjectsCollection(endpoint, params: nil)
+    }
+    
     func getUserCommunities(userId: CRUDObjectId) -> Future<CollectionResponse<Community>,NSError> {
         let endpoint = Community.userCommunitiesEndpoint(userId)
         return getObjectsCollection(endpoint, params: nil)
@@ -279,6 +279,12 @@ struct APIService {
     func joinCommunity(communityId: CRUDObjectId) -> Future<Void, NSError> {
         let endpoint = Community.membersEndpoint(communityId)
         return updateCommand(endpoint)
+    }
+    
+    func leaveCommunity(communityId: CRUDObjectId) -> Future<Void, NSError> {
+        //TODO: hardcode, change on server endpoint update
+        let endpoint = "/v1.0/community/\(communityId)/members"
+        return updateCommand(endpoint, method:.DELETE)
     }
     
     //MARK: - People -
@@ -370,12 +376,25 @@ struct APIService {
         }
     }
     
-    func getAll(homeItem: HomeItem) -> Future<CollectionResponse<FeedItem>,NSError> {
+    func getAll(homeItem: HomeItem, seachFilter: SearchFilter) -> Future<CollectionResponse<FeedItem>,NSError> {
         let endpoint = homeItem.endpoint()
 //        //TODO: change this when it will be fixed on backend
         let method: Alamofire.Method = .POST
         let params = APIServiceQuery()
         params.append("type", value: [homeItem.rawValue])
+        if let itemTypes = seachFilter.itemTypes {
+            var itemTypesArray : [Int] = []
+            
+            for (_, value) in itemTypes.enumerate() {
+               itemTypesArray.append(value.rawValue)
+            }
+            params.append("type", value: itemTypesArray)
+        }
+        
+        if let communities = seachFilter.communities {
+            params.append("communityId", value: communities)
+        }
+        
         return session().flatMap {
             (token: AuthResponse.Token) -> Future<CollectionResponse<FeedItem>, NSError> in
             //TODO: fix endp
@@ -399,16 +418,32 @@ struct APIService {
             return self.handleFailure(future)
         }
     }
-    
-    func getVolunteer(volunteer: CRUDObjectId) -> Future<Community, NSError> {
-        let endpoint = Volunteer.endpoint()
+
+    func getVolunteer(volunteerId: CRUDObjectId) -> Future<Community, NSError> {
+        let endpoint = Volunteer.volunteerEndpoint(volunteerId)
         return getObject(endpoint)
     }
     
-    func getBomaHotelsDetails(objectId: CRUDObjectId) -> Future<Product, NSError> {
-        let endpont = HomeItem.BomaHotels.endpoint(objectId)
+    func joinVolunteer(volunteerId: CRUDObjectId) -> Future<Void, NSError> {
+        let endpoint = Volunteer.membersEndpoint(volunteerId)
+        return updateCommand(endpoint)
+    }
+    
+    func leaveVolunteer(volunteerId: CRUDObjectId) -> Future<Void, NSError> {
+        //TODO: hardcode, change on server endpoint update
+        let endpoint = "/v1.0/volunteer/\(volunteerId)/members"
+        return updateCommand(endpoint, method:.DELETE)
+    }
+    
+    func getBomaHotelsDetails(objectId: CRUDObjectId) -> Future<BomaHotel, NSError> {
+        let endpoint = HomeItem.BomaHotels.endpoint(objectId)
         //TODO need fix downcastng
-        return self.getOne(endpont!)
+        return session().flatMap {
+            (token: AuthResponse.Token) -> Future<BomaHotel, NSError> in
+            let request = self.updateRequest(token, endpoint: endpoint!, params: nil, method: .GET)
+            let (_ , future): (Alamofire.Request, Future<BomaHotel, NSError>) = self.dataProvider.objectRequest(request)
+            return self.handleFailure(future)
+        }
     }
     
     func getProjectsDetails(objectId: CRUDObjectId) -> Future<Product, NSError> {
@@ -430,11 +465,6 @@ struct APIService {
     func getMarketDetails(objectId: CRUDObjectId) -> Future<Product, NSError> {
         let endpont = HomeItem.Market.endpoint(objectId)
         return self.getOne(endpont!)
-    }
-
-    func getVolunteerDetails(objectId: CRUDObjectId) -> Future<Event, NSError> {
-        let endpoint = HomeItem.Volunteer.endpoint(objectId)
-        return getObject(endpoint!)
     }
     
     func getTrainingDetails(objectId: CRUDObjectId) -> Future<Product, NSError> {
@@ -525,7 +555,7 @@ struct APIService {
         return session().flatMap {
             (token: AuthResponse.Token) -> Future<Void, NSError> in
             let request = self.updateRequest(token, endpoint: endpoint, method: method, params: nil)
-            let (_, future): CRUDResultType = self.dataProvider.jsonRequest(request, map: self.commandMapping(), validation: self.statusCodeValidation(statusCode: [201]))
+            let (_, future): CRUDResultType = self.dataProvider.jsonRequest(request, map: self.commandMapping(), validation: self.statusCodeValidation(statusCode: [201, 204]))
             return self.handleFailure(future)
         }
     }
@@ -606,6 +636,7 @@ struct APIService {
     
     func statusCodeValidation<S: SequenceType where S.Generator.Element == Int>(statusCode acceptableStatusCode: S) -> Alamofire.Request.Validation {
         return { _, response in
+            print(acceptableStatusCode, acceptableStatusCode.dynamicType)
             if acceptableStatusCode.contains(response.statusCode) {
                 return .Success
             } else {

@@ -28,7 +28,18 @@ class NewsCardCell: TableViewCell {
         headerLabel.text = m!.title
         infoLabel.text = m!.info
         detailsLabel.text = m!.details
+        
+        if let numOfLikes = m!.numOfLikes {
+            likesLabel.text = String(numOfLikes)
+        }
+        
+        if let numOfComments = m!.numOfComments {
+            commentsLabel.text = String(numOfComments)
+        }
     }
+    
+    @IBOutlet weak var likesLabel: UILabel!
+    @IBOutlet weak var commentsLabel: UILabel!
     
     @IBOutlet private weak var imageHeightConstaint: NSLayoutConstraint!
     @IBOutlet private weak var feedItemImageView: UIImageView!

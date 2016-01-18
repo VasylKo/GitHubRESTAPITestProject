@@ -111,7 +111,15 @@ struct Volunteer: CRUDObject {
     static func volunteerEndpoint(volunteerId: CRUDObjectId) -> String {
         return (Volunteer.endpoint() as NSString).stringByAppendingPathComponent("\(volunteerId)")
     }
-
+    
+    static func userVolunteersEndpoint(userId: CRUDObjectId) -> String {
+        return (UserProfile.endpoint() as NSString).stringByAppendingPathComponent("\(userId)/volunteers")
+    }
+    
+    static func membersEndpoint(communityId: CRUDObjectId) -> String {
+        return (Volunteer.volunteerEndpoint(communityId) as NSString).stringByAppendingPathComponent("/members")
+    }
+    
     var description: String {
         return "<\(self.dynamicType):\(objectId)>"
     }

@@ -80,7 +80,7 @@ extension BrowseListTableViewCell: BrowseActionConsumer {
     
     func browseControllerDidChangeContent(controller: BrowseActionProducer) {
         //TODO: use constraint outlet instead of magic number
-        listTableHeightConstraint.constant = listController.tableView.contentSize.height + 20 // Padding top
+        listTableHeightConstraint.constant = listController.tableView.contentSize.height + 80 // Padding top
         superview?.setNeedsLayout()
         
         actionConsumer?.browseControllerDidChangeContent(controller)

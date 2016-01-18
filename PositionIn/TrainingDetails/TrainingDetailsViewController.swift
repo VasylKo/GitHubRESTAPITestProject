@@ -10,10 +10,6 @@ import UIKit
 import PosInCore
 import CleanroomLogger
 import BrightFutures
-//
-//protocol ProductDetailsActionConsumer {
-//    func executeAction(action: ProductDetailsViewController.ProductDetailsAction)
-//}
 
 final class TrainingDetailsViewController: UIViewController {
     
@@ -60,11 +56,6 @@ final class TrainingDetailsViewController: UIViewController {
         if let name = author?.title {
             nameLabel.text = name
         }
-        
-        //        temporary decision
-        //        priceLabel.text = product.price.map {
-        //            let newValue = $0 as Float
-        //            return AppConfiguration().currencyFormatter.stringFromNumber(NSNumber(float: newValue)) ?? ""}
         
         let imageURL: NSURL?
         
@@ -113,9 +104,9 @@ final class TrainingDetailsViewController: UIViewController {
                     image: "productSendMessage", action: .SendMessage),
                 TrainingActionItem(title: NSLocalizedString("Organizer Profile", comment: "Product action: Seller Profile"),
                     image: "productSellerProfile", action: .SellerProfile),
-                TrainingActionItem(title: NSLocalizedString("Navigate", comment: "Product action: Navigate"),
+                /*TrainingActionItem(title: NSLocalizedString("Navigate", comment: "Product action: Navigate"),
                     image: "productNavigate", action: .Navigate),
-                TrainingActionItem(title: NSLocalizedString("More Information", comment: "Product action: More Information"), image: "productTerms&Info", action: .ProductInventory),
+                TrainingActionItem(title: NSLocalizedString("More Information", comment: "Product action: More Information"), image: "productTerms&Info", action: .ProductInventory),*/
             ],
         ]
     }
