@@ -14,7 +14,7 @@ struct Community: CRUDObject {
     var name: String?
     var communityDescription: String?
     var avatar: NSURL?
-    var closed: Bool = false
+    var closed: Bool? = nil
     
     var shops: [ObjectInfo]?
 
