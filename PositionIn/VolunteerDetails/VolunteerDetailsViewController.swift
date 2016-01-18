@@ -39,7 +39,9 @@ class VolunteerDetailsViewController: UIViewController {
             switch self.type {
             case .Volunteer:
                 api().getVolunteer(objectId).onSuccess {[weak self] volunteer in
-                    self?.didReceiveDetails(volunteer)
+                    var volunteerVar = volunteer
+                    volunteerVar.closed = nil
+                    self?.didReceiveDetails(volunteerVar)
                 }
             case .Community:
                 api().getCommunity(objectId).onSuccess {[weak self] volunteer in
@@ -174,8 +176,8 @@ extension VolunteerDetailsViewController: VolunteerDetailsActionConsumer {
                     alertController.addAction(UIAlertAction(title: "Volunteer", style: .Default, handler: { action in
                         switch action.style{
                         case .Default:
-                            if self.objectId != nil {
-                                api().joinVolunteer(self.objectId!).onSuccess { [weak self] _ in
+                    if let objId = self.objectId {
+                                api().joinVolunteer(objId).onSuccess { [weak self] _ in
                                     //on success
                                 }
                             } else {
@@ -192,34 +194,21 @@ extension VolunteerDetailsViewController: VolunteerDetailsActionConsumer {
                     self.presentViewController(alertController, animated: true, completion: nil)
                     return
                 case .Community:
-                    if self.objectId != nil {
+                    if let objId = self.objectId {
                         if let community = self.volunteer {
-                            if community.closed {
-                                let alertController = UIAlertController(title: nil, message:
-                                    "Kenya Red Cross will review your community request and respond within a few days", preferredStyle: UIAlertControllerStyle.Alert)
-                                alertController.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: nil))
-                                alertController.addAction(UIAlertAction(title: "Ok", style: .Default, handler: { action in
-                                    switch action.style{
-                                    case .Default:
-                                        if self.objectId != nil {
-                                            api().joinCommunity(self.objectId!).onSuccess { [weak self] _ in
-                                                //on success
-                                            }
-                                        } else {
-                                            Log.error?.message("objectId is nil")
-                                        }
-                                    case .Cancel:
-                                        print("cancel")
-                                        
-                                    case .Destructive:
-                                        print("destructive")
-                                    }
-                                    self.navigationController?.popViewControllerAnimated(true)
-                                }))
-                            } else {
-                                api().joinCommunity(self.objectId!).onSuccess { [weak self] _ in
-                                    //on success
+                            
+                            if let closed = community.closed {
+                                if closed {
+                                    self.joinClosedCommunity(community)
                                 }
+                                else {
+                                    api().joinCommunity(objId).onSuccess { [weak self] _ in
+                                        //on success
+                                    }
+                                }
+                            }
+                            else {
+                                self.joinClosedCommunity(community)
                             }
                             self.navigationController?.popViewControllerAnimated(true)
                         }
@@ -240,6 +229,30 @@ extension VolunteerDetailsViewController: VolunteerDetailsActionConsumer {
             return
         }
         performSegue(segue)
+    }
+    
+    private func joinClosedCommunity(community: Community) {
+        let alertController = UIAlertController(title: nil, message:
+            "Kenya Red Cross will review your community request and respond within a few days", preferredStyle: UIAlertControllerStyle.Alert)
+        alertController.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: nil))
+        alertController.addAction(UIAlertAction(title: "Ok", style: .Default, handler: { action in
+            switch action.style{
+            case .Default:
+                if self.objectId != nil {
+                    api().joinCommunity(self.objectId!).onSuccess { [weak self] _ in
+                        //on success
+                    }
+                } else {
+                    Log.error?.message("objectId is nil")
+                }
+            case .Cancel:
+                print("cancel")
+                
+            case .Destructive:
+                print("destructive")
+            }
+            self.navigationController?.popViewControllerAnimated(true)
+        }))
     }
 }
 
