@@ -184,9 +184,13 @@ class BrowseCommunityViewController: BesideMenuViewController, BrowseCommunityAc
                 }
             }
             break
-        case .Browse, .Post:
+        case .Browse:
             self.selectedObjectId = community
             self.performSegue(BrowseCommunityViewController.Segue.showVolunteerDetailsViewController)
+        case .Post:
+            let controller = Storyboards.NewItems.instantiateAddPostViewController()
+            controller.communityId = community
+            navigationController?.pushViewController(controller, animated: true)
         case .Invite:
             break
         case .Edit:
