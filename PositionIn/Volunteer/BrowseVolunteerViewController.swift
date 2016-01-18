@@ -91,8 +91,9 @@ class BrowseVolunteerViewController: BrowseCommunityViewController {
             }
             break
         case .Post:
-            self.selectedObjectId = community
-            self.performSegue(BrowseVolunteerViewController.Segue.showVolunteerDetailsViewController)
+            let controller = Storyboards.NewItems.instantiateAddPostViewController()
+            controller.communityId = community
+            navigationController?.pushViewController(controller, animated: true)
         case .Browse, .None:
             switch self.browseModeSegmentedControl.selectedSegmentIndex {
             case 0:
