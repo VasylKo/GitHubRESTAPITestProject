@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SettingsViewController" customModule="PositionIn" customModuleProvider="target">
@@ -35,7 +35,7 @@
                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IfA-sb-Ayr">
+                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IfA-sb-Ayr">
                                     <rect key="frame" x="20" y="122" width="560" height="48"/>
                                     <color key="backgroundColor" red="0.92941176469999998" green="0.1058823529" blue="0.18039215689999999" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
@@ -61,7 +61,7 @@
                                         <constraint firstAttribute="width" constant="114" id="gj6-Kg-SBu"/>
                                     </constraints>
                                 </imageView>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="brc-L0-rwf">
+                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="brc-L0-rwf">
                                     <rect key="frame" x="0.0" y="200" width="600" height="48"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <constraints>
@@ -74,36 +74,6 @@
                                     </state>
                                     <connections>
                                         <action selector="changePasswordPressed:" destination="-1" eventType="touchUpInside" id="Q9Y-TS-tOs"/>
-                                    </connections>
-                                </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S0w-2X-ySo">
-                                    <rect key="frame" x="0.0" y="248" width="600" height="48"/>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="48" id="HP2-F4-W3E"/>
-                                    </constraints>
-                                    <inset key="contentEdgeInsets" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                    <state key="normal" title="Contact Support">
-                                        <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                    </state>
-                                    <connections>
-                                        <action selector="contactSupportPressed:" destination="-1" eventType="touchUpInside" id="zaH-LI-ILx"/>
-                                    </connections>
-                                </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sZh-7v-iPi">
-                                    <rect key="frame" x="0.0" y="296" width="600" height="48"/>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="48" id="EGz-KV-uUs"/>
-                                    </constraints>
-                                    <inset key="contentEdgeInsets" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                    <state key="normal" title="Terms &amp; Conditions">
-                                        <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                    </state>
-                                    <connections>
-                                        <action selector="termsConditionsButtonPressed:" destination="-1" eventType="touchUpInside" id="dob-3N-Fi5"/>
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9lT-hg-Zdr">
@@ -120,6 +90,36 @@
                                         <action selector="signOutPressed:" destination="-1" eventType="touchUpInside" id="0tS-h0-Au8"/>
                                     </connections>
                                 </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S0w-2X-ySo">
+                                    <rect key="frame" x="0.0" y="200" width="600" height="48"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="48" id="HP2-F4-W3E"/>
+                                    </constraints>
+                                    <inset key="contentEdgeInsets" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                    <state key="normal" title="Contact Support">
+                                        <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="contactSupportPressed:" destination="-1" eventType="touchUpInside" id="zaH-LI-ILx"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sZh-7v-iPi">
+                                    <rect key="frame" x="0.0" y="248" width="600" height="48"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="48" id="EGz-KV-uUs"/>
+                                    </constraints>
+                                    <inset key="contentEdgeInsets" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                    <state key="normal" title="Terms &amp; Conditions">
+                                        <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="termsConditionsButtonPressed:" destination="-1" eventType="touchUpInside" id="dob-3N-Fi5"/>
+                                    </connections>
+                                </button>
                             </subviews>
                             <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803915" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
@@ -134,7 +134,7 @@
                                 <constraint firstItem="sZh-7v-iPi" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="TY7-Tt-SMb"/>
                                 <constraint firstAttribute="trailing" secondItem="sZh-7v-iPi" secondAttribute="trailing" id="Yqh-wt-h3J"/>
                                 <constraint firstAttribute="trailing" secondItem="S0w-2X-ySo" secondAttribute="trailing" id="aPA-YY-Dr5"/>
-                                <constraint firstItem="S0w-2X-ySo" firstAttribute="top" secondItem="brc-L0-rwf" secondAttribute="bottom" id="cCu-hf-QD2"/>
+                                <constraint firstItem="S0w-2X-ySo" firstAttribute="top" secondItem="brc-L0-rwf" secondAttribute="bottom" constant="-48" id="cCu-hf-QD2"/>
                                 <constraint firstAttribute="trailing" secondItem="T1p-jq-JD3" secondAttribute="trailing" constant="8" id="eyu-AW-HwJ"/>
                                 <constraint firstItem="T1p-jq-JD3" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="iFT-AT-LQt"/>
                                 <constraint firstAttribute="centerX" secondItem="5Ot-Y4-rBN" secondAttribute="centerX" id="jhV-MT-Fgj"/>
@@ -143,7 +143,7 @@
                                 <constraint firstAttribute="trailing" secondItem="brc-L0-rwf" secondAttribute="trailing" id="rhI-34-VSo"/>
                                 <constraint firstAttribute="centerX" secondItem="IfA-sb-Ayr" secondAttribute="centerX" id="ti9-DH-ZmF"/>
                                 <constraint firstItem="T1p-jq-JD3" firstAttribute="top" secondItem="9lT-hg-Zdr" secondAttribute="bottom" constant="20" id="uhW-7l-Ajd"/>
-                                <constraint firstItem="9lT-hg-Zdr" firstAttribute="top" secondItem="sZh-7v-iPi" secondAttribute="bottom" constant="40" id="vnx-q6-BIJ"/>
+                                <constraint firstItem="9lT-hg-Zdr" firstAttribute="top" secondItem="sZh-7v-iPi" secondAttribute="bottom" constant="88" id="vnx-q6-BIJ"/>
                                 <constraint firstItem="S0w-2X-ySo" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="zrF-UO-rfS"/>
                             </constraints>
                         </view>

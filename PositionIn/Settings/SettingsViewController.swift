@@ -62,7 +62,7 @@ class SettingsViewController: BesideMenuViewController, MFMailComposeViewControl
     }
     
     @IBAction func contactSupportPressed(sender: AnyObject) {
-        self.showMailControllerWithRecepientEmail("support@positionin.com")
+        self.showMailControllerWithRecepientEmail("rcapp@redcross.or.ke")
     }
     
     @IBAction func signOutPressed(sender: AnyObject) {
