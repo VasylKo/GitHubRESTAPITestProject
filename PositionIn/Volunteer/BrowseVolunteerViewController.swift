@@ -21,7 +21,7 @@ class BrowseVolunteerViewController: BrowseCommunityViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let volunteerDetailsViewController = segue.destinationViewController  as? VolunteerDetailsViewController {
             volunteerDetailsViewController.objectId = self.selectedObjectId
-            volunteerDetailsViewController.joinAction = true
+            volunteerDetailsViewController.joinAction = (self.browseModeSegmentedControl.selectedSegmentIndex == 1) 
             volunteerDetailsViewController.type = VolunteerDetailsViewController.ControllerType.Volunteer
         }
     }
@@ -91,11 +91,8 @@ class BrowseVolunteerViewController: BrowseCommunityViewController {
             }
             break
         case .Browse, .Post:
-            let controller = Storyboards.Main.instantiateCommunityViewController()
-            controller.objectId = community
-            controller.controllerType = .Volunteer
-            
-            navigationController?.pushViewController(controller, animated: true)
+            self.selectedObjectId = community
+            self.performSegue(BrowseCommunityViewController.Segue.showVolunteerDetailsViewController)
         case .Invite:
             break
         case .Edit:
@@ -103,6 +100,11 @@ class BrowseVolunteerViewController: BrowseCommunityViewController {
             controller.existingCommunityId = community
             navigationController?.pushViewController(controller, animated: true)
             self.subscribeForContentUpdates(controller)
+        case .Leave:
+            api().leaveVolunteer(community).onSuccess(callback: { (Void) -> Void in
+                Log.error?.message("Done!!!!!")
+                self.reloadData()
+            })
         case .None:
             self.selectedObjectId = community
             self.performSegue(BrowseVolunteerViewController.Segue.showVolunteerDetailsViewController)
