@@ -282,7 +282,8 @@ struct APIService {
     }
     
     func leaveCommunity(communityId: CRUDObjectId) -> Future<Void, NSError> {
-        let endpoint = Community.membersEndpoint(communityId)
+        //TODO: hardcode, change on server endpoint update
+        let endpoint = "/v1.0/community/\(communityId)/members"
         return updateCommand(endpoint, method:.DELETE)
     }
     
@@ -423,13 +424,14 @@ struct APIService {
         return getObject(endpoint)
     }
     
-    func joinVolunteer(communityId: CRUDObjectId) -> Future<Void, NSError> {
-        let endpoint = Volunteer.membersEndpoint(communityId)
+    func joinVolunteer(volunteerId: CRUDObjectId) -> Future<Void, NSError> {
+        let endpoint = Volunteer.membersEndpoint(volunteerId)
         return updateCommand(endpoint)
     }
     
-    func leaveVolunteer(communityId: CRUDObjectId) -> Future<Void, NSError> {
-        let endpoint = Volunteer.membersEndpoint(communityId)
+    func leaveVolunteer(volunteerId: CRUDObjectId) -> Future<Void, NSError> {
+        //TODO: hardcode, change on server endpoint update
+        let endpoint = "/v1.0/volunteer/\(volunteerId)/members"
         return updateCommand(endpoint, method:.DELETE)
     }
     
@@ -553,7 +555,7 @@ struct APIService {
         return session().flatMap {
             (token: AuthResponse.Token) -> Future<Void, NSError> in
             let request = self.updateRequest(token, endpoint: endpoint, method: method, params: nil)
-            let (_, future): CRUDResultType = self.dataProvider.jsonRequest(request, map: self.commandMapping(), validation: self.statusCodeValidation(statusCode: [201]))
+            let (_, future): CRUDResultType = self.dataProvider.jsonRequest(request, map: self.commandMapping(), validation: self.statusCodeValidation(statusCode: [201, 204]))
             return self.handleFailure(future)
         }
     }
@@ -634,6 +636,7 @@ struct APIService {
     
     func statusCodeValidation<S: SequenceType where S.Generator.Element == Int>(statusCode acceptableStatusCode: S) -> Alamofire.Request.Validation {
         return { _, response in
+            print(acceptableStatusCode, acceptableStatusCode.dynamicType)
             if acceptableStatusCode.contains(response.statusCode) {
                 return .Success
             } else {
