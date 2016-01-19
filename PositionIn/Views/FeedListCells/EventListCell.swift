@@ -24,24 +24,24 @@ final class EventListCell: TableViewCell {
         
         switch m!.itemType {
         case .Emergency:
-            productImage.setImageFromURL(m!.imageURL, placeholder: UIImage(named: "placeholderEvent"))
+            productImage.setImageFromURL(m!.imageURL, placeholder: UIImage(named: "PromotionDetailsPlaceholder"))
         case .GiveBlood:
-            productImage.setImageFromURL(m!.imageURL, placeholder: UIImage(named: "placeholderEvent"))
+            productImage.setImageFromURL(m!.imageURL, placeholder: UIImage(named: "give_blood_img_default"))
         case .Training:
-            productImage.setImageFromURL(m!.imageURL, placeholder: UIImage(named: "placeholderEvent"))
-        case .Volunteer:
-            productImage.setImageFromURL(m!.imageURL, placeholder: UIImage(named: "placeholderEvent"))
+            productImage.setImageFromURL(m!.imageURL, placeholder: UIImage(named: "trainings_placeholder"))
         case .Market:
-            productImage.setImageFromURL(m!.imageURL, placeholder: UIImage(named: "placeholderEvent"))
+            productImage.setImageFromURL(m!.imageURL, placeholder: UIImage(named: "market_img_default"))
         case .BomaHotels:
             productImage.setImageFromURL(m!.imageURL, placeholder: UIImage(named: "bomaHotelPlaceholder"))
         case .Project:
-            productImage.setImageFromURL(m!.imageURL, placeholder: UIImage(named: "placeholderEvent"))
+            productImage.setImageFromURL(m!.imageURL, placeholder: UIImage(named: "hardware_img_default"))
         case .Event:
-            productImage.setImageFromURL(m!.imageURL, placeholder: UIImage(named: "placeholderEvent"))
+            productImage.setImageFromURL(m!.imageURL, placeholder: UIImage(named: "eventDetailsPlaceholder"))
         case .News:
             productImage.setImageFromURL(m!.imageURL, placeholder: UIImage(named: "placeholderEvent"))
         case .Unknown:
+            break
+        default:
             break
         }
         
