@@ -12,7 +12,7 @@ final class AppConfiguration {
     init() {
         switch AppConfiguration.environment {
         case .Prod:
-            baseURL = NSURL(string: "https://app.positionin.com/api/")!
+            baseURL = NSURL(string: "https://krcs.rc-app.com/api/")!
 //            amazonURL = NSURL(string: "https://pos-prod.s3.amazonaws.com/")!
             //Workaround bug in S3
             amazonURL = NSURL(string: "https://app.positionin.com")!
