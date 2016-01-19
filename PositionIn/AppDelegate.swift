@@ -63,10 +63,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 self?.currentUserDidChange(newProfile)
         }
     }
-
-    deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(userDidChangeObserver)
-    }
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         setupMaps()

@@ -8,18 +8,12 @@
 
 import Foundation
 
-
 class NetworkActivityIndicatorManager: NSObject {
-    private var activityCount: Int
+    private var activityCount: Int = 0
     private var activityIndicatorVisibilityTimer: NSTimer?
     
     var isNetworkActivityIndicatorVisible: Bool {
         return activityCount > 0
-    }
-    
-    override init() {
-        activityCount = 0
-        super.init()
     }
     
     func increment() {

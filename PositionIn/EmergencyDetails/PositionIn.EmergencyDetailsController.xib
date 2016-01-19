@@ -13,6 +13,7 @@
                 <outlet property="headerLabel" destination="ZQP-jm-EdI" id="xSG-Cv-GWA"/>
                 <outlet property="infoLabel" destination="PbB-SZ-dD3" id="7bU-Lr-p66"/>
                 <outlet property="nameLabel" destination="0p7-iH-nBi" id="NGc-XM-rEh"/>
+                <outlet property="pinDistanceImageView" destination="RJr-VN-Z99" id="oh8-ZS-N4P"/>
                 <outlet property="productImageView" destination="uaV-NL-9EA" id="ni3-CF-Ctd"/>
                 <outlet property="view" destination="loQ-gs-aYc" id="jib-D3-eez"/>
             </connections>

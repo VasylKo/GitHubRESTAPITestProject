@@ -103,7 +103,7 @@ class BrowseVolunteerViewController: BrowseCommunityViewController {
                 navigationController?.pushViewController(controller, animated: true)
             case 1:
                 self.selectedObjectId = community
-                self.performSegue(BrowseVolunteerViewController.Segue.showVolunteerDetailsViewController)
+                self.performSegue(BrowseCommunityViewController.Segue.showVolunteerDetailsViewController)
             default:
                 break
             }

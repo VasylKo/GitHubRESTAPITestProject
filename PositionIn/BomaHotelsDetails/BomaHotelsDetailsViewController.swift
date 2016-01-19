@@ -71,13 +71,19 @@ final class BomaHotelsDetailsViewController: UIViewController {
         
         productImageView.setImageFromURL(imageURL, placeholder: image)
         if let coordinates = bomaHotel.location?.coordinates {
+            self.productPinDistanceImageView.hidden = false
             locationRequestToken.invalidate()
             locationRequestToken = InvalidationToken()
             locationController().distanceFromCoordinate(coordinates).onSuccess(locationRequestToken.validContext) {
                 [weak self] distance in
                 let formatter = NSLengthFormatter()
                 self?.infoLabel.text = formatter.stringFromMeters(distance)
-            }
+                }.onFailure(callback: { (error:NSError) -> Void in
+                    self.productPinDistanceImageView.hidden = true
+                    self.infoLabel.text = "" })
+        } else {
+            self.productPinDistanceImageView.hidden = true
+            self.infoLabel.text = ""
         }
     }
     
@@ -116,6 +122,7 @@ final class BomaHotelsDetailsViewController: UIViewController {
     @IBOutlet private weak var headerLabel: UILabel!
     @IBOutlet private weak var infoLabel: UILabel!
     
+    @IBOutlet weak var productPinDistanceImageView: UIImageView!
     @IBOutlet private weak var nameLabel: UILabel!
     @IBOutlet private weak var priceLabel: UILabel!
     @IBOutlet private weak var detailsLabel: UILabel!

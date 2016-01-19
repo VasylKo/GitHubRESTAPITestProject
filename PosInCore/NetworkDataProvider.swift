@@ -12,7 +12,7 @@ import ObjectMapper
 import BrightFutures
 import MobileCoreServices
 
-public class NetworkDataProvider: NSObject {
+public class NetworkDataProvider {
     
     /**
     Create request for mappable object
