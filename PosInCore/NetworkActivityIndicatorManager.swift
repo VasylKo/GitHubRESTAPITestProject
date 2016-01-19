@@ -8,7 +8,7 @@
 
 import Foundation
 
-class NetworkActivityIndicatorManager {
+class NetworkActivityIndicatorManager: NSObject {
     private var activityCount: Int = 0
     private var activityIndicatorVisibilityTimer: NSTimer?
     
