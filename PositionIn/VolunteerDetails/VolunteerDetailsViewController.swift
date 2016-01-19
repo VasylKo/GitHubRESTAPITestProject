@@ -236,7 +236,7 @@ extension VolunteerDetailsViewController: VolunteerDetailsActionConsumer {
             "Kenya Red Cross will review your community request and respond within a few days", preferredStyle: UIAlertControllerStyle.Alert)
         alertController.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: nil))
         alertController.addAction(UIAlertAction(title: "Ok", style: .Default, handler: { action in
-            switch action.style{
+            switch action.style {
             case .Default:
                 if self.objectId != nil {
                     api().joinCommunity(self.objectId!).onSuccess { [weak self] _ in
@@ -253,6 +253,8 @@ extension VolunteerDetailsViewController: VolunteerDetailsActionConsumer {
             }
             self.navigationController?.popViewControllerAnimated(true)
         }))
+        self.presentViewController(alertController, animated: true, completion: nil)
+        return
     }
 }
 

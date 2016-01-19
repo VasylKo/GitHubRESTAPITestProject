@@ -184,9 +184,19 @@ class BrowseCommunityViewController: BesideMenuViewController, BrowseCommunityAc
                 }
             }
             break
-        case .Browse:
-            self.selectedObjectId = community
-            self.performSegue(BrowseCommunityViewController.Segue.showVolunteerDetailsViewController)
+        case .Browse, .None:
+            switch self.browseModeSegmentedControl.selectedSegmentIndex {
+            case 0:
+                let controller = Storyboards.Main.instantiateCommunityViewController()
+                controller.objectId = community
+                controller.controllerType = .Community
+                navigationController?.pushViewController(controller, animated: true)
+            case 1:
+                self.selectedObjectId = community
+                self.performSegue(BrowseCommunityViewController.Segue.showVolunteerDetailsViewController)
+            default:
+                break
+            }
         case .Post:
             let controller = Storyboards.NewItems.instantiateAddPostViewController()
             controller.communityId = community
@@ -202,10 +212,6 @@ class BrowseCommunityViewController: BesideMenuViewController, BrowseCommunityAc
             api().leaveCommunity(community).onSuccess(callback: { (Void) -> Void in
                 self.reloadData()
             })
-        case .None:
-            self.selectedObjectId = community
-            self.performSegue(BrowseCommunityViewController.Segue.showVolunteerDetailsViewController)
-            break
         }
     }
 }
