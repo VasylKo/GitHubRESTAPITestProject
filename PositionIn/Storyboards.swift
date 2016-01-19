@@ -4,7 +4,6 @@
 //
 
 import UIKit
-import PositionIn
 
 //MARK: - Storyboards
 
@@ -690,18 +689,18 @@ extension BrowseCommunityViewController {
 extension BrowseVolunteerViewController { 
 
     enum Segue: String, CustomStringConvertible, SegueProtocol {
-        case ShowVolunteerDetailsViewController = "showVolunteerDetailsViewController"
+        case showVolunteerDetailsViewController = "showVolunteerDetailsViewController"
 
         var kind: SegueKind? {
             switch (self) {
-            case ShowVolunteerDetailsViewController:
+            case showVolunteerDetailsViewController:
                 return SegueKind(rawValue: "show")
             }
         }
 
         var destination: UIViewController.Type? {
             switch (self) {
-            case ShowVolunteerDetailsViewController:
+            case showVolunteerDetailsViewController:
                 return VolunteerDetailsViewController.self
             }
         }
@@ -727,11 +726,44 @@ extension BrowseMapViewController: IdentifiableProtocol {
 
 
 //MARK: - TrainingDetailsViewController
+extension UIStoryboardSegue {
+    func selection() -> TrainingDetailsViewController.Segue? {
+        if let identifier = self.identifier {
+            return TrainingDetailsViewController.Segue(rawValue: identifier)
+        }
+        return nil
+    }
+}
+
 extension TrainingDetailsViewController: IdentifiableProtocol { 
     var identifier: String? { return "TrainingDetailsViewControllerId" }
     static var identifier: String? { return "TrainingDetailsViewControllerId" }
 }
 
+extension TrainingDetailsViewController { 
+
+    enum Segue: String, CustomStringConvertible, SegueProtocol {
+        case showUserProfile = "showUserProfile"
+
+        var kind: SegueKind? {
+            switch (self) {
+            case showUserProfile:
+                return SegueKind(rawValue: "show")
+            }
+        }
+
+        var destination: UIViewController.Type? {
+            switch (self) {
+            case showUserProfile:
+                return UserProfileViewController.self
+            }
+        }
+
+        var identifier: String? { return self.description } 
+        var description: String { return self.rawValue }
+    }
+
+}
 
 //MARK: - BrowseGridViewController
 extension BrowseGridViewController: IdentifiableProtocol { 
@@ -1960,12 +1992,15 @@ extension DonateViewController {
     enum Segue: String, CustomStringConvertible, SegueProtocol {
         case ShowBraintree = "ShowBraintree"
         case PaymentCompleted = "PaymentCompleted"
+        case ShowMpesa = "ShowMpesa"
 
         var kind: SegueKind? {
             switch (self) {
             case ShowBraintree:
                 return SegueKind(rawValue: "show")
             case PaymentCompleted:
+                return SegueKind(rawValue: "show")
+            case ShowMpesa:
                 return SegueKind(rawValue: "show")
             }
         }
@@ -1976,6 +2011,8 @@ extension DonateViewController {
                 return BraintreePaymentViewController.self
             case PaymentCompleted:
                 return UINavigationController.self
+            case ShowMpesa:
+                return MpesaViewController.self
             }
         }
 
@@ -1998,6 +2035,8 @@ extension PaymentViewController: IdentifiableProtocol {
     static var identifier: String? { return "PaymentViewControllerId" }
 }
 
+
+//MARK: - MpesaViewController
 
 //MARK: - BraintreePaymentViewController
 extension BraintreePaymentViewController: IdentifiableProtocol { 

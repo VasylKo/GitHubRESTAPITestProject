@@ -13,6 +13,7 @@
                 <outlet property="headerLabel" destination="ati-oP-ynl" id="rDW-Jj-Uwt"/>
                 <outlet property="infoLabel" destination="QaN-CP-TKD" id="Hrj-OP-1Kk"/>
                 <outlet property="nameLabel" destination="Yjp-Xw-pBL" id="sWo-fu-La9"/>
+                <outlet property="pinDistanceImageView" destination="mMa-Jq-qtK" id="DQj-TN-HXL"/>
                 <outlet property="priceLabel" destination="8Qb-Kh-vAf" id="F1X-WB-4LX"/>
                 <outlet property="productImageView" destination="djR-mn-LSG" id="zPL-7a-zgn"/>
                 <outlet property="view" destination="UuP-rw-UeB" id="gx2-S8-xVa"/>

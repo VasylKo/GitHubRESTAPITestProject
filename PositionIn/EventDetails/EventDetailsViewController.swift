@@ -51,7 +51,7 @@ final class EventDetailsViewController: UIViewController {
             imageURL = nil
         }
         
-        let image = UIImage(named: "hardware_img_default")
+        let image = UIImage(named: "eventDetailsPlaceholder")
         
         let startDate = dateFormatter.stringFromDate(event.startDate ?? NSDate())
         let endDate = dateFormatter.stringFromDate(event.endDate ?? NSDate())

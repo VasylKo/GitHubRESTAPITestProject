@@ -74,13 +74,19 @@ final class ProductDetailsViewController: UIViewController {
 
         productImageView.setImageFromURL(imageURL, placeholder: image)
         if let coordinates = product.location?.coordinates {
+            self.pinDistanceImageView.hidden = false
             locationRequestToken.invalidate()
             locationRequestToken = InvalidationToken()
             locationController().distanceFromCoordinate(coordinates).onSuccess(locationRequestToken.validContext) {
                 [weak self] distance in
                 let formatter = NSLengthFormatter()
                 self?.infoLabel.text = formatter.stringFromMeters(distance)
-            }
+                }.onFailure(callback: { (error:NSError) -> Void in
+                    self.pinDistanceImageView.hidden = true
+                    self.infoLabel.text = "" })
+        } else {
+            self.pinDistanceImageView.hidden = true
+            self.infoLabel.text = ""
         }
     }
     
@@ -118,6 +124,7 @@ final class ProductDetailsViewController: UIViewController {
     @IBOutlet private weak var headerLabel: UILabel!
     @IBOutlet private weak var infoLabel: UILabel!
     
+    @IBOutlet weak var pinDistanceImageView: UIImageView!
     @IBOutlet private weak var nameLabel: UILabel!
     @IBOutlet private weak var priceLabel: UILabel!
     @IBOutlet private weak var detailsLabel: UILabel!
