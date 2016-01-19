@@ -102,7 +102,6 @@ class BrowseVolunteerViewController: BrowseCommunityViewController {
             self.subscribeForContentUpdates(controller)
         case .Leave:
             api().leaveVolunteer(community).onSuccess(callback: { (Void) -> Void in
-                Log.error?.message("Done!!!!!")
                 self.reloadData()
             })
         case .None:

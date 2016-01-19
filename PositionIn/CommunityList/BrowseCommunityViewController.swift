@@ -200,7 +200,6 @@ class BrowseCommunityViewController: BesideMenuViewController, BrowseCommunityAc
             self.subscribeForContentUpdates(controller)
         case .Leave:
             api().leaveCommunity(community).onSuccess(callback: { (Void) -> Void in
-                Log.error?.message("Done!!!!!")
                 self.reloadData()
             })
         case .None:
