@@ -636,7 +636,6 @@ struct APIService {
     
     func statusCodeValidation<S: SequenceType where S.Generator.Element == Int>(statusCode acceptableStatusCode: S) -> Alamofire.Request.Validation {
         return { _, response in
-            print(acceptableStatusCode, acceptableStatusCode.dynamicType)
             if acceptableStatusCode.contains(response.statusCode) {
                 return .Success
             } else {
