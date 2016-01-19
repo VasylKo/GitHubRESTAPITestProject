@@ -11,6 +11,10 @@ import PosInCore
 import CleanroomLogger
 import BrightFutures
 
+protocol TrainingDetailsActionConsumer {
+    func executeAction(action: TrainingDetailsViewController.TrainingDetailsAction)
+}
+
 final class TrainingDetailsViewController: UIViewController {
     
     override func viewDidLoad() {
@@ -121,9 +125,10 @@ final class TrainingDetailsViewController: UIViewController {
     @IBOutlet private weak var detailsLabel: UILabel!
 }
 
-extension TrainingDetailsViewController {
+extension TrainingDetailsViewController : TrainingDetailsActionConsumer {
+    
     enum TrainingDetailsAction: CustomStringConvertible {
-        case Buy, ProductInventory, SellerProfile, SendMessage, Navigate
+        case Buy, ProductInventory, SendMessage, SellerProfile, Navigate
         
         var description: String {
             switch self {
@@ -131,21 +136,36 @@ extension TrainingDetailsViewController {
                 return "Buy"
             case .ProductInventory:
                 return "Product Inventory"
-            case .SellerProfile:
-                return "Seller profile"
             case .SendMessage:
                 return "Send message"
+            case .SellerProfile:
+                return "Seller profile"
             case .Navigate:
                 return "Navigate"
             }
         }
     }
     
-    
     struct TrainingActionItem {
         let title: String
         let image: String
         let action: TrainingDetailsAction
+    }
+    
+    func executeAction(action: TrainingDetailsAction) {
+        let segue: TrainingDetailsViewController.Segue
+        switch action {
+        case .SendMessage:
+            if let userId = author?.objectId {
+                showChatViewController(userId)
+            }
+            return
+        case .SellerProfile:
+            segue = .showUserProfile
+        default:
+            return
+        }
+        performSegue(segue)
     }
 }
 
@@ -186,6 +206,14 @@ extension TrainingDetailsViewController {
         
         override func nibCellsId() -> [String] {
             return [ActionCell.reuseId()]
+        }
+        
+        func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+            tableView.deselectRowAtIndexPath(indexPath, animated: true)
+            let item = items[indexPath.section][indexPath.row]
+            if let actionConsumer = parentViewController as? TrainingDetailsActionConsumer {
+                actionConsumer.executeAction(item.action)
+            }
         }
     }
 }
