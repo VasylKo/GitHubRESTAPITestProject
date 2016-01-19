@@ -64,8 +64,8 @@ class GiveBloodDetailsViewController: UIViewController {
         } else {
             imageURL = nil
         }
-        
-        let image = UIImage(named: "hardware_img_default")
+
+        let image = UIImage(named: "give_blood_img_default")
         
         productImageView.setImageFromURL(imageURL, placeholder: image)
         if let coordinates = product.location?.coordinates {
