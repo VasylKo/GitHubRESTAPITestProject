@@ -425,7 +425,7 @@ struct APIService {
     }
     
     func joinVolunteer(volunteerId: CRUDObjectId) -> Future<Void, NSError> {
-        let endpoint = Volunteer.membersEndpoint(volunteerId)
+        let endpoint = "/v1.0/volunteer/\(volunteerId)/members"
         return updateCommand(endpoint)
     }
     
