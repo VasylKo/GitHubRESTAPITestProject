@@ -137,6 +137,7 @@ class VolunteerDetailsViewController: UIViewController {
     @IBOutlet private weak var headerLabel: UILabel!
     @IBOutlet private weak var infoLabel: UILabel!
     
+    @IBOutlet weak var joinPublicCommunityActivityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var pinDistanceImageView: UIImageView!
     @IBOutlet private weak var nameLabel: UILabel!
     @IBOutlet private weak var priceLabel: UILabel!
@@ -225,15 +226,18 @@ extension VolunteerDetailsViewController: VolunteerDetailsActionConsumer {
                                     self.navigationController?.popViewControllerAnimated(true)
                                 }
                                 else {
-                                    api().joinCommunity(objId).onSuccess { [weak self] _ in
-                                        //on success
+                                    self.joinPublicCommunityActivityIndicator.startAnimating()
+                                    api().joinCommunity(objId).onSuccess() { [weak self] _ in
+                                        if let strongSelf = self {
+                                            strongSelf.joinPublicCommunityActivityIndicator.stopAnimating()
+                                            let controller = Storyboards.Main.instantiateCommunityViewController()
+                                            controller.objectId = objId
+                                            controller.controllerType = .Community
+                                            let viewControllers = [(strongSelf.navigationController?.viewControllers.first)!, controller]
+                                            strongSelf.navigationController?.setViewControllers(viewControllers, animated: true)
+                                        }}.onFailure { [weak self] result in
+                                            self?.joinPublicCommunityActivityIndicator.stopAnimating()
                                     }
-                                    let controller = Storyboards.Main.instantiateCommunityViewController()
-                                    controller.objectId = objId
-                                    controller.controllerType = .Community
-                                    navigationController?.pushViewController(controller, animated:true)
-                                    let previousIndex = (self.navigationController?.viewControllers.count)! - 1
-                                    self.navigationController?.viewControllers.removeAtIndex(previousIndex)
                                 }
                             }
                             else {
