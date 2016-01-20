@@ -228,14 +228,13 @@ extension VolunteerDetailsViewController: VolunteerDetailsActionConsumer {
                                 else {
                                     self.joinPublicCommunityActivityIndicator.startAnimating()
                                     api().joinCommunity(objId).onSuccess() { [weak self] _ in
-                                        if let strongSelf = self {
-                                            strongSelf.joinPublicCommunityActivityIndicator.stopAnimating()
-                                            let controller = Storyboards.Main.instantiateCommunityViewController()
-                                            controller.objectId = objId
-                                            controller.controllerType = .Community
-                                            let viewControllers = [(strongSelf.navigationController?.viewControllers.first)!, controller]
-                                            strongSelf.navigationController?.setViewControllers(viewControllers, animated: true)
-                                        }}.onFailure { [weak self] result in
+                                        self?.joinPublicCommunityActivityIndicator.stopAnimating()
+                                        let controller = Storyboards.Main.instantiateCommunityViewController()
+                                        controller.objectId = objId
+                                        controller.controllerType = .Community
+                                        let viewControllers = [(self?.navigationController?.viewControllers.first)!, controller]
+                                        self?.navigationController?.setViewControllers(viewControllers, animated: true)
+                                        }.onFailure { [weak self] result in
                                             self?.joinPublicCommunityActivityIndicator.stopAnimating()
                                     }
                                 }
