@@ -16,7 +16,7 @@ protocol BrowseActionProducer {
 }
 
 protocol BrowseActionConsumer: class {
-    func browseController(controller: BrowseActionProducer, didSelectItem objectId: CRUDObjectId, type itemType: FeedItem.ItemType, data: Any?)
+    func browseController(controller: BrowseActionProducer, didSelectItem object: Any, type itemType: FeedItem.ItemType, data: Any?)
     func browseControllerDidChangeContent(controller: BrowseActionProducer)
 }
 
@@ -173,63 +173,63 @@ protocol BrowseActionConsumer: class {
     
     //MARK: - BrowseActionConsumer: Browse actions -
     
-    func browseController(controller: BrowseActionProducer, didSelectItem objectId: CRUDObjectId, type itemType: FeedItem.ItemType, data: Any?) {
+    func browseController(controller: BrowseActionProducer, didSelectItem object: Any, type itemType: FeedItem.ItemType, data: Any?) {
         switch itemType {
         case .Project:
             trackGoogleAnalyticsEvent("Main", action: "Click", label: "Product")
             let controller =  Storyboards.Main.instantiateProductDetailsViewControllerId()
-            controller.objectId = objectId
+            controller.objectId = object as? CRUDObjectId
             controller.author = data as? ObjectInfo
             navigationController?.pushViewController(controller, animated: true)
         case .Training:
             trackGoogleAnalyticsEvent("Main", action: "Click", label: "Training")
             let controller =  Storyboards.Main.instantiateTrainingDetailsViewControllerId()
-            controller.objectId = objectId
+            controller.objectId = object as? CRUDObjectId
             controller.author = data as? ObjectInfo
             navigationController?.pushViewController(controller, animated: true)
         case .Emergency:
             trackGoogleAnalyticsEvent("Main", action: "Click", label: "Emergency")
             let controller =  Storyboards.Main.instantiateEmergencyDetailsControllerId()
-            controller.objectId = objectId
+            controller.objectId = object as? CRUDObjectId
             controller.author = data as? ObjectInfo
             navigationController?.pushViewController(controller, animated: true)
         case .BomaHotels:
             trackGoogleAnalyticsEvent("Main", action: "Click", label: "BomaHotels")
             let controller =  Storyboards.Main.instantiateBomaHotelsDetailsViewControllerId()
-            controller.objectId = objectId
+            controller.objectId = object as? CRUDObjectId
             controller.author = data as? ObjectInfo
             navigationController?.pushViewController(controller, animated: true)
         case .GiveBlood:
             trackGoogleAnalyticsEvent("Main", action: "Click", label: "GiveBlood")
             let controller =  Storyboards.Main.instantiateGiveBloodDetailsViewControllerId()
-            controller.objectId = objectId
+            controller.objectId = object as? CRUDObjectId
             controller.author = data as? ObjectInfo
             navigationController?.pushViewController(controller, animated: true)
         case .Market:
             trackGoogleAnalyticsEvent("Main", action: "Click", label: "Post")
             let controller = Storyboards.Main.instantiateMarketDetailsViewControllerId()
-            controller.objectId = objectId
+            controller.objectId = object as? CRUDObjectId
             controller.author = data as? ObjectInfo
             navigationController?.pushViewController(controller, animated: true)
         case .Volunteer:
             trackGoogleAnalyticsEvent("Main", action: "Click", label: "Post")
             let controller = Storyboards.Main.instantiateVolunteerDetailsViewControllerId()
-            controller.objectId = objectId
+            controller.volunteer = object as? Community
             controller.author = data as? ObjectInfo
             navigationController?.pushViewController(controller, animated: true)
         case .News:
             trackGoogleAnalyticsEvent("Main", action: "Click", label: "Post")
             let controller = Storyboards.Main.instantiatePostViewController()
-            controller.objectId = objectId
+            controller.objectId = object as? CRUDObjectId
             navigationController?.pushViewController(controller, animated: true)
         case .Event:
             trackGoogleAnalyticsEvent("Main", action: "Click", label: "Post")
             let controller = Storyboards.Main.instantiateEventDetailsViewControllerId()
-            controller.objectId = objectId
+            controller.objectId = object as? CRUDObjectId
             controller.author = data as? ObjectInfo
             navigationController?.pushViewController(controller, animated: true)
         default:
-            Log.debug?.message("Did select \(itemType)<\(objectId)>")
+            Log.debug?.message("Did select \(itemType)<\(object)>")
         }
     }
     

@@ -365,7 +365,7 @@ extension UserProfileViewController: UserProfileActionConsumer {
 
 extension UserProfileViewController: BrowseActionConsumer {
     
-    func browseController(controller: BrowseActionProducer, didSelectItem objectId: CRUDObjectId, type itemType: FeedItem.ItemType, data: Any?) {
+    func browseController(controller: BrowseActionProducer, didSelectItem object: Any, type itemType: FeedItem.ItemType, data: Any?) {
         switch itemType {
             
         case .Project:

@@ -11,7 +11,7 @@ import BrightFutures
 import CleanroomLogger
 
 protocol BrowseCommunityActionConsumer: class {
-    func executeAction(action: BrowseCommunityViewController.Action, community: CRUDObjectId)
+    func executeAction(action: BrowseCommunityViewController.Action, community: Community)
 }
 
 protocol BrowseCommunityActionProvider {
@@ -140,10 +140,10 @@ class BrowseCommunityViewController: BesideMenuViewController, BrowseCommunityAc
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let volunteerDetailsViewController = segue.destinationViewController  as? VolunteerDetailsViewController {
-
-            volunteerDetailsViewController.objectId = self.selectedObjectId
+            volunteerDetailsViewController.volunteer = self.selectedObject
             volunteerDetailsViewController.joinAction = (self.browseModeSegmentedControl.selectedSegmentIndex == 1) 
             volunteerDetailsViewController.type = VolunteerDetailsViewController.ControllerType.Community
+            volunteerDetailsViewController.author = self.selectedObject?.owner
         }
     }
     
@@ -167,13 +167,14 @@ class BrowseCommunityViewController: BesideMenuViewController, BrowseCommunityAc
     
     /* BrowseCommunityActionConsumer */
     
-    var selectedObjectId : CRUDObjectId?
+    var selectedObject : Community?
     
-    func executeAction(action: BrowseCommunityViewController.Action, community: CRUDObjectId) {
+    func executeAction(action: BrowseCommunityViewController.Action, community: Community) {
+        let communityId = community.objectId
         switch action {
         case .Join:
             if api().isUserAuthorized() {
-                api().joinCommunity(community).onSuccess { [weak self] _ in
+                api().joinCommunity(communityId).onSuccess { [weak self] _ in
                     self?.reloadData()
                     ConversationManager.sharedInstance().refresh()
                 }
@@ -188,28 +189,28 @@ class BrowseCommunityViewController: BesideMenuViewController, BrowseCommunityAc
             switch self.browseModeSegmentedControl.selectedSegmentIndex {
             case 0:
                 let controller = Storyboards.Main.instantiateCommunityViewController()
-                controller.objectId = community
+                controller.objectId = communityId
                 controller.controllerType = .Community
                 navigationController?.pushViewController(controller, animated: true)
             case 1:
-                self.selectedObjectId = community
+                self.selectedObject = community
                 self.performSegue(BrowseCommunityViewController.Segue.showVolunteerDetailsViewController)
             default:
                 break
             }
         case .Post:
             let controller = Storyboards.NewItems.instantiateAddPostViewController()
-            controller.communityId = community
+            controller.communityId = communityId
             navigationController?.pushViewController(controller, animated: true)
         case .Invite:
             break
         case .Edit:
             let controller = Storyboards.NewItems.instantiateEditCommunityViewController()
-            controller.existingCommunityId = community
+            controller.existingCommunityId = communityId
             navigationController?.pushViewController(controller, animated: true)
             self.subscribeForContentUpdates(controller)
         case .Leave:
-            api().leaveCommunity(community).onSuccess(callback: { (Void) -> Void in
+            api().leaveCommunity(communityId).onSuccess(callback: { (Void) -> Void in
                 self.reloadData()
             })
         }
@@ -258,7 +259,7 @@ extension BrowseCommunityViewController {
         func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
             tableView.deselectRowAtIndexPath(indexPath, animated: false)
             if let model = self.tableView(tableView, modelForIndexPath: indexPath) as? BrowseCommunityTableViewCellModel {
-                actionConsumer?.executeAction(model.tapAction, community: model.objectId)
+                actionConsumer?.executeAction(model.tapAction, community: model.community)
             }
         }
     }

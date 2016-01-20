@@ -31,10 +31,13 @@ struct Community: CRUDObject {
     },
     */
     var membersCount: Int = 0
-    var postsCount: Int = 0
-    var eventsCount: Int = 0
+    var postsCount: Int   = 0
+    var eventsCount: Int  = 0
     
-    var role: Role = .Unknown
+    var role : UserInfo.Role = .Unknown
+    var owner : UserInfo {
+        return self.members?.items.filter(){$0.role == UserInfo.Role.Owner}.first ?? UserInfo()
+    }
     var members: CollectionResponse<UserInfo>?
     var location: Location?
     
@@ -44,35 +47,12 @@ struct Community: CRUDObject {
     
     var canView: Bool {
         switch role {
-        case .Unknown, .Invite :
+        case .Unknown, .Invitee:
             return false
         default:
             return true
         }
-    }
-
-    enum Role: Int, CustomDebugStringConvertible {
-        case Unknown
-        case Owner, Moderator, Member, Invite
-        
-        var debugDescription: String {
-            let displayString: String
-            switch self {
-            case Unknown:
-                displayString = "Unknown"
-            case Owner:
-                displayString = "Owner"
-            case Moderator:
-                displayString = "Moderator"
-            case Member:
-                displayString = "Member"
-            case Invite:
-                displayString = "Invitee"
-            }
-            return "<Role:\(displayString)>"
-        }
-    }
-    
+    }    
 
     init(objectId: CRUDObjectId = CRUDObjectInvalidId) {
         self.objectId = objectId
