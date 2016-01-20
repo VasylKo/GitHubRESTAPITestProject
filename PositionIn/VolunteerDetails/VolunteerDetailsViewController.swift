@@ -25,26 +25,26 @@ class VolunteerDetailsViewController: UIViewController {
         reloadData()
     }
     
-    //    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-    //        if let profileController = segue.destinationViewController  as? UserProfileViewController,
-    //            let userId = author?.objectId {
-    //                profileController.objectId = userId
-    //        }
-    //    }
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let profileController = segue.destinationViewController  as? UserProfileViewController,
+            let userId = author?.objectId {
+                profileController.objectId = userId
+        }
+    }
     
     private func reloadData() {
         self.infoLabel.text = NSLocalizedString("Calculating...", comment: "Distance calculation process")
-        switch objectId {
-        case .Some(let objectId):
+        switch self.volunteer {
+        case .Some(let volunteer):
             switch self.type {
             case .Volunteer:
-                api().getVolunteer(objectId).onSuccess {[weak self] volunteer in
+                api().getVolunteer(volunteer.objectId).onSuccess {[weak self] volunteer in
                     var volunteerVar = volunteer
                     volunteerVar.closed = nil
                     self?.didReceiveDetails(volunteerVar)
                 }
             case .Community:
-                api().getCommunity(objectId).onSuccess {[weak self] volunteer in
+                api().getCommunity(volunteer.objectId).onSuccess {[weak self] volunteer in
                     self?.didReceiveDetails(volunteer)
                 }
             default:
@@ -88,10 +88,9 @@ class VolunteerDetailsViewController: UIViewController {
     var type : ControllerType = .Unknown
     var joinAction : Bool = true
     
-    var objectId: CRUDObjectId?
+    var volunteer: Community?
     var author: ObjectInfo?
     
-    private var volunteer: Community?
     private var locationRequestToken = InvalidationToken()
     
     private lazy var dataSource: VolunteerDetailsDataSource = { [unowned self] in
@@ -103,7 +102,7 @@ class VolunteerDetailsViewController: UIViewController {
     
     private func productAcionItems() -> [[VolunteerActionItem]] {
         let firstSection = [
-            /*VolunteerActionItem(title: NSLocalizedString("Send Message", comment: "Volunteer"), image: "productSendMessage", action: .SendMessage),*/
+            VolunteerActionItem(title: NSLocalizedString("Send Message", comment: "Volunteer"), image: "productSendMessage", action: .SendMessage),
             VolunteerActionItem(title: NSLocalizedString("Organizer Profile", comment: "Volunteer"), image: "productSellerProfile", action: .SellerProfile),
             /*VolunteerActionItem(title: NSLocalizedString("More Information", comment: "Volunteer"), image: "productTerms&Info", action: .ProductInventory)*/]
         
@@ -111,17 +110,25 @@ class VolunteerDetailsViewController: UIViewController {
             //public or joined case
             return [firstSection]
         } else {
-            var joinActionItem : VolunteerActionItem
-            switch self.type {
-            case .Volunteer:
-                joinActionItem = VolunteerActionItem(title: NSLocalizedString("Volunteer", comment: "Volunteer"), image: "home_volunteer",action: .Join)
-            case .Community:
-                joinActionItem = VolunteerActionItem(title: NSLocalizedString("Join", comment: "Community"), image: "home_volunteer",action: .Join)
-            case .Unknown:
-                //TODO:change .Buy
-                joinActionItem = VolunteerActionItem(title: "", image: "", action: .Join)
+            var actionItem : VolunteerActionItem
+            let userId : CRUDObjectId = api().currentUserId() ?? CRUDObjectInvalidId
+            let userRole : UserInfo.Role = self.volunteer?.members?.items.filter() {$0.objectId == userId}.first?.role ?? .Unknown
+            switch userRole {
+            case .Applicant:
+                actionItem = VolunteerActionItem(title: "Pending", image: "", action: .Pending)
+            default:
+                switch self.type {
+                case .Volunteer:
+                    actionItem = VolunteerActionItem(title: NSLocalizedString("Volunteer", comment: "Volunteer"), image: "home_volunteer",action: .Join)
+                case .Community:
+                    actionItem = VolunteerActionItem(title: NSLocalizedString("Join", comment: "Community"), image: "home_volunteer",action: .Join)
+                case .Unknown:
+                    //TODO:change .Buy
+                    actionItem = VolunteerActionItem(title: "", image: "", action: .Join)
+                }
             }
-            return [[joinActionItem], firstSection]
+            
+            return [[actionItem], firstSection]
         }
     }
     
@@ -138,7 +145,7 @@ class VolunteerDetailsViewController: UIViewController {
 
 extension VolunteerDetailsViewController {
     enum VolunteerDetailsAction: CustomStringConvertible {
-        case Join, ProductInventory, SellerProfile, SendMessage
+        case Join, ProductInventory, SellerProfile, SendMessage, Pending
         
         var description: String {
             switch self {
@@ -150,6 +157,8 @@ extension VolunteerDetailsViewController {
                 return "Seller profile"
             case .SendMessage:
                 return "Send message"
+            case .Pending:
+                return "Pending"
             }
         }
     }
@@ -166,15 +175,21 @@ extension VolunteerDetailsViewController: VolunteerDetailsActionConsumer {
     func executeAction(action: VolunteerDetailsAction) {
         let segue: VolunteerDetailsViewController.Segue
         switch action {
+        case .Pending:
+            let alertController = UIAlertController(title: nil, message:
+                "Please, wait...", preferredStyle: UIAlertControllerStyle.Alert)
+            alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+            self.presentViewController(alertController, animated:true, completion: nil)
+            return
         case .SellerProfile:
             segue = .ShowOrganizerProfile
         case .SendMessage:
-            //            if let userId = author?.objectId {
-            //                showChatViewController(userId)
-            //            }
+            if let userId = author?.objectId {
+                showChatViewController(userId)
+            }
             return
         case .Join:
-            if api().isUserAuthorized() && self.objectId != nil {
+            if api().isUserAuthorized() && self.volunteer?.objectId != nil {
                 switch self.type {
                 case .Volunteer:
                     let alertController = UIAlertController(title: nil, message:
@@ -183,7 +198,7 @@ extension VolunteerDetailsViewController: VolunteerDetailsActionConsumer {
                     alertController.addAction(UIAlertAction(title: "Volunteer", style: .Default, handler: { action in
                         switch action.style{
                         case .Default:
-                    if let objId = self.objectId {
+                            if let objId = self.volunteer?.objectId {
                                 api().joinVolunteer(objId).onSuccess { [weak self] _ in
                                     //on success
                                 }
@@ -201,7 +216,7 @@ extension VolunteerDetailsViewController: VolunteerDetailsActionConsumer {
                     self.presentViewController(alertController, animated: true, completion: nil)
                     return
                 case .Community:
-                    if let objId = self.objectId {
+                    if let objId = self.volunteer?.objectId {
                         if let community = self.volunteer {
                             
                             if let closed = community.closed {
@@ -245,8 +260,8 @@ extension VolunteerDetailsViewController: VolunteerDetailsActionConsumer {
         alertController.addAction(UIAlertAction(title: "Ok", style: .Default, handler: { action in
             switch action.style {
             case .Default:
-                if self.objectId != nil {
-                    api().joinCommunity(self.objectId!).onSuccess { [weak self] _ in
+                if let objectId = self.volunteer?.objectId {
+                    api().joinCommunity(objectId).onSuccess { [weak self] _ in
                         //on success
                     }
                 } else {
