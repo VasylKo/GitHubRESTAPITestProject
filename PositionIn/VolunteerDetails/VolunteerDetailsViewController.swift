@@ -137,6 +137,7 @@ class VolunteerDetailsViewController: UIViewController {
     @IBOutlet private weak var headerLabel: UILabel!
     @IBOutlet private weak var infoLabel: UILabel!
     
+    @IBOutlet weak var joinPublicCommunityActivityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var pinDistanceImageView: UIImageView!
     @IBOutlet private weak var nameLabel: UILabel!
     @IBOutlet private weak var priceLabel: UILabel!
@@ -222,17 +223,26 @@ extension VolunteerDetailsViewController: VolunteerDetailsActionConsumer {
                             if let closed = community.closed {
                                 if closed {
                                     self.joinClosedCommunity(community)
+                                    self.navigationController?.popViewControllerAnimated(true)
                                 }
                                 else {
-                                    api().joinCommunity(objId).onSuccess { [weak self] _ in
-                                        //on success
+                                    self.joinPublicCommunityActivityIndicator.startAnimating()
+                                    api().joinCommunity(objId).onSuccess() { [weak self] _ in
+                                        self?.joinPublicCommunityActivityIndicator.stopAnimating()
+                                        let controller = Storyboards.Main.instantiateCommunityViewController()
+                                        controller.objectId = objId
+                                        controller.controllerType = .Community
+                                        let viewControllers = [(self?.navigationController?.viewControllers.first)!, controller]
+                                        self?.navigationController?.setViewControllers(viewControllers, animated: true)
+                                        }.onFailure { [weak self] result in
+                                            self?.joinPublicCommunityActivityIndicator.stopAnimating()
                                     }
                                 }
                             }
                             else {
                                 self.joinClosedCommunity(community)
+                                self.navigationController?.popViewControllerAnimated(true)
                             }
-                            self.navigationController?.popViewControllerAnimated(true)
                         }
                     } else {
                         Log.error?.message("objectId is nil")
