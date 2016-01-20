@@ -222,17 +222,24 @@ extension VolunteerDetailsViewController: VolunteerDetailsActionConsumer {
                             if let closed = community.closed {
                                 if closed {
                                     self.joinClosedCommunity(community)
+                                    self.navigationController?.popViewControllerAnimated(true)
                                 }
                                 else {
                                     api().joinCommunity(objId).onSuccess { [weak self] _ in
                                         //on success
                                     }
+                                    let controller = Storyboards.Main.instantiateCommunityViewController()
+                                    controller.objectId = objId
+                                    controller.controllerType = .Community
+                                    navigationController?.pushViewController(controller, animated:true)
+                                    let previousIndex = (self.navigationController?.viewControllers.count)! - 1
+                                    self.navigationController?.viewControllers.removeAtIndex(previousIndex)
                                 }
                             }
                             else {
                                 self.joinClosedCommunity(community)
+                                self.navigationController?.popViewControllerAnimated(true)
                             }
-                            self.navigationController?.popViewControllerAnimated(true)
                         }
                     } else {
                         Log.error?.message("objectId is nil")
