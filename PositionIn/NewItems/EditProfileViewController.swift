@@ -17,7 +17,7 @@ final class EditProfileViewController: BaseAddItemViewController {
     private enum Tags : String {
         case FirstName = "FirstName"
         case LastName = "LastName"
-        case Phone = "Phone"
+        case Email = "Email"
         case About = "About"
         case Photo = "Photo"
     }
@@ -57,7 +57,7 @@ final class EditProfileViewController: BaseAddItemViewController {
         form.addFormSection(infoSection)
         infoSection.addFormRow(firstnameRow)
         infoSection.addFormRow(lastnameRow)
-        infoSection.addFormRow(phoneRow)
+        infoSection.addFormRow(emailRow)
        
         self.form  = form
         
@@ -65,7 +65,7 @@ final class EditProfileViewController: BaseAddItemViewController {
             if let strongSelf = self {
                 strongSelf.firstnameRow.value = profile.firstName
                 strongSelf.lastnameRow.value = profile.lastName
-                strongSelf.phoneRow.value = profile.phone
+                strongSelf.emailRow.value = profile.email
                 strongSelf.tableView.reloadData()
                 strongSelf.userProfile = profile
             }
@@ -92,10 +92,10 @@ final class EditProfileViewController: BaseAddItemViewController {
         return row
         }()
     
-    // Phone
-    lazy private var phoneRow: XLFormRowDescriptor = {
-        let row = XLFormRowDescriptor(tag: Tags.Phone.rawValue, rowType: XLFormRowDescriptorTypeEmail,
-            title: NSLocalizedString("Phone", comment: "Edit profile: Email"))
+    // Email
+    lazy private var emailRow: XLFormRowDescriptor = {
+        let row = XLFormRowDescriptor(tag: Tags.Email.rawValue, rowType: XLFormRowDescriptorTypeEmail,
+            title: NSLocalizedString("Email", comment: "Edit profile: Email"))
         row.cellConfig.setObject(UIScheme.mainThemeColor, forKey: "textLabel.textColor")
         row.cellConfig.setObject(UIScheme.mainThemeColor, forKey: "tintColor")
         return row
@@ -130,7 +130,7 @@ final class EditProfileViewController: BaseAddItemViewController {
         api().register(username: nil, password: nil, phoneNumber: self.phoneNumber,
             phoneVerificationCode: self.validationCode,
             firstName: values[Tags.FirstName.rawValue] as? String,
-            lastName: values[Tags.LastName.rawValue] as? String).onSuccess(callback: {[weak self] userProfile in
+            lastName: values[Tags.LastName.rawValue] as? String, email: values[Tags.Email.rawValue] as? String).onSuccess(callback: {[weak self] userProfile in
                 trackGoogleAnalyticsEvent("Status", action: "Click", label: "Auth Success")
                 Log.info?.message("Registration done")
                 
@@ -171,7 +171,7 @@ final class EditProfileViewController: BaseAddItemViewController {
                 view.userInteractionEnabled = false
                 userProfile.firstName = values[Tags.FirstName.rawValue] as? String
                 userProfile.lastName = values[Tags.LastName.rawValue] as? String
-                userProfile.phone = values[Tags.Phone.rawValue] as? String
+                userProfile.email = values[Tags.Email.rawValue] as? String
                 userProfile.userDescription = values[Tags.About.rawValue] as? String
                 
                 avatarUpload.flatMap { (urls: [NSURL]) -> Future<Void, NSError> in
