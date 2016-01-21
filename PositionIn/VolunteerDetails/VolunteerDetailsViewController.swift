@@ -65,7 +65,16 @@ class VolunteerDetailsViewController: UIViewController {
         detailsLabel.text = volunteer.communityDescription?.stringByReplacingOccurrencesOfString("\\n", withString: "\n")
         priceLabel.text = "\(Int(volunteer.membersCount)) beneficiaries"
         
-        let image = UIImage(named: "communityPlaceholder")
+        var image: UIImage?
+        
+        switch self.type {
+        case .Volunteer:
+            image = UIImage(named: "volunteer_placeholder")
+        case .Community:
+            image = UIImage(named: "communityPlaceholder")
+        default:
+            break
+        }
         
         productImageView.setImageFromURL(volunteer.avatar, placeholder: image)
         if let coordinates = volunteer.location?.coordinates {
