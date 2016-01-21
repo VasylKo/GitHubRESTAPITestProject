@@ -197,8 +197,16 @@ extension VolunteerDetailsViewController: VolunteerDetailsActionConsumer {
         let segue: VolunteerDetailsViewController.Segue
         switch action {
         case .Pending:
+            var title : String
+            switch self.type {
+            case .Volunteer:
+                title = "Kenya Red Cross will review your volunteering request and respond within a few days"
+            case .Community, .Unknown:
+                title = "Kenya Red Cross will review your request and respond within a few days"
+            }
+            
             let alertController = UIAlertController(title: nil, message:
-                "Please, wait...", preferredStyle: UIAlertControllerStyle.Alert)
+                title, preferredStyle: UIAlertControllerStyle.Alert)
             alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
             self.presentViewController(alertController, animated:true, completion: nil)
             return
