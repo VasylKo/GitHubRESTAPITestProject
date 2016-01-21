@@ -42,10 +42,14 @@ class VolunteerDetailsViewController: UIViewController {
                     var volunteerVar = volunteer
                     volunteerVar.closed = nil
                     self?.didReceiveDetails(volunteerVar)
+                    self?.dataSource.items = (self?.productAcionItems())!
+                    self?.dataSource.configureTable((self?.actionTableView)!)
                 }
             case .Community:
                 api().getCommunity(volunteer.objectId).onSuccess {[weak self] volunteer in
                     self?.didReceiveDetails(volunteer)
+                    self?.dataSource.items = (self?.productAcionItems())!
+                    self?.dataSource.configureTable((self?.actionTableView)!)
                 }
             default:
                 break
@@ -115,13 +119,20 @@ class VolunteerDetailsViewController: UIViewController {
             let userRole : UserInfo.Role = self.volunteer?.members?.items.filter() {$0.objectId == userId}.first?.role ?? .Unknown
             switch userRole {
             case .Applicant:
-                actionItem = VolunteerActionItem(title: "Pending", image: "", action: .Pending)
+                switch self.type {
+                case .Volunteer:
+                     actionItem = VolunteerActionItem(title: "Pending", image: "home_volunteer", action: .Pending)
+                case .Community:
+                     actionItem = VolunteerActionItem(title: "Pending", image: "MainMenuCommunity", action: .Pending)
+                case .Unknown:
+                     actionItem = VolunteerActionItem(title: "Pending", image: "", action: .Pending)
+                }
             default:
                 switch self.type {
                 case .Volunteer:
                     actionItem = VolunteerActionItem(title: NSLocalizedString("Volunteer", comment: "Volunteer"), image: "home_volunteer",action: .Join)
                 case .Community:
-                    actionItem = VolunteerActionItem(title: NSLocalizedString("Join", comment: "Community"), image: "home_volunteer",action: .Join)
+                    actionItem = VolunteerActionItem(title: NSLocalizedString("Join", comment: "Community"), image: "MainMenuCommunity",action: .Join)
                 case .Unknown:
                     //TODO:change .Buy
                     actionItem = VolunteerActionItem(title: "", image: "", action: .Join)
@@ -201,7 +212,7 @@ extension VolunteerDetailsViewController: VolunteerDetailsActionConsumer {
                         case .Default:
                             if let objId = self.volunteer?.objectId {
                                 api().joinVolunteer(objId).onSuccess { [weak self] _ in
-                                    //on success
+                                    self?.reloadData()
                                 }
                             } else {
                                 Log.error?.message("objectId is nil")
@@ -212,7 +223,6 @@ extension VolunteerDetailsViewController: VolunteerDetailsActionConsumer {
                         case .Destructive:
                             print("destructive")
                         }
-                        self.navigationController?.popViewControllerAnimated(true)
                     }))
                     self.presentViewController(alertController, animated: true, completion: nil)
                     return
@@ -223,17 +233,20 @@ extension VolunteerDetailsViewController: VolunteerDetailsActionConsumer {
                             if let closed = community.closed {
                                 if closed {
                                     self.joinClosedCommunity(community)
-                                    self.navigationController?.popViewControllerAnimated(true)
                                 }
                                 else {
                                     self.joinPublicCommunityActivityIndicator.startAnimating()
                                     api().joinCommunity(objId).onSuccess() { [weak self] _ in
+                                        //navigate
                                         self?.joinPublicCommunityActivityIndicator.stopAnimating()
                                         let controller = Storyboards.Main.instantiateCommunityViewController()
                                         controller.objectId = objId
                                         controller.controllerType = .Community
-                                        let viewControllers = [(self?.navigationController?.viewControllers.first)!, controller]
-                                        self?.navigationController?.setViewControllers(viewControllers, animated: true)
+                                        self?.navigationController?.showViewController(controller, sender: nil)
+                                        //remove join action button
+                                        self?.joinAction = false
+                                        self?.dataSource.items = (self?.productAcionItems())!
+                                        self?.dataSource.configureTable((self?.actionTableView)!)
                                         }.onFailure { [weak self] result in
                                             self?.joinPublicCommunityActivityIndicator.stopAnimating()
                                     }
@@ -241,7 +254,6 @@ extension VolunteerDetailsViewController: VolunteerDetailsActionConsumer {
                             }
                             else {
                                 self.joinClosedCommunity(community)
-                                self.navigationController?.popViewControllerAnimated(true)
                             }
                         }
                     } else {
@@ -272,7 +284,7 @@ extension VolunteerDetailsViewController: VolunteerDetailsActionConsumer {
             case .Default:
                 if let objectId = self.volunteer?.objectId {
                     api().joinCommunity(objectId).onSuccess { [weak self] _ in
-                        //on success
+                        self?.reloadData()
                     }
                 } else {
                     Log.error?.message("objectId is nil")
@@ -283,7 +295,6 @@ extension VolunteerDetailsViewController: VolunteerDetailsActionConsumer {
             case .Destructive:
                 print("destructive")
             }
-            self.navigationController?.popViewControllerAnimated(true)
         }))
         self.presentViewController(alertController, animated: true, completion: nil)
         return
