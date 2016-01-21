@@ -66,6 +66,11 @@ class BrowseCommunityViewController: BesideMenuViewController, BrowseCommunityAc
         }
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        reloadData()
+    }
+    
     private var firstLoad: Bool = true
     
     var browseMode: BrowseMode = .MyGroups {
