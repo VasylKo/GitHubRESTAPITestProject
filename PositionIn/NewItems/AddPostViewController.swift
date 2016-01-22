@@ -125,11 +125,11 @@ final class AddPostViewController: BaseAddItemViewController {
                     post.name = values[Tags.Message.rawValue] as? String
                     post.descriptionString = values[Tags.Message.rawValue] as? String
                     post.location = location
-                    post.photos = urls.map { url in
-                        var info = PhotoInfo()
-                        info.url = url
-                        return info
+                    
+                    if let photoUrl = urls.first {
+                        post.photoURL = photoUrl.absoluteString
                     }
+                    
                     if let communityId = communityId {
                         post.communityID = communityId
                         return api().createCommunityPost(post: post)
