@@ -29,53 +29,56 @@ class CompactFeedTableCellModel: FeedTableCellModel {
     let imageURL: NSURL?
     let location: Location?
     
+    let date: NSDate?
+    
     var numOfLikes: Int?
     var numOfComments: Int?
     
-    init(itemType: FeedItem.ItemType, objectID: CRUDObjectId, title: String?, details: String?, info: String?, price: Float?, imageURL url: NSURL?, location: Location? = nil, numOfLikes: Int? = nil, numOfComments: Int? = nil, data: Any? = nil) {
-            self.objectID = objectID
-            self.itemType = itemType
-            self.title = title
-            self.info = info
-            self.details = details
-            self.imageURL = url
-            self.price = price
-            self.data = data
-            self.location = location
-            self.numOfLikes = numOfLikes
-            self.numOfComments = numOfComments
+    init(itemType: FeedItem.ItemType, objectID: CRUDObjectId, title: String?, details: String?, info: String?, price: Float?, imageURL url: NSURL?, location: Location? = nil, numOfLikes: Int? = nil, numOfComments: Int? = nil, date: NSDate?, data: Any? = nil) {
+        self.objectID = objectID
+        self.itemType = itemType
+        self.title = title
+        self.info = info
+        self.details = details
+        self.imageURL = url
+        self.price = price
+        self.data = data
+        self.location = location
+        self.numOfLikes = numOfLikes
+        self.numOfComments = numOfComments
+        self.date = date
         
-            switch itemType {
-            case .Emergency:
-                fallthrough
-            case .GiveBlood:
-                fallthrough
-            case .Training:
-                fallthrough
-            case .Volunteer:
-                fallthrough
-            case .Market:
-                fallthrough
-            case .BomaHotels:
-                if let location = location {
-                    locationController().distanceFromCoordinate(location.coordinates).onSuccess {
-                        [weak self] distance in
-                        let formatter = NSLengthFormatter()
-                        self?.info = formatter.stringFromMeters(distance)
-                    }
+        switch itemType {
+        case .Emergency:
+            fallthrough
+        case .GiveBlood:
+            fallthrough
+        case .Training:
+            fallthrough
+        case .Volunteer:
+            fallthrough
+        case .Market:
+            fallthrough
+        case .BomaHotels:
+            if let location = location {
+                locationController().distanceFromCoordinate(location.coordinates).onSuccess {
+                    [weak self] distance in
+                    let formatter = NSLengthFormatter()
+                    self?.info = formatter.stringFromMeters(distance)
                 }
-            case .Project:
-                if let price = price {
-                    self.info = "\(Int(price)) beneficiaries"
-                }
-            case .Event:
-                //attend
-                fallthrough
-            case .News:
-                fallthrough
-            case .Unknown:
-                break
             }
+        case .Project:
+            if let price = price {
+                self.info = "\(Int(price)) beneficiaries"
+            }
+        case .Event:
+            //attend
+            fallthrough
+        case .News:
+            fallthrough
+        case .Unknown:
+            break
+        }
     }
 }
 
@@ -84,6 +87,14 @@ final class ComapctBadgeFeedTableCellModel : CompactFeedTableCellModel {
     
     init(itemType: FeedItem.ItemType, objectID: CRUDObjectId, title: String?, details: String?, info: String?, imageURL url: NSURL?, badge: String?, data: Any?) {
         self.badge = badge
-        super.init(itemType: itemType, objectID: objectID, title: title, details: details, info: info, price: nil, imageURL: url, data: data)
+        super.init(itemType: itemType,
+            objectID: objectID,
+            title: title,
+            details: details,
+            info: info,
+            price: nil,
+            imageURL: url,
+            date: nil,
+            data: data)
     }
 }
