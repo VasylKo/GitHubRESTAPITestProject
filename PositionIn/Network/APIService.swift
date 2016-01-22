@@ -124,6 +124,12 @@ struct APIService {
         return getObject(endpoint)
     }
     
+    func getPostComments(postId: CRUDObjectId) -> Future<CollectionResponse<Comment>, NSError> {
+        let endpoint = "/v1.0/posts/\(postId)/comments"
+        return getObjectsCollection(endpoint, params: nil)
+    }
+    
+    
     func createUserPost(post object: Post) -> Future<Post, NSError> {
         return currentUserId().flatMap {
             (userId: CRUDObjectId) -> Future<Post, NSError> in

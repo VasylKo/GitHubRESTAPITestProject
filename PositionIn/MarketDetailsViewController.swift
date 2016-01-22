@@ -107,8 +107,7 @@ final class MarketDetailsViewController: UIViewController {
         let zeroSection = [ // 0 section
             MarketActionItem(title: NSLocalizedString("Buy Product", comment: "Buy: Market"),
                 image: "productBuyProduct",
-                action: .Buy),
-        ]
+                action: .Buy)]
         var firstSection = [ // 1 section
             MarketActionItem(title: NSLocalizedString("Send Message", comment: "Market"), image: "productSendMessage", action: .SendMessage),
             MarketActionItem(title: NSLocalizedString("Organizer Profile", comment: "Market"), image: "productSellerProfile", action: .SellerProfile),
