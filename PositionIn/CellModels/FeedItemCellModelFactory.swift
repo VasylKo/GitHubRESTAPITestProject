@@ -33,8 +33,7 @@ struct FeedItemCellModelFactory {
             fallthrough
         case .Project:
             return [
-                CompactFeedTableCellModel(
-                    itemType: feedItem.type,
+                CompactFeedTableCellModel(itemType: feedItem.type,
                     objectID: feedItem.objectId,
                     title: feedItem.name,
                     details: feedItem.author?.title,
@@ -42,10 +41,10 @@ struct FeedItemCellModelFactory {
                     price: feedItem.donations,
                     imageURL: feedItem.image,
                     location: feedItem.location,
-                    data: feedItem.itemData,
                     numOfLikes: feedItem.numOfLikes,
-                    numOfComments: feedItem.numOfComments
-                ),
+                    numOfComments: feedItem.numOfComments,
+                    date: feedItem.date,
+                    data: feedItem.itemData)
             ]
         case .Unknown:
             fallthrough

@@ -121,13 +121,13 @@ extension APIService {
     
     //Register anonymous user
     func register() -> Future<UserProfile, NSError> {
-        return registerRequest(username: nil, password: nil, phoneNumber: nil, phoneVerificationCode: nil, info: nil).flatMap { _ in
+        return registerRequest(nil, username: nil, password: nil, phoneNumber: nil, phoneVerificationCode: nil, info: nil).flatMap { _ in
             return self.updateCurrentProfileStatus()
         }
     }
     
     //Register new user
-    func register(username username: String?, password: String?, phoneNumber: String?, phoneVerificationCode: String?, firstName: String?, lastName: String?) -> Future<UserProfile, NSError> {
+    func register(username username: String?, password: String?, phoneNumber: String?, phoneVerificationCode: String?, firstName: String?, lastName: String?, email: String?) -> Future<UserProfile, NSError> {
         var info: [String: AnyObject] = [:]
         if let firstName = firstName {
             info ["firstName"] = firstName
@@ -135,15 +135,15 @@ extension APIService {
         if let lastName = lastName {
             info ["lastName"] = lastName
         }
-        return registerRequest(username: username, password: password, phoneNumber: phoneNumber, phoneVerificationCode: phoneVerificationCode, info: info).flatMap { _ in
+        return registerRequest(email, username: username, password: password, phoneNumber: phoneNumber, phoneVerificationCode: phoneVerificationCode, info: info).flatMap { _ in
             return self.updateCurrentProfileStatus(password)
         }
     }
     
     //MARK: - Private members -
     
-    private func registerRequest(username username: String?, password: String?, phoneNumber: String?, phoneVerificationCode: String?, info: [String: AnyObject]?) -> Future<AuthResponse, NSError> {
-        let urlRequest = AuthRouter.Register(api: self, username: username, password: password, phoneNumber: phoneNumber, phoneVerificationCode: phoneVerificationCode, profileInfo: info)
+    private func registerRequest(email: String?, username: String?, password: String?, phoneNumber: String?, phoneVerificationCode: String?, info: [String: AnyObject]?) -> Future<AuthResponse, NSError> {
+        let urlRequest = AuthRouter.Register(api: self, email:email, username: username, password: password, phoneNumber: phoneNumber, phoneVerificationCode: phoneVerificationCode, profileInfo: info)
         
         let mapping: AnyObject? -> AuthResponse? = { json in
             return Mapper<AuthResponse>().map(json)
@@ -258,7 +258,7 @@ extension APIService {
         
         case Login(api: APIService, username: String?, password: String?, phoneNumber: String?, phoneVerificationCode: String?)
         case Facebook(api: APIService, fbToken: String)
-        case Register(api: APIService, username: String?, password: String?, phoneNumber: String?, phoneVerificationCode: String?, profileInfo: [String: AnyObject]?)
+        case Register(api: APIService, email: String?, username: String?, password: String?, phoneNumber: String?, phoneVerificationCode: String?, profileInfo: [String: AnyObject]?)
         case Refresh(api: APIService, token: String)
         case PhoneVerification(api: APIService, phone: String)
         case VerifyPhoneCode(api: APIService, phone: String, code: String)
@@ -319,7 +319,7 @@ extension APIService {
                     "fbToken" : fbToken,
                     "device" : deviceInfo(),
                 ]
-            case .Register(let api,  let username, let password, let phoneNumber, let phoneVerificationCode, let profile):
+            case .Register(let api, let email, let username, let password, let phoneNumber, let phoneVerificationCode, let profile):
                 url = api.https("/v1.0/users/register")
                 method = .POST
                 encoding = .JSON
@@ -327,6 +327,9 @@ extension APIService {
                 params = [
                     "device" : deviceInfo(),
                 ]
+                if let email = email {
+                    params["email"] = email
+                }
                 if let username = username {
                     params["email"] = username
                 }

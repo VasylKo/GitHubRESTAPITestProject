@@ -9,10 +9,10 @@
 import PosInCore
 
 class BrowseCommunityTableViewCellModel: TableViewCellModel {
-    let objectId: CRUDObjectId
+    let community : Community
     let tapAction: BrowseCommunityViewController.Action
-    init(objectId: CRUDObjectId, tapAction: BrowseCommunityViewController.Action) {
-        self.objectId = objectId
+    init(community: Community, tapAction: BrowseCommunityViewController.Action) {
+        self.community = community
         self.tapAction = tapAction
     }
 }
@@ -24,30 +24,30 @@ final class BrowseCommunityHeaderCellModel: BrowseCommunityTableViewCellModel {
     let isClosed: Bool?
     weak var actionConsumer: CommunityFeedActionConsumer?
     
-    init(objectId: CRUDObjectId, tapAction: BrowseCommunityViewController.Action, title: String, url: NSURL?, showInfo: Bool, isClosed: Bool?) {
+    init(community: Community, tapAction: BrowseCommunityViewController.Action, title: String, url: NSURL?, showInfo: Bool, isClosed: Bool?) {
         self.title = title
         self.url = url
         self.showInfo = showInfo
         self.isClosed = isClosed
-        super.init(objectId: objectId, tapAction: tapAction)
+        super.init(community: community, tapAction: tapAction)
     }
 }
 
 final class BrowseCommunityInfoCellModel: BrowseCommunityTableViewCellModel {
     let membersCount: Int?
     let text: String?
-    init(objectId: CRUDObjectId, tapAction: BrowseCommunityViewController.Action, members: Int?, text: String?) {
+    init(community: Community, tapAction: BrowseCommunityViewController.Action, members: Int?, text: String?) {
         self.text = text
         membersCount = members
-        super.init(objectId: objectId, tapAction: tapAction)
+        super.init(community: community, tapAction: tapAction)
     }
 }
 
 final class BrowseCommunityActionCellModel: BrowseCommunityTableViewCellModel {
     let actions: [BrowseCommunityViewController.Action]
     weak var actionConsumer: BrowseCommunityActionConsumer?
-    init(objectId: CRUDObjectId, tapAction: BrowseCommunityViewController.Action, actions: [BrowseCommunityViewController.Action]) {
+    init(community: Community, tapAction: BrowseCommunityViewController.Action, actions: [BrowseCommunityViewController.Action]) {
         self.actions = actions
-        super.init(objectId: objectId, tapAction: tapAction)
+        super.init(community: community, tapAction: tapAction)
     }
 }

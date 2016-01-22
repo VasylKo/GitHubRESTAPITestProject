@@ -12,16 +12,15 @@ import CleanroomLogger
 
 final class CommunityActionCell: TableViewCell {
     override func setModel(model: TableViewCellModel) {
-        let m = model as? BrowseCommunityActionCellModel
-        assert(m != nil, "Invalid model passed")
-        objectId = m!.objectId
-        actionConsumer = m!.actionConsumer
-        Log.debug?.value(m!.actions)
+        let m = model as! BrowseCommunityActionCellModel
+        community = m.community
+        actionConsumer = m.actionConsumer
+        Log.debug?.value(m.actions)
         for btn in actionButtons {
             btn.removeFromSuperview()
         }
         
-        actionButtons = m!.actions.map { action in
+        actionButtons = m.actions.map { action in
             let button = UIButton()
             button.tag = action.rawValue
             button.setTitle(action.displayText(), forState: .Normal)
@@ -36,11 +35,11 @@ final class CommunityActionCell: TableViewCell {
     }
     
     weak var actionConsumer: BrowseCommunityActionConsumer?
-    var objectId: CRUDObjectId = CRUDObjectInvalidId
+    var community: Community?
     
     @IBAction func executeAction(sender: UIButton) {
         if let action = BrowseCommunityViewController.Action(rawValue: sender.tag) {
-            actionConsumer?.executeAction(action, community: objectId)
+            actionConsumer?.executeAction(action, community: community ?? Community())
         }
     }
     

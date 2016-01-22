@@ -20,16 +20,21 @@ class VolunteerSearchViewController: UIViewController, XLFormRowDescriptorViewCo
     
     let cellIdentifier = "CellIdentifier"
     var rowDescriptor : XLFormRowDescriptor?
-    var volunteers : [Community] = []
+    var volunteers : [Community] = []    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        api().getVolunteers().onSuccess(callback: {[weak self] response in
-            self?.volunteers = response.items
-            self?.activityIndicator.stopAnimating()
-            self?.volunteerTableView.reloadData()
-            })
         self.volunteerTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
+        self.volunteerTableView.tableFooterView = UIView(frame: CGRect.zero)
+        api().currentUserId().flatMap { userId in
+            return api().getUserVolunteers(userId)
+            }.onSuccess { [weak self] response in
+                if self != nil {
+                    self?.volunteers = response.items
+                    self?.volunteerTableView?.reloadData()
+                    self?.activityIndicator.stopAnimating()
+                }
+        }
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

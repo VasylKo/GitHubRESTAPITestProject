@@ -14,15 +14,28 @@ final class CommunityHeaderCell: TableViewCell {
         let m = model as? BrowseCommunityHeaderCellModel
         assert(m != nil, "Invalid model passed")
         captionLabel.text = m!.title
-        contentImageView.setImageFromURL(m!.url, placeholder: UIImage(named: "communityPlaceholder"))
+        
+
         self.infoButton.hidden = !m!.showInfo
         shouldCallInfoAction = m!.showInfo
         self.actionConsumer = m!.actionConsumer
+        
+        var placeholderName: String = ""
         if let isClosed = m!.isClosed {
-            self.communityType.image = isClosed ?
-            UIImage(named: "closed_comm") :
-            UIImage(named: "public_comm")
+            placeholderName = "communityPlaceholder"
+            if isClosed {
+                self.communityType.image = UIImage(named: "closed_comm")
+            }
+            else {
+                self.communityType.image = UIImage(named: "public_comm")
+            }
         }
+        else {
+            placeholderName = "volunteer_placeholder"
+            self.communityType.image = nil
+        }
+        
+        contentImageView.setImageFromURL(m!.url, placeholder: UIImage(named: placeholderName))
     }
     
     override func prepareForReuse() {

@@ -24,9 +24,11 @@ class NewsCardCell: TableViewCell {
             self.imageHeightConstaint.constant = 0
         }
         
-        
         headerLabel.text = m!.title
-        infoLabel.text = m!.info
+        if let date = m!.date {
+            infoLabel.text = date.formattedAsTimeAgo()
+        }
+
         detailsLabel.text = m!.details
         
         if let numOfLikes = m!.numOfLikes {

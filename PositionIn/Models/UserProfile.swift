@@ -18,6 +18,7 @@ final class UserProfile: CRUDObject {
 //    "gender": <gender enum>
 //    "dob": <date>,
     var phone: String?
+    var email: String?
     var avatar: NSURL?
     var backgroundImage: NSURL?
     var location: Location?
@@ -73,6 +74,7 @@ final class UserProfile: CRUDObject {
         lastName <- map["lastName"]
         userDescription <- map["description"]
         phone <- map["phone"]
+        email <- map["email"]
         avatar <- (map["avatar"], AmazonURLTransform())
         backgroundImage <- (map["background"], AmazonURLTransform())
         location <- map["location"]

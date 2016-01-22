@@ -44,10 +44,17 @@ final class PostViewController: UIViewController, UITextFieldDelegate {
     private func reloadPost() {
         if let objectId = objectId {
             api().getPost(objectId).onSuccess { [weak self] post in
-                self?.post = post
-                self?.dataSource.setPost(post)
-                self?.tableView.reloadData()
-                self?.tableView.layoutIfNeeded();
+                var post = post                
+                api().getPostComments(objectId).onSuccess(callback: { [weak self] response in
+                    if let comments = response.items {
+                        post.comments = comments
+                    }
+                    self?.post = post
+                    self?.dataSource.setPost(post)
+                    self?.tableView.reloadData()
+                    self?.tableView.layoutIfNeeded();
+                })
+
             }
         }
     }
@@ -112,8 +119,6 @@ extension PostViewController {
             self?.reloadPost()
             textField?.text = nil
         }
-
-
         
         return true;
     }

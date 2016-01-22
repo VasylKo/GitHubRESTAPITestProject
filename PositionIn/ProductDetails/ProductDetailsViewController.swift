@@ -81,6 +81,8 @@ final class ProductDetailsViewController: UIViewController {
                 [weak self] distance in
                 let formatter = NSLengthFormatter()
                 self?.infoLabel.text = formatter.stringFromMeters(distance)
+                self?.dataSource.items = (self?.productAcionItems())!
+                self?.dataSource.configureTable((self?.actionTableView)!)
                 }.onFailure(callback: { (error:NSError) -> Void in
                     self.pinDistanceImageView.hidden = true
                     self.infoLabel.text = "" })
@@ -104,19 +106,19 @@ final class ProductDetailsViewController: UIViewController {
     
     
     private func productAcionItems() -> [[ProductActionItem]] {
-        return [
-            [ // 0 section
-                ProductActionItem(title: NSLocalizedString("Donate", comment: "Product action: Buy Product"),
-                    image: "home_donate",
-                    action: .Buy),
-            ],
-            [ // 1 section
-                ProductActionItem(title: NSLocalizedString("Send Message", comment: "Product action: Send Message"), image: "productSendMessage", action: .SendMessage),
-                ProductActionItem(title: NSLocalizedString("Organizer Profile", comment: "Product action: Seller Profile"), image: "productSellerProfile", action: .SellerProfile),
-                /*ProductActionItem(title: NSLocalizedString("More Information", comment: "Product action: Navigate"), image: "productTerms&Info", action: .ProductInventory),*/
-            ],
-        ]
+        let zeroSection = [ // 0 section
+            ProductActionItem(title: NSLocalizedString("Donate", comment: "Product action: Buy Product"),
+                image: "home_donate",
+                action: .Buy)]
         
+        var firstSection = [ // 1 section
+            ProductActionItem(title: NSLocalizedString("Send Message", comment: "Product action: Send Message"), image: "productSendMessage", action: .SendMessage),
+            ProductActionItem(title: NSLocalizedString("Organizer Profile", comment: "Product action: Seller Profile"), image: "productSellerProfile", action: .SellerProfile)]
+        if self.product?.location != nil {
+            firstSection.append(ProductActionItem(title: NSLocalizedString("Navigate", comment: "Product action: Navigate"), image: "productNavigate", action: .Navigate))
+        }
+        
+        return [zeroSection, firstSection]
     }
     
     @IBOutlet private weak var actionTableView: UITableView!
@@ -132,7 +134,7 @@ final class ProductDetailsViewController: UIViewController {
 
 extension ProductDetailsViewController {
     enum ProductDetailsAction: CustomStringConvertible {
-        case Buy, ProductInventory, SellerProfile, SendMessage
+        case Buy, ProductInventory, SellerProfile, SendMessage, Navigate
         
         var description: String {
             switch self {
@@ -144,6 +146,8 @@ extension ProductDetailsViewController {
                 return "Seller profile"
             case .SendMessage:
                 return "Send message"
+            case .Navigate:
+                return "Navigate"
             }
         }
     }
@@ -171,6 +175,13 @@ extension ProductDetailsViewController: ProductDetailsActionConsumer {
             }
         case .ProductInventory:
             segue = .ShowProductInventory
+        case .Navigate:
+            if let coordinates = self.product?.location?.coordinates {
+                OpenApplication.appleMap(with: coordinates)
+            } else {
+                Log.error?.message("coordinates missed")
+            }
+            return
         case .SellerProfile:
             segue = .ShowSellerProfile
         case .SendMessage:

@@ -79,7 +79,6 @@ final class EventDetailsViewController: UIViewController {
                 EventActionItem(title: NSLocalizedString("Navigate", comment: "Event action: Navigate"), image: "productNavigate", action: .Navigate)*/
             ],
         ]
-        
     }
     
     var objectId: CRUDObjectId?

@@ -124,6 +124,12 @@ struct APIService {
         return getObject(endpoint)
     }
     
+    func getPostComments(postId: CRUDObjectId) -> Future<CollectionResponse<Comment>, NSError> {
+        let endpoint = "/v1.0/posts/\(postId)/comments"
+        return getObjectsCollection(endpoint, params: nil)
+    }
+    
+    
     func createUserPost(post object: Post) -> Future<Post, NSError> {
         return currentUserId().flatMap {
             (userId: CRUDObjectId) -> Future<Post, NSError> in
@@ -555,7 +561,7 @@ struct APIService {
         return session().flatMap {
             (token: AuthResponse.Token) -> Future<Void, NSError> in
             let request = self.updateRequest(token, endpoint: endpoint, method: method, params: nil)
-            let (_, future): CRUDResultType = self.dataProvider.jsonRequest(request, map: self.commandMapping(), validation: self.statusCodeValidation(statusCode: [201, 204]))
+            let (_, future): CRUDResultType = self.dataProvider.jsonRequest(request, map: self.commandMapping(), validation: self.statusCodeValidation(statusCode: [200, 201, 204]))
             return self.handleFailure(future)
         }
     }
