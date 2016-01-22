@@ -79,6 +79,8 @@ final class MarketDetailsViewController: UIViewController {
                 [weak self] distance in
                 let formatter = NSLengthFormatter()
                 self?.infoLabel.text = formatter.stringFromMeters(distance)
+                self?.dataSource.items = (self?.productAcionItems())!
+                self?.dataSource.configureTable((self?.actionTableView)!)
                 }.onFailure(callback: { (error:NSError) -> Void in
                     self.pinDistanceImageView.hidden = true
                     self.infoLabel.text = "" })
@@ -102,20 +104,19 @@ final class MarketDetailsViewController: UIViewController {
     
     
     private func productAcionItems() -> [[MarketActionItem]] {
-        return [
-            [ // 0 section
-                MarketActionItem(title: NSLocalizedString("Buy Product", comment: "Buy: Market"),
-                    image: "productBuyProduct",
-                    action: .Buy),
-            ],
-            [ // 1 section
-                MarketActionItem(title: NSLocalizedString("Send Message", comment: "Market"), image: "productSendMessage", action: .SendMessage),
-                MarketActionItem(title: NSLocalizedString("Seller Profile", comment: "Market"), image: "productSellerProfile", action: .SellerProfile),
-                /*MarketActionItem(title: NSLocalizedString("Navigate", comment: "Market"), image: "productNavigate", action: .ProductInventory),
-                MarketActionItem(title: NSLocalizedString("More Information", comment: "Market"), image: "productTerms&Info", action: .ProductInventory),*/
-            ],
+        let zeroSection = [ // 0 section
+            MarketActionItem(title: NSLocalizedString("Buy Product", comment: "Buy: Market"),
+                image: "productBuyProduct",
+                action: .Buy)]
+        var firstSection = [ // 1 section
+            MarketActionItem(title: NSLocalizedString("Send Message", comment: "Market"), image: "productSendMessage", action: .SendMessage),
+            MarketActionItem(title: NSLocalizedString("Organizer Profile", comment: "Market"), image: "productSellerProfile", action: .SellerProfile),
+            /*MarketActionItem(title: NSLocalizedString("More Information", comment: "Market"), image: "productTerms&Info", action: .ProductInventory),*/
         ]
-        
+        if self.product?.location != nil {
+            firstSection.append(MarketActionItem(title: NSLocalizedString("Navigate", comment: "Market"), image: "productNavigate", action: .Navigate))
+        }
+        return [zeroSection, firstSection]
     }
     
     @IBOutlet private weak var actionTableView: UITableView!
@@ -166,6 +167,13 @@ extension MarketDetailsViewController: MarketDetailsActionConsumer {
         case .SendMessage:
             if let userId = author?.objectId {
                 showChatViewController(userId)
+            }
+            return
+        case .Navigate:
+            if let coordinates = self.product?.location?.coordinates {
+                OpenApplication.appleMap(with: coordinates)
+            } else {
+                Log.error?.message("coordinates missed")
             }
             return
         default:

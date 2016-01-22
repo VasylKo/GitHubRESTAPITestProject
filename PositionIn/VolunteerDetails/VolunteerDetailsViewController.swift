@@ -88,6 +88,8 @@ class VolunteerDetailsViewController: UIViewController {
                 }.onFailure(callback: { (error:NSError) -> Void in
                     self.pinDistanceImageView.hidden = true
                     self.infoLabel.text = "" })
+            self.dataSource.items = self.productAcionItems()
+            self.dataSource.configureTable(self.actionTableView)
         } else {
             self.pinDistanceImageView.hidden = true
             self.infoLabel.text = ""
@@ -114,10 +116,13 @@ class VolunteerDetailsViewController: UIViewController {
     
     
     private func productAcionItems() -> [[VolunteerActionItem]] {
-        let firstSection = [
+        var firstSection = [
             VolunteerActionItem(title: NSLocalizedString("Send Message", comment: "Volunteer"), image: "productSendMessage", action: .SendMessage),
             VolunteerActionItem(title: NSLocalizedString("Organizer Profile", comment: "Volunteer"), image: "productSellerProfile", action: .SellerProfile),
             /*VolunteerActionItem(title: NSLocalizedString("More Information", comment: "Volunteer"), image: "productTerms&Info", action: .ProductInventory)*/]
+        if self.volunteer?.location != nil {
+            firstSection.append(VolunteerActionItem(title: NSLocalizedString("Navigate", comment: "BomaHotels"), image: "productNavigate", action: .Navigate))
+        }
         
         if (self.joinAction != true) {
             //public or joined case
@@ -166,12 +171,14 @@ class VolunteerDetailsViewController: UIViewController {
 
 extension VolunteerDetailsViewController {
     enum VolunteerDetailsAction: CustomStringConvertible {
-        case Join, ProductInventory, SellerProfile, SendMessage, Pending
+        case Join, Navigate, ProductInventory, SellerProfile, SendMessage, Pending
         
         var description: String {
             switch self {
             case .Join:
                 return "Join"
+            case .Navigate:
+                return "Navigate"
             case .ProductInventory:
                 return "Product Inventory"
             case .SellerProfile:
@@ -284,6 +291,13 @@ extension VolunteerDetailsViewController: VolunteerDetailsActionConsumer {
                 api().logout().onComplete {[weak self] _ in
                     self?.sideBarController?.executeAction(.Login)
                 }
+            }
+            return
+        case .Navigate:
+            if let coordinates = self.volunteer?.location?.coordinates {
+                OpenApplication.appleMap(with: coordinates)
+            } else {
+                Log.error?.message("coordinates missed")
             }
             return
         case .ProductInventory:

@@ -76,6 +76,8 @@ class GiveBloodDetailsViewController: UIViewController {
                 [weak self] distance in
                 let formatter = NSLengthFormatter()
                 self?.infoLabel.text = formatter.stringFromMeters(distance)
+                self?.dataSource.items = (self?.productAcionItems())!
+                self?.dataSource.configureTable((self?.actionTableView)!)
                 }.onFailure(callback: { (error:NSError) -> Void in
                     self.productPinDistanceImageView.hidden = true
                     self.infoLabel.text = "" })
@@ -99,20 +101,15 @@ class GiveBloodDetailsViewController: UIViewController {
     
     
     private func productAcionItems() -> [[GiveBloodActionItem]] {
-        return [
-           /* [
-                GiveBloodActionItem(title: NSLocalizedString("Navigate", comment: "GiveBlood"),
-                    image: "productNavigate",
-                    action: .Buy),
-            ], */
-            [ // 0 section
-                GiveBloodActionItem(title: NSLocalizedString("Send Message", comment: "GiveBlood"), image: "productSendMessage", action: .SendMessage),
-                GiveBloodActionItem(title: NSLocalizedString("Office", comment: "GiveBlood"), image: "productSellerProfile", action: .ProductInventory),
-                /* GiveBloodActionItem(title: NSLocalizedString("More Information", comment: "GiveBlood"), image: "productTerms&Info",
-                    action: .ProductInventory), */
-            ],
-        ]
+        var zeroSection = [ // 0 section
+            GiveBloodActionItem(title: NSLocalizedString("Send Message", comment: "GiveBlood"), image: "productSendMessage", action: .SendMessage),
+            GiveBloodActionItem(title: NSLocalizedString("Office", comment: "GiveBlood"), image: "productSellerProfile", action: .ProductInventory),]
         
+        if self.product?.location != nil {
+            zeroSection.append(GiveBloodActionItem(title: NSLocalizedString("Navigate", comment: "GiveBlood"), image: "productNavigate", action: .Navigate))
+        }
+        
+        return [zeroSection]
     }
     
     @IBOutlet private weak var actionTableView: UITableView!
@@ -128,7 +125,7 @@ class GiveBloodDetailsViewController: UIViewController {
 
 extension GiveBloodDetailsViewController {
     enum GiveBloodDetailsAction: CustomStringConvertible {
-        case Buy, ProductInventory, SellerProfile, SendMessage
+        case Buy, ProductInventory, SellerProfile, SendMessage, Navigate
         
         var description: String {
             switch self {
@@ -140,6 +137,8 @@ extension GiveBloodDetailsViewController {
                 return "Seller profile"
             case .SendMessage:
                 return "Send message"
+            case .Navigate:
+                return "Navigate"
             }
         }
     }
@@ -157,6 +156,13 @@ extension GiveBloodDetailsViewController: GiveBloodDetailsActionConsumer {
         let segue: GiveBloodDetailsViewController.Segue
         switch action {
         case .SellerProfile:
+            return
+        case .Navigate:
+            if let coordinates = self.product?.location?.coordinates {
+                OpenApplication.appleMap(with: coordinates)
+            } else {
+                Log.error?.message("coordinates missed")
+            }
             return
         case .SendMessage:
             if let userId = author?.objectId {
