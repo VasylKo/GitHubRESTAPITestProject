@@ -110,7 +110,7 @@ final class MarketDetailsViewController: UIViewController {
             ],
             [ // 1 section
                 MarketActionItem(title: NSLocalizedString("Send Message", comment: "Market"), image: "productSendMessage", action: .SendMessage),
-                MarketActionItem(title: NSLocalizedString("Organizer Profile", comment: "Market"), image: "productSellerProfile", action: .SellerProfile),
+                MarketActionItem(title: NSLocalizedString("Seller Profile", comment: "Market"), image: "productSellerProfile", action: .SellerProfile),
                 /*MarketActionItem(title: NSLocalizedString("Navigate", comment: "Market"), image: "productNavigate", action: .ProductInventory),
                 MarketActionItem(title: NSLocalizedString("More Information", comment: "Market"), image: "productTerms&Info", action: .ProductInventory),*/
             ],
