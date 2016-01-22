@@ -153,7 +153,7 @@ final class UserProfileViewController: BesideMenuViewController, BrowseActionPro
         super.viewDidLoad()
         navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
         navigationController?.navigationBar.shadowImage = UIImage()
-        self.navigationItem.titleView = searchbar
+        //self.navigationItem.titleView = searchbar
         dataSource.configureTable(tableView)
         didReceiveProfile(profile)
         reloadData()
