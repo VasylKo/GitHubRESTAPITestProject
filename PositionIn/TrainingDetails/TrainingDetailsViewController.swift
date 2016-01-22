@@ -80,6 +80,8 @@ final class TrainingDetailsViewController: UIViewController {
                 [weak self] distance in
                 let formatter = NSLengthFormatter()
                 self?.infoLabel.text = formatter.stringFromMeters(distance)
+                self?.dataSource.items = (self?.trainingActionItems())!
+                self?.dataSource.configureTable((self?.actionTableView)!)
                 }.onFailure(callback: { (error:NSError) -> Void in
                     self.pinDistanceImageView.hidden = true
                     self.infoLabel.text = "" })
@@ -103,22 +105,23 @@ final class TrainingDetailsViewController: UIViewController {
     
     
     private func trainingActionItems() -> [[TrainingActionItem]] {
-        return [
-            [ // 0 section
-                TrainingActionItem(title: NSLocalizedString("Sign Up", comment: "Product action: Buy Product"),
-                    image: "productBuyProduct",
-                    action: .Buy),
-            ],
-            [ // 1 section
-                TrainingActionItem(title: NSLocalizedString("Send Message", comment: "Product action: Send Message"),
-                    image: "productSendMessage", action: .SendMessage),
-                TrainingActionItem(title: NSLocalizedString("Organizer Profile", comment: "Product action: Seller Profile"),
-                    image: "productSellerProfile", action: .SellerProfile),
-                /*TrainingActionItem(title: NSLocalizedString("Navigate", comment: "Product action: Navigate"),
-                    image: "productNavigate", action: .Navigate),
-                TrainingActionItem(title: NSLocalizedString("More Information", comment: "Product action: More Information"), image: "productTerms&Info", action: .ProductInventory),*/
-            ],
+        let zeroSection = [ // 0 section
+            TrainingActionItem(title: NSLocalizedString("Sign Up", comment: "Product action: Buy Product"),
+                image: "productBuyProduct",
+                action: .Buy)]
+        
+        var firstSection = [ // 1 section
+            TrainingActionItem(title: NSLocalizedString("Send Message", comment: "Product action: Send Message"),
+                image: "productSendMessage", action: .SendMessage),
+            TrainingActionItem(title: NSLocalizedString("Organizer Profile", comment: "Product action: Seller Profile"),
+                image: "productSellerProfile", action: .SellerProfile),
+            /*TrainingActionItem(title: NSLocalizedString("More Information", comment: "Product action: More Information"), image: "productTerms&Info", action: .ProductInventory),*/
         ]
+        if self.product?.location != nil {
+            firstSection.append(TrainingActionItem(title: NSLocalizedString("Navigate", comment: "Product action: Navigate"), image: "productNavigate", action: .Navigate))
+        }
+        
+        return [zeroSection, firstSection]
     }
     
     @IBOutlet private weak var actionTableView: UITableView!
@@ -165,6 +168,13 @@ extension TrainingDetailsViewController : TrainingDetailsActionConsumer {
         case .SendMessage:
             if let userId = author?.objectId {
                 showChatViewController(userId)
+            }
+            return
+        case .Navigate:
+            if let coordinates = self.product?.location?.coordinates {
+                OpenApplication.appleMap(with: coordinates)
+            } else {
+                Log.error?.message("coordinates missed")
             }
             return
         case .SellerProfile:

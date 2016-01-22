@@ -9,6 +9,7 @@ import UIKit
 import PosInCore
 import CleanroomLogger
 import BrightFutures
+import MapKit
 
 protocol BomaHotelsDetailsActionConsumer {
     func executeAction(action: BomaHotelsDetailsViewController.BomaHotelsDetailsAction)
@@ -78,9 +79,12 @@ final class BomaHotelsDetailsViewController: UIViewController {
                 [weak self] distance in
                 let formatter = NSLengthFormatter()
                 self?.infoLabel.text = formatter.stringFromMeters(distance)
+                self?.dataSource.items = (self?.bomaHotelAcionItems())!
+                self?.dataSource.configureTable((self?.actionTableView)!)
                 }.onFailure(callback: { (error:NSError) -> Void in
                     self.productPinDistanceImageView.hidden = true
                     self.infoLabel.text = "" })
+            
         } else {
             self.productPinDistanceImageView.hidden = true
             self.infoLabel.text = ""
@@ -101,20 +105,13 @@ final class BomaHotelsDetailsViewController: UIViewController {
     
     
     private func bomaHotelAcionItems() -> [[BomaHotelActionItem]] {
-        return [
-            [ // 0 section
-                BomaHotelActionItem(title: NSLocalizedString("Booking", comment: "BomaHotels"),
-                    image: "productBuyProduct",
-                    action: .Buy),
-            ],
-            [ // 1 section
-                BomaHotelActionItem(title: NSLocalizedString("Send Message", comment: "BomaHotels"), image: "productSendMessage", action: .SendMessage),
-                BomaHotelActionItem(title: NSLocalizedString("Organizer Profile", comment: "BomaHotels"), image: "productSellerProfile", action: .SellerProfile),
-                /*BomaHotelActionItem(title: NSLocalizedString("Navigate", comment: "BomaHotels"), image: "productNavigate", action: .ProductInventory),
-                BomaHotelActionItem(title: NSLocalizedString("More Information", comment: "BomaHotels"), image: "productTerms&Info", action: .ProductInventory), */
-            ],
-        ]
-        
+        let zeroSection = [BomaHotelActionItem(title: NSLocalizedString("Booking", comment: "BomaHotels"), image: "productBuyProduct", action: .Buy)]
+        var firstSection = [BomaHotelActionItem(title: NSLocalizedString("Send Message", comment: "BomaHotels"), image: "productSendMessage", action: .SendMessage),
+                            BomaHotelActionItem(title: NSLocalizedString("Organizer Profile", comment: "BomaHotels"), image: "productSellerProfile", action: .SellerProfile)]
+        if self.bomaHotel?.location != nil {
+            firstSection.append(BomaHotelActionItem(title: NSLocalizedString("Navigate", comment: "BomaHotels"), image: "productNavigate", action: .Navigate))
+        }
+        return [zeroSection, firstSection]
     }
     
     @IBOutlet private weak var actionTableView: UITableView!
@@ -130,12 +127,14 @@ final class BomaHotelsDetailsViewController: UIViewController {
 
 extension BomaHotelsDetailsViewController {
     enum BomaHotelsDetailsAction: CustomStringConvertible {
-        case Buy, ProductInventory, SellerProfile, SendMessage
+        case Buy, Navigate, ProductInventory, SellerProfile, SendMessage
         
         var description: String {
             switch self {
             case .Buy:
                 return "Buy"
+            case .Navigate:
+                return "Navigate"
             case .ProductInventory:
                 return "Product Inventory"
             case .SellerProfile:
@@ -167,6 +166,13 @@ extension BomaHotelsDetailsViewController: BomaHotelsDetailsActionConsumer {
         case .Buy:
             if let bookingURL = self.bomaHotel?.bookingURL {
                 UIApplication.sharedApplication().openURL(bookingURL)
+            }
+            return
+        case .Navigate:
+            if let coordinates = self.bomaHotel?.location?.coordinates {
+                OpenApplication.appleMap(with: coordinates)
+            } else {
+                Log.error?.message("coordinates missed")
             }
             return
         default:
