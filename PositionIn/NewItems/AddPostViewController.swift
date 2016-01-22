@@ -127,7 +127,7 @@ final class AddPostViewController: BaseAddItemViewController {
                     post.location = location
                     
                     if let photoUrl = urls.first {
-                        post.photoURL = photoUrl.absoluteString
+                        post.photoURL = photoUrl
                     }
                     
                     if let communityId = communityId {

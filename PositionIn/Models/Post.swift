@@ -13,7 +13,7 @@ struct Post: CRUDObject {
     var objectId: CRUDObjectId = CRUDObjectInvalidId
     var name: String?
     var descriptionString: String?
-    var photoURL: String?
+    var photoURL: NSURL?
     var location: Location?
     
     var likes: Int = 0
@@ -41,8 +41,8 @@ struct Post: CRUDObject {
         objectId <- (map["id"], CRUDObjectIdTransform())
         name <- map["name"]
         descriptionString <- map["description"]
-        photoURL <- map["image"]
-        likes <- map["likes"]
+        photoURL <- (map["image"], AmazonURLTransform())
+        likes <- map["numOfLikes"]
         location <- map["location"]
         isLiked <- map["isLiked"]
         author <- map["author"]
