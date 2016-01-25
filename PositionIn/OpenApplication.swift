@@ -12,7 +12,7 @@ import MapKit
 public class OpenApplication: NSObject {
     
     class func appleMap(with destination : CLLocationCoordinate2D) {
-        let urlString = "http://maps.apple.com/?daddr=\(destination.latitude),\(destination.longitude)"
+        let urlString = "http://maps.apple.com/?saddr=&daddr=\(destination.latitude),\(destination.longitude)"
         let url = NSURL(string: urlString)!
         UIApplication.sharedApplication().openURL(url)
     }
