@@ -1088,13 +1088,6 @@
 		E6DADB9F1B8C5907009A5694 /* ItemCategory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemCategory.swift; sourceTree = "<group>"; };
 		E6DB13DB1B74C84900E4BA96 /* Appfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Appfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		E6DB13DD1B74C84900E4BA96 /* Fastfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Fastfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		E6DB13DE1B74C84900E4BA96 /* report.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = report.xml; sourceTree = "<group>"; };
-		E6DB13E11B74C84900E4BA96 /* en-US-iPad-0-LandingScreen-portrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "en-US-iPad-0-LandingScreen-portrait.png"; sourceTree = "<group>"; };
-		E6DB13E21B74C84900E4BA96 /* en-US-iPhone4-0-LandingScreen-portrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "en-US-iPhone4-0-LandingScreen-portrait.png"; sourceTree = "<group>"; };
-		E6DB13E31B74C84900E4BA96 /* en-US-iPhone5-0-LandingScreen-portrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "en-US-iPhone5-0-LandingScreen-portrait.png"; sourceTree = "<group>"; };
-		E6DB13E41B74C84900E4BA96 /* en-US-iPhone6-0-LandingScreen-portrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "en-US-iPhone6-0-LandingScreen-portrait.png"; sourceTree = "<group>"; };
-		E6DB13E51B74C84900E4BA96 /* en-US-iPhone6Plus-0-LandingScreen-portrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "en-US-iPhone6Plus-0-LandingScreen-portrait.png"; sourceTree = "<group>"; };
-		E6DB13E61B74C84900E4BA96 /* screenshots.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = screenshots.html; sourceTree = "<group>"; };
 		E6DB13E71B74C84900E4BA96 /* Snapfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Snapfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		E6E2FE881B66F61300880F3C /* Messaging.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Messaging.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6E2FE8B1B66F61300880F3C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -2922,42 +2915,11 @@
 			isa = PBXGroup;
 			children = (
 				D15F47511C0CB420009ED3FD /* redcross.erb */,
-				E6DB13DA1B74C84900E4BA96 /* actions */,
 				E6DB13DB1B74C84900E4BA96 /* Appfile */,
 				E6DB13DD1B74C84900E4BA96 /* Fastfile */,
-				E6DB13DE1B74C84900E4BA96 /* report.xml */,
-				E6DB13DF1B74C84900E4BA96 /* screenshots */,
 				E6DB13E71B74C84900E4BA96 /* Snapfile */,
 			);
 			path = fastlane;
-			sourceTree = "<group>";
-		};
-		E6DB13DA1B74C84900E4BA96 /* actions */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = actions;
-			sourceTree = "<group>";
-		};
-		E6DB13DF1B74C84900E4BA96 /* screenshots */ = {
-			isa = PBXGroup;
-			children = (
-				E6DB13E01B74C84900E4BA96 /* en-US */,
-				E6DB13E61B74C84900E4BA96 /* screenshots.html */,
-			);
-			path = screenshots;
-			sourceTree = "<group>";
-		};
-		E6DB13E01B74C84900E4BA96 /* en-US */ = {
-			isa = PBXGroup;
-			children = (
-				E6DB13E11B74C84900E4BA96 /* en-US-iPad-0-LandingScreen-portrait.png */,
-				E6DB13E21B74C84900E4BA96 /* en-US-iPhone4-0-LandingScreen-portrait.png */,
-				E6DB13E31B74C84900E4BA96 /* en-US-iPhone5-0-LandingScreen-portrait.png */,
-				E6DB13E41B74C84900E4BA96 /* en-US-iPhone6-0-LandingScreen-portrait.png */,
-				E6DB13E51B74C84900E4BA96 /* en-US-iPhone6Plus-0-LandingScreen-portrait.png */,
-			);
-			path = "en-US";
 			sourceTree = "<group>";
 		};
 		E6E2FE891B66F61300880F3C /* Messaging */ = {
