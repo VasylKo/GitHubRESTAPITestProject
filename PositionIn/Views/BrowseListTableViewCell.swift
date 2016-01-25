@@ -74,8 +74,8 @@ final class BrowseListTableViewCell: TableViewCell, TableViewChildViewController
 }
 
 extension BrowseListTableViewCell: BrowseActionConsumer {
-    func browseController(controller: BrowseActionProducer, didSelectItem objectId: CRUDObjectId, type itemType: FeedItem.ItemType, data: Any?) {
-        actionConsumer?.browseController(controller, didSelectItem: objectId, type: itemType, data: data)
+    func browseController(controller: BrowseActionProducer, didSelectItem object: Any, type itemType: FeedItem.ItemType, data: Any?) {
+        actionConsumer?.browseController(controller, didSelectItem: object, type: itemType, data: data)
     }
     
     func browseControllerDidChangeContent(controller: BrowseActionProducer) {

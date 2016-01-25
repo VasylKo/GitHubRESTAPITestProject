@@ -12,7 +12,8 @@ class PostImageCell: TableViewCell {
     override func setModel(model: TableViewCellModel) {
         let m = model as? TableViewCellURLModel
         assert(m != nil, "Invalid model passed")
-        contentImage.setImageFromURL(m!.url, placeholder: UIImage(named: "communityPlaceholder"))
+        //TODO: set placeholder
+        contentImage.setImageFromURL(m!.url, placeholder: UIImage(named: ""))
     }
 
     @IBOutlet weak var contentImage: UIImageView!

@@ -15,9 +15,10 @@ struct PostCellModelFactory {
         var models: [[TableViewCellModel]] = []
         var firstSection: [TableViewCellModel] = []
         
-        if let url = post.photos?.first?.url {
-            firstSection.append(TableViewCellURLModel(url: url))
+        if let urlString = post.photoURL {
+            firstSection.append(TableViewCellURLModel(url: urlString))
         }
+        
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
         let date: String? = post.date.map { dateFormatter.stringFromDate($0) }
