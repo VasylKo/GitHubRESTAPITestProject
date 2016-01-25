@@ -53,7 +53,7 @@ final class CommunityViewController: DisplayModeViewController {
             let filterUpdate = { (filter: SearchFilter) -> SearchFilter in
                 var f = filter
                 f.communities = [community.objectId]
-                f.itemTypes = [FeedItem.ItemType.Event, FeedItem.ItemType.News]
+                f.itemTypes = [FeedItem.ItemType.Event, FeedItem.ItemType.Post]
                 return f
             }
             

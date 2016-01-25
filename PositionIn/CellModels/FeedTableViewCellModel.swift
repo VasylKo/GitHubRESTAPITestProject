@@ -76,6 +76,8 @@ class CompactFeedTableCellModel: FeedTableCellModel {
             fallthrough
         case .News:
             fallthrough
+        case .Post:
+            fallthrough
         case .Unknown:
             break
         }
