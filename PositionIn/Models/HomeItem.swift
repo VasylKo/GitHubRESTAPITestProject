@@ -10,7 +10,7 @@ import Foundation
 
 enum HomeItem: Int, CustomDebugStringConvertible {
     case Unknown = 0
-    case Projects, Emergency, Training, GiveBlood, Volunteer, BomaHotels, Events, News, Market = 9, Ambulance, Membership, Donate
+    case Projects, Emergency, Training, GiveBlood, Volunteer, BomaHotels, Events, News, Market, Ambulance, Membership, Donate
     
     static var count: Int {
         return 12
