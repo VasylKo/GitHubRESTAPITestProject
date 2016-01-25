@@ -36,8 +36,4 @@ target 'PositionIn' do
 
 end
 
-target 'PositionInTests' do
-
-end
-
 
