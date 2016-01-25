@@ -710,7 +710,6 @@
 		E660E52C1B5AC23B00F52050 /* PositionIn.MainMenuViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.MainMenuViewController.xib; sourceTree = "<group>"; };
 		E660E52F1B5AC28600F52050 /* MainMenuCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuCell.swift; sourceTree = "<group>"; };
 		E660E5311B5AC2A200F52050 /* PositionIn.MainMenuCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.MainMenuCell.xib; sourceTree = "<group>"; };
-		E660E5351B5B192100F52050 /* PositionIn.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = PositionIn.playground; sourceTree = "<group>"; };
 		E660E5371B5BCCD700F52050 /* TableViewCellModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewCellModel.swift; sourceTree = "<group>"; };
 		E660E5391B5BCD7300F52050 /* TableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		E660E53B1B5BCDCE00F52050 /* TableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableView.swift; sourceTree = "<group>"; };
@@ -1717,7 +1716,6 @@
 			isa = PBXGroup;
 			children = (
 				E689F0741B6B8E5400597587 /* README.md */,
-				E660E5351B5B192100F52050 /* PositionIn.playground */,
 				E689EE861B6A86A700597587 /* Cartfile */,
 				E6DB13D81B74C84900E4BA96 /* fastlane */,
 				E6736ADC1B4E56EB0003580D /* Scripts */,
