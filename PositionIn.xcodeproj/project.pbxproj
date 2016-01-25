@@ -1008,7 +1008,6 @@
 		E689F0601B6A8CF900597587 /* XMPPFramework.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPFramework.h; sourceTree = "<group>"; };
 		E689F0701B6A909200597587 /* XMPPDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPDelegate.h; sourceTree = "<group>"; };
 		E689F0711B6A909200597587 /* XMPPDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPDelegate.m; sourceTree = "<group>"; };
-		E689F0741B6B8E5400597587 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		E689F0761B6B90F400597587 /* ProductInventoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductInventoryViewController.swift; sourceTree = "<group>"; };
 		E689F0781B6B911F00597587 /* PositionIn.ProductInventoryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.ProductInventoryViewController.xib; sourceTree = "<group>"; };
 		E689F07A1B6B972F00597587 /* ProductInventoryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductInventoryCell.swift; sourceTree = "<group>"; };
@@ -1640,7 +1639,6 @@
 		E64DC3411B4E53C90011D37C = {
 			isa = PBXGroup;
 			children = (
-				E689F0741B6B8E5400597587 /* README.md */,
 				E689EE861B6A86A700597587 /* Cartfile */,
 				E6DB13D81B74C84900E4BA96 /* fastlane */,
 				E6736ADC1B4E56EB0003580D /* Scripts */,
