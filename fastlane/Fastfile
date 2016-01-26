@@ -23,9 +23,9 @@ default_platform :ios
 platform :ios do
 
   before_all do
-    # ENV["SLACK_URL"] = "https://hooks.slack.com/services/..."
-    sh 'rm -rf ~/Library/Caches/org.carthage.CarthageKit/dependencies/'
 
+    sh 'rm -rf ~/Library/Caches/org.carthage.CarthageKit/dependencies/'
+    
     carthage(
       use_ssh: false,         # Use SSH for downloading GitHub repositories.
       use_submodules: false,  # Add dependencies as Git submodules.
@@ -35,14 +35,6 @@ platform :ios do
 
     cocoapods
 
-    # increment_build_number
-
-    # xctool # run the tests of your app
-  end
-
-  desc "Runs all the tests"
-  lane :test do
-    snapshot
   end
 
   desc "Submit a new Dev Build to Amazon S3"
