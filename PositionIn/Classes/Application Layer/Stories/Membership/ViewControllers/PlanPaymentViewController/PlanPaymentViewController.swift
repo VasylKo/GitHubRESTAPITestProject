@@ -12,7 +12,7 @@ class PlanPaymentViewController : UIViewController {
     
     private let router : MembershipRouter
     
-    init(router: MembershipRouter = MembershipRouterImplementation()) {
+    init(router: MembershipRouter) {
         self.router = router
         super.init(nibName: String(PlanPaymentViewController.self), bundle: nil)
     }

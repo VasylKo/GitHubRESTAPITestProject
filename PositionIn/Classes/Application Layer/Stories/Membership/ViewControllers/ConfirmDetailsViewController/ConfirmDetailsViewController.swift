@@ -12,7 +12,7 @@ class ConfirmDetailsViewController : UIViewController {
     
     private let router : MembershipRouter
     
-    init(router: MembershipRouter = MembershipRouterImplementation()) {
+    init(router: MembershipRouter) {
         self.router = router
         super.init(nibName: String(ConfirmDetailsViewController.self), bundle: nil)
     }

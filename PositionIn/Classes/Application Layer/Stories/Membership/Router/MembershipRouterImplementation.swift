@@ -9,9 +9,17 @@
 import UIKit
 
 class MembershipRouterImplementation: BaseRouterImplementation, MembershipRouter {
-
+    
+    func showInitialViewController(sourceViewController : UIViewController) {
+        let corporatePlansViewController = CorporatePlansViewController(router: self)
+        let individualPlansViewController = IndividualPlansViewController(router: self)
+        let initialViewController = MembershipPlansContainerViewController(router: self,
+                                                       containeredViewControllers: [corporatePlansViewController, individualPlansViewController])
+        sourceViewController.navigationController?.pushViewController(initialViewController, animated: true)
+    }
+    
     func showMembershipPlanDetailsViewController(sourceViewController : UIViewController) {
-        sourceViewController.navigationController?.pushViewController(MembershipPlanDetailsViewController(), animated: true)
+        sourceViewController.navigationController?.pushViewController(MembershipPlanDetailsViewController(router: self), animated: true)
     }
     
 }
