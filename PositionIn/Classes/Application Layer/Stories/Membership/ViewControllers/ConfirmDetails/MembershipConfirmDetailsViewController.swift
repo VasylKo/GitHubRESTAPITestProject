@@ -1,5 +1,5 @@
 //
-//  IndividualPlansViewController.swift
+//  MembershipConfirmDetailsViewController.swift
 //  PositionIn
 //
 //  Created by ng on 1/27/16.
@@ -8,13 +8,13 @@
 
 import Foundation
 
-class IndividualPlansViewController : UIViewController {
+class MembershipConfirmDetailsViewController : UIViewController {
     
     private let router : MembershipRouter
     
     init(router: MembershipRouter) {
         self.router = router
-        super.init(nibName: String(IndividualPlansViewController.self), bundle: nil)
+        super.init(nibName: String(MembershipConfirmDetailsViewController.self), bundle: nil)
     }
     
     required init?(coder: NSCoder) {

@@ -10,7 +10,7 @@ import Foundation
 
 class MembershipPlansContainerViewController : ContainerViewController {
     
-    @IBOutlet weak var segmentControl: UISegmentedControl!
+    @IBOutlet private weak var segmentControl: UISegmentedControl!
     
     private let router : MembershipRouter
     

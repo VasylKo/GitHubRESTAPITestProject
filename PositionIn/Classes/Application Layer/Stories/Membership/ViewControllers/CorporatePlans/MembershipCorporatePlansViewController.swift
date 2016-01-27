@@ -1,5 +1,5 @@
 //
-//  MembershipCardViewController.swift
+//  MembershipCorporatePlansViewController.swift
 //  PositionIn
 //
 //  Created by ng on 1/27/16.
@@ -8,13 +8,13 @@
 
 import Foundation
 
-class MembershipCardViewController : UIViewController {
+class MembershipCorporatePlansViewController : UIViewController {
     
     private let router : MembershipRouter
     
     init(router: MembershipRouter) {
         self.router = router
-        super.init(nibName: String(MembershipCardViewController.self), bundle: nil)
+        super.init(nibName: String(MembershipCorporatePlansViewController.self), bundle: nil)
     }
     
     required init?(coder: NSCoder) {

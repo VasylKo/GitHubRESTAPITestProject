@@ -1,5 +1,5 @@
 //
-//  StepsContainerViewController.swift
+//  MembershipIndividualPlansViewController.swift
 //  PositionIn
 //
 //  Created by ng on 1/27/16.
@@ -8,18 +8,16 @@
 
 import Foundation
 
-class StepsContainerViewController : UIViewController {
+class MembershipIndividualPlansViewController : UIViewController {
     
     private let router : MembershipRouter
     
     init(router: MembershipRouter) {
         self.router = router
-        super.init(nibName: String(StepsContainerViewController.self), bundle: nil)
+        super.init(nibName: String(MembershipIndividualPlansViewController.self), bundle: nil)
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) is not supported")
     }
 }
-
-
