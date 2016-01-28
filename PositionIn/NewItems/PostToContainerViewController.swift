@@ -17,20 +17,21 @@ class PostToContainerViewController: ContainerViewController, XLFormRowDescripto
     
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    
+    init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         let communitySearchViewController = CommunitySearchViewController()
         let volunteerSearchViewController = VolunteerSearchViewController()
-        containeredViewControllers = [communitySearchViewController, volunteerSearchViewController]
+        let containeredViewControllers = [communitySearchViewController, volunteerSearchViewController]
         rowDescriptorViewControllers = [communitySearchViewController, volunteerSearchViewController]
+        super.init(nibName: String(PostToContainerViewController.self), containeredViewControllers: containeredViewControllers)
     }
 
     required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
         let communitySearchViewController = CommunitySearchViewController()
         let volunteerSearchViewController = VolunteerSearchViewController()
-        containeredViewControllers = [communitySearchViewController, volunteerSearchViewController]
+        let containeredViewControllers = [communitySearchViewController, volunteerSearchViewController]
         rowDescriptorViewControllers = [communitySearchViewController, volunteerSearchViewController]
+        super.init(nibName: String(PostToContainerViewController.self), containeredViewControllers: containeredViewControllers)
     }
     
     override func viewDidLoad() {

@@ -11,11 +11,13 @@ import UIKit
 class MembershipRouterImplementation: BaseRouterImplementation, MembershipRouter {
     
     func showInitialViewController(sourceViewController : UIViewController) {
-//        let corporatePlansViewController = CorporatePlansViewController(router: self)
-//        let individualPlansViewController = IndividualPlansViewController(router: self)
-//        let initialViewController = MembershipPlansContainerViewController(router: self,
-//                                                       containeredViewControllers: [corporatePlansViewController, individualPlansViewController])
-//        sourceViewController.navigationController?.pushViewController(initialViewController, animated: true)
+        let corporatePlansViewController = MembershipCorporatePlansViewController(router: self)
+        let individualPlansViewController = MembershipIndividualPlansViewController(router: self)
+        let initialViewController = SegmentedControlContainerViewController(mapping: ["Individual" : individualPlansViewController,
+                                                                                      "Corporate"  : corporatePlansViewController],
+                                                                            title: "Membership")
+        
+        sourceViewController.navigationController?.pushViewController(initialViewController, animated: true)
     }
     
     func showMembershipPlanDetailsViewController(sourceViewController : UIViewController) {
