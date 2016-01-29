@@ -109,6 +109,8 @@
 		D1379E901C2AC58F0041AA4E /* ExploreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1379E8F1C2AC58F0041AA4E /* ExploreViewController.swift */; };
 		D1379E941C2C21F80041AA4E /* NewsCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1379E921C2C21F80041AA4E /* NewsCardCell.swift */; };
 		D1379E951C2C21F80041AA4E /* PositionIn.NewsCardCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1379E931C2C21F80041AA4E /* PositionIn.NewsCardCell.xib */; };
+		D14E0E751C5A347400A67AC5 /* MembershipConfirmDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D14E0E741C5A347400A67AC5 /* MembershipConfirmDetailsViewController.xib */; };
+		D14E0E811C5A6E6300A67AC5 /* MembershipPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D14E0E801C5A6E6300A67AC5 /* MembershipPageView.swift */; };
 		D153AB841C11FA9B00DFB5C9 /* AmbulanceRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D153AB831C11FA9B00DFB5C9 /* AmbulanceRequest.swift */; };
 		D154411A1C47D642006251B7 /* Volunteer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15441191C47D642006251B7 /* Volunteer.swift */; };
 		D15F47441C088A26009ED3FD /* HomeItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15F47431C088A26009ED3FD /* HomeItem.swift */; };
@@ -590,6 +592,8 @@
 		D1379E8F1C2AC58F0041AA4E /* ExploreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExploreViewController.swift; sourceTree = "<group>"; };
 		D1379E921C2C21F80041AA4E /* NewsCardCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsCardCell.swift; sourceTree = "<group>"; };
 		D1379E931C2C21F80041AA4E /* PositionIn.NewsCardCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.NewsCardCell.xib; sourceTree = "<group>"; };
+		D14E0E741C5A347400A67AC5 /* MembershipConfirmDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MembershipConfirmDetailsViewController.xib; sourceTree = "<group>"; };
+		D14E0E801C5A6E6300A67AC5 /* MembershipPageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MembershipPageView.swift; sourceTree = "<group>"; };
 		D153AB831C11FA9B00DFB5C9 /* AmbulanceRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AmbulanceRequest.swift; sourceTree = "<group>"; };
 		D15441191C47D642006251B7 /* Volunteer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Volunteer.swift; sourceTree = "<group>"; };
 		D15F47431C088A26009ED3FD /* HomeItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeItem.swift; sourceTree = "<group>"; };
@@ -1330,6 +1334,7 @@
 		CD795BEA1C57BA8100C1C298 /* Membership */ = {
 			isa = PBXGroup;
 			children = (
+				D14E0E7F1C5A6DFE00A67AC5 /* Views */,
 				D1DA1EAF1C5909D7009F5AFA /* ViewControllers */,
 				CD795BEC1C57BA8100C1C298 /* Interface */,
 				CD795BEE1C57BA8100C1C298 /* Router */,
@@ -1406,6 +1411,14 @@
 				D1379E931C2C21F80041AA4E /* PositionIn.NewsCardCell.xib */,
 			);
 			path = NewsCardCell;
+			sourceTree = "<group>";
+		};
+		D14E0E7F1C5A6DFE00A67AC5 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				D14E0E801C5A6E6300A67AC5 /* MembershipPageView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		D15F47451C0AFD14009ED3FD /* CallAmbulance */ = {
@@ -1519,6 +1532,7 @@
 			isa = PBXGroup;
 			children = (
 				D1DA1EB11C5909D7009F5AFA /* MembershipConfirmDetailsViewController.swift */,
+				D14E0E741C5A347400A67AC5 /* MembershipConfirmDetailsViewController.xib */,
 			);
 			path = ConfirmDetails;
 			sourceTree = "<group>";
@@ -3383,6 +3397,7 @@
 			files = (
 				CD795BE11C57B4EE00C1C298 /* Snapfile in Resources */,
 				CD795BDF1C57B4EE00C1C298 /* Fastfile in Resources */,
+				D14E0E751C5A347400A67AC5 /* MembershipConfirmDetailsViewController.xib in Resources */,
 				50C7B5B21BC6A32900E8E8B4 /* PositionIn.SettingsViewController.xib in Resources */,
 				E6BEF1E81B9C83F200511B46 /* PositionIn.CommunityInfoCell.xib in Resources */,
 				D1F1FF2F1C24265B006D2E75 /* PositionIn.GiveBloodDetailsViewController.xib in Resources */,
@@ -3700,6 +3715,7 @@
 				2431EBE01B94C1DC009FB158 /* Event.swift in Sources */,
 				24EF62111BA81A6B00472531 /* ChatHistoryCellModel.swift in Sources */,
 				E6BEF1EF1B9C9D6400511B46 /* CommunityViewController.swift in Sources */,
+				D14E0E811C5A6E6300A67AC5 /* MembershipPageView.swift in Sources */,
 				E68B52061B8736F4006B980C /* FilterViewController.swift in Sources */,
 				E62B16F61B5C1AA700D446BC /* MainMenuUserCell.swift in Sources */,
 				E6F3093E1BA81FAF00C9420C /* PickPhotoView.swift in Sources */,
