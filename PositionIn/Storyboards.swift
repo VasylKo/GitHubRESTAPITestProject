@@ -4,6 +4,7 @@
 //
 
 import UIKit
+import PositionIn
 
 //MARK: - Storyboards
 
@@ -313,10 +314,6 @@ struct Storyboards {
 
         static func instantiatePhoneVerificationController() -> PhoneVerificationViewController {
             return self.storyboard.instantiateViewControllerWithIdentifier("PhoneVerificationController") as! PhoneVerificationViewController
-        }
-
-        static func instantiatePlansViewController() -> PlansViewController {
-            return self.storyboard.instantiateViewControllerWithIdentifier("PlansViewController") as! PlansViewController
         }
 
         static func instantiatePhoneNumberNavigationController() -> OnboardingNavigationController {
@@ -1888,17 +1885,6 @@ extension PhoneVerificationViewController {
 }
 
 //MARK: - EditProfileViewController
-
-//MARK: - MembershipPlansViewController
-
-
-//MARK: - PlansViewController
-extension PlansViewController: IdentifiableProtocol { 
-    var identifier: String? { return "PlansViewController" }
-    static var identifier: String? { return "PlansViewController" }
-}
-
-
 
 //MARK: - OnboardingNavigationController
 extension OnboardingNavigationController: IdentifiableProtocol { 
