@@ -10,18 +10,18 @@ import UIKit
 
 class MembershipRouterImplementation: BaseRouterImplementation, MembershipRouter {
     
-    func showInitialViewController(sourceViewController : UIViewController) {
-        let corporatePlansViewController = MembershipCorporatePlansViewController(router: self)
-        let individualPlansViewController = MembershipIndividualPlansViewController(router: self)
-        let initialViewController = SegmentedControlContainerViewController(mapping: ["Individual" : individualPlansViewController,
-                                                                                      "Corporate"  : corporatePlansViewController],
-                                                                            title: "Membership")
+    func showInitialViewController(from sourceViewController : UIViewController) {
+        let corporatePlansViewController = MembershipPlansViewController(router: self, type: MembershipPlan.PlanType.Corporate)
+        let individualPlansViewController = MembershipPlansViewController(router: self, type: MembershipPlan.PlanType.Individual)
+        let initialViewController = SegmentedControlContainerViewController(labels: ["Individual", "Corporate"],
+                                            containeredViewControllers: [individualPlansViewController, corporatePlansViewController], title: "Membership")
         
         sourceViewController.navigationController?.pushViewController(initialViewController, animated: true)
     }
     
-    func showMembershipPlanDetailsViewController(sourceViewController : UIViewController) {
-        sourceViewController.navigationController?.pushViewController(MembershipPlanDetailsViewController(router: self), animated: true)
+    func showMembershipPlanDetailsViewController(from sourceViewController : UIViewController, with plan : MembershipPlan) {
+        let membershipDetailsViewController = MembershipPlanDetailsViewController(router: self, plan: plan)
+        sourceViewController.navigationController?.pushViewController(membershipDetailsViewController, animated: true)
     }
     
 }

@@ -13,17 +13,16 @@ class SegmentedControlContainerViewController: ContainerViewController {
     
     @IBOutlet private weak var segmentedControl: UISegmentedControl!
     
-    private let mapping : [String : UIViewController]
+    private let labels : [String]
     private let controllerTitle : String
     
     //MARK: Initializers
     
-    init(mapping : [String : UIViewController], title : String) {
-        assert(mapping.keys.count == 2)
-        
-        self.mapping = mapping
+    init(labels : [String], containeredViewControllers : [UIViewController], title : String) {
+        assert(labels.count == containeredViewControllers.count)
+        self.labels = labels
         self.controllerTitle = title
-        super.init(nibName: String(SegmentedControlContainerViewController.self), containeredViewControllers: Array(mapping.values))
+        super.init(nibName: String(SegmentedControlContainerViewController.self), containeredViewControllers: containeredViewControllers)
     }
     
     required init?(coder: NSCoder) {
@@ -41,12 +40,14 @@ class SegmentedControlContainerViewController: ContainerViewController {
     }
     
     func setupInterface() {
+        
         self.title = self.controllerTitle
         
         self.segmentedControl.tintColor = UIScheme.mainThemeColor
-        let keys = Array(self.mapping.keys)
-        self.segmentedControl.setTitle(keys[0], forSegmentAtIndex: 0)
-        self.segmentedControl.setTitle(keys[1], forSegmentAtIndex: 1)
+        
+        for (index, value) in self.labels.enumerate() {
+            self.segmentedControl.setTitle(value, forSegmentAtIndex: index)
+        }
     }
     
     //MARK: Target-Action

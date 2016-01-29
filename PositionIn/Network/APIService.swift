@@ -226,6 +226,18 @@ struct APIService {
         return self.createObject(endpoint, object: object)
     }
     
+    //MARK: - Membership -
+    
+    func getMemberships() -> Future<CollectionResponse<MembershipPlan>, NSError> {
+        let endpoint = MembershipPlan.endpoint()
+        return getObjectsCollection(endpoint, params: nil)
+    }
+    
+    func getMembership(membershipId: CRUDObjectId) -> Future<MembershipPlan, NSError> {
+        let endpoint = MembershipPlan.endpoint(membershipId)
+        return getObject(endpoint)
+    }
+    
     //MARK: - Community -
     
     func getCommunities(page: Page) -> Future<CollectionResponse<Community>,NSError> {

@@ -142,8 +142,8 @@ final class EditProfileViewController: BaseAddItemViewController {
                     }
                 }
                 
-                self?.navigationController?.pushViewController(Storyboards.Onboarding.instantiateMembershipPlansViewController(),
-                    animated: true)
+                let router : MembershipRouter = MembershipRouterImplementation()
+                router.showInitialViewController(from: self!)
                 }).onSuccess(callback: { _ in
                     api().pushesRegistration()
                 }).onFailure(callback: {_ in

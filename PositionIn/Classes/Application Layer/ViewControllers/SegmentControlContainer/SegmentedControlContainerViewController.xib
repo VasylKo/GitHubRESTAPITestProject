@@ -20,8 +20,8 @@
                 <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="42C-dL-KcK">
                     <rect key="frame" x="55" y="22" width="490" height="29"/>
                     <segments>
-                        <segment title="Individual"/>
-                        <segment title="Corporate"/>
+                        <segment title="0"/>
+                        <segment title="1"/>
                     </segments>
                     <connections>
                         <action selector="segmentControlValueChanged:" destination="-1" eventType="valueChanged" id="WTR-OE-1e7"/>

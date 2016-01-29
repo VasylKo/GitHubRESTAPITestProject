@@ -222,7 +222,7 @@ protocol BrowseModeDisplay {
         switch itemType {
         case .Membership:
             let router : MembershipRouter = MembershipRouterImplementation()
-            router.showInitialViewController(self)
+            router.showInitialViewController(from: self)
             //        self.navigationController?.pushViewController(Storyboards.Onboarding.instantiateMembershipPlansViewController(), animated: true)
         case .Volunteer:
             self.navigationController?.pushViewController(Storyboards.Main.instantiateBrowseVolunteerViewController(), animated: true)
