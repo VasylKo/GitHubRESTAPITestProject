@@ -11,33 +11,22 @@ import XLForm
 
 class MembershipConfirmDetailsViewController : XLFormViewController {
     
-    
     //TODO: should provide user info
     
     private let router : MembershipRouter
     
-    private enum Tags: String {
-        case Phone = "Phone"
-        case FirstName = "FirstName"
-        case LastName = "LastName"
-        case Email = "Email"
-    }
+    private let pageView = MembershipPageView(pageCount: 3)
     
-    lazy private var stepCounterView: MembershipPageView = {
-        let stepCounterView: MembershipPageView = MembershipPageView()
-        return stepCounterView
-    }()
-    
-    lazy private var phoneRow: XLFormRowDescriptor = {
-        let row = XLFormRowDescriptor(tag: Tags.FirstName.rawValue, rowType: XLFormRowDescriptorTypeText, title: NSLocalizedString("Phone", comment: "Confirm details: Phone name"))
+    private var phoneRow: XLFormRowDescriptor = {
+        let row = XLFormRowDescriptor(tag: nil, rowType: XLFormRowDescriptorTypeText, title: NSLocalizedString("Phone", comment: ""))
         row.required = true
         row.cellConfig.setObject(UIColor.grayColor(), forKey: "textLabel.textColor")
         row.cellConfig.setObject(UIScheme.mainThemeColor, forKey: "tintColor")
         return row
     }()
     
-    lazy private var firstnameRow: XLFormRowDescriptor = {
-        let row = XLFormRowDescriptor(tag: Tags.FirstName.rawValue, rowType: XLFormRowDescriptorTypeText, title: NSLocalizedString("First name", comment: "Confirm details: First name"))
+    private var firstNameRow: XLFormRowDescriptor = {
+        let row = XLFormRowDescriptor(tag: nil, rowType: XLFormRowDescriptorTypeText, title: NSLocalizedString("First name", comment: ""))
         row.required = true
         row.cellConfig.setObject(UIScheme.mainThemeColor, forKey: "textLabel.textColor")
         row.cellConfig.setObject(UIScheme.mainThemeColor, forKey: "tintColor")
@@ -45,8 +34,8 @@ class MembershipConfirmDetailsViewController : XLFormViewController {
     }()
     
     //Last name
-    lazy private var lastnameRow: XLFormRowDescriptor = {
-        let row = XLFormRowDescriptor(tag: Tags.LastName.rawValue, rowType: XLFormRowDescriptorTypeText, title: NSLocalizedString("Last name", comment: "Confirm details: Last name"))
+    private var lastNameRow: XLFormRowDescriptor = {
+        let row = XLFormRowDescriptor(tag: nil, rowType: XLFormRowDescriptorTypeText, title: NSLocalizedString("Last name", comment: ""))
         row.cellConfig.setObject(UIScheme.mainThemeColor, forKey: "textLabel.textColor")
         row.cellConfig.setObject(UIScheme.mainThemeColor, forKey: "tintColor")
         row.required = true
@@ -54,8 +43,8 @@ class MembershipConfirmDetailsViewController : XLFormViewController {
     }()
     
     // Email
-    lazy private var emailRow: XLFormRowDescriptor = {
-        let row = XLFormRowDescriptor(tag: Tags.Email.rawValue, rowType: XLFormRowDescriptorTypeEmail,
+    private var emailRow: XLFormRowDescriptor = {
+        let row = XLFormRowDescriptor(tag: nil, rowType: XLFormRowDescriptorTypeEmail,
             title: NSLocalizedString("Email", comment: "Confirm details: Email"))
         row.cellConfig.setObject(UIScheme.mainThemeColor, forKey: "textLabel.textColor")
         row.cellConfig.setObject(UIScheme.mainThemeColor, forKey: "tintColor")
@@ -66,7 +55,7 @@ class MembershipConfirmDetailsViewController : XLFormViewController {
     
     init(router: MembershipRouter) {
         self.router = router
-        super.init(nibName: String(MembershipConfirmDetailsViewController.self), bundle: nil)
+        super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder: NSCoder) {
@@ -77,49 +66,56 @@ class MembershipConfirmDetailsViewController : XLFormViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //1
         self.initializeForm()
+        //2
+        self.setupInterface()
+    }
+    
+    func setupInterface() {
+        self.title = NSLocalizedString("Confirm Details", comment: "")
+        
+        self.pageView.sizeToFit()
+        self.pageView.redrawView(0)
+        self.view.addSubview(pageView)
     }
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        self.stepCounterView.sizeToFit()
-        var frame: CGRect = self.stepCounterView.frame
+        
+        self.pageView.sizeToFit()
+        var frame: CGRect = self.pageView.frame
         frame.origin.x = 0
         frame.origin.y = self.view.frame.size.height - frame.size.height
-        self.stepCounterView.frame = frame
+        self.pageView.frame = frame
+        
+        self.view.tintColor = UIScheme.mainThemeColor
     }
     
-    //MARK: Customizing
+    //MARK: Form
     
     func initializeForm() {
         
-        self.title = NSLocalizedString("Confirm Details", comment: "Confirm Details")
-        view.tintColor = UIScheme.mainThemeColor
-        
-        let form = XLFormDescriptor(title:NSLocalizedString("Confirm Details", comment: "Confirm Details"))
+        let form = XLFormDescriptor(title:NSLocalizedString("Confirm Details", comment: ""))
         
         //Phone Section
         let phoneSection = XLFormSectionDescriptor.formSection()
         phoneSection.addFormRow(self.phoneRow)
         phoneRow.disabled = true
+        //TODO:set value
         form.addFormSection(phoneSection)
         
         let infoSection = XLFormSectionDescriptor.formSection()
-        
-        infoSection.addFormRow(self.firstnameRow)
-        //add value
-        infoSection.addFormRow(self.lastnameRow)
-        //add value
+        infoSection.addFormRow(self.firstNameRow)
+        //TODO:set value
+        infoSection.addFormRow(self.lastNameRow)
+        //TODO:set value
         infoSection.addFormRow(self.emailRow)
-        //add value
+        //TODO:set value
         form.addFormSection(infoSection)
         
         self.form = form
-        
-        self.stepCounterView.sizeToFit()
-        self.stepCounterView.redrawView(0)
-
-        self.view.addSubview(self.stepCounterView)
     }
     
 }

@@ -12,10 +12,11 @@ class MembershipPageView: UIView {
     
     //MARK: Initializers
     
-    private let numberOfSteps: Int = 3 //TODO make public available if need variable amount of steps
+    private let pageCount: Int  //TODO make public available if need variable amount of steps
     
-    override init (frame : CGRect) {
-        super.init(frame : frame)
+    init(pageCount : Int) {
+        self.pageCount = pageCount
+        super.init(frame: CGRectZero)
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -37,14 +38,14 @@ class MembershipPageView: UIView {
         
         self.layer.sublayers?.removeAll()
         
-        for var index: Int = 0; index < numberOfSteps; ++index {
+        for var index: Int = 0; index < pageCount; ++index {
 
             let circleLayer: CAShapeLayer = CAShapeLayer()
             let circleXOrigin: Int = 36
             let circleDiameter: Int = 16
             let currentDiameter: Int = (index <= activeStep) ? circleDiameter : circleDiameter / 2
             let widthWithoutMargins = (self.frame.size.width - 36 * 2)
-            let marginBetweenCircleCenters = widthWithoutMargins / CGFloat(self.numberOfSteps - 1)
+            let marginBetweenCircleCenters = widthWithoutMargins / CGFloat(self.pageCount - 1)
             
             let activeColor = UIColor(red: 208/255, green: 55/255, blue: 49/255, alpha: 1)
             let unactiveColor = UIColor(red: 243/255, green: 215/255, blue: 218/255, alpha: 1)
