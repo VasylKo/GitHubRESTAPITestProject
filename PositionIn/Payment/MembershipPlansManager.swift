@@ -193,4 +193,3 @@ enum CorporatePlans: Int {
     
     static let count = 5
 }
-    

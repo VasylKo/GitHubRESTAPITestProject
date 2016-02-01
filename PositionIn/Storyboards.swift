@@ -4,6 +4,7 @@
 //
 
 import UIKit
+import PositionIn
 
 //MARK: - Storyboards
 
@@ -313,18 +314,6 @@ struct Storyboards {
 
         static func instantiatePhoneVerificationController() -> PhoneVerificationViewController {
             return self.storyboard.instantiateViewControllerWithIdentifier("PhoneVerificationController") as! PhoneVerificationViewController
-        }
-
-        static func instantiateMembershipPlansViewController() -> MembershipPlansViewController {
-            return self.storyboard.instantiateViewControllerWithIdentifier("MembershipPlansViewController") as! MembershipPlansViewController
-        }
-
-        static func instantiatePlansViewController() -> PlansViewController {
-            return self.storyboard.instantiateViewControllerWithIdentifier("PlansViewController") as! PlansViewController
-        }
-
-        static func instantiateSelectMembershipPlansViewController() -> SelectMembershipPlansViewController {
-            return self.storyboard.instantiateViewControllerWithIdentifier("SelectMembershipPlansViewController") as! SelectMembershipPlansViewController
         }
 
         static func instantiatePhoneNumberNavigationController() -> OnboardingNavigationController {
@@ -1896,27 +1885,6 @@ extension PhoneVerificationViewController {
 }
 
 //MARK: - EditProfileViewController
-
-//MARK: - MembershipPlansViewController
-extension MembershipPlansViewController: IdentifiableProtocol { 
-    var identifier: String? { return "MembershipPlansViewController" }
-    static var identifier: String? { return "MembershipPlansViewController" }
-}
-
-
-//MARK: - PlansViewController
-extension PlansViewController: IdentifiableProtocol { 
-    var identifier: String? { return "PlansViewController" }
-    static var identifier: String? { return "PlansViewController" }
-}
-
-
-//MARK: - SelectMembershipPlansViewController
-extension SelectMembershipPlansViewController: IdentifiableProtocol { 
-    var identifier: String? { return "SelectMembershipPlansViewController" }
-    static var identifier: String? { return "SelectMembershipPlansViewController" }
-}
-
 
 //MARK: - OnboardingNavigationController
 extension OnboardingNavigationController: IdentifiableProtocol { 

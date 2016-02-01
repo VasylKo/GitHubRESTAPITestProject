@@ -10,9 +10,9 @@ import Foundation
 
 protocol MembershipRouter : BaseRouter {
     
-    func showInitialViewController(sourceViewController : UIViewController)
+    func showInitialViewController(from sourceViewController : UIViewController)
     
-    func showMembershipPlanDetailsViewController(sourceViewController : UIViewController)
+    func showMembershipPlanDetailsViewController(from sourceViewController : UIViewController, with plan : MembershipPlan)
     
     func showMembershipConfirmDetailsViewController(sourceViewController : UIViewController)
 

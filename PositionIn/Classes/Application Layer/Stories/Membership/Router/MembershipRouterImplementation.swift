@@ -10,16 +10,18 @@ import UIKit
 
 class MembershipRouterImplementation: BaseRouterImplementation, MembershipRouter {
     
-    func showInitialViewController(sourceViewController : UIViewController) {
-//        let corporatePlansViewController = CorporatePlansViewController(router: self)
-//        let individualPlansViewController = IndividualPlansViewController(router: self)
-//        let initialViewController = MembershipPlansContainerViewController(router: self,
-//                                                       containeredViewControllers: [corporatePlansViewController, individualPlansViewController])
-//        sourceViewController.navigationController?.pushViewController(initialViewController, animated: true)
+    func showInitialViewController(from sourceViewController : UIViewController) {
+        let corporatePlansViewController = MembershipPlansViewController(router: self, type: MembershipPlan.PlanType.Corporate)
+        let individualPlansViewController = MembershipPlansViewController(router: self, type: MembershipPlan.PlanType.Individual)
+        let initialViewController = SegmentedControlContainerViewController(labels: ["Individual", "Corporate"],
+                                            containeredViewControllers: [individualPlansViewController, corporatePlansViewController], title: "Membership")
+        
+        sourceViewController.navigationController?.pushViewController(initialViewController, animated: true)
     }
     
-    func showMembershipPlanDetailsViewController(sourceViewController : UIViewController) {
-        sourceViewController.navigationController?.pushViewController(MembershipPlanDetailsViewController(router: self), animated: true)
+    func showMembershipPlanDetailsViewController(from sourceViewController : UIViewController, with plan : MembershipPlan) {
+        let membershipDetailsViewController = MembershipPlanDetailsViewController(router: self, plan: plan)
+        sourceViewController.navigationController?.pushViewController(membershipDetailsViewController, animated: true)
     }
     
     func showMembershipConfirmDetailsViewController(sourceViewController : UIViewController) {

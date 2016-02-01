@@ -10,13 +10,12 @@ import Foundation
 import ObjectMapper
 
 typealias CRUDObjectId = String
-let CRUDObjectInvalidId: CRUDObjectId = ""
 
+let CRUDObjectInvalidId: CRUDObjectId = String()
 
 protocol CRUDObject: Mappable, CustomStringConvertible {
     
-
-    var objectId: CRUDObjectId { get  set}
+    var objectId: CRUDObjectId { get  set }
     
     //TODO: remove from protocol
     static func endpoint() -> String

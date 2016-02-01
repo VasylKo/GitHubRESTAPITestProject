@@ -9,24 +9,39 @@
 import UIKit
 import CleanroomLogger
 
-public class ContainerViewController: UIViewController {
+class ContainerViewController: UIViewController {
     
-    public var containeredViewControllers : [UIViewController]?
+    private let containeredViewControllers : [UIViewController]
+    
     @IBOutlet weak var containerView : UIView?
     
-    override public func viewDidLoad() {
+    //MARK: Initializers
+    
+    init(nibName: String, containeredViewControllers : [UIViewController]) {
+        self.containeredViewControllers = containeredViewControllers
+        super.init(nibName: nibName, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) is not supported")
+    }
+    
+    //MARK: Lifecycle
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
         assert(containerView != nil)
-        assert(containeredViewControllers != nil)
     }
     
     private var _activeIndex : Int = -1
-    public var activeIndex : Int {
+    var activeIndex : Int {
         get {
             return _activeIndex
         }
         set {
-            if (self.containeredViewControllers!.count - 1 >= newValue) {
-                self.currentViewController = self.containeredViewControllers![newValue]
+            if (self.containeredViewControllers.count - 1 >= newValue) {
+                self.currentViewController = self.containeredViewControllers[newValue]
                 _activeIndex = newValue;
             } else {
                 Log.error?.message("Unacceptable value of activeIndex: \(newValue))")
@@ -35,7 +50,7 @@ public class ContainerViewController: UIViewController {
     }
     
     private var _currentViewController : UIViewController?
-    public var currentViewController : UIViewController {
+    var currentViewController : UIViewController {
         get {
             return _currentViewController!
         }
