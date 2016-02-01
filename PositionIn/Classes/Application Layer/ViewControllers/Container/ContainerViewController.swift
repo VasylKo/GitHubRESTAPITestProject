@@ -29,6 +29,8 @@ class ContainerViewController: UIViewController {
     //MARK: Lifecycle
     
     override func viewDidLoad() {
+        super.viewDidLoad()
+        
         assert(containerView != nil)
     }
     
