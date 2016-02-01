@@ -1343,7 +1343,6 @@
 				CDB5B5C31C5B9C2400413715 /* Plans */,
 				CDB5B5BE1C5B9C2400413715 /* PlanDetails */,
 				CDE1B9021C5BBE5900F76F32 /* MembershipPageView.swift */,
-				CD795C381C58EFC700C1C298 /* MembershipPlansContainerViewController.xib */,
 			);
 			path = Interface;
 			sourceTree = "<group>";

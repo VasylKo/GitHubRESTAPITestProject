@@ -27,6 +27,8 @@ class PaymentViewController: XLFormViewController, PaymentReponseDelegate {
         fatalError("init(coder:) is not supported")
     }
     
+    //MARK: Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -49,7 +51,8 @@ class PaymentViewController: XLFormViewController, PaymentReponseDelegate {
         
         self.view.tintColor = UIScheme.mainThemeColor
     }
-
+    
+    //MARK: Setup Interface
 
     override func showFormValidationError(error: NSError!) {
         if let error = error {
@@ -114,6 +117,7 @@ class PaymentViewController: XLFormViewController, PaymentReponseDelegate {
     //MARK: PaymentReponseDelegate
     
     func setError(hidden: Bool, error: String?) {
+        //TODO should change handler
         self.sideBarController?.executeAction(SidebarViewController.defaultAction)
         self.dismissViewControllerAnimated(true, completion: nil)
         self.navigationController?.popToRootViewControllerAnimated(true)
