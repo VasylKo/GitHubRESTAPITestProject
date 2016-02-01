@@ -13,5 +13,7 @@ protocol MembershipRouter : BaseRouter {
     func showInitialViewController(from sourceViewController : UIViewController)
     
     func showMembershipPlanDetailsViewController(from sourceViewController : UIViewController, with plan : MembershipPlan)
+    
+    func showMembershipConfirmDetailsViewController(sourceViewController : UIViewController)
 
 }

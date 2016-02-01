@@ -24,4 +24,8 @@ class MembershipRouterImplementation: BaseRouterImplementation, MembershipRouter
         sourceViewController.navigationController?.pushViewController(membershipDetailsViewController, animated: true)
     }
     
+    func showMembershipConfirmDetailsViewController(sourceViewController : UIViewController) {
+        sourceViewController.navigationController?.pushViewController(MembershipConfirmDetailsViewController(router: self), animated: true)
+    }
+    
 }

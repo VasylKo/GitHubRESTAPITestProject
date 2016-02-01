@@ -99,6 +99,7 @@
 		CDBDD9B11C47CAAB007578BC /* PositionIn.BrowseVolunteerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CDBDD9B01C47CAAB007578BC /* PositionIn.BrowseVolunteerViewController.xib */; };
 		CDBDD9B31C491617007578BC /* BomaHotel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBDD9B21C491617007578BC /* BomaHotel.swift */; };
 		CDE1B8F81C5BB7F900F76F32 /* MembershipPlansManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDE1B8F71C5BB7F900F76F32 /* MembershipPlansManager.swift */; };
+		CDE1B9041C5BBE5900F76F32 /* MembershipPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDE1B9021C5BBE5900F76F32 /* MembershipPageView.swift */; };
 		CDEDD96B1C45033C00396594 /* PostToContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDEDD9691C45033C00396594 /* PostToContainerViewController.swift */; };
 		CDEDD96C1C45033C00396594 /* PostToContainerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CDEDD96A1C45033C00396594 /* PostToContainerViewController.xib */; };
 		CDEDD9731C45242400396594 /* VolunteerSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDEDD9711C45242400396594 /* VolunteerSearchViewController.swift */; };
@@ -578,6 +579,7 @@
 		CDBDD9B01C47CAAB007578BC /* PositionIn.BrowseVolunteerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.BrowseVolunteerViewController.xib; sourceTree = "<group>"; };
 		CDBDD9B21C491617007578BC /* BomaHotel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BomaHotel.swift; sourceTree = "<group>"; };
 		CDE1B8F71C5BB7F900F76F32 /* MembershipPlansManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MembershipPlansManager.swift; sourceTree = "<group>"; };
+		CDE1B9021C5BBE5900F76F32 /* MembershipPageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MembershipPageView.swift; sourceTree = "<group>"; };
 		CDEDD9691C45033C00396594 /* PostToContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostToContainerViewController.swift; sourceTree = "<group>"; };
 		CDEDD96A1C45033C00396594 /* PostToContainerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PostToContainerViewController.xib; sourceTree = "<group>"; };
 		CDEDD9711C45242400396594 /* VolunteerSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VolunteerSearchViewController.swift; sourceTree = "<group>"; };
@@ -1340,6 +1342,8 @@
 			children = (
 				CDB5B5C31C5B9C2400413715 /* Plans */,
 				CDB5B5BE1C5B9C2400413715 /* PlanDetails */,
+				CDE1B9021C5BBE5900F76F32 /* MembershipPageView.swift */,
+				CD795C381C58EFC700C1C298 /* MembershipPlansContainerViewController.xib */,
 			);
 			path = Interface;
 			sourceTree = "<group>";
@@ -3706,6 +3710,7 @@
 				2431EBE01B94C1DC009FB158 /* Event.swift in Sources */,
 				24EF62111BA81A6B00472531 /* ChatHistoryCellModel.swift in Sources */,
 				E6BEF1EF1B9C9D6400511B46 /* CommunityViewController.swift in Sources */,
+				CDE1B9041C5BBE5900F76F32 /* MembershipPageView.swift in Sources */,
 				E68B52061B8736F4006B980C /* FilterViewController.swift in Sources */,
 				E62B16F61B5C1AA700D446BC /* MainMenuUserCell.swift in Sources */,
 				E6F3093E1BA81FAF00C9420C /* PickPhotoView.swift in Sources */,
