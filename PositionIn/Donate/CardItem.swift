@@ -9,7 +9,7 @@
 import Box
 
 enum CardItem: Int {
-    case MPesa, Airtel, OrangeMonde, PayPal, CreditDebitCard
+    case MPesa, Airtel, PayPal, CreditDebitCard
     
     static var count = (CreditDebitCard.rawValue + 1)
     
@@ -19,8 +19,7 @@ enum CardItem: Int {
             return "M-Pesa"
         case .Airtel:
             return "Airtel"
-        case .OrangeMonde:
-            return "Orange Money"
+
         case .PayPal:
             return "PayPal"
         case .CreditDebitCard:
@@ -35,8 +34,7 @@ enum CardItem: Int {
             return UIImage(named: "mpesa")
         case .Airtel:
             return UIImage(named: "airtel")
-        case .OrangeMonde:
-            return UIImage(named: "orange_money")
+
         case .PayPal:
             return UIImage(named: "paypal")
         case .CreditDebitCard:
@@ -49,8 +47,6 @@ enum CardItem: Int {
         case .MPesa:
             return "Mpesa"
         case .Airtel:
-            return "Braintree"
-        case .OrangeMonde:
             return "Braintree"
         case .PayPal:
             return "Braintree"
