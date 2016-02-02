@@ -14,7 +14,7 @@ class MembershipConfirmDetailsViewController : XLFormViewController {
     //TODO: should provide user info
     
     private let router : MembershipRouter
-    
+    private var userProfile: UserProfile?
     private let pageView = MembershipPageView(pageCount: 3)
     
     private var phoneRow: XLFormRowDescriptor = {
@@ -69,14 +69,19 @@ class MembershipConfirmDetailsViewController : XLFormViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        //1
-        self.initializeForm()
-        //2
-        self.setupInterface()
+        self.loadData()
+
     }
     
-    func setupInterface() {
+    func loadData (){
+        api().getMyProfile().onSuccess(callback: {[weak self] userProfile in
+            self?.userProfile = userProfile
+            self?.initializeForm()
+            self?.setupInterface()
+        })
+    }
+    
+    private func setupInterface() {
         self.title = NSLocalizedString("Confirm Details", comment: "")
         
         let rightBarButtonItem: UIBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Next", comment: ""),
@@ -102,7 +107,7 @@ class MembershipConfirmDetailsViewController : XLFormViewController {
     
     //MARK: Form
     
-    func initializeForm() {
+    private func initializeForm() {
         
         let form = XLFormDescriptor(title:NSLocalizedString("Confirm Details", comment: ""))
         
@@ -127,7 +132,7 @@ class MembershipConfirmDetailsViewController : XLFormViewController {
     
     //MARK: Target- Action
     
-    func nextButtonTouched() {
+    private func nextButtonTouched() {
         //TODO: add validations
         self.router.showPaymentViewController(from: self, with: self.plan)
     }
