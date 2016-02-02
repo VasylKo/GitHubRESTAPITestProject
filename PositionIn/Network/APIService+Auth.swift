@@ -26,6 +26,10 @@ extension APIService {
         return sessionController.currentUserId()
     }
     
+    func isUserHasActiveMembershipPlan() -> Bool {
+        return sessionController.isUserHasActiveMembershipPlan()
+    }
+    
     //Returns true if user is registered
     func isUserAuthorized() -> Bool {
         return sessionController.isUserAuthorized()
@@ -35,6 +39,7 @@ extension APIService {
     func isUserAuthorized() -> Future<Void, NSError> {
         return handleFailure(sessionController.isUserAuthorized())
     }
+    
     
     //Returns true if it is current user
     func isCurrentUser(userId: CRUDObjectId) -> Bool {
@@ -222,9 +227,6 @@ extension APIService {
         return getMyProfile().andThen { result in
             if let profile = result.value {
                 self.sessionController.updateCurrentStatus(profile)                
-                if let newPassword = newPasword {
-                    self.sessionController.updatePassword(newPassword)
-                }
                 self.sendUserDidChangeNotification(profile)
             }
         }

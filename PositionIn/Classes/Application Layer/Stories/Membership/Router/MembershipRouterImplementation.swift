@@ -11,12 +11,15 @@ import UIKit
 class MembershipRouterImplementation: BaseRouterImplementation, MembershipRouter {
     
     func showInitialViewController(from sourceViewController : UIViewController) {
-        let corporatePlansViewController = MembershipPlansViewController(router: self, type: MembershipPlan.PlanType.Corporate)
-        let individualPlansViewController = MembershipPlansViewController(router: self, type: MembershipPlan.PlanType.Individual)
-        let initialViewController = SegmentedControlContainerViewController(labels: ["Individual", "Corporate"],
-                                            containeredViewControllers: [individualPlansViewController, corporatePlansViewController], title: "Membership")
-        
-        sourceViewController.navigationController?.pushViewController(initialViewController, animated: true)
+        if (api().isUserHasActiveMembershipPlan()) {
+            self.showMembershipMemberCardViewController(from: sourceViewController)
+        } else {
+            let corporatePlansViewController = MembershipPlansViewController(router: self, type: MembershipPlan.PlanType.Corporate)
+            let individualPlansViewController = MembershipPlansViewController(router: self, type: MembershipPlan.PlanType.Individual)
+            let initialViewController = SegmentedControlContainerViewController(labels: ["Individual", "Corporate"],
+                containeredViewControllers: [individualPlansViewController, corporatePlansViewController], title: "Membership")
+            sourceViewController.navigationController?.pushViewController(initialViewController, animated: true)
+        }
     }
     
     func showMembershipPlanDetailsViewController(from sourceViewController : UIViewController, with plan : MembershipPlan) {
@@ -29,8 +32,8 @@ class MembershipRouterImplementation: BaseRouterImplementation, MembershipRouter
             animated: true)
     }
     
-    func showMembershipMemberCardViewController(from sourceViewController : UIViewController, with plan : MembershipPlan) {
-        sourceViewController.navigationController?.pushViewController(MembershipMemberCardViewController(router: self, plan: plan), animated: true)
+    func showMembershipMemberCardViewController(from sourceViewController : UIViewController) {
+        sourceViewController.navigationController?.pushViewController(MembershipMemberCardViewController(router: self), animated: true)
     }
     
     func showPaymentViewController(from sourceViewController : UIViewController, with plan : MembershipPlan) {

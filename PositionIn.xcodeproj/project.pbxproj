@@ -1590,11 +1590,11 @@
 		D1DA1EAF1C5909D7009F5AFA /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				CD8ED0D41C60AD0900576DBF /* MemberCard */,
 				CD795C811C5A6DCB00C1C298 /* Plans */,
 				D1DA1EB61C5909D7009F5AFA /* PlanDetails */,
 				D1DA1EB81C5909D7009F5AFA /* PlanPayment */,
 				D1DA1EB01C5909D7009F5AFA /* ConfirmDetails */,
+				CD8ED0D41C60AD0900576DBF /* MemberCard */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";

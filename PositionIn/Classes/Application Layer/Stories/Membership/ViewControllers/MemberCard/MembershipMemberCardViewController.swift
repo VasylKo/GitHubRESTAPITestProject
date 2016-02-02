@@ -8,19 +8,22 @@
 
 import Foundation
 import CleanroomLogger
+import BrightFutures
 
 class MembershipMemberCardViewController : UIViewController {
     
     private let router : MembershipRouter
-    private let plan : MembershipPlan
+    
+    private var profile : UserProfile?
+    private var plan : MembershipPlan?
+    
     @IBOutlet weak var membershipCardView: MembershipCardView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     //MARK: Initializers
     
-    init(router: MembershipRouter, plan : MembershipPlan) {
+    init(router: MembershipRouter) {
         self.router = router
-        self.plan = plan
         super.init(nibName: String(MembershipMemberCardViewController.self), bundle: nil)
     }
     
@@ -35,20 +38,27 @@ class MembershipMemberCardViewController : UIViewController {
         
         self.setupInterface()
         
-        api().getMyProfile().onSuccess { [weak self] profile in
-            if let strongSelf = self {
-                strongSelf.membershipCardView.configure(with: profile, plan: strongSelf.plan)
-                UIView.animateWithDuration(0.4, animations: { () -> Void in
-                    strongSelf.membershipCardView.alpha = 1.0
-                })
-            }
-        }.onComplete { [weak self] _ in
-            self?.activityIndicator.stopAnimating()
-        }
+        self.getData()
     }
     
     func setupInterface() {
         self.title = String("Your Membership")
+    }
+    
+    func getData() {
+        api().getMyProfile().flatMap { [weak self] (profile : UserProfile) -> Future<MembershipPlan, NSError> in
+            self?.profile = profile
+            return api().getMembership(self?.profile?.membershipDetails?.membershipPlanId ?? CRUDObjectInvalidId)
+            }.onSuccess { [weak self] plan in
+                if let strongSelf = self {
+                    strongSelf.plan = plan
+                    strongSelf.membershipCardView.configure(with: strongSelf.profile!, plan: plan)
+                    UIView.animateWithDuration(0.4, animations: { () -> Void in
+                        strongSelf.membershipCardView.alpha = 1.0
+                    })
+                }}.onComplete { [weak self] _ in
+                    self?.activityIndicator.stopAnimating()
+        }
     }
     
     //MARK: Targe-Action

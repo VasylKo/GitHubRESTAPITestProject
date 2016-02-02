@@ -33,7 +33,7 @@ class MembershipCardView : UIView {
     func configure(with profile : UserProfile, plan : MembershipPlan) {
         self.lastNameLabel.text = profile.lastName
         self.firstNameLabel.text = profile.firstName
-        //profile image
+        self.profileImageView.setImageFromURL(profile.avatar)
         self.cardIdLabel.text = profile.membershipDetails?.membershipCardId ?? "0000 0000 0000 0000"
         self.priceLabel.text = String("KES \(plan.price ?? 0)")
         self.planNameLabel.text = plan.name
