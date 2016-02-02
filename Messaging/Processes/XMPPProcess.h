@@ -31,7 +31,7 @@ typedef void(^XMPPProcesseCompletionBlock)(id __nullable result, NSError * __nul
 - (void)executeWithCompletion:(nullable XMPPProcesseCompletionBlock)completionBlock;
 
 
--(nullable instancetype) init __attribute__((unavailable("init not available")));
+- (nullable instancetype)init NS_UNAVAILABLE;
 
 @end
 
