@@ -12,13 +12,15 @@ import CleanroomLogger
 class MembershipMemberCardViewController : UIViewController {
     
     private let router : MembershipRouter
+    private let plan : MembershipPlan
     @IBOutlet weak var membershipCardView: MembershipCardView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     //MARK: Initializers
     
-    init(router: MembershipRouter) {
+    init(router: MembershipRouter, plan : MembershipPlan) {
         self.router = router
+        self.plan = plan
         super.init(nibName: String(MembershipMemberCardViewController.self), bundle: nil)
     }
     
@@ -34,7 +36,7 @@ class MembershipMemberCardViewController : UIViewController {
         self.setupInterface()
         
         api().getMyProfile().onSuccess { [weak self] profile in
-            self?.membershipCardView.configure(with: profile, membershipPlan: nil, memebershipDetails: nil)
+            self?.membershipCardView.configure(with: profile, plan: (self?.plan)!)
             UIView.animateWithDuration(0.4, animations: { () -> Void in
                 self?.membershipCardView.alpha = 1.0
             })

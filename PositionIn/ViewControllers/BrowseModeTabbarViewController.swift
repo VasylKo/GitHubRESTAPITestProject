@@ -221,8 +221,7 @@ protocol BrowseModeDisplay {
     func browseGridViewControllerSelectItem(itemType: HomeItem) {
         switch itemType {
         case .Membership:
-            //MembershipRouterImplementation().showInitialViewController(from: self)
-            MembershipRouterImplementation().showMembershipMemberCardViewController(from: self)
+            MembershipRouterImplementation().showInitialViewController(from: self)
         case .Volunteer:
             self.navigationController?.pushViewController(Storyboards.Main.instantiateBrowseVolunteerViewController(), animated: true)
         case .Market:

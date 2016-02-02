@@ -336,10 +336,6 @@ struct Storyboards {
             return self.storyboard.instantiateViewControllerWithIdentifier("SelectPaymentMethodController") as! SelectPaymentMethodController
         }
 
-        static func instantiatePaymentViewControllerId() -> PaymentViewController {
-            return self.storyboard.instantiateViewControllerWithIdentifier("PaymentViewControllerId") as! PaymentViewController
-        }
-
         static func instantiateBraintreePaymentViewController() -> BraintreePaymentViewController {
             return self.storyboard.instantiateViewControllerWithIdentifier("BraintreePaymentViewController") as! BraintreePaymentViewController
         }
@@ -657,10 +653,9 @@ extension BrowseCommunityViewController {
         var identifier: String? { return self.description } 
         var description: String { return self.rawValue }
     }
-
 }
 
-//MARK: - BrowseVolunteerViewController
+////MARK: - BrowseVolunteerViewController
 //extension UIStoryboardSegue {
 //    func selection() -> BrowseVolunteerViewController.Segue? {
 //        if let identifier = self.identifier {
@@ -1994,13 +1989,6 @@ extension DonateViewController {
 extension SelectPaymentMethodController: IdentifiableProtocol { 
     var identifier: String? { return "SelectPaymentMethodController" }
     static var identifier: String? { return "SelectPaymentMethodController" }
-}
-
-
-//MARK: - PaymentViewController
-extension PaymentViewController: IdentifiableProtocol { 
-    var identifier: String? { return "PaymentViewControllerId" }
-    static var identifier: String? { return "PaymentViewControllerId" }
 }
 
 

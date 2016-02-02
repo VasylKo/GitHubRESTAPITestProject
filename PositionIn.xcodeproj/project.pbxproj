@@ -103,7 +103,6 @@
 		CDBDD9AA1C47AFDD007578BC /* BrowseVolunteerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBDD9A81C47AFDD007578BC /* BrowseVolunteerViewController.swift */; };
 		CDBDD9B11C47CAAB007578BC /* PositionIn.BrowseVolunteerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CDBDD9B01C47CAAB007578BC /* PositionIn.BrowseVolunteerViewController.xib */; };
 		CDBDD9B31C491617007578BC /* BomaHotel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBDD9B21C491617007578BC /* BomaHotel.swift */; };
-		CDE1B8F81C5BB7F900F76F32 /* MembershipPlansManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDE1B8F71C5BB7F900F76F32 /* MembershipPlansManager.swift */; };
 		CDE1B9041C5BBE5900F76F32 /* MembershipPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDE1B9021C5BBE5900F76F32 /* MembershipPageView.swift */; };
 		CDEDD96B1C45033C00396594 /* PostToContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDEDD9691C45033C00396594 /* PostToContainerViewController.swift */; };
 		CDEDD96C1C45033C00396594 /* PostToContainerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CDEDD96A1C45033C00396594 /* PostToContainerViewController.xib */; };
@@ -145,14 +144,13 @@
 		D1B780CF1C0F51A800EF5825 /* DonateCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1B780CE1C0F51A800EF5825 /* DonateCell.xib */; };
 		D1C475EA1C106DB70096D383 /* DonateNotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C475E91C106DB70096D383 /* DonateNotificationViewController.swift */; };
 		D1C475EC1C1081770096D383 /* PaymentCompletedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C475EB1C1081770096D383 /* PaymentCompletedViewController.swift */; };
+		D1CAA74F1C60B1920046130E /* MembershipPaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1CAA74C1C60B1920046130E /* MembershipPaymentViewController.swift */; };
+		D1CAA7521C60BB1E0046130E /* PaymentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1CAA7501C60BB1E0046130E /* PaymentTableViewCell.swift */; };
+		D1CAA7531C60BB1E0046130E /* PaymentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1CAA7511C60BB1E0046130E /* PaymentTableViewCell.xib */; };
 		D1DA176C1C05B7BE0091A8CE /* BrowseGridCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DA176A1C05B7BE0091A8CE /* BrowseGridCollectionViewCell.swift */; };
 		D1DA176D1C05B7BE0091A8CE /* PositionIn.BrowseGridCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1DA176B1C05B7BE0091A8CE /* PositionIn.BrowseGridCollectionViewCell.xib */; };
 		D1DA1EBC1C5909D7009F5AFA /* MembershipConfirmDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DA1EB11C5909D7009F5AFA /* MembershipConfirmDetailsViewController.swift */; };
 		D1DA1EBF1C5909D7009F5AFA /* MembershipPlanDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DA1EB71C5909D7009F5AFA /* MembershipPlanDetailsViewController.swift */; };
-		D1DA1EC01C5909D7009F5AFA /* MembershipPlanPaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DA1EB91C5909D7009F5AFA /* MembershipPlanPaymentViewController.swift */; };
-		D1DC3EAB1C15B21300E6B772 /* PaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DC3EAA1C15B21300E6B772 /* PaymentViewController.swift */; };
-		D1DC3EB11C15B3CF00E6B772 /* PaymentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DC3EAF1C15B3CF00E6B772 /* PaymentTableViewCell.swift */; };
-		D1DC3EB21C15B3CF00E6B772 /* PaymentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1DC3EB01C15B3CF00E6B772 /* PaymentTableViewCell.xib */; };
 		D1F1FF251C22F384006D2E75 /* VolunteerDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F1FF231C22F384006D2E75 /* VolunteerDetailsViewController.swift */; };
 		D1F1FF261C22F384006D2E75 /* PositionIn.VolunteerDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1F1FF241C22F384006D2E75 /* PositionIn.VolunteerDetailsViewController.xib */; };
 		D1F1FF2E1C24265B006D2E75 /* GiveBloodDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F1FF2C1C24265B006D2E75 /* GiveBloodDetailsViewController.swift */; };
@@ -588,7 +586,6 @@
 		CDBDD9A81C47AFDD007578BC /* BrowseVolunteerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowseVolunteerViewController.swift; sourceTree = "<group>"; };
 		CDBDD9B01C47CAAB007578BC /* PositionIn.BrowseVolunteerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.BrowseVolunteerViewController.xib; sourceTree = "<group>"; };
 		CDBDD9B21C491617007578BC /* BomaHotel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BomaHotel.swift; sourceTree = "<group>"; };
-		CDE1B8F71C5BB7F900F76F32 /* MembershipPlansManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MembershipPlansManager.swift; sourceTree = "<group>"; };
 		CDE1B9021C5BBE5900F76F32 /* MembershipPageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MembershipPageView.swift; sourceTree = "<group>"; };
 		CDEDD9691C45033C00396594 /* PostToContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostToContainerViewController.swift; sourceTree = "<group>"; };
 		CDEDD96A1C45033C00396594 /* PostToContainerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PostToContainerViewController.xib; sourceTree = "<group>"; };
@@ -631,14 +628,13 @@
 		D1B780CE1C0F51A800EF5825 /* DonateCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DonateCell.xib; sourceTree = "<group>"; };
 		D1C475E91C106DB70096D383 /* DonateNotificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DonateNotificationViewController.swift; sourceTree = "<group>"; };
 		D1C475EB1C1081770096D383 /* PaymentCompletedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentCompletedViewController.swift; sourceTree = "<group>"; };
+		D1CAA74C1C60B1920046130E /* MembershipPaymentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MembershipPaymentViewController.swift; sourceTree = "<group>"; };
+		D1CAA7501C60BB1E0046130E /* PaymentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentTableViewCell.swift; sourceTree = "<group>"; };
+		D1CAA7511C60BB1E0046130E /* PaymentTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PaymentTableViewCell.xib; sourceTree = "<group>"; };
 		D1DA176A1C05B7BE0091A8CE /* BrowseGridCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowseGridCollectionViewCell.swift; sourceTree = "<group>"; };
 		D1DA176B1C05B7BE0091A8CE /* PositionIn.BrowseGridCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.BrowseGridCollectionViewCell.xib; sourceTree = "<group>"; };
 		D1DA1EB11C5909D7009F5AFA /* MembershipConfirmDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MembershipConfirmDetailsViewController.swift; sourceTree = "<group>"; };
 		D1DA1EB71C5909D7009F5AFA /* MembershipPlanDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MembershipPlanDetailsViewController.swift; sourceTree = "<group>"; };
-		D1DA1EB91C5909D7009F5AFA /* MembershipPlanPaymentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MembershipPlanPaymentViewController.swift; sourceTree = "<group>"; };
-		D1DC3EAA1C15B21300E6B772 /* PaymentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentViewController.swift; sourceTree = "<group>"; };
-		D1DC3EAF1C15B3CF00E6B772 /* PaymentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentTableViewCell.swift; sourceTree = "<group>"; };
-		D1DC3EB01C15B3CF00E6B772 /* PaymentTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PaymentTableViewCell.xib; sourceTree = "<group>"; };
 		D1F1FF231C22F384006D2E75 /* VolunteerDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VolunteerDetailsViewController.swift; sourceTree = "<group>"; };
 		D1F1FF241C22F384006D2E75 /* PositionIn.VolunteerDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.VolunteerDetailsViewController.xib; sourceTree = "<group>"; };
 		D1F1FF2C1C24265B006D2E75 /* GiveBloodDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GiveBloodDetailsViewController.swift; sourceTree = "<group>"; };
@@ -1351,6 +1347,7 @@
 			isa = PBXGroup;
 			children = (
 				CD8ED0D71C60AD5000576DBF /* MemberCard */,
+				D1CAA7471C60AD070046130E /* Payment */,
 				CDB5B5C31C5B9C2400413715 /* Plans */,
 				CDB5B5BE1C5B9C2400413715 /* PlanDetails */,
 				CDE1B9021C5BBE5900F76F32 /* MembershipPageView.swift */,
@@ -1563,6 +1560,24 @@
 			path = DonateView;
 			sourceTree = "<group>";
 		};
+		D1CAA7471C60AD070046130E /* Payment */ = {
+			isa = PBXGroup;
+			children = (
+				D1CAA7491C60B1920046130E /* PaymentTableViewCell */,
+				D1CAA74C1C60B1920046130E /* MembershipPaymentViewController.swift */,
+			);
+			path = Payment;
+			sourceTree = "<group>";
+		};
+		D1CAA7491C60B1920046130E /* PaymentTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				D1CAA7501C60BB1E0046130E /* PaymentTableViewCell.swift */,
+				D1CAA7511C60BB1E0046130E /* PaymentTableViewCell.xib */,
+			);
+			path = PaymentTableViewCell;
+			sourceTree = "<group>";
+		};
 		D1DA17691C05B71D0091A8CE /* BrowseGridCollectionViewCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -1603,28 +1618,8 @@
 		D1DA1EB81C5909D7009F5AFA /* PlanPayment */ = {
 			isa = PBXGroup;
 			children = (
-				D1DA1EB91C5909D7009F5AFA /* MembershipPlanPaymentViewController.swift */,
 			);
 			path = PlanPayment;
-			sourceTree = "<group>";
-		};
-		D1DC3EA91C15AC3E00E6B772 /* Payment */ = {
-			isa = PBXGroup;
-			children = (
-				D1DC3EAC1C15B36D00E6B772 /* PaymentCell */,
-				D1DC3EAA1C15B21300E6B772 /* PaymentViewController.swift */,
-				CDE1B8F71C5BB7F900F76F32 /* MembershipPlansManager.swift */,
-			);
-			path = Payment;
-			sourceTree = "<group>";
-		};
-		D1DC3EAC1C15B36D00E6B772 /* PaymentCell */ = {
-			isa = PBXGroup;
-			children = (
-				D1DC3EAF1C15B3CF00E6B772 /* PaymentTableViewCell.swift */,
-				D1DC3EB01C15B3CF00E6B772 /* PaymentTableViewCell.xib */,
-			);
-			path = PaymentCell;
 			sourceTree = "<group>";
 		};
 		D1F1FF201C22F23A006D2E75 /* VolunteerDetails */ = {
@@ -1915,7 +1910,6 @@
 				D1FD85311C1EE5E200C2E87B /* TrainingDetails */,
 				D1FD85301C1EE5DA00C2E87B /* PromotionDetails */,
 				D1FD852F1C1EE5D400C2E87B /* EventDetails */,
-				D1DC3EA91C15AC3E00E6B772 /* Payment */,
 				D1B780C61C0F4E4400EF5825 /* Donate */,
 				D15F47451C0AFD14009ED3FD /* CallAmbulance */,
 				D1F86CEF1BFCAA72006E0C49 /* Onboarding */,
@@ -3469,7 +3463,6 @@
 				D1379E8E1C2A98710041AA4E /* PositionIn.ExploreCardCell.xib in Resources */,
 				CDEDD9781C45243900396594 /* PositionIn.CommunitySearchViewController.xib in Resources */,
 				D118A2AB1C0FBC380020B363 /* PositionIn.CardTableViewCell.xib in Resources */,
-				D1DC3EB21C15B3CF00E6B772 /* PaymentTableViewCell.xib in Resources */,
 				D1FD85421C1EE8EA00C2E87B /* PositionIn.EventDetailsViewController.xib in Resources */,
 				D18A1FDD1BEB95D9003F158D /* PositionIn.ChangePasswordViewController.xib in Resources */,
 				50D1AFA71BBAD21400957882 /* PositionIn.PostLikeCommentCell.xib in Resources */,
@@ -3484,6 +3477,7 @@
 				CDEDD9741C45242400396594 /* PositionIn.VolunteerSearchViewController.xib in Resources */,
 				E6F3093F1BA81FAF00C9420C /* PositionIn.AttachedPhotosView.xib in Resources */,
 				CD795BDE1C57B4EE00C1C298 /* Appfile in Resources */,
+				D1CAA7531C60BB1E0046130E /* PaymentTableViewCell.xib in Resources */,
 				E6F7A4721BA335070069152A /* PositionIn.WalletViewController.xib in Resources */,
 				E6BEF1C61B9C556300511B46 /* PositionIn.PostViewController.xib in Resources */,
 				CDB5B5CD1C5B9C2400413715 /* MembershipPlanTableViewCell.xib in Resources */,
@@ -3677,7 +3671,6 @@
 				D1C475EA1C106DB70096D383 /* DonateNotificationViewController.swift in Sources */,
 				D12EDEC71BFF4F0D00FB6245 /* PhoneVerificationViewController.swift in Sources */,
 				D1DA1EBF1C5909D7009F5AFA /* MembershipPlanDetailsViewController.swift in Sources */,
-				D1DA1EC01C5909D7009F5AFA /* MembershipPlanPaymentViewController.swift in Sources */,
 				500D7FA31BC2AACF008C8C82 /* SearchItem.swift in Sources */,
 				E661158D1B73778B003DB5B3 /* RecoverPasswordViewController.swift in Sources */,
 				50D1AFA61BBAD21400957882 /* PostLikeCommentCell.swift in Sources */,
@@ -3694,7 +3687,6 @@
 				E6A869F41B60FF2100797D16 /* UserProfile.swift in Sources */,
 				E6BEF1C81B9C5A0C00511B46 /* PostCellModelFactory.swift in Sources */,
 				E6C5CE1B1B83A24500265955 /* UIScheme.swift in Sources */,
-				D1DC3EAB1C15B21300E6B772 /* PaymentViewController.swift in Sources */,
 				E69420F91B66358000F34F06 /* ProductDetailsViewController.swift in Sources */,
 				E63201701B984D8B0066C62E /* DescriptionTableViewCell.swift in Sources */,
 				E6C952371BA1D9960032254F /* ProfileStatsCell.swift in Sources */,
@@ -3735,7 +3727,6 @@
 				CD8ED0E21C60D35900576DBF /* MembershipDetails.swift in Sources */,
 				D1FD85461C1EF6DB00C2E87B /* BomaHotelsDetailsViewController.swift in Sources */,
 				E6A869EE1B60D42C00797D16 /* APIService.swift in Sources */,
-				CDE1B8F81C5BB7F900F76F32 /* MembershipPlansManager.swift in Sources */,
 				D1F86CF31BFCBAD3006E0C49 /* PhoneNumberViewController.swift in Sources */,
 				D15F47441C088A26009ED3FD /* HomeItem.swift in Sources */,
 				CD8ED0E01C60BE7C00576DBF /* MembershipCardView.swift in Sources */,
@@ -3773,9 +3764,11 @@
 				E6C5F4581BCE908800E3B8C7 /* ConversationManager.swift in Sources */,
 				E66A3E1B1B9CE2D6005FA33B /* OrderViewController.swift in Sources */,
 				E64D00651B7C9601007693E0 /* BaseAddItemViewController.swift in Sources */,
+				D1CAA74F1C60B1920046130E /* MembershipPaymentViewController.swift in Sources */,
 				CDEDD9731C45242400396594 /* VolunteerSearchViewController.swift in Sources */,
 				E65E872C1B611BA200AE444D /* Post.swift in Sources */,
 				E6BEF1C41B9C54EF00511B46 /* PostViewController.swift in Sources */,
+				D1CAA7521C60BB1E0046130E /* PaymentTableViewCell.swift in Sources */,
 				E66115A91B73AE0F003DB5B3 /* AddEventViewController.swift in Sources */,
 				CDB5B5C81C5B9C2400413715 /* MembershipPlanDetailsBenefitTableViewCell.swift in Sources */,
 				D112D9DA1C2C83230051039E /* CreateConversationContainerViewController.swift in Sources */,
@@ -3832,7 +3825,6 @@
 				E604B16E1BF96F14004DA20B /* ChatHistory.swift in Sources */,
 				D100DF0B1BF4AA0300C81054 /* GoogleAnalyticsHelper.swift in Sources */,
 				E6D4D5B81B6FA7A7003134CB /* SearchTransition.swift in Sources */,
-				D1DC3EB11C15B3CF00E6B772 /* PaymentTableViewCell.swift in Sources */,
 				E6F3093D1BA81FAF00C9420C /* AttachedPhotosView.swift in Sources */,
 				E6BEF1DB1B9C7F9D00511B46 /* BrowseCommunityCellFactory.swift in Sources */,
 				E660E5301B5AC28600F52050 /* MainMenuCell.swift in Sources */,

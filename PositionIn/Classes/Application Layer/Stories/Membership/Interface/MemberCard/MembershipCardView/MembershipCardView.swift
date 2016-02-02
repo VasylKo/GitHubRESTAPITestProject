@@ -30,15 +30,15 @@ class MembershipCardView : UIView {
     
     //MARK: Public
     
-    func configure(with userProfile : UserProfile, membershipPlan : MembershipPlan?, memebershipDetails : MembershipDetails?) {
-        self.lastNameLabel.text = userProfile.lastName
-        self.firstNameLabel.text = userProfile.firstName
+    func configure(with profile : UserProfile, plan : MembershipPlan) {
+        self.lastNameLabel.text = profile.lastName
+        self.firstNameLabel.text = profile.firstName
         //profile image
-        self.cardIdLabel.text = /*memebershipDetails.membershipCardId ??*/ "0000 0000 0000 0000"
-        self.priceLabel.text = String("KES \(membershipPlan?.price ?? 0)")
-        self.planNameLabel.text = membershipPlan?.name
-        self.expirationDateLabel.text = String(memebershipDetails?.endDate)
-        //self.backgroundImageView.image = UIImage(named: memebershipDetails?.membershipCardImageName)
+        self.cardIdLabel.text = profile.membershipDetails?.membershipCardId ?? "0000 0000 0000 0000"
+        self.priceLabel.text = String("KES \(plan.price ?? 0)")
+        self.planNameLabel.text = plan.name
+        self.expirationDateLabel.text = String(profile.membershipDetails?.endDate)
+        self.backgroundImageView.image = UIImage(named: profile.membershipDetails?.membershipCardImageName ?? "")
     }
     
 }
