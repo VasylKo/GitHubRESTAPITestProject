@@ -14,6 +14,7 @@ class BraintreePaymentViewController : UIViewController, BTDropInViewControllerD
     var amount: Int?
     var quantity: Int?
     var productName: String?
+    var membershipId: String?
     var delegate: PaymentReponseDelegate?
     
     override func viewDidLoad() {
@@ -23,6 +24,7 @@ class BraintreePaymentViewController : UIViewController, BTDropInViewControllerD
                 strongSelf.initBraintree()
             }
         }
+        self.view.backgroundColor = UIColor.whiteColor()
     }
     
     @IBAction func userDidCancelPayment() {
@@ -30,8 +32,8 @@ class BraintreePaymentViewController : UIViewController, BTDropInViewControllerD
     }
     
     private func dismissPaymentsController(success: Bool, err: String?) {
+        self.navigationController?.popViewControllerAnimated(false)
         delegate?.paymentReponse(success,err:err)
-        self.navigationController?.popViewControllerAnimated(true)
     }
     
     private func initBraintree() {
@@ -52,8 +54,12 @@ class BraintreePaymentViewController : UIViewController, BTDropInViewControllerD
         self.dropInVc = dropInViewController
     }
     
-    func dropInViewController(viewController: BTDropInViewController, didSucceedWithTokenization paymentMethodNonce: BTPaymentMethodNonce) {
-        api().checkoutBraintree(String(amount!), nonce: paymentMethodNonce.nonce).onSuccess { [weak self] err in
+    func dropInViewController(viewController: BTDropInViewController,
+        didSucceedWithTokenization paymentMethodNonce: BTPaymentMethodNonce) {
+        //TODO: should check unwrapping
+        api().membershipCheckoutBraintree(String(amount!), nonce: paymentMethodNonce.nonce,
+            membershipId: self.membershipId!).onSuccess
+            { [weak self] err in
             if let strongSelf = self {
                 if(err == "") {
                     strongSelf.dismissPaymentsController(true, err: nil)

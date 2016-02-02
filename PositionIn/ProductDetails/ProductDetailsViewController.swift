@@ -166,7 +166,7 @@ extension ProductDetailsViewController: ProductDetailsActionConsumer {
         switch action {
         case .Buy:
             if api().isUserAuthorized() {
-                segue = .ShowBuyScreen
+                return
             } else {
                 api().logout().onComplete {[weak self] _ in
                     self?.sideBarController?.executeAction(.Login)

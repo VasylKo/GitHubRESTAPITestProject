@@ -118,6 +118,7 @@ class MembershipPaymentViewController: XLFormViewController, PaymentReponseDeleg
             paymentController.amount = self?.plan.price
             paymentController.productName = self?.plan.name
             paymentController.quantity = 1
+            paymentController.membershipId = self?.plan.objectId
             paymentController.delegate = self
             self?.navigationController?.pushViewController(paymentController, animated: true)
         }
@@ -130,10 +131,7 @@ class MembershipPaymentViewController: XLFormViewController, PaymentReponseDeleg
     //MARK: PaymentReponseDelegate
     
     func setError(hidden: Bool, error: String?) {
-        //TODO should change handler
-        self.sideBarController?.executeAction(SidebarViewController.defaultAction)
-        self.dismissViewControllerAnimated(true, completion: nil)
-        self.navigationController?.popToRootViewControllerAnimated(true)
+        self.router.showMembershipMemberCardViewController(from: self)
     }
     
     func paymentReponse(success: Bool, err: String?) {
