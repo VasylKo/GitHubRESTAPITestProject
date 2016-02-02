@@ -32,7 +32,7 @@ class MembershipPlanDetailsViewController: UIViewController, UITableViewDataSour
         fatalError("init(coder:) is not supported")
     }
     
-    //MARK: Initializers
+    //MARK: Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
