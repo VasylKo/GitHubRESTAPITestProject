@@ -89,6 +89,11 @@
 		CD795C4E1C590C1700C1C298 /* SegmentedControlContainerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD795C4D1C590C1700C1C298 /* SegmentedControlContainerViewController.xib */; };
 		CD795C801C5A382000C1C298 /* MembershipPlan.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD795C7F1C5A382000C1C298 /* MembershipPlan.swift */; };
 		CD795C831C5A6DCB00C1C298 /* MembershipPlansViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD795C821C5A6DCB00C1C298 /* MembershipPlansViewController.swift */; };
+		CD8ED0D61C60AD1A00576DBF /* MembershipMemberCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8ED0D51C60AD1A00576DBF /* MembershipMemberCardViewController.swift */; };
+		CD8ED0D91C60AE1400576DBF /* MembershipMemberCardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD8ED0D81C60AE1400576DBF /* MembershipMemberCardViewController.xib */; };
+		CD8ED0DE1C60BE7000576DBF /* MembershipCardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD8ED0DD1C60BE7000576DBF /* MembershipCardView.xib */; };
+		CD8ED0E01C60BE7C00576DBF /* MembershipCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8ED0DF1C60BE7C00576DBF /* MembershipCardView.swift */; };
+		CD8ED0E21C60D35900576DBF /* MembershipDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8ED0E11C60D35900576DBF /* MembershipDetails.swift */; };
 		CDB5B5C81C5B9C2400413715 /* MembershipPlanDetailsBenefitTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB5B5C01C5B9C2400413715 /* MembershipPlanDetailsBenefitTableViewCell.swift */; };
 		CDB5B5C91C5B9C2400413715 /* MembershipPlanDetailsBenefitTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CDB5B5C11C5B9C2400413715 /* MembershipPlanDetailsBenefitTableViewCell.xib */; };
 		CDB5B5CA1C5B9C2400413715 /* MembershipPlanDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CDB5B5C21C5B9C2400413715 /* MembershipPlanDetailsViewController.xib */; };
@@ -569,6 +574,11 @@
 		CD795C4D1C590C1700C1C298 /* SegmentedControlContainerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SegmentedControlContainerViewController.xib; sourceTree = "<group>"; };
 		CD795C7F1C5A382000C1C298 /* MembershipPlan.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MembershipPlan.swift; sourceTree = "<group>"; };
 		CD795C821C5A6DCB00C1C298 /* MembershipPlansViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MembershipPlansViewController.swift; sourceTree = "<group>"; };
+		CD8ED0D51C60AD1A00576DBF /* MembershipMemberCardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MembershipMemberCardViewController.swift; sourceTree = "<group>"; };
+		CD8ED0D81C60AE1400576DBF /* MembershipMemberCardViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MembershipMemberCardViewController.xib; sourceTree = "<group>"; };
+		CD8ED0DD1C60BE7000576DBF /* MembershipCardView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MembershipCardView.xib; sourceTree = "<group>"; };
+		CD8ED0DF1C60BE7C00576DBF /* MembershipCardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MembershipCardView.swift; sourceTree = "<group>"; };
+		CD8ED0E11C60D35900576DBF /* MembershipDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MembershipDetails.swift; sourceTree = "<group>"; };
 		CDB5B5C01C5B9C2400413715 /* MembershipPlanDetailsBenefitTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MembershipPlanDetailsBenefitTableViewCell.swift; sourceTree = "<group>"; };
 		CDB5B5C11C5B9C2400413715 /* MembershipPlanDetailsBenefitTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MembershipPlanDetailsBenefitTableViewCell.xib; sourceTree = "<group>"; };
 		CDB5B5C21C5B9C2400413715 /* MembershipPlanDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MembershipPlanDetailsViewController.xib; sourceTree = "<group>"; };
@@ -1340,10 +1350,10 @@
 		CD795BEC1C57BA8100C1C298 /* Interface */ = {
 			isa = PBXGroup;
 			children = (
+				CD8ED0D71C60AD5000576DBF /* MemberCard */,
 				CDB5B5C31C5B9C2400413715 /* Plans */,
 				CDB5B5BE1C5B9C2400413715 /* PlanDetails */,
 				CDE1B9021C5BBE5900F76F32 /* MembershipPageView.swift */,
-				CD795C381C58EFC700C1C298 /* MembershipPlansContainerViewController.xib */,
 			);
 			path = Interface;
 			sourceTree = "<group>";
@@ -1389,6 +1399,32 @@
 				CD795C821C5A6DCB00C1C298 /* MembershipPlansViewController.swift */,
 			);
 			path = Plans;
+			sourceTree = "<group>";
+		};
+		CD8ED0D41C60AD0900576DBF /* MemberCard */ = {
+			isa = PBXGroup;
+			children = (
+				CD8ED0D51C60AD1A00576DBF /* MembershipMemberCardViewController.swift */,
+			);
+			path = MemberCard;
+			sourceTree = "<group>";
+		};
+		CD8ED0D71C60AD5000576DBF /* MemberCard */ = {
+			isa = PBXGroup;
+			children = (
+				CD8ED0DC1C60BE7000576DBF /* MembershipCardView */,
+				CD8ED0D81C60AE1400576DBF /* MembershipMemberCardViewController.xib */,
+			);
+			path = MemberCard;
+			sourceTree = "<group>";
+		};
+		CD8ED0DC1C60BE7000576DBF /* MembershipCardView */ = {
+			isa = PBXGroup;
+			children = (
+				CD8ED0DD1C60BE7000576DBF /* MembershipCardView.xib */,
+				CD8ED0DF1C60BE7C00576DBF /* MembershipCardView.swift */,
+			);
+			path = MembershipCardView;
 			sourceTree = "<group>";
 		};
 		CDB5B5BE1C5B9C2400413715 /* PlanDetails */ = {
@@ -1539,6 +1575,7 @@
 		D1DA1EAF1C5909D7009F5AFA /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				CD8ED0D41C60AD0900576DBF /* MemberCard */,
 				CD795C811C5A6DCB00C1C298 /* Plans */,
 				D1DA1EB61C5909D7009F5AFA /* PlanDetails */,
 				D1DA1EB81C5909D7009F5AFA /* PlanPayment */,
@@ -1931,6 +1968,7 @@
 		E660E5251B5AB82000F52050 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				CD8ED0E11C60D35900576DBF /* MembershipDetails.swift */,
 				CD795C7F1C5A382000C1C298 /* MembershipPlan.swift */,
 				E60EBF751B8EF9B50014B6ED /* DataTransforms.swift */,
 				E6A869F11B60FF0500797D16 /* CRUDObject.swift */,
@@ -3392,6 +3430,7 @@
 			files = (
 				CD795BE11C57B4EE00C1C298 /* Snapfile in Resources */,
 				CD795BDF1C57B4EE00C1C298 /* Fastfile in Resources */,
+				CD8ED0DE1C60BE7000576DBF /* MembershipCardView.xib in Resources */,
 				50C7B5B21BC6A32900E8E8B4 /* PositionIn.SettingsViewController.xib in Resources */,
 				E6BEF1E81B9C83F200511B46 /* PositionIn.CommunityInfoCell.xib in Resources */,
 				D1F1FF2F1C24265B006D2E75 /* PositionIn.GiveBloodDetailsViewController.xib in Resources */,
@@ -3418,6 +3457,7 @@
 				E6C952351BA1D9960032254F /* PositionIn.ProfileStatsCell.xib in Resources */,
 				50FA43301C44F0B50050B00E /* ErrorCell.xib in Resources */,
 				E62B16F51B5C1AA700D446BC /* PositionIn.MainMenuUserCell.xib in Resources */,
+				CD8ED0D91C60AE1400576DBF /* MembershipMemberCardViewController.xib in Resources */,
 				E6BEF1D81B9C671D00511B46 /* PositionIn.PostInfoCell.xib in Resources */,
 				E661159E1B73A0CB003DB5B3 /* PositionIn.BrowseMapViewController.xib in Resources */,
 				50F7305A1BBBE86A008D3D94 /* PositionIn.CommentCell.xib in Resources */,
@@ -3692,11 +3732,13 @@
 				D1379E8D1C2A98710041AA4E /* ExploreCardCell.swift in Sources */,
 				E6C9522C1BA1BB0E0032254F /* PeopleListCell.swift in Sources */,
 				E6F243761B8B31510033B13C /* BrowseTabbar.swift in Sources */,
+				CD8ED0E21C60D35900576DBF /* MembershipDetails.swift in Sources */,
 				D1FD85461C1EF6DB00C2E87B /* BomaHotelsDetailsViewController.swift in Sources */,
 				E6A869EE1B60D42C00797D16 /* APIService.swift in Sources */,
 				CDE1B8F81C5BB7F900F76F32 /* MembershipPlansManager.swift in Sources */,
 				D1F86CF31BFCBAD3006E0C49 /* PhoneNumberViewController.swift in Sources */,
 				D15F47441C088A26009ED3FD /* HomeItem.swift in Sources */,
+				CD8ED0E01C60BE7C00576DBF /* MembershipCardView.swift in Sources */,
 				E6F7A4701BA333D70069152A /* WalletViewController.swift in Sources */,
 				D15F474D1C0B7801009ED3FD /* AmbulanceRequestedViewController.swift in Sources */,
 				E68B52031B873687006B980C /* FeedItemCellModelFactory.swift in Sources */,
@@ -3716,6 +3758,7 @@
 				E6F3093E1BA81FAF00C9420C /* PickPhotoView.swift in Sources */,
 				E6C5CE1D1B83A28C00265955 /* SessionController.swift in Sources */,
 				CDEDD9771C45243900396594 /* CommunitySearchViewController.swift in Sources */,
+				CD8ED0D61C60AD1A00576DBF /* MembershipMemberCardViewController.swift in Sources */,
 				D1F1FF2E1C24265B006D2E75 /* GiveBloodDetailsViewController.swift in Sources */,
 				E60F91331BE2CA2F005F416A /* BadgeView.m in Sources */,
 				E63201761B98D2DA0066C62E /* Shop.swift in Sources */,
