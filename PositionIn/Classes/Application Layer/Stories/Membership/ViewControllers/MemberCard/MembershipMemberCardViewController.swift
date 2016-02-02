@@ -36,10 +36,12 @@ class MembershipMemberCardViewController : UIViewController {
         self.setupInterface()
         
         api().getMyProfile().onSuccess { [weak self] profile in
-            self?.membershipCardView.configure(with: profile, plan: (self?.plan)!)
-            UIView.animateWithDuration(0.4, animations: { () -> Void in
-                self?.membershipCardView.alpha = 1.0
-            })
+            if let strongSelf = self {
+                strongSelf.membershipCardView.configure(with: profile, plan: strongSelf.plan)
+                UIView.animateWithDuration(0.4, animations: { () -> Void in
+                    strongSelf.membershipCardView.alpha = 1.0
+                })
+            }
         }.onComplete { [weak self] _ in
             self?.activityIndicator.stopAnimating()
         }
