@@ -49,7 +49,7 @@ class MembershipMemberCardViewController : UIViewController {
     }
     
     func getData() {
-        api().getMyProfile().flatMap { [weak self] (profile : UserProfile) -> Future<MembershipPlan, NSError> in
+        api().updateCurrentProfileStatus().flatMap { [weak self] (profile : UserProfile) -> Future<MembershipPlan, NSError> in
             self?.profile = profile
             return api().getMembership(self?.profile?.membershipDetails?.membershipPlanId ?? CRUDObjectInvalidId)
             }.onSuccess { [weak self] plan in

@@ -222,8 +222,8 @@ extension APIService {
             return self.updateAccessToken(future)
         }
     }
-    
-    private func updateCurrentProfileStatus(newPasword: String? = nil) -> Future<UserProfile, NSError> {
+//TODO: should be private
+    func updateCurrentProfileStatus(newPasword: String? = nil) -> Future<UserProfile, NSError> {
         return getMyProfile().andThen { result in
             if let profile = result.value {
                 self.sessionController.updateCurrentStatus(profile)                
