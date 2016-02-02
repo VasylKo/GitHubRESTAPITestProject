@@ -129,6 +129,6 @@ class MembershipConfirmDetailsViewController : XLFormViewController {
     
     func nextButtonTouched() {
         //TODO: add validations
-        self.router.showPaymentViewController(self, with: self.plan)
+        self.router.showPaymentViewController(from: self, with: self.plan)
     }
 }

@@ -74,6 +74,6 @@ class MembershipPlanDetailsViewController: UIViewController, UITableViewDataSour
     //MARK: Target-Action
     
     @IBAction func selectPlanTapped(sender: AnyObject) {
-        self.router .showMembershipConfirmDetailsViewController(self, with: plan)
+        self.router .showMembershipConfirmDetailsViewController(from: self, with: plan)
     }
 }

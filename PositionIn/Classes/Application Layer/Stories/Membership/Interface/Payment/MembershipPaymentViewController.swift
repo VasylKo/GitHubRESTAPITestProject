@@ -94,6 +94,7 @@ class MembershipPaymentViewController: XLFormViewController, PaymentReponseDeleg
         paymentRow.valueTransformer = CardItemValueTrasformer.self
         paymentRow.value = nil
         paymentRow.cellConfig.setObject(UIScheme.mainThemeColor, forKey: "tintColor")
+        paymentRow.required = true
         paymentSection.addFormRow(paymentRow)
         
         let confirmDonation = XLFormSectionDescriptor.formSection()
@@ -104,11 +105,19 @@ class MembershipPaymentViewController: XLFormViewController, PaymentReponseDeleg
             title: NSLocalizedString("Confirm Payment", comment: "Payment"))
         
         confirmRow.action.formBlock = { [weak self]_ in
+            
+            self?.deselectFormRow(confirmRow)
+            
+            let validationErrors : Array<NSError> = self?.formValidationErrors() as! Array<NSError>
+            if (validationErrors.count > 0){
+                self?.showFormValidationError(validationErrors.first)
+                return
+            }
+            
             let paymentController: BraintreePaymentViewController = BraintreePaymentViewController()
             paymentController.amount = self?.plan.price
             paymentController.productName = self?.plan.name
             paymentController.quantity = 1
-            paymentController.delegate = self
             paymentController.delegate = self
             self?.navigationController?.pushViewController(paymentController, animated: true)
         }

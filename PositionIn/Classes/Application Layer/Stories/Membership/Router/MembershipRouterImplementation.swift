@@ -24,12 +24,12 @@ class MembershipRouterImplementation: BaseRouterImplementation, MembershipRouter
         sourceViewController.navigationController?.pushViewController(membershipDetailsViewController, animated: true)
     }
     
-    func showMembershipConfirmDetailsViewController(sourceViewController : UIViewController, with plan : MembershipPlan) {
+    func showMembershipConfirmDetailsViewController(from sourceViewController : UIViewController, with plan : MembershipPlan) {
         sourceViewController.navigationController?.pushViewController(MembershipConfirmDetailsViewController(router: self, plan: plan),
             animated: true)
     }
     
-    func showPaymentViewController(sourceViewController : UIViewController, with plan : MembershipPlan) {
+    func showPaymentViewController(from sourceViewController : UIViewController, with plan : MembershipPlan) {
         sourceViewController.navigationController?.pushViewController(MembershipPaymentViewController(router: self, plan: plan),
             animated: true)
     }
