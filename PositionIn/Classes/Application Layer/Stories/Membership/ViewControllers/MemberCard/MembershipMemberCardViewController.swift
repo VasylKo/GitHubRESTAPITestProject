@@ -14,9 +14,11 @@ class MembershipMemberCardViewController : UIViewController {
     
     private let router : MembershipRouter
     
+
     private var profile : UserProfile?
     private var plan : MembershipPlan?
     
+    @IBOutlet var titleNavigationItem: UINavigationItem!
     @IBOutlet weak var membershipCardView: MembershipCardView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
@@ -42,7 +44,8 @@ class MembershipMemberCardViewController : UIViewController {
     }
     
     func setupInterface() {
-        self.title = String("Your Membership")
+        self.title = self.titleNavigationItem.title
+        self.navigationItem.rightBarButtonItem = self.titleNavigationItem.rightBarButtonItem
     }
     
     func getData() {
@@ -73,6 +76,10 @@ class MembershipMemberCardViewController : UIViewController {
     
     @IBAction func shareTapped(sender: AnyObject) {
         
+    }
+    
+    @IBAction func closeTapped(sender: AnyObject) {
+        self.router.dismissMembership(from: self)
     }
     
 }

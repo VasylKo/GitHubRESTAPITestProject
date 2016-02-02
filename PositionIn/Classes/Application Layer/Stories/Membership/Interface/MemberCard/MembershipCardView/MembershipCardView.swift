@@ -34,11 +34,21 @@ class MembershipCardView : UIView {
         self.lastNameLabel.text = profile.lastName
         self.firstNameLabel.text = profile.firstName
         self.profileImageView.setImageFromURL(profile.avatar)
-        self.cardIdLabel.text = profile.membershipDetails?.membershipCardId ?? "0000 0000 0000 0000"
+        self.cardIdLabel.text = profile.membershipDetails?.membershipCardId
         self.priceLabel.text = String("KES \(plan.price ?? 0)")
         self.planNameLabel.text = plan.name
-        self.expirationDateLabel.text = String(profile.membershipDetails?.endDate)
+        self.expirationDateLabel.text = self.stringFromDate(profile.membershipDetails?.endDate)
         self.backgroundImageView.image = UIImage(named: profile.membershipDetails?.membershipCardImageName ?? "")
+    }
+    
+    private func stringFromDate(date : NSDate?) -> String {
+        if date != nil {
+            let dateFormatter = NSDateFormatter()
+            dateFormatter.dateStyle = .ShortStyle
+            return dateFormatter.stringFromDate(date!)
+        } else {
+            return String()
+        }
     }
     
 }

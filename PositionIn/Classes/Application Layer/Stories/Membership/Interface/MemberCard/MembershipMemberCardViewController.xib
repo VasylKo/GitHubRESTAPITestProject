@@ -10,6 +10,7 @@
             <connections>
                 <outlet property="activityIndicator" destination="XKD-aN-BRS" id="xNw-ff-RiN"/>
                 <outlet property="membershipCardView" destination="PPC-Mh-6wS" id="ikF-qC-sZ6"/>
+                <outlet property="titleNavigationItem" destination="Rmd-0j-449" id="fPq-kR-JI4"/>
                 <outlet property="view" destination="iN0-l3-epB" id="gAF-ZK-e43"/>
             </connections>
         </placeholder>
@@ -204,6 +205,13 @@
                 <outlet property="delegate" destination="-1" id="F0S-sM-Iyz"/>
             </connections>
         </tapGestureRecognizer>
+        <navigationItem title="Your Membership" id="Rmd-0j-449">
+            <barButtonItem key="rightBarButtonItem" title="Close" id="5wI-AL-tho">
+                <connections>
+                    <action selector="closeTapped:" destination="-1" id="sgY-qw-Olr"/>
+                </connections>
+            </barButtonItem>
+        </navigationItem>
     </objects>
     <resources>
         <image name="ic_info_membership" width="64" height="64"/>
