@@ -50,11 +50,14 @@ class MembershipConfirmDetailsViewController : XLFormViewController {
         row.cellConfig.setObject(UIScheme.mainThemeColor, forKey: "tintColor")
         return row
     }()
+    
+    private var plan: MembershipPlan
 
     //MARK: Initializers
     
-    init(router: MembershipRouter) {
+    init(router: MembershipRouter, plan : MembershipPlan) {
         self.router = router
+        self.plan = plan
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -75,6 +78,10 @@ class MembershipConfirmDetailsViewController : XLFormViewController {
     
     func setupInterface() {
         self.title = NSLocalizedString("Confirm Details", comment: "")
+        
+        let rightBarButtonItem: UIBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Next", comment: ""),
+            style: .Plain, target: self, action: "nextButtonTouched")
+        self.navigationItem.rightBarButtonItem = rightBarButtonItem
         
         self.pageView.sizeToFit()
         self.pageView.redrawView(0)
@@ -118,4 +125,10 @@ class MembershipConfirmDetailsViewController : XLFormViewController {
         self.form = form
     }
     
+    //MARK: Target- Action
+    
+    func nextButtonTouched() {
+        //TODO: add validations
+        self.router.showPaymentViewController(from: self, with: self.plan)
+    }
 }

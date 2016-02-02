@@ -27,7 +27,6 @@ class DonateCell: XLFormBaseCell {
     
     override func configure() {
         super.configure()
-        selectionStyle = .None
     }
     
     
@@ -38,9 +37,7 @@ class DonateCell: XLFormBaseCell {
     override static func formDescriptorCellHeightForRowDescriptor(rowDescriptor: XLFormRowDescriptor!) -> CGFloat {
         return 80
     }
-
     
-    
-    @IBOutlet weak var projectIconImageView: UIImageView!
-    @IBOutlet weak var projectNameLabel: UILabel!
+    @IBOutlet private weak var projectIconImageView: UIImageView!
+    @IBOutlet private weak var projectNameLabel: UILabel!
 }

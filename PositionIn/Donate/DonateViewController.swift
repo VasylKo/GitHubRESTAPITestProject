@@ -67,7 +67,6 @@ class DonateViewController: XLFormViewController, PaymentReponseDelegate {
         
         errorSection!.addFormRow(errorRow)
         errorSection!.hidden = NSNumber(bool: true)
-
         
         //Donate section
         let donateToSection = XLFormSectionDescriptor.formSection()
