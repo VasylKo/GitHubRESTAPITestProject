@@ -104,9 +104,9 @@ class MembershipPaymentViewController: XLFormViewController, PaymentReponseDeleg
             rowType: XLFormRowDescriptorTypeButton,
             title: NSLocalizedString("Confirm Payment", comment: "Payment"))
         
-        confirmRow.action.formBlock = { [weak self]_ in
+        confirmRow.action.formBlock = { [weak self] row in
             
-            self?.deselectFormRow(confirmRow)
+            self?.deselectFormRow(row)
             
             let validationErrors : Array<NSError> = self?.formValidationErrors() as! Array<NSError>
             if (validationErrors.count > 0){
