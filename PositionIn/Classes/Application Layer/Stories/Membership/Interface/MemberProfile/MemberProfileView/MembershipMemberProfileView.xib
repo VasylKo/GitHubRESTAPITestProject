@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MembershipMemberProfileView" customModule="PositionIn" customModuleProvider="target"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="1QC-2g-pLH" customClass="MembershipMemberProfileView" customModule="PositionIn" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="144"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dont_rename_ic_user18" translatesAutoresizingMaskIntoConstraints="NO" id="iCI-7l-xRf">
+                    <rect key="frame" x="128" y="26" width="64" height="64"/>
+                    <gestureRecognizers/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="64" id="M7Z-ES-qVc"/>
+                        <constraint firstAttribute="width" constant="64" id="en9-kV-q4B"/>
+                    </constraints>
+                    <connections>
+                        <outletCollection property="gestureRecognizers" destination="jP5-wS-AaL" appends="YES" id="ANC-QQ-mLB"/>
+                    </connections>
+                </imageView>
+                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add Photo (optional)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yNN-6a-iKp">
+                    <rect key="frame" x="8" y="103" width="304" height="21"/>
+                    <gestureRecognizers/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                    <connections>
+                        <outletCollection property="gestureRecognizers" destination="e5S-kk-g9I" appends="YES" id="VFa-2C-yux"/>
+                    </connections>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="iCI-7l-xRf" firstAttribute="centerX" secondItem="1QC-2g-pLH" secondAttribute="centerX" id="0nX-jC-pCd"/>
+                <constraint firstAttribute="trailing" secondItem="yNN-6a-iKp" secondAttribute="trailing" constant="8" id="40M-vK-e2x"/>
+                <constraint firstItem="yNN-6a-iKp" firstAttribute="leading" secondItem="1QC-2g-pLH" secondAttribute="leading" constant="8" id="Vve-Ta-Gfa"/>
+                <constraint firstItem="yNN-6a-iKp" firstAttribute="top" secondItem="iCI-7l-xRf" secondAttribute="bottom" constant="13" id="VyX-oW-xDL"/>
+                <constraint firstItem="iCI-7l-xRf" firstAttribute="top" secondItem="1QC-2g-pLH" secondAttribute="top" constant="26" id="pTF-iW-OOV"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="addPhotoLabel" destination="yNN-6a-iKp" id="L7X-hW-2pp"/>
+                <outlet property="profileImageView" destination="iCI-7l-xRf" id="jqt-Aw-RRQ"/>
+            </connections>
+            <point key="canvasLocation" x="200" y="50"/>
+        </view>
+        <tapGestureRecognizer id="jP5-wS-AaL">
+            <connections>
+                <action selector="addPhotoAction:" destination="1QC-2g-pLH" id="tNR-Xn-Fnc"/>
+                <outlet property="delegate" destination="1QC-2g-pLH" id="R1Y-D6-PtC"/>
+            </connections>
+        </tapGestureRecognizer>
+        <tapGestureRecognizer id="e5S-kk-g9I">
+            <connections>
+                <action selector="addPhotoAction:" destination="1QC-2g-pLH" id="oVK-pD-JcM"/>
+                <outlet property="delegate" destination="1QC-2g-pLH" id="7wV-lT-cP0"/>
+            </connections>
+        </tapGestureRecognizer>
+    </objects>
+    <resources>
+        <image name="dont_rename_ic_user18" width="48" height="48"/>
+    </resources>
+</document>
