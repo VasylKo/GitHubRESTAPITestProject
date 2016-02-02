@@ -46,8 +46,10 @@ class MembershipConfirmDetailsViewController : XLFormViewController {
     private var emailRow: XLFormRowDescriptor = {
         let row = XLFormRowDescriptor(tag: nil, rowType: XLFormRowDescriptorTypeEmail,
             title: NSLocalizedString("Email", comment: "Confirm details: Email"))
+        row.cellConfigAtConfigure["textField.placeholder"] = NSLocalizedString("Required", comment: "")
         row.cellConfig.setObject(UIScheme.mainThemeColor, forKey: "textLabel.textColor")
         row.cellConfig.setObject(UIScheme.mainThemeColor, forKey: "tintColor")
+        row.required = true
         return row
     }()
     
@@ -79,6 +81,14 @@ class MembershipConfirmDetailsViewController : XLFormViewController {
             self?.initializeForm()
             self?.setupInterface()
         })
+    }
+    
+    //MARK: Setup Interface
+    
+    override func showFormValidationError(error: NSError!) {
+        if let error = error {
+            showWarning(error.localizedDescription)
+        }
     }
     
     private func setupInterface() {
@@ -113,18 +123,25 @@ class MembershipConfirmDetailsViewController : XLFormViewController {
         
         //Phone Section
         let phoneSection = XLFormSectionDescriptor.formSection()
-        phoneSection.addFormRow(self.phoneRow)
         phoneRow.disabled = true
+        phoneRow.value = self.userProfile?.phone
         //TODO:set value
+        phoneSection.addFormRow(self.phoneRow)
         form.addFormSection(phoneSection)
         
         let infoSection = XLFormSectionDescriptor.formSection()
+        
+        if let firstName = self.userProfile?.firstName {
+            firstNameRow.value = firstName
+        }
         infoSection.addFormRow(self.firstNameRow)
-        //TODO:set value
+        
+        lastNameRow.value = self.userProfile?.lastName
         infoSection.addFormRow(self.lastNameRow)
-        //TODO:set value
+        
+        emailRow.value = self.userProfile?.email
         infoSection.addFormRow(self.emailRow)
-        //TODO:set value
+        
         form.addFormSection(infoSection)
         
         self.form = form
@@ -132,8 +149,32 @@ class MembershipConfirmDetailsViewController : XLFormViewController {
     
     //MARK: Target- Action
     
-    private func nextButtonTouched() {
+    @objc func nextButtonTouched() {
         //TODO: add validations
-        self.router.showPaymentViewController(from: self, with: self.plan)
+        let validationErrors : Array<NSError> = self.formValidationErrors() as! Array<NSError>
+        if (validationErrors.count > 0){
+            self.showFormValidationError(validationErrors.first)
+            return
+        }
+        
+        if let email = self.emailRow.value as? String {
+            self.userProfile?.email = email
+        }
+        if let firstName = self.firstNameRow.value as? String {
+            self.userProfile?.firstName = firstName
+        }
+        if let lastName = self.lastNameRow.value as? String {
+            self.userProfile?.lastName = lastName
+        }
+        
+        if let userProfile = self.userProfile {
+            api().updateMyProfile(userProfile).onComplete(callback: { [unowned self] _ in
+                self.router.showPaymentViewController(from: self, with: self.plan)
+                })
+        }
+        else {
+            self.router.showPaymentViewController(from: self, with: self.plan)
+        }
+
     }
 }
