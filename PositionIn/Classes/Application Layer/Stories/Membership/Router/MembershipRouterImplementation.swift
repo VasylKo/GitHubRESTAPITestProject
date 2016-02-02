@@ -42,7 +42,7 @@ class MembershipRouterImplementation: BaseRouterImplementation, MembershipRouter
     }
     
     func dismissMembership(from sourceViewController : UIViewController) {
-        sourceViewController.navigationController?.popToRootViewControllerAnimated(true)
+        appDelegate().sidebarViewController?.executeAction(SidebarViewController.defaultAction)
+        sourceViewController.dismissViewControllerAnimated(true, completion: nil)
     }
-    
 }
