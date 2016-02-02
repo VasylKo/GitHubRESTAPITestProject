@@ -30,7 +30,7 @@ class MembershipRouterImplementation: BaseRouterImplementation, MembershipRouter
     }
     
     func showPaymentViewController(sourceViewController : UIViewController, with plan : MembershipPlan) {
-        sourceViewController.navigationController?.pushViewController(PaymentViewController(router: self, plan: plan),
+        sourceViewController.navigationController?.pushViewController(MembershipPaymentViewController(router: self, plan: plan),
             animated: true)
     }
 }

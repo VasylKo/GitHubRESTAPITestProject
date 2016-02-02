@@ -32,12 +32,8 @@ class PaymentViewController: XLFormViewController, PaymentReponseDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.setupInterface()
         self.initializeForm()
-        view.tintColor = UIScheme.mainThemeColor
-        
-        self.pageView.sizeToFit()
-        self.pageView.redrawView(1)
-        self.view.addSubview(pageView)
     }
     
     override func viewWillLayoutSubviews() {
@@ -58,6 +54,14 @@ class PaymentViewController: XLFormViewController, PaymentReponseDelegate {
         if let error = error {
             showWarning(error.localizedDescription)
         }
+    }
+    
+    func setupInterface() {
+        view.tintColor = UIScheme.mainThemeColor
+        
+        self.pageView.sizeToFit()
+        self.pageView.redrawView(1)
+        self.view.addSubview(pageView)
     }
     
     func initializeForm() {
