@@ -18,6 +18,11 @@
                         <constraint firstAttribute="height" constant="64" id="M7Z-ES-qVc"/>
                         <constraint firstAttribute="width" constant="64" id="en9-kV-q4B"/>
                     </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="32"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
                     <connections>
                         <outletCollection property="gestureRecognizers" destination="jP5-wS-AaL" appends="YES" id="ANC-QQ-mLB"/>
                     </connections>
@@ -26,7 +31,7 @@
                     <rect key="frame" x="8" y="103" width="304" height="21"/>
                     <gestureRecognizers/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                     <connections>
                         <outletCollection property="gestureRecognizers" destination="e5S-kk-g9I" appends="YES" id="VFa-2C-yux"/>

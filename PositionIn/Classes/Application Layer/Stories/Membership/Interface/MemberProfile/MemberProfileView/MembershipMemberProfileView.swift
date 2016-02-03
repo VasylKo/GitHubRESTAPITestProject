@@ -31,9 +31,26 @@ class MembershipMemberProfileView : UIView {
         }
     }
     
-    func configure (profileImage : UIImage) {
-        self.profileImageView.image = profileImage
+    func configure (asset : PHAsset) {
+        let previewSize = profileImageView.bounds.size
+        let requestOptions = PHImageRequestOptions()
+        requestOptions.deliveryMode = .FastFormat
+        imageManager.requestImageForAsset(asset,
+            targetSize: previewSize,
+            contentMode: .AspectFit,
+            options: requestOptions,
+            resultHandler: { [weak self] (image, info) -> Void in
+                print(image?.size)
+                UIView.animateWithDuration(0.4, animations: { () -> Void in
+                    self?.profileImageView.layer.masksToBounds = true
+                    self?.profileImageView.image = image
+                    self?.addPhotoLabel.alpha = 0.0
+                })
+            })
     }
     
+    private lazy var imageManager: PHCachingImageManager = {
+        return PHCachingImageManager()
+    }()
 }
 

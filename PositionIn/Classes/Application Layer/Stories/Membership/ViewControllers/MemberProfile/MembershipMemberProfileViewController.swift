@@ -136,11 +136,12 @@ class MembershipMemberProfileViewController : XLFormViewController, MembershipMe
     }
     
     private func addAssets(assets: [PHAsset]) {
-        
+        if let asset = assets.first {
+             self.headerView?.configure(asset)
+        }  
     }
     
 }
-
 
 extension MembershipMemberProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
