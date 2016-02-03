@@ -12,13 +12,15 @@ protocol MembershipRouter : BaseRouter {
     
     func showInitialViewController(from sourceViewController : UIViewController)
     
-    func showMembershipPlanDetailsViewController(from sourceViewController : UIViewController, with plan : MembershipPlan)
+    func showMembershipPlanDetailsViewController(from sourceViewController : UIViewController, with plan : MembershipPlan, onlyPlanInfo : Bool)
     
     func showMembershipMemberCardViewController(from sourceViewController : UIViewController)
 
     func showMembershipConfirmDetailsViewController(from sourceViewController : UIViewController, with plan : MembershipPlan)
     
     func showPaymentViewController(from sourceViewController : UIViewController, with plan : MembershipPlan)
+    
+    func showPlansViewController(from sourceViewController : UIViewController, with plan : MembershipPlan)
     
     func dismissMembership(from sourceViewController : UIViewController)
 }
