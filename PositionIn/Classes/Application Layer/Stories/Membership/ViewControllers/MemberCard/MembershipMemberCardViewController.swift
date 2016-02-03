@@ -74,7 +74,7 @@ class MembershipMemberCardViewController : UIViewController {
     
     @IBAction func detailsTapped(sender: AnyObject) {
         if let plan = self.plan {
-            self.router.showMembershipPlanDetailsViewController(from: self, with: plan, paymentInfo: false)
+            self.router.showMembershipPlanDetailsViewController(from: self, with: plan, onlyPlanInfo: true)
         }
     }
     

@@ -22,8 +22,8 @@ class MembershipRouterImplementation: BaseRouterImplementation, MembershipRouter
         }
     }
     
-    func showMembershipPlanDetailsViewController(from sourceViewController : UIViewController, with plan : MembershipPlan, paymentInfo : Bool) {
-        let membershipDetailsViewController = MembershipPlanDetailsViewController(router: self, plan: plan, paymentInfo: paymentInfo)
+    func showMembershipPlanDetailsViewController(from sourceViewController : UIViewController, with plan : MembershipPlan, onlyPlanInfo : Bool) {
+        let membershipDetailsViewController = MembershipPlanDetailsViewController(router: self, plan: plan, onlyPlanInfo: onlyPlanInfo)
         sourceViewController.navigationController?.pushViewController(membershipDetailsViewController, animated: true)
     }
 

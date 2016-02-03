@@ -17,7 +17,10 @@ class MembershipPlansViewController : UIViewController, UITableViewDelegate, UIT
     private let reuseIdentifier = String(MembershipPlanTableViewCell.self)
     
     @IBOutlet private weak var tableView: UITableView!
+    @IBOutlet private weak var alreadyMemberButton: UIButton!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var bottomView: UIView!
+    @IBOutlet weak var spaceBetweenBottomViewAndTableViewContstraint: NSLayoutConstraint!
     
     //MARK: Initializers
     
@@ -50,6 +53,11 @@ class MembershipPlansViewController : UIViewController, UITableViewDelegate, UIT
         let nib = UINib(nibName: String(MembershipPlanTableViewCell.self), bundle: nil)
         self.tableView.registerNib(nib, forCellReuseIdentifier: self.reuseIdentifier)
         self.tableView.tableFooterView = UIView(frame: CGRectZero)
+        
+        if self.currentMembershipPlan != nil {
+            self.bottomView.hidden = true
+            spaceBetweenBottomViewAndTableViewContstraint.constant = -self.bottomView.frame.size.height
+        }
     }
     
     //MARK: UITableViewDelegate & UITableViewDataSource
@@ -83,11 +91,16 @@ class MembershipPlansViewController : UIViewController, UITableViewDelegate, UIT
                 //first cell is guest
                 self.router.dismissMembership(from: self)
             } else {
-                self.router.showMembershipPlanDetailsViewController(from: self, with : self.plans[indexPath.row - 1], paymentInfo: true)
+                self.router.showMembershipPlanDetailsViewController(from: self, with : self.plans[indexPath.row - 1], onlyPlanInfo: false)
             }
         } else {
-            self.router.showMembershipPlanDetailsViewController(from: self, with : self.plans[indexPath.row], paymentInfo: true)
+            self.router.showMembershipPlanDetailsViewController(from: self, with : self.plans[indexPath.row], onlyPlanInfo: false)
         }
     }
     
+    //MARK: Target-Action
+    
+    @IBAction func alreadyMemberPressed(sender: AnyObject) {
+        self.router.dismissMembership(from: self)
+    }
 }

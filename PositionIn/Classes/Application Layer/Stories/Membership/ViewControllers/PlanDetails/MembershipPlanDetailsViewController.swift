@@ -12,7 +12,7 @@ class MembershipPlanDetailsViewController: UIViewController, UITableViewDataSour
     
     private let router : MembershipRouter
     private let plan: MembershipPlan
-    private let paymentInfo : Bool
+    private let onlyPlanInfo : Bool
     private let reuseIdentifier = String(MembershipPlanDetailsBenefitTableViewCell.self)
     
     
@@ -24,10 +24,10 @@ class MembershipPlanDetailsViewController: UIViewController, UITableViewDataSour
     
     //MARK: Initializers
     
-    init(router: MembershipRouter, plan : MembershipPlan, paymentInfo: Bool) {
+    init(router: MembershipRouter, plan : MembershipPlan, onlyPlanInfo: Bool) {
         self.router = router
         self.plan = plan
-        self.paymentInfo = paymentInfo
+        self.onlyPlanInfo = onlyPlanInfo
         super.init(nibName: String(MembershipPlanDetailsViewController.self), bundle: nil)
     }
     
@@ -54,7 +54,7 @@ class MembershipPlanDetailsViewController: UIViewController, UITableViewDataSour
         self.tableView.rowHeight = UITableViewAutomaticDimension;
         self.tableView.estimatedRowHeight = 44.0;
         
-        if self.paymentInfo == false {
+        if self.onlyPlanInfo == true {
             self.selectPlanButton.hidden = true
         }
     }
