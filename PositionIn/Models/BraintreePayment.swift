@@ -22,6 +22,10 @@ struct BraintreePayment{
         return "\(prefix)donation/checkout"
     }
     
+    static func membershipCheckoutEndpoint() -> String {
+        return "\(prefix)membership/checkout"
+    }
+    
     static func tokenMapping() -> (AnyObject? -> String?) {
         return { response in
             if let json = response as? NSDictionary {

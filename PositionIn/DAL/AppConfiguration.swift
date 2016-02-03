@@ -63,10 +63,10 @@ final class AppConfiguration {
     
     let currencyFormatter: NSNumberFormatter = {
         let currencyFormatter = NSNumberFormatter()
-        currencyFormatter.currencySymbol = "KSh"
+        currencyFormatter.currencySymbol = "KES "
         currencyFormatter.numberStyle = .CurrencyStyle
         currencyFormatter.generatesDecimalNumbers = false
-        currencyFormatter.maximumFractionDigits = 0
+        currencyFormatter.maximumFractionDigits = 2
         currencyFormatter.roundingMode = .RoundDown
         return currencyFormatter
         }()

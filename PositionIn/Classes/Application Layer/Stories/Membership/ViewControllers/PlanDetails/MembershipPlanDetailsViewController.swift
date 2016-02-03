@@ -12,7 +12,9 @@ class MembershipPlanDetailsViewController: UIViewController, UITableViewDataSour
     
     private let router : MembershipRouter
     private let plan: MembershipPlan
+    private let onlyPlanInfo : Bool
     private let reuseIdentifier = String(MembershipPlanDetailsBenefitTableViewCell.self)
+    
     
     @IBOutlet private weak var tableView: UITableView!
     @IBOutlet private weak var selectPlanButton: UIButton!
@@ -22,9 +24,10 @@ class MembershipPlanDetailsViewController: UIViewController, UITableViewDataSour
     
     //MARK: Initializers
     
-    init(router: MembershipRouter, plan : MembershipPlan) {
+    init(router: MembershipRouter, plan : MembershipPlan, onlyPlanInfo: Bool) {
         self.router = router
         self.plan = plan
+        self.onlyPlanInfo = onlyPlanInfo
         super.init(nibName: String(MembershipPlanDetailsViewController.self), bundle: nil)
     }
     
@@ -32,7 +35,7 @@ class MembershipPlanDetailsViewController: UIViewController, UITableViewDataSour
         fatalError("init(coder:) is not supported")
     }
     
-    //MARK: Initializers
+    //MARK: Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,7 +54,9 @@ class MembershipPlanDetailsViewController: UIViewController, UITableViewDataSour
         self.tableView.rowHeight = UITableViewAutomaticDimension;
         self.tableView.estimatedRowHeight = 44.0;
         
-        self.navigationController?.navigationBar.topItem?.title = ""
+        if self.onlyPlanInfo == true {
+            self.selectPlanButton.hidden = true
+        }
     }
     
     //MARK: UITableViewDataSource
@@ -74,6 +79,6 @@ class MembershipPlanDetailsViewController: UIViewController, UITableViewDataSour
     //MARK: Target-Action
     
     @IBAction func selectPlanTapped(sender: AnyObject) {
-        
+        self.router .showMembershipConfirmDetailsViewController(from: self, with: plan)
     }
 }

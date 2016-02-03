@@ -27,16 +27,35 @@ class SelectPaymentMethodController: UIViewController, XLFormRowDescriptorViewCo
         self.tableView.registerNib(UINib(nibName: reuseIdentifier,
             bundle: nil),
             forCellReuseIdentifier: reuseIdentifier)
-        
         self.view.addSubview(self.tableView)
+        
+        self.infoLabel = UILabel(frame: CGRectZero)
+        self.infoLabel.text = NSLocalizedString("Information is send over secure connection", comment: "")
+        self.infoLabel.font = UIFont(name: "Helvetica", size: 14)
+        self.view.addSubview(self.infoLabel)
+        
+        self.view.backgroundColor = UIColor.bt_colorWithBytesR(245, g: 245, b: 245)
     }
+    
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        self.tableView.frame = self.view.frame
+
+        var frame = self.tableView.frame
+        frame.origin.y = 10
+        frame.size = self.tableView.contentSize
+        frame.size.width = self.view.frame.size.width
+        self.tableView.frame = frame
+        
+        self.infoLabel.sizeToFit()
+        frame = self.infoLabel.frame
+        frame.origin.x = (self.view.frame.size.width - frame.size.width) / 2
+        frame.origin.y = self.view.frame.size.height - frame.size.height - 10
+        self.infoLabel.frame = frame
     }
     
-    @IBOutlet var tableView: UITableView!
+    @IBOutlet private var tableView: UITableView!
+    @IBOutlet private var infoLabel: UILabel!
 }
 
 
@@ -55,6 +74,7 @@ extension SelectPaymentMethodController: UITableViewDelegate {
 }
 
 extension SelectPaymentMethodController: UITableViewDataSource {
+    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return CardItem.count
     }
@@ -68,6 +88,7 @@ extension SelectPaymentMethodController: UITableViewDataSource {
                 cell.cardName = CardItem.cardName(cardItem)
                 cell.cardImage = CardItem.cardImage(cardItem)
             }
+            cell.layoutMargins = UIEdgeInsetsZero
         }
         return cell
     }

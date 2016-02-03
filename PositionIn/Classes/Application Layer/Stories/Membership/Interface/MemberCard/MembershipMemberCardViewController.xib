@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MembershipMemberCardViewController" customModule="PositionIn" customModuleProvider="target">
+            <connections>
+                <outlet property="activityIndicator" destination="XKD-aN-BRS" id="xNw-ff-RiN"/>
+                <outlet property="detailsButton" destination="1Lv-tB-cU7" id="gcX-46-Aae"/>
+                <outlet property="membershipCardView" destination="PPC-Mh-6wS" id="ikF-qC-sZ6"/>
+                <outlet property="titleNavigationItem" destination="Rmd-0j-449" id="fPq-kR-JI4"/>
+                <outlet property="upgradeButton" destination="sZq-ih-ihb" id="lvq-cg-cpX"/>
+                <outlet property="view" destination="iN0-l3-epB" id="gAF-ZK-e43"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KDX-Bc-15m">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="263"/>
+                    <subviews>
+                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="XKD-aN-BRS">
+                            <rect key="frame" x="290" y="140" width="20" height="20"/>
+                        </activityIndicatorView>
+                        <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PPC-Mh-6wS" customClass="MembershipCardView" customModule="PositionIn" customModuleProvider="target">
+                            <rect key="frame" x="146" y="32" width="308" height="199"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="199" id="32O-im-R39"/>
+                                <constraint firstAttribute="width" constant="308" id="D6L-lf-YC6"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="PPC-Mh-6wS" firstAttribute="top" secondItem="KDX-Bc-15m" secondAttribute="top" constant="32" id="RWA-k5-LOD"/>
+                        <constraint firstItem="PPC-Mh-6wS" firstAttribute="centerX" secondItem="KDX-Bc-15m" secondAttribute="centerX" id="cgQ-fh-kM0"/>
+                        <constraint firstItem="XKD-aN-BRS" firstAttribute="centerX" secondItem="KDX-Bc-15m" secondAttribute="centerX" id="gQJ-t6-io5"/>
+                        <constraint firstItem="XKD-aN-BRS" firstAttribute="centerY" secondItem="KDX-Bc-15m" secondAttribute="centerY" constant="18.5" id="rUV-tp-a4u"/>
+                        <constraint firstAttribute="height" constant="263" id="vtr-eq-Bhn"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w0d-GP-c5r">
+                    <rect key="frame" x="0.0" y="263" width="600" height="120"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GC2-Nv-NOA">
+                            <rect key="frame" x="0.0" y="0.0" width="600" height="1"/>
+                            <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                        </view>
+                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eUH-1u-Ay2">
+                            <rect key="frame" x="0.0" y="119" width="600" height="1"/>
+                            <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="leQ-pi-pJa">
+                            <rect key="frame" x="0.0" y="0.0" width="300" height="120"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Upgrade" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AaE-po-Iaw">
+                                    <rect key="frame" x="117" y="88" width="67" height="21"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sZq-ih-ihb">
+                                    <rect key="frame" x="110" y="8" width="80" height="80"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="80" id="3Vj-W2-VUd"/>
+                                        <constraint firstAttribute="width" constant="80" id="vJy-eW-5R7"/>
+                                    </constraints>
+                                    <state key="normal" image="ic_upgrade_membership">
+                                        <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="upgradeTapped:" destination="-1" eventType="touchUpInside" id="Ra4-8v-Q3q"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstItem="AaE-po-Iaw" firstAttribute="top" secondItem="sZq-ih-ihb" secondAttribute="bottom" id="1hr-tG-0jI"/>
+                                <constraint firstItem="sZq-ih-ihb" firstAttribute="centerY" secondItem="leQ-pi-pJa" secondAttribute="centerY" constant="-12" id="HAL-Py-29d"/>
+                                <constraint firstItem="AaE-po-Iaw" firstAttribute="centerX" secondItem="sZq-ih-ihb" secondAttribute="centerX" id="N8o-0i-9kG"/>
+                                <constraint firstItem="sZq-ih-ihb" firstAttribute="centerX" secondItem="leQ-pi-pJa" secondAttribute="centerX" id="V5y-fH-4rg"/>
+                            </constraints>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bld-oJ-Bc9">
+                            <rect key="frame" x="300" y="0.0" width="300" height="120"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Details" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lAe-0a-u9S">
+                                    <rect key="frame" x="124" y="88" width="53" height="21"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Lv-tB-cU7">
+                                    <rect key="frame" x="110" y="8" width="80" height="80"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="80" id="Vha-yQ-t6w"/>
+                                        <constraint firstAttribute="height" constant="80" id="iuQ-I9-i7V"/>
+                                    </constraints>
+                                    <state key="normal" image="ic_info_membership">
+                                        <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="detailsTapped:" destination="-1" eventType="touchUpInside" id="wEr-Kb-2nv"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstItem="lAe-0a-u9S" firstAttribute="top" secondItem="1Lv-tB-cU7" secondAttribute="bottom" id="AHC-xW-J5N"/>
+                                <constraint firstItem="1Lv-tB-cU7" firstAttribute="centerY" secondItem="bld-oJ-Bc9" secondAttribute="centerY" constant="-12" id="Jxm-2t-eBn"/>
+                                <constraint firstItem="1Lv-tB-cU7" firstAttribute="centerX" secondItem="bld-oJ-Bc9" secondAttribute="centerX" id="wih-48-mqO"/>
+                                <constraint firstItem="lAe-0a-u9S" firstAttribute="centerX" secondItem="1Lv-tB-cU7" secondAttribute="centerX" id="xJ0-Yy-Gk4"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="bld-oJ-Bc9" firstAttribute="width" secondItem="leQ-pi-pJa" secondAttribute="width" id="5fo-9s-H9A"/>
+                        <constraint firstAttribute="trailing" secondItem="bld-oJ-Bc9" secondAttribute="trailing" id="9wI-eL-yWr"/>
+                        <constraint firstAttribute="height" constant="120" id="BRb-Sg-OfZ"/>
+                        <constraint firstItem="leQ-pi-pJa" firstAttribute="width" secondItem="w0d-GP-c5r" secondAttribute="width" multiplier="1:2" id="CN4-pN-t7f"/>
+                        <constraint firstItem="bld-oJ-Bc9" firstAttribute="top" secondItem="w0d-GP-c5r" secondAttribute="top" id="Icc-5P-1P9"/>
+                        <constraint firstItem="leQ-pi-pJa" firstAttribute="leading" secondItem="w0d-GP-c5r" secondAttribute="leading" id="dIn-mb-3nR"/>
+                        <constraint firstAttribute="bottom" secondItem="bld-oJ-Bc9" secondAttribute="bottom" id="g4S-gB-Fqr"/>
+                        <constraint firstAttribute="bottom" secondItem="leQ-pi-pJa" secondAttribute="bottom" id="lHL-VY-a8a"/>
+                        <constraint firstItem="leQ-pi-pJa" firstAttribute="top" secondItem="w0d-GP-c5r" secondAttribute="top" id="zSn-vX-kfr"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="KDX-Bc-15m" secondAttribute="trailing" id="0y9-dY-kx4"/>
+                <constraint firstAttribute="trailing" secondItem="w0d-GP-c5r" secondAttribute="trailing" id="BgO-v2-NnV"/>
+                <constraint firstItem="KDX-Bc-15m" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="GJY-sk-aFC"/>
+                <constraint firstItem="w0d-GP-c5r" firstAttribute="top" secondItem="KDX-Bc-15m" secondAttribute="bottom" id="RFf-VV-NXh"/>
+                <constraint firstItem="KDX-Bc-15m" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="kWD-XS-f6a"/>
+                <constraint firstItem="w0d-GP-c5r" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="njl-nC-FvW"/>
+            </constraints>
+            <point key="canvasLocation" x="432" y="479"/>
+        </view>
+        <navigationItem title="Your Membership" id="Rmd-0j-449">
+            <barButtonItem key="rightBarButtonItem" title="Close" id="5wI-AL-tho">
+                <connections>
+                    <action selector="closeTapped:" destination="-1" id="sgY-qw-Olr"/>
+                </connections>
+            </barButtonItem>
+        </navigationItem>
+    </objects>
+    <resources>
+        <image name="ic_info_membership" width="64" height="64"/>
+        <image name="ic_upgrade_membership" width="64" height="64"/>
+    </resources>
+</document>
