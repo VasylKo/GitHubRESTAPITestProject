@@ -14,13 +14,14 @@ class MembershipMemberCardViewController : UIViewController {
     
     private let router : MembershipRouter
     
-
     private var profile : UserProfile?
     private var plan : MembershipPlan?
     
     @IBOutlet var titleNavigationItem: UINavigationItem!
     @IBOutlet weak var membershipCardView: MembershipCardView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var upgradeButton: UIButton!
+    @IBOutlet weak var detailsButton: UIButton!
     
     //MARK: Initializers
     
@@ -52,10 +53,15 @@ class MembershipMemberCardViewController : UIViewController {
         api().updateCurrentProfileStatus().flatMap { [weak self] (profile : UserProfile) -> Future<MembershipPlan, NSError> in
             self?.profile = profile
             return api().getMembership(self?.profile?.membershipDetails?.membershipPlanId ?? CRUDObjectInvalidId)
-            }.onSuccess { [weak self] plan in
+            }.flatMap { [weak self] (plan : MembershipPlan) -> Future<CollectionResponse<MembershipPlan>, NSError> in
+                self?.plan = plan
+                return api().getMemberships()
+            }.onSuccess { [weak self] collectionResponse in
                 if let strongSelf = self {
-                    strongSelf.plan = plan
-                    strongSelf.membershipCardView.configure(with: strongSelf.profile!, plan: plan)
+                    if collectionResponse.items.isEmpty {
+                        strongSelf.upgradeButton.enabled = false
+                    }
+                    strongSelf.membershipCardView.configure(with: strongSelf.profile!, plan: strongSelf.plan!)
                     UIView.animateWithDuration(0.4, animations: { () -> Void in
                         strongSelf.membershipCardView.alpha = 1.0
                     })
@@ -67,16 +73,17 @@ class MembershipMemberCardViewController : UIViewController {
     //MARK: Targe-Action
     
     @IBAction func detailsTapped(sender: AnyObject) {
-        
+        if let plan = self.plan {
+            self.router.showMembershipPlanDetailsViewController(from: self, with: plan, onlyPlanInfo: true)
+        }
     }
     
     @IBAction func upgradeTapped(sender: AnyObject) {
-        
+        if let plan = self.plan {
+            self.router.showPlansViewController(from: self, with: plan)
+        }
     }
     
-    @IBAction func shareTapped(sender: AnyObject) {
-        
-    }
     
     @IBAction func closeTapped(sender: AnyObject) {
         self.router.dismissMembership(from: self)

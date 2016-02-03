@@ -12,18 +12,22 @@ class MembershipPlansViewController : UIViewController, UITableViewDelegate, UIT
     
     private let router : MembershipRouter
     private var plans : [MembershipPlan] = []
+    private var currentMembershipPlan : MembershipPlan?
     private var type : MembershipPlan.PlanType
     private let reuseIdentifier = String(MembershipPlanTableViewCell.self)
     
     @IBOutlet private weak var tableView: UITableView!
+    @IBOutlet private weak var alreadyMemberButton: UIButton!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-    @IBOutlet weak var alreadyMemberButton: UIButton!
+    @IBOutlet weak var bottomView: UIView!
+    @IBOutlet weak var spaceBetweenBottomViewAndTableViewContstraint: NSLayoutConstraint!
     
     //MARK: Initializers
     
-    init(router: MembershipRouter, type : MembershipPlan.PlanType) {
+    init(router: MembershipRouter, type : MembershipPlan.PlanType, currentMembershipPlan : MembershipPlan?) {
         self.router = router
         self.type = type
+        self.currentMembershipPlan = currentMembershipPlan
         super.init(nibName: String(MembershipPlansViewController.self), bundle: nil)
     }
     
@@ -50,35 +54,53 @@ class MembershipPlansViewController : UIViewController, UITableViewDelegate, UIT
         self.tableView.registerNib(nib, forCellReuseIdentifier: self.reuseIdentifier)
         self.tableView.tableFooterView = UIView(frame: CGRectZero)
         
-        self.alreadyMemberButton.setTitleColor(UIScheme.mainThemeColor, forState: .Normal)
+        if self.currentMembershipPlan != nil {
+            self.bottomView.hidden = true
+            spaceBetweenBottomViewAndTableViewContstraint.constant = -self.bottomView.frame.size.height
+        }
     }
     
     //MARK: UITableViewDelegate & UITableViewDataSource
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // guest not a plan, add it (+1)
-        return plans.count + 1
+        let hasGuest = (self.currentMembershipPlan == nil)
+        return hasGuest ? plans.count + 1 : plans.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(self.reuseIdentifier, forIndexPath: indexPath) as! MembershipPlanTableViewCell
-        if indexPath.row == 0 {
-            //first cell is guest
-            cell.configureAsGuest()
+        let hasGuest = (self.currentMembershipPlan == nil)
+        if hasGuest {
+            if indexPath.row == 0 {
+                //first cell is guest
+                cell.configureAsGuest()
+            } else {
+                cell.configure(with: self.plans[indexPath.row - 1])
+            }
         } else {
-            cell.configure(with: self.plans[indexPath.row - 1])
+            cell.configure(with: self.plans[indexPath.row])
         }
         return cell
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: false)
-        
-        if indexPath.row == 0 {
-            //route as guest
+        let hasGuest = (self.currentMembershipPlan == nil)
+        if hasGuest {
+            if indexPath.row == 0 {
+                //first cell is guest
+                self.router.dismissMembership(from: self)
+            } else {
+                self.router.showMembershipPlanDetailsViewController(from: self, with : self.plans[indexPath.row - 1], onlyPlanInfo: false)
+            }
         } else {
-            self.router.showMembershipPlanDetailsViewController(from: self, with : self.plans[indexPath.row - 1])
+            self.router.showMembershipPlanDetailsViewController(from: self, with : self.plans[indexPath.row], onlyPlanInfo: false)
         }
     }
     
+    //MARK: Target-Action
+    
+    @IBAction func alreadyMemberPressed(sender: AnyObject) {
+        self.router.dismissMembership(from: self)
+    }
 }
