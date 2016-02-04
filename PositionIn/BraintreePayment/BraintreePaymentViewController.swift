@@ -15,6 +15,7 @@ class BraintreePaymentViewController : UIViewController, BTDropInViewControllerD
     var quantity: Int?
     var productName: String?
     var membershipId: String?
+    var itemId: String?
     var delegate: PaymentReponseDelegate?
     
     override func viewDidLoad() {
@@ -32,7 +33,7 @@ class BraintreePaymentViewController : UIViewController, BTDropInViewControllerD
     }
     
     private func dismissPaymentsController(success: Bool, err: String?) {
-        self.navigationController?.popViewControllerAnimated(false)
+        self.navigationController?.popViewControllerAnimated(true)
         delegate?.paymentReponse(success,err:err)
     }
     
@@ -71,7 +72,7 @@ class BraintreePaymentViewController : UIViewController, BTDropInViewControllerD
                 }
             }
             else {
-                api().checkoutBraintree(String(amount!), nonce: paymentMethodNonce.nonce).onSuccess
+                api().checkoutBraintree(String(amount!), nonce: paymentMethodNonce.nonce, itemId: self.itemId).onSuccess
                     { [weak self] err in
                         if let strongSelf = self {
                             if(err == "") {

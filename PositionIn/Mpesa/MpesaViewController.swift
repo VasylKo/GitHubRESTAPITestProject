@@ -5,7 +5,7 @@
 
 import UIKit
 
-class MpesaViewController : UIViewController, PaymentProtocol {
+class MpesaViewController : UIViewController {
     var amount: Int?
     var quantity: Int?
     var productName: String?

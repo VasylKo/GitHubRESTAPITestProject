@@ -23,17 +23,19 @@ class SelectPaymentMethodController: UIViewController, XLFormRowDescriptorViewCo
         self.tableView.dataSource = self
         self.tableView.delegate = self
         self.tableView.rowHeight = UITableViewAutomaticDimension;
-        self.tableView.estimatedRowHeight = 80;
+        self.tableView.estimatedRowHeight = 100;
         self.tableView.registerNib(UINib(nibName: reuseIdentifier,
             bundle: nil),
             forCellReuseIdentifier: reuseIdentifier)
         self.view.addSubview(self.tableView)
         
         self.infoLabel = UILabel(frame: CGRectZero)
-        self.infoLabel.text = NSLocalizedString("Information is send over secure connection", comment: "")
+        self.infoLabel.text = NSLocalizedString("Information is sent over a secure connection.", comment: "")
         self.infoLabel.font = UIFont(name: "Helvetica", size: 14)
         self.view.addSubview(self.infoLabel)
-        
+     
+        self.title = NSLocalizedString("Select Payment Method", comment: "")
+        self.navigationController?.navigationItem.backBarButtonItem?.title = " "
         self.view.backgroundColor = UIColor.bt_colorWithBytesR(245, g: 245, b: 245)
     }
     
@@ -86,6 +88,7 @@ extension SelectPaymentMethodController: UITableViewDataSource {
         if let cell = cell as? CardTableViewCell {
             if let cardItem = CardItem(rawValue: indexPath.row) {
                 cell.cardName = CardItem.cardName(cardItem)
+                cell.cardDescription = CardItem.cardDescription(cardItem)
                 cell.cardImage = CardItem.cardImage(cardItem)
             }
             cell.layoutMargins = UIEdgeInsetsZero

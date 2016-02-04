@@ -20,7 +20,7 @@ struct Product: CRUDObject {
     var deliveryMethod: DeliveryMethod? = .Unknown
     var photos: [PhotoInfo]?
     var location: Location?
-    var imageURLString: String?
+    var imageURL: NSURL?
     
 /*
     //TODO:
@@ -69,7 +69,7 @@ struct Product: CRUDObject {
         deliveryMethod <- (map["deliveryMethod"], EnumTransform())
         photos <- map["photos"]
         location <- map["location"]
-        imageURLString <- map["image"]
+        imageURL <- (map["image"], AmazonURLTransform())
     }
     
     static func endpoint() -> String {
@@ -83,7 +83,6 @@ struct Product: CRUDObject {
     static func shopItemsEndpoint(shopId: CRUDObjectId) -> String {
         return (Product.endpoint() as NSString).stringByAppendingPathComponent("\(shopId)/items")
     }
-        
     
     var description: String {
         return "<\(self.dynamicType):\(objectId)>"

@@ -19,7 +19,7 @@ class EmergencyDetailsController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = NSLocalizedString("Emergency", comment: "Product details: title")
+        title = NSLocalizedString("Emergency Alerts", comment: "Product details: title")
         dataSource.items = productAcionItems()
         dataSource.configureTable(actionTableView)
         reloadData()
@@ -58,18 +58,9 @@ class EmergencyDetailsController: UIViewController {
             nameLabel.text = name
         }
         
-        let imageURL: NSURL?
-        
-        if let urlString = product.imageURLString {
-            imageURL = NSURL(string:urlString)
-        }
-        else {
-            imageURL = nil
-        }
-        
         let image = UIImage(named: "PromotionDetailsPlaceholder")
         
-        productImageView.setImageFromURL(imageURL, placeholder: image)
+        productImageView.setImageFromURL(product.imageURL, placeholder: image)
         if let coordinates = product.location?.coordinates {
             self.pinDistanceImageView.hidden = false
             locationRequestToken.invalidate()
