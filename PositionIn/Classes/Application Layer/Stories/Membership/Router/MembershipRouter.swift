@@ -14,6 +14,8 @@ protocol MembershipRouter : BaseRouter {
     
     func showMembershipPlanDetailsViewController(from sourceViewController : UIViewController, with plan : MembershipPlan, onlyPlanInfo : Bool)
     
+    func showMembershipMemberProfile(from sourceViewController : UIViewController, phoneNumber : String, validationCode : String)
+
     func showMembershipMemberCardViewController(from sourceViewController : UIViewController)
 
     func showMembershipConfirmDetailsViewController(from sourceViewController : UIViewController, with plan : MembershipPlan)

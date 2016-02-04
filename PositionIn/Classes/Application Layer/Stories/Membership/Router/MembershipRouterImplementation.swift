@@ -36,6 +36,11 @@ class MembershipRouterImplementation: BaseRouterImplementation, MembershipRouter
         sourceViewController.navigationController?.pushViewController(MembershipMemberCardViewController(router: self), animated: true)
     }
     
+    
+    func showMembershipMemberProfile(from sourceViewController : UIViewController, phoneNumber : String, validationCode : String) {
+        sourceViewController.navigationController?.pushViewController(MembershipMemberProfileViewController(router: self, phoneNumber: phoneNumber, validationCode: validationCode), animated: true)
+    }
+    
     func showPaymentViewController(from sourceViewController : UIViewController, with plan : MembershipPlan) {
         sourceViewController.navigationController?.pushViewController(MembershipPaymentViewController(router: self, plan: plan),
             animated: true)
