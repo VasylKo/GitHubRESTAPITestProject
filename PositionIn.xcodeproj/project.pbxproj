@@ -74,6 +74,7 @@
 		50FA43301C44F0B50050B00E /* ErrorCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50FA432F1C44F0B50050B00E /* ErrorCell.xib */; };
 		50FE7D891BBE77BB005676E2 /* ItemsSearchResultDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FE7D871BBE77BB005676E2 /* ItemsSearchResultDataSource.swift */; };
 		50FE7D8A1BBE77BB005676E2 /* ItemsSearchResultsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FE7D881BBE77BB005676E2 /* ItemsSearchResultsController.swift */; };
+		CD21EA381C63A78800E50909 /* MembershipMemberProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD21EA371C63A78800E50909 /* MembershipMemberProfileViewController.swift */; };
 		CD794DE01C52485E00C1C298 /* OpenApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD794DDF1C52485E00C1C298 /* OpenApplication.swift */; };
 		CD795BDE1C57B4EE00C1C298 /* Appfile in Resources */ = {isa = PBXBuildFile; fileRef = CD795BDA1C57B4EE00C1C298 /* Appfile */; };
 		CD795BDF1C57B4EE00C1C298 /* Fastfile in Resources */ = {isa = PBXBuildFile; fileRef = CD795BDB1C57B4EE00C1C298 /* Fastfile */; };
@@ -104,6 +105,10 @@
 		CDBDD9B11C47CAAB007578BC /* PositionIn.BrowseVolunteerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CDBDD9B01C47CAAB007578BC /* PositionIn.BrowseVolunteerViewController.xib */; };
 		CDBDD9B31C491617007578BC /* BomaHotel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBDD9B21C491617007578BC /* BomaHotel.swift */; };
 		CDE1B9041C5BBE5900F76F32 /* MembershipPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDE1B9021C5BBE5900F76F32 /* MembershipPageView.swift */; };
+		CDE1B90D1C5F658100F76F32 /* MembershipMemberProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CDE1B90C1C5F658100F76F32 /* MembershipMemberProfileViewController.xib */; };
+		CDE1B90F1C5F678B00F76F32 /* LocalizedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDE1B90E1C5F678B00F76F32 /* LocalizedString.swift */; };
+		CDE1B91F1C5F9E6A00F76F32 /* MembershipMemberProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDE1B91D1C5F9E6A00F76F32 /* MembershipMemberProfileView.swift */; };
+		CDE1B9201C5F9E6A00F76F32 /* MembershipMemberProfileView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CDE1B91E1C5F9E6A00F76F32 /* MembershipMemberProfileView.xib */; };
 		CDEDD96B1C45033C00396594 /* PostToContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDEDD9691C45033C00396594 /* PostToContainerViewController.swift */; };
 		CDEDD96C1C45033C00396594 /* PostToContainerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CDEDD96A1C45033C00396594 /* PostToContainerViewController.xib */; };
 		CDEDD9731C45242400396594 /* VolunteerSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDEDD9711C45242400396594 /* VolunteerSearchViewController.swift */; };
@@ -557,6 +562,7 @@
 		AF836D0B902FDFFA6CB4A412 /* Pods_Messaging.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Messaging.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB73828B80F64D347BB9F14D /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5785CCFFE7238C562E6E52F /* Pods-PositionIn.devrelease.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PositionIn.devrelease.xcconfig"; path = "Pods/Target Support Files/Pods-PositionIn/Pods-PositionIn.devrelease.xcconfig"; sourceTree = "<group>"; };
+		CD21EA371C63A78800E50909 /* MembershipMemberProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MembershipMemberProfileViewController.swift; sourceTree = "<group>"; };
 		CD794DDF1C52485E00C1C298 /* OpenApplication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpenApplication.swift; sourceTree = "<group>"; };
 		CD795BDA1C57B4EE00C1C298 /* Appfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Appfile; sourceTree = "<group>"; };
 		CD795BDB1C57B4EE00C1C298 /* Fastfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Fastfile; sourceTree = "<group>"; };
@@ -587,6 +593,10 @@
 		CDBDD9B01C47CAAB007578BC /* PositionIn.BrowseVolunteerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.BrowseVolunteerViewController.xib; sourceTree = "<group>"; };
 		CDBDD9B21C491617007578BC /* BomaHotel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BomaHotel.swift; sourceTree = "<group>"; };
 		CDE1B9021C5BBE5900F76F32 /* MembershipPageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MembershipPageView.swift; sourceTree = "<group>"; };
+		CDE1B90C1C5F658100F76F32 /* MembershipMemberProfileViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MembershipMemberProfileViewController.xib; sourceTree = "<group>"; };
+		CDE1B90E1C5F678B00F76F32 /* LocalizedString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalizedString.swift; sourceTree = "<group>"; };
+		CDE1B91D1C5F9E6A00F76F32 /* MembershipMemberProfileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MembershipMemberProfileView.swift; sourceTree = "<group>"; };
+		CDE1B91E1C5F9E6A00F76F32 /* MembershipMemberProfileView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MembershipMemberProfileView.xib; sourceTree = "<group>"; };
 		CDEDD9691C45033C00396594 /* PostToContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostToContainerViewController.swift; sourceTree = "<group>"; };
 		CDEDD96A1C45033C00396594 /* PostToContainerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PostToContainerViewController.xib; sourceTree = "<group>"; };
 		CDEDD9711C45242400396594 /* VolunteerSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VolunteerSearchViewController.swift; sourceTree = "<group>"; };
@@ -1292,6 +1302,7 @@
 		CD795BD51C57B4C700C1C298 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				CDE1B90E1C5F678B00F76F32 /* LocalizedString.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1346,6 +1357,7 @@
 		CD795BEC1C57BA8100C1C298 /* Interface */ = {
 			isa = PBXGroup;
 			children = (
+				CDE1B90B1C5F657300F76F32 /* MemberProfile */,
 				CD8ED0D71C60AD5000576DBF /* MemberCard */,
 				D1CAA7471C60AD070046130E /* Payment */,
 				CDB5B5C31C5B9C2400413715 /* Plans */,
@@ -1469,6 +1481,32 @@
 			path = Volunteer;
 			sourceTree = "<group>";
 		};
+		CDE1B9081C5F648700F76F32 /* MemberProfile */ = {
+			isa = PBXGroup;
+			children = (
+				CD21EA371C63A78800E50909 /* MembershipMemberProfileViewController.swift */,
+			);
+			path = MemberProfile;
+			sourceTree = "<group>";
+		};
+		CDE1B90B1C5F657300F76F32 /* MemberProfile */ = {
+			isa = PBXGroup;
+			children = (
+				CDE1B91C1C5F9E6A00F76F32 /* MemberProfileView */,
+				CDE1B90C1C5F658100F76F32 /* MembershipMemberProfileViewController.xib */,
+			);
+			path = MemberProfile;
+			sourceTree = "<group>";
+		};
+		CDE1B91C1C5F9E6A00F76F32 /* MemberProfileView */ = {
+			isa = PBXGroup;
+			children = (
+				CDE1B91D1C5F9E6A00F76F32 /* MembershipMemberProfileView.swift */,
+				CDE1B91E1C5F9E6A00F76F32 /* MembershipMemberProfileView.xib */,
+			);
+			path = MemberProfileView;
+			sourceTree = "<group>";
+		};
 		D100DF0C1BF4AA6500C81054 /* NSDate-Time-Ago */ = {
 			isa = PBXGroup;
 			children = (
@@ -1590,6 +1628,7 @@
 		D1DA1EAF1C5909D7009F5AFA /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				CDE1B9081C5F648700F76F32 /* MemberProfile */,
 				CD795C811C5A6DCB00C1C298 /* Plans */,
 				D1DA1EB61C5909D7009F5AFA /* PlanDetails */,
 				D1DA1EB81C5909D7009F5AFA /* PlanPayment */,
@@ -3451,6 +3490,7 @@
 				E6C952351BA1D9960032254F /* PositionIn.ProfileStatsCell.xib in Resources */,
 				50FA43301C44F0B50050B00E /* ErrorCell.xib in Resources */,
 				E62B16F51B5C1AA700D446BC /* PositionIn.MainMenuUserCell.xib in Resources */,
+				CDE1B90D1C5F658100F76F32 /* MembershipMemberProfileViewController.xib in Resources */,
 				CD8ED0D91C60AE1400576DBF /* MembershipMemberCardViewController.xib in Resources */,
 				E6BEF1D81B9C671D00511B46 /* PositionIn.PostInfoCell.xib in Resources */,
 				E661159E1B73A0CB003DB5B3 /* PositionIn.BrowseMapViewController.xib in Resources */,
@@ -3500,6 +3540,7 @@
 				D1FD85391C1EE8BB00C2E87B /* PositionIn.TrainingDetailsViewController.xib in Resources */,
 				E661159B1B73A0CB003DB5B3 /* PositionIn.BrowseListViewController.xib in Resources */,
 				CD795BE01C57B4EE00C1C298 /* redcross.erb in Resources */,
+				CDE1B9201C5F9E6A00F76F32 /* MembershipMemberProfileView.xib in Resources */,
 				E6F7A47F1BA356130069152A /* PositionIn.LocationCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3654,6 +3695,7 @@
 				E6DADB9E1B8C5799009A5694 /* SearchFilter.swift in Sources */,
 				D1FD853A1C1EE8BB00C2E87B /* TrainingDetailsViewController.swift in Sources */,
 				E64D00631B7C8FB7007693E0 /* AddPostViewController.swift in Sources */,
+				CDE1B91F1C5F9E6A00F76F32 /* MembershipMemberProfileView.swift in Sources */,
 				50FA432C1C4404CC0050B00E /* PaymentProtocol.swift in Sources */,
 				E6F7A4811BA356500069152A /* LocationSearchResultDataSource.swift in Sources */,
 				E62B16FF1B5CE0F800D446BC /* BesideMenuViewController.swift in Sources */,
@@ -3671,6 +3713,7 @@
 				D1C475EA1C106DB70096D383 /* DonateNotificationViewController.swift in Sources */,
 				D12EDEC71BFF4F0D00FB6245 /* PhoneVerificationViewController.swift in Sources */,
 				D1DA1EBF1C5909D7009F5AFA /* MembershipPlanDetailsViewController.swift in Sources */,
+				CD21EA381C63A78800E50909 /* MembershipMemberProfileViewController.swift in Sources */,
 				500D7FA31BC2AACF008C8C82 /* SearchItem.swift in Sources */,
 				E661158D1B73778B003DB5B3 /* RecoverPasswordViewController.swift in Sources */,
 				50D1AFA61BBAD21400957882 /* PostLikeCommentCell.swift in Sources */,
@@ -3706,6 +3749,7 @@
 				CDEDD96B1C45033C00396594 /* PostToContainerViewController.swift in Sources */,
 				D1B780CD1C0F519600EF5825 /* DonateCell.swift in Sources */,
 				D18A1FDC1BEB95D9003F158D /* ChangePasswordViewController.swift in Sources */,
+				CDE1B90F1C5F678B00F76F32 /* LocalizedString.swift in Sources */,
 				E6D7F83B1BE24AE500A544F4 /* MainMenuBadgeCell.swift in Sources */,
 				E6BEF1EA1B9C902400511B46 /* BrowseCommunityTableViewCellModel.swift in Sources */,
 				E63201741B9872C60066C62E /* EditProfileViewController.swift in Sources */,
