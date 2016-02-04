@@ -88,13 +88,10 @@ class PhoneVerificationViewController: XLFormViewController {
                     }
                     else {
                         //register
-                        trackGoogleAnalyticsEvent("Auth", action: "Click", label: "SMS verification", value: NSNumber(int: 0))
-                        MembershipRouterImplementation().showMembershipMemberProfile(from: self!)
-                        //let controller = EditProfileViewController(nibName: nil, bundle: nil)
-                        //controller.phoneNumber = self?.phoneNumber
-                        //controller.validationCode = codeString
-                        
-                        //self?.navigationController?.pushViewController(controller, animated: true)
+                        if let strongSelf = self {
+                            trackGoogleAnalyticsEvent("Auth", action: "Click", label: "SMS verification", value: NSNumber(int: 0))
+                            MembershipRouterImplementation().showMembershipMemberProfile(from: strongSelf, phoneNumber: strongSelf.phoneNumber!, validationCode: codeString)
+                        }
                     }
                     })
         }

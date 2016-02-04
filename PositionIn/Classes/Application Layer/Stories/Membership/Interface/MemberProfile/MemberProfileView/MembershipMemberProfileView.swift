@@ -18,7 +18,8 @@ class MembershipMemberProfileView : UIView {
 
     @IBOutlet private weak var profileImageView: UIImageView!
     @IBOutlet private weak var addPhotoLabel: UILabel!
-    
+
+    var asset : PHAsset?
     var delegate : MembershipMemberProfileViewDelegate?
     
     override func awakeFromNib() {
@@ -32,6 +33,7 @@ class MembershipMemberProfileView : UIView {
     }
     
     func configure (asset : PHAsset) {
+        self.asset = asset
         let previewSize = profileImageView.bounds.size
         let requestOptions = PHImageRequestOptions()
         requestOptions.deliveryMode = .FastFormat
@@ -40,7 +42,6 @@ class MembershipMemberProfileView : UIView {
             contentMode: .AspectFit,
             options: requestOptions,
             resultHandler: { [weak self] (image, info) -> Void in
-                print(image?.size)
                 UIView.animateWithDuration(0.4, animations: { () -> Void in
                     self?.profileImageView.layer.masksToBounds = true
                     self?.profileImageView.image = image

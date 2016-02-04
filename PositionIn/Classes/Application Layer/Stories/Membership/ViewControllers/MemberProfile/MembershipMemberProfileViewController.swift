@@ -17,14 +17,17 @@ import Result
 import ImagePickerSheetController
 import MobileCoreServices
 import Photos
+
+
 class MembershipMemberProfileViewController : XLFormViewController, MembershipMemberProfileViewDelegate {
     
+    private var phoneNumber: String
+    private var validationCode: String
     private let router : MembershipRouter
     
-    private var headerView : MembershipMemberProfileView?
+    private var headerView : MembershipMemberProfileView!
     private var userProfile: UserProfile?
-    private var phoneNumber: String?
-    private var validationCode: String?
+
     
     enum Tags : String {
         case FirstName
@@ -34,8 +37,10 @@ class MembershipMemberProfileViewController : XLFormViewController, MembershipMe
     
     //MARK: Initializers
     
-    init(router: MembershipRouter) {
+    init(router: MembershipRouter, phoneNumber : String, validationCode : String) {
         self.router = router
+        self.phoneNumber = phoneNumber
+        self.validationCode = validationCode
         
         super.init(nibName: String(MembershipMemberProfileViewController.self), bundle: nil)
         
@@ -89,6 +94,9 @@ class MembershipMemberProfileViewController : XLFormViewController, MembershipMe
     }
     
     func setupInterface() {
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Done"), style: UIBarButtonItemStyle.Plain, target: self, action: "didTapDone:")
+        self.title = "My Profile"
+        
         if let headerView = NSBundle.mainBundle().loadNibNamed(String(MembershipMemberProfileView.self), owner: nil, options: nil).first as? MembershipMemberProfileView {
             self.headerView = headerView
             self.tableView.tableHeaderView = headerView
@@ -141,6 +149,44 @@ class MembershipMemberProfileViewController : XLFormViewController, MembershipMe
         }  
     }
     
+    @IBAction func didTapDone(sender: AnyObject) {
+        if view.userInteractionEnabled == false {
+            return
+        }
+        let validationErrors : Array<NSError> = self.formValidationErrors() as! Array<NSError>
+        if (validationErrors.count > 0){
+            self.showFormValidationError(validationErrors.first)
+            return
+        }
+        self.tableView.endEditing(true)
+        
+        let values = formValues()
+        Log.debug?.value(values)
+        
+        api().register(username: nil, password: nil, phoneNumber: self.phoneNumber,
+            phoneVerificationCode: self.validationCode,
+            firstName: values[Tags.FirstName.rawValue] as? String,
+            lastName: values[Tags.LastName.rawValue] as? String, email: values[Tags.Email.rawValue] as? String).onSuccess(callback: {[weak self] userProfile in
+            
+                trackGoogleAnalyticsEvent("Status", action: "Click", label: "Auth Success")
+                Log.info?.message("Registration done")
+                
+                if let avatarUpload = self?.uploadAssets(self?.headerView.asset) {
+                    avatarUpload.flatMap { (urls: [NSURL]) -> Future<Void, NSError> in
+                        userProfile.avatar = urls.first
+                        return api().updateMyProfile(userProfile)
+                    }
+                }
+                
+                let router : MembershipRouter = MembershipRouterImplementation()
+                router.showInitialViewController(from: self!)
+                }).onSuccess(callback: { _ in
+                    api().pushesRegistration()
+                }).onFailure(callback: {_ in
+                    trackGoogleAnalyticsEvent("Status", action: "Click", label: "Auth Fail")
+                })
+    }
+    
 }
 
 extension MembershipMemberProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
@@ -190,4 +236,34 @@ extension MembershipMemberProfileViewController: UIImagePickerControllerDelegate
         return future
     }
     
+    func uploadAssets(value: AnyObject?, optional: Bool = true) -> Future<[NSURL], NSError>? {
+        if let asset = value as? PHAsset {
+            return self.uploadDataForAsset(asset).flatMap({ (let data, let dataUTI) in
+                return api().uploadImage(data, dataUTI: dataUTI)
+            }).map({ (let url) in
+                return [url]
+            })
+        }
+        
+        return optional ? Future(value: []) : nil
+    }
+    
+    private func uploadDataForAsset(asset: PHAsset) -> Future<(NSData, String), NSError> {
+        let p = Promise<(NSData, String), NSError>()
+        let options = PHImageRequestOptions()
+        options.deliveryMode = .HighQualityFormat
+        PHImageManager.defaultManager().requestImageDataForAsset(asset, options: options) { (imageData, dataUTI, orientation, info) -> Void in
+            switch (imageData, dataUTI) {
+            case (.Some, .Some):
+                p.success((imageData!, dataUTI!))
+            default:
+                if let error = info?[PHImageErrorKey] as? NSError {
+                    p.failure(error)
+                } else {
+                    p.failure(NetworkDataProvider.ErrorCodes.UnknownError.error())
+                }
+            }
+        }
+        return p.future
+    }
 }
