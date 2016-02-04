@@ -24,6 +24,7 @@ class MembershipMemberProfileView : UIView {
     
     override func awakeFromNib() {
         self.addPhotoLabel.textColor = UIScheme.mainThemeColor
+        self.profileImageView.layer.masksToBounds = true
     }
     
     @IBAction func addPhotoAction(sender: AnyObject) {
