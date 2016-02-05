@@ -15,6 +15,12 @@ class CardTableViewCell: UITableViewCell {
             self.cardNameLabel.text = cardName
         }
     }
+
+    var cardDescription: String? {
+        didSet {
+            self.cardDescriptionLabel.text = cardDescription
+        }
+    }
     
     var cardImage: UIImage? {
         didSet {
@@ -23,5 +29,6 @@ class CardTableViewCell: UITableViewCell {
     }
     
     @IBOutlet weak var cardNameLabel: UILabel!
+    @IBOutlet weak var cardDescriptionLabel: UILabel!
     @IBOutlet weak var cardIconImageView: UIImageView!
 }

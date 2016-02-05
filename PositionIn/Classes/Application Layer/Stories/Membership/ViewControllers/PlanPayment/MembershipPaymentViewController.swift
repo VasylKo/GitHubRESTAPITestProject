@@ -9,7 +9,7 @@
 import UIKit
 import XLForm
 
-class PaymentViewController: XLFormViewController, PaymentReponseDelegate {
+class MembershipPaymentViewController: XLFormViewController, PaymentReponseDelegate {
     
     private let pageView = MembershipPageView(pageCount: 3)
     private let router : MembershipRouter
@@ -94,6 +94,7 @@ class PaymentViewController: XLFormViewController, PaymentReponseDelegate {
         paymentRow.valueTransformer = CardItemValueTrasformer.self
         paymentRow.value = nil
         paymentRow.cellConfig.setObject(UIScheme.mainThemeColor, forKey: "tintColor")
+        paymentRow.required = true
         paymentSection.addFormRow(paymentRow)
         
         let confirmDonation = XLFormSectionDescriptor.formSection()
@@ -101,14 +102,24 @@ class PaymentViewController: XLFormViewController, PaymentReponseDelegate {
         
         let confirmRow: XLFormRowDescriptor = XLFormRowDescriptor(tag: nil,
             rowType: XLFormRowDescriptorTypeButton,
-            title: NSLocalizedString("Confirm Payment", comment: "Payment"))
+            title: NSLocalizedString("Proceed to Pay"))
+        confirmRow.cellConfig["backgroundColor"] = UIScheme.mainThemeColor
+        confirmRow.cellConfig["textLabel.textColor"] = UIColor.whiteColor()
         
-        confirmRow.action.formBlock = { [weak self]_ in
+        confirmRow.action.formBlock = { [weak self] row in
+            
+            self?.deselectFormRow(row)
+            
+            let validationErrors : Array<NSError> = self?.formValidationErrors() as! Array<NSError>
+            if (validationErrors.count > 0){
+                self?.showFormValidationError(validationErrors.first)
+                return
+            }
+            
             let paymentController: BraintreePaymentViewController = BraintreePaymentViewController()
             paymentController.amount = self?.plan.price
             paymentController.productName = self?.plan.name
-            paymentController.quantity = 1
-            paymentController.delegate = self
+            paymentController.membershipId = self?.plan.objectId
             paymentController.delegate = self
             self?.navigationController?.pushViewController(paymentController, animated: true)
         }
@@ -121,10 +132,7 @@ class PaymentViewController: XLFormViewController, PaymentReponseDelegate {
     //MARK: PaymentReponseDelegate
     
     func setError(hidden: Bool, error: String?) {
-        //TODO should change handler
-        self.sideBarController?.executeAction(SidebarViewController.defaultAction)
-        self.dismissViewControllerAnimated(true, completion: nil)
-        self.navigationController?.popToRootViewControllerAnimated(true)
+        self.router.showMembershipMemberCardViewController(from: self)
     }
     
     func paymentReponse(success: Bool, err: String?) {

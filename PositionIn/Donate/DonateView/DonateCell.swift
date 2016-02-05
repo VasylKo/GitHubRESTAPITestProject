@@ -19,16 +19,15 @@ class DonateCell: XLFormBaseCell {
         }
     }
     
-    var projectIcon: UIImage? {
+    var projectIconURL: NSURL? {
         didSet {
-            self.projectIconImageView.image = projectIcon
+            self.projectIconImageView.setImageFromURL(projectIconURL, placeholder: nil)
         }
     }
     
     override func configure() {
         super.configure()
     }
-    
     
     override func update() {
         super.update()

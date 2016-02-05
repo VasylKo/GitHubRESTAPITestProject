@@ -60,17 +60,9 @@ final class MarketDetailsViewController: UIViewController {
             let newValue = $0 as Float
             return AppConfiguration().currencyFormatter.stringFromNumber(NSNumber(float: newValue)) ?? ""}
         
-        let imageURL: NSURL?
-        
-        if let urlString = product.imageURLString {
-            imageURL = NSURL(string:urlString)
-        } else {
-            imageURL = nil
-        }
-        
         let image = UIImage(named: "market_img_default")
         
-        productImageView.setImageFromURL(imageURL, placeholder: image)
+        productImageView.setImageFromURL(product.imageURL, placeholder: image)
         if let coordinates = product.location?.coordinates {
             self.pinDistanceImageView.hidden = false
             locationRequestToken.invalidate()
@@ -111,7 +103,6 @@ final class MarketDetailsViewController: UIViewController {
         var firstSection = [ // 1 section
             MarketActionItem(title: NSLocalizedString("Send Message", comment: "Market"), image: "productSendMessage", action: .SendMessage),
             MarketActionItem(title: NSLocalizedString("Seller Profile", comment: "Market"), image: "productSellerProfile", action: .SellerProfile),
-            /*MarketActionItem(title: NSLocalizedString("More Information", comment: "Market"), image: "productTerms&Info", action: .ProductInventory),*/
         ]
         if self.product?.location != nil {
             firstSection.append(MarketActionItem(title: NSLocalizedString("Navigate", comment: "Market"), image: "productNavigate", action: .Navigate))
@@ -132,14 +123,12 @@ final class MarketDetailsViewController: UIViewController {
 
 extension MarketDetailsViewController {
     enum MarketDetailsAction: CustomStringConvertible {
-        case Buy, ProductInventory, SellerProfile, SendMessage, Navigate
+        case Buy, SellerProfile, SendMessage, Navigate
         
         var description: String {
             switch self {
             case .Buy:
                 return "Buy"
-            case .ProductInventory:
-                return "Product Inventory"
             case .SellerProfile:
                 return "Seller profile"
             case .SendMessage:
@@ -160,8 +149,10 @@ extension MarketDetailsViewController {
 
 extension MarketDetailsViewController: MarketDetailsActionConsumer {
     func executeAction(action: MarketDetailsAction) {
-        let segue: BomaHotelsDetailsViewController.Segue
+        let segue: MarketDetailsViewController.Segue
         switch action {
+        case .Buy:
+            segue = .ShowBuyScreen
         case .SellerProfile:
             segue = .ShowOrganizerProfile
         case .SendMessage:
@@ -175,8 +166,6 @@ extension MarketDetailsViewController: MarketDetailsActionConsumer {
             } else {
                 Log.error?.message("coordinates missed")
             }
-            return
-        default:
             return
         }
         performSegue(segue)
