@@ -8,7 +8,7 @@ import Braintree
 
 class BraintreePaymentViewController : UIViewController, BTDropInViewControllerDelegate, PaymentProtocol {
     private var braintreeClient: BTAPIClient?
-    private var clientToken = ""
+    private var clientToken: String?
     private var dropInVc : BTDropInViewController?
     
     var amount: Int?
@@ -38,21 +38,24 @@ class BraintreePaymentViewController : UIViewController, BTDropInViewControllerD
     }
     
     private func initBraintree() {
-        self.braintreeClient = BTAPIClient(authorization: clientToken)
-        
-        let dropInViewController = BTDropInViewController(APIClient: braintreeClient!)
-        dropInViewController.delegate = self
-        
-        dropInViewController.title = NSLocalizedString("Payment Method", comment: "braintree title")
-        let summaryFormat = NSLocalizedString("%@ %@", comment: "Order: Summary format")
-        dropInViewController.paymentRequest?.summaryTitle = productName
-        dropInViewController.paymentRequest?.displayAmount = "\(amount!) KSH"
-        dropInViewController.paymentRequest?.summaryDescription = String(format: summaryFormat, "Quantity:", String(quantity!))
-        dropInViewController.paymentRequest?.callToActionText = NSLocalizedString("Checkout", comment: "Order: Checkout")
-        
-        self.view.addSubview(dropInViewController.view)
-        
-        self.dropInVc = dropInViewController
+        if let clientToken = clientToken {
+            
+            self.braintreeClient = BTAPIClient(authorization: clientToken)
+            
+            let dropInViewController = BTDropInViewController(APIClient: braintreeClient!)
+            dropInViewController.delegate = self
+            
+            dropInViewController.title = NSLocalizedString("Payment Method", comment: "braintree title")
+            let summaryFormat = NSLocalizedString("%@ %@", comment: "Order: Summary format")
+            dropInViewController.paymentRequest?.summaryTitle = productName
+            dropInViewController.paymentRequest?.displayAmount = "\(amount!) KSH"
+            dropInViewController.paymentRequest?.summaryDescription = String(format: summaryFormat, "Quantity:", String(quantity!))
+            dropInViewController.paymentRequest?.callToActionText = NSLocalizedString("Checkout", comment: "Order: Checkout")
+            
+            self.view.addSubview(dropInViewController.view)
+            
+            self.dropInVc = dropInViewController
+        }
     }
     
     func dropInViewController(viewController: BTDropInViewController,

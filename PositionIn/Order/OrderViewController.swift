@@ -92,23 +92,26 @@ class OrderViewController: UITableViewController {
 
 
     @IBAction func didTapCheckout(sender: AnyObject) {
-        let dropInViewController = BTDropInViewController(APIClient: braintreeClient!)
-        dropInViewController.delegate = self
-
-        dropInViewController.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Cancel, target: self, action: "userDidCancelPayment:")
-        dropInViewController.navigationItem.leftBarButtonItem?.tintColor = UIColor.whiteColor()
-        dropInViewController.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.bt_colorWithBytesR(254,
+        
+        if let braintreeClient = braintreeClient {
+            let dropInViewController = BTDropInViewController(APIClient: braintreeClient)
+            dropInViewController.delegate = self
+            
+            dropInViewController.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Cancel, target: self, action: "userDidCancelPayment:")
+            dropInViewController.navigationItem.leftBarButtonItem?.tintColor = UIColor.whiteColor()
+            dropInViewController.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.bt_colorWithBytesR(254,
                 g: 187,
                 b: 182)]
-        dropInViewController.title = NSLocalizedString("Payment Method", comment: "braintree title")
-        let summaryFormat = NSLocalizedString("%@ %@", comment: "Order: Summary format")
-        dropInViewController.paymentRequest?.summaryTitle = String(format: summaryFormat, quantityString, product?.name ?? "")
-        dropInViewController.paymentRequest?.displayAmount = totalLabel.text ?? ""
-        dropInViewController.paymentRequest?.summaryDescription = product?.text
-        dropInViewController.paymentRequest?.callToActionText = NSLocalizedString("Checkout", comment: "Order: Checkout")
-        let navigationController = UINavigationController(rootViewController: dropInViewController)
-        navigationController.view.tintColor = UIScheme.mainThemeColor
-        presentViewController(navigationController, animated: true, completion: nil)
+            dropInViewController.title = NSLocalizedString("Payment Method", comment: "braintree title")
+            let summaryFormat = NSLocalizedString("%@ %@", comment: "Order: Summary format")
+            dropInViewController.paymentRequest?.summaryTitle = String(format: summaryFormat, quantityString, product?.name ?? "")
+            dropInViewController.paymentRequest?.displayAmount = totalLabel.text ?? ""
+            dropInViewController.paymentRequest?.summaryDescription = product?.text
+            dropInViewController.paymentRequest?.callToActionText = NSLocalizedString("Checkout", comment: "Order: Checkout")
+            let navigationController = UINavigationController(rootViewController: dropInViewController)
+            navigationController.view.tintColor = UIScheme.mainThemeColor
+            presentViewController(navigationController, animated: true, completion: nil)
+        }
     }
 
     @IBAction func userDidCancelPayment(sender: AnyObject) {
