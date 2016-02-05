@@ -110,13 +110,13 @@ enum HomeItem: Int, CustomDebugStringConvertible {
     func displayString() -> String {
         switch self {
         case .Emergency:
-            return NSLocalizedString("Emergency", comment: "HomeItem")
+            return NSLocalizedString("Emergency Alerts", comment: "HomeItem")
         case .Ambulance:
             return NSLocalizedString("Ambulance", comment: "HomeItem")
         case .GiveBlood:
             return NSLocalizedString("Give Blood", comment: "HomeItem")
         case .News:
-            return NSLocalizedString("News", comment: "HomeItem")
+            return NSLocalizedString("KRCS News", comment: "HomeItem")
         case .Membership:
             return NSLocalizedString("Membership", comment: "HomeItem")
         case .Donate:

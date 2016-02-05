@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
@@ -20,9 +20,9 @@
                             <constraint firstAttribute="width" secondItem="Otu-Zf-BiP" secondAttribute="height" multiplier="1:1" id="9zM-AU-kdU"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4ET-CM-vnV">
-                        <rect key="frame" x="8" y="85" width="84" height="16"/>
-                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" text="Label Label Label" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4ET-CM-vnV">
+                        <rect key="frame" x="12" y="72" width="76" height="28"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -30,13 +30,13 @@
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
             <constraints>
-                <constraint firstItem="4ET-CM-vnV" firstAttribute="top" secondItem="Otu-Zf-BiP" secondAttribute="bottom" constant="13" id="D17-5g-BWf"/>
+                <constraint firstItem="4ET-CM-vnV" firstAttribute="top" secondItem="Otu-Zf-BiP" secondAttribute="bottom" id="D17-5g-BWf"/>
                 <constraint firstAttribute="trailing" secondItem="Otu-Zf-BiP" secondAttribute="trailing" constant="18" id="JAv-cZ-NQC"/>
                 <constraint firstAttribute="bottom" secondItem="4ET-CM-vnV" secondAttribute="bottom" id="YgJ-Pf-07B"/>
-                <constraint firstItem="4ET-CM-vnV" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="8" id="ZEC-ZI-dJT"/>
+                <constraint firstItem="4ET-CM-vnV" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="12" id="ZEC-ZI-dJT"/>
                 <constraint firstItem="Otu-Zf-BiP" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="8" id="b3f-Vu-qZg"/>
                 <constraint firstItem="Otu-Zf-BiP" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="18" id="lNV-Gi-XGE"/>
-                <constraint firstAttribute="trailing" secondItem="4ET-CM-vnV" secondAttribute="trailing" constant="8" id="xbL-To-WXP"/>
+                <constraint firstAttribute="trailing" secondItem="4ET-CM-vnV" secondAttribute="trailing" constant="12" id="xbL-To-WXP"/>
             </constraints>
             <connections>
                 <outlet property="homeItemImage" destination="Otu-Zf-BiP" id="0FQ-H8-VEu"/>
