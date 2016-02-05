@@ -57,6 +57,8 @@ class MembershipPaymentViewController: XLFormViewController, PaymentReponseDeleg
     }
     
     func setupInterface() {
+        self.title = "Payment"
+        
         view.tintColor = UIScheme.mainThemeColor
         
         self.pageView.sizeToFit()
