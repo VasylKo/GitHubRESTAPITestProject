@@ -35,7 +35,6 @@ class SelectPaymentMethodController: UIViewController, XLFormRowDescriptorViewCo
         self.view.addSubview(self.infoLabel)
      
         self.title = NSLocalizedString("Select Payment Method", comment: "")
-        self.navigationController?.navigationItem.backBarButtonItem?.title = " "
         self.view.backgroundColor = UIColor.bt_colorWithBytesR(245, g: 245, b: 245)
     }
     
