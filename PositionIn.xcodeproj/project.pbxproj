@@ -75,6 +75,7 @@
 		50FE7D891BBE77BB005676E2 /* ItemsSearchResultDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FE7D871BBE77BB005676E2 /* ItemsSearchResultDataSource.swift */; };
 		50FE7D8A1BBE77BB005676E2 /* ItemsSearchResultsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FE7D881BBE77BB005676E2 /* ItemsSearchResultsController.swift */; };
 		CD21EA381C63A78800E50909 /* MembershipMemberProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD21EA371C63A78800E50909 /* MembershipMemberProfileViewController.swift */; };
+		CD21EA401C64E85E00E50909 /* MembershipPaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD21EA3F1C64E85E00E50909 /* MembershipPaymentViewController.swift */; };
 		CD794DE01C52485E00C1C298 /* OpenApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD794DDF1C52485E00C1C298 /* OpenApplication.swift */; };
 		CD795BDE1C57B4EE00C1C298 /* Appfile in Resources */ = {isa = PBXBuildFile; fileRef = CD795BDA1C57B4EE00C1C298 /* Appfile */; };
 		CD795BDF1C57B4EE00C1C298 /* Fastfile in Resources */ = {isa = PBXBuildFile; fileRef = CD795BDB1C57B4EE00C1C298 /* Fastfile */; };
@@ -149,7 +150,6 @@
 		D1B780CF1C0F51A800EF5825 /* DonateCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1B780CE1C0F51A800EF5825 /* DonateCell.xib */; };
 		D1C475EA1C106DB70096D383 /* DonateNotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C475E91C106DB70096D383 /* DonateNotificationViewController.swift */; };
 		D1C475EC1C1081770096D383 /* PaymentCompletedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C475EB1C1081770096D383 /* PaymentCompletedViewController.swift */; };
-		D1CAA74F1C60B1920046130E /* MembershipPaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1CAA74C1C60B1920046130E /* MembershipPaymentViewController.swift */; };
 		D1CAA7521C60BB1E0046130E /* PaymentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1CAA7501C60BB1E0046130E /* PaymentTableViewCell.swift */; };
 		D1CAA7531C60BB1E0046130E /* PaymentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1CAA7511C60BB1E0046130E /* PaymentTableViewCell.xib */; };
 		D1DA176C1C05B7BE0091A8CE /* BrowseGridCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DA176A1C05B7BE0091A8CE /* BrowseGridCollectionViewCell.swift */; };
@@ -563,6 +563,7 @@
 		BB73828B80F64D347BB9F14D /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5785CCFFE7238C562E6E52F /* Pods-PositionIn.devrelease.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PositionIn.devrelease.xcconfig"; path = "Pods/Target Support Files/Pods-PositionIn/Pods-PositionIn.devrelease.xcconfig"; sourceTree = "<group>"; };
 		CD21EA371C63A78800E50909 /* MembershipMemberProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MembershipMemberProfileViewController.swift; sourceTree = "<group>"; };
+		CD21EA3F1C64E85E00E50909 /* MembershipPaymentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MembershipPaymentViewController.swift; sourceTree = "<group>"; };
 		CD794DDF1C52485E00C1C298 /* OpenApplication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpenApplication.swift; sourceTree = "<group>"; };
 		CD795BDA1C57B4EE00C1C298 /* Appfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Appfile; sourceTree = "<group>"; };
 		CD795BDB1C57B4EE00C1C298 /* Fastfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Fastfile; sourceTree = "<group>"; };
@@ -638,7 +639,6 @@
 		D1B780CE1C0F51A800EF5825 /* DonateCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DonateCell.xib; sourceTree = "<group>"; };
 		D1C475E91C106DB70096D383 /* DonateNotificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DonateNotificationViewController.swift; sourceTree = "<group>"; };
 		D1C475EB1C1081770096D383 /* PaymentCompletedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentCompletedViewController.swift; sourceTree = "<group>"; };
-		D1CAA74C1C60B1920046130E /* MembershipPaymentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MembershipPaymentViewController.swift; sourceTree = "<group>"; };
 		D1CAA7501C60BB1E0046130E /* PaymentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentTableViewCell.swift; sourceTree = "<group>"; };
 		D1CAA7511C60BB1E0046130E /* PaymentTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PaymentTableViewCell.xib; sourceTree = "<group>"; };
 		D1DA176A1C05B7BE0091A8CE /* BrowseGridCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowseGridCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -1602,7 +1602,6 @@
 			isa = PBXGroup;
 			children = (
 				D1CAA7491C60B1920046130E /* PaymentTableViewCell */,
-				D1CAA74C1C60B1920046130E /* MembershipPaymentViewController.swift */,
 			);
 			path = Payment;
 			sourceTree = "<group>";
@@ -1657,6 +1656,7 @@
 		D1DA1EB81C5909D7009F5AFA /* PlanPayment */ = {
 			isa = PBXGroup;
 			children = (
+				CD21EA3F1C64E85E00E50909 /* MembershipPaymentViewController.swift */,
 			);
 			path = PlanPayment;
 			sourceTree = "<group>";
@@ -3787,6 +3787,7 @@
 				2431EBE01B94C1DC009FB158 /* Event.swift in Sources */,
 				24EF62111BA81A6B00472531 /* ChatHistoryCellModel.swift in Sources */,
 				E6BEF1EF1B9C9D6400511B46 /* CommunityViewController.swift in Sources */,
+				CD21EA401C64E85E00E50909 /* MembershipPaymentViewController.swift in Sources */,
 				CDE1B9041C5BBE5900F76F32 /* MembershipPageView.swift in Sources */,
 				E68B52061B8736F4006B980C /* FilterViewController.swift in Sources */,
 				E62B16F61B5C1AA700D446BC /* MainMenuUserCell.swift in Sources */,
@@ -3808,7 +3809,6 @@
 				E6C5F4581BCE908800E3B8C7 /* ConversationManager.swift in Sources */,
 				E66A3E1B1B9CE2D6005FA33B /* OrderViewController.swift in Sources */,
 				E64D00651B7C9601007693E0 /* BaseAddItemViewController.swift in Sources */,
-				D1CAA74F1C60B1920046130E /* MembershipPaymentViewController.swift in Sources */,
 				CDEDD9731C45242400396594 /* VolunteerSearchViewController.swift in Sources */,
 				E65E872C1B611BA200AE444D /* Post.swift in Sources */,
 				E6BEF1C41B9C54EF00511B46 /* PostViewController.swift in Sources */,
