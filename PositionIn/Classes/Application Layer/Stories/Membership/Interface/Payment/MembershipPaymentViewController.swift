@@ -117,7 +117,6 @@ class MembershipPaymentViewController: XLFormViewController, PaymentReponseDeleg
             let paymentController: BraintreePaymentViewController = BraintreePaymentViewController()
             paymentController.amount = self?.plan.price
             paymentController.productName = self?.plan.name
-            paymentController.quantity = 1
             paymentController.membershipId = self?.plan.objectId
             paymentController.delegate = self
             self?.navigationController?.pushViewController(paymentController, animated: true)

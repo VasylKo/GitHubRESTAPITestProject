@@ -12,6 +12,7 @@ import Braintree
 class OrderViewController: UITableViewController {
     var product: Product?
     private var clientToken: String?
+    private var finishedSuccessfully = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,9 +24,18 @@ class OrderViewController: UITableViewController {
         
         if let product = self.product {
             itemNameLabel.text = product.name
-            let url = product.photos?.first?.url
+            let url = product.imageURL
             let image = product.category?.productPlaceholderImage()
             itemImageView.setImageFromURL(url, placeholder: image)
+
+            let dateFormatter = NSDateFormatter()
+            dateFormatter.dateFormat = "EEE dd yyyy, HH:mm"
+            let startDateString = dateFormatter.stringFromDate(product.startDate!)
+            dateFormatter.dateFormat = "HH:mm"
+            let endDateString = dateFormatter.stringFromDate(product.endData!)
+            
+            self.dateTimeLabel.text = "\(startDateString) to \(endDateString)"
+            
         }
         updateLabels()
     }
@@ -59,8 +69,10 @@ class OrderViewController: UITableViewController {
     @IBOutlet private weak var quantityLabel: UILabel!
     @IBOutlet private weak var feeLabel: UILabel!
     @IBOutlet private weak var totalLabel: UILabel!
-    @IBOutlet weak var taxLabel: UILabel!
-    @IBOutlet weak var subtotalLabel: UILabel!
+    @IBOutlet private weak var taxLabel: UILabel!
+    @IBOutlet private weak var subtotalLabel: UILabel!
+    
+    @IBOutlet private weak var dateTimeLabel: UILabel!
 
     lazy private var quantityFormatter: NSNumberFormatter = {
         let formatter = NSNumberFormatter()
@@ -124,12 +136,11 @@ extension OrderViewController: BTDropInViewControllerDelegate {
         api().productCheckoutBraintree(String(amount!), nonce: paymentMethodNonce.nonce,
             itemId: (product?.objectId)!, quantity: self.quantity).onSuccess
             { [weak self] err in
-                if let strongSelf = self {
-                    if(err == "") {
-//                        strongSelf.dismissPaymentsController(true, err: nil)
-                    } else {
-//                        strongSelf.dismissPaymentsController(false, err: err)
-                    }
+                if(err == "") {
+                    self?.dismissPaymentsController()
+                    self?.finishedSuccessfully = true
+                } else {
+                    
                 }
         }
         dismissPaymentsController()

@@ -27,16 +27,6 @@ class DonateViewController: XLFormViewController, PaymentReponseDelegate {
     private var finishedSuccessfully = false
     private var errorSection:XLFormSectionDescriptor?
     
-//    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
-//        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-//        self.initializeForm()
-//    }
-//    
-//    required init?(coder aDecoder: NSCoder) {
-//        super.init(coder: aDecoder)
-//        self.initializeForm()
-//    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.tintColor = UIScheme.mainThemeColor
@@ -44,6 +34,7 @@ class DonateViewController: XLFormViewController, PaymentReponseDelegate {
     }
     
     override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
         if(finishedSuccessfully) {
             let paymentCompleteController = Storyboards.Onboarding.instantiatePaymentCompletedViewController()
             paymentCompleteController.projectName = self.product?.name
@@ -187,7 +178,6 @@ class DonateViewController: XLFormViewController, PaymentReponseDelegate {
             paymentProtocol.amount = self.amount
             paymentProtocol.delegate = self
             paymentProtocol.productName = "Donation"
-            paymentProtocol.quantity = 1
             paymentProtocol.itemId = self.product?.objectId
         }
     }

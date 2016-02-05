@@ -10,7 +10,6 @@ import UIKit
 
 class PaymentCompletedViewController: UIViewController {
 
-    
     @IBOutlet private weak var projectImageView: UIImageView!
     @IBOutlet private weak var projectNameLabel: UILabel!
 
