@@ -96,6 +96,7 @@ class MembershipMemberProfileViewController : XLFormViewController, MembershipMe
     func setupInterface() {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Done"), style: UIBarButtonItemStyle.Plain, target: self, action: "didTapDone:")
         self.title = "My Profile"
+        self.navigationItem.hidesBackButton = true
         
         if let headerView = NSBundle.mainBundle().loadNibNamed(String(MembershipMemberProfileView.self), owner: nil, options: nil).first as? MembershipMemberProfileView {
             self.headerView = headerView
