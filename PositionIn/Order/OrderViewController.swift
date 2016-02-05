@@ -28,14 +28,18 @@ class OrderViewController: UITableViewController {
             let image = product.category?.productPlaceholderImage()
             itemImageView.setImageFromURL(url, placeholder: image)
 
+
             let dateFormatter = NSDateFormatter()
             dateFormatter.dateFormat = "EEE dd yyyy, HH:mm"
-            let startDateString = dateFormatter.stringFromDate(product.startDate!)
-            dateFormatter.dateFormat = "HH:mm"
-            let endDateString = dateFormatter.stringFromDate(product.endData!)
-            
-            self.dateTimeLabel.text = "\(startDateString) to \(endDateString)"
-            
+            if let startDate = product.startDate,
+            let endData = product.endData {
+                let startDateString = dateFormatter.stringFromDate(product.startDate!)
+                
+                dateFormatter.dateFormat = "HH:mm"
+                let endDateString = dateFormatter.stringFromDate(product.endData!)
+                
+                self.dateTimeLabel.text = "\(startDateString) to \(endDateString)"
+            }
         }
         updateLabels()
     }

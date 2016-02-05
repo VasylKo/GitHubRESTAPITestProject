@@ -48,8 +48,14 @@ class BraintreePaymentViewController : UIViewController, BTDropInViewControllerD
             dropInViewController.title = NSLocalizedString("Payment Method", comment: "braintree title")
             let summaryFormat = NSLocalizedString("%@ %@", comment: "Order: Summary format")
             dropInViewController.paymentRequest?.summaryTitle = productName
-            dropInViewController.paymentRequest?.displayAmount = "\(amount!) KSH"
-            dropInViewController.paymentRequest?.summaryDescription = String(format: summaryFormat, "Quantity:", String(quantity!))
+            if let quantity = self.quantity {
+                dropInViewController.paymentRequest?.summaryDescription = String(format: summaryFormat, "Quantity:", String(quantity))
+            }
+            
+            if let amount = self.amount {
+                dropInViewController.paymentRequest?.displayAmount = "\(amount) KSH"
+            }
+
             dropInViewController.paymentRequest?.callToActionText = NSLocalizedString("Checkout", comment: "Order: Checkout")
             
             self.view.addSubview(dropInViewController.view)
