@@ -655,7 +655,7 @@ extension BrowseCommunityViewController {
 
 }
 
-////MARK: - BrowseVolunteerViewController
+//MARK: - BrowseVolunteerViewController
 //extension UIStoryboardSegue {
 //    func selection() -> BrowseVolunteerViewController.Segue? {
 //        if let identifier = self.identifier {
@@ -841,13 +841,10 @@ extension EmergencyDetailsController {
 
     enum Segue: String, CustomStringConvertible, SegueProtocol {
         case ShowSellerProfile = "ShowSellerProfile"
-        case Donate = "Donate"
 
         var kind: SegueKind? {
             switch (self) {
             case ShowSellerProfile:
-                return SegueKind(rawValue: "show")
-            case Donate:
                 return SegueKind(rawValue: "show")
             }
         }
@@ -856,8 +853,6 @@ extension EmergencyDetailsController {
             switch (self) {
             case ShowSellerProfile:
                 return UserProfileViewController.self
-            case Donate:
-                return OrderViewController.self
             }
         }
 

@@ -165,7 +165,10 @@ extension EmergencyDetailsController: EmergencyDetailsActionConsumer {
             }
             return
         case .Donate:
-            segue = .Donate
+            let donateController = Storyboards.Onboarding.instantiateDonateViewController()
+            donateController.product = self.product
+            self.navigationController?.pushViewController(donateController, animated: true)
+            return
         case .SendMessage:
             if let userId = author?.objectId {
                 showChatViewController(userId)
