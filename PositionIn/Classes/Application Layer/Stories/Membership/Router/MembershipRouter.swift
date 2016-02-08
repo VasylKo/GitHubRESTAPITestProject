@@ -24,5 +24,7 @@ protocol MembershipRouter : BaseRouter {
     
     func showPlansViewController(from sourceViewController : UIViewController, with plan : MembershipPlan)
     
+    func showMPesaConfirmPaymentViewController(from sourceViewController : UIViewController, with plan : MembershipPlan)
+    
     func dismissMembership(from sourceViewController : UIViewController)
 }

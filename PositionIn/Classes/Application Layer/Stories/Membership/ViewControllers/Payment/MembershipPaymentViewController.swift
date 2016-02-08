@@ -122,7 +122,7 @@ class MembershipPaymentViewController: XLFormViewController, PaymentReponseDeleg
             //MPesa
             if let cardItem: Box<CardItem> = paymentRow.value as? Box<CardItem> {
                 if cardItem.value == .MPesa {
-                    return
+                    self?.router.showMPesaConfirmPaymentViewController(from: self!, with: self!.plan)
                 }
                 else {
                     let paymentController: BraintreePaymentViewController = BraintreePaymentViewController()

@@ -49,6 +49,21 @@ struct BraintreePayment{
         }
     }
     
+    static func mpesaMapping() -> (AnyObject? -> String?) {
+        return  { response in
+            
+            if let json = response as? NSDictionary {
+                if let transactionId = json["id"] as? String {
+                    return transactionId
+                }
+            }
+            
+            Log.error?.message("Got unexpected response")
+            Log.debug?.value(response)
+            return nil
+        }
+    }
+    
     static func checkoutMapping() -> (AnyObject? -> String?) {
         return  { response in
             if let json = response as? NSDictionary {
