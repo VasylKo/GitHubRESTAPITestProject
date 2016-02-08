@@ -81,7 +81,7 @@ class BraintreePaymentViewController : UIViewController, BTDropInViewControllerD
                 }
             }
             else {
-                api().checkoutBraintree(String(amount!), nonce: paymentMethodNonce.nonce, itemId: self.itemId).onSuccess
+                api().donateCheckoutBraintree(String(amount!), nonce: paymentMethodNonce.nonce, itemId: self.itemId).onSuccess
                     { [weak self] err in
                         if let strongSelf = self {
                             if(err == "") {

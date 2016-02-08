@@ -1,22 +1,15 @@
 //
-//  BraintreePayment.swift
+//  MPessaPayment.swift
 //  PositionIn
 //
-//  Created by Max Stoliar on 1/10/16.
+//  Created by Mikhail Polyevin on 08/02/16.
 //  Copyright © 2016 Soluna Labs. All rights reserved.
 //
 
 import CleanroomLogger
 
-struct BraintreePayment{
-    private static let prefix = "/v1.0/payments/braintree/"
-
-    let payment_method_nonce:String
-    let amount:String
-    
-    static func tokenEndpoint() -> String {
-        return "\(prefix)client_token"
-    }
+struct MPesaPayment {
+    private static let prefix = "/v1.0/payments/mpesa/"
     
     static func donateCheckoutEndpoint() -> String {
         return "\(prefix)donation/checkout"
@@ -30,23 +23,8 @@ struct BraintreePayment{
         return "\(prefix)product/checkout"
     }
     
-    static func tokenMapping() -> (AnyObject? -> String?) {
-        return { response in
-            if let json = response as? NSDictionary {
-                if let token = json["clientToken"] as? String{
-                    return token
-                } else {
-                    Log.error?.message("Got unexpected response")
-                    Log.debug?.value(json)
-                    return nil
-                }
-            }
-            else {
-                Log.error?.message("Got unexpected response: \(response)")
-                return nil
-            }
-            
-        }
+    static func productCheckoutEndpoint(itemId itemId: String) -> String {
+        return "\(prefix)\(itemId)/status"
     }
     
     static func checkoutMapping() -> (AnyObject? -> String?) {
