@@ -8,6 +8,7 @@
 
 import UIKit
 import XLForm
+import Box
 
 class MembershipPaymentViewController: XLFormViewController, PaymentReponseDelegate {
     
@@ -118,12 +119,20 @@ class MembershipPaymentViewController: XLFormViewController, PaymentReponseDeleg
                 return
             }
             
-            let paymentController: BraintreePaymentViewController = BraintreePaymentViewController()
-            paymentController.amount = self?.plan.price
-            paymentController.productName = self?.plan.name
-            paymentController.membershipId = self?.plan.objectId
-            paymentController.delegate = self
-            self?.navigationController?.pushViewController(paymentController, animated: true)
+            //MPesa
+            if let cardItem: Box<CardItem> = paymentRow.value as? Box<CardItem> {
+                if cardItem.value == .MPesa {
+                    return
+                }
+                else {
+                    let paymentController: BraintreePaymentViewController = BraintreePaymentViewController()
+                    paymentController.amount = self?.plan.price
+                    paymentController.productName = self?.plan.name
+                    paymentController.membershipId = self?.plan.objectId
+                    paymentController.delegate = self
+                    self?.navigationController?.pushViewController(paymentController, animated: true)
+                }
+            }
         }
         
         confirmDonation.addFormRow(confirmRow)
