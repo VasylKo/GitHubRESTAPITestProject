@@ -138,6 +138,8 @@
 		D15F474B1C0B77EF009ED3FD /* AmbulanceSentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15F474A1C0B77EF009ED3FD /* AmbulanceSentViewController.swift */; };
 		D15F474D1C0B7801009ED3FD /* AmbulanceRequestedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15F474C1C0B7801009ED3FD /* AmbulanceRequestedViewController.swift */; };
 		D161F7691C68C67C00EBDB94 /* MPessaPayment.swift in Sources */ = {isa = PBXBuildFile; fileRef = D161F7681C68C67C00EBDB94 /* MPessaPayment.swift */; };
+		D161F7721C68E4E800EBDB94 /* MarketPaymentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D161F7711C68E4E800EBDB94 /* MarketPaymentView.swift */; };
+		D161F7741C68E4F300EBDB94 /* MarketPaymentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D161F7731C68E4F300EBDB94 /* MarketPaymentView.xib */; };
 		D18A1FDC1BEB95D9003F158D /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18A1FDA1BEB95D9003F158D /* ChangePasswordViewController.swift */; };
 		D18A1FDD1BEB95D9003F158D /* PositionIn.ChangePasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D18A1FDB1BEB95D9003F158D /* PositionIn.ChangePasswordViewController.xib */; };
 		D18EA2C81C031C9800A886A5 /* OnboardingNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18EA2C71C031C9800A886A5 /* OnboardingNavigationController.swift */; };
@@ -628,6 +630,8 @@
 		D15F474A1C0B77EF009ED3FD /* AmbulanceSentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AmbulanceSentViewController.swift; sourceTree = "<group>"; };
 		D15F474C1C0B7801009ED3FD /* AmbulanceRequestedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AmbulanceRequestedViewController.swift; sourceTree = "<group>"; };
 		D161F7681C68C67C00EBDB94 /* MPessaPayment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPessaPayment.swift; sourceTree = "<group>"; };
+		D161F7711C68E4E800EBDB94 /* MarketPaymentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarketPaymentView.swift; sourceTree = "<group>"; };
+		D161F7731C68E4F300EBDB94 /* MarketPaymentView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MarketPaymentView.xib; sourceTree = "<group>"; };
 		D18A1FDA1BEB95D9003F158D /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
 		D18A1FDB1BEB95D9003F158D /* PositionIn.ChangePasswordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.ChangePasswordViewController.xib; sourceTree = "<group>"; };
 		D18EA2C71C031C9800A886A5 /* OnboardingNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingNavigationController.swift; sourceTree = "<group>"; };
@@ -1557,6 +1561,15 @@
 			path = CallAmbulance;
 			sourceTree = "<group>";
 		};
+		D161F76A1C68E3CA00EBDB94 /* MarketPaymentView */ = {
+			isa = PBXGroup;
+			children = (
+				D161F7711C68E4E800EBDB94 /* MarketPaymentView.swift */,
+				D161F7731C68E4F300EBDB94 /* MarketPaymentView.xib */,
+			);
+			path = MarketPaymentView;
+			sourceTree = "<group>";
+		};
 		D18A1FD91BEB95AF003F158D /* ChangePassword */ = {
 			isa = PBXGroup;
 			children = (
@@ -1603,6 +1616,7 @@
 		D1CAA7471C60AD070046130E /* Payment */ = {
 			isa = PBXGroup;
 			children = (
+				D161F76A1C68E3CA00EBDB94 /* MarketPaymentView */,
 				D1CAA7491C60B1920046130E /* PaymentTableViewCell */,
 			);
 			path = Payment;
@@ -3490,6 +3504,7 @@
 				D1DA176D1C05B7BE0091A8CE /* PositionIn.BrowseGridCollectionViewCell.xib in Resources */,
 				E660E52E1B5AC23B00F52050 /* PositionIn.MainMenuViewController.xib in Resources */,
 				CDB5B5CA1C5B9C2400413715 /* MembershipPlanDetailsViewController.xib in Resources */,
+				D161F7741C68E4F300EBDB94 /* MarketPaymentView.xib in Resources */,
 				E6C952351BA1D9960032254F /* PositionIn.ProfileStatsCell.xib in Resources */,
 				50FA43301C44F0B50050B00E /* ErrorCell.xib in Resources */,
 				E62B16F51B5C1AA700D446BC /* PositionIn.MainMenuUserCell.xib in Resources */,
@@ -3766,6 +3781,7 @@
 				D1B780CA1C0F4E9E00EF5825 /* SelectPaymentMethodController.swift in Sources */,
 				E66115991B73A0CB003DB5B3 /* BrowseListViewController.swift in Sources */,
 				D1FD853E1C1EE8D800C2E87B /* PromotionDetailsViewController.swift in Sources */,
+				D161F7721C68E4E800EBDB94 /* MarketPaymentView.swift in Sources */,
 				E6F074AF1BA6980D00D2566B /* ConversationViewController.swift in Sources */,
 				E6C952361BA1D9960032254F /* ProfileInfoCell.swift in Sources */,
 				D1DA176C1C05B7BE0091A8CE /* BrowseGridCollectionViewCell.swift in Sources */,
