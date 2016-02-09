@@ -57,17 +57,9 @@ class GiveBloodDetailsViewController: UIViewController {
             priceLabel.text = "\(Int(price)) beneficiaries"
         }
         
-        let imageURL: NSURL?
-        
-        if let urlString = product.imageURLString {
-            imageURL = NSURL(string:urlString)
-        } else {
-            imageURL = nil
-        }
-
         let image = UIImage(named: "give_blood_img_default")
         
-        productImageView.setImageFromURL(imageURL, placeholder: image)
+        productImageView.setImageFromURL(product.imageURL, placeholder: image)
         if let coordinates = product.location?.coordinates {
             self.productPinDistanceImageView.hidden = false
             locationRequestToken.invalidate()

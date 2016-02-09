@@ -93,7 +93,7 @@ extension APIService {
     }
     
     // Logout from the current session
-    func logout() -> Future<Void, NoError> {
+    func logout() -> Future<Void, BrightFutures.NoError> {
         return sessionController.logout().onComplete { _ in
             self.sendUserDidChangeNotification(nil)
         }

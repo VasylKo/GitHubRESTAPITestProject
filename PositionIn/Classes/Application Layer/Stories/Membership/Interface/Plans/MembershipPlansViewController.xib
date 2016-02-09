@@ -8,7 +8,9 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MembershipPlansViewController" customModule="PositionIn" customModuleProvider="target">
             <connections>
                 <outlet property="activityIndicator" destination="ioA-r8-REa" id="Bmp-vA-fZ6"/>
-                <outlet property="alreadyMemberButton" destination="pa6-S6-mGN" id="VhU-x7-hVa"/>
+                <outlet property="alreadyMemberButton" destination="pa6-S6-mGN" id="Ytd-Nl-QP8"/>
+                <outlet property="bottomView" destination="U7J-cM-WT4" id="QS4-Ic-wXm"/>
+                <outlet property="spaceBetweenBottomViewAndTableViewContstraint" destination="OSJ-5f-2sQ" id="Uwy-2J-Yhm"/>
                 <outlet property="tableView" destination="Qrt-Nb-pT8" id="oCk-KA-tcc"/>
                 <outlet property="view" destination="iN0-l3-epB" id="Rjt-gf-4UT"/>
             </connections>
@@ -35,6 +37,9 @@
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pa6-S6-mGN">
                             <rect key="frame" x="20" y="17" width="560" height="30"/>
                             <state key="normal" title="Already a Member?"/>
+                            <connections>
+                                <action selector="alreadyMemberPressed:" destination="-1" eventType="touchUpInside" id="WMs-k0-9zJ"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

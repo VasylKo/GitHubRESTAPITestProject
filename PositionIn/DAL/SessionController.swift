@@ -71,7 +71,7 @@ struct SessionController {
         return token
     }
     
-    func logout() -> Future<Void, NoError> {
+    func logout() -> Future<Void, BrightFutures.NoError> {
         return future {
             self.setAuth(AuthResponse.invalidAuth())
             self.updateCurrentStatus(nil)

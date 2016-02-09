@@ -34,7 +34,7 @@ class MembershipPageView: UIView {
     
     func redrawView(activeStep: Int) {
         
-        self.backgroundColor = UIColor.clearColor()
+        self.backgroundColor = UIColor.whiteColor()
         
         self.layer.sublayers?.removeAll()
         

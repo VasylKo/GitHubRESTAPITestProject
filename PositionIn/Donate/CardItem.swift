@@ -24,6 +24,16 @@ enum CardItem: Int {
         }
     }
     
+    static func cardDescription(item: CardItem) -> String? {
+        switch item {
+        case .MPesa:
+            return "Enter payment details and complete your purchase"
+        case .PayPal:
+            return "Enter payment details and complete your purchase"
+        case .CreditDebitCard:
+            return "Visa, Mastercard, American Express"
+        }
+    }
     
     static func cardImage(item: CardItem) -> UIImage? {
         switch item {

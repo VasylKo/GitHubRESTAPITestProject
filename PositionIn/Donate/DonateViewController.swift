@@ -20,29 +20,27 @@ class DonateViewController: XLFormViewController, PaymentReponseDelegate {
         case Error = "Error"
     }
     
+    var product: Product?
+    
     private var amount:Int = 0;
     private var paymentType:String?
     private var finishedSuccessfully = false
     private var errorSection:XLFormSectionDescriptor?
     
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        self.initializeForm()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        self.initializeForm()
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.tintColor = UIScheme.mainThemeColor
+        self.initializeForm()
     }
     
     override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
         if(finishedSuccessfully) {
-            self.performSegueWithIdentifier("PaymentCompleted", sender: self)
+            let paymentCompleteController = Storyboards.Onboarding.instantiatePaymentCompletedViewController()
+            paymentCompleteController.projectName = self.product?.name
+            paymentCompleteController.projectIconURL = self.product?.imageURL
+            
+            self.navigationController?.pushViewController(paymentCompleteController, animated: true)
         }
     }
     
@@ -74,6 +72,14 @@ class DonateViewController: XLFormViewController, PaymentReponseDelegate {
         
         let donateProjectRow: XLFormRowDescriptor = XLFormRowDescriptor(tag: Tags.Project.rawValue,
             rowType: XLFormRowDescriptorTypeDonate)
+        if let product = self.product {
+            donateProjectRow.cellConfigAtConfigure["name"] = product.name
+            
+            if let imageURL = product.imageURL {
+                donateProjectRow.cellConfigAtConfigure["projectIconURL"] = imageURL
+            }
+        }
+        
         donateToSection.addFormRow(donateProjectRow)
         
         let donatationSection = XLFormSectionDescriptor.formSectionWithTitle("Donation Amount (KSH)")
@@ -166,13 +172,13 @@ class DonateViewController: XLFormViewController, PaymentReponseDelegate {
             setError(false, error: err)
         }
     }
-
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         if var paymentProtocol = segue.destinationViewController as? PaymentProtocol {
-           paymentProtocol.amount = self.amount
-           paymentProtocol.delegate = self
-           paymentProtocol.productName = "Donation"
-           paymentProtocol.quantity = 1
+            paymentProtocol.amount = self.amount
+            paymentProtocol.delegate = self
+            paymentProtocol.productName = "Donation"
+            paymentProtocol.itemId = self.product?.objectId
         }
     }
 }
