@@ -142,7 +142,7 @@
 		D15F47491C0B77D7009ED3FD /* AmbulanceBaseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15F47481C0B77D7009ED3FD /* AmbulanceBaseController.swift */; };
 		D15F474B1C0B77EF009ED3FD /* AmbulanceSentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15F474A1C0B77EF009ED3FD /* AmbulanceSentViewController.swift */; };
 		D15F474D1C0B7801009ED3FD /* AmbulanceRequestedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15F474C1C0B7801009ED3FD /* AmbulanceRequestedViewController.swift */; };
-		D161F7691C68C67C00EBDB94 /* MPessaPayment.swift in Sources */ = {isa = PBXBuildFile; fileRef = D161F7681C68C67C00EBDB94 /* MPessaPayment.swift */; };
+		D161F7691C68C67C00EBDB94 /* MPesaPayment.swift in Sources */ = {isa = PBXBuildFile; fileRef = D161F7681C68C67C00EBDB94 /* MPesaPayment.swift */; };
 		D161F7721C68E4E800EBDB94 /* MarketPaymentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D161F7711C68E4E800EBDB94 /* MarketPaymentView.swift */; };
 		D161F7741C68E4F300EBDB94 /* MarketPaymentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D161F7731C68E4F300EBDB94 /* MarketPaymentView.xib */; };
 		D18A1FDC1BEB95D9003F158D /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18A1FDA1BEB95D9003F158D /* ChangePasswordViewController.swift */; };
@@ -152,6 +152,7 @@
 		D18EA2CE1C04B38400A886A5 /* BrowseGridViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18EA2CC1C04B38400A886A5 /* BrowseGridViewController.swift */; };
 		D18EA2CF1C04B38400A886A5 /* PositionIn.BrowseGridViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D18EA2CD1C04B38400A886A5 /* PositionIn.BrowseGridViewController.xib */; };
 		D196225F1BF13075003BCD85 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D196225E1BF13075003BCD85 /* GoogleService-Info.plist */; };
+		D19A19FF1C69F8890099038F /* MPesaPaymentCompleteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D19A19FD1C69F8890099038F /* MPesaPaymentCompleteViewController.swift */; };
 		D1B780C81C0F4E7700EF5825 /* DonateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B780C71C0F4E7700EF5825 /* DonateViewController.swift */; };
 		D1B780CA1C0F4E9E00EF5825 /* SelectPaymentMethodController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B780C91C0F4E9E00EF5825 /* SelectPaymentMethodController.swift */; };
 		D1B780CD1C0F519600EF5825 /* DonateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B780CC1C0F519600EF5825 /* DonateCell.swift */; };
@@ -639,7 +640,7 @@
 		D15F47481C0B77D7009ED3FD /* AmbulanceBaseController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AmbulanceBaseController.swift; sourceTree = "<group>"; };
 		D15F474A1C0B77EF009ED3FD /* AmbulanceSentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AmbulanceSentViewController.swift; sourceTree = "<group>"; };
 		D15F474C1C0B7801009ED3FD /* AmbulanceRequestedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AmbulanceRequestedViewController.swift; sourceTree = "<group>"; };
-		D161F7681C68C67C00EBDB94 /* MPessaPayment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPessaPayment.swift; sourceTree = "<group>"; };
+		D161F7681C68C67C00EBDB94 /* MPesaPayment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPesaPayment.swift; sourceTree = "<group>"; };
 		D161F7711C68E4E800EBDB94 /* MarketPaymentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarketPaymentView.swift; sourceTree = "<group>"; };
 		D161F7731C68E4F300EBDB94 /* MarketPaymentView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MarketPaymentView.xib; sourceTree = "<group>"; };
 		D18A1FDA1BEB95D9003F158D /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
@@ -649,6 +650,7 @@
 		D18EA2CC1C04B38400A886A5 /* BrowseGridViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowseGridViewController.swift; sourceTree = "<group>"; };
 		D18EA2CD1C04B38400A886A5 /* PositionIn.BrowseGridViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.BrowseGridViewController.xib; sourceTree = "<group>"; };
 		D196225E1BF13075003BCD85 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		D19A19FD1C69F8890099038F /* MPesaPaymentCompleteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPesaPaymentCompleteViewController.swift; sourceTree = "<group>"; };
 		D1B780C71C0F4E7700EF5825 /* DonateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DonateViewController.swift; sourceTree = "<group>"; };
 		D1B780C91C0F4E9E00EF5825 /* SelectPaymentMethodController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectPaymentMethodController.swift; sourceTree = "<group>"; };
 		D1B780CC1C0F519600EF5825 /* DonateCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DonateCell.swift; sourceTree = "<group>"; };
@@ -1634,6 +1636,14 @@
 			path = BrowseGrid;
 			sourceTree = "<group>";
 		};
+		D19A19FC1C69F87D0099038F /* MPesaPaymentCompleteViewController */ = {
+			isa = PBXGroup;
+			children = (
+				D19A19FD1C69F8890099038F /* MPesaPaymentCompleteViewController.swift */,
+			);
+			name = MPesaPaymentCompleteViewController;
+			sourceTree = "<group>";
+		};
 		D1B780C61C0F4E4400EF5825 /* Donate */ = {
 			isa = PBXGroup;
 			children = (
@@ -2080,7 +2090,7 @@
 				500D7FA21BC2AACF008C8C82 /* SearchItem.swift */,
 				D15F47431C088A26009ED3FD /* HomeItem.swift */,
 				5095611A1C3EBFCD00D3C207 /* BraintreePayment.swift */,
-				D161F7681C68C67C00EBDB94 /* MPessaPayment.swift */,
+				D161F7681C68C67C00EBDB94 /* MPesaPayment.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -2190,6 +2200,7 @@
 		E66A3E191B9CE2AB005FA33B /* Order */ = {
 			isa = PBXGroup;
 			children = (
+				D19A19FC1C69F87D0099038F /* MPesaPaymentCompleteViewController */,
 				E66A3E1A1B9CE2D6005FA33B /* OrderViewController.swift */,
 			);
 			path = Order;
@@ -3747,7 +3758,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D161F7691C68C67C00EBDB94 /* MPessaPayment.swift in Sources */,
+				D161F7691C68C67C00EBDB94 /* MPesaPayment.swift in Sources */,
 				D18EA2CE1C04B38400A886A5 /* BrowseGridViewController.swift in Sources */,
 				500D7FA81BC2CD39008C8C82 /* SearchEntityCell.swift in Sources */,
 				E6325F721B57E1DA00996480 /* Storyboards.swift in Sources */,
@@ -3772,6 +3783,7 @@
 				D1FD85351C1EE8A800C2E87B /* EmergencyDetailsController.swift in Sources */,
 				D1C475EA1C106DB70096D383 /* DonateNotificationViewController.swift in Sources */,
 				D12EDEC71BFF4F0D00FB6245 /* PhoneVerificationViewController.swift in Sources */,
+				D19A19FF1C69F8890099038F /* MPesaPaymentCompleteViewController.swift in Sources */,
 				D1DA1EBF1C5909D7009F5AFA /* MembershipPlanDetailsViewController.swift in Sources */,
 				CD21EA381C63A78800E50909 /* MembershipMemberProfileViewController.swift in Sources */,
 				500D7FA31BC2AACF008C8C82 /* SearchItem.swift in Sources */,

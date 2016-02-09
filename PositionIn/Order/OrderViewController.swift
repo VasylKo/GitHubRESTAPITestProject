@@ -9,7 +9,7 @@
 import UIKit
 import Braintree
 
-class OrderViewController: UITableViewController {
+class OrderViewController: UITableViewController, SelectPaymentMethodControllerDelegate {
     var product: Product?
     private var clientToken: String?
     private var finishedSuccessfully = false
@@ -33,10 +33,10 @@ class OrderViewController: UITableViewController {
             dateFormatter.dateFormat = "EEE dd yyyy, HH:mm"
             if let startDate = product.startDate,
             let endData = product.endData {
-                let startDateString = dateFormatter.stringFromDate(product.startDate!)
+                let startDateString = dateFormatter.stringFromDate(startDate)
                 
                 dateFormatter.dateFormat = "HH:mm"
-                let endDateString = dateFormatter.stringFromDate(product.endData!)
+                let endDateString = dateFormatter.stringFromDate(endData)
                 
                 self.dateTimeLabel.text = "\(startDateString) to \(endDateString)"
             }
@@ -66,7 +66,8 @@ class OrderViewController: UITableViewController {
             totalLabel.text = nil
         }
     }
-
+    
+    @IBOutlet private weak var paymentMethodLabel: UILabel!
     @IBOutlet private weak var itemImageView: UIImageView!
     @IBOutlet private weak var itemNameLabel: UILabel!
     @IBOutlet private weak var quantityStepper: UIStepper!
@@ -84,6 +85,7 @@ class OrderViewController: UITableViewController {
         return formatter
     }()
 
+    private var cardItem: CardItem?
     private var braintreeClient: BTAPIClient?
 
     private var quantity: Int {
@@ -94,28 +96,49 @@ class OrderViewController: UITableViewController {
         return quantityFormatter.stringFromNumber(NSNumber(integer: quantity)) ?? ""
     }
 
-
+    @IBAction func selectPaymentTouched(sender: AnyObject) {
+        let controller: SelectPaymentMethodController = SelectPaymentMethodController()
+        controller.delegate = self
+        self.navigationController?.pushViewController(controller, animated: true)
+    }
+    
     @IBAction func didTapCheckout(sender: AnyObject) {
         
-        if let braintreeClient = braintreeClient {
-            let dropInViewController = BTDropInViewController(APIClient: braintreeClient)
-            dropInViewController.delegate = self
-            
-            dropInViewController.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Cancel, target: self, action: "userDidCancelPayment:")
-            dropInViewController.navigationItem.leftBarButtonItem?.tintColor = UIColor.whiteColor()
-            dropInViewController.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.bt_colorWithBytesR(254,
-                g: 187,
-                b: 182)]
-            dropInViewController.title = NSLocalizedString("Payment Method", comment: "braintree title")
-            let summaryFormat = NSLocalizedString("%@ %@", comment: "Order: Summary format")
-            dropInViewController.paymentRequest?.summaryTitle = String(format: summaryFormat, quantityString, product?.name ?? "")
-            dropInViewController.paymentRequest?.displayAmount = totalLabel.text ?? ""
-            dropInViewController.paymentRequest?.summaryDescription = product?.text
-            dropInViewController.paymentRequest?.callToActionText = NSLocalizedString("Checkout", comment: "Order: Checkout")
-            let navigationController = UINavigationController(rootViewController: dropInViewController)
-            navigationController.view.tintColor = UIScheme.mainThemeColor
-            presentViewController(navigationController, animated: true, completion: nil)
+        if let braintreeClient = braintreeClient,
+        cardItem = cardItem {
+            switch cardItem {
+            case .MPesa:
+                if let product = product {
+                    let controller = MPesaPaymentCompleteViewController(quantity: quantity, product: product)
+                    self.navigationController?.pushViewController(controller, animated: true)
+                }
+            case .CreditDebitCard:
+                fallthrough
+            case .PayPal:
+                let dropInViewController = BTDropInViewController(APIClient: braintreeClient)
+                dropInViewController.delegate = self
+                
+                dropInViewController.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Cancel, target: self, action: "userDidCancelPayment:")
+                dropInViewController.navigationItem.leftBarButtonItem?.tintColor = UIColor.whiteColor()
+                dropInViewController.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.bt_colorWithBytesR(254,
+                    g: 187,
+                    b: 182)]
+                dropInViewController.title = NSLocalizedString("Payment Method", comment: "braintree title")
+                let summaryFormat = NSLocalizedString("%@ %@", comment: "Order: Summary format")
+                dropInViewController.paymentRequest?.summaryTitle = String(format: summaryFormat, quantityString, product?.name ?? "")
+                dropInViewController.paymentRequest?.displayAmount = totalLabel.text ?? ""
+                dropInViewController.paymentRequest?.summaryDescription = product?.text
+                dropInViewController.paymentRequest?.callToActionText = NSLocalizedString("Checkout", comment: "Order: Checkout")
+                let navigationController = UINavigationController(rootViewController: dropInViewController)
+                navigationController.view.tintColor = UIScheme.mainThemeColor
+                presentViewController(navigationController, animated: true, completion: nil)
+            }
         }
+    }
+    
+    func paymentMethodSelected(cardItem: CardItem) {
+        self.cardItem = cardItem
+        self.paymentMethodLabel.text = CardItem.cardName(cardItem)
     }
 
     @IBAction func userDidCancelPayment(sender: AnyObject) {
@@ -146,6 +169,12 @@ extension OrderViewController: BTDropInViewControllerDelegate {
                 if(err == "") {
                     self?.dismissPaymentsController()
                     self?.finishedSuccessfully = true
+                    
+                    let controller = MPesaPaymentCompleteViewController(quantity: self!.quantity, product: (self?.product!)!)
+                    controller.showSuccess = true
+                    self?.navigationController?.pushViewController(controller, animated: true)
+                    
+                    
                 } else {
                     
                 }
@@ -156,5 +185,4 @@ extension OrderViewController: BTDropInViewControllerDelegate {
     func dropInViewControllerDidCancel(viewController: BTDropInViewController) {
         dismissPaymentsController()
     }
-
 }
