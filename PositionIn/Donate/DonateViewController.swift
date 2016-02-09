@@ -177,7 +177,8 @@ class DonateViewController: XLFormViewController, PaymentReponseDelegate {
         if var paymentProtocol = segue.destinationViewController as? PaymentProtocol {
             paymentProtocol.amount = self.amount
             paymentProtocol.delegate = self
-            paymentProtocol.productName = "Donation"
+            paymentProtocol.productName = self.product?.name
+            paymentProtocol.product = self.product
             paymentProtocol.itemId = self.product?.objectId
         }
     }

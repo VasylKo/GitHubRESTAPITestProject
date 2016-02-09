@@ -547,7 +547,7 @@ struct APIService {
         return session().flatMap {
             (token: AuthResponse.Token) -> Future<String, NSError> in
             let request = self.updateRequest(token, endpoint: endpoint, method: .POST, params: params)
-            let (_, future): CRUDResultType = self.dataProvider.jsonRequest(request, map: BraintreePayment.checkoutMapping(), validation: nil)
+            let (_, future): CRUDResultType = self.dataProvider.jsonRequest(request, map: BraintreePayment.mpesaMapping(), validation: nil)
             return self.handleFailure(future)
         }
     }

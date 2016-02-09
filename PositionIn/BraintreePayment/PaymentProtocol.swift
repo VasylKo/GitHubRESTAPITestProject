@@ -12,4 +12,5 @@ protocol PaymentProtocol {
     var quantity: Int? { get set }
     var productName: String? { get set }
     var delegate: PaymentReponseDelegate? { get set }
+    var product: Product? { get set }
 }
