@@ -513,7 +513,7 @@ struct APIService {
         }
     }
     
-    func productCheckoutMpesa(amount:String, nonce:String, itemId: String, quantity: NSNumber) -> Future<String, NSError> {
+    func productCheckoutMpesa(amount:NSNumber, nonce:String, itemId: String, quantity: NSNumber) -> Future<String, NSError> {
         let endpoint = MPesaPayment.productCheckoutEndpoint()
         let  params = ["payment_method_nonce": nonce, "amount" : amount, "itemId" : itemId, "quantity": quantity]
         typealias CRUDResultType = (Alamofire.Request, Future<String, NSError>)
