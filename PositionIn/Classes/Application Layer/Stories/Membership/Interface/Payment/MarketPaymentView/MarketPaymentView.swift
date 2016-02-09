@@ -7,28 +7,45 @@
 //
 
 import UIKit
+import XLForm
 
-class MarketPaymentView: UIView {
+let XLFormRowDescriptorTypeMarketPaymentView = "XLFormRowDescriptorTypeMarketPaymentView"
 
-    var product: Product? {
+class MarketPaymentView: XLFormBaseCell {
+
+    var price: NSNumber? {
         didSet {
-            if let product = self.product {
-                self.iconImageView.setImageFromURL(product.imageURL, placeholder: nil)
-                self.itemNameLabel.text = product.name
-                //TODO: should set pickUpAvailabilityLabel 
-                if let price = product.price {
-                    self.subtotalLabel.text = String(price)
-                    self.totalLabel.text = String(price)
-                }
+            if let price = price {
+                self.subtotalLabel.text = String(price)
+                self.totalLabel.text = String(price)
             }
         }
     }
-    var quantity: Int? {
+    
+    var imageURL: NSURL? {
         didSet {
-            if let quantity = self.quantity {
-                self.quintityLabel.text = String(quantity)
+            self.iconImageView.setImageFromURL(imageURL, placeholder: nil)
+        }
+    }
+    
+    var quantity: NSNumber? {
+        didSet {
+            if let quantity = price {
+                self.self.quintityLabel.text = String(quantity)
             }
         }
+    }
+    
+    override func configure() {
+        super.configure()
+    }
+    
+    override func update() {
+        super.update()
+    }
+
+    override static func formDescriptorCellHeightForRowDescriptor(rowDescriptor: XLFormRowDescriptor!) -> CGFloat {
+        return 350
     }
     
     @IBOutlet private weak var iconImageView: UIImageView!
@@ -37,15 +54,4 @@ class MarketPaymentView: UIView {
     @IBOutlet private weak var quintityLabel: UILabel!
     @IBOutlet private weak var subtotalLabel: UILabel!
     @IBOutlet private weak var totalLabel: UILabel!
-    
-//MARK: Initializers
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
-    
 }

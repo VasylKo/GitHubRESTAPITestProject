@@ -10,8 +10,13 @@ import UIKit
 import XLForm
 import Box
 
+protocol SelectPaymentMethodControllerDelegate {
+    func paymentMethodSelected(сardItem: CardItem)
+}
+
 class SelectPaymentMethodController: UIViewController, XLFormRowDescriptorViewController {
     
+    var delegate: SelectPaymentMethodControllerDelegate?
     var rowDescriptor: XLFormRowDescriptor?
     
     override func viewDidLoad() {
@@ -66,6 +71,7 @@ extension SelectPaymentMethodController: UITableViewDelegate {
         
         if let cardItem = CardItem(rawValue: indexPath.row) {
             self.rowDescriptor?.value = Box(cardItem)
+            self.delegate?.paymentMethodSelected(cardItem)
         }
         
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
