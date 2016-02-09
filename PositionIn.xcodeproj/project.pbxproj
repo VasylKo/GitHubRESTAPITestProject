@@ -75,7 +75,10 @@
 		50FE7D891BBE77BB005676E2 /* ItemsSearchResultDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FE7D871BBE77BB005676E2 /* ItemsSearchResultDataSource.swift */; };
 		50FE7D8A1BBE77BB005676E2 /* ItemsSearchResultsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FE7D881BBE77BB005676E2 /* ItemsSearchResultsController.swift */; };
 		CD21EA381C63A78800E50909 /* MembershipMemberProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD21EA371C63A78800E50909 /* MembershipMemberProfileViewController.swift */; };
-		CD21EA401C64E85E00E50909 /* MembershipPaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD21EA3F1C64E85E00E50909 /* MembershipPaymentViewController.swift */; };
+		CD21EA531C68E46000E50909 /* MembershipPaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD21EA521C68E46000E50909 /* MembershipPaymentViewController.swift */; };
+		CD21EA551C68E89B00E50909 /* MPesaIndicatorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD21EA541C68E89B00E50909 /* MPesaIndicatorView.xib */; };
+		CD21EA571C68E98D00E50909 /* MPesaIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD21EA561C68E98D00E50909 /* MPesaIndicatorView.swift */; };
+		CD21EA611C68F9FF00E50909 /* MembershipMPesaConfirmPaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD21EA601C68F9FF00E50909 /* MembershipMPesaConfirmPaymentViewController.swift */; };
 		CD794DE01C52485E00C1C298 /* OpenApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD794DDF1C52485E00C1C298 /* OpenApplication.swift */; };
 		CD795BDE1C57B4EE00C1C298 /* Appfile in Resources */ = {isa = PBXBuildFile; fileRef = CD795BDA1C57B4EE00C1C298 /* Appfile */; };
 		CD795BDF1C57B4EE00C1C298 /* Fastfile in Resources */ = {isa = PBXBuildFile; fileRef = CD795BDB1C57B4EE00C1C298 /* Fastfile */; };
@@ -566,7 +569,10 @@
 		BB73828B80F64D347BB9F14D /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5785CCFFE7238C562E6E52F /* Pods-PositionIn.devrelease.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PositionIn.devrelease.xcconfig"; path = "Pods/Target Support Files/Pods-PositionIn/Pods-PositionIn.devrelease.xcconfig"; sourceTree = "<group>"; };
 		CD21EA371C63A78800E50909 /* MembershipMemberProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MembershipMemberProfileViewController.swift; sourceTree = "<group>"; };
-		CD21EA3F1C64E85E00E50909 /* MembershipPaymentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MembershipPaymentViewController.swift; sourceTree = "<group>"; };
+		CD21EA521C68E46000E50909 /* MembershipPaymentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MembershipPaymentViewController.swift; sourceTree = "<group>"; };
+		CD21EA541C68E89B00E50909 /* MPesaIndicatorView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MPesaIndicatorView.xib; sourceTree = "<group>"; };
+		CD21EA561C68E98D00E50909 /* MPesaIndicatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPesaIndicatorView.swift; sourceTree = "<group>"; };
+		CD21EA601C68F9FF00E50909 /* MembershipMPesaConfirmPaymentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MembershipMPesaConfirmPaymentViewController.swift; sourceTree = "<group>"; };
 		CD794DDF1C52485E00C1C298 /* OpenApplication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpenApplication.swift; sourceTree = "<group>"; };
 		CD795BDA1C57B4EE00C1C298 /* Appfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Appfile; sourceTree = "<group>"; };
 		CD795BDB1C57B4EE00C1C298 /* Fastfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Fastfile; sourceTree = "<group>"; };
@@ -1270,6 +1276,31 @@
 			path = ItemSearchResult;
 			sourceTree = "<group>";
 		};
+		CD21EA491C68E39900E50909 /* MPesaDetails */ = {
+			isa = PBXGroup;
+			children = (
+				CD21EA541C68E89B00E50909 /* MPesaIndicatorView.xib */,
+				CD21EA561C68E98D00E50909 /* MPesaIndicatorView.swift */,
+			);
+			path = MPesaDetails;
+			sourceTree = "<group>";
+		};
+		CD21EA511C68E46000E50909 /* Payment */ = {
+			isa = PBXGroup;
+			children = (
+				CD21EA521C68E46000E50909 /* MembershipPaymentViewController.swift */,
+			);
+			path = Payment;
+			sourceTree = "<group>";
+		};
+		CD21EA5F1C68F9FF00E50909 /* MPesaConfirmPayment */ = {
+			isa = PBXGroup;
+			children = (
+				CD21EA601C68F9FF00E50909 /* MembershipMPesaConfirmPaymentViewController.swift */,
+			);
+			path = MPesaConfirmPayment;
+			sourceTree = "<group>";
+		};
 		CD795BC71C57B4C700C1C298 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
@@ -1363,6 +1394,7 @@
 		CD795BEC1C57BA8100C1C298 /* Interface */ = {
 			isa = PBXGroup;
 			children = (
+				CD21EA491C68E39900E50909 /* MPesaDetails */,
 				CDE1B90B1C5F657300F76F32 /* MemberProfile */,
 				CD8ED0D71C60AD5000576DBF /* MemberCard */,
 				D1CAA7471C60AD070046130E /* Payment */,
@@ -1643,10 +1675,11 @@
 		D1DA1EAF1C5909D7009F5AFA /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				CD21EA5F1C68F9FF00E50909 /* MPesaConfirmPayment */,
 				CDE1B9081C5F648700F76F32 /* MemberProfile */,
 				CD795C811C5A6DCB00C1C298 /* Plans */,
 				D1DA1EB61C5909D7009F5AFA /* PlanDetails */,
-				D1DA1EB81C5909D7009F5AFA /* PlanPayment */,
+				CD21EA511C68E46000E50909 /* Payment */,
 				D1DA1EB01C5909D7009F5AFA /* ConfirmDetails */,
 				CD8ED0D41C60AD0900576DBF /* MemberCard */,
 			);
@@ -1667,14 +1700,6 @@
 				D1DA1EB71C5909D7009F5AFA /* MembershipPlanDetailsViewController.swift */,
 			);
 			path = PlanDetails;
-			sourceTree = "<group>";
-		};
-		D1DA1EB81C5909D7009F5AFA /* PlanPayment */ = {
-			isa = PBXGroup;
-			children = (
-				CD21EA3F1C64E85E00E50909 /* MembershipPaymentViewController.swift */,
-			);
-			path = PlanPayment;
 			sourceTree = "<group>";
 		};
 		D1F1FF201C22F23A006D2E75 /* VolunteerDetails */ = {
@@ -3489,6 +3514,7 @@
 				D1F86CF11BFCAA96006E0C49 /* Onboarding.storyboard in Resources */,
 				D1F1FF261C22F384006D2E75 /* PositionIn.VolunteerDetailsViewController.xib in Resources */,
 				CDEDD96C1C45033C00396594 /* PostToContainerViewController.xib in Resources */,
+				CD21EA551C68E89B00E50909 /* MPesaIndicatorView.xib in Resources */,
 				E69420FF1B665F5100F34F06 /* PositionIn.ProductDetailsViewController.xib in Resources */,
 				D1FD854C1C1EFE0F00C2E87B /* PositionIn.MarketDetailsViewController.xib in Resources */,
 				E6D7F83C1BE24AE500A544F4 /* PositionIn.MainMenuBadgeCell.xib in Resources */,
@@ -3739,6 +3765,7 @@
 				CD795BE71C57B9AA00C1C298 /* BaseRouter.swift in Sources */,
 				E632016E1B9834910066C62E /* ObjectInfo.swift in Sources */,
 				E6F2436C1B8B0E150033B13C /* MainMenuLoginCell.swift in Sources */,
+				CD21EA571C68E98D00E50909 /* MPesaIndicatorView.swift in Sources */,
 				E68B52211B875F8F006B980C /* EventListCell.swift in Sources */,
 				E68B52271B875F8F006B980C /* PostListCell.swift in Sources */,
 				CDBDD9AA1C47AFDD007578BC /* BrowseVolunteerViewController.swift in Sources */,
@@ -3788,6 +3815,7 @@
 				D1379E8D1C2A98710041AA4E /* ExploreCardCell.swift in Sources */,
 				E6C9522C1BA1BB0E0032254F /* PeopleListCell.swift in Sources */,
 				E6F243761B8B31510033B13C /* BrowseTabbar.swift in Sources */,
+				CD21EA531C68E46000E50909 /* MembershipPaymentViewController.swift in Sources */,
 				CD8ED0E21C60D35900576DBF /* MembershipDetails.swift in Sources */,
 				D1FD85461C1EF6DB00C2E87B /* BomaHotelsDetailsViewController.swift in Sources */,
 				E6A869EE1B60D42C00797D16 /* APIService.swift in Sources */,
@@ -3807,7 +3835,6 @@
 				2431EBE01B94C1DC009FB158 /* Event.swift in Sources */,
 				24EF62111BA81A6B00472531 /* ChatHistoryCellModel.swift in Sources */,
 				E6BEF1EF1B9C9D6400511B46 /* CommunityViewController.swift in Sources */,
-				CD21EA401C64E85E00E50909 /* MembershipPaymentViewController.swift in Sources */,
 				CDE1B9041C5BBE5900F76F32 /* MembershipPageView.swift in Sources */,
 				E68B52061B8736F4006B980C /* FilterViewController.swift in Sources */,
 				E62B16F61B5C1AA700D446BC /* MainMenuUserCell.swift in Sources */,
@@ -3865,6 +3892,7 @@
 				24D850421B878730008CAE82 /* LoginSignupViewController.swift in Sources */,
 				E66115891B73771E003DB5B3 /* LoginViewController.swift in Sources */,
 				E6F7A47E1BA356130069152A /* LocationSearchResultsController.swift in Sources */,
+				CD21EA611C68F9FF00E50909 /* MembershipMPesaConfirmPaymentViewController.swift in Sources */,
 				E6018E501B849266001D22FA /* XMPPProcess+Future.swift in Sources */,
 				E6BEF1E31B9C83F200511B46 /* CommunityActionCell.swift in Sources */,
 				CD795C4B1C590BEE00C1C298 /* ContainerViewController.swift in Sources */,
