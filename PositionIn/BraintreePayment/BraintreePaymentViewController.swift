@@ -16,6 +16,7 @@ class BraintreePaymentViewController : UIViewController, BTDropInViewControllerD
     var productName: String?
     var membershipId: String?
     var itemId: String?
+    var product: Product?
     var delegate: PaymentReponseDelegate?
     
     override func viewDidLoad() {
