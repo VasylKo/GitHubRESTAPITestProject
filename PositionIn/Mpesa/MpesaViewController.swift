@@ -26,8 +26,7 @@ class MpesaViewController : XLFormViewController, PaymentProtocol {
         self.initializeForm()
         
         let amount = String(self.amount ?? 0)
-        let itemId = self.itemId ?? ""
-        api().donateCheckoutMpesa(amount, nonce: "", itemId: itemId).onSuccess { [weak self] transactionId in
+        api().donateCheckoutMpesa(amount, nonce: "").onSuccess { [weak self] transactionId in
             self?.transactionId = transactionId
             self?.pollStatus()
         }

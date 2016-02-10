@@ -238,7 +238,8 @@ protocol BrowseActionConsumer: class {
     }
     
     func browseMapViewControllerCenterMapOnLocation(location: Location) {
-        self.searchbar.attributedText = self.searchBarAttributedText(self.searchString, searchString: nil, locationString: SearchFilter.currentFilter.locationName)
+        //crash searchbar.getter, should fix
+//        self.searchbar.attributedText = self.searchBarAttributedText(self.searchString, searchString: nil, locationString: SearchFilter.currentFilter.locationName)
     }
     
     //MARK: - Search -
