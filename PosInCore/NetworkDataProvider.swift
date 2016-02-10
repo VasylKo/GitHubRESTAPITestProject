@@ -43,7 +43,7 @@ public class NetworkDataProvider {
         validation: Alamofire.Request.Validation? = nil
         ) -> (Alamofire.Request, Future<[T], NSError>) {
             let mapping: AnyObject? -> [T]? = { json in
-                return Mapper<T>().mapArray((json))
+                return Mapper<T>().mapArray(json)
             }
             return jsonRequest(URLRequest, map: mapping, validation: validation)
     }
@@ -186,7 +186,7 @@ extension NetworkDataProvider {
     - ParsingError:    Response Parsing error
     */
     public enum ErrorCodes: Int {
-        public static let errorDomain = "com.bekitzur.Network"
+        public static let errorDomain = "com.bekitzur.network"
         
         case UnknownError, InvalidRequestError, TransferError, InvalidResponseError, ParsingError, InvalidSessionError
         

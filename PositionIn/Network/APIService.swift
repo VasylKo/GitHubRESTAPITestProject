@@ -91,7 +91,7 @@ struct APIService {
             (token: AuthResponse.Token) -> Future<Void, NSError> in
             let request = self.updateRequest(token, endpoint: endpoint, method: .POST,
                 params: params)
-            let (_, future): CRUDResultType = self.dataProvider.jsonRequest(request, map: self.commandMapping(), validation: self.statusCodeValidation(statusCode: [200]))
+            let (_, future): CRUDResultType = self.dataProvider.jsonRequest(request, map: self.commandMapping(), validation: nil)
             return self.handleFailure(future)
         }
     }
@@ -655,7 +655,7 @@ struct APIService {
         return session().flatMap {
             (token: AuthResponse.Token) -> Future<Void, NSError> in
             let request = self.updateRequest(token, endpoint: endpoint, method: method, params: nil)
-            let (_, future): CRUDResultType = self.dataProvider.jsonRequest(request, map: self.commandMapping(), validation: self.statusCodeValidation(statusCode: [200, 201, 204]))
+            let (_, future): CRUDResultType = self.dataProvider.jsonRequest(request, map: self.commandMapping(), validation: nil)
             return self.handleFailure(future)
         }
     }
@@ -668,7 +668,7 @@ struct APIService {
             (token: AuthResponse.Token) -> Future<Void, NSError> in
             let params = Mapper().toJSON(object)
             let request = self.updateRequest(token, endpoint: endpoint, method: .PUT, params: params)
-            let (_, future): CRUDResultType = self.dataProvider.jsonRequest(request, map: self.emptyResponseMapping(), validation: self.statusCodeValidation(statusCode: [204]))
+            let (_, future): CRUDResultType = self.dataProvider.jsonRequest(request, map: self.emptyResponseMapping(), validation: nil)
             return self.handleFailure(future)
         }
     }
@@ -715,30 +715,11 @@ struct APIService {
         }
     }
     
-    func phoneCodeValidation() -> (AnyObject? -> Bool?) {
-        return { response in
-            if let json = response as? NSDictionary {
-                if let isExistingUser = json["isExistingUser"] as? Bool{
-                    return isExistingUser
-                } else {
-                    Log.error?.message("Got unexpected response")
-                    Log.debug?.value(json)
-                    return nil
-                }
-            }
-            else {
-                Log.error?.message("Got unexpected response: \(response)")
-                return nil
-            }
-            
-        }
-    }
-    
     func statusCodeValidation<S: SequenceType where S.Generator.Element == Int>(statusCode acceptableStatusCode: S) -> Alamofire.Request.Validation {
         return { _, response in
             if acceptableStatusCode.contains(response.statusCode) {
                 return .Success
-            } else {
+            } else {                
                 return .Failure(NetworkDataProvider.ErrorCodes.TransferError.error())
             }
         }

@@ -163,18 +163,14 @@ extension APIService {
     private func verifyPhoneRequest(phoneNumber: String) ->  Future<Void, NSError> {
         typealias CRUDResultType = (Alamofire.Request, Future<Void, NSError>)
         let request = AuthRouter.PhoneVerification(api: self, phone: phoneNumber)
-        let (_, future): CRUDResultType = self.dataProvider.jsonRequest(request, map: self.commandMapping(), validation: self.statusCodeValidation(statusCode: [200]))
+        let (_, future): CRUDResultType = self.dataProvider.jsonRequest(request, map: self.commandMapping(), validation: nil)
         return self.handleFailure(future)
     }
     
     private func verifyPhoneCodeRequest(phoneNumber: String, code: String) ->  Future<Bool, NSError> {
         typealias CRUDResultType = (Alamofire.Request, Future<Bool, NSError>)
         let request = AuthRouter.VerifyPhoneCode(api: self, phone: phoneNumber, code: code)
-        
-        let serializer = Alamofire.Request.validationCodeResponseSerializer(self.phoneCodeValidation())
-        let (_, future): (Alamofire.Request, Future<Bool, NSError>) = dataProvider.request(request,
-            serializer: serializer,
-            validation: nil)
+        let (_, future): CRUDResultType = self.dataProvider.jsonRequest(request, map: self.phoneCodeMapping(), validation: nil)
         return self.handleFailure(future)
     }
     
@@ -253,6 +249,24 @@ extension APIService {
         dispatch_async(dispatch_get_main_queue()) {
             NSNotificationCenter.defaultCenter().postNotificationName(UserProfile.CurrentUserDidChangeNotification,
                 object: profile, userInfo: nil)
+        }
+    }
+    
+    func phoneCodeMapping() -> (AnyObject? -> Bool?) {
+        return { response in
+            if let json = response as? NSDictionary {
+                if let isExistingUser = json["isExistingUser"] as? Bool{
+                    return isExistingUser
+                } else {
+                    Log.error?.message("Got unexpected response")
+                    Log.debug?.value(json)
+                    return nil
+                }
+            }
+            else {
+                Log.error?.message("Got unexpected response: \(response)")
+                return nil
+            }
         }
     }
     
@@ -375,29 +389,6 @@ extension APIService {
 private extension Alamofire.Request {
     
     //MARK: - Custom serializer -
-    private static func validationCodeResponseSerializer<T>(mapping: AnyObject? -> T?) -> ResponseSerializer<T, NSError> {
-        return ResponseSerializer { request, response, data, error in
-            
-            let JSONResponseSerializer = Request.JSONResponseSerializer(options: .AllowFragments)
-            let result = JSONResponseSerializer.serializeResponse(request, response, data, error)
-            
-            switch result {
-            case .Success(let json):
-                guard let object = mapping(json) else {
-                    if  let jsonDict = json as? [String: AnyObject],
-                        let msg = jsonDict["error"] as? String {
-                            return .Failure(NetworkDataProvider.ErrorCodes.TransferError.error(localizedDescription: msg))
-                    }
-                    return .Failure(NetworkDataProvider.ErrorCodes.InvalidResponseError.error())
-                }
-                return .Success(object)
-            case .Failure(let error):
-                return .Failure(NetworkDataProvider.ErrorCodes.ParsingError.error(error))
-            }
-        }
-    }
-    
-    //MARK: - Custom serializer -
     private static func AuthResponseSerializer<T>(mapping: AnyObject? -> T?) -> ResponseSerializer<T, NSError> {
         return ResponseSerializer { request, response, data, error in
             guard error == nil else { return .Failure(error!) }
@@ -421,38 +412,27 @@ private extension Alamofire.Request {
             }
             
             // Response body parsing
-            var json: NSDictionary?
-            guard let validData = data where validData.length > 0 else {
-                let failureReason = "JSON could not be serialized. Input data was nil or zero length."
-                let error = Error.errorWithCode(.JSONSerializationFailed, failureReason: failureReason)
-                return .Failure(error)
-            }
-            do {
-                let JSON = try NSJSONSerialization.JSONObjectWithData(validData, options:  .AllowFragments) as? NSDictionary
-                json = JSON
-            } catch {
-                return .Failure(error as NSError)
-            }
+            let JSONResponseSerializer = Request.JSONResponseSerializer(options: .AllowFragments)
+            let result = JSONResponseSerializer.serializeResponse(request, response, data, error)
             
-            //Response body and refresh token association
-            var result: NSDictionary? = json
-            if let json = json, let rtc = refreshTokenCookie {
-                let mutableJSON = NSMutableDictionary(dictionary: json)
-                mutableJSON["refresh_token"] = rtc.value
-                mutableJSON["refresh_token_expires_in"] = rtc.expiresDate?.timeIntervalSinceDate(NSDate())
-                
-                result = mutableJSON
-            }
-
-            //Mapping reponse
-            guard let object = mapping(result) else {
-                if  let jsonDict = json as? [String: AnyObject],
-                    let msg = jsonDict["error"] as? String {
-                        return .Failure(NetworkDataProvider.ErrorCodes.TransferError.error(localizedDescription: msg))
+            switch result {
+            case .Success(let json):
+                let mutableJSON = json.mutableCopy() as? NSMutableDictionary
+                if let rtc = refreshTokenCookie where mutableJSON != nil {
+                    mutableJSON!["refresh_token"] = rtc.value
+                    mutableJSON!["refresh_token_expires_in"] = rtc.expiresDate?.timeIntervalSinceDate(NSDate())
                 }
-                return .Failure(NetworkDataProvider.ErrorCodes.InvalidResponseError.error())
+                guard let object = mapping(mutableJSON) else {
+                    if  let jsonDict = json as? [String: AnyObject],
+                        let msg = jsonDict["error"] as? String {
+                            return .Failure(NetworkDataProvider.ErrorCodes.TransferError.error(localizedDescription: msg))
+                    }
+                    return .Failure(NetworkDataProvider.ErrorCodes.InvalidResponseError.error())
+                }
+                return .Success(object)
+            case .Failure(let error):
+                return .Failure(NetworkDataProvider.ErrorCodes.ParsingError.error(error))
             }
-            return .Success(object)
         }
     }
 }

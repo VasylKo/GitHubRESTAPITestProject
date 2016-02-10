@@ -175,9 +175,15 @@ extension AppDelegate {
             switch (error.domain, error.code) {
             case (baseErrorDomain, NetworkDataProvider.ErrorCodes.InvalidSessionError.rawValue):
                 self.sidebarViewController?.executeAction(.Login)
-                showError(error.localizedDescription)
-            default:
+                showError(NSLocalizedString("You are not logged in. Please login again"))
+            case (baseErrorDomain, NetworkDataProvider.ErrorCodes.TransferError.rawValue):
                 showWarning(error.localizedDescription)
+            case (baseErrorDomain, _):
+                //invalid response, request, parse error, unknown...
+                fallthrough
+            default:
+                // 500+ code from alamofire
+                showWarning(NSLocalizedString("Sorry, something went wrong. Our engineering team is handling this."))
             }
         }
     }
