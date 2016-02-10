@@ -8,7 +8,9 @@
 
 protocol PaymentProtocol {
     var amount: Int? { get set }
+    var itemId: String? { get set }
     var quantity: Int? { get set }
     var productName: String? { get set }
     var delegate: PaymentReponseDelegate? { get set }
+    var product: Product? { get set }
 }

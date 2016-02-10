@@ -23,9 +23,9 @@ default_platform :ios
 platform :ios do
 
   before_all do
-    # ENV["SLACK_URL"] = "https://hooks.slack.com/services/..."
-    sh 'rm -rf ~/Library/Caches/org.carthage.CarthageKit/dependencies/'
 
+    sh 'rm -rf ~/Library/Caches/org.carthage.CarthageKit/dependencies/'
+    
     carthage(
       use_ssh: false,         # Use SSH for downloading GitHub repositories.
       use_submodules: false,  # Add dependencies as Git submodules.
@@ -35,14 +35,6 @@ platform :ios do
 
     cocoapods
 
-    # increment_build_number
-
-    # xctool # run the tests of your app
-  end
-
-  desc "Runs all the tests"
-  lane :test do
-    snapshot
   end
 
   desc "Submit a new Dev Build to Amazon S3"
@@ -79,6 +71,25 @@ platform :ios do
          path: 'staging/v{CFBundleShortVersionString}_b{CFBundleVersion}/'
          )
     end
+
+    desc "Submit a new Staging 2 Build to Amazon S3"
+    lane :Staging2 do
+        gym(
+            scheme: "PositionIn",
+            configuration: "StagingReleaseCopy",
+            output_directory: "Build",
+            clean: true,
+            use_legacy_build_api: true,
+            ) # Build app
+            #      snapshot
+            s3(
+               html_template_path: "./fastlane/redcross.erb",
+               html_file_name: "staging2.html",
+               version_file_name: "staging2.version.json",
+               path: 'staging2/v{CFBundleShortVersionString}_b{CFBundleVersion}/'
+               )
+    end
+    
 
     desc "Submit a new Production Build to Amazon S3"
     lane :Production do

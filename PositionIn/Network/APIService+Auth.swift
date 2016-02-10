@@ -26,6 +26,10 @@ extension APIService {
         return sessionController.currentUserId()
     }
     
+    func isUserHasActiveMembershipPlan() -> Bool {
+        return sessionController.isUserHasActiveMembershipPlan()
+    }
+    
     //Returns true if user is registered
     func isUserAuthorized() -> Bool {
         return sessionController.isUserAuthorized()
@@ -35,6 +39,7 @@ extension APIService {
     func isUserAuthorized() -> Future<Void, NSError> {
         return handleFailure(sessionController.isUserAuthorized())
     }
+    
     
     //Returns true if it is current user
     func isCurrentUser(userId: CRUDObjectId) -> Bool {
@@ -88,7 +93,7 @@ extension APIService {
     }
     
     // Logout from the current session
-    func logout() -> Future<Void, NoError> {
+    func logout() -> Future<Void, BrightFutures.NoError> {
         return sessionController.logout().onComplete { _ in
             self.sendUserDidChangeNotification(nil)
         }
@@ -217,14 +222,11 @@ extension APIService {
             return self.updateAccessToken(future)
         }
     }
-    
-    private func updateCurrentProfileStatus(newPasword: String? = nil) -> Future<UserProfile, NSError> {
+//TODO: should be private
+    func updateCurrentProfileStatus(newPasword: String? = nil) -> Future<UserProfile, NSError> {
         return getMyProfile().andThen { result in
             if let profile = result.value {
                 self.sessionController.updateCurrentStatus(profile)                
-                if let newPassword = newPasword {
-                    self.sessionController.updatePassword(newPassword)
-                }
                 self.sendUserDidChangeNotification(profile)
             }
         }

@@ -57,22 +57,9 @@ final class ProductDetailsViewController: UIViewController {
             priceLabel.text = "\(Int(price)) beneficiaries"
         }
         
-//        temporary decision
-//        priceLabel.text = product.price.map {
-//            let newValue = $0 as Float
-//            return AppConfiguration().currencyFormatter.stringFromNumber(NSNumber(float: newValue)) ?? ""}
-        
-        let imageURL: NSURL?
-        
-        if let urlString = product.imageURLString {
-            imageURL = NSURL(string:urlString)
-        } else {
-            imageURL = nil
-        }
-        
         let image = UIImage(named: "hardware_img_default")
 
-        productImageView.setImageFromURL(imageURL, placeholder: image)
+        productImageView.setImageFromURL(product.imageURL, placeholder: image)
         if let coordinates = product.location?.coordinates {
             self.pinDistanceImageView.hidden = false
             locationRequestToken.invalidate()
@@ -166,7 +153,11 @@ extension ProductDetailsViewController: ProductDetailsActionConsumer {
         switch action {
         case .Buy:
             if api().isUserAuthorized() {
-                segue = .ShowBuyScreen
+                //TODO should change following code
+                let donateController = Storyboards.Onboarding.instantiateDonateViewController()
+                donateController.product = self.product
+                self.navigationController?.pushViewController(donateController, animated: true)
+                return
             } else {
                 api().logout().onComplete {[weak self] _ in
                     self?.sideBarController?.executeAction(.Login)

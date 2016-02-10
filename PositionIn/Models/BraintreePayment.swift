@@ -18,8 +18,16 @@ struct BraintreePayment{
         return "\(prefix)client_token"
     }
     
-    static func checkoutEndpoint() -> String {
+    static func donateCheckoutEndpoint() -> String {
         return "\(prefix)donation/checkout"
+    }
+    
+    static func membershipCheckoutEndpoint() -> String {
+        return "\(prefix)membership/checkout"
+    }
+    
+    static func productCheckoutEndpoint() -> String {
+        return "\(prefix)product/checkout"
     }
     
     static func tokenMapping() -> (AnyObject? -> String?) {
@@ -38,6 +46,21 @@ struct BraintreePayment{
                 return nil
             }
             
+        }
+    }
+    
+    static func mpesaMapping() -> (AnyObject? -> String?) {
+        return  { response in
+            
+            if let json = response as? NSDictionary {
+                if let transactionId = json["id"] as? String {
+                    return transactionId
+                }
+            }
+            
+            Log.error?.message("Got unexpected response")
+            Log.debug?.value(response)
+            return nil
         }
     }
     

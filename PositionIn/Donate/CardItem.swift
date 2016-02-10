@@ -9,7 +9,7 @@
 import Box
 
 enum CardItem: Int {
-    case MPesa, Airtel, OrangeMonde, PayPal, CreditDebitCard
+    case MPesa, PayPal, CreditDebitCard
     
     static var count = (CreditDebitCard.rawValue + 1)
     
@@ -17,10 +17,6 @@ enum CardItem: Int {
         switch item {
         case .MPesa:
             return "M-Pesa"
-        case .Airtel:
-            return "Airtel"
-        case .OrangeMonde:
-            return "Orange Money"
         case .PayPal:
             return "PayPal"
         case .CreditDebitCard:
@@ -28,15 +24,21 @@ enum CardItem: Int {
         }
     }
     
+    static func cardDescription(item: CardItem) -> String? {
+        switch item {
+        case .MPesa:
+            return "Enter payment details and complete your purchase"
+        case .PayPal:
+            return "Enter payment details and complete your purchase"
+        case .CreditDebitCard:
+            return "Visa, Mastercard, American Express"
+        }
+    }
     
     static func cardImage(item: CardItem) -> UIImage? {
         switch item {
         case .MPesa:
             return UIImage(named: "mpesa")
-        case .Airtel:
-            return UIImage(named: "airtel")
-        case .OrangeMonde:
-            return UIImage(named: "orange_money")
         case .PayPal:
             return UIImage(named: "paypal")
         case .CreditDebitCard:
@@ -48,10 +50,6 @@ enum CardItem: Int {
         switch item {
         case .MPesa:
             return "Mpesa"
-        case .Airtel:
-            return "Braintree"
-        case .OrangeMonde:
-            return "Braintree"
         case .PayPal:
             return "Braintree"
         case .CreditDebitCard:
@@ -76,7 +74,6 @@ class CardItemValueTrasformer : NSValueTransformer {
                 return CardItem.cardName(box.value)
             }
         }
-        
         return nil
     }
 }
