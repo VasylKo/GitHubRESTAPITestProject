@@ -18,7 +18,7 @@ final class AppConfiguration {
             amazonURL = NSURL(string: "https://krcs.rc-app.com")!
             xmppHostname = "krcs.rc-app.com"
             googleAnalystLogLevel = GAILogLevel.Verbose
-            googleMapsKey = "AIzaSyDkUHOpFWNBDAW5Gu2I0E7iHe4FRWGyM6o"
+            googleMapsKey = "AIzaSyA3NvrDKBcpIsnq4-ZACG41y7Mj-wSfVrY"
         case .Staging:
             baseURL = NSURL(string: "https://app-sta.positionin.com/api/")!
             amazonURL = NSURL(string: "https://pos-sta.s3.amazonaws.com/")!
