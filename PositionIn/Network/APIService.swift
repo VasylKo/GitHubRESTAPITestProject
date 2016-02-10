@@ -539,9 +539,9 @@ struct APIService {
         }
     }
     
-    func donateCheckoutMpesa(amount:String, nonce:String, itemId:String) -> Future<String, NSError> {
+    func donateCheckoutMpesa(amount:String, nonce:String) -> Future<String, NSError> {
         let endpoint = MPesaPayment.donateCheckoutEndpoint()
-        let params = ["payment_method_nonce": nonce, "amount" : amount, "itemId" : itemId]
+        let params = ["payment_method_nonce": nonce, "amount" : amount]
         typealias CRUDResultType = (Alamofire.Request, Future<String, NSError>)
         
         return session().flatMap {
