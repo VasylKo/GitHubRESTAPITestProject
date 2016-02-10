@@ -24,7 +24,13 @@ final class AppConfiguration {
             amazonURL = NSURL(string: "https://pos-sta.s3.amazonaws.com/")!
             xmppHostname = "app-sta.positionin.com"
             googleAnalystLogLevel = GAILogLevel.Verbose
-            googleMapsKey = "AIzaSyA3NvrDKBcpIsnq4-ZACG41y7Mj-wSfVrY"
+            googleMapsKey = "AIzaSyDkUHOpFWNBDAW5Gu2I0E7iHe4FRWGyM6o"
+        case .StagingCopy:
+            baseURL = NSURL(string: "https://app-sta2.positionin.com/api/")!
+            amazonURL = NSURL(string: "https://pos-sta.s3.amazonaws.com/")!
+            xmppHostname = "app-sta2.positionin.com"
+            googleAnalystLogLevel = GAILogLevel.Verbose
+            googleMapsKey = "AIzaSyDkUHOpFWNBDAW5Gu2I0E7iHe4FRWGyM6o"
         case .Dev:
             baseURL = NSURL(string: "https://app-dev.positionin.com/api/")!
             amazonURL = NSURL(string: "https://pos-dev.s3.amazonaws.com/")!
@@ -48,6 +54,7 @@ final class AppConfiguration {
     private enum Environment: String {
         case Dev = "Dev"
         case Staging = "Staging"
+        case StagingCopy = "StagingCopy"
         case Prod = "Production"
     }
     
@@ -56,6 +63,8 @@ final class AppConfiguration {
             return .Prod
         #elseif STAGING_ENV
             return .Staging
+        #elseif STAGING_COPY_ENV
+            return .StagingCopy
         #else
             return .Dev
         #endif
@@ -63,10 +72,10 @@ final class AppConfiguration {
     
     let currencyFormatter: NSNumberFormatter = {
         let currencyFormatter = NSNumberFormatter()
-        currencyFormatter.currencySymbol = "KSh"
+        currencyFormatter.currencySymbol = "KES "
         currencyFormatter.numberStyle = .CurrencyStyle
         currencyFormatter.generatesDecimalNumbers = false
-        currencyFormatter.maximumFractionDigits = 0
+        currencyFormatter.maximumFractionDigits = 2
         currencyFormatter.roundingMode = .RoundDown
         return currencyFormatter
         }()

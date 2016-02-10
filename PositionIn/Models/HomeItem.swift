@@ -10,7 +10,7 @@ import Foundation
 
 enum HomeItem: Int, CustomDebugStringConvertible {
     case Unknown = 0
-    case Projects, Emergency, Training, GiveBlood, Volunteer, BomaHotels, Events, Market = 9, News, Ambulance, Membership, Donate
+    case Projects, Emergency, Training, GiveBlood, Volunteer, BomaHotels, Events, News, Market, Ambulance, Membership, Donate
     
     static var count: Int {
         return 12
@@ -110,13 +110,13 @@ enum HomeItem: Int, CustomDebugStringConvertible {
     func displayString() -> String {
         switch self {
         case .Emergency:
-            return NSLocalizedString("Emergency", comment: "HomeItem")
+            return NSLocalizedString("Emergency Alerts", comment: "HomeItem")
         case .Ambulance:
             return NSLocalizedString("Ambulance", comment: "HomeItem")
         case .GiveBlood:
             return NSLocalizedString("Give Blood", comment: "HomeItem")
         case .News:
-            return NSLocalizedString("News", comment: "HomeItem")
+            return NSLocalizedString("KRCS News", comment: "HomeItem")
         case .Membership:
             return NSLocalizedString("Membership", comment: "HomeItem")
         case .Donate:

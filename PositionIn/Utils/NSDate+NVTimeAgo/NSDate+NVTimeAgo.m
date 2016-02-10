@@ -183,9 +183,9 @@
     BOOL is24Hour = ([format rangeOfString:@"a"].location == NSNotFound);
     //Format
     if (is24Hour) {
-        [dateFormatter setDateFormat:@"H:mm"];
+        [dateFormatter setDateFormat:@"'Today', H:mm"];
     } else {
-        [dateFormatter setDateFormat:@"h:mm a"];
+        [dateFormatter setDateFormat:@"'Today', h:mm a"];
     }
     return [NSString stringWithFormat:@"%@", [dateFormatter stringFromDate:self]];
 }
@@ -194,7 +194,16 @@
 // Yesterday = "Yesterday"
 - (NSString *)formatAsYesterday
 {
-    return @"Yesterday";
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    NSString *format = [NSDateFormatter dateFormatFromTemplate:@"j" options:0 locale:[NSLocale currentLocale]];
+    BOOL is24Hour = ([format rangeOfString:@"a"].location == NSNotFound);
+    //Format
+    if (is24Hour) {
+        [dateFormatter setDateFormat:@"'Yesterday', H:mm"];
+    } else {
+        [dateFormatter setDateFormat:@"'Yesterday', h:mm a"];
+    }
+    return [NSString stringWithFormat:@"%@", [dateFormatter stringFromDate:self]];
 }
 
 
@@ -202,11 +211,20 @@
 - (NSString *)formatAsLastWeek
 {
     //Create date formatter
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
 
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    
     //Format
-    [dateFormatter setDateFormat:@"EEEE"];
-    return [dateFormatter stringFromDate:self];
+    
+    NSString *format = [NSDateFormatter dateFormatFromTemplate:@"j" options:0 locale:[NSLocale currentLocale]];
+    BOOL is24Hour = ([format rangeOfString:@"a"].location == NSNotFound);
+    //Format
+    if (is24Hour) {
+        [dateFormatter setDateFormat:@"EEEE, H:mm"];
+    } else {
+        [dateFormatter setDateFormat:@"EEEE, h:mm a"];
+    }
+    return [NSString stringWithFormat:@"%@", [dateFormatter stringFromDate:self]];
 }
 
 
@@ -217,7 +235,16 @@
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     
     //Format
-    [dateFormatter setDateFormat:@"MMMM d 'at' h:mm a"];
+    NSString *format = [NSDateFormatter dateFormatFromTemplate:@"j" options:0 locale:[NSLocale currentLocale]];
+    
+    BOOL is24Hour = ([format rangeOfString:@"a"].location == NSNotFound);
+    //Format
+    if (is24Hour) {
+        [dateFormatter setDateFormat:@"MMMM d, H:mm"];
+    } else {
+        [dateFormatter setDateFormat:@"MMMM d, h:mm a"];
+    }
+    return [NSString stringWithFormat:@"%@", [dateFormatter stringFromDate:self]];
     return [dateFormatter stringFromDate:self];
 }
 
@@ -241,10 +268,18 @@
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     
     //Format
-    [dateFormatter setDateFormat:@"MM/dd/yy"];
+    
+    NSString *format = [NSDateFormatter dateFormatFromTemplate:@"j" options:0 locale:[NSLocale currentLocale]];
+    BOOL is24Hour = ([format rangeOfString:@"a"].location == NSNotFound);
+    //Format
+    if (is24Hour) {
+        [dateFormatter setDateFormat:@"dd MMM, H:mm"];
+    } else {
+        [dateFormatter setDateFormat:@"dd MMM, h:mm a"];
+    }
+    return [NSString stringWithFormat:@"%@", [dateFormatter stringFromDate:self]];
     return [dateFormatter stringFromDate:self];
 }
-
 
 /*
  =======================================================================

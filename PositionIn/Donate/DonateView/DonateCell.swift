@@ -19,17 +19,15 @@ class DonateCell: XLFormBaseCell {
         }
     }
     
-    var projectIcon: UIImage? {
+    var projectIconURL: NSURL? {
         didSet {
-            self.projectIconImageView.image = projectIcon
+            self.projectIconImageView.setImageFromURL(projectIconURL, placeholder: nil)
         }
     }
     
     override func configure() {
         super.configure()
-        selectionStyle = .None
     }
-    
     
     override func update() {
         super.update()
@@ -38,9 +36,7 @@ class DonateCell: XLFormBaseCell {
     override static func formDescriptorCellHeightForRowDescriptor(rowDescriptor: XLFormRowDescriptor!) -> CGFloat {
         return 80
     }
-
     
-    
-    @IBOutlet weak var projectIconImageView: UIImageView!
-    @IBOutlet weak var projectNameLabel: UILabel!
+    @IBOutlet private weak var projectIconImageView: UIImageView!
+    @IBOutlet private weak var projectNameLabel: UILabel!
 }

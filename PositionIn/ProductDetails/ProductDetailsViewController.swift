@@ -57,22 +57,9 @@ final class ProductDetailsViewController: UIViewController {
             priceLabel.text = "\(Int(price)) beneficiaries"
         }
         
-//        temporary decision
-//        priceLabel.text = product.price.map {
-//            let newValue = $0 as Float
-//            return AppConfiguration().currencyFormatter.stringFromNumber(NSNumber(float: newValue)) ?? ""}
-        
-        let imageURL: NSURL?
-        
-        if let urlString = product.imageURLString {
-            imageURL = NSURL(string:urlString)
-        } else {
-            imageURL = nil
-        }
-        
         let image = UIImage(named: "hardware_img_default")
 
-        productImageView.setImageFromURL(imageURL, placeholder: image)
+        productImageView.setImageFromURL(product.imageURL, placeholder: image)
         if let coordinates = product.location?.coordinates {
             self.pinDistanceImageView.hidden = false
             locationRequestToken.invalidate()
@@ -81,6 +68,8 @@ final class ProductDetailsViewController: UIViewController {
                 [weak self] distance in
                 let formatter = NSLengthFormatter()
                 self?.infoLabel.text = formatter.stringFromMeters(distance)
+                self?.dataSource.items = (self?.productAcionItems())!
+                self?.dataSource.configureTable((self?.actionTableView)!)
                 }.onFailure(callback: { (error:NSError) -> Void in
                     self.pinDistanceImageView.hidden = true
                     self.infoLabel.text = "" })
@@ -104,19 +93,19 @@ final class ProductDetailsViewController: UIViewController {
     
     
     private func productAcionItems() -> [[ProductActionItem]] {
-        return [
-            [ // 0 section
-                ProductActionItem(title: NSLocalizedString("Donate", comment: "Product action: Buy Product"),
-                    image: "home_donate",
-                    action: .Buy),
-            ],
-            [ // 1 section
-                ProductActionItem(title: NSLocalizedString("Send Message", comment: "Product action: Send Message"), image: "productSendMessage", action: .SendMessage),
-                ProductActionItem(title: NSLocalizedString("Organizer Profile", comment: "Product action: Seller Profile"), image: "productSellerProfile", action: .SellerProfile),
-                /*ProductActionItem(title: NSLocalizedString("More Information", comment: "Product action: Navigate"), image: "productTerms&Info", action: .ProductInventory),*/
-            ],
-        ]
+        let zeroSection = [ // 0 section
+            ProductActionItem(title: NSLocalizedString("Donate", comment: "Product action: Buy Product"),
+                image: "home_donate",
+                action: .Buy)]
         
+        var firstSection = [ // 1 section
+            ProductActionItem(title: NSLocalizedString("Send Message", comment: "Product action: Send Message"), image: "productSendMessage", action: .SendMessage),
+            ProductActionItem(title: NSLocalizedString("Organizer Profile", comment: "Product action: Seller Profile"), image: "productSellerProfile", action: .SellerProfile)]
+        if self.product?.location != nil {
+            firstSection.append(ProductActionItem(title: NSLocalizedString("Navigate", comment: "Product action: Navigate"), image: "productNavigate", action: .Navigate))
+        }
+        
+        return [zeroSection, firstSection]
     }
     
     @IBOutlet private weak var actionTableView: UITableView!
@@ -132,7 +121,7 @@ final class ProductDetailsViewController: UIViewController {
 
 extension ProductDetailsViewController {
     enum ProductDetailsAction: CustomStringConvertible {
-        case Buy, ProductInventory, SellerProfile, SendMessage
+        case Buy, ProductInventory, SellerProfile, SendMessage, Navigate
         
         var description: String {
             switch self {
@@ -144,6 +133,8 @@ extension ProductDetailsViewController {
                 return "Seller profile"
             case .SendMessage:
                 return "Send message"
+            case .Navigate:
+                return "Navigate"
             }
         }
     }
@@ -162,7 +153,11 @@ extension ProductDetailsViewController: ProductDetailsActionConsumer {
         switch action {
         case .Buy:
             if api().isUserAuthorized() {
-                segue = .ShowBuyScreen
+                //TODO should change following code
+                let donateController = Storyboards.Onboarding.instantiateDonateViewController()
+                donateController.product = self.product
+                self.navigationController?.pushViewController(donateController, animated: true)
+                return
             } else {
                 api().logout().onComplete {[weak self] _ in
                     self?.sideBarController?.executeAction(.Login)
@@ -171,6 +166,13 @@ extension ProductDetailsViewController: ProductDetailsActionConsumer {
             }
         case .ProductInventory:
             segue = .ShowProductInventory
+        case .Navigate:
+            if let coordinates = self.product?.location?.coordinates {
+                OpenApplication.appleMap(with: coordinates)
+            } else {
+                Log.error?.message("coordinates missed")
+            }
+            return
         case .SellerProfile:
             segue = .ShowSellerProfile
         case .SendMessage:

@@ -124,6 +124,12 @@ struct APIService {
         return getObject(endpoint)
     }
     
+    func getPostComments(postId: CRUDObjectId) -> Future<CollectionResponse<Comment>, NSError> {
+        let endpoint = "/v1.0/posts/\(postId)/comments"
+        return getObjectsCollection(endpoint, params: nil)
+    }
+    
+    
     func createUserPost(post object: Post) -> Future<Post, NSError> {
         return currentUserId().flatMap {
             (userId: CRUDObjectId) -> Future<Post, NSError> in
@@ -218,6 +224,18 @@ struct APIService {
     func createProduct(object: Product, inShop shop: CRUDObjectId) -> Future<Product, NSError> {
         let endpoint = Product.shopItemsEndpoint(shop)
         return self.createObject(endpoint, object: object)
+    }
+    
+    //MARK: - Membership -
+    
+    func getMemberships() -> Future<CollectionResponse<MembershipPlan>, NSError> {
+        let endpoint = MembershipPlan.endpoint()
+        return getObjectsCollection(endpoint, params: nil)
+    }
+    
+    func getMembership(membershipId: CRUDObjectId) -> Future<MembershipPlan, NSError> {
+        let endpoint = MembershipPlan.endpoint(membershipId)
+        return getObject(endpoint)
     }
     
     //MARK: - Community -
@@ -481,6 +499,59 @@ struct APIService {
         }
     }
 
+    //MARK: - MPesa requests
+    
+    func transactionStatusMpesa(transactionId: String) -> Future<String, NSError> {
+        let endpoint = MPesaPayment.productCheckoutEndpoint(itemId: transactionId)
+        typealias CRUDResultType = (Alamofire.Request, Future<String, NSError>)
+        
+        return session().flatMap {
+            (token: AuthResponse.Token) -> Future<String, NSError> in
+            let request = self.updateRequest(token, endpoint: endpoint, method: .GET, params: nil)
+            let (_, future): CRUDResultType = self.dataProvider.jsonRequest(request, map: BraintreePayment.checkoutMapping(), validation: nil)
+            return future
+        }
+    }
+    
+    func productCheckoutMpesa(amount:NSNumber, nonce:String, itemId: String, quantity: NSNumber) -> Future<String, NSError> {
+        let endpoint = MPesaPayment.productCheckoutEndpoint()
+        let  params = ["payment_method_nonce": nonce, "amount" : amount, "itemId" : itemId, "quantity": quantity]
+        typealias CRUDResultType = (Alamofire.Request, Future<String, NSError>)
+        
+        return session().flatMap {
+            (token: AuthResponse.Token) -> Future<String, NSError> in
+            let request = self.updateRequest(token, endpoint: endpoint, method: .POST, params: params)
+            let (_, future): CRUDResultType = self.dataProvider.jsonRequest(request, map: BraintreePayment.checkoutMapping(), validation: nil)
+            return self.handleFailure(future)
+        }
+    }
+    
+    func membershipCheckoutMpesa(amount:String, nonce:String, membershipId: String) -> Future<String, NSError> {
+        let endpoint = MPesaPayment.membershipCheckoutEndpoint()
+        let params = ["payment_method_nonce": nonce, "amount" : amount, "itemId" : membershipId]
+        typealias CRUDResultType = (Alamofire.Request, Future<String, NSError>)
+        
+        return session().flatMap {
+            (token: AuthResponse.Token) -> Future<String, NSError> in
+            let request = self.updateRequest(token, endpoint: endpoint, method: .POST, params: params)
+            let (_, future): CRUDResultType = self.dataProvider.jsonRequest(request, map: BraintreePayment.mpesaMapping(), validation: nil)
+            return self.handleFailure(future)
+        }
+    }
+    
+    func donateCheckoutMpesa(amount:String, nonce:String, itemId:String) -> Future<String, NSError> {
+        let endpoint = MPesaPayment.donateCheckoutEndpoint()
+        let params = ["payment_method_nonce": nonce, "amount" : amount, "itemId" : itemId]
+        typealias CRUDResultType = (Alamofire.Request, Future<String, NSError>)
+        
+        return session().flatMap {
+            (token: AuthResponse.Token) -> Future<String, NSError> in
+            let request = self.updateRequest(token, endpoint: endpoint, method: .POST, params: params)
+            let (_, future): CRUDResultType = self.dataProvider.jsonRequest(request, map: BraintreePayment.mpesaMapping(), validation: nil)
+            return self.handleFailure(future)
+        }
+    }
+    
     //MARK: - Braintree requests
 
     func getToken() -> Future<String, NSError> {
@@ -494,10 +565,39 @@ struct APIService {
             return self.handleFailure(future)
         }
     }
+    
+    func productCheckoutBraintree(amount:String, nonce:String, itemId: String, quantity: NSNumber) -> Future<String, NSError> {
+        let endpoint = BraintreePayment.productCheckoutEndpoint()
+        let  params = ["payment_method_nonce": nonce, "amount" : amount, "itemId" : itemId, "quantity": quantity]
+        typealias CRUDResultType = (Alamofire.Request, Future<String, NSError>)
+        
+        return session().flatMap {
+            (token: AuthResponse.Token) -> Future<String, NSError> in
+            let request = self.updateRequest(token, endpoint: endpoint, method: .POST, params: params)
+            let (_, future): CRUDResultType = self.dataProvider.jsonRequest(request, map: BraintreePayment.checkoutMapping(), validation: nil)
+            return self.handleFailure(future)
+        }
+    }
+    
+    func membershipCheckoutBraintree(amount:String, nonce:String, membershipId: String) -> Future<String, NSError> {
+        let endpoint = BraintreePayment.membershipCheckoutEndpoint()
+        let  params = ["payment_method_nonce": nonce, "amount" : amount, "itemId" : membershipId]
+        typealias CRUDResultType = (Alamofire.Request, Future<String, NSError>)
+        
+        return session().flatMap {
+            (token: AuthResponse.Token) -> Future<String, NSError> in
+            let request = self.updateRequest(token, endpoint: endpoint, method: .POST, params: params)
+            let (_, future): CRUDResultType = self.dataProvider.jsonRequest(request, map: BraintreePayment.checkoutMapping(), validation: nil)
+            return self.handleFailure(future)
+        }
+    }
 
-    func checkoutBraintree(amount:String, nonce:String) -> Future<String, NSError> {
-        let endpoint = BraintreePayment.checkoutEndpoint()
-        let  params = ["payment_method_nonce": nonce, "amount" : amount]
+    func donateCheckoutBraintree(amount:String, nonce:String, itemId:String?) -> Future<String, NSError> {
+        let endpoint = BraintreePayment.donateCheckoutEndpoint()
+        var params = ["payment_method_nonce": nonce, "amount" : amount]
+        if let itemId = itemId {
+            params = ["payment_method_nonce": nonce, "amount" : amount, "itemId" : itemId]
+        }
         typealias CRUDResultType = (Alamofire.Request, Future<String, NSError>)
 
         return session().flatMap {
@@ -555,7 +655,7 @@ struct APIService {
         return session().flatMap {
             (token: AuthResponse.Token) -> Future<Void, NSError> in
             let request = self.updateRequest(token, endpoint: endpoint, method: method, params: nil)
-            let (_, future): CRUDResultType = self.dataProvider.jsonRequest(request, map: self.commandMapping(), validation: self.statusCodeValidation(statusCode: [201, 204]))
+            let (_, future): CRUDResultType = self.dataProvider.jsonRequest(request, map: self.commandMapping(), validation: self.statusCodeValidation(statusCode: [200, 201, 204]))
             return self.handleFailure(future)
         }
     }

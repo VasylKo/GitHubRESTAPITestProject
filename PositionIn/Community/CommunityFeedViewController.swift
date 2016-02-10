@@ -55,7 +55,7 @@ class CommunityFeedViewController: BesideMenuViewController, BrowseActionProduce
         if self.controllerType == .Community {
             closed = community.closed
         }
-        let headerModel = BrowseCommunityHeaderCellModel(objectId: community.objectId, tapAction: .None, title:community.name ?? "", url:community.avatar, showInfo: true,  isClosed: closed)
+        let headerModel = BrowseCommunityHeaderCellModel(community: community, tapAction: .None, title:community.name ?? "", url:community.avatar, showInfo: true,  isClosed: closed)
         headerModel.actionConsumer = self
         dataSource.items[Sections.Info.rawValue] = [headerModel,
             CommunityStatsCellModel(countMembers: community.membersCount, countPosts: community.postsCount, countEvents: community.eventsCount)
@@ -65,8 +65,9 @@ class CommunityFeedViewController: BesideMenuViewController, BrowseActionProduce
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let volunteerDetailsViewController = segue.destinationViewController  as? VolunteerDetailsViewController {
-            volunteerDetailsViewController.objectId = self.community.objectId
+            volunteerDetailsViewController.volunteer = self.community
             volunteerDetailsViewController.joinAction = false
+            volunteerDetailsViewController.author = self.community.owner
             if let typeValue = VolunteerDetailsViewController.ControllerType(rawValue:self.controllerType.rawValue){
                 volunteerDetailsViewController.type = typeValue
             }
@@ -109,8 +110,8 @@ class CommunityFeedViewController: BesideMenuViewController, BrowseActionProduce
 }
 
 extension CommunityFeedViewController: BrowseActionConsumer {
-    func browseController(controller: BrowseActionProducer, didSelectItem objectId: CRUDObjectId, type itemType: FeedItem.ItemType, data: Any?) {
-        actionConsumer?.browseController(controller, didSelectItem: objectId, type: itemType, data: data)
+    func browseController(controller: BrowseActionProducer, didSelectItem object: Any, type itemType: FeedItem.ItemType, data: Any?) {
+        actionConsumer?.browseController(controller, didSelectItem: object, type: itemType, data: data)
     }
     
     func browseControllerDidChangeContent(controller: BrowseActionProducer) {

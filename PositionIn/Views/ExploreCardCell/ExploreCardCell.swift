@@ -32,7 +32,7 @@ class ExploreCardCell: TableViewCell {
             feedItemLogoImageView.image = UIImage(named: "home_projects")
         case .Event:
             feedItemLogoImageView.image = UIImage(named: "home_event")
-        case .News:
+        case .News, .Post:
             feedItemLogoImageView.image = UIImage(named: "home_news")
         case .Unknown:
             break

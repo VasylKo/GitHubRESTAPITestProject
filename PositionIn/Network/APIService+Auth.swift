@@ -26,6 +26,10 @@ extension APIService {
         return sessionController.currentUserId()
     }
     
+    func isUserHasActiveMembershipPlan() -> Bool {
+        return sessionController.isUserHasActiveMembershipPlan()
+    }
+    
     //Returns true if user is registered
     func isUserAuthorized() -> Bool {
         return sessionController.isUserAuthorized()
@@ -35,6 +39,7 @@ extension APIService {
     func isUserAuthorized() -> Future<Void, NSError> {
         return handleFailure(sessionController.isUserAuthorized())
     }
+    
     
     //Returns true if it is current user
     func isCurrentUser(userId: CRUDObjectId) -> Bool {
@@ -88,7 +93,7 @@ extension APIService {
     }
     
     // Logout from the current session
-    func logout() -> Future<Void, NoError> {
+    func logout() -> Future<Void, BrightFutures.NoError> {
         return sessionController.logout().onComplete { _ in
             self.sendUserDidChangeNotification(nil)
         }
@@ -121,13 +126,13 @@ extension APIService {
     
     //Register anonymous user
     func register() -> Future<UserProfile, NSError> {
-        return registerRequest(username: nil, password: nil, phoneNumber: nil, phoneVerificationCode: nil, info: nil).flatMap { _ in
+        return registerRequest(nil, username: nil, password: nil, phoneNumber: nil, phoneVerificationCode: nil, info: nil).flatMap { _ in
             return self.updateCurrentProfileStatus()
         }
     }
     
     //Register new user
-    func register(username username: String?, password: String?, phoneNumber: String?, phoneVerificationCode: String?, firstName: String?, lastName: String?) -> Future<UserProfile, NSError> {
+    func register(username username: String?, password: String?, phoneNumber: String?, phoneVerificationCode: String?, firstName: String?, lastName: String?, email: String?) -> Future<UserProfile, NSError> {
         var info: [String: AnyObject] = [:]
         if let firstName = firstName {
             info ["firstName"] = firstName
@@ -135,15 +140,15 @@ extension APIService {
         if let lastName = lastName {
             info ["lastName"] = lastName
         }
-        return registerRequest(username: username, password: password, phoneNumber: phoneNumber, phoneVerificationCode: phoneVerificationCode, info: info).flatMap { _ in
+        return registerRequest(email, username: username, password: password, phoneNumber: phoneNumber, phoneVerificationCode: phoneVerificationCode, info: info).flatMap { _ in
             return self.updateCurrentProfileStatus(password)
         }
     }
     
     //MARK: - Private members -
     
-    private func registerRequest(username username: String?, password: String?, phoneNumber: String?, phoneVerificationCode: String?, info: [String: AnyObject]?) -> Future<AuthResponse, NSError> {
-        let urlRequest = AuthRouter.Register(api: self, username: username, password: password, phoneNumber: phoneNumber, phoneVerificationCode: phoneVerificationCode, profileInfo: info)
+    private func registerRequest(email: String?, username: String?, password: String?, phoneNumber: String?, phoneVerificationCode: String?, info: [String: AnyObject]?) -> Future<AuthResponse, NSError> {
+        let urlRequest = AuthRouter.Register(api: self, email:email, username: username, password: password, phoneNumber: phoneNumber, phoneVerificationCode: phoneVerificationCode, profileInfo: info)
         
         let mapping: AnyObject? -> AuthResponse? = { json in
             return Mapper<AuthResponse>().map(json)
@@ -217,14 +222,11 @@ extension APIService {
             return self.updateAccessToken(future)
         }
     }
-    
-    private func updateCurrentProfileStatus(newPasword: String? = nil) -> Future<UserProfile, NSError> {
+//TODO: should be private
+    func updateCurrentProfileStatus(newPasword: String? = nil) -> Future<UserProfile, NSError> {
         return getMyProfile().andThen { result in
             if let profile = result.value {
                 self.sessionController.updateCurrentStatus(profile)                
-                if let newPassword = newPasword {
-                    self.sessionController.updatePassword(newPassword)
-                }
                 self.sendUserDidChangeNotification(profile)
             }
         }
@@ -258,7 +260,7 @@ extension APIService {
         
         case Login(api: APIService, username: String?, password: String?, phoneNumber: String?, phoneVerificationCode: String?)
         case Facebook(api: APIService, fbToken: String)
-        case Register(api: APIService, username: String?, password: String?, phoneNumber: String?, phoneVerificationCode: String?, profileInfo: [String: AnyObject]?)
+        case Register(api: APIService, email: String?, username: String?, password: String?, phoneNumber: String?, phoneVerificationCode: String?, profileInfo: [String: AnyObject]?)
         case Refresh(api: APIService, token: String)
         case PhoneVerification(api: APIService, phone: String)
         case VerifyPhoneCode(api: APIService, phone: String, code: String)
@@ -319,7 +321,7 @@ extension APIService {
                     "fbToken" : fbToken,
                     "device" : deviceInfo(),
                 ]
-            case .Register(let api,  let username, let password, let phoneNumber, let phoneVerificationCode, let profile):
+            case .Register(let api, let email, let username, let password, let phoneNumber, let phoneVerificationCode, let profile):
                 url = api.https("/v1.0/users/register")
                 method = .POST
                 encoding = .JSON
@@ -327,6 +329,9 @@ extension APIService {
                 params = [
                     "device" : deviceInfo(),
                 ]
+                if let email = email {
+                    params["email"] = email
+                }
                 if let username = username {
                     params["email"] = username
                 }

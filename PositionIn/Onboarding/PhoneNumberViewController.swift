@@ -36,6 +36,7 @@ class PhoneNumberViewController: XLFormViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.tintColor = UIScheme.mainThemeColor
+        trackGoogleAnalyticsEvent("Auth", action: "Click", label: "SMS code")
     }
     
     override func showFormValidationError(error: NSError!) {

@@ -48,13 +48,38 @@ class ObjectInfo: CRUDObject {
 class UserInfo: ObjectInfo {
     var isCommunity: Bool = false
     var avatar: NSURL?
-    var role : Int = 0
+    var role : Role = .Unknown
+    
+    enum Role: Int, CustomDebugStringConvertible {
+        case Unknown
+        case Owner, Moderator, Member, Invitee, Applicant, Rejected
+        var debugDescription: String {
+            let displayString: String
+            switch self {
+            case Unknown:
+                displayString = "Unknown"
+            case Owner:
+                displayString = "Owner"
+            case Moderator:
+                displayString = "Moderator"
+            case Member:
+                displayString = "Member"
+            case Invitee:
+                displayString = "Invitee"
+            case Applicant:
+                displayString = "Applicant"
+            case Rejected:
+                displayString = "Rejected"
+            }
+            return "<Role:\(displayString)>"
+        }
+    }
     
     override func mapping(map: Map) {
         super.mapping(map)
         avatar <- (map["avatar"], AmazonURLTransform())
         isCommunity <- map["isCommunity"]
-        role <- map["role"]
+        role <- (map["role"], EnumTransform())
     }
     
 }

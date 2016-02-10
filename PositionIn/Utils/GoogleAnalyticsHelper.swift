@@ -9,8 +9,12 @@
 import Foundation
 
 func trackGoogleAnalyticsEvent(categoryName: String, action: String, label: String) {
+    trackGoogleAnalyticsEvent(categoryName, action: action, label: label, value: nil)
+}
+
+func trackGoogleAnalyticsEvent(categoryName: String, action: String, label: String, value: NSNumber?) {
     let tracker = GAI.sharedInstance().defaultTracker
     let builder = GAIDictionaryBuilder.createEventWithCategory(categoryName,
-        action: action, label: label, value:nil)
+        action: action, label: label, value: value)
     tracker.send(builder.build() as [NSObject : AnyObject])
 }

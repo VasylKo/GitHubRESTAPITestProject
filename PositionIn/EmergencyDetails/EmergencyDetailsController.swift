@@ -19,7 +19,7 @@ class EmergencyDetailsController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = NSLocalizedString("Emergency", comment: "Product details: title")
+        title = NSLocalizedString("Emergency Alerts", comment: "Product details: title")
         dataSource.items = productAcionItems()
         dataSource.configureTable(actionTableView)
         reloadData()
@@ -58,18 +58,9 @@ class EmergencyDetailsController: UIViewController {
             nameLabel.text = name
         }
         
-        let imageURL: NSURL?
-        
-        if let urlString = product.imageURLString {
-            imageURL = NSURL(string:urlString)
-        }
-        else {
-            imageURL = nil
-        }
-        
         let image = UIImage(named: "PromotionDetailsPlaceholder")
         
-        productImageView.setImageFromURL(imageURL, placeholder: image)
+        productImageView.setImageFromURL(product.imageURL, placeholder: image)
         if let coordinates = product.location?.coordinates {
             self.pinDistanceImageView.hidden = false
             locationRequestToken.invalidate()
@@ -78,6 +69,8 @@ class EmergencyDetailsController: UIViewController {
                 [weak self] distance in
                 let formatter = NSLengthFormatter()
                 self?.infoLabel.text = formatter.stringFromMeters(distance)
+                self?.dataSource.items = (self?.productAcionItems())!
+                self?.dataSource.configureTable((self?.actionTableView)!)
                 }.onFailure(callback: { (error:NSError) -> Void in
                     self.pinDistanceImageView.hidden = true
                     self.infoLabel.text = "" })
@@ -101,25 +94,24 @@ class EmergencyDetailsController: UIViewController {
     
     
     private func productAcionItems() -> [[EmergencyActionItem]] {
-        return [
-            [ // 0 section
-                EmergencyActionItem(title: NSLocalizedString("Donate", comment: "Product action: Buy Product"),
-                    image: "home_donate",
-                    action: .Donate),
-            ],
-            [ // 1 section
-                EmergencyActionItem(title: NSLocalizedString("Send Message", comment: "Product action: Send Message"),
-                    image: "productSendMessage",
-                    action: .SendMessage),
-                EmergencyActionItem(title: NSLocalizedString("Member Profile", comment: "Product action: Seller Profile"),
-                    image: "productSellerProfile",
-                    action: .MemberProfile),
-                /*EmergencyActionItem(title: NSLocalizedString("More Information", comment: "Product action: Navigate"),
-                    image: "productTerms&Info",
-                    action: .MoreInformation),*/
-            ],
+        let zeroSection = [ // 0 section
+            EmergencyActionItem(title: NSLocalizedString("Donate", comment: "Product action: Buy Product"),
+                image: "home_donate",
+                action: .Donate)]
+
+        var firstSection = [ // 1 section
+            EmergencyActionItem(title: NSLocalizedString("Send Message", comment: "Product action: Send Message"),
+                image: "productSendMessage",
+                action: .SendMessage),
+            EmergencyActionItem(title: NSLocalizedString("Member Profile", comment: "Product action: Seller Profile"),
+                image: "productSellerProfile",
+                action: .MemberProfile)
         ]
+        if self.product?.location != nil {
+            firstSection.append(EmergencyActionItem(title: NSLocalizedString("Navigate", comment: "Emergency"), image: "productNavigate", action: .Navigate))
+        }
         
+        return [zeroSection, firstSection]
     }
     
     @IBOutlet private weak var actionTableView: UITableView!
@@ -134,12 +126,14 @@ class EmergencyDetailsController: UIViewController {
 
 extension EmergencyDetailsController {
     enum EmergencyDetailsAction: CustomStringConvertible {
-        case Donate, SendMessage, MemberProfile, MoreInformation
+        case Donate, Navigate, SendMessage, MemberProfile, MoreInformation
         
         var description: String {
             switch self {
             case .Donate:
                 return "Donate"
+            case .Navigate:
+                return "Navigate"
             case .SendMessage:
                 return "Send Message"
             case .MemberProfile:
@@ -163,8 +157,18 @@ extension EmergencyDetailsController: EmergencyDetailsActionConsumer {
     func executeAction(action: EmergencyDetailsAction) {
         let segue: EmergencyDetailsController.Segue
         switch action {
+        case .Navigate:
+            if let coordinates = self.product?.location?.coordinates {
+                OpenApplication.appleMap(with: coordinates)
+            } else {
+                Log.error?.message("coordinates missed")
+            }
+            return
         case .Donate:
-            segue = .Donate
+            let donateController = Storyboards.Onboarding.instantiateDonateViewController()
+            donateController.product = self.product
+            self.navigationController?.pushViewController(donateController, animated: true)
+            return
         case .SendMessage:
             if let userId = author?.objectId {
                 showChatViewController(userId)

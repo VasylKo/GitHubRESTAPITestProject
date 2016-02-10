@@ -77,6 +77,7 @@ class PhoneVerificationViewController: XLFormViewController {
                 let codeString = "\(codeRowValue)"
                 api().verifyPhoneCode(phoneNumber, code: codeString).onSuccess(callback: {[weak self] isExistingUser in
                     if isExistingUser {
+                        trackGoogleAnalyticsEvent("Auth", action: "Click", label: "SMS verification", value: NSNumber(int: 1))
                         api().login(username: nil, password: nil, phoneNumber: phoneNumber, phoneVerificationCode: codeString).onSuccess { [weak self] _ in
                             self?.dismissLogin()
                             }.onSuccess(callback: { _ in
@@ -87,11 +88,10 @@ class PhoneVerificationViewController: XLFormViewController {
                     }
                     else {
                         //register
-                        let controller = EditProfileViewController(nibName: nil, bundle: nil)
-                        controller.phoneNumber = self?.phoneNumber
-                        controller.validationCode = codeString
-                        
-                        self?.navigationController?.pushViewController(controller, animated: true)
+                        if let strongSelf = self {
+                            trackGoogleAnalyticsEvent("Auth", action: "Click", label: "SMS verification", value: NSNumber(int: 0))
+                            MembershipRouterImplementation().showMembershipMemberProfile(from: strongSelf, phoneNumber: strongSelf.phoneNumber!, validationCode: codeString)
+                        }
                     }
                     })
         }

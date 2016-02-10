@@ -71,7 +71,7 @@ struct SessionController {
         return token
     }
     
-    func logout() -> Future<Void, NoError> {
+    func logout() -> Future<Void, BrightFutures.NoError> {
         return future {
             self.setAuth(AuthResponse.invalidAuth())
             self.updateCurrentStatus(nil)
@@ -82,24 +82,22 @@ struct SessionController {
     func isUserAuthorized() -> Future<Void, NSError> {
         return self.currentUserId().flatMap { _ in
             return future { () -> Result<Void, NSError> in
-                if self.isGuest {
-                    let errorCode = NetworkDataProvider.ErrorCodes.InvalidSessionError
-                    return Result(error: errorCode.error())
-                } else {
-                    return Result(value: ())
-                }
+                return Result(value: ())
             }
         }
     }
     
     func isUserAuthorized() -> Bool {
         if let _: CRUDObjectId = currentUserId() {
-            return !isGuest
+            return true
         }
         return false
     }
     
-    
+    func isUserHasActiveMembershipPlan() -> Bool {
+        return self.isMembershipPlanActive
+    }
+
     func setAuth(authResponse: AuthResponse) {
         Log.info?.message("Auth changed")
         Log.debug?.value(authResponse)
@@ -161,30 +159,20 @@ struct SessionController {
 
     func updateCurrentStatus(profile: UserProfile?) {
         keychain[KeychainKeys.UserIdKey] = profile?.objectId
-        var isGuest: Bool = profile?.guest ?? true
+        var isMembershipPlanActive: Bool = (profile?.membershipDetails != nil)
         do {
-            try keychain.set(NSData(bytes: &isGuest, length: sizeof(Bool)), key: KeychainKeys.IsGuestKey)
+            try keychain.set(NSData(bytes: &isMembershipPlanActive, length: sizeof(Bool)), key: KeychainKeys.IsMembershipPlanActive)
         } catch let error {
             Log.error?.value(error)
         }
     }
     
-    @available(*, deprecated=1.0)
-    func updatePassword(newPassword: String) {
-        keychain[KeychainKeys.UserPasswordKey] = newPassword
-    }
-    
-    @available(*, unavailable, message="We do not store password anymore")
-    var userPassword: String? {
-        return keychain[KeychainKeys.UserPasswordKey]
-    }
-    
-    private var isGuest: Bool {
+    private var isMembershipPlanActive: Bool {
         do {
-            if let data = try keychain.getData(KeychainKeys.IsGuestKey) {
-                var isGuest: Bool = true
-                data.getBytes(&isGuest, length:sizeof(Bool))
-                return isGuest
+            if let data = try keychain.getData(KeychainKeys.IsMembershipPlanActive) {
+                var isMembershipPlanActive: Bool = false
+                data.getBytes(&isMembershipPlanActive, length:sizeof(Bool))
+                return isMembershipPlanActive
             }
         } catch let error {
             Log.error?.value(error)
@@ -241,11 +229,8 @@ struct SessionController {
         static let ExpireDateKeyRT = "edrt"
         
         static let UserIdKey = "userId"
-        static let IsGuestKey = "isGuest"
+        static let IsMembershipPlanActive = "IsMembershipPlanActive"
         
         static let DeviceToken = "dt"
-        
-        @available(*, deprecated=1.0)
-        static let UserPasswordKey = "UserPassword"
     }
 }

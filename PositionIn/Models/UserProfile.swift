@@ -15,21 +15,20 @@ final class UserProfile: CRUDObject {
     var middleName: String?
     var lastName: String?
     var userDescription: String?
-//    "gender": <gender enum>
-//    "dob": <date>,
     var phone: String?
+    var email: String?
     var avatar: NSURL?
     var backgroundImage: NSURL?
     var location: Location?
     var guest: Bool =  false
     var shops: [ObjectInfo]?
+    var membershipDetails : MembershipDetails?
     
     enum Gender {
         case Unknown
         case Male
         case Female
     }
-    
     
     var countFollowers: Int?
     var countFollowing: Int?
@@ -73,6 +72,7 @@ final class UserProfile: CRUDObject {
         lastName <- map["lastName"]
         userDescription <- map["description"]
         phone <- map["phone"]
+        email <- map["email"]
         avatar <- (map["avatar"], AmazonURLTransform())
         backgroundImage <- (map["background"], AmazonURLTransform())
         location <- map["location"]
@@ -81,6 +81,7 @@ final class UserProfile: CRUDObject {
         countFollowers <- map["followers.count"]
         countFollowing <- map["following.count"]
         countPosts <- map["posts.count"]
+        membershipDetails <- map["membershipDetails"]
     }
     
     static func endpoint() -> String {
@@ -110,7 +111,6 @@ final class UserProfile: CRUDObject {
     static func subscripttionEndpoint(userId: CRUDObjectId) -> String {
         return (UserProfile.userEndpoint(userId) as NSString).stringByAppendingPathComponent("subscription")
     }
-
     
     enum SubscriptionState: Int {
         case SameUser
