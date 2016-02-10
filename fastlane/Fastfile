@@ -72,6 +72,25 @@ platform :ios do
          )
     end
 
+    desc "Submit a new Staging 2 Build to Amazon S3"
+    lane :Staging2 do
+        gym(
+            scheme: "PositionIn",
+            configuration: "StagingReleaseCopy",
+            output_directory: "Build",
+            clean: true,
+            use_legacy_build_api: true,
+            ) # Build app
+            #      snapshot
+            s3(
+               html_template_path: "./fastlane/redcross.erb",
+               html_file_name: "staging2.html",
+               version_file_name: "staging2.version.json",
+               path: 'staging2/v{CFBundleShortVersionString}_b{CFBundleVersion}/'
+               )
+    end
+    
+
     desc "Submit a new Production Build to Amazon S3"
     lane :Production do
         gym(
