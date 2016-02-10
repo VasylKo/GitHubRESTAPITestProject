@@ -26,20 +26,9 @@ protocol BrowseModeDisplay {
                 api().isUserAuthorized().onSuccess {  _ in
                     pushAndSubscribe(Storyboards.Onboarding.instantiateCallAmbulanceViewController())
                 }},
-            // changes for 3 button UI(ambulance, post, donate)
-            //            AddMenuView.MenuItem.eventItemWithAction {
-            //                api().isUserAuthorized().onSuccess {  _ in
-            //                    pushAndSubscribe(Storyboards.NewItems.instantiateAddEventViewController())
-            //                }},
-            //            AddMenuView.MenuItem.productItemWithAction {
-            //                api().isUserAuthorized().onSuccess {  _ in
-            //                    pushAndSubscribe(Storyboards.NewItems.instantiateAddProductViewController())
-            //                }},
-            
-            
             AddMenuView.MenuItem.inviteItemWithAction {
                 api().isUserAuthorized().onSuccess {  _ in
-//                    pushAndSubscribe(Storyboards.NewItems.instantiateAddEventViewController())
+                    pushAndSubscribe(Storyboards.Onboarding.instantiateDonateViewController())
                 }},
             AddMenuView.MenuItem.postItemWithAction {
                 api().isUserAuthorized().onSuccess {  _ in
