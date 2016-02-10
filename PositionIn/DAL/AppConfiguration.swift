@@ -36,7 +36,7 @@ final class AppConfiguration {
             amazonURL = NSURL(string: "https://pos-dev.s3.amazonaws.com/")!
             xmppHostname = "app-dev.positionin.com"
             googleAnalystLogLevel = GAILogLevel.None
-            googleMapsKey = "AIzaSyA3NvrDKBcpIsnq4-ZACG41y7Mj-wSfVrY"
+            googleMapsKey = "AIzaSyDkUHOpFWNBDAW5Gu2I0E7iHe4FRWGyM6o"
         }
         xmppPort = 5222
     }
