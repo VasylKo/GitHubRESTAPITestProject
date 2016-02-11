@@ -75,7 +75,7 @@ struct Product: CRUDObject {
         imageURL <- (map["image"], AmazonURLTransform())
         startDate <- (map["startDate"], APIDateTransform())
         endData <- (map["startDate"], APIDateTransform())
-        externalURLString <- map["externalURL"]
+        externalURLString <- map["externalUrl"]
     }
     
     static func endpoint() -> String {

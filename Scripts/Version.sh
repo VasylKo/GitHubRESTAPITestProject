@@ -46,8 +46,8 @@ else
 	echo "#define ${PREFIX}BUILD_NUMBER ${BUILD_NUMBER}" > $1
 	echo "#define ${PREFIX}BUILD_HASH ${BUILD_HASH}" >> $1
     echo "#define ${PREFIX}MAJOR_VERSION ${MAJOR_VERSION}" >> $1
-    echo "#define ${PREFIX}MINOR_VERSION ${MAJOR_VERSION}.${BUILD_NUMBER}" >> $1
-    echo "#define ${PREFIX}VERSION() @\"${MAJOR_VERSION}.${BUILD_NUMBER}\"" >> $1
-    echo "Version: ${MAJOR_VERSION}.${BUILD_NUMBER}.${BUILD_HASH}"
+    echo "#define ${PREFIX}MINOR_VERSION ${MAJOR_VERSION} - ${BUILD_NUMBER}" >> $1
+    echo "#define ${PREFIX}VERSION() @\"${MAJOR_VERSION} - ${BUILD_NUMBER}\"" >> $1
+    echo "Version: ${MAJOR_VERSION} - ${BUILD_NUMBER}.${BUILD_HASH}"
 	find "${PROJECT_DIR}" -iname "*.plist" -maxdepth 1 -exec touch {} \;	
 fi
