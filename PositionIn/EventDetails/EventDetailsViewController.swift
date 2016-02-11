@@ -58,6 +58,10 @@ final class EventDetailsViewController: UIViewController {
         priceLabel.text = "\(startDate) - \(endDate)"
         eventImageView.setImageFromURL(imageURL, placeholder: image)
         
+        if event.location?.coordinates != nil {
+            self.dataSource.items = self.eventActionItems()
+            self.dataSource.configureTable(self.actionTableView)
+        }
     }
     
     private lazy var dataSource: EventDetailsDataSource = { [unowned self] in
@@ -66,19 +70,19 @@ final class EventDetailsViewController: UIViewController {
         return dataSource
         }()
     
-    
     private func eventActionItems() -> [[EventActionItem]] {
-        return [
-            [ // 0 section
-                EventActionItem(title: NSLocalizedString("Attend", comment: "Event action: Attend"), image: "eventAttend", action: .Attend),
-            ],
-            [ // 1 section
-                EventActionItem(title: NSLocalizedString("Send Message", comment: "Event action: Send Message"), image: "productSendMessage", action: .SendMessage),
-                EventActionItem(title: NSLocalizedString("Organizer Profile", comment: "Event action: Organizer Profile"), image: "productSellerProfile", action: .OrganizerProfile),
-                /*EventActionItem(title: NSLocalizedString("More Information", comment: "Event action: Terms and Information"), image: "productTerms&Info", action: .TermsAndInformation),
-                EventActionItem(title: NSLocalizedString("Navigate", comment: "Event action: Navigate"), image: "productNavigate", action: .Navigate)*/
-            ],
+        let zeroSection = [ // 0 section
+            EventActionItem(title: NSLocalizedString("Attend", comment: "Event action: Attend"), image: "eventAttend", action: .Attend)
         ]
+        
+        var firstSection = [ // 1 section
+            EventActionItem(title: NSLocalizedString("Send Message", comment: "Event action: Send Message"), image: "productSendMessage", action: .SendMessage),
+            EventActionItem(title: NSLocalizedString("Organizer Profile", comment: "Event action: Organizer Profile"), image: "productSellerProfile", action: .OrganizerProfile),]
+        if self.event?.location != nil {
+            firstSection.append(EventActionItem(title: NSLocalizedString("Navigate", comment: "Event action: Navigate"), image: "productNavigate", action: .Navigate))
+        }
+        
+        return [zeroSection, firstSection]
     }
     
     var objectId: CRUDObjectId?
@@ -145,7 +149,13 @@ extension EventDetailsViewController: EventDetailsActionConsumer {
                 }
                 return
             }
-
+        case .Navigate:
+            if let coordinates = self.event?.location?.coordinates {
+                OpenApplication.appleMap(with: coordinates)
+            } else {
+                Log.error?.message("coordinates missed")
+            }
+            return
         default:
             Log.warning?.message("Unhandled action: \(action)")
             return
