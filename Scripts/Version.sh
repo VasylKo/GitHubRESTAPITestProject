@@ -2,7 +2,7 @@
 
 echo "Get version ..."
 
-MAJOR_VERSION="${MINOR_VERSION}.${TEST_VARIABLE}"
+MAJOR_VERSION=$TEAMCITY_BUILD_VERSION
 
 if [ -z "${PROJECT_DIR}" ]; then
 	PROJECT_DIR=`pwd`
@@ -12,29 +12,29 @@ if [ -z "${PREFIX}" ]; then
 	PREFIX=""
 fi
 
-SVN_DIR="${PROJECT_DIR}/.svn"
-GIT_DIR="${PROJECT_DIR}/.git"
-
-if [ -d "${GIT_DIR}" ]; then
-	if [ -z "${GIT_BRANCH}" ]; then
-		GIT_BRANCH=`git rev-parse --abbrev-ref HEAD`
-	fi
-	
-	BUILD_NUMBER=`xcrun git rev-list ${GIT_BRANCH} | wc -l | tr -d ' '`
-	BUILD_HASH=`xcrun git rev-parse --short --verify ${GIT_BRANCH} | tr -d ' '`
-elif [ -d "${SVN_DIR}" ]; then
-	BUILD_NUMBER=`xcrun svnversion -nc "${PROJECT_DIR}" | sed -e 's/^[^:]*://;s/[A-Za-z]//' | tr -d ' '`
-	BUILD_HASH="${BUILD_NUMBER}"
-else
-    if [ -z "${BUILD_NUMBER}" ]; then
-        BUILD_NUMBER="1"
-    fi
-    if [ -z "${BUILD_VCS_NUMBER}" ]; then
-        BUILD_HASH="1"
-    else
-        BUILD_HASH="${BUILD_VCS_NUMBER}"
-    fi
-fi
+#SVN_DIR="${PROJECT_DIR}/.svn"
+#GIT_DIR="${PROJECT_DIR}/.git"
+#
+#if [ -d "${GIT_DIR}" ]; then
+#	if [ -z "${GIT_BRANCH}" ]; then
+#		GIT_BRANCH=`git rev-parse --abbrev-ref HEAD`
+#	fi
+#	
+#	BUILD_NUMBER=`xcrun git rev-list ${GIT_BRANCH} | wc -l | tr -d ' '`
+#	BUILD_HASH=`xcrun git rev-parse --short --verify ${GIT_BRANCH} | tr -d ' '`
+#elif [ -d "${SVN_DIR}" ]; then
+#	BUILD_NUMBER=`xcrun svnversion -nc "${PROJECT_DIR}" | sed -e 's/^[^:]*://;s/[A-Za-z]//' | tr -d ' '`
+    BUILD_HASH=$BUILD_NUMBER
+#else
+#    if [ -z "${BUILD_NUMBER}" ]; then
+#        BUILD_NUMBER="1"
+#    fi
+#    if [ -z "${BUILD_VCS_NUMBER}" ]; then
+#        BUILD_HASH="1"
+#    else
+#        BUILD_HASH="${BUILD_VCS_NUMBER}"
+#    fi
+#fi
 
 if [ -z "$1" ]; then
 	if [ "${BUILD_NUMBER}" == "${BUILD_HASH}" ]; then
