@@ -4,6 +4,10 @@ echo "Get version ..."
 
 MAJOR_VERSION=$TEAMCITY_BUILD_VERSION
 
+if [ -n "${MAJOR_VERSION}" ]; then
+MAJOR_VERSION="1.1.1"
+fi
+
 if [ -z "${PROJECT_DIR}" ]; then
 	PROJECT_DIR=`pwd`
 fi
