@@ -21,6 +21,7 @@ struct Product: CRUDObject {
     var photos: [PhotoInfo]?
     var location: Location?
     var imageURL: NSURL?
+    var externalURLString: String?
     var startDate: NSDate?
     var endData: NSDate?
     
@@ -74,6 +75,7 @@ struct Product: CRUDObject {
         imageURL <- (map["image"], AmazonURLTransform())
         startDate <- (map["startDate"], APIDateTransform())
         endData <- (map["startDate"], APIDateTransform())
+        externalURLString <- map["externalURL"]
     }
     
     static func endpoint() -> String {
