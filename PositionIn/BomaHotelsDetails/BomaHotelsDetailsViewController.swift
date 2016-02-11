@@ -46,6 +46,8 @@ final class BomaHotelsDetailsViewController: UIViewController {
                 return api().getBomaHotelsDetails(objectId)
                 }.onSuccess { [weak self] bomaHotel in
                     self?.didReceiveBomaHotelDetails(bomaHotel)
+                    self?.dataSource.items = (self?.bomaHotelAcionItems())!
+                    self?.dataSource.configureTable((self?.actionTableView)!)
             }
         default:
             Log.error?.message("Not enough data to load boma hotel")
@@ -69,7 +71,6 @@ final class BomaHotelsDetailsViewController: UIViewController {
         }
         
         let image = UIImage(named: "bomaHotelPlaceholder")
-        
         productImageView.setImageFromURL(imageURL, placeholder: image)
         if let coordinates = bomaHotel.location?.coordinates {
             self.productPinDistanceImageView.hidden = false
@@ -105,13 +106,22 @@ final class BomaHotelsDetailsViewController: UIViewController {
     
     
     private func bomaHotelAcionItems() -> [[BomaHotelActionItem]] {
-        let zeroSection = [BomaHotelActionItem(title: NSLocalizedString("Booking", comment: "BomaHotels"), image: "productBuyProduct", action: .Buy)]
-        var firstSection = [BomaHotelActionItem(title: NSLocalizedString("Send Message", comment: "BomaHotels"), image: "productSendMessage", action: .SendMessage),
-                            BomaHotelActionItem(title: NSLocalizedString("Organizer Profile", comment: "BomaHotels"), image: "productSellerProfile", action: .SellerProfile)]
-        if self.bomaHotel?.location != nil {
-            firstSection.append(BomaHotelActionItem(title: NSLocalizedString("Navigate", comment: "BomaHotels"), image: "productNavigate", action: .Navigate))
+        if self.bomaHotel?.bookingURL != nil {
+            let zeroSection = [BomaHotelActionItem(title: NSLocalizedString("Booking", comment: "BomaHotels"), image: "productBuyProduct", action: .Buy)]
+            var firstSection = [BomaHotelActionItem(title: NSLocalizedString("Send Message", comment: "BomaHotels"), image: "productSendMessage", action: .SendMessage),
+                BomaHotelActionItem(title: NSLocalizedString("Organizer Profile", comment: "BomaHotels"), image: "productSellerProfile", action: .SellerProfile)]
+            if self.bomaHotel?.location != nil {
+                firstSection.append(BomaHotelActionItem(title: NSLocalizedString("Navigate", comment: "BomaHotels"), image: "productNavigate", action: .Navigate))
+            }
+            return [zeroSection, firstSection]
+        } else {
+            var zeroSection = [BomaHotelActionItem(title: NSLocalizedString("Send Message", comment: "BomaHotels"), image: "productSendMessage", action: .SendMessage),
+                BomaHotelActionItem(title: NSLocalizedString("Organizer Profile", comment: "BomaHotels"), image: "productSellerProfile", action: .SellerProfile)]
+            if self.bomaHotel?.location != nil {
+                zeroSection.append(BomaHotelActionItem(title: NSLocalizedString("Navigate", comment: "BomaHotels"), image: "productNavigate", action: .Navigate))
+            }
+            return [zeroSection]
         }
-        return [zeroSection, firstSection]
     }
     
     @IBOutlet private weak var actionTableView: UITableView!
@@ -165,7 +175,7 @@ extension BomaHotelsDetailsViewController: BomaHotelsDetailsActionConsumer {
             return
         case .Buy:
             if let bookingURL = self.bomaHotel?.bookingURL {
-                UIApplication.sharedApplication().openURL(bookingURL)
+                OpenApplication.Safari(with: bookingURL)
             }
             return
         case .Navigate:
