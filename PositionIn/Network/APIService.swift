@@ -261,29 +261,6 @@ struct APIService {
         return getObject(endpoint)
     }
     
-    func createAmbulanceRequest(object: AmbulanceRequest) -> Future<AmbulanceRequest, NSError> {
-        let endpoint = AmbulanceRequest.endpoint()
-        typealias CRUDResultType = (Alamofire.Request, Future<AmbulanceRequest, NSError>)
-        let params = Mapper().toJSON(object)
-        return session().flatMap {
-            (token: AuthResponse.Token) -> Future<AmbulanceRequest, NSError> in
-            let request = self.updateRequest(token, endpoint: endpoint, method: .POST, params: params)
-             let (_, future): CRUDResultType = self.dataProvider.objectRequest(request)
-            return future
-        }
-    }
-    
-    func deleteAmbulanceRequest(objectId: CRUDObjectId) -> Future<Void, NSError> {
-        let endpoint = AmbulanceRequest.endpoint(objectId)
-        typealias CRUDResultType = (Alamofire.Request, Future<Void, NSError>)
-        return session().flatMap {
-            (token: AuthResponse.Token) -> Future<Void, NSError> in
-            let request = self.updateRequest(token, endpoint: endpoint, method: .DELETE)
-            let (_, future): CRUDResultType = self.dataProvider.jsonRequest(request, map: self.emptyResponseMapping(), validation: nil)
-            return future
-        }
-    }
-    
     func createCommunity(community object: Community) -> Future<Community, NSError> {
         let endpoint = Community.endpoint()
         return createObject(endpoint, object: object)
@@ -303,6 +280,31 @@ struct APIService {
         //TODO: hardcode, change on server endpoint update
         let endpoint = "/v1.0/community/\(communityId)/members"
         return updateCommand(endpoint, method:.DELETE)
+    }
+    
+    //MARK: - Ambulance - 
+    
+    func createAmbulanceRequest(object: AmbulanceRequest) -> Future<AmbulanceRequest, NSError> {
+        let endpoint = AmbulanceRequest.endpoint()
+        typealias CRUDResultType = (Alamofire.Request, Future<AmbulanceRequest, NSError>)
+        let params = Mapper().toJSON(object)
+        return session().flatMap {
+            (token: AuthResponse.Token) -> Future<AmbulanceRequest, NSError> in
+            let request = self.updateRequest(token, endpoint: endpoint, method: .POST, params: params)
+            let (_, future): CRUDResultType = self.dataProvider.objectRequest(request)
+            return future
+        }
+    }
+    
+    func deleteAmbulanceRequest(objectId: CRUDObjectId) -> Future<Void, NSError> {
+        let endpoint = AmbulanceRequest.endpoint(objectId)
+        typealias CRUDResultType = (Alamofire.Request, Future<Void, NSError>)
+        return session().flatMap {
+            (token: AuthResponse.Token) -> Future<Void, NSError> in
+            let request = self.updateRequest(token, endpoint: endpoint, method: .DELETE)
+            let (_, future): CRUDResultType = self.dataProvider.jsonRequest(request, map: self.emptyResponseMapping(), validation: nil)
+            return future
+        }
     }
     
     //MARK: - People -

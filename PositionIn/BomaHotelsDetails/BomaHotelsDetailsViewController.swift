@@ -113,12 +113,22 @@ final class BomaHotelsDetailsViewController: UIViewController {
             if self.bomaHotel?.location != nil {
                 firstSection.append(BomaHotelActionItem(title: NSLocalizedString("Navigate", comment: "BomaHotels"), image: "productNavigate", action: .Navigate))
             }
+            if self.bomaHotel?.links?.isEmpty == false || self.bomaHotel?.attachments?.isEmpty == false {
+                firstSection.append(BomaHotelActionItem(title: NSLocalizedString("More Information"), image: "productTerms&Info", action: .MoreInformation))
+            } else {
+                firstSection.append(BomaHotelActionItem(title: NSLocalizedString("No attachments"), image: "productTerms&Info", action: .MoreInformation))
+            }
             return [zeroSection, firstSection]
         } else {
             var zeroSection = [BomaHotelActionItem(title: NSLocalizedString("Send Message", comment: "BomaHotels"), image: "productSendMessage", action: .SendMessage),
                 BomaHotelActionItem(title: NSLocalizedString("Organizer Profile", comment: "BomaHotels"), image: "productSellerProfile", action: .SellerProfile)]
             if self.bomaHotel?.location != nil {
                 zeroSection.append(BomaHotelActionItem(title: NSLocalizedString("Navigate", comment: "BomaHotels"), image: "productNavigate", action: .Navigate))
+            }
+            if self.bomaHotel?.links?.isEmpty == false || self.bomaHotel?.attachments?.isEmpty == false {
+                zeroSection.append(BomaHotelActionItem(title: NSLocalizedString("More Information"), image: "productTerms&Info", action: .MoreInformation))
+            } else {
+                zeroSection.append(BomaHotelActionItem(title: NSLocalizedString("No attachments"), image: "productTerms&Info", action: .MoreInformation))
             }
             return [zeroSection]
         }
@@ -137,7 +147,7 @@ final class BomaHotelsDetailsViewController: UIViewController {
 
 extension BomaHotelsDetailsViewController {
     enum BomaHotelsDetailsAction: CustomStringConvertible {
-        case Buy, Navigate, ProductInventory, SellerProfile, SendMessage
+        case Buy, Navigate, ProductInventory, SellerProfile, SendMessage, MoreInformation
         
         var description: String {
             switch self {
@@ -151,6 +161,8 @@ extension BomaHotelsDetailsViewController {
                 return "Seller profile"
             case .SendMessage:
                 return "Send message"
+            case .MoreInformation:
+                return "More Information"
             }
         }
     }
@@ -183,6 +195,12 @@ extension BomaHotelsDetailsViewController: BomaHotelsDetailsActionConsumer {
                 OpenApplication.appleMap(with: coordinates)
             } else {
                 Log.error?.message("coordinates missed")
+            }
+            return
+        case .MoreInformation:
+            if self.bomaHotel?.links?.isEmpty == false || self.bomaHotel?.attachments?.isEmpty == false {
+                let moreInformationViewController = MoreInformationViewController(links: self.bomaHotel?.links, attachments: self.bomaHotel?.attachments)
+                self.navigationController?.pushViewController(moreInformationViewController, animated: true)
             }
             return
         default:
