@@ -34,7 +34,7 @@ final class AppConfiguration {
         case .Dev:
             baseURL = NSURL(string: "https://app-dev.positionin.com/api/")!
             amazonURL = NSURL(string: "https://pos-dev.s3.amazonaws.com/")!
-            xmppHostname = "app-dev.positionin.com"
+            xmppHostname = "chat-dev.positionin.com"
             googleAnalystLogLevel = GAILogLevel.None
             googleMapsKey = "AIzaSyDkUHOpFWNBDAW5Gu2I0E7iHe4FRWGyM6o"
         }
