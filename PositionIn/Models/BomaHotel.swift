@@ -54,7 +54,7 @@ struct BomaHotel: CRUDObject {
         photos <- map["photos"]
         location <- map["location"]
         imageURLString <- map["image"]
-        bookingURL <- (map["bookingLink"], URLTransform())
+        bookingURL <- (map["externalUrl"], URLTransform())
     }
     
     static func endpoint() -> String {
