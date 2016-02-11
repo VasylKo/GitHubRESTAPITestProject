@@ -175,7 +175,7 @@ extension AppDelegate {
             switch (error.domain, error.code) {
             case (baseErrorDomain, NetworkDataProvider.ErrorCodes.InvalidSessionError.rawValue):
                 self.sidebarViewController?.executeAction(.Login)
-                showError(NSLocalizedString("You are not logged in. Please login again"))
+                //showError(NSLocalizedString("You are not logged in. Please login again"))
             case (baseErrorDomain, NetworkDataProvider.ErrorCodes.TransferError.rawValue):
                 showWarning(error.localizedDescription)
             case (baseErrorDomain, _):
