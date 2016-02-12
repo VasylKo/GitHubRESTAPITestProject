@@ -42,7 +42,11 @@ final class MarketDetailsViewController: UIViewController {
             api().getUserProfile(author.objectId).flatMap { (profile: UserProfile) -> Future<Product, NSError> in
                 return api().getMarketDetails(objectId)
                 }.onSuccess { [weak self] product in
-                    self?.didReceiveProductDetails(product)
+                    if let strongSelf = self {
+                        strongSelf.didReceiveProductDetails(product)
+                        strongSelf.dataSource.items = strongSelf.productAcionItems()
+                        strongSelf.dataSource.configureTable(strongSelf.actionTableView)
+                    }
             }
         default:
             Log.error?.message("Not enough data to load product")
@@ -107,6 +111,11 @@ final class MarketDetailsViewController: UIViewController {
         if self.product?.location != nil {
             firstSection.append(MarketActionItem(title: NSLocalizedString("Navigate", comment: "Market"), image: "productNavigate", action: .Navigate))
         }
+        if self.product?.links?.isEmpty == false || self.product?.attachments?.isEmpty == false {
+            firstSection.append(MarketActionItem(title: NSLocalizedString("More Information"), image: "productTerms&Info", action: .MoreInformation))
+        } else {
+            firstSection.append(MarketActionItem(title: NSLocalizedString("No attachments"), image: "productTerms&Info", action: .MoreInformation))
+        }
         return [zeroSection, firstSection]
     }
     
@@ -123,7 +132,7 @@ final class MarketDetailsViewController: UIViewController {
 
 extension MarketDetailsViewController {
     enum MarketDetailsAction: CustomStringConvertible {
-        case Buy, SellerProfile, SendMessage, Navigate
+        case Buy, SellerProfile, SendMessage, Navigate, MoreInformation
         
         var description: String {
             switch self {
@@ -135,6 +144,8 @@ extension MarketDetailsViewController {
                 return "Send message"
             case .Navigate:
                 return "Navigate"
+            case .MoreInformation:
+                return "More Information"
             }
         }
     }
@@ -158,6 +169,12 @@ extension MarketDetailsViewController: MarketDetailsActionConsumer {
         case .SendMessage:
             if let userId = author?.objectId {
                 showChatViewController(userId)
+            }
+            return
+        case .MoreInformation:
+            if self.product?.links?.isEmpty == false || self.product?.attachments?.isEmpty == false {
+                let moreInformationViewController = MoreInformationViewController(links: self.product?.links, attachments: self.product?.attachments)
+                self.navigationController?.pushViewController(moreInformationViewController, animated: true)
             }
             return
         case .Navigate:

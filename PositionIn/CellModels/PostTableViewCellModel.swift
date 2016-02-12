@@ -15,6 +15,11 @@ struct PostLikesCountModel: TableViewCellModel {
     let actionConsumer: PostActionConsumer?
 }
 
+struct PostAttachmentsModel: TableViewCellModel {
+    let attachments: [Attachment]?
+    let links: [NSURL]?
+}
+
 struct PostInfoModel: TableViewCellModel {
     let firstLine: String?
     let secondLine: String?

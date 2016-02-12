@@ -28,7 +28,11 @@ final class EventDetailsViewController: UIViewController {
     private func reloadData() {
         if let objectId = objectId {
             api().getEvent(objectId).onSuccess { [weak self] event in
-                self?.didReceiveEventDetails(event)
+                if let strongSelf = self {
+                    strongSelf.didReceiveEventDetails(event)
+                    strongSelf.dataSource.items = strongSelf.eventActionItems()
+                    strongSelf.dataSource.configureTable(strongSelf.actionTableView)
+                }
             }
         }
     }
@@ -81,6 +85,11 @@ final class EventDetailsViewController: UIViewController {
         if self.event?.location != nil {
             firstSection.append(EventActionItem(title: NSLocalizedString("Navigate", comment: "Event action: Navigate"), image: "productNavigate", action: .Navigate))
         }
+        if self.event?.links?.isEmpty == false || self.event?.attachments?.isEmpty == false {
+            firstSection.append(EventActionItem(title: NSLocalizedString("More Information"), image: "productTerms&Info", action: .MoreInformation))
+        } else {
+            firstSection.append(EventActionItem(title: NSLocalizedString("No attachments"), image: "productTerms&Info", action: .MoreInformation))
+        }
         
         return [zeroSection, firstSection]
     }
@@ -101,7 +110,7 @@ final class EventDetailsViewController: UIViewController {
 
 extension EventDetailsViewController {
     enum EventDetailsAction: CustomStringConvertible {
-        case Attend, SendMessage, OrganizerProfile, TermsAndInformation, Navigate
+        case Attend, SendMessage, OrganizerProfile, TermsAndInformation, Navigate, MoreInformation
         
         var description: String {
             switch self {
@@ -115,6 +124,8 @@ extension EventDetailsViewController {
                 return "Terms & Information"
             case .Navigate:
                 return "Navigate"
+            case .MoreInformation:
+                return "More Information"
             }
         }
     }
@@ -149,6 +160,12 @@ extension EventDetailsViewController: EventDetailsActionConsumer {
                 }
                 return
             }
+        case .MoreInformation:
+            if self.event?.links?.isEmpty == false || self.event?.attachments?.isEmpty == false {
+                let moreInformationViewController = MoreInformationViewController(links: self.event?.links, attachments: self.event?.attachments)
+                self.navigationController?.pushViewController(moreInformationViewController, animated: true)
+            }
+            return
         case .Navigate:
             if let coordinates = self.event?.location?.coordinates {
                 OpenApplication.appleMap(with: coordinates)

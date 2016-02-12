@@ -23,6 +23,9 @@ struct Post: CRUDObject {
     var date: NSDate?
     var communityID: String?
     
+    var links : [NSURL]?
+    var attachments : [Attachment]?
+    
     init(objectId: CRUDObjectId = CRUDObjectInvalidId) {
         self.objectId = objectId
     }
@@ -48,7 +51,9 @@ struct Post: CRUDObject {
         author <- map["author"]
         comments <- map["comments"]
         communityID <- map["communityId"]
-        date <- (map["date"], APIDateTransform())        
+        date <- (map["date"], APIDateTransform())
+        links <- (map["links"], URLTransform())
+        attachments <- map["attachments"]
     }
     
     static func endpoint() -> String {

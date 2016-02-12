@@ -43,7 +43,11 @@ class EmergencyDetailsController: UIViewController {
             api().getUserProfile(author.objectId).flatMap { (profile: UserProfile) -> Future<Product, NSError> in
                 return api().getEmergencyDetails(objectId)
                 }.onSuccess { [weak self] product in
-                    self?.didReceiveProductDetails(product)
+                    if let strongSelf = self {
+                        strongSelf.didReceiveProductDetails(product)
+                        strongSelf.dataSource.items = strongSelf.productAcionItems()
+                        strongSelf.dataSource.configureTable(strongSelf.actionTableView)
+                    }
             }
         default:
             Log.error?.message("Not enough data to load product")
@@ -109,6 +113,11 @@ class EmergencyDetailsController: UIViewController {
         ]
         if self.product?.location != nil {
             firstSection.append(EmergencyActionItem(title: NSLocalizedString("Navigate", comment: "Emergency"), image: "productNavigate", action: .Navigate))
+        }
+        if self.product?.links?.isEmpty == false || self.product?.attachments?.isEmpty == false {
+            firstSection.append(EmergencyActionItem(title: NSLocalizedString("More Information"), image: "productTerms&Info", action: .MoreInformation))
+        } else {
+            firstSection.append(EmergencyActionItem(title: NSLocalizedString("No attachments"), image: "productTerms&Info", action: .MoreInformation))
         }
         
         return [zeroSection, firstSection]
@@ -177,6 +186,10 @@ extension EmergencyDetailsController: EmergencyDetailsActionConsumer {
         case .MemberProfile:
             segue = .ShowSellerProfile
         case .MoreInformation:
+            if self.product?.links?.isEmpty == false || self.product?.attachments?.isEmpty == false {
+                let moreInformationViewController = MoreInformationViewController(links: self.product?.links, attachments: self.product?.attachments)
+                self.navigationController?.pushViewController(moreInformationViewController, animated: true)
+            }
             return
         }
         performSegue(segue)

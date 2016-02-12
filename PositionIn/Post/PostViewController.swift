@@ -14,6 +14,7 @@ import BrightFutures
 
 protocol PostActionConsumer: class {
     func showProfileScreen(userId: CRUDObjectId)
+    func showAttachments(links: [NSURL]?, attachments: [Attachment]?)
     func likePost()
 }
 
@@ -22,7 +23,7 @@ protocol PostActionProvider {
 }
 
 final class PostViewController: UIViewController, UITextFieldDelegate {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         dataSource.configureTable(tableView)
@@ -44,7 +45,7 @@ final class PostViewController: UIViewController, UITextFieldDelegate {
     private func reloadPost() {
         if let objectId = objectId {
             api().getPost(objectId).onSuccess { [weak self] post in
-                var post = post                
+                var post = post
                 api().getPostComments(objectId).onSuccess(callback: { [weak self] response in
                     if let comments = response.items {
                         post.comments = comments
@@ -53,8 +54,8 @@ final class PostViewController: UIViewController, UITextFieldDelegate {
                     self?.dataSource.setPost(post)
                     self?.tableView.reloadData()
                     self?.tableView.layoutIfNeeded();
-                })
-
+                    })
+                
             }
         }
     }
@@ -97,8 +98,8 @@ final class PostViewController: UIViewController, UITextFieldDelegate {
         dataSource.parentViewController = self
         return dataSource
         }()
-
-
+    
+    
     @IBOutlet weak var tableView: TableView!
     @IBOutlet weak var enterCommentField: UITextField!
     @IBOutlet weak var enterCommentFieldBottomSpaceConstraint: NSLayoutConstraint!
@@ -111,10 +112,10 @@ extension PostViewController {
         guard let text = textField.text where text.characters.count > 0, let post = post else  {
             return true
         }
-
+        
         var comment = Comment()
         comment.text = text
-                
+        
         api().createPostComment(post.objectId, object: comment).onSuccess {[weak self, weak textField] comment in
             self?.reloadPost()
             textField?.text = nil
@@ -125,6 +126,12 @@ extension PostViewController {
 }
 
 extension PostViewController: PostActionConsumer {
+    
+    func showAttachments(links: [NSURL]?, attachments: [Attachment]?) {
+        let moreInformationViewController = MoreInformationViewController(links: links, attachments: attachments)
+        self.navigationController?.pushViewController(moreInformationViewController, animated: true)
+    }
+    
     func showProfileScreen(userId: CRUDObjectId) {
         let profileController = Storyboards.Main.instantiateUserProfileViewController()
         profileController.objectId = userId
@@ -188,10 +195,14 @@ extension PostViewController {
         
         func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
             tableView.deselectRowAtIndexPath(indexPath, animated: true)
-            if  let actionConsumer = parentViewController as? PostActionConsumer,
-                let model = self.tableView(tableView, modelForIndexPath: indexPath) as? PostInfoModel,
-                let userId = model.userId {
-                    actionConsumer.showProfileScreen(userId)
+            if  let actionConsumer = parentViewController as? PostActionConsumer {
+                if let model = self.tableView(tableView, modelForIndexPath: indexPath) as? PostInfoModel,
+                    let userId = model.userId {
+                        actionConsumer.showProfileScreen(userId)
+                }
+                if let model = self.tableView(tableView, modelForIndexPath: indexPath) as? PostAttachmentsModel {
+                    actionConsumer.showAttachments(model.links, attachments: model.attachments)
+                }
             }
         }
     }
