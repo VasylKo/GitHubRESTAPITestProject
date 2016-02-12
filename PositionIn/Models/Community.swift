@@ -15,8 +15,9 @@ struct Community: CRUDObject {
     var communityDescription: String?
     var avatar: NSURL?
     var closed: Bool? = nil
-    
     var shops: [ObjectInfo]?
+    var links : [NSURL]?
+    var attachments : [Attachment]?
 
     /*
     "members": {
@@ -82,6 +83,8 @@ struct Community: CRUDObject {
         membersCount <- map["members.count"]
         postsCount <- map["posts.count"]
         eventsCount <- map["events.count"]
+        links <- (map["links"], URLTransform())
+        attachments <- map["attachments"]
     }
     
     static func endpoint() -> String {
