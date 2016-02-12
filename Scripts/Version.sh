@@ -4,6 +4,10 @@ echo "Get version ..."
 
 MAJOR_VERSION="${MAJOR.VERSION}.${VAR_GLOBAL}.${MINOR_VERSION}.${VAR_LOCAL}.${fix.number}"
 
+if [ -z "${MAJOR_VERSION}" ]; then
+MAJOR_VERSION="1.1.1"
+fi
+
 if [ -z "${PROJECT_DIR}" ]; then
 	PROJECT_DIR=`pwd`
 fi
