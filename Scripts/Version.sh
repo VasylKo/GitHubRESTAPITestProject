@@ -2,7 +2,7 @@
 
 echo "Get version ..."
 
-MAJOR_VERSION="${VAR_GLOBAL}.${VAR_LOCAL}"
+MAJOR_VERSION="${MAJOR.VERSION}.${VAR_GLOBAL}.${MINOR_VERSION}.${VAR_LOCAL}.${fix.number}"
 
 if [ -z "${PROJECT_DIR}" ]; then
 	PROJECT_DIR=`pwd`
