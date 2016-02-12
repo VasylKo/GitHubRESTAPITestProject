@@ -292,7 +292,7 @@ struct APIService {
             (token: AuthResponse.Token) -> Future<AmbulanceRequest, NSError> in
             let request = self.updateRequest(token, endpoint: endpoint, method: .POST, params: params)
             let (_, future): CRUDResultType = self.dataProvider.objectRequest(request)
-            return future
+            return self.handleFailure(future)
         }
     }
     
@@ -303,7 +303,7 @@ struct APIService {
             (token: AuthResponse.Token) -> Future<Void, NSError> in
             let request = self.updateRequest(token, endpoint: endpoint, method: .DELETE)
             let (_, future): CRUDResultType = self.dataProvider.jsonRequest(request, map: self.emptyResponseMapping(), validation: nil)
-            return future
+            return self.handleFailure(future)
         }
     }
     
