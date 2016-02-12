@@ -21,6 +21,8 @@ struct Event: CRUDObject {
     var participants: Int? = 0
     var author: CRUDObjectId?
     var imageURLString: String?
+    var links : [NSURL]?
+    var attachments : [Attachment]?
     
 /* 
     TODO:
@@ -66,8 +68,6 @@ struct Event: CRUDObject {
     
 */
     
-    
-    
     init(objectId: CRUDObjectId = CRUDObjectInvalidId) {
         self.objectId = objectId
     }
@@ -83,7 +83,6 @@ struct Event: CRUDObject {
     }
     
     mutating func mapping(map: Map) {
-        
         objectId <- (map["id"], CRUDObjectIdTransform())
         name <- map["name"]
         text <- map["description"]
@@ -95,6 +94,8 @@ struct Event: CRUDObject {
         participants <- map["numOfParticipants"]
         author <- (map["author"], CRUDObjectIdTransform())
         imageURLString <- map["image"]
+        links <- (map["links"], URLTransform())
+        attachments <- map["attachments"]
     }
     
     static func endpoint() -> String {
