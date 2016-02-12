@@ -45,9 +45,11 @@ final class BomaHotelsDetailsViewController: UIViewController {
             api().getUserProfile(author.objectId).flatMap { (profile: UserProfile) -> Future<BomaHotel, NSError> in
                 return api().getBomaHotelsDetails(objectId)
                 }.onSuccess { [weak self] bomaHotel in
-                    self?.didReceiveBomaHotelDetails(bomaHotel)
-                    self?.dataSource.items = (self?.bomaHotelAcionItems())!
-                    self?.dataSource.configureTable((self?.actionTableView)!)
+                    if let strongSelf = self {
+                        strongSelf.didReceiveBomaHotelDetails(bomaHotel)
+                        strongSelf.dataSource.items = strongSelf.bomaHotelAcionItems()
+                        strongSelf.dataSource.configureTable(strongSelf.actionTableView)
+                    }
             }
         default:
             Log.error?.message("Not enough data to load boma hotel")
@@ -106,12 +108,12 @@ final class BomaHotelsDetailsViewController: UIViewController {
     
     
     private func bomaHotelAcionItems() -> [[BomaHotelActionItem]] {
-        var zeroSection, firstSection
+        var zeroSection : [BomaHotelActionItem] = []
         if self.bomaHotel?.bookingURL != nil {
-            zeroSection = [BomaHotelActionItem(title: NSLocalizedString("Booking", comment: "BomaHotels"), image: "productBuyProduct", action: .Buy)]
+             zeroSection.append(BomaHotelActionItem(title: NSLocalizedString("Booking", comment: "BomaHotels"), image: "productBuyProduct", action: .Buy))
         }
         
-        firstSection = [BomaHotelActionItem(title: NSLocalizedString("Send Message", comment: "BomaHotels"), image: "productSendMessage", action: .SendMessage),
+        var firstSection = [BomaHotelActionItem(title: NSLocalizedString("Send Message", comment: "BomaHotels"), image: "productSendMessage", action: .SendMessage),
             BomaHotelActionItem(title: NSLocalizedString("Organizer Profile", comment: "BomaHotels"), image: "productSellerProfile", action: .SellerProfile)]
         if self.bomaHotel?.location != nil {
             firstSection.append(BomaHotelActionItem(title: NSLocalizedString("Navigate", comment: "BomaHotels"), image: "productNavigate", action: .Navigate))

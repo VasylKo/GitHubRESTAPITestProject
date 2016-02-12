@@ -24,6 +24,8 @@ struct Product: CRUDObject {
     var externalURLString: String?
     var startDate: NSDate?
     var endData: NSDate?
+    var links : [NSURL]?
+    var attachments : [Attachment]?
     
 /*
     //TODO:
@@ -76,6 +78,8 @@ struct Product: CRUDObject {
         startDate <- (map["startDate"], APIDateTransform())
         endData <- (map["startDate"], APIDateTransform())
         externalURLString <- map["externalUrl"]
+        links <- (map["links"], URLTransform())
+        attachments <- map["attachments"]
     }
     
     static func endpoint() -> String {
