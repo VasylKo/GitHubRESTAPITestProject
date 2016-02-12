@@ -106,31 +106,26 @@ final class BomaHotelsDetailsViewController: UIViewController {
     
     
     private func bomaHotelAcionItems() -> [[BomaHotelActionItem]] {
+        var zeroSection, firstSection
         if self.bomaHotel?.bookingURL != nil {
-            let zeroSection = [BomaHotelActionItem(title: NSLocalizedString("Booking", comment: "BomaHotels"), image: "productBuyProduct", action: .Buy)]
-            var firstSection = [BomaHotelActionItem(title: NSLocalizedString("Send Message", comment: "BomaHotels"), image: "productSendMessage", action: .SendMessage),
-                BomaHotelActionItem(title: NSLocalizedString("Organizer Profile", comment: "BomaHotels"), image: "productSellerProfile", action: .SellerProfile)]
-            if self.bomaHotel?.location != nil {
-                firstSection.append(BomaHotelActionItem(title: NSLocalizedString("Navigate", comment: "BomaHotels"), image: "productNavigate", action: .Navigate))
-            }
-            if self.bomaHotel?.links?.isEmpty == false || self.bomaHotel?.attachments?.isEmpty == false {
-                firstSection.append(BomaHotelActionItem(title: NSLocalizedString("More Information"), image: "productTerms&Info", action: .MoreInformation))
-            } else {
-                firstSection.append(BomaHotelActionItem(title: NSLocalizedString("No attachments"), image: "productTerms&Info", action: .MoreInformation))
-            }
+            zeroSection = [BomaHotelActionItem(title: NSLocalizedString("Booking", comment: "BomaHotels"), image: "productBuyProduct", action: .Buy)]
+        }
+        
+        firstSection = [BomaHotelActionItem(title: NSLocalizedString("Send Message", comment: "BomaHotels"), image: "productSendMessage", action: .SendMessage),
+            BomaHotelActionItem(title: NSLocalizedString("Organizer Profile", comment: "BomaHotels"), image: "productSellerProfile", action: .SellerProfile)]
+        if self.bomaHotel?.location != nil {
+            firstSection.append(BomaHotelActionItem(title: NSLocalizedString("Navigate", comment: "BomaHotels"), image: "productNavigate", action: .Navigate))
+        }
+        if self.bomaHotel?.links?.isEmpty == false || self.bomaHotel?.attachments?.isEmpty == false {
+            firstSection.append(BomaHotelActionItem(title: NSLocalizedString("More Information"), image: "productTerms&Info", action: .MoreInformation))
+        } else {
+            firstSection.append(BomaHotelActionItem(title: NSLocalizedString("No attachments"), image: "productTerms&Info", action: .MoreInformation))
+        }
+        
+        if zeroSection.isEmpty == false {
             return [zeroSection, firstSection]
         } else {
-            var zeroSection = [BomaHotelActionItem(title: NSLocalizedString("Send Message", comment: "BomaHotels"), image: "productSendMessage", action: .SendMessage),
-                BomaHotelActionItem(title: NSLocalizedString("Organizer Profile", comment: "BomaHotels"), image: "productSellerProfile", action: .SellerProfile)]
-            if self.bomaHotel?.location != nil {
-                zeroSection.append(BomaHotelActionItem(title: NSLocalizedString("Navigate", comment: "BomaHotels"), image: "productNavigate", action: .Navigate))
-            }
-            if self.bomaHotel?.links?.isEmpty == false || self.bomaHotel?.attachments?.isEmpty == false {
-                zeroSection.append(BomaHotelActionItem(title: NSLocalizedString("More Information"), image: "productTerms&Info", action: .MoreInformation))
-            } else {
-                zeroSection.append(BomaHotelActionItem(title: NSLocalizedString("No attachments"), image: "productTerms&Info", action: .MoreInformation))
-            }
-            return [zeroSection]
+            return [firstSection]
         }
     }
     
