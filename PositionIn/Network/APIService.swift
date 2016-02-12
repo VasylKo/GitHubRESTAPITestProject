@@ -412,7 +412,7 @@ struct APIService {
         }
         
         if let communities = seachFilter.communities {
-            params.append("communityId", value: communities)
+            params.append("communities", value: communities)
         }
         
         return session().flatMap {
