@@ -2,7 +2,7 @@
 
 echo "Get version ..."
 
-MAJOR_VERSION="${major.version}.${minor.version}.${fix.number}"
+MAJOR_VERSION=$MINOR_VERSION
 
 if [ -z "${MAJOR_VERSION}" ]; then
     MAJOR_VERSION="1.1.1"
