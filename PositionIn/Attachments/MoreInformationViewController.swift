@@ -50,7 +50,14 @@ class MoreInformationViewController : XLFormViewController {
                 rowDescriptor.cellConfig["textLabel.text"] = attachment.name
                 rowDescriptor.cellConfig["textLabel.textAlignment"] = Int(0)
                 rowDescriptor.cellConfig["textLabel.textColor"] = UIColor.blackColor()
-                rowDescriptor.cellConfig["imageView.image"] = UIImage(named: "home_news")
+                rowDescriptor.cellConfig["textLabel.tintColor"] = UIScheme.mainThemeColor
+                
+                if attachment.type?.containsString("pdf") == true {
+                    rowDescriptor.cellConfig["imageView.image"] = UIImage(named: "ic_pdf_attachment")
+                } else {
+                    rowDescriptor.cellConfig["imageView.image"] = UIImage(named: "ic_image_attachment")
+                }
+
                 rowDescriptor.action.formBlock =  { _ in
                     if let indexPath = self.tableView.indexPathForSelectedRow {
                         self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
