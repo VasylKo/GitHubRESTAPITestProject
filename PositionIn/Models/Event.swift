@@ -23,6 +23,7 @@ struct Event: CRUDObject {
     var imageURLString: String?
     var links : [NSURL]?
     var attachments : [Attachment]?
+    var isAttending: Bool?
     
 /* 
     TODO:
@@ -96,6 +97,7 @@ struct Event: CRUDObject {
         imageURLString <- map["image"]
         links <- (map["links"], URLTransform())
         attachments <- map["attachments"]
+        isAttending <- map["isAttending"]
     }
     
     static func endpoint() -> String {
@@ -104,6 +106,10 @@ struct Event: CRUDObject {
     
     static func endpoint(eventId: CRUDObjectId) -> String {
         return (Event.endpoint() as NSString).stringByAppendingPathComponent("\(eventId)")
+    }
+    
+    static func endpointAttend(eventId: CRUDObjectId) -> String {
+        return (Event.endpoint() as NSString).stringByAppendingPathComponent("\(eventId)/members")
     }
     
     static func userEventsEndpoint(userId: CRUDObjectId) -> String {

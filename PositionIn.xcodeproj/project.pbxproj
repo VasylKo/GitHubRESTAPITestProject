@@ -134,6 +134,8 @@
 		D118A2AB1C0FBC380020B363 /* PositionIn.CardTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D118A2A91C0FBC380020B363 /* PositionIn.CardTableViewCell.xib */; };
 		D118A2AD1C0FBDF50020B363 /* CardItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D118A2AC1C0FBDF50020B363 /* CardItem.swift */; };
 		D12EDEC71BFF4F0D00FB6245 /* PhoneVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D12EDEC61BFF4F0D00FB6245 /* PhoneVerificationViewController.swift */; };
+		D13039FB1C721960004B673F /* AttendEventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D13039F91C721960004B673F /* AttendEventCell.swift */; };
+		D13039FC1C721960004B673F /* PositionIn.AttendEventCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D13039FA1C721960004B673F /* PositionIn.AttendEventCell.xib */; };
 		D1379E8D1C2A98710041AA4E /* ExploreCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1379E8B1C2A98710041AA4E /* ExploreCardCell.swift */; };
 		D1379E8E1C2A98710041AA4E /* PositionIn.ExploreCardCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1379E8C1C2A98710041AA4E /* PositionIn.ExploreCardCell.xib */; };
 		D1379E901C2AC58F0041AA4E /* ExploreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1379E8F1C2AC58F0041AA4E /* ExploreViewController.swift */; };
@@ -638,6 +640,8 @@
 		D118A2A91C0FBC380020B363 /* PositionIn.CardTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.CardTableViewCell.xib; sourceTree = "<group>"; };
 		D118A2AC1C0FBDF50020B363 /* CardItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardItem.swift; sourceTree = "<group>"; };
 		D12EDEC61BFF4F0D00FB6245 /* PhoneVerificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhoneVerificationViewController.swift; sourceTree = "<group>"; };
+		D13039F91C721960004B673F /* AttendEventCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttendEventCell.swift; sourceTree = "<group>"; };
+		D13039FA1C721960004B673F /* PositionIn.AttendEventCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.AttendEventCell.xib; sourceTree = "<group>"; };
 		D1379E8B1C2A98710041AA4E /* ExploreCardCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExploreCardCell.swift; sourceTree = "<group>"; };
 		D1379E8C1C2A98710041AA4E /* PositionIn.ExploreCardCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.ExploreCardCell.xib; sourceTree = "<group>"; };
 		D1379E8F1C2AC58F0041AA4E /* ExploreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExploreViewController.swift; sourceTree = "<group>"; };
@@ -1952,6 +1956,8 @@
 				E60F91311BE2CA2F005F416A /* BadgeView.h */,
 				E60F91321BE2CA2F005F416A /* BadgeView.m */,
 				E63201711B984E2D0066C62E /* PositionIn.DescriptionTableViewCell.xib */,
+				D13039F91C721960004B673F /* AttendEventCell.swift */,
+				D13039FA1C721960004B673F /* PositionIn.AttendEventCell.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -3564,6 +3570,7 @@
 				D1F1FF261C22F384006D2E75 /* PositionIn.VolunteerDetailsViewController.xib in Resources */,
 				CD0FCC2F1C69ECD800AFD36C /* TotalCell.xib in Resources */,
 				CDEDD96C1C45033C00396594 /* PostToContainerViewController.xib in Resources */,
+				D13039FC1C721960004B673F /* PositionIn.AttendEventCell.xib in Resources */,
 				CD21EA551C68E89B00E50909 /* MPesaIndicatorView.xib in Resources */,
 				E69420FF1B665F5100F34F06 /* PositionIn.ProductDetailsViewController.xib in Resources */,
 				D1FD854C1C1EFE0F00C2E87B /* PositionIn.MarketDetailsViewController.xib in Resources */,
@@ -3957,6 +3964,7 @@
 				E6A869F21B60FF0500797D16 /* CRUDObject.swift in Sources */,
 				D1B1F1E21C6B194E00D43A3B /* MPesaPayment.swift in Sources */,
 				D153AB841C11FA9B00DFB5C9 /* AmbulanceRequest.swift in Sources */,
+				D13039FB1C721960004B673F /* AttendEventCell.swift in Sources */,
 				D1379E901C2AC58F0041AA4E /* ExploreViewController.swift in Sources */,
 				E60EBF761B8EF9B50014B6ED /* DataTransforms.swift in Sources */,
 				50F730591BBBE86A008D3D94 /* CommentCell.swift in Sources */,
@@ -4152,6 +4160,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4223,7 +4232,7 @@
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -D DEBUG -D \"STAGING_COPY_ENV\"";
 				PRODUCT_BUNDLE_IDENTIFIER = com.positionin.dev01;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "28e36433-baa3-48c1-ab40-ea63a0d51d51";
 				STRIP_INSTALLED_PRODUCT = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "PositionIn/PositionIn-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -4350,6 +4359,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Media Applications ltd";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Media Applications ltd";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4597,7 +4607,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: John Smith (YQDELLEP82)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -4670,7 +4680,7 @@
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -D DEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = com.positionin.dev01;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "4090597b-3616-4b1a-bf12-4db79621e1df";
 				STRIP_INSTALLED_PRODUCT = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "PositionIn/PositionIn-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -4683,8 +4693,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "Apple Production IOS Push Services: com.positionin.dev01";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Production IOS Push Services: com.positionin.dev01";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Media Applications ltd";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4841,6 +4851,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -5104,7 +5115,7 @@
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -D \"STAGING_ENV\"";
 				PRODUCT_BUNDLE_IDENTIFIER = com.positionin.dev01;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "28e36433-baa3-48c1-ab40-ea63a0d51d51";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "PositionIn/PositionIn-Bridging-Header.h";
 			};
 			name = StagingRelease;
@@ -5226,6 +5237,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -5415,7 +5427,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Media Applications ltd";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Media Applications ltd";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -5488,7 +5500,7 @@
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -D \"PROD_ENV\"";
 				PRODUCT_BUNDLE_IDENTIFIER = com.positionin.dev01;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "6ac14aea-4af0-4175-a35d-6ddfa940a94a";
+				PROVISIONING_PROFILE = "9a031cc8-1c31-4a42-bd96-a2c75c3e97a6";
 				SWIFT_OBJC_BRIDGING_HEADER = "PositionIn/PositionIn-Bridging-Header.h";
 			};
 			name = ProdRelease;
