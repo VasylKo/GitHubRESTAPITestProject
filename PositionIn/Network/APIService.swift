@@ -210,6 +210,12 @@ struct APIService {
         return getObject(endpoint)
     }
     
+    func attendEvent(objectId: CRUDObjectId, attend: Bool) -> Future<Void, NSError> {
+        let method: Alamofire.Method = attend ? Method.POST : Method.DELETE
+        let endpoint = Event.endpointAttend(objectId)
+        return updateCommand(endpoint, method: method)
+    }
+    
     //MARK: - Products -
     
     func getUserProducts(userId: CRUDObjectId, page: Page) -> Future<CollectionResponse<Product>, NSError> {

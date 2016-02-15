@@ -75,8 +75,13 @@ final class EventDetailsViewController: UIViewController {
         }()
     
     private func eventActionItems() -> [[EventActionItem]] {
+        var isAttend = false
+        if let attend = self.event?.isAttending {
+            isAttend = attend
+        }
         let zeroSection = [ // 0 section
-            EventActionItem(title: NSLocalizedString("Attend", comment: "Event action: Attend"), image: "eventAttend", action: .Attend)
+            EventActionItem(title: NSLocalizedString("Attend", comment: "Event action: Attend"), image: "eventAttend", attend:isAttend ,
+                action: .Attend)
         ]
         
         var firstSection = [ // 1 section
@@ -134,7 +139,16 @@ extension EventDetailsViewController {
     struct EventActionItem {
         let title: String
         let image: String
+        var attend: Bool = false
         let action: EventDetailsAction
+        
+        
+        init(title: String, image: String, attend: Bool = false, action: EventDetailsAction) {
+            self.title = title
+            self.image = image
+            self.attend = attend
+            self.action = action
+        }
     }
 }
 
@@ -153,7 +167,16 @@ extension EventDetailsViewController: EventDetailsActionConsumer {
             }
         case .Attend :
             if api().isUserAuthorized() {
-                //TODO: need implement
+                var isAttend = false
+                if let attend = self.event?.isAttending {
+                    isAttend = attend
+                }
+                if let event = self.event {
+                    api().attendEvent(event.objectId, attend:!isAttend).onSuccess(callback: {
+                        self.reloadData()
+                    })
+                }
+
             } else {
                 api().logout().onComplete {[weak self] _ in
                     self?.sideBarController?.executeAction(.Login)
@@ -199,12 +222,24 @@ extension EventDetailsViewController {
         }
         
         @objc override func tableView(tableView: UITableView, reuseIdentifierForIndexPath indexPath: NSIndexPath) -> String {
-            return ActionCell.reuseId()
+            if indexPath.section == 0 {
+                return AttendEventCell.reuseId()
+            }
+            else {
+                return ActionCell.reuseId()
+            }
         }
         
         override func tableView(tableView: UITableView, modelForIndexPath indexPath: NSIndexPath) -> TableViewCellModel {
             let item = items[indexPath.section][indexPath.row]
-            let model = TableViewCellImageTextModel(title: item.title, imageName: item.image)
+            var model: TableViewCellModel
+            if indexPath.section == 0 {
+                model = TableViewCellAttendEventModel(attendEvent: item.attend)
+            }
+            else {
+                model = TableViewCellImageTextModel(title: item.title, imageName: item.image)
+            }
+
             return model
         }
         
@@ -216,7 +251,7 @@ extension EventDetailsViewController {
         }
         
         override func nibCellsId() -> [String] {
-            return [ActionCell.reuseId()]
+            return [ActionCell.reuseId(), AttendEventCell.reuseId()]
         }
         
         func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -228,5 +263,3 @@ extension EventDetailsViewController {
         }
     }
 }
-
-
