@@ -12,7 +12,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="49.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <switch opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="qa8-HG-dVt">
@@ -34,6 +34,7 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="attendEventLabel" destination="7xN-np-O1J" id="6AJ-5q-dh4"/>
                 <outlet property="attendEventSwitchControl" destination="qa8-HG-dVt" id="13P-rn-C8t"/>
             </connections>
         </tableViewCell>

@@ -76,11 +76,13 @@ final class EventDetailsViewController: UIViewController {
     
     private func eventActionItems() -> [[EventActionItem]] {
         var isAttend = false
+        var title = "Attend"
         if let attend = self.event?.isAttending {
             isAttend = attend
+            title = attend ? "Attending" : "Attend"
         }
         let zeroSection = [ // 0 section
-            EventActionItem(title: NSLocalizedString("Attend", comment: "Event action: Attend"), image: "eventAttend", attend:isAttend ,
+            EventActionItem(title: NSLocalizedString(title, comment: "Event action: Attend"), image: "eventAttend", attend:isAttend ,
                 action: .Attend)
         ]
         
@@ -234,7 +236,7 @@ extension EventDetailsViewController {
             let item = items[indexPath.section][indexPath.row]
             var model: TableViewCellModel
             if indexPath.section == 0 {
-                model = TableViewCellAttendEventModel(attendEvent: item.attend)
+                model = TableViewCellAttendEventModel(title: item.title, attendEvent: item.attend)
             }
             else {
                 model = TableViewCellImageTextModel(title: item.title, imageName: item.image)

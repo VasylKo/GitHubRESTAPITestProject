@@ -27,8 +27,10 @@ public struct TableViewCellTextModel: TableViewCellModel {
 
 public struct TableViewCellAttendEventModel: TableViewCellModel {
     public let attendEvent: Bool
+    public let title: String
     
-    public init(attendEvent: Bool) {
+    public init(title: String, attendEvent: Bool) {
+        self.title = title
         self.attendEvent = attendEvent
     }
 }

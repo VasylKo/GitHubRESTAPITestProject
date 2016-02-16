@@ -14,7 +14,9 @@ class AttendEventCell: TableViewCell {
         let m = model as? TableViewCellAttendEventModel
         assert(m != nil, "Invalid model passed")
         self.attendEventSwitchControl.setOn(m!.attendEvent, animated: false)
+        self.attendEventLabel.text = m!.title
     }
     
+    @IBOutlet private weak var attendEventLabel: UILabel!
     @IBOutlet private weak var attendEventSwitchControl: UISwitch!
 }
