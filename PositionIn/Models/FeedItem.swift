@@ -22,7 +22,7 @@ struct FeedItem: CRUDObject {
     var donations: Float?
     var startDate: NSDate?
     var endDate: NSDate?
-    var author: ObjectInfo?
+    var author: UserInfo?
     var community: CRUDObjectId = CRUDObjectInvalidId
     var date: NSDate?
     var image: NSURL?
