@@ -50,6 +50,12 @@ final class BrowseListViewController: UIViewController, BrowseActionProducer, Br
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
 
+        if let fromViewController = self.navigationController?.transitionCoordinator()?.viewControllerForKey(UITransitionContextFromViewControllerKey) {
+            if self.navigationController?.viewControllers.contains(fromViewController) == false {
+                self.reloadData()
+            }
+        }
+        
         //TODO: hot fix for distance 
         let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(1 * Double(NSEC_PER_SEC)))
         dispatch_after(delayTime, dispatch_get_main_queue()) { [weak self] in
