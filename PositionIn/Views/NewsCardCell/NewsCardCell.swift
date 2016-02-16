@@ -38,6 +38,10 @@ class NewsCardCell: TableViewCell {
         if let numOfComments = m!.numOfComments {
             commentsLabel.text = String(numOfComments)
         }
+        
+        if let text = m!.text {
+            self.newsTextLabel.text = text
+        }
     }
     
     @IBOutlet weak var likesLabel: UILabel!
@@ -49,6 +53,7 @@ class NewsCardCell: TableViewCell {
     @IBOutlet private weak var infoLabel: UILabel!
     @IBOutlet private weak var detailsLabel: UILabel!
     @IBOutlet private weak var feedItemLogoImageView: UIImageView!
+    @IBOutlet private weak var newsTextLabel: UILabel!
     
     override func prepareForReuse() {
         super.prepareForReuse()

@@ -40,6 +40,7 @@ struct FeedItemCellModelFactory {
                     title: feedItem.name,
                     details: feedItem.author?.title,
                     info: nil,
+                    text: feedItem.text,
                     price: feedItem.donations,
                     imageURL: feedItem.image,
                     location: feedItem.location,
@@ -115,6 +116,7 @@ struct FeedItemCellModelFactory {
                 title: feedItem.name,
                 details: feedItem.details,
                 info: feedItem.text,
+                text: feedItem.text,
                 imageURL: feedItem.image,
                 badge: feedItem.price.map {
                     let newValue = $0 as Float
