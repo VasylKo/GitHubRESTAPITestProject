@@ -32,7 +32,7 @@ final class BrowseMapViewController: UIViewController, BrowseActionProducer, Bro
     
     var browseMode: BrowseModeTabbarViewController.BrowseMode = .ForYou
     
-    let visibleItemTypes: [FeedItem.ItemType] = [.Project, .Emergency, .Training, .News]
+    let visibleItemTypes: [FeedItem.ItemType] = [.Project, .Emergency, .Training, .News, .Event]
     
     var filter = SearchFilter.currentFilter
     
