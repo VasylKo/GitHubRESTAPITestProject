@@ -18,10 +18,8 @@ struct PostCellModelFactory {
         if let urlString = post.photoURL {
             firstSection.append(TableViewCellURLModel(url: urlString))
         }
-        
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
-        let date: String? = post.date.map { dateFormatter.stringFromDate($0) }
+
+        let date: String? = post.date?.formattedAsTimeAgo()
         firstSection.append(PostInfoModel(firstLine: post.author?.title, secondLine: date, imageUrl: post.author?.avatar, userId: post.author?.objectId))
         firstSection.append(TableViewCellTextModel(title: post.name ?? ""))
         
@@ -35,6 +33,8 @@ struct PostCellModelFactory {
         
         var secondSection: [TableViewCellModel] = []
         
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
         for comment: Comment in post.comments {
             let dateString = dateFormatter.stringFromDate(comment.date ?? NSDate())
             secondSection.append(PostCommentCellModel(userId: comment.author!.objectId, name: comment.author!.title, comment: comment.text, date:dateString, imageUrl: comment.author!.avatar))
