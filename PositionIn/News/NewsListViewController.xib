@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NewsListViewController" customModule="PositionIn" customModuleProvider="target">
+            <connections>
+                <outlet property="tableView" destination="3Uk-5Y-GaQ" id="6PY-nP-5s7"/>
+                <outlet property="view" destination="iN0-l3-epB" id="UvT-U7-6PC"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="3Uk-5Y-GaQ" customClass="TableView" customModule="PosInCore">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="9QT-hn-1GZ"/>
+                        <outlet property="delegate" destination="-1" id="J2O-Gl-cCP"/>
+                    </connections>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="3Uk-5Y-GaQ" secondAttribute="bottom" id="0gq-2N-QOa"/>
+                <constraint firstItem="3Uk-5Y-GaQ" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Gwa-cj-ML4"/>
+                <constraint firstItem="3Uk-5Y-GaQ" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="VRS-NT-vlI"/>
+                <constraint firstAttribute="trailing" secondItem="3Uk-5Y-GaQ" secondAttribute="trailing" id="eUo-Ez-2No"/>
+            </constraints>
+        </view>
+    </objects>
+</document>

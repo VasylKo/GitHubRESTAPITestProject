@@ -11,11 +11,31 @@ import PosInCore
 
 class NewsCardCell: TableViewCell {
     
+    private var actionConsumer: NewsListActionConsumer?
+    private var item : FeedItem?
+    
+    @IBOutlet weak var likeButton: UIButton!
+    @IBOutlet weak var likesLabel: UILabel!
+    @IBOutlet weak var commentsLabel: UILabel!
+    @IBOutlet private weak var imageHeightConstaint: NSLayoutConstraint!
+    @IBOutlet private weak var feedItemImageView: UIImageView!
+    @IBOutlet private weak var headerLabel: UILabel!
+    @IBOutlet private weak var infoLabel: UILabel!
+    @IBOutlet private weak var detailsLabel: UILabel!
+    @IBOutlet private weak var feedItemAvatarView: AvatarView!
+    @IBOutlet private weak var newsTextLabel: UILabel!
+    
+    //MARK: Set model
+    
     override func setModel(model: TableViewCellModel) {
-        let m = model as? CompactFeedTableCellModel
+        likeButton.userInteractionEnabled = true
+        
+        let m = model as? NewsTableViewCellModel
         assert(m != nil, "Invalid model passed")
         
-        if let imgURL = m!.imageURL {
+        self.item = m!.item
+        
+        if let imgURL = m!.item.image {
             feedItemImageView.setImageFromURL(imgURL)
             self.imageHeightConstaint.constant = 80
         }
@@ -24,40 +44,40 @@ class NewsCardCell: TableViewCell {
             self.imageHeightConstaint.constant = 0
         }
         
-        headerLabel.text = m!.title
-        if let date = m!.date {
+        headerLabel.text = m!.item.name
+        if let date = m!.item.date {
             infoLabel.text = date.formattedAsTimeAgo()
         }
 
-        detailsLabel.text = m!.details
+        detailsLabel.text = m!.item.author?.title
         
-        if let numOfLikes = m!.numOfLikes {
-            likesLabel.text = String(numOfLikes)
+        if let likes = m!.item.numOfLikes {
+            likesLabel.text = String(likes)
         }
         
-        if let numOfComments = m!.numOfComments {
-            commentsLabel.text = String(numOfComments)
+        if let comments = m!.item.numOfComments {
+            commentsLabel.text = String(comments)
         }
         
-        if let text = m!.text {
+        if let text = m!.item.text {
             self.newsTextLabel.text = text
         }
         
-        if let url = m!.avatarURL {
+        if let url = m!.item.author?.avatar {
             feedItemAvatarView.setImageFromURL(url)
         }
+        
+        self.actionConsumer = m!.actionConsumer
     }
     
-    @IBOutlet weak var likesLabel: UILabel!
-    @IBOutlet weak var commentsLabel: UILabel!
+    //MARK: Actions
     
-    @IBOutlet private weak var imageHeightConstaint: NSLayoutConstraint!
-    @IBOutlet private weak var feedItemImageView: UIImageView!
-    @IBOutlet private weak var headerLabel: UILabel!
-    @IBOutlet private weak var infoLabel: UILabel!
-    @IBOutlet private weak var detailsLabel: UILabel!
-    @IBOutlet private weak var feedItemAvatarView: AvatarView!
-    @IBOutlet private weak var newsTextLabel: UILabel!
+    @IBAction func likeButtonPressed(sender: AnyObject) {
+        likeButton.userInteractionEnabled = false
+        actionConsumer?.like(self.item!)
+    }
+    
+    //MARK: Other
     
     override func prepareForReuse() {
         super.prepareForReuse()

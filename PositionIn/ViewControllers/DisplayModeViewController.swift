@@ -217,7 +217,7 @@ protocol BrowseActionConsumer: class {
             controller.volunteer = object as? Community
             controller.author = data as? ObjectInfo
             navigationController?.pushViewController(controller, animated: true)
-        case .News, .Post:
+        case .Post:
             trackGoogleAnalyticsEvent("Main", action: "Click", label: "Post")
             let controller = Storyboards.Main.instantiatePostViewController()
             controller.objectId = object as? CRUDObjectId
