@@ -507,6 +507,13 @@ struct APIService {
         }
     }
 
+    //MARK: - Notifications
+
+    func getNotifications() -> Future<CollectionResponse<Notification>, NSError> {
+        let endpoint = Notification.endpoint()
+        return getObjectsCollection(endpoint, params: nil)
+    }
+    
     //MARK: - MPesa requests
     
     func transactionStatusMpesa(transactionId: String) -> Future<String, NSError> {
