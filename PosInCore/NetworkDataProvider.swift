@@ -137,7 +137,7 @@ public class NetworkDataProvider {
         if let validation = validation {
             return request.validate(validation)
         } else {
-            return request.validate(statusCode: [] + (200..<300) + (400..<500) )
+            return request.validate(statusCode: [] + (200..<300) + (400..<600) )
         }
     }
 }
