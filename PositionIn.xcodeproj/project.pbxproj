@@ -75,7 +75,7 @@
 		50FE7D891BBE77BB005676E2 /* ItemsSearchResultDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FE7D871BBE77BB005676E2 /* ItemsSearchResultDataSource.swift */; };
 		50FE7D8A1BBE77BB005676E2 /* ItemsSearchResultsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FE7D881BBE77BB005676E2 /* ItemsSearchResultsController.swift */; };
 		CD076E871C73922A005C04C2 /* NewsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD076E861C73922A005C04C2 /* NewsListViewController.swift */; };
-		CD076E891C7497A8005C04C2 /* NewsListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD076E881C7497A8005C04C2 /* NewsListViewController.xib */; };
+		CD076E891C7497A8005C04C2 /* PositionIn.NewsListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD076E881C7497A8005C04C2 /* PositionIn.NewsListViewController.xib */; };
 		CD0FCC2E1C69ECD800AFD36C /* TotalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0FCC2C1C69ECD800AFD36C /* TotalCell.swift */; };
 		CD0FCC2F1C69ECD800AFD36C /* TotalCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD0FCC2D1C69ECD800AFD36C /* TotalCell.xib */; };
 		CD1313311C6E3387002F6F32 /* PositionIn.PostAttachmentsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD1313301C6E3387002F6F32 /* PositionIn.PostAttachmentsCell.xib */; };
@@ -586,7 +586,7 @@
 		BB73828B80F64D347BB9F14D /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5785CCFFE7238C562E6E52F /* Pods-PositionIn.devrelease.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PositionIn.devrelease.xcconfig"; path = "Pods/Target Support Files/Pods-PositionIn/Pods-PositionIn.devrelease.xcconfig"; sourceTree = "<group>"; };
 		CD076E861C73922A005C04C2 /* NewsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsListViewController.swift; sourceTree = "<group>"; };
-		CD076E881C7497A8005C04C2 /* NewsListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewsListViewController.xib; sourceTree = "<group>"; };
+		CD076E881C7497A8005C04C2 /* PositionIn.NewsListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.NewsListViewController.xib; sourceTree = "<group>"; };
 		CD0FCC2C1C69ECD800AFD36C /* TotalCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TotalCell.swift; sourceTree = "<group>"; };
 		CD0FCC2D1C69ECD800AFD36C /* TotalCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TotalCell.xib; sourceTree = "<group>"; };
 		CD1313301C6E3387002F6F32 /* PositionIn.PostAttachmentsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.PostAttachmentsCell.xib; sourceTree = "<group>"; };
@@ -1314,7 +1314,7 @@
 				CD552DD21C75DF560012920F /* CellModel */,
 				CD552DCF1C75DF0D0012920F /* NewsTableViewCell */,
 				CD076E861C73922A005C04C2 /* NewsListViewController.swift */,
-				CD076E881C7497A8005C04C2 /* NewsListViewController.xib */,
+				CD076E881C7497A8005C04C2 /* PositionIn.NewsListViewController.xib */,
 			);
 			path = News;
 			sourceTree = "<group>";
@@ -3656,7 +3656,7 @@
 				E6C9523B1BA1DC910032254F /* PositionIn.ProfileFollowCell.xib in Resources */,
 				D196225F1BF13075003BCD85 /* GoogleService-Info.plist in Resources */,
 				E6BEF1CC1B9C5E7200511B46 /* PositionIn.PostImageCell.xib in Resources */,
-				CD076E891C7497A8005C04C2 /* NewsListViewController.xib in Resources */,
+				CD076E891C7497A8005C04C2 /* PositionIn.NewsListViewController.xib in Resources */,
 				E689F07D1B6B976100597587 /* PositionIn.ProductInventoryCell.xib in Resources */,
 				E6BEF1E61B9C83F200511B46 /* PositionIn.CommunityActionCell.xib in Resources */,
 				CDEDD9741C45242400396594 /* PositionIn.VolunteerSearchViewController.xib in Resources */,
