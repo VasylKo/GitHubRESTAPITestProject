@@ -85,8 +85,10 @@
 		CD21EA571C68E98D00E50909 /* MPesaIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD21EA561C68E98D00E50909 /* MPesaIndicatorView.swift */; };
 		CD21EA611C68F9FF00E50909 /* MembershipMPesaConfirmPaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD21EA601C68F9FF00E50909 /* MembershipMPesaConfirmPaymentViewController.swift */; };
 		CD3358201C6CD19A00E78267 /* MoreInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD33581F1C6CD19A00E78267 /* MoreInformationViewController.swift */; };
-		CD5063801C74D1B70028106D /* NewsTableViewCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD50637F1C74D1B70028106D /* NewsTableViewCellModel.swift */; };
-		CD5063821C74D2600028106D /* NewsCellModelFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD5063811C74D2600028106D /* NewsCellModelFactory.swift */; };
+		CD552DD11C75DF1A0012920F /* NewsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD552DD01C75DF1A0012920F /* NewsTableViewCell.swift */; };
+		CD552DD41C75DF670012920F /* PositionIn.NewsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD552DD31C75DF670012920F /* PositionIn.NewsTableViewCell.xib */; };
+		CD552DD71C75DFB80012920F /* NewsCellModelFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD552DD51C75DFB80012920F /* NewsCellModelFactory.swift */; };
+		CD552DD81C75DFB80012920F /* NewsTableViewCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD552DD61C75DFB80012920F /* NewsTableViewCellModel.swift */; };
 		CD794DE01C52485E00C1C298 /* OpenApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD794DDF1C52485E00C1C298 /* OpenApplication.swift */; };
 		CD795BDE1C57B4EE00C1C298 /* Appfile in Resources */ = {isa = PBXBuildFile; fileRef = CD795BDA1C57B4EE00C1C298 /* Appfile */; };
 		CD795BDF1C57B4EE00C1C298 /* Fastfile in Resources */ = {isa = PBXBuildFile; fileRef = CD795BDB1C57B4EE00C1C298 /* Fastfile */; };
@@ -596,8 +598,10 @@
 		CD21EA561C68E98D00E50909 /* MPesaIndicatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPesaIndicatorView.swift; sourceTree = "<group>"; };
 		CD21EA601C68F9FF00E50909 /* MembershipMPesaConfirmPaymentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MembershipMPesaConfirmPaymentViewController.swift; sourceTree = "<group>"; };
 		CD33581F1C6CD19A00E78267 /* MoreInformationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreInformationViewController.swift; sourceTree = "<group>"; };
-		CD50637F1C74D1B70028106D /* NewsTableViewCellModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsTableViewCellModel.swift; sourceTree = "<group>"; };
-		CD5063811C74D2600028106D /* NewsCellModelFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsCellModelFactory.swift; sourceTree = "<group>"; };
+		CD552DD01C75DF1A0012920F /* NewsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsTableViewCell.swift; sourceTree = "<group>"; };
+		CD552DD31C75DF670012920F /* PositionIn.NewsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.NewsTableViewCell.xib; sourceTree = "<group>"; };
+		CD552DD51C75DFB80012920F /* NewsCellModelFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsCellModelFactory.swift; sourceTree = "<group>"; };
+		CD552DD61C75DFB80012920F /* NewsTableViewCellModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsTableViewCellModel.swift; sourceTree = "<group>"; };
 		CD794DDF1C52485E00C1C298 /* OpenApplication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpenApplication.swift; sourceTree = "<group>"; };
 		CD795BDA1C57B4EE00C1C298 /* Appfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Appfile; sourceTree = "<group>"; };
 		CD795BDB1C57B4EE00C1C298 /* Fastfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Fastfile; sourceTree = "<group>"; };
@@ -1311,6 +1315,8 @@
 		CD076E851C739215005C04C2 /* News */ = {
 			isa = PBXGroup;
 			children = (
+				CD552DD21C75DF560012920F /* CellModel */,
+				CD552DCF1C75DF0D0012920F /* NewsTableViewCell */,
 				CD076E861C73922A005C04C2 /* NewsListViewController.swift */,
 				CD076E881C7497A8005C04C2 /* NewsListViewController.xib */,
 			);
@@ -1357,6 +1363,24 @@
 				CD33581F1C6CD19A00E78267 /* MoreInformationViewController.swift */,
 			);
 			path = Attachments;
+			sourceTree = "<group>";
+		};
+		CD552DCF1C75DF0D0012920F /* NewsTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				CD552DD31C75DF670012920F /* PositionIn.NewsTableViewCell.xib */,
+				CD552DD01C75DF1A0012920F /* NewsTableViewCell.swift */,
+			);
+			path = NewsTableViewCell;
+			sourceTree = "<group>";
+		};
+		CD552DD21C75DF560012920F /* CellModel */ = {
+			isa = PBXGroup;
+			children = (
+				CD552DD51C75DFB80012920F /* NewsCellModelFactory.swift */,
+				CD552DD61C75DFB80012920F /* NewsTableViewCellModel.swift */,
+			);
+			path = CellModel;
 			sourceTree = "<group>";
 		};
 		CD795BC71C57B4C700C1C298 /* Classes */ = {
@@ -3174,8 +3198,6 @@
 				E68B52021B873687006B980C /* FeedItemCellModelFactory.swift */,
 				E6BEF1C71B9C5A0C00511B46 /* PostCellModelFactory.swift */,
 				E6BEF1CE1B9C60B500511B46 /* PostTableViewCellModel.swift */,
-				CD5063811C74D2600028106D /* NewsCellModelFactory.swift */,
-				CD50637F1C74D1B70028106D /* NewsTableViewCellModel.swift */,
 				24EF62101BA81A6B00472531 /* ChatHistoryCellModel.swift */,
 				E6BEF1DA1B9C7F9D00511B46 /* BrowseCommunityCellFactory.swift */,
 				E6BEF1E91B9C902400511B46 /* BrowseCommunityTableViewCellModel.swift */,
@@ -3561,7 +3583,6 @@
 					};
 					E6E2FE871B66F61300880F3C = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = WVE53RRC7C;
 					};
 				};
 			};
@@ -3597,6 +3618,7 @@
 				CD8ED0DE1C60BE7000576DBF /* MembershipCardView.xib in Resources */,
 				50C7B5B21BC6A32900E8E8B4 /* PositionIn.SettingsViewController.xib in Resources */,
 				E6BEF1E81B9C83F200511B46 /* PositionIn.CommunityInfoCell.xib in Resources */,
+				CD552DD41C75DF670012920F /* PositionIn.NewsTableViewCell.xib in Resources */,
 				D1F1FF2F1C24265B006D2E75 /* PositionIn.GiveBloodDetailsViewController.xib in Resources */,
 				D1379E951C2C21F80041AA4E /* PositionIn.NewsCardCell.xib in Resources */,
 				E6BEF1E71B9C83F200511B46 /* PositionIn.CommunityHeaderCell.xib in Resources */,
@@ -3839,6 +3861,7 @@
 				E62B16FF1B5CE0F800D446BC /* BesideMenuViewController.swift in Sources */,
 				E66F901B1BA6A5C100280B77 /* ChatController.swift in Sources */,
 				D1B780C81C0F4E7700EF5825 /* DonateViewController.swift in Sources */,
+				CD552DD71C75DFB80012920F /* NewsCellModelFactory.swift in Sources */,
 				CD795BE31C57B59500C1C298 /* AppDelegate.swift in Sources */,
 				E66115A51B73A920003DB5B3 /* AddProductViewController.swift in Sources */,
 				E6365D351B7D709E00CB79CB /* PhotoInfo.swift in Sources */,
@@ -3909,6 +3932,7 @@
 				E6C952361BA1D9960032254F /* ProfileInfoCell.swift in Sources */,
 				D1DA176C1C05B7BE0091A8CE /* BrowseGridCollectionViewCell.swift in Sources */,
 				D1379E8D1C2A98710041AA4E /* ExploreCardCell.swift in Sources */,
+				CD552DD11C75DF1A0012920F /* NewsTableViewCell.swift in Sources */,
 				E6C9522C1BA1BB0E0032254F /* PeopleListCell.swift in Sources */,
 				E6F243761B8B31510033B13C /* BrowseTabbar.swift in Sources */,
 				CD21EA531C68E46000E50909 /* MembershipPaymentViewController.swift in Sources */,
@@ -3971,7 +3995,6 @@
 				E63201651B967A540066C62E /* Notifications.swift in Sources */,
 				E62B16FB1B5CDF0100D446BC /* MessagesListViewController.swift in Sources */,
 				D154411A1C47D642006251B7 /* Volunteer.swift in Sources */,
-				CD5063801C74D1B70028106D /* NewsTableViewCellModel.swift in Sources */,
 				CD795BF21C57BA8100C1C298 /* MembershipRouterImplementation.swift in Sources */,
 				E66A3E181B9CC90C005FA33B /* EditCommunityViewController.swift in Sources */,
 				CD0FCC2E1C69ECD800AFD36C /* TotalCell.swift in Sources */,
@@ -4017,12 +4040,12 @@
 				CDB5B5CC1C5B9C2400413715 /* MembershipPlanTableViewCell.swift in Sources */,
 				D1379E941C2C21F80041AA4E /* NewsCardCell.swift in Sources */,
 				E6199BB71B9F3B7400E3C69D /* PeopleViewController.swift in Sources */,
-				CD5063821C74D2600028106D /* NewsCellModelFactory.swift in Sources */,
 				E604B16E1BF96F14004DA20B /* ChatHistory.swift in Sources */,
 				D100DF0B1BF4AA0300C81054 /* GoogleAnalyticsHelper.swift in Sources */,
 				E6D4D5B81B6FA7A7003134CB /* SearchTransition.swift in Sources */,
 				E6F3093D1BA81FAF00C9420C /* AttachedPhotosView.swift in Sources */,
 				E6BEF1DB1B9C7F9D00511B46 /* BrowseCommunityCellFactory.swift in Sources */,
+				CD552DD81C75DFB80012920F /* NewsTableViewCellModel.swift in Sources */,
 				E660E5301B5AC28600F52050 /* MainMenuCell.swift in Sources */,
 				E6C952391BA1DA400032254F /* ProfileFollowCell.swift in Sources */,
 				E6C952261BA1A8230032254F /* StringValidation.swift in Sources */,
@@ -4199,7 +4222,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -4308,6 +4331,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_REPEATED_USE_OF_WEAK = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -4339,6 +4363,7 @@
 				OTHER_LDFLAGS = "-lxml2";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.positionin.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -4507,6 +4532,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_REPEATED_USE_OF_WEAK = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -4538,6 +4564,7 @@
 				OTHER_LDFLAGS = "-lxml2";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.positionin.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -4648,7 +4675,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Shulamit Salant (4ZRAKT5AF5)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Shulamit Salant (4ZRAKT5AF5)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4734,7 +4761,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Media Applications ltd";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Media Applications ltd";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

@@ -18,11 +18,11 @@ struct NewsCellModelFactory {
     }
     
     func cellsReuseId() -> [String] {
-        return [NewsCardCell.reuseId()]
+        return [NewsTableViewCell.reuseId()]
     }
     
     func cellReuseIdForModel(model: TableViewCellModel) -> String {
-        return NewsCardCell.reuseId()
+        return NewsTableViewCell.reuseId()
     }
     
 }

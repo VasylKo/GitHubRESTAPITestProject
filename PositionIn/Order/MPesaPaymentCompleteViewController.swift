@@ -38,11 +38,15 @@ class MPesaPaymentCompleteViewController: XLFormViewController {
         self.initializeForm()
         
         if let quantity = self.quantity, let price = product?.price, let objId = product?.objectId where !self.showSuccess  {
-            api().productCheckoutMpesa(NSNumber(float: price), nonce: "", itemId: objId, quantity: NSNumber(integer: quantity)).onSuccess {
+            api().productCheckoutMpesa(NSNumber(float: price),
+                nonce: "", itemId: objId,
+                quantity: NSNumber(integer: quantity)).onSuccess {
                 [weak self] transactionId in
                 self?.transactionId = transactionId
                 self?.pollStatus()
-            }
+                }.onFailure(callback: { [weak self] _ in
+                    self?.headerView.showFailure()
+                })
         }
         
         if (showSuccess) {
@@ -57,14 +61,14 @@ class MPesaPaymentCompleteViewController: XLFormViewController {
     @objc func pollStatus() {
         api().transactionStatusMpesa(transactionId).onSuccess { [weak self] status in
             self?.headerView.showSuccess()
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (Int64)(1 * NSEC_PER_SEC)), dispatch_get_main_queue()) {
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (Int64)(3 * NSEC_PER_SEC)), dispatch_get_main_queue()) {
                 appDelegate().sidebarViewController?.executeAction(SidebarViewController.defaultAction)
                 self?.dismissViewControllerAnimated(true, completion: nil)
             }
             }.onFailure { [weak self] error in
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (Int64)(10 * NSEC_PER_SEC)), dispatch_get_main_queue()) {
                     self?.pollStatus()
-                }
+            }
         }
     }
     
