@@ -520,7 +520,7 @@ struct APIService {
             return future
         }
     }
-    
+
     func productCheckoutMpesa(amount:NSNumber, nonce:String, itemId: String, quantity: NSNumber) -> Future<String, NSError> {
         let endpoint = MPesaPayment.productCheckoutEndpoint()
         let  params = ["payment_method_nonce": nonce, "amount" : amount, "itemId" : itemId, "quantity": quantity]
@@ -529,7 +529,7 @@ struct APIService {
         return session().flatMap {
             (token: AuthResponse.Token) -> Future<String, NSError> in
             let request = self.updateRequest(token, endpoint: endpoint, method: .POST, params: params)
-            let (_, future): CRUDResultType = self.dataProvider.jsonRequest(request, map: BraintreePayment.checkoutMapping(), validation: nil)
+            let (_, future): CRUDResultType = self.dataProvider.jsonRequest(request, map: BraintreePayment.mpesaMapping(), validation: nil)
             return self.handleFailure(future)
         }
     }
