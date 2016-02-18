@@ -214,8 +214,7 @@ protocol BrowseModeDisplay {
         case .Volunteer:
             self.navigationController?.pushViewController(Storyboards.Main.instantiateBrowseVolunteerViewController(), animated: true)
         case .News:
-            let controller = Storyboards.Main.instantiateNewsViewController()
-            self.navigationController?.pushViewController(controller, animated: true)
+            self.navigationController?.pushViewController(NewsContainerViewController(), animated: true)
         case .Market: 
             fallthrough
         case .BomaHotels:

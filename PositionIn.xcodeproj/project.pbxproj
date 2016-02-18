@@ -75,10 +75,13 @@
 		50FE7D891BBE77BB005676E2 /* ItemsSearchResultDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FE7D871BBE77BB005676E2 /* ItemsSearchResultDataSource.swift */; };
 		50FE7D8A1BBE77BB005676E2 /* ItemsSearchResultsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FE7D881BBE77BB005676E2 /* ItemsSearchResultsController.swift */; };
 		CD076E871C73922A005C04C2 /* NewsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD076E861C73922A005C04C2 /* NewsListViewController.swift */; };
-		CD076E891C7497A8005C04C2 /* PositionIn.NewsListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD076E881C7497A8005C04C2 /* PositionIn.NewsListViewController.xib */; };
+		CD076E891C7497A8005C04C2 /* NewsListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD076E881C7497A8005C04C2 /* NewsListViewController.xib */; };
 		CD0FCC2E1C69ECD800AFD36C /* TotalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0FCC2C1C69ECD800AFD36C /* TotalCell.swift */; };
 		CD0FCC2F1C69ECD800AFD36C /* TotalCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD0FCC2D1C69ECD800AFD36C /* TotalCell.xib */; };
 		CD1313311C6E3387002F6F32 /* PositionIn.PostAttachmentsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD1313301C6E3387002F6F32 /* PositionIn.PostAttachmentsCell.xib */; };
+		CD21C8D01C76002C009261C7 /* NewsContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD21C8CF1C76002C009261C7 /* NewsContainerViewController.swift */; };
+		CD21C8D31C7600B0009261C7 /* BarButtonItemContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD21C8D21C7600B0009261C7 /* BarButtonItemContainerViewController.swift */; };
+		CD21C8D51C7601B7009261C7 /* BarButtonItemContainerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD21C8D41C7601B7009261C7 /* BarButtonItemContainerViewController.xib */; };
 		CD21EA381C63A78800E50909 /* MembershipMemberProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD21EA371C63A78800E50909 /* MembershipMemberProfileViewController.swift */; };
 		CD21EA531C68E46000E50909 /* MembershipPaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD21EA521C68E46000E50909 /* MembershipPaymentViewController.swift */; };
 		CD21EA551C68E89B00E50909 /* MPesaIndicatorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD21EA541C68E89B00E50909 /* MPesaIndicatorView.xib */; };
@@ -104,6 +107,8 @@
 		CD795C4E1C590C1700C1C298 /* SegmentedControlContainerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD795C4D1C590C1700C1C298 /* SegmentedControlContainerViewController.xib */; };
 		CD795C801C5A382000C1C298 /* MembershipPlan.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD795C7F1C5A382000C1C298 /* MembershipPlan.swift */; };
 		CD795C831C5A6DCB00C1C298 /* MembershipPlansViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD795C821C5A6DCB00C1C298 /* MembershipPlansViewController.swift */; };
+		CD87FDEE1C7611AA00E610AE /* NewsMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD87FDED1C7611AA00E610AE /* NewsMapViewController.swift */; };
+		CD87FDF01C76133100E610AE /* NewsMapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD87FDEF1C76133100E610AE /* NewsMapViewController.xib */; };
 		CD8ED0D61C60AD1A00576DBF /* MembershipMemberCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8ED0D51C60AD1A00576DBF /* MembershipMemberCardViewController.swift */; };
 		CD8ED0D91C60AE1400576DBF /* MembershipMemberCardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD8ED0D81C60AE1400576DBF /* MembershipMemberCardViewController.xib */; };
 		CD8ED0DE1C60BE7000576DBF /* MembershipCardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD8ED0DD1C60BE7000576DBF /* MembershipCardView.xib */; };
@@ -586,10 +591,13 @@
 		BB73828B80F64D347BB9F14D /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5785CCFFE7238C562E6E52F /* Pods-PositionIn.devrelease.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PositionIn.devrelease.xcconfig"; path = "Pods/Target Support Files/Pods-PositionIn/Pods-PositionIn.devrelease.xcconfig"; sourceTree = "<group>"; };
 		CD076E861C73922A005C04C2 /* NewsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsListViewController.swift; sourceTree = "<group>"; };
-		CD076E881C7497A8005C04C2 /* PositionIn.NewsListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.NewsListViewController.xib; sourceTree = "<group>"; };
+		CD076E881C7497A8005C04C2 /* NewsListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewsListViewController.xib; sourceTree = "<group>"; };
 		CD0FCC2C1C69ECD800AFD36C /* TotalCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TotalCell.swift; sourceTree = "<group>"; };
 		CD0FCC2D1C69ECD800AFD36C /* TotalCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TotalCell.xib; sourceTree = "<group>"; };
 		CD1313301C6E3387002F6F32 /* PositionIn.PostAttachmentsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.PostAttachmentsCell.xib; sourceTree = "<group>"; };
+		CD21C8CF1C76002C009261C7 /* NewsContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsContainerViewController.swift; sourceTree = "<group>"; };
+		CD21C8D21C7600B0009261C7 /* BarButtonItemContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarButtonItemContainerViewController.swift; sourceTree = "<group>"; };
+		CD21C8D41C7601B7009261C7 /* BarButtonItemContainerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BarButtonItemContainerViewController.xib; sourceTree = "<group>"; };
 		CD21EA371C63A78800E50909 /* MembershipMemberProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MembershipMemberProfileViewController.swift; sourceTree = "<group>"; };
 		CD21EA521C68E46000E50909 /* MembershipPaymentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MembershipPaymentViewController.swift; sourceTree = "<group>"; };
 		CD21EA541C68E89B00E50909 /* MPesaIndicatorView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MPesaIndicatorView.xib; sourceTree = "<group>"; };
@@ -615,6 +623,8 @@
 		CD795C4D1C590C1700C1C298 /* SegmentedControlContainerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SegmentedControlContainerViewController.xib; sourceTree = "<group>"; };
 		CD795C7F1C5A382000C1C298 /* MembershipPlan.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MembershipPlan.swift; sourceTree = "<group>"; };
 		CD795C821C5A6DCB00C1C298 /* MembershipPlansViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MembershipPlansViewController.swift; sourceTree = "<group>"; };
+		CD87FDED1C7611AA00E610AE /* NewsMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsMapViewController.swift; sourceTree = "<group>"; };
+		CD87FDEF1C76133100E610AE /* NewsMapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewsMapViewController.xib; sourceTree = "<group>"; };
 		CD8ED0D51C60AD1A00576DBF /* MembershipMemberCardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MembershipMemberCardViewController.swift; sourceTree = "<group>"; };
 		CD8ED0D81C60AE1400576DBF /* MembershipMemberCardViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MembershipMemberCardViewController.xib; sourceTree = "<group>"; };
 		CD8ED0DD1C60BE7000576DBF /* MembershipCardView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MembershipCardView.xib; sourceTree = "<group>"; };
@@ -1313,8 +1323,11 @@
 			children = (
 				CD552DD21C75DF560012920F /* CellModel */,
 				CD552DCF1C75DF0D0012920F /* NewsTableViewCell */,
+				CD21C8CF1C76002C009261C7 /* NewsContainerViewController.swift */,
 				CD076E861C73922A005C04C2 /* NewsListViewController.swift */,
-				CD076E881C7497A8005C04C2 /* PositionIn.NewsListViewController.xib */,
+				CD076E881C7497A8005C04C2 /* NewsListViewController.xib */,
+				CD87FDED1C7611AA00E610AE /* NewsMapViewController.swift */,
+				CD87FDEF1C76133100E610AE /* NewsMapViewController.xib */,
 			);
 			path = News;
 			sourceTree = "<group>";
@@ -1326,6 +1339,15 @@
 				CD0FCC2D1C69ECD800AFD36C /* TotalCell.xib */,
 			);
 			path = TotalView;
+			sourceTree = "<group>";
+		};
+		CD21C8D11C7600A0009261C7 /* BarButtonItemContainer */ = {
+			isa = PBXGroup;
+			children = (
+				CD21C8D21C7600B0009261C7 /* BarButtonItemContainerViewController.swift */,
+				CD21C8D41C7601B7009261C7 /* BarButtonItemContainerViewController.xib */,
+			);
+			path = BarButtonItemContainer;
 			sourceTree = "<group>";
 		};
 		CD21EA491C68E39900E50909 /* MPesaDetails */ = {
@@ -1495,6 +1517,7 @@
 		CD795C461C590BEE00C1C298 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				CD21C8D11C7600A0009261C7 /* BarButtonItemContainer */,
 				CD795C471C590BEE00C1C298 /* Container */,
 				CD795C491C590BEE00C1C298 /* SegmentControlContainer */,
 			);
@@ -3607,6 +3630,7 @@
 				CD552DD41C75DF670012920F /* PositionIn.NewsTableViewCell.xib in Resources */,
 				D1F1FF2F1C24265B006D2E75 /* PositionIn.GiveBloodDetailsViewController.xib in Resources */,
 				D1379E951C2C21F80041AA4E /* PositionIn.NewsCardCell.xib in Resources */,
+				CD21C8D51C7601B7009261C7 /* BarButtonItemContainerViewController.xib in Resources */,
 				E6BEF1E71B9C83F200511B46 /* PositionIn.CommunityHeaderCell.xib in Resources */,
 				D1F86CF11BFCAA96006E0C49 /* Onboarding.storyboard in Resources */,
 				D1F1FF261C22F384006D2E75 /* PositionIn.VolunteerDetailsViewController.xib in Resources */,
@@ -3656,7 +3680,7 @@
 				E6C9523B1BA1DC910032254F /* PositionIn.ProfileFollowCell.xib in Resources */,
 				D196225F1BF13075003BCD85 /* GoogleService-Info.plist in Resources */,
 				E6BEF1CC1B9C5E7200511B46 /* PositionIn.PostImageCell.xib in Resources */,
-				CD076E891C7497A8005C04C2 /* PositionIn.NewsListViewController.xib in Resources */,
+				CD076E891C7497A8005C04C2 /* NewsListViewController.xib in Resources */,
 				E689F07D1B6B976100597587 /* PositionIn.ProductInventoryCell.xib in Resources */,
 				E6BEF1E61B9C83F200511B46 /* PositionIn.CommunityActionCell.xib in Resources */,
 				CDEDD9741C45242400396594 /* PositionIn.VolunteerSearchViewController.xib in Resources */,
@@ -3664,6 +3688,7 @@
 				CD795BDE1C57B4EE00C1C298 /* Appfile in Resources */,
 				D1CAA7531C60BB1E0046130E /* PaymentTableViewCell.xib in Resources */,
 				E6F7A4721BA335070069152A /* PositionIn.WalletViewController.xib in Resources */,
+				CD87FDF01C76133100E610AE /* NewsMapViewController.xib in Resources */,
 				E6BEF1C61B9C556300511B46 /* PositionIn.PostViewController.xib in Resources */,
 				CDB5B5CD1C5B9C2400413715 /* MembershipPlanTableViewCell.xib in Resources */,
 				CDBDD9B11C47CAAB007578BC /* PositionIn.BrowseVolunteerViewController.xib in Resources */,
@@ -3924,6 +3949,7 @@
 				D1FD85461C1EF6DB00C2E87B /* BomaHotelsDetailsViewController.swift in Sources */,
 				E6A869EE1B60D42C00797D16 /* APIService.swift in Sources */,
 				D1F86CF31BFCBAD3006E0C49 /* PhoneNumberViewController.swift in Sources */,
+				CD87FDEE1C7611AA00E610AE /* NewsMapViewController.swift in Sources */,
 				D15F47441C088A26009ED3FD /* HomeItem.swift in Sources */,
 				CD8ED0E01C60BE7C00576DBF /* MembershipCardView.swift in Sources */,
 				E6F7A4701BA333D70069152A /* WalletViewController.swift in Sources */,
@@ -3937,6 +3963,7 @@
 				E6BEF1CD1B9C5E7200511B46 /* PostImageCell.swift in Sources */,
 				D1F1FF251C22F384006D2E75 /* VolunteerDetailsViewController.swift in Sources */,
 				D1FD854B1C1EFE0F00C2E87B /* MarketDetailsViewController.swift in Sources */,
+				CD21C8D01C76002C009261C7 /* NewsContainerViewController.swift in Sources */,
 				2431EBE01B94C1DC009FB158 /* Event.swift in Sources */,
 				24EF62111BA81A6B00472531 /* ChatHistoryCellModel.swift in Sources */,
 				E6BEF1EF1B9C9D6400511B46 /* CommunityViewController.swift in Sources */,
@@ -3957,6 +3984,7 @@
 				E6F243701B8B17910033B13C /* DisplayModeViewController.swift in Sources */,
 				D15F47491C0B77D7009ED3FD /* AmbulanceBaseController.swift in Sources */,
 				E6F7A47D1BA356130069152A /* LocationCell.swift in Sources */,
+				CD21C8D31C7600B0009261C7 /* BarButtonItemContainerViewController.swift in Sources */,
 				D15F47471C0AFDAF009ED3FD /* CallAmbulanceViewController.swift in Sources */,
 				E68B52011B873545006B980C /* FeedTableViewCellModel.swift in Sources */,
 				E6C5F4581BCE908800E3B8C7 /* ConversationManager.swift in Sources */,
