@@ -74,15 +74,24 @@
 		50FA43301C44F0B50050B00E /* ErrorCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50FA432F1C44F0B50050B00E /* ErrorCell.xib */; };
 		50FE7D891BBE77BB005676E2 /* ItemsSearchResultDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FE7D871BBE77BB005676E2 /* ItemsSearchResultDataSource.swift */; };
 		50FE7D8A1BBE77BB005676E2 /* ItemsSearchResultsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FE7D881BBE77BB005676E2 /* ItemsSearchResultsController.swift */; };
+		CD076E871C73922A005C04C2 /* NewsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD076E861C73922A005C04C2 /* NewsListViewController.swift */; };
+		CD076E891C7497A8005C04C2 /* PositionIn.NewsListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD076E881C7497A8005C04C2 /* PositionIn.NewsListViewController.xib */; };
 		CD0FCC2E1C69ECD800AFD36C /* TotalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0FCC2C1C69ECD800AFD36C /* TotalCell.swift */; };
 		CD0FCC2F1C69ECD800AFD36C /* TotalCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD0FCC2D1C69ECD800AFD36C /* TotalCell.xib */; };
 		CD1313311C6E3387002F6F32 /* PositionIn.PostAttachmentsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD1313301C6E3387002F6F32 /* PositionIn.PostAttachmentsCell.xib */; };
+		CD21C8D01C76002C009261C7 /* NewsContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD21C8CF1C76002C009261C7 /* NewsContainerViewController.swift */; };
+		CD21C8D31C7600B0009261C7 /* BarButtonItemContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD21C8D21C7600B0009261C7 /* BarButtonItemContainerViewController.swift */; };
+		CD21C8D51C7601B7009261C7 /* BarButtonItemContainerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD21C8D41C7601B7009261C7 /* BarButtonItemContainerViewController.xib */; };
 		CD21EA381C63A78800E50909 /* MembershipMemberProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD21EA371C63A78800E50909 /* MembershipMemberProfileViewController.swift */; };
 		CD21EA531C68E46000E50909 /* MembershipPaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD21EA521C68E46000E50909 /* MembershipPaymentViewController.swift */; };
 		CD21EA551C68E89B00E50909 /* MPesaIndicatorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD21EA541C68E89B00E50909 /* MPesaIndicatorView.xib */; };
 		CD21EA571C68E98D00E50909 /* MPesaIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD21EA561C68E98D00E50909 /* MPesaIndicatorView.swift */; };
 		CD21EA611C68F9FF00E50909 /* MembershipMPesaConfirmPaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD21EA601C68F9FF00E50909 /* MembershipMPesaConfirmPaymentViewController.swift */; };
 		CD3358201C6CD19A00E78267 /* MoreInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD33581F1C6CD19A00E78267 /* MoreInformationViewController.swift */; };
+		CD552DD11C75DF1A0012920F /* NewsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD552DD01C75DF1A0012920F /* NewsTableViewCell.swift */; };
+		CD552DD41C75DF670012920F /* PositionIn.NewsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD552DD31C75DF670012920F /* PositionIn.NewsTableViewCell.xib */; };
+		CD552DD71C75DFB80012920F /* NewsCellModelFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD552DD51C75DFB80012920F /* NewsCellModelFactory.swift */; };
+		CD552DD81C75DFB80012920F /* NewsTableViewCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD552DD61C75DFB80012920F /* NewsTableViewCellModel.swift */; };
 		CD794DE01C52485E00C1C298 /* OpenApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD794DDF1C52485E00C1C298 /* OpenApplication.swift */; };
 		CD795BDE1C57B4EE00C1C298 /* Appfile in Resources */ = {isa = PBXBuildFile; fileRef = CD795BDA1C57B4EE00C1C298 /* Appfile */; };
 		CD795BDF1C57B4EE00C1C298 /* Fastfile in Resources */ = {isa = PBXBuildFile; fileRef = CD795BDB1C57B4EE00C1C298 /* Fastfile */; };
@@ -98,6 +107,8 @@
 		CD795C4E1C590C1700C1C298 /* SegmentedControlContainerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD795C4D1C590C1700C1C298 /* SegmentedControlContainerViewController.xib */; };
 		CD795C801C5A382000C1C298 /* MembershipPlan.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD795C7F1C5A382000C1C298 /* MembershipPlan.swift */; };
 		CD795C831C5A6DCB00C1C298 /* MembershipPlansViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD795C821C5A6DCB00C1C298 /* MembershipPlansViewController.swift */; };
+		CD87FDEE1C7611AA00E610AE /* NewsMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD87FDED1C7611AA00E610AE /* NewsMapViewController.swift */; };
+		CD87FDF01C76133100E610AE /* NewsMapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD87FDEF1C76133100E610AE /* NewsMapViewController.xib */; };
 		CD8ED0D61C60AD1A00576DBF /* MembershipMemberCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8ED0D51C60AD1A00576DBF /* MembershipMemberCardViewController.swift */; };
 		CD8ED0D91C60AE1400576DBF /* MembershipMemberCardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD8ED0D81C60AE1400576DBF /* MembershipMemberCardViewController.xib */; };
 		CD8ED0DE1C60BE7000576DBF /* MembershipCardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD8ED0DD1C60BE7000576DBF /* MembershipCardView.xib */; };
@@ -579,15 +590,24 @@
 		AF836D0B902FDFFA6CB4A412 /* Pods_Messaging.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Messaging.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB73828B80F64D347BB9F14D /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5785CCFFE7238C562E6E52F /* Pods-PositionIn.devrelease.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PositionIn.devrelease.xcconfig"; path = "Pods/Target Support Files/Pods-PositionIn/Pods-PositionIn.devrelease.xcconfig"; sourceTree = "<group>"; };
+		CD076E861C73922A005C04C2 /* NewsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsListViewController.swift; sourceTree = "<group>"; };
+		CD076E881C7497A8005C04C2 /* PositionIn.NewsListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.NewsListViewController.xib; sourceTree = "<group>"; };
 		CD0FCC2C1C69ECD800AFD36C /* TotalCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TotalCell.swift; sourceTree = "<group>"; };
 		CD0FCC2D1C69ECD800AFD36C /* TotalCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TotalCell.xib; sourceTree = "<group>"; };
 		CD1313301C6E3387002F6F32 /* PositionIn.PostAttachmentsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.PostAttachmentsCell.xib; sourceTree = "<group>"; };
+		CD21C8CF1C76002C009261C7 /* NewsContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsContainerViewController.swift; sourceTree = "<group>"; };
+		CD21C8D21C7600B0009261C7 /* BarButtonItemContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarButtonItemContainerViewController.swift; sourceTree = "<group>"; };
+		CD21C8D41C7601B7009261C7 /* BarButtonItemContainerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BarButtonItemContainerViewController.xib; sourceTree = "<group>"; };
 		CD21EA371C63A78800E50909 /* MembershipMemberProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MembershipMemberProfileViewController.swift; sourceTree = "<group>"; };
 		CD21EA521C68E46000E50909 /* MembershipPaymentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MembershipPaymentViewController.swift; sourceTree = "<group>"; };
 		CD21EA541C68E89B00E50909 /* MPesaIndicatorView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MPesaIndicatorView.xib; sourceTree = "<group>"; };
 		CD21EA561C68E98D00E50909 /* MPesaIndicatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPesaIndicatorView.swift; sourceTree = "<group>"; };
 		CD21EA601C68F9FF00E50909 /* MembershipMPesaConfirmPaymentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MembershipMPesaConfirmPaymentViewController.swift; sourceTree = "<group>"; };
 		CD33581F1C6CD19A00E78267 /* MoreInformationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreInformationViewController.swift; sourceTree = "<group>"; };
+		CD552DD01C75DF1A0012920F /* NewsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsTableViewCell.swift; sourceTree = "<group>"; };
+		CD552DD31C75DF670012920F /* PositionIn.NewsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.NewsTableViewCell.xib; sourceTree = "<group>"; };
+		CD552DD51C75DFB80012920F /* NewsCellModelFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsCellModelFactory.swift; sourceTree = "<group>"; };
+		CD552DD61C75DFB80012920F /* NewsTableViewCellModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsTableViewCellModel.swift; sourceTree = "<group>"; };
 		CD794DDF1C52485E00C1C298 /* OpenApplication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpenApplication.swift; sourceTree = "<group>"; };
 		CD795BDA1C57B4EE00C1C298 /* Appfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Appfile; sourceTree = "<group>"; };
 		CD795BDB1C57B4EE00C1C298 /* Fastfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Fastfile; sourceTree = "<group>"; };
@@ -603,6 +623,8 @@
 		CD795C4D1C590C1700C1C298 /* SegmentedControlContainerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SegmentedControlContainerViewController.xib; sourceTree = "<group>"; };
 		CD795C7F1C5A382000C1C298 /* MembershipPlan.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MembershipPlan.swift; sourceTree = "<group>"; };
 		CD795C821C5A6DCB00C1C298 /* MembershipPlansViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MembershipPlansViewController.swift; sourceTree = "<group>"; };
+		CD87FDED1C7611AA00E610AE /* NewsMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsMapViewController.swift; sourceTree = "<group>"; };
+		CD87FDEF1C76133100E610AE /* NewsMapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewsMapViewController.xib; sourceTree = "<group>"; };
 		CD8ED0D51C60AD1A00576DBF /* MembershipMemberCardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MembershipMemberCardViewController.swift; sourceTree = "<group>"; };
 		CD8ED0D81C60AE1400576DBF /* MembershipMemberCardViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MembershipMemberCardViewController.xib; sourceTree = "<group>"; };
 		CD8ED0DD1C60BE7000576DBF /* MembershipCardView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MembershipCardView.xib; sourceTree = "<group>"; };
@@ -1296,6 +1318,20 @@
 			path = ItemSearchResult;
 			sourceTree = "<group>";
 		};
+		CD076E851C739215005C04C2 /* News */ = {
+			isa = PBXGroup;
+			children = (
+				CD552DD21C75DF560012920F /* CellModel */,
+				CD552DCF1C75DF0D0012920F /* NewsTableViewCell */,
+				CD21C8CF1C76002C009261C7 /* NewsContainerViewController.swift */,
+				CD076E861C73922A005C04C2 /* NewsListViewController.swift */,
+				CD076E881C7497A8005C04C2 /* PositionIn.NewsListViewController.xib */,
+				CD87FDED1C7611AA00E610AE /* NewsMapViewController.swift */,
+				CD87FDEF1C76133100E610AE /* NewsMapViewController.xib */,
+			);
+			path = News;
+			sourceTree = "<group>";
+		};
 		CD0FCC2B1C69ECD800AFD36C /* TotalView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1303,6 +1339,15 @@
 				CD0FCC2D1C69ECD800AFD36C /* TotalCell.xib */,
 			);
 			path = TotalView;
+			sourceTree = "<group>";
+		};
+		CD21C8D11C7600A0009261C7 /* BarButtonItemContainer */ = {
+			isa = PBXGroup;
+			children = (
+				CD21C8D21C7600B0009261C7 /* BarButtonItemContainerViewController.swift */,
+				CD21C8D41C7601B7009261C7 /* BarButtonItemContainerViewController.xib */,
+			);
+			path = BarButtonItemContainer;
 			sourceTree = "<group>";
 		};
 		CD21EA491C68E39900E50909 /* MPesaDetails */ = {
@@ -1336,6 +1381,24 @@
 				CD33581F1C6CD19A00E78267 /* MoreInformationViewController.swift */,
 			);
 			path = Attachments;
+			sourceTree = "<group>";
+		};
+		CD552DCF1C75DF0D0012920F /* NewsTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				CD552DD31C75DF670012920F /* PositionIn.NewsTableViewCell.xib */,
+				CD552DD01C75DF1A0012920F /* NewsTableViewCell.swift */,
+			);
+			path = NewsTableViewCell;
+			sourceTree = "<group>";
+		};
+		CD552DD21C75DF560012920F /* CellModel */ = {
+			isa = PBXGroup;
+			children = (
+				CD552DD51C75DFB80012920F /* NewsCellModelFactory.swift */,
+				CD552DD61C75DFB80012920F /* NewsTableViewCellModel.swift */,
+			);
+			path = CellModel;
 			sourceTree = "<group>";
 		};
 		CD795BC71C57B4C700C1C298 /* Classes */ = {
@@ -1454,6 +1517,7 @@
 		CD795C461C590BEE00C1C298 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				CD21C8D11C7600A0009261C7 /* BarButtonItemContainer */,
 				CD795C471C590BEE00C1C298 /* Container */,
 				CD795C491C590BEE00C1C298 /* SegmentControlContainer */,
 			);
@@ -2028,6 +2092,7 @@
 		E64DC34C1B4E53C90011D37C /* PositionIn */ = {
 			isa = PBXGroup;
 			children = (
+				CD076E851C739215005C04C2 /* News */,
 				CD795BC71C57B4C700C1C298 /* Classes */,
 				CD33581E1C6CCE2F00E78267 /* Attachments */,
 				CDBDD9A71C47AFB2007578BC /* Volunteer */,
@@ -3527,7 +3592,6 @@
 					};
 					E6E2FE871B66F61300880F3C = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = WVE53RRC7C;
 					};
 				};
 			};
@@ -3563,8 +3627,10 @@
 				CD8ED0DE1C60BE7000576DBF /* MembershipCardView.xib in Resources */,
 				50C7B5B21BC6A32900E8E8B4 /* PositionIn.SettingsViewController.xib in Resources */,
 				E6BEF1E81B9C83F200511B46 /* PositionIn.CommunityInfoCell.xib in Resources */,
+				CD552DD41C75DF670012920F /* PositionIn.NewsTableViewCell.xib in Resources */,
 				D1F1FF2F1C24265B006D2E75 /* PositionIn.GiveBloodDetailsViewController.xib in Resources */,
 				D1379E951C2C21F80041AA4E /* PositionIn.NewsCardCell.xib in Resources */,
+				CD21C8D51C7601B7009261C7 /* BarButtonItemContainerViewController.xib in Resources */,
 				E6BEF1E71B9C83F200511B46 /* PositionIn.CommunityHeaderCell.xib in Resources */,
 				D1F86CF11BFCAA96006E0C49 /* Onboarding.storyboard in Resources */,
 				D1F1FF261C22F384006D2E75 /* PositionIn.VolunteerDetailsViewController.xib in Resources */,
@@ -3614,6 +3680,7 @@
 				E6C9523B1BA1DC910032254F /* PositionIn.ProfileFollowCell.xib in Resources */,
 				D196225F1BF13075003BCD85 /* GoogleService-Info.plist in Resources */,
 				E6BEF1CC1B9C5E7200511B46 /* PositionIn.PostImageCell.xib in Resources */,
+				CD076E891C7497A8005C04C2 /* PositionIn.NewsListViewController.xib in Resources */,
 				E689F07D1B6B976100597587 /* PositionIn.ProductInventoryCell.xib in Resources */,
 				E6BEF1E61B9C83F200511B46 /* PositionIn.CommunityActionCell.xib in Resources */,
 				CDEDD9741C45242400396594 /* PositionIn.VolunteerSearchViewController.xib in Resources */,
@@ -3621,6 +3688,7 @@
 				CD795BDE1C57B4EE00C1C298 /* Appfile in Resources */,
 				D1CAA7531C60BB1E0046130E /* PaymentTableViewCell.xib in Resources */,
 				E6F7A4721BA335070069152A /* PositionIn.WalletViewController.xib in Resources */,
+				CD87FDF01C76133100E610AE /* NewsMapViewController.xib in Resources */,
 				E6BEF1C61B9C556300511B46 /* PositionIn.PostViewController.xib in Resources */,
 				CDB5B5CD1C5B9C2400413715 /* MembershipPlanTableViewCell.xib in Resources */,
 				CDBDD9B11C47CAAB007578BC /* PositionIn.BrowseVolunteerViewController.xib in Resources */,
@@ -3803,6 +3871,7 @@
 				E62B16FF1B5CE0F800D446BC /* BesideMenuViewController.swift in Sources */,
 				E66F901B1BA6A5C100280B77 /* ChatController.swift in Sources */,
 				D1B780C81C0F4E7700EF5825 /* DonateViewController.swift in Sources */,
+				CD552DD71C75DFB80012920F /* NewsCellModelFactory.swift in Sources */,
 				CD795BE31C57B59500C1C298 /* AppDelegate.swift in Sources */,
 				E66115A51B73A920003DB5B3 /* AddProductViewController.swift in Sources */,
 				E6365D351B7D709E00CB79CB /* PhotoInfo.swift in Sources */,
@@ -3872,6 +3941,7 @@
 				E6C952361BA1D9960032254F /* ProfileInfoCell.swift in Sources */,
 				D1DA176C1C05B7BE0091A8CE /* BrowseGridCollectionViewCell.swift in Sources */,
 				D1379E8D1C2A98710041AA4E /* ExploreCardCell.swift in Sources */,
+				CD552DD11C75DF1A0012920F /* NewsTableViewCell.swift in Sources */,
 				E6C9522C1BA1BB0E0032254F /* PeopleListCell.swift in Sources */,
 				E6F243761B8B31510033B13C /* BrowseTabbar.swift in Sources */,
 				CD21EA531C68E46000E50909 /* MembershipPaymentViewController.swift in Sources */,
@@ -3879,18 +3949,21 @@
 				D1FD85461C1EF6DB00C2E87B /* BomaHotelsDetailsViewController.swift in Sources */,
 				E6A869EE1B60D42C00797D16 /* APIService.swift in Sources */,
 				D1F86CF31BFCBAD3006E0C49 /* PhoneNumberViewController.swift in Sources */,
+				CD87FDEE1C7611AA00E610AE /* NewsMapViewController.swift in Sources */,
 				D15F47441C088A26009ED3FD /* HomeItem.swift in Sources */,
 				CD8ED0E01C60BE7C00576DBF /* MembershipCardView.swift in Sources */,
 				E6F7A4701BA333D70069152A /* WalletViewController.swift in Sources */,
 				D15F474D1C0B7801009ED3FD /* AmbulanceRequestedViewController.swift in Sources */,
 				E68B52031B873687006B980C /* FeedItemCellModelFactory.swift in Sources */,
 				CD795C831C5A6DCB00C1C298 /* MembershipPlansViewController.swift in Sources */,
+				CD076E871C73922A005C04C2 /* NewsListViewController.swift in Sources */,
 				E6829B041B5E6CF800FB1E1D /* RoundButton.swift in Sources */,
 				E6DADBA01B8C5907009A5694 /* ItemCategory.swift in Sources */,
 				E6BB09FE1BC51369008D59B7 /* CreateConversationViewController.swift in Sources */,
 				E6BEF1CD1B9C5E7200511B46 /* PostImageCell.swift in Sources */,
 				D1F1FF251C22F384006D2E75 /* VolunteerDetailsViewController.swift in Sources */,
 				D1FD854B1C1EFE0F00C2E87B /* MarketDetailsViewController.swift in Sources */,
+				CD21C8D01C76002C009261C7 /* NewsContainerViewController.swift in Sources */,
 				2431EBE01B94C1DC009FB158 /* Event.swift in Sources */,
 				24EF62111BA81A6B00472531 /* ChatHistoryCellModel.swift in Sources */,
 				E6BEF1EF1B9C9D6400511B46 /* CommunityViewController.swift in Sources */,
@@ -3911,6 +3984,7 @@
 				E6F243701B8B17910033B13C /* DisplayModeViewController.swift in Sources */,
 				D15F47491C0B77D7009ED3FD /* AmbulanceBaseController.swift in Sources */,
 				E6F7A47D1BA356130069152A /* LocationCell.swift in Sources */,
+				CD21C8D31C7600B0009261C7 /* BarButtonItemContainerViewController.swift in Sources */,
 				D15F47471C0AFDAF009ED3FD /* CallAmbulanceViewController.swift in Sources */,
 				E68B52011B873545006B980C /* FeedTableViewCellModel.swift in Sources */,
 				E6C5F4581BCE908800E3B8C7 /* ConversationManager.swift in Sources */,
@@ -3983,6 +4057,7 @@
 				E6D4D5B81B6FA7A7003134CB /* SearchTransition.swift in Sources */,
 				E6F3093D1BA81FAF00C9420C /* AttachedPhotosView.swift in Sources */,
 				E6BEF1DB1B9C7F9D00511B46 /* BrowseCommunityCellFactory.swift in Sources */,
+				CD552DD81C75DFB80012920F /* NewsTableViewCellModel.swift in Sources */,
 				E660E5301B5AC28600F52050 /* MainMenuCell.swift in Sources */,
 				E6C952391BA1DA400032254F /* ProfileFollowCell.swift in Sources */,
 				E6C952261BA1A8230032254F /* StringValidation.swift in Sources */,
@@ -4268,6 +4343,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_REPEATED_USE_OF_WEAK = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -4299,6 +4375,7 @@
 				OTHER_LDFLAGS = "-lxml2";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.positionin.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -4358,7 +4435,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Media Applications ltd";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Media Applications ltd";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -4467,6 +4544,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_REPEATED_USE_OF_WEAK = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -4498,6 +4576,7 @@
 				OTHER_LDFLAGS = "-lxml2";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.positionin.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -4607,7 +4686,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: John Smith (YQDELLEP82)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -4680,7 +4759,7 @@
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -D DEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = com.positionin.dev01;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "4090597b-3616-4b1a-bf12-4db79621e1df";
+				PROVISIONING_PROFILE = "b80b49a5-97f8-4b09-9b74-b633ea091187";
 				STRIP_INSTALLED_PRODUCT = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "PositionIn/PositionIn-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -4693,7 +4772,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Media Applications ltd";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -5042,7 +5121,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Media Applications ltd";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Media Applications ltd";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -5427,7 +5506,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Media Applications ltd";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Media Applications ltd";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (

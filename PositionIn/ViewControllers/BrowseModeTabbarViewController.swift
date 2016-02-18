@@ -213,13 +213,13 @@ protocol BrowseModeDisplay {
             MembershipRouterImplementation().showInitialViewController(from: self)
         case .Volunteer:
             self.navigationController?.pushViewController(Storyboards.Main.instantiateBrowseVolunteerViewController(), animated: true)
-        case .Market:
+        case .News:
+            self.navigationController?.pushViewController(NewsContainerViewController(), animated: true)
+        case .Market: 
             fallthrough
         case .BomaHotels:
             fallthrough
         case .Events:
-            fallthrough
-        case .News:
             fallthrough
         case .GiveBlood:
             fallthrough
@@ -228,14 +228,12 @@ protocol BrowseModeDisplay {
         case .Training:
             fallthrough
         case .Projects:
-            
+            let controller = Storyboards.Main.instantiateExploreViewControllerId()
             let filterUpdate = { (filter: SearchFilter) -> SearchFilter in
                 var f = filter
                 f.homeItemType = itemType
                 return f
             }
-            
-            let controller = Storyboards.Main.instantiateExploreViewControllerId()
             controller.childFilterUpdate = filterUpdate
             controller.title = itemType.displayString()
             self.navigationController?.pushViewController(controller, animated: true)

@@ -28,7 +28,7 @@ class NewsCardCell: TableViewCell {
         if let date = m!.date {
             infoLabel.text = date.formattedAsTimeAgo()
         }
-
+        
         detailsLabel.text = m!.details
         
         if let numOfLikes = m!.numOfLikes {
