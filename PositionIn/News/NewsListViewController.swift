@@ -122,8 +122,8 @@ extension NewsListViewController {
         
         func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
             tableView.deselectRowAtIndexPath(indexPath, animated: true)
-            if let model = self.tableView(tableView, modelForIndexPath: indexPath) as? FeedTableCellModel {
-                self.actionConsumer?.showNewsDetails(model.objectID)
+            if let model = self.tableView(tableView, modelForIndexPath: indexPath) as? NewsTableViewCellModel {
+                self.actionConsumer?.showNewsDetails(model.item.objectId)
             }
         }
         
