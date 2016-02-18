@@ -33,7 +33,7 @@ class NewsListViewController: UIViewController {
         super.viewDidLoad()
         self.title = NSLocalizedString("KRCS News")
         
-        dataSource.configureTable(tableView)
+        dataSource.configureTable(self.tableView)
         self.reloadData()
     }
     
