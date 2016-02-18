@@ -89,10 +89,6 @@ struct Storyboards {
             return self.storyboard.instantiateViewControllerWithIdentifier("BrowseGridViewController") as! BrowseGridViewController
         }
 
-        static func instantiateNewsViewController() -> NewsListViewController {
-            return self.storyboard.instantiateViewControllerWithIdentifier("NewsViewController") as! NewsListViewController
-        }
-
         static func instantiateExploreViewControllerId() -> ExploreViewController {
             return self.storyboard.instantiateViewControllerWithIdentifier("ExploreViewControllerId") as! ExploreViewController
         }
@@ -758,13 +754,6 @@ extension TrainingDetailsViewController {
 extension BrowseGridViewController: IdentifiableProtocol { 
     var identifier: String? { return "BrowseGridViewController" }
     static var identifier: String? { return "BrowseGridViewController" }
-}
-
-
-//MARK: - NewsListViewController
-extension NewsListViewController: IdentifiableProtocol { 
-    var identifier: String? { return "NewsViewController" }
-    static var identifier: String? { return "NewsViewController" }
 }
 
 
