@@ -444,14 +444,6 @@
             </objects>
             <point key="canvasLocation" x="3423" y="-1538"/>
         </scene>
-        <!--News List View Controller-->
-        <scene sceneID="9q6-P5-JtK">
-            <objects>
-                <viewController storyboardIdentifier="NewsViewController" id="fe0-VC-zD9" customClass="NewsListViewController" customModule="PositionIn" customModuleProvider="target" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="pIL-6g-QwV" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="4143" y="-2335"/>
-        </scene>
         <!--Explore View Controller-->
         <scene sceneID="ABc-sq-kRO">
             <objects>
