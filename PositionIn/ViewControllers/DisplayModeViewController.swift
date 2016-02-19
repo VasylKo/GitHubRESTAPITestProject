@@ -88,7 +88,7 @@ protocol BrowseActionConsumer: class {
             actionProducer.actionConsumer = self
         }
         
-        displayModeSegmentedControl.selectedSegmentIndex = mode.rawValue
+        self.navigationItem.rightBarButtonItem = self.barButtonItems[mode.rawValue]
     }
     
     func prepareDisplayController(controller: UIViewController) {
@@ -108,47 +108,30 @@ protocol BrowseActionConsumer: class {
     }
     
     func setRightBarItems() {
-        let segmentButton = UIBarButtonItem(customView: displayModeSegmentedControl)
-        let spacer = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FixedSpace, target: nil,
-            action: nil)
-        spacer.width = -15;
-        self.navigationItem.rightBarButtonItems = [spacer, segmentButton]
+        for imageName in ["list_view_icon", "map_view_icon"] {
+            let barButtonItem : UIBarButtonItem  = UIBarButtonItem(image: UIImage(named: imageName),
+                                                                   style: .Plain,
+                                                                  target: self,
+                                                                  action: Selector("barButtonPressed:"))
+            self.barButtonItems.append(barButtonItem)
+        }
+
+        self.navigationItem.rightBarButtonItem = self.barButtonItems[0]
     }
     
     private(set) internal weak var contentView: UIView!
     
     //MARK: - Display segment -
     
-    typealias DisplayModeSegmentedControl = HMSegmentedControl
-    
-    private(set) internal lazy var displayModeSegmentedControl: DisplayModeSegmentedControl = { [unowned self] in
-        let items = [
-            UIImage(named: "BrowseModeMap")!,
-            UIImage(named: "BrowseModeList")!,
-        ]
-        let selectedItems = [
-            UIImage(named: "BrowseModeMapSelected")!,
-            UIImage(named: "BrowseModeListSelected")!,
-        ]
+    private var barButtonItems : [UIBarButtonItem] = []
+
+    @IBAction private func barButtonPressed(barButtonItem : UIBarButtonItem) {
+        let index = self.barButtonItems.indexOf(barButtonItem)!
+        let next = (index == 0) ? 1 : 0
         
-        let segmentControl = DisplayModeSegmentedControl(sectionImages: items, sectionSelectedImages: selectedItems)
-        segmentControl.frame = CGRect(origin: CGPointZero, size: CGSize(width: 80, height: 44))
-        segmentControl.selectionIndicatorColor = UIColor.whiteColor()
-        segmentControl.backgroundColor = UIColor.clearColor()
-        segmentControl.segmentEdgeInset = UIEdgeInsetsZero
-        segmentControl.selectionIndicatorHeight = 2.0
-        segmentControl.borderWidth = 0.0
-        segmentControl.userDraggable = false
-        segmentControl.verticalDividerEnabled = false
-        segmentControl.selectionIndicatorLocation = HMSegmentedControlSelectionIndicatorLocationDown
-        segmentControl.selectionStyle = HMSegmentedControlSelectionStyleFullWidthStripe
-        segmentControl.addTarget(self, action: "displayModeSegmentChanged:", forControlEvents: UIControlEvents.ValueChanged)
-        return segmentControl
-        }()
-    
-    
-    @IBAction private func displayModeSegmentChanged(sender: HMSegmentedControl) {
-        if let displayMode = DisplayMode(rawValue: sender.selectedSegmentIndex) {
+        self.navigationItem.setRightBarButtonItem(self.barButtonItems[next], animated: true)
+        
+        if let displayMode = DisplayMode(rawValue: next) {
             self.displayMode = displayMode
         } else {
             fatalError("Unknown display mode in segment control")

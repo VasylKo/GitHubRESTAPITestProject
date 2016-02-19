@@ -10,15 +10,12 @@ import Foundation
 
 class BarButtonItemContainerViewController: ContainerViewController {
     
-    private let controllerTitle : String
     private var barButtonItems : [UIBarButtonItem] = []
     
     //MARK: Initializers
     
     init(containeredViewControllers : [UIViewController], title : String, imageNames : [String]) {
         assert(imageNames.count == containeredViewControllers.count)
-        
-        self.controllerTitle = title
         
         super.init(nibName: String(BarButtonItemContainerViewController.self), containeredViewControllers: containeredViewControllers)
         
