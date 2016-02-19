@@ -16,19 +16,19 @@ final class AppConfiguration {
 //            amazonURL = NSURL(string: "https://pos-prod.s3.amazonaws.com/")!
             //Workaround bug in S3
             amazonURL = NSURL(string: "https://krcs.rc-app.com")!
-            xmppHostname = "krcs.rc-app.com"
+            xmppHostname = "chat-krcs.rc-app.com"
             googleAnalystLogLevel = GAILogLevel.Verbose
             googleMapsKey = "AIzaSyDkUHOpFWNBDAW5Gu2I0E7iHe4FRWGyM6o"
         case .Staging:
             baseURL = NSURL(string: "https://app-sta.positionin.com/api/")!
             amazonURL = NSURL(string: "https://pos-sta.s3.amazonaws.com/")!
-            xmppHostname = "app-sta.positionin.com"
+            xmppHostname = "chat-sta.positionin.com"
             googleAnalystLogLevel = GAILogLevel.Verbose
             googleMapsKey = "AIzaSyDkUHOpFWNBDAW5Gu2I0E7iHe4FRWGyM6o"
         case .StagingCopy:
             baseURL = NSURL(string: "https://app-sta2.positionin.com/api/")!
             amazonURL = NSURL(string: "https://pos-sta.s3.amazonaws.com/")!
-            xmppHostname = "app-sta2.positionin.com"
+            xmppHostname = "chat-sta2.positionin.com"
             googleAnalystLogLevel = GAILogLevel.Verbose
             googleMapsKey = "AIzaSyDkUHOpFWNBDAW5Gu2I0E7iHe4FRWGyM6o"
         case .Dev:
