@@ -40,8 +40,10 @@ struct FeedItemCellModelFactory {
                     title: feedItem.name,
                     details: feedItem.author?.title,
                     info: nil,
+                    text: feedItem.text,
                     price: feedItem.donations,
                     imageURL: feedItem.image,
+                    avatarURL: feedItem.author?.avatar,
                     location: feedItem.location,
                     numOfLikes: feedItem.numOfLikes,
                     numOfComments: feedItem.numOfComments,
@@ -115,7 +117,9 @@ struct FeedItemCellModelFactory {
                 title: feedItem.name,
                 details: feedItem.details,
                 info: feedItem.text,
+                text: feedItem.text,
                 imageURL: feedItem.image,
+                avatarURL: nil,
                 badge: feedItem.price.map {
                     let newValue = $0 as Float
                     return AppConfiguration().currencyFormatter.stringFromNumber(NSNumber(float: newValue)) ?? ""},

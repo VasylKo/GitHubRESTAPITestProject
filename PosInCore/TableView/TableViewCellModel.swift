@@ -25,6 +25,16 @@ public struct TableViewCellTextModel: TableViewCellModel {
     }
 }
 
+public struct TableViewCellAttendEventModel: TableViewCellModel {
+    public let attendEvent: Bool
+    public let title: String
+    
+    public init(title: String, attendEvent: Bool) {
+        self.title = title
+        self.attendEvent = attendEvent
+    }
+}
+
 public struct TableViewCellImageTextModel: TableViewCellModel {
     public let title: String
     public let image: String

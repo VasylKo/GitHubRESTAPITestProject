@@ -68,7 +68,7 @@
                                     </userDefinedRuntimeAttributes>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.09 miles" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PbB-SZ-dD3">
-                                    <rect key="frame" x="31" y="44" width="559" height="18"/>
+                                    <rect key="frame" x="31" y="45" width="559" height="18"/>
                                     <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="15"/>
                                     <color key="textColor" red="0.92941176469999998" green="0.1058823529" blue="0.18039215689999999" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
@@ -77,7 +77,7 @@
                                     </userDefinedRuntimeAttributes>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Edward Ryan" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AwI-et-ZL1">
-                                    <rect key="frame" x="10" y="72" width="580" height="17"/>
+                                    <rect key="frame" x="10" y="73" width="580" height="17"/>
                                     <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="14"/>
                                     <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
@@ -86,7 +86,7 @@
                                     </userDefinedRuntimeAttributes>
                                 </label>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="productPinDistance" translatesAutoresizingMaskIntoConstraints="NO" id="RJr-VN-Z99">
-                                    <rect key="frame" x="10" y="42" width="16" height="17"/>
+                                    <rect key="frame" x="10" y="43" width="16" height="17"/>
                                     <color key="tintColor" red="0.92941176469999998" green="0.1058823529" blue="0.18039215689999999" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="17" id="1eP-x9-rFi"/>
@@ -111,10 +111,10 @@
                             </constraints>
                         </view>
                         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" style="plain" rowHeight="45" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="WGk-sZ-jno" customClass="TableView" customModule="PosInCore">
-                            <rect key="frame" x="0.0" y="399" width="600" height="300"/>
+                            <rect key="frame" x="0.0" y="399" width="600" height="350"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="300" id="hnE-YC-9qb"/>
+                                <constraint firstAttribute="height" constant="350" id="hnE-YC-9qb"/>
                             </constraints>
                             <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </tableView>
@@ -124,7 +124,7 @@
                         <constraint firstAttribute="bottom" secondItem="WGk-sZ-jno" secondAttribute="bottom" id="5xe-B6-5ze"/>
                         <constraint firstAttribute="trailing" secondItem="WGk-sZ-jno" secondAttribute="trailing" id="AaC-9m-Opp"/>
                         <constraint firstItem="uaV-NL-9EA" firstAttribute="width" secondItem="3E7-za-PSW" secondAttribute="width" id="B0m-BH-bpk"/>
-                        <constraint firstItem="WGk-sZ-jno" firstAttribute="top" secondItem="Omg-0P-QlP" secondAttribute="bottom" id="D4T-ms-NjC"/>
+                        <constraint firstItem="WGk-sZ-jno" firstAttribute="top" secondItem="Omg-0P-QlP" secondAttribute="bottom" constant="-1" id="D4T-ms-NjC"/>
                         <constraint firstAttribute="trailing" secondItem="KiG-BC-0uH" secondAttribute="trailing" id="DTn-cR-GOJ"/>
                         <constraint firstAttribute="trailing" secondItem="uaV-NL-9EA" secondAttribute="trailing" id="KxQ-Xq-irf"/>
                         <constraint firstItem="KiG-BC-0uH" firstAttribute="leading" secondItem="3E7-za-PSW" secondAttribute="leading" id="L8s-24-9Me"/>

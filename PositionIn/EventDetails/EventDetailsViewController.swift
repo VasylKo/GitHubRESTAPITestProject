@@ -28,7 +28,11 @@ final class EventDetailsViewController: UIViewController {
     private func reloadData() {
         if let objectId = objectId {
             api().getEvent(objectId).onSuccess { [weak self] event in
-                self?.didReceiveEventDetails(event)
+                if let strongSelf = self {
+                    strongSelf.didReceiveEventDetails(event)
+                    strongSelf.dataSource.items = strongSelf.eventActionItems()
+                    strongSelf.dataSource.configureTable(strongSelf.actionTableView)
+                }
             }
         }
     }
@@ -58,6 +62,10 @@ final class EventDetailsViewController: UIViewController {
         priceLabel.text = "\(startDate) - \(endDate)"
         eventImageView.setImageFromURL(imageURL, placeholder: image)
         
+        if event.location?.coordinates != nil {
+            self.dataSource.items = self.eventActionItems()
+            self.dataSource.configureTable(self.actionTableView)
+        }
     }
     
     private lazy var dataSource: EventDetailsDataSource = { [unowned self] in
@@ -66,19 +74,31 @@ final class EventDetailsViewController: UIViewController {
         return dataSource
         }()
     
-    
     private func eventActionItems() -> [[EventActionItem]] {
-        return [
-            [ // 0 section
-                EventActionItem(title: NSLocalizedString("Attend", comment: "Event action: Attend"), image: "eventAttend", action: .Attend),
-            ],
-            [ // 1 section
-                EventActionItem(title: NSLocalizedString("Send Message", comment: "Event action: Send Message"), image: "productSendMessage", action: .SendMessage),
-                EventActionItem(title: NSLocalizedString("Organizer Profile", comment: "Event action: Organizer Profile"), image: "productSellerProfile", action: .OrganizerProfile),
-                /*EventActionItem(title: NSLocalizedString("More Information", comment: "Event action: Terms and Information"), image: "productTerms&Info", action: .TermsAndInformation),
-                EventActionItem(title: NSLocalizedString("Navigate", comment: "Event action: Navigate"), image: "productNavigate", action: .Navigate)*/
-            ],
+        var isAttend = false
+        var title = "Attend"
+        if let attend = self.event?.isAttending {
+            isAttend = attend
+            title = attend ? "Attending" : "Attend"
+        }
+        let zeroSection = [ // 0 section
+            EventActionItem(title: NSLocalizedString(title, comment: "Event action: Attend"), image: "eventAttend", attend:isAttend ,
+                action: .Attend)
         ]
+        
+        var firstSection = [ // 1 section
+            EventActionItem(title: NSLocalizedString("Send Message", comment: "Event action: Send Message"), image: "productSendMessage", action: .SendMessage),
+            EventActionItem(title: NSLocalizedString("Organizer Profile", comment: "Event action: Organizer Profile"), image: "productSellerProfile", action: .OrganizerProfile),]
+        if self.event?.location != nil {
+            firstSection.append(EventActionItem(title: NSLocalizedString("Navigate", comment: "Event action: Navigate"), image: "productNavigate", action: .Navigate))
+        }
+        if self.event?.links?.isEmpty == false || self.event?.attachments?.isEmpty == false {
+            firstSection.append(EventActionItem(title: NSLocalizedString("More Information"), image: "productTerms&Info", action: .MoreInformation))
+        } else {
+            firstSection.append(EventActionItem(title: NSLocalizedString("No attachments"), image: "productTerms&Info", action: .MoreInformation))
+        }
+        
+        return [zeroSection, firstSection]
     }
     
     var objectId: CRUDObjectId?
@@ -97,7 +117,7 @@ final class EventDetailsViewController: UIViewController {
 
 extension EventDetailsViewController {
     enum EventDetailsAction: CustomStringConvertible {
-        case Attend, SendMessage, OrganizerProfile, TermsAndInformation, Navigate
+        case Attend, SendMessage, OrganizerProfile, TermsAndInformation, Navigate, MoreInformation
         
         var description: String {
             switch self {
@@ -111,6 +131,8 @@ extension EventDetailsViewController {
                 return "Terms & Information"
             case .Navigate:
                 return "Navigate"
+            case .MoreInformation:
+                return "More Information"
             }
         }
     }
@@ -119,7 +141,16 @@ extension EventDetailsViewController {
     struct EventActionItem {
         let title: String
         let image: String
+        var attend: Bool = false
         let action: EventDetailsAction
+        
+        
+        init(title: String, image: String, attend: Bool = false, action: EventDetailsAction) {
+            self.title = title
+            self.image = image
+            self.attend = attend
+            self.action = action
+        }
     }
 }
 
@@ -138,14 +169,35 @@ extension EventDetailsViewController: EventDetailsActionConsumer {
             }
         case .Attend :
             if api().isUserAuthorized() {
-                //TODO: need implement
+                var isAttend = false
+                if let attend = self.event?.isAttending {
+                    isAttend = attend
+                }
+                if let event = self.event {
+                    api().attendEvent(event.objectId, attend:!isAttend).onSuccess(callback: {
+                        self.reloadData()
+                    })
+                }
+
             } else {
                 api().logout().onComplete {[weak self] _ in
                     self?.sideBarController?.executeAction(.Login)
                 }
                 return
             }
-
+        case .MoreInformation:
+            if self.event?.links?.isEmpty == false || self.event?.attachments?.isEmpty == false {
+                let moreInformationViewController = MoreInformationViewController(links: self.event?.links, attachments: self.event?.attachments)
+                self.navigationController?.pushViewController(moreInformationViewController, animated: true)
+            }
+            return
+        case .Navigate:
+            if let coordinates = self.event?.location?.coordinates {
+                OpenApplication.appleMap(with: coordinates)
+            } else {
+                Log.error?.message("coordinates missed")
+            }
+            return
         default:
             Log.warning?.message("Unhandled action: \(action)")
             return
@@ -172,12 +224,24 @@ extension EventDetailsViewController {
         }
         
         @objc override func tableView(tableView: UITableView, reuseIdentifierForIndexPath indexPath: NSIndexPath) -> String {
-            return ActionCell.reuseId()
+            if indexPath.section == 0 {
+                return AttendEventCell.reuseId()
+            }
+            else {
+                return ActionCell.reuseId()
+            }
         }
         
         override func tableView(tableView: UITableView, modelForIndexPath indexPath: NSIndexPath) -> TableViewCellModel {
             let item = items[indexPath.section][indexPath.row]
-            let model = TableViewCellImageTextModel(title: item.title, imageName: item.image)
+            var model: TableViewCellModel
+            if indexPath.section == 0 {
+                model = TableViewCellAttendEventModel(title: item.title, attendEvent: item.attend)
+            }
+            else {
+                model = TableViewCellImageTextModel(title: item.title, imageName: item.image)
+            }
+
             return model
         }
         
@@ -189,7 +253,7 @@ extension EventDetailsViewController {
         }
         
         override func nibCellsId() -> [String] {
-            return [ActionCell.reuseId()]
+            return [ActionCell.reuseId(), AttendEventCell.reuseId()]
         }
         
         func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -201,5 +265,3 @@ extension EventDetailsViewController {
         }
     }
 }
-
-

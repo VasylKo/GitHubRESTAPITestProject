@@ -137,7 +137,7 @@ public class NetworkDataProvider {
         if let validation = validation {
             return request.validate(validation)
         } else {
-            return request.validate(statusCode: [] + (200..<300) + (400..<500) )
+            return request.validate(statusCode: [] + (200..<300) + (400..<600) )
         }
     }
 }
@@ -149,9 +149,6 @@ private extension Alamofire.Request {
     private static func CustomResponseSerializer<T>(mapping: AnyObject? -> T?) -> ResponseSerializer<T, NSError> {
         return ResponseSerializer { request, response, data, error in
             guard error == nil else { return .Failure(error!) }
-            if let statusCode = response?.statusCode where statusCode == 401 {
-                return .Failure(NetworkDataProvider.ErrorCodes.InvalidSessionError.error())
-            }
             
             let JSONResponseSerializer = Request.JSONResponseSerializer(options: .AllowFragments)
             let result = JSONResponseSerializer.serializeResponse(request, response, data, error)
@@ -161,7 +158,11 @@ private extension Alamofire.Request {
                 guard let object = mapping(json) else {
                     if  let jsonDict = json as? [String: AnyObject],
                         let msg = jsonDict["error"] as? String {
-                            return .Failure(NetworkDataProvider.ErrorCodes.TransferError.error(localizedDescription: msg))
+                            if let statusCode = response?.statusCode where statusCode == 401 {
+                                return .Failure(NetworkDataProvider.ErrorCodes.InvalidSessionError.error(localizedDescription: msg))
+                            } else {
+                                return .Failure(NetworkDataProvider.ErrorCodes.TransferError.error(localizedDescription: msg))
+                            }
                     }
                     return .Failure(NetworkDataProvider.ErrorCodes.InvalidResponseError.error())
                 }

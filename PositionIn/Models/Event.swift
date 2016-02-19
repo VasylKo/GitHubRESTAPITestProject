@@ -21,6 +21,9 @@ struct Event: CRUDObject {
     var participants: Int? = 0
     var author: CRUDObjectId?
     var imageURLString: String?
+    var links : [NSURL]?
+    var attachments : [Attachment]?
+    var isAttending: Bool?
     
 /* 
     TODO:
@@ -66,8 +69,6 @@ struct Event: CRUDObject {
     
 */
     
-    
-    
     init(objectId: CRUDObjectId = CRUDObjectInvalidId) {
         self.objectId = objectId
     }
@@ -83,7 +84,6 @@ struct Event: CRUDObject {
     }
     
     mutating func mapping(map: Map) {
-        
         objectId <- (map["id"], CRUDObjectIdTransform())
         name <- map["name"]
         text <- map["description"]
@@ -95,6 +95,9 @@ struct Event: CRUDObject {
         participants <- map["numOfParticipants"]
         author <- (map["author"], CRUDObjectIdTransform())
         imageURLString <- map["image"]
+        links <- (map["links"], URLTransform())
+        attachments <- map["attachments"]
+        isAttending <- map["isAttending"]
     }
     
     static func endpoint() -> String {
@@ -103,6 +106,10 @@ struct Event: CRUDObject {
     
     static func endpoint(eventId: CRUDObjectId) -> String {
         return (Event.endpoint() as NSString).stringByAppendingPathComponent("\(eventId)")
+    }
+    
+    static func endpointAttend(eventId: CRUDObjectId) -> String {
+        return (Event.endpoint() as NSString).stringByAppendingPathComponent("\(eventId)/members")
     }
     
     static func userEventsEndpoint(userId: CRUDObjectId) -> String {

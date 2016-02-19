@@ -16,25 +16,25 @@ final class AppConfiguration {
 //            amazonURL = NSURL(string: "https://pos-prod.s3.amazonaws.com/")!
             //Workaround bug in S3
             amazonURL = NSURL(string: "https://krcs.rc-app.com")!
-            xmppHostname = "krcs.rc-app.com"
+            xmppHostname = "chat-krcs.rc-app.com"
             googleAnalystLogLevel = GAILogLevel.Verbose
             googleMapsKey = "AIzaSyDkUHOpFWNBDAW5Gu2I0E7iHe4FRWGyM6o"
         case .Staging:
             baseURL = NSURL(string: "https://app-sta.positionin.com/api/")!
             amazonURL = NSURL(string: "https://pos-sta.s3.amazonaws.com/")!
-            xmppHostname = "app-sta.positionin.com"
+            xmppHostname = "chat-sta.positionin.com"
             googleAnalystLogLevel = GAILogLevel.Verbose
             googleMapsKey = "AIzaSyDkUHOpFWNBDAW5Gu2I0E7iHe4FRWGyM6o"
         case .StagingCopy:
             baseURL = NSURL(string: "https://app-sta2.positionin.com/api/")!
             amazonURL = NSURL(string: "https://pos-sta.s3.amazonaws.com/")!
-            xmppHostname = "app-sta2.positionin.com"
+            xmppHostname = "chat-sta2.positionin.com"
             googleAnalystLogLevel = GAILogLevel.Verbose
             googleMapsKey = "AIzaSyDkUHOpFWNBDAW5Gu2I0E7iHe4FRWGyM6o"
         case .Dev:
             baseURL = NSURL(string: "https://app-dev.positionin.com/api/")!
             amazonURL = NSURL(string: "https://pos-dev.s3.amazonaws.com/")!
-            xmppHostname = "app-dev.positionin.com"
+            xmppHostname = "chat-dev.positionin.com"
             googleAnalystLogLevel = GAILogLevel.None
             googleMapsKey = "AIzaSyA3NvrDKBcpIsnq4-ZACG41y7Mj-wSfVrY"
         }
@@ -81,7 +81,6 @@ final class AppConfiguration {
         }()
 
     var appVersion: String? {
-        let env = AppConfiguration.environment.rawValue
-        return (NSBundle.mainBundle().infoDictionary?[kCFBundleVersionKey as String] as? String).map {"\($0)-\(env)"}
+        return (NSBundle.mainBundle().infoDictionary?[kCFBundleVersionKey as String] as? String).map {"\($0)"}
     }
 }

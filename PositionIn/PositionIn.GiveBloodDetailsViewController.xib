@@ -123,7 +123,9 @@
                             <rect key="frame" x="0.0" y="399" width="600" height="300"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="300" id="Ryn-gc-BHW"/>
+                                <constraint firstAttribute="height" constant="300" id="Ryn-gc-BHW">
+                                    <variation key="heightClass=regular-widthClass=compact" constant="350"/>
+                                </constraint>
                             </constraints>
                             <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </tableView>
@@ -135,10 +137,14 @@
                         <constraint firstItem="wWd-vV-kUk" firstAttribute="top" secondItem="egj-Kc-81c" secondAttribute="bottom" id="KIs-Ud-8uL"/>
                         <constraint firstItem="uPC-oF-bHf" firstAttribute="leading" secondItem="8KA-q9-aXe" secondAttribute="leading" id="UQG-5L-ADW"/>
                         <constraint firstItem="egj-Kc-81c" firstAttribute="width" secondItem="8KA-q9-aXe" secondAttribute="width" id="Uhc-xR-iRP"/>
-                        <constraint firstItem="uPC-oF-bHf" firstAttribute="top" secondItem="wWd-vV-kUk" secondAttribute="bottom" id="ZLw-yt-2Rj"/>
+                        <constraint firstItem="uPC-oF-bHf" firstAttribute="top" secondItem="wWd-vV-kUk" secondAttribute="bottom" id="ZLw-yt-2Rj">
+                            <variation key="heightClass=regular-widthClass=compact" constant="-1"/>
+                        </constraint>
                         <constraint firstItem="egj-Kc-81c" firstAttribute="top" secondItem="8KA-q9-aXe" secondAttribute="top" id="Zm1-7N-5gx"/>
                         <constraint firstItem="egj-Kc-81c" firstAttribute="bottom" secondItem="YRQ-Tn-acC" secondAttribute="bottom" id="aQ2-jG-nzm"/>
-                        <constraint firstAttribute="bottom" secondItem="uPC-oF-bHf" secondAttribute="bottom" id="dLL-Nf-rsa"/>
+                        <constraint firstAttribute="bottom" secondItem="uPC-oF-bHf" secondAttribute="bottom" id="dLL-Nf-rsa">
+                            <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
+                        </constraint>
                         <constraint firstAttribute="trailing" secondItem="wWd-vV-kUk" secondAttribute="trailing" id="dbM-yg-P4w"/>
                         <constraint firstAttribute="trailing" secondItem="YRQ-Tn-acC" secondAttribute="trailing" id="ifd-yp-9qn"/>
                         <constraint firstItem="wWd-vV-kUk" firstAttribute="leading" secondItem="8KA-q9-aXe" secondAttribute="leading" id="tkD-fg-tYA"/>
@@ -154,6 +160,7 @@
                 <constraint firstAttribute="bottom" secondItem="8KA-q9-aXe" secondAttribute="bottom" id="twl-s9-mas"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="226" y="413"/>
         </view>
     </objects>
     <resources>

@@ -41,7 +41,11 @@ class GiveBloodDetailsViewController: UIViewController {
             api().getUserProfile(author.objectId).flatMap { (profile: UserProfile) -> Future<Product, NSError> in
                 return api().getGiveBloodDetails(objectId)
                 }.onSuccess { [weak self] product in
-                    self?.didReceiveProductDetails(product)
+                    if let strongSelf = self {
+                        strongSelf.didReceiveProductDetails(product)
+                        strongSelf.dataSource.items = strongSelf.productAcionItems()
+                        strongSelf.dataSource.configureTable(strongSelf.actionTableView)
+                    }
             }
         default:
             Log.error?.message("Not enough data to load product")
@@ -100,6 +104,11 @@ class GiveBloodDetailsViewController: UIViewController {
         if self.product?.location != nil {
             zeroSection.append(GiveBloodActionItem(title: NSLocalizedString("Navigate", comment: "GiveBlood"), image: "productNavigate", action: .Navigate))
         }
+        if self.product?.links?.isEmpty == false || self.product?.attachments?.isEmpty == false {
+            zeroSection.append(GiveBloodActionItem(title: NSLocalizedString("More Information"), image: "productTerms&Info", action: .MoreInformation))
+        } else {
+            zeroSection.append(GiveBloodActionItem(title: NSLocalizedString("No attachments"), image: "productTerms&Info", action: .MoreInformation))
+        }
         
         return [zeroSection]
     }
@@ -117,7 +126,7 @@ class GiveBloodDetailsViewController: UIViewController {
 
 extension GiveBloodDetailsViewController {
     enum GiveBloodDetailsAction: CustomStringConvertible {
-        case Buy, ProductInventory, SellerProfile, SendMessage, Navigate
+        case Buy, ProductInventory, SellerProfile, SendMessage, Navigate, MoreInformation
         
         var description: String {
             switch self {
@@ -131,6 +140,8 @@ extension GiveBloodDetailsViewController {
                 return "Send message"
             case .Navigate:
                 return "Navigate"
+            case .MoreInformation:
+                return "More Information"
             }
         }
     }
@@ -165,6 +176,12 @@ extension GiveBloodDetailsViewController: GiveBloodDetailsActionConsumer {
             return
         case .ProductInventory:
             segue = .ShowOrganizerProfile
+        case .MoreInformation:
+            if self.product?.links?.isEmpty == false || self.product?.attachments?.isEmpty == false {
+                let moreInformationViewController = MoreInformationViewController(links: self.product?.links, attachments: self.product?.attachments)
+                self.navigationController?.pushViewController(moreInformationViewController, animated: true)
+            }
+            return
         }
         performSegue(segue)
     }

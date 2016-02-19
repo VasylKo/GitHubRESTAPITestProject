@@ -21,7 +21,7 @@ final class BrowseMapViewController: UIViewController, BrowseActionProducer, Bro
     override func viewDidLoad() {
         super.viewDidLoad()
         if let coordinate = filter.coordinates {
-            self.mapView.moveCamera(GMSCameraUpdate.setTarget(coordinate, zoom: 12))
+            self.mapView.moveCamera(GMSCameraUpdate.setTarget(coordinate, zoom: 4))
             self.shouldReverseGeocodeCoordinate = false
             self.mapMovementEnd( CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude))
         }
@@ -32,7 +32,7 @@ final class BrowseMapViewController: UIViewController, BrowseActionProducer, Bro
     
     var browseMode: BrowseModeTabbarViewController.BrowseMode = .ForYou
     
-    let visibleItemTypes: [FeedItem.ItemType] = [.Project, .Emergency, .Training]
+    let visibleItemTypes: [FeedItem.ItemType] = [.Project, .Emergency, .Training, .News, .Event]
     
     var filter = SearchFilter.currentFilter
     
@@ -62,6 +62,10 @@ final class BrowseMapViewController: UIViewController, BrowseActionProducer, Bro
                 return UIImage(named: "PromotionMarker")
             case .Training:
                 return UIImage(named: "ProductMarker")
+            case .News:
+                return UIImage(named: "news_map")
+            case .Event:
+                return UIImage(named: "event_map")
             default:
                 return nil
             }

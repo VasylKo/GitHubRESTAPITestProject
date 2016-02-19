@@ -38,16 +38,19 @@ class MembershipMPesaDetailsViewController: XLFormViewController {
         self.initializeForm()
         
         let price = String(self.plan.price ?? 0)
-        api().membershipCheckoutMpesa(price, nonce: "", membershipId: self.plan.objectId).onSuccess { [weak self] transactionId in
+        api().membershipCheckoutMpesa(price, nonce: "",
+            membershipId: self.plan.objectId).onSuccess { [weak self] transactionId in
             self?.transactionId = transactionId
             self?.pollStatus()
-        }
+            }.onFailure(callback: { [weak self] _ in
+                self?.headerView.showFailure()
+            })
     }
-    
+
     @objc func pollStatus() {
         api().transactionStatusMpesa(transactionId).onSuccess { [weak self] status in
             self?.headerView.showSuccess()
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (Int64)(1 * NSEC_PER_SEC)), dispatch_get_main_queue()) {
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (Int64)(3 * NSEC_PER_SEC)), dispatch_get_main_queue()) {
                 if let strongSelf = self {
                     strongSelf.router.showMembershipMemberCardViewController(from: strongSelf)
                 }
