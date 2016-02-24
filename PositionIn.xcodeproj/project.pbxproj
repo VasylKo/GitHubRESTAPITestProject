@@ -3561,6 +3561,7 @@
 				373963105920A4E5BC0C1447 /* Copy Pods Resources */,
 				50FA91181BB4211E00B56810 /* Copy Simulator app */,
 				D1531E551C43DBF700B2A3A9 /* Fabric */,
+				D1BD11E11C7DB7300047E959 /* NewRelic */,
 			);
 			buildRules = (
 			);
@@ -3830,6 +3831,20 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Fabric/run\" 27437daf7b0468aa7a96977842e169657c6b889e 58591b6e6e68aaf8d43a618c90f6c748e0b802f61f287d83e43e16f0542fba41";
+		};
+		D1BD11E11C7DB7300047E959 /* NewRelic */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = NewRelic;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "SCRIPT=`/usr/bin/find \"${SRCROOT}\" -name newrelic_postbuild.sh | head -n 1`\n/bin/bash \"${SCRIPT}\" \"AA0492dd667078eb6a7d0a70ba7267487f6b3fff21\"";
 		};
 		E6325F6C1B57E0E600996480 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;

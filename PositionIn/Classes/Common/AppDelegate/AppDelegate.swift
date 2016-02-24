@@ -111,6 +111,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIApplication.sharedApplication().registerForRemoteNotifications()
         
         Fabric.with([Crashlytics.self])
+        
+        NewRelic.startWithApplicationToken(AppConfiguration().newRelicToken);
 
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
     }
