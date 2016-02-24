@@ -260,7 +260,6 @@
     return [dateFormatter stringFromDate:self];
 }
 
-
 // Anything else = "20/10/15"
 - (NSString *)formatAsOther
 {
@@ -278,7 +277,6 @@
         [dateFormatter setDateFormat:@"dd MMM, h:mm a"];
     }
     return [NSString stringWithFormat:@"%@", [dateFormatter stringFromDate:self]];
-    return [dateFormatter stringFromDate:self];
 }
 
 /*

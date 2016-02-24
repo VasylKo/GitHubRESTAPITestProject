@@ -51,9 +51,7 @@ class DonateViewController: XLFormViewController, PaymentReponseDelegate {
     }
     
     func initializeForm() {
-        
         let form = XLFormDescriptor(title: NSLocalizedString("Donate", comment: "Donate"))
-        
         //Error
         errorSection = XLFormSectionDescriptor()
         form.addFormSection(errorSection!)
