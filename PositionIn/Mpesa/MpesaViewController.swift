@@ -35,14 +35,14 @@ class MpesaViewController : XLFormViewController, PaymentProtocol {
     }
     
     @objc func pollStatus() {
-        api().transactionStatusMpesa(transactionId).onFailure { [weak self] status in
+        api().transactionStatusMpesa(transactionId).onSuccess{ [weak self] status in
             self?.headerView.showSuccess()
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (Int64)(3 * NSEC_PER_SEC)), dispatch_get_main_queue()) {
                 if self != nil {
                     appDelegate().sidebarViewController?.executeAction(SidebarViewController.defaultAction)
                 }
             }
-            }.onSuccess { [weak self] error in
+            }.onFailure { [weak self] error in
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (Int64)(10 * NSEC_PER_SEC)), dispatch_get_main_queue()) {
                     self?.pollStatus()
                 }
