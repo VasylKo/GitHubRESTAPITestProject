@@ -93,7 +93,7 @@ DEPENDENCIES:
   - JSQMessagesViewController (~> 7.2)
   - KeychainAccess (~> 2.3.1)
   - KYDrawerController (~> 1.1)
-  - NewRelicAgent
+  - NewRelicAgent (~> 5.3.6)
   - PosInCore (from `PosInCore`)
   - RealmSwift (~> 0.97.0)
   - UIImageEffects
