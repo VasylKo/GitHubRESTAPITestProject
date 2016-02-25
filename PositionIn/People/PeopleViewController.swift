@@ -70,7 +70,8 @@ final class PeopleViewController: BesideMenuViewController {
                 }
             }
         case .Explore:
-            peopleRequest = api().getUsers(APIService.Page())
+            let page = APIService.Page(start: 0, size: 1000)
+            peopleRequest = api().getUsers(page)
         }
         peopleRequest.onSuccess(dataRequestToken.validContext) { [weak self] response in
             if let userList = response.items {
