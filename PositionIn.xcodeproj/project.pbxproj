@@ -109,6 +109,7 @@
 		CD795C831C5A6DCB00C1C298 /* MembershipPlansViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD795C821C5A6DCB00C1C298 /* MembershipPlansViewController.swift */; };
 		CD87FDEE1C7611AA00E610AE /* NewsMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD87FDED1C7611AA00E610AE /* NewsMapViewController.swift */; };
 		CD87FDF01C76133100E610AE /* NewsMapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD87FDEF1C76133100E610AE /* NewsMapViewController.xib */; };
+		CD87FDF41C7DB94D00E610AE /* CommunityMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD87FDF31C7DB94D00E610AE /* CommunityMapViewController.swift */; };
 		CD8ED0D61C60AD1A00576DBF /* MembershipMemberCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8ED0D51C60AD1A00576DBF /* MembershipMemberCardViewController.swift */; };
 		CD8ED0D91C60AE1400576DBF /* MembershipMemberCardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD8ED0D81C60AE1400576DBF /* MembershipMemberCardViewController.xib */; };
 		CD8ED0DE1C60BE7000576DBF /* MembershipCardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD8ED0DD1C60BE7000576DBF /* MembershipCardView.xib */; };
@@ -630,6 +631,7 @@
 		CD795C821C5A6DCB00C1C298 /* MembershipPlansViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MembershipPlansViewController.swift; sourceTree = "<group>"; };
 		CD87FDED1C7611AA00E610AE /* NewsMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsMapViewController.swift; sourceTree = "<group>"; };
 		CD87FDEF1C76133100E610AE /* NewsMapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewsMapViewController.xib; sourceTree = "<group>"; };
+		CD87FDF31C7DB94D00E610AE /* CommunityMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommunityMapViewController.swift; sourceTree = "<group>"; };
 		CD8ED0D51C60AD1A00576DBF /* MembershipMemberCardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MembershipMemberCardViewController.swift; sourceTree = "<group>"; };
 		CD8ED0D81C60AE1400576DBF /* MembershipMemberCardViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MembershipMemberCardViewController.xib; sourceTree = "<group>"; };
 		CD8ED0DD1C60BE7000576DBF /* MembershipCardView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MembershipCardView.xib; sourceTree = "<group>"; };
@@ -3380,6 +3382,7 @@
 			children = (
 				E6DA53C21B7D00DB000087A7 /* BrowseCommunityViewController.swift */,
 				E6DA53C31B7D00DB000087A7 /* PositionIn.BrowseCommunityViewController.xib */,
+				CD87FDF31C7DB94D00E610AE /* CommunityMapViewController.swift */,
 			);
 			path = CommunityList;
 			sourceTree = "<group>";
@@ -3941,6 +3944,7 @@
 				E6BEF1C81B9C5A0C00511B46 /* PostCellModelFactory.swift in Sources */,
 				E6C5CE1B1B83A24500265955 /* UIScheme.swift in Sources */,
 				E69420F91B66358000F34F06 /* ProductDetailsViewController.swift in Sources */,
+				CD87FDF41C7DB94D00E610AE /* CommunityMapViewController.swift in Sources */,
 				E63201701B984D8B0066C62E /* DescriptionTableViewCell.swift in Sources */,
 				E6C952371BA1D9960032254F /* ProfileStatsCell.swift in Sources */,
 				CD795BF41C57BBC200C1C298 /* BaseRouterImplementation.swift in Sources */,

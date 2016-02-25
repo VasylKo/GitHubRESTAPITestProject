@@ -64,6 +64,7 @@ class BrowseCommunityViewController: BesideMenuViewController, BrowseCommunityAc
             browseMode = .Explore
             self.browseModeSegmentedControl.removeSegmentAtIndex(0, animated: false)
         }
+        setRightBarItems()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -218,6 +219,39 @@ class BrowseCommunityViewController: BesideMenuViewController, BrowseCommunityAc
             api().leaveCommunity(communityId).onSuccess(callback: { (Void) -> Void in
                 self.reloadData()
             })
+        }
+    }
+    
+    // MAP:
+    
+    func setRightBarItems() {
+        for imageName in ["list_view_icon", "map_view_icon"] {
+            let barButtonItem : UIBarButtonItem  = UIBarButtonItem(image: UIImage(named: imageName),
+                style: .Plain,
+                target: self,
+                action: Selector("barButtonPressed:"))
+            self.barButtonItems.append(barButtonItem)
+        }
+        
+        self.navigationItem.rightBarButtonItem = self.barButtonItems[0]
+    }
+    
+    private var barButtonItems : [UIBarButtonItem] = []
+    private var communityMapViewController = CommunityMapViewController()
+    
+    @IBAction private func barButtonPressed(barButtonItem : UIBarButtonItem) {
+        let index = self.barButtonItems.indexOf(barButtonItem)!
+        let next = (index == 0) ? 1 : 0
+        
+        self.navigationItem.setRightBarButtonItem(self.barButtonItems[next], animated: true)
+        
+        if (next == 0) {
+            self.communityMapViewController.view.removeFromSuperview()
+            self.communityMapViewController.removeFromParentViewController()
+        } else {
+            self.addChildViewController(communityMapViewController)
+            self.view.addSubview(communityMapViewController.view)
+            communityMapViewController.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
         }
     }
 }

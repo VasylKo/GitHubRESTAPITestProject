@@ -94,10 +94,6 @@ class CommunityFeedViewController: BesideMenuViewController, BrowseActionProduce
         reloadData()
     }
 
-    @IBAction func prepareForUnwind(segue: UIStoryboardSegue) {
-        
-    }
-
     lazy var dataSource: CommunityFeedDataSource = { [unowned self] in
         let dataSource = CommunityFeedDataSource()
         dataSource.parentViewController = self
