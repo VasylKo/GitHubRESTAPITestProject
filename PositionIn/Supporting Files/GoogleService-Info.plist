@@ -3,11 +3,11 @@
 <plist version="1.0">
 <dict>
 	<key>TRACKING_ID</key>
-	<string>UA-67713026-1</string>
+	<string>UA-67713026-2</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.positionin.positionin</string>
+	<string>com.connectik.members</string>
 	<key>IS_ADS_ENABLED</key>
 	<false/>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -19,6 +19,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<false/>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:861169797578:ios:476e002cceadf218</string>
+	<string>1:574629600389:ios:22d4caad55493817</string>
+	<key>PROJECT_ID</key>
+	<string>positionin-1029</string>
 </dict>
 </plist>
