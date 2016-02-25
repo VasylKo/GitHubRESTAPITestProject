@@ -75,10 +75,9 @@ extension APIService {
     
     //Success if has valid session and user is not a guest
     func recoverSession() -> Future<UserProfile, NSError> {
-        let f = session().flatMap { _ in
+        return session().flatMap { _ in
             return self.sessionController.isUserAuthorized()
-        }
-        return handleFailure(f).flatMap { _ in
+        }.flatMap { _ in
             return self.updateCurrentProfileStatus()
         }
     }
