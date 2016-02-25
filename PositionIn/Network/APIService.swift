@@ -210,6 +210,12 @@ struct APIService {
         return getObject(endpoint)
     }
     
+    func attendEvent(objectId: CRUDObjectId, attend: Bool) -> Future<Void, NSError> {
+        let method: Alamofire.Method = attend ? Method.POST : Method.DELETE
+        let endpoint = Event.endpointAttend(objectId)
+        return updateCommand(endpoint, method: method)
+    }
+    
     //MARK: - Products -
     
     func getUserProducts(userId: CRUDObjectId, page: Page) -> Future<CollectionResponse<Product>, NSError> {
@@ -261,29 +267,6 @@ struct APIService {
         return getObject(endpoint)
     }
     
-    func createAmbulanceRequest(object: AmbulanceRequest) -> Future<AmbulanceRequest, NSError> {
-        let endpoint = AmbulanceRequest.endpoint()
-        typealias CRUDResultType = (Alamofire.Request, Future<AmbulanceRequest, NSError>)
-        let params = Mapper().toJSON(object)
-        return session().flatMap {
-            (token: AuthResponse.Token) -> Future<AmbulanceRequest, NSError> in
-            let request = self.updateRequest(token, endpoint: endpoint, method: .POST, params: params)
-             let (_, future): CRUDResultType = self.dataProvider.objectRequest(request)
-            return future
-        }
-    }
-    
-    func deleteAmbulanceRequest(objectId: CRUDObjectId) -> Future<Void, NSError> {
-        let endpoint = AmbulanceRequest.endpoint(objectId)
-        typealias CRUDResultType = (Alamofire.Request, Future<Void, NSError>)
-        return session().flatMap {
-            (token: AuthResponse.Token) -> Future<Void, NSError> in
-            let request = self.updateRequest(token, endpoint: endpoint, method: .DELETE)
-            let (_, future): CRUDResultType = self.dataProvider.jsonRequest(request, map: self.emptyResponseMapping(), validation: nil)
-            return future
-        }
-    }
-    
     func createCommunity(community object: Community) -> Future<Community, NSError> {
         let endpoint = Community.endpoint()
         return createObject(endpoint, object: object)
@@ -303,6 +286,31 @@ struct APIService {
         //TODO: hardcode, change on server endpoint update
         let endpoint = "/v1.0/community/\(communityId)/members"
         return updateCommand(endpoint, method:.DELETE)
+    }
+    
+    //MARK: - Ambulance - 
+    
+    func createAmbulanceRequest(object: AmbulanceRequest) -> Future<AmbulanceRequest, NSError> {
+        let endpoint = AmbulanceRequest.endpoint()
+        typealias CRUDResultType = (Alamofire.Request, Future<AmbulanceRequest, NSError>)
+        let params = Mapper().toJSON(object)
+        return session().flatMap {
+            (token: AuthResponse.Token) -> Future<AmbulanceRequest, NSError> in
+            let request = self.updateRequest(token, endpoint: endpoint, method: .POST, params: params)
+            let (_, future): CRUDResultType = self.dataProvider.objectRequest(request)
+            return self.handleFailure(future)
+        }
+    }
+    
+    func deleteAmbulanceRequest(objectId: CRUDObjectId) -> Future<Void, NSError> {
+        let endpoint = AmbulanceRequest.endpoint(objectId)
+        typealias CRUDResultType = (Alamofire.Request, Future<Void, NSError>)
+        return session().flatMap {
+            (token: AuthResponse.Token) -> Future<Void, NSError> in
+            let request = self.updateRequest(token, endpoint: endpoint, method: .DELETE)
+            let (_, future): CRUDResultType = self.dataProvider.jsonRequest(request, map: self.emptyResponseMapping(), validation: nil)
+            return self.handleFailure(future)
+        }
     }
     
     //MARK: - People -
@@ -410,7 +418,7 @@ struct APIService {
         }
         
         if let communities = seachFilter.communities {
-            params.append("communityId", value: communities)
+            params.append("communities", value: communities)
         }
         
         return session().flatMap {
@@ -499,6 +507,13 @@ struct APIService {
         }
     }
 
+    //MARK: - Notifications
+
+    func getNotifications() -> Future<CollectionResponse<Notification>, NSError> {
+        let endpoint = Notification.endpoint()
+        return getObjectsCollection(endpoint, params: nil)
+    }
+    
     //MARK: - MPesa requests
     
     func transactionStatusMpesa(transactionId: String) -> Future<String, NSError> {
@@ -512,7 +527,7 @@ struct APIService {
             return future
         }
     }
-    
+
     func productCheckoutMpesa(amount:NSNumber, nonce:String, itemId: String, quantity: NSNumber) -> Future<String, NSError> {
         let endpoint = MPesaPayment.productCheckoutEndpoint()
         let  params = ["payment_method_nonce": nonce, "amount" : amount, "itemId" : itemId, "quantity": quantity]
@@ -521,7 +536,7 @@ struct APIService {
         return session().flatMap {
             (token: AuthResponse.Token) -> Future<String, NSError> in
             let request = self.updateRequest(token, endpoint: endpoint, method: .POST, params: params)
-            let (_, future): CRUDResultType = self.dataProvider.jsonRequest(request, map: BraintreePayment.checkoutMapping(), validation: nil)
+            let (_, future): CRUDResultType = self.dataProvider.jsonRequest(request, map: BraintreePayment.mpesaMapping(), validation: nil)
             return self.handleFailure(future)
         }
     }
@@ -539,9 +554,9 @@ struct APIService {
         }
     }
     
-    func donateCheckoutMpesa(amount:String, nonce:String, itemId:String) -> Future<String, NSError> {
+    func donateCheckoutMpesa(amount:String, nonce:String) -> Future<String, NSError> {
         let endpoint = MPesaPayment.donateCheckoutEndpoint()
-        let params = ["payment_method_nonce": nonce, "amount" : amount, "itemId" : itemId]
+        let params = ["payment_method_nonce": nonce, "amount" : amount]
         typealias CRUDResultType = (Alamofire.Request, Future<String, NSError>)
         
         return session().flatMap {

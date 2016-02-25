@@ -16,5 +16,9 @@ public class OpenApplication: NSObject {
         let url = NSURL(string: urlString)!
         UIApplication.sharedApplication().openURL(url)
     }
+    
+    class func Safari(with url : NSURL) {
+        UIApplication.sharedApplication().openURL(url)
+    }
 
 }

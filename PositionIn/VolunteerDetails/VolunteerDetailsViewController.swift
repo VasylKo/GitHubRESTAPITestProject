@@ -47,9 +47,11 @@ class VolunteerDetailsViewController: UIViewController {
                 }
             case .Community:
                 api().getCommunity(volunteer.objectId).onSuccess {[weak self] volunteer in
-                    self?.didReceiveDetails(volunteer)
-                    self?.dataSource.items = (self?.productAcionItems())!
-                    self?.dataSource.configureTable((self?.actionTableView)!)
+                    if let strongSelf = self {
+                        strongSelf.didReceiveDetails(volunteer)
+                        strongSelf.dataSource.items = strongSelf.productAcionItems()
+                        strongSelf.dataSource.configureTable(strongSelf.actionTableView)
+                    }
                 }
             default:
                 break
@@ -123,6 +125,11 @@ class VolunteerDetailsViewController: UIViewController {
         if self.volunteer?.location != nil {
             firstSection.append(VolunteerActionItem(title: NSLocalizedString("Navigate", comment: "BomaHotels"), image: "productNavigate", action: .Navigate))
         }
+        if self.volunteer?.links?.isEmpty == false || self.volunteer?.attachments?.isEmpty == false {
+            firstSection.append(VolunteerActionItem(title: NSLocalizedString("More Information"), image: "productTerms&Info", action: .MoreInformation))
+        } else {
+            firstSection.append(VolunteerActionItem(title: NSLocalizedString("No attachments"), image: "productTerms&Info", action: .MoreInformation))
+        }
         
         if (self.joinAction != true) {
             //public or joined case
@@ -171,7 +178,7 @@ class VolunteerDetailsViewController: UIViewController {
 
 extension VolunteerDetailsViewController {
     enum VolunteerDetailsAction: CustomStringConvertible {
-        case Join, Navigate, ProductInventory, SellerProfile, SendMessage, Pending
+        case Join, Navigate, ProductInventory, SellerProfile, SendMessage, Pending, MoreInformation
         
         var description: String {
             switch self {
@@ -187,6 +194,8 @@ extension VolunteerDetailsViewController {
                 return "Send message"
             case .Pending:
                 return "Pending"
+            case .MoreInformation:
+                return "More Information"
             }
         }
     }
@@ -301,6 +310,12 @@ extension VolunteerDetailsViewController: VolunteerDetailsActionConsumer {
             }
             return
         case .ProductInventory:
+            return
+        case .MoreInformation:
+            if self.volunteer?.links?.isEmpty == false || self.volunteer?.attachments?.isEmpty == false {
+                let moreInformationViewController = MoreInformationViewController(links: self.volunteer?.links, attachments: self.volunteer?.attachments)
+                self.navigationController?.pushViewController(moreInformationViewController, animated: true)
+            }
             return
         }
         performSegue(segue)

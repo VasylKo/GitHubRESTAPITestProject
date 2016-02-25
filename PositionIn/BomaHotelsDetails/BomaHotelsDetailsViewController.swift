@@ -45,7 +45,11 @@ final class BomaHotelsDetailsViewController: UIViewController {
             api().getUserProfile(author.objectId).flatMap { (profile: UserProfile) -> Future<BomaHotel, NSError> in
                 return api().getBomaHotelsDetails(objectId)
                 }.onSuccess { [weak self] bomaHotel in
-                    self?.didReceiveBomaHotelDetails(bomaHotel)
+                    if let strongSelf = self {
+                        strongSelf.didReceiveBomaHotelDetails(bomaHotel)
+                        strongSelf.dataSource.items = strongSelf.bomaHotelAcionItems()
+                        strongSelf.dataSource.configureTable(strongSelf.actionTableView)
+                    }
             }
         default:
             Log.error?.message("Not enough data to load boma hotel")
@@ -69,7 +73,6 @@ final class BomaHotelsDetailsViewController: UIViewController {
         }
         
         let image = UIImage(named: "bomaHotelPlaceholder")
-        
         productImageView.setImageFromURL(imageURL, placeholder: image)
         if let coordinates = bomaHotel.location?.coordinates {
             self.productPinDistanceImageView.hidden = false
@@ -105,13 +108,27 @@ final class BomaHotelsDetailsViewController: UIViewController {
     
     
     private func bomaHotelAcionItems() -> [[BomaHotelActionItem]] {
-        let zeroSection = [BomaHotelActionItem(title: NSLocalizedString("Booking", comment: "BomaHotels"), image: "productBuyProduct", action: .Buy)]
+        var zeroSection : [BomaHotelActionItem] = []
+        if self.bomaHotel?.bookingURL != nil {
+             zeroSection.append(BomaHotelActionItem(title: NSLocalizedString("Booking", comment: "BomaHotels"), image: "productBuyProduct", action: .Buy))
+        }
+        
         var firstSection = [BomaHotelActionItem(title: NSLocalizedString("Send Message", comment: "BomaHotels"), image: "productSendMessage", action: .SendMessage),
-                            BomaHotelActionItem(title: NSLocalizedString("Organizer Profile", comment: "BomaHotels"), image: "productSellerProfile", action: .SellerProfile)]
+            BomaHotelActionItem(title: NSLocalizedString("Organizer Profile", comment: "BomaHotels"), image: "productSellerProfile", action: .SellerProfile)]
         if self.bomaHotel?.location != nil {
             firstSection.append(BomaHotelActionItem(title: NSLocalizedString("Navigate", comment: "BomaHotels"), image: "productNavigate", action: .Navigate))
         }
-        return [zeroSection, firstSection]
+        if self.bomaHotel?.links?.isEmpty == false || self.bomaHotel?.attachments?.isEmpty == false {
+            firstSection.append(BomaHotelActionItem(title: NSLocalizedString("More Information"), image: "productTerms&Info", action: .MoreInformation))
+        } else {
+            firstSection.append(BomaHotelActionItem(title: NSLocalizedString("No attachments"), image: "productTerms&Info", action: .MoreInformation))
+        }
+        
+        if zeroSection.isEmpty == false {
+            return [zeroSection, firstSection]
+        } else {
+            return [firstSection]
+        }
     }
     
     @IBOutlet private weak var actionTableView: UITableView!
@@ -127,7 +144,7 @@ final class BomaHotelsDetailsViewController: UIViewController {
 
 extension BomaHotelsDetailsViewController {
     enum BomaHotelsDetailsAction: CustomStringConvertible {
-        case Buy, Navigate, ProductInventory, SellerProfile, SendMessage
+        case Buy, Navigate, ProductInventory, SellerProfile, SendMessage, MoreInformation
         
         var description: String {
             switch self {
@@ -141,6 +158,8 @@ extension BomaHotelsDetailsViewController {
                 return "Seller profile"
             case .SendMessage:
                 return "Send message"
+            case .MoreInformation:
+                return "More Information"
             }
         }
     }
@@ -165,7 +184,7 @@ extension BomaHotelsDetailsViewController: BomaHotelsDetailsActionConsumer {
             return
         case .Buy:
             if let bookingURL = self.bomaHotel?.bookingURL {
-                UIApplication.sharedApplication().openURL(bookingURL)
+                OpenApplication.Safari(with: bookingURL)
             }
             return
         case .Navigate:
@@ -173,6 +192,12 @@ extension BomaHotelsDetailsViewController: BomaHotelsDetailsActionConsumer {
                 OpenApplication.appleMap(with: coordinates)
             } else {
                 Log.error?.message("coordinates missed")
+            }
+            return
+        case .MoreInformation:
+            if self.bomaHotel?.links?.isEmpty == false || self.bomaHotel?.attachments?.isEmpty == false {
+                let moreInformationViewController = MoreInformationViewController(links: self.bomaHotel?.links, attachments: self.bomaHotel?.attachments)
+                self.navigationController?.pushViewController(moreInformationViewController, animated: true)
             }
             return
         default:

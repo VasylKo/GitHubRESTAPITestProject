@@ -27,26 +27,30 @@ class CompactFeedTableCellModel: FeedTableCellModel {
     var info: String?
     let price: Float?
     let imageURL: NSURL?
+    let avatarURL: NSURL?
     let location: Location?
+    let text : String?
     
     let date: NSDate?
     
     var numOfLikes: Int?
     var numOfComments: Int?
     
-    init(itemType: FeedItem.ItemType, objectID: CRUDObjectId, title: String?, details: String?, info: String?, price: Float?, imageURL url: NSURL?, location: Location? = nil, numOfLikes: Int? = nil, numOfComments: Int? = nil, date: NSDate?, data: Any? = nil) {
+    init(itemType: FeedItem.ItemType, objectID: CRUDObjectId, title: String?, details: String?, info: String?, text: String?, price: Float?, imageURL: NSURL?, avatarURL:NSURL?, location: Location? = nil, numOfLikes: Int? = nil, numOfComments: Int? = nil, date: NSDate?, data: Any? = nil) {
         self.objectID = objectID
         self.itemType = itemType
         self.title = title
         self.info = info
         self.details = details
-        self.imageURL = url
+        self.imageURL = imageURL
+        self.avatarURL = avatarURL
         self.price = price
         self.data = data
         self.location = location
         self.numOfLikes = numOfLikes
         self.numOfComments = numOfComments
         self.date = date
+        self.text = text
         
         switch itemType {
         case .Emergency:
@@ -87,15 +91,17 @@ class CompactFeedTableCellModel: FeedTableCellModel {
 final class ComapctBadgeFeedTableCellModel : CompactFeedTableCellModel {
     let badge: String?
     
-    init(itemType: FeedItem.ItemType, objectID: CRUDObjectId, title: String?, details: String?, info: String?, imageURL url: NSURL?, badge: String?, data: Any?) {
+    init(itemType: FeedItem.ItemType, objectID: CRUDObjectId, title: String?, details: String?, info: String?, text: String?, imageURL: NSURL?, avatarURL:NSURL?, badge: String?, data: Any?) {
         self.badge = badge
         super.init(itemType: itemType,
             objectID: objectID,
             title: title,
             details: details,
             info: info,
+            text: text,
             price: nil,
-            imageURL: url,
+            imageURL: imageURL,
+            avatarURL: avatarURL,
             date: nil,
             data: data)
     }

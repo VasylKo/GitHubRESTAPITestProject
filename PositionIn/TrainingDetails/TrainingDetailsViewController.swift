@@ -157,6 +157,14 @@ extension TrainingDetailsViewController : TrainingDetailsActionConsumer {
     func executeAction(action: TrainingDetailsAction) {
         let segue: TrainingDetailsViewController.Segue
         switch action {
+        case .Buy:
+            if let urlString = self.product?.externalURLString {
+                let url = NSURL(string: urlString)
+                if let url = url {
+                    OpenApplication.Safari(with: url)
+                }
+            }
+            return
         case .SendMessage:
             if let userId = author?.objectId {
                 showChatViewController(userId)

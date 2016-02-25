@@ -28,7 +28,7 @@ class NewsCardCell: TableViewCell {
         if let date = m!.date {
             infoLabel.text = date.formattedAsTimeAgo()
         }
-
+        
         detailsLabel.text = m!.details
         
         if let numOfLikes = m!.numOfLikes {
@@ -37,6 +37,14 @@ class NewsCardCell: TableViewCell {
         
         if let numOfComments = m!.numOfComments {
             commentsLabel.text = String(numOfComments)
+        }
+        
+        if let text = m!.text {
+            self.newsTextLabel.text = text
+        }
+        
+        if let url = m!.avatarURL {
+            feedItemAvatarView.setImageFromURL(url)
         }
     }
     
@@ -48,9 +56,11 @@ class NewsCardCell: TableViewCell {
     @IBOutlet private weak var headerLabel: UILabel!
     @IBOutlet private weak var infoLabel: UILabel!
     @IBOutlet private weak var detailsLabel: UILabel!
-    @IBOutlet private weak var feedItemLogoImageView: UIImageView!
+    @IBOutlet private weak var feedItemAvatarView: AvatarView!
+    @IBOutlet private weak var newsTextLabel: UILabel!
     
     override func prepareForReuse() {
         super.prepareForReuse()
+        feedItemAvatarView.cancelSetImage()
     }
 }

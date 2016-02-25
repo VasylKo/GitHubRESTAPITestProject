@@ -16,27 +16,31 @@ final class AppConfiguration {
 //            amazonURL = NSURL(string: "https://pos-prod.s3.amazonaws.com/")!
             //Workaround bug in S3
             amazonURL = NSURL(string: "https://krcs.rc-app.com")!
-            xmppHostname = "krcs.rc-app.com"
+            xmppHostname = "chat-krcs.rc-app.com"
             googleAnalystLogLevel = GAILogLevel.Verbose
             googleMapsKey = "AIzaSyA3NvrDKBcpIsnq4-ZACG41y7Mj-wSfVrY"
+            newRelicToken = "AA0492dd667078eb6a7d0a70ba7267487f6b3fff21"
         case .Staging:
             baseURL = NSURL(string: "https://app-sta.positionin.com/api/")!
             amazonURL = NSURL(string: "https://pos-sta.s3.amazonaws.com/")!
-            xmppHostname = "app-sta.positionin.com"
+            xmppHostname = "chat-sta.positionin.com"
             googleAnalystLogLevel = GAILogLevel.Verbose
             googleMapsKey = "AIzaSyDkUHOpFWNBDAW5Gu2I0E7iHe4FRWGyM6o"
+            newRelicToken = ""
         case .StagingCopy:
             baseURL = NSURL(string: "https://app-sta2.positionin.com/api/")!
             amazonURL = NSURL(string: "https://pos-sta.s3.amazonaws.com/")!
-            xmppHostname = "app-sta2.positionin.com"
+            xmppHostname = "chat-sta2.positionin.com"
             googleAnalystLogLevel = GAILogLevel.Verbose
             googleMapsKey = "AIzaSyDkUHOpFWNBDAW5Gu2I0E7iHe4FRWGyM6o"
+            newRelicToken = ""
         case .Dev:
             baseURL = NSURL(string: "https://app-dev.positionin.com/api/")!
             amazonURL = NSURL(string: "https://pos-dev.s3.amazonaws.com/")!
-            xmppHostname = "app-dev.positionin.com"
+            xmppHostname = "chat-dev.positionin.com"
             googleAnalystLogLevel = GAILogLevel.None
             googleMapsKey = "AIzaSyDkUHOpFWNBDAW5Gu2I0E7iHe4FRWGyM6o"
+            newRelicToken = "AA0492dd667078eb6a7d0a70ba7267487f6b3fff21"
         }
         xmppPort = 5222
     }
@@ -47,6 +51,8 @@ final class AppConfiguration {
     let amazonURL : NSURL
     
     let googleMapsKey: String
+    
+    let newRelicToken: String
     
     let xmppHostname: String
     let xmppPort: Int
@@ -81,7 +87,6 @@ final class AppConfiguration {
         }()
 
     var appVersion: String? {
-        let env = AppConfiguration.environment.rawValue
-        return (NSBundle.mainBundle().infoDictionary?[kCFBundleVersionKey as String] as? String).map {"\($0)-\(env)"}
+        return (NSBundle.mainBundle().infoDictionary?[kCFBundleVersionKey as String] as? String).map {"\($0)"}
     }
 }

@@ -111,6 +111,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIApplication.sharedApplication().registerForRemoteNotifications()
         
         Fabric.with([Crashlytics.self])
+        
+        NewRelic.startWithApplicationToken(AppConfiguration().newRelicToken);
 
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
     }
@@ -133,6 +135,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             .stringByReplacingOccurrencesOfString( " ", withString: "" ) as String
         
         api.setDeviceToken(deviceTokenString)
+        api.pushesRegistration()
     }
     
     func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
@@ -140,7 +143,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
-        //TODO handle
+        showSuccess("receive push note")
     }
 }
 
@@ -175,15 +178,9 @@ extension AppDelegate {
             switch (error.domain, error.code) {
             case (baseErrorDomain, NetworkDataProvider.ErrorCodes.InvalidSessionError.rawValue):
                 self.sidebarViewController?.executeAction(.Login)
-                showError(NSLocalizedString("You are not logged in. Please login again"))
-            case (baseErrorDomain, NetworkDataProvider.ErrorCodes.TransferError.rawValue):
                 showWarning(error.localizedDescription)
-            case (baseErrorDomain, _):
-                //invalid response, request, parse error, unknown...
-                fallthrough
             default:
-                // 500+ code from alamofire
-                showWarning(NSLocalizedString("Sorry, something went wrong. Our engineering team is handling this."))
+                showWarning(error.localizedDescription)
             }
         }
     }

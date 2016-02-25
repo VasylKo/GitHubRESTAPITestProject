@@ -76,8 +76,6 @@ enum HomeItem: Int, CustomDebugStringConvertible {
         default:
             return nil
         }
-        
-        return nil
     }
     
     func endpoint() -> String? {
