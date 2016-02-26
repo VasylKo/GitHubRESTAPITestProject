@@ -132,8 +132,6 @@ class VolunteerDetailsViewController: UIViewController {
         }
         if self.volunteer?.links?.isEmpty == false || self.volunteer?.attachments?.isEmpty == false {
             firstSection.append(VolunteerActionItem(title: NSLocalizedString("More Information"), image: "productTerms&Info", action: .MoreInformation))
-        } else {
-            firstSection.append(VolunteerActionItem(title: NSLocalizedString("No attachments"), image: "productTerms&Info", action: .MoreInformation))
         }
         
         if (self.joinAction != true) {
