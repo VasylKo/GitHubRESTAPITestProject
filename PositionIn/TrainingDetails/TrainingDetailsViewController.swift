@@ -42,7 +42,11 @@ final class TrainingDetailsViewController: UIViewController {
             api().getUserProfile(author.objectId).flatMap { (profile: UserProfile) -> Future<Product, NSError> in
                 return api().getTrainingDetails(objectId)
                 }.onSuccess { [weak self] product in
-                    self?.didReceiveProductDetails(product)
+                    if let strongSelf = self {
+                        self?.didReceiveProductDetails(product)
+                        strongSelf.dataSource.items = strongSelf.trainingActionItems()
+                        strongSelf.dataSource.configureTable(strongSelf.actionTableView)
+                    }
             }
         default:
             Log.error?.message("Not enough data to load product")
@@ -104,9 +108,11 @@ final class TrainingDetailsViewController: UIViewController {
         
         var firstSection = [ // 1 section
             TrainingActionItem(title: NSLocalizedString("Send Message", comment: "Product action: Send Message"),
-                image: "productSendMessage", action: .SendMessage)
-            /*TrainingActionItem(title: NSLocalizedString("More Information", comment: "Product action: More Information"), image: "productTerms&Info", action: .ProductInventory),*/
-        ]
+                image: "productSendMessage", action: .SendMessage)]
+        
+        if self.product?.links?.isEmpty == false || self.product?.attachments?.isEmpty == false {
+            firstSection.append(TrainingActionItem(title: NSLocalizedString("More Information", comment: "Product action: More Information"), image: "productTerms&Info", action: .MoreInformation))
+        }
         
         if self.author?.objectId != api().currentUserId() {
             firstSection.append(TrainingActionItem(title: NSLocalizedString("Organizer Profile", comment: "Product action: Seller Profile"),
@@ -134,7 +140,7 @@ final class TrainingDetailsViewController: UIViewController {
 extension TrainingDetailsViewController : TrainingDetailsActionConsumer {
     
     enum TrainingDetailsAction: CustomStringConvertible {
-        case Buy, ProductInventory, SendMessage, SellerProfile, Navigate
+        case Buy, ProductInventory, SendMessage, SellerProfile, Navigate, MoreInformation
         
         var description: String {
             switch self {
@@ -148,6 +154,8 @@ extension TrainingDetailsViewController : TrainingDetailsActionConsumer {
                 return "Seller profile"
             case .Navigate:
                 return "Navigate"
+            case .MoreInformation:
+                return "MoreInformation"
             }
         }
     }
@@ -183,6 +191,12 @@ extension TrainingDetailsViewController : TrainingDetailsActionConsumer {
             return
         case .SellerProfile:
             segue = .showUserProfile
+        case .MoreInformation:
+            if self.product?.links?.isEmpty == false || self.product?.attachments?.isEmpty == false {
+                let moreInformationViewController = MoreInformationViewController(links: self.product?.links, attachments: self.product?.attachments)
+                self.navigationController?.pushViewController(moreInformationViewController, animated: true)
+            }
+            return
         default:
             return
         }
