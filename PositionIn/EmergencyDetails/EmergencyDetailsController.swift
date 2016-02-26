@@ -106,11 +106,13 @@ class EmergencyDetailsController: UIViewController {
         var firstSection = [ // 1 section
             EmergencyActionItem(title: NSLocalizedString("Send Message", comment: "Product action: Send Message"),
                 image: "productSendMessage",
-                action: .SendMessage),
-            EmergencyActionItem(title: NSLocalizedString("Member Profile", comment: "Product action: Seller Profile"),
-                image: "productSellerProfile",
-                action: .MemberProfile)
-        ]
+                action: .SendMessage)]
+        
+        if self.author?.objectId != api().currentUserId() {
+            firstSection.append(EmergencyActionItem(title: NSLocalizedString("Member Profile",
+                comment: "Product action: Seller Profile"), image: "productSellerProfile", action: .MemberProfile))
+        }
+        
         if self.product?.location != nil {
             firstSection.append(EmergencyActionItem(title: NSLocalizedString("Navigate", comment: "Emergency"), image: "productNavigate", action: .Navigate))
         }

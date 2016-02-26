@@ -104,11 +104,15 @@ final class TrainingDetailsViewController: UIViewController {
         
         var firstSection = [ // 1 section
             TrainingActionItem(title: NSLocalizedString("Send Message", comment: "Product action: Send Message"),
-                image: "productSendMessage", action: .SendMessage),
-            TrainingActionItem(title: NSLocalizedString("Organizer Profile", comment: "Product action: Seller Profile"),
-                image: "productSellerProfile", action: .SellerProfile),
+                image: "productSendMessage", action: .SendMessage)
             /*TrainingActionItem(title: NSLocalizedString("More Information", comment: "Product action: More Information"), image: "productTerms&Info", action: .ProductInventory),*/
         ]
+        
+        if self.author?.objectId != api().currentUserId() {
+            firstSection.append(TrainingActionItem(title: NSLocalizedString("Organizer Profile", comment: "Product action: Seller Profile"),
+                image: "productSellerProfile", action: .SellerProfile))
+        }
+        
         if self.product?.location != nil {
             firstSection.append(TrainingActionItem(title: NSLocalizedString("Navigate", comment: "Product action: Navigate"), image: "productNavigate", action: .Navigate))
         }
