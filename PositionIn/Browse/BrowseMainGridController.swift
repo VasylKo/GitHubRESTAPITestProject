@@ -16,7 +16,7 @@ class BrowseMainGridController: BrowseModeTabbarViewController {
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "notification_icon"), style: .Plain, target: self, action: "notificationTouched")
         
-
+        navigationController?.delegate = self
     }
     
     @objc func notificationTouched() {
@@ -38,4 +38,13 @@ class BrowseMainGridController: BrowseModeTabbarViewController {
         }
     }
 
+}
+
+// MARK: - UINavigationControllerDelegate
+extension BrowseMainGridController: UINavigationControllerDelegate {
+    func navigationController(navigationController: UINavigationController, willShowViewController viewController: UIViewController, animated: Bool) {
+        // Hide title on back button
+        let backItem = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
+        viewController.navigationItem.backBarButtonItem = backItem
+    }
 }

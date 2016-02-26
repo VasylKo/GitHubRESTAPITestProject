@@ -64,6 +64,8 @@ class BrowseCommunityViewController: BesideMenuViewController, BrowseCommunityAc
             browseMode = .Explore
             self.browseModeSegmentedControl.removeSegmentAtIndex(0, animated: false)
         }
+        
+        navigationController?.delegate = self
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -267,5 +269,13 @@ extension BrowseCommunityViewController {
                 actionConsumer?.executeAction(model.tapAction, community: model.community)
             }
         }
+    }
+}
+
+// MARK: - UINavigationControllerDelegate
+extension BrowseCommunityViewController: UINavigationControllerDelegate {
+    func navigationController(navigationController: UINavigationController, willShowViewController viewController: UIViewController, animated: Bool) {
+        let backItem = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
+        viewController.navigationItem.backBarButtonItem = backItem
     }
 }
