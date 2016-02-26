@@ -91,6 +91,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         XLFormViewController.cellClassesForRowDescriptorTypes()[XLFormRowDescriptorTypeDonate] =
         "DonateCell"
         
+        XLFormViewController.cellClassesForRowDescriptorTypes()[XLFormRowDescriptorTypeMoreInformation] =
+        "MoreInformationCell"
+        
         XLFormViewController.cellClassesForRowDescriptorTypes()[XLFormRowDescriptorTypeTotal] =
         "TotalCell"
         

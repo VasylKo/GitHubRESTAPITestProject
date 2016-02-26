@@ -98,8 +98,12 @@ class GiveBloodDetailsViewController: UIViewController {
     
     private func productAcionItems() -> [[GiveBloodActionItem]] {
         var zeroSection = [ // 0 section
-            GiveBloodActionItem(title: NSLocalizedString("Send Message", comment: "GiveBlood"), image: "productSendMessage", action: .SendMessage),
-            GiveBloodActionItem(title: NSLocalizedString("Office", comment: "GiveBlood"), image: "productSellerProfile", action: .ProductInventory),]
+            GiveBloodActionItem(title: NSLocalizedString("Send Message", comment: "GiveBlood"), image: "productSendMessage", action: .SendMessage)]
+        
+        if self.author?.objectId != api().currentUserId() {
+            zeroSection.append(GiveBloodActionItem(title: NSLocalizedString("Office", comment: "GiveBlood"),
+                image: "productSellerProfile", action: .ProductInventory))
+        }
         
         if self.product?.location != nil {
             zeroSection.append(GiveBloodActionItem(title: NSLocalizedString("Navigate", comment: "GiveBlood"), image: "productNavigate", action: .Navigate))

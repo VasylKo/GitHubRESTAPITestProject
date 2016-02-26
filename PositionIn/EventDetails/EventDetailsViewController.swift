@@ -87,8 +87,13 @@ final class EventDetailsViewController: UIViewController {
         ]
         
         var firstSection = [ // 1 section
-            EventActionItem(title: NSLocalizedString("Send Message", comment: "Event action: Send Message"), image: "productSendMessage", action: .SendMessage),
-            EventActionItem(title: NSLocalizedString("Organizer Profile", comment: "Event action: Organizer Profile"), image: "productSellerProfile", action: .OrganizerProfile),]
+            EventActionItem(title: NSLocalizedString("Send Message", comment: "Event action: Send Message"), image: "productSendMessage", action: .SendMessage)]
+        
+        if self.author?.objectId != api().currentUserId() {
+            firstSection.append(EventActionItem(title: NSLocalizedString("Organizer Profile", comment: "Event action: Organizer Profile"),
+                image: "productSellerProfile", action: .OrganizerProfile))
+        }
+        
         if self.event?.location != nil {
             firstSection.append(EventActionItem(title: NSLocalizedString("Navigate", comment: "Event action: Navigate"), image: "productNavigate", action: .Navigate))
         }

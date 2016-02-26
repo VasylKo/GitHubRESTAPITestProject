@@ -14,9 +14,8 @@ class NewsTableViewCell: TableViewCell {
     private var actionConsumer: NewsListActionConsumer?
     private var item : FeedItem?
     
+    @IBOutlet weak var commentButton: UIButton!
     @IBOutlet weak var likeButton: UIButton!
-    @IBOutlet weak var likesLabel: UILabel!
-    @IBOutlet weak var commentsLabel: UILabel!
     @IBOutlet private weak var imageHeightConstaint: NSLayoutConstraint!
     @IBOutlet private weak var feedItemImageView: UIImageView!
     @IBOutlet private weak var headerLabel: UILabel!
@@ -52,11 +51,11 @@ class NewsTableViewCell: TableViewCell {
         detailsLabel.text = m!.item.author?.title
         
         if let likes = m!.item.numOfLikes {
-            likesLabel.text = String(likes)
+            likeButton.setTitle(String(likes), forState: .Normal)
         }
         
         if let comments = m!.item.numOfComments {
-            commentsLabel.text = String(comments)
+            commentButton.setTitle(String(comments), forState: .Normal)
         }
         
         if let text = m!.item.text {

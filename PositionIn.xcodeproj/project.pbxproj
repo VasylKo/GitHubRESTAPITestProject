@@ -114,6 +114,8 @@
 		CD8ED0DE1C60BE7000576DBF /* MembershipCardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD8ED0DD1C60BE7000576DBF /* MembershipCardView.xib */; };
 		CD8ED0E01C60BE7C00576DBF /* MembershipCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8ED0DF1C60BE7C00576DBF /* MembershipCardView.swift */; };
 		CD8ED0E21C60D35900576DBF /* MembershipDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8ED0E11C60D35900576DBF /* MembershipDetails.swift */; };
+		CD9CA0F51C7F3E50007B26AA /* MoreInformationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9CA0F41C7F3E50007B26AA /* MoreInformationCell.swift */; };
+		CD9CA0FB1C7F5397007B26AA /* MoreInformationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD9CA0FA1C7F5397007B26AA /* MoreInformationCell.xib */; };
 		CDB5B5C81C5B9C2400413715 /* MembershipPlanDetailsBenefitTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB5B5C01C5B9C2400413715 /* MembershipPlanDetailsBenefitTableViewCell.swift */; };
 		CDB5B5C91C5B9C2400413715 /* MembershipPlanDetailsBenefitTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CDB5B5C11C5B9C2400413715 /* MembershipPlanDetailsBenefitTableViewCell.xib */; };
 		CDB5B5CA1C5B9C2400413715 /* MembershipPlanDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CDB5B5C21C5B9C2400413715 /* MembershipPlanDetailsViewController.xib */; };
@@ -635,6 +637,8 @@
 		CD8ED0DD1C60BE7000576DBF /* MembershipCardView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MembershipCardView.xib; sourceTree = "<group>"; };
 		CD8ED0DF1C60BE7C00576DBF /* MembershipCardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MembershipCardView.swift; sourceTree = "<group>"; };
 		CD8ED0E11C60D35900576DBF /* MembershipDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MembershipDetails.swift; sourceTree = "<group>"; };
+		CD9CA0F41C7F3E50007B26AA /* MoreInformationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreInformationCell.swift; sourceTree = "<group>"; };
+		CD9CA0FA1C7F5397007B26AA /* MoreInformationCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MoreInformationCell.xib; sourceTree = "<group>"; };
 		CDB5B5C01C5B9C2400413715 /* MembershipPlanDetailsBenefitTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MembershipPlanDetailsBenefitTableViewCell.swift; sourceTree = "<group>"; };
 		CDB5B5C11C5B9C2400413715 /* MembershipPlanDetailsBenefitTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MembershipPlanDetailsBenefitTableViewCell.xib; sourceTree = "<group>"; };
 		CDB5B5C21C5B9C2400413715 /* MembershipPlanDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MembershipPlanDetailsViewController.xib; sourceTree = "<group>"; };
@@ -1388,6 +1392,7 @@
 		CD33581E1C6CCE2F00E78267 /* Attachments */ = {
 			isa = PBXGroup;
 			children = (
+				CD9CA0F31C7F3E43007B26AA /* MoreInformationCell */,
 				CD33581F1C6CD19A00E78267 /* MoreInformationViewController.swift */,
 			);
 			path = Attachments;
@@ -1583,6 +1588,15 @@
 				CD8ED0DF1C60BE7C00576DBF /* MembershipCardView.swift */,
 			);
 			path = MembershipCardView;
+			sourceTree = "<group>";
+		};
+		CD9CA0F31C7F3E43007B26AA /* MoreInformationCell */ = {
+			isa = PBXGroup;
+			children = (
+				CD9CA0F41C7F3E50007B26AA /* MoreInformationCell.swift */,
+				CD9CA0FA1C7F5397007B26AA /* MoreInformationCell.xib */,
+			);
+			path = MoreInformationCell;
 			sourceTree = "<group>";
 		};
 		CDB5B5BE1C5B9C2400413715 /* PlanDetails */ = {
@@ -2121,8 +2135,8 @@
 		E64DC34C1B4E53C90011D37C /* PositionIn */ = {
 			isa = PBXGroup;
 			children = (
-				CD076E851C739215005C04C2 /* News */,
 				CD795BC71C57B4C700C1C298 /* Classes */,
+				CD076E851C739215005C04C2 /* News */,
 				D1F3E8061C74DC9000EFC8ED /* NotificationViewController */,
 				CD33581E1C6CCE2F00E78267 /* Attachments */,
 				CDBDD9A71C47AFB2007578BC /* Volunteer */,
@@ -3667,6 +3681,7 @@
 				D1F86CF11BFCAA96006E0C49 /* Onboarding.storyboard in Resources */,
 				D1F1FF261C22F384006D2E75 /* PositionIn.VolunteerDetailsViewController.xib in Resources */,
 				CD0FCC2F1C69ECD800AFD36C /* TotalCell.xib in Resources */,
+				CD9CA0FB1C7F5397007B26AA /* MoreInformationCell.xib in Resources */,
 				CDEDD96C1C45033C00396594 /* PostToContainerViewController.xib in Resources */,
 				D13039FC1C721960004B673F /* PositionIn.AttendEventCell.xib in Resources */,
 				CD21EA551C68E89B00E50909 /* MPesaIndicatorView.xib in Resources */,
@@ -4021,6 +4036,7 @@
 				CDC102491C6CC091009FF6D9 /* Attachment.swift in Sources */,
 				CDE1B9041C5BBE5900F76F32 /* MembershipPageView.swift in Sources */,
 				E68B52061B8736F4006B980C /* FilterViewController.swift in Sources */,
+				CD9CA0F51C7F3E50007B26AA /* MoreInformationCell.swift in Sources */,
 				E62B16F61B5C1AA700D446BC /* MainMenuUserCell.swift in Sources */,
 				E6F3093E1BA81FAF00C9420C /* PickPhotoView.swift in Sources */,
 				E6C5CE1D1B83A28C00265955 /* SessionController.swift in Sources */,

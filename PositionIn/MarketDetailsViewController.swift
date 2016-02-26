@@ -105,9 +105,13 @@ final class MarketDetailsViewController: UIViewController {
                 image: "productBuyProduct",
                 action: .Buy)]
         var firstSection = [ // 1 section
-            MarketActionItem(title: NSLocalizedString("Send Message", comment: "Market"), image: "productSendMessage", action: .SendMessage),
-            MarketActionItem(title: NSLocalizedString("Seller Profile", comment: "Market"), image: "productSellerProfile", action: .SellerProfile),
-        ]
+            MarketActionItem(title: NSLocalizedString("Send Message", comment: "Market"), image: "productSendMessage", action: .SendMessage)]
+        
+        if self.author?.objectId != api().currentUserId() {
+            firstSection.append(MarketActionItem(title: NSLocalizedString("Seller Profile", comment: "Market"),
+                image: "productSellerProfile", action: .SellerProfile))
+        }
+        
         if self.product?.location != nil {
             firstSection.append(MarketActionItem(title: NSLocalizedString("Navigate", comment: "Market"), image: "productNavigate", action: .Navigate))
         }

@@ -8,6 +8,7 @@
 
 import Foundation
 import XLForm
+import Box
 
 class MoreInformationViewController : XLFormViewController {
     
@@ -18,6 +19,8 @@ class MoreInformationViewController : XLFormViewController {
     
     var attachments : [Attachment]
     var links : [NSURL]
+    
+    var attachmentRowDescriptors : [XLFormRowDescriptor] = []
     
     //MARK: Initializers
     
@@ -38,6 +41,11 @@ class MoreInformationViewController : XLFormViewController {
         super.viewDidLoad()
         
         self.view.tintColor = UIScheme.mainThemeColor
+        for (index, attachment) in self.attachments.enumerate() {
+            let rowDescriptor = self.attachmentRowDescriptors[index]
+            rowDescriptor.value = Box(attachment)
+            rowDescriptor.cellForFormController(self).update()
+        }
     }
     
     func initializeForm() {
@@ -46,17 +54,7 @@ class MoreInformationViewController : XLFormViewController {
         if self.attachments.isEmpty == false {
             let attachmentsSection = XLFormSectionDescriptor.formSectionWithTitle(NSLocalizedString("Attachments"))
             for attachment in self.attachments {
-                let rowDescriptor = XLFormRowDescriptor(tag: Tags.Attachment.rawValue, rowType: XLFormRowDescriptorTypeButton)
-                rowDescriptor.cellConfig["textLabel.text"] = attachment.name
-                rowDescriptor.cellConfig["textLabel.textAlignment"] = Int(0)
-                rowDescriptor.cellConfig["textLabel.textColor"] = UIColor.blackColor()
-                rowDescriptor.cellConfig["textLabel.tintColor"] = UIScheme.mainThemeColor
-                
-                if attachment.type?.containsString("pdf") == true {
-                    rowDescriptor.cellConfig["imageView.image"] = UIImage(named: "ic_pdf_attachment")
-                } else {
-                    rowDescriptor.cellConfig["imageView.image"] = UIImage(named: "ic_image_attachment")
-                }
+                let rowDescriptor = XLFormRowDescriptor(tag: Tags.Attachment.rawValue, rowType: XLFormRowDescriptorTypeMoreInformation)
 
                 rowDescriptor.action.formBlock =  { _ in
                     if let indexPath = self.tableView.indexPathForSelectedRow {
@@ -66,6 +64,7 @@ class MoreInformationViewController : XLFormViewController {
                         }
                     }
                 }
+                self.attachmentRowDescriptors.append(rowDescriptor)
                 attachmentsSection.addFormRow(rowDescriptor)
             }
             form.addFormSection(attachmentsSection)
@@ -90,6 +89,5 @@ class MoreInformationViewController : XLFormViewController {
         
         self.form = form
     }
-    
     
 }
