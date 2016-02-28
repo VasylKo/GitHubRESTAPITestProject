@@ -58,7 +58,10 @@ class GiveBloodDetailsViewController: UIViewController {
         nameLabel.text = author?.title
         detailsLabel.text = product.text?.stringByReplacingOccurrencesOfString("\\n", withString: "\n")
         if let price = product.donations {
+            nameLeadingConstraint?.priority = UILayoutPriorityDefaultLow
             priceLabel.text = "\(Int(price)) beneficiaries"
+        } else {
+            nameLeadingConstraint?.priority = UILayoutPriorityDefaultHigh
         }
         
         let image = UIImage(named: "give_blood_img_default")
@@ -126,6 +129,8 @@ class GiveBloodDetailsViewController: UIViewController {
     @IBOutlet private weak var nameLabel: UILabel!
     @IBOutlet private weak var priceLabel: UILabel!
     @IBOutlet private weak var detailsLabel: UILabel!
+    
+    @IBOutlet weak var nameLeadingConstraint: NSLayoutConstraint?
 }
 
 extension GiveBloodDetailsViewController {
