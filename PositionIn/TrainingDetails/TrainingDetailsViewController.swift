@@ -58,7 +58,7 @@ final class TrainingDetailsViewController: UIViewController {
         headerLabel.text = product.name
         detailsLabel.text = product.text?.stringByReplacingOccurrencesOfString("\\n", withString: "\n")
         if let price = product.price {
-            priceLabel.text = "\(Int(price)) KSH"
+            priceLabel.text = "\(AppConfiguration().currencySymbol) \(Int(price))"
         }
         
         if let name = author?.title {

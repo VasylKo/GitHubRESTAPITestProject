@@ -76,9 +76,10 @@ final class AppConfiguration {
         #endif
     }
     
-    let currencyFormatter: NSNumberFormatter = {
+    let currencySymbol = "KSh"
+    lazy var currencyFormatter: NSNumberFormatter = {
         let currencyFormatter = NSNumberFormatter()
-        currencyFormatter.currencySymbol = "KES "
+        currencyFormatter.currencySymbol = "\(AppConfiguration().currencySymbol) "
         currencyFormatter.numberStyle = .CurrencyStyle
         currencyFormatter.generatesDecimalNumbers = false
         currencyFormatter.maximumFractionDigits = 2
