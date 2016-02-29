@@ -134,12 +134,6 @@ class DonateViewController: XLFormViewController, PaymentReponseDelegate {
             if (self?.paymentType != nil && self?.amount != 0) {
                 self!.performSegueWithIdentifier("Show\((self?.paymentType)!)", sender: self!)
                 self?.setError(true, error: nil)
-            } else {
-                if(self?.amount == 0) {
-                   self?.setError(false, error: "The donation amount connot be 0")
-                } else {
-                   self?.setError(false, error: "You must select a payment method")
-                }
             }
             
             self?.deselectFormRow(sender)

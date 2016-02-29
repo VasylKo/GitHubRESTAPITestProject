@@ -50,12 +50,6 @@ class MembershipPaymentViewController: XLFormViewController, PaymentReponseDeleg
     }
     
     //MARK: Setup Interface
-
-    override func showFormValidationError(error: NSError!) {
-        if let error = error {
-            showWarning(error.localizedDescription)
-        }
-    }
     
     func setupInterface() {
         self.title = "Payment"
@@ -115,7 +109,6 @@ class MembershipPaymentViewController: XLFormViewController, PaymentReponseDeleg
             
             let validationErrors : Array<NSError> = self?.formValidationErrors() as! Array<NSError>
             if (validationErrors.count > 0){
-                self?.showFormValidationError(validationErrors.first)
                 return
             }
             
