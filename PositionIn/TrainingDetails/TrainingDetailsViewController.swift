@@ -59,8 +59,12 @@ final class TrainingDetailsViewController: UIViewController {
         nameLabel.text = author?.title
         detailsLabel.text = product.text?.stringByReplacingOccurrencesOfString("\\n", withString: "\n")
         if let price = product.price {
+            priceLabel.text = "\(AppConfiguration().currencySymbol) \(Int(price))"
+        }
+        
+        if let name = author?.title {
+            nameLabel.text = name
             nameLeadingConstraint?.priority = UILayoutPriorityDefaultLow
-            priceLabel.text = "\(Int(price)) KSH"
         } else {
             nameLeadingConstraint?.priority = UILayoutPriorityDefaultHigh
         }

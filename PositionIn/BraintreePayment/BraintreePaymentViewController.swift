@@ -54,7 +54,8 @@ class BraintreePaymentViewController : UIViewController, BTDropInViewControllerD
             }
             
             if let amount = self.amount {
-                dropInViewController.paymentRequest?.displayAmount = "\(amount) KSH"
+                let displayAmount = "\(AppConfiguration().currencySymbol) \(amount)"
+                dropInViewController.paymentRequest?.displayAmount = displayAmount
             }
 
             dropInViewController.paymentRequest?.callToActionText = NSLocalizedString("Checkout", comment: "Order: Checkout")

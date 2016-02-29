@@ -80,7 +80,8 @@ class DonateViewController: XLFormViewController, PaymentReponseDelegate {
         
         donateToSection.addFormRow(donateProjectRow)
         
-        let donatationSection = XLFormSectionDescriptor.formSectionWithTitle("Donation Amount (KSH)")
+        let donatationSectionTitle = "Donation Amount (\(AppConfiguration().currencySymbol))"
+        let donatationSection = XLFormSectionDescriptor.formSectionWithTitle(donatationSectionTitle)
         form.addFormSection(donatationSection)
         
         let donationRow: XLFormRowDescriptor = XLFormRowDescriptor(tag: Tags.Money.rawValue,
