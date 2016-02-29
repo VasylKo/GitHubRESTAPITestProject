@@ -118,11 +118,10 @@ class VolunteerDetailsViewController: UIViewController {
     
     
     private func productAcionItems() -> [[VolunteerActionItem]] {
-        var firstSection = [
-            VolunteerActionItem(title: NSLocalizedString("Send Message", comment: "Volunteer"), image: "productSendMessage", action: .SendMessage),
-            /*VolunteerActionItem(title: NSLocalizedString("More Information", comment: "Volunteer"), image: "productTerms&Info", action: .ProductInventory)*/]
+        var firstSection = [VolunteerActionItem]()
         
         if self.author?.objectId != api().currentUserId() {
+            firstSection.append(VolunteerActionItem(title: NSLocalizedString("Send Message", comment: "Volunteer"), image: "productSendMessage", action: .SendMessage))
             firstSection.append(VolunteerActionItem(title: NSLocalizedString("Organizer Profile", comment: "Volunteer"),
                 image: "productSellerProfile", action: .SellerProfile))
         }

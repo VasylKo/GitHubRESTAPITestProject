@@ -102,10 +102,10 @@ final class ProductDetailsViewController: UIViewController {
                 image: "home_donate",
                 action: .Buy)]
         
-        var firstSection = [ // 1 section
-            ProductActionItem(title: NSLocalizedString("Send Message", comment: "Product action: Send Message"), image: "productSendMessage", action: .SendMessage)]
+        var firstSection = [ProductActionItem]() // 1 section
         
         if self.author?.objectId != api().currentUserId() {
+            firstSection.append(ProductActionItem(title: NSLocalizedString("Send Message", comment: "Product action: Send Message"), image: "productSendMessage", action: .SendMessage))
             firstSection.append(ProductActionItem(title: NSLocalizedString("Organizer Profile", comment: "Product action: Seller Profile"),
                 image: "productSellerProfile", action: .SellerProfile))
         }
