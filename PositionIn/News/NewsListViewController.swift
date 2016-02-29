@@ -37,6 +37,17 @@ class NewsListViewController: UIViewController {
         self.reloadData()
     }
     
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if let fromViewController = self.navigationController?.transitionCoordinator()?.viewControllerForKey(UITransitionContextFromViewControllerKey) {
+            if self.navigationController?.viewControllers.contains(fromViewController) == false {
+                self.reloadData()
+            }
+        }
+    }
+    
     //MARK: Data
     
     func reloadData() {
