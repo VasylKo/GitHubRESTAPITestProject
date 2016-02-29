@@ -68,6 +68,8 @@ class CompactFeedTableCellModel: FeedTableCellModel {
                 locationController().distanceFromCoordinate(location.coordinates).onSuccess {
                     [weak self] distance in
                     let formatter = NSLengthFormatter()
+                    formatter.numberFormatter.maximumFractionDigits = 1
+                    formatter.unitStyle = .Long
                     self?.info = formatter.stringFromMeters(distance)
                 }
             }
