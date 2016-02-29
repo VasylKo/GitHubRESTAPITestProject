@@ -124,7 +124,7 @@ class DonateViewController: XLFormViewController, PaymentReponseDelegate {
         
         let confirmRow: XLFormRowDescriptor = XLFormRowDescriptor(tag: Tags.Confirm.rawValue,
             rowType: XLFormRowDescriptorTypeButton,
-            title: NSLocalizedString("Confirm Donation", comment: "Payment"))
+            title: NSLocalizedString("Proceed to Donate"))
         
         confirmRow.cellConfig["backgroundColor"] = UIScheme.mainThemeColor
         confirmRow.cellConfig["textLabel.color"] = UIColor.whiteColor()
