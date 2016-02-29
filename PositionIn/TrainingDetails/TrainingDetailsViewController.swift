@@ -56,6 +56,7 @@ final class TrainingDetailsViewController: UIViewController {
     private func didReceiveProductDetails(product: Product) {
         self.product = product
         headerLabel.text = product.name
+        nameLabel.text = author?.title
         detailsLabel.text = product.text?.stringByReplacingOccurrencesOfString("\\n", withString: "\n")
         if let price = product.price {
             priceLabel.text = "\(AppConfiguration().currencySymbol) \(Int(price))"
@@ -63,6 +64,9 @@ final class TrainingDetailsViewController: UIViewController {
         
         if let name = author?.title {
             nameLabel.text = name
+            nameLeadingConstraint?.priority = UILayoutPriorityDefaultLow
+        } else {
+            nameLeadingConstraint?.priority = UILayoutPriorityDefaultHigh
         }
         
         let image = UIImage(named: "trainings_placeholder")
@@ -135,6 +139,8 @@ final class TrainingDetailsViewController: UIViewController {
     @IBOutlet private weak var nameLabel: UILabel!
     @IBOutlet private weak var priceLabel: UILabel!
     @IBOutlet private weak var detailsLabel: UILabel!
+    
+    @IBOutlet weak var nameLeadingConstraint: NSLayoutConstraint?
 }
 
 extension TrainingDetailsViewController : TrainingDetailsActionConsumer {

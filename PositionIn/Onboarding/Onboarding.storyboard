@@ -120,6 +120,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="sendBarButtonItem" destination="peT-kn-vwY" id="uzS-kn-WMP"/>
                         <segue destination="Ffb-Kg-ByV" kind="show" identifier="AmbulanceRequestedSegueId" id="1dq-j8-aQA"/>
                     </connections>
                 </viewController>
