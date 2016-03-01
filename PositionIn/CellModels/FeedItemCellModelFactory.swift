@@ -11,7 +11,7 @@ import PosInCore
 
 struct FeedItemCellModelFactory {
     
-    func compactModelsForItem(feedItem: FeedItem) -> [TableViewCellModel] {
+    func compactModelsForItem(delegate : ActionsDelegate, feedItem: FeedItem) -> [TableViewCellModel] {
         switch feedItem.type {
         case .GiveBlood:
             fallthrough
@@ -35,8 +35,8 @@ struct FeedItemCellModelFactory {
             fallthrough
         case .Project:
             return [
-                CompactFeedTableCellModel(itemType: feedItem.type,
-                    objectID: feedItem.objectId,
+                CompactFeedTableCellModel(delegate:delegate,
+                    item: feedItem,
                     title: feedItem.name,
                     details: feedItem.author?.title,
                     info: nil,
@@ -59,7 +59,7 @@ struct FeedItemCellModelFactory {
     
     func compactCellReuseIdForModel(model: TableViewCellModel, showCardCells: Bool) -> String {
         if let model = model as? CompactFeedTableCellModel {
-            switch model.itemType {
+            switch model.item.type {
             case .Post:
                 fallthrough
             case .News:
@@ -112,8 +112,8 @@ struct FeedItemCellModelFactory {
     func walletModelsForItem(feedItem: FeedItem) -> [TableViewCellModel] {
         return [
             ComapctBadgeFeedTableCellModel (
-                itemType: feedItem.type,
-                objectID: feedItem.objectId,
+                delegate: nil,
+                item: feedItem,
                 title: feedItem.name,
                 details: feedItem.details,
                 info: feedItem.text,

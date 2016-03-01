@@ -11,5 +11,5 @@ import PosInCore
 
 struct NewsTableViewCellModel: TableViewCellModel {
     let item : FeedItem
-    let actionConsumer: NewsListActionConsumer?
+    weak var actionConsumer: NewsListActionConsumer?
 }
