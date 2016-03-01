@@ -55,7 +55,7 @@ final class BrowseListViewController: UIViewController, BrowseActionProducer, Br
                 self.reloadData()
             }
         }
-        
+
         //TODO: hot fix for distance 
         let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(1 * Double(NSEC_PER_SEC)))
         dispatch_after(delayTime, dispatch_get_main_queue()) { [weak self] in
@@ -183,11 +183,6 @@ extension BrowseListViewController {
             showCompactCells = detailed
             self.showCardCells = showCardCells
         }
-                
-        override func configureTable(tableView: UITableView) {
-            tableView.estimatedRowHeight = showCompactCells ? 80.0 : 120.0
-            super.configureTable(tableView)
-        }
         
         func numberOfSectionsInTableView(tableView: UITableView) -> Int {
             return models.count
@@ -221,6 +216,33 @@ extension BrowseListViewController {
                let actionConsumer = self.actionConsumer {
                 actionConsumer.browseController(actionProducer, didSelectItem: model.item.objectId, type: model.item.type, data: model.data)
             }
+        }
+        
+        func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+            if let model = self.tableView(tableView, modelForIndexPath: indexPath) as? CompactFeedTableCellModel {
+                if model.item.type == .Post {
+                    var cellHeight: CGFloat = 150
+                    cellHeight = (model.imageURL != nil) ? (cellHeight + 80) : cellHeight
+
+                    if let text = model.text {
+                        let maxSize = CGSize(width: UIScreen.mainScreen().applicationFrame.size.width - 20, height: 80)
+                        let attrString = NSAttributedString.init(string: text, attributes: [NSFontAttributeName:UIFont.systemFontOfSize(17)])
+                        let rect = attrString.boundingRectWithSize(maxSize, options: NSStringDrawingOptions.UsesLineFragmentOrigin, context: nil)
+                        let size = CGSizeMake(rect.size.width, rect.size.height)
+                        
+                        cellHeight += (size.height + 10)
+                    }
+                    
+                    
+                    return cellHeight
+                    
+                }
+                else {
+                    let height: CGFloat = showCompactCells ? 80.0 : 120.0
+                    return height
+                }
+            }
+            return 0
         }
         
         func setItems(delegate: ActionsDelegate, feedItems: [FeedItem]) {
