@@ -183,7 +183,10 @@ extension AppDelegate {
                 self.sidebarViewController?.executeAction(.Login)
                 showWarning(error.localizedDescription)
             default:
-                showWarning(error.localizedDescription)
+                //TODO: remove hot fix
+                if error.localizedDescription != "Invalid_token" {
+                    showWarning(error.localizedDescription)
+                }
             }
         }
     }
