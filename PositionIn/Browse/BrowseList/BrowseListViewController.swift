@@ -132,7 +132,8 @@ final class BrowseListViewController: UIViewController, BrowseActionProducer, Br
             if strongSelf.excludeCommunityItems {
                 items = items.filter { $0.community == CRUDObjectInvalidId }
             }
-            strongSelf.dataSource.setItems(items)
+            
+            strongSelf.dataSource.setItems(strongSelf, feedItems: items)
             strongSelf.tableView.reloadData()
             strongSelf.tableView.setContentOffset(CGPointZero, animated: false)
             strongSelf.actionConsumer?.browseControllerDidChangeContent(strongSelf)
@@ -156,6 +157,23 @@ final class BrowseListViewController: UIViewController, BrowseActionProducer, Br
     
     @IBOutlet private(set) internal weak var tableView: UITableView!
     @IBOutlet private weak var displayModeSegmentedControl: UISegmentedControl!
+}
+    
+extension BrowseListViewController: ActionsDelegate {
+    
+    func like(item: FeedItem) {
+        if (item.isLiked) {
+            api().unlikePost(item.objectId).onSuccess{[weak self] in
+                self?.reloadData()
+            }
+        }
+        else {
+            api().likePost(item.objectId).onSuccess{[weak self] in
+                self?.reloadData()
+            }
+        }
+    }
+    
 }
 
 extension BrowseListViewController {
@@ -201,14 +219,14 @@ extension BrowseListViewController {
             if let model = self.tableView(tableView, modelForIndexPath: indexPath) as? FeedTableCellModel,
                let actionProducer = parentViewController as? BrowseActionProducer,
                let actionConsumer = self.actionConsumer {
-                actionConsumer.browseController(actionProducer, didSelectItem: model.objectID, type: model.itemType, data: model.data)
+                actionConsumer.browseController(actionProducer, didSelectItem: model.item.objectId, type: model.item.type, data: model.data)
             }
         }
         
-        func setItems(feedItems: [FeedItem]) {
+        func setItems(delegate: ActionsDelegate, feedItems: [FeedItem]) {
             if showCompactCells {
                 let list =  feedItems.reduce([]) { models, feedItem  in
-                    return models + self.modelFactory.compactModelsForItem(feedItem)
+                    return models + self.modelFactory.compactModelsForItem(delegate, feedItem: feedItem)
                 }
                 models = [ list ]
             } else {
