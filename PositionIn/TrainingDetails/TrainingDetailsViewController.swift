@@ -110,17 +110,18 @@ final class TrainingDetailsViewController: UIViewController {
                 image: "productBuyProduct",
                 action: .Buy)]
         
-        var firstSection = [ // 1 section
-            TrainingActionItem(title: NSLocalizedString("Send Message", comment: "Product action: Send Message"),
-                image: "productSendMessage", action: .SendMessage)]
+        var firstSection = [TrainingActionItem]() // 1 section
+        
+        if self.author?.objectId != api().currentUserId() {
+            firstSection.append(TrainingActionItem(title: NSLocalizedString("Send Message", comment: "Product action: Send Message"),
+                image: "productSendMessage", action: .SendMessage))
+            
+            firstSection.append(TrainingActionItem(title: NSLocalizedString("Organizer Profile", comment: "Product action: Seller Profile"),
+                image: "productSellerProfile", action: .SellerProfile))
+        }
         
         if self.product?.links?.isEmpty == false || self.product?.attachments?.isEmpty == false {
             firstSection.append(TrainingActionItem(title: NSLocalizedString("More Information", comment: "Product action: More Information"), image: "productTerms&Info", action: .MoreInformation))
-        }
-        
-        if self.author?.objectId != api().currentUserId() {
-            firstSection.append(TrainingActionItem(title: NSLocalizedString("Organizer Profile", comment: "Product action: Seller Profile"),
-                image: "productSellerProfile", action: .SellerProfile))
         }
         
         if self.product?.location != nil {

@@ -86,10 +86,10 @@ final class EventDetailsViewController: UIViewController {
                 action: .Attend)
         ]
         
-        var firstSection = [ // 1 section
-            EventActionItem(title: NSLocalizedString("Send Message", comment: "Event action: Send Message"), image: "productSendMessage", action: .SendMessage)]
+        var firstSection = [EventActionItem]() // 1 section
         
         if self.author?.objectId != api().currentUserId() {
+            firstSection.append(EventActionItem(title: NSLocalizedString("Send Message", comment: "Event action: Send Message"), image: "productSendMessage", action: .SendMessage))
             firstSection.append(EventActionItem(title: NSLocalizedString("Organizer Profile", comment: "Event action: Organizer Profile"),
                 image: "productSellerProfile", action: .OrganizerProfile))
         }

@@ -113,9 +113,10 @@ final class BomaHotelsDetailsViewController: UIViewController {
              zeroSection.append(BomaHotelActionItem(title: NSLocalizedString("Booking", comment: "BomaHotels"), image: "productBuyProduct", action: .Buy))
         }
         
-        var firstSection = [BomaHotelActionItem(title: NSLocalizedString("Send Message", comment: "BomaHotels"), image: "productSendMessage", action: .SendMessage)]
+        var firstSection = [BomaHotelActionItem]()
         
         if self.author?.objectId != api().currentUserId() {
+            firstSection.append(BomaHotelActionItem(title: NSLocalizedString("Send Message", comment: "BomaHotels"), image: "productSendMessage", action: .SendMessage))
             zeroSection.append(BomaHotelActionItem(title: NSLocalizedString("Organizer Profile", comment: "BomaHotels"),
                 image: "productSellerProfile", action: .SellerProfile))
         }

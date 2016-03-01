@@ -100,10 +100,10 @@ class GiveBloodDetailsViewController: UIViewController {
     
     
     private func productAcionItems() -> [[GiveBloodActionItem]] {
-        var zeroSection = [ // 0 section
-            GiveBloodActionItem(title: NSLocalizedString("Send Message", comment: "GiveBlood"), image: "productSendMessage", action: .SendMessage)]
+        var zeroSection = [GiveBloodActionItem]() // 0 section
         
         if self.author?.objectId != api().currentUserId() {
+            zeroSection.append(GiveBloodActionItem(title: NSLocalizedString("Send Message", comment: "GiveBlood"), image: "productSendMessage", action: .SendMessage))   
             zeroSection.append(GiveBloodActionItem(title: NSLocalizedString("Office", comment: "GiveBlood"),
                 image: "productSellerProfile", action: .ProductInventory))
         }
