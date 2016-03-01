@@ -11,7 +11,7 @@ import PosInCore
 
 class NewsTableViewCell: TableViewCell {
     
-    private var actionConsumer: NewsListActionConsumer?
+    private weak var actionConsumer: NewsListActionConsumer?
     private var item : FeedItem?
     
     @IBOutlet weak var commentButton: UIButton!

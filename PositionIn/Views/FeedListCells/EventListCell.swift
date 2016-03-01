@@ -22,7 +22,7 @@ final class EventListCell: TableViewCell {
 
         //todo: need update images
         
-        switch m!.itemType {
+        switch m!.item.type {
         case .Emergency:
             productImage.setImageFromURL(m!.imageURL, placeholder: UIImage(named: "PromotionDetailsPlaceholder"))
         case .GiveBlood:
