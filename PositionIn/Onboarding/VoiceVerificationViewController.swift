@@ -16,6 +16,10 @@ class VoiceVerificationViewController: XLFormViewController {
         case ValidationCode = "ValidationCode"
     }
     
+    var phoneNumber: String?
+    
+    //MARK: Initializers
+    
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         self.initializeForm()
@@ -24,12 +28,6 @@ class VoiceVerificationViewController: XLFormViewController {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.initializeForm()
-    }
-    
-    override func showFormValidationError(error: NSError!) {
-        if let error = error {
-            showWarning(error.localizedDescription)
-        }
     }
     
     func initializeForm() {
@@ -79,6 +77,7 @@ class VoiceVerificationViewController: XLFormViewController {
         self.form = form
     }
     
+    //MARK: Target-Action
     
     @IBAction func doneButtonPressed() {
         
@@ -115,11 +114,17 @@ class VoiceVerificationViewController: XLFormViewController {
         }
     }
     
+    //MARK: Private
+    
+    override func showFormValidationError(error: NSError!) {
+        if let error = error {
+            showWarning(error.localizedDescription)
+        }
+    }
+    
     func dismissLogin() {
         sideBarController?.executeAction(SidebarViewController.defaultAction)
         dismissViewControllerAnimated(true, completion: nil)
     }
     
-    var phoneNumber: String?
-
 }
