@@ -23,6 +23,8 @@ class OrderViewController: UITableViewController, SelectPaymentMethodControllerD
         }
         
         if let product = self.product {
+            self.quantityStepper.maximumValue = Double(product.quantity ?? 1)
+            
             itemNameLabel.text = product.name
             let url = product.imageURL
             let image = product.category?.productPlaceholderImage()
@@ -93,7 +95,8 @@ class OrderViewController: UITableViewController, SelectPaymentMethodControllerD
     }
 
     private var quantityString: String {
-        return quantityFormatter.stringFromNumber(NSNumber(integer: quantity)) ?? ""
+        return (quantityFormatter.stringFromNumber(NSNumber(integer: quantity)) ?? "") +
+            NSLocalizedString(" (Out of \(self.product?.quantity ?? 0) available)")
     }
 
     @IBAction func selectPaymentTouched(sender: AnyObject) {
@@ -113,8 +116,6 @@ class OrderViewController: UITableViewController, SelectPaymentMethodControllerD
                     self.navigationController?.pushViewController(controller, animated: true)
                 }
             case .CreditDebitCard:
-                fallthrough
-            case .PayPal:
                 let dropInViewController = BTDropInViewController(APIClient: braintreeClient)
                 dropInViewController.delegate = self
                 
