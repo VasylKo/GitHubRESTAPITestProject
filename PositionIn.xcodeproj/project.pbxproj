@@ -140,6 +140,7 @@
 		CDEDD9781C45243900396594 /* PositionIn.CommunitySearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CDEDD9761C45243900396594 /* PositionIn.CommunitySearchViewController.xib */; };
 		D100DF0B1BF4AA0300C81054 /* GoogleAnalyticsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D100DF0A1BF4AA0300C81054 /* GoogleAnalyticsHelper.swift */; };
 		D100DF0F1BF4AA7900C81054 /* NSDate+NVTimeAgo.m in Sources */ = {isa = PBXBuildFile; fileRef = D100DF0E1BF4AA7900C81054 /* NSDate+NVTimeAgo.m */; };
+		D104D3351C87198900A4541A /* VoiceVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D104D3341C87198900A4541A /* VoiceVerificationViewController.swift */; };
 		D112D9D61C2C7EED0051039E /* CreateUserConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D112D9D51C2C7EED0051039E /* CreateUserConversationViewController.swift */; };
 		D112D9D81C2C826C0051039E /* CreateCommunityConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D112D9D71C2C826C0051039E /* CreateCommunityConversationViewController.swift */; };
 		D112D9DA1C2C83230051039E /* CreateConversationContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D112D9D91C2C83230051039E /* CreateConversationContainerViewController.swift */; };
@@ -664,6 +665,7 @@
 		D100DF0A1BF4AA0300C81054 /* GoogleAnalyticsHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GoogleAnalyticsHelper.swift; path = Utils/GoogleAnalyticsHelper.swift; sourceTree = "<group>"; };
 		D100DF0D1BF4AA7900C81054 /* NSDate+NVTimeAgo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+NVTimeAgo.h"; sourceTree = "<group>"; };
 		D100DF0E1BF4AA7900C81054 /* NSDate+NVTimeAgo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+NVTimeAgo.m"; sourceTree = "<group>"; };
+		D104D3341C87198900A4541A /* VoiceVerificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VoiceVerificationViewController.swift; sourceTree = "<group>"; };
 		D112D9D51C2C7EED0051039E /* CreateUserConversationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateUserConversationViewController.swift; sourceTree = "<group>"; };
 		D112D9D71C2C826C0051039E /* CreateCommunityConversationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateCommunityConversationViewController.swift; sourceTree = "<group>"; };
 		D112D9D91C2C83230051039E /* CreateConversationContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateConversationContainerViewController.swift; sourceTree = "<group>"; };
@@ -1880,6 +1882,7 @@
 				D1F86CF21BFCBAD3006E0C49 /* PhoneNumberViewController.swift */,
 				D12EDEC61BFF4F0D00FB6245 /* PhoneVerificationViewController.swift */,
 				D18EA2C71C031C9800A886A5 /* OnboardingNavigationController.swift */,
+				D104D3341C87198900A4541A /* VoiceVerificationViewController.swift */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -4113,6 +4116,7 @@
 				CD794DE01C52485E00C1C298 /* OpenApplication.swift in Sources */,
 				2431EBDE1B947442009FB158 /* Product.swift in Sources */,
 				D100DF0F1BF4AA7900C81054 /* NSDate+NVTimeAgo.m in Sources */,
+				D104D3351C87198900A4541A /* VoiceVerificationViewController.swift in Sources */,
 				E6A869EC1B60D3E300797D16 /* APIService+Auth.swift in Sources */,
 				D18EA2C81C031C9800A886A5 /* OnboardingNavigationController.swift in Sources */,
 				50FE7D891BBE77BB005676E2 /* ItemsSearchResultDataSource.swift in Sources */,
