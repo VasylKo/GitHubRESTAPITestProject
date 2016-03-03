@@ -43,6 +43,8 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		18495E521C85F1A200666524 /* MembershipMemberDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18495E511C85F1A200666524 /* MembershipMemberDetailsViewController.swift */; };
+		18F331361C8614560010321B /* MembershipMemberDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18F331351C8614560010321B /* MembershipMemberDetailsViewController.xib */; };
 		1A56454F1ADF6D1BF3022FB3 /* BraintreePaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A564EEB40AD56FD2C113F2A /* BraintreePaymentViewController.swift */; };
 		1A5647F5D0FCC84FA5BF21FF /* MpesaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A56419027EC5956741AF471 /* MpesaViewController.swift */; };
 		1A564902D955532DE5B29A65 /* ErrorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A56438E04F9AD6CBDA75AC9 /* ErrorCell.swift */; };
@@ -557,6 +559,8 @@
 
 /* Begin PBXFileReference section */
 		040F01865A9A2BB68F3FDBFF /* Pods-PositionIn.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PositionIn.release.xcconfig"; path = "Pods/Target Support Files/Pods-PositionIn/Pods-PositionIn.release.xcconfig"; sourceTree = "<group>"; };
+		18495E511C85F1A200666524 /* MembershipMemberDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MembershipMemberDetailsViewController.swift; sourceTree = "<group>"; };
+		18F331351C8614560010321B /* MembershipMemberDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MembershipMemberDetailsViewController.xib; sourceTree = "<group>"; };
 		1A5640E770D4CB872B2E4605 /* PaymentReponseDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentReponseDelegate.swift; sourceTree = "<group>"; };
 		1A56419027EC5956741AF471 /* MpesaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MpesaViewController.swift; sourceTree = "<group>"; };
 		1A56438E04F9AD6CBDA75AC9 /* ErrorCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorCell.swift; sourceTree = "<group>"; };
@@ -1263,6 +1267,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		18495E501C85F1A200666524 /* MemberDetails */ = {
+			isa = PBXGroup;
+			children = (
+				18495E511C85F1A200666524 /* MembershipMemberDetailsViewController.swift */,
+			);
+			path = MemberDetails;
+			sourceTree = "<group>";
+		};
+		18F331341C8614560010321B /* MemberDetails */ = {
+			isa = PBXGroup;
+			children = (
+				18F331351C8614560010321B /* MembershipMemberDetailsViewController.xib */,
+			);
+			path = MemberDetails;
+			sourceTree = "<group>";
+		};
 		1A564C3EC8DDC78E3A580F36 /* Mpesa */ = {
 			isa = PBXGroup;
 			children = (
@@ -1511,6 +1531,7 @@
 		CD795BEC1C57BA8100C1C298 /* Interface */ = {
 			isa = PBXGroup;
 			children = (
+				18F331341C8614560010321B /* MemberDetails */,
 				CD21EA491C68E39900E50909 /* MPesaDetails */,
 				CDE1B90B1C5F657300F76F32 /* MemberProfile */,
 				CD8ED0D71C60AD5000576DBF /* MemberCard */,
@@ -1811,6 +1832,7 @@
 		D1DA1EAF1C5909D7009F5AFA /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				18495E501C85F1A200666524 /* MemberDetails */,
 				CD21EA5F1C68F9FF00E50909 /* MPesaConfirmPayment */,
 				CDE1B9081C5F648700F76F32 /* MemberProfile */,
 				CD795C811C5A6DCB00C1C298 /* Plans */,
@@ -3694,6 +3716,7 @@
 				CDB5B5CB1C5B9C2400413715 /* MembershipPlansViewController.xib in Resources */,
 				E6F2436E1B8B0E3A0033B13C /* PositionIn.MainMenuLoginCell.xib in Resources */,
 				D1FD85471C1EF6DB00C2E87B /* PositionIn.BomaHotelsDetailsViewController.xib in Resources */,
+				18F331361C8614560010321B /* MembershipMemberDetailsViewController.xib in Resources */,
 				E689F0791B6B911F00597587 /* PositionIn.ProductInventoryViewController.xib in Resources */,
 				500D7FA91BC2CD39008C8C82 /* PositionIn.SearchEntityCell.xib in Resources */,
 				E6C952341BA1D9960032254F /* PositionIn.ProfileInfoCell.xib in Resources */,
@@ -4011,6 +4034,7 @@
 				D1DA176C1C05B7BE0091A8CE /* BrowseGridCollectionViewCell.swift in Sources */,
 				D1379E8D1C2A98710041AA4E /* ExploreCardCell.swift in Sources */,
 				CD552DD11C75DF1A0012920F /* NewsTableViewCell.swift in Sources */,
+				18495E521C85F1A200666524 /* MembershipMemberDetailsViewController.swift in Sources */,
 				E6C9522C1BA1BB0E0032254F /* PeopleListCell.swift in Sources */,
 				E6F243761B8B31510033B13C /* BrowseTabbar.swift in Sources */,
 				CD21EA531C68E46000E50909 /* MembershipPaymentViewController.swift in Sources */,

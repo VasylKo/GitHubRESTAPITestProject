@@ -46,6 +46,11 @@ class MembershipRouterImplementation: BaseRouterImplementation, MembershipRouter
             animated: true)
     }
     
+    func showMemberDetailsViewController(from sourceViewController : UIViewController) {
+        sourceViewController.navigationController?.pushViewController(MembershipMemberDetailsViewController(router: self),
+            animated: true)
+    }
+    
     func showPlansViewController(from sourceViewController : UIViewController, with plan : MembershipPlan) {
         let plansViewController = MembershipPlansViewController(router: self, type: plan.type, currentMembershipPlan: plan)
         sourceViewController.navigationController?.pushViewController(plansViewController, animated: true)
