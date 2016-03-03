@@ -23,13 +23,6 @@ class MembershipBraintreeConfirmPaymentViewController: MembershipMPesaConfirmPay
         fatalError("init(coder:) is not supported")
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        self.setupInterface()
-        self.initializeForm()
-    }
-    
     override func checkPurchase() {
         if let creditCardPaymentSuccess = self.creditCardPaymentSuccess {
             if creditCardPaymentSuccess == true {
