@@ -34,6 +34,11 @@ class NewsTableViewCell: TableViewCell {
         
         self.item = m!.item
         
+        if let liked = self.item?.isLiked {
+            let image = liked == true ? UIImage(named:"ic_like_selected") : UIImage(named:"ic_like_up")
+            self.likeButton.setImage(image, forState: .Normal)
+        }
+        
         if let imgURL = m!.item.image {
             feedItemImageView.setImageFromURL(imgURL)
             self.imageHeightConstaint.constant = 80

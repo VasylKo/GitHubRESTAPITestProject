@@ -29,6 +29,11 @@ class NewsCardCell: TableViewCell {
         assert(self.model != nil, "Invalid model passed")
         
         
+        if let liked = self.model?.item.isLiked {
+            let image = liked == true ? UIImage(named:"ic_like_selected") : UIImage(named:"ic_like_up")
+            self.likesButton.setImage(image, forState: .Normal)
+        }
+        
         if let imgURL = self.model?.imageURL {
             feedItemImageView.setImageFromURL(imgURL)
             self.imageHeightConstaint.constant = 80
