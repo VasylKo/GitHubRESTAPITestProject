@@ -115,7 +115,7 @@ class MembershipPaymentViewController: XLFormViewController, PaymentReponseDeleg
             //MPesa
             if let cardItem: Box<CardItem> = paymentRow.value as? Box<CardItem> {
                 if cardItem.value == .MPesa {
-                    self?.router.showMPesaConfirmPaymentViewController(from: self!, with: self!.plan)
+                    self?.router.showMPesaConfirmPaymentViewController(from: self!, with: self!.plan, creditCardPaymentSuccess: nil)
                 }
                 else {
                     let paymentController: BraintreePaymentViewController = BraintreePaymentViewController()
@@ -136,7 +136,7 @@ class MembershipPaymentViewController: XLFormViewController, PaymentReponseDeleg
     //MARK: PaymentReponseDelegate
     
     func setError(hidden: Bool, error: String?) {
-        self.router.showMembershipMemberCardViewController(from: self)
+        self.router.showMPesaConfirmPaymentViewController(from: self, with: self.plan, creditCardPaymentSuccess: hidden)
     }
     
     func paymentReponse(success: Bool, err: String?) {

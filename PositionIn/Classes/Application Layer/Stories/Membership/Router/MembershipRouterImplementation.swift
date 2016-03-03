@@ -56,8 +56,8 @@ class MembershipRouterImplementation: BaseRouterImplementation, MembershipRouter
         sourceViewController.dismissViewControllerAnimated(true, completion: nil)
     }
     
-    func showMPesaConfirmPaymentViewController(from sourceViewController : UIViewController, with plan : MembershipPlan) {
-        let mpesaConfirmPaymentViewController = MembershipMPesaDetailsViewController(router: self, plan: plan)
+    func showMPesaConfirmPaymentViewController(from sourceViewController : UIViewController, with plan : MembershipPlan, creditCardPaymentSuccess: Bool?) {
+        let mpesaConfirmPaymentViewController = MembershipMPesaDetailsViewController(router: self, plan: plan, creditCardPaymentSuccess: creditCardPaymentSuccess)
         sourceViewController.navigationController?.pushViewController(mpesaConfirmPaymentViewController, animated: true)
     }
 }

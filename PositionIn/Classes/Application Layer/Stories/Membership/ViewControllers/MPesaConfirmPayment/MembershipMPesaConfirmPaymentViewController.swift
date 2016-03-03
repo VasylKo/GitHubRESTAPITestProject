@@ -16,12 +16,14 @@ class MembershipMPesaDetailsViewController: XLFormViewController {
     private let plan : MembershipPlan
     private var headerView : MPesaIndicatorView!
     private var transactionId = ""
+    private var creditCardPaymentSuccess: Bool?
     
     //MARK: Initializers
     
-    init(router: MembershipRouter, plan: MembershipPlan) {
+    init(router: MembershipRouter, plan: MembershipPlan, creditCardPaymentSuccess: Bool?) {
         self.router = router
         self.plan = plan
+        self.creditCardPaymentSuccess = creditCardPaymentSuccess
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -37,14 +39,27 @@ class MembershipMPesaDetailsViewController: XLFormViewController {
         self.setupInterface()
         self.initializeForm()
         
-        let price = String(self.plan.price ?? 0)
-        api().membershipCheckoutMpesa(price, nonce: "",
-            membershipId: self.plan.objectId).onSuccess { [weak self] transactionId in
-            self?.transactionId = transactionId
-            self?.pollStatus()
-            }.onFailure(callback: { [weak self] _ in
-                self?.headerView.showFailure()
-            })
+        if let creditCardPaymentSuccess = creditCardPaymentSuccess {
+            if creditCardPaymentSuccess == true {
+                self.headerView.showSuccess()
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (Int64)(3 * NSEC_PER_SEC)), dispatch_get_main_queue()) {
+                    self.router.showMembershipMemberCardViewController(from: self)
+                }
+            }
+            else {
+                self.headerView.showFailure()
+            }
+        }
+        else {
+            let price = String(self.plan.price ?? 0)
+            api().membershipCheckoutMpesa(price, nonce: "",
+                membershipId: self.plan.objectId).onSuccess { [weak self] transactionId in
+                    self?.transactionId = transactionId
+                    self?.pollStatus()
+                }.onFailure(callback: { [weak self] _ in
+                    self?.headerView.showFailure()
+                    })
+        }
     }
 
     @objc func pollStatus() {
