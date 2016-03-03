@@ -111,6 +111,18 @@ struct APIService {
         return getObject(endpoint)
     }
     
+    //MARK: - Wallet -
+    
+    func getDonations() -> Future<CollectionResponse<Donation>, NSError> {
+        let endpoint = Donation.endpoint()
+        return getObjectsCollection(endpoint, params: nil)
+    }
+    
+    func getOrders() -> Future<CollectionResponse<Order>, NSError> {
+        let endpoint = Order.endpoint()
+        return getObjectsCollection(endpoint, params: nil)
+    }
+    
     //MARK: - Posts -
     
     func getUserPosts(userId: CRUDObjectId, page: Page) -> Future<CollectionResponse<Post>, NSError> {
