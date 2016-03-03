@@ -9,21 +9,20 @@
 import Foundation
 import XLForm
 
-class MembershipMPesaDetailsViewController: XLFormViewController {
+class MembershipMPesaConfirmPaymentViewController: XLFormViewController {
     
     private let pageView = MembershipPageView(pageCount: 3)
-    private let router : MembershipRouter
+    let router : MembershipRouter
     private let plan : MembershipPlan
-    private var headerView : MPesaIndicatorView!
+    var headerView : MPesaIndicatorView!
     private var transactionId = ""
-    private var creditCardPaymentSuccess: Bool?
+
     
     //MARK: Initializers
     
-    init(router: MembershipRouter, plan: MembershipPlan, creditCardPaymentSuccess: Bool?) {
+    init(router: MembershipRouter, plan: MembershipPlan) {
         self.router = router
         self.plan = plan
-        self.creditCardPaymentSuccess = creditCardPaymentSuccess
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -39,27 +38,14 @@ class MembershipMPesaDetailsViewController: XLFormViewController {
         self.setupInterface()
         self.initializeForm()
         
-        if let creditCardPaymentSuccess = creditCardPaymentSuccess {
-            if creditCardPaymentSuccess == true {
-                self.headerView.showSuccess()
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (Int64)(3 * NSEC_PER_SEC)), dispatch_get_main_queue()) {
-                    self.router.showMemberDetailsViewController(from: self)
-                }
-            }
-            else {
-                self.headerView.showFailure()
-            }
-        }
-        else {
-            let price = String(self.plan.price ?? 0)
-            api().membershipCheckoutMpesa(price, nonce: "",
-                membershipId: self.plan.objectId).onSuccess { [weak self] transactionId in
-                    self?.transactionId = transactionId
-                    self?.pollStatus()
-                }.onFailure(callback: { [weak self] _ in
-                    self?.headerView.showFailure()
-                    })
-        }
+        let price = String(self.plan.price ?? 0)
+        api().membershipCheckoutMpesa(price, nonce: "",
+            membershipId: self.plan.objectId).onSuccess { [weak self] transactionId in
+                self?.transactionId = transactionId
+                self?.pollStatus()
+            }.onFailure(callback: { [weak self] _ in
+                self?.headerView.showFailure()
+                })
     }
 
     @objc func pollStatus() {
