@@ -119,41 +119,20 @@ class MembershipConfirmDetailsViewController : XLFormViewController {
     
     private func initializeForm() {
         
-        let form = XLFormDescriptor(title:NSLocalizedString("Confirm Details", comment: ""))
+
         
-        //Phone Section
-        let phoneSection = XLFormSectionDescriptor.formSection()
-        phoneRow.disabled = true
-        phoneRow.value = self.userProfile?.phone
-        //TODO:set value
-        phoneSection.addFormRow(self.phoneRow)
-        form.addFormSection(phoneSection)
-        
-        let infoSection = XLFormSectionDescriptor.formSection()
-        
-        if let firstName = self.userProfile?.firstName {
-            firstNameRow.value = firstName
-        }
-        infoSection.addFormRow(self.firstNameRow)
-        
-        lastNameRow.value = self.userProfile?.lastName
-        infoSection.addFormRow(self.lastNameRow)
-        
-        emailRow.value = self.userProfile?.email
-        infoSection.addFormRow(self.emailRow)
-        
-        form.addFormSection(infoSection)
-        
-        self.form = form
     }
     
     //MARK: Target- Action
     
     @objc func nextButtonTouched() {
+        navigationItem.rightBarButtonItem?.enabled = false
+        
         //TODO: add validations
         let validationErrors : Array<NSError> = self.formValidationErrors() as! Array<NSError>
         if (validationErrors.count > 0){
             self.showFormValidationError(validationErrors.first)
+            navigationItem.rightBarButtonItem?.enabled = true
             return
         }
         
@@ -170,10 +149,11 @@ class MembershipConfirmDetailsViewController : XLFormViewController {
         if let userProfile = self.userProfile {
             api().updateMyProfile(userProfile).onComplete(callback: { [unowned self] _ in
                 self.router.showPaymentViewController(from: self, with: self.plan)
+                self.navigationItem.rightBarButtonItem?.enabled = true
                 })
-        }
-        else {
+        } else {
             self.router.showPaymentViewController(from: self, with: self.plan)
+            navigationItem.rightBarButtonItem?.enabled = true
         }
 
     }
