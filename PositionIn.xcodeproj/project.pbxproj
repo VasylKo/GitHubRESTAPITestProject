@@ -143,6 +143,7 @@
 		D100DF0B1BF4AA0300C81054 /* GoogleAnalyticsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D100DF0A1BF4AA0300C81054 /* GoogleAnalyticsHelper.swift */; };
 		D100DF0F1BF4AA7900C81054 /* NSDate+NVTimeAgo.m in Sources */ = {isa = PBXBuildFile; fileRef = D100DF0E1BF4AA7900C81054 /* NSDate+NVTimeAgo.m */; };
 		D104D3351C87198900A4541A /* VoiceVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D104D3341C87198900A4541A /* VoiceVerificationViewController.swift */; };
+		D104D33E1C888D4E00A4541A /* MembershipBraintreeConfirmPaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D104D33D1C888D4E00A4541A /* MembershipBraintreeConfirmPaymentViewController.swift */; };
 		D112D9D61C2C7EED0051039E /* CreateUserConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D112D9D51C2C7EED0051039E /* CreateUserConversationViewController.swift */; };
 		D112D9D81C2C826C0051039E /* CreateCommunityConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D112D9D71C2C826C0051039E /* CreateCommunityConversationViewController.swift */; };
 		D112D9DA1C2C83230051039E /* CreateConversationContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D112D9D91C2C83230051039E /* CreateConversationContainerViewController.swift */; };
@@ -670,6 +671,7 @@
 		D100DF0D1BF4AA7900C81054 /* NSDate+NVTimeAgo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+NVTimeAgo.h"; sourceTree = "<group>"; };
 		D100DF0E1BF4AA7900C81054 /* NSDate+NVTimeAgo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+NVTimeAgo.m"; sourceTree = "<group>"; };
 		D104D3341C87198900A4541A /* VoiceVerificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VoiceVerificationViewController.swift; sourceTree = "<group>"; };
+		D104D33D1C888D4E00A4541A /* MembershipBraintreeConfirmPaymentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MembershipBraintreeConfirmPaymentViewController.swift; sourceTree = "<group>"; };
 		D112D9D51C2C7EED0051039E /* CreateUserConversationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateUserConversationViewController.swift; sourceTree = "<group>"; };
 		D112D9D71C2C826C0051039E /* CreateCommunityConversationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateCommunityConversationViewController.swift; sourceTree = "<group>"; };
 		D112D9D91C2C83230051039E /* CreateConversationContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateConversationContainerViewController.swift; sourceTree = "<group>"; };
@@ -1703,6 +1705,14 @@
 			path = "Utils/NSDate+NVTimeAgo";
 			sourceTree = "<group>";
 		};
+		D104D33C1C888D2C00A4541A /* BraintreeConfirmPayment */ = {
+			isa = PBXGroup;
+			children = (
+				D104D33D1C888D4E00A4541A /* MembershipBraintreeConfirmPaymentViewController.swift */,
+			);
+			path = BraintreeConfirmPayment;
+			sourceTree = "<group>";
+		};
 		D118A2A71C0FBB9A0020B363 /* CardCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -1832,6 +1842,7 @@
 		D1DA1EAF1C5909D7009F5AFA /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				D104D33C1C888D2C00A4541A /* BraintreeConfirmPayment */,
 				18495E501C85F1A200666524 /* MemberDetails */,
 				CD21EA5F1C68F9FF00E50909 /* MPesaConfirmPayment */,
 				CDE1B9081C5F648700F76F32 /* MemberProfile */,
@@ -3986,6 +3997,7 @@
 				CD21EA571C68E98D00E50909 /* MPesaIndicatorView.swift in Sources */,
 				D1F3E8091C74DD1200EFC8ED /* NotificationViewController.swift in Sources */,
 				E68B52211B875F8F006B980C /* EventListCell.swift in Sources */,
+				D104D33E1C888D4E00A4541A /* MembershipBraintreeConfirmPaymentViewController.swift in Sources */,
 				E68B52271B875F8F006B980C /* PostListCell.swift in Sources */,
 				CDBDD9AA1C47AFDD007578BC /* BrowseVolunteerViewController.swift in Sources */,
 				D1F3E8141C7628C100EFC8ED /* NotificationTableViewCell.swift in Sources */,
