@@ -182,7 +182,7 @@ extension AppDelegate {
             case (baseErrorDomain, NetworkDataProvider.ErrorCodes.InvalidSessionError.rawValue):
                 self.sidebarViewController?.executeAction(.Login)
                 //TODO: remove hot fix
-                if error.localizedDescription != "Invalid_token" {
+                if(error.localizedDescription.caseInsensitiveCompare("invalid_token") != .OrderedSame) {
                     showWarning(error.localizedDescription)
                 }
             default:
