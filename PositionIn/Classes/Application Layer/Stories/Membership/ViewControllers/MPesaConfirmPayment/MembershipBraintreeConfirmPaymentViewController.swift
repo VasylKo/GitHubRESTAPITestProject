@@ -28,12 +28,14 @@ class MembershipBraintreeConfirmPaymentViewController: MembershipMPesaConfirmPay
         
         self.setupInterface()
         self.initializeForm()
-        
+    }
+    
+    override func checkPurchase() {
         if let creditCardPaymentSuccess = self.creditCardPaymentSuccess {
             if creditCardPaymentSuccess == true {
                 self.headerView.showSuccess()
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (Int64)(3 * NSEC_PER_SEC)), dispatch_get_main_queue()) {
-                    super.router.showMemberDetailsViewController(from: self)
+                    self.router.showMemberDetailsViewController(from: self)
                 }
             }
             else {

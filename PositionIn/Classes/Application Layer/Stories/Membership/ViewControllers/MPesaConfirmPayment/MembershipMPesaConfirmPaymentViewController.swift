@@ -37,7 +37,10 @@ class MembershipMPesaConfirmPaymentViewController: XLFormViewController {
         
         self.setupInterface()
         self.initializeForm()
-        
+        self.checkPurchase()
+    }
+    
+    func checkPurchase() {
         let price = String(self.plan.price ?? 0)
         api().membershipCheckoutMpesa(price, nonce: "",
             membershipId: self.plan.objectId).onSuccess { [weak self] transactionId in
