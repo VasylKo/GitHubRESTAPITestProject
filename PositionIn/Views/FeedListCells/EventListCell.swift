@@ -46,7 +46,8 @@ final class EventListCell: TableViewCell {
         }
         
         titleLabel.text = m!.title
-        infoLabel.text = m!.info
+        let eventDetailsFormat = NSLocalizedString("%d People are attending", comment: "Event details: details format")
+        infoLabel.text = String(format: eventDetailsFormat, m!.numOfParticipants ?? 0)
         dateLabel.text = m!.details
     }
     

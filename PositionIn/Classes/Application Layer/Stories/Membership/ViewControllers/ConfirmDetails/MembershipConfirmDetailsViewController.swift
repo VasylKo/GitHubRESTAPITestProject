@@ -72,7 +72,6 @@ class MembershipConfirmDetailsViewController : XLFormViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.loadData()
-
     }
     
     func loadData (){
@@ -118,9 +117,32 @@ class MembershipConfirmDetailsViewController : XLFormViewController {
     //MARK: Form
     
     private func initializeForm() {
+        let form = XLFormDescriptor(title:NSLocalizedString("Confirm Details", comment: ""))
         
-
+        //Phone Section
+        let phoneSection = XLFormSectionDescriptor.formSection()
+        phoneRow.disabled = true
+        phoneRow.value = self.userProfile?.phone
+        //TODO:set value
+        phoneSection.addFormRow(self.phoneRow)
+        form.addFormSection(phoneSection)
         
+        let infoSection = XLFormSectionDescriptor.formSection()
+        
+        if let firstName = self.userProfile?.firstName {
+            firstNameRow.value = firstName
+        }
+        infoSection.addFormRow(self.firstNameRow)
+        
+        lastNameRow.value = self.userProfile?.lastName
+        infoSection.addFormRow(self.lastNameRow)
+        
+        emailRow.value = self.userProfile?.email
+        infoSection.addFormRow(self.emailRow)
+        
+        form.addFormSection(infoSection)
+        
+        self.form = form
     }
     
     //MARK: Target- Action

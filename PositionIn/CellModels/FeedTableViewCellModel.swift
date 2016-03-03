@@ -36,10 +36,12 @@ class CompactFeedTableCellModel: FeedTableCellModel {
     let date: NSDate?
     var numOfLikes: Int?
     var numOfComments: Int?
+    var numOfParticipants: Int?
     
     weak var delegate : ActionsDelegate?
     
-    init(delegate : ActionsDelegate?, item : FeedItem, title: String?, details: String?, info: String?, text: String?, price: Float?, imageURL: NSURL?, avatarURL:NSURL?, location: Location? = nil, numOfLikes: Int? = nil, numOfComments: Int? = nil, date: NSDate?, data: Any? = nil) {
+    init(delegate : ActionsDelegate?, item : FeedItem, title: String?, details: String?, info: String?, text: String?, price: Float?, imageURL: NSURL?, avatarURL:NSURL?, location: Location? = nil, numOfLikes: Int? = nil, numOfComments: Int? = nil,
+        numOfParticipants: Int? = nil,  date: NSDate?, data: Any? = nil) {
         self.item = item
         self.delegate = delegate
         self.title = title
@@ -52,6 +54,7 @@ class CompactFeedTableCellModel: FeedTableCellModel {
         self.location = location
         self.numOfLikes = numOfLikes
         self.numOfComments = numOfComments
+        self.numOfParticipants = numOfParticipants
         self.date = date
         self.text = text
         
