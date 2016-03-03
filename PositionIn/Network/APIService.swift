@@ -113,13 +113,13 @@ struct APIService {
     
     //MARK: - Wallet -
     
-    func getDonations() -> Future<CollectionResponse<Donation>, NSError> {
-        let endpoint = Donation.endpoint()
+    func getDonations(userId: CRUDObjectId) -> Future<CollectionResponse<Donation>, NSError> {
+        let endpoint = "/v1.0/payments/users/\(userId)/donations"
         return getObjectsCollection(endpoint, params: nil)
     }
     
-    func getOrders() -> Future<CollectionResponse<Order>, NSError> {
-        let endpoint = Order.endpoint()
+    func getOrders(userId: CRUDObjectId) -> Future<CollectionResponse<Order>, NSError> {
+        let endpoint = "/v1.0/payments/users/\(userId)/orders"
         return getObjectsCollection(endpoint, params: nil)
     }
     
