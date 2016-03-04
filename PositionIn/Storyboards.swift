@@ -206,8 +206,8 @@ struct Storyboards {
             return self.storyboard.instantiateViewControllerWithIdentifier("CreateUserConversationViewController") as! CreateUserConversationViewController
         }
 
-        static func instantiateOrderDetailsViewControllerId() -> OrderDetailsViewController {
-            return self.storyboard.instantiateViewControllerWithIdentifier("OrderDetailsViewControllerId") as! OrderDetailsViewController
+        static func instantiateBoughtProductDetailsViewControllerId() -> BoughtProductDetailsViewController {
+            return self.storyboard.instantiateViewControllerWithIdentifier("BoughtProductDetailsViewControllerId") as! BoughtProductDetailsViewController
         }
     }
 
@@ -683,31 +683,31 @@ extension BrowseCommunityViewController {
 //    var storyboardIdentifier: String? { return "BrowseVolunteerViewController" }
 //    static var storyboardIdentifier: String? { return "BrowseVolunteerViewController" }
 //}
-
-extension BrowseVolunteerViewController { 
-
-    enum Segue: String, CustomStringConvertible, SegueProtocol {
-        case showVolunteerDetailsViewController = "showVolunteerDetailsViewController"
-
-        var kind: SegueKind? {
-            switch (self) {
-            case showVolunteerDetailsViewController:
-                return SegueKind(rawValue: "show")
-            }
-        }
-
-        var destination: UIViewController.Type? {
-            switch (self) {
-            case showVolunteerDetailsViewController:
-                return VolunteerDetailsViewController.self
-            }
-        }
-
-        var identifier: String? { return self.description } 
-        var description: String { return self.rawValue }
-    }
-
-}
+//
+//extension BrowseVolunteerViewController { 
+//
+//    enum Segue: String, CustomStringConvertible, SegueProtocol {
+//        case showVolunteerDetailsViewController = "showVolunteerDetailsViewController"
+//
+//        var kind: SegueKind? {
+//            switch (self) {
+//            case showVolunteerDetailsViewController:
+//                return SegueKind(rawValue: "show")
+//            }
+//        }
+//
+//        var destination: UIViewController.Type? {
+//            switch (self) {
+//            case showVolunteerDetailsViewController:
+//                return VolunteerDetailsViewController.self
+//            }
+//        }
+//
+//        var identifier: String? { return self.description } 
+//        var description: String { return self.rawValue }
+//    }
+//
+//}
 
 //MARK: - SearchViewController
 extension SearchViewController: IdentifiableProtocol { 
@@ -1424,10 +1424,10 @@ extension CreateUserConversationViewController: IdentifiableProtocol {
 
 //MARK: - CreateConversationViewController
 
-//MARK: - OrderDetailsViewController
-extension OrderDetailsViewController: IdentifiableProtocol { 
-    var storyboardIdentifier: String? { return "OrderDetailsViewControllerId" }
-    static var storyboardIdentifier: String? { return "OrderDetailsViewControllerId" }
+//MARK: - BoughtProductDetailsViewController
+extension BoughtProductDetailsViewController: IdentifiableProtocol { 
+    var storyboardIdentifier: String? { return "BoughtProductDetailsViewControllerId" }
+    static var storyboardIdentifier: String? { return "BoughtProductDetailsViewControllerId" }
 }
 
 
