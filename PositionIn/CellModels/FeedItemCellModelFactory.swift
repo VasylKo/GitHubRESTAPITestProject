@@ -109,33 +109,6 @@ struct FeedItemCellModelFactory {
         return [ExploreCardCell.reuseId(), NewsCardCell.reuseId()]
     }
     
-    func walletModelsForItem(feedItem: FeedItem) -> [TableViewCellModel] {
-        return [
-            ComapctBadgeFeedTableCellModel (
-                delegate: nil,
-                item: feedItem,
-                title: feedItem.name,
-                details: feedItem.details,
-                info: feedItem.text,
-                text: feedItem.text,
-                imageURL: feedItem.image,
-                avatarURL: nil,
-                badge: feedItem.price.map {
-                    let newValue = $0 as Float
-                    return AppConfiguration().currencyFormatter.stringFromNumber(NSNumber(float: newValue)) ?? ""},
-                data: feedItem.itemData
-            ),
-        ]
-    }
-    
-    func walletReuseIdForModel(model: TableViewCellModel) -> String {
-        return EventListCell.reuseId()
-    }
-    
-    func walletReuseId() -> [String]  {
-        return [EventListCell.reuseId()]
-    }
-    
     private let dateFormatter: NSDateFormatter = {
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle

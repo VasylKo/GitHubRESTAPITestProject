@@ -39,6 +39,8 @@ final class EventListCell: TableViewCell {
             productImage.setImageFromURL(m!.imageURL, placeholder: UIImage(named: "eventDetailsPlaceholder"))
         case .News:
             productImage.setImageFromURL(m!.imageURL, placeholder: UIImage(named: "placeholderEvent"))
+        case .Wallet:
+            productImage.setImageFromURL(m!.imageURL, placeholder: UIImage(named: "market_img_default"))
         case .Unknown:
             break
         default:

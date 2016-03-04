@@ -17,6 +17,6 @@ final class DonationDetailsViewController: UIViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = ""
+        title = "Donation"
     }
 }

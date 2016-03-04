@@ -56,24 +56,29 @@ final class WalletViewController: BesideMenuViewController {
 
     // MARK: - Private functions
     private func reloadData() {
-        let items = mockData(browseMode)
-        dataSource.setItems(items)
+        dataSource.setItems([])
         tableView?.reloadData()
-    }
-    
-    private func mockData(mode: BrowseMode) -> [FeedItem] {
-        let dateText = Optional(NSDate()).map{dateFormatter.stringFromDate($0)}
-        switch mode {
+        
+        guard let userId: CRUDObjectId = api().currentUserId() else {
+            return
+        }
+        
+        switch browseMode {
         case .Purchases:
-            return  [
-                FeedItem(name: "The Forest", details: "Edward Rayan", text: "9 miles", price: 12.0),
-                FeedItem(name: "Albuquerque", details: "Amber Tran", text: "9 miles", price: 12.0),
-                FeedItem(name: "World X1", details: "Sharon Brewer", text: "9 miles", price: 12.0)
-            ]
+            api().getOrders(userId, reason: "bought").onSuccess { [weak self] (response : CollectionResponse<Order>) in
+                let items = response.items.map { item -> Order in
+                    item.entityDetails?.name = item.entityDetails?.name ?? NSLocalizedString("Donation to KRCS")
+                    return item
+                }
+                
+                self?.dataSource.setItems(items)
+                self?.tableView?.reloadData()
+            }
         case .MyDonations:
-            return [
-                FeedItem(name: "Wizard of the Coast", details: "Edward Rayan", text: dateText ?? "01.02.2015", price: 123.23)
-            ]
+            api().getDonations(userId).onSuccess { [weak self] (response : CollectionResponse<Order>) in
+                self?.dataSource.setItems(response.items)
+                self?.tableView?.reloadData()
+            }
         }
     }
 
@@ -91,8 +96,9 @@ final class WalletViewController: BesideMenuViewController {
 
 extension WalletViewController {
     internal class WalletItemDatasource: TableViewDataSource {
+
         private var models: [[TableViewCellModel]] = []
-        private let modelFactory = FeedItemCellModelFactory()
+        private let modelFactory = WalletsCellFactory()
         
         override func configureTable(tableView: UITableView) {
             tableView.estimatedRowHeight = 80.0
@@ -122,10 +128,25 @@ extension WalletViewController {
         
         func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
             tableView.deselectRowAtIndexPath(indexPath, animated: true)
+            
+            guard let walletViewController = parentViewController as? WalletViewController else {
+                return
+            }
+            
+            switch walletViewController.browseMode {
+            case .Purchases:
+                let controller =  Storyboards.Main.instantiateOrderDetailsViewControllerId()
+                //controller.donation = model.donation
+                walletViewController.navigationController?.pushViewController(controller, animated: true)
+            case .MyDonations:
+                let controller =  Storyboards.Main.instantiateDonationDetailsViewControllerId()
+                //controller.donation = model.donation
+                walletViewController.navigationController?.pushViewController(controller, animated: true)
+            }
         }
 
-        func setItems(feedItems: [FeedItem]) {
-            models = feedItems.map { self.modelFactory.walletModelsForItem($0) }
+        func setItems(orders: [Order]) {
+            models = orders.map { modelFactory.walletModelsForItem($0) }
         }
     }
 }

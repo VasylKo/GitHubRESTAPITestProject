@@ -9,31 +9,34 @@
 import ObjectMapper
 import CleanroomLogger
 
-struct Order: CRUDObject {
-    var objectId: CRUDObjectId = CRUDObjectInvalidId
-    var entityDetails: Product?
-    var paymentDate: NSDate?
-    var paymentMethod: String? // FIXME: Need to change to enum value
-    var price: Float?
-    var quantity: String?
-    var status: String? // FIXME: Need to change to enum value
-    var transactionId: String?
+enum PaymentMethod: Int, CustomStringConvertible {
+    case Unknown = 0, Braintree, MPESA
     
-    init(objectId: CRUDObjectId = CRUDObjectInvalidId) {
-        self.objectId = objectId
-    }
-    
-    init?(_ map: Map) {
-        mapping(map)
-        if objectId == CRUDObjectInvalidId {
-            Log.error?.message("Error while parsing object")
-            Log.debug?.trace()
-            Log.verbose?.value(self)
-            return nil
+    var description: String {
+        switch self {
+        case .Unknown:
+            return "Unknown"
+        case .Braintree:
+            return "Braintree"
+        case .MPESA:
+            return "MPESA"
         }
     }
+}
+
+enum OrderStatus: Int {
+    case Unknown = 0, New, Reserve, ProcessingPayment, PaymentReceived, Shipped, Delivered
+}
+
+final class Order: FeedItem {
+    var entityDetails: Product?
+    var paymentDate: NSDate?
+    var paymentMethod: PaymentMethod?
+    var quantity: String?
+    var status: OrderStatus?
+    var transactionId: String?
     
-    mutating func mapping(map: Map) {
+    override func mapping(map: Map) {
         objectId <- (map["id"], CRUDObjectIdTransform())
         entityDetails <- map["entityDetails"]
         paymentDate <- (map["paymentDate"], APIDateTransform())
@@ -44,11 +47,8 @@ struct Order: CRUDObject {
         transactionId <- map["transactionId"]
     }
     
-    static func endpoint() -> String {
-        return "/v1.0/payments/orders"
-    }
-    
-    var description: String {
-        return "<\(self.dynamicType):\(objectId)>"
+    required init?(_ map: Map) {
+        super.init(map)
+        type = .Wallet
     }
 }

@@ -11,7 +11,7 @@ import CleanroomLogger
 
 //TODO: clean from invalid ivars
 
-struct FeedItem: CRUDObject {
+class FeedItem: CRUDObject {
     var objectId: CRUDObjectId = CRUDObjectInvalidId
     var name: String?
     var descr: String?
@@ -42,7 +42,7 @@ struct FeedItem: CRUDObject {
         self.price = price
     }
     
-    init?(_ map: Map) {
+    required init?(_ map: Map) {
         mapping(map)
         if objectId == CRUDObjectInvalidId {
             Log.error?.message("Error while parsing object")
@@ -52,7 +52,7 @@ struct FeedItem: CRUDObject {
         }
     }
     
-    mutating func mapping(map: Map) {
+    func mapping(map: Map) {
         objectId <- (map["id"], CRUDObjectIdTransform())
         name <- map["name"]
         descr <- map["desctiption"]
@@ -90,6 +90,7 @@ struct FeedItem: CRUDObject {
         case News
         case Market
         case Post
+        case Wallet
         
         var description: String {
             switch self {
@@ -115,6 +116,8 @@ struct FeedItem: CRUDObject {
                 return "Volunteer"
             case Post:
                 return "Post"
+            case Wallet:
+                return "Wallet"
             }
         
         }
