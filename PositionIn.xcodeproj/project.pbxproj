@@ -43,6 +43,8 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		18495E521C85F1A200666524 /* MembershipMemberDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18495E511C85F1A200666524 /* MembershipMemberDetailsViewController.swift */; };
+		18F331361C8614560010321B /* MembershipMemberDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18F331351C8614560010321B /* MembershipMemberDetailsViewController.xib */; };
 		1A56454F1ADF6D1BF3022FB3 /* BraintreePaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A564EEB40AD56FD2C113F2A /* BraintreePaymentViewController.swift */; };
 		1A5647F5D0FCC84FA5BF21FF /* MpesaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A56419027EC5956741AF471 /* MpesaViewController.swift */; };
 		1A564902D955532DE5B29A65 /* ErrorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A56438E04F9AD6CBDA75AC9 /* ErrorCell.swift */; };
@@ -115,6 +117,8 @@
 		CD8ED0DE1C60BE7000576DBF /* MembershipCardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD8ED0DD1C60BE7000576DBF /* MembershipCardView.xib */; };
 		CD8ED0E01C60BE7C00576DBF /* MembershipCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8ED0DF1C60BE7C00576DBF /* MembershipCardView.swift */; };
 		CD8ED0E21C60D35900576DBF /* MembershipDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8ED0E11C60D35900576DBF /* MembershipDetails.swift */; };
+		CD9CA0F51C7F3E50007B26AA /* MoreInformationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9CA0F41C7F3E50007B26AA /* MoreInformationCell.swift */; };
+		CD9CA0FB1C7F5397007B26AA /* MoreInformationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD9CA0FA1C7F5397007B26AA /* MoreInformationCell.xib */; };
 		CDB5B5C81C5B9C2400413715 /* MembershipPlanDetailsBenefitTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB5B5C01C5B9C2400413715 /* MembershipPlanDetailsBenefitTableViewCell.swift */; };
 		CDB5B5C91C5B9C2400413715 /* MembershipPlanDetailsBenefitTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CDB5B5C11C5B9C2400413715 /* MembershipPlanDetailsBenefitTableViewCell.xib */; };
 		CDB5B5CA1C5B9C2400413715 /* MembershipPlanDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CDB5B5C21C5B9C2400413715 /* MembershipPlanDetailsViewController.xib */; };
@@ -139,6 +143,8 @@
 		CDEDD9781C45243900396594 /* PositionIn.CommunitySearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CDEDD9761C45243900396594 /* PositionIn.CommunitySearchViewController.xib */; };
 		D100DF0B1BF4AA0300C81054 /* GoogleAnalyticsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D100DF0A1BF4AA0300C81054 /* GoogleAnalyticsHelper.swift */; };
 		D100DF0F1BF4AA7900C81054 /* NSDate+NVTimeAgo.m in Sources */ = {isa = PBXBuildFile; fileRef = D100DF0E1BF4AA7900C81054 /* NSDate+NVTimeAgo.m */; };
+		D104D3351C87198900A4541A /* VoiceVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D104D3341C87198900A4541A /* VoiceVerificationViewController.swift */; };
+		D104D33E1C888D4E00A4541A /* MembershipBraintreeConfirmPaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D104D33D1C888D4E00A4541A /* MembershipBraintreeConfirmPaymentViewController.swift */; };
 		D112D9D61C2C7EED0051039E /* CreateUserConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D112D9D51C2C7EED0051039E /* CreateUserConversationViewController.swift */; };
 		D112D9D81C2C826C0051039E /* CreateCommunityConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D112D9D71C2C826C0051039E /* CreateCommunityConversationViewController.swift */; };
 		D112D9DA1C2C83230051039E /* CreateConversationContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D112D9D91C2C83230051039E /* CreateConversationContainerViewController.swift */; };
@@ -555,6 +561,8 @@
 
 /* Begin PBXFileReference section */
 		040F01865A9A2BB68F3FDBFF /* Pods-PositionIn.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PositionIn.release.xcconfig"; path = "Pods/Target Support Files/Pods-PositionIn/Pods-PositionIn.release.xcconfig"; sourceTree = "<group>"; };
+		18495E511C85F1A200666524 /* MembershipMemberDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MembershipMemberDetailsViewController.swift; sourceTree = "<group>"; };
+		18F331351C8614560010321B /* MembershipMemberDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MembershipMemberDetailsViewController.xib; sourceTree = "<group>"; };
 		1A5640E770D4CB872B2E4605 /* PaymentReponseDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentReponseDelegate.swift; sourceTree = "<group>"; };
 		1A56419027EC5956741AF471 /* MpesaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MpesaViewController.swift; sourceTree = "<group>"; };
 		1A56438E04F9AD6CBDA75AC9 /* ErrorCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorCell.swift; sourceTree = "<group>"; };
@@ -637,6 +645,8 @@
 		CD8ED0DD1C60BE7000576DBF /* MembershipCardView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MembershipCardView.xib; sourceTree = "<group>"; };
 		CD8ED0DF1C60BE7C00576DBF /* MembershipCardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MembershipCardView.swift; sourceTree = "<group>"; };
 		CD8ED0E11C60D35900576DBF /* MembershipDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MembershipDetails.swift; sourceTree = "<group>"; };
+		CD9CA0F41C7F3E50007B26AA /* MoreInformationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreInformationCell.swift; sourceTree = "<group>"; };
+		CD9CA0FA1C7F5397007B26AA /* MoreInformationCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MoreInformationCell.xib; sourceTree = "<group>"; };
 		CDB5B5C01C5B9C2400413715 /* MembershipPlanDetailsBenefitTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MembershipPlanDetailsBenefitTableViewCell.swift; sourceTree = "<group>"; };
 		CDB5B5C11C5B9C2400413715 /* MembershipPlanDetailsBenefitTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MembershipPlanDetailsBenefitTableViewCell.xib; sourceTree = "<group>"; };
 		CDB5B5C21C5B9C2400413715 /* MembershipPlanDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MembershipPlanDetailsViewController.xib; sourceTree = "<group>"; };
@@ -662,6 +672,8 @@
 		D100DF0A1BF4AA0300C81054 /* GoogleAnalyticsHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GoogleAnalyticsHelper.swift; path = Utils/GoogleAnalyticsHelper.swift; sourceTree = "<group>"; };
 		D100DF0D1BF4AA7900C81054 /* NSDate+NVTimeAgo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+NVTimeAgo.h"; sourceTree = "<group>"; };
 		D100DF0E1BF4AA7900C81054 /* NSDate+NVTimeAgo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+NVTimeAgo.m"; sourceTree = "<group>"; };
+		D104D3341C87198900A4541A /* VoiceVerificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VoiceVerificationViewController.swift; sourceTree = "<group>"; };
+		D104D33D1C888D4E00A4541A /* MembershipBraintreeConfirmPaymentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MembershipBraintreeConfirmPaymentViewController.swift; sourceTree = "<group>"; };
 		D112D9D51C2C7EED0051039E /* CreateUserConversationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateUserConversationViewController.swift; sourceTree = "<group>"; };
 		D112D9D71C2C826C0051039E /* CreateCommunityConversationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateCommunityConversationViewController.swift; sourceTree = "<group>"; };
 		D112D9D91C2C83230051039E /* CreateConversationContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateConversationContainerViewController.swift; sourceTree = "<group>"; };
@@ -1259,6 +1271,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		18495E501C85F1A200666524 /* MemberDetails */ = {
+			isa = PBXGroup;
+			children = (
+				18495E511C85F1A200666524 /* MembershipMemberDetailsViewController.swift */,
+			);
+			path = MemberDetails;
+			sourceTree = "<group>";
+		};
+		18F331341C8614560010321B /* MemberDetails */ = {
+			isa = PBXGroup;
+			children = (
+				18F331351C8614560010321B /* MembershipMemberDetailsViewController.xib */,
+			);
+			path = MemberDetails;
+			sourceTree = "<group>";
+		};
 		1A564C3EC8DDC78E3A580F36 /* Mpesa */ = {
 			isa = PBXGroup;
 			children = (
@@ -1390,6 +1418,7 @@
 		CD33581E1C6CCE2F00E78267 /* Attachments */ = {
 			isa = PBXGroup;
 			children = (
+				CD9CA0F31C7F3E43007B26AA /* MoreInformationCell */,
 				CD33581F1C6CD19A00E78267 /* MoreInformationViewController.swift */,
 			);
 			path = Attachments;
@@ -1506,6 +1535,7 @@
 		CD795BEC1C57BA8100C1C298 /* Interface */ = {
 			isa = PBXGroup;
 			children = (
+				18F331341C8614560010321B /* MemberDetails */,
 				CD21EA491C68E39900E50909 /* MPesaDetails */,
 				CDE1B90B1C5F657300F76F32 /* MemberProfile */,
 				CD8ED0D71C60AD5000576DBF /* MemberCard */,
@@ -1587,6 +1617,15 @@
 			path = MembershipCardView;
 			sourceTree = "<group>";
 		};
+		CD9CA0F31C7F3E43007B26AA /* MoreInformationCell */ = {
+			isa = PBXGroup;
+			children = (
+				CD9CA0F41C7F3E50007B26AA /* MoreInformationCell.swift */,
+				CD9CA0FA1C7F5397007B26AA /* MoreInformationCell.xib */,
+			);
+			path = MoreInformationCell;
+			sourceTree = "<group>";
+		};
 		CDB5B5BE1C5B9C2400413715 /* PlanDetails */ = {
 			isa = PBXGroup;
 			children = (
@@ -1666,6 +1705,14 @@
 			);
 			name = "NSDate-Time-Ago";
 			path = "Utils/NSDate+NVTimeAgo";
+			sourceTree = "<group>";
+		};
+		D104D33C1C888D2C00A4541A /* BraintreeConfirmPayment */ = {
+			isa = PBXGroup;
+			children = (
+				D104D33D1C888D4E00A4541A /* MembershipBraintreeConfirmPaymentViewController.swift */,
+			);
+			path = BraintreeConfirmPayment;
 			sourceTree = "<group>";
 		};
 		D118A2A71C0FBB9A0020B363 /* CardCell */ = {
@@ -1797,6 +1844,8 @@
 		D1DA1EAF1C5909D7009F5AFA /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				D104D33C1C888D2C00A4541A /* BraintreeConfirmPayment */,
+				18495E501C85F1A200666524 /* MemberDetails */,
 				CD21EA5F1C68F9FF00E50909 /* MPesaConfirmPayment */,
 				CDE1B9081C5F648700F76F32 /* MemberProfile */,
 				CD795C811C5A6DCB00C1C298 /* Plans */,
@@ -1868,6 +1917,7 @@
 				D1F86CF21BFCBAD3006E0C49 /* PhoneNumberViewController.swift */,
 				D12EDEC61BFF4F0D00FB6245 /* PhoneVerificationViewController.swift */,
 				D18EA2C71C031C9800A886A5 /* OnboardingNavigationController.swift */,
+				D104D3341C87198900A4541A /* VoiceVerificationViewController.swift */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -2123,8 +2173,8 @@
 		E64DC34C1B4E53C90011D37C /* PositionIn */ = {
 			isa = PBXGroup;
 			children = (
-				CD076E851C739215005C04C2 /* News */,
 				CD795BC71C57B4C700C1C298 /* Classes */,
+				CD076E851C739215005C04C2 /* News */,
 				D1F3E8061C74DC9000EFC8ED /* NotificationViewController */,
 				CD33581E1C6CCE2F00E78267 /* Attachments */,
 				CDBDD9A71C47AFB2007578BC /* Volunteer */,
@@ -2143,7 +2193,6 @@
 				D1F86CEF1BFCAA72006E0C49 /* Onboarding */,
 				2429FFA21B8E00770061B4E0 /* Utils */,
 				E6018E4E1B849266001D22FA /* ClassExtensions */,
-				E68B51FF1B87351E006B980C /* CellModels */,
 				E660E52A1B5AC23B00F52050 /* MainMenu */,
 				E62B17001B5CE39400D446BC /* Browse */,
 				E6D4D5B01B6F8186003134CB /* Search */,
@@ -2161,6 +2210,7 @@
 				E6F7A46E1BA333B30069152A /* Wallet */,
 				E62B16F91B5CDED600D446BC /* Messaging */,
 				E6325F5F1B57D89A00996480 /* ViewControllers */,
+				E68B51FF1B87351E006B980C /* CellModels */,
 				E6325F581B57D46C00996480 /* Views */,
 				E6C5CE171B83A21500265955 /* DAL */,
 				E660E5251B5AB82000F52050 /* Models */,
@@ -3564,6 +3614,7 @@
 				373963105920A4E5BC0C1447 /* Copy Pods Resources */,
 				50FA91181BB4211E00B56810 /* Copy Simulator app */,
 				D1531E551C43DBF700B2A3A9 /* Fabric */,
+				D1BD11E11C7DB7300047E959 /* NewRelic */,
 			);
 			buildRules = (
 			);
@@ -3669,6 +3720,7 @@
 				D1F86CF11BFCAA96006E0C49 /* Onboarding.storyboard in Resources */,
 				D1F1FF261C22F384006D2E75 /* PositionIn.VolunteerDetailsViewController.xib in Resources */,
 				CD0FCC2F1C69ECD800AFD36C /* TotalCell.xib in Resources */,
+				CD9CA0FB1C7F5397007B26AA /* MoreInformationCell.xib in Resources */,
 				CDEDD96C1C45033C00396594 /* PostToContainerViewController.xib in Resources */,
 				D13039FC1C721960004B673F /* PositionIn.AttendEventCell.xib in Resources */,
 				CD21EA551C68E89B00E50909 /* MPesaIndicatorView.xib in Resources */,
@@ -3678,6 +3730,7 @@
 				CDB5B5CB1C5B9C2400413715 /* MembershipPlansViewController.xib in Resources */,
 				E6F2436E1B8B0E3A0033B13C /* PositionIn.MainMenuLoginCell.xib in Resources */,
 				D1FD85471C1EF6DB00C2E87B /* PositionIn.BomaHotelsDetailsViewController.xib in Resources */,
+				18F331361C8614560010321B /* MembershipMemberDetailsViewController.xib in Resources */,
 				E689F0791B6B911F00597587 /* PositionIn.ProductInventoryViewController.xib in Resources */,
 				500D7FA91BC2CD39008C8C82 /* PositionIn.SearchEntityCell.xib in Resources */,
 				E6C952341BA1D9960032254F /* PositionIn.ProfileInfoCell.xib in Resources */,
@@ -3834,6 +3887,20 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Fabric/run\" 27437daf7b0468aa7a96977842e169657c6b889e 58591b6e6e68aaf8d43a618c90f6c748e0b802f61f287d83e43e16f0542fba41";
 		};
+		D1BD11E11C7DB7300047E959 /* NewRelic */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = NewRelic;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "SCRIPT=`/usr/bin/find \"${SRCROOT}\" -name newrelic_postbuild.sh | head -n 1`\n/bin/bash \"${SCRIPT}\" \"AA0492dd667078eb6a7d0a70ba7267487f6b3fff21\"";
+		};
 		E6325F6C1B57E0E600996480 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -3933,6 +4000,7 @@
 				CD21EA571C68E98D00E50909 /* MPesaIndicatorView.swift in Sources */,
 				D1F3E8091C74DD1200EFC8ED /* NotificationViewController.swift in Sources */,
 				E68B52211B875F8F006B980C /* EventListCell.swift in Sources */,
+				D104D33E1C888D4E00A4541A /* MembershipBraintreeConfirmPaymentViewController.swift in Sources */,
 				E68B52271B875F8F006B980C /* PostListCell.swift in Sources */,
 				CDBDD9AA1C47AFDD007578BC /* BrowseVolunteerViewController.swift in Sources */,
 				D1F3E8141C7628C100EFC8ED /* NotificationTableViewCell.swift in Sources */,
@@ -3982,6 +4050,7 @@
 				D1DA176C1C05B7BE0091A8CE /* BrowseGridCollectionViewCell.swift in Sources */,
 				D1379E8D1C2A98710041AA4E /* ExploreCardCell.swift in Sources */,
 				CD552DD11C75DF1A0012920F /* NewsTableViewCell.swift in Sources */,
+				18495E521C85F1A200666524 /* MembershipMemberDetailsViewController.swift in Sources */,
 				E6C9522C1BA1BB0E0032254F /* PeopleListCell.swift in Sources */,
 				E6F243761B8B31510033B13C /* BrowseTabbar.swift in Sources */,
 				CD21EA531C68E46000E50909 /* MembershipPaymentViewController.swift in Sources */,
@@ -4010,6 +4079,7 @@
 				CDC102491C6CC091009FF6D9 /* Attachment.swift in Sources */,
 				CDE1B9041C5BBE5900F76F32 /* MembershipPageView.swift in Sources */,
 				E68B52061B8736F4006B980C /* FilterViewController.swift in Sources */,
+				CD9CA0F51C7F3E50007B26AA /* MoreInformationCell.swift in Sources */,
 				E62B16F61B5C1AA700D446BC /* MainMenuUserCell.swift in Sources */,
 				E6F3093E1BA81FAF00C9420C /* PickPhotoView.swift in Sources */,
 				E6C5CE1D1B83A28C00265955 /* SessionController.swift in Sources */,
@@ -4086,6 +4156,7 @@
 				CD794DE01C52485E00C1C298 /* OpenApplication.swift in Sources */,
 				2431EBDE1B947442009FB158 /* Product.swift in Sources */,
 				D100DF0F1BF4AA7900C81054 /* NSDate+NVTimeAgo.m in Sources */,
+				D104D3351C87198900A4541A /* VoiceVerificationViewController.swift in Sources */,
 				E6A869EC1B60D3E300797D16 /* APIService+Auth.swift in Sources */,
 				D18EA2C81C031C9800A886A5 /* OnboardingNavigationController.swift in Sources */,
 				50FE7D891BBE77BB005676E2 /* ItemsSearchResultDataSource.swift in Sources */,
@@ -4347,7 +4418,7 @@
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -D DEBUG -D \"STAGING_COPY_ENV\"";
 				PRODUCT_BUNDLE_IDENTIFIER = com.positionin.dev01;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "28e36433-baa3-48c1-ab40-ea63a0d51d51";
+				PROVISIONING_PROFILE = "";
 				STRIP_INSTALLED_PRODUCT = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "PositionIn/PositionIn-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -5234,7 +5305,7 @@
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -D \"STAGING_ENV\"";
 				PRODUCT_BUNDLE_IDENTIFIER = com.positionin.dev01;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "28e36433-baa3-48c1-ab40-ea63a0d51d51";
 				SWIFT_OBJC_BRIDGING_HEADER = "PositionIn/PositionIn-Bridging-Header.h";
 			};
 			name = StagingRelease;
@@ -5547,7 +5618,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Media Applications ltd";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Media Applications ltd";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

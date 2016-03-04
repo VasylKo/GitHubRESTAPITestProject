@@ -11,7 +11,8 @@ import XLForm
 import BrightFutures
 
 class CallAmbulanceViewController: BaseAddItemViewController {
-
+    @IBOutlet weak var sendBarButtonItem: UIBarButtonItem?
+    
     private enum Tags: String {
         case Description = "Description"
         case Incedent = "Incedent"
@@ -115,6 +116,7 @@ class CallAmbulanceViewController: BaseAddItemViewController {
         if  let imageUpload = uploadAssets(values[Tags.Photo.rawValue]) {
             let getLocation = locationController().getCurrentLocation()
             view.userInteractionEnabled = false
+            sendBarButtonItem?.enabled = false
             getLocation.zip(imageUpload).flatMap { (location: Location, urls: [NSURL]) -> Future<AmbulanceRequest, NSError> in
                 var ambulanceRequest = AmbulanceRequest()
                 ambulanceRequest.descriptionString = values[Tags.Description.rawValue] as? String

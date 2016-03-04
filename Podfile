@@ -23,6 +23,7 @@ target 'PositionIn' do
   pod 'FBSDKCoreKit', '~> 4.7'
   pod 'FBSDKLoginKit', '~> 4.7'
   pod 'Box', '~> 2.0'
+  pod 'NewRelicAgent', '~> 5.3.6'
 
   post_install do |installer|
     installer.pods_project.targets.each do |target|

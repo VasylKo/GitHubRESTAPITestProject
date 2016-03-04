@@ -72,6 +72,9 @@ struct Location: Mappable, CustomStringConvertible {
     }
     
     var description: String {
-        return "<\(self.dynamicType):\(coordinates.latitude),\(coordinates.longitude)>"
+        if let coordinates = self.coordinates {
+            return "<\(self.dynamicType):\(coordinates.latitude),\(coordinates.longitude)>"
+        }
+        return "<\(self.dynamicType):nil,nil>"
     }
 }

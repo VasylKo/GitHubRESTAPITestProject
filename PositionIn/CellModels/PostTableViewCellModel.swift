@@ -11,6 +11,7 @@ import PosInCore
 
 struct PostLikesCountModel: TableViewCellModel {
     let likes: Int
+    let isLiked: Bool
     let comments: Int
     let actionConsumer: PostActionConsumer?
 }

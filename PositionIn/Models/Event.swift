@@ -20,7 +20,7 @@ struct Event: CRUDObject {
     var category: ItemCategory?
     var participants: Int? = 0
     var author: CRUDObjectId?
-    var imageURLString: String?
+    var imageURL: NSURL?
     var links : [NSURL]?
     var attachments : [Attachment]?
     var isAttending: Bool?
@@ -94,7 +94,7 @@ struct Event: CRUDObject {
         category <- (map["category"], EnumTransform())
         participants <- map["numOfParticipants"]
         author <- (map["author"], CRUDObjectIdTransform())
-        imageURLString <- map["image"]
+        imageURL <- (map["image"], AmazonURLTransform())
         links <- (map["links"], URLTransform())
         attachments <- map["attachments"]
         isAttending <- map["isAttending"]

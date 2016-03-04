@@ -91,6 +91,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         XLFormViewController.cellClassesForRowDescriptorTypes()[XLFormRowDescriptorTypeDonate] =
         "DonateCell"
         
+        XLFormViewController.cellClassesForRowDescriptorTypes()[XLFormRowDescriptorTypeMoreInformation] =
+        "MoreInformationCell"
+        
         XLFormViewController.cellClassesForRowDescriptorTypes()[XLFormRowDescriptorTypeTotal] =
         "TotalCell"
         
@@ -111,6 +114,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIApplication.sharedApplication().registerForRemoteNotifications()
         
         Fabric.with([Crashlytics.self])
+        
+        NewRelic.startWithApplicationToken(AppConfiguration().newRelicToken);
 
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
     }
@@ -176,7 +181,10 @@ extension AppDelegate {
             switch (error.domain, error.code) {
             case (baseErrorDomain, NetworkDataProvider.ErrorCodes.InvalidSessionError.rawValue):
                 self.sidebarViewController?.executeAction(.Login)
-                showWarning(error.localizedDescription)
+                //TODO: remove hot fix
+                if(error.localizedDescription.caseInsensitiveCompare("invalid_token") != .OrderedSame) {
+                    showWarning(error.localizedDescription)
+                }
             default:
                 showWarning(error.localizedDescription)
             }

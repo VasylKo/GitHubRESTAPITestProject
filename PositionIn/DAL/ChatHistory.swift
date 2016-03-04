@@ -54,7 +54,7 @@ class RealmChatHistory: ChatHistory {
         return itemsForRoom(room)
     }
     
-    private func itemsForRoom(room: ChatRoomType) -> [ XMPPTextMessage] {
+    private func itemsForRoom(room: ChatRoomType) -> [XMPPTextMessage] {
         return currentRealm.objects(ChatMessageStorageObject).filter("room == %@", room).sorted("date", ascending: true).map { $0.message() }
     }
     

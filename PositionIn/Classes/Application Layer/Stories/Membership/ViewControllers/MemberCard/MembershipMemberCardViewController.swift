@@ -23,6 +23,7 @@ class MembershipMemberCardViewController : UIViewController {
     @IBOutlet weak var upgradeButton: UIButton!
     @IBOutlet weak var detailsButton: UIButton!
     
+    @IBOutlet weak var upgradeView: UIView!
     //MARK: Initializers
     
     init(router: MembershipRouter) {
@@ -60,6 +61,7 @@ class MembershipMemberCardViewController : UIViewController {
                 if let strongSelf = self {
                     if collectionResponse.items.isEmpty {
                         strongSelf.upgradeButton.enabled = false
+                        strongSelf.upgradeView.hidden = true
                     }
                     strongSelf.membershipCardView.configure(with: strongSelf.profile!, plan: strongSelf.plan!)
                     UIView.animateWithDuration(0.4, animations: { () -> Void in

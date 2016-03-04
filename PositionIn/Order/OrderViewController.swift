@@ -23,6 +23,8 @@ class OrderViewController: UITableViewController, SelectPaymentMethodControllerD
         }
         
         if let product = self.product {
+            self.quantityStepper.maximumValue = Double(product.quantity ?? 1)
+            
             itemNameLabel.text = product.name
             let url = product.imageURL
             let image = product.category?.productPlaceholderImage()
@@ -32,12 +34,9 @@ class OrderViewController: UITableViewController, SelectPaymentMethodControllerD
             let dateFormatter = NSDateFormatter()
             dateFormatter.dateFormat = "EEE dd yyyy, HH:mm"
             if let startDate = product.startDate,
-            let endData = product.endData {
+            let endDate = product.endData {
                 let startDateString = dateFormatter.stringFromDate(startDate)
-                
-                dateFormatter.dateFormat = "HH:mm"
-                let endDateString = dateFormatter.stringFromDate(endData)
-                
+                let endDateString = dateFormatter.stringFromDate(endDate)
                 self.dateTimeLabel.text = "\(startDateString) to \(endDateString)"
             }
         }
@@ -93,7 +92,8 @@ class OrderViewController: UITableViewController, SelectPaymentMethodControllerD
     }
 
     private var quantityString: String {
-        return quantityFormatter.stringFromNumber(NSNumber(integer: quantity)) ?? ""
+        return (quantityFormatter.stringFromNumber(NSNumber(integer: quantity)) ?? "") +
+            NSLocalizedString(" (Out of \(self.product?.quantity ?? 0) available)")
     }
 
     @IBAction func selectPaymentTouched(sender: AnyObject) {
@@ -113,8 +113,6 @@ class OrderViewController: UITableViewController, SelectPaymentMethodControllerD
                     self.navigationController?.pushViewController(controller, animated: true)
                 }
             case .CreditDebitCard:
-                fallthrough
-            case .PayPal:
                 let dropInViewController = BTDropInViewController(APIClient: braintreeClient)
                 dropInViewController.delegate = self
                 
@@ -153,6 +151,15 @@ class OrderViewController: UITableViewController, SelectPaymentMethodControllerD
         if let clientToken = clientToken {
             self.braintreeClient = BTAPIClient(authorization: clientToken)
         }
+    }
+    
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        let height = super.tableView(tableView, heightForRowAtIndexPath: indexPath)
+        //hide availability date cell
+        if indexPath.row == 1 && self.product?.startDate == nil && self.product?.endData == nil {
+            return 0.0
+        }
+        return height
     }
 }
 
