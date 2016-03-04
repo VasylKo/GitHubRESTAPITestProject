@@ -11,11 +11,12 @@ import PositionIn
 extension UIStoryboard {
     func instantiateViewController<T: UIViewController where T: IdentifiableProtocol>(type: T.Type) -> T? {
         let instance = type.init()
-        if let identifier = instance.identifier {
+        if let identifier = instance.storyboardIdentifier {
             return self.instantiateViewControllerWithIdentifier(identifier) as? T
         }
         return nil
     }
+
 }
 
 protocol Storyboard {
@@ -186,11 +187,15 @@ struct Storyboards {
         }
 
         static func instantiateSplashViewController() -> UIViewController {
-            return self.storyboard.instantiateViewControllerWithIdentifier("SplashViewController") as! UIViewController
+            return self.storyboard.instantiateViewControllerWithIdentifier("SplashViewController")
         }
 
         static func instantiateWalletViewController() -> WalletViewController {
             return self.storyboard.instantiateViewControllerWithIdentifier("WalletViewController") as! WalletViewController
+        }
+
+        static func instantiateDonationDetailsViewControllerId() -> DonationDetailsViewController {
+            return self.storyboard.instantiateViewControllerWithIdentifier("DonationDetailsViewControllerId") as! DonationDetailsViewController
         }
 
         static func instantiateCreateCommunityConversationViewController() -> CreateCommunityConversationViewController {
@@ -199,6 +204,10 @@ struct Storyboards {
 
         static func instantiateCreateUserConversationViewController() -> CreateUserConversationViewController {
             return self.storyboard.instantiateViewControllerWithIdentifier("CreateUserConversationViewController") as! CreateUserConversationViewController
+        }
+
+        static func instantiateOrderDetailsViewControllerId() -> OrderDetailsViewController {
+            return self.storyboard.instantiateViewControllerWithIdentifier("OrderDetailsViewControllerId") as! OrderDetailsViewController
         }
     }
 
@@ -378,12 +387,16 @@ enum SegueKind: String, CustomStringConvertible {
     var description: String { return self.rawValue } 
 }
 
-//MARK: - SegueProtocol
+//MARK: - IdentifiableProtocol
+
 public protocol IdentifiableProtocol: Equatable {
-    var identifier: String? { get }
+    var storyboardIdentifier: String? { get }
 }
 
-public protocol SegueProtocol: IdentifiableProtocol {
+//MARK: - SegueProtocol
+
+public protocol SegueProtocol {
+    var identifier: String? { get }
 }
 
 public func ==<T: SegueProtocol, U: SegueProtocol>(lhs: T, rhs: U) -> Bool {
@@ -416,7 +429,7 @@ public protocol ReusableViewProtocol: IdentifiableProtocol {
 }
 
 public func ==<T: ReusableViewProtocol, U: ReusableViewProtocol>(lhs: T, rhs: U) -> Bool {
-    return lhs.identifier == rhs.identifier
+    return lhs.storyboardIdentifier == rhs.storyboardIdentifier
 }
 
 //MARK: - Protocol Implementation
@@ -425,12 +438,12 @@ extension UIStoryboardSegue: SegueProtocol {
 
 extension UICollectionReusableView: ReusableViewProtocol {
     public var viewType: UIView.Type? { return self.dynamicType }
-    public var identifier: String? { return self.reuseIdentifier }
+    public var storyboardIdentifier: String? { return self.reuseIdentifier }
 }
 
 extension UITableViewCell: ReusableViewProtocol {
     public var viewType: UIView.Type? { return self.dynamicType }
-    public var identifier: String? { return self.reuseIdentifier }
+    public var storyboardIdentifier: String? { return self.reuseIdentifier }
 }
 
 //MARK: - UIViewController extension
@@ -451,27 +464,27 @@ extension UIViewController {
 extension UICollectionView {
 
     func dequeueReusableCell<T: ReusableViewProtocol>(reusable: T, forIndexPath: NSIndexPath!) -> UICollectionViewCell? {
-        if let identifier = reusable.identifier {
+        if let identifier = reusable.storyboardIdentifier {
             return dequeueReusableCellWithReuseIdentifier(identifier, forIndexPath: forIndexPath)
         }
         return nil
     }
 
     func registerReusableCell<T: ReusableViewProtocol>(reusable: T) {
-        if let type = reusable.viewType, identifier = reusable.identifier {
+        if let type = reusable.viewType, identifier = reusable.storyboardIdentifier {
             registerClass(type, forCellWithReuseIdentifier: identifier)
         }
     }
 
     func dequeueReusableSupplementaryViewOfKind<T: ReusableViewProtocol>(elementKind: String, withReusable reusable: T, forIndexPath: NSIndexPath!) -> UICollectionReusableView? {
-        if let identifier = reusable.identifier {
+        if let identifier = reusable.storyboardIdentifier {
             return dequeueReusableSupplementaryViewOfKind(elementKind, withReuseIdentifier: identifier, forIndexPath: forIndexPath)
         }
         return nil
     }
 
     func registerReusable<T: ReusableViewProtocol>(reusable: T, forSupplementaryViewOfKind elementKind: String) {
-        if let type = reusable.viewType, identifier = reusable.identifier {
+        if let type = reusable.viewType, identifier = reusable.storyboardIdentifier {
             registerClass(type, forSupplementaryViewOfKind: elementKind, withReuseIdentifier: identifier)
         }
     }
@@ -481,27 +494,27 @@ extension UICollectionView {
 extension UITableView {
 
     func dequeueReusableCell<T: ReusableViewProtocol>(reusable: T, forIndexPath: NSIndexPath!) -> UITableViewCell? {
-        if let identifier = reusable.identifier {
+        if let identifier = reusable.storyboardIdentifier {
             return dequeueReusableCellWithIdentifier(identifier, forIndexPath: forIndexPath)
         }
         return nil
     }
 
     func registerReusableCell<T: ReusableViewProtocol>(reusable: T) {
-        if let type = reusable.viewType, identifier = reusable.identifier {
+        if let type = reusable.viewType, identifier = reusable.storyboardIdentifier {
             registerClass(type, forCellReuseIdentifier: identifier)
         }
     }
 
     func dequeueReusableHeaderFooter<T: ReusableViewProtocol>(reusable: T) -> UITableViewHeaderFooterView? {
-        if let identifier = reusable.identifier {
+        if let identifier = reusable.storyboardIdentifier {
             return dequeueReusableHeaderFooterViewWithIdentifier(identifier)
         }
         return nil
     }
 
     func registerReusableHeaderFooter<T: ReusableViewProtocol>(reusable: T) {
-        if let type = reusable.viewType, identifier = reusable.identifier {
+        if let type = reusable.viewType, identifier = reusable.storyboardIdentifier {
              registerClass(type, forHeaderFooterViewReuseIdentifier: identifier)
         }
     }
@@ -510,8 +523,8 @@ extension UITableView {
 
 //MARK: - MainMenuViewController
 extension MainMenuViewController: IdentifiableProtocol { 
-    var identifier: String? { return "MainMenuViewController" }
-    static var identifier: String? { return "MainMenuViewController" }
+    var storyboardIdentifier: String? { return "MainMenuViewController" }
+    static var storyboardIdentifier: String? { return "MainMenuViewController" }
 }
 
 
@@ -609,8 +622,8 @@ extension SidebarViewController {
 
 //MARK: - CreateConversationContainerViewController
 extension CreateConversationContainerViewController: IdentifiableProtocol { 
-    var identifier: String? { return "CreateConversationContainerViewController" }
-    static var identifier: String? { return "CreateConversationContainerViewController" }
+    var storyboardIdentifier: String? { return "CreateConversationContainerViewController" }
+    static var storyboardIdentifier: String? { return "CreateConversationContainerViewController" }
 }
 
 
@@ -627,8 +640,8 @@ extension UIStoryboardSegue {
 }
 
 extension BrowseCommunityViewController: IdentifiableProtocol { 
-    var identifier: String? { return "BrowseCommunityViewController" }
-    static var identifier: String? { return "BrowseCommunityViewController" }
+    var storyboardIdentifier: String? { return "BrowseCommunityViewController" }
+    static var storyboardIdentifier: String? { return "BrowseCommunityViewController" }
 }
 
 extension BrowseCommunityViewController { 
@@ -667,8 +680,8 @@ extension BrowseCommunityViewController {
 //}
 //
 //extension BrowseVolunteerViewController: IdentifiableProtocol { 
-//    var identifier: String? { return "BrowseVolunteerViewController" }
-//    static var identifier: String? { return "BrowseVolunteerViewController" }
+//    var storyboardIdentifier: String? { return "BrowseVolunteerViewController" }
+//    static var storyboardIdentifier: String? { return "BrowseVolunteerViewController" }
 //}
 
 extension BrowseVolunteerViewController { 
@@ -698,15 +711,15 @@ extension BrowseVolunteerViewController {
 
 //MARK: - SearchViewController
 extension SearchViewController: IdentifiableProtocol { 
-    var identifier: String? { return "SearchViewController" }
-    static var identifier: String? { return "SearchViewController" }
+    var storyboardIdentifier: String? { return "SearchViewController" }
+    static var storyboardIdentifier: String? { return "SearchViewController" }
 }
 
 
 //MARK: - BrowseMapViewController
 extension BrowseMapViewController: IdentifiableProtocol { 
-    var identifier: String? { return "BrowseMapViewController" }
-    static var identifier: String? { return "BrowseMapViewController" }
+    var storyboardIdentifier: String? { return "BrowseMapViewController" }
+    static var storyboardIdentifier: String? { return "BrowseMapViewController" }
 }
 
 
@@ -721,8 +734,8 @@ extension UIStoryboardSegue {
 }
 
 extension TrainingDetailsViewController: IdentifiableProtocol { 
-    var identifier: String? { return "TrainingDetailsViewControllerId" }
-    static var identifier: String? { return "TrainingDetailsViewControllerId" }
+    var storyboardIdentifier: String? { return "TrainingDetailsViewControllerId" }
+    static var storyboardIdentifier: String? { return "TrainingDetailsViewControllerId" }
 }
 
 extension TrainingDetailsViewController { 
@@ -752,22 +765,22 @@ extension TrainingDetailsViewController {
 
 //MARK: - BrowseGridViewController
 extension BrowseGridViewController: IdentifiableProtocol { 
-    var identifier: String? { return "BrowseGridViewController" }
-    static var identifier: String? { return "BrowseGridViewController" }
+    var storyboardIdentifier: String? { return "BrowseGridViewController" }
+    static var storyboardIdentifier: String? { return "BrowseGridViewController" }
 }
 
 
 //MARK: - ExploreViewController
 extension ExploreViewController: IdentifiableProtocol { 
-    var identifier: String? { return "ExploreViewControllerId" }
-    static var identifier: String? { return "ExploreViewControllerId" }
+    var storyboardIdentifier: String? { return "ExploreViewControllerId" }
+    static var storyboardIdentifier: String? { return "ExploreViewControllerId" }
 }
 
 
 //MARK: - BrowseListViewController
 extension BrowseListViewController: IdentifiableProtocol { 
-    var identifier: String? { return "BrowseListViewController" }
-    static var identifier: String? { return "BrowseListViewController" }
+    var storyboardIdentifier: String? { return "BrowseListViewController" }
+    static var storyboardIdentifier: String? { return "BrowseListViewController" }
 }
 
 
@@ -784,8 +797,8 @@ extension UIStoryboardSegue {
 }
 
 extension ProductDetailsViewController: IdentifiableProtocol { 
-    var identifier: String? { return "ProductDetailsViewControllerId" }
-    static var identifier: String? { return "ProductDetailsViewControllerId" }
+    var storyboardIdentifier: String? { return "ProductDetailsViewControllerId" }
+    static var storyboardIdentifier: String? { return "ProductDetailsViewControllerId" }
 }
 
 extension ProductDetailsViewController { 
@@ -834,8 +847,8 @@ extension UIStoryboardSegue {
 }
 
 extension EmergencyDetailsController: IdentifiableProtocol { 
-    var identifier: String? { return "EmergencyDetailsControllerId" }
-    static var identifier: String? { return "EmergencyDetailsControllerId" }
+    var storyboardIdentifier: String? { return "EmergencyDetailsControllerId" }
+    static var storyboardIdentifier: String? { return "EmergencyDetailsControllerId" }
 }
 
 extension EmergencyDetailsController { 
@@ -874,8 +887,8 @@ extension UIStoryboardSegue {
 }
 
 extension VolunteerDetailsViewController: IdentifiableProtocol { 
-    var identifier: String? { return "VolunteerDetailsViewControllerId" }
-    static var identifier: String? { return "VolunteerDetailsViewControllerId" }
+    var storyboardIdentifier: String? { return "VolunteerDetailsViewControllerId" }
+    static var storyboardIdentifier: String? { return "VolunteerDetailsViewControllerId" }
 }
 
 extension VolunteerDetailsViewController { 
@@ -914,8 +927,8 @@ extension UIStoryboardSegue {
 }
 
 extension GiveBloodDetailsViewController: IdentifiableProtocol { 
-    var identifier: String? { return "GiveBloodDetailsViewControllerId" }
-    static var identifier: String? { return "GiveBloodDetailsViewControllerId" }
+    var storyboardIdentifier: String? { return "GiveBloodDetailsViewControllerId" }
+    static var storyboardIdentifier: String? { return "GiveBloodDetailsViewControllerId" }
 }
 
 extension GiveBloodDetailsViewController { 
@@ -954,8 +967,8 @@ extension UIStoryboardSegue {
 }
 
 extension MarketDetailsViewController: IdentifiableProtocol { 
-    var identifier: String? { return "MarketDetailsViewControllerId" }
-    static var identifier: String? { return "MarketDetailsViewControllerId" }
+    var storyboardIdentifier: String? { return "MarketDetailsViewControllerId" }
+    static var storyboardIdentifier: String? { return "MarketDetailsViewControllerId" }
 }
 
 extension MarketDetailsViewController { 
@@ -999,8 +1012,8 @@ extension UIStoryboardSegue {
 }
 
 extension BomaHotelsDetailsViewController: IdentifiableProtocol { 
-    var identifier: String? { return "BomaHotelsDetailsViewControllerId" }
-    static var identifier: String? { return "BomaHotelsDetailsViewControllerId" }
+    var storyboardIdentifier: String? { return "BomaHotelsDetailsViewControllerId" }
+    static var storyboardIdentifier: String? { return "BomaHotelsDetailsViewControllerId" }
 }
 
 extension BomaHotelsDetailsViewController { 
@@ -1039,8 +1052,8 @@ extension UIStoryboardSegue {
 }
 
 extension EventDetailsViewController: IdentifiableProtocol { 
-    var identifier: String? { return "EventDetailsViewControllerId" }
-    static var identifier: String? { return "EventDetailsViewControllerId" }
+    var storyboardIdentifier: String? { return "EventDetailsViewControllerId" }
+    static var storyboardIdentifier: String? { return "EventDetailsViewControllerId" }
 }
 
 extension EventDetailsViewController { 
@@ -1079,8 +1092,8 @@ extension UIStoryboardSegue {
 }
 
 extension PromotionDetailsViewController: IdentifiableProtocol { 
-    var identifier: String? { return "PromotionDetailsViewControllerId" }
-    static var identifier: String? { return "PromotionDetailsViewControllerId" }
+    var storyboardIdentifier: String? { return "PromotionDetailsViewControllerId" }
+    static var storyboardIdentifier: String? { return "PromotionDetailsViewControllerId" }
 }
 
 extension PromotionDetailsViewController { 
@@ -1154,8 +1167,8 @@ extension UIStoryboardSegue {
 }
 
 extension PostViewController: IdentifiableProtocol { 
-    var identifier: String? { return "PostViewController" }
-    static var identifier: String? { return "PostViewController" }
+    var storyboardIdentifier: String? { return "PostViewController" }
+    static var storyboardIdentifier: String? { return "PostViewController" }
 }
 
 extension PostViewController { 
@@ -1196,8 +1209,8 @@ extension UIStoryboardSegue {
 }
 
 extension BrowseViewController: IdentifiableProtocol { 
-    var identifier: String? { return "MapViewController" }
-    static var identifier: String? { return "MapViewController" }
+    var storyboardIdentifier: String? { return "MapViewController" }
+    static var storyboardIdentifier: String? { return "MapViewController" }
 }
 
 extension BrowseViewController { 
@@ -1251,8 +1264,8 @@ extension UIStoryboardSegue {
 }
 
 extension PeopleViewController: IdentifiableProtocol { 
-    var identifier: String? { return "PeopleViewController" }
-    static var identifier: String? { return "PeopleViewController" }
+    var storyboardIdentifier: String? { return "PeopleViewController" }
+    static var storyboardIdentifier: String? { return "PeopleViewController" }
 }
 
 extension PeopleViewController { 
@@ -1282,8 +1295,8 @@ extension PeopleViewController {
 
 //MARK: - UserProfileViewController
 extension UserProfileViewController: IdentifiableProtocol { 
-    var identifier: String? { return "UserProfileViewController" }
-    static var identifier: String? { return "UserProfileViewController" }
+    var storyboardIdentifier: String? { return "UserProfileViewController" }
+    static var storyboardIdentifier: String? { return "UserProfileViewController" }
 }
 
 
@@ -1298,8 +1311,8 @@ extension UIStoryboardSegue {
 }
 
 extension CommunityFeedViewController: IdentifiableProtocol { 
-    var identifier: String? { return "CommunityFeedViewController" }
-    static var identifier: String? { return "CommunityFeedViewController" }
+    var storyboardIdentifier: String? { return "CommunityFeedViewController" }
+    static var storyboardIdentifier: String? { return "CommunityFeedViewController" }
 }
 
 extension CommunityFeedViewController { 
@@ -1329,8 +1342,8 @@ extension CommunityFeedViewController {
 
 //MARK: - ChangePasswordViewController
 extension ChangePasswordViewController: IdentifiableProtocol { 
-    var identifier: String? { return "ChangePasswordController" }
-    static var identifier: String? { return "ChangePasswordController" }
+    var storyboardIdentifier: String? { return "ChangePasswordController" }
+    static var storyboardIdentifier: String? { return "ChangePasswordController" }
 }
 
 
@@ -1345,8 +1358,8 @@ extension UIStoryboardSegue {
 }
 
 extension SettingsViewController: IdentifiableProtocol { 
-    var identifier: String? { return "SettingsViewController" }
-    static var identifier: String? { return "SettingsViewController" }
+    var storyboardIdentifier: String? { return "SettingsViewController" }
+    static var storyboardIdentifier: String? { return "SettingsViewController" }
 }
 
 extension SettingsViewController { 
@@ -1376,33 +1389,47 @@ extension SettingsViewController {
 
 //MARK: - CommunityViewController
 extension CommunityViewController: IdentifiableProtocol { 
-    var identifier: String? { return "CommunityViewController" }
-    static var identifier: String? { return "CommunityViewController" }
+    var storyboardIdentifier: String? { return "CommunityViewController" }
+    static var storyboardIdentifier: String? { return "CommunityViewController" }
 }
 
 
 //MARK: - WalletViewController
 extension WalletViewController: IdentifiableProtocol { 
-    var identifier: String? { return "WalletViewController" }
-    static var identifier: String? { return "WalletViewController" }
+    var storyboardIdentifier: String? { return "WalletViewController" }
+    static var storyboardIdentifier: String? { return "WalletViewController" }
+}
+
+
+//MARK: - DonationDetailsViewController
+extension DonationDetailsViewController: IdentifiableProtocol { 
+    var storyboardIdentifier: String? { return "DonationDetailsViewControllerId" }
+    static var storyboardIdentifier: String? { return "DonationDetailsViewControllerId" }
 }
 
 
 //MARK: - CreateCommunityConversationViewController
 extension CreateCommunityConversationViewController: IdentifiableProtocol { 
-    var identifier: String? { return "CreateCommunityConversationViewController" }
-    static var identifier: String? { return "CreateCommunityConversationViewController" }
+    var storyboardIdentifier: String? { return "CreateCommunityConversationViewController" }
+    static var storyboardIdentifier: String? { return "CreateCommunityConversationViewController" }
 }
 
 
 //MARK: - CreateUserConversationViewController
 extension CreateUserConversationViewController: IdentifiableProtocol { 
-    var identifier: String? { return "CreateUserConversationViewController" }
-    static var identifier: String? { return "CreateUserConversationViewController" }
+    var storyboardIdentifier: String? { return "CreateUserConversationViewController" }
+    static var storyboardIdentifier: String? { return "CreateUserConversationViewController" }
 }
 
 
 //MARK: - CreateConversationViewController
+
+//MARK: - OrderDetailsViewController
+extension OrderDetailsViewController: IdentifiableProtocol { 
+    var storyboardIdentifier: String? { return "OrderDetailsViewControllerId" }
+    static var storyboardIdentifier: String? { return "OrderDetailsViewControllerId" }
+}
+
 
 //MARK: - LoginSignupViewController
 extension UIStoryboardSegue {
@@ -1415,8 +1442,8 @@ extension UIStoryboardSegue {
 }
 
 extension LoginSignupViewController: IdentifiableProtocol { 
-    var identifier: String? { return "LoginSignUpViewController" }
-    static var identifier: String? { return "LoginSignUpViewController" }
+    var storyboardIdentifier: String? { return "LoginSignUpViewController" }
+    static var storyboardIdentifier: String? { return "LoginSignUpViewController" }
 }
 
 extension LoginSignupViewController { 
@@ -1460,8 +1487,8 @@ extension UIStoryboardSegue {
 }
 
 extension RegisterViewController: IdentifiableProtocol { 
-    var identifier: String? { return "RegisterViewController" }
-    static var identifier: String? { return "RegisterViewController" }
+    var storyboardIdentifier: String? { return "RegisterViewController" }
+    static var storyboardIdentifier: String? { return "RegisterViewController" }
 }
 
 extension RegisterViewController { 
@@ -1491,8 +1518,8 @@ extension RegisterViewController {
 
 //MARK: - RecoverPasswordViewController
 extension RecoverPasswordViewController: IdentifiableProtocol { 
-    var identifier: String? { return "RecoverPasswordViewController" }
-    static var identifier: String? { return "RecoverPasswordViewController" }
+    var storyboardIdentifier: String? { return "RecoverPasswordViewController" }
+    static var storyboardIdentifier: String? { return "RecoverPasswordViewController" }
 }
 
 
@@ -1507,8 +1534,8 @@ extension UIStoryboardSegue {
 }
 
 extension LoginViewController: IdentifiableProtocol { 
-    var identifier: String? { return "LoginViewController" }
-    static var identifier: String? { return "LoginViewController" }
+    var storyboardIdentifier: String? { return "LoginViewController" }
+    static var storyboardIdentifier: String? { return "LoginViewController" }
 }
 
 extension LoginViewController { 
@@ -1538,8 +1565,8 @@ extension LoginViewController {
 
 //MARK: - RegisterInfoViewController
 extension RegisterInfoViewController: IdentifiableProtocol { 
-    var identifier: String? { return "RegisterInfoViewController" }
-    static var identifier: String? { return "RegisterInfoViewController" }
+    var storyboardIdentifier: String? { return "RegisterInfoViewController" }
+    static var storyboardIdentifier: String? { return "RegisterInfoViewController" }
 }
 
 
@@ -1554,8 +1581,8 @@ extension UIStoryboardSegue {
 }
 
 extension AddProductViewController: IdentifiableProtocol { 
-    var identifier: String? { return "AddProductViewController" }
-    static var identifier: String? { return "AddProductViewController" }
+    var storyboardIdentifier: String? { return "AddProductViewController" }
+    static var storyboardIdentifier: String? { return "AddProductViewController" }
 }
 
 extension AddProductViewController { 
@@ -1586,8 +1613,8 @@ extension AddProductViewController {
 
 //MARK: - AddPostViewController
 extension AddPostViewController: IdentifiableProtocol { 
-    var identifier: String? { return "AddPostViewController" }
-    static var identifier: String? { return "AddPostViewController" }
+    var storyboardIdentifier: String? { return "AddPostViewController" }
+    static var storyboardIdentifier: String? { return "AddPostViewController" }
 }
 
 
@@ -1602,8 +1629,8 @@ extension UIStoryboardSegue {
 }
 
 extension AddCommunityViewController: IdentifiableProtocol { 
-    var identifier: String? { return "AddCommunityViewController" }
-    static var identifier: String? { return "AddCommunityViewController" }
+    var storyboardIdentifier: String? { return "AddCommunityViewController" }
+    static var storyboardIdentifier: String? { return "AddCommunityViewController" }
 }
 
 extension AddCommunityViewController { 
@@ -1643,8 +1670,8 @@ extension UIStoryboardSegue {
 }
 
 extension EditCommunityViewController: IdentifiableProtocol { 
-    var identifier: String? { return "EditCommunityViewController" }
-    static var identifier: String? { return "EditCommunityViewController" }
+    var storyboardIdentifier: String? { return "EditCommunityViewController" }
+    static var storyboardIdentifier: String? { return "EditCommunityViewController" }
 }
 
 extension EditCommunityViewController { 
@@ -1684,8 +1711,8 @@ extension UIStoryboardSegue {
 }
 
 extension EditProfileViewController: IdentifiableProtocol { 
-    var identifier: String? { return "EditProfileViewController" }
-    static var identifier: String? { return "EditProfileViewController" }
+    var storyboardIdentifier: String? { return "EditProfileViewController" }
+    static var storyboardIdentifier: String? { return "EditProfileViewController" }
 }
 
 extension EditProfileViewController { 
@@ -1716,8 +1743,8 @@ extension EditProfileViewController {
 
 //MARK: - PostToContainerViewController
 extension PostToContainerViewController: IdentifiableProtocol { 
-    var identifier: String? { return "PostToContainerViewControllerId" }
-    static var identifier: String? { return "PostToContainerViewControllerId" }
+    var storyboardIdentifier: String? { return "PostToContainerViewControllerId" }
+    static var storyboardIdentifier: String? { return "PostToContainerViewControllerId" }
 }
 
 
@@ -1732,8 +1759,8 @@ extension UIStoryboardSegue {
 }
 
 extension AddPromotionViewController: IdentifiableProtocol { 
-    var identifier: String? { return "AddPromotionViewController" }
-    static var identifier: String? { return "AddPromotionViewController" }
+    var storyboardIdentifier: String? { return "AddPromotionViewController" }
+    static var storyboardIdentifier: String? { return "AddPromotionViewController" }
 }
 
 extension AddPromotionViewController { 
@@ -1773,8 +1800,8 @@ extension UIStoryboardSegue {
 }
 
 extension AddEventViewController: IdentifiableProtocol { 
-    var identifier: String? { return "AddEventViewController" }
-    static var identifier: String? { return "AddEventViewController" }
+    var storyboardIdentifier: String? { return "AddEventViewController" }
+    static var storyboardIdentifier: String? { return "AddEventViewController" }
 }
 
 extension AddEventViewController { 
@@ -1851,8 +1878,8 @@ extension UIStoryboardSegue {
 }
 
 extension PhoneVerificationViewController: IdentifiableProtocol { 
-    var identifier: String? { return "PhoneVerificationController" }
-    static var identifier: String? { return "PhoneVerificationController" }
+    var storyboardIdentifier: String? { return "PhoneVerificationController" }
+    static var storyboardIdentifier: String? { return "PhoneVerificationController" }
 }
 
 extension PhoneVerificationViewController { 
@@ -1884,8 +1911,8 @@ extension PhoneVerificationViewController {
 
 //MARK: - OnboardingNavigationController
 extension OnboardingNavigationController: IdentifiableProtocol { 
-    var identifier: String? { return "PhoneNumberNavigationController" }
-    static var identifier: String? { return "PhoneNumberNavigationController" }
+    var storyboardIdentifier: String? { return "PhoneNumberNavigationController" }
+    static var storyboardIdentifier: String? { return "PhoneNumberNavigationController" }
 }
 
 
@@ -1900,8 +1927,8 @@ extension UIStoryboardSegue {
 }
 
 extension CallAmbulanceViewController: IdentifiableProtocol { 
-    var identifier: String? { return "CallAmbulanceViewController" }
-    static var identifier: String? { return "CallAmbulanceViewController" }
+    var storyboardIdentifier: String? { return "CallAmbulanceViewController" }
+    static var storyboardIdentifier: String? { return "CallAmbulanceViewController" }
 }
 
 extension CallAmbulanceViewController { 
@@ -1931,8 +1958,8 @@ extension CallAmbulanceViewController {
 
 //MARK: - AmbulanceSentViewController
 extension AmbulanceSentViewController: IdentifiableProtocol { 
-    var identifier: String? { return "AmbulanceSentViewControllerId" }
-    static var identifier: String? { return "AmbulanceSentViewControllerId" }
+    var storyboardIdentifier: String? { return "AmbulanceSentViewControllerId" }
+    static var storyboardIdentifier: String? { return "AmbulanceSentViewControllerId" }
 }
 
 
@@ -1947,8 +1974,8 @@ extension UIStoryboardSegue {
 }
 
 extension DonateViewController: IdentifiableProtocol { 
-    var identifier: String? { return "DonateViewController" }
-    static var identifier: String? { return "DonateViewController" }
+    var storyboardIdentifier: String? { return "DonateViewController" }
+    static var storyboardIdentifier: String? { return "DonateViewController" }
 }
 
 extension DonateViewController { 
@@ -1988,8 +2015,8 @@ extension DonateViewController {
 
 //MARK: - SelectPaymentMethodController
 extension SelectPaymentMethodController: IdentifiableProtocol { 
-    var identifier: String? { return "SelectPaymentMethodController" }
-    static var identifier: String? { return "SelectPaymentMethodController" }
+    var storyboardIdentifier: String? { return "SelectPaymentMethodController" }
+    static var storyboardIdentifier: String? { return "SelectPaymentMethodController" }
 }
 
 
@@ -1997,15 +2024,15 @@ extension SelectPaymentMethodController: IdentifiableProtocol {
 
 //MARK: - BraintreePaymentViewController
 extension BraintreePaymentViewController: IdentifiableProtocol { 
-    var identifier: String? { return "BraintreePaymentViewController" }
-    static var identifier: String? { return "BraintreePaymentViewController" }
+    var storyboardIdentifier: String? { return "BraintreePaymentViewController" }
+    static var storyboardIdentifier: String? { return "BraintreePaymentViewController" }
 }
 
 
 //MARK: - DonateNotificationViewController
 extension DonateNotificationViewController: IdentifiableProtocol { 
-    var identifier: String? { return "DonateNotificationViewController" }
-    static var identifier: String? { return "DonateNotificationViewController" }
+    var storyboardIdentifier: String? { return "DonateNotificationViewController" }
+    static var storyboardIdentifier: String? { return "DonateNotificationViewController" }
 }
 
 
@@ -2020,8 +2047,8 @@ extension UIStoryboardSegue {
 }
 
 extension AmbulanceRequestedViewController: IdentifiableProtocol { 
-    var identifier: String? { return "AmbulanceRequestedViewControllerId" }
-    static var identifier: String? { return "AmbulanceRequestedViewControllerId" }
+    var storyboardIdentifier: String? { return "AmbulanceRequestedViewControllerId" }
+    static var storyboardIdentifier: String? { return "AmbulanceRequestedViewControllerId" }
 }
 
 extension AmbulanceRequestedViewController { 
@@ -2051,7 +2078,7 @@ extension AmbulanceRequestedViewController {
 
 //MARK: - PaymentCompletedViewController
 extension PaymentCompletedViewController: IdentifiableProtocol { 
-    var identifier: String? { return "PaymentCompletedViewController" }
-    static var identifier: String? { return "PaymentCompletedViewController" }
+    var storyboardIdentifier: String? { return "PaymentCompletedViewController" }
+    static var storyboardIdentifier: String? { return "PaymentCompletedViewController" }
 }
 

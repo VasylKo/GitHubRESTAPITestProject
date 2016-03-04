@@ -43,6 +43,12 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		18817F1E1C897CFB00FBA6B1 /* WalletsCellFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18817F1D1C897CFB00FBA6B1 /* WalletsCellFactory.swift */; };
+		18817F221C89B28B00FBA6B1 /* DonationDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18817F201C89B28B00FBA6B1 /* DonationDetailsViewController.swift */; };
+		18817F231C89B28B00FBA6B1 /* PositionIn.DonationDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18817F211C89B28B00FBA6B1 /* PositionIn.DonationDetailsViewController.xib */; };
+		18F3313F1C8871870010321B /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F3313D1C8871870010321B /* Order.swift */; };
+		18F3314A1C8899A40010321B /* OrderDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F331461C8899A40010321B /* OrderDetailsViewController.swift */; };
+		18F3314B1C8899A40010321B /* PositionIn.OrderDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18F331471C8899A40010321B /* PositionIn.OrderDetailsViewController.xib */; };
 		1A56454F1ADF6D1BF3022FB3 /* BraintreePaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A564EEB40AD56FD2C113F2A /* BraintreePaymentViewController.swift */; };
 		1A5647F5D0FCC84FA5BF21FF /* MpesaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A56419027EC5956741AF471 /* MpesaViewController.swift */; };
 		1A564902D955532DE5B29A65 /* ErrorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A56438E04F9AD6CBDA75AC9 /* ErrorCell.swift */; };
@@ -556,6 +562,12 @@
 
 /* Begin PBXFileReference section */
 		040F01865A9A2BB68F3FDBFF /* Pods-PositionIn.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PositionIn.release.xcconfig"; path = "Pods/Target Support Files/Pods-PositionIn/Pods-PositionIn.release.xcconfig"; sourceTree = "<group>"; };
+		18817F1D1C897CFB00FBA6B1 /* WalletsCellFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletsCellFactory.swift; sourceTree = "<group>"; };
+		18817F201C89B28B00FBA6B1 /* DonationDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DonationDetailsViewController.swift; sourceTree = "<group>"; };
+		18817F211C89B28B00FBA6B1 /* PositionIn.DonationDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.DonationDetailsViewController.xib; sourceTree = "<group>"; };
+		18F3313D1C8871870010321B /* Order.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
+		18F331461C8899A40010321B /* OrderDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderDetailsViewController.swift; sourceTree = "<group>"; };
+		18F331471C8899A40010321B /* PositionIn.OrderDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.OrderDetailsViewController.xib; sourceTree = "<group>"; };
 		1A5640E770D4CB872B2E4605 /* PaymentReponseDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentReponseDelegate.swift; sourceTree = "<group>"; };
 		1A56419027EC5956741AF471 /* MpesaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MpesaViewController.swift; sourceTree = "<group>"; };
 		1A56438E04F9AD6CBDA75AC9 /* ErrorCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorCell.swift; sourceTree = "<group>"; };
@@ -1261,6 +1273,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		18817F1F1C89B28B00FBA6B1 /* DonationDetails */ = {
+			isa = PBXGroup;
+			children = (
+				18817F201C89B28B00FBA6B1 /* DonationDetailsViewController.swift */,
+				18817F211C89B28B00FBA6B1 /* PositionIn.DonationDetailsViewController.xib */,
+			);
+			path = DonationDetails;
+			sourceTree = "<group>";
+		};
+		18F331451C8899A40010321B /* OrderDetails */ = {
+			isa = PBXGroup;
+			children = (
+				18F331461C8899A40010321B /* OrderDetailsViewController.swift */,
+				18F331471C8899A40010321B /* PositionIn.OrderDetailsViewController.xib */,
+			);
+			path = OrderDetails;
+			sourceTree = "<group>";
+		};
 		1A564C3EC8DDC78E3A580F36 /* Mpesa */ = {
 			isa = PBXGroup;
 			children = (
@@ -2170,6 +2200,8 @@
 				E61B20D61B7E0806005EAB2C /* Settings */,
 				D18A1FD91BEB95AF003F158D /* ChangePassword */,
 				E6F7A46E1BA333B30069152A /* Wallet */,
+				18F331451C8899A40010321B /* OrderDetails */,
+				18817F1F1C89B28B00FBA6B1 /* DonationDetails */,
 				E62B16F91B5CDED600D446BC /* Messaging */,
 				E6325F5F1B57D89A00996480 /* ViewControllers */,
 				E68B51FF1B87351E006B980C /* CellModels */,
@@ -2202,6 +2234,7 @@
 		E660E5251B5AB82000F52050 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				18F3313D1C8871870010321B /* Order.swift */,
 				D1F3E80B1C75D2B300EFC8ED /* Notification.swift */,
 				CDC102481C6CC091009FF6D9 /* Attachment.swift */,
 				D1B1F1E11C6B194E00D43A3B /* MPesaPayment.swift */,
@@ -3247,6 +3280,7 @@
 		E68B51FF1B87351E006B980C /* CellModels */ = {
 			isa = PBXGroup;
 			children = (
+				18817F1D1C897CFB00FBA6B1 /* WalletsCellFactory.swift */,
 				500D7FA41BC2ADFE008C8C82 /* SearchItemCellModel.swift */,
 				E68B52001B873545006B980C /* FeedTableViewCellModel.swift */,
 				E68B52021B873687006B980C /* FeedItemCellModelFactory.swift */,
@@ -3695,12 +3729,14 @@
 				500D7FA91BC2CD39008C8C82 /* PositionIn.SearchEntityCell.xib in Resources */,
 				E6C952341BA1D9960032254F /* PositionIn.ProfileInfoCell.xib in Resources */,
 				E6D4D5B51B6F8B9F003134CB /* PositionIn.SearchBar.xib in Resources */,
+				18F3314B1C8899A40010321B /* PositionIn.OrderDetailsViewController.xib in Resources */,
 				E66115A31B73A18C003DB5B3 /* NewItems.storyboard in Resources */,
 				24EF62161BA81DCB00472531 /* PositionIn.ChatHistoryCell.xib in Resources */,
 				D1DA176D1C05B7BE0091A8CE /* PositionIn.BrowseGridCollectionViewCell.xib in Resources */,
 				E660E52E1B5AC23B00F52050 /* PositionIn.MainMenuViewController.xib in Resources */,
 				CDB5B5CA1C5B9C2400413715 /* MembershipPlanDetailsViewController.xib in Resources */,
 				D161F7741C68E4F300EBDB94 /* MarketPaymentView.xib in Resources */,
+				18817F231C89B28B00FBA6B1 /* PositionIn.DonationDetailsViewController.xib in Resources */,
 				E6C952351BA1D9960032254F /* PositionIn.ProfileStatsCell.xib in Resources */,
 				50FA43301C44F0B50050B00E /* ErrorCell.xib in Resources */,
 				E62B16F51B5C1AA700D446BC /* PositionIn.MainMenuUserCell.xib in Resources */,
@@ -3952,6 +3988,7 @@
 				D1DA1EBF1C5909D7009F5AFA /* MembershipPlanDetailsViewController.swift in Sources */,
 				CD21EA381C63A78800E50909 /* MembershipMemberProfileViewController.swift in Sources */,
 				500D7FA31BC2AACF008C8C82 /* SearchItem.swift in Sources */,
+				18817F221C89B28B00FBA6B1 /* DonationDetailsViewController.swift in Sources */,
 				E661158D1B73778B003DB5B3 /* RecoverPasswordViewController.swift in Sources */,
 				50D1AFA61BBAD21400957882 /* PostLikeCommentCell.swift in Sources */,
 				CD795BE71C57B9AA00C1C298 /* BaseRouter.swift in Sources */,
@@ -3999,6 +4036,7 @@
 				E6BEF1E41B9C83F200511B46 /* CommunityHeaderCell.swift in Sources */,
 				243D0AA81B8AF90800B0E220 /* RegisterInfoViewController.swift in Sources */,
 				E6D4D5B21B6F81A7003134CB /* SearchViewController.swift in Sources */,
+				18817F1E1C897CFB00FBA6B1 /* WalletsCellFactory.swift in Sources */,
 				D1B780CA1C0F4E9E00EF5825 /* SelectPaymentMethodController.swift in Sources */,
 				E66115991B73A0CB003DB5B3 /* BrowseListViewController.swift in Sources */,
 				D1FD853E1C1EE8D800C2E87B /* PromotionDetailsViewController.swift in Sources */,
@@ -4131,8 +4169,10 @@
 				E6F243781B8B3CDE0033B13C /* BrowseListTableViewCell.swift in Sources */,
 				D1FD85411C1EE8EA00C2E87B /* EventDetailsViewController.swift in Sources */,
 				E61B20D81B7E0838005EAB2C /* SettingsViewController.swift in Sources */,
+				18F3314A1C8899A40010321B /* OrderDetailsViewController.swift in Sources */,
 				CD795C4C1C590BEE00C1C298 /* SegmentedControlContainerViewController.swift in Sources */,
 				1A56454F1ADF6D1BF3022FB3 /* BraintreePaymentViewController.swift in Sources */,
+				18F3313F1C8871870010321B /* Order.swift in Sources */,
 				1A56491DAEFA315F9DB47400 /* PaymentReponseDelegate.swift in Sources */,
 				1A564902D955532DE5B29A65 /* ErrorCell.swift in Sources */,
 				1A5647F5D0FCC84FA5BF21FF /* MpesaViewController.swift in Sources */,
