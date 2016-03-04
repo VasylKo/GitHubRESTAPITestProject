@@ -12,7 +12,7 @@ import CleanroomLogger
 
 final class DonationDetailsViewController: UIViewController {
     // MARK: - Private properties
-    private var donation: Dotation?
+    private var donation: Order?
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
