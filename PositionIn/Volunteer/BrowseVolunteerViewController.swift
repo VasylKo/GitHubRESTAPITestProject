@@ -13,6 +13,8 @@ import CleanroomLogger
 
 class BrowseVolunteerViewController: BrowseCommunityViewController {
     
+    //override var mapViewController = VolunteerMapViewController() as UIViewCo
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Volunteering"

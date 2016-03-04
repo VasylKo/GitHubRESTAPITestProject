@@ -1,8 +1,8 @@
 //
-//  CommunityMapViewController.swift
+//  VolunteerMapViewController.swift
 //  PositionIn
 //
-//  Created by ng on 2/24/16.
+//  Created by ng on 3/4/16.
 //  Copyright © 2016 Soluna Labs. All rights reserved.
 //
 
@@ -12,9 +12,7 @@ import CleanroomLogger
 import BrightFutures
 import Box
 
-class CommunityMapViewController : UIViewController, GMSMapViewDelegate {
-    
-    lazy var items : [Community] = []
+class VolunteerMapViewController : UIViewController, GMSMapViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,18 +21,11 @@ class CommunityMapViewController : UIViewController, GMSMapViewDelegate {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        
-//        api().currentUserId().flatMap { userId in
-//            return api().getUserCommunities(userId)
-//            }.flatMap { response in
-//                //strongSelf
-//                self.items.append(response.items)
-//                return api().getCommunities(APIService.Page())
-//            }.onSuccess { [weak self] response in
-//                if let strongSelf = self {
-//                    //strongSelf.items.append(response.items)
-//                    strongSelf.displayCommunities(strongSelf.items)
-//                }
+        Log.error?.value(self.mapView)
+//        api().getCommunities(APIService.Page()).onSuccess { [weak self] response in
+//            if let strongSelf = self {
+//                strongSelf.displayCommunities(response.items)
+//            }
 //        }
     }
     
@@ -69,7 +60,11 @@ class CommunityMapViewController : UIViewController, GMSMapViewDelegate {
             return false
         }
         let community = box.value
-
+        
         return true
+    }
+    
+    func initializeMapViewController () -> UIViewController {
+        return VolunteerMapViewController()
     }
 }

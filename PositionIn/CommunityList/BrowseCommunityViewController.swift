@@ -227,7 +227,7 @@ class BrowseCommunityViewController: BesideMenuViewController, BrowseCommunityAc
     // MAP:
     
     func setRightBarItems() {
-        for imageName in ["list_view_icon", "map_view_icon"] {
+        for imageName in ["map_view_icon", "list_view_icon"] {
             let barButtonItem : UIBarButtonItem  = UIBarButtonItem(image: UIImage(named: imageName),
                 style: .Plain,
                 target: self,
@@ -239,7 +239,11 @@ class BrowseCommunityViewController: BesideMenuViewController, BrowseCommunityAc
     }
     
     private var barButtonItems : [UIBarButtonItem] = []
-    private var communityMapViewController = CommunityMapViewController()
+    lazy var mapViewController : UIViewController = self.initializeMapViewController()
+    
+    func initializeMapViewController () -> UIViewController {
+        return CommunityMapViewController()
+    }
     
     @IBAction private func barButtonPressed(barButtonItem : UIBarButtonItem) {
         let index = self.barButtonItems.indexOf(barButtonItem)!
@@ -248,12 +252,12 @@ class BrowseCommunityViewController: BesideMenuViewController, BrowseCommunityAc
         self.navigationItem.setRightBarButtonItem(self.barButtonItems[next], animated: true)
         
         if (next == 0) {
-            self.communityMapViewController.view.removeFromSuperview()
-            self.communityMapViewController.removeFromParentViewController()
+            self.mapViewController.view.removeFromSuperview()
+            self.mapViewController.removeFromParentViewController()
         } else {
-            self.addChildViewController(communityMapViewController)
-            self.view.addSubview(communityMapViewController.view)
-            communityMapViewController.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
+            self.addChildViewController(mapViewController)
+            self.view.addSubview(mapViewController.view)
+            mapViewController.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
         }
     }
 }

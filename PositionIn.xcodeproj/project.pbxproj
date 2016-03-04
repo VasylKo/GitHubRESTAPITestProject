@@ -112,6 +112,7 @@
 		CD87FDEE1C7611AA00E610AE /* NewsMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD87FDED1C7611AA00E610AE /* NewsMapViewController.swift */; };
 		CD87FDF01C76133100E610AE /* NewsMapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD87FDEF1C76133100E610AE /* NewsMapViewController.xib */; };
 		CD87FDF41C7DB94D00E610AE /* CommunityMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD87FDF31C7DB94D00E610AE /* CommunityMapViewController.swift */; };
+		CD8DB9AA1C89BB4100488EBB /* VolunteerMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8DB9A91C89BB4100488EBB /* VolunteerMapViewController.swift */; };
 		CD8ED0D61C60AD1A00576DBF /* MembershipMemberCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8ED0D51C60AD1A00576DBF /* MembershipMemberCardViewController.swift */; };
 		CD8ED0D91C60AE1400576DBF /* MembershipMemberCardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD8ED0D81C60AE1400576DBF /* MembershipMemberCardViewController.xib */; };
 		CD8ED0DE1C60BE7000576DBF /* MembershipCardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD8ED0DD1C60BE7000576DBF /* MembershipCardView.xib */; };
@@ -640,6 +641,7 @@
 		CD87FDED1C7611AA00E610AE /* NewsMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsMapViewController.swift; sourceTree = "<group>"; };
 		CD87FDEF1C76133100E610AE /* NewsMapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewsMapViewController.xib; sourceTree = "<group>"; };
 		CD87FDF31C7DB94D00E610AE /* CommunityMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommunityMapViewController.swift; sourceTree = "<group>"; };
+		CD8DB9A91C89BB4100488EBB /* VolunteerMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VolunteerMapViewController.swift; sourceTree = "<group>"; };
 		CD8ED0D51C60AD1A00576DBF /* MembershipMemberCardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MembershipMemberCardViewController.swift; sourceTree = "<group>"; };
 		CD8ED0D81C60AE1400576DBF /* MembershipMemberCardViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MembershipMemberCardViewController.xib; sourceTree = "<group>"; };
 		CD8ED0DD1C60BE7000576DBF /* MembershipCardView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MembershipCardView.xib; sourceTree = "<group>"; };
@@ -1667,6 +1669,7 @@
 			children = (
 				CDBDD9A81C47AFDD007578BC /* BrowseVolunteerViewController.swift */,
 				CDBDD9B01C47CAAB007578BC /* PositionIn.BrowseVolunteerViewController.xib */,
+				CD8DB9A91C89BB4100488EBB /* VolunteerMapViewController.swift */,
 			);
 			path = Volunteer;
 			sourceTree = "<group>";
@@ -4153,6 +4156,7 @@
 				E60EBF761B8EF9B50014B6ED /* DataTransforms.swift in Sources */,
 				50F730591BBBE86A008D3D94 /* CommentCell.swift in Sources */,
 				E61B20EF1B813C8C005EAB2C /* Community.swift in Sources */,
+				CD8DB9AA1C89BB4100488EBB /* VolunteerMapViewController.swift in Sources */,
 				CD794DE01C52485E00C1C298 /* OpenApplication.swift in Sources */,
 				2431EBDE1B947442009FB158 /* Product.swift in Sources */,
 				D100DF0F1BF4AA7900C81054 /* NSDate+NVTimeAgo.m in Sources */,
