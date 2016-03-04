@@ -75,8 +75,8 @@ struct Product: CRUDObject {
         photos <- map["photos"]
         location <- map["location"]
         imageURL <- (map["image"], AmazonURLTransform())
-        startDate <- (map["startDate"], APIDateTransform())
-        endData <- (map["startDate"], APIDateTransform())
+        startDate <- (map["startDate"], APIDateTransform()) 
+        endData <- (map["endDate"], APIDateTransform())
         externalURLString <- map["externalUrl"]
         links <- (map["links"], URLTransform())
         attachments <- map["attachments"]
