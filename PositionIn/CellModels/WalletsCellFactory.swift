@@ -29,9 +29,7 @@ struct WalletsCellFactory {
                 text: "",
                 imageURL: order.entityDetails?.imageURL,
                 avatarURL: nil,
-                badge: order.price.map {
-                    let newValue = $0 as Float
-                    return AppConfiguration().currencyFormatter.stringFromNumber(NSNumber(float: newValue)) ?? ""},
+                badge: "",
                 data: order.paymentDate
             ),
         ]

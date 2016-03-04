@@ -66,17 +66,26 @@ final class WalletViewController: BesideMenuViewController {
         switch browseMode {
         case .Purchases:
             api().getOrders(userId, reason: "bought").onSuccess { [weak self] (response : CollectionResponse<Order>) in
-                let items = response.items.map { item -> Order in
-                    item.entityDetails?.name = item.entityDetails?.name ?? NSLocalizedString("Donation to KRCS")
-                    return item
-                }
-                
-                self?.dataSource.setItems(items)
+                self?.dataSource.setItems(response.items)
                 self?.tableView?.reloadData()
             }
         case .MyDonations:
             api().getDonations(userId).onSuccess { [weak self] (response : CollectionResponse<Order>) in
-                self?.dataSource.setItems(response.items)
+                
+                
+                // FIXME: This hack should be removed when BE return entityDetails
+                let items = response.items.map { item -> Order in
+                    if item.entityDetails?.name == nil {
+                        var entityDetails = Product()
+                        entityDetails.objectId = CRUDObjectInvalidId
+                        entityDetails.name = NSLocalizedString("Donation to KRCS")
+                        item.entityDetails = entityDetails
+                    }
+                    return item
+                }
+                
+                
+                self?.dataSource.setItems(items)
                 self?.tableView?.reloadData()
             }
         }
@@ -129,18 +138,19 @@ extension WalletViewController {
         func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
             tableView.deselectRowAtIndexPath(indexPath, animated: true)
             
-            guard let walletViewController = parentViewController as? WalletViewController else {
+            guard let walletViewController = parentViewController as? WalletViewController,
+                model = models[indexPath.section][indexPath.row] as? ComapctBadgeFeedTableCellModel else {
                 return
             }
             
             switch walletViewController.browseMode {
             case .Purchases:
-                let controller =  Storyboards.Main.instantiateOrderDetailsViewControllerId()
-                //controller.donation = model.donation
+                let controller = Storyboards.Main.instantiateBoughtProductDetailsViewControllerId()
+                controller.product = model.item as? Order
                 walletViewController.navigationController?.pushViewController(controller, animated: true)
             case .MyDonations:
-                let controller =  Storyboards.Main.instantiateDonationDetailsViewControllerId()
-                //controller.donation = model.donation
+                let controller = Storyboards.Main.instantiateDonationDetailsViewControllerId()
+                controller.donation = model.item as? Order
                 walletViewController.navigationController?.pushViewController(controller, animated: true)
             }
         }
