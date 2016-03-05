@@ -24,6 +24,11 @@ final class DonationDetailsViewController: UIViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        configure()
+    }
+    
+    // MARK: - Private functions
+    private func configure() {
         title = NSLocalizedString("Donation")
         
         productImage?.setImageFromURL(donation?.entityDetails?.imageURL, placeholder: UIImage(named: "market_img_default"))
