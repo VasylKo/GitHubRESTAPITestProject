@@ -16,6 +16,15 @@ protocol BoughtProductDetailsActionConsumer {
 
 final class BoughtProductDetailsViewController: UIViewController {
     // MARK: - IBOutles
+    @IBOutlet weak var productImage: UIImageView?
+    @IBOutlet weak var productNameLabel: UILabel?
+    @IBOutlet weak var orderStatusLabel: UILabel?
+    @IBOutlet weak var pickUpAvailabilityLabel: UILabel?
+    @IBOutlet weak var quantityLabel: UILabel?
+    @IBOutlet weak var paymentMethodLabel: UILabel?
+    @IBOutlet weak var paymentDateLabel: UILabel?
+    @IBOutlet weak var totalLabel: UILabel?
+    
     @IBOutlet weak var actionTableView: UITableView?
     
     // MARK: - Internal properties
@@ -31,16 +40,12 @@ final class BoughtProductDetailsViewController: UIViewController {
     private func productActionItems() -> [[BoughtProductDetailsActionItem]] {
         var zeroSection = [BoughtProductDetailsActionItem]() // 1 section
         
-//        if self.author?.objectId != api().currentUserId() {
-//            firstSection.append(BoughtProductDetailsActionItem(title: NSLocalizedString("Send Message", comment: "Product action: Send Message"),
-//                image: "productSendMessage", action: .SendMessage))
-//            
-//            firstSection.append(BoughtProductDetailsActionItem(title: NSLocalizedString("Organizer Profile", comment: "Product action: Seller Profile"),
-//                image: "productSellerProfile", action: .SellerProfile))
-//        }
-//        
-        if product?.entityDetails?.location != nil {
-            zeroSection.append(BoughtProductDetailsActionItem(title: NSLocalizedString("Navigate", comment: "Product action: Navigate"), image: "productNavigate", action: .Navigate))
+        if product?.entityDetails?.author?.objectId != api().currentUserId() {
+            zeroSection.append(BoughtProductDetailsActionItem(title: NSLocalizedString("Send Message", comment: "Product action: Send Message"),
+                image: "productSendMessage", action: .SendMessage))
+            
+            zeroSection.append(BoughtProductDetailsActionItem(title: NSLocalizedString("Seller Profile", comment: "Product action: Seller Profile"),
+                image: "productSellerProfile", action: .SellerProfile))
         }
 
         if product?.entityDetails?.links?.isEmpty == false || product?.entityDetails?.attachments?.isEmpty == false {
@@ -53,11 +58,7 @@ final class BoughtProductDetailsViewController: UIViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = NSLocalizedString("Purchases")
-        dataSource.items = productActionItems()
-        if let actionTableView = actionTableView {
-            dataSource.configureTable(actionTableView)
-        }
+        configure()
         reloadData()
     }
     
@@ -65,25 +66,37 @@ final class BoughtProductDetailsViewController: UIViewController {
     private func reloadData() {
         actionTableView?.reloadData()
     }
+    
+    private func configure() {
+        title = NSLocalizedString("Purchases")
+        
+        productImage?.setImageFromURL(product?.entityDetails?.imageURL, placeholder: UIImage(named: "market_img_default"))
+        productNameLabel?.text = product?.entityDetails?.name
+        orderStatusLabel?.text = product?.status?.description
+        pickUpAvailabilityLabel?.text = product?.entityDetails?.endData?.formattedAsTimeAgo()
+        quantityLabel?.text = "\(product?.quantity ?? 0)"
+        paymentMethodLabel?.text = product?.paymentMethod?.description
+        paymentDateLabel?.text = product?.paymentDate?.formattedAsTimeAgo()
+        totalLabel?.text = AppConfiguration().currencyFormatter.stringFromNumber(product?.price ?? 0.0) ?? ""
+        
+        dataSource.items = productActionItems()
+        if let actionTableView = actionTableView {
+            dataSource.configureTable(actionTableView)
+        }
+    }
 }
 
 // MARK: - BoughtProductDetailsActionConsumer
 extension BoughtProductDetailsViewController: BoughtProductDetailsActionConsumer {
     enum BoughtProductDetailsAction: CustomStringConvertible {
-        case Buy, ProductInventory, SendMessage, SellerProfile, Navigate, MoreInformation
+        case SendMessage, SellerProfile, MoreInformation
         
         var description: String {
             switch self {
-            case .Buy:
-                return "Buy"
-            case .ProductInventory:
-                return "Product Inventory"
             case .SendMessage:
                 return "Send message"
             case .SellerProfile:
                 return "Seller profile"
-            case .Navigate:
-                return "Navigate"
             case .MoreInformation:
                 return "MoreInformation"
             }
@@ -97,41 +110,25 @@ extension BoughtProductDetailsViewController: BoughtProductDetailsActionConsumer
     }
     
     func executeAction(action: BoughtProductDetailsAction) {
-        //let segue: TrainingDetailsViewController.Segue
+        let segue: TrainingDetailsViewController.Segue
         switch action {
-        case .Buy:
-//            if let urlString = self.product?.externalURLString {
-//                let url = NSURL(string: urlString)
-//                if let url = url {
-//                    OpenApplication.Safari(with: url)
-//                }
-//            }
-            return
         case .SendMessage:
-//            if let userId = author?.objectId {
-//                showChatViewController(userId)
-//            }
-            return
-        case .Navigate:
-//            if let coordinates = self.product?.location?.coordinates {
-//                OpenApplication.appleMap(with: coordinates)
-//            } else {
-//                Log.error?.message("coordinates missed")
-//            }
+            if let userId = product?.entityDetails?.author?.objectId {
+                showChatViewController(userId)
+            }
             return
         case .SellerProfile:
-            return
-            //segue = .showUserProfile
+            segue = .showUserProfile
         case .MoreInformation:
-//            if self.product?.links?.isEmpty == false || self.product?.attachments?.isEmpty == false {
-//                let moreInformationViewController = MoreInformationViewController(links: self.product?.links, attachments: self.product?.attachments)
-//                self.navigationController?.pushViewController(moreInformationViewController, animated: true)
-//            }
+            if product?.entityDetails?.links?.isEmpty == false || product?.entityDetails?.attachments?.isEmpty == false {
+                let moreInformationViewController = MoreInformationViewController(links: product?.entityDetails?.links, attachments: product?.entityDetails?.attachments)
+                navigationController?.pushViewController(moreInformationViewController, animated: true)
+            }
             return
         default:
             return
         }
-        //performSegue(segue)
+        performSegue(segue)
     }
 }
 
@@ -162,14 +159,7 @@ extension BoughtProductDetailsViewController {
             let model = TableViewCellImageTextModel(title: item.title, imageName: item.image)
             return model
         }
-        
-//        @objc override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-//            if section == 1 {
-//                return 50
-//            }
-//            return super.tableView(tableView, heightForHeaderInSection: section)
-//        }
-//        
+     
         override func nibCellsId() -> [String] {
             return [ActionCell.reuseId()]
         }

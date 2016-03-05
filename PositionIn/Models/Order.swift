@@ -24,15 +24,34 @@ enum PaymentMethod: Int, CustomStringConvertible {
     }
 }
 
-enum OrderStatus: Int {
+enum OrderStatus: Int, CustomStringConvertible {
     case Unknown = 0, New, Reserve, ProcessingPayment, PaymentReceived, Shipped, Delivered
+    
+    var description: String {
+        switch self {
+        case .Unknown:
+            return "Unknown"
+        case .New:
+            return "New"
+        case .Reserve:
+            return "Reserve"
+        case .ProcessingPayment:
+            return "Processing Payment"
+        case .PaymentReceived:
+            return "Payment Received"
+        case .Shipped:
+            return "Shipped"
+        case .Delivered:
+            return "Delivered"
+        }
+    }
 }
 
 final class Order: FeedItem {
     var entityDetails: Product?
     var paymentDate: NSDate?
     var paymentMethod: PaymentMethod?
-    var quantity: String?
+    var quantity: Int?
     var status: OrderStatus?
     var transactionId: String?
     

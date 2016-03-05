@@ -8,6 +8,14 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BoughtProductDetailsViewController" customModule="PositionIn" customModuleProvider="target">
             <connections>
                 <outlet property="actionTableView" destination="xxH-tk-HnA" id="7vy-IZ-abs"/>
+                <outlet property="orderStatusLabel" destination="zwI-Yu-9R4" id="QRp-Gu-XrZ"/>
+                <outlet property="paymentDateLabel" destination="BuX-gm-GHF" id="2HI-Pl-Ufi"/>
+                <outlet property="paymentMethodLabel" destination="RPP-Nv-Eem" id="bla-VO-wsl"/>
+                <outlet property="pickUpAvailabilityLabel" destination="zqa-dk-vMy" id="n0Y-ks-NU8"/>
+                <outlet property="productImage" destination="P2g-N2-wfU" id="y9f-ak-XTn"/>
+                <outlet property="productNameLabel" destination="FoI-NO-f4L" id="U8T-b7-3B2"/>
+                <outlet property="quantityLabel" destination="9Cy-T9-DQm" id="qBh-Ux-mI9"/>
+                <outlet property="totalLabel" destination="uNg-zE-AhT" id="fN1-bG-RiU"/>
                 <outlet property="view" destination="oWL-kh-pq7" id="deI-x7-vtQ"/>
             </connections>
         </placeholder>
@@ -21,7 +29,7 @@
                     <subviews>
                         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" style="plain" rowHeight="45" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="xxH-tk-HnA" customClass="TableView" customModule="PosInCore">
                             <rect key="frame" x="0.0" y="350" width="600" height="400"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="400" id="J96-m1-T4W"/>
                             </constraints>
@@ -33,21 +41,21 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FLy-BQ-6sk" userLabel="HeaderView">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="82"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="P2g-N2-wfU">
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="P2g-N2-wfU">
                                             <rect key="frame" x="8" y="8" width="64" height="64"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="64" id="cV3-pQ-Lj0"/>
                                                 <constraint firstAttribute="width" constant="64" id="nSY-3f-weE"/>
                                             </constraints>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rar-pE-gIJ">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Item name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rar-pE-gIJ">
                                             <rect key="frame" x="80" y="8" width="512" height="17"/>
                                             <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="14"/>
                                             <color key="textColor" red="0.60784313729999995" green="0.60784313729999995" blue="0.60784313729999995" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Status" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zwI-Yu-9R4">
-                                            <rect key="frame" x="108" y="53" width="484" height="21"/>
+                                            <rect key="frame" x="80" y="53" width="512" height="21"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="21" id="X1f-TR-Nvo"/>
                                             </constraints>
@@ -55,14 +63,7 @@
                                             <color key="textColor" red="0.4392156862745098" green="0.70980392156862748" blue="0.18431372549019609" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Q25-Q3-RJy">
-                                            <rect key="frame" x="80" y="52" width="20" height="20"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="20" id="Lxq-rK-et9"/>
-                                                <constraint firstAttribute="height" constant="20" id="QdX-Ym-sQ6"/>
-                                            </constraints>
-                                        </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FoI-NO-f4L">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FoI-NO-f4L">
                                             <rect key="frame" x="80" y="28" width="512" height="20.5"/>
                                             <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="17"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -81,14 +82,12 @@
                                         <constraint firstItem="rar-pE-gIJ" firstAttribute="leading" secondItem="P2g-N2-wfU" secondAttribute="trailing" constant="8" id="7zp-Ry-Mo2"/>
                                         <constraint firstAttribute="trailing" secondItem="FoI-NO-f4L" secondAttribute="trailing" constant="8" id="8nd-4U-AJL"/>
                                         <constraint firstAttribute="height" constant="82" id="GVy-81-SOt"/>
-                                        <constraint firstItem="Q25-Q3-RJy" firstAttribute="top" secondItem="FoI-NO-f4L" secondAttribute="bottom" constant="3.5" id="KA9-5A-td2"/>
-                                        <constraint firstItem="zwI-Yu-9R4" firstAttribute="leading" secondItem="Q25-Q3-RJy" secondAttribute="trailing" constant="8" id="KEu-xX-L4w"/>
                                         <constraint firstAttribute="trailing" secondItem="zwI-Yu-9R4" secondAttribute="trailing" constant="8" id="KqE-w4-F7y"/>
                                         <constraint firstItem="FoI-NO-f4L" firstAttribute="leading" secondItem="P2g-N2-wfU" secondAttribute="trailing" constant="8" id="LGh-nU-5Jb"/>
-                                        <constraint firstItem="Q25-Q3-RJy" firstAttribute="leading" secondItem="P2g-N2-wfU" secondAttribute="trailing" constant="8" id="Pcy-mq-2kj"/>
                                         <constraint firstAttribute="trailing" secondItem="rar-pE-gIJ" secondAttribute="trailing" constant="8" id="QNf-nR-d2m"/>
                                         <constraint firstItem="P2g-N2-wfU" firstAttribute="leading" secondItem="FLy-BQ-6sk" secondAttribute="leading" constant="8" id="UhT-M6-Kq7"/>
                                         <constraint firstItem="P2g-N2-wfU" firstAttribute="top" secondItem="FLy-BQ-6sk" secondAttribute="top" constant="8" id="Ulp-vx-wnq"/>
+                                        <constraint firstItem="zwI-Yu-9R4" firstAttribute="leading" secondItem="P2g-N2-wfU" secondAttribute="trailing" constant="8" id="XsE-JF-eFc"/>
                                         <constraint firstItem="Xz3-eE-uHq" firstAttribute="leading" secondItem="FLy-BQ-6sk" secondAttribute="leading" id="byf-3U-1M8"/>
                                         <constraint firstItem="FoI-NO-f4L" firstAttribute="top" secondItem="rar-pE-gIJ" secondAttribute="bottom" constant="3" id="hNI-qT-Abp"/>
                                         <constraint firstItem="zwI-Yu-9R4" firstAttribute="top" secondItem="FoI-NO-f4L" secondAttribute="bottom" constant="4.5" id="iDG-x6-HE4"/>
