@@ -47,20 +47,12 @@ final class EventDetailsViewController: UIViewController {
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
         
-        let imageURL: NSURL?
-        
-        if let urlString = event.imageURLString {
-            imageURL = NSURL(string:urlString)
-        } else {
-            imageURL = nil
-        }
-        
         let image = UIImage(named: "eventDetailsPlaceholder")
         
         let startDate = dateFormatter.stringFromDate(event.startDate ?? NSDate())
         let endDate = dateFormatter.stringFromDate(event.endDate ?? NSDate())
         priceLabel.text = "\(startDate) - \(endDate)"
-        eventImageView.setImageFromURL(imageURL, placeholder: image)
+        eventImageView.setImageFromURL(self.event?.imageURL, placeholder: image)
         
         if event.location?.coordinates != nil {
             self.dataSource.items = self.eventActionItems()

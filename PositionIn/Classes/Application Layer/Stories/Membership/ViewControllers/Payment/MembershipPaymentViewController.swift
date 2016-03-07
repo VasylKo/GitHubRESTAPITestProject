@@ -136,7 +136,7 @@ class MembershipPaymentViewController: XLFormViewController, PaymentReponseDeleg
     //MARK: PaymentReponseDelegate
     
     func setError(hidden: Bool, error: String?) {
-        self.router.showMembershipMemberCardViewController(from: self)
+        self.router.showBraintreeConfirmPaymentViewController(from: self, with: self.plan, creditCardPaymentSuccess: hidden)
     }
     
     func paymentReponse(success: Bool, err: String?) {

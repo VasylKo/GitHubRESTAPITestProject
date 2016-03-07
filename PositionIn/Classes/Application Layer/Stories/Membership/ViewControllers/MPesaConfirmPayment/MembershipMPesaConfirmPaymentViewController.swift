@@ -9,13 +9,14 @@
 import Foundation
 import XLForm
 
-class MembershipMPesaDetailsViewController: XLFormViewController {
+class MembershipMPesaConfirmPaymentViewController: XLFormViewController {
     
     private let pageView = MembershipPageView(pageCount: 3)
-    private let router : MembershipRouter
+    let router : MembershipRouter
     private let plan : MembershipPlan
-    private var headerView : MPesaIndicatorView!
+    var headerView : MPesaIndicatorView!
     private var transactionId = ""
+
     
     //MARK: Initializers
     
@@ -36,15 +37,18 @@ class MembershipMPesaDetailsViewController: XLFormViewController {
         
         self.setupInterface()
         self.initializeForm()
-        
+        self.checkPurchase()
+    }
+    
+    func checkPurchase() {
         let price = String(self.plan.price ?? 0)
         api().membershipCheckoutMpesa(price, nonce: "",
             membershipId: self.plan.objectId).onSuccess { [weak self] transactionId in
-            self?.transactionId = transactionId
-            self?.pollStatus()
+                self?.transactionId = transactionId
+                self?.pollStatus()
             }.onFailure(callback: { [weak self] _ in
                 self?.headerView.showFailure()
-            })
+                })
     }
 
     @objc func pollStatus() {

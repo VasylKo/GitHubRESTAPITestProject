@@ -63,17 +63,9 @@ final class BomaHotelsDetailsViewController: UIViewController {
         if let price = bomaHotel.donations {
             priceLabel.text = "\(Int(price)) beneficiaries"
         }
-
-        let imageURL: NSURL?
-        
-        if let urlString = bomaHotel.imageURLString {
-            imageURL = NSURL(string:urlString)
-        } else {
-            imageURL = nil
-        }
         
         let image = UIImage(named: "bomaHotelPlaceholder")
-        productImageView.setImageFromURL(imageURL, placeholder: image)
+        productImageView.setImageFromURL(bomaHotel.imageURL, placeholder: image)
         if let coordinates = bomaHotel.location?.coordinates {
             self.productPinDistanceImageView.hidden = false
             locationRequestToken.invalidate()

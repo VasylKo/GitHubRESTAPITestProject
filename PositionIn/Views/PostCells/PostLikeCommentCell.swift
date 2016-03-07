@@ -18,6 +18,9 @@ class PostLikeCommentCell: TableViewCell {
         let m = model as? PostLikesCountModel
         assert(m != nil, "Invalid model passed")
         
+        let image = m!.isLiked == true ? UIImage(named:"ic_like_selected") : UIImage(named:"ic_like_up")
+        self.likeButton.setImage(image, forState: .Normal)
+        
         self.amountOfCommentsLabel.text = String(m!.comments)
         self.amountOfLikesLabel.text = String(m!.likes)
         self.actionConsumer = m!.actionConsumer

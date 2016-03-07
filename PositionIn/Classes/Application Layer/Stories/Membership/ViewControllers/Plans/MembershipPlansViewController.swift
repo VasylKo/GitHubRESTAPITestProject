@@ -23,8 +23,8 @@ class MembershipPlansViewController : UIViewController, UITableViewDelegate, UIT
     @IBOutlet weak var bottomView: UIView!
     @IBOutlet weak var spaceBetweenBottomViewAndTableViewContstraint: NSLayoutConstraint!
     
-    let websiteURL = NSURL(string: "http://www.redcross.or.ke")!
-    let phoneCallURL: NSURL = NSURL(string: "tel://+254703037000")!
+    let website = "http://www.redcross.or.ke"
+    let phone = "+254703037000"
     let email = "membership@redcross.or.ke"
     
     //MARK: Initializers
@@ -107,14 +107,12 @@ class MembershipPlansViewController : UIViewController, UITableViewDelegate, UIT
     
     @IBAction func alreadyMemberPressed(sender: AnyObject) {
         let actionSheetController: UIAlertController = UIAlertController(title: NSLocalizedString("Please contact our support"), message: nil, preferredStyle: .ActionSheet)
-        let cancelActionButton: UIAlertAction = UIAlertAction(title: NSLocalizedString("Cancel"), style: .Cancel) { action -> Void in
-            print("Cancel")
-        }
+        let cancelActionButton: UIAlertAction = UIAlertAction(title: NSLocalizedString("Cancel"), style: .Cancel, handler: nil)
         actionSheetController.addAction(cancelActionButton)
         
         let callAction: UIAlertAction = UIAlertAction(title: NSLocalizedString("Call Support"), style: .Default)
             { action -> Void in
-                OpenApplication.Safari(with: self.phoneCallURL)
+                UIApplication.sharedApplication().openURL(NSURL(string:"telprompt:" + self.phone)!)
         }
         actionSheetController.addAction(callAction)
         
@@ -131,7 +129,8 @@ class MembershipPlansViewController : UIViewController, UITableViewDelegate, UIT
         
         let websiteAction: UIAlertAction = UIAlertAction(title: NSLocalizedString("Visit Website"), style: .Default)
             { action -> Void in
-                OpenApplication.Safari(with: self.websiteURL)
+                let websiteURL = NSURL(string: "http://www.redcross.or.ke")!
+                OpenApplication.Safari(with: websiteURL)
         }
         actionSheetController.addAction(websiteAction)
         

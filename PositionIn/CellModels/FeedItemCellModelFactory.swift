@@ -47,6 +47,7 @@ struct FeedItemCellModelFactory {
                     location: feedItem.location,
                     numOfLikes: feedItem.numOfLikes,
                     numOfComments: feedItem.numOfComments,
+                    numOfParticipants: feedItem.numOfParticipants,
                     date: feedItem.date,
                     data: feedItem.itemData)
             ]
