@@ -23,7 +23,7 @@ class PaymentCompletedViewController: UIViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        projectImageView?.setImageFromURL(projectIconURL, placeholder: UIImage(named: "krfc.png"))
+        projectImageView?.setImageFromURL(projectIconURL, placeholder: UIImage(named: "krfc"))
         projectNameLabel?.text = projectName
         let donationString = "\(amountDonation) \(AppConfiguration().currencySymbol)"
         totalLabel?.text = donationString
