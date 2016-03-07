@@ -149,11 +149,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
-        //TODO handle
+        //TODO: handle
     }
     
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
-        //todo should set push note message
+        //TODO: should set push note message
         let apsDictionary = userInfo["aps"]
         if let alert = apsDictionary!["alert"] as? String {
             let notification = LNNotification(message: alert)
