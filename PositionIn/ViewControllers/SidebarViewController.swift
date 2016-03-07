@@ -23,7 +23,7 @@ class SidebarViewController: KYDrawerController {
         case Messages
         case Filters
         case Community
-//        case Wallet
+        case Wallet
         case UserProfile
         case Settings
         case Login
@@ -65,8 +65,8 @@ class SidebarViewController: KYDrawerController {
                 return (SidebarViewController.Segue.ShowMyProfile, nil)
             case .People:
                 return (SidebarViewController.Segue.ShowPeople, nil)
-//            case .Wallet:
-//                return (SidebarViewController.Segue.ShowWallet, nil)
+            case .Wallet:
+                return (SidebarViewController.Segue.ShowWallet, nil)
             default:
                 return nil
             }

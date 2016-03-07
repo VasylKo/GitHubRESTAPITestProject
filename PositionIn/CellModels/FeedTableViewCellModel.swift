@@ -90,6 +90,8 @@ class CompactFeedTableCellModel: FeedTableCellModel {
             fallthrough
         case .Post:
             fallthrough
+        case .Wallet:
+            fallthrough
         case .Unknown:
             break
         }

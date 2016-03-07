@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="j5Z-eJ-Y0Z">
-    <dependencies>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="j5Z-eJ-Y0Z">   <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -884,7 +883,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ru2-xA-PBE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3547" y="1772"/>
+            <point key="canvasLocation" x="3563" y="1772"/>
         </scene>
         <!--Promotion Details View Controller-->
         <scene sceneID="ec5-5d-AsZ">
@@ -1238,7 +1237,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mKB-oL-w9T" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2278" y="-843"/>
+            <point key="canvasLocation" x="-2250" y="-843"/>
         </scene>
         <!--Community Navigation Controller Scene-->
         <scene sceneID="igP-u2-ckw">
@@ -1282,7 +1281,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IRb-nU-VUE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2564" y="-1594"/>
+            <point key="canvasLocation" x="-4564" y="-1570"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="jHI-at-ZQD">
@@ -1355,7 +1354,15 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PjA-9H-5Fk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1893" y="-1594"/>
+            <point key="canvasLocation" x="-3848" y="-1570"/>
+        </scene>
+        <!--Donation Details View Controller-->
+        <scene sceneID="l0G-CB-bn2">
+            <objects>
+                <viewController storyboardIdentifier="DonationDetailsViewControllerId" id="PHu-dG-8BF" customClass="DonationDetailsViewController" customModule="PositionIn" customModuleProvider="target" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2ba-OQ-bBa" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-3144" y="-2248"/>
         </scene>
         <!--Create Community Conversation View Controller-->
         <scene sceneID="vu5-5i-x4S">
@@ -1479,16 +1486,24 @@
             </objects>
             <point key="canvasLocation" x="2254" y="767"/>
         </scene>
+        <!--Bought Product Details View Controller-->
+        <scene sceneID="SCe-mz-TUg">
+            <objects>
+                <viewController storyboardIdentifier="BoughtProductDetailsViewControllerId" id="pc3-vY-yiD" customClass="BoughtProductDetailsViewController" customModule="PositionIn" customModuleProvider="target" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="w3w-Si-RPA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-3144" y="-1524"/>
+        </scene>
     </scenes>
     <resources>
         <image name="SplashImage" width="320" height="568"/>
         <image name="newChat" width="24" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="6ZU-Ck-PGM"/>
         <segue reference="9u4-qy-iVR"/>
-        <segue reference="X7t-wp-vZe"/>
         <segue reference="UGm-BP-OPQ"/>
+        <segue reference="OnQ-Ex-OI6"/>
         <segue reference="ulD-Z3-59i"/>
-        <segue reference="ND0-h7-Vra"/>
     </inferredMetricsTieBreakers>
 </document>
