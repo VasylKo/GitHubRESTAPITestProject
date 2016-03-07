@@ -9,23 +9,31 @@
 import UIKit
 
 class PaymentCompletedViewController: UIViewController {
-
-    @IBOutlet private weak var projectImageView: UIImageView!
-    @IBOutlet private weak var projectNameLabel: UILabel!
-
-    var projectName: String?
-    var projectIconURL: NSURL?
+    // MARK: - IBOutlets
+    @IBOutlet weak var projectImageView: UIImageView?
+    @IBOutlet weak var projectNameLabel: UILabel?
+    @IBOutlet weak var totalLabel: UILabel?
+    @IBOutlet weak var donateMessageLabel: UILabel?
     
+    // MARK: - Internal properties
+    internal var projectName: String?
+    internal var projectIconURL: NSURL?
+    internal var amountDonation: Int = 0
+    
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.projectImageView.setImageFromURL(projectIconURL)
-        self.projectNameLabel.text = projectName
+        projectImageView?.setImageFromURL(projectIconURL, placeholder: UIImage(named: "krfc"))
+        projectNameLabel?.text = projectName
+        let donationString = "\(amountDonation) \(AppConfiguration().currencySymbol)"
+        totalLabel?.text = donationString
+        donateMessageLabel?.text = donateMessageLabel?.text?.stringByReplacingOccurrencesOfString("{amount}", withString: donationString, options: .LiteralSearch, range: nil)
     }
     
+    // MARK: - IBAction
     @IBAction func closeButtonTapped(sender: AnyObject) {
         sideBarController?.executeAction(SidebarViewController.defaultAction)
         dismissViewControllerAnimated(true, completion: nil)
-        self.navigationController?.popToRootViewControllerAnimated(true)
+        navigationController?.popToRootViewControllerAnimated(true)
     }
-
 }

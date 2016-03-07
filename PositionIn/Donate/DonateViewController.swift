@@ -37,8 +37,9 @@ class DonateViewController: XLFormViewController, PaymentReponseDelegate {
         super.viewDidAppear(animated)
         if(finishedSuccessfully) {
             let paymentCompleteController = Storyboards.Onboarding.instantiatePaymentCompletedViewController()
-            paymentCompleteController.projectName = self.product?.name
+            paymentCompleteController.projectName = self.product?.name ?? NSLocalizedString("Kenya Red Cross Society")
             paymentCompleteController.projectIconURL = self.product?.imageURL
+            paymentCompleteController.amountDonation = amount
             
             self.navigationController?.pushViewController(paymentCompleteController, animated: true)
         }
