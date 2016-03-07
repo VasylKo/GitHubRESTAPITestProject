@@ -521,8 +521,8 @@ struct APIService {
 
     //MARK: - Notifications
 
-    func getNotifications() -> Future<CollectionResponse<Notification>, NSError> {
-        let endpoint = Notification.endpoint()
+    func getNotifications() -> Future<CollectionResponse<SystemNotification>, NSError> {
+        let endpoint = SystemNotification.endpoint()
         return getObjectsCollection(endpoint, params: nil)
     }
     

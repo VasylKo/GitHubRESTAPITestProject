@@ -164,6 +164,7 @@
 		D1379E901C2AC58F0041AA4E /* ExploreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1379E8F1C2AC58F0041AA4E /* ExploreViewController.swift */; };
 		D1379E941C2C21F80041AA4E /* NewsCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1379E921C2C21F80041AA4E /* NewsCardCell.swift */; };
 		D1379E951C2C21F80041AA4E /* PositionIn.NewsCardCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1379E931C2C21F80041AA4E /* PositionIn.NewsCardCell.xib */; };
+		D1381AD61C8D76C700328D86 /* PushNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1381AD51C8D76C700328D86 /* PushNotification.swift */; };
 		D153AB841C11FA9B00DFB5C9 /* AmbulanceRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D153AB831C11FA9B00DFB5C9 /* AmbulanceRequest.swift */; };
 		D154411A1C47D642006251B7 /* Volunteer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15441191C47D642006251B7 /* Volunteer.swift */; };
 		D15F47441C088A26009ED3FD /* HomeItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15F47431C088A26009ED3FD /* HomeItem.swift */; };
@@ -200,7 +201,7 @@
 		D1F1FF2F1C24265B006D2E75 /* PositionIn.GiveBloodDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1F1FF2D1C24265B006D2E75 /* PositionIn.GiveBloodDetailsViewController.xib */; };
 		D1F3E8091C74DD1200EFC8ED /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F3E8071C74DD1200EFC8ED /* NotificationViewController.swift */; };
 		D1F3E80A1C74DD1200EFC8ED /* NotificationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1F3E8081C74DD1200EFC8ED /* NotificationViewController.xib */; };
-		D1F3E80C1C75D2B300EFC8ED /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F3E80B1C75D2B300EFC8ED /* Notification.swift */; };
+		D1F3E80C1C75D2B300EFC8ED /* SystemNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F3E80B1C75D2B300EFC8ED /* SystemNotification.swift */; };
 		D1F3E8141C7628C100EFC8ED /* NotificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F3E8121C7628C100EFC8ED /* NotificationTableViewCell.swift */; };
 		D1F3E8151C7628C100EFC8ED /* PositionIn.NotificationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1F3E8131C7628C100EFC8ED /* PositionIn.NotificationTableViewCell.xib */; };
 		D1F86CF11BFCAA96006E0C49 /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D1F86CF01BFCAA96006E0C49 /* Onboarding.storyboard */; };
@@ -698,6 +699,7 @@
 		D1379E8F1C2AC58F0041AA4E /* ExploreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExploreViewController.swift; sourceTree = "<group>"; };
 		D1379E921C2C21F80041AA4E /* NewsCardCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsCardCell.swift; sourceTree = "<group>"; };
 		D1379E931C2C21F80041AA4E /* PositionIn.NewsCardCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.NewsCardCell.xib; sourceTree = "<group>"; };
+		D1381AD51C8D76C700328D86 /* PushNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushNotification.swift; sourceTree = "<group>"; };
 		D153AB831C11FA9B00DFB5C9 /* AmbulanceRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AmbulanceRequest.swift; sourceTree = "<group>"; };
 		D15441191C47D642006251B7 /* Volunteer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Volunteer.swift; sourceTree = "<group>"; };
 		D15F47431C088A26009ED3FD /* HomeItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeItem.swift; sourceTree = "<group>"; };
@@ -734,7 +736,7 @@
 		D1F1FF2D1C24265B006D2E75 /* PositionIn.GiveBloodDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.GiveBloodDetailsViewController.xib; sourceTree = "<group>"; };
 		D1F3E8071C74DD1200EFC8ED /* NotificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
 		D1F3E8081C74DD1200EFC8ED /* NotificationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NotificationViewController.xib; sourceTree = "<group>"; };
-		D1F3E80B1C75D2B300EFC8ED /* Notification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
+		D1F3E80B1C75D2B300EFC8ED /* SystemNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SystemNotification.swift; sourceTree = "<group>"; };
 		D1F3E8121C7628C100EFC8ED /* NotificationTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationTableViewCell.swift; sourceTree = "<group>"; };
 		D1F3E8131C7628C100EFC8ED /* PositionIn.NotificationTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.NotificationTableViewCell.xib; sourceTree = "<group>"; };
 		D1F86CF01BFCAA96006E0C49 /* Onboarding.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Onboarding.storyboard; sourceTree = "<group>"; };
@@ -2272,6 +2274,8 @@
 			children = (
 				18F3313D1C8871870010321B /* Order.swift */,
 				D1F3E80B1C75D2B300EFC8ED /* Notification.swift */,
+				D1381AD51C8D76C700328D86 /* PushNotification.swift */,
+				D1F3E80B1C75D2B300EFC8ED /* SystemNotification.swift */,
 				CDC102481C6CC091009FF6D9 /* Attachment.swift */,
 				D1B1F1E11C6B194E00D43A3B /* MPesaPayment.swift */,
 				CD8ED0E11C60D35900576DBF /* MembershipDetails.swift */,
@@ -3994,6 +3998,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D1381AD61C8D76C700328D86 /* PushNotification.swift in Sources */,
 				D18EA2CE1C04B38400A886A5 /* BrowseGridViewController.swift in Sources */,
 				500D7FA81BC2CD39008C8C82 /* SearchEntityCell.swift in Sources */,
 				E6325F721B57E1DA00996480 /* Storyboards.swift in Sources */,
@@ -4016,7 +4021,7 @@
 				E6FC24C31BAAEC23006FE7A0 /* Conversation.swift in Sources */,
 				CD795C801C5A382000C1C298 /* MembershipPlan.swift in Sources */,
 				E66115A81B73AE0F003DB5B3 /* AddPromotionViewController.swift in Sources */,
-				D1F3E80C1C75D2B300EFC8ED /* Notification.swift in Sources */,
+				D1F3E80C1C75D2B300EFC8ED /* SystemNotification.swift in Sources */,
 				D1DA1EBC1C5909D7009F5AFA /* MembershipConfirmDetailsViewController.swift in Sources */,
 				D1FD85351C1EE8A800C2E87B /* EmergencyDetailsController.swift in Sources */,
 				CDD9AA1B1C6E2CDF007C7556 /* PostAttachmentsCell.swift in Sources */,

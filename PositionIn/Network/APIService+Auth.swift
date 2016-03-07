@@ -102,7 +102,7 @@ extension APIService {
     //0 - api type for sms validation
     //1 - api type for sms validation (duplicate functionality)
     //2 - api type for phone validation call call
-    func verifyPhone(phoneNumber: String, type: NSNumber = NSNumber(int: 0)) -> Future<Void, NSError> {
+    func verifyPhone(phoneNumber: String, type: NSNumber) -> Future<Void, NSError> {
         return verifyPhoneRequest(phoneNumber, type: type)
     }
     

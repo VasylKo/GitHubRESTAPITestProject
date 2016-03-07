@@ -10,23 +10,28 @@ import ObjectMapper
 import CleanroomLogger
 
 enum Gender: Int, CustomStringConvertible {
-    case Unknown = 0
-    case Male
+    case Male = 0
     case Female
-    case Other
     
     var description: String {
         switch self {
-        case .Unknown:
-            return "Unknown"
         case .Male:
             return "Male"
         case .Female:
             return "Female"
-        case .Other:
-            return "Other"
         }
     }
+}
+
+enum EducationLevel: String {
+    case PrimarySchool = "Primary School"
+    case SecondarySchool = "Secondary School"
+    case HighSchool = "High School"
+    case Diploma = "Diploma"
+    case Undergraduate = "Undergraduate"
+    case PostGraduateDiploma = "Post-graduate diploma"
+    case Masters = "Masters"
+    case PHD = "PHD"
 }
 
 final class UserProfile: CRUDObject {
@@ -48,7 +53,7 @@ final class UserProfile: CRUDObject {
     var profession: String?
     // countryBranch
     var permanentResidence: String?
-    var educationLevel: String?
+    var educationLevel: EducationLevel?
     
     var guest: Bool =  false
     var shops: [ObjectInfo]?
