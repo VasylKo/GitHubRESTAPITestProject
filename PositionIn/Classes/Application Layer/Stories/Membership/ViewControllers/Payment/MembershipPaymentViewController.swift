@@ -74,8 +74,6 @@ class MembershipPaymentViewController: XLFormViewController, PaymentReponseDeleg
         donateProjectRow.cellConfigAtConfigure["planImage"] = UIImage(named : plan.membershipImageName)
         
         if let price = plan.price {
-            donateProjectRow.cellConfigAtConfigure["priceString"] = AppConfiguration().currencyFormatter.stringFromNumber(NSNumber(integer:
-                price)) ?? ""
             donateProjectRow.cellConfigAtConfigure["totalString"] = AppConfiguration().currencyFormatter.stringFromNumber(NSNumber(integer:
                 price)) ?? ""
         }
