@@ -37,8 +37,9 @@ class DonateViewController: XLFormViewController, PaymentReponseDelegate {
         super.viewDidAppear(animated)
         if(finishedSuccessfully) {
             let paymentCompleteController = Storyboards.Onboarding.instantiatePaymentCompletedViewController()
-            paymentCompleteController.projectName = self.product?.name
+            paymentCompleteController.projectName = self.product?.name ?? NSLocalizedString("Kenya Red Cross Society")
             paymentCompleteController.projectIconURL = self.product?.imageURL
+            paymentCompleteController.amountDonation = amount
             
             self.navigationController?.pushViewController(paymentCompleteController, animated: true)
         }
@@ -80,7 +81,8 @@ class DonateViewController: XLFormViewController, PaymentReponseDelegate {
         
         donateToSection.addFormRow(donateProjectRow)
         
-        let donatationSection = XLFormSectionDescriptor.formSectionWithTitle("Donation Amount (KSH)")
+        let donatationSectionTitle = "Donation Amount (\(AppConfiguration().currencySymbol))"
+        let donatationSection = XLFormSectionDescriptor.formSectionWithTitle(donatationSectionTitle)
         form.addFormSection(donatationSection)
         
         let donationRow: XLFormRowDescriptor = XLFormRowDescriptor(tag: Tags.Money.rawValue,
@@ -123,7 +125,7 @@ class DonateViewController: XLFormViewController, PaymentReponseDelegate {
         
         let confirmRow: XLFormRowDescriptor = XLFormRowDescriptor(tag: Tags.Confirm.rawValue,
             rowType: XLFormRowDescriptorTypeButton,
-            title: NSLocalizedString("Confirm Donation", comment: "Payment"))
+            title: NSLocalizedString("Proceed to Donate"))
         
         confirmRow.cellConfig["backgroundColor"] = UIScheme.mainThemeColor
         confirmRow.cellConfig["textLabel.color"] = UIColor.whiteColor()
@@ -133,12 +135,6 @@ class DonateViewController: XLFormViewController, PaymentReponseDelegate {
             if (self?.paymentType != nil && self?.amount != 0) {
                 self!.performSegueWithIdentifier("Show\((self?.paymentType)!)", sender: self!)
                 self?.setError(true, error: nil)
-            } else {
-                if(self?.amount == 0) {
-                   self?.setError(false, error: "The donation amount connot be 0")
-                } else {
-                   self?.setError(false, error: "You must select a payment method")
-                }
             }
             
             self?.deselectFormRow(sender)

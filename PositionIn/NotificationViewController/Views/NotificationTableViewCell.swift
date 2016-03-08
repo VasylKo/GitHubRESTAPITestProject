@@ -14,7 +14,7 @@ class NotificationTableViewCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     
-    func configureWithNotification(notification: Notification) {
+    func configureWithNotification(notification: SystemNotification) {
         self.titleLabel.text = notification.title ?? NSLocalizedString("Notification")
         self.dateLabel.text = notification.createdDate?.formattedAsTimeAgo()
     }

@@ -13,9 +13,7 @@ final class AppConfiguration {
         switch AppConfiguration.environment {
         case .Prod:
             baseURL = NSURL(string: "https://krcs.rc-app.com/api/")!
-//            amazonURL = NSURL(string: "https://pos-prod.s3.amazonaws.com/")!
-            //Workaround bug in S3
-            amazonURL = NSURL(string: "https://krcs.rc-app.com")!
+            amazonURL = NSURL(string: "https://pos-prod.s3.amazonaws.com/")!
             xmppHostname = "chat-krcs.rc-app.com"
             googleAnalystLogLevel = GAILogLevel.Verbose
             googleMapsKey = "AIzaSyA3NvrDKBcpIsnq4-ZACG41y7Mj-wSfVrY"
@@ -26,14 +24,14 @@ final class AppConfiguration {
             xmppHostname = "chat-sta.positionin.com"
             googleAnalystLogLevel = GAILogLevel.Verbose
             googleMapsKey = "AIzaSyDkUHOpFWNBDAW5Gu2I0E7iHe4FRWGyM6o"
-            newRelicToken = ""
+            newRelicToken = "AA0492dd667078eb6a7d0a70ba7267487f6b3fff21"
         case .StagingCopy:
             baseURL = NSURL(string: "https://app-sta2.positionin.com/api/")!
             amazonURL = NSURL(string: "https://pos-sta.s3.amazonaws.com/")!
             xmppHostname = "chat-sta2.positionin.com"
             googleAnalystLogLevel = GAILogLevel.Verbose
             googleMapsKey = "AIzaSyDkUHOpFWNBDAW5Gu2I0E7iHe4FRWGyM6o"
-            newRelicToken = ""
+            newRelicToken = "AA0492dd667078eb6a7d0a70ba7267487f6b3fff21"
         case .Dev:
             baseURL = NSURL(string: "https://app-dev.positionin.com/api/")!
             amazonURL = NSURL(string: "https://pos-dev.s3.amazonaws.com/")!
@@ -76,9 +74,10 @@ final class AppConfiguration {
         #endif
     }
     
-    let currencyFormatter: NSNumberFormatter = {
+    let currencySymbol = "KSh"
+    lazy var currencyFormatter: NSNumberFormatter = {
         let currencyFormatter = NSNumberFormatter()
-        currencyFormatter.currencySymbol = "KES "
+        currencyFormatter.currencySymbol = "\(AppConfiguration().currencySymbol) "
         currencyFormatter.numberStyle = .CurrencyStyle
         currencyFormatter.generatesDecimalNumbers = false
         currencyFormatter.maximumFractionDigits = 2

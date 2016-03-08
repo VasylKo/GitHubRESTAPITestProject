@@ -22,7 +22,7 @@ final class EventListCell: TableViewCell {
 
         //todo: need update images
         
-        switch m!.itemType {
+        switch m!.item.type {
         case .Emergency:
             productImage.setImageFromURL(m!.imageURL, placeholder: UIImage(named: "PromotionDetailsPlaceholder"))
         case .GiveBlood:
@@ -39,6 +39,8 @@ final class EventListCell: TableViewCell {
             productImage.setImageFromURL(m!.imageURL, placeholder: UIImage(named: "eventDetailsPlaceholder"))
         case .News:
             productImage.setImageFromURL(m!.imageURL, placeholder: UIImage(named: "placeholderEvent"))
+        case .Wallet:
+            productImage.setImageFromURL(m!.imageURL, placeholder: UIImage(named: "market_img_default"))
         case .Unknown:
             break
         default:
@@ -46,7 +48,8 @@ final class EventListCell: TableViewCell {
         }
         
         titleLabel.text = m!.title
-        infoLabel.text = m!.info
+        let eventDetailsFormat = NSLocalizedString("%d People are attending", comment: "Event details: details format")
+        infoLabel.text = String(format: eventDetailsFormat, m!.numOfParticipants ?? 0)
         dateLabel.text = m!.details
     }
     

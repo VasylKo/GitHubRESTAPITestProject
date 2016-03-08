@@ -43,6 +43,16 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		18817F1E1C897CFB00FBA6B1 /* WalletsCellFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18817F1D1C897CFB00FBA6B1 /* WalletsCellFactory.swift */; };
+		18817F221C89B28B00FBA6B1 /* DonationDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18817F201C89B28B00FBA6B1 /* DonationDetailsViewController.swift */; };
+		18817F231C89B28B00FBA6B1 /* PositionIn.DonationDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18817F211C89B28B00FBA6B1 /* PositionIn.DonationDetailsViewController.xib */; };
+		18CCFAF51C8D841900603C7F /* BoughtProductDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CCFAF31C8D841900603C7F /* BoughtProductDetailsViewController.swift */; };
+		18CCFAF61C8D841900603C7F /* PositionIn.BoughtProductDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18CCFAF41C8D841900603C7F /* PositionIn.BoughtProductDetailsViewController.xib */; };
+		18CCFAF81C8D89E800603C7F /* VoiceVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CCFAF71C8D89E800603C7F /* VoiceVerificationViewController.swift */; };
+		18CCFAFB1C8D8AAB00603C7F /* MembershipMemberDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CCFAFA1C8D8AAA00603C7F /* MembershipMemberDetailsViewController.swift */; };
+		18CCFB011C8D8AEB00603C7F /* MembershipMemberDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18CCFB001C8D8AEB00603C7F /* MembershipMemberDetailsViewController.xib */; };
+		18CCFB041C8D8B1900603C7F /* MembershipBraintreeConfirmPaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CCFB031C8D8B1900603C7F /* MembershipBraintreeConfirmPaymentViewController.swift */; };
+		18F3313F1C8871870010321B /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F3313D1C8871870010321B /* Order.swift */; };
 		1A56454F1ADF6D1BF3022FB3 /* BraintreePaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A564EEB40AD56FD2C113F2A /* BraintreePaymentViewController.swift */; };
 		1A5647F5D0FCC84FA5BF21FF /* MpesaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A56419027EC5956741AF471 /* MpesaViewController.swift */; };
 		1A564902D955532DE5B29A65 /* ErrorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A56438E04F9AD6CBDA75AC9 /* ErrorCell.swift */; };
@@ -114,6 +124,8 @@
 		CD8ED0DE1C60BE7000576DBF /* MembershipCardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD8ED0DD1C60BE7000576DBF /* MembershipCardView.xib */; };
 		CD8ED0E01C60BE7C00576DBF /* MembershipCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8ED0DF1C60BE7C00576DBF /* MembershipCardView.swift */; };
 		CD8ED0E21C60D35900576DBF /* MembershipDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8ED0E11C60D35900576DBF /* MembershipDetails.swift */; };
+		CD9CA0F51C7F3E50007B26AA /* MoreInformationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9CA0F41C7F3E50007B26AA /* MoreInformationCell.swift */; };
+		CD9CA0FB1C7F5397007B26AA /* MoreInformationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD9CA0FA1C7F5397007B26AA /* MoreInformationCell.xib */; };
 		CDB5B5C81C5B9C2400413715 /* MembershipPlanDetailsBenefitTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB5B5C01C5B9C2400413715 /* MembershipPlanDetailsBenefitTableViewCell.swift */; };
 		CDB5B5C91C5B9C2400413715 /* MembershipPlanDetailsBenefitTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CDB5B5C11C5B9C2400413715 /* MembershipPlanDetailsBenefitTableViewCell.xib */; };
 		CDB5B5CA1C5B9C2400413715 /* MembershipPlanDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CDB5B5C21C5B9C2400413715 /* MembershipPlanDetailsViewController.xib */; };
@@ -152,6 +164,7 @@
 		D1379E901C2AC58F0041AA4E /* ExploreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1379E8F1C2AC58F0041AA4E /* ExploreViewController.swift */; };
 		D1379E941C2C21F80041AA4E /* NewsCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1379E921C2C21F80041AA4E /* NewsCardCell.swift */; };
 		D1379E951C2C21F80041AA4E /* PositionIn.NewsCardCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1379E931C2C21F80041AA4E /* PositionIn.NewsCardCell.xib */; };
+		D1381AD61C8D76C700328D86 /* PushNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1381AD51C8D76C700328D86 /* PushNotification.swift */; };
 		D153AB841C11FA9B00DFB5C9 /* AmbulanceRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D153AB831C11FA9B00DFB5C9 /* AmbulanceRequest.swift */; };
 		D154411A1C47D642006251B7 /* Volunteer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15441191C47D642006251B7 /* Volunteer.swift */; };
 		D15F47441C088A26009ED3FD /* HomeItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15F47431C088A26009ED3FD /* HomeItem.swift */; };
@@ -188,7 +201,7 @@
 		D1F1FF2F1C24265B006D2E75 /* PositionIn.GiveBloodDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1F1FF2D1C24265B006D2E75 /* PositionIn.GiveBloodDetailsViewController.xib */; };
 		D1F3E8091C74DD1200EFC8ED /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F3E8071C74DD1200EFC8ED /* NotificationViewController.swift */; };
 		D1F3E80A1C74DD1200EFC8ED /* NotificationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1F3E8081C74DD1200EFC8ED /* NotificationViewController.xib */; };
-		D1F3E80C1C75D2B300EFC8ED /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F3E80B1C75D2B300EFC8ED /* Notification.swift */; };
+		D1F3E80C1C75D2B300EFC8ED /* SystemNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F3E80B1C75D2B300EFC8ED /* SystemNotification.swift */; };
 		D1F3E8141C7628C100EFC8ED /* NotificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F3E8121C7628C100EFC8ED /* NotificationTableViewCell.swift */; };
 		D1F3E8151C7628C100EFC8ED /* PositionIn.NotificationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1F3E8131C7628C100EFC8ED /* PositionIn.NotificationTableViewCell.xib */; };
 		D1F86CF11BFCAA96006E0C49 /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D1F86CF01BFCAA96006E0C49 /* Onboarding.storyboard */; };
@@ -554,6 +567,16 @@
 
 /* Begin PBXFileReference section */
 		040F01865A9A2BB68F3FDBFF /* Pods-PositionIn.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PositionIn.release.xcconfig"; path = "Pods/Target Support Files/Pods-PositionIn/Pods-PositionIn.release.xcconfig"; sourceTree = "<group>"; };
+		18817F1D1C897CFB00FBA6B1 /* WalletsCellFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletsCellFactory.swift; sourceTree = "<group>"; };
+		18817F201C89B28B00FBA6B1 /* DonationDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DonationDetailsViewController.swift; sourceTree = "<group>"; };
+		18817F211C89B28B00FBA6B1 /* PositionIn.DonationDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.DonationDetailsViewController.xib; sourceTree = "<group>"; };
+		18CCFAF31C8D841900603C7F /* BoughtProductDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoughtProductDetailsViewController.swift; sourceTree = "<group>"; };
+		18CCFAF41C8D841900603C7F /* PositionIn.BoughtProductDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.BoughtProductDetailsViewController.xib; sourceTree = "<group>"; };
+		18CCFAF71C8D89E800603C7F /* VoiceVerificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VoiceVerificationViewController.swift; sourceTree = "<group>"; };
+		18CCFAFA1C8D8AAA00603C7F /* MembershipMemberDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MembershipMemberDetailsViewController.swift; sourceTree = "<group>"; };
+		18CCFB001C8D8AEB00603C7F /* MembershipMemberDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MembershipMemberDetailsViewController.xib; sourceTree = "<group>"; };
+		18CCFB031C8D8B1900603C7F /* MembershipBraintreeConfirmPaymentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MembershipBraintreeConfirmPaymentViewController.swift; sourceTree = "<group>"; };
+		18F3313D1C8871870010321B /* Order.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
 		1A5640E770D4CB872B2E4605 /* PaymentReponseDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentReponseDelegate.swift; sourceTree = "<group>"; };
 		1A56419027EC5956741AF471 /* MpesaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MpesaViewController.swift; sourceTree = "<group>"; };
 		1A56438E04F9AD6CBDA75AC9 /* ErrorCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorCell.swift; sourceTree = "<group>"; };
@@ -635,6 +658,8 @@
 		CD8ED0DD1C60BE7000576DBF /* MembershipCardView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MembershipCardView.xib; sourceTree = "<group>"; };
 		CD8ED0DF1C60BE7C00576DBF /* MembershipCardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MembershipCardView.swift; sourceTree = "<group>"; };
 		CD8ED0E11C60D35900576DBF /* MembershipDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MembershipDetails.swift; sourceTree = "<group>"; };
+		CD9CA0F41C7F3E50007B26AA /* MoreInformationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreInformationCell.swift; sourceTree = "<group>"; };
+		CD9CA0FA1C7F5397007B26AA /* MoreInformationCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MoreInformationCell.xib; sourceTree = "<group>"; };
 		CDB5B5C01C5B9C2400413715 /* MembershipPlanDetailsBenefitTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MembershipPlanDetailsBenefitTableViewCell.swift; sourceTree = "<group>"; };
 		CDB5B5C11C5B9C2400413715 /* MembershipPlanDetailsBenefitTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MembershipPlanDetailsBenefitTableViewCell.xib; sourceTree = "<group>"; };
 		CDB5B5C21C5B9C2400413715 /* MembershipPlanDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MembershipPlanDetailsViewController.xib; sourceTree = "<group>"; };
@@ -674,6 +699,7 @@
 		D1379E8F1C2AC58F0041AA4E /* ExploreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExploreViewController.swift; sourceTree = "<group>"; };
 		D1379E921C2C21F80041AA4E /* NewsCardCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsCardCell.swift; sourceTree = "<group>"; };
 		D1379E931C2C21F80041AA4E /* PositionIn.NewsCardCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.NewsCardCell.xib; sourceTree = "<group>"; };
+		D1381AD51C8D76C700328D86 /* PushNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushNotification.swift; sourceTree = "<group>"; };
 		D153AB831C11FA9B00DFB5C9 /* AmbulanceRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AmbulanceRequest.swift; sourceTree = "<group>"; };
 		D15441191C47D642006251B7 /* Volunteer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Volunteer.swift; sourceTree = "<group>"; };
 		D15F47431C088A26009ED3FD /* HomeItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeItem.swift; sourceTree = "<group>"; };
@@ -712,7 +738,7 @@
 		D1F1FF2D1C24265B006D2E75 /* PositionIn.GiveBloodDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.GiveBloodDetailsViewController.xib; sourceTree = "<group>"; };
 		D1F3E8071C74DD1200EFC8ED /* NotificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
 		D1F3E8081C74DD1200EFC8ED /* NotificationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NotificationViewController.xib; sourceTree = "<group>"; };
-		D1F3E80B1C75D2B300EFC8ED /* Notification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
+		D1F3E80B1C75D2B300EFC8ED /* SystemNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SystemNotification.swift; sourceTree = "<group>"; };
 		D1F3E8121C7628C100EFC8ED /* NotificationTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationTableViewCell.swift; sourceTree = "<group>"; };
 		D1F3E8131C7628C100EFC8ED /* PositionIn.NotificationTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.NotificationTableViewCell.xib; sourceTree = "<group>"; };
 		D1F86CF01BFCAA96006E0C49 /* Onboarding.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Onboarding.storyboard; sourceTree = "<group>"; };
@@ -1259,6 +1285,48 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		180158B21C89FDB100A10878 /* BoughtProductDetails */ = {
+			isa = PBXGroup;
+			children = (
+				18CCFAF31C8D841900603C7F /* BoughtProductDetailsViewController.swift */,
+				18CCFAF41C8D841900603C7F /* PositionIn.BoughtProductDetailsViewController.xib */,
+			);
+			path = BoughtProductDetails;
+			sourceTree = "<group>";
+		};
+		18817F1F1C89B28B00FBA6B1 /* DonationDetails */ = {
+			isa = PBXGroup;
+			children = (
+				18817F201C89B28B00FBA6B1 /* DonationDetailsViewController.swift */,
+				18817F211C89B28B00FBA6B1 /* PositionIn.DonationDetailsViewController.xib */,
+			);
+			path = DonationDetails;
+			sourceTree = "<group>";
+		};
+		18CCFAF91C8D8AAA00603C7F /* MemberDetails */ = {
+			isa = PBXGroup;
+			children = (
+				18CCFAFA1C8D8AAA00603C7F /* MembershipMemberDetailsViewController.swift */,
+			);
+			path = MemberDetails;
+			sourceTree = "<group>";
+		};
+		18CCFAFF1C8D8AEB00603C7F /* MemberDetails */ = {
+			isa = PBXGroup;
+			children = (
+				18CCFB001C8D8AEB00603C7F /* MembershipMemberDetailsViewController.xib */,
+			);
+			path = MemberDetails;
+			sourceTree = "<group>";
+		};
+		18CCFB021C8D8B1900603C7F /* BraintreeConfirmPayment */ = {
+			isa = PBXGroup;
+			children = (
+				18CCFB031C8D8B1900603C7F /* MembershipBraintreeConfirmPaymentViewController.swift */,
+			);
+			path = BraintreeConfirmPayment;
+			sourceTree = "<group>";
+		};
 		1A564C3EC8DDC78E3A580F36 /* Mpesa */ = {
 			isa = PBXGroup;
 			children = (
@@ -1390,6 +1458,7 @@
 		CD33581E1C6CCE2F00E78267 /* Attachments */ = {
 			isa = PBXGroup;
 			children = (
+				CD9CA0F31C7F3E43007B26AA /* MoreInformationCell */,
 				CD33581F1C6CD19A00E78267 /* MoreInformationViewController.swift */,
 			);
 			path = Attachments;
@@ -1506,6 +1575,7 @@
 		CD795BEC1C57BA8100C1C298 /* Interface */ = {
 			isa = PBXGroup;
 			children = (
+				18CCFAFF1C8D8AEB00603C7F /* MemberDetails */,
 				CD21EA491C68E39900E50909 /* MPesaDetails */,
 				CDE1B90B1C5F657300F76F32 /* MemberProfile */,
 				CD8ED0D71C60AD5000576DBF /* MemberCard */,
@@ -1585,6 +1655,15 @@
 				CD8ED0DF1C60BE7C00576DBF /* MembershipCardView.swift */,
 			);
 			path = MembershipCardView;
+			sourceTree = "<group>";
+		};
+		CD9CA0F31C7F3E43007B26AA /* MoreInformationCell */ = {
+			isa = PBXGroup;
+			children = (
+				CD9CA0F41C7F3E50007B26AA /* MoreInformationCell.swift */,
+				CD9CA0FA1C7F5397007B26AA /* MoreInformationCell.xib */,
+			);
+			path = MoreInformationCell;
 			sourceTree = "<group>";
 		};
 		CDB5B5BE1C5B9C2400413715 /* PlanDetails */ = {
@@ -1797,6 +1876,8 @@
 		D1DA1EAF1C5909D7009F5AFA /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				18CCFB021C8D8B1900603C7F /* BraintreeConfirmPayment */,
+				18CCFAF91C8D8AAA00603C7F /* MemberDetails */,
 				CD21EA5F1C68F9FF00E50909 /* MPesaConfirmPayment */,
 				CDE1B9081C5F648700F76F32 /* MemberProfile */,
 				CD795C811C5A6DCB00C1C298 /* Plans */,
@@ -1864,6 +1945,7 @@
 		D1F86CEF1BFCAA72006E0C49 /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
+				18CCFAF71C8D89E800603C7F /* VoiceVerificationViewController.swift */,
 				D1F86CF01BFCAA96006E0C49 /* Onboarding.storyboard */,
 				D1F86CF21BFCBAD3006E0C49 /* PhoneNumberViewController.swift */,
 				D12EDEC61BFF4F0D00FB6245 /* PhoneVerificationViewController.swift */,
@@ -2123,8 +2205,8 @@
 		E64DC34C1B4E53C90011D37C /* PositionIn */ = {
 			isa = PBXGroup;
 			children = (
-				CD076E851C739215005C04C2 /* News */,
 				CD795BC71C57B4C700C1C298 /* Classes */,
+				CD076E851C739215005C04C2 /* News */,
 				D1F3E8061C74DC9000EFC8ED /* NotificationViewController */,
 				CD33581E1C6CCE2F00E78267 /* Attachments */,
 				CDBDD9A71C47AFB2007578BC /* Volunteer */,
@@ -2143,7 +2225,6 @@
 				D1F86CEF1BFCAA72006E0C49 /* Onboarding */,
 				2429FFA21B8E00770061B4E0 /* Utils */,
 				E6018E4E1B849266001D22FA /* ClassExtensions */,
-				E68B51FF1B87351E006B980C /* CellModels */,
 				E660E52A1B5AC23B00F52050 /* MainMenu */,
 				E62B17001B5CE39400D446BC /* Browse */,
 				E6D4D5B01B6F8186003134CB /* Search */,
@@ -2159,8 +2240,11 @@
 				E61B20D61B7E0806005EAB2C /* Settings */,
 				D18A1FD91BEB95AF003F158D /* ChangePassword */,
 				E6F7A46E1BA333B30069152A /* Wallet */,
+				18817F1F1C89B28B00FBA6B1 /* DonationDetails */,
+				180158B21C89FDB100A10878 /* BoughtProductDetails */,
 				E62B16F91B5CDED600D446BC /* Messaging */,
 				E6325F5F1B57D89A00996480 /* ViewControllers */,
+				E68B51FF1B87351E006B980C /* CellModels */,
 				E6325F581B57D46C00996480 /* Views */,
 				E6C5CE171B83A21500265955 /* DAL */,
 				E660E5251B5AB82000F52050 /* Models */,
@@ -2190,7 +2274,10 @@
 		E660E5251B5AB82000F52050 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				18F3313D1C8871870010321B /* Order.swift */,
 				D1F3E80B1C75D2B300EFC8ED /* Notification.swift */,
+				D1381AD51C8D76C700328D86 /* PushNotification.swift */,
+				D1F3E80B1C75D2B300EFC8ED /* SystemNotification.swift */,
 				CDC102481C6CC091009FF6D9 /* Attachment.swift */,
 				D1B1F1E11C6B194E00D43A3B /* MPesaPayment.swift */,
 				CD8ED0E11C60D35900576DBF /* MembershipDetails.swift */,
@@ -3235,6 +3322,7 @@
 		E68B51FF1B87351E006B980C /* CellModels */ = {
 			isa = PBXGroup;
 			children = (
+				18817F1D1C897CFB00FBA6B1 /* WalletsCellFactory.swift */,
 				500D7FA41BC2ADFE008C8C82 /* SearchItemCellModel.swift */,
 				E68B52001B873545006B980C /* FeedTableViewCellModel.swift */,
 				E68B52021B873687006B980C /* FeedItemCellModelFactory.swift */,
@@ -3659,6 +3747,7 @@
 				CD795BE11C57B4EE00C1C298 /* Snapfile in Resources */,
 				CD795BDF1C57B4EE00C1C298 /* Fastfile in Resources */,
 				CD8ED0DE1C60BE7000576DBF /* MembershipCardView.xib in Resources */,
+				18CCFB011C8D8AEB00603C7F /* MembershipMemberDetailsViewController.xib in Resources */,
 				50C7B5B21BC6A32900E8E8B4 /* PositionIn.SettingsViewController.xib in Resources */,
 				E6BEF1E81B9C83F200511B46 /* PositionIn.CommunityInfoCell.xib in Resources */,
 				CD552DD41C75DF670012920F /* PositionIn.NewsTableViewCell.xib in Resources */,
@@ -3669,6 +3758,7 @@
 				D1F86CF11BFCAA96006E0C49 /* Onboarding.storyboard in Resources */,
 				D1F1FF261C22F384006D2E75 /* PositionIn.VolunteerDetailsViewController.xib in Resources */,
 				CD0FCC2F1C69ECD800AFD36C /* TotalCell.xib in Resources */,
+				CD9CA0FB1C7F5397007B26AA /* MoreInformationCell.xib in Resources */,
 				CDEDD96C1C45033C00396594 /* PostToContainerViewController.xib in Resources */,
 				D13039FC1C721960004B673F /* PositionIn.AttendEventCell.xib in Resources */,
 				CD21EA551C68E89B00E50909 /* MPesaIndicatorView.xib in Resources */,
@@ -3679,6 +3769,7 @@
 				E6F2436E1B8B0E3A0033B13C /* PositionIn.MainMenuLoginCell.xib in Resources */,
 				D1FD85471C1EF6DB00C2E87B /* PositionIn.BomaHotelsDetailsViewController.xib in Resources */,
 				E689F0791B6B911F00597587 /* PositionIn.ProductInventoryViewController.xib in Resources */,
+				18CCFAF61C8D841900603C7F /* PositionIn.BoughtProductDetailsViewController.xib in Resources */,
 				500D7FA91BC2CD39008C8C82 /* PositionIn.SearchEntityCell.xib in Resources */,
 				E6C952341BA1D9960032254F /* PositionIn.ProfileInfoCell.xib in Resources */,
 				E6D4D5B51B6F8B9F003134CB /* PositionIn.SearchBar.xib in Resources */,
@@ -3688,6 +3779,7 @@
 				E660E52E1B5AC23B00F52050 /* PositionIn.MainMenuViewController.xib in Resources */,
 				CDB5B5CA1C5B9C2400413715 /* MembershipPlanDetailsViewController.xib in Resources */,
 				D161F7741C68E4F300EBDB94 /* MarketPaymentView.xib in Resources */,
+				18817F231C89B28B00FBA6B1 /* PositionIn.DonationDetailsViewController.xib in Resources */,
 				E6C952351BA1D9960032254F /* PositionIn.ProfileStatsCell.xib in Resources */,
 				50FA43301C44F0B50050B00E /* ErrorCell.xib in Resources */,
 				E62B16F51B5C1AA700D446BC /* PositionIn.MainMenuUserCell.xib in Resources */,
@@ -3908,6 +4000,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D1381AD61C8D76C700328D86 /* PushNotification.swift in Sources */,
 				D18EA2CE1C04B38400A886A5 /* BrowseGridViewController.swift in Sources */,
 				500D7FA81BC2CD39008C8C82 /* SearchEntityCell.swift in Sources */,
 				E6325F721B57E1DA00996480 /* Storyboards.swift in Sources */,
@@ -3919,6 +4012,7 @@
 				50FA432C1C4404CC0050B00E /* PaymentProtocol.swift in Sources */,
 				E6F7A4811BA356500069152A /* LocationSearchResultDataSource.swift in Sources */,
 				E62B16FF1B5CE0F800D446BC /* BesideMenuViewController.swift in Sources */,
+				18CCFB041C8D8B1900603C7F /* MembershipBraintreeConfirmPaymentViewController.swift in Sources */,
 				E66F901B1BA6A5C100280B77 /* ChatController.swift in Sources */,
 				D1B780C81C0F4E7700EF5825 /* DonateViewController.swift in Sources */,
 				CD552DD71C75DFB80012920F /* NewsCellModelFactory.swift in Sources */,
@@ -3929,7 +4023,7 @@
 				E6FC24C31BAAEC23006FE7A0 /* Conversation.swift in Sources */,
 				CD795C801C5A382000C1C298 /* MembershipPlan.swift in Sources */,
 				E66115A81B73AE0F003DB5B3 /* AddPromotionViewController.swift in Sources */,
-				D1F3E80C1C75D2B300EFC8ED /* Notification.swift in Sources */,
+				D1F3E80C1C75D2B300EFC8ED /* SystemNotification.swift in Sources */,
 				D1DA1EBC1C5909D7009F5AFA /* MembershipConfirmDetailsViewController.swift in Sources */,
 				D1FD85351C1EE8A800C2E87B /* EmergencyDetailsController.swift in Sources */,
 				CDD9AA1B1C6E2CDF007C7556 /* PostAttachmentsCell.swift in Sources */,
@@ -3938,7 +4032,9 @@
 				D19A19FF1C69F8890099038F /* MPesaPaymentCompleteViewController.swift in Sources */,
 				D1DA1EBF1C5909D7009F5AFA /* MembershipPlanDetailsViewController.swift in Sources */,
 				CD21EA381C63A78800E50909 /* MembershipMemberProfileViewController.swift in Sources */,
+				18CCFAFB1C8D8AAB00603C7F /* MembershipMemberDetailsViewController.swift in Sources */,
 				500D7FA31BC2AACF008C8C82 /* SearchItem.swift in Sources */,
+				18817F221C89B28B00FBA6B1 /* DonationDetailsViewController.swift in Sources */,
 				E661158D1B73778B003DB5B3 /* RecoverPasswordViewController.swift in Sources */,
 				50D1AFA61BBAD21400957882 /* PostLikeCommentCell.swift in Sources */,
 				CD795BE71C57B9AA00C1C298 /* BaseRouter.swift in Sources */,
@@ -3975,6 +4071,7 @@
 				E6BEF1D91B9C671D00511B46 /* PostInfoCell.swift in Sources */,
 				CDEDD96B1C45033C00396594 /* PostToContainerViewController.swift in Sources */,
 				D1B780CD1C0F519600EF5825 /* DonateCell.swift in Sources */,
+				18CCFAF81C8D89E800603C7F /* VoiceVerificationViewController.swift in Sources */,
 				D18A1FDC1BEB95D9003F158D /* ChangePasswordViewController.swift in Sources */,
 				CDE1B90F1C5F678B00F76F32 /* LocalizedString.swift in Sources */,
 				E6D7F83B1BE24AE500A544F4 /* MainMenuBadgeCell.swift in Sources */,
@@ -3985,7 +4082,9 @@
 				E62B17061B5CE3EB00D446BC /* BrowseViewController.swift in Sources */,
 				E6BEF1E41B9C83F200511B46 /* CommunityHeaderCell.swift in Sources */,
 				243D0AA81B8AF90800B0E220 /* RegisterInfoViewController.swift in Sources */,
+				18CCFAF51C8D841900603C7F /* BoughtProductDetailsViewController.swift in Sources */,
 				E6D4D5B21B6F81A7003134CB /* SearchViewController.swift in Sources */,
+				18817F1E1C897CFB00FBA6B1 /* WalletsCellFactory.swift in Sources */,
 				D1B780CA1C0F4E9E00EF5825 /* SelectPaymentMethodController.swift in Sources */,
 				E66115991B73A0CB003DB5B3 /* BrowseListViewController.swift in Sources */,
 				D1FD853E1C1EE8D800C2E87B /* PromotionDetailsViewController.swift in Sources */,
@@ -4023,6 +4122,7 @@
 				CDC102491C6CC091009FF6D9 /* Attachment.swift in Sources */,
 				CDE1B9041C5BBE5900F76F32 /* MembershipPageView.swift in Sources */,
 				E68B52061B8736F4006B980C /* FilterViewController.swift in Sources */,
+				CD9CA0F51C7F3E50007B26AA /* MoreInformationCell.swift in Sources */,
 				E62B16F61B5C1AA700D446BC /* MainMenuUserCell.swift in Sources */,
 				E6F3093E1BA81FAF00C9420C /* PickPhotoView.swift in Sources */,
 				E6C5CE1D1B83A28C00265955 /* SessionController.swift in Sources */,
@@ -4119,6 +4219,7 @@
 				E61B20D81B7E0838005EAB2C /* SettingsViewController.swift in Sources */,
 				CD795C4C1C590BEE00C1C298 /* SegmentedControlContainerViewController.swift in Sources */,
 				1A56454F1ADF6D1BF3022FB3 /* BraintreePaymentViewController.swift in Sources */,
+				18F3313F1C8871870010321B /* Order.swift in Sources */,
 				1A56491DAEFA315F9DB47400 /* PaymentReponseDelegate.swift in Sources */,
 				1A564902D955532DE5B29A65 /* ErrorCell.swift in Sources */,
 				1A5647F5D0FCC84FA5BF21FF /* MpesaViewController.swift in Sources */,

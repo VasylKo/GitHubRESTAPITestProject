@@ -144,7 +144,8 @@ class PhoneNumberViewController: XLFormViewController {
             alertController.addAction(cancelAction)
             
             let OKAction = UIAlertAction(title: "Yes", style: .Default) {[weak self] (action) in
-                api().verifyPhone(phoneNumber).onSuccess(callback: {[weak self] in
+                let smsCode = NSNumber(int: 1)
+                api().verifyPhone(phoneNumber, type: smsCode).onSuccess(callback: {[weak self] in
                     let validationController = Storyboards.Onboarding.instantiatePhoneVerificationController()
                     validationController.phoneNumber = phoneNumber
                     self?.navigationController?.pushViewController(validationController, animated: true)

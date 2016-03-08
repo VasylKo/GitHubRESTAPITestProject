@@ -67,7 +67,7 @@ class MpesaViewController : XLFormViewController, PaymentProtocol {
         donateProjectRow.cellConfigAtConfigure["projectIconURL"] = self.product?.imageURL
         donateToSection.addFormRow(donateProjectRow)
         let totalProjectRow: XLFormRowDescriptor = XLFormRowDescriptor(tag: nil, rowType: XLFormRowDescriptorTypeTotal)
-        totalProjectRow.cellConfigAtConfigure["price"] = "KSH \(self.amount ?? 0)"
+        totalProjectRow.cellConfigAtConfigure["price"] = "\(AppConfiguration().currencySymbol) \(self.amount ?? 0)"
         donateToSection.addFormRow(totalProjectRow)
         
         self.form = form

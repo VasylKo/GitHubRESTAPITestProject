@@ -7,8 +7,9 @@
 //
 
 import Foundation
+import MessageUI
 
-class MembershipPlansViewController : UIViewController, UITableViewDelegate, UITableViewDataSource {
+class MembershipPlansViewController : UIViewController, UITableViewDelegate, UITableViewDataSource, MFMailComposeViewControllerDelegate {
     
     private let router : MembershipRouter
     private var plans : [MembershipPlan] = []
@@ -21,6 +22,10 @@ class MembershipPlansViewController : UIViewController, UITableViewDelegate, UIT
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var bottomView: UIView!
     @IBOutlet weak var spaceBetweenBottomViewAndTableViewContstraint: NSLayoutConstraint!
+    
+    let website = "http://www.redcross.or.ke"
+    let phone = "+254703037000"
+    let email = "membership@redcross.or.ke"
     
     //MARK: Initializers
     
@@ -101,6 +106,57 @@ class MembershipPlansViewController : UIViewController, UITableViewDelegate, UIT
     //MARK: Target-Action
     
     @IBAction func alreadyMemberPressed(sender: AnyObject) {
-        self.router.dismissMembership(from: self)
+        let actionSheetController: UIAlertController = UIAlertController(title: NSLocalizedString("Please contact our support"), message: nil, preferredStyle: .ActionSheet)
+        let cancelActionButton: UIAlertAction = UIAlertAction(title: NSLocalizedString("Cancel"), style: .Cancel, handler: nil)
+        actionSheetController.addAction(cancelActionButton)
+        
+        let callAction: UIAlertAction = UIAlertAction(title: NSLocalizedString("Call Support"), style: .Default)
+            { action -> Void in
+                UIApplication.sharedApplication().openURL(NSURL(string:"telprompt:" + self.phone)!)
+        }
+        actionSheetController.addAction(callAction)
+        
+        let emailAction: UIAlertAction = UIAlertAction(title: NSLocalizedString("Email Support"), style: .Default)
+            { action -> Void in
+                let mailComposeViewController = self.configuredMailComposeViewController()
+                if MFMailComposeViewController.canSendMail() {
+                    self.presentViewController(mailComposeViewController, animated: true, completion: nil)
+                } else {
+                    self.showSendMailErrorAlert()
+                }
+        }
+        actionSheetController.addAction(emailAction)
+        
+        let websiteAction: UIAlertAction = UIAlertAction(title: NSLocalizedString("Visit Website"), style: .Default)
+            { action -> Void in
+                let websiteURL = NSURL(string: "http://www.redcross.or.ke")!
+                OpenApplication.Safari(with: websiteURL)
+        }
+        actionSheetController.addAction(websiteAction)
+        
+        self.presentViewController(actionSheetController, animated: true, completion: nil)
+    }
+    
+    //MARK: MFMailComposeViewControllerDelegate
+    
+    func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
+        controller.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    //MARK: Private
+    
+    func configuredMailComposeViewController() -> MFMailComposeViewController {
+        let mailComposerVC = MFMailComposeViewController()
+        mailComposerVC.mailComposeDelegate = self
+        mailComposerVC.setToRecipients([self.email])
+        return mailComposerVC
+    }
+    
+    func showSendMailErrorAlert() {
+        let sendMailErrorAlert = UIAlertView(title: NSLocalizedString("Could Not Send Email"),
+            message: NSLocalizedString("Your device could not send e-mail.  Please check e-mail configuration and try again."),
+            delegate: self,
+            cancelButtonTitle: "OK")
+        sendMailErrorAlert.show()
     }
 }

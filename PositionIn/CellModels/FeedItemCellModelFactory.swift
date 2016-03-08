@@ -11,7 +11,7 @@ import PosInCore
 
 struct FeedItemCellModelFactory {
     
-    func compactModelsForItem(feedItem: FeedItem) -> [TableViewCellModel] {
+    func compactModelsForItem(delegate : ActionsDelegate, feedItem: FeedItem) -> [TableViewCellModel] {
         switch feedItem.type {
         case .GiveBlood:
             fallthrough
@@ -35,8 +35,8 @@ struct FeedItemCellModelFactory {
             fallthrough
         case .Project:
             return [
-                CompactFeedTableCellModel(itemType: feedItem.type,
-                    objectID: feedItem.objectId,
+                CompactFeedTableCellModel(delegate:delegate,
+                    item: feedItem,
                     title: feedItem.name,
                     details: feedItem.author?.title,
                     info: nil,
@@ -47,6 +47,7 @@ struct FeedItemCellModelFactory {
                     location: feedItem.location,
                     numOfLikes: feedItem.numOfLikes,
                     numOfComments: feedItem.numOfComments,
+                    numOfParticipants: feedItem.numOfParticipants,
                     date: feedItem.date,
                     data: feedItem.itemData)
             ]
@@ -59,7 +60,7 @@ struct FeedItemCellModelFactory {
     
     func compactCellReuseIdForModel(model: TableViewCellModel, showCardCells: Bool) -> String {
         if let model = model as? CompactFeedTableCellModel {
-            switch model.itemType {
+            switch model.item.type {
             case .Post:
                 fallthrough
             case .News:
@@ -107,33 +108,6 @@ struct FeedItemCellModelFactory {
 
     func detailedCellsReuseId() -> [String]  {
         return [ExploreCardCell.reuseId(), NewsCardCell.reuseId()]
-    }
-    
-    func walletModelsForItem(feedItem: FeedItem) -> [TableViewCellModel] {
-        return [
-            ComapctBadgeFeedTableCellModel (
-                itemType: feedItem.type,
-                objectID: feedItem.objectId,
-                title: feedItem.name,
-                details: feedItem.details,
-                info: feedItem.text,
-                text: feedItem.text,
-                imageURL: feedItem.image,
-                avatarURL: nil,
-                badge: feedItem.price.map {
-                    let newValue = $0 as Float
-                    return AppConfiguration().currencyFormatter.stringFromNumber(NSNumber(float: newValue)) ?? ""},
-                data: feedItem.itemData
-            ),
-        ]
-    }
-    
-    func walletReuseIdForModel(model: TableViewCellModel) -> String {
-        return EventListCell.reuseId()
-    }
-    
-    func walletReuseId() -> [String]  {
-        return [EventListCell.reuseId()]
     }
     
     private let dateFormatter: NSDateFormatter = {

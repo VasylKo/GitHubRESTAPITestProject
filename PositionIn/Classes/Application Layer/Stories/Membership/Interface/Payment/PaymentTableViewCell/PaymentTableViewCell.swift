@@ -19,12 +19,6 @@ class PaymentTableViewCell: XLFormBaseCell {
         }
     }
     
-    var priceString: String? {
-        didSet{
-            self.priceLabel.text = priceString
-        }
-    }
-    
     var planString: String? {
         didSet{
             self.planName.text = planString
@@ -38,9 +32,6 @@ class PaymentTableViewCell: XLFormBaseCell {
     }
     
     @IBOutlet private weak var totalLabel: UILabel!
-    @IBOutlet private weak var feeLabel: UILabel!
-    @IBOutlet private weak var taxLabel: UILabel!
-    @IBOutlet private weak var priceLabel: UILabel!
     @IBOutlet private weak var planName: UILabel!
     @IBOutlet private weak var planImageView: UIImageView!
 }

@@ -37,7 +37,7 @@ class MembershipCardView : UIView {
             self.profileImageView.setImageFromURL(avatarURL)
         }
         self.cardIdLabel.text = profile.membershipDetails?.membershipCardId
-        self.priceLabel.text = String("KES \(plan.price ?? 0)")
+        self.priceLabel.text = String("\(AppConfiguration().currencySymbol) \(plan.price ?? 0)")
         self.planNameLabel.text = plan.name
         self.expirationDateLabel.text = self.stringFromDate(profile.membershipDetails?.endDate)
         self.backgroundImageView.image = UIImage(named: profile.membershipDetails?.membershipCardImageName ?? "")

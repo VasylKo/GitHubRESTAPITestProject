@@ -48,7 +48,7 @@ class MembershipPlanDetailsViewController: UIViewController, UITableViewDataSour
         
         self.membershipPlanImageView.image = UIImage(named : self.plan.membershipImageName)
         self.membershipPlanTitleLabel.text = self.plan.name
-        self.priceLabel.text = String("KES \(self.plan.price ?? 0) Annually")
+        self.priceLabel.text = String("\(AppConfiguration().currencySymbol) \(self.plan.price ?? 0) Annually")
         
         self.tableView.registerNib(UINib(nibName: String(MembershipPlanDetailsBenefitTableViewCell.self), bundle: nil), forCellReuseIdentifier: self.reuseIdentifier)
         self.tableView.rowHeight = UITableViewAutomaticDimension;

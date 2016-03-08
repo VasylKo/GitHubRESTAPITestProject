@@ -63,17 +63,9 @@ final class BomaHotelsDetailsViewController: UIViewController {
         if let price = bomaHotel.donations {
             priceLabel.text = "\(Int(price)) beneficiaries"
         }
-
-        let imageURL: NSURL?
-        
-        if let urlString = bomaHotel.imageURLString {
-            imageURL = NSURL(string:urlString)
-        } else {
-            imageURL = nil
-        }
         
         let image = UIImage(named: "bomaHotelPlaceholder")
-        productImageView.setImageFromURL(imageURL, placeholder: image)
+        productImageView.setImageFromURL(bomaHotel.imageURL, placeholder: image)
         if let coordinates = bomaHotel.location?.coordinates {
             self.productPinDistanceImageView.hidden = false
             locationRequestToken.invalidate()
@@ -113,8 +105,14 @@ final class BomaHotelsDetailsViewController: UIViewController {
              zeroSection.append(BomaHotelActionItem(title: NSLocalizedString("Booking", comment: "BomaHotels"), image: "productBuyProduct", action: .Buy))
         }
         
-        var firstSection = [BomaHotelActionItem(title: NSLocalizedString("Send Message", comment: "BomaHotels"), image: "productSendMessage", action: .SendMessage),
-            BomaHotelActionItem(title: NSLocalizedString("Organizer Profile", comment: "BomaHotels"), image: "productSellerProfile", action: .SellerProfile)]
+        var firstSection = [BomaHotelActionItem]()
+        
+        if self.author?.objectId != api().currentUserId() {
+            firstSection.append(BomaHotelActionItem(title: NSLocalizedString("Send Message", comment: "BomaHotels"), image: "productSendMessage", action: .SendMessage))
+            zeroSection.append(BomaHotelActionItem(title: NSLocalizedString("Organizer Profile", comment: "BomaHotels"),
+                image: "productSellerProfile", action: .SellerProfile))
+        }
+        
         if self.bomaHotel?.location != nil {
             firstSection.append(BomaHotelActionItem(title: NSLocalizedString("Navigate", comment: "BomaHotels"), image: "productNavigate", action: .Navigate))
         }

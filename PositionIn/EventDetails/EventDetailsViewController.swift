@@ -47,20 +47,12 @@ final class EventDetailsViewController: UIViewController {
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
         
-        let imageURL: NSURL?
-        
-        if let urlString = event.imageURLString {
-            imageURL = NSURL(string:urlString)
-        } else {
-            imageURL = nil
-        }
-        
         let image = UIImage(named: "eventDetailsPlaceholder")
         
         let startDate = dateFormatter.stringFromDate(event.startDate ?? NSDate())
         let endDate = dateFormatter.stringFromDate(event.endDate ?? NSDate())
         priceLabel.text = "\(startDate) - \(endDate)"
-        eventImageView.setImageFromURL(imageURL, placeholder: image)
+        eventImageView.setImageFromURL(self.event?.imageURL, placeholder: image)
         
         if event.location?.coordinates != nil {
             self.dataSource.items = self.eventActionItems()
@@ -86,9 +78,14 @@ final class EventDetailsViewController: UIViewController {
                 action: .Attend)
         ]
         
-        var firstSection = [ // 1 section
-            EventActionItem(title: NSLocalizedString("Send Message", comment: "Event action: Send Message"), image: "productSendMessage", action: .SendMessage),
-            EventActionItem(title: NSLocalizedString("Organizer Profile", comment: "Event action: Organizer Profile"), image: "productSellerProfile", action: .OrganizerProfile),]
+        var firstSection = [EventActionItem]() // 1 section
+        
+        if self.author?.objectId != api().currentUserId() {
+            firstSection.append(EventActionItem(title: NSLocalizedString("Send Message", comment: "Event action: Send Message"), image: "productSendMessage", action: .SendMessage))
+            firstSection.append(EventActionItem(title: NSLocalizedString("Organizer Profile", comment: "Event action: Organizer Profile"),
+                image: "productSellerProfile", action: .OrganizerProfile))
+        }
+        
         if self.event?.location != nil {
             firstSection.append(EventActionItem(title: NSLocalizedString("Navigate", comment: "Event action: Navigate"), image: "productNavigate", action: .Navigate))
         }

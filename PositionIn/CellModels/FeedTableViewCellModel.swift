@@ -10,16 +10,19 @@ import Foundation
 import PosInCore
 import CoreLocation
 
+protocol ActionsDelegate: class {
+    func like(item: FeedItem)
+}
+
 protocol FeedTableCellModel: TableViewCellModel {
-    var itemType: FeedItem.ItemType { get }
-    var objectID: CRUDObjectId { get }
+    weak var delegate: ActionsDelegate? { get }
+    var item: FeedItem { get }
     var data: Any? { get }
 }
 
 class CompactFeedTableCellModel: FeedTableCellModel {
     
-    let itemType: FeedItem.ItemType
-    let objectID: CRUDObjectId
+    let item : FeedItem
     let data: Any?
     
     let title: String?
@@ -30,15 +33,17 @@ class CompactFeedTableCellModel: FeedTableCellModel {
     let avatarURL: NSURL?
     let location: Location?
     let text : String?
-    
     let date: NSDate?
-    
     var numOfLikes: Int?
     var numOfComments: Int?
+    var numOfParticipants: Int?
     
-    init(itemType: FeedItem.ItemType, objectID: CRUDObjectId, title: String?, details: String?, info: String?, text: String?, price: Float?, imageURL: NSURL?, avatarURL:NSURL?, location: Location? = nil, numOfLikes: Int? = nil, numOfComments: Int? = nil, date: NSDate?, data: Any? = nil) {
-        self.objectID = objectID
-        self.itemType = itemType
+    weak var delegate : ActionsDelegate?
+    
+    init(delegate : ActionsDelegate?, item : FeedItem, title: String?, details: String?, info: String?, text: String?, price: Float?, imageURL: NSURL?, avatarURL:NSURL?, location: Location? = nil, numOfLikes: Int? = nil, numOfComments: Int? = nil,
+        numOfParticipants: Int? = nil,  date: NSDate?, data: Any? = nil) {
+        self.item = item
+        self.delegate = delegate
         self.title = title
         self.info = info
         self.details = details
@@ -49,10 +54,11 @@ class CompactFeedTableCellModel: FeedTableCellModel {
         self.location = location
         self.numOfLikes = numOfLikes
         self.numOfComments = numOfComments
+        self.numOfParticipants = numOfParticipants
         self.date = date
         self.text = text
         
-        switch itemType {
+        switch self.item.type {
         case .Emergency:
             fallthrough
         case .GiveBlood:
@@ -68,6 +74,8 @@ class CompactFeedTableCellModel: FeedTableCellModel {
                 locationController().distanceFromCoordinate(location.coordinates).onSuccess {
                     [weak self] distance in
                     let formatter = NSLengthFormatter()
+                    formatter.numberFormatter.maximumFractionDigits = 1
+                    formatter.unitStyle = .Long
                     self?.info = formatter.stringFromMeters(distance)
                 }
             }
@@ -82,6 +90,8 @@ class CompactFeedTableCellModel: FeedTableCellModel {
             fallthrough
         case .Post:
             fallthrough
+        case .Wallet:
+            fallthrough
         case .Unknown:
             break
         }
@@ -91,10 +101,10 @@ class CompactFeedTableCellModel: FeedTableCellModel {
 final class ComapctBadgeFeedTableCellModel : CompactFeedTableCellModel {
     let badge: String?
     
-    init(itemType: FeedItem.ItemType, objectID: CRUDObjectId, title: String?, details: String?, info: String?, text: String?, imageURL: NSURL?, avatarURL:NSURL?, badge: String?, data: Any?) {
+    init(delegate: ActionsDelegate?,item: FeedItem, title: String?, details: String?, info: String?, text: String?, imageURL: NSURL?, avatarURL:NSURL?, badge: String?, data: Any?) {
         self.badge = badge
-        super.init(itemType: itemType,
-            objectID: objectID,
+        super.init(delegate: delegate,
+            item: item,
             title: title,
             details: details,
             info: info,

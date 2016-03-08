@@ -9,26 +9,54 @@
 import ObjectMapper
 import CleanroomLogger
 
+enum Gender: Int, CustomStringConvertible {
+    case Male = 0
+    case Female
+    
+    var description: String {
+        switch self {
+        case .Male:
+            return "Male"
+        case .Female:
+            return "Female"
+        }
+    }
+}
+
+enum EducationLevel: String {
+    case PrimarySchool = "Primary School"
+    case SecondarySchool = "Secondary School"
+    case HighSchool = "High School"
+    case Diploma = "Diploma"
+    case Undergraduate = "Undergraduate"
+    case PostGraduateDiploma = "Post-graduate diploma"
+    case Masters = "Masters"
+    case PHD = "PHD"
+}
+
 final class UserProfile: CRUDObject {
     var objectId: CRUDObjectId = CRUDObjectInvalidId
+    var avatar: NSURL?
     var firstName: String?
     var middleName: String?
     var lastName: String?
-    var userDescription: String?
     var phone: String?
+    var userDescription: String?
+    var gender: Gender?
+    var dateOfBirth: NSDate?
     var email: String?
-    var avatar: NSURL?
     var backgroundImage: NSURL?
     var location: Location?
+    var membershipDetails : MembershipDetails?
+    var passportNumber: String?
+    var postalAddress: Location?
+    var profession: String?
+    // countryBranch
+    var permanentResidence: String?
+    var educationLevel: EducationLevel?
+    
     var guest: Bool =  false
     var shops: [ObjectInfo]?
-    var membershipDetails : MembershipDetails?
-    
-    enum Gender {
-        case Unknown
-        case Male
-        case Female
-    }
     
     var countFollowers: Int?
     var countFollowing: Int?

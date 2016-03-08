@@ -50,12 +50,6 @@ class MembershipPaymentViewController: XLFormViewController, PaymentReponseDeleg
     }
     
     //MARK: Setup Interface
-
-    override func showFormValidationError(error: NSError!) {
-        if let error = error {
-            showWarning(error.localizedDescription)
-        }
-    }
     
     func setupInterface() {
         self.title = "Payment"
@@ -80,8 +74,6 @@ class MembershipPaymentViewController: XLFormViewController, PaymentReponseDeleg
         donateProjectRow.cellConfigAtConfigure["planImage"] = UIImage(named : plan.membershipImageName)
         
         if let price = plan.price {
-            donateProjectRow.cellConfigAtConfigure["priceString"] = AppConfiguration().currencyFormatter.stringFromNumber(NSNumber(integer:
-                price)) ?? ""
             donateProjectRow.cellConfigAtConfigure["totalString"] = AppConfiguration().currencyFormatter.stringFromNumber(NSNumber(integer:
                 price)) ?? ""
         }
@@ -115,7 +107,6 @@ class MembershipPaymentViewController: XLFormViewController, PaymentReponseDeleg
             
             let validationErrors : Array<NSError> = self?.formValidationErrors() as! Array<NSError>
             if (validationErrors.count > 0){
-                self?.showFormValidationError(validationErrors.first)
                 return
             }
             
@@ -143,7 +134,7 @@ class MembershipPaymentViewController: XLFormViewController, PaymentReponseDeleg
     //MARK: PaymentReponseDelegate
     
     func setError(hidden: Bool, error: String?) {
-        self.router.showMembershipMemberCardViewController(from: self)
+        self.router.showBraintreeConfirmPaymentViewController(from: self, with: self.plan, creditCardPaymentSuccess: hidden)
     }
     
     func paymentReponse(success: Bool, err: String?) {
