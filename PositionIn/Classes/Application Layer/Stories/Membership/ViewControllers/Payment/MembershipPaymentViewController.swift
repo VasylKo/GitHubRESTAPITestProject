@@ -15,6 +15,7 @@ class MembershipPaymentViewController: XLFormViewController, PaymentReponseDeleg
     private let pageView = MembershipPageView(pageCount: 3)
     private let router : MembershipRouter
     private let plan : MembershipPlan
+    private weak var confirmRowDescriptor: XLFormRowDescriptor?
     
     //MARK: Initializers
     
@@ -100,7 +101,9 @@ class MembershipPaymentViewController: XLFormViewController, PaymentReponseDeleg
         let confirmRow: XLFormRowDescriptor = XLFormRowDescriptor(tag: nil,
             rowType: XLFormRowDescriptorTypeButton,
             title: NSLocalizedString("Proceed to Pay"))
-        confirmRow.cellConfig["backgroundColor"] = UIScheme.mainThemeColor
+        confirmRowDescriptor = confirmRow
+        confirmRow.disabled = true
+        confirmRow.cellConfig["backgroundColor"] = UIScheme.disableActionColor
         confirmRow.cellConfig["textLabel.textColor"] = UIColor.whiteColor()
         
         confirmRow.action.formBlock = { [weak self] row in
@@ -144,6 +147,21 @@ class MembershipPaymentViewController: XLFormViewController, PaymentReponseDeleg
             setError(true, error: nil)
         } else {
             setError(false, error: err)
+        }
+    }
+    
+    // MARK: XLFormViewController
+    override func formRowDescriptorValueHasChanged(formRow: XLFormRowDescriptor!, oldValue: AnyObject!, newValue: AnyObject!) {
+        super.formRowDescriptorValueHasChanged(formRow, oldValue: oldValue, newValue: newValue)
+        
+        let validationErrors : Array<NSError> = formValidationErrors() as! Array<NSError>
+        let hasErrors = validationErrors.count > 0
+        
+        if let confirmRowDescriptor = confirmRowDescriptor {
+            let backgroundColor = hasErrors ? UIScheme.disableActionColor : UIScheme.enableActionColor
+            confirmRowDescriptor.disabled = hasErrors
+            confirmRowDescriptor.cellConfig["backgroundColor"] = backgroundColor
+            updateFormRow(confirmRowDescriptor)
         }
     }
 }
