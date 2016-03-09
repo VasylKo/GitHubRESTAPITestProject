@@ -43,6 +43,7 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		18033D0B1C905E6100C709DD /* NSDate+TimeZone.m in Sources */ = {isa = PBXBuildFile; fileRef = 18033D0A1C905E6100C709DD /* NSDate+TimeZone.m */; };
 		18817F1E1C897CFB00FBA6B1 /* WalletsCellFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18817F1D1C897CFB00FBA6B1 /* WalletsCellFactory.swift */; };
 		18817F221C89B28B00FBA6B1 /* DonationDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18817F201C89B28B00FBA6B1 /* DonationDetailsViewController.swift */; };
 		18817F231C89B28B00FBA6B1 /* PositionIn.DonationDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18817F211C89B28B00FBA6B1 /* PositionIn.DonationDetailsViewController.xib */; };
@@ -567,6 +568,8 @@
 
 /* Begin PBXFileReference section */
 		040F01865A9A2BB68F3FDBFF /* Pods-PositionIn.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PositionIn.release.xcconfig"; path = "Pods/Target Support Files/Pods-PositionIn/Pods-PositionIn.release.xcconfig"; sourceTree = "<group>"; };
+		18033D091C905E6100C709DD /* NSDate+TimeZone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+TimeZone.h"; sourceTree = "<group>"; };
+		18033D0A1C905E6100C709DD /* NSDate+TimeZone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+TimeZone.m"; sourceTree = "<group>"; };
 		18817F1D1C897CFB00FBA6B1 /* WalletsCellFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletsCellFactory.swift; sourceTree = "<group>"; };
 		18817F201C89B28B00FBA6B1 /* DonationDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DonationDetailsViewController.swift; sourceTree = "<group>"; };
 		18817F211C89B28B00FBA6B1 /* PositionIn.DonationDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.DonationDetailsViewController.xib; sourceTree = "<group>"; };
@@ -1738,6 +1741,8 @@
 		D100DF0C1BF4AA6500C81054 /* NSDate-Time-Ago */ = {
 			isa = PBXGroup;
 			children = (
+				18033D091C905E6100C709DD /* NSDate+TimeZone.h */,
+				18033D0A1C905E6100C709DD /* NSDate+TimeZone.m */,
 				D100DF0D1BF4AA7900C81054 /* NSDate+NVTimeAgo.h */,
 				D100DF0E1BF4AA7900C81054 /* NSDate+NVTimeAgo.m */,
 			);
@@ -4063,6 +4068,7 @@
 				D18EA2CA1C04A3CA00A886A5 /* BrowseMainGridController.swift in Sources */,
 				CD795BFA1C57CA5E00C1C298 /* MembershipRouter.swift in Sources */,
 				500D7FA51BC2ADFE008C8C82 /* SearchItemCellModel.swift in Sources */,
+				18033D0B1C905E6100C709DD /* NSDate+TimeZone.m in Sources */,
 				2431EBDC1B945F5A009FB158 /* Promotion.swift in Sources */,
 				E689F07B1B6B972F00597587 /* ProductInventoryCell.swift in Sources */,
 				E65E87301B611FE700AE444D /* Response.swift in Sources */,
