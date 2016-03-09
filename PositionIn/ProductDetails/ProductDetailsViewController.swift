@@ -57,8 +57,8 @@ final class ProductDetailsViewController: UIViewController {
         self.product = product
         headerLabel.text = product.name
         detailsLabel.text = product.text?.stringByReplacingOccurrencesOfString("\\n", withString: "\n")
-        if let price = product.donations {
-            priceLabel.text = "\(Int(price)) beneficiaries"
+        if let numOfBeneficiaries = product.numOfBeneficiaries {
+            priceLabel.text = "\(Int(numOfBeneficiaries)) beneficiaries"
         }
         
         let image = UIImage(named: "hardware_img_default")

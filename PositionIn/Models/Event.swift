@@ -92,7 +92,7 @@ struct Event: CRUDObject {
         photos <- map["photos"]
         location <- map["location"]
         category <- (map["category"], EnumTransform())
-        participants <- map["numOfParticipants"]
+        participants <- map["numOfBeneficiaries"]
         author <- (map["author"], CRUDObjectIdTransform())
         imageURL <- (map["image"], AmazonURLTransform())
         links <- (map["links"], URLTransform())
