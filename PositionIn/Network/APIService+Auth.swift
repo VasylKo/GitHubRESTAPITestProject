@@ -99,8 +99,11 @@ extension APIService {
     }
     
     //Verify Phone
-    func verifyPhone(phoneNumber: String) -> Future<Void, NSError> {
-        return verifyPhoneRequest(phoneNumber)
+    //0 - api type for sms validation
+    //1 - api type for sms validation (duplicate functionality)
+    //2 - api type for phone validation call call
+    func verifyPhone(phoneNumber: String, type: NSNumber) -> Future<Void, NSError> {
+        return verifyPhoneRequest(phoneNumber, type: type)
     }
     
     //Validate Code
@@ -159,9 +162,9 @@ extension APIService {
         return handleFailure(updateAuth(future))
     }
     
-    private func verifyPhoneRequest(phoneNumber: String) ->  Future<Void, NSError> {
+    private func verifyPhoneRequest(phoneNumber: String, type: NSNumber) ->  Future<Void, NSError> {
         typealias CRUDResultType = (Alamofire.Request, Future<Void, NSError>)
-        let request = AuthRouter.PhoneVerification(api: self, phone: phoneNumber)
+        let request = AuthRouter.PhoneVerification(api: self, phone: phoneNumber, type: type)
         let (_, future): CRUDResultType = self.dataProvider.jsonRequest(request, map: self.commandMapping(), validation: nil)
         return self.handleFailure(future)
     }
@@ -275,7 +278,7 @@ extension APIService {
         case Facebook(api: APIService, fbToken: String)
         case Register(api: APIService, email: String?, username: String?, password: String?, phoneNumber: String?, phoneVerificationCode: String?, profileInfo: [String: AnyObject]?)
         case Refresh(api: APIService, token: String)
-        case PhoneVerification(api: APIService, phone: String)
+        case PhoneVerification(api: APIService, phone: String, type: NSNumber)
         case VerifyPhoneCode(api: APIService, phone: String, code: String)
         
         // URLRequestConvertible
@@ -294,11 +297,12 @@ extension APIService {
                     "phoneVerificationCode" : code,
                     "device" : deviceInfo(),
                 ]
-            case .PhoneVerification(let api, let phone):
+            case .PhoneVerification(let api, let phone, let type):
                 url = api.https("/v1.0/users/phoneVerification")
                 params = [
                     "phoneNumber" : phone,
-                    "device" : deviceInfo(),
+                    "type" : type,
+                    "device" : deviceInfo()
                 ]
             case .Refresh(let api, let token):
                 url = api.https("/v1.0/users/token")

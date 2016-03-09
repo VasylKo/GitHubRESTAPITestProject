@@ -13,9 +13,7 @@ final class AppConfiguration {
         switch AppConfiguration.environment {
         case .Prod:
             baseURL = NSURL(string: "https://krcs.rc-app.com/api/")!
-//            amazonURL = NSURL(string: "https://pos-prod.s3.amazonaws.com/")!
-            //Workaround bug in S3
-            amazonURL = NSURL(string: "https://krcs.rc-app.com")!
+            amazonURL = NSURL(string: "https://pos-prod.s3.amazonaws.com/")!
             xmppHostname = "chat-krcs.rc-app.com"
             googleAnalystLogLevel = GAILogLevel.Verbose
             googleMapsKey = "AIzaSyA3NvrDKBcpIsnq4-ZACG41y7Mj-wSfVrY"

@@ -116,12 +116,12 @@ final class TrainingDetailsViewController: UIViewController {
                 image: "productSellerProfile", action: .SellerProfile))
         }
         
-        if self.product?.links?.isEmpty == false || self.product?.attachments?.isEmpty == false {
-            firstSection.append(TrainingActionItem(title: NSLocalizedString("More Information", comment: "Product action: More Information"), image: "productTerms&Info", action: .MoreInformation))
-        }
-        
         if self.product?.location != nil {
             firstSection.append(TrainingActionItem(title: NSLocalizedString("Navigate", comment: "Product action: Navigate"), image: "productNavigate", action: .Navigate))
+        }
+        
+        if self.product?.links?.isEmpty == false || self.product?.attachments?.isEmpty == false {
+            firstSection.append(TrainingActionItem(title: NSLocalizedString("More Information", comment: "Product action: More Information"), image: "productTerms&Info", action: .MoreInformation))
         }
         
         return [zeroSection, firstSection]

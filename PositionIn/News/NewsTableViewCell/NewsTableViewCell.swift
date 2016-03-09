@@ -11,7 +11,7 @@ import PosInCore
 
 class NewsTableViewCell: TableViewCell {
     
-    private var actionConsumer: NewsListActionConsumer?
+    private weak var actionConsumer: NewsListActionConsumer?
     private var item : FeedItem?
     
     @IBOutlet weak var commentButton: UIButton!
@@ -33,6 +33,11 @@ class NewsTableViewCell: TableViewCell {
         assert(m != nil, "Invalid model passed")
         
         self.item = m!.item
+        
+        if let liked = self.item?.isLiked {
+            let image = liked == true ? UIImage(named:"ic_like_selected") : UIImage(named:"ic_like_up")
+            self.likeButton.setImage(image, forState: .Normal)
+        }
         
         if let imgURL = m!.item.image {
             feedItemImageView.setImageFromURL(imgURL)

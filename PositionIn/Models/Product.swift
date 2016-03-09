@@ -26,6 +26,9 @@ struct Product: CRUDObject {
     var endData: NSDate?
     var links : [NSURL]?
     var attachments : [Attachment]?
+    var author: UserInfo?
+    var numOfBeneficiaries: Int?
+    
     
 /*
     //TODO:
@@ -75,11 +78,13 @@ struct Product: CRUDObject {
         photos <- map["photos"]
         location <- map["location"]
         imageURL <- (map["image"], AmazonURLTransform())
-        startDate <- (map["startDate"], APIDateTransform())
-        endData <- (map["startDate"], APIDateTransform())
+        startDate <- (map["startDate"], APIDateTransform()) 
+        endData <- (map["endDate"], APIDateTransform())
         externalURLString <- map["externalUrl"]
         links <- (map["links"], URLTransform())
         attachments <- map["attachments"]
+        author <- map["author"]
+        numOfBeneficiaries <- map["numOfBeneficiaries"]
     }
     
     static func endpoint() -> String {

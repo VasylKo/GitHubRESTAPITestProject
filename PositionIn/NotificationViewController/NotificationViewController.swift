@@ -10,14 +10,14 @@ import UIKit
 
 class NotificationViewController: UITableViewController {
     
-    private var notifications: [Notification]?
+    private var notifications: [SystemNotification]?
     
     //MARK: Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupInterface()
-        api().getNotifications().onSuccess(callback: { [weak self] (response : CollectionResponse<Notification>) in
+        api().getNotifications().onSuccess(callback: { [weak self] (response : CollectionResponse<SystemNotification>) in
             self?.notifications = response.items
             self?.tableView.reloadData()
             })
