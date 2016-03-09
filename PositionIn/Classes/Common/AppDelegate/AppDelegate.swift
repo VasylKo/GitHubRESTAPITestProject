@@ -123,7 +123,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         notificationSettings.alertStyle = .Banner
         notificationSettings.soundEnabled = false
         LNNotificationCenter.defaultCenter().registerApplicationWithIdentifier("RedCross", name: "Red Cross", icon: UIImage(named: "push_notification_icon"), defaultSettings: notificationSettings);
-
+        
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
     }
     

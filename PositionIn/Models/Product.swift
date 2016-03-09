@@ -27,6 +27,8 @@ struct Product: CRUDObject {
     var links : [NSURL]?
     var attachments : [Attachment]?
     var author: UserInfo?
+    var numOfBeneficiaries: Int?
+    
     
 /*
     //TODO:
@@ -82,6 +84,7 @@ struct Product: CRUDObject {
         links <- (map["links"], URLTransform())
         attachments <- map["attachments"]
         author <- map["author"]
+        numOfBeneficiaries <- map["numOfBeneficiaries"]
     }
     
     static func endpoint() -> String {

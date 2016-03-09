@@ -48,8 +48,15 @@ final class EventListCell: TableViewCell {
         }
         
         titleLabel.text = m!.title
-        let eventDetailsFormat = NSLocalizedString("%d People are attending", comment: "Event details: details format")
-        infoLabel.text = String(format: eventDetailsFormat, m!.numOfParticipants ?? 0)
+        
+        if m!.item.type == FeedItem.ItemType.Event {
+            let eventDetailsFormat = NSLocalizedString("%d People are attending", comment: "Event details: details format")
+            infoLabel.text = String(format: eventDetailsFormat, m!.numOfParticipants ?? 0)
+        }
+        else {
+            infoLabel.text = m!.info
+        }
+    
         dateLabel.text = m!.details
     }
     
