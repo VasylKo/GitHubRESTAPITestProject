@@ -65,7 +65,7 @@ class MembershipMemberDetailsViewController : BaseAddItemViewController {
         
         let dateOfBirthRow = XLFormRowDescriptor(tag: Tags.DateOfBirth.rawValue, rowType: XLFormRowDescriptorTypeDateInline, title: NSLocalizedString("Date Of Birth"))
         dateOfBirthRow.required = false
-        dateOfBirthRow.value = NSDate()
+        dateOfBirthRow.value = nil
         dateOfBirthRow.cellConfig["maximumDate"] = NSDate()
         dateOfBirthRow.cellConfig["textLabel.textColor"] = UIScheme.mainThemeColor
         dateOfBirthRow.cellConfig["tintColor"] = UIScheme.mainThemeColor
