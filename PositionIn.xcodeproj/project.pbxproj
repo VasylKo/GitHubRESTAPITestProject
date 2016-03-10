@@ -2278,7 +2278,6 @@
 			isa = PBXGroup;
 			children = (
 				18F3313D1C8871870010321B /* Order.swift */,
-				D1F3E80B1C75D2B300EFC8ED /* Notification.swift */,
 				D1381AD51C8D76C700328D86 /* PushNotification.swift */,
 				D1F3E80B1C75D2B300EFC8ED /* SystemNotification.swift */,
 				CDC102481C6CC091009FF6D9 /* Attachment.swift */,
@@ -4340,6 +4339,193 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		CD8DB9B11C91AEDA00488EBB /* Prod02Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Prod02Release;
+		};
+		CD8DB9B21C91AEDA00488EBB /* Prod02Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = EBB4ADD19B63BD62828B753E /* Pods-PositionIn.prodrelease.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				BUNDLE_IDENTIFIER_USER_DEFINED_VALUE = com.krcs.members;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Media Applications ltd";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Kenya Red Cross (87SW7N9JU2)";
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)",
+				);
+				INFOPLIST_FILE = "PositionIn/Supporting Files/Info.plist";
+				INFOPLIST_PREFIX_HEADER = "PositionIn/Supporting Files/Version.h";
+				INFOPLIST_PREPROCESS = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-l\"c++\"",
+					"-l\"icucore\"",
+					"-l\"z\"",
+					"-framework",
+					"\"AVFoundation\"",
+					"-framework",
+					"\"Accelerate\"",
+					"-framework",
+					"\"Alamofire\"",
+					"-framework",
+					"\"BrightFutures\"",
+					"-framework",
+					"\"CoreBluetooth\"",
+					"-framework",
+					"\"CoreData\"",
+					"-framework",
+					"\"CoreGraphics\"",
+					"-framework",
+					"\"CoreLocation\"",
+					"-framework",
+					"\"CoreText\"",
+					"-framework",
+					"\"GLKit\"",
+					"-framework",
+					"\"GoogleMaps\"",
+					"-framework",
+					"\"Haneke\"",
+					"-framework",
+					"\"ImageIO\"",
+					"-framework",
+					"\"ImagePickerSheetController\"",
+					"-framework",
+					"\"KYDrawerController\"",
+					"-framework",
+					"\"KeychainAccess\"",
+					"-framework",
+					"\"ObjectMapper\"",
+					"-framework",
+					"\"OpenGLES\"",
+					"-framework",
+					"\"PosInCore\"",
+					"-framework",
+					"\"QuartzCore\"",
+					"-framework",
+					"\"Result\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+					"-framework",
+					"\"UIImageEffects\"",
+					"-framework",
+					"\"XLForm\"",
+					"-ObjC",
+				);
+				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -D \"PROD02_ENV\"";
+				PRODUCT_BUNDLE_IDENTIFIER = com.positionin.dev01;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "106a95c1-832d-4c02-b3e4-3c00b62ec2be";
+				SWIFT_OBJC_BRIDGING_HEADER = "PositionIn/PositionIn-Bridging-Header.h";
+			};
+			name = Prod02Release;
+		};
+		CD8DB9B31C91AEDB00488EBB /* Prod02Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Prod02Release;
+		};
+		CD8DB9B41C91AEDB00488EBB /* Prod02Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Prod02Release;
+		};
+		CD8DB9B51C91AEDB00488EBB /* Prod02Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Prod02Release;
+		};
+		CD8DB9B61C91AEDB00488EBB /* Prod02Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_OBJC_EXPLICIT_OWNERSHIP_TYPE = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_REPEATED_USE_OF_WEAK = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				GCC_WARN_SHADOW = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					/usr/include/libxml2,
+				);
+				INFOPLIST_FILE = Messaging/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/XMPPFramework/Vendor/libidn",
+				);
+				OTHER_LDFLAGS = "-lxml2";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.positionin.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Prod02Release;
+		};
 		D1C475F61C1092720096D383 /* StagingDebugCopy */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -4391,6 +4577,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				BUNDLE_IDENTIFIER_USER_DEFINED_VALUE = com.positionin.dev01;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -4592,6 +4779,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				BUNDLE_IDENTIFIER_USER_DEFINED_VALUE = com.positionin.dev01;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Media Applications ltd";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Media Applications ltd";
@@ -4843,6 +5031,7 @@
 			baseConfigurationReference = 63CC26C8BE01B93DC180BE00 /* Pods-PositionIn.devdebug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				BUNDLE_IDENTIFIER_USER_DEFINED_VALUE = com.positionin.dev01;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Shulamit Salant (4ZRAKT5AF5)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Shulamit Salant (4ZRAKT5AF5)";
@@ -4929,6 +5118,7 @@
 			baseConfigurationReference = C5785CCFFE7238C562E6E52F /* Pods-PositionIn.devrelease.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				BUNDLE_IDENTIFIER_USER_DEFINED_VALUE = com.positionin.dev01;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Media Applications ltd";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Media Applications ltd";
@@ -5086,6 +5276,7 @@
 			baseConfigurationReference = A8CE39DC2C33792AC988FB6F /* Pods-PositionIn.stagingdebug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				BUNDLE_IDENTIFIER_USER_DEFINED_VALUE = com.positionin.dev01;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -5278,6 +5469,7 @@
 			baseConfigurationReference = ECC822B2432C22D1C85FFC57 /* Pods-PositionIn.stagingrelease.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				BUNDLE_IDENTIFIER_USER_DEFINED_VALUE = com.positionin.dev01;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Media Applications ltd";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Media Applications ltd";
@@ -5472,6 +5664,7 @@
 			baseConfigurationReference = 696019E5F5D5A8184C75D0A2 /* Pods-PositionIn.proddebug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				BUNDLE_IDENTIFIER_USER_DEFINED_VALUE = com.positionin.dev01;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -5663,6 +5856,7 @@
 			baseConfigurationReference = EBB4ADD19B63BD62828B753E /* Pods-PositionIn.prodrelease.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				BUNDLE_IDENTIFIER_USER_DEFINED_VALUE = com.positionin.dev01;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Media Applications ltd";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Media Applications ltd";
@@ -5913,6 +6107,7 @@
 				E6325F6B1B57E0E100996480 /* DevRelease */,
 				E68DF1561BC4CFE20054482D /* StagingRelease */,
 				E68DF1661BC4CFFF0054482D /* ProdRelease */,
+				CD8DB9B51C91AEDB00488EBB /* Prod02Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = DevRelease;
@@ -5928,6 +6123,7 @@
 				E64DC3681B4E53CA0011D37C /* DevRelease */,
 				E68DF1511BC4CFE20054482D /* StagingRelease */,
 				E68DF1611BC4CFFF0054482D /* ProdRelease */,
+				CD8DB9B11C91AEDA00488EBB /* Prod02Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = DevRelease;
@@ -5943,6 +6139,7 @@
 				E64DC36B1B4E53CA0011D37C /* DevRelease */,
 				E68DF1521BC4CFE20054482D /* StagingRelease */,
 				E68DF1621BC4CFFF0054482D /* ProdRelease */,
+				CD8DB9B21C91AEDA00488EBB /* Prod02Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = DevRelease;
@@ -5958,6 +6155,7 @@
 				E6736AD11B4E562D0003580D /* DevRelease */,
 				E68DF1541BC4CFE20054482D /* StagingRelease */,
 				E68DF1641BC4CFFF0054482D /* ProdRelease */,
+				CD8DB9B31C91AEDB00488EBB /* Prod02Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = DevRelease;
@@ -5973,6 +6171,7 @@
 				E6736AD71B4E56570003580D /* DevRelease */,
 				E68DF1551BC4CFE20054482D /* StagingRelease */,
 				E68DF1651BC4CFFF0054482D /* ProdRelease */,
+				CD8DB9B41C91AEDB00488EBB /* Prod02Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = DevRelease;
@@ -5988,6 +6187,7 @@
 				E6E2FEA21B66F61400880F3C /* DevRelease */,
 				E68DF1571BC4CFE20054482D /* StagingRelease */,
 				E68DF1671BC4CFFF0054482D /* ProdRelease */,
+				CD8DB9B61C91AEDB00488EBB /* Prod02Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = DevRelease;
