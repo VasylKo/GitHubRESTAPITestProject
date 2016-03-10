@@ -109,6 +109,26 @@ platform :ios do
            )
     end
 
+    desc "Submit a new Production 2 (Kenya Red Cross) Build to Amazon S3"
+    lane :Production2 do
+        gym(
+            scheme: "PositionIn",
+            configuration: "ProdRelease2",
+            output_directory: "Build",
+            clean: true,
+            use_legacy_build_api: true,
+            ) # Build app
+#        snapshot
+        s3(
+            html_template_path: "./fastlane/redcross.erb",
+            html_file_name: "production.html",
+            version_file_name: "production.version.json",
+            path: 'prod/v{CFBundleShortVersionString}_b{CFBundleVersion}/'
+            )
+    end
+
+
+
   desc "Deploy a new version to the App Store"
   desc "** Full Markdown** Support: `code`"
   lane :deploy do
