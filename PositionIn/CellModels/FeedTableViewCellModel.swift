@@ -80,8 +80,8 @@ class CompactFeedTableCellModel: FeedTableCellModel {
                 }
             }
         case .Project:
-            if let price = price {
-                self.info = "\(Int(price)) beneficiaries"
+            if let numOfParticipants = numOfParticipants {
+                self.info = "\(Int(numOfParticipants)) beneficiaries"
             }
         case .Event:
             //attend

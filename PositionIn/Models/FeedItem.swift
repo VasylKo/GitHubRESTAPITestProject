@@ -73,7 +73,7 @@ class FeedItem: CRUDObject {
         isLiked <- map["isLiked"]
         numOfLikes <- map["numOfLikes"]
         numOfComments <- map["numOfComments"]
-        numOfParticipants <- map["numOfParticipants"]
+        numOfParticipants <- map["numOfBeneficiaries"]
     }
     
     var description: String {

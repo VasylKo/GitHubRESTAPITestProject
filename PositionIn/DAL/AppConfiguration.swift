@@ -18,6 +18,13 @@ final class AppConfiguration {
             googleAnalystLogLevel = GAILogLevel.Verbose
             googleMapsKey = "AIzaSyA3NvrDKBcpIsnq4-ZACG41y7Mj-wSfVrY"
             newRelicToken = "AA0492dd667078eb6a7d0a70ba7267487f6b3fff21"
+        case .Prod02:
+            baseURL = NSURL(string: "https://krcs.rc-app.com/api/")!
+            amazonURL = NSURL(string: "https://pos-prod.s3.amazonaws.com/")!
+            xmppHostname = "chat-krcs.rc-app.com"
+            googleAnalystLogLevel = GAILogLevel.Verbose
+            googleMapsKey = "AIzaSyA3NvrDKBcpIsnq4-ZACG41y7Mj-wSfVrY"
+            newRelicToken = "AA0492dd667078eb6a7d0a70ba7267487f6b3fff21"
         case .Staging:
             baseURL = NSURL(string: "https://app-sta.positionin.com/api/")!
             amazonURL = NSURL(string: "https://pos-sta.s3.amazonaws.com/")!
@@ -56,15 +63,18 @@ final class AppConfiguration {
     let xmppPort: Int
     
     private enum Environment: String {
-        case Dev = "Dev"
-        case Staging = "Staging"
-        case StagingCopy = "StagingCopy"
-        case Prod = "Production"
+        case Dev
+        case Staging
+        case StagingCopy
+        case Prod
+        case Prod02
     }
     
     private static var environment: Environment {
         #if PROD_ENV
             return .Prod
+        #elseif PROD02_ENV
+            return .Prod02
         #elseif STAGING_ENV
             return .Staging
         #elseif STAGING_COPY_ENV

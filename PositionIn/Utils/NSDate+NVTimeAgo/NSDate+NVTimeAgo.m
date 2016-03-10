@@ -7,6 +7,7 @@
 //
 
 #import "NSDate+NVTimeAgo.h"
+#import "NSDate+TimeZone.h"
 
 @implementation NSDate (NVFacebookTimeAgo)
 
@@ -44,17 +45,19 @@
  */
 - (NSString *)formattedAsTimeAgo
 {    
-    //Now
+    // Now date in local time
     NSDate *now = [NSDate date];
-    NSTimeInterval secondsSince = -(int)[self timeIntervalSinceDate:now];
+    NSDate *localNow = [now toLocalTime];
+    
+    NSTimeInterval secondsSince = -(int)[self timeIntervalSinceDate:localNow];
     
     // Today = "1:28 PM"
-    if([self isSameDayAs:now])
+    if([self isSameDayAs:localNow])
         return [self formatAsToday:secondsSince];
  
     
     // Yesterday = "Yesterday"
-    if([self isYesterday:now])
+    if([self isYesterday:localNow])
         return [self formatAsYesterday];
   
     
@@ -187,7 +190,7 @@
     } else {
         [dateFormatter setDateFormat:@"'Today', h:mm a"];
     }
-    return [NSString stringWithFormat:@"%@", [dateFormatter stringFromDate:self]];
+    return [NSString stringWithFormat:@"%@", [dateFormatter stringFromDate:[self toLocalTime]]];
 }
 
 
@@ -203,7 +206,7 @@
     } else {
         [dateFormatter setDateFormat:@"'Yesterday', h:mm a"];
     }
-    return [NSString stringWithFormat:@"%@", [dateFormatter stringFromDate:self]];
+    return [NSString stringWithFormat:@"%@", [dateFormatter stringFromDate:[self toLocalTime]]];
 }
 
 
@@ -224,7 +227,7 @@
     } else {
         [dateFormatter setDateFormat:@"EEEE, h:mm a"];
     }
-    return [NSString stringWithFormat:@"%@", [dateFormatter stringFromDate:self]];
+    return [NSString stringWithFormat:@"%@", [dateFormatter stringFromDate:[self toLocalTime]]];
 }
 
 
@@ -244,7 +247,7 @@
     } else {
         [dateFormatter setDateFormat:@"MMMM d, h:mm a"];
     }
-    return [NSString stringWithFormat:@"%@", [dateFormatter stringFromDate:self]];
+    return [NSString stringWithFormat:@"%@", [dateFormatter stringFromDate:[self toLocalTime]]];
     return [dateFormatter stringFromDate:self];
 }
 
@@ -276,7 +279,7 @@
     } else {
         [dateFormatter setDateFormat:@"dd MMM, h:mm a"];
     }
-    return [NSString stringWithFormat:@"%@", [dateFormatter stringFromDate:self]];
+    return [NSString stringWithFormat:@"%@", [dateFormatter stringFromDate:[self toLocalTime]]];
 }
 
 /*
