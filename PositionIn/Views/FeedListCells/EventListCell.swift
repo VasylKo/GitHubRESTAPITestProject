@@ -56,8 +56,29 @@ final class EventListCell: TableViewCell {
             break
         }
         
+<<<<<<< HEAD
         titleLabel?.text = m!.title
         dateLabel?.text = m!.details
+=======
+        titleLabel.text = m!.title
+        
+        if m!.item.type == FeedItem.ItemType.Event {
+            let eventDetailsFormat = NSLocalizedString("%d People are attending", comment: "Event details: details format")
+            infoLabel.text = String(format: eventDetailsFormat, m!.numOfParticipants ?? 0)
+            
+            if let date = m!.date {
+                let dateFormatter = NSDateFormatter()
+                dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
+                let date = dateFormatter.stringFromDate(date)
+                dateLabel.text = date
+            }
+
+        }
+        else {
+            infoLabel.text = m!.info
+            dateLabel.text = m!.details
+        }
+>>>>>>> develop
     }
     
     override func prepareForReuse() {

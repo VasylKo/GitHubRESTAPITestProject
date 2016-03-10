@@ -31,6 +31,10 @@ class PaymentTableViewCell: XLFormBaseCell {
         }
     }
     
+    override static func formDescriptorCellHeightForRowDescriptor(rowDescriptor: XLFormRowDescriptor!) -> CGFloat {
+        return 122
+    }
+    
     @IBOutlet private weak var totalLabel: UILabel!
     @IBOutlet private weak var planName: UILabel!
     @IBOutlet private weak var planImageView: UIImageView!
