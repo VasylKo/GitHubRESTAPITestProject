@@ -41,7 +41,7 @@ final class MainMenuViewController: UIViewController {
         //TODO: refactor
         return [
             MainMenuItem(title: NSLocalizedString("Home", comment: "Main Menu: Home"), imageName: "MainMenuForYou", action: .ForYou),
-            MainMenuItem(title: NSLocalizedString("Explore", comment: "Main Menu: Explore"), imageName: "MainMenuNew", action: .New),
+            MainMenuItem(title: NSLocalizedString("Feed", comment: "Main Menu: Explore"), imageName: "MainMenuNew", action: .New),
             MainMenuItem(title: NSLocalizedString("Messages", comment: "Main Menu: Messages"), imageName: "MainMenuMessages", action: .Messages),
             MainMenuItem(title: NSLocalizedString("Communities", comment: "Main Menu: Community"), imageName: "MainMenuCommunity", action: .Community),
             MainMenuItem(title: NSLocalizedString("People", comment: "Main Menu: People"), imageName: "MainMenuPeople", action: .People),
