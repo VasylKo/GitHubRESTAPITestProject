@@ -4333,7 +4333,7 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		CD8DB9B11C91AEDA00488EBB /* Prod02Release */ = {
+		CD8DB9B11C91AEDA00488EBB /* ProdRelease2 */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -4368,14 +4368,12 @@
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
-			name = Prod02Release;
+			name = ProdRelease2;
 		};
-		CD8DB9B21C91AEDA00488EBB /* Prod02Release */ = {
+		CD8DB9B21C91AEDA00488EBB /* ProdRelease2 */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = EBB4ADD19B63BD62828B753E /* Pods-PositionIn.prodrelease.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				BUNDLE_IDENTIFIER_USER_DEFINED_VALUE = com.krcs.members;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Media Applications ltd";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Kenya Red Cross (87SW7N9JU2)";
@@ -4447,36 +4445,36 @@
 					"\"XLForm\"",
 					"-ObjC",
 				);
-				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -D \"PROD02_ENV\"";
-				PRODUCT_BUNDLE_IDENTIFIER = com.positionin.dev01;
+				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -D \"PROD_ENV\"";
+				PRODUCT_BUNDLE_IDENTIFIER = com.krcs.members;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "106a95c1-832d-4c02-b3e4-3c00b62ec2be";
 				SWIFT_OBJC_BRIDGING_HEADER = "PositionIn/PositionIn-Bridging-Header.h";
 			};
-			name = Prod02Release;
+			name = ProdRelease2;
 		};
-		CD8DB9B31C91AEDB00488EBB /* Prod02Release */ = {
+		CD8DB9B31C91AEDB00488EBB /* ProdRelease2 */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
-			name = Prod02Release;
+			name = ProdRelease2;
 		};
-		CD8DB9B41C91AEDB00488EBB /* Prod02Release */ = {
+		CD8DB9B41C91AEDB00488EBB /* ProdRelease2 */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
-			name = Prod02Release;
+			name = ProdRelease2;
 		};
-		CD8DB9B51C91AEDB00488EBB /* Prod02Release */ = {
+		CD8DB9B51C91AEDB00488EBB /* ProdRelease2 */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
-			name = Prod02Release;
+			name = ProdRelease2;
 		};
-		CD8DB9B61C91AEDB00488EBB /* Prod02Release */ = {
+		CD8DB9B61C91AEDB00488EBB /* ProdRelease2 */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
@@ -4518,7 +4516,7 @@
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
-			name = Prod02Release;
+			name = ProdRelease2;
 		};
 		D1C475F61C1092720096D383 /* StagingDebugCopy */ = {
 			isa = XCBuildConfiguration;
@@ -4571,7 +4569,6 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				BUNDLE_IDENTIFIER_USER_DEFINED_VALUE = com.positionin.dev01;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -4773,7 +4770,6 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				BUNDLE_IDENTIFIER_USER_DEFINED_VALUE = com.positionin.dev01;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Media Applications ltd";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Media Applications ltd";
@@ -5025,7 +5021,6 @@
 			baseConfigurationReference = BF974669627C5C2C7EE1ED41 /* Pods-PositionIn.devdebug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				BUNDLE_IDENTIFIER_USER_DEFINED_VALUE = com.positionin.dev01;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Shulamit Salant (4ZRAKT5AF5)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Shulamit Salant (4ZRAKT5AF5)";
@@ -5112,7 +5107,6 @@
 			baseConfigurationReference = 64AF9DE99B2895039ACA7F1F /* Pods-PositionIn.devrelease.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				BUNDLE_IDENTIFIER_USER_DEFINED_VALUE = com.positionin.dev01;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Media Applications ltd";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Media Applications ltd";
@@ -5270,7 +5264,6 @@
 			baseConfigurationReference = B20EC0EEF67E33E51960AE34 /* Pods-PositionIn.stagingdebug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				BUNDLE_IDENTIFIER_USER_DEFINED_VALUE = com.positionin.dev01;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -5463,7 +5456,6 @@
 			baseConfigurationReference = 56DAF56D2A99203B14E2570B /* Pods-PositionIn.stagingrelease.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				BUNDLE_IDENTIFIER_USER_DEFINED_VALUE = com.positionin.dev01;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Media Applications ltd";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Media Applications ltd";
@@ -5658,7 +5650,6 @@
 			baseConfigurationReference = 13A2A63466B39BB54E2BD39A /* Pods-PositionIn.proddebug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				BUNDLE_IDENTIFIER_USER_DEFINED_VALUE = com.positionin.dev01;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -5850,7 +5841,6 @@
 			baseConfigurationReference = 3B8926F67F56D70AAB2211B0 /* Pods-PositionIn.prodrelease.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				BUNDLE_IDENTIFIER_USER_DEFINED_VALUE = com.positionin.dev01;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Media Applications ltd";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Media Applications ltd";
@@ -6101,7 +6091,7 @@
 				E6325F6B1B57E0E100996480 /* DevRelease */,
 				E68DF1561BC4CFE20054482D /* StagingRelease */,
 				E68DF1661BC4CFFF0054482D /* ProdRelease */,
-				CD8DB9B51C91AEDB00488EBB /* Prod02Release */,
+				CD8DB9B51C91AEDB00488EBB /* ProdRelease2 */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = DevRelease;
@@ -6117,7 +6107,7 @@
 				E64DC3681B4E53CA0011D37C /* DevRelease */,
 				E68DF1511BC4CFE20054482D /* StagingRelease */,
 				E68DF1611BC4CFFF0054482D /* ProdRelease */,
-				CD8DB9B11C91AEDA00488EBB /* Prod02Release */,
+				CD8DB9B11C91AEDA00488EBB /* ProdRelease2 */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = DevRelease;
@@ -6133,7 +6123,7 @@
 				E64DC36B1B4E53CA0011D37C /* DevRelease */,
 				E68DF1521BC4CFE20054482D /* StagingRelease */,
 				E68DF1621BC4CFFF0054482D /* ProdRelease */,
-				CD8DB9B21C91AEDA00488EBB /* Prod02Release */,
+				CD8DB9B21C91AEDA00488EBB /* ProdRelease2 */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = DevRelease;
@@ -6149,7 +6139,7 @@
 				E6736AD11B4E562D0003580D /* DevRelease */,
 				E68DF1541BC4CFE20054482D /* StagingRelease */,
 				E68DF1641BC4CFFF0054482D /* ProdRelease */,
-				CD8DB9B31C91AEDB00488EBB /* Prod02Release */,
+				CD8DB9B31C91AEDB00488EBB /* ProdRelease2 */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = DevRelease;
@@ -6165,7 +6155,7 @@
 				E6736AD71B4E56570003580D /* DevRelease */,
 				E68DF1551BC4CFE20054482D /* StagingRelease */,
 				E68DF1651BC4CFFF0054482D /* ProdRelease */,
-				CD8DB9B41C91AEDB00488EBB /* Prod02Release */,
+				CD8DB9B41C91AEDB00488EBB /* ProdRelease2 */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = DevRelease;
@@ -6181,7 +6171,7 @@
 				E6E2FEA21B66F61400880F3C /* DevRelease */,
 				E68DF1571BC4CFE20054482D /* StagingRelease */,
 				E68DF1671BC4CFFF0054482D /* ProdRelease */,
-				CD8DB9B61C91AEDB00488EBB /* Prod02Release */,
+				CD8DB9B61C91AEDB00488EBB /* ProdRelease2 */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = DevRelease;
