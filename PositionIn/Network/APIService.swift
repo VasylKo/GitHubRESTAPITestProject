@@ -41,12 +41,12 @@ final class APIService {
         }
     }
     
-    func handleConnectionError<R>(future: Future<R, NSError>, futureBuilder: Void -> Future<R, NSError>) -> Future<R, NSError> {
-        return future.recoverWith { error in
+    func handleConnectionError<R>(future1: Future<R, NSError>, futureBuilder: Void -> Future<R, NSError>) -> Future<R, NSError> {
+        return future1.recoverWith { error in
             if error.code == NSURLErrorNetworkConnectionLost {
                 return futureBuilder()
             }
-            return future
+            return Future(error: error)
         }
     }
     
