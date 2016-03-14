@@ -196,6 +196,12 @@
 		D1DA176D1C05B7BE0091A8CE /* PositionIn.BrowseGridCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1DA176B1C05B7BE0091A8CE /* PositionIn.BrowseGridCollectionViewCell.xib */; };
 		D1DA1EBC1C5909D7009F5AFA /* MembershipConfirmDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DA1EB11C5909D7009F5AFA /* MembershipConfirmDetailsViewController.swift */; };
 		D1DA1EBF1C5909D7009F5AFA /* MembershipPlanDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DA1EB71C5909D7009F5AFA /* MembershipPlanDetailsViewController.swift */; };
+		D1F1B8291C92DB5000C22204 /* FeedListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F1B8271C92DB5000C22204 /* FeedListViewController.swift */; };
+		D1F1B82A1C92DB5000C22204 /* FeedListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1F1B8281C92DB5000C22204 /* FeedListViewController.xib */; };
+		D1F1B8371C92E0E700C22204 /* FeauteredFeedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F1B8351C92E0E700C22204 /* FeauteredFeedTableViewCell.swift */; };
+		D1F1B8381C92E0E700C22204 /* FeauteredFeedTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1F1B8361C92E0E700C22204 /* FeauteredFeedTableViewCell.xib */; };
+		D1F1B83C1C92E17400C22204 /* FeedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F1B83A1C92E17400C22204 /* FeedTableViewCell.swift */; };
+		D1F1B83D1C92E17400C22204 /* FeedTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1F1B83B1C92E17400C22204 /* FeedTableViewCell.xib */; };
 		D1F1FF251C22F384006D2E75 /* VolunteerDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F1FF231C22F384006D2E75 /* VolunteerDetailsViewController.swift */; };
 		D1F1FF261C22F384006D2E75 /* PositionIn.VolunteerDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1F1FF241C22F384006D2E75 /* PositionIn.VolunteerDetailsViewController.xib */; };
 		D1F1FF2E1C24265B006D2E75 /* GiveBloodDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F1FF2C1C24265B006D2E75 /* GiveBloodDetailsViewController.swift */; };
@@ -731,6 +737,12 @@
 		D1DA176B1C05B7BE0091A8CE /* PositionIn.BrowseGridCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.BrowseGridCollectionViewCell.xib; sourceTree = "<group>"; };
 		D1DA1EB11C5909D7009F5AFA /* MembershipConfirmDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MembershipConfirmDetailsViewController.swift; sourceTree = "<group>"; };
 		D1DA1EB71C5909D7009F5AFA /* MembershipPlanDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MembershipPlanDetailsViewController.swift; sourceTree = "<group>"; };
+		D1F1B8271C92DB5000C22204 /* FeedListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FeedListViewController.swift; path = FeedListViewController/FeedListViewController.swift; sourceTree = "<group>"; };
+		D1F1B8281C92DB5000C22204 /* FeedListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FeedListViewController.xib; path = FeedListViewController/FeedListViewController.xib; sourceTree = "<group>"; };
+		D1F1B8351C92E0E700C22204 /* FeauteredFeedTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FeauteredFeedTableViewCell.swift; path = FeauteredFeedTableViewCell/FeauteredFeedTableViewCell.swift; sourceTree = "<group>"; };
+		D1F1B8361C92E0E700C22204 /* FeauteredFeedTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FeauteredFeedTableViewCell.xib; path = FeauteredFeedTableViewCell/FeauteredFeedTableViewCell.xib; sourceTree = "<group>"; };
+		D1F1B83A1C92E17400C22204 /* FeedTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedTableViewCell.swift; sourceTree = "<group>"; };
+		D1F1B83B1C92E17400C22204 /* FeedTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeedTableViewCell.xib; sourceTree = "<group>"; };
 		D1F1FF231C22F384006D2E75 /* VolunteerDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VolunteerDetailsViewController.swift; sourceTree = "<group>"; };
 		D1F1FF241C22F384006D2E75 /* PositionIn.VolunteerDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.VolunteerDetailsViewController.xib; sourceTree = "<group>"; };
 		D1F1FF2C1C24265B006D2E75 /* GiveBloodDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GiveBloodDetailsViewController.swift; sourceTree = "<group>"; };
@@ -1920,6 +1932,34 @@
 			path = PlanDetails;
 			sourceTree = "<group>";
 		};
+		D1F1B82B1C92DBF200C22204 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				D1F1B8391C92E15400C22204 /* FeedTableViewCell */,
+				D1F1B8341C92E0B800C22204 /* FeauteredFeedTableViewCell */,
+			);
+			name = Views;
+			path = FeedListViewController/Views;
+			sourceTree = "<group>";
+		};
+		D1F1B8341C92E0B800C22204 /* FeauteredFeedTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				D1F1B8351C92E0E700C22204 /* FeauteredFeedTableViewCell.swift */,
+				D1F1B8361C92E0E700C22204 /* FeauteredFeedTableViewCell.xib */,
+			);
+			name = FeauteredFeedTableViewCell;
+			sourceTree = "<group>";
+		};
+		D1F1B8391C92E15400C22204 /* FeedTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				D1F1B83A1C92E17400C22204 /* FeedTableViewCell.swift */,
+				D1F1B83B1C92E17400C22204 /* FeedTableViewCell.xib */,
+			);
+			path = FeedTableViewCell;
+			sourceTree = "<group>";
+		};
 		D1F1FF201C22F23A006D2E75 /* VolunteerDetails */ = {
 			isa = PBXGroup;
 			children = (
@@ -1955,6 +1995,16 @@
 				D1F3E8131C7628C100EFC8ED /* PositionIn.NotificationTableViewCell.xib */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		D1F7A7871C91947500A76709 /* FeedListViewController */ = {
+			isa = PBXGroup;
+			children = (
+				D1F1B82B1C92DBF200C22204 /* Views */,
+				D1F1B8271C92DB5000C22204 /* FeedListViewController.swift */,
+				D1F1B8281C92DB5000C22204 /* FeedListViewController.xib */,
+			);
+			name = FeedListViewController;
 			sourceTree = "<group>";
 		};
 		D1F86CEF1BFCAA72006E0C49 /* Onboarding */ = {
@@ -2202,6 +2252,7 @@
 		E64DC34C1B4E53C90011D37C /* PositionIn */ = {
 			isa = PBXGroup;
 			children = (
+				D1F7A7871C91947500A76709 /* FeedListViewController */,
 				CD795BC71C57B4C700C1C298 /* Classes */,
 				CD076E851C739215005C04C2 /* News */,
 				D1F3E8061C74DC9000EFC8ED /* NotificationViewController */,
@@ -3773,6 +3824,7 @@
 				24EF62161BA81DCB00472531 /* PositionIn.ChatHistoryCell.xib in Resources */,
 				D1DA176D1C05B7BE0091A8CE /* PositionIn.BrowseGridCollectionViewCell.xib in Resources */,
 				E660E52E1B5AC23B00F52050 /* PositionIn.MainMenuViewController.xib in Resources */,
+				D1F1B8381C92E0E700C22204 /* FeauteredFeedTableViewCell.xib in Resources */,
 				CDB5B5CA1C5B9C2400413715 /* MembershipPlanDetailsViewController.xib in Resources */,
 				D161F7741C68E4F300EBDB94 /* MarketPaymentView.xib in Resources */,
 				18817F231C89B28B00FBA6B1 /* PositionIn.DonationDetailsViewController.xib in Resources */,
@@ -3781,6 +3833,7 @@
 				E62B16F51B5C1AA700D446BC /* PositionIn.MainMenuUserCell.xib in Resources */,
 				CDE1B90D1C5F658100F76F32 /* MembershipMemberProfileViewController.xib in Resources */,
 				CD8ED0D91C60AE1400576DBF /* MembershipMemberCardViewController.xib in Resources */,
+				D1F1B82A1C92DB5000C22204 /* FeedListViewController.xib in Resources */,
 				E6BEF1D81B9C671D00511B46 /* PositionIn.PostInfoCell.xib in Resources */,
 				D1F3E8151C7628C100EFC8ED /* PositionIn.NotificationTableViewCell.xib in Resources */,
 				E661159E1B73A0CB003DB5B3 /* PositionIn.BrowseMapViewController.xib in Resources */,
@@ -3801,6 +3854,7 @@
 				E68B52231B875F8F006B980C /* PositionIn.EventListCell.xib in Resources */,
 				E6BEF1D31B9C657100511B46 /* PositionIn.PostBodyCell.xib in Resources */,
 				E6C9523B1BA1DC910032254F /* PositionIn.ProfileFollowCell.xib in Resources */,
+				D1F1B83D1C92E17400C22204 /* FeedTableViewCell.xib in Resources */,
 				D196225F1BF13075003BCD85 /* GoogleService-Info.plist in Resources */,
 				E6BEF1CC1B9C5E7200511B46 /* PositionIn.PostImageCell.xib in Resources */,
 				CD076E891C7497A8005C04C2 /* PositionIn.NewsListViewController.xib in Resources */,
@@ -4039,6 +4093,7 @@
 				CD21EA571C68E98D00E50909 /* MPesaIndicatorView.swift in Sources */,
 				D1F3E8091C74DD1200EFC8ED /* NotificationViewController.swift in Sources */,
 				E68B52211B875F8F006B980C /* EventListCell.swift in Sources */,
+				D1F1B83C1C92E17400C22204 /* FeedTableViewCell.swift in Sources */,
 				E68B52271B875F8F006B980C /* PostListCell.swift in Sources */,
 				CDBDD9AA1C47AFDD007578BC /* BrowseVolunteerViewController.swift in Sources */,
 				D1F3E8141C7628C100EFC8ED /* NotificationTableViewCell.swift in Sources */,
@@ -4151,6 +4206,7 @@
 				E6BEF1D51B9C657B00511B46 /* PostBodyCell.swift in Sources */,
 				E6C9522A1BA1A82F0032254F /* UIImageView+URL.swift in Sources */,
 				E6F2437C1B8B42D70033B13C /* UserProfileViewController.swift in Sources */,
+				D1F1B8371C92E0E700C22204 /* FeauteredFeedTableViewCell.swift in Sources */,
 				E6D4D5B61B6F8B9F003134CB /* SearchBar.swift in Sources */,
 				D112D9D61C2C7EED0051039E /* CreateUserConversationViewController.swift in Sources */,
 				E6C5CE191B83A21500265955 /* LocationController.swift in Sources */,
@@ -4163,6 +4219,7 @@
 				E64D006A1B7CA2DC007693E0 /* AddCommunityViewController.swift in Sources */,
 				E6A10AC61B74232100047D74 /* LocationSelectorViewController.swift in Sources */,
 				E62B16F81B5C6BBF00D446BC /* AvatarView.swift in Sources */,
+				D1F1B8291C92DB5000C22204 /* FeedListViewController.swift in Sources */,
 				D112D9D81C2C826C0051039E /* CreateCommunityConversationViewController.swift in Sources */,
 				E6F243721B8B1F460033B13C /* BrowseModeTabbarViewController.swift in Sources */,
 				E61B20D51B7DD47C005EAB2C /* FeedItem.swift in Sources */,
