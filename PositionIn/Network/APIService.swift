@@ -14,7 +14,7 @@ import BrightFutures
 import CleanroomLogger
 import Result
 
-struct APIService {
+final class APIService {
     
     init (
         url: NSURL,
@@ -32,12 +32,21 @@ struct APIService {
     
     var defaultErrorHandler: ErrorHandler?
     
-    func handleFailure<R>(future: Future<R, NSError>) -> Future<R, NSError> {
-        return future.onFailure { error in
+    func handleFailure<R>(futureBuilder: Void -> Future<R, NSError>) -> Future<R, NSError> {
+        return handleConnectionError(futureBuilder(), futureBuilder: futureBuilder).onFailure { error in
             if let e = NetworkDataProvider.ErrorCodes.fromError(error) where e == .InvalidSessionError {
                 self.logout()
             }
             self.defaultErrorHandler?(error)
+        }
+    }
+    
+    func handleConnectionError<R>(future1: Future<R, NSError>, futureBuilder: Void -> Future<R, NSError>) -> Future<R, NSError> {
+        return future1.recoverWith { error in
+            if error.code == NSURLErrorNetworkConnectionLost {
+                return futureBuilder()
+            }
+            return Future(error: error)
         }
     }
     
@@ -89,10 +98,14 @@ struct APIService {
         }
         return session().flatMap {
             (token: AuthResponse.Token) -> Future<Void, NSError> in
-            let request = self.updateRequest(token, endpoint: endpoint, method: .POST,
-                params: params)
-            let (_, future): CRUDResultType = self.dataProvider.jsonRequest(request, map: self.commandMapping(), validation: nil)
-            return self.handleFailure(future)
+            
+            let futureBuilder: (Void -> Future<Void, NSError>) = { [unowned self] in
+                let request = self.updateRequest(token, endpoint: endpoint, method: .POST, params: params)
+                let (_, future): CRUDResultType = self.dataProvider.jsonRequest(request, map: self.commandMapping(), validation: nil)
+                return future
+            }
+            
+            return self.handleFailure(futureBuilder)
         }
     }
     
@@ -111,6 +124,18 @@ struct APIService {
         return getObject(endpoint)
     }
     
+    //MARK: - Wallet -
+    
+//    func getDonations(userId: CRUDObjectId) -> Future<CollectionResponse<Order>, NSError> {
+//        let endpoint = "/v1.0/payments/users/\(userId)/donations"
+//        return getObjectsCollection(endpoint, params: nil)
+//    }
+//    
+//    func getOrders(userId: CRUDObjectId, reason: String) -> Future<CollectionResponse<Order>, NSError> {
+//        let endpoint = "/v1.0/payments/users/\(userId)/orders/\(reason)"
+//        return getObjectsCollection(endpoint, params: nil)
+//    }
+//    
     //MARK: - Posts -
     
     func getUserPosts(userId: CRUDObjectId, page: Page) -> Future<CollectionResponse<Post>, NSError> {
@@ -296,9 +321,14 @@ struct APIService {
         let params = Mapper().toJSON(object)
         return session().flatMap {
             (token: AuthResponse.Token) -> Future<AmbulanceRequest, NSError> in
-            let request = self.updateRequest(token, endpoint: endpoint, method: .POST, params: params)
-            let (_, future): CRUDResultType = self.dataProvider.objectRequest(request)
-            return self.handleFailure(future)
+            
+            let futureBuilder: (Void -> Future<AmbulanceRequest, NSError>) = { [unowned self] in
+                let request = self.updateRequest(token, endpoint: endpoint, method: .POST, params: params)
+                let (_, future): CRUDResultType = self.dataProvider.objectRequest(request)
+                return future
+            }
+                
+            return self.handleFailure(futureBuilder)
         }
     }
     
@@ -307,9 +337,14 @@ struct APIService {
         typealias CRUDResultType = (Alamofire.Request, Future<Void, NSError>)
         return session().flatMap {
             (token: AuthResponse.Token) -> Future<Void, NSError> in
-            let request = self.updateRequest(token, endpoint: endpoint, method: .DELETE)
-            let (_, future): CRUDResultType = self.dataProvider.jsonRequest(request, map: self.emptyResponseMapping(), validation: nil)
-            return self.handleFailure(future)
+            
+            let futureBuilder: (Void -> Future<Void, NSError>) = { [unowned self] in
+                let request = self.updateRequest(token, endpoint: endpoint, method: .DELETE)
+                let (_, future): CRUDResultType = self.dataProvider.jsonRequest(request, map: self.emptyResponseMapping(), validation: nil)
+                return future
+            }
+                
+            return self.handleFailure(futureBuilder)
         }
     }
     
@@ -330,9 +365,14 @@ struct APIService {
         typealias CRUDResultType = (Alamofire.Request, Future<CollectionResponse<UserInfo>, NSError>)        
         return session().flatMap {
             (token: AuthResponse.Token) -> Future<CollectionResponse<UserInfo>, NSError> in
-            let request = self.updateRequest(token, endpoint: endpoint, params: params.query)
-            let (_ , future): CRUDResultType = self.dataProvider.objectRequest(request)
-            return self.handleFailure(future)
+            
+            let futureBuilder: (Void -> Future<CollectionResponse<UserInfo>, NSError>) = { [unowned self] in
+                let request = self.updateRequest(token, endpoint: endpoint, params: params.query)
+                let (_ , future): CRUDResultType = self.dataProvider.objectRequest(request)
+                return future
+            }
+            
+            return self.handleFailure(futureBuilder)
         }
     }
     
@@ -382,9 +422,14 @@ struct APIService {
         Log.debug?.value(params.query)
         return session().flatMap {
             (token: AuthResponse.Token) -> Future<QuickSearchResponse, NSError> in
-            let request = self.updateRequest(token, endpoint: endpoint, params: params.query)
-            let (_ , future): (Alamofire.Request, Future<QuickSearchResponse, NSError>) = self.dataProvider.objectRequest(request)
-            return self.handleFailure(future)
+            
+            let futureBuilder: (Void -> Future<QuickSearchResponse, NSError>) = { [unowned self] in
+                let request = self.updateRequest(token, endpoint: endpoint, params: params.query)
+                let (_ , future): (Alamofire.Request, Future<QuickSearchResponse, NSError>) = self.dataProvider.objectRequest(request)
+                return future
+            }
+    
+            return self.handleFailure(futureBuilder)
         }
     }
     
@@ -396,9 +441,14 @@ struct APIService {
         Log.debug?.value(params.query)
         return session().flatMap {
             (token: AuthResponse.Token) -> Future<CollectionResponse<FeedItem>, NSError> in
-            let request = self.updateRequest(token, endpoint: endpoint, params: params.query)
-            let (_ , future): (Alamofire.Request, Future<CollectionResponse<FeedItem>, NSError>) = self.dataProvider.objectRequest(request)
-            return self.handleFailure(future)
+            
+            let futureBuilder: (Void -> Future<CollectionResponse<FeedItem>, NSError>) = { [unowned self] in
+                let request = self.updateRequest(token, endpoint: endpoint, params: params.query)
+                let (_ , future): (Alamofire.Request, Future<CollectionResponse<FeedItem>, NSError>) = self.dataProvider.objectRequest(request)
+                return future
+            }
+            
+            return self.handleFailure(futureBuilder)
         }
     }
     
@@ -428,9 +478,14 @@ struct APIService {
             if let endpoint = endpoint {
                 endp = endpoint
             }
-            let request = self.updateRequest(token, endpoint: endp, method: method, params: params.query)
-            let (_ , future): (Alamofire.Request, Future<CollectionResponse<FeedItem>, NSError>) = self.dataProvider.objectRequest(request)
-            return self.handleFailure(future)
+            
+            let futureBuilder: (Void -> Future<CollectionResponse<FeedItem>, NSError>) = { [unowned self] in
+                let request = self.updateRequest(token, endpoint: endp, method: method, params: params.query)
+                let (_ , future): (Alamofire.Request, Future<CollectionResponse<FeedItem>, NSError>) = self.dataProvider.objectRequest(request)
+                return future
+            }
+            
+            return self.handleFailure(futureBuilder)
         }
     }
     
@@ -439,9 +494,14 @@ struct APIService {
         let method: Alamofire.Method = .GET
         return session().flatMap {
             (token: AuthResponse.Token) -> Future<CollectionResponse<Community>, NSError> in
-            let request = self.updateRequest(token, endpoint: endpoint!, method: method)
-            let (_ , future): (Alamofire.Request, Future<CollectionResponse<Community>, NSError>) = self.dataProvider.objectRequest(request)
-            return self.handleFailure(future)
+            
+            let futureBuilder: (Void -> Future<CollectionResponse<Community>, NSError>) = { [unowned self] in
+                let request = self.updateRequest(token, endpoint: endpoint!, method: method)
+                let (_ , future): (Alamofire.Request, Future<CollectionResponse<Community>, NSError>) = self.dataProvider.objectRequest(request)
+                return future
+            }
+            
+            return self.handleFailure(futureBuilder)
         }
     }
 
@@ -466,9 +526,14 @@ struct APIService {
         //TODO need fix downcastng
         return session().flatMap {
             (token: AuthResponse.Token) -> Future<BomaHotel, NSError> in
-            let request = self.updateRequest(token, endpoint: endpoint!, params: nil, method: .GET)
-            let (_ , future): (Alamofire.Request, Future<BomaHotel, NSError>) = self.dataProvider.objectRequest(request)
-            return self.handleFailure(future)
+            
+            let futureBuilder: (Void -> Future<BomaHotel, NSError>) = { [unowned self] in
+                let request = self.updateRequest(token, endpoint: endpoint!, params: nil, method: .GET)
+                let (_ , future): (Alamofire.Request, Future<BomaHotel, NSError>) = self.dataProvider.objectRequest(request)
+                return future
+            }
+            
+            return self.handleFailure(futureBuilder)
         }
     }
     
@@ -501,14 +566,24 @@ struct APIService {
     private func getOne(endpoint: String) -> Future<Product, NSError> {
         return session().flatMap {
             (token: AuthResponse.Token) -> Future<Product, NSError> in
-            let request = self.updateRequest(token, endpoint: endpoint, params: nil, method: .GET)
-            let (_ , future): (Alamofire.Request, Future<Product, NSError>) = self.dataProvider.objectRequest(request)
-            return self.handleFailure(future)
+            
+            let futureBuilder: (Void -> Future<Product, NSError>) = { [unowned self] in
+                let request = self.updateRequest(token, endpoint: endpoint, params: nil, method: .GET)
+                let (_ , future): (Alamofire.Request, Future<Product, NSError>) = self.dataProvider.objectRequest(request)
+                return future
+            }
+            
+            return self.handleFailure(futureBuilder)
         }
     }
 
     //MARK: - Notifications
 
+//    func getNotifications() -> Future<CollectionResponse<SystemNotification>, NSError> {
+//        let endpoint = SystemNotification.endpoint()
+//        return getObjectsCollection(endpoint, params: nil)
+//    }
+    
     func getNotifications() -> Future<CollectionResponse<Notification>, NSError> {
         let endpoint = Notification.endpoint()
         return getObjectsCollection(endpoint, params: nil)
@@ -535,9 +610,14 @@ struct APIService {
         
         return session().flatMap {
             (token: AuthResponse.Token) -> Future<String, NSError> in
-            let request = self.updateRequest(token, endpoint: endpoint, method: .POST, params: params)
-            let (_, future): CRUDResultType = self.dataProvider.jsonRequest(request, map: BraintreePayment.mpesaMapping(), validation: nil)
-            return self.handleFailure(future)
+            
+            let futureBuilder: (Void -> Future<String, NSError>) = { [unowned self] in
+                let request = self.updateRequest(token, endpoint: endpoint, method: .POST, params: params)
+                let (_, future): CRUDResultType = self.dataProvider.jsonRequest(request, map: BraintreePayment.mpesaMapping(), validation: nil)
+                return future
+            }
+            
+            return self.handleFailure(futureBuilder)
         }
     }
     
@@ -548,9 +628,14 @@ struct APIService {
         
         return session().flatMap {
             (token: AuthResponse.Token) -> Future<String, NSError> in
-            let request = self.updateRequest(token, endpoint: endpoint, method: .POST, params: params)
-            let (_, future): CRUDResultType = self.dataProvider.jsonRequest(request, map: BraintreePayment.mpesaMapping(), validation: nil)
-            return self.handleFailure(future)
+            
+            let futureBuilder: (Void -> Future<String, NSError>) = { [unowned self] in
+                let request = self.updateRequest(token, endpoint: endpoint, method: .POST, params: params)
+                let (_, future): CRUDResultType = self.dataProvider.jsonRequest(request, map: BraintreePayment.mpesaMapping(), validation: nil)
+                return future
+            }
+            
+            return self.handleFailure(futureBuilder)
         }
     }
     
@@ -561,9 +646,14 @@ struct APIService {
         
         return session().flatMap {
             (token: AuthResponse.Token) -> Future<String, NSError> in
-            let request = self.updateRequest(token, endpoint: endpoint, method: .POST, params: params)
-            let (_, future): CRUDResultType = self.dataProvider.jsonRequest(request, map: BraintreePayment.mpesaMapping(), validation: nil)
-            return self.handleFailure(future)
+            
+            let futureBuilder: (Void -> Future<String, NSError>) = { [unowned self] in
+                let request = self.updateRequest(token, endpoint: endpoint, method: .POST, params: params)
+                let (_, future): CRUDResultType = self.dataProvider.jsonRequest(request, map: BraintreePayment.mpesaMapping(), validation: nil)
+                return future
+            }
+            
+            return self.handleFailure(futureBuilder)
         }
     }
     
@@ -575,9 +665,14 @@ struct APIService {
         
         return session().flatMap {
             (token: AuthResponse.Token) -> Future<String, NSError> in
-            let request = self.readRequest(token, endpoint: endpoint)
-            let (_, future): CRUDResultType = self.dataProvider.jsonRequest(request, map: BraintreePayment.tokenMapping(), validation: nil)
-            return self.handleFailure(future)
+            
+            let futureBuilder: (Void -> Future<String, NSError>) = { [unowned self] in
+                let request = self.readRequest(token, endpoint: endpoint)
+                let (_, future): CRUDResultType = self.dataProvider.jsonRequest(request, map: BraintreePayment.tokenMapping(), validation: nil)
+                return future
+            }
+            
+            return self.handleFailure(futureBuilder)
         }
     }
     
@@ -588,9 +683,14 @@ struct APIService {
         
         return session().flatMap {
             (token: AuthResponse.Token) -> Future<String, NSError> in
-            let request = self.updateRequest(token, endpoint: endpoint, method: .POST, params: params)
-            let (_, future): CRUDResultType = self.dataProvider.jsonRequest(request, map: BraintreePayment.checkoutMapping(), validation: nil)
-            return self.handleFailure(future)
+            
+            let futureBuilder: (Void -> Future<String, NSError>) = { [unowned self] in
+                let request = self.updateRequest(token, endpoint: endpoint, method: .POST, params: params)
+                let (_, future): CRUDResultType = self.dataProvider.jsonRequest(request, map: BraintreePayment.checkoutMapping(), validation: nil)
+                return future
+            }
+                
+            return self.handleFailure(futureBuilder)
         }
     }
     
@@ -601,9 +701,14 @@ struct APIService {
         
         return session().flatMap {
             (token: AuthResponse.Token) -> Future<String, NSError> in
-            let request = self.updateRequest(token, endpoint: endpoint, method: .POST, params: params)
-            let (_, future): CRUDResultType = self.dataProvider.jsonRequest(request, map: BraintreePayment.checkoutMapping(), validation: nil)
-            return self.handleFailure(future)
+            
+            let futureBuilder: (Void -> Future<String, NSError>) = { [unowned self] in
+                let request = self.updateRequest(token, endpoint: endpoint, method: .POST, params: params)
+                let (_, future): CRUDResultType = self.dataProvider.jsonRequest(request, map: BraintreePayment.checkoutMapping(), validation: nil)
+                return future
+            }
+                
+            return self.handleFailure(futureBuilder)
         }
     }
 
@@ -617,9 +722,14 @@ struct APIService {
 
         return session().flatMap {
             (token: AuthResponse.Token) -> Future<String, NSError> in
-            let request = self.updateRequest(token, endpoint: endpoint, method: .POST, params: params)
-            let (_, future): CRUDResultType = self.dataProvider.jsonRequest(request, map: BraintreePayment.checkoutMapping(), validation: nil)
-            return self.handleFailure(future)
+            
+            let futureBuilder: (Void -> Future<String, NSError>) = { [unowned self] in
+                let request = self.updateRequest(token, endpoint: endpoint, method: .POST, params: params)
+                let (_, future): CRUDResultType = self.dataProvider.jsonRequest(request, map: BraintreePayment.checkoutMapping(), validation: nil)
+                return future
+            }
+                
+            return self.handleFailure(futureBuilder)
         }
     }
 
@@ -630,9 +740,14 @@ struct APIService {
         
         return session().flatMap {
             (token: AuthResponse.Token) -> Future<CollectionResponse<C>, NSError> in
-            let request = self.readRequest(token, endpoint: endpoint, params: params)
-            let (_ , future): CRUDResultType = self.dataProvider.objectRequest(request)
-            return self.handleFailure(future)
+            
+            let futureBuilder: (Void -> Future<CollectionResponse<C>, NSError>) = { [unowned self] in
+                let request = self.readRequest(token, endpoint: endpoint, params: params)
+                let (_ , future): CRUDResultType = self.dataProvider.objectRequest(request)
+                return future
+            }
+            
+            return self.handleFailure(futureBuilder)
         }
     }
     
@@ -641,9 +756,14 @@ struct APIService {
         
         return session().flatMap {
             (token: AuthResponse.Token) -> Future<C, NSError> in
-            let request = self.readRequest(token, endpoint: endpoint)
-            let (_, future): CRUDResultType = self.dataProvider.objectRequest(request)
-            return self.handleFailure(future)
+            
+            let futureBuilder: (Void -> Future<C, NSError>) = { [unowned self] in
+                let request = self.readRequest(token, endpoint: endpoint)
+                let (_, future): CRUDResultType = self.dataProvider.objectRequest(request)
+                return future
+            }
+                
+            return self.handleFailure(futureBuilder)
         }
     }
     
@@ -652,14 +772,19 @@ struct APIService {
         
         return session().flatMap {
             (token: AuthResponse.Token) -> Future<C, NSError> in
-            let params = Mapper().toJSON(object)
-            let request = self.updateRequest(token, endpoint: endpoint, method: .POST, params: params)
-            let (_ , future): CRUDResultType = self.dataProvider.objectRequest(request)
-            return self.handleFailure(future.map { (updateResponse: UpdateResponse) -> C in
-                var updatedObject = object
-                updatedObject.objectId = updateResponse.objectId
-                return updatedObject
-            })
+            
+            let futureBuilder: (Void -> Future<C, NSError>) = { [unowned self] in
+                let params = Mapper().toJSON(object)
+                let request = self.updateRequest(token, endpoint: endpoint, method: .POST, params: params)
+                let (_ , future): CRUDResultType = self.dataProvider.objectRequest(request)
+                return future.map { (updateResponse: UpdateResponse) -> C in
+                    var updatedObject = object
+                    updatedObject.objectId = updateResponse.objectId
+                    return updatedObject
+                }
+            }
+            
+            return self.handleFailure(futureBuilder)
         }
     }
 
@@ -669,9 +794,14 @@ struct APIService {
         
         return session().flatMap {
             (token: AuthResponse.Token) -> Future<Void, NSError> in
-            let request = self.updateRequest(token, endpoint: endpoint, method: method, params: nil)
-            let (_, future): CRUDResultType = self.dataProvider.jsonRequest(request, map: self.commandMapping(), validation: nil)
-            return self.handleFailure(future)
+            
+            let futureBuilder: (Void -> Future<Void, NSError>) = { [unowned self] in
+                let request = self.updateRequest(token, endpoint: endpoint, method: method, params: nil)
+                let (_, future): CRUDResultType = self.dataProvider.jsonRequest(request, map: self.commandMapping(), validation: nil)
+                return future
+            }
+            
+            return self.handleFailure(futureBuilder)
         }
     }
 
@@ -681,10 +811,15 @@ struct APIService {
         
         return session().flatMap {
             (token: AuthResponse.Token) -> Future<Void, NSError> in
-            let params = Mapper().toJSON(object)
-            let request = self.updateRequest(token, endpoint: endpoint, method: .PUT, params: params)
-            let (_, future): CRUDResultType = self.dataProvider.jsonRequest(request, map: self.emptyResponseMapping(), validation: nil)
-            return self.handleFailure(future)
+            
+            let futureBuilder: (Void -> Future<Void, NSError>) = { [unowned self] in
+                let params = Mapper().toJSON(object)
+                let request = self.updateRequest(token, endpoint: endpoint, method: .PUT, params: params)
+                let (_, future): CRUDResultType = self.dataProvider.jsonRequest(request, map: self.emptyResponseMapping(), validation: nil)
+                return future
+            }
+                
+            return self.handleFailure(futureBuilder)
         }
     }
     
@@ -805,6 +940,7 @@ extension APIService {
             var headers = [
                 "Authorization": "Bearer \(token)",
                 "Accept" : "application/json",
+                "Connection": "close",
             ]
             if let additionalHeaders = additionalHeaders {
                 for (key,value) in additionalHeaders {

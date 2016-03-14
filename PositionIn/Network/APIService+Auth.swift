@@ -37,7 +37,10 @@ extension APIService {
     
     //Success if user is registered
     func isUserAuthorized() -> Future<Void, NSError> {
-        return handleFailure(sessionController.isUserAuthorized())
+        let futureBuilder: (Void -> Future<Void, NSError>) = { [unowned self] in
+            return self.sessionController.isUserAuthorized()
+        }
+        return handleFailure(futureBuilder)
     }
     
     
@@ -75,10 +78,9 @@ extension APIService {
     
     //Success if has valid session and user is not a guest
     func recoverSession() -> Future<UserProfile, NSError> {
-        let f = session().flatMap { _ in
+        return session().flatMap { _ in
             return self.sessionController.isUserAuthorized()
-        }
-        return handleFailure(f).flatMap { _ in
+        }.flatMap { _ in
             return self.updateCurrentProfileStatus()
         }
     }
@@ -100,8 +102,11 @@ extension APIService {
     }
     
     //Verify Phone
-    func verifyPhone(phoneNumber: String) -> Future<Void, NSError> {
-        return verifyPhoneRequest(phoneNumber)
+    //0 - api type for sms validation
+    //1 - api type for sms validation (duplicate functionality)
+    //2 - api type for phone validation call call
+    func verifyPhone(phoneNumber: String, type: NSNumber) -> Future<Void, NSError> {
+        return verifyPhoneRequest(phoneNumber, type: type)
     }
     
     //Validate Code
@@ -154,24 +159,37 @@ extension APIService {
             return Mapper<AuthResponse>().map(json)
         }
         
-        let serializer = Alamofire.Request.AuthResponseSerializer(mapping)
-        let (_, future): (Alamofire.Request, Future<AuthResponse, NSError>) = dataProvider.request(urlRequest, serializer: serializer, validation: nil)
-        
-        return handleFailure(updateAuth(future))
+        let futureBuilder: (Void -> Future<AuthResponse, NSError>) = { [unowned self] in
+            let serializer = Alamofire.Request.AuthResponseSerializer(mapping)
+            let (_, future): (Alamofire.Request, Future<AuthResponse, NSError>) = self.dataProvider.request(urlRequest, serializer: serializer, validation: nil)
+            return self.updateAuth(future)
+        }
+            
+        return handleFailure(futureBuilder)
     }
     
-    private func verifyPhoneRequest(phoneNumber: String) ->  Future<Void, NSError> {
+    private func verifyPhoneRequest(phoneNumber: String, type: NSNumber) ->  Future<Void, NSError> {
         typealias CRUDResultType = (Alamofire.Request, Future<Void, NSError>)
-        let request = AuthRouter.PhoneVerification(api: self, phone: phoneNumber)
-        let (_, future): CRUDResultType = self.dataProvider.jsonRequest(request, map: self.commandMapping(), validation: nil)
-        return self.handleFailure(future)
+        
+        let futureBuilder: (Void -> Future<Void, NSError>) = { [unowned self] in
+            let request = AuthRouter.PhoneVerification(api: self, phone: phoneNumber, type: type)
+            let (_, future): CRUDResultType = self.dataProvider.jsonRequest(request, map: self.commandMapping(), validation: nil)
+            return future
+        }
+        
+        return self.handleFailure(futureBuilder)
     }
     
     private func verifyPhoneCodeRequest(phoneNumber: String, code: String) ->  Future<Bool, NSError> {
         typealias CRUDResultType = (Alamofire.Request, Future<Bool, NSError>)
-        let request = AuthRouter.VerifyPhoneCode(api: self, phone: phoneNumber, code: code)
-        let (_, future): CRUDResultType = self.dataProvider.jsonRequest(request, map: self.phoneCodeMapping(), validation: nil)
-        return self.handleFailure(future)
+        
+        let futureBuilder: (Void -> Future<Bool, NSError>) = { [unowned self] in
+            let request = AuthRouter.VerifyPhoneCode(api: self, phone: phoneNumber, code: code)
+            let (_, future): CRUDResultType = self.dataProvider.jsonRequest(request, map: self.phoneCodeMapping(), validation: nil)
+            return future
+        }
+            
+        return self.handleFailure(futureBuilder)
     }
     
     private func loginRequest(username username: String?, password: String?, phoneNumber: String?, phoneVerificationCode: String?)
@@ -183,9 +201,13 @@ extension APIService {
             return Mapper<AuthResponse>().map(json)
         }
         
-        let serializer = Alamofire.Request.AuthResponseSerializer(mapping)
-        let (_, future): (Alamofire.Request, Future<AuthResponse, NSError>) = dataProvider.request(urlRequest, serializer: serializer, validation: nil)
-        return handleFailure(updateAuth(future))
+        let futureBuilder: (Void -> Future<AuthResponse, NSError>) = { [unowned self] in
+            let serializer = Alamofire.Request.AuthResponseSerializer(mapping)
+            let (_, future): (Alamofire.Request, Future<AuthResponse, NSError>) = self.dataProvider.request(urlRequest, serializer: serializer, validation: nil)
+            return self.updateAuth(future)
+        }
+        
+        return handleFailure(futureBuilder)
     }
     
     private func facebookLoginRequest(fbToken: String) -> Future<AuthResponse, NSError> {
@@ -196,11 +218,13 @@ extension APIService {
             return Mapper<AuthResponse>().map(json)
         }
         
-        let serializer = Alamofire.Request.AuthResponseSerializer(mapping)
-        let (_, future): (Alamofire.Request, Future<AuthResponse, NSError>) = dataProvider.request(urlRequest, serializer: serializer, validation: nil)
-        
+        let futureBuilder: (Void -> Future<AuthResponse, NSError>) = { [unowned self] in
+            let serializer = Alamofire.Request.AuthResponseSerializer(mapping)
+            let (_, future): (Alamofire.Request, Future<AuthResponse, NSError>) = self.dataProvider.request(urlRequest, serializer: serializer, validation: nil)
+            return self.updateAuth(future)
+        }
     
-        return handleFailure(updateAuth(future))
+        return handleFailure(futureBuilder)
     }
     
     private func refreshToken() -> Future<AccessTokenResponse, NSError> {
@@ -276,7 +300,7 @@ extension APIService {
         case Facebook(api: APIService, fbToken: String)
         case Register(api: APIService, email: String?, username: String?, password: String?, phoneNumber: String?, phoneVerificationCode: String?, profileInfo: [String: AnyObject]?)
         case Refresh(api: APIService, token: String)
-        case PhoneVerification(api: APIService, phone: String)
+        case PhoneVerification(api: APIService, phone: String, type: NSNumber)
         case VerifyPhoneCode(api: APIService, phone: String, code: String)
         
         // URLRequestConvertible
@@ -295,11 +319,12 @@ extension APIService {
                     "phoneVerificationCode" : code,
                     "device" : deviceInfo(),
                 ]
-            case .PhoneVerification(let api, let phone):
+            case .PhoneVerification(let api, let phone, let type):
                 url = api.https("/v1.0/users/phoneVerification")
                 params = [
                     "phoneNumber" : phone,
-                    "device" : deviceInfo(),
+                    "type" : type,
+                    "device" : deviceInfo()
                 ]
             case .Refresh(let api, let token):
                 url = api.https("/v1.0/users/token")
