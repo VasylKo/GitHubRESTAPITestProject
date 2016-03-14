@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PostViewController" customModule="PositionIn" customModuleProvider="target">
@@ -19,7 +19,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="hjz-f2-eqH" customClass="TableView" customModule="PosInCore">
-                    <rect key="frame" x="5" y="5" width="590" height="555"/>
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="560"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                 </tableView>
@@ -38,9 +38,9 @@
                 <constraint firstItem="vtg-OZ-pPC" firstAttribute="leading" secondItem="g23-wy-9VV" secondAttribute="leading" constant="5" id="4nP-P8-e5i"/>
                 <constraint firstAttribute="trailing" secondItem="vtg-OZ-pPC" secondAttribute="trailing" constant="5" id="4nq-oq-Qyb"/>
                 <constraint firstAttribute="bottom" secondItem="vtg-OZ-pPC" secondAttribute="bottom" constant="5" id="FVt-q7-YLY"/>
-                <constraint firstItem="hjz-f2-eqH" firstAttribute="leading" secondItem="g23-wy-9VV" secondAttribute="leading" constant="5" id="XMq-yi-9iG"/>
-                <constraint firstItem="hjz-f2-eqH" firstAttribute="top" secondItem="g23-wy-9VV" secondAttribute="top" constant="5" id="iQ6-0G-6iJ"/>
-                <constraint firstAttribute="trailing" secondItem="hjz-f2-eqH" secondAttribute="trailing" constant="5" id="w3J-KY-nmg"/>
+                <constraint firstItem="hjz-f2-eqH" firstAttribute="leading" secondItem="g23-wy-9VV" secondAttribute="leading" id="XMq-yi-9iG"/>
+                <constraint firstItem="hjz-f2-eqH" firstAttribute="top" secondItem="g23-wy-9VV" secondAttribute="top" id="iQ6-0G-6iJ"/>
+                <constraint firstAttribute="trailing" secondItem="hjz-f2-eqH" secondAttribute="trailing" id="w3J-KY-nmg"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
         </view>

@@ -18,6 +18,12 @@ class CommentCell: TableViewCell {
         userNameLabel.text = m!.name
         commentLabel.text = m!.comment
         dateLabel.text = m!.date
+        
+        containerView.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.1).CGColor
+        containerView.layer.shadowOffset = CGSizeMake(0.0, 2.0)
+        containerView.layer.shadowOpacity = 1.0
+        containerView.layer.shadowRadius = 0.0
+        containerView.layer.masksToBounds = false
     }
     
     override func prepareForReuse() {
@@ -25,6 +31,7 @@ class CommentCell: TableViewCell {
         avatarView.cancelSetImage()
     }
     
+    @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var commentLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!

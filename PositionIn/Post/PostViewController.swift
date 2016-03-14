@@ -27,6 +27,7 @@ final class PostViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         dataSource.configureTable(tableView)
+        tableView.separatorStyle = .None
         self.enterCommentField.delegate = self;
         self.reloadPost()
     }
