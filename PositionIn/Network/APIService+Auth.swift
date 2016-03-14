@@ -66,6 +66,12 @@ extension APIService {
                     let hostname = AppConfiguration().xmppHostname
                     let jid = "\(user)@\(hostname)"
                     return XMPPCredentials(jid: jid, password: password)
+                case (_, nil):
+                    // refresh token
+                    api().session().onSuccess(callback: { token in
+                        Log.debug?.message("new token for chat: \(token)")
+                    })
+                    return nil
                 default:
                     return nil
                 }
