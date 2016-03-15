@@ -89,9 +89,8 @@ class MembershipMemberDetailsViewController : BaseAddItemViewController {
         locationRow.cellConfig["tintColor"] = UIScheme.mainThemeColor
         secondSection.addFormRow(locationRow)
         
-        let postalAddressRow = locationRowDescriptor(Tags.PostalAddress.rawValue)
+        let postalAddressRow = XLFormRowDescriptor(tag: Tags.PostalAddress.rawValue, rowType: XLFormRowDescriptorTypeText, title: NSLocalizedString("Postal Address"))
         postalAddressRow.required = false
-        postalAddressRow.title = NSLocalizedString("Postal Address")
         postalAddressRow.cellConfig["textLabel.textColor"] = UIScheme.mainThemeColor
         postalAddressRow.cellConfig["tintColor"] = UIScheme.mainThemeColor
         secondSection.addFormRow(postalAddressRow)
@@ -192,11 +191,7 @@ class MembershipMemberDetailsViewController : BaseAddItemViewController {
                 location.coordinates = locationCoordinates
                 userProfile.location = location
             }
-            if let postalAddressCoordinates = (values[Tags.PostalAddress.rawValue] as? CLLocation)?.coordinate {
-                var postalAddress = Location()
-                postalAddress.coordinates = postalAddressCoordinates
-                userProfile.postalAddress = postalAddress
-            }
+            userProfile.postalAddress = values[Tags.PostalAddress.rawValue] as? String
             userProfile.permanentResidence = values[Tags.PermanentResidence.rawValue] as? String
             if let educationLevelRawValue = values[Tags.EducationLevel.rawValue] as? String {
                 userProfile.educationLevel = EducationLevel(rawValue: educationLevelRawValue)
