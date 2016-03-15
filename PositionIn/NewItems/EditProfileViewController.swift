@@ -286,55 +286,6 @@ final class EditProfileViewController: BaseAddItemViewController {
         eduAndProfessionSection.addFormRow(professionRow)        
         
         tableView.reloadData()
-        
-//        api().getMyProfile().onSuccess { [weak self] profile in
-//            if let strongSelf = self {
-//                // Init info section
-//                strongSelf.firstnameRow.value = profile.firstName
-//                strongSelf.lastnameRow.value = profile.lastName
-//                strongSelf.emailRow.value = profile.email
-//                strongSelf.phoneRow.value = profile.phone
-//                
-//                // Init about me section
-//                strongSelf.aboutRow.value = profile.userDescription
-//                
-//                // Init personal info section
-//                if let gender = profile.gender {
-//                    strongSelf.genderRow.value = XLFormOptionsObject(value: gender.rawValue, displayText: gender.description)
-//                }
-//                strongSelf.dateOfBirthRow.value = profile.dateOfBirth
-//                strongSelf.IDPassPortNumberRow.value = profile.passportNumber
-//                
-//                // Init addresses section
-//                // locationRow
-//                // postalAddressRow
-//                // branchOfChoiseRow
-//                
-//                var options : Array<XLFormOptionsObject> = []
-//                if let countyBranches = strongSelf.countyBranches {
-//                    for countyBranch in countyBranches {
-//                        options.append(XLFormOptionsObject(value: countyBranch.objectId, displayText: countyBranch.name))
-//                    }
-//                }
-//                strongSelf.branchOfChoiseRow.selectorOptions = options
-//                if let countyBranch = strongSelf.userProfile?.countyBranch {
-//                    strongSelf.branchOfChoiseRow.value = XLFormOptionsObject(value: countyBranch.objectId, displayText:countyBranch.name)
-//                }
-//                
-//                
-//                strongSelf.permanentResidenceRow.value = profile.permanentResidence
-//                
-//                // Init education Level and profession section
-//                if let educationLevel = profile.educationLevel {
-//                    strongSelf.educationLevelRow.value = XLFormOptionsObject(value: educationLevel.rawValue, displayText: educationLevel.description)
-//                }
-//                strongSelf.professionRow.value = profile.profession
-//                
-//                
-//                strongSelf.tableView.reloadData()
-//                strongSelf.userProfile = profile
-//            }
-//        }
     }
     
     private func fillFormFromUserProfileModel() {
