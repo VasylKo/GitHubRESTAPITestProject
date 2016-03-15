@@ -58,9 +58,11 @@ public struct TableViewCellURLTextModel: TableViewCellModel {
 public struct TableViewCellURLModel: TableViewCellModel {
     public let url: NSURL?
     public let height: integer_t
+    public let placeholderString: String
     
-    public init(url: NSURL?, height: integer_t = 100) {
+    public init(url: NSURL?, height: integer_t = 100, placeholderString: String = "") {
         self.url = url
         self.height = height
+        self.placeholderString = placeholderString
     }
 }
