@@ -13,6 +13,8 @@ class PostBodyCell: TableViewCell {
         let m = model as? TableViewCellTextModel
         assert(m != nil, "Invalid model passed")
         contentLabel.text = m!.title
+        
+        selectionStyle = .None
     }
 
     @IBOutlet weak var contentLabel: UILabel!

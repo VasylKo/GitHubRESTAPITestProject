@@ -78,7 +78,21 @@ class FeedListViewController: UIViewController {
 extension FeedListViewController: UITableViewDelegate {
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        //TODO: handle tap
+        let detailsController = NewsDetailsViewController(nibName: "NewsDetailsViewController", bundle: nil)
+        
+        if indexPath.row == 0 {
+            detailsController.objectId = self.feauteredFeedItem?.objectId
+        }
+        else {
+            if let feedItems = self.feedItems {
+                let feedItem = feedItems[indexPath.row - 1]
+                detailsController.objectId = feedItem.objectId
+            }
+        }
+        
+        self.navigationController?.pushViewController(detailsController, animated: true)
+        //should devide to post and emergency
+        
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
 }

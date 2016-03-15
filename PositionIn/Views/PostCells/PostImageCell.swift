@@ -14,7 +14,11 @@ class PostImageCell: TableViewCell {
         assert(m != nil, "Invalid model passed")
         //TODO: set placeholder
         contentImage.setImageFromURL(m!.url, placeholder: UIImage(named: ""))
+        
+        self.imageHeightConstaint.constant = CGFloat(m!.height)
+        self.setNeedsLayout()
     }
 
+    @IBOutlet weak var imageHeightConstaint: NSLayoutConstraint!
     @IBOutlet weak var contentImage: UIImageView!
 }

@@ -17,14 +17,14 @@
                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Ev-k8-dOD" userLabel="Container">
                         <rect key="frame" x="0.0" y="8" width="317" height="105"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jC6-Fv-csn" userLabel="DateLabel">
-                                <rect key="frame" x="74" y="44" width="234" height="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jC6-Fv-csn" userLabel="DateLabel">
+                                <rect key="frame" x="64" y="45" width="244" height="15"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="13"/>
                                 <color key="textColor" red="0.60784313725490191" green="0.60784313725490191" blue="0.60784313725490191" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pif-sd-dGN" userLabel="NameLabel">
-                                <rect key="frame" x="74" y="12" width="234" height="20"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pif-sd-dGN" userLabel="NameLabel">
+                                <rect key="frame" x="64" y="12" width="245" height="21"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -33,14 +33,14 @@
                                 </userDefinedRuntimeAttributes>
                             </label>
                             <view clipsSubviews="YES" contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="LfW-dp-Eo5" customClass="AvatarView" customModule="PositionIn" customModuleProvider="target">
-                                <rect key="frame" x="12" y="12" width="50" height="50"/>
+                                <rect key="frame" x="16" y="12" width="36" height="36"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="50" id="E4K-OZ-hyc"/>
-                                    <constraint firstAttribute="height" constant="50" id="TEt-2y-veM"/>
+                                    <constraint firstAttribute="width" constant="36" id="E4K-OZ-hyc"/>
+                                    <constraint firstAttribute="height" constant="36" id="TEt-2y-veM"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5RN-WH-csu" userLabel="CommentLabel">
-                                <rect key="frame" x="74" y="74" width="234" height="23"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5RN-WH-csu" userLabel="CommentLabel">
+                                <rect key="frame" x="64" y="72" width="245" height="25"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                 <color key="textColor" red="0.23529411764705882" green="0.23529411764705882" blue="0.23529411764705882" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -58,7 +58,7 @@
                             <constraint firstItem="pif-sd-dGN" firstAttribute="top" secondItem="4Ev-k8-dOD" secondAttribute="top" constant="12" id="idw-F9-Lpz"/>
                             <constraint firstItem="pif-sd-dGN" firstAttribute="leading" secondItem="LfW-dp-Eo5" secondAttribute="trailing" constant="12" id="kLp-qK-UVu"/>
                             <constraint firstItem="5RN-WH-csu" firstAttribute="top" secondItem="jC6-Fv-csn" secondAttribute="bottom" constant="12" id="kQe-hN-MK3"/>
-                            <constraint firstItem="LfW-dp-Eo5" firstAttribute="leading" secondItem="4Ev-k8-dOD" secondAttribute="leading" constant="12" id="rWJ-LB-JoT"/>
+                            <constraint firstItem="LfW-dp-Eo5" firstAttribute="leading" secondItem="4Ev-k8-dOD" secondAttribute="leading" constant="16" id="rWJ-LB-JoT"/>
                             <constraint firstItem="LfW-dp-Eo5" firstAttribute="top" secondItem="4Ev-k8-dOD" secondAttribute="top" constant="12" id="sXp-wD-xf6"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>

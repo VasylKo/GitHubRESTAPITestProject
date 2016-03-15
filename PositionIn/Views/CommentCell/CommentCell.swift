@@ -24,6 +24,8 @@ class CommentCell: TableViewCell {
         containerView.layer.shadowOpacity = 1.0
         containerView.layer.shadowRadius = 0.0
         containerView.layer.masksToBounds = false
+        
+        self.selectionStyle = .None
     }
     
     override func prepareForReuse() {

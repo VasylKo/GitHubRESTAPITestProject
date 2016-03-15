@@ -11,16 +11,11 @@ import PosInCore
 import CleanroomLogger
 import BrightFutures
 
-protocol PostActionConsumer: NewsActionConsumer {
-    func showProfileScreen(userId: CRUDObjectId)
-    func showAttachments(links: [NSURL]?, attachments: [Attachment]?)
+protocol NewsActionConsumer: class {
+    func likePost()
 }
 
-protocol PostActionProvider {
-    var actionConsumer: PostActionConsumer? { get set }
-}
-
-final class PostViewController: UIViewController, UITextFieldDelegate {
+final class NewsDetailsViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +23,9 @@ final class PostViewController: UIViewController, UITextFieldDelegate {
         tableView.separatorStyle = .None
         self.enterCommentField.delegate = self;
         self.reloadPost()
+        
+        self.title = NSLocalizedString("News")
+        self.tableView.backgroundColor = UIColor.bt_colorWithBytesR(238, g: 238, b: 238)
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -40,7 +38,6 @@ final class PostViewController: UIViewController, UITextFieldDelegate {
         self.unsubscribeFromKeyboardNotification()
     }
     
-    //TODO: remove this call
     private func reloadPost() {
         if let objectId = objectId {
             api().getPost(objectId).onSuccess { [weak self] post in
@@ -54,7 +51,6 @@ final class PostViewController: UIViewController, UITextFieldDelegate {
                     self?.tableView.reloadData()
                     self?.tableView.layoutIfNeeded();
                     })
-                
             }
         }
     }
@@ -90,10 +86,10 @@ final class PostViewController: UIViewController, UITextFieldDelegate {
         NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
-    private var post: Post?
+
     
-    private lazy var dataSource: PostDataSource = { [unowned self] in
-        let dataSource = PostDataSource()
+    private lazy var dataSource: NewsDataSource = { [unowned self] in
+        let dataSource = NewsDataSource()
         dataSource.parentViewController = self
         return dataSource
         }()
@@ -103,9 +99,10 @@ final class PostViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var enterCommentField: UITextField!
     @IBOutlet weak var enterCommentFieldBottomSpaceConstraint: NSLayoutConstraint!
     var objectId: CRUDObjectId?
+    private var post: Post?
 }
 
-extension PostViewController {
+extension NewsDetailsViewController {
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         guard let text = textField.text where text.characters.count > 0, let post = post else  {
@@ -124,18 +121,7 @@ extension PostViewController {
     }
 }
 
-extension PostViewController: PostActionConsumer {
-    
-    func showAttachments(links: [NSURL]?, attachments: [Attachment]?) {
-        let moreInformationViewController = MoreInformationViewController(links: links, attachments: attachments)
-        self.navigationController?.pushViewController(moreInformationViewController, animated: true)
-    }
-    
-    func showProfileScreen(userId: CRUDObjectId) {
-        let profileController = Storyboards.Main.instantiateUserProfileViewController()
-        profileController.objectId = userId
-        navigationController?.pushViewController(profileController, animated: true)
-    }
+extension NewsDetailsViewController: NewsActionConsumer {
     
     func likePost() {
         if let tempPost = post {
@@ -153,14 +139,15 @@ extension PostViewController: PostActionConsumer {
     }
 }
 
-extension PostViewController {
-    internal class PostDataSource: TableViewDataSource {
+
+extension NewsDetailsViewController {
+    internal class NewsDataSource: TableViewDataSource {
         
-        var actionConsumer: PostActionConsumer? {
-            return parentViewController as? PostActionConsumer
+        var actionConsumer: NewsActionConsumer? {
+            return parentViewController as? NewsActionConsumer
         }
         
-        private let cellFactory = PostCellModelFactory()
+        private let cellFactory = FeedItemNewsCellModelFactory()
         private var items: [[TableViewCellModel]] =  [[],[]]
         
         func setPost(post: Post) {
@@ -190,19 +177,6 @@ extension PostViewController {
         
         override func nibCellsId() -> [String] {
             return cellFactory.postCellsReuseId()
-        }
-        
-        func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-            tableView.deselectRowAtIndexPath(indexPath, animated: true)
-            if  let actionConsumer = parentViewController as? PostActionConsumer {
-                if let model = self.tableView(tableView, modelForIndexPath: indexPath) as? PostInfoModel,
-                    let userId = model.userId {
-                        actionConsumer.showProfileScreen(userId)
-                }
-                if let model = self.tableView(tableView, modelForIndexPath: indexPath) as? PostAttachmentsModel {
-                    actionConsumer.showAttachments(model.links, attachments: model.attachments)
-                }
-            }
         }
     }
 }
