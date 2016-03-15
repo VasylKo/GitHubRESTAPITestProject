@@ -18,13 +18,22 @@ class NewsItemTitleCell: TableViewCell {
         if let date = m!.date {
             dateLabel.text = date
         }
+        else {
+            newsTitleLabel.text = nil
+        }
         
         if let author = m!.author {
             authorLabel.text = "By \(author)"
         }
+        else {
+            newsTitleLabel.text = nil
+        }
         
         if let newsTitle = m!.title {
             newsTitleLabel.text = newsTitle
+        }
+        else {
+            newsTitleLabel.text = nil
         }
         
         self.selectionStyle = .None

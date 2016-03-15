@@ -135,10 +135,12 @@ extension FeedListViewController: UITableViewDataSource {
                 forIndexPath: indexPath) as! FeedTableViewCell
             
             let feedItem = self.feedItems![indexPath.row - 1]
-            let imagePlaceholder = (feedItem.type == .Emergency) ? "home_emergencies" : "home_news"
+            let imagePlaceholder = (feedItem.type == .Emergency) ? "PromotionDetailsPlaceholder" : "home_news"
             feedItemCell.setImageURL(feedItem.image, placeholder: imagePlaceholder)
-            feedItemCell.titleString = feedItem.text
-            feedItemCell.authorString = feedItem.name
+            feedItemCell.titleString = feedItem.name
+            if let title = feedItem.author?.title {
+                feedItemCell.authorString = "By \(title)"
+            }
             feedItemCell.timeAgoString = feedItem.date?.formattedAsTimeAgo()
             cell = feedItemCell
         }
