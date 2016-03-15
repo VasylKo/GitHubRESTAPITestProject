@@ -162,6 +162,10 @@ class OrderViewController: UITableViewController, SelectPaymentMethodControllerD
     // MARK: - UITableViewDelegate
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         let height = super.tableView(tableView, heightForRowAtIndexPath: indexPath)
+        // hide availability date cell
+        if indexPath.section == 0 && indexPath.row == 1 && self.product?.startDate == nil && self.product?.endData == nil {
+            return 0.0
+        }
         return height
     }
 }
