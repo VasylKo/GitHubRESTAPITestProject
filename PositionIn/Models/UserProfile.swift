@@ -83,9 +83,9 @@ final class UserProfile: CRUDObject {
     var passportNumber: String?
     var postalAddress: Location?
     var profession: String?
-    var countyBranchOfChoise: Location?
     var permanentResidence: String?
     var educationLevel: EducationLevel?
+    var countyBranch : Community?
     
     var guest: Bool =  false
     var shops: [ObjectInfo]?
@@ -136,15 +136,13 @@ final class UserProfile: CRUDObject {
         gender <- map["gender"]
         dateOfBirth <- (map["dob"], APIDateTransform())
         email <- map["email"]
+        countyBranch <- map["countryBranch"]
         backgroundImage <- (map["background"], AmazonURLTransform())
         location <- map["location"]
         membershipDetails <- map["membershipDetails"]
         passportNumber <- map["passportNumber"]
         postalAddress <- map["postalAddress"]
         profession <- map["profession"]
-        
-        // countyBranchOfChoise
-        
         permanentResidence <- map["permanentResidence"]
         educationLevel <- map["educationLevel"]
         guest <- map["guest"]

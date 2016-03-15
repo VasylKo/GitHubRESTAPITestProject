@@ -28,6 +28,10 @@ final class ChatController: NSObject {
         fetchMetadata()
     }
     
+    func canSendMessage() -> Bool {
+        return self.chatClient.isAuthorized
+    }
+    
     func closeSession() {
         chatClient.removeMessageListener(self)
         ConversationManager.sharedInstance().didLeaveConversation(conversation)
