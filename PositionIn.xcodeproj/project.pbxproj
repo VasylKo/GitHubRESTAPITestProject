@@ -601,6 +601,7 @@
 		24EF62131BA81B5800472531 /* ChatHistoryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatHistoryCell.swift; path = Messaging/ChatHistoryCell.swift; sourceTree = "<group>"; };
 		24EF62151BA81DCB00472531 /* PositionIn.ChatHistoryCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PositionIn.ChatHistoryCell.xib; path = Messaging/PositionIn.ChatHistoryCell.xib; sourceTree = "<group>"; };
 		3B8926F67F56D70AAB2211B0 /* Pods-PositionIn.prodrelease.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PositionIn.prodrelease.xcconfig"; path = "Pods/Target Support Files/Pods-PositionIn/Pods-PositionIn.prodrelease.xcconfig"; sourceTree = "<group>"; };
+		4C3EC3EDA1F39CF38753B1D2 /* Pods-PositionIn.prodrelease2.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PositionIn.prodrelease2.xcconfig"; path = "Pods/Target Support Files/Pods-PositionIn/Pods-PositionIn.prodrelease2.xcconfig"; sourceTree = "<group>"; };
 		500D7FA21BC2AACF008C8C82 /* SearchItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchItem.swift; sourceTree = "<group>"; };
 		500D7FA41BC2ADFE008C8C82 /* SearchItemCellModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchItemCellModel.swift; sourceTree = "<group>"; };
 		500D7FA61BC2CD39008C8C82 /* SearchEntityCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchEntityCell.swift; sourceTree = "<group>"; };
@@ -1396,6 +1397,7 @@
 				64AF9DE99B2895039ACA7F1F /* Pods-PositionIn.devrelease.xcconfig */,
 				56DAF56D2A99203B14E2570B /* Pods-PositionIn.stagingrelease.xcconfig */,
 				3B8926F67F56D70AAB2211B0 /* Pods-PositionIn.prodrelease.xcconfig */,
+				4C3EC3EDA1F39CF38753B1D2 /* Pods-PositionIn.prodrelease2.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -4429,6 +4431,7 @@
 		};
 		CD8DB9B21C91AEDA00488EBB /* ProdRelease2 */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4C3EC3EDA1F39CF38753B1D2 /* Pods-PositionIn.prodrelease2.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;

@@ -504,6 +504,13 @@ final class APIService {
             return self.handleFailure(futureBuilder)
         }
     }
+    
+    func getCountyBranches(page: Page) -> Future<CollectionResponse<Community>, NSError> {
+        let endpoint = HomeItem.Volunteer.endpoint()
+        var params = page.query
+        params["filterByParticipationStatus"] = false
+        return getObjectsCollection(endpoint!, params: params)
+    }
 
     func getVolunteer(volunteerId: CRUDObjectId) -> Future<Community, NSError> {
         let endpoint = Volunteer.volunteerEndpoint(volunteerId)

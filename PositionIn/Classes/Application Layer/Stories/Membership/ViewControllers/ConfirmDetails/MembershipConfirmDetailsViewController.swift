@@ -7,7 +7,9 @@
 //
 
 import Foundation
+import BrightFutures
 import XLForm
+import Box
 
 class MembershipConfirmDetailsViewController : XLFormViewController {
     
@@ -15,6 +17,7 @@ class MembershipConfirmDetailsViewController : XLFormViewController {
     
     private let router : MembershipRouter
     private var userProfile: UserProfile?
+    private var countyBranches: [Community]?
     private let pageView = MembershipPageView(pageCount: 3)
     
     private var phoneRow: XLFormRowDescriptor = {
@@ -33,7 +36,6 @@ class MembershipConfirmDetailsViewController : XLFormViewController {
         return row
     }()
     
-    //Last name
     private var lastNameRow: XLFormRowDescriptor = {
         let row = XLFormRowDescriptor(tag: nil, rowType: XLFormRowDescriptorTypeText, title: NSLocalizedString("Last name", comment: ""))
         row.cellConfig.setObject(UIScheme.mainThemeColor, forKey: "textLabel.textColor")
@@ -42,11 +44,18 @@ class MembershipConfirmDetailsViewController : XLFormViewController {
         return row
     }()
     
-    // Email
     private var emailRow: XLFormRowDescriptor = {
         let row = XLFormRowDescriptor(tag: nil, rowType: XLFormRowDescriptorTypeEmail,
             title: NSLocalizedString("Email", comment: "Confirm details: Email"))
         row.cellConfigAtConfigure["textField.placeholder"] = NSLocalizedString("Required", comment: "")
+        row.cellConfig.setObject(UIScheme.mainThemeColor, forKey: "textLabel.textColor")
+        row.cellConfig.setObject(UIScheme.mainThemeColor, forKey: "tintColor")
+        row.required = true
+        return row
+    }()
+    
+    private var countyBranchRow: XLFormRowDescriptor = {
+        let row = XLFormRowDescriptor(tag: nil, rowType:XLFormRowDescriptorTypeSelectorPush, title: NSLocalizedString("County Branch"))
         row.cellConfig.setObject(UIScheme.mainThemeColor, forKey: "textLabel.textColor")
         row.cellConfig.setObject(UIScheme.mainThemeColor, forKey: "tintColor")
         row.required = true
@@ -75,7 +84,12 @@ class MembershipConfirmDetailsViewController : XLFormViewController {
     }
     
     func loadData (){
-        api().getMyProfile().onSuccess(callback: {[weak self] userProfile in
+        let page = APIService.Page(start: 0, size: 100)
+        
+        api().getCountyBranches(page).flatMap { [weak self] (response: CollectionResponse<Community>) -> Future<UserProfile, NSError> in
+            self?.countyBranches = response.items
+            return api().getMyProfile()
+        }.onSuccess(callback: {[weak self] userProfile in
             self?.userProfile = userProfile
             self?.initializeForm()
             self?.setupInterface()
@@ -139,6 +153,19 @@ class MembershipConfirmDetailsViewController : XLFormViewController {
         
         emailRow.value = self.userProfile?.email
         infoSection.addFormRow(self.emailRow)
+
+        
+        var options : Array<XLFormOptionsObject> = []
+        if let countyBranches = self.countyBranches {
+            for countyBranch in countyBranches {
+                options.append(XLFormOptionsObject(value: countyBranch.objectId, displayText: countyBranch.name))
+            }
+        }
+        self.countyBranchRow.selectorOptions = options
+        if let countyBranch = self.userProfile?.countyBranch {
+            countyBranchRow.value = XLFormOptionsObject(value: countyBranch.objectId, displayText:countyBranch.name)
+        }
+        infoSection.addFormRow(self.countyBranchRow)
         
         form.addFormSection(infoSection)
         
@@ -166,6 +193,14 @@ class MembershipConfirmDetailsViewController : XLFormViewController {
         }
         if let lastName = self.lastNameRow.value as? String {
             self.userProfile?.lastName = lastName
+        }
+        
+        if let countyBranch = self.countyBranchRow.value as? XLFormOptionsObject {
+            if let objectId = countyBranch.formValue() as? CRUDObjectId {
+                var countyBranch = Community()
+                countyBranch.objectId = objectId
+                self.userProfile?.countyBranch = Community(objectId: objectId)
+            }
         }
         
         if let userProfile = self.userProfile {
