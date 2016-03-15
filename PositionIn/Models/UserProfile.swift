@@ -51,9 +51,9 @@ final class UserProfile: CRUDObject {
     var passportNumber: String?
     var postalAddress: Location?
     var profession: String?
-    // countryBranch
     var permanentResidence: String?
     var educationLevel: EducationLevel?
+    var countyBranch : Community?
     
     var guest: Bool =  false
     var shops: [ObjectInfo]?
@@ -101,6 +101,7 @@ final class UserProfile: CRUDObject {
         userDescription <- map["description"]
         phone <- map["phone"]
         email <- map["email"]
+        countyBranch <- map["countryBranch"]
         avatar <- (map["avatar"], AmazonURLTransform())
         backgroundImage <- (map["background"], AmazonURLTransform())
         location <- map["location"]

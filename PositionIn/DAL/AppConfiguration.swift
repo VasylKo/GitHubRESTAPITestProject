@@ -56,10 +56,10 @@ final class AppConfiguration {
     let xmppPort: Int
     
     private enum Environment: String {
-        case Dev = "Dev"
-        case Staging = "Staging"
-        case StagingCopy = "StagingCopy"
-        case Prod = "Production"
+        case Dev
+        case Staging
+        case StagingCopy
+        case Prod
     }
     
     private static var environment: Environment {

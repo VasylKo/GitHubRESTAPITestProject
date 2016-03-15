@@ -6,6 +6,7 @@
 //  Copyright © 2016 Soluna Labs. All rights reserved.
 //
 
+import BrightFutures
 import UIKit
 
 class FeedListViewController: UIViewController {
@@ -19,58 +20,41 @@ class FeedListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    
+        self.setupInterface()
+        
+        self.loadData()
+    }
+    
+    private func setupInterface() {
         
         var nib = UINib(nibName: String(FeedTableViewCell.self), bundle: nil)
         self.tableView.registerNib(nib, forCellReuseIdentifier: String(FeedTableViewCell.self))
         nib = UINib(nibName:  String(FeauteredFeedTableViewCell.self), bundle: nil)
         self.tableView.registerNib(nib, forCellReuseIdentifier: String(FeauteredFeedTableViewCell.self))
-        
-        self.loadData()
     }
     
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-//        feed-logo
-        let imageView = UIImageView(image: UIImage(named: "feed-logo")?.imageWithRenderingMode(.AlwaysOriginal))
-        let barButtonItem = UIBarButtonItem(customView: imageView)
-        self.navigationItem.titleView = imageView
-        self.navigationItem.rightBarButtonItem = barButtonItem
-        self.navigationItem.rightBarButtonItems = [barButtonItem]
-        self.navigationController?.navigationItem.rightBarButtonItem = barButtonItem
-    }
-    
-    //MARK: LoadData
+    //MARK: Load data
     
     func loadData () {
-        
         var filter = SearchFilter()
         filter.isFeatured = true
-        
-        let group = dispatch_group_create()
-        
-        dispatch_group_enter(group)
         var page = APIService.Page(start: 0, size: 1)
-        api().getFeed(filter, page: page).onSuccess(callback: { [weak self] response in
+        
+        api().getFeed(filter, page: page).flatMap { [weak self] (response: CollectionResponse<FeedItem>) -> Future<CollectionResponse<FeedItem>, NSError> in
             self?.feauteredFeedItem = response.items.first
-            dispatch_group_leave(group)
-            }
-        )
-        
-        page = APIService.Page(start: 0, size: 100)
-        filter = SearchFilter()
-        filter.itemTypes = [.Emergency, .News]
-        dispatch_group_enter(group)
-        api().getFeed(filter, page: page).onSuccess(callback: { [weak self] response in
+            
+            page = APIService.Page(start: 0, size: 100)
+            filter = SearchFilter()
+            filter.itemTypes = [.Emergency, .News]
+            
+            return api().getFeed(filter, page: page)
+            
+            }.onSuccess {[weak self] (response: CollectionResponse<FeedItem>) -> Void in
             self?.feedItems = response.items
-            dispatch_group_leave(group)
-            }
-        )
-        
-        dispatch_group_notify(group, dispatch_get_main_queue(), {
-            self.tableView.reloadData()
-            self.tableView.contentSize = CGSize(width: self.tableView.contentSize.width, height: self.tableView.contentSize.height + 20)
-            //margin from bottom plus button
-        })
+            self?.tableView.reloadData()
+            self?.tableView.contentSize = CGSize(width: self!.tableView.contentSize.width, height: self!.tableView.contentSize.height + 20)
+        }
     }
 }
 
