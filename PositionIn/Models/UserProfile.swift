@@ -9,12 +9,13 @@
 import ObjectMapper
 import CleanroomLogger
 
-enum Gender: Int, CustomStringConvertible {
+enum Gender: Int, CustomStringConvertible, TransformType {
     case Unknown = 0
     case Male
     case Female
     case Other
     
+    // CustomStringConvertible
     var description: String {
         switch self {
         case .Unknown:
@@ -27,9 +28,26 @@ enum Gender: Int, CustomStringConvertible {
             return "Other"
         }
     }
+    
+    // TransformType
+    typealias Object = Gender
+    typealias JSON = String
+    func transformFromJSON(value: AnyObject?) -> Object? {
+        if let genderValue = value as? Int {
+            return Gender(rawValue: genderValue)
+        }
+        return nil
+    }
+    
+    func transformToJSON(value: Object?) -> JSON? {
+        if let rawValue = value?.rawValue {
+            return "\(rawValue)"
+        }
+        return nil
+    }
 }
 
-enum EducationLevel: Int, CustomStringConvertible  {
+enum EducationLevel: Int, CustomStringConvertible, TransformType  {
     case Unknown = 0
     case PrimarySchool
     case SecondarySchool
@@ -40,6 +58,7 @@ enum EducationLevel: Int, CustomStringConvertible  {
     case Masters
     case PHD
     
+    // CustomStringConvertible
     var description: String {
         switch self {
         case .Unknown:
@@ -61,6 +80,23 @@ enum EducationLevel: Int, CustomStringConvertible  {
         case .PHD:
             return "PHD"
         }
+    }
+    
+    // TransformType
+    typealias Object = EducationLevel
+    typealias JSON = String
+    func transformFromJSON(value: AnyObject?) -> Object? {
+        if let educationValue = value as? Int {
+            return EducationLevel(rawValue: educationValue)
+        }
+        return nil
+    }
+    
+    func transformToJSON(value: Object?) -> JSON? {
+        if let rawValue = value?.rawValue {
+            return "\(rawValue)"
+        }
+        return nil
     }
 }
 
@@ -131,9 +167,7 @@ final class UserProfile: CRUDObject {
         lastName <- map["lastName"]
         phone <- map["phone"]
         userDescription <- map["description"]
-        if let genderValue: Int = map["gender"].value() {
-            gender = Gender(rawValue: genderValue)
-        }
+        gender <- map["gender"]
         dateOfBirth <- (map["dob"], APIDateTransform())
         email <- map["email"]
         backgroundImage <- (map["background"], AmazonURLTransform())
@@ -146,9 +180,7 @@ final class UserProfile: CRUDObject {
         // countyBranchOfChoise
         
         permanentResidence <- map["permanentResidence"]
-        if let educationLevelValue: Int = map["educationLevel"].value() {
-            educationLevel = EducationLevel(rawValue: educationLevelValue)
-        }
+        educationLevel <- map["educationLevel"]
         guest <- map["guest"]
         shops <- map["shops.data"]
         countFollowers <- map["followers.count"]
