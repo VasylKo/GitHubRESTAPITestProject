@@ -182,9 +182,7 @@ class MembershipMemberDetailsViewController : BaseAddItemViewController {
         let values = formValues()
         
         if let userProfile = self.userProfile {
-            if let genderRawValue = (values[Tags.Gender.rawValue] as? NSNumber)?.integerValue {
-                userProfile.gender = Gender(rawValue: genderRawValue)
-            }
+            userProfile.gender = (values[Tags.Gender.rawValue] as? XLFormOptionsObject).flatMap { $0.gender }
             userProfile.dateOfBirth = values[Tags.Gender.rawValue] as? NSDate
             userProfile.passportNumber = values[Tags.DateOfBirth.rawValue] as? String
             if let locationCoordinates = (values[Tags.Location.rawValue] as? CLLocation)?.coordinate {
@@ -194,9 +192,7 @@ class MembershipMemberDetailsViewController : BaseAddItemViewController {
             }
             //userProfile.postalAddress = values[Tags.PostalAddress.rawValue] as? String
             userProfile.permanentResidence = values[Tags.PermanentResidence.rawValue] as? String
-            if let educationLevelRawValue = (values[Tags.Gender.rawValue] as? NSNumber)?.integerValue  {
-                userProfile.educationLevel = EducationLevel(rawValue: educationLevelRawValue)
-            }
+            userProfile.educationLevel = (values[Tags.EducationLevel.rawValue] as? XLFormOptionsObject).flatMap { $0.educationLevel }
             userProfile.profession = values[Tags.Profession.rawValue] as? String
 
             api().updateMyProfile(userProfile).onSuccess(callback: { [weak self] _ in
