@@ -21,6 +21,17 @@ class FeauteredFeedTableViewCell: UITableViewCell {
         }
     }
     
+    override func setSelected(selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+        titleLabelContainerView.backgroundColor = UIColor.bt_colorFromHex("000000", alpha: 0.5)
+    }
+    
+    override func setHighlighted(highlighted: Bool, animated: Bool) {
+        super.setHighlighted(highlighted, animated: animated)
+        titleLabelContainerView.backgroundColor = UIColor.bt_colorFromHex("000000", alpha: 0.5)
+    }
+    
+    @IBOutlet weak var titleLabelContainerView: UIView!
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var feedItemImageView: UIImageView!
 }

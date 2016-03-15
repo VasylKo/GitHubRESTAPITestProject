@@ -13,3 +13,9 @@ struct NewsTableViewCellModel: TableViewCellModel {
     let item : FeedItem
     weak var actionConsumer: NewsListActionConsumer?
 }
+
+struct NewsDetailsTitleTableViewCellModel: TableViewCellModel {
+    let title: String?
+    let author: String?
+    let date: String?
+}

@@ -62,7 +62,21 @@ class FeedListViewController: UIViewController {
 extension FeedListViewController: UITableViewDelegate {
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        //TODO: handle tap
+        let detailsController = NewsDetailsViewController(nibName: "NewsDetailsViewController", bundle: nil)
+        
+        if indexPath.row == 0 {
+            detailsController.objectId = self.feauteredFeedItem?.objectId
+        }
+        else {
+            if let feedItems = self.feedItems {
+                let feedItem = feedItems[indexPath.row - 1]
+                detailsController.objectId = feedItem.objectId
+            }
+        }
+        
+        self.navigationController?.pushViewController(detailsController, animated: true)
+        //should devide to post and emergency
+        
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
 }
@@ -105,10 +119,12 @@ extension FeedListViewController: UITableViewDataSource {
                 forIndexPath: indexPath) as! FeedTableViewCell
             
             let feedItem = self.feedItems![indexPath.row - 1]
-            let imagePlaceholder = (feedItem.type == .Emergency) ? "home_emergencies" : "home_news"
+            let imagePlaceholder = (feedItem.type == .Emergency) ? "PromotionDetailsPlaceholder" : "home_news"
             feedItemCell.setImageURL(feedItem.image, placeholder: imagePlaceholder)
-            feedItemCell.titleString = feedItem.text
-            feedItemCell.authorString = feedItem.name
+            feedItemCell.titleString = feedItem.name
+            if let title = feedItem.author?.title {
+                feedItemCell.authorString = "By \(title)"
+            }
             feedItemCell.timeAgoString = feedItem.date?.formattedAsTimeAgo()
             cell = feedItemCell
         }
