@@ -89,8 +89,9 @@ class MembershipMemberDetailsViewController : BaseAddItemViewController {
         locationRow.cellConfig["tintColor"] = UIScheme.mainThemeColor
         secondSection.addFormRow(locationRow)
         
-        let postalAddressRow = XLFormRowDescriptor(tag: Tags.PostalAddress.rawValue, rowType: XLFormRowDescriptorTypeText, title: NSLocalizedString("Postal Address"))
+        let postalAddressRow = locationRowDescriptor(Tags.PostalAddress.rawValue)
         postalAddressRow.required = false
+        postalAddressRow.title = NSLocalizedString("Postal Address")
         postalAddressRow.cellConfig["textLabel.textColor"] = UIScheme.mainThemeColor
         postalAddressRow.cellConfig["tintColor"] = UIScheme.mainThemeColor
         secondSection.addFormRow(postalAddressRow)
@@ -111,14 +112,14 @@ class MembershipMemberDetailsViewController : BaseAddItemViewController {
             rowType:XLFormRowDescriptorTypeSelectorPush, title: NSLocalizedString("Education Level"))
         educationLevelRow.required = false
         var educationLevelSelectorOptions: [XLFormOptionsObject] = []
-        educationLevelSelectorOptions.append(XLFormOptionsObject(value: EducationLevel.PrimarySchool.rawValue, displayText: EducationLevel.PrimarySchool.rawValue))
-        educationLevelSelectorOptions.append(XLFormOptionsObject(value: EducationLevel.SecondarySchool.rawValue, displayText: EducationLevel.SecondarySchool.rawValue))
-        educationLevelSelectorOptions.append(XLFormOptionsObject(value: EducationLevel.HighSchool.rawValue, displayText: EducationLevel.HighSchool.rawValue))
-        educationLevelSelectorOptions.append(XLFormOptionsObject(value: EducationLevel.Diploma.rawValue, displayText: EducationLevel.Diploma.rawValue))
-        educationLevelSelectorOptions.append(XLFormOptionsObject(value: EducationLevel.Undergraduate.rawValue, displayText: EducationLevel.Undergraduate.rawValue))
-        educationLevelSelectorOptions.append(XLFormOptionsObject(value: EducationLevel.PostGraduateDiploma.rawValue, displayText: EducationLevel.PostGraduateDiploma.rawValue))
-        educationLevelSelectorOptions.append(XLFormOptionsObject(value: EducationLevel.Masters.rawValue, displayText: EducationLevel.Masters.rawValue))
-        educationLevelSelectorOptions.append(XLFormOptionsObject(value: EducationLevel.PHD.rawValue, displayText: EducationLevel.PHD.rawValue))
+        educationLevelSelectorOptions.append(XLFormOptionsObject(value: EducationLevel.PrimarySchool.rawValue, displayText: EducationLevel.PrimarySchool.description))
+        educationLevelSelectorOptions.append(XLFormOptionsObject(value: EducationLevel.SecondarySchool.rawValue, displayText: EducationLevel.SecondarySchool.description))
+        educationLevelSelectorOptions.append(XLFormOptionsObject(value: EducationLevel.HighSchool.rawValue, displayText: EducationLevel.HighSchool.description))
+        educationLevelSelectorOptions.append(XLFormOptionsObject(value: EducationLevel.Diploma.rawValue, displayText: EducationLevel.Diploma.description))
+        educationLevelSelectorOptions.append(XLFormOptionsObject(value: EducationLevel.Undergraduate.rawValue, displayText: EducationLevel.Undergraduate.description))
+        educationLevelSelectorOptions.append(XLFormOptionsObject(value: EducationLevel.PostGraduateDiploma.rawValue, displayText: EducationLevel.PostGraduateDiploma.description))
+        educationLevelSelectorOptions.append(XLFormOptionsObject(value: EducationLevel.Masters.rawValue, displayText: EducationLevel.Masters.description))
+        educationLevelSelectorOptions.append(XLFormOptionsObject(value: EducationLevel.PHD.rawValue, displayText: EducationLevel.PHD.description))
         educationLevelRow.selectorOptions = educationLevelSelectorOptions
         educationLevelRow.value = educationLevelSelectorOptions.first
         educationLevelRow.cellConfig["textLabel.textColor"] = UIScheme.mainThemeColor
@@ -191,9 +192,9 @@ class MembershipMemberDetailsViewController : BaseAddItemViewController {
                 location.coordinates = locationCoordinates
                 userProfile.location = location
             }
-            userProfile.postalAddress = values[Tags.PostalAddress.rawValue] as? String
+            //userProfile.postalAddress = values[Tags.PostalAddress.rawValue] as? String
             userProfile.permanentResidence = values[Tags.PermanentResidence.rawValue] as? String
-            if let educationLevelRawValue = values[Tags.EducationLevel.rawValue] as? String {
+            if let educationLevelRawValue = (values[Tags.Gender.rawValue] as? NSNumber)?.integerValue  {
                 userProfile.educationLevel = EducationLevel(rawValue: educationLevelRawValue)
             }
             userProfile.profession = values[Tags.Profession.rawValue] as? String
