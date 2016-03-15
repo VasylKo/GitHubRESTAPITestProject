@@ -9,7 +9,7 @@
 import ObjectMapper
 import CleanroomLogger
 
-enum Gender: Int, CustomStringConvertible, TransformType {
+enum Gender: Int, CustomStringConvertible {
     case Unknown = 0
     case Male
     case Female
@@ -28,26 +28,9 @@ enum Gender: Int, CustomStringConvertible, TransformType {
             return "Other"
         }
     }
-    
-    // TransformType
-    typealias Object = Gender
-    typealias JSON = String
-    func transformFromJSON(value: AnyObject?) -> Object? {
-        if let genderValue = value as? Int {
-            return Gender(rawValue: genderValue)
-        }
-        return nil
-    }
-    
-    func transformToJSON(value: Object?) -> JSON? {
-        if let rawValue = value?.rawValue {
-            return "\(rawValue)"
-        }
-        return nil
-    }
 }
 
-enum EducationLevel: Int, CustomStringConvertible, TransformType  {
+enum EducationLevel: Int, CustomStringConvertible  {
     case Unknown = 0
     case PrimarySchool
     case SecondarySchool
@@ -80,23 +63,6 @@ enum EducationLevel: Int, CustomStringConvertible, TransformType  {
         case .PHD:
             return "PHD"
         }
-    }
-    
-    // TransformType
-    typealias Object = EducationLevel
-    typealias JSON = String
-    func transformFromJSON(value: AnyObject?) -> Object? {
-        if let educationValue = value as? Int {
-            return EducationLevel(rawValue: educationValue)
-        }
-        return nil
-    }
-    
-    func transformToJSON(value: Object?) -> JSON? {
-        if let rawValue = value?.rawValue {
-            return "\(rawValue)"
-        }
-        return nil
     }
 }
 
