@@ -39,6 +39,7 @@ final class EditProfileViewController: BaseAddItemViewController {
     
     // MARK: - Private properties
     private var userProfile: UserProfile?
+    private var countyBranches: [Community]?
     
     // Photo
     lazy private var photoRow: XLFormRowDescriptor = { [unowned self] in
@@ -153,11 +154,10 @@ final class EditProfileViewController: BaseAddItemViewController {
     
     // Postal Branch Of Choise
     lazy private var branchOfChoiseRow: XLFormRowDescriptor = { [unowned self] in
-        let branchOfChoiseRow = self.locationRowDescriptor(Tags.PostalAddress.rawValue)
-        branchOfChoiseRow.required = false
-        branchOfChoiseRow.title = NSLocalizedString("County Branch Of Choice")
-        branchOfChoiseRow.cellConfig["textLabel.textColor"] = UIScheme.mainThemeColor
-        branchOfChoiseRow.cellConfig["tintColor"] = UIScheme.mainThemeColor
+        let branchOfChoiseRow = XLFormRowDescriptor(tag: Tags.BranchOfChoise.rawValue, rowType:XLFormRowDescriptorTypeSelectorPush, title: NSLocalizedString("County Branch"))
+        branchOfChoiseRow.cellConfig.setObject(UIScheme.mainThemeColor, forKey: "textLabel.textColor")
+        branchOfChoiseRow.cellConfig.setObject(UIScheme.mainThemeColor, forKey: "tintColor")
+        
         return branchOfChoiseRow
     }()
     
@@ -208,12 +208,12 @@ final class EditProfileViewController: BaseAddItemViewController {
     // MARK: - Lifecycle
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        self.initializeForm()
+        loadData()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        self.initializeForm()
+        loadData()
     }
     
     override func viewDidLoad() {
@@ -230,6 +230,19 @@ final class EditProfileViewController: BaseAddItemViewController {
     }
     
     // MARK: - Private functions
+    private func loadData (){
+        let page = APIService.Page(start: 0, size: 100)
+        
+        api().getCountyBranches(page).flatMap { [weak self] (response: CollectionResponse<Community>) -> Future<UserProfile, NSError> in
+            self?.countyBranches = response.items
+            return api().getMyProfile()
+        }.onSuccess(callback: {[weak self] userProfile in
+            self?.userProfile = userProfile
+            self?.initializeForm()
+            self?.fillFormFromUserProfileModel()
+        })
+    }
+    
     private func initializeForm() {
         form = XLFormDescriptor(title: NSLocalizedString("Edit profile"))
 
@@ -272,41 +285,98 @@ final class EditProfileViewController: BaseAddItemViewController {
         eduAndProfessionSection.addFormRow(educationLevelRow)
         eduAndProfessionSection.addFormRow(professionRow)        
         
-        api().getMyProfile().onSuccess { [weak self] profile in
-            if let strongSelf = self {
-                // Init info section
-                strongSelf.firstnameRow.value = profile.firstName
-                strongSelf.lastnameRow.value = profile.lastName
-                strongSelf.emailRow.value = profile.email
-                strongSelf.phoneRow.value = profile.phone
-                
-                // Init about me section
-                strongSelf.aboutRow.value = profile.userDescription
-                
-                // Init personal info section
-                if let gender = profile.gender {
-                    strongSelf.genderRow.value = XLFormOptionsObject(value: gender.rawValue, displayText: gender.description)
-                }
-                strongSelf.dateOfBirthRow.value = profile.dateOfBirth
-                strongSelf.IDPassPortNumberRow.value = profile.passportNumber
-                
-                // Init addresses section
-                // locationRow
-                // postalAddressRow
-                // branchOfChoiseRow
-                strongSelf.permanentResidenceRow.value = profile.permanentResidence
-                
-                // Init education Level and profession section
-                if let educationLevel = profile.educationLevel {
-                    strongSelf.educationLevelRow.value = XLFormOptionsObject(value: educationLevel.rawValue, displayText: educationLevel.description)
-                }
-                strongSelf.professionRow.value = profile.profession
-                
-                
-                strongSelf.tableView.reloadData()
-                strongSelf.userProfile = profile
+        tableView.reloadData()
+        
+//        api().getMyProfile().onSuccess { [weak self] profile in
+//            if let strongSelf = self {
+//                // Init info section
+//                strongSelf.firstnameRow.value = profile.firstName
+//                strongSelf.lastnameRow.value = profile.lastName
+//                strongSelf.emailRow.value = profile.email
+//                strongSelf.phoneRow.value = profile.phone
+//                
+//                // Init about me section
+//                strongSelf.aboutRow.value = profile.userDescription
+//                
+//                // Init personal info section
+//                if let gender = profile.gender {
+//                    strongSelf.genderRow.value = XLFormOptionsObject(value: gender.rawValue, displayText: gender.description)
+//                }
+//                strongSelf.dateOfBirthRow.value = profile.dateOfBirth
+//                strongSelf.IDPassPortNumberRow.value = profile.passportNumber
+//                
+//                // Init addresses section
+//                // locationRow
+//                // postalAddressRow
+//                // branchOfChoiseRow
+//                
+//                var options : Array<XLFormOptionsObject> = []
+//                if let countyBranches = strongSelf.countyBranches {
+//                    for countyBranch in countyBranches {
+//                        options.append(XLFormOptionsObject(value: countyBranch.objectId, displayText: countyBranch.name))
+//                    }
+//                }
+//                strongSelf.branchOfChoiseRow.selectorOptions = options
+//                if let countyBranch = strongSelf.userProfile?.countyBranch {
+//                    strongSelf.branchOfChoiseRow.value = XLFormOptionsObject(value: countyBranch.objectId, displayText:countyBranch.name)
+//                }
+//                
+//                
+//                strongSelf.permanentResidenceRow.value = profile.permanentResidence
+//                
+//                // Init education Level and profession section
+//                if let educationLevel = profile.educationLevel {
+//                    strongSelf.educationLevelRow.value = XLFormOptionsObject(value: educationLevel.rawValue, displayText: educationLevel.description)
+//                }
+//                strongSelf.professionRow.value = profile.profession
+//                
+//                
+//                strongSelf.tableView.reloadData()
+//                strongSelf.userProfile = profile
+//            }
+//        }
+    }
+    
+    private func fillFormFromUserProfileModel() {
+        // Init info section
+        firstnameRow.value = userProfile?.firstName
+        lastnameRow.value = userProfile?.lastName
+        emailRow.value = userProfile?.email
+        phoneRow.value = userProfile?.phone
+        
+        // Init about me section
+        aboutRow.value = userProfile?.userDescription
+        
+        // Init personal info section
+        if let gender = userProfile?.gender {
+            genderRow.value = XLFormOptionsObject(value: gender.rawValue, displayText: gender.description)
+        }
+        dateOfBirthRow.value = userProfile?.dateOfBirth
+        IDPassPortNumberRow.value = userProfile?.passportNumber
+        
+        // Init addresses section
+        // locationRow
+        // postalAddressRow
+        
+        var options : Array<XLFormOptionsObject> = []
+        if let countyBranches = countyBranches {
+            for countyBranch in countyBranches {
+                options.append(XLFormOptionsObject(value: countyBranch.objectId, displayText: countyBranch.name))
             }
         }
+        branchOfChoiseRow.selectorOptions = options
+        if let countyBranch = userProfile?.countyBranch {
+            branchOfChoiseRow.value = XLFormOptionsObject(value: countyBranch.objectId, displayText:countyBranch.name)
+        }
+        
+        
+        permanentResidenceRow.value = userProfile?.permanentResidence
+        
+        // Init education Level and profession section
+        if let educationLevel = userProfile?.educationLevel {
+            educationLevelRow.value = XLFormOptionsObject(value: educationLevel.rawValue, displayText: educationLevel.description)
+        }
+        professionRow.value = userProfile?.profession
     }
     
     private func fillUserProfileModel() {
@@ -324,7 +394,14 @@ final class EditProfileViewController: BaseAddItemViewController {
             userProfile.passportNumber = values[Tags.IDPassportNumber.rawValue] as? String
             // locationRow
             // postalAddressRow
-            // branchOfChoiseRow
+            if let countyBranch = values[Tags.BranchOfChoise.rawValue]  as? XLFormOptionsObject {
+                if let objectId = countyBranch.formValue() as? CRUDObjectId {
+                    var countyBranch = Community()
+                    countyBranch.objectId = objectId
+                    userProfile.countyBranch = Community(objectId: objectId)
+                }
+            }
+            
             userProfile.educationLevel = (values[Tags.EducationLevel.rawValue] as? XLFormOptionsObject).flatMap { $0.educationLevel }
             userProfile.profession = values[Tags.Profession.rawValue] as? String
         }
