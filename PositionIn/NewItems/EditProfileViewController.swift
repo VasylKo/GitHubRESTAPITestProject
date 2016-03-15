@@ -89,6 +89,7 @@ final class EditProfileViewController: BaseAddItemViewController {
     lazy private var aboutRow: XLFormRowDescriptor = {
         let row = XLFormRowDescriptor(tag: Tags.About.rawValue,
             rowType: XLFormRowDescriptorTypeTextView)
+        row.cellConfig["textView.placeholder"] = NSLocalizedString("Optional")
         return row
     }()
     
@@ -229,7 +230,7 @@ final class EditProfileViewController: BaseAddItemViewController {
     }
     
     // MARK: - Private functions
-    func initializeForm() {
+    private func initializeForm() {
         form = XLFormDescriptor(title: NSLocalizedString("Edit profile"))
 
         // Photo section
@@ -238,22 +239,27 @@ final class EditProfileViewController: BaseAddItemViewController {
         photoSection.addFormRow(photoRow)
 
         // Info section
-        let infoSection  = XLFormSectionDescriptor.formSection()
+        let infoSection = XLFormSectionDescriptor.formSection()
         form.addFormSection(infoSection)
         infoSection.addFormRow(firstnameRow)
         infoSection.addFormRow(lastnameRow)
         infoSection.addFormRow(emailRow)
         infoSection.addFormRow(phoneRow)
         
+        // About me section
+        let aboutMeSection = XLFormSectionDescriptor.formSectionWithTitle(NSLocalizedString("About Me"))
+        form.addFormSection(aboutMeSection)
+        aboutMeSection.addFormRow(aboutRow)
+        
         // Personal info section
-        let personalInfoSection  = XLFormSectionDescriptor.formSection()
+        let personalInfoSection = XLFormSectionDescriptor.formSection()
         form.addFormSection(personalInfoSection)
         personalInfoSection.addFormRow(genderRow)
         personalInfoSection.addFormRow(dateOfBirthRow)
         personalInfoSection.addFormRow(IDPassPortNumberRow)
         
         // Addresses section
-        let addressesSection  = XLFormSectionDescriptor.formSection()
+        let addressesSection = XLFormSectionDescriptor.formSection()
         form.addFormSection(addressesSection)
         addressesSection.addFormRow(locationRow)
         addressesSection.addFormRow(postalAddressRow)
@@ -261,7 +267,7 @@ final class EditProfileViewController: BaseAddItemViewController {
         addressesSection.addFormRow(permanentResidenceRow)
         
         // Education Level and profession section
-        let eduAndProfessionSection  = XLFormSectionDescriptor.formSection()
+        let eduAndProfessionSection = XLFormSectionDescriptor.formSection()
         form.addFormSection(eduAndProfessionSection)
         eduAndProfessionSection.addFormRow(educationLevelRow)
         eduAndProfessionSection.addFormRow(professionRow)        
@@ -274,6 +280,9 @@ final class EditProfileViewController: BaseAddItemViewController {
                 strongSelf.emailRow.value = profile.email
                 strongSelf.phoneRow.value = profile.phone
                 
+                // Init about me section
+                strongSelf.aboutRow.value = profile.userDescription
+                
                 // Init personal info section
                 if let gender = profile.gender {
                     strongSelf.genderRow.value = XLFormOptionsObject(value: gender.rawValue, displayText: gender.description)
@@ -283,7 +292,7 @@ final class EditProfileViewController: BaseAddItemViewController {
                 
                 // Init addresses section
                 // locationRow
-                //strongSelf.postalAddressRow.value = profile.postalAddress
+                // postalAddressRow
                 // branchOfChoiseRow
                 strongSelf.permanentResidenceRow.value = profile.permanentResidence
                 
@@ -300,6 +309,27 @@ final class EditProfileViewController: BaseAddItemViewController {
         }
     }
     
+    private func fillUserProfileModel() {
+        let values = formValues()
+        Log.debug?.value(values)
+        
+        if let userProfile = userProfile {
+            userProfile.firstName = values[Tags.FirstName.rawValue] as? String
+            userProfile.lastName = values[Tags.LastName.rawValue] as? String
+            userProfile.email = values[Tags.Email.rawValue] as? String
+            userProfile.phone = values[Tags.Phone.rawValue] as? String
+            userProfile.userDescription = values[Tags.About.rawValue] as? String
+            userProfile.gender = (values[Tags.Gender.rawValue] as? XLFormOptionsObject).flatMap { $0.gender }
+            userProfile.dateOfBirth = values[Tags.DateOfBirth.rawValue] as? NSDate
+            userProfile.passportNumber = values[Tags.IDPassportNumber.rawValue] as? String
+            // locationRow
+            // postalAddressRow
+            // branchOfChoiseRow
+            userProfile.educationLevel = (values[Tags.EducationLevel.rawValue] as? XLFormOptionsObject).flatMap { $0.educationLevel }
+            userProfile.profession = values[Tags.Profession.rawValue] as? String
+        }
+    }
+
     //MARK: - Actions
     @IBAction func didTapDone(sender: AnyObject) {
         if view.userInteractionEnabled == false {
@@ -350,17 +380,10 @@ final class EditProfileViewController: BaseAddItemViewController {
         }
         self.tableView.endEditing(true)
         
-        let values = formValues()
-        Log.debug?.value(values)
-        
         if  let userProfile = userProfile,
-            let avatarUpload = uploadAssets(values[Tags.Photo.rawValue]) {
+            avatarUpload = uploadAssets(formValues()[Tags.Photo.rawValue]) {
                 view.userInteractionEnabled = false
-                userProfile.firstName = values[Tags.FirstName.rawValue] as? String
-                userProfile.lastName = values[Tags.LastName.rawValue] as? String
-                userProfile.email = values[Tags.Email.rawValue] as? String
-                userProfile.userDescription = values[Tags.About.rawValue] as? String
-                
+                fillUserProfileModel()
                 avatarUpload.flatMap { (urls: [NSURL]) -> Future<Void, NSError> in
                     userProfile.avatar = urls.first
                     return api().updateMyProfile(userProfile)
