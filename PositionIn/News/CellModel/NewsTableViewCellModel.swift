@@ -16,6 +16,7 @@ struct NewsTableViewCellModel: TableViewCellModel {
 
 struct NewsDetailsTitleTableViewCellModel: TableViewCellModel {
     let title: String?
+    let distance: String?
     let author: String?
     let date: String?
 }

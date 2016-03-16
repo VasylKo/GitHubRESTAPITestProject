@@ -19,14 +19,28 @@ class NewsItemTitleCell: TableViewCell {
             dateLabel.text = date
         }
         else {
-            newsTitleLabel.text = nil
+            dateLabel.text = nil
         }
         
+        distanceIcon.hidden = true
+        distanceLabel.hidden = true
+        authorLabel.hidden = true
+        
         if let author = m!.author {
+            authorLabel.hidden = false
             authorLabel.text = "By \(author)"
         }
         else {
-            newsTitleLabel.text = nil
+            authorLabel.text = nil
+        }
+        
+        if let distance = m!.distance {
+            distanceIcon.hidden = false
+            distanceLabel.hidden = false
+            distanceLabel.text = distance
+        }
+        else {
+            distanceLabel.text = nil
         }
         
         if let newsTitle = m!.title {
@@ -38,6 +52,9 @@ class NewsItemTitleCell: TableViewCell {
         
         self.selectionStyle = .None
     }
+    
+    @IBOutlet weak var distanceIcon: UIImageView!
+    @IBOutlet weak var distanceLabel: UILabel!
     
     @IBOutlet private weak var dateLabel: UILabel!
     @IBOutlet private weak var authorLabel: UILabel!

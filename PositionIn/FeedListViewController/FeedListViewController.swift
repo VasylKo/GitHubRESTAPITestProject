@@ -37,6 +37,7 @@ class FeedListViewController: UIViewController {
     //MARK: Load data
     
     func loadData () {
+        self.tableView.hidden = true
         var filter = SearchFilter()
         filter.isFeatured = true
         var page = APIService.Page(start: 0, size: 1)
@@ -51,9 +52,11 @@ class FeedListViewController: UIViewController {
             return api().getFeed(filter, page: page)
             
             }.onSuccess {[weak self] (response: CollectionResponse<FeedItem>) -> Void in
-            self?.feedItems = response.items
-            self?.tableView.reloadData()
-            self?.tableView.contentSize = CGSize(width: self!.tableView.contentSize.width, height: self!.tableView.contentSize.height + 20)
+                self?.feedItems = response.items
+                self?.tableView.reloadData()
+                self?.tableView.contentSize = CGSize(width: self!.tableView.contentSize.width,
+                    height: self!.tableView.contentSize.height + 20)
+                self?.tableView.hidden = false
         }
     }
 }
@@ -66,10 +69,10 @@ extension FeedListViewController: UITableViewDelegate {
         let item = (indexPath.row == 0) ? self.feauteredFeedItem : self.feedItems![indexPath.row - 1]
         
         if (item!.type == .Emergency) {
-            let controller =  Storyboards.Main.instantiateEmergencyDetailsControllerId()
-            controller.objectId = item?.objectId
-            controller.author = item?.author
-            self.navigationController?.pushViewController(controller, animated: true)
+            let detailsController = FeedEmergencyDetailsViewController(nibName: "FeedEmergencyDetailsViewController",
+                bundle: nil)
+            detailsController.objectId = item?.objectId
+            self.navigationController?.pushViewController(detailsController, animated: true)
         }
         else {
             let detailsController = NewsDetailsViewController(nibName: "NewsDetailsViewController",
@@ -113,7 +116,7 @@ extension FeedListViewController: UITableViewDataSource {
                 forIndexPath: indexPath) as! FeauteredFeedTableViewCell
             let imagePlaceholder = (self.feauteredFeedItem?.type == .Emergency) ? "PromotionDetailsPlaceholder" : "news_placeholder"
             feauteredCell.setImageURL(self.feauteredFeedItem?.image, placeholder: imagePlaceholder)
-            feauteredCell.titleString = self.feauteredFeedItem?.text
+            feauteredCell.titleString = self.feauteredFeedItem?.name
             cell = feauteredCell
         }
         else {

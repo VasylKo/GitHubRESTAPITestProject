@@ -229,7 +229,6 @@ final class EditProfileViewController: BaseAddItemViewController, UserProfileAva
                 style: UIBarButtonItemStyle.Plain,
                 target: self,
                 action: "didTapDone:")
-            self.navigationItem.rightBarButtonItem?.enabled = false
             self.title = NSLocalizedString("My Profile")
         }
     }
@@ -418,9 +417,8 @@ final class EditProfileViewController: BaseAddItemViewController, UserProfileAva
         }
         self.tableView.endEditing(true)
         
-        if  let userProfile = userProfile,
-            asset = self.headerView.asset,
-            avatarUpload = uploadAssets(asset) {
+        if let userProfile = userProfile {
+            if let asset = self.headerView.asset, avatarUpload = uploadAssets(asset) {
                 view.userInteractionEnabled = false
                 fillUserProfileModel()
                 avatarUpload.flatMap { (urls: [NSURL]) -> Future<Void, NSError> in
@@ -439,13 +437,30 @@ final class EditProfileViewController: BaseAddItemViewController, UserProfileAva
                 }.onComplete { [weak self] result in
                     self?.view.userInteractionEnabled = true
                 }
+            } else {
+                view.userInteractionEnabled = false
+                fillUserProfileModel()
+                api().updateMyProfile(userProfile)
+                    .onSuccess { [weak self] in
+                        NSNotificationCenter.defaultCenter().postNotificationName(
+                            UserProfile.CurrentUserDidChangeNotification,
+                            object: userProfile,
+                            userInfo: nil
+                        )
+                        self?.sendUpdateNotification()
+                        self?.performSegue(EditProfileViewController.Segue.Close)
+                    }.onFailure { error in
+                        showError(error.localizedDescription)
+                    }.onComplete { [weak self] result in
+                        self?.view.userInteractionEnabled = true
+                }
+            }
         }
     }
     
     // MARK: XLFormViewController
     override func formRowDescriptorValueHasChanged(formRow: XLFormRowDescriptor!, oldValue: AnyObject!, newValue: AnyObject!) {
         super.formRowDescriptorValueHasChanged(formRow, oldValue: oldValue, newValue: newValue)
-        self.navigationItem.rightBarButtonItem?.enabled = true
     }
     
     // MARK: Avatar Photo

@@ -62,6 +62,14 @@ final class BoughtProductDetailsViewController: UIViewController {
         reloadData()
     }
     
+    // MARK: - UIViewController
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let profileController = segue.destinationViewController  as? UserProfileViewController,
+            let userId = product?.entityDetails?.author?.objectId {
+                profileController.objectId = userId
+        }
+    }
+    
     // MARK: - Private functions
     private func reloadData() {
         actionTableView?.reloadData()
