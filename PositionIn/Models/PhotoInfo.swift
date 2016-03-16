@@ -31,7 +31,7 @@ struct PhotoInfo: Mappable, CustomStringConvertible {
     
     mutating func mapping(map: Map) {
         objectId <- (map["id"], CRUDObjectIdTransform())
-        url <- (map["url"], AmazonURLTransform())
+        url <- (map["url"], ImageURLTransform())
     }
     
     

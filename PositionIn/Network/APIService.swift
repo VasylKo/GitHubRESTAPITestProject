@@ -1018,7 +1018,7 @@ extension APIService {
             }.flatMap { (response: AnyObject?) -> Future<NSURL, NSError> in
                 let f: Future<NSURL, NSError> = future {
                     guard let JSON = response as? [String: AnyObject],
-                          let url = AmazonURLTransform().transformFromJSON(JSON["url"])  else {
+                          let url = ImageURLTransform().transformFromJSON(JSON["url"])  else {
                             return Result(error: NetworkDataProvider.ErrorCodes.InvalidResponseError.error())
                     }
                     return Result(value: url)

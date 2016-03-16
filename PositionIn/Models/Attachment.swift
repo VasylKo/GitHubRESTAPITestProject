@@ -27,7 +27,7 @@ struct Attachment : Mappable {
         objectId <-  map["id"]
         name <- map["name"]
         type <- map["type"]
-        url <- (map["url"], AmazonURLTransform())
+        url <- (map["url"], ImageURLTransform())
     }
     
 }

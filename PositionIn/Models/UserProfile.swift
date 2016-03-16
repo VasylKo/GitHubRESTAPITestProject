@@ -127,7 +127,7 @@ final class UserProfile: CRUDObject {
     
     func mapping(map: Map) {
         objectId <- (map["id"], CRUDObjectIdTransform())
-        avatar <- (map["avatar"], AmazonURLTransform())
+        avatar <- (map["avatar"], ImageURLTransform())
         firstName <- map["firstName"]
         middleName <- map["middleName"]
         lastName <- map["lastName"]
@@ -137,7 +137,7 @@ final class UserProfile: CRUDObject {
         dateOfBirth <- (map["dob"], APIDateTransform())
         email <- map["email"]
         countyBranch <- map["countryBranch"]
-        backgroundImage <- (map["background"], AmazonURLTransform())
+        backgroundImage <- (map["background"], ImageURLTransform())
         location <- map["location"]
         membershipDetails <- map["membershipDetails"]
         passportNumber <- map["passportNumber"]

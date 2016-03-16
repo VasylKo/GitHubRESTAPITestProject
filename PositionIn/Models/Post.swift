@@ -44,7 +44,7 @@ struct Post: CRUDObject {
         objectId <- (map["id"], CRUDObjectIdTransform())
         name <- map["name"]
         descriptionString <- map["description"]
-        photoURL <- (map["image"], AmazonURLTransform())
+        photoURL <- (map["image"], ImageURLTransform())
         likes <- map["numOfLikes"]
         location <- map["location"]
         isLiked <- map["isLiked"]
