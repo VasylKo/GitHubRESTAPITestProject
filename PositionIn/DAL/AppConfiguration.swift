@@ -27,7 +27,7 @@ final class AppConfiguration {
             newRelicToken = "AA0492dd667078eb6a7d0a70ba7267487f6b3fff21"
         case .StagingCopy:
             baseURL = NSURL(string: "https://app-sta2.positionin.com/api/")!
-            amazonURL = NSURL(string: "https://pos-sta.s3.amazonaws.com/")!
+            amazonURL = NSURL(string: "https://pos-sta2.s3.amazonaws.com/")!
             xmppHostname = "chat-sta2.positionin.com"
             googleAnalystLogLevel = GAILogLevel.Verbose
             googleMapsKey = "AIzaSyDkUHOpFWNBDAW5Gu2I0E7iHe4FRWGyM6o"
