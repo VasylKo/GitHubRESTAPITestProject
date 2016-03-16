@@ -95,6 +95,7 @@ class MembershipMemberProfileViewController : XLFormViewController, MembershipMe
     
     func setupInterface() {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Done"), style: UIBarButtonItemStyle.Plain, target: self, action: "didTapDone:")
+        self.navigationItem.rightBarButtonItem?.enabled = false
         self.title = "My Profile"
         self.navigationItem.hidesBackButton = true
         
@@ -189,6 +190,15 @@ class MembershipMemberProfileViewController : XLFormViewController, MembershipMe
             })
     }
     
+    // MARK: XLFormViewController
+    override func formRowDescriptorValueHasChanged(formRow: XLFormRowDescriptor!, oldValue: AnyObject!, newValue: AnyObject!) {
+        super.formRowDescriptorValueHasChanged(formRow, oldValue: oldValue, newValue: newValue)
+        
+        let validationErrors : Array<NSError> = formValidationErrors() as! Array<NSError>
+        let hasErrors = validationErrors.count > 0
+        
+        navigationItem.rightBarButtonItem?.enabled = !hasErrors
+    }
 }
 
 extension MembershipMemberProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
