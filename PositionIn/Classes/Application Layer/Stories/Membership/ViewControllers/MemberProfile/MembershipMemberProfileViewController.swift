@@ -181,11 +181,12 @@ class MembershipMemberProfileViewController : XLFormViewController, MembershipMe
                 
                 let router : MembershipRouter = MembershipRouterImplementation()
                 router.showInitialViewController(from: self!)
-                }).onSuccess(callback: { _ in
-                    api().pushesRegistration()
-                }).onFailure(callback: {_ in
-                    trackGoogleAnalyticsEvent("Status", action: "Click", label: "Auth Fail")
-                })
+                self?.navigationController?.topViewController?.navigationItem.hidesBackButton = true
+            }).onSuccess(callback: { _ in
+                api().pushesRegistration()
+            }).onFailure(callback: {_ in
+                trackGoogleAnalyticsEvent("Status", action: "Click", label: "Auth Fail")
+            })
     }
     
 }
