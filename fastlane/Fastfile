@@ -113,7 +113,7 @@ platform :ios do
     lane :Production2 do
         gym(
             scheme: "PositionIn",
-            configuration: "Prod02Release",
+            configuration: "ProdRelease2",
             output_directory: "Build",
             clean: true,
             use_legacy_build_api: true,

@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -15,20 +16,30 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Text" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uhr-ln-YYb">
-                        <rect key="frame" x="5" y="5" width="310" height="90"/>
-                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <rect key="frame" x="20" y="12" width="284" height="76"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.87" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="string" keyPath="text" value=""/>
                         </userDefinedRuntimeAttributes>
                     </label>
+                    <view alpha="0.10000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KKn-0y-A6B">
+                        <rect key="frame" x="0.0" y="99" width="320" height="1"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="Ke7-pp-ZG0"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="uhr-ln-YYb" firstAttribute="top" secondItem="qmI-xV-Jq0" secondAttribute="top" constant="5" id="Hzu-8d-ygA"/>
-                    <constraint firstAttribute="trailing" secondItem="uhr-ln-YYb" secondAttribute="trailing" constant="5" id="hF1-ze-yit"/>
-                    <constraint firstAttribute="bottom" secondItem="uhr-ln-YYb" secondAttribute="bottom" constant="5" id="kSz-jS-yj8"/>
-                    <constraint firstItem="uhr-ln-YYb" firstAttribute="leading" secondItem="qmI-xV-Jq0" secondAttribute="leading" constant="5" id="z80-N2-i2o"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="KKn-0y-A6B" secondAttribute="bottom" constant="-8" id="1FU-tW-BvE"/>
+                    <constraint firstItem="uhr-ln-YYb" firstAttribute="top" secondItem="qmI-xV-Jq0" secondAttribute="top" constant="12" id="Hzu-8d-ygA"/>
+                    <constraint firstItem="KKn-0y-A6B" firstAttribute="leading" secondItem="qmI-xV-Jq0" secondAttribute="leadingMargin" constant="-8" id="deo-Pq-PHH"/>
+                    <constraint firstAttribute="trailing" secondItem="uhr-ln-YYb" secondAttribute="trailing" constant="16" id="hF1-ze-yit"/>
+                    <constraint firstAttribute="bottom" secondItem="uhr-ln-YYb" secondAttribute="bottom" constant="12" id="kSz-jS-yj8"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="KKn-0y-A6B" secondAttribute="trailing" constant="-8" id="xkN-Di-Tqe"/>
+                    <constraint firstItem="uhr-ln-YYb" firstAttribute="leading" secondItem="qmI-xV-Jq0" secondAttribute="leading" constant="20" id="z80-N2-i2o"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

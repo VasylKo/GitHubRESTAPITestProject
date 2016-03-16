@@ -123,19 +123,11 @@ extension BrowseMapViewController: GMSMapViewDelegate {
         var f = filter
         f.coordinates = coordinate
         
-        var homeItem = HomeItem.Unknown
-        if let tempHomeItem = f.homeItemType {
-            homeItem = tempHomeItem
-        }
+        //MARK: should refactor
+        let homeItem = HomeItem.Unknown
         let request: Future<CollectionResponse<FeedItem>,NSError> = api().getAll(homeItem,
             seachFilter: self.filter)
-        
-//        switch browseMode {
-//        case .ForYou:
-//            request = api().forYou(f, page: APIService.Page())
-//        case .New:
-//            request = api().getFeed(f, page: APIService.Page())
-//        }
+
         request.onSuccess {
             [weak self] response in
             Log.debug?.value(response.items)

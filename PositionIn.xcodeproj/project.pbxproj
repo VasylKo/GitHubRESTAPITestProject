@@ -157,6 +157,16 @@
 		D118A2AA1C0FBC380020B363 /* CardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D118A2A81C0FBC380020B363 /* CardTableViewCell.swift */; };
 		D118A2AB1C0FBC380020B363 /* PositionIn.CardTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D118A2A91C0FBC380020B363 /* PositionIn.CardTableViewCell.xib */; };
 		D118A2AD1C0FBDF50020B363 /* CardItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D118A2AC1C0FBDF50020B363 /* CardItem.swift */; };
+		D12EB2851C96E5DF00718E57 /* FeedListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D12EB2831C96E5DF00718E57 /* FeedListViewController.swift */; };
+		D12EB2861C96E5DF00718E57 /* FeedListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D12EB2841C96E5DF00718E57 /* FeedListViewController.xib */; };
+		D12EB2891C96E5F700718E57 /* FeedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D12EB2871C96E5F700718E57 /* FeedTableViewCell.swift */; };
+		D12EB28A1C96E5F700718E57 /* FeedTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D12EB2881C96E5F700718E57 /* FeedTableViewCell.xib */; };
+		D12EB28D1C96E62400718E57 /* FeauteredFeedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D12EB28B1C96E62400718E57 /* FeauteredFeedTableViewCell.swift */; };
+		D12EB28E1C96E62400718E57 /* FeauteredFeedTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D12EB28C1C96E62400718E57 /* FeauteredFeedTableViewCell.xib */; };
+		D12EB2911C96E71200718E57 /* NewsDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D12EB28F1C96E71200718E57 /* NewsDetailsViewController.swift */; };
+		D12EB2921C96E71200718E57 /* NewsDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D12EB2901C96E71200718E57 /* NewsDetailsViewController.xib */; };
+		D12EB2961C96E83600718E57 /* NewsItemTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D12EB2941C96E83600718E57 /* NewsItemTitleCell.swift */; };
+		D12EB2971C96E83600718E57 /* PositionIn.NewsItemTitleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D12EB2951C96E83600718E57 /* PositionIn.NewsItemTitleCell.xib */; };
 		D12EDEC71BFF4F0D00FB6245 /* PhoneVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D12EDEC61BFF4F0D00FB6245 /* PhoneVerificationViewController.swift */; };
 		D13039FB1C721960004B673F /* AttendEventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D13039F91C721960004B673F /* AttendEventCell.swift */; };
 		D13039FC1C721960004B673F /* PositionIn.AttendEventCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D13039FA1C721960004B673F /* PositionIn.AttendEventCell.xib */; };
@@ -196,6 +206,7 @@
 		D1DA176D1C05B7BE0091A8CE /* PositionIn.BrowseGridCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1DA176B1C05B7BE0091A8CE /* PositionIn.BrowseGridCollectionViewCell.xib */; };
 		D1DA1EBC1C5909D7009F5AFA /* MembershipConfirmDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DA1EB11C5909D7009F5AFA /* MembershipConfirmDetailsViewController.swift */; };
 		D1DA1EBF1C5909D7009F5AFA /* MembershipPlanDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DA1EB71C5909D7009F5AFA /* MembershipPlanDetailsViewController.swift */; };
+		D1E11B681C9817A800CD8BC0 /* FeedItemNewsCellModelFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1E11B671C9817A800CD8BC0 /* FeedItemNewsCellModelFactory.swift */; };
 		D1F1FF251C22F384006D2E75 /* VolunteerDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F1FF231C22F384006D2E75 /* VolunteerDetailsViewController.swift */; };
 		D1F1FF261C22F384006D2E75 /* PositionIn.VolunteerDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1F1FF241C22F384006D2E75 /* PositionIn.VolunteerDetailsViewController.xib */; };
 		D1F1FF2E1C24265B006D2E75 /* GiveBloodDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F1FF2C1C24265B006D2E75 /* GiveBloodDetailsViewController.swift */; };
@@ -595,6 +606,7 @@
 		24EF62131BA81B5800472531 /* ChatHistoryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatHistoryCell.swift; path = Messaging/ChatHistoryCell.swift; sourceTree = "<group>"; };
 		24EF62151BA81DCB00472531 /* PositionIn.ChatHistoryCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PositionIn.ChatHistoryCell.xib; path = Messaging/PositionIn.ChatHistoryCell.xib; sourceTree = "<group>"; };
 		3B8926F67F56D70AAB2211B0 /* Pods-PositionIn.prodrelease.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PositionIn.prodrelease.xcconfig"; path = "Pods/Target Support Files/Pods-PositionIn/Pods-PositionIn.prodrelease.xcconfig"; sourceTree = "<group>"; };
+		4C3EC3EDA1F39CF38753B1D2 /* Pods-PositionIn.prodrelease2.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PositionIn.prodrelease2.xcconfig"; path = "Pods/Target Support Files/Pods-PositionIn/Pods-PositionIn.prodrelease2.xcconfig"; sourceTree = "<group>"; };
 		500D7FA21BC2AACF008C8C82 /* SearchItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchItem.swift; sourceTree = "<group>"; };
 		500D7FA41BC2ADFE008C8C82 /* SearchItemCellModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchItemCellModel.swift; sourceTree = "<group>"; };
 		500D7FA61BC2CD39008C8C82 /* SearchEntityCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchEntityCell.swift; sourceTree = "<group>"; };
@@ -692,6 +704,16 @@
 		D118A2A81C0FBC380020B363 /* CardTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardTableViewCell.swift; sourceTree = "<group>"; };
 		D118A2A91C0FBC380020B363 /* PositionIn.CardTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.CardTableViewCell.xib; sourceTree = "<group>"; };
 		D118A2AC1C0FBDF50020B363 /* CardItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardItem.swift; sourceTree = "<group>"; };
+		D12EB2831C96E5DF00718E57 /* FeedListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedListViewController.swift; sourceTree = "<group>"; };
+		D12EB2841C96E5DF00718E57 /* FeedListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeedListViewController.xib; sourceTree = "<group>"; };
+		D12EB2871C96E5F700718E57 /* FeedTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FeedTableViewCell.swift; path = PositionIn/FeedListViewController/Views/FeedTableViewCell/FeedTableViewCell.swift; sourceTree = SOURCE_ROOT; };
+		D12EB2881C96E5F700718E57 /* FeedTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FeedTableViewCell.xib; path = PositionIn/FeedListViewController/Views/FeedTableViewCell/FeedTableViewCell.xib; sourceTree = SOURCE_ROOT; };
+		D12EB28B1C96E62400718E57 /* FeauteredFeedTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FeauteredFeedTableViewCell.swift; path = PositionIn/FeedListViewController/Views/FeauteredFeedTableViewCell/FeauteredFeedTableViewCell.swift; sourceTree = SOURCE_ROOT; };
+		D12EB28C1C96E62400718E57 /* FeauteredFeedTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FeauteredFeedTableViewCell.xib; path = PositionIn/FeedListViewController/Views/FeauteredFeedTableViewCell/FeauteredFeedTableViewCell.xib; sourceTree = SOURCE_ROOT; };
+		D12EB28F1C96E71200718E57 /* NewsDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsDetailsViewController.swift; sourceTree = "<group>"; };
+		D12EB2901C96E71200718E57 /* NewsDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewsDetailsViewController.xib; sourceTree = "<group>"; };
+		D12EB2941C96E83600718E57 /* NewsItemTitleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsItemTitleCell.swift; sourceTree = "<group>"; };
+		D12EB2951C96E83600718E57 /* PositionIn.NewsItemTitleCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.NewsItemTitleCell.xib; sourceTree = "<group>"; };
 		D12EDEC61BFF4F0D00FB6245 /* PhoneVerificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhoneVerificationViewController.swift; sourceTree = "<group>"; };
 		D13039F91C721960004B673F /* AttendEventCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttendEventCell.swift; sourceTree = "<group>"; };
 		D13039FA1C721960004B673F /* PositionIn.AttendEventCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.AttendEventCell.xib; sourceTree = "<group>"; };
@@ -733,6 +755,7 @@
 		D1DA176B1C05B7BE0091A8CE /* PositionIn.BrowseGridCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.BrowseGridCollectionViewCell.xib; sourceTree = "<group>"; };
 		D1DA1EB11C5909D7009F5AFA /* MembershipConfirmDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MembershipConfirmDetailsViewController.swift; sourceTree = "<group>"; };
 		D1DA1EB71C5909D7009F5AFA /* MembershipPlanDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MembershipPlanDetailsViewController.swift; sourceTree = "<group>"; };
+		D1E11B671C9817A800CD8BC0 /* FeedItemNewsCellModelFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedItemNewsCellModelFactory.swift; sourceTree = "<group>"; };
 		D1F1FF231C22F384006D2E75 /* VolunteerDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VolunteerDetailsViewController.swift; sourceTree = "<group>"; };
 		D1F1FF241C22F384006D2E75 /* PositionIn.VolunteerDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.VolunteerDetailsViewController.xib; sourceTree = "<group>"; };
 		D1F1FF2C1C24265B006D2E75 /* GiveBloodDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GiveBloodDetailsViewController.swift; sourceTree = "<group>"; };
@@ -1386,6 +1409,7 @@
 				64AF9DE99B2895039ACA7F1F /* Pods-PositionIn.devrelease.xcconfig */,
 				56DAF56D2A99203B14E2570B /* Pods-PositionIn.stagingrelease.xcconfig */,
 				3B8926F67F56D70AAB2211B0 /* Pods-PositionIn.prodrelease.xcconfig */,
+				4C3EC3EDA1F39CF38753B1D2 /* Pods-PositionIn.prodrelease2.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -1764,6 +1788,25 @@
 			path = "Utils/NSDate+NVTimeAgo";
 			sourceTree = "<group>";
 		};
+		D112BFB11C96E1E700339D7D /* NewsDetailsViewController */ = {
+			isa = PBXGroup;
+			children = (
+				D1E11B661C98176500CD8BC0 /* CellModel */,
+				D112BFB31C96E29900339D7D /* Views */,
+				D12EB28F1C96E71200718E57 /* NewsDetailsViewController.swift */,
+				D12EB2901C96E71200718E57 /* NewsDetailsViewController.xib */,
+			);
+			path = NewsDetailsViewController;
+			sourceTree = "<group>";
+		};
+		D112BFB31C96E29900339D7D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				D12EB2931C96E7D300718E57 /* NewsItemTitleCell */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		D118A2A71C0FBB9A0020B363 /* CardCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -1771,6 +1814,15 @@
 				D118A2A91C0FBC380020B363 /* PositionIn.CardTableViewCell.xib */,
 			);
 			name = CardCell;
+			sourceTree = "<group>";
+		};
+		D12EB2931C96E7D300718E57 /* NewsItemTitleCell */ = {
+			isa = PBXGroup;
+			children = (
+				D12EB2941C96E83600718E57 /* NewsItemTitleCell.swift */,
+				D12EB2951C96E83600718E57 /* PositionIn.NewsItemTitleCell.xib */,
+			);
+			path = NewsItemTitleCell;
 			sourceTree = "<group>";
 		};
 		D1379E8A1C2A95E70041AA4E /* ExploreCardCell */ = {
@@ -1922,6 +1974,42 @@
 			path = PlanDetails;
 			sourceTree = "<group>";
 		};
+		D1E11B661C98176500CD8BC0 /* CellModel */ = {
+			isa = PBXGroup;
+			children = (
+				D1E11B671C9817A800CD8BC0 /* FeedItemNewsCellModelFactory.swift */,
+			);
+			path = CellModel;
+			sourceTree = "<group>";
+		};
+		D1F1B82B1C92DBF200C22204 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				D1F1B8391C92E15400C22204 /* FeedTableViewCell */,
+				D1F1B8341C92E0B800C22204 /* FeauteredFeedTableViewCell */,
+			);
+			name = Views;
+			path = FeedListViewController/Views;
+			sourceTree = "<group>";
+		};
+		D1F1B8341C92E0B800C22204 /* FeauteredFeedTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				D12EB28B1C96E62400718E57 /* FeauteredFeedTableViewCell.swift */,
+				D12EB28C1C96E62400718E57 /* FeauteredFeedTableViewCell.xib */,
+			);
+			name = FeauteredFeedTableViewCell;
+			sourceTree = "<group>";
+		};
+		D1F1B8391C92E15400C22204 /* FeedTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				D12EB2871C96E5F700718E57 /* FeedTableViewCell.swift */,
+				D12EB2881C96E5F700718E57 /* FeedTableViewCell.xib */,
+			);
+			path = FeedTableViewCell;
+			sourceTree = "<group>";
+		};
 		D1F1FF201C22F23A006D2E75 /* VolunteerDetails */ = {
 			isa = PBXGroup;
 			children = (
@@ -1957,6 +2045,16 @@
 				D1F3E8131C7628C100EFC8ED /* PositionIn.NotificationTableViewCell.xib */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		D1F7A7871C91947500A76709 /* FeedListViewController */ = {
+			isa = PBXGroup;
+			children = (
+				D12EB2831C96E5DF00718E57 /* FeedListViewController.swift */,
+				D12EB2841C96E5DF00718E57 /* FeedListViewController.xib */,
+				D1F1B82B1C92DBF200C22204 /* Views */,
+			);
+			path = FeedListViewController;
 			sourceTree = "<group>";
 		};
 		D1F86CEF1BFCAA72006E0C49 /* Onboarding */ = {
@@ -2204,6 +2302,8 @@
 		E64DC34C1B4E53C90011D37C /* PositionIn */ = {
 			isa = PBXGroup;
 			children = (
+				D112BFB11C96E1E700339D7D /* NewsDetailsViewController */,
+				D1F7A7871C91947500A76709 /* FeedListViewController */,
 				CD795BC71C57B4C700C1C298 /* Classes */,
 				CD076E851C739215005C04C2 /* News */,
 				D1F3E8061C74DC9000EFC8ED /* NotificationViewController */,
@@ -3790,6 +3890,7 @@
 				D1FD85361C1EE8A800C2E87B /* PositionIn.EmergencyDetailsController.xib in Resources */,
 				E6C9522E1BA1BB470032254F /* PositionIn.PeopleListCell.xib in Resources */,
 				CD795C4E1C590C1700C1C298 /* SegmentedControlContainerViewController.xib in Resources */,
+				D12EB2921C96E71200718E57 /* NewsDetailsViewController.xib in Resources */,
 				240A9B9C1B9CCDA4007C77E3 /* PositionIn.CommunityStatsCell.xib in Resources */,
 				E66115871B7376F4003DB5B3 /* Login.storyboard in Resources */,
 				D1379E8E1C2A98710041AA4E /* PositionIn.ExploreCardCell.xib in Resources */,
@@ -3804,6 +3905,8 @@
 				E6BEF1D31B9C657100511B46 /* PositionIn.PostBodyCell.xib in Resources */,
 				E6C9523B1BA1DC910032254F /* PositionIn.ProfileFollowCell.xib in Resources */,
 				D196225F1BF13075003BCD85 /* GoogleService-Info.plist in Resources */,
+				D12EB28A1C96E5F700718E57 /* FeedTableViewCell.xib in Resources */,
+				D12EB28E1C96E62400718E57 /* FeauteredFeedTableViewCell.xib in Resources */,
 				E6BEF1CC1B9C5E7200511B46 /* PositionIn.PostImageCell.xib in Resources */,
 				CD076E891C7497A8005C04C2 /* PositionIn.NewsListViewController.xib in Resources */,
 				E689F07D1B6B976100597587 /* PositionIn.ProductInventoryCell.xib in Resources */,
@@ -3820,11 +3923,13 @@
 				D1F3E80A1C74DD1200EFC8ED /* NotificationViewController.xib in Resources */,
 				E62B16FD1B5CDF2400D446BC /* PositionIn.MessagesListViewController.xib in Resources */,
 				D1B780CF1C0F51A800EF5825 /* DonateCell.xib in Resources */,
+				D12EB2861C96E5DF00718E57 /* FeedListViewController.xib in Resources */,
 				E69421021B666A1600F34F06 /* PositionIn.ActionCell.xib in Resources */,
 				E6F309421BA8200600C9420C /* PositionIn.PickPhotoView.xib in Resources */,
 				E64DC3551B4E53C90011D37C /* Main.storyboard in Resources */,
 				D1FD853D1C1EE8D800C2E87B /* PositionIn.PromotionDetailsViewController.xib in Resources */,
 				E64DC35A1B4E53C90011D37C /* LaunchScreen.xib in Resources */,
+				D12EB2971C96E83600718E57 /* PositionIn.NewsItemTitleCell.xib in Resources */,
 				500D7FAD1BC2CD51008C8C82 /* PositionIn.SearchSectionCell.xib in Resources */,
 				E6F2437A1B8B40380033B13C /* PositionIn.BrowseListTableViewCell.xib in Resources */,
 				E63201721B984E2D0066C62E /* PositionIn.DescriptionTableViewCell.xib in Resources */,
@@ -4036,10 +4141,12 @@
 				E661158D1B73778B003DB5B3 /* RecoverPasswordViewController.swift in Sources */,
 				50D1AFA61BBAD21400957882 /* PostLikeCommentCell.swift in Sources */,
 				CD795BE71C57B9AA00C1C298 /* BaseRouter.swift in Sources */,
+				D12EB2851C96E5DF00718E57 /* FeedListViewController.swift in Sources */,
 				E632016E1B9834910066C62E /* ObjectInfo.swift in Sources */,
 				E6F2436C1B8B0E150033B13C /* MainMenuLoginCell.swift in Sources */,
 				CD21EA571C68E98D00E50909 /* MPesaIndicatorView.swift in Sources */,
 				D1F3E8091C74DD1200EFC8ED /* NotificationViewController.swift in Sources */,
+				D12EB2891C96E5F700718E57 /* FeedTableViewCell.swift in Sources */,
 				E68B52211B875F8F006B980C /* EventListCell.swift in Sources */,
 				E68B52271B875F8F006B980C /* PostListCell.swift in Sources */,
 				CDBDD9AA1C47AFDD007578BC /* BrowseVolunteerViewController.swift in Sources */,
@@ -4074,6 +4181,7 @@
 				D18A1FDC1BEB95D9003F158D /* ChangePasswordViewController.swift in Sources */,
 				CDE1B90F1C5F678B00F76F32 /* LocalizedString.swift in Sources */,
 				E6D7F83B1BE24AE500A544F4 /* MainMenuBadgeCell.swift in Sources */,
+				D12EB2911C96E71200718E57 /* NewsDetailsViewController.swift in Sources */,
 				E6BEF1EA1B9C902400511B46 /* BrowseCommunityTableViewCellModel.swift in Sources */,
 				E63201741B9872C60066C62E /* EditProfileViewController.swift in Sources */,
 				E65E87321B614A9900AE444D /* Location.swift in Sources */,
@@ -4128,6 +4236,7 @@
 				CDEDD9771C45243900396594 /* CommunitySearchViewController.swift in Sources */,
 				CD8ED0D61C60AD1A00576DBF /* MembershipMemberCardViewController.swift in Sources */,
 				D1F1FF2E1C24265B006D2E75 /* GiveBloodDetailsViewController.swift in Sources */,
+				D12EB2961C96E83600718E57 /* NewsItemTitleCell.swift in Sources */,
 				E60F91331BE2CA2F005F416A /* BadgeView.m in Sources */,
 				E63201761B98D2DA0066C62E /* Shop.swift in Sources */,
 				E6BEF1EE1B9C9D6400511B46 /* CommunityFeedViewController.swift in Sources */,
@@ -4155,10 +4264,12 @@
 				E6F2437C1B8B42D70033B13C /* UserProfileViewController.swift in Sources */,
 				E6D4D5B61B6F8B9F003134CB /* SearchBar.swift in Sources */,
 				D112D9D61C2C7EED0051039E /* CreateUserConversationViewController.swift in Sources */,
+				D12EB28D1C96E62400718E57 /* FeauteredFeedTableViewCell.swift in Sources */,
 				E6C5CE191B83A21500265955 /* LocationController.swift in Sources */,
 				E63201651B967A540066C62E /* Notifications.swift in Sources */,
 				E62B16FB1B5CDF0100D446BC /* MessagesListViewController.swift in Sources */,
 				D154411A1C47D642006251B7 /* Volunteer.swift in Sources */,
+				D1E11B681C9817A800CD8BC0 /* FeedItemNewsCellModelFactory.swift in Sources */,
 				CD795BF21C57BA8100C1C298 /* MembershipRouterImplementation.swift in Sources */,
 				E66A3E181B9CC90C005FA33B /* EditCommunityViewController.swift in Sources */,
 				CD0FCC2E1C69ECD800AFD36C /* TotalCell.swift in Sources */,
@@ -4335,7 +4446,7 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		CD8DB9B11C91AEDA00488EBB /* Prod02Release */ = {
+		CD8DB9B11C91AEDA00488EBB /* ProdRelease2 */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -4370,14 +4481,13 @@
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
-			name = Prod02Release;
+			name = ProdRelease2;
 		};
-		CD8DB9B21C91AEDA00488EBB /* Prod02Release */ = {
+		CD8DB9B21C91AEDA00488EBB /* ProdRelease2 */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = EBB4ADD19B63BD62828B753E /* Pods-PositionIn.prodrelease.xcconfig */;
+			baseConfigurationReference = 4C3EC3EDA1F39CF38753B1D2 /* Pods-PositionIn.prodrelease2.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				BUNDLE_IDENTIFIER_USER_DEFINED_VALUE = com.krcs.members;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Media Applications ltd";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Kenya Red Cross (87SW7N9JU2)";
@@ -4449,36 +4559,36 @@
 					"\"XLForm\"",
 					"-ObjC",
 				);
-				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -D \"PROD02_ENV\"";
-				PRODUCT_BUNDLE_IDENTIFIER = com.positionin.dev01;
+				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -D \"PROD_ENV\"";
+				PRODUCT_BUNDLE_IDENTIFIER = com.krcs.members;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "106a95c1-832d-4c02-b3e4-3c00b62ec2be";
 				SWIFT_OBJC_BRIDGING_HEADER = "PositionIn/PositionIn-Bridging-Header.h";
 			};
-			name = Prod02Release;
+			name = ProdRelease2;
 		};
-		CD8DB9B31C91AEDB00488EBB /* Prod02Release */ = {
+		CD8DB9B31C91AEDB00488EBB /* ProdRelease2 */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
-			name = Prod02Release;
+			name = ProdRelease2;
 		};
-		CD8DB9B41C91AEDB00488EBB /* Prod02Release */ = {
+		CD8DB9B41C91AEDB00488EBB /* ProdRelease2 */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
-			name = Prod02Release;
+			name = ProdRelease2;
 		};
-		CD8DB9B51C91AEDB00488EBB /* Prod02Release */ = {
+		CD8DB9B51C91AEDB00488EBB /* ProdRelease2 */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
-			name = Prod02Release;
+			name = ProdRelease2;
 		};
-		CD8DB9B61C91AEDB00488EBB /* Prod02Release */ = {
+		CD8DB9B61C91AEDB00488EBB /* ProdRelease2 */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
@@ -4520,7 +4630,7 @@
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
-			name = Prod02Release;
+			name = ProdRelease2;
 		};
 		D1C475F61C1092720096D383 /* StagingDebugCopy */ = {
 			isa = XCBuildConfiguration;
@@ -4573,7 +4683,6 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				BUNDLE_IDENTIFIER_USER_DEFINED_VALUE = com.positionin.dev01;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -4853,7 +4962,6 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				BUNDLE_IDENTIFIER_USER_DEFINED_VALUE = com.positionin.dev01;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Media Applications ltd";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Media Applications ltd";
@@ -5454,7 +5562,6 @@
 			baseConfigurationReference = BF974669627C5C2C7EE1ED41 /* Pods-PositionIn.devdebug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				BUNDLE_IDENTIFIER_USER_DEFINED_VALUE = com.positionin.dev01;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Shulamit Salant (4ZRAKT5AF5)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Shulamit Salant (4ZRAKT5AF5)";
@@ -5541,7 +5648,6 @@
 			baseConfigurationReference = 64AF9DE99B2895039ACA7F1F /* Pods-PositionIn.devrelease.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				BUNDLE_IDENTIFIER_USER_DEFINED_VALUE = com.positionin.dev01;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Media Applications ltd";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Media Applications ltd";
@@ -5699,7 +5805,6 @@
 			baseConfigurationReference = B20EC0EEF67E33E51960AE34 /* Pods-PositionIn.stagingdebug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				BUNDLE_IDENTIFIER_USER_DEFINED_VALUE = com.positionin.dev01;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -5892,7 +5997,6 @@
 			baseConfigurationReference = 56DAF56D2A99203B14E2570B /* Pods-PositionIn.stagingrelease.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				BUNDLE_IDENTIFIER_USER_DEFINED_VALUE = com.positionin.dev01;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Media Applications ltd";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Media Applications ltd";
@@ -6087,7 +6191,6 @@
 			baseConfigurationReference = 13A2A63466B39BB54E2BD39A /* Pods-PositionIn.proddebug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				BUNDLE_IDENTIFIER_USER_DEFINED_VALUE = com.positionin.dev01;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -6279,7 +6382,6 @@
 			baseConfigurationReference = 3B8926F67F56D70AAB2211B0 /* Pods-PositionIn.prodrelease.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				BUNDLE_IDENTIFIER_USER_DEFINED_VALUE = com.positionin.dev01;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Media Applications ltd";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Media Applications ltd";
@@ -6530,7 +6632,7 @@
 				E6325F6B1B57E0E100996480 /* DevRelease */,
 				E68DF1561BC4CFE20054482D /* StagingRelease */,
 				E68DF1661BC4CFFF0054482D /* ProdRelease */,
-				CD8DB9B51C91AEDB00488EBB /* Prod02Release */,
+				CD8DB9B51C91AEDB00488EBB /* ProdRelease2 */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = DevRelease;
@@ -6546,7 +6648,7 @@
 				E64DC3681B4E53CA0011D37C /* DevRelease */,
 				E68DF1511BC4CFE20054482D /* StagingRelease */,
 				E68DF1611BC4CFFF0054482D /* ProdRelease */,
-				CD8DB9B11C91AEDA00488EBB /* Prod02Release */,
+				CD8DB9B11C91AEDA00488EBB /* ProdRelease2 */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = DevRelease;
@@ -6562,7 +6664,7 @@
 				E64DC36B1B4E53CA0011D37C /* DevRelease */,
 				E68DF1521BC4CFE20054482D /* StagingRelease */,
 				E68DF1621BC4CFFF0054482D /* ProdRelease */,
-				CD8DB9B21C91AEDA00488EBB /* Prod02Release */,
+				CD8DB9B21C91AEDA00488EBB /* ProdRelease2 */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = DevRelease;
@@ -6578,7 +6680,7 @@
 				E6736AD11B4E562D0003580D /* DevRelease */,
 				E68DF1541BC4CFE20054482D /* StagingRelease */,
 				E68DF1641BC4CFFF0054482D /* ProdRelease */,
-				CD8DB9B31C91AEDB00488EBB /* Prod02Release */,
+				CD8DB9B31C91AEDB00488EBB /* ProdRelease2 */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = DevRelease;
@@ -6594,7 +6696,7 @@
 				E6736AD71B4E56570003580D /* DevRelease */,
 				E68DF1551BC4CFE20054482D /* StagingRelease */,
 				E68DF1651BC4CFFF0054482D /* ProdRelease */,
-				CD8DB9B41C91AEDB00488EBB /* Prod02Release */,
+				CD8DB9B41C91AEDB00488EBB /* ProdRelease2 */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = DevRelease;
@@ -6610,7 +6712,7 @@
 				E6E2FEA21B66F61400880F3C /* DevRelease */,
 				E68DF1571BC4CFE20054482D /* StagingRelease */,
 				E68DF1671BC4CFFF0054482D /* ProdRelease */,
-				CD8DB9B61C91AEDB00488EBB /* Prod02Release */,
+				CD8DB9B61C91AEDB00488EBB /* ProdRelease2 */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = DevRelease;

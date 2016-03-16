@@ -110,7 +110,7 @@ extension BoughtProductDetailsViewController: BoughtProductDetailsActionConsumer
     }
     
     func executeAction(action: BoughtProductDetailsAction) {
-        let segue: TrainingDetailsViewController.Segue
+        let segue: BoughtProductDetailsViewController.Segue
         switch action {
         case .SendMessage:
             if let userId = product?.entityDetails?.author?.objectId {
@@ -118,14 +118,12 @@ extension BoughtProductDetailsViewController: BoughtProductDetailsActionConsumer
             }
             return
         case .SellerProfile:
-            segue = .showUserProfile
+            segue = .ShowSellerProfile
         case .MoreInformation:
             if product?.entityDetails?.links?.isEmpty == false || product?.entityDetails?.attachments?.isEmpty == false {
                 let moreInformationViewController = MoreInformationViewController(links: product?.entityDetails?.links, attachments: product?.entityDetails?.attachments)
                 navigationController?.pushViewController(moreInformationViewController, animated: true)
             }
-            return
-        default:
             return
         }
         performSegue(segue)

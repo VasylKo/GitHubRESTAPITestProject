@@ -88,7 +88,19 @@ protocol BrowseActionConsumer: class {
             actionProducer.actionConsumer = self
         }
         
-        self.navigationItem.rightBarButtonItem = self.barButtonItems[mode.rawValue]
+        //New right bar button item for feed controller
+        if let _ = self.childViewControllers.first as? FeedListViewController {
+            let imageView = UIImageView(image: UIImage(named: "feed-logo")?.imageWithRenderingMode(.AlwaysOriginal))
+            let barButtonItem = UIBarButtonItem(customView: imageView)
+            
+            let negativeSeparator = UIBarButtonItem(barButtonSystemItem: .FixedSpace, target: nil, action: nil)
+            negativeSeparator.width = -17
+            
+            self.navigationItem.rightBarButtonItems = [negativeSeparator,barButtonItem]
+        }
+        else {
+            self.navigationItem.rightBarButtonItem = self.barButtonItems[mode.rawValue]
+        }
     }
     
     func prepareDisplayController(controller: UIViewController) {

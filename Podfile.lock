@@ -133,7 +133,7 @@ SPEC CHECKSUMS:
   LNNotificationsUI: 19554d28a5c3bb89a196ab7a5b0d5c9d95c28b96
   NewRelicAgent: 731c3b39030885531dad40e43cd80b8dbe61647e
   ObjectMapper: 528b1a6677a6acac7747edd508576983e76a9148
-  PosInCore: d343ffa2e13b1fba322212eb498bdc452a305c54
+  PosInCore: 6110bbb5ffdcfb6603d6a896edf6eeda57dd279a
   Realm: b498a6fb9d288b171ff98d0e2d4384c295be8990
   RealmSwift: d014810dec75c9a3f1a33926d2dabfed855c582c
   Result: dd3dd71af3fa2e262f1a999e14fba2c25ec14f16
