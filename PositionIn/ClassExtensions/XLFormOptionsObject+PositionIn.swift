@@ -38,7 +38,13 @@ extension XLFormOptionsObject {
         return enumValue()
     }
     
+    var gender: Gender? {
+        return enumValue()
+    }
     
+    var educationLevel: EducationLevel? {
+        return enumValue()
+    }
     
     private func enumValue<T: RawRepresentable>() -> T? {
         if let rawValue = formValue() as? T.RawValue {

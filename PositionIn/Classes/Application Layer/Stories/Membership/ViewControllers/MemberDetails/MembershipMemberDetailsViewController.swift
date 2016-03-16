@@ -112,14 +112,14 @@ class MembershipMemberDetailsViewController : BaseAddItemViewController {
             rowType:XLFormRowDescriptorTypeSelectorPush, title: NSLocalizedString("Education Level"))
         educationLevelRow.required = false
         var educationLevelSelectorOptions: [XLFormOptionsObject] = []
-        educationLevelSelectorOptions.append(XLFormOptionsObject(value: EducationLevel.PrimarySchool.rawValue, displayText: EducationLevel.PrimarySchool.rawValue))
-        educationLevelSelectorOptions.append(XLFormOptionsObject(value: EducationLevel.SecondarySchool.rawValue, displayText: EducationLevel.SecondarySchool.rawValue))
-        educationLevelSelectorOptions.append(XLFormOptionsObject(value: EducationLevel.HighSchool.rawValue, displayText: EducationLevel.HighSchool.rawValue))
-        educationLevelSelectorOptions.append(XLFormOptionsObject(value: EducationLevel.Diploma.rawValue, displayText: EducationLevel.Diploma.rawValue))
-        educationLevelSelectorOptions.append(XLFormOptionsObject(value: EducationLevel.Undergraduate.rawValue, displayText: EducationLevel.Undergraduate.rawValue))
-        educationLevelSelectorOptions.append(XLFormOptionsObject(value: EducationLevel.PostGraduateDiploma.rawValue, displayText: EducationLevel.PostGraduateDiploma.rawValue))
-        educationLevelSelectorOptions.append(XLFormOptionsObject(value: EducationLevel.Masters.rawValue, displayText: EducationLevel.Masters.rawValue))
-        educationLevelSelectorOptions.append(XLFormOptionsObject(value: EducationLevel.PHD.rawValue, displayText: EducationLevel.PHD.rawValue))
+        educationLevelSelectorOptions.append(XLFormOptionsObject(value: EducationLevel.PrimarySchool.rawValue, displayText: EducationLevel.PrimarySchool.description))
+        educationLevelSelectorOptions.append(XLFormOptionsObject(value: EducationLevel.SecondarySchool.rawValue, displayText: EducationLevel.SecondarySchool.description))
+        educationLevelSelectorOptions.append(XLFormOptionsObject(value: EducationLevel.HighSchool.rawValue, displayText: EducationLevel.HighSchool.description))
+        educationLevelSelectorOptions.append(XLFormOptionsObject(value: EducationLevel.Diploma.rawValue, displayText: EducationLevel.Diploma.description))
+        educationLevelSelectorOptions.append(XLFormOptionsObject(value: EducationLevel.Undergraduate.rawValue, displayText: EducationLevel.Undergraduate.description))
+        educationLevelSelectorOptions.append(XLFormOptionsObject(value: EducationLevel.PostGraduateDiploma.rawValue, displayText: EducationLevel.PostGraduateDiploma.description))
+        educationLevelSelectorOptions.append(XLFormOptionsObject(value: EducationLevel.Masters.rawValue, displayText: EducationLevel.Masters.description))
+        educationLevelSelectorOptions.append(XLFormOptionsObject(value: EducationLevel.PHD.rawValue, displayText: EducationLevel.PHD.description))
         educationLevelRow.selectorOptions = educationLevelSelectorOptions
         educationLevelRow.value = educationLevelSelectorOptions.first
         educationLevelRow.cellConfig["textLabel.textColor"] = UIScheme.mainThemeColor
@@ -182,9 +182,7 @@ class MembershipMemberDetailsViewController : BaseAddItemViewController {
         let values = formValues()
         
         if let userProfile = self.userProfile {
-            if let genderRawValue = (values[Tags.Gender.rawValue] as? NSNumber)?.integerValue {
-                userProfile.gender = Gender(rawValue: genderRawValue)
-            }
+            userProfile.gender = (values[Tags.Gender.rawValue] as? XLFormOptionsObject).flatMap { $0.gender }
             userProfile.dateOfBirth = values[Tags.Gender.rawValue] as? NSDate
             userProfile.passportNumber = values[Tags.DateOfBirth.rawValue] as? String
             if let locationCoordinates = (values[Tags.Location.rawValue] as? CLLocation)?.coordinate {
@@ -192,15 +190,9 @@ class MembershipMemberDetailsViewController : BaseAddItemViewController {
                 location.coordinates = locationCoordinates
                 userProfile.location = location
             }
-            if let postalAddressCoordinates = (values[Tags.PostalAddress.rawValue] as? CLLocation)?.coordinate {
-                var postalAddress = Location()
-                postalAddress.coordinates = postalAddressCoordinates
-                userProfile.postalAddress = postalAddress
-            }
+            //userProfile.postalAddress = values[Tags.PostalAddress.rawValue] as? String
             userProfile.permanentResidence = values[Tags.PermanentResidence.rawValue] as? String
-            if let educationLevelRawValue = values[Tags.EducationLevel.rawValue] as? String {
-                userProfile.educationLevel = EducationLevel(rawValue: educationLevelRawValue)
-            }
+            userProfile.educationLevel = (values[Tags.EducationLevel.rawValue] as? XLFormOptionsObject).flatMap { $0.educationLevel }
             userProfile.profession = values[Tags.Profession.rawValue] as? String
 
             api().updateMyProfile(userProfile).onSuccess(callback: { [weak self] _ in
