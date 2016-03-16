@@ -28,6 +28,7 @@ struct Product: CRUDObject {
     var attachments : [Attachment]?
     var author: UserInfo?
     var numOfBeneficiaries: Int?
+    var distanceString: String?
     
     
 /*
@@ -85,6 +86,7 @@ struct Product: CRUDObject {
         attachments <- map["attachments"]
         author <- map["author"]
         numOfBeneficiaries <- map["numOfBeneficiaries"]
+        distanceString <- map["distanceString"]
     }
     
     static func endpoint() -> String {

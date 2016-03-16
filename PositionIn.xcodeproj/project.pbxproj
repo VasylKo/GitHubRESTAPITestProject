@@ -185,6 +185,9 @@
 		D15F474D1C0B7801009ED3FD /* AmbulanceRequestedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15F474C1C0B7801009ED3FD /* AmbulanceRequestedViewController.swift */; };
 		D161F7721C68E4E800EBDB94 /* MarketPaymentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D161F7711C68E4E800EBDB94 /* MarketPaymentView.swift */; };
 		D161F7741C68E4F300EBDB94 /* MarketPaymentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D161F7731C68E4F300EBDB94 /* MarketPaymentView.xib */; };
+		D16772761C997BB100B624FC /* FeedEmergencyDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16772751C997BB100B624FC /* FeedEmergencyDetailsViewController.swift */; };
+		D16772781C9989FE00B624FC /* FeedEmergencyDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D16772771C9989FE00B624FC /* FeedEmergencyDetailsViewController.xib */; };
+		D167727B1C9991B100B624FC /* FeedEmergencyCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D167727A1C9991B100B624FC /* FeedEmergencyCellModel.swift */; };
 		D18A1FDC1BEB95D9003F158D /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18A1FDA1BEB95D9003F158D /* ChangePasswordViewController.swift */; };
 		D18A1FDD1BEB95D9003F158D /* PositionIn.ChangePasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D18A1FDB1BEB95D9003F158D /* PositionIn.ChangePasswordViewController.xib */; };
 		D18EA2C81C031C9800A886A5 /* OnboardingNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18EA2C71C031C9800A886A5 /* OnboardingNavigationController.swift */; };
@@ -732,6 +735,9 @@
 		D15F474C1C0B7801009ED3FD /* AmbulanceRequestedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AmbulanceRequestedViewController.swift; sourceTree = "<group>"; };
 		D161F7711C68E4E800EBDB94 /* MarketPaymentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarketPaymentView.swift; sourceTree = "<group>"; };
 		D161F7731C68E4F300EBDB94 /* MarketPaymentView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MarketPaymentView.xib; sourceTree = "<group>"; };
+		D16772751C997BB100B624FC /* FeedEmergencyDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedEmergencyDetailsViewController.swift; sourceTree = "<group>"; };
+		D16772771C9989FE00B624FC /* FeedEmergencyDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeedEmergencyDetailsViewController.xib; sourceTree = "<group>"; };
+		D167727A1C9991B100B624FC /* FeedEmergencyCellModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedEmergencyCellModel.swift; sourceTree = "<group>"; };
 		D18A1FDA1BEB95D9003F158D /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
 		D18A1FDB1BEB95D9003F158D /* PositionIn.ChangePasswordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.ChangePasswordViewController.xib; sourceTree = "<group>"; };
 		D18EA2C71C031C9800A886A5 /* OnboardingNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingNavigationController.swift; sourceTree = "<group>"; };
@@ -1861,6 +1867,14 @@
 			path = MarketPaymentView;
 			sourceTree = "<group>";
 		};
+		D16772791C99912E00B624FC /* CellModel */ = {
+			isa = PBXGroup;
+			children = (
+				D167727A1C9991B100B624FC /* FeedEmergencyCellModel.swift */,
+			);
+			path = CellModel;
+			sourceTree = "<group>";
+		};
 		D18A1FD91BEB95AF003F158D /* ChangePassword */ = {
 			isa = PBXGroup;
 			children = (
@@ -1878,6 +1892,16 @@
 				D18EA2CD1C04B38400A886A5 /* PositionIn.BrowseGridViewController.xib */,
 			);
 			path = BrowseGrid;
+			sourceTree = "<group>";
+		};
+		D1933C251C997AAB00D1B965 /* FeedEmergencyDetailsViewController */ = {
+			isa = PBXGroup;
+			children = (
+				D16772791C99912E00B624FC /* CellModel */,
+				D16772751C997BB100B624FC /* FeedEmergencyDetailsViewController.swift */,
+				D16772771C9989FE00B624FC /* FeedEmergencyDetailsViewController.xib */,
+			);
+			path = FeedEmergencyDetailsViewController;
 			sourceTree = "<group>";
 		};
 		D19A19FC1C69F87D0099038F /* MPesaPaymentCompleteViewController */ = {
@@ -2300,6 +2324,7 @@
 		E64DC34C1B4E53C90011D37C /* PositionIn */ = {
 			isa = PBXGroup;
 			children = (
+				D1933C251C997AAB00D1B965 /* FeedEmergencyDetailsViewController */,
 				D112BFB11C96E1E700339D7D /* NewsDetailsViewController */,
 				D1F7A7871C91947500A76709 /* FeedListViewController */,
 				CD795BC71C57B4C700C1C298 /* Classes */,
@@ -3869,6 +3894,7 @@
 				500D7FA91BC2CD39008C8C82 /* PositionIn.SearchEntityCell.xib in Resources */,
 				E6C952341BA1D9960032254F /* PositionIn.ProfileInfoCell.xib in Resources */,
 				E6D4D5B51B6F8B9F003134CB /* PositionIn.SearchBar.xib in Resources */,
+				D16772781C9989FE00B624FC /* FeedEmergencyDetailsViewController.xib in Resources */,
 				E66115A31B73A18C003DB5B3 /* NewItems.storyboard in Resources */,
 				24EF62161BA81DCB00472531 /* PositionIn.ChatHistoryCell.xib in Resources */,
 				D1DA176D1C05B7BE0091A8CE /* PositionIn.BrowseGridCollectionViewCell.xib in Resources */,
@@ -4256,6 +4282,8 @@
 				E66115A91B73AE0F003DB5B3 /* AddEventViewController.swift in Sources */,
 				CDB5B5C81C5B9C2400413715 /* MembershipPlanDetailsBenefitTableViewCell.swift in Sources */,
 				D112D9DA1C2C83230051039E /* CreateConversationContainerViewController.swift in Sources */,
+				D167727B1C9991B100B624FC /* FeedEmergencyCellModel.swift in Sources */,
+				D16772761C997BB100B624FC /* FeedEmergencyDetailsViewController.swift in Sources */,
 				E69421031B666A1600F34F06 /* ActionCell.swift in Sources */,
 				E6BEF1D51B9C657B00511B46 /* PostBodyCell.swift in Sources */,
 				E6C9522A1BA1A82F0032254F /* UIImageView+URL.swift in Sources */,
