@@ -40,19 +40,36 @@
                         <color key="textColor" red="0.92941176470588238" green="0.10588235294117647" blue="0.1803921568627451" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="productPinDistance" translatesAutoresizingMaskIntoConstraints="NO" id="qSW-nO-GXN">
+                        <rect key="frame" x="18" y="100" width="20" height="17"/>
+                        <color key="tintColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="calibratedRGB"/>
+                    </imageView>
+                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y3q-0l-LsD">
+                        <rect key="frame" x="46" y="100" width="210" height="17"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                        <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="XcK-fF-xO2" firstAttribute="top" secondItem="qSW-nO-GXN" secondAttribute="bottom" constant="10" id="2Lq-9g-qNK"/>
                     <constraint firstAttribute="bottomMargin" secondItem="XcK-fF-xO2" secondAttribute="bottom" constant="-8" id="5it-rp-7nE"/>
                     <constraint firstItem="tnH-7t-KTq" firstAttribute="top" secondItem="Xd4-3O-NDP" secondAttribute="bottom" constant="10" id="9lG-8b-7hP"/>
                     <constraint firstItem="XcK-fF-xO2" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="-8" id="P1D-2g-qBd"/>
+                    <constraint firstItem="kvR-0w-vHn" firstAttribute="leading" secondItem="y3q-0l-LsD" secondAttribute="trailing" constant="8" id="PSp-cy-elJ"/>
                     <constraint firstItem="XcK-fF-xO2" firstAttribute="top" secondItem="kvR-0w-vHn" secondAttribute="bottom" constant="10" id="Q0e-y0-gqA"/>
                     <constraint firstItem="Xd4-3O-NDP" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="12" id="Sbs-Pi-17m"/>
                     <constraint firstItem="tnH-7t-KTq" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="12" id="Vzu-WY-E8b"/>
                     <constraint firstItem="Xd4-3O-NDP" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="20" id="W44-Ib-X0w"/>
+                    <constraint firstItem="XcK-fF-xO2" firstAttribute="top" secondItem="y3q-0l-LsD" secondAttribute="bottom" constant="10" id="Y9h-cr-SKS"/>
                     <constraint firstAttribute="trailingMargin" secondItem="Xd4-3O-NDP" secondAttribute="trailing" constant="12" id="alt-5f-hwE"/>
                     <constraint firstItem="kvR-0w-vHn" firstAttribute="top" secondItem="Xd4-3O-NDP" secondAttribute="bottom" constant="10" id="cj2-4w-6qn"/>
+                    <constraint firstItem="qSW-nO-GXN" firstAttribute="top" secondItem="Xd4-3O-NDP" secondAttribute="bottom" constant="10" id="cle-Hn-Hh9"/>
+                    <constraint firstItem="y3q-0l-LsD" firstAttribute="top" secondItem="Xd4-3O-NDP" secondAttribute="bottom" constant="10" id="emh-Hd-YKO"/>
+                    <constraint firstItem="qSW-nO-GXN" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="10" id="h9f-4T-tRt"/>
                     <constraint firstAttribute="trailingMargin" secondItem="kvR-0w-vHn" secondAttribute="trailing" constant="12" id="ixJ-9g-kIz"/>
                     <constraint firstItem="kvR-0w-vHn" firstAttribute="leading" secondItem="tnH-7t-KTq" secondAttribute="trailing" constant="8" id="j88-bs-ev4"/>
+                    <constraint firstItem="y3q-0l-LsD" firstAttribute="leading" secondItem="qSW-nO-GXN" secondAttribute="trailing" constant="8" id="mvQ-0W-0Vk"/>
                     <constraint firstAttribute="trailingMargin" secondItem="XcK-fF-xO2" secondAttribute="trailing" constant="-8" id="n1f-0n-42m"/>
                     <constraint firstItem="XcK-fF-xO2" firstAttribute="top" secondItem="tnH-7t-KTq" secondAttribute="bottom" constant="10" id="wXC-Qg-9JZ"/>
                 </constraints>
@@ -60,9 +77,14 @@
             <connections>
                 <outlet property="authorLabel" destination="tnH-7t-KTq" id="3RL-We-nAO"/>
                 <outlet property="dateLabel" destination="kvR-0w-vHn" id="Zex-A5-P0B"/>
+                <outlet property="distanceIcon" destination="qSW-nO-GXN" id="xJX-ug-baq"/>
+                <outlet property="distanceLabel" destination="y3q-0l-LsD" id="EgF-D6-USe"/>
                 <outlet property="newsTitleLabel" destination="Xd4-3O-NDP" id="eiy-o2-Nw0"/>
             </connections>
             <point key="canvasLocation" x="502" y="527"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="productPinDistance" width="20" height="20"/>
+    </resources>
 </document>

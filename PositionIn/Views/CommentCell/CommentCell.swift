@@ -19,13 +19,23 @@ class CommentCell: TableViewCell {
         commentLabel.text = m!.comment
         dateLabel.text = m!.date
         
-        containerView.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.1).CGColor
-        containerView.layer.shadowOffset = CGSizeMake(0.0, 2.0)
-        containerView.layer.shadowOpacity = 1.0
-        containerView.layer.shadowRadius = 0.0
+        self.containerView.layer.cornerRadius = 2
+        
         containerView.layer.masksToBounds = false
+        containerView.layer.shadowColor = UIColor.blackColor().CGColor
+        containerView.layer.shadowOffset = CGSize(width: 0, height: 0.5)
+        containerView.layer.shadowOpacity = 0.1
         
         self.selectionStyle = .None
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        self.containerView.frame = CGRect(origin: CGPoint(x: 8, y: 8),
+            size: CGSizeMake(self.bounds.size.width - 16, self.bounds.size.height - 16))
+        let shadowPath = UIBezierPath(rect: containerView.bounds)
+        containerView.layer.shadowPath = shadowPath.CGPath
     }
     
     override func prepareForReuse() {

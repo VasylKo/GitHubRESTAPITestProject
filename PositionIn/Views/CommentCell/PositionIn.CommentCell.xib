@@ -15,16 +15,16 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Ev-k8-dOD" userLabel="Container">
-                        <rect key="frame" x="0.0" y="8" width="317" height="105"/>
+                        <rect key="frame" x="8" y="8" width="301" height="105"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jC6-Fv-csn" userLabel="DateLabel">
-                                <rect key="frame" x="64" y="45" width="244" height="15"/>
+                                <rect key="frame" x="64" y="45" width="228" height="15"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="13"/>
                                 <color key="textColor" red="0.60784313725490191" green="0.60784313725490191" blue="0.60784313725490191" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pif-sd-dGN" userLabel="NameLabel">
-                                <rect key="frame" x="64" y="12" width="245" height="21"/>
+                                <rect key="frame" x="64" y="12" width="229" height="21"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -40,7 +40,7 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5RN-WH-csu" userLabel="CommentLabel">
-                                <rect key="frame" x="64" y="72" width="245" height="25"/>
+                                <rect key="frame" x="64" y="72" width="229" height="25"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                 <color key="textColor" red="0.23529411764705882" green="0.23529411764705882" blue="0.23529411764705882" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -70,8 +70,8 @@
                 <constraints>
                     <constraint firstItem="4Ev-k8-dOD" firstAttribute="top" secondItem="Dqh-Bo-qXP" secondAttribute="top" constant="8" id="20f-iy-IJx"/>
                     <constraint firstAttribute="bottom" secondItem="4Ev-k8-dOD" secondAttribute="bottom" constant="8" id="57T-DH-UOt"/>
-                    <constraint firstAttribute="trailing" secondItem="4Ev-k8-dOD" secondAttribute="trailing" id="tWc-XE-Hfg"/>
-                    <constraint firstItem="4Ev-k8-dOD" firstAttribute="leading" secondItem="Dqh-Bo-qXP" secondAttribute="leading" id="xAa-Fr-EJU"/>
+                    <constraint firstAttribute="trailing" secondItem="4Ev-k8-dOD" secondAttribute="trailing" constant="8" id="tWc-XE-Hfg"/>
+                    <constraint firstItem="4Ev-k8-dOD" firstAttribute="leading" secondItem="Dqh-Bo-qXP" secondAttribute="leading" constant="8" id="xAa-Fr-EJU"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
