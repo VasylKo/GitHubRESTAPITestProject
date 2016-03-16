@@ -16,10 +16,9 @@ struct FeedItemNewsCellModelFactory {
         var models: [[TableViewCellModel]] = []
         var firstSection: [TableViewCellModel] = []
         
-        if let urlString = post.photoURL {
-            let placeholderString = "PromotionDetailsPlaceholder"
-            firstSection.append(TableViewCellURLModel(url: urlString, height: 180, placeholderString: placeholderString))
-        }
+        let placeholderString = "news_placeholder"
+        
+        firstSection.append(TableViewCellURLModel(url: post.photoURL, height: 180, placeholderString: placeholderString))
         
         let date: String? = post.date?.formattedAsTimeAgo()
         firstSection.append(NewsDetailsTitleTableViewCellModel(title: post.name, author: post.author?.title, date: date))
