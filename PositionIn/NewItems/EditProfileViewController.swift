@@ -11,8 +11,10 @@ import XLForm
 import CleanroomLogger
 import BrightFutures
 import Photos
+import ImagePickerSheetController
+import MobileCoreServices
 
-final class EditProfileViewController: BaseAddItemViewController {
+final class EditProfileViewController: BaseAddItemViewController, UserProfileAvatarViewDelegate {
     private enum Tags: String {
         case Photo
         case FirstName
@@ -40,13 +42,13 @@ final class EditProfileViewController: BaseAddItemViewController {
     // MARK: - Private properties
     private var userProfile: UserProfile?
     private var countyBranches: [Community]?
+    private var headerView : UserProfileAvatarView!
     
     // Photo
     lazy private var photoRow: XLFormRowDescriptor = { [unowned self] in
         let row = self.photoRowDescriptor(EditProfileViewController.Tags.Photo.rawValue)
         return row
     }()
-    
     
     // First name
     lazy private var firstnameRow: XLFormRowDescriptor = {
@@ -154,7 +156,7 @@ final class EditProfileViewController: BaseAddItemViewController {
     
     // Postal Branch Of Choise
     lazy private var branchOfChoiseRow: XLFormRowDescriptor = { [unowned self] in
-        let branchOfChoiseRow = XLFormRowDescriptor(tag: Tags.BranchOfChoise.rawValue, rowType:XLFormRowDescriptorTypeSelectorPush, title: NSLocalizedString("County Branch"))
+        let branchOfChoiseRow = XLFormRowDescriptor(tag: Tags.BranchOfChoise.rawValue, rowType:XLFormRowDescriptorTypeSelectorPush, title: NSLocalizedString("County Branch of Choice"))
         branchOfChoiseRow.cellConfig.setObject(UIScheme.mainThemeColor, forKey: "textLabel.textColor")
         branchOfChoiseRow.cellConfig.setObject(UIScheme.mainThemeColor, forKey: "tintColor")
         
@@ -205,7 +207,8 @@ final class EditProfileViewController: BaseAddItemViewController {
     } ()
     
     
-    // MARK: - Lifecycle
+    // MARK: - Initializers
+    
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         loadData()
@@ -215,6 +218,8 @@ final class EditProfileViewController: BaseAddItemViewController {
         super.init(coder: aDecoder)
         loadData()
     }
+    
+    //MARK: Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -240,16 +245,21 @@ final class EditProfileViewController: BaseAddItemViewController {
             self?.userProfile = userProfile
             self?.initializeForm()
             self?.fillFormFromUserProfileModel()
+            
+            if let headerView = NSBundle.mainBundle().loadNibNamed(String(UserProfileAvatarView.self), owner: nil, options: nil).first as? UserProfileAvatarView {
+                self?.headerView = headerView
+                self?.tableView.tableHeaderView = headerView
+                headerView.delegate = self
+            }
+            
+            if let url = self?.userProfile?.avatar {
+                self?.headerView?.setAvatar(url)
+            }
         })
     }
     
     private func initializeForm() {
         form = XLFormDescriptor(title: NSLocalizedString("Edit profile"))
-
-        // Photo section
-        let photoSection = XLFormSectionDescriptor.formSection()
-        form.addFormSection(photoSection)
-        photoSection.addFormRow(photoRow)
 
         // Info section
         let infoSection = XLFormSectionDescriptor.formSection()
@@ -409,7 +419,8 @@ final class EditProfileViewController: BaseAddItemViewController {
         self.tableView.endEditing(true)
         
         if  let userProfile = userProfile,
-            avatarUpload = uploadAssets(formValues()[Tags.Photo.rawValue]) {
+            asset = self.headerView.asset,
+            avatarUpload = uploadAssets(asset) {
                 view.userInteractionEnabled = false
                 fillUserProfileModel()
                 avatarUpload.flatMap { (urls: [NSURL]) -> Future<Void, NSError> in
@@ -428,8 +439,6 @@ final class EditProfileViewController: BaseAddItemViewController {
                 }.onComplete { [weak self] result in
                     self?.view.userInteractionEnabled = true
                 }
-        } else {
-            showError(NSLocalizedString("Failed to fetch user data", comment: "Edit profile: Prefetch failure"))
         }
     }
     
@@ -438,4 +447,60 @@ final class EditProfileViewController: BaseAddItemViewController {
         super.formRowDescriptorValueHasChanged(formRow, oldValue: oldValue, newValue: newValue)
         self.navigationItem.rightBarButtonItem?.enabled = true
     }
+    
+    // MARK: Avatar Photo
+    
+    func addPhoto() {
+        let controller = ImagePickerSheetController(mediaType: .Image)
+        controller.maximumSelection = 1
+        
+        controller.addAction(ImagePickerAction(title: NSLocalizedString("Take Photo"), handler: { [weak self] _ in
+            self?.presentImagePicker(.Camera)
+            }))
+        
+        controller.addAction(ImagePickerAction(title: NSLocalizedString("Photo Library"), secondaryTitle: { NSString.localizedStringWithFormat(NSLocalizedString("Add %lu Photo"), $0) as String},
+            handler: { [weak self] _ in
+                self?.presentImagePicker(.PhotoLibrary)
+            }, secondaryHandler: { [weak self] _, numberOfPhotos in
+                self?.addAssets(controller.selectedImageAssets)
+            }))
+        
+        controller.addAction(ImagePickerAction(title: NSLocalizedString("Cancel", comment: "Action Title"), style: .Cancel, handler: { _ in
+            Log.debug?.message("Cancelled")
+        }))
+        
+        presentViewController(controller, animated: true, completion: nil)
+    }
+    
+    private func presentImagePicker(sourceType: UIImagePickerControllerSourceType) {
+        if UIImagePickerController.isSourceTypeAvailable(sourceType) {
+            Log.debug?.message("Presenting picker for source \(sourceType)")
+            let picker = UIImagePickerController()
+            picker.sourceType = sourceType
+            picker.allowsEditing = false
+            picker.mediaTypes = [kUTTypeImage as String]
+            picker.delegate = self
+            self.presentViewController(picker, animated: true, completion: nil)
+        } else {
+            Log.error?.message("Unavailable source type: \(sourceType)")
+        }
+    }
+    
+    private func addAssets(assets: [PHAsset]) {
+        if let asset = assets.first {
+            self.headerView?.configure(asset)
+        }
+    }
+    
+    override func uploadAssets(value: AnyObject?, optional: Bool = true) -> Future<[NSURL], NSError>? {
+        if let asset = value as? PHAsset {
+            return self.uploadDataForAsset(asset).flatMap({ (let data, let dataUTI) in
+                return api().uploadImage(data, dataUTI: dataUTI)
+            }).map({ (let url) in
+                return [url]
+            })
+        }
+        return optional ? Future(value: []) : nil
+    }
+    
 }

@@ -41,9 +41,9 @@ final class APIDateTransform: DateFormatterTransform {
     
 }
 
-class AmazonURLTransform: RelativeURLTransform {
+class ImageURLTransform: RelativeURLTransform {
     init() {
-        super.init(baseURL: AppConfiguration().amazonURL)
+        super.init(baseURL: AppConfiguration().imageBaseURL)
     }
 }
 

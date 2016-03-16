@@ -103,6 +103,8 @@
 		CD552DD41C75DF670012920F /* PositionIn.NewsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD552DD31C75DF670012920F /* PositionIn.NewsTableViewCell.xib */; };
 		CD552DD71C75DFB80012920F /* NewsCellModelFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD552DD51C75DFB80012920F /* NewsCellModelFactory.swift */; };
 		CD552DD81C75DFB80012920F /* NewsTableViewCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD552DD61C75DFB80012920F /* NewsTableViewCellModel.swift */; };
+		CD65C5FC1C9988D400C2C11B /* UserProfileAvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD65C5FA1C9988D400C2C11B /* UserProfileAvatarView.swift */; };
+		CD65C5FD1C9988D400C2C11B /* UserProfileAvatarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD65C5FB1C9988D400C2C11B /* UserProfileAvatarView.xib */; };
 		CD794DE01C52485E00C1C298 /* OpenApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD794DDF1C52485E00C1C298 /* OpenApplication.swift */; };
 		CD795BDE1C57B4EE00C1C298 /* Appfile in Resources */ = {isa = PBXBuildFile; fileRef = CD795BDA1C57B4EE00C1C298 /* Appfile */; };
 		CD795BDF1C57B4EE00C1C298 /* Fastfile in Resources */ = {isa = PBXBuildFile; fileRef = CD795BDB1C57B4EE00C1C298 /* Fastfile */; };
@@ -649,6 +651,8 @@
 		CD552DD31C75DF670012920F /* PositionIn.NewsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.NewsTableViewCell.xib; sourceTree = "<group>"; };
 		CD552DD51C75DFB80012920F /* NewsCellModelFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsCellModelFactory.swift; sourceTree = "<group>"; };
 		CD552DD61C75DFB80012920F /* NewsTableViewCellModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsTableViewCellModel.swift; sourceTree = "<group>"; };
+		CD65C5FA1C9988D400C2C11B /* UserProfileAvatarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileAvatarView.swift; sourceTree = "<group>"; };
+		CD65C5FB1C9988D400C2C11B /* UserProfileAvatarView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserProfileAvatarView.xib; sourceTree = "<group>"; };
 		CD794DDF1C52485E00C1C298 /* OpenApplication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpenApplication.swift; sourceTree = "<group>"; };
 		CD795BDA1C57B4EE00C1C298 /* Appfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Appfile; sourceTree = "<group>"; };
 		CD795BDB1C57B4EE00C1C298 /* Fastfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Fastfile; sourceTree = "<group>"; };
@@ -1519,6 +1523,15 @@
 				CD552DD61C75DFB80012920F /* NewsTableViewCellModel.swift */,
 			);
 			path = CellModel;
+			sourceTree = "<group>";
+		};
+		CD65C5F91C9988D400C2C11B /* ProfileView */ = {
+			isa = PBXGroup;
+			children = (
+				CD65C5FA1C9988D400C2C11B /* UserProfileAvatarView.swift */,
+				CD65C5FB1C9988D400C2C11B /* UserProfileAvatarView.xib */,
+			);
+			path = ProfileView;
 			sourceTree = "<group>";
 		};
 		CD795BC71C57B4C700C1C298 /* Classes */ = {
@@ -3605,6 +3618,7 @@
 		E6F309381BA81FAF00C9420C /* UploadPhotoCell */ = {
 			isa = PBXGroup;
 			children = (
+				CD65C5F91C9988D400C2C11B /* ProfileView */,
 				E6F3093C1BA81FAF00C9420C /* UploadPhotoCell.swift */,
 				E6F309391BA81FAF00C9420C /* AttachedPhotosView.swift */,
 				E6F3093B1BA81FAF00C9420C /* PositionIn.AttachedPhotosView.xib */,
@@ -3891,6 +3905,7 @@
 				E6C9522E1BA1BB470032254F /* PositionIn.PeopleListCell.xib in Resources */,
 				CD795C4E1C590C1700C1C298 /* SegmentedControlContainerViewController.xib in Resources */,
 				D12EB2921C96E71200718E57 /* NewsDetailsViewController.xib in Resources */,
+				CD65C5FD1C9988D400C2C11B /* UserProfileAvatarView.xib in Resources */,
 				240A9B9C1B9CCDA4007C77E3 /* PositionIn.CommunityStatsCell.xib in Resources */,
 				E66115871B7376F4003DB5B3 /* Login.storyboard in Resources */,
 				D1379E8E1C2A98710041AA4E /* PositionIn.ExploreCardCell.xib in Resources */,
@@ -4110,6 +4125,7 @@
 				E6BEF1D11B9C61F900511B46 /* Comment.swift in Sources */,
 				E6DADB9E1B8C5799009A5694 /* SearchFilter.swift in Sources */,
 				D1FD853A1C1EE8BB00C2E87B /* TrainingDetailsViewController.swift in Sources */,
+				CD65C5FC1C9988D400C2C11B /* UserProfileAvatarView.swift in Sources */,
 				E64D00631B7C8FB7007693E0 /* AddPostViewController.swift in Sources */,
 				CDE1B91F1C5F9E6A00F76F32 /* MembershipMemberProfileView.swift in Sources */,
 				50FA432C1C4404CC0050B00E /* PaymentProtocol.swift in Sources */,

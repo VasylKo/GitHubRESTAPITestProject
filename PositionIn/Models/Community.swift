@@ -75,7 +75,7 @@ struct Community: CRUDObject {
         name <- map["name"]
         communityDescription <- map["description"]
         role <- (map["role"], EnumTransform())
-        avatar <- (map["avatar"], AmazonURLTransform())
+        avatar <- (map["avatar"], ImageURLTransform())
         closed <- map["closed"]
         members <- map["members"]
         location <- map["location"]

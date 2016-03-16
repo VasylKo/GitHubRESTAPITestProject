@@ -55,7 +55,7 @@ class MembershipConfirmDetailsViewController : XLFormViewController {
     }()
     
     private var countyBranchRow: XLFormRowDescriptor = {
-        let row = XLFormRowDescriptor(tag: nil, rowType:XLFormRowDescriptorTypeSelectorPush, title: NSLocalizedString("County Branch"))
+        let row = XLFormRowDescriptor(tag: nil, rowType:XLFormRowDescriptorTypeSelectorPush, title: NSLocalizedString("County Branch of Choice"))
         row.cellConfig.setObject(UIScheme.mainThemeColor, forKey: "textLabel.textColor")
         row.cellConfig.setObject(UIScheme.mainThemeColor, forKey: "tintColor")
         row.required = true

@@ -216,7 +216,7 @@ class BaseAddItemViewController: XLFormViewController {
         return optional ? Future(value: []) : nil
     }
     
-    private func uploadDataForAsset(asset: PHAsset) -> Future<(NSData, String), NSError> {
+    func uploadDataForAsset(asset: PHAsset) -> Future<(NSData, String), NSError> {
         let p = Promise<(NSData, String), NSError>()
         let options = PHImageRequestOptions()
         options.deliveryMode = .HighQualityFormat

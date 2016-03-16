@@ -67,7 +67,7 @@ class FeedItem: CRUDObject {
         author <- map["author"]
         community <- (map["community"], CRUDObjectIdTransform())
         date <- (map["date"], APIDateTransform())
-        image <- (map["image"], AmazonURLTransform())
+        image <- (map["image"], ImageURLTransform())
         type <- (map["type"], EnumTransform())
         location <- map["location"]
         isLiked <- map["isLiked"]

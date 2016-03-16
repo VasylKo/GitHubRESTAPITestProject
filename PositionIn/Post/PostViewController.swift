@@ -26,6 +26,7 @@ final class PostViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         dataSource.configureTable(tableView)
         tableView.separatorStyle = .None
+        self.enterCommentField.placeholder = NSLocalizedString("Write a comment...")
         self.enterCommentField.delegate = self;
         self.reloadPost()
     }
