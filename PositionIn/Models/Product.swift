@@ -77,7 +77,7 @@ struct Product: CRUDObject {
         deliveryMethod <- (map["deliveryMethod"], EnumTransform())
         photos <- map["photos"]
         location <- map["location"]
-        imageURL <- (map["image"], AmazonURLTransform())
+        imageURL <- (map["image"], ImageURLTransform())
         startDate <- (map["startDate"], APIDateTransform()) 
         endData <- (map["endDate"], APIDateTransform())
         externalURLString <- map["externalUrl"]
