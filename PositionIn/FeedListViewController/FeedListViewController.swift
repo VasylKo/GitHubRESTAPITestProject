@@ -62,20 +62,22 @@ class FeedListViewController: UIViewController {
 extension FeedListViewController: UITableViewDelegate {
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let detailsController = NewsDetailsViewController(nibName: "NewsDetailsViewController", bundle: nil)
         
-        if indexPath.row == 0 {
-            detailsController.objectId = self.feauteredFeedItem?.objectId
+        let item = (indexPath.row == 0) ? self.feauteredFeedItem : self.feedItems![indexPath.row - 1]
+        
+        if (item!.type == .Emergency) {
+            let controller =  Storyboards.Main.instantiateEmergencyDetailsControllerId()
+            controller.objectId = item?.objectId
+            controller.author = item?.author
+            self.navigationController?.pushViewController(controller, animated: true)
         }
         else {
-            if let feedItems = self.feedItems {
-                let feedItem = feedItems[indexPath.row - 1]
-                detailsController.objectId = feedItem.objectId
-            }
+            let detailsController = NewsDetailsViewController(nibName: "NewsDetailsViewController",
+                bundle: nil)
+            
+            detailsController.objectId = item?.objectId
+            self.navigationController?.pushViewController(detailsController, animated: true)
         }
-        
-        self.navigationController?.pushViewController(detailsController, animated: true)
-        //should devide to post and emergency
         
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
@@ -109,7 +111,7 @@ extension FeedListViewController: UITableViewDataSource {
         if indexPath.row == 0 {
             let feauteredCell = tableView.dequeueReusableCellWithIdentifier(String(FeauteredFeedTableViewCell.self),
                 forIndexPath: indexPath) as! FeauteredFeedTableViewCell
-            let imagePlaceholder = (self.feauteredFeedItem?.type == .Emergency) ? "PromotionDetailsPlaceholder" : "home_news"
+            let imagePlaceholder = (self.feauteredFeedItem?.type == .Emergency) ? "PromotionDetailsPlaceholder" : "news_placeholder"
             feauteredCell.setImageURL(self.feauteredFeedItem?.image, placeholder: imagePlaceholder)
             feauteredCell.titleString = self.feauteredFeedItem?.text
             cell = feauteredCell
@@ -119,7 +121,7 @@ extension FeedListViewController: UITableViewDataSource {
                 forIndexPath: indexPath) as! FeedTableViewCell
             
             let feedItem = self.feedItems![indexPath.row - 1]
-            let imagePlaceholder = (feedItem.type == .Emergency) ? "PromotionDetailsPlaceholder" : "home_news"
+            let imagePlaceholder = (feedItem.type == .Emergency) ? "PromotionDetailsPlaceholder" : "news_placeholder"
             feedItemCell.setImageURL(feedItem.image, placeholder: imagePlaceholder)
             feedItemCell.titleString = feedItem.name
             if let title = feedItem.author?.title {
