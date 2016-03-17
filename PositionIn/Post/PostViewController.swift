@@ -11,11 +11,9 @@ import PosInCore
 import CleanroomLogger
 import BrightFutures
 
-
-protocol PostActionConsumer: class {
+protocol PostActionConsumer: NewsActionConsumer {
     func showProfileScreen(userId: CRUDObjectId)
     func showAttachments(links: [NSURL]?, attachments: [Attachment]?)
-    func likePost()
 }
 
 protocol PostActionProvider {
@@ -27,6 +25,8 @@ final class PostViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         dataSource.configureTable(tableView)
+        tableView.separatorStyle = .None
+        self.enterCommentField.placeholder = NSLocalizedString("Write a comment...")
         self.enterCommentField.delegate = self;
         self.reloadPost()
     }

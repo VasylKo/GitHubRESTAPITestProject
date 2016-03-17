@@ -55,7 +55,7 @@ struct BomaHotel: CRUDObject {
         deliveryMethod <- (map["deliveryMethod"], EnumTransform())
         photos <- map["photos"]
         location <- map["location"]
-        imageURL <- (map["image"], AmazonURLTransform())
+        imageURL <- (map["image"], ImageURLTransform())
         bookingURL <- (map["externalUrl"], URLTransform())
         links <- (map["links"], URLTransform())
         attachments <- map["attachments"]

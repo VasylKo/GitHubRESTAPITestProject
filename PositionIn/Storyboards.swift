@@ -668,8 +668,8 @@ extension BrowseCommunityViewController {
     }
 
 }
-
-//MARK: - BrowseVolunteerViewController
+//
+////MARK: - BrowseVolunteerViewController
 //extension UIStoryboardSegue {
 //    func selection() -> BrowseVolunteerViewController.Segue? {
 //        if let identifier = self.identifier {
@@ -683,31 +683,31 @@ extension BrowseCommunityViewController {
 //    var storyboardIdentifier: String? { return "BrowseVolunteerViewController" }
 //    static var storyboardIdentifier: String? { return "BrowseVolunteerViewController" }
 //}
-//
-//extension BrowseVolunteerViewController { 
-//
-//    enum Segue: String, CustomStringConvertible, SegueProtocol {
-//        case showVolunteerDetailsViewController = "showVolunteerDetailsViewController"
-//
-//        var kind: SegueKind? {
-//            switch (self) {
-//            case showVolunteerDetailsViewController:
-//                return SegueKind(rawValue: "show")
-//            }
-//        }
-//
-//        var destination: UIViewController.Type? {
-//            switch (self) {
-//            case showVolunteerDetailsViewController:
-//                return VolunteerDetailsViewController.self
-//            }
-//        }
-//
-//        var identifier: String? { return self.description } 
-//        var description: String { return self.rawValue }
-//    }
-//
-//}
+
+extension BrowseVolunteerViewController { 
+
+    enum Segue: String, CustomStringConvertible, SegueProtocol {
+        case showVolunteerDetailsViewController = "showVolunteerDetailsViewController"
+
+        var kind: SegueKind? {
+            switch (self) {
+            case showVolunteerDetailsViewController:
+                return SegueKind(rawValue: "show")
+            }
+        }
+
+        var destination: UIViewController.Type? {
+            switch (self) {
+            case showVolunteerDetailsViewController:
+                return VolunteerDetailsViewController.self
+            }
+        }
+
+        var identifier: String? { return self.description } 
+        var description: String { return self.rawValue }
+    }
+
+}
 
 //MARK: - SearchViewController
 extension SearchViewController: IdentifiableProtocol { 
@@ -1425,11 +1425,44 @@ extension CreateUserConversationViewController: IdentifiableProtocol {
 //MARK: - CreateConversationViewController
 
 //MARK: - BoughtProductDetailsViewController
+extension UIStoryboardSegue {
+    func selection() -> BoughtProductDetailsViewController.Segue? {
+        if let identifier = self.identifier {
+            return BoughtProductDetailsViewController.Segue(rawValue: identifier)
+        }
+        return nil
+    }
+}
+
 extension BoughtProductDetailsViewController: IdentifiableProtocol { 
     var storyboardIdentifier: String? { return "BoughtProductDetailsViewControllerId" }
     static var storyboardIdentifier: String? { return "BoughtProductDetailsViewControllerId" }
 }
 
+extension BoughtProductDetailsViewController { 
+
+    enum Segue: String, CustomStringConvertible, SegueProtocol {
+        case ShowSellerProfile = "ShowSellerProfile"
+
+        var kind: SegueKind? {
+            switch (self) {
+            case ShowSellerProfile:
+                return SegueKind(rawValue: "show")
+            }
+        }
+
+        var destination: UIViewController.Type? {
+            switch (self) {
+            case ShowSellerProfile:
+                return UserProfileViewController.self
+            }
+        }
+
+        var identifier: String? { return self.description } 
+        var description: String { return self.rawValue }
+    }
+
+}
 
 //MARK: - LoginSignupViewController
 extension UIStoryboardSegue {

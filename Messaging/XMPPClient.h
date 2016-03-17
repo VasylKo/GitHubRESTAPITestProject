@@ -8,12 +8,8 @@
 
 @import Foundation;
 
-@protocol XMPPCredentialsProvider;
-@protocol XMPPClientDelegate;
-@protocol XMPPMessageListener;
-@class XMPPProcess;
-@class XMPPClientConfiguration;
-@class XMPPTextMessage;
+@protocol XMPPCredentialsProvider, XMPPClientDelegate, XMPPMessageListener;
+@class XMPPProcess, XMPPClientConfiguration, XMPPTextMessage;
 
 @interface XMPPClient : NSObject
 

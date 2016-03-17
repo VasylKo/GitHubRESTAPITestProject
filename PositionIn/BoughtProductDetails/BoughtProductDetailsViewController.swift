@@ -62,6 +62,14 @@ final class BoughtProductDetailsViewController: UIViewController {
         reloadData()
     }
     
+    // MARK: - UIViewController
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let profileController = segue.destinationViewController  as? UserProfileViewController,
+            let userId = product?.entityDetails?.author?.objectId {
+                profileController.objectId = userId
+        }
+    }
+    
     // MARK: - Private functions
     private func reloadData() {
         actionTableView?.reloadData()
@@ -110,7 +118,7 @@ extension BoughtProductDetailsViewController: BoughtProductDetailsActionConsumer
     }
     
     func executeAction(action: BoughtProductDetailsAction) {
-        let segue: TrainingDetailsViewController.Segue
+        let segue: BoughtProductDetailsViewController.Segue
         switch action {
         case .SendMessage:
             if let userId = product?.entityDetails?.author?.objectId {
@@ -118,14 +126,12 @@ extension BoughtProductDetailsViewController: BoughtProductDetailsActionConsumer
             }
             return
         case .SellerProfile:
-            segue = .showUserProfile
+            segue = .ShowSellerProfile
         case .MoreInformation:
             if product?.entityDetails?.links?.isEmpty == false || product?.entityDetails?.attachments?.isEmpty == false {
                 let moreInformationViewController = MoreInformationViewController(links: product?.entityDetails?.links, attachments: product?.entityDetails?.attachments)
                 navigationController?.pushViewController(moreInformationViewController, animated: true)
             }
-            return
-        default:
             return
         }
         performSegue(segue)

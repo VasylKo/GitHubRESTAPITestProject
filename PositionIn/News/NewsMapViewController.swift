@@ -14,7 +14,7 @@ class NewsMapViewController : ContainerViewController, BrowseActionConsumer {
     
     convenience init() {
         let map = Storyboards.Main.instantiateBrowseMapViewController()
-        map.filter.homeItemType = .News
+        map.filter.itemTypes = [.News]
         
         self.init(nibName: String(NewsMapViewController.self), containeredViewControllers: [map])
         
