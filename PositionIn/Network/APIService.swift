@@ -438,31 +438,24 @@ final class APIService {
         let params = APIServiceQuery()
         params.append(query: query)
         params.append(query: page)
-        Log.debug?.value(params.query)
-        return session().flatMap {
-            (token: AuthResponse.Token) -> Future<CollectionResponse<FeedItem>, NSError> in
-            
-            let futureBuilder: (Void -> Future<CollectionResponse<FeedItem>, NSError>) = { [unowned self] in
-                let request = self.updateRequest(token, endpoint: endpoint, params: params.query)
-                let (_ , future): (Alamofire.Request, Future<CollectionResponse<FeedItem>, NSError>) = self.dataProvider.objectRequest(request)
-                return future
-            }
-            
-            return self.handleFailure(futureBuilder)
-        }
+        return self.getObjectsCollection(endpoint, params: params.query)
     }
     
     func getAll(homeItem: HomeItem, seachFilter: SearchFilter) -> Future<CollectionResponse<FeedItem>,NSError> {
         let endpoint = homeItem.endpoint()
-//        //TODO: change this when it will be fixed on backend
-        let method: Alamofire.Method = .POST
+        //TODO: fix endp
+        var endp = ""
+        if let endpoint = endpoint {
+            endp = endpoint
+        }
+        //        //TODO: change this when it will be fixed on backend
         let params = APIServiceQuery()
-        params.append("type", value: [homeItem.rawValue])
+        params.append("type", value: [String(homeItem.rawValue)])
         if let itemTypes = seachFilter.itemTypes {
-            var itemTypesArray : [Int] = []
+            var itemTypesArray : [String] = []
             
             for (_, value) in itemTypes.enumerate() {
-               itemTypesArray.append(value.rawValue)
+                itemTypesArray.append(String(value.rawValue))
             }
             params.append("type", value: itemTypesArray)
         }
@@ -471,22 +464,16 @@ final class APIService {
             params.append("communities", value: communities)
         }
         
-        return session().flatMap {
-            (token: AuthResponse.Token) -> Future<CollectionResponse<FeedItem>, NSError> in
-            //TODO: fix endp
-            var endp = ""
-            if let endpoint = endpoint {
-                endp = endpoint
+        var parameters = [String:AnyObject]()
+        for (key, value) in params.query {
+            if let array = value as? [String] {
+                parameters[key] = array.joinWithSeparator(",")
+            } else {
+                parameters[key] = value
             }
-            
-            let futureBuilder: (Void -> Future<CollectionResponse<FeedItem>, NSError>) = { [unowned self] in
-                let request = self.updateRequest(token, endpoint: endp, method: method, params: params.query)
-                let (_ , future): (Alamofire.Request, Future<CollectionResponse<FeedItem>, NSError>) = self.dataProvider.objectRequest(request)
-                return future
-            }
-            
-            return self.handleFailure(futureBuilder)
         }
+        
+        return self.getObjectsCollection(endp, params: parameters)
     }
     
     func getVolunteers() -> Future<CollectionResponse<Community>,NSError> {
