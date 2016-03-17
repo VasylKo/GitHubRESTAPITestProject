@@ -157,10 +157,9 @@ class CallAmbulanceViewController: BaseAddItemViewController {
                 if let incidentType: XLFormOptionsObject = values[Tags.Incedent.rawValue] as? XLFormOptionsObject {
                     if let incedentTypeValue = incidentType.valueData() as? NSNumber {
                         if ((incedentTypeValue.integerValue - 1) == IncidentType.Bleeding.rawValue) {
-                            
-                        }
-                        else {
-                            
+                            if let accidentDescription = values[Tags.Bleeding.rawValue] as? String {
+                                ambulanceRequest.accidentDescription = accidentDescription
+                            }
                         }
                         ambulanceRequest.incidentType = incedentTypeValue
                     }
