@@ -245,6 +245,8 @@ protocol BrowseModeDisplay {
 //MARK: - BrowseTabbarDelegate -
     
     @objc func tabbarDidChangeMode(tabbar: BrowseTabbar) {
-        browseMode = tabbar.selectedMode
+        if (browseMode != tabbar.selectedMode) {
+            browseMode = tabbar.selectedMode
+        }
     }
 }
