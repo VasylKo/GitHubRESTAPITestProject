@@ -18,7 +18,7 @@ struct FeedItemNewsCellModelFactory {
         
         firstSection.append(TableViewCellURLModel(url: post.photoURL, height: 180, placeholderString: "news_placeholder"))
         
-        let date: String? = post.date?.formattedAsTimeAgo()
+        let date: String? = post.date?.formattedAsFeedTime()
         firstSection.append(NewsDetailsTitleTableViewCellModel(title: post.name, distance: nil,author: post.author?.title, date: date))
         
         if let text = post.descriptionString {
