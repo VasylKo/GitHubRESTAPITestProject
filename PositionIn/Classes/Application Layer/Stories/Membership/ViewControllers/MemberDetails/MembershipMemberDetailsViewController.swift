@@ -138,8 +138,26 @@ class MembershipMemberDetailsViewController : BaseAddItemViewController {
         api().getMyProfile().onSuccess { [weak self] profile in
             if let strongSelf = self {
                 strongSelf.userProfile = profile
+                strongSelf.fillFormFromUserProfileModel()
             }
         }
+    }
+    
+    func fillFormFromUserProfileModel() {
+        if let gender = userProfile?.gender {
+             form.formRowWithTag(Tags.Gender.rawValue)?.value = XLFormOptionsObject(value: gender.rawValue, displayText: gender.description)
+        }
+        form.formRowWithTag(Tags.DateOfBirth.rawValue)?.value = userProfile?.dateOfBirth
+        form.formRowWithTag(Tags.IDPassPortNumber.rawValue)?.value = userProfile?.passportNumber
+        
+        // locationRow
+        // postalAddressRow
+        form.formRowWithTag(Tags.PermanentResidence.rawValue)?.value = userProfile?.permanentResidence
+        
+        if let educationLevel = userProfile?.educationLevel {
+            form.formRowWithTag(Tags.EducationLevel.rawValue)?.value = XLFormOptionsObject(value: educationLevel.rawValue, displayText: educationLevel.description)
+        }
+        form.formRowWithTag(Tags.Profession.rawValue)?.value = userProfile?.profession
     }
     
     required init?(coder: NSCoder) {
@@ -183,8 +201,8 @@ class MembershipMemberDetailsViewController : BaseAddItemViewController {
         
         if let userProfile = self.userProfile {
             userProfile.gender = (values[Tags.Gender.rawValue] as? XLFormOptionsObject).flatMap { $0.gender }
-            userProfile.dateOfBirth = values[Tags.Gender.rawValue] as? NSDate
-            userProfile.passportNumber = values[Tags.DateOfBirth.rawValue] as? String
+            userProfile.dateOfBirth = values[Tags.DateOfBirth.rawValue] as? NSDate
+            userProfile.passportNumber = values[Tags.IDPassPortNumber.rawValue] as? String
             if let locationCoordinates = (values[Tags.Location.rawValue] as? CLLocation)?.coordinate {
                 var location = Location()
                 location.coordinates = locationCoordinates
