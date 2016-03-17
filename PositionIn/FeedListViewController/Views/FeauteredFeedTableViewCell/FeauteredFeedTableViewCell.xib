@@ -21,7 +21,7 @@
                             <constraint firstAttribute="height" constant="284" id="MPP-hk-0tt"/>
                         </constraints>
                     </imageView>
-                    <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="suo-WV-PQB">
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="suo-WV-PQB">
                         <rect key="frame" x="0.0" y="198" width="320" height="86"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label Label Label Label Label Label Label Label Label Label Label Label Label" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HI7-9A-qW6">
@@ -31,7 +31,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.69999999999999996" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="HI7-9A-qW6" firstAttribute="leading" secondItem="suo-WV-PQB" secondAttribute="leading" constant="8" id="1nx-WE-Jrw"/>
                             <constraint firstAttribute="bottom" secondItem="HI7-9A-qW6" secondAttribute="bottom" constant="8" id="E2h-Qb-SJG"/>

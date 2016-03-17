@@ -16,6 +16,7 @@ struct AmbulanceRequest: CRUDObject {
     var photos: [PhotoInfo]?
     var location: Location?
     var incidentType: NSNumber?
+    var accidentDescription: String?
     
     init(objectId: CRUDObjectId = CRUDObjectInvalidId) {
         self.objectId = objectId
@@ -37,6 +38,7 @@ struct AmbulanceRequest: CRUDObject {
         photos <- map["photos"]
         location <- map["location"]
         incidentType <- map["type"]
+        accidentDescription <- map["accidentDescription"]
     }
     
     static func endpoint() -> String {
