@@ -40,8 +40,6 @@ class MembershipMemberDetailsViewController : BaseAddItemViewController {
     init(router: MembershipRouter) {
         self.router = router
         super.init(nibName: String(MembershipMemberDetailsViewController.self), bundle: nil)
-        
-        self.initializeForm()
     }
     
     func initializeForm() {
@@ -58,7 +56,6 @@ class MembershipMemberDetailsViewController : BaseAddItemViewController {
         genderSelectorOptions.append(XLFormOptionsObject(value: Gender.Male.rawValue, displayText: Gender.Male.description))
         genderSelectorOptions.append(XLFormOptionsObject(value: Gender.Female.rawValue, displayText: Gender.Female.description))
         genderRow.selectorOptions = genderSelectorOptions
-        genderRow.value = genderSelectorOptions.first
         genderRow.cellConfig["textLabel.textColor"] = UIScheme.mainThemeColor
         genderRow.cellConfig["tintColor"] = UIScheme.mainThemeColor
         firstSection.addFormRow(genderRow)
@@ -121,7 +118,6 @@ class MembershipMemberDetailsViewController : BaseAddItemViewController {
         educationLevelSelectorOptions.append(XLFormOptionsObject(value: EducationLevel.Masters.rawValue, displayText: EducationLevel.Masters.description))
         educationLevelSelectorOptions.append(XLFormOptionsObject(value: EducationLevel.PHD.rawValue, displayText: EducationLevel.PHD.description))
         educationLevelRow.selectorOptions = educationLevelSelectorOptions
-        educationLevelRow.value = educationLevelSelectorOptions.first
         educationLevelRow.cellConfig["textLabel.textColor"] = UIScheme.mainThemeColor
         educationLevelRow.cellConfig["tintColor"] = UIScheme.mainThemeColor
         thirdSection.addFormRow(educationLevelRow)
@@ -135,18 +131,14 @@ class MembershipMemberDetailsViewController : BaseAddItemViewController {
         
         self.form = form
         
-        api().getMyProfile().onSuccess { [weak self] profile in
-            if let strongSelf = self {
-                strongSelf.userProfile = profile
-                strongSelf.fillFormFromUserProfileModel()
-            }
-        }
+        tableView.reloadData()
     }
     
     func fillFormFromUserProfileModel() {
         if let gender = userProfile?.gender {
              form.formRowWithTag(Tags.Gender.rawValue)?.value = XLFormOptionsObject(value: gender.rawValue, displayText: gender.description)
         }
+        
         form.formRowWithTag(Tags.DateOfBirth.rawValue)?.value = userProfile?.dateOfBirth
         form.formRowWithTag(Tags.IDPassPortNumber.rawValue)?.value = userProfile?.passportNumber
         
@@ -168,7 +160,7 @@ class MembershipMemberDetailsViewController : BaseAddItemViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.loadData()
         self.setupInterface()
     }
     
@@ -193,6 +185,17 @@ class MembershipMemberDetailsViewController : BaseAddItemViewController {
         self.pageView.redrawView(3)
         self.view.addSubview(pageView)
     }
+    
+    func loadData() {
+        api().getMyProfile().onSuccess { [weak self] profile in
+            if let strongSelf = self {
+                strongSelf.userProfile = profile
+                strongSelf.initializeForm()
+                strongSelf.fillFormFromUserProfileModel()
+            }
+        }
+    }
+
     
     //MARK: Target-Action
     
