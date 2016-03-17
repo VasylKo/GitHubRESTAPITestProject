@@ -55,7 +55,7 @@ final class EventListCell: TableViewCell {
             
             if let date = m!.date {
                 let dateFormatter = NSDateFormatter()
-                dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
+                dateFormatter.dateFormat = "dd MMM, hh:mma"
                 let date = dateFormatter.stringFromDate(date)
                 dateLabel?.text = date
             }
