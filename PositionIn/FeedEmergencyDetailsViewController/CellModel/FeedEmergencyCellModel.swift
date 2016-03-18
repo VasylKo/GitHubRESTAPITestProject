@@ -22,8 +22,8 @@ struct FeedEmergencyCellModel {
         firstSection.append(TableViewCellURLModel(url: emergency.imageURL, height: 180, placeholderString: "PromotionDetailsPlaceholder"))
         
         //TODO: uncomment when BE fix
-//        let date: String? = emergency.date?.formattedAsTimeAgo()
-        firstSection.append(NewsDetailsTitleTableViewCellModel(title: emergency.name, distance: emergency.distanceString, author: nil, date: nil))
+        let date: String? = emergency.date?.formattedAsTimeAgo()
+        firstSection.append(NewsDetailsTitleTableViewCellModel(title: emergency.name, distance: emergency.distanceString, author: nil, date: date))
         
         if let text = emergency.text {
             firstSection.append(TableViewCellTextModel(title: text))
@@ -43,7 +43,9 @@ struct FeedEmergencyCellModel {
             secondSection.append(TableViewCellImageTextModel(title: "More Information", imageName: "productTerms&Info"))
         }
         
-        models.append(secondSection)
+        if secondSection.count > 0 {
+            models.append(secondSection)
+        }
         return models
     }
     

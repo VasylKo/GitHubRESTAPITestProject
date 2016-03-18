@@ -18,23 +18,20 @@ struct FeedItemNewsCellModelFactory {
         
         firstSection.append(TableViewCellURLModel(url: post.photoURL, height: 180, placeholderString: "news_placeholder"))
         
-        let date: String? = post.date?.formattedAsTimeAgo()
-        firstSection.append(NewsDetailsTitleTableViewCellModel(title: post.name, distance: nil,author: post.author?.title, date: date))
+        firstSection.append(NewsDetailsTitleTableViewCellModel(title: post.name, distance: nil,author: post.author?.title, date: nil))
         
         if let text = post.descriptionString {
             firstSection.append(TableViewCellTextModel(title: text))
         }
 
 
-        firstSection.append(PostLikesCountModel(likes: post.likes, isLiked:post.isLiked, comments: post.comments.count, actionConsumer: actionConsumer))
+        firstSection.append(PostLikesCountModel(likes: post.likes, isLiked:post.isLiked, isCommented: false, comments: post.comments.count, actionConsumer: actionConsumer))
         models.append(firstSection)
         
         var secondSection: [TableViewCellModel] = []
-        
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
+
         for comment: Comment in post.comments {
-            let dateString = dateFormatter.stringFromDate(comment.date ?? NSDate())
+            let dateString = comment.date?.formattedAsCommentTime()
             secondSection.append(PostCommentCellModel(userId: comment.author!.objectId, name: comment.author!.title, comment: comment.text, date:dateString, imageUrl: comment.author!.avatar))
         }
         

@@ -15,24 +15,11 @@ class NewsItemTitleCell: TableViewCell {
         let m = model as? NewsDetailsTitleTableViewCellModel
         assert(m != nil, "Invalid model passed")
         
-        if let date = m!.date {
-            dateLabel.text = date
-        }
-        else {
-            dateLabel.text = nil
-        }
+        dateLabel.text = m!.date
+        newsTitleLabel.text = m!.title
         
         distanceIcon.hidden = true
         distanceLabel.hidden = true
-        authorLabel.hidden = true
-        
-        if let author = m!.author {
-            authorLabel.hidden = false
-            authorLabel.text = "By \(author)"
-        }
-        else {
-            authorLabel.text = nil
-        }
         
         if let distance = m!.distance {
             distanceIcon.hidden = false
@@ -41,22 +28,18 @@ class NewsItemTitleCell: TableViewCell {
         }
         else {
             distanceLabel.text = nil
-        }
-        
-        if let newsTitle = m!.title {
-            newsTitleLabel.text = newsTitle
-        }
-        else {
-            newsTitleLabel.text = nil
+            if (m!.date == nil) {
+                bottomContainerHeightConstaint.constant = 0
+            }
         }
         
         self.selectionStyle = .None
     }
     
+    @IBOutlet weak var bottomContainerHeightConstaint: NSLayoutConstraint!
     @IBOutlet weak var distanceIcon: UIImageView!
     @IBOutlet weak var distanceLabel: UILabel!
     
     @IBOutlet private weak var dateLabel: UILabel!
-    @IBOutlet private weak var authorLabel: UILabel!
     @IBOutlet private weak var newsTitleLabel: UILabel!
 }

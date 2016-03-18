@@ -40,14 +40,16 @@ class FeedListViewController: UIViewController {
         self.tableView.hidden = true
         var filter = SearchFilter()
         filter.isFeatured = true
+        filter.categories = nil
+        filter.startPrice = nil
+        filter.endPrice = nil
         var page = APIService.Page(start: 0, size: 1)
         
         api().getFeed(filter, page: page).flatMap { [weak self] (response: CollectionResponse<FeedItem>) -> Future<CollectionResponse<FeedItem>, NSError> in
             self?.feauteredFeedItem = response.items.first
             
             page = APIService.Page(start: 0, size: 100)
-            filter = SearchFilter()
-            filter.itemTypes = [.Emergency, .News]
+            filter.isFeatured = false
             
             return api().getFeed(filter, page: page)
             
@@ -66,7 +68,8 @@ extension FeedListViewController: UITableViewDelegate {
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        let item = (indexPath.row == 0) ? self.feauteredFeedItem : self.feedItems![indexPath.row - 1]
+        let offset = (self.feauteredFeedItem != nil) ? 1 : 0
+        let item = (indexPath.row == 0) ? self.feauteredFeedItem : self.feedItems![indexPath.row - offset]
         
         if (item!.type == .Emergency) {
             let detailsController = FeedEmergencyDetailsViewController(nibName: "FeedEmergencyDetailsViewController",
@@ -111,7 +114,7 @@ extension FeedListViewController: UITableViewDataSource {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         var cell: UITableViewCell?
-        if indexPath.row == 0 {
+        if indexPath.row == 0 && (self.feauteredFeedItem != nil) {
             let feauteredCell = tableView.dequeueReusableCellWithIdentifier(String(FeauteredFeedTableViewCell.self),
                 forIndexPath: indexPath) as! FeauteredFeedTableViewCell
             let imagePlaceholder = (self.feauteredFeedItem?.type == .Emergency) ? "PromotionDetailsPlaceholder" : "news_placeholder"
@@ -123,14 +126,16 @@ extension FeedListViewController: UITableViewDataSource {
             let feedItemCell = tableView.dequeueReusableCellWithIdentifier(String(FeedTableViewCell.self),
                 forIndexPath: indexPath) as! FeedTableViewCell
             
-            let feedItem = self.feedItems![indexPath.row - 1]
+            let offset = (self.feauteredFeedItem != nil) ? 1 : 0
+            
+            let feedItem = self.feedItems![indexPath.row - offset]
             let imagePlaceholder = (feedItem.type == .Emergency) ? "PromotionDetailsPlaceholder" : "news_placeholder"
             feedItemCell.setImageURL(feedItem.image, placeholder: imagePlaceholder)
             feedItemCell.titleString = feedItem.name
             if let title = feedItem.author?.title {
                 feedItemCell.authorString = "By \(title)"
             }
-            feedItemCell.timeAgoString = feedItem.date?.formattedAsTimeAgo()
+            feedItemCell.timeAgoString = feedItem.date?.formattedAsFeedTime()
             cell = feedItemCell
         }
         return cell!

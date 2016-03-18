@@ -21,22 +21,23 @@
                             <constraint firstAttribute="height" constant="284" id="MPP-hk-0tt"/>
                         </constraints>
                     </imageView>
-                    <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="suo-WV-PQB">
+                    <view contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="suo-WV-PQB">
                         <rect key="frame" x="0.0" y="198" width="320" height="86"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label Label Label Label Label Label Label Label Label Label Label Label Label" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HI7-9A-qW6">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="245" text="Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label Label" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HI7-9A-qW6">
                                 <rect key="frame" x="8" y="8" width="304" height="70"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.80000000000000004" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="HI7-9A-qW6" firstAttribute="leading" secondItem="suo-WV-PQB" secondAttribute="leading" constant="8" id="1nx-WE-Jrw"/>
                             <constraint firstAttribute="bottom" secondItem="HI7-9A-qW6" secondAttribute="bottom" constant="8" id="E2h-Qb-SJG"/>
                             <constraint firstAttribute="trailing" secondItem="HI7-9A-qW6" secondAttribute="trailing" constant="8" id="HsL-o6-xis"/>
                             <constraint firstItem="HI7-9A-qW6" firstAttribute="top" secondItem="suo-WV-PQB" secondAttribute="top" constant="8" id="IMe-cD-Dwk"/>
+                            <constraint firstAttribute="height" constant="86" id="g9p-Vb-nC4"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -55,6 +56,7 @@
                 <outlet property="feedItemImageView" destination="fih-EF-5HZ" id="FDu-f2-b83"/>
                 <outlet property="titleLabel" destination="HI7-9A-qW6" id="D0p-G8-Ttk"/>
                 <outlet property="titleLabelContainerView" destination="suo-WV-PQB" id="Efk-Eu-cOk"/>
+                <outlet property="titleLabelContainerViewHeight" destination="g9p-Vb-nC4" id="Tgg-Gr-87C"/>
             </connections>
         </tableViewCell>
     </objects>

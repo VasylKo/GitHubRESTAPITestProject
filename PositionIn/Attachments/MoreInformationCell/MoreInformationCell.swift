@@ -14,6 +14,11 @@ let XLFormRowDescriptorTypeMoreInformation = "XLFormRowDescriptorTypeMoreInforma
 
 class MoreInformationCell : XLFormButtonCell {
     
+    @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var descriptionImageView: UIImageView!
+    
+    
     var attachment: Attachment? {
         let box = self.rowDescriptor?.value as? Box<Attachment>
         return box?.value
@@ -21,16 +26,20 @@ class MoreInformationCell : XLFormButtonCell {
     
     override func configure() {
         super.configure()
-        
-        self.textLabel?.textAlignment = .Left
-        self.textLabel?.textColor = UIColor.blackColor()
-        self.textLabel?.tintColor = UIScheme.mainThemeColor
     }
     
     override func update() {
         super.update()
         
-        self.textLabel?.text = self.attachment?.name ?? ""
+        self.titleLabel.text = self.attachment?.name ?? ""
+        
+        if self.attachment?.type?.containsString("/") == true {
+            let description = self.attachment?.type?.componentsSeparatedByString("/").last?.uppercaseString
+            self.descriptionLabel.text = description
+        } else {
+            self.descriptionLabel.text = self.attachment?.type ?? ""
+        }
+        
         
         let placeholder : UIImage
         if self.attachment?.type?.containsString("pdf") == true {
@@ -39,15 +48,13 @@ class MoreInformationCell : XLFormButtonCell {
             placeholder = UIImage(named: "ic_image_attachment")!
         }
         
-        self.imageView?.image = placeholder
+        self.descriptionImageView?.image = placeholder
         if let url = self.attachment?.url {
-            self.imageView?.setImageFromURL(url)
+            self.descriptionImageView.setImageFromURL(url)
         }
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        self.imageView?.frame = CGRectMake(0, 0, self.frame.size.height, self.frame.size.height)
+    override static func formDescriptorCellHeightForRowDescriptor(rowDescriptor: XLFormRowDescriptor!) -> CGFloat {
+        return 65
     }
-    
 }

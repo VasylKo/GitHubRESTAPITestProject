@@ -31,7 +31,9 @@ class FeedItem: CRUDObject {
     var numOfLikes: Int?
     var isLiked: Bool = false
     var numOfComments: Int?
+    var numOfBeneficiaries: Int?
     var numOfParticipants: Int?
+    
     var itemData: Any? {
         return author
     }
@@ -73,7 +75,8 @@ class FeedItem: CRUDObject {
         isLiked <- map["isLiked"]
         numOfLikes <- map["numOfLikes"]
         numOfComments <- map["numOfComments"]
-        numOfParticipants <- map["numOfBeneficiaries"]
+        numOfBeneficiaries <- map["numOfBeneficiaries"]
+        numOfParticipants <- map["numOfParticipants"]
     }
     
     var description: String {

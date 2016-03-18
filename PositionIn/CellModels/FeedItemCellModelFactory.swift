@@ -18,7 +18,23 @@ struct FeedItemCellModelFactory {
         case .News:
             fallthrough
         case .Event:
-            fallthrough
+            return [
+                CompactFeedTableCellModel(delegate:delegate,
+                    item: feedItem,
+                    title: feedItem.name,
+                    details: feedItem.author?.title,
+                    info: nil,
+                    text: feedItem.text,
+                    price: feedItem.donations,
+                    imageURL: feedItem.image,
+                    avatarURL: feedItem.author?.avatar,
+                    location: feedItem.location,
+                    numOfLikes: feedItem.numOfLikes,
+                    numOfComments: feedItem.numOfComments,
+                    numOfParticipants: feedItem.numOfParticipants,
+                    date: feedItem.date,
+                    data: feedItem.itemData)
+            ]
         case .Project:
             fallthrough
         case .Market:
@@ -47,7 +63,7 @@ struct FeedItemCellModelFactory {
                     location: feedItem.location,
                     numOfLikes: feedItem.numOfLikes,
                     numOfComments: feedItem.numOfComments,
-                    numOfParticipants: feedItem.numOfParticipants,
+                    numOfParticipants: feedItem.numOfBeneficiaries,
                     date: feedItem.date,
                     data: feedItem.itemData)
             ]

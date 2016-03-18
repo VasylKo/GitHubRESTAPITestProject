@@ -76,7 +76,21 @@ final class LocationController {
         return getCurrentCoordinate().map { myCoordinate in
             let myLocation = CLLocation(latitude: myCoordinate.latitude, longitude: myCoordinate.longitude)
             let startLocation = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
-            return myLocation.distanceFromLocation(startLocation)
+            let distance = myLocation.distanceFromLocation(startLocation)
+            let roundedDistance = round(distance)
+            return roundedDistance
+        }
+    }
+    
+    func distanceStringFromCoordinate(coordinate: CLLocationCoordinate2D) -> Future<String, NSError> {
+        return getCurrentCoordinate().map { myCoordinate in
+            let myLocation = CLLocation(latitude: myCoordinate.latitude, longitude: myCoordinate.longitude)
+            let startLocation = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
+            let distance = myLocation.distanceFromLocation(startLocation)
+            let formatter = NSLengthFormatter()
+            formatter.numberFormatter.maximumFractionDigits = 1
+            formatter.unitStyle = .Long
+            return formatter.stringFromMeters(distance)
         }
     }
     

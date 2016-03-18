@@ -60,7 +60,7 @@ class OrderViewController: UITableViewController, SelectPaymentMethodControllerD
             
             itemNameLabel.text = product.name
             let url = product.imageURL
-            let image = product.category?.productPlaceholderImage()
+            let image = UIImage(named: "market_img_default")
             itemImageView.setImageFromURL(url, placeholder: image)
 
 
