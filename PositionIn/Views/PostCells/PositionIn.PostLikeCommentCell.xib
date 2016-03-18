@@ -12,7 +12,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="56"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="55.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="56"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ExH-gC-VZh">
@@ -33,7 +33,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="77z-vS-LWT">
-                                <rect key="frame" x="117" y="12" width="24" height="24"/>
+                                <rect key="frame" x="160" y="12" width="24" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="24" id="lQ6-Fe-8zc"/>
                                     <constraint firstAttribute="height" constant="24" id="uCe-bC-jNe"/>
@@ -50,7 +50,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cEz-rY-ao3">
-                                <rect key="frame" x="161" y="15" width="10" height="18"/>
+                                <rect key="frame" x="204" y="15" width="10" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" red="0.92941176470588238" green="0.10588235294117647" blue="0.1803921568627451" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -63,7 +63,7 @@
                             <constraint firstItem="HuE-yi-xLX" firstAttribute="centerY" secondItem="ExH-gC-VZh" secondAttribute="centerY" id="SGf-WG-BfP"/>
                             <constraint firstItem="HO7-Ff-nIN" firstAttribute="centerY" secondItem="ExH-gC-VZh" secondAttribute="centerY" id="SsM-QH-KtV"/>
                             <constraint firstItem="HuE-yi-xLX" firstAttribute="leading" secondItem="ExH-gC-VZh" secondAttribute="leading" constant="20" id="YZd-1O-boO"/>
-                            <constraint firstItem="77z-vS-LWT" firstAttribute="leading" secondItem="ExH-gC-VZh" secondAttribute="leading" constant="117" id="jfU-UM-TmL"/>
+                            <constraint firstItem="77z-vS-LWT" firstAttribute="leading" secondItem="ExH-gC-VZh" secondAttribute="leading" constant="160" id="jfU-UM-TmL"/>
                             <constraint firstItem="77z-vS-LWT" firstAttribute="centerY" secondItem="ExH-gC-VZh" secondAttribute="centerY" id="scJ-n0-AJA"/>
                             <constraint firstItem="cEz-rY-ao3" firstAttribute="centerY" secondItem="ExH-gC-VZh" secondAttribute="centerY" id="vDL-UT-bfv"/>
                             <constraint firstAttribute="height" constant="48" id="wKK-UH-6iY"/>
@@ -81,6 +81,7 @@
             <connections>
                 <outlet property="amountOfCommentsLabel" destination="cEz-rY-ao3" id="4P8-92-rvb"/>
                 <outlet property="amountOfLikesLabel" destination="HO7-Ff-nIN" id="Q4q-EG-odB"/>
+                <outlet property="commentButton" destination="77z-vS-LWT" id="hMV-Kk-fCW"/>
                 <outlet property="containerView" destination="ExH-gC-VZh" id="7jt-2H-Zxc"/>
                 <outlet property="likeButton" destination="HuE-yi-xLX" id="qzB-AV-qeE"/>
             </connections>

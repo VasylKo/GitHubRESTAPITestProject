@@ -18,15 +18,14 @@ struct FeedItemNewsCellModelFactory {
         
         firstSection.append(TableViewCellURLModel(url: post.photoURL, height: 180, placeholderString: "news_placeholder"))
         
-        let date: String? = post.date?.formattedAsFeedTime()
-        firstSection.append(NewsDetailsTitleTableViewCellModel(title: post.name, distance: nil,author: post.author?.title, date: date))
+        firstSection.append(NewsDetailsTitleTableViewCellModel(title: post.name, distance: nil,author: post.author?.title, date: nil))
         
         if let text = post.descriptionString {
             firstSection.append(TableViewCellTextModel(title: text))
         }
 
 
-        firstSection.append(PostLikesCountModel(likes: post.likes, isLiked:post.isLiked, comments: post.comments.count, actionConsumer: actionConsumer))
+        firstSection.append(PostLikesCountModel(likes: post.likes, isLiked:post.isLiked, isCommented: false, comments: post.comments.count, actionConsumer: actionConsumer))
         models.append(firstSection)
         
         var secondSection: [TableViewCellModel] = []
