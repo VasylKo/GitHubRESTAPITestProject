@@ -63,7 +63,7 @@ final class MainMenuViewController: UIViewController {
         //Browse mode did change
         let browseModeBlock: NSNotification! -> Void = { [weak self] notification in
             if  let menuController = self,
-                let browseController = notification.object as? BrowseViewController,
+                let browseController = notification.object as? BrowseModeTabbarViewController,
                 let action = menuController.actionForMode(browseController.browseMode) {
                     for (idx, item) in menuController.dataSource.items.enumerate() {
                         if item.action == action {
