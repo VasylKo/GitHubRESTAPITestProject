@@ -50,17 +50,16 @@
 {    
     // Now date in local time
     NSDate *now = [NSDate date];
-    NSDate *localNow = [now toLocalTime];
     
-    NSTimeInterval secondsSince = -(int)[self timeIntervalSinceDate:localNow];
+    NSTimeInterval secondsSince = -(int)[self timeIntervalSinceDate:now];
     
     // Today = "1:28 PM"
-    if([self isSameDayAs:localNow])
-        return [self formatAsToday:secondsSince];
+    if([self isSameDayAs:now])
+        return [self formatAsToday];
  
     
     // Yesterday = "Yesterday"
-    if([self isYesterday:localNow])
+    if([self isYesterday:now])
         return [self formatAsYesterday];
   
     
@@ -73,30 +72,15 @@
     
 }
 
-
-//< 1 minute       	= "Just now"
-//< 1 hour         	= "x minutes ago"
-//< 2 hour         	= "1 hour ago"
-//< Yesterday        = "x hours ago"
-//Yesterday        	= "yesterday"
-//< 1 year         	= "Mar 8 at 9:26am"
-//1 year             = "1 year ago"
-//> 2 year           = "x years ago"
-
-
-
-
 /*
  Formatted As Feed Time
- Returns the date formatted as Time Ago (in the style of the mobile time ago date formatting for Facebook)
  */
 - (NSString *)formattedAsFeedTime
 {
     // Now date in local time
     NSDate *now = [NSDate date];
-    NSDate *localNow = [now toLocalTime];
     
-    NSTimeInterval secondsSince = -(int)[self timeIntervalSinceDate:localNow];
+    NSTimeInterval secondsSince = -(int)[self timeIntervalSinceDate:now];
     
     // < 1 minute
     if(secondsSince < MINUTE)
@@ -112,15 +96,15 @@
     if(secondsSince < HOUR * 2.)
         return @"1 hour";
     
-    // < Yesterday
-    if(![self isYesterday:localNow] && secondsSince < HOUR * 24.) {
+    // Today
+    if([self isSameDayAs:now]) {
         int hours = floor(secondsSince / HOUR);
         return [NSString stringWithFormat:@"%i hours ago", hours];
     }
     
     // Yesterday
-    if([self isYesterday:localNow])
-        return @"yesterday";
+    if([self isYesterday:now])
+        return [self formatAsYesterday];
     
     // < 1 year
     if(secondsSince < YEAR)
@@ -135,6 +119,25 @@
     return [NSString stringWithFormat:@"%i years ago", years];
 }
 
+
+/*
+ Formatted As Comment Time
+ */
+- (NSString *)formattedAsCommentTime {
+    // Now date in local time
+    NSDate *now = [NSDate date];
+    
+    // Today
+    if([self isSameDayAs:now])
+        return [self formatAsToday];
+    
+    // Yesterday
+    if ([self isYesterday:now])
+        return [self formatAsYesterday];
+    
+    // Anything else
+    return [self formatAsOther];
+}
 
 /*
  ========================== Date Comparison Methods ==========================
@@ -244,7 +247,7 @@
 
 
 // Today = "time format"
-- (NSString *)formatAsToday:(NSTimeInterval)secondsSince
+- (NSString *)formatAsToday
 {
     //Create date formatter
     static NSDateFormatter *dateFormatter = nil;
@@ -261,7 +264,7 @@
     } else {
         [dateFormatter setDateFormat:@"'Today', h:mm a"];
     }
-    return [NSString stringWithFormat:@"%@", [dateFormatter stringFromDate:[self toLocalTime]]];
+    return [NSString stringWithFormat:@"%@", [dateFormatter stringFromDate:self]];
 }
 
 
@@ -283,7 +286,7 @@
     } else {
         [dateFormatter setDateFormat:@"'Yesterday', h:mm a"];
     }
-    return [NSString stringWithFormat:@"%@", [dateFormatter stringFromDate:[self toLocalTime]]];
+    return [NSString stringWithFormat:@"%@", [dateFormatter stringFromDate:self]];
 }
 
 
@@ -305,7 +308,7 @@
     } else {
         [dateFormatter setDateFormat:@"EEEE, h:mm a"];
     }
-    return [NSString stringWithFormat:@"%@", [dateFormatter stringFromDate:[self toLocalTime]]];
+    return [NSString stringWithFormat:@"%@", [dateFormatter stringFromDate:self]];
 }
 
 
@@ -361,7 +364,7 @@
     } else {
         [dateFormatter setDateFormat:@"dd MMM, h:mm a"];
     }
-    return [NSString stringWithFormat:@"%@", [dateFormatter stringFromDate:[self toLocalTime]]];
+    return [NSString stringWithFormat:@"%@", [dateFormatter stringFromDate:self]];
 }
 
 /*
