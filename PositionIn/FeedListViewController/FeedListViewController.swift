@@ -67,9 +67,16 @@ class FeedListViewController: UIViewController {
 extension FeedListViewController: UITableViewDelegate {
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    
+        var item:FeedItem?
         
-        let offset = (self.feauteredFeedItem != nil) ? 1 : 0
-        let item = (indexPath.row == 0) ? self.feauteredFeedItem : self.feedItems![indexPath.row - offset]
+        if indexPath.row == 0 && (self.feauteredFeedItem != nil) {
+            item = self.feauteredFeedItem
+        }
+        else {
+            let offset = (self.feauteredFeedItem != nil) ? 1 : 0
+            item = self.feedItems![indexPath.row - offset]
+        }
         
         if (item!.type == .Emergency) {
             let detailsController = FeedEmergencyDetailsViewController(nibName: "FeedEmergencyDetailsViewController",
