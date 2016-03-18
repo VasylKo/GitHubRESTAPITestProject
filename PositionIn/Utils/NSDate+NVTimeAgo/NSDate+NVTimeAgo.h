@@ -80,12 +80,25 @@
      < 1 minute       	= "Just now"
      < 1 hour         	= "x minutes ago"
      < 2 hour         	= "1 hour ago"
-     < Yesterday        = "x hours ago"
+     Today              = "x hours ago"
      Yesterday        	= "yesterday"
      < 1 year         	= "Mar 8 at 9:26am"
-     < 2 year             = "1 year ago"
-     Anything else           = "x years ago"
+     < 2 year           = "1 year ago"
+     Anything else      = "x years ago"
  */
 - (NSString *)formattedAsFeedTime;
+
+/*
+ Formatted As Comment Time
+ Returns the time formatted as Feed Time (in the style of Facebook's mobile date formatting)
+ 
+ Comment Time Date Format
+ -----------
+ Today              = "Today, 9:26am"
+ Yesterday          = "Yesterday, 9:26am"
+ Anything else      = "Mar 8 at 9:26am"
+ 
+ */
+- (NSString *)formattedAsCommentTime;
 
 @end

@@ -106,7 +106,7 @@ class SidebarViewController: KYDrawerController {
         lastAction = action
     }
     
-    private var lastAction: Action = .None
+    var lastAction: Action = .None
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let segueId = segue.identifier {

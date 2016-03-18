@@ -15,7 +15,7 @@ struct BrowseCommunityCellFactory {
         let tapAction = tapActionForCommunity(community)
         models.append(BrowseCommunityHeaderCellModel(community: community, tapAction: tapAction, title:community.name ?? "", url:community.avatar, showInfo: false, isClosed: community.closed))
         
-        models.append(BrowseCommunityInfoCellModel(community: community, tapAction: tapAction, members: community.members?.total, text: community.communityDescription))
+        models.append(BrowseCommunityInfoCellModel(community: community, tapAction: tapAction, members: community.membersCount, text: community.communityDescription))
 
         let actionModel = BrowseCommunityActionCellModel(community: community, tapAction: tapAction, actions: actionListForCommunity(community))
         actionModel.actionConsumer = actionConsumer
