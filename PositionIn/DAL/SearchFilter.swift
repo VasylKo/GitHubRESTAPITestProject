@@ -26,7 +26,7 @@ struct SearchFilter: Mappable {
     var startDate: NSDate?
     var endDate: NSDate?
     var categories: [ItemCategory]?
-    var itemTypes: [FeedItem.ItemType]? 
+    var itemTypes: [FeedItem.ItemType]?
     var name: String?
     var users: [CRUDObjectId]?
     var communities: [CRUDObjectId]?

@@ -71,10 +71,9 @@ class GiveBloodDetailsViewController: UIViewController {
             self.productPinDistanceImageView.hidden = false
             locationRequestToken.invalidate()
             locationRequestToken = InvalidationToken()
-            locationController().distanceFromCoordinate(coordinates).onSuccess(locationRequestToken.validContext) {
-                [weak self] distance in
-                let formatter = NSLengthFormatter()
-                self?.infoLabel.text = formatter.stringFromMeters(distance)
+            locationController().distanceStringFromCoordinate(coordinates).onSuccess() {
+                [weak self] distanceString in
+                self?.infoLabel.text = distanceString
                 self?.dataSource.items = (self?.productAcionItems())!
                 self?.dataSource.configureTable((self?.actionTableView)!)
                 }.onFailure(callback: { (error:NSError) -> Void in

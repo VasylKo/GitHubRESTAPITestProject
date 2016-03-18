@@ -438,6 +438,9 @@ final class APIService {
         let params = APIServiceQuery()
         params.append(query: query)
         params.append(query: page)
+        var itemTypesArray : [String] = []
+        params.append("type", value: "2,8")
+
         return self.getObjectsCollection(endpoint, params: params.query)
     }
     

@@ -29,10 +29,9 @@ class FeedEmergencyDetailsViewController: UIViewController {
             api().getEmergencyDetails(objectId).onSuccess { [weak self] emergency in
                 if let coordinates = emergency.location?.coordinates {
                     var emergency = emergency
-                    locationController().distanceFromCoordinate(coordinates).onSuccess() {
-                        [weak self] distance in
-                        let formatter = NSLengthFormatter()
-                        emergency.distanceString = formatter.stringFromMeters(distance)
+                    locationController().distanceStringFromCoordinate(coordinates).onSuccess() {
+                        [weak self] distanceString in
+                        emergency.distanceString = distanceString
                         
                         self?.emergency = emergency
                         self?.dataSource.setEmergency(emergency)
