@@ -131,7 +131,7 @@ extension FeedListViewController: UITableViewDataSource {
             if let title = feedItem.author?.title {
                 feedItemCell.authorString = "By \(title)"
             }
-            feedItemCell.timeAgoString = feedItem.date?.formattedAsTimeAgo()
+            feedItemCell.timeAgoString = feedItem.date?.formattedAsFeedTime()
             cell = feedItemCell
         }
         return cell!

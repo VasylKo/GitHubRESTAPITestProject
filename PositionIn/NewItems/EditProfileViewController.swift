@@ -206,23 +206,11 @@ final class EditProfileViewController: BaseAddItemViewController, UserProfileAva
         return professionRow
     } ()
     
-    
-    // MARK: - Initializers
-    
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        loadData()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        loadData()
-    }
-    
     //MARK: Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        loadData()
         
         if let _ = self.phoneNumber {
             self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Done"),
