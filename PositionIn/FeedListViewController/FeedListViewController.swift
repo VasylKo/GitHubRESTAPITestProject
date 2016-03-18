@@ -47,6 +47,7 @@ class FeedListViewController: UIViewController {
             
             page = APIService.Page(start: 0, size: 100)
             filter = SearchFilter()
+            filter.isFeatured = false
             filter.itemTypes = [.Emergency, .News]
             
             return api().getFeed(filter, page: page)

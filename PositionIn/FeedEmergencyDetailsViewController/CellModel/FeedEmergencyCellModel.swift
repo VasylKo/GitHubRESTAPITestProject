@@ -43,7 +43,9 @@ struct FeedEmergencyCellModel {
             secondSection.append(TableViewCellImageTextModel(title: "More Information", imageName: "productTerms&Info"))
         }
         
-        models.append(secondSection)
+        if secondSection.count > 0 {
+            models.append(secondSection)
+        }
         return models
     }
     

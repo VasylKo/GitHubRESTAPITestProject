@@ -28,7 +28,7 @@ struct PostCellModelFactory {
             firstSection.append(PostAttachmentsModel(attachments: post.attachments, links: post.links))
         }
         
-        firstSection.append(PostLikesCountModel(likes: post.likes, isLiked:post.isLiked, comments: post.comments.count, actionConsumer: actionConsumer))
+        firstSection.append(PostLikesCountModel(likes: post.likes, isLiked:post.isLiked, isCommented: false, comments: post.comments.count, actionConsumer: actionConsumer))
         models.append(firstSection)
         
         var secondSection: [TableViewCellModel] = []

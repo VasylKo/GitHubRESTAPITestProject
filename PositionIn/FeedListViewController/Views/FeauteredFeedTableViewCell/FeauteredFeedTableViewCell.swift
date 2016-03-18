@@ -31,6 +31,14 @@ class FeauteredFeedTableViewCell: UITableViewCell {
         titleLabelContainerView.backgroundColor = UIColor.bt_colorFromHex("000000", alpha: 0.5)
     }
     
+    override func layoutSubviews() {
+        self.titleLabel.sizeToFit()
+        titleLabelContainerViewHeight.constant = self.titleLabel.frame.size.height + 16
+        
+        self.setNeedsUpdateConstraints()
+    }
+    
+    @IBOutlet weak var titleLabelContainerViewHeight: NSLayoutConstraint!
     @IBOutlet weak var titleLabelContainerView: UIView!
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var feedItemImageView: UIImageView!
