@@ -80,7 +80,7 @@ struct Community: CRUDObject {
         members <- map["members"]
         location <- map["location"]
         shops <- map["shops.data"]
-        membersCount <- map["members.count"]
+        membersCount <- map["activeMembersCount"]
         postsCount <- map["posts.count"]
         eventsCount <- map["events.count"]
         links <- (map["links"], URLTransform())
