@@ -4676,7 +4676,6 @@
 			name = ProdRelease2;
 		};
 		D1C475F61C1092720096D383 /* StagingDebugCopy */ = {
->>>>>>> 09c68fa3de6c2eb24069958fc49674413bdad130
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
