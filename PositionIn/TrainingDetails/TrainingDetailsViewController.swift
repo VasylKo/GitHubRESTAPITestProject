@@ -42,7 +42,11 @@ final class TrainingDetailsViewController: UIViewController {
             api().getUserProfile(author.objectId).flatMap { (profile: UserProfile) -> Future<Product, NSError> in
                 return api().getTrainingDetails(objectId)
                 }.onSuccess { [weak self] product in
-                    self?.didReceiveProductDetails(product)
+                    if let strongSelf = self {
+                        self?.didReceiveProductDetails(product)
+                        strongSelf.dataSource.items = strongSelf.trainingActionItems()
+                        strongSelf.dataSource.configureTable(strongSelf.actionTableView)
+                    }
             }
         default:
             Log.error?.message("Not enough data to load product")
@@ -52,13 +56,13 @@ final class TrainingDetailsViewController: UIViewController {
     private func didReceiveProductDetails(product: Product) {
         self.product = product
         headerLabel.text = product.name
+        nameLabel.text = author?.title
         detailsLabel.text = product.text?.stringByReplacingOccurrencesOfString("\\n", withString: "\n")
         if let price = product.price {
-            priceLabel.text = "\(Int(price)) KSH"
-        }
-        
-        if let name = author?.title {
-            nameLabel.text = name
+            priceLabel.text = "\(AppConfiguration().currencySymbol) \(Int(price))"
+            nameLeadingConstraint?.priority = UILayoutPriorityDefaultLow
+        } else {
+            nameLeadingConstraint?.priority = UILayoutPriorityDefaultHigh
         }
         
         let image = UIImage(named: "trainings_placeholder")
@@ -68,10 +72,9 @@ final class TrainingDetailsViewController: UIViewController {
             self.pinDistanceImageView.hidden = false
             locationRequestToken.invalidate()
             locationRequestToken = InvalidationToken()
-            locationController().distanceFromCoordinate(coordinates).onSuccess(locationRequestToken.validContext) {
-                [weak self] distance in
-                let formatter = NSLengthFormatter()
-                self?.infoLabel.text = formatter.stringFromMeters(distance)
+            locationController().distanceStringFromCoordinate(coordinates).onSuccess() {
+                [weak self] distanceString in
+                self?.infoLabel.text = distanceString
                 self?.dataSource.items = (self?.trainingActionItems())!
                 self?.dataSource.configureTable((self?.actionTableView)!)
                 }.onFailure(callback: { (error:NSError) -> Void in
@@ -102,15 +105,22 @@ final class TrainingDetailsViewController: UIViewController {
                 image: "productBuyProduct",
                 action: .Buy)]
         
-        var firstSection = [ // 1 section
-            TrainingActionItem(title: NSLocalizedString("Send Message", comment: "Product action: Send Message"),
-                image: "productSendMessage", action: .SendMessage),
-            TrainingActionItem(title: NSLocalizedString("Organizer Profile", comment: "Product action: Seller Profile"),
-                image: "productSellerProfile", action: .SellerProfile),
-            /*TrainingActionItem(title: NSLocalizedString("More Information", comment: "Product action: More Information"), image: "productTerms&Info", action: .ProductInventory),*/
-        ]
+        var firstSection = [TrainingActionItem]() // 1 section
+        
+        if self.author?.objectId != api().currentUserId() {
+            firstSection.append(TrainingActionItem(title: NSLocalizedString("Send Message", comment: "Product action: Send Message"),
+                image: "productSendMessage", action: .SendMessage))
+            
+            firstSection.append(TrainingActionItem(title: NSLocalizedString("Organizer Profile", comment: "Product action: Seller Profile"),
+                image: "productSellerProfile", action: .SellerProfile))
+        }
+        
         if self.product?.location != nil {
             firstSection.append(TrainingActionItem(title: NSLocalizedString("Navigate", comment: "Product action: Navigate"), image: "productNavigate", action: .Navigate))
+        }
+        
+        if self.product?.links?.isEmpty == false || self.product?.attachments?.isEmpty == false {
+            firstSection.append(TrainingActionItem(title: NSLocalizedString("More Information", comment: "Product action: More Information"), image: "productTerms&Info", action: .MoreInformation))
         }
         
         return [zeroSection, firstSection]
@@ -125,12 +135,14 @@ final class TrainingDetailsViewController: UIViewController {
     @IBOutlet private weak var nameLabel: UILabel!
     @IBOutlet private weak var priceLabel: UILabel!
     @IBOutlet private weak var detailsLabel: UILabel!
+    
+    @IBOutlet weak var nameLeadingConstraint: NSLayoutConstraint?
 }
 
 extension TrainingDetailsViewController : TrainingDetailsActionConsumer {
     
     enum TrainingDetailsAction: CustomStringConvertible {
-        case Buy, ProductInventory, SendMessage, SellerProfile, Navigate
+        case Buy, ProductInventory, SendMessage, SellerProfile, Navigate, MoreInformation
         
         var description: String {
             switch self {
@@ -144,6 +156,8 @@ extension TrainingDetailsViewController : TrainingDetailsActionConsumer {
                 return "Seller profile"
             case .Navigate:
                 return "Navigate"
+            case .MoreInformation:
+                return "MoreInformation"
             }
         }
     }
@@ -179,6 +193,12 @@ extension TrainingDetailsViewController : TrainingDetailsActionConsumer {
             return
         case .SellerProfile:
             segue = .showUserProfile
+        case .MoreInformation:
+            if self.product?.links?.isEmpty == false || self.product?.attachments?.isEmpty == false {
+                let moreInformationViewController = MoreInformationViewController(links: self.product?.links, attachments: self.product?.attachments)
+                self.navigationController?.pushViewController(moreInformationViewController, animated: true)
+            }
+            return
         default:
             return
         }

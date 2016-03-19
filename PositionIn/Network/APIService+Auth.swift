@@ -66,6 +66,12 @@ extension APIService {
                     let hostname = AppConfiguration().xmppHostname
                     let jid = "\(user)@\(hostname)"
                     return XMPPCredentials(jid: jid, password: password)
+                case (_, nil):
+                    // refresh token
+                    api().session().onSuccess(callback: { token in
+                        Log.debug?.message("new token for chat: \(token)")
+                    })
+                    return nil
                 default:
                     return nil
                 }
@@ -105,15 +111,9 @@ extension APIService {
     //0 - api type for sms validation
     //1 - api type for sms validation (duplicate functionality)
     //2 - api type for phone validation call call
-    
-    //Verify Phone
-    func verifyPhone(phoneNumber: String) -> Future<Void, NSError> {
-        return verifyPhoneRequest(phoneNumber)
+    func verifyPhone(phoneNumber: String, type: NSNumber) -> Future<Void, NSError> {
+        return verifyPhoneRequest(phoneNumber, type: type)
     }
-    
-//    func verifyPhone(phoneNumber: String, type: NSNumber) -> Future<Void, NSError> {
-//        return verifyPhoneRequest(phoneNumber, type: type)
-//    }
     
     //Validate Code
     func verifyPhoneCode(phoneNumber: String, code: String) -> Future<Bool, NSError> {
@@ -174,29 +174,17 @@ extension APIService {
         return handleFailure(futureBuilder)
     }
     
-    private func verifyPhoneRequest(phoneNumber: String) ->  Future<Void, NSError> {
+    private func verifyPhoneRequest(phoneNumber: String, type: NSNumber) ->  Future<Void, NSError> {
         typealias CRUDResultType = (Alamofire.Request, Future<Void, NSError>)
         
         let futureBuilder: (Void -> Future<Void, NSError>) = { [unowned self] in
-            let request = AuthRouter.PhoneVerification(api: self, phone: phoneNumber)
+            let request = AuthRouter.PhoneVerification(api: self, phone: phoneNumber, type: type)
             let (_, future): CRUDResultType = self.dataProvider.jsonRequest(request, map: self.commandMapping(), validation: nil)
             return future
         }
-
+        
         return self.handleFailure(futureBuilder)
     }
-    
-//    private func verifyPhoneRequest(phoneNumber: String, type: NSNumber) ->  Future<Void, NSError> {
-//        typealias CRUDResultType = (Alamofire.Request, Future<Void, NSError>)
-//        
-//        let futureBuilder: (Void -> Future<Void, NSError>) = { [unowned self] in
-//            let request = AuthRouter.PhoneVerification(api: self, phone: phoneNumber, type: type)
-//            let (_, future): CRUDResultType = self.dataProvider.jsonRequest(request, map: self.commandMapping(), validation: nil)
-//            return future
-//        }
-//        
-//        return self.handleFailure(futureBuilder)
-//    }
     
     private func verifyPhoneCodeRequest(phoneNumber: String, code: String) ->  Future<Bool, NSError> {
         typealias CRUDResultType = (Alamofire.Request, Future<Bool, NSError>)
@@ -318,8 +306,7 @@ extension APIService {
         case Facebook(api: APIService, fbToken: String)
         case Register(api: APIService, email: String?, username: String?, password: String?, phoneNumber: String?, phoneVerificationCode: String?, profileInfo: [String: AnyObject]?)
         case Refresh(api: APIService, token: String)
-        //case PhoneVerification(api: APIService, phone: String, type: NSNumber)
-        case PhoneVerification(api: APIService, phone: String)
+        case PhoneVerification(api: APIService, phone: String, type: NSNumber)
         case VerifyPhoneCode(api: APIService, phone: String, code: String)
         
         // URLRequestConvertible
@@ -338,18 +325,12 @@ extension APIService {
                     "phoneVerificationCode" : code,
                     "device" : deviceInfo(),
                 ]
-//            case .PhoneVerification(let api, let phone, let type):
-//                url = api.https("/v1.0/users/phoneVerification")
-//                params = [
-//                    "phoneNumber" : phone,
-//                    "type" : type,
-//                    "device" : deviceInfo()
-//                ]
-            case .PhoneVerification(let api, let phone):
+            case .PhoneVerification(let api, let phone, let type):
                 url = api.https("/v1.0/users/phoneVerification")
                 params = [
                     "phoneNumber" : phone,
-                    "device" : deviceInfo(),
+                    "type" : type,
+                    "device" : deviceInfo()
                 ]
             case .Refresh(let api, let token):
                 url = api.https("/v1.0/users/token")

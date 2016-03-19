@@ -12,87 +12,102 @@ import CleanroomLogger
 
 final class WalletViewController: BesideMenuViewController {
     enum BrowseMode {
-        case Inventory, Sold, Purchased
+        case Purchases, MyDonations
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        dataSource.configureTable(tableView)
-        browseMode = .Inventory
-    }
+    // MARK: - IBOutlet
+    @IBOutlet weak var tableView: UITableView?
     
-    func reloadData() {
-        let items = mockData(browseMode)
-        dataSource.setItems(items)
-        tableView.reloadData()
-    }
-    
-    var browseMode: BrowseMode = .Inventory {
-        didSet{
+    // MARK: - Private variables
+    private var browseMode: BrowseMode = .Purchases {
+        didSet {
             reloadData()
             switch browseMode {
-            case .Inventory:
-                trackGoogleAnalyticsEvent("Wallet", action: "Click", label: "Inventory")
-            case .Purchased:
-                trackGoogleAnalyticsEvent("Wallet", action: "Click", label: "Purchased")
-            case .Sold:
-                trackGoogleAnalyticsEvent("Wallet", action: "Click", label: "Sold")
+            case .Purchases:
+                trackGoogleAnalyticsEvent("Wallet", action: "Click", label: "Purchases")
+            case .MyDonations:
+                trackGoogleAnalyticsEvent("Wallet", action: "Click", label: "MyDonations")
             }
         }
     }
     
-    func mockData(mode: BrowseMode) -> [FeedItem] {
-        let dateText = Optional(NSDate()).map{dateFormatter.stringFromDate($0)}
-        switch mode {
-        case .Inventory:
-            return  [
-                FeedItem(name: "The Forest", details: "Edward Rayan", text: "9 miles", price: 12.0),
-                FeedItem(name: "Albuquerque", details: "Amber Tran", text: "9 miles", price: 12.0),
-                FeedItem(name: "World X1", details: "Sharon Brewer", text: "9 miles", price: 12.0)
-            ]
-        case .Sold:
-            return [
-                FeedItem(name: "Wizard of the Coast", details: "Edward Rayan", text: dateText ?? "01.02.2015", price: 123.23)
-            ]
-        case .Purchased:
-            return [
-                FeedItem(name: "Venus Poster", details: "Arthur Anderson", text: dateText ?? "01.02.2015", price: 214.32)
-            ]
-        }
-    }
-    
-    @IBAction func displayModeSegmentedControlChanged(sender: UISegmentedControl) {
-        let segmentMapping: [Int: BrowseMode] = [
-            0: .Inventory,
-            1: .Sold,
-            2: .Purchased
-        ]
-        if let newFilterValue = segmentMapping[sender.selectedSegmentIndex]{
-            browseMode = newFilterValue
-        }
-    }
-    
-    private lazy var dataSource: WalletItemDatasource = { [unowned self] in
+    private lazy var dataSource: WalletItemDatasource = { [weak self] in
         let dataSource = WalletItemDatasource()
-        dataSource.parentViewController = self
+        if let strongSelf = self {
+            dataSource.parentViewController = strongSelf
+        }
         return dataSource
-        }()
+    }()
     
     private let dateFormatter: NSDateFormatter = {
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
         return dateFormatter
-        }()
+    }()
     
-    @IBOutlet private(set) internal weak var tableView: UITableView!
-    @IBOutlet private weak var displayModeSegmentedControl: UISegmentedControl!
-    
+    // MARK: - Lifecycle
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        if let tableView = tableView {
+            dataSource.configureTable(tableView)
+        }
+        browseMode = .Purchases
+    }
+
+    // MARK: - Private functions
+    private func reloadData() {
+        dataSource.setItems([])
+        tableView?.reloadData()
+        
+        guard let userId: CRUDObjectId = api().currentUserId() else {
+            return
+        }
+        
+        switch browseMode {
+        case .Purchases:
+            api().getOrders(userId, reason: "sold").onSuccess { [weak self] (response : CollectionResponse<Order>) in
+                self?.dataSource.setItems(response.items)
+                self?.tableView?.reloadData()
+            }
+        case .MyDonations:
+            api().getDonations(userId).onSuccess { [weak self] (response : CollectionResponse<Order>) in
+                
+                
+                // FIXME: This hack should be removed when BE return entityDetails
+                let items = response.items.map { item -> Order in
+                    if item.entityDetails?.name == nil {
+                        var entityDetails = Product()
+                        entityDetails.objectId = CRUDObjectInvalidId
+                        entityDetails.name = NSLocalizedString("Donation to KRCS")
+                        item.entityDetails = entityDetails
+                    }
+                    return item
+                }
+                
+                
+                self?.dataSource.setItems(items)
+                self?.tableView?.reloadData()
+            }
+        }
+    }
+
+    // MARK: - Actions
+    @IBAction func displayModeSegmentedControlChanged(sender: UISegmentedControl) {
+        let segmentMapping: [Int: BrowseMode] = [
+            0: .Purchases,
+            1: .MyDonations,
+        ]
+        if let newFilterValue = segmentMapping[sender.selectedSegmentIndex]{
+            browseMode = newFilterValue
+        }
+    }
 }
 
-
 extension WalletViewController {
-    
     internal class WalletItemDatasource: TableViewDataSource {
+
+        private var models: [[TableViewCellModel]] = []
+        private let modelFactory = WalletsCellFactory()
         
         override func configureTable(tableView: UITableView) {
             tableView.estimatedRowHeight = 80.0
@@ -122,16 +137,26 @@ extension WalletViewController {
         
         func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
             tableView.deselectRowAtIndexPath(indexPath, animated: true)
+            
+            guard let walletViewController = parentViewController as? WalletViewController,
+                model = models[indexPath.section][indexPath.row] as? ComapctBadgeFeedTableCellModel else {
+                return
+            }
+            
+            switch walletViewController.browseMode {
+            case .Purchases:
+                let controller = Storyboards.Main.instantiateBoughtProductDetailsViewControllerId()
+                controller.product = model.item as? Order
+                walletViewController.navigationController?.pushViewController(controller, animated: true)
+            case .MyDonations:
+                let controller = Storyboards.Main.instantiateDonationDetailsViewControllerId()
+                controller.donation = model.item as? Order
+                walletViewController.navigationController?.pushViewController(controller, animated: true)
+            }
         }
 
-        
-        func setItems(feedItems: [FeedItem]) {
-            models = feedItems.map { self.modelFactory.walletModelsForItem($0) }
+        func setItems(orders: [Order]) {
+            models = orders.map { modelFactory.walletModelsForItem($0) }
         }
-        
-        private var models: [[TableViewCellModel]] = []
-        private let modelFactory = FeedItemCellModelFactory()
     }
-    
-    
 }

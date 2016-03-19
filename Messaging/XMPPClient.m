@@ -60,7 +60,8 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
 @property (nonnull, nonatomic, strong) id<XMPPCredentialsProvider> credentialsProvider;
 
 @property (readwrite, assign) BOOL authorized;
-
+@property (readwrite, assign) BOOL authorizing;
+@property (nonatomic, strong) NSLock *reconnectionLock;
 
 - (void)storeDirectMessage:(nonnull XMPPTextMessage *)message outgoing:(BOOL)outgoing;
 - (nullable XMPPRoom *)roomWithId:(nonnull NSString *)roomId;
@@ -157,6 +158,7 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
 #pragma mark - Stream LifeCycle -
 
 - (void)setupStreamWithConfig:(XMPPClientConfiguration *)configuration {
+    self.reconnectionLock = [NSLock new];
     self.xmppDelegate = [XMPPDelegate new];
     self.xmppStream = [XMPPStream new];
     dispatch_queue_t delegateQueue = [self delegateQueue];
@@ -242,6 +244,7 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
 - (void)auth {
     XMPPCredentials *credentials = [self.credentialsProvider getChatCredentials];
     if (credentials != nil) {
+        self.authorizing = YES;
         XMPPJID *jid = [XMPPJID jidWithString:credentials.jid];
         self.currentUserId = [jid user];
         [self cleanRooms];
@@ -249,9 +252,11 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
         process.password = credentials.password;
         process.jid = jid;
         __weak XMPPClient *weakClient = self;
+        
         [process executeWithCompletion:^(id __nullable result, NSError * __nullable error) {
             XMPPClient *client = weakClient;
-            client.authorized = (error == nil);
+            client.authorized = error? NO : YES;
+            self.authorizing = NO;
             if (error) {
                 XMPPLogError(@"Auth error: %@", [error localizedDescription]);
             }
@@ -361,11 +366,26 @@ static const int xmppLogLevel = XMPP_LOG_LEVEL_VERBOSE | XMPP_LOG_FLAG_TRACE;
 
 - (void)xmppReconnect:(XMPPReconnect *)sender didDetectAccidentalDisconnect:(SCNetworkConnectionFlags)connectionFlags {
     XMPPLogTrace();
-    [self auth];
+    
+    self.authorized = NO;
+    BOOL reachable = (connectionFlags & kSCNetworkReachabilityFlagsReachable);
+    
+    if (reachable && [self.reconnectionLock tryLock]) {
+        [self auth];
+        [self.reconnectionLock unlock];
+    }
 }
 
 - (BOOL)xmppReconnect:(XMPPReconnect *)sender shouldAttemptAutoReconnect:(SCNetworkConnectionFlags)connectionFlags {
     XMPPLogTrace();
+    
+    BOOL reachable = (connectionFlags & kSCNetworkReachabilityFlagsReachable);
+    
+    if (reachable && !self.isAuthorized && !self.authorizing && [self.reconnectionLock tryLock]) {
+        [self auth];
+        [self.reconnectionLock unlock];
+    }
+    
     return NO;
 }
 

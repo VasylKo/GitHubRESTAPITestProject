@@ -58,7 +58,10 @@ class GiveBloodDetailsViewController: UIViewController {
         nameLabel.text = author?.title
         detailsLabel.text = product.text?.stringByReplacingOccurrencesOfString("\\n", withString: "\n")
         if let price = product.donations {
+            nameLeadingConstraint?.priority = UILayoutPriorityDefaultLow
             priceLabel.text = "\(Int(price)) beneficiaries"
+        } else {
+            nameLeadingConstraint?.priority = UILayoutPriorityDefaultHigh
         }
         
         let image = UIImage(named: "give_blood_img_default")
@@ -68,10 +71,9 @@ class GiveBloodDetailsViewController: UIViewController {
             self.productPinDistanceImageView.hidden = false
             locationRequestToken.invalidate()
             locationRequestToken = InvalidationToken()
-            locationController().distanceFromCoordinate(coordinates).onSuccess(locationRequestToken.validContext) {
-                [weak self] distance in
-                let formatter = NSLengthFormatter()
-                self?.infoLabel.text = formatter.stringFromMeters(distance)
+            locationController().distanceStringFromCoordinate(coordinates).onSuccess() {
+                [weak self] distanceString in
+                self?.infoLabel.text = distanceString
                 self?.dataSource.items = (self?.productAcionItems())!
                 self?.dataSource.configureTable((self?.actionTableView)!)
                 }.onFailure(callback: { (error:NSError) -> Void in
@@ -97,9 +99,13 @@ class GiveBloodDetailsViewController: UIViewController {
     
     
     private func productAcionItems() -> [[GiveBloodActionItem]] {
-        var zeroSection = [ // 0 section
-            GiveBloodActionItem(title: NSLocalizedString("Send Message", comment: "GiveBlood"), image: "productSendMessage", action: .SendMessage),
-            GiveBloodActionItem(title: NSLocalizedString("Office", comment: "GiveBlood"), image: "productSellerProfile", action: .ProductInventory),]
+        var zeroSection = [GiveBloodActionItem]() // 0 section
+        
+        if self.author?.objectId != api().currentUserId() {
+            zeroSection.append(GiveBloodActionItem(title: NSLocalizedString("Send Message", comment: "GiveBlood"), image: "productSendMessage", action: .SendMessage))   
+            zeroSection.append(GiveBloodActionItem(title: NSLocalizedString("Office", comment: "GiveBlood"),
+                image: "productSellerProfile", action: .ProductInventory))
+        }
         
         if self.product?.location != nil {
             zeroSection.append(GiveBloodActionItem(title: NSLocalizedString("Navigate", comment: "GiveBlood"), image: "productNavigate", action: .Navigate))
@@ -122,6 +128,8 @@ class GiveBloodDetailsViewController: UIViewController {
     @IBOutlet private weak var nameLabel: UILabel!
     @IBOutlet private weak var priceLabel: UILabel!
     @IBOutlet private weak var detailsLabel: UILabel!
+    
+    @IBOutlet weak var nameLeadingConstraint: NSLayoutConstraint?
 }
 
 extension GiveBloodDetailsViewController {

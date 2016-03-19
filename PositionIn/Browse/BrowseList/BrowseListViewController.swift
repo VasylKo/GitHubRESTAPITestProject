@@ -55,7 +55,7 @@ final class BrowseListViewController: UIViewController, BrowseActionProducer, Br
                 self.reloadData()
             }
         }
-        
+
         //TODO: hot fix for distance 
         let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(1 * Double(NSEC_PER_SEC)))
         dispatch_after(delayTime, dispatch_get_main_queue()) { [weak self] in
@@ -110,11 +110,8 @@ final class BrowseListViewController: UIViewController, BrowseActionProducer, Br
         dataRequestToken.invalidate()
         dataRequestToken = InvalidationToken()
         
-        var homeItem = HomeItem.Unknown
-        if let tempHomeItem = searchFilter.homeItemType {
-            homeItem = tempHomeItem
-        }
-        
+        //MARK: should refactor
+        let homeItem = HomeItem.Unknown
         let request: Future<CollectionResponse<FeedItem>,NSError> = api().getAll(homeItem, seachFilter: self.filter)
         
         request.onSuccess(dataRequestToken.validContext) {
@@ -132,7 +129,8 @@ final class BrowseListViewController: UIViewController, BrowseActionProducer, Br
             if strongSelf.excludeCommunityItems {
                 items = items.filter { $0.community == CRUDObjectInvalidId }
             }
-            strongSelf.dataSource.setItems(items)
+            
+            strongSelf.dataSource.setItems(strongSelf, feedItems: items)
             strongSelf.tableView.reloadData()
             strongSelf.tableView.setContentOffset(CGPointZero, animated: false)
             strongSelf.actionConsumer?.browseControllerDidChangeContent(strongSelf)
@@ -157,6 +155,23 @@ final class BrowseListViewController: UIViewController, BrowseActionProducer, Br
     @IBOutlet private(set) internal weak var tableView: UITableView!
     @IBOutlet private weak var displayModeSegmentedControl: UISegmentedControl!
 }
+    
+extension BrowseListViewController: ActionsDelegate {
+    
+    func like(item: FeedItem) {
+        if (item.isLiked) {
+            api().unlikePost(item.objectId).onSuccess{[weak self] in
+                self?.reloadData()
+            }
+        }
+        else {
+            api().likePost(item.objectId).onSuccess{[weak self] in
+                self?.reloadData()
+            }
+        }
+    }
+    
+}
 
 extension BrowseListViewController {
     internal class FeedItemDatasource: TableViewDataSource {
@@ -164,11 +179,6 @@ extension BrowseListViewController {
         init(shouldShowDetailedCells detailed: Bool, showCardCells: Bool) {
             showCompactCells = detailed
             self.showCardCells = showCardCells
-        }
-                
-        override func configureTable(tableView: UITableView) {
-            tableView.estimatedRowHeight = showCompactCells ? 80.0 : 120.0
-            super.configureTable(tableView)
         }
         
         func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -201,14 +211,41 @@ extension BrowseListViewController {
             if let model = self.tableView(tableView, modelForIndexPath: indexPath) as? FeedTableCellModel,
                let actionProducer = parentViewController as? BrowseActionProducer,
                let actionConsumer = self.actionConsumer {
-                actionConsumer.browseController(actionProducer, didSelectItem: model.objectID, type: model.itemType, data: model.data)
+                actionConsumer.browseController(actionProducer, didSelectItem: model.item.objectId, type: model.item.type, data: model.data)
             }
         }
         
-        func setItems(feedItems: [FeedItem]) {
+        func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+            if let model = self.tableView(tableView, modelForIndexPath: indexPath) as? CompactFeedTableCellModel {
+                if model.item.type == .Post {
+                    var cellHeight: CGFloat = 150
+                    cellHeight = (model.imageURL != nil) ? (cellHeight + 80) : cellHeight
+
+                    if let text = model.text {
+                        let maxSize = CGSize(width: UIScreen.mainScreen().applicationFrame.size.width - 20, height: 80)
+                        let attrString = NSAttributedString.init(string: text, attributes: [NSFontAttributeName:UIFont.systemFontOfSize(17)])
+                        let rect = attrString.boundingRectWithSize(maxSize, options: NSStringDrawingOptions.UsesLineFragmentOrigin, context: nil)
+                        let size = CGSizeMake(rect.size.width, rect.size.height)
+                        
+                        cellHeight += (size.height + 10)
+                    }
+                    
+                    
+                    return cellHeight
+                    
+                }
+                else {
+                    let height: CGFloat = showCompactCells ? 80.0 : 120.0
+                    return height
+                }
+            }
+            return 0
+        }
+        
+        func setItems(delegate: ActionsDelegate, feedItems: [FeedItem]) {
             if showCompactCells {
                 let list =  feedItems.reduce([]) { models, feedItem  in
-                    return models + self.modelFactory.compactModelsForItem(feedItem)
+                    return models + self.modelFactory.compactModelsForItem(delegate, feedItem: feedItem)
                 }
                 models = [ list ]
             } else {

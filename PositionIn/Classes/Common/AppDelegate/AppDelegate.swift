@@ -18,6 +18,8 @@ import XLForm
 import Braintree
 import Fabric
 import Crashlytics
+import LNNotificationsUI
+
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -50,7 +52,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         chatClient = XMPPClient()
         locationController = LocationController()
         
-        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.bt_colorWithBytesR(254, g: 187, b: 182)]
         UINavigationBar.appearance().barTintColor = UIColor.bt_colorWithBytesR(237, g: 27, b: 46)
         
         super.init()
@@ -62,6 +63,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 let newProfile = notification.object as? UserProfile
                 self?.currentUserDidChange(newProfile)
         }
+        
     }
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
@@ -91,6 +93,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         XLFormViewController.cellClassesForRowDescriptorTypes()[XLFormRowDescriptorTypeDonate] =
         "DonateCell"
         
+        XLFormViewController.cellClassesForRowDescriptorTypes()[XLFormRowDescriptorTypeMoreInformation] =
+        "MoreInformationCell"
+        
         XLFormViewController.cellClassesForRowDescriptorTypes()[XLFormRowDescriptorTypeTotal] =
         "TotalCell"
         
@@ -113,7 +118,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Fabric.with([Crashlytics.self])
         
         NewRelic.startWithApplicationToken(AppConfiguration().newRelicToken);
-
+        let notificationSettings = LNNotificationAppSettings()
+        notificationSettings.alertStyle = .Banner
+        notificationSettings.soundEnabled = false
+        LNNotificationCenter.defaultCenter().registerApplicationWithIdentifier("RedCross", name: "Red Cross", icon: UIImage(named: "push_notification_icon"), defaultSettings: notificationSettings);
+        
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
     }
     
@@ -127,7 +136,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
-        
+
         let characterSet: NSCharacterSet = NSCharacterSet( charactersInString: "<>" )
         
         let deviceTokenString: String = (deviceToken.description as NSString)
@@ -139,11 +148,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
-        //TODO handle
+        //TODO: handle
     }
     
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
-        showSuccess("receive push note")
+        //TODO: should set push note message
+        let apsDictionary = userInfo["aps"]
+        if let alert = apsDictionary!["alert"] as? String {
+            let notification = LNNotification(message: alert)
+            LNNotificationCenter.defaultCenter().presentNotification(notification, forApplicationIdentifier: "RedCross")
+        }
     }
 }
 
@@ -178,7 +192,10 @@ extension AppDelegate {
             switch (error.domain, error.code) {
             case (baseErrorDomain, NetworkDataProvider.ErrorCodes.InvalidSessionError.rawValue):
                 self.sidebarViewController?.executeAction(.Login)
-                showWarning(error.localizedDescription)
+                //TODO: remove hot fix
+                if(error.localizedDescription.caseInsensitiveCompare("invalid_token") != .OrderedSame) {
+                    showWarning(error.localizedDescription)
+                }
             default:
                 showWarning(error.localizedDescription)
             }

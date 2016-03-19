@@ -71,10 +71,9 @@ final class MarketDetailsViewController: UIViewController {
             self.pinDistanceImageView.hidden = false
             locationRequestToken.invalidate()
             locationRequestToken = InvalidationToken()
-            locationController().distanceFromCoordinate(coordinates).onSuccess(locationRequestToken.validContext) {
-                [weak self] distance in
-                let formatter = NSLengthFormatter()
-                self?.infoLabel.text = formatter.stringFromMeters(distance)
+            locationController().distanceStringFromCoordinate(coordinates).onSuccess() {
+                [weak self] distanceString in
+                self?.infoLabel.text = distanceString
                 self?.dataSource.items = (self?.productAcionItems())!
                 self?.dataSource.configureTable((self?.actionTableView)!)
                 }.onFailure(callback: { (error:NSError) -> Void in
@@ -104,10 +103,14 @@ final class MarketDetailsViewController: UIViewController {
             MarketActionItem(title: NSLocalizedString("Buy Product", comment: "Buy: Market"),
                 image: "productBuyProduct",
                 action: .Buy)]
-        var firstSection = [ // 1 section
-            MarketActionItem(title: NSLocalizedString("Send Message", comment: "Market"), image: "productSendMessage", action: .SendMessage),
-            MarketActionItem(title: NSLocalizedString("Seller Profile", comment: "Market"), image: "productSellerProfile", action: .SellerProfile),
-        ]
+        var firstSection = [MarketActionItem]() // 1 section
+        
+        if self.author?.objectId != api().currentUserId() {
+            firstSection.append(MarketActionItem(title: NSLocalizedString("Send Message", comment: "Market"), image: "productSendMessage", action: .SendMessage))
+            firstSection.append(MarketActionItem(title: NSLocalizedString("Seller Profile", comment: "Market"),
+                image: "productSellerProfile", action: .SellerProfile))
+        }
+        
         if self.product?.location != nil {
             firstSection.append(MarketActionItem(title: NSLocalizedString("Navigate", comment: "Market"), image: "productNavigate", action: .Navigate))
         }

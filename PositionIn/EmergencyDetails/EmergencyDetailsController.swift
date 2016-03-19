@@ -69,10 +69,9 @@ class EmergencyDetailsController: UIViewController {
             self.pinDistanceImageView.hidden = false
             locationRequestToken.invalidate()
             locationRequestToken = InvalidationToken()
-            locationController().distanceFromCoordinate(coordinates).onSuccess(locationRequestToken.validContext) {
-                [weak self] distance in
-                let formatter = NSLengthFormatter()
-                self?.infoLabel.text = formatter.stringFromMeters(distance)
+            locationController().distanceStringFromCoordinate(coordinates).onSuccess(locationRequestToken.validContext) {
+                [weak self] distanceString in
+                self?.infoLabel.text = distanceString
                 self?.dataSource.items = (self?.productAcionItems())!
                 self?.dataSource.configureTable((self?.actionTableView)!)
                 }.onFailure(callback: { (error:NSError) -> Void in
@@ -103,14 +102,18 @@ class EmergencyDetailsController: UIViewController {
                 image: "home_donate",
                 action: .Donate)]
 
-        var firstSection = [ // 1 section
-            EmergencyActionItem(title: NSLocalizedString("Send Message", comment: "Product action: Send Message"),
+        var firstSection = [EmergencyActionItem]() // 1 section
+        
+        if self.author?.objectId != api().currentUserId() {
+            firstSection.append(EmergencyActionItem(title: NSLocalizedString("Send Message", comment: "Product action: Send Message"),
                 image: "productSendMessage",
-                action: .SendMessage),
-            EmergencyActionItem(title: NSLocalizedString("Member Profile", comment: "Product action: Seller Profile"),
-                image: "productSellerProfile",
-                action: .MemberProfile)
-        ]
+                action: .SendMessage))
+            firstSection.append(EmergencyActionItem(title: NSLocalizedString("Member Profile",
+                comment: "Product action: Seller Profile"), image: "productSellerProfile", action: .MemberProfile))
+        }
+        
+        
+        
         if self.product?.location != nil {
             firstSection.append(EmergencyActionItem(title: NSLocalizedString("Navigate", comment: "Emergency"), image: "productNavigate", action: .Navigate))
         }

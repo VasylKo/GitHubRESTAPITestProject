@@ -10,14 +10,13 @@
 import ObjectMapper
 import CleanroomLogger
 
-struct Notification : CRUDObject {
+struct SystemNotification : CRUDObject {
 
     var objectId: CRUDObjectId = CRUDObjectInvalidId
     var title: String?
     var message: String?
     var isRead: Bool?
     var createdDate: NSDate?
-    
     
     //MARK: Mappable
     

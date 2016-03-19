@@ -20,7 +20,7 @@ struct BomaHotel: CRUDObject {
     var deliveryMethod: DeliveryMethod? = .Unknown
     var photos: [PhotoInfo]?
     var location: Location?
-    var imageURLString: String?
+    var imageURL: NSURL?
     var bookingURL : NSURL?
     var links : [NSURL]?
     var attachments : [Attachment]?
@@ -55,7 +55,7 @@ struct BomaHotel: CRUDObject {
         deliveryMethod <- (map["deliveryMethod"], EnumTransform())
         photos <- map["photos"]
         location <- map["location"]
-        imageURLString <- map["image"]
+        imageURL <- (map["image"], ImageURLTransform())
         bookingURL <- (map["externalUrl"], URLTransform())
         links <- (map["links"], URLTransform())
         attachments <- map["attachments"]

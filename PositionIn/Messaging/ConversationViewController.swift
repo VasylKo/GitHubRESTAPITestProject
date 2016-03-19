@@ -53,11 +53,12 @@ final class ConversationViewController: JSQMessagesViewController {
     *  @param date              The message date.
     */
     override func didPressSendButton(button: UIButton!, withMessageText text: String!, senderId: String!, senderDisplayName: String!, date: NSDate!) {
-        JSQSystemSoundPlayer.jsq_playMessageSentSound()
-        let message = JSQMessage(senderId: senderId, senderDisplayName: senderDisplayName, date: date, text: text)
-        chatController.sendMessage(message)
-        finishSendingMessageAnimated(true)
-        
+        //JSQSystemSoundPlayer.jsq_playMessageSentSound()
+        if self.chatController.canSendMessage() {
+            let message = JSQMessage(senderId: senderId, senderDisplayName: senderDisplayName, date: date, text: text)
+            chatController.sendMessage(message)
+            finishSendingMessageAnimated(true)
+        }
     }
     
     /**
@@ -67,7 +68,7 @@ final class ConversationViewController: JSQMessagesViewController {
     */
     override func didPressAccessoryButton(sender: UIButton!) {
         let sendCompletion: () -> () = { [weak self] in
-            JSQSystemSoundPlayer.jsq_playMessageSentSound()
+            //JSQSystemSoundPlayer.jsq_playMessageSentSound()
             self?.finishSendingMessageAnimated(true)
         }
         let sheet = UIAlertController(
@@ -239,9 +240,9 @@ extension ConversationViewController {
 
 extension ConversationViewController: ChatControllerDelegate {
     func didUpdateMessages() {
-        if chatController.messagesCount() > 0 {
-            JSQSystemSoundPlayer.jsq_playMessageReceivedSound()
-        }
+//        if chatController.messagesCount() > 0 {
+//            JSQSystemSoundPlayer.jsq_playMessageReceivedSound()
+//        }
         scrollToBottomAnimated(true)
         finishReceivingMessage()
     }

@@ -83,10 +83,9 @@ class VolunteerDetailsViewController: UIViewController {
             self.pinDistanceImageView.hidden = false
             locationRequestToken.invalidate()
             locationRequestToken = InvalidationToken()
-            locationController().distanceFromCoordinate(coordinates).onSuccess(locationRequestToken.validContext) {
-                [weak self] distance in
-                let formatter = NSLengthFormatter()
-                self?.infoLabel.text = formatter.stringFromMeters(distance)
+            locationController().distanceStringFromCoordinate(coordinates).onSuccess() {
+                [weak self] distanceString in
+                self?.infoLabel.text = distanceString
                 }.onFailure(callback: { (error:NSError) -> Void in
                     self.pinDistanceImageView.hidden = true
                     self.infoLabel.text = "" })
@@ -118,17 +117,19 @@ class VolunteerDetailsViewController: UIViewController {
     
     
     private func productAcionItems() -> [[VolunteerActionItem]] {
-        var firstSection = [
-            VolunteerActionItem(title: NSLocalizedString("Send Message", comment: "Volunteer"), image: "productSendMessage", action: .SendMessage),
-            VolunteerActionItem(title: NSLocalizedString("Organizer Profile", comment: "Volunteer"), image: "productSellerProfile", action: .SellerProfile),
-            /*VolunteerActionItem(title: NSLocalizedString("More Information", comment: "Volunteer"), image: "productTerms&Info", action: .ProductInventory)*/]
+        var firstSection = [VolunteerActionItem]()
+        
+        if self.author?.objectId != api().currentUserId() {
+            firstSection.append(VolunteerActionItem(title: NSLocalizedString("Send Message", comment: "Volunteer"), image: "productSendMessage", action: .SendMessage))
+            firstSection.append(VolunteerActionItem(title: NSLocalizedString("Organizer Profile", comment: "Volunteer"),
+                image: "productSellerProfile", action: .SellerProfile))
+        }
+        
         if self.volunteer?.location != nil {
             firstSection.append(VolunteerActionItem(title: NSLocalizedString("Navigate", comment: "BomaHotels"), image: "productNavigate", action: .Navigate))
         }
         if self.volunteer?.links?.isEmpty == false || self.volunteer?.attachments?.isEmpty == false {
             firstSection.append(VolunteerActionItem(title: NSLocalizedString("More Information"), image: "productTerms&Info", action: .MoreInformation))
-        } else {
-            firstSection.append(VolunteerActionItem(title: NSLocalizedString("No attachments"), image: "productTerms&Info", action: .MoreInformation))
         }
         
         if (self.joinAction != true) {
@@ -213,18 +214,6 @@ extension VolunteerDetailsViewController: VolunteerDetailsActionConsumer {
         let segue: VolunteerDetailsViewController.Segue
         switch action {
         case .Pending:
-            var title : String
-            switch self.type {
-            case .Volunteer:
-                title = "Kenya Red Cross will review your volunteering request and respond within a few days"
-            case .Community, .Unknown:
-                title = "Kenya Red Cross will review your request and respond within a few days"
-            }
-            
-            let alertController = UIAlertController(title: nil, message:
-                title, preferredStyle: UIAlertControllerStyle.Alert)
-            alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
-            self.presentViewController(alertController, animated:true, completion: nil)
             return
         case .SellerProfile:
             segue = .ShowOrganizerProfile
@@ -373,6 +362,11 @@ extension VolunteerDetailsViewController {
             let item = items[indexPath.section][indexPath.row]
             let model = TableViewCellImageTextModel(title: item.title, imageName: item.image)
             return model
+        }
+        
+        override func tableView(tableView: UITableView, configureCell cell: TableViewCell, forIndexPath indexPath: NSIndexPath) {
+            super.tableView(tableView, configureCell: cell, forIndexPath: indexPath)
+            cell.selectionStyle = indexPath.section == 0 ? .None : .Gray
         }
         
         @objc override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

@@ -15,7 +15,7 @@ class ExploreCardCell: TableViewCell {
         let m = model as? CompactFeedTableCellModel
         assert(m != nil, "Invalid model passed")
         
-        switch m!.itemType {
+        switch m!.item.type {
         case .Emergency:
             feedItemLogoImageView.image = UIImage(named: "home_emergencies")
         case .GiveBlood:
@@ -34,7 +34,7 @@ class ExploreCardCell: TableViewCell {
             feedItemLogoImageView.image = UIImage(named: "home_event")
         case .News, .Post:
             feedItemLogoImageView.image = UIImage(named: "home_news")
-        case .Unknown:
+        case .Unknown, .Wallet:
             break
         }
         if let imgURL = m!.imageURL {

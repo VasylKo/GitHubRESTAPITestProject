@@ -46,6 +46,11 @@ class MembershipRouterImplementation: BaseRouterImplementation, MembershipRouter
             animated: true)
     }
     
+    func showMemberDetailsViewController(from sourceViewController : UIViewController) {
+        sourceViewController.navigationController?.pushViewController(MembershipMemberDetailsViewController(router: self),
+            animated: true)
+    }
+    
     func showPlansViewController(from sourceViewController : UIViewController, with plan : MembershipPlan) {
         let plansViewController = MembershipPlansViewController(router: self, type: plan.type, currentMembershipPlan: plan)
         sourceViewController.navigationController?.pushViewController(plansViewController, animated: true)
@@ -57,7 +62,12 @@ class MembershipRouterImplementation: BaseRouterImplementation, MembershipRouter
     }
     
     func showMPesaConfirmPaymentViewController(from sourceViewController : UIViewController, with plan : MembershipPlan) {
-        let mpesaConfirmPaymentViewController = MembershipMPesaDetailsViewController(router: self, plan: plan)
+        let mpesaConfirmPaymentViewController = MembershipMPesaConfirmPaymentViewController(router: self, plan: plan)
+        sourceViewController.navigationController?.pushViewController(mpesaConfirmPaymentViewController, animated: true)
+    }
+    
+    func showBraintreeConfirmPaymentViewController(from sourceViewController : UIViewController, with plan : MembershipPlan, creditCardPaymentSuccess: Bool?) {
+        let mpesaConfirmPaymentViewController = MembershipBraintreeConfirmPaymentViewController(router: self, plan: plan, creditCardPaymentSuccess: creditCardPaymentSuccess)
         sourceViewController.navigationController?.pushViewController(mpesaConfirmPaymentViewController, animated: true)
     }
 }

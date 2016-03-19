@@ -47,22 +47,41 @@ class PhoneVerificationViewController: XLFormViewController {
         codeRow.addValidator(XLFormRegexValidator(msg: NSLocalizedString("Incorrect validation code",
             comment: "Onboarding"), regex: "^\\d+$"))
         codeRow.onChangeBlock  = {[weak self] oldValue, newValue, descriptor in
-            if let newValue = newValue as? String {
-                if newValue.characters.count > 6 {
-                    descriptor.value = oldValue
-                    Queue.main.async { _ in
-                        self?.reloadFormRow(descriptor)
+            if let newValue = newValue as? String,
+                let oldValue = oldValue as? String {
+                    if newValue.characters.count == 6 && newValue.compare(oldValue) != .OrderedSame {
+                        self?.doneButtonPressed()
                     }
-                }
+                    else if newValue.characters.count > 6 {
+                        descriptor.value = oldValue
+                        Queue.main.async { _ in
+                            self?.reloadFormRow(descriptor)
+                        }
+                    }
             }
         }
         phoneNumberSection.addFormRow(codeRow)
+        
+        let voiceCallSection = XLFormSectionDescriptor.formSectionWithTitle("You can use Voice Verification")
+        let voiceVerificationRow: XLFormRowDescriptor = XLFormRowDescriptor(tag: nil,
+            rowType: XLFormRowDescriptorTypeButton,
+            title: NSLocalizedString("Voice Verification"))
+        voiceVerificationRow.cellConfig["backgroundColor"] = UIScheme.mainThemeColor
+        voiceVerificationRow.cellConfig["textLabel.textColor"] = UIColor.whiteColor()
+        
+        voiceVerificationRow.action.formBlock = { [weak self] row in
+            let voiceCallContoller = VoiceVerificationViewController(nibName: nil, bundle: nil)
+            voiceCallContoller.phoneNumber = self?.phoneNumber
+            self?.navigationController?.pushViewController(voiceCallContoller, animated: true)
+        }
+        voiceCallSection.addFormRow(voiceVerificationRow)
+        form.addFormSection(voiceCallSection)
         
         self.form = form
     }
 
     
-    @IBAction func doneButtonPressed(sender: AnyObject) {
+    @IBAction func doneButtonPressed() {
         
         let validationErrors : Array<NSError> = self.formValidationErrors() as! Array<NSError>
         if (validationErrors.count > 0){

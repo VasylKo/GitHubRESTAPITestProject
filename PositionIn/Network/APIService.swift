@@ -126,16 +126,16 @@ final class APIService {
     
     //MARK: - Wallet -
     
-//    func getDonations(userId: CRUDObjectId) -> Future<CollectionResponse<Order>, NSError> {
-//        let endpoint = "/v1.0/payments/users/\(userId)/donations"
-//        return getObjectsCollection(endpoint, params: nil)
-//    }
-//    
-//    func getOrders(userId: CRUDObjectId, reason: String) -> Future<CollectionResponse<Order>, NSError> {
-//        let endpoint = "/v1.0/payments/users/\(userId)/orders/\(reason)"
-//        return getObjectsCollection(endpoint, params: nil)
-//    }
-//    
+    func getDonations(userId: CRUDObjectId) -> Future<CollectionResponse<Order>, NSError> {
+        let endpoint = "/v1.0/payments/users/\(userId)/donations"
+        return getObjectsCollection(endpoint, params: nil)
+    }
+    
+    func getOrders(userId: CRUDObjectId, reason: String) -> Future<CollectionResponse<Order>, NSError> {
+        let endpoint = "/v1.0/payments/users/\(userId)/orders/\(reason)"
+        return getObjectsCollection(endpoint, params: nil)
+    }
+    
     //MARK: - Posts -
     
     func getUserPosts(userId: CRUDObjectId, page: Page) -> Future<CollectionResponse<Post>, NSError> {
@@ -438,31 +438,27 @@ final class APIService {
         let params = APIServiceQuery()
         params.append(query: query)
         params.append(query: page)
-        Log.debug?.value(params.query)
-        return session().flatMap {
-            (token: AuthResponse.Token) -> Future<CollectionResponse<FeedItem>, NSError> in
-            
-            let futureBuilder: (Void -> Future<CollectionResponse<FeedItem>, NSError>) = { [unowned self] in
-                let request = self.updateRequest(token, endpoint: endpoint, params: params.query)
-                let (_ , future): (Alamofire.Request, Future<CollectionResponse<FeedItem>, NSError>) = self.dataProvider.objectRequest(request)
-                return future
-            }
-            
-            return self.handleFailure(futureBuilder)
-        }
+        var itemTypesArray : [String] = []
+        params.append("type", value: "2,8")
+
+        return self.getObjectsCollection(endpoint, params: params.query)
     }
     
     func getAll(homeItem: HomeItem, seachFilter: SearchFilter) -> Future<CollectionResponse<FeedItem>,NSError> {
         let endpoint = homeItem.endpoint()
-//        //TODO: change this when it will be fixed on backend
-        let method: Alamofire.Method = .POST
+        //TODO: fix endp
+        var endp = ""
+        if let endpoint = endpoint {
+            endp = endpoint
+        }
+        //        //TODO: change this when it will be fixed on backend
         let params = APIServiceQuery()
-        params.append("type", value: [homeItem.rawValue])
+        params.append("type", value: [String(homeItem.rawValue)])
         if let itemTypes = seachFilter.itemTypes {
-            var itemTypesArray : [Int] = []
+            var itemTypesArray : [String] = []
             
             for (_, value) in itemTypes.enumerate() {
-               itemTypesArray.append(value.rawValue)
+                itemTypesArray.append(String(value.rawValue))
             }
             params.append("type", value: itemTypesArray)
         }
@@ -471,22 +467,16 @@ final class APIService {
             params.append("communities", value: communities)
         }
         
-        return session().flatMap {
-            (token: AuthResponse.Token) -> Future<CollectionResponse<FeedItem>, NSError> in
-            //TODO: fix endp
-            var endp = ""
-            if let endpoint = endpoint {
-                endp = endpoint
+        var parameters = [String:AnyObject]()
+        for (key, value) in params.query {
+            if let array = value as? [String] {
+                parameters[key] = array.joinWithSeparator(",")
+            } else {
+                parameters[key] = value
             }
-            
-            let futureBuilder: (Void -> Future<CollectionResponse<FeedItem>, NSError>) = { [unowned self] in
-                let request = self.updateRequest(token, endpoint: endp, method: method, params: params.query)
-                let (_ , future): (Alamofire.Request, Future<CollectionResponse<FeedItem>, NSError>) = self.dataProvider.objectRequest(request)
-                return future
-            }
-            
-            return self.handleFailure(futureBuilder)
         }
+        
+        return self.getObjectsCollection(endp, params: parameters)
     }
     
     func getVolunteers() -> Future<CollectionResponse<Community>,NSError> {
@@ -503,6 +493,13 @@ final class APIService {
             
             return self.handleFailure(futureBuilder)
         }
+    }
+    
+    func getCountyBranches(page: Page) -> Future<CollectionResponse<Community>, NSError> {
+        let endpoint = HomeItem.Volunteer.endpoint()
+        var params = page.query
+        params["filterByParticipationStatus"] = false
+        return getObjectsCollection(endpoint!, params: params)
     }
 
     func getVolunteer(volunteerId: CRUDObjectId) -> Future<Community, NSError> {
@@ -579,13 +576,8 @@ final class APIService {
 
     //MARK: - Notifications
 
-//    func getNotifications() -> Future<CollectionResponse<SystemNotification>, NSError> {
-//        let endpoint = SystemNotification.endpoint()
-//        return getObjectsCollection(endpoint, params: nil)
-//    }
-    
-    func getNotifications() -> Future<CollectionResponse<Notification>, NSError> {
-        let endpoint = Notification.endpoint()
+    func getNotifications() -> Future<CollectionResponse<SystemNotification>, NSError> {
+        let endpoint = SystemNotification.endpoint()
         return getObjectsCollection(endpoint, params: nil)
     }
     
@@ -1016,7 +1008,7 @@ extension APIService {
             }.flatMap { (response: AnyObject?) -> Future<NSURL, NSError> in
                 let f: Future<NSURL, NSError> = future {
                     guard let JSON = response as? [String: AnyObject],
-                          let url = AmazonURLTransform().transformFromJSON(JSON["url"])  else {
+                          let url = ImageURLTransform().transformFromJSON(JSON["url"])  else {
                             return Result(error: NetworkDataProvider.ErrorCodes.InvalidResponseError.error())
                     }
                     return Result(value: url)

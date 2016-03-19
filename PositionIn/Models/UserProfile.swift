@@ -9,26 +9,86 @@
 import ObjectMapper
 import CleanroomLogger
 
+enum Gender: Int, CustomStringConvertible {
+    case Unknown = 0
+    case Male
+    case Female
+    case Other
+    
+    // CustomStringConvertible
+    var description: String {
+        switch self {
+        case .Unknown:
+            return "Unknown"
+        case .Male:
+            return "Male"
+        case .Female:
+            return "Female"
+        case .Other:
+            return "Other"
+        }
+    }
+}
+
+enum EducationLevel: Int, CustomStringConvertible  {
+    case Unknown = 0
+    case PrimarySchool
+    case SecondarySchool
+    case HighSchool
+    case Diploma
+    case Undergraduate
+    case PostGraduateDiploma
+    case Masters
+    case PHD
+    
+    // CustomStringConvertible
+    var description: String {
+        switch self {
+        case .Unknown:
+            return "Unknown"
+        case .PrimarySchool:
+            return "Primary School"
+        case .SecondarySchool:
+            return "Secondary School"
+        case .HighSchool:
+            return "High School"
+        case .Diploma:
+            return "Diploma"
+        case .Undergraduate:
+            return "Undergraduate"
+        case .PostGraduateDiploma:
+            return "Post-graduate diploma"
+        case .Masters:
+            return "Masters"
+        case .PHD:
+            return "PHD"
+        }
+    }
+}
+
 final class UserProfile: CRUDObject {
     var objectId: CRUDObjectId = CRUDObjectInvalidId
+    var avatar: NSURL?
     var firstName: String?
     var middleName: String?
     var lastName: String?
-    var userDescription: String?
     var phone: String?
+    var userDescription: String?
+    var gender: Gender?
+    var dateOfBirth: NSDate?
     var email: String?
-    var avatar: NSURL?
     var backgroundImage: NSURL?
     var location: Location?
+    var membershipDetails : MembershipDetails?
+    var passportNumber: String?
+    var postalAddress: Location?
+    var profession: String?
+    var permanentResidence: String?
+    var educationLevel: EducationLevel?
+    var countyBranch : Community?
+    
     var guest: Bool =  false
     var shops: [ObjectInfo]?
-    var membershipDetails : MembershipDetails?
-    
-    enum Gender {
-        case Unknown
-        case Male
-        case Female
-    }
     
     var countFollowers: Int?
     var countFollowing: Int?
@@ -67,21 +127,29 @@ final class UserProfile: CRUDObject {
     
     func mapping(map: Map) {
         objectId <- (map["id"], CRUDObjectIdTransform())
+        avatar <- (map["avatar"], ImageURLTransform())
         firstName <- map["firstName"]
         middleName <- map["middleName"]
         lastName <- map["lastName"]
-        userDescription <- map["description"]
         phone <- map["phone"]
+        userDescription <- map["description"]
+        gender <- map["gender"]
+        dateOfBirth <- (map["dob"], APIDateTransform())
         email <- map["email"]
-        avatar <- (map["avatar"], AmazonURLTransform())
-        backgroundImage <- (map["background"], AmazonURLTransform())
+        countyBranch <- map["countryBranch"]
+        backgroundImage <- (map["background"], ImageURLTransform())
         location <- map["location"]
+        membershipDetails <- map["membershipDetails"]
+        passportNumber <- map["passportNumber"]
+        postalAddress <- map["postalAddress"]
+        profession <- map["profession"]
+        permanentResidence <- map["permanentResidence"]
+        educationLevel <- map["educationLevel"]
         guest <- map["guest"]
         shops <- map["shops.data"]
         countFollowers <- map["followers.count"]
         countFollowing <- map["following.count"]
         countPosts <- map["posts.count"]
-        membershipDetails <- map["membershipDetails"]
     }
     
     static func endpoint() -> String {

@@ -1,5 +1,5 @@
 PODS:
-  - Alamofire (3.2.0)
+  - Alamofire (3.2.1)
   - Bolts (1.5.0):
     - Bolts/AppLinks (= 1.5.0)
     - Bolts/Tasks (= 1.5.0)
@@ -62,6 +62,7 @@ PODS:
   - JSQSystemSoundPlayer (2.0.1)
   - KeychainAccess (2.3.3)
   - KYDrawerController (1.1.2)
+  - LNNotificationsUI (0.0.1)
   - NewRelicAgent (5.3.6)
   - ObjectMapper (1.1.5)
   - PosInCore (0.0.1):
@@ -93,7 +94,8 @@ DEPENDENCIES:
   - JSQMessagesViewController (~> 7.2)
   - KeychainAccess (~> 2.3.1)
   - KYDrawerController (~> 1.1)
-  - NewRelicAgent
+  - LNNotificationsUI (~> 0.0.1)
+  - NewRelicAgent (~> 5.3.6)
   - PosInCore (from `PosInCore`)
   - RealmSwift (~> 0.97.0)
   - UIImageEffects
@@ -104,7 +106,7 @@ EXTERNAL SOURCES:
     :path: PosInCore
 
 SPEC CHECKSUMS:
-  Alamofire: 4da478599fccddff361205c8929333d7fe18dceb
+  Alamofire: f11d8624a05f5d39e0c99309b3e600a3ba64298a
   Bolts: 722ab9a4f8b50fc4ed1b9998a5a7a2b3f16d80b4
   Box: 70713ca3679e4e11ad4c470e9b58265f506fc659
   Braintree: bb66f0a87e9809d36da89e698455e7e902aaeef6
@@ -128,9 +130,10 @@ SPEC CHECKSUMS:
   JSQSystemSoundPlayer: c5850e77a4363ffd374cd851154b9af93264ed8d
   KeychainAccess: 9b7e49e48277e329b1b3195e54697ed313d30acf
   KYDrawerController: 222c4d07ed09fa7842011d36d73e3599dcbccab3
+  LNNotificationsUI: 19554d28a5c3bb89a196ab7a5b0d5c9d95c28b96
   NewRelicAgent: 731c3b39030885531dad40e43cd80b8dbe61647e
   ObjectMapper: 528b1a6677a6acac7747edd508576983e76a9148
-  PosInCore: d343ffa2e13b1fba322212eb498bdc452a305c54
+  PosInCore: 6110bbb5ffdcfb6603d6a896edf6eeda57dd279a
   Realm: b498a6fb9d288b171ff98d0e2d4384c295be8990
   RealmSwift: d014810dec75c9a3f1a33926d2dabfed855c582c
   Result: dd3dd71af3fa2e262f1a999e14fba2c25ec14f16

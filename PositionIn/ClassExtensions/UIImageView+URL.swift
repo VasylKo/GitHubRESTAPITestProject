@@ -10,8 +10,16 @@ import Foundation
 import Haneke
 
 extension UIImageView {
-    func setImageFromURL(url: NSURL?, placeholder: UIImage? = nil) {        
-        if let url = url {
+    func setImageFromURL(url: NSURL?, placeholder: UIImage? = nil) {
+        let scale = UIScreen.mainScreen().scale
+        let viewSize = frame.size
+        let targetImageViewSize = CGSizeMake(viewSize.width * scale, viewSize.height * scale)
+        
+        // TODO: Need to create extension for create NSURL with parameters
+        let parameters = "?w=\(Int(targetImageViewSize.width))&h=\(Int(targetImageViewSize.height))"
+        let urlWithTargetSize = NSURL(string: parameters, relativeToURL: url)
+        
+        if let url = urlWithTargetSize {
             let fetcher = ImageNetworkFetcher<UIImage>(URL: url)
             self.hnk_setImageFromFetcher(fetcher, placeholder: placeholder)            
         } else {

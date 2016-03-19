@@ -16,7 +16,7 @@ class MembershipPlanTableViewCell: UITableViewCell {
     
     func configure(with plan : MembershipPlan) {
         self.titleLabel.text = plan.name
-        self.descriptionLabel.text = String("KES \(plan.price ?? 0) Annually")
+        self.descriptionLabel.text = String("\(AppConfiguration().currencySymbol) \(plan.price ?? 0) Annually")
         self.membershipImageView.image = UIImage(named : plan.membershipImageName)
     }
     

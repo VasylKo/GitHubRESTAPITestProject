@@ -63,25 +63,16 @@ final class BomaHotelsDetailsViewController: UIViewController {
         if let price = bomaHotel.donations {
             priceLabel.text = "\(Int(price)) beneficiaries"
         }
-
-        let imageURL: NSURL?
-        
-        if let urlString = bomaHotel.imageURLString {
-            imageURL = NSURL(string:urlString)
-        } else {
-            imageURL = nil
-        }
         
         let image = UIImage(named: "bomaHotelPlaceholder")
-        productImageView.setImageFromURL(imageURL, placeholder: image)
+        productImageView.setImageFromURL(bomaHotel.imageURL, placeholder: image)
         if let coordinates = bomaHotel.location?.coordinates {
             self.productPinDistanceImageView.hidden = false
             locationRequestToken.invalidate()
             locationRequestToken = InvalidationToken()
-            locationController().distanceFromCoordinate(coordinates).onSuccess(locationRequestToken.validContext) {
-                [weak self] distance in
-                let formatter = NSLengthFormatter()
-                self?.infoLabel.text = formatter.stringFromMeters(distance)
+            locationController().distanceStringFromCoordinate(coordinates).onSuccess(locationRequestToken.validContext) {
+                [weak self] distanceString in
+                self?.infoLabel.text = distanceString
                 self?.dataSource.items = (self?.bomaHotelAcionItems())!
                 self?.dataSource.configureTable((self?.actionTableView)!)
                 }.onFailure(callback: { (error:NSError) -> Void in
@@ -113,8 +104,14 @@ final class BomaHotelsDetailsViewController: UIViewController {
              zeroSection.append(BomaHotelActionItem(title: NSLocalizedString("Booking", comment: "BomaHotels"), image: "productBuyProduct", action: .Buy))
         }
         
-        var firstSection = [BomaHotelActionItem(title: NSLocalizedString("Send Message", comment: "BomaHotels"), image: "productSendMessage", action: .SendMessage),
-            BomaHotelActionItem(title: NSLocalizedString("Organizer Profile", comment: "BomaHotels"), image: "productSellerProfile", action: .SellerProfile)]
+        var firstSection = [BomaHotelActionItem]()
+        
+        if self.author?.objectId != api().currentUserId() {
+            firstSection.append(BomaHotelActionItem(title: NSLocalizedString("Send Message", comment: "BomaHotels"), image: "productSendMessage", action: .SendMessage))
+            zeroSection.append(BomaHotelActionItem(title: NSLocalizedString("Organizer Profile", comment: "BomaHotels"),
+                image: "productSellerProfile", action: .SellerProfile))
+        }
+        
         if self.bomaHotel?.location != nil {
             firstSection.append(BomaHotelActionItem(title: NSLocalizedString("Navigate", comment: "BomaHotels"), image: "productNavigate", action: .Navigate))
         }
