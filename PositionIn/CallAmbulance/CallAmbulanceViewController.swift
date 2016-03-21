@@ -16,14 +16,15 @@ class CallAmbulanceViewController: BaseAddItemViewController {
     private enum Tags: String {
         case Description = "Description"
         case Incedent = "Incedent"
+        case Bleeding = "Bleeding"
         case Location = "Location"
         case Photo = "Photo"
     }
     
     private enum IncidentType: Int {
-        case Medical = 0, Accident, FireInjury, HeartAttack, HeadStoke, Shock
+        case Other = 0, Fainted, Collapsed, NonResponsive, BreathingFast, Sweating, Bleeding, NotBreathing, NotTalking, Unconscious, Seizure, Choking, ChestPain
         
-        static let allValues = [Medical, Accident, FireInjury, HeartAttack, HeadStoke, Shock]
+        static let allValues = [Other, Fainted, Collapsed, NonResponsive, BreathingFast, Sweating, Bleeding, NotBreathing, NotTalking, Unconscious, Seizure, Choking, ChestPain]
     }
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
@@ -58,6 +59,13 @@ class CallAmbulanceViewController: BaseAddItemViewController {
         
         //Incident & Location Section
         let incedentLocationSection = XLFormSectionDescriptor.formSection()
+        
+        let bleedingRow : XLFormRowDescriptor = XLFormRowDescriptor(tag: Tags.Bleeding.rawValue,
+            rowType:XLFormRowDescriptorTypeText, title:NSLocalizedString("Where from?",
+                comment: "Call Ambulance"))
+        bleedingRow.hidden = true
+        bleedingRow.required = true
+        
         let incedentRow : XLFormRowDescriptor = XLFormRowDescriptor(tag: Tags.Incedent.rawValue,
             rowType:XLFormRowDescriptorTypeSelectorPush, title:NSLocalizedString("Incident Type",
                 comment: "Call Ambulance"))
@@ -72,7 +80,18 @@ class CallAmbulanceViewController: BaseAddItemViewController {
         }
         incedentRow.selectorOptions = selectorOptions
         incedentRow.value = selectorOptions.first
+        incedentRow.onChangeBlock = {[weak bleedingRow]   oldValue, newValue, descriptor in
+            if let value = newValue as? XLFormOptionsObject, let incidentType = value.formValue() as? NSNumber {
+                if ((incidentType.integerValue - 1) == IncidentType.Bleeding.rawValue) {
+                    bleedingRow?.hidden = false
+                }
+                else {
+                    bleedingRow?.hidden = true
+                }
+            }
+        }
         incedentLocationSection.addFormRow(incedentRow)
+        incedentLocationSection.addFormRow(bleedingRow)
         
         // Location
         let locationRow = locationRowDescriptor(Tags.Location.rawValue)
@@ -89,18 +108,32 @@ class CallAmbulanceViewController: BaseAddItemViewController {
     
     private func incedentType(let value: IncidentType) -> String? {
         switch value {
-        case .Medical:
-            return NSLocalizedString("Medical", comment: "Incedent Type")
-        case .Accident:
-            return NSLocalizedString("Accident", comment: "Incedent Type")
-        case .FireInjury:
-            return NSLocalizedString("Fire Injury", comment: "Incedent Type")
-        case .HeartAttack:
-            return NSLocalizedString("Heart Attack", comment: "Incedent Type")
-        case .HeadStoke:
-            return NSLocalizedString("Head Stoke", comment: "Incedent Type")
-        case .Shock:
-            return NSLocalizedString("Shock", comment: "Incedent Type")
+        case .Other:
+            return NSLocalizedString("Other")
+        case .Fainted:
+            return NSLocalizedString("Fainted")
+        case .Collapsed:
+            return NSLocalizedString("Collapsed")
+        case .NonResponsive:
+            return NSLocalizedString("Non-responsive")
+        case .BreathingFast:
+            return NSLocalizedString("Breathing fast")
+        case .Sweating:
+            return NSLocalizedString("Sweating")
+        case .Bleeding:
+            return NSLocalizedString("Bleeding")
+        case .NotBreathing:
+            return NSLocalizedString("Not breathing")
+        case .NotTalking:
+            return NSLocalizedString("Not talking")
+        case .Unconscious:
+            return NSLocalizedString("Unconscious")
+        case .Seizure:
+            return NSLocalizedString("Seizure")
+        case .Choking:
+            return NSLocalizedString("Choking")
+        case .ChestPain:
+            return NSLocalizedString("Chest Pain")
         }
     }
     
@@ -123,6 +156,11 @@ class CallAmbulanceViewController: BaseAddItemViewController {
                 
                 if let incidentType: XLFormOptionsObject = values[Tags.Incedent.rawValue] as? XLFormOptionsObject {
                     if let incedentTypeValue = incidentType.valueData() as? NSNumber {
+                        if ((incedentTypeValue.integerValue - 1) == IncidentType.Bleeding.rawValue) {
+                            if let accidentDescription = values[Tags.Bleeding.rawValue] as? String {
+                                ambulanceRequest.accidentDescription = accidentDescription
+                            }
+                        }
                         ambulanceRequest.incidentType = incedentTypeValue
                     }
                 }

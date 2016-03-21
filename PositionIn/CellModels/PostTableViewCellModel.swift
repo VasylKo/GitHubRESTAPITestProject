@@ -12,8 +12,9 @@ import PosInCore
 struct PostLikesCountModel: TableViewCellModel {
     let likes: Int
     let isLiked: Bool
+    let isCommented: Bool
     let comments: Int
-    let actionConsumer: PostActionConsumer?
+    let actionConsumer: NewsActionConsumer?
 }
 
 struct PostAttachmentsModel: TableViewCellModel {

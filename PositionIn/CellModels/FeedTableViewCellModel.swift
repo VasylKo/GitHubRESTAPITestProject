@@ -71,17 +71,14 @@ class CompactFeedTableCellModel: FeedTableCellModel {
             fallthrough
         case .BomaHotels:
             if let location = location {
-                locationController().distanceFromCoordinate(location.coordinates).onSuccess {
-                    [weak self] distance in
-                    let formatter = NSLengthFormatter()
-                    formatter.numberFormatter.maximumFractionDigits = 1
-                    formatter.unitStyle = .Long
-                    self?.info = formatter.stringFromMeters(distance)
+                locationController().distanceStringFromCoordinate(location.coordinates).onSuccess() {
+                    [weak self] distanceString in
+                    self?.info = distanceString
                 }
             }
         case .Project:
-            if let price = price {
-                self.info = "\(Int(price)) beneficiaries"
+            if let numOfParticipants = numOfParticipants {
+                self.info = "\(Int(numOfParticipants)) beneficiaries"
             }
         case .Event:
             //attend
@@ -89,6 +86,8 @@ class CompactFeedTableCellModel: FeedTableCellModel {
         case .News:
             fallthrough
         case .Post:
+            fallthrough
+        case .Wallet:
             fallthrough
         case .Unknown:
             break

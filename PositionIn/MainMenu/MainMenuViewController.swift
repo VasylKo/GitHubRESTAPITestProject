@@ -41,11 +41,11 @@ final class MainMenuViewController: UIViewController {
         //TODO: refactor
         return [
             MainMenuItem(title: NSLocalizedString("Home", comment: "Main Menu: Home"), imageName: "MainMenuForYou", action: .ForYou),
-            MainMenuItem(title: NSLocalizedString("Explore", comment: "Main Menu: Explore"), imageName: "MainMenuNew", action: .New),
+            MainMenuItem(title: NSLocalizedString("Feed", comment: "Main Menu: Explore"), imageName: "MainMenuNew", action: .New),
             MainMenuItem(title: NSLocalizedString("Messages", comment: "Main Menu: Messages"), imageName: "MainMenuMessages", action: .Messages),
             MainMenuItem(title: NSLocalizedString("Communities", comment: "Main Menu: Community"), imageName: "MainMenuCommunity", action: .Community),
             MainMenuItem(title: NSLocalizedString("People", comment: "Main Menu: People"), imageName: "MainMenuPeople", action: .People),
-//            MainMenuItem(title: NSLocalizedString("Wallet", comment: "Main Menu: Wallet"), imageName: "MainMenuWallet", action: .Wallet),
+            MainMenuItem(title: NSLocalizedString("Wallet", comment: "Main Menu: Wallet"), imageName: "MainMenuWallet", action: .Wallet),
             MainMenuItem(title: NSLocalizedString("Settings", comment: "Main Menu: Settings"), imageName: "MainMenuSettings", action: .Settings),
         ]
     }
@@ -59,19 +59,27 @@ final class MainMenuViewController: UIViewController {
         }
     }
     
+    private func setActionInMenu(action: SidebarViewController.Action?) {
+        guard let action = action else {
+            return
+        }
+        
+        for (idx, item) in dataSource.items.enumerate() {
+            if item.action == action {
+                let indexPath = NSIndexPath(forRow: idx, inSection: 0)
+                tableView.selectRowAtIndexPath(indexPath, animated: true, scrollPosition: .Top)
+                break
+            }
+        }
+    }
+    
     private func subscribeToNotifications(){
         //Browse mode did change
         let browseModeBlock: NSNotification! -> Void = { [weak self] notification in
             if  let menuController = self,
-                let browseController = notification.object as? BrowseViewController,
+                let browseController = notification.object as? BrowseModeTabbarViewController,
                 let action = menuController.actionForMode(browseController.browseMode) {
-                    for (idx, item) in menuController.dataSource.items.enumerate() {
-                        if item.action == action {
-                            let indexPath = NSIndexPath(forRow: idx, inSection: 0)
-                            menuController.tableView.selectRowAtIndexPath(indexPath, animated: true, scrollPosition: .Top)
-                            break
-                        }
-                    }
+                    self?.setActionInMenu(action)
             } // if
         }
 
@@ -89,6 +97,7 @@ final class MainMenuViewController: UIViewController {
                 if let menuController = self {
                     menuController.dataSource.items = menuController.menuItemsForUser(newProfile)
                     menuController.tableView.reloadData()
+                    self?.setActionInMenu(appDelegate().sidebarViewController?.lastAction)
                 }
             }
         }
@@ -105,6 +114,7 @@ final class MainMenuViewController: UIViewController {
             dispatch_async(dispatch_get_main_queue()) {
                 if let menuController = self {
                     menuController.tableView.reloadData()
+                    self?.setActionInMenu(appDelegate().sidebarViewController?.lastAction)
                 }
             }
         }

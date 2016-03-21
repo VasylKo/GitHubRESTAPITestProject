@@ -40,8 +40,6 @@ class MembershipMemberDetailsViewController : BaseAddItemViewController {
     init(router: MembershipRouter) {
         self.router = router
         super.init(nibName: String(MembershipMemberDetailsViewController.self), bundle: nil)
-        
-        self.initializeForm()
     }
     
     func initializeForm() {
@@ -51,34 +49,31 @@ class MembershipMemberDetailsViewController : BaseAddItemViewController {
         let firstSection = XLFormSectionDescriptor.formSection()
         form.addFormSection(firstSection)
         
-        let IDPassPortNumberRow = XLFormRowDescriptor(tag: Tags.IDPassPortNumber.rawValue, rowType: XLFormRowDescriptorTypeText, title: NSLocalizedString("ID/PassPort Number"))
+        let genderRow : XLFormRowDescriptor = XLFormRowDescriptor(tag: Tags.Gender.rawValue,
+            rowType:XLFormRowDescriptorTypeSelectorPush, title: NSLocalizedString("Gender"))
+        genderRow.required = false
+        var genderSelectorOptions: [XLFormOptionsObject] = []
+        genderSelectorOptions.append(XLFormOptionsObject(value: Gender.Male.rawValue, displayText: Gender.Male.description))
+        genderSelectorOptions.append(XLFormOptionsObject(value: Gender.Female.rawValue, displayText: Gender.Female.description))
+        genderRow.selectorOptions = genderSelectorOptions
+        genderRow.cellConfig["textLabel.textColor"] = UIScheme.mainThemeColor
+        genderRow.cellConfig["tintColor"] = UIScheme.mainThemeColor
+        firstSection.addFormRow(genderRow)
+        
+        let dateOfBirthRow = XLFormRowDescriptor(tag: Tags.DateOfBirth.rawValue, rowType: XLFormRowDescriptorTypeDateInline, title: NSLocalizedString("Date Of Birth"))
+        dateOfBirthRow.required = false
+        dateOfBirthRow.value = nil
+        dateOfBirthRow.cellConfig["maximumDate"] = NSDate()
+        dateOfBirthRow.cellConfig["textLabel.textColor"] = UIScheme.mainThemeColor
+        dateOfBirthRow.cellConfig["tintColor"] = UIScheme.mainThemeColor
+        firstSection.addFormRow(dateOfBirthRow)
+        
+        let IDPassPortNumberRow = XLFormRowDescriptor(tag: Tags.IDPassPortNumber.rawValue, rowType: XLFormRowDescriptorTypeText, title: NSLocalizedString("ID/Passport Number"))
         IDPassPortNumberRow.required = false
         IDPassPortNumberRow.cellConfig["textLabel.textColor"] = UIScheme.mainThemeColor
         IDPassPortNumberRow.cellConfig["tintColor"] = UIScheme.mainThemeColor
         IDPassPortNumberRow.cellConfig["textField.placeholder"] = NSLocalizedString("Optional")
         firstSection.addFormRow(IDPassPortNumberRow)
-        
-        let genderRow : XLFormRowDescriptor = XLFormRowDescriptor(tag: Tags.Gender.rawValue,
-            rowType:XLFormRowDescriptorTypeSelectorPush, title: NSLocalizedString("Gender"))
-        genderRow.required = false
-        var genderSelectorOptions: [XLFormOptionsObject] = []
-        genderSelectorOptions.append(XLFormOptionsObject(value: Gender.Unknown.rawValue, displayText: Gender.Unknown.description))
-        genderSelectorOptions.append(XLFormOptionsObject(value: Gender.Male.rawValue, displayText: Gender.Male.description))
-        genderSelectorOptions.append(XLFormOptionsObject(value: Gender.Female.rawValue, displayText: Gender.Female.description))
-        genderSelectorOptions.append(XLFormOptionsObject(value: Gender.Other.rawValue, displayText: Gender.Other.description))
-        genderRow.selectorOptions = genderSelectorOptions
-        genderRow.value = genderSelectorOptions.first
-        genderRow.cellConfig["textLabel.textColor"] = UIScheme.mainThemeColor
-        genderRow.cellConfig["tintColor"] = UIScheme.mainThemeColor
-        firstSection.addFormRow(genderRow)
-
-        let dateOfBirthRow = XLFormRowDescriptor(tag: Tags.DateOfBirth.rawValue, rowType: XLFormRowDescriptorTypeDateInline, title: NSLocalizedString("Date Of Birth"))
-        dateOfBirthRow.required = false
-        dateOfBirthRow.value = NSDate()
-        dateOfBirthRow.cellConfig["maximumDate"] = NSDate()
-        dateOfBirthRow.cellConfig["textLabel.textColor"] = UIScheme.mainThemeColor
-        dateOfBirthRow.cellConfig["tintColor"] = UIScheme.mainThemeColor
-        firstSection.addFormRow(dateOfBirthRow)
         
         // Second section
         let secondSection = XLFormSectionDescriptor.formSection()
@@ -93,7 +88,7 @@ class MembershipMemberDetailsViewController : BaseAddItemViewController {
         
         let postalAddressRow = locationRowDescriptor(Tags.PostalAddress.rawValue)
         postalAddressRow.required = false
-        postalAddressRow.title = NSLocalizedString("Postal address")
+        postalAddressRow.title = NSLocalizedString("Postal Address")
         postalAddressRow.cellConfig["textLabel.textColor"] = UIScheme.mainThemeColor
         postalAddressRow.cellConfig["tintColor"] = UIScheme.mainThemeColor
         secondSection.addFormRow(postalAddressRow)
@@ -108,12 +103,23 @@ class MembershipMemberDetailsViewController : BaseAddItemViewController {
         // Third section
         let thirdSection = XLFormSectionDescriptor.formSection()
         form.addFormSection(thirdSection)
+
         
-        let educationLevelRow = XLFormRowDescriptor(tag: Tags.EducationLevel.rawValue, rowType: XLFormRowDescriptorTypeText, title: NSLocalizedString("Education Level"))
+        let educationLevelRow : XLFormRowDescriptor = XLFormRowDescriptor(tag: Tags.EducationLevel.rawValue,
+            rowType:XLFormRowDescriptorTypeSelectorPush, title: NSLocalizedString("Education Level"))
         educationLevelRow.required = false
+        var educationLevelSelectorOptions: [XLFormOptionsObject] = []
+        educationLevelSelectorOptions.append(XLFormOptionsObject(value: EducationLevel.PrimarySchool.rawValue, displayText: EducationLevel.PrimarySchool.description))
+        educationLevelSelectorOptions.append(XLFormOptionsObject(value: EducationLevel.SecondarySchool.rawValue, displayText: EducationLevel.SecondarySchool.description))
+        educationLevelSelectorOptions.append(XLFormOptionsObject(value: EducationLevel.HighSchool.rawValue, displayText: EducationLevel.HighSchool.description))
+        educationLevelSelectorOptions.append(XLFormOptionsObject(value: EducationLevel.Diploma.rawValue, displayText: EducationLevel.Diploma.description))
+        educationLevelSelectorOptions.append(XLFormOptionsObject(value: EducationLevel.Undergraduate.rawValue, displayText: EducationLevel.Undergraduate.description))
+        educationLevelSelectorOptions.append(XLFormOptionsObject(value: EducationLevel.PostGraduateDiploma.rawValue, displayText: EducationLevel.PostGraduateDiploma.description))
+        educationLevelSelectorOptions.append(XLFormOptionsObject(value: EducationLevel.Masters.rawValue, displayText: EducationLevel.Masters.description))
+        educationLevelSelectorOptions.append(XLFormOptionsObject(value: EducationLevel.PHD.rawValue, displayText: EducationLevel.PHD.description))
+        educationLevelRow.selectorOptions = educationLevelSelectorOptions
         educationLevelRow.cellConfig["textLabel.textColor"] = UIScheme.mainThemeColor
         educationLevelRow.cellConfig["tintColor"] = UIScheme.mainThemeColor
-        educationLevelRow.cellConfig["textField.placeholder"] = NSLocalizedString("Optional")
         thirdSection.addFormRow(educationLevelRow)
         
         let professionRow = XLFormRowDescriptor(tag: Tags.Profession.rawValue, rowType: XLFormRowDescriptorTypeText, title: NSLocalizedString("Profession"))
@@ -125,11 +131,25 @@ class MembershipMemberDetailsViewController : BaseAddItemViewController {
         
         self.form = form
         
-        api().getMyProfile().onSuccess { [weak self] profile in
-            if let strongSelf = self {
-                strongSelf.userProfile = profile
-            }
+        tableView.reloadData()
+    }
+    
+    func fillFormFromUserProfileModel() {
+        if let gender = userProfile?.gender {
+             form.formRowWithTag(Tags.Gender.rawValue)?.value = XLFormOptionsObject(value: gender.rawValue, displayText: gender.description)
         }
+        
+        form.formRowWithTag(Tags.DateOfBirth.rawValue)?.value = userProfile?.dateOfBirth
+        form.formRowWithTag(Tags.IDPassPortNumber.rawValue)?.value = userProfile?.passportNumber
+        
+        // locationRow
+        // postalAddressRow
+        form.formRowWithTag(Tags.PermanentResidence.rawValue)?.value = userProfile?.permanentResidence
+        
+        if let educationLevel = userProfile?.educationLevel {
+            form.formRowWithTag(Tags.EducationLevel.rawValue)?.value = XLFormOptionsObject(value: educationLevel.rawValue, displayText: educationLevel.description)
+        }
+        form.formRowWithTag(Tags.Profession.rawValue)?.value = userProfile?.profession
     }
     
     required init?(coder: NSCoder) {
@@ -140,7 +160,7 @@ class MembershipMemberDetailsViewController : BaseAddItemViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.loadData()
         self.setupInterface()
     }
     
@@ -166,29 +186,34 @@ class MembershipMemberDetailsViewController : BaseAddItemViewController {
         self.view.addSubview(pageView)
     }
     
+    func loadData() {
+        api().getMyProfile().onSuccess { [weak self] profile in
+            if let strongSelf = self {
+                strongSelf.userProfile = profile
+                strongSelf.initializeForm()
+                strongSelf.fillFormFromUserProfileModel()
+            }
+        }
+    }
+
+    
     //MARK: Target-Action
     
     @IBAction func didTapDone(sender: AnyObject) {
         let values = formValues()
         
         if let userProfile = self.userProfile {
-            if let genderRawValue = (values[Tags.Gender.rawValue] as? NSNumber)?.integerValue {
-                userProfile.gender = Gender(rawValue: genderRawValue)
-            }
-            userProfile.dateOfBirth = values[Tags.Gender.rawValue] as? NSDate
-            userProfile.passportNumber = values[Tags.DateOfBirth.rawValue] as? String
+            userProfile.gender = (values[Tags.Gender.rawValue] as? XLFormOptionsObject).flatMap { $0.gender }
+            userProfile.dateOfBirth = values[Tags.DateOfBirth.rawValue] as? NSDate
+            userProfile.passportNumber = values[Tags.IDPassPortNumber.rawValue] as? String
             if let locationCoordinates = (values[Tags.Location.rawValue] as? CLLocation)?.coordinate {
                 var location = Location()
                 location.coordinates = locationCoordinates
                 userProfile.location = location
             }
-            if let postalAddressCoordinates = (values[Tags.PostalAddress.rawValue] as? CLLocation)?.coordinate {
-                var postalAddress = Location()
-                postalAddress.coordinates = postalAddressCoordinates
-                userProfile.postalAddress = postalAddress
-            }
+            //userProfile.postalAddress = values[Tags.PostalAddress.rawValue] as? String
             userProfile.permanentResidence = values[Tags.PermanentResidence.rawValue] as? String
-            userProfile.educationLevel = values[Tags.EducationLevel.rawValue] as? String
+            userProfile.educationLevel = (values[Tags.EducationLevel.rawValue] as? XLFormOptionsObject).flatMap { $0.educationLevel }
             userProfile.profession = values[Tags.Profession.rawValue] as? String
 
             api().updateMyProfile(userProfile).onSuccess(callback: { [weak self] _ in

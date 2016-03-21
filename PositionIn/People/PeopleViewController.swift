@@ -141,7 +141,7 @@ final class PeopleListDataSource: TableViewDataSource {
 
     
     func setUserList(users: [UserInfo]) {
-        items = users.map { UserInfoTableViewCellModel(userInfo: $0) }
+        items = users.sort{ $0.title < $1.title }.map{ UserInfoTableViewCellModel(userInfo: $0) }
     }
     
     override func configureTable(tableView: UITableView) {

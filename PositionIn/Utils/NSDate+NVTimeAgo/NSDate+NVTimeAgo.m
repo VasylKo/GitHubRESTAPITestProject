@@ -7,6 +7,7 @@
 //
 
 #import "NSDate+NVTimeAgo.h"
+#import "NSDate+TimeZone.h"
 
 @implementation NSDate (NVFacebookTimeAgo)
 
@@ -28,8 +29,11 @@
     //http://stackoverflow.com/questions/10026714/ios-converting-a-date-received-from-a-mysql-server-into-users-local-time
     //If this is not in UTC, we don't have any knowledge about
     //which tz it is. MUST BE IN UTC.
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    static NSDateFormatter *formatter = nil;
+    if (!formatter) {
+        formatter = [NSDateFormatter new];
+        [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    }
     
     NSDate *date = [formatter dateFromString:mysqlDatetime];
     
@@ -44,13 +48,14 @@
  */
 - (NSString *)formattedAsTimeAgo
 {    
-    //Now
+    // Now date in local time
     NSDate *now = [NSDate date];
+    
     NSTimeInterval secondsSince = -(int)[self timeIntervalSinceDate:now];
     
     // Today = "1:28 PM"
     if([self isSameDayAs:now])
-        return [self formatAsToday:secondsSince];
+        return [self formatAsToday];
  
     
     // Yesterday = "Yesterday"
@@ -67,7 +72,72 @@
     
 }
 
+/*
+ Formatted As Feed Time
+ */
+- (NSString *)formattedAsFeedTime
+{
+    // Now date in local time
+    NSDate *now = [NSDate date];
+    
+    NSTimeInterval secondsSince = -(int)[self timeIntervalSinceDate:now];
+    
+    // < 1 minute
+    if(secondsSince < MINUTE)
+        return @"Just now";
+    
+    // < 1 hour
+    if(secondsSince < HOUR) {
+        int minutes = floor(secondsSince / MINUTE);
+        return [NSString stringWithFormat:@"%i minutes ago", minutes];
+    }
+    
+    // < 2 hours
+    if(secondsSince < HOUR * 2.)
+        return @"1 hour";
+    
+    // Today
+    if([self isSameDayAs:now]) {
+        int hours = floor(secondsSince / HOUR);
+        return [NSString stringWithFormat:@"%i hours ago", hours];
+    }
+    
+    // Yesterday
+    if([self isYesterday:now])
+        return [self formatAsYesterday];
+    
+    // < 1 year
+    if(secondsSince < YEAR)
+        return [self formatAsOther];
+    
+    // < 2 years
+    if(secondsSince < YEAR * 2.)
+        return @"1 year ago";
+    
+    // Anything else
+    int years = floor(secondsSince / YEAR);
+    return [NSString stringWithFormat:@"%i years ago", years];
+}
 
+
+/*
+ Formatted As Comment Time
+ */
+- (NSString *)formattedAsCommentTime {
+    // Now date in local time
+    NSDate *now = [NSDate date];
+    
+    // Today
+    if([self isSameDayAs:now])
+        return [self formatAsToday];
+    
+    // Yesterday
+    if ([self isYesterday:now])
+        return [self formatAsYesterday];
+    
+    // Anything else
+    return [self formatAsOther];
+}
 
 /*
  ========================== Date Comparison Methods ==========================
@@ -80,8 +150,11 @@
 - (BOOL)isSameDayAs:(NSDate *)comparisonDate
 {
     //Check by matching the date strings
-    NSDateFormatter *dateComparisonFormatter = [[NSDateFormatter alloc] init];
-    [dateComparisonFormatter setDateFormat:@"yyyy-MM-dd"];
+    static NSDateFormatter *dateComparisonFormatter = nil;
+    if (!dateComparisonFormatter) {
+        dateComparisonFormatter = [NSDateFormatter new];
+        [dateComparisonFormatter setDateFormat:@"yyyy-MM-dd"];
+    }
     
     //Return true if they are the same
     return [[dateComparisonFormatter stringFromDate:self] isEqualToString:[dateComparisonFormatter stringFromDate:comparisonDate]];
@@ -174,12 +247,16 @@
 
 
 // Today = "time format"
-- (NSString *)formatAsToday:(NSTimeInterval)secondsSince
+- (NSString *)formatAsToday
 {
     //Create date formatter
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    static NSDateFormatter *dateFormatter = nil;
+    static NSString *format = nil;
+    if (!dateFormatter) {
+        dateFormatter = [NSDateFormatter new];
+        format = [NSDateFormatter dateFormatFromTemplate:@"j" options:0 locale:[NSLocale currentLocale]];
+    }
     
-    NSString *format = [NSDateFormatter dateFormatFromTemplate:@"j" options:0 locale:[NSLocale currentLocale]];
     BOOL is24Hour = ([format rangeOfString:@"a"].location == NSNotFound);
     //Format
     if (is24Hour) {
@@ -194,8 +271,14 @@
 // Yesterday = "Yesterday"
 - (NSString *)formatAsYesterday
 {
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    NSString *format = [NSDateFormatter dateFormatFromTemplate:@"j" options:0 locale:[NSLocale currentLocale]];
+    //Create date formatter
+    static NSDateFormatter *dateFormatter = nil;
+    static NSString *format = nil;
+    if (!dateFormatter) {
+        dateFormatter = [NSDateFormatter new];
+        format = [NSDateFormatter dateFormatFromTemplate:@"j" options:0 locale:[NSLocale currentLocale]];
+    }
+    
     BOOL is24Hour = ([format rangeOfString:@"a"].location == NSNotFound);
     //Format
     if (is24Hour) {
@@ -211,12 +294,13 @@
 - (NSString *)formatAsLastWeek
 {
     //Create date formatter
-
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    static NSDateFormatter *dateFormatter = nil;
+    static NSString *format = nil;
+    if (!dateFormatter) {
+        dateFormatter = [NSDateFormatter new];
+        format = [NSDateFormatter dateFormatFromTemplate:@"j" options:0 locale:[NSLocale currentLocale]];
+    }
     
-    //Format
-    
-    NSString *format = [NSDateFormatter dateFormatFromTemplate:@"j" options:0 locale:[NSLocale currentLocale]];
     BOOL is24Hour = ([format rangeOfString:@"a"].location == NSNotFound);
     //Format
     if (is24Hour) {
@@ -232,10 +316,12 @@
 - (NSString *)formatAsLastMonth
 {
     //Create date formatter
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    
-    //Format
-    NSString *format = [NSDateFormatter dateFormatFromTemplate:@"j" options:0 locale:[NSLocale currentLocale]];
+    static NSDateFormatter *dateFormatter = nil;
+    static NSString *format = nil;
+    if (!dateFormatter) {
+        dateFormatter = [NSDateFormatter new];
+        format = [NSDateFormatter dateFormatFromTemplate:@"j" options:0 locale:[NSLocale currentLocale]];
+    }
     
     BOOL is24Hour = ([format rangeOfString:@"a"].location == NSNotFound);
     //Format
@@ -244,7 +330,6 @@
     } else {
         [dateFormatter setDateFormat:@"MMMM d, h:mm a"];
     }
-    return [NSString stringWithFormat:@"%@", [dateFormatter stringFromDate:self]];
     return [dateFormatter stringFromDate:self];
 }
 
@@ -253,10 +338,11 @@
 - (NSString *)formatAsLastYear
 {
     //Create date formatter
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    
-    //Format
-    [dateFormatter setDateFormat:@"MMMM d"];
+    static NSDateFormatter *dateFormatter = nil;
+    if (!dateFormatter) {
+        dateFormatter = [NSDateFormatter new];
+        [dateFormatter setDateFormat:@"MMMM d"];
+    }
     return [dateFormatter stringFromDate:self];
 }
 
@@ -264,11 +350,13 @@
 - (NSString *)formatAsOther
 {
     //Create date formatter
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    
-    //Format
-    
-    NSString *format = [NSDateFormatter dateFormatFromTemplate:@"j" options:0 locale:[NSLocale currentLocale]];
+    static NSDateFormatter *dateFormatter = nil;
+    static NSString *format = nil;
+    if (!dateFormatter) {
+        dateFormatter = [NSDateFormatter new];
+        format = [NSDateFormatter dateFormatFromTemplate:@"j" options:0 locale:[NSLocale currentLocale]];
+    }
+
     BOOL is24Hour = ([format rangeOfString:@"a"].location == NSNotFound);
     //Format
     if (is24Hour) {

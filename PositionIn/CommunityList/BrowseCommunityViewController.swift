@@ -71,7 +71,7 @@ class BrowseCommunityViewController: BesideMenuViewController, BrowseCommunityAc
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        reloadData()
+        self.reloadData()
     }
     
     private var firstLoad: Bool = true
@@ -79,7 +79,7 @@ class BrowseCommunityViewController: BesideMenuViewController, BrowseCommunityAc
     var browseMode: BrowseMode = .MyGroups {
         didSet {
             browseModeSegmentedControl.selectedSegmentIndex = browseMode.rawValue
-            reloadData()
+            self.reloadData()
         }
     }
     
@@ -140,7 +140,7 @@ class BrowseCommunityViewController: BesideMenuViewController, BrowseCommunityAc
         super.contentDidChange(sender, info: info)
         ConversationManager.sharedInstance().refresh()
         if isViewLoaded() {
-            reloadData()
+            self.reloadData()
         }
     }
     

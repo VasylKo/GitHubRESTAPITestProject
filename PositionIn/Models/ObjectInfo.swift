@@ -77,7 +77,7 @@ class UserInfo: ObjectInfo {
     
     override func mapping(map: Map) {
         super.mapping(map)
-        avatar <- (map["avatar"], AmazonURLTransform())
+        avatar <- (map["avatar"], ImageURLTransform())
         isCommunity <- map["isCommunity"]
         role <- (map["role"], EnumTransform())
     }

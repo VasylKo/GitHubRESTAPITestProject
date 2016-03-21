@@ -16,7 +16,6 @@ class MarketPaymentView: XLFormBaseCell {
     var price: NSNumber? {
         didSet {
             if let price = price {
-                self.subtotalLabel.text = String(price)
                 self.totalLabel.text = String(price)
             }
         }
@@ -52,6 +51,5 @@ class MarketPaymentView: XLFormBaseCell {
     @IBOutlet private weak var itemNameLabel: UILabel!
     @IBOutlet private weak var pickUpAvailabilityLabel: UILabel!
     @IBOutlet private weak var quintityLabel: UILabel!
-    @IBOutlet private weak var subtotalLabel: UILabel!
     @IBOutlet private weak var totalLabel: UILabel!
 }

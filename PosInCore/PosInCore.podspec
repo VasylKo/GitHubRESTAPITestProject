@@ -11,4 +11,6 @@ Pod::Spec.new do |s|
   s.dependency 'ObjectMapper', '~> 1.0'
   s.dependency 'BrightFutures', '~> 3.0'
   s.requires_arc = true
+  s.homepage='http://positionin.com'
+  s.source={ :git => 'https://github.com/solunalabs/position-in-ios.git'}
 end

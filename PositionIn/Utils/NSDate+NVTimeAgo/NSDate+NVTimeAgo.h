@@ -41,20 +41,6 @@
     4/18/2013
     You can contact me on: www.nikilster.com
  
- 
- 
-    Date Format
-    -----------
-     < 1 minute       	= "Just now"
-     < 1 hour         	= "x minutes ago"
-     Today            	= "x hours ago"
-     Yesterday        	= "Yesterday at 1:28pm"
-     < Last 7 days    	= "Friday at 1:48am"
-     < Last 30 days   	= "March 30 at 1:14 pm"
-     < 1 year         	= "September 15"
-     Anything else    	= "September 9, 2011"
- 
- 
 */
 
 #import <Foundation/Foundation.h>
@@ -71,8 +57,48 @@
 /*
     Formatted As Time Ago
     Returns the time formatted as Time Ago (in the style of Facebook's mobile date formatting)
+    
+    Time Ago Date Format
+    -----------
+    < 1 minute       	= "Just now"
+    < 1 hour         	= "x minutes ago"
+    Today            	= "x hours ago"
+    Yesterday        	= "Yesterday at 1:28pm"
+    < Last 7 days    	= "Friday at 1:48am"
+    < Last 30 days   	= "March 30 at 1:14 pm"
+    < 1 year         	= "September 15"
+    Anything else    	= "September 9, 2011"
  */
 - (NSString *)formattedAsTimeAgo;
 
+/*
+     Formatted As Feed Time
+     Returns the time formatted as Feed Time (in the style of Facebook's mobile date formatting)
+ 
+     Feed Time Date Format
+     -----------
+     < 1 minute       	= "Just now"
+     < 1 hour         	= "x minutes ago"
+     < 2 hour         	= "1 hour ago"
+     Today              = "x hours ago"
+     Yesterday        	= "yesterday"
+     < 1 year         	= "Mar 8 at 9:26am"
+     < 2 year           = "1 year ago"
+     Anything else      = "x years ago"
+ */
+- (NSString *)formattedAsFeedTime;
+
+/*
+ Formatted As Comment Time
+ Returns the time formatted as Feed Time (in the style of Facebook's mobile date formatting)
+ 
+ Comment Time Date Format
+ -----------
+ Today              = "Today, 9:26am"
+ Yesterday          = "Yesterday, 9:26am"
+ Anything else      = "Mar 8 at 9:26am"
+ 
+ */
+- (NSString *)formattedAsCommentTime;
 
 @end

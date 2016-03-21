@@ -33,7 +33,7 @@ final class APIDateTransform: DateFormatterTransform {
     
     init() {
         let formatter = NSDateFormatter()
-        formatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
+        formatter.timeZone = NSTimeZone(abbreviation: "UTC")
         formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
         
         super.init(dateFormatter: formatter)
@@ -41,9 +41,9 @@ final class APIDateTransform: DateFormatterTransform {
     
 }
 
-class AmazonURLTransform: RelativeURLTransform {
+class ImageURLTransform: RelativeURLTransform {
     init() {
-        super.init(baseURL: AppConfiguration().amazonURL)
+        super.init(baseURL: AppConfiguration().imageBaseURL)
     }
 }
 

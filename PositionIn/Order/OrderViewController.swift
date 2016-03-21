@@ -10,10 +10,41 @@ import UIKit
 import Braintree
 
 class OrderViewController: UITableViewController, SelectPaymentMethodControllerDelegate {
-    var product: Product?
+    // MARK: - IBOutlets
+    @IBOutlet weak var paymentMethodLabel: UILabel!
+    @IBOutlet weak var itemImageView: UIImageView!
+    @IBOutlet weak var itemNameLabel: UILabel!
+    @IBOutlet weak var quantityStepper: UIStepper!
+    @IBOutlet weak var quantityLabel: UILabel!
+    @IBOutlet weak var totalLabel: UILabel!
+    @IBOutlet weak var dateTimeLabel: UILabel!
+    @IBOutlet weak var proceedToPayButton: UIButton!
+    
+    // MARK: - Internal properties
+    internal var product: Product?
+    
+    // MARK: - Private properties
     private var clientToken: String?
     private var finishedSuccessfully = false
-
+    lazy private var quantityFormatter: NSNumberFormatter = {
+        let formatter = NSNumberFormatter()
+        formatter.numberStyle = .DecimalStyle
+        return formatter
+    }()
+    
+    private var cardItem: CardItem?
+    private var braintreeClient: BTAPIClient?
+    
+    private var quantity: Int {
+        return Int(round(quantityStepper.value))
+    }
+    
+    private var quantityString: String {
+        return (quantityFormatter.stringFromNumber(NSNumber(integer: quantity)) ?? "") +
+            NSLocalizedString(" (Out of \(self.product?.quantity ?? 0) available)")
+    }
+    
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -22,12 +53,14 @@ class OrderViewController: UITableViewController, SelectPaymentMethodControllerD
             self?.initializeBrainTree()
         }
         
+        self.tableView.tableFooterView = UIView(frame: CGRectZero)
+        
         if let product = self.product {
             self.quantityStepper.maximumValue = Double(product.quantity ?? 1)
             
             itemNameLabel.text = product.name
             let url = product.imageURL
-            let image = product.category?.productPlaceholderImage()
+            let image = UIImage(named: "market_img_default")
             itemImageView.setImageFromURL(url, placeholder: image)
 
 
@@ -43,59 +76,42 @@ class OrderViewController: UITableViewController, SelectPaymentMethodControllerD
         updateLabels()
     }
 
-    @IBAction func quantityStepperDidChange(sender: UIStepper) {
-        updateLabels()
-    }
-
+    // MARK: - Private functions
     private func updateLabels() {
         quantityLabel.text = quantityString
         if let price = product?.price {
-            let subtotal: Float = price * Float(quantity)
-            subtotalLabel.text = AppConfiguration().currencyFormatter.stringFromNumber(NSNumber(float: subtotal))
-            let tax: Float = 0
-            taxLabel.text = AppConfiguration().currencyFormatter.stringFromNumber(NSNumber(float: tax))
-            let fee: Float = 0
-            feeLabel.text = AppConfiguration().currencyFormatter.stringFromNumber(NSNumber(float: fee))
-            let total = subtotal + tax + fee
+            let total = price * Float(quantity)
             totalLabel.text = AppConfiguration().currencyFormatter.stringFromNumber(NSNumber(float: total))
         } else {
-            subtotalLabel.text = nil
-            taxLabel.text = nil
-            feeLabel.text = nil
             totalLabel.text = nil
         }
     }
     
-    @IBOutlet private weak var paymentMethodLabel: UILabel!
-    @IBOutlet private weak var itemImageView: UIImageView!
-    @IBOutlet private weak var itemNameLabel: UILabel!
-    @IBOutlet private weak var quantityStepper: UIStepper!
-    @IBOutlet private weak var quantityLabel: UILabel!
-    @IBOutlet private weak var feeLabel: UILabel!
-    @IBOutlet private weak var totalLabel: UILabel!
-    @IBOutlet private weak var taxLabel: UILabel!
-    @IBOutlet private weak var subtotalLabel: UILabel!
+    private func updateStateOfActionButton() {
+        var enableAction = quantity > 0
+        enableAction = enableAction && cardItem != nil
+        
+        let actionBGColor = enableAction ? UIScheme.enableActionColor : UIScheme.disableActionColor
+        proceedToPayButton.backgroundColor = actionBGColor
+        proceedToPayButton.enabled = enableAction
+    }
     
-    @IBOutlet private weak var dateTimeLabel: UILabel!
-
-    lazy private var quantityFormatter: NSNumberFormatter = {
-        let formatter = NSNumberFormatter()
-        formatter.numberStyle = .DecimalStyle
-        return formatter
-    }()
-
-    private var cardItem: CardItem?
-    private var braintreeClient: BTAPIClient?
-
-    private var quantity: Int {
-        return Int(round(quantityStepper.value))
+    private func dismissPaymentsController() {
+        dismissViewControllerAnimated(true, completion: nil)
     }
-
-    private var quantityString: String {
-        return (quantityFormatter.stringFromNumber(NSNumber(integer: quantity)) ?? "") +
-            NSLocalizedString(" (Out of \(self.product?.quantity ?? 0) available)")
+    
+    private func initializeBrainTree() {
+        if let clientToken = clientToken {
+            self.braintreeClient = BTAPIClient(authorization: clientToken)
+        }
     }
-
+    
+    // MARK: - Actions
+    @IBAction func quantityStepperDidChange(sender: UIStepper) {
+        updateLabels()
+        updateStateOfActionButton()
+    }
+    
     @IBAction func selectPaymentTouched(sender: AnyObject) {
         let controller: SelectPaymentMethodController = SelectPaymentMethodController()
         controller.delegate = self
@@ -103,7 +119,6 @@ class OrderViewController: UITableViewController, SelectPaymentMethodControllerD
     }
     
     @IBAction func didTapCheckout(sender: AnyObject) {
-        
         if let braintreeClient = braintreeClient,
         cardItem = cardItem {
             switch cardItem {
@@ -137,35 +152,26 @@ class OrderViewController: UITableViewController, SelectPaymentMethodControllerD
     func paymentMethodSelected(cardItem: CardItem) {
         self.cardItem = cardItem
         self.paymentMethodLabel.text = CardItem.cardName(cardItem)
+        updateStateOfActionButton()
     }
 
     @IBAction func userDidCancelPayment(sender: AnyObject) {
         dismissPaymentsController()
     }
-
-    private func dismissPaymentsController() {
-        dismissViewControllerAnimated(true, completion: nil)
-    }
-
-    private func initializeBrainTree() {
-        if let clientToken = clientToken {
-            self.braintreeClient = BTAPIClient(authorization: clientToken)
-        }
-    }
     
+    // MARK: - UITableViewDelegate
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         let height = super.tableView(tableView, heightForRowAtIndexPath: indexPath)
-        //hide availability date cell
-        if indexPath.row == 1 && self.product?.startDate == nil && self.product?.endData == nil {
+        // hide availability date cell
+        if indexPath.section == 0 && indexPath.row == 1 && self.product?.startDate == nil && self.product?.endData == nil {
             return 0.0
         }
         return height
     }
 }
 
-
+// MARK: - BTDropInViewControllerDelegate
 extension OrderViewController: BTDropInViewControllerDelegate {
-    
     func dropInViewController(viewController: BTDropInViewController, didSucceedWithTokenization paymentMethodNonce: BTPaymentMethodNonce) {
         //TODO: should refactor
         let amount = product?.price!

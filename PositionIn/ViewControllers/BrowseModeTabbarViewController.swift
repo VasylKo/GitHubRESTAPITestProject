@@ -44,20 +44,13 @@ protocol BrowseModeDisplay {
             let browseGridController = Storyboards.Main.instantiateBrowseGridViewController()
             browseGridController.browseGridDelegate = self
             self.searchbar.attributedText = nil
+            self.navigationController?.navigationBar.barTintColor = UIColor.bt_colorWithBytesR(237, g: 27, b: 46)
             return browseGridController
         case .New:
-            super.setRightBarItems()
-            switch self.displayMode {
-            case .Map:
-                let mapController = Storyboards.Main.instantiateBrowseMapViewController()
-                mapController.delegate = self
-                return mapController
-            case .List:
-                let listController = Storyboards.Main.instantiateBrowseListViewController()
-                listController.hideSeparatorLinesNearSegmentedControl = true
-                listController.showCardCells = true
-                return listController
-            }
+            let listController = FeedListViewController(nibName: "FeedListViewController", bundle: nil)
+            self.navigationController?.navigationBar.barTintColor = UIColor.blackColor()
+            self.navigationItem.rightBarButtonItems = nil
+            return listController
         }
     }
     
@@ -231,7 +224,10 @@ protocol BrowseModeDisplay {
             let controller = Storyboards.Main.instantiateExploreViewControllerId()
             let filterUpdate = { (filter: SearchFilter) -> SearchFilter in
                 var f = filter
-                f.homeItemType = itemType
+                let feedItemType = FeedItem.ItemType(rawValue: itemType.rawValue)
+                if let feedItemType = feedItemType {
+                    f.itemTypes = [feedItemType]
+                }
                 return f
             }
             controller.childFilterUpdate = filterUpdate
@@ -249,6 +245,8 @@ protocol BrowseModeDisplay {
 //MARK: - BrowseTabbarDelegate -
     
     @objc func tabbarDidChangeMode(tabbar: BrowseTabbar) {
-        browseMode = tabbar.selectedMode
+        if (browseMode != tabbar.selectedMode) {
+            browseMode = tabbar.selectedMode
+        }
     }
 }

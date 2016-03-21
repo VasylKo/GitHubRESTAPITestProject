@@ -11,7 +11,7 @@ import CleanroomLogger
 
 //TODO: clean from invalid ivars
 
-struct FeedItem: CRUDObject {
+class FeedItem: CRUDObject {
     var objectId: CRUDObjectId = CRUDObjectInvalidId
     var name: String?
     var descr: String?
@@ -31,7 +31,9 @@ struct FeedItem: CRUDObject {
     var numOfLikes: Int?
     var isLiked: Bool = false
     var numOfComments: Int?
+    var numOfBeneficiaries: Int?
     var numOfParticipants: Int?
+    
     var itemData: Any? {
         return author
     }
@@ -43,7 +45,7 @@ struct FeedItem: CRUDObject {
         self.price = price
     }
     
-    init?(_ map: Map) {
+    required init?(_ map: Map) {
         mapping(map)
         if objectId == CRUDObjectInvalidId {
             Log.error?.message("Error while parsing object")
@@ -53,7 +55,7 @@ struct FeedItem: CRUDObject {
         }
     }
     
-    mutating func mapping(map: Map) {
+    func mapping(map: Map) {
         objectId <- (map["id"], CRUDObjectIdTransform())
         name <- map["name"]
         descr <- map["desctiption"]
@@ -67,12 +69,13 @@ struct FeedItem: CRUDObject {
         author <- map["author"]
         community <- (map["community"], CRUDObjectIdTransform())
         date <- (map["date"], APIDateTransform())
-        image <- (map["image"], AmazonURLTransform())
+        image <- (map["image"], ImageURLTransform())
         type <- (map["type"], EnumTransform())
         location <- map["location"]
         isLiked <- map["isLiked"]
         numOfLikes <- map["numOfLikes"]
         numOfComments <- map["numOfComments"]
+        numOfBeneficiaries <- map["numOfBeneficiaries"]
         numOfParticipants <- map["numOfParticipants"]
     }
     
@@ -92,6 +95,7 @@ struct FeedItem: CRUDObject {
         case News
         case Market
         case Post
+        case Wallet
         
         var description: String {
             switch self {
@@ -117,6 +121,8 @@ struct FeedItem: CRUDObject {
                 return "Volunteer"
             case Post:
                 return "Post"
+            case Wallet:
+                return "Wallet"
             }
         
         }

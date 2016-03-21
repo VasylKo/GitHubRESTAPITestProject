@@ -110,11 +110,8 @@ final class BrowseListViewController: UIViewController, BrowseActionProducer, Br
         dataRequestToken.invalidate()
         dataRequestToken = InvalidationToken()
         
-        var homeItem = HomeItem.Unknown
-        if let tempHomeItem = searchFilter.homeItemType {
-            homeItem = tempHomeItem
-        }
-        
+        //MARK: should refactor
+        let homeItem = HomeItem.Unknown
         let request: Future<CollectionResponse<FeedItem>,NSError> = api().getAll(homeItem, seachFilter: self.filter)
         
         request.onSuccess(dataRequestToken.validContext) {

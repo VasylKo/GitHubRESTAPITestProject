@@ -68,7 +68,8 @@ class VoiceVerificationViewController: XLFormViewController {
         voiceVerificationRow.action.formBlock = { [weak self] row in
             if let phoneNumber = self?.phoneNumber {
                 //2 - api type for phone validation call call
-                api().verifyPhone(phoneNumber, type: NSNumber(int: 2))
+                let phoneCallCode = NSNumber(int: 2)
+                api().verifyPhone(phoneNumber, type: phoneCallCode)
             }
         }
         voiceCallSection.addFormRow(voiceVerificationRow)

@@ -26,6 +26,7 @@ class DonateViewController: XLFormViewController, PaymentReponseDelegate {
     private var paymentType:String?
     private var finishedSuccessfully = false
     private var errorSection:XLFormSectionDescriptor?
+    private weak var confirmRowDescriptor: XLFormRowDescriptor?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,8 +38,9 @@ class DonateViewController: XLFormViewController, PaymentReponseDelegate {
         super.viewDidAppear(animated)
         if(finishedSuccessfully) {
             let paymentCompleteController = Storyboards.Onboarding.instantiatePaymentCompletedViewController()
-            paymentCompleteController.projectName = self.product?.name
+            paymentCompleteController.projectName = self.product?.name ?? NSLocalizedString("Kenya Red Cross Society")
             paymentCompleteController.projectIconURL = self.product?.imageURL
+            paymentCompleteController.amountDonation = amount
             
             self.navigationController?.pushViewController(paymentCompleteController, animated: true)
         }
@@ -96,6 +98,7 @@ class DonateViewController: XLFormViewController, PaymentReponseDelegate {
                 self?.amount = 0
             }
         }
+        donationRow.addValidator(DonateValidator())
         
         donatationSection.addFormRow(donationRow)
         
@@ -104,7 +107,7 @@ class DonateViewController: XLFormViewController, PaymentReponseDelegate {
         
         let paymentRow: XLFormRowDescriptor = XLFormRowDescriptor(tag: Tags.Payment.rawValue,
             rowType: XLFormRowDescriptorTypeSelectorPush, title: NSLocalizedString("Select payment method", comment: "Payment"))
-        
+        paymentRow.required = true
         paymentRow.action.viewControllerClass = SelectPaymentMethodController.self
         paymentRow.valueTransformer = CardItemValueTrasformer.self
         paymentRow.value = nil
@@ -125,18 +128,22 @@ class DonateViewController: XLFormViewController, PaymentReponseDelegate {
         let confirmRow: XLFormRowDescriptor = XLFormRowDescriptor(tag: Tags.Confirm.rawValue,
             rowType: XLFormRowDescriptorTypeButton,
             title: NSLocalizedString("Proceed to Donate"))
-        
-        confirmRow.cellConfig["backgroundColor"] = UIScheme.mainThemeColor
+        confirmRowDescriptor = confirmRow
+        confirmRow.disabled = true
+        confirmRow.cellConfig["backgroundColor"] = UIScheme.disableActionColor
         confirmRow.cellConfig["textLabel.color"] = UIColor.whiteColor()
         confirmRow.cellConfig["textLabel.textAlignment"] =  NSTextAlignment.Center.rawValue
 
-        confirmRow.action.formBlock = { [weak self] (sender: XLFormRowDescriptor!) -> Void in
-            if (self?.paymentType != nil && self?.amount != 0) {
-                self!.performSegueWithIdentifier("Show\((self?.paymentType)!)", sender: self!)
-                self?.setError(true, error: nil)
+        confirmRow.action.formBlock = { [weak self] row in
+            self?.deselectFormRow(row)
+            
+            let validationErrors : Array<NSError> = self?.formValidationErrors() as! Array<NSError>
+            if (validationErrors.count > 0){
+                return
             }
             
-            self?.deselectFormRow(sender)
+            self?.performSegueWithIdentifier("Show\((self?.paymentType)!)", sender: self!)
+            self?.setError(true, error: nil)
         }
         
         confirmDonation.addFormRow(confirmRow)
@@ -173,6 +180,38 @@ class DonateViewController: XLFormViewController, PaymentReponseDelegate {
             paymentProtocol.productName = self.product?.name
             paymentProtocol.product = self.product
             paymentProtocol.itemId = self.product?.objectId
+        }
+    }
+    
+    // MARK: XLFormViewController
+    override func formRowDescriptorValueHasChanged(formRow: XLFormRowDescriptor!, oldValue: AnyObject!, newValue: AnyObject!) {
+        super.formRowDescriptorValueHasChanged(formRow, oldValue: oldValue, newValue: newValue)
+
+        let validationErrors : Array<NSError> = formValidationErrors() as! Array<NSError>
+        let hasErrors = validationErrors.count > 0
+        
+        if let confirmRowDescriptor = confirmRowDescriptor {
+            let backgroundColor = hasErrors ? UIScheme.disableActionColor : UIScheme.enableActionColor
+            confirmRowDescriptor.disabled = hasErrors
+            confirmRowDescriptor.cellConfig["backgroundColor"] = backgroundColor
+            updateFormRow(confirmRowDescriptor)
+        }
+    }
+}
+
+extension DonateViewController {
+    internal class DonateValidator: NSObject, XLFormValidatorProtocol {
+        @objc func isValid(row: XLFormRowDescriptor!) -> XLFormValidationStatus {
+            var msg = ""
+            var status = false
+            if let value = row.value as? NSNumber where value.intValue > 0 {
+                msg = NSLocalizedString("Intered value is valid")
+                status = true
+            } else {
+                msg = NSLocalizedString("Intered value is invalid")
+                status = false
+            }
+            return XLFormValidationStatus(msg: msg, status: status, rowDescriptor: row)
         }
     }
 }

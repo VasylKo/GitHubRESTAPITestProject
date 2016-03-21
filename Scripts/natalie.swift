@@ -49,10 +49,13 @@ private extension String {
   }
 }
 
-private func SwiftRepresentationForString(string: String, capitalizeFirstLetter: Bool = false) -> String {
+private func SwiftRepresentationForString(string: String, capitalizeFirstLetter: Bool = false, doNotShadow: String? = nil) -> String {
     var str =  string.trimAllWhitespacesAndSpecialCharacters()
     if capitalizeFirstLetter {
        str = String(str.uppercaseString.unicodeScalars.prefix(1) + str.unicodeScalars.suffix(str.unicodeScalars.count - 1))
+    }
+    if str == doNotShadow {
+        str = str + "_"
     }
     return str
 }
@@ -664,6 +667,15 @@ enum OS: String, CustomStringConvertible {
         }
     }
 
+    var storyboardControllerReturnType: String {
+        switch self {
+        case iOS:
+            return "UIViewController"
+        case OSX:
+            return "AnyObject" // NSViewController or NSWindowController
+        }
+    }
+
     var storyboardControllerSignatureType: String {
         switch self {
         case iOS:
@@ -678,7 +690,7 @@ enum OS: String, CustomStringConvertible {
         case iOS:
             return [("ViewController", "UIViewController")]
         case OSX:
-            return [("WindowController", "NSWindowController"), ("ViewController", "NSViewController")]
+            return [("Controller", "NSWindowController"), ("Controller", "NSViewController")]
         }
     }
 
@@ -700,15 +712,6 @@ enum OS: String, CustomStringConvertible {
         }
     }
 
-    var storyboardControllerReturnType: String {
-        switch self {
-        case iOS:
-            return "UIViewController"
-        case OSX:
-            return "AnyObject" // NSViewController or NSWindowController
-        }
-    }
-
     func controllerTypeForElementName(name: String) -> String? {
         switch self {
         case iOS:
@@ -727,7 +730,7 @@ enum OS: String, CustomStringConvertible {
                 return "UIPageViewController"
             case "collectionViewController":
                 return "UICollectionViewController"
-            case "exit":
+            case "exit", "viewControllerPlaceholder":
                 return nil
             default:
                 assertionFailure("Unknown controller element: \(name)")
@@ -745,7 +748,7 @@ enum OS: String, CustomStringConvertible {
                 return "NSTabViewController"
             case "splitViewController":
                 return "NSSplitViewController"
-            case "exit":
+            case "exit", "viewControllerPlaceholder":
                 return nil
             default:
                 assertionFailure("Unknown controller element: \(name)")
@@ -937,20 +940,21 @@ class Storyboard: XMLObject {
             let cast = (returnType == os.storyboardControllerReturnType ? "" : " as! \(returnType)")
             print("")
             print("        static func instantiate\(signatureType)WithIdentifier(identifier: String) -> \(returnType) {")
-            print("            return self.storyboard.instantiate\(os.storyboardControllerSignatureType)WithIdentifier(identifier)\(cast)")
+            print("            return self.storyboard.instantiate\(signatureType)WithIdentifier(identifier)\(cast)")
             print("        }")
 
             print("")
-            print("        static func instantiateViewController<T: UIViewController where T: IdentifiableProtocol>(type: T.Type) -> T? {")
+            print("        static func instantiateViewController<T: \(returnType) where T: IdentifiableProtocol>(type: T.Type) -> T? {")
             print("            return self.storyboard.instantiateViewController(type)")
             print("        }")
         }
         for scene in self.scenes {
             if let viewController = scene.viewController, storyboardIdentifier = viewController.storyboardIdentifier {
                 let controllerClass = (viewController.customClass ?? os.controllerTypeForElementName(viewController.name)!)
+                let cast = (controllerClass == os.storyboardControllerReturnType ? "" : " as! \(controllerClass)")
                 print("")
                 print("        static func instantiate\(SwiftRepresentationForString(storyboardIdentifier, capitalizeFirstLetter: true))() -> \(controllerClass) {")
-                print("            return self.storyboard.instantiate\(os.storyboardControllerSignatureType)WithIdentifier(\"\(storyboardIdentifier)\") as! \(controllerClass)")
+                print("            return self.storyboard.instantiate\(os.storyboardControllerSignatureType)WithIdentifier(\"\(storyboardIdentifier)\")\(cast)")
                 print("        }")
             }
         }
@@ -979,8 +983,12 @@ class Storyboard: XMLObject {
 
                     if let storyboardIdentifier = viewController.storyboardIdentifier {
                         print("extension \(customClass): IdentifiableProtocol { ")
-                        print("    var identifier: String? { return \"\(storyboardIdentifier)\" }")
-                        print("    static var identifier: String? { return \"\(storyboardIdentifier)\" }")
+                        if viewController.customModule != nil {
+                            print("    var storyboardIdentifier: String? { return \"\(storyboardIdentifier)\" }")
+                        } else {
+                            print("    public var storyboardIdentifier: String? { return \"\(storyboardIdentifier)\" }")
+                        }
+                        print("    static var storyboardIdentifier: String? { return \"\(storyboardIdentifier)\" }")
                         print("}")
                         print("")
                     }
@@ -1053,7 +1061,7 @@ class Storyboard: XMLObject {
                             print("    enum Reusable: String, CustomStringConvertible, ReusableViewProtocol {")
                             for reusable in reusables {
                                 if let identifier = reusable.reuseIdentifier {
-                                    print("        case \(identifier) = \"\(identifier)\"")
+                                    print("        case \(SwiftRepresentationForString(identifier, doNotShadow: reusable.customClass)) = \"\(identifier)\"")
                                 }
                             }
                             print("")
@@ -1062,7 +1070,7 @@ class Storyboard: XMLObject {
                             var needDefault = false
                             for reusable in reusables {
                                 if let identifier = reusable.reuseIdentifier {
-                                    print("            case \(identifier):")
+                                    print("            case \(SwiftRepresentationForString(identifier, doNotShadow: reusable.customClass)):")
                                     print("                return ReusableKind(rawValue: \"\(reusable.kind)\")")
                                 } else {
                                     needDefault = true
@@ -1081,7 +1089,7 @@ class Storyboard: XMLObject {
                             needDefault = false
                             for reusable in reusables {
                                 if let identifier = reusable.reuseIdentifier, customClass = reusable.customClass {
-                                    print("            case \(identifier):")
+                                    print("            case \(SwiftRepresentationForString(identifier, doNotShadow: reusable.customClass)):")
                                     print("                return \(customClass).self")
                                 } else {
                                     needDefault = true
@@ -1094,7 +1102,7 @@ class Storyboard: XMLObject {
                             print("            }")
                             print("        }")
                             print("")
-                            print("        var identifier: String? { return self.description } ")
+                            print("        var storyboardIdentifier: String? { return self.description } ")
                             print("        var description: String { return self.rawValue }")
                             print("    }")
                             print("")
@@ -1151,16 +1159,18 @@ func processStoryboards(storyboards: [StoryboardFile], os: OS) {
     print("//MARK: - Storyboards")
 
     print("")
-    print("extension UIStoryboard {")
-    print("    func instantiateViewController<T: UIViewController where T: IdentifiableProtocol>(type: T.Type) -> T? {")
-    print("        let instance = type.init()")
-    print("        if let identifier = instance.identifier {")
-    print("            return self.instantiateViewControllerWithIdentifier(identifier) as? T")
-    print("        }")
-    print("        return nil")
-    print("    }")
+    print("extension \(os.storyboardType) {")
+    for (signatureType, returnType) in os.storyboardInstantiationInfo {
+        print("    func instantiateViewController<T: \(returnType) where T: IdentifiableProtocol>(type: T.Type) -> T? {")
+        print("        let instance = type.init()")
+        print("        if let identifier = instance.storyboardIdentifier {")
+        print("            return self.instantiate\(signatureType)WithIdentifier(identifier) as? T")
+        print("        }")
+        print("        return nil")
+        print("    }")
+        print("")
+    }
     print("}")
-
 
     print("")
     print("protocol Storyboard {")
@@ -1201,13 +1211,16 @@ func processStoryboards(storyboards: [StoryboardFile], os: OS) {
     print("    var description: String { return self.rawValue } ")
     print("}")
     print("")
-
-    print("//MARK: - SegueProtocol")
+    print("//MARK: - IdentifiableProtocol")
+    print("")
     print("public protocol IdentifiableProtocol: Equatable {")
-    print("    var identifier: String? { get }")
+    print("    var storyboardIdentifier: String? { get }")
     print("}")
     print("")
-    print("public protocol SegueProtocol: IdentifiableProtocol {")
+    print("//MARK: - SegueProtocol")
+    print("")
+    print("public protocol SegueProtocol {")
+    print("    var identifier: String? { get }")
     print("}")
     print("")
 
@@ -1243,7 +1256,7 @@ func processStoryboards(storyboards: [StoryboardFile], os: OS) {
     print("")
 
     print("public func ==<T: ReusableViewProtocol, U: ReusableViewProtocol>(lhs: T, rhs: U) -> Bool {")
-    print("    return lhs.identifier == rhs.identifier")
+    print("    return lhs.storyboardIdentifier == rhs.storyboardIdentifier")
     print("}")
     print("")
 
@@ -1256,7 +1269,7 @@ func processStoryboards(storyboards: [StoryboardFile], os: OS) {
         for reusableView in reusableViews {
             print("extension \(reusableView): ReusableViewProtocol {")
             print("    public var viewType: UIView.Type? { return self.dynamicType }")
-            print("    public var identifier: String? { return self.reuseIdentifier }")
+            print("    public var storyboardIdentifier: String? { return self.reuseIdentifier }")
             print("}")
             print("")
         }
@@ -1284,27 +1297,27 @@ func processStoryboards(storyboards: [StoryboardFile], os: OS) {
         print("extension UICollectionView {")
         print("")
         print("    func dequeueReusableCell<T: ReusableViewProtocol>(reusable: T, forIndexPath: NSIndexPath!) -> UICollectionViewCell? {")
-        print("        if let identifier = reusable.identifier {")
+        print("        if let identifier = reusable.storyboardIdentifier {")
         print("            return dequeueReusableCellWithReuseIdentifier(identifier, forIndexPath: forIndexPath)")
         print("        }")
         print("        return nil")
         print("    }")
         print("")
         print("    func registerReusableCell<T: ReusableViewProtocol>(reusable: T) {")
-        print("        if let type = reusable.viewType, identifier = reusable.identifier {")
+        print("        if let type = reusable.viewType, identifier = reusable.storyboardIdentifier {")
         print("            registerClass(type, forCellWithReuseIdentifier: identifier)")
         print("        }")
         print("    }")
         print("")
         print("    func dequeueReusableSupplementaryViewOfKind<T: ReusableViewProtocol>(elementKind: String, withReusable reusable: T, forIndexPath: NSIndexPath!) -> UICollectionReusableView? {")
-        print("        if let identifier = reusable.identifier {")
+        print("        if let identifier = reusable.storyboardIdentifier {")
         print("            return dequeueReusableSupplementaryViewOfKind(elementKind, withReuseIdentifier: identifier, forIndexPath: forIndexPath)")
         print("        }")
         print("        return nil")
         print("    }")
         print("")
         print("    func registerReusable<T: ReusableViewProtocol>(reusable: T, forSupplementaryViewOfKind elementKind: String) {")
-        print("        if let type = reusable.viewType, identifier = reusable.identifier {")
+        print("        if let type = reusable.viewType, identifier = reusable.storyboardIdentifier {")
         print("            registerClass(type, forSupplementaryViewOfKind: elementKind, withReuseIdentifier: identifier)")
         print("        }")
         print("    }")
@@ -1315,27 +1328,27 @@ func processStoryboards(storyboards: [StoryboardFile], os: OS) {
         print("extension UITableView {")
         print("")
         print("    func dequeueReusableCell<T: ReusableViewProtocol>(reusable: T, forIndexPath: NSIndexPath!) -> UITableViewCell? {")
-        print("        if let identifier = reusable.identifier {")
+        print("        if let identifier = reusable.storyboardIdentifier {")
         print("            return dequeueReusableCellWithIdentifier(identifier, forIndexPath: forIndexPath)")
         print("        }")
         print("        return nil")
         print("    }")
         print("")
         print("    func registerReusableCell<T: ReusableViewProtocol>(reusable: T) {")
-        print("        if let type = reusable.viewType, identifier = reusable.identifier {")
+        print("        if let type = reusable.viewType, identifier = reusable.storyboardIdentifier {")
         print("            registerClass(type, forCellReuseIdentifier: identifier)")
         print("        }")
         print("    }")
         print("")
         print("    func dequeueReusableHeaderFooter<T: ReusableViewProtocol>(reusable: T) -> UITableViewHeaderFooterView? {")
-        print("        if let identifier = reusable.identifier {")
+        print("        if let identifier = reusable.storyboardIdentifier {")
         print("            return dequeueReusableHeaderFooterViewWithIdentifier(identifier)")
         print("        }")
         print("        return nil")
         print("    }")
         print("")
         print("    func registerReusableHeaderFooter<T: ReusableViewProtocol>(reusable: T) {")
-        print("        if let type = reusable.viewType, identifier = reusable.identifier {")
+        print("        if let type = reusable.viewType, identifier = reusable.storyboardIdentifier {")
         print("             registerClass(type, forHeaderFooterViewReuseIdentifier: identifier)")
         print("        }")
         print("    }")
