@@ -32,14 +32,15 @@ class MoreInformationCell : XLFormButtonCell {
         super.update()
         
         self.titleLabel.text = self.attachment?.name ?? ""
-        
-        if self.attachment?.type?.containsString("/") == true {
-            let description = self.attachment?.type?.componentsSeparatedByString("/").last?.uppercaseString
-            self.descriptionLabel.text = description
-        } else {
-            self.descriptionLabel.text = self.attachment?.type ?? ""
+        if let name = self.attachment?.name {
+            let components = name.componentsSeparatedByString(".")
+            if components.count > 1 {
+                self.descriptionLabel.text = components.last
+                self.titleLabel.text = components[components.count - 2]
+            } else {
+                self.titleLabel.text = components.last
+            }
         }
-        
         
         let placeholder : UIImage
         if self.attachment?.type?.containsString("pdf") == true {
