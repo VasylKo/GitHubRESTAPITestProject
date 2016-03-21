@@ -98,6 +98,7 @@ class PhoneNumberViewController: XLFormViewController {
     }
     
     func dismissLogin() {
+        self.view.endEditing(true)
         sideBarController?.executeAction(SidebarViewController.defaultAction)
         dismissViewControllerAnimated(true, completion: nil)
     }

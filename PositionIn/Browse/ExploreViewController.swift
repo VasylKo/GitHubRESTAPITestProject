@@ -12,6 +12,8 @@ import UIKit
 
 class ExploreViewController: DisplayModeViewController {
     
+    var homeItem: HomeItem?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.titleView = nil
@@ -39,9 +41,9 @@ class ExploreViewController: DisplayModeViewController {
                 return mapController
             case .List:
                 let listController = Storyboards.Main.instantiateBrowseListViewController()
+                listController.homeItem = homeItem
                 listController.hideSeparatorLinesNearSegmentedControl = true
                 listController.showCardCells = false
-                
                 return listController
         }
     }

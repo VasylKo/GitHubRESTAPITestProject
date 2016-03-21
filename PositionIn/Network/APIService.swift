@@ -438,7 +438,7 @@ final class APIService {
         let params = APIServiceQuery()
         params.append(query: query)
         params.append(query: page)
-        var itemTypesArray : [String] = []
+        //TODO: should refactor
         params.append("type", value: "2,8")
 
         return self.getObjectsCollection(endpoint, params: params.query)
@@ -446,12 +446,7 @@ final class APIService {
     
     func getAll(homeItem: HomeItem, seachFilter: SearchFilter) -> Future<CollectionResponse<FeedItem>,NSError> {
         let endpoint = homeItem.endpoint()
-        //TODO: fix endp
-        var endp = ""
-        if let endpoint = endpoint {
-            endp = endpoint
-        }
-        //        //TODO: change this when it will be fixed on backend
+        //TODO: should refactor
         let params = APIServiceQuery()
         params.append("type", value: [String(homeItem.rawValue)])
         if let itemTypes = seachFilter.itemTypes {
@@ -476,7 +471,7 @@ final class APIService {
             }
         }
         
-        return self.getObjectsCollection(endp, params: parameters)
+        return self.getObjectsCollection(endpoint, params: parameters)
     }
     
     func getVolunteers() -> Future<CollectionResponse<Community>,NSError> {
@@ -486,7 +481,7 @@ final class APIService {
             (token: AuthResponse.Token) -> Future<CollectionResponse<Community>, NSError> in
             
             let futureBuilder: (Void -> Future<CollectionResponse<Community>, NSError>) = { [unowned self] in
-                let request = self.updateRequest(token, endpoint: endpoint!, method: method)
+                let request = self.updateRequest(token, endpoint: endpoint, method: method)
                 let (_ , future): (Alamofire.Request, Future<CollectionResponse<Community>, NSError>) = self.dataProvider.objectRequest(request)
                 return future
             }
@@ -499,7 +494,7 @@ final class APIService {
         let endpoint = HomeItem.Volunteer.endpoint()
         var params = page.query
         params["filterByParticipationStatus"] = false
-        return getObjectsCollection(endpoint!, params: params)
+        return getObjectsCollection(endpoint, params: params)
     }
 
     func getVolunteer(volunteerId: CRUDObjectId) -> Future<Community, NSError> {

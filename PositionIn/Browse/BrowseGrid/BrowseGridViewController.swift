@@ -9,7 +9,7 @@
 import UIKit
 
 protocol BrowseGridViewControllerDelegate : class {
-    func browseGridViewControllerSelectItem(itemType: HomeItem)
+    func browseGridViewControllerSelectItem(homeItem: HomeItem)
 }
 
 class BrowseGridViewController: UIViewController {

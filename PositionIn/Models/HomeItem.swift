@@ -78,7 +78,7 @@ enum HomeItem: Int, CustomDebugStringConvertible {
         }
     }
     
-    func endpoint() -> String? {
+    func endpoint() -> String {
         switch self {
         case .Emergency:
             return "/v1.0/search"
@@ -93,7 +93,7 @@ enum HomeItem: Int, CustomDebugStringConvertible {
         case .Projects:
             return "/v1.0/search"
         case .Market:
-            return "/v1.0/search"
+            return "/v1.0/products"
         case .BomaHotels:
             return "/v1.0/search"
         case .Volunteer:
@@ -101,7 +101,7 @@ enum HomeItem: Int, CustomDebugStringConvertible {
         case .Unknown:
             return "/v1.0/search"
         default:
-            return nil
+            return ""
         }
     }
     
