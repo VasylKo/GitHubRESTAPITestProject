@@ -64,6 +64,7 @@ class AvatarView: UIView {
          // Smoothens the border
         borderLayer.contentsScale = 2.0 * UIScreen.mainScreen().scale
         // Explicitly set the image
+        imageView.backgroundColor = UIColor.whiteColor()
         imageView.image = image
         // Mask the image
         imageView.layer.mask = maskLayer
