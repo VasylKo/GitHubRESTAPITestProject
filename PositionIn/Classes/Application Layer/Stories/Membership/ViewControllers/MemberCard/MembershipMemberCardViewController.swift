@@ -23,6 +23,13 @@ class MembershipMemberCardViewController : UIViewController {
     @IBOutlet weak var upgradeButton: UIButton!
     @IBOutlet weak var detailsButton: UIButton!
     
+    @IBOutlet weak var expiredDescriptionLabel: UILabel!
+    @IBOutlet weak var daysLeftLabel: UILabel!
+    @IBOutlet weak var expiredButton: UIButton!
+    @IBOutlet weak var expiredButtonAlignmentConstraint: NSLayoutConstraint!
+    @IBOutlet weak var expiredHeightConstraint: NSLayoutConstraint!
+    
+    
     @IBOutlet weak var upgradeView: UIView!
     //MARK: Initializers
     
@@ -48,6 +55,8 @@ class MembershipMemberCardViewController : UIViewController {
     func setupInterface() {
         self.title = self.titleNavigationItem.title
         self.navigationItem.rightBarButtonItem = self.titleNavigationItem.rightBarButtonItem
+        
+        self.expiredHeightConstraint.constant = 0
     }
     
     func getData() {
@@ -59,7 +68,7 @@ class MembershipMemberCardViewController : UIViewController {
                 return api().getMemberships()
             }.onSuccess { [weak self] collectionResponse in
                 if let strongSelf = self {
-                    if collectionResponse.items.isEmpty {
+                    if collectionResponse.items.isEmpty || strongSelf.profile?.membershipDetails?.status != .Active {
                         strongSelf.upgradeButton.enabled = false
                         strongSelf.upgradeView.hidden = true
                     }
@@ -67,6 +76,7 @@ class MembershipMemberCardViewController : UIViewController {
                     UIView.animateWithDuration(0.4, animations: { () -> Void in
                         strongSelf.membershipCardView.alpha = 1.0
                     })
+                    strongSelf.configureExpiredView(with: self?.profile?.membershipDetails)
                 }}.onComplete { [weak self] _ in
                     self?.activityIndicator.stopAnimating()
         }
@@ -91,4 +101,34 @@ class MembershipMemberCardViewController : UIViewController {
         self.router.dismissMembership(from: self)
     }
     
+    @IBAction func renewTapped(sender: AnyObject) {
+        self.router.showInitialViewController(from: self, hasActivePlan: false)
+    }
+
+    //MARK: Private
+    
+    func configureExpiredView(with details: MembershipDetails?) {
+        if let membershipDetails = details {
+            switch membershipDetails.status {
+            case .Active, .Unknown:
+                self.expiredHeightConstraint.constant = 0
+                break
+            case .isAboutToExpired:
+                self.expiredHeightConstraint.constant = 96
+                self.expiredDescriptionLabel.text = NSLocalizedString("Your memberhip is about to expired")
+                self.daysLeftLabel.hidden = false
+                self.daysLeftLabel.text = NSLocalizedString("\(membershipDetails.daysLeft ?? 0) Days Left")
+                self.expiredButtonAlignmentConstraint.constant = 65
+                break
+            case .Expired:
+                self.expiredHeightConstraint.constant = 96
+                self.expiredDescriptionLabel.text = NSLocalizedString("Your memberhip is expired")
+                self.daysLeftLabel.hidden = true
+                self.expiredButtonAlignmentConstraint.constant = 0
+                break
+            }
+        } else {
+            self.expiredHeightConstraint.constant = 0
+        }
+    }
 }
