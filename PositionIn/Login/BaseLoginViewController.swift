@@ -49,6 +49,7 @@ class BaseLoginViewController: UIViewController {
     }
     
     func dismissLogin() {
+        self.view.endEditing(true)
         sideBarController?.executeAction(SidebarViewController.defaultAction)
         dismissViewControllerAnimated(true, completion: nil)
     }
