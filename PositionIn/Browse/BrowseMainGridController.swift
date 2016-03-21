@@ -14,9 +14,19 @@ class BrowseMainGridController: BrowseModeTabbarViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "notification_icon"), style: .Plain, target: self, action: "notificationTouched")
+        let notificationBarButtonItem = UIBarButtonItem(image: UIImage(named: "notification_icon"), style: .Plain, target: self, action: "notificationTouched")
+        self.navigationItem.rightBarButtonItem = notificationBarButtonItem
+        self.navigationItem.rightBarButtonItem?.enabled = false
         
         navigationController?.delegate = self
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        api().hasNotifications().onSuccess { [weak self] (has : Bool) -> Void in
+            self?.navigationItem.rightBarButtonItem?.enabled = has
+        }
     }
     
     @objc func notificationTouched() {

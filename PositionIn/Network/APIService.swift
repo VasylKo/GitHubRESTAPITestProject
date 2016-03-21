@@ -576,6 +576,27 @@ final class APIService {
         return getObjectsCollection(endpoint, params: nil)
     }
     
+    func hasNotifications() -> Future<Bool, NSError> {
+        let endpoint = SystemNotification.endpoint()
+        let page = Page(start: 0, size: 1)
+        typealias CRUDResultType = (Alamofire.Request, Future<CollectionResponse<SystemNotification>, NSError>)
+        
+        return session().flatMap {
+            (token: AuthResponse.Token) -> Future<CollectionResponse<SystemNotification>, NSError> in
+            
+            let futureBuilder: (Void -> Future<CollectionResponse<SystemNotification>, NSError>) = { [unowned self] in
+                let request = self.readRequest(token, endpoint: endpoint, params: page.query)
+                let (_ , future): CRUDResultType = self.dataProvider.objectRequest(request)
+                return future
+            }
+            
+            return futureBuilder()
+            }.flatMap({ (response : CollectionResponse<SystemNotification>) -> Future<Bool, NSError> in
+                let result = response.items.count > 0 ? true : false
+                return Future(value: result)
+        })
+    }
+    
     //MARK: - MPesa requests
     
     func transactionStatusMpesa(transactionId: String) -> Future<String, NSError> {
