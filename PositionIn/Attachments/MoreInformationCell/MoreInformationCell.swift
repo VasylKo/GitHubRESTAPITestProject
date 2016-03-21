@@ -35,7 +35,7 @@ class MoreInformationCell : XLFormButtonCell {
         if let name = self.attachment?.name {
             let components = name.componentsSeparatedByString(".")
             if components.count > 1 {
-                self.descriptionLabel.text = components.last
+                self.descriptionLabel.text = components.last?.uppercaseString
                 self.titleLabel.text = components[components.count - 2]
             } else {
                 self.titleLabel.text = components.last
