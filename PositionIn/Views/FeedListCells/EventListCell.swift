@@ -62,7 +62,7 @@ final class EventListCell: TableViewCell {
 
         }
         else {
-            infoLabel?.text = m!.info
+            infoLabel?.text = m!.info ?? " "
             dateLabel?.text = m!.details
         }
     }
