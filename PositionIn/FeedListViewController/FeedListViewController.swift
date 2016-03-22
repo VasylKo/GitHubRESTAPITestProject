@@ -69,9 +69,10 @@ extension FeedListViewController: UITableViewDelegate {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
     
         var item:FeedItem?
-        
+        var isFeautered = false
         if indexPath.row == 0 && (self.feauteredFeedItem != nil) {
             item = self.feauteredFeedItem
+            isFeautered = true
         }
         else {
             let offset = (self.feauteredFeedItem != nil) ? 1 : 0
@@ -82,6 +83,7 @@ extension FeedListViewController: UITableViewDelegate {
             let detailsController = FeedEmergencyDetailsViewController(nibName: "FeedEmergencyDetailsViewController",
                 bundle: nil)
             detailsController.objectId = item?.objectId
+            detailsController.isFeautered = isFeautered
             self.navigationController?.pushViewController(detailsController, animated: true)
         }
         else {
@@ -89,6 +91,7 @@ extension FeedListViewController: UITableViewDelegate {
                 bundle: nil)
             
             detailsController.objectId = item?.objectId
+            detailsController.isFeautered = isFeautered
             self.navigationController?.pushViewController(detailsController, animated: true)
         }
         

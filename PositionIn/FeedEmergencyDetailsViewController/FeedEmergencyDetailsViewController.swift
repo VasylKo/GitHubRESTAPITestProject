@@ -59,6 +59,7 @@ class FeedEmergencyDetailsViewController: UIViewController {
     @IBOutlet weak var tableView: TableView!
     var objectId: CRUDObjectId?
     private var emergency: Product?
+    var isFeautered: Bool = false
 }
 
 extension FeedEmergencyDetailsViewController: UITableViewDelegate {
@@ -79,7 +80,8 @@ extension FeedEmergencyDetailsViewController {
         private var items: [[TableViewCellModel]] =  [[],[]]
         
         func setEmergency(emergency: Product) {
-            items = cellFactory.modelsForEmergency(emergency, actionConsumer: self.actionConsumer)
+            let controller = self.parentViewController as! FeedEmergencyDetailsViewController
+            items = cellFactory.modelsForEmergency(emergency, isFeautered: controller.isFeautered, actionConsumer: self.actionConsumer)
         }
         
         override func configureTable(tableView: UITableView) {
@@ -122,7 +124,9 @@ extension FeedEmergencyDetailsViewController {
         }
         
         func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+            
             tableView.deselectRowAtIndexPath(indexPath, animated: true)
+            
             if let _ = tableView.cellForRowAtIndexPath(indexPath) as? ActionCell {
                 //TODO: need check not by title
                 if let model = items[indexPath.section][indexPath.row] as? TableViewCellImageTextModel {

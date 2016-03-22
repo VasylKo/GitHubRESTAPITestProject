@@ -12,18 +12,23 @@ import CleanroomLogger
 
 struct FeedItemNewsCellModelFactory {
     
-    func modelsForPost(post: Post, actionConsumer: NewsActionConsumer?) -> [[TableViewCellModel]] {
+    func modelsForPost(post: Post, isFeautered: Bool, actionConsumer: NewsActionConsumer?) -> [[TableViewCellModel]] {
         var models: [[TableViewCellModel]] = []
         var firstSection: [TableViewCellModel] = []
         
         firstSection.append(TableViewCellURLModel(url: post.photoURL, height: 180, placeholderString: "news_placeholder"))
         
-        firstSection.append(NewsDetailsTitleTableViewCellModel(title: post.name, distance: nil,author: post.author?.title, date: nil))
+        let dateString = post.date?.formattedAsFeedTime()
+        
+        firstSection.append(NewsDetailsTitleTableViewCellModel(title: post.name, isFeautered: isFeautered, distance: nil,author: post.author?.title, date: dateString))
         
         if let text = post.descriptionString {
             firstSection.append(TableViewCellTextModel(title: text))
         }
 
+        if post.links?.isEmpty == false || post.attachments?.isEmpty == false {
+            firstSection.append(TableViewCellImageTextModel(title: "More Information", imageName: "productTerms&Info"))
+        }
 
         firstSection.append(PostLikesCountModel(likes: post.likes, isLiked:post.isLiked, isCommented: false, comments: post.comments.count, actionConsumer: actionConsumer))
         models.append(firstSection)
@@ -40,7 +45,8 @@ struct FeedItemNewsCellModelFactory {
     }
     
     func postCellsReuseId() -> [String] {
-        return [PostImageCell.reuseId(), PostBodyCell.reuseId(), PostInfoCell.reuseId(), PostLikeCommentCell.reuseId(), CommentCell.reuseId(), PostAttachmentsCell.reuseId(), NewsItemTitleCell.reuseId()]
+        return [PostImageCell.reuseId(), PostBodyCell.reuseId(), PostInfoCell.reuseId(), PostLikeCommentCell.reuseId(), CommentCell.reuseId(), PostAttachmentsCell.reuseId(), NewsItemTitleCell.reuseId(), ActionCell.reuseId()
+]
     }
     
     func cellReuseIdForModel(model: TableViewCellModel) -> String {
@@ -61,6 +67,9 @@ struct FeedItemNewsCellModelFactory {
         }
         if model is PostAttachmentsModel {
             return PostAttachmentsCell.reuseId()
+        }
+        if model is TableViewCellImageTextModel {
+            return ActionCell.reuseId()
         }
         if model is NewsDetailsTitleTableViewCellModel {
             return NewsItemTitleCell.reuseId()
