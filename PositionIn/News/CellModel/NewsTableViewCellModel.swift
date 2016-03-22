@@ -16,6 +16,7 @@ struct NewsTableViewCellModel: TableViewCellModel {
 
 struct NewsDetailsTitleTableViewCellModel: TableViewCellModel {
     let title: String?
+    let isFeautered: Bool?
     let distance: String?
     let author: String?
     let date: String?
