@@ -24,8 +24,24 @@ class FeedListViewController: UIViewController {
         self.setupInterface()
         
         self.loadData()
+        
+        setNavigationButtons()
     }
     
+    
+
+    private func setNavigationButtons() {
+        //Add image to Bavigation Bar
+        let imageView = UIImageView(image: UIImage(named: "feed-logo")?.imageWithRenderingMode(.AlwaysOriginal))
+        let barButtonItem = UIBarButtonItem(customView: imageView)
+        
+        //Add button with negative width to stick above image to left edge
+        let negativeSeparator = UIBarButtonItem(barButtonSystemItem: .FixedSpace, target: nil, action: nil)
+        negativeSeparator.width = -17
+        //Call parent view controller with navigation bar (BrowseMainGridController) where we whant to add notification button
+        parentViewController?.navigationItem.rightBarButtonItems = [negativeSeparator,barButtonItem]
+    }
+
     private func setupInterface() {
         
         var nib = UINib(nibName: String(FeedTableViewCell.self), bundle: nil)
