@@ -65,7 +65,7 @@ final class WalletViewController: BesideMenuViewController {
         
         switch browseMode {
         case .Purchases:
-            api().getOrders(userId, reason: "sold").onSuccess { [weak self] (response : CollectionResponse<Order>) in
+            api().getOrders(userId, reason: "bought").onSuccess { [weak self] (response : CollectionResponse<Order>) in
                 self?.dataSource.setItems(response.items)
                 self?.tableView?.reloadData()
             }
