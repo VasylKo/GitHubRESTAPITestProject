@@ -10,7 +10,6 @@ import PosInCore
 import BrightFutures
 import CleanroomLogger
 
-
 protocol PeopleActionConsumer {
     func showProfileScreen(userId: CRUDObjectId)
 }

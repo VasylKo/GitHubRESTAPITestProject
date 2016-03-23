@@ -58,6 +58,10 @@
 		1A5647F5D0FCC84FA5BF21FF /* MpesaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A56419027EC5956741AF471 /* MpesaViewController.swift */; };
 		1A564902D955532DE5B29A65 /* ErrorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A56438E04F9AD6CBDA75AC9 /* ErrorCell.swift */; };
 		1A56491DAEFA315F9DB47400 /* PaymentReponseDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A5640E770D4CB872B2E4605 /* PaymentReponseDelegate.swift */; };
+		23F6AF831CA1DBAD00CDD2FF /* PeopleFollowingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 23F6AF821CA1DBAD00CDD2FF /* PeopleFollowingViewController.xib */; };
+		23F6AF851CA2889800CDD2FF /* PeopleExploreViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 23F6AF841CA2889800CDD2FF /* PeopleExploreViewController.xib */; };
+		23F6AF871CA28BB000CDD2FF /* Fetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23F6AF861CA28BB000CDD2FF /* Fetcher.swift */; };
+		23F6AF891CA28EFA00CDD2FF /* FetchViewLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23F6AF881CA28EFA00CDD2FF /* FetchViewLogic.swift */; };
 		240A9B9C1B9CCDA4007C77E3 /* PositionIn.CommunityStatsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 240A9B9B1B9CCDA4007C77E3 /* PositionIn.CommunityStatsCell.xib */; };
 		240A9B9E1B9CCDB4007C77E3 /* CommunityStatsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 240A9B9D1B9CCDB4007C77E3 /* CommunityStatsCell.swift */; };
 		2431EBDC1B945F5A009FB158 /* Promotion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2431EBDB1B945F5A009FB158 /* Promotion.swift */; };
@@ -603,6 +607,10 @@
 		1A56419027EC5956741AF471 /* MpesaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MpesaViewController.swift; sourceTree = "<group>"; };
 		1A56438E04F9AD6CBDA75AC9 /* ErrorCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorCell.swift; sourceTree = "<group>"; };
 		1A564EEB40AD56FD2C113F2A /* BraintreePaymentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BraintreePaymentViewController.swift; sourceTree = "<group>"; };
+		23F6AF821CA1DBAD00CDD2FF /* PeopleFollowingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PeopleFollowingViewController.xib; sourceTree = "<group>"; };
+		23F6AF841CA2889800CDD2FF /* PeopleExploreViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PeopleExploreViewController.xib; sourceTree = "<group>"; };
+		23F6AF861CA28BB000CDD2FF /* Fetcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Fetcher.swift; sourceTree = "<group>"; };
+		23F6AF881CA28EFA00CDD2FF /* FetchViewLogic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchViewLogic.swift; sourceTree = "<group>"; };
 		240A9B9B1B9CCDA4007C77E3 /* PositionIn.CommunityStatsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.CommunityStatsCell.xib; sourceTree = "<group>"; };
 		240A9B9D1B9CCDB4007C77E3 /* CommunityStatsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommunityStatsCell.swift; sourceTree = "<group>"; };
 		2431EBDB1B945F5A009FB158 /* Promotion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Promotion.swift; sourceTree = "<group>"; };
@@ -2198,10 +2206,14 @@
 			children = (
 				CDC2BE111CA191DB0049C971 /* PeopleContainerViewController.swift */,
 				CD7C07A51CA1A7B10075BC5B /* PeopleFollowingViewController.swift */,
+				23F6AF821CA1DBAD00CDD2FF /* PeopleFollowingViewController.xib */,
 				CD7C07A71CA1A7C90075BC5B /* PeopleExploreViewControler.swift */,
+				23F6AF841CA2889800CDD2FF /* PeopleExploreViewController.xib */,
 				E6199BB61B9F3B7400E3C69D /* PeopleViewController.swift */,
 				E6C9522B1BA1BB0E0032254F /* PeopleListCell.swift */,
 				E6C9522D1BA1BB470032254F /* PositionIn.PeopleListCell.xib */,
+				23F6AF861CA28BB000CDD2FF /* Fetcher.swift */,
+				23F6AF881CA28EFA00CDD2FF /* FetchViewLogic.swift */,
 			);
 			path = People;
 			sourceTree = "<group>";
@@ -3957,6 +3969,7 @@
 				D12EB28E1C96E62400718E57 /* FeauteredFeedTableViewCell.xib in Resources */,
 				E6BEF1CC1B9C5E7200511B46 /* PositionIn.PostImageCell.xib in Resources */,
 				CD076E891C7497A8005C04C2 /* PositionIn.NewsListViewController.xib in Resources */,
+				23F6AF831CA1DBAD00CDD2FF /* PeopleFollowingViewController.xib in Resources */,
 				E689F07D1B6B976100597587 /* PositionIn.ProductInventoryCell.xib in Resources */,
 				E6BEF1E61B9C83F200511B46 /* PositionIn.CommunityActionCell.xib in Resources */,
 				CDEDD9741C45242400396594 /* PositionIn.VolunteerSearchViewController.xib in Resources */,
@@ -3973,6 +3986,7 @@
 				D1B780CF1C0F51A800EF5825 /* DonateCell.xib in Resources */,
 				D12EB2861C96E5DF00718E57 /* FeedListViewController.xib in Resources */,
 				E69421021B666A1600F34F06 /* PositionIn.ActionCell.xib in Resources */,
+				23F6AF851CA2889800CDD2FF /* PeopleExploreViewController.xib in Resources */,
 				E6F309421BA8200600C9420C /* PositionIn.PickPhotoView.xib in Resources */,
 				E64DC3551B4E53C90011D37C /* Main.storyboard in Resources */,
 				D1FD853D1C1EE8D800C2E87B /* PositionIn.PromotionDetailsViewController.xib in Resources */,
@@ -4354,6 +4368,7 @@
 				E6A869F21B60FF0500797D16 /* CRUDObject.swift in Sources */,
 				D1B1F1E21C6B194E00D43A3B /* MPesaPayment.swift in Sources */,
 				D153AB841C11FA9B00DFB5C9 /* AmbulanceRequest.swift in Sources */,
+				23F6AF871CA28BB000CDD2FF /* Fetcher.swift in Sources */,
 				D13039FB1C721960004B673F /* AttendEventCell.swift in Sources */,
 				D1379E901C2AC58F0041AA4E /* ExploreViewController.swift in Sources */,
 				E60EBF761B8EF9B50014B6ED /* DataTransforms.swift in Sources */,
@@ -4383,6 +4398,7 @@
 				E61B20D81B7E0838005EAB2C /* SettingsViewController.swift in Sources */,
 				CD795C4C1C590BEE00C1C298 /* SegmentedControlContainerViewController.swift in Sources */,
 				1A56454F1ADF6D1BF3022FB3 /* BraintreePaymentViewController.swift in Sources */,
+				23F6AF891CA28EFA00CDD2FF /* FetchViewLogic.swift in Sources */,
 				18F3313F1C8871870010321B /* Order.swift in Sources */,
 				1A56491DAEFA315F9DB47400 /* PaymentReponseDelegate.swift in Sources */,
 				1A564902D955532DE5B29A65 /* ErrorCell.swift in Sources */,
