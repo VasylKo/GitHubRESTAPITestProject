@@ -27,6 +27,7 @@ class CompactFeedTableCellModel: FeedTableCellModel {
     
     let title: String?
     let details: String?
+    let authorName: String?
     var info: String?
     let price: Float?
     let imageURL: NSURL?
@@ -40,13 +41,14 @@ class CompactFeedTableCellModel: FeedTableCellModel {
     
     weak var delegate : ActionsDelegate?
     
-    init(delegate : ActionsDelegate?, item : FeedItem, title: String?, details: String?, info: String?, text: String?, price: Float?, imageURL: NSURL?, avatarURL:NSURL?, location: Location? = nil, numOfLikes: Int? = nil, numOfComments: Int? = nil,
+    init(delegate : ActionsDelegate?, item : FeedItem, title: String?, details: String?, authorName: String?, info: String?, text: String?, price: Float?, imageURL: NSURL?, avatarURL:NSURL?, location: Location? = nil, numOfLikes: Int? = nil, numOfComments: Int? = nil,
         numOfParticipants: Int? = nil,  date: NSDate?, data: Any? = nil) {
         self.item = item
         self.delegate = delegate
         self.title = title
         self.info = info
         self.details = details
+        self.authorName = authorName
         self.imageURL = imageURL
         self.avatarURL = avatarURL
         self.price = price
@@ -104,6 +106,7 @@ final class ComapctBadgeFeedTableCellModel : CompactFeedTableCellModel {
             item: item,
             title: title,
             details: details,
+            authorName: nil,
             info: info,
             text: text,
             price: nil,
