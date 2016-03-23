@@ -448,7 +448,7 @@ final class APIService {
         let endpoint = homeItem.endpoint()
         //TODO: should refactor
         let params = APIServiceQuery()
-        params.append("type", value: [String(homeItem.rawValue)])
+        params.append("type", value: String(homeItem.rawValue))
         if let itemTypes = seachFilter.itemTypes {
             var itemTypesArray : [String] = []
             

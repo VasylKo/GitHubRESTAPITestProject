@@ -19,7 +19,11 @@ class NewsListViewController: UIViewController {
     
     @IBOutlet weak var tableView: TableView!
     private var dataRequestToken = InvalidationToken()
-    private let filter = SearchFilter.currentFilter
+    private var filter: SearchFilter {
+        var filter = SearchFilter.currentFilter
+        filter.itemTypes = [.News]
+        return filter
+    }
     
     lazy var dataSource: NewsListDataSource = { [unowned self] in
         let dataSource = NewsListDataSource()
