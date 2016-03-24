@@ -114,7 +114,7 @@ class MembershipMemberCardViewController : UIViewController {
                 break
             case .isAboutToExpired:
                 self.expiredHeightConstraint.constant = 96
-                self.expiredDescriptionLabel.text = NSLocalizedString("Your membership is about to expired")
+                self.expiredDescriptionLabel.text = NSLocalizedString("Your membership is about to expire")
                 self.daysLeftLabel.hidden = false
                 self.daysLeftLabel.text = NSLocalizedString("\(membershipDetails.daysLeft ?? 0) Days Left")
                 self.expiredButtonAlignmentConstraint.constant = 65
