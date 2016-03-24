@@ -68,13 +68,12 @@ class MembershipMemberCardViewController : UIViewController {
                 return api().getMemberships()
             }.onSuccess { [weak self] collectionResponse in
                 if let strongSelf = self {
-                    if collectionResponse.items.isEmpty || strongSelf.profile?.membershipDetails?.status != .Active {
-                        strongSelf.upgradeButton.enabled = false
-                        strongSelf.upgradeView.hidden = true
-                    }
                     strongSelf.membershipCardView.configure(with: strongSelf.profile!, plan: strongSelf.plan!)
                     UIView.animateWithDuration(0.4, animations: { () -> Void in
                         strongSelf.membershipCardView.alpha = 1.0
+                        if collectionResponse.items.count > 0 && strongSelf.profile?.membershipDetails?.status == .Active {
+                            strongSelf.upgradeView.alpha = 1.0
+                        }
                     })
                     strongSelf.configureExpiredView(with: self?.profile?.membershipDetails)
                 }}.onComplete { [weak self] _ in
@@ -115,14 +114,14 @@ class MembershipMemberCardViewController : UIViewController {
                 break
             case .isAboutToExpired:
                 self.expiredHeightConstraint.constant = 96
-                self.expiredDescriptionLabel.text = NSLocalizedString("Your memberhip is about to expired")
+                self.expiredDescriptionLabel.text = NSLocalizedString("Your membership is about to expired")
                 self.daysLeftLabel.hidden = false
                 self.daysLeftLabel.text = NSLocalizedString("\(membershipDetails.daysLeft ?? 0) Days Left")
                 self.expiredButtonAlignmentConstraint.constant = 65
                 break
             case .Expired:
                 self.expiredHeightConstraint.constant = 96
-                self.expiredDescriptionLabel.text = NSLocalizedString("Your memberhip is expired")
+                self.expiredDescriptionLabel.text = NSLocalizedString("Your membership is expired")
                 self.daysLeftLabel.hidden = true
                 self.expiredButtonAlignmentConstraint.constant = 0
                 break
