@@ -49,7 +49,7 @@ class PhoneNumberViewController: XLFormViewController {
         let form = XLFormDescriptor(title: NSLocalizedString("Your Phone Number", comment: "New post: form caption"))
         
         //Country code section
-        let countryCodeSection = XLFormSectionDescriptor.formSectionWithTitle("Please confirm your country code\nand enter your phone number")
+        let countryCodeSection = XLFormSectionDescriptor.formSectionWithTitle("Join Red Cross Today\nPlease confirm your country code\nand enter your mobile phone number")
         form.addFormSection(countryCodeSection)
         
         let coutryRow : XLFormRowDescriptor = XLFormRowDescriptor(tag: Tags.CountryCode.rawValue,
