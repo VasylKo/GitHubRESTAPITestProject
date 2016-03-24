@@ -34,7 +34,7 @@ class ExploreCardCell: TableViewCell {
             feedItemLogoImageView.image = UIImage(named: "home_event")
         case .News, .Post:
             feedItemLogoImageView.image = UIImage(named: "home_news")
-        case .Unknown, .Wallet:
+        case .Unknown, .Donation:
             break
         }
         if let imgURL = m!.imageURL {

@@ -64,10 +64,27 @@ final class Order: FeedItem {
         quantity <- map["quantity"]
         status <- map["status"]
         transactionId <- map["transactionId"]
+        
+        determinateOrderType()
+    }
+    
+    /*
+    Logic to determinate what type of wallet entity.
+    We need it to show different placeholder image for each wallet entity.
+    It could be: .Market, .Emergency, .Project, .Donation
+    Look backend API to see orderTypeNumber values. Donation type don't have orderTypeNumber.
+    */
+    private func determinateOrderType() {
+        guard let entityDetails = entityDetails, orderTypeNumber = entityDetails.typeNumber, orderType = FeedItem.ItemType(rawValue: orderTypeNumber) else {
+            type = .Donation
+            return
+        }
+        
+        type = orderType
     }
     
     required init?(_ map: Map) {
         super.init(map)
-        type = .Wallet
+        
     }
 }
