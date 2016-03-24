@@ -11,10 +11,6 @@ import PosInCore
 import BrightFutures
 import CleanroomLogger
 
-protocol PeopleExploreActionConsumer {
-    func showProfileScreen(userId: CRUDObjectId)
-}
-
 class PeopleExploreViewController : UIViewController, FetchViewLogicDelegate, UITableViewDelegate {
     
     @IBOutlet private weak var activityIndicator: UIActivityIndicatorView!
@@ -26,7 +22,8 @@ class PeopleExploreViewController : UIViewController, FetchViewLogicDelegate, UI
     
     private lazy var dataSource: PeopleExploreDataSource = { [unowned self] in
         let dataSource = PeopleExploreDataSource()
-        dataSource.parentViewController = self
+        dataSource.parentViewController = self.parentViewController
+        dataSource.additionalTableViewDelegate = self
         return dataSource
         }()
     
@@ -39,7 +36,6 @@ class PeopleExploreViewController : UIViewController, FetchViewLogicDelegate, UI
         
         self.tableView.tableFooterView = self.footerView
         dataSource.configureTable(tableView)
-        self.tableView.delegate = self
         
         subscribeToNotifications()
     }
@@ -84,10 +80,12 @@ class PeopleExploreViewController : UIViewController, FetchViewLogicDelegate, UI
     }
     
     deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(subscriptionUpdateObserver)
+        if let subscriptionUpdateObserver = self.subscriptionUpdateObserver {
+            NSNotificationCenter.defaultCenter().removeObserver(subscriptionUpdateObserver)
+        }
     }
 
-    private var subscriptionUpdateObserver: NSObjectProtocol!
+    private var subscriptionUpdateObserver: NSObjectProtocol?
     
     func contentDidChange(sender: AnyObject?, info: [NSObject : AnyObject]?) {
         (self.parentViewController as? BesideMenuViewController)?.contentDidChange(sender, info: info)
@@ -123,21 +121,12 @@ class PeopleExploreViewController : UIViewController, FetchViewLogicDelegate, UI
     }
 }
 
-extension PeopleExploreViewController: PeopleExploreActionConsumer {
-    
-    func showProfileScreen(userId: CRUDObjectId) {
-        let profileController = Storyboards.Main.instantiateUserProfileViewController()
-        profileController.objectId = userId
-        navigationController?.pushViewController(profileController, animated: true)
-    }
-    
-}
-
 final class PeopleExploreDataSource: TableViewDataSource {
     private var items: [UserInfoTableViewCellModel] = []
+    internal weak var additionalTableViewDelegate : UITableViewDelegate?
     
     func setUserList(users: [UserInfo]) {
-        items = users.sort{ $0.title < $1.title }.map{ UserInfoTableViewCellModel(userInfo: $0) }
+        items = users.sort { ($0.title ?? "").localizedCaseInsensitiveCompare($1.title ?? "") == NSComparisonResult.OrderedAscending }.map{ UserInfoTableViewCellModel(userInfo: $0) }
     }
     
     override func configureTable(tableView: UITableView) {
@@ -172,6 +161,11 @@ final class PeopleExploreDataSource: TableViewDataSource {
             let parentViewController = parentViewController as? PeopleActionConsumer {
                 parentViewController.showProfileScreen(model.userInfo.objectId)
         }
+    }
+    
+    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        super.tableView(tableView, willDisplayCell: cell, forRowAtIndexPath: indexPath)
+        self.additionalTableViewDelegate?.tableView!(tableView, willDisplayCell: cell, forRowAtIndexPath: indexPath)
     }
     
 }

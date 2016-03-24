@@ -11,10 +11,6 @@ import PosInCore
 import BrightFutures
 import CleanroomLogger
 
-protocol PeopleFollowingActionConsumer {
-    func showProfileScreen(userId: CRUDObjectId)
-}
-
 class PeopleFollowingViewController : UIViewController {
     
     @IBOutlet private weak var tableView: TableView!
@@ -72,10 +68,12 @@ class PeopleFollowingViewController : UIViewController {
     }
     
     deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(subscriptionUpdateObserver)
+        if let subscriptionUpdateObserver = self.subscriptionUpdateObserver {
+            NSNotificationCenter.defaultCenter().removeObserver(subscriptionUpdateObserver)
+        }
     }
     
-    private var subscriptionUpdateObserver: NSObjectProtocol!
+    private var subscriptionUpdateObserver: NSObjectProtocol?
 
     func contentDidChange(sender: AnyObject?, info: [NSObject : AnyObject]?) {
         (self.parentViewController as? BesideMenuViewController)?.contentDidChange(sender, info: info)
@@ -89,19 +87,9 @@ class PeopleFollowingViewController : UIViewController {
     
     private lazy var dataSource: PeopleFollowingDataSource = { [unowned self] in
         let dataSource = PeopleFollowingDataSource()
-        dataSource.parentViewController = self
+        dataSource.parentViewController = self.parentViewController
         return dataSource
         }()
-    
-}
-
-extension PeopleFollowingViewController: PeopleFollowingActionConsumer {
-    
-    func showProfileScreen(userId: CRUDObjectId) {
-        let profileController = Storyboards.Main.instantiateUserProfileViewController()
-        profileController.objectId = userId
-        navigationController?.pushViewController(profileController, animated: true)
-    }
     
 }
 

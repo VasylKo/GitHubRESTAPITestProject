@@ -9,6 +9,10 @@
 import Foundation
 import CleanroomLogger
 
+protocol PeopleActionConsumer {
+    func showProfileScreen(userId: CRUDObjectId)
+}
+
 class PeopleContainerViewController : BesideMenuViewController {
     
     private let containeredViewControllers : [UIViewController]
@@ -75,6 +79,17 @@ class PeopleContainerViewController : BesideMenuViewController {
     
     @IBAction func segmentControlValueChanged(sender: UISegmentedControl) {
         self.activeIndex = self.segmentedControl.selectedSegmentIndex
+    }
+    
+}
+
+
+extension PeopleContainerViewController: PeopleActionConsumer {
+    
+    func showProfileScreen(userId: CRUDObjectId) {
+        let profileController = Storyboards.Main.instantiateUserProfileViewController()
+        profileController.objectId = userId
+        navigationController?.pushViewController(profileController, animated: true)
     }
     
 }
