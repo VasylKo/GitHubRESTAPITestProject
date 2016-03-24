@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MembershipMessageController" customModule="PositionIn" customModuleProvider="target">
+            <connections>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GtA-Pi-fNA">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TAt-3E-lgW">
+                            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                            <subviews>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="krcs_membership" translatesAutoresizingMaskIntoConstraints="NO" id="oyg-tF-aaF">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="154"/>
+                                </imageView>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3a3-u4-iIj" customClass="BecomeMemberView" customModule="PositionIn" customModuleProvider="target">
+                                    <rect key="frame" x="16" y="114" width="568" height="80"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="80" id="WTl-Tn-nAn"/>
+                                    </constraints>
+                                </view>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pw4-Vg-lYm">
+                                    <rect key="frame" x="16" y="213" width="568" height="21"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.87" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="trailing" secondItem="3a3-u4-iIj" secondAttribute="trailing" constant="16" id="815-4C-M25"/>
+                                <constraint firstItem="3a3-u4-iIj" firstAttribute="leading" secondItem="TAt-3E-lgW" secondAttribute="leading" constant="16" id="A8S-Es-cu5"/>
+                                <constraint firstItem="3a3-u4-iIj" firstAttribute="top" secondItem="TAt-3E-lgW" secondAttribute="top" constant="114" id="Aaf-8X-hNK"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="TAt-3E-lgW" firstAttribute="top" secondItem="GtA-Pi-fNA" secondAttribute="top" id="MJo-6p-c4p"/>
+                        <constraint firstAttribute="bottom" secondItem="TAt-3E-lgW" secondAttribute="bottom" id="MU4-5W-dRk"/>
+                        <constraint firstAttribute="trailing" secondItem="TAt-3E-lgW" secondAttribute="trailing" id="UQy-4j-gd5"/>
+                        <constraint firstItem="TAt-3E-lgW" firstAttribute="centerX" secondItem="GtA-Pi-fNA" secondAttribute="centerX" id="Wkn-EE-qHD"/>
+                        <constraint firstItem="TAt-3E-lgW" firstAttribute="leading" secondItem="GtA-Pi-fNA" secondAttribute="leading" id="ehm-YY-Mtk"/>
+                        <constraint firstItem="TAt-3E-lgW" firstAttribute="centerY" secondItem="GtA-Pi-fNA" secondAttribute="centerY" id="fhw-Ly-eQN"/>
+                    </constraints>
+                </scrollView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="GtA-Pi-fNA" secondAttribute="trailing" id="Q5P-6I-ZrJ"/>
+                <constraint firstItem="GtA-Pi-fNA" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Xv2-Aa-o0p"/>
+                <constraint firstItem="GtA-Pi-fNA" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="ZHl-c9-I65"/>
+                <constraint firstAttribute="bottom" secondItem="GtA-Pi-fNA" secondAttribute="bottom" id="iRx-f2-3Df"/>
+            </constraints>
+        </view>
+    </objects>
+    <resources>
+        <image name="krcs_membership" width="320" height="154"/>
+    </resources>
+</document>

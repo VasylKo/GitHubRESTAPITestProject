@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="BecomeMemberView" customModule="PositionIn" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="80"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gsZ-Sy-qXc">
+                    <rect key="frame" x="8" y="8" width="64" height="64"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="64" id="Sjf-WB-ZYk"/>
+                        <constraint firstAttribute="height" constant="64" id="qbW-8Z-jRJ"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xDa-86-9K7">
+                    <rect key="frame" x="80" y="20" width="512" height="20"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OwT-ka-Qa3">
+                    <rect key="frame" x="80" y="48" width="512" height="17"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
+                    <color key="textColor" red="0.92941176470588238" green="0.10588235294117647" blue="0.1803921568627451" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="gsZ-Sy-qXc" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="43Q-LX-rxR"/>
+                <constraint firstItem="gsZ-Sy-qXc" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="4cc-JJ-WUI"/>
+                <constraint firstItem="xDa-86-9K7" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="20" id="Ow4-St-oXC"/>
+                <constraint firstAttribute="trailing" secondItem="xDa-86-9K7" secondAttribute="trailing" constant="8" id="Qzx-1a-P4s"/>
+                <constraint firstAttribute="trailing" secondItem="OwT-ka-Qa3" secondAttribute="trailing" constant="8" id="aUi-fv-eDv"/>
+                <constraint firstItem="xDa-86-9K7" firstAttribute="leading" secondItem="gsZ-Sy-qXc" secondAttribute="trailing" constant="8" id="byO-N3-NiA"/>
+                <constraint firstItem="OwT-ka-Qa3" firstAttribute="top" secondItem="xDa-86-9K7" secondAttribute="bottom" constant="8" id="c1W-sZ-TtW"/>
+                <constraint firstItem="OwT-ka-Qa3" firstAttribute="leading" secondItem="gsZ-Sy-qXc" secondAttribute="trailing" constant="8" id="vuW-1T-TR0"/>
+                <constraint firstAttribute="bottom" secondItem="OwT-ka-Qa3" secondAttribute="bottom" constant="15" id="wuI-6S-6JG"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="723" y="581"/>
+        </view>
+    </objects>
+</document>

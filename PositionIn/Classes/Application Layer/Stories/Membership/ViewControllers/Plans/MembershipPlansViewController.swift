@@ -23,6 +23,7 @@ class MembershipPlansViewController : UIViewController, UITableViewDelegate, UIT
     @IBOutlet weak var bottomView: UIView!
     @IBOutlet weak var spaceBetweenBottomViewAndTableViewContstraint: NSLayoutConstraint!
     
+    //TODO: should refactor
     let website = "http://www.redcross.or.ke"
     let phone = "+254703037000"
     let email = "membership@redcross.or.ke"
@@ -52,6 +53,9 @@ class MembershipPlansViewController : UIViewController, UITableViewDelegate, UIT
             self?.plans = response.items.filter(){ $0.type == self?.type }
             self?.tableView.reloadData()
         }
+        
+        let rightBarButtomItem = UIBarButtonItem(image: UIImage(named: "info_button_icon"), style: .Plain, target: self, action: "questionTapped")
+        self.parentViewController?.navigationItem.rightBarButtonItem = rightBarButtomItem
     }
     
     func setupInterface() {
@@ -104,6 +108,10 @@ class MembershipPlansViewController : UIViewController, UITableViewDelegate, UIT
     }
     
     //MARK: Target-Action
+    
+    @objc func questionTapped () {
+        
+    }
     
     @IBAction func alreadyMemberPressed(sender: AnyObject) {
         let actionSheetController: UIAlertController = UIAlertController(title: NSLocalizedString("Please contact our support"), message: nil, preferredStyle: .ActionSheet)
