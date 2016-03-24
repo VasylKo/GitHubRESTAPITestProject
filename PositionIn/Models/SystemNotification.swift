@@ -12,11 +12,23 @@ import CleanroomLogger
 
 struct SystemNotification : CRUDObject {
 
+    enum Type: Int {
+        case Unknown = 0
+        case AmbulanceOnTheWay
+        case AmbulanceCancelled
+        case MPESAPaymentCompleted
+        case MPESAPaymentFailed
+        case MembershipIsAboutToExpired
+        case MembershipExpired
+        case OrderDelivered
+    }
+    
     var objectId: CRUDObjectId = CRUDObjectInvalidId
     var title: String?
     var message: String?
     var isRead: Bool?
     var createdDate: NSDate?
+    var type : Type = .Unknown
     
     //MARK: Mappable
     
@@ -30,6 +42,7 @@ struct SystemNotification : CRUDObject {
         message <- map["message"]
         createdDate <-  (map["createdDate"], APIDateTransform())
         isRead <- map["isRead"]
+        type <- map["type"]
     }
     
     static func endpoint() -> String {
