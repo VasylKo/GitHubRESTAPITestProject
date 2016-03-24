@@ -30,8 +30,6 @@ struct Product: CRUDObject {
     var numOfBeneficiaries: Int?
     var distanceString: String?
     var date: NSDate?
-    var type: FeedItem.ItemType?
-    
     
 /*
     //TODO:
@@ -90,7 +88,6 @@ struct Product: CRUDObject {
         numOfBeneficiaries <- map["numOfBeneficiaries"]
         distanceString <- map["distanceString"]
         date <- (map["date"], APIDateTransform())
-        type <- (map["type"], EnumTransform())
     }
     
     static func endpoint() -> String {

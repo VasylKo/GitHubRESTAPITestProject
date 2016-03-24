@@ -55,6 +55,7 @@ final class Order: FeedItem {
     var status: OrderStatus?
     var transactionId: String?
     
+    
     override func mapping(map: Map) {
         objectId <- (map["id"], CRUDObjectIdTransform())
         entityDetails <- map["entityDetails"]
@@ -64,18 +65,13 @@ final class Order: FeedItem {
         quantity <- map["quantity"]
         status <- map["status"]
         transactionId <- map["transactionId"]
+        type <- map["entityDetails.type"]
     }
     
     required init?(_ map: Map) {
         super.init(map)
         
-        /*
-        Logic to determinate what type of wallet entity.
-        It could be: .Market, .Emergency, .Project, .Donation
-        */
-        if let entityDetails = entityDetails, orderType = entityDetails.type {
-            type = orderType
-        } else {
+        if type == .Unknown {
             type = .Donation
         }
     }
