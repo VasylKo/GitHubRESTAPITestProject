@@ -10,16 +10,30 @@ import UIKit
 
 class MembershipRouterImplementation: BaseRouterImplementation, MembershipRouter {
     
-    func showInitialViewController(from sourceViewController : UIViewController) {
-        if (api().isUserHasActiveMembershipPlan()) {
-            self.showMembershipMemberCardViewController(from: sourceViewController)
-        } else {
-            let corporatePlansViewController = MembershipPlansViewController(router: self, type: MembershipPlan.PlanType.Corporate, currentMembershipPlan: nil)
-            let individualPlansViewController = MembershipPlansViewController(router: self, type: MembershipPlan.PlanType.Individual, currentMembershipPlan: nil)
-            let initialViewController = SegmentedControlContainerViewController(labels: ["Individual", "Corporate"],
-                containeredViewControllers: [individualPlansViewController, corporatePlansViewController], title: "Membership")
-            sourceViewController.navigationController?.pushViewController(initialViewController, animated: true)
+    func showInitialViewController(from sourceViewController : UIViewController, hasActivePlan: Bool? = nil) {
+        switch hasActivePlan {
+        case .Some(let active):
+            if (active) {
+                self.showMembershipMemberCardViewController(from: sourceViewController)
+            } else {
+                let corporatePlansViewController = MembershipPlansViewController(router: self, type: MembershipPlan.PlanType.Corporate, currentMembershipPlan: nil)
+                let individualPlansViewController = MembershipPlansViewController(router: self, type: MembershipPlan.PlanType.Individual, currentMembershipPlan: nil)
+                let initialViewController = SegmentedControlContainerViewController(labels: ["Individual", "Corporate"],
+                    containeredViewControllers: [individualPlansViewController, corporatePlansViewController], title: "Membership")
+                sourceViewController.navigationController?.pushViewController(initialViewController, animated: true)
+            }
+        case .None:
+            if (api().isUserHasActiveMembershipPlan()) {
+                self.showMembershipMemberCardViewController(from: sourceViewController)
+            } else {
+                let corporatePlansViewController = MembershipPlansViewController(router: self, type: MembershipPlan.PlanType.Corporate, currentMembershipPlan: nil)
+                let individualPlansViewController = MembershipPlansViewController(router: self, type: MembershipPlan.PlanType.Individual, currentMembershipPlan: nil)
+                let initialViewController = SegmentedControlContainerViewController(labels: ["Individual", "Corporate"],
+                    containeredViewControllers: [individualPlansViewController, corporatePlansViewController], title: "Membership")
+                sourceViewController.navigationController?.pushViewController(initialViewController, animated: true)
+            }
         }
+
     }
     
     func showMembershipPlanDetailsViewController(from sourceViewController : UIViewController, with plan : MembershipPlan, onlyPlanInfo : Bool) {

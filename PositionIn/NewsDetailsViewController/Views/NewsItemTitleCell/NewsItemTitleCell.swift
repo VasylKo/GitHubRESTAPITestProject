@@ -20,6 +20,12 @@ class NewsItemTitleCell: TableViewCell {
         
         distanceIcon.hidden = true
         distanceLabel.hidden = true
+        authorLabel.hidden = true
+        
+        if m!.isFeautered == true {
+            bottomContainerHeightConstaint.constant = 0
+            return
+        }
         
         if let distance = m!.distance {
             distanceIcon.hidden = false
@@ -27,8 +33,14 @@ class NewsItemTitleCell: TableViewCell {
             distanceLabel.text = distance
         }
         else {
+            
+            if let author = m!.author {
+                self.authorLabel.text = "By \(author)"
+                self.authorLabel.hidden = false
+            }
+            
             distanceLabel.text = nil
-            if (m!.date == nil) {
+            if (m!.date == nil && m!.author == nil) {
                 bottomContainerHeightConstaint.constant = 0
             }
         }
@@ -37,6 +49,7 @@ class NewsItemTitleCell: TableViewCell {
     }
     
     @IBOutlet weak var bottomContainerHeightConstaint: NSLayoutConstraint!
+    @IBOutlet weak var authorLabel: UILabel!
     @IBOutlet weak var distanceIcon: UIImageView!
     @IBOutlet weak var distanceLabel: UILabel!
     

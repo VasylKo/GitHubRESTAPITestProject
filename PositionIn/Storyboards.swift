@@ -150,10 +150,6 @@ struct Storyboards {
             return self.storyboard.instantiateViewControllerWithIdentifier("PeopleNavigationController") as! UINavigationController
         }
 
-        static func instantiatePeopleViewController() -> PeopleViewController {
-            return self.storyboard.instantiateViewControllerWithIdentifier("PeopleViewController") as! PeopleViewController
-        }
-
         static func instantiateUserProfileViewController() -> UserProfileViewController {
             return self.storyboard.instantiateViewControllerWithIdentifier("UserProfileViewController") as! UserProfileViewController
         }
@@ -1244,46 +1240,6 @@ extension BrowseViewController {
                 return PromotionDetailsViewController.self
             case ShowPost:
                 return PostViewController.self
-            }
-        }
-
-        var identifier: String? { return self.description } 
-        var description: String { return self.rawValue }
-    }
-
-}
-
-//MARK: - PeopleViewController
-extension UIStoryboardSegue {
-    func selection() -> PeopleViewController.Segue? {
-        if let identifier = self.identifier {
-            return PeopleViewController.Segue(rawValue: identifier)
-        }
-        return nil
-    }
-}
-
-extension PeopleViewController: IdentifiableProtocol { 
-    var storyboardIdentifier: String? { return "PeopleViewController" }
-    static var storyboardIdentifier: String? { return "PeopleViewController" }
-}
-
-extension PeopleViewController { 
-
-    enum Segue: String, CustomStringConvertible, SegueProtocol {
-        case ShowUserProfile = "ShowUserProfile"
-
-        var kind: SegueKind? {
-            switch (self) {
-            case ShowUserProfile:
-                return SegueKind(rawValue: "show")
-            }
-        }
-
-        var destination: UIViewController.Type? {
-            switch (self) {
-            case ShowUserProfile:
-                return UserProfileViewController.self
             }
         }
 

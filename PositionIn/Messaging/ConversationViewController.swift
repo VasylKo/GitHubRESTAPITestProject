@@ -42,6 +42,11 @@ final class ConversationViewController: JSQMessagesViewController {
     
     //MARK: - Overrides -
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.inputToolbar?.contentView?.leftBarButtonItem = nil;
+    }
+    
     /**
     *  This method is called when the user taps the send button on the inputToolbar
     *  after composing a message with the specified data.

@@ -49,7 +49,7 @@ class PhoneNumberViewController: XLFormViewController {
         let form = XLFormDescriptor(title: NSLocalizedString("Your Phone Number", comment: "New post: form caption"))
         
         //Country code section
-        let countryCodeSection = XLFormSectionDescriptor.formSectionWithTitle("Please confirm your country code\nand enter your phone number")
+        let countryCodeSection = XLFormSectionDescriptor.formSectionWithTitle("Join Red Cross Today\nPlease confirm your country code\nand enter your mobile phone number")
         form.addFormSection(countryCodeSection)
         
         let coutryRow : XLFormRowDescriptor = XLFormRowDescriptor(tag: Tags.CountryCode.rawValue,
@@ -88,7 +88,7 @@ class PhoneNumberViewController: XLFormViewController {
         
         let phoneRow: XLFormRowDescriptor = XLFormRowDescriptor(tag: Tags.Phone.rawValue,
             rowType: XLFormRowDescriptorTypePhone)
-        phoneRow.cellConfigAtConfigure["textField.placeholder"] = "Enter your phone number"
+        phoneRow.cellConfigAtConfigure["textField.placeholder"] = "Enter your mobile phone number"
         phoneRow.required = true
         phoneRow.addValidator(XLFormRegexValidator(msg: NSLocalizedString("Please specify a valid phone number",
             comment: "Onboarding"), regex: "^\\+?\\d+$"))
@@ -98,6 +98,7 @@ class PhoneNumberViewController: XLFormViewController {
     }
     
     func dismissLogin() {
+        self.view.endEditing(true)
         sideBarController?.executeAction(SidebarViewController.defaultAction)
         dismissViewControllerAnimated(true, completion: nil)
     }
@@ -138,7 +139,7 @@ class PhoneNumberViewController: XLFormViewController {
             
             let alertController = UIAlertController(title: NSLocalizedString("Number Confirmation",
                 comment: "Onboarding"),
-                message: "Is your phone number below correct?\n\(phoneNumber)", preferredStyle: .Alert)
+                message: "Is your mobile phone number below correct?\n\(phoneNumber)", preferredStyle: .Alert)
             
             let cancelAction = UIAlertAction(title: "Edit", style: .Cancel, handler: nil)
             alertController.addAction(cancelAction)

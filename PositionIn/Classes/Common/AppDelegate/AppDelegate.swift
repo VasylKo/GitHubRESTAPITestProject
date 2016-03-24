@@ -155,8 +155,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //TODO: should set push note message
         let apsDictionary = userInfo["aps"]
         if let alert = apsDictionary!["alert"] as? String {
-            let notification = LNNotification(message: alert)
-            LNNotificationCenter.defaultCenter().presentNotification(notification, forApplicationIdentifier: "RedCross")
+            
+            //don't show notification when on ambulance flow screens
+            let w : UIWindow = (UIApplication.sharedApplication().delegate?.window!)!
+            var isOnAmbulanceFlow = false
+            if let controllersInNavigation = ((w.rootViewController as? SidebarViewController)?.childViewControllers.last as? UINavigationController)?.viewControllers {
+                for controller in controllersInNavigation {
+                    if controller is CallAmbulanceViewController {
+                        isOnAmbulanceFlow = true
+                    }
+                }
+            }
+            if !isOnAmbulanceFlow {
+                let notification = LNNotification(message: alert)
+                LNNotificationCenter.defaultCenter().presentNotification(notification, forApplicationIdentifier: "RedCross")
+            }
         }
     }
 }

@@ -89,7 +89,7 @@ final class LocationController {
             let distance = myLocation.distanceFromLocation(startLocation)
             let formatter = NSLengthFormatter()
             formatter.numberFormatter.maximumFractionDigits = 1
-            formatter.unitStyle = .Long
+            formatter.unitStyle = .Medium
             return formatter.stringFromMeters(distance)
         }
     }

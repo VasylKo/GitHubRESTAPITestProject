@@ -43,12 +43,12 @@ class NewsCardCell: TableViewCell {
             self.imageHeightConstaint.constant = 0
         }
         
-        headerLabel.text = self.model?.title
+        headerLabel.text = self.model?.authorName
         if let date = self.model?.date {
-            infoLabel.text = date.formattedAsTimeAgo()
+            detailsLabel.text = date.formattedAsTimeAgo()
         }
         
-        detailsLabel.text = self.model?.details
+        infoLabel.text = self.model?.details
         
         if let numOfLikes = self.model?.numOfLikes {
             likesButton.setTitle(String(numOfLikes), forState: .Normal)

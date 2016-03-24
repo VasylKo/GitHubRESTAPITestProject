@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DonateInfoViewController" customModule="PositionIn" customModuleProvider="target">
+            <connections>
+                <outlet property="donateButton" destination="Fqa-Xn-3fa" id="0mo-QG-V0q"/>
+                <outlet property="donateInfoContainerView" destination="kJ1-ZN-INQ" id="jJC-LV-aCC"/>
+                <outlet property="donateToLabel" destination="pox-xM-NCr" id="heT-9B-hOA"/>
+                <outlet property="view" destination="rds-mS-GFk" id="4ZA-b4-VsV"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="rds-mS-GFk">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RVZ-oy-DDr">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Eoq-MD-V3F">
+                            <rect key="frame" x="0.0" y="0.0" width="600" height="533"/>
+                            <subviews>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="redraw" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="krcs_donate" translatesAutoresizingMaskIntoConstraints="NO" id="EuY-hh-Hh3">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="154"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="154" id="pZe-6I-6Oy"/>
+                                    </constraints>
+                                </imageView>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kJ1-ZN-INQ">
+                                    <rect key="frame" x="16" y="109" width="568" height="80"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="krfc" translatesAutoresizingMaskIntoConstraints="NO" id="sGx-10-ckR">
+                                            <rect key="frame" x="8" y="8" width="64" height="64"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="64" id="8A5-Gz-RLj"/>
+                                                <constraint firstAttribute="width" constant="64" id="yAD-Py-duD"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Donate to" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3ug-aM-qpj">
+                                            <rect key="frame" x="72" y="20" width="488" height="16.5"/>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                            <color key="textColor" red="0.60784313725490191" green="0.60784313725490191" blue="0.60784313725490191" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pox-xM-NCr">
+                                            <rect key="frame" x="72" y="44" width="488" height="20.5"/>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                    <constraints>
+                                        <constraint firstItem="pox-xM-NCr" firstAttribute="top" secondItem="3ug-aM-qpj" secondAttribute="bottom" constant="8" id="199-av-Nzx"/>
+                                        <constraint firstAttribute="height" constant="80" id="9WK-hY-cjw"/>
+                                        <constraint firstItem="sGx-10-ckR" firstAttribute="leading" secondItem="kJ1-ZN-INQ" secondAttribute="leading" constant="8" id="DFJ-Lo-d6m"/>
+                                        <constraint firstAttribute="bottom" secondItem="pox-xM-NCr" secondAttribute="bottom" constant="15" id="EEf-xo-c8t"/>
+                                        <constraint firstItem="3ug-aM-qpj" firstAttribute="leading" secondItem="sGx-10-ckR" secondAttribute="trailing" id="PpP-Fd-njT"/>
+                                        <constraint firstAttribute="trailing" secondItem="pox-xM-NCr" secondAttribute="trailing" constant="8" id="Qwk-yV-wwm"/>
+                                        <constraint firstAttribute="trailing" secondItem="3ug-aM-qpj" secondAttribute="trailing" constant="8" id="Z4M-vp-xeS"/>
+                                        <constraint firstItem="pox-xM-NCr" firstAttribute="leading" secondItem="sGx-10-ckR" secondAttribute="trailing" id="x2Y-eY-aSr"/>
+                                        <constraint firstItem="3ug-aM-qpj" firstAttribute="top" secondItem="kJ1-ZN-INQ" secondAttribute="top" constant="20" id="yqN-ct-6fo"/>
+                                        <constraint firstItem="sGx-10-ckR" firstAttribute="top" secondItem="kJ1-ZN-INQ" secondAttribute="top" constant="8" id="zoh-9P-RaC"/>
+                                    </constraints>
+                                </view>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fqa-Xn-3fa">
+                                    <rect key="frame" x="20" y="464" width="560" height="45"/>
+                                    <color key="backgroundColor" red="0.97972347859999998" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="45" id="rwb-3o-rzL"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="19"/>
+                                    <state key="normal" title="Donate">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="donateTapped:" destination="-1" eventType="touchUpInside" id="2Gg-2c-jhw"/>
+                                    </connections>
+                                </button>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Make the difference,  be the difference" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vP6-5p-0X0">
+                                    <rect key="frame" x="20" y="205" width="560" height="76"/>
+                                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="32"/>
+                                    <color key="textColor" red="0.92941176470588238" green="0.10588235294117647" blue="0.1803921568627451" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vRe-eA-55z">
+                                    <rect key="frame" x="20" y="297" width="560" height="139"/>
+                                    <string key="text">Your donation will help us in disaster alleviation, provide water &amp; sanitation, improve education, provide health services and improve food security.
+
+Your donations allow Kenya Red Cross beneficiaries to build their businesses, support their families, plan their futures and transform their communities.</string>
+                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.54000000000000004" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" red="0.96470588239999999" green="0.96470588239999999" blue="0.96470588239999999" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstItem="Fqa-Xn-3fa" firstAttribute="leading" secondItem="Eoq-MD-V3F" secondAttribute="leading" constant="20" id="1rU-1A-Ri9"/>
+                                <constraint firstItem="EuY-hh-Hh3" firstAttribute="leading" secondItem="Eoq-MD-V3F" secondAttribute="leading" id="4Cm-a6-8e6"/>
+                                <constraint firstItem="vP6-5p-0X0" firstAttribute="leading" secondItem="Eoq-MD-V3F" secondAttribute="leading" constant="20" id="4GY-3G-pTg"/>
+                                <constraint firstItem="Fqa-Xn-3fa" firstAttribute="top" secondItem="vRe-eA-55z" secondAttribute="bottom" constant="28" id="6qV-Q1-pcF"/>
+                                <constraint firstItem="vP6-5p-0X0" firstAttribute="top" secondItem="kJ1-ZN-INQ" secondAttribute="bottom" constant="16" id="7gz-kA-lCA"/>
+                                <constraint firstAttribute="trailing" secondItem="vRe-eA-55z" secondAttribute="trailing" constant="20" id="9OW-58-mBD"/>
+                                <constraint firstItem="vRe-eA-55z" firstAttribute="leading" secondItem="Eoq-MD-V3F" secondAttribute="leading" constant="20" id="BVQ-T4-rdt"/>
+                                <constraint firstItem="EuY-hh-Hh3" firstAttribute="top" secondItem="Eoq-MD-V3F" secondAttribute="top" id="Bo1-k2-Rek"/>
+                                <constraint firstItem="vRe-eA-55z" firstAttribute="top" secondItem="vP6-5p-0X0" secondAttribute="bottom" constant="16" id="HLK-hu-4ZD"/>
+                                <constraint firstItem="vRe-eA-55z" firstAttribute="leading" secondItem="Eoq-MD-V3F" secondAttribute="leading" constant="20" id="NZe-WB-jZJ"/>
+                                <constraint firstAttribute="trailing" secondItem="vP6-5p-0X0" secondAttribute="trailing" constant="20" id="VmQ-pl-wEJ"/>
+                                <constraint firstAttribute="trailing" secondItem="Fqa-Xn-3fa" secondAttribute="trailing" constant="20" id="cKC-Ku-cg3"/>
+                                <constraint firstAttribute="trailing" secondItem="EuY-hh-Hh3" secondAttribute="trailing" id="eXy-9u-gwa"/>
+                                <constraint firstItem="kJ1-ZN-INQ" firstAttribute="top" secondItem="Eoq-MD-V3F" secondAttribute="top" constant="109" id="gNe-Iy-3C3"/>
+                                <constraint firstAttribute="trailing" secondItem="kJ1-ZN-INQ" secondAttribute="trailing" constant="16" id="j2g-wP-HVd"/>
+                                <constraint firstAttribute="bottom" secondItem="Fqa-Xn-3fa" secondAttribute="bottom" constant="24" id="kgU-JQ-mAr"/>
+                                <constraint firstAttribute="trailing" secondItem="vRe-eA-55z" secondAttribute="trailing" constant="20" id="qa6-7C-dNU"/>
+                                <constraint firstItem="kJ1-ZN-INQ" firstAttribute="leading" secondItem="Eoq-MD-V3F" secondAttribute="leading" constant="16" id="rE9-dv-IOY"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="Eoq-MD-V3F" secondAttribute="bottom" id="1pM-bM-gS5"/>
+                        <constraint firstItem="Eoq-MD-V3F" firstAttribute="leading" secondItem="RVZ-oy-DDr" secondAttribute="leading" id="Aa4-tU-Xaa"/>
+                        <constraint firstItem="Eoq-MD-V3F" firstAttribute="centerY" secondItem="RVZ-oy-DDr" secondAttribute="centerY" id="JfS-i1-YI0"/>
+                        <constraint firstAttribute="trailing" secondItem="Eoq-MD-V3F" secondAttribute="trailing" id="iMq-W1-Qws"/>
+                        <constraint firstItem="Eoq-MD-V3F" firstAttribute="top" secondItem="RVZ-oy-DDr" secondAttribute="top" id="iWw-ff-FFL"/>
+                        <constraint firstItem="Eoq-MD-V3F" firstAttribute="centerX" secondItem="RVZ-oy-DDr" secondAttribute="centerX" id="vHf-OZ-z0g"/>
+                    </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="JfS-i1-YI0"/>
+                            <exclude reference="vHf-OZ-z0g"/>
+                        </mask>
+                    </variation>
+                </scrollView>
+            </subviews>
+            <color key="backgroundColor" red="0.96470588239999999" green="0.96470588239999999" blue="0.96470588239999999" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstItem="RVZ-oy-DDr" firstAttribute="top" secondItem="rds-mS-GFk" secondAttribute="top" id="6gm-cS-nRY"/>
+                <constraint firstItem="Eoq-MD-V3F" firstAttribute="height" secondItem="rds-mS-GFk" secondAttribute="height" priority="250" id="7U4-jq-bqX"/>
+                <constraint firstItem="Eoq-MD-V3F" firstAttribute="width" secondItem="rds-mS-GFk" secondAttribute="width" id="9Jx-U1-3pc"/>
+                <constraint firstAttribute="trailing" secondItem="RVZ-oy-DDr" secondAttribute="trailing" id="KNA-fd-8Kx"/>
+                <constraint firstItem="RVZ-oy-DDr" firstAttribute="leading" secondItem="rds-mS-GFk" secondAttribute="leading" id="OcJ-Cp-ZzL"/>
+                <constraint firstAttribute="bottom" secondItem="RVZ-oy-DDr" secondAttribute="bottom" id="TvB-Ph-ZFn"/>
+            </constraints>
+        </view>
+    </objects>
+    <resources>
+        <image name="krcs_donate" width="320" height="154"/>
+        <image name="krfc" width="60" height="60"/>
+    </resources>
+</document>

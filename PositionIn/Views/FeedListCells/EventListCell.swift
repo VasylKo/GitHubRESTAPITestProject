@@ -47,7 +47,7 @@ final class EventListCell: TableViewCell {
             break
         }
         
-        titleLabel?.text = m!.title
+        titleLabel?.text = m!.title ?? " "
         
         if m!.item.type == FeedItem.ItemType.Event {
             let eventDetailsFormat = NSLocalizedString("%d People are attending", comment: "Event details: details format")
@@ -57,13 +57,13 @@ final class EventListCell: TableViewCell {
                 let dateFormatter = NSDateFormatter()
                 dateFormatter.dateFormat = "dd MMM, hh:mm a"
                 let date = dateFormatter.stringFromDate(date)
-                dateLabel?.text = date
+                dateLabel?.text = date ?? " "
             }
 
         }
         else {
-            infoLabel?.text = m!.info
-            dateLabel?.text = m!.details
+            infoLabel?.text = m!.info ?? " "
+            dateLabel?.text = m!.details ?? " "
         }
     }
     
