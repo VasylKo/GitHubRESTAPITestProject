@@ -29,11 +29,14 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TAt-3E-lgW">
                             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                             <subviews>
-                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="redraw" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="krcs_membership" translatesAutoresizingMaskIntoConstraints="NO" id="oyg-tF-aaF">
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="redraw" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="krcs_membership" translatesAutoresizingMaskIntoConstraints="NO" id="oyg-tF-aaF">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="154"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="154" id="Bwb-ny-fPU"/>
+                                    </constraints>
                                 </imageView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pw4-Vg-lYm">
-                                    <rect key="frame" x="20" y="205" width="560" height="59.5"/>
+                                    <rect key="frame" x="20" y="205" width="560" height="60"/>
                                     <string key="text">As a voluntary organization, the Society operates through a network of members and volunteers who assist in implementing KRCS activities countrywide</string>
                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.87" colorSpace="calibratedRGB"/>
@@ -98,7 +101,7 @@
                                     </connections>
                                 </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="249" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YoK-Tc-a9B">
-                                    <rect key="frame" x="20" y="432" width="560" height="74.5"/>
+                                    <rect key="frame" x="20" y="432" width="560" height="75"/>
                                     <string key="text">The Societies humanitarian action over the years has been made possible by the commitment of members, coupled with the support provided by different organizations &amp; individuals.</string>
                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.87" colorSpace="calibratedRGB"/>
@@ -111,7 +114,10 @@
                                 <constraint firstItem="D7n-Ql-eYG" firstAttribute="leading" secondItem="TAt-3E-lgW" secondAttribute="leading" constant="16" id="ERm-X2-8cE"/>
                                 <constraint firstItem="sYg-CA-SJx" firstAttribute="leading" secondItem="TAt-3E-lgW" secondAttribute="leading" constant="20" id="Ed8-L6-l4U"/>
                                 <constraint firstItem="YoK-Tc-a9B" firstAttribute="top" secondItem="TBU-dD-eNG" secondAttribute="bottom" constant="20" id="Htf-5w-1hH"/>
+                                <constraint firstItem="oyg-tF-aaF" firstAttribute="top" secondItem="TAt-3E-lgW" secondAttribute="top" id="KKY-rz-1pO"/>
+                                <constraint firstAttribute="trailing" secondItem="oyg-tF-aaF" secondAttribute="trailing" id="KnP-7W-4en"/>
                                 <constraint firstItem="sYg-CA-SJx" firstAttribute="top" secondItem="YoK-Tc-a9B" secondAttribute="bottom" constant="24" id="PzR-Up-Vni"/>
+                                <constraint firstItem="oyg-tF-aaF" firstAttribute="leading" secondItem="TAt-3E-lgW" secondAttribute="leading" id="WDb-UU-v5k"/>
                                 <constraint firstItem="YoK-Tc-a9B" firstAttribute="leading" secondItem="TAt-3E-lgW" secondAttribute="leading" constant="20" id="abo-hx-cA9"/>
                                 <constraint firstAttribute="trailing" secondItem="sYg-CA-SJx" secondAttribute="trailing" constant="20" id="bt0-GD-zI6"/>
                                 <constraint firstAttribute="trailing" secondItem="pw4-Vg-lYm" secondAttribute="trailing" constant="20" id="kbM-gW-LMq"/>
