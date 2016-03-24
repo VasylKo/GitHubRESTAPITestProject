@@ -68,10 +68,12 @@ class PeopleFollowingViewController : UIViewController {
     }
     
     deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(subscriptionUpdateObserver)
+        if let subscriptionUpdateObserver = self.subscriptionUpdateObserver {
+            NSNotificationCenter.defaultCenter().removeObserver(subscriptionUpdateObserver)
+        }
     }
     
-    private var subscriptionUpdateObserver: NSObjectProtocol!
+    private var subscriptionUpdateObserver: NSObjectProtocol?
 
     func contentDidChange(sender: AnyObject?, info: [NSObject : AnyObject]?) {
         (self.parentViewController as? BesideMenuViewController)?.contentDidChange(sender, info: info)
