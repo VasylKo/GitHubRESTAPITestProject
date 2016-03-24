@@ -31,10 +31,34 @@ final class DonationDetailsViewController: UIViewController {
     private func configure() {
         title = NSLocalizedString("Donation")
         
-        productImage?.setImageFromURL(donation?.entityDetails?.imageURL, placeholder: UIImage(named: "market_img_default"))
+        setProductImage()
         donatedToLabel?.text = donation?.entityDetails?.name
         paymentMethodLabel?.text = donation?.paymentMethod?.description
         paymentDateLabel?.text = donation?.paymentDate?.formattedAsTimeAgo()
         totalLabel?.text = AppConfiguration().currencyFormatter.stringFromNumber(donation?.price ?? 0.0) ?? ""
+    }
+    
+    
+    private func setProductImage() {
+        guard let donation = donation else {
+            productImage?.setImageFromURL(nil, placeholder: UIImage(named: "market_img_default"))
+            return
+        }
+        
+        var placeholderImage: UIImage?
+        
+        switch donation.type {
+        case .Emergency:
+             placeholderImage = UIImage(named: "PromotionDetailsPlaceholder")
+        case .Project:
+            placeholderImage = UIImage(named: "hardware_img_default")
+        case .Donation:
+            placeholderImage = UIImage(named: "krfc")
+        default:
+            placeholderImage = UIImage(named: "market_img_default")
+        }
+        
+        //set image for donation
+        productImage?.setImageFromURL(donation.entityDetails?.imageURL, placeholder: placeholderImage)
     }
 }
