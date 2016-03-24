@@ -36,9 +36,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     override init() {
         #if DEBUG
-//        Log.enable(.Verbose, synchronousMode: true)
+        Log.enable(.Verbose, synchronousMode: true)
         #else
-//        Log.enable(.Info, synchronousMode: false)
+        Log.enable(.Info, synchronousMode: false)
         #endif
         let appConfig = AppConfiguration()
         let urlSessionConfig = NSURLSessionConfiguration.defaultSessionConfiguration()
@@ -61,8 +61,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             object: nil,
             queue: nil) { [weak self] notification in
                 let newProfile = notification.object as? UserProfile
-// 
-//                self?.currentUserDidChange(newProfile)
+                self?.currentUserDidChange(newProfile)
         }
         
     }
@@ -118,7 +117,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         Fabric.with([Crashlytics.self])
         
-//        NewRelic.startWithApplicationToken(AppConfiguration().newRelicToken);
+        NewRelic.startWithApplicationToken(AppConfiguration().newRelicToken);
         let notificationSettings = LNNotificationAppSettings()
         notificationSettings.alertStyle = .Banner
         notificationSettings.soundEnabled = false
@@ -179,7 +178,7 @@ extension AppDelegate {
     
     private class func chatClientInstance() -> XMPPClient {
         let appConfig = AppConfiguration()
-        let chatConfig = XMPPClientConfiguration(appConfig.xmppHostname, port: appConfig.xmppPort)
+        let chatConfig = XMPPClientConfiguration(with: appConfig.xmppHostname, port: appConfig.xmppPort)
         let credentialsProvider = appDelegate().api.chatCredentialsProvider()
         return XMPPClient(configuration: chatConfig, credentialsProvider: credentialsProvider)
     }

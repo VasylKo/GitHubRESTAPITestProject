@@ -23,14 +23,6 @@ class MembershipMessageController: UIViewController {
         becomeMemberContainerView.layer.shadowOpacity = 0.1
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        
-//        var size = self.scrollView.contentSize
-//        size.height = self.contentView.frame.size.height
-//        self.scrollView.contentSize = size
-    }
-//    
     @IBAction func becomeMemberTapped(sender: AnyObject) {
         self.navigationController?.popViewControllerAnimated(true)
     }
