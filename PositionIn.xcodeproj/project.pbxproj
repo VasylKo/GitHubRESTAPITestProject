@@ -248,7 +248,6 @@
 		E604B16E1BF96F14004DA20B /* ChatHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E604B16D1BF96F14004DA20B /* ChatHistory.swift */; };
 		E60EBF761B8EF9B50014B6ED /* DataTransforms.swift in Sources */ = {isa = PBXBuildFile; fileRef = E60EBF751B8EF9B50014B6ED /* DataTransforms.swift */; };
 		E60F91331BE2CA2F005F416A /* BadgeView.m in Sources */ = {isa = PBXBuildFile; fileRef = E60F91321BE2CA2F005F416A /* BadgeView.m */; };
-		E6199BB71B9F3B7400E3C69D /* PeopleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6199BB61B9F3B7400E3C69D /* PeopleViewController.swift */; };
 		E61B20D51B7DD47C005EAB2C /* FeedItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61B20D41B7DD47C005EAB2C /* FeedItem.swift */; };
 		E61B20D81B7E0838005EAB2C /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61B20D71B7E0838005EAB2C /* SettingsViewController.swift */; };
 		E61B20EF1B813C8C005EAB2C /* Community.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61B20EE1B813C8C005EAB2C /* Community.swift */; };
@@ -808,7 +807,6 @@
 		E60EBF751B8EF9B50014B6ED /* DataTransforms.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataTransforms.swift; sourceTree = "<group>"; };
 		E60F91311BE2CA2F005F416A /* BadgeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BadgeView.h; sourceTree = "<group>"; };
 		E60F91321BE2CA2F005F416A /* BadgeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BadgeView.m; sourceTree = "<group>"; };
-		E6199BB61B9F3B7400E3C69D /* PeopleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeopleViewController.swift; sourceTree = "<group>"; };
 		E61B20D41B7DD47C005EAB2C /* FeedItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedItem.swift; sourceTree = "<group>"; };
 		E61B20D71B7E0838005EAB2C /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		E61B20EE1B813C8C005EAB2C /* Community.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Community.swift; sourceTree = "<group>"; };
@@ -2209,7 +2207,6 @@
 				23F6AF821CA1DBAD00CDD2FF /* PeopleFollowingViewController.xib */,
 				CD7C07A71CA1A7C90075BC5B /* PeopleExploreViewControler.swift */,
 				23F6AF841CA2889800CDD2FF /* PeopleExploreViewController.xib */,
-				E6199BB61B9F3B7400E3C69D /* PeopleViewController.swift */,
 				E6C9522B1BA1BB0E0032254F /* PeopleListCell.swift */,
 				E6C9522D1BA1BB470032254F /* PositionIn.PeopleListCell.xib */,
 				23F6AF861CA28BB000CDD2FF /* Fetcher.swift */,
@@ -4382,7 +4379,6 @@
 				50FE7D891BBE77BB005676E2 /* ItemsSearchResultDataSource.swift in Sources */,
 				CDB5B5CC1C5B9C2400413715 /* MembershipPlanTableViewCell.swift in Sources */,
 				D1379E941C2C21F80041AA4E /* NewsCardCell.swift in Sources */,
-				E6199BB71B9F3B7400E3C69D /* PeopleViewController.swift in Sources */,
 				E604B16E1BF96F14004DA20B /* ChatHistory.swift in Sources */,
 				D100DF0B1BF4AA0300C81054 /* GoogleAnalyticsHelper.swift in Sources */,
 				E6D4D5B81B6FA7A7003134CB /* SearchTransition.swift in Sources */,
