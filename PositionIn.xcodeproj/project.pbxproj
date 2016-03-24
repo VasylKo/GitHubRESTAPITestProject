@@ -214,6 +214,8 @@
 		D1C475EC1C1081770096D383 /* PaymentCompletedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C475EB1C1081770096D383 /* PaymentCompletedViewController.swift */; };
 		D1CAA7521C60BB1E0046130E /* PaymentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1CAA7501C60BB1E0046130E /* PaymentTableViewCell.swift */; };
 		D1CAA7531C60BB1E0046130E /* PaymentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1CAA7511C60BB1E0046130E /* PaymentTableViewCell.xib */; };
+		D1D391461CA47D430065CC25 /* DonateInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1D391441CA47D430065CC25 /* DonateInfoViewController.swift */; };
+		D1D391471CA47D430065CC25 /* DonateInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1D391451CA47D430065CC25 /* DonateInfoViewController.xib */; };
 		D1DA176C1C05B7BE0091A8CE /* BrowseGridCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DA176A1C05B7BE0091A8CE /* BrowseGridCollectionViewCell.swift */; };
 		D1DA176D1C05B7BE0091A8CE /* PositionIn.BrowseGridCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1DA176B1C05B7BE0091A8CE /* PositionIn.BrowseGridCollectionViewCell.xib */; };
 		D1DA1EBC1C5909D7009F5AFA /* MembershipConfirmDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DA1EB11C5909D7009F5AFA /* MembershipConfirmDetailsViewController.swift */; };
@@ -774,6 +776,8 @@
 		D1C475EB1C1081770096D383 /* PaymentCompletedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentCompletedViewController.swift; sourceTree = "<group>"; };
 		D1CAA7501C60BB1E0046130E /* PaymentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentTableViewCell.swift; sourceTree = "<group>"; };
 		D1CAA7511C60BB1E0046130E /* PaymentTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PaymentTableViewCell.xib; sourceTree = "<group>"; };
+		D1D391441CA47D430065CC25 /* DonateInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DonateInfoViewController.swift; sourceTree = "<group>"; };
+		D1D391451CA47D430065CC25 /* DonateInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DonateInfoViewController.xib; sourceTree = "<group>"; };
 		D1DA176A1C05B7BE0091A8CE /* BrowseGridCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowseGridCollectionViewCell.swift; sourceTree = "<group>"; };
 		D1DA176B1C05B7BE0091A8CE /* PositionIn.BrowseGridCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.BrowseGridCollectionViewCell.xib; sourceTree = "<group>"; };
 		D1DA1EB11C5909D7009F5AFA /* MembershipConfirmDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MembershipConfirmDetailsViewController.swift; sourceTree = "<group>"; };
@@ -1984,6 +1988,15 @@
 			path = PaymentTableViewCell;
 			sourceTree = "<group>";
 		};
+		D1D391431CA47D160065CC25 /* DonateInfoViewController */ = {
+			isa = PBXGroup;
+			children = (
+				D1D391441CA47D430065CC25 /* DonateInfoViewController.swift */,
+				D1D391451CA47D430065CC25 /* DonateInfoViewController.xib */,
+			);
+			path = DonateInfoViewController;
+			sourceTree = "<group>";
+		};
 		D1DA17691C05B71D0091A8CE /* BrowseGridCollectionViewCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -2376,6 +2389,7 @@
 		E64DC34C1B4E53C90011D37C /* PositionIn */ = {
 			isa = PBXGroup;
 			children = (
+				D1D391431CA47D160065CC25 /* DonateInfoViewController */,
 				D1DC99351CA27E2B004A992B /* MembershipMessageController */,
 				D1933C251C997AAB00D1B965 /* FeedEmergencyDetailsViewController */,
 				D112BFB11C96E1E700339D7D /* NewsDetailsViewController */,
@@ -3973,6 +3987,7 @@
 				240A9B9C1B9CCDA4007C77E3 /* PositionIn.CommunityStatsCell.xib in Resources */,
 				E66115871B7376F4003DB5B3 /* Login.storyboard in Resources */,
 				D1DC99391CA27E8D004A992B /* MembershipMessageController.xib in Resources */,
+				D1D391471CA47D430065CC25 /* DonateInfoViewController.xib in Resources */,
 				D1379E8E1C2A98710041AA4E /* PositionIn.ExploreCardCell.xib in Resources */,
 				CDEDD9781C45243900396594 /* PositionIn.CommunitySearchViewController.xib in Resources */,
 				CD1313311C6E3387002F6F32 /* PositionIn.PostAttachmentsCell.xib in Resources */,
@@ -4308,6 +4323,7 @@
 				E6BEF1CD1B9C5E7200511B46 /* PostImageCell.swift in Sources */,
 				D1F1FF251C22F384006D2E75 /* VolunteerDetailsViewController.swift in Sources */,
 				D1FD854B1C1EFE0F00C2E87B /* MarketDetailsViewController.swift in Sources */,
+				D1D391461CA47D430065CC25 /* DonateInfoViewController.swift in Sources */,
 				CD21C8D01C76002C009261C7 /* NewsContainerViewController.swift in Sources */,
 				2431EBE01B94C1DC009FB158 /* Event.swift in Sources */,
 				24EF62111BA81A6B00472531 /* ChatHistoryCellModel.swift in Sources */,

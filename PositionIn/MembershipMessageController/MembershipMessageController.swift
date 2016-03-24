@@ -28,12 +28,12 @@ class MembershipMessageController: UIViewController {
     }
 
     
-    @IBOutlet weak var contentView: UIView!
-    @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var becomeMemberButton: UIButton!
-    @IBOutlet weak var becomeMemberContainerView: UIView!
-    @IBOutlet weak var bottomInfoLabel: UILabel!
-    @IBOutlet weak var topInfoLabel: UILabel!
-    @IBOutlet weak var makeDiffLabel: UILabel!
-    @IBOutlet weak var becomeMemberLabel: UILabel!
+    @IBOutlet private weak var contentView: UIView!
+    @IBOutlet private weak var scrollView: UIScrollView!
+    @IBOutlet private weak var becomeMemberButton: UIButton!
+    @IBOutlet private weak var becomeMemberContainerView: UIView!
+    @IBOutlet private weak var bottomInfoLabel: UILabel!
+    @IBOutlet private weak var topInfoLabel: UILabel!
+    @IBOutlet private weak var makeDiffLabel: UILabel!
+    @IBOutlet private weak var becomeMemberLabel: UILabel!
 }
