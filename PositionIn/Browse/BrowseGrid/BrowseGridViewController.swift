@@ -31,6 +31,27 @@ class BrowseGridViewController: UIViewController {
         }        
         
         self.collectionView.setCollectionViewLayout(flowLayout, animated: false)
+        
+        setNavigationButtons()
+    }
+    
+    private func setNavigationButtons() {
+        //Call parent view controller with navigation bar (BrowseMainGridController) where we whant to add notification button
+        let notificationBarButtonItem = UIBarButtonItem(image: UIImage(named: "notification_icon"), style: .Plain, target: self, action: "notificationTouched")
+        parentViewController?.navigationItem.rightBarButtonItem = notificationBarButtonItem
+        parentViewController?.navigationItem.rightBarButtonItem?.enabled = false
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        api().hasNotifications().onSuccess { [weak self] (has : Bool) -> Void in
+            self?.parentViewController?.navigationItem.rightBarButtonItem?.enabled = has
+        }
+    }
+    
+    @objc func notificationTouched() {
+        let controller = NotificationViewController()
+        self.navigationController?.pushViewController(controller, animated: true)
     }
     
     weak var browseGridDelegate: BrowseGridViewControllerDelegate?

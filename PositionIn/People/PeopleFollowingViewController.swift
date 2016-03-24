@@ -1,77 +1,56 @@
 //
-//  PeopleViewController.swift
+//  SubscriptionsViewController.swift
 //  PositionIn
 //
-//  Created by Alexandr Goncharov on 08/09/15.
-//  Copyright (c) 2015 Soluna Labs. All rights reserved.
+//  Created by ng on 3/22/16.
+//  Copyright © 2016 Soluna Labs. All rights reserved.
 //
 
+import Foundation
 import PosInCore
 import BrightFutures
 import CleanroomLogger
 
-protocol PeopleActionConsumer {
+protocol PeopleFollowingActionConsumer {
     func showProfileScreen(userId: CRUDObjectId)
 }
 
-
-final class PeopleViewController: BesideMenuViewController {
+class PeopleFollowingViewController : UIViewController {
+    
+    @IBOutlet private weak var tableView: TableView!
+    
+    //MARK: Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.tableView.tableFooterView = UIView(frame: CGRectZero)
         dataSource.configureTable(tableView)
-        browseMode = .Following
         subscribeToNotifications()
-        //Remove following section for not registred users
-        if !api().isUserAuthorized() {
-            browseMode = .Explore
-            self.browseModeSegmentedControl.removeSegmentAtIndex(0, animated: false)
-        }
-    }
-    
-    var browseMode: BrowseMode = .Following {
-        didSet {
-            browseModeSegmentedControl.selectedSegmentIndex = browseMode.rawValue
-            reloadData()
-        }
-    }
-    
-    enum BrowseMode: Int {
-        case Following
-        case Explore
+        
+        reloadData()
     }
     
     func reloadData() {
         dataRequestToken.invalidate()
         dataRequestToken = InvalidationToken()
         let peopleRequest: Future<CollectionResponse<UserInfo>,NSError>
-        switch browseMode {
-        case .Following:
-            let mySubscriptionsRequest = api().getMySubscriptions()
-            if firstFollowingRequestToken.isInvalid {
-                peopleRequest = mySubscriptionsRequest
-            } else {
-                // On first load switch to explore if not following any user
-                firstFollowingRequestToken.invalidate()
-                peopleRequest = mySubscriptionsRequest.flatMap { response -> Future<CollectionResponse<UserInfo>,NSError> in
-                    if let userList = response.items  where userList.count == 0 {
-                        return Future(error: NetworkDataProvider.ErrorCodes.InvalidRequestError.error())
-                    } else {
-                        return Future(value: response)
-                    }
-                }.andThen { [weak self] result in
-                    switch result {
-                    case .Failure(_):
-                        self?.browseMode = .Explore
-                    default:
-                        break
-                    }
+        
+        let mySubscriptionsRequest = api().getMySubscriptions()
+        if firstFollowingRequestToken.isInvalid {
+            peopleRequest = mySubscriptionsRequest
+        } else {
+            // On first load switch to explore if not following any user
+            firstFollowingRequestToken.invalidate()
+            peopleRequest = mySubscriptionsRequest.flatMap { response -> Future<CollectionResponse<UserInfo>,NSError> in
+                if let userList = response.items  where userList.count == 0 {
+                    return Future(error: NetworkDataProvider.ErrorCodes.InvalidRequestError.error())
+                } else {
+                    return Future(value: response)
                 }
             }
-        case .Explore:
-            let page = APIService.Page(start: 0, size: 1000)
-            peopleRequest = api().getUsers(page)
         }
+    
         peopleRequest.onSuccess(dataRequestToken.validContext) { [weak self] response in
             if let userList = response.items {
                 Log.debug?.value(userList)
@@ -80,7 +59,7 @@ final class PeopleViewController: BesideMenuViewController {
             }
         }
     }
-
+    
     private func subscribeToNotifications() {
         subscriptionUpdateObserver = NSNotificationCenter.defaultCenter().addObserverForName(
             UserProfileViewController.SubscriptionDidChangeNotification,
@@ -94,50 +73,40 @@ final class PeopleViewController: BesideMenuViewController {
     
     deinit {
         NSNotificationCenter.defaultCenter().removeObserver(subscriptionUpdateObserver)
-
     }
     
     private var subscriptionUpdateObserver: NSObjectProtocol!
-    
-    override func contentDidChange(sender: AnyObject?, info: [NSObject : AnyObject]?) {
-        super.contentDidChange(sender, info: info)
+
+    func contentDidChange(sender: AnyObject?, info: [NSObject : AnyObject]?) {
+        (self.parentViewController as? BesideMenuViewController)?.contentDidChange(sender, info: info)
         if isViewLoaded() {
             reloadData()
         }
     }
-
-    @IBAction func browseModeSegmentChanged(sender: UISegmentedControl) {
-        if let mode = BrowseMode(rawValue: sender.selectedSegmentIndex) {
-            browseMode = mode
-        }
-    }
-    
-    @IBOutlet private weak var browseModeSegmentedControl: UISegmentedControl!
-    
-    @IBOutlet private weak var tableView: TableView!
     
     private var dataRequestToken = InvalidationToken()
     private let firstFollowingRequestToken = InvalidationToken()
-
-    private lazy var dataSource: PeopleListDataSource = { [unowned self] in
-        let dataSource = PeopleListDataSource()
+    
+    private lazy var dataSource: PeopleFollowingDataSource = { [unowned self] in
+        let dataSource = PeopleFollowingDataSource()
         dataSource.parentViewController = self
         return dataSource
         }()
-
+    
 }
 
-extension PeopleViewController: PeopleActionConsumer {
+extension PeopleFollowingViewController: PeopleFollowingActionConsumer {
+    
     func showProfileScreen(userId: CRUDObjectId) {
         let profileController = Storyboards.Main.instantiateUserProfileViewController()
         profileController.objectId = userId
         navigationController?.pushViewController(profileController, animated: true)
     }
+    
 }
 
-final class PeopleListDataSource: TableViewDataSource {
+final class PeopleFollowingDataSource: TableViewDataSource {
     private var items: [UserInfoTableViewCellModel] = []
-
     
     func setUserList(users: [UserInfo]) {
         items = users.sort{ $0.title < $1.title }.map{ UserInfoTableViewCellModel(userInfo: $0) }
@@ -172,9 +141,9 @@ final class PeopleListDataSource: TableViewDataSource {
         tableView.deselectRowAtIndexPath(indexPath, animated: false)
         
         if let model = self.tableView(tableView, modelForIndexPath: indexPath) as? UserInfoTableViewCellModel,
-           let parentViewController = parentViewController as? PeopleActionConsumer {
-            parentViewController.showProfileScreen(model.userInfo.objectId)
+            let parentViewController = parentViewController as? PeopleActionConsumer {
+                parentViewController.showProfileScreen(model.userInfo.objectId)
         }
     }
-
+    
 }
