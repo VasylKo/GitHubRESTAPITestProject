@@ -98,7 +98,7 @@ class AvatarView: UIView {
         borderLayer.frame = bounds
     }
     
-    private let imageView = UIImageView()
+    private let imageView = UIImageView(image: UIImage(named: "AvatarPlaceholder"))
     private let borderLayer = CAShapeLayer()
     private let maskLayer = CAShapeLayer()
     
