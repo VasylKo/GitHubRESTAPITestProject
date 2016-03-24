@@ -110,7 +110,8 @@ class MembershipPlansViewController : UIViewController, UITableViewDelegate, UIT
     //MARK: Target-Action
     
     @objc func questionTapped () {
-        
+        self.navigationController?.pushViewController(MembershipMessageController(nibName: "MembershipMessageController", bundle: nil),
+                                                      animated: true)
     }
     
     @IBAction func alreadyMemberPressed(sender: AnyObject) {

@@ -20,15 +20,10 @@ class FeedListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
         self.setupInterface()
-        
         self.loadData()
-        
         setNavigationButtons()
     }
-    
-    
 
     private func setNavigationButtons() {
         //Add image to Bavigation Bar
