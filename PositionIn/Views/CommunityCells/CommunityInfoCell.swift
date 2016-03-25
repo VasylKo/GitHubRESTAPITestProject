@@ -15,9 +15,10 @@ final class CommunityInfoCell: TableViewCell {
         assert(m != nil, "Invalid model passed")
         
         let countFormat: String
-        if (m!.type == .Volunteer) {
-            countFormat = NSLocalizedString("%d Volunteers", comment: "Browse community: count members")
-        } else {
+        switch m!.type {
+        case .Volunteer:
+          countFormat = NSLocalizedString("%d Volunteers", comment: "Browse community: count members")
+        default:
             countFormat = NSLocalizedString("%d Members", comment: "Browse volunteering: count Volunteers")
         }
         
