@@ -114,6 +114,9 @@ extension APIService {
             return self.logoutRequest(accessToken: accessToken)
             }.onSuccess { [unowned self] _ in
                 self.logout()
+            }.onFailure { [unowned self] error in
+                //Handle error to show UI worning
+                self.defaultErrorHandler?(error)
         }
         
     }
@@ -394,7 +397,7 @@ extension APIService {
                 //Add headers needed for logout
                 headers = [:]
                 headers["Accept"] = "application/json"
-                headers["Authorization"] = "Bearer \(token)"
+                headers["Authorization"] = "Bearer \(accessToken)"
 
             case .Facebook(let api, let fbToken):
                 url = api.https("/v1.0/users/login")
