@@ -438,7 +438,7 @@ final class APIService {
         let params = APIServiceQuery()
         params.append(query: query)
         params.append(query: page)
-        var itemTypesArray : [String] = []
+        //TODO: should refactor
         params.append("type", value: "2,8")
 
         return self.getObjectsCollection(endpoint, params: params.query)
@@ -446,14 +446,9 @@ final class APIService {
     
     func getAll(homeItem: HomeItem, seachFilter: SearchFilter) -> Future<CollectionResponse<FeedItem>,NSError> {
         let endpoint = homeItem.endpoint()
-        //TODO: fix endp
-        var endp = ""
-        if let endpoint = endpoint {
-            endp = endpoint
-        }
-        //        //TODO: change this when it will be fixed on backend
+        //TODO: should refactor
         let params = APIServiceQuery()
-        params.append("type", value: [String(homeItem.rawValue)])
+        params.append("type", value: String(homeItem.rawValue))
         if let itemTypes = seachFilter.itemTypes {
             var itemTypesArray : [String] = []
             
@@ -476,7 +471,7 @@ final class APIService {
             }
         }
         
-        return self.getObjectsCollection(endp, params: parameters)
+        return self.getObjectsCollection(endpoint, params: parameters)
     }
     
     func getVolunteers() -> Future<CollectionResponse<Community>,NSError> {
@@ -486,7 +481,7 @@ final class APIService {
             (token: AuthResponse.Token) -> Future<CollectionResponse<Community>, NSError> in
             
             let futureBuilder: (Void -> Future<CollectionResponse<Community>, NSError>) = { [unowned self] in
-                let request = self.updateRequest(token, endpoint: endpoint!, method: method)
+                let request = self.updateRequest(token, endpoint: endpoint, method: method)
                 let (_ , future): (Alamofire.Request, Future<CollectionResponse<Community>, NSError>) = self.dataProvider.objectRequest(request)
                 return future
             }
@@ -499,7 +494,7 @@ final class APIService {
         let endpoint = HomeItem.Volunteer.endpoint()
         var params = page.query
         params["filterByParticipationStatus"] = false
-        return getObjectsCollection(endpoint!, params: params)
+        return getObjectsCollection(endpoint, params: params)
     }
 
     func getVolunteer(volunteerId: CRUDObjectId) -> Future<Community, NSError> {
@@ -579,6 +574,45 @@ final class APIService {
     func getNotifications() -> Future<CollectionResponse<SystemNotification>, NSError> {
         let endpoint = SystemNotification.endpoint()
         return getObjectsCollection(endpoint, params: nil)
+    }
+    
+    func readNotifications(notificationsIds: [String]) -> Future<Void, NSError> {
+        let endpoint = SystemNotification.endpoint()
+        
+        typealias CRUDResultType = (Alamofire.Request, Future<Void, NSError>)
+        
+        return session().flatMap {
+            (token: AuthResponse.Token) -> Future<Void, NSError> in
+            
+            let futureBuilder: (Void -> Future<Void, NSError>) = { [unowned self] in
+                let params = ["notificationIds": notificationsIds]
+                let request = self.updateRequest(token, endpoint: endpoint, method: .PUT, params: params)
+                let (_, future): CRUDResultType = self.dataProvider.jsonRequest(request, map: self.commandMapping(), validation: nil)
+                return future
+            }
+            return self.handleFailure(futureBuilder)
+        }
+    }
+    
+    func hasNotifications() -> Future<Bool, NSError> {
+        let endpoint = SystemNotification.endpoint()
+        let page = Page(start: 0, size: 1)
+        typealias CRUDResultType = (Alamofire.Request, Future<CollectionResponse<SystemNotification>, NSError>)
+        
+        return session().flatMap {
+            (token: AuthResponse.Token) -> Future<CollectionResponse<SystemNotification>, NSError> in
+            
+            let futureBuilder: (Void -> Future<CollectionResponse<SystemNotification>, NSError>) = { [unowned self] in
+                let request = self.readRequest(token, endpoint: endpoint, params: page.query)
+                let (_ , future): CRUDResultType = self.dataProvider.objectRequest(request)
+                return future
+            }
+            
+            return futureBuilder()
+            }.flatMap({ (response : CollectionResponse<SystemNotification>) -> Future<Bool, NSError> in
+                let result = response.items.count > 0 ? true : false
+                return Future(value: result)
+        })
     }
     
     //MARK: - MPesa requests

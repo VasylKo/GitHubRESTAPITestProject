@@ -39,15 +39,15 @@ final class EventListCell: TableViewCell {
             productImage?.setImageFromURL(m!.imageURL, placeholder: UIImage(named: "eventDetailsPlaceholder"))
         case .News:
             productImage?.setImageFromURL(m!.imageURL, placeholder: UIImage(named: "placeholderEvent"))
-        case .Wallet:
-            productImage?.setImageFromURL(m!.imageURL, placeholder: UIImage(named: "market_img_default"))
+        case .Donation:
+            productImage?.setImageFromURL(m!.imageURL, placeholder: UIImage(named: "krfc"))
         case .Unknown:
             break
         default:
             break
         }
         
-        titleLabel?.text = m!.title
+        titleLabel?.text = m!.title ?? " "
         
         if m!.item.type == FeedItem.ItemType.Event {
             let eventDetailsFormat = NSLocalizedString("%d People are attending", comment: "Event details: details format")
@@ -57,13 +57,13 @@ final class EventListCell: TableViewCell {
                 let dateFormatter = NSDateFormatter()
                 dateFormatter.dateFormat = "dd MMM, hh:mm a"
                 let date = dateFormatter.stringFromDate(date)
-                dateLabel?.text = date
+                dateLabel?.text = date ?? " "
             }
 
         }
         else {
-            infoLabel?.text = m!.info
-            dateLabel?.text = m!.details
+            infoLabel?.text = m!.info ?? " "
+            dateLabel?.text = m!.details ?? " "
         }
     }
     

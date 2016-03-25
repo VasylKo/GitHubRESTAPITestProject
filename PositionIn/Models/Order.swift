@@ -55,6 +55,7 @@ final class Order: FeedItem {
     var status: OrderStatus?
     var transactionId: String?
     
+    
     override func mapping(map: Map) {
         objectId <- (map["id"], CRUDObjectIdTransform())
         entityDetails <- map["entityDetails"]
@@ -64,10 +65,14 @@ final class Order: FeedItem {
         quantity <- map["quantity"]
         status <- map["status"]
         transactionId <- map["transactionId"]
+        type <- map["entityDetails.type"]
     }
     
     required init?(_ map: Map) {
         super.init(map)
-        type = .Wallet
+        
+        if type == .Unknown {
+            type = .Donation
+        }
     }
 }

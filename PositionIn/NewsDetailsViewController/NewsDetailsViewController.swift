@@ -86,8 +86,6 @@ final class NewsDetailsViewController: UIViewController, UITextFieldDelegate {
         NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
-
-    
     private lazy var dataSource: NewsDataSource = { [unowned self] in
         let dataSource = NewsDataSource()
         dataSource.parentViewController = self
@@ -100,6 +98,7 @@ final class NewsDetailsViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var enterCommentFieldBottomSpaceConstraint: NSLayoutConstraint!
     var objectId: CRUDObjectId?
     private var post: Post?
+    var isFeautered: Bool = false
 }
 
 extension NewsDetailsViewController {
@@ -151,7 +150,8 @@ extension NewsDetailsViewController {
         private var items: [[TableViewCellModel]] =  [[],[]]
         
         func setPost(post: Post) {
-            items = cellFactory.modelsForPost(post, actionConsumer: self.actionConsumer)
+            let controller = self.parentViewController as! NewsDetailsViewController
+            items = cellFactory.modelsForPost(post, isFeautered: controller.isFeautered, actionConsumer: self.actionConsumer)
         }
         
         override func configureTable(tableView: UITableView) {
@@ -177,6 +177,17 @@ extension NewsDetailsViewController {
         
         override func nibCellsId() -> [String] {
             return cellFactory.postCellsReuseId()
+        }
+        
+        func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+            tableView.deselectRowAtIndexPath(indexPath, animated: true)
+            
+            let controller = self.parentViewController as! NewsDetailsViewController
+            if controller.post?.links?.isEmpty == false || controller.post?.attachments?.isEmpty == false {
+                let moreInformationViewController = MoreInformationViewController(links: controller.post?.links,
+                    attachments: controller.post?.attachments)
+                controller.navigationController?.pushViewController(moreInformationViewController, animated: true)
+            }
         }
     }
 }

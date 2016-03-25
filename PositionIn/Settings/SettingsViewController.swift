@@ -66,7 +66,7 @@ class SettingsViewController: BesideMenuViewController, MFMailComposeViewControl
     }
     
     @IBAction func signOutPressed(sender: AnyObject) {
-        api().logout().onComplete {[weak self] _ in
+        api().logoutFromServer().onSuccess {[weak self] _ in
             self?.sideBarController?.executeAction(.Login)
         }
     }

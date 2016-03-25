@@ -58,6 +58,10 @@
 		1A5647F5D0FCC84FA5BF21FF /* MpesaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A56419027EC5956741AF471 /* MpesaViewController.swift */; };
 		1A564902D955532DE5B29A65 /* ErrorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A56438E04F9AD6CBDA75AC9 /* ErrorCell.swift */; };
 		1A56491DAEFA315F9DB47400 /* PaymentReponseDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A5640E770D4CB872B2E4605 /* PaymentReponseDelegate.swift */; };
+		23F6AF831CA1DBAD00CDD2FF /* PeopleFollowingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 23F6AF821CA1DBAD00CDD2FF /* PeopleFollowingViewController.xib */; };
+		23F6AF851CA2889800CDD2FF /* PeopleExploreViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 23F6AF841CA2889800CDD2FF /* PeopleExploreViewController.xib */; };
+		23F6AF871CA28BB000CDD2FF /* Fetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23F6AF861CA28BB000CDD2FF /* Fetcher.swift */; };
+		23F6AF891CA28EFA00CDD2FF /* FetchViewLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23F6AF881CA28EFA00CDD2FF /* FetchViewLogic.swift */; };
 		240A9B9C1B9CCDA4007C77E3 /* PositionIn.CommunityStatsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 240A9B9B1B9CCDA4007C77E3 /* PositionIn.CommunityStatsCell.xib */; };
 		240A9B9E1B9CCDB4007C77E3 /* CommunityStatsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 240A9B9D1B9CCDB4007C77E3 /* CommunityStatsCell.swift */; };
 		2431EBDC1B945F5A009FB158 /* Promotion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2431EBDB1B945F5A009FB158 /* Promotion.swift */; };
@@ -120,6 +124,8 @@
 		CD795C4E1C590C1700C1C298 /* SegmentedControlContainerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD795C4D1C590C1700C1C298 /* SegmentedControlContainerViewController.xib */; };
 		CD795C801C5A382000C1C298 /* MembershipPlan.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD795C7F1C5A382000C1C298 /* MembershipPlan.swift */; };
 		CD795C831C5A6DCB00C1C298 /* MembershipPlansViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD795C821C5A6DCB00C1C298 /* MembershipPlansViewController.swift */; };
+		CD7C07A61CA1A7B10075BC5B /* PeopleFollowingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7C07A51CA1A7B10075BC5B /* PeopleFollowingViewController.swift */; };
+		CD7C07A81CA1A7C90075BC5B /* PeopleExploreViewControler.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7C07A71CA1A7C90075BC5B /* PeopleExploreViewControler.swift */; };
 		CD87FDEE1C7611AA00E610AE /* NewsMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD87FDED1C7611AA00E610AE /* NewsMapViewController.swift */; };
 		CD87FDF01C76133100E610AE /* NewsMapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD87FDEF1C76133100E610AE /* NewsMapViewController.xib */; };
 		CD87FDF41C7DB94D00E610AE /* CommunityMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD87FDF31C7DB94D00E610AE /* CommunityMapViewController.swift */; };
@@ -141,6 +147,7 @@
 		CDBDD9B11C47CAAB007578BC /* PositionIn.BrowseVolunteerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CDBDD9B01C47CAAB007578BC /* PositionIn.BrowseVolunteerViewController.xib */; };
 		CDBDD9B31C491617007578BC /* BomaHotel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBDD9B21C491617007578BC /* BomaHotel.swift */; };
 		CDC102491C6CC091009FF6D9 /* Attachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC102481C6CC091009FF6D9 /* Attachment.swift */; };
+		CDC2BE121CA191DB0049C971 /* PeopleContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC2BE111CA191DB0049C971 /* PeopleContainerViewController.swift */; };
 		CDD9AA1B1C6E2CDF007C7556 /* PostAttachmentsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD9AA1A1C6E2CDF007C7556 /* PostAttachmentsCell.swift */; };
 		CDE1B9041C5BBE5900F76F32 /* MembershipPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDE1B9021C5BBE5900F76F32 /* MembershipPageView.swift */; };
 		CDE1B90D1C5F658100F76F32 /* MembershipMemberProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CDE1B90C1C5F658100F76F32 /* MembershipMemberProfileViewController.xib */; };
@@ -209,10 +216,14 @@
 		D1C475EC1C1081770096D383 /* PaymentCompletedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C475EB1C1081770096D383 /* PaymentCompletedViewController.swift */; };
 		D1CAA7521C60BB1E0046130E /* PaymentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1CAA7501C60BB1E0046130E /* PaymentTableViewCell.swift */; };
 		D1CAA7531C60BB1E0046130E /* PaymentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1CAA7511C60BB1E0046130E /* PaymentTableViewCell.xib */; };
+		D1D391461CA47D430065CC25 /* DonateInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1D391441CA47D430065CC25 /* DonateInfoViewController.swift */; };
+		D1D391471CA47D430065CC25 /* DonateInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1D391451CA47D430065CC25 /* DonateInfoViewController.xib */; };
 		D1DA176C1C05B7BE0091A8CE /* BrowseGridCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DA176A1C05B7BE0091A8CE /* BrowseGridCollectionViewCell.swift */; };
 		D1DA176D1C05B7BE0091A8CE /* PositionIn.BrowseGridCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1DA176B1C05B7BE0091A8CE /* PositionIn.BrowseGridCollectionViewCell.xib */; };
 		D1DA1EBC1C5909D7009F5AFA /* MembershipConfirmDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DA1EB11C5909D7009F5AFA /* MembershipConfirmDetailsViewController.swift */; };
 		D1DA1EBF1C5909D7009F5AFA /* MembershipPlanDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DA1EB71C5909D7009F5AFA /* MembershipPlanDetailsViewController.swift */; };
+		D1DC99381CA27E8D004A992B /* MembershipMessageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DC99361CA27E8D004A992B /* MembershipMessageController.swift */; };
+		D1DC99391CA27E8D004A992B /* MembershipMessageController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1DC99371CA27E8D004A992B /* MembershipMessageController.xib */; };
 		D1E11B681C9817A800CD8BC0 /* FeedItemNewsCellModelFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1E11B671C9817A800CD8BC0 /* FeedItemNewsCellModelFactory.swift */; };
 		D1F1FF251C22F384006D2E75 /* VolunteerDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F1FF231C22F384006D2E75 /* VolunteerDetailsViewController.swift */; };
 		D1F1FF261C22F384006D2E75 /* PositionIn.VolunteerDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1F1FF241C22F384006D2E75 /* PositionIn.VolunteerDetailsViewController.xib */; };
@@ -243,7 +254,6 @@
 		E604B16E1BF96F14004DA20B /* ChatHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E604B16D1BF96F14004DA20B /* ChatHistory.swift */; };
 		E60EBF761B8EF9B50014B6ED /* DataTransforms.swift in Sources */ = {isa = PBXBuildFile; fileRef = E60EBF751B8EF9B50014B6ED /* DataTransforms.swift */; };
 		E60F91331BE2CA2F005F416A /* BadgeView.m in Sources */ = {isa = PBXBuildFile; fileRef = E60F91321BE2CA2F005F416A /* BadgeView.m */; };
-		E6199BB71B9F3B7400E3C69D /* PeopleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6199BB61B9F3B7400E3C69D /* PeopleViewController.swift */; };
 		E61B20D51B7DD47C005EAB2C /* FeedItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61B20D41B7DD47C005EAB2C /* FeedItem.swift */; };
 		E61B20D81B7E0838005EAB2C /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61B20D71B7E0838005EAB2C /* SettingsViewController.swift */; };
 		E61B20EF1B813C8C005EAB2C /* Community.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61B20EE1B813C8C005EAB2C /* Community.swift */; };
@@ -602,6 +612,10 @@
 		1A56419027EC5956741AF471 /* MpesaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MpesaViewController.swift; sourceTree = "<group>"; };
 		1A56438E04F9AD6CBDA75AC9 /* ErrorCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorCell.swift; sourceTree = "<group>"; };
 		1A564EEB40AD56FD2C113F2A /* BraintreePaymentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BraintreePaymentViewController.swift; sourceTree = "<group>"; };
+		23F6AF821CA1DBAD00CDD2FF /* PeopleFollowingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PeopleFollowingViewController.xib; sourceTree = "<group>"; };
+		23F6AF841CA2889800CDD2FF /* PeopleExploreViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PeopleExploreViewController.xib; sourceTree = "<group>"; };
+		23F6AF861CA28BB000CDD2FF /* Fetcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Fetcher.swift; sourceTree = "<group>"; };
+		23F6AF881CA28EFA00CDD2FF /* FetchViewLogic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchViewLogic.swift; sourceTree = "<group>"; };
 		240A9B9B1B9CCDA4007C77E3 /* PositionIn.CommunityStatsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.CommunityStatsCell.xib; sourceTree = "<group>"; };
 		240A9B9D1B9CCDB4007C77E3 /* CommunityStatsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommunityStatsCell.swift; sourceTree = "<group>"; };
 		2431EBDB1B945F5A009FB158 /* Promotion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Promotion.swift; sourceTree = "<group>"; };
@@ -673,6 +687,8 @@
 		CD795C4D1C590C1700C1C298 /* SegmentedControlContainerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SegmentedControlContainerViewController.xib; sourceTree = "<group>"; };
 		CD795C7F1C5A382000C1C298 /* MembershipPlan.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MembershipPlan.swift; sourceTree = "<group>"; };
 		CD795C821C5A6DCB00C1C298 /* MembershipPlansViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MembershipPlansViewController.swift; sourceTree = "<group>"; };
+		CD7C07A51CA1A7B10075BC5B /* PeopleFollowingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeopleFollowingViewController.swift; sourceTree = "<group>"; };
+		CD7C07A71CA1A7C90075BC5B /* PeopleExploreViewControler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeopleExploreViewControler.swift; sourceTree = "<group>"; };
 		CD87FDED1C7611AA00E610AE /* NewsMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsMapViewController.swift; sourceTree = "<group>"; };
 		CD87FDEF1C76133100E610AE /* NewsMapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewsMapViewController.xib; sourceTree = "<group>"; };
 		CD87FDF31C7DB94D00E610AE /* CommunityMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommunityMapViewController.swift; sourceTree = "<group>"; };
@@ -694,6 +710,7 @@
 		CDBDD9B01C47CAAB007578BC /* PositionIn.BrowseVolunteerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.BrowseVolunteerViewController.xib; sourceTree = "<group>"; };
 		CDBDD9B21C491617007578BC /* BomaHotel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BomaHotel.swift; sourceTree = "<group>"; };
 		CDC102481C6CC091009FF6D9 /* Attachment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Attachment.swift; sourceTree = "<group>"; };
+		CDC2BE111CA191DB0049C971 /* PeopleContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeopleContainerViewController.swift; sourceTree = "<group>"; };
 		CDD9AA1A1C6E2CDF007C7556 /* PostAttachmentsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostAttachmentsCell.swift; sourceTree = "<group>"; };
 		CDE1B9021C5BBE5900F76F32 /* MembershipPageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MembershipPageView.swift; sourceTree = "<group>"; };
 		CDE1B90C1C5F658100F76F32 /* MembershipMemberProfileViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MembershipMemberProfileViewController.xib; sourceTree = "<group>"; };
@@ -763,10 +780,14 @@
 		D1C475EB1C1081770096D383 /* PaymentCompletedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentCompletedViewController.swift; sourceTree = "<group>"; };
 		D1CAA7501C60BB1E0046130E /* PaymentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentTableViewCell.swift; sourceTree = "<group>"; };
 		D1CAA7511C60BB1E0046130E /* PaymentTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PaymentTableViewCell.xib; sourceTree = "<group>"; };
+		D1D391441CA47D430065CC25 /* DonateInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DonateInfoViewController.swift; sourceTree = "<group>"; };
+		D1D391451CA47D430065CC25 /* DonateInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DonateInfoViewController.xib; sourceTree = "<group>"; };
 		D1DA176A1C05B7BE0091A8CE /* BrowseGridCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowseGridCollectionViewCell.swift; sourceTree = "<group>"; };
 		D1DA176B1C05B7BE0091A8CE /* PositionIn.BrowseGridCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.BrowseGridCollectionViewCell.xib; sourceTree = "<group>"; };
 		D1DA1EB11C5909D7009F5AFA /* MembershipConfirmDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MembershipConfirmDetailsViewController.swift; sourceTree = "<group>"; };
 		D1DA1EB71C5909D7009F5AFA /* MembershipPlanDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MembershipPlanDetailsViewController.swift; sourceTree = "<group>"; };
+		D1DC99361CA27E8D004A992B /* MembershipMessageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MembershipMessageController.swift; sourceTree = "<group>"; };
+		D1DC99371CA27E8D004A992B /* MembershipMessageController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MembershipMessageController.xib; sourceTree = "<group>"; };
 		D1E11B671C9817A800CD8BC0 /* FeedItemNewsCellModelFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedItemNewsCellModelFactory.swift; sourceTree = "<group>"; };
 		D1F1FF231C22F384006D2E75 /* VolunteerDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VolunteerDetailsViewController.swift; sourceTree = "<group>"; };
 		D1F1FF241C22F384006D2E75 /* PositionIn.VolunteerDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.VolunteerDetailsViewController.xib; sourceTree = "<group>"; };
@@ -798,7 +819,6 @@
 		E60EBF751B8EF9B50014B6ED /* DataTransforms.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataTransforms.swift; sourceTree = "<group>"; };
 		E60F91311BE2CA2F005F416A /* BadgeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BadgeView.h; sourceTree = "<group>"; };
 		E60F91321BE2CA2F005F416A /* BadgeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BadgeView.m; sourceTree = "<group>"; };
-		E6199BB61B9F3B7400E3C69D /* PeopleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeopleViewController.swift; sourceTree = "<group>"; };
 		E61B20D41B7DD47C005EAB2C /* FeedItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedItem.swift; sourceTree = "<group>"; };
 		E61B20D71B7E0838005EAB2C /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		E61B20EE1B813C8C005EAB2C /* Community.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Community.swift; sourceTree = "<group>"; };
@@ -1973,6 +1993,15 @@
 			path = PaymentTableViewCell;
 			sourceTree = "<group>";
 		};
+		D1D391431CA47D160065CC25 /* DonateInfoViewController */ = {
+			isa = PBXGroup;
+			children = (
+				D1D391441CA47D430065CC25 /* DonateInfoViewController.swift */,
+				D1D391451CA47D430065CC25 /* DonateInfoViewController.xib */,
+			);
+			path = DonateInfoViewController;
+			sourceTree = "<group>";
+		};
 		D1DA17691C05B71D0091A8CE /* BrowseGridCollectionViewCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -2012,6 +2041,23 @@
 				D1DA1EB71C5909D7009F5AFA /* MembershipPlanDetailsViewController.swift */,
 			);
 			path = PlanDetails;
+			sourceTree = "<group>";
+		};
+		D1DC99351CA27E2B004A992B /* MembershipMessageController */ = {
+			isa = PBXGroup;
+			children = (
+				D1DC993A1CA2CF47004A992B /* Views */,
+				D1DC99361CA27E8D004A992B /* MembershipMessageController.swift */,
+				D1DC99371CA27E8D004A992B /* MembershipMessageController.xib */,
+			);
+			path = MembershipMessageController;
+			sourceTree = "<group>";
+		};
+		D1DC993A1CA2CF47004A992B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		D1E11B661C98176500CD8BC0 /* CellModel */ = {
@@ -2195,9 +2241,15 @@
 		E6199BB51B9F3B4400E3C69D /* People */ = {
 			isa = PBXGroup;
 			children = (
-				E6199BB61B9F3B7400E3C69D /* PeopleViewController.swift */,
+				CDC2BE111CA191DB0049C971 /* PeopleContainerViewController.swift */,
+				CD7C07A51CA1A7B10075BC5B /* PeopleFollowingViewController.swift */,
+				23F6AF821CA1DBAD00CDD2FF /* PeopleFollowingViewController.xib */,
+				CD7C07A71CA1A7C90075BC5B /* PeopleExploreViewControler.swift */,
+				23F6AF841CA2889800CDD2FF /* PeopleExploreViewController.xib */,
 				E6C9522B1BA1BB0E0032254F /* PeopleListCell.swift */,
 				E6C9522D1BA1BB470032254F /* PositionIn.PeopleListCell.xib */,
+				23F6AF861CA28BB000CDD2FF /* Fetcher.swift */,
+				23F6AF881CA28EFA00CDD2FF /* FetchViewLogic.swift */,
 			);
 			path = People;
 			sourceTree = "<group>";
@@ -2342,6 +2394,8 @@
 		E64DC34C1B4E53C90011D37C /* PositionIn */ = {
 			isa = PBXGroup;
 			children = (
+				D1D391431CA47D160065CC25 /* DonateInfoViewController */,
+				D1DC99351CA27E2B004A992B /* MembershipMessageController */,
 				D1933C251C997AAB00D1B965 /* FeedEmergencyDetailsViewController */,
 				D112BFB11C96E1E700339D7D /* NewsDetailsViewController */,
 				D1F7A7871C91947500A76709 /* FeedListViewController */,
@@ -3938,6 +3992,8 @@
 				CD65C5FD1C9988D400C2C11B /* UserProfileAvatarView.xib in Resources */,
 				240A9B9C1B9CCDA4007C77E3 /* PositionIn.CommunityStatsCell.xib in Resources */,
 				E66115871B7376F4003DB5B3 /* Login.storyboard in Resources */,
+				D1DC99391CA27E8D004A992B /* MembershipMessageController.xib in Resources */,
+				D1D391471CA47D430065CC25 /* DonateInfoViewController.xib in Resources */,
 				D1379E8E1C2A98710041AA4E /* PositionIn.ExploreCardCell.xib in Resources */,
 				CDEDD9781C45243900396594 /* PositionIn.CommunitySearchViewController.xib in Resources */,
 				CD1313311C6E3387002F6F32 /* PositionIn.PostAttachmentsCell.xib in Resources */,
@@ -3954,6 +4010,7 @@
 				D12EB28E1C96E62400718E57 /* FeauteredFeedTableViewCell.xib in Resources */,
 				E6BEF1CC1B9C5E7200511B46 /* PositionIn.PostImageCell.xib in Resources */,
 				CD076E891C7497A8005C04C2 /* PositionIn.NewsListViewController.xib in Resources */,
+				23F6AF831CA1DBAD00CDD2FF /* PeopleFollowingViewController.xib in Resources */,
 				E689F07D1B6B976100597587 /* PositionIn.ProductInventoryCell.xib in Resources */,
 				E6BEF1E61B9C83F200511B46 /* PositionIn.CommunityActionCell.xib in Resources */,
 				CDEDD9741C45242400396594 /* PositionIn.VolunteerSearchViewController.xib in Resources */,
@@ -3970,6 +4027,7 @@
 				D1B780CF1C0F51A800EF5825 /* DonateCell.xib in Resources */,
 				D12EB2861C96E5DF00718E57 /* FeedListViewController.xib in Resources */,
 				E69421021B666A1600F34F06 /* PositionIn.ActionCell.xib in Resources */,
+				23F6AF851CA2889800CDD2FF /* PeopleExploreViewController.xib in Resources */,
 				E6F309421BA8200600C9420C /* PositionIn.PickPhotoView.xib in Resources */,
 				E64DC3551B4E53C90011D37C /* Main.storyboard in Resources */,
 				D1FD853D1C1EE8D800C2E87B /* PositionIn.PromotionDetailsViewController.xib in Resources */,
@@ -4183,6 +4241,7 @@
 				E66478921C918CC400BA5EFB /* SystemNotification.swift in Sources */,
 				18CCFAFB1C8D8AAB00603C7F /* MembershipMemberDetailsViewController.swift in Sources */,
 				500D7FA31BC2AACF008C8C82 /* SearchItem.swift in Sources */,
+				CDC2BE121CA191DB0049C971 /* PeopleContainerViewController.swift in Sources */,
 				18817F221C89B28B00FBA6B1 /* DonationDetailsViewController.swift in Sources */,
 				E661158D1B73778B003DB5B3 /* RecoverPasswordViewController.swift in Sources */,
 				50D1AFA61BBAD21400957882 /* PostLikeCommentCell.swift in Sources */,
@@ -4203,6 +4262,7 @@
 				D15F474B1C0B77EF009ED3FD /* AmbulanceSentViewController.swift in Sources */,
 				E6A869F41B60FF2100797D16 /* UserProfile.swift in Sources */,
 				E6BEF1C81B9C5A0C00511B46 /* PostCellModelFactory.swift in Sources */,
+				CD7C07A61CA1A7B10075BC5B /* PeopleFollowingViewController.swift in Sources */,
 				E6C5CE1B1B83A24500265955 /* UIScheme.swift in Sources */,
 				E69420F91B66358000F34F06 /* ProductDetailsViewController.swift in Sources */,
 				CD87FDF41C7DB94D00E610AE /* CommunityMapViewController.swift in Sources */,
@@ -4262,6 +4322,7 @@
 				D15F474D1C0B7801009ED3FD /* AmbulanceRequestedViewController.swift in Sources */,
 				E68B52031B873687006B980C /* FeedItemCellModelFactory.swift in Sources */,
 				CD795C831C5A6DCB00C1C298 /* MembershipPlansViewController.swift in Sources */,
+				D1DC99381CA27E8D004A992B /* MembershipMessageController.swift in Sources */,
 				CD076E871C73922A005C04C2 /* NewsListViewController.swift in Sources */,
 				E6829B041B5E6CF800FB1E1D /* RoundButton.swift in Sources */,
 				E6DADBA01B8C5907009A5694 /* ItemCategory.swift in Sources */,
@@ -4269,6 +4330,7 @@
 				E6BEF1CD1B9C5E7200511B46 /* PostImageCell.swift in Sources */,
 				D1F1FF251C22F384006D2E75 /* VolunteerDetailsViewController.swift in Sources */,
 				D1FD854B1C1EFE0F00C2E87B /* MarketDetailsViewController.swift in Sources */,
+				D1D391461CA47D430065CC25 /* DonateInfoViewController.swift in Sources */,
 				CD21C8D01C76002C009261C7 /* NewsContainerViewController.swift in Sources */,
 				2431EBE01B94C1DC009FB158 /* Event.swift in Sources */,
 				24EF62111BA81A6B00472531 /* ChatHistoryCellModel.swift in Sources */,
@@ -4350,6 +4412,7 @@
 				E6A869F21B60FF0500797D16 /* CRUDObject.swift in Sources */,
 				D1B1F1E21C6B194E00D43A3B /* MPesaPayment.swift in Sources */,
 				D153AB841C11FA9B00DFB5C9 /* AmbulanceRequest.swift in Sources */,
+				23F6AF871CA28BB000CDD2FF /* Fetcher.swift in Sources */,
 				D13039FB1C721960004B673F /* AttendEventCell.swift in Sources */,
 				D1379E901C2AC58F0041AA4E /* ExploreViewController.swift in Sources */,
 				E60EBF761B8EF9B50014B6ED /* DataTransforms.swift in Sources */,
@@ -4364,7 +4427,6 @@
 				50FE7D891BBE77BB005676E2 /* ItemsSearchResultDataSource.swift in Sources */,
 				CDB5B5CC1C5B9C2400413715 /* MembershipPlanTableViewCell.swift in Sources */,
 				D1379E941C2C21F80041AA4E /* NewsCardCell.swift in Sources */,
-				E6199BB71B9F3B7400E3C69D /* PeopleViewController.swift in Sources */,
 				E604B16E1BF96F14004DA20B /* ChatHistory.swift in Sources */,
 				D100DF0B1BF4AA0300C81054 /* GoogleAnalyticsHelper.swift in Sources */,
 				E6D4D5B81B6FA7A7003134CB /* SearchTransition.swift in Sources */,
@@ -4375,10 +4437,12 @@
 				E6C952391BA1DA400032254F /* ProfileFollowCell.swift in Sources */,
 				E6C952261BA1A8230032254F /* StringValidation.swift in Sources */,
 				E6F243781B8B3CDE0033B13C /* BrowseListTableViewCell.swift in Sources */,
+				CD7C07A81CA1A7C90075BC5B /* PeopleExploreViewControler.swift in Sources */,
 				D1FD85411C1EE8EA00C2E87B /* EventDetailsViewController.swift in Sources */,
 				E61B20D81B7E0838005EAB2C /* SettingsViewController.swift in Sources */,
 				CD795C4C1C590BEE00C1C298 /* SegmentedControlContainerViewController.swift in Sources */,
 				1A56454F1ADF6D1BF3022FB3 /* BraintreePaymentViewController.swift in Sources */,
+				23F6AF891CA28EFA00CDD2FF /* FetchViewLogic.swift in Sources */,
 				18F3313F1C8871870010321B /* Order.swift in Sources */,
 				1A56491DAEFA315F9DB47400 /* PaymentReponseDelegate.swift in Sources */,
 				1A564902D955532DE5B29A65 /* ErrorCell.swift in Sources */,

@@ -79,7 +79,7 @@ class PhoneVerificationViewController: XLFormViewController {
         
         self.form = form
     }
-
+    
     
     @IBAction func doneButtonPressed() {
         
@@ -98,10 +98,9 @@ class PhoneVerificationViewController: XLFormViewController {
                     if isExistingUser {
                         trackGoogleAnalyticsEvent("Auth", action: "Click", label: "SMS verification", value: NSNumber(int: 1))
                         api().login(username: nil, password: nil, phoneNumber: phoneNumber, phoneVerificationCode: codeString).onSuccess { [weak self] _ in
+                            api().pushesRegistration()
                             self?.dismissLogin()
-                            }.onSuccess(callback: { _ in
-                                api().pushesRegistration()
-                            }).onFailure(callback: { _ in
+                            }.onFailure(callback: { _ in
                                 trackGoogleAnalyticsEvent("Status", action: "Click", label: "Auth Fail")
                             })
                     }
@@ -117,6 +116,7 @@ class PhoneVerificationViewController: XLFormViewController {
     }
     
     func dismissLogin() {
+        self.view.endEditing(true)
         sideBarController?.executeAction(SidebarViewController.defaultAction)
         dismissViewControllerAnimated(true, completion: nil)
     }

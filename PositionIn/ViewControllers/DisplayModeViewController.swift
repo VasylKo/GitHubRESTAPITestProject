@@ -88,17 +88,16 @@ protocol BrowseActionConsumer: class {
             actionProducer.actionConsumer = self
         }
         
-        //New right bar button item for feed controller
-        if let _ = self.childViewControllers.first as? FeedListViewController {
-            let imageView = UIImageView(image: UIImage(named: "feed-logo")?.imageWithRenderingMode(.AlwaysOriginal))
-            let barButtonItem = UIBarButtonItem(customView: imageView)
-            
-            let negativeSeparator = UIBarButtonItem(barButtonSystemItem: .FixedSpace, target: nil, action: nil)
-            negativeSeparator.width = -17
-            
-            self.navigationItem.rightBarButtonItems = [negativeSeparator,barButtonItem]
-        }
-        else {
+        //Set right bar button item
+        //TODO: refactore this
+        switch self.childViewControllers.first {
+        case is FeedListViewController:
+            //right bar button item is set in FeedListViewController (reg line image button)
+            break
+        case is BrowseGridViewController:
+            //right bar button item is set in BrowseGridViewController (notification button)
+            break
+        default:
             self.navigationItem.rightBarButtonItem = self.barButtonItems[mode.rawValue]
         }
     }
