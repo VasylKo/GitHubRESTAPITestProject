@@ -14,6 +14,10 @@ import Box
 
 class VolunteerMapViewController : UIViewController, GMSMapViewDelegate {
     
+    private lazy var userVolunteers : [Community] = []
+    private lazy var volunteers : [Community] = []
+    private var markers = [GMSMarker]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.mapView.animateToZoom(2)
@@ -21,12 +25,18 @@ class VolunteerMapViewController : UIViewController, GMSMapViewDelegate {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        Log.error?.value(self.mapView)
-//        api().getCommunities(APIService.Page()).onSuccess { [weak self] response in
-//            if let strongSelf = self {
-//                strongSelf.displayCommunities(response.items)
-//            }
-//        }
+        
+        api().currentUserId().flatMap { userId in
+            return api().getUserVolunteers(userId)
+            }.flatMap { [weak self] (response: CollectionResponse<Community>) -> Future<CollectionResponse<Community>, NSError> in
+                self?.userVolunteers = response.items
+                return api().getVolunteers()
+            }.onSuccess { [weak self] (response: CollectionResponse<Community>) -> Void in
+                if let strongSelf = self {
+                    strongSelf.volunteers = response.items
+                    strongSelf.displayVolunteers()
+                }
+        }
     }
     
     lazy private var mapView: GMSMapView = { [unowned self] in
@@ -43,28 +53,37 @@ class VolunteerMapViewController : UIViewController, GMSMapViewDelegate {
         }()
     
     
-    func displayCommunities(communities: [Community]) {
-        for community in communities {
-            let  position = community.location?.coordinates ?? kCLLocationCoordinate2DInvalid
-            let marker = GMSMarker(position: position)
-            marker.map = self.mapView
-            marker.icon = UIImage(named: "PromotionMarker")
-            marker.userData = Box(community)
+    func displayVolunteers() {
+        let allVolunteers = self.volunteers + self.userVolunteers
+        for volunteer in allVolunteers {
+            if let position = volunteer.location?.coordinates {
+                let marker = GMSMarker(position: position)
+                marker.map = self.mapView
+                marker.icon = UIImage(named: "PromotionMarker")
+                marker.userData = Box(volunteer)
+            }
         }
     }
-    
-    private var markers = [GMSMarker]()
     
     func mapView(mapView: GMSMapView!, didTapMarker marker: GMSMarker!) -> Bool {
-        guard let box = marker.userData as? Box<FeedItem> else {
+        
+        guard let box = marker.userData as? Box<Community> else {
             return false
         }
-        let community = box.value
+        
+        let volunteer = box.value
+        
+        trackGoogleAnalyticsEvent("Main", action: "Click", label: "Community")
+        let controller = Storyboards.Main.instantiateVolunteerDetailsViewControllerId()
+        controller.volunteer = volunteer
+        controller.author = volunteer.owner
+        controller.type = .Volunteer
+        let notTojoin = self.userVolunteers.contains { volunteerInVolunteers in
+            return volunteerInVolunteers.objectId == volunteer.objectId
+        }
+        controller.joinAction = !notTojoin
+        navigationController?.pushViewController(controller, animated: true)
         
         return true
-    }
-    
-    func initializeMapViewController () -> UIViewController {
-        return VolunteerMapViewController()
     }
 }

@@ -254,6 +254,7 @@ class BrowseCommunityViewController: BesideMenuViewController, BrowseCommunityAc
         if (next == 0) {
             self.mapViewController.view.removeFromSuperview()
             self.mapViewController.removeFromParentViewController()
+            self.reloadData()
         } else {
             self.addChildViewController(mapViewController)
             self.view.addSubview(mapViewController.view)

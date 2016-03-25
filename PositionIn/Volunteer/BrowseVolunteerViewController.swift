@@ -124,4 +124,8 @@ class BrowseVolunteerViewController: BrowseCommunityViewController {
             })
         }
     }
+    
+    override func initializeMapViewController () -> UIViewController {
+        return VolunteerMapViewController()
+    }
 }
