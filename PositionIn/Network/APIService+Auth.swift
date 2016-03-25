@@ -107,6 +107,17 @@ extension APIService {
         }
     }
     
+    
+    // Logout from server to stop receiving push notifications and then expire current session
+    func logoutFromServer() -> Future<Void, NSError> {
+        return session().flatMap{ [unowned self] accessToken in
+            return self.logoutRequest(accessToken: accessToken)
+            }.onSuccess { [unowned self] _ in
+                self.logout()
+        }
+        
+    }
+    
     //Verify Phone
     //0 - api type for sms validation
     //1 - api type for sms validation (duplicate functionality)
@@ -216,7 +227,7 @@ extension APIService {
         return handleFailure(futureBuilder)
     }
     
-    private func logoutRequest(accessToken: String) -> Future<Void, NSError> {
+    private func logoutRequest(accessToken accessToken: String) -> Future<Void, NSError> {
         
         typealias ResultType = (Alamofire.Request, Future<Void, NSError>)
         
