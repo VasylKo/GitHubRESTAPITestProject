@@ -216,6 +216,20 @@ extension APIService {
         return handleFailure(futureBuilder)
     }
     
+    private func logoutRequest(accessToken: String) -> Future<Void, NSError> {
+        
+        typealias ResultType = (Alamofire.Request, Future<Void, NSError>)
+        
+        let futureBuilder: (Void -> Future<Void, NSError>) = { [unowned self] in
+            let request = AuthRouter.Logout(api: self, accessToken: accessToken)
+            let serializer = Alamofire.Request.LogoutEmptyResponseSerializer()
+            let (_, future): ResultType = self.dataProvider.request(request, serializer: serializer, validation: nil)
+            return future
+        }
+
+        return handleFailure(futureBuilder)
+    }
+    
     private func facebookLoginRequest(fbToken: String) -> Future<AuthResponse, NSError> {
         let urlRequest = AuthRouter.Facebook(api: self, fbToken: fbToken)
         
@@ -303,6 +317,7 @@ extension APIService {
     private enum AuthRouter: URLRequestConvertible {
         
         case Login(api: APIService, username: String?, password: String?, phoneNumber: String?, phoneVerificationCode: String?)
+        case Logout(api: APIService, accessToken: String)
         case Facebook(api: APIService, fbToken: String)
         case Register(api: APIService, email: String?, username: String?, password: String?, phoneNumber: String?, phoneVerificationCode: String?, profileInfo: [String: AnyObject]?)
         case Refresh(api: APIService, token: String)
@@ -360,6 +375,16 @@ extension APIService {
                 if let phoneVerificationCode = phoneVerificationCode {
                     params["phoneVerificationCode"] = phoneVerificationCode
                 }
+            case .Logout(let api, let accessToken):
+                url = api.https("/v1.0/users/logout")
+                method = .GET
+                encoding = .URL
+                
+                //Add headers needed for logout
+                headers = [:]
+                headers["Accept"] = "application/json"
+                headers["Authorization"] = "Bearer \(token)"
+
             case .Facebook(let api, let fbToken):
                 url = api.https("/v1.0/users/login")
                 params = [
@@ -466,4 +491,18 @@ private extension Alamofire.Request {
             }
         }
     }
+    
+    //MARK: - Custom serializer -
+    private static func LogoutEmptyResponseSerializer() -> ResponseSerializer<Void, NSError> {
+        return ResponseSerializer { request, response, data, error in
+            guard error == nil else { return .Failure(error!) }
+            if let statusCode = response?.statusCode where statusCode == 200 {
+                return .Success()
+            } else {
+                return .Failure(NetworkDataProvider.ErrorCodes.InvalidSessionError.error())
+            }
+            
+        }
+    }
+
 }
