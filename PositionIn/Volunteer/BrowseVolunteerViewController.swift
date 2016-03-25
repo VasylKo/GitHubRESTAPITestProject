@@ -72,7 +72,7 @@ class BrowseVolunteerViewController: BrowseCommunityViewController {
                     community.closed = nil
                     updateCommunity.append(community)
                 }
-                self?.dataSource.setCommunities(updateCommunity, mode: browseMode)
+                self?.dataSource.setCommunities(updateCommunity, mode: browseMode, type: .Volunteer)
                 self?.tableView.reloadData()
             }
         }
