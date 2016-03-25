@@ -8,27 +8,47 @@
 
 import UIKit
 
+
 class NotificationTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var notificationImageView: UIImageView!
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet private weak var notificationImageView: UIImageView!
+    @IBOutlet private weak var titleLabel: UILabel!
+    @IBOutlet private weak var dateLabel: UILabel!
     
     func configureWithNotification(notification: SystemNotification) {
         
+        //TODO: should add types
         var image : UIImage
         switch notification.type {
         case .AmbulanceOnTheWay:
-            image = UIImage(named:"ic_ambulance_notification_unread")!
+            fallthrough
         case .AmbulanceCancelled:
-            image = UIImage(named:"ic_ambulance_notification_unread")!
+            image =  (notification.isRead == true) ?  UIImage(named:"ic_ambulance_notification_read")!
+                : UIImage(named:"ic_ambulance_notification_unread")!
+        case .MPESAPaymentCompleted:
+            image = UIImage(named:"AddIcon")!
+            break
+        case .MPESAPaymentFailed:
+            image = UIImage(named:"AddIcon")!
+            break
+        case .MembershipIsAboutToExpired:
+            image = UIImage(named:"AddIcon")!
+            break
+        case .MembershipExpired:
+            image = UIImage(named:"AddIcon")!
+            break
+        case .OrderDelivered:
+            image = UIImage(named:"AddIcon")!
+            break
         default:
             image = UIImage(named:"AddIcon")!
         }
         
         self.notificationImageView.image = image
+        
         self.titleLabel.text = notification.title ?? NSLocalizedString("Notification")
-        self.dateLabel.text = notification.createdDate?.formattedAsTimeAgo()
+        self.dateLabel.textColor = (notification.isRead == true) ? UIColor.grayColor() : UIColor.redColor()
+        
+        self.dateLabel.text = notification.createdDate?.formattedAsFeedTime()
     }
-    
 }

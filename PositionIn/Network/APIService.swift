@@ -576,6 +576,24 @@ final class APIService {
         return getObjectsCollection(endpoint, params: nil)
     }
     
+    func readNotifications(notificationsIds: [String]) -> Future<Void, NSError> {
+        let endpoint = SystemNotification.endpoint()
+        
+        typealias CRUDResultType = (Alamofire.Request, Future<Void, NSError>)
+        
+        return session().flatMap {
+            (token: AuthResponse.Token) -> Future<Void, NSError> in
+            
+            let futureBuilder: (Void -> Future<Void, NSError>) = { [unowned self] in
+                let params = ["notificationIds": notificationsIds]
+                let request = self.updateRequest(token, endpoint: endpoint, method: .PUT, params: params)
+                let (_, future): CRUDResultType = self.dataProvider.jsonRequest(request, map: self.commandMapping(), validation: nil)
+                return future
+            }
+            return self.handleFailure(futureBuilder)
+        }
+    }
+    
     func hasNotifications() -> Future<Bool, NSError> {
         let endpoint = SystemNotification.endpoint()
         let page = Page(start: 0, size: 1)
