@@ -36,9 +36,11 @@ final class BrowseCommunityHeaderCellModel: BrowseCommunityTableViewCellModel {
 final class BrowseCommunityInfoCellModel: BrowseCommunityTableViewCellModel {
     let membersCount: Int?
     let text: String?
-    init(community: Community, tapAction: BrowseCommunityViewController.Action, members: Int?, text: String?) {
+    let type: CommunityViewController.ControllerType
+    init(community: Community, tapAction: BrowseCommunityViewController.Action, members: Int?, text: String?, type: CommunityViewController.ControllerType) {
         self.text = text
         membersCount = members
+        self.type = type
         super.init(community: community, tapAction: tapAction)
     }
 }

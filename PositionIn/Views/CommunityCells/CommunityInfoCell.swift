@@ -13,7 +13,14 @@ final class CommunityInfoCell: TableViewCell {
     override func setModel(model: TableViewCellModel) {
         let m = model as? BrowseCommunityInfoCellModel
         assert(m != nil, "Invalid model passed")
-        let countFormat = NSLocalizedString("%d Members", comment: "Browse community: count members")
+        
+        let countFormat: String
+        if (m!.type == .Volunteer) {
+            countFormat = NSLocalizedString("%d Volunteers", comment: "Browse community: count members")
+        } else {
+            countFormat = NSLocalizedString("%d Members", comment: "Browse volunteering: count Volunteers")
+        }
+        
         countLabel.text = (m!.membersCount).map { String(format:countFormat, $0) }
         descriptionLabel.text = m!.text
         

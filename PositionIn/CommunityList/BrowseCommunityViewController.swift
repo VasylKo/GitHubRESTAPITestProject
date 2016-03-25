@@ -234,8 +234,8 @@ extension BrowseCommunityViewController {
         private var items: [[TableViewCellModel]] = []
         private let cellFactory = BrowseCommunityCellFactory()
         
-        func setCommunities(communities: [Community], mode: BrowseCommunityViewController.BrowseMode) {
-            items = communities.map { self.cellFactory.modelsForCommunity($0, mode: mode, actionConsumer: self.actionConsumer) }
+        func setCommunities(communities: [Community], mode: BrowseCommunityViewController.BrowseMode, type: CommunityViewController.ControllerType = .Community) {
+            items = communities.map { self.cellFactory.modelsForCommunity($0, mode: mode, actionConsumer: self.actionConsumer, type: type) }
         }
         
         override func configureTable(tableView: UITableView) {
