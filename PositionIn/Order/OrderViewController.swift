@@ -173,24 +173,24 @@ class OrderViewController: UITableViewController, SelectPaymentMethodControllerD
 // MARK: - BTDropInViewControllerDelegate
 extension OrderViewController: BTDropInViewControllerDelegate {
     func dropInViewController(viewController: BTDropInViewController, didSucceedWithTokenization paymentMethodNonce: BTPaymentMethodNonce) {
-        //TODO: should refactor
-        let amount = product?.price!
-        
-        api().productCheckoutBraintree(String(amount!), nonce: paymentMethodNonce.nonce,
-            itemId: (product?.objectId)!, quantity: self.quantity).onSuccess
-            { [weak self] err in
-                if(err == "") {
-                    self?.dismissPaymentsController()
-                    self?.finishedSuccessfully = true
-                    
-                    let controller = MPesaPaymentCompleteViewController(quantity: self!.quantity, product: (self?.product!)!)
-                    controller.showSuccess = true
-                    self?.navigationController?.pushViewController(controller, animated: true)
-                    
-                    
-                } else {
-                    
+        if let product = product {
+            if let price = product.price {
+                
+                let priceWitAmount = price * Float(self.quantity)
+                
+                api().productCheckoutBraintree(String(priceWitAmount), nonce: paymentMethodNonce.nonce,
+                    itemId: product.objectId, quantity: self.quantity).onSuccess
+                    { [weak self] err in
+                        if(err == "") {
+                            self?.dismissPaymentsController()
+                            self?.finishedSuccessfully = true
+                            
+                            let controller = MPesaPaymentCompleteViewController(quantity: self!.quantity, product: (self?.product!)!)
+                            controller.showSuccess = true
+                            self?.navigationController?.pushViewController(controller, animated: true)
+                        }
                 }
+            }
         }
         dismissPaymentsController()
     }

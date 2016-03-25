@@ -158,7 +158,7 @@ private extension Alamofire.Request {
                 guard let object = mapping(json) else {
                     if  let jsonDict = json as? [String: AnyObject],
                         let msg = jsonDict["error"] as? String {
-                            if let statusCode = response?.statusCode where statusCode == 401 {
+                            if let statusCode = response?.statusCode where statusCode == 400 || statusCode == 401 {
                                 return .Failure(NetworkDataProvider.ErrorCodes.InvalidSessionError.error(localizedDescription: msg))
                             } else {
                                 return .Failure(NetworkDataProvider.ErrorCodes.TransferError.error(localizedDescription: msg))
@@ -189,7 +189,7 @@ extension NetworkDataProvider {
     public enum ErrorCodes: Int {
         public static let errorDomain = "com.bekitzur.network"
         
-        case UnknownError, InvalidRequestError, TransferError, InvalidResponseError, ParsingError, InvalidSessionError
+        case UnknownError, InvalidRequestError, TransferError, InvalidResponseError, ParsingError, InvalidSessionError, SessionRevokedError
         
         /**
         Trying to construct Error code from NSError
@@ -242,6 +242,8 @@ extension NetworkDataProvider {
                 return NSLocalizedString("TransferError", comment: "Data transfer error")
             case .InvalidSessionError:
                 return NSLocalizedString("InvalidSessionError", comment: "Session error")
+            case .SessionRevokedError:
+                return NSLocalizedString("SessionRevokedError", comment: "Session Revoked")
             case .UnknownError:
                 fallthrough
             default:

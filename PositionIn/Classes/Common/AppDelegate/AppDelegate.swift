@@ -117,7 +117,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         Fabric.with([Crashlytics.self])
         
-        NewRelic.startWithApplicationToken(AppConfiguration().newRelicToken);
+        NewRelicController.start()
+        
         let notificationSettings = LNNotificationAppSettings()
         notificationSettings.alertStyle = .Banner
         notificationSettings.soundEnabled = false

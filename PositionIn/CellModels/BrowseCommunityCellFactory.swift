@@ -10,12 +10,12 @@ import PosInCore
 import CleanroomLogger
 
 struct BrowseCommunityCellFactory {
-    func modelsForCommunity(community: Community, mode: BrowseCommunityViewController.BrowseMode, actionConsumer: BrowseCommunityActionConsumer?) -> [TableViewCellModel] {
+    func modelsForCommunity(community: Community, mode: BrowseCommunityViewController.BrowseMode, actionConsumer: BrowseCommunityActionConsumer?, type: CommunityViewController.ControllerType) -> [TableViewCellModel] {
         var models: [TableViewCellModel] = []
         let tapAction = tapActionForCommunity(community)
         models.append(BrowseCommunityHeaderCellModel(community: community, tapAction: tapAction, title:community.name ?? "", url:community.avatar, showInfo: false, isClosed: community.closed))
         
-        models.append(BrowseCommunityInfoCellModel(community: community, tapAction: tapAction, members: community.membersCount, text: community.communityDescription))
+        models.append(BrowseCommunityInfoCellModel(community: community, tapAction: tapAction, members: community.membersCount, text: community.communityDescription, type: type))
 
         let actionModel = BrowseCommunityActionCellModel(community: community, tapAction: tapAction, actions: actionListForCommunity(community))
         actionModel.actionConsumer = actionConsumer

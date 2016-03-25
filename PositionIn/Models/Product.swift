@@ -31,7 +31,6 @@ struct Product: CRUDObject {
     var distanceString: String?
     var date: NSDate?
     
-    
 /*
     //TODO:
     "itemCategory": <guid>

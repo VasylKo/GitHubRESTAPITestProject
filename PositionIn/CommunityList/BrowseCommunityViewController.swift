@@ -65,6 +65,7 @@ class BrowseCommunityViewController: BesideMenuViewController, BrowseCommunityAc
             self.browseModeSegmentedControl.removeSegmentAtIndex(0, animated: false)
         }
         
+        setRightBarItems()
         navigationController?.delegate = self
     }
     
@@ -222,6 +223,44 @@ class BrowseCommunityViewController: BesideMenuViewController, BrowseCommunityAc
             })
         }
     }
+    
+    // MAP:
+    
+    func setRightBarItems() {
+        for imageName in ["map_view_icon", "list_view_icon"] {
+            let barButtonItem : UIBarButtonItem  = UIBarButtonItem(image: UIImage(named: imageName),
+                style: .Plain,
+                target: self,
+                action: Selector("barButtonPressed:"))
+            self.barButtonItems.append(barButtonItem)
+        }
+        
+        self.navigationItem.rightBarButtonItem = self.barButtonItems[0]
+    }
+    
+    private var barButtonItems : [UIBarButtonItem] = []
+    lazy var mapViewController : UIViewController = self.initializeMapViewController()
+    
+    func initializeMapViewController () -> UIViewController {
+        return CommunityMapViewController()
+    }
+    
+    @IBAction private func barButtonPressed(barButtonItem : UIBarButtonItem) {
+        let index = self.barButtonItems.indexOf(barButtonItem)!
+        let next = (index == 0) ? 1 : 0
+        
+        self.navigationItem.setRightBarButtonItem(self.barButtonItems[next], animated: true)
+        
+        if (next == 0) {
+            self.mapViewController.view.removeFromSuperview()
+            self.mapViewController.removeFromParentViewController()
+            self.reloadData()
+        } else {
+            self.addChildViewController(mapViewController)
+            self.view.addSubview(mapViewController.view)
+            mapViewController.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
+        }
+    }
 }
 
 extension BrowseCommunityViewController {
@@ -234,8 +273,8 @@ extension BrowseCommunityViewController {
         private var items: [[TableViewCellModel]] = []
         private let cellFactory = BrowseCommunityCellFactory()
         
-        func setCommunities(communities: [Community], mode: BrowseCommunityViewController.BrowseMode) {
-            items = communities.map { self.cellFactory.modelsForCommunity($0, mode: mode, actionConsumer: self.actionConsumer) }
+        func setCommunities(communities: [Community], mode: BrowseCommunityViewController.BrowseMode, type: CommunityViewController.ControllerType = .Community) {
+            items = communities.map { self.cellFactory.modelsForCommunity($0, mode: mode, actionConsumer: self.actionConsumer, type: type) }
         }
         
         override func configureTable(tableView: UITableView) {
