@@ -462,8 +462,11 @@ private extension Alamofire.Request {
     private static func AuthResponseSerializer<T>(mapping: AnyObject? -> T?) -> ResponseSerializer<T, NSError> {
         return ResponseSerializer { request, response, data, error in
             guard error == nil else { return .Failure(error!) }
-            if let statusCode = response?.statusCode where statusCode == 401 {
-                return .Failure(NetworkDataProvider.ErrorCodes.InvalidSessionError.error())
+            if let statusCode = response?.statusCode where statusCode == 400 || statusCode == 401 {
+                var attributes = [String: String]()
+                NewRelicController.logWithUser("Refresh token error \(statusCode)", attributes: attributes)
+                
+                return .Failure(NetworkDataProvider.ErrorCodes.SessionRevokedError.error())
             }
             
             // Cookies parsing

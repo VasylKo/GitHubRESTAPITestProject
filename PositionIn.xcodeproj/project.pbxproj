@@ -44,6 +44,7 @@
 
 /* Begin PBXBuildFile section */
 		18033D0B1C905E6100C709DD /* NSDate+TimeZone.m in Sources */ = {isa = PBXBuildFile; fileRef = 18033D0A1C905E6100C709DD /* NSDate+TimeZone.m */; };
+		184236C01CA5B59700C53D08 /* NewRelicController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184236BF1CA5B59700C53D08 /* NewRelicController.swift */; };
 		18817F1E1C897CFB00FBA6B1 /* WalletsCellFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18817F1D1C897CFB00FBA6B1 /* WalletsCellFactory.swift */; };
 		18817F221C89B28B00FBA6B1 /* DonationDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18817F201C89B28B00FBA6B1 /* DonationDetailsViewController.swift */; };
 		18817F231C89B28B00FBA6B1 /* PositionIn.DonationDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18817F211C89B28B00FBA6B1 /* PositionIn.DonationDetailsViewController.xib */; };
@@ -598,6 +599,7 @@
 		13A2A63466B39BB54E2BD39A /* Pods-PositionIn.proddebug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PositionIn.proddebug.xcconfig"; path = "Pods/Target Support Files/Pods-PositionIn/Pods-PositionIn.proddebug.xcconfig"; sourceTree = "<group>"; };
 		18033D091C905E6100C709DD /* NSDate+TimeZone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+TimeZone.h"; sourceTree = "<group>"; };
 		18033D0A1C905E6100C709DD /* NSDate+TimeZone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+TimeZone.m"; sourceTree = "<group>"; };
+		184236BF1CA5B59700C53D08 /* NewRelicController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewRelicController.swift; sourceTree = "<group>"; };
 		18817F1D1C897CFB00FBA6B1 /* WalletsCellFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletsCellFactory.swift; sourceTree = "<group>"; };
 		18817F201C89B28B00FBA6B1 /* DonationDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DonationDetailsViewController.swift; sourceTree = "<group>"; };
 		18817F211C89B28B00FBA6B1 /* PositionIn.DonationDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.DonationDetailsViewController.xib; sourceTree = "<group>"; };
@@ -3621,6 +3623,7 @@
 			isa = PBXGroup;
 			children = (
 				E6C5CE181B83A21500265955 /* LocationController.swift */,
+				184236BF1CA5B59700C53D08 /* NewRelicController.swift */,
 				E6C5CE1C1B83A28C00265955 /* SessionController.swift */,
 				E6C5CE1E1B83A2B700265955 /* AppConfiguration.swift */,
 				E6C5CE1A1B83A24500265955 /* UIScheme.swift */,
@@ -4355,6 +4358,7 @@
 				D15F47491C0B77D7009ED3FD /* AmbulanceBaseController.swift in Sources */,
 				E6F7A47D1BA356130069152A /* LocationCell.swift in Sources */,
 				CD21C8D31C7600B0009261C7 /* BarButtonItemContainerViewController.swift in Sources */,
+				184236C01CA5B59700C53D08 /* NewRelicController.swift in Sources */,
 				D15F47471C0AFDAF009ED3FD /* CallAmbulanceViewController.swift in Sources */,
 				E68B52011B873545006B980C /* FeedTableViewCellModel.swift in Sources */,
 				E6C5F4581BCE908800E3B8C7 /* ConversationManager.swift in Sources */,

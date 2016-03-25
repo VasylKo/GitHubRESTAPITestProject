@@ -116,18 +116,23 @@ final class BrowseListViewController: UIViewController, BrowseActionProducer, Br
         let request: Future<CollectionResponse<FeedItem>,NSError> = api().getAll(homeItem, seachFilter: self.filter)
         
         request.onSuccess(dataRequestToken.validContext) {
-            [unowned self] response in
+            [weak self] response in
+            
+            guard let strongSelf = self else {
+                return
+            }
+            
             Log.debug?.value(response.items)
 
             var items: [FeedItem] = response.items
-            if self.excludeCommunityItems {
+            if strongSelf.excludeCommunityItems {
                 items = items.filter { $0.community == CRUDObjectInvalidId }
             }
             
-            self.dataSource.setItems(self, feedItems: items)
-            self.tableView.reloadData()
-            self.tableView.setContentOffset(CGPointZero, animated: false)
-            self.actionConsumer?.browseControllerDidChangeContent(self)
+            strongSelf.dataSource.setItems(strongSelf, feedItems: items)
+            strongSelf.tableView.reloadData()
+            strongSelf.tableView.setContentOffset(CGPointZero, animated: false)
+            strongSelf.actionConsumer?.browseControllerDidChangeContent(strongSelf)
         }
     }
     
