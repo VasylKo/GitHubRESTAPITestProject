@@ -13,17 +13,9 @@ class BrowseMainGridController: BrowseModeTabbarViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "notification_icon"), style: .Plain, target: self, action: "notificationTouched")
-        
         navigationController?.delegate = self
     }
-    
-    @objc func notificationTouched() {
-        let controller = NotificationViewController()
-        self.navigationController?.pushViewController(controller, animated: true)
-    }
-    
+
     override func presentSearchViewController(filter: SearchFilter) {
         childFilterUpdate = nil
         applyDisplayMode(displayMode)

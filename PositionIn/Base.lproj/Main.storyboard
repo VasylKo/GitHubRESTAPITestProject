@@ -989,10 +989,10 @@
             </objects>
             <point key="canvasLocation" x="-902" y="-1436"/>
         </scene>
-        <!--People View Controller-->
+        <!--People Container View Controller-->
         <scene sceneID="ENb-qf-IkM">
             <objects>
-                <viewController storyboardIdentifier="PeopleViewController" id="eAB-D2-ac0" customClass="PeopleViewController" customModule="PositionIn" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PeopleViewController" id="eAB-D2-ac0" customClass="PeopleContainerViewController" customModule="PositionIn" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jp9-44-Yyc"/>
                         <viewControllerLayoutGuide type="bottom" id="bap-jG-ifl"/>
@@ -1001,17 +1001,17 @@
                         <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="s1t-9I-Go6" customClass="TableView" customModule="PosInCore">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hRF-ui-7e9">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </tableView>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="s1t-9I-Go6" firstAttribute="top" secondItem="jp9-44-Yyc" secondAttribute="bottom" id="Dkq-yY-vo5"/>
-                            <constraint firstItem="bap-jG-ifl" firstAttribute="top" secondItem="s1t-9I-Go6" secondAttribute="bottom" id="Xtb-sb-qtJ"/>
-                            <constraint firstAttribute="trailing" secondItem="s1t-9I-Go6" secondAttribute="trailing" id="ZVa-zA-z1m"/>
-                            <constraint firstItem="s1t-9I-Go6" firstAttribute="leading" secondItem="00s-2i-lmJ" secondAttribute="leading" id="lCb-S2-sCq"/>
+                            <constraint firstItem="bap-jG-ifl" firstAttribute="top" secondItem="hRF-ui-7e9" secondAttribute="bottom" id="8KO-aT-Gid"/>
+                            <constraint firstItem="hRF-ui-7e9" firstAttribute="top" secondItem="jp9-44-Yyc" secondAttribute="bottom" id="Alw-7v-ove"/>
+                            <constraint firstAttribute="trailing" secondItem="hRF-ui-7e9" secondAttribute="trailing" id="dEf-6U-vtw"/>
+                            <constraint firstItem="hRF-ui-7e9" firstAttribute="leading" secondItem="00s-2i-lmJ" secondAttribute="leading" id="o9Y-2o-kso"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="AcL-Oe-2Nz">
@@ -1025,13 +1025,13 @@
                             </segments>
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
-                                <action selector="browseModeSegmentChanged:" destination="eAB-D2-ac0" eventType="valueChanged" id="7bb-WQ-gak"/>
+                                <action selector="segmentControlValueChanged:" destination="eAB-D2-ac0" eventType="valueChanged" id="vr7-Ry-6Dn"/>
                             </connections>
                         </segmentedControl>
                     </navigationItem>
                     <connections>
-                        <outlet property="browseModeSegmentedControl" destination="Pmf-n5-rnC" id="NMe-Tk-IYK"/>
-                        <outlet property="tableView" destination="s1t-9I-Go6" id="vXD-og-qWn"/>
+                        <outlet property="containerView" destination="hRF-ui-7e9" id="pjM-pf-Gez"/>
+                        <outlet property="segmentedControl" destination="Pmf-n5-rnC" id="rqM-GE-h2X"/>
                         <segue destination="2Iu-6t-chL" kind="show" identifier="ShowUserProfile" id="jVg-bh-JyA"/>
                     </connections>
                 </viewController>
@@ -1446,10 +1446,10 @@
         <image name="newChat" width="24" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Y2f-e6-GbJ"/>
         <segue reference="sID-M8-MPA"/>
         <segue reference="UGm-BP-OPQ"/>
         <segue reference="X7t-wp-vZe"/>
         <segue reference="ulD-Z3-59i"/>
+        <segue reference="jVg-bh-JyA"/>
     </inferredMetricsTieBreakers>
 </document>

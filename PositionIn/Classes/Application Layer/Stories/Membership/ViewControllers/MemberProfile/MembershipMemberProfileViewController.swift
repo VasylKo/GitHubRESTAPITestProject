@@ -180,7 +180,7 @@ class MembershipMemberProfileViewController : XLFormViewController, MembershipMe
                     }
                 }
                 
-                let router : MembershipRouter = MembershipRouterImplementation()
+                let router = MembershipRouterImplementation()
                 router.showInitialViewController(from: self!)
                 self?.navigationController?.topViewController?.navigationItem.hidesBackButton = true
             }).onSuccess(callback: { _ in

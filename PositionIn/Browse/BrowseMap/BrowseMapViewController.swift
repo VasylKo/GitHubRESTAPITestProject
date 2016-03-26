@@ -32,7 +32,7 @@ final class BrowseMapViewController: UIViewController, BrowseActionProducer, Bro
     
     var browseMode: BrowseModeTabbarViewController.BrowseMode = .ForYou
     
-    let visibleItemTypes: [FeedItem.ItemType] = [.Project, .Emergency, .Training, .News, .Event, .Market, .GiveBlood]
+    let visibleItemTypes: [FeedItem.ItemType] = [.Project, .Emergency, .Training, .News, .Event, .Market, .GiveBlood, .BomaHotels]
     
     var filter = SearchFilter.currentFilter
     
@@ -70,6 +70,8 @@ final class BrowseMapViewController: UIViewController, BrowseActionProducer, Bro
                 return UIImage(named: "event_map")
             case .GiveBlood:
                 return UIImage(named: "category_blood_map")
+            case .BomaHotels:
+                return UIImage(named: "bomahotel_map")
             default:
                 return nil
             }
@@ -124,7 +126,7 @@ extension BrowseMapViewController: GMSMapViewDelegate {
         f.coordinates = coordinate
         
         //MARK: should refactor
-        let homeItem = HomeItem.Unknown
+        let homeItem = HomeItem.News
         let request: Future<CollectionResponse<FeedItem>,NSError> = api().getAll(homeItem,
             seachFilter: self.filter)
 

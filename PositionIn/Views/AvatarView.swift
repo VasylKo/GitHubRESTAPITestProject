@@ -64,6 +64,7 @@ class AvatarView: UIView {
          // Smoothens the border
         borderLayer.contentsScale = 2.0 * UIScreen.mainScreen().scale
         // Explicitly set the image
+        imageView.backgroundColor = UIColor.whiteColor()
         imageView.image = image
         // Mask the image
         imageView.layer.mask = maskLayer
@@ -97,7 +98,7 @@ class AvatarView: UIView {
         borderLayer.frame = bounds
     }
     
-    private let imageView = UIImageView()
+    private let imageView = UIImageView(image: UIImage(named: "AvatarPlaceholder"))
     private let borderLayer = CAShapeLayer()
     private let maskLayer = CAShapeLayer()
     

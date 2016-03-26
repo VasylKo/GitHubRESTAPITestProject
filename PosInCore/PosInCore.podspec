@@ -7,8 +7,8 @@ Pod::Spec.new do |s|
   s.platform = :ios
   s.ios.deployment_target = '8.0'
   s.source_files =  '*.swift' , 'TableView/*.swift'
-  s.dependency 'Alamofire', '~> 3.1'
-  s.dependency 'ObjectMapper', '~> 1.0'
+  s.dependency 'Alamofire', '~> 3.2.1'
+  s.dependency 'ObjectMapper', '~>  1.1.5'
   s.dependency 'BrightFutures', '~> 3.0'
   s.requires_arc = true
   s.homepage='http://positionin.com'

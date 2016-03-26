@@ -17,6 +17,12 @@ class NotificationViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupInterface()
+        self.loadData()
+    }
+    
+    //MARK: Load Data 
+    
+    func loadData() {
         api().getNotifications().onSuccess(callback: { [weak self] (response : CollectionResponse<SystemNotification>) in
             self?.notifications = response.items
             self?.tableView.reloadData()
@@ -48,11 +54,21 @@ class NotificationViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(NSStringFromClass(NotificationTableViewCell.self), forIndexPath: indexPath)
-        if let notification = self.notifications,
+        if let notifications = self.notifications,
         cell = cell as? NotificationTableViewCell {
-            let notification = notification[indexPath.row]
+            let notification = notifications[indexPath.row]
             cell.configureWithNotification(notification)
         }
         return cell
+    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        let notification = notifications![indexPath.row]
+        if notification.isRead != true {
+            api().readNotifications([notification.objectId]).onSuccess(callback: { [weak self] in
+                self?.loadData()
+                })
+        }
     }
 }

@@ -95,7 +95,7 @@ class FeedItem: CRUDObject {
         case News
         case Market
         case Post
-        case Wallet
+        case Donation
         
         var description: String {
             switch self {
@@ -121,8 +121,8 @@ class FeedItem: CRUDObject {
                 return "Volunteer"
             case Post:
                 return "Post"
-            case Wallet:
-                return "Wallet"
+            case Donation:
+                return "Donation"
             }
         
         }

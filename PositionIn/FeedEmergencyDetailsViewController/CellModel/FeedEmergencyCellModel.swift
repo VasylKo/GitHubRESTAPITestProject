@@ -15,15 +15,13 @@ import CleanroomLogger
 
 struct FeedEmergencyCellModel {
     
-    func modelsForEmergency(emergency: Product, actionConsumer: NewsActionConsumer?) -> [[TableViewCellModel]] {
+    func modelsForEmergency(emergency: Product, isFeautered: Bool, actionConsumer: NewsActionConsumer?) -> [[TableViewCellModel]] {
         var models: [[TableViewCellModel]] = []
         var firstSection: [TableViewCellModel] = []
-        
         firstSection.append(TableViewCellURLModel(url: emergency.imageURL, height: 180, placeholderString: "PromotionDetailsPlaceholder"))
-        
-        //TODO: uncomment when BE fix
-        let date: String? = emergency.date?.formattedAsTimeAgo()
-        firstSection.append(NewsDetailsTitleTableViewCellModel(title: emergency.name, distance: emergency.distanceString, author: nil, date: date))
+        let date: String? = emergency.date?.formattedAsFeedTime()
+        firstSection.append(NewsDetailsTitleTableViewCellModel(title: emergency.name,
+            isFeautered: isFeautered, distance: emergency.distanceString, author: nil, date: date))
         
         if let text = emergency.text {
             firstSection.append(TableViewCellTextModel(title: text))

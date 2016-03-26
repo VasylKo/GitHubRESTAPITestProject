@@ -20,12 +20,23 @@ class FeedListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
         self.setupInterface()
-        
         self.loadData()
+        setNavigationButtons()
     }
-    
+
+    private func setNavigationButtons() {
+        //Add image to Bavigation Bar
+        let imageView = UIImageView(image: UIImage(named: "feed-logo")?.imageWithRenderingMode(.AlwaysOriginal))
+        let barButtonItem = UIBarButtonItem(customView: imageView)
+        
+        //Add button with negative width to stick above image to left edge
+        let negativeSeparator = UIBarButtonItem(barButtonSystemItem: .FixedSpace, target: nil, action: nil)
+        negativeSeparator.width = -17
+        //Call parent view controller with navigation bar (BrowseMainGridController) where we whant to add notification button
+        parentViewController?.navigationItem.rightBarButtonItems = [negativeSeparator,barButtonItem]
+    }
+
     private func setupInterface() {
         
         var nib = UINib(nibName: String(FeedTableViewCell.self), bundle: nil)
@@ -69,9 +80,10 @@ extension FeedListViewController: UITableViewDelegate {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
     
         var item:FeedItem?
-        
+        var isFeautered = false
         if indexPath.row == 0 && (self.feauteredFeedItem != nil) {
             item = self.feauteredFeedItem
+            isFeautered = true
         }
         else {
             let offset = (self.feauteredFeedItem != nil) ? 1 : 0
@@ -82,6 +94,7 @@ extension FeedListViewController: UITableViewDelegate {
             let detailsController = FeedEmergencyDetailsViewController(nibName: "FeedEmergencyDetailsViewController",
                 bundle: nil)
             detailsController.objectId = item?.objectId
+            detailsController.isFeautered = isFeautered
             self.navigationController?.pushViewController(detailsController, animated: true)
         }
         else {
@@ -89,6 +102,7 @@ extension FeedListViewController: UITableViewDelegate {
                 bundle: nil)
             
             detailsController.objectId = item?.objectId
+            detailsController.isFeautered = isFeautered
             self.navigationController?.pushViewController(detailsController, animated: true)
         }
         

@@ -385,7 +385,7 @@ final class EditProfileViewController: BaseAddItemViewController, UserProfileAva
                     }
                 }
                 
-                let router : MembershipRouter = MembershipRouterImplementation()
+                let router = MembershipRouterImplementation()
                 router.showInitialViewController(from: self!)
                 }).onSuccess(callback: { _ in
                     api().pushesRegistration()

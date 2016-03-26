@@ -31,6 +31,12 @@ class DonateViewController: XLFormViewController, PaymentReponseDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.tintColor = UIScheme.mainThemeColor
+        
+        let rightBarButtomItem = UIBarButtonItem(image: UIImage(named: "info_button_icon"), style: .Plain, target: self, action: "questionTapped")
+        self.navigationItem.rightBarButtonItem = rightBarButtomItem
+        
+        self.title = NSLocalizedString("Donate")
+        
         self.initializeForm()
     }
     
@@ -150,6 +156,13 @@ class DonateViewController: XLFormViewController, PaymentReponseDelegate {
         confirmDonation.footerTitle = "By purchasing, you agree to Red Cross Terms of service and Privecy Policy"
         
         self.form = form
+    }
+
+    @objc func questionTapped() {
+        let controller = DonateInfoViewController(nibName: "DonateInfoViewController",
+                                                  bundle: nil)
+        controller.donateToString = self.product?.name
+        self.navigationController?.pushViewController(controller, animated: true)
     }
     
     func setError(hidden: Bool, error: String?) {

@@ -15,6 +15,7 @@ final class BrowseListViewController: UIViewController, BrowseActionProducer, Br
     var excludeCommunityItems = false
     var shoWCompactCells: Bool = true
     var showCardCells: Bool = false
+    var homeItem: HomeItem?
     private var dataRequestToken = InvalidationToken()
 
     var browseMode: BrowseModeTabbarViewController.BrowseMode = .ForYou {
@@ -91,11 +92,6 @@ final class BrowseListViewController: UIViewController, BrowseActionProducer, Br
             if (canAffectFilter) {
                 f.itemTypes = [selectedItemType]
             }
-//            else if (filter.itemTypes!.filter { $0 == FeedItem.ItemType.Unknown }.count == 0)
-//                || selectedItemType != FeedItem.ItemType.Unknown {
-//                self.dataSource.setItems([])
-//                self.tableView.reloadData()
-//            }
             filter = f
         }
     }
@@ -105,25 +101,28 @@ final class BrowseListViewController: UIViewController, BrowseActionProducer, Br
     }
     
     private func getFeedItems(searchFilter: SearchFilter, page: APIService.Page = APIService.Page()) {
+        
         Log.debug?.trace()
         Log.debug?.value(self)
         dataRequestToken.invalidate()
         dataRequestToken = InvalidationToken()
         
         //MARK: should refactor
-        let homeItem = HomeItem.Unknown
+        
+        var homeItem = HomeItem.Unknown
+        if let homeItemUnwrapped = self.homeItem {
+            homeItem = homeItemUnwrapped
+        }
         let request: Future<CollectionResponse<FeedItem>,NSError> = api().getAll(homeItem, seachFilter: self.filter)
         
         request.onSuccess(dataRequestToken.validContext) {
             [weak self] response in
-            Log.debug?.value(response.items)
-            guard let strongSelf = self
-                //                let itemTypes = searchFilter.itemTypes{
-                //                //TODO: need discuss this moment
-                //                where itemTypes.contains(strongSelf.selectedItemType) || strongSelf.selectedItemType == .Unknown
-                else {
-                    return
+            
+            guard let strongSelf = self else {
+                return
             }
+            
+            Log.debug?.value(response.items)
 
             var items: [FeedItem] = response.items
             if strongSelf.excludeCommunityItems {
