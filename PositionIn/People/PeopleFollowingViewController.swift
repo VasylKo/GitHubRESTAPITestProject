@@ -97,7 +97,7 @@ final class PeopleFollowingDataSource: TableViewDataSource {
     private var items: [UserInfoTableViewCellModel] = []
     
     func setUserList(users: [UserInfo]) {
-        items = users.sort{ $0.title < $1.title }.map{ UserInfoTableViewCellModel(userInfo: $0) }
+        items = users.sort{ ($0.title ?? "").localizedCaseInsensitiveCompare($1.title ?? "") == NSComparisonResult.OrderedAscending }.map{ UserInfoTableViewCellModel(userInfo: $0) }
     }
     
     override func configureTable(tableView: UITableView) {
