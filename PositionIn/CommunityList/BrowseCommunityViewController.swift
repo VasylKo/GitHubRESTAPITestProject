@@ -187,11 +187,6 @@ class BrowseCommunityViewController: BesideMenuViewController, BrowseCommunityAc
                     ConversationManager.sharedInstance().refresh()
                 }
             }
-            else {
-                api().logout().onComplete {[weak self] _ in
-                    self?.sideBarController?.executeAction(.Login)
-                }
-            }
             break
         case .Browse, .None:
             switch self.browseModeSegmentedControl.selectedSegmentIndex {

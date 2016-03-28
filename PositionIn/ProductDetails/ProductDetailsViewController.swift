@@ -172,13 +172,8 @@ extension ProductDetailsViewController: ProductDetailsActionConsumer {
                 let donateController = Storyboards.Onboarding.instantiateDonateViewController()
                 donateController.product = self.product
                 self.navigationController?.pushViewController(donateController, animated: true)
-                return
-            } else {
-                api().logout().onComplete {[weak self] _ in
-                    self?.sideBarController?.executeAction(.Login)
-                }
-                return
             }
+            return
         case .ProductInventory:
             segue = .ShowProductInventory
         case .Navigate:

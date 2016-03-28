@@ -204,12 +204,10 @@ extension AppDelegate {
             Log.error?.value(error)
             let baseErrorDomain: String = NetworkDataProvider.ErrorCodes.errorDomain
             switch (error.domain, error.code) {
-            case (baseErrorDomain, NetworkDataProvider.ErrorCodes.InvalidSessionError.rawValue):
+            case (baseErrorDomain, NetworkDataProvider.ErrorCodes.SessionRevokedError.rawValue):
                 self.sidebarViewController?.executeAction(.Login)
-                //TODO: remove hot fix
-                if(error.localizedDescription.caseInsensitiveCompare("invalid_token") != .OrderedSame) {
-                    showWarning(error.localizedDescription)
-                }
+            case (baseErrorDomain, NetworkDataProvider.ErrorCodes.InvalidSessionError.rawValue):
+                return
             default:
                 showWarning(error.localizedDescription)
             }

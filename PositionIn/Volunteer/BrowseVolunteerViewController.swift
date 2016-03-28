@@ -88,11 +88,6 @@ class BrowseVolunteerViewController: BrowseCommunityViewController {
                     ConversationManager.sharedInstance().refresh()
                 }
             }
-            else {
-                api().logout().onComplete {[weak self] _ in
-                    self?.sideBarController?.executeAction(.Login)
-                }
-            }
             break
         case .Post:
             let controller = Storyboards.NewItems.instantiateAddPostViewController()

@@ -17,19 +17,11 @@ import Result
 extension Future {
     func recoverErrorWith(futureBuilder: Void -> Future<T, E>) -> Future<T, E> {
         return self.recoverWith { error in
-            if (error as NSError).code == NSURLErrorNetworkConnectionLost {
-                return futureBuilder()
-            }
-            
             if let e = NetworkDataProvider.ErrorCodes.fromError(error as NSError) where e == .InvalidSessionError {
-                return futureBuilder()
+                api().sessionController.setAccessTokenResponse(AccessTokenResponse.invalidAccessToken())
             }
             
-            if let e = NetworkDataProvider.ErrorCodes.fromError(error as NSError) where e == .SessionRevokedError {
-                return futureBuilder()
-            }
-            
-            return Future(error: error)
+            return futureBuilder()
         }
     }
 }
@@ -106,17 +98,17 @@ final class APIService {
             let newPassword = newPassword {
                 params = ["oldPassword" : oldPassword, "newPassword" : newPassword]
         }
-        return session().flatMap {
-            (token: AuthResponse.Token) -> Future<Void, NSError> in
-            
-            let futureBuilder: (Void -> Future<Void, NSError>) = { [unowned self] in
+        
+        let futureBuilder: (Void -> Future<Void, NSError>) = { [unowned self] in
+            return self.session().flatMap {
+                (token: AuthResponse.Token) -> Future<Void, NSError> in
                 let request = self.updateRequest(token, endpoint: endpoint, method: .POST, params: params)
                 let (_, future): CRUDResultType = self.dataProvider.jsonRequest(request, map: self.commandMapping(), validation: nil)
                 return future
             }
-            
-            return self.handleFailure(futureBuilder)
         }
+        
+        return self.handleFailure(futureBuilder)
     }
     
     func getMyProfile() -> Future<UserProfile, NSError> {
@@ -591,17 +583,17 @@ final class APIService {
         
         typealias CRUDResultType = (Alamofire.Request, Future<Void, NSError>)
         
-        return session().flatMap {
-            (token: AuthResponse.Token) -> Future<Void, NSError> in
-            
-            let futureBuilder: (Void -> Future<Void, NSError>) = { [unowned self] in
+        let futureBuilder: (Void -> Future<Void, NSError>) = { [unowned self] in
+            self.session().flatMap {
+                (token: AuthResponse.Token) -> Future<Void, NSError> in
                 let params = ["notificationIds": notificationsIds]
                 let request = self.updateRequest(token, endpoint: endpoint, method: .PUT, params: params)
                 let (_, future): CRUDResultType = self.dataProvider.jsonRequest(request, map: self.commandMapping(), validation: nil)
                 return future
             }
-            return self.handleFailure(futureBuilder)
         }
+        
+        return self.handleFailure(futureBuilder)
     }
     
     func hasNotifications() -> Future<Bool, NSError> {
@@ -610,7 +602,7 @@ final class APIService {
         typealias CRUDResultType = (Alamofire.Request, Future<CollectionResponse<SystemNotification>, NSError>)
         
         let futureBuilder: (Void -> Future<CollectionResponse<SystemNotification>, NSError>) = { [unowned self] in
-            return self.session().flatMap {
+            self.session().flatMap {
                 (token: AuthResponse.Token) -> Future<CollectionResponse<SystemNotification>, NSError> in
                 let request = self.readRequest(token, endpoint: endpoint, params: page.query)
                 let (_ , future): CRUDResultType = self.dataProvider.objectRequest(request)

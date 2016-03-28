@@ -176,28 +176,20 @@ extension EventDetailsViewController: EventDetailsActionConsumer {
                     })
                 }
 
-            } else {
-                api().logout().onComplete {[weak self] _ in
-                    self?.sideBarController?.executeAction(.Login)
-                }
-                return
             }
         case .MoreInformation:
             if self.event?.links?.isEmpty == false || self.event?.attachments?.isEmpty == false {
                 let moreInformationViewController = MoreInformationViewController(links: self.event?.links, attachments: self.event?.attachments)
                 self.navigationController?.pushViewController(moreInformationViewController, animated: true)
             }
-            return
         case .Navigate:
             if let coordinates = self.event?.location?.coordinates {
                 OpenApplication.appleMap(with: coordinates)
             } else {
                 Log.error?.message("coordinates missed")
             }
-            return
         default:
             Log.warning?.message("Unhandled action: \(action)")
-            return
         }
     }
 }

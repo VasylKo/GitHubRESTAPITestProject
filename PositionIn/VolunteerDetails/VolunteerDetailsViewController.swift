@@ -287,11 +287,6 @@ extension VolunteerDetailsViewController: VolunteerDetailsActionConsumer {
                     break
                 }
             }
-            else {
-                api().logout().onComplete {[weak self] _ in
-                    self?.sideBarController?.executeAction(.Login)
-                }
-            }
             return
         case .Navigate:
             if let coordinates = self.volunteer?.location?.coordinates {
