@@ -91,8 +91,6 @@ final class EventDetailsViewController: UIViewController {
         }
         if self.event?.links?.isEmpty == false || self.event?.attachments?.isEmpty == false {
             firstSection.append(EventActionItem(title: NSLocalizedString("More Information"), image: "productTerms&Info", action: .MoreInformation))
-        } else {
-            firstSection.append(EventActionItem(title: NSLocalizedString("No attachments"), image: "productTerms&Info", action: .MoreInformation))
         }
         
         return [zeroSection, firstSection]

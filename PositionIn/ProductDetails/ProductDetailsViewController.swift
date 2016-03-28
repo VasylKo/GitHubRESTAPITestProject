@@ -114,8 +114,6 @@ final class ProductDetailsViewController: UIViewController {
         }
         if self.product?.links?.isEmpty == false || self.product?.attachments?.isEmpty == false {
             firstSection.append(ProductActionItem(title: NSLocalizedString("More Information"), image: "productTerms&Info", action: .MoreInformation))
-        } else {
-            firstSection.append(ProductActionItem(title: NSLocalizedString("No attachments"), image: "productTerms&Info", action: .MoreInformation))
         }
         
         return [zeroSection, firstSection]
