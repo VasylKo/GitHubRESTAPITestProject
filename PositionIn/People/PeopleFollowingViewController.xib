@@ -24,8 +24,8 @@
                         <outlet property="delegate" destination="-1" id="ODn-TU-7hB"/>
                     </connections>
                 </tableView>
-                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Press Explore tab to follow new people" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qh8-wU-bsN">
-                    <rect key="frame" x="0.0" y="0.0" width="600" height="400"/>
+                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Press Explore tab to follow new people" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qh8-wU-bsN" userLabel="No Followers Warning Label">
+                    <rect key="frame" x="0.0" y="30" width="600" height="18"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
@@ -34,7 +34,10 @@
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="JxX-6c-MFk" secondAttribute="trailing" id="2oj-Hb-23S"/>
+                <constraint firstAttribute="trailing" secondItem="qh8-wU-bsN" secondAttribute="trailing" id="8KW-Oc-TxQ"/>
+                <constraint firstItem="qh8-wU-bsN" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="DRA-Ho-bY1"/>
                 <constraint firstAttribute="trailing" secondItem="qh8-wU-bsN" secondAttribute="trailing" id="FJQ-0x-WHr"/>
+                <constraint firstItem="qh8-wU-bsN" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="30" id="Fks-18-ndE"/>
                 <constraint firstAttribute="bottom" secondItem="qh8-wU-bsN" secondAttribute="bottom" constant="200" id="M26-Ou-VmM"/>
                 <constraint firstItem="JxX-6c-MFk" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Vym-fe-h1t"/>
                 <constraint firstItem="JxX-6c-MFk" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="WS7-MW-IER"/>
@@ -42,6 +45,14 @@
                 <constraint firstItem="qh8-wU-bsN" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="gwx-rL-Uw9"/>
                 <constraint firstItem="qh8-wU-bsN" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="k2s-Eg-dBb"/>
             </constraints>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="FJQ-0x-WHr"/>
+                    <exclude reference="M26-Ou-VmM"/>
+                    <exclude reference="gwx-rL-Uw9"/>
+                    <exclude reference="k2s-Eg-dBb"/>
+                </mask>
+            </variation>
         </view>
     </objects>
 </document>
