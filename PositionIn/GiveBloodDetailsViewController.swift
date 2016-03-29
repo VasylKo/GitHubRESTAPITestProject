@@ -112,8 +112,6 @@ class GiveBloodDetailsViewController: UIViewController {
         }
         if self.product?.links?.isEmpty == false || self.product?.attachments?.isEmpty == false {
             zeroSection.append(GiveBloodActionItem(title: NSLocalizedString("More Information"), image: "productTerms&Info", action: .MoreInformation))
-        } else {
-            zeroSection.append(GiveBloodActionItem(title: NSLocalizedString("No attachments"), image: "productTerms&Info", action: .MoreInformation))
         }
         
         return [zeroSection]

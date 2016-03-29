@@ -206,8 +206,6 @@ extension AppDelegate {
             switch (error.domain, error.code) {
             case (baseErrorDomain, NetworkDataProvider.ErrorCodes.SessionRevokedError.rawValue):
                 self.sidebarViewController?.executeAction(.Login)
-            case (baseErrorDomain, NetworkDataProvider.ErrorCodes.InvalidSessionError.rawValue):
-                return
             default:
                 showWarning(error.localizedDescription)
             }
