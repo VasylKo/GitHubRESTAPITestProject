@@ -117,7 +117,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         Fabric.with([Crashlytics.self])
         
-        NewRelic.startWithApplicationToken(AppConfiguration().newRelicToken);
+        NewRelicController.start()
+        
         let notificationSettings = LNNotificationAppSettings()
         notificationSettings.alertStyle = .Banner
         notificationSettings.soundEnabled = false
@@ -203,12 +204,8 @@ extension AppDelegate {
             Log.error?.value(error)
             let baseErrorDomain: String = NetworkDataProvider.ErrorCodes.errorDomain
             switch (error.domain, error.code) {
-            case (baseErrorDomain, NetworkDataProvider.ErrorCodes.InvalidSessionError.rawValue):
+            case (baseErrorDomain, NetworkDataProvider.ErrorCodes.SessionRevokedError.rawValue):
                 self.sidebarViewController?.executeAction(.Login)
-                //TODO: remove hot fix
-                if(error.localizedDescription.caseInsensitiveCompare("invalid_token") != .OrderedSame) {
-                    showWarning(error.localizedDescription)
-                }
             default:
                 showWarning(error.localizedDescription)
             }

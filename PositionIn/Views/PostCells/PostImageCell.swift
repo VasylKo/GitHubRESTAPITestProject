@@ -12,11 +12,14 @@ class PostImageCell: TableViewCell {
     override func setModel(model: TableViewCellModel) {
         let m = model as? TableViewCellURLModel
         assert(m != nil, "Invalid model passed")
-        //TODO: set placeholder
-        contentImage.setImageFromURL(m!.url, placeholder: UIImage(named: m!.placeholderString))
         
         self.imageHeightConstaint.constant = CGFloat(m!.height)
-        self.setNeedsLayout()
+        var frame = contentImage.frame
+        frame.size.height = CGFloat(m!.height)
+        contentImage.frame = frame
+        self.updateConstraints()
+        
+        contentImage.setImageFromURL(m!.url, placeholder: UIImage(named: m!.placeholderString))
     }
 
     @IBOutlet weak var imageHeightConstaint: NSLayoutConstraint!

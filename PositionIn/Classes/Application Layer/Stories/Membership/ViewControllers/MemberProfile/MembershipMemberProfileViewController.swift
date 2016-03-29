@@ -88,8 +88,10 @@ class MembershipMemberProfileViewController : XLFormViewController, MembershipMe
         
         self.setupInterface()
         
-        api().getMyProfile().onSuccess { [weak self] profile in
+        if api().isUserAuthorized() {
+            api().getMyProfile().onSuccess { [weak self] profile in
                 self?.userProfile = profile
+            }
         }
     }
     

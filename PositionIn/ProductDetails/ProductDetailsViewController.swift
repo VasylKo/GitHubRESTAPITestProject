@@ -114,8 +114,6 @@ final class ProductDetailsViewController: UIViewController {
         }
         if self.product?.links?.isEmpty == false || self.product?.attachments?.isEmpty == false {
             firstSection.append(ProductActionItem(title: NSLocalizedString("More Information"), image: "productTerms&Info", action: .MoreInformation))
-        } else {
-            firstSection.append(ProductActionItem(title: NSLocalizedString("No attachments"), image: "productTerms&Info", action: .MoreInformation))
         }
         
         return [zeroSection, firstSection]
@@ -172,13 +170,8 @@ extension ProductDetailsViewController: ProductDetailsActionConsumer {
                 let donateController = Storyboards.Onboarding.instantiateDonateViewController()
                 donateController.product = self.product
                 self.navigationController?.pushViewController(donateController, animated: true)
-                return
-            } else {
-                api().logout().onComplete {[weak self] _ in
-                    self?.sideBarController?.executeAction(.Login)
-                }
-                return
             }
+            return
         case .ProductInventory:
             segue = .ShowProductInventory
         case .Navigate:

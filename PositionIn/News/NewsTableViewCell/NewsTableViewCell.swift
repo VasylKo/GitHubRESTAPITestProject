@@ -41,7 +41,7 @@ class NewsTableViewCell: TableViewCell {
         
         if let imgURL = m!.item.image {
             feedItemImageView.setImageFromURL(imgURL)
-            self.imageHeightConstaint.constant = 80
+            self.imageHeightConstaint.constant = 160
         }
         else {
             feedItemImageView.image = nil

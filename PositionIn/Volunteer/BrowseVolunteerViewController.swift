@@ -13,6 +13,8 @@ import CleanroomLogger
 
 class BrowseVolunteerViewController: BrowseCommunityViewController {
     
+    //override var mapViewController = VolunteerMapViewController() as UIViewCo
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Volunteering"
@@ -70,7 +72,7 @@ class BrowseVolunteerViewController: BrowseCommunityViewController {
                     community.closed = nil
                     updateCommunity.append(community)
                 }
-                self?.dataSource.setCommunities(updateCommunity, mode: browseMode)
+                self?.dataSource.setCommunities(updateCommunity, mode: browseMode, type: .Volunteer)
                 self?.tableView.reloadData()
             }
         }
@@ -84,11 +86,6 @@ class BrowseVolunteerViewController: BrowseCommunityViewController {
                 api().joinCommunity(communityId).onSuccess { [weak self] _ in
                     self?.reloadData()
                     ConversationManager.sharedInstance().refresh()
-                }
-            }
-            else {
-                api().logout().onComplete {[weak self] _ in
-                    self?.sideBarController?.executeAction(.Login)
                 }
             }
             break
@@ -121,5 +118,9 @@ class BrowseVolunteerViewController: BrowseCommunityViewController {
                 self.reloadData()
             })
         }
+    }
+    
+    override func initializeMapViewController () -> UIViewController {
+        return VolunteerMapViewController()
     }
 }

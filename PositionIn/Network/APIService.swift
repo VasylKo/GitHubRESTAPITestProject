@@ -14,8 +14,19 @@ import BrightFutures
 import CleanroomLogger
 import Result
 
+extension Future {
+    func recoverErrorWith(futureBuilder: Void -> Future<T, E>) -> Future<T, E> {
+        return self.recoverWith { error in
+            if let e = NetworkDataProvider.ErrorCodes.fromError(error as NSError) where e == .InvalidSessionError {
+                api().sessionController.setAccessTokenResponse(AccessTokenResponse.invalidAccessToken())
+            }
+            
+            return futureBuilder()
+        }
+    }
+}
+
 final class APIService {
-    
     init (
         url: NSURL,
         dataProvider: NetworkDataProvider = NetworkDataProvider(),
@@ -32,21 +43,12 @@ final class APIService {
     
     var defaultErrorHandler: ErrorHandler?
     
-    func handleFailure<R>(futureBuilder: Void -> Future<R, NSError>) -> Future<R, NSError> {
-        return handleConnectionError(futureBuilder(), futureBuilder: futureBuilder).onFailure { error in
-            if let e = NetworkDataProvider.ErrorCodes.fromError(error) where e == .InvalidSessionError {
+    func handleFailure<R>(fb: Void -> Future<R, NSError>) -> Future<R, NSError> {
+        return fb().recoverErrorWith(fb).recoverErrorWith(fb).recoverErrorWith(fb).onFailure { error in
+            if let e = NetworkDataProvider.ErrorCodes.fromError(error) where e == .SessionRevokedError {
                 self.logout()
             }
             self.defaultErrorHandler?(error)
-        }
-    }
-    
-    func handleConnectionError<R>(future1: Future<R, NSError>, futureBuilder: Void -> Future<R, NSError>) -> Future<R, NSError> {
-        return future1.recoverWith { error in
-            if error.code == NSURLErrorNetworkConnectionLost {
-                return futureBuilder()
-            }
-            return Future(error: error)
         }
     }
     
@@ -96,17 +98,17 @@ final class APIService {
             let newPassword = newPassword {
                 params = ["oldPassword" : oldPassword, "newPassword" : newPassword]
         }
-        return session().flatMap {
-            (token: AuthResponse.Token) -> Future<Void, NSError> in
-            
-            let futureBuilder: (Void -> Future<Void, NSError>) = { [unowned self] in
+        
+        let futureBuilder: (Void -> Future<Void, NSError>) = { [unowned self] in
+            return self.session().flatMap {
+                (token: AuthResponse.Token) -> Future<Void, NSError> in
                 let request = self.updateRequest(token, endpoint: endpoint, method: .POST, params: params)
                 let (_, future): CRUDResultType = self.dataProvider.jsonRequest(request, map: self.commandMapping(), validation: nil)
                 return future
             }
-            
-            return self.handleFailure(futureBuilder)
         }
+        
+        return self.handleFailure(futureBuilder)
     }
     
     func getMyProfile() -> Future<UserProfile, NSError> {
@@ -319,33 +321,33 @@ final class APIService {
         let endpoint = AmbulanceRequest.endpoint()
         typealias CRUDResultType = (Alamofire.Request, Future<AmbulanceRequest, NSError>)
         let params = Mapper().toJSON(object)
-        return session().flatMap {
-            (token: AuthResponse.Token) -> Future<AmbulanceRequest, NSError> in
-            
-            let futureBuilder: (Void -> Future<AmbulanceRequest, NSError>) = { [unowned self] in
+        
+        let futureBuilder: (Void -> Future<AmbulanceRequest, NSError>) = { [unowned self] in
+            return self.session().flatMap {
+                (token: AuthResponse.Token) -> Future<AmbulanceRequest, NSError> in
                 let request = self.updateRequest(token, endpoint: endpoint, method: .POST, params: params)
                 let (_, future): CRUDResultType = self.dataProvider.objectRequest(request)
                 return future
             }
-                
-            return self.handleFailure(futureBuilder)
         }
+        
+        return handleFailure(futureBuilder)
     }
     
     func deleteAmbulanceRequest(objectId: CRUDObjectId) -> Future<Void, NSError> {
         let endpoint = AmbulanceRequest.endpoint(objectId)
         typealias CRUDResultType = (Alamofire.Request, Future<Void, NSError>)
-        return session().flatMap {
-            (token: AuthResponse.Token) -> Future<Void, NSError> in
-            
-            let futureBuilder: (Void -> Future<Void, NSError>) = { [unowned self] in
+        
+        let futureBuilder: (Void -> Future<Void, NSError>) = { [unowned self] in
+            return self.session().flatMap {
+                (token: AuthResponse.Token) -> Future<Void, NSError> in
                 let request = self.updateRequest(token, endpoint: endpoint, method: .DELETE)
                 let (_, future): CRUDResultType = self.dataProvider.jsonRequest(request, map: self.emptyResponseMapping(), validation: nil)
                 return future
             }
-                
-            return self.handleFailure(futureBuilder)
         }
+        
+        return handleFailure(futureBuilder)
     }
     
     //MARK: - People -
@@ -363,17 +365,17 @@ final class APIService {
         
         //TODO: refactor, use generics
         typealias CRUDResultType = (Alamofire.Request, Future<CollectionResponse<UserInfo>, NSError>)        
-        return session().flatMap {
-            (token: AuthResponse.Token) -> Future<CollectionResponse<UserInfo>, NSError> in
-            
-            let futureBuilder: (Void -> Future<CollectionResponse<UserInfo>, NSError>) = { [unowned self] in
+        
+        let futureBuilder: (Void -> Future<CollectionResponse<UserInfo>, NSError>) = { [unowned self] in
+            return self.session().flatMap {
+                (token: AuthResponse.Token) -> Future<CollectionResponse<UserInfo>, NSError> in
                 let request = self.updateRequest(token, endpoint: endpoint, params: params.query)
                 let (_ , future): CRUDResultType = self.dataProvider.objectRequest(request)
                 return future
             }
-            
-            return self.handleFailure(futureBuilder)
         }
+        
+        return handleFailure(futureBuilder)
     }
     
     func getMySubscriptions() -> Future<CollectionResponse<UserInfo>,NSError> {
@@ -420,17 +422,18 @@ final class APIService {
         params.append(query: query)
         params.append(query: page)
         Log.debug?.value(params.query)
-        return session().flatMap {
-            (token: AuthResponse.Token) -> Future<QuickSearchResponse, NSError> in
-            
-            let futureBuilder: (Void -> Future<QuickSearchResponse, NSError>) = { [unowned self] in
+        
+        let futureBuilder: (Void -> Future<QuickSearchResponse, NSError>) = { [unowned self] in
+            return self.session().flatMap {
+                (token: AuthResponse.Token) -> Future<QuickSearchResponse, NSError> in
+                
                 let request = self.updateRequest(token, endpoint: endpoint, params: params.query)
                 let (_ , future): (Alamofire.Request, Future<QuickSearchResponse, NSError>) = self.dataProvider.objectRequest(request)
                 return future
             }
-    
-            return self.handleFailure(futureBuilder)
         }
+        
+        return self.handleFailure(futureBuilder)
     }
     
     func getFeed(query: APIServiceQueryConvertible, page: Page) -> Future<CollectionResponse<FeedItem>,NSError> {
@@ -477,17 +480,17 @@ final class APIService {
     func getVolunteers() -> Future<CollectionResponse<Community>,NSError> {
         let endpoint = HomeItem.Volunteer.endpoint()
         let method: Alamofire.Method = .GET
-        return session().flatMap {
-            (token: AuthResponse.Token) -> Future<CollectionResponse<Community>, NSError> in
-            
-            let futureBuilder: (Void -> Future<CollectionResponse<Community>, NSError>) = { [unowned self] in
+        
+        let futureBuilder: (Void -> Future<CollectionResponse<Community>, NSError>) = { [unowned self] in
+            return self.session().flatMap {
+                (token: AuthResponse.Token) -> Future<CollectionResponse<Community>, NSError> in
                 let request = self.updateRequest(token, endpoint: endpoint, method: method)
                 let (_ , future): (Alamofire.Request, Future<CollectionResponse<Community>, NSError>) = self.dataProvider.objectRequest(request)
                 return future
             }
-            
-            return self.handleFailure(futureBuilder)
         }
+        
+        return self.handleFailure(futureBuilder)
     }
     
     func getCountyBranches(page: Page) -> Future<CollectionResponse<Community>, NSError> {
@@ -516,17 +519,17 @@ final class APIService {
     func getBomaHotelsDetails(objectId: CRUDObjectId) -> Future<BomaHotel, NSError> {
         let endpoint = HomeItem.BomaHotels.endpoint(objectId)
         //TODO need fix downcastng
-        return session().flatMap {
-            (token: AuthResponse.Token) -> Future<BomaHotel, NSError> in
-            
-            let futureBuilder: (Void -> Future<BomaHotel, NSError>) = { [unowned self] in
+        
+        let futureBuilder: (Void -> Future<BomaHotel, NSError>) = { [unowned self] in
+            self.session().flatMap {
+                (token: AuthResponse.Token) -> Future<BomaHotel, NSError> in
                 let request = self.updateRequest(token, endpoint: endpoint!, params: nil, method: .GET)
                 let (_ , future): (Alamofire.Request, Future<BomaHotel, NSError>) = self.dataProvider.objectRequest(request)
                 return future
             }
-            
-            return self.handleFailure(futureBuilder)
         }
+        
+        return self.handleFailure(futureBuilder)
     }
     
     func getProjectsDetails(objectId: CRUDObjectId) -> Future<Product, NSError> {
@@ -556,17 +559,16 @@ final class APIService {
     }
     
     private func getOne(endpoint: String) -> Future<Product, NSError> {
-        return session().flatMap {
-            (token: AuthResponse.Token) -> Future<Product, NSError> in
-            
-            let futureBuilder: (Void -> Future<Product, NSError>) = { [unowned self] in
+        let futureBuilder: (Void -> Future<Product, NSError>) = { [unowned self] in
+            self.session().flatMap {
+                (token: AuthResponse.Token) -> Future<Product, NSError> in
                 let request = self.updateRequest(token, endpoint: endpoint, params: nil, method: .GET)
                 let (_ , future): (Alamofire.Request, Future<Product, NSError>) = self.dataProvider.objectRequest(request)
                 return future
             }
-            
-            return self.handleFailure(futureBuilder)
         }
+    
+        return self.handleFailure(futureBuilder)
     }
 
     //MARK: - Notifications
@@ -576,25 +578,42 @@ final class APIService {
         return getObjectsCollection(endpoint, params: nil)
     }
     
+    func readNotifications(notificationsIds: [String]) -> Future<Void, NSError> {
+        let endpoint = SystemNotification.endpoint()
+        
+        typealias CRUDResultType = (Alamofire.Request, Future<Void, NSError>)
+        
+        let futureBuilder: (Void -> Future<Void, NSError>) = { [unowned self] in
+            self.session().flatMap {
+                (token: AuthResponse.Token) -> Future<Void, NSError> in
+                let params = ["notificationIds": notificationsIds]
+                let request = self.updateRequest(token, endpoint: endpoint, method: .PUT, params: params)
+                let (_, future): CRUDResultType = self.dataProvider.jsonRequest(request, map: self.commandMapping(), validation: nil)
+                return future
+            }
+        }
+        
+        return self.handleFailure(futureBuilder)
+    }
+    
     func hasNotifications() -> Future<Bool, NSError> {
         let endpoint = SystemNotification.endpoint()
         let page = Page(start: 0, size: 1)
         typealias CRUDResultType = (Alamofire.Request, Future<CollectionResponse<SystemNotification>, NSError>)
         
-        return session().flatMap {
-            (token: AuthResponse.Token) -> Future<CollectionResponse<SystemNotification>, NSError> in
-            
-            let futureBuilder: (Void -> Future<CollectionResponse<SystemNotification>, NSError>) = { [unowned self] in
+        let futureBuilder: (Void -> Future<CollectionResponse<SystemNotification>, NSError>) = { [unowned self] in
+            self.session().flatMap {
+                (token: AuthResponse.Token) -> Future<CollectionResponse<SystemNotification>, NSError> in
                 let request = self.readRequest(token, endpoint: endpoint, params: page.query)
                 let (_ , future): CRUDResultType = self.dataProvider.objectRequest(request)
                 return future
             }
-            
-            return futureBuilder()
-            }.flatMap({ (response : CollectionResponse<SystemNotification>) -> Future<Bool, NSError> in
+        }
+        
+        return futureBuilder().flatMap{ (response : CollectionResponse<SystemNotification>) -> Future<Bool, NSError> in
                 let result = response.items.count > 0 ? true : false
                 return Future(value: result)
-        })
+        }
     }
     
     //MARK: - MPesa requests
@@ -616,17 +635,16 @@ final class APIService {
         let  params = ["payment_method_nonce": nonce, "amount" : amount, "itemId" : itemId, "quantity": quantity]
         typealias CRUDResultType = (Alamofire.Request, Future<String, NSError>)
         
-        return session().flatMap {
-            (token: AuthResponse.Token) -> Future<String, NSError> in
-            
-            let futureBuilder: (Void -> Future<String, NSError>) = { [unowned self] in
+        let futureBuilder: (Void -> Future<String, NSError>) = { [unowned self] in
+            self.session().flatMap {
+                (token: AuthResponse.Token) -> Future<String, NSError> in
                 let request = self.updateRequest(token, endpoint: endpoint, method: .POST, params: params)
                 let (_, future): CRUDResultType = self.dataProvider.jsonRequest(request, map: BraintreePayment.mpesaMapping(), validation: nil)
                 return future
             }
-            
-            return self.handleFailure(futureBuilder)
         }
+        
+        return self.handleFailure(futureBuilder)
     }
     
     func membershipCheckoutMpesa(amount:String, nonce:String, membershipId: String) -> Future<String, NSError> {
@@ -634,17 +652,16 @@ final class APIService {
         let params = ["payment_method_nonce": nonce, "amount" : amount, "itemId" : membershipId]
         typealias CRUDResultType = (Alamofire.Request, Future<String, NSError>)
         
-        return session().flatMap {
-            (token: AuthResponse.Token) -> Future<String, NSError> in
-            
-            let futureBuilder: (Void -> Future<String, NSError>) = { [unowned self] in
+        let futureBuilder: (Void -> Future<String, NSError>) = { [unowned self] in
+            return self.session().flatMap {
+                (token: AuthResponse.Token) -> Future<String, NSError> in
                 let request = self.updateRequest(token, endpoint: endpoint, method: .POST, params: params)
                 let (_, future): CRUDResultType = self.dataProvider.jsonRequest(request, map: BraintreePayment.mpesaMapping(), validation: nil)
                 return future
             }
-            
-            return self.handleFailure(futureBuilder)
         }
+        
+        return self.handleFailure(futureBuilder)
     }
     
     func donateCheckoutMpesa(amount:String, nonce:String) -> Future<String, NSError> {
@@ -652,17 +669,16 @@ final class APIService {
         let params = ["payment_method_nonce": nonce, "amount" : amount]
         typealias CRUDResultType = (Alamofire.Request, Future<String, NSError>)
         
-        return session().flatMap {
-            (token: AuthResponse.Token) -> Future<String, NSError> in
-            
-            let futureBuilder: (Void -> Future<String, NSError>) = { [unowned self] in
+        let futureBuilder: (Void -> Future<String, NSError>) = { [unowned self] in
+            return self.session().flatMap {
+                (token: AuthResponse.Token) -> Future<String, NSError> in
                 let request = self.updateRequest(token, endpoint: endpoint, method: .POST, params: params)
                 let (_, future): CRUDResultType = self.dataProvider.jsonRequest(request, map: BraintreePayment.mpesaMapping(), validation: nil)
                 return future
             }
-            
-            return self.handleFailure(futureBuilder)
         }
+        
+        return self.handleFailure(futureBuilder)
     }
     
     //MARK: - Braintree requests
@@ -671,17 +687,16 @@ final class APIService {
         let endpoint = BraintreePayment.tokenEndpoint()
         typealias CRUDResultType = (Alamofire.Request, Future<String, NSError>)
         
-        return session().flatMap {
-            (token: AuthResponse.Token) -> Future<String, NSError> in
-            
-            let futureBuilder: (Void -> Future<String, NSError>) = { [unowned self] in
+        let futureBuilder: (Void -> Future<String, NSError>) = { [unowned self] in
+            return self.session().flatMap {
+                (token: AuthResponse.Token) -> Future<String, NSError> in
                 let request = self.readRequest(token, endpoint: endpoint)
                 let (_, future): CRUDResultType = self.dataProvider.jsonRequest(request, map: BraintreePayment.tokenMapping(), validation: nil)
                 return future
             }
-            
-            return self.handleFailure(futureBuilder)
         }
+        
+        return self.handleFailure(futureBuilder)
     }
     
     func productCheckoutBraintree(amount:String, nonce:String, itemId: String, quantity: NSNumber) -> Future<String, NSError> {
@@ -689,17 +704,16 @@ final class APIService {
         let  params = ["payment_method_nonce": nonce, "amount" : amount, "itemId" : itemId, "quantity": quantity]
         typealias CRUDResultType = (Alamofire.Request, Future<String, NSError>)
         
-        return session().flatMap {
-            (token: AuthResponse.Token) -> Future<String, NSError> in
-            
-            let futureBuilder: (Void -> Future<String, NSError>) = { [unowned self] in
+        let futureBuilder: (Void -> Future<String, NSError>) = { [unowned self] in
+            return self.session().flatMap {
+                (token: AuthResponse.Token) -> Future<String, NSError> in
                 let request = self.updateRequest(token, endpoint: endpoint, method: .POST, params: params)
                 let (_, future): CRUDResultType = self.dataProvider.jsonRequest(request, map: BraintreePayment.checkoutMapping(), validation: nil)
                 return future
             }
-                
-            return self.handleFailure(futureBuilder)
         }
+        
+        return self.handleFailure(futureBuilder)
     }
     
     func membershipCheckoutBraintree(amount:String, nonce:String, membershipId: String) -> Future<String, NSError> {
@@ -707,17 +721,16 @@ final class APIService {
         let  params = ["payment_method_nonce": nonce, "amount" : amount, "itemId" : membershipId]
         typealias CRUDResultType = (Alamofire.Request, Future<String, NSError>)
         
-        return session().flatMap {
-            (token: AuthResponse.Token) -> Future<String, NSError> in
-            
-            let futureBuilder: (Void -> Future<String, NSError>) = { [unowned self] in
+        let futureBuilder: (Void -> Future<String, NSError>) = { [unowned self] in
+            return self.session().flatMap {
+                (token: AuthResponse.Token) -> Future<String, NSError> in
                 let request = self.updateRequest(token, endpoint: endpoint, method: .POST, params: params)
                 let (_, future): CRUDResultType = self.dataProvider.jsonRequest(request, map: BraintreePayment.checkoutMapping(), validation: nil)
                 return future
             }
-                
-            return self.handleFailure(futureBuilder)
         }
+        
+        return self.handleFailure(futureBuilder)
     }
 
     func donateCheckoutBraintree(amount:String, nonce:String, itemId:String?) -> Future<String, NSError> {
@@ -728,17 +741,17 @@ final class APIService {
         }
         typealias CRUDResultType = (Alamofire.Request, Future<String, NSError>)
 
-        return session().flatMap {
-            (token: AuthResponse.Token) -> Future<String, NSError> in
-            
-            let futureBuilder: (Void -> Future<String, NSError>) = { [unowned self] in
+        
+        let futureBuilder: (Void -> Future<String, NSError>) = { [unowned self] in
+            return self.session().flatMap {
+                (token: AuthResponse.Token) -> Future<String, NSError> in
                 let request = self.updateRequest(token, endpoint: endpoint, method: .POST, params: params)
                 let (_, future): CRUDResultType = self.dataProvider.jsonRequest(request, map: BraintreePayment.checkoutMapping(), validation: nil)
                 return future
             }
-                
-            return self.handleFailure(futureBuilder)
         }
+        
+        return self.handleFailure(futureBuilder)
     }
 
     //MARK: - Generic requests -
@@ -746,42 +759,39 @@ final class APIService {
     private func getObjectsCollection<C: CRUDObject>(endpoint: String, params: [String : AnyObject]?) -> Future<CollectionResponse<C>, NSError> {
         typealias CRUDResultType = (Alamofire.Request, Future<CollectionResponse<C>, NSError>)
         
-        return session().flatMap {
-            (token: AuthResponse.Token) -> Future<CollectionResponse<C>, NSError> in
-            
-            let futureBuilder: (Void -> Future<CollectionResponse<C>, NSError>) = { [unowned self] in
+        let futureBuilder: (Void -> Future<CollectionResponse<C>, NSError>) = { [unowned self] in
+            return self.session().flatMap {
+                (token: AuthResponse.Token) -> Future<CollectionResponse<C>, NSError> in
                 let request = self.readRequest(token, endpoint: endpoint, params: params)
                 let (_ , future): CRUDResultType = self.dataProvider.objectRequest(request)
                 return future
             }
-            
-            return self.handleFailure(futureBuilder)
         }
+        
+        return self.handleFailure(futureBuilder)
     }
     
     private func getObject<C: CRUDObject>(endpoint: String) -> Future<C, NSError> {
         typealias CRUDResultType = (Alamofire.Request, Future<C, NSError>)
         
-        return session().flatMap {
-            (token: AuthResponse.Token) -> Future<C, NSError> in
-            
-            let futureBuilder: (Void -> Future<C, NSError>) = { [unowned self] in
+        let futureBuilder: (Void -> Future<C, NSError>) = { [unowned self] in
+            return self.session().flatMap {
+                (token: AuthResponse.Token) -> Future<C, NSError> in
                 let request = self.readRequest(token, endpoint: endpoint)
                 let (_, future): CRUDResultType = self.dataProvider.objectRequest(request)
                 return future
             }
-                
-            return self.handleFailure(futureBuilder)
         }
+        
+        return self.handleFailure(futureBuilder)
     }
     
     private func createObject<C: CRUDObject>(endpoint: String, object: C) -> Future<C, NSError> {
         typealias CRUDResultType = (Alamofire.Request, Future<UpdateResponse, NSError>)
         
-        return session().flatMap {
-            (token: AuthResponse.Token) -> Future<C, NSError> in
-            
-            let futureBuilder: (Void -> Future<C, NSError>) = { [unowned self] in
+        let futureBuilder: (Void -> Future<C, NSError>) = { [unowned self] in
+            return self.session().flatMap {
+                (token: AuthResponse.Token) -> Future<C, NSError> in
                 let params = Mapper().toJSON(object)
                 let request = self.updateRequest(token, endpoint: endpoint, method: .POST, params: params)
                 let (_ , future): CRUDResultType = self.dataProvider.objectRequest(request)
@@ -791,44 +801,42 @@ final class APIService {
                     return updatedObject
                 }
             }
-            
-            return self.handleFailure(futureBuilder)
         }
+        
+        return self.handleFailure(futureBuilder)
     }
 
     
     private func updateCommand(endpoint: String, method: Alamofire.Method = .POST) -> Future<Void, NSError> {
         typealias CRUDResultType = (Alamofire.Request, Future<Void, NSError>)
         
-        return session().flatMap {
-            (token: AuthResponse.Token) -> Future<Void, NSError> in
-            
-            let futureBuilder: (Void -> Future<Void, NSError>) = { [unowned self] in
+        let futureBuilder: (Void -> Future<Void, NSError>) = { [unowned self] in
+            return self.session().flatMap {
+                (token: AuthResponse.Token) -> Future<Void, NSError> in
                 let request = self.updateRequest(token, endpoint: endpoint, method: method, params: nil)
                 let (_, future): CRUDResultType = self.dataProvider.jsonRequest(request, map: self.commandMapping(), validation: nil)
                 return future
             }
-            
-            return self.handleFailure(futureBuilder)
         }
+        
+        return self.handleFailure(futureBuilder)
     }
 
     
     private func updateObject<C: CRUDObject>(endpoint: String, object: C) -> Future<Void, NSError> {
         typealias CRUDResultType = (Alamofire.Request, Future<Void, NSError>)
         
-        return session().flatMap {
-            (token: AuthResponse.Token) -> Future<Void, NSError> in
-            
-            let futureBuilder: (Void -> Future<Void, NSError>) = { [unowned self] in
+        let futureBuilder: (Void -> Future<Void, NSError>) = { [unowned self] in
+            return self.session().flatMap {
+                (token: AuthResponse.Token) -> Future<Void, NSError> in
                 let params = Mapper().toJSON(object)
                 let request = self.updateRequest(token, endpoint: endpoint, method: .PUT, params: params)
                 let (_, future): CRUDResultType = self.dataProvider.jsonRequest(request, map: self.emptyResponseMapping(), validation: nil)
                 return future
             }
-                
-            return self.handleFailure(futureBuilder)
         }
+        
+        return self.handleFailure(futureBuilder)
     }
     
     //MARK: - Helpers -

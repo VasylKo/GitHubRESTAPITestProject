@@ -54,6 +54,8 @@ struct SessionController {
     }
     
     func currentAccessToken() -> AuthResponse.Token? {
+        print("expirationDate: ", self.accessTokenExpiresIn, "Now: ", NSDate())
+        
         guard let token = self.accessToken,
             let expirationDate = self.accessTokenExpiresIn
             where  NSDate().compare(expirationDate) == NSComparisonResult.OrderedAscending
@@ -111,7 +113,9 @@ struct SessionController {
         keychain[KeychainKeys.AccessTokenKey] = accessToken
         keychain[KeychainKeys.RefreshTokenKey] = refreshToken
         
-        let accessTokenExpiresIn = NSDate(timeIntervalSinceNow: NSTimeInterval(accessTokenExpires))
+        //Access token should be refreshed at half time of the token. 
+        //If the access token typically has an expiration of 15 minutes then it would be refreshed after 7.5 minutes.
+        let accessTokenExpiresIn = NSDate(timeIntervalSinceNow: NSTimeInterval(accessTokenExpires) / 2.0)
         do  {
             try keychain.set(NSKeyedArchiver.archivedDataWithRootObject(accessTokenExpiresIn), key: KeychainKeys.AccessTokenKey)
         } catch let error {

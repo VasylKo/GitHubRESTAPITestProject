@@ -16,7 +16,7 @@ struct PostCellModelFactory {
         var firstSection: [TableViewCellModel] = []
         
         if let urlString = post.photoURL {
-            firstSection.append(TableViewCellURLModel(url: urlString))
+            firstSection.append(TableViewCellURLModel(url: urlString, height: 169))
         }
 
         let date: String? = post.date?.formattedAsTimeAgo()
