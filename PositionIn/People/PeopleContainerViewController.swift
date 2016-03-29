@@ -75,6 +75,11 @@ class PeopleContainerViewController : BesideMenuViewController {
         }
     }
     
+    func switchToExploreViewController() {
+        segmentedControl.selectedSegmentIndex = self.segmentedControl.numberOfSegments - 1
+        activeIndex = segmentedControl.selectedSegmentIndex
+    }
+    
     //MARK: Target-Action
     
     @IBAction func segmentControlValueChanged(sender: UISegmentedControl) {

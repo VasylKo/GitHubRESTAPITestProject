@@ -14,6 +14,7 @@ import CleanroomLogger
 class PeopleFollowingViewController : UIViewController {
     
     @IBOutlet private weak var tableView: TableView!
+    @IBOutlet weak var noFollowersWorningLabel: UILabel!
     
     //MARK: Lifecycle
     
@@ -38,18 +39,23 @@ class PeopleFollowingViewController : UIViewController {
         } else {
             // On first load switch to explore if not following any user
             firstFollowingRequestToken.invalidate()
-            peopleRequest = mySubscriptionsRequest.flatMap { response -> Future<CollectionResponse<UserInfo>,NSError> in
+            peopleRequest = mySubscriptionsRequest.flatMap { [weak self] response -> Future<CollectionResponse<UserInfo>,NSError> in
                 if let userList = response.items  where userList.count == 0 {
-                    return Future(error: NetworkDataProvider.ErrorCodes.InvalidRequestError.error())
-                } else {
-                    return Future(value: response)
+                    let parentViewController = self?.parentViewController as? PeopleContainerViewController
+                    parentViewController?.switchToExploreViewController()
                 }
+                
+                return Future(value: response)
             }
         }
     
         peopleRequest.onSuccess(dataRequestToken.validContext) { [weak self] response in
             if let userList = response.items {
                 Log.debug?.value(userList)
+                
+                self?.tableView.hidden = userList.count == 0
+                self?.noFollowersWorningLabel.hidden = !(userList.count == 0)
+               
                 self?.dataSource.setUserList(userList)
                 self?.tableView.reloadData()
             }
