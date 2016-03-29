@@ -36,7 +36,7 @@ class NewsCardCell: TableViewCell {
         
         if let imgURL = self.model?.imageURL {
             feedItemImageView.setImageFromURL(imgURL)
-            self.imageHeightConstaint.constant = 80
+            self.imageHeightConstaint.constant = 160
         }
         else {
             feedItemImageView.image = nil
