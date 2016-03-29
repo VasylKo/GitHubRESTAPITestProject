@@ -28,7 +28,7 @@ target 'PositionIn' do
 
   post_install do |installer|
     installer.pods_project.targets.each do |target|
-      if ['GoogleMaps'].include?(target.name)
+      if ['GoogleMaps'].include?(target.name) | ['RealmSwift'].include?(target.name) | ['Realm'].include?(target.name)
         target.build_configurations.each do |config|
           config.build_settings['ENABLE_BITCODE'] = 'NO'
         end
