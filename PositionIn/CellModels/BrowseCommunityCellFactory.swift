@@ -53,6 +53,8 @@ struct BrowseCommunityCellFactory {
             return [.Post, .Browse, .Leave /*.Invite*/]
         case .Applicant:
             return [.Browse]
+        case .Member:
+            return [.Post, .Browse, .Leave]            
         default:
             if let closed = community.closed {
                 if closed {
