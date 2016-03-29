@@ -25,7 +25,7 @@
                     </connections>
                 </tableView>
                 <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Press Explore tab to follow new people" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qh8-wU-bsN">
-                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="400"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
@@ -35,7 +35,7 @@
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="JxX-6c-MFk" secondAttribute="trailing" id="2oj-Hb-23S"/>
                 <constraint firstAttribute="trailing" secondItem="qh8-wU-bsN" secondAttribute="trailing" id="FJQ-0x-WHr"/>
-                <constraint firstAttribute="bottom" secondItem="qh8-wU-bsN" secondAttribute="bottom" id="M26-Ou-VmM"/>
+                <constraint firstAttribute="bottom" secondItem="qh8-wU-bsN" secondAttribute="bottom" constant="200" id="M26-Ou-VmM"/>
                 <constraint firstItem="JxX-6c-MFk" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Vym-fe-h1t"/>
                 <constraint firstItem="JxX-6c-MFk" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="WS7-MW-IER"/>
                 <constraint firstAttribute="bottom" secondItem="JxX-6c-MFk" secondAttribute="bottom" id="gSD-8q-Rc3"/>
