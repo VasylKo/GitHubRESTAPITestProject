@@ -33,6 +33,8 @@ final class CommunityHeaderCell: TableViewCell {
         else {
             placeholderName = "volunteer_placeholder"
             self.communityType.image = nil
+            //To aligne volunteering's name to the left set image width to 0
+            communityTypeImageWidthConstraint.constant = 0
         }
         
         contentImageView.setImageFromURL(m!.url, placeholder: UIImage(named: placeholderName))
@@ -52,6 +54,7 @@ final class CommunityHeaderCell: TableViewCell {
     }
     
     private var shouldCallInfoAction: Bool = false
+    @IBOutlet weak var communityTypeImageWidthConstraint: NSLayoutConstraint!
     @IBOutlet private weak var infoButton: UIButton!
     @IBOutlet private weak var contentImageView: UIImageView!
     @IBOutlet private weak var captionLabel: UILabel!
