@@ -68,6 +68,7 @@ final class MainMenuViewController: UIViewController {
             if item.action == action {
                 let indexPath = NSIndexPath(forRow: idx, inSection: 0)
                 tableView.selectRowAtIndexPath(indexPath, animated: true, scrollPosition: .Top)
+                appDelegate().sidebarViewController?.lastAction = action
                 break
             }
         }
