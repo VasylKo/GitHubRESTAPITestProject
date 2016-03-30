@@ -200,8 +200,8 @@ protocol BrowseModeDisplay {
  
 //MARK: - BrowseGridViewControllerDelegate
     
-    func browseGridViewControllerSelectItem(itemType: HomeItem) {
-        switch itemType {
+    func browseGridViewControllerSelectItem(homeItem: HomeItem) {
+        switch homeItem {
         case .Membership:
             MembershipRouterImplementation().showInitialViewController(from: self)
         case .Volunteer:
@@ -222,16 +222,17 @@ protocol BrowseModeDisplay {
             fallthrough
         case .Projects:
             let controller = Storyboards.Main.instantiateExploreViewControllerId()
+            controller.homeItem = homeItem
             let filterUpdate = { (filter: SearchFilter) -> SearchFilter in
                 var f = filter
-                let feedItemType = FeedItem.ItemType(rawValue: itemType.rawValue)
+                let feedItemType = FeedItem.ItemType(rawValue: homeItem.rawValue)
                 if let feedItemType = feedItemType {
                     f.itemTypes = [feedItemType]
                 }
                 return f
             }
             controller.childFilterUpdate = filterUpdate
-            controller.title = itemType.displayString()
+            controller.title = homeItem.displayString()
             self.navigationController?.pushViewController(controller, animated: true)
         case .Donate:
             self.navigationController?.pushViewController(Storyboards.Onboarding.instantiateDonateViewController(), animated: true)

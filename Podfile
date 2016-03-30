@@ -10,7 +10,7 @@ target 'PositionIn' do
   pod 'UIImageEffects', :inhibit_warnings => true
   pod 'XLForm', '~> 3.1.0'
   pod 'ImagePickerSheetController', '~> 0.9'
-  pod 'GoogleMaps', '~> 1.10'
+  pod 'GoogleMaps', '1.11.1'
   pod 'HMSegmentedControl', '~> 1.5.2'
   pod 'JDStatusBarNotification', '~> 1.5'
   pod 'JSQMessagesViewController', '~> 7.2'
@@ -24,11 +24,11 @@ target 'PositionIn' do
   pod 'FBSDKLoginKit', '~> 4.7'
   pod 'Box', '~> 2.0'
   pod 'NewRelicAgent', '~> 5.3.6'
-  pod 'LNNotificationsUI', '~> 0.0.1'
+  pod 'LNNotificationsUI', :git => 'https://github.com/LeoNatan/LNNotificationsUI'
 
   post_install do |installer|
     installer.pods_project.targets.each do |target|
-      if ['GoogleMaps'].include?(target.name)
+      if ['GoogleMaps'].include?(target.name) | ['RealmSwift'].include?(target.name) | ['Realm'].include?(target.name)
         target.build_configurations.each do |config|
           config.build_settings['ENABLE_BITCODE'] = 'NO'
         end

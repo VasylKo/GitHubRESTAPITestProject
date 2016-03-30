@@ -337,11 +337,6 @@ extension UserProfileViewController: UserProfileActionConsumer {
                     self?.reloadData()
                 }
             }
-            else {
-                api().logout().onComplete {[weak self] _ in
-                    self?.sideBarController?.executeAction(.Login)
-                }
-            }
         case .UnFollow:
             api().unFollowUser(objectId).onSuccess { [weak self] in
                 self?.sendSubscriptionUpdateNotification(nil)

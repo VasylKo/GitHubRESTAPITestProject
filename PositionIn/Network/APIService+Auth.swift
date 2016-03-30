@@ -107,6 +107,20 @@ extension APIService {
         }
     }
     
+    
+    // Logout from server to stop receiving push notifications and then expire current session
+    func logoutFromServer() -> Future<Void, NSError> {
+        return session().flatMap{ [unowned self] accessToken in
+            return self.logoutRequest(accessToken: accessToken)
+            }.onSuccess { [unowned self] _ in
+                self.logout()
+            }.onFailure { [unowned self] error in
+                //Handle error to show UI worning
+                self.defaultErrorHandler?(error)
+        }
+        
+    }
+    
     //Verify Phone
     //0 - api type for sms validation
     //1 - api type for sms validation (duplicate functionality)
@@ -216,6 +230,20 @@ extension APIService {
         return handleFailure(futureBuilder)
     }
     
+    private func logoutRequest(accessToken accessToken: String) -> Future<Void, NSError> {
+        
+        typealias ResultType = (Alamofire.Request, Future<Void, NSError>)
+        
+        let futureBuilder: (Void -> Future<Void, NSError>) = { [unowned self] in
+            let request = AuthRouter.Logout(api: self, accessToken: accessToken)
+            let serializer = Alamofire.Request.LogoutEmptyResponseSerializer()
+            let (_, future): ResultType = self.dataProvider.request(request, serializer: serializer, validation: nil)
+            return future
+        }
+
+        return handleFailure(futureBuilder)
+    }
+    
     private func facebookLoginRequest(fbToken: String) -> Future<AuthResponse, NSError> {
         let urlRequest = AuthRouter.Facebook(api: self, fbToken: fbToken)
         
@@ -303,6 +331,7 @@ extension APIService {
     private enum AuthRouter: URLRequestConvertible {
         
         case Login(api: APIService, username: String?, password: String?, phoneNumber: String?, phoneVerificationCode: String?)
+        case Logout(api: APIService, accessToken: String)
         case Facebook(api: APIService, fbToken: String)
         case Register(api: APIService, email: String?, username: String?, password: String?, phoneNumber: String?, phoneVerificationCode: String?, profileInfo: [String: AnyObject]?)
         case Refresh(api: APIService, token: String)
@@ -360,6 +389,16 @@ extension APIService {
                 if let phoneVerificationCode = phoneVerificationCode {
                     params["phoneVerificationCode"] = phoneVerificationCode
                 }
+            case .Logout(let api, let accessToken):
+                url = api.https("/v1.0/users/logout")
+                method = .GET
+                encoding = .URL
+                
+                //Add headers needed for logout
+                headers = [:]
+                headers["Accept"] = "application/json"
+                headers["Authorization"] = "Bearer \(accessToken)"
+
             case .Facebook(let api, let fbToken):
                 url = api.https("/v1.0/users/login")
                 params = [
@@ -423,8 +462,11 @@ private extension Alamofire.Request {
     private static func AuthResponseSerializer<T>(mapping: AnyObject? -> T?) -> ResponseSerializer<T, NSError> {
         return ResponseSerializer { request, response, data, error in
             guard error == nil else { return .Failure(error!) }
-            if let statusCode = response?.statusCode where statusCode == 401 {
-                return .Failure(NetworkDataProvider.ErrorCodes.InvalidSessionError.error())
+            if let statusCode = response?.statusCode where statusCode == 400 || statusCode == 401 {
+                var attributes = [String: String]()
+                NewRelicController.logWithUser("Refresh token error \(statusCode)", attributes: attributes)
+                
+                return .Failure(NetworkDataProvider.ErrorCodes.SessionRevokedError.error())
             }
             
             // Cookies parsing
@@ -466,4 +508,18 @@ private extension Alamofire.Request {
             }
         }
     }
+    
+    //MARK: - Custom serializer -
+    private static func LogoutEmptyResponseSerializer() -> ResponseSerializer<Void, NSError> {
+        return ResponseSerializer { request, response, data, error in
+            guard error == nil else { return .Failure(error!) }
+            if let statusCode = response?.statusCode where statusCode == 200 {
+                return .Success()
+            } else {
+                return .Failure(NetworkDataProvider.ErrorCodes.InvalidSessionError.error())
+            }
+            
+        }
+    }
+
 }

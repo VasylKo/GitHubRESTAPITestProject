@@ -36,19 +36,19 @@ class NewsCardCell: TableViewCell {
         
         if let imgURL = self.model?.imageURL {
             feedItemImageView.setImageFromURL(imgURL)
-            self.imageHeightConstaint.constant = 80
+            self.imageHeightConstaint.constant = 160
         }
         else {
             feedItemImageView.image = nil
             self.imageHeightConstaint.constant = 0
         }
         
-        headerLabel.text = self.model?.title
+        headerLabel.text = self.model?.authorName
         if let date = self.model?.date {
-            infoLabel.text = date.formattedAsTimeAgo()
+            detailsLabel.text = date.formattedAsTimeAgo()
         }
         
-        detailsLabel.text = self.model?.details
+        infoLabel.text = self.model?.details
         
         if let numOfLikes = self.model?.numOfLikes {
             likesButton.setTitle(String(numOfLikes), forState: .Normal)

@@ -10,7 +10,7 @@ import Foundation
 
 protocol MembershipRouter : BaseRouter {
     
-    func showInitialViewController(from sourceViewController : UIViewController)
+    func showInitialViewController(from sourceViewController : UIViewController, hasActivePlan: Bool?)
     
     func showMembershipPlanDetailsViewController(from sourceViewController : UIViewController, with plan : MembershipPlan, onlyPlanInfo : Bool)
     

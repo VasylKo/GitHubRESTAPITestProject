@@ -18,6 +18,13 @@ class CommunityStatsCell: TableViewCell {
         membersLabel.text = m!.countMembers.map { String($0) } ?? emptyValue
         eventsLabel.text = m!.countEvents.map { String($0) } ?? emptyValue
         selectionStyle = .None
+        
+        switch m!.type {
+        case .Volunteer:
+            membersTitleLabel.text = NSLocalizedString("Volunteers", comment: "Members counter title")
+        default:
+            break
+        }
     }
     
     override func prepareForReuse() {
@@ -30,10 +37,12 @@ class CommunityStatsCell: TableViewCell {
     @IBOutlet private weak var membersLabel: UILabel!
     @IBOutlet private weak var postsLabel: UILabel!
     @IBOutlet private weak var eventsLabel: UILabel!
+    @IBOutlet weak var membersTitleLabel: UILabel!
 }
 
 public struct CommunityStatsCellModel: TableViewCellModel {
     let countMembers: Int?
     let countPosts: Int?
     let countEvents: Int?
+    let type: CommunityViewController.ControllerType
 }

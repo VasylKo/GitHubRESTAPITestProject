@@ -65,15 +65,17 @@ class VolunteerDetailsViewController: UIViewController {
         self.volunteer = volunteer
         headerLabel.text = volunteer.name
         detailsLabel.text = volunteer.communityDescription?.stringByReplacingOccurrencesOfString("\\n", withString: "\n")
-        priceLabel.text = "\(Int(volunteer.membersCount)) beneficiaries"
+        
         
         var image: UIImage?
         
         switch self.type {
         case .Volunteer:
             image = UIImage(named: "volunteer_placeholder")
+            priceLabel.text = "\(Int(volunteer.membersCount)) volunteers"
         case .Community:
             image = UIImage(named: "communityPlaceholder")
+            priceLabel.text = "\(Int(volunteer.membersCount)) beneficiaries"
         default:
             break
         }
@@ -283,11 +285,6 @@ extension VolunteerDetailsViewController: VolunteerDetailsActionConsumer {
                     }
                 case .Unknown:
                     break
-                }
-            }
-            else {
-                api().logout().onComplete {[weak self] _ in
-                    self?.sideBarController?.executeAction(.Login)
                 }
             }
             return

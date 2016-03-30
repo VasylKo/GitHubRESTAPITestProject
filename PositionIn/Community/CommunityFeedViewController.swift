@@ -58,7 +58,7 @@ class CommunityFeedViewController: BesideMenuViewController, BrowseActionProduce
         let headerModel = BrowseCommunityHeaderCellModel(community: community, tapAction: .None, title:community.name ?? "", url:community.avatar, showInfo: true,  isClosed: closed)
         headerModel.actionConsumer = self
         dataSource.items[Sections.Info.rawValue] = [headerModel,
-            CommunityStatsCellModel(countMembers: community.membersCount, countPosts: community.postsCount, countEvents: community.eventsCount)
+            CommunityStatsCellModel(countMembers: community.membersCount, countPosts: community.postsCount, countEvents: community.eventsCount, type: controllerType)
         ]
         self.updateFeed()
     }
@@ -92,10 +92,6 @@ class CommunityFeedViewController: BesideMenuViewController, BrowseActionProduce
         navigationController?.navigationBar.shadowImage = UIImage()
         dataSource.configureTable(tableView)
         reloadData()
-    }
-
-    @IBAction func prepareForUnwind(segue: UIStoryboardSegue) {
-        
     }
 
     lazy var dataSource: CommunityFeedDataSource = { [unowned self] in

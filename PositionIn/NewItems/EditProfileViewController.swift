@@ -83,6 +83,7 @@ final class EditProfileViewController: BaseAddItemViewController, UserProfileAva
     lazy private var phoneRow: XLFormRowDescriptor = {
         let row = XLFormRowDescriptor(tag: Tags.Phone.rawValue,
             rowType: XLFormRowDescriptorTypeEmail, title: NSLocalizedString("Phone"))
+        row.disabled = true
         row.cellConfig.setObject(UIScheme.mainThemeColor, forKey: "textLabel.textColor")
         row.cellConfig.setObject(UIScheme.mainThemeColor, forKey: "tintColor")
         return row
@@ -385,7 +386,7 @@ final class EditProfileViewController: BaseAddItemViewController, UserProfileAva
                     }
                 }
                 
-                let router : MembershipRouter = MembershipRouterImplementation()
+                let router = MembershipRouterImplementation()
                 router.showInitialViewController(from: self!)
                 }).onSuccess(callback: { _ in
                     api().pushesRegistration()

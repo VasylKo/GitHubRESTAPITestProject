@@ -91,8 +91,6 @@ final class EventDetailsViewController: UIViewController {
         }
         if self.event?.links?.isEmpty == false || self.event?.attachments?.isEmpty == false {
             firstSection.append(EventActionItem(title: NSLocalizedString("More Information"), image: "productTerms&Info", action: .MoreInformation))
-        } else {
-            firstSection.append(EventActionItem(title: NSLocalizedString("No attachments"), image: "productTerms&Info", action: .MoreInformation))
         }
         
         return [zeroSection, firstSection]
@@ -176,28 +174,20 @@ extension EventDetailsViewController: EventDetailsActionConsumer {
                     })
                 }
 
-            } else {
-                api().logout().onComplete {[weak self] _ in
-                    self?.sideBarController?.executeAction(.Login)
-                }
-                return
             }
         case .MoreInformation:
             if self.event?.links?.isEmpty == false || self.event?.attachments?.isEmpty == false {
                 let moreInformationViewController = MoreInformationViewController(links: self.event?.links, attachments: self.event?.attachments)
                 self.navigationController?.pushViewController(moreInformationViewController, animated: true)
             }
-            return
         case .Navigate:
             if let coordinates = self.event?.location?.coordinates {
                 OpenApplication.appleMap(with: coordinates)
             } else {
                 Log.error?.message("coordinates missed")
             }
-            return
         default:
             Log.warning?.message("Unhandled action: \(action)")
-            return
         }
     }
 }

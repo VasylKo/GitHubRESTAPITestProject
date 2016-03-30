@@ -88,8 +88,10 @@ class MembershipMemberProfileViewController : XLFormViewController, MembershipMe
         
         self.setupInterface()
         
-        api().getMyProfile().onSuccess { [weak self] profile in
+        if api().isUserAuthorized() {
+            api().getMyProfile().onSuccess { [weak self] profile in
                 self?.userProfile = profile
+            }
         }
     }
     
@@ -180,7 +182,7 @@ class MembershipMemberProfileViewController : XLFormViewController, MembershipMe
                     }
                 }
                 
-                let router : MembershipRouter = MembershipRouterImplementation()
+                let router = MembershipRouterImplementation()
                 router.showInitialViewController(from: self!)
                 self?.navigationController?.topViewController?.navigationItem.hidesBackButton = true
             }).onSuccess(callback: { _ in
