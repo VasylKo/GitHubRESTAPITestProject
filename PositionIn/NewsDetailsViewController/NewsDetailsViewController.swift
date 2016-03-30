@@ -13,6 +13,7 @@ import BrightFutures
 
 protocol NewsActionConsumer: class {
     func likePost()
+    func commentPost()
 }
 
 final class NewsDetailsViewController: UIViewController, UITextFieldDelegate {
@@ -134,6 +135,12 @@ extension NewsDetailsViewController: NewsActionConsumer {
                     self?.reloadPost()
                 }
             }
+        }
+    }
+    
+    func commentPost() {
+        if !enterCommentField.isFirstResponder() {
+            enterCommentField.becomeFirstResponder()
         }
     }
 }
