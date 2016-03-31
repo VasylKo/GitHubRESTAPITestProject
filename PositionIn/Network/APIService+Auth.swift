@@ -201,7 +201,7 @@ extension APIService {
             return self.updateAuth(future)
         }
             
-        return handleFailure(futureBuilder)
+        return handleAuthFailure(futureBuilder)
     }
     
     private func verifyPhoneRequest(phoneNumber: String, type: NSNumber) ->  Future<Void, NSError> {
@@ -213,7 +213,7 @@ extension APIService {
             return future
         }
         
-        return self.handleFailure(futureBuilder)
+        return self.handleAuthFailure(futureBuilder)
     }
     
     private func verifyPhoneCodeRequest(phoneNumber: String, code: String) ->  Future<Bool, NSError> {
@@ -225,7 +225,7 @@ extension APIService {
             return future
         }
             
-        return self.handleFailure(futureBuilder)
+        return self.handleAuthFailure(futureBuilder)
     }
     
     private func loginRequest(username username: String?, password: String?, phoneNumber: String?, phoneVerificationCode: String?)
@@ -243,7 +243,7 @@ extension APIService {
             return self.updateAuth(future)
         }
         
-        return handleFailure(futureBuilder)
+        return handleAuthFailure(futureBuilder)
     }
     
     private func logoutRequest(accessToken accessToken: String) -> Future<Void, NSError> {
