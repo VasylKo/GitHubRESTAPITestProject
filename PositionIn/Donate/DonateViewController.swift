@@ -218,10 +218,10 @@ extension DonateViewController {
             var msg = ""
             var status = false
             if let value = row.value as? NSNumber where value.intValue > 0 {
-                msg = NSLocalizedString("Intered value is valid")
+                msg = NSLocalizedString("Entered value is valid")
                 status = true
             } else {
-                msg = NSLocalizedString("Intered value is invalid")
+                msg = NSLocalizedString("Entered value is invalid")
                 status = false
             }
             return XLFormValidationStatus(msg: msg, status: status, rowDescriptor: row)
