@@ -169,7 +169,9 @@ extension ProductDetailsViewController: ProductDetailsActionConsumer {
                 //TODO should change following code
                 let donateController = Storyboards.Onboarding.instantiateDonateViewController()
                 donateController.product = self.product
+                donateController.viewControllerToOpenOnComplete = self
                 self.navigationController?.pushViewController(donateController, animated: true)
+                
             }
             return
         case .ProductInventory:
