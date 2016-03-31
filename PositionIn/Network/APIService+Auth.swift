@@ -14,7 +14,27 @@ import BrightFutures
 import CleanroomLogger
 import Messaging
 
+extension Future {
+    func recoverAuthErrorWith(futureBuilder: Void -> Future<T, E>) -> Future<T, E> {
+        return self.recoverWith { error in
+            if (error as NSError).code == NSURLErrorNetworkConnectionLost {
+                return futureBuilder()
+            }
+            
+            return Future(error: error)
+        }
+    }
+}
+
 extension APIService {
+    func handleAuthFailure<R>(fb: Void -> Future<R, NSError>) -> Future<R, NSError> {
+        return fb().recoverAuthErrorWith(fb).recoverAuthErrorWith(fb).recoverAuthErrorWith(fb).onFailure { error in
+            if let e = NetworkDataProvider.ErrorCodes.fromError(error) where e == .SessionRevokedError {
+                self.logout()
+            }
+            self.defaultErrorHandler?(error)
+        }
+    }
     
     //Returns current user id
     func currentUserId() -> CRUDObjectId? {
@@ -40,7 +60,7 @@ extension APIService {
         let futureBuilder: (Void -> Future<Void, NSError>) = { [unowned self] in
             return self.sessionController.isUserAuthorized()
         }
-        return handleFailure(futureBuilder)
+        return handleAuthFailure(futureBuilder)
     }
     
     
@@ -114,11 +134,7 @@ extension APIService {
             return self.logoutRequest(accessToken: accessToken)
             }.onSuccess { [unowned self] _ in
                 self.logout()
-            }.onFailure { [unowned self] error in
-                //Handle error to show UI worning
-                self.defaultErrorHandler?(error)
-        }
-        
+            }
     }
     
     //Verify Phone
@@ -241,7 +257,7 @@ extension APIService {
             return future
         }
 
-        return handleFailure(futureBuilder)
+        return handleAuthFailure(futureBuilder)
     }
     
     private func facebookLoginRequest(fbToken: String) -> Future<AuthResponse, NSError> {
@@ -258,7 +274,7 @@ extension APIService {
             return self.updateAuth(future)
         }
     
-        return handleFailure(futureBuilder)
+        return handleAuthFailure(futureBuilder)
     }
     
     private func refreshToken() -> Future<AccessTokenResponse, NSError> {
