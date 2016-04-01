@@ -24,6 +24,11 @@ class FeedListViewController: UIViewController {
         self.loadData()
         setNavigationButtons()
     }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        trackScreenToAnalytics("Feed")
+    }
 
     private func setNavigationButtons() {
         //Add image to Bavigation Bar
