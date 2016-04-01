@@ -95,23 +95,29 @@ class PhoneVerificationViewController: XLFormViewController {
             let phoneNumber = self.phoneNumber {
                 let codeString = "\(codeRowValue)"
                 api().verifyPhoneCode(phoneNumber, code: codeString).onSuccess(callback: {[weak self] isExistingUser in
+                    //User entered valid sms code
+                    trackGoogleAnalyticsEvent("PhoneVerification", action: "VerificationSuccessful")
+                    
                     if isExistingUser {
-                        trackGoogleAnalyticsEvent("Auth", action: "Click", label: "SMS verification", value: NSNumber(int: 1))
+                        //sing in
+                        trackGoogleAnalyticsEvent("Auth", action: "UserSignIn")
                         api().login(username: nil, password: nil, phoneNumber: phoneNumber, phoneVerificationCode: codeString).onSuccess { [weak self] _ in
                             api().pushesRegistration()
                             self?.dismissLogin()
                             }.onFailure(callback: { _ in
-                                trackGoogleAnalyticsEvent("Status", action: "Click", label: "Auth Fail")
+                                trackGoogleAnalyticsEvent("Auth", action: "UserSignInFail")
                             })
                     }
                     else {
                         //register
                         if let strongSelf = self {
-                            trackGoogleAnalyticsEvent("Auth", action: "Click", label: "SMS verification", value: NSNumber(int: 0))
                             MembershipRouterImplementation().showMembershipMemberProfile(from: strongSelf, phoneNumber: strongSelf.phoneNumber!, validationCode: codeString)
                         }
                     }
-                    })
+                    }).onFailure { _ in
+                        //User entered invalid sms code
+                        trackGoogleAnalyticsEvent("PhoneVerification", action: "VerificationFail")
+                }
         }
     }
     
