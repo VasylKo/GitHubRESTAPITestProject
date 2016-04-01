@@ -14,3 +14,10 @@ func trackGoogleAnalyticsEvent(categoryName: String, action: String, label: Stri
         action: action, label: label, value: value)
     tracker?.send(builder.build() as [NSObject : AnyObject])
 }
+
+func trackScreenToAnalytics(name: String) {
+    let tracker = GAI.sharedInstance().defaultTracker
+    tracker.set(kGAIScreenName, value: name)
+    let build = GAIDictionaryBuilder.createScreenView().build() as [NSObject : AnyObject]
+    tracker.send(build)
+}

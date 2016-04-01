@@ -57,8 +57,12 @@ final class ProductDetailsViewController: UIViewController {
         self.product = product
         headerLabel.text = product.name
         detailsLabel.text = product.text?.stringByReplacingOccurrencesOfString("\\n", withString: "\n")
-        if let numOfBeneficiaries = product.numOfBeneficiaries {
+        if let numOfBeneficiaries = product.numOfBeneficiaries where numOfBeneficiaries > 0 {
+            transparentGrayView.hidden = false
             priceLabel.text = "\(Int(numOfBeneficiaries)) beneficiaries"
+        }
+        else {
+            transparentGrayView.hidden = true
         }
         
         let image = UIImage(named: "hardware_img_default")
@@ -128,6 +132,7 @@ final class ProductDetailsViewController: UIViewController {
     @IBOutlet private weak var nameLabel: UILabel!
     @IBOutlet private weak var priceLabel: UILabel!
     @IBOutlet private weak var detailsLabel: UILabel!
+    @IBOutlet weak var transparentGrayView: UIView!
 }
 
 extension ProductDetailsViewController {

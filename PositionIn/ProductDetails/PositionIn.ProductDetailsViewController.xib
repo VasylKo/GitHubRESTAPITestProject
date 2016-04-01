@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
@@ -16,6 +16,7 @@
                 <outlet property="pinDistanceImageView" destination="mMa-Jq-qtK" id="DQj-TN-HXL"/>
                 <outlet property="priceLabel" destination="8Qb-Kh-vAf" id="F1X-WB-4LX"/>
                 <outlet property="productImageView" destination="djR-mn-LSG" id="zPL-7a-zgn"/>
+                <outlet property="transparentGrayView" destination="4jW-Uc-5k3" id="08D-nA-oA2"/>
                 <outlet property="view" destination="UuP-rw-UeB" id="gx2-S8-xVa"/>
             </connections>
         </placeholder>
@@ -33,7 +34,7 @@
                                 <constraint firstAttribute="width" secondItem="djR-mn-LSG" secondAttribute="height" multiplier="2:1" id="eKo-kP-UL2"/>
                             </constraints>
                         </imageView>
-                        <view alpha="0.64999999999999969" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4jW-Uc-5k3">
+                        <view hidden="YES" alpha="0.64999999999999969" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4jW-Uc-5k3">
                             <rect key="frame" x="0.0" y="252" width="600" height="48"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$99" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Qb-Kh-vAf">

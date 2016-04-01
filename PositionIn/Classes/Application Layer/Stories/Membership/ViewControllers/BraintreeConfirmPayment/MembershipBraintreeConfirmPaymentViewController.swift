@@ -12,6 +12,11 @@ class MembershipBraintreeConfirmPaymentViewController: MembershipMPesaConfirmPay
     
     private var creditCardPaymentSuccess: Bool?
 
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        trackScreenToAnalytics("MembershipPaymentConfirmation")
+    }
+    
     //MARK: Initializers
     
     init(router: MembershipRouter, plan: MembershipPlan, creditCardPaymentSuccess: Bool?) {

@@ -42,6 +42,11 @@ class CallAmbulanceViewController: BaseAddItemViewController {
         view.tintColor = UIScheme.mainThemeColor
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        trackScreenToAnalytics("CallAmbulanceForm")
+    }
+    
     override func showFormValidationError(error: NSError!) {
         if let error = error {
             showWarning(error.localizedDescription)
