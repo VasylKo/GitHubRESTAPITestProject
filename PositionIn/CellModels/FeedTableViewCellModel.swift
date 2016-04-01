@@ -79,7 +79,7 @@ class CompactFeedTableCellModel: FeedTableCellModel {
                 }
             }
         case .Project:
-            if let numOfParticipants = numOfParticipants {
+            if let numOfParticipants = numOfParticipants where numOfParticipants > 0 {
                 self.info = "\(Int(numOfParticipants)) beneficiaries"
             }
         case .Event:
