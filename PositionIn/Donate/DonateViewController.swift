@@ -21,6 +21,7 @@ class DonateViewController: XLFormViewController, PaymentReponseDelegate {
     }
     
     var product: Product?
+    var donationType: FeedItem.ItemType = .Donation
     
     private var amount:Int = 0;
     private var paymentType:String?
@@ -152,7 +153,11 @@ class DonateViewController: XLFormViewController, PaymentReponseDelegate {
                 return
             }
             
-            trackGoogleAnalyticsEvent("Donate", action: "ProceedToPay", label: self?.paymentType ?? "Can't get type", value: NSNumber(integer: self?.amount ?? 0))
+            //Send tracking enevt
+            let donationTypeName = self?.donationType.description ?? "Unknown donation source"
+            let paymentType = self?.paymentType ?? "Can't get type"
+            let paymentAmountNumber = NSNumber(integer: self?.amount ?? 0)
+            trackGoogleAnalyticsEvent(donationTypeName, action: "ProceedToPay", label: paymentType, value: paymentAmountNumber)
             
             self?.performSegueWithIdentifier("Show\((self?.paymentType)!)", sender: self!)
             self?.setError(true, error: nil)

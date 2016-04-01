@@ -178,6 +178,7 @@ extension EmergencyDetailsController: EmergencyDetailsActionConsumer {
             let donateController = Storyboards.Onboarding.instantiateDonateViewController()
             donateController.product = self.product
             donateController.viewControllerToOpenOnComplete = self
+            donateController.donationType = .Emergency
             self.navigationController?.pushViewController(donateController, animated: true)
             return
         case .SendMessage:
