@@ -23,6 +23,11 @@ class PhoneNumberViewController: XLFormViewController {
         static let allValues = [Kenya, Swizerland, France]
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        trackScreenToAnalytics("PhoneVerification")
+    }
+    
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         self.initializeForm()
