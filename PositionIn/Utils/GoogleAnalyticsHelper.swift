@@ -16,5 +16,5 @@ func trackGoogleAnalyticsEvent(categoryName: String, action: String, label: Stri
     let tracker = GAI.sharedInstance().defaultTracker
     let builder = GAIDictionaryBuilder.createEventWithCategory(categoryName,
         action: action, label: label, value: value)
-    tracker.send(builder.build() as [NSObject : AnyObject])
+    tracker?.send(builder.build() as [NSObject : AnyObject])
 }
