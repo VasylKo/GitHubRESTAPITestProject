@@ -152,6 +152,8 @@ class DonateViewController: XLFormViewController, PaymentReponseDelegate {
                 return
             }
             
+            trackGoogleAnalyticsEvent("Donate", action: "ProceedToPay", label: self?.paymentType ?? "Can't get type", value: NSNumber(integer: self?.amount ?? 0))
+            
             self?.performSegueWithIdentifier("Show\((self?.paymentType)!)", sender: self!)
             self?.setError(true, error: nil)
         }
