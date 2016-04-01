@@ -83,6 +83,11 @@ class MembershipConfirmDetailsViewController : XLFormViewController {
         self.loadData()
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        trackScreenToAnalytics("MembershipConfirmDetails")
+    }
+    
     func loadData (){
         let page = APIService.Page(start: 0, size: 100)
         
