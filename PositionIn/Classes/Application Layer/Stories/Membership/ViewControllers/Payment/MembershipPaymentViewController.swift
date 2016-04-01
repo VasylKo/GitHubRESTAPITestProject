@@ -106,6 +106,7 @@ class MembershipPaymentViewController: XLFormViewController, PaymentReponseDeleg
         
         confirmRow.action.formBlock = { [weak self] row in
             
+            
             self?.deselectFormRow(row)
             
             let validationErrors : Array<NSError> = self?.formValidationErrors() as! Array<NSError>
@@ -115,6 +116,7 @@ class MembershipPaymentViewController: XLFormViewController, PaymentReponseDeleg
             
             //MPesa
             if let cardItem: Box<CardItem> = paymentRow.value as? Box<CardItem> {
+                trackGoogleAnalyticsEvent("Membership", action: "ProceedToPay", label: CardItem.cardPayment(cardItem.value) ?? "Can't get type", value: NSNumber(integer: self!.plan.price ?? 0))
                 if cardItem.value == .MPesa {
                     self?.router.showMPesaConfirmPaymentViewController(from: self!, with: self!.plan)
                 }
