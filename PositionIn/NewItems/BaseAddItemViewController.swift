@@ -279,16 +279,27 @@ class BaseAddItemViewController: XLFormViewController {
         presentViewController(controller, animated: true, completion: nil)
         self.deselectFormRow(sender)
     }
-
+    
     private func presentImagePicker(sourceType: UIImagePickerControllerSourceType) {
         if UIImagePickerController.isSourceTypeAvailable(sourceType) {
-            Log.debug?.message("Presenting picker for source \(sourceType)")
-            let picker = UIImagePickerController()
-            picker.sourceType = sourceType
-            picker.allowsEditing = false
-            picker.mediaTypes = [kUTTypeImage as String]
-            picker.delegate = self
-            self.presentViewController(picker, animated: true, completion: nil)
+            let status = PHPhotoLibrary.authorizationStatus()
+            
+            if status == .Denied {
+                let actionSheetController: UIAlertController = UIAlertController(title: NSLocalizedString("Please allow access to your photos"),
+                    message: nil, preferredStyle:.Alert)
+                let cancelActionButton: UIAlertAction = UIAlertAction(title: NSLocalizedString("OK"), style: .Cancel, handler: nil)
+                actionSheetController.addAction(cancelActionButton)
+                self.presentViewController(actionSheetController, animated: true, completion: nil)
+            }
+            else {
+                Log.debug?.message("Presenting picker for source \(sourceType)")
+                let picker = UIImagePickerController()
+                picker.sourceType = sourceType
+                picker.allowsEditing = false
+                picker.mediaTypes = [kUTTypeImage as String]
+                picker.delegate = self
+                self.presentViewController(picker, animated: true, completion: nil)
+            }
         } else {
             Log.error?.message("Unavailable source type: \(sourceType)")
         }
