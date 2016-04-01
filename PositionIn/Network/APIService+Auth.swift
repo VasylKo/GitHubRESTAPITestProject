@@ -116,6 +116,8 @@ extension APIService {
         return sessionController.session().recoverWith { _ in
             return self.refreshToken().map { response in
                 return response.accessToken
+                }.onFailure { error in
+                    trackGoogleAnalyticsEvent("Token", action: "RefreshFailed", label: error.localizedDescription)
             }
         }
     }
