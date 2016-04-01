@@ -175,6 +175,7 @@ extension ProductDetailsViewController: ProductDetailsActionConsumer {
                 let donateController = Storyboards.Onboarding.instantiateDonateViewController()
                 donateController.product = self.product
                 donateController.viewControllerToOpenOnComplete = self
+                donateController.donationType = .Project
                 self.navigationController?.pushViewController(donateController, animated: true)
                 
             }
