@@ -23,6 +23,11 @@ class VolunteerMapViewController : UIViewController, GMSMapViewDelegate {
         self.mapView.animateToZoom(2)
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        trackScreenToAnalytics(AnalyticsLabels.volunteerMap)
+    }
+    
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         

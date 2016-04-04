@@ -45,7 +45,11 @@ final class BrowseListViewController: UIViewController, BrowseActionProducer, Br
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        trackScreenToAnalytics(AnalyticsLabels.labelForHomeItem(homeItem, suffix: "List"))
+        //Send analytics
+        if let homeItem = homeItem {
+            trackScreenToAnalytics(AnalyticsLabels.labelForHomeItem(homeItem, suffix: "List"))
+        }
+        
     }
     
     override func viewWillLayoutSubviews() {

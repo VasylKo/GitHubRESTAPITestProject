@@ -12,7 +12,7 @@ class VolunteerDetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        switch self.type {
+        switch type {
         case .Volunteer:
             self.title = NSLocalizedString("Volunteer", comment:"")
         case .Community:
@@ -23,6 +23,19 @@ class VolunteerDetailsViewController: UIViewController {
         dataSource.items = productAcionItems()
         dataSource.configureTable(actionTableView)
         reloadData()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        switch type {
+        case .Volunteer:
+            trackScreenToAnalytics(AnalyticsLabels.volunteerDetails)
+        case .Community:
+            trackScreenToAnalytics(AnalyticsLabels.communityDetails)
+        default:
+            break
+        }
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

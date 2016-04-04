@@ -77,6 +77,8 @@ struct AnalyticsLabels {
     static let volunteerList = NSLocalizedString("VolunteerList")
     static let volunteerMap = NSLocalizedString("VolunteerMap")
     static let volunteerDetails = NSLocalizedString("VolunteerDetails")
+    static let volunteerPostsList = NSLocalizedString("VolunteerPostsList")
+    static let volunteerPostDetails = NSLocalizedString("VolunteerPostDetails")
     
     static let feed = NSLocalizedString("Feed")
     static let feedDetails = NSLocalizedString("FeedDetails")
@@ -87,6 +89,8 @@ struct AnalyticsLabels {
     static let communitiesList = NSLocalizedString("CommunitiesList")
     static let communitiesMap = NSLocalizedString("CommunitiesMap")
     static let communityDetails = NSLocalizedString("CommunityDetails")
+    static let communityPostsList = NSLocalizedString("CommunityPostsList")
+    static let communityPostDetails = NSLocalizedString("CommunityPostDetails")
 
     static let peopleList = NSLocalizedString("PeopleList")
     static let peopleDetails = NSLocalizedString("PeopleDetails")
@@ -127,6 +131,9 @@ struct AnalyticsLabels {
             scrennLabel = marketItem
         case .BomaHotels:
             scrennLabel = bomaHotel
+        case .Volunteer:
+            return volunteerPostsList
+
             
         default:
             scrennLabel = unknownScreen
