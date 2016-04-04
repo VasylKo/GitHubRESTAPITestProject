@@ -21,7 +21,7 @@ class DonateViewController: XLFormViewController, PaymentReponseDelegate {
     }
     
     var product: Product?
-    var donationType: FeedItem.ItemType = .Donation
+    var donationType: HomeItem = .Donate
     
     private var amount:Int = 0;
     private var paymentType:String?
@@ -41,6 +41,11 @@ class DonateViewController: XLFormViewController, PaymentReponseDelegate {
         self.title = NSLocalizedString("Donate")
         
         self.initializeForm()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        sendScreenNameToAnalytics()
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -153,11 +158,7 @@ class DonateViewController: XLFormViewController, PaymentReponseDelegate {
                 return
             }
             
-            //Send tracking enevt
-            let donationTypeName = self?.donationType.description ?? "Unknown donation source"
-            let paymentType = self?.paymentType ?? "Can't get type"
-            let paymentAmountNumber = NSNumber(integer: self?.amount ?? 0)
-            trackGoogleAnalyticsEvent(donationTypeName, action: "ProceedToPay", label: paymentType, value: paymentAmountNumber)
+            self?.sendDonationEventToAnalytics()
             
             self?.performSegueWithIdentifier("Show\((self?.paymentType)!)", sender: self!)
             self?.setError(true, error: nil)
@@ -221,6 +222,24 @@ class DonateViewController: XLFormViewController, PaymentReponseDelegate {
             updateFormRow(confirmRowDescriptor)
         }
     }
+    
+    //MARK: - Analytic tracking
+    
+    private func sendDonationEventToAnalytics() {
+        //Send tracking enevt
+        let donationTypeName = donationType.displayString().stringByReplacingOccurrencesOfString(" ", withString: "") ?? "Unknown donation source"
+        let paymentTypeLabel = paymentType ?? "Can't get type"
+        let paymentAmountNumber = NSNumber(integer: amount ?? 0)
+        trackGoogleAnalyticsEvent(donationTypeName, action: "ProceedToPay", label: paymentTypeLabel, value: paymentAmountNumber)
+    }
+    
+    private func sendScreenNameToAnalytics() {
+        //Send tracking enevt
+        let screenName = donationType.displayString().stringByReplacingOccurrencesOfString(" ", withString: "") ?? "Unknown donation source"
+        trackScreenToAnalytics(screenName + "Donate")
+    }
+    
+    
 }
 
 extension DonateViewController {
