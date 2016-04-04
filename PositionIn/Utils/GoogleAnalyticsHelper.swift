@@ -49,8 +49,8 @@ struct AnalyticsLabels {
     static let giveBlood = NSLocalizedString("GiveBlood")
     static let giveBloodDetails = NSLocalizedString("GiveBloodDetails")
     
+    static let krcsNews = NSLocalizedString("KrcsNews")
     static let krcsNewsList = NSLocalizedString("KrcsNewsList")
-    static let krcsNewsMap = NSLocalizedString("KrcsNewsMap")
     static let krcsNewsDetails = NSLocalizedString("KrcsNewsDetails")
   
     static let donateForm = NSLocalizedString("DonateForm")
@@ -102,6 +102,7 @@ struct AnalyticsLabels {
    
     //static let  = NSLocalizedString("")
 
+    static let mapScreen = NSLocalizedString("MapScreen")
     static let unknownScreen = NSLocalizedString("UnknownScreen")
     
     static func labelForHomeItem(homeItem: HomeItem?, suffix: String = "") -> String {
@@ -131,6 +132,51 @@ struct AnalyticsLabels {
             scrennLabel = unknownScreen
         }
         
+        return scrennLabel + suffix
+    }
+    
+    static func labelForItemType(itemType: FeedItem.ItemType?, suffix: String = "") -> String {
+    
+        guard let itemType  = itemType else {
+            return unknownScreen
+        }
+        
+        var scrennLabel: String
+        
+        switch itemType {
+        case .Emergency:
+            scrennLabel = emergencyAlerts
+        case .GiveBlood:
+            scrennLabel = giveBlood
+        case .Training:
+            scrennLabel = training
+        case .Project:
+            scrennLabel = project
+        case .Market:
+            scrennLabel = marketItem
+        case .BomaHotels:
+            scrennLabel = bomaHotel
+        case .News:
+           scrennLabel = krcsNews
+            
+        default:
+            scrennLabel = unknownScreen
+        }
+        
+        /*
+case Unknown
+case Project
+case Emergency
+case Training
+case GiveBlood
+case Volunteer
+case BomaHotels
+case Event
+case News
+case Market
+case Post
+case Donation
+*/
         return scrennLabel + suffix
     }
     

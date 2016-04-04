@@ -53,12 +53,12 @@ class ExploreViewController: DisplayModeViewController {
     }
     
     private func trackScreenForDisplayMode(mode: DisplayMode) {
-        switch mode {
-        case .List:
-            trackScreenToAnalytics(AnalyticsLabels.labelForHomeItem(homeItem, suffix: "List"))
-        case .Map:
-            trackScreenToAnalytics(AnalyticsLabels.labelForHomeItem(homeItem, suffix: "Map"))
-        }
+//        switch mode {
+//        case .List:
+//            trackScreenToAnalytics(AnalyticsLabels.labelForHomeItem(homeItem, suffix: "List"))
+//        case .Map:
+//            trackScreenToAnalytics(AnalyticsLabels.labelForHomeItem(homeItem, suffix: "Map"))
+//        }
 
     }
     
