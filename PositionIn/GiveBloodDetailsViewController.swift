@@ -24,6 +24,11 @@ class GiveBloodDetailsViewController: UIViewController {
         reloadData()
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        trackScreenToAnalytics("GiveBloodDetails")
+    }
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let orderController = segue.destinationViewController  as? OrderViewController {
             orderController.product = self.product
