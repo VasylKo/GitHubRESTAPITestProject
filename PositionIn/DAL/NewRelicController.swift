@@ -10,6 +10,9 @@ import Foundation
 
 final class NewRelicController {
     static func start() {
+        #if DEBUG
+            NewRelic.setApplicationBuild("Debug build")
+        #endif
         NewRelic.startWithApplicationToken(AppConfiguration().newRelicToken)
     }
     

@@ -115,8 +115,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIApplication.sharedApplication().registerUserNotificationSettings(settings)
         UIApplication.sharedApplication().registerForRemoteNotifications()
         
-        Fabric.with([Crashlytics.self])
-        
+        #if DEBUG
+            Fabric.with([Crashlytics.self])
+        #endif
         NewRelicController.start()
         
         let notificationSettings = LNNotificationAppSettings()
