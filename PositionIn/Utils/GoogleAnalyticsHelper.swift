@@ -105,8 +105,6 @@ struct AnalyticsLabels {
     static let profileEdit = NSLocalizedString("ProfileEdit")
     static let chat = NSLocalizedString("Chat")
    
-    //static let  = NSLocalizedString("")
-
     static let mapScreen = NSLocalizedString("MapScreen")
     static let unknownScreen = NSLocalizedString("UnknownScreen")
     
@@ -171,21 +169,98 @@ struct AnalyticsLabels {
             scrennLabel = unknownScreen
         }
         
-        /*
-case Unknown
-case Project
-case Emergency
-case Training
-case GiveBlood
-case Volunteer
-case BomaHotels
-case Event
-case News
-case Market
-case Post
-case Donation
-*/
         return scrennLabel + suffix
     }
     
+}
+
+struct AnalyticCategories {
+    static let token = NSLocalizedString("Token")
+    static let network = NSLocalizedString("Network")
+    static let phoneVerification = NSLocalizedString("PhoneVerification")
+    static let auth = NSLocalizedString("Auth")
+    static let membership = NSLocalizedString("Membership")
+    static let donate = NSLocalizedString("Donate")
+    static let ambulance = NSLocalizedString("Ambulance")
+    static let projects = NSLocalizedString("Projects")
+    static let emergencyAlert = NSLocalizedString("EmergencyAlert")
+    static let volunteer = NSLocalizedString("Volunteer")
+    static let feedEmergencyAlert = NSLocalizedString("FeedEmergencyAlert")
+    static let feedNews = NSLocalizedString("FeedNews")
+    static let messages = NSLocalizedString("Messages")
+    static let people = NSLocalizedString("People")
+    static let wallet = NSLocalizedString("Wallet")
+    static let settings = NSLocalizedString("Settings")
+    static let profile = NSLocalizedString("Profile")
+    static let bomaHotels = NSLocalizedString("BomaHotels")
+    static let notifications = NSLocalizedString("Notifications")
+}
+
+struct AnalyticActios {
+    static let accessTokenError = NSLocalizedString("AccessTokenError")
+    static let refreshTokenError = NSLocalizedString("RefreshTokenError")
+    static let refreshFailed = NSLocalizedString("RefreshFailed")
+    
+    static let error = NSLocalizedString("Error")
+
+    static let done = NSLocalizedString("Done")
+    static let phoneConfirmed = NSLocalizedString("PhoneConfirmed")
+    static let phoneVerificationRequested = NSLocalizedString("PhoneVerificationRequested")
+    static let codeVerificationRequested = NSLocalizedString("CodeVerificationRequested")
+    static let verificationSuccessful = NSLocalizedString("VerificationSuccessful")
+    static let verificationFail = NSLocalizedString("VerificationFail")
+    
+    static let userSignIn = NSLocalizedString("UserSignIn")
+    static let userSignInFail = NSLocalizedString("UserSignInFail")
+    static let userSignUp = NSLocalizedString("UserSignUp")
+    static let userSignUpFail = NSLocalizedString("UserSignUpFail")
+    
+    static let planListSelection = NSLocalizedString("PlanListSelection")
+    static let planSelected = NSLocalizedString("PlanSelected")
+    static let planTypeSelection = NSLocalizedString("PlanTypeSelection")
+    static let alreadyMember = NSLocalizedString("AlreadyMember")
+    static let confirmDetailsNext = NSLocalizedString("ConfirmDetailsNext")
+    static let selectPaymentMethod = NSLocalizedString("SelectPaymentMethod")
+    static let proceedToPay = NSLocalizedString("ProceedToPay")
+    static let paymentOutcome = NSLocalizedString("PaymentOutcome")
+    
+    static let setDonation = NSLocalizedString("SetDonation")
+    
+    static let requestSent = NSLocalizedString("RequestSent")
+    static let requestOutcome = NSLocalizedString("RequestOutcome")
+    
+    static let donate = NSLocalizedString("Donate")
+    
+    static let volunteerRequest = NSLocalizedString("VolunteerRequest")
+    static let volunteerCancel = NSLocalizedString("VolunteerCancel")
+    
+    static let moreInformation = NSLocalizedString("MoreInformation")
+    static let openAttachment = NSLocalizedString("OpenAttachment")
+    static let like = NSLocalizedString("Like")
+    static let unlike = NSLocalizedString("Unlike")
+    static let comment = NSLocalizedString("Comment")
+    
+    static let clickNew = NSLocalizedString("ClickNew")
+    static let clickNewPeople = NSLocalizedString("ClickNewPeople")
+    static let clickNewCommunities = NSLocalizedString("ClickNewCommunities")
+    static let messageSent = NSLocalizedString("MessageSent")
+    
+    static let follow = NSLocalizedString("Follow")
+    static let unfollow = NSLocalizedString("Unfollow")
+    static let followingCount = NSLocalizedString("FollowingCount")
+    static let followersCount = NSLocalizedString("FollowersCount")
+    
+    static let purchased = NSLocalizedString("Purchased")
+    static let donations = NSLocalizedString("Donations")
+    
+    static let contactSupport = NSLocalizedString("ContactSupport")
+    static let termsAndConditions = NSLocalizedString("TermsAndConditions")
+    static let signOut = NSLocalizedString("SignOut")
+    
+    static let edit = NSLocalizedString("Edit")
+    static let editDone = NSLocalizedString("EditDone")
+    
+    static let bookingClicked = NSLocalizedString("BookingClicked")
+    
+    static let notificationCount = NSLocalizedString("NotificationCount")
 }
