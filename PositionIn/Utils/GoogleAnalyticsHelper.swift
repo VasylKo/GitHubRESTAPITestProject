@@ -8,13 +8,16 @@
 
 import Foundation
 
-func trackGoogleAnalyticsEvent(categoryName: String, action: String, label: String) {
-    trackGoogleAnalyticsEvent(categoryName, action: action, label: label, value: nil)
-}
-
-func trackGoogleAnalyticsEvent(categoryName: String, action: String, label: String, value: NSNumber?) {
+func trackGoogleAnalyticsEvent(categoryName: String, action: String, label: String = "", value: NSNumber? = nil) {
     let tracker = GAI.sharedInstance().defaultTracker
     let builder = GAIDictionaryBuilder.createEventWithCategory(categoryName,
         action: action, label: label, value: value)
-    tracker.send(builder.build() as [NSObject : AnyObject])
+    tracker?.send(builder.build() as [NSObject : AnyObject])
+}
+
+func trackScreenToAnalytics(name: String) {
+    let tracker = GAI.sharedInstance().defaultTracker
+    tracker.set(kGAIScreenName, value: name)
+    let build = GAIDictionaryBuilder.createScreenView().build() as [NSObject : AnyObject]
+    tracker.send(build)
 }

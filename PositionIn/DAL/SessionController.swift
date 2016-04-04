@@ -35,6 +35,7 @@ struct SessionController {
             guard let refreshToken = self.refreshToken else {
                 Log.warning?.trace()
                 let errorCode = NetworkDataProvider.ErrorCodes.InvalidSessionError
+                trackGoogleAnalyticsEvent("", action: "RefreshTokenError", label: "In app refresh token missing")
                 return Result(error: errorCode.error())
             }
             return Result(value: refreshToken)
@@ -60,6 +61,8 @@ struct SessionController {
             let expirationDate = self.accessTokenExpiresIn
             where  NSDate().compare(expirationDate) == NSComparisonResult.OrderedAscending
             else {
+                let tockenErrorReason = self.accessToken == nil ? "missing" : "expired"
+                trackGoogleAnalyticsEvent("Token", action: "AccessTokenError", label: "In app access token " + tockenErrorReason)
                 return nil
         }
         return token

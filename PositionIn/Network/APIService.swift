@@ -49,6 +49,8 @@ final class APIService {
                 self.logout()
             }
             self.defaultErrorHandler?(error)
+            
+            trackGoogleAnalyticsEvent("Network", action: "Error", label: error.localizedDescription, value: NSNumber(integer: error.code))
         }
     }
     

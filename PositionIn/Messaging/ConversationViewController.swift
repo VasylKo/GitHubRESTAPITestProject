@@ -63,6 +63,7 @@ final class ConversationViewController: JSQMessagesViewController {
             let message = JSQMessage(senderId: senderId, senderDisplayName: senderDisplayName, date: date, text: text)
             chatController.sendMessage(message)
             finishSendingMessageAnimated(true)
+            trackGoogleAnalyticsEvent("Messages", action: "MessageSent")
         }
     }
     
