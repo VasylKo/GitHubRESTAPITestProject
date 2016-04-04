@@ -60,7 +60,9 @@ final class UserProfileViewController: BesideMenuViewController, BrowseActionPro
         api().getUserProfile(objectId).zip(api().getSubscriptionStateForUser(objectId)).onSuccess {
             [weak self] profile, state in
             self?.didReceiveProfile(profile, state: state)
-        }
+            }.onComplete(callback: { [weak self] _ in
+                self?.tableView.userInteractionEnabled = true
+                })
     }
     
     private func didReceiveProfile(profile: UserProfile, state: UserProfile.SubscriptionState = .SameUser) {
@@ -342,12 +344,15 @@ extension UserProfileViewController: UserProfileActionConsumer {
             presentViewController(navigationController, animated: true, completion: nil)
         case .Follow:
             if api().isUserAuthorized() {
+                self.tableView.userInteractionEnabled = false
                 api().followUser(objectId).onSuccess { [weak self] in
                     self?.sendSubscriptionUpdateNotification(nil)
                     self?.reloadData()
                 }
+                
             }
         case .UnFollow:
+            self.tableView.userInteractionEnabled = false
             api().unFollowUser(objectId).onSuccess { [weak self] in
                 self?.sendSubscriptionUpdateNotification(nil)
                 self?.reloadData()
