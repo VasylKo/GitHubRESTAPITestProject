@@ -159,6 +159,11 @@ final class UserProfileViewController: BesideMenuViewController, BrowseActionPro
         reloadData()
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        trackScreenToAnalytics(AnalyticsLabels.peopleDetails)
+    }
+    
     @IBAction func prepareForUnwind(segue: UIStoryboardSegue) {
         
     }
