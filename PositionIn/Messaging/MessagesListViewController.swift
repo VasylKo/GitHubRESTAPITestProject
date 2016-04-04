@@ -23,6 +23,7 @@ final class MessagesListViewController: BesideMenuViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         reloadData()
+        trackScreenToAnalytics(AnalyticsLabels.messages)
     }
 
     func reloadData() {
