@@ -56,27 +56,52 @@ struct AnalyticsLabels {
     static let donateForm = NSLocalizedString("DonateForm")
     static let donateConfirmation = NSLocalizedString("DonateConfirmation")
 
-    static let training = NSLocalizedString("TrainingList")
+    static let training = NSLocalizedString("Training")
     static let trainingDetails = NSLocalizedString("TrainingDetails")
 
     static let event = NSLocalizedString("EventList")
     static let eventDetails = NSLocalizedString("EventDetails")
 
     
-//    static let  = NSLocalizedString("")
-//    static let  = NSLocalizedString("")
-//    static let  = NSLocalizedString("")
-//    static let  = NSLocalizedString("")
-//    static let  = NSLocalizedString("")
-//    static let  = NSLocalizedString("")
-//    static let  = NSLocalizedString("")
-//    static let  = NSLocalizedString("")
-//    static let  = NSLocalizedString("")
-//    static let  = NSLocalizedString("")
-//    static let  = NSLocalizedString("")
-//    static let  = NSLocalizedString("")
+    static let project = NSLocalizedString("Project")
+    static let projectDetails = NSLocalizedString("ProjectDetails")
     
     
+    static let marketItem = NSLocalizedString("MarketItem")
+    static let marketItemDetails = NSLocalizedString("MarketItemDetails")
+    static let marketItemPurchase = NSLocalizedString("MarketItemPurchase")
+
+    static let bomaHotel = NSLocalizedString("BomaHotel")
+    static let bomaHotelDetails = NSLocalizedString("BomaHotelDetails")
+    
+    static let volunteerList = NSLocalizedString("VolunteerList")
+    static let volunteerMap = NSLocalizedString("VolunteerMap")
+    static let volunteerDetails = NSLocalizedString("VolunteerDetails")
+    
+    static let feed = NSLocalizedString("Feed")
+    static let feedDetails = NSLocalizedString("FeedDetails")
+
+    static let messages = NSLocalizedString("Messages")
+    static let messagesNewChat = NSLocalizedString("MessagesNewChat")
+    
+    static let communitiesList = NSLocalizedString("CommunitiesList")
+    static let communitiesMap = NSLocalizedString("CommunitiesMap")
+    static let communityDetails = NSLocalizedString("CommunityDetails")
+
+    static let peopleList = NSLocalizedString("PeopleList")
+    static let peopleDetails = NSLocalizedString("PeopleDetails")
+    
+    static let walletList = NSLocalizedString("WalletList")
+    static let walletDetails = NSLocalizedString("WalletDetails")
+    
+    static let settings = NSLocalizedString("Settings")
+
+    static let profile = NSLocalizedString("Profile")
+    static let profileEdit = NSLocalizedString("ProfileEdit")
+    static let chat = NSLocalizedString("Chat")
+   
+    //static let  = NSLocalizedString("")
+
     static let unknownScreen = NSLocalizedString("UnknownScreen")
     
     static func labelForHomeItem(homeItem: HomeItem?, suffix: String = "") -> String {
@@ -95,6 +120,12 @@ struct AnalyticsLabels {
             return donateForm
         case .Training:
             scrennLabel = training
+        case .Projects:
+            scrennLabel = project
+        case .Market:
+            scrennLabel = marketItem
+        case .BomaHotels:
+            scrennLabel = bomaHotel
             
         default:
             scrennLabel = unknownScreen
