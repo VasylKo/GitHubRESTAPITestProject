@@ -161,7 +161,12 @@ final class UserProfileViewController: BesideMenuViewController, BrowseActionPro
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        trackScreenToAnalytics(AnalyticsLabels.peopleDetails)
+        if api().isCurrentUser(objectId) {
+            trackScreenToAnalytics(AnalyticsLabels.profile)
+        } else {
+            trackScreenToAnalytics(AnalyticsLabels.peopleDetails)
+        }
+        
     }
     
     @IBAction func prepareForUnwind(segue: UIStoryboardSegue) {
