@@ -53,6 +53,11 @@ final class WalletViewController: BesideMenuViewController {
         }
         browseMode = .Purchases
     }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        trackScreenToAnalytics(AnalyticsLabels.walletList)
+    }
 
     // MARK: - Private functions
     private func reloadData() {

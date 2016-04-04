@@ -97,6 +97,7 @@ struct AnalyticsLabels {
     
     static let walletList = NSLocalizedString("WalletList")
     static let walletDetails = NSLocalizedString("WalletDetails")
+    static let walletDonationsDetails = NSLocalizedString("WalletDonationsDetails")
     
     static let settings = NSLocalizedString("Settings")
 
