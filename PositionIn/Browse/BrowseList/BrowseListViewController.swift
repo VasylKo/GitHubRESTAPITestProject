@@ -42,6 +42,16 @@ final class BrowseListViewController: UIViewController, BrowseActionProducer, Br
         self.bottomSeparatorLine.hidden = hideSeparatorLinesNearSegmentedControl
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        //Send analytics
+        if let homeItem = homeItem {
+            trackScreenToAnalytics(AnalyticsLabels.labelForHomeItem(homeItem, suffix: "List"))
+        }
+        
+    }
+    
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         self.topSeparatorHeightConstraint.constant = 1 / UIScreen.mainScreen().scale

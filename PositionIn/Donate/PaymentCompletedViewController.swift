@@ -31,6 +31,11 @@ class PaymentCompletedViewController: UIViewController {
         donateMessageLabel?.text = donateMessageLabel?.text?.stringByReplacingOccurrencesOfString("{amount}", withString: donationString, options: .LiteralSearch, range: nil)
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        trackScreenToAnalytics(AnalyticsLabels.donateConfirmation)
+    }
+    
     // MARK: - IBAction
     @IBAction func closeButtonTapped(sender: AnyObject) {
         if let viewController = viewControllerToOpenOnComplete {

@@ -48,7 +48,7 @@ class BrowseGridViewController: UIViewController {
         api().hasNotifications().onSuccess { [weak self] (has : Bool) -> Void in
             self?.parentViewController?.navigationItem.rightBarButtonItem?.enabled = has
         }
-        trackScreenToAnalytics("Home")
+        trackScreenToAnalytics(AnalyticsLabels.home)
     }
     
     @objc func notificationTouched() {

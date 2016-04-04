@@ -34,7 +34,9 @@ class ExploreViewController: DisplayModeViewController {
     }
     
     override func viewControllerForMode(mode: DisplayModeViewController.DisplayMode) -> UIViewController {
-            switch mode {
+        trackScreenForDisplayMode(mode)
+        
+        switch mode {
             case .Map:
                 let mapController = Storyboards.Main.instantiateBrowseMapViewController()
                 mapController.delegate = self
@@ -46,5 +48,18 @@ class ExploreViewController: DisplayModeViewController {
                 listController.showCardCells = false
                 return listController
         }
+        
+        
     }
+    
+    private func trackScreenForDisplayMode(mode: DisplayMode) {
+//        switch mode {
+//        case .List:
+//            trackScreenToAnalytics(AnalyticsLabels.labelForHomeItem(homeItem, suffix: "List"))
+//        case .Map:
+//            trackScreenToAnalytics(AnalyticsLabels.labelForHomeItem(homeItem, suffix: "Map"))
+//        }
+
+    }
+    
 }

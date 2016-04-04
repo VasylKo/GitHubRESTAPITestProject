@@ -40,7 +40,7 @@ class MembershipPaymentViewController: XLFormViewController, PaymentReponseDeleg
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        trackScreenToAnalytics("MembershipPayment")
+        trackScreenToAnalytics(AnalyticsLabels.membershipPayment)
     }
     
     override func viewWillLayoutSubviews() {

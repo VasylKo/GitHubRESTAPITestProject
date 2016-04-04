@@ -44,7 +44,7 @@ class CallAmbulanceViewController: BaseAddItemViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        trackScreenToAnalytics("CallAmbulanceForm")
+        trackScreenToAnalytics(AnalyticsLabels.callAmbulanceForm)
     }
     
     override func showFormValidationError(error: NSError!) {

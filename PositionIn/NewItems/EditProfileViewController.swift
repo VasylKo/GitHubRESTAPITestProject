@@ -222,6 +222,11 @@ final class EditProfileViewController: BaseAddItemViewController, UserProfileAva
         }
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        trackScreenToAnalytics(AnalyticsLabels.profileEdit)
+    }
+    
     // MARK: - Private functions
     private func loadData (){
         let page = APIService.Page(start: 0, size: 100)

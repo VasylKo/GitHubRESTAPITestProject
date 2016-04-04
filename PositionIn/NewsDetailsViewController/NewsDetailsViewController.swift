@@ -32,7 +32,7 @@ final class NewsDetailsViewController: UIViewController, UITextFieldDelegate {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.subscribeOnKeyboardNotification()
-        trackScreenToAnalytics("FeedDetails")
+        trackScreenToAnalytics(AnalyticsLabels.feedDetails)
     }
     
     override func viewWillDisappear(animated: Bool) {

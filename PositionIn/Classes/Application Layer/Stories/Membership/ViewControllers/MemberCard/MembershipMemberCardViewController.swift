@@ -54,7 +54,7 @@ class MembershipMemberCardViewController : UIViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        trackScreenToAnalytics("MembershipCard")
+        trackScreenToAnalytics(AnalyticsLabels.membershipCard)
     }
     
     func setupInterface() {

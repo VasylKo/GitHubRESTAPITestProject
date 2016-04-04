@@ -50,6 +50,8 @@ class NewsListViewController: UIViewController {
                 self.reloadData()
             }
         }
+        
+        trackScreenToAnalytics(AnalyticsLabels.krcsNewsList)
     }
     
     //MARK: Data
@@ -80,7 +82,7 @@ class NewsListViewController: UIViewController {
 extension NewsListViewController: NewsListActionConsumer {
     
     func showNewsDetails(id: CRUDObjectId) {
-        trackGoogleAnalyticsEvent("Main", action: "Click", label: "Post")
+        trackScreenToAnalytics(AnalyticsLabels.krcsNewsDetails)
         let controller = Storyboards.Main.instantiatePostViewController()
         controller.objectId = id
         navigationController?.pushViewController(controller, animated: true)

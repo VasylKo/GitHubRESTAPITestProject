@@ -24,6 +24,10 @@ final class EventDetailsViewController: UIViewController {
         reloadData()
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        trackScreenToAnalytics(AnalyticsLabels.eventDetails)
+    }
     
     private func reloadData() {
         if let objectId = objectId {

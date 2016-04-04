@@ -166,7 +166,7 @@ class MembershipMemberDetailsViewController : BaseAddItemViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        trackScreenToAnalytics("MembershipMemberDetails")
+        trackScreenToAnalytics(AnalyticsLabels.membershipMemberDetails)
     }
     
     override func viewWillLayoutSubviews() {

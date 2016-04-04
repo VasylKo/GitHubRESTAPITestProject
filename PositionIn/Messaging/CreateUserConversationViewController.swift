@@ -19,6 +19,12 @@ class CreateUserConversationViewController: CreateConversationViewController {
         reloadData()
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        trackScreenToAnalytics(AnalyticsLabels.messagesNewChat)
+    }
+
+    
     override func reloadData() {
         api().getMySubscriptions().onSuccess { [weak self] response in
             if let userList = response.items {

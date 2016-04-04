@@ -26,6 +26,11 @@ final class BomaHotelsDetailsViewController: UIViewController {
         reloadData()
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        trackScreenToAnalytics(AnalyticsLabels.bomaHotelDetails)
+    }
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
 // unsupported functionality?
 //        if let orderController = segue.destinationViewController  as? OrderViewController {

@@ -25,6 +25,11 @@ final class ProductDetailsViewController: UIViewController {
         reloadData()
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        trackScreenToAnalytics(AnalyticsLabels.projectDetails)
+    }
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let orderController = segue.destinationViewController  as? OrderViewController {
             orderController.product = self.product
@@ -175,7 +180,7 @@ extension ProductDetailsViewController: ProductDetailsActionConsumer {
                 let donateController = Storyboards.Onboarding.instantiateDonateViewController()
                 donateController.product = self.product
                 donateController.viewControllerToOpenOnComplete = self
-                donateController.donationType = .Project
+                donateController.donationType = .Projects
                 self.navigationController?.pushViewController(donateController, animated: true)
                 
             }
