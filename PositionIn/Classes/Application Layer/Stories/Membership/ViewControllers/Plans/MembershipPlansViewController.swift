@@ -60,7 +60,7 @@ class MembershipPlansViewController : UIViewController, UITableViewDelegate, UIT
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        trackScreenToAnalytics("MembershipPlanSelection")
+        trackScreenToAnalytics(AnalyticsLabels.membershipPlanSelection)
     }
     
     func setupInterface() {

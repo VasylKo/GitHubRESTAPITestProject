@@ -26,7 +26,7 @@ class GiveBloodDetailsViewController: UIViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        trackScreenToAnalytics("GiveBloodDetails")
+        trackScreenToAnalytics(AnalyticsLabels.giveBloodDetails)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

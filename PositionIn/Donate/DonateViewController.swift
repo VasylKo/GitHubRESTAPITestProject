@@ -234,9 +234,7 @@ class DonateViewController: XLFormViewController, PaymentReponseDelegate {
     }
     
     private func sendScreenNameToAnalytics() {
-        //Send tracking enevt
-        let screenName = donationType.displayString().stringByReplacingOccurrencesOfString(" ", withString: "") ?? "Unknown donation source"
-        trackScreenToAnalytics(screenName + "Donate")
+       trackScreenToAnalytics(AnalyticsLabels.labelForHomeItem(donationType, suffix: "Donate"))
     }
     
     

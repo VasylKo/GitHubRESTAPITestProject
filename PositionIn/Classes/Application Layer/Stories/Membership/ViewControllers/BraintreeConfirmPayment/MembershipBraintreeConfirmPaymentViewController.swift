@@ -14,7 +14,7 @@ class MembershipBraintreeConfirmPaymentViewController: MembershipMPesaConfirmPay
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        trackScreenToAnalytics("MembershipPaymentConfirmation")
+        trackScreenToAnalytics(AnalyticsLabels.membershipPaymentConfirmation)
     }
     
     //MARK: Initializers

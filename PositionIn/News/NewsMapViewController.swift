@@ -31,7 +31,7 @@ class NewsMapViewController : ContainerViewController, BrowseActionConsumer {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        trackScreenToAnalytics("KrcsNewsMap")
+        trackScreenToAnalytics(AnalyticsLabels.krcsNewsMap)
     }
     
     //MARK: BrowseActionConsumer

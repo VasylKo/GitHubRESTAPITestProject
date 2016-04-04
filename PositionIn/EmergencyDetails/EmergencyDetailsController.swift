@@ -27,7 +27,7 @@ class EmergencyDetailsController: UIViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        trackScreenToAnalytics("EmergencyAlertDetails")
+        trackScreenToAnalytics(AnalyticsLabels.emergencyAlertDetails)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

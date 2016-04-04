@@ -53,14 +53,13 @@ class ExploreViewController: DisplayModeViewController {
     }
     
     private func trackScreenForDisplayMode(mode: DisplayMode) {
-        let screenIdentifierLabel = homeItem?.displayString().stringByReplacingOccurrencesOfString(" ", withString: "") ?? "UnknownScreen"
         switch mode {
         case .List:
-            trackScreenToAnalytics(screenIdentifierLabel + "List")
+            trackScreenToAnalytics(AnalyticsLabels.labelForHomeItem(homeItem, suffix: "List"))
         case .Map:
-            trackScreenToAnalytics(screenIdentifierLabel + "Map")
+            trackScreenToAnalytics(AnalyticsLabels.labelForHomeItem(homeItem, suffix: "Map"))
         }
+
     }
-    
     
 }

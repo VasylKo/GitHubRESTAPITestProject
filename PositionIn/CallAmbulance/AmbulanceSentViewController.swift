@@ -10,6 +10,6 @@ class AmbulanceSentViewController: AmbulanceBaseController {
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        trackScreenToAnalytics("CallAmbulanceConfirmed")
+        trackScreenToAnalytics(AnalyticsLabels.callAmbulanceConfirmed)
     }
 }
