@@ -196,6 +196,22 @@ struct AnalyticCategories {
     static let profile = NSLocalizedString("Profile")
     static let bomaHotels = NSLocalizedString("BomaHotels")
     static let notifications = NSLocalizedString("Notifications")
+    
+    static let unknownCategoty = NSLocalizedString("UnknownCategoty")
+    
+    static func labelForHomeItem(homeItem: HomeItem?) -> String {
+        guard let homeItem  = homeItem else {
+            return unknownCategoty
+        }
+        
+        switch homeItem {
+        case .Donate:
+            return donate
+            
+        default:
+            return unknownCategoty
+        }
+    }
 }
 
 struct AnalyticActios {
