@@ -46,6 +46,7 @@ class MembershipPlanDetailsViewController: UIViewController, UITableViewDataSour
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         trackScreenToAnalytics(AnalyticsLabels.membershipPlanDetails)
+        trackEventToAnalytics(AnalyticCategories.membership, action: AnalyticActios.planListSelection, label: plan.name ?? NSLocalizedString("No plan name"))
     }
     
     func setupInterface() {
@@ -84,6 +85,7 @@ class MembershipPlanDetailsViewController: UIViewController, UITableViewDataSour
     //MARK: Target-Action
     
     @IBAction func selectPlanTapped(sender: AnyObject) {
+        trackEventToAnalytics(AnalyticCategories.membership, action: AnalyticActios.planSelected, label: plan.name ?? NSLocalizedString("No plan name"))
         self.router .showMembershipConfirmDetailsViewController(from: self, with: plan)
     }
 }

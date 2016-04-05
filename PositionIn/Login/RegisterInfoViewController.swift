@@ -36,7 +36,7 @@ final class RegisterInfoViewController: BaseLoginViewController {
                     return
             }
             
-            trackEventToAnalytics(AnalyticCategories.auth, action: c, label: NSLocalizedString("Signup Complete"))
+            trackEventToAnalytics(AnalyticCategories.auth, action: AnalyticActios.click, label: NSLocalizedString("Signup Complete"))
             
             let firstName = firstnameTextField.text
             let lastName = lastnameTextField.text
