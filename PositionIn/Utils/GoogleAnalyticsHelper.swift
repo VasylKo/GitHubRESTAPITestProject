@@ -187,6 +187,7 @@ struct AnalyticCategories {
     static let projects = NSLocalizedString("Projects")
     static let emergencyAlert = NSLocalizedString("EmergencyAlert")
     static let volunteer = NSLocalizedString("Volunteer")
+    static let communitiy = NSLocalizedString("Communitiy")
     static let feedEmergencyAlert = NSLocalizedString("FeedEmergencyAlert")
     static let feedNews = NSLocalizedString("FeedNews")
     static let messages = NSLocalizedString("Messages")
@@ -256,6 +257,9 @@ struct AnalyticActios {
     
     static let volunteerRequest = NSLocalizedString("VolunteerRequest")
     static let volunteerCancel = NSLocalizedString("VolunteerCancel")
+    
+    static let communityRequest = NSLocalizedString("CommunityRequest")
+    static let communityCancel = NSLocalizedString("CommunityCancel")
     
     static let moreInformation = NSLocalizedString("MoreInformation")
     static let openAttachment = NSLocalizedString("OpenAttachment")
