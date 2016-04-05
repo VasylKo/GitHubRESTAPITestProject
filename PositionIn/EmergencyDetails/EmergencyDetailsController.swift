@@ -184,6 +184,7 @@ extension EmergencyDetailsController: EmergencyDetailsActionConsumer {
             donateController.product = self.product
             donateController.viewControllerToOpenOnComplete = self
             donateController.donationType = .Emergency
+            trackEventToAnalytics(AnalyticCategories.labelForHomeItem(donateController.donationType), action: AnalyticActios.donate, label: product?.name ?? NSLocalizedString("Can't get product type"))
             self.navigationController?.pushViewController(donateController, animated: true)
             return
         case .SendMessage:

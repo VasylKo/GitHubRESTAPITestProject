@@ -209,7 +209,9 @@ struct AnalyticCategories {
             return donate
         case .Projects:
             return projects
-            
+        case .Emergency:
+            return emergencyAlert
+        
         default:
             return unknownCategoty
         }
