@@ -24,9 +24,9 @@ final class WalletViewController: BesideMenuViewController {
             reloadData()
             switch browseMode {
             case .Purchases:
-                trackGoogleAnalyticsEvent("Wallet", action: "Click", label: "Purchases")
+                trackEventToAnalytics("Wallet", action: "Click", label: "Purchases")
             case .MyDonations:
-                trackGoogleAnalyticsEvent("Wallet", action: "Click", label: "MyDonations")
+                trackEventToAnalytics("Wallet", action: "Click", label: "MyDonations")
             }
         }
     }

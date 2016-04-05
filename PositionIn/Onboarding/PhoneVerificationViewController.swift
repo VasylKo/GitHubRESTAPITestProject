@@ -101,16 +101,16 @@ class PhoneVerificationViewController: XLFormViewController {
                 let codeString = "\(codeRowValue)"
                 api().verifyPhoneCode(phoneNumber, code: codeString).onSuccess(callback: {[weak self] isExistingUser in
                     //User entered valid sms code
-                    trackGoogleAnalyticsEvent(AnalyticCategories.phoneVerification, action: AnalyticActios.verificationSuccessful)
+                    trackEventToAnalytics(AnalyticCategories.phoneVerification, action: AnalyticActios.verificationSuccessful)
                     
                     if isExistingUser {
                         //sing in
-                        trackGoogleAnalyticsEvent("Auth", action: "UserSignIn")
+                        trackEventToAnalytics("Auth", action: "UserSignIn")
                         api().login(username: nil, password: nil, phoneNumber: phoneNumber, phoneVerificationCode: codeString).onSuccess { [weak self] _ in
                             api().pushesRegistration()
                             self?.dismissLogin()
                             }.onFailure(callback: { _ in
-                                trackGoogleAnalyticsEvent("Auth", action: "UserSignInFail")
+                                trackEventToAnalytics("Auth", action: "UserSignInFail")
                             })
                     }
                     else {
@@ -121,7 +121,7 @@ class PhoneVerificationViewController: XLFormViewController {
                     }
                     }).onFailure { _ in
                         //User entered invalid sms code
-                        trackGoogleAnalyticsEvent(AnalyticCategories.phoneVerification, action: AnalyticActios.verificationFail)
+                        trackEventToAnalytics(AnalyticCategories.phoneVerification, action: AnalyticActios.verificationFail)
                 }
         }
     }

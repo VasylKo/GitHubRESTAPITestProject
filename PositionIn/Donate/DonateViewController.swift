@@ -230,7 +230,7 @@ class DonateViewController: XLFormViewController, PaymentReponseDelegate {
         let donationTypeName = donationType.displayString().stringByReplacingOccurrencesOfString(" ", withString: "") ?? "Unknown donation source"
         let paymentTypeLabel = paymentType ?? "Can't get type"
         let paymentAmountNumber = NSNumber(integer: amount ?? 0)
-        trackGoogleAnalyticsEvent(donationTypeName, action: "ProceedToPay", label: paymentTypeLabel, value: paymentAmountNumber)
+        trackEventToAnalytics(donationTypeName, action: "ProceedToPay", label: paymentTypeLabel, value: paymentAmountNumber)
     }
     
     private func sendScreenNameToAnalytics() {

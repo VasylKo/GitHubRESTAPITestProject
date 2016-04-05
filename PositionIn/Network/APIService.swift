@@ -50,7 +50,7 @@ final class APIService {
             }
             self.defaultErrorHandler?(error)
             
-            trackGoogleAnalyticsEvent(AnalyticCategories.network, action: AnalyticActios.error, label: error.localizedDescription, value: NSNumber(integer: error.code))
+            trackEventToAnalytics(AnalyticCategories.network, action: AnalyticActios.error, label: error.localizedDescription, value: NSNumber(integer: error.code))
         }
     }
     

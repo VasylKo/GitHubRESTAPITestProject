@@ -22,7 +22,7 @@ final class LoginViewController: BaseLoginViewController {
     }
 
     @IBAction func didTapForgot(sender: AnyObject) {
-        trackGoogleAnalyticsEvent("Auth", action: "Click", label: "Forgot")
+        trackEventToAnalytics("Auth", action: "Click", label: "Forgot")
         performSegue(LoginViewController.Segue.ForgotPasswordSegueId)
     }
         
@@ -33,11 +33,11 @@ final class LoginViewController: BaseLoginViewController {
             
             api().login(username: username, password: password, phoneNumber: nil, phoneVerificationCode: nil).onSuccess { [weak self] _ in
                 Log.info?.message("Logged in")
-                trackGoogleAnalyticsEvent("Status", action: "Click", label: "Auth Success")
+                trackEventToAnalytics("Status", action: "Click", label: "Auth Success")
                 self?.dismissLogin()
                 api().pushesRegistration()
                 }.onFailure(callback: { _ in
-                    trackGoogleAnalyticsEvent("Status", action: "Click", label: "Auth Fail")
+                    trackEventToAnalytics("Status", action: "Click", label: "Auth Fail")
                 })
             
         } else {

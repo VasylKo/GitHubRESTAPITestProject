@@ -41,7 +41,7 @@ class PhoneNumberViewController: XLFormViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.tintColor = UIScheme.mainThemeColor
-        trackGoogleAnalyticsEvent("Auth", action: "Click", label: "SMS code")
+        trackEventToAnalytics("Auth", action: "Click", label: "SMS code")
     }
     
     override func showFormValidationError(error: NSError!) {
@@ -110,7 +110,7 @@ class PhoneNumberViewController: XLFormViewController {
     
     @IBAction func doneButtonPressed(sender: AnyObject) {
         
-        trackGoogleAnalyticsEvent(AnalyticCategories.phoneVerification, action: AnalyticActios.done)
+        trackEventToAnalytics(AnalyticCategories.phoneVerification, action: AnalyticActios.done)
         
         let validationErrors : Array<NSError> = self.formValidationErrors() as! Array<NSError>
         if (validationErrors.count > 0){
@@ -153,7 +153,7 @@ class PhoneNumberViewController: XLFormViewController {
             
             let OKAction = UIAlertAction(title: "Yes", style: .Default) {[weak self] (action) in
                 
-                trackGoogleAnalyticsEvent(AnalyticCategories.phoneVerification, action: AnalyticActios.phoneConfirmed)
+                trackEventToAnalytics(AnalyticCategories.phoneVerification, action: AnalyticActios.phoneConfirmed)
                 
                 let smsCode = NSNumber(int: 1)
                 api().verifyPhone(phoneNumber, type: smsCode).onSuccess(callback: {[weak self] in

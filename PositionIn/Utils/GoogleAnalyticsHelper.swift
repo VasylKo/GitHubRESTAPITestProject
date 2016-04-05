@@ -8,7 +8,8 @@
 
 import Foundation
 
-func trackGoogleAnalyticsEvent(categoryName: String, action: String, label: String = "", value: NSNumber? = nil) {
+
+func trackEventToAnalytics(categoryName: String, action: String, label: String = "", value: NSNumber? = nil) {
     let tracker = GAI.sharedInstance().defaultTracker
     let builder = GAIDictionaryBuilder.createEventWithCategory(categoryName,
         action: action, label: label, value: value)

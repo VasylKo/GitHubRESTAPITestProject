@@ -127,7 +127,7 @@ class MembershipPlansViewController : UIViewController, UITableViewDelegate, UIT
         let callSupportTitle = NSLocalizedString("Call Support")
         let callAction: UIAlertAction = UIAlertAction(title: callSupportTitle, style: .Default)
             { action -> Void in
-                trackGoogleAnalyticsEvent("Membership", action: "AlreadyMember", label: callSupportTitle)
+                trackEventToAnalytics("Membership", action: "AlreadyMember", label: callSupportTitle)
                 UIApplication.sharedApplication().openURL(NSURL(string:"telprompt:" + self.phone)!)
         }
         actionSheetController.addAction(callAction)
@@ -135,7 +135,7 @@ class MembershipPlansViewController : UIViewController, UITableViewDelegate, UIT
         let emailSupportTitle = NSLocalizedString("Email Support")
         let emailAction: UIAlertAction = UIAlertAction(title: emailSupportTitle, style: .Default)
             { action -> Void in
-                trackGoogleAnalyticsEvent("Membership", action: "AlreadyMember", label: emailSupportTitle)
+                trackEventToAnalytics("Membership", action: "AlreadyMember", label: emailSupportTitle)
                 let mailComposeViewController = self.configuredMailComposeViewController()
                 if MFMailComposeViewController.canSendMail() {
                     self.presentViewController(mailComposeViewController, animated: true, completion: nil)
@@ -148,7 +148,7 @@ class MembershipPlansViewController : UIViewController, UITableViewDelegate, UIT
         let visitWebTitle = NSLocalizedString("Visit Website")
         let websiteAction: UIAlertAction = UIAlertAction(title: visitWebTitle, style: .Default)
             { action -> Void in
-                trackGoogleAnalyticsEvent("Membership", action: "AlreadyMember", label: visitWebTitle)
+                trackEventToAnalytics("Membership", action: "AlreadyMember", label: visitWebTitle)
                 let websiteURL = NSURL(string: "http://www.redcross.or.ke")!
                 OpenApplication.Safari(with: websiteURL)
         }
