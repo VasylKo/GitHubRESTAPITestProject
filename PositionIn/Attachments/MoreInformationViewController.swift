@@ -19,14 +19,16 @@ class MoreInformationViewController : XLFormViewController {
     
     var attachments : [Attachment]
     var links : [NSURL]
+    var newsTitle: String?
     
     var attachmentRowDescriptors : [XLFormRowDescriptor] = []
     
     //MARK: Initializers
     
-    init(links: [NSURL]?, attachments: [Attachment]?) {
+    init(links: [NSURL]?, attachments: [Attachment]?, newsTitle: String? = nil) {
         self.attachments = attachments ?? []
         self.links = links ?? []
+        self.newsTitle = newsTitle
         super.init(nibName: nil, bundle: nil)
         self.initializeForm()
     }
@@ -58,6 +60,9 @@ class MoreInformationViewController : XLFormViewController {
 
                 rowDescriptor.action.formBlock =  { _ in
                     if let indexPath = self.tableView.indexPathForSelectedRow {
+                        let newsLabel = self.newsTitle ?? NSLocalizedString("Can't get news title")
+                        let attachmentLabel = attachment.name ?? NSLocalizedString("Can't get attachment name")
+                        trackEventToAnalytics(AnalyticCategories.feedNews, action: AnalyticActios.openAttachment, label: newsLabel + " - " + attachmentLabel)
                         self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
                         //type pdf
                         if attachment.type?.containsString("pdf") == true {
@@ -83,6 +88,9 @@ class MoreInformationViewController : XLFormViewController {
                 rowDescriptor.cellConfig["textLabel.text"] = link.absoluteString
                 rowDescriptor.cellConfig["textLabel.textAlignment"] = Int(0)
                 rowDescriptor.action.formBlock =  { _ in
+                    let newsLabel = self.newsTitle ?? NSLocalizedString("Can't get news title")
+                    let linkLabel = link.absoluteString
+                    trackEventToAnalytics(AnalyticCategories.feedNews, action: AnalyticActios.openLink, label: newsLabel + " - " + linkLabel)
                     if let indexPath = self.tableView.indexPathForSelectedRow {
                         self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
                         OpenApplication.Safari(with: link)

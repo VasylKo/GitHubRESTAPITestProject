@@ -135,6 +135,8 @@ extension FeedEmergencyDetailsViewController {
                         let donateController = Storyboards.Onboarding.instantiateDonateViewController()
                         let controller = self.parentViewController as! FeedEmergencyDetailsViewController
                         donateController.product = controller.emergency
+                        donateController.donationType = .Emergency
+                        trackEventToAnalytics(AnalyticCategories.labelForHomeItem(donateController.donationType), action: AnalyticCategories.donate, label: controller.emergency?.name ?? NSLocalizedString("Can't get product type"))
                         controller.navigationController?.pushViewController(donateController, animated: true)
                         break
                     case "Send Message":

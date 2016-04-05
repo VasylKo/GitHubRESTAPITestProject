@@ -263,6 +263,7 @@ struct AnalyticActios {
     
     static let moreInformation = NSLocalizedString("MoreInformation")
     static let openAttachment = NSLocalizedString("OpenAttachment")
+    static let openLink = NSLocalizedString("OpenLink")
     static let like = NSLocalizedString("Like")
     static let unlike = NSLocalizedString("Unlike")
     static let comment = NSLocalizedString("Comment")
