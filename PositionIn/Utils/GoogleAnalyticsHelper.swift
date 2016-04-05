@@ -207,6 +207,8 @@ struct AnalyticCategories {
         switch homeItem {
         case .Donate:
             return donate
+        case .Projects:
+            return projects
             
         default:
             return unknownCategoty
