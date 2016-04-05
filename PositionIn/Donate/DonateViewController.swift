@@ -165,7 +165,7 @@ class DonateViewController: XLFormViewController, PaymentReponseDelegate {
         }
         
         confirmDonation.addFormRow(confirmRow)
-            confirmDonation.footerTitle = "By donating, you agree to Red Cross Terms of service and Privecy Policy"
+            confirmDonation.footerTitle = "By donating, you agree to Red Cross Terms of service and Privacy Policy"
         
         self.form = form
     }
