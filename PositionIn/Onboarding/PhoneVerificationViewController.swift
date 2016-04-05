@@ -105,12 +105,12 @@ class PhoneVerificationViewController: XLFormViewController {
                     
                     if isExistingUser {
                         //sing in
-                        trackEventToAnalytics("Auth", action: "UserSignIn")
+                        trackEventToAnalytics(AnalyticCategories.auth, action: AnalyticActios.userSignIn)
                         api().login(username: nil, password: nil, phoneNumber: phoneNumber, phoneVerificationCode: codeString).onSuccess { [weak self] _ in
                             api().pushesRegistration()
                             self?.dismissLogin()
                             }.onFailure(callback: { _ in
-                                trackEventToAnalytics("Auth", action: "UserSignInFail")
+                                trackEventToAnalytics(AnalyticCategories.auth, action: AnalyticActios.userSignInFail)
                             })
                     }
                     else {

@@ -15,7 +15,7 @@ final class RecoverPasswordViewController: BaseLoginViewController {
         super.viewDidLoad()
         submitButton.layer.borderColor = UIColor.bt_colorWithBytesR(237, g: 27, b: 46).CGColor
         submitButton.layer.borderWidth = 1
-        trackEventToAnalytics("Auth", action: "Click", label: "Forgot Password")
+        trackEventToAnalytics(AnalyticCategories.auth, action: AnalyticActios.click, label: NSLocalizedString("Forgot Password"))
     }
     
     @IBAction func didTapSubmitButton(sender: AnyObject) {

@@ -22,13 +22,13 @@ final class LoginSignupViewController: BaseLoginViewController {
     }
         
     @IBAction func didTapLogin(sender: AnyObject) {
-        trackEventToAnalytics("Auth", action: "Click", label: "Login")
+        trackEventToAnalytics(AnalyticCategories.auth, action: AnalyticActios.click, label: NSLocalizedString("Login"))
         performSegue(LoginSignupViewController.Segue.LoginSegueId)
     }
     
 
     @IBAction func didTapSignUp(sender: AnyObject) {
-        trackEventToAnalytics("Auth", action: "Click", label: "Signup")
+        trackEventToAnalytics(AnalyticCategories.auth, action: AnalyticActios.click, label: NSLocalizedString("Signup"))
         performSegue(LoginSignupViewController.Segue.SignUpSegueId)
     }
     

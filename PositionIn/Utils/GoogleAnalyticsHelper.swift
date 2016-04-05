@@ -180,6 +180,7 @@ struct AnalyticCategories {
     static let network = NSLocalizedString("Network")
     static let phoneVerification = NSLocalizedString("PhoneVerification")
     static let auth = NSLocalizedString("Auth")
+    static let status = NSLocalizedString("Status")
     static let membership = NSLocalizedString("Membership")
     static let donate = NSLocalizedString("Donate")
     static let ambulance = NSLocalizedString("Ambulance")
@@ -215,6 +216,7 @@ struct AnalyticActios {
     static let userSignInFail = NSLocalizedString("UserSignInFail")
     static let userSignUp = NSLocalizedString("UserSignUp")
     static let userSignUpFail = NSLocalizedString("UserSignUpFail")
+    static let status = NSLocalizedString("Status")
     
     static let planListSelection = NSLocalizedString("PlanListSelection")
     static let planSelected = NSLocalizedString("PlanSelected")
@@ -241,6 +243,7 @@ struct AnalyticActios {
     static let unlike = NSLocalizedString("Unlike")
     static let comment = NSLocalizedString("Comment")
     
+    static let click = NSLocalizedString("Click")
     static let clickNew = NSLocalizedString("ClickNew")
     static let clickNewPeople = NSLocalizedString("ClickNewPeople")
     static let clickNewCommunities = NSLocalizedString("ClickNewCommunities")
