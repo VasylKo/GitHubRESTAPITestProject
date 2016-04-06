@@ -146,6 +146,7 @@ final class UserProfileViewController: BesideMenuViewController, BrowseActionPro
     
     @IBAction func handleNavigationBarButtonItemTap(sender: UIButton) {
         if let action = UserProfileViewController.ProfileAction(rawValue: sender.tag) where action != .None {
+            trackEventToAnalytics(AnalyticCategories.profile, action: AnalyticActios.edit)
             self.shouldExecuteAction(action)
         }
     }
@@ -174,7 +175,9 @@ final class UserProfileViewController: BesideMenuViewController, BrowseActionPro
     }
     
     @IBAction func prepareForUnwind(segue: UIStoryboardSegue) {
-        
+        if segue == EditProfileViewController.Segue.Close {
+            trackEventToAnalytics(AnalyticCategories.profile, action: AnalyticActios.editDone, label: NSLocalizedString("Cancel"))
+        }
     }
     
     lazy var dataSource: ProfileDataSource = { [unowned self] in

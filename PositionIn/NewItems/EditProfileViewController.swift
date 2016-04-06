@@ -405,6 +405,8 @@ final class EditProfileViewController: BaseAddItemViewController, UserProfileAva
             return
         }
         
+        trackEventToAnalytics(AnalyticCategories.profile, action: AnalyticActios.editDone, label: NSLocalizedString("Save"))
+        
         guard isFieldsValid() else {
             return
         }
