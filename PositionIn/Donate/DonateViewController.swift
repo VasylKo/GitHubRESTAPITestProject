@@ -20,8 +20,13 @@ class DonateViewController: XLFormViewController, PaymentReponseDelegate {
         case Error = "Error"
     }
     
+    enum DonationType: Int {
+        case Unknown = 0
+        case Project, EmergencyAlert, Donation, FeedEmergencyAlert
+    }
+    
     var product: Product?
-    var donationType: HomeItem = .Donate
+    var donationType: DonationType = .Donation
     
     private var amount:Int = 0;
     private var paymentType: String?
@@ -233,14 +238,14 @@ class DonateViewController: XLFormViewController, PaymentReponseDelegate {
     
     private func sendDonationEventToAnalytics(action action: String, label: String? = nil) {
         //Send tracking enevt
-        let donationTypeName = AnalyticCategories.labelForHomeItem(donationType)
+        let donationTypeName = AnalyticCategories.labelForDonationType(donationType)
         let paymentTypeLabel = label ?? paymentTypeName ?? NSLocalizedString("Can't get payment type")
         let paymentAmountNumber = NSNumber(integer: amount ?? 0)
         trackEventToAnalytics(donationTypeName, action: action, label: paymentTypeLabel, value: paymentAmountNumber)
     }
     
     private func sendScreenNameToAnalytics() {
-       trackScreenToAnalytics(AnalyticsLabels.labelForHomeItem(donationType, suffix: "Donate"))
+       trackScreenToAnalytics(AnalyticsLabels.labelForDonationType(donationType))
     }
     
     

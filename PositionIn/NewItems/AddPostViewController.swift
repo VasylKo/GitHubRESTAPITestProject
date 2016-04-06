@@ -45,6 +45,8 @@ final class AddPostViewController: BaseAddItemViewController {
                     self.tableView.reloadData()
                 }
             })
+        } else {
+            trackScreenToAnalytics(AnalyticsLabels.addNewPost)
         }
     }
 

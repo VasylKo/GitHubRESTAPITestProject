@@ -34,6 +34,7 @@ final class PostViewController: UIViewController, UITextFieldDelegate {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.subscribeOnKeyboardNotification()
+        trackScreenToAnalytics(AnalyticsLabels.postDetails)
     }
     
     override func viewWillDisappear(animated: Bool) {

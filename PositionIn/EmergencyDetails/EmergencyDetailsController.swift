@@ -183,8 +183,8 @@ extension EmergencyDetailsController: EmergencyDetailsActionConsumer {
             let donateController = Storyboards.Onboarding.instantiateDonateViewController()
             donateController.product = self.product
             donateController.viewControllerToOpenOnComplete = self
-            donateController.donationType = .Emergency
-            trackEventToAnalytics(AnalyticCategories.labelForHomeItem(donateController.donationType), action: AnalyticActios.donate, label: product?.name ?? NSLocalizedString("Can't get product type"))
+            donateController.donationType = .EmergencyAlert
+            trackEventToAnalytics(AnalyticCategories.labelForDonationType(donateController.donationType), action: AnalyticActios.donate, label: product?.name ?? NSLocalizedString("Can't get product type"))
             self.navigationController?.pushViewController(donateController, animated: true)
             return
         case .SendMessage:
