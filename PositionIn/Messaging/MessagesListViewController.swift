@@ -62,7 +62,7 @@ final class MessagesListViewController: BesideMenuViewController {
     
     //MARK: - Navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "newMessage" {
+        if segue.identifier == MessagesListViewController.Segue.newMessage {
             trackEventToAnalytics(AnalyticCategories.messages, action: AnalyticActios.clickNew)
         }
     }
