@@ -73,10 +73,15 @@ final class WalletViewController: BesideMenuViewController {
             api().getOrders(userId, reason: "bought").onSuccess { [weak self] (response : CollectionResponse<Order>) in
                 self?.dataSource.setItems(response.items)
                 self?.tableView?.reloadData()
+                
+                //Send event to analytic
+                trackEventToAnalytics(AnalyticCategories.wallet, action: AnalyticActios.purchased, value: NSNumber(integer: response.items.count))
             }
         case .MyDonations:
             api().getDonations(userId).onSuccess { [weak self] (response : CollectionResponse<Order>) in
                 
+                //Send event to analytic
+                trackEventToAnalytics(AnalyticCategories.wallet, action: AnalyticActios.donations, value: NSNumber(integer: response.items.count))
                 
                 // FIXME: This hack should be removed when BE return entityDetails
                 let items = response.items.map { item -> Order in
