@@ -60,6 +60,10 @@ final class UserProfileViewController: BesideMenuViewController, BrowseActionPro
         api().getUserProfile(objectId).zip(api().getSubscriptionStateForUser(objectId)).onSuccess {
             [weak self] profile, state in
             self?.didReceiveProfile(profile, state: state)
+            
+            //send event to analytic
+            trackEventToAnalytics(AnalyticCategories.people, action: AnalyticActios.followingCount, value: NSNumber(integer: profile.countFollowing ?? 0))
+            trackEventToAnalytics(AnalyticCategories.people, action: AnalyticActios.followersCount, value: NSNumber(integer: profile.countFollowers ?? 0))
         }
     }
     
@@ -345,12 +349,20 @@ extension UserProfileViewController: UserProfileActionConsumer {
                 api().followUser(objectId).onSuccess { [weak self] in
                     self?.sendSubscriptionUpdateNotification(nil)
                     self?.reloadData()
+                    
+                    //Sent event to analytics
+                    let personID = self?.objectId ?? NSLocalizedString("Unknown ID")
+                    trackEventToAnalytics(AnalyticCategories.people, action: AnalyticActios.follow, label: NSLocalizedString("Person + ") + personID)
                 }
             }
         case .UnFollow:
             api().unFollowUser(objectId).onSuccess { [weak self] in
                 self?.sendSubscriptionUpdateNotification(nil)
                 self?.reloadData()
+                
+                //Sent event to analytics
+                let personID = self?.objectId ?? NSLocalizedString("Unknown ID")
+                trackEventToAnalytics(AnalyticCategories.people, action: AnalyticActios.unfollow, label: NSLocalizedString("Person + ") + personID)
             }
         case .Chat:
             showChatViewController(objectId)
