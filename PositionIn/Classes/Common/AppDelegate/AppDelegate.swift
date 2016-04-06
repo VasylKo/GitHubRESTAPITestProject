@@ -36,7 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     override init() {
         #if DEBUG
-        Log.enable(.Verbose, synchronousMode: true)
+        Log.enable(minimumSeverity: .Verbose, debugMode: true)
         #else
         Log.enable(.Info, synchronousMode: false)
         #endif
