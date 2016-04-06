@@ -129,13 +129,13 @@ extension NewsDetailsViewController: NewsActionConsumer {
         if let tempPost = post {
             if (tempPost.isLiked) {
                 api().unlikePost(tempPost.objectId).onSuccess{[weak self] in
-                    trackEventToAnalytics(AnalyticCategories.feedNews, action: AnalyticActios.like, label: self?.post?.name ?? NSLocalizedString("Can't get news title"))
+                    trackEventToAnalytics(AnalyticCategories.feedNews, action: AnalyticActios.unlike, label: self?.post?.name ?? NSLocalizedString("Can't get news title"))
                     self?.reloadPost()
                 }
             }
             else {
                 api().likePost(tempPost.objectId).onSuccess{[weak self] in
-                    trackEventToAnalytics(AnalyticCategories.feedNews, action: AnalyticActios.unlike, label: self?.post?.name ?? NSLocalizedString("Can't get news title"))
+                    trackEventToAnalytics(AnalyticCategories.feedNews, action: AnalyticActios.like, label: self?.post?.name ?? NSLocalizedString("Can't get news title"))
                     self?.reloadPost()
                 }
             }

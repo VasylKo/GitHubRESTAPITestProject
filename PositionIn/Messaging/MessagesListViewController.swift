@@ -60,6 +60,13 @@ final class MessagesListViewController: BesideMenuViewController {
         NSNotificationCenter.defaultCenter().removeObserver(conversationDidChangeObserver)
     }
     
+    //MARK: - Navigation
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "newMessage" {
+            trackEventToAnalytics(AnalyticCategories.messages, action: AnalyticActios.clickNew)
+        }
+    }
+    
 }
 
 
