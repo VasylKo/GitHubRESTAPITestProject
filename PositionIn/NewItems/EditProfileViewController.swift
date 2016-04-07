@@ -76,6 +76,7 @@ final class EditProfileViewController: BaseAddItemViewController, UserProfileAva
             rowType: XLFormRowDescriptorTypeEmail, title: NSLocalizedString("Email"))
         row.cellConfig.setObject(UIScheme.mainThemeColor, forKey: "textLabel.textColor")
         row.cellConfig.setObject(UIScheme.mainThemeColor, forKey: "tintColor")
+        row.addValidator(XLFormRegexValidator(msg: NSLocalizedString("Please enter a valid email", comment: "Email validation"), regex: "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"))
         return row
     }()
     
@@ -407,10 +408,6 @@ final class EditProfileViewController: BaseAddItemViewController, UserProfileAva
         
         trackEventToAnalytics(AnalyticCategories.profile, action: AnalyticActios.editDone, label: NSLocalizedString("Save"))
         
-        guard isFieldsValid() else {
-            return
-        }
-        
         let validationErrors : Array<NSError> = self.formValidationErrors() as! Array<NSError>
         if (validationErrors.count > 0){
             self.showFormValidationError(validationErrors.first)
@@ -457,28 +454,6 @@ final class EditProfileViewController: BaseAddItemViewController, UserProfileAva
                 }
             }
         }
-    }
-    
-    // MARK: - Fileds vaalidatios
-    private func isFieldsValid() -> Bool {
-        let values = formValues()
-        guard let email = values[Tags.Email.rawValue] as? String else {
-            return true
-        }
-        
-        
-        let validationRules: [StringValidation.ValidationRule] = [
-            (email, StringValidation.sequence([StringValidation.required(),StringValidation.email()]))]
-        
-        return validateInput(validationRules)
-    }
-    
-    private func validateInput(validationRules: [StringValidation.ValidationRule]) -> Bool {
-        if let validationResult = StringValidation.validate(validationRules) {
-            showWarning(validationResult.error.localizedDescription)
-            return false
-        }
-        return true
     }
     
     // MARK: XLFormViewController
