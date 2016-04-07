@@ -150,6 +150,10 @@ struct Storyboards {
             return self.storyboard.instantiateViewControllerWithIdentifier("PeopleNavigationController") as! UINavigationController
         }
 
+        static func instantiatePeopleViewController() -> PeopleContainerViewController {
+            return self.storyboard.instantiateViewControllerWithIdentifier("PeopleViewController") as! PeopleContainerViewController
+        }
+
         static func instantiateUserProfileViewController() -> UserProfileViewController {
             return self.storyboard.instantiateViewControllerWithIdentifier("UserProfileViewController") as! UserProfileViewController
         }
@@ -615,6 +619,39 @@ extension SidebarViewController {
 }
 
 //MARK: - MessagesListViewController
+extension UIStoryboardSegue {
+    func selection() -> MessagesListViewController.Segue? {
+        if let identifier = self.identifier {
+            return MessagesListViewController.Segue(rawValue: identifier)
+        }
+        return nil
+    }
+}
+
+extension MessagesListViewController { 
+
+    enum Segue: String, CustomStringConvertible, SegueProtocol {
+        case newMessage = "newMessage"
+
+        var kind: SegueKind? {
+            switch (self) {
+            case newMessage:
+                return SegueKind(rawValue: "show")
+            }
+        }
+
+        var destination: UIViewController.Type? {
+            switch (self) {
+            case newMessage:
+                return CreateConversationContainerViewController.self
+            }
+        }
+
+        var identifier: String? { return self.description } 
+        var description: String { return self.rawValue }
+    }
+
+}
 
 //MARK: - CreateConversationContainerViewController
 extension CreateConversationContainerViewController: IdentifiableProtocol { 
@@ -641,46 +678,6 @@ extension BrowseCommunityViewController: IdentifiableProtocol {
 }
 
 extension BrowseCommunityViewController { 
-
-    enum Segue: String, CustomStringConvertible, SegueProtocol {
-        case showVolunteerDetailsViewController = "showVolunteerDetailsViewController"
-
-        var kind: SegueKind? {
-            switch (self) {
-            case showVolunteerDetailsViewController:
-                return SegueKind(rawValue: "show")
-            }
-        }
-
-        var destination: UIViewController.Type? {
-            switch (self) {
-            case showVolunteerDetailsViewController:
-                return VolunteerDetailsViewController.self
-            }
-        }
-
-        var identifier: String? { return self.description } 
-        var description: String { return self.rawValue }
-    }
-
-}
-//
-////MARK: - BrowseVolunteerViewController
-//extension UIStoryboardSegue {
-//    func selection() -> BrowseVolunteerViewController.Segue? {
-//        if let identifier = self.identifier {
-//            return BrowseVolunteerViewController.Segue(rawValue: identifier)
-//        }
-//        return nil
-//    }
-//}
-//
-//extension BrowseVolunteerViewController: IdentifiableProtocol { 
-//    var storyboardIdentifier: String? { return "BrowseVolunteerViewController" }
-//    static var storyboardIdentifier: String? { return "BrowseVolunteerViewController" }
-//}
-
-extension BrowseVolunteerViewController { 
 
     enum Segue: String, CustomStringConvertible, SegueProtocol {
         case showVolunteerDetailsViewController = "showVolunteerDetailsViewController"
@@ -1240,6 +1237,46 @@ extension BrowseViewController {
                 return PromotionDetailsViewController.self
             case ShowPost:
                 return PostViewController.self
+            }
+        }
+
+        var identifier: String? { return self.description } 
+        var description: String { return self.rawValue }
+    }
+
+}
+
+//MARK: - PeopleContainerViewController
+extension UIStoryboardSegue {
+    func selection() -> PeopleContainerViewController.Segue? {
+        if let identifier = self.identifier {
+            return PeopleContainerViewController.Segue(rawValue: identifier)
+        }
+        return nil
+    }
+}
+
+extension PeopleContainerViewController: IdentifiableProtocol { 
+    var storyboardIdentifier: String? { return "PeopleViewController" }
+    static var storyboardIdentifier: String? { return "PeopleViewController" }
+}
+
+extension PeopleContainerViewController { 
+
+    enum Segue: String, CustomStringConvertible, SegueProtocol {
+        case ShowUserProfile = "ShowUserProfile"
+
+        var kind: SegueKind? {
+            switch (self) {
+            case ShowUserProfile:
+                return SegueKind(rawValue: "show")
+            }
+        }
+
+        var destination: UIViewController.Type? {
+            switch (self) {
+            case ShowUserProfile:
+                return UserProfileViewController.self
             }
         }
 

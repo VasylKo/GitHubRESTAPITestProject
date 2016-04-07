@@ -183,6 +183,7 @@ extension BomaHotelsDetailsViewController: BomaHotelsDetailsActionConsumer {
             }
             return
         case .Buy:
+            trackEventToAnalytics(AnalyticCategories.bomaHotels, action: AnalyticActios.bookingClicked, label: bomaHotel?.name ?? NSLocalizedString("Unknown hotel"))
             if let bookingURL = self.bomaHotel?.bookingURL {
                 OpenApplication.Safari(with: bookingURL)
             }

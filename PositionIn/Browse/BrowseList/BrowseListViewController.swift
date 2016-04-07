@@ -22,9 +22,9 @@ final class BrowseListViewController: UIViewController, BrowseActionProducer, Br
         didSet {
             switch browseMode {
             case .ForYou:
-                trackGoogleAnalyticsEvent("Main", action: "Click", label: "For You")
+                trackEventToAnalytics("Main", action: "Click", label: "For You")
             case .New:
-                trackGoogleAnalyticsEvent("Main", action: "Click", label: "New")
+                trackEventToAnalytics("Main", action: "Click", label: "New")
             }
         }
     }

@@ -30,6 +30,8 @@ class CreateCommunityConversationViewController: CreateConversationViewControlle
             return UserInfoTableViewCellModel(userInfo: userInfo)
         }
         
+        trackEventToAnalytics(AnalyticCategories.messages, action: AnalyticActios.clickNewCommunities, value: NSNumber(integer: communities.count))
+        
         self.tableView.hidden = communities.count == 0
         self.followLabel.hidden = communities.count != 0
         self.dataSource.setUserList(communities)

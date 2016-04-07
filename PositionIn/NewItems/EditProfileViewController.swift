@@ -380,7 +380,7 @@ final class EditProfileViewController: BaseAddItemViewController, UserProfileAva
             phoneVerificationCode: self.validationCode,
             firstName: values[Tags.FirstName.rawValue] as? String,
             lastName: values[Tags.LastName.rawValue] as? String, email: values[Tags.Email.rawValue] as? String).onSuccess(callback: {[weak self] userProfile in
-                trackGoogleAnalyticsEvent("Status", action: "Click", label: "Auth Success")
+                trackEventToAnalytics("Status", action: "Click", label: "Auth Success")
                 Log.info?.message("Registration done")
                 
                 
@@ -396,7 +396,7 @@ final class EditProfileViewController: BaseAddItemViewController, UserProfileAva
                 }).onSuccess(callback: { _ in
                     api().pushesRegistration()
                 }).onFailure(callback: {_ in
-                    trackGoogleAnalyticsEvent("Status", action: "Click", label: "Auth Fail")
+                    trackEventToAnalytics("Status", action: "Click", label: "Auth Fail")
                 })
     }
 
@@ -404,6 +404,8 @@ final class EditProfileViewController: BaseAddItemViewController, UserProfileAva
         if view.userInteractionEnabled == false {
             return
         }
+        
+        trackEventToAnalytics(AnalyticCategories.profile, action: AnalyticActios.editDone, label: NSLocalizedString("Save"))
         
         guard isFieldsValid() else {
             return

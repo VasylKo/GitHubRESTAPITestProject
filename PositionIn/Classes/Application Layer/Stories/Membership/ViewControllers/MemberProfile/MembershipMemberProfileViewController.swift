@@ -177,7 +177,7 @@ class MembershipMemberProfileViewController : XLFormViewController, MembershipMe
             firstName: values[Tags.FirstName.rawValue] as? String,
             lastName: values[Tags.LastName.rawValue] as? String, email: values[Tags.Email.rawValue] as? String).onSuccess(callback: {[weak self] userProfile in
             
-                trackGoogleAnalyticsEvent("Auth", action: "UserSignUp")
+                trackEventToAnalytics(AnalyticCategories.auth, action: AnalyticActios.userSignUp)
                 Log.info?.message("Registration done")
                 
                 if let avatarUpload = self?.uploadAssets(self?.headerView.asset) {
@@ -193,7 +193,7 @@ class MembershipMemberProfileViewController : XLFormViewController, MembershipMe
             }).onSuccess(callback: { _ in
                 api().pushesRegistration()
             }).onFailure(callback: {_ in
-                trackGoogleAnalyticsEvent("Auth", action: "UserSignUpFail")
+                trackEventToAnalytics(AnalyticCategories.auth, action: AnalyticActios.userSignUpFail)
             })
     }
     
