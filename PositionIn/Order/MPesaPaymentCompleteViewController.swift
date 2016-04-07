@@ -9,19 +9,25 @@
 import UIKit
 import XLForm
 
+protocol MPesaPaymentCompleteDelegate {
+    func closeButtonTapped(controller: MPesaPaymentCompleteViewController)
+}
+
 class MPesaPaymentCompleteViewController: XLFormViewController {
 
-    var showSuccess:Bool = false
     private var quantity: Int?
     private var product: Product?
     private var headerView : MPesaIndicatorView!
     private var transactionId = ""
+    private var cardItem: CardItem = .MPesa
+    private var delegate: MPesaPaymentCompleteDelegate?
     
     //MARK: Initializers
-
-    init(quantity: Int, product: Product) {
+    init(quantity: Int, product: Product, cardItem: CardItem = .MPesa, delegate: MPesaPaymentCompleteDelegate? = nil) {
         self.quantity = quantity
         self.product = product
+        self.cardItem = cardItem
+        self.delegate = delegate
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -37,24 +43,23 @@ class MPesaPaymentCompleteViewController: XLFormViewController {
         self.setupInterface()
         self.initializeForm()
         
-        if let quantity = self.quantity, let price = product?.price, let objId = product?.objectId where !self.showSuccess  {
-            api().productCheckoutMpesa(NSNumber(float: price),
-                nonce: "", itemId: objId,
-                quantity: NSNumber(integer: quantity)).onSuccess {
-                [weak self] transactionId in
-                self?.transactionId = transactionId
-                self?.pollStatus()
-                }.onFailure(callback: { [weak self] _ in
-                    self?.headerView.showFailure()
-                })
-        }
-        
-        if (showSuccess) {
-            self.headerView.showSuccess()
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (Int64)(1 * NSEC_PER_SEC)), dispatch_get_main_queue()) {
-                appDelegate().sidebarViewController?.executeAction(SidebarViewController.defaultAction)
-                self.dismissViewControllerAnimated(true, completion: nil)
+        switch cardItem {
+        case .MPesa:
+            if let quantity = self.quantity, let price = product?.price, let objId = product?.objectId  {
+                api().productCheckoutMpesa(NSNumber(float: price),
+                    nonce: "", itemId: objId,
+                    quantity: NSNumber(integer: quantity)).onSuccess {
+                        [weak self] transactionId in
+                        self?.transactionId = transactionId
+                        self?.pollStatus()
+                    }.onFailure(callback: { [weak self] _ in
+                        self?.headerView.showFailure()
+                        })
             }
+        
+        case .CreditDebitCard:
+            self.headerView.showSuccess()
+            customizeNavigationBar()
         }
     }
     
@@ -98,5 +103,15 @@ class MPesaPaymentCompleteViewController: XLFormViewController {
         donateToSection.addFormRow(donateProjectRow)
         
         self.form = form
+    }
+    
+    private func customizeNavigationBar() {
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Close", style: .Done, target: self, action: "closeButtonPressed:")
+        navigationItem.leftBarButtonItem?.tintColor = UIColor.whiteColor()
+    }
+    
+    func closeButtonPressed(sender: AnyObject) {
+        delegate?.closeButtonTapped(self)
+        dismissViewControllerAnimated(true, completion: nil)
     }
 }
