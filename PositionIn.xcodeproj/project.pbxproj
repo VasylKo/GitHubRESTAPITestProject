@@ -59,8 +59,8 @@
 		1A5647F5D0FCC84FA5BF21FF /* MpesaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A56419027EC5956741AF471 /* MpesaViewController.swift */; };
 		1A564902D955532DE5B29A65 /* ErrorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A56438E04F9AD6CBDA75AC9 /* ErrorCell.swift */; };
 		1A56491DAEFA315F9DB47400 /* PaymentReponseDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A5640E770D4CB872B2E4605 /* PaymentReponseDelegate.swift */; };
-		23F6AF831CA1DBAD00CDD2FF /* PeopleFollowingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 23F6AF821CA1DBAD00CDD2FF /* PeopleFollowingViewController.xib */; };
-		23F6AF851CA2889800CDD2FF /* PeopleExploreViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 23F6AF841CA2889800CDD2FF /* PeopleExploreViewController.xib */; };
+		23F6AF831CA1DBAD00CDD2FF /* PositionIn.PeopleFollowingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 23F6AF821CA1DBAD00CDD2FF /* PositionIn.PeopleFollowingViewController.xib */; };
+		23F6AF851CA2889800CDD2FF /* PositionIn.PeopleExploreViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 23F6AF841CA2889800CDD2FF /* PositionIn.PeopleExploreViewController.xib */; };
 		23F6AF871CA28BB000CDD2FF /* Fetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23F6AF861CA28BB000CDD2FF /* Fetcher.swift */; };
 		23F6AF891CA28EFA00CDD2FF /* FetchViewLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23F6AF881CA28EFA00CDD2FF /* FetchViewLogic.swift */; };
 		240A9B9C1B9CCDA4007C77E3 /* PositionIn.CommunityStatsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 240A9B9B1B9CCDA4007C77E3 /* PositionIn.CommunityStatsCell.xib */; };
@@ -616,8 +616,8 @@
 		1A56419027EC5956741AF471 /* MpesaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MpesaViewController.swift; sourceTree = "<group>"; };
 		1A56438E04F9AD6CBDA75AC9 /* ErrorCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorCell.swift; sourceTree = "<group>"; };
 		1A564EEB40AD56FD2C113F2A /* BraintreePaymentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BraintreePaymentViewController.swift; sourceTree = "<group>"; };
-		23F6AF821CA1DBAD00CDD2FF /* PeopleFollowingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PeopleFollowingViewController.xib; sourceTree = "<group>"; };
-		23F6AF841CA2889800CDD2FF /* PeopleExploreViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PeopleExploreViewController.xib; sourceTree = "<group>"; };
+		23F6AF821CA1DBAD00CDD2FF /* PositionIn.PeopleFollowingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.PeopleFollowingViewController.xib; sourceTree = "<group>"; };
+		23F6AF841CA2889800CDD2FF /* PositionIn.PeopleExploreViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.PeopleExploreViewController.xib; sourceTree = "<group>"; };
 		23F6AF861CA28BB000CDD2FF /* Fetcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Fetcher.swift; sourceTree = "<group>"; };
 		23F6AF881CA28EFA00CDD2FF /* FetchViewLogic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchViewLogic.swift; sourceTree = "<group>"; };
 		240A9B9B1B9CCDA4007C77E3 /* PositionIn.CommunityStatsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.CommunityStatsCell.xib; sourceTree = "<group>"; };
@@ -2258,9 +2258,9 @@
 			children = (
 				CDC2BE111CA191DB0049C971 /* PeopleContainerViewController.swift */,
 				CD7C07A51CA1A7B10075BC5B /* PeopleFollowingViewController.swift */,
-				23F6AF821CA1DBAD00CDD2FF /* PeopleFollowingViewController.xib */,
+				23F6AF821CA1DBAD00CDD2FF /* PositionIn.PeopleFollowingViewController.xib */,
 				CD7C07A71CA1A7C90075BC5B /* PeopleExploreViewControler.swift */,
-				23F6AF841CA2889800CDD2FF /* PeopleExploreViewController.xib */,
+				23F6AF841CA2889800CDD2FF /* PositionIn.PeopleExploreViewController.xib */,
 				E6C9522B1BA1BB0E0032254F /* PeopleListCell.swift */,
 				E6C9522D1BA1BB470032254F /* PositionIn.PeopleListCell.xib */,
 				23F6AF861CA28BB000CDD2FF /* Fetcher.swift */,
@@ -3911,10 +3911,10 @@
 					};
 					E64DC3491B4E53C90011D37C = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = WVE53RRC7C;
+						DevelopmentTeam = KDN5UXRB6G;
 						SystemCapabilities = {
 							com.apple.Push = {
-								enabled = 1;
+								enabled = 0;
 							};
 						};
 					};
@@ -4028,7 +4028,7 @@
 				D12EB28E1C96E62400718E57 /* FeauteredFeedTableViewCell.xib in Resources */,
 				E6BEF1CC1B9C5E7200511B46 /* PositionIn.PostImageCell.xib in Resources */,
 				CD076E891C7497A8005C04C2 /* PositionIn.NewsListViewController.xib in Resources */,
-				23F6AF831CA1DBAD00CDD2FF /* PeopleFollowingViewController.xib in Resources */,
+				23F6AF831CA1DBAD00CDD2FF /* PositionIn.PeopleFollowingViewController.xib in Resources */,
 				E689F07D1B6B976100597587 /* PositionIn.ProductInventoryCell.xib in Resources */,
 				E6BEF1E61B9C83F200511B46 /* PositionIn.CommunityActionCell.xib in Resources */,
 				CDEDD9741C45242400396594 /* PositionIn.VolunteerSearchViewController.xib in Resources */,
@@ -4045,7 +4045,7 @@
 				D1B780CF1C0F51A800EF5825 /* DonateCell.xib in Resources */,
 				D12EB2861C96E5DF00718E57 /* FeedListViewController.xib in Resources */,
 				E69421021B666A1600F34F06 /* PositionIn.ActionCell.xib in Resources */,
-				23F6AF851CA2889800CDD2FF /* PeopleExploreViewController.xib in Resources */,
+				23F6AF851CA2889800CDD2FF /* PositionIn.PeopleExploreViewController.xib in Resources */,
 				E6F309421BA8200600C9420C /* PositionIn.PickPhotoView.xib in Resources */,
 				E64DC3551B4E53C90011D37C /* Main.storyboard in Resources */,
 				D1FD853D1C1EE8D800C2E87B /* PositionIn.PromotionDetailsViewController.xib in Resources */,
@@ -4623,8 +4623,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Media Applications ltd";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Kenya Red Cross (87SW7N9JU2)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4694,9 +4694,9 @@
 					"-ObjC",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -D \"PROD_ENV\"";
-				PRODUCT_BUNDLE_IDENTIFIER = com.krcs.members;
+				PRODUCT_BUNDLE_IDENTIFIER = com.risingapp.positionin;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "106a95c1-832d-4c02-b3e4-3c00b62ec2be";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "PositionIn/PositionIn-Bridging-Header.h";
 			};
 			name = ProdRelease2;
@@ -4818,8 +4818,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4889,7 +4889,7 @@
 					"-ObjC",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -D DEBUG -D \"STAGING_COPY_ENV\"";
-				PRODUCT_BUNDLE_IDENTIFIER = com.positionin.dev01;
+				PRODUCT_BUNDLE_IDENTIFIER = com.risingapp.positionin;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				STRIP_INSTALLED_PRODUCT = NO;
@@ -5019,8 +5019,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Media Applications ltd";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Media Applications ltd";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -5090,9 +5090,9 @@
 					"-ObjC",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -D DEBUG -D \"STAGING_COPY_ENV\"";
-				PRODUCT_BUNDLE_IDENTIFIER = com.positionin.dev01;
+				PRODUCT_BUNDLE_IDENTIFIER = com.risingapp.positionin;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "28e36433-baa3-48c1-ab40-ea63a0d51d51";
+				PROVISIONING_PROFILE = "";
 				STRIP_INSTALLED_PRODUCT = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "PositionIn/PositionIn-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -5270,8 +5270,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Shulamit Salant (4ZRAKT5AF5)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Shulamit Salant (4ZRAKT5AF5)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -5341,9 +5341,9 @@
 					"-ObjC",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -D DEBUG";
-				PRODUCT_BUNDLE_IDENTIFIER = com.positionin.dev01;
+				PRODUCT_BUNDLE_IDENTIFIER = com.risingapp.positionin;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "b80b49a5-97f8-4b09-9b74-b633ea091187";
+				PROVISIONING_PROFILE = "";
 				STRIP_INSTALLED_PRODUCT = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "PositionIn/PositionIn-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -5356,8 +5356,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Media Applications ltd";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Media Applications ltd";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -5427,9 +5427,9 @@
 					"\"XLForm\"",
 					"-ObjC",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.positionin.dev01;
+				PRODUCT_BUNDLE_IDENTIFIER = com.risingapp.positionin;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "b309cda0-57e8-4186-9226-7b24f18da37f";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "PositionIn/PositionIn-Bridging-Header.h";
 			};
 			name = DevRelease;
@@ -5584,7 +5584,7 @@
 					"-ObjC",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -D DEBUG -D \"STAGING_ENV\"";
-				PRODUCT_BUNDLE_IDENTIFIER = com.positionin.dev01;
+				PRODUCT_BUNDLE_IDENTIFIER = com.risingapp.positionin;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				STRIP_INSTALLED_PRODUCT = NO;
@@ -5705,8 +5705,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Media Applications ltd";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Media Applications ltd";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -5776,9 +5776,9 @@
 					"-ObjC",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -D \"STAGING_ENV\"";
-				PRODUCT_BUNDLE_IDENTIFIER = com.positionin.dev01;
+				PRODUCT_BUNDLE_IDENTIFIER = com.risingapp.positionin;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "28e36433-baa3-48c1-ab40-ea63a0d51d51";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "PositionIn/PositionIn-Bridging-Header.h";
 			};
 			name = StagingRelease;
@@ -5970,7 +5970,7 @@
 					"-ObjC",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -D DEBUG -D \"PROD_ENV\"";
-				PRODUCT_BUNDLE_IDENTIFIER = com.positionin.dev01;
+				PRODUCT_BUNDLE_IDENTIFIER = com.risingapp.positionin;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "PositionIn/PositionIn-Bridging-Header.h";
@@ -6090,8 +6090,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Media Applications ltd";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Media Applications ltd";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -6161,9 +6161,9 @@
 					"-ObjC",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -D \"PROD_ENV\"";
-				PRODUCT_BUNDLE_IDENTIFIER = com.connectik.members;
+				PRODUCT_BUNDLE_IDENTIFIER = com.risingapp.positionin;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "9a031cc8-1c31-4a42-bd96-a2c75c3e97a6";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "PositionIn/PositionIn-Bridging-Header.h";
 			};
 			name = ProdRelease;

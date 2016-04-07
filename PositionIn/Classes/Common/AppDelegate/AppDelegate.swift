@@ -36,7 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     override init() {
         #if DEBUG
-        Log.enable(minimumSeverity: .Verbose, debugMode: true)
+        //Log.enable(minimumSeverity: .Verbose, debugMode: true)
         #else
         Log.enable(.Info, synchronousMode: false)
         #endif
@@ -116,9 +116,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIApplication.sharedApplication().registerForRemoteNotifications()
         
         #if DEBUG
-            Fabric.with([Crashlytics.self])
+         //   Fabric.with([Crashlytics.self])
         #endif
-        NewRelicController.start()
+       // NewRelicController.start()
         
         let notificationSettings = LNNotificationAppSettings()
         notificationSettings.alertStyle = .Banner
