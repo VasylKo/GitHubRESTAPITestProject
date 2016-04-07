@@ -244,7 +244,7 @@ extension BrowseListViewController {
                     
                 }
                 else {
-                    let height: CGFloat = showCompactCells ? 80.0 : 120.0
+                    let height: CGFloat = showCompactCells ? 75.0 : 100.0
                     return height
                 }
             }
