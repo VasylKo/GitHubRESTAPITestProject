@@ -22,12 +22,12 @@ final class MarketDetailsViewController: UIViewController {
         title = NSLocalizedString("Market", comment: "Market")
         dataSource.items = productAcionItems()
         dataSource.configureTable(actionTableView)
-        reloadData()
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         trackScreenToAnalytics(AnalyticsLabels.marketItemDetails)
+        reloadData()
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

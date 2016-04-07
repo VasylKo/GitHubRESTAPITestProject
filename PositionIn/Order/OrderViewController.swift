@@ -203,9 +203,7 @@ extension OrderViewController: BTDropInViewControllerDelegate {
     
     
     private func showBrainTreePaymentSuccessViewController() {
-        let successPaymentController = MPesaPaymentCompleteViewController(quantity: quantity, product: product!)
-        successPaymentController.showSuccess = true
-        successPaymentController.delegate = self
+        let successPaymentController = MPesaPaymentCompleteViewController(quantity: quantity, product: product!, cardItem: .CreditDebitCard, delegate: self)
         
         let navigationController = UINavigationController(rootViewController: successPaymentController)
         presentViewController(navigationController, animated: true, completion: nil)

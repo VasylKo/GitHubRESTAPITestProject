@@ -15,18 +15,19 @@ protocol MPesaPaymentCompleteDelegate {
 
 class MPesaPaymentCompleteViewController: XLFormViewController {
 
-    var showSuccess:Bool = false
-    var delegate: MPesaPaymentCompleteDelegate?
     private var quantity: Int?
     private var product: Product?
     private var headerView : MPesaIndicatorView!
     private var transactionId = ""
+    private var cardItem: CardItem = .MPesa
+    private var delegate: MPesaPaymentCompleteDelegate?
     
     //MARK: Initializers
-
-    init(quantity: Int, product: Product) {
+    init(quantity: Int, product: Product, cardItem: CardItem = .MPesa, delegate: MPesaPaymentCompleteDelegate? = nil) {
         self.quantity = quantity
         self.product = product
+        self.cardItem = cardItem
+        self.delegate = delegate
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -42,19 +43,21 @@ class MPesaPaymentCompleteViewController: XLFormViewController {
         self.setupInterface()
         self.initializeForm()
         
-        if let quantity = self.quantity, let price = product?.price, let objId = product?.objectId where !self.showSuccess  {
-            api().productCheckoutMpesa(NSNumber(float: price),
-                nonce: "", itemId: objId,
-                quantity: NSNumber(integer: quantity)).onSuccess {
-                [weak self] transactionId in
-                self?.transactionId = transactionId
-                self?.pollStatus()
-                }.onFailure(callback: { [weak self] _ in
-                    self?.headerView.showFailure()
-                })
-        }
+        switch cardItem {
+        case .MPesa:
+            if let quantity = self.quantity, let price = product?.price, let objId = product?.objectId  {
+                api().productCheckoutMpesa(NSNumber(float: price),
+                    nonce: "", itemId: objId,
+                    quantity: NSNumber(integer: quantity)).onSuccess {
+                        [weak self] transactionId in
+                        self?.transactionId = transactionId
+                        self?.pollStatus()
+                    }.onFailure(callback: { [weak self] _ in
+                        self?.headerView.showFailure()
+                        })
+            }
         
-        if (showSuccess) {
+        case .CreditDebitCard:
             self.headerView.showSuccess()
             customizeNavigationBar()
         }
