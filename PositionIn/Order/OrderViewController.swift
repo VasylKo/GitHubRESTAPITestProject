@@ -189,10 +189,7 @@ extension OrderViewController: BTDropInViewControllerDelegate {
                         if(err == "") {
                             self?.dismissPaymentsController()
                             self?.finishedSuccessfully = true
-                            
-                            let controller = MPesaPaymentCompleteViewController(quantity: self!.quantity, product: (self?.product!)!)
-                            controller.showSuccess = true
-                            self?.navigationController?.pushViewController(controller, animated: true)
+                            self?.showBrainTreePaymentSuccessViewController()
                         }
                 }
             }
@@ -202,5 +199,22 @@ extension OrderViewController: BTDropInViewControllerDelegate {
 
     func dropInViewControllerDidCancel(viewController: BTDropInViewController) {
         dismissPaymentsController()
+    }
+    
+    
+    private func showBrainTreePaymentSuccessViewController() {
+        let successPaymentController = MPesaPaymentCompleteViewController(quantity: quantity, product: product!)
+        successPaymentController.showSuccess = true
+        successPaymentController.delegate = self
+        
+        let navigationController = UINavigationController(rootViewController: successPaymentController)
+        presentViewController(navigationController, animated: true, completion: nil)
+    }
+}
+
+extension OrderViewController: MPesaPaymentCompleteDelegate {
+    func closeButtonTapped(controller: MPesaPaymentCompleteViewController) {
+        //Go back to product details
+        navigationController?.popViewControllerAnimated(false)
     }
 }

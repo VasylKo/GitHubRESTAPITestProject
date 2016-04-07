@@ -9,9 +9,14 @@
 import UIKit
 import XLForm
 
+protocol MPesaPaymentCompleteDelegate {
+    func closeButtonTapped(controller: MPesaPaymentCompleteViewController)
+}
+
 class MPesaPaymentCompleteViewController: XLFormViewController {
 
     var showSuccess:Bool = false
+    var delegate: MPesaPaymentCompleteDelegate?
     private var quantity: Int?
     private var product: Product?
     private var headerView : MPesaIndicatorView!
@@ -51,10 +56,7 @@ class MPesaPaymentCompleteViewController: XLFormViewController {
         
         if (showSuccess) {
             self.headerView.showSuccess()
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (Int64)(1 * NSEC_PER_SEC)), dispatch_get_main_queue()) {
-                appDelegate().sidebarViewController?.executeAction(SidebarViewController.defaultAction)
-                self.dismissViewControllerAnimated(true, completion: nil)
-            }
+            customizeNavigationBar()
         }
     }
     
@@ -98,5 +100,15 @@ class MPesaPaymentCompleteViewController: XLFormViewController {
         donateToSection.addFormRow(donateProjectRow)
         
         self.form = form
+    }
+    
+    private func customizeNavigationBar() {
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Close", style: .Done, target: self, action: "closeButtonPressed:")
+        navigationItem.leftBarButtonItem?.tintColor = UIColor.whiteColor()
+    }
+    
+    func closeButtonPressed(sender: AnyObject) {
+        delegate?.closeButtonTapped(self)
+        dismissViewControllerAnimated(true, completion: nil)
     }
 }
