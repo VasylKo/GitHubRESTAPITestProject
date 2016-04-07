@@ -36,7 +36,7 @@ enum CardItem: Int {
         case .MPesa:
             return "Enter payment details and complete your purchase"
         case .CreditDebitCard:
-            return "Visa, Mastercard, American Express"
+            return "Visa, Mastercard"
         }
     }
     
