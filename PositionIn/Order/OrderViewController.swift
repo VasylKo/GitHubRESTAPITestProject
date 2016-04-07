@@ -142,11 +142,15 @@ class OrderViewController: UITableViewController, SelectPaymentMethodControllerD
                     g: 187,
                     b: 182)]
                 dropInViewController.title = NSLocalizedString("Payment Method", comment: "braintree title")
+                
+                
                 let summaryFormat = NSLocalizedString("%@ %@", comment: "Order: Summary format")
-                dropInViewController.paymentRequest?.summaryTitle = String(format: summaryFormat, quantityString, product?.name ?? "")
+                let callToActionTextFormat = NSLocalizedString("%@ - %@", comment: "Order: Summary format")
+                dropInViewController.paymentRequest?.summaryTitle = product?.name ?? ""
                 dropInViewController.paymentRequest?.displayAmount = totalLabel.text ?? ""
-                dropInViewController.paymentRequest?.summaryDescription = product?.text
-                dropInViewController.paymentRequest?.callToActionText = NSLocalizedString("Checkout", comment: "Order: Checkout")
+                dropInViewController.paymentRequest?.summaryDescription = String(format: summaryFormat, NSLocalizedString("Quantity:"), String(quantity))
+                dropInViewController.paymentRequest?.callToActionText = String(format: callToActionTextFormat, totalLabel.text ?? "", NSLocalizedString("Pay"))
+
                 let navigationController = UINavigationController(rootViewController: dropInViewController)
                 navigationController.view.tintColor = UIScheme.mainThemeColor
                 presentViewController(navigationController, animated: true, completion: nil)
