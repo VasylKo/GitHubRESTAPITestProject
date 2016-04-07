@@ -24,6 +24,7 @@ target 'PositionIn' do
   pod 'FBSDKLoginKit', '~> 4.7'
   pod 'Box', '~> 2.0'
   pod 'NewRelicAgent', '~> 5.3.6'
+  pod 'CHCSVParser', '~> 2.1.0'
   pod 'LNNotificationsUI', :git => 'https://github.com/LeoNatan/LNNotificationsUI'
 
   post_install do |installer|
