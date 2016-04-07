@@ -81,7 +81,7 @@ final class SearchViewController: UIViewController {
         locationSearchTextField.leftViewMode = .Always
         locationSearchTextField.backgroundColor = UIColor.bt_colorWithBytesR(0, g: 0, b: 0, a: 102)
         
-        trackGoogleAnalyticsEvent("Search", action: "<\(SearchFilter.currentFilter.coordinates?.latitude, SearchFilter.currentFilter.coordinates?.latitude)>", label: "Search")
+        trackEventToAnalytics("Search", action: "<\(SearchFilter.currentFilter.coordinates?.latitude, SearchFilter.currentFilter.coordinates?.latitude)>", label: "Search")
     }
     
     @IBAction func cancelButtonPressed(sender: AnyObject) {

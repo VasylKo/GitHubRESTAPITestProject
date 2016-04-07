@@ -34,6 +34,19 @@ final class CommunityViewController: DisplayModeViewController {
 
     }
     
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        switch controllerType {
+        case .Unknown:
+            break;
+        case .Community:
+            trackScreenToAnalytics(AnalyticsLabels.communityPostsList)
+        case .Volunteer:
+            trackScreenToAnalytics(AnalyticsLabels.volunteerPostsList)
+        }
+    }
+    
     @IBAction func prepareForUnwind(segue: UIStoryboardSegue) {
         
     }

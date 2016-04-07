@@ -20,11 +20,17 @@ class DonateViewController: XLFormViewController, PaymentReponseDelegate {
         case Error = "Error"
     }
     
+    enum DonationType: Int {
+        case Unknown = 0
+        case Project, EmergencyAlert, Donation, FeedEmergencyAlert
+    }
+    
     var product: Product?
-    var donationType: HomeItem = .Donate
+    var donationType: DonationType = .Donation
     
     private var amount:Int = 0;
-    private var paymentType:String?
+    private var paymentType: String?
+    private var paymentTypeName: String?
     private var finishedSuccessfully = false
     private var errorSection:XLFormSectionDescriptor?
     private weak var confirmRowDescriptor: XLFormRowDescriptor?
@@ -110,6 +116,7 @@ class DonateViewController: XLFormViewController, PaymentReponseDelegate {
         donationRow.onChangeBlock =  { [weak self] oldValue, newValue, _ in
             if let value = newValue as? NSNumber {
                 self?.amount = Int(value)
+                self?.sendDonationEventToAnalytics(action: AnalyticActios.setDonation, label: "")
             } else {
                 self?.amount = 0
             }
@@ -131,6 +138,8 @@ class DonateViewController: XLFormViewController, PaymentReponseDelegate {
         paymentRow.onChangeBlock = { [weak self] oldValue, newValue, _ in
             if let box: Box<CardItem> = newValue as? Box {
                 self?.paymentType = CardItem.cardPayment(box.value)
+                self?.paymentTypeName = CardItem.cardName(box.value)
+                self?.sendDonationEventToAnalytics(action: AnalyticActios.selectPaymentMethod)
             } else {
                 self?.paymentType = nil
             }
@@ -158,7 +167,7 @@ class DonateViewController: XLFormViewController, PaymentReponseDelegate {
                 return
             }
             
-            self?.sendDonationEventToAnalytics()
+            self?.sendDonationEventToAnalytics(action: AnalyticActios.proceedToPay)
             
             self?.performSegueWithIdentifier("Show\((self?.paymentType)!)", sender: self!)
             self?.setError(true, error: nil)
@@ -193,8 +202,10 @@ class DonateViewController: XLFormViewController, PaymentReponseDelegate {
         if(success) {
             finishedSuccessfully = true
             setError(true, error: nil)
+            sendDonationEventToAnalytics(action: AnalyticActios.paymentOutcome, label: NSLocalizedString("Payment Completed"))
         } else {
             setError(false, error: err)
+            sendDonationEventToAnalytics(action: AnalyticActios.paymentOutcome, label: err)
         }
     }
     
@@ -225,16 +236,16 @@ class DonateViewController: XLFormViewController, PaymentReponseDelegate {
     
     //MARK: - Analytic tracking
     
-    private func sendDonationEventToAnalytics() {
+    private func sendDonationEventToAnalytics(action action: String, label: String? = nil) {
         //Send tracking enevt
-        let donationTypeName = donationType.displayString().stringByReplacingOccurrencesOfString(" ", withString: "") ?? "Unknown donation source"
-        let paymentTypeLabel = paymentType ?? "Can't get type"
+        let donationTypeName = AnalyticCategories.labelForDonationType(donationType)
+        let paymentTypeLabel = label ?? paymentTypeName ?? NSLocalizedString("Can't get payment type")
         let paymentAmountNumber = NSNumber(integer: amount ?? 0)
-        trackGoogleAnalyticsEvent(donationTypeName, action: "ProceedToPay", label: paymentTypeLabel, value: paymentAmountNumber)
+        trackEventToAnalytics(donationTypeName, action: action, label: paymentTypeLabel, value: paymentAmountNumber)
     }
     
     private func sendScreenNameToAnalytics() {
-       trackScreenToAnalytics(AnalyticsLabels.labelForHomeItem(donationType, suffix: "Donate"))
+       trackScreenToAnalytics(AnalyticsLabels.labelForDonationType(donationType))
     }
     
     

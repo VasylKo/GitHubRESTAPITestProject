@@ -182,11 +182,14 @@ class MembershipConfirmDetailsViewController : XLFormViewController {
     @objc func nextButtonTouched() {
         navigationItem.rightBarButtonItem?.enabled = false
         
+        
+        
         //TODO: add validations
         let validationErrors : Array<NSError> = self.formValidationErrors() as! Array<NSError>
         if (validationErrors.count > 0){
             self.showFormValidationError(validationErrors.first)
             navigationItem.rightBarButtonItem?.enabled = true
+            trackEventToAnalytics(AnalyticCategories.membership, action: AnalyticActios.confirmDetailsNext, label: validationErrors.first?.localizedDescription ?? NSLocalizedString("Unknown error"))
             return
         }
         
@@ -217,6 +220,8 @@ class MembershipConfirmDetailsViewController : XLFormViewController {
             self.router.showPaymentViewController(from: self, with: self.plan)
             navigationItem.rightBarButtonItem?.enabled = true
         }
+        
+        trackEventToAnalytics(AnalyticCategories.membership, action: AnalyticActios.confirmDetailsNext, label: NSLocalizedString("Success"))
 
     }
 }

@@ -22,6 +22,7 @@ class CreateConversationContainerViewController: UIViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.updateChieldViewController(ControllerType.People)
+        trackScreenToAnalytics(AnalyticsLabels.messagesNewChat)
     }
     
     func updateChieldViewController(index: ControllerType) {
@@ -38,6 +39,7 @@ class CreateConversationContainerViewController: UIViewController {
             
             self.contentView.addSubViewOnEntireSize(childController.view)
             currentModeViewController = childController
+            
         }
     }
     

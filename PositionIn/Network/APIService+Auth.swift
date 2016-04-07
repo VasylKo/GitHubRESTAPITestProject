@@ -34,7 +34,7 @@ extension APIService {
             }
             self.defaultErrorHandler?(error)
             
-            trackGoogleAnalyticsEvent("Network", action: "Error", label: error.localizedDescription, value: NSNumber(integer: error.code))
+            trackEventToAnalytics(AnalyticCategories.network, action: AnalyticActios.error, label: error.localizedDescription, value: NSNumber(integer: error.code))
         }
     }
     
@@ -119,7 +119,7 @@ extension APIService {
             return self.refreshToken().map { response in
                 return response.accessToken
                 }.onFailure { error in
-                    trackGoogleAnalyticsEvent("Token", action: "RefreshFailed", label: error.localizedDescription)
+                    trackEventToAnalytics(AnalyticCategories.token, action: AnalyticActios.refreshFailed, label: error.localizedDescription)
             }
         }
     }
@@ -146,13 +146,13 @@ extension APIService {
     //1 - api type for sms validation (duplicate functionality)
     //2 - api type for phone validation call call
     func verifyPhone(phoneNumber: String, type: NSNumber) -> Future<Void, NSError> {
-        trackGoogleAnalyticsEvent("PhoneVerification", action: "PhoneVerificationRequested")
+        trackEventToAnalytics(AnalyticCategories.phoneVerification, action: AnalyticActios.phoneVerificationRequested)
         return verifyPhoneRequest(phoneNumber, type: type)
     }
     
     //Validate Code
     func verifyPhoneCode(phoneNumber: String, code: String) -> Future<Bool, NSError> {
-        trackGoogleAnalyticsEvent("PhoneVerification", action: "CodeVerificationRequested")
+        trackEventToAnalytics(AnalyticCategories.phoneVerification, action: AnalyticActios.codeVerificationRequested)
         return verifyPhoneCodeRequest(phoneNumber, code: code)
     }
     

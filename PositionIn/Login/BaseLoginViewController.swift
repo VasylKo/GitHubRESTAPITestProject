@@ -27,20 +27,20 @@ class BaseLoginViewController: UIViewController {
     
     @IBAction func facebookTouched(sender: AnyObject) {
         
-        trackGoogleAnalyticsEvent("Auth", action: "Click", label: "Login With Facebook")
+        trackEventToAnalytics(AnalyticCategories.auth, action: AnalyticActios.click, label: NSLocalizedString("Login With Facebook"))
         
         FBSDKLoginManager().logInWithReadPermissions(["public_profile"], fromViewController: self,
             handler: { (result:FBSDKLoginManagerLoginResult!, error:NSError!) -> Void in
                 if error != nil {
                     FBSDKLoginManager().logOut()
-                    trackGoogleAnalyticsEvent("Auth", action: "Status", label: "Auth Fail")
+                    trackEventToAnalytics(AnalyticCategories.auth, action: AnalyticActios.status, label: NSLocalizedString("Auth Fail"))
                 } else if result.isCancelled {
                     FBSDKLoginManager().logOut()
-                    trackGoogleAnalyticsEvent("Auth", action: "Status", label: "Auth Fail")
+                    trackEventToAnalytics(AnalyticCategories.auth, action: AnalyticActios.status, label: NSLocalizedString("Auth Fail"))
                 } else {
                     let fbToken = result.token.tokenString
                     api().login(fbToken).onSuccess { [weak self] _ in
-                        trackGoogleAnalyticsEvent("Status", action: "Click", label: "Auth Success")
+                        trackEventToAnalytics(AnalyticCategories.status, action: AnalyticActios.click, label: NSLocalizedString("Auth Success"))
                         Log.info?.message("Logged in")
                         self?.dismissLogin()
                     }

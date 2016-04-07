@@ -179,8 +179,8 @@ class CallAmbulanceViewController: BaseAddItemViewController {
                     
                     //Send analytics event
                     let incidentType = values[Tags.Incedent.rawValue] as? XLFormOptionsObject
-                    let icnidentName = incidentType?.displayText() ?? "Can't get type"
-                    trackGoogleAnalyticsEvent("Ambulance", action: "RequestSent", label: icnidentName)
+                    let icnidentName = incidentType?.displayText() ?? NSLocalizedString("Can't get type")
+                    trackEventToAnalytics(AnalyticCategories.ambulance, action: AnalyticActios.requestSent, label: icnidentName)
                     
                     let controller = Storyboards.Onboarding.instantiateAmbulanceRequestedViewControllerId()
                     controller.ambulanceRequestObjectId = ambulanceRequest.objectId
