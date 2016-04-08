@@ -51,7 +51,7 @@ class MarketPaymentView: XLFormBaseCell {
     override func configure() {
         super.configure()
         //pickUpAvailabilityLabel will be sat from product
-        pickUpAvailabilityLabel.text = ""
+        pickUpAvailabilityLabel.text = " "
     }
     
     override func update() {
