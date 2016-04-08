@@ -18,6 +18,11 @@ class VoiceVerificationViewController: XLFormViewController {
     
     var phoneNumber: String?
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        trackScreenToAnalytics("VoiceVerificationCode")
+    }
+    
     //MARK: Initializers
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {

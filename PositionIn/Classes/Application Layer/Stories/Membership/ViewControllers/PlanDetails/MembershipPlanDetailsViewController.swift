@@ -43,6 +43,11 @@ class MembershipPlanDetailsViewController: UIViewController, UITableViewDataSour
         self.setupInterface()
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        trackScreenToAnalytics("MembershipPlanDetails")
+    }
+    
     func setupInterface() {
         self.title = String("Membership Plans")
         

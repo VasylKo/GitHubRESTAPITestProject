@@ -35,6 +35,7 @@ class BrowseGridViewController: UIViewController {
         setNavigationButtons()
     }
     
+    
     private func setNavigationButtons() {
         //Call parent view controller with navigation bar (BrowseMainGridController) where we whant to add notification button
         let notificationBarButtonItem = UIBarButtonItem(image: UIImage(named: "notification_icon"), style: .Plain, target: self, action: "notificationTouched")
@@ -47,6 +48,7 @@ class BrowseGridViewController: UIViewController {
         api().hasNotifications().onSuccess { [weak self] (has : Bool) -> Void in
             self?.parentViewController?.navigationItem.rightBarButtonItem?.enabled = has
         }
+        trackScreenToAnalytics("Home")
     }
     
     @objc func notificationTouched() {

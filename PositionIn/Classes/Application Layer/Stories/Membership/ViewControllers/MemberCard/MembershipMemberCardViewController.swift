@@ -52,6 +52,11 @@ class MembershipMemberCardViewController : UIViewController {
         self.getData()
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        trackScreenToAnalytics("MembershipCard")
+    }
+    
     func setupInterface() {
         self.title = self.titleNavigationItem.title
         self.navigationItem.rightBarButtonItem = self.titleNavigationItem.rightBarButtonItem

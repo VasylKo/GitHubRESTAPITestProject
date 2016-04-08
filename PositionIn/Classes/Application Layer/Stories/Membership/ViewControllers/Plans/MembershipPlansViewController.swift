@@ -58,6 +58,11 @@ class MembershipPlansViewController : UIViewController, UITableViewDelegate, UIT
         self.parentViewController?.navigationItem.rightBarButtonItem = rightBarButtomItem
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        trackScreenToAnalytics("MembershipPlanSelection")
+    }
+    
     func setupInterface() {
         let nib = UINib(nibName: String(MembershipPlanTableViewCell.self), bundle: nil)
         self.tableView.registerNib(nib, forCellReuseIdentifier: self.reuseIdentifier)
