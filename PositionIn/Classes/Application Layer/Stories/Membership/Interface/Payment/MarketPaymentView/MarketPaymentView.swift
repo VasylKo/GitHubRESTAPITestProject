@@ -59,7 +59,7 @@ class MarketPaymentView: XLFormBaseCell {
     }
 
     override static func formDescriptorCellHeightForRowDescriptor(rowDescriptor: XLFormRowDescriptor!) -> CGFloat {
-        return 272
+        return 236
     }
     
     @IBOutlet private weak var iconImageView: UIImageView!
