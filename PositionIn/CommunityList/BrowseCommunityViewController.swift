@@ -72,6 +72,12 @@ class BrowseCommunityViewController: BesideMenuViewController, BrowseCommunityAc
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.reloadData()
+        
+        sendScreenTrackToAnalytic()
+    }
+    
+    func sendScreenTrackToAnalytic() {
+        trackScreenToAnalytics(AnalyticsLabels.communitiesList)
     }
     
     private var firstLoad: Bool = true
@@ -194,6 +200,7 @@ class BrowseCommunityViewController: BesideMenuViewController, BrowseCommunityAc
                 let controller = Storyboards.Main.instantiateCommunityViewController()
                 controller.objectId = communityId
                 controller.controllerType = .Community
+                trackScreenToAnalytics(AnalyticsLabels.communityPostsList)
                 navigationController?.pushViewController(controller, animated: true)
             case 1:
                 self.selectedObject = community
@@ -204,6 +211,7 @@ class BrowseCommunityViewController: BesideMenuViewController, BrowseCommunityAc
         case .Post:
             let controller = Storyboards.NewItems.instantiateAddPostViewController()
             controller.communityId = communityId
+            trackScreenToAnalytics(AnalyticsLabels.communityPostDetails)
             navigationController?.pushViewController(controller, animated: true)
         case .Invite:
             break

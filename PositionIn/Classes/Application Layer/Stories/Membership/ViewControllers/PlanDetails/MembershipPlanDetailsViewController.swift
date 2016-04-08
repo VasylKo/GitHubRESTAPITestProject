@@ -45,7 +45,7 @@ class MembershipPlanDetailsViewController: UIViewController, UITableViewDataSour
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        trackScreenToAnalytics("MembershipPlanDetails")
+        trackScreenToAnalytics(AnalyticsLabels.membershipPlanDetails)
     }
     
     func setupInterface() {

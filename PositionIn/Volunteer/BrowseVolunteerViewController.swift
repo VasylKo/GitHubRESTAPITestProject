@@ -20,6 +20,16 @@ class BrowseVolunteerViewController: BrowseCommunityViewController {
         self.title = "Volunteering"
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+    }
+    
+    override func sendScreenTrackToAnalytic() {
+        
+        trackScreenToAnalytics(AnalyticsLabels.volunteerList)
+    }
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let volunteerDetailsViewController = segue.destinationViewController  as? VolunteerDetailsViewController {
             volunteerDetailsViewController.volunteer = self.selectedObject
@@ -92,6 +102,7 @@ class BrowseVolunteerViewController: BrowseCommunityViewController {
         case .Post:
             let controller = Storyboards.NewItems.instantiateAddPostViewController()
             controller.communityId = communityId
+            trackScreenToAnalytics(AnalyticsLabels.volunteerPostDetails)
             navigationController?.pushViewController(controller, animated: true)
         case .Browse, .None:
             switch self.browseModeSegmentedControl.selectedSegmentIndex {
@@ -99,6 +110,7 @@ class BrowseVolunteerViewController: BrowseCommunityViewController {
                 let controller = Storyboards.Main.instantiateCommunityViewController()
                 controller.objectId = communityId
                 controller.controllerType = .Volunteer
+                trackScreenToAnalytics(AnalyticsLabels.volunteerPostsList)
                 navigationController?.pushViewController(controller, animated: true)
             case 1:
                 self.selectedObject = community

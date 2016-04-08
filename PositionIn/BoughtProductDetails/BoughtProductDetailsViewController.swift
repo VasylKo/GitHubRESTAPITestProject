@@ -62,6 +62,11 @@ final class BoughtProductDetailsViewController: UIViewController {
         reloadData()
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        trackScreenToAnalytics(AnalyticsLabels.walletDetails)
+    }
+    
     // MARK: - UIViewController
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let profileController = segue.destinationViewController  as? UserProfileViewController,

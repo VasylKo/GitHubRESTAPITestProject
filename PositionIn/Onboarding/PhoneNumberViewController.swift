@@ -25,7 +25,7 @@ class PhoneNumberViewController: XLFormViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        trackScreenToAnalytics("PhoneVerification")
+        trackScreenToAnalytics(AnalyticsLabels.phoneVerification)
     }
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {

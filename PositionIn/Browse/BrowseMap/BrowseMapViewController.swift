@@ -27,6 +27,17 @@ final class BrowseMapViewController: UIViewController, BrowseActionProducer, Bro
         }
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        //Send analytic info
+        if let itemType = filter.itemTypes?.first where filter.itemTypes?.count == 1 {
+            trackScreenToAnalytics(AnalyticsLabels.labelForItemType(itemType, suffix: "Map"))
+        } else {
+            trackScreenToAnalytics(AnalyticsLabels.mapScreen)
+        }
+     }
+    
     var shouldApplySectionFilter = true
     var shouldReverseGeocodeCoordinate = false
     

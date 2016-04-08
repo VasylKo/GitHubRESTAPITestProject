@@ -25,6 +25,11 @@ final class TrainingDetailsViewController: UIViewController {
         reloadData()
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        trackScreenToAnalytics(AnalyticsLabels.trainingDetails)
+    }
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let orderController = segue.destinationViewController  as? OrderViewController {
             orderController.product = self.product

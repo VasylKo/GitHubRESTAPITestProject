@@ -29,10 +29,6 @@ class BraintreePaymentViewController : UIViewController, BTDropInViewControllerD
         self.view.backgroundColor = UIColor.whiteColor()
     }
     
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        trackScreenToAnalytics("BraintreePayment")
-    }
     
     @IBAction func userDidCancelPayment() {
         dismissPaymentsController(false, err:nil)

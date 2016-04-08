@@ -20,7 +20,7 @@ class VoiceVerificationViewController: XLFormViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        trackScreenToAnalytics("VoiceVerificationCode")
+        trackScreenToAnalytics(AnalyticsLabels.voiceVerificationCode)
     }
     
     //MARK: Initializers

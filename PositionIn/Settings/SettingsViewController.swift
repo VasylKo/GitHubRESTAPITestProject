@@ -21,6 +21,11 @@ class SettingsViewController: BesideMenuViewController, MFMailComposeViewControl
         customizeButton(self.passwordButton)
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        trackScreenToAnalytics(AnalyticsLabels.settings)
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         

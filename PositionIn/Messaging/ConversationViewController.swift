@@ -47,6 +47,12 @@ final class ConversationViewController: JSQMessagesViewController {
         self.inputToolbar?.contentView?.leftBarButtonItem = nil;
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        trackScreenToAnalytics(AnalyticsLabels.chat)
+    }
+
+    
     /**
     *  This method is called when the user taps the send button on the inputToolbar
     *  after composing a message with the specified data.

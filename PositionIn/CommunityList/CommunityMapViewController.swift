@@ -23,6 +23,11 @@ class CommunityMapViewController : UIViewController, GMSMapViewDelegate {
         self.mapView.animateToZoom(2)
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        trackScreenToAnalytics(AnalyticsLabels.communitiesMap)
+    }
+    
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         

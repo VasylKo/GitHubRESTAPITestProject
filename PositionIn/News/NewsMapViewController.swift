@@ -29,6 +29,10 @@ class NewsMapViewController : ContainerViewController, BrowseActionConsumer {
         self.activeIndex = 0
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+    }
+    
     //MARK: BrowseActionConsumer
     
     func browseController(controller: BrowseActionProducer, didSelectItem object: Any, type itemType: FeedItem.ItemType, data: Any?) {

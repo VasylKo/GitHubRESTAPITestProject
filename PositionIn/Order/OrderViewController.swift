@@ -75,6 +75,11 @@ class OrderViewController: UITableViewController, SelectPaymentMethodControllerD
         }
         updateLabels()
     }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        trackScreenToAnalytics(AnalyticsLabels.marketItemPurchase)
+    }
 
     // MARK: - Private functions
     private func updateLabels() {

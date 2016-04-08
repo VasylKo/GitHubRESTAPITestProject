@@ -27,7 +27,7 @@ class FeedListViewController: UIViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        trackScreenToAnalytics("Feed")
+        trackScreenToAnalytics(AnalyticsLabels.feed)
     }
 
     private func setNavigationButtons() {

@@ -85,7 +85,7 @@ class MembershipConfirmDetailsViewController : XLFormViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        trackScreenToAnalytics("MembershipConfirmDetails")
+        trackScreenToAnalytics(AnalyticsLabels.membershipConfirmDetails)
     }
     
     func loadData (){
