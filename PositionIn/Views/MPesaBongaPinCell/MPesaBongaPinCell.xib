@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="102" id="d8U-21-n69" customClass="MPesaBongaPinCell" customModule="PositionIn" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="341" height="102"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="d8U-21-n69" id="dVS-RI-p78">
+                <rect key="frame" x="0.0" y="0.0" width="341" height="101"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iN0-l3-epB">
+                        <rect key="frame" x="0.0" y="0.0" width="341" height="102"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To complete this M-Pesa transaction, you will need to enter your Bonga PIN on your handset. If you don't have one dial" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zMK-jW-Mw8">
+                                <rect key="frame" x="16" y="14" width="309" height="49"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8d2-hk-Drv">
+                                <rect key="frame" x="16" y="59" width="51" height="29"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="14"/>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" title="*126*5#"/>
+                                <connections>
+                                    <action selector="dialNumberButtonPressed:" destination="d8U-21-n69" eventType="touchUpInside" id="Xki-wX-TX8"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="for instructions." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xrq-nl-yBc">
+                                <rect key="frame" x="70" y="66" width="98" height="17"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qqC-f3-QCg">
+                                <rect key="frame" x="171" y="60" width="33" height="29"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                <color key="tintColor" red="0.92941176469999998" green="0.1058823529" blue="0.18039215689999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="More"/>
+                                <connections>
+                                    <action selector="moreButtonPressed:" destination="d8U-21-n69" eventType="touchUpInside" id="7eW-Qh-fGt"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="8d2-hk-Drv" firstAttribute="top" secondItem="zMK-jW-Mw8" secondAttribute="bottom" constant="-4" id="3F3-1N-BhP"/>
+                            <constraint firstItem="qqC-f3-QCg" firstAttribute="baseline" secondItem="xrq-nl-yBc" secondAttribute="baseline" id="Ddz-UU-tUK"/>
+                            <constraint firstItem="zMK-jW-Mw8" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="14" id="IX9-Nu-TG4"/>
+                            <constraint firstItem="xrq-nl-yBc" firstAttribute="leading" secondItem="8d2-hk-Drv" secondAttribute="trailing" constant="3" id="PGj-ew-IP0"/>
+                            <constraint firstItem="zMK-jW-Mw8" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="TC6-FI-9S0"/>
+                            <constraint firstItem="qqC-f3-QCg" firstAttribute="leading" secondItem="xrq-nl-yBc" secondAttribute="trailing" constant="3" id="WH1-ee-xaa"/>
+                            <constraint firstItem="xrq-nl-yBc" firstAttribute="baseline" secondItem="8d2-hk-Drv" secondAttribute="baseline" id="ady-CL-mHb"/>
+                            <constraint firstAttribute="bottom" secondItem="8d2-hk-Drv" secondAttribute="bottom" constant="14" id="bI2-xN-3Fn"/>
+                            <constraint firstItem="8d2-hk-Drv" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="tAi-7h-Ydf"/>
+                            <constraint firstAttribute="bottom" secondItem="8d2-hk-Drv" secondAttribute="bottom" constant="14" id="ybJ-Y0-mzz"/>
+                            <constraint firstAttribute="trailing" secondItem="zMK-jW-Mw8" secondAttribute="trailing" constant="16" id="yjE-br-mDh"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="ybJ-Y0-mzz"/>
+                            </mask>
+                        </variation>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="iN0-l3-epB" firstAttribute="top" secondItem="dVS-RI-p78" secondAttribute="top" id="Kkc-v8-YbX"/>
+                    <constraint firstItem="iN0-l3-epB" firstAttribute="leading" secondItem="dVS-RI-p78" secondAttribute="leading" id="NYa-Sh-FXK"/>
+                    <constraint firstAttribute="bottom" secondItem="iN0-l3-epB" secondAttribute="bottom" constant="8" id="jMb-Qe-jfG"/>
+                    <constraint firstAttribute="trailing" secondItem="iN0-l3-epB" secondAttribute="trailing" id="otA-TD-XnH"/>
+                </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="jMb-Qe-jfG"/>
+                    </mask>
+                </variation>
+            </tableViewCellContentView>
+            <inset key="separatorInset" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
+            <point key="canvasLocation" x="369.5" y="178"/>
+        </tableViewCell>
+    </objects>
+</document>
