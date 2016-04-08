@@ -13,30 +13,45 @@ let XLFormRowDescriptorTypeMarketPaymentView = "XLFormRowDescriptorTypeMarketPay
 
 class MarketPaymentView: XLFormBaseCell {
 
-    var price: NSNumber? {
+    var totalPrice: NSNumber? {
         didSet {
-            if let price = price {
-                self.totalLabel.text = String(price)
+            if let totalPrice = totalPrice {
+                self.totalLabel.text = AppConfiguration().currencyFormatter.stringFromNumber(totalPrice)
             }
         }
     }
     
     var imageURL: NSURL? {
         didSet {
-            self.iconImageView.setImageFromURL(imageURL, placeholder: nil)
+            let defaultImage = UIImage(named: "market_img_default")
+            self.iconImageView.setImageFromURL(imageURL, placeholder: defaultImage)
         }
     }
     
     var quantity: NSNumber? {
         didSet {
-            if let quantity = price {
+            if let quantity = quantity {
                 self.self.quintityLabel.text = String(quantity)
             }
         }
     }
     
+    var itemName: String? {
+        didSet {
+            self.itemNameLabel.text = itemName ?? ""
+        }
+    }
+    
+    var pickUpAvailability: String? {
+        didSet {
+            self.pickUpAvailabilityLabel.text = pickUpAvailability
+        }
+    }
+
     override func configure() {
         super.configure()
+        //pickUpAvailabilityLabel will be sat from product
+        pickUpAvailabilityLabel.text = ""
     }
     
     override func update() {
@@ -44,7 +59,7 @@ class MarketPaymentView: XLFormBaseCell {
     }
 
     override static func formDescriptorCellHeightForRowDescriptor(rowDescriptor: XLFormRowDescriptor!) -> CGFloat {
-        return 350
+        return 272
     }
     
     @IBOutlet private weak var iconImageView: UIImageView!

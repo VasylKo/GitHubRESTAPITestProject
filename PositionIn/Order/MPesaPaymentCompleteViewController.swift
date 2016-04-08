@@ -97,9 +97,14 @@ class MPesaPaymentCompleteViewController: XLFormViewController {
         if let product = product,
         quantity = quantity, price = product.price{
             donateProjectRow.cellConfigAtConfigure["quantity"] = NSNumber(integer: quantity)
-            donateProjectRow.cellConfigAtConfigure["price"] = NSNumber(float:price)
+            let totalPrice = price * Float(quantity)
+            donateProjectRow.cellConfigAtConfigure["totalPrice"] = NSNumber(float: totalPrice)
         }
+        
+        donateProjectRow.cellConfigAtConfigure["itemName"] = product?.name
         donateProjectRow.cellConfigAtConfigure["imageURL"] = product?.imageURL
+        //TODO: add product pickUpAvailability data
+        //donateProjectRow.cellConfigAtConfigure["pickUpAvailability"] = product?.entityDetails?.endData?.formattedAsTimeAgo()
         donateToSection.addFormRow(donateProjectRow)
         
         self.form = form
