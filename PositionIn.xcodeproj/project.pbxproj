@@ -89,8 +89,8 @@
 		50FA43301C44F0B50050B00E /* ErrorCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50FA432F1C44F0B50050B00E /* ErrorCell.xib */; };
 		50FE7D891BBE77BB005676E2 /* ItemsSearchResultDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FE7D871BBE77BB005676E2 /* ItemsSearchResultDataSource.swift */; };
 		50FE7D8A1BBE77BB005676E2 /* ItemsSearchResultsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FE7D881BBE77BB005676E2 /* ItemsSearchResultsController.swift */; };
-		541820FC1CB7B28D001A780A /* MPesaBongaPinView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 541820FB1CB7B28D001A780A /* MPesaBongaPinView.swift */; };
-		541820FE1CB7B295001A780A /* MPesaBongaPinView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 541820FD1CB7B295001A780A /* MPesaBongaPinView.xib */; };
+		541820FC1CB7B28D001A780A /* MPesaBongaPinCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 541820FB1CB7B28D001A780A /* MPesaBongaPinCell.swift */; };
+		541820FE1CB7B295001A780A /* MPesaBongaPinCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 541820FD1CB7B295001A780A /* MPesaBongaPinCell.xib */; };
 		5DA3850FA75B150D79C68EE1 /* Pods_PositionIn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFAA26C98F322F00903B06FC /* Pods_PositionIn.framework */; };
 		CD076E871C73922A005C04C2 /* NewsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD076E861C73922A005C04C2 /* NewsListViewController.swift */; };
 		CD076E891C7497A8005C04C2 /* PositionIn.NewsListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD076E881C7497A8005C04C2 /* PositionIn.NewsListViewController.xib */; };
@@ -651,8 +651,8 @@
 		50FA432F1C44F0B50050B00E /* ErrorCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ErrorCell.xib; sourceTree = "<group>"; };
 		50FE7D871BBE77BB005676E2 /* ItemsSearchResultDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemsSearchResultDataSource.swift; sourceTree = "<group>"; };
 		50FE7D881BBE77BB005676E2 /* ItemsSearchResultsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemsSearchResultsController.swift; sourceTree = "<group>"; };
-		541820FB1CB7B28D001A780A /* MPesaBongaPinView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPesaBongaPinView.swift; sourceTree = "<group>"; };
-		541820FD1CB7B295001A780A /* MPesaBongaPinView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MPesaBongaPinView.xib; sourceTree = "<group>"; };
+		541820FB1CB7B28D001A780A /* MPesaBongaPinCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPesaBongaPinCell.swift; sourceTree = "<group>"; };
+		541820FD1CB7B295001A780A /* MPesaBongaPinCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MPesaBongaPinCell.xib; sourceTree = "<group>"; };
 		56DAF56D2A99203B14E2570B /* Pods-PositionIn.stagingrelease.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PositionIn.stagingrelease.xcconfig"; path = "Pods/Target Support Files/Pods-PositionIn/Pods-PositionIn.stagingrelease.xcconfig"; sourceTree = "<group>"; };
 		64AF9DE99B2895039ACA7F1F /* Pods-PositionIn.devrelease.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PositionIn.devrelease.xcconfig"; path = "Pods/Target Support Files/Pods-PositionIn/Pods-PositionIn.devrelease.xcconfig"; sourceTree = "<group>"; };
 		6D4334208E75726DC30CEAE7 /* Pods-PositionIn.stagingreleasecopy.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PositionIn.stagingreleasecopy.xcconfig"; path = "Pods/Target Support Files/Pods-PositionIn/Pods-PositionIn.stagingreleasecopy.xcconfig"; sourceTree = "<group>"; };
@@ -1484,8 +1484,8 @@
 		541820F41CB7B0F2001A780A /* MPesaBongaPinCell */ = {
 			isa = PBXGroup;
 			children = (
-				541820FB1CB7B28D001A780A /* MPesaBongaPinView.swift */,
-				541820FD1CB7B295001A780A /* MPesaBongaPinView.xib */,
+				541820FB1CB7B28D001A780A /* MPesaBongaPinCell.swift */,
+				541820FD1CB7B295001A780A /* MPesaBongaPinCell.xib */,
 			);
 			path = MPesaBongaPinCell;
 			sourceTree = "<group>";
@@ -4010,7 +4010,7 @@
 				500D7FA91BC2CD39008C8C82 /* PositionIn.SearchEntityCell.xib in Resources */,
 				E6C952341BA1D9960032254F /* PositionIn.ProfileInfoCell.xib in Resources */,
 				E6D4D5B51B6F8B9F003134CB /* PositionIn.SearchBar.xib in Resources */,
-				541820FE1CB7B295001A780A /* MPesaBongaPinView.xib in Resources */,
+				541820FE1CB7B295001A780A /* MPesaBongaPinCell.xib in Resources */,
 				D16772781C9989FE00B624FC /* FeedEmergencyDetailsViewController.xib in Resources */,
 				E66115A31B73A18C003DB5B3 /* NewItems.storyboard in Resources */,
 				D179EBD31CB6B938006012CC /* country-codes.csv in Resources */,
@@ -4256,7 +4256,7 @@
 				500D7FA81BC2CD39008C8C82 /* SearchEntityCell.swift in Sources */,
 				E6325F721B57E1DA00996480 /* Storyboards.swift in Sources */,
 				E6BEF1D11B9C61F900511B46 /* Comment.swift in Sources */,
-				541820FC1CB7B28D001A780A /* MPesaBongaPinView.swift in Sources */,
+				541820FC1CB7B28D001A780A /* MPesaBongaPinCell.swift in Sources */,
 				E6DADB9E1B8C5799009A5694 /* SearchFilter.swift in Sources */,
 				D1FD853A1C1EE8BB00C2E87B /* TrainingDetailsViewController.swift in Sources */,
 				CD65C5FC1C9988D400C2C11B /* UserProfileAvatarView.swift in Sources */,

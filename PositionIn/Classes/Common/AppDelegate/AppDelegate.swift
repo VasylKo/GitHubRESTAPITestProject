@@ -108,6 +108,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         XLFormViewController.cellClassesForRowDescriptorTypes()[XLFormRowDescriptorTypePayment] =
         "PaymentTableViewCell"
         
+        XLFormViewController.cellClassesForRowDescriptorTypes()[XLFormRowDescriptorTypeMPesaBongaPinView] =
+        "MPesaBongaPinCell"
+        
         BTAppSwitch.setReturnURLScheme("\(NSBundle.mainBundle().bundleIdentifier!).payments")
 
         let settings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound],

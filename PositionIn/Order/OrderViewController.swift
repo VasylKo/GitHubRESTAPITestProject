@@ -24,6 +24,7 @@ class OrderViewController: UITableViewController, SelectPaymentMethodControllerD
     internal var product: Product?
     
     // MARK: - Private properties
+    private var showMpesaMongaPinInfoCell = false
     private var clientToken: String?
     private var finishedSuccessfully = false
     lazy private var quantityFormatter: NSNumberFormatter = {
@@ -79,6 +80,7 @@ class OrderViewController: UITableViewController, SelectPaymentMethodControllerD
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         trackScreenToAnalytics(AnalyticsLabels.marketItemPurchase)
+        tableView.reloadData()
     }
 
     // MARK: - Private functions
@@ -160,6 +162,7 @@ class OrderViewController: UITableViewController, SelectPaymentMethodControllerD
     
     func paymentMethodSelected(cardItem: CardItem) {
         self.cardItem = cardItem
+        showMpesaMongaPinInfoCell = cardItem == .MPesa
         self.paymentMethodLabel.text = CardItem.cardName(cardItem)
         updateStateOfActionButton()
     }
@@ -168,9 +171,23 @@ class OrderViewController: UITableViewController, SelectPaymentMethodControllerD
         dismissPaymentsController()
     }
     
+    @IBAction func moreAboutMpesaButtonPressed(sender: UIButton) {
+        guard let mpesaURL = NSURL(string: "http://www.safaricom.co.ke/personal/m-pesa") else { return }
+        OpenApplication.Safari(with: mpesaURL)
+    }
+    
+    @IBAction func dialMpesaNumberButtonPressed(sender: UIButton) {
+        OpenApplication.Tel(with: "*126*5#")
+    }
     // MARK: - UITableViewDelegate
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         let height = super.tableView(tableView, heightForRowAtIndexPath: indexPath)
+        
+        //Show Mpesa Monga Pin Info Cell
+        if indexPath.section == 1 && indexPath.row == 1 {
+            return showMpesaMongaPinInfoCell ? 102.0 : 0.0
+        }
+        
         // hide availability date cell
         if indexPath.section == 0 && indexPath.row == 1 && self.product?.startDate == nil && self.product?.endData == nil {
             return 0.0

@@ -11,7 +11,7 @@ import XLForm
 
 let XLFormRowDescriptorTypeMPesaBongaPinView = "XLFormRowDescriptorTypeMPesaBongaPinView"
 
-class MPesaBongaPinView: XLFormBaseCell {
+class MPesaBongaPinCell: XLFormBaseCell {
     
     override static func formDescriptorCellHeightForRowDescriptor(rowDescriptor: XLFormRowDescriptor!) -> CGFloat {
         return 102
@@ -25,7 +25,7 @@ class MPesaBongaPinView: XLFormBaseCell {
         super.update()
         
     }
-        
+    
     @IBAction func moreButtonPressed(sender: UIButton) {
         guard let mpesaURL = NSURL(string: "http://www.safaricom.co.ke/personal/m-pesa") else { return }
         OpenApplication.Safari(with: mpesaURL)
