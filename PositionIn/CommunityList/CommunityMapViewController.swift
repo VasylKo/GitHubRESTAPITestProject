@@ -79,7 +79,7 @@ class CommunityMapViewController : UIViewController, GMSMapViewDelegate {
         
         let community = box.value
        
-        trackGoogleAnalyticsEvent("Main", action: "Click", label: "Community")
+        trackEventToAnalytics("Main", action: "Click", label: "Community")
         let controller = Storyboards.Main.instantiateVolunteerDetailsViewControllerId()
         controller.volunteer = community
         controller.author = community.owner

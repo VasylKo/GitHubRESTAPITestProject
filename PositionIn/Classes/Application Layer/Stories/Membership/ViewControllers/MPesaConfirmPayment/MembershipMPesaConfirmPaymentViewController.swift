@@ -46,9 +46,18 @@ class MembershipMPesaConfirmPaymentViewController: XLFormViewController {
             membershipId: self.plan.objectId).onSuccess { [weak self] transactionId in
                 self?.transactionId = transactionId
                 self?.pollStatus()
+                self?.sendPaymentEventToAnalytics(success: true)
             }.onFailure(callback: { [weak self] _ in
                 self?.headerView.showFailure()
+                self?.sendPaymentEventToAnalytics(success: false)
                 })
+    }
+    
+    func sendPaymentEventToAnalytics(success success: Bool) {
+        let planPrice = NSNumber(integer: plan.price ?? 0)
+        let paymentLabel = success ? NSLocalizedString("Payment Completed", comment: "MPesaIndicatorView") : NSLocalizedString("Payment Failed", comment: "MPesaIndicatorView")
+        trackEventToAnalytics(AnalyticCategories.membership, action: AnalyticActios.paymentOutcome, label: paymentLabel, value: planPrice)
+
     }
 
     @objc func pollStatus() {

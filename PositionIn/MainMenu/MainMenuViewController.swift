@@ -19,7 +19,7 @@ final class MainMenuViewController: UIViewController {
         dataSource.items = menuItemsForUser(nil)
         dataSource.configureTable(tableView)
         subscribeToNotifications()
-        trackGoogleAnalyticsEvent("Main", action: "Click", label: "Home")
+        trackEventToAnalytics("Main", action: "Click", label: "Home")
     }
     
     private func menuItemsForUser(user: UserProfile?) -> [MainMenuItem] {

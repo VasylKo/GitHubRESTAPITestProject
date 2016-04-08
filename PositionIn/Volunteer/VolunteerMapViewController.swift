@@ -78,7 +78,7 @@ class VolunteerMapViewController : UIViewController, GMSMapViewDelegate {
         
         let volunteer = box.value
         
-        trackGoogleAnalyticsEvent("Main", action: "Click", label: "Community")
+        trackEventToAnalytics("Main", action: "Click", label: "Community")
         let controller = Storyboards.Main.instantiateVolunteerDetailsViewControllerId()
         controller.volunteer = volunteer
         controller.author = volunteer.owner

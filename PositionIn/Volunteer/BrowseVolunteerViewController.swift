@@ -102,7 +102,7 @@ class BrowseVolunteerViewController: BrowseCommunityViewController {
         case .Post:
             let controller = Storyboards.NewItems.instantiateAddPostViewController()
             controller.communityId = communityId
-            trackScreenToAnalytics(AnalyticsLabels.volunteerPostDetails)
+            trackScreenToAnalytics(AnalyticsLabels.volunteerAddNewPost)
             navigationController?.pushViewController(controller, animated: true)
         case .Browse, .None:
             switch self.browseModeSegmentedControl.selectedSegmentIndex {
@@ -110,7 +110,6 @@ class BrowseVolunteerViewController: BrowseCommunityViewController {
                 let controller = Storyboards.Main.instantiateCommunityViewController()
                 controller.objectId = communityId
                 controller.controllerType = .Volunteer
-                trackScreenToAnalytics(AnalyticsLabels.volunteerPostsList)
                 navigationController?.pushViewController(controller, animated: true)
             case 1:
                 self.selectedObject = community

@@ -11,10 +11,21 @@ import CleanroomLogger
 
 struct MembershipPlan: CRUDObject {
     
-    enum PlanType : Int {
+    enum PlanType : Int, CustomStringConvertible {
         case Unknown    = 0
         case Individual = 1
         case Corporate  = 2
+        
+        var description: String {
+            switch self {
+            case .Individual:
+                return "Individual"
+            case .Corporate:
+                return "Corporate"
+            default:
+                return "Unknown"
+            }
+        }
     }
     
     var objectId : CRUDObjectId = CRUDObjectInvalidId

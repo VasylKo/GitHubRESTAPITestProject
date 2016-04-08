@@ -11,6 +11,15 @@ import Box
 enum CardItem: Int {
     case MPesa, CreditDebitCard//, PayPal
     
+    func paymentTypeName() -> String {
+        switch self {
+        case .MPesa:
+            return "M-Pesa"
+        case .CreditDebitCard:
+            return "Credit/Debit Card"
+        }
+    }
+    
     static var count = (CreditDebitCard.rawValue + 1)
     
     static func cardName(item: CardItem) -> String? {

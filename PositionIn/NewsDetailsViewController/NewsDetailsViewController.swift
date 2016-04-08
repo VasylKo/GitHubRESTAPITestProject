@@ -114,6 +114,7 @@ extension NewsDetailsViewController {
         comment.text = text
         
         api().createPostComment(post.objectId, object: comment).onSuccess {[weak self, weak textField] comment in
+            trackEventToAnalytics(AnalyticCategories.feedNews, action: AnalyticActios.comment, label: self?.post?.name ?? NSLocalizedString("Can't get news title"))
             self?.reloadPost()
             textField?.text = nil
         }
@@ -128,11 +129,13 @@ extension NewsDetailsViewController: NewsActionConsumer {
         if let tempPost = post {
             if (tempPost.isLiked) {
                 api().unlikePost(tempPost.objectId).onSuccess{[weak self] in
+                    trackEventToAnalytics(AnalyticCategories.feedNews, action: AnalyticActios.unlike, label: self?.post?.name ?? NSLocalizedString("Can't get news title"))
                     self?.reloadPost()
                 }
             }
             else {
                 api().likePost(tempPost.objectId).onSuccess{[weak self] in
+                    trackEventToAnalytics(AnalyticCategories.feedNews, action: AnalyticActios.like, label: self?.post?.name ?? NSLocalizedString("Can't get news title"))
                     self?.reloadPost()
                 }
             }
@@ -193,7 +196,8 @@ extension NewsDetailsViewController {
             let controller = self.parentViewController as! NewsDetailsViewController
             if controller.post?.links?.isEmpty == false || controller.post?.attachments?.isEmpty == false {
                 let moreInformationViewController = MoreInformationViewController(links: controller.post?.links,
-                    attachments: controller.post?.attachments)
+                    attachments: controller.post?.attachments, newsTitle: controller.post?.name)
+                trackEventToAnalytics(AnalyticCategories.feedNews, action: AnalyticActios.moreInformation, label: controller.post?.name ?? NSLocalizedString("Can't get news title"))
                 controller.navigationController?.pushViewController(moreInformationViewController, animated: true)
             }
         }

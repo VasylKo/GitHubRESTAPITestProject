@@ -61,6 +61,9 @@ class MembershipPlansViewController : UIViewController, UITableViewDelegate, UIT
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         trackScreenToAnalytics(AnalyticsLabels.membershipPlanSelection)
+        
+        //Sent event PlanTypeSelection (Individual <OR> Corporate) to anlytics
+        trackEventToAnalytics(AnalyticCategories.membership, action: AnalyticActios.planTypeSelection, label: type.description)
     }
     
     func setupInterface() {
@@ -127,7 +130,7 @@ class MembershipPlansViewController : UIViewController, UITableViewDelegate, UIT
         let callSupportTitle = NSLocalizedString("Call Support")
         let callAction: UIAlertAction = UIAlertAction(title: callSupportTitle, style: .Default)
             { action -> Void in
-                trackGoogleAnalyticsEvent("Membership", action: "AlreadyMember", label: callSupportTitle)
+                trackEventToAnalytics(AnalyticCategories.membership, action: AnalyticActios.alreadyMember, label: callSupportTitle)
                 UIApplication.sharedApplication().openURL(NSURL(string:"telprompt:" + self.phone)!)
         }
         actionSheetController.addAction(callAction)
@@ -135,7 +138,7 @@ class MembershipPlansViewController : UIViewController, UITableViewDelegate, UIT
         let emailSupportTitle = NSLocalizedString("Email Support")
         let emailAction: UIAlertAction = UIAlertAction(title: emailSupportTitle, style: .Default)
             { action -> Void in
-                trackGoogleAnalyticsEvent("Membership", action: "AlreadyMember", label: emailSupportTitle)
+                trackEventToAnalytics(AnalyticCategories.membership, action: AnalyticActios.alreadyMember, label: emailSupportTitle)
                 let mailComposeViewController = self.configuredMailComposeViewController()
                 if MFMailComposeViewController.canSendMail() {
                     self.presentViewController(mailComposeViewController, animated: true, completion: nil)
@@ -148,12 +151,13 @@ class MembershipPlansViewController : UIViewController, UITableViewDelegate, UIT
         let visitWebTitle = NSLocalizedString("Visit Website")
         let websiteAction: UIAlertAction = UIAlertAction(title: visitWebTitle, style: .Default)
             { action -> Void in
-                trackGoogleAnalyticsEvent("Membership", action: "AlreadyMember", label: visitWebTitle)
+                trackEventToAnalytics(AnalyticCategories.membership, action: AnalyticActios.alreadyMember, label: visitWebTitle)
                 let websiteURL = NSURL(string: "http://www.redcross.or.ke")!
                 OpenApplication.Safari(with: websiteURL)
         }
         actionSheetController.addAction(websiteAction)
         
+        trackEventToAnalytics(AnalyticCategories.membership, action: AnalyticActios.alreadyMember)
         self.presentViewController(actionSheetController, animated: true, completion: nil)
     }
     
