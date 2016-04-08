@@ -134,11 +134,9 @@ extension APIService {
     
     // Logout from server to stop receiving push notifications and then expire current session
     func logoutFromServer() -> Future<Void, NSError> {
-        return session().flatMap{ [unowned self] accessToken in
-            return self.logoutRequest(accessToken: accessToken)
-            }.onSuccess { [unowned self] _ in
-                self.logout()
-            }
+        return logoutRequest().onSuccess { [unowned self] _ in
+            self.logout()
+        }
     }
     
     //Verify Phone
@@ -252,18 +250,20 @@ extension APIService {
         return handleAuthFailure(futureBuilder)
     }
     
-    private func logoutRequest(accessToken accessToken: String) -> Future<Void, NSError> {
-        
+    private func logoutRequest() -> Future<Void, NSError> {
         typealias ResultType = (Alamofire.Request, Future<Void, NSError>)
         
         let futureBuilder: (Void -> Future<Void, NSError>) = { [unowned self] in
-            let request = AuthRouter.Logout(api: self, accessToken: accessToken)
-            let serializer = Alamofire.Request.LogoutEmptyResponseSerializer()
-            let (_, future): ResultType = self.dataProvider.request(request, serializer: serializer, validation: nil)
-            return future
+            return self.session().flatMap {
+                (accessToken: AuthResponse.Token) -> Future<Void, NSError> in
+                let request = AuthRouter.Logout(api: self, accessToken: accessToken)
+                let serializer = Alamofire.Request.LogoutEmptyResponseSerializer()
+                let (_, future): ResultType = self.dataProvider.request(request, serializer: serializer, validation: nil)
+                return future
+            }
         }
-
-        return handleAuthFailure(futureBuilder)
+ 
+        return handleFailure(futureBuilder)
     }
     
     private func facebookLoginRequest(fbToken: String) -> Future<AuthResponse, NSError> {

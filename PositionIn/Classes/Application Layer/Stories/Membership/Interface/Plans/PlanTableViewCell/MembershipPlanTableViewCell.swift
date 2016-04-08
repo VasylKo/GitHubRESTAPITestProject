@@ -16,8 +16,16 @@ class MembershipPlanTableViewCell: UITableViewCell {
     
     func configure(with plan : MembershipPlan) {
         self.titleLabel.text = plan.name
-        self.descriptionLabel.text = String("\(AppConfiguration().currencySymbol) \(plan.price ?? 0) Annually")
         self.membershipImageView.image = UIImage(named : plan.membershipImageName)
+        
+        switch plan.type {
+        case .Corporate:
+            self.descriptionLabel.text = String("\(AppConfiguration().currencySymbol) \(plan.price ?? 0) Annually")
+        case .Individual:
+            fallthrough
+        case .Unknown:
+            self.descriptionLabel.text = String("\(AppConfiguration().currencySymbol) \(plan.price ?? 0)")
+        }
     }
     
     func configureAsGuest () {
