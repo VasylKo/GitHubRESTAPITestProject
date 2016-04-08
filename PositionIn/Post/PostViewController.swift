@@ -152,6 +152,12 @@ extension PostViewController: PostActionConsumer {
             }
         }
     }
+    
+    func commentPost() {
+        if !enterCommentField.isFirstResponder() {
+            enterCommentField.becomeFirstResponder()
+        }
+    }
 }
 
 extension PostViewController {

@@ -32,7 +32,7 @@ final class BrowseMapViewController: UIViewController, BrowseActionProducer, Bro
     
     var browseMode: BrowseModeTabbarViewController.BrowseMode = .ForYou
     
-    let visibleItemTypes: [FeedItem.ItemType] = [.Project, .Emergency, .Training, .News, .Event, .Market, .GiveBlood, .BomaHotels]
+    let visibleItemTypes: [FeedItem.ItemType] = [.Project, .Emergency, .Training, .News, .Event, .Market, .GiveBlood, .BomaHotels, .Post]
     
     var filter = SearchFilter.currentFilter
     
@@ -64,7 +64,7 @@ final class BrowseMapViewController: UIViewController, BrowseActionProducer, Bro
                 return UIImage(named: "EventMarker")
             case .Market:
                 return UIImage(named: "MarketMarker")
-            case .News:
+            case .News, .Post:
                 return UIImage(named: "news_map")
             case .Event:
                 return UIImage(named: "event_map")

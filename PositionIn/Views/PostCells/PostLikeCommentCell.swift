@@ -17,7 +17,7 @@ class PostLikeCommentCell: TableViewCell {
         var image = m!.isLiked == true ? UIImage(named:"ic_like_selected") : UIImage(named:"ic_like_up")
         self.likeButton.setImage(image, forState: .Normal)
 
-        commentButton.userInteractionEnabled = false
+        commentButton.userInteractionEnabled = true
         
         image = m!.isCommented == true ? UIImage(named:"communityPostActive") : UIImage(named:"communityPostUnactive")
         self.commentButton.setImage(image, forState: .Normal)
@@ -39,6 +39,9 @@ class PostLikeCommentCell: TableViewCell {
     @IBAction func likeButtonPressed(sender: AnyObject) {
         likeButton.userInteractionEnabled = false
         actionConsumer?.likePost()
+    }
+    @IBAction func postButtonPressed(sender: UIButton) {
+        actionConsumer?.commentPost()
     }
     
     @IBOutlet weak var commentButton: UIButton!

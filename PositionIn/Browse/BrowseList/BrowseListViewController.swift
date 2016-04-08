@@ -217,16 +217,16 @@ extension BrowseListViewController {
         func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
             if let model = self.tableView(tableView, modelForIndexPath: indexPath) as? CompactFeedTableCellModel {
                 if model.item.type == .Post {
-                    var cellHeight: CGFloat = 150
-                    cellHeight = (model.imageURL != nil) ? (cellHeight + 80) : cellHeight
+                    var cellHeight: CGFloat = 125
+                    cellHeight = (model.imageURL != nil) ? (cellHeight + 160) : cellHeight
 
                     if let text = model.text {
-                        let maxSize = CGSize(width: UIScreen.mainScreen().applicationFrame.size.width - 20, height: 80)
+                        let maxSize = CGSize(width: UIScreen.mainScreen().applicationFrame.size.width - 80, height: CGFloat(MAXFLOAT))
                         let attrString = NSAttributedString.init(string: text, attributes: [NSFontAttributeName:UIFont.systemFontOfSize(17)])
                         let rect = attrString.boundingRectWithSize(maxSize, options: NSStringDrawingOptions.UsesLineFragmentOrigin, context: nil)
                         let size = CGSizeMake(rect.size.width, rect.size.height)
                         
-                        cellHeight += (size.height + 10)
+                        cellHeight += (size.height + 15)
                     }
                     
                     

@@ -157,6 +157,11 @@ class MembershipMemberProfileViewController : XLFormViewController, MembershipMe
         if view.userInteractionEnabled == false {
             return
         }
+        
+        guard isFieldsValid() else {
+            return
+        }
+        
         let validationErrors : Array<NSError> = self.formValidationErrors() as! Array<NSError>
         if (validationErrors.count > 0){
             self.showFormValidationError(validationErrors.first)
@@ -190,6 +195,28 @@ class MembershipMemberProfileViewController : XLFormViewController, MembershipMe
             }).onFailure(callback: {_ in
                 trackGoogleAnalyticsEvent("Status", action: "Click", label: "Auth Fail")
             })
+    }
+    
+    // MARK: - Fileds vaalidatios
+    private func isFieldsValid() -> Bool {
+        let values = formValues()
+        guard let email = values[Tags.Email.rawValue] as? String else {
+            return true
+        }
+        
+        
+        let validationRules: [StringValidation.ValidationRule] = [
+            (email, StringValidation.sequence([StringValidation.required(),StringValidation.email()]))]
+        
+        return validateInput(validationRules)
+    }
+    
+    private func validateInput(validationRules: [StringValidation.ValidationRule]) -> Bool {
+        if let validationResult = StringValidation.validate(validationRules) {
+            showWarning(validationResult.error.localizedDescription)
+            return false
+        }
+        return true
     }
     
     // MARK: XLFormViewController

@@ -28,6 +28,8 @@ class DonateViewController: XLFormViewController, PaymentReponseDelegate {
     private var errorSection:XLFormSectionDescriptor?
     private weak var confirmRowDescriptor: XLFormRowDescriptor?
     
+    internal var viewControllerToOpenOnComplete: UIViewController?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.tintColor = UIScheme.mainThemeColor
@@ -47,6 +49,8 @@ class DonateViewController: XLFormViewController, PaymentReponseDelegate {
             paymentCompleteController.projectName = self.product?.name ?? NSLocalizedString("Kenya Red Cross Society")
             paymentCompleteController.projectIconURL = self.product?.imageURL
             paymentCompleteController.amountDonation = amount
+            
+            paymentCompleteController.viewControllerToOpenOnComplete = viewControllerToOpenOnComplete
             
             self.navigationController?.pushViewController(paymentCompleteController, animated: true)
         }
@@ -218,10 +222,10 @@ extension DonateViewController {
             var msg = ""
             var status = false
             if let value = row.value as? NSNumber where value.intValue > 0 {
-                msg = NSLocalizedString("Intered value is valid")
+                msg = NSLocalizedString("Entered value is valid")
                 status = true
             } else {
-                msg = NSLocalizedString("Intered value is invalid")
+                msg = NSLocalizedString("Entered value is invalid")
                 status = false
             }
             return XLFormValidationStatus(msg: msg, status: status, rowDescriptor: row)

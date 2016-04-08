@@ -86,9 +86,26 @@ struct StringValidation {
         }
     }
     
+    /*
+    //Original email regex
     static func email() -> Validator {
         return { string in
             let emailRegex: String = "[^\\s@<>]+@[^\\s@<>]+\\.[^\\s@<>]+"
+            let emailTest: NSPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegex)
+            if !emailTest.evaluateWithObject(string) {
+                return StringValidation.error(
+                    ErrorCode.Email.rawValue,
+                    localizedDescription: NSLocalizedString("Please enter a valid email", comment: "Email validation")
+                )
+            }
+            return nil
+        }
+    }
+*/
+    //New email regex
+    static func email() -> Validator {
+        return { string in
+            let emailRegex: String = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"
             let emailTest: NSPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegex)
             if !emailTest.evaluateWithObject(string) {
                 return StringValidation.error(
@@ -137,5 +154,11 @@ struct StringValidation {
 extension UITextField: StringValidatable {
     var validationString: String? {
         return text
+    }
+}
+
+extension String: StringValidatable {
+    var validationString: String? {
+        return self
     }
 }
