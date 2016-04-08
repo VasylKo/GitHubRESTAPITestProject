@@ -16,6 +16,7 @@ class MembershipCardView : UIView {
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var planNameLabel: UILabel!
+    @IBOutlet weak var expirationDateTitleLabel: UILabel!
     @IBOutlet weak var expirationDateLabel: UILabel!
     @IBOutlet weak var cardIdLabel: UILabel!
     
@@ -39,8 +40,16 @@ class MembershipCardView : UIView {
         self.cardIdLabel.text = profile.membershipDetails?.membershipCardId
         self.priceLabel.text = String("\(AppConfiguration().currencySymbol) \(plan.price ?? 0)")
         self.planNameLabel.text = plan.name
-        self.expirationDateLabel.text = self.stringFromDate(profile.membershipDetails?.endDate)
         self.backgroundImageView.image = UIImage(named: profile.membershipDetails?.membershipCardImageName ?? "")
+        
+        if let lifetime = plan.lifetime where lifetime {
+            self.expirationDateTitleLabel.hidden = true
+            self.expirationDateLabel.hidden = true
+        } else {
+            self.expirationDateTitleLabel.hidden = false
+            self.expirationDateLabel.hidden = false
+            self.expirationDateLabel.text = self.stringFromDate(profile.membershipDetails?.endDate)
+        }
     }
     
     private func stringFromDate(date : NSDate?) -> String {

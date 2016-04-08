@@ -64,6 +64,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 self?.currentUserDidChange(newProfile)
         }
         
+        let defaults = NSUserDefaults.standardUserDefaults()
+        
+        let kFirstRun = "kFirstRun"
+        if (defaults.objectForKey(kFirstRun) == nil) {
+            SessionController().clearKeychain()
+            defaults.setBool(true, forKey: kFirstRun)
+        }
     }
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
@@ -107,6 +114,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         XLFormViewController.cellClassesForRowDescriptorTypes()[XLFormRowDescriptorTypePayment] =
         "PaymentTableViewCell"
+        
+        XLFormViewController.cellClassesForRowDescriptorTypes()[XLFormRowDescriptorTypeMPesaBongaPinView] =
+        "MPesaBongaPinCell"
         
         BTAppSwitch.setReturnURLScheme("\(NSBundle.mainBundle().bundleIdentifier!).payments")
 
