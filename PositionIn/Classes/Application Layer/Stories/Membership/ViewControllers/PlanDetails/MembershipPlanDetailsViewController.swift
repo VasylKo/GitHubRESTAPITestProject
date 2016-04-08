@@ -55,13 +55,10 @@ class MembershipPlanDetailsViewController: UIViewController, UITableViewDataSour
         self.membershipPlanImageView.image = UIImage(named : self.plan.membershipImageName)
         self.membershipPlanTitleLabel.text = self.plan.name
         
-        switch plan.type {
-        case .Corporate:
-            self.priceLabel.text = String("\(AppConfiguration().currencySymbol) \(self.plan.price ?? 0) Annually")
-        case .Individual:
-            fallthrough
-        case .Unknown:
+        if let lifetime = plan.lifetime where lifetime {
             self.priceLabel.text = String("\(AppConfiguration().currencySymbol) \(self.plan.price ?? 0)")
+        } else {
+            self.priceLabel.text = String("\(AppConfiguration().currencySymbol) \(self.plan.price ?? 0) Annually")
         }
         
         self.tableView.registerNib(UINib(nibName: String(MembershipPlanDetailsBenefitTableViewCell.self), bundle: nil), forCellReuseIdentifier: self.reuseIdentifier)
