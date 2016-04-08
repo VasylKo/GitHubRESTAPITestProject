@@ -110,6 +110,8 @@ class PhoneNumberViewController: XLFormViewController {
     
     @IBAction func doneButtonPressed(sender: AnyObject) {
         
+        trackGoogleAnalyticsEvent("PhoneVerification", action: "Done")
+        
         let validationErrors : Array<NSError> = self.formValidationErrors() as! Array<NSError>
         if (validationErrors.count > 0){
             self.showFormValidationError(validationErrors.first)
@@ -150,6 +152,9 @@ class PhoneNumberViewController: XLFormViewController {
             alertController.addAction(cancelAction)
             
             let OKAction = UIAlertAction(title: "Yes", style: .Default) {[weak self] (action) in
+                
+                trackGoogleAnalyticsEvent("PhoneVerification", action: "PhoneConfirmed")
+                
                 let smsCode = NSNumber(int: 1)
                 api().verifyPhone(phoneNumber, type: smsCode).onSuccess(callback: {[weak self] in
                     let validationController = Storyboards.Onboarding.instantiatePhoneVerificationController()
