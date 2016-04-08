@@ -103,8 +103,7 @@ class MPesaPaymentCompleteViewController: XLFormViewController {
         
         donateProjectRow.cellConfigAtConfigure["itemName"] = product?.name
         donateProjectRow.cellConfigAtConfigure["imageURL"] = product?.imageURL
-        //TODO: add product pickUpAvailability data
-        //donateProjectRow.cellConfigAtConfigure["pickUpAvailability"] = product?.entityDetails?.endData?.formattedAsTimeAgo()
+        donateProjectRow.cellConfigAtConfigure["pickUpAvailability"] = product?.endData?.formattedAsTimeAgo()
         donateToSection.addFormRow(donateProjectRow)
         
         self.form = form
