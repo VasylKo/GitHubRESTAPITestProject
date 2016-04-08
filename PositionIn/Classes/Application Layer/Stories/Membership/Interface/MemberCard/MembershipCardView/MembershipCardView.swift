@@ -42,16 +42,13 @@ class MembershipCardView : UIView {
         self.planNameLabel.text = plan.name
         self.backgroundImageView.image = UIImage(named: profile.membershipDetails?.membershipCardImageName ?? "")
         
-        switch plan.type {
-        case .Corporate:
+        if let lifetime = plan.lifetime where lifetime {
+            self.expirationDateTitleLabel.hidden = true
+            self.expirationDateLabel.hidden = true
+        } else {
             self.expirationDateTitleLabel.hidden = false
             self.expirationDateLabel.hidden = false
             self.expirationDateLabel.text = self.stringFromDate(profile.membershipDetails?.endDate)
-        case .Individual:
-            fallthrough
-        case .Unknown:
-            self.expirationDateTitleLabel.hidden = true
-            self.expirationDateLabel.hidden = true
         }
     }
     

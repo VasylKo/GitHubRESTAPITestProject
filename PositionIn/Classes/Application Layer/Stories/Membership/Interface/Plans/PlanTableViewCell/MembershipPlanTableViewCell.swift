@@ -18,13 +18,10 @@ class MembershipPlanTableViewCell: UITableViewCell {
         self.titleLabel.text = plan.name
         self.membershipImageView.image = UIImage(named : plan.membershipImageName)
         
-        switch plan.type {
-        case .Corporate:
-            self.descriptionLabel.text = String("\(AppConfiguration().currencySymbol) \(plan.price ?? 0) Annually")
-        case .Individual:
-            fallthrough
-        case .Unknown:
+        if let lifetime = plan.lifetime where lifetime {
             self.descriptionLabel.text = String("\(AppConfiguration().currencySymbol) \(plan.price ?? 0)")
+        } else {
+            self.descriptionLabel.text = String("\(AppConfiguration().currencySymbol) \(plan.price ?? 0) Annually")
         }
     }
     
