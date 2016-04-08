@@ -20,5 +20,12 @@ public class OpenApplication: NSObject {
     class func Safari(with url : NSURL) {
         UIApplication.sharedApplication().openURL(url)
     }
-
+    
+    class func Tel(with tel : String) {
+        guard let phoneNumberURL = NSURL(string: "tel://" + tel) else { return }
+        if UIApplication.sharedApplication().canOpenURL(phoneNumberURL) {
+            UIApplication.sharedApplication().openURL(phoneNumberURL)
+        }
+        
+    }
 }

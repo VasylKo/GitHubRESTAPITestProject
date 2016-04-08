@@ -64,7 +64,9 @@ final class UserProfileViewController: BesideMenuViewController, BrowseActionPro
             //send event to analytic
             trackEventToAnalytics(AnalyticCategories.people, action: AnalyticActios.followingCount, value: NSNumber(integer: profile.countFollowing ?? 0))
             trackEventToAnalytics(AnalyticCategories.people, action: AnalyticActios.followersCount, value: NSNumber(integer: profile.countFollowers ?? 0))
-        }
+        }.onComplete(callback: { [weak self] _ in
+                self?.tableView.userInteractionEnabled = true
+                })
     }
     
     private func didReceiveProfile(profile: UserProfile, state: UserProfile.SubscriptionState = .SameUser) {
@@ -349,6 +351,7 @@ extension UserProfileViewController: UserProfileActionConsumer {
             presentViewController(navigationController, animated: true, completion: nil)
         case .Follow:
             if api().isUserAuthorized() {
+                self.tableView.userInteractionEnabled = false
                 api().followUser(objectId).onSuccess { [weak self] in
                     self?.sendSubscriptionUpdateNotification(nil)
                     self?.reloadData()
@@ -357,8 +360,10 @@ extension UserProfileViewController: UserProfileActionConsumer {
                     let personID = self?.objectId ?? NSLocalizedString("Unknown ID")
                     trackEventToAnalytics(AnalyticCategories.people, action: AnalyticActios.follow, label: NSLocalizedString("Person + ") + personID)
                 }
+                
             }
         case .UnFollow:
+            self.tableView.userInteractionEnabled = false
             api().unFollowUser(objectId).onSuccess { [weak self] in
                 self?.sendSubscriptionUpdateNotification(nil)
                 self?.reloadData()

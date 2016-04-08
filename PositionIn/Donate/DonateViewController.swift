@@ -128,6 +128,11 @@ class DonateViewController: XLFormViewController, PaymentReponseDelegate {
         let paymentSection = XLFormSectionDescriptor.formSectionWithTitle("Payment")
         form.addFormSection(paymentSection)
         
+        //MPESA Bonga pin row
+        let mpesaBongoPinRow: XLFormRowDescriptor = XLFormRowDescriptor(tag: nil, rowType: XLFormRowDescriptorTypeMPesaBongaPinView)
+        mpesaBongoPinRow.hidden = true
+        
+        //Select payment method row
         let paymentRow: XLFormRowDescriptor = XLFormRowDescriptor(tag: Tags.Payment.rawValue,
             rowType: XLFormRowDescriptorTypeSelectorPush, title: NSLocalizedString("Select payment method", comment: "Payment"))
         paymentRow.required = true
@@ -140,12 +145,19 @@ class DonateViewController: XLFormViewController, PaymentReponseDelegate {
                 self?.paymentType = CardItem.cardPayment(box.value)
                 self?.paymentTypeName = CardItem.cardName(box.value)
                 self?.sendDonationEventToAnalytics(action: AnalyticActios.selectPaymentMethod)
+                
+                //Show M-Pesa additional info row
+                mpesaBongoPinRow.hidden = box.value != .MPesa
+
             } else {
                 self?.paymentType = nil
             }
         }
         
         paymentSection.addFormRow(paymentRow)
+        paymentSection.addFormRow(mpesaBongoPinRow)
+        
+        
         
         let confirmDonation = XLFormSectionDescriptor.formSection()
         form.addFormSection(confirmDonation)
@@ -174,7 +186,7 @@ class DonateViewController: XLFormViewController, PaymentReponseDelegate {
         }
         
         confirmDonation.addFormRow(confirmRow)
-        confirmDonation.footerTitle = "By purchasing, you agree to Red Cross Terms of service and Privecy Policy"
+            confirmDonation.footerTitle = "By donating, you agree to Red Cross Terms of service and Privacy Policy"
         
         self.form = form
     }

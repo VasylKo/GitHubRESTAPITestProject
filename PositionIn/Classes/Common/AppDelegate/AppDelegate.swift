@@ -36,7 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     override init() {
         #if DEBUG
-        Log.enable(.Verbose, synchronousMode: true)
+        Log.enable(minimumSeverity: .Verbose, debugMode: true)
         #else
         Log.enable(.Info, synchronousMode: false)
         #endif
@@ -108,6 +108,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         XLFormViewController.cellClassesForRowDescriptorTypes()[XLFormRowDescriptorTypePayment] =
         "PaymentTableViewCell"
         
+        XLFormViewController.cellClassesForRowDescriptorTypes()[XLFormRowDescriptorTypeMPesaBongaPinView] =
+        "MPesaBongaPinCell"
+        
         BTAppSwitch.setReturnURLScheme("\(NSBundle.mainBundle().bundleIdentifier!).payments")
 
         let settings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound],
@@ -115,8 +118,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIApplication.sharedApplication().registerUserNotificationSettings(settings)
         UIApplication.sharedApplication().registerForRemoteNotifications()
         
+        #if DEBUG
         Fabric.with([Crashlytics.self])
-        
+        #endif
         NewRelicController.start()
         
         let notificationSettings = LNNotificationAppSettings()

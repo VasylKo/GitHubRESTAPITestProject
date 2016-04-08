@@ -72,6 +72,7 @@ class MembershipMemberProfileViewController : XLFormViewController, MembershipMe
         emailRow.cellConfig["textLabel.textColor"] = UIScheme.mainThemeColor
         emailRow.cellConfig["tintColor"] = UIScheme.mainThemeColor
         emailRow.cellConfig["textField.placeholder"] = NSLocalizedString("Optional")
+        emailRow.addValidator(XLFormRegexValidator(msg: NSLocalizedString("Please enter a valid email", comment: "Email validation"), regex: "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"))
         infoSection.addFormRow(emailRow)
         
         self.form  = form
@@ -158,10 +159,6 @@ class MembershipMemberProfileViewController : XLFormViewController, MembershipMe
             return
         }
         
-        guard isFieldsValid() else {
-            return
-        }
-        
         let validationErrors : Array<NSError> = self.formValidationErrors() as! Array<NSError>
         if (validationErrors.count > 0){
             self.showFormValidationError(validationErrors.first)
@@ -195,28 +192,6 @@ class MembershipMemberProfileViewController : XLFormViewController, MembershipMe
             }).onFailure(callback: {_ in
                 trackEventToAnalytics(AnalyticCategories.auth, action: AnalyticActios.userSignUpFail)
             })
-    }
-    
-    // MARK: - Fileds vaalidatios
-    private func isFieldsValid() -> Bool {
-        let values = formValues()
-        guard let email = values[Tags.Email.rawValue] as? String else {
-            return true
-        }
-        
-        
-        let validationRules: [StringValidation.ValidationRule] = [
-            (email, StringValidation.sequence([StringValidation.required(),StringValidation.email()]))]
-        
-        return validateInput(validationRules)
-    }
-    
-    private func validateInput(validationRules: [StringValidation.ValidationRule]) -> Bool {
-        if let validationResult = StringValidation.validate(validationRules) {
-            showWarning(validationResult.error.localizedDescription)
-            return false
-        }
-        return true
     }
     
     // MARK: XLFormViewController

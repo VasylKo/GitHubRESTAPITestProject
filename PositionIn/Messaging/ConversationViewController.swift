@@ -175,7 +175,11 @@ final class ConversationViewController: JSQMessagesViewController {
 
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         if let cell = super.collectionView(collectionView, cellForItemAtIndexPath: indexPath) as?  JSQMessagesCollectionViewCell {
-            
+            if let message = self.collectionView(collectionView as! JSQMessagesCollectionView, messageDataForItemAtIndexPath: indexPath) where
+                message.senderId() != self.senderId{
+                cell.textView?.textColor = UIColor.blackColor()
+            }
+
             return cell
         }
         return UICollectionViewCell()

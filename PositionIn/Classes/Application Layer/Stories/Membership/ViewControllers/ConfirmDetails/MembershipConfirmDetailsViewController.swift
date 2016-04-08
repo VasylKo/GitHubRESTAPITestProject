@@ -50,6 +50,7 @@ class MembershipConfirmDetailsViewController : XLFormViewController {
         row.cellConfigAtConfigure["textField.placeholder"] = NSLocalizedString("Required", comment: "")
         row.cellConfig.setObject(UIScheme.mainThemeColor, forKey: "textLabel.textColor")
         row.cellConfig.setObject(UIScheme.mainThemeColor, forKey: "tintColor")
+        row.addValidator(XLFormRegexValidator(msg: NSLocalizedString("Please enter a valid email", comment: "Email validation"), regex: "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"))
         row.required = true
         return row
     }()

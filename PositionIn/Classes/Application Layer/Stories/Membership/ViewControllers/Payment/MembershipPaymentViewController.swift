@@ -95,6 +95,12 @@ class MembershipPaymentViewController: XLFormViewController, PaymentReponseDeleg
         let paymentSection = XLFormSectionDescriptor.formSectionWithTitle("Payment")
         form.addFormSection(paymentSection)
         
+        
+        //MPESA Bonga pin row
+        let mpesaBongoPinRow: XLFormRowDescriptor = XLFormRowDescriptor(tag: nil, rowType: XLFormRowDescriptorTypeMPesaBongaPinView)
+        mpesaBongoPinRow.hidden = true
+        
+        //Select payment method row
         let paymentRow: XLFormRowDescriptor = XLFormRowDescriptor(tag: Tags.Payment.rawValue,
             rowType: XLFormRowDescriptorTypeSelectorPush, title: NSLocalizedString("Select payment method", comment: "Payment"))
         paymentRow.action.viewControllerClass = SelectPaymentMethodController.self
@@ -102,7 +108,15 @@ class MembershipPaymentViewController: XLFormViewController, PaymentReponseDeleg
         paymentRow.value = nil
         paymentRow.cellConfig.setObject(UIScheme.mainThemeColor, forKey: "tintColor")
         paymentRow.required = true
+        paymentRow.onChangeBlock = { oldValue, newValue, _ in
+            if let box: Box<CardItem> = newValue as? Box {
+                //Show M-Pesa additional info row
+                mpesaBongoPinRow.hidden = box.value != .MPesa
+            }
+        }
+        
         paymentSection.addFormRow(paymentRow)
+        paymentSection.addFormRow(mpesaBongoPinRow)
         
         let confirmDonation = XLFormSectionDescriptor.formSection()
         form.addFormSection(confirmDonation)

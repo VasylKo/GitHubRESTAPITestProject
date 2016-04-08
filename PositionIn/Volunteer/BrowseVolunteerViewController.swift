@@ -18,6 +18,7 @@ class BrowseVolunteerViewController: BrowseCommunityViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Volunteering"
+        navigationController?.delegate = nil
     }
     
     override func viewWillAppear(animated: Bool) {

@@ -666,8 +666,77 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="BongaPin" rowHeight="102" id="yHg-TM-J1e">
+                                        <rect key="frame" x="0.0" y="337" width="600" height="102"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="yHg-TM-J1e" id="CSH-XM-mkO">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="101"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0b9-D0-PGK">
+                                                    <rect key="frame" x="0.0" y="0.0" width="600" height="86"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To complete this M-Pesa transaction, you will need to enter your Bonga PIN on your handset. If you don't have one dial" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9J7-pn-Rb1">
+                                                            <rect key="frame" x="16" y="14" width="568" height="33"/>
+                                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mnU-jL-Se1">
+                                                            <rect key="frame" x="16" y="43" width="51" height="29"/>
+                                                            <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="14"/>
+                                                            <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <state key="normal" title="*126*5#"/>
+                                                            <connections>
+                                                                <action selector="dialMpesaNumberButtonPressed:" destination="9PQ-zJ-hEA" eventType="touchUpInside" id="J3e-uN-O75"/>
+                                                            </connections>
+                                                        </button>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="for instructions." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rpk-si-lgz">
+                                                            <rect key="frame" x="70" y="50" width="98" height="17"/>
+                                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZOh-RU-Xhy">
+                                                            <rect key="frame" x="171" y="44" width="33" height="29"/>
+                                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                                            <color key="tintColor" red="0.92941176469999998" green="0.1058823529" blue="0.18039215689999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <state key="normal" title="More"/>
+                                                            <connections>
+                                                                <action selector="moreAboutMpesaButtonPressed:" destination="9PQ-zJ-hEA" eventType="touchUpInside" id="Xk6-8y-L8W"/>
+                                                            </connections>
+                                                        </button>
+                                                    </subviews>
+                                                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="bottom" secondItem="mnU-jL-Se1" secondAttribute="bottom" constant="14" id="0x4-2r-f1k"/>
+                                                        <constraint firstAttribute="trailing" secondItem="9J7-pn-Rb1" secondAttribute="trailing" constant="16" id="1D1-2H-pjx"/>
+                                                        <constraint firstItem="mnU-jL-Se1" firstAttribute="top" secondItem="9J7-pn-Rb1" secondAttribute="bottom" constant="-4" id="DnR-Hb-zCF"/>
+                                                        <constraint firstItem="Rpk-si-lgz" firstAttribute="baseline" secondItem="mnU-jL-Se1" secondAttribute="baseline" id="PQD-uP-2pI"/>
+                                                        <constraint firstItem="Rpk-si-lgz" firstAttribute="leading" secondItem="mnU-jL-Se1" secondAttribute="trailing" constant="3" id="Pfi-k0-eXt"/>
+                                                        <constraint firstItem="ZOh-RU-Xhy" firstAttribute="baseline" secondItem="Rpk-si-lgz" secondAttribute="baseline" id="Q0g-aL-3o6"/>
+                                                        <constraint firstItem="9J7-pn-Rb1" firstAttribute="top" secondItem="0b9-D0-PGK" secondAttribute="top" constant="14" id="SgD-Gq-Xld"/>
+                                                        <constraint firstItem="9J7-pn-Rb1" firstAttribute="leading" secondItem="0b9-D0-PGK" secondAttribute="leading" constant="16" id="heR-a7-8Qr"/>
+                                                        <constraint firstItem="mnU-jL-Se1" firstAttribute="leading" secondItem="0b9-D0-PGK" secondAttribute="leading" constant="16" id="uD3-gc-a82"/>
+                                                        <constraint firstItem="ZOh-RU-Xhy" firstAttribute="leading" secondItem="Rpk-si-lgz" secondAttribute="trailing" constant="3" id="wmT-SN-1Mu"/>
+                                                        <constraint firstAttribute="bottom" secondItem="mnU-jL-Se1" secondAttribute="bottom" constant="14" id="yCz-0H-ROa"/>
+                                                    </constraints>
+                                                    <variation key="default">
+                                                        <mask key="constraints">
+                                                            <exclude reference="yCz-0H-ROa"/>
+                                                        </mask>
+                                                    </variation>
+                                                </view>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="0b9-D0-PGK" firstAttribute="top" secondItem="CSH-XM-mkO" secondAttribute="top" id="YLj-k1-cGX"/>
+                                                <constraint firstItem="0b9-D0-PGK" firstAttribute="leading" secondItem="CSH-XM-mkO" secondAttribute="leading" id="jEZ-0Q-cam"/>
+                                                <constraint firstAttribute="trailing" secondItem="0b9-D0-PGK" secondAttribute="trailing" id="pi1-aw-a76"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="60" id="UL0-zW-Mxn">
-                                        <rect key="frame" x="0.0" y="337" width="600" height="60"/>
+                                        <rect key="frame" x="0.0" y="439" width="600" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="UL0-zW-Mxn" id="ZkR-io-RwN">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="59"/>
@@ -694,7 +763,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="132" id="s0p-dk-fgV">
-                                        <rect key="frame" x="0.0" y="397" width="600" height="132"/>
+                                        <rect key="frame" x="0.0" y="499" width="600" height="132"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="s0p-dk-fgV" id="XOD-av-vt1">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="131"/>
