@@ -17,6 +17,7 @@ final class DonationDetailsViewController: UIViewController {
     @IBOutlet weak var paymentMethodLabel: UILabel?
     @IBOutlet weak var paymentDateLabel: UILabel?
     @IBOutlet weak var totalLabel: UILabel?
+    @IBOutlet weak var transactionIDLabel: UILabel?
     
     // MARK: - Intenal properties
     internal var donation: Order?
@@ -39,6 +40,7 @@ final class DonationDetailsViewController: UIViewController {
         setProductImage()
         donatedToLabel?.text = donation?.entityDetails?.name
         paymentMethodLabel?.text = donation?.paymentMethod?.description
+        transactionIDLabel?.text = donation?.transactionId
         paymentDateLabel?.text = donation?.paymentDate?.formattedAsTimeAgo()
         totalLabel?.text = AppConfiguration().currencyFormatter.stringFromNumber(donation?.price ?? 0.0) ?? ""
     }
