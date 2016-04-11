@@ -128,6 +128,36 @@ class FeedItem: CRUDObject {
         }
     }
     
+    func likeEndpoint() -> String {
+        switch type {
+        case .Unknown:
+            break
+        case .Project:
+            break
+        case .Emergency:
+            break
+        case .Training:
+            break
+        case .GiveBlood:
+            break
+        case .Event:
+            break
+        case .News:
+            return "/v1.0/news/\(objectId)/like"
+        case .BomaHotels:
+            break
+        case .Market:
+            break
+        case .Volunteer:
+            break
+        case .Post:
+            break
+        case .Donation:
+            break
+        }
+        return ""
+    }
+    
     static func endpoint() -> String {
         return "/v1.0/search"
     }
