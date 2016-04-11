@@ -41,18 +41,13 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="270" text="0.09 miles" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CmM-7b-atD">
-                                <rect key="frame" x="56" y="215" width="240" height="17"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="260" verticalHuggingPriority="260" text="Edward Ryan" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gvg-wy-92o">
                                 <rect key="frame" x="56" y="193" width="240" height="17"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                 <color key="textColor" red="0.61176470589999998" green="0.61176470589999998" blue="0.61176470589999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wb6-xM-xc6">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wb6-xM-xc6">
                                 <rect key="frame" x="56" y="240" width="240" height="53"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -110,27 +105,25 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="ghU-PB-oTZ" secondAttribute="trailing" constant="8" id="345-xn-PvY"/>
-                            <constraint firstItem="CmM-7b-atD" firstAttribute="top" secondItem="gvg-wy-92o" secondAttribute="bottom" constant="5" id="9QN-AJ-deX"/>
+                            <constraint firstItem="wb6-xM-xc6" firstAttribute="top" secondItem="gvg-wy-92o" secondAttribute="bottom" constant="8" id="7aj-HG-ZUt"/>
                             <constraint firstItem="BuU-PG-vaO" firstAttribute="leading" secondItem="VFT-5Z-uSd" secondAttribute="leading" constant="8" id="Aob-Mj-EXC"/>
+                            <constraint firstItem="xzk-7w-btk" firstAttribute="top" secondItem="wb6-xM-xc6" secondAttribute="bottom" constant="8" id="D4t-F5-o9y"/>
                             <constraint firstAttribute="trailing" secondItem="wb6-xM-xc6" secondAttribute="trailing" constant="8" id="Ezx-zA-zvi"/>
                             <constraint firstItem="ghU-PB-oTZ" firstAttribute="top" secondItem="z5a-Vc-Unv" secondAttribute="bottom" constant="8" id="FDO-zA-Kuw"/>
                             <constraint firstItem="z5a-Vc-Unv" firstAttribute="top" secondItem="VFT-5Z-uSd" secondAttribute="top" id="FQn-cz-0NI"/>
                             <constraint firstItem="z5a-Vc-Unv" firstAttribute="leading" secondItem="VFT-5Z-uSd" secondAttribute="leading" id="GVh-lL-wfd"/>
-                            <constraint firstItem="wb6-xM-xc6" firstAttribute="top" secondItem="CmM-7b-atD" secondAttribute="bottom" constant="8" id="K2K-eK-x7v"/>
-                            <constraint firstItem="BuU-PG-vaO" firstAttribute="top" secondItem="z5a-Vc-Unv" secondAttribute="top" id="NOq-7r-t1a"/>
                             <constraint firstAttribute="trailing" secondItem="xzk-7w-btk" secondAttribute="trailing" id="O84-X0-y8h"/>
-                            <constraint firstAttribute="trailing" secondItem="CmM-7b-atD" secondAttribute="trailing" constant="8" id="PdJ-hV-ECl"/>
                             <constraint firstItem="xzk-7w-btk" firstAttribute="top" secondItem="wb6-xM-xc6" secondAttribute="bottom" constant="8" id="RC5-H0-LZj"/>
-                            <constraint firstItem="wb6-xM-xc6" firstAttribute="leading" secondItem="CmM-7b-atD" secondAttribute="leading" id="Zsj-0W-Ima"/>
                             <constraint firstAttribute="trailing" secondItem="gvg-wy-92o" secondAttribute="trailing" constant="8" id="Zwp-qi-tUe"/>
                             <constraint firstAttribute="trailing" secondItem="z5a-Vc-Unv" secondAttribute="trailing" id="a6J-EK-HiA"/>
-                            <constraint firstItem="xzk-7w-btk" firstAttribute="top" secondItem="wb6-xM-xc6" secondAttribute="bottom" constant="15" id="bHO-xr-R4S"/>
                             <constraint firstItem="ghU-PB-oTZ" firstAttribute="leading" secondItem="BuU-PG-vaO" secondAttribute="trailing" constant="8" id="cDV-37-xEb"/>
                             <constraint firstItem="gvg-wy-92o" firstAttribute="top" secondItem="ghU-PB-oTZ" secondAttribute="bottom" constant="5" id="cbN-RI-oVu"/>
                             <constraint firstItem="xzk-7w-btk" firstAttribute="leading" secondItem="VFT-5Z-uSd" secondAttribute="leading" id="crH-oy-exK"/>
+                            <constraint firstItem="wb6-xM-xc6" firstAttribute="leading" secondItem="gvg-wy-92o" secondAttribute="leading" id="eBw-gh-ueY"/>
                             <constraint firstItem="BuU-PG-vaO" firstAttribute="top" secondItem="z5a-Vc-Unv" secondAttribute="bottom" constant="8" id="iFW-wE-PIn"/>
                             <constraint firstAttribute="bottom" secondItem="xzk-7w-btk" secondAttribute="bottom" id="kfb-11-zWv"/>
-                            <constraint firstItem="CmM-7b-atD" firstAttribute="leading" secondItem="ghU-PB-oTZ" secondAttribute="leading" id="luu-vS-jej"/>
+                            <constraint firstItem="wb6-xM-xc6" firstAttribute="top" secondItem="gvg-wy-92o" secondAttribute="bottom" constant="8" id="oud-t8-6Pn"/>
+                            <constraint firstAttribute="trailing" secondItem="wb6-xM-xc6" secondAttribute="trailing" constant="8" id="p6K-P0-gc8"/>
                             <constraint firstItem="gvg-wy-92o" firstAttribute="leading" secondItem="ghU-PB-oTZ" secondAttribute="leading" id="xC1-AY-CTX"/>
                             <constraint firstItem="gvg-wy-92o" firstAttribute="top" secondItem="ghU-PB-oTZ" secondAttribute="bottom" constant="5" id="zCY-aq-5RD"/>
                         </constraints>
@@ -141,8 +134,9 @@
                         </userDefinedRuntimeAttributes>
                         <variation key="default">
                             <mask key="constraints">
-                                <exclude reference="NOq-7r-t1a"/>
-                                <exclude reference="bHO-xr-R4S"/>
+                                <exclude reference="7aj-HG-ZUt"/>
+                                <exclude reference="Ezx-zA-zvi"/>
+                                <exclude reference="RC5-H0-LZj"/>
                             </mask>
                         </variation>
                     </view>
@@ -163,11 +157,10 @@
                 <outlet property="feedItemImageView" destination="z5a-Vc-Unv" id="BD6-ad-b4g"/>
                 <outlet property="headerLabel" destination="ghU-PB-oTZ" id="Df9-nU-DzW"/>
                 <outlet property="imageHeightConstaint" destination="wai-cu-y5i" id="eu0-7Q-TUI"/>
-                <outlet property="infoLabel" destination="CmM-7b-atD" id="GH4-ro-qMu"/>
                 <outlet property="likeButton" destination="r8Z-ur-RJI" id="HJW-F8-w44"/>
                 <outlet property="newsTextLabel" destination="wb6-xM-xc6" id="km2-sE-ciQ"/>
             </connections>
-            <point key="canvasLocation" x="215" y="378"/>
+            <point key="canvasLocation" x="215" y="478"/>
         </tableViewCell>
     </objects>
     <resources>

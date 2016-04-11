@@ -91,6 +91,8 @@
 		50FE7D8A1BBE77BB005676E2 /* ItemsSearchResultsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FE7D881BBE77BB005676E2 /* ItemsSearchResultsController.swift */; };
 		541820FC1CB7B28D001A780A /* MPesaBongaPinCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 541820FB1CB7B28D001A780A /* MPesaBongaPinCell.swift */; };
 		541820FE1CB7B295001A780A /* MPesaBongaPinCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 541820FD1CB7B295001A780A /* MPesaBongaPinCell.xib */; };
+		54A31F961CBBF20900A833C9 /* DonationPaymentAmountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54A31F941CBBF20900A833C9 /* DonationPaymentAmountCell.swift */; };
+		54A31F971CBBF20900A833C9 /* DonationPaymentAmountCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 54A31F951CBBF20900A833C9 /* DonationPaymentAmountCell.xib */; };
 		5DA3850FA75B150D79C68EE1 /* Pods_PositionIn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFAA26C98F322F00903B06FC /* Pods_PositionIn.framework */; };
 		CD076E871C73922A005C04C2 /* NewsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD076E861C73922A005C04C2 /* NewsListViewController.swift */; };
 		CD076E891C7497A8005C04C2 /* PositionIn.NewsListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD076E881C7497A8005C04C2 /* PositionIn.NewsListViewController.xib */; };
@@ -653,6 +655,8 @@
 		50FE7D881BBE77BB005676E2 /* ItemsSearchResultsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemsSearchResultsController.swift; sourceTree = "<group>"; };
 		541820FB1CB7B28D001A780A /* MPesaBongaPinCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPesaBongaPinCell.swift; sourceTree = "<group>"; };
 		541820FD1CB7B295001A780A /* MPesaBongaPinCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MPesaBongaPinCell.xib; sourceTree = "<group>"; };
+		54A31F941CBBF20900A833C9 /* DonationPaymentAmountCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DonationPaymentAmountCell.swift; sourceTree = "<group>"; };
+		54A31F951CBBF20900A833C9 /* DonationPaymentAmountCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DonationPaymentAmountCell.xib; sourceTree = "<group>"; };
 		56DAF56D2A99203B14E2570B /* Pods-PositionIn.stagingrelease.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PositionIn.stagingrelease.xcconfig"; path = "Pods/Target Support Files/Pods-PositionIn/Pods-PositionIn.stagingrelease.xcconfig"; sourceTree = "<group>"; };
 		64AF9DE99B2895039ACA7F1F /* Pods-PositionIn.devrelease.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PositionIn.devrelease.xcconfig"; path = "Pods/Target Support Files/Pods-PositionIn/Pods-PositionIn.devrelease.xcconfig"; sourceTree = "<group>"; };
 		6D4334208E75726DC30CEAE7 /* Pods-PositionIn.stagingreleasecopy.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PositionIn.stagingreleasecopy.xcconfig"; path = "Pods/Target Support Files/Pods-PositionIn/Pods-PositionIn.stagingreleasecopy.xcconfig"; sourceTree = "<group>"; };
@@ -1488,6 +1492,15 @@
 				541820FD1CB7B295001A780A /* MPesaBongaPinCell.xib */,
 			);
 			path = MPesaBongaPinCell;
+			sourceTree = "<group>";
+		};
+		54A31F931CBBF1C200A833C9 /* DonationPaymentAmountCell */ = {
+			isa = PBXGroup;
+			children = (
+				54A31F941CBBF20900A833C9 /* DonationPaymentAmountCell.swift */,
+				54A31F951CBBF20900A833C9 /* DonationPaymentAmountCell.xib */,
+			);
+			path = DonationPaymentAmountCell;
 			sourceTree = "<group>";
 		};
 		CD076E851C739215005C04C2 /* News */ = {
@@ -2339,6 +2352,7 @@
 		E6325F581B57D46C00996480 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				54A31F931CBBF1C200A833C9 /* DonationPaymentAmountCell */,
 				541820F41CB7B0F2001A780A /* MPesaBongaPinCell */,
 				D1379E911C2C21380041AA4E /* NewsCardCell */,
 				D1379E8A1C2A95E70041AA4E /* ExploreCardCell */,
@@ -3986,6 +4000,7 @@
 				CD8ED0DE1C60BE7000576DBF /* MembershipCardView.xib in Resources */,
 				18CCFB011C8D8AEB00603C7F /* MembershipMemberDetailsViewController.xib in Resources */,
 				50C7B5B21BC6A32900E8E8B4 /* PositionIn.SettingsViewController.xib in Resources */,
+				54A31F971CBBF20900A833C9 /* DonationPaymentAmountCell.xib in Resources */,
 				E6BEF1E81B9C83F200511B46 /* PositionIn.CommunityInfoCell.xib in Resources */,
 				CD552DD41C75DF670012920F /* PositionIn.NewsTableViewCell.xib in Resources */,
 				D1F1FF2F1C24265B006D2E75 /* PositionIn.GiveBloodDetailsViewController.xib in Resources */,
@@ -4447,6 +4462,7 @@
 				E6BEF1E51B9C83F200511B46 /* CommunityInfoCell.swift in Sources */,
 				E6325F651B57D89A00996480 /* SidebarViewController.swift in Sources */,
 				CD3358201C6CD19A00E78267 /* MoreInformationViewController.swift in Sources */,
+				54A31F961CBBF20900A833C9 /* DonationPaymentAmountCell.swift in Sources */,
 				24D850421B878730008CAE82 /* LoginSignupViewController.swift in Sources */,
 				E66115891B73771E003DB5B3 /* LoginViewController.swift in Sources */,
 				E6F7A47E1BA356130069152A /* LocationSearchResultsController.swift in Sources */,

@@ -20,6 +20,9 @@ class DonateViewController: XLFormViewController, PaymentReponseDelegate {
         case Error = "Error"
     }
     
+    private static let mpesaPeymentAmountErrorMessage = NSLocalizedString("The minimum amount should be 10 for m-pesa payment", comment: "Mpesa payment amount warning")
+
+    
     enum DonationType: Int {
         case Unknown = 0
         case Project, EmergencyAlert, Donation, FeedEmergencyAlert
@@ -28,12 +31,16 @@ class DonateViewController: XLFormViewController, PaymentReponseDelegate {
     var product: Product?
     var donationType: DonationType = .Donation
     
-    private var amount:Int = 0;
+    private var amount:Int = 0
+     
+    private var selectedCardType: CardItem?
     private var paymentType: String?
-    private var paymentTypeName: String?
     private var finishedSuccessfully = false
     private var errorSection:XLFormSectionDescriptor?
     private weak var confirmRowDescriptor: XLFormRowDescriptor?
+    private weak var paymentTypeRowDescriptor: XLFormRowDescriptor?
+    private weak var paymentAmountWarningRowDescriptor: XLFormRowDescriptor?
+    private var cardTypeValidator = CardTypeValidator()
     
     internal var viewControllerToOpenOnComplete: UIViewController?
     
@@ -125,6 +132,14 @@ class DonateViewController: XLFormViewController, PaymentReponseDelegate {
         
         donatationSection.addFormRow(donationRow)
         
+        //Payment amount worning row
+        let paymentAmountWorningRow: XLFormRowDescriptor = XLFormRowDescriptor(tag: nil,
+            rowType: XLFormRowDescriptorTypeDonationPaymentAmountCell)
+        paymentAmountWorningRow.cellConfigAtConfigure["textToShow"] = DonateViewController.mpesaPeymentAmountErrorMessage
+        paymentAmountWorningRow.hidden = true
+        paymentAmountWarningRowDescriptor = paymentAmountWorningRow
+        donatationSection.addFormRow(paymentAmountWorningRow)
+        
         let paymentSection = XLFormSectionDescriptor.formSectionWithTitle("Payment")
         form.addFormSection(paymentSection)
         
@@ -135,15 +150,17 @@ class DonateViewController: XLFormViewController, PaymentReponseDelegate {
         //Select payment method row
         let paymentRow: XLFormRowDescriptor = XLFormRowDescriptor(tag: Tags.Payment.rawValue,
             rowType: XLFormRowDescriptorTypeSelectorPush, title: NSLocalizedString("Select payment method", comment: "Payment"))
+        paymentTypeRowDescriptor = paymentRow
         paymentRow.required = true
         paymentRow.action.viewControllerClass = SelectPaymentMethodController.self
         paymentRow.valueTransformer = CardItemValueTrasformer.self
         paymentRow.value = nil
         paymentRow.cellConfig.setObject(UIScheme.mainThemeColor, forKey: "tintColor")
+        paymentRow.addValidator(cardTypeValidator)
         paymentRow.onChangeBlock = { [weak self] oldValue, newValue, _ in
             if let box: Box<CardItem> = newValue as? Box {
                 self?.paymentType = CardItem.cardPayment(box.value)
-                self?.paymentTypeName = CardItem.cardName(box.value)
+                self?.selectedCardType = box.value
                 self?.sendDonationEventToAnalytics(action: AnalyticActios.selectPaymentMethod)
                 
                 //Show M-Pesa additional info row
@@ -234,24 +251,48 @@ class DonateViewController: XLFormViewController, PaymentReponseDelegate {
     // MARK: XLFormViewController
     override func formRowDescriptorValueHasChanged(formRow: XLFormRowDescriptor!, oldValue: AnyObject!, newValue: AnyObject!) {
         super.formRowDescriptorValueHasChanged(formRow, oldValue: oldValue, newValue: newValue)
-
+        
+        guard   let paymentTypeRowDescriptor = paymentTypeRowDescriptor,
+                    confirmRowDescriptor = confirmRowDescriptor,
+                    paymentAmountWarningRowDescriptor = paymentAmountWarningRowDescriptor
+        else { return }
+        
         let validationErrors : Array<NSError> = formValidationErrors() as! Array<NSError>
         let hasErrors = validationErrors.count > 0
         
-        if let confirmRowDescriptor = confirmRowDescriptor {
-            let backgroundColor = hasErrors ? UIScheme.disableActionColor : UIScheme.enableActionColor
-            confirmRowDescriptor.disabled = hasErrors
-            confirmRowDescriptor.cellConfig["backgroundColor"] = backgroundColor
-            updateFormRow(confirmRowDescriptor)
+        if let rowTag = formRow.tag, value = newValue as? NSNumber  where rowTag == Tags.Money.rawValue {
+            cardTypeValidator.paymentAmount = Int(value)
         }
+        
+        //Show mpesa minimum payment amount worning label
+        let paymenTypeValidationStatus = paymentTypeRowDescriptor.doValidation()
+        if !paymenTypeValidationStatus.isValid && paymenTypeValidationStatus.msg == DonateViewController.mpesaPeymentAmountErrorMessage {
+            paymentAmountWarningRowDescriptor.hidden = false
+        } else {
+            paymentAmountWarningRowDescriptor.hidden = true
+        }
+        
+        //Enable or disable confirm button
+        let backgroundColor = hasErrors ? UIScheme.disableActionColor : UIScheme.enableActionColor
+        confirmRowDescriptor.disabled = hasErrors
+        confirmRowDescriptor.cellConfig["backgroundColor"] = backgroundColor
+        updateFormRow(confirmRowDescriptor)
+        
     }
     
     //MARK: - Analytic tracking
     
     private func sendDonationEventToAnalytics(action action: String, label: String? = nil) {
         //Send tracking enevt
+        var paymentTypeName = ""
+        if let cardType = selectedCardType, cardName = CardItem.cardName(cardType) {
+            paymentTypeName = cardName
+        } else {
+            paymentTypeName = NSLocalizedString("Can't get payment type")
+        }
+        
         let donationTypeName = AnalyticCategories.labelForDonationType(donationType)
-        let paymentTypeLabel = label ?? paymentTypeName ?? NSLocalizedString("Can't get payment type")
+        let paymentTypeLabel = label ?? paymentTypeName
         let paymentAmountNumber = NSNumber(integer: amount ?? 0)
         trackEventToAnalytics(donationTypeName, action: action, label: paymentTypeLabel, value: paymentAmountNumber)
     }
@@ -273,6 +314,27 @@ extension DonateViewController {
                 status = true
             } else {
                 msg = NSLocalizedString("Entered value is invalid")
+                status = false
+            }
+            return XLFormValidationStatus(msg: msg, status: status, rowDescriptor: row)
+        }
+    }
+    
+    internal class CardTypeValidator: NSObject, XLFormValidatorProtocol {
+        var paymentAmount = 0
+        
+        @objc func isValid(row: XLFormRowDescriptor!) -> XLFormValidationStatus {
+            var msg = ""
+            var status = false
+            
+            if let box: Box<CardItem> = row.value as? Box where box.value == .CreditDebitCard || (box.value == .MPesa && paymentAmount >= 10) {
+                msg = NSLocalizedString("Selected value is valid")
+                status = true
+            } else if let box: Box<CardItem> = row.value as? Box where box.value == .MPesa && paymentAmount < 10 {
+                msg = DonateViewController.mpesaPeymentAmountErrorMessage
+                status = false
+            } else {
+                msg = NSLocalizedString("Selected value is invalid (empty)")
                 status = false
             }
             return XLFormValidationStatus(msg: msg, status: status, rowDescriptor: row)

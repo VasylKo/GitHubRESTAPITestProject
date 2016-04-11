@@ -224,6 +224,9 @@ struct AnalyticCategories {
     static let bomaHotels = NSLocalizedString("BomaHotels")
     static let notifications = NSLocalizedString("Notifications")
     
+    static let home = NSLocalizedString("Home")
+    static let post = NSLocalizedString("Post")
+    
     static let unknownCategoty = NSLocalizedString("UnknownCategoty")
     
     static func labelForDonationType(donationType: DonateViewController.DonationType) -> String {
@@ -316,4 +319,14 @@ struct AnalyticActios {
     static let bookingClicked = NSLocalizedString("BookingClicked")
     
     static let notificationCount = NSLocalizedString("NotificationCount")
+    
+    static let homePlusPressedOpen = NSLocalizedString("HomePlusPressedOpen")
+    static let actionOpenDonate = NSLocalizedString("ActionOpenDonate")
+    static let actionOpenAmbulance = NSLocalizedString("ActionOpenAmbulance")
+    static let actionOpenPost = NSLocalizedString("ActionOpenPost")
+    static let homePlusPressedClose = NSLocalizedString("HomePlusPressedClose")
+    
+    
+    
+    
 }

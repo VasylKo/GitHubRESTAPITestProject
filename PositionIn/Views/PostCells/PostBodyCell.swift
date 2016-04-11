@@ -13,9 +13,10 @@ class PostBodyCell: TableViewCell {
         let m = model as? TableViewCellTextModel
         assert(m != nil, "Invalid model passed")
         contentLabel.text = m!.title
-        
+        leftMarginConstaint.constant = CGFloat(m!.leftMargin)
         selectionStyle = .None
     }
 
+    @IBOutlet weak var leftMarginConstaint: NSLayoutConstraint!
     @IBOutlet weak var contentLabel: UILabel!
 }
