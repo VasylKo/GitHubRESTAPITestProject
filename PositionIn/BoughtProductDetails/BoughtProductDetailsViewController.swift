@@ -24,6 +24,7 @@ final class BoughtProductDetailsViewController: UIViewController {
     @IBOutlet weak var paymentMethodLabel: UILabel?
     @IBOutlet weak var paymentDateLabel: UILabel?
     @IBOutlet weak var totalLabel: UILabel?
+    @IBOutlet weak var transactionIDLabel: UILabel?
     
     @IBOutlet weak var actionTableView: UITableView?
     
@@ -89,6 +90,7 @@ final class BoughtProductDetailsViewController: UIViewController {
         pickUpAvailabilityLabel?.text = product?.entityDetails?.endData?.formattedAsTimeAgo()
         quantityLabel?.text = "\(product?.quantity ?? 0)"
         paymentMethodLabel?.text = product?.paymentMethod?.description
+        transactionIDLabel?.text = product?.transactionId
         paymentDateLabel?.text = product?.paymentDate?.formattedAsTimeAgo()
         totalLabel?.text = AppConfiguration().currencyFormatter.stringFromNumber(product?.price ?? 0.0) ?? ""
         
