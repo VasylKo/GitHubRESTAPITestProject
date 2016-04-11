@@ -415,6 +415,17 @@ final class APIService {
         return updateCommand(endpoint, method: .DELETE)
     }
 
+    //MARK: - Feed items -
+    
+    func likeFeedItem(feedItem: FeedItem) -> Future<Void, NSError> {
+        let endpoint = feedItem.likeEndpoint()
+        return updateCommand(endpoint)
+    }
+    
+    func unlikeFeedItem(feedItem: FeedItem) -> Future<Void, NSError> {
+        let endpoint = feedItem.likeEndpoint()
+        return updateCommand(endpoint, method: .DELETE)
+    }
     
     //MARK: - Search -
     

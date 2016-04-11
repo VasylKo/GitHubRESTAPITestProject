@@ -90,15 +90,16 @@ extension NewsListViewController: NewsListActionConsumer {
     
     func like(item: FeedItem) {
         if (item.isLiked) {
-            api().unlikePost(item.objectId).onSuccess{[weak self] in
-                self?.reloadData()
-            }
+            item.numOfLikes?--
+            api().unlikeFeedItem(item).onSuccess{}
         }
         else {
-            api().likePost(item.objectId).onSuccess{[weak self] in
-                self?.reloadData()
-            }
+            item.numOfLikes?++
+            api().likeFeedItem(item).onSuccess{}
         }
+        
+        item.isLiked = !item.isLiked
+        tableView.reloadData()
     }
 }
 
