@@ -19,9 +19,11 @@ public struct  TableViewCellInvalidModel: TableViewCellModel {
 
 public struct TableViewCellTextModel: TableViewCellModel {
     public let title: String
+    public let leftMargin: integer_t
     
-    public init(title: String) {
+    public init(title: String, leftMargin: integer_t = 20) {
         self.title = title
+        self.leftMargin = leftMargin
     }
 }
 
