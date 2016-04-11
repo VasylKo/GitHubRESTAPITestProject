@@ -20,8 +20,8 @@ struct PostCellModelFactory {
         }
 
         let date: String? = post.date?.formattedAsTimeAgo()
-        firstSection.append(PostInfoModel(firstLine: post.author?.title, secondLine: date, imageUrl: post.author?.avatar, userId: post.author?.objectId))
-        firstSection.append(TableViewCellTextModel(title: post.name ?? ""))
+        firstSection.append(PostInfoModel(firstLine: post.name, secondLine: date, imageUrl: post.author?.avatar, userId: post.author?.objectId))
+        firstSection.append(TableViewCellTextModel(title: post.descriptionString ?? "", leftMargin: 62))
         
         
         if post.links?.isEmpty == false || post.attachments?.isEmpty == false {
