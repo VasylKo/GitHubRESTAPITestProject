@@ -54,16 +54,16 @@ struct AnalyticsLabels {
     static let krcsNews = NSLocalizedString("KrcsNews")
     static let krcsNewsList = NSLocalizedString("KrcsNewsList")
     static let krcsNewsDetails = NSLocalizedString("KrcsNewsDetails")
-    
+  
     static let donateForm = NSLocalizedString("DonateForm")
     static let donateConfirmation = NSLocalizedString("DonateConfirmation")
-    
+
     static let training = NSLocalizedString("Training")
     static let trainingDetails = NSLocalizedString("TrainingDetails")
-    
+
     static let event = NSLocalizedString("Event")
     static let eventDetails = NSLocalizedString("EventDetails")
-    
+
     
     static let project = NSLocalizedString("Project")
     static let projectDetails = NSLocalizedString("ProjectDetails")
@@ -72,7 +72,7 @@ struct AnalyticsLabels {
     static let marketItem = NSLocalizedString("MarketItem")
     static let marketItemDetails = NSLocalizedString("MarketItemDetails")
     static let marketItemPurchase = NSLocalizedString("MarketItemPurchase")
-    
+
     static let bomaHotel = NSLocalizedString("BomaHotel")
     static let bomaHotelDetails = NSLocalizedString("BomaHotelDetails")
     
@@ -86,7 +86,7 @@ struct AnalyticsLabels {
     static let feed = NSLocalizedString("Feed")
     static let feedDetails = NSLocalizedString("FeedDetails")
     static let feedEmergencyAlertDonate = NSLocalizedString("FeedEmergencyAlertDonate")
-    
+
     static let messages = NSLocalizedString("Messages")
     static let messagesNewChat = NSLocalizedString("MessagesNewChat")
     
@@ -96,7 +96,7 @@ struct AnalyticsLabels {
     static let communityPostsList = NSLocalizedString("CommunityPostsList")
     static let communityPostDetails = NSLocalizedString("CommunityPostDetails")
     static let communityAddNewPost = NSLocalizedString("CommunityAddNewPost")
-    
+
     static let peopleList = NSLocalizedString("PeopleList")
     static let peopleDetails = NSLocalizedString("PeopleDetails")
     
@@ -105,21 +105,21 @@ struct AnalyticsLabels {
     static let walletDonationsDetails = NSLocalizedString("WalletDonationsDetails")
     
     static let settings = NSLocalizedString("Settings")
-    
+
     static let profile = NSLocalizedString("Profile")
     static let profileEdit = NSLocalizedString("ProfileEdit")
     static let chat = NSLocalizedString("Chat")
-    
+   
     static let mapScreen = NSLocalizedString("MapScreen")
     static let unknownScreen = NSLocalizedString("UnknownScreen")
     
-    
+ 
     /*
-    Method to constract screen name from home item type.
-    Is used for View Controllers that are common for different object in app.
-    For example:
-    "Project" + "List" will return "ProjectList"
-    */
+Method to constract screen name from home item type.
+Is used for View Controllers that are common for different object in app.
+For example:
+"Project" + "List" will return "ProjectList"
+*/
     static func labelForHomeItem(homeItem: HomeItem?, suffix: String = "") -> String {
         guard let homeItem  = homeItem else {
             return unknownScreen
@@ -151,7 +151,7 @@ struct AnalyticsLabels {
     }
     
     static func labelForItemType(itemType: FeedItem.ItemType?, suffix: String = "") -> String {
-        
+    
         guard let itemType  = itemType else {
             return unknownScreen
         }
@@ -172,7 +172,7 @@ struct AnalyticsLabels {
         case .BomaHotels:
             scrennLabel = bomaHotel
         case .News:
-            scrennLabel = krcsNews
+           scrennLabel = krcsNews
         case .Event:
             scrennLabel = event
             
@@ -224,10 +224,13 @@ struct AnalyticCategories {
     static let bomaHotels = NSLocalizedString("BomaHotels")
     static let notifications = NSLocalizedString("Notifications")
     
+    static let home = NSLocalizedString("Home")
+    static let post = NSLocalizedString("Post")
+    
     static let unknownCategoty = NSLocalizedString("UnknownCategoty")
     
     static func labelForDonationType(donationType: DonateViewController.DonationType) -> String {
-        
+ 
         switch donationType {
         case .Donation:
             return donate
@@ -249,7 +252,7 @@ struct AnalyticActios {
     static let refreshFailed = NSLocalizedString("RefreshFailed")
     
     static let error = NSLocalizedString("Error")
-    
+
     static let done = NSLocalizedString("Done")
     static let phoneConfirmed = NSLocalizedString("PhoneConfirmed")
     static let phoneVerificationRequested = NSLocalizedString("PhoneVerificationRequested")
@@ -316,4 +319,14 @@ struct AnalyticActios {
     static let bookingClicked = NSLocalizedString("BookingClicked")
     
     static let notificationCount = NSLocalizedString("NotificationCount")
+    
+    static let homePlusPressedOpen = NSLocalizedString("HomePlusPressedOpen")
+    static let actionOpenDonate = NSLocalizedString("ActionOpenDonate")
+    static let actionOpenAmbulance = NSLocalizedString("ActionOpenAmbulance")
+    static let actionOpenPost = NSLocalizedString("ActionOpenPost")
+    static let homePlusPressedClose = NSLocalizedString("HomePlusPressedClose")
+    
+    
+    
+    
 }

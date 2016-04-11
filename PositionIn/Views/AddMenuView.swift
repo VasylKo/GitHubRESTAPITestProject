@@ -36,6 +36,8 @@ final class AddMenuView: UIView {
     }
     
     @IBAction func toogleMenuTapped(sender: AnyObject) {
+        let label = !expanded ? AnalyticActios.homePlusPressedOpen : AnalyticActios.homePlusPressedClose
+        trackEventToAnalytics(AnalyticCategories.home, action: label)
         expanded = !expanded
     }
     
