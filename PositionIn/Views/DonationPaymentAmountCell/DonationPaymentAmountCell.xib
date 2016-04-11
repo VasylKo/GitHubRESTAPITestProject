@@ -30,7 +30,6 @@
                     <constraint firstItem="HlD-ju-mdE" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="8" id="ovk-Ac-29g"/>
                 </constraints>
             </tableViewCellContentView>
-            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <connections>
                 <outlet property="warningTextLabel" destination="HlD-ju-mdE" id="utm-qf-aou"/>
             </connections>
