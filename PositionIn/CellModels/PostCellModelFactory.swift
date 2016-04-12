@@ -20,7 +20,7 @@ struct PostCellModelFactory {
         }
 
         let date: String? = post.date?.formattedAsTimeAgo()
-        firstSection.append(PostInfoModel(firstLine: post.name, secondLine: date, imageUrl: post.author?.avatar, userId: post.author?.objectId))
+        firstSection.append(PostInfoModel(firstLine: post.author?.title, secondLine: date, imageUrl: post.author?.avatar, userId: post.author?.objectId))
         firstSection.append(TableViewCellTextModel(title: post.descriptionString ?? "", leftMargin: 62))
         
         
