@@ -58,7 +58,7 @@ final class BoughtProductDetailsViewController: UIViewController {
         }
 
         if product?.entityDetails?.links?.isEmpty == false || product?.entityDetails?.attachments?.isEmpty == false {
-            zeroSection.append(BoughtProductDetailsActionItem(title: NSLocalizedString("More Information", comment: "Product action: More Information"), image: "productTerms&Info", action: .MoreInformation))
+            zeroSection.append(BoughtProductDetailsActionItem(title: NSLocalizedString("Attachments", comment: "Product action: More Information"), image: "productTerms&Info", action: .MoreInformation))
         }
         
         return [zeroSection]

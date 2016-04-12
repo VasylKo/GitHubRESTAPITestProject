@@ -15,7 +15,7 @@ class PostAttachmentsCell: TableViewCell {
         assert(m != nil, "Invalid model passed")
         self.imageView?.image = UIImage(named: "productTerms&Info")
         self.imageView?.tintColor = UIScheme.mainThemeColor
-        self.textLabel?.text = NSLocalizedString("More Information")
+        self.textLabel?.text = NSLocalizedString("Attachments")
         self.textLabel?.textAlignment = .Left
     }
     

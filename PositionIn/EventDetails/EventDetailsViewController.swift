@@ -94,7 +94,7 @@ final class EventDetailsViewController: UIViewController {
             firstSection.append(EventActionItem(title: NSLocalizedString("Navigate", comment: "Event action: Navigate"), image: "productNavigate", action: .Navigate))
         }
         if self.event?.links?.isEmpty == false || self.event?.attachments?.isEmpty == false {
-            firstSection.append(EventActionItem(title: NSLocalizedString("More Information"), image: "productTerms&Info", action: .MoreInformation))
+            firstSection.append(EventActionItem(title: NSLocalizedString("Attachments"), image: "productTerms&Info", action: .MoreInformation))
         }
         
         return [zeroSection, firstSection]
