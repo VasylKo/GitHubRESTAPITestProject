@@ -19,6 +19,7 @@ class PaymentCompletedViewController: UIViewController {
     internal var projectName: String?
     internal var projectIconURL: NSURL?
     internal var amountDonation: Int = 0
+    internal var viewControllerToOpenOnComplete: UIViewController?
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -30,10 +31,19 @@ class PaymentCompletedViewController: UIViewController {
         donateMessageLabel?.text = donateMessageLabel?.text?.stringByReplacingOccurrencesOfString("{amount}", withString: donationString, options: .LiteralSearch, range: nil)
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        trackScreenToAnalytics(AnalyticsLabels.donateConfirmation)
+    }
+    
     // MARK: - IBAction
     @IBAction func closeButtonTapped(sender: AnyObject) {
-        sideBarController?.executeAction(SidebarViewController.defaultAction)
-        dismissViewControllerAnimated(true, completion: nil)
-        navigationController?.popToRootViewControllerAnimated(true)
+        if let viewController = viewControllerToOpenOnComplete {
+            navigationController?.popToViewController(viewController, animated: true)
+        } else {
+            sideBarController?.executeAction(SidebarViewController.defaultAction)
+            dismissViewControllerAnimated(true, completion: nil)
+            navigationController?.popViewControllerAnimated(true)
+        }
     }
 }

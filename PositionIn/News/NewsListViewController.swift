@@ -50,6 +50,8 @@ class NewsListViewController: UIViewController {
                 self.reloadData()
             }
         }
+        
+        trackScreenToAnalytics(AnalyticsLabels.krcsNewsList)
     }
     
     //MARK: Data
@@ -80,7 +82,7 @@ class NewsListViewController: UIViewController {
 extension NewsListViewController: NewsListActionConsumer {
     
     func showNewsDetails(id: CRUDObjectId) {
-        trackGoogleAnalyticsEvent("Main", action: "Click", label: "Post")
+        trackScreenToAnalytics(AnalyticsLabels.krcsNewsDetails)
         let controller = Storyboards.Main.instantiatePostViewController()
         controller.objectId = id
         navigationController?.pushViewController(controller, animated: true)
@@ -88,15 +90,16 @@ extension NewsListViewController: NewsListActionConsumer {
     
     func like(item: FeedItem) {
         if (item.isLiked) {
-            api().unlikePost(item.objectId).onSuccess{[weak self] in
-                self?.reloadData()
-            }
+            item.numOfLikes?--
+            api().unlikeFeedItem(item).onSuccess{}
         }
         else {
-            api().likePost(item.objectId).onSuccess{[weak self] in
-                self?.reloadData()
-            }
+            item.numOfLikes?++
+            api().likeFeedItem(item).onSuccess{}
         }
+        
+        item.isLiked = !item.isLiked
+        tableView.reloadData()
     }
 }
 

@@ -22,9 +22,9 @@ final class BrowseListViewController: UIViewController, BrowseActionProducer, Br
         didSet {
             switch browseMode {
             case .ForYou:
-                trackGoogleAnalyticsEvent("Main", action: "Click", label: "For You")
+                trackEventToAnalytics("Main", action: "Click", label: "For You")
             case .New:
-                trackGoogleAnalyticsEvent("Main", action: "Click", label: "New")
+                trackEventToAnalytics("Main", action: "Click", label: "New")
             }
         }
     }
@@ -40,6 +40,16 @@ final class BrowseListViewController: UIViewController, BrowseActionProducer, Br
         self.tableView.separatorStyle = self.showCardCells ? .None : .SingleLine
         self.topSeparatorLine.hidden = hideSeparatorLinesNearSegmentedControl
         self.bottomSeparatorLine.hidden = hideSeparatorLinesNearSegmentedControl
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        //Send analytics
+        if let homeItem = homeItem {
+            trackScreenToAnalytics(AnalyticsLabels.labelForHomeItem(homeItem, suffix: "List"))
+        }
+        
     }
     
     override func viewWillLayoutSubviews() {
@@ -60,7 +70,7 @@ final class BrowseListViewController: UIViewController, BrowseActionProducer, Br
         //TODO: hot fix for distance 
         let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(1 * Double(NSEC_PER_SEC)))
         dispatch_after(delayTime, dispatch_get_main_queue()) { [weak self] in
-            self?.tableView.reloadData()
+    //        self?.tableView.reloadData()
         }
     }
         
@@ -217,16 +227,16 @@ extension BrowseListViewController {
         func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
             if let model = self.tableView(tableView, modelForIndexPath: indexPath) as? CompactFeedTableCellModel {
                 if model.item.type == .Post {
-                    var cellHeight: CGFloat = 150
-                    cellHeight = (model.imageURL != nil) ? (cellHeight + 80) : cellHeight
+                    var cellHeight: CGFloat = 125
+                    cellHeight = (model.imageURL != nil) ? (cellHeight + 160) : cellHeight
 
                     if let text = model.text {
-                        let maxSize = CGSize(width: UIScreen.mainScreen().applicationFrame.size.width - 20, height: 80)
+                        let maxSize = CGSize(width: UIScreen.mainScreen().applicationFrame.size.width - 80, height: CGFloat(MAXFLOAT))
                         let attrString = NSAttributedString.init(string: text, attributes: [NSFontAttributeName:UIFont.systemFontOfSize(17)])
                         let rect = attrString.boundingRectWithSize(maxSize, options: NSStringDrawingOptions.UsesLineFragmentOrigin, context: nil)
                         let size = CGSizeMake(rect.size.width, rect.size.height)
                         
-                        cellHeight += (size.height + 10)
+                        cellHeight += (size.height + 15)
                     }
                     
                     
@@ -234,7 +244,7 @@ extension BrowseListViewController {
                     
                 }
                 else {
-                    let height: CGFloat = showCompactCells ? 80.0 : 120.0
+                    let height: CGFloat = showCompactCells ? 75.0 : 100.0
                     return height
                 }
             }

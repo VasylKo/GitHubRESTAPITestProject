@@ -18,6 +18,17 @@ class BrowseVolunteerViewController: BrowseCommunityViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Volunteering"
+        navigationController?.delegate = nil
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+    }
+    
+    override func sendScreenTrackToAnalytic() {
+        
+        trackScreenToAnalytics(AnalyticsLabels.volunteerList)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -92,6 +103,7 @@ class BrowseVolunteerViewController: BrowseCommunityViewController {
         case .Post:
             let controller = Storyboards.NewItems.instantiateAddPostViewController()
             controller.communityId = communityId
+            trackScreenToAnalytics(AnalyticsLabels.volunteerAddNewPost)
             navigationController?.pushViewController(controller, animated: true)
         case .Browse, .None:
             switch self.browseModeSegmentedControl.selectedSegmentIndex {

@@ -12,6 +12,11 @@ class MembershipBraintreeConfirmPaymentViewController: MembershipMPesaConfirmPay
     
     private var creditCardPaymentSuccess: Bool?
 
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        trackScreenToAnalytics(AnalyticsLabels.membershipPaymentConfirmation)
+    }
+    
     //MARK: Initializers
     
     init(router: MembershipRouter, plan: MembershipPlan, creditCardPaymentSuccess: Bool?) {
@@ -27,12 +32,14 @@ class MembershipBraintreeConfirmPaymentViewController: MembershipMPesaConfirmPay
         if let creditCardPaymentSuccess = self.creditCardPaymentSuccess {
             if creditCardPaymentSuccess == true {
                 self.headerView.showSuccess()
+                self.sendPaymentEventToAnalytics(success: true)
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (Int64)(3 * NSEC_PER_SEC)), dispatch_get_main_queue()) {
                     self.router.showMemberDetailsViewController(from: self)
                 }
             }
             else {
                 self.headerView.showFailure()
+                self.sendPaymentEventToAnalytics(success: false)
             }
         }
     }

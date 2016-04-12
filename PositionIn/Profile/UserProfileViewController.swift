@@ -60,7 +60,13 @@ final class UserProfileViewController: BesideMenuViewController, BrowseActionPro
         api().getUserProfile(objectId).zip(api().getSubscriptionStateForUser(objectId)).onSuccess {
             [weak self] profile, state in
             self?.didReceiveProfile(profile, state: state)
-        }
+            
+            //send event to analytic
+            trackEventToAnalytics(AnalyticCategories.people, action: AnalyticActios.followingCount, value: NSNumber(integer: profile.countFollowing ?? 0))
+            trackEventToAnalytics(AnalyticCategories.people, action: AnalyticActios.followersCount, value: NSNumber(integer: profile.countFollowers ?? 0))
+        }.onComplete(callback: { [weak self] _ in
+                self?.tableView.userInteractionEnabled = true
+                })
     }
     
     private func didReceiveProfile(profile: UserProfile, state: UserProfile.SubscriptionState = .SameUser) {
@@ -142,6 +148,7 @@ final class UserProfileViewController: BesideMenuViewController, BrowseActionPro
     
     @IBAction func handleNavigationBarButtonItemTap(sender: UIButton) {
         if let action = UserProfileViewController.ProfileAction(rawValue: sender.tag) where action != .None {
+            trackEventToAnalytics(AnalyticCategories.profile, action: AnalyticActios.edit)
             self.shouldExecuteAction(action)
         }
     }
@@ -159,8 +166,20 @@ final class UserProfileViewController: BesideMenuViewController, BrowseActionPro
         reloadData()
     }
     
-    @IBAction func prepareForUnwind(segue: UIStoryboardSegue) {
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        if api().isCurrentUser(objectId) {
+            trackScreenToAnalytics(AnalyticsLabels.profile)
+        } else {
+            trackScreenToAnalytics(AnalyticsLabels.peopleDetails)
+        }
         
+    }
+    
+    @IBAction func prepareForUnwind(segue: UIStoryboardSegue) {
+        if segue == EditProfileViewController.Segue.Close {
+            trackEventToAnalytics(AnalyticCategories.profile, action: AnalyticActios.editDone, label: NSLocalizedString("Cancel"))
+        }
     }
     
     lazy var dataSource: ProfileDataSource = { [unowned self] in
@@ -332,15 +351,26 @@ extension UserProfileViewController: UserProfileActionConsumer {
             presentViewController(navigationController, animated: true, completion: nil)
         case .Follow:
             if api().isUserAuthorized() {
+                self.tableView.userInteractionEnabled = false
                 api().followUser(objectId).onSuccess { [weak self] in
                     self?.sendSubscriptionUpdateNotification(nil)
                     self?.reloadData()
+                    
+                    //Sent event to analytics
+                    let personID = self?.objectId ?? NSLocalizedString("Unknown ID")
+                    trackEventToAnalytics(AnalyticCategories.people, action: AnalyticActios.follow, label: NSLocalizedString("Person + ") + personID)
                 }
+                
             }
         case .UnFollow:
+            self.tableView.userInteractionEnabled = false
             api().unFollowUser(objectId).onSuccess { [weak self] in
                 self?.sendSubscriptionUpdateNotification(nil)
                 self?.reloadData()
+                
+                //Sent event to analytics
+                let personID = self?.objectId ?? NSLocalizedString("Unknown ID")
+                trackEventToAnalytics(AnalyticCategories.people, action: AnalyticActios.unfollow, label: NSLocalizedString("Person + ") + personID)
             }
         case .Chat:
             showChatViewController(objectId)

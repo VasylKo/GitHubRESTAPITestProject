@@ -8,6 +8,7 @@
 
 import UIKit
 import XLForm
+import CHCSVParser
 
 class PhoneNumberViewController: XLFormViewController {
     
@@ -16,27 +17,27 @@ class PhoneNumberViewController: XLFormViewController {
         case Phone = "Phone"
     }
     
-    private enum Countries : Int {
-        case Kenya = 0, Swizerland, France
-        //USA, UK, Swizerland, France, Israel, Russia
-        
-        static let allValues = [Kenya, Swizerland, France]
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        trackScreenToAnalytics(AnalyticsLabels.phoneVerification)
     }
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        self.prepareCountryPhoneCodes()
         self.initializeForm()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        self.prepareCountryPhoneCodes()
         self.initializeForm()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.tintColor = UIScheme.mainThemeColor
-        trackGoogleAnalyticsEvent("Auth", action: "Click", label: "SMS code")
+        trackEventToAnalytics(AnalyticCategories.auth, action: AnalyticActios.click, label: NSLocalizedString("SMS code"))
     }
     
     override func showFormValidationError(error: NSError!) {
@@ -56,27 +57,35 @@ class PhoneNumberViewController: XLFormViewController {
             rowType:XLFormRowDescriptorTypeSelectorPush, title:"")
         var selectorOptions: [XLFormOptionsObject] = []
         
-        var counter = 0
-        for value in Countries.allValues {
-            let countryName = self.countryName(value)
-            let countryPhoneCode = self.countryPhoneCode(value)
+        var kenyaSelectorOption: XLFormOptionsObject?
+        
+        for (index, element) in phonesDictionary.enumerate() {
+            let country = element["countryName"]
+            let code = element["phoneCode"]
             
-            if let countryName = countryName,
-                let countryPhoneCode = countryPhoneCode {
-                    let optionObject = XLFormOptionsObject(value: counter, displayText: "\(countryName) \(countryPhoneCode)")
+            if let countryName = country,
+                let countryPhoneCode = code {
+                    
+                    let optionObject = XLFormOptionsObject(value: index, displayText: "\(countryName) \(countryPhoneCode)")
+                    if countryName == "Kenya" {
+                        kenyaSelectorOption = optionObject
+                    }
                     selectorOptions.append(optionObject)
             }
-            counter++
         }
         
         coutryRow.selectorOptions = selectorOptions
-        if let firstObject = selectorOptions.first {
-            coutryRow.title = firstObject.displayText()
+        if let kenyaSelectorOption = kenyaSelectorOption {
+            coutryRow.title = kenyaSelectorOption.displayText()
         }
         coutryRow.onChangeBlock = {[unowned coutryRow] oldValue, newValue, descriptor in
             if let newValue = newValue as? XLFormOptionsObject {
                 coutryRow.title = newValue.displayText()
-                self.countryNumber = newValue.formValue() as? Int
+                let countryNumber = newValue.formValue() as? Int
+                if let countryNumber = countryNumber {
+                    let countryInfo = self.phonesDictionary[countryNumber]
+                    self.countryPhoneCode = countryInfo["phoneCode"]
+                }
                 coutryRow.value = nil
             }
         }
@@ -97,6 +106,27 @@ class PhoneNumberViewController: XLFormViewController {
         self.form = form
     }
     
+    func prepareCountryPhoneCodes() {
+        let csvFile = NSBundle.mainBundle().pathForResource("country-codes", ofType: "csv")
+        let content = NSArray(contentsOfCSVFile: csvFile)
+        
+        for (index, element) in content.enumerate() {
+            if index > 0 {
+                if let element = element as? NSArray {
+                    let countryName = element[0]
+                    let phoneCode = element[1]
+                    
+                    if var countryName = countryName as? String, var phoneCode = phoneCode as? String {
+                        countryName = countryName.stringByReplacingOccurrencesOfString("\"", withString: "")
+                        phoneCode = "+\(phoneCode)"
+                        let array = ["countryName" : countryName, "phoneCode" : phoneCode]
+                        phonesDictionary.append(array)
+                    }
+                }
+            }
+        }
+    }
+    
     func dismissLogin() {
         self.view.endEditing(true)
         sideBarController?.executeAction(SidebarViewController.defaultAction)
@@ -104,6 +134,8 @@ class PhoneNumberViewController: XLFormViewController {
     }
     
     @IBAction func doneButtonPressed(sender: AnyObject) {
+        
+        trackEventToAnalytics(AnalyticCategories.phoneVerification, action: AnalyticActios.done)
         
         let validationErrors : Array<NSError> = self.formValidationErrors() as! Array<NSError>
         if (validationErrors.count > 0){
@@ -113,15 +145,7 @@ class PhoneNumberViewController: XLFormViewController {
         
         let phoneRow = self.form.formRowWithTag(Tags.Phone.rawValue)
         
-        let countryCode: String?
-        if let countryNumber = self.countryNumber,
-            let country = Countries(rawValue: countryNumber) {
-                countryCode = self.countryPhoneCode(country)
-        } else {
-            countryCode = nil
-        }
-        
-        if let phoneRow = phoneRow?.value {
+        if let phoneRow = phoneRow?.value, countryNumber = self.countryPhoneCode {
             let phoneRowString = "\(phoneRow)"
             let phoneNumber : String
             
@@ -129,12 +153,7 @@ class PhoneNumberViewController: XLFormViewController {
                 phoneNumber = phoneRowString
             }
             else {
-                if let countryCode = countryCode {
-                    phoneNumber = "\(countryCode)\(phoneRowString)"
-                }
-                else {
-                    return
-                }
+                phoneNumber = "\(countryNumber)\(phoneRowString)"
             }
             
             let alertController = UIAlertController(title: NSLocalizedString("Number Confirmation",
@@ -145,6 +164,9 @@ class PhoneNumberViewController: XLFormViewController {
             alertController.addAction(cancelAction)
             
             let OKAction = UIAlertAction(title: "Yes", style: .Default) {[weak self] (action) in
+                
+                trackEventToAnalytics(AnalyticCategories.phoneVerification, action: AnalyticActios.phoneConfirmed)
+                
                 let smsCode = NSNumber(int: 1)
                 api().verifyPhone(phoneNumber, type: smsCode).onSuccess(callback: {[weak self] in
                     let validationController = Storyboards.Onboarding.instantiatePhoneVerificationController()
@@ -158,45 +180,8 @@ class PhoneNumberViewController: XLFormViewController {
         }
     }
     
-    private func countryName(let value: Countries) -> String? {
-        switch value {
-        case .Kenya:
-            return "Kenya"
-//        case .USA:
-//            return "United States"
-//        case .UK:
-//            return "United Kingdom"
-        case .Swizerland:
-            return "Swizerland"
-        case .France:
-            return "France"
-//        case .Israel:
-//            return "Israel"
-//        case .Russia:
-//            return "Russia"
-        }
-    }
-    
-    private func countryPhoneCode(let value: Countries) -> String? {
-        switch value {
-        case .Kenya:
-            return "+254"
-//        case .USA:
-//            return "+1"
-//        case .UK:
-//            return "+44"
-        case .Swizerland:
-            return "+41"
-        case .France:
-            return "+33"
-//        case .Israel:
-//            return "+972"
-//        case .Russia:
-//            return "+7"
-        }
-    }
-    
-    private var countryNumber: Int? = 0
+    private var countryPhoneCode: String? = "+254"
+    private var phonesDictionary: [[String: String]] = []
     
     @IBOutlet private weak var doneButton: UIBarButtonItem!
     @IBOutlet private weak var phoneNumberTextField: UITextField!

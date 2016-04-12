@@ -27,6 +27,11 @@ final class DonationDetailsViewController: UIViewController {
         configure()
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        trackScreenToAnalytics(AnalyticsLabels.walletDonationsDetails)
+    }
+    
     // MARK: - Private functions
     private func configure() {
         title = NSLocalizedString("Donation")

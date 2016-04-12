@@ -17,6 +17,12 @@ class MembershipPaymentViewController: XLFormViewController, PaymentReponseDeleg
     private let plan : MembershipPlan
     private weak var confirmRowDescriptor: XLFormRowDescriptor?
     
+    private enum Tags : String {
+        case Money = "Money"
+        case Payment = "Payment"
+        case Confirm = "Confirm"
+    }
+    
     //MARK: Initializers
     
     init(router: MembershipRouter, plan: MembershipPlan) {
@@ -36,6 +42,11 @@ class MembershipPaymentViewController: XLFormViewController, PaymentReponseDeleg
         
         self.setupInterface()
         self.initializeForm()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        trackScreenToAnalytics(AnalyticsLabels.membershipPayment)
     }
     
     override func viewWillLayoutSubviews() {
@@ -84,14 +95,28 @@ class MembershipPaymentViewController: XLFormViewController, PaymentReponseDeleg
         let paymentSection = XLFormSectionDescriptor.formSectionWithTitle("Payment")
         form.addFormSection(paymentSection)
         
-        let paymentRow: XLFormRowDescriptor = XLFormRowDescriptor(tag: nil,
+        
+        //MPESA Bonga pin row
+        let mpesaBongoPinRow: XLFormRowDescriptor = XLFormRowDescriptor(tag: nil, rowType: XLFormRowDescriptorTypeMPesaBongaPinView)
+        mpesaBongoPinRow.hidden = true
+        
+        //Select payment method row
+        let paymentRow: XLFormRowDescriptor = XLFormRowDescriptor(tag: Tags.Payment.rawValue,
             rowType: XLFormRowDescriptorTypeSelectorPush, title: NSLocalizedString("Select payment method", comment: "Payment"))
         paymentRow.action.viewControllerClass = SelectPaymentMethodController.self
         paymentRow.valueTransformer = CardItemValueTrasformer.self
         paymentRow.value = nil
         paymentRow.cellConfig.setObject(UIScheme.mainThemeColor, forKey: "tintColor")
         paymentRow.required = true
+        paymentRow.onChangeBlock = { oldValue, newValue, _ in
+            if let box: Box<CardItem> = newValue as? Box {
+                //Show M-Pesa additional info row
+                mpesaBongoPinRow.hidden = box.value != .MPesa
+            }
+        }
+        
         paymentSection.addFormRow(paymentRow)
+        paymentSection.addFormRow(mpesaBongoPinRow)
         
         let confirmDonation = XLFormSectionDescriptor.formSection()
         form.addFormSection(confirmDonation)
@@ -106,6 +131,7 @@ class MembershipPaymentViewController: XLFormViewController, PaymentReponseDeleg
         
         confirmRow.action.formBlock = { [weak self] row in
             
+            
             self?.deselectFormRow(row)
             
             let validationErrors : Array<NSError> = self?.formValidationErrors() as! Array<NSError>
@@ -115,6 +141,8 @@ class MembershipPaymentViewController: XLFormViewController, PaymentReponseDeleg
             
             //MPesa
             if let cardItem: Box<CardItem> = paymentRow.value as? Box<CardItem> {
+                self?.sendEventToAnalytics(cardItem: cardItem, action: AnalyticActios.proceedToPay)
+                
                 if cardItem.value == .MPesa {
                     self?.router.showMPesaConfirmPaymentViewController(from: self!, with: self!.plan)
                 }
@@ -134,6 +162,13 @@ class MembershipPaymentViewController: XLFormViewController, PaymentReponseDeleg
         self.form = form
     }
     
+    //MARK: - Analytics
+    private func sendEventToAnalytics(cardItem cardItem: Box<CardItem>, action: String) {
+        let cardType = CardItem.cardName(cardItem.value) ?? NSLocalizedString("Can't get card type")
+        let paymentAmount = NSNumber(integer: self.plan.price ?? 0)
+        trackEventToAnalytics(AnalyticCategories.membership, action: action, label: cardType, value: paymentAmount)
+    }
+    
     //MARK: PaymentReponseDelegate
     
     func setError(hidden: Bool, error: String?) {
@@ -151,6 +186,11 @@ class MembershipPaymentViewController: XLFormViewController, PaymentReponseDeleg
     // MARK: XLFormViewController
     override func formRowDescriptorValueHasChanged(formRow: XLFormRowDescriptor!, oldValue: AnyObject!, newValue: AnyObject!) {
         super.formRowDescriptorValueHasChanged(formRow, oldValue: oldValue, newValue: newValue)
+        
+        //Send payment method selected to analytics
+        if formRow.tag == Tags.Payment.rawValue, let cardItem: Box<CardItem> = newValue as? Box<CardItem> {
+            sendEventToAnalytics(cardItem: cardItem, action: AnalyticActios.selectPaymentMethod)
+        }
         
         let validationErrors : Array<NSError> = formValidationErrors() as! Array<NSError>
         let hasErrors = validationErrors.count > 0

@@ -76,6 +76,7 @@ final class EditProfileViewController: BaseAddItemViewController, UserProfileAva
             rowType: XLFormRowDescriptorTypeEmail, title: NSLocalizedString("Email"))
         row.cellConfig.setObject(UIScheme.mainThemeColor, forKey: "textLabel.textColor")
         row.cellConfig.setObject(UIScheme.mainThemeColor, forKey: "tintColor")
+        row.addValidator(XLFormRegexValidator(msg: NSLocalizedString("Please enter a valid email", comment: "Email validation"), regex: "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"))
         return row
     }()
     
@@ -220,6 +221,11 @@ final class EditProfileViewController: BaseAddItemViewController, UserProfileAva
                 action: "didTapDone:")
             self.title = NSLocalizedString("My Profile")
         }
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        trackScreenToAnalytics(AnalyticsLabels.profileEdit)
     }
     
     // MARK: - Private functions
@@ -375,7 +381,7 @@ final class EditProfileViewController: BaseAddItemViewController, UserProfileAva
             phoneVerificationCode: self.validationCode,
             firstName: values[Tags.FirstName.rawValue] as? String,
             lastName: values[Tags.LastName.rawValue] as? String, email: values[Tags.Email.rawValue] as? String).onSuccess(callback: {[weak self] userProfile in
-                trackGoogleAnalyticsEvent("Status", action: "Click", label: "Auth Success")
+                trackEventToAnalytics("Status", action: "Click", label: "Auth Success")
                 Log.info?.message("Registration done")
                 
                 
@@ -391,7 +397,7 @@ final class EditProfileViewController: BaseAddItemViewController, UserProfileAva
                 }).onSuccess(callback: { _ in
                     api().pushesRegistration()
                 }).onFailure(callback: {_ in
-                    trackGoogleAnalyticsEvent("Status", action: "Click", label: "Auth Fail")
+                    trackEventToAnalytics("Status", action: "Click", label: "Auth Fail")
                 })
     }
 
@@ -399,6 +405,9 @@ final class EditProfileViewController: BaseAddItemViewController, UserProfileAva
         if view.userInteractionEnabled == false {
             return
         }
+        
+        trackEventToAnalytics(AnalyticCategories.profile, action: AnalyticActios.editDone, label: NSLocalizedString("Save"))
+        
         let validationErrors : Array<NSError> = self.formValidationErrors() as! Array<NSError>
         if (validationErrors.count > 0){
             self.showFormValidationError(validationErrors.first)

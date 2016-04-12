@@ -12,7 +12,7 @@ class VolunteerDetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        switch self.type {
+        switch type {
         case .Volunteer:
             self.title = NSLocalizedString("Volunteer", comment:"")
         case .Community:
@@ -23,6 +23,19 @@ class VolunteerDetailsViewController: UIViewController {
         dataSource.items = productAcionItems()
         dataSource.configureTable(actionTableView)
         reloadData()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        switch type {
+        case .Volunteer:
+            trackScreenToAnalytics(AnalyticsLabels.volunteerDetails)
+        case .Community:
+            trackScreenToAnalytics(AnalyticsLabels.communityDetails)
+        default:
+            break
+        }
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -230,10 +243,13 @@ extension VolunteerDetailsViewController: VolunteerDetailsActionConsumer {
                 case .Volunteer:
                     let alertController = UIAlertController(title: nil, message:
                         "Kenya Red Cross will review your volunteering request and respond within a few days", preferredStyle: UIAlertControllerStyle.Alert)
-                    alertController.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: nil))
+                    alertController.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: { _ in
+                        trackEventToAnalytics(AnalyticCategories.volunteer, action: AnalyticActios.volunteerCancel, label: self.volunteer?.name ?? NSLocalizedString("Can't get volunteer title"))
+                    }))
                     alertController.addAction(UIAlertAction(title: "Volunteer", style: .Default, handler: { action in
                         switch action.style{
                         case .Default:
+                            trackEventToAnalytics(AnalyticCategories.volunteer, action: AnalyticActios.volunteerRequest, label: self.volunteer?.name ?? NSLocalizedString("Can't get volunteer title"))
                             if let objId = self.volunteer?.objectId {
                                 api().joinVolunteer(objId).onSuccess { [weak self] _ in
                                     self?.reloadData()
@@ -310,10 +326,13 @@ extension VolunteerDetailsViewController: VolunteerDetailsActionConsumer {
     private func joinClosedCommunity(community: Community) {
         let alertController = UIAlertController(title: nil, message:
             "Kenya Red Cross will review your community request and respond within a few days", preferredStyle: UIAlertControllerStyle.Alert)
-        alertController.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: nil))
+        alertController.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: { _ in
+            trackEventToAnalytics(AnalyticCategories.communitiy, action: AnalyticActios.communityCancel, label: self.volunteer?.name ?? NSLocalizedString("Can't get volunteer title"))
+        }))
         alertController.addAction(UIAlertAction(title: "Ok", style: .Default, handler: { action in
             switch action.style {
             case .Default:
+                trackEventToAnalytics(AnalyticCategories.communitiy, action: AnalyticActios.communityRequest, label: self.volunteer?.name ?? NSLocalizedString("Can't get volunteer title"))
                 if let objectId = self.volunteer?.objectId {
                     api().joinCommunity(objectId).onSuccess { [weak self] _ in
                         self?.reloadData()

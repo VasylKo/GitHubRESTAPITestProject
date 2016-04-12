@@ -72,6 +72,12 @@ class BrowseCommunityViewController: BesideMenuViewController, BrowseCommunityAc
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.reloadData()
+        
+        sendScreenTrackToAnalytic()
+    }
+    
+    func sendScreenTrackToAnalytic() {
+        trackScreenToAnalytics(AnalyticsLabels.communitiesList)
     }
     
     private var firstLoad: Bool = true
@@ -204,6 +210,7 @@ class BrowseCommunityViewController: BesideMenuViewController, BrowseCommunityAc
         case .Post:
             let controller = Storyboards.NewItems.instantiateAddPostViewController()
             controller.communityId = communityId
+            trackScreenToAnalytics(AnalyticsLabels.communityAddNewPost)
             navigationController?.pushViewController(controller, animated: true)
         case .Invite:
             break
@@ -250,6 +257,8 @@ class BrowseCommunityViewController: BesideMenuViewController, BrowseCommunityAc
             self.mapViewController.view.removeFromSuperview()
             self.mapViewController.removeFromParentViewController()
             self.reloadData()
+            //after map view dissaper send new screen name to analytic
+            sendScreenTrackToAnalytic()
         } else {
             self.addChildViewController(mapViewController)
             self.view.addSubview(mapViewController.view)

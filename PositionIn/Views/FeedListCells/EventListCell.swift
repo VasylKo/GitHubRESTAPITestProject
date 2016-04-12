@@ -63,7 +63,12 @@ final class EventListCell: TableViewCell {
         }
         else {
             infoLabel?.text = m!.info ?? " "
-            dateLabel?.text = m!.details ?? " "
+            if let details = m!.details {
+                dateLabel?.text = details
+            }
+            else if let authorName = m!.authorName  {
+                dateLabel?.text = authorName
+            }
         }
     }
     

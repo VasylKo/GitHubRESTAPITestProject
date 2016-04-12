@@ -34,6 +34,7 @@ final class PostViewController: UIViewController, UITextFieldDelegate {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.subscribeOnKeyboardNotification()
+        trackScreenToAnalytics(AnalyticsLabels.postDetails)
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -150,6 +151,12 @@ extension PostViewController: PostActionConsumer {
                     self?.reloadPost()
                 }
             }
+        }
+    }
+    
+    func commentPost() {
+        if !enterCommentField.isFirstResponder() {
+            enterCommentField.becomeFirstResponder()
         }
     }
 }

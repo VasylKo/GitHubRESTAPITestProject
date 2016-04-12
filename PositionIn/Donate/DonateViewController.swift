@@ -20,13 +20,22 @@ class DonateViewController: XLFormViewController, PaymentReponseDelegate {
         case Error = "Error"
     }
     
+    enum DonationType: Int {
+        case Unknown = 0
+        case Project, EmergencyAlert, Donation, FeedEmergencyAlert
+    }
+    
     var product: Product?
+    var donationType: DonationType = .Donation
     
     private var amount:Int = 0;
-    private var paymentType:String?
+    private var paymentType: String?
+    private var paymentTypeName: String?
     private var finishedSuccessfully = false
     private var errorSection:XLFormSectionDescriptor?
     private weak var confirmRowDescriptor: XLFormRowDescriptor?
+    
+    internal var viewControllerToOpenOnComplete: UIViewController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,6 +49,11 @@ class DonateViewController: XLFormViewController, PaymentReponseDelegate {
         self.initializeForm()
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        sendScreenNameToAnalytics()
+    }
+    
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         if(finishedSuccessfully) {
@@ -47,6 +61,8 @@ class DonateViewController: XLFormViewController, PaymentReponseDelegate {
             paymentCompleteController.projectName = self.product?.name ?? NSLocalizedString("Kenya Red Cross Society")
             paymentCompleteController.projectIconURL = self.product?.imageURL
             paymentCompleteController.amountDonation = amount
+            
+            paymentCompleteController.viewControllerToOpenOnComplete = viewControllerToOpenOnComplete
             
             self.navigationController?.pushViewController(paymentCompleteController, animated: true)
         }
@@ -100,6 +116,7 @@ class DonateViewController: XLFormViewController, PaymentReponseDelegate {
         donationRow.onChangeBlock =  { [weak self] oldValue, newValue, _ in
             if let value = newValue as? NSNumber {
                 self?.amount = Int(value)
+                self?.sendDonationEventToAnalytics(action: AnalyticActios.setDonation, label: "")
             } else {
                 self?.amount = 0
             }
@@ -111,6 +128,11 @@ class DonateViewController: XLFormViewController, PaymentReponseDelegate {
         let paymentSection = XLFormSectionDescriptor.formSectionWithTitle("Payment")
         form.addFormSection(paymentSection)
         
+        //MPESA Bonga pin row
+        let mpesaBongoPinRow: XLFormRowDescriptor = XLFormRowDescriptor(tag: nil, rowType: XLFormRowDescriptorTypeMPesaBongaPinView)
+        mpesaBongoPinRow.hidden = true
+        
+        //Select payment method row
         let paymentRow: XLFormRowDescriptor = XLFormRowDescriptor(tag: Tags.Payment.rawValue,
             rowType: XLFormRowDescriptorTypeSelectorPush, title: NSLocalizedString("Select payment method", comment: "Payment"))
         paymentRow.required = true
@@ -121,12 +143,21 @@ class DonateViewController: XLFormViewController, PaymentReponseDelegate {
         paymentRow.onChangeBlock = { [weak self] oldValue, newValue, _ in
             if let box: Box<CardItem> = newValue as? Box {
                 self?.paymentType = CardItem.cardPayment(box.value)
+                self?.paymentTypeName = CardItem.cardName(box.value)
+                self?.sendDonationEventToAnalytics(action: AnalyticActios.selectPaymentMethod)
+                
+                //Show M-Pesa additional info row
+                mpesaBongoPinRow.hidden = box.value != .MPesa
+
             } else {
                 self?.paymentType = nil
             }
         }
         
         paymentSection.addFormRow(paymentRow)
+        paymentSection.addFormRow(mpesaBongoPinRow)
+        
+        
         
         let confirmDonation = XLFormSectionDescriptor.formSection()
         form.addFormSection(confirmDonation)
@@ -148,12 +179,14 @@ class DonateViewController: XLFormViewController, PaymentReponseDelegate {
                 return
             }
             
+            self?.sendDonationEventToAnalytics(action: AnalyticActios.proceedToPay)
+            
             self?.performSegueWithIdentifier("Show\((self?.paymentType)!)", sender: self!)
             self?.setError(true, error: nil)
         }
         
         confirmDonation.addFormRow(confirmRow)
-        confirmDonation.footerTitle = "By purchasing, you agree to Red Cross Terms of service and Privecy Policy"
+            confirmDonation.footerTitle = "By donating, you agree to Red Cross Terms of service and Privacy Policy"
         
         self.form = form
     }
@@ -181,8 +214,10 @@ class DonateViewController: XLFormViewController, PaymentReponseDelegate {
         if(success) {
             finishedSuccessfully = true
             setError(true, error: nil)
+            sendDonationEventToAnalytics(action: AnalyticActios.paymentOutcome, label: NSLocalizedString("Payment Completed"))
         } else {
             setError(false, error: err)
+            sendDonationEventToAnalytics(action: AnalyticActios.paymentOutcome, label: err)
         }
     }
     
@@ -210,6 +245,22 @@ class DonateViewController: XLFormViewController, PaymentReponseDelegate {
             updateFormRow(confirmRowDescriptor)
         }
     }
+    
+    //MARK: - Analytic tracking
+    
+    private func sendDonationEventToAnalytics(action action: String, label: String? = nil) {
+        //Send tracking enevt
+        let donationTypeName = AnalyticCategories.labelForDonationType(donationType)
+        let paymentTypeLabel = label ?? paymentTypeName ?? NSLocalizedString("Can't get payment type")
+        let paymentAmountNumber = NSNumber(integer: amount ?? 0)
+        trackEventToAnalytics(donationTypeName, action: action, label: paymentTypeLabel, value: paymentAmountNumber)
+    }
+    
+    private func sendScreenNameToAnalytics() {
+       trackScreenToAnalytics(AnalyticsLabels.labelForDonationType(donationType))
+    }
+    
+    
 }
 
 extension DonateViewController {
@@ -218,10 +269,10 @@ extension DonateViewController {
             var msg = ""
             var status = false
             if let value = row.value as? NSNumber where value.intValue > 0 {
-                msg = NSLocalizedString("Intered value is valid")
+                msg = NSLocalizedString("Entered value is valid")
                 status = true
             } else {
-                msg = NSLocalizedString("Intered value is invalid")
+                msg = NSLocalizedString("Entered value is invalid")
                 status = false
             }
             return XLFormValidationStatus(msg: msg, status: status, rowDescriptor: row)

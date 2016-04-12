@@ -24,6 +24,7 @@ class NotificationViewController: UITableViewController {
     
     func loadData() {
         api().getNotifications().onSuccess(callback: { [weak self] (response : CollectionResponse<SystemNotification>) in
+            trackEventToAnalytics(AnalyticCategories.notifications, action: AnalyticActios.notificationCount, value: NSNumber(integer: response.items.count))
             self?.notifications = response.items
             self?.tableView.reloadData()
             })

@@ -24,9 +24,9 @@ final class WalletViewController: BesideMenuViewController {
             reloadData()
             switch browseMode {
             case .Purchases:
-                trackGoogleAnalyticsEvent("Wallet", action: "Click", label: "Purchases")
+                trackEventToAnalytics("Wallet", action: "Click", label: "Purchases")
             case .MyDonations:
-                trackGoogleAnalyticsEvent("Wallet", action: "Click", label: "MyDonations")
+                trackEventToAnalytics("Wallet", action: "Click", label: "MyDonations")
             }
         }
     }
@@ -53,6 +53,11 @@ final class WalletViewController: BesideMenuViewController {
         }
         browseMode = .Purchases
     }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        trackScreenToAnalytics(AnalyticsLabels.walletList)
+    }
 
     // MARK: - Private functions
     private func reloadData() {
@@ -68,10 +73,15 @@ final class WalletViewController: BesideMenuViewController {
             api().getOrders(userId, reason: "bought").onSuccess { [weak self] (response : CollectionResponse<Order>) in
                 self?.dataSource.setItems(response.items)
                 self?.tableView?.reloadData()
+                
+                //Send event to analytic
+                trackEventToAnalytics(AnalyticCategories.wallet, action: AnalyticActios.purchased, value: NSNumber(integer: response.items.count))
             }
         case .MyDonations:
             api().getDonations(userId).onSuccess { [weak self] (response : CollectionResponse<Order>) in
                 
+                //Send event to analytic
+                trackEventToAnalytics(AnalyticCategories.wallet, action: AnalyticActios.donations, value: NSNumber(integer: response.items.count))
                 
                 // FIXME: This hack should be removed when BE return entityDetails
                 let items = response.items.map { item -> Order in

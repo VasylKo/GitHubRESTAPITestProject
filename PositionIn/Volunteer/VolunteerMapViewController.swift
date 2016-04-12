@@ -23,6 +23,11 @@ class VolunteerMapViewController : UIViewController, GMSMapViewDelegate {
         self.mapView.animateToZoom(2)
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        trackScreenToAnalytics(AnalyticsLabels.volunteerMap)
+    }
+    
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
@@ -73,7 +78,7 @@ class VolunteerMapViewController : UIViewController, GMSMapViewDelegate {
         
         let volunteer = box.value
         
-        trackGoogleAnalyticsEvent("Main", action: "Click", label: "Community")
+        trackEventToAnalytics("Main", action: "Click", label: "Community")
         let controller = Storyboards.Main.instantiateVolunteerDetailsViewControllerId()
         controller.volunteer = volunteer
         controller.author = volunteer.owner

@@ -43,6 +43,7 @@ class PeopleExploreViewController : UIViewController, FetchViewLogicDelegate, UI
     override func viewWillAppear(animated: Bool) {
         if self.viewLogic.objects.isEmpty {
             self.viewLogic.fetch()
+            trackScreenToAnalytics(AnalyticsLabels.peopleList)
         }
         
         //UIKit bug?

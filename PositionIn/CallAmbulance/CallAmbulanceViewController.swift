@@ -42,6 +42,11 @@ class CallAmbulanceViewController: BaseAddItemViewController {
         view.tintColor = UIScheme.mainThemeColor
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        trackScreenToAnalytics(AnalyticsLabels.callAmbulanceForm)
+    }
+    
     override func showFormValidationError(error: NSError!) {
         if let error = error {
             showWarning(error.localizedDescription)
@@ -171,6 +176,12 @@ class CallAmbulanceViewController: BaseAddItemViewController {
                     return info
                 }
                 return api().createAmbulanceRequest(ambulanceRequest).onSuccess(callback: {[weak self] ambulanceRequest in
+                    
+                    //Send analytics event
+                    let incidentType = values[Tags.Incedent.rawValue] as? XLFormOptionsObject
+                    let icnidentName = incidentType?.displayText() ?? NSLocalizedString("Can't get type")
+                    trackEventToAnalytics(AnalyticCategories.ambulance, action: AnalyticActios.requestSent, label: icnidentName)
+                    
                     let controller = Storyboards.Onboarding.instantiateAmbulanceRequestedViewControllerId()
                     controller.ambulanceRequestObjectId = ambulanceRequest.objectId
                     self?.navigationController?.pushViewController(controller, animated: true)

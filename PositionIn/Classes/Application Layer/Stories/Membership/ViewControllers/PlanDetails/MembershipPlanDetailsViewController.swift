@@ -43,12 +43,23 @@ class MembershipPlanDetailsViewController: UIViewController, UITableViewDataSour
         self.setupInterface()
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        trackScreenToAnalytics(AnalyticsLabels.membershipPlanDetails)
+        trackEventToAnalytics(AnalyticCategories.membership, action: AnalyticActios.planListSelection, label: plan.name ?? NSLocalizedString("No plan name"))
+    }
+    
     func setupInterface() {
         self.title = String("Membership Plans")
         
         self.membershipPlanImageView.image = UIImage(named : self.plan.membershipImageName)
         self.membershipPlanTitleLabel.text = self.plan.name
-        self.priceLabel.text = String("\(AppConfiguration().currencySymbol) \(self.plan.price ?? 0) Annually")
+        
+        if let lifetime = plan.lifetime where lifetime {
+            self.priceLabel.text = String("\(AppConfiguration().currencySymbol) \(self.plan.price ?? 0)")
+        } else {
+            self.priceLabel.text = String("\(AppConfiguration().currencySymbol) \(self.plan.price ?? 0) Annually")
+        }
         
         self.tableView.registerNib(UINib(nibName: String(MembershipPlanDetailsBenefitTableViewCell.self), bundle: nil), forCellReuseIdentifier: self.reuseIdentifier)
         self.tableView.rowHeight = UITableViewAutomaticDimension;
@@ -79,6 +90,7 @@ class MembershipPlanDetailsViewController: UIViewController, UITableViewDataSour
     //MARK: Target-Action
     
     @IBAction func selectPlanTapped(sender: AnyObject) {
+        trackEventToAnalytics(AnalyticCategories.membership, action: AnalyticActios.planSelected, label: plan.name ?? NSLocalizedString("No plan name"))
         self.router .showMembershipConfirmDetailsViewController(from: self, with: plan)
     }
 }

@@ -17,6 +17,11 @@ class PhoneVerificationViewController: XLFormViewController {
         case ValidationCode = "ValidationCode"
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        trackScreenToAnalytics(AnalyticsLabels.verificationCode)
+    }
+    
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         self.initializeForm()
@@ -95,23 +100,29 @@ class PhoneVerificationViewController: XLFormViewController {
             let phoneNumber = self.phoneNumber {
                 let codeString = "\(codeRowValue)"
                 api().verifyPhoneCode(phoneNumber, code: codeString).onSuccess(callback: {[weak self] isExistingUser in
+                    //User entered valid sms code
+                    trackEventToAnalytics(AnalyticCategories.phoneVerification, action: AnalyticActios.verificationSuccessful)
+                    
                     if isExistingUser {
-                        trackGoogleAnalyticsEvent("Auth", action: "Click", label: "SMS verification", value: NSNumber(int: 1))
+                        //sing in
+                        trackEventToAnalytics(AnalyticCategories.auth, action: AnalyticActios.userSignIn)
                         api().login(username: nil, password: nil, phoneNumber: phoneNumber, phoneVerificationCode: codeString).onSuccess { [weak self] _ in
                             api().pushesRegistration()
                             self?.dismissLogin()
                             }.onFailure(callback: { _ in
-                                trackGoogleAnalyticsEvent("Status", action: "Click", label: "Auth Fail")
+                                trackEventToAnalytics(AnalyticCategories.auth, action: AnalyticActios.userSignInFail)
                             })
                     }
                     else {
                         //register
                         if let strongSelf = self {
-                            trackGoogleAnalyticsEvent("Auth", action: "Click", label: "SMS verification", value: NSNumber(int: 0))
                             MembershipRouterImplementation().showMembershipMemberProfile(from: strongSelf, phoneNumber: strongSelf.phoneNumber!, validationCode: codeString)
                         }
                     }
-                    })
+                    }).onFailure { _ in
+                        //User entered invalid sms code
+                        trackEventToAnalytics(AnalyticCategories.phoneVerification, action: AnalyticActios.verificationFail)
+                }
         }
     }
     

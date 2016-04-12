@@ -25,6 +25,11 @@ final class ProductDetailsViewController: UIViewController {
         reloadData()
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        trackScreenToAnalytics(AnalyticsLabels.projectDetails)
+    }
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let orderController = segue.destinationViewController  as? OrderViewController {
             orderController.product = self.product
@@ -57,8 +62,12 @@ final class ProductDetailsViewController: UIViewController {
         self.product = product
         headerLabel.text = product.name
         detailsLabel.text = product.text?.stringByReplacingOccurrencesOfString("\\n", withString: "\n")
-        if let numOfBeneficiaries = product.numOfBeneficiaries {
+        if let numOfBeneficiaries = product.numOfBeneficiaries where numOfBeneficiaries > 0 {
+            transparentGrayView.hidden = false
             priceLabel.text = "\(Int(numOfBeneficiaries)) beneficiaries"
+        }
+        else {
+            transparentGrayView.hidden = true
         }
         
         let image = UIImage(named: "hardware_img_default")
@@ -128,6 +137,7 @@ final class ProductDetailsViewController: UIViewController {
     @IBOutlet private weak var nameLabel: UILabel!
     @IBOutlet private weak var priceLabel: UILabel!
     @IBOutlet private weak var detailsLabel: UILabel!
+    @IBOutlet weak var transparentGrayView: UIView!
 }
 
 extension ProductDetailsViewController {
@@ -169,7 +179,11 @@ extension ProductDetailsViewController: ProductDetailsActionConsumer {
                 //TODO should change following code
                 let donateController = Storyboards.Onboarding.instantiateDonateViewController()
                 donateController.product = self.product
+                donateController.viewControllerToOpenOnComplete = self
+                donateController.donationType = .Project
+                trackEventToAnalytics(AnalyticCategories.labelForDonationType(donateController.donationType), action: AnalyticActios.donate, label: product?.name ?? NSLocalizedString("Can't get product type"))
                 self.navigationController?.pushViewController(donateController, animated: true)
+                
             }
             return
         case .ProductInventory:

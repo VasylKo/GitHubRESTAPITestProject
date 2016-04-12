@@ -50,6 +50,7 @@ class MembershipConfirmDetailsViewController : XLFormViewController {
         row.cellConfigAtConfigure["textField.placeholder"] = NSLocalizedString("Required", comment: "")
         row.cellConfig.setObject(UIScheme.mainThemeColor, forKey: "textLabel.textColor")
         row.cellConfig.setObject(UIScheme.mainThemeColor, forKey: "tintColor")
+        row.addValidator(XLFormRegexValidator(msg: NSLocalizedString("Please enter a valid email", comment: "Email validation"), regex: "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"))
         row.required = true
         return row
     }()
@@ -81,6 +82,11 @@ class MembershipConfirmDetailsViewController : XLFormViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.loadData()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        trackScreenToAnalytics(AnalyticsLabels.membershipConfirmDetails)
     }
     
     func loadData (){
@@ -177,11 +183,14 @@ class MembershipConfirmDetailsViewController : XLFormViewController {
     @objc func nextButtonTouched() {
         navigationItem.rightBarButtonItem?.enabled = false
         
+        
+        
         //TODO: add validations
         let validationErrors : Array<NSError> = self.formValidationErrors() as! Array<NSError>
         if (validationErrors.count > 0){
             self.showFormValidationError(validationErrors.first)
             navigationItem.rightBarButtonItem?.enabled = true
+            trackEventToAnalytics(AnalyticCategories.membership, action: AnalyticActios.confirmDetailsNext, label: validationErrors.first?.localizedDescription ?? NSLocalizedString("Unknown error"))
             return
         }
         
@@ -212,6 +221,8 @@ class MembershipConfirmDetailsViewController : XLFormViewController {
             self.router.showPaymentViewController(from: self, with: self.plan)
             navigationItem.rightBarButtonItem?.enabled = true
         }
+        
+        trackEventToAnalytics(AnalyticCategories.membership, action: AnalyticActios.confirmDetailsNext, label: NSLocalizedString("Success"))
 
     }
 }

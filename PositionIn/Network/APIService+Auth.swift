@@ -14,7 +14,29 @@ import BrightFutures
 import CleanroomLogger
 import Messaging
 
+extension Future {
+    func recoverAuthErrorWith(futureBuilder: Void -> Future<T, E>) -> Future<T, E> {
+        return self.recoverWith { error in
+            if (error as NSError).code == NSURLErrorNetworkConnectionLost {
+                return futureBuilder()
+            }
+            
+            return Future(error: error)
+        }
+    }
+}
+
 extension APIService {
+    func handleAuthFailure<R>(fb: Void -> Future<R, NSError>) -> Future<R, NSError> {
+        return fb().recoverAuthErrorWith(fb).recoverAuthErrorWith(fb).recoverAuthErrorWith(fb).onFailure { error in
+            if let e = NetworkDataProvider.ErrorCodes.fromError(error) where e == .SessionRevokedError {
+                self.logout()
+            }
+            self.defaultErrorHandler?(error)
+            
+            trackEventToAnalytics(AnalyticCategories.network, action: AnalyticActios.error, label: error.localizedDescription, value: NSNumber(integer: error.code))
+        }
+    }
     
     //Returns current user id
     func currentUserId() -> CRUDObjectId? {
@@ -40,7 +62,7 @@ extension APIService {
         let futureBuilder: (Void -> Future<Void, NSError>) = { [unowned self] in
             return self.sessionController.isUserAuthorized()
         }
-        return handleFailure(futureBuilder)
+        return handleAuthFailure(futureBuilder)
     }
     
     
@@ -96,6 +118,8 @@ extension APIService {
         return sessionController.session().recoverWith { _ in
             return self.refreshToken().map { response in
                 return response.accessToken
+                }.onFailure { error in
+                    trackEventToAnalytics(AnalyticCategories.token, action: AnalyticActios.refreshFailed, label: error.localizedDescription)
             }
         }
     }
@@ -110,15 +134,9 @@ extension APIService {
     
     // Logout from server to stop receiving push notifications and then expire current session
     func logoutFromServer() -> Future<Void, NSError> {
-        return session().flatMap{ [unowned self] accessToken in
-            return self.logoutRequest(accessToken: accessToken)
-            }.onSuccess { [unowned self] _ in
-                self.logout()
-            }.onFailure { [unowned self] error in
-                //Handle error to show UI worning
-                self.defaultErrorHandler?(error)
+        return logoutRequest().onSuccess { [unowned self] _ in
+            self.logout()
         }
-        
     }
     
     //Verify Phone
@@ -126,11 +144,13 @@ extension APIService {
     //1 - api type for sms validation (duplicate functionality)
     //2 - api type for phone validation call call
     func verifyPhone(phoneNumber: String, type: NSNumber) -> Future<Void, NSError> {
+        trackEventToAnalytics(AnalyticCategories.phoneVerification, action: AnalyticActios.phoneVerificationRequested)
         return verifyPhoneRequest(phoneNumber, type: type)
     }
     
     //Validate Code
     func verifyPhoneCode(phoneNumber: String, code: String) -> Future<Bool, NSError> {
+        trackEventToAnalytics(AnalyticCategories.phoneVerification, action: AnalyticActios.codeVerificationRequested)
         return verifyPhoneCodeRequest(phoneNumber, code: code)
     }
     
@@ -185,7 +205,7 @@ extension APIService {
             return self.updateAuth(future)
         }
             
-        return handleFailure(futureBuilder)
+        return handleAuthFailure(futureBuilder)
     }
     
     private func verifyPhoneRequest(phoneNumber: String, type: NSNumber) ->  Future<Void, NSError> {
@@ -197,7 +217,7 @@ extension APIService {
             return future
         }
         
-        return self.handleFailure(futureBuilder)
+        return self.handleAuthFailure(futureBuilder)
     }
     
     private func verifyPhoneCodeRequest(phoneNumber: String, code: String) ->  Future<Bool, NSError> {
@@ -209,7 +229,7 @@ extension APIService {
             return future
         }
             
-        return self.handleFailure(futureBuilder)
+        return self.handleAuthFailure(futureBuilder)
     }
     
     private func loginRequest(username username: String?, password: String?, phoneNumber: String?, phoneVerificationCode: String?)
@@ -227,20 +247,22 @@ extension APIService {
             return self.updateAuth(future)
         }
         
-        return handleFailure(futureBuilder)
+        return handleAuthFailure(futureBuilder)
     }
     
-    private func logoutRequest(accessToken accessToken: String) -> Future<Void, NSError> {
-        
+    private func logoutRequest() -> Future<Void, NSError> {
         typealias ResultType = (Alamofire.Request, Future<Void, NSError>)
         
         let futureBuilder: (Void -> Future<Void, NSError>) = { [unowned self] in
-            let request = AuthRouter.Logout(api: self, accessToken: accessToken)
-            let serializer = Alamofire.Request.LogoutEmptyResponseSerializer()
-            let (_, future): ResultType = self.dataProvider.request(request, serializer: serializer, validation: nil)
-            return future
+            return self.session().flatMap {
+                (accessToken: AuthResponse.Token) -> Future<Void, NSError> in
+                let request = AuthRouter.Logout(api: self, accessToken: accessToken)
+                let serializer = Alamofire.Request.LogoutEmptyResponseSerializer()
+                let (_, future): ResultType = self.dataProvider.request(request, serializer: serializer, validation: nil)
+                return future
+            }
         }
-
+ 
         return handleFailure(futureBuilder)
     }
     
@@ -258,7 +280,7 @@ extension APIService {
             return self.updateAuth(future)
         }
     
-        return handleFailure(futureBuilder)
+        return handleAuthFailure(futureBuilder)
     }
     
     private func refreshToken() -> Future<AccessTokenResponse, NSError> {

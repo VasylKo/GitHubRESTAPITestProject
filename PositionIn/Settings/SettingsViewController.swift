@@ -21,6 +21,11 @@ class SettingsViewController: BesideMenuViewController, MFMailComposeViewControl
         customizeButton(self.passwordButton)
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        trackScreenToAnalytics(AnalyticsLabels.settings)
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
@@ -32,6 +37,7 @@ class SettingsViewController: BesideMenuViewController, MFMailComposeViewControl
     }
     
     @IBAction func termsConditionsButtonPressed(sender: AnyObject) {
+        trackEventToAnalytics(AnalyticCategories.settings, action: AnalyticActios.termsAndConditions)
         let url: NSURL? = NSURL(string: "http://www.redcross.or.ke/")
         if let url = url {
             UIApplication.sharedApplication().openURL(url)
@@ -58,9 +64,11 @@ class SettingsViewController: BesideMenuViewController, MFMailComposeViewControl
     
     @IBAction func contactSupportPressed(sender: AnyObject) {
         self.showMailControllerWithRecepientEmail("rcapp@redcross.or.ke")
+        trackEventToAnalytics(AnalyticCategories.settings, action: AnalyticActios.contactSupport)
     }
     
     @IBAction func signOutPressed(sender: AnyObject) {
+        trackEventToAnalytics(AnalyticCategories.settings, action: AnalyticActios.signOut)
         api().logoutFromServer().onSuccess {[weak self] _ in
             self?.sideBarController?.executeAction(.Login)
         }

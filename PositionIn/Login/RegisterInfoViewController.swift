@@ -36,7 +36,7 @@ final class RegisterInfoViewController: BaseLoginViewController {
                     return
             }
             
-            trackGoogleAnalyticsEvent("Auth", action: "Click", label: "Signup Complete")
+            trackEventToAnalytics(AnalyticCategories.auth, action: AnalyticActios.click, label: NSLocalizedString("Signup Complete"))
             
             let firstName = firstnameTextField.text
             let lastName = lastnameTextField.text
@@ -44,14 +44,14 @@ final class RegisterInfoViewController: BaseLoginViewController {
             
             api().register(username: username, password: password, phoneNumber: nil, phoneVerificationCode: nil, firstName: firstName, lastName: lastName, email: email).onSuccess {
                 [weak self] _ in
-                trackGoogleAnalyticsEvent("Status", action: "Click", label: "Auth Success")
+                trackEventToAnalytics(AnalyticCategories.status, action: AnalyticActios.click, label: NSLocalizedString("Auth Success"))
                 Log.info?.message("Registration done")
                 self?.sideBarController?.executeAction(SidebarViewController.defaultAction)
                 self?.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
                 }.onSuccess(callback: { _ in
                     api().pushesRegistration()
                 }).onFailure(callback: {_ in
-                trackGoogleAnalyticsEvent("Status", action: "Click", label: "Auth Fail")
+                trackEventToAnalytics(AnalyticCategories.status, action: AnalyticActios.click, label: NSLocalizedString("Auth Fail"))
             })
         } //validation
     }

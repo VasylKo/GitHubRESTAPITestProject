@@ -25,6 +25,11 @@ class EmergencyDetailsController: UIViewController {
         reloadData()
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        trackScreenToAnalytics(AnalyticsLabels.emergencyAlertDetails)
+    }
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let orderController = segue.destinationViewController  as? OrderViewController {
             orderController.product = self.product
@@ -177,6 +182,9 @@ extension EmergencyDetailsController: EmergencyDetailsActionConsumer {
         case .Donate:
             let donateController = Storyboards.Onboarding.instantiateDonateViewController()
             donateController.product = self.product
+            donateController.viewControllerToOpenOnComplete = self
+            donateController.donationType = .EmergencyAlert
+            trackEventToAnalytics(AnalyticCategories.labelForDonationType(donateController.donationType), action: AnalyticActios.donate, label: product?.name ?? NSLocalizedString("Can't get product type"))
             self.navigationController?.pushViewController(donateController, animated: true)
             return
         case .SendMessage:

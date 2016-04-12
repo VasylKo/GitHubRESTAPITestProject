@@ -34,6 +34,19 @@ final class CommunityViewController: DisplayModeViewController {
 
     }
     
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        switch controllerType {
+        case .Unknown:
+            break;
+        case .Community:
+            trackScreenToAnalytics(AnalyticsLabels.communityPostsList)
+        case .Volunteer:
+            trackScreenToAnalytics(AnalyticsLabels.volunteerPostsList)
+        }
+    }
+    
     @IBAction func prepareForUnwind(segue: UIStoryboardSegue) {
         
     }
@@ -53,7 +66,7 @@ final class CommunityViewController: DisplayModeViewController {
             let filterUpdate = { (filter: SearchFilter) -> SearchFilter in
                 var f = filter
                 f.communities = [community.objectId]
-                f.itemTypes = [FeedItem.ItemType.Event, FeedItem.ItemType.Post]
+                f.itemTypes = [FeedItem.ItemType.Event, FeedItem.ItemType.Post, FeedItem.ItemType.Market]
                 return f
             }
             

@@ -18,6 +18,11 @@ class VoiceVerificationViewController: XLFormViewController {
     
     var phoneNumber: String?
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        trackScreenToAnalytics(AnalyticsLabels.voiceVerificationCode)
+    }
+    
     //MARK: Initializers
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
@@ -95,19 +100,19 @@ class VoiceVerificationViewController: XLFormViewController {
                 let codeString = "\(codeRowValue)"
                 api().verifyPhoneCode(phoneNumber, code: codeString).onSuccess(callback: {[weak self] isExistingUser in
                     if isExistingUser {
-                        trackGoogleAnalyticsEvent("Auth", action: "Click", label: "SMS verification", value: NSNumber(int: 1))
+                        trackEventToAnalytics(AnalyticCategories.auth, action: AnalyticActios.click, label: NSLocalizedString("SMS verification"), value: NSNumber(int: 1))
                         api().login(username: nil, password: nil, phoneNumber: phoneNumber, phoneVerificationCode: codeString).onSuccess { [weak self] _ in
                             api().pushesRegistration()
                             self?.view.resignFirstResponder()
                             self?.dismissLogin()
                             }.onFailure(callback: { _ in
-                                trackGoogleAnalyticsEvent("Status", action: "Click", label: "Auth Fail")
+                                trackEventToAnalytics("Status", action: AnalyticActios.click, label: NSLocalizedString("Auth Fail"))
                             })
                     }
                     else {
                         //register
                         if let strongSelf = self {
-                            trackGoogleAnalyticsEvent("Auth", action: "Click", label: "SMS verification", value: NSNumber(int: 0))
+                            trackEventToAnalytics(AnalyticCategories.auth, action: AnalyticActios.click, label: NSLocalizedString("SMS verification"), value: NSNumber(int: 0))
                             MembershipRouterImplementation().showMembershipMemberProfile(from: strongSelf, phoneNumber: strongSelf.phoneNumber!, validationCode: codeString)
                         }
                     }

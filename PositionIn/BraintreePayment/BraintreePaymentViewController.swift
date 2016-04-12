@@ -29,6 +29,7 @@ class BraintreePaymentViewController : UIViewController, BTDropInViewControllerD
         self.view.backgroundColor = UIColor.whiteColor()
     }
     
+    
     @IBAction func userDidCancelPayment() {
         dismissPaymentsController(false, err:nil)
     }

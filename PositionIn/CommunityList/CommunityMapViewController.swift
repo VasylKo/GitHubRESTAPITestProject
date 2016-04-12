@@ -23,6 +23,11 @@ class CommunityMapViewController : UIViewController, GMSMapViewDelegate {
         self.mapView.animateToZoom(2)
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        trackScreenToAnalytics(AnalyticsLabels.communitiesMap)
+    }
+    
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
@@ -74,7 +79,7 @@ class CommunityMapViewController : UIViewController, GMSMapViewDelegate {
         
         let community = box.value
        
-        trackGoogleAnalyticsEvent("Main", action: "Click", label: "Community")
+        trackEventToAnalytics("Main", action: "Click", label: "Community")
         let controller = Storyboards.Main.instantiateVolunteerDetailsViewControllerId()
         controller.volunteer = community
         controller.author = community.owner

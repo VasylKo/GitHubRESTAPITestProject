@@ -45,6 +45,8 @@ final class AddPostViewController: BaseAddItemViewController {
                     self.tableView.reloadData()
                 }
             })
+        } else {
+            trackScreenToAnalytics(AnalyticsLabels.addNewPost)
         }
     }
 
@@ -60,7 +62,7 @@ final class AddPostViewController: BaseAddItemViewController {
         messageRow.required = true
         messageRow.cellConfigAtConfigure["textView.placeholder"] = NSLocalizedString("Message", comment: "New post: message")
         messageRow.addValidator(XLFormRegexValidator(msg: NSLocalizedString("Incorrect message lenght",
-            comment: "Add post"), regex: "^.{0,500}$"))
+            comment: "Add post"), regex: "^.{0,800}$"))
         descriptionSection.addFormRow(messageRow)
         // Community
         let postToRow = XLFormRowDescriptor(tag:Tags.PostTo.rawValue,
@@ -139,7 +141,16 @@ final class AddPostViewController: BaseAddItemViewController {
                 }.onSuccess { [weak self] (post: Post) -> ()  in
                     Log.debug?.value(post)
                     self?.sendUpdateNotification()
-                    self?.cancelButtonTouched()
+                    
+                    
+                    let controller = Storyboards.Main.instantiateCommunityViewController()
+                    controller.objectId = communityId!
+                    
+                    self?.navigationController?.pushViewController(controller, animated: true)
+                    if var viewControllers = self?.navigationController?.viewControllers {
+                        viewControllers.removeAtIndex(viewControllers.count - 2) //Remove previous controller from controllers stack
+                        self?.navigationController?.viewControllers = viewControllers
+                    }
                 }.onFailure { error in
                     showError(error.localizedDescription)
                 }.onComplete { [weak self] result in

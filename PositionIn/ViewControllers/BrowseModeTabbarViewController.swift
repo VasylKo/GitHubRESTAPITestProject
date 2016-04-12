@@ -24,14 +24,17 @@ protocol BrowseModeDisplay {
         return [
             AddMenuView.MenuItem.promotionItemWithAction {
                 api().isUserAuthorized().onSuccess {  _ in
+                    trackEventToAnalytics(AnalyticCategories.ambulance, action: AnalyticActios.actionOpenAmbulance)
                     pushAndSubscribe(Storyboards.Onboarding.instantiateCallAmbulanceViewController())
                 }},
             AddMenuView.MenuItem.inviteItemWithAction {
                 api().isUserAuthorized().onSuccess {  _ in
+                    trackEventToAnalytics(AnalyticCategories.donate, action: AnalyticActios.actionOpenDonate)
                     pushAndSubscribe(Storyboards.Onboarding.instantiateDonateViewController())
                 }},
             AddMenuView.MenuItem.postItemWithAction {
                 api().isUserAuthorized().onSuccess {  _ in
+                    trackEventToAnalytics(AnalyticCategories.post, action: AnalyticActios.actionOpenPost)
                     pushAndSubscribe(Storyboards.NewItems.instantiateAddPostViewController())
                 }}
         ]

@@ -19,7 +19,7 @@ final class MainMenuViewController: UIViewController {
         dataSource.items = menuItemsForUser(nil)
         dataSource.configureTable(tableView)
         subscribeToNotifications()
-        trackGoogleAnalyticsEvent("Main", action: "Click", label: "Home")
+        trackEventToAnalytics("Main", action: "Click", label: "Home")
     }
     
     private func menuItemsForUser(user: UserProfile?) -> [MainMenuItem] {
@@ -68,6 +68,7 @@ final class MainMenuViewController: UIViewController {
             if item.action == action {
                 let indexPath = NSIndexPath(forRow: idx, inSection: 0)
                 tableView.selectRowAtIndexPath(indexPath, animated: true, scrollPosition: .Top)
+                appDelegate().sidebarViewController?.lastAction = action
                 break
             }
         }
