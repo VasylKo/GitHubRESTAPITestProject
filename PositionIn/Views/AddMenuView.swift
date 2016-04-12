@@ -101,10 +101,10 @@ final class AddMenuView: UIView {
             for menuItemView in menuItemViews {
                 contains = menuItemView.frame.contains(point)
                 if contains {
-                    break ;
+                    return true
                 }
             }
-            return contains
+            return startButton.frame.contains(point)
         }
         return super.pointInside(point, withEvent: event)
     }
