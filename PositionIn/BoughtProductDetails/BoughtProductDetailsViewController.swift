@@ -26,6 +26,8 @@ final class BoughtProductDetailsViewController: UIViewController {
     @IBOutlet weak var totalLabel: UILabel?
     @IBOutlet weak var transactionIDLabel: UILabel?
     
+    @IBOutlet weak var pickUpAvaiabililityCellHeightConstraints: NSLayoutConstraint?
+    
     @IBOutlet weak var actionTableView: UITableView?
     
     // MARK: - Internal properties
@@ -87,7 +89,12 @@ final class BoughtProductDetailsViewController: UIViewController {
         productImage?.setImageFromURL(product?.entityDetails?.imageURL, placeholder: UIImage(named: "market_img_default"))
         productNameLabel?.text = product?.entityDetails?.name
         orderStatusLabel?.text = product?.status?.description
-        pickUpAvailabilityLabel?.text = product?.entityDetails?.endData?.formattedAsTimeAgo()
+        //Hide pick-up avaiabilility cell if the product don't have one
+        if let endData =  product?.entityDetails?.endData {
+            pickUpAvailabilityLabel?.text = endData.formattedAsTimeAgo()
+        } else {
+            pickUpAvaiabililityCellHeightConstraints?.constant = 0
+        }
         quantityLabel?.text = "\(product?.quantity ?? 0)"
         paymentMethodLabel?.text = product?.paymentMethod?.description
         transactionIDLabel?.text = product?.transactionId
