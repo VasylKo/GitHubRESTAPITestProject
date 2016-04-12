@@ -40,6 +40,12 @@ final class BoughtProductDetailsViewController: UIViewController {
         return dataSource
     }()
     
+    private lazy var dateFormatter: NSDateFormatter = {
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "EEE dd yyyy, HH:mm"
+        return dateFormatter
+    }()
+    
     private func productActionItems() -> [[BoughtProductDetailsActionItem]] {
         var zeroSection = [BoughtProductDetailsActionItem]() // 1 section
         
@@ -90,8 +96,11 @@ final class BoughtProductDetailsViewController: UIViewController {
         productNameLabel?.text = product?.entityDetails?.name
         orderStatusLabel?.text = product?.status?.description
         //Hide pick-up avaiabilility cell if the product don't have one
-        if let endData =  product?.entityDetails?.endData {
-            pickUpAvailabilityLabel?.text = endData.formattedAsTimeAgo()
+        if let startDate = product?.entityDetails?.startDate, endDate = product?.entityDetails?.endData {
+            let startDateString = dateFormatter.stringFromDate(startDate)
+            let endDateString = dateFormatter.stringFromDate(endDate)
+            let pickUpAvaliabilityString = "\(startDateString) to \(endDateString)"
+            pickUpAvailabilityLabel?.text = pickUpAvaliabilityString
         } else {
             pickUpAvaiabililityCellHeightConstraints?.constant = 0
         }
