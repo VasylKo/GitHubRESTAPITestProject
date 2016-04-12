@@ -210,6 +210,11 @@ extension PostViewController {
                 if let model = self.tableView(tableView, modelForIndexPath: indexPath) as? PostAttachmentsModel {
                     actionConsumer.showAttachments(model.links, attachments: model.attachments)
                 }
+                
+                //Open user profile on comment click
+                if let model = self.tableView(tableView, modelForIndexPath: indexPath) as? PostCommentCellModel {
+                    actionConsumer.showProfileScreen(model.userId)
+                }
             }
         }
     }
