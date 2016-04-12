@@ -50,7 +50,7 @@ class MembershipPlansViewController : UIViewController, UITableViewDelegate, UIT
         
         api().getMemberships().onSuccess { [weak self] (response : CollectionResponse<MembershipPlan>) in
             self?.activityIndicator.stopAnimating()
-            self?.plans = response.items.filter(){ $0.type == self?.type }
+            self?.plans = response.items.filter(){ $0.type == self?.type }.sort { $0.price < $1.price }
             self?.tableView.reloadData()
         }
         
