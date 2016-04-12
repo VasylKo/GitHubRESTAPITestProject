@@ -85,7 +85,7 @@
                                 <constraint firstAttribute="height" constant="1" id="Lkw-hP-FBZ"/>
                             </constraints>
                         </view>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="400" verticalHuggingPriority="249" text="20:00 - 22:00 PM" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tNO-1b-O93">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="400" verticalHuggingPriority="249" text="20:00 - 22:00 PM" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="tNO-1b-O93">
                             <rect key="frame" x="16" y="32" width="288" height="20"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="16"/>
                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -100,19 +100,15 @@
                         <constraint firstAttribute="trailing" secondItem="VwQ-t8-feL" secondAttribute="trailing" constant="16" id="HN7-Xa-obK"/>
                         <constraint firstItem="tNO-1b-O93" firstAttribute="top" secondItem="VwQ-t8-feL" secondAttribute="bottom" constant="4" id="InA-PY-7Ii"/>
                         <constraint firstItem="VwQ-t8-feL" firstAttribute="leading" secondItem="YxJ-g4-0r0" secondAttribute="leading" constant="16" id="Lb0-8x-VIl"/>
-                        <constraint firstItem="tNO-1b-O93" firstAttribute="leading" secondItem="YxJ-g4-0r0" secondAttribute="leading" constant="8" id="Uf4-8U-iK9"/>
                         <constraint firstItem="tNO-1b-O93" firstAttribute="trailing" secondItem="VwQ-t8-feL" secondAttribute="trailing" id="fkv-cd-lO2"/>
                         <constraint firstAttribute="bottom" secondItem="JFN-GS-epb" secondAttribute="bottom" id="frT-k8-03h"/>
-                        <constraint firstAttribute="height" constant="61" id="gDa-qB-VKS"/>
-                        <constraint firstAttribute="trailing" secondItem="tNO-1b-O93" secondAttribute="trailing" constant="8" id="nFP-vh-ht3"/>
                         <constraint firstAttribute="trailing" secondItem="JFN-GS-epb" secondAttribute="trailing" id="pai-hU-Evl"/>
                         <constraint firstItem="JFN-GS-epb" firstAttribute="leading" secondItem="YxJ-g4-0r0" secondAttribute="leading" id="rSi-FO-bek"/>
+                        <constraint firstAttribute="height" constant="61" id="taS-IN-3cL"/>
                     </constraints>
                     <variation key="default">
                         <mask key="constraints">
-                            <exclude reference="gDa-qB-VKS"/>
-                            <exclude reference="Uf4-8U-iK9"/>
-                            <exclude reference="nFP-vh-ht3"/>
+                            <exclude reference="9y5-z6-039"/>
                         </mask>
                     </variation>
                 </view>
@@ -227,7 +223,8 @@
             <connections>
                 <outlet property="iconImageView" destination="tUM-DO-NNb" id="NB5-UP-dVE"/>
                 <outlet property="itemNameLabel" destination="uhi-7k-iRj" id="jSc-Qk-6IM"/>
-                <outlet property="pickUpAvailabilityLabel" destination="tNO-1b-O93" id="hoa-hb-Zbp"/>
+                <outlet property="pickUpAvaiabililityCellHeightConstraint" destination="taS-IN-3cL" id="yrc-2e-IB5"/>
+                <outlet property="pickUpAvailabilityLabel" destination="tNO-1b-O93" id="9f4-to-eh9"/>
                 <outlet property="quintityLabel" destination="4Kv-yU-n2j" id="UVr-m2-IkQ"/>
                 <outlet property="totalLabel" destination="n15-xP-gQo" id="RTI-Xc-IYZ"/>
             </connections>
