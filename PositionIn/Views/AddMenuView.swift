@@ -97,8 +97,14 @@ final class AddMenuView: UIView {
     
     override func pointInside(point: CGPoint, withEvent event: UIEvent?) -> Bool {
         if (mExpanded) {
-            let rect = menuItemViews.reduce(bounds) { return CGRectUnion($0, $1.frame) }
-            return rect.contains(point)
+            var contains = false
+            for menuItemView in menuItemViews {
+                contains = menuItemView.frame.contains(point)
+                if contains {
+                    return true
+                }
+            }
+            return startButton.frame.contains(point)
         }
         return super.pointInside(point, withEvent: event)
     }
