@@ -16,7 +16,7 @@ class MarketPaymentView: XLFormBaseCell {
     var totalPrice: NSNumber? {
         didSet {
             if let totalPrice = totalPrice {
-                self.totalLabel.text = AppConfiguration().currencyFormatter.stringFromNumber(totalPrice)
+                self.totalLabel?.text = AppConfiguration().currencyFormatter.stringFromNumber(totalPrice)
             }
         }
     }
@@ -24,34 +24,40 @@ class MarketPaymentView: XLFormBaseCell {
     var imageURL: NSURL? {
         didSet {
             let defaultImage = UIImage(named: "market_img_default")
-            self.iconImageView.setImageFromURL(imageURL, placeholder: defaultImage)
+            self.iconImageView?.setImageFromURL(imageURL, placeholder: defaultImage)
         }
     }
     
     var quantity: NSNumber? {
         didSet {
             if let quantity = quantity {
-                self.self.quintityLabel.text = String(quantity)
+                self.quintityLabel?.text = String(quantity)
             }
         }
     }
     
     var itemName: String? {
         didSet {
-            self.itemNameLabel.text = itemName ?? ""
+            self.itemNameLabel?.text = itemName ?? ""
         }
     }
     
     var pickUpAvailability: String? {
         didSet {
-            self.pickUpAvailabilityLabel.text = pickUpAvailability
+            if let text = pickUpAvailability {
+                MarketPaymentView.pickUpAvaiabililityCellHeight = 61
+                self.pickUpAvaiabililityCellHeightConstraint?.constant = MarketPaymentView.pickUpAvaiabililityCellHeight
+                self.pickUpAvailabilityLabel?.text = text
+                self.update()
+            }
         }
     }
 
     override func configure() {
         super.configure()
-        //pickUpAvailabilityLabel will be sat from product
-        pickUpAvailabilityLabel.text = " "
+        //Hide pickUpAvailabilityLabel
+        MarketPaymentView.pickUpAvaiabililityCellHeight = 0
+        self.pickUpAvaiabililityCellHeightConstraint?.constant = MarketPaymentView.pickUpAvaiabililityCellHeight
     }
     
     override func update() {
@@ -59,12 +65,16 @@ class MarketPaymentView: XLFormBaseCell {
     }
 
     override static func formDescriptorCellHeightForRowDescriptor(rowDescriptor: XLFormRowDescriptor!) -> CGFloat {
-        return 236
+        return 175 + MarketPaymentView.pickUpAvaiabililityCellHeight
     }
     
-    @IBOutlet private weak var iconImageView: UIImageView!
-    @IBOutlet private weak var itemNameLabel: UILabel!
-    @IBOutlet private weak var pickUpAvailabilityLabel: UILabel!
-    @IBOutlet private weak var quintityLabel: UILabel!
-    @IBOutlet private weak var totalLabel: UILabel!
+    @IBOutlet private weak var iconImageView: UIImageView?
+    @IBOutlet private weak var itemNameLabel: UILabel?
+    @IBOutlet private weak var pickUpAvailabilityLabel: UILabel?
+    @IBOutlet private weak var quintityLabel: UILabel?
+    @IBOutlet private weak var totalLabel: UILabel?
+    @IBOutlet private weak var pickUpAvaiabililityCellHeightConstraint: NSLayoutConstraint?
+    
+    static var pickUpAvaiabililityCellHeight: CGFloat = 0
+
 }

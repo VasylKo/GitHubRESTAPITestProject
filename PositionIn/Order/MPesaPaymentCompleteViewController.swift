@@ -21,6 +21,11 @@ class MPesaPaymentCompleteViewController: XLFormViewController {
     private var transactionId = ""
     private var cardItem: CardItem = .MPesa
     private var delegate: MPesaPaymentCompleteDelegate?
+    private lazy var dateFormatter: NSDateFormatter = {
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "EEE dd yyyy, HH:mm"
+        return dateFormatter
+    }()
     
     //MARK: Initializers
     init(quantity: Int, product: Product, cardItem: CardItem = .MPesa, delegate: MPesaPaymentCompleteDelegate? = nil) {
@@ -103,7 +108,13 @@ class MPesaPaymentCompleteViewController: XLFormViewController {
         
         donateProjectRow.cellConfigAtConfigure["itemName"] = product?.name
         donateProjectRow.cellConfigAtConfigure["imageURL"] = product?.imageURL
-        donateProjectRow.cellConfigAtConfigure["pickUpAvailability"] = product?.endData?.formattedAsTimeAgo()
+        if let startDate = product?.startDate, endDate = product?.endData {
+            let startDateString = dateFormatter.stringFromDate(startDate)
+            let endDateString = dateFormatter.stringFromDate(endDate)
+            let pickUpAvaliabilityString = "\(startDateString) to \(endDateString)"
+            donateProjectRow.cellConfigAtConfigure["pickUpAvailability"] = pickUpAvaliabilityString
+        }
+        
         donateToSection.addFormRow(donateProjectRow)
         
         self.form = form
