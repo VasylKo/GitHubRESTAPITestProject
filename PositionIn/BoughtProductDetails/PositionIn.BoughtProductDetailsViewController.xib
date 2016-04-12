@@ -30,7 +30,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                     <subviews>
                         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" style="plain" rowHeight="45" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="xxH-tk-HnA" customClass="TableView" customModule="PosInCore">
-                            <rect key="frame" x="0.0" y="350" width="600" height="400"/>
+                            <rect key="frame" x="0.0" y="395" width="600" height="400"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="400" id="J96-m1-T4W"/>
@@ -38,7 +38,7 @@
                             <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </tableView>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oQ7-Lq-gEx">
-                            <rect key="frame" x="0.0" y="0.0" width="600" height="350"/>
+                            <rect key="frame" x="0.0" y="0.0" width="600" height="395"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FLy-BQ-6sk" userLabel="HeaderView">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="82"/>
@@ -362,17 +362,19 @@
                                 <constraint firstItem="azE-lo-KKm" firstAttribute="top" secondItem="4ND-O5-Ncp" secondAttribute="bottom" id="fys-km-Eab"/>
                                 <constraint firstAttribute="trailing" secondItem="4ND-O5-Ncp" secondAttribute="trailing" id="k8P-WE-fnJ"/>
                                 <constraint firstItem="pFF-mC-dT5" firstAttribute="leading" secondItem="oQ7-Lq-gEx" secondAttribute="leading" id="kvf-nr-jwJ"/>
+                                <constraint firstAttribute="bottom" secondItem="9mV-Hf-uBa" secondAttribute="bottom" constant="13" id="ml0-XO-VJc"/>
                                 <constraint firstItem="9xI-Jv-ARK" firstAttribute="leading" secondItem="oQ7-Lq-gEx" secondAttribute="leading" id="oMl-0k-wB5"/>
                                 <constraint firstAttribute="trailing" secondItem="azE-lo-KKm" secondAttribute="trailing" id="ugE-TJ-41d"/>
                                 <constraint firstItem="bQE-nM-jGW" firstAttribute="top" secondItem="pFF-mC-dT5" secondAttribute="bottom" id="w4g-Kb-pPj"/>
                                 <constraint firstItem="FLy-BQ-6sk" firstAttribute="top" secondItem="oQ7-Lq-gEx" secondAttribute="top" id="wUe-D3-c2b"/>
-                                <constraint firstAttribute="height" constant="350" id="wVa-hC-yXC"/>
+                                <constraint firstAttribute="height" constant="395" id="wVa-hC-yXC"/>
                                 <constraint firstItem="9xI-Jv-ARK" firstAttribute="top" secondItem="pFF-mC-dT5" secondAttribute="bottom" id="xEZ-5U-JT9"/>
                                 <constraint firstAttribute="trailing" secondItem="bQE-nM-jGW" secondAttribute="trailing" id="xuH-8J-5hq"/>
                                 <constraint firstItem="pFF-mC-dT5" firstAttribute="top" secondItem="azE-lo-KKm" secondAttribute="bottom" id="zVj-d1-InE"/>
                             </constraints>
                             <variation key="default">
                                 <mask key="constraints">
+                                    <exclude reference="wVa-hC-yXC"/>
                                     <exclude reference="xEZ-5U-JT9"/>
                                 </mask>
                             </variation>
