@@ -120,7 +120,7 @@ final class MarketDetailsViewController: UIViewController {
             firstSection.append(MarketActionItem(title: NSLocalizedString("Navigate", comment: "Market"), image: "productNavigate", action: .Navigate))
         }
         if self.product?.links?.isEmpty == false || self.product?.attachments?.isEmpty == false {
-            firstSection.append(MarketActionItem(title: NSLocalizedString("More Information"), image: "productTerms&Info", action: .MoreInformation))
+            firstSection.append(MarketActionItem(title: NSLocalizedString("Attachments"), image: "productTerms&Info", action: .MoreInformation))
         }
         
         return [zeroSection, firstSection]

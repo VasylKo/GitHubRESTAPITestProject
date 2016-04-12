@@ -122,7 +122,7 @@ final class ProductDetailsViewController: UIViewController {
             firstSection.append(ProductActionItem(title: NSLocalizedString("Navigate", comment: "Product action: Navigate"), image: "productNavigate", action: .Navigate))
         }
         if self.product?.links?.isEmpty == false || self.product?.attachments?.isEmpty == false {
-            firstSection.append(ProductActionItem(title: NSLocalizedString("More Information"), image: "productTerms&Info", action: .MoreInformation))
+            firstSection.append(ProductActionItem(title: NSLocalizedString("Attachments"), image: "productTerms&Info", action: .MoreInformation))
         }
         
         return [zeroSection, firstSection]

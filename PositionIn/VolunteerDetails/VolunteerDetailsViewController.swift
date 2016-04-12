@@ -144,7 +144,7 @@ class VolunteerDetailsViewController: UIViewController {
             firstSection.append(VolunteerActionItem(title: NSLocalizedString("Navigate", comment: "BomaHotels"), image: "productNavigate", action: .Navigate))
         }
         if self.volunteer?.links?.isEmpty == false || self.volunteer?.attachments?.isEmpty == false {
-            firstSection.append(VolunteerActionItem(title: NSLocalizedString("More Information"), image: "productTerms&Info", action: .MoreInformation))
+            firstSection.append(VolunteerActionItem(title: NSLocalizedString("Attachments"), image: "productTerms&Info", action: .MoreInformation))
         }
         
         if (self.joinAction != true) {

@@ -125,7 +125,7 @@ final class TrainingDetailsViewController: UIViewController {
         }
         
         if self.product?.links?.isEmpty == false || self.product?.attachments?.isEmpty == false {
-            firstSection.append(TrainingActionItem(title: NSLocalizedString("More Information", comment: "Product action: More Information"), image: "productTerms&Info", action: .MoreInformation))
+            firstSection.append(TrainingActionItem(title: NSLocalizedString("Attachments", comment: "Product action: More Information"), image: "productTerms&Info", action: .MoreInformation))
         }
         
         return [zeroSection, firstSection]

@@ -38,7 +38,7 @@ struct FeedEmergencyCellModel {
             secondSection.append(TableViewCellImageTextModel(title: "Member Profile", imageName: "productSellerProfile"))
         }
         if emergency.links?.isEmpty == false || emergency.attachments?.isEmpty == false {
-            secondSection.append(TableViewCellImageTextModel(title: "More Information", imageName: "productTerms&Info"))
+            secondSection.append(TableViewCellImageTextModel(title: "Attachments", imageName: "productTerms&Info"))
         }
         
         if secondSection.count > 0 {
