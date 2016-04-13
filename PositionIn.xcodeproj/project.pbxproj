@@ -4722,7 +4722,7 @@
 					"-ObjC",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -D \"PROD_ENV\"";
-				PRODUCT_BUNDLE_IDENTIFIER = com.connectik.staff.sta2;
+				PRODUCT_BUNDLE_IDENTIFIER = com.connectik.members.sta2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "PositionIn/PositionIn-Bridging-Header.h";
@@ -4917,7 +4917,7 @@
 					"-ObjC",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -D DEBUG -D \"STAGING_COPY_ENV\"";
-				PRODUCT_BUNDLE_IDENTIFIER = com.connectik.staff.sta2;
+				PRODUCT_BUNDLE_IDENTIFIER = com.connectik.members.sta2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				STRIP_INSTALLED_PRODUCT = NO;
@@ -5118,7 +5118,7 @@
 					"-ObjC",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -D DEBUG -D \"STAGING_COPY_ENV\"";
-				PRODUCT_BUNDLE_IDENTIFIER = com.connectik.staff.sta2;
+				PRODUCT_BUNDLE_IDENTIFIER = com.connectik.members.sta2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				STRIP_INSTALLED_PRODUCT = NO;
@@ -5369,7 +5369,7 @@
 					"-ObjC",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -D DEBUG";
-				PRODUCT_BUNDLE_IDENTIFIER = com.connectik.staff.sta2;
+				PRODUCT_BUNDLE_IDENTIFIER = com.connectik.members.sta2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				STRIP_INSTALLED_PRODUCT = NO;
@@ -5455,7 +5455,7 @@
 					"\"XLForm\"",
 					"-ObjC",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.connectik.staff.sta2;
+				PRODUCT_BUNDLE_IDENTIFIER = com.connectik.members.sta2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "PositionIn/PositionIn-Bridging-Header.h";
@@ -5612,7 +5612,7 @@
 					"-ObjC",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -D DEBUG -D \"STAGING_ENV\"";
-				PRODUCT_BUNDLE_IDENTIFIER = com.connectik.staff.sta2;
+				PRODUCT_BUNDLE_IDENTIFIER = com.connectik.members.sta2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				STRIP_INSTALLED_PRODUCT = NO;
@@ -5804,7 +5804,7 @@
 					"-ObjC",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -D \"STAGING_ENV\"";
-				PRODUCT_BUNDLE_IDENTIFIER = com.connectik.staff.sta2;
+				PRODUCT_BUNDLE_IDENTIFIER = com.connectik.members.sta2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "PositionIn/PositionIn-Bridging-Header.h";
@@ -5998,7 +5998,7 @@
 					"-ObjC",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -D DEBUG -D \"PROD_ENV\"";
-				PRODUCT_BUNDLE_IDENTIFIER = com.connectik.staff.sta2;
+				PRODUCT_BUNDLE_IDENTIFIER = com.connectik.members.sta2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "PositionIn/PositionIn-Bridging-Header.h";
@@ -6189,7 +6189,7 @@
 					"-ObjC",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -D \"PROD_ENV\"";
-				PRODUCT_BUNDLE_IDENTIFIER = com.connectik.staff.sta2;
+				PRODUCT_BUNDLE_IDENTIFIER = com.connectik.members.sta2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "PositionIn/PositionIn-Bridging-Header.h";
