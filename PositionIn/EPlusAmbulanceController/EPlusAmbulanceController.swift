@@ -13,6 +13,12 @@ class EPlusAmbulanceController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupUI()
+        self.setupTableViewHeaderFooter()
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        self.setupTableViewHeaderFooter()
     }
     
     func setupUI() {
@@ -25,6 +31,15 @@ class EPlusAmbulanceController: UIViewController {
         topBorder.frame = CGRectMake(-1, -1, CGRectGetWidth(buttonContainerView.frame) + 2, CGRectGetHeight(buttonContainerView.frame) + 2)
         buttonContainerView.layer.addSublayer(topBorder)
         
+        self.tableView.estimatedRowHeight = 73
+        
+        self.automaticallyAdjustsScrollViewInsets = false;
+        
+        let nib = UINib(nibName: String(EPlusPlanTableViewCell.self), bundle: nil)
+        self.tableView.registerNib(nib, forCellReuseIdentifier: String(EPlusPlanTableViewCell.self))
+    }
+    
+    func setupTableViewHeaderFooter() {
         let footerView = NSBundle.mainBundle().loadNibNamed(String(EPlusTableViewFooterView.self), owner: nil, options: nil).first
         if let footerView = footerView as? EPlusTableViewFooterView {
             footerView.delegate = self
@@ -35,38 +50,8 @@ class EPlusAmbulanceController: UIViewController {
         if let headerView = headerView as? UIView {
             self.tableView.tableHeaderView = headerView
         }
-        
-        
-        self.tableView.estimatedRowHeight = 73
-        
-        self.automaticallyAdjustsScrollViewInsets = false;
-        
-        let nib = UINib(nibName: String(EPlusPlanTableViewCell.self), bundle: nil)
-        self.tableView.registerNib(nib, forCellReuseIdentifier: String(EPlusPlanTableViewCell.self))
     }
     
-//    override func viewDidLayoutSubviews() {
-//        super.viewDidLayoutSubviews()
-//        
-//        let headerView = self.tableView.tableHeaderView
-//        if let headerView = headerView {
-//            var frame = headerView.frame
-//            frame.size.height = 65
-//            headerView.frame = frame
-//            self.tableView.tableHeaderView = headerView
-//        }
-//
-//        let footerView = self.tableView.tableFooterView
-//        if let footerView = footerView {
-//            var frame = footerView.frame
-//            frame.size.height = 90
-//            frame.origin.y = self.tableView.frame.size.height - frame.size.height
-//            footerView.frame = frame
-//            self.tableView.tableHeaderView = footerView
-//        }
-//        
-//    }
-////    
     @IBAction func callAnAmbulance(sender: AnyObject) {
 
     }
