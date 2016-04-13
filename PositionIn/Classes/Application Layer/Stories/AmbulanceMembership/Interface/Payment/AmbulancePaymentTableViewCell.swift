@@ -7,18 +7,35 @@
 //
 
 import UIKit
+import XLForm
 
-class AmbulancePaymentTableViewCell: UITableViewCell {
+let XLFormRowDescriptorTypeAmbulancePayment = "XLFormRowDescriptorTypeAmbulancePayment"
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+class AmbulancePaymentTableViewCell: XLFormBaseCell {
+    
+    var totalString: String? {
+        didSet{
+            self.totalLabel.text = totalString
+        }
     }
     
+    var planString: String? {
+        didSet{
+            self.planName.text = planString
+        }
+    }
+    
+    var planImage: UIImage? {
+        didSet{
+            self.planImageView.image = planImage
+        }
+    }
+    
+    override static func formDescriptorCellHeightForRowDescriptor(rowDescriptor: XLFormRowDescriptor!) -> CGFloat {
+        return 122
+    }
+    
+    @IBOutlet private weak var totalLabel: UILabel!
+    @IBOutlet private weak var planName: UILabel!
+    @IBOutlet private weak var planImageView: UIImageView!
 }

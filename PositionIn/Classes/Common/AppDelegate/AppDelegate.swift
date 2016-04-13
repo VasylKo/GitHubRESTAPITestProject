@@ -121,6 +121,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         XLFormViewController.cellClassesForRowDescriptorTypes()[XLFormRowDescriptorTypeDonationPaymentAmountCell] =
         "DonationPaymentAmountCell"
         
+        XLFormViewController.cellClassesForRowDescriptorTypes()[XLFormRowDescriptorTypeAmbulancePayment] =
+        "AmbulancePaymentTableViewCell"
+        
         BTAppSwitch.setReturnURLScheme("\(NSBundle.mainBundle().bundleIdentifier!).payments")
 
         let settings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound],
