@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="EPlusTableViewFooterView" customModule="PositionIn" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="90"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6a1-6z-Zeb">
+                    <rect key="frame" x="20" y="8" width="560" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="jaq-H6-KRf"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                    <state key="normal" title="Already a Member?">
+                        <color key="titleColor" red="0.82352941176470584" green="0.23921568627450979" blue="0.27450980392156865" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="alreadyMemberButtonTouched:" destination="iN0-l3-epB" eventType="touchUpInside" id="zjP-Mp-EhW"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="0.95294117647058818" green="0.95294117647058818" blue="0.95294117647058818" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="6a1-6z-Zeb" secondAttribute="trailing" constant="20" id="0qD-Ph-RGQ"/>
+                <constraint firstItem="6a1-6z-Zeb" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="Ryy-VF-bvQ"/>
+                <constraint firstItem="6a1-6z-Zeb" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="YvP-LF-Zme"/>
+                <constraint firstAttribute="bottom" secondItem="6a1-6z-Zeb" secondAttribute="bottom" constant="32" id="Ztx-X5-XgH"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+        </view>
+    </objects>
+</document>
