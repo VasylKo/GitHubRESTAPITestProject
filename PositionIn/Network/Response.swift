@@ -56,6 +56,12 @@ struct CollectionResponse<C: CRUDObject>: Mappable {
     private(set) var items: [C]!
     private(set) var total: Int!
     
+    // FIXME: Ambulance Hot fix - need to remove
+    init(items: [C], total: Int!) {
+        self.items = items
+        self.total = total
+    }
+    
     init?(_ map: Map) {
         mapping(map)
         switch (items, total) {
