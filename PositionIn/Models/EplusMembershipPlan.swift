@@ -1,5 +1,5 @@
 //
-//  AmbulanceMembershipPlan.swift
+//  EplusMembershipPlan.swift
 //  PositionIn
 //
 //  Created by ng on 1/28/16.
@@ -9,7 +9,7 @@
 import ObjectMapper
 import CleanroomLogger
 
-struct AmbulanceMembershipPlan: CRUDObject {
+struct EplusMembershipPlan: CRUDObject {
     
     enum PlanType : Int, CustomStringConvertible {
         case Unknown = 0, Family, Individual, Schools, Corporate, ResidentialEstates, Sacco
@@ -45,7 +45,7 @@ struct AmbulanceMembershipPlan: CRUDObject {
             return "corporate_plan_eplus_icon"
         case CRUDObjectId(PlanType.ResidentialEstates.rawValue):
             return "residential_plan_eplus_icon"
-        case CRUDObjectId(PlanType.Saccos.rawValue):
+        case CRUDObjectId(PlanType.Sacco.rawValue):
             return "saccos_plan_eplus_icon"
         default:
             return ""
