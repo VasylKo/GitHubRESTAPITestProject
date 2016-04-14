@@ -13,7 +13,7 @@ class AmbulanceConfirmPaymentViewController: XLFormViewController {
     
     private let pageView = MembershipPageView(pageCount: 3)
     let router : MembershipRouter
-    private let plan : MembershipPlan
+    private let plan : EplusMembershipPlan
     var headerView : MPesaIndicatorView!
     private var transactionId = ""
     private let card: CardItem
@@ -22,7 +22,7 @@ class AmbulanceConfirmPaymentViewController: XLFormViewController {
     
     //MARK: Initializers
     
-    init(router: MembershipRouter, plan: MembershipPlan, card: CardItem, isSuccess: Bool) {
+    init(router: MembershipRouter, plan: EplusMembershipPlan, card: CardItem, isSuccess: Bool = false) {
         self.router = router
         self.plan = plan
         self.card = card
@@ -131,7 +131,8 @@ class AmbulanceConfirmPaymentViewController: XLFormViewController {
     private func paymentDidSuccess() {
         headerView.showSuccess()
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (Int64)(3 * NSEC_PER_SEC)), dispatch_get_main_queue()) {
-            self.router.showMembershipMemberCardViewController(from: self)
+            //TODO: add route to plan card
+            //self.router.showMembershipMemberCardViewController(from: self)
         }
     }
     
@@ -141,6 +142,7 @@ class AmbulanceConfirmPaymentViewController: XLFormViewController {
         //sendPaymentEventToAnalytics(success: false)
     }
     
+    //TODO: add Analytic events
     //MARK: - Analytic
     /*
     func sendPaymentEventToAnalytics(success success: Bool) {
