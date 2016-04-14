@@ -11,6 +11,29 @@ import UIKit
 class EplusMembershipRouterImplementation: BaseRouterImplementation, EplusMembershipRouter {
     
     func showInitialViewController(from sourceViewController : UIViewController, hasActivePlan: Bool? = nil) {
+        
+        var family = EplusMembershipPlan()
+        family.objectId = CRUDObjectId(EplusMembershipPlan.PlanType.Family.rawValue)
+        family.name = "Family"
+        family.price = 6000
+        family.costDescription = "KSH 6,000 Annually"
+        family.planDescription = "This Cover provides a 24/7 Ambulance membership for a family in towns where E-plus has ambulances.\n\nMaximum number of 6 family members (principle, spouse and 4 children)"
+        var familyBenefits = [String]()
+        familyBenefits.append("Access to Medical Helpline 24/7.")
+        familyBenefits.append("Unlimited emergency ambulance services.")
+        familyBenefits.append("Treatment and stabilization on site.")
+        familyBenefits.append("Transfer to Hospital after stabilization.")
+        family.benefits = familyBenefits
+        var familyOtherBenefits = [String]()
+        familyOtherBenefits.append("No age limit.")
+        familyOtherBenefits.append("No pre existing conditions.")
+        familyOtherBenefits.append("Congenital conditions covered.")
+        familyOtherBenefits.append("Medically indicated transfers from Hospital to home.")
+        family.otherBenefits = familyOtherBenefits
+        
+        showMembershipConfirmDetailsViewController(from: sourceViewController, with: family)
+        
+        
 //        switch hasActivePlan {
 //        case .Some(let active):
 //            if (active) {
@@ -69,11 +92,6 @@ class EplusMembershipRouterImplementation: BaseRouterImplementation, EplusMember
 //        sourceViewController.navigationController?.pushViewController(plansViewController, animated: true)
     }
     
-    func dismissMembership(from sourceViewController : UIViewController) {
-//        appDelegate().sidebarViewController?.executeAction(SidebarViewController.defaultAction)
-//        sourceViewController.dismissViewControllerAnimated(true, completion: nil)
-    }
-    
     func showMPesaConfirmPaymentViewController(from sourceViewController : UIViewController, with plan : EplusMembershipPlan) {
 //        let mpesaConfirmPaymentViewController = MembershipMPesaConfirmPaymentViewController(router: self, plan: plan)
 //        sourceViewController.navigationController?.pushViewController(mpesaConfirmPaymentViewController, animated: true)
@@ -82,5 +100,14 @@ class EplusMembershipRouterImplementation: BaseRouterImplementation, EplusMember
     func showBraintreeConfirmPaymentViewController(from sourceViewController : UIViewController, with plan : EplusMembershipPlan, creditCardPaymentSuccess: Bool?) {
 //        let mpesaConfirmPaymentViewController = MembershipBraintreeConfirmPaymentViewController(router: self, plan: plan, creditCardPaymentSuccess: creditCardPaymentSuccess)
 //        sourceViewController.navigationController?.pushViewController(mpesaConfirmPaymentViewController, animated: true)
+    }
+    
+    func showCallAmbulanceViewController(from sourceViewController : UIViewController) {
+        sourceViewController.navigationController?.pushViewController(Storyboards.Onboarding.instantiateCallAmbulanceViewController(), animated: true)
+    }
+    
+    func dismissMembership(from sourceViewController : UIViewController) {
+        //        appDelegate().sidebarViewController?.executeAction(SidebarViewController.defaultAction)
+        //        sourceViewController.dismissViewControllerAnimated(true, completion: nil)
     }
 }

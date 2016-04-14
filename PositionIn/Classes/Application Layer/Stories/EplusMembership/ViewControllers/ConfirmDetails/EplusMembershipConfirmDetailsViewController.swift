@@ -55,14 +55,6 @@ class EplusMembershipConfirmDetailsViewController : XLFormViewController {
         return row
     }()
     
-    private var countyBranchRow: XLFormRowDescriptor = {
-        let row = XLFormRowDescriptor(tag: nil, rowType:XLFormRowDescriptorTypeSelectorPush, title: NSLocalizedString("County Branch of Choice"))
-        row.cellConfig.setObject(UIScheme.mainThemeColor, forKey: "textLabel.textColor")
-        row.cellConfig.setObject(UIScheme.mainThemeColor, forKey: "tintColor")
-        row.required = true
-        return row
-    }()
-    
     private var plan: EplusMembershipPlan
 
     //MARK: Initializers
@@ -159,19 +151,6 @@ class EplusMembershipConfirmDetailsViewController : XLFormViewController {
         
         emailRow.value = self.userProfile?.email
         infoSection.addFormRow(self.emailRow)
-
-        
-        var options : Array<XLFormOptionsObject> = []
-        if let countyBranches = self.countyBranches {
-            for countyBranch in countyBranches {
-                options.append(XLFormOptionsObject(value: countyBranch.objectId, displayText: countyBranch.name))
-            }
-        }
-        self.countyBranchRow.selectorOptions = options
-        if let countyBranch = self.userProfile?.countyBranch {
-            countyBranchRow.value = XLFormOptionsObject(value: countyBranch.objectId, displayText:countyBranch.name)
-        }
-        infoSection.addFormRow(self.countyBranchRow)
         
         form.addFormSection(infoSection)
         
@@ -202,14 +181,6 @@ class EplusMembershipConfirmDetailsViewController : XLFormViewController {
         }
         if let lastName = self.lastNameRow.value as? String {
             self.userProfile?.lastName = lastName
-        }
-        
-        if let countyBranch = self.countyBranchRow.value as? XLFormOptionsObject {
-            if let objectId = countyBranch.formValue() as? CRUDObjectId {
-                var countyBranch = Community()
-                countyBranch.objectId = objectId
-                self.userProfile?.countyBranch = Community(objectId: objectId)
-            }
         }
         
         if let userProfile = self.userProfile {

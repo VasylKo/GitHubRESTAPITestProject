@@ -30,5 +30,7 @@ protocol EplusMembershipRouter : BaseRouter {
     
     func showBraintreeConfirmPaymentViewController(from sourceViewController : UIViewController, with plan : EplusMembershipPlan, creditCardPaymentSuccess: Bool?)
     
+    func showCallAmbulanceViewController(from sourceViewController : UIViewController)
+    
     func dismissMembership(from sourceViewController : UIViewController)
 }
