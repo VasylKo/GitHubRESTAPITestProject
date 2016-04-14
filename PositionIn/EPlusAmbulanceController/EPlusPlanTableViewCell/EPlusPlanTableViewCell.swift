@@ -12,19 +12,25 @@ class EPlusPlanTableViewCell: UITableViewCell {
     
     var planImageViewString: String? {
         didSet {
-            self.planImageView.image = UIImage(named: planImageViewString!)
+            if let planImageViewString = planImageViewString {
+                self.planImageView.image = UIImage(named: planImageViewString)
+            }
         }
     }
     
     var infoLabelString: String? {
         didSet {
-            self.infoLabel.text = infoLabelString!
+            if let infoLabelString = infoLabelString {
+                self.infoLabel.text = infoLabelString
+            }
         }
     }
     
     var titleLabelString: String? {
         didSet {
-            self.titleLabel.text = titleLabelString!
+            if let titleLabelString = titleLabelString {
+                self.titleLabel.text = titleLabelString
+            }
         }
     }
     

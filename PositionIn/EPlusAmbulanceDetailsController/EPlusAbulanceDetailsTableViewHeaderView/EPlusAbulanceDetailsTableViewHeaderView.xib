@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="EPlusAbulanceDetailsTableViewHeaderView" customModule="PositionIn" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="170"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7wl-Tp-ON9">
+                    <rect key="frame" x="263" y="8" width="75" height="75"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="75" id="21u-4j-vb1"/>
+                        <constraint firstAttribute="height" constant="75" id="puK-N9-Ndf"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0XD-O3-3DD">
+                    <rect key="frame" x="20" y="98" width="560" height="26"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="22"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jfg-Vg-qgF">
+                    <rect key="frame" x="20" y="132" width="560" height="21"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                    <color key="textColor" red="0.82352941180000006" green="0.23921568630000001" blue="0.27450980390000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="Jfg-Vg-qgF" firstAttribute="top" secondItem="0XD-O3-3DD" secondAttribute="bottom" constant="8" id="0Pv-Ob-BSz"/>
+                <constraint firstItem="0XD-O3-3DD" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="2Tv-Ha-5sZ"/>
+                <constraint firstItem="0XD-O3-3DD" firstAttribute="top" secondItem="7wl-Tp-ON9" secondAttribute="bottom" constant="15" id="4Bc-dD-RzY"/>
+                <constraint firstItem="7wl-Tp-ON9" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="6Ol-rl-5TR"/>
+                <constraint firstItem="7wl-Tp-ON9" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="AHu-Ro-AxV"/>
+                <constraint firstAttribute="bottom" secondItem="Jfg-Vg-qgF" secondAttribute="bottom" constant="17" id="Yve-1V-Fg1"/>
+                <constraint firstAttribute="trailing" secondItem="0XD-O3-3DD" secondAttribute="trailing" constant="20" id="gf4-Al-hKD"/>
+                <constraint firstItem="Jfg-Vg-qgF" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="oGH-l9-HHi"/>
+                <constraint firstAttribute="trailing" secondItem="Jfg-Vg-qgF" secondAttribute="trailing" constant="20" id="xvI-5G-VBV"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="planImageView" destination="7wl-Tp-ON9" id="k7N-5y-5D1"/>
+                <outlet property="planNameLabel" destination="0XD-O3-3DD" id="hUu-Iz-nUc"/>
+                <outlet property="priceLabel" destination="Jfg-Vg-qgF" id="a5y-aR-Czt"/>
+            </connections>
+        </view>
+    </objects>
+</document>
