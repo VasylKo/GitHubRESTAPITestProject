@@ -80,6 +80,7 @@ final class UserProfile: CRUDObject {
     var backgroundImage: NSURL?
     var location: Location?
     var membershipDetails : MembershipDetails?
+    var eplusMembershipDetails : EplusMembershipDetails?
     var passportNumber: String?
     var postalAddress: Location?
     var profession: String?
