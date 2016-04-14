@@ -1,5 +1,5 @@
 //
-//  AmbulanceConfirmPaymentViewController.swift
+//  EplusConfirmPaymentViewController.swift
 //  PositionIn
 //
 //  Created by Vasiliy Kotsiuba on 13/04/16.
@@ -9,10 +9,10 @@
 import Foundation
 import XLForm
 
-class AmbulanceConfirmPaymentViewController: XLFormViewController {
+class EplusConfirmPaymentViewController: XLFormViewController {
     
     private let pageView = MembershipPageView(pageCount: 3)
-    let router : MembershipRouter
+    let router : EplusMembershipRouter
     private let plan : EplusMembershipPlan
     var headerView : MPesaIndicatorView!
     private var transactionId = ""
@@ -22,7 +22,7 @@ class AmbulanceConfirmPaymentViewController: XLFormViewController {
     
     //MARK: Initializers
     
-    init(router: MembershipRouter, plan: EplusMembershipPlan, card: CardItem, isSuccess: Bool = false) {
+    init(router: EplusMembershipRouter, plan: EplusMembershipPlan, card: CardItem, isSuccess: Bool = false) {
         self.router = router
         self.plan = plan
         self.card = card

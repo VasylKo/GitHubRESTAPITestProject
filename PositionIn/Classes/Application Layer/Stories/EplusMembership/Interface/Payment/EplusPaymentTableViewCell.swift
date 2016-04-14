@@ -1,5 +1,5 @@
 //
-//  AmbulancePaymentTableViewCell.swift
+//  EplusPaymentTableViewCell.swift
 //  PositionIn
 //
 //  Created by Vasiliy Kotsiuba on 13/04/16.
@@ -11,7 +11,7 @@ import XLForm
 
 let XLFormRowDescriptorTypeAmbulancePayment = "XLFormRowDescriptorTypeAmbulancePayment"
 
-class AmbulancePaymentTableViewCell: XLFormBaseCell {
+class EplusPaymentTableViewCell: XLFormBaseCell {
     
     var totalString: String? {
         didSet{

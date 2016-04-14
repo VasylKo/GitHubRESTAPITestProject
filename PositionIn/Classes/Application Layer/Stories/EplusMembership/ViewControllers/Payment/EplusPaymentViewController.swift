@@ -1,5 +1,5 @@
 //
-//  AmbulancePaymentViewController.swift
+//  EplusPaymentViewController.swift
 //  PositionIn
 //
 //  Created by Vasiliy Kotsiuba on 13/04/16.
@@ -10,10 +10,10 @@ import UIKit
 import XLForm
 import Box
 
-class AmbulancePaymentViewController: XLFormViewController, PaymentReponseDelegate {
+class EplusPaymentViewController: XLFormViewController, PaymentReponseDelegate {
     
     private let pageView = MembershipPageView(pageCount: 3)
-    private let router : MembershipRouter
+    private let router : EplusMembershipRouter
     private let plan : EplusMembershipPlan
     private weak var confirmRowDescriptor: XLFormRowDescriptor?
     
@@ -26,7 +26,7 @@ class AmbulancePaymentViewController: XLFormViewController, PaymentReponseDelega
     
     //MARK: Initializers
     
-    init(router: MembershipRouter, plan: EplusMembershipPlan) {
+    init(router: EplusMembershipRouter, plan: EplusMembershipPlan) {
         self.router = router
         self.plan = plan
         super.init(nibName: nil, bundle: nil)
@@ -176,7 +176,7 @@ class AmbulancePaymentViewController: XLFormViewController, PaymentReponseDelega
         case .MPesa:
             //TODO: add route to confirm payment controller
             //router.showMPesaConfirmPaymentViewController(from: self, with: self.plan)
-            navigationController?.pushViewController(AmbulanceConfirmPaymentViewController(router: nil, plan: self.plan, card: card), animated: true)
+            navigationController?.pushViewController(EplusConfirmPaymentViewController(router: router, plan: self.plan, card: card), animated: true)
             
         case .CreditDebitCard:
             let paymentController: BraintreePaymentViewController = BraintreePaymentViewController()
@@ -203,7 +203,7 @@ class AmbulancePaymentViewController: XLFormViewController, PaymentReponseDelega
         //self.router.showBraintreeConfirmPaymentViewController(from: self, with: self.plan, creditCardPaymentSuccess: hidden)
         
         guard let card = selectPaymentRowValue() else { return }
-        navigationController?.pushViewController(AmbulanceConfirmPaymentViewController(router: nil, plan: self.plan, card: card, isSuccess: isSuccess), animated: true)
+        navigationController?.pushViewController(EplusConfirmPaymentViewController(router: router, plan: self.plan, card: card, isSuccess: isSuccess), animated: true)
     }
     
     func paymentReponse(success: Bool, err: String?) {

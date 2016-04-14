@@ -60,6 +60,10 @@
 		18CCFB011C8D8AEB00603C7F /* MembershipMemberDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18CCFB001C8D8AEB00603C7F /* MembershipMemberDetailsViewController.xib */; };
 		18CCFB041C8D8B1900603C7F /* MembershipBraintreeConfirmPaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CCFB031C8D8B1900603C7F /* MembershipBraintreeConfirmPaymentViewController.swift */; };
 		18F3313F1C8871870010321B /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F3313D1C8871870010321B /* Order.swift */; };
+		18F7C6271CBFB76200B68BB6 /* EplusConfirmPaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F7C6241CBFB76200B68BB6 /* EplusConfirmPaymentViewController.swift */; };
+		18F7C6281CBFB76200B68BB6 /* EplusPaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F7C6261CBFB76200B68BB6 /* EplusPaymentViewController.swift */; };
+		18F7C62D1CBFB76900B68BB6 /* EplusPaymentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F7C62B1CBFB76900B68BB6 /* EplusPaymentTableViewCell.swift */; };
+		18F7C62E1CBFB76900B68BB6 /* EplusPaymentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18F7C62C1CBFB76900B68BB6 /* EplusPaymentTableViewCell.xib */; };
 		1A56454F1ADF6D1BF3022FB3 /* BraintreePaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A564EEB40AD56FD2C113F2A /* BraintreePaymentViewController.swift */; };
 		1A5647F5D0FCC84FA5BF21FF /* MpesaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A56419027EC5956741AF471 /* MpesaViewController.swift */; };
 		1A564902D955532DE5B29A65 /* ErrorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A56438E04F9AD6CBDA75AC9 /* ErrorCell.swift */; };
@@ -631,6 +635,10 @@
 		18CCFB001C8D8AEB00603C7F /* MembershipMemberDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MembershipMemberDetailsViewController.xib; sourceTree = "<group>"; };
 		18CCFB031C8D8B1900603C7F /* MembershipBraintreeConfirmPaymentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MembershipBraintreeConfirmPaymentViewController.swift; sourceTree = "<group>"; };
 		18F3313D1C8871870010321B /* Order.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
+		18F7C6241CBFB76200B68BB6 /* EplusConfirmPaymentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EplusConfirmPaymentViewController.swift; sourceTree = "<group>"; };
+		18F7C6261CBFB76200B68BB6 /* EplusPaymentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EplusPaymentViewController.swift; sourceTree = "<group>"; };
+		18F7C62B1CBFB76900B68BB6 /* EplusPaymentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EplusPaymentTableViewCell.swift; sourceTree = "<group>"; };
+		18F7C62C1CBFB76900B68BB6 /* EplusPaymentTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EplusPaymentTableViewCell.xib; sourceTree = "<group>"; };
 		1A5640E770D4CB872B2E4605 /* PaymentReponseDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentReponseDelegate.swift; sourceTree = "<group>"; };
 		1A56419027EC5956741AF471 /* MpesaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MpesaViewController.swift; sourceTree = "<group>"; };
 		1A56438E04F9AD6CBDA75AC9 /* ErrorCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorCell.swift; sourceTree = "<group>"; };
@@ -1386,6 +1394,7 @@
 		181314E41CBFA3B4004373F2 /* EplusMembership */ = {
 			isa = PBXGroup;
 			children = (
+				18F7C6291CBFB76900B68BB6 /* Interface */,
 				181314E51CBFA3B4004373F2 /* Router */,
 				181314E81CBFA3B4004373F2 /* ViewControllers */,
 			);
@@ -1404,6 +1413,8 @@
 		181314E81CBFA3B4004373F2 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				18F7C6231CBFB76200B68BB6 /* ConfirmPayment */,
+				18F7C6251CBFB76200B68BB6 /* Payment */,
 				181314E91CBFA3B4004373F2 /* ConfirmDetails */,
 			);
 			path = ViewControllers;
@@ -1448,6 +1459,39 @@
 				18CCFB031C8D8B1900603C7F /* MembershipBraintreeConfirmPaymentViewController.swift */,
 			);
 			path = BraintreeConfirmPayment;
+			sourceTree = "<group>";
+		};
+		18F7C6231CBFB76200B68BB6 /* ConfirmPayment */ = {
+			isa = PBXGroup;
+			children = (
+				18F7C6241CBFB76200B68BB6 /* EplusConfirmPaymentViewController.swift */,
+			);
+			path = ConfirmPayment;
+			sourceTree = "<group>";
+		};
+		18F7C6251CBFB76200B68BB6 /* Payment */ = {
+			isa = PBXGroup;
+			children = (
+				18F7C6261CBFB76200B68BB6 /* EplusPaymentViewController.swift */,
+			);
+			path = Payment;
+			sourceTree = "<group>";
+		};
+		18F7C6291CBFB76900B68BB6 /* Interface */ = {
+			isa = PBXGroup;
+			children = (
+				18F7C62A1CBFB76900B68BB6 /* Payment */,
+			);
+			path = Interface;
+			sourceTree = "<group>";
+		};
+		18F7C62A1CBFB76900B68BB6 /* Payment */ = {
+			isa = PBXGroup;
+			children = (
+				18F7C62B1CBFB76900B68BB6 /* EplusPaymentTableViewCell.swift */,
+				18F7C62C1CBFB76900B68BB6 /* EplusPaymentTableViewCell.xib */,
+			);
+			path = Payment;
 			sourceTree = "<group>";
 		};
 		1A564C3EC8DDC78E3A580F36 /* Mpesa */ = {
@@ -1544,57 +1588,6 @@
 				541820FD1CB7B295001A780A /* MPesaBongaPinCell.xib */,
 			);
 			path = MPesaBongaPinCell;
-			sourceTree = "<group>";
-		};
-		541BA1C61CBEAD99007D9AB0 /* ConfirmPayment */ = {
-			isa = PBXGroup;
-			children = (
-				541BA1C71CBEADAE007D9AB0 /* AmbulanceConfirmPaymentViewController.swift */,
-			);
-			path = ConfirmPayment;
-			sourceTree = "<group>";
-		};
-		54A2064E1CBE566E0080B596 /* AmbulanceMembership */ = {
-			isa = PBXGroup;
-			children = (
-				54A2064F1CBE566E0080B596 /* Interface */,
-				54A206511CBE566E0080B596 /* ViewControllers */,
-			);
-			path = AmbulanceMembership;
-			sourceTree = "<group>";
-		};
-		54A2064F1CBE566E0080B596 /* Interface */ = {
-			isa = PBXGroup;
-			children = (
-				54A206501CBE566E0080B596 /* Payment */,
-			);
-			path = Interface;
-			sourceTree = "<group>";
-		};
-		54A206501CBE566E0080B596 /* Payment */ = {
-			isa = PBXGroup;
-			children = (
-				541BA1BC1CBE75CF007D9AB0 /* AmbulancePaymentTableViewCell.swift */,
-				541BA1BD1CBE75CF007D9AB0 /* AmbulancePaymentTableViewCell.xib */,
-			);
-			path = Payment;
-			sourceTree = "<group>";
-		};
-		54A206511CBE566E0080B596 /* ViewControllers */ = {
-			isa = PBXGroup;
-			children = (
-				541BA1C61CBEAD99007D9AB0 /* ConfirmPayment */,
-				54A206521CBE566E0080B596 /* Payment */,
-			);
-			path = ViewControllers;
-			sourceTree = "<group>";
-		};
-		54A206521CBE566E0080B596 /* Payment */ = {
-			isa = PBXGroup;
-			children = (
-				54A206531CBE5C5E0080B596 /* AmbulancePaymentViewController.swift */,
-			);
-			path = Payment;
 			sourceTree = "<group>";
 		};
 		54A31F931CBBF1C200A833C9 /* DonationPaymentAmountCell */ = {
@@ -4118,6 +4111,7 @@
 				D1F1FF261C22F384006D2E75 /* PositionIn.VolunteerDetailsViewController.xib in Resources */,
 				CD0FCC2F1C69ECD800AFD36C /* TotalCell.xib in Resources */,
 				CD9CA0FB1C7F5397007B26AA /* MoreInformationCell.xib in Resources */,
+				18F7C62E1CBFB76900B68BB6 /* EplusPaymentTableViewCell.xib in Resources */,
 				CDEDD96C1C45033C00396594 /* PostToContainerViewController.xib in Resources */,
 				D13039FC1C721960004B673F /* PositionIn.AttendEventCell.xib in Resources */,
 				CD21EA551C68E89B00E50909 /* MPesaIndicatorView.xib in Resources */,
@@ -4404,7 +4398,9 @@
 				D1C475EA1C106DB70096D383 /* DonateNotificationViewController.swift in Sources */,
 				D12EDEC71BFF4F0D00FB6245 /* PhoneVerificationViewController.swift in Sources */,
 				D19A19FF1C69F8890099038F /* MPesaPaymentCompleteViewController.swift in Sources */,
+				18F7C62D1CBFB76900B68BB6 /* EplusPaymentTableViewCell.swift in Sources */,
 				D1DA1EBF1C5909D7009F5AFA /* MembershipPlanDetailsViewController.swift in Sources */,
+				18F7C6281CBFB76200B68BB6 /* EplusPaymentViewController.swift in Sources */,
 				CD21EA381C63A78800E50909 /* MembershipMemberProfileViewController.swift in Sources */,
 				E66478921C918CC400BA5EFB /* SystemNotification.swift in Sources */,
 				18CCFAFB1C8D8AAB00603C7F /* MembershipMemberDetailsViewController.swift in Sources */,
@@ -4526,6 +4522,7 @@
 				D15F47491C0B77D7009ED3FD /* AmbulanceBaseController.swift in Sources */,
 				E6F7A47D1BA356130069152A /* LocationCell.swift in Sources */,
 				CD21C8D31C7600B0009261C7 /* BarButtonItemContainerViewController.swift in Sources */,
+				18F7C6271CBFB76200B68BB6 /* EplusConfirmPaymentViewController.swift in Sources */,
 				184236C01CA5B59700C53D08 /* NewRelicController.swift in Sources */,
 				D15F47471C0AFDAF009ED3FD /* CallAmbulanceViewController.swift in Sources */,
 				E68B52011B873545006B980C /* FeedTableViewCellModel.swift in Sources */,

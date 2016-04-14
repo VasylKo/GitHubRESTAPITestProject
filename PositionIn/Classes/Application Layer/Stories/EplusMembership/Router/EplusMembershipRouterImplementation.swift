@@ -78,8 +78,8 @@ class EplusMembershipRouterImplementation: BaseRouterImplementation, EplusMember
     }
     
     func showPaymentViewController(from sourceViewController : UIViewController, with plan : EplusMembershipPlan) {
-//        sourceViewController.navigationController?.pushViewController(MembershipPaymentViewController(router: self, plan: plan),
-//            animated: true)
+        let paymentController = EplusPaymentViewController(router: self, plan: plan)
+        sourceViewController.navigationController?.pushViewController(paymentController, animated: true)
     }
     
     func showMemberDetailsViewController(from sourceViewController : UIViewController) {
