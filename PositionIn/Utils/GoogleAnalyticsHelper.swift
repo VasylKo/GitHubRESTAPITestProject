@@ -40,6 +40,9 @@ struct AnalyticsLabels {
     static let membershipMemberDetails = NSLocalizedString("MembershipMemberDetails")
     static let membershipCard = NSLocalizedString("MembershipCard")
     
+    //E-plus ambulance
+    static let ambulancePayment = NSLocalizedString("AmbulancePayment")
+    
     static let emergencyAlerts = NSLocalizedString("EmergencyAlerts")
     static let emergencyAlertDetails = NSLocalizedString("EmergencyAlertDetails")
     static let emergencyAlertDonate = NSLocalizedString("EmergencyAlertDonate")
