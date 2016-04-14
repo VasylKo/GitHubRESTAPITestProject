@@ -24,13 +24,23 @@
                         <action selector="alreadyMemberButtonTouched:" destination="iN0-l3-epB" eventType="touchUpInside" id="zjP-Mp-EhW"/>
                     </connections>
                 </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uqC-XS-7ZP">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="1"/>
+                    <color key="backgroundColor" red="0.9137254901960784" green="0.9137254901960784" blue="0.9137254901960784" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="WK0-yx-4aq"/>
+                    </constraints>
+                </view>
             </subviews>
-            <color key="backgroundColor" red="0.95294117647058818" green="0.95294117647058818" blue="0.95294117647058818" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" red="0.96470588235294119" green="0.96470588235294119" blue="0.96470588235294119" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="6a1-6z-Zeb" secondAttribute="trailing" constant="20" id="0qD-Ph-RGQ"/>
+                <constraint firstItem="uqC-XS-7ZP" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="O4H-CQ-bpP"/>
                 <constraint firstItem="6a1-6z-Zeb" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="Ryy-VF-bvQ"/>
+                <constraint firstItem="uqC-XS-7ZP" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="VSo-Bd-j0f"/>
                 <constraint firstItem="6a1-6z-Zeb" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="YvP-LF-Zme"/>
                 <constraint firstAttribute="bottom" secondItem="6a1-6z-Zeb" secondAttribute="bottom" constant="32" id="Ztx-X5-XgH"/>
+                <constraint firstAttribute="trailing" secondItem="uqC-XS-7ZP" secondAttribute="trailing" id="pIT-XO-w8f"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
         </view>

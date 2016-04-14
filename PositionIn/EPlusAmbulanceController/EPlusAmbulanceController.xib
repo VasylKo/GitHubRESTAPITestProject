@@ -8,7 +8,9 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EPlusAmbulanceController" customModule="PositionIn" customModuleProvider="target">
             <connections>
                 <outlet property="buttonContainerView" destination="sZQ-rc-pRv" id="Nyb-yU-7qT"/>
+                <outlet property="callAmbulanceButton" destination="lWR-8b-mXO" id="aMr-JZ-0yB"/>
                 <outlet property="callAnAmbulanceButton" destination="lWR-8b-mXO" id="KvW-0x-sGx"/>
+                <outlet property="spinner" destination="qK7-WZ-h2a" id="3CS-w6-eGO"/>
                 <outlet property="tableView" destination="SI8-jC-BZG" id="Rkl-3B-60v"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -18,14 +20,13 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sZQ-rc-pRv">
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sZQ-rc-pRv">
                     <rect key="frame" x="0.0" y="524" width="600" height="76"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lWR-8b-mXO">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lWR-8b-mXO">
                             <rect key="frame" x="15" y="16" width="570" height="44"/>
                             <color key="backgroundColor" red="0.85490196078431369" green="0.22352941176470587" blue="0.23921568627450979" alpha="1" colorSpace="calibratedRGB"/>
-                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
-                            <state key="normal" title="Call an Ambulance">
+                            <state key="normal" title="Call an Ambulance" image="ambulance_icon">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <userDefinedRuntimeAttributes>
@@ -45,7 +46,7 @@
                         <constraint firstItem="lWR-8b-mXO" firstAttribute="top" secondItem="sZQ-rc-pRv" secondAttribute="top" constant="16" id="foJ-t5-J1F"/>
                     </constraints>
                 </view>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="SI8-jC-BZG">
+                <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="SI8-jC-BZG">
                     <rect key="frame" x="0.0" y="0.0" width="600" height="516"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <connections>
@@ -53,11 +54,17 @@
                         <outlet property="delegate" destination="-1" id="E67-F3-5oa"/>
                     </connections>
                 </tableView>
+                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="qK7-WZ-h2a">
+                    <rect key="frame" x="282" y="281" width="37" height="37"/>
+                    <color key="color" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                </activityIndicatorView>
             </subviews>
             <color key="backgroundColor" red="0.96470588235294119" green="0.96470588235294119" blue="0.96470588235294119" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="SI8-jC-BZG" secondAttribute="trailing" id="8DZ-kc-kz2"/>
+                <constraint firstItem="qK7-WZ-h2a" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Bee-aj-87n"/>
                 <constraint firstAttribute="bottom" secondItem="sZQ-rc-pRv" secondAttribute="bottom" id="CKs-kM-eqD"/>
+                <constraint firstItem="qK7-WZ-h2a" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="Pmr-Xz-v8y"/>
                 <constraint firstItem="SI8-jC-BZG" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="SmC-Te-z90"/>
                 <constraint firstItem="SI8-jC-BZG" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="XT6-3N-i26"/>
                 <constraint firstAttribute="trailing" secondItem="sZQ-rc-pRv" secondAttribute="trailing" id="bR6-t4-p62"/>
@@ -66,4 +73,7 @@
             </constraints>
         </view>
     </objects>
+    <resources>
+        <image name="ambulance_icon" width="36" height="36"/>
+    </resources>
 </document>

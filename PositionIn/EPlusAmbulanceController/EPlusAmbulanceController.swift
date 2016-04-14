@@ -19,10 +19,25 @@ class EPlusAmbulanceController: UIViewController {
     override func viewDidAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.setupTableViewHeaderFooter()
+        self.loadData()
+    }
+    
+    func loadData() {
+        spinner.startAnimating()
+        self.tableView.hidden = true
+        self.buttonContainerView.hidden = true
+        api().getAmbulanceMemberships().onSuccess(callback: { [weak self] (response : CollectionResponse<EplusMembershipPlan>) in
+            self?.plans = response.items
+            self?.tableView.reloadData()
+            self?.spinner.stopAnimating()
+            self?.tableView.hidden = false
+            self?.buttonContainerView.hidden = false
+            }).onFailure(callback: {[weak self] _ in
+                self?.spinner.stopAnimating()
+            })
     }
     
     func setupUI() {
-        
         self.title = "E-Plus"
         
         let topBorder: CALayer = CALayer()
@@ -37,6 +52,9 @@ class EPlusAmbulanceController: UIViewController {
         
         let nib = UINib(nibName: String(EPlusPlanTableViewCell.self), bundle: nil)
         self.tableView.registerNib(nib, forCellReuseIdentifier: String(EPlusPlanTableViewCell.self))
+        
+        callAmbulanceButton.imageEdgeInsets = UIEdgeInsetsMake(0, -20, 0, 0)
+        
     }
     
     func setupTableViewHeaderFooter() {
@@ -56,9 +74,12 @@ class EPlusAmbulanceController: UIViewController {
 
     }
     
+    @IBOutlet weak var spinner: UIActivityIndicatorView!
+    @IBOutlet weak var callAmbulanceButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var buttonContainerView: UIView!
     @IBOutlet weak var callAnAmbulanceButton: UIButton!
+    private var plans: [EplusMembershipPlan] = []
 }
 
 extension EPlusAmbulanceController: EPlusTableViewFooterViewDelegate {
@@ -104,15 +125,20 @@ extension EPlusAmbulanceController: UITableViewDelegate {
 extension EPlusAmbulanceController: UITableViewDataSource {
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //WARNING: hardcode
-        return 6
+        return plans.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(String(EPlusPlanTableViewCell.self),
             forIndexPath: indexPath) as! EPlusPlanTableViewCell
+        let plan = self.plans[indexPath.row]
+        cell.planImageViewString = plan.membershipImageName
+        cell.titleLabelString = plan.name
+        cell.infoLabelString = plan.costDescription
         cell.accessoryType = .DisclosureIndicator
         cell.separatorInset = UIEdgeInsetsZero
+        cell.layoutMargins = UIEdgeInsetsZero
+        cell.preservesSuperviewLayoutMargins = false
         return cell
     }
 }

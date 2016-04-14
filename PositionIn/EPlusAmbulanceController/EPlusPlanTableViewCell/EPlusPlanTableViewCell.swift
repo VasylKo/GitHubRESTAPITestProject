@@ -10,8 +10,26 @@ import UIKit
 
 class EPlusPlanTableViewCell: UITableViewCell {
     
-    @IBOutlet weak var planImageView: UIImageView!
-    @IBOutlet weak var infoLabel: UILabel!
-    @IBOutlet weak var titleLabel: UILabel!
+    var planImageViewString: String? {
+        didSet {
+            self.planImageView.image = UIImage(named: planImageViewString!)
+        }
+    }
+    
+    var infoLabelString: String? {
+        didSet {
+            self.infoLabel.text = infoLabelString!
+        }
+    }
+    
+    var titleLabelString: String? {
+        didSet {
+            self.titleLabel.text = titleLabelString!
+        }
+    }
+    
+    @IBOutlet private weak var planImageView: UIImageView!
+    @IBOutlet private weak var infoLabel: UILabel!
+    @IBOutlet private weak var titleLabel: UILabel!
     
 }
