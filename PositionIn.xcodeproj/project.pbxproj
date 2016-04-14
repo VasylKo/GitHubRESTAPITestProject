@@ -100,7 +100,10 @@
 		50FE7D8A1BBE77BB005676E2 /* ItemsSearchResultsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FE7D881BBE77BB005676E2 /* ItemsSearchResultsController.swift */; };
 		541820FC1CB7B28D001A780A /* MPesaBongaPinCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 541820FB1CB7B28D001A780A /* MPesaBongaPinCell.swift */; };
 		541820FE1CB7B295001A780A /* MPesaBongaPinCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 541820FD1CB7B295001A780A /* MPesaBongaPinCell.xib */; };
-		541BA1BF1CBE75CF007D9AB0 /* AmbulancePaymentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 541BA1BD1CBE75CF007D9AB0 /* AmbulancePaymentTableViewCell.xib */; };
+		541BA1D71CBFDEE3007D9AB0 /* EplusMemberCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 541BA1D61CBFDEE3007D9AB0 /* EplusMemberCardViewController.swift */; };
+		541BA1D91CBFE034007D9AB0 /* EplusMemberCardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 541BA1D81CBFE034007D9AB0 /* EplusMemberCardViewController.xib */; };
+		541BA1DC1CBFE9AB007D9AB0 /* EplusMemberCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 541BA1DA1CBFE9AB007D9AB0 /* EplusMemberCardView.swift */; };
+		541BA1DD1CBFE9AB007D9AB0 /* EplusMemberCardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 541BA1DB1CBFE9AB007D9AB0 /* EplusMemberCardView.xib */; };
 		54A31F961CBBF20900A833C9 /* DonationPaymentAmountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54A31F941CBBF20900A833C9 /* DonationPaymentAmountCell.swift */; };
 		54A31F971CBBF20900A833C9 /* DonationPaymentAmountCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 54A31F951CBBF20900A833C9 /* DonationPaymentAmountCell.xib */; };
 		5DA3850FA75B150D79C68EE1 /* Pods_PositionIn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFAA26C98F322F00903B06FC /* Pods_PositionIn.framework */; };
@@ -674,7 +677,10 @@
 		50FE7D881BBE77BB005676E2 /* ItemsSearchResultsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemsSearchResultsController.swift; sourceTree = "<group>"; };
 		541820FB1CB7B28D001A780A /* MPesaBongaPinCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPesaBongaPinCell.swift; sourceTree = "<group>"; };
 		541820FD1CB7B295001A780A /* MPesaBongaPinCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MPesaBongaPinCell.xib; sourceTree = "<group>"; };
-		541BA1BD1CBE75CF007D9AB0 /* AmbulancePaymentTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AmbulancePaymentTableViewCell.xib; sourceTree = "<group>"; };
+		541BA1D61CBFDEE3007D9AB0 /* EplusMemberCardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EplusMemberCardViewController.swift; sourceTree = "<group>"; };
+		541BA1D81CBFE034007D9AB0 /* EplusMemberCardViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EplusMemberCardViewController.xib; sourceTree = "<group>"; };
+		541BA1DA1CBFE9AB007D9AB0 /* EplusMemberCardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EplusMemberCardView.swift; sourceTree = "<group>"; };
+		541BA1DB1CBFE9AB007D9AB0 /* EplusMemberCardView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EplusMemberCardView.xib; sourceTree = "<group>"; };
 		54A31F941CBBF20900A833C9 /* DonationPaymentAmountCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DonationPaymentAmountCell.swift; sourceTree = "<group>"; };
 		54A31F951CBBF20900A833C9 /* DonationPaymentAmountCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DonationPaymentAmountCell.xib; sourceTree = "<group>"; };
 		56DAF56D2A99203B14E2570B /* Pods-PositionIn.stagingrelease.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PositionIn.stagingrelease.xcconfig"; path = "Pods/Target Support Files/Pods-PositionIn/Pods-PositionIn.stagingrelease.xcconfig"; sourceTree = "<group>"; };
@@ -1407,6 +1413,7 @@
 		181314E81CBFA3B4004373F2 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				541BA1D51CBFDED0007D9AB0 /* EplusMemberCard */,
 				18F7C6231CBFB76200B68BB6 /* ConfirmPayment */,
 				18F7C6251CBFB76200B68BB6 /* Payment */,
 				181314E91CBFA3B4004373F2 /* ConfirmDetails */,
@@ -1474,6 +1481,7 @@
 		18F7C6291CBFB76900B68BB6 /* Interface */ = {
 			isa = PBXGroup;
 			children = (
+				541BA1CB1CBFC1F5007D9AB0 /* EplusMemberCard */,
 				18F7C62A1CBFB76900B68BB6 /* Payment */,
 			);
 			path = Interface;
@@ -1582,6 +1590,32 @@
 				541820FD1CB7B295001A780A /* MPesaBongaPinCell.xib */,
 			);
 			path = MPesaBongaPinCell;
+			sourceTree = "<group>";
+		};
+		541BA1CB1CBFC1F5007D9AB0 /* EplusMemberCard */ = {
+			isa = PBXGroup;
+			children = (
+				541BA1CC1CBFC1F5007D9AB0 /* EplusMemberCardView */,
+				541BA1D81CBFE034007D9AB0 /* EplusMemberCardViewController.xib */,
+			);
+			path = EplusMemberCard;
+			sourceTree = "<group>";
+		};
+		541BA1CC1CBFC1F5007D9AB0 /* EplusMemberCardView */ = {
+			isa = PBXGroup;
+			children = (
+				541BA1DA1CBFE9AB007D9AB0 /* EplusMemberCardView.swift */,
+				541BA1DB1CBFE9AB007D9AB0 /* EplusMemberCardView.xib */,
+			);
+			path = EplusMemberCardView;
+			sourceTree = "<group>";
+		};
+		541BA1D51CBFDED0007D9AB0 /* EplusMemberCard */ = {
+			isa = PBXGroup;
+			children = (
+				541BA1D61CBFDEE3007D9AB0 /* EplusMemberCardViewController.swift */,
+			);
+			path = EplusMemberCard;
 			sourceTree = "<group>";
 		};
 		54A31F931CBBF1C200A833C9 /* DonationPaymentAmountCell */ = {
@@ -4089,7 +4123,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				CD795BE11C57B4EE00C1C298 /* Snapfile in Resources */,
-				541BA1BF1CBE75CF007D9AB0 /* AmbulancePaymentTableViewCell.xib in Resources */,
 				CD795BDF1C57B4EE00C1C298 /* Fastfile in Resources */,
 				CD8ED0DE1C60BE7000576DBF /* MembershipCardView.xib in Resources */,
 				18CCFB011C8D8AEB00603C7F /* MembershipMemberDetailsViewController.xib in Resources */,
@@ -4103,6 +4136,7 @@
 				E6BEF1E71B9C83F200511B46 /* PositionIn.CommunityHeaderCell.xib in Resources */,
 				D1F86CF11BFCAA96006E0C49 /* Onboarding.storyboard in Resources */,
 				D1F1FF261C22F384006D2E75 /* PositionIn.VolunteerDetailsViewController.xib in Resources */,
+				541BA1D91CBFE034007D9AB0 /* EplusMemberCardViewController.xib in Resources */,
 				CD0FCC2F1C69ECD800AFD36C /* TotalCell.xib in Resources */,
 				CD9CA0FB1C7F5397007B26AA /* MoreInformationCell.xib in Resources */,
 				18F7C62E1CBFB76900B68BB6 /* EplusPaymentTableViewCell.xib in Resources */,
@@ -4199,6 +4233,7 @@
 				D1FD85391C1EE8BB00C2E87B /* PositionIn.TrainingDetailsViewController.xib in Resources */,
 				E661159B1B73A0CB003DB5B3 /* PositionIn.BrowseListViewController.xib in Resources */,
 				CD795BE01C57B4EE00C1C298 /* redcross.erb in Resources */,
+				541BA1DD1CBFE9AB007D9AB0 /* EplusMemberCardView.xib in Resources */,
 				CDE1B9201C5F9E6A00F76F32 /* MembershipMemberProfileView.xib in Resources */,
 				E6F7A47F1BA356130069152A /* PositionIn.LocationCell.xib in Resources */,
 			);
@@ -4507,6 +4542,7 @@
 				D1F1FF2E1C24265B006D2E75 /* GiveBloodDetailsViewController.swift in Sources */,
 				D12EB2961C96E83600718E57 /* NewsItemTitleCell.swift in Sources */,
 				E60F91331BE2CA2F005F416A /* BadgeView.m in Sources */,
+				541BA1D71CBFDEE3007D9AB0 /* EplusMemberCardViewController.swift in Sources */,
 				E63201761B98D2DA0066C62E /* Shop.swift in Sources */,
 				E6BEF1EE1B9C9D6400511B46 /* CommunityFeedViewController.swift in Sources */,
 				240A9B9E1B9CCDB4007C77E3 /* CommunityStatsCell.swift in Sources */,
@@ -4593,6 +4629,7 @@
 				D18EA2C81C031C9800A886A5 /* OnboardingNavigationController.swift in Sources */,
 				50FE7D891BBE77BB005676E2 /* ItemsSearchResultDataSource.swift in Sources */,
 				CDB5B5CC1C5B9C2400413715 /* MembershipPlanTableViewCell.swift in Sources */,
+				541BA1DC1CBFE9AB007D9AB0 /* EplusMemberCardView.swift in Sources */,
 				D1379E941C2C21F80041AA4E /* NewsCardCell.swift in Sources */,
 				E604B16E1BF96F14004DA20B /* ChatHistory.swift in Sources */,
 				D100DF0B1BF4AA0300C81054 /* GoogleAnalyticsHelper.swift in Sources */,
