@@ -100,10 +100,7 @@
 		50FE7D8A1BBE77BB005676E2 /* ItemsSearchResultsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FE7D881BBE77BB005676E2 /* ItemsSearchResultsController.swift */; };
 		541820FC1CB7B28D001A780A /* MPesaBongaPinCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 541820FB1CB7B28D001A780A /* MPesaBongaPinCell.swift */; };
 		541820FE1CB7B295001A780A /* MPesaBongaPinCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 541820FD1CB7B295001A780A /* MPesaBongaPinCell.xib */; };
-		541BA1BE1CBE75CF007D9AB0 /* AmbulancePaymentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 541BA1BC1CBE75CF007D9AB0 /* AmbulancePaymentTableViewCell.swift */; };
 		541BA1BF1CBE75CF007D9AB0 /* AmbulancePaymentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 541BA1BD1CBE75CF007D9AB0 /* AmbulancePaymentTableViewCell.xib */; };
-		541BA1C81CBEADAE007D9AB0 /* AmbulanceConfirmPaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 541BA1C71CBEADAE007D9AB0 /* AmbulanceConfirmPaymentViewController.swift */; };
-		54A206541CBE5C5E0080B596 /* AmbulancePaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54A206531CBE5C5E0080B596 /* AmbulancePaymentViewController.swift */; };
 		54A31F961CBBF20900A833C9 /* DonationPaymentAmountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54A31F941CBBF20900A833C9 /* DonationPaymentAmountCell.swift */; };
 		54A31F971CBBF20900A833C9 /* DonationPaymentAmountCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 54A31F951CBBF20900A833C9 /* DonationPaymentAmountCell.xib */; };
 		5DA3850FA75B150D79C68EE1 /* Pods_PositionIn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFAA26C98F322F00903B06FC /* Pods_PositionIn.framework */; };
@@ -677,10 +674,7 @@
 		50FE7D881BBE77BB005676E2 /* ItemsSearchResultsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemsSearchResultsController.swift; sourceTree = "<group>"; };
 		541820FB1CB7B28D001A780A /* MPesaBongaPinCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPesaBongaPinCell.swift; sourceTree = "<group>"; };
 		541820FD1CB7B295001A780A /* MPesaBongaPinCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MPesaBongaPinCell.xib; sourceTree = "<group>"; };
-		541BA1BC1CBE75CF007D9AB0 /* AmbulancePaymentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AmbulancePaymentTableViewCell.swift; sourceTree = "<group>"; };
 		541BA1BD1CBE75CF007D9AB0 /* AmbulancePaymentTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AmbulancePaymentTableViewCell.xib; sourceTree = "<group>"; };
-		541BA1C71CBEADAE007D9AB0 /* AmbulanceConfirmPaymentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AmbulanceConfirmPaymentViewController.swift; sourceTree = "<group>"; };
-		54A206531CBE5C5E0080B596 /* AmbulancePaymentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AmbulancePaymentViewController.swift; sourceTree = "<group>"; };
 		54A31F941CBBF20900A833C9 /* DonationPaymentAmountCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DonationPaymentAmountCell.swift; sourceTree = "<group>"; };
 		54A31F951CBBF20900A833C9 /* DonationPaymentAmountCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DonationPaymentAmountCell.xib; sourceTree = "<group>"; };
 		56DAF56D2A99203B14E2570B /* Pods-PositionIn.stagingrelease.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PositionIn.stagingrelease.xcconfig"; path = "Pods/Target Support Files/Pods-PositionIn/Pods-PositionIn.stagingrelease.xcconfig"; sourceTree = "<group>"; };
@@ -4453,7 +4447,6 @@
 				D18A1FDC1BEB95D9003F158D /* ChangePasswordViewController.swift in Sources */,
 				CDE1B90F1C5F678B00F76F32 /* LocalizedString.swift in Sources */,
 				E6D7F83B1BE24AE500A544F4 /* MainMenuBadgeCell.swift in Sources */,
-				541BA1C81CBEADAE007D9AB0 /* AmbulanceConfirmPaymentViewController.swift in Sources */,
 				D12EB2911C96E71200718E57 /* NewsDetailsViewController.swift in Sources */,
 				E6BEF1EA1B9C902400511B46 /* BrowseCommunityTableViewCellModel.swift in Sources */,
 				E63201741B9872C60066C62E /* EditProfileViewController.swift in Sources */,
@@ -4606,11 +4599,9 @@
 				E6D4D5B81B6FA7A7003134CB /* SearchTransition.swift in Sources */,
 				E6F3093D1BA81FAF00C9420C /* AttachedPhotosView.swift in Sources */,
 				E6BEF1DB1B9C7F9D00511B46 /* BrowseCommunityCellFactory.swift in Sources */,
-				54A206541CBE5C5E0080B596 /* AmbulancePaymentViewController.swift in Sources */,
 				CD552DD81C75DFB80012920F /* NewsTableViewCellModel.swift in Sources */,
 				E660E5301B5AC28600F52050 /* MainMenuCell.swift in Sources */,
 				E6C952391BA1DA400032254F /* ProfileFollowCell.swift in Sources */,
-				541BA1BE1CBE75CF007D9AB0 /* AmbulancePaymentTableViewCell.swift in Sources */,
 				E6C952261BA1A8230032254F /* StringValidation.swift in Sources */,
 				E6F243781B8B3CDE0033B13C /* BrowseListTableViewCell.swift in Sources */,
 				CD7C07A81CA1A7C90075BC5B /* PeopleExploreViewControler.swift in Sources */,
