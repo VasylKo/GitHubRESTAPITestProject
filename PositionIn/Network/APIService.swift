@@ -117,11 +117,21 @@ final class APIService {
         let endpoint = UserProfile.myProfileEndpoint()
         
         // FIXME: Remove this stabs when will be implemented endpoint for it
-//        return getObject(endpoint).andThen { result in
-//            result.value?.eplusMembershipDetails
-//        }
+        return getObject(endpoint).andThen { result in
+            var eplusMembershipDetails = EplusMembershipDetails()
+            
+            eplusMembershipDetails.membershipCardId = "4000 1234 5675 9010"
+            eplusMembershipDetails.membershipPlanId = CRUDObjectId(1)
+            eplusMembershipDetails.startDate = NSDate()
+            eplusMembershipDetails.endDate = NSDate()
+            eplusMembershipDetails.active = true
+            eplusMembershipDetails.status = EplusMembershipDetails.MembershipDetailsStatus.Active
+            eplusMembershipDetails.daysLeft = 100
+            
+            result.value?.eplusMembershipDetails = eplusMembershipDetails
+        }
         
-        return getObject(endpoint)
+        //return getObject(endpoint)
     }
     
     func updateMyProfile(object: UserProfile) -> Future<Void, NSError> {

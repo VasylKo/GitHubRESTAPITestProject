@@ -11,6 +11,9 @@ import ObjectMapper
 
 struct EplusMembershipDetails : Mappable {
     
+    // FIXME: Ambulance Hot fix - need to remove
+    init() {}
+    
     var membershipCardId : String?
     var membershipCardImageName : String {
         
