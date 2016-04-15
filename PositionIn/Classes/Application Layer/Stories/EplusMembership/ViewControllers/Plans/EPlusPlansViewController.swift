@@ -22,6 +22,7 @@ class EPlusPlansViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.loadData()
         self.setupUI()
         self.setupTableViewHeaderFooter()
     }
@@ -29,7 +30,6 @@ class EPlusPlansViewController: UIViewController {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         self.setupTableViewHeaderFooter()
-        self.loadData()
     }
     
     func loadData() {
@@ -89,8 +89,8 @@ class EPlusPlansViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var buttonContainerView: UIView!
     @IBOutlet weak var callAnAmbulanceButton: UIButton!
-    private var plans: [EPlusMembershipPlan] = []
     private let router : EPlusMembershipRouter
+    private var plans: [EPlusMembershipPlan] = []
 }
 
 extension EPlusPlansViewController: EPlusTableViewFooterViewDelegate {

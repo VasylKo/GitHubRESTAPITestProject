@@ -462,7 +462,7 @@ final class APIService {
         sacco.benefitGroups = saccoBenefitGroups
         items.append(sacco)
         
-        return Future(value: CollectionResponse(items:items, total: items.count), delay: 3)
+        return Future(value: CollectionResponse(items:items, total: items.count), delay: 0.5)
         
         //let endpoint = AmbulanceMembershipPlan.endpoint()
         //return getObjectsCollection(endpoint, params: nil)

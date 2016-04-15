@@ -71,7 +71,8 @@ class EPlusMembershipRouterImplementation: BaseRouterImplementation, EPlusMember
     }
 
     func showMembershipConfirmDetailsViewController(from sourceViewController : UIViewController, with plan : EPlusMembershipPlan) {
-        sourceViewController.navigationController?.pushViewController(EPlusMembershipConfirmDetailsViewController(router: self, plan: plan), animated: true)
+        sourceViewController.navigationController?.pushViewController(EPlusAmbulanceDetailsController(router: self, plan: plan),
+            animated: true)
     }
     
     func showMembershipMemberCardViewController(from sourceViewController : UIViewController) {
