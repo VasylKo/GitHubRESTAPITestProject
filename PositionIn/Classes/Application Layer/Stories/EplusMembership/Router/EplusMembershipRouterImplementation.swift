@@ -11,27 +11,28 @@ import UIKit
 class EplusMembershipRouterImplementation: BaseRouterImplementation, EplusMembershipRouter {
     
     func showInitialViewController(from sourceViewController : UIViewController, hasActivePlan: Bool? = nil) {
+        showPlansViewController(from: sourceViewController)
         
-        var family = EplusMembershipPlan()
-        family.objectId = CRUDObjectId(EplusMembershipPlan.PlanType.Family.rawValue)
-        family.name = "Family"
-        family.price = 6000
-        family.costDescription = "KSH 6,000 Annually"
-        family.planDescription = "This Cover provides a 24/7 Ambulance membership for a family in towns where E-plus has ambulances.\n\nMaximum number of 6 family members (principle, spouse and 4 children)"
-        var familyBenefits = [String]()
-        familyBenefits.append("Access to Medical Helpline 24/7.")
-        familyBenefits.append("Unlimited emergency ambulance services.")
-        familyBenefits.append("Treatment and stabilization on site.")
-        familyBenefits.append("Transfer to Hospital after stabilization.")
-        family.benefits = familyBenefits
-        var familyOtherBenefits = [String]()
-        familyOtherBenefits.append("No age limit.")
-        familyOtherBenefits.append("No pre existing conditions.")
-        familyOtherBenefits.append("Congenital conditions covered.")
-        familyOtherBenefits.append("Medically indicated transfers from Hospital to home.")
-        family.otherBenefits = familyOtherBenefits
-        
-        showMembershipConfirmDetailsViewController(from: sourceViewController, with: family)
+//        var family = EplusMembershipPlan()
+//        family.objectId = CRUDObjectId(EplusMembershipPlan.PlanType.Family.rawValue)
+//        family.name = "Family"
+//        family.price = 6000
+//        family.costDescription = "KSH 6,000 Annually"
+//        family.planDescription = "This Cover provides a 24/7 Ambulance membership for a family in towns where E-plus has ambulances.\n\nMaximum number of 6 family members (principle, spouse and 4 children)"
+//        var familyBenefits = [String]()
+//        familyBenefits.append("Access to Medical Helpline 24/7.")
+//        familyBenefits.append("Unlimited emergency ambulance services.")
+//        familyBenefits.append("Treatment and stabilization on site.")
+//        familyBenefits.append("Transfer to Hospital after stabilization.")
+//        family.benefits = familyBenefits
+//        var familyOtherBenefits = [String]()
+//        familyOtherBenefits.append("No age limit.")
+//        familyOtherBenefits.append("No pre existing conditions.")
+//        familyOtherBenefits.append("Congenital conditions covered.")
+//        familyOtherBenefits.append("Medically indicated transfers from Hospital to home.")
+//        family.otherBenefits = familyOtherBenefits
+//        
+//        showMembershipConfirmDetailsViewController(from: sourceViewController, with: family)
         
         
 //        switch hasActivePlan {
@@ -57,6 +58,11 @@ class EplusMembershipRouterImplementation: BaseRouterImplementation, EplusMember
 //            }
 //        }
 
+    }
+    
+    func showPlansViewController(from sourceViewController : UIViewController /*, with plan : EplusMembershipPlan */) {
+        let plansViewController = EPlusPlansViewController(router: self)
+        sourceViewController.navigationController?.pushViewController(plansViewController, animated: true)
     }
     
     func showMembershipPlanDetailsViewController(from sourceViewController : UIViewController, with plan : EplusMembershipPlan, onlyPlanInfo : Bool) {
@@ -85,11 +91,6 @@ class EplusMembershipRouterImplementation: BaseRouterImplementation, EplusMember
     func showMemberDetailsViewController(from sourceViewController : UIViewController) {
 //        sourceViewController.navigationController?.pushViewController(MembershipMemberDetailsViewController(router: self),
 //            animated: true)
-    }
-    
-    func showPlansViewController(from sourceViewController : UIViewController, with plan : EplusMembershipPlan) {
-//        let plansViewController = MembershipPlansViewController(router: self, type: plan.type, currentMembershipPlan: plan)
-//        sourceViewController.navigationController?.pushViewController(plansViewController, animated: true)
     }
     
     func showMPesaConfirmPaymentViewController(from sourceViewController : UIViewController, with plan : EplusMembershipPlan) {

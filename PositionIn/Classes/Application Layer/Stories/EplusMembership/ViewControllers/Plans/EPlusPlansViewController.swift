@@ -1,5 +1,5 @@
 //
-//  EPlusAmbulanceController.swift
+//  EPlusPlansViewController.swift
 //  PositionIn
 //
 //  Created by Mikhail Polyevin on 13/04/16.
@@ -8,16 +8,20 @@
 
 import UIKit
 
-class EPlusAmbulanceController: UIViewController {
+class EPlusPlansViewController: UIViewController {
+    
+    init(router: EplusMembershipRouter) {
+        self.router = router
+        super.init(nibName: NSStringFromClass(EPlusPlansViewController.self), bundle: nil)
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupUI()
-        self.setupTableViewHeaderFooter()
-    }
-    
-    override func viewDidAppear(animated: Bool) {
-        super.viewWillAppear(animated)
         self.setupTableViewHeaderFooter()
         self.loadData()
     }
@@ -71,7 +75,7 @@ class EPlusAmbulanceController: UIViewController {
     }
     
     @IBAction func callAnAmbulance(sender: AnyObject) {
-
+        router.showCallAmbulanceViewController(from: self)
     }
     
     @IBOutlet weak var spinner: UIActivityIndicatorView!
@@ -80,9 +84,10 @@ class EPlusAmbulanceController: UIViewController {
     @IBOutlet weak var buttonContainerView: UIView!
     @IBOutlet weak var callAnAmbulanceButton: UIButton!
     private var plans: [EplusMembershipPlan] = []
+    private let router : EplusMembershipRouter
 }
 
-extension EPlusAmbulanceController: EPlusTableViewFooterViewDelegate {
+extension EPlusPlansViewController: EPlusTableViewFooterViewDelegate {
     func alreadyMemberButtonTouched() {
         
         let optionMenu = UIAlertController(title: nil, message: "Please contact our support", preferredStyle: .ActionSheet)
@@ -115,14 +120,17 @@ extension EPlusAmbulanceController: EPlusTableViewFooterViewDelegate {
     }
 }
 
-extension EPlusAmbulanceController: UITableViewDelegate {
+extension EPlusPlansViewController: UITableViewDelegate {
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        
+        let plan = plans[indexPath.row]
+        router.showMembershipConfirmDetailsViewController(from: self, with: plan)
     }
 }
 
-extension EPlusAmbulanceController: UITableViewDataSource {
+extension EPlusPlansViewController: UITableViewDataSource {
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return plans.count
