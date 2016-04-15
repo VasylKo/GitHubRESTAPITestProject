@@ -296,29 +296,6 @@ final class APIService {
         
         // FIXME: Remove this stabs when will be implemented endpoint for it
         
-        // Individual
-        var individual = EPlusMembershipPlan()
-        individual.objectId = CRUDObjectId(EPlusMembershipPlan.PlanType.Individual.rawValue)
-        individual.name = "Individual"
-        individual.price = 3000
-        individual.type = .Individual
-        individual.costDescription = "KSh 3,000 Annually"
-        var individualBenefitGroups = [BenefitGroup]()
-        var individualBenefits = [String]()
-        individualBenefits.append("Access to Medical Helpline 24/7.")
-        individualBenefits.append("Unlimited emergency ambulance services.")
-        individualBenefits.append("Treatment and stabilization on site.")
-        individualBenefits.append("Transfer to Hospital after stabilisation.")
-        individualBenefitGroups.append(BenefitGroup(title: "Benefits", benefits: individualBenefits))
-        var individualOtherBenefits = [String]()
-        individualOtherBenefits.append("No age limit.")
-        individualOtherBenefits.append("No pre existing conditions.")
-        individualOtherBenefits.append("Congenital conditions covered.")
-        individualOtherBenefits.append("Medically indicated transfers from hospital to home.")
-        individualBenefitGroups.append(BenefitGroup(title: "Other Benefits", benefits: individualOtherBenefits))
-        individual.benefitGroups = individualBenefitGroups
-        items.append(individual)
-        
         // Family
         var family = EPlusMembershipPlan()
         family.objectId = CRUDObjectId(EPlusMembershipPlan.PlanType.Family.rawValue)
@@ -343,13 +320,36 @@ final class APIService {
         familyCover.append("Provides a 24/7 Ambulance membership for a family in towns where E-plus has ambulances.")
         familyCover.append("Maximum number of 6 family members (principle, spouse and 4 children).")
         familyBenefitGroups.append(BenefitGroup(title: "This Cover", benefits: familyCover))
-        individual.benefitGroups = familyBenefitGroups
+        family.benefitGroups = familyBenefitGroups
         items.append(family)
+        
+        // Individual
+        var individual = EPlusMembershipPlan()
+        individual.objectId = CRUDObjectId(EPlusMembershipPlan.PlanType.Individual.rawValue)
+        individual.name = "Individual"
+        individual.price = 3000
+        individual.type = .Individual
+        individual.costDescription = "KSh 3,000 Annually"
+        var individualBenefitGroups = [BenefitGroup]()
+        var individualBenefits = [String]()
+        individualBenefits.append("Access to Medical Helpline 24/7.")
+        individualBenefits.append("Unlimited emergency ambulance services.")
+        individualBenefits.append("Treatment and stabilization on site.")
+        individualBenefits.append("Transfer to Hospital after stabilisation.")
+        individualBenefitGroups.append(BenefitGroup(title: "Benefits", benefits: individualBenefits))
+        var individualOtherBenefits = [String]()
+        individualOtherBenefits.append("No age limit.")
+        individualOtherBenefits.append("No pre existing conditions.")
+        individualOtherBenefits.append("Congenital conditions covered.")
+        individualOtherBenefits.append("Medically indicated transfers from hospital to home.")
+        individualBenefitGroups.append(BenefitGroup(title: "Other Benefits", benefits: individualOtherBenefits))
+        individual.benefitGroups = individualBenefitGroups
+        items.append(individual)
         
         // Schools
         var schools = EPlusMembershipPlan()
         schools.objectId = CRUDObjectId(EPlusMembershipPlan.PlanType.Schools.rawValue)
-        schools.name = "Schools/Colleges & University"
+        schools.name = "Schools"
         schools.price = 1500
         schools.type = .Schools
         schools.costDescription = "KSh 1,500 Annually (per child)"
@@ -407,7 +407,7 @@ final class APIService {
         // Residential Estates
         var residential = EPlusMembershipPlan()
         residential.objectId = CRUDObjectId(EPlusMembershipPlan.PlanType.ResidentialEstates.rawValue)
-        residential.name = "Residential"
+        residential.name = "Residential Estates"
         residential.price = 1200
         residential.type = .ResidentialEstates
         residential.costDescription = "KSh 1,200 Annually (per household)"
