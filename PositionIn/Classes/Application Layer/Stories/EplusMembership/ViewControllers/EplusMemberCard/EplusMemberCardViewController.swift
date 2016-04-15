@@ -40,6 +40,7 @@ class EplusMemberCardViewController : UIViewController {
         
         setupInterface()
         detailsButton?.enabled = false
+        eplusMemberCardView?.alpha = 0
         getData()
     }
     

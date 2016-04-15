@@ -8,6 +8,7 @@
 
 import UIKit
 
+@IBDesignable
 class EplusMemberCardView: UIView {
 
     @IBOutlet weak var backgroundImageView: UIImageView!
@@ -20,13 +21,33 @@ class EplusMemberCardView: UIView {
     @IBOutlet weak var expirationDateLabel: UILabel!
     @IBOutlet weak var cardIdLabel: UILabel!
     
-    //MARK: Initializers
-    
+    // MARK: init methods
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        if let subview = NSBundle.mainBundle().loadNibNamed(String(EplusMemberCardView.self), owner: self, options: nil).first as? UIView {
-            self.addSubViewOnEntireSize(subview)
-        }
+        
+        commonSetup()
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        commonSetup()
+    }
+    
+    // MARK: setup view
+    
+    private func loadViewFromNib() -> UIView {
+        let viewBundle = NSBundle(forClass: self.dynamicType)
+        //  An exception will be thrown if the xib file with this class name not found,
+        let view = viewBundle.loadNibNamed(String(self.dynamicType), owner: self, options: nil)[0]
+        return view as! UIView
+    }
+    
+    private func commonSetup() {
+        let nibView = loadViewFromNib()
+        nibView.frame = bounds
+        // Adding nibView on the top of our view
+        addSubViewOnEntireSize(nibView)
     }
     
     //MARK: Public

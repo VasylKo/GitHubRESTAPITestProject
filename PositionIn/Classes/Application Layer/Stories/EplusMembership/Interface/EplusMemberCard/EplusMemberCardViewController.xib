@@ -31,7 +31,7 @@
                                         <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="IhB-vX-9ki">
                                             <rect key="frame" x="289" y="132" width="20" height="20"/>
                                         </activityIndicatorView>
-                                        <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b9F-aw-ETS" customClass="EplusMemberCardView" customModule="PositionIn" customModuleProvider="target">
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b9F-aw-ETS" customClass="EplusMemberCardView" customModule="PositionIn" customModuleProvider="target">
                                             <rect key="frame" x="145" y="32" width="308" height="199"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <constraints>
