@@ -7,7 +7,10 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EplusMemberCardViewController" customModule="PositionIn" customModuleProvider="target">
             <connections>
-                <outlet property="detailsButton" destination="GgK-Us-YYA" id="cLI-AB-ddF"/>
+                <outlet property="activityIndicator" destination="IhB-vX-9ki" id="oGg-ic-449"/>
+                <outlet property="detailsButton" destination="GgK-Us-YYA" id="un7-OM-4DF"/>
+                <outlet property="eplusMemberCardView" destination="b9F-aw-ETS" id="MrH-ga-DPy"/>
+                <outlet property="infoLabel" destination="1EL-Bm-pRx" id="Y4n-ZE-hQ1"/>
                 <outlet property="view" destination="iN0-l3-epB" id="tYz-yn-c2B"/>
             </connections>
         </placeholder>
@@ -20,13 +23,13 @@
                     <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="77j-kX-ld6" userLabel="ContentView">
-                            <rect key="frame" x="0.0" y="0.0" width="600" height="488"/>
+                            <rect key="frame" x="0.0" y="0.0" width="600" height="472"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IiH-IT-xXo" userLabel="MemberCardSection">
-                                    <rect key="frame" x="0.0" y="0.0" width="597" height="263"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="597" height="247"/>
                                     <subviews>
                                         <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="IhB-vX-9ki">
-                                            <rect key="frame" x="289" y="140" width="20" height="20"/>
+                                            <rect key="frame" x="289" y="132" width="20" height="20"/>
                                         </activityIndicatorView>
                                         <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b9F-aw-ETS" customClass="EplusMemberCardView" customModule="PositionIn" customModuleProvider="target">
                                             <rect key="frame" x="145" y="32" width="308" height="199"/>
@@ -44,10 +47,16 @@
                                         <constraint firstAttribute="height" constant="263" id="VRp-ne-bNH"/>
                                         <constraint firstItem="b9F-aw-ETS" firstAttribute="top" secondItem="IiH-IT-xXo" secondAttribute="top" constant="32" id="ZqG-gc-i5u"/>
                                         <constraint firstItem="IhB-vX-9ki" firstAttribute="centerY" secondItem="IiH-IT-xXo" secondAttribute="centerY" constant="18.5" id="dFD-n3-PPT"/>
+                                        <constraint firstAttribute="bottom" secondItem="b9F-aw-ETS" secondAttribute="bottom" constant="16" id="fPq-Or-sd7"/>
                                     </constraints>
+                                    <variation key="default">
+                                        <mask key="constraints">
+                                            <exclude reference="VRp-ne-bNH"/>
+                                        </mask>
+                                    </variation>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7yj-cG-mA0" userLabel="DetailsButtonSection">
-                                    <rect key="frame" x="0.0" y="263" width="600" height="64"/>
+                                    <rect key="frame" x="0.0" y="247" width="600" height="64"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JjW-4P-s8Y" userLabel="up_separator">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="1"/>
@@ -108,7 +117,7 @@
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qcB-hl-FvQ" userLabel="InfoSection">
-                                    <rect key="frame" x="0.0" y="343" width="600" height="135"/>
+                                    <rect key="frame" x="0.0" y="327" width="600" height="135"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="eplus_logo" translatesAutoresizingMaskIntoConstraints="NO" id="e7E-6Y-WTD">
                                             <rect key="frame" x="233" y="16" width="134" height="66"/>
@@ -184,7 +193,7 @@
                     </variation>
                 </scrollView>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="Ekd-R9-ksN" secondAttribute="bottom" id="Cdx-ZQ-pGe"/>
                 <constraint firstItem="77j-kX-ld6" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" id="IlU-Yf-OSc"/>

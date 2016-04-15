@@ -24,31 +24,30 @@ class EplusMemberCardView: UIView {
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        if let subview = NSBundle.mainBundle().loadNibNamed(String(MembershipCardView.self), owner: self, options: nil).first as? UIView {
+        if let subview = NSBundle.mainBundle().loadNibNamed(String(EplusMemberCardView.self), owner: self, options: nil).first as? UIView {
             self.addSubViewOnEntireSize(subview)
         }
     }
     
     //MARK: Public
     
-    func configure(with profile : UserProfile, plan : MembershipPlan) {
-        self.lastNameLabel.text = profile.lastName
-        self.firstNameLabel.text = profile.firstName
-        if let avatarURL = profile.avatar {
-            self.profileImageView.setImageFromURL(avatarURL)
-        }
-        self.cardIdLabel.text = profile.membershipDetails?.membershipCardId
-        self.priceLabel.text = String("\(AppConfiguration().currencySymbol) \(plan.price ?? 0)")
-        self.planNameLabel.text = plan.name
-        self.backgroundImageView.image = UIImage(named: profile.membershipDetails?.membershipCardImageName ?? "")
+    func configureWith(profile profile : UserProfile, plan: EplusMembershipPlan) {
         
-        if let lifetime = plan.lifetime where lifetime {
-            self.expirationDateTitleLabel.hidden = true
-            self.expirationDateLabel.hidden = true
+        let noValueLabel = "-"
+        
+        lastNameLabel.text = profile.lastName
+        firstNameLabel.text = profile.firstName
+        if let avatarURL = profile.avatar {
+            profileImageView.setImageFromURL(avatarURL)
+        }
+        cardIdLabel.text = profile.eplusMembershipDetails?.membershipCardId ?? noValueLabel
+        priceLabel.text = String("\(AppConfiguration().currencySymbol) \(plan.price ?? 0)")
+        planNameLabel.text = plan.name ?? noValueLabel
+        backgroundImageView.image = UIImage(named: profile.eplusMembershipDetails?.membershipCardImageName ?? "")
+        if let endDate = profile.eplusMembershipDetails?.endDate {
+            expirationDateLabel.text = stringFromDate(endDate)
         } else {
-            self.expirationDateTitleLabel.hidden = false
-            self.expirationDateLabel.hidden = false
-            self.expirationDateLabel.text = self.stringFromDate(profile.membershipDetails?.endDate)
+            expirationDateLabel.text = noValueLabel
         }
     }
     
