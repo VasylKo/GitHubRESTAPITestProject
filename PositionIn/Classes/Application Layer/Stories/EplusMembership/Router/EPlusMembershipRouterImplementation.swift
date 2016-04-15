@@ -108,7 +108,7 @@ class EPlusMembershipRouterImplementation: BaseRouterImplementation, EPlusMember
     }
     
     func dismissMembership(from sourceViewController : UIViewController) {
-        //        appDelegate().sidebarViewController?.executeAction(SidebarViewController.defaultAction)
-        //        sourceViewController.dismissViewControllerAnimated(true, completion: nil)
+        appDelegate().sidebarViewController?.executeAction(SidebarViewController.defaultAction)
+        sourceViewController.dismissViewControllerAnimated(true, completion: nil)
     }
 }

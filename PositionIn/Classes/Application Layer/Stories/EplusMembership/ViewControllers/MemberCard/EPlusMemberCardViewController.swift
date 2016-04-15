@@ -91,7 +91,4 @@ class EPlusMemberCardViewController : UIViewController {
     func closeTapped(sender: AnyObject) {
         self.router.dismissMembership(from: self)
     }
-    
-
-
 }
