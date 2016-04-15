@@ -10,11 +10,11 @@ import UIKit
 import XLForm
 import Box
 
-class EplusPaymentViewController: XLFormViewController, PaymentReponseDelegate {
+class EPlusPaymentViewController: XLFormViewController, PaymentReponseDelegate {
     
     private let pageView = MembershipPageView(pageCount: 3)
-    private let router : EplusMembershipRouter
-    private let plan : EplusMembershipPlan
+    private let router : EPlusMembershipRouter
+    private let plan : EPlusMembershipPlan
     private weak var confirmRowDescriptor: XLFormRowDescriptor?
     
     private enum Tags : String {
@@ -26,7 +26,7 @@ class EplusPaymentViewController: XLFormViewController, PaymentReponseDelegate {
     
     //MARK: Initializers
     
-    init(router: EplusMembershipRouter, plan: EplusMembershipPlan) {
+    init(router: EPlusMembershipRouter, plan: EPlusMembershipPlan) {
         self.router = router
         self.plan = plan
         super.init(nibName: nil, bundle: nil)

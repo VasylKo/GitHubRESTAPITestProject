@@ -8,7 +8,7 @@
 
 import UIKit
 
-class EplusMembershipRouterImplementation: BaseRouterImplementation, EplusMembershipRouter {
+class EPlusMembershipRouterImplementation: BaseRouterImplementation, EPlusMembershipRouter {
     
     func showInitialViewController(from sourceViewController : UIViewController, hasActivePlan: Bool? = nil) {
         showPlansViewController(from: sourceViewController)
@@ -65,12 +65,12 @@ class EplusMembershipRouterImplementation: BaseRouterImplementation, EplusMember
         sourceViewController.navigationController?.pushViewController(plansViewController, animated: true)
     }
     
-    func showMembershipPlanDetailsViewController(from sourceViewController : UIViewController, with plan : EplusMembershipPlan, onlyPlanInfo : Bool) {
+    func showMembershipPlanDetailsViewController(from sourceViewController : UIViewController, with plan : EPlusMembershipPlan, onlyPlanInfo : Bool) {
 //        let membershipDetailsViewController = MembershipPlanDetailsViewController(router: self, plan: plan, onlyPlanInfo: onlyPlanInfo)
 //        sourceViewController.navigationController?.pushViewController(membershipDetailsViewController, animated: true)
     }
 
-    func showMembershipConfirmDetailsViewController(from sourceViewController : UIViewController, with plan : EplusMembershipPlan) {
+    func showMembershipConfirmDetailsViewController(from sourceViewController : UIViewController, with plan : EPlusMembershipPlan) {
         sourceViewController.navigationController?.pushViewController(EplusMembershipConfirmDetailsViewController(router: self, plan: plan), animated: true)
     }
     
@@ -83,8 +83,8 @@ class EplusMembershipRouterImplementation: BaseRouterImplementation, EplusMember
         //sourceViewController.navigationController?.pushViewController(MembershipMemberProfileViewController(router: self, phoneNumber: phoneNumber, validationCode: validationCode), animated: true)
     }
     
-    func showPaymentViewController(from sourceViewController : UIViewController, with plan : EplusMembershipPlan) {
-        let paymentController = EplusPaymentViewController(router: self, plan: plan)
+    func showPaymentViewController(from sourceViewController : UIViewController, with plan : EPlusMembershipPlan) {
+        let paymentController = EPlusPaymentViewController(router: self, plan: plan)
         sourceViewController.navigationController?.pushViewController(paymentController, animated: true)
     }
     
@@ -93,12 +93,12 @@ class EplusMembershipRouterImplementation: BaseRouterImplementation, EplusMember
 //            animated: true)
     }
     
-    func showMPesaConfirmPaymentViewController(from sourceViewController : UIViewController, with plan : EplusMembershipPlan) {
+    func showMPesaConfirmPaymentViewController(from sourceViewController : UIViewController, with plan : EPlusMembershipPlan) {
 //        let mpesaConfirmPaymentViewController = MembershipMPesaConfirmPaymentViewController(router: self, plan: plan)
 //        sourceViewController.navigationController?.pushViewController(mpesaConfirmPaymentViewController, animated: true)
     }
     
-    func showBraintreeConfirmPaymentViewController(from sourceViewController : UIViewController, with plan : EplusMembershipPlan, creditCardPaymentSuccess: Bool?) {
+    func showBraintreeConfirmPaymentViewController(from sourceViewController : UIViewController, with plan : EPlusMembershipPlan, creditCardPaymentSuccess: Bool?) {
 //        let mpesaConfirmPaymentViewController = MembershipBraintreeConfirmPaymentViewController(router: self, plan: plan, creditCardPaymentSuccess: creditCardPaymentSuccess)
 //        sourceViewController.navigationController?.pushViewController(mpesaConfirmPaymentViewController, animated: true)
     }

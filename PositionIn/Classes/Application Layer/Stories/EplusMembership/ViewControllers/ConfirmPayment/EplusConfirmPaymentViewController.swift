@@ -12,8 +12,8 @@ import XLForm
 class EplusConfirmPaymentViewController: XLFormViewController {
     
     private let pageView = MembershipPageView(pageCount: 3)
-    let router : EplusMembershipRouter
-    private let plan : EplusMembershipPlan
+    let router : EPlusMembershipRouter
+    private let plan : EPlusMembershipPlan
     var headerView : MPesaIndicatorView!
     private var transactionId = ""
     private let card: CardItem
@@ -22,7 +22,7 @@ class EplusConfirmPaymentViewController: XLFormViewController {
     
     //MARK: Initializers
     
-    init(router: EplusMembershipRouter, plan: EplusMembershipPlan, card: CardItem, isSuccess: Bool = false) {
+    init(router: EPlusMembershipRouter, plan: EPlusMembershipPlan, card: CardItem, isSuccess: Bool = false) {
         self.router = router
         self.plan = plan
         self.card = card

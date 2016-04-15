@@ -10,7 +10,7 @@ import UIKit
 
 class EPlusPlansViewController: UIViewController {
     
-    init(router: EplusMembershipRouter) {
+    init(router: EPlusMembershipRouter) {
         self.router = router
         super.init(nibName: NSStringFromClass(EPlusPlansViewController.self), bundle: nil)
     }
@@ -23,6 +23,11 @@ class EPlusPlansViewController: UIViewController {
         super.viewDidLoad()
         self.setupUI()
         self.setupTableViewHeaderFooter()
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        self.setupTableViewHeaderFooter()
         self.loadData()
     }
     
@@ -30,7 +35,7 @@ class EPlusPlansViewController: UIViewController {
         spinner.startAnimating()
         self.tableView.hidden = true
         self.buttonContainerView.hidden = true
-        api().getAmbulanceMemberships().onSuccess(callback: { [weak self] (response : CollectionResponse<EplusMembershipPlan>) in
+        api().getEPlusMemberships().onSuccess(callback: { [weak self] (response : CollectionResponse<EPlusMembershipPlan>) in
             self?.plans = response.items
             self?.tableView.reloadData()
             self?.spinner.stopAnimating()
@@ -83,8 +88,8 @@ class EPlusPlansViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var buttonContainerView: UIView!
     @IBOutlet weak var callAnAmbulanceButton: UIButton!
-    private var plans: [EplusMembershipPlan] = []
-    private let router : EplusMembershipRouter
+    private var plans: [EPlusMembershipPlan] = []
+    private let router : EPlusMembershipRouter
 }
 
 extension EPlusPlansViewController: EPlusTableViewFooterViewDelegate {

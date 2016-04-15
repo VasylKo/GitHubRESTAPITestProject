@@ -15,7 +15,7 @@ class EplusMembershipConfirmDetailsViewController : XLFormViewController {
     
     //TODO: should provide user info
     
-    private let router : EplusMembershipRouter
+    private let router : EPlusMembershipRouter
     private var userProfile: UserProfile?
     private var countyBranches: [Community]?
     private let pageView = MembershipPageView(pageCount: 3)
@@ -55,11 +55,11 @@ class EplusMembershipConfirmDetailsViewController : XLFormViewController {
         return row
     }()
     
-    private var plan: EplusMembershipPlan
+    private var plan: EPlusMembershipPlan
 
     //MARK: Initializers
     
-    init(router: EplusMembershipRouter, plan : EplusMembershipPlan) {
+    init(router: EPlusMembershipRouter, plan : EPlusMembershipPlan) {
         self.router = router
         self.plan = plan
         super.init(nibName: nil, bundle: nil)

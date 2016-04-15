@@ -122,7 +122,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         "DonationPaymentAmountCell"
         
         XLFormViewController.cellClassesForRowDescriptorTypes()[XLFormRowDescriptorTypeAmbulancePayment] =
-        "EplusPaymentTableViewCell"
+        "EPlusPaymentTableViewCell"
         
         BTAppSwitch.setReturnURLScheme("\(NSBundle.mainBundle().bundleIdentifier!).payments")
 
