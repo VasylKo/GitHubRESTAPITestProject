@@ -51,6 +51,8 @@
 		181314ED1CBFA3B4004373F2 /* EPlusMembershipConfirmDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181314EA1CBFA3B4004373F2 /* EPlusMembershipConfirmDetailsViewController.swift */; };
 		184040101CC116BB00DF3655 /* BenefitsGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1840400F1CC116BB00DF3655 /* BenefitsGroup.swift */; };
 		184040131CC1284A00DF3655 /* EPlusMemberCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184040121CC1284A00DF3655 /* EPlusMemberCardViewController.swift */; };
+		184040171CC13FA700DF3655 /* EplusSIgnUpNowButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184040151CC13FA700DF3655 /* EplusSIgnUpNowButton.swift */; };
+		184040181CC13FA700DF3655 /* EplusSIgnUpNowButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 184040161CC13FA700DF3655 /* EplusSIgnUpNowButton.xib */; };
 		184236C01CA5B59700C53D08 /* NewRelicController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184236BF1CA5B59700C53D08 /* NewRelicController.swift */; };
 		18817F1E1C897CFB00FBA6B1 /* WalletsCellFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18817F1D1C897CFB00FBA6B1 /* WalletsCellFactory.swift */; };
 		18817F221C89B28B00FBA6B1 /* DonationDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18817F201C89B28B00FBA6B1 /* DonationDetailsViewController.swift */; };
@@ -635,6 +637,8 @@
 		181314EA1CBFA3B4004373F2 /* EPlusMembershipConfirmDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EPlusMembershipConfirmDetailsViewController.swift; sourceTree = "<group>"; };
 		1840400F1CC116BB00DF3655 /* BenefitsGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BenefitsGroup.swift; sourceTree = "<group>"; };
 		184040121CC1284A00DF3655 /* EPlusMemberCardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EPlusMemberCardViewController.swift; sourceTree = "<group>"; };
+		184040151CC13FA700DF3655 /* EplusSIgnUpNowButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EplusSIgnUpNowButton.swift; sourceTree = "<group>"; };
+		184040161CC13FA700DF3655 /* EplusSIgnUpNowButton.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EplusSIgnUpNowButton.xib; sourceTree = "<group>"; };
 		184236BF1CA5B59700C53D08 /* NewRelicController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewRelicController.swift; sourceTree = "<group>"; };
 		18817F1D1C897CFB00FBA6B1 /* WalletsCellFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletsCellFactory.swift; sourceTree = "<group>"; };
 		18817F201C89B28B00FBA6B1 /* DonationDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DonationDetailsViewController.swift; sourceTree = "<group>"; };
@@ -1456,6 +1460,15 @@
 			path = MemberCard;
 			sourceTree = "<group>";
 		};
+		184040141CC13FA700DF3655 /* EplusSIgnUpNowButton */ = {
+			isa = PBXGroup;
+			children = (
+				184040151CC13FA700DF3655 /* EplusSIgnUpNowButton.swift */,
+				184040161CC13FA700DF3655 /* EplusSIgnUpNowButton.xib */,
+			);
+			path = EplusSIgnUpNowButton;
+			sourceTree = "<group>";
+		};
 		18817F1F1C89B28B00FBA6B1 /* DonationDetails */ = {
 			isa = PBXGroup;
 			children = (
@@ -1508,6 +1521,7 @@
 		18F7C6291CBFB76900B68BB6 /* Interface */ = {
 			isa = PBXGroup;
 			children = (
+				184040141CC13FA700DF3655 /* EplusSIgnUpNowButton */,
 				18F7C6461CBFF13500B68BB6 /* Plans */,
 				541BA1CB1CBFC1F5007D9AB0 /* EplusMemberCard */,
 				18F7C62A1CBFB76900B68BB6 /* Payment */,
@@ -4198,6 +4212,7 @@
 				54A31F971CBBF20900A833C9 /* DonationPaymentAmountCell.xib in Resources */,
 				E6BEF1E81B9C83F200511B46 /* PositionIn.CommunityInfoCell.xib in Resources */,
 				CD552DD41C75DF670012920F /* PositionIn.NewsTableViewCell.xib in Resources */,
+				184040181CC13FA700DF3655 /* EplusSIgnUpNowButton.xib in Resources */,
 				D1F1FF2F1C24265B006D2E75 /* PositionIn.GiveBloodDetailsViewController.xib in Resources */,
 				D1379E951C2C21F80041AA4E /* PositionIn.NewsCardCell.xib in Resources */,
 				CD21C8D51C7601B7009261C7 /* BarButtonItemContainerViewController.xib in Resources */,
@@ -4640,6 +4655,7 @@
 				E66115A91B73AE0F003DB5B3 /* AddEventViewController.swift in Sources */,
 				CDB5B5C81C5B9C2400413715 /* MembershipPlanDetailsBenefitTableViewCell.swift in Sources */,
 				181314ED1CBFA3B4004373F2 /* EPlusMembershipConfirmDetailsViewController.swift in Sources */,
+				184040171CC13FA700DF3655 /* EplusSIgnUpNowButton.swift in Sources */,
 				D112D9DA1C2C83230051039E /* CreateConversationContainerViewController.swift in Sources */,
 				D167727B1C9991B100B624FC /* FeedEmergencyCellModel.swift in Sources */,
 				D16772761C997BB100B624FC /* FeedEmergencyDetailsViewController.swift in Sources */,

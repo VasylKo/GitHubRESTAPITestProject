@@ -217,6 +217,6 @@ class CallAmbulanceViewController: BaseAddItemViewController {
     }
     
     func footerButtonTouched(sender: UIButton) {
-        
+        EPlusMembershipRouterImplementation().showPlansViewController(from: self)
     }
 }
