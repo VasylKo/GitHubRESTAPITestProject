@@ -26,7 +26,7 @@ struct EPlusMembershipPlan: CRUDObject {
     var objectId : CRUDObjectId = CRUDObjectInvalidId
     var name : String?
     var costDescription : String?
-    var benefits : [String: [String]]?
+    var benefitGroups : [BenefitGroup]?
     var price : Int?
     var type : PlanType = .Unknown
     var durationDays : Int?

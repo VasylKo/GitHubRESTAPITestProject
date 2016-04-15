@@ -303,19 +303,20 @@ final class APIService {
         individual.price = 3000
         individual.type = .Individual
         individual.costDescription = "KSh 3,000 Annually"
+        var individualBenefitGroups = [BenefitGroup]()
         var individualBenefits = [String]()
-        individualBenefits.append("No age limit.")
-        individualBenefits.append("No pre existing conditions.")
-        individualBenefits.append("Congenital conditions covered.")
-        individualBenefits.append("Medically indicated transfers from hospital to home.")
+        individualBenefits.append("Access to Medical Helpline 24/7.")
+        individualBenefits.append("Unlimited emergency ambulance services.")
+        individualBenefits.append("Treatment and stabilization on site.")
+        individualBenefits.append("Transfer to Hospital after stabilisation.")
+        individualBenefitGroups.append(BenefitGroup(title: "Benefits", benefits: individualBenefits))
         var individualOtherBenefits = [String]()
         individualOtherBenefits.append("No age limit.")
         individualOtherBenefits.append("No pre existing conditions.")
         individualOtherBenefits.append("Congenital conditions covered.")
         individualOtherBenefits.append("Medically indicated transfers from hospital to home.")
-        individual.benefits = [String: [String]]()
-        individual.benefits?["Benefits"] = individualBenefits
-        individual.benefits?["Other Benefits"] = individualOtherBenefits
+        individualBenefitGroups.append(BenefitGroup(title: "Other Benefits", benefits: individualOtherBenefits))
+        individual.benefitGroups = individualBenefitGroups
         items.append(individual)
         
         // Family
@@ -325,23 +326,24 @@ final class APIService {
         family.price = 6000
         family.type = .Family
         family.costDescription = "KSh 6,000 Annually"
+        var familyBenefitGroups = [BenefitGroup]()
         var familyBenefits = [String]()
         familyBenefits.append("Access to Medical Helpline 24/7.")
         familyBenefits.append("Unlimited emergency ambulance services.")
         familyBenefits.append("Treatment and stabilization on site.")
         familyBenefits.append("Transfer to Hospital after stabilization.")
+        familyBenefitGroups.append(BenefitGroup(title: "Benefits", benefits: familyBenefits))
         var familyOtherBenefits = [String]()
         familyOtherBenefits.append("No age limit.")
         familyOtherBenefits.append("No pre existing conditions.")
         familyOtherBenefits.append("Congenital conditions covered.")
         familyOtherBenefits.append("Medically indicated transfers from Hospital to home.")
+        familyBenefitGroups.append(BenefitGroup(title: "Other Benefits", benefits: familyOtherBenefits))
         var familyCover = [String]()
         familyCover.append("Provides a 24/7 Ambulance membership for a family in towns where E-plus has ambulances.")
         familyCover.append("Maximum number of 6 family members (principle, spouse and 4 children).")
-        family.benefits = [String: [String]]()
-        family.benefits?["Benefits"] = familyBenefits
-        family.benefits?["Other Benefits"] = familyOtherBenefits
-        family.benefits?["This Cover"] = familyCover
+        familyBenefitGroups.append(BenefitGroup(title: "This Cover", benefits: familyCover))
+        individual.benefitGroups = familyBenefitGroups
         items.append(family)
         
         // Schools
@@ -351,11 +353,13 @@ final class APIService {
         schools.price = 1500
         schools.type = .Schools
         schools.costDescription = "KSh 1,500 Annually (per child)"
+        var schoolsBenefitGroups = [BenefitGroup]()
         var schoolsBenefits = [String]()
         schoolsBenefits.append("Access to Medical Helpline 24/7.")
         schoolsBenefits.append("Unlimited emergency ambulance services.")
         schoolsBenefits.append("Treatment and stabilization on site.")
         schoolsBenefits.append("Transfer to Hospital after stabilization.")
+        schoolsBenefitGroups.append(BenefitGroup(title: "Benefits", benefits: schoolsBenefits))
         var schoolsOtherBenefits = [String]()
         schoolsOtherBenefits.append("No age limit.")
         schoolsOtherBenefits.append("No pre existing conditions.")
@@ -364,14 +368,13 @@ final class APIService {
         schoolsOtherBenefits.append("One free standby ambulance service per term.")
         schoolsOtherBenefits.append("Free First Aid training of 20 teachers per year.")
         schoolsOtherBenefits.append("**PA and OP/IP Hospital benefits can be arranged at an extra cost.")
+        schoolsBenefitGroups.append(BenefitGroup(title: "Other Benefits", benefits: schoolsOtherBenefits))
         var schoolsThisCovers = [String]()
         schoolsThisCovers.append("24/7 emergency ambulance service for students/pupils in towns where E-plus has ambulances.")
         schoolsThisCovers.append("The ambulance service is restricted to within the school and during school hours.")
         schoolsThisCovers.append("Open to institutions with a population of at least 100 pupils/students.")
-        schools.benefits = [String: [String]]()
-        schools.benefits?["Benefits"] = schoolsBenefits
-        schools.benefits?["Other Benefits"] = schoolsOtherBenefits
-        schools.benefits?["This Cover"] = schoolsThisCovers
+        schoolsBenefitGroups.append(BenefitGroup(title: "This Cover", benefits: schoolsThisCovers))
+        schools.benefitGroups = schoolsBenefitGroups
         items.append(schools)
         
         // Corporate
@@ -408,11 +411,13 @@ final class APIService {
         residential.price = 1200
         residential.type = .ResidentialEstates
         residential.costDescription = "KSh 1,200 Annually (per household)"
+        var residentialBenefitGroups = [BenefitGroup]()
         var residentialBenefits = [String]()
         residentialBenefits.append("Access to Medical Helpline 24/7.")
         residentialBenefits.append("Unlimited emergency ambulance services.")
         residentialBenefits.append("Treatment and stabilization on site.")
         residentialBenefits.append("Transfer to Hospital after stabilization.")
+        residentialBenefitGroups.append(BenefitGroup(title: "Benefits", benefits: residentialBenefits))
         var residentialOtherBenefits = [String]()
         residentialOtherBenefits.append("No age limit.")
         residentialOtherBenefits.append("No pre existing conditions.")
@@ -422,13 +427,12 @@ final class APIService {
         residentialOtherBenefits.append("Free one standby ambulance service for estate functions.")
         residentialOtherBenefits.append("No limit of persons within a household.")
         residentialOtherBenefits.append("Visitors and any persons within the estate are covered.")
+        residentialBenefitGroups.append(BenefitGroup(title: "Other Benefits", benefits: residentialOtherBenefits))
         var residentialCover = [String]()
         residentialCover.append("24/7 ambulance membership for residents in an organised estate.")
         residentialCover.append("A minimum of 50 families in an estate.")
-        residential.benefits = [String: [String]]()
-        residential.benefits?["Benefits"] = residentialBenefits
-        residential.benefits?["Other Benefits"] = residentialOtherBenefits
-        residential.benefits?["This Cover"] = residentialCover
+        residentialBenefitGroups.append(BenefitGroup(title: "This Cover", benefits: residentialCover))
+        residential.benefitGroups = residentialBenefitGroups
         items.append(residential)
         
         // Sacco
@@ -438,25 +442,24 @@ final class APIService {
         sacco.price = 150
         sacco.type = .Sacco
         sacco.costDescription = "KSh 150 Annually (per member)"
+        var saccoBenefitGroups = [BenefitGroup]()
         var saccoBenefits = [String]()
         saccoBenefits.append("Access to Medical Helpline 24/7.")
         saccoBenefits.append("Unlimited emergency ambulance services.")
         saccoBenefits.append("Treatment and stabilization on site.")
         saccoBenefits.append("Transfer to Hospital after stabilization.")
+        saccoBenefitGroups.append(BenefitGroup(title: "Benefits", benefits: saccoBenefits))
         var saccoOtherBenefits = [String]()
         saccoOtherBenefits.append("No age limit.")
         saccoOtherBenefits.append("No pre existing conditions.")
         saccoOtherBenefits.append("Congenital conditions covered.")
         saccoOtherBenefits.append("Medically indicated transfers from Hospital to home.")
         saccoOtherBenefits.append("No limit of number of dependants per Sacco member.")
+        saccoBenefitGroups.append(BenefitGroup(title: "Other Benefits", benefits: saccoOtherBenefits))
         var saccoCover = [String]()
         saccoCover.append("24/7 ambulance membership for Sacco members only where E-plus has ambulances.")
-        sacco.benefits = [String: [String]]()
-        sacco.benefits?["Benefits"] = saccoBenefits
-        sacco.benefits?["Other Benefits"] = saccoOtherBenefits
-        sacco.benefits?["This Cover"] = saccoCover
+        saccoBenefitGroups.append(BenefitGroup(title: "This Cover", benefits: saccoCover))
         items.append(sacco)
-        
         
         return Future(value: CollectionResponse(items:items, total: items.count), delay: 3)
         

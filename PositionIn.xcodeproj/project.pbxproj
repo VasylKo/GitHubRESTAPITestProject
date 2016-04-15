@@ -49,6 +49,7 @@
 		181314EB1CBFA3B4004373F2 /* EPlusMembershipRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181314E61CBFA3B4004373F2 /* EPlusMembershipRouter.swift */; };
 		181314EC1CBFA3B4004373F2 /* EplusMembershipRouterImplementation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181314E71CBFA3B4004373F2 /* EplusMembershipRouterImplementation.swift */; };
 		181314ED1CBFA3B4004373F2 /* EPlusMembershipConfirmDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181314EA1CBFA3B4004373F2 /* EPlusMembershipConfirmDetailsViewController.swift */; };
+		184040101CC116BB00DF3655 /* BenefitsGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1840400F1CC116BB00DF3655 /* BenefitsGroup.swift */; };
 		184236C01CA5B59700C53D08 /* NewRelicController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184236BF1CA5B59700C53D08 /* NewRelicController.swift */; };
 		18817F1E1C897CFB00FBA6B1 /* WalletsCellFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18817F1D1C897CFB00FBA6B1 /* WalletsCellFactory.swift */; };
 		18817F221C89B28B00FBA6B1 /* DonationDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18817F201C89B28B00FBA6B1 /* DonationDetailsViewController.swift */; };
@@ -628,6 +629,7 @@
 		181314E61CBFA3B4004373F2 /* EPlusMembershipRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EPlusMembershipRouter.swift; sourceTree = "<group>"; };
 		181314E71CBFA3B4004373F2 /* EplusMembershipRouterImplementation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EplusMembershipRouterImplementation.swift; sourceTree = "<group>"; };
 		181314EA1CBFA3B4004373F2 /* EPlusMembershipConfirmDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EPlusMembershipConfirmDetailsViewController.swift; sourceTree = "<group>"; };
+		1840400F1CC116BB00DF3655 /* BenefitsGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BenefitsGroup.swift; sourceTree = "<group>"; };
 		184236BF1CA5B59700C53D08 /* NewRelicController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewRelicController.swift; sourceTree = "<group>"; };
 		18817F1D1C897CFB00FBA6B1 /* WalletsCellFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletsCellFactory.swift; sourceTree = "<group>"; };
 		18817F201C89B28B00FBA6B1 /* DonationDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DonationDetailsViewController.swift; sourceTree = "<group>"; };
@@ -2676,6 +2678,7 @@
 		E660E5251B5AB82000F52050 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				1840400F1CC116BB00DF3655 /* BenefitsGroup.swift */,
 				181314D41CBE7933004373F2 /* EPlusMembershipPlan.swift */,
 				E66478911C918CC400BA5EFB /* SystemNotification.swift */,
 				18F3313D1C8871870010321B /* Order.swift */,
@@ -4567,6 +4570,7 @@
 				E68B52061B8736F4006B980C /* FilterViewController.swift in Sources */,
 				CD9CA0F51C7F3E50007B26AA /* MoreInformationCell.swift in Sources */,
 				E62B16F61B5C1AA700D446BC /* MainMenuUserCell.swift in Sources */,
+				184040101CC116BB00DF3655 /* BenefitsGroup.swift in Sources */,
 				E6F3093E1BA81FAF00C9420C /* PickPhotoView.swift in Sources */,
 				E6C5CE1D1B83A28C00265955 /* SessionController.swift in Sources */,
 				CDEDD9771C45243900396594 /* CommunitySearchViewController.swift in Sources */,
