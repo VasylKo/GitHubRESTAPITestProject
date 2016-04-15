@@ -116,6 +116,6 @@ extension EPlusAmbulanceDetailsController: UITableViewDataSource {
 
 extension EPlusAmbulanceDetailsController: EPlusSelectPlanTableViewFooterViewDelegate {
     func selectPlanTouched() {
-        
+        router.showMembershipConfirmDetailsViewController(from: self, with: plan!)
     }
 }

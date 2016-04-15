@@ -167,7 +167,7 @@ extension EPlusPlansViewController: UITableViewDelegate {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         
         let plan = plans[indexPath.row]
-        router.showMembershipConfirmDetailsViewController(from: self, with: plan)
+        router.showMembershipPlanDetailsViewController(from: self, with: plan)
     }
 }
 

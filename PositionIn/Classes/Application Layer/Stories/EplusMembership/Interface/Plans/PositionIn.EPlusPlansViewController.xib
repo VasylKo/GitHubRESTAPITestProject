@@ -47,7 +47,7 @@
                     </constraints>
                 </view>
                 <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="SI8-jC-BZG">
-                    <rect key="frame" x="0.0" y="0.0" width="600" height="516"/>
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="524"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="ZZS-8j-mUN"/>
@@ -69,7 +69,7 @@
                 <constraint firstItem="SI8-jC-BZG" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="XT6-3N-i26"/>
                 <constraint firstAttribute="trailing" secondItem="sZQ-rc-pRv" secondAttribute="trailing" id="bR6-t4-p62"/>
                 <constraint firstItem="sZQ-rc-pRv" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="gyb-yi-E4h"/>
-                <constraint firstItem="sZQ-rc-pRv" firstAttribute="top" secondItem="SI8-jC-BZG" secondAttribute="bottom" constant="8" id="kFV-Oe-ca8"/>
+                <constraint firstItem="sZQ-rc-pRv" firstAttribute="top" secondItem="SI8-jC-BZG" secondAttribute="bottom" id="kFV-Oe-ca8"/>
             </constraints>
         </view>
     </objects>

@@ -145,13 +145,7 @@ class CallAmbulanceViewController: BaseAddItemViewController {
         }
     }
     
-    @IBAction func sendButtonTouched(sender: AnyObject) {
-        let validationErrors : Array<NSError> = self.formValidationErrors() as! Array<NSError>
-        if (validationErrors.count > 0){
-            self.showFormValidationError(validationErrors.first)
-            return
-        }
-        
+    private func sendCallAmbulanceRequest() {
         let values = formValues()
         
         if  let imageUpload = uploadAssets(values[Tags.Photo.rawValue]) {
@@ -192,7 +186,30 @@ class CallAmbulanceViewController: BaseAddItemViewController {
             }
         }
     }
-
+    
+    @IBAction func sendButtonTouched(sender: AnyObject) {
+        let validationErrors : Array<NSError> = self.formValidationErrors() as! Array<NSError>
+        if (validationErrors.count > 0){
+            self.showFormValidationError(validationErrors.first)
+            return
+        }
+        
+        let message = "Fee may be charged to a non E-Plus members depending on the distance."
+        let alertController = UIAlertController(title: nil, message: message, preferredStyle: .Alert)
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) in
+        }
+        alertController.addAction(cancelAction)
+        
+        let SendAction = UIAlertAction(title: "Send", style: .Default) { [weak self](action) in
+            self?.sendCallAmbulanceRequest()
+        }
+        alertController.addAction(SendAction)
+        
+        
+        self.presentViewController(alertController, animated: true) {}
+    }
+    
     @IBAction func cancelButtonTouched(sender: AnyObject) {
         self.navigationController?.popToRootViewControllerAnimated(true)
     }
