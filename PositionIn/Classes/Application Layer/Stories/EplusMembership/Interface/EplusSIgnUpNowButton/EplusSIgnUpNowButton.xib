@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EplusSIgnUpNowButton" customModule="PositionIn" customModuleProvider="target">
+            <connections>
+                <outlet property="signUpNowViewContainer" destination="e2R-3C-CwF" id="gBi-JM-U0Z"/>
+                <outlet property="viewPlanViewContainer" destination="WxU-VJ-Id3" id="6bD-Tr-E7O"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="651" height="66"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jRZ-v7-xaL" userLabel="separator">
+                    <rect key="frame" x="0.0" y="0.0" width="651" height="1"/>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="7CS-ja-p2e"/>
+                    </constraints>
+                </view>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="251" image="eplus_icon" translatesAutoresizingMaskIntoConstraints="NO" id="4Il-66-ucj">
+                    <rect key="frame" x="16" y="17" width="32" height="32"/>
+                </imageView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B4f-jp-4qj" userLabel="ContainerView">
+                    <rect key="frame" x="56" y="12" width="551" height="42"/>
+                    <subviews>
+                        <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e2R-3C-CwF" userLabel="signUpNowContainer">
+                            <rect key="frame" x="0.0" y="0.0" width="551" height="42"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="For an E-plus rescue package" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4V5-FD-CW4">
+                                    <rect key="frame" x="0.0" y="0.0" width="551" height="17"/>
+                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SIGN UP NOW" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aOn-Ba-OAj">
+                                    <rect key="frame" x="0.0" y="21" width="551" height="21"/>
+                                    <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="17"/>
+                                    <color key="textColor" red="0.92941176469999998" green="0.1058823529" blue="0.18039215689999999" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstItem="4V5-FD-CW4" firstAttribute="leading" secondItem="e2R-3C-CwF" secondAttribute="leading" id="AMU-Gm-2Us"/>
+                                <constraint firstItem="aOn-Ba-OAj" firstAttribute="leading" secondItem="e2R-3C-CwF" secondAttribute="leading" id="E1M-Dh-3QB"/>
+                                <constraint firstItem="4V5-FD-CW4" firstAttribute="top" secondItem="e2R-3C-CwF" secondAttribute="top" id="UmS-De-dXH"/>
+                                <constraint firstAttribute="trailing" secondItem="aOn-Ba-OAj" secondAttribute="trailing" id="h8p-MC-8Iz"/>
+                                <constraint firstAttribute="bottom" secondItem="aOn-Ba-OAj" secondAttribute="bottom" id="oki-ze-kia"/>
+                                <constraint firstAttribute="trailing" secondItem="4V5-FD-CW4" secondAttribute="trailing" id="qbx-oc-4b6"/>
+                                <constraint firstItem="aOn-Ba-OAj" firstAttribute="top" secondItem="4V5-FD-CW4" secondAttribute="bottom" constant="4" id="wWd-91-8QE"/>
+                            </constraints>
+                        </view>
+                        <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WxU-VJ-Id3" userLabel="viewPlanContainer">
+                            <rect key="frame" x="0.0" y="0.0" width="551" height="42"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="VIEW YOUR E-PLUS PLAN" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sYq-V9-i3C" userLabel="VIEW YOUR E-PLUS PLAN">
+                                    <rect key="frame" x="0.0" y="11" width="551" height="21"/>
+                                    <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="17"/>
+                                    <color key="textColor" red="0.92941176469999998" green="0.1058823529" blue="0.18039215689999999" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="trailing" secondItem="sYq-V9-i3C" secondAttribute="trailing" id="1qJ-jE-Ahm"/>
+                                <constraint firstItem="sYq-V9-i3C" firstAttribute="centerY" secondItem="WxU-VJ-Id3" secondAttribute="centerY" id="4hi-0M-XlN"/>
+                                <constraint firstItem="sYq-V9-i3C" firstAttribute="leading" secondItem="WxU-VJ-Id3" secondAttribute="leading" id="gQT-6T-J30"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="WxU-VJ-Id3" firstAttribute="top" secondItem="B4f-jp-4qj" secondAttribute="top" id="5A2-Ef-vzs"/>
+                        <constraint firstAttribute="trailing" secondItem="WxU-VJ-Id3" secondAttribute="trailing" id="FBg-QW-2Uk"/>
+                        <constraint firstItem="e2R-3C-CwF" firstAttribute="top" secondItem="B4f-jp-4qj" secondAttribute="top" id="GUn-aQ-hzK"/>
+                        <constraint firstAttribute="bottom" secondItem="WxU-VJ-Id3" secondAttribute="bottom" id="U4N-Lu-UPg"/>
+                        <constraint firstItem="e2R-3C-CwF" firstAttribute="leading" secondItem="B4f-jp-4qj" secondAttribute="leading" id="VOE-Bb-KCV"/>
+                        <constraint firstItem="WxU-VJ-Id3" firstAttribute="leading" secondItem="B4f-jp-4qj" secondAttribute="leading" id="bMs-lM-Tzt"/>
+                        <constraint firstAttribute="trailing" secondItem="e2R-3C-CwF" secondAttribute="trailing" id="dJj-cE-KxO"/>
+                        <constraint firstAttribute="bottom" secondItem="e2R-3C-CwF" secondAttribute="bottom" id="pM2-RF-gmM"/>
+                    </constraints>
+                </view>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cgY-Do-JED">
+                    <rect key="frame" x="615" y="23" width="20" height="20"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="20" id="VEU-tf-42x"/>
+                        <constraint firstAttribute="width" constant="20" id="icQ-Ug-Ya4"/>
+                    </constraints>
+                </imageView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="4Il-66-ucj" secondAttribute="bottom" id="1Ow-7g-3rg"/>
+                <constraint firstAttribute="trailing" secondItem="cgY-Do-JED" secondAttribute="trailing" constant="16" id="Akz-Xk-q4J"/>
+                <constraint firstItem="B4f-jp-4qj" firstAttribute="leading" secondItem="4Il-66-ucj" secondAttribute="trailing" constant="8" id="CnF-jP-77p"/>
+                <constraint firstItem="B4f-jp-4qj" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="EJo-8B-GLb"/>
+                <constraint firstItem="4Il-66-ucj" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="Kod-NL-DVQ"/>
+                <constraint firstItem="cgY-Do-JED" firstAttribute="leading" secondItem="B4f-jp-4qj" secondAttribute="trailing" constant="8" id="NPt-uh-AkC"/>
+                <constraint firstItem="4Il-66-ucj" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="T1A-qp-aTL"/>
+                <constraint firstItem="4Il-66-ucj" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="VMP-vp-5t3"/>
+                <constraint firstItem="jRZ-v7-xaL" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="YHA-JF-dRe"/>
+                <constraint firstAttribute="trailing" secondItem="jRZ-v7-xaL" secondAttribute="trailing" id="byy-dQ-khb"/>
+                <constraint firstItem="cgY-Do-JED" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="fAF-mG-r4W"/>
+                <constraint firstItem="jRZ-v7-xaL" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="u77-3n-fqX"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="1Ow-7g-3rg"/>
+                    <exclude reference="T1A-qp-aTL"/>
+                </mask>
+            </variation>
+            <point key="canvasLocation" x="455.5" y="-206"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="eplus_icon" width="32" height="32"/>
+    </resources>
+</document>
