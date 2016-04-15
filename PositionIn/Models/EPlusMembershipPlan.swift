@@ -9,7 +9,7 @@
 import ObjectMapper
 import CleanroomLogger
 
-struct EplusMembershipPlan: CRUDObject {
+struct EPlusMembershipPlan: CRUDObject {
     
     enum PlanType : Int, CustomStringConvertible {
         case Unknown = 0, Family, Individual, Schools, Corporate, ResidentialEstates, Sacco
@@ -26,10 +26,7 @@ struct EplusMembershipPlan: CRUDObject {
     var objectId : CRUDObjectId = CRUDObjectInvalidId
     var name : String?
     var costDescription : String?
-    var planDescription : String?
-    var thisCovers : [String]?
-    var benefits : [String]?
-    var otherBenefits : [String]?
+    var benefits : [String: [String]]?
     var price : Int?
     var type : PlanType = .Unknown
     var durationDays : Int?

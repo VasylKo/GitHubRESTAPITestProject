@@ -240,7 +240,7 @@ protocol BrowseModeDisplay {
         case .Donate:
             self.navigationController?.pushViewController(Storyboards.Onboarding.instantiateDonateViewController(), animated: true)
         case .Ambulance:
-            EplusMembershipRouterImplementation().showInitialViewController(from: self)
+            EPlusMembershipRouterImplementation().showInitialViewController(from: self)
         default:
             break
         }
