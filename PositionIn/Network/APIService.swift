@@ -301,7 +301,8 @@ final class APIService {
         individual.objectId = CRUDObjectId(EPlusMembershipPlan.PlanType.Individual.rawValue)
         individual.name = "Individual"
         individual.price = 3000
-        individual.costDescription = "KSH 3,000 Annually"
+        individual.type = .Individual
+        individual.costDescription = "KSh 3,000 Annually"
         var individualBenefits = [String]()
         individualBenefits.append("No age limit.")
         individualBenefits.append("No pre existing conditions.")
@@ -322,7 +323,8 @@ final class APIService {
         family.objectId = CRUDObjectId(EPlusMembershipPlan.PlanType.Family.rawValue)
         family.name = "Family"
         family.price = 6000
-        family.costDescription = "KSH 6,000 Annually"
+        family.type = .Family
+        family.costDescription = "KSh 6,000 Annually"
         var familyBenefits = [String]()
         familyBenefits.append("Access to Medical Helpline 24/7.")
         familyBenefits.append("Unlimited emergency ambulance services.")
@@ -347,7 +349,8 @@ final class APIService {
         schools.objectId = CRUDObjectId(EPlusMembershipPlan.PlanType.Schools.rawValue)
         schools.name = "Schools/Colleges & University"
         schools.price = 1500
-        schools.costDescription = "KSH 1,500 Annually (per child)"
+        schools.type = .Schools
+        schools.costDescription = "KSh 1,500 Annually (per child)"
         var schoolsBenefits = [String]()
         schoolsBenefits.append("Access to Medical Helpline 24/7.")
         schoolsBenefits.append("Unlimited emergency ambulance services.")
@@ -372,37 +375,39 @@ final class APIService {
         items.append(schools)
         
         // Corporate
-        var corporate = EPlusMembershipPlan()
-        corporate.objectId = CRUDObjectId(EPlusMembershipPlan.PlanType.Corporate.rawValue)
-        corporate.name = "Corporate"
-        corporate.price = 0
-        corporate.costDescription = "Annual Membership Rate"
-        var corporateBenefits = [String]()
-        corporateBenefits.append("Access to Medical Helpline 24/7.")
-        corporateBenefits.append("Unlimited emergency ambulance services.")
-        corporateBenefits.append("Treatment and stabilization on site.")
-        corporateBenefits.append("Transfer to Hospital after stabilization.")
-        var corporateOtherBenefits = [String]()
-        corporateOtherBenefits.append("No age limit.")
-        corporateOtherBenefits.append("No pre existing conditions.")
-        corporateOtherBenefits.append("Congenital conditions covered.")
-        corporateOtherBenefits.append("Medically indicated transfers from Hospital to home.")
-        corporateOtherBenefits.append("Extension of membership to dependants with an extra fee.")
-        var corporateCover = [String]()
-        corporateCover.append("24/7 Ambulance membership for employees.")
-        corporateCover.append("Membership is restricted within the work premise and sometimes within the town in the residential areas.")
-        corporate.benefits = [String: [String]]()
-        corporate.benefits?["Benefits"] = corporateBenefits
-        corporate.benefits?["Other Benefits"] = corporateOtherBenefits
-        corporate.benefits?["This Cover"] = corporateCover
-        items.append(corporate)
+//        var corporate = EPlusMembershipPlan()
+//        corporate.objectId = CRUDObjectId(EPlusMembershipPlan.PlanType.Corporate.rawValue)
+//        corporate.name = "Corporate"
+//        corporate.price = 0
+//        corporate.type = .Corporate
+//        corporate.costDescription = "Annual Membership Rate"
+//        var corporateBenefits = [String]()
+//        corporateBenefits.append("Access to Medical Helpline 24/7.")
+//        corporateBenefits.append("Unlimited emergency ambulance services.")
+//        corporateBenefits.append("Treatment and stabilization on site.")
+//        corporateBenefits.append("Transfer to Hospital after stabilization.")
+//        var corporateOtherBenefits = [String]()
+//        corporateOtherBenefits.append("No age limit.")
+//        corporateOtherBenefits.append("No pre existing conditions.")
+//        corporateOtherBenefits.append("Congenital conditions covered.")
+//        corporateOtherBenefits.append("Medically indicated transfers from Hospital to home.")
+//        corporateOtherBenefits.append("Extension of membership to dependants with an extra fee.")
+//        var corporateCover = [String]()
+//        corporateCover.append("24/7 Ambulance membership for employees.")
+//        corporateCover.append("Membership is restricted within the work premise and sometimes within the town in the residential areas.")
+//        corporate.benefits = [String: [String]]()
+//        corporate.benefits?["Benefits"] = corporateBenefits
+//        corporate.benefits?["Other Benefits"] = corporateOtherBenefits
+//        corporate.benefits?["This Cover"] = corporateCover
+//        items.append(corporate)
         
         // Residential Estates
         var residential = EPlusMembershipPlan()
         residential.objectId = CRUDObjectId(EPlusMembershipPlan.PlanType.ResidentialEstates.rawValue)
         residential.name = "Residential"
         residential.price = 1200
-        residential.costDescription = "KSH 1,200 Annually (per household)"
+        residential.type = .ResidentialEstates
+        residential.costDescription = "KSh 1,200 Annually (per household)"
         var residentialBenefits = [String]()
         residentialBenefits.append("Access to Medical Helpline 24/7.")
         residentialBenefits.append("Unlimited emergency ambulance services.")
@@ -431,7 +436,8 @@ final class APIService {
         sacco.objectId = CRUDObjectId(EPlusMembershipPlan.PlanType.Sacco.rawValue)
         sacco.name = "Sacco"
         sacco.price = 150
-        sacco.costDescription = "KSH 150 Annually (per member)"
+        sacco.type = .Sacco
+        sacco.costDescription = "KSh 150 Annually (per member)"
         var saccoBenefits = [String]()
         saccoBenefits.append("Access to Medical Helpline 24/7.")
         saccoBenefits.append("Unlimited emergency ambulance services.")
@@ -449,7 +455,7 @@ final class APIService {
         sacco.benefits?["Benefits"] = saccoBenefits
         sacco.benefits?["Other Benefits"] = saccoOtherBenefits
         sacco.benefits?["This Cover"] = saccoCover
-        items.append(residential)
+        items.append(sacco)
         
         
         return Future(value: CollectionResponse(items:items, total: items.count), delay: 3)
@@ -458,7 +464,7 @@ final class APIService {
         //return getObjectsCollection(endpoint, params: nil)
     }
     
-    func getAmbulanceMembership(membershipId: CRUDObjectId) -> Future<EPlusMembershipPlan, NSError> {
+    func getEPlusMembership(membershipId: CRUDObjectId) -> Future<EPlusMembershipPlan, NSError> {
         // FIXME: Remove this stabs when will be implemented endpoint for it
         
         return getEPlusMemberships().flatMap { response -> Future<EPlusMembershipPlan, NSError> in
