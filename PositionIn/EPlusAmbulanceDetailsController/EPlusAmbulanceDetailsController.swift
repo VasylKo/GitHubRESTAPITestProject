@@ -10,6 +10,12 @@ import UIKit
 
 class EPlusAmbulanceDetailsController: UIViewController {
     
+    init(router: EPlusMembershipRouter, plan: EPlusMembershipPlan) {
+        self.plan = plan
+        self.router = router
+        super.init(nibName: NSStringFromClass(EPlusAmbulanceDetailsController.self), bundle: nil)
+    }
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -18,17 +24,6 @@ class EPlusAmbulanceDetailsController: UIViewController {
         super.viewDidLoad()
         self.setupUI()
         self.setupTableViewHeaderFooter()
-        self.loadData()
-    }
-    
-    func loadData() {
-        spinner.startAnimating()
-        self.tableView.hidden = true
-        if let planId = planId {
-            api().getAmbulanceMembership(planId).onSuccess(callback: { [weak self] plan in
-                self?.tableView.reloadData()
-            })
-        }
     }
     
     func setupUI() {
@@ -38,9 +33,6 @@ class EPlusAmbulanceDetailsController: UIViewController {
         
         let nib = UINib(nibName: String(EPlusPlanTableViewCell.self), bundle: nil)
         self.tableView.registerNib(nib, forCellReuseIdentifier: String(EPlusPlanTableViewCell.self))
-        
-        callAmbulanceButton.imageEdgeInsets = UIEdgeInsetsMake(0, -20, 0, 0)
-        
     }
     
     func setupTableViewHeaderFooter() {
@@ -55,11 +47,8 @@ class EPlusAmbulanceDetailsController: UIViewController {
         }
     }
     
-    @IBOutlet weak var spinner: UIActivityIndicatorView!
-    @IBOutlet weak var callAmbulanceButton: UIButton!
-    private var plans: EplusMembershipPlan?
-    var planId: String?
-    
+    private var plan: EPlusMembershipPlan?
+    private let router : EPlusMembershipRouter
     @IBOutlet weak var tableView: UITableView!
 }
 

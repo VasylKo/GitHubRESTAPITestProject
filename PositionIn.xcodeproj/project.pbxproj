@@ -261,7 +261,7 @@
 		D1F86CF11BFCAA96006E0C49 /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D1F86CF01BFCAA96006E0C49 /* Onboarding.storyboard */; };
 		D1F86CF31BFCBAD3006E0C49 /* PhoneNumberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F86CF21BFCBAD3006E0C49 /* PhoneNumberViewController.swift */; };
 		D1FC6D581CBFFBFE00A38DE7 /* EPlusAmbulanceDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1FC6D561CBFFBFE00A38DE7 /* EPlusAmbulanceDetailsController.swift */; };
-		D1FC6D591CBFFBFE00A38DE7 /* EPlusAmbulanceDetailsController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1FC6D571CBFFBFE00A38DE7 /* EPlusAmbulanceDetailsController.xib */; };
+		D1FC6D591CBFFBFE00A38DE7 /* PositionIn.EPlusAmbulanceDetailsController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1FC6D571CBFFBFE00A38DE7 /* PositionIn.EPlusAmbulanceDetailsController.xib */; };
 		D1FC6D601CC000E700A38DE7 /* EPlusPlanInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1FC6D5E1CC000E700A38DE7 /* EPlusPlanInfoTableViewCell.swift */; };
 		D1FC6D611CC000E700A38DE7 /* EPlusPlanInfoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1FC6D5F1CC000E700A38DE7 /* EPlusPlanInfoTableViewCell.xib */; };
 		D1FC6D641CC000FF00A38DE7 /* EPlusPlanTitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1FC6D621CC000FF00A38DE7 /* EPlusPlanTitleTableViewCell.swift */; };
@@ -860,7 +860,7 @@
 		D1F86CF01BFCAA96006E0C49 /* Onboarding.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Onboarding.storyboard; sourceTree = "<group>"; };
 		D1F86CF21BFCBAD3006E0C49 /* PhoneNumberViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhoneNumberViewController.swift; sourceTree = "<group>"; };
 		D1FC6D561CBFFBFE00A38DE7 /* EPlusAmbulanceDetailsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EPlusAmbulanceDetailsController.swift; sourceTree = "<group>"; };
-		D1FC6D571CBFFBFE00A38DE7 /* EPlusAmbulanceDetailsController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EPlusAmbulanceDetailsController.xib; sourceTree = "<group>"; };
+		D1FC6D571CBFFBFE00A38DE7 /* PositionIn.EPlusAmbulanceDetailsController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.EPlusAmbulanceDetailsController.xib; sourceTree = "<group>"; };
 		D1FC6D5E1CC000E700A38DE7 /* EPlusPlanInfoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EPlusPlanInfoTableViewCell.swift; sourceTree = "<group>"; };
 		D1FC6D5F1CC000E700A38DE7 /* EPlusPlanInfoTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EPlusPlanInfoTableViewCell.xib; sourceTree = "<group>"; };
 		D1FC6D621CC000FF00A38DE7 /* EPlusPlanTitleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EPlusPlanTitleTableViewCell.swift; sourceTree = "<group>"; };
@@ -2387,7 +2387,7 @@
 				D1FC6D5B1CBFFE1500A38DE7 /* EPlusSelectPlanTableViewFooterView */,
 				D1FC6D5A1CBFFE0500A38DE7 /* EPlusAbulanceDetailsTableViewHeaderView */,
 				D1FC6D561CBFFBFE00A38DE7 /* EPlusAmbulanceDetailsController.swift */,
-				D1FC6D571CBFFBFE00A38DE7 /* EPlusAmbulanceDetailsController.xib */,
+				D1FC6D571CBFFBFE00A38DE7 /* PositionIn.EPlusAmbulanceDetailsController.xib */,
 			);
 			path = EPlusAmbulanceDetailsController;
 			sourceTree = "<group>";
@@ -4287,7 +4287,7 @@
 				D1FC6D6D1CC0016000A38DE7 /* EPlusAbulanceDetailsTableViewHeaderView.xib in Resources */,
 				D1DC99391CA27E8D004A992B /* MembershipMessageController.xib in Resources */,
 				D1D391471CA47D430065CC25 /* DonateInfoViewController.xib in Resources */,
-				D1FC6D591CBFFBFE00A38DE7 /* EPlusAmbulanceDetailsController.xib in Resources */,
+				D1FC6D591CBFFBFE00A38DE7 /* PositionIn.EPlusAmbulanceDetailsController.xib in Resources */,
 				D1379E8E1C2A98710041AA4E /* PositionIn.ExploreCardCell.xib in Resources */,
 				CDEDD9781C45243900396594 /* PositionIn.CommunitySearchViewController.xib in Resources */,
 				CD1313311C6E3387002F6F32 /* PositionIn.PostAttachmentsCell.xib in Resources */,

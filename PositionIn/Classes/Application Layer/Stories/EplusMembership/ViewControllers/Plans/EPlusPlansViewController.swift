@@ -88,8 +88,8 @@ class EPlusPlansViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var buttonContainerView: UIView!
     @IBOutlet weak var callAnAmbulanceButton: UIButton!
-    private var plans: [EPlusMembershipPlan] = []
     private let router : EPlusMembershipRouter
+    private var plans: [EPlusMembershipPlan] = []
 }
 
 extension EPlusPlansViewController: EPlusTableViewFooterViewDelegate {
