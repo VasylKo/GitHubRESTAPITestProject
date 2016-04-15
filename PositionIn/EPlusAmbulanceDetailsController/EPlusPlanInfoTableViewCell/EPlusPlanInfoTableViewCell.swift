@@ -10,7 +10,6 @@ import UIKit
 
 class EPlusPlanInfoTableViewCell: UITableViewCell {
 
-    
     var planInfoString: String? {
         didSet {
             if let planInfoString = planInfoString {

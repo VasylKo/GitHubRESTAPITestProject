@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MessageUI
 
 class EPlusPlansViewController: UIViewController {
     
@@ -21,6 +22,7 @@ class EPlusPlansViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.loadData()
         self.setupUI()
         self.setupTableViewHeaderFooter()
     }
@@ -28,7 +30,6 @@ class EPlusPlansViewController: UIViewController {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         self.setupTableViewHeaderFooter()
-        self.loadData()
     }
     
     func loadData() {
@@ -99,16 +100,22 @@ extension EPlusPlansViewController: EPlusTableViewFooterViewDelegate {
         
         let callSupport = UIAlertAction(title: "Call Support", style: .Default, handler: {
             (alert: UIAlertAction!) -> Void in
-            
+            OpenApplication.Tel(with: AlreadyEplusMemberActions.phone)
         })
+        
         let emailSupport = UIAlertAction(title: "Email Support", style: .Default, handler: {
             (alert: UIAlertAction!) -> Void in
-            
+            let mailComposeViewController = self.configuredMailComposeViewController()
+            if MFMailComposeViewController.canSendMail() {
+                self.presentViewController(mailComposeViewController, animated: true, completion: nil)
+            } else {
+                self.showSendMailErrorAlert()
+            }
         })
         
         let visitWebsire = UIAlertAction(title: "Visit Website", style: .Default, handler: {
             (alert: UIAlertAction!) -> Void in
-            
+            OpenApplication.Safari(with: AlreadyEplusMemberActions.websiteURL)
         })
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: {
@@ -122,6 +129,35 @@ extension EPlusPlansViewController: EPlusTableViewFooterViewDelegate {
         
         self.presentViewController(optionMenu, animated: true, completion: nil)
         
+    }
+    
+    private struct AlreadyEplusMemberActions {
+        static let websiteURL = NSURL(string: "http://www.eplus.co.ke")!
+        static let phone = "+254717714938"
+        static let email = "support@eplus.co.ke"
+    }
+    
+    private func configuredMailComposeViewController() -> MFMailComposeViewController {
+        let mailComposerVC = MFMailComposeViewController()
+        mailComposerVC.mailComposeDelegate = self
+        mailComposerVC.setToRecipients([AlreadyEplusMemberActions.email])
+        return mailComposerVC
+    }
+    
+    private func showSendMailErrorAlert() {
+        let sendMailErrorAlert = UIAlertView(title: NSLocalizedString("Could Not Send Email"),
+            message: NSLocalizedString("Your device could not send e-mail.  Please check e-mail configuration and try again."),
+            delegate: self,
+            cancelButtonTitle: "OK")
+        sendMailErrorAlert.show()
+    }
+}
+
+extension EPlusPlansViewController: MFMailComposeViewControllerDelegate{
+    //MARK: MFMailComposeViewControllerDelegate
+    
+    func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
+        controller.dismissViewControllerAnimated(true, completion: nil)
     }
 }
 

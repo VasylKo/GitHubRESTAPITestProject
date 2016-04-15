@@ -29,12 +29,11 @@ class EPlusAbulanceDetailsTableViewHeaderView: UIView {
     var priceString: String? {
         didSet {
             if let priceString = priceString {
-                self.planNameLabel.text = priceString
+                self.priceLabel.text = priceString
             }
         }
     }
     
-
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var planImageView: UIImageView!
     @IBOutlet weak var planNameLabel: UILabel!

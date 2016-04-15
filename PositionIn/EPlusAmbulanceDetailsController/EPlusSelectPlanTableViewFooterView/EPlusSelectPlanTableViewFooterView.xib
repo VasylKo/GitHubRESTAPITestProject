@@ -28,7 +28,6 @@
                     </connections>
                 </button>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="y8H-ds-Goa" secondAttribute="trailing" constant="15" id="USC-pe-CIP"/>
                 <constraint firstAttribute="bottom" secondItem="y8H-ds-Goa" secondAttribute="bottom" constant="30" id="hMK-T9-Lf7"/>

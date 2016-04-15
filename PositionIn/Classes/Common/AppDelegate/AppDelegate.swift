@@ -132,9 +132,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIApplication.sharedApplication().registerForRemoteNotifications()
         
         #if DEBUG
-        Fabric.with([Crashlytics.self])
+//        Fabric.with([Crashlytics.self])
         #endif
-        NewRelicController.start()
+//111        NewRelicController.start()
         
         let notificationSettings = LNNotificationAppSettings()
         notificationSettings.alertStyle = .Banner
