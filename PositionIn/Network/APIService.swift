@@ -459,6 +459,7 @@ final class APIService {
         var saccoCover = [String]()
         saccoCover.append("24/7 ambulance membership for Sacco members only where E-plus has ambulances.")
         saccoBenefitGroups.append(BenefitGroup(title: "This Cover", benefits: saccoCover))
+        sacco.benefitGroups = saccoBenefitGroups
         items.append(sacco)
         
         return Future(value: CollectionResponse(items:items, total: items.count), delay: 3)
