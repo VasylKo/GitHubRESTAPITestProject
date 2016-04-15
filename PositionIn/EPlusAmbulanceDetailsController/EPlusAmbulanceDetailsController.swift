@@ -35,6 +35,7 @@ class EPlusAmbulanceDetailsController: UIViewController {
     func setupUI() {
         title = "Rescue Package"
         tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 44
         let nib = UINib(nibName: String(EPlusPlanInfoTableViewCell.self), bundle: nil)
         tableView.registerNib(nib, forCellReuseIdentifier: String(EPlusPlanInfoTableViewCell.self))
         tableView.separatorStyle = .None
