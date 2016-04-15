@@ -103,7 +103,7 @@ class EPlusMembershipConfirmDetailsViewController : XLFormViewController {
     lazy private var dateOfBirthRow: XLFormRowDescriptor = {
         let dateOfBirthRow = XLFormRowDescriptor(tag: Tags.DateOfBirth.rawValue,
             rowType: XLFormRowDescriptorTypeDateInline, title: NSLocalizedString("Date Of Birth"))
-        dateOfBirthRow.required = false
+        dateOfBirthRow.required = true
         dateOfBirthRow.value = nil
         dateOfBirthRow.cellConfig["maximumDate"] = NSDate()
         dateOfBirthRow.cellConfig["textLabel.textColor"] = UIScheme.mainThemeColor
@@ -115,7 +115,7 @@ class EPlusMembershipConfirmDetailsViewController : XLFormViewController {
     lazy private var genderRow: XLFormRowDescriptor = {
         let genderRow : XLFormRowDescriptor = XLFormRowDescriptor(tag: Tags.Gender.rawValue,
             rowType:XLFormRowDescriptorTypeSelectorPush, title: NSLocalizedString("Gender"))
-        genderRow.required = false
+        genderRow.required = true
         var genderSelectorOptions: [XLFormOptionsObject] = []
         genderSelectorOptions.append(XLFormOptionsObject(value: Gender.Male.rawValue, displayText: Gender.Male.description))
         genderSelectorOptions.append(XLFormOptionsObject(value: Gender.Female.rawValue, displayText: Gender.Female.description))
@@ -147,7 +147,7 @@ class EPlusMembershipConfirmDetailsViewController : XLFormViewController {
         let row = XLFormRowDescriptor(tag: Tags.Allergies.rawValue, rowType: XLFormRowDescriptorTypeTextView, title: NSLocalizedString("Allergies", comment: ""))
         row.cellConfig.setObject(UIScheme.mainThemeColor, forKey: "textLabel.textColor")
         row.cellConfig.setObject(UIScheme.mainThemeColor, forKey: "tintColor")
-        row.required = true
+        row.required = false
         return row
     }()
     

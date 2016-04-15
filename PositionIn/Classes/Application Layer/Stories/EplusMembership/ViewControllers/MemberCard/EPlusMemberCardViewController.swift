@@ -26,7 +26,7 @@ class EPlusMemberCardViewController : UIViewController {
     
     init(router: EPlusMembershipRouter) {
         self.router = router
-        super.init(nibName: String(EPlusMemberCardViewController.self), bundle: nil)
+        super.init(nibName: NSStringFromClass(EPlusMemberCardViewController.self), bundle: nil)
     }
     
     required init?(coder: NSCoder) {

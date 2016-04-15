@@ -131,14 +131,19 @@ class EplusConfirmPaymentViewController: XLFormViewController {
     private func paymentDidSuccess() {
         headerView.showSuccess()
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (Int64)(3 * NSEC_PER_SEC)), dispatch_get_main_queue()) {
-            //TODO: add route to plan card
-            //self.router.showMembershipMemberCardViewController(from: self)
+            self.router.showMembershipMemberCardViewController(from: self)
         }
     }
     
     
     private func paymentDidFail() {
         headerView.showFailure()
+        
+        // FIXME: Ambulance hot fix for showing card
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (Int64)(3 * NSEC_PER_SEC)), dispatch_get_main_queue()) {
+            self.router.showMembershipMemberCardViewController(from: self)
+        }
+        
         //sendPaymentEventToAnalytics(success: false)
     }
     
