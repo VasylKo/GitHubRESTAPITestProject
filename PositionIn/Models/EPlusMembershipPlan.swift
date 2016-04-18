@@ -9,6 +9,13 @@
 import ObjectMapper
 import CleanroomLogger
 
+struct EPlusPlanOption {
+    var price: Int?
+    var minParticipants: Int?
+    var maxParticipants: Int?
+    var costDescription: String?
+}
+
 struct EPlusMembershipPlan: CRUDObject {
     
     enum PlanType : Int, CustomStringConvertible {
@@ -25,12 +32,13 @@ struct EPlusMembershipPlan: CRUDObject {
     
     var objectId : CRUDObjectId = CRUDObjectInvalidId
     var name : String?
-    var costDescription : String?
-    var benefitGroups : [BenefitGroup]?
-    var price : Int?
-    var type : PlanType = .Unknown
-    var durationDays : Int?
-    var membershipImageName : String {
+    var costDescription: String?
+    var planOptions: [EPlusPlanOption]?
+    var benefitGroups: [BenefitGroup]?
+    var price: Int?
+    var type: PlanType = .Unknown
+    var durationDays: Int?
+    var membershipImageName: String {
         switch objectId {
         case CRUDObjectId(PlanType.Family.rawValue):
             return "family_plan_eplus_icon"
