@@ -138,7 +138,7 @@ extension EPlusCorporateAmbulanceDetailsController: UITableViewDataSource {
                     optionCell.peopleAmountString = String("\(minParticipants) - \(maxParticipants)")
                 }
                 else if let minParticipants = option.minParticipants {
-                    let moreThatString = "More that"
+                    let moreThatString = "More than"
                     let text = String("\(moreThatString) \(minParticipants)")
                     let attributedText = NSMutableAttributedString(string:text)
                     attributedText.addAttribute(NSFontAttributeName, value:UIFont(name: "Helvetica", size: 15)!,
