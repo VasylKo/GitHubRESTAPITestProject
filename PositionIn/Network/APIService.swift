@@ -378,31 +378,39 @@ final class APIService {
         items.append(schools)
         
         // Corporate
-//        var corporate = EPlusMembershipPlan()
-//        corporate.objectId = CRUDObjectId(EPlusMembershipPlan.PlanType.Corporate.rawValue)
-//        corporate.name = "Corporate"
-//        corporate.price = 0
-//        corporate.type = .Corporate
-//        corporate.costDescription = "Annual Membership Rate"
-//        var corporateBenefits = [String]()
-//        corporateBenefits.append("Access to Medical Helpline 24/7.")
-//        corporateBenefits.append("Unlimited emergency ambulance services.")
-//        corporateBenefits.append("Treatment and stabilization on site.")
-//        corporateBenefits.append("Transfer to Hospital after stabilization.")
-//        var corporateOtherBenefits = [String]()
-//        corporateOtherBenefits.append("No age limit.")
-//        corporateOtherBenefits.append("No pre existing conditions.")
-//        corporateOtherBenefits.append("Congenital conditions covered.")
-//        corporateOtherBenefits.append("Medically indicated transfers from Hospital to home.")
-//        corporateOtherBenefits.append("Extension of membership to dependants with an extra fee.")
-//        var corporateCover = [String]()
-//        corporateCover.append("24/7 Ambulance membership for employees.")
-//        corporateCover.append("Membership is restricted within the work premise and sometimes within the town in the residential areas.")
-//        corporate.benefits = [String: [String]]()
-//        corporate.benefits?["Benefits"] = corporateBenefits
-//        corporate.benefits?["Other Benefits"] = corporateOtherBenefits
-//        corporate.benefits?["This Cover"] = corporateCover
-//        items.append(corporate)
+        var corporate = EPlusMembershipPlan()
+        corporate.objectId = CRUDObjectId(EPlusMembershipPlan.PlanType.Corporate.rawValue)
+        corporate.name = "Corporate"
+        corporate.type = .Corporate
+        
+        var corporatePlanOptions = [EPlusPlanOption]()
+        corporatePlanOptions.append(EPlusPlanOption(price: 3000, minParticipants: 1, maxParticipants: 9, costDescription: "Annually (per staff)"))
+        corporatePlanOptions.append(EPlusPlanOption(price: 2900, minParticipants: 10, maxParticipants: 50, costDescription: "Annually (per staff)"))
+        corporatePlanOptions.append(EPlusPlanOption(price: 2800, minParticipants: 51, maxParticipants: 100, costDescription: "Annually (per staff)"))
+        corporatePlanOptions.append(EPlusPlanOption(price: 2700, minParticipants: 101, maxParticipants: 500, costDescription: "Annually (per staff)"))
+        corporatePlanOptions.append(EPlusPlanOption(price: 2500, minParticipants: 501, maxParticipants: nil, costDescription: "Annually (per staff)"))
+        corporate.planOptions = corporatePlanOptions
+        corporate.costDescription = "Annual Membership Rate"
+        var corporateBenefitGroups = [BenefitGroup]()
+        var corporateBenefits = [String]()
+        corporateBenefits.append("Access to Medical Helpline 24/7.")
+        corporateBenefits.append("Unlimited emergency ambulance services.")
+        corporateBenefits.append("Treatment and stabilization on site.")
+        corporateBenefits.append("Transfer to Hospital after stabilization.")
+        corporateBenefitGroups.append(BenefitGroup(title: "Benefits", benefits: corporateBenefits))
+        var corporateOtherBenefits = [String]()
+        corporateOtherBenefits.append("No age limit.")
+        corporateOtherBenefits.append("No pre existing conditions.")
+        corporateOtherBenefits.append("Congenital conditions covered.")
+        corporateOtherBenefits.append("Medically indicated transfers from Hospital to home.")
+        corporateOtherBenefits.append("Extension of membership to dependants with an extra fee.")
+        corporateBenefitGroups.append(BenefitGroup(title: "Other Benefits", benefits: corporateOtherBenefits))
+        var corporateCover = [String]()
+        corporateCover.append("24/7 Ambulance membership for employees.")
+        corporateCover.append("Membership is restricted within the work premise and sometimes within the town in the residential areas.")
+        corporateBenefitGroups.append(BenefitGroup(title: "This Cover", benefits: corporateCover))
+        corporate.benefitGroups = corporateBenefitGroups
+        items.append(corporate)
         
         // Residential Estates
         var residential = EPlusMembershipPlan()
