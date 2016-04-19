@@ -153,7 +153,7 @@ extension AddMenuView {
         static func promotionItemWithAction(action: ItemAction?) -> MenuItem {
             return MenuItem(
                 title: NSLocalizedString("Call an\nAmbuance",comment: "Add menu: PROMOTION"),
-                icon: UIImage(named: "AddPromotion")!,
+                icon: UIImage(named: "ambulance_icon")!,
                 color: UIScheme.mainThemeColor,
                 action: action
             )
