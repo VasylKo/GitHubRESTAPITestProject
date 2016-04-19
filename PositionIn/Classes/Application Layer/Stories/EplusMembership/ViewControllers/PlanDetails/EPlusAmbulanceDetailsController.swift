@@ -107,6 +107,13 @@ extension EPlusAmbulanceDetailsController {
         
         return .Unknown
     }
+    
+    private func generalSectionElementIndexForTableViewSectionIndex(index: Int) -> Int {
+        guard let plan = plan else { return 0 }
+        let corporateSection = plan.planOptions == nil ? 0 : 1
+        let correctedSectionNumber = index - corporateSection
+        return correctedSectionNumber
+    }
 }
 
 extension EPlusAmbulanceDetailsController: UITableViewDelegate {
@@ -119,15 +126,26 @@ extension EPlusAmbulanceDetailsController: UITableViewDelegate {
 extension EPlusAmbulanceDetailsController: UITableViewDataSource {
     
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        guard let plan = plan else { return "" }
         
-        //Look if there is last section with additional benefits
-        if let _ = plan?.otherBenefits where section == (tableView.numberOfSections - 1) {
-            return "-------------------"
-        } else if let benefitGroups = plan?.benefitGroups, let title = benefitGroups[section].title {
+        let sectionType = getSectionType(section)
+        
+        switch sectionType {
+        case .CorporateSection:
+            return ""
+            
+        case .GeneralSection:
+            let benefitGroups = plan.benefitGroups!
+            let index = generalSectionElementIndexForTableViewSectionIndex(section)
+            let title = benefitGroups[index].title
             return title
-        }
+            
+        case .SpecialOfferSection:
+            return "-------------------"
         
-        return ""
+        default:
+            return ""
+        }
     }
     
     func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
@@ -139,36 +157,78 @@ extension EPlusAmbulanceDetailsController: UITableViewDataSource {
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        //There could be one section that is alway at the bottom
-        if let plan = self.plan, let benefitGroups = plan.benefitGroups {
-            let lastSection = plan.otherBenefits == nil ? 0 : 1
-            return benefitGroups.count + lastSection
-        }
-        return 0
+        guard let plan = plan else { return 0 }
+        
+        let corporateSection = plan.planOptions == nil ? 0 : 1
+        let lastSection = plan.otherBenefits == nil ? 0 : 1
+        let generalSections = plan.benefitGroups?.count ?? 0
+        
+        return corporateSection + generalSections + lastSection
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
        
-        //Look if there is last section with additional benefits
-        if let lastSectionElements = plan?.otherBenefits where section == (tableView.numberOfSections - 1) {
-            return lastSectionElements.count
-        } else if let benefitGroups = plan?.benefitGroups, benefits = benefitGroups[section].infoBlocks {
-            return benefits.count
+        guard let plan = plan else { return 0 }
+        
+        let sectionType = getSectionType(section)
+        
+        switch sectionType {
+        case .CorporateSection:
+            return 0
+            
+        case .GeneralSection:
+            let index = generalSectionElementIndexForTableViewSectionIndex(section)
+            let rowsCount = plan.benefitGroups![index].infoBlocks?.count ?? 0
+            return rowsCount
+            
+        case .SpecialOfferSection:
+            let rowsCount = plan.otherBenefits!.count
+            return rowsCount
+            
+        default:
+            return 0
         }
         
-        return 0
+//        //Look if there is last section with additional benefits
+//        if let lastSectionElements = plan?.otherBenefits where section == (tableView.numberOfSections - 1) {
+//            return lastSectionElements.count
+//        } else if let benefitGroups = plan?.benefitGroups, benefits = benefitGroups[section].infoBlocks {
+//            return benefits.count
+//        }
+        
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(String(EPlusPlanInfoTableViewCell.self),
             forIndexPath: indexPath) as! EPlusPlanInfoTableViewCell
         
-        //Look if there is last section with additional benefits
-        if let lastSectionElements = plan?.otherBenefits where indexPath.section == (tableView.numberOfSections - 1) {
-            cell.planInfoString = lastSectionElements[indexPath.row]
-        } else if let benefitGroups = plan?.benefitGroups, let benefits = benefitGroups[indexPath.section].infoBlocks {
-            cell.planInfoString = benefits[indexPath.row]
+        guard let plan = plan else { return cell }
+        
+        let sectionType = getSectionType(indexPath.section)
+        
+        switch sectionType {
+        case .CorporateSection:
+            return cell
+            
+        case .GeneralSection:
+            let index = generalSectionElementIndexForTableViewSectionIndex(indexPath.section)
+            if let benefits = plan.benefitGroups![index].infoBlocks {
+                cell.planInfoString = benefits[indexPath.row]
+            }
+            
+        case .SpecialOfferSection:
+            cell.planInfoString = plan.otherBenefits![indexPath.row]
+            
+        default:
+            break
         }
+        
+//        //Look if there is last section with additional benefits
+//        if let lastSectionElements = plan?.otherBenefits where indexPath.section == (tableView.numberOfSections - 1) {
+//            cell.planInfoString = lastSectionElements[indexPath.row]
+//        } else if let benefitGroups = plan?.benefitGroups, let benefits = benefitGroups[indexPath.section].infoBlocks {
+//            cell.planInfoString = benefits[indexPath.row]
+//        }
 
         return cell
     }
