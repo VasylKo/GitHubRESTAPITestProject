@@ -39,14 +39,8 @@ class NewsTableViewCell: TableViewCell {
             self.likeButton.setImage(image, forState: .Normal)
         }
         
-        if let imgURL = m!.item.image {
-            feedItemImageView.setImageFromURL(imgURL)
-            self.imageHeightConstaint.constant = 160
-        }
-        else {
-            feedItemImageView.image = nil
-            self.imageHeightConstaint.constant = 0
-        }
+        feedItemImageView.setImageFromURL(m!.item.image, placeholder: UIImage(named: "news_placeholder"))
+        self.imageHeightConstaint.constant = 160
         
         headerLabel.text = m!.item.name
         if let date = m!.item.date {
