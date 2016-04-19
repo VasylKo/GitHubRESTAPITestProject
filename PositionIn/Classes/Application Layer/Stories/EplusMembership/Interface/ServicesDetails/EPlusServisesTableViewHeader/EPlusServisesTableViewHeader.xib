@@ -17,12 +17,12 @@
                         <constraint firstAttribute="height" constant="120" id="DeA-oy-efo"/>
                     </constraints>
                 </imageView>
-                <view alpha="0.64999997615814209" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WH5-gk-Xoc">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WH5-gk-Xoc">
                     <rect key="frame" x="0.0" y="78" width="600" height="42"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="90A-Db-B94">
                             <rect key="frame" x="75" y="5" width="500" height="32"/>
-                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                             <userDefinedRuntimeAttributes>
@@ -30,7 +30,7 @@
                             </userDefinedRuntimeAttributes>
                         </label>
                     </subviews>
-                    <color key="backgroundColor" red="0.14901960780000001" green="0.14901960780000001" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.69999999999999996" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstItem="90A-Db-B94" firstAttribute="leading" secondItem="WH5-gk-Xoc" secondAttribute="leading" constant="75" id="9DY-b1-4rW"/>
                         <constraint firstAttribute="trailing" secondItem="90A-Db-B94" secondAttribute="trailing" constant="25" id="CX3-4j-S6L"/>

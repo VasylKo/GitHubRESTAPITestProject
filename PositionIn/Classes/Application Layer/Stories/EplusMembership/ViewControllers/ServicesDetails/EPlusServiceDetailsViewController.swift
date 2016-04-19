@@ -58,10 +58,9 @@ class EPlusServiceDetailsViewController: UIViewController {
         
         let headerView = NSBundle.mainBundle().loadNibNamed(String(EPlusServisesTableViewHeader.self), owner: nil, options: nil).first
         if let headerView = headerView as? EPlusServisesTableViewHeader {
-            
             headerView.titleString = service.name
             headerView.iconImageString = service.serviceImageName
-            
+            headerView.mainImageString = service.mainImageName
             tableView.tableHeaderView = headerView
         }
     }
