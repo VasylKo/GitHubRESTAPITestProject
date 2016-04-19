@@ -22,7 +22,7 @@ class AboutEplusServiceController: UIViewController {
     private let cellReuseID = "Cell"
     private let headerReuseID = "TableSectionHeader"
     private var isLoadingData = true
-    
+    private var data: CollectionResponse<EPlusService>?
     private let router : EPlusMembershipRouter
     @IBOutlet weak var tableView: UITableView?
     
@@ -57,9 +57,15 @@ class AboutEplusServiceController: UIViewController {
     
     // MARK: - Private implementation
     private func getData() {
-//        api().getEPlusServices().onSuccess { (<#CollectionResponse<EPlusService>#>) -> Void in
-//            <#code#>
-//        }
+        api().getEPlusServices().onSuccess { [weak self] (plans: CollectionResponse<EPlusService>) -> Void in
+            if plans.total > 0 {
+                self?.data = plans
+            }
+            
+        }.onComplete {[weak self] _ in
+            self?.isLoadingData = false
+            self?.tableView?.reloadData()
+        }
     }
     
     private func configureContactUsCell(cell: AboutEplusServiceTableViewCell) {
@@ -97,17 +103,17 @@ extension AboutEplusServiceController: UITableViewDataSource {
         switch sectionType {
         case .HeaderView:
             return  0
+        
         case .ServicesList:
-            //TODO: implement based on model
             if isLoadingData {
                 //Row with spiner
                 return 1
             } else {
-                
+                return self.data?.total ?? 0
             }
-            return  3
             
         case .ContactUsButton:
+            
             return 1
         default:
             return 0
@@ -124,11 +130,11 @@ extension AboutEplusServiceController: UITableViewDataSource {
             configureContactUsCell(cell)
         
         case .ServicesList:
-            //TODO: implement cell config
-            if !isLoadingData {
-                cell.icon?.image = UIImage(named: "service_2_eplus_icon")!
-                cell.title?.text = "Service"
-                cell.subTitle?.text = NSLocalizedString("Description of Service")
+            if !isLoadingData, let service = data?.items[indexPath.row] {
+                let image = UIImage(named: service.serviceImageName)
+                let title = service.name
+                let subTitle = service.shortDesc
+                cell.configureCellWith(title, subTitle: subTitle, image: image)
             }
         
         default:
@@ -176,6 +182,7 @@ extension AboutEplusServiceController: UITableViewDelegate {
         switch sectionType {
         case .ServicesList:
             //TODO: Implement router
+            showContactUsController(nil)
             break
         
         case .ContactUsButton:
@@ -185,6 +192,15 @@ extension AboutEplusServiceController: UITableViewDelegate {
             break
         }
         
+    }
+    
+    func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
+        //Cant press on loading cell
+        if let sectionType = Section(rawValue: indexPath.section) where sectionType == .ServicesList && isLoadingData {
+            return nil
+        } else {
+            return indexPath
+        }
     }
     
 }
