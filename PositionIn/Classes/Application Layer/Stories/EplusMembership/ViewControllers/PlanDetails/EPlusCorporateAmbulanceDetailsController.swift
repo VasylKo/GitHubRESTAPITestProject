@@ -26,10 +26,9 @@ class EPlusCorporateAmbulanceDetailsController: UIViewController {
         setupUI()
     }
     
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-        setupUI()
-        setupTableViewHeaderFooter()
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        sizeHeaderToFit()
     }
     
     func setupUI() {
@@ -44,6 +43,20 @@ class EPlusCorporateAmbulanceDetailsController: UIViewController {
         
         tableView.separatorStyle = .None
         tableView.bounces = false
+    }
+    
+    private func sizeHeaderToFit() {
+        let headerView = tableView.tableHeaderView!
+        
+        headerView.setNeedsLayout()
+        headerView.layoutIfNeeded()
+        
+        let height = headerView.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize).height
+        var frame = headerView.frame
+        frame.size.height = height
+        headerView.frame = frame
+        
+        tableView.tableHeaderView = headerView
     }
     
     func setupTableViewHeaderFooter() {
