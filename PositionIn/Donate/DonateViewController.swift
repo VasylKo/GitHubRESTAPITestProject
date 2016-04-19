@@ -20,7 +20,7 @@ class DonateViewController: XLFormViewController, PaymentReponseDelegate {
         case Error = "Error"
     }
     
-    private static let mpesaPeymentAmountErrorMessage = NSLocalizedString("The minimum amount should be 10 for m-pesa payment", comment: "Mpesa payment amount warning")
+    private static let mpesaPeymentAmountErrorMessage = NSLocalizedString("The minimum amount should be 10 for M-Pesa payment", comment: "Mpesa payment amount warning")
 
     
     enum DonationType: Int {

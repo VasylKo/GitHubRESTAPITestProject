@@ -26,10 +26,9 @@ class EPlusAmbulanceDetailsController: UIViewController {
         setupUI()
     }
     
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-        setupUI()
-        setupTableViewHeaderFooter()
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        sizeHeaderToFit()
     }
     
     func setupUI() {
@@ -45,6 +44,20 @@ class EPlusAmbulanceDetailsController: UIViewController {
         tableView.registerNib(nib, forCellReuseIdentifier: String(EPlusPlanInfoTableViewCell.self))
         tableView.separatorStyle = .None
         tableView.bounces = false
+    }
+    
+    private func sizeHeaderToFit() {
+        guard let headerView = tableView?.tableHeaderView else { return }
+        
+        headerView.setNeedsLayout()
+        headerView.layoutIfNeeded()
+        
+        let height = headerView.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize).height
+        var frame = headerView.frame
+        frame.size.height = height
+        headerView.frame = frame
+        
+        tableView.tableHeaderView = headerView
     }
     
     func setupTableViewHeaderFooter() {
@@ -93,8 +106,8 @@ extension EPlusAmbulanceDetailsController: UITableViewDataSource {
     func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         
         if let headerView = view as? UITableViewHeaderFooterView {
-            headerView.textLabel?.font = UIFont(name: "Helvetica Neue", size: 17)
-            headerView.textLabel?.textColor = UIColor.bt_colorWithBytesR(169, g: 169, b: 169)
+            headerView.textLabel?.font = UIScheme.tableSectionTitleFont
+            headerView.textLabel?.textColor = UIScheme.tableSectionTitleColor
         }
     }
     
