@@ -66,6 +66,15 @@ class AboutEplusServiceController: UIViewController {
 
     // MARK: - Table view data source
 extension AboutEplusServiceController: UITableViewDataSource {
+    
+    func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        
+        if let headerView = view as? UITableViewHeaderFooterView {
+            headerView.textLabel?.font = UIScheme.tableSectionTitleFont
+            headerView.textLabel?.textColor = UIScheme.tableSectionTitleColor
+        }
+    }
+    
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         //First section with header, 2nd - with dynamic services list, 3d - static contact us button
         return Section.sectionsCoun
@@ -128,7 +137,7 @@ extension AboutEplusServiceController: UITableViewDelegate {
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 60.0
+        return 74.0
     }
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

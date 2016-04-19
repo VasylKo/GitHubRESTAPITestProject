@@ -106,8 +106,8 @@ extension EPlusAmbulanceDetailsController: UITableViewDataSource {
     func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         
         if let headerView = view as? UITableViewHeaderFooterView {
-            headerView.textLabel?.font = UIFont(name: "Helvetica Neue", size: 17)
-            headerView.textLabel?.textColor = UIColor.bt_colorWithBytesR(169, g: 169, b: 169)
+            headerView.textLabel?.font = UIScheme.tableSectionTitleFont
+            headerView.textLabel?.textColor = UIScheme.tableSectionTitleColor
         }
     }
     
