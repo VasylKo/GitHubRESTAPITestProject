@@ -11,17 +11,16 @@ import UIKit
 class AboutEplusServiceController: UIViewController {
 
     private enum Section: Int {
-        case HeaderView = 0
-        case ServicesList = 1
-        case ContactUsButton = 2
+        case ServicesList = 0
+        case ContactUsButton = 1
         case Unknown
         
-        static let sectionsCoun = 3
+        static let sectionsCoun = 2
     }
     
     private let cellReuseID = "Cell"
-    private let headerReuseID = "TableSectionHeader"
-    
+    private var isLoadingData = true
+    private var data: CollectionResponse<EPlusService>?
     private let router : EPlusMembershipRouter
     @IBOutlet weak var tableView: UITableView?
     
@@ -41,8 +40,20 @@ class AboutEplusServiceController: UIViewController {
         super.viewDidLoad()
         setupUI()
         tableView?.registerNib(UINib(nibName: "AboutEplusServiceTableViewCell", bundle: nil), forCellReuseIdentifier: cellReuseID)
-        tableView?.registerNib(UINib(nibName: "AboutEplusServiceTableViewHeaderView", bundle: nil), forHeaderFooterViewReuseIdentifier: headerReuseID)
+
+        //Add table view header
+        if let headerView = NSBundle.mainBundle().loadNibNamed(String(AboutEplusServiceTableViewHeaderView.self), owner: nil, options: nil).first as? UIView {
+            tableView?.tableHeaderView = headerView
+        }
+        
+        getData()
     }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        sizeHeaderToFit()
+    }
+    
     
     // MARK: - UI setup
     private func setupUI() {
@@ -51,11 +62,38 @@ class AboutEplusServiceController: UIViewController {
         navigationItem.setRightBarButtonItem(rightButton, animated: false)
     }
     
+    private func sizeHeaderToFit() {
+        guard let headerView = tableView?.tableHeaderView else { return }
+        
+        headerView.setNeedsLayout()
+        headerView.layoutIfNeeded()
+        
+        let height = headerView.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize).height
+        var frame = headerView.frame
+        frame.size.height = height
+        headerView.frame = frame
+        
+        tableView!.tableHeaderView = headerView
+    }
+    
     // MARK: - Private implementation
+    private func getData() {
+        api().getEPlusServices().onSuccess { [weak self] (plans: CollectionResponse<EPlusService>) -> Void in
+            if plans.total > 0 {
+                self?.data = plans
+            }
+            
+        }.onComplete {[weak self] _ in
+            self?.isLoadingData = false
+            self?.tableView?.reloadData()
+        }
+    }
+    
     private func configureContactUsCell(cell: AboutEplusServiceTableViewCell) {
-        cell.icon?.image = UIImage(named: "service_5_eplus_icon")
-        cell.title?.text = NSLocalizedString("Contact Us")
-        cell.subTitle?.text = NSLocalizedString("E-Plus Medical Service")
+        let image = UIImage(named: "service_5_eplus_icon")
+        let title = NSLocalizedString("Contact Us")
+        let subTitle = NSLocalizedString("E-Plus Medical Service")
+        cell.configureCellWith(title, subTitle: subTitle, image: image)
     }
     
     func showContactUsController(sender: AnyObject?) {
@@ -66,6 +104,15 @@ class AboutEplusServiceController: UIViewController {
 
     // MARK: - Table view data source
 extension AboutEplusServiceController: UITableViewDataSource {
+    
+    func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        
+        if let headerView = view as? UITableViewHeaderFooterView {
+            headerView.textLabel?.font = UIScheme.tableSectionTitleFont
+            headerView.textLabel?.textColor = UIScheme.tableSectionTitleColor
+        }
+    }
+    
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         //First section with header, 2nd - with dynamic services list, 3d - static contact us button
         return Section.sectionsCoun
@@ -75,12 +122,15 @@ extension AboutEplusServiceController: UITableViewDataSource {
         let sectionType = Section(rawValue: section) ?? Section.Unknown
         
         switch sectionType {
-        case .HeaderView:
-            return  0
+        case .ServicesList where isLoadingData:
+           //Row with spiner
+            return 1
+            
         case .ServicesList:
-            //TODO: implement based on model
-            return  3
+            return self.data?.total ?? 0
+
         case .ContactUsButton:
+            
             return 1
         default:
             return 0
@@ -97,10 +147,12 @@ extension AboutEplusServiceController: UITableViewDataSource {
             configureContactUsCell(cell)
         
         case .ServicesList:
-            //TODO: implement cell config
-            cell.icon?.image = UIImage(named: "service_2_eplus_icon")!
-            cell.title?.text = "Service"
-            cell.subTitle?.text = NSLocalizedString("Description of Service")
+            if !isLoadingData, let service = data?.items[indexPath.row] {
+                let image = UIImage(named: service.serviceImageName)
+                let title = service.name
+                let subTitle = service.shortDesc
+                cell.configureCellWith(title, subTitle: subTitle, image: image)
+            }
         
         default:
             break
@@ -108,14 +160,6 @@ extension AboutEplusServiceController: UITableViewDataSource {
         
         return cell
     }
-    
-    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        guard let sectionType = Section(rawValue: section) where sectionType == .HeaderView else { return nil }
-        
-        let headerView = tableView.dequeueReusableHeaderFooterViewWithIdentifier(headerReuseID)
-        return headerView
-    }
-    
     
 }
 
@@ -128,15 +172,7 @@ extension AboutEplusServiceController: UITableViewDelegate {
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 60.0
-    }
-    
-    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if let sectionType = Section(rawValue: section) where sectionType == .HeaderView {
-            return 120.0
-        } else {
-            return 20
-        }
+        return 74.0
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -156,6 +192,15 @@ extension AboutEplusServiceController: UITableViewDelegate {
             break
         }
         
+    }
+    
+    func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
+        //Cant press on loading cell
+        if let sectionType = Section(rawValue: indexPath.section) where sectionType == .ServicesList && isLoadingData {
+            return nil
+        } else {
+            return indexPath
+        }
     }
     
 }

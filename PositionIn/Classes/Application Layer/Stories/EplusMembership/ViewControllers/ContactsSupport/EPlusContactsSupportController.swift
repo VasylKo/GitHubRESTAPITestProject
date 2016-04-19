@@ -216,6 +216,16 @@ extension EPlusContactsSupportController {
 
     // MARK: - Table view data source
 extension EPlusContactsSupportController: UITableViewDataSource {
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return dataStore.count
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        let section_obj = dataStore[section]
+        let dataArray = section_obj[dataKey] as? [AnyObject]
+        
+        return dataArray?.count ?? 0
+    }
     
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         let section = dataStore[section]
@@ -234,6 +244,7 @@ extension EPlusContactsSupportController: UITableViewDataSource {
         return cell
     }
     
+    // MARK: - Helper fot table cell
     private func cellForTableView(tableView: UITableView) -> UITableViewCell {
         let cellIdentifier = "Cell"
         if let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier) {
@@ -270,16 +281,15 @@ extension EPlusContactsSupportController: UITableViewDataSource {
 
 // MARK: - Table view delegate
 extension EPlusContactsSupportController: UITableViewDelegate {
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return dataStore.count
+    func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        
+        if let headerView = view as? UITableViewHeaderFooterView {
+            headerView.textLabel?.font = UIScheme.tableSectionTitleFont
+            headerView.textLabel?.textColor = UIScheme.tableSectionTitleColor
+        }
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let section_obj = dataStore[section]
-        let dataArray = section_obj[dataKey] as? [AnyObject]
-        
-        return dataArray?.count ?? 0
-    }
+    
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
