@@ -21,6 +21,8 @@ class CallAmbulanceViewController: BaseAddItemViewController {
         case Photo = "Photo"
     }
     
+    private var footerButtom: EplusSIgnUpNowButton?
+    
     private enum IncidentType: Int {
         case Other = 0, Fainted, Collapsed, NonResponsive, BreathingFast, Sweating, Bleeding, NotBreathing, NotTalking, Unconscious, Seizure, Choking, ChestPain
         
@@ -40,6 +42,7 @@ class CallAmbulanceViewController: BaseAddItemViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.tintColor = UIScheme.mainThemeColor
+        addFooterButton()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -142,13 +145,7 @@ class CallAmbulanceViewController: BaseAddItemViewController {
         }
     }
     
-    @IBAction func sendButtonTouched(sender: AnyObject) {
-        let validationErrors : Array<NSError> = self.formValidationErrors() as! Array<NSError>
-        if (validationErrors.count > 0){
-            self.showFormValidationError(validationErrors.first)
-            return
-        }
-        
+    private func sendCallAmbulanceRequest() {
         let values = formValues()
         
         if  let imageUpload = uploadAssets(values[Tags.Photo.rawValue]) {
@@ -189,8 +186,54 @@ class CallAmbulanceViewController: BaseAddItemViewController {
             }
         }
     }
-
+    
+    @IBAction func sendButtonTouched(sender: AnyObject) {
+        let validationErrors : Array<NSError> = self.formValidationErrors() as! Array<NSError>
+        if (validationErrors.count > 0){
+            self.showFormValidationError(validationErrors.first)
+            return
+        }
+        
+        let message = "Fee may be charged to a non E-Plus members depending on the distance."
+        let alertController = UIAlertController(title: nil, message: message, preferredStyle: .Alert)
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) in
+        }
+        alertController.addAction(cancelAction)
+        
+        let SendAction = UIAlertAction(title: "Send", style: .Default) { [weak self](action) in
+            self?.sendCallAmbulanceRequest()
+        }
+        alertController.addAction(SendAction)
+        
+        
+        self.presentViewController(alertController, animated: true) {}
+    }
+    
     @IBAction func cancelButtonTouched(sender: AnyObject) {
         self.navigationController?.popToRootViewControllerAnimated(true)
+    }
+    
+    //MARK: - Footer button
+    private func addFooterButton() {
+        let buttonHeight = CGFloat(60)
+        let button = EplusSIgnUpNowButton(eplusButtonType: .SignUP)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: Selector("footerButtonTouched:"), forControlEvents: UIControlEvents.TouchUpInside)
+        view.insertSubview(button, aboveSubview: tableView)
+        
+        //Add buttons constaraints
+        let bottomConstraint = NSLayoutConstraint(item: view, attribute: .Bottom, relatedBy: .Equal, toItem: button, attribute: .Bottom, multiplier: 1.0, constant: 0.0)
+        let trailingConstraint = NSLayoutConstraint(item: view, attribute: .Trailing, relatedBy: .Equal, toItem: button, attribute: .Trailing, multiplier: 1.0, constant: 0.0)
+        let leadingConstraint = NSLayoutConstraint(item: view, attribute: .Leading, relatedBy: .Equal, toItem: button, attribute: .Leading, multiplier: 1.0, constant: 0.0)
+        let heightConstraint = NSLayoutConstraint(item: button, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1.0, constant: buttonHeight)
+        button.addConstraint(heightConstraint)
+        view.addConstraints([bottomConstraint, trailingConstraint, leadingConstraint])
+        
+        footerButtom = button
+    }
+    
+    func footerButtonTouched(sender: UIButton) {
+        EPlusMembershipRouterImplementation().showPlansViewController(from: self)
     }
 }

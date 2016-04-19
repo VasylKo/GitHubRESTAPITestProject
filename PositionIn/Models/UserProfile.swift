@@ -66,6 +66,34 @@ enum EducationLevel: Int, CustomStringConvertible  {
     }
 }
 
+enum BloodGroup: Int, CustomStringConvertible  {
+    case Unknown = 0
+    case GroupA
+    case GroupB
+    case GroupAB
+    case GroupO
+    case DontKnow
+    
+    // CustomStringConvertible
+    var description: String {
+        switch self {
+        case .Unknown:
+            return "Unknown"
+        case .GroupA:
+            return "A"
+        case .GroupB:
+            return "B"
+        case .GroupAB:
+            return "AB"
+        case .GroupO:
+            return "O"
+        case .DontKnow:
+            return "Don't know"
+        }
+    }
+}
+
+
 final class UserProfile: CRUDObject {
     var objectId: CRUDObjectId = CRUDObjectInvalidId
     var avatar: NSURL?
@@ -80,12 +108,16 @@ final class UserProfile: CRUDObject {
     var backgroundImage: NSURL?
     var location: Location?
     var membershipDetails : MembershipDetails?
+    var eplusMembershipDetails : EplusMembershipDetails?
     var passportNumber: String?
     var postalAddress: Location?
     var profession: String?
     var permanentResidence: String?
     var educationLevel: EducationLevel?
     var countyBranch : Community?
+
+    var bloodGroup: BloodGroup?
+    var allergies: String?
     
     var guest: Bool =  false
     var shops: [ObjectInfo]?

@@ -121,6 +121,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         XLFormViewController.cellClassesForRowDescriptorTypes()[XLFormRowDescriptorTypeDonationPaymentAmountCell] =
         "DonationPaymentAmountCell"
         
+        XLFormViewController.cellClassesForRowDescriptorTypes()[XLFormRowDescriptorTypeAmbulancePayment] =
+        "EPlusPaymentTableViewCell"
+        
         BTAppSwitch.setReturnURLScheme("\(NSBundle.mainBundle().bundleIdentifier!).payments")
 
         let settings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound],
@@ -129,9 +132,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIApplication.sharedApplication().registerForRemoteNotifications()
         
         #if DEBUG
-        Fabric.with([Crashlytics.self])
+//        Fabric.with([Crashlytics.self])
         #endif
-        NewRelicController.start()
+//111        NewRelicController.start()
         
         let notificationSettings = LNNotificationAppSettings()
         notificationSettings.alertStyle = .Banner
