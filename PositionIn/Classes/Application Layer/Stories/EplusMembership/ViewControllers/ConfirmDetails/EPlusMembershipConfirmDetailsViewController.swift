@@ -346,9 +346,11 @@ class EPlusMembershipConfirmDetailsViewController : XLFormViewController {
         if let firstName = self.userProfile?.firstName {
             firstNameRow.value = firstName
         }
+        self.firstNameRow.disabled = true
         infoSection.addFormRow(self.firstNameRow)
         
         lastNameRow.value = self.userProfile?.lastName
+        self.lastNameRow.disabled = true
         infoSection.addFormRow(self.lastNameRow)
     
         infoSection.addFormRow(self.IDPassPortNumberRow)
