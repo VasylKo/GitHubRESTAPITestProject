@@ -115,7 +115,7 @@ extension EPlusCorporateAmbulanceDetailsController: UITableViewDataSource {
             }
         }
         else {
-            if let plan = self.plan, let benefitGroups = plan.benefitGroups, let benefits = benefitGroups[section - 1].benefits {
+            if let plan = self.plan, let benefitGroups = plan.benefitGroups, let benefits = benefitGroups[section - 1].infoBlocks {
                 return benefits.count
             }
         }
