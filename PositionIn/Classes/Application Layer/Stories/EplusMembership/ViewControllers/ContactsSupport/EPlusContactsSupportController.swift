@@ -38,9 +38,9 @@ class EPlusContactsSupportController: UIViewController {
     
     private let section5Title = ""
     private let text1Sec5 = "info@eplus.co.ke"
-    private let picForText1Sec5 = "individual_plan_eplus_icon"
+    private let picForText1Sec5 = "email_icon"
     private let text2Sec5 = "www.eplus.co.ke"
-    private let picForText2Sec5 = "service_2_eplus_icon"
+    private let picForText2Sec5 = "website_icon"
 
     
     

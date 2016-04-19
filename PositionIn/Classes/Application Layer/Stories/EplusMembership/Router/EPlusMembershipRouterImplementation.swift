@@ -123,7 +123,7 @@ class EPlusMembershipRouterImplementation: BaseRouterImplementation, EPlusMember
     }
     
     func showContactSupportController(from sourceViewController : UIViewController) {
-        //sourceViewController.navigationController?.pushViewController(AboutEplusServiceController(router: self), animated: true)
+        sourceViewController.navigationController?.pushViewController(EPlusContactsSupportController(router: self), animated: true)
     }
     
     func dismissMembership(from sourceViewController : UIViewController) {
