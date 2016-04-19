@@ -55,7 +55,6 @@ class EPlusAmbulanceDetailsController: UIViewController {
                 headerView.planImageViewString = plan.membershipImageName
                 headerView.planNameString = plan.name
                 headerView.priceString = plan.costDescription
-
             }
             tableView.tableHeaderView = headerView
         }

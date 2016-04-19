@@ -66,8 +66,14 @@ class EPlusMembershipRouterImplementation: BaseRouterImplementation, EPlusMember
     }
     
     func showMembershipPlanDetailsViewController(from sourceViewController : UIViewController, with plan : EPlusMembershipPlan /*, onlyPlanInfo : Bool */) {
-        let membershipDetailsViewController = EPlusAmbulanceDetailsController(router: self, plan: plan /*, onlyPlanInfo: onlyPlanInfo*/)
-        sourceViewController.navigationController?.pushViewController(membershipDetailsViewController, animated: true)
+        switch plan.type {
+        case .Corporate:
+            let membershipDetailsViewController = EPlusCorporateAmbulanceDetailsController(router: self, plan: plan /*, onlyPlanInfo: onlyPlanInfo*/)
+            sourceViewController.navigationController?.pushViewController(membershipDetailsViewController, animated: true)
+        default:
+            let membershipDetailsViewController = EPlusAmbulanceDetailsController(router: self, plan: plan /*, onlyPlanInfo: onlyPlanInfo*/)
+            sourceViewController.navigationController?.pushViewController(membershipDetailsViewController, animated: true)
+        }
     }
 
     func showMembershipConfirmDetailsViewController(from sourceViewController : UIViewController, with plan : EPlusMembershipPlan) {
