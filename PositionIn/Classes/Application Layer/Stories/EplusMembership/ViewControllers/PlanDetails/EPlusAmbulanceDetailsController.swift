@@ -97,9 +97,14 @@ extension EPlusAmbulanceDetailsController: UITableViewDelegate {
 extension EPlusAmbulanceDetailsController: UITableViewDataSource {
     
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if let plan = self.plan, let benefitGroups = plan.benefitGroups, let title = benefitGroups[section].title {
+        
+        //Look if there is last section with additional benefits
+        if let _ = plan?.otherBenefits where section == (tableView.numberOfSections - 1) {
+            return "-------------------"
+        } else if let benefitGroups = plan?.benefitGroups, let title = benefitGroups[section].title {
             return title
         }
+        
         return ""
     }
     
@@ -112,25 +117,37 @@ extension EPlusAmbulanceDetailsController: UITableViewDataSource {
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        //There could be one section that is alway at the bottom
         if let plan = self.plan, let benefitGroups = plan.benefitGroups {
-            return benefitGroups.count
+            let lastSection = plan.otherBenefits == nil ? 0 : 1
+            return benefitGroups.count + lastSection
         }
         return 0
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let plan = self.plan, let benefitGroups = plan.benefitGroups, let benefits = benefitGroups[section].infoBlocks {
+       
+        //Look if there is last section with additional benefits
+        if let lastSectionElements = plan?.otherBenefits where section == (tableView.numberOfSections - 1) {
+            return lastSectionElements.count
+        } else if let benefitGroups = plan?.benefitGroups, benefits = benefitGroups[section].infoBlocks {
             return benefits.count
         }
+        
         return 0
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(String(EPlusPlanInfoTableViewCell.self),
             forIndexPath: indexPath) as! EPlusPlanInfoTableViewCell
-        if let plan = self.plan, let benefitGroups = plan.benefitGroups, let benefits = benefitGroups[indexPath.section].infoBlocks {
+        
+        //Look if there is last section with additional benefits
+        if let lastSectionElements = plan?.otherBenefits where indexPath.section == (tableView.numberOfSections - 1) {
+            cell.planInfoString = lastSectionElements[indexPath.row]
+        } else if let benefitGroups = plan?.benefitGroups, let benefits = benefitGroups[indexPath.section].infoBlocks {
             cell.planInfoString = benefits[indexPath.row]
         }
+
         return cell
     }
 }
