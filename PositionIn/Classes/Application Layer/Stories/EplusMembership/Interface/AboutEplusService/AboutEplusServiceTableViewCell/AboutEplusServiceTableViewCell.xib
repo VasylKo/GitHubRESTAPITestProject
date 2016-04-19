@@ -17,7 +17,7 @@
                     <view hidden="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5Td-dd-h0w" userLabel="CelContainerView">
                         <rect key="frame" x="0.0" y="0.0" width="287" height="72"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="251" image="service_1_eplus_icon" translatesAutoresizingMaskIntoConstraints="NO" id="LfZ-cT-spm" customClass="service_1_eplus_icon">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="251" misplaced="YES" image="service_1_eplus_icon" translatesAutoresizingMaskIntoConstraints="NO" id="LfZ-cT-spm" customClass="service_1_eplus_icon">
                                 <rect key="frame" x="8" y="8" width="56" height="56"/>
                             </imageView>
                             <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2Tb-uT-Zjy" userLabel="LabelsContainerView">

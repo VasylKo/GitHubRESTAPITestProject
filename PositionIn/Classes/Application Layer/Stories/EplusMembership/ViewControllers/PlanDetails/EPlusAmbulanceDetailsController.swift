@@ -28,7 +28,7 @@ class EPlusAmbulanceDetailsController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        sizeHeaderToFit()
+        sizeHeaderFooterToFit()
     }
     
     func setupUI() {
@@ -40,24 +40,53 @@ class EPlusAmbulanceDetailsController: UIViewController {
         
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 44
-        let nib = UINib(nibName: String(EPlusPlanInfoTableViewCell.self), bundle: nil)
+        
+        //General cell
+        var nib = UINib(nibName: String(EPlusPlanInfoTableViewCell.self), bundle: nil)
         tableView.registerNib(nib, forCellReuseIdentifier: String(EPlusPlanInfoTableViewCell.self))
+        
+        //Corporare cell
+        nib = UINib(nibName: String(EPlusCorporatePlanOptionTableViewCell.self), bundle: nil)
+        tableView.registerNib(nib, forCellReuseIdentifier: String(EPlusCorporatePlanOptionTableViewCell.self))
+        
+        //SpecialOfferSection cell
+        nib = UINib(nibName: String(EPlusFtooterSectionTableViewCell.self), bundle: nil)
+        tableView.registerNib(nib, forCellReuseIdentifier: String(EPlusFtooterSectionTableViewCell.self))
+        
+        //SpecialOfferSection header
+        nib = UINib(nibName: String(EPlusAbulanceDetailsTableViewSectionHeaderView.self), bundle: nil)
+        tableView.registerNib(nib, forHeaderFooterViewReuseIdentifier: String(EPlusAbulanceDetailsTableViewSectionHeaderView.self))
+        
+        
         tableView.separatorStyle = .None
         tableView.bounces = false
     }
     
-    private func sizeHeaderToFit() {
-        guard let headerView = tableView?.tableHeaderView else { return }
+    private func sizeHeaderFooterToFit() {
+        guard let headerView = tableView?.tableHeaderView, footerView = tableView?.tableFooterView else { return }
         
+        //Adjust header
         headerView.setNeedsLayout()
         headerView.layoutIfNeeded()
         
-        let height = headerView.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize).height
+        var height = headerView.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize).height
         var frame = headerView.frame
         frame.size.height = height
         headerView.frame = frame
         
         tableView.tableHeaderView = headerView
+        
+        //Adjust footer
+        footerView.setNeedsLayout()
+        footerView.layoutIfNeeded()
+        
+        height = footerView.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize).height
+        frame = footerView.frame
+        frame.size.height = height
+        footerView.frame = frame
+        
+        tableView.tableFooterView = footerView
+  
     }
     
     func setupTableViewHeaderFooter() {
@@ -87,20 +116,89 @@ class EPlusAmbulanceDetailsController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
 }
 
+    //MARK: - Sections Managment
+extension EPlusAmbulanceDetailsController {
+   
+    private enum SectionType {
+        case CorporateSection, GeneralSections (sectionIndex: Int), SpecialOfferSection, Unknown
+    }
+    
+    private func getSectionType(sectionIndex: Int) -> SectionType {
+        guard let plan = plan else { return .Unknown }
+        
+        if let _ = plan.planOptions where sectionIndex == 0 {
+            return .CorporateSection
+        } else if let _ = plan.otherBenefits where sectionIndex == (tableView.numberOfSections - 1) {
+            return .SpecialOfferSection
+        } else if let _ = plan.benefitGroups {
+            let corporateSection = plan.planOptions == nil ? 0 : 1
+            let correctedSectionNumber = sectionIndex - corporateSection
+            return .GeneralSections (sectionIndex: correctedSectionNumber)
+        }
+        
+        return .Unknown
+    }
+}
+
 extension EPlusAmbulanceDetailsController: UITableViewDelegate {
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
+    
 }
 
 extension EPlusAmbulanceDetailsController: UITableViewDataSource {
     
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if let plan = self.plan, let benefitGroups = plan.benefitGroups, let title = benefitGroups[section].title {
+        guard let plan = plan else { return "" }
+        
+        let sectionType = getSectionType(section)
+        
+        switch sectionType {
+        case .CorporateSection:
+            return ""
+            
+        case .GeneralSections (let sectionIndex):
+            let benefitGroups = plan.benefitGroups!
+            let title = benefitGroups[sectionIndex].title
             return title
+        
+        default:
+            return ""
         }
-        return ""
+    }
+    
+    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        let sectionType = getSectionType(section)
+        
+        switch sectionType {
+        case .CorporateSection:
+            return 0
+            
+        case .GeneralSections:
+            return 30
+            
+        case .SpecialOfferSection:
+            return 10
+            
+        default:
+            return 30
+        }
+    }
+    
+    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let sectionType = getSectionType(section)
+        
+        switch sectionType {
+        case .SpecialOfferSection:
+            let headerView = tableView.dequeueReusableHeaderFooterViewWithIdentifier(String(EPlusAbulanceDetailsTableViewSectionHeaderView.self))
+            return headerView
+            
+        default:
+            return nil
+        }
+        
     }
     
     func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
@@ -112,27 +210,98 @@ extension EPlusAmbulanceDetailsController: UITableViewDataSource {
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        if let plan = self.plan, let benefitGroups = plan.benefitGroups {
-            return benefitGroups.count
-        }
-        return 0
+        guard let plan = plan else { return 0 }
+        
+        let corporateSection = plan.planOptions == nil ? 0 : 1
+        let lastSection = plan.otherBenefits == nil ? 0 : 1
+        let GeneralSectionss = plan.benefitGroups?.count ?? 0
+        
+        return corporateSection + GeneralSectionss + lastSection
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let plan = self.plan, let benefitGroups = plan.benefitGroups, let benefits = benefitGroups[section].infoBlocks {
-            return benefits.count
+       
+        guard let plan = plan else { return 0 }
+        
+        let sectionType = getSectionType(section)
+        
+        switch sectionType {
+        case .CorporateSection:
+            let rowsCount = plan.planOptions!.count
+            return rowsCount
+            
+        case .GeneralSections(let sectionIndex):
+            let rowsCount = plan.benefitGroups![sectionIndex].infoBlocks?.count ?? 0
+            return rowsCount
+            
+        case .SpecialOfferSection:
+            let rowsCount = plan.otherBenefits!.count
+            return rowsCount
+            
+        default:
+            return 0
         }
-        return 0
+        
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(String(EPlusPlanInfoTableViewCell.self),
-            forIndexPath: indexPath) as! EPlusPlanInfoTableViewCell
-        if let plan = self.plan, let benefitGroups = plan.benefitGroups, let benefits = benefitGroups[indexPath.section].infoBlocks {
-            cell.planInfoString = benefits[indexPath.row]
+        guard let plan = plan else { return UITableViewCell() }
+        
+        let sectionType = getSectionType(indexPath.section)
+        
+        switch sectionType {
+        case .CorporateSection:
+            let cell = tableView.dequeueReusableCellWithIdentifier(String(EPlusCorporatePlanOptionTableViewCell.self), forIndexPath: indexPath) as! EPlusCorporatePlanOptionTableViewCell
+            configureCorporateCell(cell, atIndexPath: indexPath)
+            return cell
+            
+        case .GeneralSections(let sectionIndex):
+            let cell = tableView.dequeueReusableCellWithIdentifier(String(EPlusPlanInfoTableViewCell.self),
+                forIndexPath: indexPath) as! EPlusPlanInfoTableViewCell
+            
+            if let benefits = plan.benefitGroups![sectionIndex].infoBlocks {
+                cell.planInfoString = benefits[indexPath.row]
+            }
+            
+            return cell
+            
+        case .SpecialOfferSection:
+            let cell = tableView.dequeueReusableCellWithIdentifier(String(EPlusFtooterSectionTableViewCell.self), forIndexPath: indexPath) as! EPlusFtooterSectionTableViewCell
+            cell.titleLabel?.text = plan.otherBenefits![indexPath.row]
+            return cell
+            
+        default:
+            return UITableViewCell()
         }
-        return cell
+
     }
+    
+    //MARK: - Configure cells helper
+    private func configureCorporateCell(cell: EPlusCorporatePlanOptionTableViewCell, atIndexPath indexPath: NSIndexPath) {
+        if let plan = self.plan, let planOptions = plan.planOptions {
+            let option = planOptions[indexPath.row]
+            cell.planInfoString = option.costDescription
+            let currencyFormatter = AppConfiguration().currencyFormatter
+            currencyFormatter.maximumFractionDigits = 0
+            cell.priceString = currencyFormatter.stringFromNumber(option.price ?? 0.0) ?? ""
+            
+            if let minParticipants = option.minParticipants, let maxParticipants = option.maxParticipants {
+                cell.peopleAmountString = String("\(minParticipants) - \(maxParticipants)")
+            }
+            else if let minParticipants = option.minParticipants {
+                let moreThatString = "More than"
+                let text = String("\(moreThatString) \(minParticipants)")
+                let attributedText = NSMutableAttributedString(string:text)
+                attributedText.addAttribute(NSFontAttributeName, value:UIFont(name: "Helvetica", size: 15)!,
+                    range: (text as NSString).rangeOfString(moreThatString))
+                attributedText.addAttribute(NSFontAttributeName, value:UIFont(name: "Helvetica", size: 25)!,
+                    range: (text as NSString).rangeOfString("\(minParticipants)"))
+                cell.attributedPeopleAmountString = attributedText
+            }
+        }
+    }
+    
+    
 }
 
 extension EPlusAmbulanceDetailsController: EPlusSelectPlanTableViewFooterViewDelegate {
