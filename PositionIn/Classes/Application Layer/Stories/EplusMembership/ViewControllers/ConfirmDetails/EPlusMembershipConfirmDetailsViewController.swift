@@ -80,10 +80,10 @@ class EPlusMembershipConfirmDetailsViewController : XLFormViewController {
     lazy private var IDPassPortNumberRow: XLFormRowDescriptor = {
         let IDPassPortNumberRow = XLFormRowDescriptor(tag: Tags.IDPassportNumber.rawValue,
             rowType: XLFormRowDescriptorTypeText, title: NSLocalizedString("ID/Passport Number"))
-        IDPassPortNumberRow.required = false
+        IDPassPortNumberRow.required = true
         IDPassPortNumberRow.cellConfig["textLabel.textColor"] = UIScheme.mainThemeColor
         IDPassPortNumberRow.cellConfig["tintColor"] = UIScheme.mainThemeColor
-        IDPassPortNumberRow.cellConfig["textField.placeholder"] = NSLocalizedString("Optional")
+        IDPassPortNumberRow.cellConfig["textField.placeholder"] = NSLocalizedString("Required")
         return IDPassPortNumberRow
     }()
     
@@ -155,7 +155,18 @@ class EPlusMembershipConfirmDetailsViewController : XLFormViewController {
     
     // Number of Dependents
     lazy private var numberOfDependentsRow: XLFormRowDescriptor = {
-        let row = XLFormRowDescriptor(tag: Tags.NumberOfDependents.rawValue, rowType: XLFormRowDescriptorTypeInteger, title: NSLocalizedString("Number of Dependents", comment: ""))
+        let row = XLFormRowDescriptor(tag: Tags.NumberOfDependents.rawValue, rowType: XLFormRowDescriptorTypeSelectorPush, title: NSLocalizedString("Number of Dependents", comment: ""))
+        
+        var selectorOptions: [XLFormOptionsObject] = []
+        
+        // TODO: Need to refactor
+        selectorOptions.append(XLFormOptionsObject(value: NSNumber(integer: 1), displayText: "1"))
+        selectorOptions.append(XLFormOptionsObject(value: NSNumber(integer: 2), displayText: "2"))
+        selectorOptions.append(XLFormOptionsObject(value: NSNumber(integer: 3), displayText: "3"))
+        selectorOptions.append(XLFormOptionsObject(value: NSNumber(integer: 4), displayText: "4"))
+        selectorOptions.append(XLFormOptionsObject(value: NSNumber(integer: 5), displayText: "5"))
+        row.selectorOptions = selectorOptions
+        
         row.cellConfig.setObject(UIScheme.mainThemeColor, forKey: "textLabel.textColor")
         row.cellConfig.setObject(UIScheme.mainThemeColor, forKey: "tintColor")
         row.required = true
@@ -352,33 +363,36 @@ class EPlusMembershipConfirmDetailsViewController : XLFormViewController {
         lastNameRow.value = self.userProfile?.lastName
         self.lastNameRow.disabled = true
         infoSection.addFormRow(self.lastNameRow)
-    
-        infoSection.addFormRow(self.IDPassPortNumberRow)
         
         emailRow.value = self.userProfile?.email
         infoSection.addFormRow(self.emailRow)
         
-        // Additional info section
         
-        let additionalInfoSection = XLFormSectionDescriptor.formSection()
-        form.addFormSection(additionalInfoSection)
-        
-        additionalInfoSection.addFormRow(self.dateOfBirthRow)
-        dateOfBirthRow.value = userProfile?.dateOfBirth
-        
-        additionalInfoSection.addFormRow(self.genderRow)
-        if let gender = userProfile?.gender {
-            genderRow.value = XLFormOptionsObject(value: gender.rawValue, displayText: gender.description)
+        if (plan.type == .Family || plan.type == .Individual) {
+            infoSection.addFormRow(self.IDPassPortNumberRow)
+            
+            // Additional info section
+            
+            let additionalInfoSection = XLFormSectionDescriptor.formSection()
+            form.addFormSection(additionalInfoSection)
+            
+            additionalInfoSection.addFormRow(self.dateOfBirthRow)
+            dateOfBirthRow.value = userProfile?.dateOfBirth
+            
+            additionalInfoSection.addFormRow(self.genderRow)
+            if let gender = userProfile?.gender {
+                genderRow.value = XLFormOptionsObject(value: gender.rawValue, displayText: gender.description)
+            }
+            
+            additionalInfoSection.addFormRow(self.bloodGroupRow)
+            
+            // Allergies
+            
+            let allergiesSection = XLFormSectionDescriptor.formSection()
+            form.addFormSection(allergiesSection)
+            
+            allergiesSection.addFormRow(self.allergiesRow)
         }
-        
-        additionalInfoSection.addFormRow(self.bloodGroupRow)
-        
-        // Allergies
-        
-        let allergiesSection = XLFormSectionDescriptor.formSection()
-        form.addFormSection(allergiesSection)
-        
-        allergiesSection.addFormRow(self.allergiesRow)
         
         // Plan details section
         

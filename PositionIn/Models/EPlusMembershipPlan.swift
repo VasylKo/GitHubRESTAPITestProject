@@ -59,17 +59,17 @@ struct EPlusMembershipPlan: CRUDObject {
         
         switch type {
         case .Family:
-            return "\(formatedPrice) Annually"
+            return "\(formatedPrice)Annually"
         case .Individual:
-            return "\(formatedPrice) Annually"
+            return "\(formatedPrice)Annually"
         case .Schools:
-            return "\(formatedPrice) Annually (per child)"
+            return "\(formatedPrice)Annually (per child)"
         case .Corporate:
             return "Annual Membership Rate"
         case .ResidentialEstates:
-            return "\(formatedPrice) Annually (per household)"
+            return "\(formatedPrice)Annually (per household)"
         case .Sacco:
-            return "\(formatedPrice) Annually (per member)"
+            return "\(formatedPrice)Annually (per member)"
         default:
             return ""
         }
