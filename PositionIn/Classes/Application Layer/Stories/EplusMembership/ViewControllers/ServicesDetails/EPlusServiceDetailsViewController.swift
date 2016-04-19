@@ -50,23 +50,13 @@ class EPlusServiceDetailsViewController: UIViewController {
     func setupTableViewHeaderFooter() {
         let footerView = NSBundle.mainBundle().loadNibNamed(String(EPlusSelectPlanTableViewFooterView.self), owner: nil, options: nil).first
         if let footerView = footerView as? EPlusSelectPlanTableViewFooterView {
-            footerView.delegate = self
             tableView.tableFooterView = footerView
         }
         
         let headerView = NSBundle.mainBundle().loadNibNamed(String(EPlusAbulanceDetailsTableViewHeaderView.self), owner: nil, options: nil).first
         if let headerView = headerView as? EPlusAbulanceDetailsTableViewHeaderView {
-            if let plan = plan {
-                headerView.planImageViewString = plan.membershipImageName
-                headerView.planNameString = plan.name
-                headerView.priceString = plan.costDescription
-            }
             tableView.tableHeaderView = headerView
         }
-    }
-    
-    func nextButtonTouched(sender: AnyObject) {
-        router.showMembershipConfirmDetailsViewController(from: self, with: plan!)
     }
 }
 
@@ -78,44 +68,36 @@ extension EPlusServiceDetailsViewController: UITableViewDelegate {
 }
 
 extension EPlusServiceDetailsViewController: UITableViewDataSource {
-    
-    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if let plan = self.plan, let benefitGroups = plan.benefitGroups, let title = benefitGroups[section].title {
-            return title
-        }
-        return ""
-    }
-    
-    func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        
-        if let headerView = view as? UITableViewHeaderFooterView {
-            headerView.textLabel?.font = UIFont(name: "Helvetica Neue", size: 17)
-            headerView.textLabel?.textColor = UIColor.bt_colorWithBytesR(169, g: 169, b: 169)
-        }
-    }
-    
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        if let plan = self.plan, let benefitGroups = plan.benefitGroups {
-            return benefitGroups.count
-        }
-        return 0
-    }
-    
+//    
+//    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+//        if let plan = self.plan, let benefitGroups = plan.benefitGroups, let title = benefitGroups[section].title {
+//            return title
+//        }
+//        return ""
+//    }
+//    
+//    func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+//        
+//        if let headerView = view as? UITableViewHeaderFooterView {
+//            headerView.textLabel?.font = UIFont(name: "Helvetica Neue", size: 17)
+//            headerView.textLabel?.textColor = UIColor.bt_colorWithBytesR(169, g: 169, b: 169)
+//        }
+//    }
+//    
+//    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+//        if let plan = self.plan, let benefitGroups = plan.benefitGroups {
+//            return benefitGroups.count
+//        }
+//        return 0
+//    }
+//    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let plan = self.plan, let benefitGroups = plan.benefitGroups, let benefits = benefitGroups[section].infoBlocks {
-            return benefits.count
-        }
         return 0
     }
-    
+
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(String(EPlusPlanInfoTableViewCell.self),
             forIndexPath: indexPath) as! EPlusPlanInfoTableViewCell
-        if let plan = self.plan, let benefitGroups = plan.benefitGroups, let benefits = benefitGroups[indexPath.section].infoBlocks {
-            cell.planInfoString = benefits[indexPath.row]
-        }
         return cell
     }
-}
-
 }
