@@ -9,12 +9,11 @@
 import UIKit
 
 class EPlusServiceDetailsViewController: UIViewController {
-
+    
     @IBOutlet weak var tableView: UITableView!
     private let router : EPlusMembershipRouter
     private let service: EPlusService
     
-    // MARK: - Inits
     init(router: EPlusMembershipRouter, service: EPlusService) {
         self.router = router
         self.service = service
@@ -48,15 +47,42 @@ class EPlusServiceDetailsViewController: UIViewController {
     }
     
     func setupTableViewHeaderFooter() {
-        let footerView = NSBundle.mainBundle().loadNibNamed(String(EPlusSelectPlanTableViewFooterView.self), owner: nil, options: nil).first
-        if let footerView = footerView as? EPlusSelectPlanTableViewFooterView {
-            tableView.tableFooterView = footerView
+        let footerView = NSBundle.mainBundle().loadNibNamed(String(EPlusServisesTableViewFooter.self), owner: nil, options: nil).first
+        if let footerView = footerView as? EPlusServisesTableViewFooter {
+            if let note = self.service.footnote {
+                footerView.infoLabelString = note
+                tableView.tableFooterView = footerView
+            }
+            
         }
         
-        let headerView = NSBundle.mainBundle().loadNibNamed(String(EPlusAbulanceDetailsTableViewHeaderView.self), owner: nil, options: nil).first
-        if let headerView = headerView as? EPlusAbulanceDetailsTableViewHeaderView {
+        let headerView = NSBundle.mainBundle().loadNibNamed(String(EPlusServisesTableViewHeader.self), owner: nil, options: nil).first
+        if let headerView = headerView as? EPlusServisesTableViewHeader {
+            
+            headerView.titleString = service.name
+            headerView.iconImageString = service.serviceImageName
+            
             tableView.tableHeaderView = headerView
         }
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        sizeHeaderToFit()
+    }
+    
+    func sizeHeaderToFit() {
+        let headerView = tableView.tableHeaderView!
+        
+        headerView.setNeedsLayout()
+        headerView.layoutIfNeeded()
+        
+        let height = headerView.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize).height
+        var frame = headerView.frame
+        frame.size.height = height
+        headerView.frame = frame
+        
+        tableView.tableHeaderView = headerView
     }
 }
 
@@ -68,36 +94,68 @@ extension EPlusServiceDetailsViewController: UITableViewDelegate {
 }
 
 extension EPlusServiceDetailsViewController: UITableViewDataSource {
-//    
-//    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-//        if let plan = self.plan, let benefitGroups = plan.benefitGroups, let title = benefitGroups[section].title {
-//            return title
-//        }
-//        return ""
-//    }
-//    
-//    func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-//        
-//        if let headerView = view as? UITableViewHeaderFooterView {
-//            headerView.textLabel?.font = UIFont(name: "Helvetica Neue", size: 17)
-//            headerView.textLabel?.textColor = UIColor.bt_colorWithBytesR(169, g: 169, b: 169)
-//        }
-//    }
-//    
-//    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-//        if let plan = self.plan, let benefitGroups = plan.benefitGroups {
-//            return benefitGroups.count
-//        }
-//        return 0
-//    }
-//    
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+    
+    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section > 0, let infoBlocks = service.infoBlocks, let title = infoBlocks[section - 1].title {
+            return title
+        }
+        return ""
+    }
+    
+    func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        
+        if let headerView = view as? UITableViewHeaderFooterView {
+            headerView.textLabel?.font = UIFont(name: "Helvetica Neue", size: 13)
+            headerView.textLabel?.textColor = UIColor.redColor()
+        }
     }
 
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        var numberOfSectionsInTableView = 0
+        if let _ = service.serviceDesc {
+            numberOfSectionsInTableView++
+        }
+        
+        if let infoBlocks = service.infoBlocks {
+            numberOfSectionsInTableView += infoBlocks.count
+        }
+        
+        return numberOfSectionsInTableView
+    }
+
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+
+        var numberOfRowsInSection = 0
+        if section == 0 {
+            if let _ = service.serviceDesc {
+                numberOfRowsInSection = 1
+            }
+        }
+        else {
+            if section > 0, let infoBlocks = service.infoBlocks {
+                numberOfRowsInSection = infoBlocks.count
+            }
+        }
+        return numberOfRowsInSection
+    }
+    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(String(EPlusPlanInfoTableViewCell.self),
             forIndexPath: indexPath) as! EPlusPlanInfoTableViewCell
+        if indexPath.section == 0 {
+            if let serviceDesc = service.serviceDesc {
+                cell.planInfoString = serviceDesc
+                cell.showBullet = false
+            }
+        }
+        else {
+            if let infoBlocks = service.infoBlocks, title = infoBlocks[indexPath.row].title {
+                cell.showBullet = (infoBlocks.count > 0)
+                cell.planInfoString = title
+            }
+        }
+        cell.backgroundColor = UIColor.clearColor()
+        cell.userInteractionEnabled = false
         return cell
     }
 }

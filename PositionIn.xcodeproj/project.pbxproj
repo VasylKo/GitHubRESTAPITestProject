@@ -234,6 +234,8 @@
 		D1381AD61C8D76C700328D86 /* PushNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1381AD51C8D76C700328D86 /* PushNotification.swift */; };
 		D140BE411CC669BC001F9139 /* EPlusServisesTableViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D140BE3F1CC669BC001F9139 /* EPlusServisesTableViewHeader.swift */; };
 		D140BE421CC669BC001F9139 /* EPlusServisesTableViewHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = D140BE401CC669BC001F9139 /* EPlusServisesTableViewHeader.xib */; };
+		D140BE451CC66D57001F9139 /* EPlusServisesTableViewFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D140BE441CC66D57001F9139 /* EPlusServisesTableViewFooter.swift */; };
+		D140BE471CC66D60001F9139 /* EPlusServisesTableViewFooter.xib in Resources */ = {isa = PBXBuildFile; fileRef = D140BE461CC66D60001F9139 /* EPlusServisesTableViewFooter.xib */; };
 		D14E47831CC64DFC002FDD6A /* EPlusServiceDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D14E47811CC64DFC002FDD6A /* EPlusServiceDetailsViewController.swift */; };
 		D14E47841CC64DFC002FDD6A /* EPlusServiceDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D14E47821CC64DFC002FDD6A /* EPlusServiceDetailsViewController.xib */; };
 		D153AB841C11FA9B00DFB5C9 /* AmbulanceRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D153AB831C11FA9B00DFB5C9 /* AmbulanceRequest.swift */; };
@@ -854,6 +856,8 @@
 		D1381AD51C8D76C700328D86 /* PushNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushNotification.swift; sourceTree = "<group>"; };
 		D140BE3F1CC669BC001F9139 /* EPlusServisesTableViewHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EPlusServisesTableViewHeader.swift; sourceTree = "<group>"; };
 		D140BE401CC669BC001F9139 /* EPlusServisesTableViewHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EPlusServisesTableViewHeader.xib; sourceTree = "<group>"; };
+		D140BE441CC66D57001F9139 /* EPlusServisesTableViewFooter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EPlusServisesTableViewFooter.swift; sourceTree = "<group>"; };
+		D140BE461CC66D60001F9139 /* EPlusServisesTableViewFooter.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EPlusServisesTableViewFooter.xib; sourceTree = "<group>"; };
 		D14E47811CC64DFC002FDD6A /* EPlusServiceDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EPlusServiceDetailsViewController.swift; sourceTree = "<group>"; };
 		D14E47821CC64DFC002FDD6A /* EPlusServiceDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EPlusServiceDetailsViewController.xib; path = ../../ViewControllers/ServicesDetails/EPlusServiceDetailsViewController.xib; sourceTree = "<group>"; };
 		D153AB831C11FA9B00DFB5C9 /* AmbulanceRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AmbulanceRequest.swift; sourceTree = "<group>"; };
@@ -2289,6 +2293,15 @@
 			path = EPlusServisesTableViewHeader;
 			sourceTree = "<group>";
 		};
+		D140BE431CC66D41001F9139 /* EPlusServisesTableViewFooter */ = {
+			isa = PBXGroup;
+			children = (
+				D140BE441CC66D57001F9139 /* EPlusServisesTableViewFooter.swift */,
+				D140BE461CC66D60001F9139 /* EPlusServisesTableViewFooter.xib */,
+			);
+			name = EPlusServisesTableViewFooter;
+			sourceTree = "<group>";
+		};
 		D14E477B1CC64D7C002FDD6A /* ServicesDetails */ = {
 			isa = PBXGroup;
 			children = (
@@ -2300,6 +2313,7 @@
 		D14E477C1CC64DC0002FDD6A /* ServicesDetails */ = {
 			isa = PBXGroup;
 			children = (
+				D140BE431CC66D41001F9139 /* EPlusServisesTableViewFooter */,
 				D140BE3E1CC669A7001F9139 /* EPlusServisesTableViewHeader */,
 				D14E47821CC64DFC002FDD6A /* EPlusServiceDetailsViewController.xib */,
 			);
@@ -4455,6 +4469,7 @@
 				CD8ED0D91C60AE1400576DBF /* MembershipMemberCardViewController.xib in Resources */,
 				E6BEF1D81B9C671D00511B46 /* PositionIn.PostInfoCell.xib in Resources */,
 				D1F3E8151C7628C100EFC8ED /* PositionIn.NotificationTableViewCell.xib in Resources */,
+				D140BE471CC66D60001F9139 /* EPlusServisesTableViewFooter.xib in Resources */,
 				E661159E1B73A0CB003DB5B3 /* PositionIn.BrowseMapViewController.xib in Resources */,
 				50F7305A1BBBE86A008D3D94 /* PositionIn.CommentCell.xib in Resources */,
 				D1FD85361C1EE8A800C2E87B /* PositionIn.EmergencyDetailsController.xib in Resources */,
@@ -4742,6 +4757,7 @@
 				D1F3E8141C7628C100EFC8ED /* NotificationTableViewCell.swift in Sources */,
 				500D7FAC1BC2CD51008C8C82 /* SearchSectionCell.swift in Sources */,
 				E661158F1B738844003DB5B3 /* BaseLoginViewController.swift in Sources */,
+				D140BE451CC66D57001F9139 /* EPlusServisesTableViewFooter.swift in Sources */,
 				50FE7D8A1BBE77BB005676E2 /* ItemsSearchResultsController.swift in Sources */,
 				D15F474B1C0B77EF009ED3FD /* AmbulanceSentViewController.swift in Sources */,
 				E6A869F41B60FF2100797D16 /* UserProfile.swift in Sources */,

@@ -582,8 +582,6 @@ final class APIService {
         
         items.append(evacuation)
         
-        
-        
     
         var eventCoverage = EPlusService()
         eventCoverage.objectId = CRUDObjectId(2)
