@@ -21,6 +21,7 @@ class AboutEplusServiceController: UIViewController {
     
     private let cellReuseID = "Cell"
     private let headerReuseID = "TableSectionHeader"
+    private var isLoadingData = true
     
     private let router : EPlusMembershipRouter
     @IBOutlet weak var tableView: UITableView?
@@ -42,7 +43,10 @@ class AboutEplusServiceController: UIViewController {
         setupUI()
         tableView?.registerNib(UINib(nibName: "AboutEplusServiceTableViewCell", bundle: nil), forCellReuseIdentifier: cellReuseID)
         tableView?.registerNib(UINib(nibName: "AboutEplusServiceTableViewHeaderView", bundle: nil), forHeaderFooterViewReuseIdentifier: headerReuseID)
+        
+        getData()
     }
+    
     
     // MARK: - UI setup
     private func setupUI() {
@@ -52,10 +56,17 @@ class AboutEplusServiceController: UIViewController {
     }
     
     // MARK: - Private implementation
+    private func getData() {
+//        api().getEPlusServices().onSuccess { (<#CollectionResponse<EPlusService>#>) -> Void in
+//            <#code#>
+//        }
+    }
+    
     private func configureContactUsCell(cell: AboutEplusServiceTableViewCell) {
-        cell.icon?.image = UIImage(named: "service_5_eplus_icon")
-        cell.title?.text = NSLocalizedString("Contact Us")
-        cell.subTitle?.text = NSLocalizedString("E-Plus Medical Service")
+        let image = UIImage(named: "service_5_eplus_icon")
+        let title = NSLocalizedString("Contact Us")
+        let subTitle = NSLocalizedString("E-Plus Medical Service")
+        cell.configureCellWith(title, subTitle: subTitle, image: image)
     }
     
     func showContactUsController(sender: AnyObject?) {
@@ -88,7 +99,14 @@ extension AboutEplusServiceController: UITableViewDataSource {
             return  0
         case .ServicesList:
             //TODO: implement based on model
+            if isLoadingData {
+                //Row with spiner
+                return 1
+            } else {
+                
+            }
             return  3
+            
         case .ContactUsButton:
             return 1
         default:
@@ -107,9 +125,11 @@ extension AboutEplusServiceController: UITableViewDataSource {
         
         case .ServicesList:
             //TODO: implement cell config
-            cell.icon?.image = UIImage(named: "service_2_eplus_icon")!
-            cell.title?.text = "Service"
-            cell.subTitle?.text = NSLocalizedString("Description of Service")
+            if !isLoadingData {
+                cell.icon?.image = UIImage(named: "service_2_eplus_icon")!
+                cell.title?.text = "Service"
+                cell.subTitle?.text = NSLocalizedString("Description of Service")
+            }
         
         default:
             break
