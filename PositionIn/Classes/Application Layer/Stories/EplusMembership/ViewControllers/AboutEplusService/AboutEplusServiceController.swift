@@ -24,6 +24,7 @@ class AboutEplusServiceController: UIViewController {
     
     private let router : EPlusMembershipRouter
     @IBOutlet weak var tableView: UITableView?
+    private var services: [EPlusService] = []
     
     // MARK: - Inits
     init(router: EPlusMembershipRouter) {
@@ -42,7 +43,17 @@ class AboutEplusServiceController: UIViewController {
         setupUI()
         tableView?.registerNib(UINib(nibName: "AboutEplusServiceTableViewCell", bundle: nil), forCellReuseIdentifier: cellReuseID)
         tableView?.registerNib(UINib(nibName: "AboutEplusServiceTableViewHeaderView", bundle: nil), forHeaderFooterViewReuseIdentifier: headerReuseID)
+        self.loadData()
     }
+    
+        // MARK: - UI setup
+    func loadData() {
+        api().getEPlusServices().onSuccess(callback: { [weak self] (response : CollectionResponse<EPlusService>) in
+            self?.services = response.items
+            self?.tableView?.reloadData()
+            })
+    }
+    
     
     // MARK: - UI setup
     private func setupUI() {
@@ -61,7 +72,10 @@ class AboutEplusServiceController: UIViewController {
     func showContactUsController(sender: AnyObject?) {
         router.showContactSupportController(from: self)
     }
-
+    
+    func showServiceDetails(service: EPlusService) {
+        router.showServiceDetailsController(from: self, with: service)
+    }
 }
 
     // MARK: - Table view data source
@@ -78,8 +92,7 @@ extension AboutEplusServiceController: UITableViewDataSource {
         case .HeaderView:
             return  0
         case .ServicesList:
-            //TODO: implement based on model
-            return  3
+            return  services.count
         case .ContactUsButton:
             return 1
         default:
@@ -97,11 +110,10 @@ extension AboutEplusServiceController: UITableViewDataSource {
             configureContactUsCell(cell)
         
         case .ServicesList:
-            //TODO: implement cell config
-            cell.icon?.image = UIImage(named: "service_2_eplus_icon")!
-            cell.title?.text = "Service"
-            cell.subTitle?.text = NSLocalizedString("Description of Service")
-        
+            let service = services[indexPath.row]
+            cell.icon?.image = UIImage(named: service.serviceImageName)
+            cell.title?.text = service.name
+            cell.subTitle?.text = service.shortDesc
         default:
             break
         }
@@ -115,8 +127,6 @@ extension AboutEplusServiceController: UITableViewDataSource {
         let headerView = tableView.dequeueReusableHeaderFooterViewWithIdentifier(headerReuseID)
         return headerView
     }
-    
-    
 }
 
     // MARK: - Table view delegate
@@ -140,13 +150,14 @@ extension AboutEplusServiceController: UITableViewDelegate {
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         
         let sectionType = Section(rawValue: indexPath.section) ?? Section.Unknown
-        
         switch sectionType {
         case .ServicesList:
-            //TODO: Implement router
+            let service = services[indexPath.row]
+            showServiceDetails(service)
             break
         
         case .ContactUsButton:
