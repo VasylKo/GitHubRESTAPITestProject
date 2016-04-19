@@ -99,6 +99,10 @@ class AboutEplusServiceController: UIViewController {
     func showContactUsController(sender: AnyObject?) {
         router.showContactSupportController(from: self)
     }
+    
+    func showServiceDetails(service: EPlusService) {
+        router.showServiceDetailsController(from: self, with: service)
+    }
 
 }
 
@@ -182,9 +186,11 @@ extension AboutEplusServiceController: UITableViewDelegate {
         
         switch sectionType {
         case .ServicesList:
-            //TODO: Implement router
+            let service = data?.items[indexPath.row]
+            if let service = service {
+                showServiceDetails(service)
+            }
             break
-        
         case .ContactUsButton:
             showContactUsController(nil)
         

@@ -233,6 +233,12 @@
 		D1379E941C2C21F80041AA4E /* NewsCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1379E921C2C21F80041AA4E /* NewsCardCell.swift */; };
 		D1379E951C2C21F80041AA4E /* PositionIn.NewsCardCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1379E931C2C21F80041AA4E /* PositionIn.NewsCardCell.xib */; };
 		D1381AD61C8D76C700328D86 /* PushNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1381AD51C8D76C700328D86 /* PushNotification.swift */; };
+		D140BE411CC669BC001F9139 /* EPlusServisesTableViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D140BE3F1CC669BC001F9139 /* EPlusServisesTableViewHeader.swift */; };
+		D140BE421CC669BC001F9139 /* EPlusServisesTableViewHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = D140BE401CC669BC001F9139 /* EPlusServisesTableViewHeader.xib */; };
+		D140BE451CC66D57001F9139 /* EPlusServisesTableViewFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D140BE441CC66D57001F9139 /* EPlusServisesTableViewFooter.swift */; };
+		D140BE471CC66D60001F9139 /* EPlusServisesTableViewFooter.xib in Resources */ = {isa = PBXBuildFile; fileRef = D140BE461CC66D60001F9139 /* EPlusServisesTableViewFooter.xib */; };
+		D14E47831CC64DFC002FDD6A /* EPlusServiceDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D14E47811CC64DFC002FDD6A /* EPlusServiceDetailsViewController.swift */; };
+		D14E47841CC64DFC002FDD6A /* EPlusServiceDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D14E47821CC64DFC002FDD6A /* EPlusServiceDetailsViewController.xib */; };
 		D153AB841C11FA9B00DFB5C9 /* AmbulanceRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D153AB831C11FA9B00DFB5C9 /* AmbulanceRequest.swift */; };
 		D154411A1C47D642006251B7 /* Volunteer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15441191C47D642006251B7 /* Volunteer.swift */; };
 		D15F47441C088A26009ED3FD /* HomeItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15F47431C088A26009ED3FD /* HomeItem.swift */; };
@@ -850,6 +856,12 @@
 		D1379E921C2C21F80041AA4E /* NewsCardCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsCardCell.swift; sourceTree = "<group>"; };
 		D1379E931C2C21F80041AA4E /* PositionIn.NewsCardCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.NewsCardCell.xib; sourceTree = "<group>"; };
 		D1381AD51C8D76C700328D86 /* PushNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushNotification.swift; sourceTree = "<group>"; };
+		D140BE3F1CC669BC001F9139 /* EPlusServisesTableViewHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EPlusServisesTableViewHeader.swift; sourceTree = "<group>"; };
+		D140BE401CC669BC001F9139 /* EPlusServisesTableViewHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EPlusServisesTableViewHeader.xib; sourceTree = "<group>"; };
+		D140BE441CC66D57001F9139 /* EPlusServisesTableViewFooter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EPlusServisesTableViewFooter.swift; sourceTree = "<group>"; };
+		D140BE461CC66D60001F9139 /* EPlusServisesTableViewFooter.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EPlusServisesTableViewFooter.xib; sourceTree = "<group>"; };
+		D14E47811CC64DFC002FDD6A /* EPlusServiceDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EPlusServiceDetailsViewController.swift; sourceTree = "<group>"; };
+		D14E47821CC64DFC002FDD6A /* EPlusServiceDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EPlusServiceDetailsViewController.xib; path = ../../ViewControllers/ServicesDetails/EPlusServiceDetailsViewController.xib; sourceTree = "<group>"; };
 		D153AB831C11FA9B00DFB5C9 /* AmbulanceRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AmbulanceRequest.swift; sourceTree = "<group>"; };
 		D15441191C47D642006251B7 /* Volunteer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Volunteer.swift; sourceTree = "<group>"; };
 		D15F47431C088A26009ED3FD /* HomeItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeItem.swift; sourceTree = "<group>"; };
@@ -1477,6 +1489,7 @@
 		181314E81CBFA3B4004373F2 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				D14E477B1CC64D7C002FDD6A /* ServicesDetails */,
 				184040331CC6290900DF3655 /* ContactsSupport */,
 				5419F97D1CC52A80000E16E7 /* AboutEplusService */,
 				1840402B1CC14A3700DF3655 /* PlanDetails */,
@@ -1631,6 +1644,7 @@
 		18F7C6291CBFB76900B68BB6 /* Interface */ = {
 			isa = PBXGroup;
 			children = (
+				D14E477C1CC64DC0002FDD6A /* ServicesDetails */,
 				184040301CC628FF00DF3655 /* ContactsSupport */,
 				5419F97C1CC52A78000E16E7 /* AboutEplusService */,
 				184040191CC14A2B00DF3655 /* PlanDetails */,
@@ -2271,6 +2285,42 @@
 				D1379E931C2C21F80041AA4E /* PositionIn.NewsCardCell.xib */,
 			);
 			path = NewsCardCell;
+			sourceTree = "<group>";
+		};
+		D140BE3E1CC669A7001F9139 /* EPlusServisesTableViewHeader */ = {
+			isa = PBXGroup;
+			children = (
+				D140BE3F1CC669BC001F9139 /* EPlusServisesTableViewHeader.swift */,
+				D140BE401CC669BC001F9139 /* EPlusServisesTableViewHeader.xib */,
+			);
+			path = EPlusServisesTableViewHeader;
+			sourceTree = "<group>";
+		};
+		D140BE431CC66D41001F9139 /* EPlusServisesTableViewFooter */ = {
+			isa = PBXGroup;
+			children = (
+				D140BE441CC66D57001F9139 /* EPlusServisesTableViewFooter.swift */,
+				D140BE461CC66D60001F9139 /* EPlusServisesTableViewFooter.xib */,
+			);
+			name = EPlusServisesTableViewFooter;
+			sourceTree = "<group>";
+		};
+		D14E477B1CC64D7C002FDD6A /* ServicesDetails */ = {
+			isa = PBXGroup;
+			children = (
+				D14E47811CC64DFC002FDD6A /* EPlusServiceDetailsViewController.swift */,
+			);
+			path = ServicesDetails;
+			sourceTree = "<group>";
+		};
+		D14E477C1CC64DC0002FDD6A /* ServicesDetails */ = {
+			isa = PBXGroup;
+			children = (
+				D140BE431CC66D41001F9139 /* EPlusServisesTableViewFooter */,
+				D140BE3E1CC669A7001F9139 /* EPlusServisesTableViewHeader */,
+				D14E47821CC64DFC002FDD6A /* EPlusServiceDetailsViewController.xib */,
+			);
+			path = ServicesDetails;
 			sourceTree = "<group>";
 		};
 		D15F47451C0AFD14009ED3FD /* CallAmbulance */ = {
@@ -4384,6 +4434,7 @@
 				541BA1D91CBFE034007D9AB0 /* PositionIn.EPlusMemberCardViewController.xib in Resources */,
 				CD0FCC2F1C69ECD800AFD36C /* TotalCell.xib in Resources */,
 				CD9CA0FB1C7F5397007B26AA /* MoreInformationCell.xib in Resources */,
+				D140BE421CC669BC001F9139 /* EPlusServisesTableViewHeader.xib in Resources */,
 				18F7C62E1CBFB76900B68BB6 /* EPlusPaymentTableViewCell.xib in Resources */,
 				CDEDD96C1C45033C00396594 /* PostToContainerViewController.xib in Resources */,
 				D13039FC1C721960004B673F /* PositionIn.AttendEventCell.xib in Resources */,
@@ -4395,6 +4446,7 @@
 				CDB5B5CB1C5B9C2400413715 /* MembershipPlansViewController.xib in Resources */,
 				E6F2436E1B8B0E3A0033B13C /* PositionIn.MainMenuLoginCell.xib in Resources */,
 				D1FD85471C1EF6DB00C2E87B /* PositionIn.BomaHotelsDetailsViewController.xib in Resources */,
+				D14E47841CC64DFC002FDD6A /* EPlusServiceDetailsViewController.xib in Resources */,
 				E689F0791B6B911F00597587 /* PositionIn.ProductInventoryViewController.xib in Resources */,
 				18CCFAF61C8D841900603C7F /* PositionIn.BoughtProductDetailsViewController.xib in Resources */,
 				500D7FA91BC2CD39008C8C82 /* PositionIn.SearchEntityCell.xib in Resources */,
@@ -4420,6 +4472,7 @@
 				CD8ED0D91C60AE1400576DBF /* MembershipMemberCardViewController.xib in Resources */,
 				E6BEF1D81B9C671D00511B46 /* PositionIn.PostInfoCell.xib in Resources */,
 				D1F3E8151C7628C100EFC8ED /* PositionIn.NotificationTableViewCell.xib in Resources */,
+				D140BE471CC66D60001F9139 /* EPlusServisesTableViewFooter.xib in Resources */,
 				E661159E1B73A0CB003DB5B3 /* PositionIn.BrowseMapViewController.xib in Resources */,
 				50F7305A1BBBE86A008D3D94 /* PositionIn.CommentCell.xib in Resources */,
 				D1FD85361C1EE8A800C2E87B /* PositionIn.EmergencyDetailsController.xib in Resources */,
@@ -4707,6 +4760,7 @@
 				D1F3E8141C7628C100EFC8ED /* NotificationTableViewCell.swift in Sources */,
 				500D7FAC1BC2CD51008C8C82 /* SearchSectionCell.swift in Sources */,
 				E661158F1B738844003DB5B3 /* BaseLoginViewController.swift in Sources */,
+				D140BE451CC66D57001F9139 /* EPlusServisesTableViewFooter.swift in Sources */,
 				50FE7D8A1BBE77BB005676E2 /* ItemsSearchResultsController.swift in Sources */,
 				D15F474B1C0B77EF009ED3FD /* AmbulanceSentViewController.swift in Sources */,
 				E6A869F41B60FF2100797D16 /* UserProfile.swift in Sources */,
@@ -4813,6 +4867,7 @@
 				E6BEF1EE1B9C9D6400511B46 /* CommunityFeedViewController.swift in Sources */,
 				240A9B9E1B9CCDB4007C77E3 /* CommunityStatsCell.swift in Sources */,
 				E661159D1B73A0CB003DB5B3 /* BrowseMapViewController.swift in Sources */,
+				D140BE411CC669BC001F9139 /* EPlusServisesTableViewHeader.swift in Sources */,
 				E6F243701B8B17910033B13C /* DisplayModeViewController.swift in Sources */,
 				D15F47491C0B77D7009ED3FD /* AmbulanceBaseController.swift in Sources */,
 				E6F7A47D1BA356130069152A /* LocationCell.swift in Sources */,
@@ -4844,6 +4899,7 @@
 				E6F2437C1B8B42D70033B13C /* UserProfileViewController.swift in Sources */,
 				E6D4D5B61B6F8B9F003134CB /* SearchBar.swift in Sources */,
 				D112D9D61C2C7EED0051039E /* CreateUserConversationViewController.swift in Sources */,
+				D14E47831CC64DFC002FDD6A /* EPlusServiceDetailsViewController.swift in Sources */,
 				D12EB28D1C96E62400718E57 /* FeauteredFeedTableViewCell.swift in Sources */,
 				E6C5CE191B83A21500265955 /* LocationController.swift in Sources */,
 				E63201651B967A540066C62E /* Notifications.swift in Sources */,

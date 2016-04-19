@@ -36,14 +36,16 @@
                     <constraint firstAttribute="bottom" secondItem="PyO-Rb-4HX" secondAttribute="bottom" constant="8" id="KWr-t6-8q3"/>
                     <constraint firstAttribute="trailing" secondItem="PyO-Rb-4HX" secondAttribute="trailing" constant="12" id="NxT-zN-sva"/>
                     <constraint firstItem="oz9-N0-LR0" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="8" id="P8H-dr-I3H"/>
-                    <constraint firstItem="PyO-Rb-4HX" firstAttribute="leading" secondItem="oz9-N0-LR0" secondAttribute="trailing" constant="12" id="emg-Zi-WbI"/>
+                    <constraint firstItem="PyO-Rb-4HX" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="28" id="btF-nv-ts0"/>
                     <constraint firstItem="PyO-Rb-4HX" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="g3h-Nv-9qG"/>
                     <constraint firstItem="oz9-N0-LR0" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="10" id="pp8-1R-A3f"/>
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" red="0.96470588239999999" green="0.96470588239999999" blue="0.96470588239999999" alpha="1" colorSpace="calibratedRGB"/>
             <connections>
+                <outlet property="bulletView" destination="oz9-N0-LR0" id="Gzu-Dh-OEA"/>
                 <outlet property="infoLabel" destination="PyO-Rb-4HX" id="cCU-nq-wsK"/>
+                <outlet property="labelLeftMarginConstraint" destination="btF-nv-ts0" id="WwT-LR-1ml"/>
             </connections>
         </tableViewCell>
     </objects>
