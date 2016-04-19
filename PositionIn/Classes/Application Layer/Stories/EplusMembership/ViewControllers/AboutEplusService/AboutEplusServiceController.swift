@@ -11,16 +11,14 @@ import UIKit
 class AboutEplusServiceController: UIViewController {
 
     private enum Section: Int {
-        case HeaderView = 0
-        case ServicesList = 1
-        case ContactUsButton = 2
+        case ServicesList = 0
+        case ContactUsButton = 1
         case Unknown
         
-        static let sectionsCoun = 3
+        static let sectionsCoun = 2
     }
     
     private let cellReuseID = "Cell"
-    private let headerReuseID = "TableSectionHeader"
     private var isLoadingData = true
     private var data: CollectionResponse<EPlusService>?
     private let router : EPlusMembershipRouter
@@ -42,9 +40,18 @@ class AboutEplusServiceController: UIViewController {
         super.viewDidLoad()
         setupUI()
         tableView?.registerNib(UINib(nibName: "AboutEplusServiceTableViewCell", bundle: nil), forCellReuseIdentifier: cellReuseID)
-        tableView?.registerNib(UINib(nibName: "AboutEplusServiceTableViewHeaderView", bundle: nil), forHeaderFooterViewReuseIdentifier: headerReuseID)
+
+        //Add table view header
+        if let headerView = NSBundle.mainBundle().loadNibNamed(String(AboutEplusServiceTableViewHeaderView.self), owner: nil, options: nil).first as? UIView {
+            tableView?.tableHeaderView = headerView
+        }
         
         getData()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        sizeHeaderToFit()
     }
     
     
@@ -53,6 +60,20 @@ class AboutEplusServiceController: UIViewController {
         title = NSLocalizedString("About")
         let rightButton = UIBarButtonItem(image: UIImage(named: "services_icon"), style: .Done, target: self, action: Selector("showContactUsController:"))
         navigationItem.setRightBarButtonItem(rightButton, animated: false)
+    }
+    
+    private func sizeHeaderToFit() {
+        guard let headerView = tableView?.tableHeaderView else { return }
+        
+        headerView.setNeedsLayout()
+        headerView.layoutIfNeeded()
+        
+        let height = headerView.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize).height
+        var frame = headerView.frame
+        frame.size.height = height
+        headerView.frame = frame
+        
+        tableView!.tableHeaderView = headerView
     }
     
     // MARK: - Private implementation
@@ -101,17 +122,13 @@ extension AboutEplusServiceController: UITableViewDataSource {
         let sectionType = Section(rawValue: section) ?? Section.Unknown
         
         switch sectionType {
-        case .HeaderView:
-            return  0
-        
-        case .ServicesList:
-            if isLoadingData {
-                //Row with spiner
-                return 1
-            } else {
-                return self.data?.total ?? 0
-            }
+        case .ServicesList where isLoadingData:
+           //Row with spiner
+            return 1
             
+        case .ServicesList:
+            return self.data?.total ?? 0
+
         case .ContactUsButton:
             
             return 1
@@ -144,14 +161,6 @@ extension AboutEplusServiceController: UITableViewDataSource {
         return cell
     }
     
-    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        guard let sectionType = Section(rawValue: section) where sectionType == .HeaderView else { return nil }
-        
-        let headerView = tableView.dequeueReusableHeaderFooterViewWithIdentifier(headerReuseID)
-        return headerView
-    }
-    
-    
 }
 
     // MARK: - Table view delegate
@@ -166,14 +175,6 @@ extension AboutEplusServiceController: UITableViewDelegate {
         return 74.0
     }
     
-    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if let sectionType = Section(rawValue: section) where sectionType == .HeaderView {
-            return 120.0
-        } else {
-            return 20
-        }
-    }
-    
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         
@@ -182,7 +183,6 @@ extension AboutEplusServiceController: UITableViewDelegate {
         switch sectionType {
         case .ServicesList:
             //TODO: Implement router
-            showContactUsController(nil)
             break
         
         case .ContactUsButton:

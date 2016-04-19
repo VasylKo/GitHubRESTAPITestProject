@@ -128,6 +128,7 @@
 		5419F98A1CC52EDF000E16E7 /* AboutEplusServiceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5419F9881CC52EDF000E16E7 /* AboutEplusServiceTableViewCell.swift */; };
 		5419F98B1CC52EDF000E16E7 /* AboutEplusServiceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5419F9891CC52EDF000E16E7 /* AboutEplusServiceTableViewCell.xib */; };
 		5419F98D1CC53F45000E16E7 /* AboutEplusServiceTableViewHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5419F98C1CC53F45000E16E7 /* AboutEplusServiceTableViewHeaderView.xib */; };
+		5419F98F1CC65C95000E16E7 /* AboutEplusServiceTableViewHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5419F98E1CC65C94000E16E7 /* AboutEplusServiceTableViewHeaderView.swift */; };
 		541BA1D91CBFE034007D9AB0 /* PositionIn.EPlusMemberCardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 541BA1D81CBFE034007D9AB0 /* PositionIn.EPlusMemberCardViewController.xib */; };
 		541BA1DC1CBFE9AB007D9AB0 /* EPlusMemberCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 541BA1DA1CBFE9AB007D9AB0 /* EPlusMemberCardView.swift */; };
 		541BA1DD1CBFE9AB007D9AB0 /* EPlusMemberCardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 541BA1DB1CBFE9AB007D9AB0 /* EPlusMemberCardView.xib */; };
@@ -736,6 +737,7 @@
 		5419F9881CC52EDF000E16E7 /* AboutEplusServiceTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutEplusServiceTableViewCell.swift; sourceTree = "<group>"; };
 		5419F9891CC52EDF000E16E7 /* AboutEplusServiceTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AboutEplusServiceTableViewCell.xib; sourceTree = "<group>"; };
 		5419F98C1CC53F45000E16E7 /* AboutEplusServiceTableViewHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AboutEplusServiceTableViewHeaderView.xib; sourceTree = "<group>"; };
+		5419F98E1CC65C94000E16E7 /* AboutEplusServiceTableViewHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutEplusServiceTableViewHeaderView.swift; sourceTree = "<group>"; };
 		541BA1D81CBFE034007D9AB0 /* PositionIn.EPlusMemberCardViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.EPlusMemberCardViewController.xib; sourceTree = "<group>"; };
 		541BA1DA1CBFE9AB007D9AB0 /* EPlusMemberCardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EPlusMemberCardView.swift; sourceTree = "<group>"; };
 		541BA1DB1CBFE9AB007D9AB0 /* EPlusMemberCardView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EPlusMemberCardView.xib; sourceTree = "<group>"; };
@@ -1821,6 +1823,7 @@
 		5419F9831CC52E70000E16E7 /* AboutEplusServiceTableViewHeader */ = {
 			isa = PBXGroup;
 			children = (
+				5419F98E1CC65C94000E16E7 /* AboutEplusServiceTableViewHeaderView.swift */,
 				5419F98C1CC53F45000E16E7 /* AboutEplusServiceTableViewHeaderView.xib */,
 			);
 			path = AboutEplusServiceTableViewHeader;
@@ -4873,6 +4876,7 @@
 				E6F7A47E1BA356130069152A /* LocationSearchResultsController.swift in Sources */,
 				CD21EA611C68F9FF00E50909 /* MembershipMPesaConfirmPaymentViewController.swift in Sources */,
 				E6018E501B849266001D22FA /* XMPPProcess+Future.swift in Sources */,
+				5419F98F1CC65C95000E16E7 /* AboutEplusServiceTableViewHeaderView.swift in Sources */,
 				E6BEF1E31B9C83F200511B46 /* CommunityActionCell.swift in Sources */,
 				CD795C4B1C590BEE00C1C298 /* ContainerViewController.swift in Sources */,
 				24EF62141BA81B5800472531 /* ChatHistoryCell.swift in Sources */,

@@ -47,7 +47,7 @@ class EPlusAmbulanceDetailsController: UIViewController {
     }
     
     private func sizeHeaderToFit() {
-        let headerView = tableView.tableHeaderView!
+        guard let headerView = tableView?.tableHeaderView else { return }
         
         headerView.setNeedsLayout()
         headerView.layoutIfNeeded()
