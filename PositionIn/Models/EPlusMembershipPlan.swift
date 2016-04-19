@@ -9,17 +9,28 @@
 import ObjectMapper
 import CleanroomLogger
 
-struct EPlusPlanOption {
+struct EPlusPlanOption: Mappable {
     var price: Int?
     var minParticipants: Int?
     var maxParticipants: Int?
     var costDescription: String?
+    
+    init?(_ map: Map) {
+        mapping(map)
+    }
+    
+    mutating func mapping(map: Map) {
+        price            <-  map["price"]
+        minParticipants  <-  map["from"]
+        maxParticipants  <-  map["to"]
+        costDescription  <-  map["comments"]
+    }
 }
 
 struct EPlusMembershipPlan: CRUDObject {
     
     enum PlanType : Int, CustomStringConvertible {
-        case Unknown = 0, Family, Individual, Schools, Corporate, ResidentialEstates, Sacco
+        case Unknown = 29, Family, Individual, Schools, Corporate, ResidentialEstates, Sacco
     
         var description: String {
             return ""
@@ -29,28 +40,53 @@ struct EPlusMembershipPlan: CRUDObject {
     // FIXME: Ambulance Hot fix - need to remove
     init() {}
     
-    
     var objectId : CRUDObjectId = CRUDObjectInvalidId
     var name : String?
-    var costDescription: String?
     var planOptions: [EPlusPlanOption]?
+    var otherBenefits: [String]?
     var benefitGroups: [InfoGroup]?
     var price: Int?
-    var type: PlanType = .Unknown
+    
+    var type: PlanType {
+        return PlanType(rawValue: Int(objectId) ?? PlanType.Unknown.rawValue)!
+    }
+    
+    var featured: Bool?
     var durationDays: Int?
+    
+    var costDescription: String {
+        let formatedPrice = AppConfiguration().currencyFormatter.stringFromNumber(NSNumber(integer: price ?? 0)) ?? ""
+        
+        switch type {
+        case .Family:
+            return "\(formatedPrice) Annually"
+        case .Individual:
+            return "\(formatedPrice) Annually"
+        case .Schools:
+            return "\(formatedPrice) Annually (per child)"
+        case .Corporate:
+            return "Annual Membership Rate"
+        case .ResidentialEstates:
+            return "\(formatedPrice) Annually (per household)"
+        case .Sacco:
+            return "\(formatedPrice) Annually (per member)"
+        default:
+            return ""
+        }
+    }
     var membershipImageName: String {
-        switch objectId {
-        case CRUDObjectId(PlanType.Family.rawValue):
+        switch type {
+        case .Family:
             return "family_plan_eplus_icon"
-        case CRUDObjectId(PlanType.Individual.rawValue):
+        case .Individual:
             return "individual_plan_eplus_icon"
-        case CRUDObjectId(PlanType.Schools.rawValue):
+        case .Schools:
             return "school_plan_eplus_icon"
-        case CRUDObjectId(PlanType.Corporate.rawValue):
+        case .Corporate:
             return "corporate_plan_eplus_icon"
-        case CRUDObjectId(PlanType.ResidentialEstates.rawValue):
+        case .ResidentialEstates:
             return "residential_plan_eplus_icon"
-        case CRUDObjectId(PlanType.Sacco.rawValue):
+        case .Sacco:
             return "saccos_plan_eplus_icon"
         default:
             return ""
@@ -70,20 +106,25 @@ struct EPlusMembershipPlan: CRUDObject {
     }
     
     mutating func mapping(map: Map) {
-//        objectId     <- (map["id"], CRUDObjectIdTransform())
-//        name         <-  map["name"]
-//        benefits     <-  map["benefits"]
-//        price        <-  map["price"]
-//        type         <-  (map["type"], EnumTransform())
-//        featured     <-  map["featured"]
-//        durationDays <-  map["durationDays"]
-//        lifetime     <-  map["lifetime"]
+        objectId       <- (map["id"], CRUDObjectIdTransform())
+        price          <-  map["price"]
+        
+        
+        //type           <-  map["objectId"]
+        
+        
+        name           <-  map["name"]
+        featured       <-  map["featured"]
+        durationDays   <-  map["durationDays"]
+        planOptions    <-  map["benefits.prices"]
+        benefitGroups  <-  map["benefits.groups"]
+        otherBenefits  <-  map["benefits.items"]
     }
     
     //MARK: Endpoints
     
     static func endpoint() -> String {
-        return "/v1.0/memberships"
+        return "/v1.0/ambulance/memberships"
     }
     
     static func endpoint(identifier : CRUDObjectId) -> String {

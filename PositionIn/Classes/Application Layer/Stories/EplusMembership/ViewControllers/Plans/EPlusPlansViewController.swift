@@ -42,9 +42,9 @@ class EPlusPlansViewController: UIViewController {
             self?.spinner.stopAnimating()
             self?.tableView.hidden = false
             self?.buttonContainerView.hidden = false
-            }).onFailure(callback: {[weak self] _ in
-                self?.spinner.stopAnimating()
-            })
+        }).onFailure(callback: {[weak self] _ in
+            self?.spinner.stopAnimating()
+        })
     }
     
     func setupUI() {
