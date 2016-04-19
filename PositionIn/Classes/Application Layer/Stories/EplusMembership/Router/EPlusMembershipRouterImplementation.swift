@@ -114,6 +114,18 @@ class EPlusMembershipRouterImplementation: BaseRouterImplementation, EPlusMember
         sourceViewController.navigationController?.pushViewController(Storyboards.Onboarding.instantiateCallAmbulanceViewController(), animated: true)
     }
     
+    func showAboutController(from sourceViewController : UIViewController) {
+        sourceViewController.navigationController?.pushViewController(AboutEplusServiceController(router: self), animated: true)
+    }
+    
+    func showServiceDetailsController(from sourceViewController : UIViewController, with service: EPlusService) {
+        
+    }
+    
+    func showContactSupportController(from sourceViewController : UIViewController) {
+        //sourceViewController.navigationController?.pushViewController(AboutEplusServiceController(router: self), animated: true)
+    }
+    
     func dismissMembership(from sourceViewController : UIViewController) {
         appDelegate().sidebarViewController?.executeAction(SidebarViewController.defaultAction)
         sourceViewController.dismissViewControllerAnimated(true, completion: nil)

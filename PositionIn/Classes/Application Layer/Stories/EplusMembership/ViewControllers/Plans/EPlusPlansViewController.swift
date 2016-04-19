@@ -65,6 +65,8 @@ class EPlusPlansViewController: UIViewController {
         
         callAmbulanceButton.imageEdgeInsets = UIEdgeInsetsMake(0, -20, 0, 0)
         
+        let rightButton = UIBarButtonItem(image: UIImage(named: "info_button_icon"), style: .Done, target: self, action: Selector("showAboutController:"))
+        navigationItem.setRightBarButtonItem(rightButton, animated: false)
     }
     
     func setupTableViewHeaderFooter() {
@@ -82,6 +84,10 @@ class EPlusPlansViewController: UIViewController {
     
     @IBAction func callAnAmbulance(sender: AnyObject) {
         router.showCallAmbulanceViewController(from: self)
+    }
+    
+    func showAboutController(sender: AnyObject) {
+        router.showAboutController(from: self)
     }
     
     @IBOutlet weak var spinner: UIActivityIndicatorView!

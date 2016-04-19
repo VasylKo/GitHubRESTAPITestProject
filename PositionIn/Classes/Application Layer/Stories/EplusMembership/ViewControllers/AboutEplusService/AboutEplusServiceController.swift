@@ -59,8 +59,7 @@ class AboutEplusServiceController: UIViewController {
     }
     
     func showContactUsController(sender: AnyObject?) {
-        //TODO: implement router to contact support controller
-        print("Show contacts")
+        router.showContactSupportController(from: self)
     }
 
 }

@@ -32,5 +32,11 @@ protocol EPlusMembershipRouter : BaseRouter {
     
     func showCallAmbulanceViewController(from sourceViewController : UIViewController)
     
+    func showAboutController(from sourceViewController : UIViewController)
+    
+    func showServiceDetailsController(from sourceViewController : UIViewController, with service: EPlusService)
+    
+    func showContactSupportController(from sourceViewController : UIViewController)
+    
     func dismissMembership(from sourceViewController : UIViewController)
 }
