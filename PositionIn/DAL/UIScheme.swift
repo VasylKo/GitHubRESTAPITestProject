@@ -27,4 +27,8 @@ struct UIScheme {
     
     static let enableActionColor = UIColor(red: 237/255.0, green: 27/255.0, blue: 46/255.0, alpha: 1.0)
     static let disableActionColor = UIColor(red: 243/255.0, green: 130/255.0, blue: 140/255.0, alpha: 1.0)
+    
+    static let tableSectionTitleColor = UIColor.bt_colorWithBytesR(169, g: 169, b: 169)
+    static let tableSectionTitleFont = UIFont(name: "Helvetica Neue", size: 17)
+    
 }

@@ -26,14 +26,19 @@ class EPlusCorporateAmbulanceDetailsController: UIViewController {
         setupUI()
     }
     
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-        setupUI()
-        setupTableViewHeaderFooter()
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        sizeHeaderToFit()
     }
     
     func setupUI() {
         title = "Rescue Package"
+        
+        let rightBarButtonItem: UIBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Next", comment: ""),
+            style: .Plain, target: self, action: "nextButtonTouched:")
+        self.navigationItem.rightBarButtonItem = rightBarButtonItem
+        
+        
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 44
         var nib = UINib(nibName: String(EPlusPlanInfoTableViewCell.self), bundle: nil)
@@ -44,6 +49,20 @@ class EPlusCorporateAmbulanceDetailsController: UIViewController {
         
         tableView.separatorStyle = .None
         tableView.bounces = false
+    }
+    
+    private func sizeHeaderToFit() {
+        guard let headerView = tableView?.tableHeaderView else { return }
+        
+        headerView.setNeedsLayout()
+        headerView.layoutIfNeeded()
+        
+        let height = headerView.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize).height
+        var frame = headerView.frame
+        frame.size.height = height
+        headerView.frame = frame
+        
+        tableView.tableHeaderView = headerView
     }
     
     func setupTableViewHeaderFooter() {
@@ -61,6 +80,10 @@ class EPlusCorporateAmbulanceDetailsController: UIViewController {
             }
             tableView.tableHeaderView = headerView
         }
+    }
+    
+    func nextButtonTouched(sender: AnyObject) {
+        router.showMembershipConfirmDetailsViewController(from: self, with: plan!)
     }
     
     private var plan: EPlusMembershipPlan?
@@ -87,8 +110,8 @@ extension EPlusCorporateAmbulanceDetailsController: UITableViewDataSource {
     func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         
         if let headerView = view as? UITableViewHeaderFooterView {
-            headerView.textLabel?.font = UIFont(name: "Helvetica Neue", size: 17)
-            headerView.textLabel?.textColor = UIColor.bt_colorWithBytesR(169, g: 169, b: 169)
+            headerView.textLabel?.font = UIScheme.tableSectionTitleFont
+            headerView.textLabel?.textColor = UIScheme.tableSectionTitleColor
         }
     }
     

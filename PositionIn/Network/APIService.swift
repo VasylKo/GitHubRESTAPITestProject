@@ -292,185 +292,188 @@ final class APIService {
     //MARK: - Ambulance Membership -
     
     func getEPlusMemberships() -> Future<CollectionResponse<EPlusMembershipPlan>, NSError> {
-        var items = [EPlusMembershipPlan]()
+        let endpoint = EPlusMembershipPlan.endpoint()
+        return getObjectsCollection(endpoint, params: nil)
         
-        // FIXME: Remove this stabs when will be implemented endpoint for it
-        
-        // Family
-        var family = EPlusMembershipPlan()
-        family.objectId = CRUDObjectId(EPlusMembershipPlan.PlanType.Family.rawValue)
-        family.name = "Family"
-        family.price = 6000
-        family.type = .Family
-        family.costDescription = "KSh 6,000 Annually"
-        var familyBenefitGroups = [InfoGroup]()
-        var familyBenefits = [String]()
-        familyBenefits.append("Access to Medical Helpline 24/7")
-        familyBenefits.append("Unlimited emergency ambulance services")
-        familyBenefits.append("Treatment and stabilisation on site")
-        familyBenefits.append("Transfer to Hospital after stabilisation")
-        familyBenefitGroups.append(InfoGroup(title: "Benefits", infoBlocks: familyBenefits))
-        var familyOtherBenefits = [String]()
-        familyOtherBenefits.append("No age limit")
-        familyOtherBenefits.append("No pre-existing conditions")
-        familyOtherBenefits.append("Congenital conditions covered")
-        familyOtherBenefits.append("Medically indicated transfers from Hospital to home")
-        familyBenefitGroups.append(InfoGroup(title: "Other Benefits", infoBlocks: familyOtherBenefits))
-        var familyCover = [String]()
-        familyCover.append("Provides a 24/7 Ambulance membership for a family in towns where E-plus has ambulances")
-        familyCover.append("Maximum number of 6 family members (principle, spouse and 4 children)")
-        familyBenefitGroups.append(InfoGroup(title: "This Covers", infoBlocks: familyCover))
-        family.benefitGroups = familyBenefitGroups
-        items.append(family)
-        
-        // Individual
-        var individual = EPlusMembershipPlan()
-        individual.objectId = CRUDObjectId(EPlusMembershipPlan.PlanType.Individual.rawValue)
-        individual.name = "Individual"
-        individual.price = 3000
-        individual.type = .Individual
-        individual.costDescription = "KSh 3,000 Annually"
-        var individualBenefitGroups = [InfoGroup]()
-        var individualBenefits = [String]()
-        individualBenefits.append("Access to Medical Helpline 24/7")
-        individualBenefits.append("Unlimited emergency ambulance services")
-        individualBenefits.append("Treatment and stabilisation on site")
-        individualBenefits.append("Transfer to Hospital after stabilisation")
-        individualBenefitGroups.append(InfoGroup(title: "Benefits", infoBlocks: individualBenefits))
-        var individualOtherBenefits = [String]()
-        individualOtherBenefits.append("No age limit")
-        individualOtherBenefits.append("No pre-existing conditions")
-        individualOtherBenefits.append("Congenital conditions covered")
-        individualOtherBenefits.append("Medically indicated transfers from hospital to home")
-        individualBenefitGroups.append(InfoGroup(title: "Other Benefits", infoBlocks: individualOtherBenefits))
-        individual.benefitGroups = individualBenefitGroups
-        items.append(individual)
-        
-        // Schools
-        var schools = EPlusMembershipPlan()
-        schools.objectId = CRUDObjectId(EPlusMembershipPlan.PlanType.Schools.rawValue)
-        schools.name = "Schools"
-        schools.price = 1500
-        schools.type = .Schools
-        schools.costDescription = "KSh 1,500 Annually (per child)"
-        var schoolsBenefitGroups = [InfoGroup]()
-        var schoolsBenefits = [String]()
-        schoolsBenefits.append("Access to Medical Helpline 24/7")
-        schoolsBenefits.append("Unlimited emergency ambulance services")
-        schoolsBenefits.append("Treatment and stabilisation on site")
-        schoolsBenefits.append("Transfer to Hospital after stabilisation")
-        schoolsBenefitGroups.append(InfoGroup(title: "Benefits", infoBlocks: schoolsBenefits))
-        var schoolsOtherBenefits = [String]()
-        schoolsOtherBenefits.append("No age limit")
-        schoolsOtherBenefits.append("No pre-existing conditions")
-        schoolsOtherBenefits.append("Congenital conditions covered")
-        schoolsOtherBenefits.append("Medically indicated transfers from Hospital to home")
-        schoolsOtherBenefits.append("One free standby ambulance service per term")
-        schoolsOtherBenefits.append("Free First Aid training of 20 teachers per year")
-        schoolsOtherBenefits.append("**PA and OP/IP Hospital benefits can be arranged at an extra cost")
-        schoolsBenefitGroups.append(InfoGroup(title: "Other Benefits", infoBlocks: schoolsOtherBenefits))
-        var schoolsThisCovers = [String]()
-        schoolsThisCovers.append("24/7 emergency ambulance service for students/pupils in towns where E-plus has ambulances")
-        schoolsThisCovers.append("The ambulance service is restricted to within the school grounds and during school hours")
-        schoolsThisCovers.append("Open to institutions with a population of at least 100 pupils/students")
-        schoolsBenefitGroups.append(InfoGroup(title: "This Covers", infoBlocks: schoolsThisCovers))
-        schools.benefitGroups = schoolsBenefitGroups
-        items.append(schools)
-        
-        // Corporate
-        var corporate = EPlusMembershipPlan()
-        corporate.objectId = CRUDObjectId(EPlusMembershipPlan.PlanType.Corporate.rawValue)
-        corporate.name = "Corporate"
-        corporate.type = .Corporate
-        
-        var corporatePlanOptions = [EPlusPlanOption]()
-        corporatePlanOptions.append(EPlusPlanOption(price: 3000, minParticipants: 1, maxParticipants: 9, costDescription: "Annually (per staff)"))
-        corporatePlanOptions.append(EPlusPlanOption(price: 2900, minParticipants: 10, maxParticipants: 50, costDescription: "Annually (per staff)"))
-        corporatePlanOptions.append(EPlusPlanOption(price: 2800, minParticipants: 51, maxParticipants: 100, costDescription: "Annually (per staff)"))
-        corporatePlanOptions.append(EPlusPlanOption(price: 2700, minParticipants: 101, maxParticipants: 500, costDescription: "Annually (per staff)"))
-        corporatePlanOptions.append(EPlusPlanOption(price: 2500, minParticipants: 501, maxParticipants: nil, costDescription: "Annually (per staff)"))
-        corporate.planOptions = corporatePlanOptions
-        corporate.costDescription = "Annual Membership Rate"
-        var corporateBenefitGroups = [InfoGroup]()
-        var corporateBenefits = [String]()
-        corporateBenefits.append("Access to Medical Helpline 24/7")
-        corporateBenefits.append("Unlimited emergency ambulance services")
-        corporateBenefits.append("Treatment and stabilisation on site")
-        corporateBenefits.append("Transfer to Hospital after stabilisation")
-        corporateBenefitGroups.append(InfoGroup(title: "Benefits", infoBlocks: corporateBenefits))
-        var corporateOtherBenefits = [String]()
-        corporateOtherBenefits.append("No age limit")
-        corporateOtherBenefits.append("No pre-existing conditions")
-        corporateOtherBenefits.append("Congenital conditions covered")
-        corporateOtherBenefits.append("Medically indicated transfers from Hospital to home")
-        corporateOtherBenefits.append("Extension of membership to dependants with an extra fee")
-        corporateBenefitGroups.append(InfoGroup(title: "Other Benefits", infoBlocks: corporateOtherBenefits))
-        var corporateCover = [String]()
-        corporateCover.append("24/7 Ambulance membership for employees")
-        corporateCover.append("Membership is restricted within the work premise and sometimes within the town in the residential areas")
-        corporateBenefitGroups.append(InfoGroup(title: "This Covers", infoBlocks: corporateCover))
-        corporate.benefitGroups = corporateBenefitGroups
-        items.append(corporate)
-        
-        // Residential Estates
-        var residential = EPlusMembershipPlan()
-        residential.objectId = CRUDObjectId(EPlusMembershipPlan.PlanType.ResidentialEstates.rawValue)
-        residential.name = "Residential Estates"
-        residential.price = 1200
-        residential.type = .ResidentialEstates
-        residential.costDescription = "KSh 1,200 Annually (per household)"
-        var residentialBenefitGroups = [InfoGroup]()
-        var residentialBenefits = [String]()
-        residentialBenefits.append("Access to Medical Helpline 24/7")
-        residentialBenefits.append("Unlimited emergency ambulance services")
-        residentialBenefits.append("Treatment and stabilisation on site")
-        residentialBenefits.append("Transfer to Hospital after stabilisation")
-        residentialBenefitGroups.append(InfoGroup(title: "Benefits", infoBlocks: residentialBenefits))
-        var residentialOtherBenefits = [String]()
-        residentialOtherBenefits.append("No age limit")
-        residentialOtherBenefits.append("No pre-existing conditions")
-        residentialOtherBenefits.append("Congenital conditions covered")
-        residentialOtherBenefits.append("Medically indicated transfers from Hospital to home")
-        residentialOtherBenefits.append("Free First Aid training for 10-20 persons appointed by the estate every year")
-        residentialOtherBenefits.append("Free one standby ambulance service for estate functions")
-        residentialOtherBenefits.append("No limit of persons within a household")
-        residentialOtherBenefits.append("Visitors and any persons within the estate are covered")
-        residentialBenefitGroups.append(InfoGroup(title: "Other Benefits", infoBlocks: residentialOtherBenefits))
-        var residentialCover = [String]()
-        residentialCover.append("24/7 ambulance membership for residents in an organised estate")
-        residentialCover.append("A minimum of 50 families in an estate")
-        residentialBenefitGroups.append(InfoGroup(title: "This Covers", infoBlocks: residentialCover))
-        residential.benefitGroups = residentialBenefitGroups
-        items.append(residential)
-        
-        // Sacco
-        var sacco = EPlusMembershipPlan()
-        sacco.objectId = CRUDObjectId(EPlusMembershipPlan.PlanType.Sacco.rawValue)
-        sacco.name = "Sacco"
-        sacco.price = 150
-        sacco.type = .Sacco
-        sacco.costDescription = "KSh 150 Annually (per member)"
-        var saccoBenefitGroups = [InfoGroup]()
-        var saccoBenefits = [String]()
-        saccoBenefits.append("Access to Medical Helpline 24/7")
-        saccoBenefits.append("Unlimited emergency ambulance services")
-        saccoBenefits.append("Treatment and stabilisation on site")
-        saccoBenefits.append("Transfer to Hospital after stabilisation")
-        saccoBenefitGroups.append(InfoGroup(title: "Benefits", infoBlocks: saccoBenefits))
-        var saccoOtherBenefits = [String]()
-        saccoOtherBenefits.append("No age limit")
-        saccoOtherBenefits.append("No pre-existing conditions")
-        saccoOtherBenefits.append("Congenital conditions covered")
-        saccoOtherBenefits.append("Medically indicated transfers from Hospital to home")
-        saccoOtherBenefits.append("No limit of number of dependants per Sacco member")
-        saccoBenefitGroups.append(InfoGroup(title: "Other Benefits", infoBlocks: saccoOtherBenefits))
-        var saccoCover = [String]()
-        saccoCover.append("24/7 ambulance membership for Sacco members only where E-plus has ambulances")
-        saccoBenefitGroups.append(InfoGroup(title: "This Covers", infoBlocks: saccoCover))
-        sacco.benefitGroups = saccoBenefitGroups
-        items.append(sacco)
-        
-        return Future(value: CollectionResponse(items:items, total: items.count), delay: 0.5)
+//        var items = [EPlusMembershipPlan]()
+//        
+//        // FIXME: Remove this stabs when will be implemented endpoint for it
+//        
+//        // Family
+//        var family = EPlusMembershipPlan()
+//        family.objectId = CRUDObjectId(EPlusMembershipPlan.PlanType.Family.rawValue)
+//        family.name = "Family"
+//        family.price = 6000
+//        family.type = .Family
+//        family.costDescription = "KSh 6,000 Annually"
+//        var familyBenefitGroups = [InfoGroup]()
+//        var familyBenefits = [String]()
+//        familyBenefits.append("Access to Medical Helpline 24/7")
+//        familyBenefits.append("Unlimited emergency ambulance services")
+//        familyBenefits.append("Treatment and stabilisation on site")
+//        familyBenefits.append("Transfer to Hospital after stabilisation")
+//        familyBenefitGroups.append(InfoGroup(title: "Benefits", infoBlocks: familyBenefits))
+//        var familyOtherBenefits = [String]()
+//        familyOtherBenefits.append("No age limit")
+//        familyOtherBenefits.append("No pre-existing conditions")
+//        familyOtherBenefits.append("Congenital conditions covered")
+//        familyOtherBenefits.append("Medically indicated transfers from Hospital to home")
+//        familyBenefitGroups.append(InfoGroup(title: "Other Benefits", infoBlocks: familyOtherBenefits))
+//        var familyCover = [String]()
+//        familyCover.append("Provides a 24/7 Ambulance membership for a family in towns where E-plus has ambulances")
+//        familyCover.append("Maximum number of 6 family members (principle, spouse and 4 children)")
+//        familyBenefitGroups.append(InfoGroup(title: "This Covers", infoBlocks: familyCover))
+//        family.benefitGroups = familyBenefitGroups
+//        items.append(family)
+//        
+//        // Individual
+//        var individual = EPlusMembershipPlan()
+//        individual.objectId = CRUDObjectId(EPlusMembershipPlan.PlanType.Individual.rawValue)
+//        individual.name = "Individual"
+//        individual.price = 3000
+//        individual.type = .Individual
+//        individual.costDescription = "KSh 3,000 Annually"
+//        var individualBenefitGroups = [InfoGroup]()
+//        var individualBenefits = [String]()
+//        individualBenefits.append("Access to Medical Helpline 24/7")
+//        individualBenefits.append("Unlimited emergency ambulance services")
+//        individualBenefits.append("Treatment and stabilisation on site")
+//        individualBenefits.append("Transfer to Hospital after stabilisation")
+//        individualBenefitGroups.append(InfoGroup(title: "Benefits", infoBlocks: individualBenefits))
+//        var individualOtherBenefits = [String]()
+//        individualOtherBenefits.append("No age limit")
+//        individualOtherBenefits.append("No pre-existing conditions")
+//        individualOtherBenefits.append("Congenital conditions covered")
+//        individualOtherBenefits.append("Medically indicated transfers from hospital to home")
+//        individualBenefitGroups.append(InfoGroup(title: "Other Benefits", infoBlocks: individualOtherBenefits))
+//        individual.benefitGroups = individualBenefitGroups
+//        items.append(individual)
+//        
+//        // Schools
+//        var schools = EPlusMembershipPlan()
+//        schools.objectId = CRUDObjectId(EPlusMembershipPlan.PlanType.Schools.rawValue)
+//        schools.name = "Schools"
+//        schools.price = 1500
+//        schools.type = .Schools
+//        schools.costDescription = "KSh 1,500 Annually (per child)"
+//        var schoolsBenefitGroups = [InfoGroup]()
+//        var schoolsBenefits = [String]()
+//        schoolsBenefits.append("Access to Medical Helpline 24/7")
+//        schoolsBenefits.append("Unlimited emergency ambulance services")
+//        schoolsBenefits.append("Treatment and stabilisation on site")
+//        schoolsBenefits.append("Transfer to Hospital after stabilisation")
+//        schoolsBenefitGroups.append(InfoGroup(title: "Benefits", infoBlocks: schoolsBenefits))
+//        var schoolsOtherBenefits = [String]()
+//        schoolsOtherBenefits.append("No age limit")
+//        schoolsOtherBenefits.append("No pre-existing conditions")
+//        schoolsOtherBenefits.append("Congenital conditions covered")
+//        schoolsOtherBenefits.append("Medically indicated transfers from Hospital to home")
+//        schoolsOtherBenefits.append("One free standby ambulance service per term")
+//        schoolsOtherBenefits.append("Free First Aid training of 20 teachers per year")
+//        schoolsOtherBenefits.append("**PA and OP/IP Hospital benefits can be arranged at an extra cost")
+//        schoolsBenefitGroups.append(InfoGroup(title: "Other Benefits", infoBlocks: schoolsOtherBenefits))
+//        var schoolsThisCovers = [String]()
+//        schoolsThisCovers.append("24/7 emergency ambulance service for students/pupils in towns where E-plus has ambulances")
+//        schoolsThisCovers.append("The ambulance service is restricted to within the school grounds and during school hours")
+//        schoolsThisCovers.append("Open to institutions with a population of at least 100 pupils/students")
+//        schoolsBenefitGroups.append(InfoGroup(title: "This Covers", infoBlocks: schoolsThisCovers))
+//        schools.benefitGroups = schoolsBenefitGroups
+//        items.append(schools)
+//        
+//        // Corporate
+//        var corporate = EPlusMembershipPlan()
+//        corporate.objectId = CRUDObjectId(EPlusMembershipPlan.PlanType.Corporate.rawValue)
+//        corporate.name = "Corporate"
+//        corporate.type = .Corporate
+//        
+//        var corporatePlanOptions = [EPlusPlanOption]()
+//        corporatePlanOptions.append(EPlusPlanOption(price: 3000, minParticipants: 1, maxParticipants: 9, costDescription: "Annually (per staff)"))
+//        corporatePlanOptions.append(EPlusPlanOption(price: 2900, minParticipants: 10, maxParticipants: 50, costDescription: "Annually (per staff)"))
+//        corporatePlanOptions.append(EPlusPlanOption(price: 2800, minParticipants: 51, maxParticipants: 100, costDescription: "Annually (per staff)"))
+//        corporatePlanOptions.append(EPlusPlanOption(price: 2700, minParticipants: 101, maxParticipants: 500, costDescription: "Annually (per staff)"))
+//        corporatePlanOptions.append(EPlusPlanOption(price: 2500, minParticipants: 501, maxParticipants: nil, costDescription: "Annually (per staff)"))
+//        corporate.planOptions = corporatePlanOptions
+//        corporate.costDescription = "Annual Membership Rate"
+//        var corporateBenefitGroups = [InfoGroup]()
+//        var corporateBenefits = [String]()
+//        corporateBenefits.append("Access to Medical Helpline 24/7")
+//        corporateBenefits.append("Unlimited emergency ambulance services")
+//        corporateBenefits.append("Treatment and stabilisation on site")
+//        corporateBenefits.append("Transfer to Hospital after stabilisation")
+//        corporateBenefitGroups.append(InfoGroup(title: "Benefits", infoBlocks: corporateBenefits))
+//        var corporateOtherBenefits = [String]()
+//        corporateOtherBenefits.append("No age limit")
+//        corporateOtherBenefits.append("No pre-existing conditions")
+//        corporateOtherBenefits.append("Congenital conditions covered")
+//        corporateOtherBenefits.append("Medically indicated transfers from Hospital to home")
+//        corporateOtherBenefits.append("Extension of membership to dependants with an extra fee")
+//        corporateBenefitGroups.append(InfoGroup(title: "Other Benefits", infoBlocks: corporateOtherBenefits))
+//        var corporateCover = [String]()
+//        corporateCover.append("24/7 Ambulance membership for employees")
+//        corporateCover.append("Membership is restricted within the work premise and sometimes within the town in the residential areas")
+//        corporateBenefitGroups.append(InfoGroup(title: "This Covers", infoBlocks: corporateCover))
+//        corporate.benefitGroups = corporateBenefitGroups
+//        items.append(corporate)
+//        
+//        // Residential Estates
+//        var residential = EPlusMembershipPlan()
+//        residential.objectId = CRUDObjectId(EPlusMembershipPlan.PlanType.ResidentialEstates.rawValue)
+//        residential.name = "Residential Estates"
+//        residential.price = 1200
+//        residential.type = .ResidentialEstates
+//        residential.costDescription = "KSh 1,200 Annually (per household)"
+//        var residentialBenefitGroups = [InfoGroup]()
+//        var residentialBenefits = [String]()
+//        residentialBenefits.append("Access to Medical Helpline 24/7")
+//        residentialBenefits.append("Unlimited emergency ambulance services")
+//        residentialBenefits.append("Treatment and stabilisation on site")
+//        residentialBenefits.append("Transfer to Hospital after stabilisation")
+//        residentialBenefitGroups.append(InfoGroup(title: "Benefits", infoBlocks: residentialBenefits))
+//        var residentialOtherBenefits = [String]()
+//        residentialOtherBenefits.append("No age limit")
+//        residentialOtherBenefits.append("No pre-existing conditions")
+//        residentialOtherBenefits.append("Congenital conditions covered")
+//        residentialOtherBenefits.append("Medically indicated transfers from Hospital to home")
+//        residentialOtherBenefits.append("Free First Aid training for 10-20 persons appointed by the estate every year")
+//        residentialOtherBenefits.append("Free one standby ambulance service for estate functions")
+//        residentialOtherBenefits.append("No limit of persons within a household")
+//        residentialOtherBenefits.append("Visitors and any persons within the estate are covered")
+//        residentialBenefitGroups.append(InfoGroup(title: "Other Benefits", infoBlocks: residentialOtherBenefits))
+//        var residentialCover = [String]()
+//        residentialCover.append("24/7 ambulance membership for residents in an organised estate")
+//        residentialCover.append("A minimum of 50 families in an estate")
+//        residentialBenefitGroups.append(InfoGroup(title: "This Covers", infoBlocks: residentialCover))
+//        residential.benefitGroups = residentialBenefitGroups
+//        items.append(residential)
+//        
+//        // Sacco
+//        var sacco = EPlusMembershipPlan()
+//        sacco.objectId = CRUDObjectId(EPlusMembershipPlan.PlanType.Sacco.rawValue)
+//        sacco.name = "Sacco"
+//        sacco.price = 150
+//        sacco.type = .Sacco
+//        sacco.costDescription = "KSh 150 Annually (per member)"
+//        var saccoBenefitGroups = [InfoGroup]()
+//        var saccoBenefits = [String]()
+//        saccoBenefits.append("Access to Medical Helpline 24/7")
+//        saccoBenefits.append("Unlimited emergency ambulance services")
+//        saccoBenefits.append("Treatment and stabilisation on site")
+//        saccoBenefits.append("Transfer to Hospital after stabilisation")
+//        saccoBenefitGroups.append(InfoGroup(title: "Benefits", infoBlocks: saccoBenefits))
+//        var saccoOtherBenefits = [String]()
+//        saccoOtherBenefits.append("No age limit")
+//        saccoOtherBenefits.append("No pre-existing conditions")
+//        saccoOtherBenefits.append("Congenital conditions covered")
+//        saccoOtherBenefits.append("Medically indicated transfers from Hospital to home")
+//        saccoOtherBenefits.append("No limit of number of dependants per Sacco member")
+//        saccoBenefitGroups.append(InfoGroup(title: "Other Benefits", infoBlocks: saccoOtherBenefits))
+//        var saccoCover = [String]()
+//        saccoCover.append("24/7 ambulance membership for Sacco members only where E-plus has ambulances")
+//        saccoBenefitGroups.append(InfoGroup(title: "This Covers", infoBlocks: saccoCover))
+//        sacco.benefitGroups = saccoBenefitGroups
+//        items.append(sacco)
+//        
+//        return Future(value: CollectionResponse(items:items, total: items.count), delay: 0.5)
         
         //let endpoint = AmbulanceMembershipPlan.endpoint()
         //return getObjectsCollection(endpoint, params: nil)

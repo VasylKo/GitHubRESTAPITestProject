@@ -36,6 +36,19 @@ struct EPlusService: CRUDObject {
         }
     }
     
+    var mainImageName: String {
+        switch objectId {
+        case CRUDObjectId(0):
+            return "eplus_about_2"
+        case CRUDObjectId(1):
+            return "eplus_about_3"
+        case CRUDObjectId(2):
+            return "eplus_about_4"
+        default:
+            return ""
+        }
+    }
+    
     //MARK: Mappable
     
     init?(_ map: Map) {
