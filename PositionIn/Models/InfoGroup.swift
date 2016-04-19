@@ -1,5 +1,5 @@
 //
-//  BenefitsGroup.swift
+//  InfoGroup.swift
 //  PositionIn
 //
 //  Created by Ruslan Kolchakov on 04/15/16.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct BenefitGroup {
+struct InfoGroup {
     var title: String?
-    var benefits: [String]?
+    var infoBlocks: [String]?
 }
