@@ -97,7 +97,7 @@ extension EPlusAmbulanceDetailsController: UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let plan = self.plan, let benefitGroups = plan.benefitGroups, let benefits = benefitGroups[section].benefits {
+        if let plan = self.plan, let benefitGroups = plan.benefitGroups, let benefits = benefitGroups[section].infoBlocks {
             return benefits.count
         }
         return 0
@@ -106,7 +106,7 @@ extension EPlusAmbulanceDetailsController: UITableViewDataSource {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(String(EPlusPlanInfoTableViewCell.self),
             forIndexPath: indexPath) as! EPlusPlanInfoTableViewCell
-        if let plan = self.plan, let benefitGroups = plan.benefitGroups, let benefits = benefitGroups[indexPath.section].benefits {
+        if let plan = self.plan, let benefitGroups = plan.benefitGroups, let benefits = benefitGroups[indexPath.section].infoBlocks {
             cell.planInfoString = benefits[indexPath.row]
         }
         return cell

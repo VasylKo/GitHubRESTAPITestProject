@@ -154,7 +154,7 @@ extension EPlusCorporateAmbulanceDetailsController: UITableViewDataSource {
         else {
             let infoPlanCell = tableView.dequeueReusableCellWithIdentifier(String(EPlusPlanInfoTableViewCell.self),
                 forIndexPath: indexPath) as! EPlusPlanInfoTableViewCell
-            if let plan = self.plan, let benefitGroups = plan.benefitGroups, let benefits = benefitGroups[indexPath.section - 1].benefits {
+            if let plan = self.plan, let benefitGroups = plan.benefitGroups, let benefits = benefitGroups[indexPath.section - 1].infoBlocks {
                 infoPlanCell.planInfoString = benefits[indexPath.row]
             }
             cell = infoPlanCell
