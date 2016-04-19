@@ -33,6 +33,12 @@ class EPlusCorporateAmbulanceDetailsController: UIViewController {
     
     func setupUI() {
         title = "Rescue Package"
+        
+        let rightBarButtonItem: UIBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Next", comment: ""),
+            style: .Plain, target: self, action: "nextButtonTouched:")
+        self.navigationItem.rightBarButtonItem = rightBarButtonItem
+        
+        
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 44
         var nib = UINib(nibName: String(EPlusPlanInfoTableViewCell.self), bundle: nil)
@@ -74,6 +80,10 @@ class EPlusCorporateAmbulanceDetailsController: UIViewController {
             }
             tableView.tableHeaderView = headerView
         }
+    }
+    
+    func nextButtonTouched(sender: AnyObject) {
+        router.showMembershipConfirmDetailsViewController(from: self, with: plan!)
     }
     
     private var plan: EPlusMembershipPlan?
