@@ -1,57 +1,36 @@
 //
-//  EplusMembershipPlan.swift
+//  EPlusServicen.swift
 //  PositionIn
 //
-//  Created by Ruslan Kolchakov on 04/18/16.
+//  Created by ng on 1/28/16.
 //  Copyright © 2016 Soluna Labs. All rights reserved.
 //
 
 import ObjectMapper
 import CleanroomLogger
 
-struct EPlusPlanOption {
-    var price: Int?
-    var minParticipants: Int?
-    var maxParticipants: Int?
-    var costDescription: String?
-}
-
-struct EPlusMembershipPlan: CRUDObject {
-    
-    enum PlanType : Int, CustomStringConvertible {
-        case Unknown = 0, Family, Individual, Schools, Corporate, ResidentialEstates, Sacco
-    
-        var description: String {
-            return ""
-        }
-    }
+struct EPlusService: CRUDObject {
     
     // FIXME: Ambulance Hot fix - need to remove
     init() {}
     
-    
     var objectId : CRUDObjectId = CRUDObjectInvalidId
     var name : String?
-    var costDescription: String?
-    var planOptions: [EPlusPlanOption]?
-    var benefitGroups: [InfoGroup]?
-    var price: Int?
-    var type: PlanType = .Unknown
-    var durationDays: Int?
-    var membershipImageName: String {
+    var shortDesc: String?
+    var serviceDesc: String?
+    var infoBlocks: [InfoGroup]?
+    var footnote: String?
+    
+    var serviceImageName: String {
         switch objectId {
-        case CRUDObjectId(PlanType.Family.rawValue):
-            return "family_plan_eplus_icon"
-        case CRUDObjectId(PlanType.Individual.rawValue):
-            return "individual_plan_eplus_icon"
-        case CRUDObjectId(PlanType.Schools.rawValue):
-            return "school_plan_eplus_icon"
-        case CRUDObjectId(PlanType.Corporate.rawValue):
-            return "corporate_plan_eplus_icon"
-        case CRUDObjectId(PlanType.ResidentialEstates.rawValue):
-            return "residential_plan_eplus_icon"
-        case CRUDObjectId(PlanType.Sacco.rawValue):
-            return "saccos_plan_eplus_icon"
+        case CRUDObjectId(0):
+            return "service_1_eplus_icon"
+        case CRUDObjectId(1):
+            return "service_2_eplus_icon"
+        case CRUDObjectId(2):
+            return "service_3_eplus_icon"
+        case CRUDObjectId(3):
+            return "service_5_eplus_icon"
         default:
             return ""
         }

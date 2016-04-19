@@ -49,7 +49,7 @@
 		181314EB1CBFA3B4004373F2 /* EPlusMembershipRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181314E61CBFA3B4004373F2 /* EPlusMembershipRouter.swift */; };
 		181314EC1CBFA3B4004373F2 /* EPlusMembershipRouterImplementation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181314E71CBFA3B4004373F2 /* EPlusMembershipRouterImplementation.swift */; };
 		181314ED1CBFA3B4004373F2 /* EPlusMembershipConfirmDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181314EA1CBFA3B4004373F2 /* EPlusMembershipConfirmDetailsViewController.swift */; };
-		184040101CC116BB00DF3655 /* BenefitsGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1840400F1CC116BB00DF3655 /* BenefitsGroup.swift */; };
+		184040101CC116BB00DF3655 /* InfoGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1840400F1CC116BB00DF3655 /* InfoGroup.swift */; };
 		184040131CC1284A00DF3655 /* EPlusMemberCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184040121CC1284A00DF3655 /* EPlusMemberCardViewController.swift */; };
 		184040171CC13FA700DF3655 /* EplusSIgnUpNowButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184040151CC13FA700DF3655 /* EplusSIgnUpNowButton.swift */; };
 		184040181CC13FA700DF3655 /* EplusSIgnUpNowButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 184040161CC13FA700DF3655 /* EplusSIgnUpNowButton.xib */; };
@@ -61,6 +61,7 @@
 		184040291CC14A2B00DF3655 /* EPlusSelectPlanTableViewFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 184040221CC14A2B00DF3655 /* EPlusSelectPlanTableViewFooterView.xib */; };
 		1840402A1CC14A2B00DF3655 /* PositionIn.EPlusAmbulanceDetailsController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 184040231CC14A2B00DF3655 /* PositionIn.EPlusAmbulanceDetailsController.xib */; };
 		1840402D1CC14A3700DF3655 /* EPlusAmbulanceDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1840402C1CC14A3700DF3655 /* EPlusAmbulanceDetailsController.swift */; };
+		1840402F1CC500F600DF3655 /* EPlusService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1840402E1CC500F600DF3655 /* EPlusService.swift */; };
 		184236C01CA5B59700C53D08 /* NewRelicController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184236BF1CA5B59700C53D08 /* NewRelicController.swift */; };
 		18817F1E1C897CFB00FBA6B1 /* WalletsCellFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18817F1D1C897CFB00FBA6B1 /* WalletsCellFactory.swift */; };
 		18817F221C89B28B00FBA6B1 /* DonationDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18817F201C89B28B00FBA6B1 /* DonationDetailsViewController.swift */; };
@@ -643,7 +644,7 @@
 		181314E61CBFA3B4004373F2 /* EPlusMembershipRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EPlusMembershipRouter.swift; sourceTree = "<group>"; };
 		181314E71CBFA3B4004373F2 /* EPlusMembershipRouterImplementation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EPlusMembershipRouterImplementation.swift; sourceTree = "<group>"; };
 		181314EA1CBFA3B4004373F2 /* EPlusMembershipConfirmDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EPlusMembershipConfirmDetailsViewController.swift; sourceTree = "<group>"; };
-		1840400F1CC116BB00DF3655 /* BenefitsGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BenefitsGroup.swift; sourceTree = "<group>"; };
+		1840400F1CC116BB00DF3655 /* InfoGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoGroup.swift; sourceTree = "<group>"; };
 		184040121CC1284A00DF3655 /* EPlusMemberCardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EPlusMemberCardViewController.swift; sourceTree = "<group>"; };
 		184040151CC13FA700DF3655 /* EplusSIgnUpNowButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EplusSIgnUpNowButton.swift; sourceTree = "<group>"; };
 		184040161CC13FA700DF3655 /* EplusSIgnUpNowButton.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EplusSIgnUpNowButton.xib; sourceTree = "<group>"; };
@@ -655,6 +656,7 @@
 		184040221CC14A2B00DF3655 /* EPlusSelectPlanTableViewFooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EPlusSelectPlanTableViewFooterView.xib; sourceTree = "<group>"; };
 		184040231CC14A2B00DF3655 /* PositionIn.EPlusAmbulanceDetailsController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.EPlusAmbulanceDetailsController.xib; sourceTree = "<group>"; };
 		1840402C1CC14A3700DF3655 /* EPlusAmbulanceDetailsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EPlusAmbulanceDetailsController.swift; sourceTree = "<group>"; };
+		1840402E1CC500F600DF3655 /* EPlusService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EPlusService.swift; sourceTree = "<group>"; };
 		184236BF1CA5B59700C53D08 /* NewRelicController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewRelicController.swift; sourceTree = "<group>"; };
 		18817F1D1C897CFB00FBA6B1 /* WalletsCellFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletsCellFactory.swift; sourceTree = "<group>"; };
 		18817F201C89B28B00FBA6B1 /* DonationDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DonationDetailsViewController.swift; sourceTree = "<group>"; };
@@ -2792,8 +2794,9 @@
 		E660E5251B5AB82000F52050 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				1840400F1CC116BB00DF3655 /* BenefitsGroup.swift */,
+				1840400F1CC116BB00DF3655 /* InfoGroup.swift */,
 				181314D41CBE7933004373F2 /* EPlusMembershipPlan.swift */,
+				1840402E1CC500F600DF3655 /* EPlusService.swift */,
 				E66478911C918CC400BA5EFB /* SystemNotification.swift */,
 				18F3313D1C8871870010321B /* Order.swift */,
 				D1381AD51C8D76C700328D86 /* PushNotification.swift */,
@@ -4655,6 +4658,7 @@
 				18F7C6451CBFF0F100B68BB6 /* EPlusPlansViewController.swift in Sources */,
 				D1FD853E1C1EE8D800C2E87B /* PromotionDetailsViewController.swift in Sources */,
 				D161F7721C68E4E800EBDB94 /* MarketPaymentView.swift in Sources */,
+				1840402F1CC500F600DF3655 /* EPlusService.swift in Sources */,
 				E6F074AF1BA6980D00D2566B /* ConversationViewController.swift in Sources */,
 				E6C952361BA1D9960032254F /* ProfileInfoCell.swift in Sources */,
 				D1DA176C1C05B7BE0091A8CE /* BrowseGridCollectionViewCell.swift in Sources */,
@@ -4693,7 +4697,7 @@
 				E68B52061B8736F4006B980C /* FilterViewController.swift in Sources */,
 				CD9CA0F51C7F3E50007B26AA /* MoreInformationCell.swift in Sources */,
 				E62B16F61B5C1AA700D446BC /* MainMenuUserCell.swift in Sources */,
-				184040101CC116BB00DF3655 /* BenefitsGroup.swift in Sources */,
+				184040101CC116BB00DF3655 /* InfoGroup.swift in Sources */,
 				E6F3093E1BA81FAF00C9420C /* PickPhotoView.swift in Sources */,
 				E6C5CE1D1B83A28C00265955 /* SessionController.swift in Sources */,
 				CDEDD9771C45243900396594 /* CommunitySearchViewController.swift in Sources */,
