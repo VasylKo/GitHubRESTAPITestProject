@@ -87,6 +87,28 @@ class EPlusAmbulanceDetailsController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
 }
 
+    //MARK: - Sections Managment
+extension EPlusAmbulanceDetailsController {
+   
+    private enum SectionType {
+        case CorporateSection, GeneralSection, SpecialOfferSection, Unknown
+    }
+    
+    private func getSectionType(sectionIndex: Int) -> SectionType {
+        guard let plan = plan else { return .Unknown }
+        
+        if let _ = plan.planOptions where sectionIndex == 0 {
+            return .CorporateSection
+        } else if let _ = plan.otherBenefits where sectionIndex == (tableView.numberOfSections - 1) {
+            return .SpecialOfferSection
+        } else if let _ = plan.benefitGroups {
+            return .GeneralSection
+        }
+        
+        return .Unknown
+    }
+}
+
 extension EPlusAmbulanceDetailsController: UITableViewDelegate {
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -150,6 +172,8 @@ extension EPlusAmbulanceDetailsController: UITableViewDataSource {
 
         return cell
     }
+    
+    
 }
 
 extension EPlusAmbulanceDetailsController: EPlusSelectPlanTableViewFooterViewDelegate {
