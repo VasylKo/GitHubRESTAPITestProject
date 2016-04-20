@@ -12,6 +12,7 @@ import Braintree
 import Box
 
 class ProductOrderViewController: XLFormViewController {
+
     private enum Tags : String {
         case Header = "Header"
         case Avaliability = "Avaliability"
@@ -20,6 +21,9 @@ class ProductOrderViewController: XLFormViewController {
         case ProceedToPay = "ProceedToPay"
 
     }
+    
+    // MARK: - Private properties
+    private weak var proceedToPayRowDescriptor: XLFormRowDescriptor?
     
     // MARK: - Internal properties
     internal var product: Product?
@@ -38,7 +42,7 @@ class ProductOrderViewController: XLFormViewController {
         trackScreenToAnalytics(AnalyticsLabels.marketItemPurchase)
     }
     
-    // MARK: - Builf XFForm
+    // MARK: - Build XFForm
     func initializeForm() {
         guard let product = product else { return }
         
@@ -54,8 +58,56 @@ class ProductOrderViewController: XLFormViewController {
             rowType: XLFormRowDescriptorTypeOrderHeder)
         orderHeaderRow.cellConfigAtConfigure["name"] = product.name
         orderHeaderRow.cellConfigAtConfigure["projectIconURL"] = product.imageURL
-        
         productSection.addFormRow(orderHeaderRow)
+        
+        //Quantity row
+        let quantityRow: XLFormRowDescriptor = XLFormRowDescriptor(tag: Tags.Quantity.rawValue,
+            rowType: XLFormRowDescriptorTypeQuantityViewCell)
+        
+        /*
+        quantityRow.value = 0
+        quantityRow.cellConfigAtConfigure["stepControl.minimumValue"] = 0
+        quantityRow.cellConfigAtConfigure["stepControl.maximumValue"] = 100
+        quantityRow.cellConfigAtConfigure["stepControl.stepValue"] = 1
+        quantityRow.cellConfigAtConfigure["tintColor"] = UIScheme.mainThemeColor
+        quantityRow.cellConfigAtConfigure["currentStepValue.textColor"] = UIScheme.mainThemeColor
+        //quantityRow.cellConfigAtConfigure["currentStepValue.hidden"] = true
+        //quantityRow.cellConfigAtConfigure["subtitle"] = "ddf"
+        quantityRow.cellConfig.setObject("AppleSDGothicNeo-Regular", forKey: "detailTextLabel.text")
+*/
+        productSection.addFormRow(quantityRow)
+        
+        //ProceedToPay section
+        let proceedToPaySection = XLFormSectionDescriptor.formSection()
+        form.addFormSection(proceedToPaySection)
+        
+        let proceedToPayRow: XLFormRowDescriptor = XLFormRowDescriptor(tag: Tags.ProceedToPay.rawValue,
+        rowType: XLFormRowDescriptorTypeButton, title: NSLocalizedString("Proceed to Pay"))
+        proceedToPayRowDescriptor = proceedToPayRow
+        proceedToPayRow.disabled = true
+        proceedToPayRow.cellConfig["backgroundColor"] = UIScheme.disableActionColor
+        proceedToPayRow.cellConfig["textLabel.color"] = UIColor.whiteColor()
+        proceedToPayRow.cellConfig["textLabel.textAlignment"] =  NSTextAlignment.Center.rawValue
+        
+        /*
+        proceedToPayRow.action.formBlock = { [weak self] row in
+            self?.deselectFormRow(row)
+            
+            let validationErrors : Array<NSError> = self?.formValidationErrors() as! Array<NSError>
+            if (validationErrors.count > 0){
+                return
+            }
+            
+            self?.sendDonationEventToAnalytics(action: AnalyticActios.proceedToPay)
+            
+            self?.performSegueWithIdentifier("Show\((self?.paymentType)!)", sender: self!)
+            self?.setError(true, error: nil)
+        }
+*/
+        
+        proceedToPaySection.addFormRow(proceedToPayRow)
+        
+        proceedToPaySection.footerTitle = NSLocalizedString("By purchasing, you agree to Red Cross Terms of Service and Privacy Policy")
         
         self.form = form
     }
@@ -68,4 +120,29 @@ class ProductOrderViewController: XLFormViewController {
         
         return UITableViewAutomaticDimension
     }
+}
+
+extension ProductOrderViewController {
+    /*
+    internal class CardTypeValidator: NSObject, XLFormValidatorProtocol {
+        var paymentAmount = 0
+        
+        @objc func isValid(row: XLFormRowDescriptor!) -> XLFormValidationStatus {
+            var msg = ""
+            var status = false
+            
+            if let box: Box<CardItem> = row.value as? Box where box.value == .CreditDebitCard || (box.value == .MPesa && paymentAmount >= 10) {
+                msg = NSLocalizedString("Selected value is valid")
+                status = true
+            } else if let box: Box<CardItem> = row.value as? Box where box.value == .MPesa && paymentAmount < 10 {
+                msg = DonateViewController.mpesaPeymentAmountErrorMessage
+                status = false
+            } else {
+                msg = NSLocalizedString("Selected value is invalid (empty)")
+                status = false
+            }
+            return XLFormValidationStatus(msg: msg, status: status, rowDescriptor: row)
+        }
+    }
+*/
 }

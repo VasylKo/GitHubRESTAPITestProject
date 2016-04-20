@@ -15,16 +15,16 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NAi-i5-JUU">
-                        <rect key="frame" x="80" y="11" width="379" height="57.5"/>
+                        <rect key="frame" x="88" y="11.5" width="371" height="57"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Item name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i3i-uW-Zeg">
-                                <rect key="frame" x="8" y="8" width="363" height="17"/>
+                                <rect key="frame" x="8" y="8" width="355" height="17"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="14"/>
                                 <color key="textColor" red="0.60784313729999995" green="0.60784313729999995" blue="0.60784313729999995" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Medical kit" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GHb-wx-QKi">
-                                <rect key="frame" x="8" y="29" width="363" height="21"/>
+                                <rect key="frame" x="8" y="29" width="355" height="20.5"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -42,7 +42,7 @@
                         </constraints>
                     </view>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="market_img_default" translatesAutoresizingMaskIntoConstraints="NO" id="NSi-XP-m7K">
-                        <rect key="frame" x="8" y="8" width="64" height="64"/>
+                        <rect key="frame" x="16" y="8" width="64" height="64"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="64" id="PRc-Z4-Hzh"/>
                             <constraint firstAttribute="height" constant="64" id="dV2-tK-uXb"/>
@@ -51,7 +51,7 @@
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="NAi-i5-JUU" secondAttribute="trailing" constant="8" id="AWk-T8-wl3"/>
-                    <constraint firstItem="NSi-XP-m7K" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="YPg-Uk-6fa"/>
+                    <constraint firstItem="NSi-XP-m7K" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="YPg-Uk-6fa"/>
                     <constraint firstItem="NSi-XP-m7K" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="b9b-eG-wmn"/>
                     <constraint firstItem="NAi-i5-JUU" firstAttribute="leading" secondItem="NSi-XP-m7K" secondAttribute="trailing" constant="8" id="uYE-DO-iEb"/>
                     <constraint firstItem="NAi-i5-JUU" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="wWg-zN-tnx"/>
