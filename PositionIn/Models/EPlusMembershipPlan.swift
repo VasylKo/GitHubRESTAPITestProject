@@ -127,7 +127,7 @@ struct EPlusMembershipPlan: CRUDObject {
     }
     
     static func endpoint(identifier : CRUDObjectId) -> String {
-        return self.endpoint() + "/" + identifier
+        return "/v1.0/ambulance/membership/" + identifier
     }
     
     //MARK: CustomStringConvertible protocol

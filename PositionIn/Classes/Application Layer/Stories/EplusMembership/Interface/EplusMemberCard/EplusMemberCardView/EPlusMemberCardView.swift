@@ -63,7 +63,7 @@ class EPlusMemberCardView: UIView {
         }
         cardIdLabel.text = membershipDetails.membershipCardId ?? noValueLabel
         priceLabel.text = String("\(AppConfiguration().currencySymbol) \(plan.price ?? 0)")
-        planNameLabel.text = membershipDetails.membershipPlanName ?? noValueLabel
+        planNameLabel.text = plan.name ?? noValueLabel
         backgroundImageView.image = UIImage(named: membershipDetails.membershipCardImageName ?? "")
         if let endDate = membershipDetails.endDate {
             expirationDateLabel.text = stringFromDate(endDate)

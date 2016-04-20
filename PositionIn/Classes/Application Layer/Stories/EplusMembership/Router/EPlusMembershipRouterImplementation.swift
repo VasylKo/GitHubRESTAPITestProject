@@ -11,53 +11,11 @@ import UIKit
 class EPlusMembershipRouterImplementation: BaseRouterImplementation, EPlusMembershipRouter {
     
     func showInitialViewController(from sourceViewController : UIViewController, hasActivePlan: Bool? = nil) {
-        showPlansViewController(from: sourceViewController)
-        
-//        var family = EplusMembershipPlan()
-//        family.objectId = CRUDObjectId(EplusMembershipPlan.PlanType.Family.rawValue)
-//        family.name = "Family"
-//        family.price = 6000
-//        family.costDescription = "KSH 6,000 Annually"
-//        family.planDescription = "This Cover provides a 24/7 Ambulance membership for a family in towns where E-plus has ambulances.\n\nMaximum number of 6 family members (principle, spouse and 4 children)"
-//        var familyBenefits = [String]()
-//        familyBenefits.append("Access to Medical Helpline 24/7.")
-//        familyBenefits.append("Unlimited emergency ambulance services.")
-//        familyBenefits.append("Treatment and stabilization on site.")
-//        familyBenefits.append("Transfer to Hospital after stabilization.")
-//        family.benefits = familyBenefits
-//        var familyOtherBenefits = [String]()
-//        familyOtherBenefits.append("No age limit.")
-//        familyOtherBenefits.append("No pre existing conditions.")
-//        familyOtherBenefits.append("Congenital conditions covered.")
-//        familyOtherBenefits.append("Medically indicated transfers from Hospital to home.")
-//        family.otherBenefits = familyOtherBenefits
-//        
-//        showMembershipConfirmDetailsViewController(from: sourceViewController, with: family)
-        
-        
-//        switch hasActivePlan {
-//        case .Some(let active):
-//            if (active) {
-//                self.showMembershipMemberCardViewController(from: sourceViewController)
-//            } else {
-//                let corporatePlansViewController = MembershipPlansViewController(router: self, type: MembershipPlan.PlanType.Corporate, currentMembershipPlan: nil)
-//                let individualPlansViewController = MembershipPlansViewController(router: self, type: MembershipPlan.PlanType.Individual, currentMembershipPlan: nil)
-//                let initialViewController = SegmentedControlContainerViewController(labels: ["Individual", "Corporate"],
-//                    containeredViewControllers: [individualPlansViewController, corporatePlansViewController], title: "Membership")
-//                sourceViewController.navigationController?.pushViewController(initialViewController, animated: true)
-//            }
-//        case .None:
-//            if (api().isUserHasActiveMembershipPlan()) {
-//                self.showMembershipMemberCardViewController(from: sourceViewController)
-//            } else {
-//                let corporatePlansViewController = MembershipPlansViewController(router: self, type: MembershipPlan.PlanType.Corporate, currentMembershipPlan: nil)
-//                let individualPlansViewController = MembershipPlansViewController(router: self, type: MembershipPlan.PlanType.Individual, currentMembershipPlan: nil)
-//                let initialViewController = SegmentedControlContainerViewController(labels: ["Individual", "Corporate"],
-//                    containeredViewControllers: [individualPlansViewController, corporatePlansViewController], title: "Membership")
-//                sourceViewController.navigationController?.pushViewController(initialViewController, animated: true)
-//            }
-//        }
-
+        api().getEPlusActiveMembership().onSuccess { _ -> Void in
+            self.showMembershipMemberCardViewController(from: sourceViewController)
+        }.onFailure { [unowned self] (error: NSError) -> Void in
+            self.showPlansViewController(from: sourceViewController)
+        }
     }
     
     func showPlansViewController(from sourceViewController : UIViewController /*, with plan : EplusMembershipPlan */) {

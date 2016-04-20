@@ -116,7 +116,7 @@
                                         <constraint firstAttribute="bottom" secondItem="GgK-Us-YYA" secondAttribute="bottom" id="zVV-tS-0Bw"/>
                                     </constraints>
                                 </view>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qcB-hl-FvQ" userLabel="InfoSection">
+                                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qcB-hl-FvQ" userLabel="InfoSection">
                                     <rect key="frame" x="0.0" y="327" width="600" height="135"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="eplus_logo" translatesAutoresizingMaskIntoConstraints="NO" id="e7E-6Y-WTD">

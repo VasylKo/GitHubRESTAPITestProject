@@ -60,9 +60,11 @@ class EPlusMemberCardViewController : UIViewController {
             self?.profile = profile
             
             return api().getEPlusActiveMembership().flatMap { [weak self] (details : EplusMembershipDetails) -> Future<Void, NSError> in
-                return api().getEPlusMembership(details.membershipPlanId).flatMap { [weak self] (plan : EPlusMembershipPlan) -> Future<Void, NSError> in
+                return api().getEPlusMemberships().flatMap { [weak self] (response : CollectionResponse<EPlusMembershipPlan>) -> Future<Void, NSError> in
+                    //api().getEPlusMembership(details.membershipPlanId).flatMap { [weak self] (plan : EPlusMembershipPlan) -> Future<Void, NSError> in
                     if let strongSelf = self, profile = strongSelf.profile {
-                        strongSelf.eplusMemberCardView?.configureWith(profile: profile, plan: plan, membershipDetails: details)
+                        strongSelf.plan = response.items.filter {$0.objectId == details.membershipPlanId}.first!
+                        strongSelf.eplusMemberCardView?.configureWith(profile: profile, plan: strongSelf.plan!, membershipDetails: details)
                         strongSelf.detailsButton?.enabled = true
         
                         //Show eplus memver card
@@ -81,7 +83,6 @@ class EPlusMemberCardViewController : UIViewController {
     //MARK: Targe-Action
     
     @IBAction func detailsTapped(sender: AnyObject) {
-        //TODO: Implement PlanRoueter
         if let plan = self.plan {
             router.showMembershipPlanDetailsViewController(from: self, with: plan /*, onlyPlanInfo: true */)
         }

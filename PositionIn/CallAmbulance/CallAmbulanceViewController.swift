@@ -42,7 +42,13 @@ class CallAmbulanceViewController: BaseAddItemViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.tintColor = UIScheme.mainThemeColor
-        addFooterButton()
+        
+        api().getEPlusActiveMembership().onSuccess { [unowned self] (membershipDetails: EplusMembershipDetails) -> Void in
+            self.addFooterButton(.AlreadyMember)
+        }.onFailure { [unowned self] (error: NSError) -> Void in
+            self.addFooterButton(.SignUP)
+        }
+        
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -215,9 +221,9 @@ class CallAmbulanceViewController: BaseAddItemViewController {
     }
     
     //MARK: - Footer button
-    private func addFooterButton() {
+    private func addFooterButton(buttonType: EplusSIgnUpNowButton.EplusButtonType) {
         let buttonHeight = CGFloat(60)
-        let button = EplusSIgnUpNowButton(eplusButtonType: .SignUP)
+        let button = EplusSIgnUpNowButton(eplusButtonType: buttonType)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: Selector("footerButtonTouched:"), forControlEvents: UIControlEvents.TouchUpInside)
         view.insertSubview(button, aboveSubview: tableView)
@@ -233,7 +239,11 @@ class CallAmbulanceViewController: BaseAddItemViewController {
         footerButtom = button
     }
     
-    func footerButtonTouched(sender: UIButton) {
-        EPlusMembershipRouterImplementation().showPlansViewController(from: self)
+    func footerButtonTouched(sender: EplusSIgnUpNowButton) {
+        if sender.type == .SignUP {
+            EPlusMembershipRouterImplementation().showPlansViewController(from: self)
+        } else {
+            EPlusMembershipRouterImplementation().showMembershipMemberCardViewController(from: self)
+        }
     }
 }

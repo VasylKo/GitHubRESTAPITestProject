@@ -28,6 +28,7 @@ class EplusSIgnUpNowButton: UIButton {
     convenience init(eplusButtonType: EplusButtonType) {
         self.init()
         type = eplusButtonType
+        setupUI()
     }
     
     override init(frame: CGRect) {

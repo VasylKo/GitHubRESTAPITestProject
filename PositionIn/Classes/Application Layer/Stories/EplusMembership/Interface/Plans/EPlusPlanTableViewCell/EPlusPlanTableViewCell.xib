@@ -23,13 +23,13 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Igu-bs-jab">
-                        <rect key="frame" x="73" y="12" width="219" height="20"/>
+                        <rect key="frame" x="73" y="12" width="231" height="20"/>
                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5WL-po-eot">
-                        <rect key="frame" x="73" y="40" width="219" height="22"/>
+                        <rect key="frame" x="73" y="40" width="231" height="22"/>
                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                         <color key="textColor" red="0.5490196078431373" green="0.5490196078431373" blue="0.5490196078431373" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -40,9 +40,9 @@
                     <constraint firstItem="5WL-po-eot" firstAttribute="leading" secondItem="4Dl-OQ-F8J" secondAttribute="trailing" constant="8" id="8Xu-Am-h8f"/>
                     <constraint firstItem="5WL-po-eot" firstAttribute="top" secondItem="Igu-bs-jab" secondAttribute="bottom" constant="8" id="8rQ-sP-xJF"/>
                     <constraint firstItem="Igu-bs-jab" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="4" id="D70-WY-Hwv"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="5WL-po-eot" secondAttribute="trailing" constant="20" id="Iaf-vl-ZA6"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="5WL-po-eot" secondAttribute="trailing" constant="8" id="Iaf-vl-ZA6"/>
                     <constraint firstAttribute="bottom" secondItem="4Dl-OQ-F8J" secondAttribute="bottom" constant="12" id="OT9-jg-Nsd"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="Igu-bs-jab" secondAttribute="trailing" constant="20" id="Q6O-Lv-UYi"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="Igu-bs-jab" secondAttribute="trailing" constant="8" id="Q6O-Lv-UYi"/>
                     <constraint firstItem="Igu-bs-jab" firstAttribute="leading" secondItem="4Dl-OQ-F8J" secondAttribute="trailing" constant="8" id="S5y-9I-RQ2"/>
                     <constraint firstItem="5WL-po-eot" firstAttribute="top" secondItem="Igu-bs-jab" secondAttribute="bottom" constant="8" id="feM-5M-Y7B"/>
                     <constraint firstAttribute="bottomMargin" secondItem="5WL-po-eot" secondAttribute="bottom" constant="4" id="m1A-ED-6Te"/>
@@ -55,6 +55,7 @@
                 <outlet property="planImageView" destination="4Dl-OQ-F8J" id="HMJ-iR-0XV"/>
                 <outlet property="titleLabel" destination="Igu-bs-jab" id="IYu-V0-fDw"/>
             </connections>
+            <point key="canvasLocation" x="226" y="292"/>
         </tableViewCell>
     </objects>
 </document>
