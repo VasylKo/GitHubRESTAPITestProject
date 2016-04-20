@@ -99,6 +99,7 @@ class PhoneVerificationViewController: XLFormViewController {
         if let codeRowValue = codeRow?.value,
             let phoneNumber = self.phoneNumber {
                 let codeString = "\(codeRowValue)"
+                self.navigationItem.rightBarButtonItem?.enabled = false
                 api().verifyPhoneCode(phoneNumber, code: codeString).onSuccess(callback: {[weak self] isExistingUser in
                     //User entered valid sms code
                     trackEventToAnalytics(AnalyticCategories.phoneVerification, action: AnalyticActios.verificationSuccessful)
@@ -119,8 +120,10 @@ class PhoneVerificationViewController: XLFormViewController {
                             MembershipRouterImplementation().showMembershipMemberProfile(from: strongSelf, phoneNumber: strongSelf.phoneNumber!, validationCode: codeString)
                         }
                     }
-                    }).onFailure { _ in
+                    self?.navigationItem.rightBarButtonItem?.enabled = true;
+                    }).onFailure { [weak self] _ in
                         //User entered invalid sms code
+                        self?.navigationItem.rightBarButtonItem?.enabled = true;
                         trackEventToAnalytics(AnalyticCategories.phoneVerification, action: AnalyticActios.verificationFail)
                 }
         }
