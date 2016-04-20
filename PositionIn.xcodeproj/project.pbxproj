@@ -133,6 +133,7 @@
 		5419F9991CC6C7F9000E16E7 /* EPlusAbulanceDetailsTableViewSectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5419F9981CC6C7F9000E16E7 /* EPlusAbulanceDetailsTableViewSectionHeaderView.swift */; };
 		5419F99D1CC6C9C9000E16E7 /* EPlusFtooterSectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5419F99B1CC6C9C9000E16E7 /* EPlusFtooterSectionTableViewCell.swift */; };
 		5419F99E1CC6C9C9000E16E7 /* EPlusFtooterSectionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5419F99C1CC6C9C9000E16E7 /* EPlusFtooterSectionTableViewCell.xib */; };
+		5419F9A01CC78080000E16E7 /* MailComposeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5419F99F1CC78080000E16E7 /* MailComposeViewController.swift */; };
 		541BA1D91CBFE034007D9AB0 /* PositionIn.EPlusMemberCardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 541BA1D81CBFE034007D9AB0 /* PositionIn.EPlusMemberCardViewController.xib */; };
 		541BA1DC1CBFE9AB007D9AB0 /* EPlusMemberCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 541BA1DA1CBFE9AB007D9AB0 /* EPlusMemberCardView.swift */; };
 		541BA1DD1CBFE9AB007D9AB0 /* EPlusMemberCardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 541BA1DB1CBFE9AB007D9AB0 /* EPlusMemberCardView.xib */; };
@@ -751,6 +752,7 @@
 		5419F9981CC6C7F9000E16E7 /* EPlusAbulanceDetailsTableViewSectionHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EPlusAbulanceDetailsTableViewSectionHeaderView.swift; sourceTree = "<group>"; };
 		5419F99B1CC6C9C9000E16E7 /* EPlusFtooterSectionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EPlusFtooterSectionTableViewCell.swift; sourceTree = "<group>"; };
 		5419F99C1CC6C9C9000E16E7 /* EPlusFtooterSectionTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EPlusFtooterSectionTableViewCell.xib; sourceTree = "<group>"; };
+		5419F99F1CC78080000E16E7 /* MailComposeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MailComposeViewController.swift; sourceTree = "<group>"; };
 		541BA1D81CBFE034007D9AB0 /* PositionIn.EPlusMemberCardViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.EPlusMemberCardViewController.xib; sourceTree = "<group>"; };
 		541BA1DA1CBFE9AB007D9AB0 /* EPlusMemberCardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EPlusMemberCardView.swift; sourceTree = "<group>"; };
 		541BA1DB1CBFE9AB007D9AB0 /* EPlusMemberCardView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EPlusMemberCardView.xib; sourceTree = "<group>"; };
@@ -4126,6 +4128,7 @@
 				E66F901A1BA6A5C100280B77 /* ChatController.swift */,
 				E6C5F4571BCE908800E3B8C7 /* ConversationManager.swift */,
 				E604B16D1BF96F14004DA20B /* ChatHistory.swift */,
+				5419F99F1CC78080000E16E7 /* MailComposeViewController.swift */,
 			);
 			path = DAL;
 			sourceTree = "<group>";
@@ -4856,6 +4859,7 @@
 				CD87FDEE1C7611AA00E610AE /* NewsMapViewController.swift in Sources */,
 				D15F47441C088A26009ED3FD /* HomeItem.swift in Sources */,
 				CD8ED0E01C60BE7C00576DBF /* MembershipCardView.swift in Sources */,
+				5419F9A01CC78080000E16E7 /* MailComposeViewController.swift in Sources */,
 				E6F7A4701BA333D70069152A /* WalletViewController.swift in Sources */,
 				D15F474D1C0B7801009ED3FD /* AmbulanceRequestedViewController.swift in Sources */,
 				E68B52031B873687006B980C /* FeedItemCellModelFactory.swift in Sources */,
