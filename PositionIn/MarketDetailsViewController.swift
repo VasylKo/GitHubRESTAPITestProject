@@ -63,8 +63,6 @@ final class MarketDetailsViewController: UIViewController {
         headerLabel.text = product.name
         detailsLabel.text = product.text?.stringByReplacingOccurrencesOfString("\\n", withString: "\n")
         
-        nameLabel.text = author?.title
-        
         priceLabel.text = product.price.map {
             let newValue = $0 as Float
             return AppConfiguration().currencyFormatter.stringFromNumber(NSNumber(float: newValue)) ?? ""}
@@ -120,7 +118,7 @@ final class MarketDetailsViewController: UIViewController {
             firstSection.append(MarketActionItem(title: NSLocalizedString("Navigate", comment: "Market"), image: "productNavigate", action: .Navigate))
         }
         if self.product?.links?.isEmpty == false || self.product?.attachments?.isEmpty == false {
-            firstSection.append(MarketActionItem(title: NSLocalizedString("More Information"), image: "productTerms&Info", action: .MoreInformation))
+            firstSection.append(MarketActionItem(title: NSLocalizedString("Attachments"), image: "productTerms&Info", action: .MoreInformation))
         }
         
         return [zeroSection, firstSection]
@@ -132,7 +130,6 @@ final class MarketDetailsViewController: UIViewController {
     @IBOutlet private weak var infoLabel: UILabel!
     
     @IBOutlet weak var pinDistanceImageView: UIImageView!
-    @IBOutlet private weak var nameLabel: UILabel!
     @IBOutlet private weak var priceLabel: UILabel!
     @IBOutlet private weak var detailsLabel: UILabel!
 }

@@ -110,7 +110,7 @@ enum HomeItem: Int, CustomDebugStringConvertible {
         case .Emergency:
             return NSLocalizedString("Emergency Alerts", comment: "HomeItem")
         case .Ambulance:
-            return NSLocalizedString("Ambulance", comment: "HomeItem")
+            return NSLocalizedString("E-Plus Ambulance", comment: "HomeItem")
         case .GiveBlood:
             return NSLocalizedString("Give Blood", comment: "HomeItem")
         case .News:

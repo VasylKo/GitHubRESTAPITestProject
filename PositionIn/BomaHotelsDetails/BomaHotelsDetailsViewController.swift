@@ -121,7 +121,7 @@ final class BomaHotelsDetailsViewController: UIViewController {
             firstSection.append(BomaHotelActionItem(title: NSLocalizedString("Navigate", comment: "BomaHotels"), image: "productNavigate", action: .Navigate))
         }
         if self.bomaHotel?.links?.isEmpty == false || self.bomaHotel?.attachments?.isEmpty == false {
-            firstSection.append(BomaHotelActionItem(title: NSLocalizedString("More Information"), image: "productTerms&Info", action: .MoreInformation))
+            firstSection.append(BomaHotelActionItem(title: NSLocalizedString("Attachments"), image: "productTerms&Info", action: .MoreInformation))
         }
         
         if zeroSection.isEmpty == false {

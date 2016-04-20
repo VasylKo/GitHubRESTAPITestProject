@@ -254,8 +254,7 @@ final class APIService {
             return self.getObjectsCollection(endpoint, params: params)
         }
     }
-    
-    
+
     func createProduct(object: Product, inShop shop: CRUDObjectId) -> Future<Product, NSError> {
         let endpoint = Product.shopItemsEndpoint(shop)
         return self.createObject(endpoint, object: object)
@@ -271,6 +270,184 @@ final class APIService {
     func getMembership(membershipId: CRUDObjectId) -> Future<MembershipPlan, NSError> {
         let endpoint = MembershipPlan.endpoint(membershipId)
         return getObject(endpoint)
+    }
+    
+    //MARK: - Ambulance Membership -
+    
+    func getEPlusMemberships() -> Future<CollectionResponse<EPlusMembershipPlan>, NSError> {
+        let endpoint = EPlusMembershipPlan.endpoint()
+        return getObjectsCollection(endpoint, params: nil)
+    }
+    
+    func getEPlusMembership(membershipId: CRUDObjectId) -> Future<EPlusMembershipPlan, NSError> {
+        let endpoint = EPlusMembershipPlan.endpoint(membershipId)
+        return getObject(endpoint)
+    }
+    
+    func getEPlusServices() -> Future<CollectionResponse<EPlusService>, NSError> {
+        var items = [EPlusService]()
+        
+        // Residential Estates
+        var hourEvacuation = EPlusService()
+        hourEvacuation.objectId = CRUDObjectId(0)
+        hourEvacuation.name = "24 Hour Evacuation"
+        hourEvacuation.shortDesc = "Available 24 hours a day"
+        hourEvacuation.serviceDesc = "Emergency Plus Medical Services is dedicated to providing 24 hour emergency rescue services countrywide. Eplus has the largest capacity of ambulances which respond to medical emergencies of members and non members.\n\nA medical emergency is any life threatening injury or illness that if not treated immediately may lead to disability or death."
+        hourEvacuation.footnote = "*A small fee will be charged to non-members depending on the distance"
+        
+        var hourEvacuationGroups = [InfoGroup]()
+        var hourEvacuationEmergencies = [String]()
+        hourEvacuationEmergencies.append("Breathing difficulty")
+        hourEvacuationEmergencies.append("Chest pain")
+        hourEvacuationEmergencies.append("Choking")
+        hourEvacuationEmergencies.append("Fainting or loss of consciousness")
+        hourEvacuationEmergencies.append("Bleeding that does not stop")
+        hourEvacuationEmergencies.append("Coughing up or vomiting blood")
+        hourEvacuationEmergencies.append("Severe or persistent vomiting")
+        hourEvacuationEmergencies.append("Near drowning")
+        hourEvacuationEmergencies.append("Burns")
+        hourEvacuationEmergencies.append("Trauma due to motor vehicle accidents or falls")
+        hourEvacuationEmergencies.append("Poisoning and drug overdose")
+        hourEvacuationEmergencies.append("Sudden severe abdominal pain")
+        hourEvacuationEmergencies.append("Stroke")
+        hourEvacuationEmergencies.append("Convulsions without any history")
+        hourEvacuationEmergencies.append("Obstetric emergencies")
+        hourEvacuationEmergencies.append("Snake bites")
+        hourEvacuationGroups.append(InfoGroup(title: "Some of the Medical emergencies are:", infoBlocks: hourEvacuationEmergencies))
+        
+        var hourEvacuationNumbers = [String]()
+        hourEvacuationNumbers.append("1199")
+        hourEvacuationNumbers.append("0700 395 395")
+        hourEvacuationNumbers.append("0738 395 395")
+        hourEvacuationNumbers.append("Landline +254-20-2655251")
+        hourEvacuationGroups.append(InfoGroup(title: "Emergency numbers", infoBlocks: hourEvacuationNumbers))
+        
+        var hourEvacuationTypesOfAmbulance = [String]()
+        hourEvacuationTypesOfAmbulance.append("Basic Life Support ambulances (BLS) and Advanced Cardiac Life Support ambulances (ACLS)")
+        hourEvacuationTypesOfAmbulance.append("We have Landcruiser and Toyota Hiace High Roof ambulances")
+        hourEvacuationTypesOfAmbulance.append("The ambulances are tropicalized for the country, are fully air conditioned and are fitted with DC/AC inverters")
+        hourEvacuationGroups.append(InfoGroup(title: "Types of ambulance", infoBlocks: hourEvacuationTypesOfAmbulance))
+        
+        var hourEvacuationMedicalPersonnel = [String]()
+        hourEvacuationMedicalPersonnel.append("ICU/A&E nurses that are trained in Pre-Hospital Care")
+        hourEvacuationMedicalPersonnel.append("Emergency Medical Technicians that have specialized in trauma and EVOC")
+        hourEvacuationMedicalPersonnel.append("Highly skilled and capable in handling all medical emergencies")
+        hourEvacuationGroups.append(InfoGroup(title: "Medical personnel", infoBlocks: hourEvacuationMedicalPersonnel))
+        
+        var hourEvacuationHowToCall = [String]()
+        hourEvacuationHowToCall.append("State your name and telephone number")
+        hourEvacuationHowToCall.append("Your location")
+        hourEvacuationHowToCall.append("Nature of the emergency")
+        hourEvacuationHowToCall.append("Number of casualties")
+        hourEvacuationHowToCall.append("Whether you are a member or not")
+        hourEvacuationGroups.append(InfoGroup(title: "How to call for an ambulance", infoBlocks: hourEvacuationHowToCall))
+        
+        hourEvacuation.infoBlocks = hourEvacuationGroups
+        
+        items.append(hourEvacuation)
+        
+
+        
+        var evacuation = EPlusService()
+        evacuation.objectId = CRUDObjectId(1)
+        evacuation.name = "Cross Border Evacuation"
+        evacuation.shortDesc = "Available on request"
+        evacuation.serviceDesc = "These are evacuations or transfers that we do from one country to another within the greater east African community for stable patients that have been discharged from the hospital or those that have terminal illnesses."
+        evacuation.footnote = "*The cross border transfer charges depend on the distance and related costs"
+        
+        var evacuationGroups = [InfoGroup]()
+        var evacuationDeployment = [String]()
+        evacuationDeployment.append("We deploy appropriate fully equipped ambulances, personnel and supplies.")
+        evacuationGroups.append(InfoGroup(title: "Deployment", infoBlocks: evacuationDeployment))
+        
+        var evacuationPatientPreparation = [String]()
+        evacuationPatientPreparation.append("The patient must have a medical report, travel documents, appropriate vaccinations and a relative to accompany.")
+        evacuationGroups.append(InfoGroup(title: "Patient preparation", infoBlocks: evacuationPatientPreparation))
+        
+        var evacuationBookAnAmbulance = [String]()
+        evacuationBookAnAmbulance.append("Send an email with the details below to dispatch@eplus.co.ke")
+        evacuationBookAnAmbulance.append("Your name and town of residence")
+        evacuationBookAnAmbulance.append("Patient location and direction")
+        evacuationBookAnAmbulance.append("State if patient is a stretcher case, on a wheelchair, sitting or walking")
+        evacuationBookAnAmbulance.append("Admitting hospital, town and country")
+        evacuationBookAnAmbulance.append("Whether medical report, VISA and vaccination have been done")
+        evacuationBookAnAmbulance.append("Date and time of the intended ambulance transfer")
+        evacuationBookAnAmbulance.append("Name of person accompanying and relationship, if available")
+        hourEvacuationGroups.append(InfoGroup(title: "How to book an ambulance", infoBlocks: evacuationBookAnAmbulance))
+        
+        evacuation.infoBlocks = evacuationGroups
+        
+        items.append(evacuation)
+        
+    
+        var eventCoverage = EPlusService()
+        eventCoverage.objectId = CRUDObjectId(2)
+        eventCoverage.name = "Cross Border Evacuation"
+        eventCoverage.shortDesc = "Corporate, school, sports, liveshows"
+        eventCoverage.serviceDesc = "Via this service, we provide appropriate standby ambulances and personnel for sporting events, safari rally, meetings, launches with large crowds, funeral gatherings and parties etc."
+        eventCoverage.footnote = "A small fee will be charged to non-members depending on the distance"
+        
+        var eventCoverageGroups = [InfoGroup]()
+        var eventCoverageOurCharges = [String]()
+        eventCoverageOurCharges.append("Our subsidized rates depend on the duration, distance and personnel required.")
+        eventCoverageGroups.append(InfoGroup(title: "Our charges", infoBlocks: eventCoverageOurCharges))
+        
+        var eventRequestTheService = [String]()
+        eventRequestTheService.append("Send to us the details of the event one week prior to the event, send us its details including date, start and end time, nature of the event, location, number of participants, telephone contacts, postal address and person/organisation paying for the event.\n\nAlternatively, you can fill in the event request form below and send to dispatch@eplus.co.ke")
+        eventCoverageGroups.append(InfoGroup(title: "How to request the service ", infoBlocks: eventRequestTheService))
+        
+        var eventConfirmation = [String]()
+        eventConfirmation.append("We will send you a quotation within the same day and wait for payment. Confirmation will be done once payment has been made.")
+        eventCoverageGroups.append(InfoGroup(title: "Confirmation", infoBlocks: eventConfirmation))
+    
+        var eventreport = [String]()
+        eventreport.append("This will be made available to you once you sign off for the ambulance at the end of the event and within 48 hours.")
+        eventCoverageGroups.append(InfoGroup(title: "Event report", infoBlocks: eventreport))
+        
+        var eventHowToCallAmbulance = [String]()
+        eventHowToCallAmbulance.append("State your name and telephone number")
+        eventHowToCallAmbulance.append("Your location")
+        eventHowToCallAmbulance.append("Nature of the emergency")
+        eventHowToCallAmbulance.append("Number of casualties")
+        eventHowToCallAmbulance.append("Whether you are a member or not")
+        eventCoverageGroups.append(InfoGroup(title: "How to call for an ambulance", infoBlocks: eventHowToCallAmbulance))
+        
+        eventCoverage.infoBlocks = eventCoverageGroups
+        
+        items.append(eventCoverage)
+        
+        return Future(value: CollectionResponse(items:items, total: items.count), delay: 0.5)
+    }
+    
+    func getEPlusActiveMembership() -> Future<EplusMembershipDetails, NSError> {
+        let endpoint = EplusMembershipDetails.endpoint()
+        return getObject(endpoint)
+    }
+    
+    func createEPlusOrder(planOptions object: EPlusPlanOptions) -> Future<EplusMembershipDetails, NSError> {
+        let endpoint = EPlusPlanOptions.endpoint()
+        
+        let responseMapping: AnyObject? -> EplusMembershipDetails? = { response in
+            if let json = response as? NSDictionary {
+                return Mapper<EplusMembershipDetails>().map(json)
+            }
+            return nil
+        }
+        
+        typealias CRUDResultType = (Alamofire.Request, Future<EplusMembershipDetails, NSError>)
+        
+        let futureBuilder: (Void -> Future<EplusMembershipDetails, NSError>) = { [unowned self] in
+            return self.session().flatMap {
+                (token: AuthResponse.Token) -> Future<EplusMembershipDetails, NSError> in
+                let params = Mapper().toJSON(object)
+                let request = self.updateRequest(token, endpoint: endpoint, method: .POST, params: params)
+                
+                let (_ , future): CRUDResultType = self.dataProvider.jsonRequest(request, map: responseMapping, validation: nil)
+                return future
+            }
+        }
+        
+        return self.handleFailure(futureBuilder)
     }
     
     //MARK: - Community -

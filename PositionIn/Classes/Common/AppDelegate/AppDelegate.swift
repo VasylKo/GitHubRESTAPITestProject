@@ -64,6 +64,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 self?.currentUserDidChange(newProfile)
         }
         
+        let defaults = NSUserDefaults.standardUserDefaults()
+        
+        let kFirstRun = "kFirstRun"
+        if (defaults.objectForKey(kFirstRun) == nil) {
+            SessionController().clearKeychain()
+            defaults.setBool(true, forKey: kFirstRun)
+        }
     }
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
@@ -111,6 +118,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         XLFormViewController.cellClassesForRowDescriptorTypes()[XLFormRowDescriptorTypeMPesaBongaPinView] =
         "MPesaBongaPinCell"
         
+        XLFormViewController.cellClassesForRowDescriptorTypes()[XLFormRowDescriptorTypeDonationPaymentAmountCell] =
+        "DonationPaymentAmountCell"
+        
+        XLFormViewController.cellClassesForRowDescriptorTypes()[XLFormRowDescriptorTypeAmbulancePayment] =
+        "EPlusPaymentTableViewCell"
+        
         BTAppSwitch.setReturnURLScheme("\(NSBundle.mainBundle().bundleIdentifier!).payments")
 
         let settings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound],
@@ -119,9 +132,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIApplication.sharedApplication().registerForRemoteNotifications()
         
         #if DEBUG
-        Fabric.with([Crashlytics.self])
+//        Fabric.with([Crashlytics.self])
         #endif
-        NewRelicController.start()
+//111        NewRelicController.start()
         
         let notificationSettings = LNNotificationAppSettings()
         notificationSettings.alertStyle = .Banner

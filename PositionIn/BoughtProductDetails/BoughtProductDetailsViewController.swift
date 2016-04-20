@@ -24,6 +24,9 @@ final class BoughtProductDetailsViewController: UIViewController {
     @IBOutlet weak var paymentMethodLabel: UILabel?
     @IBOutlet weak var paymentDateLabel: UILabel?
     @IBOutlet weak var totalLabel: UILabel?
+    @IBOutlet weak var transactionIDLabel: UILabel?
+    
+    @IBOutlet weak var pickUpAvaiabililityCellHeightConstraints: NSLayoutConstraint?
     
     @IBOutlet weak var actionTableView: UITableView?
     
@@ -35,6 +38,12 @@ final class BoughtProductDetailsViewController: UIViewController {
         let dataSource = BoughtProductDetailsDataSource()
         dataSource.parentViewController = self
         return dataSource
+    }()
+    
+    private lazy var dateFormatter: NSDateFormatter = {
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "EEE dd yyyy, HH:mm"
+        return dateFormatter
     }()
     
     private func productActionItems() -> [[BoughtProductDetailsActionItem]] {
@@ -49,7 +58,7 @@ final class BoughtProductDetailsViewController: UIViewController {
         }
 
         if product?.entityDetails?.links?.isEmpty == false || product?.entityDetails?.attachments?.isEmpty == false {
-            zeroSection.append(BoughtProductDetailsActionItem(title: NSLocalizedString("More Information", comment: "Product action: More Information"), image: "productTerms&Info", action: .MoreInformation))
+            zeroSection.append(BoughtProductDetailsActionItem(title: NSLocalizedString("Attachments", comment: "Product action: More Information"), image: "productTerms&Info", action: .MoreInformation))
         }
         
         return [zeroSection]
@@ -86,9 +95,18 @@ final class BoughtProductDetailsViewController: UIViewController {
         productImage?.setImageFromURL(product?.entityDetails?.imageURL, placeholder: UIImage(named: "market_img_default"))
         productNameLabel?.text = product?.entityDetails?.name
         orderStatusLabel?.text = product?.status?.description
-        pickUpAvailabilityLabel?.text = product?.entityDetails?.endData?.formattedAsTimeAgo()
+        //Hide pick-up avaiabilility cell if the product don't have one
+        if let startDate = product?.entityDetails?.startDate, endDate = product?.entityDetails?.endData {
+            let startDateString = dateFormatter.stringFromDate(startDate)
+            let endDateString = dateFormatter.stringFromDate(endDate)
+            let pickUpAvaliabilityString = "\(startDateString) to \(endDateString)"
+            pickUpAvailabilityLabel?.text = pickUpAvaliabilityString
+        } else {
+            pickUpAvaiabililityCellHeightConstraints?.constant = 0
+        }
         quantityLabel?.text = "\(product?.quantity ?? 0)"
         paymentMethodLabel?.text = product?.paymentMethod?.description
+        transactionIDLabel?.text = product?.transactionId
         paymentDateLabel?.text = product?.paymentDate?.formattedAsTimeAgo()
         totalLabel?.text = AppConfiguration().currencyFormatter.stringFromNumber(product?.price ?? 0.0) ?? ""
         

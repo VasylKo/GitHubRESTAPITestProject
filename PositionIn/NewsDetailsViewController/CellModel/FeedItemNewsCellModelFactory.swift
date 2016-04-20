@@ -27,7 +27,7 @@ struct FeedItemNewsCellModelFactory {
         }
 
         if post.links?.isEmpty == false || post.attachments?.isEmpty == false {
-            firstSection.append(TableViewCellImageTextModel(title: "More Information", imageName: "productTerms&Info"))
+            firstSection.append(TableViewCellImageTextModel(title: "Attachments", imageName: "productTerms&Info"))
         }
 
         firstSection.append(PostLikesCountModel(likes: post.likes, isLiked:post.isLiked, isCommented: false, comments: post.comments.count, actionConsumer: actionConsumer))
