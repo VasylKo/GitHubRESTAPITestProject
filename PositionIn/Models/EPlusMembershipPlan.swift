@@ -27,16 +27,15 @@ struct EPlusPlanOption: Mappable {
     }
 }
 
-struct EPlusMembershipPlan: CRUDObject {
+enum EPlusPlanType : Int, CustomStringConvertible {
+    case Unknown = 29, Family, Individual, Schools, Corporate, ResidentialEstates, Sacco
     
-    enum PlanType : Int, CustomStringConvertible {
-        case Unknown = 29, Family, Individual, Schools, Corporate, ResidentialEstates, Sacco
-    
-        var description: String {
-            return ""
-        }
+    var description: String {
+        return ""
     }
-    
+}
+
+struct EPlusMembershipPlan: CRUDObject {
     // FIXME: Ambulance Hot fix - need to remove
     init() {}
     
@@ -47,8 +46,8 @@ struct EPlusMembershipPlan: CRUDObject {
     var benefitGroups: [InfoGroup]?
     var price: Int?
     
-    var type: PlanType {
-        return PlanType(rawValue: Int(objectId) ?? PlanType.Unknown.rawValue)!
+    var type: EPlusPlanType {
+        return EPlusPlanType(rawValue: Int(objectId) ?? EPlusPlanType.Unknown.rawValue)!
     }
     
     var featured: Bool?

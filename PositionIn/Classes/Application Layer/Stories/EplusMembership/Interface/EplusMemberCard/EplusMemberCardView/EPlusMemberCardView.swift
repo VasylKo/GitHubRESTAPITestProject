@@ -52,7 +52,7 @@ class EPlusMemberCardView: UIView {
     
     //MARK: Public
     
-    func configureWith(profile profile : UserProfile, plan: EPlusMembershipPlan) {
+    func configureWith(profile profile : UserProfile, plan: EPlusMembershipPlan, membershipDetails: EplusMembershipDetails) {
         
         let noValueLabel = "-"
         
@@ -61,11 +61,11 @@ class EPlusMemberCardView: UIView {
         if let avatarURL = profile.avatar {
             profileImageView.setImageFromURL(avatarURL)
         }
-        cardIdLabel.text = profile.eplusMembershipDetails?.membershipCardId ?? noValueLabel
+        cardIdLabel.text = membershipDetails.membershipCardId ?? noValueLabel
         priceLabel.text = String("\(AppConfiguration().currencySymbol) \(plan.price ?? 0)")
-        planNameLabel.text = plan.name ?? noValueLabel
-        backgroundImageView.image = UIImage(named: profile.eplusMembershipDetails?.membershipCardImageName ?? "")
-        if let endDate = profile.eplusMembershipDetails?.endDate {
+        planNameLabel.text = membershipDetails.membershipPlanName ?? noValueLabel
+        backgroundImageView.image = UIImage(named: membershipDetails.membershipCardImageName ?? "")
+        if let endDate = membershipDetails.endDate {
             expirationDateLabel.text = stringFromDate(endDate)
         } else {
             expirationDateLabel.text = noValueLabel

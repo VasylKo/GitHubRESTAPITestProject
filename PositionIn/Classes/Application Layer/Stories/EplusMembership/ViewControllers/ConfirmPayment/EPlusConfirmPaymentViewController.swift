@@ -129,21 +129,33 @@ class EplusConfirmPaymentViewController: XLFormViewController {
     
     //MARK: - End of payment
     private func paymentDidSuccess() {
-        headerView.showSuccess()
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (Int64)(3 * NSEC_PER_SEC)), dispatch_get_main_queue()) {
-            self.router.showMembershipMemberCardViewController(from: self)
+        if self.plan.type == .Family {
+            api().getMyProfile().onSuccess(callback: { (profile : UserProfile) -> Void in
+                let message = "You have selected x dependents. Our customer support will contact you at <phone number> within the next 48 hours"
+                let alertController = UIAlertController(title: nil, message: message, preferredStyle: .Alert)
+                
+                let okAction = UIAlertAction(title: "Ok", style: .Default) { (action) in
+                }
+                alertController.addAction(okAction)
+                self.presentViewController(alertController, animated: true) {}
+                
+                self.headerView.showSuccess()
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (Int64)(3 * NSEC_PER_SEC)), dispatch_get_main_queue()) {
+                    self.router.showMembershipMemberCardViewController(from: self)
+                }
+            })
+        } else {
+            self.headerView.showSuccess()
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (Int64)(3 * NSEC_PER_SEC)), dispatch_get_main_queue()) {
+                self.router.showMembershipMemberCardViewController(from: self)
+            }
         }
     }
     
     
     private func paymentDidFail() {
         headerView.showFailure()
-        
-        // FIXME: Ambulance hot fix for showing card
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (Int64)(3 * NSEC_PER_SEC)), dispatch_get_main_queue()) {
-            self.router.showMembershipMemberCardViewController(from: self)
-        }
-        
+                
         //sendPaymentEventToAnalytics(success: false)
     }
     

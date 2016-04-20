@@ -56,24 +56,24 @@ class EPlusMemberCardViewController : UIViewController {
     
     
     func getData() {
-        
-        api().getMyProfile().flatMap { [weak self] (profile : UserProfile) -> Future<EPlusMembershipPlan, NSError> in
+        api().getMyProfile().flatMap { [weak self] (profile : UserProfile) -> Future<Void, NSError> in
             self?.profile = profile
-            return api().getEPlusMembership(profile.eplusMembershipDetails?.membershipPlanId ?? CRUDObjectInvalidId)
             
-            }.onSuccess { [weak self] (plan: EPlusMembershipPlan) -> Void in
-                guard let strongSelf = self, profile = strongSelf.profile else { return }
-                strongSelf.plan = plan
-                strongSelf.eplusMemberCardView?.configureWith(profile: profile, plan: plan)
-                strongSelf.detailsButton?.enabled = true
-                
-                //Show eplus memver card
-                UIView.animateWithDuration(0.4, animations: { () -> Void in
-                    strongSelf.eplusMemberCardView?.alpha = 1.0
-                })
-                
-            }.onComplete { [weak self] _ in
-                self?.activityIndicator?.stopAnimating()
+            return api().getEPlusActiveMembership().flatMap { [weak self] (details : EplusMembershipDetails) -> Future<Void, NSError> in
+                return api().getEPlusMembership(details.membershipPlanId).flatMap { [weak self] (plan : EPlusMembershipPlan) -> Future<Void, NSError> in
+                    if let strongSelf = self, profile = strongSelf.profile {
+                        strongSelf.eplusMemberCardView?.configureWith(profile: profile, plan: plan, membershipDetails: details)
+                        strongSelf.detailsButton?.enabled = true
+        
+                        //Show eplus memver card
+                        UIView.animateWithDuration(0.4, animations: { () -> Void in
+                            strongSelf.eplusMemberCardView?.alpha = 1.0
+                        })
+                        strongSelf.activityIndicator?.stopAnimating()
+                    }
+                    return Future()
+                }
+            }
         }
     }
 

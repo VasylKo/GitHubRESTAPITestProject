@@ -429,8 +429,7 @@ class EPlusMembershipConfirmDetailsViewController : XLFormViewController {
     @objc func nextButtonTouched() {
         navigationItem.rightBarButtonItem?.enabled = false
         
-        
-        
+
         //TODO: add validations
         let validationErrors : Array<NSError> = self.formValidationErrors() as! Array<NSError>
         if (validationErrors.count > 0){
@@ -440,21 +439,68 @@ class EPlusMembershipConfirmDetailsViewController : XLFormViewController {
             return
         }
         
-        if let email = self.emailRow.value as? String {
-            self.userProfile?.email = email
+        if let passportNumber = self.IDPassPortNumberRow.value as? String {
+            self.userProfile?.passportNumber = passportNumber
         }
-        if let firstName = self.firstNameRow.value as? String {
-            self.userProfile?.firstName = firstName
+        
+        if let dob = self.dateOfBirthRow.value as? NSDate {
+            self.userProfile?.dateOfBirth = dob
         }
-        if let lastName = self.lastNameRow.value as? String {
-            self.userProfile?.lastName = lastName
-        }
+        
+        userProfile?.gender = (self.genderRow.value as? XLFormOptionsObject).flatMap { $0.gender }
+        
         
         if let userProfile = self.userProfile {
             api().updateMyProfile(userProfile).onComplete(callback: { [unowned self] _ in
-                self.router.showPaymentViewController(from: self, with: self.plan)
-                self.navigationItem.rightBarButtonItem?.enabled = true
+            
+                var planOptions = EPlusPlanOptions()
+                planOptions.id = self.plan.objectId
+                
+                switch self.plan.type {
+                case .Unknown:
+                    break
+                case .Individual:
+                    self.router.showPaymentViewController(from: self, with: self.plan)
+                    self.navigationItem.rightBarButtonItem?.enabled = true
+                    return
+                case .Family:
+                    let numberOfDependentsValue: XLFormOptionsObject = (self.numberOfDependentsRow.value as? XLFormOptionsObject)!
+                    let numberOfDependents = (numberOfDependentsValue.valueData() as? NSNumber)?.integerValue ?? 0
+                    planOptions.dependentsCount = numberOfDependents
+                    
+                    api().createEPlusOrder(planOptions: planOptions).onSuccess(callback: { [unowned self] _ -> Void in
+                        self.router.showPaymentViewController(from: self, with: self.plan)
+                        self.navigationItem.rightBarButtonItem?.enabled = true
+                    })
+                    return
+                case .Schools:
+                    planOptions.schoolName = (self.schoolNameRow.value as? String) ?? ""
+                    planOptions.studentsCount = (self.numberOfStudentsRow.value as? NSNumber)?.integerValue ?? 0
+                case .Corporate:
+                    planOptions.companyName = (self.companyNameRow.value as? String) ?? ""
+                    planOptions.peopleCount = (self.numberOfCompanyPeopleRow.value as? NSNumber)?.integerValue ?? 0
+                case .ResidentialEstates:
+                    planOptions.estateName = (self.nameOfEstateRow.value as? String) ?? ""
+                    planOptions.houseCount = (self.houseNumbersRow.value as? NSNumber)?.integerValue ?? 0
+                    planOptions.houseHoldersCount = (self.numberOfHouseholdsRow.value as? NSNumber)?.integerValue ?? 0
+                case .Sacco:
+                    planOptions.saccoName = (self.nameOfSaccoRow.value as? String) ?? ""
+                    planOptions.saccoPeopleCount = (self.numberOfSaccoPeopleRow.value as? NSNumber)?.integerValue ?? 0
+                }
+                
+                let phoneNumber = (self.phoneRow.value as? String) ?? ""
+                api().createEPlusOrder(planOptions: planOptions).onSuccess(callback: { [unowned self] _ in
+                    let message = "Our Sales team will contact you at \(phoneNumber) within the next 48 hours to complete the registration process. Thank you for selecting E Plus"
+                    let alertController = UIAlertController(title: nil, message: message, preferredStyle: .Alert)
+                    
+                    let okAction = UIAlertAction(title: "Ok", style: .Default) { (action) in
+                    }
+                    alertController.addAction(okAction)
+                    
+                    self.navigationController?.popToRootViewControllerAnimated(false)
+                    self.presentViewController(alertController, animated: true) {}
                 })
+            })
         } else {
             self.router.showPaymentViewController(from: self, with: self.plan)
             navigationItem.rightBarButtonItem?.enabled = true
