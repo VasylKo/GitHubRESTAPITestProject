@@ -92,6 +92,8 @@
 		541820FC1CB7B28D001A780A /* MPesaBongaPinCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 541820FB1CB7B28D001A780A /* MPesaBongaPinCell.swift */; };
 		541820FE1CB7B295001A780A /* MPesaBongaPinCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 541820FD1CB7B295001A780A /* MPesaBongaPinCell.xib */; };
 		542EDF461CC7C234006FE641 /* ProductOrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 542EDF451CC7C234006FE641 /* ProductOrderViewController.swift */; };
+		542EDF4C1CC7CE80006FE641 /* OrderHeaderViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 542EDF4A1CC7CE80006FE641 /* OrderHeaderViewCell.swift */; };
+		542EDF4D1CC7CE80006FE641 /* OrderHeaderViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 542EDF4B1CC7CE80006FE641 /* OrderHeaderViewCell.xib */; };
 		54A31F961CBBF20900A833C9 /* DonationPaymentAmountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54A31F941CBBF20900A833C9 /* DonationPaymentAmountCell.swift */; };
 		54A31F971CBBF20900A833C9 /* DonationPaymentAmountCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 54A31F951CBBF20900A833C9 /* DonationPaymentAmountCell.xib */; };
 		5DA3850FA75B150D79C68EE1 /* Pods_PositionIn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFAA26C98F322F00903B06FC /* Pods_PositionIn.framework */; };
@@ -657,6 +659,8 @@
 		541820FB1CB7B28D001A780A /* MPesaBongaPinCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPesaBongaPinCell.swift; sourceTree = "<group>"; };
 		541820FD1CB7B295001A780A /* MPesaBongaPinCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MPesaBongaPinCell.xib; sourceTree = "<group>"; };
 		542EDF451CC7C234006FE641 /* ProductOrderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductOrderViewController.swift; sourceTree = "<group>"; };
+		542EDF4A1CC7CE80006FE641 /* OrderHeaderViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderHeaderViewCell.swift; sourceTree = "<group>"; };
+		542EDF4B1CC7CE80006FE641 /* OrderHeaderViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderHeaderViewCell.xib; sourceTree = "<group>"; };
 		54A31F941CBBF20900A833C9 /* DonationPaymentAmountCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DonationPaymentAmountCell.swift; sourceTree = "<group>"; };
 		54A31F951CBBF20900A833C9 /* DonationPaymentAmountCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DonationPaymentAmountCell.xib; sourceTree = "<group>"; };
 		56DAF56D2A99203B14E2570B /* Pods-PositionIn.stagingrelease.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PositionIn.stagingrelease.xcconfig"; path = "Pods/Target Support Files/Pods-PositionIn/Pods-PositionIn.stagingrelease.xcconfig"; sourceTree = "<group>"; };
@@ -1494,6 +1498,23 @@
 				541820FD1CB7B295001A780A /* MPesaBongaPinCell.xib */,
 			);
 			path = MPesaBongaPinCell;
+			sourceTree = "<group>";
+		};
+		542EDF471CC7CE4A006FE641 /* Interface */ = {
+			isa = PBXGroup;
+			children = (
+				542EDF491CC7CE69006FE641 /* OrderHeaderViewCell */,
+			);
+			path = Interface;
+			sourceTree = "<group>";
+		};
+		542EDF491CC7CE69006FE641 /* OrderHeaderViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				542EDF4A1CC7CE80006FE641 /* OrderHeaderViewCell.swift */,
+				542EDF4B1CC7CE80006FE641 /* OrderHeaderViewCell.xib */,
+			);
+			path = OrderHeaderViewCell;
 			sourceTree = "<group>";
 		};
 		54A31F931CBBF1C200A833C9 /* DonationPaymentAmountCell */ = {
@@ -2663,6 +2684,7 @@
 		E66A3E191B9CE2AB005FA33B /* Order */ = {
 			isa = PBXGroup;
 			children = (
+				542EDF471CC7CE4A006FE641 /* Interface */,
 				D19A19FC1C69F87D0099038F /* MPesaPaymentCompleteViewController */,
 				E66A3E1A1B9CE2D6005FA33B /* OrderViewController.swift */,
 				542EDF451CC7C234006FE641 /* ProductOrderViewController.swift */,
@@ -4086,6 +4108,7 @@
 				CDB5B5CD1C5B9C2400413715 /* MembershipPlanTableViewCell.xib in Resources */,
 				CDBDD9B11C47CAAB007578BC /* PositionIn.BrowseVolunteerViewController.xib in Resources */,
 				D1F3E80A1C74DD1200EFC8ED /* NotificationViewController.xib in Resources */,
+				542EDF4D1CC7CE80006FE641 /* OrderHeaderViewCell.xib in Resources */,
 				E62B16FD1B5CDF2400D446BC /* PositionIn.MessagesListViewController.xib in Resources */,
 				D1B780CF1C0F51A800EF5825 /* DonateCell.xib in Resources */,
 				D12EB2861C96E5DF00718E57 /* FeedListViewController.xib in Resources */,
@@ -4463,6 +4486,7 @@
 				CDBDD9B31C491617007578BC /* BomaHotel.swift in Sources */,
 				D19BDF341CAD7D3C00F0A887 /* WebViewController.swift in Sources */,
 				E661158B1B73774B003DB5B3 /* RegisterViewController.swift in Sources */,
+				542EDF4C1CC7CE80006FE641 /* OrderHeaderViewCell.swift in Sources */,
 				E6BEF1E51B9C83F200511B46 /* CommunityInfoCell.swift in Sources */,
 				E6325F651B57D89A00996480 /* SidebarViewController.swift in Sources */,
 				CD3358201C6CD19A00E78267 /* MoreInformationViewController.swift in Sources */,
