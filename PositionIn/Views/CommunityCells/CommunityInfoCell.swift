@@ -17,9 +17,18 @@ final class CommunityInfoCell: TableViewCell {
         let countFormat: String
         switch m!.type {
         case .Volunteer:
-          countFormat = NSLocalizedString("%d Volunteers", comment: "Browse community: count members")
+            countFormat = NSLocalizedString("%d Volunteers", comment: "Browse community: count members")
         default:
             countFormat = NSLocalizedString("%d Members", comment: "Browse volunteering: count Volunteers")
+        }
+        
+        if m!.isClosed {
+            communityTypeLabel.text = NSLocalizedString("Public")
+            communityTypeIcon.image = UIImage(named: "public_comm")
+        }
+        else {
+            communityTypeLabel.text = NSLocalizedString("Closed")
+            communityTypeIcon.image = UIImage(named: "closed_comm")
         }
         
         countLabel.text = (m!.membersCount).map { String(format:countFormat, $0) }
@@ -30,6 +39,8 @@ final class CommunityInfoCell: TableViewCell {
         self.separatorInset = UIEdgeInsetsZero
     }
     
+    @IBOutlet weak var communityTypeIcon: UIImageView!
+    @IBOutlet weak var communityTypeLabel: UILabel!
     @IBOutlet weak var countLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     

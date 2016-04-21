@@ -21,14 +21,12 @@ final class BrowseCommunityHeaderCellModel: BrowseCommunityTableViewCellModel {
     let title: String
     let url: NSURL?
     let showInfo: Bool
-    let isClosed: Bool?
     weak var actionConsumer: CommunityFeedActionConsumer?
     
-    init(community: Community, tapAction: BrowseCommunityViewController.Action, title: String, url: NSURL?, showInfo: Bool, isClosed: Bool?) {
+    init(community: Community, tapAction: BrowseCommunityViewController.Action, title: String, url: NSURL?, showInfo: Bool) {
         self.title = title
         self.url = url
         self.showInfo = showInfo
-        self.isClosed = isClosed
         super.init(community: community, tapAction: tapAction)
     }
 }
@@ -37,10 +35,14 @@ final class BrowseCommunityInfoCellModel: BrowseCommunityTableViewCellModel {
     let membersCount: Int?
     let text: String?
     let type: CommunityViewController.ControllerType
-    init(community: Community, tapAction: BrowseCommunityViewController.Action, members: Int?, text: String?, type: CommunityViewController.ControllerType) {
+    var isClosed: Bool = false
+    
+    init(community: Community, tapAction: BrowseCommunityViewController.Action, members: Int?, text: String?, type: CommunityViewController.ControllerType, isClosed: Bool) {
         self.text = text
         membersCount = members
         self.type = type
+        self.isClosed = isClosed
+
         super.init(community: community, tapAction: tapAction)
     }
 }

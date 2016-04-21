@@ -15,29 +15,11 @@ final class CommunityHeaderCell: TableViewCell {
         assert(m != nil, "Invalid model passed")
         captionLabel.text = m!.title
         
-
         self.infoButton.hidden = !m!.showInfo
         shouldCallInfoAction = m!.showInfo
         self.actionConsumer = m!.actionConsumer
         
-        var placeholderName: String = ""
-        if let isClosed = m!.isClosed {
-            placeholderName = "communityPlaceholder"
-            if isClosed {
-                self.communityType.image = UIImage(named: "closed_comm")
-            }
-            else {
-                self.communityType.image = UIImage(named: "public_comm")
-            }
-        }
-        else {
-            placeholderName = "volunteer_placeholder"
-            self.communityType.image = nil
-            //To aligne volunteering's name to the left set image width to 0
-            communityTypeImageWidthConstraint.constant = 0
-        }
-        
-        contentImageView.setImageFromURL(m!.url, placeholder: UIImage(named: placeholderName))
+        contentImageView.setImageFromURL(m!.url, placeholder: UIImage(named: "communityPlaceholder"))
     }
     
     override func prepareForReuse() {
@@ -54,9 +36,7 @@ final class CommunityHeaderCell: TableViewCell {
     }
     
     private var shouldCallInfoAction: Bool = false
-    @IBOutlet weak var communityTypeImageWidthConstraint: NSLayoutConstraint!
     @IBOutlet private weak var infoButton: UIButton!
     @IBOutlet private weak var contentImageView: UIImageView!
     @IBOutlet private weak var captionLabel: UILabel!
-    @IBOutlet private weak var communityType: UIImageView!
 }

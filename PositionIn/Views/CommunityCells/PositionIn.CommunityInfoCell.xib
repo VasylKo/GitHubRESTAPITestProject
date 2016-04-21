@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -10,19 +11,20 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="130"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="LnB-1Z-Tnm" id="2NY-pq-cAG">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="129.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="38 Members" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XQk-UL-8mz">
-                        <rect key="frame" x="16" y="5" width="288" height="18"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="38 Members" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aoZ-zC-qxe">
+                        <rect key="frame" x="32" y="5" width="188" height="18"/>
                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
-                        <color key="textColor" red="0.74901960784313726" green="0.74901960784313726" blue="0.74901960784313726" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="textColor" red="0.74901960779999999" green="0.74901960779999999" blue="0.74901960779999999" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="string" keyPath="text" value=""/>
                         </userDefinedRuntimeAttributes>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="200" verticalCompressionResistancePriority="749" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tat-Wc-Uju">
-                        <rect key="frame" x="16" y="28" width="288" height="97"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="200" verticalCompressionResistancePriority="749" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tat-Wc-Uju">
+                        <rect key="frame" x="8" y="27" width="304" height="94"/>
                         <string key="text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</string>
                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -31,19 +33,57 @@
                             <userDefinedRuntimeAttribute type="string" keyPath="text" value=""/>
                         </userDefinedRuntimeAttributes>
                     </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="SR6-1U-fb7">
+                        <rect key="frame" x="8" y="6" width="16" height="16"/>
+                        <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="16" id="Rg7-NA-I3g"/>
+                            <constraint firstAttribute="height" constant="16" id="bV4-7Y-0Ag"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="38 Members" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XQk-UL-8mz">
+                        <rect key="frame" x="227" y="5" width="85" height="18"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                        <color key="textColor" red="0.74901960784313726" green="0.74901960784313726" blue="0.74901960784313726" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="string" keyPath="text" value=""/>
+                        </userDefinedRuntimeAttributes>
+                    </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="XQk-UL-8mz" firstAttribute="trailing" secondItem="tat-Wc-Uju" secondAttribute="trailing" id="4av-xu-aau"/>
-                    <constraint firstAttribute="bottom" secondItem="tat-Wc-Uju" secondAttribute="bottom" constant="5" id="6Im-ls-Ac1"/>
-                    <constraint firstItem="XQk-UL-8mz" firstAttribute="leading" secondItem="2NY-pq-cAG" secondAttribute="leading" constant="16" id="H4r-cc-pdv"/>
-                    <constraint firstAttribute="trailing" secondItem="XQk-UL-8mz" secondAttribute="trailing" constant="16" id="WXy-r7-OgR"/>
-                    <constraint firstItem="XQk-UL-8mz" firstAttribute="top" secondItem="2NY-pq-cAG" secondAttribute="top" constant="5" id="ckJ-fy-aqz"/>
-                    <constraint firstItem="XQk-UL-8mz" firstAttribute="leading" secondItem="tat-Wc-Uju" secondAttribute="leading" id="qNv-Se-qcw"/>
-                    <constraint firstItem="tat-Wc-Uju" firstAttribute="top" secondItem="XQk-UL-8mz" secondAttribute="bottom" constant="5" id="yRC-wV-cX9"/>
+                    <constraint firstAttribute="trailing" secondItem="XQk-UL-8mz" secondAttribute="trailing" constant="8" id="0vT-Y7-1BB"/>
+                    <constraint firstItem="SR6-1U-fb7" firstAttribute="top" secondItem="2NY-pq-cAG" secondAttribute="top" constant="6" id="4hk-1m-8vc"/>
+                    <constraint firstItem="tat-Wc-Uju" firstAttribute="top" secondItem="aoZ-zC-qxe" secondAttribute="bottom" constant="5" id="6kr-VD-7eP"/>
+                    <constraint firstItem="SR6-1U-fb7" firstAttribute="centerY" secondItem="2NY-pq-cAG" secondAttribute="centerY" id="8xR-gw-HwM"/>
+                    <constraint firstItem="aoZ-zC-qxe" firstAttribute="centerY" secondItem="2NY-pq-cAG" secondAttribute="centerY" id="EdB-Zo-J3X"/>
+                    <constraint firstItem="aoZ-zC-qxe" firstAttribute="top" secondItem="2NY-pq-cAG" secondAttribute="top" constant="5" id="Jr5-F8-rSo"/>
+                    <constraint firstAttribute="trailing" secondItem="tat-Wc-Uju" secondAttribute="trailing" constant="8" id="KC7-Ku-vYl"/>
+                    <constraint firstItem="XQk-UL-8mz" firstAttribute="leading" secondItem="aoZ-zC-qxe" secondAttribute="trailing" constant="8" id="M0L-EB-7mE"/>
+                    <constraint firstItem="XQk-UL-8mz" firstAttribute="centerY" secondItem="2NY-pq-cAG" secondAttribute="centerY" id="OjC-qT-3Kx"/>
+                    <constraint firstItem="tat-Wc-Uju" firstAttribute="leading" secondItem="2NY-pq-cAG" secondAttribute="leading" constant="8" id="ZbX-3s-Ms5"/>
+                    <constraint firstAttribute="bottom" secondItem="tat-Wc-Uju" secondAttribute="bottom" constant="8" id="bQC-Kd-eHO"/>
+                    <constraint firstItem="tat-Wc-Uju" firstAttribute="leading" secondItem="SR6-1U-fb7" secondAttribute="leading" id="cHl-W7-APe"/>
+                    <constraint firstItem="XQk-UL-8mz" firstAttribute="trailing" secondItem="tat-Wc-Uju" secondAttribute="trailing" id="gTo-ps-e4S"/>
+                    <constraint firstItem="tat-Wc-Uju" firstAttribute="top" secondItem="XQk-UL-8mz" secondAttribute="bottom" constant="5" id="gfm-oK-i2W"/>
+                    <constraint firstItem="aoZ-zC-qxe" firstAttribute="leading" secondItem="SR6-1U-fb7" secondAttribute="trailing" constant="8" id="jZZ-Cv-BhM"/>
+                    <constraint firstItem="XQk-UL-8mz" firstAttribute="top" secondItem="2NY-pq-cAG" secondAttribute="top" constant="5" id="kcg-M7-3QR"/>
+                    <constraint firstItem="SR6-1U-fb7" firstAttribute="leading" secondItem="2NY-pq-cAG" secondAttribute="leading" constant="8" id="yVT-cy-oRq"/>
                 </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="8xR-gw-HwM"/>
+                        <exclude reference="cHl-W7-APe"/>
+                        <exclude reference="EdB-Zo-J3X"/>
+                        <exclude reference="OjC-qT-3Kx"/>
+                        <exclude reference="gTo-ps-e4S"/>
+                    </mask>
+                </variation>
             </tableViewCellContentView>
             <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
             <connections>
+                <outlet property="communityTypeIcon" destination="SR6-1U-fb7" id="LDz-da-cJo"/>
+                <outlet property="communityTypeLabel" destination="aoZ-zC-qxe" id="EX7-ng-dgC"/>
                 <outlet property="countLabel" destination="XQk-UL-8mz" id="0PA-o9-LFQ"/>
                 <outlet property="descriptionLabel" destination="tat-Wc-Uju" id="8zr-YB-hqn"/>
             </connections>
