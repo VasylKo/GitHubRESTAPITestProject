@@ -22,6 +22,7 @@ class CallAmbulanceViewController: BaseAddItemViewController {
     }
     
     private var footerButtom: EplusSIgnUpNowButton?
+    private var userHasAmbulanceMembership: Bool = false
     
     private enum IncidentType: Int {
         case Other = 0, Fainted, Collapsed, NonResponsive, BreathingFast, Sweating, Bleeding, NotBreathing, NotTalking, Unconscious, Seizure, Choking, ChestPain
@@ -45,6 +46,7 @@ class CallAmbulanceViewController: BaseAddItemViewController {
         
         api().getEPlusActiveMembership().onSuccess { [unowned self] (membershipDetails: EplusMembershipDetails) -> Void in
             self.addFooterButton(.AlreadyMember)
+            self.userHasAmbulanceMembership = true
         }.onFailure { [unowned self] (error: NSError) -> Void in
             self.addFooterButton(.SignUP)
         }
@@ -200,20 +202,23 @@ class CallAmbulanceViewController: BaseAddItemViewController {
             return
         }
         
-        let message = "Fee may be charged to a non E-Plus members depending on the distance."
-        let alertController = UIAlertController(title: nil, message: message, preferredStyle: .Alert)
-        
-        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) in
+        if userHasAmbulanceMembership {
+            sendCallAmbulanceRequest()
+        } else {
+            let message = "Fee may be charged to a non E-Plus members depending on the distance."
+            let alertController = UIAlertController(title: nil, message: message, preferredStyle: .Alert)
+            
+            let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) in
+            }
+            alertController.addAction(cancelAction)
+            
+            let SendAction = UIAlertAction(title: "Send", style: .Default) { [weak self](action) in
+                self?.sendCallAmbulanceRequest()
+            }
+            alertController.addAction(SendAction)
+            
+            self.presentViewController(alertController, animated: true) {}
         }
-        alertController.addAction(cancelAction)
-        
-        let SendAction = UIAlertAction(title: "Send", style: .Default) { [weak self](action) in
-            self?.sendCallAmbulanceRequest()
-        }
-        alertController.addAction(SendAction)
-        
-        
-        self.presentViewController(alertController, animated: true) {}
     }
     
     @IBAction func cancelButtonTouched(sender: AnyObject) {
@@ -241,7 +246,7 @@ class CallAmbulanceViewController: BaseAddItemViewController {
     
     func footerButtonTouched(sender: EplusSIgnUpNowButton) {
         if sender.type == .SignUP {
-            EPlusMembershipRouterImplementation().showPlansViewController(from: self)
+            EPlusMembershipRouterImplementation().showPlansViewController(from: self, onlyPlansInfo: true)
         } else {
             EPlusMembershipRouterImplementation().showMembershipMemberCardViewController(from: self)
         }

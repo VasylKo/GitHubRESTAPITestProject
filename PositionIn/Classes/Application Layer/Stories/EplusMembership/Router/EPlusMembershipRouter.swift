@@ -12,9 +12,9 @@ protocol EPlusMembershipRouter : BaseRouter {
     
     func showInitialViewController(from sourceViewController : UIViewController, hasActivePlan: Bool?)
     
-    func showPlansViewController(from sourceViewController : UIViewController /*, with plan : EplusMembershipPlan */)
+    func showPlansViewController(from sourceViewController : UIViewController, onlyPlansInfo : Bool)
     
-    func showMembershipPlanDetailsViewController(from sourceViewController : UIViewController, with plan : EPlusMembershipPlan /*, onlyPlanInfo : Bool*/)
+    func showMembershipPlanDetailsViewController(from sourceViewController : UIViewController, with plan : EPlusMembershipPlan, onlyPlanInfo : Bool)
     
     func showMembershipMemberProfile(from sourceViewController : UIViewController, phoneNumber : String, validationCode : String)
 

@@ -9,10 +9,15 @@
 import UIKit
 
 class EPlusAmbulanceDetailsController: UIViewController {
+    @IBOutlet weak var tableView: UITableView!
+    private var plan: EPlusMembershipPlan?
+    private let router : EPlusMembershipRouter
+    private var onlyPlanInfo: Bool
     
-    init(router: EPlusMembershipRouter, plan: EPlusMembershipPlan) {
+    init(router: EPlusMembershipRouter, plan: EPlusMembershipPlan, onlyPlanInfo: Bool) {
         self.plan = plan
         self.router = router
+        self.onlyPlanInfo = onlyPlanInfo
         super.init(nibName: NSStringFromClass(EPlusAmbulanceDetailsController.self), bundle: nil)
     }
     
@@ -34,10 +39,12 @@ class EPlusAmbulanceDetailsController: UIViewController {
     func setupUI() {
         title = "Rescue Package"
         
-        let rightBarButtonItem: UIBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Next", comment: ""),
-            style: .Plain, target: self, action: "nextButtonTouched:")
-        self.navigationItem.rightBarButtonItem = rightBarButtonItem
-        
+        if !onlyPlanInfo {
+            let rightBarButtonItem: UIBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Next", comment: ""),
+                style: .Plain, target: self, action: "nextButtonTouched:")
+            self.navigationItem.rightBarButtonItem = rightBarButtonItem
+        }
+            
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 44
         
@@ -82,20 +89,13 @@ class EPlusAmbulanceDetailsController: UIViewController {
         
         height = footerView.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize).height
         frame = footerView.frame
-        frame.size.height = height
+        frame.size.height = onlyPlanInfo ? 0 : height
         footerView.frame = frame
         
         tableView.tableFooterView = footerView
-  
     }
     
     func setupTableViewHeaderFooter() {
-        let footerView = NSBundle.mainBundle().loadNibNamed(String(EPlusSelectPlanTableViewFooterView.self), owner: nil, options: nil).first
-        if let footerView = footerView as? EPlusSelectPlanTableViewFooterView {
-            footerView.delegate = self
-            tableView.tableFooterView = footerView
-        }
-        
         let headerView = NSBundle.mainBundle().loadNibNamed(String(EPlusAbulanceDetailsTableViewHeaderView.self), owner: nil, options: nil).first
         if let headerView = headerView as? EPlusAbulanceDetailsTableViewHeaderView {
             if let plan = plan {
@@ -105,15 +105,17 @@ class EPlusAmbulanceDetailsController: UIViewController {
             }
             tableView.tableHeaderView = headerView
         }
+        
+        let footerView = NSBundle.mainBundle().loadNibNamed(String(EPlusSelectPlanTableViewFooterView.self), owner: nil, options: nil).first
+        if let footerView = footerView as? EPlusSelectPlanTableViewFooterView {
+            footerView.delegate = self
+            tableView.tableFooterView = footerView
+        }
     }
     
     func nextButtonTouched(sender: AnyObject) {
         router.showMembershipConfirmDetailsViewController(from: self, with: plan!)
     }
-    
-    private var plan: EPlusMembershipPlan?
-    private let router : EPlusMembershipRouter
-    @IBOutlet weak var tableView: UITableView!
 }
 
     //MARK: - Sections Managment

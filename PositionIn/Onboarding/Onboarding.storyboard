@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="EQ9-4A-h3E">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="EQ9-4A-h3E">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
@@ -155,10 +155,10 @@ heading your way</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ambulance_sent" translatesAutoresizingMaskIntoConstraints="NO" id="O0H-sh-bbZ">
-                                <rect key="frame" x="258" y="59" width="84" height="112"/>
+                                <rect key="frame" x="228" y="35" width="148" height="148"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="112" id="AXE-5x-oCI"/>
-                                    <constraint firstAttribute="width" constant="84" id="mqw-Yz-EvP"/>
+                                    <constraint firstAttribute="height" constant="148" id="AXE-5x-oCI"/>
+                                    <constraint firstAttribute="width" constant="148" id="mqw-Yz-EvP"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ra2-yK-tJ4">
@@ -176,12 +176,12 @@ heading your way</string>
                         <constraints>
                             <constraint firstItem="ra2-yK-tJ4" firstAttribute="centerX" secondItem="Chp-hG-Uft" secondAttribute="centerX" id="1VH-5j-bE0"/>
                             <constraint firstItem="RZb-JA-hdd" firstAttribute="centerX" secondItem="Chp-hG-Uft" secondAttribute="centerX" id="2zV-KJ-MBm"/>
-                            <constraint firstItem="O0H-sh-bbZ" firstAttribute="top" secondItem="Thw-s6-nVg" secondAttribute="bottom" constant="59" id="9Q9-hE-KFI"/>
-                            <constraint firstItem="O0H-sh-bbZ" firstAttribute="centerX" secondItem="Chp-hG-Uft" secondAttribute="centerX" id="L5G-qJ-pr3"/>
+                            <constraint firstItem="O0H-sh-bbZ" firstAttribute="top" secondItem="Thw-s6-nVg" secondAttribute="bottom" constant="35" id="9Q9-hE-KFI"/>
+                            <constraint firstItem="O0H-sh-bbZ" firstAttribute="centerX" secondItem="Chp-hG-Uft" secondAttribute="centerX" constant="2" id="L5G-qJ-pr3"/>
                             <constraint firstItem="ra2-yK-tJ4" firstAttribute="top" secondItem="Os1-0w-SSs" secondAttribute="bottom" constant="20" id="ORO-wd-9C7"/>
                             <constraint firstItem="Os1-0w-SSs" firstAttribute="centerX" secondItem="Chp-hG-Uft" secondAttribute="centerX" id="Rjf-O8-xjg"/>
                             <constraint firstItem="Os1-0w-SSs" firstAttribute="top" secondItem="RZb-JA-hdd" secondAttribute="bottom" constant="11" id="TnO-IN-BI5"/>
-                            <constraint firstItem="RZb-JA-hdd" firstAttribute="top" secondItem="O0H-sh-bbZ" secondAttribute="bottom" constant="27" id="uB2-uI-DOR"/>
+                            <constraint firstItem="RZb-JA-hdd" firstAttribute="top" secondItem="O0H-sh-bbZ" secondAttribute="bottom" constant="15" id="uB2-uI-DOR"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="KwS-si-zaF">
@@ -335,7 +335,7 @@ M-Pesa PIN number</string>
                                         <color key="textColor" red="0.60784313729999995" green="0.60784313729999995" blue="0.60784313729999995" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="KSh 1,000.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HMm-1X-bhl">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" misplaced="YES" text="KSh 1,000.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HMm-1X-bhl">
                                         <rect key="frame" x="80" y="75" width="471" height="25"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -420,10 +420,10 @@ M-Pesa PIN number</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ambulance_requested" translatesAutoresizingMaskIntoConstraints="NO" id="9mA-yH-Er2">
-                                <rect key="frame" x="258" y="59" width="84" height="112"/>
+                                <rect key="frame" x="228" y="35" width="148" height="148"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="112" id="ZXJ-tK-DKa"/>
-                                    <constraint firstAttribute="width" constant="84" id="ie1-tL-a0J"/>
+                                    <constraint firstAttribute="height" constant="148" id="ZXJ-tK-DKa"/>
+                                    <constraint firstAttribute="width" constant="148" id="ie1-tL-a0J"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nA6-3R-RtH">
@@ -444,9 +444,9 @@ M-Pesa PIN number</string>
                             <constraint firstItem="nA6-3R-RtH" firstAttribute="centerX" secondItem="vuC-59-hrT" secondAttribute="centerX" constant="-1" id="EBJ-JY-2zz"/>
                             <constraint firstItem="n1T-ki-bM3" firstAttribute="top" secondItem="9Vq-a9-fRD" secondAttribute="bottom" constant="11" id="KOD-ue-3J6"/>
                             <constraint firstItem="9Vq-a9-fRD" firstAttribute="centerX" secondItem="vuC-59-hrT" secondAttribute="centerX" id="LBS-jM-rOo"/>
-                            <constraint firstItem="9Vq-a9-fRD" firstAttribute="top" secondItem="9mA-yH-Er2" secondAttribute="bottom" constant="27" id="Ouk-x4-vYJ"/>
-                            <constraint firstItem="9mA-yH-Er2" firstAttribute="top" secondItem="sQV-Jv-WU9" secondAttribute="bottom" constant="59" id="eNC-Gm-MDe"/>
-                            <constraint firstItem="9mA-yH-Er2" firstAttribute="centerX" secondItem="vuC-59-hrT" secondAttribute="centerX" id="twO-gW-PS6"/>
+                            <constraint firstItem="9Vq-a9-fRD" firstAttribute="top" secondItem="9mA-yH-Er2" secondAttribute="bottom" constant="15" id="Ouk-x4-vYJ"/>
+                            <constraint firstItem="9mA-yH-Er2" firstAttribute="top" secondItem="sQV-Jv-WU9" secondAttribute="bottom" constant="35" id="eNC-Gm-MDe"/>
+                            <constraint firstItem="9mA-yH-Er2" firstAttribute="centerX" secondItem="vuC-59-hrT" secondAttribute="centerX" constant="2" id="twO-gW-PS6"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="4uk-Tk-4fg">
@@ -527,7 +527,7 @@ M-Pesa PIN number</string>
                                                 <color key="textColor" red="0.60784313729999995" green="0.60784313729999995" blue="0.60784313729999995" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="KSh 1,000.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IfW-7B-ksm">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" misplaced="YES" text="KSh 1,000.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IfW-7B-ksm">
                                                 <rect key="frame" x="79" y="75" width="471" height="25"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -569,7 +569,7 @@ M-Pesa PIN number</string>
                                             </mask>
                                         </variation>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CSa-KJ-ob5">
+                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CSa-KJ-ob5">
                                         <rect key="frame" x="20" y="266" width="560" height="373"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5cg-N3-ZFQ">
@@ -591,7 +591,7 @@ M-Pesa PIN number</string>
                                                     <constraint firstAttribute="height" constant="81" id="c8b-dP-nQ5"/>
                                                 </constraints>
                                             </view>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="200" verticalCompressionResistancePriority="749" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Evo-4e-wym">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="200" verticalCompressionResistancePriority="749" misplaced="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Evo-4e-wym">
                                                 <rect key="frame" x="16" y="138" width="528" height="130"/>
                                                 <string key="text">On behalf of our Board of Directors, Committee Members, volunteers and staff, I would like to thank you for supporting the Kenya Red Cross  Society through your contribution of {amount}.
 
@@ -600,7 +600,7 @@ Your donation will go a long way to helping Kenya Red Cross Society  continue pr
                                                 <color key="textColor" red="0.45882352941176469" green="0.45882352941176469" blue="0.45882352941176469" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8uh-9i-QAp">
+                                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8uh-9i-QAp">
                                                 <rect key="frame" x="8" y="302" width="544" height="62"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zAJ-Q5-g79">
@@ -690,8 +690,8 @@ Secretary General</string>
     </scenes>
     <resources>
         <image name="abbas_profile_pic" width="62" height="62"/>
-        <image name="ambulance_requested" width="84" height="112"/>
-        <image name="ambulance_sent" width="84" height="112"/>
+        <image name="ambulance_requested" width="148" height="148"/>
+        <image name="ambulance_sent" width="148" height="148"/>
         <image name="ic_thank_you" width="48" height="48"/>
         <image name="krfc" width="60" height="60"/>
         <image name="success_icon" width="48" height="48"/>

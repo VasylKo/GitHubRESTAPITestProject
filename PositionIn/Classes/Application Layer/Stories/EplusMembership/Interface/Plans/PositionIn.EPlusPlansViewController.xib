@@ -10,6 +10,7 @@
                 <outlet property="buttonContainerView" destination="sZQ-rc-pRv" id="Nyb-yU-7qT"/>
                 <outlet property="callAmbulanceButton" destination="lWR-8b-mXO" id="aMr-JZ-0yB"/>
                 <outlet property="callAnAmbulanceButton" destination="lWR-8b-mXO" id="KvW-0x-sGx"/>
+                <outlet property="heightOfButtonContainerView" destination="2da-Lm-PKg" id="drv-86-U0Q"/>
                 <outlet property="spinner" destination="qK7-WZ-h2a" id="3CS-w6-eGO"/>
                 <outlet property="tableView" destination="SI8-jC-BZG" id="Rkl-3B-60v"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -20,7 +21,7 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sZQ-rc-pRv">
+                <view hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sZQ-rc-pRv">
                     <rect key="frame" x="0.0" y="524" width="600" height="76"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lWR-8b-mXO">
