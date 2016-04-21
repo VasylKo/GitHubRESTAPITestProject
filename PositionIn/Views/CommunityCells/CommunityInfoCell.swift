@@ -23,12 +23,12 @@ final class CommunityInfoCell: TableViewCell {
         }
         
         if m!.isClosed {
-            communityTypeLabel.text = NSLocalizedString("Public")
-            communityTypeIcon.image = UIImage(named: "public_comm")
-        }
-        else {
             communityTypeLabel.text = NSLocalizedString("Closed")
             communityTypeIcon.image = UIImage(named: "closed_comm")
+        }
+        else {
+            communityTypeLabel.text = NSLocalizedString("Public")
+            communityTypeIcon.image = UIImage(named: "public_comm")
         }
         
         countLabel.text = (m!.membersCount).map { String(format:countFormat, $0) }
