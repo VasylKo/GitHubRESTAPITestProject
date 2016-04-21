@@ -30,7 +30,7 @@ class GiveBloodDetailsViewController: UIViewController {
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let orderController = segue.destinationViewController  as? OrderViewController {
+        if let orderController = segue.destinationViewController  as? ProductOrderViewController {
             orderController.product = self.product
         }
         if let profileController = segue.destinationViewController  as? UserProfileViewController,
