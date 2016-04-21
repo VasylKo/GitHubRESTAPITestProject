@@ -53,26 +53,34 @@ struct EPlusMembershipPlan: CRUDObject {
     var featured: Bool?
     var durationDays: Int?
     
+    var shortName: String? {
+        if type == .Schools {
+            return NSLocalizedString("School")
+        }
+        return name
+    }
+    
     var costDescription: String {
-        let formatedPrice = AppConfiguration().currencyFormatter.stringFromNumber(NSNumber(integer: price ?? 0)) ?? ""
+        let formatedPrice = String("\(AppConfiguration().currencySymbol) \(price ?? 0)")
         
         switch type {
         case .Family:
-            return "\(formatedPrice)Annually"
+            return "\(formatedPrice) Annually"
         case .Individual:
-            return "\(formatedPrice)Annually"
+            return "\(formatedPrice) Annually"
         case .Schools:
-            return "\(formatedPrice)Annually (per child)"
+            return "\(formatedPrice) Annually (per child)"
         case .Corporate:
             return "Annual Membership Rate"
         case .ResidentialEstates:
-            return "\(formatedPrice)Annually (per household)"
+            return "\(formatedPrice) Annually (per household)"
         case .Sacco:
-            return "\(formatedPrice)Annually (per member)"
+            return "\(formatedPrice) Annually (per member)"
         default:
             return ""
         }
     }
+    
     var membershipImageName: String {
         switch type {
         case .Family:

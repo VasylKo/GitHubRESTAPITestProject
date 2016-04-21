@@ -164,7 +164,7 @@ class PhoneNumberViewController: XLFormViewController {
             alertController.addAction(cancelAction)
             
             let OKAction = UIAlertAction(title: "Yes", style: .Default) {[weak self] (action) in
-                
+                self?.navigationItem.rightBarButtonItem?.enabled = false;
                 trackEventToAnalytics(AnalyticCategories.phoneVerification, action: AnalyticActios.phoneConfirmed)
                 
                 let smsCode = NSNumber(int: 1)
@@ -172,7 +172,10 @@ class PhoneNumberViewController: XLFormViewController {
                     let validationController = Storyboards.Onboarding.instantiatePhoneVerificationController()
                     validationController.phoneNumber = phoneNumber
                     self?.navigationController?.pushViewController(validationController, animated: true)
-                    })
+                    self?.navigationItem.rightBarButtonItem?.enabled = true;
+                    }).onFailure(callback: {[weak self] _ in
+                        self?.navigationItem.rightBarButtonItem?.enabled = true;
+                        })
             }
             alertController.addAction(OKAction)
             
