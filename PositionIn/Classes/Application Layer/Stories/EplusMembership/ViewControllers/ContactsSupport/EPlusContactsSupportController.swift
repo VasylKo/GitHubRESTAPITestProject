@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import MessageUI
 
 class EPlusContactsSupportController: UIViewController {
     typealias Section = [String : AnyObject]
@@ -90,31 +89,9 @@ class EPlusContactsSupportController: UIViewController {
             OpenApplication.Safari(with: url)
 
         case .Email:
-            let mailComposeViewController = self.configuredMailComposeViewController([action.rawValue])
-            if MFMailComposeViewController.canSendMail() {
-                self.presentViewController(mailComposeViewController, animated: true, completion: nil)
-            } else {
-                self.showSendMailErrorAlert()
-            }
+            MailComposeViewController.presentMailControllerFrom(self, recipientsList: [action.rawValue])
         }
     }
-    
-    // MARK: - Email compose
-    private func configuredMailComposeViewController(recipients: [String]) -> MFMailComposeViewController {
-        let mailComposerVC = MFMailComposeViewController()
-        mailComposerVC.mailComposeDelegate = self
-        mailComposerVC.setToRecipients(recipients)
-        return mailComposerVC
-    }
-    
-    private func showSendMailErrorAlert() {
-        let sendMailErrorAlert = UIAlertView(title: NSLocalizedString("Could Not Send Email"),
-            message: NSLocalizedString("Your device could not send e-mail.  Please check e-mail configuration and try again."),
-            delegate: self,
-            cancelButtonTitle: "OK")
-        sendMailErrorAlert.show()
-    }
-
 }
 
 // MARK: - Mock data extension
@@ -296,13 +273,5 @@ extension EPlusContactsSupportController: UITableViewDelegate {
         if let cellInfo = cellInfoForIndePath(indexPath), actionName = cellInfo[actionKey] as? String, action = Actions(rawValue: actionName) {
             executeAction(action, forCell: cellInfo)
         }
-    }
-}
-
-//MARK: MFMailComposeViewControllerDelegate
-extension EPlusContactsSupportController: MFMailComposeViewControllerDelegate{
-    
-    func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
-        controller.dismissViewControllerAnimated(true, completion: nil)
     }
 }

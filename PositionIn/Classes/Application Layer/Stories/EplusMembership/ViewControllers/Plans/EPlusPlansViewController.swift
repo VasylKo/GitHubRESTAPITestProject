@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import MessageUI
 
 class EPlusPlansViewController: UIViewController {
     @IBOutlet weak var spinner: UIActivityIndicatorView!
@@ -116,12 +115,7 @@ extension EPlusPlansViewController: EPlusTableViewFooterViewDelegate {
         
         let emailSupport = UIAlertAction(title: "Email Support", style: .Default, handler: {
             (alert: UIAlertAction!) -> Void in
-            let mailComposeViewController = self.configuredMailComposeViewController()
-            if MFMailComposeViewController.canSendMail() {
-                self.presentViewController(mailComposeViewController, animated: true, completion: nil)
-            } else {
-                self.showSendMailErrorAlert()
-            }
+            MailComposeViewController.presentMailControllerFrom(self, recipientsList: [AlreadyEplusMemberActions.email])
         })
         
         let visitWebsire = UIAlertAction(title: "Visit Website", style: .Default, handler: {
@@ -146,29 +140,6 @@ extension EPlusPlansViewController: EPlusTableViewFooterViewDelegate {
         static let websiteURL = NSURL(string: "http://www.eplus.co.ke")!
         static let phone = "+254717714938"
         static let email = "support@eplus.co.ke"
-    }
-    
-    private func configuredMailComposeViewController() -> MFMailComposeViewController {
-        let mailComposerVC = MFMailComposeViewController()
-        mailComposerVC.mailComposeDelegate = self
-        mailComposerVC.setToRecipients([AlreadyEplusMemberActions.email])
-        return mailComposerVC
-    }
-    
-    private func showSendMailErrorAlert() {
-        let sendMailErrorAlert = UIAlertView(title: NSLocalizedString("Could Not Send Email"),
-            message: NSLocalizedString("Your device could not send e-mail.  Please check e-mail configuration and try again."),
-            delegate: self,
-            cancelButtonTitle: "OK")
-        sendMailErrorAlert.show()
-    }
-}
-
-extension EPlusPlansViewController: MFMailComposeViewControllerDelegate{
-    //MARK: MFMailComposeViewControllerDelegate
-    
-    func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
-        controller.dismissViewControllerAnimated(true, completion: nil)
     }
 }
 

@@ -53,6 +53,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         locationController = LocationController()
         
         UINavigationBar.appearance().barTintColor = UIColor.bt_colorWithBytesR(237, g: 27, b: 46)
+        UINavigationBar.appearance().translucent = false
         
         super.init()
         
