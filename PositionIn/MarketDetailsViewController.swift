@@ -19,7 +19,7 @@ final class MarketDetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = NSLocalizedString("Market", comment: "Market")
+        title = NSLocalizedString("Product", comment: "Product info screen title")
         dataSource.items = productAcionItems()
         dataSource.configureTable(actionTableView)
     }
