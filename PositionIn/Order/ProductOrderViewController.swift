@@ -24,7 +24,8 @@ class ProductOrderViewController: XLFormViewController {
     }
     
     // MARK: - Private properties
-    private weak var proceedToPayRowDescriptor: XLFormRowDescriptor?
+    //private weak var proceedToPayRowDescriptor: XLFormRowDescriptor?
+    private var braintreeClient: BTAPIClient?
     
     // MARK: - Internal properties
     internal var product: Product?
@@ -32,8 +33,7 @@ class ProductOrderViewController: XLFormViewController {
     // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        //view.tintColor = UIScheme.mainThemeColor
-        //self.title = NSLocalizedString("Order")
+        prepareBrainTreePaymentSystem()
         
         self.initializeForm()
     }
@@ -49,6 +49,61 @@ class ProductOrderViewController: XLFormViewController {
         formatter.numberStyle = .DecimalStyle
         return formatter
     }()
+    
+    // MARK: - Brain Tree Payment System
+    private func prepareBrainTreePaymentSystem() {
+        api().getToken().onSuccess { [weak self] token in
+            guard let strongSelf = self else { return }
+            strongSelf.braintreeClient = BTAPIClient(authorization: token)
+        }
+    }
+    
+    private func purchaseProductWithBrainTree(quantity quantity: Int, product: Product) {
+        guard let braintreeClient = braintreeClient else {
+            showError(NSLocalizedString("Payment system error"))
+            return
+        }
+        
+        let dropInViewController = BTDropInViewController(APIClient: braintreeClient)
+        dropInViewController.delegate = self
+        
+        //Fill product info
+        let summaryFormat = NSLocalizedString("%@ %@", comment: "Order: Summary format")
+        let callToActionTextFormat = NSLocalizedString("%@ - %@", comment: "Order: Summary format")
+        dropInViewController.paymentRequest?.summaryTitle = product.name ?? ""
+        let totalAmount = (product.price ?? 0) * Float(quantity)
+        let totalAmountString = setTotalPrice(totalAmount)
+        dropInViewController.paymentRequest?.displayAmount = totalAmountString
+        dropInViewController.paymentRequest?.summaryDescription = String(format: summaryFormat, NSLocalizedString("Quantity:"), String(quantity))
+        dropInViewController.paymentRequest?.callToActionText = String(format: callToActionTextFormat, totalAmountString, NSLocalizedString("Pay"))
+        
+        //UI setup
+        dropInViewController.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Cancel, target: self, action: "userDidCancelPayment:")
+        dropInViewController.navigationItem.leftBarButtonItem?.tintColor = UIColor.whiteColor()
+        dropInViewController.title = NSLocalizedString("Payment Method", comment: "braintree title")
+ 
+        //Present controller
+        let navigationController = UINavigationController(rootViewController: dropInViewController)
+        navigationController.view.tintColor = UIScheme.mainThemeColor
+        navigationController.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
+        presentViewController(navigationController, animated: true, completion: nil)
+    }
+    
+    private func showBrainTreePaymentSuccessViewController() {
+        guard let product = product, quantity = self.quantitySelected() else { return }
+        
+        let successPaymentController = MPesaPaymentCompleteViewController(quantity: quantity, product: product, cardItem: .CreditDebitCard, delegate: self)
+        let navigationController = UINavigationController(rootViewController: successPaymentController)
+        presentViewController(navigationController, animated: true, completion: nil)
+    }
+    
+    @IBAction func userDidCancelPayment(sender: AnyObject) {
+        dismissPaymentsController()
+    }
+    
+    private func dismissPaymentsController() {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
     
     // MARK: - Build XFForm
     func initializeForm() {
@@ -126,19 +181,10 @@ class ProductOrderViewController: XLFormViewController {
         paymentRow.valueTransformer = CardItemValueTrasformer.self
         paymentRow.value = nil
         paymentRow.cellConfig.setObject(UIScheme.mainThemeColor, forKey: "tintColor")
-        paymentRow.onChangeBlock = { [weak self] oldValue, newValue, _ in
-            if let box: Box<CardItem> = newValue as? Box {
-                //self?.paymentType = CardItem.cardPayment(box.value)
-                //self?.selectedCardType = box.value
-                //self?.sendDonationEventToAnalytics(action: AnalyticActios.selectPaymentMethod)
-                
-                //Show M-Pesa additional info row
-                mpesaBongoPinRow.hidden = box.value != .MPesa
-                
-            } else {
-                //self?.paymentType = nil
-                
-            }
+        paymentRow.onChangeBlock = { oldValue, newValue, _ in
+            guard let box: Box<CardItem> = newValue as? Box else { return }
+            //Show M-Pesa additional info row
+            mpesaBongoPinRow.hidden = box.value != .MPesa
         }
         
         paymentSection.addFormRow(paymentRow)
@@ -150,7 +196,7 @@ class ProductOrderViewController: XLFormViewController {
         
         let proceedToPayRow: XLFormRowDescriptor = XLFormRowDescriptor(tag: Tags.ProceedToPay.rawValue,
         rowType: XLFormRowDescriptorTypeButton, title: NSLocalizedString("Proceed to Pay"))
-        proceedToPayRowDescriptor = proceedToPayRow
+        //proceedToPayRowDescriptor = proceedToPayRow
         proceedToPayRow.disabled = true
         proceedToPayRow.cellConfig["backgroundColor"] = UIScheme.disableActionColor
         proceedToPayRow.cellConfig["textLabel.color"] = UIColor.whiteColor()
@@ -164,8 +210,8 @@ class ProductOrderViewController: XLFormViewController {
             case .MPesa:
                 let controller = MPesaPaymentCompleteViewController(quantity: quantity, product: product)
                 strongSelf.navigationController?.pushViewController(controller, animated: true)
-            default:
-                break
+            case .CreditDebitCard:
+                strongSelf.purchaseProductWithBrainTree(quantity: quantity, product: product)
             }
 
         }
@@ -209,41 +255,42 @@ class ProductOrderViewController: XLFormViewController {
         return box.value
     }
     
-    private func setQuantuty(quantuty: NSNumber) {
+    private func setQuantuty(quantity: NSNumber) {
         guard let quantutyRow = form.formRowWithTag(Tags.Quantity.rawValue), let product = product else { return }
         
         //Update quantity
-        let quantityString = (quantityFormatter.stringFromNumber(quantuty) ?? "") +
+        let quantityString = (quantityFormatter.stringFromNumber(quantity) ?? "") +
             NSLocalizedString(" (Out of \(product.quantity ?? 0) available)")
         quantutyRow.cellConfig.setObject(quantityString, forKey: "detailTextLabel.text")
         updateFormRow(quantutyRow)
         
         //Update total price
-        let total = (product.price ?? 0) * quantuty.floatValue
+        let total = (product.price ?? 0) * quantity.floatValue
         setTotalPrice(total)
     }
     
-    private func setTotalPrice(price: Float) {
-        guard let totalPriceRow = form.formRowWithTag(Tags.Total.rawValue) else { return }
+    private func setTotalPrice(price: Float) -> String {
+        guard let totalPriceRow = form.formRowWithTag(Tags.Total.rawValue) else { return "" }
         let totalPriceLabel = AppConfiguration().currencyFormatter.stringFromNumber(NSNumber(float: price)) ?? ""
         totalPriceRow.cellConfig.setObject(totalPriceLabel, forKey: "priceText")
         updateFormRow(totalPriceRow)
+        return totalPriceLabel
     }
     
     // MARK: XLFormViewController
     override func formRowDescriptorValueHasChanged(formRow: XLFormRowDescriptor!, oldValue: AnyObject!, newValue: AnyObject!) {
         super.formRowDescriptorValueHasChanged(formRow, oldValue: oldValue, newValue: newValue)
         
-        guard let proceedToPayRowDescriptor = proceedToPayRowDescriptor else { return }
+        guard let proceedToPayRow = form.formRowWithTag(Tags.ProceedToPay.rawValue) else { return }
         
         let validationErrors : Array<NSError> = formValidationErrors() as! Array<NSError>
         let hasErrors = validationErrors.count > 0
         
         //Enable or disable confirm button
         let backgroundColor = hasErrors ? UIScheme.disableActionColor : UIScheme.enableActionColor
-        proceedToPayRowDescriptor.disabled = hasErrors
-        proceedToPayRowDescriptor.cellConfig["backgroundColor"] = backgroundColor
-        updateFormRow(proceedToPayRowDescriptor)
+        proceedToPayRow.disabled = hasErrors
+        proceedToPayRow.cellConfig["backgroundColor"] = backgroundColor
+        updateFormRow(proceedToPayRow)
         
     }
     
@@ -281,4 +328,37 @@ extension ProductOrderViewController {
         }
     }
 
+}
+
+// MARK: - BTDropInViewControllerDelegate
+extension ProductOrderViewController: BTDropInViewControllerDelegate {
+    func dropInViewController(viewController: BTDropInViewController, didSucceedWithTokenization paymentMethodNonce: BTPaymentMethodNonce) {
+        guard let product = product, price = product.price, quantity = self.quantitySelected() else { return  self.dismissPaymentsController() }
+        
+        let priceWitAmount = price * Float(quantity)
+        
+        api().productCheckoutBraintree(String(priceWitAmount), nonce: paymentMethodNonce.nonce,
+            itemId: product.objectId, quantity: quantity).onSuccess
+            { [weak self] err in
+                if(err == "") {
+                    self?.dismissPaymentsController()
+                    //self?.finishedSuccessfully = true
+                    self?.showBrainTreePaymentSuccessViewController()
+                }
+        }
+        
+        dismissPaymentsController()
+    }
+    
+    func dropInViewControllerDidCancel(viewController: BTDropInViewController) {
+        dismissPaymentsController()
+    }
+    
+}
+
+extension ProductOrderViewController: MPesaPaymentCompleteDelegate {
+    func closeButtonTapped(controller: MPesaPaymentCompleteViewController) {
+        //Go back to product details
+        navigationController?.popViewControllerAnimated(false)
+    }
 }
