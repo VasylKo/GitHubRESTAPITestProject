@@ -10,9 +10,19 @@ import UIKit
 import MessageUI
 
 class EPlusPlansViewController: UIViewController {
+    @IBOutlet weak var spinner: UIActivityIndicatorView!
+    @IBOutlet weak var callAmbulanceButton: UIButton!
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var heightOfButtonContainerView: NSLayoutConstraint!
+    @IBOutlet weak var buttonContainerView: UIView!
+    @IBOutlet weak var callAnAmbulanceButton: UIButton!
+    private let router : EPlusMembershipRouter
+    private var plans: [EPlusMembershipPlan] = []
+    private var onlyPlansInfo: Bool
     
-    init(router: EPlusMembershipRouter) {
+    init(router: EPlusMembershipRouter, onlyPlansInfo: Bool) {
         self.router = router
+        self.onlyPlansInfo = onlyPlansInfo
         super.init(nibName: NSStringFromClass(EPlusPlansViewController.self), bundle: nil)
     }
 
@@ -37,11 +47,13 @@ class EPlusPlansViewController: UIViewController {
         self.tableView.hidden = true
         self.buttonContainerView.hidden = true
         api().getEPlusMemberships().onSuccess(callback: { [weak self] (response : CollectionResponse<EPlusMembershipPlan>) in
-            self?.plans = response.items
-            self?.tableView.reloadData()
-            self?.spinner.stopAnimating()
-            self?.tableView.hidden = false
-            self?.buttonContainerView.hidden = false
+            guard let strongSelf = self else { return }
+            
+            strongSelf.plans = response.items
+            strongSelf.tableView.reloadData()
+            strongSelf.spinner.stopAnimating()
+            strongSelf.tableView.hidden = false
+            strongSelf.buttonContainerView.hidden = false
         }).onFailure(callback: {[weak self] _ in
             self?.spinner.stopAnimating()
         })
@@ -67,18 +79,19 @@ class EPlusPlansViewController: UIViewController {
         
         let rightButton = UIBarButtonItem(image: UIImage(named: "info_button_icon"), style: .Done, target: self, action: Selector("showAboutController:"))
         navigationItem.setRightBarButtonItem(rightButton, animated: false)
+        heightOfButtonContainerView.constant = onlyPlansInfo ? 0 : 76
     }
     
     func setupTableViewHeaderFooter() {
+        let headerView = NSBundle.mainBundle().loadNibNamed(String(EPlusTableViewHeaderView.self), owner: nil, options: nil).first
+        if let headerView = headerView as? UIView {
+            self.tableView.tableHeaderView = headerView
+        }
+        
         let footerView = NSBundle.mainBundle().loadNibNamed(String(EPlusTableViewFooterView.self), owner: nil, options: nil).first
         if let footerView = footerView as? EPlusTableViewFooterView {
             footerView.delegate = self
             self.tableView.tableFooterView = footerView
-        }
-        
-        let headerView = NSBundle.mainBundle().loadNibNamed(String(EPlusTableViewHeaderView.self), owner: nil, options: nil).first
-        if let headerView = headerView as? UIView {
-            self.tableView.tableHeaderView = headerView
         }
     }
     
@@ -89,14 +102,6 @@ class EPlusPlansViewController: UIViewController {
     func showAboutController(sender: AnyObject) {
         router.showAboutController(from: self)
     }
-    
-    @IBOutlet weak var spinner: UIActivityIndicatorView!
-    @IBOutlet weak var callAmbulanceButton: UIButton!
-    @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var buttonContainerView: UIView!
-    @IBOutlet weak var callAnAmbulanceButton: UIButton!
-    private let router : EPlusMembershipRouter
-    private var plans: [EPlusMembershipPlan] = []
 }
 
 extension EPlusPlansViewController: EPlusTableViewFooterViewDelegate {
@@ -173,7 +178,7 @@ extension EPlusPlansViewController: UITableViewDelegate {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         
         let plan = plans[indexPath.row]
-        router.showMembershipPlanDetailsViewController(from: self, with: plan)
+        router.showMembershipPlanDetailsViewController(from: self, with: plan, onlyPlanInfo: false)
     }
 }
 

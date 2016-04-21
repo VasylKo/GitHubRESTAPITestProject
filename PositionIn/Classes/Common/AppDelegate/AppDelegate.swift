@@ -132,9 +132,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIApplication.sharedApplication().registerForRemoteNotifications()
         
         #if DEBUG
-//        Fabric.with([Crashlytics.self])
+            Fabric.with([Crashlytics.self])
         #endif
-//111        NewRelicController.start()
+        NewRelicController.start()
         
         let notificationSettings = LNNotificationAppSettings()
         notificationSettings.alertStyle = .Banner
@@ -223,6 +223,8 @@ extension AppDelegate {
             switch (error.domain, error.code) {
             case (baseErrorDomain, NetworkDataProvider.ErrorCodes.SessionRevokedError.rawValue):
                 self.sidebarViewController?.executeAction(.Login)
+            case (baseErrorDomain, NetworkDataProvider.ErrorCodes.ParsingError.rawValue):
+                break
             default:
                 showWarning(error.localizedDescription)
             }

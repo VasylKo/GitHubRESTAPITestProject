@@ -14,17 +14,17 @@ class EPlusMembershipRouterImplementation: BaseRouterImplementation, EPlusMember
         api().getEPlusActiveMembership().onSuccess { _ -> Void in
             self.showMembershipMemberCardViewController(from: sourceViewController)
         }.onFailure { _ -> Void in
-            self.showPlansViewController(from: sourceViewController)
+            self.showPlansViewController(from: sourceViewController, onlyPlansInfo: false)
         }
     }
     
-    func showPlansViewController(from sourceViewController : UIViewController /*, with plan : EplusMembershipPlan */) {
-        let plansViewController = EPlusPlansViewController(router: self)
+    func showPlansViewController(from sourceViewController : UIViewController, onlyPlansInfo : Bool) {
+        let plansViewController = EPlusPlansViewController(router: self, onlyPlansInfo: onlyPlansInfo)
         sourceViewController.navigationController?.pushViewController(plansViewController, animated: true)
     }
     
-    func showMembershipPlanDetailsViewController(from sourceViewController : UIViewController, with plan : EPlusMembershipPlan /*, onlyPlanInfo : Bool */) {
-        let membershipDetailsViewController = EPlusAmbulanceDetailsController(router: self, plan: plan /*, onlyPlanInfo: onlyPlanInfo*/)
+    func showMembershipPlanDetailsViewController(from sourceViewController : UIViewController, with plan : EPlusMembershipPlan, onlyPlanInfo : Bool) {
+        let membershipDetailsViewController = EPlusAmbulanceDetailsController(router: self, plan: plan, onlyPlanInfo: onlyPlanInfo)
             sourceViewController.navigationController?.pushViewController(membershipDetailsViewController, animated: true)
     }
 

@@ -21,6 +21,10 @@ extension Future {
                 api().sessionController.setAccessTokenResponse(AccessTokenResponse.invalidAccessToken())
             }
             
+            if let e = NetworkDataProvider.ErrorCodes.fromError(error as NSError) where e == .ParsingError {
+                return Future(error: error)
+            }
+            
             return futureBuilder()
         }
     }
