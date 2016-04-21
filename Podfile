@@ -26,6 +26,7 @@ target 'PositionIn' do
   pod 'NewRelicAgent', '~> 5.3.6'
   pod 'CHCSVParser', '~> 2.1.0'
   pod 'LNNotificationsUI', :git => 'https://github.com/LeoNatan/LNNotificationsUI'
+  pod 'TTTAttributedLabel', '~> 1.13'
 
   post_install do |installer|
     installer.pods_project.targets.each do |target|
