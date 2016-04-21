@@ -13,7 +13,7 @@ class EPlusMembershipRouterImplementation: BaseRouterImplementation, EPlusMember
     func showInitialViewController(from sourceViewController : UIViewController, hasActivePlan: Bool? = nil) {
         api().getEPlusActiveMembership().onSuccess { _ -> Void in
             self.showMembershipMemberCardViewController(from: sourceViewController)
-        }.onFailure { [unowned self] (error: NSError) -> Void in
+        }.onFailure { _ -> Void in
             self.showPlansViewController(from: sourceViewController)
         }
     }

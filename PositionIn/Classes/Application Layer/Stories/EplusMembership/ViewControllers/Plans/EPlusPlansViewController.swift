@@ -188,7 +188,7 @@ extension EPlusPlansViewController: UITableViewDataSource {
             forIndexPath: indexPath) as! EPlusPlanTableViewCell
         let plan = self.plans[indexPath.row]
         cell.planImageViewString = plan.membershipImageName
-        cell.titleLabelString = plan.name
+        cell.titleLabelString = plan.shortName
         cell.infoLabelString = plan.costDescription
         cell.accessoryType = .DisclosureIndicator
         cell.separatorInset = UIEdgeInsetsZero
