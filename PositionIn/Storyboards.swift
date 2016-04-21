@@ -882,7 +882,7 @@ extension ProductDetailsViewController {
             case ShowProductInventory:
                 return ProductInventoryViewController.self
             case ShowBuyScreen:
-                return OrderViewController.self
+                return ProductOrderViewController.self
             case ShowSellerProfile:
                 return UserProfileViewController.self
             }
@@ -1049,7 +1049,7 @@ extension MarketDetailsViewController {
             case ShowOrganizerProfile:
                 return UserProfileViewController.self
             case ShowBuyScreen:
-                return OrderViewController.self
+                return ProductOrderViewController.self
             }
         }
 

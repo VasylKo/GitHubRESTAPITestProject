@@ -120,9 +120,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         XLFormViewController.cellClassesForRowDescriptorTypes()[XLFormRowDescriptorTypeDonationPaymentAmountCell] =
         "DonationPaymentAmountCell"
-        
+  
         XLFormViewController.cellClassesForRowDescriptorTypes()[XLFormRowDescriptorTypeAmbulancePayment] =
         "EPlusPaymentTableViewCell"
+        XLFormViewController.cellClassesForRowDescriptorTypes()[XLFormRowDescriptorTypeOrderHeder] =
+        "OrderHeaderViewCell"
+        
+        XLFormViewController.cellClassesForRowDescriptorTypes()[XLFormRowDescriptorTypeAvailabilityViewCell] =
+        "AvailabilityViewCell"
+        
+        XLFormViewController.cellClassesForRowDescriptorTypes()[XLFormRowDescriptorTypeTotalViewCell] =
+        "TotalViewCell"
         
         BTAppSwitch.setReturnURLScheme("\(NSBundle.mainBundle().bundleIdentifier!).payments")
 
