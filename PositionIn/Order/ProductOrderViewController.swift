@@ -43,6 +43,13 @@ class ProductOrderViewController: XLFormViewController {
         trackScreenToAnalytics(AnalyticsLabels.marketItemPurchase)
     }
     
+    // MARK: - Formatters
+    lazy private var quantityFormatter: NSNumberFormatter = {
+        let formatter = NSNumberFormatter()
+        formatter.numberStyle = .DecimalStyle
+        return formatter
+    }()
+    
     // MARK: - Build XFForm
     func initializeForm() {
         guard let product = product else { return }
@@ -60,19 +67,30 @@ class ProductOrderViewController: XLFormViewController {
         orderHeaderRow.cellConfigAtConfigure["name"] = product.name
         orderHeaderRow.cellConfigAtConfigure["projectIconURL"] = product.imageURL
         productSection.addFormRow(orderHeaderRow)
-        
+ 
         //Avaliability row
-        let avaliabilityRow = XLFormRowDescriptor(tag: Tags.Avaliability.rawValue, rowType: XLFormRowDescriptorTypeAvailabilityViewCell)
-        setTitleStyleForRow(avaliabilityRow, text: NSLocalizedString("Pick-up avaliability"))
-        setSubtitleStyleForRow(avaliabilityRow, text: "00-00-00 Pick-up avaliability")
-        productSection.addFormRow(avaliabilityRow)
+        if let startDate = product.startDate, let endDate = product.endData {
+            let avaliabilityRow = XLFormRowDescriptor(tag: Tags.Avaliability.rawValue, rowType: XLFormRowDescriptorTypeAvailabilityViewCell)
+            setTitleStyleForRow(avaliabilityRow, text: NSLocalizedString("Pick-up avaliability"))
+            
+            let dateFormatter = NSDateFormatter()
+            dateFormatter.dateFormat = "EEE dd yyyy, HH:mm"
+            let startDateString = dateFormatter.stringFromDate(startDate)
+            let endDateString = dateFormatter.stringFromDate(endDate)
+            let availabilityRangeString = "\(startDateString) to \(endDateString)"
+            
+            setSubtitleStyleForRow(avaliabilityRow, text: availabilityRangeString)
+        
+            productSection.addFormRow(avaliabilityRow)
+        }
+        
         
         
         //Quantity row
         let quantityRow = XLFormRowDescriptor(tag: Tags.Quantity.rawValue, rowType: XLFormRowDescriptorTypeStepCounter, title: NSLocalizedString("Quantity", comment: "New product: Quantity"))
         quantityRow.value = 0
         quantityRow.cellConfigAtConfigure["stepControl.minimumValue"] = 0
-        quantityRow.cellConfigAtConfigure["stepControl.maximumValue"] = 100
+        quantityRow.cellConfigAtConfigure["stepControl.maximumValue"] = product.quantity ?? 1
         quantityRow.cellConfigAtConfigure["stepControl.stepValue"] = 1
         quantityRow.cellConfigAtConfigure["tintColor"] = UIScheme.mainThemeColor
         quantityRow.cellConfigAtConfigure["currentStepValue.textColor"] = UIScheme.mainThemeColor
@@ -82,18 +100,24 @@ class ProductOrderViewController: XLFormViewController {
         setTitleStyleForRow(quantityRow)
         setSubtitleStyleForRow(quantityRow, text: "0")
         quantityRow.onChangeBlock =  { [weak self] _, newValue, row in
-            if let value = newValue as? NSNumber {
-                let value = value.stringValue
-                row.cellConfig.setObject(value, forKey: "detailTextLabel.text")
-                self?.updateFormRow(row)
-            }
+            guard let value = newValue as? NSNumber, strongSelf = self else { return }
+            //Update quantity
+            let quantityString = (strongSelf.quantityFormatter.stringFromNumber(value) ?? "") +
+                    NSLocalizedString(" (Out of \(product.quantity ?? 0) available)")
+            row.cellConfig.setObject(quantityString, forKey: "detailTextLabel.text")
+            strongSelf.updateFormRow(row)
+            
+            //Update total price
+            guard let price = product.price else { return }
+            let total = price * value.floatValue
+            strongSelf.setTotalPrice(total)
         }
+        
         quantityRow.addValidator(QuantityValidator())
         productSection.addFormRow(quantityRow)
         
         //Total price row
         let totalRow = XLFormRowDescriptor(tag: Tags.Total.rawValue, rowType: XLFormRowDescriptorTypeTotalViewCell)
-        totalRow.cellConfigAtConfigure["priceText"] = String(product.price)
         productSection.addFormRow(totalRow)
         
         //Paument method section
@@ -163,6 +187,8 @@ class ProductOrderViewController: XLFormViewController {
         proceedToPaySection.footerTitle = NSLocalizedString("By purchasing, you agree to Red Cross Terms of Service and Privacy Policy")
         
         self.form = form
+        
+        setTotalPrice(0.0)
     }
     
     // MARK: XLForm helper
@@ -181,22 +207,20 @@ class ProductOrderViewController: XLFormViewController {
         }
     }
     
-    // MARK: XLFormViewController
-    private func checkFormFields() {
-        guard let proceedToPayRowDescriptor = proceedToPayRowDescriptor else { return }
+    private func quantitySelected() -> Int? {
+        guard let quantityRow = form.formRowWithTag(Tags.Quantity.rawValue), value = quantityRow.value as? NSNumber else { return nil }
         
-        let validationErrors : Array<NSError> = formValidationErrors() as! Array<NSError>
-        let hasErrors = validationErrors.count > 0
-        
-        
-        //Enable or disable confirm button
-        let backgroundColor = hasErrors ? UIScheme.disableActionColor : UIScheme.enableActionColor
-        proceedToPayRowDescriptor.disabled = hasErrors
-        proceedToPayRowDescriptor.cellConfig["backgroundColor"] = backgroundColor
-        updateFormRow(proceedToPayRowDescriptor)
+        return value.integerValue
     }
     
+    private func setTotalPrice(price: Float) {
+        guard let totalPriceRow = form.formRowWithTag(Tags.Total.rawValue) else { return }
+        let totalPriceLabel = AppConfiguration().currencyFormatter.stringFromNumber(NSNumber(float: price)) ?? ""
+        totalPriceRow.cellConfig.setObject(totalPriceLabel, forKey: "priceText")
+        updateFormRow(totalPriceRow)
+    }
     
+    // MARK: XLFormViewController
     override func formRowDescriptorValueHasChanged(formRow: XLFormRowDescriptor!, oldValue: AnyObject!, newValue: AnyObject!) {
         super.formRowDescriptorValueHasChanged(formRow, oldValue: oldValue, newValue: newValue)
         

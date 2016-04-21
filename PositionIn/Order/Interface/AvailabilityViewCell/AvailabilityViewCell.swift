@@ -12,7 +12,7 @@ import XLForm
 let XLFormRowDescriptorTypeAvailabilityViewCell = "XLFormRowDescriptorTypeAvailabilityViewCell"
 
 class AvailabilityViewCell: XLFormBaseCell {
-
+    
     override static func formDescriptorCellHeightForRowDescriptor(rowDescriptor: XLFormRowDescriptor!) -> CGFloat {
         return 50
     }
