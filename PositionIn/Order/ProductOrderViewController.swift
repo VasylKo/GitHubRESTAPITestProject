@@ -84,8 +84,7 @@ class ProductOrderViewController: XLFormViewController {
             productSection.addFormRow(avaliabilityRow)
         }
         
-        
-        
+
         //Quantity row
         let quantityRow = XLFormRowDescriptor(tag: Tags.Quantity.rawValue, rowType: XLFormRowDescriptorTypeStepCounter, title: NSLocalizedString("Quantity", comment: "New product: Quantity"))
         quantityRow.value = 0
@@ -98,19 +97,10 @@ class ProductOrderViewController: XLFormViewController {
         quantityRow.cellStyle = .Subtitle
         //TODO: add formatter
         setTitleStyleForRow(quantityRow)
-        setSubtitleStyleForRow(quantityRow, text: "0")
+        setSubtitleStyleForRow(quantityRow)
         quantityRow.onChangeBlock =  { [weak self] _, newValue, row in
             guard let value = newValue as? NSNumber, strongSelf = self else { return }
-            //Update quantity
-            let quantityString = (strongSelf.quantityFormatter.stringFromNumber(value) ?? "") +
-                    NSLocalizedString(" (Out of \(product.quantity ?? 0) available)")
-            row.cellConfig.setObject(quantityString, forKey: "detailTextLabel.text")
-            strongSelf.updateFormRow(row)
-            
-            //Update total price
-            guard let price = product.price else { return }
-            let total = price * value.floatValue
-            strongSelf.setTotalPrice(total)
+            strongSelf.setQuantuty(value)
         }
         
         quantityRow.addValidator(QuantityValidator())
@@ -165,22 +155,21 @@ class ProductOrderViewController: XLFormViewController {
         proceedToPayRow.cellConfig["backgroundColor"] = UIScheme.disableActionColor
         proceedToPayRow.cellConfig["textLabel.color"] = UIColor.whiteColor()
         proceedToPayRow.cellConfig["textLabel.textAlignment"] =  NSTextAlignment.Center.rawValue
-        
-        /*
         proceedToPayRow.action.formBlock = { [weak self] row in
             self?.deselectFormRow(row)
             
-            let validationErrors : Array<NSError> = self?.formValidationErrors() as! Array<NSError>
-            if (validationErrors.count > 0){
-                return
+            guard let strongSelf = self, product = strongSelf.product, cardType = strongSelf.cardPaymentTypeSelecred(), quantity = strongSelf.quantitySelected() else { return }
+            
+            switch cardType {
+            case .MPesa:
+                let controller = MPesaPaymentCompleteViewController(quantity: quantity, product: product)
+                strongSelf.navigationController?.pushViewController(controller, animated: true)
+            default:
+                break
             }
-            
-            self?.sendDonationEventToAnalytics(action: AnalyticActios.proceedToPay)
-            
-            self?.performSegueWithIdentifier("Show\((self?.paymentType)!)", sender: self!)
-            self?.setError(true, error: nil)
+
         }
-*/
+
         
         proceedToPaySection.addFormRow(proceedToPayRow)
         
@@ -188,7 +177,8 @@ class ProductOrderViewController: XLFormViewController {
         
         self.form = form
         
-        setTotalPrice(0.0)
+        //Set initial values
+        setQuantuty(0)
     }
     
     // MARK: XLForm helper
@@ -213,6 +203,26 @@ class ProductOrderViewController: XLFormViewController {
         return value.integerValue
     }
     
+    private func cardPaymentTypeSelecred() -> CardItem? {
+        guard let paymentTypeRow = form.formRowWithTag(Tags.Payment.rawValue), box: Box<CardItem> = paymentTypeRow.value as? Box else { return nil }
+        
+        return box.value
+    }
+    
+    private func setQuantuty(quantuty: NSNumber) {
+        guard let quantutyRow = form.formRowWithTag(Tags.Quantity.rawValue), let product = product else { return }
+        
+        //Update quantity
+        let quantityString = (quantityFormatter.stringFromNumber(quantuty) ?? "") +
+            NSLocalizedString(" (Out of \(product.quantity ?? 0) available)")
+        quantutyRow.cellConfig.setObject(quantityString, forKey: "detailTextLabel.text")
+        updateFormRow(quantutyRow)
+        
+        //Update total price
+        let total = (product.price ?? 0) * quantuty.floatValue
+        setTotalPrice(total)
+    }
+    
     private func setTotalPrice(price: Float) {
         guard let totalPriceRow = form.formRowWithTag(Tags.Total.rawValue) else { return }
         let totalPriceLabel = AppConfiguration().currencyFormatter.stringFromNumber(NSNumber(float: price)) ?? ""
@@ -228,7 +238,6 @@ class ProductOrderViewController: XLFormViewController {
         
         let validationErrors : Array<NSError> = formValidationErrors() as! Array<NSError>
         let hasErrors = validationErrors.count > 0
-        
         
         //Enable or disable confirm button
         let backgroundColor = hasErrors ? UIScheme.disableActionColor : UIScheme.enableActionColor
