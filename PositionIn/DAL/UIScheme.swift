@@ -27,4 +27,8 @@ struct UIScheme {
     
     static let enableActionColor = UIColor(red: 237/255.0, green: 27/255.0, blue: 46/255.0, alpha: 1.0)
     static let disableActionColor = UIColor(red: 243/255.0, green: 130/255.0, blue: 140/255.0, alpha: 1.0)
+    
+    static func appRegularFontOfSize(size: CGFloat) -> UIFont {
+        return UIFont(name: "Helvetica Neue", size: size) ?? UIFont.systemFontOfSize(size)
+    }
 }

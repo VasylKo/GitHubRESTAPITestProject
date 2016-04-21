@@ -94,8 +94,10 @@
 		542EDF461CC7C234006FE641 /* ProductOrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 542EDF451CC7C234006FE641 /* ProductOrderViewController.swift */; };
 		542EDF4C1CC7CE80006FE641 /* OrderHeaderViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 542EDF4A1CC7CE80006FE641 /* OrderHeaderViewCell.swift */; };
 		542EDF4D1CC7CE80006FE641 /* OrderHeaderViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 542EDF4B1CC7CE80006FE641 /* OrderHeaderViewCell.xib */; };
-		542EDF531CC7D6D3006FE641 /* OrderQuantityViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 542EDF511CC7D6D3006FE641 /* OrderQuantityViewCell.swift */; };
-		542EDF541CC7D6D3006FE641 /* OrderQuantityViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 542EDF521CC7D6D3006FE641 /* OrderQuantityViewCell.xib */; };
+		542EDF591CC8DD50006FE641 /* TotalViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 542EDF571CC8DD50006FE641 /* TotalViewCell.swift */; };
+		542EDF5A1CC8DD50006FE641 /* TotalViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 542EDF581CC8DD50006FE641 /* TotalViewCell.xib */; };
+		542EDF621CC8E0C1006FE641 /* AvailabilityViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 542EDF601CC8E0C1006FE641 /* AvailabilityViewCell.swift */; };
+		542EDF631CC8E0C1006FE641 /* AvailabilityViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 542EDF611CC8E0C1006FE641 /* AvailabilityViewCell.xib */; };
 		54A31F961CBBF20900A833C9 /* DonationPaymentAmountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54A31F941CBBF20900A833C9 /* DonationPaymentAmountCell.swift */; };
 		54A31F971CBBF20900A833C9 /* DonationPaymentAmountCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 54A31F951CBBF20900A833C9 /* DonationPaymentAmountCell.xib */; };
 		5DA3850FA75B150D79C68EE1 /* Pods_PositionIn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFAA26C98F322F00903B06FC /* Pods_PositionIn.framework */; };
@@ -663,8 +665,10 @@
 		542EDF451CC7C234006FE641 /* ProductOrderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductOrderViewController.swift; sourceTree = "<group>"; };
 		542EDF4A1CC7CE80006FE641 /* OrderHeaderViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderHeaderViewCell.swift; sourceTree = "<group>"; };
 		542EDF4B1CC7CE80006FE641 /* OrderHeaderViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderHeaderViewCell.xib; sourceTree = "<group>"; };
-		542EDF511CC7D6D3006FE641 /* OrderQuantityViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderQuantityViewCell.swift; sourceTree = "<group>"; };
-		542EDF521CC7D6D3006FE641 /* OrderQuantityViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderQuantityViewCell.xib; sourceTree = "<group>"; };
+		542EDF571CC8DD50006FE641 /* TotalViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TotalViewCell.swift; sourceTree = "<group>"; };
+		542EDF581CC8DD50006FE641 /* TotalViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TotalViewCell.xib; sourceTree = "<group>"; };
+		542EDF601CC8E0C1006FE641 /* AvailabilityViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvailabilityViewCell.swift; sourceTree = "<group>"; };
+		542EDF611CC8E0C1006FE641 /* AvailabilityViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AvailabilityViewCell.xib; sourceTree = "<group>"; };
 		54A31F941CBBF20900A833C9 /* DonationPaymentAmountCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DonationPaymentAmountCell.swift; sourceTree = "<group>"; };
 		54A31F951CBBF20900A833C9 /* DonationPaymentAmountCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DonationPaymentAmountCell.xib; sourceTree = "<group>"; };
 		56DAF56D2A99203B14E2570B /* Pods-PositionIn.stagingrelease.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PositionIn.stagingrelease.xcconfig"; path = "Pods/Target Support Files/Pods-PositionIn/Pods-PositionIn.stagingrelease.xcconfig"; sourceTree = "<group>"; };
@@ -1507,7 +1511,8 @@
 		542EDF471CC7CE4A006FE641 /* Interface */ = {
 			isa = PBXGroup;
 			children = (
-				542EDF4E1CC7D6AA006FE641 /* OrderQuantityViewCell */,
+				542EDF5F1CC8E0C1006FE641 /* AvailabilityViewCell */,
+				542EDF561CC8DD35006FE641 /* TotalViewCell */,
 				542EDF491CC7CE69006FE641 /* OrderHeaderViewCell */,
 			);
 			path = Interface;
@@ -1522,13 +1527,22 @@
 			path = OrderHeaderViewCell;
 			sourceTree = "<group>";
 		};
-		542EDF4E1CC7D6AA006FE641 /* OrderQuantityViewCell */ = {
+		542EDF561CC8DD35006FE641 /* TotalViewCell */ = {
 			isa = PBXGroup;
 			children = (
-				542EDF511CC7D6D3006FE641 /* OrderQuantityViewCell.swift */,
-				542EDF521CC7D6D3006FE641 /* OrderQuantityViewCell.xib */,
+				542EDF571CC8DD50006FE641 /* TotalViewCell.swift */,
+				542EDF581CC8DD50006FE641 /* TotalViewCell.xib */,
 			);
-			path = OrderQuantityViewCell;
+			path = TotalViewCell;
+			sourceTree = "<group>";
+		};
+		542EDF5F1CC8E0C1006FE641 /* AvailabilityViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				542EDF601CC8E0C1006FE641 /* AvailabilityViewCell.swift */,
+				542EDF611CC8E0C1006FE641 /* AvailabilityViewCell.xib */,
+			);
+			path = AvailabilityViewCell;
 			sourceTree = "<group>";
 		};
 		54A31F931CBBF1C200A833C9 /* DonationPaymentAmountCell */ = {
@@ -4080,6 +4094,7 @@
 				E62B16F51B5C1AA700D446BC /* PositionIn.MainMenuUserCell.xib in Resources */,
 				CDE1B90D1C5F658100F76F32 /* MembershipMemberProfileViewController.xib in Resources */,
 				CD8ED0D91C60AE1400576DBF /* MembershipMemberCardViewController.xib in Resources */,
+				542EDF631CC8E0C1006FE641 /* AvailabilityViewCell.xib in Resources */,
 				E6BEF1D81B9C671D00511B46 /* PositionIn.PostInfoCell.xib in Resources */,
 				D1F3E8151C7628C100EFC8ED /* PositionIn.NotificationTableViewCell.xib in Resources */,
 				E661159E1B73A0CB003DB5B3 /* PositionIn.BrowseMapViewController.xib in Resources */,
@@ -4127,13 +4142,13 @@
 				D1B780CF1C0F51A800EF5825 /* DonateCell.xib in Resources */,
 				D12EB2861C96E5DF00718E57 /* FeedListViewController.xib in Resources */,
 				E69421021B666A1600F34F06 /* PositionIn.ActionCell.xib in Resources */,
+				542EDF5A1CC8DD50006FE641 /* TotalViewCell.xib in Resources */,
 				23F6AF851CA2889800CDD2FF /* PositionIn.PeopleExploreViewController.xib in Resources */,
 				E6F309421BA8200600C9420C /* PositionIn.PickPhotoView.xib in Resources */,
 				E64DC3551B4E53C90011D37C /* Main.storyboard in Resources */,
 				D1FD853D1C1EE8D800C2E87B /* PositionIn.PromotionDetailsViewController.xib in Resources */,
 				E64DC35A1B4E53C90011D37C /* LaunchScreen.xib in Resources */,
 				D12EB2971C96E83600718E57 /* PositionIn.NewsItemTitleCell.xib in Resources */,
-				542EDF541CC7D6D3006FE641 /* OrderQuantityViewCell.xib in Resources */,
 				500D7FAD1BC2CD51008C8C82 /* PositionIn.SearchSectionCell.xib in Resources */,
 				E6F2437A1B8B40380033B13C /* PositionIn.BrowseListTableViewCell.xib in Resources */,
 				E63201721B984E2D0066C62E /* PositionIn.DescriptionTableViewCell.xib in Resources */,
@@ -4328,6 +4343,7 @@
 				CD795BE31C57B59500C1C298 /* AppDelegate.swift in Sources */,
 				E66115A51B73A920003DB5B3 /* AddProductViewController.swift in Sources */,
 				E6365D351B7D709E00CB79CB /* PhotoInfo.swift in Sources */,
+				542EDF621CC8E0C1006FE641 /* AvailabilityViewCell.swift in Sources */,
 				E660E52D1B5AC23B00F52050 /* MainMenuViewController.swift in Sources */,
 				E6FC24C31BAAEC23006FE7A0 /* Conversation.swift in Sources */,
 				CD795C801C5A382000C1C298 /* MembershipPlan.swift in Sources */,
@@ -4442,6 +4458,7 @@
 				CDE1B9041C5BBE5900F76F32 /* MembershipPageView.swift in Sources */,
 				E68B52061B8736F4006B980C /* FilterViewController.swift in Sources */,
 				CD9CA0F51C7F3E50007B26AA /* MoreInformationCell.swift in Sources */,
+				542EDF591CC8DD50006FE641 /* TotalViewCell.swift in Sources */,
 				E62B16F61B5C1AA700D446BC /* MainMenuUserCell.swift in Sources */,
 				E6F3093E1BA81FAF00C9420C /* PickPhotoView.swift in Sources */,
 				E6C5CE1D1B83A28C00265955 /* SessionController.swift in Sources */,
@@ -4487,7 +4504,6 @@
 				D1E11B681C9817A800CD8BC0 /* FeedItemNewsCellModelFactory.swift in Sources */,
 				CD795BF21C57BA8100C1C298 /* MembershipRouterImplementation.swift in Sources */,
 				E66A3E181B9CC90C005FA33B /* EditCommunityViewController.swift in Sources */,
-				542EDF531CC7D6D3006FE641 /* OrderQuantityViewCell.swift in Sources */,
 				CD0FCC2E1C69ECD800AFD36C /* TotalCell.swift in Sources */,
 				E64D006A1B7CA2DC007693E0 /* AddCommunityViewController.swift in Sources */,
 				E6A10AC61B74232100047D74 /* LocationSelectorViewController.swift in Sources */,
