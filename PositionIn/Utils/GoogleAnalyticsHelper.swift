@@ -282,7 +282,9 @@ struct AnalyticActios {
     
     static let requestSent = NSLocalizedString("RequestSent")
     static let requestOutcome = NSLocalizedString("RequestOutcome")
-    
+    static let ambulancePaidPlanSelected = NSLocalizedString("AmbulancePaidPlanSelected")
+    static let ambulanceNotPaidPlanSelected = NSLocalizedString("AmbulanceNotPaidPlanSelected")
+
     static let donate = NSLocalizedString("Donate")
     
     static let volunteerRequest = NSLocalizedString("VolunteerRequest")

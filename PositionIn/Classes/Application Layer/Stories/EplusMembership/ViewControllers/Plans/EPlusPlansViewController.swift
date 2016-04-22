@@ -101,6 +101,18 @@ class EPlusPlansViewController: UIViewController {
     func showAboutController(sender: AnyObject) {
         router.showAboutController(from: self)
     }
+    
+    //MARK: - Analytic
+    private func sendEventToAnalyticAboutSelectedPlan(plan: EPlusMembershipPlan) {
+        switch plan.type {
+        case .Family, .Individual:
+            trackEventToAnalytics(AnalyticCategories.ambulance, action: AnalyticActios.ambulancePaidPlanSelected)
+        case .Corporate, .Schools, .ResidentialEstates, .Sacco:
+            trackEventToAnalytics(AnalyticCategories.ambulance, action: AnalyticActios.ambulanceNotPaidPlanSelected)
+        default:
+            break
+        }
+    }
 }
 
 extension EPlusPlansViewController: EPlusTableViewFooterViewDelegate {
@@ -149,6 +161,7 @@ extension EPlusPlansViewController: UITableViewDelegate {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         
         let plan = plans[indexPath.row]
+        sendEventToAnalyticAboutSelectedPlan(plan)
         router.showMembershipPlanDetailsViewController(from: self, with: plan, onlyPlanInfo: false)
     }
 }
