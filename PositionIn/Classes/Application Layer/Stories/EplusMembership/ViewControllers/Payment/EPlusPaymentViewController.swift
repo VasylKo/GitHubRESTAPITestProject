@@ -193,15 +193,12 @@ class EPlusPaymentViewController: XLFormViewController, PaymentReponseDelegate {
     private func sendEventToAnalytics(cardItem cardItem: CardItem, action: String) {
         let cardType = CardItem.cardName(cardItem) ?? NSLocalizedString("Can't get card type")
         let paymentAmount = NSNumber(integer: self.plan.price ?? 0)
-        trackEventToAnalytics(AnalyticCategories.membership, action: action, label: cardType, value: paymentAmount)
+        trackEventToAnalytics(AnalyticCategories.ambulance, action: action, label: cardType, value: paymentAmount)
     }
     
     //MARK: PaymentReponseDelegate
     
     func setError(isSuccess: Bool, error: String?) {
-        //TODO: add route to confirm payment controller
-        //self.router.showBraintreeConfirmPaymentViewController(from: self, with: self.plan, creditCardPaymentSuccess: hidden)
-        
         guard let card = selectPaymentRowValue() else { return }
         navigationController?.pushViewController(EplusConfirmPaymentViewController(router: router, plan: self.plan, card: card, isSuccess: isSuccess), animated: true)
     }

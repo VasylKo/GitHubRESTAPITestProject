@@ -36,6 +36,11 @@ class EPlusPlansViewController: UIViewController {
         self.setupTableViewHeaderFooter()
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        trackScreenToAnalytics(AnalyticsLabels.ambulanceMembershipPlanSelection)
+    }
+    
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         self.setupTableViewHeaderFooter()
@@ -144,6 +149,7 @@ extension EPlusPlansViewController: EPlusTableViewFooterViewDelegate {
         optionMenu.addAction(visitWebsire)
         optionMenu.addAction(cancelAction)
         
+        trackEventToAnalytics(AnalyticCategories.ambulance, action: AnalyticActios.alreadyMember)
         self.presentViewController(optionMenu, animated: true, completion: nil)
         
     }
