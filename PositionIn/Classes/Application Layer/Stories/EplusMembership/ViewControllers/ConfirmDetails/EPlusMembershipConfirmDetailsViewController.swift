@@ -180,6 +180,7 @@ class EPlusMembershipConfirmDetailsViewController : XLFormViewController {
         let row = XLFormRowDescriptor(tag: Tags.SchoolName.rawValue, rowType: XLFormRowDescriptorTypeText, title: NSLocalizedString("School name", comment: ""))
         row.cellConfig.setObject(UIScheme.mainThemeColor, forKey: "textLabel.textColor")
         row.cellConfig.setObject(UIScheme.mainThemeColor, forKey: "tintColor")
+        row.cellConfig.setObject(NSLocalizedString("Required"), forKey: "textField.placeholder")
         row.required = true
         return row
     }()
@@ -189,6 +190,7 @@ class EPlusMembershipConfirmDetailsViewController : XLFormViewController {
         let row = XLFormRowDescriptor(tag: Tags.NumberOfStudents.rawValue, rowType: XLFormRowDescriptorTypeInteger, title: NSLocalizedString("Number of Students", comment: ""))
         row.cellConfig.setObject(UIScheme.mainThemeColor, forKey: "textLabel.textColor")
         row.cellConfig.setObject(UIScheme.mainThemeColor, forKey: "tintColor")
+        row.cellConfig.setObject(NSLocalizedString("Required"), forKey: "textField.placeholder")
         row.required = true
         return row
     }()
@@ -200,6 +202,7 @@ class EPlusMembershipConfirmDetailsViewController : XLFormViewController {
         let row = XLFormRowDescriptor(tag: Tags.CompanyName.rawValue, rowType: XLFormRowDescriptorTypeText, title: NSLocalizedString("Company name", comment: ""))
         row.cellConfig.setObject(UIScheme.mainThemeColor, forKey: "textLabel.textColor")
         row.cellConfig.setObject(UIScheme.mainThemeColor, forKey: "tintColor")
+        row.cellConfig.setObject(NSLocalizedString("Required"), forKey: "textField.placeholder")
         row.required = true
         return row
     }()
@@ -209,6 +212,7 @@ class EPlusMembershipConfirmDetailsViewController : XLFormViewController {
         let row = XLFormRowDescriptor(tag: Tags.NumberOfPeople.rawValue, rowType: XLFormRowDescriptorTypeInteger, title: NSLocalizedString("Number of People", comment: ""))
         row.cellConfig.setObject(UIScheme.mainThemeColor, forKey: "textLabel.textColor")
         row.cellConfig.setObject(UIScheme.mainThemeColor, forKey: "tintColor")
+        row.cellConfig.setObject(NSLocalizedString("Required"), forKey: "textField.placeholder")
         row.required = true
         return row
     }()
@@ -220,6 +224,7 @@ class EPlusMembershipConfirmDetailsViewController : XLFormViewController {
         let row = XLFormRowDescriptor(tag: Tags.NameOfEstate.rawValue, rowType: XLFormRowDescriptorTypeText, title: NSLocalizedString("Name of Estate", comment: ""))
         row.cellConfig.setObject(UIScheme.mainThemeColor, forKey: "textLabel.textColor")
         row.cellConfig.setObject(UIScheme.mainThemeColor, forKey: "tintColor")
+        row.cellConfig.setObject(NSLocalizedString("Required"), forKey: "textField.placeholder")
         row.required = true
         return row
     }()
@@ -229,6 +234,7 @@ class EPlusMembershipConfirmDetailsViewController : XLFormViewController {
         let row = XLFormRowDescriptor(tag: Tags.HouseNumbers.rawValue, rowType: XLFormRowDescriptorTypeInteger, title: NSLocalizedString("House numbers", comment: ""))
         row.cellConfig.setObject(UIScheme.mainThemeColor, forKey: "textLabel.textColor")
         row.cellConfig.setObject(UIScheme.mainThemeColor, forKey: "tintColor")
+        row.cellConfig.setObject(NSLocalizedString("Required"), forKey: "textField.placeholder")
         row.required = true
         return row
     }()
@@ -238,6 +244,7 @@ class EPlusMembershipConfirmDetailsViewController : XLFormViewController {
         let row = XLFormRowDescriptor(tag: Tags.NumberOfHouseholds.rawValue, rowType: XLFormRowDescriptorTypeInteger, title: NSLocalizedString("Number of households", comment: ""))
         row.cellConfig.setObject(UIScheme.mainThemeColor, forKey: "textLabel.textColor")
         row.cellConfig.setObject(UIScheme.mainThemeColor, forKey: "tintColor")
+        row.cellConfig.setObject(NSLocalizedString("Required"), forKey: "textField.placeholder")
         row.required = true
         return row
     }()
@@ -249,6 +256,7 @@ class EPlusMembershipConfirmDetailsViewController : XLFormViewController {
         let row = XLFormRowDescriptor(tag: Tags.NameOfSacco.rawValue, rowType: XLFormRowDescriptorTypeText, title: NSLocalizedString("Name of Sacco", comment: ""))
         row.cellConfig.setObject(UIScheme.mainThemeColor, forKey: "textLabel.textColor")
         row.cellConfig.setObject(UIScheme.mainThemeColor, forKey: "tintColor")
+        row.cellConfig.setObject(NSLocalizedString("Required"), forKey: "textField.placeholder")
         row.required = true
         return row
     }()
@@ -258,6 +266,7 @@ class EPlusMembershipConfirmDetailsViewController : XLFormViewController {
         let row = XLFormRowDescriptor(tag: Tags.NumberOfSaccoPeople.rawValue, rowType: XLFormRowDescriptorTypeInteger, title: NSLocalizedString("Number of People", comment: ""))
         row.cellConfig.setObject(UIScheme.mainThemeColor, forKey: "textLabel.textColor")
         row.cellConfig.setObject(UIScheme.mainThemeColor, forKey: "tintColor")
+        row.cellConfig.setObject(NSLocalizedString("Required"), forKey: "textField.placeholder")
         row.required = true
         return row
     }()
