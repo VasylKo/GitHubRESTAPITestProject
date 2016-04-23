@@ -130,12 +130,9 @@ class EplusConfirmPaymentViewController: XLFormViewController {
     //MARK: - End of payment
     private func paymentDidSuccess() {
         if self.plan.type == .Family {
-            let futureProfile = api().getMyProfile()
-            let futureMembershipCard = api().getEPlusActiveMembership()
-            
-            futureProfile.zip(futureMembershipCard).onSuccess(callback: { (profile : UserProfile, membershipDetails: EplusMembershipDetails) -> Void in
-                let numberOfDependents = membershipDetails.planOptions?.dependentsCount ?? 0
-                let phoneNumber = profile.passportNumber
+            api().getMyProfile().onSuccess(callback: { (profile : UserProfile) -> Void in
+                let numberOfDependents = self.plan.planParameters?.dependentsCount ?? 0
+                let phoneNumber = profile.phone!
                 let message = "You have selected \(numberOfDependents) dependents. Our customer support will contact you at \(phoneNumber) within the next 48 hours"
                 let alertController = UIAlertController(title: nil, message: message, preferredStyle: .Alert)
                 

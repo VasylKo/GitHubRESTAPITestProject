@@ -439,8 +439,8 @@ final class APIService {
         return getObject(endpoint)
     }
     
-    func createEPlusOrder(planOptions object: EPlusPlanOptions) -> Future<EplusMembershipDetails, NSError> {
-        let endpoint = EPlusPlanOptions.endpoint()
+    func createEPlusOrder(planParameters object: EPlusPlanParameters) -> Future<EplusMembershipDetails, NSError> {
+        let endpoint = EPlusPlanParameters.endpoint()
         
         let responseMapping: AnyObject? -> EplusMembershipDetails? = { response in
             if let json = response as? NSDictionary {
