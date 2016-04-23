@@ -104,7 +104,7 @@ extension EPlusServiceDetailsViewController: UITableViewDataSource {
     func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         
         if let headerView = view as? UITableViewHeaderFooterView {
-            headerView.textLabel?.font = UIFont(name: "Helvetica Neue", size: 13)
+            headerView.textLabel?.font = UIScheme.appRegularFontOfSize(13)
             headerView.textLabel?.textColor = UIColor.redColor()
         }
     }
