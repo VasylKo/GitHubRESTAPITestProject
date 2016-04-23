@@ -44,6 +44,8 @@ class ProjectsIntroViewController: UIViewController {
     
     // MARK: - Actions
     @IBAction func nextButtonTouched(sender: AnyObject) {
+        let defaults = NSUserDefaults.standardUserDefaults()
+        defaults.setBool(true, forKey: projectsIntroShowedKey)
         showProjectsList()
     }
     

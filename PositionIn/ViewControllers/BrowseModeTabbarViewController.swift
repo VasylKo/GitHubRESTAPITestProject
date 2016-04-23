@@ -202,7 +202,6 @@ protocol BrowseModeDisplay {
     }
  
 //MARK: - BrowseGridViewControllerDelegate
-    var testFlag = true
     func browseGridViewControllerSelectItem(homeItem: HomeItem) {
         switch homeItem {
         case .Membership:
@@ -224,25 +223,27 @@ protocol BrowseModeDisplay {
         case .Training:
             fallthrough
         case .Projects:
-            if testFlag {
-                testFlag = !testFlag
+            // Check NSUserDefaults to show project intro page
+            let defaults = NSUserDefaults.standardUserDefaults()
+            let isProjectInroShowed = defaults.boolForKey(projectsIntroShowedKey)
+            if  !isProjectInroShowed {
                 let projectsIntroController = ProjectsIntroViewController()
                 projectsIntroController.browseGridDelegate = self
                 self.navigationController?.pushViewController(projectsIntroController, animated: true)
             } else {
-            let controller = Storyboards.Main.instantiateExploreViewControllerId()
-            controller.homeItem = homeItem
-            let filterUpdate = { (filter: SearchFilter) -> SearchFilter in
-                var f = filter
-                let feedItemType = FeedItem.ItemType(rawValue: homeItem.rawValue)
-                if let feedItemType = feedItemType {
-                    f.itemTypes = [feedItemType]
+                let controller = Storyboards.Main.instantiateExploreViewControllerId()
+                controller.homeItem = homeItem
+                let filterUpdate = { (filter: SearchFilter) -> SearchFilter in
+                    var f = filter
+                    let feedItemType = FeedItem.ItemType(rawValue: homeItem.rawValue)
+                    if let feedItemType = feedItemType {
+                        f.itemTypes = [feedItemType]
+                    }
+                    return f
                 }
-                return f
-            }
-            controller.childFilterUpdate = filterUpdate
-            controller.title = homeItem.displayString()
-            self.navigationController?.pushViewController(controller, animated: true)
+                controller.childFilterUpdate = filterUpdate
+                controller.title = homeItem.displayString()
+                self.navigationController?.pushViewController(controller, animated: true)
             }
         case .Donate:
             self.navigationController?.pushViewController(Storyboards.Onboarding.instantiateDonateViewController(), animated: true)
