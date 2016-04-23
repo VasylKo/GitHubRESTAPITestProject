@@ -35,15 +35,15 @@ struct UIScheme {
     
     //App font management
     static func appRegularFontOfSize(size: CGFloat) -> UIFont {
-        return UIFont(name: "Helvetica Neue", size: size) ?? UIFont.systemFontOfSize(size)
+        return UIFont(name: "HelveticaNeue", size: size) ?? UIFont.systemFontOfSize(size)
     }
     
     static func appMediumFontOfSize(size: CGFloat) -> UIFont {
-        return UIFont(name: "Helvetica Neue Medium", size: size) ?? UIFont.systemFontOfSize(size)
+        return UIFont(name: "HelveticaNeue-Medium", size: size) ?? UIFont.systemFontOfSize(size)
     }
     
     static func appBoldFontOfSize(size: CGFloat) -> UIFont {
-        return UIFont(name: "Helvetica Neue Bold", size: size) ?? UIFont.systemFontOfSize(size)
+        return UIFont(name: "HelveticaNeue-Bold", size: size) ?? UIFont.boldSystemFontOfSize(size)
     }
 
 }
