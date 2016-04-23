@@ -247,8 +247,8 @@ extension EPlusContactsSupportController: UITableViewDataSource {
     
     private func cellInfoForIndePath(indexPath: NSIndexPath) -> Cell? {
         let section = dataStore[indexPath.section]
-        if let cells = section[dataKey], cellInfo = cells[indexPath.row] as? Cell {
-            return cellInfo
+        if let cells = section[dataKey] as? [Cell] {
+            return cells[indexPath.row]
         }
         
         return nil
