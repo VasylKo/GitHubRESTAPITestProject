@@ -205,7 +205,7 @@ final class UserProfileViewController: BesideMenuViewController, BrowseActionPro
         searchBar.tintColor = UIColor.whiteColor()
         searchBar.backgroundColor = UIScheme.searchbarBgColor
         searchBar.borderStyle = UITextBorderStyle.RoundedRect
-        searchBar.font = UIFont(name: "Helvetica", size: 16)
+        searchBar.font = UIScheme.appRegularFontOfSize(16)
         searchBar.textColor = UIColor.whiteColor()
         let leftView: UIImageView = UIImageView(image: UIImage(named: "search_icon"))
         leftView.frame = CGRectMake(0.0, 0.0, leftView.frame.size.width + 5.0, leftView.frame.size.height);
@@ -214,7 +214,7 @@ final class UserProfileViewController: BesideMenuViewController, BrowseActionPro
         searchBar.leftViewMode = .Always
         searchBar.delegate = self
         let str = NSAttributedString(string: "Search...", attributes: [NSForegroundColorAttributeName:UIColor(white: 255, alpha: 0.5),
-            NSFontAttributeName: UIFont(name: "Helvetica", size: 16)!])
+            NSFontAttributeName: UIScheme.appRegularFontOfSize(16)])
         searchBar.attributedPlaceholder =  str
         return searchBar
         }()

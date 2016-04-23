@@ -119,6 +119,8 @@
 		50FA43301C44F0B50050B00E /* ErrorCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50FA432F1C44F0B50050B00E /* ErrorCell.xib */; };
 		50FE7D891BBE77BB005676E2 /* ItemsSearchResultDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FE7D871BBE77BB005676E2 /* ItemsSearchResultDataSource.swift */; };
 		50FE7D8A1BBE77BB005676E2 /* ItemsSearchResultsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FE7D881BBE77BB005676E2 /* ItemsSearchResultsController.swift */; };
+		511791DB1CCB454E00B916CB /* ProjectsIntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511791D91CCB454E00B916CB /* ProjectsIntroViewController.swift */; };
+		511791DC1CCB454E00B916CB /* ProjectsIntroViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 511791DA1CCB454E00B916CB /* ProjectsIntroViewController.xib */; };
 		541820FC1CB7B28D001A780A /* MPesaBongaPinCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 541820FB1CB7B28D001A780A /* MPesaBongaPinCell.swift */; };
 		541820FE1CB7B295001A780A /* MPesaBongaPinCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 541820FD1CB7B295001A780A /* MPesaBongaPinCell.xib */; };
 		5419F9801CC52AC1000E16E7 /* AboutEplusServiceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5419F97E1CC52AC1000E16E7 /* AboutEplusServiceController.swift */; };
@@ -744,6 +746,8 @@
 		50FA432F1C44F0B50050B00E /* ErrorCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ErrorCell.xib; sourceTree = "<group>"; };
 		50FE7D871BBE77BB005676E2 /* ItemsSearchResultDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemsSearchResultDataSource.swift; sourceTree = "<group>"; };
 		50FE7D881BBE77BB005676E2 /* ItemsSearchResultsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemsSearchResultsController.swift; sourceTree = "<group>"; };
+		511791D91CCB454E00B916CB /* ProjectsIntroViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectsIntroViewController.swift; sourceTree = "<group>"; };
+		511791DA1CCB454E00B916CB /* ProjectsIntroViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProjectsIntroViewController.xib; sourceTree = "<group>"; };
 		541820FB1CB7B28D001A780A /* MPesaBongaPinCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPesaBongaPinCell.swift; sourceTree = "<group>"; };
 		541820FD1CB7B295001A780A /* MPesaBongaPinCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MPesaBongaPinCell.xib; sourceTree = "<group>"; };
 		5419F97E1CC52AC1000E16E7 /* AboutEplusServiceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutEplusServiceController.swift; sourceTree = "<group>"; };
@@ -1808,6 +1812,23 @@
 			);
 			name = ItemSearchController;
 			path = ItemSearchResult;
+			sourceTree = "<group>";
+		};
+		511791D31CCB434C00B916CB /* Projects */ = {
+			isa = PBXGroup;
+			children = (
+				511791D81CCB454E00B916CB /* ProjectsIntroViewController */,
+			);
+			path = Projects;
+			sourceTree = "<group>";
+		};
+		511791D81CCB454E00B916CB /* ProjectsIntroViewController */ = {
+			isa = PBXGroup;
+			children = (
+				511791DA1CCB454E00B916CB /* ProjectsIntroViewController.xib */,
+				511791D91CCB454E00B916CB /* ProjectsIntroViewController.swift */,
+			);
+			path = ProjectsIntroViewController;
 			sourceTree = "<group>";
 		};
 		541820F41CB7B0F2001A780A /* MPesaBongaPinCell */ = {
@@ -2944,6 +2965,7 @@
 		E64DC34C1B4E53C90011D37C /* PositionIn */ = {
 			isa = PBXGroup;
 			children = (
+				511791D31CCB434C00B916CB /* Projects */,
 				D179EBCF1CB67AD8006012CC /* CSVFiles */,
 				D19BDF311CAD7CEA00F0A887 /* WebViewController */,
 				D1D391431CA47D160065CC25 /* DonateInfoViewController */,
@@ -4617,6 +4639,7 @@
 				184040271CC14A2B00DF3655 /* EPlusPlanInfoTableViewCell.xib in Resources */,
 				D12EB2971C96E83600718E57 /* PositionIn.NewsItemTitleCell.xib in Resources */,
 				1840402A1CC14A2B00DF3655 /* PositionIn.EPlusAmbulanceDetailsController.xib in Resources */,
+				511791DC1CCB454E00B916CB /* ProjectsIntroViewController.xib in Resources */,
 				500D7FAD1BC2CD51008C8C82 /* PositionIn.SearchSectionCell.xib in Resources */,
 				E6F2437A1B8B40380033B13C /* PositionIn.BrowseListTableViewCell.xib in Resources */,
 				E63201721B984E2D0066C62E /* PositionIn.DescriptionTableViewCell.xib in Resources */,
@@ -4877,6 +4900,7 @@
 				18033D0B1C905E6100C709DD /* NSDate+TimeZone.m in Sources */,
 				2431EBDC1B945F5A009FB158 /* Promotion.swift in Sources */,
 				5419F99D1CC6C9C9000E16E7 /* EPlusFtooterSectionTableViewCell.swift in Sources */,
+				511791DB1CCB454E00B916CB /* ProjectsIntroViewController.swift in Sources */,
 				E689F07B1B6B972F00597587 /* ProductInventoryCell.swift in Sources */,
 				181314D51CBE7933004373F2 /* EPlusMembershipPlan.swift in Sources */,
 				E65E87301B611FE700AE444D /* Response.swift in Sources */,

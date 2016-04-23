@@ -25,8 +25,7 @@ final class CommunityActionCell: TableViewCell {
             button.tag = action.rawValue
             button.setTitle(action.displayText(), forState: .Normal)
             button.setTitleColor(UIScheme.communityActionColor, forState: .Normal)
-            button.titleLabel?.font = UIFont(name:"HelveticaNeue-Medium",
-                size: 14)
+            button.titleLabel?.font = UIScheme.appMediumFontOfSize(14)
             button.addTarget(self, action: "executeAction:", forControlEvents: UIControlEvents.TouchUpInside)
             self.contentView.addSubview(button)
             return button

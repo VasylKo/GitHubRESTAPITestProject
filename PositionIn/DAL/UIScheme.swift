@@ -31,8 +31,19 @@ struct UIScheme {
     static let tableSectionTitleColor = UIColor.bt_colorWithBytesR(169, g: 169, b: 169)
     static let tableSectionTitleFont = UIFont(name: "Helvetica Neue", size: 17)
 
+    static let appTextGreyColor = UIColor(red: 155/255.0, green: 155/255.0, blue: 155/255.0, alpha: 1.0)
+    
+    //App font management
     static func appRegularFontOfSize(size: CGFloat) -> UIFont {
-        return UIFont(name: "Helvetica Neue", size: size) ?? UIFont.systemFontOfSize(size)
+        return UIFont(name: "HelveticaNeue", size: size) ?? UIFont.systemFontOfSize(size)
+    }
+    
+    static func appMediumFontOfSize(size: CGFloat) -> UIFont {
+        return UIFont(name: "HelveticaNeue-Medium", size: size) ?? UIFont.systemFontOfSize(size)
+    }
+    
+    static func appBoldFontOfSize(size: CGFloat) -> UIFont {
+        return UIFont(name: "HelveticaNeue-Bold", size: size) ?? UIFont.boldSystemFontOfSize(size)
     }
 
 }
