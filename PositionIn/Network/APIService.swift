@@ -396,7 +396,7 @@ final class APIService {
         
         var eventCoverage = EPlusService()
         eventCoverage.objectId = CRUDObjectId(2)
-        eventCoverage.name = "Standby ambulance service for events"
+        eventCoverage.name = "Event Coverage"
         eventCoverage.shortDesc = "Corporate, school, sports, liveshows"
         eventCoverage.serviceDesc = "Via this service, we provide appropriate standby ambulances and personnel for sporting events, safari rally, meetings, launches with large crowds, funeral gatherings and parties etc."
         eventCoverage.footnote = "A small fee will be charged to non-members depending on the distance"
