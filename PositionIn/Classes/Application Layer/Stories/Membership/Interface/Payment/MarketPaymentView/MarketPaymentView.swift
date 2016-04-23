@@ -58,6 +58,7 @@ class MarketPaymentView: XLFormBaseCell {
         //Hide pickUpAvailabilityLabel
         MarketPaymentView.pickUpAvaiabililityCellHeight = 0
         self.pickUpAvaiabililityCellHeightConstraint?.constant = MarketPaymentView.pickUpAvaiabililityCellHeight
+        selectionStyle = .None
     }
     
     override func update() {

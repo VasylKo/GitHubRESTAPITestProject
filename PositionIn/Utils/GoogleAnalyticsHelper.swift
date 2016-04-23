@@ -42,6 +42,13 @@ struct AnalyticsLabels {
     
     //E-plus ambulance
     static let ambulancePayment = NSLocalizedString("AmbulancePayment")
+    static let ambulanceMembershipPlanSelection = NSLocalizedString("AmbulanceMembershipPlanSelection")
+    static let ambulanceMembershipPlanDetails = NSLocalizedString("AmbulanceMembershipPlanDetails")
+    static let ambulanceMembershipConfirmDetails = NSLocalizedString("AmbulanceMembershipConfirmDetails")
+    static let ambulanceMembershipPayment = NSLocalizedString("AmbulanceMembershipPayment")
+    static let ambulanceMembershipPaymentConfirmation = NSLocalizedString("AmbulanceMembershipPaymentConfirmation")
+    static let ambulanceMembershipCard = NSLocalizedString("AmbulanceMembershipCard")
+    
     
     static let emergencyAlerts = NSLocalizedString("EmergencyAlerts")
     static let emergencyAlertDetails = NSLocalizedString("EmergencyAlertDetails")
@@ -282,7 +289,9 @@ struct AnalyticActios {
     
     static let requestSent = NSLocalizedString("RequestSent")
     static let requestOutcome = NSLocalizedString("RequestOutcome")
-    
+    static let ambulancePaidPlanSelected = NSLocalizedString("AmbulancePaidPlanSelected")
+    static let ambulanceNotPaidPlanSelected = NSLocalizedString("AmbulanceNotPaidPlanSelected")
+
     static let donate = NSLocalizedString("Donate")
     
     static let volunteerRequest = NSLocalizedString("VolunteerRequest")

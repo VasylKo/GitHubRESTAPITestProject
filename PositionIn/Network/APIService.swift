@@ -326,6 +326,13 @@ final class APIService {
         hourEvacuationNumbers.append("Landline +254-20-2655251")
         hourEvacuationGroups.append(InfoGroup(title: "Emergency numbers", infoBlocks: hourEvacuationNumbers))
         
+        
+        var hourEvacuationLinks = [TextLink(title: "1199", type: .PhoneNumber)]
+        hourEvacuationLinks.append(TextLink(title: "0700 395 395", type: .PhoneNumber))
+        hourEvacuationLinks.append(TextLink(title: "0738 395 395", type: .PhoneNumber))
+        hourEvacuationLinks.append(TextLink(title: "+254-20-2655251", type: .PhoneNumber))
+        hourEvacuation.textLinks = hourEvacuationLinks
+        
         var hourEvacuationTypesOfAmbulance = [String]()
         hourEvacuationTypesOfAmbulance.append("Basic Life Support ambulances (BLS) and Advanced Cardiac Life Support ambulances (ACLS)")
         hourEvacuationTypesOfAmbulance.append("We have Landcruiser and Toyota Hiace High Roof ambulances")
@@ -377,16 +384,19 @@ final class APIService {
         evacuationBookAnAmbulance.append("Whether medical report, VISA and vaccination have been done")
         evacuationBookAnAmbulance.append("Date and time of the intended ambulance transfer")
         evacuationBookAnAmbulance.append("Name of person accompanying and relationship, if available")
-        hourEvacuationGroups.append(InfoGroup(title: "How to book an ambulance", infoBlocks: evacuationBookAnAmbulance))
+        evacuationGroups.append(InfoGroup(title: "How to book an ambulance", infoBlocks: evacuationBookAnAmbulance))
         
         evacuation.infoBlocks = evacuationGroups
-        
+        evacuation.textLinks = [TextLink(title: "dispatch@eplus.co.ke", type: .Email)]
         items.append(evacuation)
         
     
+        
+        
+        
         var eventCoverage = EPlusService()
         eventCoverage.objectId = CRUDObjectId(2)
-        eventCoverage.name = "Cross Border Evacuation"
+        eventCoverage.name = "Event Coverage"
         eventCoverage.shortDesc = "Corporate, school, sports, liveshows"
         eventCoverage.serviceDesc = "Via this service, we provide appropriate standby ambulances and personnel for sporting events, safari rally, meetings, launches with large crowds, funeral gatherings and parties etc."
         eventCoverage.footnote = "A small fee will be charged to non-members depending on the distance"
@@ -399,6 +409,7 @@ final class APIService {
         var eventRequestTheService = [String]()
         eventRequestTheService.append("Send to us the details of the event one week prior to the event, send us its details including date, start and end time, nature of the event, location, number of participants, telephone contacts, postal address and person/organisation paying for the event.\n\nAlternatively, you can fill in the event request form below and send to dispatch@eplus.co.ke")
         eventCoverageGroups.append(InfoGroup(title: "How to request the service ", infoBlocks: eventRequestTheService))
+        eventCoverage.textLinks = [TextLink(title: "dispatch@eplus.co.ke", type: .Email)]
         
         var eventConfirmation = [String]()
         eventConfirmation.append("We will send you a quotation within the same day and wait for payment. Confirmation will be done once payment has been made.")
@@ -428,8 +439,8 @@ final class APIService {
         return getObject(endpoint)
     }
     
-    func createEPlusOrder(planOptions object: EPlusPlanOptions) -> Future<EplusMembershipDetails, NSError> {
-        let endpoint = EPlusPlanOptions.endpoint()
+    func createEPlusOrder(planParameters object: EPlusPlanParameters) -> Future<EplusMembershipDetails, NSError> {
+        let endpoint = EPlusPlanParameters.endpoint()
         
         let responseMapping: AnyObject? -> EplusMembershipDetails? = { response in
             if let json = response as? NSDictionary {

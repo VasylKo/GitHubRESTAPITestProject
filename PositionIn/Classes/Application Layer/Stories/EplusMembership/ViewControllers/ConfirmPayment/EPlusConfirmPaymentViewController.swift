@@ -109,7 +109,7 @@ class EplusConfirmPaymentViewController: XLFormViewController {
             membershipId: self.plan.objectId).onSuccess { [weak self] transactionId in
                 self?.transactionId = transactionId
                 self?.pollMPESAStatus()
-                //self?.sendPaymentEventToAnalytics(success: true)
+                self?.sendPaymentEventToAnalytics(success: true)
             }.onFailure(callback: { [weak self] _ in
                 self?.paymentDidFail()
                 })
@@ -131,7 +131,9 @@ class EplusConfirmPaymentViewController: XLFormViewController {
     private func paymentDidSuccess() {
         if self.plan.type == .Family {
             api().getMyProfile().onSuccess(callback: { (profile : UserProfile) -> Void in
-                let message = "You have selected x dependents. Our customer support will contact you at <phone number> within the next 48 hours"
+                let numberOfDependents = self.plan.planParameters?.dependentsCount ?? 0
+                let phoneNumber = profile.phone!
+                let message = "You have selected \(numberOfDependents) dependents. Our customer support will contact you at \(phoneNumber) within the next 48 hours"
                 let alertController = UIAlertController(title: nil, message: message, preferredStyle: .Alert)
                 
                 let okAction = UIAlertAction(title: "Ok", style: .Default) { (action) in
@@ -156,18 +158,16 @@ class EplusConfirmPaymentViewController: XLFormViewController {
     private func paymentDidFail() {
         headerView.showFailure()
                 
-        //sendPaymentEventToAnalytics(success: false)
+        sendPaymentEventToAnalytics(success: false)
     }
     
     //TODO: add Analytic events
     //MARK: - Analytic
-    /*
     func sendPaymentEventToAnalytics(success success: Bool) {
         let planPrice = NSNumber(integer: plan.price ?? 0)
         let paymentLabel = success ? NSLocalizedString("Payment Completed", comment: "MPesaIndicatorView") : NSLocalizedString("Payment Failed", comment: "MPesaIndicatorView")
-        trackEventToAnalytics(AnalyticCategories.membership, action: AnalyticActios.paymentOutcome, label: paymentLabel, value: planPrice)
+        trackEventToAnalytics(AnalyticCategories.ambulance, action: AnalyticActios.paymentOutcome, label: paymentLabel, value: planPrice)
         
     }
-*/
  
 }

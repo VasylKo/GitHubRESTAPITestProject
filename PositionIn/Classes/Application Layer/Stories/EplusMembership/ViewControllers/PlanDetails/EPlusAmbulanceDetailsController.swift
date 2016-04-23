@@ -31,6 +31,11 @@ class EPlusAmbulanceDetailsController: UIViewController {
         setupUI()
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        trackScreenToAnalytics(AnalyticsLabels.ambulanceMembershipPlanDetails)
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         sizeHeaderFooterToFit()

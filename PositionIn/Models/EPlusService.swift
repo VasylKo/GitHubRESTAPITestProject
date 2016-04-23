@@ -9,6 +9,15 @@
 import ObjectMapper
 import CleanroomLogger
 
+enum TextLinkType {
+    case PhoneNumber, Email, Url
+}
+
+struct TextLink {
+    var title: String
+    var type: TextLinkType
+}
+
 struct EPlusService: CRUDObject {
     
     // FIXME: Ambulance Hot fix - need to remove
@@ -20,6 +29,7 @@ struct EPlusService: CRUDObject {
     var serviceDesc: String?
     var infoBlocks: [InfoGroup]?
     var footnote: String?
+    var textLinks: [TextLink]?
     
     var serviceImageName: String {
         switch objectId {

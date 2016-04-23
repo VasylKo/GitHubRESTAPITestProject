@@ -817,33 +817,6 @@ extension BrowseListViewController: IdentifiableProtocol {
 }
 
 
-//MARK: - OrderViewController
-extension OrderViewController { 
-
-    enum Reusable: String, CustomStringConvertible, ReusableViewProtocol {
-        case BongaPin = "BongaPin"
-
-        var kind: ReusableKind? {
-            switch (self) {
-            case BongaPin:
-                return ReusableKind(rawValue: "tableViewCell")
-            }
-        }
-
-        var viewType: UIView.Type? {
-            switch (self) {
-            default:
-                return nil
-            }
-        }
-
-        var storyboardIdentifier: String? { return self.description } 
-        var description: String { return self.rawValue }
-    }
-
-}
-
-
 //MARK: - ProductDetailsViewController
 extension UIStoryboardSegue {
     func selection() -> ProductDetailsViewController.Segue? {
@@ -882,7 +855,7 @@ extension ProductDetailsViewController {
             case ShowProductInventory:
                 return ProductInventoryViewController.self
             case ShowBuyScreen:
-                return OrderViewController.self
+                return ProductOrderViewController.self
             case ShowSellerProfile:
                 return UserProfileViewController.self
             }
@@ -1049,7 +1022,7 @@ extension MarketDetailsViewController {
             case ShowOrganizerProfile:
                 return UserProfileViewController.self
             case ShowBuyScreen:
-                return OrderViewController.self
+                return ProductOrderViewController.self
             }
         }
 

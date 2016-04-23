@@ -180,6 +180,7 @@ class EPlusMembershipConfirmDetailsViewController : XLFormViewController {
         let row = XLFormRowDescriptor(tag: Tags.SchoolName.rawValue, rowType: XLFormRowDescriptorTypeText, title: NSLocalizedString("School name", comment: ""))
         row.cellConfig.setObject(UIScheme.mainThemeColor, forKey: "textLabel.textColor")
         row.cellConfig.setObject(UIScheme.mainThemeColor, forKey: "tintColor")
+        row.cellConfig.setObject(NSLocalizedString("Required"), forKey: "textField.placeholder")
         row.required = true
         return row
     }()
@@ -189,6 +190,7 @@ class EPlusMembershipConfirmDetailsViewController : XLFormViewController {
         let row = XLFormRowDescriptor(tag: Tags.NumberOfStudents.rawValue, rowType: XLFormRowDescriptorTypeInteger, title: NSLocalizedString("Number of Students", comment: ""))
         row.cellConfig.setObject(UIScheme.mainThemeColor, forKey: "textLabel.textColor")
         row.cellConfig.setObject(UIScheme.mainThemeColor, forKey: "tintColor")
+        row.cellConfig.setObject(NSLocalizedString("Required"), forKey: "textField.placeholder")
         row.required = true
         return row
     }()
@@ -200,6 +202,7 @@ class EPlusMembershipConfirmDetailsViewController : XLFormViewController {
         let row = XLFormRowDescriptor(tag: Tags.CompanyName.rawValue, rowType: XLFormRowDescriptorTypeText, title: NSLocalizedString("Company name", comment: ""))
         row.cellConfig.setObject(UIScheme.mainThemeColor, forKey: "textLabel.textColor")
         row.cellConfig.setObject(UIScheme.mainThemeColor, forKey: "tintColor")
+        row.cellConfig.setObject(NSLocalizedString("Required"), forKey: "textField.placeholder")
         row.required = true
         return row
     }()
@@ -209,6 +212,7 @@ class EPlusMembershipConfirmDetailsViewController : XLFormViewController {
         let row = XLFormRowDescriptor(tag: Tags.NumberOfPeople.rawValue, rowType: XLFormRowDescriptorTypeInteger, title: NSLocalizedString("Number of People", comment: ""))
         row.cellConfig.setObject(UIScheme.mainThemeColor, forKey: "textLabel.textColor")
         row.cellConfig.setObject(UIScheme.mainThemeColor, forKey: "tintColor")
+        row.cellConfig.setObject(NSLocalizedString("Required"), forKey: "textField.placeholder")
         row.required = true
         return row
     }()
@@ -220,6 +224,7 @@ class EPlusMembershipConfirmDetailsViewController : XLFormViewController {
         let row = XLFormRowDescriptor(tag: Tags.NameOfEstate.rawValue, rowType: XLFormRowDescriptorTypeText, title: NSLocalizedString("Name of Estate", comment: ""))
         row.cellConfig.setObject(UIScheme.mainThemeColor, forKey: "textLabel.textColor")
         row.cellConfig.setObject(UIScheme.mainThemeColor, forKey: "tintColor")
+        row.cellConfig.setObject(NSLocalizedString("Required"), forKey: "textField.placeholder")
         row.required = true
         return row
     }()
@@ -229,6 +234,7 @@ class EPlusMembershipConfirmDetailsViewController : XLFormViewController {
         let row = XLFormRowDescriptor(tag: Tags.HouseNumbers.rawValue, rowType: XLFormRowDescriptorTypeInteger, title: NSLocalizedString("House numbers", comment: ""))
         row.cellConfig.setObject(UIScheme.mainThemeColor, forKey: "textLabel.textColor")
         row.cellConfig.setObject(UIScheme.mainThemeColor, forKey: "tintColor")
+        row.cellConfig.setObject(NSLocalizedString("Required"), forKey: "textField.placeholder")
         row.required = true
         return row
     }()
@@ -238,6 +244,7 @@ class EPlusMembershipConfirmDetailsViewController : XLFormViewController {
         let row = XLFormRowDescriptor(tag: Tags.NumberOfHouseholds.rawValue, rowType: XLFormRowDescriptorTypeInteger, title: NSLocalizedString("Number of households", comment: ""))
         row.cellConfig.setObject(UIScheme.mainThemeColor, forKey: "textLabel.textColor")
         row.cellConfig.setObject(UIScheme.mainThemeColor, forKey: "tintColor")
+        row.cellConfig.setObject(NSLocalizedString("Required"), forKey: "textField.placeholder")
         row.required = true
         return row
     }()
@@ -249,6 +256,7 @@ class EPlusMembershipConfirmDetailsViewController : XLFormViewController {
         let row = XLFormRowDescriptor(tag: Tags.NameOfSacco.rawValue, rowType: XLFormRowDescriptorTypeText, title: NSLocalizedString("Name of Sacco", comment: ""))
         row.cellConfig.setObject(UIScheme.mainThemeColor, forKey: "textLabel.textColor")
         row.cellConfig.setObject(UIScheme.mainThemeColor, forKey: "tintColor")
+        row.cellConfig.setObject(NSLocalizedString("Required"), forKey: "textField.placeholder")
         row.required = true
         return row
     }()
@@ -258,6 +266,7 @@ class EPlusMembershipConfirmDetailsViewController : XLFormViewController {
         let row = XLFormRowDescriptor(tag: Tags.NumberOfSaccoPeople.rawValue, rowType: XLFormRowDescriptorTypeInteger, title: NSLocalizedString("Number of People", comment: ""))
         row.cellConfig.setObject(UIScheme.mainThemeColor, forKey: "textLabel.textColor")
         row.cellConfig.setObject(UIScheme.mainThemeColor, forKey: "tintColor")
+        row.cellConfig.setObject(NSLocalizedString("Required"), forKey: "textField.placeholder")
         row.required = true
         return row
     }()
@@ -285,7 +294,7 @@ class EPlusMembershipConfirmDetailsViewController : XLFormViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        trackScreenToAnalytics(AnalyticsLabels.membershipConfirmDetails)
+        trackScreenToAnalytics(AnalyticsLabels.ambulanceMembershipConfirmDetails)
     }
     
     func loadData (){
@@ -435,7 +444,6 @@ class EPlusMembershipConfirmDetailsViewController : XLFormViewController {
         if (validationErrors.count > 0){
             self.showFormValidationError(validationErrors.first)
             navigationItem.rightBarButtonItem?.enabled = true
-            trackEventToAnalytics(AnalyticCategories.membership, action: AnalyticActios.confirmDetailsNext, label: validationErrors.first?.localizedDescription ?? NSLocalizedString("Unknown error"))
             return
         }
         
@@ -453,8 +461,8 @@ class EPlusMembershipConfirmDetailsViewController : XLFormViewController {
         if let userProfile = self.userProfile {
             api().updateMyProfile(userProfile).onComplete(callback: { [unowned self] _ in
             
-                var planOptions = EPlusPlanOptions()
-                planOptions.id = self.plan.objectId
+                var planParameters = EPlusPlanParameters()
+                planParameters.id = self.plan.objectId
                 
                 switch self.plan.type {
                 case .Unknown:
@@ -466,30 +474,31 @@ class EPlusMembershipConfirmDetailsViewController : XLFormViewController {
                 case .Family:
                     let numberOfDependentsValue: XLFormOptionsObject = (self.numberOfDependentsRow.value as? XLFormOptionsObject)!
                     let numberOfDependents = (numberOfDependentsValue.valueData() as? NSNumber)?.integerValue ?? 0
-                    planOptions.dependentsCount = numberOfDependents
+                    planParameters.dependentsCount = numberOfDependents
                     
-                    api().createEPlusOrder(planOptions: planOptions).onSuccess(callback: { [unowned self] _ -> Void in
+                    api().createEPlusOrder(planParameters: planParameters).onSuccess(callback: { [unowned self] _ -> Void in
+                        self.plan.planParameters = planParameters
                         self.router.showPaymentViewController(from: self, with: self.plan)
                         self.navigationItem.rightBarButtonItem?.enabled = true
                     })
                     return
                 case .Schools:
-                    planOptions.schoolName = (self.schoolNameRow.value as? String) ?? ""
-                    planOptions.studentsCount = (self.numberOfStudentsRow.value as? NSNumber)?.integerValue ?? 0
+                    planParameters.schoolName = (self.schoolNameRow.value as? String) ?? ""
+                    planParameters.studentsCount = (self.numberOfStudentsRow.value as? NSNumber)?.integerValue ?? 0
                 case .Corporate:
-                    planOptions.companyName = (self.companyNameRow.value as? String) ?? ""
-                    planOptions.peopleCount = (self.numberOfCompanyPeopleRow.value as? NSNumber)?.integerValue ?? 0
+                    planParameters.companyName = (self.companyNameRow.value as? String) ?? ""
+                    planParameters.peopleCount = (self.numberOfCompanyPeopleRow.value as? NSNumber)?.integerValue ?? 0
                 case .ResidentialEstates:
-                    planOptions.estateName = (self.nameOfEstateRow.value as? String) ?? ""
-                    planOptions.houseCount = (self.houseNumbersRow.value as? NSNumber)?.integerValue ?? 0
-                    planOptions.houseHoldersCount = (self.numberOfHouseholdsRow.value as? NSNumber)?.integerValue ?? 0
+                    planParameters.estateName = (self.nameOfEstateRow.value as? String) ?? ""
+                    planParameters.houseCount = (self.houseNumbersRow.value as? NSNumber)?.integerValue ?? 0
+                    planParameters.houseHoldersCount = (self.numberOfHouseholdsRow.value as? NSNumber)?.integerValue ?? 0
                 case .Sacco:
-                    planOptions.saccoName = (self.nameOfSaccoRow.value as? String) ?? ""
-                    planOptions.saccoPeopleCount = (self.numberOfSaccoPeopleRow.value as? NSNumber)?.integerValue ?? 0
+                    planParameters.saccoName = (self.nameOfSaccoRow.value as? String) ?? ""
+                    planParameters.saccoPeopleCount = (self.numberOfSaccoPeopleRow.value as? NSNumber)?.integerValue ?? 0
                 }
                 
                 let phoneNumber = (self.phoneRow.value as? String) ?? ""
-                api().createEPlusOrder(planOptions: planOptions).onSuccess(callback: { [unowned self] _ in
+                api().createEPlusOrder(planParameters: planParameters).onSuccess(callback: { [unowned self] _ in
                     let message = "Our Sales team will contact you at \(phoneNumber) within the next 48 hours to complete the registration process. Thank you for selecting E Plus"
                     let alertController = UIAlertController(title: nil, message: message, preferredStyle: .Alert)
                     
@@ -505,8 +514,6 @@ class EPlusMembershipConfirmDetailsViewController : XLFormViewController {
             self.router.showPaymentViewController(from: self, with: self.plan)
             navigationItem.rightBarButtonItem?.enabled = true
         }
-        
-        trackEventToAnalytics(AnalyticCategories.membership, action: AnalyticActios.confirmDetailsNext, label: NSLocalizedString("Success"))
 
     }
 }

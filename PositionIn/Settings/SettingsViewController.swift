@@ -8,9 +8,8 @@
 
 import UIKit
 import XLForm
-import MessageUI
 
-class SettingsViewController: BesideMenuViewController, MFMailComposeViewControllerDelegate {
+class SettingsViewController: BesideMenuViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -75,25 +74,8 @@ class SettingsViewController: BesideMenuViewController, MFMailComposeViewControl
     }
     
     func showMailControllerWithRecepientEmail(email: String?) {
-        if MFMailComposeViewController.canSendMail() {
-            let mailController = MFMailComposeViewController()
-            mailController.mailComposeDelegate = self
-            if let email = email {
-                mailController.setToRecipients([email])
-            }
-            self.presentViewController(mailController, animated: true, completion: nil)
-        }
-        else {
-            let sendMailErrorAlert = UIAlertView(title: "Could Not Send Email",
-                message: "Your device could not send e-mail.  Please check e-mail configuration and try again.",
-                delegate: nil, cancelButtonTitle: "OK")
-            sendMailErrorAlert.show()
-        }
-    }
-    
-    func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult,
-        error: NSError?) {
-        controller.dismissViewControllerAnimated(true, completion: nil)
+        guard let email = email else { return }
+        MailComposeViewController.presentMailControllerFrom(self, recipientsList: [email])
     }
     
     func imageWithColor(color: UIColor) -> UIImage {

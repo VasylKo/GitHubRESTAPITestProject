@@ -45,6 +45,7 @@ struct EPlusMembershipPlan: CRUDObject {
     var otherBenefits: [String]?
     var benefitGroups: [InfoGroup]?
     var price: Int?
+    var planParameters: EPlusPlanParameters?
     
     var type: EPlusPlanType {
         return EPlusPlanType(rawValue: Int(objectId) ?? EPlusPlanType.Unknown.rawValue)!

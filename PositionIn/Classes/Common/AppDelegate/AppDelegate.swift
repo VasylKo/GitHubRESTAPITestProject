@@ -53,6 +53,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         locationController = LocationController()
         
         UINavigationBar.appearance().barTintColor = UIColor.bt_colorWithBytesR(237, g: 27, b: 46)
+        UINavigationBar.appearance().translucent = false
         
         super.init()
         
@@ -120,9 +121,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         XLFormViewController.cellClassesForRowDescriptorTypes()[XLFormRowDescriptorTypeDonationPaymentAmountCell] =
         "DonationPaymentAmountCell"
-        
+  
         XLFormViewController.cellClassesForRowDescriptorTypes()[XLFormRowDescriptorTypeAmbulancePayment] =
         "EPlusPaymentTableViewCell"
+        XLFormViewController.cellClassesForRowDescriptorTypes()[XLFormRowDescriptorTypeOrderHeder] =
+        "OrderHeaderViewCell"
+        
+        XLFormViewController.cellClassesForRowDescriptorTypes()[XLFormRowDescriptorTypeAvailabilityViewCell] =
+        "AvailabilityViewCell"
+        
+        XLFormViewController.cellClassesForRowDescriptorTypes()[XLFormRowDescriptorTypeTotalViewCell] =
+        "TotalViewCell"
         
         BTAppSwitch.setReturnURLScheme("\(NSBundle.mainBundle().bundleIdentifier!).payments")
 
