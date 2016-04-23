@@ -294,7 +294,7 @@ class EPlusMembershipConfirmDetailsViewController : XLFormViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        trackScreenToAnalytics(AnalyticsLabels.membershipConfirmDetails)
+        trackScreenToAnalytics(AnalyticsLabels.ambulanceMembershipConfirmDetails)
     }
     
     func loadData (){
@@ -444,7 +444,6 @@ class EPlusMembershipConfirmDetailsViewController : XLFormViewController {
         if (validationErrors.count > 0){
             self.showFormValidationError(validationErrors.first)
             navigationItem.rightBarButtonItem?.enabled = true
-            trackEventToAnalytics(AnalyticCategories.membership, action: AnalyticActios.confirmDetailsNext, label: validationErrors.first?.localizedDescription ?? NSLocalizedString("Unknown error"))
             return
         }
         
@@ -514,8 +513,6 @@ class EPlusMembershipConfirmDetailsViewController : XLFormViewController {
             self.router.showPaymentViewController(from: self, with: self.plan)
             navigationItem.rightBarButtonItem?.enabled = true
         }
-        
-        trackEventToAnalytics(AnalyticCategories.membership, action: AnalyticActios.confirmDetailsNext, label: NSLocalizedString("Success"))
 
     }
 }
