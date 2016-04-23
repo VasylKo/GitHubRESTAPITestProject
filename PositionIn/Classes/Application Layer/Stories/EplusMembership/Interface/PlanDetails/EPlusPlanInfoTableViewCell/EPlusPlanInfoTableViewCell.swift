@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import TTTAttributedLabel
 
 class EPlusPlanInfoTableViewCell: UITableViewCell {
 
@@ -28,6 +29,12 @@ class EPlusPlanInfoTableViewCell: UITableViewCell {
     
     @IBOutlet weak var labelLeftMarginConstraint: NSLayoutConstraint!
     @IBOutlet weak var bulletView: UIView!
-    @IBOutlet private weak var infoLabel: UILabel!
+    @IBOutlet weak var infoLabel: TTTAttributedLabel!
+    
+    @IBAction func test() {
+        var s = 2
+        
+    }
+    
     
 }

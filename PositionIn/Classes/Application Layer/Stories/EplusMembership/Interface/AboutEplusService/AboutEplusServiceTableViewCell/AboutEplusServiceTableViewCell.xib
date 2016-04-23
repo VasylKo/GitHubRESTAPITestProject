@@ -11,7 +11,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="73"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="73"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="72"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view hidden="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5Td-dd-h0w" userLabel="CelContainerView">
@@ -19,6 +19,10 @@
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="251" image="service_1_eplus_icon" translatesAutoresizingMaskIntoConstraints="NO" id="LfZ-cT-spm" customClass="service_1_eplus_icon">
                                 <rect key="frame" x="8" y="8" width="56" height="56"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="56" id="JBI-uL-c8Z"/>
+                                    <constraint firstAttribute="width" constant="56" id="PE3-eb-H81"/>
+                                </constraints>
                             </imageView>
                             <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2Tb-uT-Zjy" userLabel="LabelsContainerView">
                                 <rect key="frame" x="74" y="15" width="205" height="43"/>
