@@ -202,7 +202,7 @@ protocol BrowseModeDisplay {
     }
  
 //MARK: - BrowseGridViewControllerDelegate
-    
+    var testFlag = true
     func browseGridViewControllerSelectItem(homeItem: HomeItem) {
         switch homeItem {
         case .Membership:
@@ -224,6 +224,12 @@ protocol BrowseModeDisplay {
         case .Training:
             fallthrough
         case .Projects:
+            if testFlag {
+                testFlag = !testFlag
+                let projectsIntroController = ProjectsIntroViewController()
+                projectsIntroController.browseGridDelegate = self
+                self.navigationController?.pushViewController(projectsIntroController, animated: true)
+            } else {
             let controller = Storyboards.Main.instantiateExploreViewControllerId()
             controller.homeItem = homeItem
             let filterUpdate = { (filter: SearchFilter) -> SearchFilter in
@@ -237,6 +243,7 @@ protocol BrowseModeDisplay {
             controller.childFilterUpdate = filterUpdate
             controller.title = homeItem.displayString()
             self.navigationController?.pushViewController(controller, animated: true)
+            }
         case .Donate:
             self.navigationController?.pushViewController(Storyboards.Onboarding.instantiateDonateViewController(), animated: true)
         case .Ambulance:

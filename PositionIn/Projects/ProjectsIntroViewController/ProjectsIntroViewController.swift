@@ -9,27 +9,35 @@
 import UIKit
 
 class ProjectsIntroViewController: UIViewController {
-
+    
+    weak var browseGridDelegate: BrowseGridViewControllerDelegate?
+    
+    // MARK: - View life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        setupInterface()
+        
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    private func setupInterface() {
+        
+        let rightBarButtonItem: UIBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Next", comment: ""),
+                                                                  style: .Plain, target: self, action: "nextButtonTouched:")
+        self.navigationItem.rightBarButtonItem = rightBarButtonItem
+        
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    // MARK: - Actions
+    @objc func nextButtonTouched(sender: AnyObject) {
+        showProjectsList()
     }
-    */
+    
+    private func showProjectsList() {
+        if let delegate = browseGridDelegate {
+            delegate.browseGridViewControllerSelectItem(HomeItem.Projects)
+        } else {
+            fatalError("Set browseGridDelegate")
+        }
+    }
 
 }

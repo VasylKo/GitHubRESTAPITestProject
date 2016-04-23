@@ -1825,8 +1825,8 @@
 		511791D81CCB454E00B916CB /* ProjectsIntroViewController */ = {
 			isa = PBXGroup;
 			children = (
-				511791D91CCB454E00B916CB /* ProjectsIntroViewController.swift */,
 				511791DA1CCB454E00B916CB /* ProjectsIntroViewController.xib */,
+				511791D91CCB454E00B916CB /* ProjectsIntroViewController.swift */,
 			);
 			path = ProjectsIntroViewController;
 			sourceTree = "<group>";
