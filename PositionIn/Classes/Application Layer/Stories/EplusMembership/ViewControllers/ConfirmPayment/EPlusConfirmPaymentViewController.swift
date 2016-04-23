@@ -109,7 +109,7 @@ class EplusConfirmPaymentViewController: XLFormViewController {
             membershipId: self.plan.objectId).onSuccess { [weak self] transactionId in
                 self?.transactionId = transactionId
                 self?.pollMPESAStatus()
-                //self?.sendPaymentEventToAnalytics(success: true)
+                self?.sendPaymentEventToAnalytics(success: true)
             }.onFailure(callback: { [weak self] _ in
                 self?.paymentDidFail()
                 })
@@ -156,18 +156,16 @@ class EplusConfirmPaymentViewController: XLFormViewController {
     private func paymentDidFail() {
         headerView.showFailure()
                 
-        //sendPaymentEventToAnalytics(success: false)
+        sendPaymentEventToAnalytics(success: false)
     }
     
     //TODO: add Analytic events
     //MARK: - Analytic
-    /*
     func sendPaymentEventToAnalytics(success success: Bool) {
         let planPrice = NSNumber(integer: plan.price ?? 0)
         let paymentLabel = success ? NSLocalizedString("Payment Completed", comment: "MPesaIndicatorView") : NSLocalizedString("Payment Failed", comment: "MPesaIndicatorView")
-        trackEventToAnalytics(AnalyticCategories.membership, action: AnalyticActios.paymentOutcome, label: paymentLabel, value: planPrice)
+        trackEventToAnalytics(AnalyticCategories.ambulance, action: AnalyticActios.paymentOutcome, label: paymentLabel, value: planPrice)
         
     }
-*/
  
 }

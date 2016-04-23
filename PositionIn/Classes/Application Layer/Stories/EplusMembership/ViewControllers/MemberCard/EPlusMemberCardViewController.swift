@@ -46,7 +46,7 @@ class EPlusMemberCardViewController : UIViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        trackScreenToAnalytics(AnalyticsLabels.membershipCard)
+        trackScreenToAnalytics(AnalyticsLabels.ambulanceMembershipCard)
     }
     
     func setupInterface() {

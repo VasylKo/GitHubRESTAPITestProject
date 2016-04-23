@@ -36,6 +36,11 @@ class EPlusPlansViewController: UIViewController {
         self.setupTableViewHeaderFooter()
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        trackScreenToAnalytics(AnalyticsLabels.ambulanceMembershipPlanSelection)
+    }
+    
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         self.setupTableViewHeaderFooter()
@@ -101,6 +106,18 @@ class EPlusPlansViewController: UIViewController {
     func showAboutController(sender: AnyObject) {
         router.showAboutController(from: self)
     }
+    
+    //MARK: - Analytic
+    private func sendEventToAnalyticAboutSelectedPlan(plan: EPlusMembershipPlan) {
+        switch plan.type {
+        case .Family, .Individual:
+            trackEventToAnalytics(AnalyticCategories.ambulance, action: AnalyticActios.ambulancePaidPlanSelected)
+        case .Corporate, .Schools, .ResidentialEstates, .Sacco:
+            trackEventToAnalytics(AnalyticCategories.ambulance, action: AnalyticActios.ambulanceNotPaidPlanSelected)
+        default:
+            break
+        }
+    }
 }
 
 extension EPlusPlansViewController: EPlusTableViewFooterViewDelegate {
@@ -132,6 +149,7 @@ extension EPlusPlansViewController: EPlusTableViewFooterViewDelegate {
         optionMenu.addAction(visitWebsire)
         optionMenu.addAction(cancelAction)
         
+        trackEventToAnalytics(AnalyticCategories.ambulance, action: AnalyticActios.alreadyMember)
         self.presentViewController(optionMenu, animated: true, completion: nil)
         
     }
@@ -149,6 +167,7 @@ extension EPlusPlansViewController: UITableViewDelegate {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         
         let plan = plans[indexPath.row]
+        sendEventToAnalyticAboutSelectedPlan(plan)
         router.showMembershipPlanDetailsViewController(from: self, with: plan, onlyPlanInfo: false)
     }
 }
