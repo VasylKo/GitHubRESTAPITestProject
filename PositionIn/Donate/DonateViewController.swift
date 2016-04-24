@@ -196,10 +196,13 @@ class DonateViewController: XLFormViewController, PaymentReponseDelegate {
                 return
             }
             
-            self?.sendDonationEventToAnalytics(action: AnalyticActios.proceedToPay)
+            //self?.sendDonationEventToAnalytics(action: AnalyticActios.proceedToPay)
             
-            self?.performSegueWithIdentifier("Show\((self?.paymentType)!)", sender: self!)
-            self?.setError(true, error: nil)
+            //self?.performSegueWithIdentifier("Show\((self?.paymentType)!)", sender: self!)
+            //self?.setError(true, error: nil)
+            let paymentSystem = PaymentSystemProvider.paymentSystemWithItem(self!)
+            let paymentController = DonatePaymentController(paymentSystem: paymentSystem)
+            self?.navigationController?.pushViewController(paymentController, animated: true)
         }
         
         confirmDonation.addFormRow(confirmRow)
@@ -339,5 +342,41 @@ extension DonateViewController {
             }
             return XLFormValidationStatus(msg: msg, status: status, rowDescriptor: row)
         }
+    }
+}
+
+/*
+ var price: NSNumber { get }
+ var itemId: String { get }
+ var quantity: Int { get }
+ var itemName: String { get }
+ var purchaseType: PurchaseType { get }
+ var paymentTypes: CardItem { get }
+ var fromViewController: UIViewController { get }
+ */
+
+extension DonateViewController: PurchaseConvertible {
+    var price: NSNumber {
+       return NSNumber(float: 97)
+    }
+    
+    var itemId: String {
+        return "ffff"
+    }
+    
+    var quantity: Int {
+        return 1
+    }
+    
+    var itemName: String {
+        return "ffff"
+    }
+    
+    var purchaseType: PurchaseType {
+        return .Donation
+    }
+    
+    var paymentTypes: CardItem {
+        return .CreditDebitCard
     }
 }

@@ -3,6 +3,11 @@
 // Copyright (c) 2016 Soluna Labs. All rights reserved.
 //
 
+//
+// Created by Max Stoliar on 1/10/16.
+// Copyright (c) 2016 Soluna Labs. All rights reserved.
+//
+
 import UIKit
 import Braintree
 
@@ -59,7 +64,7 @@ class BraintreePaymentViewController : UIViewController, BTDropInViewControllerD
                 let displayAmount = "\(AppConfiguration().currencySymbol) \(amount)"
                 dropInViewController.paymentRequest?.displayAmount = displayAmount
             }
-
+            
             dropInViewController.paymentRequest?.callToActionText = NSLocalizedString("Checkout", comment: "Order: Checkout")
             
             self.view.addSubview(dropInViewController.view)
@@ -69,36 +74,38 @@ class BraintreePaymentViewController : UIViewController, BTDropInViewControllerD
     }
     
     func dropInViewController(viewController: BTDropInViewController,
-        didSucceedWithTokenization paymentMethodNonce: BTPaymentMethodNonce) {
+                              didSucceedWithTokenization paymentMethodNonce: BTPaymentMethodNonce) {
         //TODO: should check unwrapping
-            if let membershipId = self.membershipId {
-                api().membershipCheckoutBraintree(String(amount!), nonce: paymentMethodNonce.nonce,
-                    membershipId: membershipId).onSuccess
-                    { [weak self] err in
-                        if let strongSelf = self {
-                            if(err == "") {
-                                strongSelf.dismissPaymentsController(true, err: nil)
-                            } else {
-                                strongSelf.dismissPaymentsController(false, err: err)
-                            }
+        if let membershipId = self.membershipId {
+            api().membershipCheckoutBraintree(String(amount!), nonce: paymentMethodNonce.nonce,
+                membershipId: membershipId).onSuccess
+                { [weak self] err in
+                    if let strongSelf = self {
+                        if(err == "") {
+                            strongSelf.dismissPaymentsController(true, err: nil)
+                        } else {
+                            strongSelf.dismissPaymentsController(false, err: err)
                         }
-                }
+                    }
             }
-            else {
-                api().donateCheckoutBraintree(String(amount!), nonce: paymentMethodNonce.nonce, itemId: self.itemId).onSuccess
-                    { [weak self] err in
-                        if let strongSelf = self {
-                            if(err == "") {
-                                strongSelf.dismissPaymentsController(true, err: nil)
-                            } else {
-                                strongSelf.dismissPaymentsController(false, err: err)
-                            }
+        }
+        else {
+            api().donateCheckoutBraintree(String(amount!), nonce: paymentMethodNonce.nonce, itemId: self.itemId).onSuccess
+                { [weak self] err in
+                    if let strongSelf = self {
+                        if(err == "") {
+                            strongSelf.dismissPaymentsController(true, err: nil)
+                        } else {
+                            strongSelf.dismissPaymentsController(false, err: err)
                         }
-                }
+                    }
             }
+        }
     }
     
     func dropInViewControllerDidCancel(viewController: BTDropInViewController) {
         dismissPaymentsController(true, err: nil)
     }
 }
+
+
