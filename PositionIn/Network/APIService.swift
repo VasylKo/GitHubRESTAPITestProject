@@ -30,6 +30,41 @@ extension Future {
     }
 }
 
+//MARK: - Custom serializer -
+private extension Alamofire.Request {
+    
+    //MARK: - Custom serializer -
+    private static func CustomResponseSerializerWithEmptyResponse<T>(mapping: AnyObject? -> T?) -> ResponseSerializer<T, NSError> {
+        return ResponseSerializer { request, response, data, error in
+            guard error == nil else { return .Failure(error!) }
+            
+            let JSONResponseSerializer = Request.JSONResponseSerializer(options: .AllowFragments)
+            let result = JSONResponseSerializer.serializeResponse(request, response, data, error)
+            
+            switch result {
+            case .Success(let json):
+                guard let object = mapping(json) else {
+                    if  let jsonDict = json as? [String: AnyObject],
+                        let msg = jsonDict["error"] as? String {
+                            if let statusCode = response?.statusCode where statusCode == 400 || statusCode == 401 {
+                                return .Failure(NetworkDataProvider.ErrorCodes.InvalidSessionError.error(localizedDescription: msg))
+                            } else {
+                                return .Failure(NetworkDataProvider.ErrorCodes.TransferError.error(localizedDescription: msg))
+                            }
+                    }
+                    return .Failure(NetworkDataProvider.ErrorCodes.InvalidResponseError.error())
+                }
+                return .Success(object)
+            case .Failure(let error):
+                if let object = mapping(nil) {
+                    return .Success(object)
+                }
+                return .Failure(NetworkDataProvider.ErrorCodes.ParsingError.error(error))
+            }
+        }
+    }
+}
+
 final class APIService {
     init (
         url: NSURL,
@@ -435,8 +470,31 @@ final class APIService {
     }
     
     func getEPlusActiveMembership() -> Future<EplusMembershipDetails, NSError> {
+    
         let endpoint = EplusMembershipDetails.endpoint()
-        return getObject(endpoint)
+        
+
+        let responseMapping: AnyObject? -> EplusMembershipDetails? = { response in
+            if let json = response as? NSDictionary {
+                return Mapper<EplusMembershipDetails>().map(json)
+            }
+            return EplusMembershipDetails()
+        }
+        
+        
+        typealias CRUDResultType = (Alamofire.Request, Future<EplusMembershipDetails, NSError>)
+        
+        let serializer = Alamofire.Request.CustomResponseSerializerWithEmptyResponse(responseMapping)
+        let futureBuilder: (Void -> Future<EplusMembershipDetails, NSError>) = { [unowned self] in
+            return self.session().flatMap {
+                (token: AuthResponse.Token) -> Future<EplusMembershipDetails, NSError> in
+                let request = self.readRequest(token, endpoint: endpoint)
+                let (_ , future): CRUDResultType = self.dataProvider.request(request, serializer: serializer, validation: nil)
+                return future
+            }
+        }
+        
+        return self.handleFailure(futureBuilder)
     }
     
     func createEPlusOrder(planParameters object: EPlusPlanParameters) -> Future<EplusMembershipDetails, NSError> {
