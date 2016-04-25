@@ -24,7 +24,6 @@ class ProductOrderViewController: XLFormViewController {
     }
     
     // MARK: - Private properties
-    //private weak var proceedToPayRowDescriptor: XLFormRowDescriptor?
     private var braintreeClient: BTAPIClient?
     
     // MARK: - Internal properties
