@@ -1,4 +1,4 @@
-	//
+//
 //  BrowseListViewController.swift
 //  PositionIn
 //
@@ -67,13 +67,13 @@ final class BrowseListViewController: UIViewController, BrowseActionProducer, Br
             }
         }
 
-        //TODO: hot fix for distance 
+        //TODO: hot fix for distance
         let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(1 * Double(NSEC_PER_SEC)))
         dispatch_after(delayTime, dispatch_get_main_queue()) { [weak self] in
     //        self?.tableView.reloadData()
         }
     }
-        
+    
     var filter = SearchFilter.currentFilter {
         didSet {
             if isViewLoaded() {
@@ -133,7 +133,7 @@ final class BrowseListViewController: UIViewController, BrowseActionProducer, Br
             }
             
             Log.debug?.value(response.items)
-
+            
             var items: [FeedItem] = response.items
             if strongSelf.excludeCommunityItems {
                 items = items.filter { $0.community == CRUDObjectInvalidId }
@@ -158,28 +158,34 @@ final class BrowseListViewController: UIViewController, BrowseActionProducer, Br
         dataSource.parentViewController = self
         return dataSource
         }()
-
+    
     weak var actionConsumer: BrowseActionConsumer?
     
     @IBOutlet private(set) internal weak var tableView: UITableView!
     @IBOutlet private weak var displayModeSegmentedControl: UISegmentedControl!
 }
-    
+
 extension BrowseListViewController: ActionsDelegate {
     
     func like(item: FeedItem) {
+        item.name = ""
         if (item.isLiked) {
+            item.isLiked = false
+            item.numOfLikes?--
+            tableView.reloadData()
             api().unlikePost(item.objectId).onSuccess{[weak self] in
                 self?.reloadData()
             }
         }
         else {
+            item.isLiked = true
+            item.numOfLikes?++
+            tableView.reloadData()
             api().likePost(item.objectId).onSuccess{[weak self] in
                 self?.reloadData()
             }
         }
     }
-    
 }
 
 extension BrowseListViewController {
@@ -218,9 +224,9 @@ extension BrowseListViewController {
         func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
             tableView.deselectRowAtIndexPath(indexPath, animated: true)
             if let model = self.tableView(tableView, modelForIndexPath: indexPath) as? FeedTableCellModel,
-               let actionProducer = parentViewController as? BrowseActionProducer,
-               let actionConsumer = self.actionConsumer {
-                actionConsumer.browseController(actionProducer, didSelectItem: model.item.objectId, type: model.item.type, data: model.data)
+                let actionProducer = parentViewController as? BrowseActionProducer,
+                let actionConsumer = self.actionConsumer {
+                    actionConsumer.browseController(actionProducer, didSelectItem: model.item.objectId, type: model.item.type, data: model.data)
             }
         }
         
@@ -229,7 +235,7 @@ extension BrowseListViewController {
                 if model.item.type == .Post {
                     var cellHeight: CGFloat = 125
                     cellHeight = (model.imageURL != nil) ? (cellHeight + 160) : cellHeight
-
+                    
                     if let text = model.text {
                         let maxSize = CGSize(width: UIScreen.mainScreen().applicationFrame.size.width - 80, height: CGFloat(MAXFLOAT))
                         let attrString = NSAttributedString.init(string: text, attributes: [NSFontAttributeName:UIFont.systemFontOfSize(17)])
@@ -260,13 +266,13 @@ extension BrowseListViewController {
             } else {
                 models = feedItems.map { self.modelFactory.detailedModelsForItem($0) }
             }
-
+            
         }
         
         private var actionConsumer: BrowseActionConsumer? {
             return (parentViewController as? BrowseActionProducer).flatMap { $0.actionConsumer }
         }
-
+        
         let showCardCells: Bool
         let showCompactCells: Bool
         private var models: [[TableViewCellModel]] = []
