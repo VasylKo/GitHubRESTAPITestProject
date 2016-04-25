@@ -438,7 +438,6 @@ class EPlusMembershipConfirmDetailsViewController : XLFormViewController {
     @objc func nextButtonTouched() {
         navigationItem.rightBarButtonItem?.enabled = false
         
-
         //TODO: add validations
         let validationErrors : Array<NSError> = self.formValidationErrors() as! Array<NSError>
         if (validationErrors.count > 0){

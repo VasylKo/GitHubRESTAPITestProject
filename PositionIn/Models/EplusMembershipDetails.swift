@@ -122,6 +122,7 @@ struct EplusMembershipDetails : CRUDObject {
     }
     
     mutating func mapping(map: Map) {
+        objectId <-  map["cardId"]
         membershipCardId <-  map["cardId"]
         membershipPlanId <- map["membershipPlanId"]
         startDate <- (map["startDate"], APIDateTransform())

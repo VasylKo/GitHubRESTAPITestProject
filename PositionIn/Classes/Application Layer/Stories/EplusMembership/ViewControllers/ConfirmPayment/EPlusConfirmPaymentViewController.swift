@@ -144,13 +144,13 @@ class EplusConfirmPaymentViewController: XLFormViewController {
                 
                 self.headerView.showSuccess()
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (Int64)(3 * NSEC_PER_SEC)), dispatch_get_main_queue()) {
-                    self.router.showMembershipMemberCardViewController(from: self)
+                    self.router.showMembershipMemberCardViewController(from: self, hidesBackButton: true)
                 }
             })
         } else {
             self.headerView.showSuccess()
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (Int64)(3 * NSEC_PER_SEC)), dispatch_get_main_queue()) {
-                self.router.showMembershipMemberCardViewController(from: self)
+                self.router.showMembershipMemberCardViewController(from: self, hidesBackButton: true)
             }
         }
     }
