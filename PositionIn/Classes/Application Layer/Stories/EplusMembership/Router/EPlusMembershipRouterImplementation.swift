@@ -11,7 +11,7 @@ import UIKit
 class EPlusMembershipRouterImplementation: BaseRouterImplementation, EPlusMembershipRouter {
     
     func showInitialViewController(from sourceViewController : UIViewController, hasActivePlan: Bool? = nil) {
-        api().getEPlusActiveMembership().onSuccess { [unowned self] (membershipDetails: EplusMembershipDetails?) -> Void in
+        api().getEPlusActiveMembership().onSuccess { (membershipDetails: EplusMembershipDetails?) -> Void in
             if membershipDetails?.objectId != CRUDObjectInvalidId {
                 self.showCallAmbulanceViewController(from: sourceViewController)
             } else {
