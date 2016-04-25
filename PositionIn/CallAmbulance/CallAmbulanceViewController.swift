@@ -249,7 +249,7 @@ class CallAmbulanceViewController: BaseAddItemViewController {
         if sender.type == .SignUP {
             EPlusMembershipRouterImplementation().showPlansViewController(from: self, onlyPlansInfo: true)
         } else {
-            EPlusMembershipRouterImplementation().showMembershipMemberCardViewController(from: self)
+            EPlusMembershipRouterImplementation().showMembershipMemberCardViewController(from: self, hidesBackButton: false)
         }
     }
 }

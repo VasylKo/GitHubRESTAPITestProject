@@ -469,10 +469,8 @@ final class APIService {
         return Future(value: CollectionResponse(items:items, total: items.count), delay: 0.5)
     }
     
-    func getEPlusActiveMembership() -> Future<EplusMembershipDetails, NSError> {
-    
+    func getEPlusActiveMembership() -> Future<EplusMembershipDetails, NSError> {    
         let endpoint = EplusMembershipDetails.endpoint()
-        
 
         let responseMapping: AnyObject? -> EplusMembershipDetails? = { response in
             if let json = response as? NSDictionary {
