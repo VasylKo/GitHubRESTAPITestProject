@@ -1840,6 +1840,7 @@
 		511791FD1CCD54EE00B916CB /* DonatePaymentController */ = {
 			isa = PBXGroup;
 			children = (
+				542EDF951CCE2ED6006FE641 /* Interface */,
 				511791FE1CCD551300B916CB /* DonatePaymentController.swift */,
 			);
 			path = DonatePaymentController;
@@ -2011,6 +2012,13 @@
 				542EDF931CCE20BA006FE641 /* CommonPaymentViewController.swift */,
 			);
 			path = CommonPaymentViewController;
+			sourceTree = "<group>";
+		};
+		542EDF951CCE2ED6006FE641 /* Interface */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Interface;
 			sourceTree = "<group>";
 		};
 		54A31F931CBBF1C200A833C9 /* DonationPaymentAmountCell */ = {
@@ -2572,7 +2580,7 @@
 				511791FD1CCD54EE00B916CB /* DonatePaymentController */,
 				CD0FCC2B1C69ECD800AFD36C /* TotalView */,
 				D118A2A71C0FBB9A0020B363 /* CardCell */,
-				D1B780CB1C0F50DE00EF5825 /* DonateView */,
+				D1B780CB1C0F50DE00EF5825 /* Donate */,
 				D1B780C71C0F4E7700EF5825 /* DonateViewController.swift */,
 				D1B780C91C0F4E9E00EF5825 /* SelectPaymentMethodController.swift */,
 				D118A2AC1C0FBDF50020B363 /* CardItem.swift */,
@@ -2583,12 +2591,13 @@
 			path = Donate;
 			sourceTree = "<group>";
 		};
-		D1B780CB1C0F50DE00EF5825 /* DonateView */ = {
+		D1B780CB1C0F50DE00EF5825 /* Donate */ = {
 			isa = PBXGroup;
 			children = (
 				D1B780CC1C0F519600EF5825 /* DonateCell.swift */,
 				D1B780CE1C0F51A800EF5825 /* DonateCell.xib */,
 			);
+			name = Donate;
 			path = DonateView;
 			sourceTree = "<group>";
 		};

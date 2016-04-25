@@ -43,12 +43,12 @@ class CommonPaymentViewController: UITableViewController, PaymentController {
         }
         
     }
-    
+        
     // MARK: - Privvate implementation
     private func setupInterface() {
         if let headerView = NSBundle.mainBundle().loadNibNamed(String(CommonTransactionStatusView.self), owner: nil, options: nil).first as? CommonTransactionStatusView {
             self.headerView = headerView
-            tableView?.tableHeaderView = headerView
+            tableView.tableHeaderView = headerView
         }
     }
     

@@ -34,8 +34,10 @@ class DonateCell: XLFormBaseCell {
     }
     
     override static func formDescriptorCellHeightForRowDescriptor(rowDescriptor: XLFormRowDescriptor!) -> CGFloat {
-        return 80
+        return DonateCell.cellHeight
     }
+    
+    static let cellHeight = CGFloat(80.0)
     
     @IBOutlet private weak var projectIconImageView: UIImageView!
     @IBOutlet private weak var projectNameLabel: UILabel!
