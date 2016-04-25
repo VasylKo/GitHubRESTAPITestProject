@@ -115,9 +115,6 @@
 		50FA43301C44F0B50050B00E /* ErrorCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50FA432F1C44F0B50050B00E /* ErrorCell.xib */; };
 		50FE7D891BBE77BB005676E2 /* ItemsSearchResultDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FE7D871BBE77BB005676E2 /* ItemsSearchResultDataSource.swift */; };
 		50FE7D8A1BBE77BB005676E2 /* ItemsSearchResultsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FE7D881BBE77BB005676E2 /* ItemsSearchResultsController.swift */; };
-		511791E41CCBE22A00B916CB /* BraintreePaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511791DF1CCBE22A00B916CB /* BraintreePaymentViewController.swift */; };
-		511791E71CCBE22A00B916CB /* MpesaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511791E31CCBE22A00B916CB /* MpesaViewController.swift */; };
-		511791EA1CCBE2D000B916CB /* PaymentProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511791E81CCBE2D000B916CB /* PaymentProtocol.swift */; };
 		511791ED1CCBEC5900B916CB /* PaymentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511791EC1CCBEC5900B916CB /* PaymentManager.swift */; };
 		511791FB1CCCBA6500B916CB /* BraintreePaymentSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511791FA1CCCBA6500B916CB /* BraintreePaymentSystem.swift */; };
 		511792001CCD551300B916CB /* DonatePaymentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511791FE1CCD551300B916CB /* DonatePaymentController.swift */; };
@@ -150,6 +147,8 @@
 		542EDF8B1CCE1374006FE641 /* CommonTransactionStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 542EDF881CCE1374006FE641 /* CommonTransactionStatusView.swift */; };
 		542EDF8C1CCE1374006FE641 /* CommonTransactionStatusView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 542EDF891CCE1374006FE641 /* CommonTransactionStatusView.xib */; };
 		542EDF941CCE20BA006FE641 /* CommonPaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 542EDF931CCE20BA006FE641 /* CommonPaymentViewController.swift */; };
+		542EDF9E1CCE548E006FE641 /* SuccessDonationInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 542EDF9C1CCE548E006FE641 /* SuccessDonationInfoCell.swift */; };
+		542EDF9F1CCE548E006FE641 /* SuccessDonationInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 542EDF9D1CCE548E006FE641 /* SuccessDonationInfoCell.xib */; };
 		54A31F961CBBF20900A833C9 /* DonationPaymentAmountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54A31F941CBBF20900A833C9 /* DonationPaymentAmountCell.swift */; };
 		54A31F971CBBF20900A833C9 /* DonationPaymentAmountCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 54A31F951CBBF20900A833C9 /* DonationPaymentAmountCell.xib */; };
 		5DA3850FA75B150D79C68EE1 /* Pods_PositionIn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFAA26C98F322F00903B06FC /* Pods_PositionIn.framework */; };
@@ -746,9 +745,6 @@
 		50FA432F1C44F0B50050B00E /* ErrorCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ErrorCell.xib; sourceTree = "<group>"; };
 		50FE7D871BBE77BB005676E2 /* ItemsSearchResultDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemsSearchResultDataSource.swift; sourceTree = "<group>"; };
 		50FE7D881BBE77BB005676E2 /* ItemsSearchResultsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemsSearchResultsController.swift; sourceTree = "<group>"; };
-		511791DF1CCBE22A00B916CB /* BraintreePaymentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BraintreePaymentViewController.swift; sourceTree = "<group>"; };
-		511791E31CCBE22A00B916CB /* MpesaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MpesaViewController.swift; sourceTree = "<group>"; };
-		511791E81CCBE2D000B916CB /* PaymentProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentProtocol.swift; sourceTree = "<group>"; };
 		511791EC1CCBEC5900B916CB /* PaymentManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentManager.swift; sourceTree = "<group>"; };
 		511791FA1CCCBA6500B916CB /* BraintreePaymentSystem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BraintreePaymentSystem.swift; sourceTree = "<group>"; };
 		511791FE1CCD551300B916CB /* DonatePaymentController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DonatePaymentController.swift; sourceTree = "<group>"; };
@@ -781,6 +777,8 @@
 		542EDF881CCE1374006FE641 /* CommonTransactionStatusView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonTransactionStatusView.swift; sourceTree = "<group>"; };
 		542EDF891CCE1374006FE641 /* CommonTransactionStatusView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommonTransactionStatusView.xib; sourceTree = "<group>"; };
 		542EDF931CCE20BA006FE641 /* CommonPaymentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonPaymentViewController.swift; sourceTree = "<group>"; };
+		542EDF9C1CCE548E006FE641 /* SuccessDonationInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuccessDonationInfoCell.swift; sourceTree = "<group>"; };
+		542EDF9D1CCE548E006FE641 /* SuccessDonationInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SuccessDonationInfoCell.xib; sourceTree = "<group>"; };
 		54A31F941CBBF20900A833C9 /* DonationPaymentAmountCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DonationPaymentAmountCell.swift; sourceTree = "<group>"; };
 		54A31F951CBBF20900A833C9 /* DonationPaymentAmountCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DonationPaymentAmountCell.xib; sourceTree = "<group>"; };
 		56DAF56D2A99203B14E2570B /* Pods-PositionIn.stagingrelease.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PositionIn.stagingrelease.xcconfig"; path = "Pods/Target Support Files/Pods-PositionIn/Pods-PositionIn.stagingrelease.xcconfig"; sourceTree = "<group>"; };
@@ -1809,7 +1807,6 @@
 			children = (
 				542EDF791CCE0B27006FE641 /* Interface */,
 				542EDF911CCE20BA006FE641 /* Controllers */,
-				511791E81CCBE2D000B916CB /* PaymentProtocol.swift */,
 				511791DE1CCBE22A00B916CB /* BraintreePaymentSystem */,
 				511791E21CCBE22A00B916CB /* MpesaPaymentSystem */,
 				511791EC1CCBEC5900B916CB /* PaymentManager.swift */,
@@ -1820,7 +1817,6 @@
 		511791DE1CCBE22A00B916CB /* BraintreePaymentSystem */ = {
 			isa = PBXGroup;
 			children = (
-				511791DF1CCBE22A00B916CB /* BraintreePaymentViewController.swift */,
 				511791FA1CCCBA6500B916CB /* BraintreePaymentSystem.swift */,
 			);
 			name = BraintreePaymentSystem;
@@ -1830,7 +1826,6 @@
 		511791E21CCBE22A00B916CB /* MpesaPaymentSystem */ = {
 			isa = PBXGroup;
 			children = (
-				511791E31CCBE22A00B916CB /* MpesaViewController.swift */,
 				542EDF771CCE05AE006FE641 /* MpesaPaymentSystem.swift */,
 			);
 			name = MpesaPaymentSystem;
@@ -2017,8 +2012,18 @@
 		542EDF951CCE2ED6006FE641 /* Interface */ = {
 			isa = PBXGroup;
 			children = (
+				542EDF9B1CCE5484006FE641 /* SuccessDonationInfoCell */,
 			);
 			path = Interface;
+			sourceTree = "<group>";
+		};
+		542EDF9B1CCE5484006FE641 /* SuccessDonationInfoCell */ = {
+			isa = PBXGroup;
+			children = (
+				542EDF9C1CCE548E006FE641 /* SuccessDonationInfoCell.swift */,
+				542EDF9D1CCE548E006FE641 /* SuccessDonationInfoCell.xib */,
+			);
+			path = SuccessDonationInfoCell;
 			sourceTree = "<group>";
 		};
 		54A31F931CBBF1C200A833C9 /* DonationPaymentAmountCell */ = {
@@ -4627,6 +4632,7 @@
 				18817F231C89B28B00FBA6B1 /* PositionIn.DonationDetailsViewController.xib in Resources */,
 				E6C952351BA1D9960032254F /* PositionIn.ProfileStatsCell.xib in Resources */,
 				542EDF711CC92949006FE641 /* AvailabilityViewCell.xib in Resources */,
+				542EDF9F1CCE548E006FE641 /* SuccessDonationInfoCell.xib in Resources */,
 				5419F9851CC52E70000E16E7 /* PositionIn.AboutEplusServiceController.xib in Resources */,
 				50FA43301C44F0B50050B00E /* ErrorCell.xib in Resources */,
 				D19BDF351CAD7D3C00F0A887 /* WebViewController.xib in Resources */,
@@ -4884,7 +4890,6 @@
 				541820FC1CB7B28D001A780A /* MPesaBongaPinCell.swift in Sources */,
 				E6DADB9E1B8C5799009A5694 /* SearchFilter.swift in Sources */,
 				D1FD853A1C1EE8BB00C2E87B /* TrainingDetailsViewController.swift in Sources */,
-				511791E71CCBE22A00B916CB /* MpesaViewController.swift in Sources */,
 				CD65C5FC1C9988D400C2C11B /* UserProfileAvatarView.swift in Sources */,
 				E64D00631B7C8FB7007693E0 /* AddPostViewController.swift in Sources */,
 				CDE1B91F1C5F9E6A00F76F32 /* MembershipMemberProfileView.swift in Sources */,
@@ -4942,7 +4947,6 @@
 				E69420F91B66358000F34F06 /* ProductDetailsViewController.swift in Sources */,
 				D1AEF68C1CC506B40030C695 /* EPlusCorporatePlanOptionTableViewCell.swift in Sources */,
 				CD87FDF41C7DB94D00E610AE /* CommunityMapViewController.swift in Sources */,
-				511791E41CCBE22A00B916CB /* BraintreePaymentViewController.swift in Sources */,
 				E63201701B984D8B0066C62E /* DescriptionTableViewCell.swift in Sources */,
 				E6C952371BA1D9960032254F /* ProfileStatsCell.swift in Sources */,
 				CD795BF41C57BBC200C1C298 /* BaseRouterImplementation.swift in Sources */,
@@ -4963,7 +4967,6 @@
 				E65E87301B611FE700AE444D /* Response.swift in Sources */,
 				E6BEF1D91B9C671D00511B46 /* PostInfoCell.swift in Sources */,
 				CDEDD96B1C45033C00396594 /* PostToContainerViewController.swift in Sources */,
-				511791EA1CCBE2D000B916CB /* PaymentProtocol.swift in Sources */,
 				D1B780CD1C0F519600EF5825 /* DonateCell.swift in Sources */,
 				18CCFAF81C8D89E800603C7F /* VoiceVerificationViewController.swift in Sources */,
 				D18A1FDC1BEB95D9003F158D /* ChangePasswordViewController.swift in Sources */,
@@ -5156,6 +5159,7 @@
 				CD795C4C1C590BEE00C1C298 /* SegmentedControlContainerViewController.swift in Sources */,
 				23F6AF891CA28EFA00CDD2FF /* FetchViewLogic.swift in Sources */,
 				18F3313F1C8871870010321B /* Order.swift in Sources */,
+				542EDF9E1CCE548E006FE641 /* SuccessDonationInfoCell.swift in Sources */,
 				1A564902D955532DE5B29A65 /* ErrorCell.swift in Sources */,
 				511791ED1CCBEC5900B916CB /* PaymentManager.swift in Sources */,
 			);

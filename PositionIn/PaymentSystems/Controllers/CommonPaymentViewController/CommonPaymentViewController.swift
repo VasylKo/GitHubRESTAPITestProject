@@ -9,7 +9,7 @@
 import UIKit
 
 /*
-    This is common payment view controller with table view. The table has a header view wich cab show payment transaction status.
+    This is common payment view controller with table view. The table has a header view wich can show payment transaction status on completion.
 */
 
 class CommonPaymentViewController: UITableViewController, PaymentController {
