@@ -385,6 +385,6 @@ extension DonateViewController: PurchaseConvertible {
     }
     
     var paymentTypes: CardItem {
-        return .CreditDebitCard
+        return cardPaymentTypeSelecred()
     }
 }

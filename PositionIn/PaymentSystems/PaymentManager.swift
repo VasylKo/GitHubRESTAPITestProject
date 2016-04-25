@@ -48,7 +48,7 @@ struct PaymentSystemProvider {
         case .CreditDebitCard:
             return BraintreePaymentSystem(item: item)
         case .MPesa:
-             return BraintreePaymentSystem(item: item)
+             return MpesaPaymentSystem(item: item)
         }
     }
 }

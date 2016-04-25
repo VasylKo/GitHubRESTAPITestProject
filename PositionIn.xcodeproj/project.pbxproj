@@ -147,6 +147,7 @@
 		542EDF741CC92949006FE641 /* TotalViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 542EDF6D1CC92949006FE641 /* TotalViewCell.swift */; };
 		542EDF751CC92949006FE641 /* TotalViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 542EDF6E1CC92949006FE641 /* TotalViewCell.xib */; };
 		542EDF761CC92949006FE641 /* ProductOrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 542EDF6F1CC92949006FE641 /* ProductOrderViewController.swift */; };
+		542EDF781CCE05AE006FE641 /* MpesaPaymentSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 542EDF771CCE05AE006FE641 /* MpesaPaymentSystem.swift */; };
 		54A31F961CBBF20900A833C9 /* DonationPaymentAmountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54A31F941CBBF20900A833C9 /* DonationPaymentAmountCell.swift */; };
 		54A31F971CBBF20900A833C9 /* DonationPaymentAmountCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 54A31F951CBBF20900A833C9 /* DonationPaymentAmountCell.xib */; };
 		5DA3850FA75B150D79C68EE1 /* Pods_PositionIn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFAA26C98F322F00903B06FC /* Pods_PositionIn.framework */; };
@@ -775,6 +776,7 @@
 		542EDF6D1CC92949006FE641 /* TotalViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TotalViewCell.swift; sourceTree = "<group>"; };
 		542EDF6E1CC92949006FE641 /* TotalViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TotalViewCell.xib; sourceTree = "<group>"; };
 		542EDF6F1CC92949006FE641 /* ProductOrderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductOrderViewController.swift; sourceTree = "<group>"; };
+		542EDF771CCE05AE006FE641 /* MpesaPaymentSystem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MpesaPaymentSystem.swift; sourceTree = "<group>"; };
 		54A31F941CBBF20900A833C9 /* DonationPaymentAmountCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DonationPaymentAmountCell.swift; sourceTree = "<group>"; };
 		54A31F951CBBF20900A833C9 /* DonationPaymentAmountCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DonationPaymentAmountCell.xib; sourceTree = "<group>"; };
 		56DAF56D2A99203B14E2570B /* Pods-PositionIn.stagingrelease.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PositionIn.stagingrelease.xcconfig"; path = "Pods/Target Support Files/Pods-PositionIn/Pods-PositionIn.stagingrelease.xcconfig"; sourceTree = "<group>"; };
@@ -1802,27 +1804,30 @@
 			isa = PBXGroup;
 			children = (
 				511791E81CCBE2D000B916CB /* PaymentProtocol.swift */,
-				511791DE1CCBE22A00B916CB /* BraintreePayment */,
-				511791E21CCBE22A00B916CB /* Mpesa */,
+				511791DE1CCBE22A00B916CB /* BraintreePaymentSystem */,
+				511791E21CCBE22A00B916CB /* MpesaPaymentSystem */,
 				511791EC1CCBEC5900B916CB /* PaymentManager.swift */,
 			);
 			path = PaymentSystems;
 			sourceTree = "<group>";
 		};
-		511791DE1CCBE22A00B916CB /* BraintreePayment */ = {
+		511791DE1CCBE22A00B916CB /* BraintreePaymentSystem */ = {
 			isa = PBXGroup;
 			children = (
 				511791DF1CCBE22A00B916CB /* BraintreePaymentViewController.swift */,
 				511791FA1CCCBA6500B916CB /* BraintreePaymentSystem.swift */,
 			);
+			name = BraintreePaymentSystem;
 			path = BraintreePayment;
 			sourceTree = "<group>";
 		};
-		511791E21CCBE22A00B916CB /* Mpesa */ = {
+		511791E21CCBE22A00B916CB /* MpesaPaymentSystem */ = {
 			isa = PBXGroup;
 			children = (
 				511791E31CCBE22A00B916CB /* MpesaViewController.swift */,
+				542EDF771CCE05AE006FE641 /* MpesaPaymentSystem.swift */,
 			);
+			name = MpesaPaymentSystem;
 			path = Mpesa;
 			sourceTree = "<group>";
 		};
@@ -4821,6 +4826,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				542EDF781CCE05AE006FE641 /* MpesaPaymentSystem.swift in Sources */,
 				D1381AD61C8D76C700328D86 /* PushNotification.swift in Sources */,
 				D18EA2CE1C04B38400A886A5 /* BrowseGridViewController.swift in Sources */,
 				500D7FA81BC2CD39008C8C82 /* SearchEntityCell.swift in Sources */,
