@@ -106,7 +106,9 @@ class EPlusAmbulanceDetailsController: UIViewController {
             if let plan = plan {
                 headerView.planImageViewString = plan.membershipImageName
                 headerView.planNameString = plan.name
-                headerView.priceString = plan.costDescription
+                if plan.type != .Corporate {
+                    headerView.priceString = plan.costDescription   
+                }
             }
             tableView.tableHeaderView = headerView
         }
