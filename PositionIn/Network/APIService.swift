@@ -602,9 +602,12 @@ final class APIService {
     
     //MARK: - People -
     
-    func getUsers(page: Page) -> Future<CollectionResponse<UserInfo>,NSError> {
+    func getUsers(page: Page, searchString: String? = nil) -> Future<CollectionResponse<UserInfo>,NSError> {
         let endpoint = UserProfile.endpoint()
-        let params = page.query
+        var params = page.query
+        if let searchString = searchString {
+            params["name"] = searchString
+        }
         return getObjectsCollection(endpoint, params: params)
     }
     
@@ -628,15 +631,20 @@ final class APIService {
         return handleFailure(futureBuilder)
     }
     
-    func getMySubscriptions() -> Future<CollectionResponse<UserInfo>,NSError> {
+    func getMySubscriptions(searchString: String? = nil) -> Future<CollectionResponse<UserInfo>,NSError> {
         return currentUserId().flatMap { userId in
-            return self.getUserSubscriptions(userId)
+            return self.getUserSubscriptions(userId, searchString: searchString)
         }
     }
     
-    func getUserSubscriptions(userId: CRUDObjectId) -> Future<CollectionResponse<UserInfo>,NSError> {
+    func getUserSubscriptions(userId: CRUDObjectId, searchString: String? = nil) -> Future<CollectionResponse<UserInfo>,NSError> {
         let endpoint = UserProfile.subscripttionEndpoint(userId)
-        return getObjectsCollection(endpoint, params: nil)
+        var params: [String : AnyObject] = [String : AnyObject]()
+        if let searchString = searchString {
+            params["name"] = searchString
+        }
+        
+        return getObjectsCollection(endpoint, params: params)
     }
     
     func getSubscriptionStateForUser(userId: CRUDObjectId) -> Future<UserProfile.SubscriptionState, NSError> {

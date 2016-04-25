@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
@@ -9,6 +9,7 @@
             <connections>
                 <outlet property="activityIndicator" destination="shX-PK-iXK" id="7hK-g2-Den"/>
                 <outlet property="footerView" destination="C2F-bf-NZe" id="GhY-p0-Udf"/>
+                <outlet property="searchBar" destination="D8f-y1-Rde" id="ZFY-r6-Qgl"/>
                 <outlet property="tableView" destination="8NV-u8-bXj" id="JDL-aq-aZY"/>
                 <outlet property="view" destination="iN0-l3-epB" id="Job-Km-dHa"/>
             </connections>
@@ -19,20 +20,36 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="8NV-u8-bXj" customClass="TableView" customModule="PosInCore">
-                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                    <rect key="frame" x="0.0" y="44" width="600" height="556"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <connections>
                         <outlet property="delegate" destination="-1" id="Bgq-wi-tZo"/>
                     </connections>
                 </tableView>
+                <searchBar contentMode="redraw" placeholder="Search" translatesAutoresizingMaskIntoConstraints="NO" id="D8f-y1-Rde">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                    <textInputTraits key="textInputTraits"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="8lX-iA-Bj8"/>
+                    </connections>
+                </searchBar>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstItem="8NV-u8-bXj" firstAttribute="top" secondItem="D8f-y1-Rde" secondAttribute="bottom" id="ByP-R9-5FJ"/>
                 <constraint firstAttribute="trailing" secondItem="8NV-u8-bXj" secondAttribute="trailing" id="R5Q-Uh-ALN"/>
                 <constraint firstAttribute="bottom" secondItem="8NV-u8-bXj" secondAttribute="bottom" id="d91-z4-VY9"/>
+                <constraint firstItem="D8f-y1-Rde" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="hFB-Xf-FcY"/>
+                <constraint firstAttribute="trailing" secondItem="D8f-y1-Rde" secondAttribute="trailing" id="hOn-fj-Umd"/>
+                <constraint firstItem="D8f-y1-Rde" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="il3-tA-ehI"/>
                 <constraint firstItem="8NV-u8-bXj" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="lbk-W4-MjD"/>
                 <constraint firstItem="8NV-u8-bXj" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="mlB-xe-z9m"/>
             </constraints>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="lbk-W4-MjD"/>
+                </mask>
+            </variation>
         </view>
         <view contentMode="scaleToFill" id="C2F-bf-NZe">
             <rect key="frame" x="0.0" y="0.0" width="600" height="50"/>
