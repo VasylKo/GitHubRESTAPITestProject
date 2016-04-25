@@ -288,7 +288,6 @@
 		D1B780CD1C0F519600EF5825 /* DonateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B780CC1C0F519600EF5825 /* DonateCell.swift */; };
 		D1B780CF1C0F51A800EF5825 /* DonateCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1B780CE1C0F51A800EF5825 /* DonateCell.xib */; };
 		D1C475EA1C106DB70096D383 /* DonateNotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C475E91C106DB70096D383 /* DonateNotificationViewController.swift */; };
-		D1C475EC1C1081770096D383 /* PaymentCompletedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C475EB1C1081770096D383 /* PaymentCompletedViewController.swift */; };
 		D1CAA7521C60BB1E0046130E /* PaymentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1CAA7501C60BB1E0046130E /* PaymentTableViewCell.swift */; };
 		D1CAA7531C60BB1E0046130E /* PaymentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1CAA7511C60BB1E0046130E /* PaymentTableViewCell.xib */; };
 		D1D391461CA47D430065CC25 /* DonateInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1D391441CA47D430065CC25 /* DonateInfoViewController.swift */; };
@@ -926,7 +925,6 @@
 		D1B780CC1C0F519600EF5825 /* DonateCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DonateCell.swift; sourceTree = "<group>"; };
 		D1B780CE1C0F51A800EF5825 /* DonateCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DonateCell.xib; sourceTree = "<group>"; };
 		D1C475E91C106DB70096D383 /* DonateNotificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DonateNotificationViewController.swift; sourceTree = "<group>"; };
-		D1C475EB1C1081770096D383 /* PaymentCompletedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentCompletedViewController.swift; sourceTree = "<group>"; };
 		D1CAA7501C60BB1E0046130E /* PaymentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentTableViewCell.swift; sourceTree = "<group>"; };
 		D1CAA7511C60BB1E0046130E /* PaymentTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PaymentTableViewCell.xib; sourceTree = "<group>"; };
 		D1D391441CA47D430065CC25 /* DonateInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DonateInfoViewController.swift; sourceTree = "<group>"; };
@@ -2590,7 +2588,6 @@
 				D1B780C91C0F4E9E00EF5825 /* SelectPaymentMethodController.swift */,
 				D118A2AC1C0FBDF50020B363 /* CardItem.swift */,
 				D1C475E91C106DB70096D383 /* DonateNotificationViewController.swift */,
-				D1C475EB1C1081770096D383 /* PaymentCompletedViewController.swift */,
 				1A564ECCDF0969356B20C9A5 /* ErrorView */,
 			);
 			path = Donate;
@@ -5118,7 +5115,6 @@
 				E6BEF1E31B9C83F200511B46 /* CommunityActionCell.swift in Sources */,
 				CD795C4B1C590BEE00C1C298 /* ContainerViewController.swift in Sources */,
 				24EF62141BA81B5800472531 /* ChatHistoryCell.swift in Sources */,
-				D1C475EC1C1081770096D383 /* PaymentCompletedViewController.swift in Sources */,
 				E6C5CE1F1B83A2B700265955 /* AppConfiguration.swift in Sources */,
 				E6A869F21B60FF0500797D16 /* CRUDObject.swift in Sources */,
 				D1B1F1E21C6B194E00D43A3B /* MPesaPayment.swift in Sources */,

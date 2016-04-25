@@ -352,10 +352,6 @@ struct Storyboards {
         static func instantiateAmbulanceRequestedViewControllerId() -> AmbulanceRequestedViewController {
             return self.storyboard.instantiateViewControllerWithIdentifier("AmbulanceRequestedViewControllerId") as! AmbulanceRequestedViewController
         }
-
-        static func instantiatePaymentCompletedViewController() -> PaymentCompletedViewController {
-            return self.storyboard.instantiateViewControllerWithIdentifier("PaymentCompletedViewController") as! PaymentCompletedViewController
-        }
     }
 }
 
@@ -2116,9 +2112,5 @@ extension AmbulanceRequestedViewController {
 
 }
 
-//MARK: - PaymentCompletedViewController
-extension PaymentCompletedViewController: IdentifiableProtocol { 
-    var storyboardIdentifier: String? { return "PaymentCompletedViewController" }
-    static var storyboardIdentifier: String? { return "PaymentCompletedViewController" }
-}
+
 

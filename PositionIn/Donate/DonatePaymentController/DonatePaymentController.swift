@@ -18,13 +18,18 @@ class DonatePaymentController: CommonPaymentViewController {
         super.viewDidLoad()
         tableView?.registerNib(UINib(nibName: String(DonateCell.self), bundle: nil), forCellReuseIdentifier: String(DonateCell.self))
         tableView?.registerNib(UINib(nibName: String(TotalCell.self), bundle: nil), forCellReuseIdentifier: String(TotalCell.self))
-        
+        tableView?.registerNib(UINib(nibName: String(SuccessDonationInfoCell.self), bundle: nil), forCellReuseIdentifier: String(SuccessDonationInfoCell.self))
     }
     
     //MARK: - Override base class behaviour
     override func paymentDidSuccess() {
         super.paymentDidSuccess()
         sendDonationEventToAnalytics(action: AnalyticActios.paymentOutcome, label: NSLocalizedString("Payment Completed"))
+        
+        //Add success donation section
+        sectionsCount = 2
+        tableView.insertSections(NSIndexSet(index: 1), withRowAnimation: .Fade)
+        trackScreenToAnalytics(AnalyticsLabels.donateConfirmation)
     }
     
     override func paymentDidFail(error: NSError) {
@@ -60,6 +65,8 @@ extension DonatePaymentController {
         switch section {
         case 0:
             return 2
+        case 1:
+            return 1
         default:
             return 0
         }
@@ -78,6 +85,9 @@ extension DonatePaymentController {
         switch indexPath {
         case NSIndexPath(forRow: 0, inSection: 0):
             return DonateCell.cellHeight
+        case NSIndexPath(forRow: 0, inSection: 1):
+            return SuccessDonationInfoCell.cellHeight
+            
         default:
             return UITableViewAutomaticDimension
         }
@@ -93,6 +103,10 @@ extension DonatePaymentController {
         case NSIndexPath(forRow: 1, inSection: 0):
             let cell = tableView.dequeueReusableCellWithIdentifier(String(TotalCell.self), forIndexPath: indexPath) as! TotalCell
             cell.priceLabel.text = paymentSystem.item.totalAmountFofmattedString
+            return cell
+        case NSIndexPath(forRow: 0, inSection: 1):
+            let cell = tableView.dequeueReusableCellWithIdentifier(String(SuccessDonationInfoCell.self), forIndexPath: indexPath) as! SuccessDonationInfoCell
+            cell.amountString =  paymentSystem.item.totalAmountFofmattedString
             return cell
         default:
             return UITableViewCell()

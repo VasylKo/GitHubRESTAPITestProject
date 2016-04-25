@@ -10,15 +10,13 @@ import UIKit
 
 class SuccessDonationInfoCell: UITableViewCell {
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    @IBOutlet weak var donateMessageLabel: UILabel?
+    
+    var amountString: String? {
+        didSet {
+            donateMessageLabel?.text = donateMessageLabel?.text?.stringByReplacingOccurrencesOfString("{amount}", withString: amountString ?? "", options: .LiteralSearch, range: nil)
+        }
     }
     
+    static let cellHeight = CGFloat(500.0)
 }
