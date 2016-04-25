@@ -14,6 +14,8 @@ class DonatePaymentController: CommonPaymentViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView?.registerNib(UINib(nibName: String(DonateCell.self), bundle: nil), forCellReuseIdentifier: String(DonateCell.self))
+        tableView?.registerNib(UINib(nibName: String(TotalCell.self), bundle: nil), forCellReuseIdentifier: String(TotalCell.self))
+ 
     }
 
 
@@ -28,7 +30,7 @@ extension DonatePaymentController {
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
-            return 1
+            return 2
         default:
             return 0
         }
@@ -47,25 +49,24 @@ extension DonatePaymentController {
         switch indexPath {
         case NSIndexPath(forRow: 0, inSection: 0):
             return DonateCell.cellHeight
-        case NSIndexPath(forRow: 1, inSection: 0):
-            return DonateCell.cellHeight
         default:
             return UITableViewAutomaticDimension
         }
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        switch indexPath.section {
-        case 0:
+        switch indexPath {
+        case NSIndexPath(forRow: 0, inSection: 0):
             let cell = tableView.dequeueReusableCellWithIdentifier(String(DonateCell.self), forIndexPath: indexPath) as! DonateCell
+            cell.projectIconImageView.setImageFromURL(paymentSystem.item.imageURL)
+            cell.projectNameLabel.text = paymentSystem.item.itemName
+            return cell
+        case NSIndexPath(forRow: 1, inSection: 0):
+            let cell = tableView.dequeueReusableCellWithIdentifier(String(TotalCell.self), forIndexPath: indexPath) as! TotalCell
+            cell.priceLabel.text = paymentSystem.item.totalAmountFofmattedString
             return cell
         default:
             return UITableViewCell()
         }
     }
-}
-
-//MARK: - Override UITableViewDelegate
-extension DonatePaymentController {
-    
 }

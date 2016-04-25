@@ -12,7 +12,7 @@ import BrightFutures
 
 final class BraintreePaymentSystem: NSObject, PaymentSystem {
     // MARK: - Private ivar
-    private var item: PurchaseConvertible
+    var item: PurchaseConvertible
     private var dropInViewController: BTDropInViewController?
     private let promise: Promise<Void, NSError>
     

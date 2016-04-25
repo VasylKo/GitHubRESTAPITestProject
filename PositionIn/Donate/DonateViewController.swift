@@ -387,4 +387,8 @@ extension DonateViewController: PurchaseConvertible {
     var paymentTypes: CardItem {
         return cardPaymentTypeSelecred()
     }
+    
+    var imageURL: NSURL? {
+        return product?.imageURL
+    }
 }

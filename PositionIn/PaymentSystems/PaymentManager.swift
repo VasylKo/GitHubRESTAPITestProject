@@ -20,6 +20,7 @@ protocol PurchaseConvertible {
     var itemName: String { get }
     var purchaseType: PurchaseType { get }
     var paymentTypes: CardItem { get }
+    var imageURL: NSURL? { get }
 }
 
 extension PurchaseConvertible {
@@ -33,6 +34,7 @@ extension PurchaseConvertible {
 }
 
 protocol PaymentSystem {
+    var item: PurchaseConvertible { get }
     init(item: PurchaseConvertible)
     func purchase() -> Future<Void, NSError>
 }

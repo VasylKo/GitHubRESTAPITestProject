@@ -13,7 +13,7 @@ import BrightFutures
 final class MpesaPaymentSystem: PaymentSystem {
 
     // MARK: - Private ivar
-    private var item: PurchaseConvertible
+    var item: PurchaseConvertible
     private let promise: Promise<Void, NSError>
     
     // MARK: - Init, PaymentSystem

@@ -39,6 +39,6 @@ class DonateCell: XLFormBaseCell {
     
     static let cellHeight = CGFloat(80.0)
     
-    @IBOutlet private weak var projectIconImageView: UIImageView!
-    @IBOutlet private weak var projectNameLabel: UILabel!
+    @IBOutlet weak var projectIconImageView: UIImageView!
+    @IBOutlet weak var projectNameLabel: UILabel!
 }
