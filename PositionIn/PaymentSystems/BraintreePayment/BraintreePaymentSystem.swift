@@ -14,7 +14,6 @@ final class BraintreePaymentSystem: NSObject, PaymentSystem {
     // MARK: - Private ivar
     private var item: PurchaseConvertible
     private var dropInViewController: BTDropInViewController?
-    private var paymentResponseCompletion: PaymentResponseCompletion?
     private let promise: Promise<Void, NSError>
     
     //Create simple error
@@ -78,8 +77,7 @@ final class BraintreePaymentSystem: NSObject, PaymentSystem {
         let summaryFormat = NSLocalizedString("%@ %@", comment: "Order: Summary format")
         let callToActionTextFormat = NSLocalizedString("%@ - %@", comment: "Order: Summary format")
         controller.paymentRequest?.summaryTitle = item.itemName
-        let totalAmountString = AppConfiguration().currencyFormatter.stringFromNumber(NSNumber(float: item.totalAmount)) ?? ""
-        controller.paymentRequest?.displayAmount = totalAmountString
+        controller.paymentRequest?.displayAmount = item.totalAmountFofmattedString
         
         //Set up description
         switch item.purchaseType {
@@ -89,7 +87,7 @@ final class BraintreePaymentSystem: NSObject, PaymentSystem {
             controller.paymentRequest?.summaryDescription = NSLocalizedString("Donation")
         }
         
-        controller.paymentRequest?.callToActionText = String(format: callToActionTextFormat, totalAmountString, NSLocalizedString("Pay"))
+        controller.paymentRequest?.callToActionText = String(format: callToActionTextFormat, item.totalAmountFofmattedString, NSLocalizedString("Pay"))
         
     }
     

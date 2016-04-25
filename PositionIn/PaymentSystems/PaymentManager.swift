@@ -15,7 +15,7 @@ enum PurchaseType {
 
 protocol PurchaseConvertible {
     var price: NSNumber { get }
-    var itemId: String { get }
+    var itemId: String? { get }
     var quantity: Int { get }
     var itemName: String { get }
     var purchaseType: PurchaseType { get }
@@ -26,9 +26,11 @@ extension PurchaseConvertible {
     var totalAmount: Float {
         return price.floatValue * Float(quantity)
     }
+    
+    var totalAmountFofmattedString: String {
+        return AppConfiguration().currencyFormatter.stringFromNumber(NSNumber(float: totalAmount)) ?? ""
+    }
 }
-
-typealias PaymentResponseCompletion = (isSuccessful: Bool, errorMsg: String?) -> ()
 
 protocol PaymentSystem {
     init(item: PurchaseConvertible)

@@ -196,19 +196,36 @@ class DonateViewController: XLFormViewController, PaymentReponseDelegate {
                 return
             }
             
-            //self?.sendDonationEventToAnalytics(action: AnalyticActios.proceedToPay)
+            /*
+            self?.sendDonationEventToAnalytics(action: AnalyticActios.proceedToPay)
+            self?.performSegueWithIdentifier("Show\((self?.paymentType)!)", sender: self!)
+            self?.setError(true, error: nil)
+            */
             
-            //self?.performSegueWithIdentifier("Show\((self?.paymentType)!)", sender: self!)
-            //self?.setError(true, error: nil)
+            //New payment flow
             let paymentSystem = PaymentSystemProvider.paymentSystemWithItem(self!)
             let paymentController = DonatePaymentController(paymentSystem: paymentSystem)
             self?.navigationController?.pushViewController(paymentController, animated: true)
+
         }
         
         confirmDonation.addFormRow(confirmRow)
             confirmDonation.footerTitle = "By donating, you agree to Red Cross Terms of service and Privacy Policy"
         
         self.form = form
+    }
+    
+    // MARK: XLForm helper
+    private func donationAmountEntered() -> NSNumber {
+        guard let donationAmountRow = form.formRowWithTag(Tags.Money.rawValue), value = donationAmountRow.value as? NSNumber else { return 0 }
+        
+        return value
+    }
+    
+    private func cardPaymentTypeSelecred() -> CardItem {
+        guard let paymentTypeRow = form.formRowWithTag(Tags.Payment.rawValue), box: Box<CardItem> = paymentTypeRow.value as? Box else { return .CreditDebitCard }
+        
+        return box.value
     }
 
     @objc func questionTapped() {
@@ -345,23 +362,14 @@ extension DonateViewController {
     }
 }
 
-/*
- var price: NSNumber { get }
- var itemId: String { get }
- var quantity: Int { get }
- var itemName: String { get }
- var purchaseType: PurchaseType { get }
- var paymentTypes: CardItem { get }
- var fromViewController: UIViewController { get }
- */
-
+//MARK: - PurchaseConvertible
 extension DonateViewController: PurchaseConvertible {
     var price: NSNumber {
-       return NSNumber(float: 97)
+       return donationAmountEntered()
     }
     
-    var itemId: String {
-        return "ffff"
+    var itemId: String? {
+        return product?.objectId
     }
     
     var quantity: Int {
@@ -369,7 +377,7 @@ extension DonateViewController: PurchaseConvertible {
     }
     
     var itemName: String {
-        return "ffff"
+        return product?.name ?? "Kenya Red Cross Society"
     }
     
     var purchaseType: PurchaseType {
