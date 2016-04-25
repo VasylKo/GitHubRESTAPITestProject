@@ -129,6 +129,7 @@ class EplusConfirmPaymentViewController: XLFormViewController {
     
     //MARK: - End of payment
     private func paymentDidSuccess() {
+        navigationItem.hidesBackButton = true
         if self.plan.type == .Family {
             api().getMyProfile().onSuccess(callback: { (profile : UserProfile) -> Void in
                 let numberOfDependents = self.plan.planParameters?.dependentsCount ?? 0

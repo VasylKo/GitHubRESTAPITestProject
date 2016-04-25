@@ -59,7 +59,11 @@ class EPlusMemberCardViewController : UIViewController {
         api().getMyProfile().flatMap { [weak self] (profile : UserProfile) -> Future<Void, NSError> in
             self?.profile = profile
             
-            return api().getEPlusActiveMembership().flatMap { [weak self] (details : EplusMembershipDetails) -> Future<Void, NSError> in
+            return api().getEPlusActiveMembership().flatMap { [weak self] (details : EplusMembershipDetails?) -> Future<Void, NSError> in
+                guard let details = details else {
+                    return Future()
+                }
+                
                 return api().getEPlusMemberships().flatMap { [weak self] (response : CollectionResponse<EPlusMembershipPlan>) -> Future<Void, NSError> in
                     //api().getEPlusMembership(details.membershipPlanId).flatMap { [weak self] (plan : EPlusMembershipPlan) -> Future<Void, NSError> in
                     if let strongSelf = self, profile = strongSelf.profile {

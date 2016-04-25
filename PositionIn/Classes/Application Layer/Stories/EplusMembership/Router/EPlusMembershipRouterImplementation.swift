@@ -11,10 +11,12 @@ import UIKit
 class EPlusMembershipRouterImplementation: BaseRouterImplementation, EPlusMembershipRouter {
     
     func showInitialViewController(from sourceViewController : UIViewController, hasActivePlan: Bool? = nil) {
-        api().getEPlusActiveMembership().onSuccess { _ -> Void in
-            self.showCallAmbulanceViewController(from: sourceViewController)
-        }.onFailure { _ -> Void in
-            self.showPlansViewController(from: sourceViewController, onlyPlansInfo: false)
+        api().getEPlusActiveMembership().onSuccess { [unowned self] (membershipDetails: EplusMembershipDetails?) -> Void in
+            if membershipDetails?.objectId != CRUDObjectInvalidId {
+                self.showCallAmbulanceViewController(from: sourceViewController)
+            } else {
+                self.showPlansViewController(from: sourceViewController, onlyPlansInfo: false)
+            }
         }
     }
     
