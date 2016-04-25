@@ -11,7 +11,7 @@ import XLForm
 import Braintree
 import Box
 
-class DonateViewController: XLFormViewController, PaymentReponseDelegate {
+class DonateViewController: XLFormViewController {
     private enum Tags : String {
         case Project = "Project"
         case Money = "Money"
@@ -31,11 +31,6 @@ class DonateViewController: XLFormViewController, PaymentReponseDelegate {
     var product: Product?
     var donationType: DonationType = .Donation
     
-    private var amount:Int = 0
-     
-    private var selectedCardType: CardItem?
-    private var paymentType: String?
-    private var finishedSuccessfully = false
     private var errorSection:XLFormSectionDescriptor?
     private weak var confirmRowDescriptor: XLFormRowDescriptor?
     private weak var paymentTypeRowDescriptor: XLFormRowDescriptor?
@@ -59,20 +54,6 @@ class DonateViewController: XLFormViewController, PaymentReponseDelegate {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         sendScreenNameToAnalytics()
-    }
-    
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-        if(finishedSuccessfully) {
-            let paymentCompleteController = Storyboards.Onboarding.instantiatePaymentCompletedViewController()
-            paymentCompleteController.projectName = self.product?.name ?? NSLocalizedString("Kenya Red Cross Society")
-            paymentCompleteController.projectIconURL = self.product?.imageURL
-            paymentCompleteController.amountDonation = amount
-            
-            paymentCompleteController.viewControllerToOpenOnComplete = viewControllerToOpenOnComplete
-            
-            self.navigationController?.pushViewController(paymentCompleteController, animated: true)
-        }
     }
     
     override func showFormValidationError(error: NSError!) {
@@ -122,10 +103,7 @@ class DonateViewController: XLFormViewController, PaymentReponseDelegate {
         donationRow.cellConfig.setObject(UIScheme.mainThemeColor, forKey: "tintColor")
         donationRow.onChangeBlock =  { [weak self] oldValue, newValue, _ in
             if let value = newValue as? NSNumber {
-                self?.amount = Int(value)
                 self?.sendDonationEventToAnalytics(action: AnalyticActios.setDonation, label: "")
-            } else {
-                self?.amount = 0
             }
         }
         donationRow.addValidator(DonateValidator())
@@ -159,15 +137,11 @@ class DonateViewController: XLFormViewController, PaymentReponseDelegate {
         paymentRow.addValidator(cardTypeValidator)
         paymentRow.onChangeBlock = { [weak self] oldValue, newValue, _ in
             if let box: Box<CardItem> = newValue as? Box {
-                self?.paymentType = CardItem.cardPayment(box.value)
-                self?.selectedCardType = box.value
                 self?.sendDonationEventToAnalytics(action: AnalyticActios.selectPaymentMethod)
                 
                 //Show M-Pesa additional info row
                 mpesaBongoPinRow.hidden = box.value != .MPesa
 
-            } else {
-                self?.paymentType = nil
             }
         }
         
@@ -196,15 +170,13 @@ class DonateViewController: XLFormViewController, PaymentReponseDelegate {
                 return
             }
             
-            /*
             self?.sendDonationEventToAnalytics(action: AnalyticActios.proceedToPay)
-            self?.performSegueWithIdentifier("Show\((self?.paymentType)!)", sender: self!)
-            self?.setError(true, error: nil)
-            */
             
-            //New payment flow
+            //Payment flow
             let paymentSystem = PaymentSystemProvider.paymentSystemWithItem(self!)
             let paymentController = DonatePaymentController(paymentSystem: paymentSystem)
+            paymentController.viewControllerToOpenOnComplete = self?.viewControllerToOpenOnComplete
+            paymentController.donationType = self?.donationType ?? .Donation
             self?.navigationController?.pushViewController(paymentController, animated: true)
 
         }
@@ -247,27 +219,6 @@ class DonateViewController: XLFormViewController, PaymentReponseDelegate {
         }
     }
     
-    func paymentReponse(success: Bool, err: String?) {
-        if(success) {
-            finishedSuccessfully = true
-            setError(true, error: nil)
-            sendDonationEventToAnalytics(action: AnalyticActios.paymentOutcome, label: NSLocalizedString("Payment Completed"))
-        } else {
-            setError(false, error: err)
-            sendDonationEventToAnalytics(action: AnalyticActios.paymentOutcome, label: err)
-        }
-    }
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
-        if var paymentProtocol = segue.destinationViewController as? PaymentProtocol {
-            paymentProtocol.amount = self.amount
-            paymentProtocol.delegate = self
-            paymentProtocol.productName = self.product?.name
-            paymentProtocol.product = self.product
-            paymentProtocol.itemId = self.product?.objectId
-        }
-    }
-    
     // MARK: XLFormViewController
     override func formRowDescriptorValueHasChanged(formRow: XLFormRowDescriptor!, oldValue: AnyObject!, newValue: AnyObject!) {
         super.formRowDescriptorValueHasChanged(formRow, oldValue: oldValue, newValue: newValue)
@@ -305,7 +256,7 @@ class DonateViewController: XLFormViewController, PaymentReponseDelegate {
     private func sendDonationEventToAnalytics(action action: String, label: String? = nil) {
         //Send tracking enevt
         var paymentTypeName = ""
-        if let cardType = selectedCardType, cardName = CardItem.cardName(cardType) {
+        if let cardName = CardItem.cardName(cardPaymentTypeSelecred()) {
             paymentTypeName = cardName
         } else {
             paymentTypeName = NSLocalizedString("Can't get payment type")
@@ -313,7 +264,7 @@ class DonateViewController: XLFormViewController, PaymentReponseDelegate {
         
         let donationTypeName = AnalyticCategories.labelForDonationType(donationType)
         let paymentTypeLabel = label ?? paymentTypeName
-        let paymentAmountNumber = NSNumber(integer: amount ?? 0)
+        let paymentAmountNumber = NSNumber(float: totalAmount)
         trackEventToAnalytics(donationTypeName, action: action, label: paymentTypeLabel, value: paymentAmountNumber)
     }
     

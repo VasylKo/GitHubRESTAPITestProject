@@ -25,6 +25,13 @@ final class BraintreePaymentSystem: NSObject, PaymentSystem {
             ]
         return NSError(domain: "com.bekitzur.payment", code: 100, userInfo: userInfo)
     }()
+    private lazy var userCancelPaymentError: NSError = {
+        let userInfo: [NSObject : AnyObject] = [
+            NSLocalizedDescriptionKey: NSLocalizedString("User cancel payment", comment: "Localized Braintree payment error description"),
+            NSLocalizedFailureReasonErrorKey: NSLocalizedString("User did not entered credit card details", comment: "Localized Braintree payment error reazon"),
+        ]
+        return NSError(domain: "com.bekitzur.payment", code: 100, userInfo: userInfo)
+    }()
     
     // MARK: - Init, PaymentSystem
     required init(item: PurchaseConvertible) {
@@ -94,7 +101,8 @@ final class BraintreePaymentSystem: NSObject, PaymentSystem {
     //MARK: - Actions
     @IBAction func userDidCancelPayment() {
         dismissPaymentsController() { [weak self] in
-            self?.promise.failure((self?.paymentError)!)
+            guard let strongSelf = self else { return }
+            strongSelf.promise.failure(strongSelf.userCancelPaymentError)
         }
     }
     

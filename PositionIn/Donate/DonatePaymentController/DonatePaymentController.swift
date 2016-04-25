@@ -9,16 +9,45 @@
 import UIKit
 
 class DonatePaymentController: CommonPaymentViewController {
+    internal var viewControllerToOpenOnComplete: UIViewController?
+    var donationType: DonateViewController.DonationType = .Donation
+    
     private var sectionsCount = 1
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView?.registerNib(UINib(nibName: String(DonateCell.self), bundle: nil), forCellReuseIdentifier: String(DonateCell.self))
         tableView?.registerNib(UINib(nibName: String(TotalCell.self), bundle: nil), forCellReuseIdentifier: String(TotalCell.self))
- 
+        
+    }
+    
+    //MARK: - Override base class behaviour
+    override func paymentDidSuccess() {
+        super.paymentDidSuccess()
+        sendDonationEventToAnalytics(action: AnalyticActios.paymentOutcome, label: NSLocalizedString("Payment Completed"))
+    }
+    
+    override func paymentDidFail(error: NSError) {
+        super.paymentDidFail(error)
+        sendDonationEventToAnalytics(action: AnalyticActios.paymentOutcome, label: error.localizedDescription)
+    }
+    
+    override func closeButtonTappedAfterSuccessPayment(sender: AnyObject) {
+        if let viewController = viewControllerToOpenOnComplete {
+            navigationController?.popToViewController(viewController, animated: true)
+        } else {
+            sideBarController?.executeAction(SidebarViewController.defaultAction)
+        }
     }
 
-
+    //MARK: - Analytic tracking
+    
+    private func sendDonationEventToAnalytics(action action: String, label: String) {
+        let donationTypeName = AnalyticCategories.labelForDonationType(donationType)
+        let paymentAmountNumber = NSNumber(float: paymentSystem.item.totalAmount)
+        trackEventToAnalytics(donationTypeName, action: action, label: label, value: paymentAmountNumber)
+    }
+    
 }
 
 //MARK: - Override UITableViewDataSource

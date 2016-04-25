@@ -46,6 +46,10 @@ class CommonPaymentViewController: UITableViewController, PaymentController {
         
     // MARK: - Privvate implementation
     private func setupInterface() {
+        //Hide back button while transaction is in action
+        navigationItem.setHidesBackButton(true, animated: false)
+        
+        //Set header transaction status view
         if let headerView = NSBundle.mainBundle().loadNibNamed(String(CommonTransactionStatusView.self), owner: nil, options: nil).first as? CommonTransactionStatusView {
             self.headerView = headerView
             tableView.tableHeaderView = headerView
@@ -53,12 +57,19 @@ class CommonPaymentViewController: UITableViewController, PaymentController {
     }
     
     //MARK: - Internal func
-    func paymentDidSuccess() {
+    internal func paymentDidSuccess() {
         headerView?.showSuccess()
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Close", style: .Done, target: self, action: Selector("closeButtonTappedAfterSuccessPayment:"))
     }
     
-    func paymentDidFail(error: NSError) {
+    internal func closeButtonTappedAfterSuccessPayment(sender: AnyObject) {
+        print("Father")
+    }
+    
+    internal func paymentDidFail(error: NSError) {
         headerView?.showFailure()
+        //Enable back button, so user can go back and correct payment info
+        navigationItem.setHidesBackButton(false, animated: true)
     }
 
 }
