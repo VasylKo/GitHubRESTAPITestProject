@@ -35,8 +35,8 @@ class EPlusMembershipRouterImplementation: BaseRouterImplementation, EPlusMember
             animated: true)
     }
     
-    func showMembershipMemberCardViewController(from sourceViewController : UIViewController, hidesBackButton: Bool) {
-        let cardViewController = EPlusMemberCardViewController(router: self)
+    func showMembershipMemberCardViewController(from sourceViewController : UIViewController, hidesBackButton: Bool, canTransitToInfo: Bool) {
+        let cardViewController = EPlusMemberCardViewController(router: self, canTransitToInfo: canTransitToInfo)
         cardViewController.navigationItem.hidesBackButton = hidesBackButton
         sourceViewController.navigationController?.pushViewController(cardViewController, animated: true)
     }
