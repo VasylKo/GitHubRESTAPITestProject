@@ -165,6 +165,13 @@ extension BraintreePaymentSystem: BTDropInViewControllerDelegate {
         
     }
     
+    @objc func dropInViewControllerWillComplete(viewController: BTDropInViewController) {
+        let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.White)
+        activityIndicator.startAnimating()
+        let activityItem = UIBarButtonItem(customView: activityIndicator)
+        dropInViewController?.navigationItem.leftBarButtonItem = activityItem
+    }
+    
     @objc func dropInViewControllerDidCancel(viewController: BTDropInViewController) {
         userDidCancelPayment()
     }
