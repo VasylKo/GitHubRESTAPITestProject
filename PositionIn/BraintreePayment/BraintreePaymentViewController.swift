@@ -71,6 +71,18 @@ class BraintreePaymentViewController : UIViewController, BTDropInViewControllerD
     func dropInViewController(viewController: BTDropInViewController,
         didSucceedWithTokenization paymentMethodNonce: BTPaymentMethodNonce) {
         //TODO: should check unwrapping
+            
+            switch paymentMethodNonce.type {
+            case "MasterCard", "Visa" :
+                break
+            default:
+                let alert = UIAlertController(title: "Error", message: "Unfortunately we do not accept the credit card you have provided. Please try again with either Visa or MasterCard.", preferredStyle: .Alert)
+                let action = UIAlertAction(title: "Ok", style: .Cancel, handler: nil)
+                alert.addAction(action)
+                viewController.presentViewController(alert, animated: true, completion: nil)
+                return
+            }
+            
             if let membershipId = self.membershipId {
                 api().membershipCheckoutBraintree(String(amount!), nonce: paymentMethodNonce.nonce,
                     membershipId: membershipId).onSuccess
