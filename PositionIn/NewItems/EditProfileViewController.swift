@@ -499,7 +499,7 @@ final class EditProfileViewController: BaseAddItemViewController, UserProfileAva
         }
     }
     
-    private func addAssets(assets: [PHAsset]) {
+    override func addAssets(assets: [PHAsset]) {
         if let asset = assets.first {
             self.headerView?.configure(asset)
         }
