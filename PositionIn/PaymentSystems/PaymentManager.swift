@@ -21,6 +21,7 @@ protocol PurchaseConvertible {
     var purchaseType: PurchaseType { get }
     var paymentTypes: CardItem { get }
     var imageURL: NSURL? { get }
+    var image: UIImage? { get }
 }
 
 extension PurchaseConvertible {
@@ -30,6 +31,19 @@ extension PurchaseConvertible {
     
     var totalAmountFofmattedString: String {
         return AppConfiguration().currencyFormatter.stringFromNumber(NSNumber(float: totalAmount)) ?? ""
+    }
+    
+    //Provide standart values
+    var quantity: Int {
+        return 1
+    }
+    
+    var imageURL: NSURL? {
+        return nil
+    }
+    
+    var image: UIImage? {
+        return nil
     }
 }
 

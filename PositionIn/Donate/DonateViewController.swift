@@ -322,11 +322,7 @@ extension DonateViewController: PurchaseConvertible {
     var itemId: String? {
         return product?.objectId
     }
-    
-    var quantity: Int {
-        return 1
-    }
-    
+        
     var itemName: String {
         return product?.name ?? "Kenya Red Cross Society"
     }
