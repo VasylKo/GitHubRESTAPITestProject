@@ -135,7 +135,7 @@ class EPlusMembershipConfirmDetailsViewController : XLFormViewController {
         selectorOptions.append(XLFormOptionsObject(value: BloodGroup.GroupB.rawValue, displayText: BloodGroup.GroupB.description))
         selectorOptions.append(XLFormOptionsObject(value: BloodGroup.GroupAB.rawValue, displayText: BloodGroup.GroupAB.description))
         selectorOptions.append(XLFormOptionsObject(value: BloodGroup.GroupO.rawValue, displayText: BloodGroup.GroupO.description))
-        selectorOptions.append(XLFormOptionsObject(value: BloodGroup.DontKnow.rawValue, displayText: BloodGroup.DontKnow.description))
+        selectorOptions.append(XLFormOptionsObject(value: BloodGroup.Unknown.rawValue, displayText: BloodGroup.Unknown.description))
         bloodGroupRow.selectorOptions = selectorOptions
         bloodGroupRow.cellConfig["textLabel.textColor"] = UIScheme.mainThemeColor
         bloodGroupRow.cellConfig["tintColor"] = UIScheme.mainThemeColor
@@ -378,6 +378,7 @@ class EPlusMembershipConfirmDetailsViewController : XLFormViewController {
         
         
         if (plan.type == .Family || plan.type == .Individual) {
+            IDPassPortNumberRow.value = self.userProfile?.passportNumber
             infoSection.addFormRow(self.IDPassPortNumberRow)
             
             // Additional info section
@@ -393,6 +394,9 @@ class EPlusMembershipConfirmDetailsViewController : XLFormViewController {
                 genderRow.value = XLFormOptionsObject(value: gender.rawValue, displayText: gender.description)
             }
             
+            if let bloodGroup = userProfile?.bloodGroup {
+                bloodGroupRow.value = XLFormOptionsObject(value: bloodGroup.rawValue, displayText: bloodGroup.description)
+            }
             additionalInfoSection.addFormRow(self.bloodGroupRow)
             
             // Allergies
@@ -400,6 +404,7 @@ class EPlusMembershipConfirmDetailsViewController : XLFormViewController {
             let allergiesSection = XLFormSectionDescriptor.formSection()
             form.addFormSection(allergiesSection)
             
+            self.allergiesRow.value = self.userProfile?.allergies
             allergiesSection.addFormRow(self.allergiesRow)
         }
         
@@ -446,6 +451,8 @@ class EPlusMembershipConfirmDetailsViewController : XLFormViewController {
             return
         }
         
+        self.userProfile?.email = self.emailRow.value as? String
+        
         if let passportNumber = self.IDPassPortNumberRow.value as? String {
             self.userProfile?.passportNumber = passportNumber
         }
@@ -455,7 +462,10 @@ class EPlusMembershipConfirmDetailsViewController : XLFormViewController {
         }
         
         userProfile?.gender = (self.genderRow.value as? XLFormOptionsObject).flatMap { $0.gender }
-        
+        userProfile?.allergies = self.allergiesRow.value as? String
+        if let formValue = (self.bloodGroupRow.value as? XLFormOptionsObject)?.formValue() as? Int {
+            userProfile?.bloodGroup = BloodGroup(rawValue: formValue)
+        }
         
         if let userProfile = self.userProfile {
             api().updateMyProfile(userProfile).onComplete(callback: { [unowned self] _ in
