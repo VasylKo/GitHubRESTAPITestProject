@@ -32,8 +32,6 @@ class ProductOrderViewController: XLFormViewController {
     // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        prepareBrainTreePaymentSystem()
-        
         self.initializeForm()
     }
     
@@ -48,61 +46,6 @@ class ProductOrderViewController: XLFormViewController {
         formatter.numberStyle = .DecimalStyle
         return formatter
     }()
-    
-    // MARK: - Brain Tree Payment System
-    private func prepareBrainTreePaymentSystem() {
-        api().getToken().onSuccess { [weak self] token in
-            guard let strongSelf = self else { return }
-            strongSelf.braintreeClient = BTAPIClient(authorization: token)
-        }
-    }
-    
-    private func purchaseProductWithBrainTree(quantity quantity: Int, product: Product) {
-        guard let braintreeClient = braintreeClient else {
-            showError(NSLocalizedString("Payment system error"))
-            return
-        }
-        
-        let dropInViewController = BTDropInViewController(APIClient: braintreeClient)
-        dropInViewController.delegate = self
-        
-        //Fill product info
-        let summaryFormat = NSLocalizedString("%@ %@", comment: "Order: Summary format")
-        let callToActionTextFormat = NSLocalizedString("%@ - %@", comment: "Order: Summary format")
-        dropInViewController.paymentRequest?.summaryTitle = product.name ?? ""
-        let totalAmount = (product.price ?? 0) * Float(quantity)
-        let totalAmountString = setTotalPrice(totalAmount)
-        dropInViewController.paymentRequest?.displayAmount = totalAmountString
-        dropInViewController.paymentRequest?.summaryDescription = String(format: summaryFormat, NSLocalizedString("Quantity:"), String(quantity))
-        dropInViewController.paymentRequest?.callToActionText = String(format: callToActionTextFormat, totalAmountString, NSLocalizedString("Pay"))
-        
-        //UI setup
-        dropInViewController.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Cancel, target: self, action: "userDidCancelPayment:")
-        dropInViewController.navigationItem.leftBarButtonItem?.tintColor = UIColor.whiteColor()
-        dropInViewController.title = NSLocalizedString("Payment Method", comment: "braintree title")
- 
-        //Present controller
-        let navigationController = UINavigationController(rootViewController: dropInViewController)
-        navigationController.view.tintColor = UIScheme.mainThemeColor
-        navigationController.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
-        presentViewController(navigationController, animated: true, completion: nil)
-    }
-    
-    private func showBrainTreePaymentSuccessViewController() {
-        guard let product = product, quantity = self.quantitySelected() else { return }
-        
-        let successPaymentController = MPesaPaymentCompleteViewController(quantity: quantity, product: product, cardItem: .CreditDebitCard, delegate: self)
-        let navigationController = UINavigationController(rootViewController: successPaymentController)
-        presentViewController(navigationController, animated: true, completion: nil)
-    }
-    
-    @IBAction func userDidCancelPayment(sender: AnyObject) {
-        dismissPaymentsController()
-    }
-    
-    private func dismissPaymentsController() {
-        dismissViewControllerAnimated(true, completion: nil)
-    }
     
     // MARK: - Build XFForm
     func initializeForm() {
@@ -201,17 +144,18 @@ class ProductOrderViewController: XLFormViewController {
         proceedToPayRow.cellConfig["textLabel.color"] = UIColor.whiteColor()
         proceedToPayRow.cellConfig["textLabel.textAlignment"] =  NSTextAlignment.Center.rawValue
         proceedToPayRow.action.formBlock = { [weak self] row in
-            self?.deselectFormRow(row)
+            guard let strongSelf = self else { return }
             
-            guard let strongSelf = self, product = strongSelf.product, cardType = strongSelf.cardPaymentTypeSelecred(), quantity = strongSelf.quantitySelected() else { return }
+            strongSelf.deselectFormRow(row)
             
-            switch cardType {
-            case .MPesa:
-                let controller = MPesaPaymentCompleteViewController(quantity: quantity, product: product)
-                strongSelf.navigationController?.pushViewController(controller, animated: true)
-            case .CreditDebitCard:
-                strongSelf.purchaseProductWithBrainTree(quantity: quantity, product: product)
+            //Payment flow
+            let paymentSystem = PaymentSystemProvider.paymentSystemWithItem(strongSelf)
+            let paymentController = ProductOrderPaymentViewController(paymentSystem: paymentSystem)
+            //Get alias to previous View Controller
+            if let viewControllers = strongSelf.navigationController?.viewControllers {
+                paymentController.viewControllerToOpenOnComplete = viewControllers[viewControllers.count - 2]
             }
+            strongSelf.navigationController?.pushViewController(paymentController, animated: true)
 
         }
 
@@ -248,8 +192,8 @@ class ProductOrderViewController: XLFormViewController {
         return value.integerValue
     }
     
-    private func cardPaymentTypeSelecred() -> CardItem? {
-        guard let paymentTypeRow = form.formRowWithTag(Tags.Payment.rawValue), box: Box<CardItem> = paymentTypeRow.value as? Box else { return nil }
+    private func cardPaymentTypeSelecred() -> CardItem {
+        guard let paymentTypeRow = form.formRowWithTag(Tags.Payment.rawValue), box: Box<CardItem> = paymentTypeRow.value as? Box else { return .CreditDebitCard }
         
         return box.value
     }
@@ -326,38 +270,35 @@ extension ProductOrderViewController {
             return XLFormValidationStatus(msg: msg, status: status, rowDescriptor: row)
         }
     }
-
 }
 
-// MARK: - BTDropInViewControllerDelegate
-extension ProductOrderViewController: BTDropInViewControllerDelegate {
-    func dropInViewController(viewController: BTDropInViewController, didSucceedWithTokenization paymentMethodNonce: BTPaymentMethodNonce) {
-        guard let product = product, price = product.price, quantity = self.quantitySelected() else { return  self.dismissPaymentsController() }
-        
-        let priceWitAmount = price * Float(quantity)
-        
-        api().productCheckoutBraintree(String(priceWitAmount), nonce: paymentMethodNonce.nonce,
-            itemId: product.objectId, quantity: quantity).onSuccess
-            { [weak self] err in
-                if(err == "") {
-                    self?.dismissPaymentsController()
-                    //self?.finishedSuccessfully = true
-                    self?.showBrainTreePaymentSuccessViewController()
-                }
-        }
-        
-        dismissPaymentsController()
+//MARK: - PurchaseConvertible
+extension ProductOrderViewController: PurchaseConvertible {
+    var price: NSNumber {
+        return NSNumber(float: product?.price ?? 0)
     }
     
-    func dropInViewControllerDidCancel(viewController: BTDropInViewController) {
-        dismissPaymentsController()
+    var itemId: String? {
+        return product?.objectId
     }
     
-}
-
-extension ProductOrderViewController: MPesaPaymentCompleteDelegate {
-    func closeButtonTapped(controller: MPesaPaymentCompleteViewController) {
-        //Go back to product details
-        navigationController?.popViewControllerAnimated(false)
+    var quantity: Int {
+        return quantitySelected() ?? 1
+    }
+    
+    var itemName: String {
+        return product?.name ?? ""
+    }
+    
+    var purchaseType: PurchaseType {
+        return .Product
+    }
+    
+    var paymentTypes: CardItem {
+        return cardPaymentTypeSelecred()
+    }
+    
+    var imageURL: NSURL? {
+        return product?.imageURL
     }
 }

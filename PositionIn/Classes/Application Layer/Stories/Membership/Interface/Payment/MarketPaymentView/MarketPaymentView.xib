@@ -112,7 +112,7 @@
                         </mask>
                     </variation>
                 </view>
-                <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cRg-rN-7nD" userLabel="QuantityView">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cRg-rN-7nD" userLabel="QuantityView">
                     <rect key="frame" x="0.0" y="138" width="320" height="61"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Quantity:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yfl-WY-zih">
@@ -127,7 +127,7 @@
                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mtS-9j-z5W" userLabel="separator">
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mtS-9j-z5W" userLabel="separator">
                             <rect key="frame" x="0.0" y="60" width="320" height="1"/>
                             <color key="backgroundColor" red="0.91764705879999997" green="0.91764705879999997" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
@@ -163,7 +163,7 @@
                         </mask>
                     </variation>
                 </view>
-                <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IT0-oZ-0Ng" userLabel="TotalView">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IT0-oZ-0Ng" userLabel="TotalView">
                     <rect key="frame" x="8" y="199" width="304" height="37"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="Total" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LBA-Fs-BfN">

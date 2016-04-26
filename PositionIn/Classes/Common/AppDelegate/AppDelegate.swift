@@ -106,9 +106,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         XLFormViewController.cellClassesForRowDescriptorTypes()[XLFormRowDescriptorTypeTotal] =
         "TotalCell"
-        
-        XLFormViewController.cellClassesForRowDescriptorTypes()[XLFormRowDescriptorTypeMarketPaymentView] =
-        "MarketPaymentView"
 
         XLFormViewController.cellClassesForRowDescriptorTypes()[XLFormRowDescriptorTypeError] =
         "ErrorCell"
