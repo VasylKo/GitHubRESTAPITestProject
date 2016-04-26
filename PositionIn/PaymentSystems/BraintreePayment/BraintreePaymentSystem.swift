@@ -114,22 +114,38 @@ final class BraintreePaymentSystem: NSObject, PaymentSystem {
         dropInViewController?.dismissViewControllerAnimated(true, completion: completion)
     }
     
+    //MARK: - Purchase implementation
     private func purchaseDonation(withTokenization paymentMethodNonce: BTPaymentMethodNonce) {
-        api().donateCheckoutBraintree(String(item.totalAmount), nonce: paymentMethodNonce.nonce, itemId: item.itemId).onSuccess
+        let response = api().donateCheckoutBraintree(String(item.totalAmount), nonce: paymentMethodNonce.nonce, itemId: item.itemId)
+        commonBrintreePaymentPesponseHandler(response)
+    }
+    
+    private func purchaseMembership(withTokenization paymentMethodNonce: BTPaymentMethodNonce) {
+        let response = api().membershipCheckoutBraintree(String(item.totalAmount), nonce: paymentMethodNonce.nonce, membershipId: item.itemId ?? CRUDObjectInvalidId)
+        commonBrintreePaymentPesponseHandler(response)
+    }
+    
+    private func purchaseProduct(withTokenization paymentMethodNonce: BTPaymentMethodNonce) {
+        let response = api().productCheckoutBraintree(String(item.totalAmount), nonce: paymentMethodNonce.nonce, itemId: item.itemId ?? CRUDObjectInvalidId, quantity: NSNumber(integer: item.quantity))
+        commonBrintreePaymentPesponseHandler(response)
+    }
+    
+    private func commonBrintreePaymentPesponseHandler(response: Future<String, NSError>) {
+        response.onSuccess
             { [weak self] err in
                 guard let strongSelf = self else { return }
-            if(err == "") {
-                strongSelf.dismissPaymentsController() {
-                    strongSelf.promise.success()
+                if(err == "") {
+                    strongSelf.dismissPaymentsController() {
+                        strongSelf.promise.success()
+                    }
+                } else {
+                    strongSelf.dismissPaymentsController() {
+                        strongSelf.promise.failure(strongSelf.paymentError)
+                    }
                 }
-            } else {
-                strongSelf.dismissPaymentsController() {
-                    strongSelf.promise.failure(strongSelf.paymentError)
-                }
-            }
                 
-        }.onFailure { [weak self] (error) in
-            self?.promise.failure(error)
+            }.onFailure { [weak self] (error) in
+                self?.promise.failure(error)
         }
     }
 }
@@ -138,12 +154,13 @@ final class BraintreePaymentSystem: NSObject, PaymentSystem {
 extension BraintreePaymentSystem: BTDropInViewControllerDelegate {
     @objc func dropInViewController(viewController: BTDropInViewController,
                               didSucceedWithTokenization paymentMethodNonce: BTPaymentMethodNonce) {
-        //TODO: should check unwrapping
         switch item.purchaseType {
         case .Donation:
             purchaseDonation(withTokenization: paymentMethodNonce)
-        default:
-            purchaseDonation(withTokenization: paymentMethodNonce)
+        case .Membership, .Eplus:
+            purchaseMembership(withTokenization: paymentMethodNonce)
+        case .Product:
+            purchaseProduct(withTokenization: paymentMethodNonce)
         }
         
     }
