@@ -14,7 +14,7 @@ class MembershipRouterImplementation: BaseRouterImplementation, MembershipRouter
         switch hasActivePlan {
         case .Some(let active):
             if (active) {
-                self.showMembershipMemberCardViewController(from: sourceViewController)
+                self.showMembershipMemberCardViewController(from: sourceViewController, showBackButton: true)
             } else {
                 let corporatePlansViewController = MembershipPlansViewController(router: self, type: MembershipPlan.PlanType.Corporate, currentMembershipPlan: nil)
                 let individualPlansViewController = MembershipPlansViewController(router: self, type: MembershipPlan.PlanType.Individual, currentMembershipPlan: nil)
@@ -24,7 +24,7 @@ class MembershipRouterImplementation: BaseRouterImplementation, MembershipRouter
             }
         case .None:
             if (api().isUserHasActiveMembershipPlan()) {
-                self.showMembershipMemberCardViewController(from: sourceViewController)
+                self.showMembershipMemberCardViewController(from: sourceViewController, showBackButton: true)
             } else {
                 let corporatePlansViewController = MembershipPlansViewController(router: self, type: MembershipPlan.PlanType.Corporate, currentMembershipPlan: nil)
                 let individualPlansViewController = MembershipPlansViewController(router: self, type: MembershipPlan.PlanType.Individual, currentMembershipPlan: nil)
@@ -46,8 +46,8 @@ class MembershipRouterImplementation: BaseRouterImplementation, MembershipRouter
             animated: true)
     }
     
-    func showMembershipMemberCardViewController(from sourceViewController : UIViewController) {
-        sourceViewController.navigationController?.pushViewController(MembershipMemberCardViewController(router: self), animated: true)
+    func showMembershipMemberCardViewController(from sourceViewController : UIViewController, showBackButton: Bool) {
+        sourceViewController.navigationController?.pushViewController(MembershipMemberCardViewController(router: self, showBackButton: showBackButton), animated: true)
     }
     
     

@@ -64,7 +64,7 @@ class MembershipPaymentTransactionViewController: CommonPaymentViewController {
     override func paymentDidSuccess() {
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (Int64)(3 * NSEC_PER_SEC)), dispatch_get_main_queue()) { [weak self] _ in
             guard let strongSelf = self else { return }
-            strongSelf.router.showMembershipMemberCardViewController(from: strongSelf)
+            strongSelf.router.showMembershipMemberCardViewController(from: strongSelf, showBackButton: false)
         }
         
         sendPaymentEventToAnalytics(label: NSLocalizedString("Payment Completed"))
