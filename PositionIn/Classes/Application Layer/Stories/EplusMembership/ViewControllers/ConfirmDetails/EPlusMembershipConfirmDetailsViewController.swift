@@ -467,9 +467,10 @@ class EPlusMembershipConfirmDetailsViewController : XLFormViewController {
                 case .Unknown:
                     break
                 case .Individual:
-                    self.router.showPaymentViewController(from: self, with: self.plan)
-                    self.navigationItem.rightBarButtonItem?.enabled = true
-                    return
+                    api().createEPlusOrder(planParameters: planParameters).onSuccess(callback: { [unowned self] _ -> Void in
+                        self.router.showPaymentViewController(from: self, with: self.plan)
+                        self.navigationItem.rightBarButtonItem?.enabled = true
+                    })
                 case .Family:
                     let numberOfDependentsValue: XLFormOptionsObject = (self.numberOfDependentsRow.value as? XLFormOptionsObject)!
                     let numberOfDependents = (numberOfDependentsValue.valueData() as? NSNumber)?.integerValue ?? 0
@@ -480,7 +481,6 @@ class EPlusMembershipConfirmDetailsViewController : XLFormViewController {
                         self.router.showPaymentViewController(from: self, with: self.plan)
                         self.navigationItem.rightBarButtonItem?.enabled = true
                     })
-                    return
                 case .Schools:
                     planParameters.schoolName = (self.schoolNameRow.value as? String) ?? ""
                     planParameters.studentsCount = (self.numberOfStudentsRow.value as? NSNumber)?.integerValue ?? 0
