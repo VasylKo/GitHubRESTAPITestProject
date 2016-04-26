@@ -23,13 +23,39 @@ final class MpesaPaymentSystem: PaymentSystem {
     }
     
     func purchase() -> Future<Void, NSError> {
-        payDonationWithMPESA()
+        purchaseWithMPESA()
         return promise.future
     }
     
-    //MARK: - MPESA Payment
-    private func payDonationWithMPESA() {
-        api().donateCheckoutMpesa(String(item.totalAmount), nonce: "").onSuccess { [weak self] transactionId in
+    private func purchaseWithMPESA() {
+        switch item.purchaseType {
+        case .Donation:
+            purchaseDonation()
+        case .Membership, .Eplus:
+            purchaseMembership()
+        case .Product:
+            purchaseProduct()
+        }
+    }
+    
+    //MARK: - Purchase implementation
+    private func purchaseDonation() {
+        let response = api().donateCheckoutMpesa(String(item.totalAmount), nonce: "")
+        commonMPESAPaymentPesponseHandler(response)
+    }
+    
+    private func purchaseMembership() {
+        let response = api().membershipCheckoutMpesa(String(item.totalAmount), nonce: "", membershipId: item.itemId ?? CRUDObjectInvalidId)
+        commonMPESAPaymentPesponseHandler(response)
+    }
+        
+    private func purchaseProduct() {
+        let response = api().productCheckoutMpesa(item.price, nonce: "", itemId: item.itemId ?? CRUDObjectInvalidId, quantity: NSNumber(integer: item.quantity))
+        commonMPESAPaymentPesponseHandler(response)
+    }
+    
+    private func commonMPESAPaymentPesponseHandler(response: Future<String, NSError>) {
+        response.onSuccess { [weak self] transactionId in
             guard let strongSelf = self else { return }
             strongSelf.pollStatus(transactionId)
             
