@@ -53,18 +53,27 @@ class MembershipPaymentTransactionViewController: CommonPaymentViewController {
         
         pageView.addConstraint(heightConstraint)
         view.addConstraints([bottomConstraint, trailingConstraint, leadingConstraint])
+  
+    }
+    
+    override func paymentDidSuccess() {
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (Int64)(3 * NSEC_PER_SEC)), dispatch_get_main_queue()) { [weak self] _ in
+            guard let strongSelf = self else { return }
+            strongSelf.router.showMembershipMemberCardViewController(from: strongSelf)
+        }
         
-        //add pageView to bottom with constaints
-        //guard let view = self.navigationController?.view else { return }
-        //navigationController?.setToolbarHidden(false, animated: false)
-        //navigationController?.toolbar.addSubview(pageView)
-        
-        /*
-        view.addSubview(pageView)
- 
-        
-*/
-        
+        sendPaymentEventToAnalytics(label: NSLocalizedString("Payment Completed"))
+    }
+    
+    override func paymentDidFail(error: NSError) {
+        super.paymentDidFail(error)
+        sendPaymentEventToAnalytics(label: error.localizedDescription)
+    }
+    
+    //MARK: - Analytic tracking
+    private func sendPaymentEventToAnalytics(label label: String) {
+        let paymentAmountNumber = NSNumber(float: paymentSystem.item.totalAmount)
+        trackEventToAnalytics(AnalyticCategories.membership, action: AnalyticActios.paymentOutcome, label: label, value: paymentAmountNumber)
     }
 
 }
