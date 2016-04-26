@@ -72,13 +72,12 @@ enum BloodGroup: Int, CustomStringConvertible  {
     case GroupB
     case GroupAB
     case GroupO
-    case DontKnow
     
     // CustomStringConvertible
     var description: String {
         switch self {
         case .Unknown:
-            return "Unknown"
+            return "Don't know"
         case .GroupA:
             return "A"
         case .GroupB:
@@ -87,8 +86,6 @@ enum BloodGroup: Int, CustomStringConvertible  {
             return "AB"
         case .GroupO:
             return "O"
-        case .DontKnow:
-            return "Don't know"
         }
     }
 }
@@ -181,6 +178,8 @@ final class UserProfile: CRUDObject {
         countFollowers <- map["followers.count"]
         countFollowing <- map["following.count"]
         countPosts <- map["posts.count"]
+        bloodGroup <- map["bloodGroup"]
+        allergies <- map["allergies"]
     }
     
     static func endpoint() -> String {
