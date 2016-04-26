@@ -150,6 +150,7 @@
 		545652851CCFA75B00C63C01 /* ProductOrderPaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 545652841CCFA75B00C63C01 /* ProductOrderPaymentViewController.swift */; };
 		5456528D1CCFAB4600C63C01 /* PaymentOrderDescriptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5456528B1CCFAB4600C63C01 /* PaymentOrderDescriptionCell.swift */; };
 		5456528E1CCFAB4600C63C01 /* PaymentOrderDescriptionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5456528C1CCFAB4600C63C01 /* PaymentOrderDescriptionCell.xib */; };
+		545652901CCFB6B800C63C01 /* NSDate+pickUpAvaliabilityString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5456528F1CCFB6B800C63C01 /* NSDate+pickUpAvaliabilityString.swift */; };
 		549C6BCE1CCF558D0062435F /* MembershipPaymentTransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 549C6BCD1CCF558D0062435F /* MembershipPaymentTransactionViewController.swift */; };
 		549C6BD01CCF6DCF0062435F /* CommonPaymentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 549C6BCF1CCF6DCF0062435F /* CommonPaymentViewController.xib */; };
 		549C6BD21CCF98CF0062435F /* EplusPaymentTransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 549C6BD11CCF98CF0062435F /* EplusPaymentTransactionViewController.swift */; };
@@ -779,6 +780,7 @@
 		545652841CCFA75B00C63C01 /* ProductOrderPaymentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductOrderPaymentViewController.swift; sourceTree = "<group>"; };
 		5456528B1CCFAB4600C63C01 /* PaymentOrderDescriptionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentOrderDescriptionCell.swift; sourceTree = "<group>"; };
 		5456528C1CCFAB4600C63C01 /* PaymentOrderDescriptionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PaymentOrderDescriptionCell.xib; sourceTree = "<group>"; };
+		5456528F1CCFB6B800C63C01 /* NSDate+pickUpAvaliabilityString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+pickUpAvaliabilityString.swift"; sourceTree = "<group>"; };
 		549C6BCD1CCF558D0062435F /* MembershipPaymentTransactionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MembershipPaymentTransactionViewController.swift; sourceTree = "<group>"; };
 		549C6BCF1CCF6DCF0062435F /* CommonPaymentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommonPaymentViewController.xib; sourceTree = "<group>"; };
 		549C6BD11CCF98CF0062435F /* EplusPaymentTransactionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EplusPaymentTransactionViewController.swift; sourceTree = "<group>"; };
@@ -2152,6 +2154,7 @@
 			isa = PBXGroup;
 			children = (
 				CDE1B90E1C5F678B00F76F32 /* LocalizedString.swift */,
+				5456528F1CCFB6B800C63C01 /* NSDate+pickUpAvaliabilityString.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -4867,6 +4870,7 @@
 				CD65C5FC1C9988D400C2C11B /* UserProfileAvatarView.swift in Sources */,
 				E64D00631B7C8FB7007693E0 /* AddPostViewController.swift in Sources */,
 				CDE1B91F1C5F9E6A00F76F32 /* MembershipMemberProfileView.swift in Sources */,
+				545652901CCFB6B800C63C01 /* NSDate+pickUpAvaliabilityString.swift in Sources */,
 				E6F7A4811BA356500069152A /* LocationSearchResultDataSource.swift in Sources */,
 				E62B16FF1B5CE0F800D446BC /* BesideMenuViewController.swift in Sources */,
 				E66F901B1BA6A5C100280B77 /* ChatController.swift in Sources */,
