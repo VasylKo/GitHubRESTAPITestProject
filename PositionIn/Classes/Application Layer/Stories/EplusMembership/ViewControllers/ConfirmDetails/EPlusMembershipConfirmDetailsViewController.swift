@@ -471,6 +471,7 @@ class EPlusMembershipConfirmDetailsViewController : XLFormViewController {
                         self.router.showPaymentViewController(from: self, with: self.plan)
                         self.navigationItem.rightBarButtonItem?.enabled = true
                     })
+                    return
                 case .Family:
                     let numberOfDependentsValue: XLFormOptionsObject = (self.numberOfDependentsRow.value as? XLFormOptionsObject)!
                     let numberOfDependents = (numberOfDependentsValue.valueData() as? NSNumber)?.integerValue ?? 0
@@ -481,6 +482,7 @@ class EPlusMembershipConfirmDetailsViewController : XLFormViewController {
                         self.router.showPaymentViewController(from: self, with: self.plan)
                         self.navigationItem.rightBarButtonItem?.enabled = true
                     })
+                    return
                 case .Schools:
                     planParameters.schoolName = (self.schoolNameRow.value as? String) ?? ""
                     planParameters.studentsCount = (self.numberOfStudentsRow.value as? NSNumber)?.integerValue ?? 0
