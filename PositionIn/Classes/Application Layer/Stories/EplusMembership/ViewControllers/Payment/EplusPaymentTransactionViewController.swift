@@ -66,7 +66,9 @@ class EplusPaymentTransactionViewController: CommonPaymentViewController {
         if self.plan.type == .Family {
             api().getMyProfile().onSuccess(callback: { [weak self] (profile : UserProfile) -> Void in
                 guard let strongSelf = self else { return }
-                let message = "You have selected x dependents. Our customer support will contact you at <phone number> within the next 48 hours"
+                let numberOfDependents = strongSelf.plan.planParameters?.dependentsCount ?? 0
+                let phoneNumber = profile.phone!
+                let message = "You have selected \(numberOfDependents) dependents. Our customer support will contact you at \(phoneNumber) within the next 48 hours"
                 let alertController = UIAlertController(title: nil, message: message, preferredStyle: .Alert)
                 
                 let okAction = UIAlertAction(title: "Ok", style: .Default) { (action) in
@@ -86,7 +88,7 @@ class EplusPaymentTransactionViewController: CommonPaymentViewController {
     private func showEplusCard() {
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (Int64)(3 * NSEC_PER_SEC)), dispatch_get_main_queue()) { [weak self] _ in
             guard let strongSelf = self else { return }
-            strongSelf.router.showMembershipMemberCardViewController(from: strongSelf, showBackButton: false)
+            strongSelf.router.showMembershipMemberCardViewController(from: strongSelf, hidesBackButton: true, canTransitToInfo: false)
         }
     }
     
