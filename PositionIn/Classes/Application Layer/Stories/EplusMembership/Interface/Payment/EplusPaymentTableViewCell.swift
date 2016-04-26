@@ -32,10 +32,12 @@ class EplusPaymentTableViewCell: XLFormBaseCell {
     }
     
     override static func formDescriptorCellHeightForRowDescriptor(rowDescriptor: XLFormRowDescriptor!) -> CGFloat {
-        return 122
+        return EplusPaymentTableViewCell.cellHeight
     }
     
-    @IBOutlet private weak var totalLabel: UILabel!
-    @IBOutlet private weak var planName: UILabel!
-    @IBOutlet private weak var planImageView: UIImageView!
+    static let cellHeight = CGFloat(122.0)
+    
+    @IBOutlet weak var totalLabel: UILabel!
+    @IBOutlet weak var planName: UILabel!
+    @IBOutlet weak var planImageView: UIImageView!
 }

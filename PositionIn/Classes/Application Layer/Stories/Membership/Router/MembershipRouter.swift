@@ -28,9 +28,5 @@ protocol MembershipRouter : BaseRouter {
     
     func showMembershipPaymentTransactionViewController(from sourceViewController : UIViewController, withPaymentSystem : PaymentSystem)
     
-    func showMPesaConfirmPaymentViewController(from sourceViewController : UIViewController, with plan : MembershipPlan)
-    
-    func showBraintreeConfirmPaymentViewController(from sourceViewController : UIViewController, with plan : MembershipPlan, creditCardPaymentSuccess: Bool?)
-    
     func dismissMembership(from sourceViewController : UIViewController)
 }

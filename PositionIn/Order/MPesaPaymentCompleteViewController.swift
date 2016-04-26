@@ -17,7 +17,7 @@ class MPesaPaymentCompleteViewController: XLFormViewController {
 
     private var quantity: Int?
     private var product: Product?
-    private var headerView : MPesaIndicatorView!
+    //private var headerView : MPesaIndicatorView!
     private var transactionId = ""
     private var cardItem: CardItem = .MPesa
     private var delegate: MPesaPaymentCompleteDelegate?
@@ -58,19 +58,19 @@ class MPesaPaymentCompleteViewController: XLFormViewController {
                         self?.transactionId = transactionId
                         self?.pollStatus()
                     }.onFailure(callback: { [weak self] _ in
-                        self?.headerView.showFailure()
+                        //self?.headerView.showFailure()
                         })
             }
         
         case .CreditDebitCard:
-            self.headerView.showSuccess()
+            //self.headerView.showSuccess()
             customizeNavigationBar()
         }
     }
     
     @objc func pollStatus() {
         api().transactionStatusMpesa(transactionId).onSuccess { [weak self] status in
-            self?.headerView.showSuccess()
+            //self?.headerView.showSuccess()
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (Int64)(3 * NSEC_PER_SEC)), dispatch_get_main_queue()) {
                 appDelegate().sidebarViewController?.executeAction(SidebarViewController.defaultAction)
                 self?.dismissViewControllerAnimated(true, completion: nil)
@@ -85,10 +85,10 @@ class MPesaPaymentCompleteViewController: XLFormViewController {
     func setupInterface() {
         view.tintColor = UIScheme.mainThemeColor
         
-        if let headerView = NSBundle.mainBundle().loadNibNamed(String(MPesaIndicatorView.self), owner: nil, options: nil).first as? MPesaIndicatorView {
-            self.headerView = headerView
-            self.tableView.tableHeaderView = headerView
-        }
+//        if let headerView = NSBundle.mainBundle().loadNibNamed(String(MPesaIndicatorView.self), owner: nil, options: nil).first as? MPesaIndicatorView {
+//            self.headerView = headerView
+//            self.tableView.tableHeaderView = headerView
+//        }
     }
     
     func initializeForm() {

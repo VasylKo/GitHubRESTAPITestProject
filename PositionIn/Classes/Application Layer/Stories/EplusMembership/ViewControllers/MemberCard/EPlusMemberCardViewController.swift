@@ -15,6 +15,7 @@ class EPlusMemberCardViewController : UIViewController {
     private let router : EPlusMembershipRouter
     private var profile : UserProfile?
     private var plan : EPlusMembershipPlan?
+    private let shoudShowBackButton: Bool
     
     @IBOutlet weak var eplusMemberCardView: EPlusMemberCardView?
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView?
@@ -24,8 +25,9 @@ class EPlusMemberCardViewController : UIViewController {
 
     //MARK: Initializers
     
-    init(router: EPlusMembershipRouter) {
+    init(router: EPlusMembershipRouter, showBackButton: Bool) {
         self.router = router
+        shoudShowBackButton = showBackButton
         super.init(nibName: NSStringFromClass(EPlusMemberCardViewController.self), bundle: nil)
     }
     
@@ -50,6 +52,7 @@ class EPlusMemberCardViewController : UIViewController {
     }
     
     func setupInterface() {
+        navigationItem.setHidesBackButton(!shoudShowBackButton, animated: false)
         title = NSLocalizedString("Your Membership", comment: "EplusMemberCardViewController title")
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Close", style: .Done, target: self, action: Selector("closeTapped:"))
     }

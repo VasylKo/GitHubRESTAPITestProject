@@ -123,7 +123,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         "DonationPaymentAmountCell"
   
         XLFormViewController.cellClassesForRowDescriptorTypes()[XLFormRowDescriptorTypeAmbulancePayment] =
-        "EPlusPaymentTableViewCell"
+        "EplusPaymentTableViewCell"
+        
         XLFormViewController.cellClassesForRowDescriptorTypes()[XLFormRowDescriptorTypeOrderHeder] =
         "OrderHeaderViewCell"
         

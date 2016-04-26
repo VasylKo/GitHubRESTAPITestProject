@@ -144,28 +144,6 @@ class MembershipPaymentViewController: XLFormViewController {
             //Payment flow
             let paymentSystem = PaymentSystemProvider.paymentSystemWithItem(strongSelf)
             strongSelf.router.showMembershipPaymentTransactionViewController(from: strongSelf, withPaymentSystem: paymentSystem)
-            
-            /*
-            //MPesa
-            if let cardItem: Box<CardItem> = paymentRow.value as? Box<CardItem> {
-            
-                
-
-                
-                if cardItem.value == .MPesa {
-                    self?.router.showMPesaConfirmPaymentViewController(from: self!, with: self!.plan)
-                }
-                else {
-//                    let paymentController: BraintreePaymentViewController = BraintreePaymentViewController()
-//                    paymentController.amount = self?.plan.price
-//                    paymentController.productName = self?.plan.name
-//                    paymentController.membershipId = self?.plan.objectId
-//                    paymentController.delegate = self
-//                    self?.navigationController?.pushViewController(paymentController, animated: true)
-                }
-
-            }
-*/
         }
         
         confirmDonation.addFormRow(confirmRow)
@@ -178,20 +156,6 @@ class MembershipPaymentViewController: XLFormViewController {
         let cardType = CardItem.cardName(cardItem) ?? NSLocalizedString("Can't get card type")
         let paymentAmount = NSNumber(integer: self.plan.price ?? 0)
         trackEventToAnalytics(AnalyticCategories.membership, action: action, label: cardType, value: paymentAmount)
-    }
-    
-    //MARK: PaymentReponseDelegate
-    
-    func setError(hidden: Bool, error: String?) {
-        self.router.showBraintreeConfirmPaymentViewController(from: self, with: self.plan, creditCardPaymentSuccess: hidden)
-    }
-    
-    func paymentReponse(success: Bool, err: String?) {
-        if(success) {
-            setError(true, error: nil)
-        } else {
-            setError(false, error: err)
-        }
     }
     
     // MARK: XLFormViewController
@@ -232,10 +196,6 @@ extension MembershipPaymentViewController: PurchaseConvertible {
         return plan.objectId
     }
     
-    var quantity: Int {
-        return 1
-    }
-    
     var itemName: String {
         return plan.name ?? ""
     }
@@ -246,10 +206,6 @@ extension MembershipPaymentViewController: PurchaseConvertible {
     
     var paymentTypes: CardItem {
         return cardPaymentTypeSelecred()
-    }
-    
-    var imageURL: NSURL? {
-        return nil
     }
     
     var image: UIImage? {
