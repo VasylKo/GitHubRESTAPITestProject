@@ -18,7 +18,7 @@ protocol EPlusMembershipRouter : BaseRouter {
     
     func showMembershipMemberProfile(from sourceViewController : UIViewController, phoneNumber : String, validationCode : String)
 
-    func showMembershipMemberCardViewController(from sourceViewController : UIViewController, hidesBackButton: Bool)
+    func showMembershipMemberCardViewController(from sourceViewController : UIViewController, hidesBackButton: Bool, canTransitToInfo: Bool)
 
     func showMembershipConfirmDetailsViewController(from sourceViewController : UIViewController, with plan : EPlusMembershipPlan)
     
