@@ -69,13 +69,8 @@ class ProductOrderViewController: XLFormViewController {
         if let startDate = product.startDate, let endDate = product.endData {
             let avaliabilityRow = XLFormRowDescriptor(tag: Tags.Avaliability.rawValue, rowType: XLFormRowDescriptorTypeAvailabilityViewCell)
             setTitleStyleForRow(avaliabilityRow, text: NSLocalizedString("Pick-up avaliability"))
-            
-            let dateFormatter = NSDateFormatter()
-            dateFormatter.dateFormat = "EEE dd yyyy, HH:mm"
-            let startDateString = dateFormatter.stringFromDate(startDate)
-            let endDateString = dateFormatter.stringFromDate(endDate)
-            let availabilityRangeString = "\(startDateString) to \(endDateString)"
-            
+
+            let availabilityRangeString = startDate.toDateString(endDate)
             setSubtitleStyleForRow(avaliabilityRow, text: availabilityRangeString)
         
             productSection.addFormRow(avaliabilityRow)
@@ -155,6 +150,7 @@ class ProductOrderViewController: XLFormViewController {
             if let viewControllers = strongSelf.navigationController?.viewControllers {
                 paymentController.viewControllerToOpenOnComplete = viewControllers[viewControllers.count - 2]
             }
+            paymentController.product = strongSelf.product
             strongSelf.navigationController?.pushViewController(paymentController, animated: true)
 
         }
