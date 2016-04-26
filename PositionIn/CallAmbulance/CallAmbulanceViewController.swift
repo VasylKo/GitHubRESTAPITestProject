@@ -44,12 +44,12 @@ class CallAmbulanceViewController: BaseAddItemViewController {
         super.viewDidLoad()
         view.tintColor = UIScheme.mainThemeColor
         
-        api().getEPlusActiveMembership().onSuccess { [unowned self] (membershipDetails: EplusMembershipDetails?) -> Void in
+        api().getEPlusActiveMembership().onSuccess { [weak self] (membershipDetails: EplusMembershipDetails?) -> Void in
             if membershipDetails?.objectId != CRUDObjectInvalidId {
-                self.addFooterButton(.AlreadyMember)
-                self.userHasAmbulanceMembership = true
+                self?.addFooterButton(.AlreadyMember)
+                self?.userHasAmbulanceMembership = true
             } else {
-                self.addFooterButton(.SignUP)
+                self?.addFooterButton(.SignUP)
             }
         }
     }
