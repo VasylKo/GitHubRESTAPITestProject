@@ -335,6 +335,17 @@ extension ProductOrderViewController: BTDropInViewControllerDelegate {
     func dropInViewController(viewController: BTDropInViewController, didSucceedWithTokenization paymentMethodNonce: BTPaymentMethodNonce) {
         guard let product = product, price = product.price, quantity = self.quantitySelected() else { return  self.dismissPaymentsController() }
         
+        switch paymentMethodNonce.type {
+        case "MasterCard", "Visa" :
+            break
+        default:
+            let alert = UIAlertController(title: "Error", message: "Unfortunately we do not accept the credit card you have provided. Please try again with either Visa or MasterCard.", preferredStyle: .Alert)
+            let action = UIAlertAction(title: "Ok", style: .Cancel, handler: nil)
+            alert.addAction(action)
+            viewController.presentViewController(alert, animated: true, completion: nil)
+            return
+        }
+        
         let priceWitAmount = price * Float(quantity)
         
         api().productCheckoutBraintree(String(priceWitAmount), nonce: paymentMethodNonce.nonce,
