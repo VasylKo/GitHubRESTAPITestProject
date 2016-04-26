@@ -26,7 +26,7 @@ class DonatePaymentController: CommonPaymentViewController {
     //MARK: - Override base class behaviour
     override func paymentDidSuccess() {
         super.paymentDidSuccess()
-        sendDonationEventToAnalytics(action: AnalyticActios.paymentOutcome, label: NSLocalizedString("Payment Completed"))
+        sendDonationEventToAnalytics(label: NSLocalizedString("Payment Completed"))
         
         //Add success donation section
         sectionsCount = 2
@@ -36,7 +36,7 @@ class DonatePaymentController: CommonPaymentViewController {
     
     override func paymentDidFail(error: NSError) {
         super.paymentDidFail(error)
-        sendDonationEventToAnalytics(action: AnalyticActios.paymentOutcome, label: error.localizedDescription)
+        sendDonationEventToAnalytics(label: error.localizedDescription)
     }
     
     override func closeButtonTappedAfterSuccessPayment(sender: AnyObject) {
@@ -48,11 +48,10 @@ class DonatePaymentController: CommonPaymentViewController {
     }
 
     //MARK: - Analytic tracking
-    
-    private func sendDonationEventToAnalytics(action action: String, label: String) {
+    private func sendDonationEventToAnalytics(label label: String) {
         let donationTypeName = AnalyticCategories.labelForDonationType(donationType)
         let paymentAmountNumber = NSNumber(float: paymentSystem.item.totalAmount)
-        trackEventToAnalytics(donationTypeName, action: action, label: label, value: paymentAmountNumber)
+        trackEventToAnalytics(donationTypeName, action: AnalyticActios.paymentOutcome, label: label, value: paymentAmountNumber)
     }
     
 }
