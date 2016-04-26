@@ -56,7 +56,7 @@ class DonatePaymentController: CommonPaymentViewController {
     
 }
 
-//MARK: - Override UITableViewDataSource
+//MARK: - UITableViewDataSource
 extension DonatePaymentController: UITableViewDataSource {
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return sectionsCount
@@ -94,17 +94,8 @@ extension DonatePaymentController: UITableViewDataSource {
     }
 }
 
-//MARK: - Override Delegate
+//MARK: - UITableViewDelegate
 extension DonatePaymentController: UITableViewDelegate {
-    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        switch section {
-        case 0:
-            return 0
-        default:
-            return UITableViewAutomaticDimension
-        }
-    }
-    
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         switch indexPath {
         case NSIndexPath(forRow: 0, inSection: 0):
