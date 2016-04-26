@@ -86,12 +86,16 @@ final class BraintreePaymentSystem: NSObject, PaymentSystem {
         controller.paymentRequest?.summaryTitle = item.itemName
         controller.paymentRequest?.displayAmount = item.totalAmountFofmattedString
         
-        //Set up description
+        //Set up bage description
         switch item.purchaseType {
         case .Product:
             controller.paymentRequest?.summaryDescription = String(format: summaryFormat, NSLocalizedString("Quantity:"), String(item.quantity))
-        default:
+        case .Donation:
             controller.paymentRequest?.summaryDescription = NSLocalizedString("Donation")
+        case .Membership:
+            controller.paymentRequest?.summaryDescription = NSLocalizedString("Membership plan")
+        case .Eplus:
+            controller.paymentRequest?.summaryDescription = NSLocalizedString("Eplus plan")
         }
         
         controller.paymentRequest?.callToActionText = String(format: callToActionTextFormat, item.totalAmountFofmattedString, NSLocalizedString("Pay"))

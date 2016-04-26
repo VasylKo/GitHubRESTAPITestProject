@@ -10,7 +10,7 @@ import UIKit
 import BrightFutures
 
 enum PurchaseType {
-    case Donation, Membership, Product
+    case Donation, Membership, Eplus, Product
 }
 
 protocol PurchaseConvertible {
