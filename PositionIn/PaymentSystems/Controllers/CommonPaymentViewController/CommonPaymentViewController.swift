@@ -34,9 +34,11 @@ class CommonPaymentViewController: UIViewController, PaymentController {
         
         paymentSystem.purchase().onSuccess { [weak self] _ in
             guard let strongSelf = self else { return }
+            strongSelf.headerView?.showSuccess()
             strongSelf.paymentDidSuccess()
             }.onFailure { [weak self] error in
                 guard let strongSelf = self else { return }
+                strongSelf.headerView?.showFailure()
                 strongSelf.paymentDidFail(error)
         }
     
@@ -75,16 +77,16 @@ class CommonPaymentViewController: UIViewController, PaymentController {
     
     //MARK: - Internal func
     internal func paymentDidSuccess() {
-        headerView?.showSuccess()
+        //add close button to navigation bat
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Close", style: .Done, target: self, action: Selector("closeButtonTappedAfterSuccessPayment:"))
     }
     
+    //Override for cuctome implementation
     internal func closeButtonTappedAfterSuccessPayment(sender: AnyObject) {
-        print("Father")
+        navigationController?.popViewControllerAnimated(true)
     }
     
     internal func paymentDidFail(error: NSError) {
-        headerView?.showFailure()
         //Enable back button, so user can go back and correct payment info
         navigationItem.setHidesBackButton(false, animated: true)
     }
