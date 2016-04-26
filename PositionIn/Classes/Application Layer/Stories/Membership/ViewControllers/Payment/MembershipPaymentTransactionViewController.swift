@@ -13,6 +13,7 @@ class MembershipPaymentTransactionViewController: CommonPaymentViewController {
     // MARK: - Rivate ivars
     private let router : MembershipRouter
     private let pageView = MembershipPageView(pageCount: 3)
+    private var sectionsCount = 1
     
     // MARK: - Init, PaymentController
     init (router: MembershipRouter, paymentSystem: PaymentSystem) {
@@ -33,6 +34,10 @@ class MembershipPaymentTransactionViewController: CommonPaymentViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupInterface()
+        
+        tableView?.dataSource = self
+        tableView?.delegate = self
+        tableView?.registerNib(UINib(nibName: String(PaymentTableViewCell.self), bundle: nil), forCellReuseIdentifier: String(PaymentTableViewCell.self))
     }
     
     
@@ -76,4 +81,45 @@ class MembershipPaymentTransactionViewController: CommonPaymentViewController {
         trackEventToAnalytics(AnalyticCategories.membership, action: AnalyticActios.paymentOutcome, label: label, value: paymentAmountNumber)
     }
 
+}
+
+//MARK: - UITableViewDataSource
+extension MembershipPaymentTransactionViewController: UITableViewDataSource {
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return sectionsCount
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        switch section {
+        case 0:
+            return 1
+        default:
+            return 0
+        }
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        switch indexPath {
+        case NSIndexPath(forRow: 0, inSection: 0):
+            let cell = tableView.dequeueReusableCellWithIdentifier(String(PaymentTableViewCell.self), forIndexPath: indexPath) as! PaymentTableViewCell
+            cell.totalLabel.text = paymentSystem.item.totalAmountFofmattedString
+            cell.planName.text = paymentSystem.item.itemName
+            cell.planImageView.image = paymentSystem.item.image
+            return cell
+        default:
+            return UITableViewCell()
+        }
+    }
+}
+
+//MARK: - UITableViewDelegate
+extension MembershipPaymentTransactionViewController: UITableViewDelegate {
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        switch indexPath {
+        case NSIndexPath(forRow: 0, inSection: 0):
+            return PaymentTableViewCell.cellHeight
+        default:
+            return UITableViewAutomaticDimension
+        }
+    }
 }
