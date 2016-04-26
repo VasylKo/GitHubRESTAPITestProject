@@ -6956,11 +6956,7 @@
 					"-ObjC",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -D \"PROD_ENV\"";
-<<<<<<< HEAD
 				PRODUCT_BUNDLE_IDENTIFIER = com.connectik.members;
-=======
-				PRODUCT_BUNDLE_IDENTIFIER = com.connectik.members.sta2;
->>>>>>> staging2
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "9a031cc8-1c31-4a42-bd96-a2c75c3e97a6";
 				SWIFT_OBJC_BRIDGING_HEADER = "PositionIn/PositionIn-Bridging-Header.h";
