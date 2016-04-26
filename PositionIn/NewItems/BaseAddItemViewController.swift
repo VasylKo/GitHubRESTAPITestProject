@@ -305,7 +305,7 @@ class BaseAddItemViewController: XLFormViewController {
         }
     }
     
-    private func addAssets(assets: [PHAsset]) {
+    func addAssets(assets: [PHAsset]) {
         Log.debug?.message("Select images \(assets)")
         currentImageRowDescriptor?.value = assets
         currentImageRowDescriptor?.cellForFormController(self).update()
