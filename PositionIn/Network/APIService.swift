@@ -30,6 +30,41 @@ extension Future {
     }
 }
 
+//MARK: - Custom serializer -
+private extension Alamofire.Request {
+    
+    //MARK: - Custom serializer -
+    private static func CustomResponseSerializerWithEmptyResponse<T>(mapping: AnyObject? -> T?) -> ResponseSerializer<T, NSError> {
+        return ResponseSerializer { request, response, data, error in
+            guard error == nil else { return .Failure(error!) }
+            
+            let JSONResponseSerializer = Request.JSONResponseSerializer(options: .AllowFragments)
+            let result = JSONResponseSerializer.serializeResponse(request, response, data, error)
+            
+            switch result {
+            case .Success(let json):
+                guard let object = mapping(json) else {
+                    if  let jsonDict = json as? [String: AnyObject],
+                        let msg = jsonDict["error"] as? String {
+                            if let statusCode = response?.statusCode where statusCode == 400 || statusCode == 401 {
+                                return .Failure(NetworkDataProvider.ErrorCodes.InvalidSessionError.error(localizedDescription: msg))
+                            } else {
+                                return .Failure(NetworkDataProvider.ErrorCodes.TransferError.error(localizedDescription: msg))
+                            }
+                    }
+                    return .Failure(NetworkDataProvider.ErrorCodes.InvalidResponseError.error())
+                }
+                return .Success(object)
+            case .Failure(let error):
+                if let object = mapping(nil) {
+                    return .Success(object)
+                }
+                return .Failure(NetworkDataProvider.ErrorCodes.ParsingError.error(error))
+            }
+        }
+    }
+}
+
 final class APIService {
     init (
         url: NSURL,
@@ -326,6 +361,13 @@ final class APIService {
         hourEvacuationNumbers.append("Landline +254-20-2655251")
         hourEvacuationGroups.append(InfoGroup(title: "Emergency numbers", infoBlocks: hourEvacuationNumbers))
         
+        
+        var hourEvacuationLinks = [TextLink(title: "1199", type: .PhoneNumber)]
+        hourEvacuationLinks.append(TextLink(title: "0700 395 395", type: .PhoneNumber))
+        hourEvacuationLinks.append(TextLink(title: "0738 395 395", type: .PhoneNumber))
+        hourEvacuationLinks.append(TextLink(title: "+254-20-2655251", type: .PhoneNumber))
+        hourEvacuation.textLinks = hourEvacuationLinks
+        
         var hourEvacuationTypesOfAmbulance = [String]()
         hourEvacuationTypesOfAmbulance.append("Basic Life Support ambulances (BLS) and Advanced Cardiac Life Support ambulances (ACLS)")
         hourEvacuationTypesOfAmbulance.append("We have Landcruiser and Toyota Hiace High Roof ambulances")
@@ -377,16 +419,19 @@ final class APIService {
         evacuationBookAnAmbulance.append("Whether medical report, VISA and vaccination have been done")
         evacuationBookAnAmbulance.append("Date and time of the intended ambulance transfer")
         evacuationBookAnAmbulance.append("Name of person accompanying and relationship, if available")
-        hourEvacuationGroups.append(InfoGroup(title: "How to book an ambulance", infoBlocks: evacuationBookAnAmbulance))
+        evacuationGroups.append(InfoGroup(title: "How to book an ambulance", infoBlocks: evacuationBookAnAmbulance))
         
         evacuation.infoBlocks = evacuationGroups
-        
+        evacuation.textLinks = [TextLink(title: "dispatch@eplus.co.ke", type: .Email)]
         items.append(evacuation)
         
     
+        
+        
+        
         var eventCoverage = EPlusService()
         eventCoverage.objectId = CRUDObjectId(2)
-        eventCoverage.name = "Cross Border Evacuation"
+        eventCoverage.name = "Event Coverage"
         eventCoverage.shortDesc = "Corporate, school, sports, liveshows"
         eventCoverage.serviceDesc = "Via this service, we provide appropriate standby ambulances and personnel for sporting events, safari rally, meetings, launches with large crowds, funeral gatherings and parties etc."
         eventCoverage.footnote = "A small fee will be charged to non-members depending on the distance"
@@ -399,6 +444,7 @@ final class APIService {
         var eventRequestTheService = [String]()
         eventRequestTheService.append("Send to us the details of the event one week prior to the event, send us its details including date, start and end time, nature of the event, location, number of participants, telephone contacts, postal address and person/organisation paying for the event.\n\nAlternatively, you can fill in the event request form below and send to dispatch@eplus.co.ke")
         eventCoverageGroups.append(InfoGroup(title: "How to request the service ", infoBlocks: eventRequestTheService))
+        eventCoverage.textLinks = [TextLink(title: "dispatch@eplus.co.ke", type: .Email)]
         
         var eventConfirmation = [String]()
         eventConfirmation.append("We will send you a quotation within the same day and wait for payment. Confirmation will be done once payment has been made.")
@@ -423,13 +469,34 @@ final class APIService {
         return Future(value: CollectionResponse(items:items, total: items.count), delay: 0.5)
     }
     
-    func getEPlusActiveMembership() -> Future<EplusMembershipDetails, NSError> {
+    func getEPlusActiveMembership() -> Future<EplusMembershipDetails, NSError> {    
         let endpoint = EplusMembershipDetails.endpoint()
-        return getObject(endpoint)
+
+        let responseMapping: AnyObject? -> EplusMembershipDetails? = { response in
+            if let json = response as? NSDictionary {
+                return Mapper<EplusMembershipDetails>().map(json)
+            }
+            return EplusMembershipDetails()
+        }
+        
+        
+        typealias CRUDResultType = (Alamofire.Request, Future<EplusMembershipDetails, NSError>)
+        
+        let serializer = Alamofire.Request.CustomResponseSerializerWithEmptyResponse(responseMapping)
+        let futureBuilder: (Void -> Future<EplusMembershipDetails, NSError>) = { [unowned self] in
+            return self.session().flatMap {
+                (token: AuthResponse.Token) -> Future<EplusMembershipDetails, NSError> in
+                let request = self.readRequest(token, endpoint: endpoint)
+                let (_ , future): CRUDResultType = self.dataProvider.request(request, serializer: serializer, validation: nil)
+                return future
+            }
+        }
+        
+        return self.handleFailure(futureBuilder)
     }
     
-    func createEPlusOrder(planOptions object: EPlusPlanOptions) -> Future<EplusMembershipDetails, NSError> {
-        let endpoint = EPlusPlanOptions.endpoint()
+    func createEPlusOrder(planParameters object: EPlusPlanParameters) -> Future<EplusMembershipDetails, NSError> {
+        let endpoint = EPlusPlanParameters.endpoint()
         
         let responseMapping: AnyObject? -> EplusMembershipDetails? = { response in
             if let json = response as? NSDictionary {
@@ -535,9 +602,12 @@ final class APIService {
     
     //MARK: - People -
     
-    func getUsers(page: Page) -> Future<CollectionResponse<UserInfo>,NSError> {
+    func getUsers(page: Page, searchString: String? = nil) -> Future<CollectionResponse<UserInfo>,NSError> {
         let endpoint = UserProfile.endpoint()
-        let params = page.query
+        var params = page.query
+        if let searchString = searchString {
+            params["name"] = searchString
+        }
         return getObjectsCollection(endpoint, params: params)
     }
     
@@ -561,15 +631,20 @@ final class APIService {
         return handleFailure(futureBuilder)
     }
     
-    func getMySubscriptions() -> Future<CollectionResponse<UserInfo>,NSError> {
+    func getMySubscriptions(searchString: String? = nil) -> Future<CollectionResponse<UserInfo>,NSError> {
         return currentUserId().flatMap { userId in
-            return self.getUserSubscriptions(userId)
+            return self.getUserSubscriptions(userId, searchString: searchString)
         }
     }
     
-    func getUserSubscriptions(userId: CRUDObjectId) -> Future<CollectionResponse<UserInfo>,NSError> {
+    func getUserSubscriptions(userId: CRUDObjectId, searchString: String? = nil) -> Future<CollectionResponse<UserInfo>,NSError> {
         let endpoint = UserProfile.subscripttionEndpoint(userId)
-        return getObjectsCollection(endpoint, params: nil)
+        var params: [String : AnyObject] = [String : AnyObject]()
+        if let searchString = searchString {
+            params["name"] = searchString
+        }
+        
+        return getObjectsCollection(endpoint, params: params)
     }
     
     func getSubscriptionStateForUser(userId: CRUDObjectId) -> Future<UserProfile.SubscriptionState, NSError> {

@@ -11,10 +11,12 @@ import UIKit
 class EPlusMembershipRouterImplementation: BaseRouterImplementation, EPlusMembershipRouter {
     
     func showInitialViewController(from sourceViewController : UIViewController, hasActivePlan: Bool? = nil) {
-        api().getEPlusActiveMembership().onSuccess { _ -> Void in
-            self.showMembershipMemberCardViewController(from: sourceViewController, showBackButton: true)
-        }.onFailure { _ -> Void in
-            self.showPlansViewController(from: sourceViewController, onlyPlansInfo: false)
+        api().getEPlusActiveMembership().onSuccess { (membershipDetails: EplusMembershipDetails?) -> Void in
+            if membershipDetails?.objectId != CRUDObjectInvalidId {
+                self.showCallAmbulanceViewController(from: sourceViewController)
+            } else {
+                self.showPlansViewController(from: sourceViewController, onlyPlansInfo: false)
+            }
         }
     }
     
@@ -33,8 +35,10 @@ class EPlusMembershipRouterImplementation: BaseRouterImplementation, EPlusMember
             animated: true)
     }
     
-    func showMembershipMemberCardViewController(from sourceViewController : UIViewController, showBackButton: Bool) {
-        sourceViewController.navigationController?.pushViewController(EPlusMemberCardViewController(router: self, showBackButton: showBackButton), animated: true)
+    func showMembershipMemberCardViewController(from sourceViewController : UIViewController, hidesBackButton: Bool, canTransitToInfo: Bool) {
+        let cardViewController = EPlusMemberCardViewController(router: self, canTransitToInfo: canTransitToInfo)
+        cardViewController.navigationItem.hidesBackButton = hidesBackButton
+        sourceViewController.navigationController?.pushViewController(cardViewController, animated: true)
     }
     
     

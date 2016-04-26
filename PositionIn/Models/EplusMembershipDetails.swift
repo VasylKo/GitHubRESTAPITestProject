@@ -9,7 +9,7 @@
 import Foundation
 import ObjectMapper
 
-struct EPlusPlanOptions : Mappable {
+struct EPlusPlanParameters : Mappable {
     var id : String?
     var companyName : String?
     var dependentsCount : Int?
@@ -113,7 +113,7 @@ struct EplusMembershipDetails : CRUDObject {
     var status : MembershipDetailsStatus = .Unknown
     var daysLeft : Int?
 
-    var planOptions : EPlusPlanOptions?
+    var planParameters : EPlusPlanParameters?
     
     //MARK: Mappable
     
@@ -122,6 +122,7 @@ struct EplusMembershipDetails : CRUDObject {
     }
     
     mutating func mapping(map: Map) {
+        objectId <-  map["cardId"]
         membershipCardId <-  map["cardId"]
         membershipPlanId <- map["membershipPlanId"]
         startDate <- (map["startDate"], APIDateTransform())
@@ -129,7 +130,7 @@ struct EplusMembershipDetails : CRUDObject {
         status <- map["status"]
         daysLeft <- map["daysLeft"]
         active <- map["active"]
-        planOptions <- map["details"]
+        planParameters <- map["details"]
     }
     
     static func endpoint() -> String {

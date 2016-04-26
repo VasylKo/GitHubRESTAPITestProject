@@ -15,7 +15,7 @@ class EPlusMemberCardViewController : UIViewController {
     private let router : EPlusMembershipRouter
     private var profile : UserProfile?
     private var plan : EPlusMembershipPlan?
-    private let shoudShowBackButton: Bool
+    private var canTransitToInfo : Bool
     
     @IBOutlet weak var eplusMemberCardView: EPlusMemberCardView?
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView?
@@ -25,9 +25,9 @@ class EPlusMemberCardViewController : UIViewController {
 
     //MARK: Initializers
     
-    init(router: EPlusMembershipRouter, showBackButton: Bool) {
+    init(router: EPlusMembershipRouter, canTransitToInfo: Bool) {
         self.router = router
-        shoudShowBackButton = showBackButton
+        self.canTransitToInfo = canTransitToInfo
         super.init(nibName: NSStringFromClass(EPlusMemberCardViewController.self), bundle: nil)
     }
     
@@ -52,9 +52,13 @@ class EPlusMemberCardViewController : UIViewController {
     }
     
     func setupInterface() {
-        navigationItem.setHidesBackButton(!shoudShowBackButton, animated: false)
         title = NSLocalizedString("Your Membership", comment: "EplusMemberCardViewController title")
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Close", style: .Done, target: self, action: Selector("closeTapped:"))
+        if canTransitToInfo {
+            let rightButton = UIBarButtonItem(image: UIImage(named: "info_button_icon"), style: .Done, target: self, action: Selector("showAboutController:"))
+            navigationItem.rightBarButtonItem = rightButton
+        } else {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Close", style: .Done, target: self, action: Selector("closeTapped:"))
+        }
     }
     
     
@@ -62,7 +66,11 @@ class EPlusMemberCardViewController : UIViewController {
         api().getMyProfile().flatMap { [weak self] (profile : UserProfile) -> Future<Void, NSError> in
             self?.profile = profile
             
-            return api().getEPlusActiveMembership().flatMap { [weak self] (details : EplusMembershipDetails) -> Future<Void, NSError> in
+            return api().getEPlusActiveMembership().flatMap { [weak self] (details : EplusMembershipDetails?) -> Future<Void, NSError> in
+                guard let details = details else {
+                    return Future()
+                }
+                
                 return api().getEPlusMemberships().flatMap { [weak self] (response : CollectionResponse<EPlusMembershipPlan>) -> Future<Void, NSError> in
                     //api().getEPlusMembership(details.membershipPlanId).flatMap { [weak self] (plan : EPlusMembershipPlan) -> Future<Void, NSError> in
                     if let strongSelf = self, profile = strongSelf.profile {
@@ -94,5 +102,9 @@ class EPlusMemberCardViewController : UIViewController {
     
     func closeTapped(sender: AnyObject) {
         self.router.dismissMembership(from: self)
+    }
+    
+    func showAboutController(sender: AnyObject) {
+        router.showAboutController(from: self)
     }
 }

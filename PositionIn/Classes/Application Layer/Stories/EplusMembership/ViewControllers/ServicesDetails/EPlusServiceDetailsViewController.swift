@@ -7,9 +7,10 @@
 //
 
 import UIKit
+import TTTAttributedLabel
 
-class EPlusServiceDetailsViewController: UIViewController {
-    
+class EPlusServiceDetailsViewController: UIViewController, TTTAttributedLabelDelegate {
+
     @IBOutlet weak var tableView: UITableView!
     private let router : EPlusMembershipRouter
     private let service: EPlusService
@@ -104,7 +105,7 @@ extension EPlusServiceDetailsViewController: UITableViewDataSource {
     func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         
         if let headerView = view as? UITableViewHeaderFooterView {
-            headerView.textLabel?.font = UIFont(name: "Helvetica Neue", size: 13)
+            headerView.textLabel?.font = UIScheme.appRegularFontOfSize(13)
             headerView.textLabel?.textColor = UIColor.redColor()
         }
     }
@@ -131,7 +132,7 @@ extension EPlusServiceDetailsViewController: UITableViewDataSource {
             }
         }
         else {
-            if section > 0, let infoBlocks = service.infoBlocks {
+            if section > 0, let infoBlocks = service.infoBlocks?[section - 1].infoBlocks {
                 numberOfRowsInSection = infoBlocks.count
             }
         }
@@ -148,13 +149,39 @@ extension EPlusServiceDetailsViewController: UITableViewDataSource {
             }
         }
         else {
-            if let infoBlocks = service.infoBlocks, title = infoBlocks[indexPath.row].title {
+            if let infoBlocks = service.infoBlocks, title = infoBlocks[indexPath.section - 1].infoBlocks?[indexPath.row] {
                 cell.showBullet = (infoBlocks.count > 0)
                 cell.planInfoString = title
             }
         }
+        if let textLinks = service.textLinks {
+            for textLink in textLinks {
+                cell.infoLabel.delegate = self
+                let range = (cell.infoLabel.text as? NSString)?.rangeOfString(textLink.title)
+                if range?.location != NSNotFound {
+                    switch textLink.type {
+                    case .PhoneNumber:
+                        cell.infoLabel.addLinkToPhoneNumber(textLink.title, withRange: range!)
+                    case .Email:
+                        cell.infoLabel.addLinkToURL(NSURL(string: "mailto://\(textLink.title)")!, withRange: range!)
+                    case .Url:
+                        cell.infoLabel.addLinkToURL(NSURL(string: "http://\(textLink.title)")!, withRange: range!)
+                    }
+                }
+            }
+        }
         cell.backgroundColor = UIColor.clearColor()
-        cell.userInteractionEnabled = false
         return cell
+    }
+    
+    func attributedLabel(label: TTTAttributedLabel!, didSelectLinkWithURL url: NSURL!) {
+        // TODO: Need to handle url
+        let email = "\(url.user!)@\(url.host!)"
+        MailComposeViewController.presentMailControllerFrom(self, recipientsList: [email])
+    }
+    
+    func attributedLabel(label: TTTAttributedLabel!, didSelectLinkWithPhoneNumber phoneNumber: String!) {
+        let trimmedString = phoneNumber.stringByReplacingOccurrencesOfString(" ", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+        UIApplication.sharedApplication().openURL(NSURL(string: "tel://\(trimmedString)")!)
     }
 }

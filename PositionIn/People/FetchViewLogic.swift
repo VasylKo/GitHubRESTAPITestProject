@@ -52,11 +52,11 @@ class FetchViewLogic<U : CRUDObject, T : Fetcher, D : FetchViewLogicDelegate whe
     
     //MARK: Public
     
-    internal func fetch() {
+    internal func fetch(searchString: String? = nil) {
         Log.error?.message("fetching with \(self.fetcher)...")
         if self.canFetch == true && self.isFetching == false {
             self.isFetching = true
-            self.fetcher.fetch(self.limit, offset: self.offset).onSuccess { [weak self] response in
+            self.fetcher.fetch(self.limit, offset: self.offset, searchString: searchString).onSuccess { [weak self] response in
                 if let strongSelf = self {
                     Log.error?.message("fetch success \(strongSelf)")
                     if response.total <= strongSelf.innerObjects.count + response.items.count {
@@ -71,6 +71,13 @@ class FetchViewLogic<U : CRUDObject, T : Fetcher, D : FetchViewLogicDelegate whe
                     self?.isFetching = false
             }
         }
+    }
+    
+    internal func clearData() {
+        self.offset = 0
+        self.objects = []
+        self.innerObjects = []
+        self.canFetch = true
     }
     
     internal func refresh() {

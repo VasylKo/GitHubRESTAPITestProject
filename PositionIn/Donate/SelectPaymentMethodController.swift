@@ -36,7 +36,7 @@ class SelectPaymentMethodController: UIViewController, XLFormRowDescriptorViewCo
         
         self.infoLabel = UILabel(frame: CGRectZero)
         self.infoLabel.text = NSLocalizedString("Information is sent over a secure connection.", comment: "")
-        self.infoLabel.font = UIFont(name: "Helvetica", size: 14)
+        self.infoLabel.font = UIScheme.appRegularFontOfSize(14)
         self.view.addSubview(self.infoLabel)
      
         self.title = NSLocalizedString("Select Payment Method", comment: "")

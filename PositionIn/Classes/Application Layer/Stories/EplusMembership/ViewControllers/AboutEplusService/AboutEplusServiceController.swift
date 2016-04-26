@@ -92,7 +92,7 @@ class AboutEplusServiceController: UIViewController {
     private func configureContactUsCell(cell: AboutEplusServiceTableViewCell) {
         let image = UIImage(named: "service_5_eplus_icon")
         let title = NSLocalizedString("Contact Us")
-        let subTitle = NSLocalizedString("E-Plus Medical Service")
+        let subTitle = NSLocalizedString("E-Plus Medical Services")
         cell.configureCellWith(title, subTitle: subTitle, image: image)
     }
     

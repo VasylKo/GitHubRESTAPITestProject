@@ -11,10 +11,11 @@ import PosInCore
 import BrightFutures
 import CleanroomLogger
 
-class PeopleFollowingViewController : UIViewController {
+class PeopleFollowingViewController : UIViewController, UISearchBarDelegate {
     
+    @IBOutlet private weak var searchBar: UISearchBar!
     @IBOutlet private weak var tableView: TableView!
-    @IBOutlet weak var noFollowersWorningLabel: UILabel!
+    @IBOutlet private weak var noFollowersWarningLabel: UILabel!
     
     //MARK: Lifecycle
     
@@ -26,6 +27,13 @@ class PeopleFollowingViewController : UIViewController {
         subscribeToNotifications()
         
         reloadData()
+        
+        let gesture = UITapGestureRecognizer(target: self, action: "viewTapped")
+        view.addGestureRecognizer(gesture)
+    }
+    
+    func viewTapped() {
+        view.endEditing(true)
     }
     
     func reloadData() {
@@ -33,7 +41,7 @@ class PeopleFollowingViewController : UIViewController {
         dataRequestToken = InvalidationToken()
         let peopleRequest: Future<CollectionResponse<UserInfo>,NSError>
         
-        let mySubscriptionsRequest = api().getMySubscriptions()
+        let mySubscriptionsRequest = api().getMySubscriptions(searchBar.text)
         if firstFollowingRequestToken.isInvalid {
             peopleRequest = mySubscriptionsRequest
         } else {
@@ -52,9 +60,9 @@ class PeopleFollowingViewController : UIViewController {
         peopleRequest.onSuccess(dataRequestToken.validContext) { [weak self] response in
             if let userList = response.items {
                 Log.debug?.value(userList)
-                
+
                 self?.tableView.hidden = userList.count == 0
-                self?.noFollowersWorningLabel.hidden = !(userList.count == 0)
+                self?.noFollowersWarningLabel.hidden = !(userList.count == 0)
                
                 self?.dataSource.setUserList(userList)
                 self?.tableView.reloadData()
@@ -62,6 +70,19 @@ class PeopleFollowingViewController : UIViewController {
         }
     }
     
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText.characters.count > 2 || searchText.characters.count == 0 {
+            NSObject.cancelPreviousPerformRequestsWithTarget(self)
+            self.performSelector("reloadData", withObject: nil, afterDelay: 2.0)
+        }
+    }
+    
+    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+        NSObject.cancelPreviousPerformRequestsWithTarget(self)
+        self.performSelector("reloadData")
+        searchBar.resignFirstResponder()
+    }
+
     private func subscribeToNotifications() {
         subscriptionUpdateObserver = NSNotificationCenter.defaultCenter().addObserverForName(
             UserProfileViewController.SubscriptionDidChangeNotification,
