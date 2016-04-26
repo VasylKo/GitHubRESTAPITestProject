@@ -50,12 +50,7 @@ class CommunityFeedViewController: BesideMenuViewController, BrowseActionProduce
     }
     
     private func didReceiveCommunity(community: Community) {
-        //TODO: hide icon for volunteer
-        var closed: Bool? = nil
-        if self.controllerType == .Community {
-            closed = community.closed
-        }
-        let headerModel = BrowseCommunityHeaderCellModel(community: community, tapAction: .None, title:community.name ?? "", url:community.avatar, showInfo: true,  isClosed: closed)
+        let headerModel = BrowseCommunityHeaderCellModel(community: community, tapAction: .None, title:community.name ?? "", url:community.avatar, showInfo: true)
         headerModel.actionConsumer = self
         dataSource.items[Sections.Info.rawValue] = [headerModel,
             CommunityStatsCellModel(countMembers: community.membersCount, countPosts: community.postsCount, countEvents: community.eventsCount, type: controllerType)

@@ -53,6 +53,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         locationController = LocationController()
         
         UINavigationBar.appearance().barTintColor = UIColor.bt_colorWithBytesR(237, g: 27, b: 46)
+        UINavigationBar.appearance().translucent = false
         
         super.init()
         
@@ -64,6 +65,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 self?.currentUserDidChange(newProfile)
         }
         
+        let defaults = NSUserDefaults.standardUserDefaults()
+        
+        let kFirstRun = "kFirstRun"
+        if (defaults.objectForKey(kFirstRun) == nil) {
+            SessionController().clearKeychain()
+            defaults.setBool(true, forKey: kFirstRun)
+        }
     }
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
@@ -111,6 +119,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         XLFormViewController.cellClassesForRowDescriptorTypes()[XLFormRowDescriptorTypeMPesaBongaPinView] =
         "MPesaBongaPinCell"
         
+        XLFormViewController.cellClassesForRowDescriptorTypes()[XLFormRowDescriptorTypeDonationPaymentAmountCell] =
+        "DonationPaymentAmountCell"
+  
+        XLFormViewController.cellClassesForRowDescriptorTypes()[XLFormRowDescriptorTypeAmbulancePayment] =
+        "EPlusPaymentTableViewCell"
+        XLFormViewController.cellClassesForRowDescriptorTypes()[XLFormRowDescriptorTypeOrderHeder] =
+        "OrderHeaderViewCell"
+        
+        XLFormViewController.cellClassesForRowDescriptorTypes()[XLFormRowDescriptorTypeAvailabilityViewCell] =
+        "AvailabilityViewCell"
+        
+        XLFormViewController.cellClassesForRowDescriptorTypes()[XLFormRowDescriptorTypeTotalViewCell] =
+        "TotalViewCell"
+        
         BTAppSwitch.setReturnURLScheme("\(NSBundle.mainBundle().bundleIdentifier!).payments")
 
         let settings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound],
@@ -119,7 +141,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIApplication.sharedApplication().registerForRemoteNotifications()
         
         #if DEBUG
-        Fabric.with([Crashlytics.self])
+            Fabric.with([Crashlytics.self])
         #endif
         NewRelicController.start()
         
@@ -210,6 +232,8 @@ extension AppDelegate {
             switch (error.domain, error.code) {
             case (baseErrorDomain, NetworkDataProvider.ErrorCodes.SessionRevokedError.rawValue):
                 self.sidebarViewController?.executeAction(.Login)
+            case (baseErrorDomain, NetworkDataProvider.ErrorCodes.ParsingError.rawValue):
+                break
             default:
                 showWarning(error.localizedDescription)
             }

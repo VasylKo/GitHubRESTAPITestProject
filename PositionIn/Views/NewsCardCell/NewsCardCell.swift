@@ -44,7 +44,10 @@ class NewsCardCell: TableViewCell {
         }
         
         headerLabel.text = self.model?.authorName
+        
+        detailsLabel.hidden = true
         if let date = self.model?.date {
+            detailsLabel.hidden = false
             detailsLabel.text = date.formattedAsTimeAgo()
         }
         

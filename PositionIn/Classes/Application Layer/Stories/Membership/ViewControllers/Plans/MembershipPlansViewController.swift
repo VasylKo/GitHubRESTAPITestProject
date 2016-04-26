@@ -7,9 +7,8 @@
 //
 
 import Foundation
-import MessageUI
 
-class MembershipPlansViewController : UIViewController, UITableViewDelegate, UITableViewDataSource, MFMailComposeViewControllerDelegate {
+class MembershipPlansViewController : UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     private let router : MembershipRouter
     private var plans : [MembershipPlan] = []
@@ -50,7 +49,7 @@ class MembershipPlansViewController : UIViewController, UITableViewDelegate, UIT
         
         api().getMemberships().onSuccess { [weak self] (response : CollectionResponse<MembershipPlan>) in
             self?.activityIndicator.stopAnimating()
-            self?.plans = response.items.filter(){ $0.type == self?.type }
+            self?.plans = response.items.filter(){ $0.type == self?.type }.sort { $0.price < $1.price }
             self?.tableView.reloadData()
         }
         
@@ -139,12 +138,7 @@ class MembershipPlansViewController : UIViewController, UITableViewDelegate, UIT
         let emailAction: UIAlertAction = UIAlertAction(title: emailSupportTitle, style: .Default)
             { action -> Void in
                 trackEventToAnalytics(AnalyticCategories.membership, action: AnalyticActios.alreadyMember, label: emailSupportTitle)
-                let mailComposeViewController = self.configuredMailComposeViewController()
-                if MFMailComposeViewController.canSendMail() {
-                    self.presentViewController(mailComposeViewController, animated: true, completion: nil)
-                } else {
-                    self.showSendMailErrorAlert()
-                }
+                MailComposeViewController.presentMailControllerFrom(self, recipientsList: [self.email])
         }
         actionSheetController.addAction(emailAction)
         
@@ -159,28 +153,5 @@ class MembershipPlansViewController : UIViewController, UITableViewDelegate, UIT
         
         trackEventToAnalytics(AnalyticCategories.membership, action: AnalyticActios.alreadyMember)
         self.presentViewController(actionSheetController, animated: true, completion: nil)
-    }
-    
-    //MARK: MFMailComposeViewControllerDelegate
-    
-    func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
-        controller.dismissViewControllerAnimated(true, completion: nil)
-    }
-    
-    //MARK: Private
-    
-    func configuredMailComposeViewController() -> MFMailComposeViewController {
-        let mailComposerVC = MFMailComposeViewController()
-        mailComposerVC.mailComposeDelegate = self
-        mailComposerVC.setToRecipients([self.email])
-        return mailComposerVC
-    }
-    
-    func showSendMailErrorAlert() {
-        let sendMailErrorAlert = UIAlertView(title: NSLocalizedString("Could Not Send Email"),
-            message: NSLocalizedString("Your device could not send e-mail.  Please check e-mail configuration and try again."),
-            delegate: self,
-            cancelButtonTitle: "OK")
-        sendMailErrorAlert.show()
     }
 }

@@ -66,6 +66,31 @@ enum EducationLevel: Int, CustomStringConvertible  {
     }
 }
 
+enum BloodGroup: Int, CustomStringConvertible  {
+    case Unknown = 0
+    case GroupA
+    case GroupB
+    case GroupAB
+    case GroupO
+    
+    // CustomStringConvertible
+    var description: String {
+        switch self {
+        case .Unknown:
+            return "Don't know"
+        case .GroupA:
+            return "A"
+        case .GroupB:
+            return "B"
+        case .GroupAB:
+            return "AB"
+        case .GroupO:
+            return "O"
+        }
+    }
+}
+
+
 final class UserProfile: CRUDObject {
     var objectId: CRUDObjectId = CRUDObjectInvalidId
     var avatar: NSURL?
@@ -86,6 +111,9 @@ final class UserProfile: CRUDObject {
     var permanentResidence: String?
     var educationLevel: EducationLevel?
     var countyBranch : Community?
+
+    var bloodGroup: BloodGroup?
+    var allergies: String?
     
     var guest: Bool =  false
     var shops: [ObjectInfo]?
@@ -150,6 +178,8 @@ final class UserProfile: CRUDObject {
         countFollowers <- map["followers.count"]
         countFollowing <- map["following.count"]
         countPosts <- map["posts.count"]
+        bloodGroup <- map["bloodGroup"]
+        allergies <- map["allergies"]
     }
     
     static func endpoint() -> String {

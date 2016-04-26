@@ -31,7 +31,7 @@ class EmergencyDetailsController: UIViewController {
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let orderController = segue.destinationViewController  as? OrderViewController {
+        if let orderController = segue.destinationViewController  as? ProductOrderViewController {
             orderController.product = self.product
         }
         if let profileController = segue.destinationViewController  as? UserProfileViewController,
@@ -123,7 +123,7 @@ class EmergencyDetailsController: UIViewController {
             firstSection.append(EmergencyActionItem(title: NSLocalizedString("Navigate", comment: "Emergency"), image: "productNavigate", action: .Navigate))
         }
         if self.product?.links?.isEmpty == false || self.product?.attachments?.isEmpty == false {
-            firstSection.append(EmergencyActionItem(title: NSLocalizedString("More Information"), image: "productTerms&Info", action: .MoreInformation))
+            firstSection.append(EmergencyActionItem(title: NSLocalizedString("Attachments"), image: "productTerms&Info", action: .MoreInformation))
         }
         
         return [zeroSection, firstSection]

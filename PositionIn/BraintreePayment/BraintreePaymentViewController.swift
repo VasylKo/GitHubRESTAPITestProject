@@ -47,6 +47,7 @@ class BraintreePaymentViewController : UIViewController, BTDropInViewControllerD
             let dropInViewController = BTDropInViewController(APIClient: braintreeClient!)
             dropInViewController.delegate = self
             
+            dropInViewController.view.tintColor = UIScheme.mainThemeColor
             dropInViewController.title = NSLocalizedString("Payment Method", comment: "braintree title")
             let summaryFormat = NSLocalizedString("%@ %@", comment: "Order: Summary format")
             dropInViewController.paymentRequest?.summaryTitle = productName

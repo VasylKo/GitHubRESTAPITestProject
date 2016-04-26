@@ -15,6 +15,17 @@ import CleanroomLogger
 
 struct SessionController {
     
+    func clearKeychain() {
+        let keychain = self.keychain
+        
+        keychain[KeychainKeys.AccessTokenKey] = nil
+        keychain[KeychainKeys.RefreshTokenKey] = nil
+        keychain[KeychainKeys.ExpireDateKeyRT] = nil
+        keychain[KeychainKeys.UserIdKey] = nil
+        keychain[KeychainKeys.IsMembershipPlanActive] = nil
+        keychain[KeychainKeys.DeviceToken] = nil
+    }
+    
     func currentUserId() -> CRUDObjectId? {
         return self.userIdValue
     }

@@ -30,7 +30,7 @@ class GiveBloodDetailsViewController: UIViewController {
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let orderController = segue.destinationViewController  as? OrderViewController {
+        if let orderController = segue.destinationViewController  as? ProductOrderViewController {
             orderController.product = self.product
         }
         if let profileController = segue.destinationViewController  as? UserProfileViewController,
@@ -116,7 +116,7 @@ class GiveBloodDetailsViewController: UIViewController {
             zeroSection.append(GiveBloodActionItem(title: NSLocalizedString("Navigate", comment: "GiveBlood"), image: "productNavigate", action: .Navigate))
         }
         if self.product?.links?.isEmpty == false || self.product?.attachments?.isEmpty == false {
-            zeroSection.append(GiveBloodActionItem(title: NSLocalizedString("More Information"), image: "productTerms&Info", action: .MoreInformation))
+            zeroSection.append(GiveBloodActionItem(title: NSLocalizedString("Attachments"), image: "productTerms&Info", action: .MoreInformation))
         }
         
         return [zeroSection]

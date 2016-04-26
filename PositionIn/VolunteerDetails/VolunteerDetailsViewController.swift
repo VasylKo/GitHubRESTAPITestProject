@@ -15,11 +15,22 @@ class VolunteerDetailsViewController: UIViewController {
         switch type {
         case .Volunteer:
             self.title = NSLocalizedString("Volunteer", comment:"")
+            communityTypeLabel.text = NSLocalizedString("Public")
+            communityTypeIcon.image = UIImage(named: "public_comm")
         case .Community:
             self.title = NSLocalizedString("Community", comment: "")
+            if let closed = volunteer?.closed where closed == true {
+                communityTypeLabel.text = NSLocalizedString("Closed")
+                communityTypeIcon.image = UIImage(named: "closed_comm")
+            }
+            else {
+                communityTypeLabel.text = NSLocalizedString("Public")
+                communityTypeIcon.image = UIImage(named: "public_comm")
+            }
         default:
             break
         }
+        
         dataSource.items = productAcionItems()
         dataSource.configureTable(actionTableView)
         reloadData()
@@ -144,7 +155,7 @@ class VolunteerDetailsViewController: UIViewController {
             firstSection.append(VolunteerActionItem(title: NSLocalizedString("Navigate", comment: "BomaHotels"), image: "productNavigate", action: .Navigate))
         }
         if self.volunteer?.links?.isEmpty == false || self.volunteer?.attachments?.isEmpty == false {
-            firstSection.append(VolunteerActionItem(title: NSLocalizedString("More Information"), image: "productTerms&Info", action: .MoreInformation))
+            firstSection.append(VolunteerActionItem(title: NSLocalizedString("Attachments"), image: "productTerms&Info", action: .MoreInformation))
         }
         
         if (self.joinAction != true) {
@@ -180,6 +191,8 @@ class VolunteerDetailsViewController: UIViewController {
         }
     }
     
+    @IBOutlet private weak var communityTypeLabel: UILabel!
+    @IBOutlet private weak var communityTypeIcon: UIImageView!
     @IBOutlet private weak var actionTableView: UITableView!
     @IBOutlet private weak var productImageView: UIImageView!
     @IBOutlet private weak var headerLabel: UILabel!
