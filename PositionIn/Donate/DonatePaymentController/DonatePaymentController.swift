@@ -16,6 +16,8 @@ class DonatePaymentController: CommonPaymentViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView?.dataSource = self
+        tableView?.delegate = self
         tableView?.registerNib(UINib(nibName: String(DonateCell.self), bundle: nil), forCellReuseIdentifier: String(DonateCell.self))
         tableView?.registerNib(UINib(nibName: String(TotalCell.self), bundle: nil), forCellReuseIdentifier: String(TotalCell.self))
         tableView?.registerNib(UINib(nibName: String(SuccessDonationInfoCell.self), bundle: nil), forCellReuseIdentifier: String(SuccessDonationInfoCell.self))
@@ -28,7 +30,7 @@ class DonatePaymentController: CommonPaymentViewController {
         
         //Add success donation section
         sectionsCount = 2
-        tableView.insertSections(NSIndexSet(index: 1), withRowAnimation: .Fade)
+        tableView?.insertSections(NSIndexSet(index: 1), withRowAnimation: .Fade)
         trackScreenToAnalytics(AnalyticsLabels.donateConfirmation)
     }
     
@@ -56,12 +58,12 @@ class DonatePaymentController: CommonPaymentViewController {
 }
 
 //MARK: - Override UITableViewDataSource
-extension DonatePaymentController {
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+extension DonatePaymentController: UITableViewDataSource {
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return sectionsCount
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
             return 2
@@ -72,28 +74,7 @@ extension DonatePaymentController {
         }
     }
     
-    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        switch section {
-        case 0:
-            return 0
-        default:
-            return super.tableView(tableView, heightForHeaderInSection: section)
-        }
-    }
-    
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        switch indexPath {
-        case NSIndexPath(forRow: 0, inSection: 0):
-            return DonateCell.cellHeight
-        case NSIndexPath(forRow: 0, inSection: 1):
-            return SuccessDonationInfoCell.cellHeight
-            
-        default:
-            return UITableViewAutomaticDimension
-        }
-    }
-    
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         switch indexPath {
         case NSIndexPath(forRow: 0, inSection: 0):
             let cell = tableView.dequeueReusableCellWithIdentifier(String(DonateCell.self), forIndexPath: indexPath) as! DonateCell
@@ -110,6 +91,30 @@ extension DonatePaymentController {
             return cell
         default:
             return UITableViewCell()
+        }
+    }
+}
+
+//MARK: - Override Delegate
+extension DonatePaymentController: UITableViewDelegate {
+    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        switch section {
+        case 0:
+            return 0
+        default:
+            return UITableViewAutomaticDimension
+        }
+    }
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        switch indexPath {
+        case NSIndexPath(forRow: 0, inSection: 0):
+            return DonateCell.cellHeight
+        case NSIndexPath(forRow: 0, inSection: 1):
+            return SuccessDonationInfoCell.cellHeight
+            
+        default:
+            return UITableViewAutomaticDimension
         }
     }
 }

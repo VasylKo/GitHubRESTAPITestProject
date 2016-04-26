@@ -149,6 +149,8 @@
 		542EDF941CCE20BA006FE641 /* CommonPaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 542EDF931CCE20BA006FE641 /* CommonPaymentViewController.swift */; };
 		542EDF9E1CCE548E006FE641 /* SuccessDonationInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 542EDF9C1CCE548E006FE641 /* SuccessDonationInfoCell.swift */; };
 		542EDF9F1CCE548E006FE641 /* SuccessDonationInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 542EDF9D1CCE548E006FE641 /* SuccessDonationInfoCell.xib */; };
+		549C6BCE1CCF558D0062435F /* MembershipPaymentTransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 549C6BCD1CCF558D0062435F /* MembershipPaymentTransactionViewController.swift */; };
+		549C6BD01CCF6DCF0062435F /* CommonPaymentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 549C6BCF1CCF6DCF0062435F /* CommonPaymentViewController.xib */; };
 		54A31F961CBBF20900A833C9 /* DonationPaymentAmountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54A31F941CBBF20900A833C9 /* DonationPaymentAmountCell.swift */; };
 		54A31F971CBBF20900A833C9 /* DonationPaymentAmountCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 54A31F951CBBF20900A833C9 /* DonationPaymentAmountCell.xib */; };
 		5DA3850FA75B150D79C68EE1 /* Pods_PositionIn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFAA26C98F322F00903B06FC /* Pods_PositionIn.framework */; };
@@ -778,6 +780,8 @@
 		542EDF931CCE20BA006FE641 /* CommonPaymentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonPaymentViewController.swift; sourceTree = "<group>"; };
 		542EDF9C1CCE548E006FE641 /* SuccessDonationInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuccessDonationInfoCell.swift; sourceTree = "<group>"; };
 		542EDF9D1CCE548E006FE641 /* SuccessDonationInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SuccessDonationInfoCell.xib; sourceTree = "<group>"; };
+		549C6BCD1CCF558D0062435F /* MembershipPaymentTransactionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MembershipPaymentTransactionViewController.swift; sourceTree = "<group>"; };
+		549C6BCF1CCF6DCF0062435F /* CommonPaymentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommonPaymentViewController.xib; sourceTree = "<group>"; };
 		54A31F941CBBF20900A833C9 /* DonationPaymentAmountCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DonationPaymentAmountCell.swift; sourceTree = "<group>"; };
 		54A31F951CBBF20900A833C9 /* DonationPaymentAmountCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DonationPaymentAmountCell.xib; sourceTree = "<group>"; };
 		56DAF56D2A99203B14E2570B /* Pods-PositionIn.stagingrelease.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PositionIn.stagingrelease.xcconfig"; path = "Pods/Target Support Files/Pods-PositionIn/Pods-PositionIn.stagingrelease.xcconfig"; sourceTree = "<group>"; };
@@ -2003,6 +2007,7 @@
 			isa = PBXGroup;
 			children = (
 				542EDF931CCE20BA006FE641 /* CommonPaymentViewController.swift */,
+				549C6BCF1CCF6DCF0062435F /* CommonPaymentViewController.xib */,
 			);
 			path = CommonPaymentViewController;
 			sourceTree = "<group>";
@@ -2078,6 +2083,7 @@
 			isa = PBXGroup;
 			children = (
 				CD21EA521C68E46000E50909 /* MembershipPaymentViewController.swift */,
+				549C6BCD1CCF558D0062435F /* MembershipPaymentTransactionViewController.swift */,
 			);
 			path = Payment;
 			sourceTree = "<group>";
@@ -4583,6 +4589,7 @@
 				D1AEF6881CC4F0370030C695 /* EPlusCorporateAmbulanceDetailsController.xib in Resources */,
 				CD8ED0DE1C60BE7000576DBF /* MembershipCardView.xib in Resources */,
 				18CCFB011C8D8AEB00603C7F /* MembershipMemberDetailsViewController.xib in Resources */,
+				549C6BD01CCF6DCF0062435F /* CommonPaymentViewController.xib in Resources */,
 				50C7B5B21BC6A32900E8E8B4 /* PositionIn.SettingsViewController.xib in Resources */,
 				D1AEF68D1CC506B40030C695 /* EPlusCorporatePlanOptionTableViewCell.xib in Resources */,
 				5419F98B1CC52EDF000E16E7 /* AboutEplusServiceTableViewCell.xib in Resources */,
@@ -5121,6 +5128,7 @@
 				D153AB841C11FA9B00DFB5C9 /* AmbulanceRequest.swift in Sources */,
 				23F6AF871CA28BB000CDD2FF /* Fetcher.swift in Sources */,
 				D13039FB1C721960004B673F /* AttendEventCell.swift in Sources */,
+				549C6BCE1CCF558D0062435F /* MembershipPaymentTransactionViewController.swift in Sources */,
 				D1379E901C2AC58F0041AA4E /* ExploreViewController.swift in Sources */,
 				E60EBF761B8EF9B50014B6ED /* DataTransforms.swift in Sources */,
 				50F730591BBBE86A008D3D94 /* CommentCell.swift in Sources */,

@@ -163,21 +163,22 @@ class DonateViewController: XLFormViewController {
         confirmRow.cellConfig["textLabel.textAlignment"] =  NSTextAlignment.Center.rawValue
 
         confirmRow.action.formBlock = { [weak self] row in
-            self?.deselectFormRow(row)
+            guard let strongSelf = self else { return }
+            strongSelf.deselectFormRow(row)
             
-            let validationErrors : Array<NSError> = self?.formValidationErrors() as! Array<NSError>
+            let validationErrors : Array<NSError> = strongSelf.formValidationErrors() as! Array<NSError>
             if (validationErrors.count > 0){
                 return
             }
             
-            self?.sendDonationEventToAnalytics(action: AnalyticActios.proceedToPay)
+            strongSelf.sendDonationEventToAnalytics(action: AnalyticActios.proceedToPay)
             
             //Payment flow
-            let paymentSystem = PaymentSystemProvider.paymentSystemWithItem(self!)
+            let paymentSystem = PaymentSystemProvider.paymentSystemWithItem(strongSelf)
             let paymentController = DonatePaymentController(paymentSystem: paymentSystem)
-            paymentController.viewControllerToOpenOnComplete = self?.viewControllerToOpenOnComplete
-            paymentController.donationType = self?.donationType ?? .Donation
-            self?.navigationController?.pushViewController(paymentController, animated: true)
+            paymentController.viewControllerToOpenOnComplete = strongSelf.viewControllerToOpenOnComplete
+            paymentController.donationType = strongSelf.donationType
+            strongSelf.navigationController?.pushViewController(paymentController, animated: true)
 
         }
         

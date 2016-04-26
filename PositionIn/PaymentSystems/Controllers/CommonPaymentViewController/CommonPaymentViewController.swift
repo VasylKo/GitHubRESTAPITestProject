@@ -8,21 +8,19 @@
 
 import UIKit
 
-/*
-    This is common payment view controller with table view. The table has a header view wich can show payment transaction status on completion.
-*/
-
-class CommonPaymentViewController: UITableViewController, PaymentController {
+//This is common payment view controller with table view. The table has a header view wich can show payment transaction status on completion.
+//Attention: table view delegaate and datasource are not set!
+class CommonPaymentViewController: UIViewController, PaymentController {
     
     // MARK: - Internal ivar
     internal let paymentSystem: PaymentSystem
-    
+    @IBOutlet var tableView: UITableView?
     private var headerView : CommonTransactionStatusView?
     
     // MARK: - Init, PaymentController
     required init(paymentSystem: PaymentSystem) {
         self.paymentSystem = paymentSystem
-        super.init(style: .Grouped)
+        super.init(nibName: String(CommonPaymentViewController.self), bundle: nil)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -41,7 +39,26 @@ class CommonPaymentViewController: UITableViewController, PaymentController {
                 guard let strongSelf = self else { return }
                 strongSelf.paymentDidFail(error)
         }
+    
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        sizeHeaderToFit()
+    }
+    
+    private func sizeHeaderToFit() {
+        guard let headerView = tableView?.tableHeaderView else { return }
         
+        headerView.setNeedsLayout()
+        headerView.layoutIfNeeded()
+        
+        let height = headerView.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize).height
+        var frame = headerView.frame
+        frame.size.height = height
+        headerView.frame = frame
+        
+        tableView?.tableHeaderView = headerView
     }
         
     // MARK: - Privvate implementation
@@ -52,7 +69,7 @@ class CommonPaymentViewController: UITableViewController, PaymentController {
         //Set header transaction status view
         if let headerView = NSBundle.mainBundle().loadNibNamed(String(CommonTransactionStatusView.self), owner: nil, options: nil).first as? CommonTransactionStatusView {
             self.headerView = headerView
-            tableView.tableHeaderView = headerView
+            tableView?.tableHeaderView = headerView
         }
     }
     
