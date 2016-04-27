@@ -345,20 +345,12 @@ struct Storyboards {
             return self.storyboard.instantiateViewControllerWithIdentifier("SelectPaymentMethodController") as! SelectPaymentMethodController
         }
 
-        static func instantiateBraintreePaymentViewController() -> BraintreePaymentViewController {
-            return self.storyboard.instantiateViewControllerWithIdentifier("BraintreePaymentViewController") as! BraintreePaymentViewController
-        }
-
         static func instantiateDonateNotificationViewController() -> DonateNotificationViewController {
             return self.storyboard.instantiateViewControllerWithIdentifier("DonateNotificationViewController") as! DonateNotificationViewController
         }
 
         static func instantiateAmbulanceRequestedViewControllerId() -> AmbulanceRequestedViewController {
             return self.storyboard.instantiateViewControllerWithIdentifier("AmbulanceRequestedViewControllerId") as! AmbulanceRequestedViewController
-        }
-
-        static func instantiatePaymentCompletedViewController() -> PaymentCompletedViewController {
-            return self.storyboard.instantiateViewControllerWithIdentifier("PaymentCompletedViewController") as! PaymentCompletedViewController
         }
     }
 }
@@ -2060,17 +2052,6 @@ extension DonateViewController {
             }
         }
 
-        var destination: UIViewController.Type? {
-            switch (self) {
-            case ShowBraintree:
-                return BraintreePaymentViewController.self
-            case ShowMpesa:
-                return MpesaViewController.self
-            case PaymentCompleted:
-                return PaymentCompletedViewController.self
-            }
-        }
-
         var identifier: String? { return self.description } 
         var description: String { return self.rawValue }
     }
@@ -2081,15 +2062,6 @@ extension DonateViewController {
 extension SelectPaymentMethodController: IdentifiableProtocol { 
     var storyboardIdentifier: String? { return "SelectPaymentMethodController" }
     static var storyboardIdentifier: String? { return "SelectPaymentMethodController" }
-}
-
-
-//MARK: - MpesaViewController
-
-//MARK: - BraintreePaymentViewController
-extension BraintreePaymentViewController: IdentifiableProtocol { 
-    var storyboardIdentifier: String? { return "BraintreePaymentViewController" }
-    static var storyboardIdentifier: String? { return "BraintreePaymentViewController" }
 }
 
 
@@ -2140,9 +2112,5 @@ extension AmbulanceRequestedViewController {
 
 }
 
-//MARK: - PaymentCompletedViewController
-extension PaymentCompletedViewController: IdentifiableProtocol { 
-    var storyboardIdentifier: String? { return "PaymentCompletedViewController" }
-    static var storyboardIdentifier: String? { return "PaymentCompletedViewController" }
-}
+
 

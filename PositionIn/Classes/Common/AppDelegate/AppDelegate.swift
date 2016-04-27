@@ -106,9 +106,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         XLFormViewController.cellClassesForRowDescriptorTypes()[XLFormRowDescriptorTypeTotal] =
         "TotalCell"
-        
-        XLFormViewController.cellClassesForRowDescriptorTypes()[XLFormRowDescriptorTypeMarketPaymentView] =
-        "MarketPaymentView"
 
         XLFormViewController.cellClassesForRowDescriptorTypes()[XLFormRowDescriptorTypeError] =
         "ErrorCell"
@@ -123,7 +120,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         "DonationPaymentAmountCell"
   
         XLFormViewController.cellClassesForRowDescriptorTypes()[XLFormRowDescriptorTypeAmbulancePayment] =
-        "EPlusPaymentTableViewCell"
+        "EplusPaymentTableViewCell"
+        
         XLFormViewController.cellClassesForRowDescriptorTypes()[XLFormRowDescriptorTypeOrderHeder] =
         "OrderHeaderViewCell"
         

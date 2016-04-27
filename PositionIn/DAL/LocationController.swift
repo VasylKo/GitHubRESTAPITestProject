@@ -87,7 +87,6 @@ final class LocationController {
             let myLocation = CLLocation(latitude: myCoordinate.latitude, longitude: myCoordinate.longitude)
             let startLocation = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
             var distanceInMeters = myLocation.distanceFromLocation(startLocation)
-            distanceInMeters = 490
             var distancePrefix = ""
             if let roundDistance = self?.roundDistance(distanceInMeters) {
                 distanceInMeters = roundDistance.distance

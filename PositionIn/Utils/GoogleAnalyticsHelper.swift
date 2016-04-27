@@ -229,6 +229,7 @@ struct AnalyticCategories {
     static let messages = NSLocalizedString("Messages")
     static let people = NSLocalizedString("People")
     static let wallet = NSLocalizedString("Wallet")
+    static let product = NSLocalizedString("Product")
     static let settings = NSLocalizedString("Settings")
     static let profile = NSLocalizedString("Profile")
     static let bomaHotels = NSLocalizedString("BomaHotels")

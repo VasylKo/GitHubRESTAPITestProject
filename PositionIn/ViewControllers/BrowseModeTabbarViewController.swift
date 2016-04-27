@@ -226,7 +226,7 @@ protocol BrowseModeDisplay {
             // Check NSUserDefaults to show project intro page
             let defaults = NSUserDefaults.standardUserDefaults()
             let isProjectInroShowed = defaults.boolForKey(projectsIntroShowedKey)
-            if  !isProjectInroShowed {
+            if  !isProjectInroShowed && homeItem == .Projects {
                 let projectsIntroController = ProjectsIntroViewController()
                 projectsIntroController.browseGridDelegate = self
                 self.navigationController?.pushViewController(projectsIntroController, animated: true)

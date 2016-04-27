@@ -8,7 +8,7 @@
 
 import Foundation
 
-class MPesaIndicatorView: UIView {
+class CommonTransactionStatusView: UIView {
     
     @IBOutlet private weak var paymentCompletedLabel: UILabel!
     @IBOutlet private weak var paymentConfirmationLabel: UILabel!
@@ -17,7 +17,7 @@ class MPesaIndicatorView: UIView {
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        self.frame = CGRect(x: self.frame.origin.x, y: self.frame.origin.y, width: self.frame.size.width, height: 200)
+        self.frame = CGRect(x: self.frame.origin.x, y: self.frame.origin.y, width: self.frame.size.width, height: 110)
     }
     
     func showSuccess() {
