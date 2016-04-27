@@ -64,7 +64,7 @@ final class UserProfileViewController: BesideMenuViewController, BrowseActionPro
             //send event to analytic
             trackEventToAnalytics(AnalyticCategories.people, action: AnalyticActios.followingCount, value: NSNumber(integer: profile.countFollowing ?? 0))
             trackEventToAnalytics(AnalyticCategories.people, action: AnalyticActios.followersCount, value: NSNumber(integer: profile.countFollowers ?? 0))
-        }.onComplete(callback: { [weak self] _ in
+            }.onComplete(callback: { [weak self] _ in
                 self?.tableView.userInteractionEnabled = true
                 })
     }
@@ -97,15 +97,12 @@ final class UserProfileViewController: BesideMenuViewController, BrowseActionPro
     }
     
     private func updateFeed() {
-        var feedModel = BrowseListCellModel(objectId: objectId, actionConsumer: self, browseMode: .New)
-        feedModel.excludeCommunityItems = true
-        feedModel.childFilterUpdate = self.childFilterUpdate
-        
-        //hide user feed
-//        dataSource.items[Sections.Feed.rawValue] = [ feedModel ]
-        
+        var model: BrowseListCellModel = BrowseListCellModel(objectId: objectId, actionConsumer: self, browseMode: .New,
+            filterType: .User)
+        model.childFilterUpdate = childFilterUpdate
+        dataSource.items[Sections.Feed.rawValue] = [model]
         tableView.reloadData()
-//        actionConsumer?.browseControllerDidChangeContent(self)
+        actionConsumer?.browseControllerDidChangeContent(self)
     }
     
     override func contentDidChange(sender: AnyObject?, info: [NSObject : AnyObject]?) {
@@ -114,7 +111,6 @@ final class UserProfileViewController: BesideMenuViewController, BrowseActionPro
             reloadData()
         }
     }
-
     
     func setNavigationBarButtonItem(isCurrentUser: Bool) {
         let navigationBarButtonActionSelector : Selector = "handleNavigationBarButtonItemTap:"
@@ -173,7 +169,6 @@ final class UserProfileViewController: BesideMenuViewController, BrowseActionPro
         } else {
             trackScreenToAnalytics(AnalyticsLabels.peopleDetails)
         }
-        
     }
     
     @IBAction func prepareForUnwind(segue: UIStoryboardSegue) {
