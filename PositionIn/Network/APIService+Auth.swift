@@ -486,7 +486,7 @@ private extension Alamofire.Request {
             guard error == nil else { return .Failure(error!) }
             if let statusCode = response?.statusCode where statusCode == 400 || statusCode == 401 {
                 var attributes = [String: String]()
-                NewRelicController.logWithUser("Refresh token error \(statusCode)", attributes: attributes)
+                NewRelicController.sharedInstance.logWithUser("Refresh token error \(statusCode)", attributes: attributes)
                 
                 return .Failure(NetworkDataProvider.ErrorCodes.SessionRevokedError.error())
             }
