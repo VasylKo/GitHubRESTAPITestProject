@@ -108,7 +108,13 @@ class PhoneNumberViewController: XLFormViewController {
     
     func prepareCountryPhoneCodes() {
         let csvFile = NSBundle.mainBundle().pathForResource("country-codes", ofType: "csv")
-        let content = NSArray(contentsOfCSVFile: csvFile)
+        
+        guard let csvFilePath = csvFile else {
+            return
+        }
+        
+        let csvUrl = NSURL(string: csvFilePath)
+        let content = NSArray(contentsOfCSVURL: csvUrl)
         
         for (index, element) in content.enumerate() {
             if index > 0 {

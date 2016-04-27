@@ -11,7 +11,7 @@ import PosInCore
 import BrightFutures
 import CleanroomLogger
 
-class PeopleExploreViewController : UIViewController, FetchViewLogicDelegate, UITableViewDelegate {
+class PeopleExploreViewController : UIViewController, FetchViewLogicDelegate, UITableViewDelegate, UIGestureRecognizerDelegate {
     
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet private weak var activityIndicator: UIActivityIndicatorView!
@@ -41,9 +41,10 @@ class PeopleExploreViewController : UIViewController, FetchViewLogicDelegate, UI
         subscribeToNotifications()
         
         let gesture = UITapGestureRecognizer(target: self, action: "viewTapped")
+        gesture.delegate = self
         view.addGestureRecognizer(gesture)
     }
-    
+
     override func viewWillAppear(animated: Bool) {
         if self.viewLogic.objects.isEmpty {
             self.viewLogic.fetch()
@@ -144,6 +145,11 @@ class PeopleExploreViewController : UIViewController, FetchViewLogicDelegate, UI
         self.viewLogic.clearData()
         self.viewLogic.fetch(self.searchBar.text)
         searchBar.resignFirstResponder()
+    }
+    
+    //MARK: UIGestureRecognizerDelegate
+    func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldReceiveTouch touch: UITouch) -> Bool {
+        return searchBar.isFirstResponder()
     }
     
 }
