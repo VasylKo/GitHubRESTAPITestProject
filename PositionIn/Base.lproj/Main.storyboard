@@ -871,30 +871,11 @@
             </objects>
             <point key="canvasLocation" x="-959" y="1974"/>
         </scene>
-        <!--Change Password-->
-        <scene sceneID="uon-oT-4oI">
-            <objects>
-                <viewController storyboardIdentifier="ChangePasswordController" id="Lv0-My-tkI" customClass="ChangePasswordViewController" customModule="PositionIn" customModuleProvider="target" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" title="Change Password" id="b4r-PR-kAS">
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="ccz-gC-38N">
-                            <connections>
-                                <action selector="saveButtonPressed:" destination="Lv0-My-tkI" id="dnA-KY-7TR"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="VJj-bK-ODp" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1845" y="1678"/>
-        </scene>
         <!--Settings-->
         <scene sceneID="Pme-xu-DE1">
             <objects>
                 <viewController storyboardIdentifier="SettingsViewController" id="BLF-bw-Lcw" customClass="SettingsViewController" customModule="PositionIn" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" title="Settings" id="FcZ-fa-4Bo"/>
-                    <connections>
-                        <segue destination="Lv0-My-tkI" kind="show" identifier="showChangePassword" id="caV-Og-1vt"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZRn-8Z-5zo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

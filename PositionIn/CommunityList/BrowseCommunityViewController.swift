@@ -27,7 +27,6 @@ class BrowseCommunityViewController: BesideMenuViewController, BrowseCommunityAc
         case Join
         case Post
         case Invite
-        case Edit
         case Leave
         
         func displayText() -> String {
@@ -40,8 +39,6 @@ class BrowseCommunityViewController: BesideMenuViewController, BrowseCommunityAc
                 return NSLocalizedString("POST", comment: "Community action: Post")
             case .Invite:
                 return NSLocalizedString("INVITE", comment: "Community action: Invite")
-            case .Edit:
-                return NSLocalizedString("EDIT", comment: "Community action: Edit")
             case .Leave:
                 return NSLocalizedString("LEAVE", comment: "Community action: Leave")
             }
@@ -214,11 +211,6 @@ class BrowseCommunityViewController: BesideMenuViewController, BrowseCommunityAc
             navigationController?.pushViewController(controller, animated: true)
         case .Invite:
             break
-        case .Edit:
-            let controller = Storyboards.NewItems.instantiateEditCommunityViewController()
-            controller.existingCommunityId = communityId
-            navigationController?.pushViewController(controller, animated: true)
-            self.subscribeForContentUpdates(controller)
         case .Leave:
             api().leaveCommunity(communityId).onSuccess(callback: { (Void) -> Void in
                 self.reloadData()

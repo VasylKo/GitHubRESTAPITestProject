@@ -160,21 +160,6 @@ extension APIService {
             return self.updateCurrentProfileStatus(password)
         }
     }
-
-    //Login via fb
-    func login(fbToken: String) -> Future<UserProfile, NSError> {
-        return facebookLoginRequest(fbToken).flatMap { _ in
-            //TODO: need add saving userName to keychain
-            return self.updateCurrentProfileStatus()
-        }
-    }
-    
-    //Register anonymous user
-    func register() -> Future<UserProfile, NSError> {
-        return registerRequest(nil, username: nil, password: nil, phoneNumber: nil, phoneVerificationCode: nil, info: nil).flatMap { _ in
-            return self.updateCurrentProfileStatus()
-        }
-    }
     
     //Register new user
     func register(username username: String?, password: String?, phoneNumber: String?, phoneVerificationCode: String?, firstName: String?, lastName: String?, email: String?) -> Future<UserProfile, NSError> {
