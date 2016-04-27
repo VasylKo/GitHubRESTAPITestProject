@@ -98,8 +98,6 @@
 		2431EBDC1B945F5A009FB158 /* Promotion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2431EBDB1B945F5A009FB158 /* Promotion.swift */; };
 		2431EBDE1B947442009FB158 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2431EBDD1B947442009FB158 /* Product.swift */; };
 		2431EBE01B94C1DC009FB158 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2431EBDF1B94C1DC009FB158 /* Event.swift */; };
-		243D0AA81B8AF90800B0E220 /* RegisterInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243D0AA71B8AF90800B0E220 /* RegisterInfoViewController.swift */; };
-		24D850421B878730008CAE82 /* LoginSignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D850411B878730008CAE82 /* LoginSignupViewController.swift */; };
 		24EF62111BA81A6B00472531 /* ChatHistoryCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24EF62101BA81A6B00472531 /* ChatHistoryCellModel.swift */; };
 		24EF62141BA81B5800472531 /* ChatHistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24EF62131BA81B5800472531 /* ChatHistoryCell.swift */; };
 		24EF62161BA81DCB00472531 /* PositionIn.ChatHistoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24EF62151BA81DCB00472531 /* PositionIn.ChatHistoryCell.xib */; };
@@ -357,11 +355,6 @@
 		E660E52E1B5AC23B00F52050 /* PositionIn.MainMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E660E52C1B5AC23B00F52050 /* PositionIn.MainMenuViewController.xib */; };
 		E660E5301B5AC28600F52050 /* MainMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E660E52F1B5AC28600F52050 /* MainMenuCell.swift */; };
 		E660E5321B5AC2A200F52050 /* PositionIn.MainMenuCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E660E5311B5AC2A200F52050 /* PositionIn.MainMenuCell.xib */; };
-		E66115871B7376F4003DB5B3 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E66115861B7376F4003DB5B3 /* Login.storyboard */; };
-		E66115891B73771E003DB5B3 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66115881B73771E003DB5B3 /* LoginViewController.swift */; };
-		E661158B1B73774B003DB5B3 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E661158A1B73774A003DB5B3 /* RegisterViewController.swift */; };
-		E661158D1B73778B003DB5B3 /* RecoverPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E661158C1B73778B003DB5B3 /* RecoverPasswordViewController.swift */; };
-		E661158F1B738844003DB5B3 /* BaseLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E661158E1B738844003DB5B3 /* BaseLoginViewController.swift */; };
 		E66115991B73A0CB003DB5B3 /* BrowseListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66115921B73A0CB003DB5B3 /* BrowseListViewController.swift */; };
 		E661159B1B73A0CB003DB5B3 /* PositionIn.BrowseListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E66115941B73A0CB003DB5B3 /* PositionIn.BrowseListViewController.xib */; };
 		E661159D1B73A0CB003DB5B3 /* BrowseMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66115971B73A0CB003DB5B3 /* BrowseMapViewController.swift */; };
@@ -716,8 +709,6 @@
 		2431EBDB1B945F5A009FB158 /* Promotion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Promotion.swift; sourceTree = "<group>"; };
 		2431EBDD1B947442009FB158 /* Product.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		2431EBDF1B94C1DC009FB158 /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
-		243D0AA71B8AF90800B0E220 /* RegisterInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterInfoViewController.swift; sourceTree = "<group>"; };
-		24D850411B878730008CAE82 /* LoginSignupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginSignupViewController.swift; sourceTree = "<group>"; };
 		24EF62101BA81A6B00472531 /* ChatHistoryCellModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatHistoryCellModel.swift; sourceTree = "<group>"; };
 		24EF62131BA81B5800472531 /* ChatHistoryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatHistoryCell.swift; path = Messaging/ChatHistoryCell.swift; sourceTree = "<group>"; };
 		24EF62151BA81DCB00472531 /* PositionIn.ChatHistoryCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PositionIn.ChatHistoryCell.xib; path = Messaging/PositionIn.ChatHistoryCell.xib; sourceTree = "<group>"; };
@@ -1002,11 +993,6 @@
 		E660E53F1B5BCF1A00F52050 /* TableRefreshHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableRefreshHeaderView.swift; sourceTree = "<group>"; };
 		E660E5411B5BCF3800F52050 /* TableViewSectionHeaderFooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewSectionHeaderFooterView.swift; sourceTree = "<group>"; };
 		E660E5431B5BE43900F52050 /* TableViewSectionHeaderFooterLabelView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewSectionHeaderFooterLabelView.swift; sourceTree = "<group>"; };
-		E66115861B7376F4003DB5B3 /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
-		E66115881B73771E003DB5B3 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		E661158A1B73774A003DB5B3 /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
-		E661158C1B73778B003DB5B3 /* RecoverPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecoverPasswordViewController.swift; sourceTree = "<group>"; };
-		E661158E1B738844003DB5B3 /* BaseLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseLoginViewController.swift; sourceTree = "<group>"; };
 		E66115921B73A0CB003DB5B3 /* BrowseListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowseListViewController.swift; sourceTree = "<group>"; };
 		E66115941B73A0CB003DB5B3 /* PositionIn.BrowseListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.BrowseListViewController.xib; sourceTree = "<group>"; };
 		E66115971B73A0CB003DB5B3 /* BrowseMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowseMapViewController.swift; sourceTree = "<group>"; };
@@ -3089,13 +3075,6 @@
 		E66115851B7376DE003DB5B3 /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				E66115861B7376F4003DB5B3 /* Login.storyboard */,
-				E661158E1B738844003DB5B3 /* BaseLoginViewController.swift */,
-				24D850411B878730008CAE82 /* LoginSignupViewController.swift */,
-				E66115881B73771E003DB5B3 /* LoginViewController.swift */,
-				E661158A1B73774A003DB5B3 /* RegisterViewController.swift */,
-				243D0AA71B8AF90800B0E220 /* RegisterInfoViewController.swift */,
-				E661158C1B73778B003DB5B3 /* RecoverPasswordViewController.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -4562,7 +4541,6 @@
 				D12EB2921C96E71200718E57 /* NewsDetailsViewController.xib in Resources */,
 				CD65C5FD1C9988D400C2C11B /* UserProfileAvatarView.xib in Resources */,
 				240A9B9C1B9CCDA4007C77E3 /* PositionIn.CommunityStatsCell.xib in Resources */,
-				E66115871B7376F4003DB5B3 /* Login.storyboard in Resources */,
 				D1DC99391CA27E8D004A992B /* MembershipMessageController.xib in Resources */,
 				D1D391471CA47D430065CC25 /* DonateInfoViewController.xib in Resources */,
 				D1379E8E1C2A98710041AA4E /* PositionIn.ExploreCardCell.xib in Resources */,
@@ -4828,7 +4806,6 @@
 				500D7FA31BC2AACF008C8C82 /* SearchItem.swift in Sources */,
 				CDC2BE121CA191DB0049C971 /* PeopleContainerViewController.swift in Sources */,
 				18817F221C89B28B00FBA6B1 /* DonationDetailsViewController.swift in Sources */,
-				E661158D1B73778B003DB5B3 /* RecoverPasswordViewController.swift in Sources */,
 				50D1AFA61BBAD21400957882 /* PostLikeCommentCell.swift in Sources */,
 				CD795BE71C57B9AA00C1C298 /* BaseRouter.swift in Sources */,
 				D12EB2851C96E5DF00718E57 /* FeedListViewController.swift in Sources */,
@@ -4842,7 +4819,6 @@
 				CDBDD9AA1C47AFDD007578BC /* BrowseVolunteerViewController.swift in Sources */,
 				D1F3E8141C7628C100EFC8ED /* NotificationTableViewCell.swift in Sources */,
 				500D7FAC1BC2CD51008C8C82 /* SearchSectionCell.swift in Sources */,
-				E661158F1B738844003DB5B3 /* BaseLoginViewController.swift in Sources */,
 				D140BE451CC66D57001F9139 /* EPlusServisesTableViewFooter.swift in Sources */,
 				50FE7D8A1BBE77BB005676E2 /* ItemsSearchResultsController.swift in Sources */,
 				D15F474B1C0B77EF009ED3FD /* AmbulanceSentViewController.swift in Sources */,
@@ -4885,7 +4861,6 @@
 				5095611B1C3EBFCD00D3C207 /* BraintreePayment.swift in Sources */,
 				E62B17061B5CE3EB00D446BC /* BrowseViewController.swift in Sources */,
 				E6BEF1E41B9C83F200511B46 /* CommunityHeaderCell.swift in Sources */,
-				243D0AA81B8AF90800B0E220 /* RegisterInfoViewController.swift in Sources */,
 				18CCFAF51C8D841900603C7F /* BoughtProductDetailsViewController.swift in Sources */,
 				E6D4D5B21B6F81A7003134CB /* SearchViewController.swift in Sources */,
 				18817F1E1C897CFB00FBA6B1 /* WalletsCellFactory.swift in Sources */,
@@ -5005,14 +4980,11 @@
 				D118A2AA1C0FBC380020B363 /* CardTableViewCell.swift in Sources */,
 				CDBDD9B31C491617007578BC /* BomaHotel.swift in Sources */,
 				D19BDF341CAD7D3C00F0A887 /* WebViewController.swift in Sources */,
-				E661158B1B73774B003DB5B3 /* RegisterViewController.swift in Sources */,
 				E6BEF1E51B9C83F200511B46 /* CommunityInfoCell.swift in Sources */,
 				E6325F651B57D89A00996480 /* SidebarViewController.swift in Sources */,
 				CD3358201C6CD19A00E78267 /* MoreInformationViewController.swift in Sources */,
 				54A31F961CBBF20900A833C9 /* DonationPaymentAmountCell.swift in Sources */,
-				24D850421B878730008CAE82 /* LoginSignupViewController.swift in Sources */,
 				542EDF761CC92949006FE641 /* ProductOrderViewController.swift in Sources */,
-				E66115891B73771E003DB5B3 /* LoginViewController.swift in Sources */,
 				E6F7A47E1BA356130069152A /* LocationSearchResultsController.swift in Sources */,
 				CD21EA611C68F9FF00E50909 /* MembershipMPesaConfirmPaymentViewController.swift in Sources */,
 				E6018E501B849266001D22FA /* XMPPProcess+Future.swift in Sources */,

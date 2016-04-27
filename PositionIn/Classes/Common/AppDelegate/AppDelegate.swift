@@ -143,7 +143,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         #if DEBUG
             Fabric.with([Crashlytics.self])
         #endif
-        NewRelicController.start()
+//        NewRelicController.start()
         
         let notificationSettings = LNNotificationAppSettings()
         notificationSettings.alertStyle = .Banner

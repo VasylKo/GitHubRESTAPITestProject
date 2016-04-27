@@ -4,7 +4,6 @@
 //
 
 import UIKit
-import PositionIn
 
 //MARK: - Storyboards
 
@@ -204,47 +203,6 @@ struct Storyboards {
 
         static func instantiateBoughtProductDetailsViewControllerId() -> BoughtProductDetailsViewController {
             return self.storyboard.instantiateViewControllerWithIdentifier("BoughtProductDetailsViewControllerId") as! BoughtProductDetailsViewController
-        }
-    }
-
-    struct Login: Storyboard {
-
-        static let identifier = "Login"
-
-        static var storyboard: UIStoryboard {
-            return UIStoryboard(name: self.identifier, bundle: nil)
-        }
-
-        static func instantiateInitialViewController() -> UINavigationController {
-            return self.storyboard.instantiateInitialViewController() as! UINavigationController
-        }
-
-        static func instantiateViewControllerWithIdentifier(identifier: String) -> UIViewController {
-            return self.storyboard.instantiateViewControllerWithIdentifier(identifier)
-        }
-
-        static func instantiateViewController<T: UIViewController where T: IdentifiableProtocol>(type: T.Type) -> T? {
-            return self.storyboard.instantiateViewController(type)
-        }
-
-        static func instantiateLoginSignUpViewController() -> LoginSignupViewController {
-            return self.storyboard.instantiateViewControllerWithIdentifier("LoginSignUpViewController") as! LoginSignupViewController
-        }
-
-        static func instantiateRegisterViewController() -> RegisterViewController {
-            return self.storyboard.instantiateViewControllerWithIdentifier("RegisterViewController") as! RegisterViewController
-        }
-
-        static func instantiateRecoverPasswordViewController() -> RecoverPasswordViewController {
-            return self.storyboard.instantiateViewControllerWithIdentifier("RecoverPasswordViewController") as! RecoverPasswordViewController
-        }
-
-        static func instantiateLoginViewController() -> LoginViewController {
-            return self.storyboard.instantiateViewControllerWithIdentifier("LoginViewController") as! LoginViewController
-        }
-
-        static func instantiateRegisterInfoViewController() -> RegisterInfoViewController {
-            return self.storyboard.instantiateViewControllerWithIdentifier("RegisterInfoViewController") as! RegisterInfoViewController
         }
     }
 
@@ -1419,145 +1377,6 @@ extension BoughtProductDetailsViewController {
     }
 
 }
-
-//MARK: - LoginSignupViewController
-extension UIStoryboardSegue {
-    func selection() -> LoginSignupViewController.Segue? {
-        if let identifier = self.identifier {
-            return LoginSignupViewController.Segue(rawValue: identifier)
-        }
-        return nil
-    }
-}
-
-extension LoginSignupViewController: IdentifiableProtocol { 
-    var storyboardIdentifier: String? { return "LoginSignUpViewController" }
-    static var storyboardIdentifier: String? { return "LoginSignUpViewController" }
-}
-
-extension LoginSignupViewController { 
-
-    enum Segue: String, CustomStringConvertible, SegueProtocol {
-        case SignUpSegueId = "SignUpSegueId"
-        case LoginSegueId = "LoginSegueId"
-
-        var kind: SegueKind? {
-            switch (self) {
-            case SignUpSegueId:
-                return SegueKind(rawValue: "show")
-            case LoginSegueId:
-                return SegueKind(rawValue: "show")
-            }
-        }
-
-        var destination: UIViewController.Type? {
-            switch (self) {
-            case SignUpSegueId:
-                return RegisterViewController.self
-            case LoginSegueId:
-                return LoginViewController.self
-            }
-        }
-
-        var identifier: String? { return self.description } 
-        var description: String { return self.rawValue }
-    }
-
-}
-
-//MARK: - RegisterViewController
-extension UIStoryboardSegue {
-    func selection() -> RegisterViewController.Segue? {
-        if let identifier = self.identifier {
-            return RegisterViewController.Segue(rawValue: identifier)
-        }
-        return nil
-    }
-}
-
-extension RegisterViewController: IdentifiableProtocol { 
-    var storyboardIdentifier: String? { return "RegisterViewController" }
-    static var storyboardIdentifier: String? { return "RegisterViewController" }
-}
-
-extension RegisterViewController { 
-
-    enum Segue: String, CustomStringConvertible, SegueProtocol {
-        case SignUpSegue = "SignUpSegue"
-
-        var kind: SegueKind? {
-            switch (self) {
-            case SignUpSegue:
-                return SegueKind(rawValue: "show")
-            }
-        }
-
-        var destination: UIViewController.Type? {
-            switch (self) {
-            case SignUpSegue:
-                return RegisterInfoViewController.self
-            }
-        }
-
-        var identifier: String? { return self.description } 
-        var description: String { return self.rawValue }
-    }
-
-}
-
-//MARK: - RecoverPasswordViewController
-extension RecoverPasswordViewController: IdentifiableProtocol { 
-    var storyboardIdentifier: String? { return "RecoverPasswordViewController" }
-    static var storyboardIdentifier: String? { return "RecoverPasswordViewController" }
-}
-
-
-//MARK: - LoginViewController
-extension UIStoryboardSegue {
-    func selection() -> LoginViewController.Segue? {
-        if let identifier = self.identifier {
-            return LoginViewController.Segue(rawValue: identifier)
-        }
-        return nil
-    }
-}
-
-extension LoginViewController: IdentifiableProtocol { 
-    var storyboardIdentifier: String? { return "LoginViewController" }
-    static var storyboardIdentifier: String? { return "LoginViewController" }
-}
-
-extension LoginViewController { 
-
-    enum Segue: String, CustomStringConvertible, SegueProtocol {
-        case ForgotPasswordSegueId = "ForgotPasswordSegueId"
-
-        var kind: SegueKind? {
-            switch (self) {
-            case ForgotPasswordSegueId:
-                return SegueKind(rawValue: "show")
-            }
-        }
-
-        var destination: UIViewController.Type? {
-            switch (self) {
-            case ForgotPasswordSegueId:
-                return RecoverPasswordViewController.self
-            }
-        }
-
-        var identifier: String? { return self.description } 
-        var description: String { return self.rawValue }
-    }
-
-}
-
-//MARK: - RegisterInfoViewController
-extension RegisterInfoViewController: IdentifiableProtocol { 
-    var storyboardIdentifier: String? { return "RegisterInfoViewController" }
-    static var storyboardIdentifier: String? { return "RegisterInfoViewController" }
-}
-
 
 //MARK: - AddPostViewController
 extension AddPostViewController: IdentifiableProtocol { 
