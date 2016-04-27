@@ -12,6 +12,15 @@ import ObjectMapper
 import BrightFutures
 import MobileCoreServices
 
+public struct NewRelicObserverNotifications {
+    public static let networkFailureNotification = "networkFailureNotification"
+    public static let URLkey = "URL"
+    public static let httpMethodKey = "HttpMethod"
+    public static let requestDurationKey = "requestDurationKey"
+    public static let errorCodeKey = "errorCodeKey"
+    public static let errorMessageKey = "errorMessageKey"
+}
+
 public class NetworkDataProvider {
     
     /**
@@ -121,6 +130,7 @@ public class NetworkDataProvider {
                     case .Success(let value):
                         p.success(value)
                     case .Failure(let error):
+                        self.postNetworkErrorInfoNotification(response: response)
                         p.failure(error)
                     }
                     
@@ -139,6 +149,18 @@ public class NetworkDataProvider {
         } else {
             return request.validate(statusCode: [] + (200..<300) + (400..<600) )
         }
+    }
+    
+    //MARK: - Post notification for new reloc
+    private func postNetworkErrorInfoNotification<V>(response response: Response<V, NSError>) {
+        let userInfo = [
+            NewRelicObserverNotifications.URLkey : response.request?.URLString ?? "",
+            NewRelicObserverNotifications.httpMethodKey: response.request?.HTTPMethod ?? "",
+            NewRelicObserverNotifications.errorCodeKey : String(response.result.error?.code),
+            NewRelicObserverNotifications.errorMessageKey : response.result.error?.localizedDescription ?? "",
+            NewRelicObserverNotifications.requestDurationKey : String(response.timeline.requestDuration)
+        ]
+        NSNotificationCenter.defaultCenter().postNotificationName(NewRelicObserverNotifications.networkFailureNotification, object: nil, userInfo: userInfo)
     }
 }
 
