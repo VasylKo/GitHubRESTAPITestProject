@@ -59,11 +59,10 @@ final class BraintreePaymentSystem: NSObject, PaymentSystem {
         dropInViewController.delegate = self
         
         //UI setup
+        addCloseButtomToNavigationBar()
         let navigationController = UINavigationController(rootViewController: dropInViewController)
         navigationController.view.tintColor = UIScheme.mainThemeColor
         navigationController.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
-        dropInViewController.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Cancel, target: self, action: Selector("userDidCancelPayment"))
-        dropInViewController.navigationItem.leftBarButtonItem?.tintColor = UIColor.whiteColor()
         dropInViewController.title = NSLocalizedString("Payment Method", comment: "braintree title")
         
         //Search for current VC to present dropInViewController
@@ -76,6 +75,12 @@ final class BraintreePaymentSystem: NSObject, PaymentSystem {
         guard let controller = currentViewController else { promise.failure(paymentError)
         return }
         controller.presentViewController(navigationController, animated: true, completion: nil)
+    }
+    
+    private func addCloseButtomToNavigationBar() {
+        dropInViewController?.navigationItem.leftBarButtonItem = nil
+        dropInViewController?.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Cancel, target: self, action: Selector("userDidCancelPayment"))
+        dropInViewController?.navigationItem.leftBarButtonItem?.tintColor = UIColor.whiteColor()
     }
     
     private func setUpProuctInfoBage(controller: BTDropInViewController) {
@@ -148,19 +153,42 @@ final class BraintreePaymentSystem: NSObject, PaymentSystem {
                 self?.promise.failure(error)
         }
     }
+    
+    //MARK: - Alert
+    private func showAlert(title title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
+        let okActionTitle = NSLocalizedString("Ok")
+        let action = UIAlertAction(title: okActionTitle, style: .Cancel, handler: nil)
+        alert.addAction(action)
+        dropInViewController?.presentViewController(alert, animated: true, completion: nil)
+    }
 }
 
 //MARK: - BTDropInViewControllerDelegate
 extension BraintreePaymentSystem: BTDropInViewControllerDelegate {
-    @objc func dropInViewController(viewController: BTDropInViewController,
-                              didSucceedWithTokenization paymentMethodNonce: BTPaymentMethodNonce) {
-        switch item.purchaseType {
-        case .Donation:
+    @objc func dropInViewController(viewController: BTDropInViewController, didSucceedWithTokenization paymentMethodNonce: BTPaymentMethodNonce) {
+        
+        switch (item.purchaseType, paymentMethodNonce.type) {
+        //Check that only MasterCard and Visa are supported
+        case (_, let cardType) where cardType != "MasterCard" && cardType != "Visa":
+            let alertTitle = NSLocalizedString("Error")
+            let alertMessage = NSLocalizedString("Unfortunately we do not accept the credit card you have provided. Please try again with either Visa or MasterCard.")
+            showAlert(title: alertTitle, message: alertMessage)
+            addCloseButtomToNavigationBar()
+        
+        case (.Donation, _):
             purchaseDonation(withTokenization: paymentMethodNonce)
-        case .Membership, .Eplus:
+        case (.Eplus, _):
+            fallthrough
+        case (.Membership, _):
             purchaseMembership(withTokenization: paymentMethodNonce)
-        case .Product:
+        case (.Product, _):
             purchaseProduct(withTokenization: paymentMethodNonce)
+        default:
+            dismissPaymentsController() { [weak self] _ in
+                guard let strongSelf = self else { return }
+                strongSelf.promise.failure(strongSelf.paymentError)
+            }
         }
         
     }
