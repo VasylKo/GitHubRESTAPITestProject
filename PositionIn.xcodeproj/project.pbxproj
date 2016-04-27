@@ -267,8 +267,6 @@
 		D15F47491C0B77D7009ED3FD /* AmbulanceBaseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15F47481C0B77D7009ED3FD /* AmbulanceBaseController.swift */; };
 		D15F474B1C0B77EF009ED3FD /* AmbulanceSentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15F474A1C0B77EF009ED3FD /* AmbulanceSentViewController.swift */; };
 		D15F474D1C0B7801009ED3FD /* AmbulanceRequestedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15F474C1C0B7801009ED3FD /* AmbulanceRequestedViewController.swift */; };
-		D161F7721C68E4E800EBDB94 /* MarketPaymentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D161F7711C68E4E800EBDB94 /* MarketPaymentView.swift */; };
-		D161F7741C68E4F300EBDB94 /* MarketPaymentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D161F7731C68E4F300EBDB94 /* MarketPaymentView.xib */; };
 		D16772761C997BB100B624FC /* FeedEmergencyDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16772751C997BB100B624FC /* FeedEmergencyDetailsViewController.swift */; };
 		D16772781C9989FE00B624FC /* FeedEmergencyDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D16772771C9989FE00B624FC /* FeedEmergencyDetailsViewController.xib */; };
 		D167727B1C9991B100B624FC /* FeedEmergencyCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D167727A1C9991B100B624FC /* FeedEmergencyCellModel.swift */; };
@@ -907,8 +905,6 @@
 		D15F47481C0B77D7009ED3FD /* AmbulanceBaseController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AmbulanceBaseController.swift; sourceTree = "<group>"; };
 		D15F474A1C0B77EF009ED3FD /* AmbulanceSentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AmbulanceSentViewController.swift; sourceTree = "<group>"; };
 		D15F474C1C0B7801009ED3FD /* AmbulanceRequestedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AmbulanceRequestedViewController.swift; sourceTree = "<group>"; };
-		D161F7711C68E4E800EBDB94 /* MarketPaymentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarketPaymentView.swift; sourceTree = "<group>"; };
-		D161F7731C68E4F300EBDB94 /* MarketPaymentView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MarketPaymentView.xib; sourceTree = "<group>"; };
 		D16772751C997BB100B624FC /* FeedEmergencyDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedEmergencyDetailsViewController.swift; sourceTree = "<group>"; };
 		D16772771C9989FE00B624FC /* FeedEmergencyDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeedEmergencyDetailsViewController.xib; sourceTree = "<group>"; };
 		D167727A1C9991B100B624FC /* FeedEmergencyCellModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedEmergencyCellModel.swift; sourceTree = "<group>"; };
@@ -2507,15 +2503,6 @@
 			path = CallAmbulance;
 			sourceTree = "<group>";
 		};
-		D161F76A1C68E3CA00EBDB94 /* MarketPaymentView */ = {
-			isa = PBXGroup;
-			children = (
-				D161F7711C68E4E800EBDB94 /* MarketPaymentView.swift */,
-				D161F7731C68E4F300EBDB94 /* MarketPaymentView.xib */,
-			);
-			path = MarketPaymentView;
-			sourceTree = "<group>";
-		};
 		D16772791C99912E00B624FC /* CellModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -2608,7 +2595,6 @@
 		D1CAA7471C60AD070046130E /* Payment */ = {
 			isa = PBXGroup;
 			children = (
-				D161F76A1C68E3CA00EBDB94 /* MarketPaymentView */,
 				D1CAA7491C60B1920046130E /* PaymentTableViewCell */,
 			);
 			path = Payment;
@@ -4627,7 +4613,6 @@
 				D1DA176D1C05B7BE0091A8CE /* PositionIn.BrowseGridCollectionViewCell.xib in Resources */,
 				E660E52E1B5AC23B00F52050 /* PositionIn.MainMenuViewController.xib in Resources */,
 				CDB5B5CA1C5B9C2400413715 /* MembershipPlanDetailsViewController.xib in Resources */,
-				D161F7741C68E4F300EBDB94 /* MarketPaymentView.xib in Resources */,
 				18817F231C89B28B00FBA6B1 /* PositionIn.DonationDetailsViewController.xib in Resources */,
 				E6C952351BA1D9960032254F /* PositionIn.ProfileStatsCell.xib in Resources */,
 				542EDF711CC92949006FE641 /* AvailabilityViewCell.xib in Resources */,
@@ -4989,7 +4974,6 @@
 				5419F9801CC52AC1000E16E7 /* AboutEplusServiceController.swift in Sources */,
 				549C6BD21CCF98CF0062435F /* EplusPaymentTransactionViewController.swift in Sources */,
 				D1FD853E1C1EE8D800C2E87B /* PromotionDetailsViewController.swift in Sources */,
-				D161F7721C68E4E800EBDB94 /* MarketPaymentView.swift in Sources */,
 				1840402F1CC500F600DF3655 /* EPlusService.swift in Sources */,
 				E6F074AF1BA6980D00D2566B /* ConversationViewController.swift in Sources */,
 				E6C952361BA1D9960032254F /* ProfileInfoCell.swift in Sources */,
