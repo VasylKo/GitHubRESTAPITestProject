@@ -112,9 +112,6 @@
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </textAttributes>
                     </navigationBar>
-                    <connections>
-                        <segue destination="K9G-R8-bQ8" kind="relationship" relationship="rootViewController" id="gTC-td-TKI"/>
-                    </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zec-Kg-fVr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -204,51 +201,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4QH-aU-lrf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1590" y="581"/>
-        </scene>
-        <!--Filters-->
-        <scene sceneID="7z0-MQ-MCn">
-            <objects>
-                <viewController id="K9G-R8-bQ8" customClass="FilterViewController" customModule="PositionIn" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="2Gd-ni-q0r"/>
-                        <viewControllerLayoutGuide type="bottom" id="kJ7-ZP-Vtb"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="NDg-LM-QRt">
-                        <rect key="frame" x="0.0" y="64" width="600" height="536"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="OAU-5D-fy1" customClass="TableView" customModule="PosInCore">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
-                                <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
-                            </tableView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="OAU-5D-fy1" firstAttribute="leading" secondItem="NDg-LM-QRt" secondAttribute="leading" id="Elr-Ea-HZF"/>
-                            <constraint firstAttribute="trailing" secondItem="OAU-5D-fy1" secondAttribute="trailing" id="Pzf-zh-Tbm"/>
-                            <constraint firstItem="kJ7-ZP-Vtb" firstAttribute="top" secondItem="OAU-5D-fy1" secondAttribute="bottom" id="ep2-Ka-UZj"/>
-                            <constraint firstItem="OAU-5D-fy1" firstAttribute="top" secondItem="2Gd-ni-q0r" secondAttribute="bottom" id="gAp-Ft-0Of"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" title="Filters" id="yMh-mP-AMn">
-                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="YEr-zF-XpM">
-                            <connections>
-                                <action selector="didTapCancel:" destination="K9G-R8-bQ8" id="Gm6-4b-vLE"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Done" id="hBm-78-kfM">
-                            <connections>
-                                <action selector="didTapApply:" destination="K9G-R8-bQ8" id="y62-V5-N5l"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="tableView" destination="OAU-5D-fy1" id="jWw-T1-KE8"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="EFp-4v-aFT" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="919" y="1238"/>
         </scene>
         <!--Browse Community View Controller-->
         <scene sceneID="4gx-Nw-hq8">

@@ -13,7 +13,6 @@ struct BomaHotel: CRUDObject {
     var objectId: CRUDObjectId = CRUDObjectInvalidId
     var name: String?
     var text: String?
-    var category: ItemCategory?
     var quantity: Int?
     var price: Float?
     var donations: Float?
@@ -48,7 +47,6 @@ struct BomaHotel: CRUDObject {
         objectId <- (map["id"], CRUDObjectIdTransform())
         name <- map["name"]
         text <- map["description"]
-        category <- (map["category"], EnumTransform())
         quantity <- map["quantity"]
         price <- map["price"]
         donations <- map["donations"]

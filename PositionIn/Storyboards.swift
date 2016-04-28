@@ -585,9 +585,6 @@ extension CreateConversationContainerViewController: IdentifiableProtocol {
     static var storyboardIdentifier: String? { return "CreateConversationContainerViewController" }
 }
 
-
-//MARK: - FilterViewController
-
 //MARK: - BrowseCommunityViewController
 extension UIStoryboardSegue {
     func selection() -> BrowseCommunityViewController.Segue? {

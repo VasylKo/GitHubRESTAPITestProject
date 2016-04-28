@@ -632,38 +632,36 @@ final class APIService {
     func getAll(homeItem: HomeItem, seachFilter: SearchFilter) -> Future<CollectionResponse<FeedItem>,NSError> {
         let endpoint = homeItem.endpoint()
         
-        //TODO: should refactor
-        
         let params = APIServiceQuery()
-        params.append("type", value: String(homeItem.rawValue))
-        if let itemTypes = seachFilter.itemTypes {
-            var itemTypesArray : [String] = []
-            
-            for (_, value) in itemTypes.enumerate() {
-                itemTypesArray.append(String(value.rawValue))
-            }
-            params.append("type", value: itemTypesArray)
-        }
+//        params.append("type", value: String(homeItem.rawValue))
+//        if let itemTypes = seachFilter.itemTypes {
+//            var itemTypesArray : [String] = []
+//            
+//            for (_, value) in itemTypes.enumerate() {
+//                itemTypesArray.append(String(value.rawValue))
+//            }
+//            params.append("type", value: itemTypesArray)
+//        }
+//        
+//        if let communities = seachFilter.communities {
+//            params.append("communities", value: communities)
+//        }
+//        
+//        if let users = seachFilter.users {
+//            params.append("users", value: users)
+//        }
+//        
+//        
+//        var parameters = [String:AnyObject]()
+//        for (key, value) in params.query {
+//            if let array = value as? [String] {
+//                parameters[key] = array.joinWithSeparator(",")
+//            } else {
+//                parameters[key] = value
+//            }
+//        }
         
-        if let communities = seachFilter.communities {
-            params.append("communities", value: communities)
-        }
-        
-        if let users = seachFilter.users {
-            params.append("users", value: users)
-        }
-        
-        
-        var parameters = [String:AnyObject]()
-        for (key, value) in params.query {
-            if let array = value as? [String] {
-                parameters[key] = array.joinWithSeparator(",")
-            } else {
-                parameters[key] = value
-            }
-        }
-        
-        return self.getObjectsCollection(endpoint, params: parameters)
+        return self.getObjectsCollection(endpoint, params: seachFilter.query)
     }
     
     func getVolunteers() -> Future<CollectionResponse<Community>,NSError> {

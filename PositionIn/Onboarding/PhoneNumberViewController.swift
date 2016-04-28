@@ -120,8 +120,7 @@ class PhoneNumberViewController: XLFormViewController {
             return
         }
         
-        let csvUrl = NSURL(string: csvFilePath)
-        let content = NSArray(contentsOfCSVURL: csvUrl)
+        let content = NSArray(contentsOfCSVFile: csvFilePath)
         
         for (index, element) in content.enumerate() {
             if index > 0 {
