@@ -122,7 +122,7 @@ class BrowseCommunityViewController: BesideMenuViewController, BrowseCommunityAc
                 }
             }
         case .Explore:
-            communitiesRequest = api().getCommunities(APIService.Page())
+            communitiesRequest = api().getCommunities(APIService.Page(start: 0, size: 200))
         }
         communitiesRequest.onSuccess(dataRequestToken.validContext) { [weak self] response in
             if let communities = response.items {
