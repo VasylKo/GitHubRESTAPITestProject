@@ -29,17 +29,12 @@ final class BrowseListViewController: UIViewController, BrowseActionProducer, Br
         }
     }
     
-    //hide separator lines
-    var hideSeparatorLinesNearSegmentedControl: Bool = true
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         dataSource.configureTable(tableView)
         selectedItemType = .Unknown
         
         self.tableView.separatorStyle = self.showCardCells ? .None : .SingleLine
-        self.topSeparatorLine.hidden = hideSeparatorLinesNearSegmentedControl
-        self.bottomSeparatorLine.hidden = hideSeparatorLinesNearSegmentedControl
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -49,13 +44,7 @@ final class BrowseListViewController: UIViewController, BrowseActionProducer, Br
         if let homeItem = homeItem {
             trackScreenToAnalytics(AnalyticsLabels.labelForHomeItem(homeItem, suffix: "List"))
         }
-        
-    }
     
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        self.topSeparatorHeightConstraint.constant = 1 / UIScreen.mainScreen().scale
-        self.bottomSeparatorHeightConstraint.constant = 1 / UIScreen.mainScreen().scale
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -65,12 +54,6 @@ final class BrowseListViewController: UIViewController, BrowseActionProducer, Br
             if self.navigationController?.viewControllers.contains(fromViewController) == false {
                 self.reloadData()
             }
-        }
-
-        //TODO: hot fix for distance
-        let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(1 * Double(NSEC_PER_SEC)))
-        dispatch_after(delayTime, dispatch_get_main_queue()) { [weak self] in
-    //        self?.tableView.reloadData()
         }
     }
     
@@ -89,9 +72,6 @@ final class BrowseListViewController: UIViewController, BrowseActionProducer, Br
     
     var canAffectFilter = true {
         didSet {
-            if self.isViewLoaded() {
-                self.displayModeSegmentedControl.selectedSegmentIndex = 0
-            }
             selectedItemType = .Unknown
         }
     }
@@ -146,12 +126,6 @@ final class BrowseListViewController: UIViewController, BrowseActionProducer, Br
         }
     }
     
-    @IBOutlet weak var topSeparatorLine: UIView!
-    @IBOutlet weak var bottomSeparatorLine: UIView!
-    
-    @IBOutlet weak var topSeparatorHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var bottomSeparatorHeightConstraint: NSLayoutConstraint!
-    
     private lazy var dataSource: FeedItemDatasource = { [unowned self] in
         let dataSource = FeedItemDatasource(shouldShowDetailedCells: self.shoWCompactCells,
             showCardCells: self.showCardCells)
@@ -162,7 +136,6 @@ final class BrowseListViewController: UIViewController, BrowseActionProducer, Br
     weak var actionConsumer: BrowseActionConsumer?
     
     @IBOutlet private(set) internal weak var tableView: UITableView!
-    @IBOutlet private weak var displayModeSegmentedControl: UISegmentedControl!
 }
 
 extension BrowseListViewController: ActionsDelegate {
@@ -266,7 +239,6 @@ extension BrowseListViewController {
             } else {
                 models = feedItems.map { self.modelFactory.detailedModelsForItem($0) }
             }
-            
         }
         
         private var actionConsumer: BrowseActionConsumer? {
@@ -277,6 +249,5 @@ extension BrowseListViewController {
         let showCompactCells: Bool
         private var models: [[TableViewCellModel]] = []
         private let modelFactory = FeedItemCellModelFactory()
-        
     }
 }

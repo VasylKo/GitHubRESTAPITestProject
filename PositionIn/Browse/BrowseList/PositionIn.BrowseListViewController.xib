@@ -1,18 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BrowseListViewController" customModule="PositionIn" customModuleProvider="target">
             <connections>
-                <outlet property="bottomSeparatorHeightConstraint" destination="UiS-ac-SnB" id="DjT-M1-di3"/>
-                <outlet property="bottomSeparatorLine" destination="KMW-lu-Cxa" id="nhC-72-ISg"/>
-                <outlet property="displayModeSegmentedControl" destination="a6X-i6-NUa" id="HOB-9A-oRO"/>
                 <outlet property="tableView" destination="rSU-D8-03P" id="LeF-5F-EAl"/>
-                <outlet property="topSeparatorHeightConstraint" destination="eCz-Ne-fKW" id="ZEQ-vV-kEH"/>
-                <outlet property="topSeparatorLine" destination="wL4-UP-YuR" id="ByG-gq-zrE"/>
                 <outlet property="view" destination="hh2-4T-SbM" id="GR9-1G-zXP"/>
             </connections>
         </placeholder>
@@ -27,67 +22,15 @@
                     <color key="separatorColor" red="0.74901960779999999" green="0.74901960779999999" blue="0.74901960779999999" alpha="1" colorSpace="calibratedRGB"/>
                     <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                 </tableView>
-                <segmentedControl hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="a6X-i6-NUa">
-                    <rect key="frame" x="10" y="20" width="580" height="29"/>
-                    <segments>
-                        <segment title="" image="FeedFilterAll"/>
-                        <segment title="" image="FeedFilterProduct"/>
-                        <segment title="" image="FeedFilterEvent"/>
-                        <segment title="" image="FeedFilterPromotion"/>
-                        <segment title="" image="FeedFilterPost"/>
-                    </segments>
-                    <color key="tintColor" red="0.92941176469999998" green="0.1058823529" blue="0.18039215689999999" alpha="1" colorSpace="calibratedRGB"/>
-                    <connections>
-                        <action selector="displayModeSegmentedControlChanged:" destination="-1" eventType="valueChanged" id="k7V-hb-Zuh"/>
-                    </connections>
-                </segmentedControl>
-                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wL4-UP-YuR" userLabel="TopSeparatorLine">
-                    <rect key="frame" x="0.0" y="8" width="600" height="1"/>
-                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="1" id="eCz-Ne-fKW"/>
-                    </constraints>
-                </view>
-                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KMW-lu-Cxa" userLabel="BottomSeparatorLine">
-                    <rect key="frame" x="0.0" y="59" width="600" height="1"/>
-                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="1" id="UiS-ac-SnB"/>
-                    </constraints>
-                </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="a6X-i6-NUa" secondAttribute="trailing" constant="10" id="7wr-hj-jfT"/>
                 <constraint firstAttribute="bottom" secondItem="rSU-D8-03P" secondAttribute="bottom" id="BnK-3b-bE1"/>
-                <constraint firstAttribute="trailing" secondItem="wL4-UP-YuR" secondAttribute="trailing" id="LaW-3M-0Ce"/>
-                <constraint firstItem="wL4-UP-YuR" firstAttribute="top" secondItem="hh2-4T-SbM" secondAttribute="top" constant="8" id="NKy-UW-J58"/>
-                <constraint firstItem="KMW-lu-Cxa" firstAttribute="top" secondItem="a6X-i6-NUa" secondAttribute="bottom" constant="11" id="Oer-bD-Yr2"/>
-                <constraint firstItem="a6X-i6-NUa" firstAttribute="leading" secondItem="hh2-4T-SbM" secondAttribute="leading" constant="10" id="PTq-DO-NYs"/>
-                <constraint firstItem="a6X-i6-NUa" firstAttribute="top" secondItem="wL4-UP-YuR" secondAttribute="bottom" constant="11" id="Stq-Ct-0gM"/>
-                <constraint firstAttribute="trailing" secondItem="KMW-lu-Cxa" secondAttribute="trailing" id="WkN-zJ-4KY"/>
-                <constraint firstItem="wL4-UP-YuR" firstAttribute="leading" secondItem="hh2-4T-SbM" secondAttribute="leading" id="XL9-W8-aLv"/>
-                <constraint firstItem="rSU-D8-03P" firstAttribute="top" secondItem="a6X-i6-NUa" secondAttribute="bottom" constant="20" id="daa-NX-VxE"/>
                 <constraint firstAttribute="trailing" secondItem="rSU-D8-03P" secondAttribute="trailing" id="fIA-t9-lYr"/>
                 <constraint firstItem="rSU-D8-03P" firstAttribute="leading" secondItem="hh2-4T-SbM" secondAttribute="leading" id="gIx-mh-q7l"/>
-                <constraint firstItem="KMW-lu-Cxa" firstAttribute="leading" secondItem="hh2-4T-SbM" secondAttribute="leading" id="hh7-tt-Ow5"/>
                 <constraint firstItem="rSU-D8-03P" firstAttribute="top" secondItem="hh2-4T-SbM" secondAttribute="top" id="itA-ns-fsF"/>
-                <constraint firstItem="a6X-i6-NUa" firstAttribute="top" secondItem="hh2-4T-SbM" secondAttribute="top" constant="20" id="lVf-v4-dAH"/>
             </constraints>
-            <variation key="default">
-                <mask key="constraints">
-                    <exclude reference="daa-NX-VxE"/>
-                    <exclude reference="NKy-UW-J58"/>
-                </mask>
-            </variation>
             <point key="canvasLocation" x="59" y="198"/>
         </view>
     </objects>
-    <resources>
-        <image name="FeedFilterAll" width="17" height="17"/>
-        <image name="FeedFilterEvent" width="17" height="17"/>
-        <image name="FeedFilterPost" width="17" height="17"/>
-        <image name="FeedFilterProduct" width="17" height="17"/>
-        <image name="FeedFilterPromotion" width="17" height="17"/>
-    </resources>
 </document>

@@ -11,7 +11,7 @@ import PosInCore
 import BrightFutures
 import CleanroomLogger
 
-class PeopleFollowingViewController : UIViewController, UISearchBarDelegate {
+class PeopleFollowingViewController : UIViewController, UISearchBarDelegate, UIGestureRecognizerDelegate {
     
     @IBOutlet private weak var searchBar: UISearchBar!
     @IBOutlet private weak var tableView: TableView!
@@ -29,6 +29,7 @@ class PeopleFollowingViewController : UIViewController, UISearchBarDelegate {
         reloadData()
         
         let gesture = UITapGestureRecognizer(target: self, action: "viewTapped")
+        gesture.delegate = self
         view.addGestureRecognizer(gesture)
     }
     
@@ -117,6 +118,11 @@ class PeopleFollowingViewController : UIViewController, UISearchBarDelegate {
         dataSource.parentViewController = self.parentViewController
         return dataSource
         }()
+    
+    //MARK: UIGestureRecognizerDelegate
+    func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldReceiveTouch touch: UITouch) -> Bool {
+        return searchBar.isFirstResponder()
+    }
     
 }
 

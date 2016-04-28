@@ -223,7 +223,7 @@ class MembershipMemberDetailsViewController : BaseAddItemViewController {
 
             api().updateMyProfile(userProfile).onSuccess(callback: { [weak self] _ in
                 if let strongSelf = self {
-                    strongSelf.router.showMembershipMemberCardViewController(from: strongSelf)
+                    strongSelf.router.showMembershipMemberCardViewController(from: strongSelf, showBackButton: true)
                 }
             })
         }

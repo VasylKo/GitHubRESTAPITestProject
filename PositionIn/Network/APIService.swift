@@ -631,7 +631,9 @@ final class APIService {
     
     func getAll(homeItem: HomeItem, seachFilter: SearchFilter) -> Future<CollectionResponse<FeedItem>,NSError> {
         let endpoint = homeItem.endpoint()
+        
         //TODO: should refactor
+        
         let params = APIServiceQuery()
         params.append("type", value: String(homeItem.rawValue))
         if let itemTypes = seachFilter.itemTypes {
@@ -646,6 +648,11 @@ final class APIService {
         if let communities = seachFilter.communities {
             params.append("communities", value: communities)
         }
+        
+        if let users = seachFilter.users {
+            params.append("users", value: users)
+        }
+        
         
         var parameters = [String:AnyObject]()
         for (key, value) in params.query {

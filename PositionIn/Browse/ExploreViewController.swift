@@ -44,7 +44,6 @@ class ExploreViewController: DisplayModeViewController {
             case .List:
                 let listController = Storyboards.Main.instantiateBrowseListViewController()
                 listController.homeItem = homeItem
-                listController.hideSeparatorLinesNearSegmentedControl = true
                 listController.showCardCells = false
                 return listController
         }

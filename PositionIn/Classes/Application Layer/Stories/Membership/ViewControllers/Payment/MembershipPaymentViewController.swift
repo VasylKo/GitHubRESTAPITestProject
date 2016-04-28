@@ -10,7 +10,7 @@ import UIKit
 import XLForm
 import Box
 
-class MembershipPaymentViewController: XLFormViewController, PaymentReponseDelegate {
+class MembershipPaymentViewController: XLFormViewController {
     
     private let pageView = MembershipPageView(pageCount: 3)
     private let router : MembershipRouter
@@ -130,31 +130,20 @@ class MembershipPaymentViewController: XLFormViewController, PaymentReponseDeleg
         confirmRow.cellConfig["textLabel.textColor"] = UIColor.whiteColor()
         
         confirmRow.action.formBlock = { [weak self] row in
+            guard let strongSelf = self else { return }
             
+            strongSelf.deselectFormRow(row)
             
-            self?.deselectFormRow(row)
-            
-            let validationErrors : Array<NSError> = self?.formValidationErrors() as! Array<NSError>
+            let validationErrors : Array<NSError> = strongSelf.formValidationErrors() as! Array<NSError>
             if (validationErrors.count > 0){
                 return
             }
             
-            //MPesa
-            if let cardItem: Box<CardItem> = paymentRow.value as? Box<CardItem> {
-                self?.sendEventToAnalytics(cardItem: cardItem, action: AnalyticActios.proceedToPay)
-                
-                if cardItem.value == .MPesa {
-                    self?.router.showMPesaConfirmPaymentViewController(from: self!, with: self!.plan)
-                }
-                else {
-                    let paymentController: BraintreePaymentViewController = BraintreePaymentViewController()
-                    paymentController.amount = self?.plan.price
-                    paymentController.productName = self?.plan.name
-                    paymentController.membershipId = self?.plan.objectId
-                    paymentController.delegate = self
-                    self?.navigationController?.pushViewController(paymentController, animated: true)
-                }
-            }
+            strongSelf.sendEventToAnalytics(cardItem: strongSelf.cardPaymentTypeSelecred(), action: AnalyticActios.proceedToPay)
+            
+            //Payment flow
+            let paymentSystem = PaymentSystemProvider.paymentSystemWithItem(strongSelf)
+            strongSelf.router.showMembershipPaymentTransactionViewController(from: strongSelf, withPaymentSystem: paymentSystem)
         }
         
         confirmDonation.addFormRow(confirmRow)
@@ -163,24 +152,10 @@ class MembershipPaymentViewController: XLFormViewController, PaymentReponseDeleg
     }
     
     //MARK: - Analytics
-    private func sendEventToAnalytics(cardItem cardItem: Box<CardItem>, action: String) {
-        let cardType = CardItem.cardName(cardItem.value) ?? NSLocalizedString("Can't get card type")
+    private func sendEventToAnalytics(cardItem cardItem: CardItem, action: String) {
+        let cardType = CardItem.cardName(cardItem) ?? NSLocalizedString("Can't get card type")
         let paymentAmount = NSNumber(integer: self.plan.price ?? 0)
         trackEventToAnalytics(AnalyticCategories.membership, action: action, label: cardType, value: paymentAmount)
-    }
-    
-    //MARK: PaymentReponseDelegate
-    
-    func setError(hidden: Bool, error: String?) {
-        self.router.showBraintreeConfirmPaymentViewController(from: self, with: self.plan, creditCardPaymentSuccess: hidden)
-    }
-    
-    func paymentReponse(success: Bool, err: String?) {
-        if(success) {
-            setError(true, error: nil)
-        } else {
-            setError(false, error: err)
-        }
     }
     
     // MARK: XLFormViewController
@@ -189,7 +164,7 @@ class MembershipPaymentViewController: XLFormViewController, PaymentReponseDeleg
         
         //Send payment method selected to analytics
         if formRow.tag == Tags.Payment.rawValue, let cardItem: Box<CardItem> = newValue as? Box<CardItem> {
-            sendEventToAnalytics(cardItem: cardItem, action: AnalyticActios.selectPaymentMethod)
+            sendEventToAnalytics(cardItem: cardItem.value, action: AnalyticActios.selectPaymentMethod)
         }
         
         let validationErrors : Array<NSError> = formValidationErrors() as! Array<NSError>
@@ -201,5 +176,39 @@ class MembershipPaymentViewController: XLFormViewController, PaymentReponseDeleg
             confirmRowDescriptor.cellConfig["backgroundColor"] = backgroundColor
             updateFormRow(confirmRowDescriptor)
         }
+    }
+    
+    // MARK: XLForm helper    
+    private func cardPaymentTypeSelecred() -> CardItem {
+        guard let paymentTypeRow = form.formRowWithTag(Tags.Payment.rawValue), box: Box<CardItem> = paymentTypeRow.value as? Box else { return .CreditDebitCard }
+        
+        return box.value
+    }
+}
+
+//MARK: - PurchaseConvertible
+extension MembershipPaymentViewController: PurchaseConvertible {
+    var price: NSNumber {
+        return NSNumber(integer: (plan.price ?? 0))
+    }
+    
+    var itemId: String? {
+        return plan.objectId
+    }
+    
+    var itemName: String {
+        return plan.name ?? ""
+    }
+    
+    var purchaseType: PurchaseType {
+        return .Membership
+    }
+    
+    var paymentTypes: CardItem {
+        return cardPaymentTypeSelecred()
+    }
+    
+    var image: UIImage? {
+        return UIImage(named : plan.membershipImageName)
     }
 }

@@ -99,6 +99,13 @@ class PhoneNumberViewController: XLFormViewController {
             rowType: XLFormRowDescriptorTypePhone)
         phoneRow.cellConfigAtConfigure["textField.placeholder"] = "Enter your mobile phone number"
         phoneRow.required = true
+        phoneRow.onChangeBlock = { [unowned self] oldValue, newValue, descriptor in
+            guard let newValue = newValue as? String, oldValue = oldValue as? String else { return }
+            //Workaround to detect done button pressen on Navigation Accessory View
+            if oldValue == newValue {
+                self.doneButtonPressed(self.doneButton)
+            }
+        }
         phoneRow.addValidator(XLFormRegexValidator(msg: NSLocalizedString("Please specify a valid phone number",
             comment: "Onboarding"), regex: "^\\+?\\d+$"))
         phoneNumberSection.addFormRow(phoneRow)
@@ -108,7 +115,13 @@ class PhoneNumberViewController: XLFormViewController {
     
     func prepareCountryPhoneCodes() {
         let csvFile = NSBundle.mainBundle().pathForResource("country-codes", ofType: "csv")
-        let content = NSArray(contentsOfCSVFile: csvFile)
+        
+        guard let csvFilePath = csvFile else {
+            return
+        }
+        
+        let csvUrl = NSURL(string: csvFilePath)
+        let content = NSArray(contentsOfCSVURL: csvUrl)
         
         for (index, element) in content.enumerate() {
             if index > 0 {

@@ -56,14 +56,9 @@ class EPlusMembershipRouterImplementation: BaseRouterImplementation, EPlusMember
 //            animated: true)
     }
     
-    func showMPesaConfirmPaymentViewController(from sourceViewController : UIViewController, with plan : EPlusMembershipPlan) {
-//        let mpesaConfirmPaymentViewController = MembershipMPesaConfirmPaymentViewController(router: self, plan: plan)
-//        sourceViewController.navigationController?.pushViewController(mpesaConfirmPaymentViewController, animated: true)
-    }
-    
-    func showBraintreeConfirmPaymentViewController(from sourceViewController : UIViewController, with plan : EPlusMembershipPlan, creditCardPaymentSuccess: Bool?) {
-//        let mpesaConfirmPaymentViewController = MembershipBraintreeConfirmPaymentViewController(router: self, plan: plan, creditCardPaymentSuccess: creditCardPaymentSuccess)
-//        sourceViewController.navigationController?.pushViewController(mpesaConfirmPaymentViewController, animated: true)
+    func showMembershipPaymentTransactionViewController(from sourceViewController : UIViewController, withPaymentSystem paymentSystem: PaymentSystem, plan: EPlusMembershipPlan) {
+        let paymentTransactionController = EplusPaymentTransactionViewController(router: self, paymentSystem: paymentSystem, plan: plan)
+        sourceViewController.navigationController?.pushViewController(paymentTransactionController, animated: true)
     }
     
     func showCallAmbulanceViewController(from sourceViewController : UIViewController) {

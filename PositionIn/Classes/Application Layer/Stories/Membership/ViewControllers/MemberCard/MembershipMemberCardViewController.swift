@@ -16,6 +16,7 @@ class MembershipMemberCardViewController : UIViewController {
     
     private var profile : UserProfile?
     private var plan : MembershipPlan?
+    private let shoudShowBackButton: Bool
     
     @IBOutlet var titleNavigationItem: UINavigationItem!
     @IBOutlet weak var membershipCardView: MembershipCardView!
@@ -33,8 +34,9 @@ class MembershipMemberCardViewController : UIViewController {
     @IBOutlet weak var upgradeView: UIView!
     //MARK: Initializers
     
-    init(router: MembershipRouter) {
+    init(router: MembershipRouter, showBackButton: Bool) {
         self.router = router
+        shoudShowBackButton = showBackButton
         super.init(nibName: String(MembershipMemberCardViewController.self), bundle: nil)
     }
     
@@ -58,6 +60,7 @@ class MembershipMemberCardViewController : UIViewController {
     }
     
     func setupInterface() {
+        navigationItem.setHidesBackButton(!shoudShowBackButton, animated: false)
         self.title = self.titleNavigationItem.title
         self.navigationItem.rightBarButtonItem = self.titleNavigationItem.rightBarButtonItem
         
