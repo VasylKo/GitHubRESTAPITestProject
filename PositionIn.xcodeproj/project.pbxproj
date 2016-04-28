@@ -2623,18 +2623,10 @@
 		D1DC99351CA27E2B004A992B /* MembershipMessageController */ = {
 			isa = PBXGroup;
 			children = (
-				D1DC993A1CA2CF47004A992B /* Views */,
 				D1DC99361CA27E8D004A992B /* MembershipMessageController.swift */,
 				D1DC99371CA27E8D004A992B /* MembershipMessageController.xib */,
 			);
 			path = MembershipMessageController;
-			sourceTree = "<group>";
-		};
-		D1DC993A1CA2CF47004A992B /* Views */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Views;
 			sourceTree = "<group>";
 		};
 		D1E11B661C98176500CD8BC0 /* CellModel */ = {
@@ -3013,7 +3005,6 @@
 				E6BEF1EB1B9C9D6400511B46 /* Community */,
 				E61B20D91B7E4A85005EAB2C /* Profile */,
 				E6199BB51B9F3B4400E3C69D /* People */,
-				E66115851B7376DE003DB5B3 /* Login */,
 				E61B20D61B7E0806005EAB2C /* Settings */,
 				E6F7A46E1BA333B30069152A /* Wallet */,
 				18817F1F1C89B28B00FBA6B1 /* DonationDetails */,
@@ -3114,13 +3105,6 @@
 				E660E5431B5BE43900F52050 /* TableViewSectionHeaderFooterLabelView.swift */,
 			);
 			path = TableView;
-			sourceTree = "<group>";
-		};
-		E66115851B7376DE003DB5B3 /* Login */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Login;
 			sourceTree = "<group>";
 		};
 		E66115911B73A0CB003DB5B3 /* BrowseList */ = {
