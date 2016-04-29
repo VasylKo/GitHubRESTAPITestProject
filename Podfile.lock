@@ -70,11 +70,11 @@ PODS:
     - Alamofire (~> 3.2.1)
     - BrightFutures (~> 3.0)
     - ObjectMapper (~> 1.1.5)
-  - Realm (0.97.0):
-    - Realm/Headers (= 0.97.0)
-  - Realm/Headers (0.97.0)
-  - RealmSwift (0.97.0):
-    - Realm (= 0.97.0)
+  - Realm (0.99.1):
+    - Realm/Headers (= 0.99.1)
+  - Realm/Headers (0.99.1)
+  - RealmSwift (0.99.1):
+    - Realm (= 0.99.1)
   - Result (1.0.2)
   - TTTAttributedLabel (1.13.4)
   - UIImageEffects (0.0.1)
@@ -100,7 +100,7 @@ DEPENDENCIES:
   - LNNotificationsUI (from `https://github.com/LeoNatan/LNNotificationsUI`)
   - NewRelicAgent (~> 5.3.6)
   - PosInCore (from `PosInCore`)
-  - RealmSwift (~> 0.97.0)
+  - RealmSwift (~> 0.99)
   - TTTAttributedLabel (~> 1.13)
   - UIImageEffects
   - XLForm (~> 3.1.0)
@@ -146,8 +146,8 @@ SPEC CHECKSUMS:
   NewRelicAgent: 731c3b39030885531dad40e43cd80b8dbe61647e
   ObjectMapper: 528b1a6677a6acac7747edd508576983e76a9148
   PosInCore: dcf621e469d4af6c8e31c2d7b27dd170bfe924ad
-  Realm: b498a6fb9d288b171ff98d0e2d4384c295be8990
-  RealmSwift: d014810dec75c9a3f1a33926d2dabfed855c582c
+  Realm: 522a0cc8e1f8755ee56d7dc16ca0fc380d045766
+  RealmSwift: 1d9c4299ef5dbf575c5da09fc706ed726327cfa0
   Result: dd3dd71af3fa2e262f1a999e14fba2c25ec14f16
   TTTAttributedLabel: 0a2ac7b2dd726d32a070dafb01446026b11e624f
   UIImageEffects: 37b99fa461e4965f332ca82e92f2c22a1075ee84
