@@ -17,7 +17,6 @@ struct Event: CRUDObject {
     var startDate: NSDate?
     var photos: [PhotoInfo]?
     var location: Location?
-    var category: ItemCategory?
     var participants: Int? = 0
     var author: CRUDObjectId?
     var imageURL: NSURL?
@@ -91,7 +90,6 @@ struct Event: CRUDObject {
         endDate <- (map["endDate"], APIDateTransform())
         photos <- map["photos"]
         location <- map["location"]
-        category <- (map["category"], EnumTransform())
         participants <- map["numOfParticipants"]
         author <- (map["author"], CRUDObjectIdTransform())
         imageURL <- (map["image"], ImageURLTransform())

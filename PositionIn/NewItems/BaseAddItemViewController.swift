@@ -74,23 +74,6 @@ class BaseAddItemViewController: XLFormViewController {
         return nil
     }
     
-    func categoryRowDescriptor(tag: String) -> XLFormRowDescriptor {
-        let categoryCaption = NSLocalizedString("Category", comment: "New item: category caption")
-        let categoryRow = XLFormRowDescriptor(tag: tag, rowType:XLFormRowDescriptorTypeSelectorPush, title: categoryCaption)
-        categoryRow.selectorTitle = categoryCaption
-        let options: [XLFormOptionObject] = ItemCategory.all().map { XLFormOptionsObject.formOptionsObjectWithItemCategory($0) }
-        categoryRow.value = options.first
-        categoryRow.cellConfigAtConfigure["tintColor"] = UIScheme.mainThemeColor
-        categoryRow.selectorOptions = options
-        categoryRow.onChangeBlock = {[unowned categoryRow]   oldValue, newValue, descriptor in
-            if let _ = newValue as? NSNull {
-                categoryRow.value = oldValue
-            }
-        }
-
-        return categoryRow
-    }
-    
     func communityRowDescriptor(tag: String) -> XLFormRowDescriptor {
         let communityCaption = NSLocalizedString("Community", comment: "New item: comunity caption")
         let communityRow = XLFormRowDescriptor(tag: tag, rowType:XLFormRowDescriptorTypeSelectorPush, title: communityCaption)
@@ -164,13 +147,6 @@ class BaseAddItemViewController: XLFormViewController {
             let communityId = option.communityId
             where communityId != CRUDObjectInvalidId {
             return communityId
-        }
-        return nil
-    }
-    
-    func categoryValue(value: AnyObject?) -> ItemCategory? {
-        if  let option = value as? XLFormOptionsObject {
-            return option.itemCatefory
         }
         return nil
     }
