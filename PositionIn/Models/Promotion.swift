@@ -16,7 +16,6 @@ struct Promotion: CRUDObject {
     var endDate: NSDate?
     var startDate: NSDate?
     var discount: Float?
-    var category: ItemCategory?
     var photos: [PhotoInfo]?
     var location: Location?
     var shop: CRUDObjectId?
@@ -72,7 +71,6 @@ struct Promotion: CRUDObject {
         endDate <- (map["endDate"], APIDateTransform())
         startDate <- (map["startDate"], APIDateTransform())
         discount <- map["discount"]
-        category <- (map["category"], EnumTransform())
         photos <- map["photos"]
         location <- map["location"]
         shop <- (map["shop"], CRUDObjectIdTransform())

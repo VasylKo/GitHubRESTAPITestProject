@@ -69,7 +69,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let kFirstRun = "kFirstRun"
         if (defaults.objectForKey(kFirstRun) == nil) {
-            SessionController().clearKeychain()
+            // FIXME: To fix POS-2417 neet to just uncommented it
+            // But it should be after next (after 19 version) deploing application to app store
+            // In commented to prevent logout after first instal with this logic
+            // But stayed logic with storing value in NSUserDefaults
+            //SessionController().clearKeychain()
+            
             defaults.setBool(true, forKey: kFirstRun)
         }
     }

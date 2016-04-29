@@ -53,13 +53,6 @@ class SettingsViewController: BesideMenuViewController {
     @IBAction func spreadTheWordPressed(sender: AnyObject) {
         self.showMailControllerWithRecepientEmail(nil)
     }
-
-    @IBAction func changePasswordPressed(sender: AnyObject) {
-        if api().isUserAuthorized() {
-            let changePasswordController = Storyboards.Main.instantiateChangePasswordController()
-            self.navigationController?.pushViewController(changePasswordController, animated: true)
-        }
-    }
     
     @IBAction func contactSupportPressed(sender: AnyObject) {
         self.showMailControllerWithRecepientEmail("rcapp@redcross.or.ke")
