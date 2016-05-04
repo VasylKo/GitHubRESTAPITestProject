@@ -205,7 +205,7 @@ extension BrowseListViewController {
         
         func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
             if let model = self.tableView(tableView, modelForIndexPath: indexPath) as? CompactFeedTableCellModel {
-                if model.item.type == .Post {
+                if model.item.type == .Post || model.item.type == .News {
                     var cellHeight: CGFloat = 125
                     cellHeight = (model.imageURL != nil) ? (cellHeight + 160) : cellHeight
                     
@@ -215,12 +215,9 @@ extension BrowseListViewController {
                         let rect = attrString.boundingRectWithSize(maxSize, options: NSStringDrawingOptions.UsesLineFragmentOrigin, context: nil)
                         let size = CGSizeMake(rect.size.width, rect.size.height)
                         
-                        cellHeight += (size.height + 15)
-                    }
-                    
-                    
+                        cellHeight += (size.height + 17)
+                    }   
                     return cellHeight
-                    
                 }
                 else {
                     let height: CGFloat = showCompactCells ? 75.0 : 100.0
