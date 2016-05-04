@@ -150,7 +150,6 @@
 		5456528E1CCFAB4600C63C01 /* PaymentOrderDescriptionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5456528C1CCFAB4600C63C01 /* PaymentOrderDescriptionCell.xib */; };
 		545652901CCFB6B800C63C01 /* NSDate+pickUpAvaliabilityString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5456528F1CCFB6B800C63C01 /* NSDate+pickUpAvaliabilityString.swift */; };
 		545652951CCFFBA000C63C01 /* ProjectsIntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 545652931CCFFBA000C63C01 /* ProjectsIntroViewController.swift */; };
-		545652961CCFFBA000C63C01 /* ProjectsIntroViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 545652941CCFFBA000C63C01 /* ProjectsIntroViewController.xib */; };
 		549C6BCE1CCF558D0062435F /* MembershipPaymentTransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 549C6BCD1CCF558D0062435F /* MembershipPaymentTransactionViewController.swift */; };
 		549C6BD01CCF6DCF0062435F /* CommonPaymentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 549C6BCF1CCF6DCF0062435F /* CommonPaymentViewController.xib */; };
 		549C6BD21CCF98CF0062435F /* EplusPaymentTransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 549C6BD11CCF98CF0062435F /* EplusPaymentTransactionViewController.swift */; };
@@ -260,6 +259,7 @@
 		D14E47841CC64DFC002FDD6A /* EPlusServiceDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D14E47821CC64DFC002FDD6A /* EPlusServiceDetailsViewController.xib */; };
 		D153AB841C11FA9B00DFB5C9 /* AmbulanceRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D153AB831C11FA9B00DFB5C9 /* AmbulanceRequest.swift */; };
 		D154411A1C47D642006251B7 /* Volunteer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15441191C47D642006251B7 /* Volunteer.swift */; };
+		D15D2DDB1CD9EA3000EE5245 /* PositionIn.ProjectsIntroViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D15D2DDA1CD9EA3000EE5245 /* PositionIn.ProjectsIntroViewController.xib */; };
 		D15F47441C088A26009ED3FD /* HomeItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15F47431C088A26009ED3FD /* HomeItem.swift */; };
 		D15F47471C0AFDAF009ED3FD /* CallAmbulanceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15F47461C0AFDAF009ED3FD /* CallAmbulanceViewController.swift */; };
 		D15F47491C0B77D7009ED3FD /* AmbulanceBaseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15F47481C0B77D7009ED3FD /* AmbulanceBaseController.swift */; };
@@ -764,7 +764,6 @@
 		5456528C1CCFAB4600C63C01 /* PaymentOrderDescriptionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PaymentOrderDescriptionCell.xib; sourceTree = "<group>"; };
 		5456528F1CCFB6B800C63C01 /* NSDate+pickUpAvaliabilityString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+pickUpAvaliabilityString.swift"; sourceTree = "<group>"; };
 		545652931CCFFBA000C63C01 /* ProjectsIntroViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectsIntroViewController.swift; sourceTree = "<group>"; };
-		545652941CCFFBA000C63C01 /* ProjectsIntroViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProjectsIntroViewController.xib; sourceTree = "<group>"; };
 		549C6BCD1CCF558D0062435F /* MembershipPaymentTransactionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MembershipPaymentTransactionViewController.swift; sourceTree = "<group>"; };
 		549C6BCF1CCF6DCF0062435F /* CommonPaymentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommonPaymentViewController.xib; sourceTree = "<group>"; };
 		549C6BD11CCF98CF0062435F /* EplusPaymentTransactionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EplusPaymentTransactionViewController.swift; sourceTree = "<group>"; };
@@ -882,6 +881,7 @@
 		D14E47821CC64DFC002FDD6A /* EPlusServiceDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EPlusServiceDetailsViewController.xib; path = ../../ViewControllers/ServicesDetails/EPlusServiceDetailsViewController.xib; sourceTree = "<group>"; };
 		D153AB831C11FA9B00DFB5C9 /* AmbulanceRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AmbulanceRequest.swift; sourceTree = "<group>"; };
 		D15441191C47D642006251B7 /* Volunteer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Volunteer.swift; sourceTree = "<group>"; };
+		D15D2DDA1CD9EA3000EE5245 /* PositionIn.ProjectsIntroViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.ProjectsIntroViewController.xib; sourceTree = "<group>"; };
 		D15F47431C088A26009ED3FD /* HomeItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeItem.swift; sourceTree = "<group>"; };
 		D15F47461C0AFDAF009ED3FD /* CallAmbulanceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CallAmbulanceViewController.swift; sourceTree = "<group>"; };
 		D15F47481C0B77D7009ED3FD /* AmbulanceBaseController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AmbulanceBaseController.swift; sourceTree = "<group>"; };
@@ -2008,8 +2008,8 @@
 		545652921CCFFBA000C63C01 /* ProjectsIntroViewController */ = {
 			isa = PBXGroup;
 			children = (
+				D15D2DDA1CD9EA3000EE5245 /* PositionIn.ProjectsIntroViewController.xib */,
 				545652931CCFFBA000C63C01 /* ProjectsIntroViewController.swift */,
-				545652941CCFFBA000C63C01 /* ProjectsIntroViewController.xib */,
 			);
 			path = ProjectsIntroViewController;
 			sourceTree = "<group>";
@@ -4522,7 +4522,6 @@
 				E689F0791B6B911F00597587 /* PositionIn.ProductInventoryViewController.xib in Resources */,
 				18CCFAF61C8D841900603C7F /* PositionIn.BoughtProductDetailsViewController.xib in Resources */,
 				500D7FA91BC2CD39008C8C82 /* PositionIn.SearchEntityCell.xib in Resources */,
-				545652961CCFFBA000C63C01 /* ProjectsIntroViewController.xib in Resources */,
 				E6C952341BA1D9960032254F /* PositionIn.ProfileInfoCell.xib in Resources */,
 				E6D4D5B51B6F8B9F003134CB /* PositionIn.SearchBar.xib in Resources */,
 				541820FE1CB7B295001A780A /* MPesaBongaPinCell.xib in Resources */,
@@ -4537,6 +4536,7 @@
 				E6C952351BA1D9960032254F /* PositionIn.ProfileStatsCell.xib in Resources */,
 				542EDF711CC92949006FE641 /* AvailabilityViewCell.xib in Resources */,
 				542EDF9F1CCE548E006FE641 /* SuccessDonationInfoCell.xib in Resources */,
+				D15D2DDB1CD9EA3000EE5245 /* PositionIn.ProjectsIntroViewController.xib in Resources */,
 				5419F9851CC52E70000E16E7 /* PositionIn.AboutEplusServiceController.xib in Resources */,
 				50FA43301C44F0B50050B00E /* ErrorCell.xib in Resources */,
 				D19BDF351CAD7D3C00F0A887 /* WebViewController.xib in Resources */,

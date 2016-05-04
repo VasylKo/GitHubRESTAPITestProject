@@ -394,21 +394,32 @@ extension UserProfileViewController: BrowseActionConsumer {
             controller.author = data as? ObjectInfo
             navigationController?.pushViewController(controller, animated: true)
         case .Emergency:
-            let controller =  Storyboards.Main.instantiateEventDetailsViewControllerId()
-            controller.objectId = objectId
+            let controller =  Storyboards.Main.instantiateEmergencyDetailsControllerId()
+            controller.objectId = object as? CRUDObjectId
+            controller.author = data as? ObjectInfo
             navigationController?.pushViewController(controller, animated: true)
         case .Training:
             let controller =  Storyboards.Main.instantiateTrainingDetailsViewControllerId()
             controller.objectId = objectId
             navigationController?.pushViewController(controller, animated: true)
-        case .GiveBlood:
-            fallthrough
         case .News:
             fallthrough
+        case .Post:
+            let controller = Storyboards.Main.instantiatePostViewController()
+            controller.objectId = object as? CRUDObjectId
+            navigationController?.pushViewController(controller, animated: true)
+        case .GiveBlood:
+            fallthrough
         case .Event:
-            fallthrough
+            let controller = Storyboards.Main.instantiateEventDetailsViewControllerId()
+            controller.objectId = object as? CRUDObjectId
+            controller.author = data as? ObjectInfo
+            navigationController?.pushViewController(controller, animated: true)
         case .Market:
-            fallthrough
+            let controller = Storyboards.Main.instantiateMarketDetailsViewControllerId()
+            controller.objectId = object as? CRUDObjectId
+            controller.author = data as? ObjectInfo
+            navigationController?.pushViewController(controller, animated: true)
         case .BomaHotels:
             fallthrough
         case .Volunteer:
@@ -442,7 +453,7 @@ extension UserProfileViewController {
         var items: [[ProfileCellModel]] = [[],[]]
         
         override func configureTable(tableView: UITableView) {
-            tableView.estimatedRowHeight = 80.0
+            tableView.estimatedRowHeight = 180.0
             super.configureTable(tableView)
         }
         

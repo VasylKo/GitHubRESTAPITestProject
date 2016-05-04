@@ -58,6 +58,9 @@ class UploadPhotoCell: XLFormBaseCell {
         }
     }
     
+    override static func formDescriptorCellHeightForRowDescriptor(rowDescriptor: XLFormRowDescriptor!) -> CGFloat {
+        return 44
+    }
     
     override func formDescriptorCellDidSelectedWithFormController(controller: XLFormViewController!) {
         self.rowDescriptor?.value = nil
