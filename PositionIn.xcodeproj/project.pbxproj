@@ -66,6 +66,7 @@
 		18817F1E1C897CFB00FBA6B1 /* WalletsCellFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18817F1D1C897CFB00FBA6B1 /* WalletsCellFactory.swift */; };
 		18817F221C89B28B00FBA6B1 /* DonationDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18817F201C89B28B00FBA6B1 /* DonationDetailsViewController.swift */; };
 		18817F231C89B28B00FBA6B1 /* PositionIn.DonationDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18817F211C89B28B00FBA6B1 /* PositionIn.DonationDetailsViewController.xib */; };
+		18B1C64C1CDA7323003702C3 /* PositionIn.ProjectsIntroViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18B1C64B1CDA7323003702C3 /* PositionIn.ProjectsIntroViewController.xib */; };
 		18CCFAF51C8D841900603C7F /* BoughtProductDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CCFAF31C8D841900603C7F /* BoughtProductDetailsViewController.swift */; };
 		18CCFAF61C8D841900603C7F /* PositionIn.BoughtProductDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18CCFAF41C8D841900603C7F /* PositionIn.BoughtProductDetailsViewController.xib */; };
 		18CCFAF81C8D89E800603C7F /* VoiceVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CCFAF71C8D89E800603C7F /* VoiceVerificationViewController.swift */; };
@@ -150,7 +151,6 @@
 		5456528E1CCFAB4600C63C01 /* PaymentOrderDescriptionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5456528C1CCFAB4600C63C01 /* PaymentOrderDescriptionCell.xib */; };
 		545652901CCFB6B800C63C01 /* NSDate+pickUpAvaliabilityString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5456528F1CCFB6B800C63C01 /* NSDate+pickUpAvaliabilityString.swift */; };
 		545652951CCFFBA000C63C01 /* ProjectsIntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 545652931CCFFBA000C63C01 /* ProjectsIntroViewController.swift */; };
-		545652961CCFFBA000C63C01 /* ProjectsIntroViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 545652941CCFFBA000C63C01 /* ProjectsIntroViewController.xib */; };
 		549C6BCE1CCF558D0062435F /* MembershipPaymentTransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 549C6BCD1CCF558D0062435F /* MembershipPaymentTransactionViewController.swift */; };
 		549C6BD01CCF6DCF0062435F /* CommonPaymentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 549C6BCF1CCF6DCF0062435F /* CommonPaymentViewController.xib */; };
 		549C6BD21CCF98CF0062435F /* EplusPaymentTransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 549C6BD11CCF98CF0062435F /* EplusPaymentTransactionViewController.swift */; };
@@ -678,6 +678,7 @@
 		18817F1D1C897CFB00FBA6B1 /* WalletsCellFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletsCellFactory.swift; sourceTree = "<group>"; };
 		18817F201C89B28B00FBA6B1 /* DonationDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DonationDetailsViewController.swift; sourceTree = "<group>"; };
 		18817F211C89B28B00FBA6B1 /* PositionIn.DonationDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.DonationDetailsViewController.xib; sourceTree = "<group>"; };
+		18B1C64B1CDA7323003702C3 /* PositionIn.ProjectsIntroViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.ProjectsIntroViewController.xib; sourceTree = "<group>"; };
 		18CCFAF31C8D841900603C7F /* BoughtProductDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoughtProductDetailsViewController.swift; sourceTree = "<group>"; };
 		18CCFAF41C8D841900603C7F /* PositionIn.BoughtProductDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.BoughtProductDetailsViewController.xib; sourceTree = "<group>"; };
 		18CCFAF71C8D89E800603C7F /* VoiceVerificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VoiceVerificationViewController.swift; sourceTree = "<group>"; };
@@ -764,7 +765,6 @@
 		5456528C1CCFAB4600C63C01 /* PaymentOrderDescriptionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PaymentOrderDescriptionCell.xib; sourceTree = "<group>"; };
 		5456528F1CCFB6B800C63C01 /* NSDate+pickUpAvaliabilityString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+pickUpAvaliabilityString.swift"; sourceTree = "<group>"; };
 		545652931CCFFBA000C63C01 /* ProjectsIntroViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectsIntroViewController.swift; sourceTree = "<group>"; };
-		545652941CCFFBA000C63C01 /* ProjectsIntroViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProjectsIntroViewController.xib; sourceTree = "<group>"; };
 		549C6BCD1CCF558D0062435F /* MembershipPaymentTransactionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MembershipPaymentTransactionViewController.swift; sourceTree = "<group>"; };
 		549C6BCF1CCF6DCF0062435F /* CommonPaymentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommonPaymentViewController.xib; sourceTree = "<group>"; };
 		549C6BD11CCF98CF0062435F /* EplusPaymentTransactionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EplusPaymentTransactionViewController.swift; sourceTree = "<group>"; };
@@ -2008,8 +2008,8 @@
 		545652921CCFFBA000C63C01 /* ProjectsIntroViewController */ = {
 			isa = PBXGroup;
 			children = (
+				18B1C64B1CDA7323003702C3 /* PositionIn.ProjectsIntroViewController.xib */,
 				545652931CCFFBA000C63C01 /* ProjectsIntroViewController.swift */,
-				545652941CCFFBA000C63C01 /* ProjectsIntroViewController.xib */,
 			);
 			path = ProjectsIntroViewController;
 			sourceTree = "<group>";
@@ -4522,7 +4522,6 @@
 				E689F0791B6B911F00597587 /* PositionIn.ProductInventoryViewController.xib in Resources */,
 				18CCFAF61C8D841900603C7F /* PositionIn.BoughtProductDetailsViewController.xib in Resources */,
 				500D7FA91BC2CD39008C8C82 /* PositionIn.SearchEntityCell.xib in Resources */,
-				545652961CCFFBA000C63C01 /* ProjectsIntroViewController.xib in Resources */,
 				E6C952341BA1D9960032254F /* PositionIn.ProfileInfoCell.xib in Resources */,
 				E6D4D5B51B6F8B9F003134CB /* PositionIn.SearchBar.xib in Resources */,
 				541820FE1CB7B295001A780A /* MPesaBongaPinCell.xib in Resources */,
@@ -4537,6 +4536,7 @@
 				E6C952351BA1D9960032254F /* PositionIn.ProfileStatsCell.xib in Resources */,
 				542EDF711CC92949006FE641 /* AvailabilityViewCell.xib in Resources */,
 				542EDF9F1CCE548E006FE641 /* SuccessDonationInfoCell.xib in Resources */,
+				18B1C64C1CDA7323003702C3 /* PositionIn.ProjectsIntroViewController.xib in Resources */,
 				5419F9851CC52E70000E16E7 /* PositionIn.AboutEplusServiceController.xib in Resources */,
 				50FA43301C44F0B50050B00E /* ErrorCell.xib in Resources */,
 				D19BDF351CAD7D3C00F0A887 /* WebViewController.xib in Resources */,
