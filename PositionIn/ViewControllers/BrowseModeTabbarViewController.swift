@@ -210,13 +210,13 @@ protocol BrowseModeDisplay {
             self.navigationController?.pushViewController(Storyboards.Main.instantiateBrowseVolunteerViewController(), animated: true)
         case .News:
             self.navigationController?.pushViewController(NewsContainerViewController(), animated: true)
-        case .Market: 
+        case .GiveBlood:
+            GiveBloodRouterImplementation().showInitialViewController(from: self)
+        case .Market:
             fallthrough
         case .BomaHotels:
             fallthrough
         case .Events:
-            fallthrough
-        case .GiveBlood:
             fallthrough
         case .Emergency:
             fallthrough

@@ -118,6 +118,8 @@
 		51E176E91CDB7C98006E4E3F /* GiveBloodRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E176E61CDB7C98006E4E3F /* GiveBloodRouter.swift */; };
 		51E176EA1CDB7C99006E4E3F /* GiveBloodRouterImplementation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E176E71CDB7C98006E4E3F /* GiveBloodRouterImplementation.swift */; };
 		51E176EF1CDB8016006E4E3F /* DonorInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E176EE1CDB8016006E4E3F /* DonorInfo.swift */; };
+		51E176F31CDB8F86006E4E3F /* IntroPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E176F11CDB8F86006E4E3F /* IntroPageViewController.swift */; };
+		51E176F71CDB8FCE006E4E3F /* PositionIn.IntroPageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51E176F61CDB8FCE006E4E3F /* PositionIn.IntroPageViewController.xib */; };
 		541820FC1CB7B28D001A780A /* MPesaBongaPinCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 541820FB1CB7B28D001A780A /* MPesaBongaPinCell.swift */; };
 		541820FE1CB7B295001A780A /* MPesaBongaPinCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 541820FD1CB7B295001A780A /* MPesaBongaPinCell.xib */; };
 		5419F9801CC52AC1000E16E7 /* AboutEplusServiceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5419F97E1CC52AC1000E16E7 /* AboutEplusServiceController.swift */; };
@@ -735,6 +737,8 @@
 		51E176E61CDB7C98006E4E3F /* GiveBloodRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GiveBloodRouter.swift; sourceTree = "<group>"; };
 		51E176E71CDB7C98006E4E3F /* GiveBloodRouterImplementation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GiveBloodRouterImplementation.swift; sourceTree = "<group>"; };
 		51E176EE1CDB8016006E4E3F /* DonorInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DonorInfo.swift; sourceTree = "<group>"; };
+		51E176F11CDB8F86006E4E3F /* IntroPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntroPageViewController.swift; sourceTree = "<group>"; };
+		51E176F61CDB8FCE006E4E3F /* PositionIn.IntroPageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.IntroPageViewController.xib; sourceTree = "<group>"; };
 		541820FB1CB7B28D001A780A /* MPesaBongaPinCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPesaBongaPinCell.swift; sourceTree = "<group>"; };
 		541820FD1CB7B295001A780A /* MPesaBongaPinCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MPesaBongaPinCell.xib; sourceTree = "<group>"; };
 		5419F97E1CC52AC1000E16E7 /* AboutEplusServiceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutEplusServiceController.swift; sourceTree = "<group>"; };
@@ -1812,6 +1816,7 @@
 		51E176E41CDB7C98006E4E3F /* Interface */ = {
 			isa = PBXGroup;
 			children = (
+				51E176F51CDB8FCE006E4E3F /* IntroPage */,
 			);
 			path = Interface;
 			sourceTree = "<group>";
@@ -1828,6 +1833,7 @@
 		51E176E81CDB7C98006E4E3F /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				51E176F01CDB8F6E006E4E3F /* IntroPage */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -1838,6 +1844,22 @@
 				51E176EE1CDB8016006E4E3F /* DonorInfo.swift */,
 			);
 			path = GiveBlood;
+			sourceTree = "<group>";
+		};
+		51E176F01CDB8F6E006E4E3F /* IntroPage */ = {
+			isa = PBXGroup;
+			children = (
+				51E176F11CDB8F86006E4E3F /* IntroPageViewController.swift */,
+			);
+			path = IntroPage;
+			sourceTree = "<group>";
+		};
+		51E176F51CDB8FCE006E4E3F /* IntroPage */ = {
+			isa = PBXGroup;
+			children = (
+				51E176F61CDB8FCE006E4E3F /* PositionIn.IntroPageViewController.xib */,
+			);
+			path = IntroPage;
 			sourceTree = "<group>";
 		};
 		541820F41CB7B0F2001A780A /* MPesaBongaPinCell */ = {
@@ -4652,6 +4674,7 @@
 				184040271CC14A2B00DF3655 /* EPlusPlanInfoTableViewCell.xib in Resources */,
 				D12EB2971C96E83600718E57 /* PositionIn.NewsItemTitleCell.xib in Resources */,
 				1840402A1CC14A2B00DF3655 /* PositionIn.EPlusAmbulanceDetailsController.xib in Resources */,
+				51E176F71CDB8FCE006E4E3F /* PositionIn.IntroPageViewController.xib in Resources */,
 				500D7FAD1BC2CD51008C8C82 /* PositionIn.SearchSectionCell.xib in Resources */,
 				E6F2437A1B8B40380033B13C /* PositionIn.BrowseListTableViewCell.xib in Resources */,
 				E63201721B984E2D0066C62E /* PositionIn.DescriptionTableViewCell.xib in Resources */,
@@ -4847,6 +4870,7 @@
 				CDE1B91F1C5F9E6A00F76F32 /* MembershipMemberProfileView.swift in Sources */,
 				545652901CCFB6B800C63C01 /* NSDate+pickUpAvaliabilityString.swift in Sources */,
 				E6F7A4811BA356500069152A /* LocationSearchResultDataSource.swift in Sources */,
+				51E176F31CDB8F86006E4E3F /* IntroPageViewController.swift in Sources */,
 				E62B16FF1B5CE0F800D446BC /* BesideMenuViewController.swift in Sources */,
 				E66F901B1BA6A5C100280B77 /* ChatController.swift in Sources */,
 				D1B780C81C0F4E7700EF5825 /* DonateViewController.swift in Sources */,

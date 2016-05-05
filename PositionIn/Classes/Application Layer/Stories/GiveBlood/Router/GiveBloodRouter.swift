@@ -9,25 +9,11 @@
 import Foundation
 
 protocol GiveBloodRouter : BaseRouter {
-    /*
-    func showInitialViewController(from sourceViewController : UIViewController, hasActivePlan: Bool?)
     
-    func showMembershipPlanDetailsViewController(from sourceViewController : UIViewController, with plan : MembershipPlan, onlyPlanInfo : Bool)
+    func showInitialViewController(from sourceViewController : UIViewController)
     
-    func showMembershipMemberProfile(from sourceViewController : UIViewController, phoneNumber : String, validationCode : String)
-
-    func showMembershipMemberCardViewController(from sourceViewController : UIViewController, showBackButton: Bool)
-
-    func showMembershipConfirmDetailsViewController(from sourceViewController : UIViewController, with plan : MembershipPlan)
+    func showIntroViewController(from sourceViewController : UIViewController)
     
-    func showPaymentViewController(from sourceViewController : UIViewController, with plan : MembershipPlan)
+    func showGiveBloodCentersViewController(from sourceViewController : UIViewController)
     
-    func showPlansViewController(from sourceViewController : UIViewController, with plan : MembershipPlan)
-    
-    func showMemberDetailsViewController(from sourceViewController : UIViewController)
-    
-    func showMembershipPaymentTransactionViewController(from sourceViewController : UIViewController, withPaymentSystem : PaymentSystem)
-    
-    func dismissMembership(from sourceViewController : UIViewController)
- */
 }
