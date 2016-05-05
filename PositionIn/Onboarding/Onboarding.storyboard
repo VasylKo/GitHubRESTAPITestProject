@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="EQ9-4A-h3E">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="EQ9-4A-h3E">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -34,7 +34,7 @@
                     <navigationItem key="navigationItem" title="Your Phone Number" id="mld-VT-MUt">
                         <barButtonItem key="rightBarButtonItem" title="Done" id="MFI-dN-fQX">
                             <connections>
-                                <action selector="doneButtonPressed:" destination="2fi-rV-Mtc" id="U6w-QN-id2"/>
+                                <action selector="navigationDoneButtonPressed:" destination="2fi-rV-Mtc" id="vTL-8M-vOf"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -51,13 +51,7 @@
         <scene sceneID="K1O-qk-MMp">
             <objects>
                 <viewController storyboardIdentifier="PhoneVerificationController" id="IZ8-El-dW0" customClass="PhoneVerificationViewController" customModule="PositionIn" customModuleProvider="target" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" title="Phone Verification" id="Iko-Vc-aUZ">
-                        <barButtonItem key="rightBarButtonItem" title="Done" id="s5f-jO-1B8">
-                            <connections>
-                                <action selector="doneButtonPressed" destination="IZ8-El-dW0" id="2wu-e0-SCT"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Phone Verification" id="Iko-Vc-aUZ"/>
                     <connections>
                         <segue destination="lJA-TZ-gvR" kind="show" identifier="ProfileSegueId" id="Ceq-Zr-sQd"/>
                     </connections>
@@ -244,14 +238,14 @@ heading your way</string>
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="We sent you a notification" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mf7-AM-6iG">
-                                <rect key="frame" x="20" y="84" width="560" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="We sent you a notification" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mf7-AM-6iG">
+                                <rect key="frame" x="20" y="40" width="560" height="21"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zyG-Wg-fLI">
-                                <rect key="frame" x="20" y="125" width="560" height="56"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zyG-Wg-fLI">
+                                <rect key="frame" x="20" y="81" width="560" height="56"/>
                                 <string key="text">To complete donation, press on
 the notification and enter you
 M-Pesa PIN number</string>
@@ -259,8 +253,8 @@ M-Pesa PIN number</string>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QaO-bz-h5g">
-                                <rect key="frame" x="20" y="195" width="560" height="105"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QaO-bz-h5g">
+                                <rect key="frame" x="20" y="152" width="560" height="105"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="krfc" translatesAutoresizingMaskIntoConstraints="NO" id="eT9-cn-0Pz">
                                         <rect key="frame" x="0.0" y="0.0" width="64" height="64"/>
@@ -294,8 +288,8 @@ M-Pesa PIN number</string>
                                         <color key="textColor" red="0.60784313729999995" green="0.60784313729999995" blue="0.60784313729999995" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" misplaced="YES" text="KSh 1,000.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HMm-1X-bhl">
-                                        <rect key="frame" x="80" y="75" width="471" height="25"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="KSh 1,000.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HMm-1X-bhl">
+                                        <rect key="frame" x="80" y="75" width="470" height="25"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>

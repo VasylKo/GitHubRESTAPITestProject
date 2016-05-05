@@ -15,13 +15,20 @@ class EPlusMemberCardViewController : UIViewController {
     private let router : EPlusMembershipRouter
     private var profile : UserProfile?
     private var plan : EPlusMembershipPlan?
+    private var planDetails : EplusMembershipDetails?
     private var canTransitToInfo : Bool
+    private lazy var dateFormatter: NSDateFormatter = {
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "dd.MM.yyyy"
+        return dateFormatter
+    }()
     
     @IBOutlet weak var eplusMemberCardView: EPlusMemberCardView?
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView?
     @IBOutlet weak var detailsButton: UIButton?
     
-    @IBOutlet weak var infoLabel: UILabel?
+    @IBOutlet weak var infoSectionViewContainer: UIView?
+    @IBOutlet weak var dateRangeLabel: UILabel?
 
     //MARK: Initializers
     
@@ -67,27 +74,52 @@ class EPlusMemberCardViewController : UIViewController {
             self?.profile = profile
             
             return api().getEPlusActiveMembership().flatMap { [weak self] (details : EplusMembershipDetails?) -> Future<Void, NSError> in
-                guard let details = details else {
+                guard let strongSelf = self, details = details else {
                     return Future()
                 }
+                strongSelf.planDetails = details
                 
                 return api().getEPlusMemberships().flatMap { [weak self] (response : CollectionResponse<EPlusMembershipPlan>) -> Future<Void, NSError> in
-                    //api().getEPlusMembership(details.membershipPlanId).flatMap { [weak self] (plan : EPlusMembershipPlan) -> Future<Void, NSError> in
                     if let strongSelf = self, profile = strongSelf.profile {
                         strongSelf.plan = response.items.filter {$0.objectId == details.membershipPlanId}.first!
                         strongSelf.eplusMemberCardView?.configureWith(profile: profile, plan: strongSelf.plan!, membershipDetails: details)
                         strongSelf.detailsButton?.enabled = true
-        
-                        //Show eplus memver card
-                        UIView.animateWithDuration(0.4, animations: { () -> Void in
-                            strongSelf.eplusMemberCardView?.alpha = 1.0
-                        })
-                        strongSelf.activityIndicator?.stopAnimating()
+
+                        strongSelf.showEplusMemberCard()
                     }
                     return Future()
                 }
             }
         }
+    }
+    
+    private func showEplusMemberCard() {
+        
+        
+        UIView.animateWithDuration(0.4, animations: { () -> Void in
+            self.eplusMemberCardView?.alpha = 1.0
+            if !self.canTransitToInfo {
+                self.setPlanDateRange()
+                self.infoSectionViewContainer?.alpha = 1.0
+            } else {
+                //set height constraint to 0 in order for scroll place to be more narrow
+                guard let infoSectionViewContainer = self.infoSectionViewContainer else { return }
+                let heightConstraint =  NSLayoutConstraint(item: infoSectionViewContainer, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1.0, constant: 0.0)
+                infoSectionViewContainer.addConstraint(heightConstraint)
+            }
+        })
+        activityIndicator?.stopAnimating()
+    
+    }
+    
+    private func setPlanDateRange() {
+        guard let startDate = planDetails?.startDate, endDate = planDetails?.endDate else {
+            dateRangeLabel?.hidden = true
+            return
+        }
+
+        let dateRangeString = dateFormatter.stringFromDate(startDate) + " - " + dateFormatter.stringFromDate(endDate)
+        dateRangeLabel?.text = dateRangeString
     }
 
     

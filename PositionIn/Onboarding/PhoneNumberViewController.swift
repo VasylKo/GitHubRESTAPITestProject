@@ -16,12 +16,7 @@ class PhoneNumberViewController: XLFormViewController {
         case CountryCode = "CountryCode"
         case Phone = "Phone"
     }
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        trackScreenToAnalytics(AnalyticsLabels.phoneVerification)
-    }
-    
+
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         self.prepareCountryPhoneCodes()
@@ -38,6 +33,21 @@ class PhoneNumberViewController: XLFormViewController {
         super.viewDidLoad()
         view.tintColor = UIScheme.mainThemeColor
         trackEventToAnalytics(AnalyticCategories.auth, action: AnalyticActios.click, label: NSLocalizedString("SMS code"))
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        trackScreenToAnalytics(AnalyticsLabels.phoneVerification)
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector:"keyboardWillAppear:",
+                                                         name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector:"keyboardWillDisappear:",
+                                                         name: UIKeyboardWillHideNotification, object: nil)
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
+        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
     override func showFormValidationError(error: NSError!) {
@@ -112,7 +122,7 @@ class PhoneNumberViewController: XLFormViewController {
         
         self.form = form
     }
-    
+
     func prepareCountryPhoneCodes() {
         let csvFile = NSBundle.mainBundle().pathForResource("country-codes", ofType: "csv")
         
@@ -145,7 +155,24 @@ class PhoneNumberViewController: XLFormViewController {
         dismissViewControllerAnimated(true, completion: nil)
     }
     
-    @IBAction func doneButtonPressed(sender: AnyObject) {
+    func keyboardWillAppear(notification: NSNotification){
+        isKeyboardVisible = true
+    }
+    
+    func keyboardWillDisappear(notification: NSNotification){
+        isKeyboardVisible = false
+    }
+    
+    @IBAction func navigationDoneButtonPressed(sender: AnyObject) {
+        if isKeyboardVisible {
+            self.view.endEditing(true)
+        }
+        else {
+            self.doneButtonPressed(self.doneButton)
+        }
+    }
+    
+    func doneButtonPressed(sender: AnyObject) {
         
         trackEventToAnalytics(AnalyticCategories.phoneVerification, action: AnalyticActios.done)
         
@@ -195,6 +222,7 @@ class PhoneNumberViewController: XLFormViewController {
         }
     }
     
+    private var isKeyboardVisible: Bool = false
     private var countryPhoneCode: String? = "+254"
     private var phonesDictionary: [[String: String]] = []
     
