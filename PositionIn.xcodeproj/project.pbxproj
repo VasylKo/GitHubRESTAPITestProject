@@ -115,6 +115,8 @@
 		511791ED1CCBEC5900B916CB /* PaymentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511791EC1CCBEC5900B916CB /* PaymentManager.swift */; };
 		511791FB1CCCBA6500B916CB /* BraintreePaymentSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511791FA1CCCBA6500B916CB /* BraintreePaymentSystem.swift */; };
 		511792001CCD551300B916CB /* DonatePaymentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511791FE1CCD551300B916CB /* DonatePaymentController.swift */; };
+		51E176E91CDB7C98006E4E3F /* GiveBloodRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E176E61CDB7C98006E4E3F /* GiveBloodRouter.swift */; };
+		51E176EA1CDB7C99006E4E3F /* GiveBloodRouterImplementation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E176E71CDB7C98006E4E3F /* GiveBloodRouterImplementation.swift */; };
 		541820FC1CB7B28D001A780A /* MPesaBongaPinCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 541820FB1CB7B28D001A780A /* MPesaBongaPinCell.swift */; };
 		541820FE1CB7B295001A780A /* MPesaBongaPinCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 541820FD1CB7B295001A780A /* MPesaBongaPinCell.xib */; };
 		5419F9801CC52AC1000E16E7 /* AboutEplusServiceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5419F97E1CC52AC1000E16E7 /* AboutEplusServiceController.swift */; };
@@ -729,6 +731,8 @@
 		511791EC1CCBEC5900B916CB /* PaymentManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentManager.swift; sourceTree = "<group>"; };
 		511791FA1CCCBA6500B916CB /* BraintreePaymentSystem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BraintreePaymentSystem.swift; sourceTree = "<group>"; };
 		511791FE1CCD551300B916CB /* DonatePaymentController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DonatePaymentController.swift; sourceTree = "<group>"; };
+		51E176E61CDB7C98006E4E3F /* GiveBloodRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GiveBloodRouter.swift; sourceTree = "<group>"; };
+		51E176E71CDB7C98006E4E3F /* GiveBloodRouterImplementation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GiveBloodRouterImplementation.swift; sourceTree = "<group>"; };
 		541820FB1CB7B28D001A780A /* MPesaBongaPinCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPesaBongaPinCell.swift; sourceTree = "<group>"; };
 		541820FD1CB7B295001A780A /* MPesaBongaPinCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MPesaBongaPinCell.xib; sourceTree = "<group>"; };
 		5419F97E1CC52AC1000E16E7 /* AboutEplusServiceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutEplusServiceController.swift; sourceTree = "<group>"; };
@@ -1793,6 +1797,39 @@
 			path = DonatePaymentController;
 			sourceTree = "<group>";
 		};
+		51E176E31CDB7C98006E4E3F /* GiveBlood */ = {
+			isa = PBXGroup;
+			children = (
+				51E176E41CDB7C98006E4E3F /* Interface */,
+				51E176E51CDB7C98006E4E3F /* Router */,
+				51E176E81CDB7C98006E4E3F /* ViewControllers */,
+			);
+			path = GiveBlood;
+			sourceTree = "<group>";
+		};
+		51E176E41CDB7C98006E4E3F /* Interface */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Interface;
+			sourceTree = "<group>";
+		};
+		51E176E51CDB7C98006E4E3F /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				51E176E61CDB7C98006E4E3F /* GiveBloodRouter.swift */,
+				51E176E71CDB7C98006E4E3F /* GiveBloodRouterImplementation.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		51E176E81CDB7C98006E4E3F /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
 		541820F41CB7B0F2001A780A /* MPesaBongaPinCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -2176,6 +2213,7 @@
 		CD795BE91C57BA8100C1C298 /* Stories */ = {
 			isa = PBXGroup;
 			children = (
+				51E176E31CDB7C98006E4E3F /* GiveBlood */,
 				181314E41CBFA3B4004373F2 /* EplusMembership */,
 				CD795BEA1C57BA8100C1C298 /* Membership */,
 			);
@@ -4885,6 +4923,7 @@
 				18F7C6451CBFF0F100B68BB6 /* EPlusPlansViewController.swift in Sources */,
 				5419F9801CC52AC1000E16E7 /* AboutEplusServiceController.swift in Sources */,
 				549C6BD21CCF98CF0062435F /* EplusPaymentTransactionViewController.swift in Sources */,
+				51E176E91CDB7C98006E4E3F /* GiveBloodRouter.swift in Sources */,
 				D1FD853E1C1EE8D800C2E87B /* PromotionDetailsViewController.swift in Sources */,
 				1840402F1CC500F600DF3655 /* EPlusService.swift in Sources */,
 				E6F074AF1BA6980D00D2566B /* ConversationViewController.swift in Sources */,
@@ -5019,6 +5058,7 @@
 				CD8DB9AA1C89BB4100488EBB /* VolunteerMapViewController.swift in Sources */,
 				CD794DE01C52485E00C1C298 /* OpenApplication.swift in Sources */,
 				181314EB1CBFA3B4004373F2 /* EPlusMembershipRouter.swift in Sources */,
+				51E176EA1CDB7C99006E4E3F /* GiveBloodRouterImplementation.swift in Sources */,
 				2431EBDE1B947442009FB158 /* Product.swift in Sources */,
 				D100DF0F1BF4AA7900C81054 /* NSDate+NVTimeAgo.m in Sources */,
 				E6A869EC1B60D3E300797D16 /* APIService+Auth.swift in Sources */,
