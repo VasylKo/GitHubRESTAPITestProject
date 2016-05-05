@@ -14,13 +14,6 @@ final class CommunityInfoCell: TableViewCell {
         let m = model as? BrowseCommunityInfoCellModel
         assert(m != nil, "Invalid model passed")
         
-        let countFormat: String
-        switch m!.type {
-        case .Volunteer:
-            countFormat = NSLocalizedString("%d Volunteers", comment: "Browse community: count members")
-        default:
-            countFormat = NSLocalizedString("%d Members", comment: "Browse volunteering: count Volunteers")
-        }
         
         if m!.isClosed {
             communityTypeLabel.text = NSLocalizedString("Closed")
@@ -29,6 +22,16 @@ final class CommunityInfoCell: TableViewCell {
         else {
             communityTypeLabel.text = NSLocalizedString("Public")
             communityTypeIcon.image = UIImage(named: "public_comm")
+        }
+        
+        let countFormat: String
+        switch m!.type {
+        case .Volunteer:
+            communityTypeLabel.text = nil
+            communityTypeIcon.image = nil
+            countFormat = NSLocalizedString("%d Volunteers", comment: "Browse community: count members")
+        default:
+            countFormat = NSLocalizedString("%d Members", comment: "Browse volunteering: count Volunteers")
         }
         
         countLabel.text = (m!.membersCount).map { String(format:countFormat, $0) }

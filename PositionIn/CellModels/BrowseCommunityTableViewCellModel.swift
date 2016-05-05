@@ -21,12 +21,15 @@ final class BrowseCommunityHeaderCellModel: BrowseCommunityTableViewCellModel {
     let title: String
     let url: NSURL?
     let showInfo: Bool
+    let type: CommunityViewController.ControllerType
     weak var actionConsumer: CommunityFeedActionConsumer?
     
-    init(community: Community, tapAction: BrowseCommunityViewController.Action, title: String, url: NSURL?, showInfo: Bool) {
+    
+    init(community: Community, tapAction: BrowseCommunityViewController.Action, title: String, url: NSURL?, showInfo: Bool, type: CommunityViewController.ControllerType) {
         self.title = title
         self.url = url
         self.showInfo = showInfo
+        self.type = type
         super.init(community: community, tapAction: tapAction)
     }
 }
