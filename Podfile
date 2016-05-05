@@ -5,8 +5,8 @@ use_frameworks!
 
 target 'PositionIn' do
   pod 'KeychainAccess', '~> 2.3.1'
-  pod 'HanekeSwift', '~> 0.10'
-  pod 'KYDrawerController', '~> 1.1'
+  pod 'HanekeSwift', '~> 0.10.0'
+  pod 'KYDrawerController', '~> 1.1.2'
   pod 'UIImageEffects', :inhibit_warnings => true
   pod 'XLForm', '~> 3.1.0'
   pod 'ImagePickerSheetController', '~> 0.9'
@@ -14,11 +14,11 @@ target 'PositionIn' do
   pod 'HMSegmentedControl', '~> 1.5.2'
   pod 'JDStatusBarNotification', '~> 1.5'
   pod 'JSQMessagesViewController', '~> 7.2'
-  pod 'Google/Analytics'
+  pod 'Google/Analytics', '~> 1.3.2'
   pod 'PosInCore', :path => 'PosInCore'
   pod 'RealmSwift', '~> 0.97.0'
-  pod 'Fabric', '~> 1.0'
-  pod 'Crashlytics', '~> 3.0'
+  pod 'Fabric', '~> 1.6.2'
+  pod 'Crashlytics', '~> 3.5.0'
   pod 'Braintree', '~> 4.1.2'
   pod 'FBSDKCoreKit', '~> 4.8.0'
   pod 'FBSDKLoginKit', '~> 4.8.0'
