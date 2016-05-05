@@ -6,7 +6,7 @@ use_frameworks!
 target 'PositionIn' do
   pod 'KeychainAccess', '~> 2.3.1'
   pod 'HanekeSwift', '~> 0.10.0'
-  pod 'KYDrawerController', '~> 1.1.2'
+  pod 'KYDrawerController', '~> 1.1.0'
   pod 'UIImageEffects', :inhibit_warnings => true
   pod 'XLForm', '~> 3.1.0'
   pod 'ImagePickerSheetController', '~> 0.9'
