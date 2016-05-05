@@ -36,9 +36,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     override init() {
         #if DEBUG
-            Log.enable(minimumSeverity: .Verbose, debugMode: true)
+            Log.enable(.Verbose, synchronousMode: true)
         #else
-            Log.enable(minimumSeverity: .Info, debugMode: false)
+            Log.enable(.Info, synchronousMode: false)
         #endif
         let appConfig = AppConfiguration()
         let urlSessionConfig = NSURLSessionConfiguration.defaultSessionConfiguration()
@@ -208,7 +208,7 @@ extension AppDelegate {
     
     private class func chatClientInstance() -> XMPPClient {
         let appConfig = AppConfiguration()
-        let chatConfig = XMPPClientConfiguration(appConfig.xmppHostname, port: appConfig.xmppPort)
+        let chatConfig = XMPPClientConfiguration(with: appConfig.xmppHostname, port: appConfig.xmppPort)
         let credentialsProvider = appDelegate().api.chatCredentialsProvider()
         return XMPPClient(configuration: chatConfig, credentialsProvider: credentialsProvider)
     }
