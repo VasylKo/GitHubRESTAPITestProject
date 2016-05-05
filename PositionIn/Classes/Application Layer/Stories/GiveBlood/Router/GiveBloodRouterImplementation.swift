@@ -11,9 +11,20 @@ import UIKit
 class GiveBloodRouterImplementation: BaseRouterImplementation, GiveBloodRouter {
     
     func showInitialViewController(from sourceViewController : UIViewController) {
+        api().getDonorInfo().onSuccess { donorInfo in
+            guard let status = donorInfo.donorStatus else {
+                self.showIntroViewController(from: sourceViewController)
+                return
+            }
+            
+            switch status {
+            case .Undefined:
+                self.showIntroViewController(from: sourceViewController)
+            default:
+                self.showGiveBloodCentersViewController(from: sourceViewController)
+            }
+        }
         
-        showIntroViewController(from: sourceViewController)
-        //showGiveBloodCentersViewController(from: sourceViewController)
     }
     
     func showIntroViewController(from sourceViewController : UIViewController) {
@@ -25,5 +36,4 @@ class GiveBloodRouterImplementation: BaseRouterImplementation, GiveBloodRouter {
         controller.homeItem = .GiveBlood
         sourceViewController.navigationController?.pushViewController(controller, animated: true)
     }
-    
 }
