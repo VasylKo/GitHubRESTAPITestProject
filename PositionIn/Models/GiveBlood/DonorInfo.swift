@@ -54,7 +54,7 @@ struct DonorInfo: CRUDObject {
         bloodGroup      <-  map["bloodGroup"]
         dueDate       <- (map["dueDate"], APIDateTransform())
         declineReason   <-  map["declineReason"]
-        donorStatus   <-  map["donorStatus"]
+        donorStatus   <-  map["status"]
     }
     
     //MARK: Endpoints
