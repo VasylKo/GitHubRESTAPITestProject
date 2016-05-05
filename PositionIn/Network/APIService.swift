@@ -442,6 +442,12 @@ final class APIService {
         return self.handleFailure(futureBuilder)
     }
     
+    //MARK: - Give Blood
+    func getDonorInfo() -> Future<DonorInfo, NSError> {
+        let endpoint = DonorInfo.endpoint()
+        return getObject(endpoint)
+    }
+    
     //MARK: - Community -
     
     func getCommunities(page: Page) -> Future<CollectionResponse<Community>,NSError> {
