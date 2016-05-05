@@ -45,6 +45,9 @@ class EPlusServiceDetailsViewController: UIViewController, TTTAttributedLabelDel
         tableView.registerNib(nib, forCellReuseIdentifier: String(EPlusPlanInfoTableViewCell.self))
         tableView.separatorStyle = .None
         tableView.bounces = false
+        
+        let rightButton = UIBarButtonItem(image: UIImage(named: "services_icon"), style: .Done, target: self, action: Selector("showContactUsController:"))
+        navigationItem.setRightBarButtonItem(rightButton, animated: false)
     }
     
     func setupTableViewHeaderFooter() {
@@ -83,6 +86,10 @@ class EPlusServiceDetailsViewController: UIViewController, TTTAttributedLabelDel
         headerView.frame = frame
         
         tableView.tableHeaderView = headerView
+    }
+    
+    func showContactUsController(sender: AnyObject?) {
+        router.showContactSupportController(from: self)
     }
 }
 
