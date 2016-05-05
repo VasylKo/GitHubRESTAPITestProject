@@ -15,8 +15,8 @@ class VolunteerDetailsViewController: UIViewController {
         switch type {
         case .Volunteer:
             self.title = NSLocalizedString("Volunteer", comment:"")
-            communityTypeLabel.text = NSLocalizedString("Public")
-            communityTypeIcon.image = UIImage(named: "public_comm")
+            communityTypeLabel.text = nil
+            communityTypeIcon.image = nil
         case .Community:
             self.title = NSLocalizedString("Community", comment: "")
             if let closed = volunteer?.closed where closed == true {
