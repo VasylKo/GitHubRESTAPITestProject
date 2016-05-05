@@ -20,13 +20,13 @@ target 'PositionIn' do
   pod 'Fabric', '~> 1.0'
   pod 'Crashlytics', '~> 3.0'
   pod 'Braintree', '~> 4.1.2'
-  pod 'FBSDKCoreKit', '~> 4.7'
-  pod 'FBSDKLoginKit', '~> 4.7'
+  pod 'FBSDKCoreKit', '~> 4.8.0'
+  pod 'FBSDKLoginKit', '~> 4.8.0'
   pod 'Box', '~> 2.0'
   pod 'NewRelicAgent', '~> 5.3.6'
   pod 'CHCSVParser', '~> 2.1.0'
-  pod 'LNNotificationsUI', :git => 'https://github.com/LeoNatan/LNNotificationsUI'
   pod 'TTTAttributedLabel', '~> 1.13'
+  pod 'LNNotificationsUI', :podspec => 'https://raw.githubusercontent.com/rkolchakov/LNNotificationsUI/master/LNNotificationsUI.podspec'
 
   post_install do |installer|
     installer.pods_project.targets.each do |target|
