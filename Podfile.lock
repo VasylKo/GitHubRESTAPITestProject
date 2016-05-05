@@ -70,11 +70,11 @@ PODS:
     - Alamofire (~> 3.2.1)
     - BrightFutures (~> 3.0)
     - ObjectMapper (~> 1.1.5)
-  - Realm (0.99.1):
-    - Realm/Headers (= 0.99.1)
-  - Realm/Headers (0.99.1)
-  - RealmSwift (0.99.1):
-    - Realm (= 0.99.1)
+  - Realm (0.97.0):
+    - Realm/Headers (= 0.97.0)
+  - Realm/Headers (0.97.0)
+  - RealmSwift (0.97.0):
+    - Realm (= 0.97.0)
   - Result (1.0.2)
   - TTTAttributedLabel (1.13.4)
   - UIImageEffects (0.0.1)
