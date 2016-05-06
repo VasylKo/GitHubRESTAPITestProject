@@ -43,7 +43,7 @@ class IntroPageViewController: UIViewController {
         tableView?.registerNib(nib, forCellReuseIdentifier: String(BottomIntroCell.self))
         
         tableView?.rowHeight = UITableViewAutomaticDimension
-        tableView?.estimatedRowHeight = 50;
+        //tableView?.estimatedRowHeight = 50;
         
     }
 
@@ -93,6 +93,14 @@ extension IntroPageViewController: UITableViewDelegate {
     
     func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 0.1
+    }
+    
+    func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        if expandedIndexPaths.contains(indexPath) {
+            return 600
+        } else {
+            return 250
+        }
     }
 }
 

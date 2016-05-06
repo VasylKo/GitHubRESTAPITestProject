@@ -17,17 +17,158 @@
                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qgS-vE-b5a" userLabel="cardContainerView">
                         <rect key="frame" x="10" y="5" width="524" height="401.5"/>
                         <subviews>
+                            <view contentMode="scaleToFill" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="wQ7-hr-sXO" userLabel="VisibleContainerView">
+                                <rect key="frame" x="0.0" y="0.0" width="524" height="199.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Eligibility of Blood donors" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y86-xA-zlI">
+                                        <rect key="frame" x="16" y="16" width="492" height="23.5"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UGP-A5-l37" userLabel="bulletContainer1">
+                                        <rect key="frame" x="16" y="55" width="492" height="57.5"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" image="bullet_icon" translatesAutoresizingMaskIntoConstraints="NO" id="URB-i1-yqx">
+                                                <rect key="frame" x="0.0" y="22" width="12" height="12"/>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="People who donate blood are voluntary Non remunerated Blood donors and are not paid for their donation." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n8w-bV-cgk">
+                                                <rect key="frame" x="24" y="10" width="452" height="37.5"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
+                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.54000000000000004" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="39" id="533-Ci-uO8"/>
+                                            <constraint firstItem="URB-i1-yqx" firstAttribute="centerY" secondItem="UGP-A5-l37" secondAttribute="centerY" id="8k9-nh-lgg"/>
+                                            <constraint firstItem="n8w-bV-cgk" firstAttribute="top" secondItem="UGP-A5-l37" secondAttribute="top" constant="10" id="FbP-nV-qxr"/>
+                                            <constraint firstAttribute="bottom" secondItem="n8w-bV-cgk" secondAttribute="bottom" constant="10" id="IhV-GH-Rlg"/>
+                                            <constraint firstAttribute="trailing" secondItem="n8w-bV-cgk" secondAttribute="trailing" constant="16" id="PkK-Ol-atE"/>
+                                            <constraint firstItem="n8w-bV-cgk" firstAttribute="centerY" secondItem="UGP-A5-l37" secondAttribute="centerY" id="hRP-vl-Ryr"/>
+                                            <constraint firstItem="URB-i1-yqx" firstAttribute="leading" secondItem="UGP-A5-l37" secondAttribute="leading" id="iX2-2W-Fzs"/>
+                                            <constraint firstItem="n8w-bV-cgk" firstAttribute="leading" secondItem="URB-i1-yqx" secondAttribute="trailing" constant="12" id="wfM-Ed-hzM"/>
+                                        </constraints>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="533-Ci-uO8"/>
+                                            </mask>
+                                        </variation>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Qw-v0-mSX" userLabel="bulletContainer2">
+                                        <rect key="frame" x="16" y="112" width="492" height="39"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" image="bullet_icon" translatesAutoresizingMaskIntoConstraints="NO" id="q3x-5U-zpp">
+                                                <rect key="frame" x="0.0" y="14" width="12" height="12"/>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You can donate blood if you are 18 – 65 years of age." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qZd-Rf-rX4">
+                                                <rect key="frame" x="24" y="10" width="452" height="19"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
+                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.54000000000000004" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstItem="qZd-Rf-rX4" firstAttribute="leading" secondItem="q3x-5U-zpp" secondAttribute="trailing" constant="12" id="CMy-1T-dYr"/>
+                                            <constraint firstItem="q3x-5U-zpp" firstAttribute="leading" secondItem="4Qw-v0-mSX" secondAttribute="leading" id="QKb-z7-wfJ"/>
+                                            <constraint firstItem="qZd-Rf-rX4" firstAttribute="top" secondItem="4Qw-v0-mSX" secondAttribute="top" constant="10" id="bI9-Kd-m9O"/>
+                                            <constraint firstAttribute="trailing" secondItem="qZd-Rf-rX4" secondAttribute="trailing" constant="16" id="bce-Or-LSr"/>
+                                            <constraint firstAttribute="bottom" secondItem="qZd-Rf-rX4" secondAttribute="bottom" constant="10" id="g7V-nR-z96"/>
+                                            <constraint firstItem="qZd-Rf-rX4" firstAttribute="centerY" secondItem="4Qw-v0-mSX" secondAttribute="centerY" id="h2n-rz-6OH"/>
+                                            <constraint firstItem="q3x-5U-zpp" firstAttribute="centerY" secondItem="4Qw-v0-mSX" secondAttribute="centerY" id="oGK-Td-pzK"/>
+                                            <constraint firstAttribute="height" constant="39" id="pBV-6x-bi5"/>
+                                        </constraints>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="pBV-6x-bi5"/>
+                                            </mask>
+                                        </variation>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BXS-hG-Nst" userLabel="bulletContainer3">
+                                        <rect key="frame" x="16" y="151" width="492" height="32.5"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" image="bullet_icon" translatesAutoresizingMaskIntoConstraints="NO" id="AaM-LI-lxx">
+                                                <rect key="frame" x="0.0" y="9.5" width="12" height="12"/>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="250" text="People who are in perfect state of health." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yUQ-Ku-IZY">
+                                                <rect key="frame" x="24" y="10" width="452" height="12.5"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
+                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.54000000000000004" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="yUQ-Ku-IZY" secondAttribute="trailing" constant="16" id="5UZ-VR-PSW"/>
+                                            <constraint firstItem="AaM-LI-lxx" firstAttribute="centerY" secondItem="BXS-hG-Nst" secondAttribute="centerY" id="8A3-QO-RN9"/>
+                                            <constraint firstAttribute="bottom" secondItem="yUQ-Ku-IZY" secondAttribute="bottom" constant="10" id="FCz-Mx-UxT"/>
+                                            <constraint firstItem="yUQ-Ku-IZY" firstAttribute="top" secondItem="BXS-hG-Nst" secondAttribute="top" constant="10" id="HMZ-Bs-gmt"/>
+                                            <constraint firstAttribute="height" constant="39" id="eJf-PN-tUa"/>
+                                            <constraint firstItem="AaM-LI-lxx" firstAttribute="leading" secondItem="BXS-hG-Nst" secondAttribute="leading" id="gvz-q2-lbc"/>
+                                            <constraint firstItem="yUQ-Ku-IZY" firstAttribute="leading" secondItem="AaM-LI-lxx" secondAttribute="trailing" constant="12" id="t4U-ZB-Jxx"/>
+                                            <constraint firstItem="yUQ-Ku-IZY" firstAttribute="centerY" secondItem="BXS-hG-Nst" secondAttribute="centerY" id="txA-nY-5l9"/>
+                                        </constraints>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="eJf-PN-tUa"/>
+                                            </mask>
+                                        </variation>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="UGP-A5-l37" firstAttribute="top" secondItem="Y86-xA-zlI" secondAttribute="bottom" constant="16" id="4Js-lP-woP"/>
+                                    <constraint firstItem="4Qw-v0-mSX" firstAttribute="top" secondItem="UGP-A5-l37" secondAttribute="bottom" id="8Bk-7L-nj6"/>
+                                    <constraint firstItem="4Qw-v0-mSX" firstAttribute="leading" secondItem="Y86-xA-zlI" secondAttribute="leading" id="FGY-b5-oUJ"/>
+                                    <constraint firstAttribute="bottom" secondItem="BXS-hG-Nst" secondAttribute="bottom" constant="16" id="S1I-nd-t7H"/>
+                                    <constraint firstItem="BXS-hG-Nst" firstAttribute="trailing" secondItem="Y86-xA-zlI" secondAttribute="trailing" id="Ta2-Jw-eNt"/>
+                                    <constraint firstItem="UGP-A5-l37" firstAttribute="leading" secondItem="Y86-xA-zlI" secondAttribute="leading" id="Ugk-Na-4C8"/>
+                                    <constraint firstItem="UGP-A5-l37" firstAttribute="trailing" secondItem="Y86-xA-zlI" secondAttribute="trailing" id="aTS-Ju-rlW"/>
+                                    <constraint firstAttribute="trailing" secondItem="Y86-xA-zlI" secondAttribute="trailing" constant="16" id="aiD-3g-VEL"/>
+                                    <constraint firstItem="4Qw-v0-mSX" firstAttribute="trailing" secondItem="Y86-xA-zlI" secondAttribute="trailing" id="bg5-tA-I0W"/>
+                                    <constraint firstItem="BXS-hG-Nst" firstAttribute="top" secondItem="4Qw-v0-mSX" secondAttribute="bottom" id="cYo-C1-jsJ"/>
+                                    <constraint firstItem="Y86-xA-zlI" firstAttribute="top" secondItem="wQ7-hr-sXO" secondAttribute="top" constant="16" id="gJ9-7V-juN"/>
+                                    <constraint firstItem="BXS-hG-Nst" firstAttribute="leading" secondItem="Y86-xA-zlI" secondAttribute="leading" id="m4w-OB-x9J"/>
+                                    <constraint firstItem="Y86-xA-zlI" firstAttribute="leading" secondItem="wQ7-hr-sXO" secondAttribute="leading" constant="16" id="shh-LD-R7p"/>
+                                </constraints>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gJg-oK-GDG" userLabel="detailContainerView">
-                                <rect key="frame" x="0.0" y="238" width="524" height="122.5"/>
+                                <rect key="frame" x="0.0" y="199" width="524" height="161.5"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aNe-Na-bnd" userLabel="ContainerView">
-                                        <rect key="frame" x="16" y="0.0" width="492" height="122.5"/>
+                                        <rect key="frame" x="16" y="0.0" width="492" height="161.5"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Vj-Us-MYY" userLabel="bulletContainer1">
-                                                <rect key="frame" x="0.0" y="0.0" width="492" height="58"/>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Zu-50-UKg" userLabel="bulletContainer1">
+                                                <rect key="frame" x="0.0" y="0.0" width="492" height="39"/>
+                                                <subviews>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" image="bullet_icon" translatesAutoresizingMaskIntoConstraints="NO" id="4Zq-U1-ku7">
+                                                        <rect key="frame" x="0.0" y="13.5" width="12" height="12"/>
+                                                    </imageView>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You can donate blood when you weigh 50 kg and above." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LW4-bb-Ngo">
+                                                        <rect key="frame" x="24" y="10" width="452" height="19"/>
+                                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
+                                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.54000000000000004" colorSpace="calibratedRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstItem="LW4-bb-Ngo" firstAttribute="leading" secondItem="4Zq-U1-ku7" secondAttribute="trailing" constant="12" id="E1T-GU-1L7"/>
+                                                    <constraint firstItem="LW4-bb-Ngo" firstAttribute="top" secondItem="6Zu-50-UKg" secondAttribute="top" priority="998" constant="10" id="Hdq-eF-M5r"/>
+                                                    <constraint firstItem="LW4-bb-Ngo" firstAttribute="centerY" secondItem="6Zu-50-UKg" secondAttribute="centerY" id="KYa-GW-bo3"/>
+                                                    <constraint firstAttribute="bottom" secondItem="LW4-bb-Ngo" secondAttribute="bottom" priority="998" constant="10" id="LHj-vZ-HEd"/>
+                                                    <constraint firstItem="4Zq-U1-ku7" firstAttribute="centerY" secondItem="6Zu-50-UKg" secondAttribute="centerY" id="PSR-oZ-mmf"/>
+                                                    <constraint firstItem="4Zq-U1-ku7" firstAttribute="leading" secondItem="6Zu-50-UKg" secondAttribute="leading" id="gVA-tw-Ysw"/>
+                                                    <constraint firstAttribute="trailing" secondItem="LW4-bb-Ngo" secondAttribute="trailing" constant="16" id="tHP-ir-B6q"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Vj-Us-MYY" userLabel="bulletContainer2">
+                                                <rect key="frame" x="0.0" y="39" width="492" height="58"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" image="bullet_icon" translatesAutoresizingMaskIntoConstraints="NO" id="ajh-Ig-6Mi">
-                                                        <rect key="frame" x="0.0" y="22.5" width="12" height="12"/>
+                                                        <rect key="frame" x="0.0" y="23" width="12" height="12"/>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VpL-Vk-S5R">
                                                         <rect key="frame" x="24" y="10" width="452" height="38"/>
@@ -48,11 +189,11 @@
                                                     <constraint firstItem="VpL-Vk-S5R" firstAttribute="centerY" secondItem="0Vj-Us-MYY" secondAttribute="centerY" id="fWW-PQ-96m"/>
                                                 </constraints>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="imM-N9-heD" userLabel="bulletContainer2">
-                                                <rect key="frame" x="0.0" y="58" width="492" height="56.5"/>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="imM-N9-heD" userLabel="bulletContainer3">
+                                                <rect key="frame" x="0.0" y="97" width="492" height="56.5"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" image="bullet_icon" translatesAutoresizingMaskIntoConstraints="NO" id="TpR-eX-QVH">
-                                                        <rect key="frame" x="0.0" y="22.5" width="12" height="12"/>
+                                                        <rect key="frame" x="0.0" y="23" width="12" height="12"/>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A man can donate blood after every 3 months and female after every 4 months" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BBw-p8-yxE">
                                                         <rect key="frame" x="24" y="9" width="452" height="37.5"/>
@@ -76,19 +217,16 @@
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstItem="imM-N9-heD" firstAttribute="top" secondItem="0Vj-Us-MYY" secondAttribute="bottom" priority="998" id="52m-Fp-OYr"/>
-                                            <constraint firstItem="0Vj-Us-MYY" firstAttribute="top" secondItem="aNe-Na-bnd" secondAttribute="top" priority="998" id="GEH-Ja-Hrf"/>
+                                            <constraint firstItem="6Zu-50-UKg" firstAttribute="leading" secondItem="aNe-Na-bnd" secondAttribute="leading" id="HZP-iZ-fAh"/>
+                                            <constraint firstItem="6Zu-50-UKg" firstAttribute="bottom" secondItem="0Vj-Us-MYY" secondAttribute="top" priority="998" id="KOe-gU-vjI"/>
                                             <constraint firstAttribute="trailing" secondItem="0Vj-Us-MYY" secondAttribute="trailing" id="WQQ-Vl-4tX"/>
-                                            <constraint firstAttribute="bottom" secondItem="imM-N9-heD" secondAttribute="bottom" priority="998" id="fZG-7z-WDF"/>
+                                            <constraint firstItem="6Zu-50-UKg" firstAttribute="top" secondItem="aNe-Na-bnd" secondAttribute="top" priority="998" id="Ygd-S5-ql3"/>
+                                            <constraint firstAttribute="trailing" secondItem="6Zu-50-UKg" secondAttribute="trailing" id="hGt-KE-g5Q"/>
                                             <constraint firstAttribute="trailing" secondItem="imM-N9-heD" secondAttribute="trailing" id="i63-v3-2E1"/>
                                             <constraint firstItem="imM-N9-heD" firstAttribute="leading" secondItem="aNe-Na-bnd" secondAttribute="leading" id="koI-JH-WIS"/>
                                             <constraint firstAttribute="bottom" secondItem="imM-N9-heD" secondAttribute="bottom" priority="998" constant="8" id="oQz-Y0-ZA8"/>
                                             <constraint firstItem="0Vj-Us-MYY" firstAttribute="leading" secondItem="aNe-Na-bnd" secondAttribute="leading" id="xWR-Gr-g1o"/>
                                         </constraints>
-                                        <variation key="default">
-                                            <mask key="constraints">
-                                                <exclude reference="fZG-7z-WDF"/>
-                                            </mask>
-                                        </variation>
                                     </view>
                                 </subviews>
                                 <constraints>
@@ -135,150 +273,6 @@
                                     <constraint firstItem="XNb-yH-Sqe" firstAttribute="leading" secondItem="zWS-Fi-uaR" secondAttribute="leading" id="wtC-l9-cFK"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="wQ7-hr-sXO" userLabel="VisibleContainerView">
-                                <rect key="frame" x="0.0" y="0.0" width="524" height="238.5"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Eligibility of Blood donors" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y86-xA-zlI">
-                                        <rect key="frame" x="16" y="16" width="492" height="24"/>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UGP-A5-l37" userLabel="bulletContainer1">
-                                        <rect key="frame" x="16" y="56" width="492" height="57.5"/>
-                                        <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" image="bullet_icon" translatesAutoresizingMaskIntoConstraints="NO" id="URB-i1-yqx">
-                                                <rect key="frame" x="0.0" y="22.5" width="12" height="12"/>
-                                            </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="People who donate blood are voluntary Non remunerated Blood donors and are not paid for their donation." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n8w-bV-cgk">
-                                                <rect key="frame" x="24" y="10" width="452" height="37.5"/>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
-                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.54000000000000004" colorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="39" id="533-Ci-uO8"/>
-                                            <constraint firstItem="URB-i1-yqx" firstAttribute="centerY" secondItem="UGP-A5-l37" secondAttribute="centerY" id="8k9-nh-lgg"/>
-                                            <constraint firstItem="n8w-bV-cgk" firstAttribute="top" secondItem="UGP-A5-l37" secondAttribute="top" constant="10" id="FbP-nV-qxr"/>
-                                            <constraint firstAttribute="bottom" secondItem="n8w-bV-cgk" secondAttribute="bottom" constant="10" id="IhV-GH-Rlg"/>
-                                            <constraint firstAttribute="trailing" secondItem="n8w-bV-cgk" secondAttribute="trailing" constant="16" id="PkK-Ol-atE"/>
-                                            <constraint firstItem="n8w-bV-cgk" firstAttribute="centerY" secondItem="UGP-A5-l37" secondAttribute="centerY" id="hRP-vl-Ryr"/>
-                                            <constraint firstItem="URB-i1-yqx" firstAttribute="leading" secondItem="UGP-A5-l37" secondAttribute="leading" id="iX2-2W-Fzs"/>
-                                            <constraint firstItem="n8w-bV-cgk" firstAttribute="leading" secondItem="URB-i1-yqx" secondAttribute="trailing" constant="12" id="wfM-Ed-hzM"/>
-                                        </constraints>
-                                        <variation key="default">
-                                            <mask key="constraints">
-                                                <exclude reference="533-Ci-uO8"/>
-                                            </mask>
-                                        </variation>
-                                    </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Qw-v0-mSX" userLabel="bulletContainer2">
-                                        <rect key="frame" x="16" y="113.5" width="492" height="39"/>
-                                        <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" image="bullet_icon" translatesAutoresizingMaskIntoConstraints="NO" id="q3x-5U-zpp">
-                                                <rect key="frame" x="0.0" y="13" width="12" height="12"/>
-                                            </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You can donate blood if you are 18 – 65 years of age." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qZd-Rf-rX4">
-                                                <rect key="frame" x="24" y="10" width="452" height="19"/>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
-                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.54000000000000004" colorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstItem="qZd-Rf-rX4" firstAttribute="leading" secondItem="q3x-5U-zpp" secondAttribute="trailing" constant="12" id="CMy-1T-dYr"/>
-                                            <constraint firstItem="q3x-5U-zpp" firstAttribute="leading" secondItem="4Qw-v0-mSX" secondAttribute="leading" id="QKb-z7-wfJ"/>
-                                            <constraint firstItem="qZd-Rf-rX4" firstAttribute="top" secondItem="4Qw-v0-mSX" secondAttribute="top" constant="10" id="bI9-Kd-m9O"/>
-                                            <constraint firstAttribute="trailing" secondItem="qZd-Rf-rX4" secondAttribute="trailing" constant="16" id="bce-Or-LSr"/>
-                                            <constraint firstAttribute="bottom" secondItem="qZd-Rf-rX4" secondAttribute="bottom" constant="10" id="g7V-nR-z96"/>
-                                            <constraint firstItem="qZd-Rf-rX4" firstAttribute="centerY" secondItem="4Qw-v0-mSX" secondAttribute="centerY" id="h2n-rz-6OH"/>
-                                            <constraint firstItem="q3x-5U-zpp" firstAttribute="centerY" secondItem="4Qw-v0-mSX" secondAttribute="centerY" id="oGK-Td-pzK"/>
-                                            <constraint firstAttribute="height" constant="39" id="pBV-6x-bi5"/>
-                                        </constraints>
-                                        <variation key="default">
-                                            <mask key="constraints">
-                                                <exclude reference="pBV-6x-bi5"/>
-                                            </mask>
-                                        </variation>
-                                    </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BXS-hG-Nst" userLabel="bulletContainer3">
-                                        <rect key="frame" x="16" y="152.5" width="492" height="39"/>
-                                        <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" image="bullet_icon" translatesAutoresizingMaskIntoConstraints="NO" id="AaM-LI-lxx">
-                                                <rect key="frame" x="0.0" y="13" width="12" height="12"/>
-                                            </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="People who are in perfect state of health." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yUQ-Ku-IZY">
-                                                <rect key="frame" x="24" y="10" width="452" height="19"/>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
-                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.54000000000000004" colorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="yUQ-Ku-IZY" secondAttribute="trailing" constant="16" id="5UZ-VR-PSW"/>
-                                            <constraint firstItem="AaM-LI-lxx" firstAttribute="centerY" secondItem="BXS-hG-Nst" secondAttribute="centerY" id="8A3-QO-RN9"/>
-                                            <constraint firstAttribute="bottom" secondItem="yUQ-Ku-IZY" secondAttribute="bottom" constant="10" id="FCz-Mx-UxT"/>
-                                            <constraint firstItem="yUQ-Ku-IZY" firstAttribute="top" secondItem="BXS-hG-Nst" secondAttribute="top" constant="10" id="HMZ-Bs-gmt"/>
-                                            <constraint firstAttribute="height" constant="39" id="eJf-PN-tUa"/>
-                                            <constraint firstItem="AaM-LI-lxx" firstAttribute="leading" secondItem="BXS-hG-Nst" secondAttribute="leading" id="gvz-q2-lbc"/>
-                                            <constraint firstItem="yUQ-Ku-IZY" firstAttribute="leading" secondItem="AaM-LI-lxx" secondAttribute="trailing" constant="12" id="t4U-ZB-Jxx"/>
-                                            <constraint firstItem="yUQ-Ku-IZY" firstAttribute="centerY" secondItem="BXS-hG-Nst" secondAttribute="centerY" id="txA-nY-5l9"/>
-                                        </constraints>
-                                        <variation key="default">
-                                            <mask key="constraints">
-                                                <exclude reference="eJf-PN-tUa"/>
-                                            </mask>
-                                        </variation>
-                                    </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3k3-Wn-ifD" userLabel="bulletContainer4">
-                                        <rect key="frame" x="16" y="191" width="492" height="31"/>
-                                        <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" image="bullet_icon" translatesAutoresizingMaskIntoConstraints="NO" id="gcS-fF-k9H">
-                                                <rect key="frame" x="0.0" y="10" width="12" height="12"/>
-                                            </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="250" text="You can donate blood when you weigh 50 kg and above." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BBU-r8-Tfo">
-                                                <rect key="frame" x="24" y="10" width="452" height="11.5"/>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
-                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.54000000000000004" colorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstItem="BBU-r8-Tfo" firstAttribute="top" secondItem="3k3-Wn-ifD" secondAttribute="top" constant="10" id="9V5-rJ-CKw"/>
-                                            <constraint firstItem="BBU-r8-Tfo" firstAttribute="leading" secondItem="gcS-fF-k9H" secondAttribute="trailing" constant="12" id="N0r-B5-YJU"/>
-                                            <constraint firstItem="gcS-fF-k9H" firstAttribute="centerY" secondItem="3k3-Wn-ifD" secondAttribute="centerY" id="aSw-rs-2hk"/>
-                                            <constraint firstItem="gcS-fF-k9H" firstAttribute="leading" secondItem="3k3-Wn-ifD" secondAttribute="leading" id="ed6-22-nuR"/>
-                                            <constraint firstAttribute="bottom" secondItem="BBU-r8-Tfo" secondAttribute="bottom" constant="10" id="hkh-Fb-AeV"/>
-                                            <constraint firstAttribute="trailing" secondItem="BBU-r8-Tfo" secondAttribute="trailing" constant="16" id="n3I-Lj-q7g"/>
-                                            <constraint firstItem="BBU-r8-Tfo" firstAttribute="centerY" secondItem="3k3-Wn-ifD" secondAttribute="centerY" id="s0T-ad-MMN"/>
-                                        </constraints>
-                                    </view>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstItem="UGP-A5-l37" firstAttribute="top" secondItem="Y86-xA-zlI" secondAttribute="bottom" constant="16" id="4Js-lP-woP"/>
-                                    <constraint firstItem="4Qw-v0-mSX" firstAttribute="top" secondItem="UGP-A5-l37" secondAttribute="bottom" id="8Bk-7L-nj6"/>
-                                    <constraint firstItem="4Qw-v0-mSX" firstAttribute="leading" secondItem="Y86-xA-zlI" secondAttribute="leading" id="FGY-b5-oUJ"/>
-                                    <constraint firstItem="3k3-Wn-ifD" firstAttribute="leading" secondItem="Y86-xA-zlI" secondAttribute="leading" id="LW5-so-xzy"/>
-                                    <constraint firstItem="3k3-Wn-ifD" firstAttribute="top" secondItem="BXS-hG-Nst" secondAttribute="bottom" id="OgB-kO-pa7"/>
-                                    <constraint firstAttribute="bottom" secondItem="3k3-Wn-ifD" secondAttribute="bottom" constant="16" id="PJd-R0-KsH"/>
-                                    <constraint firstItem="BXS-hG-Nst" firstAttribute="trailing" secondItem="Y86-xA-zlI" secondAttribute="trailing" id="Ta2-Jw-eNt"/>
-                                    <constraint firstItem="UGP-A5-l37" firstAttribute="leading" secondItem="Y86-xA-zlI" secondAttribute="leading" id="Ugk-Na-4C8"/>
-                                    <constraint firstItem="UGP-A5-l37" firstAttribute="trailing" secondItem="Y86-xA-zlI" secondAttribute="trailing" id="aTS-Ju-rlW"/>
-                                    <constraint firstAttribute="trailing" secondItem="Y86-xA-zlI" secondAttribute="trailing" constant="16" id="aiD-3g-VEL"/>
-                                    <constraint firstItem="4Qw-v0-mSX" firstAttribute="trailing" secondItem="Y86-xA-zlI" secondAttribute="trailing" id="bg5-tA-I0W"/>
-                                    <constraint firstItem="BXS-hG-Nst" firstAttribute="top" secondItem="4Qw-v0-mSX" secondAttribute="bottom" id="cYo-C1-jsJ"/>
-                                    <constraint firstItem="Y86-xA-zlI" firstAttribute="top" secondItem="wQ7-hr-sXO" secondAttribute="top" constant="16" id="gJ9-7V-juN"/>
-                                    <constraint firstItem="3k3-Wn-ifD" firstAttribute="trailing" secondItem="Y86-xA-zlI" secondAttribute="trailing" id="k0W-mD-fWO"/>
-                                    <constraint firstItem="BXS-hG-Nst" firstAttribute="leading" secondItem="Y86-xA-zlI" secondAttribute="leading" id="m4w-OB-x9J"/>
-                                    <constraint firstItem="Y86-xA-zlI" firstAttribute="leading" secondItem="wQ7-hr-sXO" secondAttribute="leading" constant="16" id="shh-LD-R7p"/>
-                                </constraints>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -309,7 +303,7 @@
                 <outlet property="cardContainerView" destination="qgS-vE-b5a" id="cU6-mi-Zrp"/>
                 <outlet property="detailContainerViewHeightConstraint" destination="Zou-uj-nKc" id="kYA-a9-5dp"/>
                 <outlet property="detailsContainerView" destination="gJg-oK-GDG" id="WLP-Da-jnK"/>
-                <outlet property="lastVisibleElementBottomAnchorConstraint" destination="PJd-R0-KsH" id="tQS-Xh-2Ub"/>
+                <outlet property="lastVisibleElementBottomAnchorConstraint" destination="S1I-nd-t7H" id="4R8-0V-QYB"/>
                 <outlet property="readMoreButton" destination="WPX-hP-TRB" id="oAK-ls-ayj"/>
             </connections>
             <point key="canvasLocation" x="316" y="508"/>
