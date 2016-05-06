@@ -39,6 +39,9 @@ class IntroPageViewController: UIViewController {
         nib = UINib(nibName: String(MiddleIntroCell.self), bundle: nil)
         tableView?.registerNib(nib, forCellReuseIdentifier: String(MiddleIntroCell.self))
         
+        nib = UINib(nibName: String(BottomIntroCell.self), bundle: nil)
+        tableView?.registerNib(nib, forCellReuseIdentifier: String(BottomIntroCell.self))
+        
         tableView?.rowHeight = UITableViewAutomaticDimension
         tableView?.estimatedRowHeight = 50;
         
@@ -68,15 +71,14 @@ extension IntroPageViewController: UITableViewDataSource {
             cell = tableView.dequeueReusableCellWithIdentifier(String(TopIntroCell.self), forIndexPath: indexPath)
         case .MiddleCell:
             cell = tableView.dequeueReusableCellWithIdentifier(String(MiddleIntroCell.self), forIndexPath: indexPath)
-        default:
-            cell = UITableViewCell()
+        case .BottomCell:
+            cell = tableView.dequeueReusableCellWithIdentifier(String(BottomIntroCell.self), forIndexPath: indexPath)
         }
         
         if let cell = cell as? GiveBloodIntroCell {
             cell.showMore = expandedIndexPaths.contains(indexPath)
             cell.delegate = self
         }
-        
         
         return cell
     }

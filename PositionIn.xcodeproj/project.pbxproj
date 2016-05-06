@@ -125,6 +125,8 @@
 		51E1770B1CDD207C006E4E3F /* PositionIn.IntroPageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51E1770A1CDD207C006E4E3F /* PositionIn.IntroPageViewController.xib */; };
 		51E1770E1CDD21A2006E4E3F /* MiddleIntroCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E1770C1CDD21A2006E4E3F /* MiddleIntroCell.swift */; };
 		51E1770F1CDD21A2006E4E3F /* MiddleIntroCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51E1770D1CDD21A2006E4E3F /* MiddleIntroCell.xib */; };
+		51E177121CDD2A91006E4E3F /* BottomIntroCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E177101CDD2A91006E4E3F /* BottomIntroCell.swift */; };
+		51E177131CDD2A92006E4E3F /* BottomIntroCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51E177111CDD2A91006E4E3F /* BottomIntroCell.xib */; };
 		541820FC1CB7B28D001A780A /* MPesaBongaPinCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 541820FB1CB7B28D001A780A /* MPesaBongaPinCell.swift */; };
 		541820FE1CB7B295001A780A /* MPesaBongaPinCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 541820FD1CB7B295001A780A /* MPesaBongaPinCell.xib */; };
 		5419F9801CC52AC1000E16E7 /* AboutEplusServiceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5419F97E1CC52AC1000E16E7 /* AboutEplusServiceController.swift */; };
@@ -749,6 +751,8 @@
 		51E1770A1CDD207C006E4E3F /* PositionIn.IntroPageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.IntroPageViewController.xib; sourceTree = "<group>"; };
 		51E1770C1CDD21A2006E4E3F /* MiddleIntroCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MiddleIntroCell.swift; sourceTree = "<group>"; };
 		51E1770D1CDD21A2006E4E3F /* MiddleIntroCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MiddleIntroCell.xib; sourceTree = "<group>"; };
+		51E177101CDD2A91006E4E3F /* BottomIntroCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomIntroCell.swift; sourceTree = "<group>"; };
+		51E177111CDD2A91006E4E3F /* BottomIntroCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BottomIntroCell.xib; sourceTree = "<group>"; };
 		541820FB1CB7B28D001A780A /* MPesaBongaPinCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPesaBongaPinCell.swift; sourceTree = "<group>"; };
 		541820FD1CB7B295001A780A /* MPesaBongaPinCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MPesaBongaPinCell.xib; sourceTree = "<group>"; };
 		5419F97E1CC52AC1000E16E7 /* AboutEplusServiceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutEplusServiceController.swift; sourceTree = "<group>"; };
@@ -1887,6 +1891,8 @@
 		51E177011CDCD957006E4E3F /* BottomCell */ = {
 			isa = PBXGroup;
 			children = (
+				51E177101CDD2A91006E4E3F /* BottomIntroCell.swift */,
+				51E177111CDD2A91006E4E3F /* BottomIntroCell.xib */,
 			);
 			path = BottomCell;
 			sourceTree = "<group>";
@@ -4713,6 +4719,7 @@
 				51E177091CDCDBF4006E4E3F /* TopIntroCell.xib in Resources */,
 				D12EB2861C96E5DF00718E57 /* FeedListViewController.xib in Resources */,
 				E69421021B666A1600F34F06 /* PositionIn.ActionCell.xib in Resources */,
+				51E177131CDD2A92006E4E3F /* BottomIntroCell.xib in Resources */,
 				5456528E1CCFAB4600C63C01 /* PaymentOrderDescriptionCell.xib in Resources */,
 				23F6AF851CA2889800CDD2FF /* PositionIn.PeopleExploreViewController.xib in Resources */,
 				E6F309421BA8200600C9420C /* PositionIn.PickPhotoView.xib in Resources */,
@@ -4970,6 +4977,7 @@
 				E6C952371BA1D9960032254F /* ProfileStatsCell.swift in Sources */,
 				CD795BF41C57BBC200C1C298 /* BaseRouterImplementation.swift in Sources */,
 				E6DA53C71B7D00DB000087A7 /* BrowseCommunityViewController.swift in Sources */,
+				51E177121CDD2A91006E4E3F /* BottomIntroCell.swift in Sources */,
 				E6F309401BA81FAF00C9420C /* UploadPhotoCell.swift in Sources */,
 				E6C952291BA1A82F0032254F /* CLLocationCoordinate2D+Equal.swift in Sources */,
 				E689F0771B6B90F400597587 /* ProductInventoryViewController.swift in Sources */,
