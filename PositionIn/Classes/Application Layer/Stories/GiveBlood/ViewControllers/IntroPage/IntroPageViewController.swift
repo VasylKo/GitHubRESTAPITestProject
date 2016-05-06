@@ -1,8 +1,8 @@
 //
-//  IntroPageViewController.swift
+//  TestIntroPageViewController.swift
 //  PositionIn
 //
-//  Created by Vasyl Kotsiuba on 5/5/16.
+//  Created by Vasyl Kotsiuba on 5/6/16.
 //  Copyright © 2016 Soluna Labs. All rights reserved.
 //
 
@@ -10,7 +10,13 @@ import UIKit
 
 class IntroPageViewController: UIViewController {
 
+    @IBOutlet weak var tableView: UITableView?
     private let router : GiveBloodRouter
+    private var expandedIndexPaths = [NSIndexPath]()
+    
+    private enum GiveBloodCellType: Int {
+        case TopCell = 0, MiddleCell, BottomCell
+    }
     
     // MARK: - Init
     init(router: GiveBloodRouter) {
@@ -22,27 +28,68 @@ class IntroPageViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: - View life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        tableView?.separatorStyle = .None
+        
+        let nib = UINib(nibName: String(TopIntroCell.self), bundle: nil)
+        tableView?.registerNib(nib, forCellReuseIdentifier: String(TopIntroCell.self))
+        
+        tableView?.rowHeight = UITableViewAutomaticDimension
+        tableView?.estimatedRowHeight = 50;
+        
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
+
+// MARK: - Table view data source
+extension IntroPageViewController: UITableViewDataSource {
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 3
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        guard let cellType = GiveBloodCellType(rawValue: indexPath.section) else {
+            fatalError("Cell type don't found")
+        }
+        
+        let cell: UITableViewCell
+        
+        switch cellType {
+        case .TopCell:
+            cell = tableView.dequeueReusableCellWithIdentifier(String(TopIntroCell.self), forIndexPath: indexPath)        default:
+            cell = UITableViewCell()
+        }
+        
+        if let cell = cell as? GiveBloodIntroCell {
+            cell.showMore = expandedIndexPaths.contains(indexPath)
+            cell.delegate = self
+        }
+        
+        
+        return cell
+    }
+    
+}
+
+// MARK: - Table view delegate
+extension IntroPageViewController: UITableViewDelegate {
+    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 4
+    }
+}
+
+extension IntroPageViewController: GiveBloodIntroCellDelegate {
+    func readMoreButtonPressedOnCell(cell: UITableViewCell) {
+        guard let indexPath = tableView?.indexPathForCell(cell) else { return }
+        expandedIndexPaths.append(indexPath)
+        
+        tableView?.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+    }
+}
+

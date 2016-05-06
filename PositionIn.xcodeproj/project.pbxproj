@@ -118,13 +118,11 @@
 		51E176E91CDB7C98006E4E3F /* GiveBloodRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E176E61CDB7C98006E4E3F /* GiveBloodRouter.swift */; };
 		51E176EA1CDB7C99006E4E3F /* GiveBloodRouterImplementation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E176E71CDB7C98006E4E3F /* GiveBloodRouterImplementation.swift */; };
 		51E176EF1CDB8016006E4E3F /* DonorInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E176EE1CDB8016006E4E3F /* DonorInfo.swift */; };
-		51E176F31CDB8F86006E4E3F /* IntroPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E176F11CDB8F86006E4E3F /* IntroPageViewController.swift */; };
-		51E176F71CDB8FCE006E4E3F /* PositionIn.IntroPageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51E176F61CDB8FCE006E4E3F /* PositionIn.IntroPageViewController.xib */; };
-		51E176FA1CDC8FC7006E4E3F /* TestIntroPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E176F81CDC8FC7006E4E3F /* TestIntroPageViewController.swift */; };
-		51E176FB1CDC8FC7006E4E3F /* PositionIn.TestIntroPageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51E176F91CDC8FC7006E4E3F /* PositionIn.TestIntroPageViewController.xib */; };
+		51E176FA1CDC8FC7006E4E3F /* IntroPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E176F81CDC8FC7006E4E3F /* IntroPageViewController.swift */; };
 		51E177051CDCDA0B006E4E3F /* IntroPageCellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E177041CDCDA0A006E4E3F /* IntroPageCellProtocol.swift */; };
 		51E177081CDCDBF4006E4E3F /* TopIntroCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E177061CDCDBF4006E4E3F /* TopIntroCell.swift */; };
 		51E177091CDCDBF4006E4E3F /* TopIntroCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51E177071CDCDBF4006E4E3F /* TopIntroCell.xib */; };
+		51E1770B1CDD207C006E4E3F /* PositionIn.IntroPageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51E1770A1CDD207C006E4E3F /* PositionIn.IntroPageViewController.xib */; };
 		541820FC1CB7B28D001A780A /* MPesaBongaPinCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 541820FB1CB7B28D001A780A /* MPesaBongaPinCell.swift */; };
 		541820FE1CB7B295001A780A /* MPesaBongaPinCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 541820FD1CB7B295001A780A /* MPesaBongaPinCell.xib */; };
 		5419F9801CC52AC1000E16E7 /* AboutEplusServiceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5419F97E1CC52AC1000E16E7 /* AboutEplusServiceController.swift */; };
@@ -742,13 +740,11 @@
 		51E176E61CDB7C98006E4E3F /* GiveBloodRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GiveBloodRouter.swift; sourceTree = "<group>"; };
 		51E176E71CDB7C98006E4E3F /* GiveBloodRouterImplementation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GiveBloodRouterImplementation.swift; sourceTree = "<group>"; };
 		51E176EE1CDB8016006E4E3F /* DonorInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DonorInfo.swift; sourceTree = "<group>"; };
-		51E176F11CDB8F86006E4E3F /* IntroPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntroPageViewController.swift; sourceTree = "<group>"; };
-		51E176F61CDB8FCE006E4E3F /* PositionIn.IntroPageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.IntroPageViewController.xib; sourceTree = "<group>"; };
-		51E176F81CDC8FC7006E4E3F /* TestIntroPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestIntroPageViewController.swift; sourceTree = "<group>"; };
-		51E176F91CDC8FC7006E4E3F /* PositionIn.TestIntroPageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.TestIntroPageViewController.xib; sourceTree = "<group>"; };
+		51E176F81CDC8FC7006E4E3F /* IntroPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntroPageViewController.swift; sourceTree = "<group>"; };
 		51E177041CDCDA0A006E4E3F /* IntroPageCellProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntroPageCellProtocol.swift; sourceTree = "<group>"; };
 		51E177061CDCDBF4006E4E3F /* TopIntroCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopIntroCell.swift; sourceTree = "<group>"; };
 		51E177071CDCDBF4006E4E3F /* TopIntroCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TopIntroCell.xib; sourceTree = "<group>"; };
+		51E1770A1CDD207C006E4E3F /* PositionIn.IntroPageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.IntroPageViewController.xib; sourceTree = "<group>"; };
 		541820FB1CB7B28D001A780A /* MPesaBongaPinCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPesaBongaPinCell.swift; sourceTree = "<group>"; };
 		541820FD1CB7B295001A780A /* MPesaBongaPinCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MPesaBongaPinCell.xib; sourceTree = "<group>"; };
 		5419F97E1CC52AC1000E16E7 /* AboutEplusServiceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutEplusServiceController.swift; sourceTree = "<group>"; };
@@ -1859,9 +1855,7 @@
 		51E176F01CDB8F6E006E4E3F /* IntroPage */ = {
 			isa = PBXGroup;
 			children = (
-				51E176F11CDB8F86006E4E3F /* IntroPageViewController.swift */,
-				51E176F81CDC8FC7006E4E3F /* TestIntroPageViewController.swift */,
-				51E176F91CDC8FC7006E4E3F /* PositionIn.TestIntroPageViewController.xib */,
+				51E176F81CDC8FC7006E4E3F /* IntroPageViewController.swift */,
 			);
 			path = IntroPage;
 			sourceTree = "<group>";
@@ -1870,7 +1864,7 @@
 			isa = PBXGroup;
 			children = (
 				51E177001CDCD957006E4E3F /* IntroPageCells */,
-				51E176F61CDB8FCE006E4E3F /* PositionIn.IntroPageViewController.xib */,
+				51E1770A1CDD207C006E4E3F /* PositionIn.IntroPageViewController.xib */,
 			);
 			path = IntroPage;
 			sourceTree = "<group>";
@@ -4606,12 +4600,12 @@
 				CD795BE11C57B4EE00C1C298 /* Snapfile in Resources */,
 				CD795BDF1C57B4EE00C1C298 /* Fastfile in Resources */,
 				D1AEF6881CC4F0370030C695 /* EPlusCorporateAmbulanceDetailsController.xib in Resources */,
-				51E176FB1CDC8FC7006E4E3F /* PositionIn.TestIntroPageViewController.xib in Resources */,
 				CD8ED0DE1C60BE7000576DBF /* MembershipCardView.xib in Resources */,
 				18CCFB011C8D8AEB00603C7F /* MembershipMemberDetailsViewController.xib in Resources */,
 				549C6BD01CCF6DCF0062435F /* CommonPaymentViewController.xib in Resources */,
 				50C7B5B21BC6A32900E8E8B4 /* PositionIn.SettingsViewController.xib in Resources */,
 				D1AEF68D1CC506B40030C695 /* EPlusCorporatePlanOptionTableViewCell.xib in Resources */,
+				51E1770B1CDD207C006E4E3F /* PositionIn.IntroPageViewController.xib in Resources */,
 				5419F98B1CC52EDF000E16E7 /* AboutEplusServiceTableViewCell.xib in Resources */,
 				54A31F971CBBF20900A833C9 /* DonationPaymentAmountCell.xib in Resources */,
 				E6BEF1E81B9C83F200511B46 /* PositionIn.CommunityInfoCell.xib in Resources */,
@@ -4723,7 +4717,6 @@
 				184040271CC14A2B00DF3655 /* EPlusPlanInfoTableViewCell.xib in Resources */,
 				D12EB2971C96E83600718E57 /* PositionIn.NewsItemTitleCell.xib in Resources */,
 				1840402A1CC14A2B00DF3655 /* PositionIn.EPlusAmbulanceDetailsController.xib in Resources */,
-				51E176F71CDB8FCE006E4E3F /* PositionIn.IntroPageViewController.xib in Resources */,
 				500D7FAD1BC2CD51008C8C82 /* PositionIn.SearchSectionCell.xib in Resources */,
 				E6F2437A1B8B40380033B13C /* PositionIn.BrowseListTableViewCell.xib in Resources */,
 				E63201721B984E2D0066C62E /* PositionIn.DescriptionTableViewCell.xib in Resources */,
@@ -4919,7 +4912,6 @@
 				CDE1B91F1C5F9E6A00F76F32 /* MembershipMemberProfileView.swift in Sources */,
 				545652901CCFB6B800C63C01 /* NSDate+pickUpAvaliabilityString.swift in Sources */,
 				E6F7A4811BA356500069152A /* LocationSearchResultDataSource.swift in Sources */,
-				51E176F31CDB8F86006E4E3F /* IntroPageViewController.swift in Sources */,
 				E62B16FF1B5CE0F800D446BC /* BesideMenuViewController.swift in Sources */,
 				E66F901B1BA6A5C100280B77 /* ChatController.swift in Sources */,
 				D1B780C81C0F4E7700EF5825 /* DonateViewController.swift in Sources */,
@@ -4975,7 +4967,7 @@
 				E6C952291BA1A82F0032254F /* CLLocationCoordinate2D+Equal.swift in Sources */,
 				E689F0771B6B90F400597587 /* ProductInventoryViewController.swift in Sources */,
 				D118A2AD1C0FBDF50020B363 /* CardItem.swift in Sources */,
-				51E176FA1CDC8FC7006E4E3F /* TestIntroPageViewController.swift in Sources */,
+				51E176FA1CDC8FC7006E4E3F /* IntroPageViewController.swift in Sources */,
 				D18EA2CA1C04A3CA00A886A5 /* BrowseMainGridController.swift in Sources */,
 				CD795BFA1C57CA5E00C1C298 /* MembershipRouter.swift in Sources */,
 				18F7C6511CBFF13600B68BB6 /* EPlusTableViewHeaderView.swift in Sources */,

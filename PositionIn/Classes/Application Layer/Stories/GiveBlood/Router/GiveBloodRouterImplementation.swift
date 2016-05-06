@@ -28,8 +28,7 @@ class GiveBloodRouterImplementation: BaseRouterImplementation, GiveBloodRouter {
     }
     
     func showIntroViewController(from sourceViewController : UIViewController) {
-        //sourceViewController.navigationController?.pushViewController(IntroPageViewController(router: self), animated: true)
-        sourceViewController.navigationController?.pushViewController(TestIntroPageViewController(router: self), animated: true)
+        sourceViewController.navigationController?.pushViewController(IntroPageViewController(router: self), animated: true)
     }
     
     func showGiveBloodCentersViewController(from sourceViewController : UIViewController) {
