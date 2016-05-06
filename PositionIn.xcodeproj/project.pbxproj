@@ -123,6 +123,8 @@
 		51E177081CDCDBF4006E4E3F /* TopIntroCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E177061CDCDBF4006E4E3F /* TopIntroCell.swift */; };
 		51E177091CDCDBF4006E4E3F /* TopIntroCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51E177071CDCDBF4006E4E3F /* TopIntroCell.xib */; };
 		51E1770B1CDD207C006E4E3F /* PositionIn.IntroPageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51E1770A1CDD207C006E4E3F /* PositionIn.IntroPageViewController.xib */; };
+		51E1770E1CDD21A2006E4E3F /* MiddleIntroCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E1770C1CDD21A2006E4E3F /* MiddleIntroCell.swift */; };
+		51E1770F1CDD21A2006E4E3F /* MiddleIntroCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51E1770D1CDD21A2006E4E3F /* MiddleIntroCell.xib */; };
 		541820FC1CB7B28D001A780A /* MPesaBongaPinCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 541820FB1CB7B28D001A780A /* MPesaBongaPinCell.swift */; };
 		541820FE1CB7B295001A780A /* MPesaBongaPinCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 541820FD1CB7B295001A780A /* MPesaBongaPinCell.xib */; };
 		5419F9801CC52AC1000E16E7 /* AboutEplusServiceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5419F97E1CC52AC1000E16E7 /* AboutEplusServiceController.swift */; };
@@ -745,6 +747,8 @@
 		51E177061CDCDBF4006E4E3F /* TopIntroCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopIntroCell.swift; sourceTree = "<group>"; };
 		51E177071CDCDBF4006E4E3F /* TopIntroCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TopIntroCell.xib; sourceTree = "<group>"; };
 		51E1770A1CDD207C006E4E3F /* PositionIn.IntroPageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.IntroPageViewController.xib; sourceTree = "<group>"; };
+		51E1770C1CDD21A2006E4E3F /* MiddleIntroCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MiddleIntroCell.swift; sourceTree = "<group>"; };
+		51E1770D1CDD21A2006E4E3F /* MiddleIntroCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MiddleIntroCell.xib; sourceTree = "<group>"; };
 		541820FB1CB7B28D001A780A /* MPesaBongaPinCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPesaBongaPinCell.swift; sourceTree = "<group>"; };
 		541820FD1CB7B295001A780A /* MPesaBongaPinCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MPesaBongaPinCell.xib; sourceTree = "<group>"; };
 		5419F97E1CC52AC1000E16E7 /* AboutEplusServiceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutEplusServiceController.swift; sourceTree = "<group>"; };
@@ -1890,6 +1894,8 @@
 		51E177021CDCD957006E4E3F /* MiddleCell */ = {
 			isa = PBXGroup;
 			children = (
+				51E1770C1CDD21A2006E4E3F /* MiddleIntroCell.swift */,
+				51E1770D1CDD21A2006E4E3F /* MiddleIntroCell.xib */,
 			);
 			path = MiddleCell;
 			sourceTree = "<group>";
@@ -4629,6 +4635,7 @@
 				D1FD854C1C1EFE0F00C2E87B /* PositionIn.MarketDetailsViewController.xib in Resources */,
 				E6D7F83C1BE24AE500A544F4 /* PositionIn.MainMenuBadgeCell.xib in Resources */,
 				CDB5B5CB1C5B9C2400413715 /* MembershipPlansViewController.xib in Resources */,
+				51E1770F1CDD21A2006E4E3F /* MiddleIntroCell.xib in Resources */,
 				E6F2436E1B8B0E3A0033B13C /* PositionIn.MainMenuLoginCell.xib in Resources */,
 				D1FD85471C1EF6DB00C2E87B /* PositionIn.BomaHotelsDetailsViewController.xib in Resources */,
 				D14E47841CC64DFC002FDD6A /* EPlusServiceDetailsViewController.xib in Resources */,
@@ -5135,6 +5142,7 @@
 				50F730591BBBE86A008D3D94 /* CommentCell.swift in Sources */,
 				E61B20EF1B813C8C005EAB2C /* Community.swift in Sources */,
 				CD8DB9AA1C89BB4100488EBB /* VolunteerMapViewController.swift in Sources */,
+				51E1770E1CDD21A2006E4E3F /* MiddleIntroCell.swift in Sources */,
 				CD794DE01C52485E00C1C298 /* OpenApplication.swift in Sources */,
 				181314EB1CBFA3B4004373F2 /* EPlusMembershipRouter.swift in Sources */,
 				51E176EA1CDB7C99006E4E3F /* GiveBloodRouterImplementation.swift in Sources */,

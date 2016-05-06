@@ -15,10 +15,10 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qgS-vE-b5a" userLabel="cardContainerView">
-                        <rect key="frame" x="10" y="10" width="524" height="607.5"/>
+                        <rect key="frame" x="10" y="0.0" width="524" height="622.5"/>
                         <subviews>
                             <view contentMode="scaleToFill" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="wQ7-hr-sXO" userLabel="VisibleContainerView">
-                                <rect key="frame" x="0.0" y="0.0" width="524" height="198"/>
+                                <rect key="frame" x="0.0" y="0.0" width="524" height="213"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g8i-nC-KVw" userLabel="hearedViewContainer">
                                         <rect key="frame" x="16" y="6" width="492" height="92"/>
@@ -80,7 +80,7 @@
                                         </variation>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aVc-Ju-bBI">
-                                        <rect key="frame" x="16" y="98" width="492" height="84"/>
+                                        <rect key="frame" x="16" y="98" width="492" height="99"/>
                                         <string key="text">The Kenya Red Cross Society is the leading blood donor recruitment partner to the Government and supports in recruitment of blood donors to the Kenya National Blood transfusion services (KNBTS).</string>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.54000000000000004" colorSpace="calibratedRGB"/>
@@ -99,7 +99,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gJg-oK-GDG" userLabel="detailContainerView">
-                                <rect key="frame" x="0.0" y="198" width="524" height="369"/>
+                                <rect key="frame" x="0.0" y="213" width="524" height="369"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aNe-Na-bnd" userLabel="ContainerView">
                                         <rect key="frame" x="16" y="0.0" width="492" height="369"/>
@@ -268,7 +268,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zWS-Fi-uaR" userLabel="ButtonContainerView">
-                                <rect key="frame" x="0.0" y="567" width="524" height="40"/>
+                                <rect key="frame" x="0.0" y="582" width="524" height="40"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WPX-hP-TRB">
                                         <rect key="frame" x="0.0" y="0.0" width="524" height="40"/>
@@ -322,8 +322,8 @@
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="qgS-vE-b5a" secondAttribute="trailing" constant="10" id="5Zr-6k-c2V"/>
-                    <constraint firstItem="qgS-vE-b5a" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="Eie-ZO-JkJ"/>
-                    <constraint firstAttribute="bottom" secondItem="qgS-vE-b5a" secondAttribute="bottom" constant="10" id="eWR-hp-Hsk"/>
+                    <constraint firstItem="qgS-vE-b5a" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="Eie-ZO-JkJ"/>
+                    <constraint firstAttribute="bottom" secondItem="qgS-vE-b5a" secondAttribute="bottom" constant="5" id="eWR-hp-Hsk"/>
                     <constraint firstItem="qgS-vE-b5a" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="qR7-80-i00"/>
                 </constraints>
             </tableViewCellContentView>

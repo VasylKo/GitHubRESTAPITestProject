@@ -33,8 +33,11 @@ class IntroPageViewController: UIViewController {
         
         tableView?.separatorStyle = .None
         
-        let nib = UINib(nibName: String(TopIntroCell.self), bundle: nil)
+        var nib = UINib(nibName: String(TopIntroCell.self), bundle: nil)
         tableView?.registerNib(nib, forCellReuseIdentifier: String(TopIntroCell.self))
+        
+        nib = UINib(nibName: String(MiddleIntroCell.self), bundle: nil)
+        tableView?.registerNib(nib, forCellReuseIdentifier: String(MiddleIntroCell.self))
         
         tableView?.rowHeight = UITableViewAutomaticDimension
         tableView?.estimatedRowHeight = 50;
@@ -62,7 +65,10 @@ extension IntroPageViewController: UITableViewDataSource {
         
         switch cellType {
         case .TopCell:
-            cell = tableView.dequeueReusableCellWithIdentifier(String(TopIntroCell.self), forIndexPath: indexPath)        default:
+            cell = tableView.dequeueReusableCellWithIdentifier(String(TopIntroCell.self), forIndexPath: indexPath)
+        case .MiddleCell:
+            cell = tableView.dequeueReusableCellWithIdentifier(String(MiddleIntroCell.self), forIndexPath: indexPath)
+        default:
             cell = UITableViewCell()
         }
         
@@ -80,10 +86,15 @@ extension IntroPageViewController: UITableViewDataSource {
 // MARK: - Table view delegate
 extension IntroPageViewController: UITableViewDelegate {
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 4
+        return 0.1
+    }
+    
+    func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 0.1
     }
 }
 
+// MARK: - GiveBloodIntroCellDelegate
 extension IntroPageViewController: GiveBloodIntroCellDelegate {
     func readMoreButtonPressedOnCell(cell: UITableViewCell) {
         guard let indexPath = tableView?.indexPathForCell(cell) else { return }
