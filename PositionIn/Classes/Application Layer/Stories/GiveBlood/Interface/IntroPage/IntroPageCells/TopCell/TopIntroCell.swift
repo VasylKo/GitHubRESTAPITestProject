@@ -6,6 +6,9 @@
 //  Copyright © 2016 Soluna Labs. All rights reserved.
 //
 
+//Implementation refer to article:
+//https://blog.pivotal.io/labs/labs/expandable-uitableviewcells
+
 import UIKit
 
 
@@ -19,12 +22,16 @@ class TopIntroCell: UITableViewCell, GiveBloodIntroCell {
         didSet {
             detailContainerViewHeightConstraint?.priority = showMore ? lowPriority : highPriority
             buttonContainerViewHeightConstraint?.priority = showMore ? highPriority : lowPriority
+            lastVisibleElementBottomAnchorConstraint?.constant = showMore ? 0 : 16
+            detailsContainerView?.hidden = !showMore
             readMoreButton?.hidden = showMore
         }
     }
     
+    @IBOutlet weak var detailsContainerView: UIView?
     @IBOutlet weak var cardContainerView: UIView?
     @IBOutlet weak var readMoreButton: UIButton?
+    @IBOutlet weak var lastVisibleElementBottomAnchorConstraint: NSLayoutConstraint?
     @IBOutlet weak var detailContainerViewHeightConstraint: NSLayoutConstraint?
     @IBOutlet weak var buttonContainerViewHeightConstraint: NSLayoutConstraint?
     

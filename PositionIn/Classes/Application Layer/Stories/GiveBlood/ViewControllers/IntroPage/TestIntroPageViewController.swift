@@ -90,7 +90,7 @@ extension TestIntroPageViewController: GiveBloodIntroCellDelegate {
         guard let indexPath = tableView?.indexPathForCell(cell) else { return }
         expandedIndexPaths.append(indexPath)
         
-        tableView?.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .None)
+        tableView?.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
     }
 }
 
