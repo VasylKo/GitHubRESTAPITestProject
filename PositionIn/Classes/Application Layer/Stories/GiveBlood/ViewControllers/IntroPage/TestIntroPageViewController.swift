@@ -30,7 +30,9 @@ class TestIntroPageViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        tableView?.separatorStyle = .None
+        
         let nib = UINib(nibName: String(TopIntroCell.self), bundle: nil)
         tableView?.registerNib(nib, forCellReuseIdentifier: String(TopIntroCell.self))
         

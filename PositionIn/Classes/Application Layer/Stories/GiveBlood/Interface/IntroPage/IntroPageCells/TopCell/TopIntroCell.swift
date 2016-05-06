@@ -23,6 +23,7 @@ class TopIntroCell: UITableViewCell, GiveBloodIntroCell {
         }
     }
     
+    @IBOutlet weak var cardContainerView: UIView?
     @IBOutlet weak var readMoreButton: UIButton?
     @IBOutlet weak var detailContainerViewHeightConstraint: NSLayoutConstraint?
     @IBOutlet weak var buttonContainerViewHeightConstraint: NSLayoutConstraint?
@@ -32,6 +33,7 @@ class TopIntroCell: UITableViewCell, GiveBloodIntroCell {
         // Initialization code
         detailContainerViewHeightConstraint?.constant = 0
         buttonContainerViewHeightConstraint?.constant = 0
+        cardContainerView?.layer.cornerRadius = 2
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
