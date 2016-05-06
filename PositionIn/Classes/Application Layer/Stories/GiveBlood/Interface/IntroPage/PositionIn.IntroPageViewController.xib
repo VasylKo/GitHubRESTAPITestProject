@@ -79,9 +79,9 @@
                                             </userDefinedRuntimeAttributes>
                                             <variation key="default">
                                                 <mask key="constraints">
-                                                    <exclude reference="WhI-aj-cXm"/>
-                                                    <exclude reference="Ppb-TV-Wsi"/>
                                                     <exclude reference="JHh-YE-J0K"/>
+                                                    <exclude reference="Ppb-TV-Wsi"/>
+                                                    <exclude reference="WhI-aj-cXm"/>
                                                 </mask>
                                             </variation>
                                         </view>
