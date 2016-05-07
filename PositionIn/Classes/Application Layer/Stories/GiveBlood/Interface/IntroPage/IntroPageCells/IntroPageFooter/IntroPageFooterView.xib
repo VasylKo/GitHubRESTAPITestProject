@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="IntroPageFooterView" customModule="PositionIn" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="594" height="171"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8lL-1p-zWT">
+                    <rect key="frame" x="10" y="32" width="574" height="139"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MyZ-nF-A9u">
+                            <rect key="frame" x="0.0" y="0.0" width="574" height="44"/>
+                            <color key="backgroundColor" red="0.92941176469999998" green="0.1058823529" blue="0.1843137255" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="44" id="OHj-DM-mNl"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="17"/>
+                            <state key="normal" title="Give Blood">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="2"/>
+                            </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="giveBloodButtonPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="uZe-Nu-pL6"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ATC-eD-zLY">
+                            <rect key="frame" x="234" y="72" width="107" height="33"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="17"/>
+                            <state key="normal" title="Skip this step">
+                                <color key="titleColor" red="0.92941176469999998" green="0.1058823529" blue="0.18039215689999999" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="skipThisStepButtonPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="DOC-FH-5Z3"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="MyZ-nF-A9u" firstAttribute="leading" secondItem="8lL-1p-zWT" secondAttribute="leading" id="0UB-Jw-z4R"/>
+                        <constraint firstItem="ATC-eD-zLY" firstAttribute="centerX" secondItem="8lL-1p-zWT" secondAttribute="centerX" id="2lk-El-RoO"/>
+                        <constraint firstItem="MyZ-nF-A9u" firstAttribute="top" secondItem="8lL-1p-zWT" secondAttribute="top" id="LmS-8l-nv2"/>
+                        <constraint firstItem="ATC-eD-zLY" firstAttribute="top" secondItem="MyZ-nF-A9u" secondAttribute="bottom" constant="28" id="QkD-cq-Vlu"/>
+                        <constraint firstAttribute="bottom" secondItem="ATC-eD-zLY" secondAttribute="bottom" constant="34" id="kaR-Pa-zcb"/>
+                        <constraint firstAttribute="height" constant="139" id="kpG-yv-F2J"/>
+                        <constraint firstAttribute="trailing" secondItem="MyZ-nF-A9u" secondAttribute="trailing" id="sZu-h2-bsg"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="8lL-1p-zWT" secondAttribute="trailing" constant="10" id="1ln-vS-UYp"/>
+                <constraint firstItem="8lL-1p-zWT" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="MXO-XT-Cr5"/>
+                <constraint firstItem="8lL-1p-zWT" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="32" id="Zx6-PR-Cej"/>
+                <constraint firstAttribute="bottom" secondItem="8lL-1p-zWT" secondAttribute="bottom" id="v7u-Sw-mEh"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="296" y="61.5"/>
+        </view>
+    </objects>
+</document>

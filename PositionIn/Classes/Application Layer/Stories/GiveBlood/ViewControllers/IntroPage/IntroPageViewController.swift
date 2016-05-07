@@ -28,10 +28,44 @@ class IntroPageViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupU()
+        prepareTableView()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        sizeFooterView()
+    }
+    
+    // MARK: - UI Setup
+    func sizeFooterView() {
+        guard let tableView = tableView, footerView = tableView.tableFooterView else { return }
+        
+        footerView.setNeedsLayout()
+        footerView.layoutIfNeeded()
+        
+        let height = footerView.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize).height
+        var frame = footerView.frame
+        frame.size.height = height
+        footerView.frame = frame
+        
+        tableView.tableFooterView = footerView
+    }
+    
+    
+    private func setupU() {
+        let rightBarButtonItem: UIBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Next", comment: ""),
+                                                                  style: .Plain, target: self, action: #selector(IntroPageViewController.giveBloodPressed))
+        self.navigationItem.rightBarButtonItem = rightBarButtonItem
+    }
+    
+    private func prepareTableView() {
         tableView?.separatorStyle = .None
+        tableView?.rowHeight = UITableViewAutomaticDimension
         
         var nib = UINib(nibName: String(TopIntroCell.self), bundle: nil)
         tableView?.registerNib(nib, forCellReuseIdentifier: String(TopIntroCell.self))
@@ -42,9 +76,17 @@ class IntroPageViewController: UIViewController {
         nib = UINib(nibName: String(BottomIntroCell.self), bundle: nil)
         tableView?.registerNib(nib, forCellReuseIdentifier: String(BottomIntroCell.self))
         
-        tableView?.rowHeight = UITableViewAutomaticDimension
-        //tableView?.estimatedRowHeight = 50;
-        
+        let footerView = NSBundle.mainBundle().loadNibNamed(String(IntroPageFooterView.self), owner: nil, options: nil).first
+        if let footerView = footerView as? IntroPageFooterView {
+            footerView.delegate = self
+            tableView?.tableFooterView = footerView
+        }
+    }
+    
+    // MARK: - Actions
+    @IBAction func giveBloodPressed() {
+        //TODO: add implementation
+        print("Give Blood pressed")
     }
 
 }
@@ -112,5 +154,18 @@ extension IntroPageViewController: GiveBloodIntroCellDelegate {
         
         tableView?.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
     }
+}
+
+// MARK: - IntroPageTableViewFooterViewDelegate
+extension IntroPageViewController: IntroPageTableViewFooterViewDelegate {
+    func giveBloodButtonPressed() {
+        giveBloodPressed()
+    }
+    
+    func skipThisStepButtonPressed() {
+        //TODO: add implementation
+        print("SkipThisStepButtonPressed")
+    }
+
 }
 

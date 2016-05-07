@@ -127,6 +127,8 @@
 		51E1770F1CDD21A2006E4E3F /* MiddleIntroCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51E1770D1CDD21A2006E4E3F /* MiddleIntroCell.xib */; };
 		51E177121CDD2A91006E4E3F /* BottomIntroCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E177101CDD2A91006E4E3F /* BottomIntroCell.swift */; };
 		51E177131CDD2A92006E4E3F /* BottomIntroCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51E177111CDD2A91006E4E3F /* BottomIntroCell.xib */; };
+		51E177161CDE5DE2006E4E3F /* IntroPageFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E177151CDE5DE2006E4E3F /* IntroPageFooterView.swift */; };
+		51E177181CDE5DF5006E4E3F /* IntroPageFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51E177171CDE5DF5006E4E3F /* IntroPageFooterView.xib */; };
 		541820FC1CB7B28D001A780A /* MPesaBongaPinCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 541820FB1CB7B28D001A780A /* MPesaBongaPinCell.swift */; };
 		541820FE1CB7B295001A780A /* MPesaBongaPinCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 541820FD1CB7B295001A780A /* MPesaBongaPinCell.xib */; };
 		5419F9801CC52AC1000E16E7 /* AboutEplusServiceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5419F97E1CC52AC1000E16E7 /* AboutEplusServiceController.swift */; };
@@ -753,6 +755,8 @@
 		51E1770D1CDD21A2006E4E3F /* MiddleIntroCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MiddleIntroCell.xib; sourceTree = "<group>"; };
 		51E177101CDD2A91006E4E3F /* BottomIntroCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomIntroCell.swift; sourceTree = "<group>"; };
 		51E177111CDD2A91006E4E3F /* BottomIntroCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BottomIntroCell.xib; sourceTree = "<group>"; };
+		51E177151CDE5DE2006E4E3F /* IntroPageFooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntroPageFooterView.swift; sourceTree = "<group>"; };
+		51E177171CDE5DF5006E4E3F /* IntroPageFooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IntroPageFooterView.xib; sourceTree = "<group>"; };
 		541820FB1CB7B28D001A780A /* MPesaBongaPinCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPesaBongaPinCell.swift; sourceTree = "<group>"; };
 		541820FD1CB7B295001A780A /* MPesaBongaPinCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MPesaBongaPinCell.xib; sourceTree = "<group>"; };
 		5419F97E1CC52AC1000E16E7 /* AboutEplusServiceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutEplusServiceController.swift; sourceTree = "<group>"; };
@@ -1880,6 +1884,7 @@
 		51E177001CDCD957006E4E3F /* IntroPageCells */ = {
 			isa = PBXGroup;
 			children = (
+				51E177141CDE5DB4006E4E3F /* IntroPageFooter */,
 				51E177041CDCDA0A006E4E3F /* IntroPageCellProtocol.swift */,
 				51E177031CDCD957006E4E3F /* TopCell */,
 				51E177021CDCD957006E4E3F /* MiddleCell */,
@@ -1913,6 +1918,15 @@
 				51E177071CDCDBF4006E4E3F /* TopIntroCell.xib */,
 			);
 			path = TopCell;
+			sourceTree = "<group>";
+		};
+		51E177141CDE5DB4006E4E3F /* IntroPageFooter */ = {
+			isa = PBXGroup;
+			children = (
+				51E177151CDE5DE2006E4E3F /* IntroPageFooterView.swift */,
+				51E177171CDE5DF5006E4E3F /* IntroPageFooterView.xib */,
+			);
+			path = IntroPageFooter;
 			sourceTree = "<group>";
 		};
 		541820F41CB7B0F2001A780A /* MPesaBongaPinCell */ = {
@@ -4687,6 +4701,7 @@
 				D1379E8E1C2A98710041AA4E /* PositionIn.ExploreCardCell.xib in Resources */,
 				CDEDD9781C45243900396594 /* PositionIn.CommunitySearchViewController.xib in Resources */,
 				CD1313311C6E3387002F6F32 /* PositionIn.PostAttachmentsCell.xib in Resources */,
+				51E177181CDE5DF5006E4E3F /* IntroPageFooterView.xib in Resources */,
 				D118A2AB1C0FBC380020B363 /* PositionIn.CardTableViewCell.xib in Resources */,
 				D1FD85421C1EE8EA00C2E87B /* PositionIn.EventDetailsViewController.xib in Resources */,
 				50D1AFA71BBAD21400957882 /* PositionIn.PostLikeCommentCell.xib in Resources */,
@@ -4944,6 +4959,7 @@
 				18F7C62D1CBFB76900B68BB6 /* EplusPaymentTableViewCell.swift in Sources */,
 				D1DA1EBF1C5909D7009F5AFA /* MembershipPlanDetailsViewController.swift in Sources */,
 				18F7C6281CBFB76200B68BB6 /* EPlusPaymentViewController.swift in Sources */,
+				51E177161CDE5DE2006E4E3F /* IntroPageFooterView.swift in Sources */,
 				CD21EA381C63A78800E50909 /* MembershipMemberProfileViewController.swift in Sources */,
 				E66478921C918CC400BA5EFB /* SystemNotification.swift in Sources */,
 				18CCFAFB1C8D8AAB00603C7F /* MembershipMemberDetailsViewController.swift in Sources */,
