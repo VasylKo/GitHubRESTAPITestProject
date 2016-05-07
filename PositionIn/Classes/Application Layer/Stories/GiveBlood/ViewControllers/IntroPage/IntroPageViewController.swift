@@ -81,6 +81,12 @@ class IntroPageViewController: UIViewController {
             footerView.delegate = self
             tableView?.tableFooterView = footerView
         }
+        
+        //Add introduction image
+        let image = UIImage(named: "introduction_give_blood_img")
+        let imageView = UIImageView(image: image)
+        tableView?.insertSubview(imageView, atIndex: 0)
+
     }
     
     // MARK: - Actions
