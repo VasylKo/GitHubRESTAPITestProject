@@ -23,42 +23,70 @@
                     <color key="textColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G2U-pS-cR5">
+                <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G2U-pS-cR5">
                     <rect key="frame" x="14" y="92" width="68" height="68"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="68" id="UIC-Fg-uYY"/>
                         <constraint firstAttribute="width" constant="68" id="oGS-qO-Odd"/>
                     </constraints>
-                    <state key="normal" title="Button"/>
+                    <state key="normal" title="Button" image="blood_a_group"/>
+                    <state key="selected" image="blood_a_group_selected"/>
+                    <connections>
+                        <action selector="bloodTypeButtonTapped:" destination="iN0-l3-epB" eventType="touchUpInside" id="nrD-BD-dP1"/>
+                    </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tWF-DO-2J8">
+                <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tWF-DO-2J8">
                     <rect key="frame" x="82" y="92" width="68" height="68"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="68" id="MF4-js-hLk"/>
                         <constraint firstAttribute="width" constant="68" id="ZNc-M3-AbF"/>
                     </constraints>
-                    <state key="normal" title="Button"/>
+                    <state key="normal" title="Button" image="blood_b_group"/>
+                    <state key="selected" image="blood_b_group_selected"/>
+                    <connections>
+                        <action selector="bloodTypeButtonTapped:" destination="iN0-l3-epB" eventType="touchUpInside" id="ZOX-pJ-e42"/>
+                    </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rzb-b0-ee2">
+                <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rzb-b0-ee2">
                     <rect key="frame" x="150" y="92" width="68" height="68"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="68" id="CVc-Zt-Cab"/>
                         <constraint firstAttribute="height" constant="68" id="tuh-aD-Gxw"/>
                     </constraints>
-                    <state key="normal" title="Button"/>
+                    <state key="normal" title="Button" image="blood_o_group"/>
+                    <state key="selected" image="blood_o_group_selected"/>
+                    <connections>
+                        <action selector="bloodTypeButtonTapped:" destination="iN0-l3-epB" eventType="touchUpInside" id="YRt-sm-cIP"/>
+                    </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Puq-4X-K9p">
+                <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Puq-4X-K9p">
                     <rect key="frame" x="218" y="92" width="68" height="68"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="68" id="USa-4N-1N6"/>
                         <constraint firstAttribute="width" constant="68" id="ffj-Ng-0sC"/>
                     </constraints>
-                    <state key="normal" title="Button"/>
+                    <state key="normal" title="Button" image="blood_ab_group"/>
+                    <state key="selected" image="blood_ab_group_selected"/>
+                    <connections>
+                        <action selector="bloodTypeButtonTapped:" destination="iN0-l3-epB" eventType="touchUpInside" id="z4Y-Xk-E6w"/>
+                    </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Fl-dP-Trg">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Fl-dP-Trg">
                     <rect key="frame" x="14" y="168" width="272" height="36"/>
-                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
-                    <state key="normal" title="DON'T KNOW"/>
+                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <state key="normal" title="DON'T KNOW">
+                        <color key="titleColor" red="0.92941176470588238" green="0.10588235294117647" blue="0.1803921568627451" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <state key="selected" backgroundImage="red_background">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="3"/>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="bloodTypeButtonTapped:" destination="iN0-l3-epB" eventType="touchUpInside" id="f9I-1K-xbB"/>
+                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -85,4 +113,15 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
         </view>
     </objects>
+    <resources>
+        <image name="blood_a_group" width="68" height="68"/>
+        <image name="blood_a_group_selected" width="68" height="68"/>
+        <image name="blood_ab_group" width="68" height="68"/>
+        <image name="blood_ab_group_selected" width="68" height="68"/>
+        <image name="blood_b_group" width="68" height="68"/>
+        <image name="blood_b_group_selected" width="68" height="68"/>
+        <image name="blood_o_group" width="68" height="68"/>
+        <image name="blood_o_group_selected" width="68" height="68"/>
+        <image name="red_background" width="1" height="1"/>
+    </resources>
 </document>
