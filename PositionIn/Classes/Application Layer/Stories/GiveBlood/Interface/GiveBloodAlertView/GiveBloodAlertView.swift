@@ -32,6 +32,7 @@ class GiveBloodAlertView: UIView {
         
         self.view?.noButton.layer.borderColor = UIScheme.tabbarBackgroundColor.CGColor
         self.view?.yesButton.layer.borderColor = UIScheme.tabbarBackgroundColor.CGColor
+        self.view?.layer.cornerRadius = 3
     }
     
     var title: String? {

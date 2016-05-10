@@ -17,7 +17,7 @@ class QuestionBloodDonorViewController: UIViewController, GiveBloodAlertViewDele
     init(router: GiveBloodRouter, type: QuestionBloodDonorViewControllerType) {
         self.router = router
         self.type = type
-        super.init(nibName: NSStringFromClass(EPlusPlansViewController.self), bundle: nil)
+        super.init(nibName: NSStringFromClass(QuestionBloodDonorViewController.self), bundle: nil)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -36,7 +36,7 @@ class QuestionBloodDonorViewController: UIViewController, GiveBloodAlertViewDele
         alertView.layer.shadowRadius = 1.0;
         alertView.layer.masksToBounds = false
         alertView.layer.shadowOpacity = 0.1
-        alertView.layer.cornerRadius = 2
+        alertView.layer.cornerRadius = 3
         
         switch type {
         case .AlreadyDonor:
@@ -49,7 +49,7 @@ class QuestionBloodDonorViewController: UIViewController, GiveBloodAlertViewDele
     }
     
     func yesTapped() {
-        self.router
+        
     }
     
     func noTapped() {
@@ -57,7 +57,7 @@ class QuestionBloodDonorViewController: UIViewController, GiveBloodAlertViewDele
     }
     
     private let router : GiveBloodRouter
-    var type: QuestionBloodDonorViewControllerType = .Unknown
+    private var type: QuestionBloodDonorViewControllerType = .Unknown
     
     @IBOutlet weak var alertView: GiveBloodAlertView!
 }

@@ -38,7 +38,6 @@ class GiveBloodRouterImplementation: BaseRouterImplementation, GiveBloodRouter {
     
     func showQuestionBloodDonorController(from sourceViewController : UIViewController, type: QuestionBloodDonorViewControllerType) {
         let controller =  QuestionBloodDonorViewController(router: self, type: type)
-        controller.type = .AlreadyDonor
         sourceViewController.navigationController?.pushViewController(controller, animated: true)
     }
 }
