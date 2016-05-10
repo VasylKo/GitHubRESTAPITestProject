@@ -118,8 +118,17 @@
 		51E176E91CDB7C98006E4E3F /* GiveBloodRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E176E61CDB7C98006E4E3F /* GiveBloodRouter.swift */; };
 		51E176EA1CDB7C99006E4E3F /* GiveBloodRouterImplementation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E176E71CDB7C98006E4E3F /* GiveBloodRouterImplementation.swift */; };
 		51E176EF1CDB8016006E4E3F /* DonorInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E176EE1CDB8016006E4E3F /* DonorInfo.swift */; };
-		51E176F31CDB8F86006E4E3F /* IntroPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E176F11CDB8F86006E4E3F /* IntroPageViewController.swift */; };
-		51E176F71CDB8FCE006E4E3F /* PositionIn.IntroPageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51E176F61CDB8FCE006E4E3F /* PositionIn.IntroPageViewController.xib */; };
+		51E176FA1CDC8FC7006E4E3F /* IntroPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E176F81CDC8FC7006E4E3F /* IntroPageViewController.swift */; };
+		51E177051CDCDA0B006E4E3F /* IntroPageCellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E177041CDCDA0A006E4E3F /* IntroPageCellProtocol.swift */; };
+		51E177081CDCDBF4006E4E3F /* TopIntroCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E177061CDCDBF4006E4E3F /* TopIntroCell.swift */; };
+		51E177091CDCDBF4006E4E3F /* TopIntroCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51E177071CDCDBF4006E4E3F /* TopIntroCell.xib */; };
+		51E1770B1CDD207C006E4E3F /* PositionIn.IntroPageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51E1770A1CDD207C006E4E3F /* PositionIn.IntroPageViewController.xib */; };
+		51E1770E1CDD21A2006E4E3F /* MiddleIntroCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E1770C1CDD21A2006E4E3F /* MiddleIntroCell.swift */; };
+		51E1770F1CDD21A2006E4E3F /* MiddleIntroCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51E1770D1CDD21A2006E4E3F /* MiddleIntroCell.xib */; };
+		51E177121CDD2A91006E4E3F /* BottomIntroCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E177101CDD2A91006E4E3F /* BottomIntroCell.swift */; };
+		51E177131CDD2A92006E4E3F /* BottomIntroCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51E177111CDD2A91006E4E3F /* BottomIntroCell.xib */; };
+		51E177161CDE5DE2006E4E3F /* IntroPageFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E177151CDE5DE2006E4E3F /* IntroPageFooterView.swift */; };
+		51E177181CDE5DF5006E4E3F /* IntroPageFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51E177171CDE5DF5006E4E3F /* IntroPageFooterView.xib */; };
 		541820FC1CB7B28D001A780A /* MPesaBongaPinCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 541820FB1CB7B28D001A780A /* MPesaBongaPinCell.swift */; };
 		541820FE1CB7B295001A780A /* MPesaBongaPinCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 541820FD1CB7B295001A780A /* MPesaBongaPinCell.xib */; };
 		5419F9801CC52AC1000E16E7 /* AboutEplusServiceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5419F97E1CC52AC1000E16E7 /* AboutEplusServiceController.swift */; };
@@ -737,8 +746,17 @@
 		51E176E61CDB7C98006E4E3F /* GiveBloodRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GiveBloodRouter.swift; sourceTree = "<group>"; };
 		51E176E71CDB7C98006E4E3F /* GiveBloodRouterImplementation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GiveBloodRouterImplementation.swift; sourceTree = "<group>"; };
 		51E176EE1CDB8016006E4E3F /* DonorInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DonorInfo.swift; sourceTree = "<group>"; };
-		51E176F11CDB8F86006E4E3F /* IntroPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntroPageViewController.swift; sourceTree = "<group>"; };
-		51E176F61CDB8FCE006E4E3F /* PositionIn.IntroPageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.IntroPageViewController.xib; sourceTree = "<group>"; };
+		51E176F81CDC8FC7006E4E3F /* IntroPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntroPageViewController.swift; sourceTree = "<group>"; };
+		51E177041CDCDA0A006E4E3F /* IntroPageCellProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntroPageCellProtocol.swift; sourceTree = "<group>"; };
+		51E177061CDCDBF4006E4E3F /* TopIntroCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopIntroCell.swift; sourceTree = "<group>"; };
+		51E177071CDCDBF4006E4E3F /* TopIntroCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TopIntroCell.xib; sourceTree = "<group>"; };
+		51E1770A1CDD207C006E4E3F /* PositionIn.IntroPageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.IntroPageViewController.xib; sourceTree = "<group>"; };
+		51E1770C1CDD21A2006E4E3F /* MiddleIntroCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MiddleIntroCell.swift; sourceTree = "<group>"; };
+		51E1770D1CDD21A2006E4E3F /* MiddleIntroCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MiddleIntroCell.xib; sourceTree = "<group>"; };
+		51E177101CDD2A91006E4E3F /* BottomIntroCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomIntroCell.swift; sourceTree = "<group>"; };
+		51E177111CDD2A91006E4E3F /* BottomIntroCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BottomIntroCell.xib; sourceTree = "<group>"; };
+		51E177151CDE5DE2006E4E3F /* IntroPageFooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntroPageFooterView.swift; sourceTree = "<group>"; };
+		51E177171CDE5DF5006E4E3F /* IntroPageFooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IntroPageFooterView.xib; sourceTree = "<group>"; };
 		541820FB1CB7B28D001A780A /* MPesaBongaPinCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPesaBongaPinCell.swift; sourceTree = "<group>"; };
 		541820FD1CB7B295001A780A /* MPesaBongaPinCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MPesaBongaPinCell.xib; sourceTree = "<group>"; };
 		5419F97E1CC52AC1000E16E7 /* AboutEplusServiceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutEplusServiceController.swift; sourceTree = "<group>"; };
@@ -1849,7 +1867,7 @@
 		51E176F01CDB8F6E006E4E3F /* IntroPage */ = {
 			isa = PBXGroup;
 			children = (
-				51E176F11CDB8F86006E4E3F /* IntroPageViewController.swift */,
+				51E176F81CDC8FC7006E4E3F /* IntroPageViewController.swift */,
 			);
 			path = IntroPage;
 			sourceTree = "<group>";
@@ -1857,9 +1875,58 @@
 		51E176F51CDB8FCE006E4E3F /* IntroPage */ = {
 			isa = PBXGroup;
 			children = (
-				51E176F61CDB8FCE006E4E3F /* PositionIn.IntroPageViewController.xib */,
+				51E177001CDCD957006E4E3F /* IntroPageCells */,
+				51E1770A1CDD207C006E4E3F /* PositionIn.IntroPageViewController.xib */,
 			);
 			path = IntroPage;
+			sourceTree = "<group>";
+		};
+		51E177001CDCD957006E4E3F /* IntroPageCells */ = {
+			isa = PBXGroup;
+			children = (
+				51E177141CDE5DB4006E4E3F /* IntroPageFooter */,
+				51E177041CDCDA0A006E4E3F /* IntroPageCellProtocol.swift */,
+				51E177031CDCD957006E4E3F /* TopCell */,
+				51E177021CDCD957006E4E3F /* MiddleCell */,
+				51E177011CDCD957006E4E3F /* BottomCell */,
+			);
+			path = IntroPageCells;
+			sourceTree = "<group>";
+		};
+		51E177011CDCD957006E4E3F /* BottomCell */ = {
+			isa = PBXGroup;
+			children = (
+				51E177101CDD2A91006E4E3F /* BottomIntroCell.swift */,
+				51E177111CDD2A91006E4E3F /* BottomIntroCell.xib */,
+			);
+			path = BottomCell;
+			sourceTree = "<group>";
+		};
+		51E177021CDCD957006E4E3F /* MiddleCell */ = {
+			isa = PBXGroup;
+			children = (
+				51E1770C1CDD21A2006E4E3F /* MiddleIntroCell.swift */,
+				51E1770D1CDD21A2006E4E3F /* MiddleIntroCell.xib */,
+			);
+			path = MiddleCell;
+			sourceTree = "<group>";
+		};
+		51E177031CDCD957006E4E3F /* TopCell */ = {
+			isa = PBXGroup;
+			children = (
+				51E177061CDCDBF4006E4E3F /* TopIntroCell.swift */,
+				51E177071CDCDBF4006E4E3F /* TopIntroCell.xib */,
+			);
+			path = TopCell;
+			sourceTree = "<group>";
+		};
+		51E177141CDE5DB4006E4E3F /* IntroPageFooter */ = {
+			isa = PBXGroup;
+			children = (
+				51E177151CDE5DE2006E4E3F /* IntroPageFooterView.swift */,
+				51E177171CDE5DF5006E4E3F /* IntroPageFooterView.xib */,
+			);
+			path = IntroPageFooter;
 			sourceTree = "<group>";
 		};
 		541820F41CB7B0F2001A780A /* MPesaBongaPinCell */ = {
@@ -4564,6 +4631,7 @@
 				549C6BD01CCF6DCF0062435F /* CommonPaymentViewController.xib in Resources */,
 				50C7B5B21BC6A32900E8E8B4 /* PositionIn.SettingsViewController.xib in Resources */,
 				D1AEF68D1CC506B40030C695 /* EPlusCorporatePlanOptionTableViewCell.xib in Resources */,
+				51E1770B1CDD207C006E4E3F /* PositionIn.IntroPageViewController.xib in Resources */,
 				5419F98B1CC52EDF000E16E7 /* AboutEplusServiceTableViewCell.xib in Resources */,
 				54A31F971CBBF20900A833C9 /* DonationPaymentAmountCell.xib in Resources */,
 				E6BEF1E81B9C83F200511B46 /* PositionIn.CommunityInfoCell.xib in Resources */,
@@ -4587,6 +4655,7 @@
 				D1FD854C1C1EFE0F00C2E87B /* PositionIn.MarketDetailsViewController.xib in Resources */,
 				E6D7F83C1BE24AE500A544F4 /* PositionIn.MainMenuBadgeCell.xib in Resources */,
 				CDB5B5CB1C5B9C2400413715 /* MembershipPlansViewController.xib in Resources */,
+				51E1770F1CDD21A2006E4E3F /* MiddleIntroCell.xib in Resources */,
 				E6F2436E1B8B0E3A0033B13C /* PositionIn.MainMenuLoginCell.xib in Resources */,
 				D1FD85471C1EF6DB00C2E87B /* PositionIn.BomaHotelsDetailsViewController.xib in Resources */,
 				D14E47841CC64DFC002FDD6A /* EPlusServiceDetailsViewController.xib in Resources */,
@@ -4632,6 +4701,7 @@
 				D1379E8E1C2A98710041AA4E /* PositionIn.ExploreCardCell.xib in Resources */,
 				CDEDD9781C45243900396594 /* PositionIn.CommunitySearchViewController.xib in Resources */,
 				CD1313311C6E3387002F6F32 /* PositionIn.PostAttachmentsCell.xib in Resources */,
+				51E177181CDE5DF5006E4E3F /* IntroPageFooterView.xib in Resources */,
 				D118A2AB1C0FBC380020B363 /* PositionIn.CardTableViewCell.xib in Resources */,
 				D1FD85421C1EE8EA00C2E87B /* PositionIn.EventDetailsViewController.xib in Resources */,
 				50D1AFA71BBAD21400957882 /* PositionIn.PostLikeCommentCell.xib in Resources */,
@@ -4661,8 +4731,10 @@
 				D1F3E80A1C74DD1200EFC8ED /* NotificationViewController.xib in Resources */,
 				E62B16FD1B5CDF2400D446BC /* PositionIn.MessagesListViewController.xib in Resources */,
 				D1B780CF1C0F51A800EF5825 /* DonateCell.xib in Resources */,
+				51E177091CDCDBF4006E4E3F /* TopIntroCell.xib in Resources */,
 				D12EB2861C96E5DF00718E57 /* FeedListViewController.xib in Resources */,
 				E69421021B666A1600F34F06 /* PositionIn.ActionCell.xib in Resources */,
+				51E177131CDD2A92006E4E3F /* BottomIntroCell.xib in Resources */,
 				5456528E1CCFAB4600C63C01 /* PaymentOrderDescriptionCell.xib in Resources */,
 				23F6AF851CA2889800CDD2FF /* PositionIn.PeopleExploreViewController.xib in Resources */,
 				E6F309421BA8200600C9420C /* PositionIn.PickPhotoView.xib in Resources */,
@@ -4674,7 +4746,6 @@
 				184040271CC14A2B00DF3655 /* EPlusPlanInfoTableViewCell.xib in Resources */,
 				D12EB2971C96E83600718E57 /* PositionIn.NewsItemTitleCell.xib in Resources */,
 				1840402A1CC14A2B00DF3655 /* PositionIn.EPlusAmbulanceDetailsController.xib in Resources */,
-				51E176F71CDB8FCE006E4E3F /* PositionIn.IntroPageViewController.xib in Resources */,
 				500D7FAD1BC2CD51008C8C82 /* PositionIn.SearchSectionCell.xib in Resources */,
 				E6F2437A1B8B40380033B13C /* PositionIn.BrowseListTableViewCell.xib in Resources */,
 				E63201721B984E2D0066C62E /* PositionIn.DescriptionTableViewCell.xib in Resources */,
@@ -4870,7 +4941,6 @@
 				CDE1B91F1C5F9E6A00F76F32 /* MembershipMemberProfileView.swift in Sources */,
 				545652901CCFB6B800C63C01 /* NSDate+pickUpAvaliabilityString.swift in Sources */,
 				E6F7A4811BA356500069152A /* LocationSearchResultDataSource.swift in Sources */,
-				51E176F31CDB8F86006E4E3F /* IntroPageViewController.swift in Sources */,
 				E62B16FF1B5CE0F800D446BC /* BesideMenuViewController.swift in Sources */,
 				E66F901B1BA6A5C100280B77 /* ChatController.swift in Sources */,
 				D1B780C81C0F4E7700EF5825 /* DonateViewController.swift in Sources */,
@@ -4889,6 +4959,7 @@
 				18F7C62D1CBFB76900B68BB6 /* EplusPaymentTableViewCell.swift in Sources */,
 				D1DA1EBF1C5909D7009F5AFA /* MembershipPlanDetailsViewController.swift in Sources */,
 				18F7C6281CBFB76200B68BB6 /* EPlusPaymentViewController.swift in Sources */,
+				51E177161CDE5DE2006E4E3F /* IntroPageFooterView.swift in Sources */,
 				CD21EA381C63A78800E50909 /* MembershipMemberProfileViewController.swift in Sources */,
 				E66478921C918CC400BA5EFB /* SystemNotification.swift in Sources */,
 				18CCFAFB1C8D8AAB00603C7F /* MembershipMemberDetailsViewController.swift in Sources */,
@@ -4915,16 +4986,19 @@
 				CD7C07A61CA1A7B10075BC5B /* PeopleFollowingViewController.swift in Sources */,
 				E6C5CE1B1B83A24500265955 /* UIScheme.swift in Sources */,
 				E69420F91B66358000F34F06 /* ProductDetailsViewController.swift in Sources */,
+				51E177081CDCDBF4006E4E3F /* TopIntroCell.swift in Sources */,
 				D1AEF68C1CC506B40030C695 /* EPlusCorporatePlanOptionTableViewCell.swift in Sources */,
 				CD87FDF41C7DB94D00E610AE /* CommunityMapViewController.swift in Sources */,
 				E63201701B984D8B0066C62E /* DescriptionTableViewCell.swift in Sources */,
 				E6C952371BA1D9960032254F /* ProfileStatsCell.swift in Sources */,
 				CD795BF41C57BBC200C1C298 /* BaseRouterImplementation.swift in Sources */,
 				E6DA53C71B7D00DB000087A7 /* BrowseCommunityViewController.swift in Sources */,
+				51E177121CDD2A91006E4E3F /* BottomIntroCell.swift in Sources */,
 				E6F309401BA81FAF00C9420C /* UploadPhotoCell.swift in Sources */,
 				E6C952291BA1A82F0032254F /* CLLocationCoordinate2D+Equal.swift in Sources */,
 				E689F0771B6B90F400597587 /* ProductInventoryViewController.swift in Sources */,
 				D118A2AD1C0FBDF50020B363 /* CardItem.swift in Sources */,
+				51E176FA1CDC8FC7006E4E3F /* IntroPageViewController.swift in Sources */,
 				D18EA2CA1C04A3CA00A886A5 /* BrowseMainGridController.swift in Sources */,
 				CD795BFA1C57CA5E00C1C298 /* MembershipRouter.swift in Sources */,
 				18F7C6511CBFF13600B68BB6 /* EPlusTableViewHeaderView.swift in Sources */,
@@ -5065,6 +5139,7 @@
 				542EDF741CC92949006FE641 /* TotalViewCell.swift in Sources */,
 				E6BEF1CF1B9C60B500511B46 /* PostTableViewCellModel.swift in Sources */,
 				E6F243751B8B31510033B13C /* AddMenuView.swift in Sources */,
+				51E177051CDCDA0B006E4E3F /* IntroPageCellProtocol.swift in Sources */,
 				D118A2AA1C0FBC380020B363 /* CardTableViewCell.swift in Sources */,
 				CDBDD9B31C491617007578BC /* BomaHotel.swift in Sources */,
 				D19BDF341CAD7D3C00F0A887 /* WebViewController.swift in Sources */,
@@ -5091,6 +5166,7 @@
 				50F730591BBBE86A008D3D94 /* CommentCell.swift in Sources */,
 				E61B20EF1B813C8C005EAB2C /* Community.swift in Sources */,
 				CD8DB9AA1C89BB4100488EBB /* VolunteerMapViewController.swift in Sources */,
+				51E1770E1CDD21A2006E4E3F /* MiddleIntroCell.swift in Sources */,
 				CD794DE01C52485E00C1C298 /* OpenApplication.swift in Sources */,
 				181314EB1CBFA3B4004373F2 /* EPlusMembershipRouter.swift in Sources */,
 				51E176EA1CDB7C99006E4E3F /* GiveBloodRouterImplementation.swift in Sources */,
