@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clipsSubviews="YES" contentMode="scaleToFill" id="iN0-l3-epB" customClass="GiveBloodAlertView" customModule="PositionIn" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="240" height="260"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="GiveBloodQuestionIcon" translatesAutoresizingMaskIntoConstraints="NO" id="F7N-gG-5Tf">
+                    <rect key="frame" x="68" y="24" width="104" height="104"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="104" id="1Nz-A8-OfM"/>
+                        <constraint firstAttribute="height" constant="104" id="5hF-0m-7mV"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p6U-gb-Gsh">
+                    <rect key="frame" x="16" y="136" width="208" height="24"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d0D-g5-PfO">
+                    <rect key="frame" x="-1" y="210" width="121" height="51"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="51" id="clM-eT-dCo"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
+                    <state key="normal" title="NO">
+                        <color key="titleColor" red="0.92941176470588238" green="0.10588235294117647" blue="0.1803921568627451" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="layer.borderWidth" value="1"/>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="noTapped:" destination="iN0-l3-epB" eventType="touchUpInside" id="VEY-tx-Hvd"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ANj-LB-L5L">
+                    <rect key="frame" x="120" y="210" width="121" height="51"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="51" id="Vkp-Mv-sDS"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
+                    <state key="normal" title="YES">
+                        <color key="titleColor" red="0.92941176470588238" green="0.10588235294117647" blue="0.1803921568627451" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="layer.borderWidth" value="1"/>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="yesTapped:" destination="iN0-l3-epB" eventType="touchUpInside" id="hIp-4U-ADZ"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="ANj-LB-L5L" firstAttribute="leading" secondItem="d0D-g5-PfO" secondAttribute="trailing" id="2I8-5D-JxM"/>
+                <constraint firstItem="F7N-gG-5Tf" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="24" id="B1B-kJ-seJ"/>
+                <constraint firstItem="p6U-gb-Gsh" firstAttribute="top" secondItem="F7N-gG-5Tf" secondAttribute="bottom" constant="8" id="CDN-us-xnu"/>
+                <constraint firstItem="ANj-LB-L5L" firstAttribute="width" secondItem="d0D-g5-PfO" secondAttribute="width" id="CIY-7w-mqD"/>
+                <constraint firstItem="ANj-LB-L5L" firstAttribute="width" secondItem="d0D-g5-PfO" secondAttribute="width" id="DOh-qV-3i4"/>
+                <constraint firstItem="F7N-gG-5Tf" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="J0N-m6-11a"/>
+                <constraint firstAttribute="bottom" secondItem="d0D-g5-PfO" secondAttribute="bottom" constant="-1" id="Lqu-OP-GIJ"/>
+                <constraint firstItem="d0D-g5-PfO" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="-1" id="PzO-WN-JZl"/>
+                <constraint firstAttribute="bottom" secondItem="ANj-LB-L5L" secondAttribute="bottom" constant="-1" id="Y1g-cE-ti6"/>
+                <constraint firstItem="ANj-LB-L5L" firstAttribute="leading" secondItem="d0D-g5-PfO" secondAttribute="trailing" id="Yba-Y3-PAc"/>
+                <constraint firstItem="p6U-gb-Gsh" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="nFc-9Z-gqY"/>
+                <constraint firstAttribute="trailing" secondItem="p6U-gb-Gsh" secondAttribute="trailing" constant="16" id="qeh-IC-1jD"/>
+                <constraint firstAttribute="trailing" secondItem="ANj-LB-L5L" secondAttribute="trailing" constant="-1" id="xgJ-Jb-558"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="2I8-5D-JxM"/>
+                    <exclude reference="CIY-7w-mqD"/>
+                </mask>
+            </variation>
+            <connections>
+                <outlet property="noButton" destination="d0D-g5-PfO" id="1pC-vi-Tpb"/>
+                <outlet property="titleLabel" destination="p6U-gb-Gsh" id="e4D-Wz-WHe"/>
+                <outlet property="yesButton" destination="ANj-LB-L5L" id="1di-M1-1zQ"/>
+            </connections>
+        </view>
+    </objects>
+    <resources>
+        <image name="GiveBloodQuestionIcon" width="104" height="104"/>
+    </resources>
+</document>
