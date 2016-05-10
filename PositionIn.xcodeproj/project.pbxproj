@@ -289,6 +289,10 @@
 		D1B780CA1C0F4E9E00EF5825 /* SelectPaymentMethodController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B780C91C0F4E9E00EF5825 /* SelectPaymentMethodController.swift */; };
 		D1B780CD1C0F519600EF5825 /* DonateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B780CC1C0F519600EF5825 /* DonateCell.swift */; };
 		D1B780CF1C0F51A800EF5825 /* DonateCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1B780CE1C0F51A800EF5825 /* DonateCell.xib */; };
+		D1BAE0001CDCBA3800B3ECE3 /* QuestionBloodDonorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1BADFFE1CDCBA3800B3ECE3 /* QuestionBloodDonorViewController.swift */; };
+		D1BAE0041CDCBAA200B3ECE3 /* PositionIn.QuestionBloodDonorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1BAE0031CDCBAA200B3ECE3 /* PositionIn.QuestionBloodDonorViewController.xib */; };
+		D1BAE0071CDCBC4D00B3ECE3 /* GiveBloodAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1BAE0061CDCBC4D00B3ECE3 /* GiveBloodAlertView.swift */; };
+		D1BAE0091CDCBC5F00B3ECE3 /* GiveBloodAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1BAE0081CDCBC5F00B3ECE3 /* GiveBloodAlertView.xib */; };
 		D1C475EA1C106DB70096D383 /* DonateNotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C475E91C106DB70096D383 /* DonateNotificationViewController.swift */; };
 		D1CAA7521C60BB1E0046130E /* PaymentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1CAA7501C60BB1E0046130E /* PaymentTableViewCell.swift */; };
 		D1CAA7531C60BB1E0046130E /* PaymentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1CAA7511C60BB1E0046130E /* PaymentTableViewCell.xib */; };
@@ -920,6 +924,10 @@
 		D1B780C91C0F4E9E00EF5825 /* SelectPaymentMethodController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectPaymentMethodController.swift; sourceTree = "<group>"; };
 		D1B780CC1C0F519600EF5825 /* DonateCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DonateCell.swift; sourceTree = "<group>"; };
 		D1B780CE1C0F51A800EF5825 /* DonateCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DonateCell.xib; sourceTree = "<group>"; };
+		D1BADFFE1CDCBA3800B3ECE3 /* QuestionBloodDonorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionBloodDonorViewController.swift; sourceTree = "<group>"; };
+		D1BAE0031CDCBAA200B3ECE3 /* PositionIn.QuestionBloodDonorViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.QuestionBloodDonorViewController.xib; sourceTree = "<group>"; };
+		D1BAE0061CDCBC4D00B3ECE3 /* GiveBloodAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GiveBloodAlertView.swift; sourceTree = "<group>"; };
+		D1BAE0081CDCBC5F00B3ECE3 /* GiveBloodAlertView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GiveBloodAlertView.xib; sourceTree = "<group>"; };
 		D1C475E91C106DB70096D383 /* DonateNotificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DonateNotificationViewController.swift; sourceTree = "<group>"; };
 		D1CAA7501C60BB1E0046130E /* PaymentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentTableViewCell.swift; sourceTree = "<group>"; };
 		D1CAA7511C60BB1E0046130E /* PaymentTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PaymentTableViewCell.xib; sourceTree = "<group>"; };
@@ -1825,6 +1833,8 @@
 			isa = PBXGroup;
 			children = (
 				D1EA401C1CE1E35200B3FA58 /* BloodType */,
+				D1BAE0051CDCBC3D00B3ECE3 /* GiveBloodAlertView */,
+				D1BAE0021CDCBA7200B3ECE3 /* QuestionBloodDonor */,
 				51E176F51CDB8FCE006E4E3F /* IntroPage */,
 			);
 			path = Interface;
@@ -1843,6 +1853,7 @@
 			isa = PBXGroup;
 			children = (
 				D1EA401B1CE1E2EA00B3FA58 /* BloodType */,
+				D1BADFFD1CDCB9F800B3ECE3 /* QuestionBloodDonor */,
 				51E176F01CDB8F6E006E4E3F /* IntroPage */,
 			);
 			path = ViewControllers;
@@ -2629,6 +2640,31 @@
 			);
 			name = Donate;
 			path = DonateView;
+			sourceTree = "<group>";
+		};
+		D1BADFFD1CDCB9F800B3ECE3 /* QuestionBloodDonor */ = {
+			isa = PBXGroup;
+			children = (
+				D1BADFFE1CDCBA3800B3ECE3 /* QuestionBloodDonorViewController.swift */,
+			);
+			path = QuestionBloodDonor;
+			sourceTree = "<group>";
+		};
+		D1BAE0021CDCBA7200B3ECE3 /* QuestionBloodDonor */ = {
+			isa = PBXGroup;
+			children = (
+				D1BAE0031CDCBAA200B3ECE3 /* PositionIn.QuestionBloodDonorViewController.xib */,
+			);
+			path = QuestionBloodDonor;
+			sourceTree = "<group>";
+		};
+		D1BAE0051CDCBC3D00B3ECE3 /* GiveBloodAlertView */ = {
+			isa = PBXGroup;
+			children = (
+				D1BAE0061CDCBC4D00B3ECE3 /* GiveBloodAlertView.swift */,
+				D1BAE0081CDCBC5F00B3ECE3 /* GiveBloodAlertView.xib */,
+			);
+			path = GiveBloodAlertView;
 			sourceTree = "<group>";
 		};
 		D1CAA7471C60AD070046130E /* Payment */ = {
@@ -4594,6 +4630,7 @@
 			files = (
 				18F7C6571CBFF13600B68BB6 /* PositionIn.EPlusPlansViewController.xib in Resources */,
 				CD795BE11C57B4EE00C1C298 /* Snapfile in Resources */,
+				D1BAE0041CDCBAA200B3ECE3 /* PositionIn.QuestionBloodDonorViewController.xib in Resources */,
 				CD795BDF1C57B4EE00C1C298 /* Fastfile in Resources */,
 				D1AEF6881CC4F0370030C695 /* EPlusCorporateAmbulanceDetailsController.xib in Resources */,
 				CD8ED0DE1C60BE7000576DBF /* MembershipCardView.xib in Resources */,
@@ -4637,6 +4674,7 @@
 				D16772781C9989FE00B624FC /* FeedEmergencyDetailsViewController.xib in Resources */,
 				E66115A31B73A18C003DB5B3 /* NewItems.storyboard in Resources */,
 				D1EA40291CE1F42400B3FA58 /* BloodTypeView.xib in Resources */,
+				D1BAE0091CDCBC5F00B3ECE3 /* GiveBloodAlertView.xib in Resources */,
 				D179EBD31CB6B938006012CC /* country-codes.csv in Resources */,
 				24EF62161BA81DCB00472531 /* PositionIn.ChatHistoryCell.xib in Resources */,
 				D1DA176D1C05B7BE0091A8CE /* PositionIn.BrowseGridCollectionViewCell.xib in Resources */,
@@ -4952,6 +4990,7 @@
 				E6A869F41B60FF2100797D16 /* UserProfile.swift in Sources */,
 				E6BEF1C81B9C5A0C00511B46 /* PostCellModelFactory.swift in Sources */,
 				CD7C07A61CA1A7B10075BC5B /* PeopleFollowingViewController.swift in Sources */,
+				D1BAE0071CDCBC4D00B3ECE3 /* GiveBloodAlertView.swift in Sources */,
 				E6C5CE1B1B83A24500265955 /* UIScheme.swift in Sources */,
 				E69420F91B66358000F34F06 /* ProductDetailsViewController.swift in Sources */,
 				D1AEF68C1CC506B40030C695 /* EPlusCorporatePlanOptionTableViewCell.swift in Sources */,
@@ -4962,6 +5001,7 @@
 				E6DA53C71B7D00DB000087A7 /* BrowseCommunityViewController.swift in Sources */,
 				E6F309401BA81FAF00C9420C /* UploadPhotoCell.swift in Sources */,
 				E6C952291BA1A82F0032254F /* CLLocationCoordinate2D+Equal.swift in Sources */,
+				D1BAE0001CDCBA3800B3ECE3 /* QuestionBloodDonorViewController.swift in Sources */,
 				E689F0771B6B90F400597587 /* ProductInventoryViewController.swift in Sources */,
 				D118A2AD1C0FBDF50020B363 /* CardItem.swift in Sources */,
 				D18EA2CA1C04A3CA00A886A5 /* BrowseMainGridController.swift in Sources */,
