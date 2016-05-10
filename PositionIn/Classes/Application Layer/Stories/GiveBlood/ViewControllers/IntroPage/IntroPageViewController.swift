@@ -85,8 +85,11 @@ class IntroPageViewController: UIViewController {
         //Add introduction image
         let image = UIImage(named: "introduction_give_blood_img")
         let imageView = UIImageView(image: image)
+        var imageViewFrame = imageView.frame
+        imageViewFrame.size.width = tableView?.frame.width ?? 0
+        imageView.frame = imageViewFrame
+        imageView.contentMode = .ScaleAspectFill
         tableView?.insertSubview(imageView, atIndex: 0)
-
     }
     
     // MARK: - Actions
