@@ -22,8 +22,6 @@ target 'PositionIn' do
   pod 'Fabric', '~> 1.0'
   pod 'Crashlytics', '~> 3.0'
   pod 'Braintree', '~> 4.1.2'
-  pod 'FBSDKCoreKit', '~> 4.7'
-  pod 'FBSDKLoginKit', '~> 4.7'
   pod 'Box', '~> 2.0'
   pod 'NewRelicAgent', '~> 5.3.6'
   pod 'CHCSVParser', '~> 2.1.0'
