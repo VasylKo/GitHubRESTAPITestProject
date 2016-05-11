@@ -47,9 +47,10 @@ platform :ios do
         use_legacy_build_api: true,
         ) # Build app
     s3(
-       version_template_path: "./fastlane/redcross.erb",
-       html_file_name: "dev.html",
-       version_file_name: "dev.version.json",
+       version_template_path: './fastlane/redcross.erb',
+       html_file_name: 'dev.html',
+       version_file_name: 'dev.version.json',
+       upload_metadata: true,
        path: 'dev/v{CFBundleShortVersionString}_b{CFBundleVersion}/'
        )
   end
@@ -65,9 +66,10 @@ platform :ios do
         ) # Build app
         #      snapshot
       s3(
-         version_template_path: "./fastlane/redcross.erb",
-         html_file_name: "staging.html",
-         version_file_name: "staging.version.json",
+         version_template_path: './fastlane/redcross.erb',
+         html_file_name: 'staging.html',
+         version_file_name: 'staging.version.json',
+         upload_metadata: true,
          path: 'staging/v{CFBundleShortVersionString}_b{CFBundleVersion}/'
          )
     end
@@ -83,9 +85,10 @@ platform :ios do
             ) # Build app
             #      snapshot
             s3(
-               version_template_path: "./fastlane/redcross.erb",
-               html_file_name: "staging2.html",
-               version_file_name: "staging2.version.json",
+               version_template_path: './fastlane/redcross.erb',
+               html_file_name: 'staging2.html',
+               version_file_name: 'staging2.version.json',
+               upload_metadata: true,
                path: 'staging2/v{CFBundleShortVersionString}_b{CFBundleVersion}/'
                )
     end
@@ -102,9 +105,10 @@ platform :ios do
             ) # Build app
 #        snapshot
         s3(
-           version_template_path: "./fastlane/redcross.erb",
-           html_file_name: "production.html",
-           version_file_name: "production.version.json",
+           version_template_path: './fastlane/redcross.erb',
+           html_file_name: 'production.html',
+           version_file_name: 'production.version.json',
+           upload_metadata: true,
            path: 'prod/v{CFBundleShortVersionString}_b{CFBundleVersion}/'
            )
     end
@@ -120,9 +124,10 @@ platform :ios do
             ) # Build app
 #        snapshot
         s3(
-            version_template_path: "./fastlane/redcross.erb",
-            html_file_name: "production.html",
-            version_file_name: "production.version.json",
+            version_template_path: './fastlane/redcross.erb',
+            html_file_name: 'production.html',
+            version_file_name: 'production.version.json',
+            upload_metadata: true,
             path: 'prod/v{CFBundleShortVersionString}_b{CFBundleVersion}/'
             )
     end
