@@ -13,7 +13,6 @@ import BrightFutures
 import CleanroomLogger
 import Messaging
 import GoogleMaps
-import FBSDKCoreKit
 import XLForm
 import Braintree
 import Fabric
@@ -36,7 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     override init() {
         #if DEBUG
-            Log.enable(.Verbose, synchronousMode: true)
+            Log.enable(minimumSeverity: .Verbose, debugMode: true)
         #else
             Log.enable(.Info, synchronousMode: false)
         #endif
@@ -153,7 +152,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         notificationSettings.soundEnabled = false
         LNNotificationCenter.defaultCenter().registerApplicationWithIdentifier("RedCross", name: "Red Cross", icon: UIImage(named: "push_notification_icon"), defaultSettings: notificationSettings);
         
-        return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
+        return true
     }
     
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
@@ -161,8 +160,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return BTAppSwitch.handleOpenURL(url, sourceApplication:sourceApplication)
         }
 
-        return FBSDKApplicationDelegate.sharedInstance().application(application, openURL: url,
-            sourceApplication: sourceApplication, annotation: annotation)
+        return true
     }
     
     func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
@@ -208,7 +206,7 @@ extension AppDelegate {
     
     private class func chatClientInstance() -> XMPPClient {
         let appConfig = AppConfiguration()
-        let chatConfig = XMPPClientConfiguration(with: appConfig.xmppHostname, port: appConfig.xmppPort)
+        let chatConfig = XMPPClientConfiguration(appConfig.xmppHostname, port: appConfig.xmppPort)
         let credentialsProvider = appDelegate().api.chatCredentialsProvider()
         return XMPPClient(configuration: chatConfig, credentialsProvider: credentialsProvider)
     }
