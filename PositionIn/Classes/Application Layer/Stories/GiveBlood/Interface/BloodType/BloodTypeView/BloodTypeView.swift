@@ -10,11 +10,7 @@ import UIKit
 
 class BloodTypeView: UIView {
     
-    override func sizeThatFits(size: CGSize) -> CGSize {
-        let screenRect: CGRect = UIScreen.mainScreen().bounds;
-        return CGSize(width: screenRect.size.width - 20, height: 174)
-    }
-    
+    //MARK: - Action
     
     @IBAction func bloodTypeButtonTapped(sender: UIButton) {
         bloodGroup = BloodGroup(rawValue: sender.tag)
@@ -24,6 +20,13 @@ class BloodTypeView: UIView {
             }
         }
         sender.selected = true
+    }
+    
+    //MARK: - UI
+    
+    override func sizeThatFits(size: CGSize) -> CGSize {
+        let screenRect: CGRect = UIScreen.mainScreen().bounds;
+        return CGSize(width: screenRect.size.width - 20, height: 174)
     }
     
     var bloodGroup: BloodGroup? {

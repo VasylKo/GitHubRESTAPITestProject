@@ -11,25 +11,27 @@ import UIKit
 class BloodTypeViewController: UIViewController {
     
     // MARK: - Init
+    
     init(router: GiveBloodRouter) {
         self.router = router
-        super.init(nibName: NSStringFromClass(BloodTypeViewController.self), bundle: nil)
+        super.init(nibName: NSStringFromClass(self.dynamicType), bundle: nil)
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: - View life cycle
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        //load data and pre set
         api().getDonorInfo().onSuccess(callback: { [weak self] donorInfo in
             self?.donorInfo = donorInfo
             self?.setupUI()
             })
     }
+    
+    // MARK: - UI
     
     func setupUI() {
         
@@ -38,7 +40,7 @@ class BloodTypeViewController: UIViewController {
         }
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Done"),
-                                                                 style: UIBarButtonItemStyle.Plain, target: self, action: "didTapDone:")
+                                                                 style: .Plain, target: self, action: #selector(didTapDone(_:)))
         
         var view = NSBundle.mainBundle().loadNibNamed("BloodTypeView", owner: self, options: nil).first
         if let bloodTypeView =  view as? BloodTypeView {
@@ -81,9 +83,10 @@ class BloodTypeViewController: UIViewController {
         }
     }
     
+    // MARK: - Actions
+    
     @IBAction func didTapDone(sender: AnyObject) {
-        //TODO: send data and push thank you
-        
+        //TODO: send data and push thank you screen
         donorInfo?.bloodGroup = self.bloodTypeView?.bloodGroup
         donorInfo?.dueDate = self.dueDateView?.dueDate
         donorInfo?.donorStatus = .Agreed
@@ -96,5 +99,4 @@ class BloodTypeViewController: UIViewController {
     private var dueDateView: DueDateView?
     private var bloodTypeView: BloodTypeView?
     private let router : GiveBloodRouter
-    
 }

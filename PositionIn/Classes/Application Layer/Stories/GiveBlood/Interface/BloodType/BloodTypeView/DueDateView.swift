@@ -10,18 +10,24 @@ import UIKit
 
 class DueDateView: UIView {
     
+    //MARK: - Actions
+    
     @IBAction func dateChanged(sender: UIDatePicker) {
         dueDate = datePicker.date
-        dateButton.setTitle(self.stringFromDate(datePicker.date), forState: .Normal)
+        dateButton.setTitle(dateFormatter.stringFromDate(datePicker.date), forState: .Normal)
     }
     
-    private func stringFromDate(date : NSDate?) -> String {
-        if date != nil {
-            return dateFormatter.stringFromDate(date!)
-        } else {
-            return String()
-        }
+    @IBAction func setDatePressed(sender: UIButton) {
+        sender.selected = !sender.selected
+        UIView.animateWithDuration(1, delay: 0, options: .BeginFromCurrentState,
+                                   animations:{ [weak self] in
+                                    self?.datePicker.alpha = sender.selected ? 1 : 0
+                                    self?.sizeToFit()},
+                                   completion: nil)
+        
     }
+    
+    //MARK: - UI
     
     override func sizeThatFits(size: CGSize) -> CGSize {
         let screenRect: CGRect = UIScreen.mainScreen().bounds;
@@ -30,15 +36,7 @@ class DueDateView: UIView {
         return CGSize(width: screenRect.size.width - 20, height: height)
     }
     
-    @IBAction func setDatePressed(sender: UIButton) {
-        sender.selected = !sender.selected
-        UIView.animateWithDuration(1, delay: 0, options: UIViewAnimationOptions.BeginFromCurrentState,
-                                   animations:{ [weak self] in
-                                    self?.datePicker.alpha = sender.selected ? 1 : 0
-                                    self?.sizeToFit()},
-                                   completion: nil)
-        
-    }
+    //MARK: - Support
     
     private let dateFormatter: NSDateFormatter = {
         let dateFormatter = NSDateFormatter()
@@ -58,7 +56,7 @@ class DueDateView: UIView {
         didSet {
             if let date = dueDate {
                 datePicker.date = date
-                dateButton.setTitle(self.stringFromDate(date), forState: .Normal)
+                dateButton.setTitle(dateFormatter.stringFromDate(date), forState: .Normal)
             }
         }
     }

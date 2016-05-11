@@ -13,7 +13,7 @@ class DonateNotificationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let backButton = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.Plain, target: navigationController, action: nil)
+        let backButton = UIBarButtonItem(title: "", style: .Plain, target: navigationController, action: nil)
         navigationItem.leftBarButtonItem = backButton
         
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(UInt64(2) * NSEC_PER_SEC)),
