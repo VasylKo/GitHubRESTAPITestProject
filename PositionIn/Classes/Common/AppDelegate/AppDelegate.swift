@@ -37,7 +37,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         #if DEBUG
             Log.enable(minimumSeverity: .Verbose, debugMode: true)
         #else
-            Log.enable(.Info, synchronousMode: false)
+            Log.enable(minimumSeverity: .Info, debugMode: false)
         #endif
         let appConfig = AppConfiguration()
         let urlSessionConfig = NSURLSessionConfiguration.defaultSessionConfiguration()
