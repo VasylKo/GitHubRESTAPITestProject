@@ -273,6 +273,8 @@
 		D16772761C997BB100B624FC /* FeedEmergencyDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16772751C997BB100B624FC /* FeedEmergencyDetailsViewController.swift */; };
 		D16772781C9989FE00B624FC /* FeedEmergencyDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D16772771C9989FE00B624FC /* FeedEmergencyDetailsViewController.xib */; };
 		D167727B1C9991B100B624FC /* FeedEmergencyCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D167727A1C9991B100B624FC /* FeedEmergencyCellModel.swift */; };
+		D17373E41CE31BBA00E9DA6F /* DueDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D17373E31CE31BBA00E9DA6F /* DueDateView.swift */; };
+		D17373E61CE31BC500E9DA6F /* DueDateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D17373E51CE31BC500E9DA6F /* DueDateView.xib */; };
 		D179EBD31CB6B938006012CC /* country-codes.csv in Resources */ = {isa = PBXBuildFile; fileRef = D179EBD21CB6B938006012CC /* country-codes.csv */; };
 		D18EA2C81C031C9800A886A5 /* OnboardingNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18EA2C71C031C9800A886A5 /* OnboardingNavigationController.swift */; };
 		D18EA2CA1C04A3CA00A886A5 /* BrowseMainGridController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18EA2C91C04A3CA00A886A5 /* BrowseMainGridController.swift */; };
@@ -908,6 +910,8 @@
 		D16772751C997BB100B624FC /* FeedEmergencyDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedEmergencyDetailsViewController.swift; sourceTree = "<group>"; };
 		D16772771C9989FE00B624FC /* FeedEmergencyDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeedEmergencyDetailsViewController.xib; sourceTree = "<group>"; };
 		D167727A1C9991B100B624FC /* FeedEmergencyCellModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedEmergencyCellModel.swift; sourceTree = "<group>"; };
+		D17373E31CE31BBA00E9DA6F /* DueDateView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DueDateView.swift; sourceTree = "<group>"; };
+		D17373E51CE31BC500E9DA6F /* DueDateView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DueDateView.xib; sourceTree = "<group>"; };
 		D179EBD21CB6B938006012CC /* country-codes.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "country-codes.csv"; sourceTree = "<group>"; };
 		D18EA2C71C031C9800A886A5 /* OnboardingNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingNavigationController.swift; sourceTree = "<group>"; };
 		D18EA2C91C04A3CA00A886A5 /* BrowseMainGridController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowseMainGridController.swift; sourceTree = "<group>"; };
@@ -2570,6 +2574,15 @@
 			path = CellModel;
 			sourceTree = "<group>";
 		};
+		D17373E21CE31BA400E9DA6F /* DueDateView */ = {
+			isa = PBXGroup;
+			children = (
+				D17373E31CE31BBA00E9DA6F /* DueDateView.swift */,
+				D17373E51CE31BC500E9DA6F /* DueDateView.xib */,
+			);
+			name = DueDateView;
+			sourceTree = "<group>";
+		};
 		D179EBCF1CB67AD8006012CC /* CSVFiles */ = {
 			isa = PBXGroup;
 			children = (
@@ -2760,6 +2773,7 @@
 		D1EA401C1CE1E35200B3FA58 /* BloodType */ = {
 			isa = PBXGroup;
 			children = (
+				D17373E21CE31BA400E9DA6F /* DueDateView */,
 				D1EA40241CE1E61C00B3FA58 /* PositionIn.BloodTypeViewController.xib */,
 				D1EA40231CE1E5F100B3FA58 /* BloodTypeView */,
 			);
@@ -4747,6 +4761,7 @@
 				542EDF731CC92949006FE641 /* OrderHeaderViewCell.xib in Resources */,
 				E64DC3551B4E53C90011D37C /* Main.storyboard in Resources */,
 				D1FD853D1C1EE8D800C2E87B /* PositionIn.PromotionDetailsViewController.xib in Resources */,
+				D17373E61CE31BC500E9DA6F /* DueDateView.xib in Resources */,
 				E64DC35A1B4E53C90011D37C /* LaunchScreen.xib in Resources */,
 				184040271CC14A2B00DF3655 /* EPlusPlanInfoTableViewCell.xib in Resources */,
 				D12EB2971C96E83600718E57 /* PositionIn.NewsItemTitleCell.xib in Resources */,
@@ -5200,6 +5215,7 @@
 				545652951CCFFBA000C63C01 /* ProjectsIntroViewController.swift in Sources */,
 				D1FD85411C1EE8EA00C2E87B /* EventDetailsViewController.swift in Sources */,
 				511792001CCD551300B916CB /* DonatePaymentController.swift in Sources */,
+				D17373E41CE31BBA00E9DA6F /* DueDateView.swift in Sources */,
 				E61B20D81B7E0838005EAB2C /* SettingsViewController.swift in Sources */,
 				CD795C4C1C590BEE00C1C298 /* SegmentedControlContainerViewController.swift in Sources */,
 				23F6AF891CA28EFA00CDD2FF /* FetchViewLogic.swift in Sources */,

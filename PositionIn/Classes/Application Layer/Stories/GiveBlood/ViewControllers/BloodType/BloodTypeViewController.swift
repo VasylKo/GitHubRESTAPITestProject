@@ -8,8 +8,8 @@
 
 import UIKit
 
-enum BlodType {
-    case Unknown, A, B, O, AB
+enum BlodType: Int {
+    case Unknown = 0, A, B, O, AB
 }
 
 class BloodTypeViewController: UIViewController {
@@ -31,30 +31,45 @@ class BloodTypeViewController: UIViewController {
     }
     
     func setupUI() {
-        let view = NSBundle.mainBundle().loadNibNamed("BloodTypeView", owner: self, options: nil).first
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Done"),
+                                                                 style: UIBarButtonItemStyle.Plain, target: self, action: "didTapDone:")
+        
+        var view = NSBundle.mainBundle().loadNibNamed("BloodTypeView", owner: self, options: nil).first
         if let bloodTypeView =  view as? BloodTypeView {
             self.bloodTypeView = bloodTypeView
-            bloodTypeView.layer.shadowColor = UIColor.blackColor().CGColor
-            bloodTypeView.layer.shadowOffset = CGSizeMake(0, 2);
-            bloodTypeView.layer.shadowOpacity = 0.1
-            bloodTypeView.layer.shadowRadius = 1.0;
-            bloodTypeView.layer.masksToBounds = false
-            bloodTypeView.layer.shadowOpacity = 0.1
-            bloodTypeView.layer.cornerRadius = 3
             self.view.addSubview(bloodTypeView)
+        }
+        
+        view = NSBundle.mainBundle().loadNibNamed("DueDateView", owner: self, options: nil).first
+        if let dueDateView =  view as? DueDateView {
+            self.dueDateView = dueDateView
+            self.view.addSubview(dueDateView)
         }
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        
         bloodTypeView?.sizeToFit()
-        let frame = bloodTypeView?.frame
+        var frame = bloodTypeView?.frame
         if var frame = frame {
             frame.origin = CGPointMake(10, 10)
             bloodTypeView?.frame = frame
         }
+        
+        dueDateView?.sizeToFit()
+        frame = dueDateView?.frame
+        if var frame = frame, let bloodTypeViewFrame = bloodTypeView?.frame{
+            frame.origin = CGPointMake(10, CGRectGetMaxY(bloodTypeViewFrame) + 8)
+            dueDateView?.frame = frame
+        }
     }
     
+    @IBAction func didTapDone(sender: AnyObject) {
+
+    }
+    
+    private var dueDateView: DueDateView?
     private var bloodTypeView: BloodTypeView?
     private let router : GiveBloodRouter
     

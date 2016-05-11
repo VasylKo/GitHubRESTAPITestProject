@@ -12,11 +12,12 @@ class BloodTypeView: UIView {
     
     override func sizeThatFits(size: CGSize) -> CGSize {
         let screenRect: CGRect = UIScreen.mainScreen().bounds;
-        return CGSize(width: screenRect.size.width - 20, height: 212)
+        return CGSize(width: screenRect.size.width - 20, height: 174)
     }
     
     
     @IBAction func bloodTypeButtonTapped(sender: UIButton) {
+        bloodType = BlodType(rawValue: sender.tag)
         for view in self.subviews {
             if let button = view as? UIButton {
                 button.selected = false
@@ -24,4 +25,6 @@ class BloodTypeView: UIView {
         }
         sender.selected = true
     }
+    
+    var bloodType: BlodType?
 }
