@@ -97,7 +97,7 @@ class MembershipMemberProfileViewController : XLFormViewController, MembershipMe
     }
     
     func setupInterface() {
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Done"), style: UIBarButtonItemStyle.Plain, target: self, action: "didTapDone:")
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Done"), style: .Plain, target: self, action: "didTapDone:")
         self.navigationItem.rightBarButtonItem?.enabled = false
         self.title = "My Profile"
         self.navigationItem.hidesBackButton = true

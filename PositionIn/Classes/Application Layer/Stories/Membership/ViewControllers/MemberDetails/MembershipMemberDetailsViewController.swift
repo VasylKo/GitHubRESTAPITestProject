@@ -182,7 +182,7 @@ class MembershipMemberDetailsViewController : BaseAddItemViewController {
     }
     
     func setupInterface() {
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Done"), style: UIBarButtonItemStyle.Plain, target: self, action: "didTapDone:")
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Done"), style: .Plain, target: self, action: "didTapDone:")
         self.title = "Member Details"
         self.navigationItem.hidesBackButton = true
         

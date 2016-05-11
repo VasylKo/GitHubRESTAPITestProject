@@ -19,9 +19,9 @@ class GiveBloodRouterImplementation: BaseRouterImplementation, GiveBloodRouter {
             
             switch status {
             case .Undefined:
-                 self.showIntroViewController(from: sourceViewController)
+                self.showGiveBloodTypeViewController(from: sourceViewController)
             default:
-                self.showGiveBloodCentersViewController(from: sourceViewController)
+                self.showGiveBloodTypeViewController(from: sourceViewController)
             }
         }
     }
@@ -33,6 +33,11 @@ class GiveBloodRouterImplementation: BaseRouterImplementation, GiveBloodRouter {
     func showGiveBloodCentersViewController(from sourceViewController : UIViewController) {
         let controller = Storyboards.Main.instantiateExploreViewControllerId()
         controller.homeItem = .GiveBlood
+        sourceViewController.navigationController?.pushViewController(controller, animated: true)
+    }
+    
+    func showGiveBloodTypeViewController(from sourceViewController : UIViewController) {
+        let controller = BloodTypeViewController(router: self)
         sourceViewController.navigationController?.pushViewController(controller, animated: true)
     }
     

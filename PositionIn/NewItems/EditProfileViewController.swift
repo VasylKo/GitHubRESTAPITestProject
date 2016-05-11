@@ -216,7 +216,7 @@ final class EditProfileViewController: BaseAddItemViewController, UserProfileAva
         
         if let _ = self.phoneNumber {
             self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Done"),
-                style: UIBarButtonItemStyle.Plain,
+                style: .Plain,
                 target: self,
                 action: "didTapDone:")
             self.title = NSLocalizedString("My Profile")
