@@ -448,6 +448,12 @@ final class APIService {
         return getObject(endpoint)
     }
     
+    func updateDonorInfo(donorInfo: DonorInfo) -> Future<Void, NSError> {
+        let endpoint = DonorInfo.endpoint()
+        return updateObject(endpoint, object: donorInfo)
+    }
+    
+    
     //MARK: - Community -
     
     func getCommunities(page: Page) -> Future<CollectionResponse<Community>,NSError> {

@@ -8,10 +8,6 @@
 
 import UIKit
 
-enum BlodType: Int {
-    case Unknown = 0, A, B, O, AB
-}
-
 class BloodTypeViewController: UIViewController {
     
     // MARK: - Init
@@ -28,9 +24,19 @@ class BloodTypeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        //load data and pre set
+        api().getDonorInfo().onSuccess(callback: { [weak self] donorInfo in
+            self?.donorInfo = donorInfo
+            self?.setupUI()
+            })
     }
     
     func setupUI() {
+        
+        for subview in self.view.subviews {
+            subview.removeFromSuperview()
+        }
+        
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Done"),
                                                                  style: UIBarButtonItemStyle.Plain, target: self, action: "didTapDone:")
         
@@ -44,6 +50,16 @@ class BloodTypeViewController: UIViewController {
         if let dueDateView =  view as? DueDateView {
             self.dueDateView = dueDateView
             self.view.addSubview(dueDateView)
+        }
+        
+        if let donorInfo = donorInfo {
+            if let bloodGroup = donorInfo.bloodGroup {
+                self.bloodTypeView?.bloodGroup = bloodGroup
+            }
+            
+            if let dueDate = donorInfo.dueDate {
+                self.dueDateView?.dueDate = dueDate
+            }
         }
     }
     
@@ -66,9 +82,17 @@ class BloodTypeViewController: UIViewController {
     }
     
     @IBAction func didTapDone(sender: AnyObject) {
-
+        //TODO: send data and push thank you
+        
+        donorInfo?.bloodGroup = self.bloodTypeView?.bloodGroup
+        donorInfo?.dueDate = self.dueDateView?.dueDate
+        donorInfo?.donorStatus = .Agreed
+        if let donorInfo = donorInfo {
+            api().updateDonorInfo(donorInfo)
+        }
     }
     
+    private var donorInfo: DonorInfo?
     private var dueDateView: DueDateView?
     private var bloodTypeView: BloodTypeView?
     private let router : GiveBloodRouter

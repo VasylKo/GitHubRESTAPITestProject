@@ -17,7 +17,7 @@ class BloodTypeView: UIView {
     
     
     @IBAction func bloodTypeButtonTapped(sender: UIButton) {
-        bloodType = BlodType(rawValue: sender.tag)
+        bloodGroup = BloodGroup(rawValue: sender.tag)
         for view in self.subviews {
             if let button = view as? UIButton {
                 button.selected = false
@@ -26,5 +26,13 @@ class BloodTypeView: UIView {
         sender.selected = true
     }
     
-    var bloodType: BlodType?
+    var bloodGroup: BloodGroup? {
+        didSet {
+            for view in self.subviews {
+                if let v = view as? UIButton where v.tag == bloodGroup?.rawValue {
+                    v.selected = true
+                }
+            }
+        }
+    }
 }
