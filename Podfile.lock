@@ -70,11 +70,11 @@ PODS:
     - Alamofire (~> 3.2.1)
     - BrightFutures (~> 3.0)
     - ObjectMapper (~> 1.1.5)
-  - Realm (0.97.1):
-    - Realm/Headers (= 0.97.1)
-  - Realm/Headers (0.97.1)
-  - RealmSwift (0.97.1):
-    - Realm (= 0.97.1)
+  - Realm (0.102.0):
+    - Realm/Headers (= 0.102.0)
+  - Realm/Headers (0.102.0)
+  - RealmSwift (0.102.0):
+    - Realm (= 0.102.0)
   - Result (1.0.2)
   - TTTAttributedLabel (1.13.4)
   - UIImageEffects (0.0.1)
@@ -86,8 +86,8 @@ DEPENDENCIES:
   - CHCSVParser (~> 2.1.0)
   - Crashlytics (~> 3.0)
   - Fabric (~> 1.0)
-  - FBSDKCoreKit (~> 4.8.0)
-  - FBSDKLoginKit (~> 4.8.0)
+  - FBSDKCoreKit (= 4.8.0)
+  - FBSDKLoginKit (= 4.8.0)
   - Google/Analytics
   - GoogleMaps (= 1.11.1)
   - HanekeSwift (~> 0.10)
@@ -100,7 +100,7 @@ DEPENDENCIES:
   - LNNotificationsUI (from `https://raw.githubusercontent.com/rkolchakov/LNNotificationsUI/master/LNNotificationsUI.podspec`)
   - NewRelicAgent (~> 5.3.6)
   - PosInCore (from `PosInCore`)
-  - RealmSwift (~> 0.97.0)
+  - RealmSwift (~> 0.99)
   - TTTAttributedLabel (~> 1.13)
   - UIImageEffects
   - XLForm (~> 3.1.0)
@@ -141,8 +141,8 @@ SPEC CHECKSUMS:
   NewRelicAgent: 731c3b39030885531dad40e43cd80b8dbe61647e
   ObjectMapper: 528b1a6677a6acac7747edd508576983e76a9148
   PosInCore: dcf621e469d4af6c8e31c2d7b27dd170bfe924ad
-  Realm: 6854f49cc788171573a0605fe5e55d3224bc39f9
-  RealmSwift: 21aa38ae5210a8e7d3ca2fd02a0ce82476672101
+  Realm: 5d219f9037e3ec2019c599b8227bfc95433cb10e
+  RealmSwift: e6f436f9fea1c57b9ad6d1c46d57562c845f3c4c
   Result: dd3dd71af3fa2e262f1a999e14fba2c25ec14f16
   TTTAttributedLabel: 0a2ac7b2dd726d32a070dafb01446026b11e624f
   UIImageEffects: 37b99fa461e4965f332ca82e92f2c22a1075ee84
