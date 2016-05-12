@@ -39,6 +39,11 @@ struct DonorInfo: CRUDObject {
     
     //MARK: Mappable
     
+    init?(declineReason: String?, donorStatus: DonorStatus? ) {
+        self.donorStatus = donorStatus
+        self.declineReason = declineReason
+    }
+    
     init?(_ map: Map) {
         mapping(map)
         if objectId == CRUDObjectInvalidId {
@@ -48,7 +53,7 @@ struct DonorInfo: CRUDObject {
             return nil
         }
     }
-    
+
     mutating func mapping(map: Map) {
         objectId        <- (map["userId"], CRUDObjectIdTransform())
         bloodGroup      <-  map["bloodGroup"]
