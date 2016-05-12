@@ -1,9 +1,7 @@
-# Uncomment this line to define a global platform for your project
 platform :ios, '8.0'
 use_frameworks!
 
-
-target 'PositionIn' do
+def common_pods
   pod 'KeychainAccess', '~> 2.3.1'
   pod 'HanekeSwift', '~> 0.10'
   pod 'KYDrawerController', '~> 1.1'
@@ -25,17 +23,14 @@ target 'PositionIn' do
   pod 'CHCSVParser', '~> 2.1.0'
   pod 'TTTAttributedLabel', '~> 1.13'
   pod 'LNNotificationsUI', :podspec => 'https://raw.githubusercontent.com/rkolchakov/LNNotificationsUI/master/LNNotificationsUI.podspec'
+end
 
-  post_install do |installer|
-    installer.pods_project.targets.each do |target|
-      if ['GoogleMaps'].include?(target.name) | ['RealmSwift'].include?(target.name) | ['Realm'].include?(target.name)
-        target.build_configurations.each do |config|
-          config.build_settings['ENABLE_BITCODE'] = 'NO'
-        end
-      end
-    end
-  end
+target 'RCKenya' do
+    common_pods
+end
 
+target 'RCSouthAfrica' do
+    common_pods
 end
 
 
