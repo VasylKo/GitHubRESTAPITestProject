@@ -13,7 +13,7 @@ enum HomeItem: Int, CustomDebugStringConvertible {
     case Projects, Emergency, Training, GiveBlood, Volunteer, BomaHotels, Events, News, Market, Ambulance, Membership, Donate
     
     static var count: Int {
-        return 12
+        return 11
     }
     
     static func homeItemForUI(value: Int) -> HomeItem {
@@ -39,8 +39,6 @@ enum HomeItem: Int, CustomDebugStringConvertible {
         case 9:
             return .Market
         case 10:
-            return .BomaHotels
-        case 11:
             return .Volunteer
         default:
             return .Unknown
@@ -67,8 +65,6 @@ enum HomeItem: Int, CustomDebugStringConvertible {
             return "/v1.0/projects/\(objectId)"
         case .Market:
             return "/v1.0/products/\(objectId)"
-        case .BomaHotels:
-            return "/v1.0/boma-hotels/\(objectId)"
         case .Volunteer:
             return "/v1.0/volunteers/\(objectId)"
         case .Unknown:
@@ -114,7 +110,8 @@ enum HomeItem: Int, CustomDebugStringConvertible {
         case .GiveBlood:
             return NSLocalizedString("Give Blood", comment: "HomeItem")
         case .News:
-            return NSLocalizedString("KRCS News", comment: "HomeItem")
+            let appShortTitle = AppConfiguration().appShortTitle
+            return NSLocalizedString("\(appShortTitle) News", comment: "HomeItem")
         case .Membership:
             return NSLocalizedString("Membership", comment: "HomeItem")
         case .Donate:
@@ -127,8 +124,6 @@ enum HomeItem: Int, CustomDebugStringConvertible {
             return NSLocalizedString("Projects", comment: "HomeItem")
         case .Market:
             return NSLocalizedString("Market", comment: "HomeItem")
-        case .BomaHotels:
-            return NSLocalizedString("Boma Hotels", comment: "HomeItem")
         case .Volunteer:
             return NSLocalizedString("Volunteer", comment: "HomeItem")
         case .Unknown:
@@ -160,8 +155,6 @@ enum HomeItem: Int, CustomDebugStringConvertible {
             return UIImage(named: "home_projects")
         case .Market:
             return UIImage(named: "home_market")
-        case .BomaHotels:
-            return UIImage(named: "home_hotel")
         case .Volunteer:
             return UIImage(named: "home_volunteer")
         case .Unknown:
