@@ -14,6 +14,24 @@ protocol ThankYouViewDelegate: class {
 
 class ThankYouView: UIView {
     
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.configure()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        self.configure()
+    }
+    
+    private func configure() {
+        self.layer.cornerRadius = 3
+        self.layer.masksToBounds = false
+        self.layer.shadowColor = UIColor.blackColor().CGColor
+        self.layer.shadowOffset = CGSize(width: 0, height: 2)
+        self.layer.shadowOpacity = 0.1
+    }
+    
     //MARK: - Action
     
     @IBAction func viewCenterButtonTapped(sender: UIButton) {
@@ -28,7 +46,7 @@ class ThankYouView: UIView {
     }
     
     //MARK: - Support
- 
+    
     weak var delegate: ThankYouViewDelegate?
     @IBOutlet weak var viewCenterButton: UIButton! {
         didSet {

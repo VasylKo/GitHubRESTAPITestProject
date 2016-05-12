@@ -36,13 +36,6 @@ class ThankYouViewController: UIViewController, ThankYouViewDelegate {
         let view = NSBundle.mainBundle().loadNibNamed("ThankYouView", owner: self, options: nil).first
         if let thankYouView =  view as? ThankYouView {
             self.thankYouView = thankYouView
-            
-            thankYouView.layer.cornerRadius = 3
-            thankYouView.layer.masksToBounds = false
-            thankYouView.layer.shadowColor = UIColor.blackColor().CGColor
-            thankYouView.layer.shadowOffset = CGSize(width: 0, height: 2)
-            thankYouView.layer.shadowOpacity = 0.1
-            
             thankYouView.delegate = self
             self.view.addSubview(thankYouView)
         }
@@ -66,6 +59,6 @@ class ThankYouViewController: UIViewController, ThankYouViewDelegate {
     }
     
     // MARK: - Support
-    private var thankYouView: ThankYouView?
+    private weak var thankYouView: ThankYouView?
     private let router : GiveBloodRouter
 }
