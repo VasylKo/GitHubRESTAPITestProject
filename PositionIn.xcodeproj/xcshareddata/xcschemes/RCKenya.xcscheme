@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "E64DC3491B4E53C90011D37C"
-               BuildableName = "PositionIn.app"
-               BlueprintName = "PositionIn"
+               BuildableName = "RCKenya.app"
+               BlueprintName = "RCKenya"
                ReferencedContainer = "container:PositionIn.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -105,8 +105,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E64DC3491B4E53C90011D37C"
-            BuildableName = "PositionIn.app"
-            BlueprintName = "PositionIn"
+            BuildableName = "RCKenya.app"
+            BlueprintName = "RCKenya"
             ReferencedContainer = "container:PositionIn.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -128,8 +128,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E64DC3491B4E53C90011D37C"
-            BuildableName = "PositionIn.app"
-            BlueprintName = "PositionIn"
+            BuildableName = "RCKenya.app"
+            BlueprintName = "RCKenya"
             ReferencedContainer = "container:PositionIn.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -154,8 +154,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E64DC3491B4E53C90011D37C"
-            BuildableName = "PositionIn.app"
-            BlueprintName = "PositionIn"
+            BuildableName = "RCKenya.app"
+            BlueprintName = "RCKenya"
             ReferencedContainer = "container:PositionIn.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
