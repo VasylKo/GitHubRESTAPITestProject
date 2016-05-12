@@ -13,6 +13,7 @@ import CleanroomLogger
 final class MainMenuViewController: UIViewController {
 
     @IBOutlet private weak var tableView: TableView!
+    @IBOutlet private weak var headerView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,6 +21,7 @@ final class MainMenuViewController: UIViewController {
         dataSource.configureTable(tableView)
         subscribeToNotifications()
         trackEventToAnalytics("Main", action: "Click", label: "Home")
+        headerView.backgroundColor = UIScheme.mainThemeColor
     }
     
     private func menuItemsForUser(user: UserProfile?) -> [MainMenuItem] {

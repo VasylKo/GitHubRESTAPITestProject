@@ -47,7 +47,7 @@ protocol BrowseModeDisplay {
             let browseGridController = Storyboards.Main.instantiateBrowseGridViewController()
             browseGridController.browseGridDelegate = self
             self.searchbar.attributedText = nil
-            self.navigationController?.navigationBar.barTintColor = UIColor.bt_colorWithBytesR(237, g: 27, b: 46)
+            self.navigationController?.navigationBar.barTintColor = UIScheme.mainThemeColor
             return browseGridController
         case .New:
             let listController = FeedListViewController(nibName: "FeedListViewController", bundle: nil)

@@ -22,10 +22,12 @@ final class MainMenuBadgeCell: TableViewCell {
         titleLabel?.text = m!.title
         let image = UIImage(named: m!.image)
         iconImageView.image = image
+        iconImageView.tintColor = UIScheme.mainThemeColor
         iconImageView.highlightedImage = image?.imageWithRenderingMode(.AlwaysTemplate)
         badgeView.hidden = m!.badge == nil
         badgeView.setText(m!.badge,  animated: false)
         badgeView.badgeColor = UIScheme.mainThemeColor
+        selectionIndicatorView.backgroundColor = UIScheme.mainThemeColor
     }
     
     override func setSelected(selected: Bool, animated: Bool) {

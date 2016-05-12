@@ -17,6 +17,7 @@ final class WalletViewController: BesideMenuViewController {
     
     // MARK: - IBOutlet
     @IBOutlet weak var tableView: UITableView?
+    @IBOutlet weak var segmentControl: UISegmentedControl?
     
     // MARK: - Private variables
     private var browseMode: BrowseMode = .Purchases {
@@ -52,6 +53,7 @@ final class WalletViewController: BesideMenuViewController {
             dataSource.configureTable(tableView)
         }
         browseMode = .Purchases
+        segmentControl?.tintColor = UIScheme.mainThemeColor
     }
     
     override func viewWillAppear(animated: Bool) {
