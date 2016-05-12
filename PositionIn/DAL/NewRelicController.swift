@@ -18,9 +18,10 @@ final class NewRelicController {
     func start() {
         #if DEBUG
             NewRelic.setApplicationBuild("Debug build")
+        #else
+            NewRelic.startWithApplicationToken(AppConfiguration().newRelicToken)
         #endif
-        NewRelic.startWithApplicationToken(AppConfiguration().newRelicToken)
-        
+    
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("trackNetworkFailure:"), name: NewRelicObserverNotifications.networkFailureNotification, object: nil)
     }
     
