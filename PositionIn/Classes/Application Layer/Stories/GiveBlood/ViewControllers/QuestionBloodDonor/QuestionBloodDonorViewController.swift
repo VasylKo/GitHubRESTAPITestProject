@@ -49,11 +49,18 @@ class QuestionBloodDonorViewController: UIViewController, GiveBloodAlertViewDele
     }
     
     func yesTapped() {
-        
+        self.router.showGiveBloodTypeViewController(from: self)
     }
     
     func noTapped() {
-        
+        switch type {
+        case .AlreadyDonor :
+            self.router.showQuestionBloodDonorController(from: self, type: .WouldBeDonor)
+            break
+        case .WouldBeDonor:
+            self.router.showUnableToDonateViewController(from: self)
+        default: break
+        }
     }
     
     private let router : GiveBloodRouter

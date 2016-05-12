@@ -55,7 +55,7 @@ class ThankYouViewController: UIViewController, ThankYouViewDelegate {
     // MARK: - ThankYouViewDelegate
     
     func viewBloodCenters() {
-        //TODO: push next screen
+        self.router.showGiveBloodCentersViewController(from: self)
     }
     
     // MARK: - Support

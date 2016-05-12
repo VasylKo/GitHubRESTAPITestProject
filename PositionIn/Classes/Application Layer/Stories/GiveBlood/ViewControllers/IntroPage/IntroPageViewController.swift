@@ -94,8 +94,7 @@ class IntroPageViewController: UIViewController {
     
     // MARK: - Actions
     @IBAction func giveBloodPressed() {
-        //TODO: add implementation
-        print("Give Blood pressed")
+        self.router.showQuestionBloodDonorController(from: self, type: .AlreadyDonor)
     }
 
 }
@@ -172,9 +171,6 @@ extension IntroPageViewController: IntroPageTableViewFooterViewDelegate {
     }
     
     func skipThisStepButtonPressed() {
-        //TODO: add implementation
-        print("SkipThisStepButtonPressed")
+        self.router.showGiveBloodCentersViewController(from: self)
     }
-
 }
-

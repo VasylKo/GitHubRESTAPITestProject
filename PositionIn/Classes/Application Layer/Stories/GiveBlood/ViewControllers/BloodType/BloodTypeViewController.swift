@@ -86,12 +86,13 @@ class BloodTypeViewController: UIViewController {
     // MARK: - Actions
     
     @IBAction func didTapDone(sender: AnyObject) {
-        //TODO: send data and push thank you screen
         donorInfo?.bloodGroup = self.bloodTypeView?.bloodGroup
         donorInfo?.dueDate = self.dueDateView?.dueDate
         donorInfo?.donorStatus = .Agreed
         if let donorInfo = donorInfo {
-            api().updateDonorInfo(donorInfo)
+            api().updateDonorInfo(donorInfo).onSuccess(callback: {[unowned self] in
+                self.router.showThankYouViewController(from: self)
+                })
         }
     }
     

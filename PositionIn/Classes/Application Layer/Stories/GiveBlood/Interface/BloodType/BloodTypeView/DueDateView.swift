@@ -13,7 +13,15 @@ class DueDateView: UIView {
     //MARK: - Actions
     
     @IBAction func dateChanged(sender: UIDatePicker) {
-        dueDate = datePicker.date
+        let sourceTimeZone = NSTimeZone(name: "UTC")
+        let destinationTimeZone = NSTimeZone.localTimeZone()
+        
+        let sourceGMTOffset = sourceTimeZone?.secondsFromGMT
+        let destinationGMTOffset = destinationTimeZone.secondsFromGMT
+        var interval = destinationGMTOffset - sourceGMTOffset!
+        interval += 60 * 60 * 24 - 1 //set the last second of today
+        dueDate = datePicker.date.dateByAddingTimeInterval(NSTimeInterval(interval))
+
         dateButton.setTitle(dateFormatter.stringFromDate(datePicker.date), forState: .Normal)
     }
     
@@ -40,15 +48,7 @@ class DueDateView: UIView {
     
     private let dateFormatter: NSDateFormatter = {
         let dateFormatter = NSDateFormatter()
-        let format = NSDateFormatter.dateFormatFromTemplate("j", options: 0, locale: NSLocale.currentLocale())
-        
-        if format?.rangeOfString("a") != nil {
-            dateFormatter.dateFormat = "dd MMM, yyyy HH:mm"
-        }
-        else {
-            dateFormatter.dateFormat = "dd MMM, yyyy h:mm a"
-        }
-        
+        dateFormatter.dateFormat = "dd MMM, yyyy"
         return dateFormatter
     }()
     
@@ -64,6 +64,7 @@ class DueDateView: UIView {
     @IBOutlet weak var dateButton: UIButton!
     @IBOutlet weak var datePicker: UIDatePicker! {
         didSet {
+            datePicker.datePickerMode = .Date
             datePicker.minimumDate = NSDate()
         }
     }
