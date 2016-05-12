@@ -31,6 +31,11 @@ class PaymentTableViewCell: XLFormBaseCell {
         }
     }
     
+    override func configure() {
+        super.configure()
+        planName.text = AppConfiguration().appFullTitle
+    }
+    
     override static func formDescriptorCellHeightForRowDescriptor(rowDescriptor: XLFormRowDescriptor!) -> CGFloat {
         return PaymentTableViewCell.cellHeight
     }

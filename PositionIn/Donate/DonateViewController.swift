@@ -325,7 +325,8 @@ extension DonateViewController: PurchaseConvertible {
     }
         
     var itemName: String {
-        return product?.name ?? "Kenya Red Cross Society"
+        let appFullTitle = AppConfiguration().appFullTitle
+        return product?.name ?? appFullTitle
     }
     
     var purchaseType: PurchaseType {

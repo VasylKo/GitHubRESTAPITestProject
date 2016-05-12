@@ -90,7 +90,8 @@ final class WalletViewController: BesideMenuViewController {
                     if item.entityDetails?.name == nil {
                         var entityDetails = Product()
                         entityDetails.objectId = CRUDObjectInvalidId
-                        entityDetails.name = NSLocalizedString("Donation to KRCS")
+                        let appShortTitle = AppConfiguration().appShortTitle
+                        entityDetails.name = NSLocalizedString("Donation to \(appShortTitle)")
                         item.entityDetails = entityDetails
                     }
                     return item

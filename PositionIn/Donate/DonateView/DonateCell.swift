@@ -27,6 +27,7 @@ class DonateCell: XLFormBaseCell {
     
     override func configure() {
         super.configure()
+        projectNameLabel.text = AppConfiguration().appFullTitle
     }
     
     override func update() {

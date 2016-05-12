@@ -169,7 +169,6 @@
 		180E1C991CE4CDE9006EBEC6 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A869ED1B60D42C00797D16 /* APIService.swift */; };
 		180E1C9A1CE4CDE9006EBEC6 /* PhoneNumberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F86CF21BFCBAD3006E0C49 /* PhoneNumberViewController.swift */; };
 		180E1C9B1CE4CDE9006EBEC6 /* NewsMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD87FDED1C7611AA00E610AE /* NewsMapViewController.swift */; };
-		180E1C9C1CE4CDE9006EBEC6 /* HomeItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15F47431C088A26009ED3FD /* HomeItem.swift */; };
 		180E1C9D1CE4CDE9006EBEC6 /* MembershipCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8ED0DF1C60BE7C00576DBF /* MembershipCardView.swift */; };
 		180E1C9E1CE4CDE9006EBEC6 /* UnableToDonateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D118A5641CE4AA16002626E9 /* UnableToDonateViewController.swift */; };
 		180E1C9F1CE4CDE9006EBEC6 /* MailComposeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5419F99F1CC78080000E16E7 /* MailComposeViewController.swift */; };
@@ -483,16 +482,18 @@
 		180E1DD81CE4CDE9006EBEC6 /* CleanroomLogger.framework in Embed Core Framework */ = {isa = PBXBuildFile; fileRef = E6B3C32E1B62581200EA613A /* CleanroomLogger.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		180E1DD91CE4CDE9006EBEC6 /* Messaging.framework in Embed Core Framework */ = {isa = PBXBuildFile; fileRef = E6E2FE881B66F61300880F3C /* Messaging.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		180E1DDA1CE4CDE9006EBEC6 /* CleanroomASL.framework in Embed Core Framework */ = {isa = PBXBuildFile; fileRef = E6B3C32D1B62581200EA613A /* CleanroomASL.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		180E1E3F1CE4DCBA006EBEC6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180E1E2E1CE4DCBA006EBEC6 /* AppDelegate.swift */; };
-		180E1E401CE4DCBA006EBEC6 /* AppConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180E1E301CE4DCBA006EBEC6 /* AppConfiguration.swift */; };
-		180E1E411CE4DCBA006EBEC6 /* UIScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180E1E311CE4DCBA006EBEC6 /* UIScheme.swift */; };
-		180E1E421CE4DCBA006EBEC6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 180E1E331CE4DCBA006EBEC6 /* GoogleService-Info.plist */; };
-		180E1E431CE4DCBA006EBEC6 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 180E1E341CE4DCBA006EBEC6 /* Info.plist */; };
-		180E1E491CE4DCCA006EBEC6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180E1E371CE4DCBA006EBEC6 /* AppDelegate.swift */; };
-		180E1E4A1CE4DCCA006EBEC6 /* AppConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180E1E391CE4DCBA006EBEC6 /* AppConfiguration.swift */; };
-		180E1E4B1CE4DCCA006EBEC6 /* UIScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180E1E3A1CE4DCBA006EBEC6 /* UIScheme.swift */; };
-		180E1E4C1CE4DCD5006EBEC6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 180E1E3C1CE4DCBA006EBEC6 /* GoogleService-Info.plist */; };
-		180E1E4D1CE4DCD5006EBEC6 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 180E1E3D1CE4DCBA006EBEC6 /* Info.plist */; };
+		180E1E651CE51580006EBEC6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180E1E521CE51580006EBEC6 /* AppDelegate.swift */; };
+		180E1E661CE51580006EBEC6 /* AppConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180E1E541CE51580006EBEC6 /* AppConfiguration.swift */; };
+		180E1E671CE51580006EBEC6 /* UIScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180E1E551CE51580006EBEC6 /* UIScheme.swift */; };
+		180E1E681CE51580006EBEC6 /* HomeItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180E1E571CE51580006EBEC6 /* HomeItem.swift */; };
+		180E1E691CE51580006EBEC6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 180E1E591CE51580006EBEC6 /* GoogleService-Info.plist */; };
+		180E1E6A1CE51580006EBEC6 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 180E1E5A1CE51580006EBEC6 /* Info.plist */; };
+		180E1E711CE51590006EBEC6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180E1E5C1CE51580006EBEC6 /* AppDelegate.swift */; };
+		180E1E721CE51590006EBEC6 /* AppConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180E1E5E1CE51580006EBEC6 /* AppConfiguration.swift */; };
+		180E1E731CE51590006EBEC6 /* UIScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180E1E5F1CE51580006EBEC6 /* UIScheme.swift */; };
+		180E1E741CE51590006EBEC6 /* HomeItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180E1E611CE51580006EBEC6 /* HomeItem.swift */; };
+		180E1E751CE51590006EBEC6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 180E1E631CE51580006EBEC6 /* GoogleService-Info.plist */; };
+		180E1E761CE51590006EBEC6 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 180E1E641CE51580006EBEC6 /* Info.plist */; };
 		181314D51CBE7933004373F2 /* EPlusMembershipPlan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181314D41CBE7933004373F2 /* EPlusMembershipPlan.swift */; };
 		181314D71CBF80D4004373F2 /* EplusMembershipDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181314D61CBF80D4004373F2 /* EplusMembershipDetails.swift */; };
 		181314EB1CBFA3B4004373F2 /* EPlusMembershipRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181314E61CBFA3B4004373F2 /* EPlusMembershipRouter.swift */; };
@@ -725,7 +726,6 @@
 		D14E47841CC64DFC002FDD6A /* EPlusServiceDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D14E47821CC64DFC002FDD6A /* EPlusServiceDetailsViewController.xib */; };
 		D153AB841C11FA9B00DFB5C9 /* AmbulanceRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D153AB831C11FA9B00DFB5C9 /* AmbulanceRequest.swift */; };
 		D154411A1C47D642006251B7 /* Volunteer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15441191C47D642006251B7 /* Volunteer.swift */; };
-		D15F47441C088A26009ED3FD /* HomeItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15F47431C088A26009ED3FD /* HomeItem.swift */; };
 		D15F47471C0AFDAF009ED3FD /* CallAmbulanceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15F47461C0AFDAF009ED3FD /* CallAmbulanceViewController.swift */; };
 		D15F47491C0B77D7009ED3FD /* AmbulanceBaseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15F47481C0B77D7009ED3FD /* AmbulanceBaseController.swift */; };
 		D15F474B1C0B77EF009ED3FD /* AmbulanceSentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15F474A1C0B77EF009ED3FD /* AmbulanceSentViewController.swift */; };
@@ -1159,17 +1159,19 @@
 		18033D091C905E6100C709DD /* NSDate+TimeZone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+TimeZone.h"; sourceTree = "<group>"; };
 		18033D0A1C905E6100C709DD /* NSDate+TimeZone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+TimeZone.m"; sourceTree = "<group>"; };
 		180E1DEB1CE4CDE9006EBEC6 /* RCSouthAfrica.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RCSouthAfrica.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		180E1E2E1CE4DCBA006EBEC6 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		180E1E301CE4DCBA006EBEC6 /* AppConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppConfiguration.swift; sourceTree = "<group>"; };
-		180E1E311CE4DCBA006EBEC6 /* UIScheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIScheme.swift; sourceTree = "<group>"; };
-		180E1E331CE4DCBA006EBEC6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		180E1E341CE4DCBA006EBEC6 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		180E1E371CE4DCBA006EBEC6 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		180E1E391CE4DCBA006EBEC6 /* AppConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppConfiguration.swift; sourceTree = "<group>"; };
-		180E1E3A1CE4DCBA006EBEC6 /* UIScheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIScheme.swift; sourceTree = "<group>"; };
-		180E1E3C1CE4DCBA006EBEC6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		180E1E3D1CE4DCBA006EBEC6 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		180E1E4F1CE4DEB8006EBEC6 /* Version.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Version.h; sourceTree = "<group>"; };
+		180E1E521CE51580006EBEC6 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		180E1E541CE51580006EBEC6 /* AppConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppConfiguration.swift; sourceTree = "<group>"; };
+		180E1E551CE51580006EBEC6 /* UIScheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIScheme.swift; sourceTree = "<group>"; };
+		180E1E571CE51580006EBEC6 /* HomeItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeItem.swift; sourceTree = "<group>"; };
+		180E1E591CE51580006EBEC6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		180E1E5A1CE51580006EBEC6 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		180E1E5C1CE51580006EBEC6 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		180E1E5E1CE51580006EBEC6 /* AppConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppConfiguration.swift; sourceTree = "<group>"; };
+		180E1E5F1CE51580006EBEC6 /* UIScheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIScheme.swift; sourceTree = "<group>"; };
+		180E1E611CE51580006EBEC6 /* HomeItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeItem.swift; sourceTree = "<group>"; };
+		180E1E631CE51580006EBEC6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		180E1E641CE51580006EBEC6 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		181314D41CBE7933004373F2 /* EPlusMembershipPlan.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EPlusMembershipPlan.swift; sourceTree = "<group>"; };
 		181314D61CBF80D4004373F2 /* EplusMembershipDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EplusMembershipDetails.swift; sourceTree = "<group>"; };
 		181314E61CBFA3B4004373F2 /* EPlusMembershipRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EPlusMembershipRouter.swift; sourceTree = "<group>"; };
@@ -1412,7 +1414,6 @@
 		D14E47821CC64DFC002FDD6A /* EPlusServiceDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EPlusServiceDetailsViewController.xib; path = ../../ViewControllers/ServicesDetails/EPlusServiceDetailsViewController.xib; sourceTree = "<group>"; };
 		D153AB831C11FA9B00DFB5C9 /* AmbulanceRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AmbulanceRequest.swift; sourceTree = "<group>"; };
 		D15441191C47D642006251B7 /* Volunteer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Volunteer.swift; sourceTree = "<group>"; };
-		D15F47431C088A26009ED3FD /* HomeItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeItem.swift; sourceTree = "<group>"; };
 		D15F47461C0AFDAF009ED3FD /* CallAmbulanceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CallAmbulanceViewController.swift; sourceTree = "<group>"; };
 		D15F47481C0B77D7009ED3FD /* AmbulanceBaseController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AmbulanceBaseController.swift; sourceTree = "<group>"; };
 		D15F474A1C0B77EF009ED3FD /* AmbulanceSentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AmbulanceSentViewController.swift; sourceTree = "<group>"; };
@@ -2016,75 +2017,93 @@
 			path = BoughtProductDetails;
 			sourceTree = "<group>";
 		};
-		180E1E2C1CE4DCB9006EBEC6 /* Applications */ = {
-			isa = PBXGroup;
-			children = (
-				180E1E2D1CE4DCBA006EBEC6 /* RCKenya */,
-				180E1E361CE4DCBA006EBEC6 /* RCSouthAfrica */,
-			);
-			path = Applications;
-			sourceTree = "<group>";
-		};
-		180E1E2D1CE4DCBA006EBEC6 /* RCKenya */ = {
-			isa = PBXGroup;
-			children = (
-				180E1E2E1CE4DCBA006EBEC6 /* AppDelegate.swift */,
-				180E1E2F1CE4DCBA006EBEC6 /* Classes */,
-				180E1E321CE4DCBA006EBEC6 /* Supporting Files */,
-			);
-			path = RCKenya;
-			sourceTree = "<group>";
-		};
-		180E1E2F1CE4DCBA006EBEC6 /* Classes */ = {
-			isa = PBXGroup;
-			children = (
-				180E1E301CE4DCBA006EBEC6 /* AppConfiguration.swift */,
-				180E1E311CE4DCBA006EBEC6 /* UIScheme.swift */,
-			);
-			path = Classes;
-			sourceTree = "<group>";
-		};
-		180E1E321CE4DCBA006EBEC6 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				180E1E331CE4DCBA006EBEC6 /* GoogleService-Info.plist */,
-				180E1E341CE4DCBA006EBEC6 /* Info.plist */,
-			);
-			path = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		180E1E361CE4DCBA006EBEC6 /* RCSouthAfrica */ = {
-			isa = PBXGroup;
-			children = (
-				180E1E371CE4DCBA006EBEC6 /* AppDelegate.swift */,
-				180E1E381CE4DCBA006EBEC6 /* Classes */,
-				180E1E3B1CE4DCBA006EBEC6 /* Supporting Files */,
-			);
-			path = RCSouthAfrica;
-			sourceTree = "<group>";
-		};
-		180E1E381CE4DCBA006EBEC6 /* Classes */ = {
-			isa = PBXGroup;
-			children = (
-				180E1E391CE4DCBA006EBEC6 /* AppConfiguration.swift */,
-				180E1E3A1CE4DCBA006EBEC6 /* UIScheme.swift */,
-			);
-			path = Classes;
-			sourceTree = "<group>";
-		};
-		180E1E3B1CE4DCBA006EBEC6 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				180E1E3C1CE4DCBA006EBEC6 /* GoogleService-Info.plist */,
-				180E1E3D1CE4DCBA006EBEC6 /* Info.plist */,
-			);
-			path = "Supporting Files";
-			sourceTree = "<group>";
-		};
 		180E1E4E1CE4DEB8006EBEC6 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
 				180E1E4F1CE4DEB8006EBEC6 /* Version.h */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		180E1E501CE51580006EBEC6 /* Applications */ = {
+			isa = PBXGroup;
+			children = (
+				180E1E511CE51580006EBEC6 /* RCKenya */,
+				180E1E5B1CE51580006EBEC6 /* RCSouthAfrica */,
+			);
+			path = Applications;
+			sourceTree = "<group>";
+		};
+		180E1E511CE51580006EBEC6 /* RCKenya */ = {
+			isa = PBXGroup;
+			children = (
+				180E1E521CE51580006EBEC6 /* AppDelegate.swift */,
+				180E1E531CE51580006EBEC6 /* DAL */,
+				180E1E561CE51580006EBEC6 /* Models */,
+				180E1E581CE51580006EBEC6 /* Supporting Files */,
+			);
+			path = RCKenya;
+			sourceTree = "<group>";
+		};
+		180E1E531CE51580006EBEC6 /* DAL */ = {
+			isa = PBXGroup;
+			children = (
+				180E1E541CE51580006EBEC6 /* AppConfiguration.swift */,
+				180E1E551CE51580006EBEC6 /* UIScheme.swift */,
+			);
+			path = DAL;
+			sourceTree = "<group>";
+		};
+		180E1E561CE51580006EBEC6 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				180E1E571CE51580006EBEC6 /* HomeItem.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		180E1E581CE51580006EBEC6 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				180E1E591CE51580006EBEC6 /* GoogleService-Info.plist */,
+				180E1E5A1CE51580006EBEC6 /* Info.plist */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		180E1E5B1CE51580006EBEC6 /* RCSouthAfrica */ = {
+			isa = PBXGroup;
+			children = (
+				180E1E5C1CE51580006EBEC6 /* AppDelegate.swift */,
+				180E1E5D1CE51580006EBEC6 /* DAL */,
+				180E1E601CE51580006EBEC6 /* Models */,
+				180E1E621CE51580006EBEC6 /* Supporting Files */,
+			);
+			path = RCSouthAfrica;
+			sourceTree = "<group>";
+		};
+		180E1E5D1CE51580006EBEC6 /* DAL */ = {
+			isa = PBXGroup;
+			children = (
+				180E1E5E1CE51580006EBEC6 /* AppConfiguration.swift */,
+				180E1E5F1CE51580006EBEC6 /* UIScheme.swift */,
+			);
+			path = DAL;
+			sourceTree = "<group>";
+		};
+		180E1E601CE51580006EBEC6 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				180E1E611CE51580006EBEC6 /* HomeItem.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		180E1E621CE51580006EBEC6 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				180E1E631CE51580006EBEC6 /* GoogleService-Info.plist */,
+				180E1E641CE51580006EBEC6 /* Info.plist */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -3774,7 +3793,7 @@
 			children = (
 				E689EE861B6A86A700597587 /* Cartfile */,
 				E66478901C918C0700BA5EFB /* Podfile */,
-				180E1E2C1CE4DCB9006EBEC6 /* Applications */,
+				180E1E501CE51580006EBEC6 /* Applications */,
 				CD795BD91C57B4EE00C1C298 /* Fastlane */,
 				E6736ADC1B4E56EB0003580D /* Scripts */,
 				E64DC34C1B4E53C90011D37C /* PositionIn */,
@@ -3904,7 +3923,6 @@
 				E632016D1B9834910066C62E /* ObjectInfo.swift */,
 				E6FC24C21BAAEC23006FE7A0 /* Conversation.swift */,
 				500D7FA21BC2AACF008C8C82 /* SearchItem.swift */,
-				D15F47431C088A26009ED3FD /* HomeItem.swift */,
 				5095611A1C3EBFCD00D3C207 /* BraintreePayment.swift */,
 			);
 			path = Models;
@@ -5385,6 +5403,7 @@
 				180E1D581CE4CDE9006EBEC6 /* MoreInformationCell.xib in Resources */,
 				180E1D591CE4CDE9006EBEC6 /* EPlusServisesTableViewHeader.xib in Resources */,
 				180E1D5A1CE4CDE9006EBEC6 /* EplusPaymentTableViewCell.xib in Resources */,
+				180E1E751CE51590006EBEC6 /* GoogleService-Info.plist in Resources */,
 				180E1D5B1CE4CDE9006EBEC6 /* PostToContainerViewController.xib in Resources */,
 				180E1D5C1CE4CDE9006EBEC6 /* PositionIn.BloodTypeViewController.xib in Resources */,
 				180E1D5D1CE4CDE9006EBEC6 /* PositionIn.AttendEventCell.xib in Resources */,
@@ -5407,7 +5426,6 @@
 				180E1D6E1CE4CDE9006EBEC6 /* PositionIn.ThankYouViewController.xib in Resources */,
 				180E1D6F1CE4CDE9006EBEC6 /* GiveBloodAlertView.xib in Resources */,
 				180E1D701CE4CDE9006EBEC6 /* NewItems.storyboard in Resources */,
-				180E1E4C1CE4DCD5006EBEC6 /* GoogleService-Info.plist in Resources */,
 				180E1D711CE4CDE9006EBEC6 /* BloodTypeView.xib in Resources */,
 				180E1D721CE4CDE9006EBEC6 /* country-codes.csv in Resources */,
 				180E1D731CE4CDE9006EBEC6 /* PositionIn.ChatHistoryCell.xib in Resources */,
@@ -5462,6 +5480,7 @@
 				180E1DA51CE4CDE9006EBEC6 /* PositionIn.ProductInventoryCell.xib in Resources */,
 				180E1DA61CE4CDE9006EBEC6 /* PositionIn.CommunityActionCell.xib in Resources */,
 				180E1DA71CE4CDE9006EBEC6 /* PositionIn.VolunteerSearchViewController.xib in Resources */,
+				180E1E761CE51590006EBEC6 /* Info.plist in Resources */,
 				180E1DA81CE4CDE9006EBEC6 /* PositionIn.AttachedPhotosView.xib in Resources */,
 				180E1DA91CE4CDE9006EBEC6 /* Appfile in Resources */,
 				180E1DAA1CE4CDE9006EBEC6 /* PaymentTableViewCell.xib in Resources */,
@@ -5503,7 +5522,6 @@
 				180E1DCE1CE4CDE9006EBEC6 /* EPlusFtooterSectionTableViewCell.xib in Resources */,
 				180E1DCF1CE4CDE9006EBEC6 /* PositionIn.TrainingDetailsViewController.xib in Resources */,
 				180E1DD01CE4CDE9006EBEC6 /* PositionIn.BrowseListViewController.xib in Resources */,
-				180E1E4D1CE4DCD5006EBEC6 /* Info.plist in Resources */,
 				180E1DD11CE4CDE9006EBEC6 /* redcross.erb in Resources */,
 				180E1DD21CE4CDE9006EBEC6 /* EPlusMemberCardView.xib in Resources */,
 				180E1DD31CE4CDE9006EBEC6 /* MembershipMemberProfileView.xib in Resources */,
@@ -5544,6 +5562,7 @@
 				CD9CA0FB1C7F5397007B26AA /* MoreInformationCell.xib in Resources */,
 				D140BE421CC669BC001F9139 /* EPlusServisesTableViewHeader.xib in Resources */,
 				18F7C62E1CBFB76900B68BB6 /* EplusPaymentTableViewCell.xib in Resources */,
+				180E1E691CE51580006EBEC6 /* GoogleService-Info.plist in Resources */,
 				CDEDD96C1C45033C00396594 /* PostToContainerViewController.xib in Resources */,
 				D1EA40251CE1E61C00B3FA58 /* PositionIn.BloodTypeViewController.xib in Resources */,
 				D13039FC1C721960004B673F /* PositionIn.AttendEventCell.xib in Resources */,
@@ -5566,7 +5585,6 @@
 				D19FC25B1CE48D6700396D23 /* PositionIn.ThankYouViewController.xib in Resources */,
 				D118A5611CE49EC9002626E9 /* GiveBloodAlertView.xib in Resources */,
 				E66115A31B73A18C003DB5B3 /* NewItems.storyboard in Resources */,
-				180E1E421CE4DCBA006EBEC6 /* GoogleService-Info.plist in Resources */,
 				D1EA40291CE1F42400B3FA58 /* BloodTypeView.xib in Resources */,
 				D179EBD31CB6B938006012CC /* country-codes.csv in Resources */,
 				24EF62161BA81DCB00472531 /* PositionIn.ChatHistoryCell.xib in Resources */,
@@ -5621,6 +5639,7 @@
 				E689F07D1B6B976100597587 /* PositionIn.ProductInventoryCell.xib in Resources */,
 				E6BEF1E61B9C83F200511B46 /* PositionIn.CommunityActionCell.xib in Resources */,
 				CDEDD9741C45242400396594 /* PositionIn.VolunteerSearchViewController.xib in Resources */,
+				180E1E6A1CE51580006EBEC6 /* Info.plist in Resources */,
 				E6F3093F1BA81FAF00C9420C /* PositionIn.AttachedPhotosView.xib in Resources */,
 				CD795BDE1C57B4EE00C1C298 /* Appfile in Resources */,
 				D1CAA7531C60BB1E0046130E /* PaymentTableViewCell.xib in Resources */,
@@ -5662,7 +5681,6 @@
 				5419F99E1CC6C9C9000E16E7 /* EPlusFtooterSectionTableViewCell.xib in Resources */,
 				D1FD85391C1EE8BB00C2E87B /* PositionIn.TrainingDetailsViewController.xib in Resources */,
 				E661159B1B73A0CB003DB5B3 /* PositionIn.BrowseListViewController.xib in Resources */,
-				180E1E431CE4DCBA006EBEC6 /* Info.plist in Resources */,
 				CD795BE01C57B4EE00C1C298 /* redcross.erb in Resources */,
 				541BA1DD1CBFE9AB007D9AB0 /* EPlusMemberCardView.xib in Resources */,
 				CDE1B9201C5F9E6A00F76F32 /* MembershipMemberProfileView.xib in Resources */,
@@ -5942,11 +5960,12 @@
 				180E1C261CE4CDE9006EBEC6 /* SearchFilter.swift in Sources */,
 				180E1C271CE4CDE9006EBEC6 /* TrainingDetailsViewController.swift in Sources */,
 				180E1C281CE4CDE9006EBEC6 /* UserProfileAvatarView.swift in Sources */,
+				180E1E711CE51590006EBEC6 /* AppDelegate.swift in Sources */,
 				180E1C291CE4CDE9006EBEC6 /* AddPostViewController.swift in Sources */,
 				180E1C2A1CE4CDE9006EBEC6 /* MembershipMemberProfileView.swift in Sources */,
 				180E1C2B1CE4CDE9006EBEC6 /* NSDate+pickUpAvaliabilityString.swift in Sources */,
+				180E1E741CE51590006EBEC6 /* HomeItem.swift in Sources */,
 				180E1C2C1CE4CDE9006EBEC6 /* LocationSearchResultDataSource.swift in Sources */,
-				180E1E4A1CE4DCCA006EBEC6 /* AppConfiguration.swift in Sources */,
 				180E1C2D1CE4CDE9006EBEC6 /* BesideMenuViewController.swift in Sources */,
 				180E1C2E1CE4CDE9006EBEC6 /* ChatController.swift in Sources */,
 				180E1C2F1CE4CDE9006EBEC6 /* DonateViewController.swift in Sources */,
@@ -6008,12 +6027,10 @@
 				180E1C691CE4CDE9006EBEC6 /* BrowseMainGridController.swift in Sources */,
 				180E1C6A1CE4CDE9006EBEC6 /* MembershipRouter.swift in Sources */,
 				180E1C6B1CE4CDE9006EBEC6 /* EPlusTableViewHeaderView.swift in Sources */,
-				180E1E491CE4DCCA006EBEC6 /* AppDelegate.swift in Sources */,
 				180E1C6C1CE4CDE9006EBEC6 /* SearchItemCellModel.swift in Sources */,
 				180E1C6D1CE4CDE9006EBEC6 /* NSDate+TimeZone.m in Sources */,
 				180E1C6E1CE4CDE9006EBEC6 /* Promotion.swift in Sources */,
 				180E1C6F1CE4CDE9006EBEC6 /* EPlusFtooterSectionTableViewCell.swift in Sources */,
-				180E1E4B1CE4DCCA006EBEC6 /* UIScheme.swift in Sources */,
 				180E1C701CE4CDE9006EBEC6 /* ProductInventoryCell.swift in Sources */,
 				180E1C711CE4CDE9006EBEC6 /* EPlusMembershipPlan.swift in Sources */,
 				180E1C721CE4CDE9006EBEC6 /* Response.swift in Sources */,
@@ -6058,9 +6075,9 @@
 				180E1C991CE4CDE9006EBEC6 /* APIService.swift in Sources */,
 				180E1C9A1CE4CDE9006EBEC6 /* PhoneNumberViewController.swift in Sources */,
 				180E1C9B1CE4CDE9006EBEC6 /* NewsMapViewController.swift in Sources */,
-				180E1C9C1CE4CDE9006EBEC6 /* HomeItem.swift in Sources */,
 				180E1C9D1CE4CDE9006EBEC6 /* MembershipCardView.swift in Sources */,
 				180E1C9E1CE4CDE9006EBEC6 /* UnableToDonateViewController.swift in Sources */,
+				180E1E731CE51590006EBEC6 /* UIScheme.swift in Sources */,
 				180E1C9F1CE4CDE9006EBEC6 /* MailComposeViewController.swift in Sources */,
 				180E1CA01CE4CDE9006EBEC6 /* WalletViewController.swift in Sources */,
 				180E1CA11CE4CDE9006EBEC6 /* AmbulanceRequestedViewController.swift in Sources */,
@@ -6089,6 +6106,7 @@
 				180E1CB81CE4CDE9006EBEC6 /* PickPhotoView.swift in Sources */,
 				180E1CB91CE4CDE9006EBEC6 /* SessionController.swift in Sources */,
 				180E1CBA1CE4CDE9006EBEC6 /* CommunitySearchViewController.swift in Sources */,
+				180E1E721CE51590006EBEC6 /* AppConfiguration.swift in Sources */,
 				180E1CBB1CE4CDE9006EBEC6 /* MembershipMemberCardViewController.swift in Sources */,
 				180E1CBC1CE4CDE9006EBEC6 /* GiveBloodDetailsViewController.swift in Sources */,
 				180E1CBD1CE4CDE9006EBEC6 /* NewsItemTitleCell.swift in Sources */,
@@ -6234,11 +6252,12 @@
 				E6DADB9E1B8C5799009A5694 /* SearchFilter.swift in Sources */,
 				D1FD853A1C1EE8BB00C2E87B /* TrainingDetailsViewController.swift in Sources */,
 				CD65C5FC1C9988D400C2C11B /* UserProfileAvatarView.swift in Sources */,
+				180E1E651CE51580006EBEC6 /* AppDelegate.swift in Sources */,
 				E64D00631B7C8FB7007693E0 /* AddPostViewController.swift in Sources */,
 				CDE1B91F1C5F9E6A00F76F32 /* MembershipMemberProfileView.swift in Sources */,
 				545652901CCFB6B800C63C01 /* NSDate+pickUpAvaliabilityString.swift in Sources */,
+				180E1E681CE51580006EBEC6 /* HomeItem.swift in Sources */,
 				E6F7A4811BA356500069152A /* LocationSearchResultDataSource.swift in Sources */,
-				180E1E401CE4DCBA006EBEC6 /* AppConfiguration.swift in Sources */,
 				E62B16FF1B5CE0F800D446BC /* BesideMenuViewController.swift in Sources */,
 				E66F901B1BA6A5C100280B77 /* ChatController.swift in Sources */,
 				D1B780C81C0F4E7700EF5825 /* DonateViewController.swift in Sources */,
@@ -6300,12 +6319,10 @@
 				D18EA2CA1C04A3CA00A886A5 /* BrowseMainGridController.swift in Sources */,
 				CD795BFA1C57CA5E00C1C298 /* MembershipRouter.swift in Sources */,
 				18F7C6511CBFF13600B68BB6 /* EPlusTableViewHeaderView.swift in Sources */,
-				180E1E3F1CE4DCBA006EBEC6 /* AppDelegate.swift in Sources */,
 				500D7FA51BC2ADFE008C8C82 /* SearchItemCellModel.swift in Sources */,
 				18033D0B1C905E6100C709DD /* NSDate+TimeZone.m in Sources */,
 				2431EBDC1B945F5A009FB158 /* Promotion.swift in Sources */,
 				5419F99D1CC6C9C9000E16E7 /* EPlusFtooterSectionTableViewCell.swift in Sources */,
-				180E1E411CE4DCBA006EBEC6 /* UIScheme.swift in Sources */,
 				E689F07B1B6B972F00597587 /* ProductInventoryCell.swift in Sources */,
 				181314D51CBE7933004373F2 /* EPlusMembershipPlan.swift in Sources */,
 				E65E87301B611FE700AE444D /* Response.swift in Sources */,
@@ -6350,9 +6367,9 @@
 				E6A869EE1B60D42C00797D16 /* APIService.swift in Sources */,
 				D1F86CF31BFCBAD3006E0C49 /* PhoneNumberViewController.swift in Sources */,
 				CD87FDEE1C7611AA00E610AE /* NewsMapViewController.swift in Sources */,
-				D15F47441C088A26009ED3FD /* HomeItem.swift in Sources */,
 				CD8ED0E01C60BE7C00576DBF /* MembershipCardView.swift in Sources */,
 				D118A5661CE4AA16002626E9 /* UnableToDonateViewController.swift in Sources */,
+				180E1E671CE51580006EBEC6 /* UIScheme.swift in Sources */,
 				5419F9A01CC78080000E16E7 /* MailComposeViewController.swift in Sources */,
 				E6F7A4701BA333D70069152A /* WalletViewController.swift in Sources */,
 				D15F474D1C0B7801009ED3FD /* AmbulanceRequestedViewController.swift in Sources */,
@@ -6381,6 +6398,7 @@
 				E6F3093E1BA81FAF00C9420C /* PickPhotoView.swift in Sources */,
 				E6C5CE1D1B83A28C00265955 /* SessionController.swift in Sources */,
 				CDEDD9771C45243900396594 /* CommunitySearchViewController.swift in Sources */,
+				180E1E661CE51580006EBEC6 /* AppConfiguration.swift in Sources */,
 				CD8ED0D61C60AD1A00576DBF /* MembershipMemberCardViewController.swift in Sources */,
 				D1F1FF2E1C24265B006D2E75 /* GiveBloodDetailsViewController.swift in Sources */,
 				D12EB2961C96E83600718E57 /* NewsItemTitleCell.swift in Sources */,
