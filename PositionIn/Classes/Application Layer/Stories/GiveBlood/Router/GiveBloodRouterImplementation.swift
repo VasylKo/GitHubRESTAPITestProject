@@ -19,9 +19,9 @@ class GiveBloodRouterImplementation: BaseRouterImplementation, GiveBloodRouter {
             
             switch status {
             case .Undefined:
-                self.showUnableToDonateViewController(from: sourceViewController)
+                self.showThankYouViewController(from: sourceViewController)
             default:
-                self.showUnableToDonateViewController(from: sourceViewController)
+                self.showThankYouViewController(from: sourceViewController)
             }
         }
     }
@@ -48,6 +48,11 @@ class GiveBloodRouterImplementation: BaseRouterImplementation, GiveBloodRouter {
     
     func showUnableToDonateViewController(from sourceViewController : UIViewController){
         let controller =  UnableToDonateViewController(router: self)
+        sourceViewController.navigationController?.pushViewController(controller, animated: true)
+    }
+    
+    func showThankYouViewController(from sourceViewController : UIViewController) {
+        let controller =  ThankYouViewController(router: self)
         sourceViewController.navigationController?.pushViewController(controller, animated: true)
     }
 }
