@@ -19,9 +19,9 @@ class GiveBloodRouterImplementation: BaseRouterImplementation, GiveBloodRouter {
             
             switch status {
             case .Undefined:
-                self.showGiveBloodTypeViewController(from: sourceViewController)
+                self.showThankYouViewController(from: sourceViewController)
             default:
-                self.showGiveBloodTypeViewController(from: sourceViewController)
+                self.showThankYouViewController(from: sourceViewController)
             }
         }
     }
@@ -43,6 +43,11 @@ class GiveBloodRouterImplementation: BaseRouterImplementation, GiveBloodRouter {
     
     func showQuestionBloodDonorController(from sourceViewController : UIViewController, type: QuestionBloodDonorViewControllerType) {
         let controller =  QuestionBloodDonorViewController(router: self, type: type)
+        sourceViewController.navigationController?.pushViewController(controller, animated: true)
+    }
+    
+    func showThankYouViewController(from sourceViewController : UIViewController) {
+        let controller =  ThankYouViewController(router: self)
         sourceViewController.navigationController?.pushViewController(controller, animated: true)
     }
 }
