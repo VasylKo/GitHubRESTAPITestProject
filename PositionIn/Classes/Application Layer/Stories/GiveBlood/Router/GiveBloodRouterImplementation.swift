@@ -46,6 +46,11 @@ class GiveBloodRouterImplementation: BaseRouterImplementation, GiveBloodRouter {
         sourceViewController.navigationController?.pushViewController(controller, animated: true)
     }
     
+    func showUnableToDonateViewController(from sourceViewController : UIViewController){
+        let controller =  UnableToDonateViewController(router: self)
+        sourceViewController.navigationController?.pushViewController(controller, animated: true)
+    }
+    
     func showThankYouViewController(from sourceViewController : UIViewController) {
         let controller =  ThankYouViewController(router: self)
         sourceViewController.navigationController?.pushViewController(controller, animated: true)

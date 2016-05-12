@@ -20,6 +20,8 @@ protocol GiveBloodRouter : BaseRouter {
     
     func showQuestionBloodDonorController(from sourceViewController : UIViewController, type: QuestionBloodDonorViewControllerType)
     
+    func showUnableToDonateViewController(from sourceViewController : UIViewController)
+
     func showThankYouViewController(from sourceViewController : UIViewController)
     
 }
