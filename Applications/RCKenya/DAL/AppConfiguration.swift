@@ -74,6 +74,9 @@ final class AppConfiguration {
         #endif
     }
     
+    let countryFullName = "Kenya"
+    let appShortTitle = "KRCS"
+    let appFullTitle = "Kenya Red Cross Society"
     let currencySymbol = "KSh"
     lazy var currencyFormatter: NSNumberFormatter = {
         let currencyFormatter = NSNumberFormatter()
