@@ -67,7 +67,7 @@ class PhoneNumberViewController: XLFormViewController {
             rowType:XLFormRowDescriptorTypeSelectorPush, title:"")
         var selectorOptions: [XLFormOptionsObject] = []
         
-        var kenyaSelectorOption: XLFormOptionsObject?
+        var selectedOption: XLFormOptionsObject?
         
         for (index, element) in phonesDictionary.enumerate() {
             let country = element["countryName"]
@@ -77,17 +77,16 @@ class PhoneNumberViewController: XLFormViewController {
                 let countryPhoneCode = code {
                     
                     let optionObject = XLFormOptionsObject(value: index, displayText: "\(countryName) \(countryPhoneCode)")
-                    if countryName == "Kenya" {
-                        kenyaSelectorOption = optionObject
+                    if countryName == AppConfiguration().countryFullName {
+                        selectedOption = optionObject
+                        self.countryPhoneCode = countryPhoneCode
                     }
                     selectorOptions.append(optionObject)
             }
         }
         
         coutryRow.selectorOptions = selectorOptions
-        if let kenyaSelectorOption = kenyaSelectorOption {
-            coutryRow.title = kenyaSelectorOption.displayText()
-        }
+        coutryRow.title = selectedOption?.displayText()
         coutryRow.onChangeBlock = {[unowned coutryRow] oldValue, newValue, descriptor in
             if let newValue = newValue as? XLFormOptionsObject {
                 coutryRow.title = newValue.displayText()
@@ -223,7 +222,7 @@ class PhoneNumberViewController: XLFormViewController {
     }
     
     private var isKeyboardVisible: Bool = false
-    private var countryPhoneCode: String? = "+254"
+    private var countryPhoneCode: String?
     private var phonesDictionary: [[String: String]] = []
     
     @IBOutlet private weak var doneButton: UIBarButtonItem!
