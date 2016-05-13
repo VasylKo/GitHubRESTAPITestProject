@@ -52,14 +52,16 @@ class UnableToDonateViewController: UIViewController, UITextViewDelegate {
     //MARK: - Action
     
     @objc private func skipTapped() {
-        
+        self.router.showGiveBloodCentersViewController(from: self)
     }
     
     //MARK: - UITextViewDelegate
     
     @IBAction private func sendTapped(sender: AnyObject) {
         let donorInfo = DonorInfo(declineReason: textView.text, donorStatus: .Declined)
-        api().updateDonorInfo(donorInfo!)
+        api().updateDonorInfo(donorInfo!).onSuccess(callback: {[unowned self] in
+            self.router.showGiveBloodCentersViewController(from: self)
+        })
     }
     
     func textViewDidBeginEditing(textView: UITextView) {
