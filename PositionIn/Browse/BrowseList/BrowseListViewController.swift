@@ -43,9 +43,6 @@ class BrowseListViewController: UIViewController, BrowseActionProducer, BrowseMo
             self.bannerButton.setBackgroundImage(UIImage(named: "pledge_banner_iphone6"), forState: .Normal)
         }
         
-        bannerButton.contentVerticalAlignment = .Fill;
-        bannerButton.contentHorizontalAlignment = .Fill;
-        
         if homeItem == .GiveBlood {
             self.bannerButton.hidden = false
             self.tableViewBottomContraint.constant = 60
