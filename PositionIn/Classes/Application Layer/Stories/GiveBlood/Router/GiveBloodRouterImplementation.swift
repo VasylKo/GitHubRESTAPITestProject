@@ -19,9 +19,9 @@ class GiveBloodRouterImplementation: BaseRouterImplementation, GiveBloodRouter {
             
             switch status {
             case .Undefined:
-                self.showThankYouViewController(from: sourceViewController)
+                self.showIntroViewController(from: sourceViewController)
             default:
-                self.showThankYouViewController(from: sourceViewController)
+                self.showIntroViewController(from: sourceViewController)
             }
         }
     }
@@ -33,7 +33,23 @@ class GiveBloodRouterImplementation: BaseRouterImplementation, GiveBloodRouter {
     func showGiveBloodCentersViewController(from sourceViewController : UIViewController) {
         let controller = Storyboards.Main.instantiateExploreViewControllerId()
         controller.homeItem = .GiveBlood
-        sourceViewController.navigationController?.pushViewController(controller, animated: true)
+        
+        let filterUpdate = { (filter: SearchFilter) -> SearchFilter in
+            var f = filter
+            let feedItemType = FeedItem.ItemType(rawValue: controller.homeItem!.rawValue)
+            if let feedItemType = feedItemType {
+                f.itemTypes = [feedItemType]
+            }
+            return f
+        }
+        
+        controller.childFilterUpdate = filterUpdate
+        controller.title = controller.homeItem!.displayString()
+        if let viewControllers = sourceViewController.navigationController?.viewControllers {
+            let controllers = [viewControllers.first!, controller]
+            sourceViewController.navigationController?.pushViewController(controller, animated: true)
+            sourceViewController.navigationController?.viewControllers = controllers
+        }
     }
     
     func showGiveBloodTypeViewController(from sourceViewController : UIViewController) {
