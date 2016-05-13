@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BrowseListViewController" customModule="PositionIn" customModuleProvider="target">
             <connections>
+                <outlet property="bannerButton" destination="bmc-Bj-pgg" id="JrZ-e9-Bkd"/>
                 <outlet property="tableView" destination="rSU-D8-03P" id="LeF-5F-EAl"/>
+                <outlet property="tableViewBottomContraint" destination="BnK-3b-bE1" id="lV2-Of-iIT"/>
                 <outlet property="view" destination="hh2-4T-SbM" id="GR9-1G-zXP"/>
             </connections>
         </placeholder>
@@ -17,20 +19,36 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" rowHeight="70" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="rSU-D8-03P" customClass="TableView" customModule="PosInCore">
-                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="540"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <color key="separatorColor" red="0.74901960779999999" green="0.74901960779999999" blue="0.74901960779999999" alpha="1" colorSpace="calibratedRGB"/>
                     <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                 </tableView>
+                <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bmc-Bj-pgg">
+                    <rect key="frame" x="0.0" y="540" width="600" height="60"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="60" id="wXH-X7-loM"/>
+                    </constraints>
+                    <state key="normal" backgroundImage="pledge_banner"/>
+                    <connections>
+                        <action selector="bannerTapped:" destination="-1" eventType="touchUpInside" id="Kuu-b0-lgd"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="rSU-D8-03P" secondAttribute="bottom" id="BnK-3b-bE1"/>
+                <constraint firstAttribute="trailing" secondItem="bmc-Bj-pgg" secondAttribute="trailing" id="3DV-NB-8ai"/>
+                <constraint firstAttribute="bottom" secondItem="rSU-D8-03P" secondAttribute="bottom" constant="60" id="BnK-3b-bE1"/>
                 <constraint firstAttribute="trailing" secondItem="rSU-D8-03P" secondAttribute="trailing" id="fIA-t9-lYr"/>
                 <constraint firstItem="rSU-D8-03P" firstAttribute="leading" secondItem="hh2-4T-SbM" secondAttribute="leading" id="gIx-mh-q7l"/>
                 <constraint firstItem="rSU-D8-03P" firstAttribute="top" secondItem="hh2-4T-SbM" secondAttribute="top" id="itA-ns-fsF"/>
+                <constraint firstAttribute="bottom" secondItem="bmc-Bj-pgg" secondAttribute="bottom" id="obx-DQ-Lev"/>
+                <constraint firstItem="bmc-Bj-pgg" firstAttribute="leading" secondItem="hh2-4T-SbM" secondAttribute="leading" id="uNU-Cr-N7V"/>
             </constraints>
             <point key="canvasLocation" x="59" y="198"/>
         </view>
     </objects>
+    <resources>
+        <image name="pledge_banner" width="320" height="60"/>
+    </resources>
 </document>

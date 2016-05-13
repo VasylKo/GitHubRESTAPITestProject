@@ -11,7 +11,7 @@ import PosInCore
 import CleanroomLogger
 import BrightFutures
 
-final class BrowseListViewController: UIViewController, BrowseActionProducer, BrowseModeDisplay, UpdateFilterProtocol {
+class BrowseListViewController: UIViewController, BrowseActionProducer, BrowseModeDisplay, UpdateFilterProtocol {
     var excludeCommunityItems = false
     var shoWCompactCells: Bool = true
     var showCardCells: Bool = false
@@ -32,9 +32,32 @@ final class BrowseListViewController: UIViewController, BrowseActionProducer, Br
     override func viewDidLoad() {
         super.viewDidLoad()
         dataSource.configureTable(tableView)
+        self.setupUI()
+    }
+    
+    
+    func setupUI() {
         selectedItemType = .Unknown
+
+        if (UIScreen.mainScreen().bounds.size.width == 375) { //check if iphone 6
+            self.bannerButton.setBackgroundImage(UIImage(named: "pledge_banner_iphone6"), forState: .Normal)
+        }
+        
+        bannerButton.contentVerticalAlignment = .Fill;
+        bannerButton.contentHorizontalAlignment = .Fill;
+        
+        if homeItem == .GiveBlood {
+            self.bannerButton.hidden = false
+            self.tableViewBottomContraint.constant = 60
+        }
+        else {
+            self.bannerButton.hidden = true
+            self.tableViewBottomContraint.constant = 0
+            self.view.setNeedsUpdateConstraints()
+        }
         
         self.tableView.separatorStyle = self.showCardCells ? .None : .SingleLine
+    
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -135,6 +158,16 @@ final class BrowseListViewController: UIViewController, BrowseActionProducer, Br
     
     weak var actionConsumer: BrowseActionConsumer?
     
+    
+    @IBAction func bannerTapped(sender: AnyObject) {
+        let url: NSURL? = NSURL(string: "http://www.pledge25kenya.org/")
+        if let url = url {
+            UIApplication.sharedApplication().openURL(url)
+        }
+    }
+    
+    @IBOutlet weak var tableViewBottomContraint: NSLayoutConstraint!
+    @IBOutlet weak var bannerButton: UIButton!
     @IBOutlet private(set) internal weak var tableView: UITableView!
 }
 
