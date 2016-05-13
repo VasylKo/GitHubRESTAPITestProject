@@ -13,7 +13,7 @@ enum DonorStatus: Int, CustomStringConvertible  {
     case Undefined = 0
     case Agreed
     case Declined
-    
+    case Skipped
     // CustomStringConvertible
     var description: String {
         switch self {
@@ -23,7 +23,8 @@ enum DonorStatus: Int, CustomStringConvertible  {
             return "Agreed"
         case .Declined:
             return "Declined"
-    
+        case .Skipped:
+            return "Skipped"
         }
 
     }
