@@ -16,7 +16,6 @@ class GiveBloodRouterImplementation: BaseRouterImplementation, GiveBloodRouter {
                 self.showIntroViewController(from: sourceViewController)
                 return
             }
-            
             switch status {
             case .Undefined:
                 self.showIntroViewController(from: sourceViewController)

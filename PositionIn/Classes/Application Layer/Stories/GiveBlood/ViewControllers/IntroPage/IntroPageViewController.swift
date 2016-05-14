@@ -171,6 +171,9 @@ extension IntroPageViewController: IntroPageTableViewFooterViewDelegate {
     }
     
     func skipThisStepButtonPressed() {
-        self.router.showGiveBloodCentersViewController(from: self)
+        let donorInfo = DonorInfo(declineReason: nil, donorStatus: .Skipped)
+        api().updateDonorInfo(donorInfo!).onSuccess { [unowned self] in
+            self.router.showGiveBloodCentersViewController(from: self)
+        }
     }
 }
