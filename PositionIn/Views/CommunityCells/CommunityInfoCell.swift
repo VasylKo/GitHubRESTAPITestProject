@@ -14,7 +14,6 @@ final class CommunityInfoCell: TableViewCell {
         let m = model as? BrowseCommunityInfoCellModel
         assert(m != nil, "Invalid model passed")
         
-        
         if m!.isClosed {
             communityTypeLabel.text = NSLocalizedString("Closed")
             communityTypeIcon.image = UIImage(named: "closed_comm")
