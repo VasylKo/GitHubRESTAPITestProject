@@ -30,6 +30,12 @@ struct Product: CRUDObject {
     var distanceString: String?
     var date: NSDate?
     
+    var numberOfAttachments: Int {
+        let linksCount = links?.count ?? 0
+        let mediaAttachmentsCount = attachments?.count ?? 0
+        return linksCount + mediaAttachmentsCount
+    }
+    
 /*
     //TODO:
     "itemCategory": <guid>
