@@ -6696,6 +6696,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 74602248B6011AF3D8E2697E /* Pods-RCSouthAfrica.devdebug.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -6783,6 +6784,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 2BF566F2C61C9CAEB0D205D6 /* Pods-RCSouthAfrica.stagingdebug.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -6870,6 +6872,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D48AACFC4C52C977EE8228EC /* Pods-RCSouthAfrica.stagingdebugcopy.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
@@ -6958,6 +6961,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 9902E912DAA0FA1686EE1499 /* Pods-RCSouthAfrica.stagingreleasecopy.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
@@ -7046,6 +7050,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = BA4D55B9C2685D72196CCD40 /* Pods-RCSouthAfrica.proddebug.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -7132,6 +7137,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = FC74075191A1DEF90EA0F351 /* Pods-RCSouthAfrica.devrelease.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
@@ -7217,6 +7223,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 8AD2B860C07FB651B64CA90D /* Pods-RCSouthAfrica.stagingrelease.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
@@ -7302,6 +7309,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = F4E49355E6CD25E54A1D765C /* Pods-RCSouthAfrica.prodrelease.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
@@ -7387,6 +7395,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 55F8F34E0E41398BCFF7BA3E /* Pods-RCSouthAfrica.prodrelease2.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
@@ -7510,6 +7519,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 178D7FA773D77E1E72A6C121 /* Pods-RCKenya.prodrelease2.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
@@ -7706,6 +7716,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 71548EFDAD1B6B7D4A57C366 /* Pods-RCKenya.stagingdebugcopy.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
@@ -7909,6 +7920,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 2B6B2FE6EECB14A38ED7F07C /* Pods-RCKenya.stagingreleasecopy.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
@@ -8165,6 +8177,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 31AB786D4E0BE94FEB17322D /* Pods-RCKenya.devdebug.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -8252,6 +8265,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 626B7EB5915045326296C2C2 /* Pods-RCKenya.devrelease.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
@@ -8411,6 +8425,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C9FF1DB5BB6B28AA1523B6AC /* Pods-RCKenya.stagingdebug.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -8605,6 +8620,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 989BDD99C10286F8B2169089 /* Pods-RCKenya.stagingrelease.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
@@ -8801,6 +8817,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A0D7A28DBC5943DE8A3BA336 /* Pods-RCKenya.proddebug.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -8994,6 +9011,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7D42E67B3A7AA874F8DCA421 /* Pods-RCKenya.prodrelease.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
