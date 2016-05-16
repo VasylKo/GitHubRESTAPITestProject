@@ -150,7 +150,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let notificationSettings = LNNotificationAppSettings()
         notificationSettings.alertStyle = .Banner
         notificationSettings.soundEnabled = false
-        LNNotificationCenter.defaultCenter().registerApplicationWithIdentifier("RedCross", name: "Red Cross", icon: UIImage(named: "push_notification_icon"), defaultSettings: notificationSettings);
+        //LNNotificationCenter.defaultCenter().registerApplicationWithIdentifier("RedCross", name: "Red Cross", icon: UIImage(named: "push_notification_icon"), defaultSettings: notificationSettings);
         
         return true
     }
