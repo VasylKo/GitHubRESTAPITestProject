@@ -17,7 +17,7 @@ class BrowseListViewController: UIViewController, BrowseActionProducer, BrowseMo
     var showCardCells: Bool = false
     var homeItem: HomeItem?
     private var dataRequestToken = InvalidationToken()
-
+    
     var browseMode: BrowseModeTabbarViewController.BrowseMode = .ForYou {
         didSet {
             switch browseMode {
@@ -38,7 +38,7 @@ class BrowseListViewController: UIViewController, BrowseActionProducer, BrowseMo
     
     func setupUI() {
         selectedItemType = .Unknown
-
+        
         if (UIScreen.mainScreen().bounds.size.width == 375) { //check if iphone 6
             self.bannerButton.setBackgroundImage(UIImage(named: "pledge_banner_iphone6"), forState: .Normal)
         }
@@ -54,7 +54,7 @@ class BrowseListViewController: UIViewController, BrowseActionProducer, BrowseMo
         }
         
         self.tableView.separatorStyle = self.showCardCells ? .None : .SingleLine
-    
+        
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -64,12 +64,12 @@ class BrowseListViewController: UIViewController, BrowseActionProducer, BrowseMo
         if let homeItem = homeItem {
             trackScreenToAnalytics(AnalyticsLabels.labelForHomeItem(homeItem, suffix: "List"))
         }
-    
+        
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-
+        
         if let fromViewController = self.navigationController?.transitionCoordinator()?.viewControllerForKey(UITransitionContextFromViewControllerKey) {
             if self.navigationController?.viewControllers.contains(fromViewController) == false {
                 self.reloadData()
@@ -84,7 +84,7 @@ class BrowseListViewController: UIViewController, BrowseActionProducer, BrowseMo
             }
         }
     }
-
+    
     func applyFilterUpdate(update: SearchFilterUpdate) {
         canAffectFilter = false
         filter = update(filter)
@@ -105,7 +105,7 @@ class BrowseListViewController: UIViewController, BrowseActionProducer, BrowseMo
             filter = f
         }
     }
-
+    
     func reloadData() {
         getFeedItems(filter)
     }
@@ -148,7 +148,7 @@ class BrowseListViewController: UIViewController, BrowseActionProducer, BrowseMo
     
     private lazy var dataSource: FeedItemDatasource = { [unowned self] in
         let dataSource = FeedItemDatasource(shouldShowDetailedCells: self.shoWCompactCells,
-            showCardCells: self.showCardCells)
+                                            showCardCells: self.showCardCells)
         dataSource.parentViewController = self
         return dataSource
         }()
@@ -171,22 +171,19 @@ class BrowseListViewController: UIViewController, BrowseActionProducer, BrowseMo
 extension BrowseListViewController: ActionsDelegate {
     
     func like(item: FeedItem) {
-        item.name = ""
         if (item.isLiked) {
-            item.isLiked = false
-            item.numOfLikes?--
-            tableView.reloadData()
-            api().unlikePost(item.objectId).onSuccess{[weak self] in
-                self?.reloadData()
-            }
+            api().unlikePost(item.objectId).onComplete(callback: { [weak self] _ in
+                dispatch_async(dispatch_get_main_queue(), {
+                    self?.reloadData()
+                })
+                })
         }
         else {
-            item.isLiked = true
-            item.numOfLikes?++
-            tableView.reloadData()
-            api().likePost(item.objectId).onSuccess{[weak self] in
-                self?.reloadData()
-            }
+            api().likePost(item.objectId).onComplete(callback: { [weak self] _ in
+                dispatch_async(dispatch_get_main_queue(), {
+                    self?.reloadData()
+                })
+                })
         }
     }
 }
@@ -229,7 +226,7 @@ extension BrowseListViewController {
             if let model = self.tableView(tableView, modelForIndexPath: indexPath) as? FeedTableCellModel,
                 let actionProducer = parentViewController as? BrowseActionProducer,
                 let actionConsumer = self.actionConsumer {
-                    actionConsumer.browseController(actionProducer, didSelectItem: model.item.objectId, type: model.item.type, data: model.data)
+                actionConsumer.browseController(actionProducer, didSelectItem: model.item.objectId, type: model.item.type, data: model.data)
             }
         }
         
@@ -246,7 +243,7 @@ extension BrowseListViewController {
                         let size = CGSizeMake(rect.size.width, rect.size.height)
                         
                         cellHeight += (size.height + 17)
-                    }   
+                    }
                     return cellHeight
                 }
                 else {
