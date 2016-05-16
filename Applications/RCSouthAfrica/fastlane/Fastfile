@@ -9,7 +9,7 @@ platform :ios do
         use_legacy_build_api: true,
         ) # Build app
     s3(
-       version_template_path: './fastlane/redcross.erb',
+       html_template_path: './fastlane/redcross.erb',
        html_file_name: 'za_dev.html',
        version_file_name: 'za_dev.version.json',
        upload_metadata: true,
@@ -28,7 +28,7 @@ platform :ios do
         ) # Build app
         #      snapshot
       s3(
-         version_template_path: './fastlane/redcross.erb',
+         html_template_path: './fastlane/redcross.erb',
          html_file_name: 'za_staging.html',
          version_file_name: 'za_staging.version.json',
          upload_metadata: true,
@@ -47,7 +47,7 @@ platform :ios do
             ) # Build app
             #      snapshot
             s3(
-               version_template_path: './fastlane/redcross.erb',
+               html_template_path: './fastlane/redcross.erb',
                html_file_name: 'za_staging2.html',
                version_file_name: 'za_staging2.version.json',
                upload_metadata: true,
@@ -67,7 +67,7 @@ platform :ios do
             ) # Build app
 #        snapshot
         s3(
-           version_template_path: './fastlane/redcross.erb',
+           html_template_path: './fastlane/redcross.erb',
            html_file_name: 'za_production.html',
            version_file_name: 'za_production.version.json',
            upload_metadata: true,
@@ -86,7 +86,7 @@ platform :ios do
             ) # Build app
 #        snapshot
         s3(
-            version_template_path: './fastlane/redcross.erb',
+            html_template_path: './fastlane/redcross.erb',
             html_file_name: 'za_production.html',
             version_file_name: 'za_production.version.json',
             upload_metadata: true,
