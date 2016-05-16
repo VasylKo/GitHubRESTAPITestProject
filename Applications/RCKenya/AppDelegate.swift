@@ -79,6 +79,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        Fabric.with([Crashlytics.self])
+        return true
+        
         setupMaps()
         api.defaultErrorHandler = UIErrorHandler()
         if SearchFilter.isCustomLocationSet == false {
@@ -150,7 +153,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let notificationSettings = LNNotificationAppSettings()
         notificationSettings.alertStyle = .Banner
         notificationSettings.soundEnabled = false
-        //LNNotificationCenter.defaultCenter().registerApplicationWithIdentifier("RedCross", name: "Red Cross", icon: UIImage(named: "push_notification_icon"), defaultSettings: notificationSettings);
+        LNNotificationCenter.defaultCenter().registerApplicationWithIdentifier("RedCross", name: "Red Cross", icon: UIImage(named: "push_notification_icon"), defaultSettings: notificationSettings);
         
         return true
     }
