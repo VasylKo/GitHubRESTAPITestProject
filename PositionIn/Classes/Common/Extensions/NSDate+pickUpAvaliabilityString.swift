@@ -12,7 +12,7 @@ extension NSDate {
     
     private var dateFormatter: NSDateFormatter {
         let dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "EEE dd yyyy, HH:mm"
+        dateFormatter.dateFormat = "MMM dd yyyy, HH:mm"
         return dateFormatter
     }
     

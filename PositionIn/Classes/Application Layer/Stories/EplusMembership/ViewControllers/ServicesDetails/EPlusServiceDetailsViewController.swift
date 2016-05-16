@@ -189,6 +189,6 @@ extension EPlusServiceDetailsViewController: UITableViewDataSource {
     
     func attributedLabel(label: TTTAttributedLabel!, didSelectLinkWithPhoneNumber phoneNumber: String!) {
         let trimmedString = phoneNumber.stringByReplacingOccurrencesOfString(" ", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
-        UIApplication.sharedApplication().openURL(NSURL(string: "tel://\(trimmedString)")!)
+        OpenApplication.Tel(with: trimmedString)
     }
 }
