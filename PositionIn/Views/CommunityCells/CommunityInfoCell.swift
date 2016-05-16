@@ -13,7 +13,7 @@ final class CommunityInfoCell: TableViewCell {
     override func setModel(model: TableViewCellModel) {
         let m = model as? BrowseCommunityInfoCellModel
         assert(m != nil, "Invalid model passed")
-        
+        self.countLabel.textAlignment = .Right
         
         if m!.isClosed {
             communityTypeLabel.text = NSLocalizedString("Closed")
@@ -30,6 +30,10 @@ final class CommunityInfoCell: TableViewCell {
             communityTypeLabel.text = nil
             communityTypeIcon.image = nil
             countFormat = NSLocalizedString("%d Volunteers", comment: "Browse community: count members")
+            self.countLabel.removeConstraint(countLabelLeftMargin)
+            countLabelLeftMargin.constant = 0
+            self.updateConstraints()
+            self.countLabel.textAlignment = .Left
         default:
             countFormat = NSLocalizedString("%d Members", comment: "Browse volunteering: count Volunteers")
         }
@@ -42,6 +46,7 @@ final class CommunityInfoCell: TableViewCell {
         self.separatorInset = UIEdgeInsetsZero
     }
     
+    @IBOutlet weak var countLabelLeftMargin: NSLayoutConstraint!
     @IBOutlet weak var communityTypeIcon: UIImageView!
     @IBOutlet weak var communityTypeLabel: UILabel!
     @IBOutlet weak var countLabel: UILabel!
