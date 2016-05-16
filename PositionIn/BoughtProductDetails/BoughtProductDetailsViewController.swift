@@ -97,10 +97,7 @@ final class BoughtProductDetailsViewController: UIViewController {
         orderStatusLabel?.text = product?.status?.description
         //Hide pick-up avaiabilility cell if the product don't have one
         if let startDate = product?.entityDetails?.startDate, endDate = product?.entityDetails?.endData {
-            let startDateString = dateFormatter.stringFromDate(startDate)
-            let endDateString = dateFormatter.stringFromDate(endDate)
-            let pickUpAvaliabilityString = "\(startDateString) to \(endDateString)"
-            pickUpAvailabilityLabel?.text = pickUpAvaliabilityString
+            pickUpAvailabilityLabel?.text = startDate.toDateString(endDate)
         } else {
             pickUpAvaiabililityCellHeightConstraints?.constant = 0
         }
