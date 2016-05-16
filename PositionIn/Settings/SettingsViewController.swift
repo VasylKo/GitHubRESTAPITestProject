@@ -60,10 +60,28 @@ class SettingsViewController: BesideMenuViewController {
     }
     
     @IBAction func signOutPressed(sender: AnyObject) {
-        trackEventToAnalytics(AnalyticCategories.settings, action: AnalyticActios.signOut)
-        api().logoutFromServer().onSuccess {[weak self] _ in
-            self?.sideBarController?.executeAction(.Login)
-        }
+        
+        let actionSheetController: UIAlertController = UIAlertController(title: "Log out of Kenya Red Cross Application?",
+                                                                         message:nil, preferredStyle: .ActionSheet)
+        
+        let cancelActionButton: UIAlertAction = UIAlertAction(title:"Cancel", style: .Cancel, handler: nil )
+        
+        actionSheetController.addAction(cancelActionButton)
+        
+        let saveActionButton: UIAlertAction = UIAlertAction(title: "Log out", style: .Destructive, handler: {[unowned self] _ in
+            trackEventToAnalytics(AnalyticCategories.settings, action: AnalyticActios.signOut)
+            self.signOutButton.userInteractionEnabled = false
+            api().logoutFromServer().onSuccess {
+                self.sideBarController?.executeAction(.Login)
+                }.onComplete(callback:{ _ in
+                    self.signOutButton.userInteractionEnabled = true
+                })
+            })
+
+        actionSheetController.addAction(saveActionButton)
+        
+        self.presentViewController(actionSheetController, animated: true, completion: nil)
+        
     }
     
     func showMailControllerWithRecepientEmail(email: String?) {
