@@ -65,9 +65,7 @@ class NewsCardCell: TableViewCell {
             self.newsTextLabel.text = text
         }
         
-        if let url = self.model?.avatarURL {
-            feedItemAvatarView.setImageFromURL(url)
-        }
+        feedItemAvatarView.setImageFromURL(self.model?.item.author?.avatar)
     }
     
     @IBAction func likesButtonPressed(sender: AnyObject) {
