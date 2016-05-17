@@ -71,7 +71,8 @@ class MoreInformationViewController : XLFormViewController {
                         if attachment.type?.containsString("pdf") == true {
                             let controller = WebViewController(nibName: "WebViewController", bundle: nil)
                             controller.contentURL = attachment.url
-                            self.navigationController?.pushViewController(controller, animated: true)
+                            let topController = UIApplication.topViewController()
+                            topController?.navigationController?.pushViewController(controller, animated: true)
                         }
                         else if let url = attachment.url {
                             OpenApplication.Safari(with: url)
