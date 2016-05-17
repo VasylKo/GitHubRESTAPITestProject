@@ -7709,7 +7709,6 @@
 		};
 		187AFC151CEBC1D300913987 /* DevDebug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 31AB786D4E0BE94FEB17322D /* Pods-RCKenya.devdebug.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -7786,7 +7785,7 @@
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -D DEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = com.connectik.sarcs.members.dev;
-				PRODUCT_MODULE_NAME = PositionIn;
+				PRODUCT_MODULE_NAME = RCRwanda;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				STRIP_INSTALLED_PRODUCT = NO;
@@ -7797,7 +7796,6 @@
 		};
 		187AFC161CEBC1D300913987 /* StagingDebug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C9FF1DB5BB6B28AA1523B6AC /* Pods-RCKenya.stagingdebug.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -7874,7 +7872,7 @@
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -D DEBUG -D \"STAGING_ENV\"";
 				PRODUCT_BUNDLE_IDENTIFIER = com.connectik.sarcs.members.dev;
-				PRODUCT_MODULE_NAME = PositionIn;
+				PRODUCT_MODULE_NAME = RCRwanda;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				STRIP_INSTALLED_PRODUCT = NO;
@@ -7885,7 +7883,6 @@
 		};
 		187AFC171CEBC1D300913987 /* StagingDebugCopy */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 71548EFDAD1B6B7D4A57C366 /* Pods-RCKenya.stagingdebugcopy.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -7963,7 +7960,7 @@
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -D DEBUG -D \"STAGING_COPY_ENV\"";
 				PRODUCT_BUNDLE_IDENTIFIER = com.connectik.sarcs.members.dev;
-				PRODUCT_MODULE_NAME = PositionIn;
+				PRODUCT_MODULE_NAME = RCRwanda;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				STRIP_INSTALLED_PRODUCT = NO;
@@ -7974,7 +7971,6 @@
 		};
 		187AFC181CEBC1D300913987 /* StagingReleaseCopy */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2B6B2FE6EECB14A38ED7F07C /* Pods-RCKenya.stagingreleasecopy.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -8052,7 +8048,7 @@
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -D DEBUG -D \"STAGING_COPY_ENV\"";
 				PRODUCT_BUNDLE_IDENTIFIER = com.connectik.sarcs.members.dev;
-				PRODUCT_MODULE_NAME = PositionIn;
+				PRODUCT_MODULE_NAME = RCRwanda;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				STRIP_INSTALLED_PRODUCT = NO;
@@ -8063,7 +8059,6 @@
 		};
 		187AFC191CEBC1D300913987 /* ProdDebug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A0D7A28DBC5943DE8A3BA336 /* Pods-RCKenya.proddebug.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -8140,7 +8135,7 @@
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -D DEBUG -D \"PROD_ENV\"";
 				PRODUCT_BUNDLE_IDENTIFIER = com.connectik.sarcs.members.dev;
-				PRODUCT_MODULE_NAME = PositionIn;
+				PRODUCT_MODULE_NAME = RCRwanda;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "PositionIn/PositionIn-Bridging-Header.h";
@@ -8150,7 +8145,6 @@
 		};
 		187AFC1A1CEBC1D300913987 /* DevRelease */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 626B7EB5915045326296C2C2 /* Pods-RCKenya.devrelease.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -8227,7 +8221,7 @@
 					"-ObjC",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.connectik.sarcs.members.dev;
-				PRODUCT_MODULE_NAME = PositionIn;
+				PRODUCT_MODULE_NAME = RCRwanda;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "PositionIn/PositionIn-Bridging-Header.h";
@@ -8236,7 +8230,6 @@
 		};
 		187AFC1B1CEBC1D300913987 /* StagingRelease */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 989BDD99C10286F8B2169089 /* Pods-RCKenya.stagingrelease.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -8313,7 +8306,7 @@
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -D \"STAGING_ENV\"";
 				PRODUCT_BUNDLE_IDENTIFIER = com.connectik.sarcs.members.dev;
-				PRODUCT_MODULE_NAME = PositionIn;
+				PRODUCT_MODULE_NAME = RCRwanda;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "PositionIn/PositionIn-Bridging-Header.h";
@@ -8322,7 +8315,6 @@
 		};
 		187AFC1C1CEBC1D300913987 /* ProdRelease */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7D42E67B3A7AA874F8DCA421 /* Pods-RCKenya.prodrelease.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -8399,7 +8391,7 @@
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -D \"PROD_ENV\"";
 				PRODUCT_BUNDLE_IDENTIFIER = com.connectik.sarcs.members.dev;
-				PRODUCT_MODULE_NAME = PositionIn;
+				PRODUCT_MODULE_NAME = RCRwanda;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "PositionIn/PositionIn-Bridging-Header.h";
@@ -8408,7 +8400,6 @@
 		};
 		187AFC1D1CEBC1D300913987 /* ProdRelease2 */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 178D7FA773D77E1E72A6C121 /* Pods-RCKenya.prodrelease2.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -8485,7 +8476,7 @@
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -D \"PROD_ENV\"";
 				PRODUCT_BUNDLE_IDENTIFIER = com.connectik.sarcs.members.dev;
-				PRODUCT_MODULE_NAME = PositionIn;
+				PRODUCT_MODULE_NAME = RCRwanda;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "PositionIn/PositionIn-Bridging-Header.h";
