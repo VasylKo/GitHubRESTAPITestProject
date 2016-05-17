@@ -328,7 +328,6 @@
 		180E1D3B1CE4CDE9006EBEC6 /* CleanroomLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6B3C32E1B62581200EA613A /* CleanroomLogger.framework */; };
 		180E1D3C1CE4CDE9006EBEC6 /* CleanroomASL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6B3C32D1B62581200EA613A /* CleanroomASL.framework */; };
 		180E1D3D1CE4CDE9006EBEC6 /* Messaging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6E2FE881B66F61300880F3C /* Messaging.framework */; };
-		180E1D3E1CE4CDE9006EBEC6 /* Pods_PositionIn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFAA26C98F322F00903B06FC /* Pods_PositionIn.framework */; };
 		180E1D401CE4CDE9006EBEC6 /* PositionIn.EPlusPlansViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18F7C6501CBFF13500B68BB6 /* PositionIn.EPlusPlansViewController.xib */; };
 		180E1D411CE4CDE9006EBEC6 /* Snapfile in Resources */ = {isa = PBXBuildFile; fileRef = CD795BDD1C57B4EE00C1C298 /* Snapfile */; };
 		180E1D421CE4CDE9006EBEC6 /* PositionIn.QuestionBloodDonorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1BAE0031CDCBAA200B3ECE3 /* PositionIn.QuestionBloodDonorViewController.xib */; };
@@ -622,7 +621,6 @@
 		549C6BD21CCF98CF0062435F /* EplusPaymentTransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 549C6BD11CCF98CF0062435F /* EplusPaymentTransactionViewController.swift */; };
 		54A31F961CBBF20900A833C9 /* DonationPaymentAmountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54A31F941CBBF20900A833C9 /* DonationPaymentAmountCell.swift */; };
 		54A31F971CBBF20900A833C9 /* DonationPaymentAmountCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 54A31F951CBBF20900A833C9 /* DonationPaymentAmountCell.xib */; };
-		5DA3850FA75B150D79C68EE1 /* Pods_PositionIn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFAA26C98F322F00903B06FC /* Pods_PositionIn.framework */; };
 		CD076E871C73922A005C04C2 /* NewsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD076E861C73922A005C04C2 /* NewsListViewController.swift */; };
 		CD076E891C7497A8005C04C2 /* PositionIn.NewsListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD076E881C7497A8005C04C2 /* PositionIn.NewsListViewController.xib */; };
 		CD0FCC2E1C69ECD800AFD36C /* TotalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0FCC2C1C69ECD800AFD36C /* TotalCell.swift */; };
@@ -2000,7 +1998,6 @@
 				180E1D3B1CE4CDE9006EBEC6 /* CleanroomLogger.framework in Frameworks */,
 				180E1D3C1CE4CDE9006EBEC6 /* CleanroomASL.framework in Frameworks */,
 				180E1D3D1CE4CDE9006EBEC6 /* Messaging.framework in Frameworks */,
-				180E1D3E1CE4CDE9006EBEC6 /* Pods_PositionIn.framework in Frameworks */,
 				412FE925B748A90A02A87D5A /* Pods_RCSouthAfrica.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2012,7 +2009,6 @@
 				E6B3C3311B62581200EA613A /* CleanroomLogger.framework in Frameworks */,
 				E6B3C32F1B62581200EA613A /* CleanroomASL.framework in Frameworks */,
 				E6E2FE9F1B66F61400880F3C /* Messaging.framework in Frameworks */,
-				5DA3850FA75B150D79C68EE1 /* Pods_PositionIn.framework in Frameworks */,
 				2AB08EF97FA61150FE05EDF7 /* Pods_RCKenya.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -5362,7 +5358,6 @@
 				ORGANIZATIONNAME = "Soluna Labs";
 				TargetAttributes = {
 					180E1C161CE4CDE9006EBEC6 = {
-						DevelopmentTeam = 7823S53735;
 						SystemCapabilities = {
 							com.apple.Push = {
 								enabled = 1;
@@ -5374,7 +5369,6 @@
 					};
 					E64DC3491B4E53C90011D37C = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = 7823S53735;
 						SystemCapabilities = {
 							com.apple.Push = {
 								enabled = 1;
