@@ -34,9 +34,7 @@ target 'RCSouthAfrica' do
 end
 
 target 'RCRwanda' do
-    pod 'Google/Analytics'
-    pod 'NewRelicAgent', '~> 5.3.6'
-    pod 'LNNotificationsUI', :podspec => 'https://raw.githubusercontent.com/rkolchakov/LNNotificationsUI/master/LNNotificationsUI.podspec'
+    common_pods
 end
 
 post_install do |installer|
