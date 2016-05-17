@@ -51,6 +51,13 @@ class BrowseGridViewController: UIViewController {
         trackScreenToAnalytics(AnalyticsLabels.home)
     }
     
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        let container = NotificationViewContainer(frame: CGRectZero)
+        container.show()
+        
+    }
+    
     @objc func notificationTouched() {
         let controller = NotificationViewController()
         self.navigationController?.pushViewController(controller, animated: true)
