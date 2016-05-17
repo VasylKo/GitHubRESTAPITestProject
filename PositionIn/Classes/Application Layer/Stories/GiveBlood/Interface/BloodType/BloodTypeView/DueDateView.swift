@@ -55,7 +55,6 @@ class DueDateView: UIView {
     var dueDate: NSDate? {
         didSet {
             if let date = dueDate {
-                datePicker.date = date
                 dateButton.setTitle(dateFormatter.stringFromDate(date), forState: .Normal)
             }
         }
