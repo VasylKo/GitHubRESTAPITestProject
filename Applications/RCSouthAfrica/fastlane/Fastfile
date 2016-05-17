@@ -7,7 +7,8 @@ platform :ios do
         output_directory: "Build",
         clean: true,
         use_legacy_build_api: true,
-        provisioning_profile_path: "./Applications/RCSouthAfrica/fastlane/Distribution.com.connectik.sarcs.members.dev.mobileprovision"
+        provisioning_profile_path: "./Applications/RCSouthAfrica/fastlane/Distribution.com.connectik.sarcs.members.dev.mobileprovision",
+        include_bitcode: false
         ) # Build app
     s3(
        html_template_path: './fastlane/redcross.erb',
