@@ -7722,7 +7722,7 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 					"$(PROJECT_DIR)",
 				);
-				INFOPLIST_FILE = "RCKenya copy-Info.plist";
+				INFOPLIST_FILE = "Applications/${TARGET_NAME}/Supporting Files/Info.plist";
 				INFOPLIST_PREFIX_HEADER = "${PROJECT_NAME}/Supporting Files/Version.h";
 				INFOPLIST_PREPROCESS = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -7785,7 +7785,7 @@
 					"-ObjC",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -D DEBUG";
-				PRODUCT_BUNDLE_IDENTIFIER = com.connectik.members.dev;
+				PRODUCT_BUNDLE_IDENTIFIER = com.connectik.sarcs.members.dev;
 				PRODUCT_MODULE_NAME = PositionIn;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -7810,7 +7810,7 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 					"$(PROJECT_DIR)",
 				);
-				INFOPLIST_FILE = "RCKenya copy-Info.plist";
+				INFOPLIST_FILE = "Applications/${TARGET_NAME}/Supporting Files/Info.plist";
 				INFOPLIST_PREFIX_HEADER = "${PROJECT_NAME}/Supporting Files/Version.h";
 				INFOPLIST_PREPROCESS = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -7873,7 +7873,7 @@
 					"-ObjC",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -D DEBUG -D \"STAGING_ENV\"";
-				PRODUCT_BUNDLE_IDENTIFIER = com.connectik.members.dev;
+				PRODUCT_BUNDLE_IDENTIFIER = com.connectik.sarcs.members.dev;
 				PRODUCT_MODULE_NAME = PositionIn;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -7899,7 +7899,7 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 					"$(PROJECT_DIR)",
 				);
-				INFOPLIST_FILE = "RCKenya copy-Info.plist";
+				INFOPLIST_FILE = "Applications/${TARGET_NAME}/Supporting Files/Info.plist";
 				INFOPLIST_PREFIX_HEADER = "${PROJECT_NAME}/Supporting Files/Version.h";
 				INFOPLIST_PREPROCESS = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -7962,7 +7962,7 @@
 					"-ObjC",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -D DEBUG -D \"STAGING_COPY_ENV\"";
-				PRODUCT_BUNDLE_IDENTIFIER = com.connectik.members.dev;
+				PRODUCT_BUNDLE_IDENTIFIER = com.connectik.sarcs.members.dev;
 				PRODUCT_MODULE_NAME = PositionIn;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -7988,7 +7988,7 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 					"$(PROJECT_DIR)",
 				);
-				INFOPLIST_FILE = "RCKenya copy-Info.plist";
+				INFOPLIST_FILE = "Applications/${TARGET_NAME}/Supporting Files/Info.plist";
 				INFOPLIST_PREFIX_HEADER = "${PROJECT_NAME}/Supporting Files/Version.h";
 				INFOPLIST_PREPROCESS = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -8051,7 +8051,7 @@
 					"-ObjC",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -D DEBUG -D \"STAGING_COPY_ENV\"";
-				PRODUCT_BUNDLE_IDENTIFIER = com.connectik.members.dev;
+				PRODUCT_BUNDLE_IDENTIFIER = com.connectik.sarcs.members.dev;
 				PRODUCT_MODULE_NAME = PositionIn;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -8076,7 +8076,7 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 					"$(PROJECT_DIR)",
 				);
-				INFOPLIST_FILE = "RCKenya copy-Info.plist";
+				INFOPLIST_FILE = "Applications/${TARGET_NAME}/Supporting Files/Info.plist";
 				INFOPLIST_PREFIX_HEADER = "${PROJECT_NAME}/Supporting Files/Version.h";
 				INFOPLIST_PREPROCESS = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -8139,7 +8139,7 @@
 					"-ObjC",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -D DEBUG -D \"PROD_ENV\"";
-				PRODUCT_BUNDLE_IDENTIFIER = com.connectik.members.dev;
+				PRODUCT_BUNDLE_IDENTIFIER = com.connectik.sarcs.members.dev;
 				PRODUCT_MODULE_NAME = PositionIn;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -8163,7 +8163,7 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 					"$(PROJECT_DIR)",
 				);
-				INFOPLIST_FILE = "RCKenya copy-Info.plist";
+				INFOPLIST_FILE = "Applications/${TARGET_NAME}/Supporting Files/Info.plist";
 				INFOPLIST_PREFIX_HEADER = "${PROJECT_NAME}/Supporting Files/Version.h";
 				INFOPLIST_PREPROCESS = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -8226,7 +8226,7 @@
 					"\"XLForm\"",
 					"-ObjC",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.connectik.members.dev;
+				PRODUCT_BUNDLE_IDENTIFIER = com.connectik.sarcs.members.dev;
 				PRODUCT_MODULE_NAME = PositionIn;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -8249,7 +8249,7 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 					"$(PROJECT_DIR)",
 				);
-				INFOPLIST_FILE = "RCKenya copy-Info.plist";
+				INFOPLIST_FILE = "Applications/${TARGET_NAME}/Supporting Files/Info.plist";
 				INFOPLIST_PREFIX_HEADER = "${PROJECT_NAME}/Supporting Files/Version.h";
 				INFOPLIST_PREPROCESS = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -8312,7 +8312,7 @@
 					"-ObjC",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -D \"STAGING_ENV\"";
-				PRODUCT_BUNDLE_IDENTIFIER = com.connectik.members.dev;
+				PRODUCT_BUNDLE_IDENTIFIER = com.connectik.sarcs.members.dev;
 				PRODUCT_MODULE_NAME = PositionIn;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -8335,7 +8335,7 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 					"$(PROJECT_DIR)",
 				);
-				INFOPLIST_FILE = "RCKenya copy-Info.plist";
+				INFOPLIST_FILE = "Applications/${TARGET_NAME}/Supporting Files/Info.plist";
 				INFOPLIST_PREFIX_HEADER = "${PROJECT_NAME}/Supporting Files/Version.h";
 				INFOPLIST_PREPROCESS = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -8398,7 +8398,7 @@
 					"-ObjC",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -D \"PROD_ENV\"";
-				PRODUCT_BUNDLE_IDENTIFIER = com.connectik.members.dev;
+				PRODUCT_BUNDLE_IDENTIFIER = com.connectik.sarcs.members.dev;
 				PRODUCT_MODULE_NAME = PositionIn;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -8421,7 +8421,7 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 					"$(PROJECT_DIR)",
 				);
-				INFOPLIST_FILE = "RCKenya copy-Info.plist";
+				INFOPLIST_FILE = "Applications/${TARGET_NAME}/Supporting Files/Info.plist";
 				INFOPLIST_PREFIX_HEADER = "${PROJECT_NAME}/Supporting Files/Version.h";
 				INFOPLIST_PREPROCESS = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -8484,7 +8484,7 @@
 					"-ObjC",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -D \"PROD_ENV\"";
-				PRODUCT_BUNDLE_IDENTIFIER = com.connectik.members.dev;
+				PRODUCT_BUNDLE_IDENTIFIER = com.connectik.sarcs.members.dev;
 				PRODUCT_MODULE_NAME = PositionIn;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
