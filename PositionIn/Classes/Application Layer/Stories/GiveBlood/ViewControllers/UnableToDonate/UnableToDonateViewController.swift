@@ -47,6 +47,8 @@ class UnableToDonateViewController: UIViewController, UITextViewDelegate {
         
         textView.text = "Type here (optional)..."
         textView.textColor = UIColor.lightGrayColor()
+        
+        self.sendButton.enabled = false
     }
     
     //MARK: - Action
@@ -72,6 +74,13 @@ class UnableToDonateViewController: UIViewController, UITextViewDelegate {
             textView.text = nil
             textView.textColor = UIColor.blackColor()
         }
+    }
+    
+    func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
+        let currentText = textView.text as NSString
+        let proposedText = currentText.stringByReplacingCharactersInRange(range, withString: text)
+        self.sendButton.enabled = proposedText.characters.count > 0
+        return true
     }
     
     func textViewDidEndEditing(textView: UITextView) {

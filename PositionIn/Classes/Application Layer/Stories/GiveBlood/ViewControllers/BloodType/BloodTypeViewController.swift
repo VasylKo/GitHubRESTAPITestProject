@@ -86,7 +86,13 @@ class BloodTypeViewController: UIViewController {
     // MARK: - Actions
     
     @IBAction func didTapDone(sender: AnyObject) {
-        donorInfo?.bloodGroup = self.bloodTypeView?.bloodGroup
+        guard let bloodGroup = self.bloodTypeView?.bloodGroup
+            else {
+                showWarning(NSLocalizedString("Please select your blood type"))
+                return
+        }
+        
+        donorInfo?.bloodGroup = bloodGroup
         donorInfo?.dueDate = self.dueDateView?.dueDate
         donorInfo?.donorStatus = .Agreed
         if let donorInfo = donorInfo {

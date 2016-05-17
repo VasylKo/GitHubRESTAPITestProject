@@ -20,7 +20,7 @@ class GiveBloodRouterImplementation: BaseRouterImplementation, GiveBloodRouter {
             case .Undefined:
                 self.showIntroViewController(from: sourceViewController)
             default:
-                self.showGiveBloodCentersViewController(from: sourceViewController)
+                self.showIntroViewController(from: sourceViewController)
             }
         }
     }
