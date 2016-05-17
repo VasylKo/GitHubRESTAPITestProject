@@ -155,7 +155,7 @@ extension FeedEmergencyDetailsViewController {
                         }
                         
                         break
-                    case "More Information":
+                    case "Attachments":
                         let controller = self.parentViewController as! FeedEmergencyDetailsViewController
                         if controller.emergency?.links?.isEmpty == false || controller.emergency?.attachments?.isEmpty == false {
                             let moreInformationViewController = MoreInformationViewController(links: controller.emergency?.links,
