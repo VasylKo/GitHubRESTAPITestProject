@@ -1,6 +1,6 @@
 platform :ios do
   desc "Submit a new Dev Build to Amazon S3"
-  lane :Za_Dev do
+  lane :Rw_Dev do
     gym(
         scheme: "RCRwanda",
         configuration: "DevRelease",
@@ -21,7 +21,7 @@ platform :ios do
   end
 
     desc "Submit a new Staging Build to Amazon S3"
-    lane :Za_Staging do
+    lane :Rw_Staging do
       gym(
         scheme: "RCRwanda",
         configuration: "StagingRelease",
@@ -41,7 +41,7 @@ platform :ios do
     end
 
     desc "Submit a new Staging 2 Build to Amazon S3"
-    lane :Za_Staging2 do
+    lane :Rw_Staging2 do
         gym(
             scheme: "RCRwanda",
             configuration: "StagingReleaseCopy",
@@ -62,7 +62,7 @@ platform :ios do
 
 
     desc "Submit a new Production Build to Amazon S3"
-    lane :Za_Production do
+    lane :Rw_Production do
         gym(
             scheme: "RCRwanda",
             configuration: "ProdRelease",
@@ -82,7 +82,7 @@ platform :ios do
     end
 
     desc "Submit a new Production 2 (Kenya Red Cross) Build to Amazon S3"
-    lane :Za_Production2 do
+    lane :Rw_Production2 do
         gym(
             scheme: "RCRwanda",
             configuration: "ProdRelease2",
