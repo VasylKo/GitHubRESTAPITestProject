@@ -63,7 +63,7 @@ class FeedEmergencyDetailsViewController: UIViewController {
     
     private func addAttachmentSection() {
         attechmentSectionHeightConstraint.constant = MoreInformationViewController.singleAttacmentViewHeight
-        let moreInformationViewController = MoreInformationViewController(links: emergency?.links, attachments: emergency?.attachments)
+        let moreInformationViewController = MoreInformationViewController(links: emergency?.links, attachments: emergency?.attachments, bounces: false)
         let attachmentsView = moreInformationViewController.view
         attechmentSectionView.addSubview(attachmentsView)
     }

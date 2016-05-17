@@ -20,15 +20,16 @@ class MoreInformationViewController : XLFormViewController {
     var attachments : [Attachment]
     var links : [NSURL]
     var newsTitle: String?
-    
+    private var shoudBounces: Bool
     var attachmentRowDescriptors : [XLFormRowDescriptor] = []
     static let singleAttacmentViewHeight: CGFloat = 150
     //MARK: Initializers
     
-    init(links: [NSURL]?, attachments: [Attachment]?, newsTitle: String? = nil) {
+    init(links: [NSURL]?, attachments: [Attachment]?, newsTitle: String? = nil, bounces: Bool = true) {
         self.attachments = attachments ?? []
         self.links = links ?? []
         self.newsTitle = newsTitle
+        self.shoudBounces = bounces
         super.init(nibName: nil, bundle: nil)
         self.initializeForm()
     }
@@ -48,6 +49,8 @@ class MoreInformationViewController : XLFormViewController {
             rowDescriptor.value = Box(attachment)
             rowDescriptor.cellForFormController(self).update()
         }
+        
+        self.tableView.bounces = shoudBounces
     }
     
     func initializeForm() {
