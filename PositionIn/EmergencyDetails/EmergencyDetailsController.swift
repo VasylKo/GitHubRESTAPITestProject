@@ -107,7 +107,7 @@ class EmergencyDetailsController: UIViewController {
     private func addAttachmentSection() {
         guard let numberOfAttachments = product?.numberOfAttachments where numberOfAttachments == 1 else { return }
         
-        attechmentSectionHeightConstraint.constant = 128
+        attechmentSectionHeightConstraint.constant = MoreInformationViewController.singleAttacmentViewHeight
         let moreInformationViewController = MoreInformationViewController(links: self.product?.links, attachments: self.product?.attachments)
         let attachmentsView = moreInformationViewController.view
         attechmentSectionView.addSubview(attachmentsView)

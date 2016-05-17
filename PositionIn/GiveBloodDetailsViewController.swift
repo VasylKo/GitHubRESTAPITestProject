@@ -50,6 +50,9 @@ class GiveBloodDetailsViewController: UIViewController {
                         strongSelf.didReceiveProductDetails(product)
                         strongSelf.dataSource.items = strongSelf.productAcionItems()
                         strongSelf.dataSource.configureTable(strongSelf.actionTableView)
+                        
+                        strongSelf.actionTableViewHeightConstraint.constant = strongSelf.actionTableView.contentSize.height
+                        strongSelf.addAttachmentSection()
                     }
             }
         default:
@@ -103,6 +106,15 @@ class GiveBloodDetailsViewController: UIViewController {
         }()
     
     
+    private func addAttachmentSection() {
+        guard let numberOfAttachments = product?.numberOfAttachments where numberOfAttachments == 1 else { return }
+        
+        attechmentSectionHeightConstraint.constant = MoreInformationViewController.singleAttacmentViewHeight
+        let moreInformationViewController = MoreInformationViewController(links: self.product?.links, attachments: self.product?.attachments)
+        let attachmentsView = moreInformationViewController.view
+        attechmentSectionView.addSubview(attachmentsView)
+    }
+    
     private func productAcionItems() -> [[GiveBloodActionItem]] {
         var zeroSection = [GiveBloodActionItem]() // 0 section
         
@@ -115,7 +127,7 @@ class GiveBloodDetailsViewController: UIViewController {
         if self.product?.location != nil {
             zeroSection.append(GiveBloodActionItem(title: NSLocalizedString("Navigate", comment: "GiveBlood"), image: "productNavigate", action: .Navigate))
         }
-        if self.product?.links?.isEmpty == false || self.product?.attachments?.isEmpty == false {
+        if let numberOfAttachments = product?.numberOfAttachments where numberOfAttachments > 1 {
             zeroSection.append(GiveBloodActionItem(title: NSLocalizedString("Attachments"), image: "productTerms&Info", action: .MoreInformation))
         }
         
@@ -123,9 +135,12 @@ class GiveBloodDetailsViewController: UIViewController {
     }
     
     @IBOutlet private weak var actionTableView: UITableView!
+    @IBOutlet weak var actionTableViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet private weak var productImageView: UIImageView!
     @IBOutlet private weak var headerLabel: UILabel!
     @IBOutlet private weak var infoLabel: UILabel!
+    @IBOutlet weak var attechmentSectionView: UIView!
+    @IBOutlet weak var attechmentSectionHeightConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var productPinDistanceImageView: UIImageView!
     @IBOutlet private weak var nameLabel: UILabel!

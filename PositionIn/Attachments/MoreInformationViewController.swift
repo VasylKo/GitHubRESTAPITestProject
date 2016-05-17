@@ -22,7 +22,7 @@ class MoreInformationViewController : XLFormViewController {
     var newsTitle: String?
     
     var attachmentRowDescriptors : [XLFormRowDescriptor] = []
-    
+    static let singleAttacmentViewHeight: CGFloat = 150
     //MARK: Initializers
     
     init(links: [NSURL]?, attachments: [Attachment]?, newsTitle: String? = nil) {
