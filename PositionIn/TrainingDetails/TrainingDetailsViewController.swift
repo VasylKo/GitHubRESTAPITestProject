@@ -19,6 +19,7 @@ final class TrainingDetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = UIColor.groupTableViewBackgroundColor()
         title = NSLocalizedString("Training", comment: "Training details: title")
         dataSource.items = trainingActionItems()
         dataSource.configureTable(actionTableView)
@@ -51,6 +52,16 @@ final class TrainingDetailsViewController: UIViewController {
                         self?.didReceiveProductDetails(product)
                         strongSelf.dataSource.items = strongSelf.trainingActionItems()
                         strongSelf.dataSource.configureTable(strongSelf.actionTableView)
+                        
+                        //If there is only 1 attachment, thant show it on current screen
+                        if let numberOfAttachments = strongSelf.product?.numberOfAttachments where numberOfAttachments == 1 {
+                            strongSelf.actionTableViewHeightConstraint.constant = strongSelf.actionTableView.contentSize.height
+                            strongSelf.addAttachmentSection()
+                        } else {
+                            //adjust scroll view content size based on table view height
+                            let scrollViewBottomSpaceHeight: CGFloat = 20
+                            strongSelf.actionTableViewHeightConstraint.constant = strongSelf.actionTableView.contentSize.height + scrollViewBottomSpaceHeight
+                        }
                     }
             }
         default:
@@ -103,6 +114,12 @@ final class TrainingDetailsViewController: UIViewController {
         return dataSource
         }()
     
+    private func addAttachmentSection() {
+        attechmentSectionHeightConstraint.constant = MoreInformationViewController.singleAttacmentViewHeight
+        let moreInformationViewController = MoreInformationViewController(links: self.product?.links, attachments: self.product?.attachments, bounces: false)
+        let attachmentsView = moreInformationViewController.view
+        attechmentSectionView.addSubview(attachmentsView)
+    }
     
     private func trainingActionItems() -> [[TrainingActionItem]] {
         let zeroSection = [ // 0 section
@@ -124,7 +141,7 @@ final class TrainingDetailsViewController: UIViewController {
             firstSection.append(TrainingActionItem(title: NSLocalizedString("Navigate", comment: "Product action: Navigate"), image: "productNavigate", action: .Navigate))
         }
         
-        if self.product?.links?.isEmpty == false || self.product?.attachments?.isEmpty == false {
+        if let numberOfAttachments = product?.numberOfAttachments where numberOfAttachments > 1 {
             firstSection.append(TrainingActionItem(title: NSLocalizedString("Attachments", comment: "Product action: More Information"), image: "productTerms&Info", action: .MoreInformation))
         }
         
@@ -132,9 +149,12 @@ final class TrainingDetailsViewController: UIViewController {
     }
     
     @IBOutlet private weak var actionTableView: UITableView!
+    @IBOutlet weak var actionTableViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet private weak var productImageView: UIImageView!
     @IBOutlet private weak var headerLabel: UILabel!
     @IBOutlet private weak var infoLabel: UILabel!
+    @IBOutlet weak var attechmentSectionView: UIView!
+    @IBOutlet weak var attechmentSectionHeightConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var pinDistanceImageView: UIImageView!
     @IBOutlet private weak var nameLabel: UILabel!
