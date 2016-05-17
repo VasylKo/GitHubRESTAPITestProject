@@ -29,6 +29,10 @@ final class BoughtProductDetailsViewController: UIViewController {
     @IBOutlet weak var pickUpAvaiabililityCellHeightConstraints: NSLayoutConstraint?
     
     @IBOutlet weak var actionTableView: UITableView?
+    @IBOutlet weak var actionTableViewHeightConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var attechmentSectionView: UIView!
+    @IBOutlet weak var attechmentSectionHeightConstraint: NSLayoutConstraint!
     
     // MARK: - Internal properties
     internal var product: Order?
@@ -57,7 +61,7 @@ final class BoughtProductDetailsViewController: UIViewController {
                 image: "productSellerProfile", action: .SellerProfile))
         }
 
-        if product?.entityDetails?.links?.isEmpty == false || product?.entityDetails?.attachments?.isEmpty == false {
+        if let numberOfAttachments = product?.entityDetails?.numberOfAttachments where numberOfAttachments > 1 {
             zeroSection.append(BoughtProductDetailsActionItem(title: NSLocalizedString("Attachments", comment: "Product action: More Information"), image: "productTerms&Info", action: .MoreInformation))
         }
         
@@ -90,6 +94,7 @@ final class BoughtProductDetailsViewController: UIViewController {
     }
     
     private func configure() {
+        view.backgroundColor = UIColor.groupTableViewBackgroundColor()
         title = NSLocalizedString("Purchases")
         
         productImage?.setImageFromURL(product?.entityDetails?.imageURL, placeholder: UIImage(named: "market_img_default"))
@@ -114,6 +119,24 @@ final class BoughtProductDetailsViewController: UIViewController {
         if let actionTableView = actionTableView {
             dataSource.configureTable(actionTableView)
         }
+        
+        //If there is only 1 attachment, thant show it on current screen
+        if let numberOfAttachments = product?.entityDetails?.numberOfAttachments where numberOfAttachments == 1 {
+            actionTableViewHeightConstraint.constant = actionTableView!.contentSize.height
+            addAttachmentSection()
+        } else {
+            //adjust scroll view content size based on table view height
+            let scrollViewBottomSpaceHeight: CGFloat = 20
+            actionTableViewHeightConstraint.constant = actionTableView!.contentSize.height + scrollViewBottomSpaceHeight
+        }
+    }
+    
+    private func addAttachmentSection() {
+        attechmentSectionHeightConstraint.constant = MoreInformationViewController.singleAttacmentViewHeight
+        let moreInformationViewController = MoreInformationViewController(links: product?.entityDetails?.links, attachments: product?.entityDetails?.attachments, bounces: false)
+        let attachmentsView = moreInformationViewController.view
+        attechmentSectionView.addSubViewOnEntireSize(attachmentsView)
+        //addSubview(attachmentsView)
     }
 }
 
