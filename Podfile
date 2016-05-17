@@ -33,6 +33,10 @@ target 'RCSouthAfrica' do
     common_pods
 end
 
+target 'RCRwanda' do
+    common_pods
+end
+
 post_install do |installer|
     installer.pods_project.targets.each do |target|
         if ['GoogleMaps'].include?(target.name) | ['RealmSwift'].include?(target.name) | ['Realm'].include?(target.name)
