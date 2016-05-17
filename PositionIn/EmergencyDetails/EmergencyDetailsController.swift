@@ -54,8 +54,15 @@ class EmergencyDetailsController: UIViewController {
                         strongSelf.dataSource.items = strongSelf.productAcionItems()
                         strongSelf.dataSource.configureTable(strongSelf.actionTableView)
                         
-                        strongSelf.actionTableViewHeightConstraint.constant = strongSelf.actionTableView.contentSize.height
-                        strongSelf.addAttachmentSection()
+                        //If there is only 1 attachment, thant show it on current screen
+                        if let numberOfAttachments = strongSelf.product?.numberOfAttachments where numberOfAttachments == 1 {
+                            strongSelf.actionTableViewHeightConstraint.constant = strongSelf.actionTableView.contentSize.height
+                            strongSelf.addAttachmentSection()
+                        } else {
+                            //adjust scroll view content size based on table view height
+                            let scrollViewBottomSpaceHeight: CGFloat = 20
+                            strongSelf.actionTableViewHeightConstraint.constant = strongSelf.actionTableView.contentSize.height + scrollViewBottomSpaceHeight
+                        }
                     }
             }
         default:
@@ -105,8 +112,6 @@ class EmergencyDetailsController: UIViewController {
         }()
     
     private func addAttachmentSection() {
-        guard let numberOfAttachments = product?.numberOfAttachments where numberOfAttachments == 1 else { return }
-        
         attechmentSectionHeightConstraint.constant = MoreInformationViewController.singleAttacmentViewHeight
         let moreInformationViewController = MoreInformationViewController(links: self.product?.links, attachments: self.product?.attachments)
         let attachmentsView = moreInformationViewController.view
