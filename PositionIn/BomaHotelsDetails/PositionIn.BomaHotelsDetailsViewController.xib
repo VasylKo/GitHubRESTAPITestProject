@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BomaHotelsDetailsViewController" customModule="PositionIn" customModuleProvider="target">
             <connections>
                 <outlet property="actionTableView" destination="4Nn-fx-mlC" id="K4v-6U-7Ef"/>
+                <outlet property="actionTableViewHeightConstraint" destination="0QR-Lm-w8J" id="4bR-Wy-t7L"/>
+                <outlet property="attechmentSectionHeightConstraint" destination="tnE-xQ-OOg" id="jJe-3T-RsD"/>
+                <outlet property="attechmentSectionView" destination="ILO-3b-Xlm" id="PZo-PW-miN"/>
                 <outlet property="detailsLabel" destination="3NG-0g-fB5" id="Yl5-wD-Kdu"/>
                 <outlet property="headerLabel" destination="MRe-Pd-AsY" id="lZw-eD-o1o"/>
                 <outlet property="infoLabel" destination="iM6-cn-q7w" id="8zu-vE-2Yj"/>
@@ -37,7 +40,7 @@
                             <rect key="frame" x="0.0" y="252" width="600" height="48"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$99" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HKq-x0-GRJ">
-                                    <rect key="frame" x="10" y="14" width="31" height="22"/>
+                                    <rect key="frame" x="10" y="13" width="31" height="22"/>
                                     <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="18"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
@@ -46,7 +49,7 @@
                                     </userDefinedRuntimeAttributes>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Edward Ryan" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="txQ-qU-rbx">
-                                    <rect key="frame" x="498" y="15" width="93" height="18"/>
+                                    <rect key="frame" x="497" y="15" width="93" height="18"/>
                                     <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="15"/>
                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
@@ -127,23 +130,39 @@
                             </constraints>
                             <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </tableView>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ILO-3b-Xlm">
+                            <rect key="frame" x="0.0" y="750" width="600" height="0.0"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="height" id="tnE-xQ-OOg"/>
+                            </constraints>
+                        </view>
                     </subviews>
                     <constraints>
                         <constraint firstItem="4eU-xx-L5M" firstAttribute="bottom" secondItem="9t8-HR-GVh" secondAttribute="bottom" id="1Cv-oN-Q5W"/>
                         <constraint firstItem="uxC-lT-yWX" firstAttribute="top" secondItem="4eU-xx-L5M" secondAttribute="bottom" id="6c7-YB-MTg"/>
                         <constraint firstItem="4Nn-fx-mlC" firstAttribute="leading" secondItem="FPY-yv-QiP" secondAttribute="leading" id="8fT-n8-aRE"/>
                         <constraint firstItem="4eU-xx-L5M" firstAttribute="leading" secondItem="FPY-yv-QiP" secondAttribute="leading" id="IW2-5p-0A9"/>
+                        <constraint firstItem="ILO-3b-Xlm" firstAttribute="leading" secondItem="FPY-yv-QiP" secondAttribute="leading" id="IZM-iX-4lz"/>
                         <constraint firstItem="4eU-xx-L5M" firstAttribute="top" secondItem="FPY-yv-QiP" secondAttribute="top" id="Kvj-xx-9Ny"/>
                         <constraint firstItem="4Nn-fx-mlC" firstAttribute="top" secondItem="uxC-lT-yWX" secondAttribute="bottom" id="NlL-VN-Ypo"/>
+                        <constraint firstAttribute="trailing" secondItem="ILO-3b-Xlm" secondAttribute="trailing" id="OpD-qM-ZC2"/>
                         <constraint firstItem="uxC-lT-yWX" firstAttribute="leading" secondItem="FPY-yv-QiP" secondAttribute="leading" id="Qia-oa-9qH"/>
                         <constraint firstAttribute="trailing" secondItem="4eU-xx-L5M" secondAttribute="trailing" id="R0E-WT-ruJ"/>
                         <constraint firstAttribute="trailing" secondItem="9t8-HR-GVh" secondAttribute="trailing" id="TcZ-De-Qor"/>
                         <constraint firstAttribute="trailing" secondItem="4Nn-fx-mlC" secondAttribute="trailing" id="ZOr-IP-X23"/>
+                        <constraint firstAttribute="bottom" secondItem="ILO-3b-Xlm" secondAttribute="bottom" id="dvG-bV-bvj"/>
                         <constraint firstItem="9t8-HR-GVh" firstAttribute="leading" secondItem="FPY-yv-QiP" secondAttribute="leading" id="hdX-YL-cjt"/>
                         <constraint firstAttribute="trailing" secondItem="uxC-lT-yWX" secondAttribute="trailing" id="mdO-oe-0xd"/>
+                        <constraint firstItem="ILO-3b-Xlm" firstAttribute="top" secondItem="4Nn-fx-mlC" secondAttribute="bottom" id="nRX-6d-6ML"/>
                         <constraint firstItem="4eU-xx-L5M" firstAttribute="width" secondItem="FPY-yv-QiP" secondAttribute="width" id="p2d-SJ-700"/>
                         <constraint firstAttribute="bottom" secondItem="4Nn-fx-mlC" secondAttribute="bottom" id="xRU-YI-VgH"/>
                     </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="xRU-YI-VgH"/>
+                        </mask>
+                    </variation>
                 </scrollView>
             </subviews>
             <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>

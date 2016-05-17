@@ -24,6 +24,12 @@ struct BomaHotel: CRUDObject {
     var links : [NSURL]?
     var attachments : [Attachment]?
     
+    var numberOfAttachments: Int {
+        let linksCount = links?.count ?? 0
+        let mediaAttachmentsCount = attachments?.count ?? 0
+        return linksCount + mediaAttachmentsCount
+    }
+    
     enum DeliveryMethod: Int {
         case Unknown
         case Pickup, Deliver, PickupOrDeliver

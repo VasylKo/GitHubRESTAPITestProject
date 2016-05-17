@@ -19,6 +19,7 @@ final class MarketDetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = UIColor.groupTableViewBackgroundColor()
         title = NSLocalizedString("Product", comment: "Product info screen title")
         dataSource.items = productAcionItems()
         dataSource.configureTable(actionTableView)
@@ -51,6 +52,16 @@ final class MarketDetailsViewController: UIViewController {
                         strongSelf.didReceiveProductDetails(product)
                         strongSelf.dataSource.items = strongSelf.productAcionItems()
                         strongSelf.dataSource.configureTable(strongSelf.actionTableView)
+                        
+                        //If there is only 1 attachment, thant show it on current screen
+                        if let numberOfAttachments = strongSelf.product?.numberOfAttachments where numberOfAttachments == 1 {
+                            strongSelf.actionTableViewHeightConstraint.constant = strongSelf.actionTableView.contentSize.height
+                            strongSelf.addAttachmentSection()
+                        } else {
+                            //adjust scroll view content size based on table view height
+                            let scrollViewBottomSpaceHeight: CGFloat = 60
+                            strongSelf.actionTableViewHeightConstraint.constant = strongSelf.actionTableView.contentSize.height + scrollViewBottomSpaceHeight
+                        }
                     }
             }
         default:
@@ -100,6 +111,12 @@ final class MarketDetailsViewController: UIViewController {
         return dataSource
         }()
     
+    private func addAttachmentSection() {
+        attechmentSectionHeightConstraint.constant = MoreInformationViewController.singleAttacmentViewHeight
+        let moreInformationViewController = MoreInformationViewController(links: self.product?.links, attachments: self.product?.attachments, bounces: false)
+        let attachmentsView = moreInformationViewController.view
+        attechmentSectionView.addSubview(attachmentsView)
+    }
     
     private func productAcionItems() -> [[MarketActionItem]] {
         let zeroSection = [ // 0 section
@@ -117,7 +134,7 @@ final class MarketDetailsViewController: UIViewController {
         if self.product?.location != nil {
             firstSection.append(MarketActionItem(title: NSLocalizedString("Navigate", comment: "Market"), image: "productNavigate", action: .Navigate))
         }
-        if self.product?.links?.isEmpty == false || self.product?.attachments?.isEmpty == false {
+        if let numberOfAttachments = product?.numberOfAttachments where numberOfAttachments > 1 {
             firstSection.append(MarketActionItem(title: NSLocalizedString("Attachments"), image: "productTerms&Info", action: .MoreInformation))
         }
         
@@ -125,9 +142,12 @@ final class MarketDetailsViewController: UIViewController {
     }
     
     @IBOutlet private weak var actionTableView: UITableView!
+    @IBOutlet weak var actionTableViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet private weak var productImageView: UIImageView!
     @IBOutlet private weak var headerLabel: UILabel!
     @IBOutlet private weak var infoLabel: UILabel!
+    @IBOutlet weak var attechmentSectionView: UIView!
+    @IBOutlet weak var attechmentSectionHeightConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var pinDistanceImageView: UIImageView!
     @IBOutlet private weak var priceLabel: UILabel!

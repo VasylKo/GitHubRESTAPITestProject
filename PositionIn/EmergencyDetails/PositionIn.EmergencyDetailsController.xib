@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EmergencyDetailsController" customModule="PositionIn" customModuleProvider="target">
             <connections>
                 <outlet property="actionTableView" destination="WGk-sZ-jno" id="4nu-Vj-tno"/>
+                <outlet property="actionTableViewHeightConstraint" destination="hnE-YC-9qb" id="JeP-Ul-n51"/>
+                <outlet property="attechmentSectionHeightConstraint" destination="5xP-ai-eXU" id="Fp1-l6-jyc"/>
+                <outlet property="attechmentSectionView" destination="43B-Ne-bjn" id="meq-m1-uji"/>
                 <outlet property="detailsLabel" destination="AwI-et-ZL1" id="L2Q-lW-WZ1"/>
                 <outlet property="headerLabel" destination="ZQP-jm-EdI" id="xSG-Cv-GWA"/>
                 <outlet property="infoLabel" destination="PbB-SZ-dD3" id="7bU-Lr-p66"/>
@@ -20,11 +23,11 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="loQ-gs-aYc">
-            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <rect key="frame" x="0.0" y="0.0" width="600" height="816"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3E7-za-PSW">
-                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3E7-za-PSW">
+                    <rect key="frame" x="-18" y="-10" width="600" height="813"/>
                     <subviews>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="uaV-NL-9EA">
                             <rect key="frame" x="0.0" y="0.0" width="600" height="300"/>
@@ -116,12 +119,19 @@
                             <constraints>
                                 <constraint firstAttribute="height" constant="350" id="hnE-YC-9qb"/>
                             </constraints>
-                            <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <color key="sectionIndexBackgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </tableView>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="43B-Ne-bjn" userLabel="AttechmentsSection">
+                            <rect key="frame" x="0.0" y="749" width="600" height="0.0"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="height" id="5xP-ai-eXU"/>
+                            </constraints>
+                        </view>
                     </subviews>
                     <constraints>
                         <constraint firstItem="uaV-NL-9EA" firstAttribute="top" secondItem="3E7-za-PSW" secondAttribute="top" id="5Vz-SS-rI4"/>
-                        <constraint firstAttribute="bottom" secondItem="WGk-sZ-jno" secondAttribute="bottom" id="5xe-B6-5ze"/>
+                        <constraint firstAttribute="bottom" secondItem="WGk-sZ-jno" secondAttribute="bottom" constant="100" id="5xe-B6-5ze"/>
                         <constraint firstAttribute="trailing" secondItem="WGk-sZ-jno" secondAttribute="trailing" id="AaC-9m-Opp"/>
                         <constraint firstItem="uaV-NL-9EA" firstAttribute="width" secondItem="3E7-za-PSW" secondAttribute="width" id="B0m-BH-bpk"/>
                         <constraint firstItem="WGk-sZ-jno" firstAttribute="top" secondItem="Omg-0P-QlP" secondAttribute="bottom" constant="-1" id="D4T-ms-NjC"/>
@@ -131,13 +141,22 @@
                         <constraint firstItem="uaV-NL-9EA" firstAttribute="bottom" secondItem="KiG-BC-0uH" secondAttribute="bottom" id="LoL-BF-bgn"/>
                         <constraint firstAttribute="trailing" secondItem="Omg-0P-QlP" secondAttribute="trailing" id="R6Q-UO-iIK"/>
                         <constraint firstItem="WGk-sZ-jno" firstAttribute="leading" secondItem="3E7-za-PSW" secondAttribute="leading" id="Rnr-sZ-FqJ"/>
+                        <constraint firstAttribute="trailing" secondItem="43B-Ne-bjn" secondAttribute="trailing" id="ZGi-HX-hkF"/>
+                        <constraint firstItem="43B-Ne-bjn" firstAttribute="leading" secondItem="3E7-za-PSW" secondAttribute="leading" id="c7L-in-a6U"/>
                         <constraint firstItem="Omg-0P-QlP" firstAttribute="top" secondItem="uaV-NL-9EA" secondAttribute="bottom" id="kMF-Os-HkP"/>
+                        <constraint firstItem="43B-Ne-bjn" firstAttribute="top" secondItem="WGk-sZ-jno" secondAttribute="bottom" id="mrc-cu-Cvl"/>
                         <constraint firstItem="Omg-0P-QlP" firstAttribute="leading" secondItem="3E7-za-PSW" secondAttribute="leading" id="tdE-Y1-uUa"/>
                         <constraint firstItem="uaV-NL-9EA" firstAttribute="leading" secondItem="3E7-za-PSW" secondAttribute="leading" id="w6z-gq-hnb"/>
+                        <constraint firstAttribute="bottom" secondItem="43B-Ne-bjn" secondAttribute="bottom" id="zxA-ag-p9b"/>
                     </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="5xe-B6-5ze"/>
+                        </mask>
+                    </variation>
                 </scrollView>
             </subviews>
-            <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" red="0.90196078431372551" green="0.90196078431372551" blue="0.90588235294117647" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="3E7-za-PSW" secondAttribute="trailing" id="5rY-rc-sxQ"/>
                 <constraint firstItem="3E7-za-PSW" firstAttribute="leading" secondItem="loQ-gs-aYc" secondAttribute="leading" id="EC5-ml-pG9"/>
@@ -145,6 +164,7 @@
                 <constraint firstItem="3E7-za-PSW" firstAttribute="top" secondItem="loQ-gs-aYc" secondAttribute="top" id="PeS-8b-8pl"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="482" y="440"/>
         </view>
     </objects>
     <resources>

@@ -616,6 +616,7 @@
 		5456528E1CCFAB4600C63C01 /* PaymentOrderDescriptionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5456528C1CCFAB4600C63C01 /* PaymentOrderDescriptionCell.xib */; };
 		545652901CCFB6B800C63C01 /* NSDate+pickUpAvaliabilityString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5456528F1CCFB6B800C63C01 /* NSDate+pickUpAvaliabilityString.swift */; };
 		545652951CCFFBA000C63C01 /* ProjectsIntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 545652931CCFFBA000C63C01 /* ProjectsIntroViewController.swift */; };
+		546A3C8E1CEB5BD100127D03 /* UIApplication+TopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546A3C8D1CEB5BD100127D03 /* UIApplication+TopViewController.swift */; };
 		549C6BCE1CCF558D0062435F /* MembershipPaymentTransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 549C6BCD1CCF558D0062435F /* MembershipPaymentTransactionViewController.swift */; };
 		549C6BD01CCF6DCF0062435F /* CommonPaymentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 549C6BCF1CCF6DCF0062435F /* CommonPaymentViewController.xib */; };
 		549C6BD21CCF98CF0062435F /* EplusPaymentTransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 549C6BD11CCF98CF0062435F /* EplusPaymentTransactionViewController.swift */; };
@@ -1299,6 +1300,7 @@
 		5456528C1CCFAB4600C63C01 /* PaymentOrderDescriptionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PaymentOrderDescriptionCell.xib; sourceTree = "<group>"; };
 		5456528F1CCFB6B800C63C01 /* NSDate+pickUpAvaliabilityString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+pickUpAvaliabilityString.swift"; sourceTree = "<group>"; };
 		545652931CCFFBA000C63C01 /* ProjectsIntroViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectsIntroViewController.swift; sourceTree = "<group>"; };
+		546A3C8D1CEB5BD100127D03 /* UIApplication+TopViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIApplication+TopViewController.swift"; sourceTree = "<group>"; };
 		549C6BCD1CCF558D0062435F /* MembershipPaymentTransactionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MembershipPaymentTransactionViewController.swift; sourceTree = "<group>"; };
 		549C6BCF1CCF6DCF0062435F /* CommonPaymentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommonPaymentViewController.xib; sourceTree = "<group>"; };
 		549C6BD11CCF98CF0062435F /* EplusPaymentTransactionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EplusPaymentTransactionViewController.swift; sourceTree = "<group>"; };
@@ -2928,6 +2930,7 @@
 			children = (
 				CDE1B90E1C5F678B00F76F32 /* LocalizedString.swift */,
 				5456528F1CCFB6B800C63C01 /* NSDate+pickUpAvaliabilityString.swift */,
+				546A3C8D1CEB5BD100127D03 /* UIApplication+TopViewController.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -6451,6 +6454,7 @@
 				E6F243701B8B17910033B13C /* DisplayModeViewController.swift in Sources */,
 				D15F47491C0B77D7009ED3FD /* AmbulanceBaseController.swift in Sources */,
 				5456528D1CCFAB4600C63C01 /* PaymentOrderDescriptionCell.swift in Sources */,
+				546A3C8E1CEB5BD100127D03 /* UIApplication+TopViewController.swift in Sources */,
 				E6F7A47D1BA356130069152A /* LocationCell.swift in Sources */,
 				5419F9941CC6C630000E16E7 /* EPlusSelectPlanTableViewFooterView.swift in Sources */,
 				184040261CC14A2B00DF3655 /* EPlusPlanInfoTableViewCell.swift in Sources */,
@@ -7210,7 +7214,6 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "PositionIn/PositionIn-Bridging-Header.h";
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
 			};
 			name = DevRelease;
 		};
@@ -8163,7 +8166,6 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = DevRelease;
@@ -8339,7 +8341,6 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "PositionIn/PositionIn-Bridging-Header.h";
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
 			};
 			name = DevRelease;
 		};

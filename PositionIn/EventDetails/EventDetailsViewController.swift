@@ -18,6 +18,7 @@ final class EventDetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = UIColor.groupTableViewBackgroundColor()
         title = NSLocalizedString("Event", comment: "Event details: title")
         dataSource.items = eventActionItems()
         dataSource.configureTable(actionTableView)
@@ -36,6 +37,16 @@ final class EventDetailsViewController: UIViewController {
                     strongSelf.didReceiveEventDetails(event)
                     strongSelf.dataSource.items = strongSelf.eventActionItems()
                     strongSelf.dataSource.configureTable(strongSelf.actionTableView)
+                    
+                    //If there is only 1 attachment, thant show it on current screen
+                    if let numberOfAttachments = strongSelf.event?.numberOfAttachments where numberOfAttachments == 1 {
+                        strongSelf.actionTableViewHeightConstraint.constant = strongSelf.actionTableView.contentSize.height
+                        strongSelf.addAttachmentSection()
+                    } else {
+                        //adjust scroll view content size based on table view height
+                        let scrollViewBottomSpaceHeight: CGFloat = 20
+                        strongSelf.actionTableViewHeightConstraint.constant = strongSelf.actionTableView.contentSize.height + scrollViewBottomSpaceHeight
+                    }
                 }
             }
         }
@@ -62,6 +73,13 @@ final class EventDetailsViewController: UIViewController {
             self.dataSource.items = self.eventActionItems()
             self.dataSource.configureTable(self.actionTableView)
         }
+    }
+    
+    private func addAttachmentSection() {
+        attechmentSectionHeightConstraint.constant = MoreInformationViewController.singleAttacmentViewHeight
+        let moreInformationViewController = MoreInformationViewController(links: event?.links, attachments: event?.attachments, bounces: false)
+        let attachmentsView = moreInformationViewController.view
+        attechmentSectionView.addSubview(attachmentsView)
     }
     
     private lazy var dataSource: EventDetailsDataSource = { [unowned self] in
@@ -93,7 +111,7 @@ final class EventDetailsViewController: UIViewController {
         if self.event?.location != nil {
             firstSection.append(EventActionItem(title: NSLocalizedString("Navigate", comment: "Event action: Navigate"), image: "productNavigate", action: .Navigate))
         }
-        if self.event?.links?.isEmpty == false || self.event?.attachments?.isEmpty == false {
+        if let numberOfAttachments = event?.numberOfAttachments where numberOfAttachments > 1 {
             firstSection.append(EventActionItem(title: NSLocalizedString("Attachments"), image: "productTerms&Info", action: .MoreInformation))
         }
         
@@ -106,9 +124,12 @@ final class EventDetailsViewController: UIViewController {
     private var event: Event?
     
     @IBOutlet private weak var actionTableView: UITableView!
+    @IBOutlet weak var actionTableViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet private weak var eventImageView: UIImageView!
     @IBOutlet private weak var headerLabel: UILabel!
     @IBOutlet private weak var infoLabel: UILabel!
+    @IBOutlet weak var attechmentSectionView: UIView!
+    @IBOutlet weak var attechmentSectionHeightConstraint: NSLayoutConstraint!
     
     @IBOutlet private weak var priceLabel: UILabel!
     @IBOutlet private weak var detailsLabel: UILabel!
