@@ -7,7 +7,9 @@ platform :ios do
         output_directory: "Build",
         clean: true,
         use_legacy_build_api: true,
-        export_method: "enterprise"
+        export_method: "enterprise",
+        provisioning_profile_path: "./Applications/RCKenya/fastlane/Distribution.com.connectik.members.dev.mobileprovision",
+        include_bitcode: false
         ) # Build app
     s3(
        html_template_path: './fastlane/redcross.erb',
