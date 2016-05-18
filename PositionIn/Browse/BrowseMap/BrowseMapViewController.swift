@@ -56,13 +56,6 @@ final class BrowseMapViewController: UIViewController, BrowseActionProducer, Bro
         }
      }
     
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        var frame = self.mapView.frame
-        frame.size.height = (homeItem == .GiveBlood) ? CGRectGetMinY(self.bannerButton.frame) : self.mapView.frame.size.height
-        self.mapView.frame = frame
-    }
-    
     var shouldApplySectionFilter = true
     var shouldReverseGeocodeCoordinate = false
     
