@@ -11,12 +11,13 @@ import BrightFutures
 
 protocol Fetcher {
     typealias FetchedObject : CRUDObject
-    func fetch(limit: Int, offset: Int) -> Future<CollectionResponse<FetchedObject>, NSError>
+    func fetch(limit: Int, offset: Int, searchString: String?) -> Future<CollectionResponse<FetchedObject>, NSError>
 }
 
 class ExploreUserFetcher : Fetcher {
-    func fetch(limit: Int, offset: Int) -> Future<CollectionResponse<UserInfo>, NSError> {
+    func fetch(limit: Int, offset: Int, searchString: String? = nil) -> Future<CollectionResponse<UserInfo>, NSError> {
         let page = APIService.Page(start: offset, size: limit)
-        return api().getUsers(page)
+        
+        return api().getUsers(page, searchString: searchString)
     }
 }

@@ -17,7 +17,6 @@ class FeedItem: CRUDObject {
     var descr: String?
     var details: String?
     var text: String?
-    var category: ItemCategory?
     var price: Float?
     var donations: Float?
     var startDate: NSDate?
@@ -61,7 +60,6 @@ class FeedItem: CRUDObject {
         descr <- map["desctiption"]
         details <- map["details"]
         text <- map["text"]
-        category <- (map["category"], EnumTransform())
         price <- map["price"]
         donations <- map["donations"]
         startDate <- (map["startDate"], APIDateTransform())

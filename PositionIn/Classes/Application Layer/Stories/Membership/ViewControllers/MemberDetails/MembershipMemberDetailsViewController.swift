@@ -182,7 +182,7 @@ class MembershipMemberDetailsViewController : BaseAddItemViewController {
     }
     
     func setupInterface() {
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Done"), style: UIBarButtonItemStyle.Plain, target: self, action: "didTapDone:")
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Done"), style: .Plain, target: self, action: "didTapDone:")
         self.title = "Member Details"
         self.navigationItem.hidesBackButton = true
         
@@ -223,7 +223,7 @@ class MembershipMemberDetailsViewController : BaseAddItemViewController {
 
             api().updateMyProfile(userProfile).onSuccess(callback: { [weak self] _ in
                 if let strongSelf = self {
-                    strongSelf.router.showMembershipMemberCardViewController(from: strongSelf)
+                    strongSelf.router.showMembershipMemberCardViewController(from: strongSelf, showBackButton: true)
                 }
             })
         }

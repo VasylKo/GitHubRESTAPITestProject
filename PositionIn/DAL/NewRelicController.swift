@@ -7,17 +7,31 @@
 //
 
 import Foundation
+import PosInCore
+
 
 final class NewRelicController {
-    static func start() {
+    
+    static let sharedInstance = NewRelicController()
+    private init() {} //This prevents others from using the default '()' initializer for this class.
+
+    func start() {
         #if DEBUG
             NewRelic.setApplicationBuild("Debug build")
+        #else
+            NewRelic.startWithApplicationToken(AppConfiguration().newRelicToken)
         #endif
-        NewRelic.startWithApplicationToken(AppConfiguration().newRelicToken)
+    
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("trackNetworkFailure:"), name: NewRelicObserverNotifications.networkFailureNotification, object: nil)
     }
     
-    static func logWithUser(name: String, var attributes: [String: String]) {
+    func logWithUser(name: String, var attributes: [String: String]) {
         attributes["UserId"] = api().currentUserId()
         NewRelic.recordEvent(name, attributes: attributes)
+    }
+    
+    @objc func trackNetworkFailure(notification: NSNotification) {
+        guard let userInfo = notification.userInfo else { return }
+        NewRelic.recordEvent("NetworkFailure", attributes: userInfo)
     }
 }

@@ -13,14 +13,7 @@ final class CommunityInfoCell: TableViewCell {
     override func setModel(model: TableViewCellModel) {
         let m = model as? BrowseCommunityInfoCellModel
         assert(m != nil, "Invalid model passed")
-        
-        let countFormat: String
-        switch m!.type {
-        case .Volunteer:
-            countFormat = NSLocalizedString("%d Volunteers", comment: "Browse community: count members")
-        default:
-            countFormat = NSLocalizedString("%d Members", comment: "Browse volunteering: count Volunteers")
-        }
+        self.countLabel.textAlignment = .Right
         
         if m!.isClosed {
             communityTypeLabel.text = NSLocalizedString("Closed")
@@ -31,6 +24,20 @@ final class CommunityInfoCell: TableViewCell {
             communityTypeIcon.image = UIImage(named: "public_comm")
         }
         
+        let countFormat: String
+        switch m!.type {
+        case .Volunteer:
+            communityTypeLabel.text = nil
+            communityTypeIcon.image = nil
+            countFormat = NSLocalizedString("%d Volunteers", comment: "Browse community: count members")
+            self.countLabel.removeConstraint(countLabelLeftMargin)
+            countLabelLeftMargin.constant = 0
+            self.updateConstraints()
+            self.countLabel.textAlignment = .Left
+        default:
+            countFormat = NSLocalizedString("%d Members", comment: "Browse volunteering: count Volunteers")
+        }
+        
         countLabel.text = (m!.membersCount).map { String(format:countFormat, $0) }
         descriptionLabel.text = m!.text
         
@@ -39,6 +46,7 @@ final class CommunityInfoCell: TableViewCell {
         self.separatorInset = UIEdgeInsetsZero
     }
     
+    @IBOutlet weak var countLabelLeftMargin: NSLayoutConstraint!
     @IBOutlet weak var communityTypeIcon: UIImageView!
     @IBOutlet weak var communityTypeLabel: UILabel!
     @IBOutlet weak var countLabel: UILabel!

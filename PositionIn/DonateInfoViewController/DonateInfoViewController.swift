@@ -25,7 +25,8 @@ class DonateInfoViewController: UIViewController {
             self.donateToLabel.text = donateToString
         }
         else {
-            self.donateToLabel.text = NSLocalizedString("Kenya Red Cross Society")
+            let appFullTitle = AppConfiguration().appFullTitle
+            self.donateToLabel.text = NSLocalizedString(appFullTitle)
         }
         
     }

@@ -56,7 +56,6 @@ class FeedListViewController: UIViewController {
         self.tableView.hidden = true
         var filter = SearchFilter()
         filter.isFeatured = true
-        filter.categories = nil
         filter.startPrice = nil
         filter.endPrice = nil
         var page = APIService.Page(start: 0, size: 1)

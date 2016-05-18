@@ -104,7 +104,7 @@ final class APIService {
         return "API: \(baseURL.absoluteString)"
     }
     
-    //pushes
+    //MARK: - Push Notification -
     
     func setDeviceToken(deviceToken: String?) {
         sessionController.setDeviceToken(deviceToken)
@@ -131,27 +131,6 @@ final class APIService {
     
     //MARK: - Profile -
     
-    func changePassword(oldPassword: String?, newPassword: String?) -> Future<Void, NSError> {
-        typealias CRUDResultType = (Alamofire.Request, Future<Void, NSError>)
-        let endpoint = UserProfile.changePasswordEndpoint()
-        var params: [String: String]? = nil
-        if let oldPassword = oldPassword,
-            let newPassword = newPassword {
-                params = ["oldPassword" : oldPassword, "newPassword" : newPassword]
-        }
-        
-        let futureBuilder: (Void -> Future<Void, NSError>) = { [unowned self] in
-            return self.session().flatMap {
-                (token: AuthResponse.Token) -> Future<Void, NSError> in
-                let request = self.updateRequest(token, endpoint: endpoint, method: .POST, params: params)
-                let (_, future): CRUDResultType = self.dataProvider.jsonRequest(request, map: self.commandMapping(), validation: nil)
-                return future
-            }
-        }
-        
-        return self.handleFailure(futureBuilder)
-    }
-    
     func getMyProfile() -> Future<UserProfile, NSError> {
         let endpoint = UserProfile.myProfileEndpoint()
         return getObject(endpoint)
@@ -171,21 +150,17 @@ final class APIService {
     
     func getDonations(userId: CRUDObjectId) -> Future<CollectionResponse<Order>, NSError> {
         let endpoint = "/v1.0/payments/users/\(userId)/donations"
-        return getObjectsCollection(endpoint, params: nil)
+        let page = Page(start: 0, size: 200)
+        return getObjectsCollection(endpoint, params: page.query)
     }
     
     func getOrders(userId: CRUDObjectId, reason: String) -> Future<CollectionResponse<Order>, NSError> {
         let endpoint = "/v1.0/payments/users/\(userId)/orders/\(reason)"
-        return getObjectsCollection(endpoint, params: nil)
+        let page = Page(start: 0, size: 200)
+        return getObjectsCollection(endpoint, params: page.query)
     }
     
     //MARK: - Posts -
-    
-    func getUserPosts(userId: CRUDObjectId, page: Page) -> Future<CollectionResponse<Post>, NSError> {
-        let endpoint = Post.userPostsEndpoint(userId)
-        let params = page.query
-        return getObjectsCollection(endpoint, params: params)
-    }
     
     func getPost(postId: CRUDObjectId) -> Future<Post, NSError> {
         let endpoint = Post.endpoint(postId)
@@ -194,9 +169,9 @@ final class APIService {
     
     func getPostComments(postId: CRUDObjectId) -> Future<CollectionResponse<Comment>, NSError> {
         let endpoint = "/v1.0/posts/\(postId)/comments"
-        return getObjectsCollection(endpoint, params: nil)
+        let page = Page(start: 0, size: 50)
+        return getObjectsCollection(endpoint, params: page.query)
     }
-    
     
     func createUserPost(post object: Post) -> Future<Post, NSError> {
         return currentUserId().flatMap {
@@ -226,32 +201,6 @@ final class APIService {
         return createObject(endpoint, object: object)
     }
     
-    //MARK: - Promotions -
-    
-    func getUserPromotions(userId: CRUDObjectId, page: Page) -> Future<CollectionResponse<Promotion>, NSError> {
-        let endpoint = Promotion.endpoint()
-        let params = page.query
-        return getObjectsCollection(endpoint, params: params)
-    }
-    
-    func createUserPromotion(object: Promotion) -> Future<Promotion, NSError> {
-        return currentUserId().flatMap {
-            (userId: CRUDObjectId) -> Future<Promotion, NSError> in
-            let endpoint = Promotion.userPromotionsEndpoint(userId)
-            return self.createObject(endpoint, object: object)
-        }
-    }
-    
-    func createCommunityPromotion(communityId: CRUDObjectId, promotion object: Promotion) -> Future<Promotion, NSError> {
-        let endpoint = Promotion.communityPromotionsEndpoint(communityId)
-        return createObject(endpoint, object: object)
-    }
-
-    func getPromotion(objectId: CRUDObjectId) -> Future<Promotion, NSError> {
-        let endpoint = Promotion.endpoint(objectId)
-        return getObject(endpoint)
-    }
-    
     //MARK: - Events -
     
     func getUserEvents(userId: CRUDObjectId, page: Page) -> Future<CollectionResponse<Event>, NSError> {
@@ -260,19 +209,6 @@ final class APIService {
         return getObjectsCollection(endpoint, params: params)
     }
     
-    func createUserEvent(object: Event) -> Future<Event, NSError> {
-        return currentUserId().flatMap {
-            (userId: CRUDObjectId) -> Future<Event, NSError> in
-            let endpoint = Event.userEventsEndpoint(userId)
-            return self.createObject(endpoint, object: object)
-        }
-    }
-    
-    func createCommunityEvent(communityId: CRUDObjectId, event object: Event) -> Future<Event, NSError> {
-        let endpoint = Event.communityEventsEndpoint(communityId)
-        return createObject(endpoint, object: object)
-    }
-
     func getEvent(objectId: CRUDObjectId) -> Future<Event, NSError> {
         let endpoint = Event.endpoint(objectId)
         return getObject(endpoint)
@@ -282,21 +218,6 @@ final class APIService {
         let method: Alamofire.Method = attend ? Method.POST : Method.DELETE
         let endpoint = Event.endpointAttend(objectId)
         return updateCommand(endpoint, method: method)
-    }
-    
-    //MARK: - Products -
-    
-    func getUserProducts(userId: CRUDObjectId, page: Page) -> Future<CollectionResponse<Product>, NSError> {
-        return self.getUserProfile(userId).flatMap { profile -> Future<CollectionResponse<Product>, NSError> in
-            let endpoint = Product.shopItemsEndpoint(profile.defaultShopId)
-            let params = page.query
-            return self.getObjectsCollection(endpoint, params: params)
-        }
-    }
-
-    func createProduct(object: Product, inShop shop: CRUDObjectId) -> Future<Product, NSError> {
-        let endpoint = Product.shopItemsEndpoint(shop)
-        return self.createObject(endpoint, object: object)
     }
     
     //MARK: - Membership -
@@ -521,6 +442,18 @@ final class APIService {
         return self.handleFailure(futureBuilder)
     }
     
+    //MARK: - Give Blood
+    func getDonorInfo() -> Future<DonorInfo, NSError> {
+        let endpoint = DonorInfo.endpoint()
+        return getObject(endpoint)
+    }
+    
+    func updateDonorInfo(donorInfo: DonorInfo) -> Future<Void, NSError> {
+        let endpoint = DonorInfo.endpoint()
+        return updateObject(endpoint, object: donorInfo)
+    }
+    
+    
     //MARK: - Community -
     
     func getCommunities(page: Page) -> Future<CollectionResponse<Community>,NSError> {
@@ -531,22 +464,19 @@ final class APIService {
 
     func getUserVolunteers(userId: CRUDObjectId) -> Future<CollectionResponse<Community>,NSError> {
         let endpoint = Volunteer.userVolunteersEndpoint(userId)
-        return getObjectsCollection(endpoint, params: nil)
+        let page = Page(start: 0, size: 200)
+        return getObjectsCollection(endpoint, params: page.query)
     }
     
     func getUserCommunities(userId: CRUDObjectId) -> Future<CollectionResponse<Community>,NSError> {
         let endpoint = Community.userCommunitiesEndpoint(userId)
-        return getObjectsCollection(endpoint, params: nil)
+        let page = Page(start: 0, size: 200)
+        return getObjectsCollection(endpoint, params: page.query)
     }
     
     func getCommunity(communityId: CRUDObjectId) -> Future<Community, NSError> {
         let endpoint = Community.communityEndpoint(communityId)
         return getObject(endpoint)
-    }
-    
-    func createCommunity(community object: Community) -> Future<Community, NSError> {
-        let endpoint = Community.endpoint()
-        return createObject(endpoint, object: object)
     }
     
     func updateCommunity(community object: Community) -> Future<Void, NSError> {
@@ -602,9 +532,12 @@ final class APIService {
     
     //MARK: - People -
     
-    func getUsers(page: Page) -> Future<CollectionResponse<UserInfo>,NSError> {
+    func getUsers(page: Page, searchString: String? = nil) -> Future<CollectionResponse<UserInfo>,NSError> {
         let endpoint = UserProfile.endpoint()
-        let params = page.query
+        var params = page.query
+        if let searchString = searchString {
+            params["name"] = searchString
+        }
         return getObjectsCollection(endpoint, params: params)
     }
     
@@ -628,15 +561,20 @@ final class APIService {
         return handleFailure(futureBuilder)
     }
     
-    func getMySubscriptions() -> Future<CollectionResponse<UserInfo>,NSError> {
+    func getMySubscriptions(searchString: String? = nil) -> Future<CollectionResponse<UserInfo>,NSError> {
         return currentUserId().flatMap { userId in
-            return self.getUserSubscriptions(userId)
+            return self.getUserSubscriptions(userId, searchString: searchString)
         }
     }
     
-    func getUserSubscriptions(userId: CRUDObjectId) -> Future<CollectionResponse<UserInfo>,NSError> {
+    func getUserSubscriptions(userId: CRUDObjectId, searchString: String? = nil) -> Future<CollectionResponse<UserInfo>,NSError> {
         let endpoint = UserProfile.subscripttionEndpoint(userId)
-        return getObjectsCollection(endpoint, params: nil)
+        var params: [String : AnyObject] = [String : AnyObject]()
+        if let searchString = searchString {
+            params["name"] = searchString
+        }
+        
+        return getObjectsCollection(endpoint, params: params)
     }
     
     func getSubscriptionStateForUser(userId: CRUDObjectId) -> Future<UserProfile.SubscriptionState, NSError> {
@@ -710,7 +648,20 @@ final class APIService {
     
     func getAll(homeItem: HomeItem, seachFilter: SearchFilter) -> Future<CollectionResponse<FeedItem>,NSError> {
         let endpoint = homeItem.endpoint()
-        //TODO: should refactor
+        
+        var amountOfObjects = 25
+        switch homeItem {
+        case .Emergency, .GiveBlood, .News:
+            amountOfObjects = 100
+        case .Unknown:
+            amountOfObjects = 100
+        default:
+            break
+        }
+        let page = Page(start: 0, size: amountOfObjects)
+        
+        //TODO: Should refactor, questions to Alamofile send array paramethers
+        
         let params = APIServiceQuery()
         params.append("type", value: String(homeItem.rawValue))
         if let itemTypes = seachFilter.itemTypes {
@@ -726,7 +677,11 @@ final class APIService {
             params.append("communities", value: communities)
         }
         
-        var parameters = [String:AnyObject]()
+        if let users = seachFilter.users {
+            params.append("users", value: users)
+        }
+        
+        var parameters = page.query
         for (key, value) in params.query {
             if let array = value as? [String] {
                 parameters[key] = array.joinWithSeparator(",")
@@ -740,18 +695,8 @@ final class APIService {
     
     func getVolunteers() -> Future<CollectionResponse<Community>,NSError> {
         let endpoint = HomeItem.Volunteer.endpoint()
-        let method: Alamofire.Method = .GET
-        
-        let futureBuilder: (Void -> Future<CollectionResponse<Community>, NSError>) = { [unowned self] in
-            return self.session().flatMap {
-                (token: AuthResponse.Token) -> Future<CollectionResponse<Community>, NSError> in
-                let request = self.updateRequest(token, endpoint: endpoint, method: method)
-                let (_ , future): (Alamofire.Request, Future<CollectionResponse<Community>, NSError>) = self.dataProvider.objectRequest(request)
-                return future
-            }
-        }
-        
-        return self.handleFailure(futureBuilder)
+        let page = Page(start: 0, size: 100)
+        return getObjectsCollection(endpoint, params: page.query)
     }
     
     func getCountyBranches(page: Page) -> Future<CollectionResponse<Community>, NSError> {
@@ -793,9 +738,23 @@ final class APIService {
         return self.handleFailure(futureBuilder)
     }
     
+    //MARK: - Get Object Details -
+    
+    private func getOne(endpoint: String) -> Future<Product, NSError> {
+        let futureBuilder: (Void -> Future<Product, NSError>) = { [unowned self] in
+            self.session().flatMap {
+                (token: AuthResponse.Token) -> Future<Product, NSError> in
+                let request = self.updateRequest(token, endpoint: endpoint, params: nil, method: .GET)
+                let (_ , future): (Alamofire.Request, Future<Product, NSError>) = self.dataProvider.objectRequest(request)
+                return future
+            }
+        }
+        
+        return self.handleFailure(futureBuilder)
+    }
+    
     func getProjectsDetails(objectId: CRUDObjectId) -> Future<Product, NSError> {
         let endpont = HomeItem.Projects.endpoint(objectId)
-        //TODO need fix downcastng
         return self.getOne(endpont!)
     }
     
@@ -818,24 +777,12 @@ final class APIService {
         let endpont = HomeItem.Training.endpoint(objectId)
         return self.getOne(endpont!)
     }
-    
-    private func getOne(endpoint: String) -> Future<Product, NSError> {
-        let futureBuilder: (Void -> Future<Product, NSError>) = { [unowned self] in
-            self.session().flatMap {
-                (token: AuthResponse.Token) -> Future<Product, NSError> in
-                let request = self.updateRequest(token, endpoint: endpoint, params: nil, method: .GET)
-                let (_ , future): (Alamofire.Request, Future<Product, NSError>) = self.dataProvider.objectRequest(request)
-                return future
-            }
-        }
-    
-        return self.handleFailure(futureBuilder)
-    }
 
-    //MARK: - Notifications
+    //MARK: - System Notifications
 
     func getNotifications() -> Future<CollectionResponse<SystemNotification>, NSError> {
         let endpoint = SystemNotification.endpoint()
+        let page = Page(start: 0, size: 100)
         return getObjectsCollection(endpoint, params: nil)
     }
     
@@ -877,7 +824,7 @@ final class APIService {
         }
     }
     
-    //MARK: - MPesa requests
+    //MARK: - MPesa requests -
     
     func transactionStatusMpesa(transactionId: String) -> Future<String, NSError> {
         let endpoint = MPesaPayment.productCheckoutEndpoint(itemId: transactionId)
@@ -942,7 +889,7 @@ final class APIService {
         return self.handleFailure(futureBuilder)
     }
     
-    //MARK: - Braintree requests
+    //MARK: - Braintree requests -
 
     func getToken() -> Future<String, NSError> {
         let endpoint = BraintreePayment.tokenEndpoint()
@@ -1019,7 +966,6 @@ final class APIService {
     
     private func getObjectsCollection<C: CRUDObject>(endpoint: String, params: [String : AnyObject]?) -> Future<CollectionResponse<C>, NSError> {
         typealias CRUDResultType = (Alamofire.Request, Future<CollectionResponse<C>, NSError>)
-        
         let futureBuilder: (Void -> Future<CollectionResponse<C>, NSError>) = { [unowned self] in
             return self.session().flatMap {
                 (token: AuthResponse.Token) -> Future<CollectionResponse<C>, NSError> in
@@ -1308,5 +1254,4 @@ extension APIService {
         request.method = .POST
         return request
     }
-
 }

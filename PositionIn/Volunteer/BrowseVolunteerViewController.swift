@@ -120,11 +120,6 @@ class BrowseVolunteerViewController: BrowseCommunityViewController {
             }
         case .Invite:
             break
-        case .Edit:
-            let controller = Storyboards.NewItems.instantiateEditCommunityViewController()
-            controller.existingCommunityId = communityId
-            navigationController?.pushViewController(controller, animated: true)
-            self.subscribeForContentUpdates(controller)
         case .Leave:
             api().leaveVolunteer(communityId).onSuccess(callback: { (Void) -> Void in
                 self.reloadData()

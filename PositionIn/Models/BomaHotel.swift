@@ -13,7 +13,6 @@ struct BomaHotel: CRUDObject {
     var objectId: CRUDObjectId = CRUDObjectInvalidId
     var name: String?
     var text: String?
-    var category: ItemCategory?
     var quantity: Int?
     var price: Float?
     var donations: Float?
@@ -24,6 +23,12 @@ struct BomaHotel: CRUDObject {
     var bookingURL : NSURL?
     var links : [NSURL]?
     var attachments : [Attachment]?
+    
+    var numberOfAttachments: Int {
+        let linksCount = links?.count ?? 0
+        let mediaAttachmentsCount = attachments?.count ?? 0
+        return linksCount + mediaAttachmentsCount
+    }
     
     enum DeliveryMethod: Int {
         case Unknown
@@ -48,7 +53,6 @@ struct BomaHotel: CRUDObject {
         objectId <- (map["id"], CRUDObjectIdTransform())
         name <- map["name"]
         text <- map["description"]
-        category <- (map["category"], EnumTransform())
         quantity <- map["quantity"]
         price <- map["price"]
         donations <- map["donations"]

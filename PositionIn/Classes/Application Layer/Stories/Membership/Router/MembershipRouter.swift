@@ -16,7 +16,7 @@ protocol MembershipRouter : BaseRouter {
     
     func showMembershipMemberProfile(from sourceViewController : UIViewController, phoneNumber : String, validationCode : String)
 
-    func showMembershipMemberCardViewController(from sourceViewController : UIViewController)
+    func showMembershipMemberCardViewController(from sourceViewController : UIViewController, showBackButton: Bool)
 
     func showMembershipConfirmDetailsViewController(from sourceViewController : UIViewController, with plan : MembershipPlan)
     
@@ -26,9 +26,7 @@ protocol MembershipRouter : BaseRouter {
     
     func showMemberDetailsViewController(from sourceViewController : UIViewController)
     
-    func showMPesaConfirmPaymentViewController(from sourceViewController : UIViewController, with plan : MembershipPlan)
-    
-    func showBraintreeConfirmPaymentViewController(from sourceViewController : UIViewController, with plan : MembershipPlan, creditCardPaymentSuccess: Bool?)
+    func showMembershipPaymentTransactionViewController(from sourceViewController : UIViewController, withPaymentSystem : PaymentSystem)
     
     func dismissMembership(from sourceViewController : UIViewController)
 }

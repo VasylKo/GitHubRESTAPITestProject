@@ -13,7 +13,6 @@ struct Product: CRUDObject {
     var objectId: CRUDObjectId = CRUDObjectInvalidId
     var name: String?
     var text: String?
-    var category: ItemCategory?
     var quantity: Int?
     var price: Float?
     var donations: Float?
@@ -30,6 +29,12 @@ struct Product: CRUDObject {
     var numOfBeneficiaries: Int?
     var distanceString: String?
     var date: NSDate?
+    
+    var numberOfAttachments: Int {
+        let linksCount = links?.count ?? 0
+        let mediaAttachmentsCount = attachments?.count ?? 0
+        return linksCount + mediaAttachmentsCount
+    }
     
 /*
     //TODO:
@@ -71,7 +76,6 @@ struct Product: CRUDObject {
         objectId <- (map["id"], CRUDObjectIdTransform())
         name <- map["name"]
         text <- map["description"]
-        category <- (map["category"], EnumTransform())
         quantity <- map["quantity"]
         price <- map["price"]
         donations <- map["donations"]

@@ -21,15 +21,6 @@ extension XLFormOptionsObject {
         return formValue() as? CRUDObjectId
     }
     
-    class func formOptionsObjectWithItemCategory(category: ItemCategory) -> XLFormOptionsObject! {
-        return XLFormOptionsObject(value: category.rawValue, displayText: category.displayString())
-    }
-    
-    var itemCatefory: ItemCategory? {
-        return enumValue()
-    }
-    
-    
     class func formOptionsObjectWithSearchDistance(distance: SearchFilter.Distance) -> XLFormOptionsObject! {
         return XLFormOptionsObject(value: distance.rawValue, displayText: distance.displayString())
     }

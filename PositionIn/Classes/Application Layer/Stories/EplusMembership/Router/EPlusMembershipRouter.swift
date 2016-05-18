@@ -26,9 +26,7 @@ protocol EPlusMembershipRouter : BaseRouter {
     
     func showMemberDetailsViewController(from sourceViewController : UIViewController)
     
-    func showMPesaConfirmPaymentViewController(from sourceViewController : UIViewController, with plan : EPlusMembershipPlan)
-    
-    func showBraintreeConfirmPaymentViewController(from sourceViewController : UIViewController, with plan : EPlusMembershipPlan, creditCardPaymentSuccess: Bool?)
+    func showMembershipPaymentTransactionViewController(from sourceViewController : UIViewController, withPaymentSystem : PaymentSystem, plan: EPlusMembershipPlan)
     
     func showCallAmbulanceViewController(from sourceViewController : UIViewController)
     

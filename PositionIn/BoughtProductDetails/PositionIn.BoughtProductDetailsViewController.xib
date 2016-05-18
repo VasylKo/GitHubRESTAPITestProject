@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BoughtProductDetailsViewController" customModule="PositionIn" customModuleProvider="target">
             <connections>
                 <outlet property="actionTableView" destination="xxH-tk-HnA" id="7vy-IZ-abs"/>
+                <outlet property="actionTableViewHeightConstraint" destination="J96-m1-T4W" id="0fa-LD-nfe"/>
+                <outlet property="attechmentSectionHeightConstraint" destination="UvT-c6-3ZO" id="gke-Sj-dc1"/>
+                <outlet property="attechmentSectionView" destination="Mo6-uO-vjT" id="pcD-6Z-RoL"/>
                 <outlet property="orderStatusLabel" destination="zwI-Yu-9R4" id="QRp-Gu-XrZ"/>
                 <outlet property="paymentDateLabel" destination="BuX-gm-GHF" id="2HI-Pl-Ufi"/>
                 <outlet property="paymentMethodLabel" destination="RPP-Nv-Eem" id="bla-VO-wsl"/>
@@ -29,14 +32,6 @@
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e7O-xn-jZ8">
                     <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                     <subviews>
-                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" style="plain" rowHeight="45" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="xxH-tk-HnA" customClass="TableView" customModule="PosInCore">
-                            <rect key="frame" x="0.0" y="395" width="600" height="400"/>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="400" id="J96-m1-T4W"/>
-                            </constraints>
-                            <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                        </tableView>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oQ7-Lq-gEx">
                             <rect key="frame" x="0.0" y="0.0" width="600" height="395"/>
                             <subviews>
@@ -379,17 +374,41 @@
                                 </mask>
                             </variation>
                         </view>
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" style="plain" rowHeight="45" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="xxH-tk-HnA" customClass="TableView" customModule="PosInCore">
+                            <rect key="frame" x="0.0" y="395" width="600" height="350"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="350" id="J96-m1-T4W"/>
+                            </constraints>
+                            <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        </tableView>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mo6-uO-vjT">
+                            <rect key="frame" x="0.0" y="745" width="600" height="0.0"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="height" id="UvT-c6-3ZO"/>
+                            </constraints>
+                        </view>
                     </subviews>
                     <constraints>
                         <constraint firstItem="xxH-tk-HnA" firstAttribute="top" secondItem="oQ7-Lq-gEx" secondAttribute="bottom" id="0fa-ma-GBX"/>
                         <constraint firstItem="oQ7-Lq-gEx" firstAttribute="top" secondItem="e7O-xn-jZ8" secondAttribute="top" id="5ti-HI-A1X"/>
+                        <constraint firstAttribute="trailing" secondItem="Mo6-uO-vjT" secondAttribute="trailing" id="OC2-Eh-dvM"/>
                         <constraint firstItem="xxH-tk-HnA" firstAttribute="leading" secondItem="e7O-xn-jZ8" secondAttribute="leading" id="Sa7-k7-ddy"/>
+                        <constraint firstItem="Mo6-uO-vjT" firstAttribute="leading" secondItem="e7O-xn-jZ8" secondAttribute="leading" id="dKb-Mg-kOH"/>
+                        <constraint firstItem="Mo6-uO-vjT" firstAttribute="top" secondItem="xxH-tk-HnA" secondAttribute="bottom" id="jxe-zc-FCn"/>
                         <constraint firstAttribute="trailing" secondItem="oQ7-Lq-gEx" secondAttribute="trailing" id="k4k-Rh-Z8p"/>
                         <constraint firstAttribute="bottom" secondItem="xxH-tk-HnA" secondAttribute="bottom" constant="-150" id="mxa-ry-MMv"/>
+                        <constraint firstAttribute="bottom" secondItem="Mo6-uO-vjT" secondAttribute="bottom" id="n6S-RB-5Vm"/>
                         <constraint firstAttribute="trailing" secondItem="xxH-tk-HnA" secondAttribute="trailing" id="nzS-28-iiW"/>
                         <constraint firstItem="oQ7-Lq-gEx" firstAttribute="leading" secondItem="e7O-xn-jZ8" secondAttribute="leading" id="qhF-8h-g4n"/>
                         <constraint firstItem="oQ7-Lq-gEx" firstAttribute="centerX" secondItem="e7O-xn-jZ8" secondAttribute="centerX" id="u7R-Ms-3IA"/>
                     </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="mxa-ry-MMv"/>
+                        </mask>
+                    </variation>
                 </scrollView>
             </subviews>
             <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>

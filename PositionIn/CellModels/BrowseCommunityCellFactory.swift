@@ -13,7 +13,7 @@ struct BrowseCommunityCellFactory {
     func modelsForCommunity(community: Community, mode: BrowseCommunityViewController.BrowseMode, actionConsumer: BrowseCommunityActionConsumer?, type: CommunityViewController.ControllerType) -> [TableViewCellModel] {
         var models: [TableViewCellModel] = []
         let tapAction = tapActionForCommunity(community)
-        models.append(BrowseCommunityHeaderCellModel(community: community, tapAction: tapAction, title:community.name ?? "", url:community.avatar, showInfo: false))
+        models.append(BrowseCommunityHeaderCellModel(community: community, tapAction: tapAction, title:community.name ?? "", url:community.avatar, showInfo: false, type: type))
         
         var isClosed = false
         switch type {

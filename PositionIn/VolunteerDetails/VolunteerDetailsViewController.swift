@@ -15,8 +15,8 @@ class VolunteerDetailsViewController: UIViewController {
         switch type {
         case .Volunteer:
             self.title = NSLocalizedString("Volunteer", comment:"")
-            communityTypeLabel.text = NSLocalizedString("Public")
-            communityTypeIcon.image = UIImage(named: "public_comm")
+            communityTypeLabel.text = nil
+            communityTypeIcon.image = nil
         case .Community:
             self.title = NSLocalizedString("Community", comment: "")
             if let closed = volunteer?.closed where closed == true {
@@ -110,16 +110,23 @@ class VolunteerDetailsViewController: UIViewController {
             locationRequestToken.invalidate()
             locationRequestToken = InvalidationToken()
             locationController().distanceStringFromCoordinate(coordinates).onSuccess() {
-                [weak self] distanceString in
-                self?.infoLabel.text = distanceString
+                [unowned self] distanceString in
+                self.infoLabel.text = distanceString
+                self.communityTypeIcon.removeConstraint(self.typeLabelLeftMargin)
+                self.view.updateConstraints()
                 }.onFailure(callback: { (error:NSError) -> Void in
                     self.pinDistanceImageView.hidden = true
-                    self.infoLabel.text = "" })
+                    self.infoLabel.text = ""
+                    self.typeLabelLeftMargin.constant = 8
+                    self.view.setNeedsUpdateConstraints()
+                })
             self.dataSource.items = self.productAcionItems()
             self.dataSource.configureTable(self.actionTableView)
         } else {
             self.pinDistanceImageView.hidden = true
             self.infoLabel.text = ""
+            self.typeLabelLeftMargin.constant = 8
+            self.view.setNeedsUpdateConstraints()
         }
     }
     
@@ -191,6 +198,7 @@ class VolunteerDetailsViewController: UIViewController {
         }
     }
     
+    @IBOutlet weak var typeLabelLeftMargin: NSLayoutConstraint!
     @IBOutlet private weak var communityTypeLabel: UILabel!
     @IBOutlet private weak var communityTypeIcon: UIImageView!
     @IBOutlet private weak var actionTableView: UITableView!

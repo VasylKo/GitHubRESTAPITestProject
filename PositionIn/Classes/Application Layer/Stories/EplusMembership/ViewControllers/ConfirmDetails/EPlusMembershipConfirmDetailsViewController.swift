@@ -390,7 +390,7 @@ class EPlusMembershipConfirmDetailsViewController : XLFormViewController {
             dateOfBirthRow.value = userProfile?.dateOfBirth
             
             additionalInfoSection.addFormRow(self.genderRow)
-            if let gender = userProfile?.gender {
+            if let gender = userProfile?.gender where gender == .Male || gender == .Female {
                 genderRow.value = XLFormOptionsObject(value: gender.rawValue, displayText: gender.description)
             }
             

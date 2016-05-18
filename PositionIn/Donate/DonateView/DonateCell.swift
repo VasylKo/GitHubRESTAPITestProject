@@ -27,6 +27,7 @@ class DonateCell: XLFormBaseCell {
     
     override func configure() {
         super.configure()
+        projectNameLabel.text = AppConfiguration().appFullTitle
     }
     
     override func update() {
@@ -34,9 +35,11 @@ class DonateCell: XLFormBaseCell {
     }
     
     override static func formDescriptorCellHeightForRowDescriptor(rowDescriptor: XLFormRowDescriptor!) -> CGFloat {
-        return 80
+        return DonateCell.cellHeight
     }
     
-    @IBOutlet private weak var projectIconImageView: UIImageView!
-    @IBOutlet private weak var projectNameLabel: UILabel!
+    static let cellHeight = CGFloat(80.0)
+    
+    @IBOutlet weak var projectIconImageView: UIImageView!
+    @IBOutlet weak var projectNameLabel: UILabel!
 }

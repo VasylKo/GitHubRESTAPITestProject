@@ -28,7 +28,6 @@ class NewsCardCell: TableViewCell {
         self.model = model as? CompactFeedTableCellModel
         assert(self.model != nil, "Invalid model passed")
         
-        
         if let liked = self.model?.item.isLiked {
             let image = liked == true ? UIImage(named:"ic_like_selected") : UIImage(named:"ic_like_up")
             self.likesButton.setImage(image, forState: .Normal)
@@ -65,15 +64,13 @@ class NewsCardCell: TableViewCell {
             self.newsTextLabel.text = text
         }
         
-        if let url = self.model?.avatarURL {
-            feedItemAvatarView.setImageFromURL(url)
-        }
+        feedItemAvatarView.setImageFromURL(self.model?.item.author?.avatar)
     }
     
     @IBAction func likesButtonPressed(sender: AnyObject) {
         if let delegate = self.model?.delegate,
             let item = self.model?.item  {
-                delegate.like(item)
+            delegate.like(item)
         }
     }
     

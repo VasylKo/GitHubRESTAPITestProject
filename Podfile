@@ -1,9 +1,7 @@
-# Uncomment this line to define a global platform for your project
 platform :ios, '8.0'
 use_frameworks!
 
-
-target 'PositionIn' do
+def common_pods
   pod 'KeychainAccess', '~> 2.3.1'
   pod 'HanekeSwift', '~> 0.10'
   pod 'KYDrawerController', '~> 1.1'
@@ -16,28 +14,35 @@ target 'PositionIn' do
   pod 'JSQMessagesViewController', '~> 7.2'
   pod 'Google/Analytics'
   pod 'PosInCore', :path => 'PosInCore'
-  pod 'RealmSwift', '~> 0.97.0'
+  pod 'RealmSwift', '~> 0.99'
   pod 'Fabric', '~> 1.0'
   pod 'Crashlytics', '~> 3.0'
   pod 'Braintree', '~> 4.1.2'
-  pod 'FBSDKCoreKit', '~> 4.7'
-  pod 'FBSDKLoginKit', '~> 4.7'
   pod 'Box', '~> 2.0'
   pod 'NewRelicAgent', '~> 5.3.6'
   pod 'CHCSVParser', '~> 2.1.0'
-  pod 'LNNotificationsUI', :git => 'https://github.com/LeoNatan/LNNotificationsUI'
   pod 'TTTAttributedLabel', '~> 1.13'
-
-  post_install do |installer|
-    installer.pods_project.targets.each do |target|
-      if ['GoogleMaps'].include?(target.name) | ['RealmSwift'].include?(target.name) | ['Realm'].include?(target.name)
-        target.build_configurations.each do |config|
-          config.build_settings['ENABLE_BITCODE'] = 'NO'
-        end
-      end
-    end
-  end
-
+  pod 'LNNotificationsUI', :podspec => 'https://raw.githubusercontent.com/rkolchakov/LNNotificationsUI/master/LNNotificationsUI.podspec'
 end
 
+target 'RCKenya' do
+    common_pods
+end
 
+target 'RCSouthAfrica' do
+    common_pods
+end
+
+target 'RCRwanda' do
+    
+end
+
+post_install do |installer|
+    installer.pods_project.targets.each do |target|
+        if ['GoogleMaps'].include?(target.name) | ['RealmSwift'].include?(target.name) | ['Realm'].include?(target.name)
+            target.build_configurations.each do |config|
+                config.build_settings['ENABLE_BITCODE'] = 'NO'
+            end
+        end
+    end
+end

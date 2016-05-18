@@ -53,7 +53,7 @@ final class BrowseTabbar: UITabBar {
         ]
         delegate = self
         
-        self.tintColor = UIColor.bt_colorWithBytesR(237, g: 27, b: 46)
+        self.tintColor = UIScheme.mainThemeColor
     }
 }
 

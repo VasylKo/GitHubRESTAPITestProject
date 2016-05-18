@@ -9,7 +9,7 @@
 import UIKit
 
 class MembershipPageView: UIView {
-    
+    static let pageViewHeight: CGFloat = 50.0
     //MARK: Initializers
     
     private let pageCount: Int  //TODO make public available if need variable amount of steps
@@ -27,7 +27,7 @@ class MembershipPageView: UIView {
     
     override func sizeThatFits(size: CGSize) -> CGSize {
         let screenRect: CGRect = UIScreen.mainScreen().bounds;
-        return CGSize(width: screenRect.size.width, height: 50)
+        return CGSize(width: screenRect.size.width, height: MembershipPageView.pageViewHeight)
     }
     
     //MARK: Drawing

@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FeedEmergencyDetailsViewController" customModule="PositionIn" customModuleProvider="target">
             <connections>
+                <outlet property="attechmentSectionHeightConstraint" destination="7zK-gs-DYI" id="oah-N0-aXz"/>
+                <outlet property="attechmentSectionView" destination="BQS-F1-55n" id="SCN-On-YCd"/>
                 <outlet property="tableView" destination="ycM-al-5wZ" id="1tG-B7-XzW"/>
+                <outlet property="tableViewHeightConstraint" destination="y7y-fT-fTG" id="aAs-I2-AuZ"/>
                 <outlet property="view" destination="iN0-l3-epB" id="3ta-BV-7XF"/>
             </connections>
         </placeholder>
@@ -16,20 +19,58 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ycM-al-5wZ" customClass="TableView" customModule="PosInCore">
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2BT-sc-Ohn">
                     <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                    <color key="backgroundColor" red="0.93333333333333335" green="0.93333333333333335" blue="0.93333333333333335" alpha="1" colorSpace="calibratedRGB"/>
-                    <connections>
-                        <outlet property="delegate" destination="-1" id="VcS-ff-iTt"/>
-                    </connections>
-                </tableView>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3zh-sB-Ja0" userLabel="Content View">
+                            <rect key="frame" x="0.0" y="0.0" width="600" height="300"/>
+                            <subviews>
+                                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ycM-al-5wZ" customClass="TableView" customModule="PosInCore">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="300"/>
+                                    <color key="backgroundColor" red="0.93333333333333335" green="0.93333333333333335" blue="0.93333333333333335" alpha="1" colorSpace="calibratedRGB"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="300" id="y7y-fT-fTG"/>
+                                    </constraints>
+                                    <connections>
+                                        <outlet property="delegate" destination="-1" id="VcS-ff-iTt"/>
+                                    </connections>
+                                </tableView>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BQS-F1-55n">
+                                    <rect key="frame" x="0.0" y="300" width="600" height="0.0"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" id="7zK-gs-DYI"/>
+                                    </constraints>
+                                </view>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstItem="BQS-F1-55n" firstAttribute="top" secondItem="ycM-al-5wZ" secondAttribute="bottom" id="2uS-0b-OKa"/>
+                                <constraint firstItem="ycM-al-5wZ" firstAttribute="leading" secondItem="3zh-sB-Ja0" secondAttribute="leading" id="4yk-bB-C1f"/>
+                                <constraint firstAttribute="trailing" secondItem="BQS-F1-55n" secondAttribute="trailing" id="RHc-QA-7NA"/>
+                                <constraint firstAttribute="trailing" secondItem="ycM-al-5wZ" secondAttribute="trailing" id="WKS-LK-bgT"/>
+                                <constraint firstAttribute="bottom" secondItem="BQS-F1-55n" secondAttribute="bottom" id="Wgj-P7-H1U"/>
+                                <constraint firstItem="ycM-al-5wZ" firstAttribute="top" secondItem="3zh-sB-Ja0" secondAttribute="top" id="aGN-tx-vnl"/>
+                                <constraint firstItem="BQS-F1-55n" firstAttribute="leading" secondItem="3zh-sB-Ja0" secondAttribute="leading" id="zsE-H7-IcE"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="3zh-sB-Ja0" secondAttribute="trailing" id="8yQ-Tx-Eo4"/>
+                        <constraint firstItem="3zh-sB-Ja0" firstAttribute="top" secondItem="2BT-sc-Ohn" secondAttribute="top" id="Lif-ub-MwR"/>
+                        <constraint firstItem="3zh-sB-Ja0" firstAttribute="leading" secondItem="2BT-sc-Ohn" secondAttribute="leading" id="acb-cP-me3"/>
+                        <constraint firstAttribute="bottom" secondItem="3zh-sB-Ja0" secondAttribute="bottom" id="eyT-op-A9s"/>
+                    </constraints>
+                </scrollView>
             </subviews>
             <color key="backgroundColor" red="0.93333333333333335" green="0.93333333333333335" blue="0.93333333333333335" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="ycM-al-5wZ" secondAttribute="trailing" id="UVs-ZU-jJy"/>
-                <constraint firstAttribute="bottom" secondItem="ycM-al-5wZ" secondAttribute="bottom" id="VrV-9W-xLQ"/>
-                <constraint firstItem="ycM-al-5wZ" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="ngj-ev-lsM"/>
-                <constraint firstItem="ycM-al-5wZ" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="z2a-Hf-fZk"/>
+                <constraint firstAttribute="trailing" secondItem="2BT-sc-Ohn" secondAttribute="trailing" id="PRS-AC-qzp"/>
+                <constraint firstItem="2BT-sc-Ohn" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="iWl-1E-YJt"/>
+                <constraint firstItem="3zh-sB-Ja0" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" id="ibm-7Q-JdY"/>
+                <constraint firstAttribute="bottom" secondItem="2BT-sc-Ohn" secondAttribute="bottom" id="mf5-7W-abb"/>
+                <constraint firstItem="2BT-sc-Ohn" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="wd0-ku-rBy"/>
             </constraints>
         </view>
     </objects>

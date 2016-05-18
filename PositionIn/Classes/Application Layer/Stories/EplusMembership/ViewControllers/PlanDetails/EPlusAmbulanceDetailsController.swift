@@ -301,9 +301,9 @@ extension EPlusAmbulanceDetailsController: UITableViewDataSource {
                 let moreThatString = "More than"
                 let text = String("\(moreThatString) \(minParticipants)")
                 let attributedText = NSMutableAttributedString(string:text)
-                attributedText.addAttribute(NSFontAttributeName, value:UIFont(name: "Helvetica", size: 15)!,
+                attributedText.addAttribute(NSFontAttributeName, value: UIScheme.appRegularFontOfSize(15),
                     range: (text as NSString).rangeOfString(moreThatString))
-                attributedText.addAttribute(NSFontAttributeName, value:UIFont(name: "Helvetica", size: 25)!,
+                attributedText.addAttribute(NSFontAttributeName, value: UIScheme.appRegularFontOfSize(25),
                     range: (text as NSString).rangeOfString("\(minParticipants)"))
                 cell.attributedPeopleAmountString = attributedText
             }

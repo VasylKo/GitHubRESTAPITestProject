@@ -35,7 +35,8 @@ class NewsListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = NSLocalizedString("KRCS News")
+        let appShortTitle = AppConfiguration().appShortTitle
+        self.title = NSLocalizedString("\(appShortTitle) News")
         
         dataSource.configureTable(self.tableView)
         self.reloadData()

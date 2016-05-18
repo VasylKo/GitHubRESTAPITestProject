@@ -21,8 +21,9 @@ final class MainMenuCell: TableViewCell {
         titleLabel?.text = m!.title
         let image = UIImage(named: m!.image)
         iconImageView.image = image
-        iconImageView.tintColor = UIColor.bt_colorWithBytesR(237, g: 27, b: 46)
+        iconImageView.tintColor = UIScheme.mainThemeColor
         iconImageView.highlightedImage = image?.imageWithRenderingMode(.AlwaysTemplate)
+        selectionIndicatorView.backgroundColor = UIScheme.mainThemeColor
     }
     
     override func setSelected(selected: Bool, animated: Bool) {

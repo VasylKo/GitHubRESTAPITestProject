@@ -1,4 +1,4 @@
-	//
+//
 //  BrowseListViewController.swift
 //  PositionIn
 //
@@ -11,13 +11,13 @@ import PosInCore
 import CleanroomLogger
 import BrightFutures
 
-final class BrowseListViewController: UIViewController, BrowseActionProducer, BrowseModeDisplay, UpdateFilterProtocol {
+class BrowseListViewController: UIViewController, BrowseActionProducer, BrowseModeDisplay, UpdateFilterProtocol {
     var excludeCommunityItems = false
     var shoWCompactCells: Bool = true
     var showCardCells: Bool = false
     var homeItem: HomeItem?
     private var dataRequestToken = InvalidationToken()
-
+    
     var browseMode: BrowseModeTabbarViewController.BrowseMode = .ForYou {
         didSet {
             switch browseMode {
@@ -29,17 +29,32 @@ final class BrowseListViewController: UIViewController, BrowseActionProducer, Br
         }
     }
     
-    //hide separator lines
-    var hideSeparatorLinesNearSegmentedControl: Bool = true
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         dataSource.configureTable(tableView)
+        self.setupUI()
+    }
+    
+    
+    func setupUI() {
         selectedItemType = .Unknown
         
+        if (UIScreen.mainScreen().bounds.size.width == 375) { //check if iphone 6
+            self.bannerButton.setBackgroundImage(UIImage(named: "pledge_banner_iphone6"), forState: .Normal)
+        }
+        
+        if homeItem == .GiveBlood {
+            self.bannerButton.hidden = false
+            self.tableViewBottomContraint.constant = 60
+        }
+        else {
+            self.bannerButton.hidden = true
+            self.tableViewBottomContraint.constant = 0
+            
+        }
+        
+        self.view.setNeedsUpdateConstraints()
         self.tableView.separatorStyle = self.showCardCells ? .None : .SingleLine
-        self.topSeparatorLine.hidden = hideSeparatorLinesNearSegmentedControl
-        self.bottomSeparatorLine.hidden = hideSeparatorLinesNearSegmentedControl
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -52,28 +67,16 @@ final class BrowseListViewController: UIViewController, BrowseActionProducer, Br
         
     }
     
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        self.topSeparatorHeightConstraint.constant = 1 / UIScreen.mainScreen().scale
-        self.bottomSeparatorHeightConstraint.constant = 1 / UIScreen.mainScreen().scale
-    }
-    
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-
+        
         if let fromViewController = self.navigationController?.transitionCoordinator()?.viewControllerForKey(UITransitionContextFromViewControllerKey) {
             if self.navigationController?.viewControllers.contains(fromViewController) == false {
                 self.reloadData()
             }
         }
-
-        //TODO: hot fix for distance 
-        let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(1 * Double(NSEC_PER_SEC)))
-        dispatch_after(delayTime, dispatch_get_main_queue()) { [weak self] in
-    //        self?.tableView.reloadData()
-        }
     }
-        
+    
     var filter = SearchFilter.currentFilter {
         didSet {
             if isViewLoaded() {
@@ -81,7 +84,7 @@ final class BrowseListViewController: UIViewController, BrowseActionProducer, Br
             }
         }
     }
-
+    
     func applyFilterUpdate(update: SearchFilterUpdate) {
         canAffectFilter = false
         filter = update(filter)
@@ -89,9 +92,6 @@ final class BrowseListViewController: UIViewController, BrowseActionProducer, Br
     
     var canAffectFilter = true {
         didSet {
-            if self.isViewLoaded() {
-                self.displayModeSegmentedControl.selectedSegmentIndex = 0
-            }
             selectedItemType = .Unknown
         }
     }
@@ -105,7 +105,7 @@ final class BrowseListViewController: UIViewController, BrowseActionProducer, Br
             filter = f
         }
     }
-
+    
     func reloadData() {
         getFeedItems(filter)
     }
@@ -133,7 +133,7 @@ final class BrowseListViewController: UIViewController, BrowseActionProducer, Br
             }
             
             Log.debug?.value(response.items)
-
+            
             var items: [FeedItem] = response.items
             if strongSelf.excludeCommunityItems {
                 items = items.filter { $0.community == CRUDObjectInvalidId }
@@ -146,40 +146,46 @@ final class BrowseListViewController: UIViewController, BrowseActionProducer, Br
         }
     }
     
-    @IBOutlet weak var topSeparatorLine: UIView!
-    @IBOutlet weak var bottomSeparatorLine: UIView!
-    
-    @IBOutlet weak var topSeparatorHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var bottomSeparatorHeightConstraint: NSLayoutConstraint!
-    
     private lazy var dataSource: FeedItemDatasource = { [unowned self] in
         let dataSource = FeedItemDatasource(shouldShowDetailedCells: self.shoWCompactCells,
-            showCardCells: self.showCardCells)
+                                            showCardCells: self.showCardCells)
         dataSource.parentViewController = self
         return dataSource
         }()
-
+    
     weak var actionConsumer: BrowseActionConsumer?
     
-    @IBOutlet private(set) internal weak var tableView: UITableView!
-    @IBOutlet private weak var displayModeSegmentedControl: UISegmentedControl!
-}
     
+    @IBAction func bannerTapped(sender: AnyObject) {
+        let url: NSURL? = NSURL(string: "http://www.pledge25kenya.org/")
+        if let url = url {
+            OpenApplication.Safari(with: url)
+        }
+    }
+    
+    @IBOutlet weak var tableViewBottomContraint: NSLayoutConstraint!
+    @IBOutlet weak var bannerButton: UIButton!
+    @IBOutlet private(set) internal weak var tableView: UITableView!
+}
+
 extension BrowseListViewController: ActionsDelegate {
     
     func like(item: FeedItem) {
         if (item.isLiked) {
-            api().unlikePost(item.objectId).onSuccess{[weak self] in
-                self?.reloadData()
-            }
+            api().unlikePost(item.objectId).onComplete(callback: { [weak self] _ in
+                dispatch_async(dispatch_get_main_queue(), {
+                    self?.reloadData()
+                })
+                })
         }
         else {
-            api().likePost(item.objectId).onSuccess{[weak self] in
-                self?.reloadData()
-            }
+            api().likePost(item.objectId).onComplete(callback: { [weak self] _ in
+                dispatch_async(dispatch_get_main_queue(), {
+                    self?.reloadData()
+                })
+                })
         }
     }
-    
 }
 
 extension BrowseListViewController {
@@ -218,30 +224,27 @@ extension BrowseListViewController {
         func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
             tableView.deselectRowAtIndexPath(indexPath, animated: true)
             if let model = self.tableView(tableView, modelForIndexPath: indexPath) as? FeedTableCellModel,
-               let actionProducer = parentViewController as? BrowseActionProducer,
-               let actionConsumer = self.actionConsumer {
+                let actionProducer = parentViewController as? BrowseActionProducer,
+                let actionConsumer = self.actionConsumer {
                 actionConsumer.browseController(actionProducer, didSelectItem: model.item.objectId, type: model.item.type, data: model.data)
             }
         }
         
         func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
             if let model = self.tableView(tableView, modelForIndexPath: indexPath) as? CompactFeedTableCellModel {
-                if model.item.type == .Post {
+                if model.item.type == .Post || model.item.type == .News {
                     var cellHeight: CGFloat = 125
                     cellHeight = (model.imageURL != nil) ? (cellHeight + 160) : cellHeight
-
+                    
                     if let text = model.text {
                         let maxSize = CGSize(width: UIScreen.mainScreen().applicationFrame.size.width - 80, height: CGFloat(MAXFLOAT))
                         let attrString = NSAttributedString.init(string: text, attributes: [NSFontAttributeName:UIFont.systemFontOfSize(17)])
                         let rect = attrString.boundingRectWithSize(maxSize, options: NSStringDrawingOptions.UsesLineFragmentOrigin, context: nil)
                         let size = CGSizeMake(rect.size.width, rect.size.height)
                         
-                        cellHeight += (size.height + 15)
+                        cellHeight += (size.height + 17)
                     }
-                    
-                    
                     return cellHeight
-                    
                 }
                 else {
                     let height: CGFloat = showCompactCells ? 75.0 : 100.0
@@ -260,17 +263,15 @@ extension BrowseListViewController {
             } else {
                 models = feedItems.map { self.modelFactory.detailedModelsForItem($0) }
             }
-
         }
         
         private var actionConsumer: BrowseActionConsumer? {
             return (parentViewController as? BrowseActionProducer).flatMap { $0.actionConsumer }
         }
-
+        
         let showCardCells: Bool
         let showCompactCells: Bool
         private var models: [[TableViewCellModel]] = []
         private let modelFactory = FeedItemCellModelFactory()
-        
     }
 }

@@ -1,0 +1,264 @@
+//
+//  AppDelegate.swift
+//  PositionIn
+//
+//  Created by Alexandr Goncharov on 09/07/15.
+//  Copyright (c) 2015 Soluna Labs. All rights reserved.
+//
+
+import UIKit
+import PosInCore
+import Alamofire
+import BrightFutures
+import CleanroomLogger
+import Messaging
+import GoogleMaps
+import XLForm
+import Braintree
+import Fabric
+import Crashlytics
+import LNNotificationsUI
+
+
+@UIApplicationMain
+class AppDelegate: UIResponder, UIApplicationDelegate {
+    
+    var window: UIWindow?
+    private(set) var api: APIService
+    private(set) var chatClient: XMPPClient
+    let locationController: LocationController
+    private var userDidChangeObserver: NSObjectProtocol!
+    
+    var sidebarViewController: SidebarViewController? {
+        return self.window?.rootViewController as? SidebarViewController
+    }
+    
+    override init() {
+        #if DEBUG
+            Log.enable(minimumSeverity: .Verbose, debugMode: true)
+        #else
+            Log.enable(minimumSeverity: .Info, debugMode: false)
+        #endif
+        let appConfig = AppConfiguration()
+        let urlSessionConfig = NSURLSessionConfiguration.defaultSessionConfiguration()
+        let baseURL = appConfig.baseURL
+        //FIXME: dissallow self signed certificates in the future
+        let trustPolicies: [String: ServerTrustPolicy]? = [
+            baseURL.host! : .DisableEvaluation
+            ]
+        let dataProvider = PosInCore.NetworkDataProvider(configuration: urlSessionConfig, trustPolicies: trustPolicies)
+        api = APIService(url: baseURL, dataProvider: dataProvider)
+        chatClient = XMPPClient()
+        locationController = LocationController()
+        
+        UINavigationBar.appearance().barTintColor = UIScheme.mainThemeColor
+        UINavigationBar.appearance().translucent = false
+        
+        super.init()
+        
+        userDidChangeObserver = NSNotificationCenter.defaultCenter().addObserverForName(
+            UserProfile.CurrentUserDidChangeNotification,
+            object: nil,
+            queue: nil) { [weak self] notification in
+                let newProfile = notification.object as? UserProfile
+                self?.currentUserDidChange(newProfile)
+        }
+        
+        let defaults = NSUserDefaults.standardUserDefaults()
+        
+        let kFirstRun = "kFirstRun"
+        if (defaults.objectForKey(kFirstRun) == nil) {
+            // FIXME: To fix POS-2417 neet to just uncommented it
+            // But it should be after next (after 19 version) deploing application to app store
+            // In commented to prevent logout after first instal with this logic
+            // But stayed logic with storing value in NSUserDefaults
+            //SessionController().clearKeychain()
+            
+            defaults.setBool(true, forKey: kFirstRun)
+        }
+    }
+    
+    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        setupMaps()
+        api.defaultErrorHandler = UIErrorHandler()
+        if SearchFilter.isCustomLocationSet == false {
+           SearchFilter.updateCurrentLocation()
+        }
+        api.recoverSession().onSuccess { [unowned self] _ in
+            self.sidebarViewController?.executeAction(SidebarViewController.defaultAction)
+        }.onFailure { [unowned self] error in
+            Log.error?.value(error)
+            self.sidebarViewController?.executeAction(.Login)
+        }
+        
+        // [START tracker_swift]
+        // Configure tracker from GoogleService-Info.plist.
+        var configureError: NSError?
+        GGLContext.sharedInstance().configureWithError(&configureError)
+        assert(configureError == nil, "Error configuring Google services: \(configureError)")
+        
+        // Optional: configure GAI options.
+        let gai = GAI.sharedInstance()
+        gai.trackUncaughtExceptions = true  // report uncaught exceptions
+        gai.logger.logLevel = AppConfiguration().googleAnalystLogLevel
+        
+        XLFormViewController.cellClassesForRowDescriptorTypes()[XLFormRowDescriptorTypeDonate] =
+        "DonateCell"
+        
+        XLFormViewController.cellClassesForRowDescriptorTypes()[XLFormRowDescriptorTypeMoreInformation] =
+        "MoreInformationCell"
+        
+        XLFormViewController.cellClassesForRowDescriptorTypes()[XLFormRowDescriptorTypeTotal] =
+        "TotalCell"
+
+        XLFormViewController.cellClassesForRowDescriptorTypes()[XLFormRowDescriptorTypeError] =
+        "ErrorCell"
+        
+        XLFormViewController.cellClassesForRowDescriptorTypes()[XLFormRowDescriptorTypePayment] =
+        "PaymentTableViewCell"
+        
+        XLFormViewController.cellClassesForRowDescriptorTypes()[XLFormRowDescriptorTypeMPesaBongaPinView] =
+        "MPesaBongaPinCell"
+        
+        XLFormViewController.cellClassesForRowDescriptorTypes()[XLFormRowDescriptorTypeDonationPaymentAmountCell] =
+        "DonationPaymentAmountCell"
+  
+        XLFormViewController.cellClassesForRowDescriptorTypes()[XLFormRowDescriptorTypeAmbulancePayment] =
+        "EplusPaymentTableViewCell"
+        
+        XLFormViewController.cellClassesForRowDescriptorTypes()[XLFormRowDescriptorTypeOrderHeder] =
+        "OrderHeaderViewCell"
+        
+        XLFormViewController.cellClassesForRowDescriptorTypes()[XLFormRowDescriptorTypeAvailabilityViewCell] =
+        "AvailabilityViewCell"
+        
+        XLFormViewController.cellClassesForRowDescriptorTypes()[XLFormRowDescriptorTypeTotalViewCell] =
+        "TotalViewCell"
+        
+        BTAppSwitch.setReturnURLScheme("\(NSBundle.mainBundle().bundleIdentifier!).payments")
+
+        let settings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound],
+            categories: nil)
+        UIApplication.sharedApplication().registerUserNotificationSettings(settings)
+        UIApplication.sharedApplication().registerForRemoteNotifications()
+        
+        #if DEBUG
+            Fabric.with([Crashlytics.self])
+        #endif
+        NewRelicController.sharedInstance.start()
+        
+        let notificationSettings = LNNotificationAppSettings()
+        notificationSettings.alertStyle = .Banner
+        notificationSettings.soundEnabled = false
+        LNNotificationCenter.defaultCenter().registerApplicationWithIdentifier("RedCross", name: "Red Cross", icon: UIImage(named: "push_notification_icon"), defaultSettings: notificationSettings);
+        
+        return true
+    }
+    
+    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
+        if url.scheme.localizedCaseInsensitiveCompare("\(NSBundle.mainBundle().bundleIdentifier!).payments") == .OrderedSame {
+            return BTAppSwitch.handleOpenURL(url, sourceApplication:sourceApplication)
+        }
+
+        return true
+    }
+    
+    func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
+
+        let characterSet: NSCharacterSet = NSCharacterSet( charactersInString: "<>" )
+        
+        let deviceTokenString: String = (deviceToken.description as NSString)
+            .stringByTrimmingCharactersInSet( characterSet )
+            .stringByReplacingOccurrencesOfString( " ", withString: "" ) as String
+        
+        api.setDeviceToken(deviceTokenString)
+        api.pushesRegistration()
+    }
+    
+    func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
+        //TODO: handle
+    }
+    
+    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
+        //TODO: should set push note message
+        let apsDictionary = userInfo["aps"]
+        if let alert = apsDictionary!["alert"] as? String {
+            
+            //don't show notification when on ambulance flow screens
+            let w : UIWindow = (UIApplication.sharedApplication().delegate?.window!)!
+            var isOnAmbulanceFlow = false
+            if let controllersInNavigation = ((w.rootViewController as? SidebarViewController)?.childViewControllers.last as? UINavigationController)?.viewControllers {
+                for controller in controllersInNavigation {
+                    if controller is CallAmbulanceViewController {
+                        isOnAmbulanceFlow = true
+                    }
+                }
+            }
+            if !isOnAmbulanceFlow {
+                let notification = LNNotification(message: alert)
+                LNNotificationCenter.defaultCenter().presentNotification(notification, forApplicationIdentifier: "RedCross")
+            }
+        }
+    }
+}
+
+extension AppDelegate {
+    
+    private class func chatClientInstance() -> XMPPClient {
+        let appConfig = AppConfiguration()
+        let chatConfig = XMPPClientConfiguration(appConfig.xmppHostname, port: appConfig.xmppPort)
+        let credentialsProvider = appDelegate().api.chatCredentialsProvider()
+        return XMPPClient(configuration: chatConfig, credentialsProvider: credentialsProvider)
+    }
+    
+    func currentUserDidChange(profile: UserProfile?) {
+        chatClient.disconnect()
+        if let user = profile {
+            let conversationManager = ConversationManager.sharedInstance()
+            conversationManager.updateUserId(user.objectId)
+            chatClient = AppDelegate.chatClientInstance()
+            chatClient.delegate = conversationManager
+            chatClient.auth()
+        }
+    }
+    
+    func setupMaps() {
+        GMSServices.provideAPIKey(AppConfiguration().googleMapsKey)
+    }
+    
+    func UIErrorHandler() -> APIService.ErrorHandler {
+        return { [unowned self] error in
+            Log.error?.value(error)
+            let baseErrorDomain: String = NetworkDataProvider.ErrorCodes.errorDomain
+            switch (error.domain, error.code) {
+            case (baseErrorDomain, NetworkDataProvider.ErrorCodes.SessionRevokedError.rawValue):
+                self.sidebarViewController?.executeAction(.Login)
+            case (baseErrorDomain, NetworkDataProvider.ErrorCodes.ParsingError.rawValue):
+                break
+            default:
+                showWarning(error.localizedDescription)
+            }
+        }
+    }
+}
+
+func appDelegate() -> AppDelegate {
+    return UIApplication.sharedApplication().delegate as! AppDelegate
+}
+
+func api() -> APIService {
+    return appDelegate().api
+}
+
+func locationController() -> LocationController {
+    return appDelegate().locationController
+}
+
+func chat() -> XMPPClient {
+    let applicationDelegate = appDelegate()
+    var chatClient: XMPPClient!
+    synced(applicationDelegate) {
+        chatClient = applicationDelegate.chatClient
+    }
+    return chatClient
+}

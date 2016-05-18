@@ -47,7 +47,7 @@ protocol BrowseModeDisplay {
             let browseGridController = Storyboards.Main.instantiateBrowseGridViewController()
             browseGridController.browseGridDelegate = self
             self.searchbar.attributedText = nil
-            self.navigationController?.navigationBar.barTintColor = UIColor.bt_colorWithBytesR(237, g: 27, b: 46)
+            self.navigationController?.navigationBar.barTintColor = UIScheme.mainThemeColor
             return browseGridController
         case .New:
             let listController = FeedListViewController(nibName: "FeedListViewController", bundle: nil)
@@ -202,7 +202,6 @@ protocol BrowseModeDisplay {
     }
  
 //MARK: - BrowseGridViewControllerDelegate
-    
     func browseGridViewControllerSelectItem(homeItem: HomeItem) {
         switch homeItem {
         case .Membership:
@@ -211,32 +210,41 @@ protocol BrowseModeDisplay {
             self.navigationController?.pushViewController(Storyboards.Main.instantiateBrowseVolunteerViewController(), animated: true)
         case .News:
             self.navigationController?.pushViewController(NewsContainerViewController(), animated: true)
-        case .Market: 
+        case .GiveBlood:
+            GiveBloodRouterImplementation().showInitialViewController(from: self)
+        case .Market:
             fallthrough
         case .BomaHotels:
             fallthrough
         case .Events:
-            fallthrough
-        case .GiveBlood:
             fallthrough
         case .Emergency:
             fallthrough
         case .Training:
             fallthrough
         case .Projects:
-            let controller = Storyboards.Main.instantiateExploreViewControllerId()
-            controller.homeItem = homeItem
-            let filterUpdate = { (filter: SearchFilter) -> SearchFilter in
-                var f = filter
-                let feedItemType = FeedItem.ItemType(rawValue: homeItem.rawValue)
-                if let feedItemType = feedItemType {
-                    f.itemTypes = [feedItemType]
+            // Check NSUserDefaults to show project intro page
+            let defaults = NSUserDefaults.standardUserDefaults()
+            let isProjectInroShowed = defaults.boolForKey(projectsIntroShowedKey)
+            if  !isProjectInroShowed && homeItem == .Projects {
+                let projectsIntroController = ProjectsIntroViewController()
+                projectsIntroController.browseGridDelegate = self
+                self.navigationController?.pushViewController(projectsIntroController, animated: true)
+            } else {
+                let controller = Storyboards.Main.instantiateExploreViewControllerId()
+                controller.homeItem = homeItem
+                let filterUpdate = { (filter: SearchFilter) -> SearchFilter in
+                    var f = filter
+                    let feedItemType = FeedItem.ItemType(rawValue: homeItem.rawValue)
+                    if let feedItemType = feedItemType {
+                        f.itemTypes = [feedItemType]
+                    }
+                    return f
                 }
-                return f
+                controller.childFilterUpdate = filterUpdate
+                controller.title = homeItem.displayString()
+                self.navigationController?.pushViewController(controller, animated: true)
             }
-            controller.childFilterUpdate = filterUpdate
-            controller.title = homeItem.displayString()
-            self.navigationController?.pushViewController(controller, animated: true)
         case .Donate:
             self.navigationController?.pushViewController(Storyboards.Onboarding.instantiateDonateViewController(), animated: true)
         case .Ambulance:

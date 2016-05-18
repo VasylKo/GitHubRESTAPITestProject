@@ -10,13 +10,16 @@ import Foundation
 import JDStatusBarNotification
 
 func showWarning(message: String) {
-    JDStatusBarNotification.showWithStatus(message, dismissAfter: 3.0, styleName: JDStatusBarStyleWarning)
+    let container = NotificationViewContainer(frame: CGRectZero)
+    container.show(title: message, type: .Yellow)
 }
 
 func showError(message: String) {
-    JDStatusBarNotification.showWithStatus(message, dismissAfter: 3.0, styleName: JDStatusBarStyleError)
+    let container = NotificationViewContainer(frame: CGRectZero)
+    container.show(title: message, type: .Yellow)
 }
 
 func showSuccess(message: String) {
-    JDStatusBarNotification.showWithStatus(message, dismissAfter: 3.0, styleName: JDStatusBarStyleSuccess)
+    let container = NotificationViewContainer(frame: CGRectZero)
+    container.show(title: message, type: .Green)
 }
