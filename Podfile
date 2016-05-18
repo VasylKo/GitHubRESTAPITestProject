@@ -34,7 +34,7 @@ target 'RCSouthAfrica' do
 end
 
 target 'RCRwanda' do
-    common_pods
+    
 end
 
 post_install do |installer|
