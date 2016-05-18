@@ -303,7 +303,7 @@ final class EditProfileViewController: BaseAddItemViewController, UserProfileAva
         aboutRow.value = userProfile?.userDescription
         
         // Init personal info section
-        if let gender = userProfile?.gender {
+        if let gender = userProfile?.gender where gender == .Male || gender == .Female {
             genderRow.value = XLFormOptionsObject(value: gender.rawValue, displayText: gender.description)
         }
         dateOfBirthRow.value = userProfile?.dateOfBirth
