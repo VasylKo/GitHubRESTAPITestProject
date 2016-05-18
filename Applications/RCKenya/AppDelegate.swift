@@ -84,11 +84,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if SearchFilter.isCustomLocationSet == false {
            SearchFilter.updateCurrentLocation()
         }
-        api.recoverSession().onSuccess { [unowned self] _ in
-            self.sidebarViewController?.executeAction(SidebarViewController.defaultAction)
-        }.onFailure { [unowned self] error in
+        
+        self.sidebarViewController?.executeAction(SidebarViewController.defaultAction)
+        api.recoverSession().onFailure { [unowned self] error in
             Log.error?.value(error)
-            self.sidebarViewController?.executeAction(.Login)
+            
+            if let e = NetworkDataProvider.ErrorCodes.fromError(error) where e == .SessionRevokedError {
+                self.sidebarViewController?.executeAction(.Login)
+            }
         }
         
         // [START tracker_swift]
