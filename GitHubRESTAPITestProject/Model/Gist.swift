@@ -17,13 +17,10 @@ class Gist: ResponseJSONObjectSerializable {
     var url: String?
     
     required init(json: JSON) {
-        self.description = json["description"].string
-        self.id = json["id"].string
-        self.ownerLogin = json["owner"]["login"].string
-        self.ownerAvatarURL = json["owner"]["avatar_url"].string
-        self.url = json["url"].string
-    }
-    
-    required init() {
+        description = json["description"].string
+        id = json["is"].string
+        ownerLogin = json["owner"]["login"].string
+        ownerAvatarURL = json["owner"]["avatar_url"].string
+        url = json["url"].string
     }
 }
