@@ -40,6 +40,7 @@ class ExploreViewController: DisplayModeViewController {
             case .Map:
                 let mapController = Storyboards.Main.instantiateBrowseMapViewController()
                 mapController.delegate = self
+                mapController.homeItem = homeItem
                 return mapController
             case .List:
                 let listController = Storyboards.Main.instantiateBrowseListViewController()

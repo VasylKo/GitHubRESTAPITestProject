@@ -25,6 +25,24 @@ final class BrowseMapViewController: UIViewController, BrowseActionProducer, Bro
             self.shouldReverseGeocodeCoordinate = false
             self.mapMovementEnd( CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude))
         }
+        self.setupUI()
+    }
+    
+    func setupUI() {
+        if (UIScreen.mainScreen().bounds.size.width == 375) { //check if iphone 6
+            self.bannerButton.setBackgroundImage(UIImage(named: "pledge_banner_iphone6"), forState: .Normal)
+        }
+        if homeItem == .GiveBlood {
+            self.bannerButton.hidden = false
+            self.mapViewContainerBottomMargin.constant = 60
+        }
+        else {
+            self.bannerButton.hidden = true
+            self.mapViewContainerBottomMargin.constant = 0
+        }
+        
+        self.view.setNeedsUpdateConstraints()
+        
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -47,6 +65,7 @@ final class BrowseMapViewController: UIViewController, BrowseActionProducer, Bro
     
     var filter = SearchFilter.currentFilter
     
+    var homeItem: HomeItem?
     weak var actionConsumer: BrowseActionConsumer?
     weak var delegate: BrowseMapViewControllerDelegate?
     
@@ -58,8 +77,9 @@ final class BrowseMapViewController: UIViewController, BrowseActionProducer, Bro
         map.settings.myLocationButton = true
         map.settings.indoorPicker = false
         map.myLocationEnabled = true
-        self.view.addSubViewOnEntireSize(map)
+        self.mapViewContainer.addSubViewOnEntireSize(map)
         map.delegate = self
+        self.view.bringSubviewToFront(self.bannerButton)
         return map
     }()
     
@@ -106,6 +126,17 @@ final class BrowseMapViewController: UIViewController, BrowseActionProducer, Bro
     }
     
     private var markers = [GMSMarker]()
+    
+    @IBAction func bannerTapped(sender: AnyObject) {
+        let url: NSURL? = NSURL(string: "http://www.pledge25kenya.org/")
+        if let url = url {
+            OpenApplication.Safari(with: url)
+        }
+    }
+    
+    @IBOutlet weak var mapViewContainerBottomMargin: NSLayoutConstraint!
+    @IBOutlet weak var mapViewContainer: UIView!
+    @IBOutlet weak var bannerButton: UIButton!
 }
 
 
@@ -137,7 +168,11 @@ extension BrowseMapViewController: GMSMapViewDelegate {
         f.coordinates = coordinate
         
         //MARK: should refactor
-        let homeItem = HomeItem.News
+        var homeItem = HomeItem.Unknown
+        if let homeItemUnwrapped = self.homeItem {
+            homeItem = homeItemUnwrapped
+        }
+        
         let request: Future<CollectionResponse<FeedItem>,NSError> = api().getAll(homeItem,
             seachFilter: self.filter)
 
