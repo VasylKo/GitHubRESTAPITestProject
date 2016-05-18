@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MarketDetailsViewController" customModule="PositionIn" customModuleProvider="target">
             <connections>
                 <outlet property="actionTableView" destination="tN3-qd-T3f" id="tvX-qb-SMF"/>
+                <outlet property="actionTableViewHeightConstraint" destination="0uP-jt-23T" id="lya-fI-I6V"/>
+                <outlet property="attechmentSectionHeightConstraint" destination="ufR-IF-JN0" id="ZvN-8F-xJP"/>
+                <outlet property="attechmentSectionView" destination="OMi-7D-Btd" id="Lw7-bg-cjZ"/>
                 <outlet property="detailsLabel" destination="ucO-Wg-k6s" id="06o-6a-t6b"/>
                 <outlet property="headerLabel" destination="eae-BK-JFW" id="zPL-t5-KgY"/>
                 <outlet property="infoLabel" destination="HXh-sw-ZiT" id="Z2r-lt-KOI"/>
@@ -20,14 +23,14 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="IRE-eX-xEX">
-            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <rect key="frame" x="0.0" y="0.0" width="600" height="588"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dQP-hM-JLB">
-                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="588"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="umE-TI-vCy" userLabel="ContetntView">
-                            <rect key="frame" x="0.0" y="0.0" width="600" height="751"/>
+                            <rect key="frame" x="0.0" y="0.0" width="600" height="752"/>
                             <subviews>
                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="CV8-ai-ImP">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="300"/>
@@ -39,7 +42,7 @@
                                     <rect key="frame" x="0.0" y="252" width="600" height="48"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$99" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Xi-ku-6wR">
-                                            <rect key="frame" x="16" y="14" width="31" height="22"/>
+                                            <rect key="frame" x="16" y="13" width="31" height="22"/>
                                             <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="18"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
@@ -56,7 +59,7 @@
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Zd-PE-WQ2">
-                                    <rect key="frame" x="0.0" y="300" width="600" height="101"/>
+                                    <rect key="frame" x="0.0" y="300" width="600" height="102"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The Forest" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eae-BK-JFW">
                                             <rect key="frame" x="16" y="10" width="568" height="26"/>
@@ -135,19 +138,20 @@
                                     </variation>
                                 </view>
                                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" style="plain" rowHeight="45" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="tN3-qd-T3f" customClass="TableView" customModule="PosInCore">
-                                    <rect key="frame" x="0.0" y="401" width="600" height="350"/>
+                                    <rect key="frame" x="0.0" y="402" width="600" height="350"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="350" id="0uP-jt-23T"/>
-                                        <constraint firstAttribute="height" constant="350" id="yMG-6U-94a"/>
                                     </constraints>
                                     <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                    <variation key="default">
-                                        <mask key="constraints">
-                                            <exclude reference="yMG-6U-94a"/>
-                                        </mask>
-                                    </variation>
                                 </tableView>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OMi-7D-Btd">
+                                    <rect key="frame" x="0.0" y="752" width="600" height="0.0"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" id="ufR-IF-JN0"/>
+                                    </constraints>
+                                </view>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
@@ -160,12 +164,16 @@
                                 <constraint firstAttribute="trailing" secondItem="waK-Se-5bD" secondAttribute="trailing" id="Gt0-kh-KIg"/>
                                 <constraint firstItem="1Zd-PE-WQ2" firstAttribute="top" secondItem="waK-Se-5bD" secondAttribute="bottom" id="Jwt-sA-j2o"/>
                                 <constraint firstAttribute="bottom" secondItem="tN3-qd-T3f" secondAttribute="bottom" id="Ln0-Tz-4Gv"/>
+                                <constraint firstItem="OMi-7D-Btd" firstAttribute="leading" secondItem="umE-TI-vCy" secondAttribute="leading" id="PJR-2L-YP7"/>
                                 <constraint firstItem="1Zd-PE-WQ2" firstAttribute="leading" secondItem="umE-TI-vCy" secondAttribute="leading" id="Y21-Fj-GmF"/>
+                                <constraint firstAttribute="trailing" secondItem="OMi-7D-Btd" secondAttribute="trailing" id="a6h-wh-cJB"/>
                                 <constraint firstItem="CV8-ai-ImP" firstAttribute="top" secondItem="umE-TI-vCy" secondAttribute="top" id="gQm-E1-dwM"/>
                                 <constraint firstAttribute="trailing" secondItem="1Zd-PE-WQ2" secondAttribute="trailing" id="jqn-jH-53a"/>
                                 <constraint firstAttribute="bottom" secondItem="tN3-qd-T3f" secondAttribute="bottom" id="lLz-Q5-Opp"/>
+                                <constraint firstItem="OMi-7D-Btd" firstAttribute="top" secondItem="tN3-qd-T3f" secondAttribute="bottom" id="ltX-rB-PiW"/>
                                 <constraint firstAttribute="trailing" secondItem="CV8-ai-ImP" secondAttribute="trailing" id="pTY-4a-WJu"/>
                                 <constraint firstItem="tN3-qd-T3f" firstAttribute="top" secondItem="1Zd-PE-WQ2" secondAttribute="bottom" id="qLE-wu-2qC"/>
+                                <constraint firstAttribute="bottom" secondItem="OMi-7D-Btd" secondAttribute="bottom" id="r7z-BW-pBJ"/>
                                 <constraint firstItem="waK-Se-5bD" firstAttribute="leading" secondItem="umE-TI-vCy" secondAttribute="leading" id="xVz-CU-RR0"/>
                             </constraints>
                             <variation key="default">
@@ -173,6 +181,7 @@
                                     <exclude reference="FsO-RI-kna"/>
                                     <exclude reference="GVe-zK-HAO"/>
                                     <exclude reference="Ln0-Tz-4Gv"/>
+                                    <exclude reference="lLz-Q5-Opp"/>
                                 </mask>
                             </variation>
                         </view>
@@ -194,6 +203,7 @@
                 <constraint firstItem="dQP-hM-JLB" firstAttribute="leading" secondItem="IRE-eX-xEX" secondAttribute="leading" id="zjW-bv-HHt"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="483" y="323"/>
         </view>
     </objects>
     <resources>

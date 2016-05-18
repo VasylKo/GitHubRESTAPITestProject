@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EventDetailsViewController" customModule="PositionIn" customModuleProvider="target">
             <connections>
                 <outlet property="actionTableView" destination="veO-FX-15o" id="5FQ-e0-fMU"/>
+                <outlet property="actionTableViewHeightConstraint" destination="mNv-4N-wFA" id="8SH-1k-hs8"/>
+                <outlet property="attechmentSectionHeightConstraint" destination="heg-fq-9Up" id="ngW-nh-XFw"/>
+                <outlet property="attechmentSectionView" destination="bE2-5X-BKG" id="Q6v-zH-7dH"/>
                 <outlet property="detailsLabel" destination="CGP-Qf-MYX" id="esq-Uk-HBD"/>
                 <outlet property="eventImageView" destination="wuA-wp-A6y" id="PDK-Ac-x36"/>
                 <outlet property="headerLabel" destination="vXA-Ry-YIz" id="C7r-BG-Ea0"/>
@@ -41,7 +44,7 @@
                             <rect key="frame" x="0.0" y="252" width="600" height="48"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$99" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eMi-0H-hX8">
-                                    <rect key="frame" x="10" y="15" width="25.5" height="18"/>
+                                    <rect key="frame" x="10" y="15" width="26" height="18"/>
                                     <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="15"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
@@ -58,7 +61,7 @@
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A9g-V6-spc">
-                            <rect key="frame" x="0.0" y="300" width="600" height="100.5"/>
+                            <rect key="frame" x="0.0" y="300" width="600" height="101"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The Forest" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vXA-Ry-YIz">
                                     <rect key="frame" x="10" y="10" width="580" height="26"/>
@@ -79,7 +82,7 @@
                                     </userDefinedRuntimeAttributes>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Edward Ryan" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rnm-FN-YEx">
-                                    <rect key="frame" x="10" y="73" width="580" height="17"/>
+                                    <rect key="frame" x="10" y="74" width="580" height="17"/>
                                     <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="14"/>
                                     <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
@@ -88,7 +91,7 @@
                                     </userDefinedRuntimeAttributes>
                                 </label>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="eventPeopleAttending" translatesAutoresizingMaskIntoConstraints="NO" id="PDh-MM-kpM">
-                                    <rect key="frame" x="11" y="42" width="25" height="22"/>
+                                    <rect key="frame" x="11" y="43" width="25" height="22"/>
                                     <color key="tintColor" red="0.92941176469999998" green="0.1058823529" blue="0.18039215689999999" alpha="1" colorSpace="calibratedRGB"/>
                                 </imageView>
                             </subviews>
@@ -111,20 +114,31 @@
                             </constraints>
                         </view>
                         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" style="plain" rowHeight="45" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="veO-FX-15o" customClass="TableView" customModule="PosInCore">
-                            <rect key="frame" x="0.0" y="400" width="600" height="420"/>
+                            <rect key="frame" x="0.0" y="401" width="600" height="420"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="420" id="mNv-4N-wFA"/>
                             </constraints>
                             <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </tableView>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bE2-5X-BKG">
+                            <rect key="frame" x="0.0" y="821" width="600" height="0.0"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="height" id="heg-fq-9Up"/>
+                            </constraints>
+                        </view>
                     </subviews>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="TXR-bg-eLp" secondAttribute="trailing" id="23c-n1-rLo"/>
                         <constraint firstItem="wuA-wp-A6y" firstAttribute="bottom" secondItem="TXR-bg-eLp" secondAttribute="bottom" id="2ya-IT-6v8"/>
                         <constraint firstItem="veO-FX-15o" firstAttribute="top" secondItem="A9g-V6-spc" secondAttribute="bottom" id="4yB-fx-8h7"/>
+                        <constraint firstItem="bE2-5X-BKG" firstAttribute="top" secondItem="veO-FX-15o" secondAttribute="bottom" id="6wx-E6-zgx"/>
+                        <constraint firstAttribute="bottom" secondItem="bE2-5X-BKG" secondAttribute="bottom" id="BNO-GJ-Pog"/>
                         <constraint firstAttribute="bottom" secondItem="veO-FX-15o" secondAttribute="bottom" id="Emf-G7-XDH"/>
                         <constraint firstItem="wuA-wp-A6y" firstAttribute="top" secondItem="LJd-Ew-eoO" secondAttribute="top" id="Pxp-hd-zOM"/>
+                        <constraint firstItem="bE2-5X-BKG" firstAttribute="leading" secondItem="LJd-Ew-eoO" secondAttribute="leading" id="YFk-8u-cgV"/>
+                        <constraint firstAttribute="trailing" secondItem="bE2-5X-BKG" secondAttribute="trailing" id="c1A-IV-W5r"/>
                         <constraint firstAttribute="trailing" secondItem="A9g-V6-spc" secondAttribute="trailing" id="f4C-P8-4Mi"/>
                         <constraint firstAttribute="trailing" secondItem="wuA-wp-A6y" secondAttribute="trailing" id="fKf-fX-qUX"/>
                         <constraint firstItem="veO-FX-15o" firstAttribute="leading" secondItem="LJd-Ew-eoO" secondAttribute="leading" id="fVE-4b-sce"/>
@@ -135,6 +149,11 @@
                         <constraint firstItem="wuA-wp-A6y" firstAttribute="leading" secondItem="LJd-Ew-eoO" secondAttribute="leading" id="rZG-p0-fmr"/>
                         <constraint firstItem="A9g-V6-spc" firstAttribute="top" secondItem="wuA-wp-A6y" secondAttribute="bottom" id="xDI-o8-gFi"/>
                     </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="Emf-G7-XDH"/>
+                        </mask>
+                    </variation>
                 </scrollView>
             </subviews>
             <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>

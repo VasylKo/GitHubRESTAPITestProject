@@ -1,29 +1,29 @@
 platform :ios do
   desc "Submit a new Dev Build to Amazon S3"
-  lane :Dev do
+  lane :Rw_Dev do
     gym(
-        scheme: "RCKenya",
+        scheme: "RCRwanda",
         configuration: "DevRelease",
         output_directory: "Build",
         clean: true,
         use_legacy_build_api: true,
         export_method: "enterprise",
-        provisioning_profile_path: "./Applications/RCKenya/fastlane/Distribution.com.connectik.members.dev.mobileprovision",
+        provisioning_profile_path: "./Applications/RCRwanda/fastlane/Distribution.com.connectik.sarcs.members.dev.mobileprovision",
         include_bitcode: false
         ) # Build app
     s3(
        html_template_path: './fastlane/redcross.erb',
-       html_file_name: 'dev.html',
-       version_file_name: 'dev.version.json',
+       html_file_name: 'za_dev.html',
+       version_file_name: 'za_dev.version.json',
        upload_metadata: true,
-       path: 'dev/v{CFBundleShortVersionString}_b{CFBundleVersion}/'
+       path: 'za_dev/v{CFBundleShortVersionString}_b{CFBundleVersion}/'
        )
   end
 
     desc "Submit a new Staging Build to Amazon S3"
-    lane :Staging do
+    lane :Rw_Staging do
       gym(
-        scheme: "RCKenya",
+        scheme: "RCRwanda",
         configuration: "StagingRelease",
         output_directory: "Build",
         clean: true,
@@ -33,17 +33,17 @@ platform :ios do
         #      snapshot
       s3(
          html_template_path: './fastlane/redcross.erb',
-         html_file_name: 'staging.html',
-         version_file_name: 'staging.version.json',
+         html_file_name: 'za_staging.html',
+         version_file_name: 'za_staging.version.json',
          upload_metadata: true,
-         path: 'staging/v{CFBundleShortVersionString}_b{CFBundleVersion}/'
+         path: 'za_staging/v{CFBundleShortVersionString}_b{CFBundleVersion}/'
          )
     end
 
     desc "Submit a new Staging 2 Build to Amazon S3"
-    lane :Staging2 do
+    lane :Rw_Staging2 do
         gym(
-            scheme: "RCKenya",
+            scheme: "RCRwanda",
             configuration: "StagingReleaseCopy",
             output_directory: "Build",
             clean: true,
@@ -53,18 +53,18 @@ platform :ios do
             #      snapshot
             s3(
                html_template_path: './fastlane/redcross.erb',
-               html_file_name: 'staging2.html',
-               version_file_name: 'staging2.version.json',
+               html_file_name: 'za_staging2.html',
+               version_file_name: 'za_staging2.version.json',
                upload_metadata: true,
-               path: 'staging2/v{CFBundleShortVersionString}_b{CFBundleVersion}/'
+               path: 'za_staging2/v{CFBundleShortVersionString}_b{CFBundleVersion}/'
                )
     end
 
 
     desc "Submit a new Production Build to Amazon S3"
-    lane :Production do
+    lane :Rw_Production do
         gym(
-            scheme: "RCKenya",
+            scheme: "RCRwanda",
             configuration: "ProdRelease",
             output_directory: "Build",
             clean: true,
@@ -74,17 +74,17 @@ platform :ios do
 #        snapshot
         s3(
            html_template_path: './fastlane/redcross.erb',
-           html_file_name: 'production.html',
-           version_file_name: 'production.version.json',
+           html_file_name: 'za_production.html',
+           version_file_name: 'za_production.version.json',
            upload_metadata: true,
-           path: 'prod/v{CFBundleShortVersionString}_b{CFBundleVersion}/'
+           path: 'za_prod/v{CFBundleShortVersionString}_b{CFBundleVersion}/'
            )
     end
 
     desc "Submit a new Production 2 (Kenya Red Cross) Build to Amazon S3"
-    lane :Production2 do
+    lane :Rw_Production2 do
         gym(
-            scheme: "RCKenya",
+            scheme: "RCRwanda",
             configuration: "ProdRelease2",
             output_directory: "Build",
             clean: true,
@@ -94,10 +94,10 @@ platform :ios do
 #        snapshot
         s3(
             html_template_path: './fastlane/redcross.erb',
-            html_file_name: 'production.html',
-            version_file_name: 'production.version.json',
+            html_file_name: 'za_production.html',
+            version_file_name: 'za_production.version.json',
             upload_metadata: true,
-            path: 'prod/v{CFBundleShortVersionString}_b{CFBundleVersion}/'
+            path: 'za_prod/v{CFBundleShortVersionString}_b{CFBundleVersion}/'
             )
     end
 end

@@ -11,6 +11,7 @@ class FeedEmergencyDetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = UIColor.groupTableViewBackgroundColor()
         dataSource.configureTable(tableView)
         tableView.separatorStyle = .None
         self.reloadEmergency()
@@ -45,8 +46,26 @@ class FeedEmergencyDetailsViewController: UIViewController {
                     self?.tableView.reloadData()
                     self?.tableView.layoutIfNeeded();
                 }
+                
+                //If there is only 1 attachment, thant show it on current screen
+                guard let strongSelf = self else { return }
+                if emergency.numberOfAttachments == 1 {
+                    strongSelf.tableViewHeightConstraint.constant = strongSelf.tableView.contentSize.height
+                    strongSelf.addAttachmentSection()
+                } else {
+                    //adjust scroll view content size based on table view height
+                    let scrollViewBottomSpaceHeight: CGFloat = 20
+                    strongSelf.tableViewHeightConstraint.constant = strongSelf.tableView.contentSize.height + scrollViewBottomSpaceHeight
+                }
             }
         }
+    }
+    
+    private func addAttachmentSection() {
+        attechmentSectionHeightConstraint.constant = MoreInformationViewController.singleAttacmentViewHeight
+        let moreInformationViewController = MoreInformationViewController(links: emergency?.links, attachments: emergency?.attachments, bounces: false)
+        let attachmentsView = moreInformationViewController.view
+        attechmentSectionView.addSubview(attachmentsView)
     }
     
     private lazy var dataSource: FeedEmergencyDataSource = { [unowned self] in
@@ -57,6 +76,11 @@ class FeedEmergencyDetailsViewController: UIViewController {
     
     
     @IBOutlet weak var tableView: TableView!
+    @IBOutlet weak var tableViewHeightConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var attechmentSectionView: UIView!
+    @IBOutlet weak var attechmentSectionHeightConstraint: NSLayoutConstraint!
+    
     var objectId: CRUDObjectId?
     private var emergency: Product?
     var isFeautered: Bool = false
@@ -155,7 +179,7 @@ extension FeedEmergencyDetailsViewController {
                         }
                         
                         break
-                    case "More Information":
+                    case "Attachments":
                         let controller = self.parentViewController as! FeedEmergencyDetailsViewController
                         if controller.emergency?.links?.isEmpty == false || controller.emergency?.attachments?.isEmpty == false {
                             let moreInformationViewController = MoreInformationViewController(links: controller.emergency?.links,

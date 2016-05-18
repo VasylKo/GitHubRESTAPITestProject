@@ -328,7 +328,6 @@
 		180E1D3B1CE4CDE9006EBEC6 /* CleanroomLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6B3C32E1B62581200EA613A /* CleanroomLogger.framework */; };
 		180E1D3C1CE4CDE9006EBEC6 /* CleanroomASL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6B3C32D1B62581200EA613A /* CleanroomASL.framework */; };
 		180E1D3D1CE4CDE9006EBEC6 /* Messaging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6E2FE881B66F61300880F3C /* Messaging.framework */; };
-		180E1D3E1CE4CDE9006EBEC6 /* Pods_PositionIn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFAA26C98F322F00903B06FC /* Pods_PositionIn.framework */; };
 		180E1D401CE4CDE9006EBEC6 /* PositionIn.EPlusPlansViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18F7C6501CBFF13500B68BB6 /* PositionIn.EPlusPlansViewController.xib */; };
 		180E1D411CE4CDE9006EBEC6 /* Snapfile in Resources */ = {isa = PBXBuildFile; fileRef = CD795BDD1C57B4EE00C1C298 /* Snapfile */; };
 		180E1D421CE4CDE9006EBEC6 /* PositionIn.QuestionBloodDonorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1BAE0031CDCBAA200B3ECE3 /* PositionIn.QuestionBloodDonorViewController.xib */; };
@@ -513,6 +512,14 @@
 		184040321CC628FF00DF3655 /* PositionIn.EPlusContactsSupportController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 184040311CC628FF00DF3655 /* PositionIn.EPlusContactsSupportController.xib */; };
 		184040351CC6290900DF3655 /* EPlusContactsSupportController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184040341CC6290900DF3655 /* EPlusContactsSupportController.swift */; };
 		184236C01CA5B59700C53D08 /* NewRelicController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184236BF1CA5B59700C53D08 /* NewRelicController.swift */; };
+		187AFC2C1CEBC31400913987 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187AFC201CEBC31400913987 /* AppDelegate.swift */; };
+		187AFC2D1CEBC31400913987 /* AppConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187AFC221CEBC31400913987 /* AppConfiguration.swift */; };
+		187AFC2E1CEBC31400913987 /* UIScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187AFC231CEBC31400913987 /* UIScheme.swift */; };
+		187AFC2F1CEBC31400913987 /* Distribution.com.connectik.sarcs.members.dev.mobileprovision in Resources */ = {isa = PBXBuildFile; fileRef = 187AFC251CEBC31400913987 /* Distribution.com.connectik.sarcs.members.dev.mobileprovision */; };
+		187AFC301CEBC31400913987 /* Fastfile in Resources */ = {isa = PBXBuildFile; fileRef = 187AFC261CEBC31400913987 /* Fastfile */; };
+		187AFC311CEBC31400913987 /* HomeItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187AFC281CEBC31400913987 /* HomeItem.swift */; };
+		187AFC321CEBC31400913987 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 187AFC2A1CEBC31400913987 /* GoogleService-Info.plist */; };
+		187AFC331CEBC31400913987 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 187AFC2B1CEBC31400913987 /* Info.plist */; };
 		18817F1E1C897CFB00FBA6B1 /* WalletsCellFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18817F1D1C897CFB00FBA6B1 /* WalletsCellFactory.swift */; };
 		18817F221C89B28B00FBA6B1 /* DonationDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18817F201C89B28B00FBA6B1 /* DonationDetailsViewController.swift */; };
 		18817F231C89B28B00FBA6B1 /* PositionIn.DonationDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18817F211C89B28B00FBA6B1 /* PositionIn.DonationDetailsViewController.xib */; };
@@ -617,12 +624,12 @@
 		5456528E1CCFAB4600C63C01 /* PaymentOrderDescriptionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5456528C1CCFAB4600C63C01 /* PaymentOrderDescriptionCell.xib */; };
 		545652901CCFB6B800C63C01 /* NSDate+pickUpAvaliabilityString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5456528F1CCFB6B800C63C01 /* NSDate+pickUpAvaliabilityString.swift */; };
 		545652951CCFFBA000C63C01 /* ProjectsIntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 545652931CCFFBA000C63C01 /* ProjectsIntroViewController.swift */; };
+		546A3C8E1CEB5BD100127D03 /* UIApplication+TopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546A3C8D1CEB5BD100127D03 /* UIApplication+TopViewController.swift */; };
 		549C6BCE1CCF558D0062435F /* MembershipPaymentTransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 549C6BCD1CCF558D0062435F /* MembershipPaymentTransactionViewController.swift */; };
 		549C6BD01CCF6DCF0062435F /* CommonPaymentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 549C6BCF1CCF6DCF0062435F /* CommonPaymentViewController.xib */; };
 		549C6BD21CCF98CF0062435F /* EplusPaymentTransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 549C6BD11CCF98CF0062435F /* EplusPaymentTransactionViewController.swift */; };
 		54A31F961CBBF20900A833C9 /* DonationPaymentAmountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54A31F941CBBF20900A833C9 /* DonationPaymentAmountCell.swift */; };
 		54A31F971CBBF20900A833C9 /* DonationPaymentAmountCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 54A31F951CBBF20900A833C9 /* DonationPaymentAmountCell.xib */; };
-		5DA3850FA75B150D79C68EE1 /* Pods_PositionIn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFAA26C98F322F00903B06FC /* Pods_PositionIn.framework */; };
 		CD076E871C73922A005C04C2 /* NewsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD076E861C73922A005C04C2 /* NewsListViewController.swift */; };
 		CD076E891C7497A8005C04C2 /* PositionIn.NewsListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD076E881C7497A8005C04C2 /* PositionIn.NewsListViewController.xib */; };
 		CD0FCC2E1C69ECD800AFD36C /* TotalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0FCC2C1C69ECD800AFD36C /* TotalCell.swift */; };
@@ -1144,6 +1151,16 @@
 			name = "Embed Core Framework";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		187AFC0A1CEBC1D300913987 /* Embed Core Framework */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Core Framework";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E6325F901B57E4B100996480 /* Embed Core Framework */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1197,6 +1214,15 @@
 		184040311CC628FF00DF3655 /* PositionIn.EPlusContactsSupportController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.EPlusContactsSupportController.xib; sourceTree = "<group>"; };
 		184040341CC6290900DF3655 /* EPlusContactsSupportController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EPlusContactsSupportController.swift; sourceTree = "<group>"; };
 		184236BF1CA5B59700C53D08 /* NewRelicController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewRelicController.swift; sourceTree = "<group>"; };
+		187AFC1E1CEBC1D300913987 /* RCRwanda.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RCRwanda.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		187AFC201CEBC31400913987 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		187AFC221CEBC31400913987 /* AppConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppConfiguration.swift; sourceTree = "<group>"; };
+		187AFC231CEBC31400913987 /* UIScheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIScheme.swift; sourceTree = "<group>"; };
+		187AFC251CEBC31400913987 /* Distribution.com.connectik.sarcs.members.dev.mobileprovision */ = {isa = PBXFileReference; lastKnownFileType = file; path = Distribution.com.connectik.sarcs.members.dev.mobileprovision; sourceTree = "<group>"; };
+		187AFC261CEBC31400913987 /* Fastfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Fastfile; sourceTree = "<group>"; };
+		187AFC281CEBC31400913987 /* HomeItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeItem.swift; sourceTree = "<group>"; };
+		187AFC2A1CEBC31400913987 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		187AFC2B1CEBC31400913987 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		18817F1D1C897CFB00FBA6B1 /* WalletsCellFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletsCellFactory.swift; sourceTree = "<group>"; };
 		18817F201C89B28B00FBA6B1 /* DonationDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DonationDetailsViewController.swift; sourceTree = "<group>"; };
 		18817F211C89B28B00FBA6B1 /* PositionIn.DonationDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.DonationDetailsViewController.xib; sourceTree = "<group>"; };
@@ -1304,6 +1330,7 @@
 		5456528C1CCFAB4600C63C01 /* PaymentOrderDescriptionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PaymentOrderDescriptionCell.xib; sourceTree = "<group>"; };
 		5456528F1CCFB6B800C63C01 /* NSDate+pickUpAvaliabilityString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+pickUpAvaliabilityString.swift"; sourceTree = "<group>"; };
 		545652931CCFFBA000C63C01 /* ProjectsIntroViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectsIntroViewController.swift; sourceTree = "<group>"; };
+		546A3C8D1CEB5BD100127D03 /* UIApplication+TopViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIApplication+TopViewController.swift"; sourceTree = "<group>"; };
 		549C6BCD1CCF558D0062435F /* MembershipPaymentTransactionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MembershipPaymentTransactionViewController.swift; sourceTree = "<group>"; };
 		549C6BCF1CCF6DCF0062435F /* CommonPaymentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommonPaymentViewController.xib; sourceTree = "<group>"; };
 		549C6BD11CCF98CF0062435F /* EplusPaymentTransactionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EplusPaymentTransactionViewController.swift; sourceTree = "<group>"; };
@@ -2006,8 +2033,14 @@
 				180E1D3B1CE4CDE9006EBEC6 /* CleanroomLogger.framework in Frameworks */,
 				180E1D3C1CE4CDE9006EBEC6 /* CleanroomASL.framework in Frameworks */,
 				180E1D3D1CE4CDE9006EBEC6 /* Messaging.framework in Frameworks */,
-				180E1D3E1CE4CDE9006EBEC6 /* Pods_PositionIn.framework in Frameworks */,
 				412FE925B748A90A02A87D5A /* Pods_RCSouthAfrica.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		187AFB6C1CEBC1D300913987 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2018,7 +2051,6 @@
 				E6B3C3311B62581200EA613A /* CleanroomLogger.framework in Frameworks */,
 				E6B3C32F1B62581200EA613A /* CleanroomASL.framework in Frameworks */,
 				E6E2FE9F1B66F61400880F3C /* Messaging.framework in Frameworks */,
-				5DA3850FA75B150D79C68EE1 /* Pods_PositionIn.framework in Frameworks */,
 				2AB08EF97FA61150FE05EDF7 /* Pods_RCKenya.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2058,6 +2090,7 @@
 		180E1E501CE51580006EBEC6 /* Applications */ = {
 			isa = PBXGroup;
 			children = (
+				187AFC1F1CEBC31400913987 /* RCRwanda */,
 				180E1E511CE51580006EBEC6 /* RCKenya */,
 				180E1E5B1CE51580006EBEC6 /* RCSouthAfrica */,
 			);
@@ -2252,6 +2285,53 @@
 				184040341CC6290900DF3655 /* EPlusContactsSupportController.swift */,
 			);
 			path = ContactsSupport;
+			sourceTree = "<group>";
+		};
+		187AFC1F1CEBC31400913987 /* RCRwanda */ = {
+			isa = PBXGroup;
+			children = (
+				187AFC201CEBC31400913987 /* AppDelegate.swift */,
+				187AFC211CEBC31400913987 /* DAL */,
+				187AFC241CEBC31400913987 /* fastlane */,
+				187AFC271CEBC31400913987 /* Models */,
+				187AFC291CEBC31400913987 /* Supporting Files */,
+			);
+			path = RCRwanda;
+			sourceTree = "<group>";
+		};
+		187AFC211CEBC31400913987 /* DAL */ = {
+			isa = PBXGroup;
+			children = (
+				187AFC221CEBC31400913987 /* AppConfiguration.swift */,
+				187AFC231CEBC31400913987 /* UIScheme.swift */,
+			);
+			path = DAL;
+			sourceTree = "<group>";
+		};
+		187AFC241CEBC31400913987 /* fastlane */ = {
+			isa = PBXGroup;
+			children = (
+				187AFC251CEBC31400913987 /* Distribution.com.connectik.sarcs.members.dev.mobileprovision */,
+				187AFC261CEBC31400913987 /* Fastfile */,
+			);
+			path = fastlane;
+			sourceTree = "<group>";
+		};
+		187AFC271CEBC31400913987 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				187AFC281CEBC31400913987 /* HomeItem.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		187AFC291CEBC31400913987 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				187AFC2A1CEBC31400913987 /* GoogleService-Info.plist */,
+				187AFC2B1CEBC31400913987 /* Info.plist */,
+			);
+			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		18817F1F1C89B28B00FBA6B1 /* DonationDetails */ = {
@@ -2938,6 +3018,7 @@
 			children = (
 				CDE1B90E1C5F678B00F76F32 /* LocalizedString.swift */,
 				5456528F1CCFB6B800C63C01 /* NSDate+pickUpAvaliabilityString.swift */,
+				546A3C8D1CEB5BD100127D03 /* UIApplication+TopViewController.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -3881,6 +3962,7 @@
 				E64DC34A1B4E53C90011D37C /* RCKenya.app */,
 				E6E2FE881B66F61300880F3C /* Messaging.framework */,
 				180E1DEB1CE4CDE9006EBEC6 /* RCSouthAfrica.app */,
+				187AFC1E1CEBC1D300913987 /* RCRwanda.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -5329,6 +5411,31 @@
 			productReference = 180E1DEB1CE4CDE9006EBEC6 /* RCSouthAfrica.app */;
 			productType = "com.apple.product-type.application";
 		};
+		187AFA471CEBC1D300913987 /* RCRwanda */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 187AFC141CEBC1D300913987 /* Build configuration list for PBXNativeTarget "RCRwanda" */;
+			buildPhases = (
+				187AFA4C1CEBC1D300913987 /* Check Pods Manifest.lock */,
+				187AFA4D1CEBC1D300913987 /* Sources */,
+				187AFB6C1CEBC1D300913987 /* Frameworks */,
+				187AFB711CEBC1D300913987 /* Resources */,
+				187AFC0A1CEBC1D300913987 /* Embed Core Framework */,
+				187AFC0E1CEBC1D300913987 /* Strip Cleanroom framework */,
+				187AFC0F1CEBC1D300913987 /* Copy Simulator app */,
+				187AFC101CEBC1D300913987 /* Fabric */,
+				187AFC111CEBC1D300913987 /* NewRelic */,
+				187AFC121CEBC1D300913987 /* Embed Pods Frameworks */,
+				187AFC131CEBC1D300913987 /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RCRwanda;
+			productName = PositionIn;
+			productReference = 187AFC1E1CEBC1D300913987 /* RCRwanda.app */;
+			productType = "com.apple.product-type.application";
+		};
 		E64DC3491B4E53C90011D37C /* RCKenya */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = E64DC3691B4E53CA0011D37C /* Build configuration list for PBXNativeTarget "RCKenya" */;
@@ -5387,7 +5494,6 @@
 				ORGANIZATIONNAME = "Soluna Labs";
 				TargetAttributes = {
 					180E1C161CE4CDE9006EBEC6 = {
-						DevelopmentTeam = 7823S53735;
 						SystemCapabilities = {
 							com.apple.Push = {
 								enabled = 1;
@@ -5399,7 +5505,6 @@
 					};
 					E64DC3491B4E53C90011D37C = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = 7823S53735;
 						SystemCapabilities = {
 							com.apple.Push = {
 								enabled = 1;
@@ -5432,6 +5537,7 @@
 			targets = (
 				E64DC3491B4E53C90011D37C /* RCKenya */,
 				180E1C161CE4CDE9006EBEC6 /* RCSouthAfrica */,
+				187AFA471CEBC1D300913987 /* RCRwanda */,
 				E6736ACF1B4E562C0003580D /* CheckTODO */,
 				E6736AD41B4E56570003580D /* UpdateVersion */,
 				E6325F681B57E0E100996480 /* Natalie */,
@@ -5597,6 +5703,17 @@
 				180E1DD41CE4CDE9006EBEC6 /* PositionIn.EPlusContactsSupportController.xib in Resources */,
 				180E1DD51CE4CDE9006EBEC6 /* PositionIn.LocationCell.xib in Resources */,
 				180E1DD61CE4CDE9006EBEC6 /* TotalViewCell.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		187AFB711CEBC1D300913987 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				187AFC331CEBC31400913987 /* Info.plist in Resources */,
+				187AFC301CEBC31400913987 /* Fastfile in Resources */,
+				187AFC2F1CEBC31400913987 /* Distribution.com.connectik.sarcs.members.dev.mobileprovision in Resources */,
+				187AFC321CEBC31400913987 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5869,6 +5986,107 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RCSouthAfrica/Pods-RCSouthAfrica-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		187AFA4C1CEBC1D300913987 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		187AFC0E1CEBC1D300913987 /* Strip Cleanroom framework */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Strip Cleanroom framework";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "$PROJECT_DIR/Carthage/Checkouts/CleanroomLogger/BuildControl/bin/stripCarthageFrameworks.sh --platform iOS";
+		};
+		187AFC0F1CEBC1D300913987 /* Copy Simulator app */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 12;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Simulator app";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PROJECT_DIR}/Scripts/CopyApp.sh\"";
+		};
+		187AFC101CEBC1D300913987 /* Fabric */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = Fabric;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" 27437daf7b0468aa7a96977842e169657c6b889e 58591b6e6e68aaf8d43a618c90f6c748e0b802f61f287d83e43e16f0542fba41";
+		};
+		187AFC111CEBC1D300913987 /* NewRelic */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = NewRelic;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "SCRIPT=`/usr/bin/find \"${SRCROOT}\" -name newrelic_postbuild.sh | head -n 1`\n/bin/bash \"${SCRIPT}\" \"AA0492dd667078eb6a7d0a70ba7267487f6b3fff21\"";
+		};
+		187AFC121CEBC1D300913987 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RCKenya/Pods-RCKenya-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		187AFC131CEBC1D300913987 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RCKenya/Pods-RCKenya-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		200521AAE0EFA7DDDE5632B0 /* Check Pods Manifest.lock */ = {
@@ -6306,6 +6524,17 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		187AFA4D1CEBC1D300913987 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				187AFC2D1CEBC31400913987 /* AppConfiguration.swift in Sources */,
+				187AFC311CEBC31400913987 /* HomeItem.swift in Sources */,
+				187AFC2E1CEBC31400913987 /* UIScheme.swift in Sources */,
+				187AFC2C1CEBC31400913987 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E64DC3461B4E53C90011D37C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -6484,6 +6713,7 @@
 				E6F243701B8B17910033B13C /* DisplayModeViewController.swift in Sources */,
 				D15F47491C0B77D7009ED3FD /* AmbulanceBaseController.swift in Sources */,
 				5456528D1CCFAB4600C63C01 /* PaymentOrderDescriptionCell.swift in Sources */,
+				546A3C8E1CEB5BD100127D03 /* UIApplication+TopViewController.swift in Sources */,
 				E6F7A47D1BA356130069152A /* LocationCell.swift in Sources */,
 				5419F9941CC6C630000E16E7 /* EPlusSelectPlanTableViewFooterView.swift in Sources */,
 				184040261CC14A2B00DF3655 /* EPlusPlanInfoTableViewCell.swift in Sources */,
@@ -7244,7 +7474,6 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "PositionIn/PositionIn-Bridging-Header.h";
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
 			};
 			name = DevRelease;
 		};
@@ -7503,6 +7732,782 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "PositionIn/PositionIn-Bridging-Header.h";
+			};
+			name = ProdRelease2;
+		};
+		187AFC151CEBC1D300913987 /* DevDebug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)",
+				);
+				INFOPLIST_FILE = "Applications/${TARGET_NAME}/Supporting Files/Info.plist";
+				INFOPLIST_PREFIX_HEADER = "${PROJECT_NAME}/Supporting Files/Version.h";
+				INFOPLIST_PREPROCESS = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-l\"c++\"",
+					"-l\"icucore\"",
+					"-l\"z\"",
+					"-framework",
+					"\"AVFoundation\"",
+					"-framework",
+					"\"Accelerate\"",
+					"-framework",
+					"\"Alamofire\"",
+					"-framework",
+					"\"BrightFutures\"",
+					"-framework",
+					"\"CoreBluetooth\"",
+					"-framework",
+					"\"CoreData\"",
+					"-framework",
+					"\"CoreGraphics\"",
+					"-framework",
+					"\"CoreLocation\"",
+					"-framework",
+					"\"CoreText\"",
+					"-framework",
+					"\"GLKit\"",
+					"-framework",
+					"\"GoogleMaps\"",
+					"-framework",
+					"\"Haneke\"",
+					"-framework",
+					"\"ImageIO\"",
+					"-framework",
+					"\"ImagePickerSheetController\"",
+					"-framework",
+					"\"KYDrawerController\"",
+					"-framework",
+					"\"KeychainAccess\"",
+					"-framework",
+					"\"ObjectMapper\"",
+					"-framework",
+					"\"OpenGLES\"",
+					"-framework",
+					"\"PosInCore\"",
+					"-framework",
+					"\"QuartzCore\"",
+					"-framework",
+					"\"Result\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+					"-framework",
+					"\"UIImageEffects\"",
+					"-framework",
+					"\"XLForm\"",
+					"-ObjC",
+				);
+				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -D DEBUG";
+				PRODUCT_BUNDLE_IDENTIFIER = com.connectik.sarcs.members.dev;
+				PRODUCT_MODULE_NAME = RCRwanda;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = DevDebug;
+		};
+		187AFC161CEBC1D300913987 /* StagingDebug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)",
+				);
+				INFOPLIST_FILE = "Applications/${TARGET_NAME}/Supporting Files/Info.plist";
+				INFOPLIST_PREFIX_HEADER = "${PROJECT_NAME}/Supporting Files/Version.h";
+				INFOPLIST_PREPROCESS = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-l\"c++\"",
+					"-l\"icucore\"",
+					"-l\"z\"",
+					"-framework",
+					"\"AVFoundation\"",
+					"-framework",
+					"\"Accelerate\"",
+					"-framework",
+					"\"Alamofire\"",
+					"-framework",
+					"\"BrightFutures\"",
+					"-framework",
+					"\"CoreBluetooth\"",
+					"-framework",
+					"\"CoreData\"",
+					"-framework",
+					"\"CoreGraphics\"",
+					"-framework",
+					"\"CoreLocation\"",
+					"-framework",
+					"\"CoreText\"",
+					"-framework",
+					"\"GLKit\"",
+					"-framework",
+					"\"GoogleMaps\"",
+					"-framework",
+					"\"Haneke\"",
+					"-framework",
+					"\"ImageIO\"",
+					"-framework",
+					"\"ImagePickerSheetController\"",
+					"-framework",
+					"\"KYDrawerController\"",
+					"-framework",
+					"\"KeychainAccess\"",
+					"-framework",
+					"\"ObjectMapper\"",
+					"-framework",
+					"\"OpenGLES\"",
+					"-framework",
+					"\"PosInCore\"",
+					"-framework",
+					"\"QuartzCore\"",
+					"-framework",
+					"\"Result\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+					"-framework",
+					"\"UIImageEffects\"",
+					"-framework",
+					"\"XLForm\"",
+					"-ObjC",
+				);
+				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -D DEBUG -D \"STAGING_ENV\"";
+				PRODUCT_BUNDLE_IDENTIFIER = com.connectik.sarcs.members.dev;
+				PRODUCT_MODULE_NAME = RCRwanda;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = StagingDebug;
+		};
+		187AFC171CEBC1D300913987 /* StagingDebugCopy */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)",
+				);
+				INFOPLIST_FILE = "Applications/${TARGET_NAME}/Supporting Files/Info.plist";
+				INFOPLIST_PREFIX_HEADER = "${PROJECT_NAME}/Supporting Files/Version.h";
+				INFOPLIST_PREPROCESS = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-l\"c++\"",
+					"-l\"icucore\"",
+					"-l\"z\"",
+					"-framework",
+					"\"AVFoundation\"",
+					"-framework",
+					"\"Accelerate\"",
+					"-framework",
+					"\"Alamofire\"",
+					"-framework",
+					"\"BrightFutures\"",
+					"-framework",
+					"\"CoreBluetooth\"",
+					"-framework",
+					"\"CoreData\"",
+					"-framework",
+					"\"CoreGraphics\"",
+					"-framework",
+					"\"CoreLocation\"",
+					"-framework",
+					"\"CoreText\"",
+					"-framework",
+					"\"GLKit\"",
+					"-framework",
+					"\"GoogleMaps\"",
+					"-framework",
+					"\"Haneke\"",
+					"-framework",
+					"\"ImageIO\"",
+					"-framework",
+					"\"ImagePickerSheetController\"",
+					"-framework",
+					"\"KYDrawerController\"",
+					"-framework",
+					"\"KeychainAccess\"",
+					"-framework",
+					"\"ObjectMapper\"",
+					"-framework",
+					"\"OpenGLES\"",
+					"-framework",
+					"\"PosInCore\"",
+					"-framework",
+					"\"QuartzCore\"",
+					"-framework",
+					"\"Result\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+					"-framework",
+					"\"UIImageEffects\"",
+					"-framework",
+					"\"XLForm\"",
+					"-ObjC",
+				);
+				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -D DEBUG -D \"STAGING_COPY_ENV\"";
+				PRODUCT_BUNDLE_IDENTIFIER = com.connectik.sarcs.members.dev;
+				PRODUCT_MODULE_NAME = RCRwanda;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = StagingDebugCopy;
+		};
+		187AFC181CEBC1D300913987 /* StagingReleaseCopy */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)",
+				);
+				INFOPLIST_FILE = "Applications/${TARGET_NAME}/Supporting Files/Info.plist";
+				INFOPLIST_PREFIX_HEADER = "${PROJECT_NAME}/Supporting Files/Version.h";
+				INFOPLIST_PREPROCESS = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-l\"c++\"",
+					"-l\"icucore\"",
+					"-l\"z\"",
+					"-framework",
+					"\"AVFoundation\"",
+					"-framework",
+					"\"Accelerate\"",
+					"-framework",
+					"\"Alamofire\"",
+					"-framework",
+					"\"BrightFutures\"",
+					"-framework",
+					"\"CoreBluetooth\"",
+					"-framework",
+					"\"CoreData\"",
+					"-framework",
+					"\"CoreGraphics\"",
+					"-framework",
+					"\"CoreLocation\"",
+					"-framework",
+					"\"CoreText\"",
+					"-framework",
+					"\"GLKit\"",
+					"-framework",
+					"\"GoogleMaps\"",
+					"-framework",
+					"\"Haneke\"",
+					"-framework",
+					"\"ImageIO\"",
+					"-framework",
+					"\"ImagePickerSheetController\"",
+					"-framework",
+					"\"KYDrawerController\"",
+					"-framework",
+					"\"KeychainAccess\"",
+					"-framework",
+					"\"ObjectMapper\"",
+					"-framework",
+					"\"OpenGLES\"",
+					"-framework",
+					"\"PosInCore\"",
+					"-framework",
+					"\"QuartzCore\"",
+					"-framework",
+					"\"Result\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+					"-framework",
+					"\"UIImageEffects\"",
+					"-framework",
+					"\"XLForm\"",
+					"-ObjC",
+				);
+				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -D DEBUG -D \"STAGING_COPY_ENV\"";
+				PRODUCT_BUNDLE_IDENTIFIER = com.connectik.sarcs.members.dev;
+				PRODUCT_MODULE_NAME = RCRwanda;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = StagingReleaseCopy;
+		};
+		187AFC191CEBC1D300913987 /* ProdDebug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)",
+				);
+				INFOPLIST_FILE = "Applications/${TARGET_NAME}/Supporting Files/Info.plist";
+				INFOPLIST_PREFIX_HEADER = "${PROJECT_NAME}/Supporting Files/Version.h";
+				INFOPLIST_PREPROCESS = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-l\"c++\"",
+					"-l\"icucore\"",
+					"-l\"z\"",
+					"-framework",
+					"\"AVFoundation\"",
+					"-framework",
+					"\"Accelerate\"",
+					"-framework",
+					"\"Alamofire\"",
+					"-framework",
+					"\"BrightFutures\"",
+					"-framework",
+					"\"CoreBluetooth\"",
+					"-framework",
+					"\"CoreData\"",
+					"-framework",
+					"\"CoreGraphics\"",
+					"-framework",
+					"\"CoreLocation\"",
+					"-framework",
+					"\"CoreText\"",
+					"-framework",
+					"\"GLKit\"",
+					"-framework",
+					"\"GoogleMaps\"",
+					"-framework",
+					"\"Haneke\"",
+					"-framework",
+					"\"ImageIO\"",
+					"-framework",
+					"\"ImagePickerSheetController\"",
+					"-framework",
+					"\"KYDrawerController\"",
+					"-framework",
+					"\"KeychainAccess\"",
+					"-framework",
+					"\"ObjectMapper\"",
+					"-framework",
+					"\"OpenGLES\"",
+					"-framework",
+					"\"PosInCore\"",
+					"-framework",
+					"\"QuartzCore\"",
+					"-framework",
+					"\"Result\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+					"-framework",
+					"\"UIImageEffects\"",
+					"-framework",
+					"\"XLForm\"",
+					"-ObjC",
+				);
+				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -D DEBUG -D \"PROD_ENV\"";
+				PRODUCT_BUNDLE_IDENTIFIER = com.connectik.sarcs.members.dev;
+				PRODUCT_MODULE_NAME = RCRwanda;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = ProdDebug;
+		};
+		187AFC1A1CEBC1D300913987 /* DevRelease */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)",
+				);
+				INFOPLIST_FILE = "Applications/${TARGET_NAME}/Supporting Files/Info.plist";
+				INFOPLIST_PREFIX_HEADER = "${PROJECT_NAME}/Supporting Files/Version.h";
+				INFOPLIST_PREPROCESS = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-l\"c++\"",
+					"-l\"icucore\"",
+					"-l\"z\"",
+					"-framework",
+					"\"AVFoundation\"",
+					"-framework",
+					"\"Accelerate\"",
+					"-framework",
+					"\"Alamofire\"",
+					"-framework",
+					"\"BrightFutures\"",
+					"-framework",
+					"\"CoreBluetooth\"",
+					"-framework",
+					"\"CoreData\"",
+					"-framework",
+					"\"CoreGraphics\"",
+					"-framework",
+					"\"CoreLocation\"",
+					"-framework",
+					"\"CoreText\"",
+					"-framework",
+					"\"GLKit\"",
+					"-framework",
+					"\"GoogleMaps\"",
+					"-framework",
+					"\"Haneke\"",
+					"-framework",
+					"\"ImageIO\"",
+					"-framework",
+					"\"ImagePickerSheetController\"",
+					"-framework",
+					"\"KYDrawerController\"",
+					"-framework",
+					"\"KeychainAccess\"",
+					"-framework",
+					"\"ObjectMapper\"",
+					"-framework",
+					"\"OpenGLES\"",
+					"-framework",
+					"\"PosInCore\"",
+					"-framework",
+					"\"QuartzCore\"",
+					"-framework",
+					"\"Result\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+					"-framework",
+					"\"UIImageEffects\"",
+					"-framework",
+					"\"XLForm\"",
+					"-ObjC",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.connectik.sarcs.members.dev;
+				PRODUCT_MODULE_NAME = RCRwanda;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+			};
+			name = DevRelease;
+		};
+		187AFC1B1CEBC1D300913987 /* StagingRelease */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)",
+				);
+				INFOPLIST_FILE = "Applications/${TARGET_NAME}/Supporting Files/Info.plist";
+				INFOPLIST_PREFIX_HEADER = "${PROJECT_NAME}/Supporting Files/Version.h";
+				INFOPLIST_PREPROCESS = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-l\"c++\"",
+					"-l\"icucore\"",
+					"-l\"z\"",
+					"-framework",
+					"\"AVFoundation\"",
+					"-framework",
+					"\"Accelerate\"",
+					"-framework",
+					"\"Alamofire\"",
+					"-framework",
+					"\"BrightFutures\"",
+					"-framework",
+					"\"CoreBluetooth\"",
+					"-framework",
+					"\"CoreData\"",
+					"-framework",
+					"\"CoreGraphics\"",
+					"-framework",
+					"\"CoreLocation\"",
+					"-framework",
+					"\"CoreText\"",
+					"-framework",
+					"\"GLKit\"",
+					"-framework",
+					"\"GoogleMaps\"",
+					"-framework",
+					"\"Haneke\"",
+					"-framework",
+					"\"ImageIO\"",
+					"-framework",
+					"\"ImagePickerSheetController\"",
+					"-framework",
+					"\"KYDrawerController\"",
+					"-framework",
+					"\"KeychainAccess\"",
+					"-framework",
+					"\"ObjectMapper\"",
+					"-framework",
+					"\"OpenGLES\"",
+					"-framework",
+					"\"PosInCore\"",
+					"-framework",
+					"\"QuartzCore\"",
+					"-framework",
+					"\"Result\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+					"-framework",
+					"\"UIImageEffects\"",
+					"-framework",
+					"\"XLForm\"",
+					"-ObjC",
+				);
+				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -D \"STAGING_ENV\"";
+				PRODUCT_BUNDLE_IDENTIFIER = com.connectik.sarcs.members.dev;
+				PRODUCT_MODULE_NAME = RCRwanda;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+			};
+			name = StagingRelease;
+		};
+		187AFC1C1CEBC1D300913987 /* ProdRelease */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)",
+				);
+				INFOPLIST_FILE = "Applications/${TARGET_NAME}/Supporting Files/Info.plist";
+				INFOPLIST_PREFIX_HEADER = "${PROJECT_NAME}/Supporting Files/Version.h";
+				INFOPLIST_PREPROCESS = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-l\"c++\"",
+					"-l\"icucore\"",
+					"-l\"z\"",
+					"-framework",
+					"\"AVFoundation\"",
+					"-framework",
+					"\"Accelerate\"",
+					"-framework",
+					"\"Alamofire\"",
+					"-framework",
+					"\"BrightFutures\"",
+					"-framework",
+					"\"CoreBluetooth\"",
+					"-framework",
+					"\"CoreData\"",
+					"-framework",
+					"\"CoreGraphics\"",
+					"-framework",
+					"\"CoreLocation\"",
+					"-framework",
+					"\"CoreText\"",
+					"-framework",
+					"\"GLKit\"",
+					"-framework",
+					"\"GoogleMaps\"",
+					"-framework",
+					"\"Haneke\"",
+					"-framework",
+					"\"ImageIO\"",
+					"-framework",
+					"\"ImagePickerSheetController\"",
+					"-framework",
+					"\"KYDrawerController\"",
+					"-framework",
+					"\"KeychainAccess\"",
+					"-framework",
+					"\"ObjectMapper\"",
+					"-framework",
+					"\"OpenGLES\"",
+					"-framework",
+					"\"PosInCore\"",
+					"-framework",
+					"\"QuartzCore\"",
+					"-framework",
+					"\"Result\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+					"-framework",
+					"\"UIImageEffects\"",
+					"-framework",
+					"\"XLForm\"",
+					"-ObjC",
+				);
+				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -D \"PROD_ENV\"";
+				PRODUCT_BUNDLE_IDENTIFIER = com.connectik.sarcs.members.dev;
+				PRODUCT_MODULE_NAME = RCRwanda;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+			};
+			name = ProdRelease;
+		};
+		187AFC1D1CEBC1D300913987 /* ProdRelease2 */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)",
+				);
+				INFOPLIST_FILE = "Applications/${TARGET_NAME}/Supporting Files/Info.plist";
+				INFOPLIST_PREFIX_HEADER = "${PROJECT_NAME}/Supporting Files/Version.h";
+				INFOPLIST_PREPROCESS = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-l\"c++\"",
+					"-l\"icucore\"",
+					"-l\"z\"",
+					"-framework",
+					"\"AVFoundation\"",
+					"-framework",
+					"\"Accelerate\"",
+					"-framework",
+					"\"Alamofire\"",
+					"-framework",
+					"\"BrightFutures\"",
+					"-framework",
+					"\"CoreBluetooth\"",
+					"-framework",
+					"\"CoreData\"",
+					"-framework",
+					"\"CoreGraphics\"",
+					"-framework",
+					"\"CoreLocation\"",
+					"-framework",
+					"\"CoreText\"",
+					"-framework",
+					"\"GLKit\"",
+					"-framework",
+					"\"GoogleMaps\"",
+					"-framework",
+					"\"Haneke\"",
+					"-framework",
+					"\"ImageIO\"",
+					"-framework",
+					"\"ImagePickerSheetController\"",
+					"-framework",
+					"\"KYDrawerController\"",
+					"-framework",
+					"\"KeychainAccess\"",
+					"-framework",
+					"\"ObjectMapper\"",
+					"-framework",
+					"\"OpenGLES\"",
+					"-framework",
+					"\"PosInCore\"",
+					"-framework",
+					"\"QuartzCore\"",
+					"-framework",
+					"\"Result\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+					"-framework",
+					"\"UIImageEffects\"",
+					"-framework",
+					"\"XLForm\"",
+					"-ObjC",
+				);
+				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -D \"PROD_ENV\"";
+				PRODUCT_BUNDLE_IDENTIFIER = com.connectik.sarcs.members.dev;
+				PRODUCT_MODULE_NAME = RCRwanda;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 			};
 			name = ProdRelease2;
 		};
@@ -8197,7 +9202,6 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = DevRelease;
@@ -8373,7 +9377,6 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "PositionIn/PositionIn-Bridging-Header.h";
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
 			};
 			name = DevRelease;
 		};
@@ -9295,6 +10298,22 @@
 				180E1DE81CE4CDE9006EBEC6 /* StagingRelease */,
 				180E1DE91CE4CDE9006EBEC6 /* ProdRelease */,
 				180E1DEA1CE4CDE9006EBEC6 /* ProdRelease2 */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = DevRelease;
+		};
+		187AFC141CEBC1D300913987 /* Build configuration list for PBXNativeTarget "RCRwanda" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				187AFC151CEBC1D300913987 /* DevDebug */,
+				187AFC161CEBC1D300913987 /* StagingDebug */,
+				187AFC171CEBC1D300913987 /* StagingDebugCopy */,
+				187AFC181CEBC1D300913987 /* StagingReleaseCopy */,
+				187AFC191CEBC1D300913987 /* ProdDebug */,
+				187AFC1A1CEBC1D300913987 /* DevRelease */,
+				187AFC1B1CEBC1D300913987 /* StagingRelease */,
+				187AFC1C1CEBC1D300913987 /* ProdRelease */,
+				187AFC1D1CEBC1D300913987 /* ProdRelease2 */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = DevRelease;

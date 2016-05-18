@@ -24,6 +24,12 @@ struct Event: CRUDObject {
     var attachments : [Attachment]?
     var isAttending: Bool?
     
+    var numberOfAttachments: Int {
+        let linksCount = links?.count ?? 0
+        let mediaAttachmentsCount = attachments?.count ?? 0
+        return linksCount + mediaAttachmentsCount
+    }
+    
 /* 
     TODO:
     "items": [<guid>],
