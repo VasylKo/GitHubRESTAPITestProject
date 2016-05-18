@@ -50,11 +50,11 @@ class BrowseListViewController: UIViewController, BrowseActionProducer, BrowseMo
         else {
             self.bannerButton.hidden = true
             self.tableViewBottomContraint.constant = 0
-            self.view.setNeedsUpdateConstraints()
+            
         }
         
+        self.view.setNeedsUpdateConstraints()
         self.tableView.separatorStyle = self.showCardCells ? .None : .SingleLine
-        
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -159,7 +159,7 @@ class BrowseListViewController: UIViewController, BrowseActionProducer, BrowseMo
     @IBAction func bannerTapped(sender: AnyObject) {
         let url: NSURL? = NSURL(string: "http://www.pledge25kenya.org/")
         if let url = url {
-            UIApplication.sharedApplication().openURL(url)
+            OpenApplication.Safari(with: url)
         }
     }
     
