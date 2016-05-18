@@ -728,7 +728,7 @@
 		D1379E951C2C21F80041AA4E /* PositionIn.NewsCardCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1379E931C2C21F80041AA4E /* PositionIn.NewsCardCell.xib */; };
 		D1381AD61C8D76C700328D86 /* PushNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1381AD51C8D76C700328D86 /* PushNotification.swift */; };
 		D13E42E31CEB0AA6003477F0 /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D13E42E21CEB0AA6003477F0 /* NotificationView.swift */; };
-		D13E42E51CEB0AB6003477F0 /* PositionIn.NotificationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D13E42E41CEB0AB6003477F0 /* PositionIn.NotificationView.xib */; };
+		D13E42E51CEB0AB6003477F0 /* NotificationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D13E42E41CEB0AB6003477F0 /* NotificationView.xib */; };
 		D13E42E81CEB17B8003477F0 /* NotificationViewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D13E42E71CEB17B8003477F0 /* NotificationViewContainer.swift */; };
 		D140BE411CC669BC001F9139 /* EPlusServisesTableViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D140BE3F1CC669BC001F9139 /* EPlusServisesTableViewHeader.swift */; };
 		D140BE421CC669BC001F9139 /* EPlusServisesTableViewHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = D140BE401CC669BC001F9139 /* EPlusServisesTableViewHeader.xib */; };
@@ -1456,7 +1456,7 @@
 		D1379E931C2C21F80041AA4E /* PositionIn.NewsCardCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.NewsCardCell.xib; sourceTree = "<group>"; };
 		D1381AD51C8D76C700328D86 /* PushNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushNotification.swift; sourceTree = "<group>"; };
 		D13E42E21CEB0AA6003477F0 /* NotificationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
-		D13E42E41CEB0AB6003477F0 /* PositionIn.NotificationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionIn.NotificationView.xib; sourceTree = "<group>"; };
+		D13E42E41CEB0AB6003477F0 /* NotificationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NotificationView.xib; sourceTree = "<group>"; };
 		D13E42E71CEB17B8003477F0 /* NotificationViewContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationViewContainer.swift; sourceTree = "<group>"; };
 		D140BE3F1CC669BC001F9139 /* EPlusServisesTableViewHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EPlusServisesTableViewHeader.swift; sourceTree = "<group>"; };
 		D140BE401CC669BC001F9139 /* EPlusServisesTableViewHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EPlusServisesTableViewHeader.xib; sourceTree = "<group>"; };
@@ -3324,7 +3324,7 @@
 			isa = PBXGroup;
 			children = (
 				D13E42E21CEB0AA6003477F0 /* NotificationView.swift */,
-				D13E42E41CEB0AB6003477F0 /* PositionIn.NotificationView.xib */,
+				D13E42E41CEB0AB6003477F0 /* NotificationView.xib */,
 			);
 			path = NotificationView;
 			sourceTree = "<group>";
@@ -5852,7 +5852,7 @@
 				D17373E61CE31BC500E9DA6F /* DueDateView.xib in Resources */,
 				E64DC35A1B4E53C90011D37C /* LaunchScreen.xib in Resources */,
 				184040271CC14A2B00DF3655 /* EPlusPlanInfoTableViewCell.xib in Resources */,
-				D13E42E51CEB0AB6003477F0 /* PositionIn.NotificationView.xib in Resources */,
+				D13E42E51CEB0AB6003477F0 /* NotificationView.xib in Resources */,
 				D12EB2971C96E83600718E57 /* PositionIn.NewsItemTitleCell.xib in Resources */,
 				1840402A1CC14A2B00DF3655 /* PositionIn.EPlusAmbulanceDetailsController.xib in Resources */,
 				500D7FAD1BC2CD51008C8C82 /* PositionIn.SearchSectionCell.xib in Resources */,

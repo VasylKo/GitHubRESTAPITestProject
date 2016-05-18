@@ -12,9 +12,7 @@ public enum NotificationViewType {
     case Yellow, Green
 }
 
-final class NotificationView: NibView {
-
-    
+final class NotificationView: UIView {
     
     var title: String? {
         didSet {
