@@ -193,8 +193,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 }
             }
             if !isOnAmbulanceFlow {
-                let notification = LNNotification(message: alert)
-                LNNotificationCenter.defaultCenter().presentNotification(notification, forApplicationIdentifier: "RedCross")
+                //let notification = LNNotification(message: alert)
+                //LNNotificationCenter.defaultCenter().presentNotification(notification, forApplicationIdentifier: "RedCross")
             }
         }
     }
