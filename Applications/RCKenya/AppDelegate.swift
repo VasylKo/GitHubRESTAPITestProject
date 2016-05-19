@@ -17,7 +17,7 @@ import XLForm
 import Braintree
 import Fabric
 import Crashlytics
-import LNNotificationsUI
+//import LNNotificationsUI
 
 
 @UIApplicationMain
@@ -145,15 +145,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIApplication.sharedApplication().registerUserNotificationSettings(settings)
         UIApplication.sharedApplication().registerForRemoteNotifications()
         
-        #if DEBUG
-            Fabric.with([Crashlytics.self])
-        #endif
         NewRelicController.sharedInstance.start()
         
-        let notificationSettings = LNNotificationAppSettings()
-        notificationSettings.alertStyle = .Banner
-        notificationSettings.soundEnabled = false
-        LNNotificationCenter.defaultCenter().registerApplicationWithIdentifier("RedCross", name: "Red Cross", icon: UIImage(named: "push_notification_icon"), defaultSettings: notificationSettings);
+//        let notificationSettings = LNNotificationAppSettings()
+//        notificationSettings.alertStyle = .Banner
+//        notificationSettings.soundEnabled = false
+//        LNNotificationCenter.defaultCenter().registerApplicationWithIdentifier("RedCross", name: "Red Cross", icon: UIImage(named: "push_notification_icon"), defaultSettings: notificationSettings);
         
         return true
     }
