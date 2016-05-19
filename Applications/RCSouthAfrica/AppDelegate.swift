@@ -15,10 +15,6 @@ import Messaging
 import GoogleMaps
 import XLForm
 import Braintree
-import Fabric
-import Crashlytics
-import LNNotificationsUI
-
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -142,9 +138,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIApplication.sharedApplication().registerUserNotificationSettings(settings)
         UIApplication.sharedApplication().registerForRemoteNotifications()
         
-        #if DEBUG
-            Fabric.with([Crashlytics.self])
-        #endif
         NewRelicController.sharedInstance.start()
         
         let notificationSettings = LNNotificationAppSettings()
