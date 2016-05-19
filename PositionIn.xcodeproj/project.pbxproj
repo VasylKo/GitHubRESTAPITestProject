@@ -5426,7 +5426,6 @@
 				187AFC0A1CEBC1D300913987 /* Embed Core Framework */,
 				187AFC0E1CEBC1D300913987 /* Strip Cleanroom framework */,
 				187AFC0F1CEBC1D300913987 /* Copy Simulator app */,
-				187AFC101CEBC1D300913987 /* Fabric */,
 				187AFC111CEBC1D300913987 /* NewRelic */,
 				187AFC121CEBC1D300913987 /* Embed Pods Frameworks */,
 				187AFC131CEBC1D300913987 /* Copy Pods Resources */,
@@ -6035,20 +6034,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PROJECT_DIR}/Scripts/CopyApp.sh\"";
-		};
-		187AFC101CEBC1D300913987 /* Fabric */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = Fabric;
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Fabric/run\" 27437daf7b0468aa7a96977842e169657c6b889e 58591b6e6e68aaf8d43a618c90f6c748e0b802f61f287d83e43e16f0542fba41";
 		};
 		187AFC111CEBC1D300913987 /* NewRelic */ = {
 			isa = PBXShellScriptBuildPhase;
