@@ -44,6 +44,10 @@
 
 /* Begin PBXBuildFile section */
 		18033D0B1C905E6100C709DD /* NSDate+TimeZone.m in Sources */ = {isa = PBXBuildFile; fileRef = 18033D0A1C905E6100C709DD /* NSDate+TimeZone.m */; };
+		1804DCAD1CEDCA6200BE143D /* UIApplication+TopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546A3C8D1CEB5BD100127D03 /* UIApplication+TopViewController.swift */; };
+		1804DCAE1CEDCA8000BE143D /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D13E42E21CEB0AA6003477F0 /* NotificationView.swift */; };
+		1804DCAF1CEDCA8000BE143D /* NotificationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D13E42E41CEB0AB6003477F0 /* NotificationView.xib */; };
+		1804DCB01CEDCA8300BE143D /* NotificationViewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D13E42E71CEB17B8003477F0 /* NotificationViewContainer.swift */; };
 		180E1C1D1CE4CDE9006EBEC6 /* MpesaPaymentSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 542EDF771CCE05AE006FE641 /* MpesaPaymentSystem.swift */; };
 		180E1C1E1CE4CDE9006EBEC6 /* PushNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1381AD51C8D76C700328D86 /* PushNotification.swift */; };
 		180E1C1F1CE4CDE9006EBEC6 /* BrowseGridViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18EA2CC1C04B38400A886A5 /* BrowseGridViewController.swift */; };
@@ -5682,6 +5686,7 @@
 				180E1DBF1CE4CDE9006EBEC6 /* DueDateView.xib in Resources */,
 				180E1DC01CE4CDE9006EBEC6 /* LaunchScreen.xib in Resources */,
 				180E1DC11CE4CDE9006EBEC6 /* EPlusPlanInfoTableViewCell.xib in Resources */,
+				1804DCAF1CEDCA8000BE143D /* NotificationView.xib in Resources */,
 				180E1DC21CE4CDE9006EBEC6 /* PositionIn.NewsItemTitleCell.xib in Resources */,
 				180E1DC31CE4CDE9006EBEC6 /* PositionIn.EPlusAmbulanceDetailsController.xib in Resources */,
 				180E1DC41CE4CDE9006EBEC6 /* PositionIn.SearchSectionCell.xib in Resources */,
@@ -6409,6 +6414,7 @@
 				180E1CC61CE4CDE9006EBEC6 /* DisplayModeViewController.swift in Sources */,
 				180E1CC71CE4CDE9006EBEC6 /* AmbulanceBaseController.swift in Sources */,
 				180E1CC81CE4CDE9006EBEC6 /* PaymentOrderDescriptionCell.swift in Sources */,
+				1804DCAD1CEDCA6200BE143D /* UIApplication+TopViewController.swift in Sources */,
 				180E1CC91CE4CDE9006EBEC6 /* LocationCell.swift in Sources */,
 				180E1CCA1CE4CDE9006EBEC6 /* EPlusSelectPlanTableViewFooterView.swift in Sources */,
 				180E1CCB1CE4CDE9006EBEC6 /* EPlusPlanInfoTableViewCell.swift in Sources */,
@@ -6458,6 +6464,7 @@
 				180E1CF71CE4CDE9006EBEC6 /* PostTableViewCellModel.swift in Sources */,
 				180E1CF81CE4CDE9006EBEC6 /* AddMenuView.swift in Sources */,
 				180E1CF91CE4CDE9006EBEC6 /* IntroPageCellProtocol.swift in Sources */,
+				1804DCB01CEDCA8300BE143D /* NotificationViewContainer.swift in Sources */,
 				180E1CFA1CE4CDE9006EBEC6 /* CardTableViewCell.swift in Sources */,
 				180E1CFB1CE4CDE9006EBEC6 /* BomaHotel.swift in Sources */,
 				180E1CFC1CE4CDE9006EBEC6 /* WebViewController.swift in Sources */,
@@ -6489,6 +6496,7 @@
 				180E1D171CE4CDE9006EBEC6 /* EPlusMembershipRouter.swift in Sources */,
 				180E1D181CE4CDE9006EBEC6 /* GiveBloodRouterImplementation.swift in Sources */,
 				180E1D191CE4CDE9006EBEC6 /* Product.swift in Sources */,
+				1804DCAE1CEDCA8000BE143D /* NotificationView.swift in Sources */,
 				180E1D1A1CE4CDE9006EBEC6 /* NSDate+NVTimeAgo.m in Sources */,
 				180E1D1B1CE4CDE9006EBEC6 /* APIService+Auth.swift in Sources */,
 				180E1D1C1CE4CDE9006EBEC6 /* OnboardingNavigationController.swift in Sources */,
