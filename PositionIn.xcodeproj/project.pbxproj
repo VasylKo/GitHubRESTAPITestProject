@@ -48,6 +48,22 @@
 		1804DCAE1CEDCA8000BE143D /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D13E42E21CEB0AA6003477F0 /* NotificationView.swift */; };
 		1804DCAF1CEDCA8000BE143D /* NotificationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D13E42E41CEB0AB6003477F0 /* NotificationView.xib */; };
 		1804DCB01CEDCA8300BE143D /* NotificationViewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D13E42E71CEB17B8003477F0 /* NotificationViewContainer.swift */; };
+		1804DCCA1CEDFCB400BE143D /* LNNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 1804DCB91CEDFCB400BE143D /* LNNotification.m */; };
+		1804DCCB1CEDFCB400BE143D /* LNNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 1804DCB91CEDFCB400BE143D /* LNNotification.m */; };
+		1804DCCC1CEDFCB400BE143D /* LNNotificationAppSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 1804DCBB1CEDFCB400BE143D /* LNNotificationAppSettings.m */; };
+		1804DCCD1CEDFCB400BE143D /* LNNotificationAppSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 1804DCBB1CEDFCB400BE143D /* LNNotificationAppSettings.m */; };
+		1804DCCE1CEDFCB400BE143D /* LNNotificationBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1804DCBE1CEDFCB400BE143D /* LNNotificationBannerView.m */; };
+		1804DCCF1CEDFCB400BE143D /* LNNotificationBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1804DCBE1CEDFCB400BE143D /* LNNotificationBannerView.m */; };
+		1804DCD01CEDFCB400BE143D /* LNNotificationBannerWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 1804DCC01CEDFCB400BE143D /* LNNotificationBannerWindow.m */; };
+		1804DCD11CEDFCB400BE143D /* LNNotificationBannerWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 1804DCC01CEDFCB400BE143D /* LNNotificationBannerWindow.m */; };
+		1804DCD21CEDFCB400BE143D /* LNNotificationCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 1804DCC21CEDFCB400BE143D /* LNNotificationCenter.m */; };
+		1804DCD31CEDFCB400BE143D /* LNNotificationCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 1804DCC21CEDFCB400BE143D /* LNNotificationCenter.m */; };
+		1804DCD41CEDFCB400BE143D /* LNNotificationsAppSettingsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1804DCC41CEDFCB400BE143D /* LNNotificationsAppSettingsController.m */; };
+		1804DCD51CEDFCB400BE143D /* LNNotificationsAppSettingsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1804DCC41CEDFCB400BE143D /* LNNotificationsAppSettingsController.m */; };
+		1804DCD61CEDFCB400BE143D /* LNNotificationSettingsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1804DCC61CEDFCB400BE143D /* LNNotificationSettingsController.m */; };
+		1804DCD71CEDFCB400BE143D /* LNNotificationSettingsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1804DCC61CEDFCB400BE143D /* LNNotificationSettingsController.m */; };
+		1804DCD81CEDFCB400BE143D /* LNNotificationsUIAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1804DCC91CEDFCB400BE143D /* LNNotificationsUIAssets.xcassets */; };
+		1804DCD91CEDFCB400BE143D /* LNNotificationsUIAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1804DCC91CEDFCB400BE143D /* LNNotificationsUIAssets.xcassets */; };
 		180E1C1D1CE4CDE9006EBEC6 /* MpesaPaymentSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 542EDF771CCE05AE006FE641 /* MpesaPaymentSystem.swift */; };
 		180E1C1E1CE4CDE9006EBEC6 /* PushNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1381AD51C8D76C700328D86 /* PushNotification.swift */; };
 		180E1C1F1CE4CDE9006EBEC6 /* BrowseGridViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18EA2CC1C04B38400A886A5 /* BrowseGridViewController.swift */; };
@@ -1185,6 +1201,24 @@
 		178D7FA773D77E1E72A6C121 /* Pods-RCKenya.prodrelease2.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RCKenya.prodrelease2.xcconfig"; path = "Pods/Target Support Files/Pods-RCKenya/Pods-RCKenya.prodrelease2.xcconfig"; sourceTree = "<group>"; };
 		18033D091C905E6100C709DD /* NSDate+TimeZone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+TimeZone.h"; sourceTree = "<group>"; };
 		18033D0A1C905E6100C709DD /* NSDate+TimeZone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+TimeZone.m"; sourceTree = "<group>"; };
+		1804DCB81CEDFCB400BE143D /* LNNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LNNotification.h; sourceTree = "<group>"; };
+		1804DCB91CEDFCB400BE143D /* LNNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LNNotification.m; sourceTree = "<group>"; };
+		1804DCBA1CEDFCB400BE143D /* LNNotificationAppSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LNNotificationAppSettings.h; sourceTree = "<group>"; };
+		1804DCBB1CEDFCB400BE143D /* LNNotificationAppSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LNNotificationAppSettings.m; sourceTree = "<group>"; };
+		1804DCBC1CEDFCB400BE143D /* LNNotificationAppSettings_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LNNotificationAppSettings_Private.h; sourceTree = "<group>"; };
+		1804DCBD1CEDFCB400BE143D /* LNNotificationBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LNNotificationBannerView.h; sourceTree = "<group>"; };
+		1804DCBE1CEDFCB400BE143D /* LNNotificationBannerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LNNotificationBannerView.m; sourceTree = "<group>"; };
+		1804DCBF1CEDFCB400BE143D /* LNNotificationBannerWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LNNotificationBannerWindow.h; sourceTree = "<group>"; };
+		1804DCC01CEDFCB400BE143D /* LNNotificationBannerWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LNNotificationBannerWindow.m; sourceTree = "<group>"; };
+		1804DCC11CEDFCB400BE143D /* LNNotificationCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LNNotificationCenter.h; sourceTree = "<group>"; };
+		1804DCC21CEDFCB400BE143D /* LNNotificationCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LNNotificationCenter.m; sourceTree = "<group>"; };
+		1804DCC31CEDFCB400BE143D /* LNNotificationsAppSettingsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LNNotificationsAppSettingsController.h; sourceTree = "<group>"; };
+		1804DCC41CEDFCB400BE143D /* LNNotificationsAppSettingsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LNNotificationsAppSettingsController.m; sourceTree = "<group>"; };
+		1804DCC51CEDFCB400BE143D /* LNNotificationSettingsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LNNotificationSettingsController.h; sourceTree = "<group>"; };
+		1804DCC61CEDFCB400BE143D /* LNNotificationSettingsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LNNotificationSettingsController.m; sourceTree = "<group>"; };
+		1804DCC71CEDFCB400BE143D /* LNNotificationsUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LNNotificationsUI.h; sourceTree = "<group>"; };
+		1804DCC81CEDFCB400BE143D /* LNNotificationsUI_iOS7.1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LNNotificationsUI_iOS7.1.h; sourceTree = "<group>"; };
+		1804DCC91CEDFCB400BE143D /* LNNotificationsUIAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = LNNotificationsUIAssets.xcassets; sourceTree = "<group>"; };
 		180E1DEB1CE4CDE9006EBEC6 /* RCSouthAfrica.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RCSouthAfrica.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		180E1E4F1CE4DEB8006EBEC6 /* Version.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Version.h; sourceTree = "<group>"; };
 		180E1E521CE51580006EBEC6 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -2081,6 +2115,39 @@
 				18CCFAF41C8D841900603C7F /* PositionIn.BoughtProductDetailsViewController.xib */,
 			);
 			path = BoughtProductDetails;
+			sourceTree = "<group>";
+		};
+		1804DCB61CEDFCB400BE143D /* LNNotificationsUI */ = {
+			isa = PBXGroup;
+			children = (
+				1804DCB71CEDFCB400BE143D /* LNNotificationsUI */,
+				1804DCC91CEDFCB400BE143D /* LNNotificationsUIAssets.xcassets */,
+			);
+			path = LNNotificationsUI;
+			sourceTree = "<group>";
+		};
+		1804DCB71CEDFCB400BE143D /* LNNotificationsUI */ = {
+			isa = PBXGroup;
+			children = (
+				1804DCB81CEDFCB400BE143D /* LNNotification.h */,
+				1804DCB91CEDFCB400BE143D /* LNNotification.m */,
+				1804DCBA1CEDFCB400BE143D /* LNNotificationAppSettings.h */,
+				1804DCBB1CEDFCB400BE143D /* LNNotificationAppSettings.m */,
+				1804DCBC1CEDFCB400BE143D /* LNNotificationAppSettings_Private.h */,
+				1804DCBD1CEDFCB400BE143D /* LNNotificationBannerView.h */,
+				1804DCBE1CEDFCB400BE143D /* LNNotificationBannerView.m */,
+				1804DCBF1CEDFCB400BE143D /* LNNotificationBannerWindow.h */,
+				1804DCC01CEDFCB400BE143D /* LNNotificationBannerWindow.m */,
+				1804DCC11CEDFCB400BE143D /* LNNotificationCenter.h */,
+				1804DCC21CEDFCB400BE143D /* LNNotificationCenter.m */,
+				1804DCC31CEDFCB400BE143D /* LNNotificationsAppSettingsController.h */,
+				1804DCC41CEDFCB400BE143D /* LNNotificationsAppSettingsController.m */,
+				1804DCC51CEDFCB400BE143D /* LNNotificationSettingsController.h */,
+				1804DCC61CEDFCB400BE143D /* LNNotificationSettingsController.m */,
+				1804DCC71CEDFCB400BE143D /* LNNotificationsUI.h */,
+				1804DCC81CEDFCB400BE143D /* LNNotificationsUI_iOS7.1.h */,
+			);
+			path = LNNotificationsUI;
 			sourceTree = "<group>";
 		};
 		180E1E4E1CE4DEB8006EBEC6 /* Supporting Files */ = {
@@ -3974,6 +4041,7 @@
 		E64DC34C1B4E53C90011D37C /* PositionIn */ = {
 			isa = PBXGroup;
 			children = (
+				1804DCB61CEDFCB400BE143D /* LNNotificationsUI */,
 				180E1E4E1CE4DEB8006EBEC6 /* Supporting Files */,
 				545652911CCFFBA000C63C01 /* Projects */,
 				511791DD1CCBE22900B916CB /* PaymentSystems */,
@@ -5399,7 +5467,6 @@
 				180E1DD71CE4CDE9006EBEC6 /* Embed Core Framework */,
 				180E1DDB1CE4CDE9006EBEC6 /* Strip Cleanroom framework */,
 				180E1DDC1CE4CDE9006EBEC6 /* Copy Simulator app */,
-				180E1DDD1CE4CDE9006EBEC6 /* Fabric */,
 				180E1DDE1CE4CDE9006EBEC6 /* NewRelic */,
 				180E1DDF1CE4CDE9006EBEC6 /* Embed Pods Frameworks */,
 				180E1DE01CE4CDE9006EBEC6 /* Copy Pods Resources */,
@@ -5450,7 +5517,6 @@
 				E6325F901B57E4B100996480 /* Embed Core Framework */,
 				E6B3C3331B62589000EA613A /* Strip Cleanroom framework */,
 				50FA91181BB4211E00B56810 /* Copy Simulator app */,
-				D1531E551C43DBF700B2A3A9 /* Fabric */,
 				D1BD11E11C7DB7300047E959 /* NewRelic */,
 				BB394B404742A463A4D438F8 /* Embed Pods Frameworks */,
 				590178D45FB9BDB6FCB090E5 /* Copy Pods Resources */,
@@ -5646,6 +5712,7 @@
 				180E1D981CE4CDE9006EBEC6 /* PositionIn.EventDetailsViewController.xib in Resources */,
 				180E1D991CE4CDE9006EBEC6 /* PositionIn.PostLikeCommentCell.xib in Resources */,
 				180E1D9A1CE4CDE9006EBEC6 /* MembershipPlanDetailsBenefitTableViewCell.xib in Resources */,
+				1804DCD91CEDFCB400BE143D /* LNNotificationsUIAssets.xcassets in Resources */,
 				180E1D9B1CE4CDE9006EBEC6 /* AboutEplusServiceTableViewHeaderView.xib in Resources */,
 				180E1D9C1CE4CDE9006EBEC6 /* PositionIn.EventListCell.xib in Resources */,
 				180E1D9D1CE4CDE9006EBEC6 /* PositionIn.PostBodyCell.xib in Resources */,
@@ -5817,6 +5884,7 @@
 				D1FD85421C1EE8EA00C2E87B /* PositionIn.EventDetailsViewController.xib in Resources */,
 				50D1AFA71BBAD21400957882 /* PositionIn.PostLikeCommentCell.xib in Resources */,
 				CDB5B5C91C5B9C2400413715 /* MembershipPlanDetailsBenefitTableViewCell.xib in Resources */,
+				1804DCD81CEDFCB400BE143D /* LNNotificationsUIAssets.xcassets in Resources */,
 				5419F98D1CC53F45000E16E7 /* AboutEplusServiceTableViewHeaderView.xib in Resources */,
 				E68B52231B875F8F006B980C /* PositionIn.EventListCell.xib in Resources */,
 				E6BEF1D31B9C657100511B46 /* PositionIn.PostBodyCell.xib in Resources */,
@@ -5933,20 +6001,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PROJECT_DIR}/Scripts/CopyApp.sh\"";
-		};
-		180E1DDD1CE4CDE9006EBEC6 /* Fabric */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = Fabric;
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Fabric/run\" 27437daf7b0468aa7a96977842e169657c6b889e 58591b6e6e68aaf8d43a618c90f6c748e0b802f61f287d83e43e16f0542fba41";
 		};
 		180E1DDE1CE4CDE9006EBEC6 /* NewRelic */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -6138,20 +6192,6 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RCKenya/Pods-RCKenya-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		D1531E551C43DBF700B2A3A9 /* Fabric */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = Fabric;
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Fabric/run\" 27437daf7b0468aa7a96977842e169657c6b889e 58591b6e6e68aaf8d43a618c90f6c748e0b802f61f287d83e43e16f0542fba41";
-		};
 		D1BD11E11C7DB7300047E959 /* NewRelic */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -6243,9 +6283,11 @@
 				180E1C2A1CE4CDE9006EBEC6 /* MembershipMemberProfileView.swift in Sources */,
 				180E1C2B1CE4CDE9006EBEC6 /* NSDate+pickUpAvaliabilityString.swift in Sources */,
 				180E1E741CE51590006EBEC6 /* HomeItem.swift in Sources */,
+				1804DCCD1CEDFCB400BE143D /* LNNotificationAppSettings.m in Sources */,
 				180E1C2C1CE4CDE9006EBEC6 /* LocationSearchResultDataSource.swift in Sources */,
 				180E1C2D1CE4CDE9006EBEC6 /* BesideMenuViewController.swift in Sources */,
 				180E1C2E1CE4CDE9006EBEC6 /* ChatController.swift in Sources */,
+				1804DCD51CEDFCB400BE143D /* LNNotificationsAppSettingsController.m in Sources */,
 				180E1C2F1CE4CDE9006EBEC6 /* DonateViewController.swift in Sources */,
 				180E1C301CE4CDE9006EBEC6 /* NewsCellModelFactory.swift in Sources */,
 				180E1C321CE4CDE9006EBEC6 /* PhotoInfo.swift in Sources */,
@@ -6283,6 +6325,7 @@
 				180E1C521CE4CDE9006EBEC6 /* SearchSectionCell.swift in Sources */,
 				180E1C531CE4CDE9006EBEC6 /* EPlusServisesTableViewFooter.swift in Sources */,
 				180E1C541CE4CDE9006EBEC6 /* ItemsSearchResultsController.swift in Sources */,
+				1804DCD11CEDFCB400BE143D /* LNNotificationBannerWindow.m in Sources */,
 				180E1C551CE4CDE9006EBEC6 /* AmbulanceSentViewController.swift in Sources */,
 				180E1C561CE4CDE9006EBEC6 /* UserProfile.swift in Sources */,
 				180E1C571CE4CDE9006EBEC6 /* PostCellModelFactory.swift in Sources */,
@@ -6302,6 +6345,7 @@
 				180E1C661CE4CDE9006EBEC6 /* ProductInventoryViewController.swift in Sources */,
 				180E1C671CE4CDE9006EBEC6 /* CardItem.swift in Sources */,
 				180E1C681CE4CDE9006EBEC6 /* IntroPageViewController.swift in Sources */,
+				1804DCD71CEDFCB400BE143D /* LNNotificationSettingsController.m in Sources */,
 				180E1C691CE4CDE9006EBEC6 /* BrowseMainGridController.swift in Sources */,
 				180E1C6A1CE4CDE9006EBEC6 /* MembershipRouter.swift in Sources */,
 				180E1C6B1CE4CDE9006EBEC6 /* EPlusTableViewHeaderView.swift in Sources */,
@@ -6367,6 +6411,8 @@
 				180E1CA71CE4CDE9006EBEC6 /* EPlusContactsSupportController.swift in Sources */,
 				180E1CA81CE4CDE9006EBEC6 /* CreateConversationViewController.swift in Sources */,
 				180E1CA91CE4CDE9006EBEC6 /* PostImageCell.swift in Sources */,
+				1804DCD31CEDFCB400BE143D /* LNNotificationCenter.m in Sources */,
+				1804DCCB1CEDFCB400BE143D /* LNNotification.m in Sources */,
 				180E1CAA1CE4CDE9006EBEC6 /* VolunteerDetailsViewController.swift in Sources */,
 				180E1CAB1CE4CDE9006EBEC6 /* BloodTypeView.swift in Sources */,
 				180E1CAC1CE4CDE9006EBEC6 /* MarketDetailsViewController.swift in Sources */,
@@ -6409,6 +6455,7 @@
 				180E1CCF1CE4CDE9006EBEC6 /* CallAmbulanceViewController.swift in Sources */,
 				180E1CD01CE4CDE9006EBEC6 /* FeedTableViewCellModel.swift in Sources */,
 				180E1CD11CE4CDE9006EBEC6 /* EPlusTableViewFooterView.swift in Sources */,
+				1804DCCF1CEDFCB400BE143D /* LNNotificationBannerView.m in Sources */,
 				180E1CD21CE4CDE9006EBEC6 /* ConversationManager.swift in Sources */,
 				180E1CD31CE4CDE9006EBEC6 /* BaseAddItemViewController.swift in Sources */,
 				180E1CD41CE4CDE9006EBEC6 /* VolunteerSearchViewController.swift in Sources */,
@@ -6549,9 +6596,11 @@
 				E64D00631B7C8FB7007693E0 /* AddPostViewController.swift in Sources */,
 				CDE1B91F1C5F9E6A00F76F32 /* MembershipMemberProfileView.swift in Sources */,
 				545652901CCFB6B800C63C01 /* NSDate+pickUpAvaliabilityString.swift in Sources */,
+				1804DCCC1CEDFCB400BE143D /* LNNotificationAppSettings.m in Sources */,
 				180E1E681CE51580006EBEC6 /* HomeItem.swift in Sources */,
 				E6F7A4811BA356500069152A /* LocationSearchResultDataSource.swift in Sources */,
 				E62B16FF1B5CE0F800D446BC /* BesideMenuViewController.swift in Sources */,
+				1804DCD41CEDFCB400BE143D /* LNNotificationsAppSettingsController.m in Sources */,
 				E66F901B1BA6A5C100280B77 /* ChatController.swift in Sources */,
 				D1B780C81C0F4E7700EF5825 /* DonateViewController.swift in Sources */,
 				CD552DD71C75DFB80012920F /* NewsCellModelFactory.swift in Sources */,
@@ -6589,6 +6638,7 @@
 				D1F3E8141C7628C100EFC8ED /* NotificationTableViewCell.swift in Sources */,
 				500D7FAC1BC2CD51008C8C82 /* SearchSectionCell.swift in Sources */,
 				D140BE451CC66D57001F9139 /* EPlusServisesTableViewFooter.swift in Sources */,
+				1804DCD01CEDFCB400BE143D /* LNNotificationBannerWindow.m in Sources */,
 				50FE7D8A1BBE77BB005676E2 /* ItemsSearchResultsController.swift in Sources */,
 				D15F474B1C0B77EF009ED3FD /* AmbulanceSentViewController.swift in Sources */,
 				E6A869F41B60FF2100797D16 /* UserProfile.swift in Sources */,
@@ -6608,6 +6658,7 @@
 				D1BAE0001CDCBA3800B3ECE3 /* QuestionBloodDonorViewController.swift in Sources */,
 				E689F0771B6B90F400597587 /* ProductInventoryViewController.swift in Sources */,
 				D118A2AD1C0FBDF50020B363 /* CardItem.swift in Sources */,
+				1804DCD61CEDFCB400BE143D /* LNNotificationSettingsController.m in Sources */,
 				51E176FA1CDC8FC7006E4E3F /* IntroPageViewController.swift in Sources */,
 				D18EA2CA1C04A3CA00A886A5 /* BrowseMainGridController.swift in Sources */,
 				CD795BFA1C57CA5E00C1C298 /* MembershipRouter.swift in Sources */,
@@ -6673,6 +6724,8 @@
 				E6829B041B5E6CF800FB1E1D /* RoundButton.swift in Sources */,
 				184040351CC6290900DF3655 /* EPlusContactsSupportController.swift in Sources */,
 				E6BB09FE1BC51369008D59B7 /* CreateConversationViewController.swift in Sources */,
+				1804DCD21CEDFCB400BE143D /* LNNotificationCenter.m in Sources */,
+				1804DCCA1CEDFCB400BE143D /* LNNotification.m in Sources */,
 				E6BEF1CD1B9C5E7200511B46 /* PostImageCell.swift in Sources */,
 				D1F1FF251C22F384006D2E75 /* VolunteerDetailsViewController.swift in Sources */,
 				D1EA40271CE1E62F00B3FA58 /* BloodTypeView.swift in Sources */,
@@ -6715,6 +6768,7 @@
 				184236C01CA5B59700C53D08 /* NewRelicController.swift in Sources */,
 				D15F47471C0AFDAF009ED3FD /* CallAmbulanceViewController.swift in Sources */,
 				E68B52011B873545006B980C /* FeedTableViewCellModel.swift in Sources */,
+				1804DCCE1CEDFCB400BE143D /* LNNotificationBannerView.m in Sources */,
 				18F7C6551CBFF13600B68BB6 /* EPlusTableViewFooterView.swift in Sources */,
 				E6C5F4581BCE908800E3B8C7 /* ConversationManager.swift in Sources */,
 				E64D00651B7C9601007693E0 /* BaseAddItemViewController.swift in Sources */,

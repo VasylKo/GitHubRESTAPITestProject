@@ -15,7 +15,6 @@ import Messaging
 import GoogleMaps
 import XLForm
 import Braintree
-//import LNNotificationsUI
 
 
 @UIApplicationMain
@@ -145,10 +144,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         NewRelicController.sharedInstance.start()
         
-//        let notificationSettings = LNNotificationAppSettings()
-//        notificationSettings.alertStyle = .Banner
-//        notificationSettings.soundEnabled = false
-//        LNNotificationCenter.defaultCenter().registerApplicationWithIdentifier("RedCross", name: "Red Cross", icon: UIImage(named: "push_notification_icon"), defaultSettings: notificationSettings);
+        //let notificationSettings = LNNotificationAppSettings()
+        //notificationSettings.alertStyle = .Banner
+        //notificationSettings.soundEnabled = false
+        //LNNotificationCenter.defaultCenter().registerApplicationWithIdentifier("RedCross", name: "Red Cross", icon: UIImage(named: "push_notification_icon"), defaultSettings: notificationSettings);
         
         return true
     }
