@@ -16,7 +16,6 @@ import GoogleMaps
 import XLForm
 import Braintree
 
-
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
@@ -144,10 +143,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         NewRelicController.sharedInstance.start()
         
-        //let notificationSettings = LNNotificationAppSettings()
-        //notificationSettings.alertStyle = .Banner
-        //notificationSettings.soundEnabled = false
-        //LNNotificationCenter.defaultCenter().registerApplicationWithIdentifier("RedCross", name: "Red Cross", icon: UIImage(named: "push_notification_icon"), defaultSettings: notificationSettings);
+        let notificationSettings = LNNotificationAppSettings()
+        notificationSettings.alertStyle = .Banner
+        notificationSettings.soundEnabled = false
+        LNNotificationCenter.defaultCenter().registerApplicationWithIdentifier("RedCross", name: "Red Cross", icon: UIImage(named: "push_notification_icon"), defaultSettings: notificationSettings);
         
         return true
     }
@@ -192,8 +191,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 }
             }
             if !isOnAmbulanceFlow {
-                //let notification = LNNotification(message: alert)
-                //LNNotificationCenter.defaultCenter().presentNotification(notification, forApplicationIdentifier: "RedCross")
+                let notification = LNNotification(message: alert)
+                LNNotificationCenter.defaultCenter().presentNotification(notification, forApplicationIdentifier: "RedCross")
             }
         }
     }
