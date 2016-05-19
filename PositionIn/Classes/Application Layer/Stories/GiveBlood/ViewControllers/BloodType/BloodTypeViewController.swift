@@ -55,7 +55,7 @@ class BloodTypeViewController: UIViewController {
         }
         
         if let donorInfo = donorInfo {
-            if let bloodGroup = donorInfo.bloodGroup {
+            if let bloodGroup = donorInfo.bloodGroup where bloodGroup != .Unknown {
                 self.bloodTypeView?.bloodGroup = bloodGroup
             }
             
