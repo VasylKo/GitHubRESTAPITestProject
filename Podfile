@@ -15,14 +15,12 @@ def common_pods
   pod 'Google/Analytics'
   pod 'PosInCore', :path => 'PosInCore'
   pod 'RealmSwift', '~> 0.99'
-  pod 'Fabric', '~> 1.0'
-  pod 'Crashlytics', '~> 3.0'
   pod 'Braintree', '~> 4.1.2'
   pod 'Box', '~> 2.0'
   pod 'NewRelicAgent', '~> 5.3.6'
   pod 'CHCSVParser', '~> 2.1.0'
   pod 'TTTAttributedLabel', '~> 1.13'
-  pod 'LNNotificationsUI', :podspec => 'https://raw.githubusercontent.com/rkolchakov/LNNotificationsUI/master/LNNotificationsUI.podspec'
+  #pod 'LNNotificationsUI', :podspec => 'https://raw.githubusercontent.com/rkolchakov/LNNotificationsUI/master/LNNotificationsUI.podspec'
 end
 
 target 'RCKenya' do
