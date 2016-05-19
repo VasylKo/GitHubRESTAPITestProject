@@ -53,18 +53,18 @@ class NotificationViewContainer: UIView {
             window?.addSubview(self)
             window?.bringSubviewToFront(self)
             
-            let animationDutation = 1.5
+            let animationDutation = 1.0
             let showAnimationDuration = animated ? animationDutation: 0
             UIView.animateWithDuration(showAnimationDuration, animations: {
                 var frame = self.notificationView?.frame
                 frame?.origin.y = 0
                 self.notificationView?.frame = frame!
                 }, completion: { _ in
-                    UIView.animateWithDuration(animationDutation, animations: {
+                    UIView.animateWithDuration(animationDutation, delay: 2, options: .BeginFromCurrentState, animations: {
                         var frame = self.notificationView?.frame
                         frame?.origin.y = -(self.notificationView?.frame.size.height)!
                         self.notificationView?.frame = frame!
-                        }, completion: { _ in
+                        }, completion: {_ in
                             self.removeFromSuperview()
                     })
             })
