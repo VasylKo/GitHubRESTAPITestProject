@@ -15,8 +15,6 @@ import Messaging
 import GoogleMaps
 import XLForm
 import Braintree
-import Fabric
-import Crashlytics
 //import LNNotificationsUI
 
 
