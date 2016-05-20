@@ -43,18 +43,16 @@ class MoreInformationCell : XLFormButtonCell {
         }
         
         let placeholder : UIImage
+        var imageURL: NSURL?
+        
         if self.attachment?.type?.containsString("pdf") == true {
             placeholder = UIImage(named: "ic_pdf_attachment")!
         } else {
             placeholder = UIImage(named: "ic_image_attachment")!
-            
-            if let url = self.attachment?.url {
-                self.descriptionImageView.setImageFromURL(url)
-            }
+            imageURL = self.attachment?.url
         }
         
-        self.descriptionImageView?.image = placeholder
-
+        self.descriptionImageView.setImageFromURL(imageURL, placeholder: placeholder)
     }
     
     override static func formDescriptorCellHeightForRowDescriptor(rowDescriptor: XLFormRowDescriptor!) -> CGFloat {
