@@ -102,6 +102,8 @@ final class EventDetailsViewController: UIViewController {
         
         var firstSection = [EventActionItem]() // 1 section
         
+        firstSection.append(EventActionItem(title: NSLocalizedString("Share Event", comment: "Event action: Share Evente"), image: "share_event", action: .ShareEvent))
+        
         if self.author?.objectId != api().currentUserId() {
             firstSection.append(EventActionItem(title: NSLocalizedString("Send Message", comment: "Event action: Send Message"), image: "productSendMessage", action: .SendMessage))
             firstSection.append(EventActionItem(title: NSLocalizedString("Organizer Profile", comment: "Event action: Organizer Profile"),
@@ -137,12 +139,14 @@ final class EventDetailsViewController: UIViewController {
 
 extension EventDetailsViewController {
     enum EventDetailsAction: CustomStringConvertible {
-        case Attend, SendMessage, OrganizerProfile, TermsAndInformation, Navigate, MoreInformation
+        case Attend, ShareEvent, SendMessage, OrganizerProfile, TermsAndInformation, Navigate, MoreInformation
         
         var description: String {
             switch self {
             case .Attend:
                 return "Attend"
+            case .ShareEvent:
+                return "Share Event"
             case .SendMessage:
                 return "Send Message"
             case .OrganizerProfile:
@@ -187,6 +191,9 @@ extension EventDetailsViewController: EventDetailsActionConsumer {
             if let author = author {
                 showChatViewController(author.objectId)
             }
+        case .ShareEvent:
+            //TODO: Implement buttoms action
+            print("Share event button pressed")
         case .Attend :
             if api().isUserAuthorized() {
                 var isAttend = false
