@@ -91,12 +91,12 @@ extension NewsListViewController: NewsListActionConsumer {
     
     func like(item: FeedItem) {
         if (item.isLiked) {
-            item.numOfLikes?--
-            api().unlikeFeedItem(item).onSuccess{}
+            item.numOfLikes? -= 1
+            api().unlikeFeedItem(item)
         }
         else {
-            item.numOfLikes?++
-            api().likeFeedItem(item).onSuccess{}
+            item.numOfLikes? += 1
+            api().likeFeedItem(item)
         }
         
         item.isLiked = !item.isLiked

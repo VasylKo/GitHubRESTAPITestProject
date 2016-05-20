@@ -172,19 +172,15 @@ extension BrowseListViewController: ActionsDelegate {
     
     func like(item: FeedItem) {
         if (item.isLiked) {
-            api().unlikePost(item.objectId).onComplete(callback: { [weak self] _ in
-                dispatch_async(dispatch_get_main_queue(), {
-                    self?.reloadData()
-                })
-                })
+            item.numOfLikes? -= 1
+            api().unlikePost(item.objectId).onSuccess{}
         }
         else {
-            api().likePost(item.objectId).onComplete(callback: { [weak self] _ in
-                dispatch_async(dispatch_get_main_queue(), {
-                    self?.reloadData()
-                })
-                })
+            item.numOfLikes? += 1
+            api().likePost(item.objectId).onSuccess{}
         }
+        item.isLiked = !item.isLiked
+        tableView.reloadData()
     }
 }
 

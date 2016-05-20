@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
@@ -75,7 +75,7 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <action selector="likesButtonPressed:" destination="vmF-dk-LAG" eventType="touchUpInside" id="p6J-vq-Oc9"/>
+                                            <action selector="likeButtonPressed:" destination="vmF-dk-LAG" eventType="touchUpInside" id="ElA-yA-j1z"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m6q-48-03K">
@@ -162,7 +162,7 @@
                 <outlet property="headerLabel" destination="ghU-PB-oTZ" id="Df9-nU-DzW"/>
                 <outlet property="imageHeightConstaint" destination="wai-cu-y5i" id="eu0-7Q-TUI"/>
                 <outlet property="infoLabel" destination="CmM-7b-atD" id="GH4-ro-qMu"/>
-                <outlet property="likesButton" destination="xPg-PJ-SH1" id="xKE-4U-sG0"/>
+                <outlet property="likeButton" destination="xPg-PJ-SH1" id="msn-lV-CcT"/>
                 <outlet property="newsTextLabel" destination="wb6-xM-xc6" id="km2-sE-ciQ"/>
             </connections>
             <point key="canvasLocation" x="215" y="378"/>
