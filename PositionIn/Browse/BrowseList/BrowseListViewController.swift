@@ -107,6 +107,9 @@ class BrowseListViewController: UIViewController, BrowseActionProducer, BrowseMo
     }
     
     func reloadData() {
+        //Reset correct TableView Content Height, so after data is loaded it will be calculated automaticaly
+        correctTableViewContentHeight = BrowseListViewController.invalidTableViewContentHeigh
+        
         getFeedItems(filter)
     }
     
@@ -143,6 +146,37 @@ class BrowseListViewController: UIViewController, BrowseActionProducer, BrowseMo
             strongSelf.tableView.reloadData()
             strongSelf.tableView.setContentOffset(CGPointZero, animated: false)
             strongSelf.actionConsumer?.browseControllerDidChangeContent(strongSelf)
+        }
+    }
+    
+    static let invalidTableViewContentHeigh: CGFloat = -1
+    var correctTableViewContentHeight: CGFloat = BrowseListViewController.invalidTableViewContentHeigh
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        //Workaround to calculate corrected table view content size height based on each cells constraint.
+        let sectionsCount = tableView.numberOfSections
+        guard sectionsCount > 0  else { return }
+        let rowsInSection = tableView.numberOfRowsInSection(sectionsCount - 1)
+        let height = tableView.contentSize.height
+        
+        /*
+        We need this If statement to pass only when autolayout calculates correct table view content size height.
+        We need to call (browseControllerDidChangeContent:) once autolayaut calculated correct table view content size height. Then "UserProfileViewController" class will update its table view layout to feet all items correctly.
+         */
+        
+        if rowsInSection > 0 && height < CGFloat(rowsInSection) * tableView.estimatedRowHeight && height != correctTableViewContentHeight {
+            correctTableViewContentHeight = height
+            /*
+            We need to use dispatch_after otherwise "UserProfileViewController" class won't layout correctly its table view, because "tableView.beginUpdates()" in "UserProfileViewController" class automaticly calls this (viewDidLayoutSubviews) method which case incorrect behaviour.
+            */
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(UInt64(0.1) * NSEC_PER_SEC)),
+                           dispatch_get_main_queue(), {[weak self] _ in
+                            guard let strongSlf = self else { return }
+                            strongSlf.actionConsumer?.browseControllerDidChangeContent(strongSlf)
+                })
+
         }
     }
     
@@ -192,6 +226,11 @@ extension BrowseListViewController {
             self.showCardCells = showCardCells
         }
         
+        override func configureTable(tableView: UITableView) {
+            tableView.estimatedRowHeight = 200.0
+            super.configureTable(tableView)
+        }
+        
         func numberOfSectionsInTableView(tableView: UITableView) -> Int {
             return models.count
         }
@@ -224,30 +263,6 @@ extension BrowseListViewController {
                 let actionConsumer = self.actionConsumer {
                 actionConsumer.browseController(actionProducer, didSelectItem: model.item.objectId, type: model.item.type, data: model.data)
             }
-        }
-        
-        func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-            if let model = self.tableView(tableView, modelForIndexPath: indexPath) as? CompactFeedTableCellModel {
-                if model.item.type == .Post || model.item.type == .News {
-                    var cellHeight: CGFloat = 125
-                    cellHeight = (model.imageURL != nil) ? (cellHeight + 160) : cellHeight
-                    
-                    if let text = model.text {
-                        let maxSize = CGSize(width: UIScreen.mainScreen().applicationFrame.size.width - 80, height: CGFloat(MAXFLOAT))
-                        let attrString = NSAttributedString.init(string: text, attributes: [NSFontAttributeName:UIFont.systemFontOfSize(17)])
-                        let rect = attrString.boundingRectWithSize(maxSize, options: NSStringDrawingOptions.UsesLineFragmentOrigin, context: nil)
-                        let size = CGSizeMake(rect.size.width, rect.size.height)
-                        
-                        cellHeight += (size.height + 17)
-                    }
-                    return cellHeight
-                }
-                else {
-                    let height: CGFloat = showCompactCells ? 75.0 : 100.0
-                    return height
-                }
-            }
-            return 0
         }
         
         func setItems(delegate: ActionsDelegate, feedItems: [FeedItem]) {

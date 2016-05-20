@@ -8,6 +8,7 @@
 
 import PosInCore
 
+/// This Cell contains TableView (listController) that is added as subview to cell's contetnt view
 final class BrowseListTableViewCell: TableViewCell, TableViewChildViewControllerCell {
     
     override func setModel(model: TableViewCellModel) {
@@ -80,7 +81,7 @@ extension BrowseListTableViewCell: BrowseActionConsumer {
     
     func browseControllerDidChangeContent(controller: BrowseActionProducer) {
         //TODO: use constraint outlet instead of magic number
-        listTableHeightConstraint.constant = listController.tableView.contentSize.height + 80
+        listTableHeightConstraint.constant = listController.tableView.contentSize.height
         superview?.setNeedsLayout()
         actionConsumer?.browseControllerDidChangeContent(controller)
     }
