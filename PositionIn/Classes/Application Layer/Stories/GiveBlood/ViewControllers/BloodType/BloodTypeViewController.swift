@@ -24,9 +24,9 @@ class BloodTypeViewController: UIViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupUI()
         api().getDonorInfo().onSuccess(callback: { [weak self] donorInfo in
             self?.donorInfo = donorInfo
+            self?.activirtIndicator.hidden = true
             self?.setupUI()
             })
     }
@@ -106,4 +106,5 @@ class BloodTypeViewController: UIViewController {
     private var dueDateView: DueDateView?
     private var bloodTypeView: BloodTypeView?
     private let router : GiveBloodRouter
+    @IBOutlet weak var activirtIndicator: UIActivityIndicatorView!
 }
