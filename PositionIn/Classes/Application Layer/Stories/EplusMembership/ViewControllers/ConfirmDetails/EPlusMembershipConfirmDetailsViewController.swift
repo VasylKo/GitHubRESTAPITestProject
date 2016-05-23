@@ -129,7 +129,7 @@ class EPlusMembershipConfirmDetailsViewController : XLFormViewController {
     lazy private var bloodGroupRow: XLFormRowDescriptor = {
         let bloodGroupRow : XLFormRowDescriptor = XLFormRowDescriptor(tag: Tags.Gender.rawValue,
             rowType:XLFormRowDescriptorTypeSelectorPush, title: NSLocalizedString("Blood Group"))
-        bloodGroupRow.required = false
+        bloodGroupRow.required = true
         var selectorOptions: [XLFormOptionsObject] = []
         selectorOptions.append(XLFormOptionsObject(value: BloodGroup.GroupA.rawValue, displayText: BloodGroup.GroupA.description))
         selectorOptions.append(XLFormOptionsObject(value: BloodGroup.GroupB.rawValue, displayText: BloodGroup.GroupB.description))

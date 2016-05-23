@@ -13,6 +13,7 @@ protocol UserProfileActionConsumer: class {
     func shouldExecuteAction(action: UserProfileViewController.ProfileAction)
 }
 
+///This class contains table view with 2 sections. Second section has BrowseListTableViewCell that contains another TableView as subview inside.
 final class UserProfileViewController: BesideMenuViewController, BrowseActionProducer, UITextFieldDelegate, SearchViewControllerDelegate {
     
     weak var actionConsumer: BrowseActionConsumer?
