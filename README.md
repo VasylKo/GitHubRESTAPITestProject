@@ -1,5 +1,6 @@
 # GitHubRESTAPITestProject
 
+Educational project to get in close touch with REST and JSON. 
 This is my Swift app that uses a GitHub web service to get data from the GitHub gists API.
 The app is made during reading the book by Christina Moulton - "iOS Apps with REST APIs: Building Web-Driven Apps in Swift".
 
