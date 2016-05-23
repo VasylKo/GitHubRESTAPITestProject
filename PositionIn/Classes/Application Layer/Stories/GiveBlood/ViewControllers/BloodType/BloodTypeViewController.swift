@@ -24,6 +24,7 @@ class BloodTypeViewController: UIViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = NSLocalizedString("Your Details", comment: "Title of give blood selection screen")
         api().getDonorInfo().onSuccess(callback: { [weak self] donorInfo in
             self?.donorInfo = donorInfo
             self?.activirtIndicator.hidden = true
