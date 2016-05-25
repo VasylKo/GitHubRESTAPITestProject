@@ -6,5 +6,6 @@ use_frameworks!
 target 'GitHubRESTAPITestProject' do
     pod 'Alamofire', '~> 3.4'
     pod 'SwiftyJSON', '~> 2.3'
+    pod 'PINRemoteImage', '~> 2.1'
 end
 

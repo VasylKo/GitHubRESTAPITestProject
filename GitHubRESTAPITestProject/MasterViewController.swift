@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import PINRemoteImage
 
 class MasterViewController: UITableViewController {
 
@@ -92,7 +93,14 @@ class MasterViewController: UITableViewController {
         let gist = gists[indexPath.row]
         cell.textLabel!.text = gist.description
         cell.detailTextLabel!.text = gist.ownerLogin
-        // TODO: set cell.imageView to display image at gist.ownerAvatarURL
+        cell.imageView?.image = nil
+        
+        // set cell.imageView to display image at gist.ownerAvatarURL
+        if let urlString = gist.ownerAvatarURL, url = NSURL(string: urlString) {
+            cell.imageView?.pin_setImageFromURL(url, placeholderImage: UIImage(named: "placeholder.png"))
+        } else {
+            cell.imageView?.image = UIImage(named: "placeholder.png")
+        }
         
         return cell
     }
