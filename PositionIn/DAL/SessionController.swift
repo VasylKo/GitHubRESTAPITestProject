@@ -45,7 +45,7 @@ struct SessionController {
         return future { () -> Result<AccessTokenResponse.Token, NSError> in
             guard let refreshToken = self.refreshToken else {
                 Log.warning?.trace()
-                let errorCode = NetworkDataProvider.ErrorCodes.InvalidSessionError
+                let errorCode = NetworkDataProvider.ErrorCodes.SessionRevokedError
                 trackEventToAnalytics(AnalyticCategories.token, action: AnalyticActios.refreshTokenError, label: NSLocalizedString("In app refresh token missing"))
                 return Result(error: errorCode.error())
             }

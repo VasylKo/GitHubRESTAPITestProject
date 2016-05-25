@@ -31,5 +31,5 @@ class TotalCell: XLFormBaseCell {
         return 50.0
     }
     
-    @IBOutlet private weak var priceLabel: UILabel!
+    @IBOutlet weak var priceLabel: UILabel!
 }

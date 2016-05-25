@@ -13,6 +13,7 @@ protocol UserProfileActionConsumer: class {
     func shouldExecuteAction(action: UserProfileViewController.ProfileAction)
 }
 
+///This class contains table view with 2 sections. Second section has BrowseListTableViewCell that contains another TableView as subview inside.
 final class UserProfileViewController: BesideMenuViewController, BrowseActionProducer, UITextFieldDelegate, SearchViewControllerDelegate {
     
     weak var actionConsumer: BrowseActionConsumer?
@@ -64,7 +65,7 @@ final class UserProfileViewController: BesideMenuViewController, BrowseActionPro
             //send event to analytic
             trackEventToAnalytics(AnalyticCategories.people, action: AnalyticActios.followingCount, value: NSNumber(integer: profile.countFollowing ?? 0))
             trackEventToAnalytics(AnalyticCategories.people, action: AnalyticActios.followersCount, value: NSNumber(integer: profile.countFollowers ?? 0))
-        }.onComplete(callback: { [weak self] _ in
+            }.onComplete(callback: { [weak self] _ in
                 self?.tableView.userInteractionEnabled = true
                 })
     }
@@ -97,15 +98,12 @@ final class UserProfileViewController: BesideMenuViewController, BrowseActionPro
     }
     
     private func updateFeed() {
-        var feedModel = BrowseListCellModel(objectId: objectId, actionConsumer: self, browseMode: .New)
-        feedModel.excludeCommunityItems = true
-        feedModel.childFilterUpdate = self.childFilterUpdate
-        
-        //hide user feed
-//        dataSource.items[Sections.Feed.rawValue] = [ feedModel ]
-        
+        var model: BrowseListCellModel = BrowseListCellModel(objectId: objectId, actionConsumer: self, browseMode: .New,
+            filterType: .User)
+        model.childFilterUpdate = childFilterUpdate
+        dataSource.items[Sections.Feed.rawValue] = [model]
         tableView.reloadData()
-//        actionConsumer?.browseControllerDidChangeContent(self)
+        actionConsumer?.browseControllerDidChangeContent(self)
     }
     
     override func contentDidChange(sender: AnyObject?, info: [NSObject : AnyObject]?) {
@@ -114,7 +112,6 @@ final class UserProfileViewController: BesideMenuViewController, BrowseActionPro
             reloadData()
         }
     }
-
     
     func setNavigationBarButtonItem(isCurrentUser: Bool) {
         let navigationBarButtonActionSelector : Selector = "handleNavigationBarButtonItemTap:"
@@ -173,7 +170,6 @@ final class UserProfileViewController: BesideMenuViewController, BrowseActionPro
         } else {
             trackScreenToAnalytics(AnalyticsLabels.peopleDetails)
         }
-        
     }
     
     @IBAction func prepareForUnwind(segue: UIStoryboardSegue) {
@@ -205,7 +201,7 @@ final class UserProfileViewController: BesideMenuViewController, BrowseActionPro
         searchBar.tintColor = UIColor.whiteColor()
         searchBar.backgroundColor = UIScheme.searchbarBgColor
         searchBar.borderStyle = UITextBorderStyle.RoundedRect
-        searchBar.font = UIFont(name: "Helvetica", size: 16)
+        searchBar.font = UIScheme.appRegularFontOfSize(16)
         searchBar.textColor = UIColor.whiteColor()
         let leftView: UIImageView = UIImageView(image: UIImage(named: "search_icon"))
         leftView.frame = CGRectMake(0.0, 0.0, leftView.frame.size.width + 5.0, leftView.frame.size.height);
@@ -214,7 +210,7 @@ final class UserProfileViewController: BesideMenuViewController, BrowseActionPro
         searchBar.leftViewMode = .Always
         searchBar.delegate = self
         let str = NSAttributedString(string: "Search...", attributes: [NSForegroundColorAttributeName:UIColor(white: 255, alpha: 0.5),
-            NSFontAttributeName: UIFont(name: "Helvetica", size: 16)!])
+            NSFontAttributeName: UIScheme.appRegularFontOfSize(16)])
         searchBar.attributedPlaceholder =  str
         return searchBar
         }()
@@ -399,21 +395,32 @@ extension UserProfileViewController: BrowseActionConsumer {
             controller.author = data as? ObjectInfo
             navigationController?.pushViewController(controller, animated: true)
         case .Emergency:
-            let controller =  Storyboards.Main.instantiateEventDetailsViewControllerId()
-            controller.objectId = objectId
+            let controller =  Storyboards.Main.instantiateEmergencyDetailsControllerId()
+            controller.objectId = object as? CRUDObjectId
+            controller.author = data as? ObjectInfo
             navigationController?.pushViewController(controller, animated: true)
         case .Training:
             let controller =  Storyboards.Main.instantiateTrainingDetailsViewControllerId()
             controller.objectId = objectId
             navigationController?.pushViewController(controller, animated: true)
-        case .GiveBlood:
-            fallthrough
         case .News:
             fallthrough
+        case .Post:
+            let controller = Storyboards.Main.instantiatePostViewController()
+            controller.objectId = object as? CRUDObjectId
+            navigationController?.pushViewController(controller, animated: true)
+        case .GiveBlood:
+            fallthrough
         case .Event:
-            fallthrough
+            let controller = Storyboards.Main.instantiateEventDetailsViewControllerId()
+            controller.objectId = object as? CRUDObjectId
+            controller.author = data as? ObjectInfo
+            navigationController?.pushViewController(controller, animated: true)
         case .Market:
-            fallthrough
+            let controller = Storyboards.Main.instantiateMarketDetailsViewControllerId()
+            controller.objectId = object as? CRUDObjectId
+            controller.author = data as? ObjectInfo
+            navigationController?.pushViewController(controller, animated: true)
         case .BomaHotels:
             fallthrough
         case .Volunteer:
@@ -447,7 +454,7 @@ extension UserProfileViewController {
         var items: [[ProfileCellModel]] = [[],[]]
         
         override func configureTable(tableView: UITableView) {
-            tableView.estimatedRowHeight = 80.0
+            tableView.estimatedRowHeight = 180.0
             super.configureTable(tableView)
         }
         

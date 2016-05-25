@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
@@ -7,7 +7,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PeopleFollowingViewController" customModule="PositionIn" customModuleProvider="target">
             <connections>
-                <outlet property="noFollowersWorningLabel" destination="qh8-wU-bsN" id="hf7-d2-Se5"/>
+                <outlet property="noFollowersWarningLabel" destination="qh8-wU-bsN" id="6Tk-oj-Dgm"/>
+                <outlet property="searchBar" destination="Gs7-Gw-izV" id="UOC-p8-o7q"/>
                 <outlet property="tableView" destination="JxX-6c-MFk" id="6eu-yx-oBj"/>
                 <outlet property="view" destination="iN0-l3-epB" id="Zv8-xH-0z4"/>
             </connections>
@@ -18,41 +19,40 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="JxX-6c-MFk" customClass="TableView" customModule="PosInCore">
-                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                    <rect key="frame" x="0.0" y="44" width="600" height="556"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <connections>
                         <outlet property="delegate" destination="-1" id="ODn-TU-7hB"/>
                     </connections>
                 </tableView>
                 <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Press Explore tab to follow new people" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qh8-wU-bsN" userLabel="No Followers Warning Label">
-                    <rect key="frame" x="0.0" y="30" width="600" height="18"/>
+                    <rect key="frame" x="0.0" y="80" width="600" height="18"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <searchBar contentMode="redraw" placeholder="Search" translatesAutoresizingMaskIntoConstraints="NO" id="Gs7-Gw-izV">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                    <textInputTraits key="textInputTraits"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="aaC-8p-sD7"/>
+                    </connections>
+                </searchBar>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="JxX-6c-MFk" secondAttribute="trailing" id="2oj-Hb-23S"/>
+                <constraint firstItem="Gs7-Gw-izV" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="41z-2b-7wa"/>
                 <constraint firstAttribute="trailing" secondItem="qh8-wU-bsN" secondAttribute="trailing" id="8KW-Oc-TxQ"/>
                 <constraint firstItem="qh8-wU-bsN" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="DRA-Ho-bY1"/>
-                <constraint firstAttribute="trailing" secondItem="qh8-wU-bsN" secondAttribute="trailing" id="FJQ-0x-WHr"/>
-                <constraint firstItem="qh8-wU-bsN" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="30" id="Fks-18-ndE"/>
-                <constraint firstAttribute="bottom" secondItem="qh8-wU-bsN" secondAttribute="bottom" constant="200" id="M26-Ou-VmM"/>
-                <constraint firstItem="JxX-6c-MFk" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Vym-fe-h1t"/>
+                <constraint firstItem="qh8-wU-bsN" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="80" id="Fks-18-ndE"/>
+                <constraint firstItem="Gs7-Gw-izV" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="PyW-Mh-EA6"/>
                 <constraint firstItem="JxX-6c-MFk" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="WS7-MW-IER"/>
+                <constraint firstAttribute="trailing" secondItem="Gs7-Gw-izV" secondAttribute="trailing" id="Z8b-km-jkE"/>
+                <constraint firstItem="JxX-6c-MFk" firstAttribute="top" secondItem="Gs7-Gw-izV" secondAttribute="bottom" id="f79-ZF-qsU"/>
                 <constraint firstAttribute="bottom" secondItem="JxX-6c-MFk" secondAttribute="bottom" id="gSD-8q-Rc3"/>
-                <constraint firstItem="qh8-wU-bsN" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="gwx-rL-Uw9"/>
-                <constraint firstItem="qh8-wU-bsN" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="k2s-Eg-dBb"/>
             </constraints>
-            <variation key="default">
-                <mask key="constraints">
-                    <exclude reference="FJQ-0x-WHr"/>
-                    <exclude reference="M26-Ou-VmM"/>
-                    <exclude reference="gwx-rL-Uw9"/>
-                    <exclude reference="k2s-Eg-dBb"/>
-                </mask>
-            </variation>
+            <point key="canvasLocation" x="443" y="396"/>
         </view>
     </objects>
 </document>

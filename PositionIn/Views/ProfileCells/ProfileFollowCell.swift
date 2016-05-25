@@ -45,7 +45,7 @@ final class ProfileFollowCell: TableViewCell {
             action = .Follow
             title = NSLocalizedString("Follow", comment: "Follow button: Follow")
             backColor = UIScheme.followActionColor
-            textColor = UIColor.bt_colorWithBytesR(237, g: 27, b: 46)
+            textColor = UIScheme.mainThemeColor
         case .SameUser:
             action = .None
             title = nil
@@ -58,7 +58,7 @@ final class ProfileFollowCell: TableViewCell {
         actionButton.setTitleColor(textColor, forState: UIControlState.Normal)
         actionButton.layer.borderWidth = 1
         actionButton.layer.cornerRadius = 2
-        actionButton.layer.borderColor = UIColor.bt_colorWithBytesR(237, g: 27, b: 46).CGColor
+        actionButton.layer.borderColor = UIScheme.mainThemeColor.CGColor
         actionButton.clipsToBounds = true
     }
     

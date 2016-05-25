@@ -17,6 +17,7 @@ final class WalletViewController: BesideMenuViewController {
     
     // MARK: - IBOutlet
     @IBOutlet weak var tableView: UITableView?
+    @IBOutlet weak var segmentControl: UISegmentedControl?
     
     // MARK: - Private variables
     private var browseMode: BrowseMode = .Purchases {
@@ -52,6 +53,7 @@ final class WalletViewController: BesideMenuViewController {
             dataSource.configureTable(tableView)
         }
         browseMode = .Purchases
+        segmentControl?.tintColor = UIScheme.mainThemeColor
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -88,7 +90,8 @@ final class WalletViewController: BesideMenuViewController {
                     if item.entityDetails?.name == nil {
                         var entityDetails = Product()
                         entityDetails.objectId = CRUDObjectInvalidId
-                        entityDetails.name = NSLocalizedString("Donation to KRCS")
+                        let appShortTitle = AppConfiguration().appShortTitle
+                        entityDetails.name = NSLocalizedString("Donation to \(appShortTitle)")
                         item.entityDetails = entityDetails
                     }
                     return item

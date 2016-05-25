@@ -11,8 +11,9 @@ import PosInCore
 import BrightFutures
 import CleanroomLogger
 
-class PeopleExploreViewController : UIViewController, FetchViewLogicDelegate, UITableViewDelegate {
+class PeopleExploreViewController : UIViewController, FetchViewLogicDelegate, UITableViewDelegate, UIGestureRecognizerDelegate {
     
+    @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet private weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet private var footerView: UIView!
     @IBOutlet private weak var tableView: TableView!
@@ -38,8 +39,12 @@ class PeopleExploreViewController : UIViewController, FetchViewLogicDelegate, UI
         dataSource.configureTable(tableView)
         
         subscribeToNotifications()
+        
+        let gesture = UITapGestureRecognizer(target: self, action: "viewTapped")
+        gesture.delegate = self
+        view.addGestureRecognizer(gesture)
     }
-    
+
     override func viewWillAppear(animated: Bool) {
         if self.viewLogic.objects.isEmpty {
             self.viewLogic.fetch()
@@ -55,11 +60,15 @@ class PeopleExploreViewController : UIViewController, FetchViewLogicDelegate, UI
         self.refreshControl = refreshControl
     }
     
+    func fetchUsers() {
+        self.viewLogic.fetch(self.searchBar.text)
+    }
+    
     //MARK: UITableViewDelegate
     
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         if self.viewLogic.canFetch && !self.viewLogic.isFetching && indexPath.row == self.viewLogic.objects.count - 1 {
-            self.viewLogic.fetch()
+            self.viewLogic.fetch(self.searchBar.text)
         }
     }
     
@@ -120,6 +129,29 @@ class PeopleExploreViewController : UIViewController, FetchViewLogicDelegate, UI
     func noContentAvailable() {
         self.tableView.tableFooterView?.hidden = true;
     }
+    
+    func viewTapped() {
+        view.endEditing(true)
+    }
+    
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText.characters.count > 2 || searchText.characters.count == 0 {
+            self.viewLogic.clearData()
+            self.viewLogic.fetch(self.searchBar.text)
+        }
+    }
+    
+    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+        self.viewLogic.clearData()
+        self.viewLogic.fetch(self.searchBar.text)
+        searchBar.resignFirstResponder()
+    }
+    
+    //MARK: UIGestureRecognizerDelegate
+    func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldReceiveTouch touch: UITouch) -> Bool {
+        return searchBar.isFirstResponder()
+    }
+    
 }
 
 final class PeopleExploreDataSource: TableViewDataSource {

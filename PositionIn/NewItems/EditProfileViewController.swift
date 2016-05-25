@@ -216,7 +216,7 @@ final class EditProfileViewController: BaseAddItemViewController, UserProfileAva
         
         if let _ = self.phoneNumber {
             self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Done"),
-                style: UIBarButtonItemStyle.Plain,
+                style: .Plain,
                 target: self,
                 action: "didTapDone:")
             self.title = NSLocalizedString("My Profile")
@@ -303,7 +303,7 @@ final class EditProfileViewController: BaseAddItemViewController, UserProfileAva
         aboutRow.value = userProfile?.userDescription
         
         // Init personal info section
-        if let gender = userProfile?.gender {
+        if let gender = userProfile?.gender where gender == .Male || gender == .Female {
             genderRow.value = XLFormOptionsObject(value: gender.rawValue, displayText: gender.description)
         }
         dateOfBirthRow.value = userProfile?.dateOfBirth
@@ -499,7 +499,7 @@ final class EditProfileViewController: BaseAddItemViewController, UserProfileAva
         }
     }
     
-    private func addAssets(assets: [PHAsset]) {
+    override func addAssets(assets: [PHAsset]) {
         if let asset = assets.first {
             self.headerView?.configure(asset)
         }

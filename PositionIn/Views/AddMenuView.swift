@@ -288,7 +288,7 @@ extension AddMenuView {
             
             label = UILabel()
             label.text = title
-            label.font = UIFont(name: "Helvetica", size: 14)
+            label.font = UIScheme.appRegularFontOfSize(14)
             label.numberOfLines = 2
             label.sizeToFit()
             

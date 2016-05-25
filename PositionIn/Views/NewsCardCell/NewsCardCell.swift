@@ -11,8 +11,8 @@ import PosInCore
 
 class NewsCardCell: TableViewCell {
     
-    @IBOutlet weak var commentsButton: UIButton!
-    @IBOutlet weak var likesButton: UIButton!
+    @IBOutlet private weak var commentsButton: UIButton!
+    @IBOutlet private weak var likeButton: UIButton!
     @IBOutlet private weak var imageHeightConstaint: NSLayoutConstraint!
     @IBOutlet private weak var feedItemImageView: UIImageView!
     @IBOutlet private weak var headerLabel: UILabel!
@@ -21,20 +21,25 @@ class NewsCardCell: TableViewCell {
     @IBOutlet private weak var feedItemAvatarView: AvatarView!
     @IBOutlet private weak var newsTextLabel: UILabel!
     
-    private var model : CompactFeedTableCellModel?
+    private var item : FeedItem?
+    private weak var actionConsumer: ActionsDelegate?
     
     override func setModel(model: TableViewCellModel) {
         
-        self.model = model as? CompactFeedTableCellModel
-        assert(self.model != nil, "Invalid model passed")
+        likeButton.userInteractionEnabled = true
         
+        let m = model as? CompactFeedTableCellModel
+        assert(m != nil, "Invalid model passed")
         
-        if let liked = self.model?.item.isLiked {
+        self.actionConsumer = m!.delegate
+        self.item = m!.item
+        
+        if let liked = self.item?.isLiked {
             let image = liked == true ? UIImage(named:"ic_like_selected") : UIImage(named:"ic_like_up")
-            self.likesButton.setImage(image, forState: .Normal)
+            self.likeButton.setImage(image, forState: .Normal)
         }
         
-        if let imgURL = self.model?.imageURL {
+        if let imgURL = m!.imageURL {
             feedItemImageView.setImageFromURL(imgURL)
             self.imageHeightConstaint.constant = 160
         }
@@ -43,40 +48,35 @@ class NewsCardCell: TableViewCell {
             self.imageHeightConstaint.constant = 0
         }
         
-        headerLabel.text = self.model?.authorName
+        headerLabel.text = m!.authorName
         
         detailsLabel.hidden = true
-        if let date = self.model?.date {
+        if let date = m!.date {
             detailsLabel.hidden = false
             detailsLabel.text = date.formattedAsTimeAgo()
         }
         
-        infoLabel.text = self.model?.details
+        infoLabel.text = m!.details
         
-        if let numOfLikes = self.model?.numOfLikes {
-            likesButton.setTitle(String(numOfLikes), forState: .Normal)
+        if let numOfLikes = self.item?.numOfLikes {
+            likeButton.setTitle(String(numOfLikes), forState: .Normal)
         }
         
-        if let numOfComments = self.model?.numOfComments {
+        if let numOfComments = m!.numOfComments {
             commentsButton.setTitle(String(numOfComments), forState: .Normal)
         }
         
-        if let text = self.model?.text {
+        if let text = m!.text {
             self.newsTextLabel.text = text
         }
         
-        if let url = self.model?.avatarURL {
-            feedItemAvatarView.setImageFromURL(url)
-        }
+        feedItemAvatarView.setImageFromURL(m!.item.author?.avatar)
     }
     
-    @IBAction func likesButtonPressed(sender: AnyObject) {
-        if let delegate = self.model?.delegate,
-            let item = self.model?.item  {
-                delegate.like(item)
-        }
+    @IBAction func likeButtonPressed(sender: AnyObject) {
+        likeButton.userInteractionEnabled = false
+        actionConsumer?.like(self.item!)
     }
-    
     override func prepareForReuse() {
         super.prepareForReuse()
         feedItemAvatarView.cancelSetImage()

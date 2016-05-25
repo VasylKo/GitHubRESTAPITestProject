@@ -10,7 +10,7 @@ import UIKit
 import XLForm
 import Box
 
-class EPlusPaymentViewController: XLFormViewController, PaymentReponseDelegate {
+class EPlusPaymentViewController: XLFormViewController {
     
     private let pageView = MembershipPageView(pageCount: 3)
     private let router : EPlusMembershipRouter
@@ -136,20 +136,20 @@ class EPlusPaymentViewController: XLFormViewController, PaymentReponseDelegate {
         confirmRow.cellConfig["textLabel.textColor"] = UIColor.whiteColor()
         
         confirmRow.action.formBlock = { [weak self] row in
-            
-            
-            self?.deselectFormRow(row)
+            guard let strongSelf = self else { return }
+            strongSelf.deselectFormRow(row)
             
             //Validate all entered fileds
-            let validationErrors : Array<NSError> = self?.formValidationErrors() as! Array<NSError>
+            let validationErrors : Array<NSError> = strongSelf.formValidationErrors() as! Array<NSError>
             if (validationErrors.count > 0){
                 return
             }
             
-            guard let card = self?.selectPaymentRowValue() else { return }
+            strongSelf.sendEventToAnalytics(cardItem: strongSelf.cardPaymentTypeSelecred(), action: AnalyticActios.proceedToPay)
             
-            self?.sendEventToAnalytics(cardItem: card, action: AnalyticActios.proceedToPay)
-            self?.proceedPaymentWithCard(card)
+            //Payment flow
+            let paymentSystem = PaymentSystemProvider.paymentSystemWithItem(strongSelf)
+            strongSelf.router.showMembershipPaymentTransactionViewController(from: strongSelf, withPaymentSystem: paymentSystem, plan: strongSelf.plan)
         }
         
         confirmPaymentSection.addFormRow(confirmRow)
@@ -157,35 +157,12 @@ class EPlusPaymentViewController: XLFormViewController, PaymentReponseDelegate {
         self.form = form
     }
     
-    //MARK: - XLForm helper
-    private func selectPaymentRowValue() -> CardItem? {
-        guard   let selectPaymentRow = form.formRowWithTag(Tags.Payment.rawValue),
-                let cardItem: Box<CardItem> = selectPaymentRow.value as? Box<CardItem>,
-                let card: CardItem = cardItem.value
-        else {
-            return nil
-        }
-        
-        return card
-    }
     
-    //MARK: - Payment
-    private func proceedPaymentWithCard(card: CardItem) {
+    // MARK: XLForm helper
+    private func cardPaymentTypeSelecred() -> CardItem {
+        guard let paymentTypeRow = form.formRowWithTag(Tags.Payment.rawValue), box: Box<CardItem> = paymentTypeRow.value as? Box else { return .CreditDebitCard }
         
-        switch card {
-        case .MPesa:
-            //TODO: add route to confirm payment controller
-            //router.showMPesaConfirmPaymentViewController(from: self, with: self.plan)
-            navigationController?.pushViewController(EplusConfirmPaymentViewController(router: router, plan: self.plan, card: card), animated: true)
-            
-        case .CreditDebitCard:
-            let paymentController: BraintreePaymentViewController = BraintreePaymentViewController()
-            paymentController.amount = plan.price
-            paymentController.productName = plan.name
-            paymentController.membershipId = plan.objectId
-            paymentController.delegate = self
-            navigationController?.pushViewController(paymentController, animated: true)
-        }
+        return box.value
     }
     
     
@@ -194,21 +171,6 @@ class EPlusPaymentViewController: XLFormViewController, PaymentReponseDelegate {
         let cardType = CardItem.cardName(cardItem) ?? NSLocalizedString("Can't get card type")
         let paymentAmount = NSNumber(integer: self.plan.price ?? 0)
         trackEventToAnalytics(AnalyticCategories.ambulance, action: action, label: cardType, value: paymentAmount)
-    }
-    
-    //MARK: PaymentReponseDelegate
-    
-    func setError(isSuccess: Bool, error: String?) {
-        guard let card = selectPaymentRowValue() else { return }
-        navigationController?.pushViewController(EplusConfirmPaymentViewController(router: router, plan: self.plan, card: card, isSuccess: isSuccess), animated: true)
-    }
-    
-    func paymentReponse(success: Bool, err: String?) {
-        if(success) {
-            setError(true, error: nil)
-        } else {
-            setError(false, error: err)
-        }
     }
     
     // MARK: XLFormViewController
@@ -227,3 +189,29 @@ class EPlusPaymentViewController: XLFormViewController, PaymentReponseDelegate {
     }
 }
 
+//MARK: - PurchaseConvertible
+extension EPlusPaymentViewController: PurchaseConvertible {
+    var price: NSNumber {
+        return NSNumber(integer: (plan.price ?? 0))
+    }
+    
+    var itemId: String? {
+        return plan.objectId
+    }
+    
+    var itemName: String {
+        return plan.name ?? ""
+    }
+    
+    var purchaseType: PurchaseType {
+        return .Eplus
+    }
+    
+    var paymentTypes: CardItem {
+        return cardPaymentTypeSelecred()
+    }
+    
+    var image: UIImage? {
+        return UIImage(named : plan.membershipImageName)
+    }
+}

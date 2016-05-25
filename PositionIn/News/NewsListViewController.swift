@@ -35,7 +35,8 @@ class NewsListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = NSLocalizedString("KRCS News")
+        let appShortTitle = AppConfiguration().appShortTitle
+        self.title = NSLocalizedString("\(appShortTitle) News")
         
         dataSource.configureTable(self.tableView)
         self.reloadData()
@@ -90,12 +91,12 @@ extension NewsListViewController: NewsListActionConsumer {
     
     func like(item: FeedItem) {
         if (item.isLiked) {
-            item.numOfLikes?--
-            api().unlikeFeedItem(item).onSuccess{}
+            item.numOfLikes? -= 1
+            api().unlikeFeedItem(item)
         }
         else {
-            item.numOfLikes?++
-            api().likeFeedItem(item).onSuccess{}
+            item.numOfLikes? += 1
+            api().likeFeedItem(item)
         }
         
         item.isLiked = !item.isLiked

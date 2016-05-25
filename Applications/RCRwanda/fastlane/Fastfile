@@ -1,0 +1,107 @@
+platform :ios do
+  desc "Submit a new Dev Build to Amazon S3"
+  lane :Rw_Dev do
+    gym(
+        scheme: "RCRwanda",
+        configuration: "DevRelease",
+        output_directory: "Build",
+        clean: true,
+        use_legacy_build_api: true,
+        export_method: "enterprise",
+        provisioning_profile_path: "./Applications/RCRwanda/fastlane/Distribution.com.connectik.sarcs.members.dev.mobileprovision",
+        include_bitcode: false
+        ) # Build app
+    s3(
+       html_template_path: './fastlane/redcross.erb',
+       html_file_name: 'za_dev.html',
+       version_file_name: 'za_dev.version.json',
+       upload_metadata: true,
+       path: 'za_dev/v{CFBundleShortVersionString}_b{CFBundleVersion}/'
+       )
+  end
+
+    desc "Submit a new Staging Build to Amazon S3"
+    lane :Rw_Staging do
+      gym(
+        scheme: "RCRwanda",
+        configuration: "StagingRelease",
+        output_directory: "Build",
+        clean: true,
+        use_legacy_build_api: true,
+        export_method: "enterprise"
+        ) # Build app
+        #      snapshot
+      s3(
+         html_template_path: './fastlane/redcross.erb',
+         html_file_name: 'za_staging.html',
+         version_file_name: 'za_staging.version.json',
+         upload_metadata: true,
+         path: 'za_staging/v{CFBundleShortVersionString}_b{CFBundleVersion}/'
+         )
+    end
+
+    desc "Submit a new Staging 2 Build to Amazon S3"
+    lane :Rw_Staging2 do
+        gym(
+            scheme: "RCRwanda",
+            configuration: "StagingReleaseCopy",
+            output_directory: "Build",
+            clean: true,
+            use_legacy_build_api: true,
+            export_method: "enterprise"
+            ) # Build app
+            #      snapshot
+            s3(
+               html_template_path: './fastlane/redcross.erb',
+               html_file_name: 'za_staging2.html',
+               version_file_name: 'za_staging2.version.json',
+               upload_metadata: true,
+               path: 'za_staging2/v{CFBundleShortVersionString}_b{CFBundleVersion}/'
+               )
+    end
+
+
+    desc "Submit a new Production Build to Amazon S3"
+    lane :Rw_Production do
+        gym(
+            scheme: "RCRwanda",
+            configuration: "ProdRelease",
+            output_directory: "Build",
+            clean: true,
+            use_legacy_build_api: true,
+            export_method: "enterprise"
+            ) # Build app
+#        snapshot
+        s3(
+           html_template_path: './fastlane/redcross.erb',
+           html_file_name: 'za_production.html',
+           version_file_name: 'za_production.version.json',
+           upload_metadata: true,
+           path: 'za_prod/v{CFBundleShortVersionString}_b{CFBundleVersion}/'
+           )
+    end
+
+    desc "Submit a new Production 2 (Kenya Red Cross) Build to Amazon S3"
+    lane :Rw_Production2 do
+        gym(
+            scheme: "RCRwanda",
+            configuration: "ProdRelease2",
+            output_directory: "Build",
+            clean: true,
+            use_legacy_build_api: true,
+            export_method: "enterprise"
+            ) # Build app
+#        snapshot
+        s3(
+            html_template_path: './fastlane/redcross.erb',
+            html_file_name: 'za_production.html',
+            version_file_name: 'za_production.version.json',
+            upload_metadata: true,
+            path: 'za_prod/v{CFBundleShortVersionString}_b{CFBundleVersion}/'
+            )
+    end
+end
+
+
+# More information about multiple platforms in fastlane:
+# https://github.com/KrauseFx/fastlane/blob/master/docs/Platforms.md

@@ -45,6 +45,9 @@ class EPlusServiceDetailsViewController: UIViewController, TTTAttributedLabelDel
         tableView.registerNib(nib, forCellReuseIdentifier: String(EPlusPlanInfoTableViewCell.self))
         tableView.separatorStyle = .None
         tableView.bounces = false
+        
+        let rightButton = UIBarButtonItem(image: UIImage(named: "services_icon"), style: .Done, target: self, action: Selector("showContactUsController:"))
+        navigationItem.setRightBarButtonItem(rightButton, animated: false)
     }
     
     func setupTableViewHeaderFooter() {
@@ -84,6 +87,10 @@ class EPlusServiceDetailsViewController: UIViewController, TTTAttributedLabelDel
         
         tableView.tableHeaderView = headerView
     }
+    
+    func showContactUsController(sender: AnyObject?) {
+        router.showContactSupportController(from: self)
+    }
 }
 
 extension EPlusServiceDetailsViewController: UITableViewDelegate {
@@ -105,7 +112,7 @@ extension EPlusServiceDetailsViewController: UITableViewDataSource {
     func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         
         if let headerView = view as? UITableViewHeaderFooterView {
-            headerView.textLabel?.font = UIFont(name: "Helvetica Neue", size: 13)
+            headerView.textLabel?.font = UIScheme.appRegularFontOfSize(13)
             headerView.textLabel?.textColor = UIColor.redColor()
         }
     }
@@ -182,6 +189,6 @@ extension EPlusServiceDetailsViewController: UITableViewDataSource {
     
     func attributedLabel(label: TTTAttributedLabel!, didSelectLinkWithPhoneNumber phoneNumber: String!) {
         let trimmedString = phoneNumber.stringByReplacingOccurrencesOfString(" ", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
-        UIApplication.sharedApplication().openURL(NSURL(string: "tel://\(trimmedString)")!)
+        OpenApplication.Tel(with: trimmedString)
     }
 }

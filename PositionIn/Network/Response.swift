@@ -11,7 +11,6 @@ import CleanroomLogger
 import PosInCore
 
 struct QuickSearchResponse: Mappable {
-    private(set) var categories: [ItemCategory]!
     private(set) var products: [ObjectInfo]!
     private(set) var promotions: [ObjectInfo]!
     private(set) var communities: [UserInfo]!
@@ -20,8 +19,8 @@ struct QuickSearchResponse: Mappable {
     
     init?(_ map: Map) {
         mapping(map)
-        switch (categories, products, promotions, communities, events, peoples) {
-        case (.Some, .Some, .Some, .Some, .Some, .Some):
+        switch (products, promotions, communities, events, peoples) {
+        case (.Some, .Some, .Some, .Some, .Some):
             break
         default:
             Log.error?.message("Error while parsing object")
@@ -36,14 +35,12 @@ struct QuickSearchResponse: Mappable {
         promotions <- map["promotions"]
         communities <- map["communities"]
         events <- map["events"]
-        categories <- (map["categories"], ListTransform(itemTransform:EnumTransform()))
         peoples <- map["peoples"]
         
         Log.verbose?.value(promotions)
         Log.verbose?.value(communities)
         Log.verbose?.value(events)
         Log.verbose?.value(peoples)
-        Log.verbose?.value(categories)
         Log.verbose?.value(peoples)
     }
     

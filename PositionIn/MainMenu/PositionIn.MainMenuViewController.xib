@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MainMenuViewController" customModule="PositionIn" customModuleProvider="target">
             <connections>
+                <outlet property="headerView" destination="Cf8-Nh-HyU" id="wda-dl-2jA"/>
                 <outlet property="tableView" destination="9te-5M-xLn" id="x6I-px-gil"/>
                 <outlet property="view" destination="sXl-IH-QGY" id="lNF-VN-TOi"/>
             </connections>
@@ -28,7 +29,6 @@
                         </imageView>
                     </subviews>
                     <color key="backgroundColor" red="0.88235294119999996" green="0.0" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
-                    <color key="tintColor" red="0.88235294119999996" green="0.0" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="H3n-OD-Lqk" secondAttribute="trailing" id="7RD-XZ-Dsl"/>
                         <constraint firstAttribute="bottom" secondItem="H3n-OD-Lqk" secondAttribute="bottom" id="LOR-C7-BDl"/>

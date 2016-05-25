@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EPlusMemberCardViewController" customModule="PositionIn" customModuleProvider="target">
             <connections>
                 <outlet property="activityIndicator" destination="IhB-vX-9ki" id="oGg-ic-449"/>
+                <outlet property="dateRangeLabel" destination="TJe-k2-krE" id="fsY-lB-NSa"/>
                 <outlet property="detailsButton" destination="GgK-Us-YYA" id="un7-OM-4DF"/>
                 <outlet property="eplusMemberCardView" destination="b9F-aw-ETS" id="MrH-ga-DPy"/>
-                <outlet property="infoLabel" destination="1EL-Bm-pRx" id="Y4n-ZE-hQ1"/>
+                <outlet property="infoSectionViewContainer" destination="qcB-hl-FvQ" id="eFN-ay-cyP"/>
                 <outlet property="view" destination="iN0-l3-epB" id="tYz-yn-c2B"/>
             </connections>
         </placeholder>
@@ -23,7 +24,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="77j-kX-ld6" userLabel="ContentView">
-                            <rect key="frame" x="0.0" y="0.0" width="600" height="472"/>
+                            <rect key="frame" x="0.0" y="0.0" width="600" height="598"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IiH-IT-xXo" userLabel="MemberCardSection">
                                     <rect key="frame" x="0.0" y="0.0" width="597" height="247"/>
@@ -90,6 +91,7 @@
                                         </imageView>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GgK-Us-YYA">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="64"/>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                             <connections>
                                                 <action selector="detailsTapped:" destination="-1" eventType="touchUpInside" id="SHc-R6-JvZ"/>
                                             </connections>
@@ -116,34 +118,56 @@
                                         <constraint firstAttribute="bottom" secondItem="GgK-Us-YYA" secondAttribute="bottom" id="zVV-tS-0Bw"/>
                                     </constraints>
                                 </view>
-                                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qcB-hl-FvQ" userLabel="InfoSection">
-                                    <rect key="frame" x="0.0" y="327" width="600" height="135"/>
+                                <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qcB-hl-FvQ" userLabel="InfoSection">
+                                    <rect key="frame" x="0.0" y="327" width="600" height="261"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="eplus_logo" translatesAutoresizingMaskIntoConstraints="NO" id="e7E-6Y-WTD">
                                             <rect key="frame" x="233" y="16" width="134" height="66"/>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Info text here" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1EL-Bm-pRx">
-                                            <rect key="frame" x="16" y="98" width="568" height="21"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Thank you for registering to the E-Plus rescue package." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1EL-Bm-pRx">
+                                            <rect key="frame" x="16" y="98" width="568" height="20.5"/>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="17"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt;start date - end date&gt;" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TJe-k2-krE">
+                                            <rect key="frame" x="16" y="156.5" width="568" height="18"/>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="15"/>
+                                            <color key="textColor" red="0.94117647059999998" green="0.2901960784" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your new membership, valid through" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6El-Qb-2AO">
+                                            <rect key="frame" x="16" y="135" width="568" height="18"/>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="15"/>
+                                            <color key="textColor" red="0.60784313725490191" green="0.60784313725490191" blue="0.62352941176470589" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="no4-0J-3sJ">
+                                            <rect key="frame" x="16" y="191" width="568" height="54"/>
+                                            <string key="text">We respond to medical emergencies professionally within the golden hour to all those in need, and offer life-saving training with a view to empowering the public to handle emergencies safely.</string>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="15"/>
+                                            <color key="textColor" red="0.60784313725490191" green="0.60784313725490191" blue="0.62352941176470589" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="128" id="92B-ht-GvX"/>
-                                        <constraint firstAttribute="bottom" secondItem="1EL-Bm-pRx" secondAttribute="bottom" constant="16" id="hkW-hu-JoW"/>
+                                        <constraint firstItem="TJe-k2-krE" firstAttribute="leading" secondItem="1EL-Bm-pRx" secondAttribute="leading" id="0B8-Zb-s8v"/>
+                                        <constraint firstItem="TJe-k2-krE" firstAttribute="top" secondItem="6El-Qb-2AO" secondAttribute="bottom" constant="4" id="5ML-g3-KWj"/>
+                                        <constraint firstItem="no4-0J-3sJ" firstAttribute="trailing" secondItem="1EL-Bm-pRx" secondAttribute="trailing" id="7Fx-U6-qR7"/>
+                                        <constraint firstItem="6El-Qb-2AO" firstAttribute="leading" secondItem="1EL-Bm-pRx" secondAttribute="leading" id="7dk-hI-n2O"/>
+                                        <constraint firstItem="no4-0J-3sJ" firstAttribute="leading" secondItem="1EL-Bm-pRx" secondAttribute="leading" id="9tc-69-iOs"/>
+                                        <constraint firstItem="TJe-k2-krE" firstAttribute="trailing" secondItem="1EL-Bm-pRx" secondAttribute="trailing" id="OqV-Jd-kZR"/>
+                                        <constraint firstItem="6El-Qb-2AO" firstAttribute="trailing" secondItem="1EL-Bm-pRx" secondAttribute="trailing" id="PQX-Jk-SL8"/>
+                                        <constraint firstAttribute="bottom" secondItem="no4-0J-3sJ" secondAttribute="bottom" constant="16" id="TAb-ek-v6H"/>
                                         <constraint firstItem="e7E-6Y-WTD" firstAttribute="top" secondItem="qcB-hl-FvQ" secondAttribute="top" constant="16" id="ifh-QW-cZ9"/>
                                         <constraint firstItem="1EL-Bm-pRx" firstAttribute="top" secondItem="e7E-6Y-WTD" secondAttribute="bottom" constant="16" id="kqg-hC-ZAa"/>
+                                        <constraint firstItem="no4-0J-3sJ" firstAttribute="top" secondItem="TJe-k2-krE" secondAttribute="bottom" constant="16" id="ms1-uy-9hg"/>
                                         <constraint firstAttribute="trailing" secondItem="1EL-Bm-pRx" secondAttribute="trailing" constant="16" id="qF2-bW-4rT"/>
+                                        <constraint firstItem="6El-Qb-2AO" firstAttribute="top" secondItem="1EL-Bm-pRx" secondAttribute="bottom" constant="16.5" id="qwn-eK-iCe"/>
                                         <constraint firstItem="e7E-6Y-WTD" firstAttribute="centerX" secondItem="qcB-hl-FvQ" secondAttribute="centerX" id="wHM-rk-9Ld"/>
                                         <constraint firstItem="1EL-Bm-pRx" firstAttribute="leading" secondItem="qcB-hl-FvQ" secondAttribute="leading" constant="16" id="xJG-WY-DNW"/>
                                     </constraints>
-                                    <variation key="default">
-                                        <mask key="constraints">
-                                            <exclude reference="92B-ht-GvX"/>
-                                        </mask>
-                                    </variation>
                                 </view>
                             </subviews>
                             <color key="backgroundColor" red="0.95686274509803926" green="0.95686274509803926" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>

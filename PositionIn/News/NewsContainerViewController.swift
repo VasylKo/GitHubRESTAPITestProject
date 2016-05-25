@@ -13,8 +13,9 @@ class NewsContainerViewController : BarButtonItemContainerViewController {
     convenience init() {
         let list = NewsListViewController()
         let map = NewsMapViewController()
+        let appShortTitle = AppConfiguration().appShortTitle
         self.init(containeredViewControllers: [list, map],
-                                       title: NSLocalizedString("KRCS News"),
+                                       title: NSLocalizedString("\(appShortTitle) News"),
                                   imageNames: ["map_view_icon", "list_view_icon"])
     }
     

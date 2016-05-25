@@ -16,147 +16,56 @@
 
 # This is the minimum version number required.
 # Update this, if you use features of a newer version
-fastlane_version "1.21.0"
+fastlane_version "1.88.0"
 
 default_platform :ios
 
-platform :ios do
+import "../Applications/RCKenya/fastlane/Fastfile"
+import "../Applications/RCSouthAfrica/fastlane/Fastfile"
+import "../Applications/RCRwanda/fastlane/Fastfile"
 
-  before_all do
+before_all do
 
-    sh 'rm -rf ~/Library/Caches/org.carthage.CarthageKit/dependencies/'
-    
-    carthage(
-      use_ssh: false,         # Use SSH for downloading GitHub repositories.
-      use_submodules: false,  # Add dependencies as Git submodules.
-      use_binaries: true,     # Check out dependency repositories even when prebuilt frameworks exist
-      platform: "iOS"         # Define which platform to build for
-    )
+  sh 'rm -rf ~/Library/Caches/org.carthage.CarthageKit/dependencies/'
 
-    cocoapods
+  carthage(
+    use_ssh: false,         # Use SSH for downloading GitHub repositories.
+    use_submodules: false,  # Add dependencies as Git submodules.
+    use_binaries: true,     # Check out dependency repositories even when prebuilt frameworks exist
+    platform: "iOS"         # Define which platform to build for
+  )
 
-  end
+  cocoapods
 
-  desc "Submit a new Dev Build to Amazon S3"
-  lane :Dev do
-    gym(
-        scheme: "PositionIn",
-        configuration: "DevRelease",
-        output_directory: "Build",
-        clean: true,
-        use_legacy_build_api: true,
-        ) # Build app
-    s3(
-       html_template_path: "./fastlane/redcross",
-       html_file_name: "dev.html",
-       version_file_name: "dev.version.json",
-       path: 'dev/v{CFBundleShortVersionString}_b{CFBundleVersion}/'
-       )
-  end
+end
 
-    desc "Submit a new Staging Build to Amazon S3"
-    lane :Staging do
-      gym(
-        scheme: "PositionIn",
-        configuration: "StagingRelease",
-        output_directory: "Build",
-        clean: true,
-        use_legacy_build_api: true,
-        ) # Build app
-        #      snapshot
-      s3(
-         html_template_path: "./fastlane/redcross.erb",
-         html_file_name: "staging.html",
-         version_file_name: "staging.version.json",
-         path: 'staging/v{CFBundleShortVersionString}_b{CFBundleVersion}/'
-         )
-    end
+desc "Deploy a new version to the App Store"
+desc "** Full Markdown** Support: `code`"
+lane :deploy do
+  snapshot
+  # sigh
+  # deliver(skip_deploy: true, force: true)
+  # frameit
+end
 
-    desc "Submit a new Staging 2 Build to Amazon S3"
-    lane :Staging2 do
-        gym(
-            scheme: "PositionIn",
-            configuration: "StagingReleaseCopy",
-            output_directory: "Build",
-            clean: true,
-            use_legacy_build_api: true,
-            ) # Build app
-            #      snapshot
-            s3(
-               html_template_path: "./fastlane/redcross.erb",
-               html_file_name: "staging2.html",
-               version_file_name: "staging2.version.json",
-               path: 'staging2/v{CFBundleShortVersionString}_b{CFBundleVersion}/'
-               )
-    end
-    
+# You can define as many lanes as you want
 
-    desc "Submit a new Production Build to Amazon S3"
-    lane :Production do
-        gym(
-            scheme: "PositionIn",
-            configuration: "ProdRelease",
-            output_directory: "Build",
-            clean: true,
-            use_legacy_build_api: true,            
-            ) # Build app
-#        snapshot
-        s3(
-           html_template_path: "./fastlane/redcross.erb",
-           html_file_name: "production.html",
-           version_file_name: "production.version.json",
-           path: 'prod/v{CFBundleShortVersionString}_b{CFBundleVersion}/'
-           )
-    end
+after_all do |lane|
+  # This block is called, only if the executed lane was successful
 
-    desc "Submit a new Production 2 (Kenya Red Cross) Build to Amazon S3"
-    lane :Production2 do
-        gym(
-            scheme: "PositionIn",
-            configuration: "ProdRelease2",
-            output_directory: "Build",
-            clean: true,
-            use_legacy_build_api: true,
-            ) # Build app
-#        snapshot
-        s3(
-            html_template_path: "./fastlane/redcross.erb",
-            html_file_name: "production.html",
-            version_file_name: "production.version.json",
-            path: 'prod/v{CFBundleShortVersionString}_b{CFBundleVersion}/'
-            )
-    end
-
-
-
-  desc "Deploy a new version to the App Store"
-  desc "** Full Markdown** Support: `code`"
-  lane :deploy do
-    snapshot
-    # sigh
-    # deliver(skip_deploy: true, force: true)
-    # frameit
-  end
-
-  # You can define as many lanes as you want
-
-  after_all do |lane|
-    # This block is called, only if the executed lane was successful
-    
-    # slack(
-    #   message: "Successfully deployed new App Update."
-    # )
-  end
-
-
-  error do |lane, exception|
-    # slack(
-    #   message: exception.message,
-    #   success: false
-    # )
-  end
+  # slack(
+  #   message: "Successfully deployed new App Update."
+  # )
 end
 
 
-# More information about multiple platforms in fastlane: 
+error do |lane, exception|
+  # slack(
+  #   message: exception.message,
+  #   success: false
+  # )
+end
+
+
+# More information about multiple platforms in fastlane:
 # https://github.com/KrauseFx/fastlane/blob/master/docs/Platforms.md

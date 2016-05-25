@@ -59,9 +59,7 @@ class NewsTableViewCell: TableViewCell {
             self.newsTextLabel.text = text
         }
         
-        if let url = m!.item.author?.avatar {
-            feedItemAvatarView.setImageFromURL(url)
-        }
+        feedItemAvatarView.setImageFromURL(m!.item.author?.avatar)
         
         self.actionConsumer = m!.actionConsumer
     }

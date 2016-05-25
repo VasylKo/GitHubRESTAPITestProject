@@ -17,13 +17,18 @@ struct Event: CRUDObject {
     var startDate: NSDate?
     var photos: [PhotoInfo]?
     var location: Location?
-    var category: ItemCategory?
     var participants: Int? = 0
     var author: CRUDObjectId?
     var imageURL: NSURL?
     var links : [NSURL]?
     var attachments : [Attachment]?
     var isAttending: Bool?
+    
+    var numberOfAttachments: Int {
+        let linksCount = links?.count ?? 0
+        let mediaAttachmentsCount = attachments?.count ?? 0
+        return linksCount + mediaAttachmentsCount
+    }
     
 /* 
     TODO:
@@ -91,7 +96,6 @@ struct Event: CRUDObject {
         endDate <- (map["endDate"], APIDateTransform())
         photos <- map["photos"]
         location <- map["location"]
-        category <- (map["category"], EnumTransform())
         participants <- map["numOfParticipants"]
         author <- (map["author"], CRUDObjectIdTransform())
         imageURL <- (map["image"], ImageURLTransform())

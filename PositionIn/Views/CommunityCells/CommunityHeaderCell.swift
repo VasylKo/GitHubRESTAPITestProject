@@ -19,7 +19,16 @@ final class CommunityHeaderCell: TableViewCell {
         shouldCallInfoAction = m!.showInfo
         self.actionConsumer = m!.actionConsumer
         
-        contentImageView.setImageFromURL(m!.url, placeholder: UIImage(named: "communityPlaceholder"))
+        var placeholder = ""
+        switch m!.type {
+        case .Community:
+            placeholder = "communityPlaceholder"
+        case .Volunteer:
+            placeholder = "volunteer_placeholder"
+        default:
+            break
+        }
+        contentImageView.setImageFromURL(m!.url, placeholder: UIImage(named: placeholder))
     }
     
     override func prepareForReuse() {

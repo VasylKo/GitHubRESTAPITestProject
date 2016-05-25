@@ -83,14 +83,36 @@ final class LocationController {
     }
     
     func distanceStringFromCoordinate(coordinate: CLLocationCoordinate2D) -> Future<String, NSError> {
-        return getCurrentCoordinate().map { myCoordinate in
+        return getCurrentCoordinate().map { [weak self] myCoordinate in
             let myLocation = CLLocation(latitude: myCoordinate.latitude, longitude: myCoordinate.longitude)
             let startLocation = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
-            let distance = myLocation.distanceFromLocation(startLocation)
+            var distanceInMeters = myLocation.distanceFromLocation(startLocation)
+            var distancePrefix = ""
+            if let roundDistance = self?.roundDistance(distanceInMeters) {
+                distanceInMeters = roundDistance.distance
+                distancePrefix = roundDistance.prefix
+            }
+            
             let formatter = NSLengthFormatter()
             formatter.numberFormatter.maximumFractionDigits = 1
             formatter.unitStyle = .Long
-            return formatter.stringFromMeters(distance)
+            return distancePrefix + formatter.stringFromMeters(distanceInMeters)
+        }
+    }
+    
+    //Round distance helper (POS-1932)
+    //Round distance to 500 miters to show <500
+    private func roundDistance(distanceInMeters: CLLocationDistance) -> (prefix: String, distance: CLLocationDistance)? {
+        
+        switch lengthFormatUnit() {
+        case .Kilometer, .Meter, .Centimeter, .Millimeter:
+            let roundMetersTo = 500.0
+            //distanceInMeters = distanceInMeters <= roundMetersTo ? roundMetersTo : distanceInMeters
+            return distanceInMeters <= roundMetersTo ? ("<", roundMetersTo) : nil
+            
+        case .Mile, .Yard, .Foot, .Inch:
+            let roundYardsTo = 457.2 // 500 meters equivalent
+            return distanceInMeters <= roundYardsTo ? ("<", roundYardsTo) : nil
         }
     }
     

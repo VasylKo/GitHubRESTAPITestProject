@@ -16,12 +16,7 @@ class PhoneNumberViewController: XLFormViewController {
         case CountryCode = "CountryCode"
         case Phone = "Phone"
     }
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        trackScreenToAnalytics(AnalyticsLabels.phoneVerification)
-    }
-    
+
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         self.prepareCountryPhoneCodes()
@@ -38,6 +33,21 @@ class PhoneNumberViewController: XLFormViewController {
         super.viewDidLoad()
         view.tintColor = UIScheme.mainThemeColor
         trackEventToAnalytics(AnalyticCategories.auth, action: AnalyticActios.click, label: NSLocalizedString("SMS code"))
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        trackScreenToAnalytics(AnalyticsLabels.phoneVerification)
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector:"keyboardWillAppear:",
+                                                         name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector:"keyboardWillDisappear:",
+                                                         name: UIKeyboardWillHideNotification, object: nil)
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
+        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
     override func showFormValidationError(error: NSError!) {
@@ -57,7 +67,7 @@ class PhoneNumberViewController: XLFormViewController {
             rowType:XLFormRowDescriptorTypeSelectorPush, title:"")
         var selectorOptions: [XLFormOptionsObject] = []
         
-        var kenyaSelectorOption: XLFormOptionsObject?
+        var selectedOption: XLFormOptionsObject?
         
         for (index, element) in phonesDictionary.enumerate() {
             let country = element["countryName"]
@@ -67,17 +77,16 @@ class PhoneNumberViewController: XLFormViewController {
                 let countryPhoneCode = code {
                     
                     let optionObject = XLFormOptionsObject(value: index, displayText: "\(countryName) \(countryPhoneCode)")
-                    if countryName == "Kenya" {
-                        kenyaSelectorOption = optionObject
+                    if countryName == AppConfiguration().countryFullName {
+                        selectedOption = optionObject
+                        self.countryPhoneCode = countryPhoneCode
                     }
                     selectorOptions.append(optionObject)
             }
         }
         
         coutryRow.selectorOptions = selectorOptions
-        if let kenyaSelectorOption = kenyaSelectorOption {
-            coutryRow.title = kenyaSelectorOption.displayText()
-        }
+        coutryRow.title = selectedOption?.displayText()
         coutryRow.onChangeBlock = {[unowned coutryRow] oldValue, newValue, descriptor in
             if let newValue = newValue as? XLFormOptionsObject {
                 coutryRow.title = newValue.displayText()
@@ -99,16 +108,28 @@ class PhoneNumberViewController: XLFormViewController {
             rowType: XLFormRowDescriptorTypePhone)
         phoneRow.cellConfigAtConfigure["textField.placeholder"] = "Enter your mobile phone number"
         phoneRow.required = true
+        phoneRow.onChangeBlock = { [unowned self] oldValue, newValue, descriptor in
+            guard let newValue = newValue as? String, oldValue = oldValue as? String else { return }
+            //Workaround to detect done button pressen on Navigation Accessory View
+            if oldValue == newValue {
+                self.doneButtonPressed(self.doneButton)
+            }
+        }
         phoneRow.addValidator(XLFormRegexValidator(msg: NSLocalizedString("Please specify a valid phone number",
             comment: "Onboarding"), regex: "^\\+?\\d+$"))
         phoneNumberSection.addFormRow(phoneRow)
         
         self.form = form
     }
-    
+
     func prepareCountryPhoneCodes() {
         let csvFile = NSBundle.mainBundle().pathForResource("country-codes", ofType: "csv")
-        let content = NSArray(contentsOfCSVFile: csvFile)
+        
+        guard let csvFilePath = csvFile else {
+            return
+        }
+        
+        let content = NSArray(contentsOfCSVFile: csvFilePath)
         
         for (index, element) in content.enumerate() {
             if index > 0 {
@@ -133,7 +154,24 @@ class PhoneNumberViewController: XLFormViewController {
         dismissViewControllerAnimated(true, completion: nil)
     }
     
-    @IBAction func doneButtonPressed(sender: AnyObject) {
+    func keyboardWillAppear(notification: NSNotification){
+        isKeyboardVisible = true
+    }
+    
+    func keyboardWillDisappear(notification: NSNotification){
+        isKeyboardVisible = false
+    }
+    
+    @IBAction func navigationDoneButtonPressed(sender: AnyObject) {
+        if isKeyboardVisible {
+            self.view.endEditing(true)
+        }
+        else {
+            self.doneButtonPressed(self.doneButton)
+        }
+    }
+    
+    func doneButtonPressed(sender: AnyObject) {
         
         trackEventToAnalytics(AnalyticCategories.phoneVerification, action: AnalyticActios.done)
         
@@ -183,7 +221,8 @@ class PhoneNumberViewController: XLFormViewController {
         }
     }
     
-    private var countryPhoneCode: String? = "+254"
+    private var isKeyboardVisible: Bool = false
+    private var countryPhoneCode: String?
     private var phonesDictionary: [[String: String]] = []
     
     @IBOutlet private weak var doneButton: UIBarButtonItem!
