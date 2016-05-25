@@ -13,6 +13,8 @@ class MasterViewController: UITableViewController {
 
     var detailViewController: DetailViewController? = nil
     var gists = [Gist]()
+    var nextPageURLString: String?
+    var isLoading = false
     
     //MARK: -View Life Cycle
     override func viewDidLoad() {
@@ -35,12 +37,17 @@ class MasterViewController: UITableViewController {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        loadGists()
+        loadGists(nil)
     }
     
     //MARK: - Network Call
-    func loadGists() {
-        GitHubAPIManager.sharedInstance.getPublicGists() { result in
+    func loadGists(urlToLoad: String?) {
+        self.isLoading = true
+        GitHubAPIManager.sharedInstance.getPublicGists(urlToLoad) {
+            (result, nextPage) in
+            self.isLoading = false
+            self.nextPageURLString = nextPage
+            
             guard result.error == nil else {
                 print(result.error)
                 // TODO: display error
@@ -48,7 +55,11 @@ class MasterViewController: UITableViewController {
             }
             
             if let fetchedGists = result.value {
-                self.gists = fetchedGists
+                if self.nextPageURLString != nil {
+                    self.gists += fetchedGists
+                } else {
+                    self.gists = fetchedGists
+                }
             }
             self.tableView.reloadData()
         }
@@ -97,9 +108,19 @@ class MasterViewController: UITableViewController {
         
         // set cell.imageView to display image at gist.ownerAvatarURL
         if let urlString = gist.ownerAvatarURL, url = NSURL(string: urlString) {
-            cell.imageView?.pin_setImageFromURL(url, placeholderImage: UIImage(named: "placeholder.png"))
+            cell.imageView?.pin_setImageFromURL(url, placeholderImage:
+                UIImage(named: "placeholder.png"))
         } else {
             cell.imageView?.image = UIImage(named: "placeholder.png")
+        }
+        
+        // See if we need to load more gists
+        let rowsToLoadFromBottom = 5;
+        let rowsLoaded = gists.count
+        if let nextPage = nextPageURLString {
+            if (!isLoading && (indexPath.row >= (rowsLoaded - rowsToLoadFromBottom))) {
+                self.loadGists(nextPage)
+            }
         }
         
         return cell
