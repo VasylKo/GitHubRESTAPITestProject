@@ -32,11 +32,23 @@ class MasterViewController: UITableViewController {
     
     override func viewWillAppear(animated: Bool) {
         self.clearsSelectionOnViewWillAppear = self.splitViewController!.collapsed
+        
+        //add refresh controll
+        if refreshControl == nil {
+            refreshControl = UIRefreshControl()
+            refreshControl?.addTarget(self, action: #selector(self.refresh(_:)), forControlEvents: .ValueChanged)
+        }
         super.viewWillAppear(animated)
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+        loadGists(nil)
+    }
+    
+    //MARK: - Network Call
+    func refresh(sender: AnyObject) {
+        nextPageURLString = nil
         loadGists(nil)
     }
     
@@ -48,6 +60,11 @@ class MasterViewController: UITableViewController {
             self.isLoading = false
             self.nextPageURLString = nextPage
             
+            //Hide refresh controll
+            if self.refreshControl != nil && self.refreshControl!.refreshing {
+                self.refreshControl!.endRefreshing()
+            }
+            
             guard result.error == nil else {
                 print(result.error)
                 // TODO: display error
@@ -55,7 +72,7 @@ class MasterViewController: UITableViewController {
             }
             
             if let fetchedGists = result.value {
-                if self.nextPageURLString != nil {
+                if urlToLoad != nil {
                     self.gists += fetchedGists
                 } else {
                     self.gists = fetchedGists
