@@ -15,6 +15,7 @@ class MasterViewController: UITableViewController {
     var gists = [Gist]()
     var nextPageURLString: String?
     var isLoading = false
+    var dateFormatter = NSDateFormatter()
     
     //MARK: -View Life Cycle
     override func viewDidLoad() {
@@ -37,6 +38,9 @@ class MasterViewController: UITableViewController {
         if refreshControl == nil {
             refreshControl = UIRefreshControl()
             refreshControl?.addTarget(self, action: #selector(self.refresh(_:)), forControlEvents: .ValueChanged)
+            refreshControl?.attributedTitle = NSAttributedString(string: "Pull to refresh")
+            dateFormatter.dateStyle = NSDateFormatterStyle.ShortStyle
+            dateFormatter.timeStyle = NSDateFormatterStyle.LongStyle
         }
         super.viewWillAppear(animated)
     }
@@ -44,6 +48,10 @@ class MasterViewController: UITableViewController {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         loadGists(nil)
+        
+        // TEST
+        GitHubAPIManager.sharedInstance.printMyStarredGistsWithBasicAuth()
+        // END TEST
     }
     
     //MARK: - Network Call
@@ -78,6 +86,12 @@ class MasterViewController: UITableViewController {
                     self.gists = fetchedGists
                 }
             }
+            
+            // update "last updated" title for refresh control
+            let now = NSDate()
+            let updateString = "Last Updated at " + self.dateFormatter.stringFromDate(now)
+            self.refreshControl?.attributedTitle = NSAttributedString(string: updateString)
+            
             self.tableView.reloadData()
         }
     }

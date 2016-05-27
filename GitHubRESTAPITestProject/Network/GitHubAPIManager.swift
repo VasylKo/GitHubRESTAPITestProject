@@ -69,6 +69,15 @@ class GitHubAPIManager {
         }
     }
     
+    // MARK: - Basic Auth
+    func printMyStarredGistsWithBasicAuth() -> Void {
+        Alamofire.request(GistRouter.GetMyStarred()).responseString { (response) in
+            if let receivedString = response.result.value {
+                print(receivedString)
+            }
+        }
+    }
+    
     //MARK: - Helper
     private func getNextPageFromHeaders(response: NSHTTPURLResponse?) -> String? {
         if let linkHeader = response?.allHeaderFields["Link"] as? String {
