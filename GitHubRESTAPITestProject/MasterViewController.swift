@@ -48,7 +48,17 @@ class MasterViewController: UITableViewController {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         //loadGists(nil)
+        
+        //Auth 2.0 flow
         loadInitialData()
+    }
+    
+    //MARK: - View Logic
+    func showOAuthLoginView() {
+        if let loginVC = storyboard?.instantiateViewControllerWithIdentifier("LoginViewController") as? LoginViewController {
+            loginVC.delegate = self
+            presentViewController(loginVC, animated: true, completion: nil)
+        }
     }
     
     //MARK: - Refresh controll
@@ -60,7 +70,7 @@ class MasterViewController: UITableViewController {
     //MARK: - Network Call
     private func loadInitialData() {
         if (!GitHubAPIManager.sharedInstance.hasOAuthToken()) {
-            //showOAuthLoginView()
+            showOAuthLoginView()
         } else {
             GitHubAPIManager.sharedInstance.printMyStarredGistsWithOAuth2()
         }
@@ -177,5 +187,14 @@ class MasterViewController: UITableViewController {
         }
     }
 
+}
+
+extension MasterViewController: LoginViewDelegate {
+    func didTapLoginButton() {
+        dismissViewControllerAnimated(false, completion: nil)
+        if let authURL = GitHubAPIManager.sharedInstance.URLToStartOAuth2Login() {
+            // TODO: show web page
+        }
+    }
 }
 

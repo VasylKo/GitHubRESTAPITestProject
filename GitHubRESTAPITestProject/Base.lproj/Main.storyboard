@@ -121,6 +121,46 @@
             </objects>
             <point key="canvasLocation" x="709" y="-630"/>
         </scene>
+        <!--Login View Controller-->
+        <scene sceneID="aRD-77-aCb">
+            <objects>
+                <viewController storyboardIdentifier="LoginViewController" id="XBA-fQ-UsM" customClass="LoginViewController" customModule="GitHubRESTAPITestProject" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="a3b-tG-R1j"/>
+                        <viewControllerLayoutGuide type="bottom" id="x1n-uJ-DCB"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="qog-tk-t5V">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dl8-Y0-Tvm">
+                                <rect key="frame" x="246" y="285" width="108" height="30"/>
+                                <state key="normal" title="Login to GitHub"/>
+                                <connections>
+                                    <action selector="loginButtonTapped:" destination="XBA-fQ-UsM" eventType="touchUpInside" id="Sok-yf-k4W"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mw1-AZ-q6L">
+                                <rect key="frame" x="276" y="325" width="48" height="30"/>
+                                <state key="normal" title="Cancel"/>
+                                <connections>
+                                    <action selector="cancelButtonTapped:" destination="XBA-fQ-UsM" eventType="touchUpInside" id="hv8-Zq-qBO"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Dl8-Y0-Tvm" firstAttribute="centerY" secondItem="qog-tk-t5V" secondAttribute="centerY" id="6qQ-Fw-BjX"/>
+                            <constraint firstItem="Dl8-Y0-Tvm" firstAttribute="centerX" secondItem="qog-tk-t5V" secondAttribute="centerX" id="Aqs-ry-ayh"/>
+                            <constraint firstItem="mw1-AZ-q6L" firstAttribute="centerX" secondItem="qog-tk-t5V" secondAttribute="centerX" id="eRI-DW-55M"/>
+                            <constraint firstItem="mw1-AZ-q6L" firstAttribute="top" secondItem="Dl8-Y0-Tvm" secondAttribute="bottom" constant="10" id="idc-G7-P8e"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Gqa-eO-gFA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1495" y="-630"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="r7l-gg-dq7">
             <objects>
