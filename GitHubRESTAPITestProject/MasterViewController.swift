@@ -47,21 +47,26 @@ class MasterViewController: UITableViewController {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        loadGists(nil)
-        
-        // TEST
-        GitHubAPIManager.sharedInstance.printMyStarredGistsWithBasicAuth()
-        // END TEST
+        //loadGists(nil)
+        loadInitialData()
     }
     
-    //MARK: - Network Call
+    //MARK: - Refresh controll
     func refresh(sender: AnyObject) {
         nextPageURLString = nil
         loadGists(nil)
     }
     
     //MARK: - Network Call
-    func loadGists(urlToLoad: String?) {
+    private func loadInitialData() {
+        if (!GitHubAPIManager.sharedInstance.hasOAuthToken()) {
+            //showOAuthLoginView()
+        } else {
+            GitHubAPIManager.sharedInstance.printMyStarredGistsWithOAuth2()
+        }
+    }
+    
+    private func loadGists(urlToLoad: String?) {
         self.isLoading = true
         GitHubAPIManager.sharedInstance.getPublicGists(urlToLoad) {
             (result, nextPage) in

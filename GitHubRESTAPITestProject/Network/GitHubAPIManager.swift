@@ -19,6 +19,7 @@ class GitHubAPIManager {
         alamofireManager = Alamofire.Manager(configuration: configuration)
     }
     
+    //MARK: - Test request
     func printPublicGists() -> Void {
         alamofireManager.request(GistRouter.GetPublic()).responseString { (response: Response<String, NSError>) in
             if let receivedString = response.result.value {
@@ -72,10 +73,39 @@ class GitHubAPIManager {
     // MARK: - Basic Auth
     func printMyStarredGistsWithBasicAuth() -> Void {
         Alamofire.request(GistRouter.GetMyStarred()).responseString { (response) in
+            guard response.result.error == nil else {
+                print(response.result.error!)
+                return
+            }
+            
             if let receivedString = response.result.value {
                 print(receivedString)
             }
         }
+    }
+    
+    // MARK: - OAuth 2.0 flow
+    func printMyStarredGistsWithOAuth2() -> Void {
+        alamofireManager.request(GistRouter.GetMyStarred()).responseString { response in
+            guard response.result.error == nil else {
+                print(response.result.error!)
+                return
+            }
+            
+            if let receivedString = response.result.value {
+                print(receivedString)
+            }
+        }
+    }
+    
+    func hasOAuthToken() -> Bool { // TODO: implement
+        return false
+    }
+    
+    func URLToStartOAuth2Login() -> NSURL? {
+        // TODO: implement
+        // TODO: get and print starred gists
+        return nil
     }
     
     //MARK: - Helper
