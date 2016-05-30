@@ -39,7 +39,7 @@ class GitHubAPIManager {
                         completionHandler(response.result, nil)
                         return
                 }
-                
+                debugPrint(response.request)
                 // need to figure out if this is the last page
                 // check the link header, if present
                 let next = self.getNextPageFromHeaders(response.response)

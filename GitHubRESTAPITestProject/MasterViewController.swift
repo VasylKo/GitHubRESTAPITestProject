@@ -47,10 +47,11 @@ class MasterViewController: UITableViewController {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        //loadGists(nil)
+        //Load lists of gists
+        loadGists()
         
         //Auth 2.0 flow
-        loadInitialData()
+        //loadInitialData()
     }
     
     //MARK: - View Logic
@@ -64,7 +65,7 @@ class MasterViewController: UITableViewController {
     //MARK: - Refresh controll
     func refresh(sender: AnyObject) {
         nextPageURLString = nil
-        loadGists(nil)
+        loadGists()
     }
     
     //MARK: - Network Call
@@ -76,7 +77,9 @@ class MasterViewController: UITableViewController {
         }
     }
     
-    private func loadGists(urlToLoad: String?) {
+    ///Load list of Gists from GitHub.
+    ///- Parameter urlToLoad: optional specify the URL to load gists (used for pagination).
+    private func loadGists(urlToLoad: String? = nil) {
         self.isLoading = true
         GitHubAPIManager.sharedInstance.getPublicGists(urlToLoad) {
             (result, nextPage) in
