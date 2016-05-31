@@ -37,6 +37,10 @@ final class OAuth2Manager{
         oAuthStatus = .GettingCode
     }
     
+    func authorisationProcessFail() {
+        oAuthStatus = .NotAuthorised
+    }
+    
     func URLToStartOAuth2Login() -> NSURL? {
         let authPath = "https://github.com/login/oauth/authorize?client_id=\(clientID)&scope=gist&state=TEST_STATE"
         guard let authURL:NSURL = NSURL(string: authPath) else {
@@ -65,6 +69,7 @@ final class OAuth2Manager{
             swapAuthCodeForToken(receivedCode)
         } else {
             oAuthStatus = .NotAuthorised
+            // TODO: add error here
         }
     }
     
@@ -77,6 +82,7 @@ final class OAuth2Manager{
             .responseString { response in
                 guard response.result.error == nil else {
                     self.oAuthStatus = .NotAuthorised
+                    // TODO: add error here
                     return
                 }
                
@@ -84,6 +90,7 @@ final class OAuth2Manager{
                 
                 guard let receivedResults = response.result.value, jsonData = receivedResults.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false) else {
                     self.oAuthStatus = .NotAuthorised
+                    // TODO: add error here
                     return
                 }
                 
@@ -91,6 +98,7 @@ final class OAuth2Manager{
                 
                 guard let oAuthToken = jsonResults["access_token"].string else {
                     self.oAuthStatus = .NotAuthorised
+                    // TODO: add error here
                     return
                 }
                 

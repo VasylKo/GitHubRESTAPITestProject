@@ -228,6 +228,7 @@ extension MasterViewController: SFSafariViewControllerDelegate {
     func safariViewController(controller: SFSafariViewController, didCompleteInitialLoad didLoadSuccessfully: Bool) {
         // Detect not being able to load the OAuth URL
         guard didLoadSuccessfully else {
+            oAuth2Manager.authorisationProcessFail()
             controller.dismissViewControllerAnimated(true, completion: nil)
             return
         }
