@@ -48,10 +48,10 @@ class MasterViewController: UITableViewController {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         //Load lists of gists
-        loadGists()
+        //loadGists()
         
         //Auth 2.0 flow
-        //loadInitialData()
+        loadInitialData()
     }
     
     //MARK: - View Logic
@@ -164,7 +164,7 @@ class MasterViewController: UITableViewController {
         }
         
         // See if we need to load more gists
-        let rowsToLoadFromBottom = 5;
+        let rowsToLoadFromBottom = 5
         let rowsLoaded = gists.count
         if let nextPage = nextPageURLString {
             if (!isLoading && (indexPath.row >= (rowsLoaded - rowsToLoadFromBottom))) {
