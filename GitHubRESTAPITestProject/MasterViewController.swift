@@ -8,14 +8,29 @@
 
 import UIKit
 import PINRemoteImage
+import SafariServices
 
 class MasterViewController: UITableViewController {
 
     var detailViewController: DetailViewController? = nil
-    var gists = [Gist]()
-    var nextPageURLString: String?
-    var isLoading = false
-    var dateFormatter = NSDateFormatter()
+    private var gists = [Gist]()
+    private var nextPageURLString: String?
+    private var isLoading = false
+    private lazy var dateFormatter: NSDateFormatter = {
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateStyle = NSDateFormatterStyle.ShortStyle
+        dateFormatter.timeStyle = NSDateFormatterStyle.LongStyle
+        return dateFormatter
+    }()
+    private var safariViewController: SFSafariViewController?
+    private let oAuth2Manager: OAuth2Manager
+    private let gitHubAPIManager: GitHubAPIManager
+    
+    required init?(coder aDecoder: NSCoder) {
+        oAuth2Manager = OAuth2Manager.sharedInstance
+        gitHubAPIManager = GitHubAPIManager.sharedInstance
+        super.init(coder: aDecoder)
+    }
     
     //MARK: -View Life Cycle
     override func viewDidLoad() {
@@ -39,8 +54,6 @@ class MasterViewController: UITableViewController {
             refreshControl = UIRefreshControl()
             refreshControl?.addTarget(self, action: #selector(self.refresh(_:)), forControlEvents: .ValueChanged)
             refreshControl?.attributedTitle = NSAttributedString(string: "Pull to refresh")
-            dateFormatter.dateStyle = NSDateFormatterStyle.ShortStyle
-            dateFormatter.timeStyle = NSDateFormatterStyle.LongStyle
         }
         super.viewWillAppear(animated)
     }
@@ -70,10 +83,13 @@ class MasterViewController: UITableViewController {
     
     //MARK: - Network Call
     private func loadInitialData() {
-        if (!GitHubAPIManager.sharedInstance.hasOAuthToken()) {
+        switch OAuth2Manager.sharedInstance.oAuthStatus {
+        case .NotAuthorised:
             showOAuthLoginView()
-        } else {
-            GitHubAPIManager.sharedInstance.printMyStarredGistsWithOAuth2()
+        case .HasToken(_):
+            gitHubAPIManager.printMyStarredGistsWithOAuth2()
+        default:
+            break
         }
     }
     
@@ -81,7 +97,7 @@ class MasterViewController: UITableViewController {
     ///- Parameter urlToLoad: optional specify the URL to load gists (used for pagination).
     private func loadGists(urlToLoad: String? = nil) {
         self.isLoading = true
-        GitHubAPIManager.sharedInstance.getPublicGists(urlToLoad) {
+        gitHubAPIManager.getPublicGists(urlToLoad) {
             (result, nextPage) in
             self.isLoading = false
             self.nextPageURLString = nextPage
@@ -194,9 +210,26 @@ class MasterViewController: UITableViewController {
 
 extension MasterViewController: LoginViewDelegate {
     func didTapLoginButton() {
+        oAuth2Manager.startAuthorisationProcess()
         dismissViewControllerAnimated(false, completion: nil)
-        if let authURL = GitHubAPIManager.sharedInstance.URLToStartOAuth2Login() {
-            // TODO: show web page
+        guard let authURL = OAuth2Manager.sharedInstance.URLToStartOAuth2Login() else  {
+            return
+        }
+        
+        safariViewController = SFSafariViewController(URL: authURL)
+        safariViewController?.delegate = self
+        presentViewController(safariViewController!, animated: true, completion: nil)
+        
+    }
+}
+
+// MARK: - Safari View Controller Delegate
+extension MasterViewController: SFSafariViewControllerDelegate {
+    func safariViewController(controller: SFSafariViewController, didCompleteInitialLoad didLoadSuccessfully: Bool) {
+        // Detect not being able to load the OAuth URL
+        guard didLoadSuccessfully else {
+            controller.dismissViewControllerAnimated(true, completion: nil)
+            return
         }
     }
 }

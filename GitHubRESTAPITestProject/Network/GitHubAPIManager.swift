@@ -10,9 +10,11 @@ import Foundation
 import Alamofire
 import SwiftyJSON
 
-class GitHubAPIManager {
+final class GitHubAPIManager {
     static let sharedInstance = GitHubAPIManager()
-    var alamofireManager: Alamofire.Manager
+    
+    //MARK: - Private properties
+    private var alamofireManager: Alamofire.Manager
     
     init () {
         let configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
@@ -96,16 +98,6 @@ class GitHubAPIManager {
                 print(receivedString)
             }
         }
-    }
-    
-    func hasOAuthToken() -> Bool { // TODO: implement
-        return false
-    }
-    
-    func URLToStartOAuth2Login() -> NSURL? {
-        // TODO: implement
-        // TODO: get and print starred gists
-        return nil
     }
     
     //MARK: - Helper
