@@ -28,7 +28,7 @@ final class OAuth2Manager{
     private(set) var oAuthStatus: Status
     
     //MARK: - Init
-    init() {
+    private init() {
         oAuthStatus = .NotAuthorised
     }
     

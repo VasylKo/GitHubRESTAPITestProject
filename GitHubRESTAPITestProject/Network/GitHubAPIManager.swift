@@ -16,7 +16,7 @@ final class GitHubAPIManager {
     //MARK: - Private properties
     private var alamofireManager: Alamofire.Manager
     
-    init () {
+    private init () {
         let configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
         alamofireManager = Alamofire.Manager(configuration: configuration)
     }
