@@ -8,6 +8,8 @@
 
 import UIKit
 
+let OAuthTokenRequestResponseReceivedNotification = "OAuthTokenRequestResponseReceivedNotification"
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDelegate {
 
@@ -24,7 +26,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
     }
     
     func application(application: UIApplication, handleOpenURL url: NSURL) -> Bool {
-        OAuth2Manager.sharedInstance.processOAuthResponse(url)
+        if url.scheme == "vkgithub" {
+            OAuth2Manager.sharedInstance.processOAuthResponse(url)
+            let notification = NSNotification(name: OAuthTokenRequestResponseReceivedNotification, object: nil)
+            NSNotificationCenter.defaultCenter().postNotification(notification)
+        }
+        
         return true
     }
 

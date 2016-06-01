@@ -13,10 +13,9 @@ import SwiftyJSON
 final class OAuth2Manager{
     static let sharedInstance = OAuth2Manager()
 
-    enum Status {
+    enum AuthorisationStatus {
         case NotAuthorised
-        case GettingCode
-        case HasCode(code: String)
+        case Authorising
         case HasToken(token: String)
     }
     
@@ -25,7 +24,11 @@ final class OAuth2Manager{
     private let clientSecret: String = "0da2da635e3de0510ff298d36a7d96e9c8c75cb0"
     
     //MARK: - Internal properties
-    private(set) var oAuthStatus: Status
+    private(set) var oAuthStatus: AuthorisationStatus {
+        didSet {
+            print(oAuthStatus)
+        }
+    }
     
     //MARK: - Init
     private init() {
@@ -34,7 +37,7 @@ final class OAuth2Manager{
     
     //MARK: - Internal methods
     func startAuthorisationProcess() {
-        oAuthStatus = .GettingCode
+        oAuthStatus = .Authorising
     }
     
     func authorisationProcessFail() {
@@ -50,9 +53,7 @@ final class OAuth2Manager{
         return authURL
     }
     
-    func processOAuthResponse(url: NSURL) {
-        oAuthStatus = .GettingCode
-        
+    func processOAuthResponse(url: NSURL) {        
         //Extract code from response
         let components = NSURLComponents(URL: url, resolvingAgainstBaseURL: false)
         var code:String?
@@ -65,7 +66,6 @@ final class OAuth2Manager{
             }
         }
         if let receivedCode = code {
-            oAuthStatus = .HasCode(code: receivedCode)
             swapAuthCodeForToken(receivedCode)
         } else {
             oAuthStatus = .NotAuthorised

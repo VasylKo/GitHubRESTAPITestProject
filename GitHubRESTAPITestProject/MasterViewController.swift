@@ -44,6 +44,9 @@ class MasterViewController: UITableViewController {
             let controllers = split.viewControllers
             self.detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? DetailViewController
         }
+        
+        //Add observer
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.oAuthTokenRequestResponseReceived(_:)), name: OAuthTokenRequestResponseReceivedNotification, object: nil)
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -65,6 +68,10 @@ class MasterViewController: UITableViewController {
         
         //Auth 2.0 flow
         loadInitialData()
+    }
+    
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
     //MARK: - View Logic
@@ -237,6 +244,10 @@ extension MasterViewController: SFSafariViewControllerDelegate {
     //In case user close safari VC
     func safariViewControllerDidFinish(controller: SFSafariViewController) {
         oAuth2Manager.authorisationProcessFail()
+    }
+    
+    func oAuthTokenRequestResponseReceived(notification: NSNotification) {
+        dismissViewControllerAnimated(true, completion: nil)
     }
 }
 
