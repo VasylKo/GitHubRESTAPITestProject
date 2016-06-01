@@ -233,5 +233,10 @@ extension MasterViewController: SFSafariViewControllerDelegate {
             return
         }
     }
+    
+    //In case user close safari VC
+    func safariViewControllerDidFinish(controller: SFSafariViewController) {
+        oAuth2Manager.authorisationProcessFail()
+    }
 }
 
