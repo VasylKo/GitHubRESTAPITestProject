@@ -9,6 +9,7 @@
 import Foundation
 import Alamofire
 import SwiftyJSON
+import Locksmith
 
 final class OAuth2Manager{
     static let sharedInstance = OAuth2Manager()
@@ -32,7 +33,14 @@ final class OAuth2Manager{
     
     //MARK: - Init
     private init() {
-        oAuthStatus = .NotAuthorised
+        //Try to load token from Keychain
+        Locksmith.loadDataForUserAccount("github")
+        let dictionary = Locksmith.loadDataForUserAccount("github")
+        if let token = dictionary?["token"] as? String {
+            oAuthStatus = .HasToken(token: token)
+        } else {
+            oAuthStatus = .NotAuthorised
+        }
     }
     
     //MARK: - Internal methods
@@ -100,6 +108,13 @@ final class OAuth2Manager{
                     self.oAuthStatus = .NotAuthorised
                     // TODO: add error here
                     return
+                }
+                
+                //Save token to Keychain
+                do {
+                    try Locksmith.updateData(["token": oAuthToken], forUserAccount: "github")
+                } catch {
+                    let _ = try? Locksmith.deleteDataForUserAccount("github")
                 }
                 
                 self.oAuthStatus = .HasToken(token: oAuthToken)
