@@ -53,6 +53,11 @@ enum GistRouter: URLRequestConvertible {
         let URL = NSURL(string: GistRouter.baseURLString)!
         let URLRequest = NSMutableURLRequest(URL: URL.URLByAppendingPathComponent(result.path))
         
+        // Set OAuth token if we have one
+        if case .HasToken(token: let token) = OAuth2Manager.sharedInstance.oAuthStatus {
+            URLRequest.setValue("token \(token)", forHTTPHeaderField: "Authorization")
+        }
+        
         var encoding: Alamofire.ParameterEncoding {
             switch method {
             case .GET:
