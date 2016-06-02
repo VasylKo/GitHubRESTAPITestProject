@@ -30,6 +30,7 @@ class MasterViewController: UITableViewController {
         oAuth2Manager = OAuth2Manager.sharedInstance
         gitHubAPIManager = GitHubAPIManager.sharedInstance
         super.init(coder: aDecoder)
+        oAuth2Manager.delegate = self
     }
     
     //MARK: -View Life Cycle
@@ -248,6 +249,12 @@ extension MasterViewController: SFSafariViewControllerDelegate {
     
     func oAuthTokenRequestResponseReceived(notification: NSNotification) {
         dismissViewControllerAnimated(true, completion: nil)
+    }
+}
+
+extension MasterViewController: OAuth2ManagerDelegate {
+    func authorisationStatusDidChanged(authorisationStatus: OAuth2Manager.AuthorisationStatus) {
+        loadInitialData()
     }
 }
 

@@ -24,6 +24,7 @@
 		54E7C5DD1CECA5180046F83D /* Gist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E7C5DC1CECA5180046F83D /* Gist.swift */; };
 		54E7C5DF1CECA5460046F83D /* ResponseJSONObjectSerializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E7C5DE1CECA5460046F83D /* ResponseJSONObjectSerializable.swift */; };
 		54E7C5E31CECA5B90046F83D /* AlamofireRequest+JSONSerializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E7C5E21CECA5B90046F83D /* AlamofireRequest+JSONSerializable.swift */; };
+		54F0C0481D002A5200998E0E /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F0C0471D002A5200998E0E /* KeychainManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +48,7 @@
 		54E7C5DC1CECA5180046F83D /* Gist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gist.swift; sourceTree = "<group>"; };
 		54E7C5DE1CECA5460046F83D /* ResponseJSONObjectSerializable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponseJSONObjectSerializable.swift; sourceTree = "<group>"; };
 		54E7C5E21CECA5B90046F83D /* AlamofireRequest+JSONSerializable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AlamofireRequest+JSONSerializable.swift"; sourceTree = "<group>"; };
+		54F0C0471D002A5200998E0E /* KeychainManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +94,7 @@
 		54E7C5BC1CEC9BFC0046F83D /* GitHubRESTAPITestProject */ = {
 			isa = PBXGroup;
 			children = (
+				54F0C0461D002A3500998E0E /*  Utils */,
 				54E7C5E11CECA5AA0046F83D /* Extensions */,
 				54E7C5D11CEC9D110046F83D /* Controllers */,
 				54E7C5D21CEC9D110046F83D /* Model */,
@@ -157,6 +160,14 @@
 				54E7C5E21CECA5B90046F83D /* AlamofireRequest+JSONSerializable.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		54F0C0461D002A3500998E0E /*  Utils */ = {
+			isa = PBXGroup;
+			children = (
+				54F0C0471D002A5200998E0E /* KeychainManager.swift */,
+			);
+			path = " Utils";
 			sourceTree = "<group>";
 		};
 		7BB736879F675ABE1D242875 /* Pods */ = {
@@ -299,6 +310,7 @@
 				54E7C5D91CEC9F5E0046F83D /* GitHubAPIManager.swift in Sources */,
 				54E7C5DF1CECA5460046F83D /* ResponseJSONObjectSerializable.swift in Sources */,
 				54E7C5DD1CECA5180046F83D /* Gist.swift in Sources */,
+				54F0C0481D002A5200998E0E /* KeychainManager.swift in Sources */,
 				54E7C5C01CEC9BFC0046F83D /* MasterViewController.swift in Sources */,
 				54E7C5DB1CECA13B0046F83D /* GistRouter.swift in Sources */,
 				5158715F1CFF8A2700D7C7B0 /* AppDelegate.swift in Sources */,

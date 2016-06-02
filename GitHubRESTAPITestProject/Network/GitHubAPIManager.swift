@@ -30,8 +30,7 @@ final class GitHubAPIManager {
         }
     }
     
-    func getMyStarredGists(pageToLoad: String?, completionHandler:
-        (Result<[Gist], NSError>, String?) -> Void) {
+    func getMyStarredGists(pageToLoad: String?, completionHandler:(Result<[Gist], NSError>, String?) -> Void) {
         if let urlString = pageToLoad {
             getGists(GistRouter.GetAtPath(urlString), completionHandler: completionHandler)
         } else {
@@ -72,16 +71,18 @@ final class GitHubAPIManager {
     
     // MARK: - OAuth 2.0 flow
     func printMyStarredGistsWithOAuth2() -> Void {
-        alamofireManager.request(GistRouter.GetMyStarred()).responseString { response in
+        let starredGistsRequest = alamofireManager.request(GistRouter.GetMyStarred()).responseString { response in
             guard response.result.error == nil else {
                 print(response.result.error!)
                 return
             }
             
-            if let receivedString = response.result.value {
-                print(receivedString)
+            if let _ = response.result.value {
+                print("Successfully loaded Starred Gists")
             }
         }
+        
+        debugPrint(starredGistsRequest)
     }
     
     //MARK: - Private implementation

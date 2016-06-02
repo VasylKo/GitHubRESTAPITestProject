@@ -9,7 +9,10 @@
 import Foundation
 import Alamofire
 import SwiftyJSON
-import Locksmith
+
+protocol OAuth2ManagerDelegate: class {
+    func authorisationStatusDidChanged(authorisationStatus: OAuth2Manager.AuthorisationStatus)
+}
 
 final class OAuth2Manager{
     static let sharedInstance = OAuth2Manager()
@@ -23,20 +26,23 @@ final class OAuth2Manager{
     //MARK: - Private properties
     private let clientID: String = "a3ac089b8988628d38ce"
     private let clientSecret: String = "0da2da635e3de0510ff298d36a7d96e9c8c75cb0"
+    private let keychainManager: KeychainManager
     
     //MARK: - Internal properties
+    weak var delegate: OAuth2ManagerDelegate?
     private(set) var oAuthStatus: AuthorisationStatus {
         didSet {
-            print(oAuthStatus)
+            print("Authorisation (OAuth2) Status Changed to : \(oAuthStatus)")
+            delegate?.authorisationStatusDidChanged(oAuthStatus)
         }
     }
     
     //MARK: - Init
     private init() {
+        keychainManager = LocksmithKeychainManager()
+        
         //Try to load token from Keychain
-        Locksmith.loadDataForUserAccount("github")
-        let dictionary = Locksmith.loadDataForUserAccount("github")
-        if let token = dictionary?["token"] as? String {
+        if let token = keychainManager.loadTokenFromKeychain() {
             oAuthStatus = .HasToken(token: token)
         } else {
             oAuthStatus = .NotAuthorised
@@ -110,13 +116,7 @@ final class OAuth2Manager{
                     return
                 }
                 
-                //Save token to Keychain
-                do {
-                    try Locksmith.updateData(["token": oAuthToken], forUserAccount: "github")
-                } catch {
-                    let _ = try? Locksmith.deleteDataForUserAccount("github")
-                }
-                
+                self.keychainManager.saveTokenToKeychain(oAuthToken)
                 self.oAuthStatus = .HasToken(token: oAuthToken)
         }
     }
