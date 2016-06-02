@@ -21,34 +21,7 @@ final class GitHubAPIManager {
         alamofireManager = Alamofire.Manager(configuration: configuration)
     }
     
-    //MARK: - Test request
-    func printPublicGists() -> Void {
-        alamofireManager.request(GistRouter.GetPublic()).responseString { (response: Response<String, NSError>) in
-            if let receivedString = response.result.value {
-                print(receivedString)
-            }
-        }
-    }
-    
-    //MARK: - Loading Gists
-    func getGists(urlRequest: URLRequestConvertible, completionHandler: (Result<[Gist], NSError>, String?) -> Void) {
-        alamofireManager.request(urlRequest)
-            .validate()
-            .responseArray { (response:Response<[Gist], NSError>) in
-                guard response.result.error == nil,
-                    let gists = response.result.value else {
-                        print(response.result.error)
-                        completionHandler(response.result, nil)
-                        return
-                }
-                debugPrint(response.request)
-                // need to figure out if this is the last page
-                // check the link header, if present
-                let next = self.getNextPageFromHeaders(response.response)
-                completionHandler(.Success(gists), next)
-        }
-    }
-    
+    //MARK: - Intrnal methods for data loading
     func getPublicGists(pageToLoad: String?, completionHandler: (Result<[Gist], NSError>, String?) -> Void) {
         if let urlString = pageToLoad {
             getGists(GistRouter.GetAtPath(urlString), completionHandler: completionHandler)
@@ -56,7 +29,16 @@ final class GitHubAPIManager {
             getGists(GistRouter.GetPublic(), completionHandler: completionHandler)
         }
     }
- 
+    
+    func getMyStarredGists(pageToLoad: String?, completionHandler:
+        (Result<[Gist], NSError>, String?) -> Void) {
+        if let urlString = pageToLoad {
+            getGists(GistRouter.GetAtPath(urlString), completionHandler: completionHandler)
+        } else {
+            getGists(GistRouter.GetMyStarred(), completionHandler: completionHandler)
+        }
+    }
+    
     //MARK: - Loading Images
     func imageFromURLString(imageURLString: String, completionHandler:
         (UIImage?, NSError?) -> Void) {
@@ -74,7 +56,7 @@ final class GitHubAPIManager {
     
     // MARK: - Basic Auth
     func printMyStarredGistsWithBasicAuth() -> Void {
-        Alamofire.request(GistRouter.GetMyStarred()).responseString { (response) in
+        let starredGistsRequest = Alamofire.request(GistRouter.GetMyStarred()).responseString { (response) in
             guard response.result.error == nil else {
                 print(response.result.error!)
                 return
@@ -84,6 +66,8 @@ final class GitHubAPIManager {
                 print(receivedString)
             }
         }
+        
+        debugPrint(starredGistsRequest)
     }
     
     // MARK: - OAuth 2.0 flow
@@ -98,6 +82,26 @@ final class GitHubAPIManager {
                 print(receivedString)
             }
         }
+    }
+    
+    //MARK: - Private implementation
+    private func getGists(urlRequest: URLRequestConvertible, completionHandler: (Result<[Gist], NSError>, String?) -> Void) {
+        let gistsRequest = alamofireManager.request(urlRequest)
+            .validate()
+            .responseArray { (response:Response<[Gist], NSError>) in
+                guard response.result.error == nil,
+                    let gists = response.result.value else {
+                        print(response.result.error)
+                        completionHandler(response.result, nil)
+                        return
+                }
+                // need to figure out if this is the last page
+                // check the link header, if present
+                let next = self.getNextPageFromHeaders(response.response)
+                completionHandler(.Success(gists), next)
+        }
+        
+        debugPrint(gistsRequest)
     }
     
     //MARK: - Helper
