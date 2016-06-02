@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		39293CE51430C5B6B9923CBC /* Pods_GitHubRESTAPITestProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10F65F0E93F28AD6F4569B73 /* Pods_GitHubRESTAPITestProject.framework */; };
 		5158715F1CFF8A2700D7C7B0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5158715D1CFF8A2700D7C7B0 /* AppDelegate.swift */; };
-		515871601CFF8A2700D7C7B0 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5158715E1CFF8A2700D7C7B0 /* Info.plist */; };
 		5412F1AE1CFDCD1F00D6EBCE /* OAuth2Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5412F1AD1CFDCD1F00D6EBCE /* OAuth2Manager.swift */; };
 		5412F1B01CFDD54800D6EBCE /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5412F1AF1CFDD54800D6EBCE /* SafariServices.framework */; };
 		541981D41CF8313300D0D40A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 541981D31CF8313200D0D40A /* LoginViewController.swift */; };
@@ -244,7 +243,6 @@
 				54E7C5CA1CEC9BFC0046F83D /* LaunchScreen.storyboard in Resources */,
 				54E7C5C71CEC9BFC0046F83D /* Assets.xcassets in Resources */,
 				54E7C5D71CEC9D210046F83D /* Podfile in Resources */,
-				515871601CFF8A2700D7C7B0 /* Info.plist in Resources */,
 				54E7C5C51CEC9BFC0046F83D /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
