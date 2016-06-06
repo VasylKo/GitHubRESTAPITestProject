@@ -9,6 +9,7 @@
 import UIKit
 import PINRemoteImage
 import SafariServices
+import Alamofire
 
 class MasterViewController: UITableViewController {
 
@@ -26,6 +27,16 @@ class MasterViewController: UITableViewController {
     private let oAuth2Manager: OAuth2Manager
     private let gitHubAPIManager: GitHubAPIManager
     
+    private enum SegmenterIndexSections: Int {
+        case publicGists = 0
+        case starredGists
+        case myGists
+    }
+    
+    //MARK: - Outlets
+    @IBOutlet weak var gistSegmentedControl: UISegmentedControl!
+    
+    //MARK: - Init
     required init?(coder aDecoder: NSCoder) {
         oAuth2Manager = OAuth2Manager.sharedInstance
         gitHubAPIManager = GitHubAPIManager.sharedInstance
@@ -33,7 +44,7 @@ class MasterViewController: UITableViewController {
         oAuth2Manager.delegate = self
     }
     
-    //MARK: -View Life Cycle
+    //MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -88,9 +99,9 @@ class MasterViewController: UITableViewController {
     ///Load lists of gists if the user is authorized
     private func loadInitialData() {
         switch OAuth2Manager.sharedInstance.oAuthStatus {
-        case .NotAuthorised:
+        case .notAuthorised:
             showOAuthLoginView()
-        case .HasToken(_):
+        case .hasToken(_):
             loadGists()
         default:
             break
@@ -101,7 +112,7 @@ class MasterViewController: UITableViewController {
     ///- Parameter urlToLoad: optional specify the URL to load gists (used for pagination).
     private func loadGists(urlToLoad: String? = nil) {
         self.isLoading = true
-        gitHubAPIManager.getMyStarredGists(urlToLoad) {[weak self] (result, nextPage) in
+        let sharedCompletionHandler: (Result<[Gist], NSError>, String?) -> Void = {[weak self] (result, nextPage) in
             guard let strongSelf = self else { return }
             strongSelf.isLoading = false
             strongSelf.nextPageURLString = nextPage
@@ -134,6 +145,18 @@ class MasterViewController: UITableViewController {
             
             strongSelf.tableView.reloadData()
         }
+        
+        guard let selectedSegmentIndex = SegmenterIndexSections(rawValue: gistSegmentedControl.selectedSegmentIndex) else { fatalError("Can't get selected segmented section. Check SegmenterIndexSections enum values") }
+        switch  selectedSegmentIndex{
+        case .publicGists:
+            GitHubAPIManager.sharedInstance.getPublicGists(urlToLoad, completionHandler: sharedCompletionHandler)
+        case .starredGists:
+            GitHubAPIManager.sharedInstance.getMyStarredGists(urlToLoad, completionHandler: sharedCompletionHandler)
+        case .myGists:
+            print("Load my gists")
+            //GitHubAPIManager.sharedInstance.getMyGists(urlToLoad, completionHandler: sharedCompletionHandler)
+            
+        }
     }
     
     
@@ -144,6 +167,8 @@ class MasterViewController: UITableViewController {
         presentViewController(alert, animated: true, completion: nil)
     }
     
+    @IBAction func segmentedControlValueChanged(sender: UISegmentedControl) {
+    }
     // MARK: - Segues
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

@@ -26,7 +26,7 @@ final class GitHubAPIManager {
         if let urlString = pageToLoad {
             getGists(GistRouter.getAtPath(urlString), completionHandler: completionHandler)
         } else {
-            getGists(GistRouter.getPublic(), completionHandler: completionHandler)
+            getGists(GistRouter.getPublic, completionHandler: completionHandler)
         }
     }
     
@@ -34,7 +34,15 @@ final class GitHubAPIManager {
         if let urlString = pageToLoad {
             getGists(GistRouter.getAtPath(urlString), completionHandler: completionHandler)
         } else {
-            getGists(GistRouter.getMyStarred(), completionHandler: completionHandler)
+            getGists(GistRouter.getMyStarred, completionHandler: completionHandler)
+        }
+    }
+    
+    func getMyGists(pageToLoad: String?, completionHandler: (Result<[Gist], NSError>, String?) -> Void) {
+        if let urlString = pageToLoad {
+            getGists(GistRouter.getAtPath(urlString), completionHandler: completionHandler)
+        } else {
+            getGists(GistRouter.getMine, completionHandler: completionHandler)
         }
     }
     
@@ -51,38 +59,6 @@ final class GitHubAPIManager {
                 let image = UIImage(data: data! as NSData)
                 completionHandler(image, nil)
         }
-    }
-    
-    // MARK: - Basic Auth
-    func printMyStarredGistsWithBasicAuth() -> Void {
-        let starredGistsRequest = Alamofire.request(GistRouter.getMyStarred()).responseString { (response) in
-            guard response.result.error == nil else {
-                print(response.result.error!)
-                return
-            }
-            
-            if let receivedString = response.result.value {
-                print(receivedString)
-            }
-        }
-        
-        debugPrint(starredGistsRequest)
-    }
-    
-    // MARK: - OAuth 2.0 flow
-    func printMyStarredGistsWithOAuth2() -> Void {
-        let starredGistsRequest = alamofireManager.request(GistRouter.getMyStarred()).responseString { response in
-            guard response.result.error == nil else {
-                print(response.result.error!)
-                return
-            }
-            
-            if let _ = response.result.value {
-                print("Successfully loaded Starred Gists")
-            }
-        }
-        
-        debugPrint(starredGistsRequest)
     }
     
     //MARK: - Private implementation

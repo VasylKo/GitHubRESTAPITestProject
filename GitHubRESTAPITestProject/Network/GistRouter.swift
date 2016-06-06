@@ -14,9 +14,10 @@ import Alamofire
 enum GistRouter: URLRequestConvertible {
     static let baseURLString:String = "https://api.github.com"
     
-    case getPublic() // GET https://api.github.com/gists/public
+    case getPublic // GET https://api.github.com/gists/public
     case getAtPath(String) // GET at given path
-    case getMyStarred() // GET https://api.github.com/gists/starred
+    case getMyStarred // GET https://api.github.com/gists/starred
+    case getMine
     
     var URLRequest: NSMutableURLRequest {
         var method: Alamofire.Method {
@@ -26,6 +27,8 @@ enum GistRouter: URLRequestConvertible {
             case .getAtPath:
                 return .GET
             case .getMyStarred:
+                return .GET
+            case .getMine:
                 return .GET
             }
         }
@@ -47,6 +50,8 @@ enum GistRouter: URLRequestConvertible {
                 return (relativePath, parameters)
             case .getMyStarred:
                 return ("/gists/starred", nil)
+            case .getMine:
+                return ("/gists", nil)
             }
         }()
         
@@ -68,7 +73,6 @@ enum GistRouter: URLRequestConvertible {
         }
         
         let (encoded, _) = encoding.encode(URLRequest, parameters: result.parameters)
-        
         encoded.HTTPMethod = method.rawValue
         
         return encoded
