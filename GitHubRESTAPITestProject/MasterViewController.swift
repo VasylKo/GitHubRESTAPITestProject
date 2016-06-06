@@ -64,10 +64,6 @@ class MasterViewController: UITableViewController {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        //Load lists of gists
-        //loadGists()
-        
-        //Auth 2.0 flow
         loadInitialData()
     }
     
@@ -77,7 +73,7 @@ class MasterViewController: UITableViewController {
     
     //MARK: - View Logic
     func showOAuthLoginView() {
-        if let loginVC = storyboard?.instantiateViewControllerWithIdentifier("LoginViewController") as? LoginViewController {
+        if let loginVC = storyboard?.instantiateViewControllerWithIdentifier("LoginViewController") as? LoginViewController where presentedViewController == nil {
             loginVC.delegate = self
             presentViewController(loginVC, animated: true, completion: nil)
         }
@@ -85,17 +81,17 @@ class MasterViewController: UITableViewController {
     
     //MARK: - Refresh controll
     func refresh(sender: AnyObject) {
-        nextPageURLString = nil
-        loadGists()
+        loadInitialData()
     }
     
     //MARK: - Network Call
+    ///Load lists of gists if the user is authorized
     private func loadInitialData() {
         switch OAuth2Manager.sharedInstance.oAuthStatus {
         case .NotAuthorised:
             showOAuthLoginView()
         case .HasToken(_):
-            gitHubAPIManager.printMyStarredGistsWithOAuth2()
+            loadGists()
         default:
             break
         }
@@ -105,7 +101,7 @@ class MasterViewController: UITableViewController {
     ///- Parameter urlToLoad: optional specify the URL to load gists (used for pagination).
     private func loadGists(urlToLoad: String? = nil) {
         self.isLoading = true
-        gitHubAPIManager.getPublicGists(urlToLoad) {
+        gitHubAPIManager.getMyStarredGists(urlToLoad) {
             (result, nextPage) in
             self.isLoading = false
             self.nextPageURLString = nextPage
@@ -221,6 +217,7 @@ extension MasterViewController: LoginViewDelegate {
         oAuth2Manager.startAuthorisationProcess()
         dismissViewControllerAnimated(false, completion: nil)
         guard let authURL = OAuth2Manager.sharedInstance.URLToStartOAuth2Login() else  {
+            oAuth2Manager.authorisationProcessFail(NSError(description: "Could not create an OAuth authorization URL", suggestion: "Please retry your request"))
             return
         }
         
@@ -236,7 +233,7 @@ extension MasterViewController: SFSafariViewControllerDelegate {
     func safariViewController(controller: SFSafariViewController, didCompleteInitialLoad didLoadSuccessfully: Bool) {
         // Detect not being able to load the OAuth URL
         guard didLoadSuccessfully else {
-            oAuth2Manager.authorisationProcessFail()
+            oAuth2Manager.authorisationProcessFail(NSError(code: NSURLErrorNotConnectedToInternet, description: "No Internet Connection", suggestion: "Please retry your request"))
             controller.dismissViewControllerAnimated(true, completion: nil)
             return
         }

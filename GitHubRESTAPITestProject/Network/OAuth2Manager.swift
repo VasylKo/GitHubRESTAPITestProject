@@ -54,7 +54,7 @@ final class OAuth2Manager{
         oAuthStatus = .Authorising
     }
     
-    func authorisationProcessFail() {
+    func authorisationProcessFail(error: NSError? = nil) {
         oAuthStatus = .NotAuthorised
     }
     
@@ -71,20 +71,23 @@ final class OAuth2Manager{
         //Extract code from response
         let components = NSURLComponents(URL: url, resolvingAgainstBaseURL: false)
         var code:String?
-        if let queryItems = components?.queryItems {
-            for queryItem in queryItems {
-                if (queryItem.name.lowercaseString == "code") {
-                    code = queryItem.value
-                    break
-                }
-            }
+        
+        guard let queryItems = components?.queryItems else {
+            authorisationProcessFail(NSError(description: "Could not obtain an OAuth code", suggestion: "Please retry your request"))
+            return
         }
-        if let receivedCode = code {
-            swapAuthCodeForToken(receivedCode)
-        } else {
-            oAuthStatus = .NotAuthorised
-            // TODO: add error here
+        for queryItem in queryItems {
+            guard queryItem.name.lowercaseString == "code" else { continue }
+            code = queryItem.value
         }
+        
+        guard let receivedCode = code else {
+            authorisationProcessFail(NSError(description: "Could not obtain an OAuth code", suggestion: "Please retry your request"))
+            return
+        }
+        
+        swapAuthCodeForToken(receivedCode)
+        
     }
     
     //MARK: - Private methods
@@ -92,32 +95,31 @@ final class OAuth2Manager{
         let getTokenPath:String = "https://github.com/login/oauth/access_token"
         let tokenParams = ["client_id": clientID, "client_secret": clientSecret, "code": receivedCode]
         let jsonHeader = ["Accept": "application/json"]
-        Alamofire.request(.POST, getTokenPath, parameters: tokenParams, headers: jsonHeader)
-            .responseString { response in
+        let authTokenRequest = Alamofire.request(.POST, getTokenPath, parameters: tokenParams, headers: jsonHeader)
+            .responseString { [weak self] response in
+                guard let strongSelf = self else { return }
+                
                 guard response.result.error == nil else {
-                    self.oAuthStatus = .NotAuthorised
-                    // TODO: add error here
+                    strongSelf.authorisationProcessFail(response.result.error)
                     return
                 }
-               
-                print(response.result.value)
-                
+            
                 guard let receivedResults = response.result.value, jsonData = receivedResults.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false) else {
-                    self.oAuthStatus = .NotAuthorised
-                    // TODO: add error here
+                    strongSelf.authorisationProcessFail(NSError(description: "Could not parse an OAuth token", suggestion: "Please retry your request"))
                     return
                 }
                 
                 let jsonResults = JSON(data: jsonData)
                 
                 guard let oAuthToken = jsonResults["access_token"].string else {
-                    self.oAuthStatus = .NotAuthorised
-                    // TODO: add error here
+                    strongSelf.authorisationProcessFail(NSError(description: "Response don't contain an OAuth token", suggestion: "Please retry your request"))
                     return
                 }
                 
-                self.keychainManager.saveTokenToKeychain(oAuthToken)
-                self.oAuthStatus = .HasToken(token: oAuthToken)
+                strongSelf.keychainManager.saveTokenToKeychain(oAuthToken)
+                strongSelf.oAuthStatus = .HasToken(token: oAuthToken)
         }
+        
+        debugPrint(authTokenRequest)
     }
 }

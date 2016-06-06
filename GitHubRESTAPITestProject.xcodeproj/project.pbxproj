@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		39293CE51430C5B6B9923CBC /* Pods_GitHubRESTAPITestProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10F65F0E93F28AD6F4569B73 /* Pods_GitHubRESTAPITestProject.framework */; };
 		5158715F1CFF8A2700D7C7B0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5158715D1CFF8A2700D7C7B0 /* AppDelegate.swift */; };
+		51D501F21D043D0700B48949 /* NSError+ConvenienceInit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51D501F11D043D0700B48949 /* NSError+ConvenienceInit.swift */; };
+		51D501F41D04664200B48949 /* ErrorGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51D501F31D04664200B48949 /* ErrorGenerator.swift */; };
 		5412F1AE1CFDCD1F00D6EBCE /* OAuth2Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5412F1AD1CFDCD1F00D6EBCE /* OAuth2Manager.swift */; };
 		5412F1B01CFDD54800D6EBCE /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5412F1AF1CFDD54800D6EBCE /* SafariServices.framework */; };
 		541981D41CF8313300D0D40A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 541981D31CF8313200D0D40A /* LoginViewController.swift */; };
@@ -32,6 +34,8 @@
 		4C2D4CE16CDEF23378B214EF /* Pods-GitHubRESTAPITestProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GitHubRESTAPITestProject.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GitHubRESTAPITestProject/Pods-GitHubRESTAPITestProject.debug.xcconfig"; sourceTree = "<group>"; };
 		5158715D1CFF8A2700D7C7B0 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = GitHubRESTAPITestProject/AppDelegate.swift; sourceTree = SOURCE_ROOT; };
 		5158715E1CFF8A2700D7C7B0 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = GitHubRESTAPITestProject/Info.plist; sourceTree = SOURCE_ROOT; };
+		51D501F11D043D0700B48949 /* NSError+ConvenienceInit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSError+ConvenienceInit.swift"; sourceTree = "<group>"; };
+		51D501F31D04664200B48949 /* ErrorGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorGenerator.swift; sourceTree = "<group>"; };
 		5412F1AD1CFDCD1F00D6EBCE /* OAuth2Manager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuth2Manager.swift; sourceTree = "<group>"; };
 		5412F1AF1CFDD54800D6EBCE /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
 		541981D31CF8313200D0D40A /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -132,6 +136,7 @@
 				54E7C5D81CEC9F5E0046F83D /* GitHubAPIManager.swift */,
 				54E7C5DA1CECA13B0046F83D /* GistRouter.swift */,
 				5412F1AD1CFDCD1F00D6EBCE /* OAuth2Manager.swift */,
+				51D501F31D04664200B48949 /* ErrorGenerator.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -157,6 +162,7 @@
 			isa = PBXGroup;
 			children = (
 				54E7C5E21CECA5B90046F83D /* AlamofireRequest+JSONSerializable.swift */,
+				51D501F11D043D0700B48949 /* NSError+ConvenienceInit.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -304,7 +310,9 @@
 			files = (
 				541981D41CF8313300D0D40A /* LoginViewController.swift in Sources */,
 				54E7C5C21CEC9BFC0046F83D /* DetailViewController.swift in Sources */,
+				51D501F41D04664200B48949 /* ErrorGenerator.swift in Sources */,
 				5412F1AE1CFDCD1F00D6EBCE /* OAuth2Manager.swift in Sources */,
+				51D501F21D043D0700B48949 /* NSError+ConvenienceInit.swift in Sources */,
 				54E7C5D91CEC9F5E0046F83D /* GitHubAPIManager.swift in Sources */,
 				54E7C5DF1CECA5460046F83D /* ResponseJSONObjectSerializable.swift in Sources */,
 				54E7C5DD1CECA5180046F83D /* Gist.swift in Sources */,
