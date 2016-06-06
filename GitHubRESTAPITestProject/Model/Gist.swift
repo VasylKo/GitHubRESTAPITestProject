@@ -19,6 +19,14 @@ class Gist: ResponseJSONObjectSerializable {
     var createdAt:NSDate?
     var updatedAt:NSDate?
     
+    private lazy var dateFormatter:NSDateFormatter = {
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+        dateFormatter.timeZone = NSTimeZone(abbreviation: "UTC")
+        dateFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
+        return dateFormatter
+    }()
+    
     required init(json: JSON) {
         description = json["description"].string
         id = json["is"].string
@@ -32,6 +40,10 @@ class Gist: ResponseJSONObjectSerializable {
                 guard let newFile = File(json: fileJSON) else { continue }
                 files?.append(newFile)
             }
+        }
+        
+        if let dateString = json["created_at"].string {
+            createdAt = dateFormatter.dateFromString(dateString)
         }
     }
 }
