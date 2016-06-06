@@ -10,18 +10,58 @@ import Foundation
 
 
 enum ErrorGenerator {
-    case oAuthCodeError(description: String?, suggestion: String?)
-    case oAuthTokenError(description: String?, suggestion: String?)
-    case customeError(domain: String?, code: Int?, description: String, suggestion: String)
+    case noInternetConnectionError
+    case oAuthAuthorizationURLError
+    case oAuthCodeError
+    case oAuthTokenError
+    case customError
     
-    static let ErrorDomain = "com.error.GitHubAPIManager"
+    static let ErrorApiDomain = "com.error.GitHubAPIManager"
     
-    func generate() -> NSError {
+    //MARK: - Error creation
+    func generate(customDomain domain: String? = nil, customCode code: Int? = nil, customDescription description: String? = nil, customSuggestion suggestion: String? = nil) -> NSError {
+            return NSError(domain: domain ?? defaultErrorDomain(), code: code ?? defaultErrorCode(), description: description ?? defaultErrorDescription() , suggestion: suggestion ??  defaultErrorSuggestion())
+    }
+    
+    
+    //MARK: - Helper private methods
+    private func defaultErrorDomain() -> String {
         switch self {
-        case let .oAuthCodeError(description, suggestion):
-            return
         default:
-            <#code#>
+            return ErrorGenerator.ErrorApiDomain
+        }
+    }
+    
+    private func defaultErrorCode() -> Int {
+        switch self {
+        case .noInternetConnectionError:
+            return NSURLErrorNotConnectedToInternet
+        default:
+            return -1
+        }
+    }
+    
+    private func defaultErrorDescription() -> String {
+        switch self {
+        case .noInternetConnectionError:
+            return "No Internet Connection"
+        case .oAuthAuthorizationURLError:
+            return "Could not create an OAuth authorization URL"
+        case .oAuthCodeError:
+            return "Could not obtain an OAuth code"
+        case .oAuthTokenError:
+            return "Could not obtain an OAuth token"
+        default:
+            return "Unknown error occurred"
+        }
+    }
+    
+    private func defaultErrorSuggestion() -> String {
+        switch self {
+        case .noInternetConnectionError, .oAuthAuthorizationURLError, .oAuthCodeError, .oAuthTokenError:
+            return "Please retry your request"
+        default:
+            return "Something went wrong. Our team is working on that."
         }
     }
 }

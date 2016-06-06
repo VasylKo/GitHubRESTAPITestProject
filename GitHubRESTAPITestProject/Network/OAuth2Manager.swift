@@ -54,7 +54,7 @@ final class OAuth2Manager{
         oAuthStatus = .Authorising
     }
     
-    func authorisationProcessFail(error: NSError? = nil) {
+    func authorisationProcessFail(withError error: NSError? = nil) {
         oAuthStatus = .NotAuthorised
     }
     
@@ -73,7 +73,7 @@ final class OAuth2Manager{
         var code:String?
         
         guard let queryItems = components?.queryItems else {
-            authorisationProcessFail(NSError(description: "Could not obtain an OAuth code", suggestion: "Please retry your request"))
+            authorisationProcessFail(withError: ErrorGenerator.oAuthCodeError.generate())
             return
         }
         for queryItem in queryItems {
@@ -82,7 +82,7 @@ final class OAuth2Manager{
         }
         
         guard let receivedCode = code else {
-            authorisationProcessFail(NSError(description: "Could not obtain an OAuth code", suggestion: "Please retry your request"))
+            authorisationProcessFail(withError: ErrorGenerator.oAuthCodeError.generate())
             return
         }
         
@@ -100,19 +100,19 @@ final class OAuth2Manager{
                 guard let strongSelf = self else { return }
                 
                 guard response.result.error == nil else {
-                    strongSelf.authorisationProcessFail(response.result.error)
+                    strongSelf.authorisationProcessFail(withError: response.result.error)
                     return
                 }
             
                 guard let receivedResults = response.result.value, jsonData = receivedResults.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false) else {
-                    strongSelf.authorisationProcessFail(NSError(description: "Could not parse an OAuth token", suggestion: "Please retry your request"))
+                    strongSelf.authorisationProcessFail(withError: ErrorGenerator.oAuthTokenError.generate(customDescription: "Could not parse an OAuth token"))
                     return
                 }
                 
                 let jsonResults = JSON(data: jsonData)
                 
                 guard let oAuthToken = jsonResults["access_token"].string else {
-                    strongSelf.authorisationProcessFail(NSError(description: "Response don't contain an OAuth token", suggestion: "Please retry your request"))
+                    strongSelf.authorisationProcessFail(withError: ErrorGenerator.oAuthTokenError.generate(customDescription: "Response don't contain an OAuth token"))
                     return
                 }
                 

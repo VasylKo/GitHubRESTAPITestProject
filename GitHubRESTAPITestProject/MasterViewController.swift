@@ -217,7 +217,7 @@ extension MasterViewController: LoginViewDelegate {
         oAuth2Manager.startAuthorisationProcess()
         dismissViewControllerAnimated(false, completion: nil)
         guard let authURL = OAuth2Manager.sharedInstance.URLToStartOAuth2Login() else  {
-            oAuth2Manager.authorisationProcessFail(NSError(description: "Could not create an OAuth authorization URL", suggestion: "Please retry your request"))
+            oAuth2Manager.authorisationProcessFail(withError: ErrorGenerator.oAuthAuthorizationURLError.generate())
             return
         }
         
@@ -233,7 +233,7 @@ extension MasterViewController: SFSafariViewControllerDelegate {
     func safariViewController(controller: SFSafariViewController, didCompleteInitialLoad didLoadSuccessfully: Bool) {
         // Detect not being able to load the OAuth URL
         guard didLoadSuccessfully else {
-            oAuth2Manager.authorisationProcessFail(NSError(code: NSURLErrorNotConnectedToInternet, description: "No Internet Connection", suggestion: "Please retry your request"))
+            oAuth2Manager.authorisationProcessFail(withError: ErrorGenerator.noInternetConnectionError.generate())
             controller.dismissViewControllerAnimated(true, completion: nil)
             return
         }
