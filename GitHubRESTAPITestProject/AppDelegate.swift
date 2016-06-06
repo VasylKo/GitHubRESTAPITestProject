@@ -28,6 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
     }
     
     func application(application: UIApplication, handleOpenURL url: NSURL) -> Bool {
+        //FIXME: #warning: To test the app provide your registred URL scheme
         if url.scheme == "vkgithub" {
             OAuth2Manager.sharedInstance.processOAuthResponse(url)
             let notification = NSNotification(name: OAuthTokenRequestResponseReceivedNotification, object: nil)

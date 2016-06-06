@@ -35,6 +35,14 @@ final class OAuth2Manager{
     }
     
     //MARK: - Private properties
+    /*
+    FIXME: #warning: To test the app:
+    1) Provide you own clientID & clientSecret.
+    To get a clientID & clientSecret head over to GitHub https://github.com/settings/applications/new
+    Hint: Set Authorization callback URL to: exampleURLScheme://?aParam=paramVal (change <exampleURLScheme> to your custom URL scheme). The ?aParam=paramVal part isn’t necessary, but GitHub wouldn’t accept a callback URL without some kind of parameters.
+    2) Also set URL scheme in Info.plist for callback URL from GitHub Auth (redirect_uri).
+    3) Don't forget to set your new URL scheme in AppDelegate.application(_:handleOpenURL:)
+     */
     private let clientID: String = "a3ac089b8988628d38ce"
     private let clientSecret: String = "0da2da635e3de0510ff298d36a7d96e9c8c75cb0"
     private let keychainManager: KeychainManager
