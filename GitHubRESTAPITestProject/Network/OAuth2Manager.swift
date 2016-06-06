@@ -17,10 +17,21 @@ protocol OAuth2ManagerDelegate: class {
 final class OAuth2Manager{
     static let sharedInstance = OAuth2Manager()
 
-    enum AuthorisationStatus {
-        case NotAuthorised
+    enum AuthorisationStatus: CustomStringConvertible {
+        case NotAuthorised(error: NSError?)
         case Authorising
         case HasToken(token: String)
+        
+        var description: String {
+            switch self {
+            case .NotAuthorised:
+                return "NotAuthorised"
+            case .Authorising:
+                return "Authorising"
+            case .HasToken:
+                return "HasToken"
+            }
+        }
     }
     
     //MARK: - Private properties
@@ -33,6 +44,9 @@ final class OAuth2Manager{
     private(set) var oAuthStatus: AuthorisationStatus {
         didSet {
             print("Authorisation (OAuth2) Status Changed to : \(oAuthStatus)")
+            if case let .NotAuthorised(error: error?) = oAuthStatus {
+                print("ERROR: \(error.localizedDescription)")
+            }
             delegate?.authorisationStatusDidChanged(oAuthStatus)
         }
     }
@@ -45,7 +59,7 @@ final class OAuth2Manager{
         if let token = keychainManager.loadTokenFromKeychain() {
             oAuthStatus = .HasToken(token: token)
         } else {
-            oAuthStatus = .NotAuthorised
+            oAuthStatus = .NotAuthorised(error: nil)
         }
     }
     
@@ -55,7 +69,7 @@ final class OAuth2Manager{
     }
     
     func authorisationProcessFail(withError error: NSError? = nil) {
-        oAuthStatus = .NotAuthorised
+        oAuthStatus = .NotAuthorised(error: error)
     }
     
     func URLToStartOAuth2Login() -> NSURL? {
