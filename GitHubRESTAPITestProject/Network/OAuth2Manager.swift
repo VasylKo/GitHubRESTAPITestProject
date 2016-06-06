@@ -18,17 +18,17 @@ final class OAuth2Manager{
     static let sharedInstance = OAuth2Manager()
 
     enum AuthorisationStatus: CustomStringConvertible {
-        case NotAuthorised(error: NSError?)
-        case Authorising
-        case HasToken(token: String)
+        case notAuthorised(error: NSError?)
+        case authorising
+        case hasToken(token: String)
         
         var description: String {
             switch self {
-            case .NotAuthorised:
+            case .notAuthorised:
                 return "NotAuthorised"
-            case .Authorising:
+            case .authorising:
                 return "Authorising"
-            case .HasToken:
+            case .hasToken:
                 return "HasToken"
             }
         }
@@ -44,7 +44,7 @@ final class OAuth2Manager{
     private(set) var oAuthStatus: AuthorisationStatus {
         didSet {
             print("Authorisation (OAuth2) Status Changed to : \(oAuthStatus)")
-            if case let .NotAuthorised(error: error?) = oAuthStatus {
+            if case let .notAuthorised(error: error?) = oAuthStatus {
                 print("ERROR: \(error.localizedDescription)")
             }
             delegate?.authorisationStatusDidChanged(oAuthStatus)
@@ -57,19 +57,19 @@ final class OAuth2Manager{
         
         //Try to load token from Keychain
         if let token = keychainManager.loadTokenFromKeychain() {
-            oAuthStatus = .HasToken(token: token)
+            oAuthStatus = .hasToken(token: token)
         } else {
-            oAuthStatus = .NotAuthorised(error: nil)
+            oAuthStatus = .notAuthorised(error: nil)
         }
     }
     
     //MARK: - Internal methods
     func startAuthorisationProcess() {
-        oAuthStatus = .Authorising
+        oAuthStatus = .authorising
     }
     
     func authorisationProcessFail(withError error: NSError? = nil) {
-        oAuthStatus = .NotAuthorised(error: error)
+        oAuthStatus = .notAuthorised(error: error)
     }
     
     func URLToStartOAuth2Login() -> NSURL? {
@@ -131,7 +131,7 @@ final class OAuth2Manager{
                 }
                 
                 strongSelf.keychainManager.saveTokenToKeychain(oAuthToken)
-                strongSelf.oAuthStatus = .HasToken(token: oAuthToken)
+                strongSelf.oAuthStatus = .hasToken(token: oAuthToken)
         }
         
         debugPrint(authTokenRequest)

@@ -14,27 +14,27 @@ import Alamofire
 enum GistRouter: URLRequestConvertible {
     static let baseURLString:String = "https://api.github.com"
     
-    case GetPublic() // GET https://api.github.com/gists/public
-    case GetAtPath(String) // GET at given path
-    case GetMyStarred() // GET https://api.github.com/gists/starred
+    case getPublic() // GET https://api.github.com/gists/public
+    case getAtPath(String) // GET at given path
+    case getMyStarred() // GET https://api.github.com/gists/starred
     
     var URLRequest: NSMutableURLRequest {
         var method: Alamofire.Method {
             switch self {
-            case .GetPublic:
+            case .getPublic:
                 return .GET
-            case .GetAtPath:
+            case .getAtPath:
                 return .GET
-            case .GetMyStarred:
+            case .getMyStarred:
                 return .GET
             }
         }
         
         let result: (path: String, parameters: [String: AnyObject]?) = {
             switch self {
-            case .GetPublic:
+            case .getPublic:
                 return ("/gists/public", nil)
-            case .GetAtPath(let path):
+            case .getAtPath(let path):
                 let URL = NSURL(string: path)
                 let relativePath = URL!.relativePath!
                 var parameters = [String: AnyObject]()
@@ -45,7 +45,7 @@ enum GistRouter: URLRequestConvertible {
                     }
                 }
                 return (relativePath, parameters)
-            case .GetMyStarred:
+            case .getMyStarred:
                 return ("/gists/starred", nil)
             }
         }()
@@ -54,7 +54,7 @@ enum GistRouter: URLRequestConvertible {
         let URLRequest = NSMutableURLRequest(URL: URL.URLByAppendingPathComponent(result.path))
         
         // Set OAuth token if we have one
-        if case .HasToken(token: let token) = OAuth2Manager.sharedInstance.oAuthStatus {
+        if case .hasToken(token: let token) = OAuth2Manager.sharedInstance.oAuthStatus {
             URLRequest.setValue("token \(token)", forHTTPHeaderField: "Authorization")
         }
         

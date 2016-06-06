@@ -24,17 +24,17 @@ final class GitHubAPIManager {
     //MARK: - Intrnal methods for data loading
     func getPublicGists(pageToLoad: String?, completionHandler: (Result<[Gist], NSError>, String?) -> Void) {
         if let urlString = pageToLoad {
-            getGists(GistRouter.GetAtPath(urlString), completionHandler: completionHandler)
+            getGists(GistRouter.getAtPath(urlString), completionHandler: completionHandler)
         } else {
-            getGists(GistRouter.GetPublic(), completionHandler: completionHandler)
+            getGists(GistRouter.getPublic(), completionHandler: completionHandler)
         }
     }
     
     func getMyStarredGists(pageToLoad: String?, completionHandler:(Result<[Gist], NSError>, String?) -> Void) {
         if let urlString = pageToLoad {
-            getGists(GistRouter.GetAtPath(urlString), completionHandler: completionHandler)
+            getGists(GistRouter.getAtPath(urlString), completionHandler: completionHandler)
         } else {
-            getGists(GistRouter.GetMyStarred(), completionHandler: completionHandler)
+            getGists(GistRouter.getMyStarred(), completionHandler: completionHandler)
         }
     }
     
@@ -55,7 +55,7 @@ final class GitHubAPIManager {
     
     // MARK: - Basic Auth
     func printMyStarredGistsWithBasicAuth() -> Void {
-        let starredGistsRequest = Alamofire.request(GistRouter.GetMyStarred()).responseString { (response) in
+        let starredGistsRequest = Alamofire.request(GistRouter.getMyStarred()).responseString { (response) in
             guard response.result.error == nil else {
                 print(response.result.error!)
                 return
@@ -71,7 +71,7 @@ final class GitHubAPIManager {
     
     // MARK: - OAuth 2.0 flow
     func printMyStarredGistsWithOAuth2() -> Void {
-        let starredGistsRequest = alamofireManager.request(GistRouter.GetMyStarred()).responseString { response in
+        let starredGistsRequest = alamofireManager.request(GistRouter.getMyStarred()).responseString { response in
             guard response.result.error == nil else {
                 print(response.result.error!)
                 return
