@@ -26,6 +26,7 @@
 		54E7C5DF1CECA5460046F83D /* ResponseJSONObjectSerializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E7C5DE1CECA5460046F83D /* ResponseJSONObjectSerializable.swift */; };
 		54E7C5E31CECA5B90046F83D /* AlamofireRequest+JSONSerializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E7C5E21CECA5B90046F83D /* AlamofireRequest+JSONSerializable.swift */; };
 		54F0C0481D002A5200998E0E /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F0C0471D002A5200998E0E /* KeychainManager.swift */; };
+		54FF0A671D05C3100035E3A4 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54FF0A661D05C3100035E3A4 /* File.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +53,7 @@
 		54E7C5DE1CECA5460046F83D /* ResponseJSONObjectSerializable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponseJSONObjectSerializable.swift; sourceTree = "<group>"; };
 		54E7C5E21CECA5B90046F83D /* AlamofireRequest+JSONSerializable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AlamofireRequest+JSONSerializable.swift"; sourceTree = "<group>"; };
 		54F0C0471D002A5200998E0E /* KeychainManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
+		54FF0A661D05C3100035E3A4 /* File.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,6 +127,7 @@
 			isa = PBXGroup;
 			children = (
 				54E7C5DC1CECA5180046F83D /* Gist.swift */,
+				54FF0A661D05C3100035E3A4 /* File.swift */,
 				54E7C5DE1CECA5460046F83D /* ResponseJSONObjectSerializable.swift */,
 			);
 			path = Model;
@@ -317,6 +320,7 @@
 				54E7C5DF1CECA5460046F83D /* ResponseJSONObjectSerializable.swift in Sources */,
 				54E7C5DD1CECA5180046F83D /* Gist.swift in Sources */,
 				54F0C0481D002A5200998E0E /* KeychainManager.swift in Sources */,
+				54FF0A671D05C3100035E3A4 /* File.swift in Sources */,
 				54E7C5C01CEC9BFC0046F83D /* MasterViewController.swift in Sources */,
 				54E7C5DB1CECA13B0046F83D /* GistRouter.swift in Sources */,
 				5158715F1CFF8A2700D7C7B0 /* AppDelegate.swift in Sources */,
