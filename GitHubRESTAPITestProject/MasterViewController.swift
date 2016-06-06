@@ -153,8 +153,7 @@ class MasterViewController: UITableViewController {
         case .starredGists:
             GitHubAPIManager.sharedInstance.getMyStarredGists(urlToLoad, completionHandler: sharedCompletionHandler)
         case .myGists:
-            print("Load my gists")
-            //GitHubAPIManager.sharedInstance.getMyGists(urlToLoad, completionHandler: sharedCompletionHandler)
+            GitHubAPIManager.sharedInstance.getMyGists(urlToLoad, completionHandler: sharedCompletionHandler)
             
         }
     }
@@ -168,6 +167,7 @@ class MasterViewController: UITableViewController {
     }
     
     @IBAction func segmentedControlValueChanged(sender: UISegmentedControl) {
+        loadGists()
     }
     // MARK: - Segues
     
