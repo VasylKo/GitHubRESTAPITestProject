@@ -92,8 +92,8 @@ final class GitHubAPIManager {
             .responseArray { (response:Response<[Gist], NSError>) in
                 guard response.result.error == nil,
                     let gists = response.result.value else {
-                        print(response.result.error)
-                        completionHandler(response.result, nil)
+                        let error =  self.checkUnauthorized(response.response) ?? response.result.error!
+                        completionHandler(.Failure(error), nil)
                         return
                 }
                 // need to figure out if this is the last page
@@ -135,5 +135,10 @@ final class GitHubAPIManager {
             }
         }
         return nil
+    }
+    
+    func checkUnauthorized(urlResponse: NSHTTPURLResponse?) -> (NSError?) {
+        guard urlResponse?.statusCode == 401 else { return nil }
+        return ErrorGenerator.unauthorizedUserError.generate()
     }
 }

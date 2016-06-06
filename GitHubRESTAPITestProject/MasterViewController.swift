@@ -101,36 +101,38 @@ class MasterViewController: UITableViewController {
     ///- Parameter urlToLoad: optional specify the URL to load gists (used for pagination).
     private func loadGists(urlToLoad: String? = nil) {
         self.isLoading = true
-        gitHubAPIManager.getMyStarredGists(urlToLoad) {
-            (result, nextPage) in
-            self.isLoading = false
-            self.nextPageURLString = nextPage
+        gitHubAPIManager.getMyStarredGists(urlToLoad) {[weak self] (result, nextPage) in
+            guard let strongSelf = self else { return }
+            strongSelf.isLoading = false
+            strongSelf.nextPageURLString = nextPage
             
             //Hide refresh controll
-            if self.refreshControl != nil && self.refreshControl!.refreshing {
-                self.refreshControl!.endRefreshing()
+            if strongSelf.refreshControl != nil && strongSelf.refreshControl!.refreshing {
+                strongSelf.refreshControl!.endRefreshing()
             }
             
             guard result.error == nil else {
-                print(result.error)
-                // TODO: display error
+                print("ERROR: \(result.error?.localizedDescription)")
+                if result.error!.code == NSURLErrorUserAuthenticationRequired {
+                    strongSelf.oAuth2Manager.authorisationProcessFail(withError: result.error!)
+                }
                 return
             }
             
             if let fetchedGists = result.value {
                 if urlToLoad != nil {
-                    self.gists += fetchedGists
+                    strongSelf.gists += fetchedGists
                 } else {
-                    self.gists = fetchedGists
+                    strongSelf.gists = fetchedGists
                 }
             }
             
             // update "last updated" title for refresh control
             let now = NSDate()
-            let updateString = "Last Updated at " + self.dateFormatter.stringFromDate(now)
-            self.refreshControl?.attributedTitle = NSAttributedString(string: updateString)
+            let updateString = "Last Updated at " + strongSelf.dateFormatter.stringFromDate(now)
+            strongSelf.refreshControl?.attributedTitle = NSAttributedString(string: updateString)
             
-            self.tableView.reloadData()
+            strongSelf.tableView.reloadData()
         }
     }
     

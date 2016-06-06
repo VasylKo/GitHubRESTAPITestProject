@@ -14,6 +14,7 @@ enum ErrorGenerator {
     case oAuthAuthorizationURLError
     case oAuthCodeError
     case oAuthTokenError
+    case unauthorizedUserError
     case customError
     
     static let ErrorApiDomain = "com.error.GitHubAPIManager"
@@ -27,6 +28,8 @@ enum ErrorGenerator {
     //MARK: - Helper private methods
     private func defaultErrorDomain() -> String {
         switch self {
+        case .unauthorizedUserError:
+            return NSURLErrorDomain
         default:
             return ErrorGenerator.ErrorApiDomain
         }
@@ -36,6 +39,8 @@ enum ErrorGenerator {
         switch self {
         case .noInternetConnectionError:
             return NSURLErrorNotConnectedToInternet
+        case .unauthorizedUserError:
+            return NSURLErrorUserAuthenticationRequired
         default:
             return -1
         }
@@ -51,6 +56,8 @@ enum ErrorGenerator {
             return "Could not obtain an OAuth code"
         case .oAuthTokenError:
             return "Could not obtain an OAuth token"
+        case .unauthorizedUserError:
+            return "Not Logged In"
         default:
             return "Unknown error occurred"
         }
@@ -60,6 +67,8 @@ enum ErrorGenerator {
         switch self {
         case .noInternetConnectionError, .oAuthAuthorizationURLError, .oAuthCodeError, .oAuthTokenError:
             return "Please retry your request"
+        case .unauthorizedUserError:
+            return "Please re-enter your GitHub credentials"
         default:
             return "Something went wrong. Our team is working on that."
         }
