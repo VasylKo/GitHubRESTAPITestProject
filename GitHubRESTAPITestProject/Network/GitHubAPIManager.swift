@@ -22,6 +22,8 @@ final class GitHubAPIManager {
     }
     
     //MARK: - Intrnal methods for data loading
+    //MARK: Data loading
+    
     func getPublicGists(pageToLoad: String?, completionHandler: (Result<[Gist], NSError>, String?) -> Void) {
         if let urlString = pageToLoad {
             getGists(GistRouter.getAtPath(urlString), completionHandler: completionHandler)
@@ -43,6 +45,26 @@ final class GitHubAPIManager {
             getGists(GistRouter.getAtPath(urlString), completionHandler: completionHandler)
         } else {
             getGists(GistRouter.getMine, completionHandler: completionHandler)
+        }
+    }
+    
+    // MARK: Starring / Unstarring / Star status
+    func isGistStarred(gistId: String, completionHandler: Result<Bool, NSError> -> Void) {
+        // GET /gists/:id/star
+        alamofireManager.request(GistRouter.isStarred(gistId))
+            .validate(statusCode: [204])
+            .response { (request, response, data, error) in
+                // 204 if starred, 404 if not
+                if let error = error {
+                    print(error)
+                    if response?.statusCode == 404 {
+                        completionHandler(.Success(false))
+                        return
+                    }
+                    completionHandler(.Failure(error))
+                    return
+                }
+                completionHandler(.Success(true))
         }
     }
     

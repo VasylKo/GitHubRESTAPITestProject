@@ -12,7 +12,7 @@ import SafariServices
 class DetailViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView?
-    
+    private var isStarred: Bool?
     
     private enum SectionType: Int {
         case aboutSection = 0
@@ -34,21 +34,60 @@ class DetailViewController: UIViewController {
 
     var gist: Gist? {
         didSet {
-            // Update the view.
+            if gist != nil {
+                fetchStarredStatus()
+            }
             configureView()
         }
     }
 
-    func configureView() {
-        // Update the user interface for the detail item.
-        tableView?.reloadData()
-    }
-
+// MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
         configureView()
     }
+    
+// MARK: - UI
+    func configureView() {
+        tableView?.reloadData()
+    }
+    
+    private func showStarredStatusError(error: NSError) {
+        let alertController = UIAlertController(title: "Could not get starred status", message: error.description, preferredStyle: .Alert)
+        // add ok button
+        let okAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+        alertController.addAction(okAction)
+        presentViewController(alertController, animated:true, completion: nil)
+    }
+    
+    private func addStarredTableViewRow() {
+        let section = SectionType.aboutSection.rawValue
+        let indexPathToInsert = NSIndexPath(forRow: 2, inSection: section)
+        tableView?.insertRowsAtIndexPaths([indexPathToInsert], withRowAnimation: .Automatic)
+    }
+    
+// MARK: - Stars
+    func fetchStarredStatus() {
+        guard let gistId = gist?.id else { return }
+        GitHubAPIManager.sharedInstance.isGistStarred(gistId, completionHandler: { [weak self] result in
+            guard let strongSelf = self else { return }
+            
+            guard result.error == nil else {
+                let error = result.error!
+                print("ERROR: \(error.localizedDescription)")
+                if error.code == NSURLErrorUserAuthenticationRequired {
+                    strongSelf.showStarredStatusError(error)
+                }
+                return
+            }
+            
+            guard let isStarred = result.value else { return }
+                strongSelf.isStarred = isStarred
+                strongSelf.addStarredTableViewRow()
+        })
+        
+    }
+    
 }
 
 //MARK: - UITableViewDelegate
@@ -86,7 +125,7 @@ extension DetailViewController: UITableViewDataSource {
         guard let sectionType = SectionType(rawValue: section) else { fatalError("Unknow section. Update SectionType enum") }
         switch sectionType {
         case .aboutSection:
-            return 2
+            return isStarred != nil ? 3 : 2
         case .filesSection:
             return gist?.files?.count ?? 0
         }
@@ -98,14 +137,15 @@ extension DetailViewController: UITableViewDataSource {
         guard let sectionType = SectionType(rawValue: indexPath.section) else { fatalError("Unknow section. Update SectionType enum") }
         
         switch (sectionType, indexPath.row) {
-        case (.aboutSection, _):
-            //User can select only files section
-            cell.selectionStyle = .None
-            fallthrough
         case (.aboutSection, 0):
+            cell.selectionStyle = .None
             cell.textLabel?.text = gist?.description
         case (.aboutSection, 1):
+            cell.selectionStyle = .None
             cell.textLabel?.text = gist?.ownerLogin
+        case (.aboutSection, 2):
+            guard let isStarred = isStarred else { break }
+            cell.textLabel?.text = isStarred ? "Unstar" : "Star"
         case (.filesSection, _):
             if let file = gist?.files?[indexPath.row] {
                 cell.textLabel?.text = file.filename

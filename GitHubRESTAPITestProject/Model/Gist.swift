@@ -29,7 +29,7 @@ class Gist: ResponseJSONObjectSerializable {
     
     required init(json: JSON) {
         description = json["description"].string
-        id = json["is"].string
+        id = json["id"].string
         ownerLogin = json["owner"]["login"].string
         ownerAvatarURL = json["owner"]["avatar_url"].string
         url = json["url"].string
