@@ -51,6 +51,7 @@ class DetailViewController: UIViewController {
     }
 }
 
+//MARK: - UITableViewDelegate
 extension DetailViewController: UITableViewDelegate {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
@@ -75,6 +76,7 @@ extension DetailViewController: UITableViewDelegate {
     }
 }
 
+//MARK: - UITableViewDataSource
 extension DetailViewController: UITableViewDataSource {
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return SectionType.numberOfSections()
@@ -96,7 +98,7 @@ extension DetailViewController: UITableViewDataSource {
         guard let sectionType = SectionType(rawValue: indexPath.section) else { fatalError("Unknow section. Update SectionType enum") }
         
         switch (sectionType, indexPath.row) {
-        case (.aboutSection,_):
+        case (.aboutSection, _):
             //User can select only files section
             cell.selectionStyle = .None
             fallthrough
