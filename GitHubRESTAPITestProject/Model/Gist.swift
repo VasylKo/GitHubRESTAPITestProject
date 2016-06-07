@@ -45,5 +45,9 @@ class Gist: ResponseJSONObjectSerializable {
         if let dateString = json["created_at"].string {
             createdAt = dateFormatter.dateFromString(dateString)
         }
+        
+        if let dateString = json["updated_at"].string {
+            updatedAt = dateFormatter.dateFromString(dateString)
+        }
     }
 }
