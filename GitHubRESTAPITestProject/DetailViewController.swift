@@ -7,11 +7,30 @@
 //
 
 import UIKit
+import SafariServices
 
 class DetailViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView?
-
+    
+    
+    private enum SectionType: Int {
+        case aboutSection = 0
+        case filesSection
+        
+        static func numberOfSections() -> Int {
+            return 2
+        }
+        
+        func sectionTitle() -> String {
+            switch self {
+            case .aboutSection:
+                return "About"
+            case .filesSection:
+                return "Files (click to open)"
+            }
+        }
+    }
 
     var gist: Gist? {
         didSet {
@@ -33,19 +52,40 @@ class DetailViewController: UIViewController {
 }
 
 extension DetailViewController: UITableViewDelegate {
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        guard indexPath.section == 1, let file = gist?.files?[indexPath.row],
+            urlString = file.raw_url, url = NSURL(string: urlString)  else { return }
+        
+        let safariViewController = SFSafariViewController(URL: url)
+        safariViewController.title = file.filename
+        navigationController?.pushViewController(safariViewController, animated: true)
+        
+    }
     
+    func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
+        //User can select only files section
+        guard let sectionType = SectionType(rawValue: indexPath.section) else { fatalError("Unknow section. Update SectionType enum") }
+        switch sectionType {
+        case .aboutSection:
+            return nil
+        case .filesSection:
+            return indexPath
+        }
+    }
 }
 
 extension DetailViewController: UITableViewDataSource {
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 2
+        return SectionType.numberOfSections()
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch section {
-        case 0:
+        guard let sectionType = SectionType(rawValue: section) else { fatalError("Unknow section. Update SectionType enum") }
+        switch sectionType {
+        case .aboutSection:
             return 2
-        default:
+        case .filesSection:
             return gist?.files?.count ?? 0
         }
     }
@@ -53,12 +93,18 @@ extension DetailViewController: UITableViewDataSource {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
         
-        switch (indexPath.section, indexPath.row) {
-        case (0, 0):
+        guard let sectionType = SectionType(rawValue: indexPath.section) else { fatalError("Unknow section. Update SectionType enum") }
+        
+        switch (sectionType, indexPath.row) {
+        case (.aboutSection,_):
+            //User can select only files section
+            cell.selectionStyle = .None
+            fallthrough
+        case (.aboutSection, 0):
             cell.textLabel?.text = gist?.description
-        case (0, 1):
+        case (.aboutSection, 1):
             cell.textLabel?.text = gist?.ownerLogin
-        case (1, _):
+        case (.filesSection, _):
             if let file = gist?.files?[indexPath.row] {
                 cell.textLabel?.text = file.filename
             }
@@ -70,12 +116,8 @@ extension DetailViewController: UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        switch section {
-        case 0:
-            return "About"
-        default:
-            return "Files"
-        }
+        guard let sectionType = SectionType(rawValue: section) else { fatalError("Unknow section. Update SectionType enum") }
+        return sectionType.sectionTitle()
     }
 }
 
