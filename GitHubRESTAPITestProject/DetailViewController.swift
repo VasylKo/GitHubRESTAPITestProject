@@ -104,12 +104,12 @@ extension DetailViewController: UITableViewDelegate {
     }
     
     func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
-        //User can select only files section
+        //User can't select 1,2 row in first section
         guard let sectionType = SectionType(rawValue: indexPath.section) else { fatalError("Unknow section. Update SectionType enum") }
-        switch sectionType {
-        case .aboutSection:
+        switch (sectionType, indexPath.row)  {
+        case (.aboutSection, 0..<2):
             return nil
-        case .filesSection:
+        default:
             return indexPath
         }
     }
@@ -132,26 +132,35 @@ extension DetailViewController: UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
+        let cell:UITableViewCell
         
         guard let sectionType = SectionType(rawValue: indexPath.section) else { fatalError("Unknow section. Update SectionType enum") }
         
         switch (sectionType, indexPath.row) {
         case (.aboutSection, 0):
+            cell = tableView.dequeueReusableCellWithIdentifier("aboutCell", forIndexPath: indexPath)
+            guard let cell = cell as? AboutGistCell else { fatalError("check cell type") }
             cell.selectionStyle = .None
-            cell.textLabel?.text = gist?.description
+            cell.titleLabel?.text = "Gist description"
+            cell.descriptionLabel?.text = gist?.description
         case (.aboutSection, 1):
+            cell = tableView.dequeueReusableCellWithIdentifier("aboutCell", forIndexPath: indexPath)
+            guard let cell = cell as? AboutGistCell else { fatalError("check cell type") }
             cell.selectionStyle = .None
-            cell.textLabel?.text = gist?.ownerLogin
+            cell.titleLabel?.text = "Gist owner"
+            cell.descriptionLabel?.text = gist?.ownerLogin
         case (.aboutSection, 2):
+            cell = tableView.dequeueReusableCellWithIdentifier("defaultCell", forIndexPath: indexPath)
             guard let isStarred = isStarred else { break }
             cell.textLabel?.text = isStarred ? "Unstar" : "Star"
+            cell.imageView?.image = UIImage(named: "star")
         case (.filesSection, _):
+            cell = tableView.dequeueReusableCellWithIdentifier("defaultCell", forIndexPath: indexPath)
             if let file = gist?.files?[indexPath.row] {
                 cell.textLabel?.text = file.filename
             }
         default:
-            break
+            cell = UITableViewCell()
         }
         
         return cell

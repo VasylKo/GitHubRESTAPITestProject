@@ -28,9 +28,19 @@ class Gist: ResponseJSONObjectSerializable {
     }()
     
     required init(json: JSON) {
-        description = json["description"].string
+        if let description = json["description"].string where !description.isEmpty {
+            self.description = description
+        } else {
+            description = "No description"
+        }
+        
+        if let ownerLogin = json["owner"]["login"].string where !ownerLogin.isEmpty {
+            self.ownerLogin = ownerLogin
+        } else {
+            ownerLogin = "Unknown owner name"
+        }
+
         id = json["id"].string
-        ownerLogin = json["owner"]["login"].string
         ownerAvatarURL = json["owner"]["avatar_url"].string
         url = json["url"].string
         
