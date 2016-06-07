@@ -40,6 +40,11 @@ class DetailViewController: UIViewController {
             configureView()
         }
     }
+    
+    var starredInfoRowIndexPath: NSIndexPath {
+        let section = SectionType.aboutSection.rawValue
+        return NSIndexPath(forRow: 2, inSection: section)
+    }
 
 // MARK: - View Life Cycle
     override func viewDidLoad() {
@@ -61,13 +66,11 @@ class DetailViewController: UIViewController {
     }
     
     private func addStarredTableViewRow() {
-        let section = SectionType.aboutSection.rawValue
-        let indexPathToInsert = NSIndexPath(forRow: 2, inSection: section)
-        tableView?.insertRowsAtIndexPaths([indexPathToInsert], withRowAnimation: .Automatic)
+        tableView?.insertRowsAtIndexPaths([starredInfoRowIndexPath], withRowAnimation: .Automatic)
     }
     
 // MARK: - Stars
-    func fetchStarredStatus() {
+    private func fetchStarredStatus() {
         guard let gistId = gist?.id else { return }
         GitHubAPIManager.sharedInstance.isGistStarred(gistId, completionHandler: { [weak self] result in
             guard let strongSelf = self else { return }
@@ -88,18 +91,41 @@ class DetailViewController: UIViewController {
         
     }
     
+    private func unstarThisGist() {
+        isStarred = !isStarred!
+        tableView?.reloadRowsAtIndexPaths([starredInfoRowIndexPath], withRowAnimation: .Automatic)
+    }
+    
+    private func starThisGist() {
+        isStarred = !isStarred!
+        tableView?.reloadRowsAtIndexPaths([starredInfoRowIndexPath], withRowAnimation: .Automatic)
+    }
+    
 }
 
 //MARK: - UITableViewDelegate
 extension DetailViewController: UITableViewDelegate {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        guard indexPath.section == 1, let file = gist?.files?[indexPath.row],
-            urlString = file.raw_url, url = NSURL(string: urlString)  else { return }
+        guard let sectionType = SectionType(rawValue: indexPath.section) else { fatalError("Unknow section. Update SectionType enum") }
+        switch sectionType {
+        case .aboutSection where indexPath.row == 2:
+            guard let isStarred = isStarred else { break }
+            if isStarred {
+                unstarThisGist()
+            } else {
+                starThisGist()
+            }
         
-        let safariViewController = SFSafariViewController(URL: url)
-        safariViewController.title = file.filename
-        navigationController?.pushViewController(safariViewController, animated: true)
+        case .filesSection:
+            guard let file = gist?.files?[indexPath.row], urlString = file.raw_url, url = NSURL(string: urlString)  else { return }
+            
+            let safariViewController = SFSafariViewController(URL: url)
+            safariViewController.title = file.filename
+            navigationController?.pushViewController(safariViewController, animated: true)
+        default:
+            break
+        }
         
     }
     
