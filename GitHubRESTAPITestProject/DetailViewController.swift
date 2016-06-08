@@ -57,8 +57,8 @@ class DetailViewController: UIViewController {
         tableView?.reloadData()
     }
     
-    private func showStarredStatusError(error: NSError) {
-        let alertController = UIAlertController(title: "Could not get starred status", message: error.description, preferredStyle: .Alert)
+    private func showError(title title: String, error: NSError) {
+        let alertController = UIAlertController(title: title, message: error.description, preferredStyle: .Alert)
         // add ok button
         let okAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
         alertController.addAction(okAction)
@@ -79,7 +79,7 @@ class DetailViewController: UIViewController {
                 let error = result.error!
                 print("ERROR: \(error.localizedDescription)")
                 if error.code == NSURLErrorUserAuthenticationRequired {
-                    strongSelf.showStarredStatusError(error)
+                    strongSelf.showError(title: "Could not get starred status",error: error)
                 }
                 return
             }
@@ -91,14 +91,42 @@ class DetailViewController: UIViewController {
         
     }
     
-    private func unstarThisGist() {
-        isStarred = !isStarred!
-        tableView?.reloadRowsAtIndexPaths([starredInfoRowIndexPath], withRowAnimation: .Automatic)
+    private func starThisGist() {
+        guard let gistID = gist?.id else { return }
+        GitHubAPIManager.sharedInstance.starGist(gistID) { [weak self] (error) in
+            guard let strongSelf = self else { return }
+            
+            guard error == nil else {
+                print("ERROR \(error?.localizedDescription)")
+                if error!.code == NSURLErrorUserAuthenticationRequired {
+                    strongSelf.showError(title: "Sorry, your gist couldn't be starred.",error: error!)
+                }
+
+                return
+            }
+            
+            strongSelf.isStarred = true
+            strongSelf.tableView?.reloadRowsAtIndexPaths([strongSelf.starredInfoRowIndexPath], withRowAnimation: .Automatic)
+        }
     }
     
-    private func starThisGist() {
-        isStarred = !isStarred!
-        tableView?.reloadRowsAtIndexPaths([starredInfoRowIndexPath], withRowAnimation: .Automatic)
+    private func unstarThisGist() {
+        guard let gistID = gist?.id else { return }
+        GitHubAPIManager.sharedInstance.unstarGist(gistID) { [weak self] (error) in
+            guard let strongSelf = self else { return }
+            
+            guard error == nil else {
+                print("ERROR \(error?.localizedDescription)")
+                if error!.code == NSURLErrorUserAuthenticationRequired {
+                    strongSelf.showError(title: "Sorry, your gist couldn't be unstarred.",error: error!)
+                }
+                
+                return
+            }
+            
+            strongSelf.isStarred = false
+            strongSelf.tableView?.reloadRowsAtIndexPaths([strongSelf.starredInfoRowIndexPath], withRowAnimation: .Automatic)
+        }
     }
     
 }

@@ -18,6 +18,7 @@ final class GitHubAPIManager {
     
     private init () {
         let configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
+        configuration.requestCachePolicy = .ReloadIgnoringLocalCacheData
         alamofireManager = Alamofire.Manager(configuration: configuration)
     }
     
@@ -69,7 +70,7 @@ final class GitHubAPIManager {
     }
     
     func starGist(gistId: String, completionHandler: (NSError?) -> Void) {
-        alamofireManager.request(GistRouter.star(gistId))
+        let starRequest = alamofireManager.request(GistRouter.star(gistId))
             .response { (request, response, data, error) in
                 if let error = error {
                     print(error)
@@ -77,10 +78,12 @@ final class GitHubAPIManager {
                 }
                 completionHandler(error)
         }
+        
+        debugPrint(starRequest)
     }
     
     func unstarGist(gistId: String, completionHandler: (NSError?) -> Void) {
-        alamofireManager.request(GistRouter.unstar(gistId))
+        let unstarRequest = alamofireManager.request(GistRouter.unstar(gistId))
            .response { (request, response, data, error) in
                 if let error = error {
                     print(error)
@@ -88,6 +91,8 @@ final class GitHubAPIManager {
                 }
                 completionHandler(error)
         }
+        
+        debugPrint(unstarRequest)
     }
     
     //MARK: - Loading Images
