@@ -48,13 +48,11 @@ class MasterViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        self.navigationItem.leftBarButtonItem = self.editButtonItem()
-        
         let addButton = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: #selector(MasterViewController.insertNewObject(_:)))
-        self.navigationItem.rightBarButtonItem = addButton
+        navigationItem.rightBarButtonItem = addButton
         if let split = self.splitViewController {
             let controllers = split.viewControllers
-            self.detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? DetailViewController
+            detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? DetailViewController
         }
         
         //Add observer
@@ -62,7 +60,7 @@ class MasterViewController: UITableViewController {
     }
     
     override func viewWillAppear(animated: Bool) {
-        self.clearsSelectionOnViewWillAppear = self.splitViewController!.collapsed
+        clearsSelectionOnViewWillAppear = self.splitViewController!.collapsed
         
         //add refresh controll
         if refreshControl == nil {
@@ -167,6 +165,13 @@ class MasterViewController: UITableViewController {
     }
     
     @IBAction func segmentedControlValueChanged(sender: UISegmentedControl) {
+        // only show add button for my gists
+        guard let selectedState = SegmenterIndexSections(rawValue: sender.selectedSegmentIndex) else { fatalError("Index not found! Check SegmenterIndexSections Enum") }
+        if case .myGists = selectedState {
+            self.navigationItem.leftBarButtonItem = self.editButtonItem()
+        } else {
+            self.navigationItem.leftBarButtonItem = nil
+        }
         loadGists()
     }
     // MARK: - Segues
@@ -182,6 +187,15 @@ class MasterViewController: UITableViewController {
                 }
             }
         }
+    }
+    
+    // MARK: - Show alert
+    private func showError(title title: String, error: NSError) {
+        let alertController = UIAlertController(title: title, message: error.description, preferredStyle: .Alert)
+        // add ok button
+        let okAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+        alertController.addAction(okAction)
+        presentViewController(alertController, animated:true, completion: nil)
     }
     
     // MARK: - Table View
@@ -223,14 +237,27 @@ class MasterViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return false
+        //Can delete only my gists
+        guard let selectedState = SegmenterIndexSections(rawValue: gistSegmentedControl.selectedSegmentIndex) else { fatalError("Index not found! Check SegmenterIndexSections Enum") }
+        return selectedState == .myGists
     }
     
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
-            gists.removeAtIndex(indexPath.row)
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+            // delete gist
+            if let id = gists[indexPath.row].id {
+                GitHubAPIManager.sharedInstance.deleteGist(id, completionHandler: { [weak self] (error) in
+                    guard let strongSelf = self else { return }
+                    
+                    guard error == nil else {
+                        strongSelf.showError(title: "Can't delete gist", error: error!)
+                        return
+                    }
+                    //Delete gist from the table
+                    strongSelf.gists.removeAtIndex(indexPath.row)
+                    strongSelf.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+                })
+            }
         } else if editingStyle == .Insert {
             // Create a new instance of the appropriate class, insert it into the array,
             // and add a new row to the table view.
