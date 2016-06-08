@@ -68,6 +68,28 @@ final class GitHubAPIManager {
         }
     }
     
+    func starGist(gistId: String, completionHandler: (NSError?) -> Void) {
+        alamofireManager.request(GistRouter.star(gistId))
+            .response { (request, response, data, error) in
+                if let error = error {
+                    print(error)
+                    return
+                }
+                completionHandler(error)
+        }
+    }
+    
+    func unstarGist(gistId: String, completionHandler: (NSError?) -> Void) {
+        alamofireManager.request(GistRouter.unstar(gistId))
+           .response { (request, response, data, error) in
+                if let error = error {
+                    print(error)
+                    return
+                }
+                completionHandler(error)
+        }
+    }
+    
     //MARK: - Loading Images
     func imageFromURLString(imageURLString: String, completionHandler:
         (UIImage?, NSError?) -> Void) {

@@ -19,6 +19,8 @@ enum GistRouter: URLRequestConvertible {
     case getMyStarred // GET https://api.github.com/gists/starred
     case getMine
     case isStarred(String) // GET https://api.github.com/gists/\(gistId)/star
+    case star(String) // PUT https://api.github.com/gists/\(gistId)/star
+    case unstar(String) // DELETE https://api.github.com/gists/\(gistId)/star
     
     var URLRequest: NSMutableURLRequest {
         var method: Alamofire.Method {
@@ -33,6 +35,10 @@ enum GistRouter: URLRequestConvertible {
                 return .GET
             case .isStarred:
                 return .GET
+            case .star:
+                return .PUT
+            case .unstar:
+                return .DELETE
             }
         }
         
@@ -57,6 +63,10 @@ enum GistRouter: URLRequestConvertible {
                 return ("/gists", nil)
             case .isStarred(let id):
                 return ("/gists/\(id)/star", nil)
+            case .star(let id):
+                return ("/gists/\(id)/star", nil)
+            case .unstar(let id):
+                    return ("/gists/\(id)/star", nil)
             }
         }()
         
