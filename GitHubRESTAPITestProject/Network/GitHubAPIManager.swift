@@ -72,10 +72,6 @@ final class GitHubAPIManager {
     func starGist(gistId: String, completionHandler: (NSError?) -> Void) {
         let starRequest = alamofireManager.request(GistRouter.star(gistId))
             .response { (request, response, data, error) in
-                if let error = error {
-                    print(error)
-                    return
-                }
                 completionHandler(error)
         }
         
@@ -85,14 +81,20 @@ final class GitHubAPIManager {
     func unstarGist(gistId: String, completionHandler: (NSError?) -> Void) {
         let unstarRequest = alamofireManager.request(GistRouter.unstar(gistId))
            .response { (request, response, data, error) in
-                if let error = error {
-                    print(error)
-                    return
-                }
                 completionHandler(error)
         }
         
         debugPrint(unstarRequest)
+    }
+    
+    // MARK: Creating and Delete
+    func deleteGist(gistId: String, completionHandler: (NSError?) -> Void) {
+        let deleteRequest = alamofireManager.request(GistRouter.delete(gistId))
+            .response { (request, response, data, error) in
+                completionHandler(error)
+        }
+        
+        debugPrint(deleteRequest)
     }
     
     //MARK: - Loading Images

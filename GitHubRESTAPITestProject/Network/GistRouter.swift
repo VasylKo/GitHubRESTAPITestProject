@@ -14,30 +14,23 @@ import Alamofire
 enum GistRouter: URLRequestConvertible {
     static let baseURLString:String = "https://api.github.com"
     
-    case getPublic // GET https://api.github.com/gists/public
-    case getAtPath(String) // GET at given path
-    case getMyStarred // GET https://api.github.com/gists/starred
+    case getPublic          // GET https://api.github.com/gists/public
+    case getAtPath(String)  // GET at given path
+    case getMyStarred       // GET https://api.github.com/gists/starred
     case getMine
-    case isStarred(String) // GET https://api.github.com/gists/\(gistId)/star
-    case star(String) // PUT https://api.github.com/gists/\(gistId)/star
-    case unstar(String) // DELETE https://api.github.com/gists/\(gistId)/star
+    case isStarred(String)  // GET https://api.github.com/gists/\(gistId)/star
+    case star(String)       // PUT https://api.github.com/gists/\(gistId)/star
+    case unstar(String)     // DELETE https://api.github.com/gists/\(gistId)/star
+    case delete(String)     // DELETE https://api.github.com/gists/\(gistId)
     
     var URLRequest: NSMutableURLRequest {
         var method: Alamofire.Method {
             switch self {
-            case .getPublic:
-                return .GET
-            case .getAtPath:
-                return .GET
-            case .getMyStarred:
-                return .GET
-            case .getMine:
-                return .GET
-            case .isStarred:
+            case .getPublic, .getAtPath, .getMyStarred, .getMine, .isStarred:
                 return .GET
             case .star:
                 return .PUT
-            case .unstar:
+            case .unstar, .delete:
                 return .DELETE
             }
         }
@@ -66,7 +59,9 @@ enum GistRouter: URLRequestConvertible {
             case .star(let id):
                 return ("/gists/\(id)/star", nil)
             case .unstar(let id):
-                    return ("/gists/\(id)/star", nil)
+                return ("/gists/\(id)/star", nil)
+            case .delete(let id):
+                return ("/gists/\(id)", nil)
             }
         }()
         
