@@ -23,6 +23,9 @@ class MasterViewController: UITableViewController {
         dateFormatter.timeStyle = NSDateFormatterStyle.LongStyle
         return dateFormatter
     }()
+    private lazy var addBarButtonItem: UIBarButtonItem = {
+        return UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: #selector(MasterViewController.createNewGist(_:)))
+    }()
     private var safariViewController: SFSafariViewController?
     private let oAuth2Manager: OAuth2Manager
     private let gitHubAPIManager: GitHubAPIManager
@@ -48,8 +51,6 @@ class MasterViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        let addButton = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: #selector(MasterViewController.insertNewObject(_:)))
-        navigationItem.rightBarButtonItem = addButton
         if let split = self.splitViewController {
             let controllers = split.viewControllers
             detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? DetailViewController
@@ -158,7 +159,7 @@ class MasterViewController: UITableViewController {
     
     
     // MARK: - Actions
-    func insertNewObject(sender: AnyObject) {
+    func createNewGist(sender: AnyObject) {
         let alert = UIAlertController(title: "Not Implemented", message: "Can't create new gists yet, will implement later", preferredStyle: .Alert)
         alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
         presentViewController(alert, animated: true, completion: nil)
@@ -168,9 +169,11 @@ class MasterViewController: UITableViewController {
         // only show add button for my gists
         guard let selectedState = SegmenterIndexSections(rawValue: sender.selectedSegmentIndex) else { fatalError("Index not found! Check SegmenterIndexSections Enum") }
         if case .myGists = selectedState {
-            self.navigationItem.leftBarButtonItem = self.editButtonItem()
+            navigationItem.leftBarButtonItem = editButtonItem()
+            navigationItem.rightBarButtonItem = addBarButtonItem
         } else {
             self.navigationItem.leftBarButtonItem = nil
+            self.navigationItem.rightBarButtonItem = nil
         }
         loadGists()
     }
