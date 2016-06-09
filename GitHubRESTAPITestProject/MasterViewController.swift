@@ -160,9 +160,8 @@ class MasterViewController: UITableViewController {
     
     // MARK: - Actions
     func createNewGist(sender: AnyObject) {
-        let alert = UIAlertController(title: "Not Implemented", message: "Can't create new gists yet, will implement later", preferredStyle: .Alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
-        presentViewController(alert, animated: true, completion: nil)
+        let createVC = CreateGistViewController(nibName: nil, bundle: nil)
+        self.navigationController?.pushViewController(createVC, animated: true)
     }
     
     @IBAction func segmentedControlValueChanged(sender: UISegmentedControl) {
