@@ -14,20 +14,23 @@ import Alamofire
 enum GistRouter: URLRequestConvertible {
     static let baseURLString:String = "https://api.github.com"
     
-    case getPublic          // GET https://api.github.com/gists/public
-    case getAtPath(String)  // GET at given path
-    case getMyStarred       // GET https://api.github.com/gists/starred
-    case getMine
-    case isStarred(String)  // GET https://api.github.com/gists/\(gistId)/star
-    case star(String)       // PUT https://api.github.com/gists/\(gistId)/star
-    case unstar(String)     // DELETE https://api.github.com/gists/\(gistId)/star
-    case delete(String)     // DELETE https://api.github.com/gists/\(gistId)
+    case getPublic                                  // GET https://api.github.com/gists/public
+    case getAtPath(url: String)                     // GET at given path
+    case getMyStarred                               // GET https://api.github.com/gists/starred
+    case getMine                                    // GET https://api.github.com/gists
+    case isStarred(gistId: String)                  // GET https://api.github.com/gists/\(gistId)/star
+    case star(gistId: String)                       // PUT https://api.github.com/gists/\(gistId)/star
+    case unstar(gistId: String)                     // DELETE https://api.github.com/gists/\(gistId)/star
+    case delete(gistId: String)                     // DELETE https://api.github.com/gists/\(gistId)
+    case сreate(parameters: [String: AnyObject])    // POST https://api.github.com/gists
     
     var URLRequest: NSMutableURLRequest {
         var method: Alamofire.Method {
             switch self {
             case .getPublic, .getAtPath, .getMyStarred, .getMine, .isStarred:
                 return .GET
+            case .сreate:
+                return .POST
             case .star:
                 return .PUT
             case .unstar, .delete:
@@ -62,6 +65,8 @@ enum GistRouter: URLRequestConvertible {
                 return ("/gists/\(id)/star", nil)
             case .delete(let id):
                 return ("/gists/\(id)", nil)
+            case .сreate(let params):
+                return ("/gists", params)
             }
         }()
         

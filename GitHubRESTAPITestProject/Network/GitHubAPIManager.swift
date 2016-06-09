@@ -27,7 +27,7 @@ final class GitHubAPIManager {
     
     func getPublicGists(pageToLoad: String?, completionHandler: (Result<[Gist], NSError>, String?) -> Void) {
         if let urlString = pageToLoad {
-            getGists(GistRouter.getAtPath(urlString), completionHandler: completionHandler)
+            getGists(GistRouter.getAtPath(url: urlString), completionHandler: completionHandler)
         } else {
             getGists(GistRouter.getPublic, completionHandler: completionHandler)
         }
@@ -35,7 +35,7 @@ final class GitHubAPIManager {
     
     func getMyStarredGists(pageToLoad: String?, completionHandler:(Result<[Gist], NSError>, String?) -> Void) {
         if let urlString = pageToLoad {
-            getGists(GistRouter.getAtPath(urlString), completionHandler: completionHandler)
+            getGists(GistRouter.getAtPath(url: urlString), completionHandler: completionHandler)
         } else {
             getGists(GistRouter.getMyStarred, completionHandler: completionHandler)
         }
@@ -43,7 +43,7 @@ final class GitHubAPIManager {
     
     func getMyGists(pageToLoad: String?, completionHandler: (Result<[Gist], NSError>, String?) -> Void) {
         if let urlString = pageToLoad {
-            getGists(GistRouter.getAtPath(urlString), completionHandler: completionHandler)
+            getGists(GistRouter.getAtPath(url: urlString), completionHandler: completionHandler)
         } else {
             getGists(GistRouter.getMine, completionHandler: completionHandler)
         }
@@ -52,7 +52,7 @@ final class GitHubAPIManager {
     // MARK: Starring / Unstarring / Star status
     func isGistStarred(gistId: String, completionHandler: Result<Bool, NSError> -> Void) {
         // GET /gists/:id/star
-        alamofireManager.request(GistRouter.isStarred(gistId))
+        alamofireManager.request(GistRouter.isStarred(gistId: gistId))
             .validate(statusCode: [204])
             .response { (request, response, data, error) in
                 // 204 if starred, 404 if not
@@ -70,7 +70,7 @@ final class GitHubAPIManager {
     }
     
     func starGist(gistId: String, completionHandler: (NSError?) -> Void) {
-        let starRequest = alamofireManager.request(GistRouter.star(gistId))
+        let starRequest = alamofireManager.request(GistRouter.star(gistId: gistId))
             .response { (request, response, data, error) in
                 completionHandler(error)
         }
@@ -79,7 +79,7 @@ final class GitHubAPIManager {
     }
     
     func unstarGist(gistId: String, completionHandler: (NSError?) -> Void) {
-        let unstarRequest = alamofireManager.request(GistRouter.unstar(gistId))
+        let unstarRequest = alamofireManager.request(GistRouter.unstar(gistId: gistId))
            .response { (request, response, data, error) in
                 completionHandler(error)
         }
@@ -88,8 +88,37 @@ final class GitHubAPIManager {
     }
     
     // MARK: Creating and Delete
+    func createNewGist(description: String, isPublic: Bool, files: [File], completionHandler: Result<Bool, NSError> -> Void) {
+        
+        let publicString = isPublic ? "true" : "false"
+
+        var filesDictionary = [String: AnyObject]()
+        for file in files {
+            guard let name = file.filename, content = file.content else { continue }
+            filesDictionary[name] = ["content": content]
+        }
+    
+        let parameters:[String: AnyObject] = [
+            "description": description,
+            "isPublic": publicString,
+            "files" : filesDictionary
+        ]
+        
+        let createNewGistRequest = alamofireManager.request(GistRouter.сreate(parameters: parameters))
+            .response { (request, response, data, error) in
+                if let error = error {
+                    completionHandler(.Failure(error))
+                    return
+                }
+                
+                completionHandler(.Success(true))
+        }
+        
+        debugPrint(createNewGistRequest)
+    }
+    
     func deleteGist(gistId: String, completionHandler: (NSError?) -> Void) {
-        let deleteRequest = alamofireManager.request(GistRouter.delete(gistId))
+        let deleteRequest = alamofireManager.request(GistRouter.delete(gistId: gistId))
             .response { (request, response, data, error) in
                 completionHandler(error)
         }
