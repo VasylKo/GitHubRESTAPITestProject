@@ -8,5 +8,6 @@ target 'GitHubRESTAPITestProject' do
     pod 'SwiftyJSON', '~> 2.3'
     pod 'PINRemoteImage', '~> 2.1'
     pod 'Locksmith', '~> 2.0'
+    pod 'Eureka', '~> 1.6'
 end
 
