@@ -11,6 +11,7 @@
 		51D501F21D043D0700B48949 /* NSError+ConvenienceInit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51D501F11D043D0700B48949 /* NSError+ConvenienceInit.swift */; };
 		51D501F41D04664200B48949 /* ErrorGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51D501F31D04664200B48949 /* ErrorGenerator.swift */; };
 		51D501F61D09F85700B48949 /* CreateGistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51D501F51D09F85700B48949 /* CreateGistViewController.swift */; };
+		51D984701D0F06F7005FD384 /* ShowMesasgeHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51D9846F1D0F06F7005FD384 /* ShowMesasgeHelper.swift */; };
 		5412F1AE1CFDCD1F00D6EBCE /* OAuth2Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5412F1AD1CFDCD1F00D6EBCE /* OAuth2Manager.swift */; };
 		5412F1B01CFDD54800D6EBCE /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5412F1AF1CFDD54800D6EBCE /* SafariServices.framework */; };
 		541981D41CF8313300D0D40A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 541981D31CF8313200D0D40A /* LoginViewController.swift */; };
@@ -39,6 +40,7 @@
 		51D501F11D043D0700B48949 /* NSError+ConvenienceInit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSError+ConvenienceInit.swift"; sourceTree = "<group>"; };
 		51D501F31D04664200B48949 /* ErrorGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorGenerator.swift; sourceTree = "<group>"; };
 		51D501F51D09F85700B48949 /* CreateGistViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateGistViewController.swift; sourceTree = "<group>"; };
+		51D9846F1D0F06F7005FD384 /* ShowMesasgeHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowMesasgeHelper.swift; sourceTree = "<group>"; };
 		5412F1AD1CFDCD1F00D6EBCE /* OAuth2Manager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuth2Manager.swift; sourceTree = "<group>"; };
 		5412F1AF1CFDD54800D6EBCE /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
 		541981D31CF8313200D0D40A /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -189,6 +191,7 @@
 			isa = PBXGroup;
 			children = (
 				54F0C0471D002A5200998E0E /* KeychainManager.swift */,
+				51D9846F1D0F06F7005FD384 /* ShowMesasgeHelper.swift */,
 			);
 			path = " Utils";
 			sourceTree = "<group>";
@@ -327,6 +330,7 @@
 				54E7C5DF1CECA5460046F83D /* ResponseJSONObjectSerializable.swift in Sources */,
 				54E7C5DD1CECA5180046F83D /* Gist.swift in Sources */,
 				54F0C0481D002A5200998E0E /* KeychainManager.swift in Sources */,
+				51D984701D0F06F7005FD384 /* ShowMesasgeHelper.swift in Sources */,
 				54FF0A671D05C3100035E3A4 /* File.swift in Sources */,
 				54FF0A691D0725D10035E3A4 /* AboutGistCell.swift in Sources */,
 				54E7C5C01CEC9BFC0046F83D /* MasterViewController.swift in Sources */,

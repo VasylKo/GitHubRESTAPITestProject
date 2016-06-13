@@ -56,15 +56,7 @@ class DetailViewController: UIViewController {
     func configureView() {
         tableView?.reloadData()
     }
-    
-    private func showError(title title: String, error: NSError) {
-        let alertController = UIAlertController(title: title, message: error.description, preferredStyle: .Alert)
-        // add ok button
-        let okAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
-        alertController.addAction(okAction)
-        presentViewController(alertController, animated:true, completion: nil)
-    }
-    
+        
     private func addStarredTableViewRow() {
         tableView?.insertRowsAtIndexPaths([starredInfoRowIndexPath], withRowAnimation: .Automatic)
     }
@@ -76,11 +68,8 @@ class DetailViewController: UIViewController {
             guard let strongSelf = self else { return }
             
             guard result.error == nil else {
-                let error = result.error!
-                print("ERROR: \(error.localizedDescription)")
-                if error.code == NSURLErrorUserAuthenticationRequired {
-                    strongSelf.showError(title: "Could not get starred status",error: error)
-                }
+                print("ERROR: \(result.error!.localizedDescription)")
+                showMessage(type: .warning, title: "Could not get starred status.", subtitle: result.error!.localizedDescription)
                 return
             }
             
@@ -98,10 +87,7 @@ class DetailViewController: UIViewController {
             
             guard error == nil else {
                 print("ERROR \(error?.localizedDescription)")
-                if error!.code == NSURLErrorUserAuthenticationRequired {
-                    strongSelf.showError(title: "Sorry, your gist couldn't be starred.",error: error!)
-                }
-
+                showMessage(type: .warning, title: "Sorry, your gist couldn't be starred.", subtitle: error!.localizedDescription)
                 return
             }
             
@@ -117,10 +103,7 @@ class DetailViewController: UIViewController {
             
             guard error == nil else {
                 print("ERROR \(error?.localizedDescription)")
-                if error!.code == NSURLErrorUserAuthenticationRequired {
-                    strongSelf.showError(title: "Sorry, your gist couldn't be unstarred.",error: error!)
-                }
-                
+                showMessage(type: .warning, title: "Sorry, your gist couldn't be unstarred.", subtitle: error!.localizedDescription)
                 return
             }
             

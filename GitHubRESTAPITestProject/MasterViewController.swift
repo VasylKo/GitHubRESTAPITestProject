@@ -122,7 +122,9 @@ class MasterViewController: UITableViewController {
             }
             
             guard result.error == nil else {
-                print("ERROR: \(result.error?.localizedDescription)")
+                print("ERROR: \(result.error!.localizedDescription)")
+                //Show error to the user
+                showMessage(type: .warning, title: "Could not load gists.", subtitle: result.error!.localizedDescription)
                 if result.error!.code == NSURLErrorUserAuthenticationRequired {
                     strongSelf.oAuth2Manager.authorisationProcessFail(withError: result.error!)
                 }
