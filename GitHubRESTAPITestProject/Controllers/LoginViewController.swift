@@ -10,6 +10,7 @@ import UIKit
 
 protocol LoginViewDelegate: class {
     func didTapLoginButton()
+    func didTapCancel()
 }
 
 class LoginViewController: UIViewController {
@@ -26,7 +27,7 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func cancelButtonTapped(sender: UIButton) {
-        dismissViewControllerAnimated(true, completion: nil)
+        delegate?.didTapCancel()
     }
 
 }

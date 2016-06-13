@@ -72,6 +72,10 @@ final class OAuth2Manager{
         oAuthStatus = .notAuthorised(error: error)
     }
     
+    func resetAuthorisationStatus() {
+        oAuthStatus = .notAuthorised(error: nil)
+    }
+    
     func URLToStartOAuth2Login() -> NSURL? {
         let authPath = "https://github.com/login/oauth/authorize?client_id=\(clientID)&scope=gist&state=TEST_STATE"
         guard let authURL:NSURL = NSURL(string: authPath) else {

@@ -97,9 +97,22 @@ class MasterViewController: UITableViewController {
     //MARK: - Network Call
     ///Load lists of gists if the user is authorized
     private func loadInitialData() {
-        switch OAuth2Manager.sharedInstance.oAuthStatus {
-        case .notAuthorised:
-            showOAuthLoginView()
+        guard let selectedSegmentIndex = SegmenterIndexSections(rawValue: gistSegmentedControl.selectedSegmentIndex) else { fatalError("Can't get selected segmented section. Check SegmenterIndexSections enum values") }
+        
+        switch oAuth2Manager.oAuthStatus {
+        case .notAuthorised where selectedSegmentIndex == .publicGists:
+            loadGists()
+        case .notAuthorised(let error):
+            //Hide refresh controll
+            if refreshControl != nil && refreshControl!.refreshing {
+                refreshControl!.endRefreshing()
+            }
+            if let error = error {
+                showMessage(type: .warning, title: "Can't authorize", subtitle: error.localizedDescription)
+                oAuth2Manager.resetAuthorisationStatus()
+            } else  {
+                showOAuthLoginView()
+            }
         case .hasToken(_):
             loadGists()
         default:
@@ -197,7 +210,7 @@ class MasterViewController: UITableViewController {
         gists = [Gist]()
         tableView.reloadData()
         
-        loadGists()
+        loadInitialData()
     }
     // MARK: - Segues
     
@@ -265,6 +278,7 @@ class MasterViewController: UITableViewController {
 
 }
 
+// MARK: - LoginViewDelegate
 extension MasterViewController: LoginViewDelegate {
     func didTapLoginButton() {
         oAuth2Manager.startAuthorisationProcess()
@@ -277,7 +291,11 @@ extension MasterViewController: LoginViewDelegate {
         safariViewController = SFSafariViewController(URL: authURL)
         safariViewController?.delegate = self
         presentViewController(safariViewController!, animated: true, completion: nil)
-        
+    }
+    
+    func didTapCancel() {
+        oAuth2Manager.authorisationProcessFail(withError: ErrorGenerator.customError.generate(customDescription: "Authorization required"))
+        dismissViewControllerAnimated(true, completion: nil)
     }
 }
 
@@ -304,7 +322,7 @@ extension MasterViewController: SFSafariViewControllerDelegate {
 
 extension MasterViewController: OAuth2ManagerDelegate {
     func authorisationStatusDidChanged(authorisationStatus: OAuth2Manager.AuthorisationStatus) {
-        loadInitialData()
+        //loadInitialData()
     }
 }
 
