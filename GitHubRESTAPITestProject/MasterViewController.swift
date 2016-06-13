@@ -192,6 +192,11 @@ class MasterViewController: UITableViewController {
             self.navigationItem.leftBarButtonItem = nil
             self.navigationItem.rightBarButtonItem = nil
         }
+        
+        // clear gists so they can't get shown for the wrong list
+        gists = [Gist]()
+        tableView.reloadData()
+        
         loadGists()
     }
     // MARK: - Segues
