@@ -52,12 +52,11 @@ final class GitHubAPIManager {
     // MARK: Starring / Unstarring / Star status
     func isGistStarred(gistId: String, completionHandler: Result<Bool, NSError> -> Void) {
         // GET /gists/:id/star
-        alamofireManager.request(GistRouter.isStarred(gistId: gistId))
+        let starStatusRequest = alamofireManager.request(GistRouter.isStarred(gistId: gistId))
             .validate(statusCode: [204])
             .response { (request, response, data, error) in
                 // 204 if starred, 404 if not
                 if let error = error {
-                    print(error)
                     if response?.statusCode == 404 {
                         completionHandler(.Success(false))
                         return
@@ -67,6 +66,8 @@ final class GitHubAPIManager {
                 }
                 completionHandler(.Success(true))
         }
+        
+        debugPrint(starStatusRequest)
     }
     
     func starGist(gistId: String, completionHandler: (NSError?) -> Void) {
