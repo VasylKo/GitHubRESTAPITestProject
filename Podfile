@@ -9,5 +9,6 @@ target 'GitHubRESTAPITestProject' do
     pod 'PINRemoteImage', '~> 2.1'
     pod 'Locksmith', '~> 2.0'
     pod 'Eureka', '~> 1.6'
+    pod 'BRYXBanner', '~> 0.5'
 end
 
