@@ -75,16 +75,23 @@ class CreateGistViewController: FormViewController {
     
     //MARK: - Create gist
     private func createNewGist() {
-        guard let descriptionRow = form.rowByTag(Tags.descroptionRow.rawValue) as? TextRow,
-        isPublicRow = form.rowByTag(Tags.isPublicRow.rawValue) as? SwitchRow,
-        filenameRow = form.rowByTag(Tags.filenameRow.rawValue) as? TextRow,
-        fileContentRow = form.rowByTag(Tags.fileContentRow.rawValue) as? TextAreaRow
-            else { fatalError("From error! Can't get rows!") }
+        guard let formValues = readFormValuesIfValid() else { return }
         
-        validate(descriptionRow.value, forTag: descriptionRow.tag)
-        validate(filenameRow.value, forTag: filenameRow.tag)
-        validate(fileContentRow.value, forTag: fileContentRow.tag)
-
+        let files:[File] = [File(name: formValues.fileName, content: formValues.fileContent)]
+        
+        GitHubAPIManager.sharedInstance.createNewGist(formValues.gistDescription, isPublic: formValues.isBublicGist, files: files) { [weak self] (result) in
+            guard let strongSelf = self else { return }
+            guard result.error == nil else {
+                strongSelf.showAlert(title: "Could not create gist", message: result.error!.localizedDescription)
+                return
+            }
+            
+            if result.value! {
+                strongSelf.dismissViewControllerAnimated(true, completion: nil)
+            } else {
+                strongSelf.showAlert(title: "Could not create gist", message: "Something went wrong. Please try again.")
+            }
+        }
     }
     
     func cancelPressed(button: UIBarButtonItem) {
@@ -92,11 +99,13 @@ class CreateGistViewController: FormViewController {
     }
     
     //MARK: - Helper methods
-    private func validate(value: String?, forTag tag: String?) {
+    private func validate(value: String?, forTag tag: String?) -> Bool {
         guard !(value?.isEmpty ?? true) else {
             showAlert(title: "Incomplete info", message: "Please fill \(tag ?? "all fields")")
-            return
+            return false
         }
+        
+        return true
     }
     
     private func showAlert(title title: String, message: String) {
@@ -105,5 +114,24 @@ class CreateGistViewController: FormViewController {
         let okAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
         alertController.addAction(okAction)
         presentViewController(alertController, animated:true, completion: nil)
+    }
+    
+    private func readFormValuesIfValid() -> (gistDescription: String, isBublicGist: Bool, fileName: String, fileContent: String)? {
+        guard let descriptionRow = form.rowByTag(Tags.descroptionRow.rawValue) as? TextRow,
+            isPublicRow = form.rowByTag(Tags.isPublicRow.rawValue) as? SwitchRow,
+            filenameRow = form.rowByTag(Tags.filenameRow.rawValue) as? TextRow,
+            fileContentRow = form.rowByTag(Tags.fileContentRow.rawValue) as? TextAreaRow
+            else { fatalError("From error! Can't get rows!") }
+        
+       guard    validate(descriptionRow.value, forTag: descriptionRow.tag) &&
+                validate(filenameRow.value, forTag: filenameRow.tag) &&
+                validate(fileContentRow.value, forTag: fileContentRow.tag) else { return nil }
+        
+        let gistDescription = descriptionRow.value ?? ""
+        let isBublicGist = isPublicRow.value ?? false
+        let fileName = filenameRow.value ?? ""
+        let fileContetnt = fileContentRow.value ?? ""
+        
+        return (gistDescription, isBublicGist, fileName, fileContetnt)
     }
 }

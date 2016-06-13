@@ -19,7 +19,7 @@ class File: ResponseJSONObjectSerializable {
         raw_url = json["raw_url"].string
     }
     
-    init?(name: String?, content: String?) {
+    init(name: String?, content: String?) {
         filename = name
         self.content = content
     }
