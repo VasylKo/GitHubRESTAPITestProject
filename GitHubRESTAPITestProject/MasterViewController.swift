@@ -167,6 +167,21 @@ class MasterViewController: UITableViewController {
         presentViewController(navigationController, animated: true, completion: nil)
     }
     
+    private func deleteGistWithId(gistId: String, fromTableView tableView: UITableView, atIndexPath indexPath: NSIndexPath) {
+        GitHubAPIManager.sharedInstance.deleteGist(gistId, completionHandler: { [weak self] (error) in
+            guard let strongSelf = self else { return }
+            
+            guard error == nil else {
+                print("ERROR: \(error!.localizedDescription)")
+                showMessage(type: .warning, title: "Can't delete gist", subtitle: error!.localizedDescription)
+                return
+            }
+            //Delete gist from the table
+            strongSelf.gists.removeAtIndex(indexPath.row)
+            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+            })
+    }
+    
     @IBAction func segmentedControlValueChanged(sender: UISegmentedControl) {
         // only show add button for my gists
         guard let selectedState = SegmenterIndexSections(rawValue: sender.selectedSegmentIndex) else { fatalError("Index not found! Check SegmenterIndexSections Enum") }
@@ -194,17 +209,7 @@ class MasterViewController: UITableViewController {
         }
     }
     
-    // MARK: - Show alert
-    private func showError(title title: String, error: NSError) {
-        let alertController = UIAlertController(title: title, message: error.description, preferredStyle: .Alert)
-        // add ok button
-        let okAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
-        alertController.addAction(okAction)
-        presentViewController(alertController, animated:true, completion: nil)
-    }
-    
     // MARK: - Table View
-    
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
@@ -248,24 +253,8 @@ class MasterViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            // delete gist
-            if let id = gists[indexPath.row].id {
-                GitHubAPIManager.sharedInstance.deleteGist(id, completionHandler: { [weak self] (error) in
-                    guard let strongSelf = self else { return }
-                    
-                    guard error == nil else {
-                        strongSelf.showError(title: "Can't delete gist", error: error!)
-                        return
-                    }
-                    //Delete gist from the table
-                    strongSelf.gists.removeAtIndex(indexPath.row)
-                    strongSelf.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-                })
-            }
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array,
-            // and add a new row to the table view.
+        if editingStyle == .Delete, let id = gists[indexPath.row].id  {
+            deleteGistWithId(id, fromTableView: tableView, atIndexPath: indexPath)
         }
     }
 

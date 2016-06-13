@@ -82,6 +82,7 @@ class CreateGistViewController: FormViewController {
         GitHubAPIManager.sharedInstance.createNewGist(formValues.gistDescription, isPublic: formValues.isBublicGist, files: files) { [weak self] (result) in
             guard let strongSelf = self else { return }
             guard result.error == nil else {
+                print("ERROR: \(result.error!.localizedDescription)")
                 showMessage(type: .warning, title: "Could not create gist.", subtitle: result.error!.localizedDescription)
                 return
             }
@@ -90,7 +91,6 @@ class CreateGistViewController: FormViewController {
                 strongSelf.dismissViewControllerAnimated(true, completion: nil)
                 showMessage(type: .success, title: "New gist added!", duration: 1)
             } else {
-                print("ERROR: \(result.error!.localizedDescription)")
                 showMessage(type: .warning, title: "Could not create gist.", subtitle: "Something went wrong. Please try again.")
             }
         }
