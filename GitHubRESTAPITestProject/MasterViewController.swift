@@ -160,8 +160,9 @@ class MasterViewController: UITableViewController {
     
     // MARK: - Actions
     func createNewGist(sender: AnyObject) {
-        let createVC = CreateGistViewController(nibName: nil, bundle: nil)
-        self.navigationController?.pushViewController(createVC, animated: true)
+        let createNewGistViewController = CreateGistViewController(nibName: nil, bundle: nil)
+        let navigationController = UINavigationController(rootViewController: createNewGistViewController)
+        presentViewController(navigationController, animated: true, completion: nil)
     }
     
     @IBAction func segmentedControlValueChanged(sender: UISegmentedControl) {

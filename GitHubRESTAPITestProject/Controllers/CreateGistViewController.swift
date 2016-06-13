@@ -26,6 +26,9 @@ class CreateGistViewController: FormViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Create Gist"
+        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Cancel,
+                                                           target: self, action: #selector(self.cancelPressed(_:)))
     }
     
     //MARK: - Form tags
@@ -82,8 +85,10 @@ class CreateGistViewController: FormViewController {
         validate(filenameRow.value, forTag: filenameRow.tag)
         validate(fileContentRow.value, forTag: fileContentRow.tag)
 
-        
-        
+    }
+    
+    func cancelPressed(button: UIBarButtonItem) {
+        dismissViewControllerAnimated(true, completion: nil)
     }
     
     //MARK: - Helper methods
