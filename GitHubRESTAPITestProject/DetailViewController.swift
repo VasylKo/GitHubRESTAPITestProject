@@ -27,7 +27,7 @@ class DetailViewController: UIViewController {
             case .aboutSection:
                 return "About"
             case .filesSection:
-                return "Files (click to open)"
+                return "Files (tap to open)"
             }
         }
     }
@@ -64,11 +64,7 @@ class DetailViewController: UIViewController {
 // MARK: - Stars
     private func fetchStarredStatus() {
         guard let gistId = gist?.id else { return }
-        guard case .hasToken = OAuth2Manager.sharedInstance.oAuthStatus else {
-            let error = ErrorGenerator.unauthorizedUserError.generate()
-            showMessage(type: .warning, title: "Could not get starred status.", subtitle: error.localizedDescription)
-            return
-        }
+        guard case .hasToken = OAuth2Manager.sharedInstance.oAuthStatus else { return }
         
         GitHubAPIManager.sharedInstance.isGistStarred(gistId, completionHandler: { [weak self] result in
             guard let strongSelf = self else { return }

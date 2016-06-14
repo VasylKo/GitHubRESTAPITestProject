@@ -81,7 +81,21 @@ class MasterViewController: UITableViewController {
         NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
-    //MARK: - View Logic
+    //MARK: - UI
+    private func updateUI() {
+        // only show add button for my gists
+        guard let selectedState = SegmenterIndexSections(rawValue: gistSegmentedControl.selectedSegmentIndex) else { fatalError("Index not found! Check SegmenterIndexSections Enum") }
+        //if my gist is selected and usr is authorized show edit and create gist buttons
+        if case .myGists = selectedState, .hasToken = oAuth2Manager.oAuthStatus {
+            navigationItem.leftBarButtonItem = editButtonItem()
+            navigationItem.rightBarButtonItem = addBarButtonItem
+        } else {
+            self.navigationItem.leftBarButtonItem = nil
+            self.navigationItem.rightBarButtonItem = nil
+        }
+    }
+    
+    //MARK: - Login View
     func showOAuthLoginView() {
         if let loginVC = storyboard?.instantiateViewControllerWithIdentifier("LoginViewController") as? LoginViewController where presentedViewController == nil {
             loginVC.delegate = self
@@ -196,16 +210,7 @@ class MasterViewController: UITableViewController {
     }
     
     @IBAction func segmentedControlValueChanged(sender: UISegmentedControl) {
-        // only show add button for my gists
-        guard let selectedState = SegmenterIndexSections(rawValue: sender.selectedSegmentIndex) else { fatalError("Index not found! Check SegmenterIndexSections Enum") }
-        //if my gist is selected and usr is authorized show edit and create gist buttons
-        if case .myGists = selectedState, .hasToken = oAuth2Manager.oAuthStatus {
-            navigationItem.leftBarButtonItem = editButtonItem()
-            navigationItem.rightBarButtonItem = addBarButtonItem
-        } else {
-            self.navigationItem.leftBarButtonItem = nil
-            self.navigationItem.rightBarButtonItem = nil
-        }
+        updateUI()
         
         // clear gists so they can't get shown for the wrong list
         gists = [Gist]()
@@ -324,6 +329,7 @@ extension MasterViewController: SFSafariViewControllerDelegate {
 extension MasterViewController: OAuth2ManagerDelegate {
     func authorisationStatusDidChanged(authorisationStatus: OAuth2Manager.AuthorisationStatus) {
         if case .hasToken = authorisationStatus {
+            updateUI()
             loadInitialData()
         }
         
