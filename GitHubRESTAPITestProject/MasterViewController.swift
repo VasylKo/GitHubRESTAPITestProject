@@ -198,7 +198,8 @@ class MasterViewController: UITableViewController {
     @IBAction func segmentedControlValueChanged(sender: UISegmentedControl) {
         // only show add button for my gists
         guard let selectedState = SegmenterIndexSections(rawValue: sender.selectedSegmentIndex) else { fatalError("Index not found! Check SegmenterIndexSections Enum") }
-        if case .myGists = selectedState {
+        //if my gist is selected and usr is authorized show edit and create gist buttons
+        if case .myGists = selectedState, .hasToken = oAuth2Manager.oAuthStatus {
             navigationItem.leftBarButtonItem = editButtonItem()
             navigationItem.rightBarButtonItem = addBarButtonItem
         } else {
@@ -303,7 +304,7 @@ extension MasterViewController: LoginViewDelegate {
 extension MasterViewController: SFSafariViewControllerDelegate {
     func safariViewController(controller: SFSafariViewController, didCompleteInitialLoad didLoadSuccessfully: Bool) {
         // Detect not being able to load the OAuth URL
-        guard didLoadSuccessfully else {
+        guard Alamofire.NetworkReachabilityManager()?.isReachable ?? false else {
             oAuth2Manager.authorisationProcessFail(withError: ErrorGenerator.noInternetConnectionError.generate())
             controller.dismissViewControllerAnimated(true, completion: nil)
             return
@@ -322,7 +323,10 @@ extension MasterViewController: SFSafariViewControllerDelegate {
 
 extension MasterViewController: OAuth2ManagerDelegate {
     func authorisationStatusDidChanged(authorisationStatus: OAuth2Manager.AuthorisationStatus) {
-        //loadInitialData()
+        if case .hasToken = authorisationStatus {
+            loadInitialData()
+        }
+        
     }
 }
 
