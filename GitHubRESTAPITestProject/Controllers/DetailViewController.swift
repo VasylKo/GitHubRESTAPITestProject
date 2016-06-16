@@ -50,6 +50,13 @@ class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureView()
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.networkIsReachableNotification(_:)), name: GitHubAPIManager.networkIsReachableNotification, object: nil)
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
 // MARK: - UI
@@ -112,6 +119,11 @@ class DetailViewController: UIViewController {
             strongSelf.isStarred = false
             strongSelf.tableView?.reloadRowsAtIndexPaths([strongSelf.starredInfoRowIndexPath], withRowAnimation: .Automatic)
         }
+    }
+    
+    //MARK: - Reachability notification
+    @objc private func networkIsReachableNotification(object: AnyObject) {
+        fetchStarredStatus()
     }
     
 }

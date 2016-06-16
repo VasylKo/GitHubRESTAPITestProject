@@ -13,13 +13,26 @@ import SwiftyJSON
 final class GitHubAPIManager {
     static let sharedInstance = GitHubAPIManager()
     
+    static let networkIsReachableNotification = "networkIsReachableNotification"
+    
     //MARK: - Private properties
     private var alamofireManager: Alamofire.Manager
-    
+    private let reachabilityManager: NetworkReachabilityManager?
+
     private init () {
         let configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
         configuration.requestCachePolicy = .ReloadIgnoringLocalCacheData
         alamofireManager = Alamofire.Manager(configuration: configuration)
+        
+        //Monitor network reachability status
+        reachabilityManager = Alamofire.NetworkReachabilityManager()
+        reachabilityManager?.listener = { reachabilityStatus in
+            if case .Reachable = reachabilityStatus {
+                NSNotificationCenter.defaultCenter().postNotificationName(GitHubAPIManager.networkIsReachableNotification, object: self)
+            }
+            
+        }
+        reachabilityManager?.startListening()
     }
     
     //MARK: - Intrnal methods for data loading

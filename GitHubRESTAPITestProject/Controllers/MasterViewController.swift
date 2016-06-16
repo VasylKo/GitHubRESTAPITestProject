@@ -57,7 +57,10 @@ class MasterViewController: UITableViewController {
         }
         
         //Add observer
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.oAuthTokenRequestResponseReceived(_:)), name: OAuthTokenRequestResponseReceivedNotification, object: nil)
+        let notificationCenter = NSNotificationCenter.defaultCenter()
+        notificationCenter.addObserver(self, selector: #selector(self.oAuthTokenRequestResponseReceived(_:)), name: OAuthTokenRequestResponseReceivedNotification, object: nil)
+        
+        notificationCenter.addObserver(self, selector: #selector(self.networkIsReachableNotification(_:)), name: GitHubAPIManager.networkIsReachableNotification, object: nil)
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -103,8 +106,13 @@ class MasterViewController: UITableViewController {
         }
     }
     
+    //MARK: - Reachability notification
+    @objc private func networkIsReachableNotification(object: AnyObject) {
+        refresh(nil)
+    }
+    
     //MARK: - Refresh controll
-    func refresh(sender: AnyObject) {
+    func refresh(sender: AnyObject?) {
         loadInitialData()
     }
     
