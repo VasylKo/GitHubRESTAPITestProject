@@ -181,7 +181,7 @@ extension DetailViewController: UITableViewDataSource {
             guard let cell = cell as? AboutGistCell else { fatalError("check cell type") }
             cell.selectionStyle = .None
             cell.titleLabel?.text = "Gist description"
-            cell.descriptionLabel?.text = gist?.description
+            cell.descriptionLabel?.text = gist?.gistDescription
         case (.aboutSection, 1):
             cell = tableView.dequeueReusableCellWithIdentifier("aboutCell", forIndexPath: indexPath)
             guard let cell = cell as? AboutGistCell else { fatalError("check cell type") }

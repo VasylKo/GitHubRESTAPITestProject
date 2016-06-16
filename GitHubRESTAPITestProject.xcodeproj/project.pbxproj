@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		5158715F1CFF8A2700D7C7B0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5158715D1CFF8A2700D7C7B0 /* AppDelegate.swift */; };
+		519F7F361D133A7200D50ECD /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 519F7F341D133A7200D50ECD /* DetailViewController.swift */; };
+		519F7F371D133A7200D50ECD /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 519F7F351D133A7200D50ECD /* MasterViewController.swift */; };
+		519F7F3A1D133A8200D50ECD /* PersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 519F7F391D133A8200D50ECD /* PersistenceManager.swift */; };
 		51D501F21D043D0700B48949 /* NSError+ConvenienceInit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51D501F11D043D0700B48949 /* NSError+ConvenienceInit.swift */; };
 		51D501F41D04664200B48949 /* ErrorGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51D501F31D04664200B48949 /* ErrorGenerator.swift */; };
 		51D501F61D09F85700B48949 /* CreateGistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51D501F51D09F85700B48949 /* CreateGistViewController.swift */; };
@@ -15,8 +18,6 @@
 		5412F1AE1CFDCD1F00D6EBCE /* OAuth2Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5412F1AD1CFDCD1F00D6EBCE /* OAuth2Manager.swift */; };
 		5412F1B01CFDD54800D6EBCE /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5412F1AF1CFDD54800D6EBCE /* SafariServices.framework */; };
 		541981D41CF8313300D0D40A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 541981D31CF8313200D0D40A /* LoginViewController.swift */; };
-		54E7C5C01CEC9BFC0046F83D /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E7C5BF1CEC9BFC0046F83D /* MasterViewController.swift */; };
-		54E7C5C21CEC9BFC0046F83D /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E7C5C11CEC9BFC0046F83D /* DetailViewController.swift */; };
 		54E7C5C51CEC9BFC0046F83D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 54E7C5C31CEC9BFC0046F83D /* Main.storyboard */; };
 		54E7C5C71CEC9BFC0046F83D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 54E7C5C61CEC9BFC0046F83D /* Assets.xcassets */; };
 		54E7C5CA1CEC9BFC0046F83D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 54E7C5C81CEC9BFC0046F83D /* LaunchScreen.storyboard */; };
@@ -37,6 +38,9 @@
 		475B273533FFB4909CDAB001 /* Pods-GitHubRESTAPITestProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GitHubRESTAPITestProject.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GitHubRESTAPITestProject/Pods-GitHubRESTAPITestProject.debug.xcconfig"; sourceTree = "<group>"; };
 		5158715D1CFF8A2700D7C7B0 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = GitHubRESTAPITestProject/AppDelegate.swift; sourceTree = SOURCE_ROOT; };
 		5158715E1CFF8A2700D7C7B0 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = GitHubRESTAPITestProject/Info.plist; sourceTree = SOURCE_ROOT; };
+		519F7F341D133A7200D50ECD /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		519F7F351D133A7200D50ECD /* MasterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
+		519F7F391D133A8200D50ECD /* PersistenceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistenceManager.swift; sourceTree = "<group>"; };
 		51D501F11D043D0700B48949 /* NSError+ConvenienceInit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSError+ConvenienceInit.swift"; sourceTree = "<group>"; };
 		51D501F31D04664200B48949 /* ErrorGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorGenerator.swift; sourceTree = "<group>"; };
 		51D501F51D09F85700B48949 /* CreateGistViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateGistViewController.swift; sourceTree = "<group>"; };
@@ -45,8 +49,6 @@
 		5412F1AF1CFDD54800D6EBCE /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
 		541981D31CF8313200D0D40A /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		54E7C5BA1CEC9BFC0046F83D /* GitHubRESTAPITestProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GitHubRESTAPITestProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		54E7C5BF1CEC9BFC0046F83D /* MasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MasterViewController.swift; path = ../MasterViewController.swift; sourceTree = "<group>"; };
-		54E7C5C11CEC9BFC0046F83D /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DetailViewController.swift; path = ../DetailViewController.swift; sourceTree = "<group>"; };
 		54E7C5C41CEC9BFC0046F83D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		54E7C5C61CEC9BFC0046F83D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		54E7C5C91CEC9BFC0046F83D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -93,6 +95,14 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		519F7F381D133A7900D50ECD /* PersistenceManager */ = {
+			isa = PBXGroup;
+			children = (
+				519F7F391D133A8200D50ECD /* PersistenceManager.swift */,
+			);
+			path = PersistenceManager;
+			sourceTree = "<group>";
+		};
 		54E7C5B11CEC9BFC0046F83D = {
 			isa = PBXGroup;
 			children = (
@@ -118,6 +128,7 @@
 				54E7C5E11CECA5AA0046F83D /* Extensions */,
 				54E7C5D11CEC9D110046F83D /* Controllers */,
 				54E7C5D21CEC9D110046F83D /* Model */,
+				519F7F381D133A7900D50ECD /* PersistenceManager */,
 				54E7C5D31CEC9D110046F83D /* Network */,
 				54E7C5D41CEC9D110046F83D /* Supporting files */,
 				54E7C5D51CEC9D110046F83D /* Views */,
@@ -131,8 +142,8 @@
 		54E7C5D11CEC9D110046F83D /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				54E7C5BF1CEC9BFC0046F83D /* MasterViewController.swift */,
-				54E7C5C11CEC9BFC0046F83D /* DetailViewController.swift */,
+				519F7F341D133A7200D50ECD /* DetailViewController.swift */,
+				519F7F351D133A7200D50ECD /* MasterViewController.swift */,
 				541981D31CF8313200D0D40A /* LoginViewController.swift */,
 				51D501F51D09F85700B48949 /* CreateGistViewController.swift */,
 			);
@@ -321,20 +332,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				541981D41CF8313300D0D40A /* LoginViewController.swift in Sources */,
-				54E7C5C21CEC9BFC0046F83D /* DetailViewController.swift in Sources */,
 				51D501F41D04664200B48949 /* ErrorGenerator.swift in Sources */,
 				51D501F61D09F85700B48949 /* CreateGistViewController.swift in Sources */,
 				5412F1AE1CFDCD1F00D6EBCE /* OAuth2Manager.swift in Sources */,
 				51D501F21D043D0700B48949 /* NSError+ConvenienceInit.swift in Sources */,
 				54E7C5D91CEC9F5E0046F83D /* GitHubAPIManager.swift in Sources */,
 				54E7C5DF1CECA5460046F83D /* ResponseJSONObjectSerializable.swift in Sources */,
+				519F7F361D133A7200D50ECD /* DetailViewController.swift in Sources */,
 				54E7C5DD1CECA5180046F83D /* Gist.swift in Sources */,
 				54F0C0481D002A5200998E0E /* KeychainManager.swift in Sources */,
 				51D984701D0F06F7005FD384 /* ShowMesasgeHelper.swift in Sources */,
+				519F7F371D133A7200D50ECD /* MasterViewController.swift in Sources */,
 				54FF0A671D05C3100035E3A4 /* File.swift in Sources */,
 				54FF0A691D0725D10035E3A4 /* AboutGistCell.swift in Sources */,
-				54E7C5C01CEC9BFC0046F83D /* MasterViewController.swift in Sources */,
 				54E7C5DB1CECA13B0046F83D /* GistRouter.swift in Sources */,
+				519F7F3A1D133A8200D50ECD /* PersistenceManager.swift in Sources */,
 				5158715F1CFF8A2700D7C7B0 /* AppDelegate.swift in Sources */,
 				54E7C5E31CECA5B90046F83D /* AlamofireRequest+JSONSerializable.swift in Sources */,
 			);
