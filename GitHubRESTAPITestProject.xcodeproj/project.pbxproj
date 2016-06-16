@@ -142,8 +142,8 @@
 		54E7C5D11CEC9D110046F83D /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				519F7F341D133A7200D50ECD /* DetailViewController.swift */,
 				519F7F351D133A7200D50ECD /* MasterViewController.swift */,
+				519F7F341D133A7200D50ECD /* DetailViewController.swift */,
 				541981D31CF8313200D0D40A /* LoginViewController.swift */,
 				51D501F51D09F85700B48949 /* CreateGistViewController.swift */,
 			);

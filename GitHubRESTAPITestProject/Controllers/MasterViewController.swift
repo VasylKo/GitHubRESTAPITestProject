@@ -130,7 +130,7 @@ class MasterViewController: UITableViewController {
                 refreshControl!.endRefreshing()
             }
             if let error = error {
-                showMessage(type: .warning, title: "Can't authorize", subtitle: error.localizedDescription)
+                showMessage(type: .warning, title: "Can't load gists", subtitle: error.localizedDescription)
                 oAuth2Manager.resetAuthorisationStatus()
             } else  {
                 showOAuthLoginView()
