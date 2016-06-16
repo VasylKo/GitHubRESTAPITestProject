@@ -155,6 +155,12 @@ class MasterViewController: UITableViewController {
                 if result.error!.code == NSURLErrorUserAuthenticationRequired {
                     strongSelf.oAuth2Manager.authorisationProcessFail(withError: result.error!)
                 }
+                
+                //If there is no internet load last saved data
+                if result.error!.code == NSURLErrorNotConnectedToInternet {
+                    strongSelf.loadDataFromLocalStorage()
+                    strongSelf.tableView.reloadData()
+                }
                 return
             }
             
@@ -171,6 +177,7 @@ class MasterViewController: UITableViewController {
             let updateString = "Last Updated at " + strongSelf.dateFormatter.stringFromDate(now)
             strongSelf.refreshControl?.attributedTitle = NSAttributedString(string: updateString)
             
+            strongSelf.saveDataToLocalStorage()
             strongSelf.tableView.reloadData()
         }
         
@@ -186,6 +193,38 @@ class MasterViewController: UITableViewController {
         }
     }
     
+    //MARK: - Persist data
+    private func saveDataToLocalStorage() {
+        let path = getPathToPersistantData()
+        PersistenceManager.saveArray(gists, path: path)
+    }
+    
+    private func loadDataFromLocalStorage() {
+        let path = getPathToPersistantData()
+        
+        if let archived:[Gist] = PersistenceManager.loadArray(path) {
+            gists = archived
+        } else {
+            // don't have any saved gists
+            self.gists = []
+        }
+    }
+    
+    private func getPathToPersistantData() -> PersistenceManager.Path {
+        let path: PersistenceManager.Path
+        
+        guard let selectedSegmentIndex = SegmenterIndexSections(rawValue: gistSegmentedControl.selectedSegmentIndex) else { fatalError("Can't get selected segmented section. Check SegmenterIndexSections enum values") }
+        switch  selectedSegmentIndex{
+        case .publicGists:
+            path = .publicGists
+        case .starredGists:
+            path = .starredGists
+        case .myGists:
+            path = .myGists
+        }
+        
+        return path
+    }
     
     // MARK: - Actions
     func createNewGist(sender: AnyObject) {
