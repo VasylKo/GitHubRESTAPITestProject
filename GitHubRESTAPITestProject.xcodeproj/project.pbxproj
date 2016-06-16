@@ -10,9 +10,9 @@
 		5158715F1CFF8A2700D7C7B0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5158715D1CFF8A2700D7C7B0 /* AppDelegate.swift */; };
 		519F7F361D133A7200D50ECD /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 519F7F341D133A7200D50ECD /* DetailViewController.swift */; };
 		519F7F371D133A7200D50ECD /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 519F7F351D133A7200D50ECD /* MasterViewController.swift */; };
-		519F7F3A1D133A8200D50ECD /* PersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 519F7F391D133A8200D50ECD /* PersistenceManager.swift */; };
+		519F7F3C1D1350F800D50ECD /* PersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 519F7F3B1D1350F800D50ECD /* PersistenceManager.swift */; };
+		519F7F3E1D13513300D50ECD /* ErrorGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 519F7F3D1D13513300D50ECD /* ErrorGenerator.swift */; };
 		51D501F21D043D0700B48949 /* NSError+ConvenienceInit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51D501F11D043D0700B48949 /* NSError+ConvenienceInit.swift */; };
-		51D501F41D04664200B48949 /* ErrorGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51D501F31D04664200B48949 /* ErrorGenerator.swift */; };
 		51D501F61D09F85700B48949 /* CreateGistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51D501F51D09F85700B48949 /* CreateGistViewController.swift */; };
 		51D984701D0F06F7005FD384 /* ShowMesasgeHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51D9846F1D0F06F7005FD384 /* ShowMesasgeHelper.swift */; };
 		5412F1AE1CFDCD1F00D6EBCE /* OAuth2Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5412F1AD1CFDCD1F00D6EBCE /* OAuth2Manager.swift */; };
@@ -40,9 +40,9 @@
 		5158715E1CFF8A2700D7C7B0 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = GitHubRESTAPITestProject/Info.plist; sourceTree = SOURCE_ROOT; };
 		519F7F341D133A7200D50ECD /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		519F7F351D133A7200D50ECD /* MasterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
-		519F7F391D133A8200D50ECD /* PersistenceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistenceManager.swift; sourceTree = "<group>"; };
+		519F7F3B1D1350F800D50ECD /* PersistenceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistenceManager.swift; sourceTree = "<group>"; };
+		519F7F3D1D13513300D50ECD /* ErrorGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorGenerator.swift; sourceTree = "<group>"; };
 		51D501F11D043D0700B48949 /* NSError+ConvenienceInit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSError+ConvenienceInit.swift"; sourceTree = "<group>"; };
-		51D501F31D04664200B48949 /* ErrorGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorGenerator.swift; sourceTree = "<group>"; };
 		51D501F51D09F85700B48949 /* CreateGistViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateGistViewController.swift; sourceTree = "<group>"; };
 		51D9846F1D0F06F7005FD384 /* ShowMesasgeHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowMesasgeHelper.swift; sourceTree = "<group>"; };
 		5412F1AD1CFDCD1F00D6EBCE /* OAuth2Manager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuth2Manager.swift; sourceTree = "<group>"; };
@@ -95,14 +95,6 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		519F7F381D133A7900D50ECD /* PersistenceManager */ = {
-			isa = PBXGroup;
-			children = (
-				519F7F391D133A8200D50ECD /* PersistenceManager.swift */,
-			);
-			path = PersistenceManager;
-			sourceTree = "<group>";
-		};
 		54E7C5B11CEC9BFC0046F83D = {
 			isa = PBXGroup;
 			children = (
@@ -124,14 +116,13 @@
 		54E7C5BC1CEC9BFC0046F83D /* GitHubRESTAPITestProject */ = {
 			isa = PBXGroup;
 			children = (
+				54E7C5D11CEC9D110046F83D /* Controllers */,
+				54E7C5D51CEC9D110046F83D /* Views */,
+				54E7C5D21CEC9D110046F83D /* Model */,
+				54E7C5D31CEC9D110046F83D /* Network */,
 				54F0C0461D002A3500998E0E /*  Utils */,
 				54E7C5E11CECA5AA0046F83D /* Extensions */,
-				54E7C5D11CEC9D110046F83D /* Controllers */,
-				54E7C5D21CEC9D110046F83D /* Model */,
-				519F7F381D133A7900D50ECD /* PersistenceManager */,
-				54E7C5D31CEC9D110046F83D /* Network */,
 				54E7C5D41CEC9D110046F83D /* Supporting files */,
-				54E7C5D51CEC9D110046F83D /* Views */,
 				54E7C5C31CEC9BFC0046F83D /* Main.storyboard */,
 				54E7C5C61CEC9BFC0046F83D /* Assets.xcassets */,
 				54E7C5C81CEC9BFC0046F83D /* LaunchScreen.storyboard */,
@@ -166,7 +157,6 @@
 				54E7C5D81CEC9F5E0046F83D /* GitHubAPIManager.swift */,
 				54E7C5DA1CECA13B0046F83D /* GistRouter.swift */,
 				5412F1AD1CFDCD1F00D6EBCE /* OAuth2Manager.swift */,
-				51D501F31D04664200B48949 /* ErrorGenerator.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -201,6 +191,8 @@
 		54F0C0461D002A3500998E0E /*  Utils */ = {
 			isa = PBXGroup;
 			children = (
+				519F7F3D1D13513300D50ECD /* ErrorGenerator.swift */,
+				519F7F3B1D1350F800D50ECD /* PersistenceManager.swift */,
 				54F0C0471D002A5200998E0E /* KeychainManager.swift */,
 				51D9846F1D0F06F7005FD384 /* ShowMesasgeHelper.swift */,
 			);
@@ -332,7 +324,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				541981D41CF8313300D0D40A /* LoginViewController.swift in Sources */,
-				51D501F41D04664200B48949 /* ErrorGenerator.swift in Sources */,
 				51D501F61D09F85700B48949 /* CreateGistViewController.swift in Sources */,
 				5412F1AE1CFDCD1F00D6EBCE /* OAuth2Manager.swift in Sources */,
 				51D501F21D043D0700B48949 /* NSError+ConvenienceInit.swift in Sources */,
@@ -346,7 +337,8 @@
 				54FF0A671D05C3100035E3A4 /* File.swift in Sources */,
 				54FF0A691D0725D10035E3A4 /* AboutGistCell.swift in Sources */,
 				54E7C5DB1CECA13B0046F83D /* GistRouter.swift in Sources */,
-				519F7F3A1D133A8200D50ECD /* PersistenceManager.swift in Sources */,
+				519F7F3E1D13513300D50ECD /* ErrorGenerator.swift in Sources */,
+				519F7F3C1D1350F800D50ECD /* PersistenceManager.swift in Sources */,
 				5158715F1CFF8A2700D7C7B0 /* AppDelegate.swift in Sources */,
 				54E7C5E31CECA5B90046F83D /* AlamofireRequest+JSONSerializable.swift in Sources */,
 			);
