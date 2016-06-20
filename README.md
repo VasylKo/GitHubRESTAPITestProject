@@ -5,11 +5,11 @@ This is my Swift app that uses a GitHub web service to get data from the GitHub 
 The app is made during reading the book by Christina Moulton - "iOS Apps with REST APIs: Building Web-Driven Apps in Swift".  
 I have just left the main idea from the code proposed in the book (actually some parts was not working correctly at all, like pagination, gist loading, and e.t.c.). Also I have redesigned OAuth flow, error handling, made more abstract usage of 3d party libraries, app UI and UX, and other. While the book was written for swift 2.0 syntax, I have upgraded it to latest swift 2.3 syntax and up-to-date pods libraries.
 
-**In this app you can:**
-Without authorization:  
+**In this app you can:**  
+**Without authorization:**  
 1. Look at a list of public gists to see what’s new.  
 
-After authorization:  
+**After authorization:**  
 2. Star a gist so you can find it later.  
 3. Look at a list of gists you have starred.  
 4. Look at a list of your own gists.  
