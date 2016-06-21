@@ -17,5 +17,5 @@ I have just left the main idea from the code proposed in the book (actually some
 6. Create a new gist.  
 7. Delete one of your gists.  
 
-**Tech stack:** Swift 2.3, iOS 9, and Xcode 7.3.1  
+**Tech stack:** Swift 2.2, iOS 9, and Xcode 7.3.1  
 **Main Pods:** Alamofire v3.4, SwiftyJSON v2.3, PINRemoteImage v2.1, Locksmith v2.0, Eureka v1.6
